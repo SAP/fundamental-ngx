@@ -230,17 +230,13 @@ export class PopoverComponent
 
     /** Opens the popover. */
     open(): void {
-        this.isOpen = true;
         this._popoverService.open();
-        this.isOpenChange.emit(this.isOpen);
         this._cdr.markForCheck();
     }
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
-        this.isOpen = false;
         this._popoverService.close(focusActiveElement);
-        this.isOpenChange.emit(this.isOpen);
         this._cdr.markForCheck();
     }
 
