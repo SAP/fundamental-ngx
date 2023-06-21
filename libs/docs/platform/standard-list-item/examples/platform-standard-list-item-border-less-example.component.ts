@@ -30,7 +30,7 @@ export class PlatformStandardListItemBorderLessExampleComponent {
                 'is a battery- or AC-powered personal computer generally smaller than a briefcase that can ' +
                 'easily be transported and conveniently',
             avatar: {
-                image: 'https://placeimg.com/400/400/nature',
+                image: 'https://picsum.photos/400/400?nature',
                 ariaLabel: 'nature'
             }
         },
@@ -49,14 +49,14 @@ export class PlatformStandardListItemBorderLessExampleComponent {
             description: 'First text item in Byline (Standard text item)',
             secondary: 'Second text item in Byline (Can be semantic (Status) or not)',
             avatar: {
-                image: 'https://placeimg.com/400/400/nature',
+                image: 'https://picsum.photos/400/400?nature',
                 ariaLabel: 'nature'
             }
         },
         {
             title: 'Item4',
             avatar: {
-                image: 'https://placeimg.com/400/400/nature',
+                image: 'https://picsum.photos/400/400?nature',
                 ariaLabel: 'nature'
             },
             description: 'First text item in Byline (Standard text item)',
