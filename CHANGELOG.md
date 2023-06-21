@@ -1,3 +1,12 @@
+# [0.42.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.29...v0.42.0-rc.30) (2023-06-21)
+
+
+### Bug Fixes
+
+* **core:** bug where token would not be removed from mobile mode ([#10056](https://github.com/SAP/fundamental-ngx/issues/10056)) ([871d69b](https://github.com/SAP/fundamental-ngx/commit/871d69b3709ef402bd93f4422b9f95b6cf6072da))
+
+
+
 # [0.42.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.28...v0.42.0-rc.29) (2023-06-21)
 
 
