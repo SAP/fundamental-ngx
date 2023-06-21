@@ -42,7 +42,7 @@
 <ng-template #moreElement>
     <span
         (click)="moreClicked()"
-        *ngIf="_showMoreElement"
+        *ngIf="_showMoreElement && _hiddenTokens.length > 0"
         #moreElementSpan
         class="fd-tokenizer-more"
         role="button"
