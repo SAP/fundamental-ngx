@@ -2387,6 +2387,13 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fundamental-styles/common-css@0.29.4":
+  version "0.29.4"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/common-css/-/common-css-0.29.4.tgz#aa4801e339faaf310c39ca344772a082fccaaa11"
+  integrity sha512-0AmD517f7T1KDTmBHDtqpkl2bP7blBjiVd9T052zgx4RgXcCg9kyePfUzavt/U0vp50sUdskt6lj0ivIAr+hPQ==
+  dependencies:
+    "@sap-theming/theming-base-content" "^11.4.0"
+
 "@fundamental-styles/cx@0.28.3":
   version "0.28.3"
   resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.28.3.tgz#34bd4364865ae8136221579eb3cc1aacf3aa84b5"
@@ -3257,7 +3264,7 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.4.2":
+"@sap-theming/theming-base-content@11.4.2", "@sap-theming/theming-base-content@^11.4.0":
   version "11.4.2"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.4.2.tgz#7b30ed929d53fe494f500ab614bf524feb166209"
   integrity sha512-luXKyJP0AGxM2S+8aIGOi4eOz/zREftntF9CY4F6xuRBLDmnzRB0Z/OxA2t3lBr6qjDhcmowG8/BVz6XDZXy0g==

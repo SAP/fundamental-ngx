@@ -11,7 +11,8 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiComboboxComponent } from './multi-combobox.component';
-import { SelectAllTogglerComponent } from './select-all-toggler.component';
+import { SelectAllTogglerComponent } from './select-all-toggler/select-all-toggler.component';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { SelectAllTogglerComponent } from './select-all-toggler.component';
         FormsModule,
         PipeModule,
         AutoCompleteModule,
-        ContentDensityModule
+        ContentDensityModule,
+        ToolbarModule
     ],
     declarations: [MultiComboboxComponent, SelectAllTogglerComponent],
     exports: [MultiComboboxComponent],

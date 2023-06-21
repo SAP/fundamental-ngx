@@ -1,0 +1,25 @@
+@import '@fundamental-styles/common-css/dist/sass/common-mixins';
+
+fd-multi-combobox-select-all-toggler {
+    display: block;
+    background-color: var(--sapBackgroundColor);
+    cursor: pointer;
+
+    @include sap-fiori-focus();
+
+    .fd-toolbar {
+        padding-left: 1rem;
+        padding-right: 0;
+    }
+
+    .fd-checkbox__label-container {
+        margin-left: 0.5rem;
+        @at-root {
+            [dir='rtl'] &,
+            &[dir='rtl'] {
+                margin-left: 0;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}

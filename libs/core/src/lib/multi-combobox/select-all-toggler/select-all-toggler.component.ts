@@ -14,26 +14,20 @@ import { ListFocusItem } from '@fundamental-ngx/core/list';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'li[fd-multi-combobox-select-all-toggler]',
+    selector: 'fd-multi-combobox-select-all-toggler',
     template: `
-        <fd-checkbox
-            [label]="'coreMultiComboBox.selectAllLabel' | fdTranslate"
-            [ngModel]="checkboxValue"
-            [tristate]="true"
-        ></fd-checkbox>
+        <fd-toolbar>
+            <div fd-form-item>
+                <fd-checkbox
+                    tabIndexValue="-1"
+                    [label]="'coreMultiComboBox.selectAllLabel' | fdTranslate"
+                    [ngModel]="checkboxValue"
+                    [tristate]="true"
+                ></fd-checkbox>
+            </div>
+        </fd-toolbar>
     `,
-    styles: [
-        `
-            li[fd-multi-combobox-select-all-toggler].fd-list__item {
-                display: block;
-                background-color: var(--sapBackgroundColor);
-            }
-        `
-    ],
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-    host: {
-        '[class.fd-list__item]': 'true'
-    },
+    styleUrls: ['./select-all-toggler.component.scss'],
     providers: [
         {
             provide: ListFocusItem,
