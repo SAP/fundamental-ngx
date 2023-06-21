@@ -1,13 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
-
 import { MessageStripComponent } from './message-strip.component';
-import { MessageStripModule } from './message-strip.module';
 
 @Component({
-    template: ` <fd-message-strip> A dismissible normal message strip. </fd-message-strip> `
+    template: ` <fd-message-strip> A dismissible normal message strip.</fd-message-strip> `
 })
 class TestMessageStripComponent {
     @ViewChild(MessageStripComponent, { static: true })
@@ -20,7 +17,7 @@ describe('MessageStripComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule, MessageStripModule],
+            imports: [MessageStripComponent],
             declarations: [TestMessageStripComponent]
         }).compileComponents();
     }));

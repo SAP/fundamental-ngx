@@ -152,7 +152,9 @@
         [ngModel]="_selectedItem"
         (click)="_checkboxClick($event)"
     />
-    <label class="fd-checkbox__label fd-grid-list__checkbox-label" [for]="id + '-checkbox'" tabindex="-1"></label>
+    <label class="fd-checkbox__label fd-grid-list__checkbox-label" [for]="id + '-checkbox'" tabindex="-1">
+        <span class="fd-checkbox__checkmark" aria-hidden="true"></span>
+    </label>
 </ng-template>
 
 <ng-template #itemFooter>
