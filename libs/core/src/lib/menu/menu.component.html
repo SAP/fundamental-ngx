@@ -11,7 +11,7 @@
             [class.fd-menu--mobile]="mobile"
             [class.fd-menu--icons]="hasAddons"
         >
-            <ul role="none" class="fd-menu__list fd-menu__list--no-shadow">
+            <ul role="none" class="fd-menu__list fd-menu__list--no-shadow" [class.fd-menu--full-width]="mobile">
                 <ng-content></ng-content>
             </ul>
         </nav>
