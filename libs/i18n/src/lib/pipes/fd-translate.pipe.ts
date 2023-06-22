@@ -17,7 +17,8 @@ import { TranslationResolver } from '../utils/translation-resolver';
 
 @Pipe({
     name: 'fdTranslate',
-    pure: false // required to update the value when the observable is resolved
+    pure: false, // required to update the value when the observable is resolved
+    standalone: true
 })
 export class FdTranslatePipe implements PipeTransform, OnDestroy {
     /** @hidden */
