@@ -63,7 +63,7 @@ export class BusyIndicatorComponent {
 
     /** add loading label value */
     @Input()
-    label: string;
+    label?: string;
 
     /** Aria live attribute value. */
     @Input()
