@@ -1,9 +1,15 @@
 <fd-docs-section-title id="message-strip-basic" componentName="message-strip">
     Message Strip Types
 </fd-docs-section-title>
-<description
-    >A number of message strip types are available. They offer preset styling for different contextual situations. Can
-    be one of 'warning', 'success', 'information', 'error' or normal (default).
+<description>
+    <p>
+        A number of message strip types are available. They offer preset styling for different contextual situations.
+        Can be one of 'warning', 'success', 'information', 'error' or normal (default).
+    </p>
+    <p>
+        They all have their own default icons, but if you want to have a custom one, that is also supported using the
+        <code>*fdMessageStripIcon</code> directive.
+    </p>
 </description>
 <component-example>
     <fd-message-strip-example></fd-message-strip-example>
@@ -53,7 +59,7 @@
 <component-example>
     <fd-message-strip-indication-colors-example></fd-message-strip-indication-colors-example>
 </component-example>
-<code-example [exampleFiles]="messageStripWidthExample"></code-example>
+<code-example [exampleFiles]="messageStripIndicationColorsExample"></code-example>
 
 <separator></separator>
 

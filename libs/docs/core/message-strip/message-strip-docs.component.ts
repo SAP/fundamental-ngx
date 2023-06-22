@@ -52,6 +52,14 @@ export class MessageStripDocsComponent {
         }
     ];
 
+    messageStripIndicationColorsExample: ExampleFile[] = [
+        {
+            language: 'ts',
+            fileName: 'message-strip-indication-colors-example',
+            code: getAssetFromModuleAssets('message-strip-indication-colors-example.component.ts')
+        }
+    ];
+
     messageStripAlertExampleFiles: ExampleFile[] = [
         {
             language: 'ts',
