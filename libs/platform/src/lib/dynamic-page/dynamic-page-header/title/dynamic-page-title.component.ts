@@ -48,6 +48,12 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     @Input()
     subtitle: string;
 
+    /**
+     * Template used to provide a custom content for the subtitle page header area
+     */
+    @Input()
+    subtitleTemplate: TemplateRef<any>;
+
     /** Whether subtitle should wrap instead of truncation. */
     @Input()
     subtitleWrap = false;

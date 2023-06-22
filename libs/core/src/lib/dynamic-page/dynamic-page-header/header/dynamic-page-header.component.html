@@ -31,24 +31,28 @@
                     </div>
                 </div>
                 <div
-                    *ngIf="_collapsed && subtitle"
+                    *ngIf="_collapsed && (subtitle || subtitleTemplate)"
                     class="fd-dynamic-page__subtitle"
                     [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
                     fdIgnoreClickOnSelection
                 >
-                    {{ subtitle }}
+                    <ng-container *ngIf="!subtitleTemplate; else subtitleRef">
+                        {{ subtitle }}
+                    </ng-container>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div
-    *ngIf="!_collapsed && subtitle"
+    *ngIf="!_collapsed && (subtitle || subtitleTemplate)"
     class="fd-dynamic-page__subtitle"
     [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
     fdIgnoreClickOnSelection
 >
-    {{ subtitle }}
+    <ng-container *ngIf="!subtitleTemplate; else subtitleRef">
+        {{ subtitle }}
+    </ng-container>
 </div>
 
 <ng-template #dynamicPageGlobalActionsRef>
@@ -56,4 +60,11 @@
 </ng-template>
 <ng-template #dynamicPageLayoutActionsRef>
     <ng-content select="fd-dynamic-page-layout-actions"></ng-content>
+</ng-template>
+
+<ng-template #subtitleRef>
+    <ng-container
+        [ngTemplateOutlet]="subtitleTemplate"
+        [ngTemplateOutletContext]="{ $implicit: _collapsed }"
+    ></ng-container>
 </ng-template>

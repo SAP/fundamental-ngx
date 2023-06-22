@@ -10,6 +10,7 @@ import {
     OnDestroy,
     OnInit,
     Renderer2,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -63,6 +64,13 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     /** Whether subtitle should wrap instead of truncation. */
     @Input()
     subtitleWrap = false;
+
+    /**
+     * Template used to provide a custom content for the subtitle page header area
+     * Use it by passing an ng-template with implicit boolean value if the header is collapsed
+     */
+    @Input()
+    subtitleTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ContentChild(FD_BREADCRUMB_COMPONENT)

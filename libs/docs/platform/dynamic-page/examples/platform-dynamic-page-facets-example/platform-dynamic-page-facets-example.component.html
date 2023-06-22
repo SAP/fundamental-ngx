@@ -2,7 +2,7 @@
 <div class="overlay" #overlay>
     <ng-container *ngIf="fullscreen">
         <fdp-dynamic-page ariaLabel="Example Dynamic Page">
-            <fdp-dynamic-page-title [title]="pageTitle" subtitle="Oversized multimaterial sneakers with quilted effect">
+            <fdp-dynamic-page-title [title]="pageTitle" [subtitleTemplate]="subtitle">
                 <!-- breadcrumb content -->
                 <fd-breadcrumb>
                     <fd-breadcrumb-item>
@@ -222,3 +222,7 @@
         </fdp-dynamic-page>
     </ng-container>
 </div>
+<ng-template #subtitle let-collapsed>
+    <span class="red-subtitle">Different platform parts</span> | <span class="blue-subtitle"> of the</span> |
+    <span class="green-subtitle">subtitle</span> | with {{ collapsed ? 'collapsed' : 'not collapsed' }} header
+</ng-template>

@@ -35,6 +35,38 @@ class TestComponent {
     constructor(public dynamicPageService: DynamicPageService) {}
 }
 
+@Component({
+    template: `
+        <fd-dynamic-page-header [title]="title" [subtitleTemplate]="subtitleTemplate">
+            <fd-breadcrumb>
+                <fd-breadcrumb-item>
+                    <a fd-link [attr.href]="'#'">Men</a>
+                </fd-breadcrumb-item>
+                <fd-breadcrumb-item>
+                    <a fd-link [attr.href]="'#'">Shoes</a>
+                </fd-breadcrumb-item>
+            </fd-breadcrumb>
+
+            <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
+            <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
+        </fd-dynamic-page-header>
+
+        <ng-template #subtitleTemplate>
+            <span class="my-custom-subtitle">CustomSubtitle</span>
+        </ng-template>
+    `,
+    providers: [DynamicPageService]
+})
+class TestWithSubtitleTemplateComponent {
+    title = 'Some title ';
+    subtitle: string;
+
+    @ViewChild(DynamicPageHeaderComponent)
+    header: DynamicPageHeaderComponent;
+
+    constructor(public dynamicPageService: DynamicPageService) {}
+}
+
 describe('DynamicPageTitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let header: DynamicPageHeaderComponent;
@@ -85,4 +117,45 @@ describe('DynamicPageTitleComponent', () => {
         fixture.detectChanges();
         expect((<any>header)._actionsSquashed).toBe(false);
     });
+});
+
+describe('DynamicPageTitleComponent with custom subtitle', () => {
+    let fixture: ComponentFixture<TestWithSubtitleTemplateComponent>;
+    let header: DynamicPageHeaderComponent;
+    let component: TestComponent;
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [CommonModule, DynamicPageModule, BreadcrumbModule, ToolbarModule, ButtonModule],
+            declarations: [TestWithSubtitleTemplateComponent],
+            providers: [DynamicPageService]
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestWithSubtitleTemplateComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        header = component.header;
+    });
+
+    it('should create', () => {
+        expect(fixture).toBeTruthy();
+    });
+
+    it('should set subtitleTemplate correctly', fakeAsync(() => {
+        fixture.detectChanges();
+
+        expect(header.subtitleTemplate).toBeDefined();
+        expect(header.subtitle).toBeUndefined();
+    }));
+
+    it('should set subtitleTemplate correctly', fakeAsync(() => {
+        fixture.detectChanges();
+
+        const subtitle = (header as any)._elementRef.nativeElement.querySelector('.my-custom-subtitle');
+
+        expect(subtitle).toBeDefined();
+        expect(subtitle.textContent).toContain('CustomSubtitle');
+    }));
 });

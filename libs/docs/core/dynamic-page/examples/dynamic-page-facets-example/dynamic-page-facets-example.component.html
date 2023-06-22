@@ -3,7 +3,7 @@
     <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page">
         <fd-dynamic-page-header
             title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-            subtitle="sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+            [subtitleTemplate]="subtitle"
         >
             <fd-breadcrumb>
                 <fd-breadcrumb-item>
@@ -199,3 +199,8 @@
         </fd-dynamic-page-footer>
     </fd-dynamic-page>
 </div>
+
+<ng-template #subtitle let-collapsed>
+    <span class="red-subtitle">Different parts</span> | <span class="blue-subtitle"> of the</span> |
+    <span class="green-subtitle">subtitle</span> | with {{ collapsed ? 'collapsed' : 'not collapsed' }} header
+</ng-template>
