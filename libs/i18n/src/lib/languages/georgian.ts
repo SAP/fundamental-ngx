@@ -43,7 +43,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         dismissLabel: 'გაუქმება'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreNavigation: {
         mainNavigation: 'მთავარი ნავიგაცია',

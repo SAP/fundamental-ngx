@@ -55,7 +55,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         dismissLabel: 'Отхвърляне'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

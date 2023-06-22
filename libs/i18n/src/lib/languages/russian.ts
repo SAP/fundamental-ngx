@@ -57,7 +57,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         dismissLabel: 'Закрыть'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreNavigation: {
         mainNavigation: 'Главная Навигация',
