@@ -65,6 +65,7 @@ import {
     getSelectableRows,
     isRowNavigatable,
     isTableRow,
+    isTreeRowFirstCell,
     PlatformTableManagedPreset,
     ROW_HEIGHT,
     RowComparator,
@@ -85,7 +86,6 @@ import {
     TableGroupChangeEvent,
     TableHeaderResizerDirective,
     TableInitialState,
-    TableInitialStateDirective,
     TablePageChangeEvent,
     TableResponsiveService,
     TableRow,
@@ -100,8 +100,7 @@ import {
     TableService,
     TableSortChangeEvent,
     TableState,
-    TableVirtualScroll,
-    isTreeRowFirstCell
+    TableVirtualScroll
 } from '@fundamental-ngx/platform/table-helpers';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
@@ -172,19 +171,17 @@ let tableUniqueId = 0;
     hostDirectives: [
         {
             directive: TableDataSourceDirective,
-            inputs: ['dataSource'],
-            // eslint-disable-next-line @angular-eslint/no-output-on-prefix,@angular-eslint/no-outputs-metadata-property
-            outputs: ['onDataRequested', 'onDataReceived']
-        },
-        {
-            directive: TableInitialStateDirective,
-            inputs: [
-                'initialVisibleColumns',
-                'initialSortBy',
-                'initialFilterBy',
-                'initialGroupBy',
-                'initialPage',
-                'state'
+            inputs: ['dataSource', 'childDataSource'],
+            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+            outputs: [
+                'childDataSourceChanged',
+                // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+                'onDataRequested',
+                // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+                'onDataReceived',
+                'dataSourceChanged',
+                'dataChanged',
+                'isLoading'
             ]
         },
         TableHeaderResizerDirective
@@ -270,6 +267,9 @@ export class TableComponent<T = any>
     /** Table row expanded state key. Used to set the initial state of tree row. */
     @Input()
     expandedStateKey: string;
+    /** Property key indicating that the row has children accessible via [childDataSource]. */
+    @Input()
+    hasChildrenKey: string;
     /**
      * Whether row is navigatable.
      * Pass boolean value to set state for the all rows.
@@ -511,7 +511,12 @@ export class TableComponent<T = any>
 
     /** @hidden */
     get loadingState(): boolean {
-        return this.loading ?? (this._dataSourceDirective._internalLoadingState || this._dndLoadingState);
+        return (
+            this.loading ??
+            (this._dataSourceDirective._internalLoadingState ||
+                this._dataSourceDirective._internalChildrenLoadingState ||
+                this._dndLoadingState)
+        );
     }
     /**
      * @hidden
@@ -574,13 +579,13 @@ export class TableComponent<T = any>
     /** @hidden */
     _selectionColumnWidth = 0;
     /** @hidden */
-    readonly tableColumnsStream = this._tableService.tableColumns$.asObservable();
+    readonly tableColumnsStream: Observable<TableColumn[]>;
     /** @hidden */
     _loadPreviousPages = false;
     /** @hidden */
     _rtl = false;
     /** @hidden */
-    readonly _dataSourceDirective = inject(TableDataSourceDirective);
+    readonly _dataSourceDirective = inject<TableDataSourceDirective<T>>(TableDataSourceDirective);
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
     /** @hidden */
@@ -670,7 +675,7 @@ export class TableComponent<T = any>
         this.initialState?.setTable(this);
         this._dndTableDirective?.setTable(this);
         this._virtualScrollDirective?.setTable(this);
-        this._dataSourceDirective?.setTable(this);
+        this._dataSourceDirective.setTable(this);
 
         this._rowTrackBy = this._defaultTrackBy;
         this._toolbarContext = {
@@ -680,6 +685,8 @@ export class TableComponent<T = any>
             groupable: this._isShownGroupSettingsInToolbar$,
             columns: this._isShownColumnSettingsInToolbar$
         };
+
+        this.tableColumnsStream = this._tableService.tableColumns$.asObservable();
 
         if (this._rtlService) {
             this._subscriptions.add(
@@ -761,7 +768,7 @@ export class TableComponent<T = any>
 
         this.initialState?.setInitialState();
 
-        this._dataSourceDirective?.initializeDataSource();
+        this._dataSourceDirective.initializeDataSource();
 
         this._listenToTableStateChanges();
 
@@ -791,13 +798,13 @@ export class TableComponent<T = any>
             this.expandAll();
         }
 
-        if (this._virtualScrollDirective) {
-            this._subscriptions.add(
-                this._virtualScrollDirective.virtualScrollTransform$.subscribe((transform) => {
+        this._subscriptions.add(
+            this._virtualScrollDirective?.virtualScrollTransform$
+                .pipe(filter(() => !!this._virtualScrollDirective?.virtualScroll && !!this._tableBody))
+                .subscribe((transform) => {
                     this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
                 })
             );
-        }
 
         this._focusableGrid.shortRowFocus = 'first';
     }
@@ -931,7 +938,19 @@ export class TableComponent<T = any>
 
     /** expand all rows */
     expandAll(): void {
-        this._tableRows.forEach((e) => {
+        const expandableRows = this._tableRows.filter((row) => row.type === TableRowType.TREE);
+        if (!this._dataSourceDirective.childDataSource) {
+            this._markAsExpanded(expandableRows);
+            return;
+        }
+
+        this._tableRowService.loadChildRows(expandableRows);
+        this._markAsExpanded(expandableRows);
+    }
+
+    /** @hidden */
+    private _markAsExpanded(rows: TableRow<T>[]): void {
+        rows.forEach((e) => {
             e.expanded = true;
             e.hidden = false;
         });
@@ -1401,7 +1420,8 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    toggleExpandableTableRow(rowToToggle: TableRow): void {
+    toggleExpandableTableRow(rowToToggle: TableRow, forceFetch = false): void {
+        rowToToggle.forceFetch = forceFetch;
         const expanded = (rowToToggle.expanded = !rowToToggle.expanded);
 
         findRowChildren(rowToToggle, this._tableRows).forEach((row) => {
@@ -1418,6 +1438,24 @@ export class TableComponent<T = any>
         });
 
         this.onTableRowsChanged();
+    }
+
+    /** @hidden */
+    _onSpyIntersect(intersected: boolean): void {
+        if (!intersected) {
+            return;
+        }
+        const {
+            page: { currentPage, pageSize }
+        } = this.getTableState();
+        const totalItems = this._dataSourceDirective.totalItems$.value;
+        const lastPage = Math.ceil(totalItems / (pageSize || totalItems));
+        if (currentPage >= lastPage) {
+            return;
+        }
+        this._ngZone.run(() => {
+            this.setCurrentPage(currentPage + 1);
+        });
     }
 
     /** @hidden */
@@ -1439,9 +1477,48 @@ export class TableComponent<T = any>
                     )
                 )
                 .subscribe((rows) => {
+                    rows =
+                        this.pageScrolling && this.getTableState().page.currentPage > 1
+                            ? [...this._tableRows, ...rows]
+                            : rows;
                     this._setTableRows(rows);
                 })
         );
+
+        this._dataSourceDirective.childItems$
+            .pipe(
+                map((items) => {
+                    const rowMap = new Map<TableRow<T>, TableRow<T>[]>();
+                    items.forEach((rowItems, parentRow) => {
+                        rowMap.set(
+                            parentRow,
+                            this._createTableRowsByDataSourceItems(rowItems).map((row) => {
+                                row.parent = parentRow;
+                                row.level = parentRow.level + 1;
+                                row.hidden = !parentRow.expanded;
+                                return row;
+                            })
+                        );
+                    });
+
+                    return rowMap;
+                })
+            )
+            .subscribe((items) => {
+                items.forEach((rows, parentRow) => {
+                    this._tableRows.splice(parentRow.index + parentRow.children.length + 1, 0, ...rows);
+
+                    parentRow.children.push(...rows);
+
+                    parentRow.lastChild = parentRow.children[parentRow.children.length - 1];
+
+                    this._tableRows.forEach((row, index) => {
+                        row.index = index;
+                    });
+
+                    this._setTableRows(this._tableRows);
+                });
+            });
     }
 
     /** @hidden */
@@ -1515,6 +1592,33 @@ export class TableComponent<T = any>
         );
 
         this._subscriptions.add(
+            this._tableRowService.loadChildRows$.subscribe((rows) => {
+                const state = this.getTableState();
+                rows.forEach((row) => {
+                    this._dataSourceDirective.childDataSource?.dataProvider
+                        .rowChildrenCount(row, state)
+                        .pipe(
+                            filter((count) => row.forceFetch || count > row.children.length),
+                            tap(() => (row.forceFetch = false)),
+                            take(1)
+                        )
+                        .subscribe(() => {
+                            const rowState = {
+                                ...state,
+                                ...{
+                                    page: {
+                                        currentPage: Math.floor(row.children.length / state.page.pageSize) + 1,
+                                        pageSize: state.page.pageSize
+                                    }
+                                }
+                            };
+                            this._dataSourceDirective.childDataSource?.fetch(rowState, [row]);
+                        });
+                });
+            })
+        );
+
+        this._subscriptions.add(
             this._tableRowService.cellClicked$.subscribe((evt) => {
                 this._onCellClick(evt.index, evt.row);
             })
@@ -1584,6 +1688,7 @@ export class TableComponent<T = any>
                 this._tableRows,
                 this.rowComparator,
                 this.relationKey,
+                this.hasChildrenKey,
                 this.selectedKey,
                 this.expandedStateKey,
                 this.rowNavigatable
@@ -1615,8 +1720,8 @@ export class TableComponent<T = any>
     private _calculateVisibleTableRows(): void {
         this._tableRowsVisible = this._tableRows.filter((row) => !row.hidden);
 
-        if (this._virtualScrollDirective) {
-            this._virtualScrollDirective?.calculateVirtualScrollRows();
+        if (this._virtualScrollDirective?.virtualScroll) {
+            this._virtualScrollDirective.calculateVirtualScrollRows();
         } else {
             this.setRowsInViewport(0, this._tableRowsVisible.length);
         }
@@ -1634,7 +1739,7 @@ export class TableComponent<T = any>
                 )
                 .subscribe((contentDensity) => {
                     this.rowHeight = ROW_HEIGHT.get(contentDensity) ?? ROW_HEIGHT.get(ContentDensityMode.COZY)!;
-                    if (this._virtualScrollDirective) {
+                    if (this._virtualScrollDirective?.virtualScroll) {
                         this._virtualScrollDirective.rowHeight = this.rowHeight;
                         this._virtualScrollDirective.calculateVirtualScrollRows();
                     }
@@ -1793,31 +1898,10 @@ export class TableComponent<T = any>
                 .scrolled()
                 .pipe(
                     filter(() => this.pageScrolling),
-                    debounceTime(50),
-                    filter((scrollable) => scrollable === this.tableScrollable),
-                    map((scrollable) => scrollable.elementRef.nativeElement),
-                    filter((element) => !!element),
-                    tap(({ scrollTop }) => {
-                        this.tableScrolled.emit(scrollTop);
-                    }),
-                    filter(
-                        ({ scrollHeight, clientHeight, scrollTop }) =>
-                            scrollHeight - clientHeight - scrollTop <= this.pageScrollingThreshold
-                    ),
-                    filter(() => {
-                        const {
-                            page: { currentPage, pageSize }
-                        } = this.getTableState();
-                        const totalItems = this._dataSourceDirective.totalItems$.value;
-                        const lastPage = Math.ceil(totalItems / (pageSize || totalItems));
-                        return currentPage < lastPage;
-                    })
+                    map((scrollable) => scrollable.elementRef.nativeElement)
                 )
-                .subscribe(() => {
-                    const currentPage = this.getTableState().page.currentPage;
-                    this._ngZone.run(() => {
-                        this.setCurrentPage(currentPage + 1);
-                    });
+                .subscribe(({ scrollTop }) => {
+                    this.tableScrolled.emit(scrollTop);
                 })
         );
     }

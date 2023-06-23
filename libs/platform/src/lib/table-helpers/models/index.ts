@@ -18,3 +18,4 @@ export * from './data-source.type';
 export * from './dnd';
 export * from './table-dialog-common-data.model';
 export * from './directives';
+export * from './table-item.model';

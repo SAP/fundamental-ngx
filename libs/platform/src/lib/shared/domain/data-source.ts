@@ -78,10 +78,10 @@ export enum MatchingStrategy {
 
 export const DATA_PROVIDERS = new InjectionToken<Map<string, DataProvider<any>>>('DataProviderRegistry');
 
-export interface DataSource<T> {
-    open(): Observable<T[]>;
+export interface DataSource<T, P = T[], L = boolean> {
+    open(): Observable<P>;
     close(): void;
-    isDataLoading: boolean;
+    isDataLoading: L;
     onDataRequested(): Observable<void>;
     onDataReceived(): Observable<void>;
 }

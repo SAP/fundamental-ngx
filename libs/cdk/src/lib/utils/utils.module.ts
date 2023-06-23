@@ -19,7 +19,8 @@ import {
     SelectableListModule,
     TemplateModule,
     TruncateModule,
-    BreakpointModule
+    BreakpointModule,
+    IntersectionSpyDirective
 } from './directives';
 import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
 
@@ -43,7 +44,8 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         ReadonlyBehaviorModule,
         ClickedBehaviorModule,
         InitialFocusModule,
-        BreakpointModule
+        BreakpointModule,
+        IntersectionSpyDirective
     ],
     exports: [
         FocusableItemModule,
@@ -63,7 +65,8 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         ReadonlyBehaviorModule,
         ClickedBehaviorModule,
         InitialFocusModule,
-        BreakpointModule
+        BreakpointModule,
+        IntersectionSpyDirective
     ],
     providers: [RtlService, ThemesService]
 })

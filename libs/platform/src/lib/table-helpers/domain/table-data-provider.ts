@@ -16,13 +16,14 @@ import {
 
 import { TableState } from '../interfaces/table-state.interface';
 import get from 'lodash-es/get';
+import { TableRow } from '../models';
 import { isCollectionFilter } from '../utils';
 
-export class TableDataProvider<T> {
+export abstract class BaseTableDataProvider<T, P = T[]> {
     /** Total items count. */
     totalItems: number;
     /** Array of items. */
-    items: T[];
+    items: P;
     /** Date time adapter for date field filtering. */
     dateTimeAdapter?: DatetimeAdapter<any>;
 
@@ -32,39 +33,11 @@ export class TableDataProvider<T> {
     protected searchInput?: SearchInput;
 
     /** @hidden */
-    private _destroy$ = new Subject<void>();
+    protected _destroy$ = new Subject<void>();
 
-    /**
-     * Method for retrieving the data.
-     * @param tableState @see TableState Set of table parameters.
-     * @returns Observable with data.
-     */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fetch(tableState?: TableState): Observable<T[]> {
-        throw new Error('fetch method should be implemented by developers for custom data providers.');
-    }
+    abstract fetch(state?: TableState, parentRows?: TableRow<T>[]): Observable<P>;
 
-    /**
-     * Method for applying filtering and retrieving the data.
-     * @param state @see TableState Set of table parameters.
-     * @returns Observable with filtered data.
-     */
-    fetchData(state: TableState): Observable<T[]> {
-        return this.fetch(state).pipe(
-            map((items) => {
-                if (this.searchInput) {
-                    items = this.search(items, { ...state, ...{ searchInput: this.searchInput } });
-                }
-
-                if (this.filterBy) {
-                    items = this.applyFiltering(items, this.filterBy);
-                }
-
-                return items;
-            }),
-            takeUntil(this._destroy$)
-        );
-    }
+    abstract fetchData(state: TableState, parentRows?: TableRow<T>[]): Observable<P>;
 
     /**
      * Method for setting external filtering conditions.
@@ -85,27 +58,6 @@ export class TableDataProvider<T> {
     applyFiltering(items: T[], filters: CollectionFilterAndGroup[]): T[] {
         items = items.filter((i) => this.getFilteringStrategy(i, filters));
         return items;
-    }
-
-    /**
-     * Method for getting all possible options for particular field.
-     * Used for creating select options.
-     * Developers can override this method to extend the filtering functionality.
-     * @param field key of the data item.
-     * @returns Observable with select items.
-     */
-    getFieldOptions(field: string): Observable<SelectItem[]> {
-        return this.fetch().pipe(
-            take(1),
-            map((data) => {
-                const options: SelectItem[] = data.map((item) => ({
-                    label: get(item, field),
-                    value: get(item, field)
-                }));
-
-                return options;
-            })
-        );
     }
 
     /** @hidden */
@@ -376,5 +328,106 @@ export class TableDataProvider<T> {
     protected unsubscribe(): void {
         this._destroy$.next();
         this._destroy$.complete();
+    }
+}
+
+export class TableDataProvider<T> extends BaseTableDataProvider<T> {
+    /**
+     * Method for retrieving the data.
+     * @param tableState @see TableState Set of table parameters.
+     * @returns Observable with data.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    fetch(tableState?: TableState): Observable<T[]> {
+        throw new Error('fetch method should be implemented by developers for custom data providers.');
+    }
+
+    /**
+     * Method for applying filtering and retrieving the data.
+     * @param state @see TableState Set of table parameters.
+     * @returns Observable with filtered data.
+     */
+    fetchData(state: TableState): Observable<T[]> {
+        return this.fetch(state).pipe(
+            map((items) => {
+                if (this.searchInput) {
+                    items = this.search(items, { ...state, ...{ searchInput: this.searchInput } });
+                }
+
+                if (this.filterBy) {
+                    items = this.applyFiltering(items, this.filterBy);
+                }
+
+                return items;
+            }),
+            takeUntil(this._destroy$)
+        );
+    }
+
+    /**
+     * Method for getting all possible options for particular field.
+     * Used for creating select options.
+     * Developers can override this method to extend the filtering functionality.
+     * @param field key of the data item.
+     * @returns Observable with select items.
+     */
+    getFieldOptions(field: string): Observable<SelectItem[]> {
+        return this.fetch().pipe(
+            take(1),
+            map((data) => {
+                const options: SelectItem[] = data.map((item) => ({
+                    label: get(item, field),
+                    value: get(item, field)
+                }));
+
+                return options;
+            })
+        );
+    }
+}
+
+export abstract class TableChildrenDataProvider<T> extends BaseTableDataProvider<T, Map<TableRow<T>, T[]>> {
+    /**
+     * Method for retrieving the amount of child itemf or a defined row.
+     * @param row
+     */
+    abstract rowChildrenCount(row: TableRow<T>, state: TableState): Observable<number>;
+    /**
+     * Method for retrieving the data.
+     * @param tableState @see TableState Set of table parameters.
+     * @returns Observable with data.
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    fetch(tableState?: TableState, parentRows?: TableRow<T>[]): Observable<Map<TableRow<T>, T[]>> {
+        throw new Error('fetch method should be implemented by developers for custom data providers.');
+    }
+
+    /**
+     * Method for applying filtering and retrieving the data.
+     * @param state @see TableState Set of table parameters.
+     * @returns Observable with filtered data.
+     */
+    fetchData(state: TableState, tableRows?: TableRow<T>[]): Observable<Map<TableRow<T>, T[]>> {
+        return this.fetch(state, tableRows).pipe(
+            map((items) => {
+                items.forEach((rowItems, row) => {
+                    if (this.searchInput) {
+                        rowItems = this.search(rowItems, { ...state, ...{ searchInput: this.searchInput } });
+                    }
+
+                    if (this.filterBy) {
+                        rowItems = this.applyFiltering(rowItems, this.filterBy);
+                    }
+
+                    if (rowItems.length === 0) {
+                        items.delete(row);
+                    } else {
+                        items.set(row, rowItems);
+                    }
+                });
+                return items;
+            }),
+            takeUntil(this._destroy$)
+        );
     }
 }

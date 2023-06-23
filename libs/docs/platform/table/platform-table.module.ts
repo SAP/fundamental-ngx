@@ -71,6 +71,8 @@ import { TableScrollingDocsComponent } from './child-docs/scrolling/table-scroll
 import { ClickableRowsDocsComponent } from './child-docs/clickable-rows/clickable-rows-docs.component';
 import { PreservedStateDocsComponent } from './child-docs/preserving-state/preserved-state-docs.component';
 import { PlatformTablePreservedStateExampleComponent } from './examples/preserved-state/platform-table-preserved-state-example.component';
+import { AdvancedExamplesDocsComponent } from './child-docs/advanced/advanced-examples-docs.component';
+import { AdvancedScrollingExampleComponent } from './examples/advanced-scrolling/advanced-scrolling-example.component';
 
 const routes: Routes = [
     {
@@ -86,7 +88,8 @@ const routes: Routes = [
             { path: 'scrolling', component: TableScrollingDocsComponent },
             { path: 'row-selection', component: RowSelectionDocsComponent },
             { path: 'clickable-rows', component: ClickableRowsDocsComponent },
-            { path: 'preserved-state', component: PreservedStateDocsComponent }
+            { path: 'preserved-state', component: PreservedStateDocsComponent },
+            { path: 'advanced', component: AdvancedExamplesDocsComponent }
         ]
     }
 ];
@@ -115,7 +118,7 @@ const routes: Routes = [
         PlatformListModule,
         ListModule
     ],
-    exports: [RouterModule],
+    exports: [RouterModule, AdvancedExamplesDocsComponent, AdvancedScrollingExampleComponent],
     declarations: [
         PlatformTableDocsComponent,
         PlatformTableHeaderComponent,
@@ -155,7 +158,9 @@ const routes: Routes = [
         TableScrollingDocsComponent,
         ClickableRowsDocsComponent,
         PreservedStateDocsComponent,
-        PlatformTablePreservedStateExampleComponent
+        PlatformTablePreservedStateExampleComponent,
+        AdvancedExamplesDocsComponent,
+        AdvancedScrollingExampleComponent
     ],
     providers: [
         RtlService,

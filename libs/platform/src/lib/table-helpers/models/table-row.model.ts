@@ -1,4 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
+import { TableDataSource } from '../domain';
 import { TableRowType } from '../enums';
 
 export type TableRowState = 'editable' | 'readonly';
@@ -58,6 +59,12 @@ export interface TableRow<T = any> {
 
     expanded$?: Observable<TableRow['expanded']>;
 
+    childItems$: Observable<T[]>;
+
+    childItemsLoading$: BehaviorSubject<boolean>;
+
+    stateChanged$: Observable<boolean>;
+
     /**
      * If item should be hidden. Used to skip rendering
      */
@@ -76,11 +83,16 @@ export interface TableRow<T = any> {
     /**
      * Children table rows.
      */
-    children: TableRow[];
+    children: TableRow<T>[];
 
     isTree: boolean;
 
     setRowType: (type: TableRowType) => void;
+
+    lastChild?: TableRow<T>;
+
+    /** Flag indicating that all child rows should be fetched again. */
+    forceFetch: boolean;
 }
 
 export type TableRowClass<T = any> = string | ((row: T) => string);
@@ -102,8 +114,21 @@ export class TableRowImpl<T> implements TableRow<T> {
     private readonly _checkedSubject = new BehaviorSubject<boolean | null>(false);
     /** @hidden */
     readonly checked$ = this._checkedSubject.asObservable();
+
     /** @hidden */
-    children: TableRow[];
+    readonly childItems$: Observable<T[]>;
+
+    /** @hidden */
+    readonly stateChanged$ = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    readonly childItemsLoading$ = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    forceFetch = false;
+
+    /** @hidden */
+    children: TableRow<T>[];
     /** @hidden */
     expandable: boolean;
     /** @hidden */
@@ -136,7 +161,13 @@ export class TableRowImpl<T> implements TableRow<T> {
     readonly value: T;
 
     /** @hidden */
+    childDataSource: TableDataSource<T> | undefined;
+
+    /** @hidden */
     isTree: boolean;
+
+    /** @hidden */
+    lastChild?: TableRow<T>;
 
     /** @hidden */
     constructor(row: Partial<TableRow>) {

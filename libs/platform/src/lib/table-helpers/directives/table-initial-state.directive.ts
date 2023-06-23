@@ -7,11 +7,7 @@ import { Table } from '../table';
 
 @Directive({
     selector: `[fdpTableInitialState],
-    fdp-table[initialVisibleColumns],
-    fdp-table[initialSortBy],
-    fdp-table[initialFilterBy],
-    fdp-table[initialGroupBy],
-    fdp-table[initialPage]`,
+    fdp-table`,
     standalone: true,
     providers: [
         {

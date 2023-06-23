@@ -27,7 +27,7 @@ export interface CellClickedModel {
 }
 
 @Injectable()
-export class TableRowService {
+export class TableRowService<T = any> {
     /** @hidden */
     private readonly _toggleRowSubject = new Subject<ToggleRowModel>();
 
@@ -60,6 +60,12 @@ export class TableRowService {
 
     /** Editable cells map. */
     readonly editableCells = new Map<TableRow<any>, EditableTableCell[]>();
+
+    /** @hidden */
+    readonly childRowsAdded$ = new Subject<{ row: TableRow; rowIndex: number; items: T[] }>();
+
+    /** Stream to load child items for a particular rows. */
+    readonly loadChildRows$ = new Subject<TableRow<T>[]>();
 
     /** `toggleRow$` stream trigger. */
     toggleRow(evt: ToggleRowModel): void {
@@ -124,5 +130,19 @@ export class TableRowService {
     /** Removes editable cells of particular row. */
     removeEditableCells(row: TableRow): void {
         this.editableCells.delete(row);
+    }
+
+    /** Triggers stream to load child items for a particular rows. */
+    loadChildRows(rows: TableRow<T> | TableRow<T>[]): void {
+        const expandableRows: TableRow<T>[] = [];
+        if (Array.isArray(rows)) {
+            expandableRows.push(...rows.filter((r) => !r.childItemsLoading$.value));
+        } else {
+            if (rows.childItemsLoading$.value) {
+                return;
+            }
+            expandableRows.push(rows);
+        }
+        this.loadChildRows$.next(expandableRows);
     }
 }
