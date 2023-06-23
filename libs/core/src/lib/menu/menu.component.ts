@@ -143,7 +143,7 @@ export class MenuComponent
     private _externalTrigger: ElementRef;
 
     /** @hidden */
-    _addons: Array<unknown> = [];
+    private _addons: Array<unknown> = [];
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -197,6 +197,20 @@ export class MenuComponent
 
             this._changeDetectorRef.markForCheck();
         });
+    }
+
+    /** Register addon */
+    registerAddon(addon: unknown): void {
+        if (!this._addons.includes(addon)) {
+            this._addons = [...this._addons, addon];
+            this._changeDetectorRef.markForCheck();
+        }
+    }
+
+    /** Unregister addon */
+    unregisterAddon(addon: unknown): void {
+        this._addons = this._addons.filter((item) => item !== addon);
+        this._changeDetectorRef.markForCheck();
     }
 
     /** @hidden */

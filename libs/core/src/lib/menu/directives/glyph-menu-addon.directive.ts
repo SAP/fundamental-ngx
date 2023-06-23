@@ -97,18 +97,12 @@ export class GlyphMenuAddonDirective implements OnDestroy {
 
     /** @hidden */
     private _addGlyphAddonToMenu(): void {
-        if (this._menuComponent && !this._menuComponent._addons.includes(this)) {
-            this._menuComponent._addons = [...this._menuComponent._addons, this];
-            this._menuComponent.detectChanges();
-        }
+        this._menuComponent?.registerAddon(this);
     }
 
     /** @hidden */
     private _removeGlyphAddonFromMenu(): void {
-        if (this._menuComponent) {
-            this._menuComponent._addons = this._menuComponent._addons.filter((item) => item !== this);
-            this._menuComponent.detectChanges();
-        }
+        this._menuComponent?.unregisterAddon(this);
     }
 
     /** @hidden */
