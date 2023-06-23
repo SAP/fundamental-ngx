@@ -1,9 +1,13 @@
 import {
     AfterViewInit,
     Component,
+    ComponentRef,
     ElementRef,
+    EmbeddedViewRef,
+    EventEmitter,
     inject,
     Input,
+    Output,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -58,6 +62,10 @@ export class DynamicPortalComponent implements AfterViewInit {
         this.portalContent$.next(value);
     }
 
+    /** Emits when the portal is attached */
+    @Output()
+    attached = new EventEmitter<ComponentRef<any> | EmbeddedViewRef<any> | Element>();
+
     /** @hidden */
     @ViewChild(CdkPortalOutlet)
     portalOutlet?: CdkPortalOutlet;
@@ -84,28 +92,31 @@ export class DynamicPortalComponent implements AfterViewInit {
         const portalOutlet = this.portalOutlet as CdkPortalOutlet;
         this.portalContent$
             .pipe(
+                tap(() => portalOutlet.detach()),
+                filter(Boolean),
                 map((content) => {
-                    portalOutlet.detach();
-                    if (content) {
-                        if (typeof content === 'string') {
-                            const fdTextElement = this.renderer.createElement('p');
-                            fdTextElement.classList.add('fd-text');
-                            fdTextElement.innerHTML = content;
-                            this.renderer.appendChild(this.elementRef.nativeElement, fdTextElement);
-                            return new DomPortal(fdTextElement);
-                        } else if (content instanceof HTMLElement || content instanceof ElementRef) {
-                            return new DomPortal(coerceElement(content as HTMLElement | ElementRef<HTMLElement>));
-                        } else if (content instanceof TemplateRef) {
-                            return new TemplatePortal(content, this.viewContainerRef);
-                        }
-                        return new ComponentPortal(content);
+                    if (typeof content === 'string') {
+                        const textElement = this.renderer.createText(content);
+                        this.renderer.appendChild(this.elementRef.nativeElement, textElement);
+                        return new DomPortal(textElement);
+                    } else if (content instanceof HTMLElement || content instanceof ElementRef) {
+                        return new DomPortal(coerceElement(content as HTMLElement | ElementRef<HTMLElement>));
+                    } else if (content instanceof TemplateRef) {
+                        return new TemplatePortal(content, this.viewContainerRef);
                     }
-                    return null;
+                    return new ComponentPortal(content);
                 }),
                 filter(Boolean),
-                tap((portal) => portalOutlet.attach(portal)),
                 takeUntil(this.destroy$)
             )
-            .subscribe();
+            .subscribe((portal) => {
+                const ref = portalOutlet.attach(portal);
+                if (portal instanceof DomPortal) {
+                    // DomPortal Attachment does not refer return Ref, like other portals
+                    this.attached.emit(portal.element);
+                } else {
+                    this.attached.emit(ref);
+                }
+            });
     }
 }
