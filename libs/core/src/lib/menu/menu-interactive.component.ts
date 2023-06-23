@@ -27,7 +27,7 @@ export class MenuInteractiveComponent {
         if (
             addon?.elementRef.nativeElement === this.elementRef.nativeElement.querySelector('fd-menu-addon:first-child')
         ) {
-            this._addon = addon;
+            this._addonInstance = addon;
         }
     }
 
