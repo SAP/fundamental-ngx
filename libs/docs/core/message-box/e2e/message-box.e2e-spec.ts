@@ -37,6 +37,10 @@ describe('Message-box test suits', () => {
         await messageBoxPage.open();
     }, 1);
 
+    afterEach(async () => {
+        await pause(100);
+    });
+
     describe('Object based example', () => {
         it('Should check working of message-boxes', async () => {
             await checkMessageBoxWorking(basedObjectExample);
