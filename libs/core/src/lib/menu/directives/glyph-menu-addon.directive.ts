@@ -28,12 +28,12 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     isInToggleButton = !!inject(TOGGLE_MENU_ITEM, { optional: true });
 
     /** IconComponent loader */
-    private iconComponent$ = fromPromise(
+    private _iconComponent$ = fromPromise(
         import('@fundamental-ngx/core/icon').then(({ IconComponent }) => IconComponent)
     ).pipe(shareReplay(1));
 
     /** @hidden */
-    private menuComponent = inject<MenuComponent>(FD_MENU_COMPONENT, { optional: true });
+    private _menuComponent = inject<MenuComponent>(FD_MENU_COMPONENT, { optional: true });
 
     /** @hidden */
     private _addonGlyphPortalOutlet$ = new Subject<CdkPortalOutlet>();
@@ -71,14 +71,14 @@ export class GlyphMenuAddonDirective implements OnDestroy {
         combineLatest([this._addonGlyphPortalOutlet$, this._glyphName$])
             .pipe(
                 tap(([, glyphName]) => {
-                    glyphName || this.isInToggleButton ? this.addGlyphAddonToMenu() : this.removeGlyphAddonFromMenu();
+                    glyphName || this.isInToggleButton ? this._addGlyphAddonToMenu() : this._removeGlyphAddonFromMenu();
                 }),
                 switchMap(([outlet, glyphName]) => {
                     if (!glyphName) {
                         outlet.detach();
                         return of(null);
                     }
-                    return this.iconComponent$.pipe(
+                    return this._iconComponent$.pipe(
                         tap((IconComponent) => {
                             const componentRef = outlet.attachComponentPortal(new ComponentPortal(IconComponent));
                             componentRef.instance.glyph = glyphName;
@@ -96,23 +96,23 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     }
 
     /** @hidden */
-    private addGlyphAddonToMenu(): void {
-        if (this.menuComponent && !this.menuComponent._addons.includes(this)) {
-            this.menuComponent._addons = [...this.menuComponent._addons, this];
-            this.menuComponent.detectChanges();
+    private _addGlyphAddonToMenu(): void {
+        if (this._menuComponent && !this._menuComponent._addons.includes(this)) {
+            this._menuComponent._addons = [...this._menuComponent._addons, this];
+            this._menuComponent.detectChanges();
         }
     }
 
     /** @hidden */
-    private removeGlyphAddonFromMenu(): void {
-        if (this.menuComponent) {
-            this.menuComponent._addons = this.menuComponent._addons.filter((item) => item !== this);
-            this.menuComponent.detectChanges();
+    private _removeGlyphAddonFromMenu(): void {
+        if (this._menuComponent) {
+            this._menuComponent._addons = this._menuComponent._addons.filter((item) => item !== this);
+            this._menuComponent.detectChanges();
         }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.removeGlyphAddonFromMenu();
+        this._removeGlyphAddonFromMenu();
     }
 }

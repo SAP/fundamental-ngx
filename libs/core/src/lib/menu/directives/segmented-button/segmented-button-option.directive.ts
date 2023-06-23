@@ -45,11 +45,11 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
             .pipe(
                 tap(() => {
                     if (!this._dotElement) {
-                        this.createDot();
+                        this._createDot();
                     }
                 }),
                 tap(([_, selected]) => {
-                    selected ? this.showDot() : this.hideDot();
+                    selected ? this._showDot() : this._hideDot();
                 }),
                 takeUntil(destroyed$)
             )
@@ -62,25 +62,25 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
     }
 
     /** @hidden */
-    private createDot(): void {
+    private _createDot(): void {
         this._dotElement = this.renderer2.createElement('span');
         this.renderer2.appendChild(this.elementRef.nativeElement, this._dotElement);
         this.renderer2.addClass(this._dotElement, 'fd-menu__active-dot');
         this.renderer2.setAttribute(this._dotElement, 'role', 'presentation');
-        this.hideDot();
+        this._hideDot();
         const addonDirective = this.menuItem.menuInteractive.startAddon;
         const addonGlyph = addonDirective._addonGlyph;
         addonGlyph.renderElement(new DomPortal(this._dotElement)).subscribe();
     }
 
     /** @hidden */
-    private showDot(): void {
+    private _showDot(): void {
         this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'false');
         this.renderer2.setStyle(this._dotElement, 'display', 'inline-block');
     }
 
     /** @hidden */
-    private hideDot(): void {
+    private _hideDot(): void {
         this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'true');
         this.renderer2.setStyle(this._dotElement, 'display', 'none');
     }

@@ -23,7 +23,7 @@ export class MenuInteractiveComponent {
 
     /** @hidden */
     @ContentChild(MenuAddonDirective)
-    private set addon(addon: MenuAddonDirective) {
+    private set _addon(addon: MenuAddonDirective) {
         if (
             addon?.elementRef.nativeElement === this.elementRef.nativeElement.querySelector('fd-menu-addon:first-child')
         ) {
@@ -63,17 +63,17 @@ export class MenuInteractiveComponent {
     public elementRef: ElementRef = inject(ElementRef);
 
     /** @hidden */
-    private _addon: MenuAddonDirective;
+    private _addonInstance: MenuAddonDirective;
 
     /** @hidden */
     get startAddon(): MenuAddonDirective {
-        if (!this._addon) {
+        if (!this._addonInstance) {
             this.addonPortalOutlet.detach();
-            this._addon = this.addonPortalOutlet.attachComponentPortal(
+            this._addonInstance = this.addonPortalOutlet.attachComponentPortal(
                 new ComponentPortal(MenuAddonDirective)
             ).instance;
         }
-        return this._addon;
+        return this._addonInstance;
     }
 
     /** @hidden */
