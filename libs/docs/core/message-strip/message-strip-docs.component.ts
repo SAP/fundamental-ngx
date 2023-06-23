@@ -52,6 +52,14 @@ export class MessageStripDocsComponent {
         }
     ];
 
+    messageStripCustomIconExample: ExampleFile[] = [
+        {
+            language: 'ts',
+            fileName: 'message-strip-custom-icon-example',
+            code: getAssetFromModuleAssets('message-strip-custom-icon-example.component.ts')
+        }
+    ];
+
     messageStripIndicationColorsExample: ExampleFile[] = [
         {
             language: 'ts',
