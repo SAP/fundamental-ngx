@@ -804,7 +804,7 @@ export class TableComponent<T = any>
                 .subscribe((transform) => {
                     this._tableBody.nativeElement.style.transform = `translateY(${transform}px)`;
                 })
-            );
+        );
 
         this._focusableGrid.shortRowFocus = 'first';
     }
