@@ -22,7 +22,7 @@
 
 The `@fundamental-ngx/platform` library is a set of [Angular](https://angular.io/) components built using [Fundamental Library Styles](https://sap.github.io/fundamental-styles/).
 
-The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+The Fundamental Library for Angular is an SAP Design System Angular component library used to build modern product user experiences with the SAP look and feel.
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/#/core/new-component) for examples and API details.
 
