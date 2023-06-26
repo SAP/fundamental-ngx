@@ -106,7 +106,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     menuItemTitle: MenuTitleDirective;
 
     /** @hidden Reference to the Menu Item interactive element */
-    @ContentChild(forwardRef(() => MenuInteractiveComponent))
+    @ContentChild(MenuInteractiveComponent)
     menuInteractive: MenuInteractiveComponent;
 
     /** @hidden Whether sub-menu is currently visible*/

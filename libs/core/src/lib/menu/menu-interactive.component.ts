@@ -27,7 +27,7 @@ export class MenuInteractiveComponent {
         if (
             addon?.elementRef.nativeElement === this.elementRef.nativeElement.querySelector('fd-menu-addon:first-child')
         ) {
-            this._addonInstance = addon;
+            this._startAddonInstance = addon;
         }
     }
 
@@ -63,17 +63,17 @@ export class MenuInteractiveComponent {
     public elementRef: ElementRef = inject(ElementRef);
 
     /** @hidden */
-    private _addonInstance: MenuAddonDirective;
+    private _startAddonInstance: MenuAddonDirective;
 
     /** @hidden */
     get startAddon(): MenuAddonDirective {
-        if (!this._addonInstance) {
+        if (!this._startAddonInstance) {
             this.addonPortalOutlet.detach();
-            this._addonInstance = this.addonPortalOutlet.attachComponentPortal(
+            this._startAddonInstance = this.addonPortalOutlet.attachComponentPortal(
                 new ComponentPortal(MenuAddonDirective)
             ).instance;
         }
-        return this._addonInstance;
+        return this._startAddonInstance;
     }
 
     /** @hidden */
