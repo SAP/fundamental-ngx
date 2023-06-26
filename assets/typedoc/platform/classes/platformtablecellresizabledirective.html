@@ -10,19 +10,76 @@
 	<h3>Hierarchy</h3>
 	<ul class="tsd-hierarchy">
 		<li>
-			<span class="target">PlatformTableCellResizableDirective</span>
+			<span class="tsd-signature-type">TableCellDirective</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">PlatformTableCellResizableDirective</span>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </section>
 <section class="tsd-panel">
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">AfterViewInit</span></li>
 		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="activable" class="tsd-anchor"></a>
+		<h3>activable</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">activable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.activable</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L34">libs/core/src/lib/table/directives/table-cell.directive.ts:34</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the table cell is activable</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="cellFocused" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cell<wbr>Focused</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">cell<wbr>Focused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FocusableItemPosition</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.cellFocused</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts#L70">libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts:70</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when the cell receives focus, not being emitted when focus moves between item&#39;s children.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="cellFocusedEventAnnouncer" class="tsd-anchor"></a>
+		<h3>cell<wbr>Focused<wbr>Event<wbr>Announcer</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">cell<wbr>Focused<wbr>Event<wbr>Announcer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CellFocusedEventAnnouncer</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.cellFocusedEventAnnouncer</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts#L66">libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts:66</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Function, which returns a string to be announced by screen-reader whenever an item which is in grid receives focus.</p>
+			</div>
+		</div>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="columnName" class="tsd-anchor"></a>
 		<h3>column<wbr>Name</h3>
@@ -30,7 +87,7 @@
 		<div class="tsd-signature tsd-kind-icon">column<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/directives/table-cell-resizable.directive.ts#L28">libs/platform/src/lib/table/directives/table-cell-resizable.directive.ts:28</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/directives/table-cell-resizable.directive.ts#L51">libs/platform/src/lib/table-helpers/directives/table-cell-resizable.directive.ts:51</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -39,9 +96,188 @@
 			</div>
 		</div>
 	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="elementRef" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> element<wbr>Ref</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.elementRef</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts#L97">libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts:97</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Element reference.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="fitContent" class="tsd-anchor"></a>
+		<h3>fit<wbr>Content</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">fit<wbr>Content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.fitContent</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L54">libs/core/src/lib/table/directives/table-cell.directive.ts:54</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the table cell&#39;s width should fit to content</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="hoverable" class="tsd-anchor"></a>
+		<h3>hoverable</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">hoverable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.hoverable</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L49">libs/core/src/lib/table/directives/table-cell.directive.ts:49</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the table cell is hoverable</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="key" class="tsd-anchor"></a>
+		<h3>key</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.key</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L68">libs/core/src/lib/table/directives/table-cell.directive.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Key of a cell element, it&#39;s used to identify this cell with certain column</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="noBorderX" class="tsd-anchor"></a>
+		<h3>no<wbr>BorderX</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">no<wbr>BorderX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.noBorderX</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L24">libs/core/src/lib/table/directives/table-cell.directive.ts:24</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to show the table cell&#39;s horizontal borders</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="noBorderY" class="tsd-anchor"></a>
+		<h3>no<wbr>BorderY</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">no<wbr>BorderY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.noBorderY</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L29">libs/core/src/lib/table/directives/table-cell.directive.ts:29</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to show the table cell&#39;s vertical borders</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="noData" class="tsd-anchor"></a>
+		<h3>no<wbr>Data</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.noData</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L64">libs/core/src/lib/table/directives/table-cell.directive.ts:64</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the table cell indicates that there is no data</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+		<a name="noPadding" class="tsd-anchor"></a>
+		<h3>no<wbr>Padding</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">no<wbr>Padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Inherited from TableCellDirective.noPadding</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/core/src/lib/table/directives/table-cell.directive.ts#L59">libs/core/src/lib/table/directives/table-cell.directive.ts:59</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the table cell shouldn&#39;t have padding on sides</p>
+			</div>
+		</div>
+	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+		<a name="fdkFocusableItem" class="tsd-anchor"></a>
+		<h3>fdk<wbr>Focusable<wbr>Item</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> fdkFocusableItem<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> fdkFocusableItem<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BooleanInput</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts#L60">libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts:60</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the item is focusable. Default is true.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts#L55">libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts:55</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the item is focusable. Default is true.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>val: <span class="tsd-signature-type">BooleanInput</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
 	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
 		<a name="resizableSide" class="tsd-anchor"></a>
 		<h3>resizable<wbr>Side</h3>
@@ -53,7 +289,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/directives/table-cell-resizable.directive.ts#L18">libs/platform/src/lib/table/directives/table-cell-resizable.directive.ts:18</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/directives/table-cell-resizable.directive.ts#L41">libs/platform/src/lib/table-helpers/directives/table-cell-resizable.directive.ts:41</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -65,6 +301,39 @@
 				<ul class="tsd-parameters">
 					<li>
 						<h5>value: <span class="tsd-signature-type">TableColumnResizableSide</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+		<a name="setTabbable" class="tsd-anchor"></a>
+		<h3>set<wbr>Tabbable</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Tabbable<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Inherited from TableCellDirective.setTabbable</p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts#L144">libs/cdk/src/lib/utils/directives/focusable-item/focusable-item.directive.ts:144</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Set tabbable state</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>state: <span class="tsd-signature-type">boolean</span></h5>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

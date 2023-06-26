@@ -1,0 +1,91 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+	<div class="tsd-comment tsd-typography">
+		<div class="lead">
+			<p>Service that is responsible for opening and closing message strip alerts.
+				This should be only created once in entire application.
+				Service is responsible for creating and managing the overlays for the
+				message strip alerts. This also manages the footer components for any
+			given position.</p>
+		</div>
+	</div>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">MessageStripAlertService</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+		<a name="open" class="tsd-anchor"></a>
+		<h3>open</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+			<li class="tsd-signature tsd-kind-icon">open&lt;ComponentType&gt;<span class="tsd-signature-symbol">(</span>c<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OpenMessageStripAlertConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageStripAlertRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/message-strip/alert/message-strip-alert.service.ts#L86">libs/core/src/lib/message-strip/alert/message-strip-alert.service.ts:86</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Open a message strip alert with given configuration</p>
+					</div>
+				</div>
+				<h4 class="tsd-type-parameters-title">Type parameters</h4>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>ComponentType = <span class="tsd-signature-type">unknown</span></h4>
+					</li>
+				</ul>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>c: <span class="tsd-signature-type">OpenMessageStripAlertConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MessageStripAlertRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ComponentType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="setFooterComponent" class="tsd-anchor"></a>
+		<h3>set<wbr>Footer<wbr>Component</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Footer<wbr>Component<span class="tsd-signature-symbol">(</span>position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"top-start"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"top-end"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bottom-start"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bottom-end"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"top-middle"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bottom-middle"</span>, component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/message-strip/alert/message-strip-alert.service.ts#L76">libs/core/src/lib/message-strip/alert/message-strip-alert.service.ts:76</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Set the footer component for a given position.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>position: <span class="tsd-signature-type">"top-start"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"top-end"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bottom-start"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bottom-end"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"top-middle"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"bottom-middle"</span></h5>
+					</li>
+					<li>
+						<h5>component: <span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

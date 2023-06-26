@@ -1,0 +1,66 @@
+<h3>Selection placement:</h3>
+<fd-segmented-button [(ngModel)]="selectionPlacement">
+    <button fd-button value="none">None</button>
+    <button fd-button value="left">Left</button>
+    <button fd-button value="afterExpand">After expand button</button>
+    <button fd-button value="right">Right</button>
+</fd-segmented-button>
+<fd-checkbox [(ngModel)]="independentSections" label="Independent sections"></fd-checkbox>
+<h4>Single selection mode:</h4>
+<form [formGroup]="singleForm">
+    <fd-tree
+        formControlName="selection"
+        [dataSource]="items"
+        selection="single"
+        [navigationIndicator]="true"
+        [independentSections]="independentSections"
+        [selectionPlacement]="selectionPlacement"
+    >
+        <fd-tree-item
+            *fdTreeItemDef="let item; as: model"
+            [level]="item.level"
+            [value]="item.data.value"
+            [state]="item.state"
+            [navigatable]="item.navigatable"
+            [childNodes]="item.children"
+            [expanded]="item.expanded"
+            [parentId]="item.parentId"
+            [id]="item.id"
+            (expandedChange)="expandChange($event, item.data.title)"
+        >
+            <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
+            <span fdTreeItemText>{{ item.data.title }}</span>
+        </fd-tree-item>
+    </fd-tree>
+</form>
+
+<p>Form value: {{ singleForm.value | json }}</p>
+
+<h4>Multiple selection mode:</h4>
+<form [formGroup]="multipleForm">
+    <fd-tree
+        formControlName="selection"
+        [dataSource]="items2"
+        [independentSections]="independentSections"
+        [navigationIndicator]="true"
+        selection="multiple"
+        [selectionPlacement]="selectionPlacement"
+    >
+        <fd-tree-item
+            *fdTreeItemDef="let item; as: model"
+            [level]="item.level"
+            [value]="item.data.value"
+            [state]="item.state"
+            [navigatable]="item.navigatable"
+            [childNodes]="item.children"
+            [expanded]="item.expanded"
+            [parentId]="item.parentId"
+            [id]="item.id"
+        >
+            <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
+            <span fdTreeItemText>{{ item.data.title }}</span>
+        </fd-tree-item>
+    </fd-tree>
+</form>
+
+<p>Form value: {{ multipleForm.value | json }}</p>

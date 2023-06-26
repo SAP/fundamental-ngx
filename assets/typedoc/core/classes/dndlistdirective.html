@@ -55,12 +55,45 @@
 		<div class="tsd-signature tsd-kind-icon">_refresh$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L104">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:104</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L139">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:139</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>An RxJS Subject that will kill the current data stream (for unsubscribing)</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dragoverPredicate" class="tsd-anchor"></a>
+		<h3>dragover<wbr>Predicate</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">dragover<wbr>Predicate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DragoverPredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L104">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:104</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Predicate function that checks whether the item can be dragged over another item.
+				If the function returns <code>false</code>, dragged over item will not be highlighted, and drop event will be canceled.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dropCancelled" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> drop<wbr>Cancelled</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">drop<wbr>Cancelled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L123">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:123</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event that is thrown when predicate function returned false.</p>
 			</div>
 		</div>
 	</section>
@@ -71,21 +104,54 @@
 		<div class="tsd-signature tsd-kind-icon">drop<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdDndDropType</span><span class="tsd-signature-symbol"> = &#x27;shift&#x27;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L42">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L55">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:55</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Defines drop strategy:</p>
 				<ul>
-					<li><code>shift</code> mode will create line after closest drop element.</li>
-					<li><code>group</code> mode will create replace indicator on whole closest drop element.</li>
-					<li><code>auto</code> mode will create line after closest drop element,
-						if dragged element coordinates are shifted for 30% from center of the closest drop element.
-					Otherwise, it will create replace indicator on whole closest drop element.</li>
+					<li><code>shift</code> mode will create line after the closest drop element.</li>
+					<li><code>group</code> mode will create replace indicator on a whole closest drop element.</li>
+					<li><code>auto</code> mode will create a line after the closest drop element
+						if dragged element coordinates are shifted for 30% from the center of the closest drop element.
+					Otherwise, it will create replace indicator on a whole closest drop element.</li>
 				</ul>
 			</div>
 			<p><code>shift</code> mode is the default.</p>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dropPredicate" class="tsd-anchor"></a>
+		<h3>drop<wbr>Predicate</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">drop<wbr>Predicate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DropPredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L97">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:97</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Predicate function that checks whether the item can be dropped over another item.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="dropPredicateCalculating" class="tsd-anchor"></a>
+		<h3>drop<wbr>Predicate<wbr>Calculating</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">drop<wbr>Predicate<wbr>Calculating<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L111">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:111</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when <code>dropPredicate</code> function evaluation changes.
+				Emits <code>true</code> when evaluation started, and <code>false</code> when completed.</p>
+			</div>
 		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
@@ -95,7 +161,7 @@
 		<div class="tsd-signature tsd-kind-icon">grid<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L29">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:29</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L42">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:42</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -112,12 +178,12 @@
 		<div class="tsd-signature tsd-kind-icon">item<wbr>Dropped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdDropEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L88">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:88</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L119">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:119</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Event that is thrown, when the item is dropped</p>
+				<p>Event that is thrown when the item is dropped</p>
 			</div>
 		</div>
 	</section>
@@ -125,10 +191,10 @@
 		<a name="items" class="tsd-anchor"></a>
 		<h3>items</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
+		<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L73">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:73</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L86">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:86</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -144,12 +210,12 @@
 		<div class="tsd-signature tsd-kind-icon">items<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L84">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:84</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L115">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:115</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Event that is thrown, when items are reordered</p>
+				<p>Event that is thrown when items are reordered</p>
 			</div>
 		</div>
 	</section>
@@ -160,7 +226,7 @@
 		<div class="tsd-signature tsd-kind-icon">threshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0.3</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L48">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:48</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L61">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:61</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -183,7 +249,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L77">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:77</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L90">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:90</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -213,7 +279,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L64">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:64</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L77">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:77</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -221,7 +287,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L58">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:58</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L71">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:71</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -230,7 +296,7 @@
 						<dd><p>Use <code>dropMode</code> property for better configuration.</p>
 						</dd>
 						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>When enabled, replace indicator will appear on whole element, instead of horizontal/vertical line before/after element.</p>
+						<dd><p>When enabled, the Replace Indicator will appear on a whole element, instead of horizontal/vertical line before/after an element.</p>
 						</dd>
 					</dl>
 				</div>
@@ -252,18 +318,18 @@
 		<h3>drag<wbr>End</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">drag<wbr>End<span class="tsd-signature-symbol">(</span>draggedItemIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">drag<wbr>End<span class="tsd-signature-symbol">(</span>draggedItemIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L198">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:198</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L251">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:251</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Method called, when element is released</p>
+						<p>Method called when an element is released</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -272,7 +338,7 @@
 						<h5>draggedItemIndex: <span class="tsd-signature-type">number</span></h5>
 					</li>
 				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 			</li>
 		</ul>
 	</section>
@@ -287,12 +353,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L189">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:189</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L241">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:241</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Method called, when element is started to be dragged</p>
+						<p>Method called when an element is started to be dragged</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>
@@ -316,12 +382,12 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L141">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:141</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts#L182">libs/cdk/src/lib/utils/drag-and-drop/dnd-list/dnd-list.directive.ts:182</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Method called, when the item is being moved by 1 px</p>
+						<p>Method called when the item is being moved by 1 px</p>
 					</div>
 				</div>
 				<h4 class="tsd-parameters-title">Parameters</h4>

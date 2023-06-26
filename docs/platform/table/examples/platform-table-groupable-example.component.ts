@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -12,7 +12,9 @@ import {
 
 @Component({
     selector: 'fdp-platform-table-groupable-example',
-    templateUrl: './platform-table-groupable-example.component.html'
+    templateUrl: './platform-table-groupable-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableGroupableExampleComponent {
     source: TableDataSource<ExampleItem>;

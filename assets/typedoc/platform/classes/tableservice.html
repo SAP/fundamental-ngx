@@ -26,52 +26,327 @@
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-		<a name="detectChanges_" class="tsd-anchor"></a>
-		<h3>detect<wbr>Changes$</h3>
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="_poppingColumnsLength" class="tsd-anchor"></a>
+		<h3>_popping<wbr>Columns<wbr>Length</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> detectChanges$<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L50">libs/platform/src/lib/table/table.service.ts:50</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Listen for immediate changes in table subcomponents (mostly table column)</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
+		<div class="tsd-signature tsd-kind-icon">_popping<wbr>Columns<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L56">libs/platform/src/lib/table-helpers/services/table.service.ts:56</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Popping columns length.</p>
+			</div>
+		</div>
 	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-		<a name="markForCheck_" class="tsd-anchor"></a>
-		<h3>mark<wbr>For<wbr>Check$</h3>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="columnsChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> columns<wbr>Change$</h3>
 		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> markForCheck$<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L45">libs/platform/src/lib/table/table.service.ts:45</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Listen for soft changes in table subcomponents (mostly table column)</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
+		<div class="tsd-signature tsd-kind-icon">columns<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ColumnsChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L72">libs/platform/src/lib/table-helpers/services/table.service.ts:72</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when columns state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="detectChanges_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> detect<wbr>Changes$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">detect<wbr>Changes$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L84">libs/platform/src/lib/table-helpers/services/table.service.ts:84</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Listen for immediate changes in table subcomponents (mostly table column)</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="filterChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> filter<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">filter<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FilterChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L66">libs/platform/src/lib/table-helpers/services/table.service.ts:66</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when filter state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="filterRules_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> filter<wbr>Rules$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">filter<wbr>Rules$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CollectionFilter</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L91">libs/platform/src/lib/table-helpers/services/table.service.ts:91</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Filter Rules Map stream. Where key is column key, and value is the associated filter rules.
+				Many filters can be applied to one column.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="freezeChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> freeze<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">freeze<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FreezeChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L70">libs/platform/src/lib/table-helpers/services/table.service.ts:70</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when freeze state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="groupChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> group<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">group<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">GroupChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L68">libs/platform/src/lib/table-helpers/services/table.service.ts:68</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when group state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="groupRules_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> group<wbr>Rules$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">group<wbr>Rules$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L96">libs/platform/src/lib/table-helpers/services/table.service.ts:96</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Group Rules Map stream. Where key is column key and value is associated group rule</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="markForCheck_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> mark<wbr>For<wbr>Check$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">mark<wbr>For<wbr>Check$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L82">libs/platform/src/lib/table-helpers/services/table.service.ts:82</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Listen for soft changes in table subcomponents (mostly table column)</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="needFetch_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> need<wbr>Fetch$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">need<wbr>Fetch$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L76">libs/platform/src/lib/table-helpers/services/table.service.ts:76</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when new fetch of data is needed.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="pageChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> page<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">page<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">PageChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L74">libs/platform/src/lib/table-helpers/services/table.service.ts:74</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when page state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="poppingColumns_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> popping<wbr>Columns$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">popping<wbr>Columns$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L54">libs/platform/src/lib/table-helpers/services/table.service.ts:54</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Popping columns stream.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="searchChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> search<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">search<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SearchChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L62">libs/platform/src/lib/table-helpers/services/table.service.ts:62</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when search state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="sortChange_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> sort<wbr>Change$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">sort<wbr>Change$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SortChange</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L64">libs/platform/src/lib/table-helpers/services/table.service.ts:64</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when sort state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="sortRules_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> sort<wbr>Rules$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">sort<wbr>Rules$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CollectionSort</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L86">libs/platform/src/lib/table-helpers/services/table.service.ts:86</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Sort rules stream.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="tableColumns_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> table<wbr>Columns$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">table<wbr>Columns$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L58">libs/platform/src/lib/table-helpers/services/table.service.ts:58</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Table columns stream.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="tableLoading_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> table<wbr>Loading$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">table<wbr>Loading$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L80">libs/platform/src/lib/table-helpers/services/table.service.ts:80</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Stream that emits when loading state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="tableState_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> table<wbr>State$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">table<wbr>State$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L40">libs/platform/src/lib/table-helpers/services/table.service.ts:40</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Table state stream.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="visibleColumns_" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> visible<wbr>Columns$</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">visible<wbr>Columns$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L50">libs/platform/src/lib/table-helpers/services/table.service.ts:50</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Visible columns stream.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="visibleColumnsLength" class="tsd-anchor"></a>
+		<h3>visible<wbr>Columns<wbr>Length</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">visible<wbr>Columns<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L52">libs/platform/src/lib/table-helpers/services/table.service.ts:52</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Visible columns length.</p>
+			</div>
+		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -87,7 +362,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L141">libs/platform/src/lib/table/table.service.ts:141</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L200">libs/platform/src/lib/table-helpers/services/table.service.ts:200</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -116,7 +391,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L191">libs/platform/src/lib/table/table.service.ts:191</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L261">libs/platform/src/lib/table-helpers/services/table.service.ts:261</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -145,7 +420,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L107">libs/platform/src/lib/table/table.service.ts:107</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L158">libs/platform/src/lib/table-helpers/services/table.service.ts:158</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -164,6 +439,125 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="buildFilterRulesMap" class="tsd-anchor"></a>
+		<h3>build<wbr>Filter<wbr>Rules<wbr>Map</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">build<wbr>Filter<wbr>Rules<wbr>Map<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L399">libs/platform/src/lib/table-helpers/services/table.service.ts:399</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Constructs filter rules based on the table state.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>state: <span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol"> = ...</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Table state.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="buildGroupRulesMap" class="tsd-anchor"></a>
+		<h3>build<wbr>Group<wbr>Rules<wbr>Map</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">build<wbr>Group<wbr>Rules<wbr>Map<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L382">libs/platform/src/lib/table-helpers/services/table.service.ts:382</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Constructs grouping rules based on the table state.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>state: <span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol"> = ...</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Table state.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="buildSortRulesMap" class="tsd-anchor"></a>
+		<h3>build<wbr>Sort<wbr>Rules<wbr>Map</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">build<wbr>Sort<wbr>Rules<wbr>Map<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L391">libs/platform/src/lib/table-helpers/services/table.service.ts:391</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Constructs sorting rules based on the table state.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>state: <span class="tsd-signature-type">TableState</span><span class="tsd-signature-symbol"> = ...</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Table state</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="constructTableMetadata" class="tsd-anchor"></a>
+		<h3>construct<wbr>Table<wbr>Metadata</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">construct<wbr>Table<wbr>Metadata<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L415">libs/platform/src/lib/table-helpers/services/table.service.ts:415</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Constructs base table config.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="detectChanges" class="tsd-anchor"></a>
 		<h3>detect<wbr>Changes</h3>
 		<!-- {log decorators} -->
@@ -174,7 +568,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L75">libs/platform/src/lib/table/table.service.ts:75</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L119">libs/platform/src/lib/table-helpers/services/table.service.ts:119</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -197,7 +591,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L210">libs/platform/src/lib/table/table.service.ts:210</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L283">libs/platform/src/lib/table-helpers/services/table.service.ts:283</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -219,6 +613,29 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="getDefaultState" class="tsd-anchor"></a>
+		<h3>get<wbr>Default<wbr>State</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Default<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableState</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L339">libs/platform/src/lib/table-helpers/services/table.service.ts:339</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Returns default table state.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableState</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="getTableState" class="tsd-anchor"></a>
 		<h3>get<wbr>Table<wbr>State</h3>
 		<!-- {log decorators} -->
@@ -229,7 +646,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L55">libs/platform/src/lib/table/table.service.ts:55</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L99">libs/platform/src/lib/table-helpers/services/table.service.ts:99</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -252,7 +669,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L70">libs/platform/src/lib/table/table.service.ts:70</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L114">libs/platform/src/lib/table-helpers/services/table.service.ts:114</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -275,7 +692,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L160">libs/platform/src/lib/table/table.service.ts:160</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L223">libs/platform/src/lib/table-helpers/services/table.service.ts:223</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -304,7 +721,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L80">libs/platform/src/lib/table/table.service.ts:80</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L124">libs/platform/src/lib/table-helpers/services/table.service.ts:124</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -333,7 +750,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L226">libs/platform/src/lib/table/table.service.ts:226</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L302">libs/platform/src/lib/table-helpers/services/table.service.ts:302</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -365,7 +782,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L242">libs/platform/src/lib/table/table.service.ts:242</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L320">libs/platform/src/lib/table-helpers/services/table.service.ts:320</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -394,7 +811,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L126">libs/platform/src/lib/table/table.service.ts:126</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L181">libs/platform/src/lib/table-helpers/services/table.service.ts:181</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -423,7 +840,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L176">libs/platform/src/lib/table/table.service.ts:176</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L243">libs/platform/src/lib/table-helpers/services/table.service.ts:243</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -442,6 +859,38 @@
 		</ul>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="setPoppingColumns" class="tsd-anchor"></a>
+		<h3>set<wbr>Popping<wbr>Columns</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Popping<wbr>Columns<span class="tsd-signature-symbol">(</span>columns<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L373">libs/platform/src/lib/table-helpers/services/table.service.ts:373</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Shares popping columns array across listeners.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>columns: <span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Popping columns to share.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 		<a name="setSort" class="tsd-anchor"></a>
 		<h3>set<wbr>Sort</h3>
 		<!-- {log decorators} -->
@@ -452,7 +901,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L91">libs/platform/src/lib/table/table.service.ts:91</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L139">libs/platform/src/lib/table-helpers/services/table.service.ts:139</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -481,7 +930,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L65">libs/platform/src/lib/table/table.service.ts:65</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L109">libs/platform/src/lib/table-helpers/services/table.service.ts:109</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -510,7 +959,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fe61e95/libs/platform/src/lib/table/table.service.ts#L60">libs/platform/src/lib/table/table.service.ts:60</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L104">libs/platform/src/lib/table-helpers/services/table.service.ts:104</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -522,6 +971,38 @@
 				<ul class="tsd-parameters">
 					<li>
 						<h5>state: <span class="tsd-signature-type">TableState</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+		<a name="setVisibleColumns" class="tsd-anchor"></a>
+		<h3>set<wbr>Visible<wbr>Columns</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Visible<wbr>Columns<span class="tsd-signature-symbol">(</span>columns<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/fa6d6c4/libs/platform/src/lib/table-helpers/services/table.service.ts#L364">libs/platform/src/lib/table-helpers/services/table.service.ts:364</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Shares visible columns array across listeners.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>columns: <span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Visible columns to share.</p>
+						</div>
 					</li>
 				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>

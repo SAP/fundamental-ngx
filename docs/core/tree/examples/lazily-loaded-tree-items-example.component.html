@@ -1,0 +1,17 @@
+<p>This example contains of 5 levels of tree items containing 20 items per level</p>
+<form>
+    <fd-tree [dataSource]="items">
+        <fd-tree-item
+            *fdTreeItemDef="let item; as: model"
+            [level]="item.level"
+            [state]="item.state"
+            [childNodes]="item.children"
+            [expanded]="item.expanded"
+            [parentId]="item.parentId"
+            [id]="item.id"
+        >
+            <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
+            <span fdTreeItemText>{{ item.data.title }}</span>
+        </fd-tree-item>
+    </fd-tree>
+</form>

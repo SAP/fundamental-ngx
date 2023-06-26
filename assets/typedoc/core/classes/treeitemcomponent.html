@@ -1,0 +1,560 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-type-parameters">
+	<h3>Type parameters</h3>
+	<ul class="tsd-type-parameters">
+		<li>
+			<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TreeItem</span> = <span class="tsd-signature-type">TreeItem</span></h4>
+		</li>
+		<li>
+			<h4>P = <span class="tsd-signature-type">any</span></h4>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="tsd-signature-type">BaseTreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span>
+			<ul class="tsd-hierarchy">
+				<li>
+					<span class="target">TreeItemComponent</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implements</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SelectableItemToken</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">AfterViewInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="ariaLabel" class="tsd-anchor"></a>
+		<h3>aria<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L76">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:76</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tree item aria label.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="childNodes" class="tsd-anchor"></a>
+		<h3>child<wbr>Nodes</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">child<wbr>Nodes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdTreeAcceptableDataSource</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = []</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>childNodes</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L109">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:109</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tree item child nodes data source.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="clicked" class="tsd-anchor"></a>
+		<h3>clicked</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">clicked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of Partial.clicked</p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L250">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:250</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Clicked behavior implementation.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="expandedChange" class="tsd-anchor"></a>
+		<h3>expanded<wbr>Change</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">expanded<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L181">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:181</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when <code>expanded</code> state changes.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="id" class="tsd-anchor"></a>
+		<h3>id</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>id</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L69">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:69</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tree item ID.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="itemContainer" class="tsd-anchor"></a>
+		<h3>item<wbr>Container</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">item<wbr>Container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>itemContainer</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L218">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:218</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tree item focusable container.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="navigatable" class="tsd-anchor"></a>
+		<h3>navigatable</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">navigatable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>navigatable</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L97">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:97</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the tree item is navigatable.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="selectableListItem" class="tsd-anchor"></a>
+		<h3>selectable<wbr>List<wbr>Item</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">selectable<wbr>List<wbr>Item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectableItemToken</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>selectableListItem</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L222">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:222</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Selectable item.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="state" class="tsd-anchor"></a>
+		<h3>state</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItemState</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>state</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L103">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:103</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tree item state.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="treeItemClick" class="tsd-anchor"></a>
+		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> tree<wbr>Item<wbr>Click</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">tree<wbr>Item<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L175">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:175</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted when user clicks on tree item.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="value" class="tsd-anchor"></a>
+		<h3>value</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">P</span></div>
+		<aside class="tsd-sources">
+			<p>Implementation of Partial.value</p>
+			<p>Overrides <span>BaseTreeItem</span>.<span>value</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L64">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:64</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Tree item value.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+		<a name="wrapContent" class="tsd-anchor"></a>
+		<h3>wrap<wbr>Content</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">wrap<wbr>Content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+		<aside class="tsd-sources">
+			<p>Overrides <span>BaseTreeItem</span>.<span>wrapContent</span></p>
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L115">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:115</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether to wrap content.</p>
+			</div>
+		</div>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+		<a name="expanded" class="tsd-anchor"></a>
+		<h3>expanded</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> expanded<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> expanded<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L158">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:158</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the tree item is expanded.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L137">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:137</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the tree item is expanded.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+		<a name="hasChildren" class="tsd-anchor"></a>
+		<h3>has<wbr>Children</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hasChildren<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L199">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:199</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the tree item has any type of child nodes.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+		<a name="hasDsChildren" class="tsd-anchor"></a>
+		<h3>has<wbr>DsChildren</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hasDsChildren<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L209">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:209</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the tree item has data source children.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+		<a name="hasProjectedChildren" class="tsd-anchor"></a>
+		<h3>has<wbr>Projected<wbr>Children</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> hasProjectedChildren<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L204">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:204</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the tree item has content-projected child nodes.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+		<a name="keyboardAccessible" class="tsd-anchor"></a>
+		<h3>keyboard<wbr>Accessible</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> keyboardAccessible<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L229">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:229</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the item is accessible via keyboard.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+		<a name="level" class="tsd-anchor"></a>
+		<h3>level</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> level<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> level<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L126">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:126</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Tree item level.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L122">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:122</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Tree item level.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+		<a name="parentId" class="tsd-anchor"></a>
+		<h3>parent<wbr>Id</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> parentId<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> parentId<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L86">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:86</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Tree item parent ID.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L82">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:82</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Tree item parent ID.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="focus" class="tsd-anchor"></a>
+		<h3>focus</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">focus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides <span>BaseTreeItem</span>.<span>focus</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L338">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:338</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Method to focus on the tree item.</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="setContainerTabIndex" class="tsd-anchor"></a>
+		<h3>set<wbr>Container<wbr>Tab<wbr>Index</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Container<wbr>Tab<wbr>Index<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides <span>BaseTreeItem</span>.<span>setContainerTabIndex</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L343">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:343</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Method for setting the focusable tabindex.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>value: <span class="tsd-signature-type">number</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+		<a name="setPosition" class="tsd-anchor"></a>
+		<h3>set<wbr>Position</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+			<li class="tsd-signature tsd-kind-icon">set<wbr>Position<span class="tsd-signature-symbol">(</span>totalItems<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, currentIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<p>Overrides <span>BaseTreeItem</span>.<span>setPosition</span></p>
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/2f26d5f/libs/core/src/lib/tree/components/tree-item/tree-item.component.ts#L332">libs/core/src/lib/tree/components/tree-item/tree-item.component.ts:332</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Sets position of the current item in the set.</p>
+					</div>
+				</div>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>totalItems: <span class="tsd-signature-type">number</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Total items amount in the set.</p>
+						</div>
+					</li>
+					<li>
+						<h5>currentIndex: <span class="tsd-signature-type">number</span></h5>
+						<div class="tsd-comment tsd-typography">
+							<p>Current item position in the set.</p>
+						</div>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

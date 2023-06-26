@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -13,7 +13,9 @@ import {
 
 @Component({
     selector: 'fdp-platform-table-freezable-example',
-    templateUrl: './platform-table-freezable-example.component.html'
+    templateUrl: './platform-table-freezable-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformTableFreezableExampleComponent {
     source: TableDataSource<TableRow>;

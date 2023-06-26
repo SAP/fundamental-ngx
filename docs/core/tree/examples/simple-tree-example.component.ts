@@ -1,56 +1,61 @@
-import { Component } from '@angular/core';
-import { TreeRowObject } from '@fundamental-ngx/core/tree';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TreeItem } from '@fundamental-ngx/core/tree';
+
+export interface AdditionalTreeItemData {
+    title: string;
+    icon: string;
+}
 
 @Component({
     selector: 'fd-simple-tree-example',
-    template: `
-        <fd-tree
-            (editRowClicked)="editRowClicked($event)"
-            (deleteRowClicked)="deleteRowClicked($event)"
-            [displayTreeActions]="true"
-            [headers]="headers"
-            [treeData]="items"
-        >
-        </fd-tree>
-    `
+    templateUrl: './simple-tree-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SimpleTreeExampleComponent {
-    headers: string[] = ['Column Header 1', 'Column Header 2', 'Column Header 3', 'Column Header 4'];
-
-    items: TreeRowObject[] = [
+    model: TreeItem<AdditionalTreeItemData>;
+    items: Partial<TreeItem<AdditionalTreeItemData>>[] = [
         {
-            rowData: ['Data 1', 'Data 2', 'Data 3', 'Data 4'],
+            navigatable: true,
+            expanded: false,
+            data: {
+                icon: 'e-care',
+                title: 'Item 1 (Level 1)'
+            },
             children: [
                 {
-                    rowData: ['Child 1', 'Child 2', 'Child 3'],
+                    expanded: false,
+                    data: {
+                        icon: 'product',
+                        title: 'Item 1 (Level 2)'
+                    },
                     children: [
                         {
-                            rowData: ['Grandchild 1', 'Grandchild 2', 'Grandchild 3', 'Grandchild 4']
+                            expanded: true,
+                            data: {
+                                icon: 'competitor',
+                                title: 'Item 1 (Level 3)'
+                            },
+                            children: [
+                                {
+                                    expanded: true,
+                                    data: {
+                                        icon: 'competitor',
+                                        title: 'Item 1 (Level 4)'
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }
             ]
         },
         {
-            rowData: ['Data 5', 'Data 6', 'Data 7', 'Data 8']
-        },
-        {
-            rowData: ['Data 9'],
-            children: [
-                {
-                    rowData: ['Child 5', 'Child 6', 'Child 7', 'Child 8']
-                }
-            ]
+            navigatable: true,
+            expanded: true,
+            data: {
+                icon: 'e-care',
+                title: 'Item 1(Level 1)'
+            }
         }
     ];
-
-    editRowClicked(row): void {
-        alert('Edit row clicked');
-        console.log(row);
-    }
-
-    deleteRowClicked(row): void {
-        alert('Delete row clicked');
-        console.log(row);
-    }
 }

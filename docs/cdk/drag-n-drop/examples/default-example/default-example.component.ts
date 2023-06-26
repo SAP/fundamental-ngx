@@ -34,7 +34,6 @@ export class DefaultExampleComponent {
     values = generateItems();
     values2 = generateItems();
     values3 = generateItems();
-    constructor() {}
 
     onItemDropped(event: FdDropEvent<ListItem>, property: string): void {
         const values = this[property] as ListItem[];

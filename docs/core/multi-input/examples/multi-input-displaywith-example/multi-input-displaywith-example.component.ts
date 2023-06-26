@@ -6,19 +6,23 @@ import { Component } from '@angular/core';
 })
 export class MultiInputDisplaywithExampleComponent {
     values = [
-        { name: 'Apple' },
-        { name: 'Banana' },
-        { name: 'Pineapple' },
-        { name: 'Tomato' },
-        { name: 'Kiwi' },
-        { name: 'Strawberry' },
-        { name: 'Blueberry' },
-        { name: 'Orange' }
+        { name: 'Apple', value: 'apple_value' },
+        { name: 'Banana', value: 'banana_value' },
+        { name: 'Pineapple', value: 'pineapple_value' },
+        { name: 'Tomato', value: 'tomato_value' },
+        { name: 'Kiwi', value: 'kiwi_value' },
+        { name: 'Strawberry', value: 'strawberry_value' },
+        { name: 'Blueberry', value: 'blueberry_value' },
+        { name: 'Orange', value: 'orange_value' }
     ];
 
     selected = [];
 
     displayFunc(obj: any): string {
         return obj.name.toLocaleUpperCase();
+    }
+
+    valueFunc(obj: any): string {
+        return obj.value;
     }
 }

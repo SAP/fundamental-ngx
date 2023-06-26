@@ -285,9 +285,6 @@ Apache-2.0
 @fundamental-ngx/moment-adapter
 Apache-2.0
 
-@fundamental-ngx/platform
-Apache-2.0
-
 @fundamental-ngx/platform/action-bar
 
 @fundamental-ngx/platform/action-button-group
@@ -339,6 +336,8 @@ Apache-2.0
 @fundamental-ngx/platform/split-menu-button
 
 @fundamental-ngx/platform/table
+
+@fundamental-ngx/platform/table-helpers
 
 @fundamental-ngx/platform/thumbnail
 
