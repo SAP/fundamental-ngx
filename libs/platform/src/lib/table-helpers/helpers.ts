@@ -189,7 +189,7 @@ export function convertTreeObjectsToTableRows<T>(
             children.forEach((c) => {
                 c.parent = c.parent || row;
                 c.level = c.parent.level + 1;
-                c.hidden = !row.expanded;
+                c.hidden = !c.parent.expanded;
             });
             row.children.push(...children);
 
