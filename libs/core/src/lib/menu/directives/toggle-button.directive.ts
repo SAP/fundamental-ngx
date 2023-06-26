@@ -24,7 +24,7 @@ import { TOGGLE_MENU_ITEM } from '../menu.tokens';
 })
 export class ToggleButtonDirective implements AfterViewInit {
     /** @hidden */
-    private _cvaControl: CvaControl<boolean> = inject(CvaControl)!;
+    private _cvaControl = inject<CvaControl<boolean>>(CvaControl);
 
     /** @hidden */
     private _destroy$ = inject(DestroyedService)!;
