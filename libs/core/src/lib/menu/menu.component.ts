@@ -143,7 +143,7 @@ export class MenuComponent
     private _externalTrigger: ElementRef;
 
     /** @hidden */
-    private _addons: Array<unknown> = [];
+    private _addons: Set<unknown> = new Set();
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -156,7 +156,7 @@ export class MenuComponent
 
     /** @hidden */
     get hasAddons(): boolean {
-        return this._addons.length > 0;
+        return this._addons.size > 0;
     }
 
     /** @hidden */
@@ -201,15 +201,13 @@ export class MenuComponent
 
     /** Register addon */
     registerAddon(addon: unknown): void {
-        if (!this._addons.includes(addon)) {
-            this._addons = [...this._addons, addon];
-            this._changeDetectorRef.markForCheck();
-        }
+        this._addons.add(addon);
+        this._changeDetectorRef.markForCheck();
     }
 
     /** Unregister addon */
     unregisterAddon(addon: unknown): void {
-        this._addons = this._addons.filter((item) => item !== addon);
+        this._addons.delete(addon);
         this._changeDetectorRef.markForCheck();
     }
 
