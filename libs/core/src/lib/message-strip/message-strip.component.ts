@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     Input,
@@ -13,8 +14,11 @@ import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/u
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { MessageStripType } from './message-strip-type';
+import { MessageStripIndicationColor } from './message-strip-indication-color';
+import { MessageStripIconDirective } from './message-strip-icon.directive';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 let messageStripUniqueId = 0;
 
@@ -37,7 +41,7 @@ let messageStripUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonModule, ContentDensityDirective, I18nModule]
+    imports: [NgIf, ButtonModule, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconModule]
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */
@@ -89,9 +93,16 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** Margin bottom of the message-strip. */
     @Input() marginBottom: string;
 
+    /** indication color of the message-strip. */
+    @Input() indicationColor: MessageStripIndicationColor;
+
     /** Event fired when the message-strip is dismissed. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Custom icon component */
+    @ContentChild(MessageStripIconDirective)
+    icon: MessageStripIconDirective;
 
     /** @hidden */
     private _dismissLabel: string;
@@ -107,6 +118,30 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
+    }
+
+    /** Whether icon container should be shown */
+    get shouldShowIcon(): boolean {
+        if (this.noIcon) {
+            return false;
+        }
+        return !!this.icon || !!this.type;
+    }
+
+    /** @hidden */
+    get typeSpecificIconName(): string {
+        switch (this.type) {
+            case 'warning':
+                return 'alert';
+            case 'success':
+                return 'sys-enter-2';
+            case 'error':
+                return 'error';
+            case 'information':
+                return 'information';
+            default:
+                return '';
+        }
     }
 
     /**
@@ -130,6 +165,7 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
             this.type ? `fd-message-strip--${this.type}` : '',
             this.dismissible ? 'fd-message-strip--dismissible' : '',
             this.noIcon ? 'fd-message-strip--no-icon' : '',
+            this.indicationColor ? `fd-message-strip--indication-color-${this.indicationColor}` : '',
             this.class
         ];
     }
