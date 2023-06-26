@@ -18,16 +18,16 @@
 
 ## <a name="1"></a>1. Description
 
-The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+The Fundamental Library for Angular is an SAP Design System Angular component library used to build modern product user experiences with the SAP look and feel.
 
 This repository contains 2 libraries(npm packages),
 
 -   [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
-    The Fundamental-ngx core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
+    The Fundamental-NGX core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
     they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
 
 -   [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
-    The Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
+    The Fundamental-NGX platform is built on top of the core to both enhance existing functionality with additional features
     which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
 
 ## <a name="2"></a>2. Requirements
