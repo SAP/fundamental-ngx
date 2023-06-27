@@ -61,6 +61,12 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     @ViewChild('labelElement')
     labelElement: ElementRef;
 
+    /** @hidden Whether input label should be wrapped */
+    @Input() wrapLabel: boolean;
+
+    /** @hidden Whether input label should be wrapped */
+    @Input() valignLabel: 'top' | 'middle' = 'middle';
+
     /** Sets the `aria-label` attribute to the element. */
     @Input()
     ariaLabel: Nullable<string>;
@@ -131,6 +137,7 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     set values(checkboxValues: FdCheckboxValues) {
         this._values = { ...FD_CHECKBOX_VALUES_DEFAULT, ...(checkboxValues ?? {}) };
     }
+
     get values(): FdCheckboxValues {
         return this._values;
     }
