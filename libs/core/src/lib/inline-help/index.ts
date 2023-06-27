@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './inline-help.module';
+export * from './inline-help.directive';

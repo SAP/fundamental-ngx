@@ -9,6 +9,12 @@
         "target": "ES2022",
         "useDefineForClassFields": false
     },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    },
     "exclude": ["./test.ts", "**/*.spec.ts", "jest.config.ts", "**/*.test.ts"],
+    "files": ["./index.ts"],
     "include": ["**/*.ts"]
 }

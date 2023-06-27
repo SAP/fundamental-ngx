@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './page-footer.component';
+export * from './page-footer.module';

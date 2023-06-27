@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './action-button-group.module';
+export * from './action-button-group.component';

@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './scrollbar.module';
+export * from './scrollbar.directive';

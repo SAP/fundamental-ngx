@@ -3,7 +3,7 @@
     "dest": "../../../../dist/libs/fn",
     "deleteDestPath": true,
     "lib": {
-        "entryFile": "./public_api.ts"
+        "entryFile": "./index.ts"
     },
     "allowedNonPeerDependencies": [
         "@sap-theming/theming-base-content",
