@@ -13,17 +13,12 @@ import { Observable, takeUntil } from 'rxjs';
 import { ListFocusItem } from '@fundamental-ngx/core/list';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-multi-combobox-select-all-toggler',
     template: `
         <fd-toolbar>
-            <div fd-form-item>
-                <fd-checkbox
-                    tabIndexValue="-1"
-                    [label]="'coreMultiComboBox.selectAllLabel' | fdTranslate"
-                    [ngModel]="checkboxValue"
-                    [tristate]="true"
-                ></fd-checkbox>
+            <div fd-form-item class="fd-multi-combobox-select-all__form-item">
+                <fd-checkbox tabIndexValue="-1" [ngModel]="checkboxValue" [tristate]="true"></fd-checkbox>
+                {{ 'coreMultiComboBox.selectAllLabel' | fdTranslate }}
             </div>
         </fd-toolbar>
     `,

@@ -4,6 +4,9 @@ fd-multi-combobox-select-all-toggler {
     display: block;
     background-color: var(--sapBackgroundColor);
     cursor: pointer;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
     @include sap-fiori-focus();
 
@@ -12,14 +15,9 @@ fd-multi-combobox-select-all-toggler {
         padding-right: 0;
     }
 
-    .fd-checkbox__label-container {
-        margin-left: 0.5rem;
-        @at-root {
-            [dir='rtl'] &,
-            &[dir='rtl'] {
-                margin-left: 0;
-                margin-right: 0.5rem;
-            }
-        }
+    .fd-multi-combobox-select-all__form-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 }
