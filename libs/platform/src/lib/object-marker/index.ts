@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './object-marker.component';
+export * from './object-marker.module';

@@ -10,5 +10,11 @@
         "useDefineForClassFields": false
     },
     "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts"],
-    "include": ["**/*.ts"]
+    "files": ["./src/index.ts"],
+    "include": ["**/*.ts"],
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    }
 }

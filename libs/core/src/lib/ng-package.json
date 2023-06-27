@@ -4,7 +4,7 @@
     "deleteDestPath": true,
     "assets": ["./assets/**/*", "./styles/*.*"],
     "lib": {
-        "entryFile": "./public_api.ts"
+        "entryFile": "./index.ts"
     },
     "allowedNonPeerDependencies": [
         "focus-trap",

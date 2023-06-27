@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './segmented-button.module';
+export * from './segmented-button.component';

@@ -1,1 +1,3 @@
-export * from './public_api';
+export * from './object-status.component';
+export * from './object-status.module';
+export * from './tokens';
