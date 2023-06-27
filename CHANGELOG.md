@@ -1,3 +1,12 @@
+## [0.42.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.0...v0.42.1-rc.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* **platform:** preserved state fixes ([#10084](https://github.com/SAP/fundamental-ngx/issues/10084)) ([8fd1826](https://github.com/SAP/fundamental-ngx/commit/8fd182689ca4adf1b26e40100889db85c0fd2c54))
+
+
+
 ## [0.42.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.0...v0.42.1-rc.0) (2023-06-26)
 
 
