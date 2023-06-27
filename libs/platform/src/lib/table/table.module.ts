@@ -17,7 +17,13 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { ClickedBehaviorModule, DisabledBehaviorModule, PipeModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
+import {
+    ClickedBehaviorModule,
+    DisabledBehaviorModule,
+    IntersectionSpyDirective,
+    PipeModule,
+    RepeatModule
+} from '@fundamental-ngx/cdk/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
@@ -148,7 +154,8 @@ const EXPORTABLE_DECLARATIONS = [
         DisabledBehaviorModule,
         PlatformListModule,
         ClickedBehaviorModule.forRoot(),
-        TableHelpersModule
+        TableHelpersModule,
+        IntersectionSpyDirective
     ],
     declarations: [...EXPORTABLE_DECLARATIONS],
     exports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule]

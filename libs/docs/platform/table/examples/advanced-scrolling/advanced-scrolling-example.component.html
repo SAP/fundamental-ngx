@@ -1,0 +1,57 @@
+<fdp-table
+    #table
+    [dataSource]="source"
+    [childDataSource]="childSource"
+    [isTreeTable]="true"
+    selectionMode="multiple"
+    relationKey="children"
+    emptyTableMessage="No data found"
+    bodyHeight="300px"
+    [virtualScroll]="true"
+    [pageScrolling]="true"
+    [pageSize]="50"
+    [renderAhead]="50"
+    [pageScrollingThreshold]="80"
+    hasChildrenKey="hasChildren"
+    [expandOnInit]="true"
+>
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false" [hideSearchInput]="true"> </fdp-table-toolbar>
+
+    <fdp-column
+        name="name"
+        key="name"
+        label="Name"
+        align="start"
+        [sortable]="true"
+        [filterable]="true"
+        [dataType]="dataTypeEnum.STRING"
+    >
+    </fdp-column>
+
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
+
+    <fdp-column
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+        [sortable]="true"
+        [filterable]="true"
+        [dataType]="dataTypeEnum.NUMBER"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+        [sortable]="true"
+        [filterable]="true"
+        [dataType]="dataTypeEnum.STRING"
+    >
+    </fdp-column>
+</fdp-table>
+
+<!-- Connect P13 Dialog to the table -->
+<fdp-table-p13-dialog [table]="table"></fdp-table-p13-dialog>

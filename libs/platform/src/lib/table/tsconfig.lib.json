@@ -15,5 +15,6 @@
         "strictMetadataEmit": true,
         "enableResourceInlining": true
     },
-    "exclude": ["src/test.ts", "**/*.spec.ts"]
+    "files": ["./index.ts"],
+    "exclude": ["src/test.ts", "**/*.spec.ts", "tests/**/*.ts"]
 }

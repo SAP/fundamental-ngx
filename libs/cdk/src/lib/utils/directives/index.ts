@@ -30,3 +30,4 @@ export * from './disabled';
 export * from './clicked';
 export * from './selectable-list';
 export * from './breakpoints/breakpoint.directive';
+export * from './intersection-spy/intersection-spy.directive';
