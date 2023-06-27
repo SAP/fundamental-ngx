@@ -44,7 +44,7 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         dismissLabel: 'Descartar'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

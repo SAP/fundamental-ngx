@@ -48,6 +48,8 @@ import { MultiInputConfig } from './multi-input.config';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import equal from 'fast-deep-equal';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { firstValueFrom, Observable } from 'rxjs';
 
 let uniqueHiddenLabel = 0;
 
@@ -169,6 +171,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     private readonly _listItems: QueryList<BaseListItem>;
 
     /** @hidden */
+    private readonly _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     constructor(
         /** @hidden */
         readonly cd: ChangeDetectorRef,
@@ -195,7 +200,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
         /** @hidden */
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        readonly contentDensityObserver: ContentDensityObserver
+        readonly contentDensityObserver: ContentDensityObserver,
+        /** @hidden */
+        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>
     ) {
         super(
             cd,
@@ -226,6 +233,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new MultiInputDataSource(providers.get(this.entityClass)!);
         }
+
+        this._getAriaLabel();
     }
 
     /** @hidden */
@@ -471,5 +480,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this._viewContainerRef,
             injector
         );
+    }
+
+    /** @hidden */
+    private async _getAriaLabel(): Promise<void> {
+        const lang = await firstValueFrom(this._language);
+        this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }

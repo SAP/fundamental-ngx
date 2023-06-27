@@ -40,7 +40,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         listItemStatusDraft: 'Brouillon'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreMessageStrip: {
         dismissLabel: 'Rejeter'
