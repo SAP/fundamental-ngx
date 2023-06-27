@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SmartFilterBarConditionsDialogComponent } from './smart-filter-bar-conditions-dialog.component';
 import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
 import { DynamicFormFieldItem } from '@fundamental-ngx/platform/form';
-import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { SmartFilterBarConditionBuilder } from './../../interfaces/smart-filter-bar-condition';
@@ -50,6 +50,10 @@ describe('SmartFilterBarConditionsDialogComponent', () => {
                 {
                     provide: DialogConfig,
                     useValue: dialogConfig
+                },
+                {
+                    provide: FD_DIALOG_FOCUS_TRAP_ERROR,
+                    useValue: true
                 }
             ]
         }).compileComponents();

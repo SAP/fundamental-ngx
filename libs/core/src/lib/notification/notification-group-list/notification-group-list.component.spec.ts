@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { NotificationGroupHeaderComponent, NotificationModule } from '../public_api';
+import { NotificationGroupHeaderComponent } from '../notification-group-header/notification-group-header.component';
+import { NotificationModule } from '../notification.module';
 
 @Component({
     template: `
