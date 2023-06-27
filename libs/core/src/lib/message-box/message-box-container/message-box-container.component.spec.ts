@@ -1,6 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 
@@ -26,11 +25,7 @@ describe('MessageBoxContainerComponent', () => {
             declarations: [TestComponent],
             providers: [MessageBoxRef, MessageBoxConfig, { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }],
             imports: [MessageBoxModule, NoopAnimationsModule]
-        })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: { entryComponents: [TestComponent] }
-            })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

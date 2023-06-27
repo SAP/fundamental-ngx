@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'header',
@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
                 font-size: 2.2rem;
             }
         `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {}

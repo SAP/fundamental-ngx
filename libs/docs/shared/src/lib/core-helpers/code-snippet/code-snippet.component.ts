@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     Input,
@@ -14,6 +15,7 @@ import hljs from 'highlight.js';
 @Component({
     selector: 'fd-code-snippet',
     styles: ['.bordered { border: 1px solid beige } code.hljs { width: 100%; background: transparent; }'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <pre [class.bordered]="standAlone">
             <code #fileBasedElement class="hljs" [class]="file.language" *ngIf="file">{{ file.code }}</code>

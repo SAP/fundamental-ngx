@@ -109,7 +109,6 @@ const routes: Routes = [
         TableLoadingExampleComponent,
         TableFixedExampleComponent
     ],
-    entryComponents: [TableCustomDialogComponent],
     providers: [
         moduleDeprecationsProvider(DeprecatedTableCompactDirective),
         moduleDeprecationsProvider(DeprecatedTableCondensedDirective),

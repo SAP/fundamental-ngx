@@ -148,6 +148,7 @@ export class TableService {
             this.setTableState(setCurrentPageToState(state, 1));
             this.buildSortRulesMap();
             const evt = { current: state.sortBy, previous: prevSortRules };
+            this.buildSortRulesMap();
 
             this.needFetch$.next();
             this.stateChange$.next({ type: 'sort', state: evt });
