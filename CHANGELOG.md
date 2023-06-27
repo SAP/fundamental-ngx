@@ -1,3 +1,12 @@
+## [0.42.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.3...v0.42.1-rc.4) (2023-06-27)
+
+
+### Bug Fixes
+
+* **core,platform:** update multi input aria-label ([#10071](https://github.com/SAP/fundamental-ngx/issues/10071)) ([28bacc5](https://github.com/SAP/fundamental-ngx/commit/28bacc5b9af59db086aebf26af19b0707a7632b0))
+
+
+
 ## [0.42.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.2...v0.42.1-rc.3) (2023-06-27)
 
 
