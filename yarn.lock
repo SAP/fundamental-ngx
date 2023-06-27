@@ -13884,10 +13884,10 @@ netmask@^2.0.2:
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-2.0.2.tgz#8b01a07644065d536383835823bc52004ebac5e7"
   integrity sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==
 
-ng-packagr@~15.1.0:
-  version "15.1.2"
-  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-15.1.2.tgz#d26e87e1099517367e11a945c299abfb5a2ac2c9"
-  integrity sha512-GpVySff7Wwx+eAW+HXkFD8et05UK0/usHnFEKznXhxmhML7XOGYaK74tAsgUwA06GUQofQH/VjdsBGi6XlVNjA==
+ng-packagr@16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-16.1.0.tgz#b250d5229a62f5765d90ed989bbb2f23df38dbb3"
+  integrity sha512-NbgzDRtRiYJi98Ssky7U5GoicZz7VkR3OW5qd9q3dt3H/JNqLh2PwB745NFG2cT00lEvfrY6LJ1NAcOjoWDibA==
   dependencies:
     "@rollup/plugin-json" "^6.0.0"
     "@rollup/plugin-node-resolve" "^15.0.0"
@@ -13901,8 +13901,8 @@ ng-packagr@~15.1.0:
     convert-source-map "^2.0.0"
     dependency-graph "^0.11.0"
     esbuild-wasm "^0.17.0"
+    fast-glob "^3.2.12"
     find-cache-dir "^3.3.2"
-    glob "^8.0.3"
     injection-js "^2.4.0"
     jsonc-parser "^3.2.0"
     less "^4.1.3"
