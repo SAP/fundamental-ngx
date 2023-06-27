@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './slider.component';
+export * from './slider.module';

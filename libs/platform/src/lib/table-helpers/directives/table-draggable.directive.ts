@@ -152,7 +152,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
                 this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
 
                 if (!dropRow.expanded && event.mode === 'group') {
-                    this._table.toggleExpandableTableRow(dropRow);
+                    this._table.toggleExpandableTableRow(dropRow, true);
                 } else {
                     this._table.onTableRowsChanged();
                 }
@@ -168,7 +168,12 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
      * Create table rows rearrange event
      */
     _emitRowsRearrangeEvent(row: TableRow, dropRow: TableRow, event: FdDropEvent<TableRow>): void {
-        const rows = this._table._tableRows.map(({ value }) => value);
+        const rows: any[] = [];
+
+        this._table._tableRows.forEach((r, index) => {
+            r.index = index;
+            rows.push(r.value);
+        });
 
         this.rowsRearrange.emit(
             new TableRowsRearrangeEvent(
@@ -220,9 +225,13 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
             }
 
             dropRow.children.push(dragRow);
+            dropRow.lastChild = dragRow;
         } else {
             dragRow.parent = dropRow.parent;
             dropRow.parent?.children.push(dragRow);
+            if (dropRow.parent) {
+                dropRow.parent.lastChild = dragRow;
+            }
         }
 
         const children = findRowChildren(dragRow, this._table._tableRows);

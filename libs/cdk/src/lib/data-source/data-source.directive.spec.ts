@@ -1,11 +1,12 @@
-import { fakeAsync, tick } from '@angular/core/testing';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { isObservable, Observable, of } from 'rxjs';
 import { AbstractDataProvider } from './base/abstract-data-provider.class';
 import { BaseDataSource } from './base/base-data-source.class';
 import { DataSourceDirective } from './data-source.directive';
 import { isDataSource } from './helpers/is-datasource';
 import { DataSource, DataSourceParser, DataSourceProvider } from './models';
+import { Component, inject } from '@angular/core';
+import { FD_DATA_SOURCE_TRANSFORMER } from './tokens';
 
 export const dataProviderData = [1, 2, 3, 4, 5];
 export const arrayData = [6, 7, 8, 9];
@@ -55,10 +56,31 @@ export class mockDataSourceParser implements DataSourceParser {
     }
 }
 
+@Component({
+    template: '',
+    standalone: true,
+    hostDirectives: [DataSourceDirective]
+})
+export class HostComponent {
+    public directive = inject(DataSourceDirective);
+}
+
 describe('DataSourceDirective', () => {
     let directive: DataSourceDirective<any>;
-    beforeEach(() => {
-        directive = new DataSourceDirective(new DestroyedService(), new mockDataSourceParser());
+    let fixture: ComponentFixture<HostComponent>;
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [HostComponent],
+            providers: [
+                {
+                    provide: FD_DATA_SOURCE_TRANSFORMER,
+                    useClass: mockDataSourceParser
+                }
+            ]
+        }).compileComponents();
+
+        fixture = TestBed.createComponent(HostComponent);
+        directive = fixture.componentInstance.directive;
     });
     it('should create an instance', () => {
         expect(directive).toBeTruthy();

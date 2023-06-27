@@ -10,10 +10,12 @@ import {
     inject,
     Input,
     NgZone,
+    OnChanges,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
+    SimpleChanges,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
@@ -40,7 +42,7 @@ import {
     TableRowService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
-import { fromEvent } from 'rxjs';
+import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -57,7 +59,7 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
         DestroyedService
     ]
 })
-export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy {
+export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
     /** Row ID. */
     @Input()
     rowId: string;
@@ -144,6 +146,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
     /** @hidden */
+    private readonly _refreshChildRows$ = new Subject<void>();
+
+    /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
@@ -219,9 +224,34 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        super.ngOnChanges(changes);
+        if ('row' in changes) {
+            this._listenToRowExpansion();
+        }
+    }
+
+    /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
+        this._refreshChildRows$.next();
+        this._refreshChildRows$.complete();
         this._tableRowService.removeEditableCells(this.row);
+    }
+
+    /** @hidden */
+    private _listenToRowExpansion(): void {
+        this._refreshChildRows$.next();
+        const refresh = merge(this._refreshChildRows$, this._destroy$);
+        // Load items only once. Further loading will be covered by the lazy loading functionality.
+        this.row?.expanded$
+            ?.pipe(
+                filter((expanded) => expanded && this.row.children.length === 0),
+                takeUntil(refresh)
+            )
+            .subscribe(() => {
+                this._tableRowService.loadChildRows(this.row);
+            });
     }
 
     /** @hidden */

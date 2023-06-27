@@ -5,5 +5,11 @@
     "compilerOptions": {
         "target": "ES2022",
         "useDefineForClassFields": false
+    },
+    "include": ["**/*.ts"],
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
     }
 }

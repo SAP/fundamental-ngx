@@ -146,6 +146,7 @@ export function convertTreeObjectsToTableRows<T>(
     tableRows: TableRow<T>[],
     rowComparator: RowComparator<T>,
     relationKey: string,
+    hasChildrenKey: string,
     selectedKey: string,
     expandedStateKey: string,
     rowNavigatable: string | boolean
@@ -158,10 +159,11 @@ export function convertTreeObjectsToTableRows<T>(
             Object.prototype.hasOwnProperty.call(item, relationKey) &&
             Array.isArray(item[relationKey]) &&
             item[relationKey].length;
+
         const row = isTableRow(item as TableRow<T>)
             ? (item as TableRow<T>)
             : newTableRow({
-                  type: hasChildren ? TableRowType.TREE : TableRowType.ITEM,
+                  type: hasChildren || item[hasChildrenKey] === true ? TableRowType.TREE : TableRowType.ITEM,
                   checked: item[selectedKey] ?? !!selectedRowsMap.get(item),
                   index,
                   value: item
@@ -181,6 +183,7 @@ export function convertTreeObjectsToTableRows<T>(
                 tableRows,
                 rowComparator,
                 relationKey,
+                hasChildrenKey,
                 selectedKey,
                 expandedStateKey,
                 rowNavigatable
@@ -189,7 +192,7 @@ export function convertTreeObjectsToTableRows<T>(
             children.forEach((c) => {
                 c.parent = c.parent || row;
                 c.level = c.parent.level + 1;
-                c.hidden = !row.expanded;
+                c.hidden = !c.parent.expanded;
             });
             row.children.push(...children);
 

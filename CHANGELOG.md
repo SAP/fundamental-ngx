@@ -1,3 +1,29 @@
+## [0.42.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.2...v0.42.1-rc.3) (2023-06-27)
+
+
+
+## [0.42.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.1...v0.42.1-rc.2) (2023-06-27)
+
+
+### Features
+
+* **platform:** table children lazy load ([#10072](https://github.com/SAP/fundamental-ngx/issues/10072)) ([1360219](https://github.com/SAP/fundamental-ngx/commit/1360219a6d16d1777cb04400f3bea509f01590ff))
+
+
+
+## [0.42.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.0...v0.42.1-rc.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* **platform:** preserved state fixes ([#10084](https://github.com/SAP/fundamental-ngx/issues/10084)) ([8fd1826](https://github.com/SAP/fundamental-ngx/commit/8fd182689ca4adf1b26e40100889db85c0fd2c54))
+
+
+
+## [0.42.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.0...v0.42.1-rc.0) (2023-06-26)
+
+
+
 # [0.42.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.31...v0.42.0) (2023-06-26)
 
 

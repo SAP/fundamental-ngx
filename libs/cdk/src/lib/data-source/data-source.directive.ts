@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Inject, Input, OnDestroy, Output } from '@angular/core';
+import { Directive, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -62,10 +62,10 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
     readonly isLoading = new EventEmitter<boolean>();
 
     /** @hidden */
-    constructor(
-        private readonly _destroyed$: DestroyedService,
-        @Inject(FD_DATA_SOURCE_TRANSFORMER) private readonly _dataSourceTransformer: DataSourceParser<T, P>
-    ) {}
+    protected readonly _destroyed$ = inject(DestroyedService);
+
+    /** @hidden */
+    private readonly _dataSourceTransformer = inject<DataSourceParser<T, P>>(FD_DATA_SOURCE_TRANSFORMER);
 
     /** @hidden */
     private _initializeDataSource(): void {
@@ -104,7 +104,7 @@ export class DataSourceDirective<T = any, P extends DataSourceProvider<T> = Data
     }
 
     /** @Hidden */
-    private _toDataStream(source: DataSource<T> | null): P | undefined {
+    protected _toDataStream(source: DataSource<T> | null): P | undefined {
         return !source
             ? undefined
             : this._dataSourceTransformer

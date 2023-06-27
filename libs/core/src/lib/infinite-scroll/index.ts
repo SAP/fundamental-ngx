@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './infinite-scroll.module';
+export * from './infinite-scroll.directive';

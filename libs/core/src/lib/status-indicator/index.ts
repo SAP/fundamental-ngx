@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './status-indicator.component';
+export * from './status-indicator.module';

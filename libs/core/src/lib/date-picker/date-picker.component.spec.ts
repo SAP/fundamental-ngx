@@ -12,8 +12,9 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
-import { DatePickerModule, DatePickerComponent } from './public_api';
 import { By } from '@angular/platform-browser';
+import { DatePickerComponent } from './date-picker.component';
+import { DatePickerModule } from './date-picker.module';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;

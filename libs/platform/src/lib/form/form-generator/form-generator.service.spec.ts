@@ -7,11 +7,11 @@ import { FormGeneratorComponentsAccessorService } from './form-generator-compone
 import { FormGeneratorService } from './form-generator.service';
 import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
 import {
-    BaseDynamicFormGeneratorControl,
     defaultFormGeneratorItemConfigProvider,
     dynamicFormFieldProvider,
     dynamicFormGroupChildProvider
-} from './public_api';
+} from './providers/providers';
+import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 
 export const dummyFormItemsWithWhenCondition: DynamicFormFieldItem[] = [
     {

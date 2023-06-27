@@ -180,7 +180,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract setRowsInViewport(startIndex: number, length: number): void;
 
-    abstract toggleExpandableTableRow(row: TableRow<T>);
+    abstract toggleExpandableTableRow(row: TableRow<T>, forceFetch?: boolean);
 
     abstract onTableRowsChanged(): void;
 }

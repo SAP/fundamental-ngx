@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './menu-button.module';
+export * from './menu-button.component';

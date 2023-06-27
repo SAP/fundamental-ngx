@@ -2,6 +2,6 @@
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../../../../dist/libs/core/step-input",
     "lib": {
-        "entryFile": "./public_api.ts"
+        "entryFile": "./index.ts"
     }
 }
