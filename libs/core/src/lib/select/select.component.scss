@@ -22,4 +22,19 @@ $block: fd-select;
             position: static;
         }
     }
+
+    .#{$block}__control[aria-selected='false'] {
+        .#{$block}__text-content {
+            font-style: italic;
+            font-weight: normal;
+            padding: 0 0.625rem;
+            color: var(--sapField_PlaceholderTextColor);
+
+            [class*='sap-icon'] {
+                font-style: italic;
+                font-weight: normal;
+                color: var(--sapField_PlaceholderTextColor);
+            }
+        }
+    }
 }
