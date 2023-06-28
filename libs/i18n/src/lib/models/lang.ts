@@ -559,6 +559,8 @@ export interface FdLanguage {
         sortDialogNotSortedLabel: FdLanguageKey;
         sortDialogConfirmBtnLabel: FdLanguageKey;
         sortDialogCancelBtnLabel: FdLanguageKey;
+        selectAllCheckboxLabel: FdLanguageKey;
+        deselectAllCheckboxLabel: FdLanguageKey;
     };
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: FdLanguageKey;

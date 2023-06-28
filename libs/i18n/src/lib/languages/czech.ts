@@ -459,7 +459,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         sortDialogSortByHeader: 'Seřazeno podle',
         sortDialogNotSortedLabel: '(Neřazeno)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Zrušit'
+        sortDialogCancelBtnLabel: 'Zrušit',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',

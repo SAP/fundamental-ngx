@@ -456,7 +456,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         sortDialogSortByHeader: 'Sıralama Ölçütü',
         sortDialogNotSortedLabel: '(Sıralanmadı)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Vazgeç'
+        sortDialogCancelBtnLabel: 'Vazgeç',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Öncekine Git',

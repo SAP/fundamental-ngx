@@ -610,7 +610,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         sortDialogSortByHeader: 'Сортировать по',
         sortDialogNotSortedLabel: '(Не отсортировано)',
         sortDialogConfirmBtnLabel: 'ОК',
-        sortDialogCancelBtnLabel: 'Отменить'
+        sortDialogCancelBtnLabel: 'Отменить',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти к предыдущему',

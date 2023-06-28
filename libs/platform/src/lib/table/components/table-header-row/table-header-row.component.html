@@ -30,6 +30,11 @@
         [tristateSelectable]="false"
         [ngModel]="checkedState"
         (ngModelChange)="_tableRowService.toggleAllSelectableRows($event)"
+        [attr.aria-description]="
+            !checkedState
+                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
+                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
+        "
     ></fd-checkbox>
 </th>
 

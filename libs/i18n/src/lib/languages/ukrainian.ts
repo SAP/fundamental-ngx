@@ -608,7 +608,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         sortDialogSortByHeader: 'Сортувати за',
         sortDialogNotSortedLabel: '(Не відсортовано)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Скасувати'
+        sortDialogCancelBtnLabel: 'Скасувати',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',
