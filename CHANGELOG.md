@@ -1,3 +1,12 @@
+## [0.42.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.5...v0.42.1-rc.6) (2023-06-28)
+
+
+### Bug Fixes
+
+* **platform:** fix expand all functionality ([#10097](https://github.com/SAP/fundamental-ngx/issues/10097)) ([76651de](https://github.com/SAP/fundamental-ngx/commit/76651de19cf2a983a5933796ba9161a4bdc47171))
+
+
+
 ## [0.42.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.4...v0.42.1-rc.5) (2023-06-27)
 
 
