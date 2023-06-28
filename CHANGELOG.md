@@ -1,3 +1,12 @@
+## [0.42.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.6...v0.42.1-rc.7) (2023-06-28)
+
+
+### Bug Fixes
+
+* dayjs adapter was enforcing double digits for month and day ([#10096](https://github.com/SAP/fundamental-ngx/issues/10096)) ([4932c63](https://github.com/SAP/fundamental-ngx/commit/4932c63525df26e6cfd0195320dcc53aac9eab79))
+
+
+
 ## [0.42.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.5...v0.42.1-rc.6) (2023-06-28)
 
 
