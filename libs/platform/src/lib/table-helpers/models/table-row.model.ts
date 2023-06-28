@@ -134,6 +134,9 @@ export class TableRowImpl<T> implements TableRow<T> {
     /** @hidden */
     set expanded(value: boolean) {
         this._expandedSubject.next(value);
+        this.children.forEach((childRow) => {
+            childRow.hidden = !value;
+        });
     }
     get expanded(): boolean {
         return this._expandedSubject.value;

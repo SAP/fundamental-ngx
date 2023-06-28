@@ -1,3 +1,21 @@
+## [0.42.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.5...v0.42.1-rc.6) (2023-06-28)
+
+
+### Bug Fixes
+
+* **platform:** fix expand all functionality ([#10097](https://github.com/SAP/fundamental-ngx/issues/10097)) ([76651de](https://github.com/SAP/fundamental-ngx/commit/76651de19cf2a983a5933796ba9161a4bdc47171))
+
+
+
+## [0.42.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.4...v0.42.1-rc.5) (2023-06-27)
+
+
+### Bug Fixes
+
+* **core:** add the correct styling for Select placeholder ([#10092](https://github.com/SAP/fundamental-ngx/issues/10092)) ([55c020b](https://github.com/SAP/fundamental-ngx/commit/55c020bfc746b508748c2fcbf018f367e4687e7c))
+
+
+
 ## [0.42.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.3...v0.42.1-rc.4) (2023-06-27)
 
 

@@ -434,6 +434,12 @@ export class TableComponent<T = any>
     /** Event emitted when new rows has been set and rendered. */
     @Output()
     readonly tableRowsSet = new EventEmitter<void>();
+    /** Event emitted when all rows being expanded. */
+    @Output()
+    allRowsExpanded = new EventEmitter<void>();
+    /** Event emitted when all rows being collapsed. */
+    @Output()
+    allRowsCollapsed = new EventEmitter<void>();
     /** @hidden */
     @ViewChild('tableScrollable')
     readonly tableScrollable: TableScrollable;
@@ -946,6 +952,7 @@ export class TableComponent<T = any>
 
         this._tableRowService.loadChildRows(expandableRows);
         this._markAsExpanded(expandableRows);
+        this.allRowsExpanded.emit();
     }
 
     /** @hidden */
@@ -966,6 +973,7 @@ export class TableComponent<T = any>
             }
         });
         this.onTableRowsChanged();
+        this.allRowsCollapsed.emit();
     }
 
     /** Search in table */
