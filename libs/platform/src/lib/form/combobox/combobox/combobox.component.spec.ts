@@ -21,8 +21,7 @@ import { DATA_PROVIDERS, DataProvider, isOptionItem } from '@fundamental-ngx/pla
 
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformComboboxModule } from '../combobox.module';
-import { ComboboxSelectionChangeEvent } from '../commons/base-combobox';
-import { ComboboxComponent } from './combobox.component';
+import { ComboboxComponent, ComboboxSelectionChangeEvent } from './combobox.component';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({

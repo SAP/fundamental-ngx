@@ -1,7 +1,6 @@
-import { Directive, ElementRef, inject } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 import { Nullable, SelectableItemToken } from '@fundamental-ngx/cdk/utils';
 import { FdTreeAcceptableDataSource } from '../data-source/tree-data-source';
-import { TreeItemDirective } from '../directives/tree-item.directive';
 import { TreeItem, TreeItemState } from './tree-item';
 
 @Directive()
@@ -92,17 +91,7 @@ export abstract class BaseTreeItem<T extends TreeItem = TreeItem, P = any>
      */
     abstract childrenLoaded: boolean;
 
-    /** @hidden */
-    public readonly elementRef = inject(ElementRef);
-
-    /** @hidden */
-    private readonly _treeItemDir = inject(TreeItemDirective, {
-        optional: true
-    });
-    /** @hidden */
-    constructor() {
-        this._treeItemDir?.setTreeItem(this);
-    }
+    abstract elementRef: ElementRef;
 
     /** Method to focus on the tree item. */
     abstract focus(): void;

@@ -4,7 +4,7 @@ export * from './components/message-popover-form-wrapper/message-popover-form-wr
 export * from './components/message-view/message-view.component';
 export * from './directives/message-popover-form-item.directive';
 export * from './models/message-popover-entry.interface';
-export * from './models/message-popover-error.interface';
 export * from './models/message-popover-wrapper.interface';
 export * from './default-config';
 export * from './utils';
+export * from './models/message-popover.interface';

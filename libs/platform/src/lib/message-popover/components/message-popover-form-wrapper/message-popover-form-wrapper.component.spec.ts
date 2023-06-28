@@ -11,9 +11,9 @@ import {
 } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PlatformMessagePopoverModule } from '../../platform-message-popover.module';
-import { MessagePopoverErrorGroup } from '../../models/message-popover-error.interface';
 
 import { MessagePopoverFormWrapperComponent } from './message-popover-form-wrapper.component';
+import { MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
 
 @Component({
     template: ` <fdp-message-popover-form-wrapper>

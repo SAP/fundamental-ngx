@@ -1,4 +1,13 @@
+import { Subject } from 'rxjs';
 import { TabConfig } from './tab-config.interface';
+import { DragRef, Point } from '@angular/cdk/drag-drop';
+
+export interface ElementChord {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
 
 /**
  * Extended TabConfig with special fields, that are calculated internally
@@ -25,4 +34,23 @@ export interface IconTabBarItem extends TabConfig {
     subItems?: IconTabBarItem[];
     /** Unique id of the parent tab, if current item is a subItem */
     parentUId?: string;
+}
+
+export interface IconTabBarDndItem {
+    dndItemData: IconTabBarItem;
+    previewClass: string[];
+    dndHoveredClass: string[];
+    dndSeparatorClass: string[];
+    moved: Subject<Point>;
+    released: Subject<void>;
+    started: Subject<void>;
+    dragRef: DragRef;
+    isVertical: boolean;
+    getElementCoordinates(): ElementChord;
+    toggleHoveredStyles(force?: boolean): void;
+    toggleSeparatorStyles(force?: boolean): void;
+}
+
+export interface IconTabBarDndList {
+    changeDraggableState(draggable: boolean): void;
 }

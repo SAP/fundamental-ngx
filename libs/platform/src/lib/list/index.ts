@@ -16,3 +16,4 @@ export * from './list-group-footer.component';
 export * from './list-group-header.component';
 export * from './load-more-content.directive';
 export { FdpListComponent } from './fdpListComponent.token';
+export * from './models/list';

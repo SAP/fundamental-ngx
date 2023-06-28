@@ -17,8 +17,7 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 import { CollectionBaseInput } from './collection-base.input';
-import { PlatformFormFieldControl } from './form-control';
-import { PlatformFormField } from './form-field';
+import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export interface InlineLayout {

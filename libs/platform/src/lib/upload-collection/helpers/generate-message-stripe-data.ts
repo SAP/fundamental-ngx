@@ -1,10 +1,11 @@
-import { DeleteEvent, MoveToEvent } from '../models/upload-collection-events.models';
 import {
     MessageOptions,
     MessageType,
     Message,
     UploadCollectionItem,
-    MessageItemsCount
+    MessageItemsCount,
+    DeleteEvent,
+    MoveToEvent
 } from '../models/upload-collection.models';
 
 function _groupByTypeAndCount(items: UploadCollectionItem[]): MessageItemsCount {

@@ -63,10 +63,7 @@ import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i
 import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
 import { FdpListComponent } from './fdpListComponent.token';
 import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
-
-export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
-export type ListType = 'inactive' | 'active' | 'detail';
-export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[] | null;
+import { FdpList, FdpListDataSource, ListType, SelectionType } from './models/list';
 
 export class SelectionChangeEvent {
     /** Selected items */
@@ -101,7 +98,7 @@ let nextListId = 0;
 })
 export class ListComponent<T>
     extends CollectionBaseInput
-    implements ListUnreadIndicator, OnInit, AfterViewInit, OnDestroy
+    implements ListUnreadIndicator, OnInit, AfterViewInit, OnDestroy, FdpList<BaseListItem>
 {
     /**  An array that holds a list of all selected items. **/
     @Input()

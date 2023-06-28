@@ -1,11 +1,14 @@
 import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { IconBarDndItemDirective, ElementChord } from './icon-bar-dnd-item.directive';
 import { Subject } from 'rxjs';
-import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { takeUntil } from 'rxjs/operators';
 import { FLIPPER_SIZE } from '../../constants';
-import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
+import {
+    ElementChord,
+    IconTabBarDndItem,
+    IconTabBarDndList,
+    IconTabBarItem
+} from '../../interfaces/icon-tab-bar-item.interface';
 
 export interface FdDnDEvent {
     draggableItem: IconTabBarItem;
@@ -36,10 +39,10 @@ export class IconBarDndContainerDirective implements OnDestroy {
     private _dragRefItems: DragRef[] = [];
 
     /** @hidden  */
-    private dndItemDirectives: IconBarDndItemDirective[] = [];
+    private dndItemDirectives: IconTabBarDndItem[] = [];
 
     /** @hidden  */
-    private _dndListDirectives: Set<IconBarDndListDirective> = new Set<IconBarDndListDirective>();
+    private _dndListDirectives: Set<IconTabBarDndList> = new Set<IconTabBarDndList>();
 
     /** @hidden */
     private _elementsCoordinates: ElementChord[];
@@ -73,7 +76,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
      */
     dragStart(): void {
         /** Counting all of the elements's chords */
-        this._elementsCoordinates = this.dndItemDirectives.map((item: IconBarDndItemDirective) =>
+        this._elementsCoordinates = this.dndItemDirectives.map((item: IconTabBarDndItem) =>
             item.getElementCoordinates()
         );
         this._generateVirtualSeparators();
@@ -146,7 +149,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
      * @param dragDir
      * @description Method called, when element is released
      */
-    dragEnd(dragDir: IconBarDndItemDirective): void {
+    dragEnd(dragDir: IconTabBarDndItem): void {
         if (this._closestSeparatorIndex || this._closestSeparatorIndex === 0) {
             this.dndItemDirectives[this._closestSeparatorIndex].toggleSeparatorStyles();
             this.dropped.emit({
@@ -172,9 +175,9 @@ export class IconBarDndContainerDirective implements OnDestroy {
 
     /**
      * @param dragItem
-     * @description Register IconBarDndItemDirective to current container
+     * @description Register IconTabBarDndItem to current container
      */
-    registerDragItem(dragItem: IconBarDndItemDirective): void {
+    registerDragItem(dragItem: IconTabBarDndItem): void {
         this._dragRefItems.push(dragItem.dragRef);
         this.dndItemDirectives.push(dragItem);
         dragItem.moved.pipe(takeUntil(this._onDestroy$)).subscribe((position: Point) => this.onMove(position));
@@ -184,27 +187,27 @@ export class IconBarDndContainerDirective implements OnDestroy {
 
     /**
      * @param dragItem
-     * @description Remove registered IconBarDndItemDirective to current container
+     * @description Remove registered IconTabBarDndItem to current container
      */
-    removeDragItem(dragItem: IconBarDndItemDirective): void {
+    removeDragItem(dragItem: IconTabBarDndItem): void {
         this._dragRefItems = this._dragRefItems.filter((item) => item !== dragItem.dragRef);
         this.dndItemDirectives = this.dndItemDirectives.filter((item) => item !== dragItem);
     }
 
     /**
      * @param listDir
-     * @description Register IconBarDndListDirective to current container
+     * @description Register IconTabBarDndList to current container
      */
-    registerDndList(listDir: IconBarDndListDirective): void {
+    registerDndList(listDir: IconTabBarDndList): void {
         this._dndListDirectives.add(listDir);
         listDir.changeDraggableState(this._draggable);
     }
 
     /**
      * @param listDir
-     * @description Remove registered IconBarDndListDirective to current container
+     * @description Remove registered IconTabBarDndList to current container
      */
-    removeDndList(listDir: IconBarDndListDirective): void {
+    removeDndList(listDir: IconTabBarDndList): void {
         this._dndListDirectives.delete(listDir);
     }
 
