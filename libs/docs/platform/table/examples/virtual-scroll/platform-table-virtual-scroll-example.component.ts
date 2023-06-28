@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
@@ -7,7 +7,8 @@ import {
     TableDataProvider,
     TableState,
     TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent
+    TableRowsRearrangeEvent,
+    TableService
 } from '@fundamental-ngx/platform/table';
 
 @Component({
@@ -16,11 +17,37 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformTableVirtualScrollExampleComponent {
+export class PlatformTableVirtualScrollExampleComponent implements OnInit {
     source: TableDataSource<ExampleItem>;
+    state: TableState;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
+    }
+
+    ngOnInit(): void {
+        this.state = this._getDefaultState();
+    }
+
+    _getDefaultState(): TableState {
+        return {
+            columnKeys: [],
+            sortBy: [],
+            filterBy: [],
+            groupBy: [],
+            columns: [],
+            searchInput: {
+                category: null,
+                text: ''
+            },
+            freezeToColumn: null,
+            freezeToEndColumn: null,
+            page: {
+                pageSize: 0,
+                currentPage: 1
+            },
+            scrollTopPosition: 3310
+        };
     }
 }
 

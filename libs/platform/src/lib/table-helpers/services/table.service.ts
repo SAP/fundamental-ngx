@@ -353,7 +353,8 @@ export class TableService {
             page: {
                 pageSize: 0,
                 currentPage: 1
-            }
+            },
+            scrollTopPosition: 0
         };
     }
 
