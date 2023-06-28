@@ -76,20 +76,20 @@ export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> |
 
 @Directive()
 export abstract class BaseCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+    /** @hidden Method to emit change event */
+    abstract emitChangeEvent<K>(value: K): void;
+
+    /** @hidden Define is this item selected */
+    abstract isSelectedOptionItem(selectedItem: OptionItem): boolean;
+
+    /** @hidden Emit select OptionItem */
+    abstract selectOptionItem(item: OptionItem): void;
+
+    /** @hidden Define value as selected */
+    abstract setAsSelected(item: OptionItem[]): void;
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
-
-    /** Datasource for suggestion list */
-    @Input()
-    set dataSource(value: FdpComboBoxDataSource<any>) {
-        if (value) {
-            this._initializeDataSource(value);
-        }
-    }
-    get dataSource(): FdpComboBoxDataSource<any> {
-        return this._dataSource;
-    }
 
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
@@ -135,17 +135,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     autoResize = false;
 
-    /** Value of the combobox */
-    @Input()
-    set value(value: any) {
-        const selectedItems = coerceArraySafe(value);
-        this.setAsSelected(this._convertToOptionItems(selectedItems));
-        super.setValue(value);
-    }
-    get value(): any {
-        return super.getValue();
-    }
-
     /**
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
      * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
@@ -177,6 +166,34 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     byline = false;
 
+    /** Datasource for suggestion list */
+    @Input()
+    set dataSource(value: FdpComboBoxDataSource<any>) {
+        if (value) {
+            this._initializeDataSource(value);
+        }
+    }
+
+    get dataSource(): FdpComboBoxDataSource<any> {
+        return this._dataSource;
+    }
+
+    /** Value of the combobox */
+    @Input()
+    set value(value: any) {
+        const selectedItems = coerceArraySafe(value);
+        this.setAsSelected(this._convertToOptionItems(selectedItems));
+        super.setValue(value);
+    }
+
+    get value(): any {
+        return super.getValue();
+    }
+
+    /** Event emitted when item is selected. */
+    @Output()
+    selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
+
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataRequested = new EventEmitter<void>();
@@ -194,16 +211,16 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     customTemplates: QueryList<TemplateDirective>;
 
     /** @hidden Custom Option item Template */
-    optionItemTemplate: TemplateRef<HTMLElement>;
+    optionItemTemplate: TemplateRef<any>;
 
     /** @hidden Custom Group Header item Template */
-    groupItemTemplate: TemplateRef<HTMLElement>;
+    groupItemTemplate: TemplateRef<any>;
 
     /** @hidden Custom Secondary item Template */
-    secondaryItemTemplate: TemplateRef<HTMLElement>;
+    secondaryItemTemplate: TemplateRef<any>;
 
     /** @hidden Custom Selected option item Template */
-    selectedItemTemplate: TemplateRef<HTMLElement>;
+    selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
     searchInputElement: ElementRef<HTMLInputElement>;
@@ -217,6 +234,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         this.onTouched();
     }
+
     get inputText(): string {
         return this._inputTextValue || '';
     }
@@ -252,10 +270,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
-    protected _dataSource: FdpComboBoxDataSource<any>;
+    _flatSuggestions: OptionItem[];
 
     /** @hidden */
-    _flatSuggestions: OptionItem[];
+    protected _dataSource: FdpComboBoxDataSource<any>;
 
     /** @hidden */
     private _inputTextValue: string;
@@ -299,24 +317,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     ];
 
     /** @hidden */
-    private _displayFn = (value: any): string => this.displayValue(value);
-
-    /** @hidden */
-    private _secondaryFn = (value: any): string => {
-        if (isOptionItem(value)) {
-            return value.secondaryText ?? '';
-        }
-
-        if (isJsObject(value) && this.secondaryKey) {
-            const currentItem = this.objectGet(value, this.secondaryKey);
-
-            return isFunction(currentItem) ? currentItem() : currentItem;
-        }
-
-        return value;
-    };
-
-    /** @hidden */
     protected constructor(
         readonly cd: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -350,18 +350,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             this._dsSubscription.unsubscribe();
         }
     }
-
-    /** @hidden Method to emit change event */
-    abstract emitChangeEvent<K>(value: K): void;
-
-    /** @hidden Define is this item selected */
-    abstract isSelectedOptionItem(selectedItem: OptionItem): boolean;
-
-    /** @hidden Emit select OptionItem */
-    abstract selectOptionItem(item: OptionItem): void;
-
-    /** @hidden Define value as selected */
-    abstract setAsSelected(item: OptionItem[]): void;
 
     /** Is empty search field */
     get isEmptyValue(): boolean {
@@ -539,6 +527,24 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     protected _flatGroups(items: OptionItem[]): OptionItem[] {
         return items.reduce((result: OptionItem[], item: OptionItem) => result.concat(item.children ?? []), []);
     }
+
+    /** @hidden */
+    private _displayFn = (value: any): string => this.displayValue(value);
+
+    /** @hidden */
+    private _secondaryFn = (value: any): string => {
+        if (isOptionItem(value)) {
+            return value.secondaryText ?? '';
+        }
+
+        if (isJsObject(value) && this.secondaryKey) {
+            const currentItem = this.objectGet(value, this.secondaryKey);
+
+            return isFunction(currentItem) ? currentItem() : currentItem;
+        }
+
+        return value;
+    };
 
     /**
      * @hidden
