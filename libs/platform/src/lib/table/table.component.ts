@@ -1911,6 +1911,8 @@ export class TableComponent<T = any>
                     const scrollTop = scrollable.getScrollTop();
 
                     this.tableScrolled.emit(scrollTop);
+
+                    // Instead of having two places to record this possition, we could just subscribe once.
                     this.getTableState().scrollTopPosition = scrollTop;
                 })
         );
@@ -1968,6 +1970,8 @@ export class TableComponent<T = any>
     /** @hidden */
     private _initScrollPosition(): void {
         const state = this.getTableState();
+
+        console.log(`_initScrollPosition: ${state.scrollTopPosition}  - ${this._tableRows.length}`);
         if (!state.scrollTopPosition || this._tableRows.length === 0) {
             return;
         }

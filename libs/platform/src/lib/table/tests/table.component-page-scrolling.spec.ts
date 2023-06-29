@@ -1,5 +1,5 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -151,5 +151,35 @@ describe('TableComponent Page Scrolling', async () => {
 
         expect(tableBodyRows.length).toBe(200);
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
+    });
+
+    describe('With Initial Scrolling position', async () => {
+        const initState = (scrollTop): TableState => {
+            const defaultState = (hostComponent.table as any)._tableService.getDefaultState();
+            return {
+                ...defaultState,
+                scrollTopPosition: scrollTop
+            };
+        };
+
+        it('should init table with scrollTop position ZERO', fakeAsync(() => {
+            hostComponent.table.setTableState(initState(0));
+            (hostComponent.table as any)._initScrollPosition();
+            tick(200);
+            fixture.detectChanges();
+
+            const scrollTop = hostComponent.table.tableScrollable.getScrollTop();
+            expect(scrollTop).toBe(0);
+        }));
+
+        it('should init table with scrollTop position 200, when TableState is used', fakeAsync(() => {
+            hostComponent.table.setTableState(initState(89));
+            (hostComponent.table as any)._initScrollPosition();
+            tick(200);
+            fixture.detectChanges();
+
+            const scrollTop = hostComponent.table.tableScrollable.getScrollTop();
+            expect(scrollTop).toBe(89);
+        }));
     });
 });
