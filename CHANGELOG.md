@@ -1,3 +1,31 @@
+## [0.42.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.8...v0.42.1-rc.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* **platform:** table tbody focus ([#10102](https://github.com/SAP/fundamental-ngx/issues/10102)) ([5aec926](https://github.com/SAP/fundamental-ngx/commit/5aec926b652ebf1397c0efb56291a93fea373cb4))
+
+
+
+## [0.42.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.7...v0.42.1-rc.8) (2023-06-29)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** circular dependencies ([#10099](https://github.com/SAP/fundamental-ngx/issues/10099)) ([5fc2e54](https://github.com/SAP/fundamental-ngx/commit/5fc2e5481197bfb2fa709ebe21a08c510cf40f41))
+* **cdk:** fix import path ([#10103](https://github.com/SAP/fundamental-ngx/issues/10103)) ([5f1e74d](https://github.com/SAP/fundamental-ngx/commit/5f1e74d07f68144f4fa726e1c442840acd7fbdc2))
+
+
+
+## [0.42.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.6...v0.42.1-rc.7) (2023-06-28)
+
+
+### Bug Fixes
+
+* dayjs adapter was enforcing double digits for month and day ([#10096](https://github.com/SAP/fundamental-ngx/issues/10096)) ([4932c63](https://github.com/SAP/fundamental-ngx/commit/4932c63525df26e6cfd0195320dcc53aac9eab79))
+
+
+
 ## [0.42.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.5...v0.42.1-rc.6) (2023-06-28)
 
 

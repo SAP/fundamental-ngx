@@ -9,10 +9,7 @@ export * from './domain/observable-data-source';
 
 export * from './form/base.input';
 export * from './form/collection-base.input';
-export * from './form/form-control';
 export * from './form/form-field';
-export * from './form/form-field-group';
-export * from './form/form-group';
 export * from './form/form-options';
 export * from './form/inline-layout-collection-base.input';
 export * from './form/hint-options';

@@ -18,8 +18,7 @@ import { Subject, Subscription } from 'rxjs';
 import { BaseCVA } from '../models/cva';
 import { isValidControlState } from '../helpers/state';
 import { FormStates } from '../models/form-state';
-import { FormField } from '../models/form-field';
-import { FormFieldControl } from '../models/form-field-control';
+import { FormField, FormFieldControl } from '../models/form-field';
 import { FD_FORM_FIELD } from '../tokens/form-field.token';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 

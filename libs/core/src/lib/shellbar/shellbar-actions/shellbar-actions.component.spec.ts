@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ShellbarComponent, ShellbarGroupFlexOptions } from '../shellbar.component';
 import { ShellbarModule } from '../shellbar.module';
 import { ShellbarActionsComponent } from './shellbar-actions.component';
+import { ShellbarGroupFlexOptions } from '../model/shellbar-sizes';
+import { FD_SHELLBAR_COMPONENT } from '../tokens';
 
 export class ShellbarMock {
     groupFlex: ShellbarGroupFlexOptions = {
@@ -21,7 +22,7 @@ describe('ShellbarActionsComponent', () => {
             imports: [ShellbarModule],
             providers: [
                 {
-                    provide: ShellbarComponent,
+                    provide: FD_SHELLBAR_COMPONENT,
                     useClass: ShellbarMock
                 }
             ]

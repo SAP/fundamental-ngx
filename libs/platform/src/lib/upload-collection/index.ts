@@ -5,7 +5,6 @@ export * from './directives/upload-collection-dragndrop.directive';
 export * from './domain/upload-collection-data-provider';
 export * from './domain/upload-collection-data-source';
 export * from './helpers/generate-message-stripe-data';
-export * from './models/upload-collection-events.models';
 export * from './models/upload-collection.models';
 export * from './services/files-validator.service';
 export * from './upload-collection/upload-collection.component';

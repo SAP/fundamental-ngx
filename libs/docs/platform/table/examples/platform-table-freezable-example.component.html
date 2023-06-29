@@ -4,6 +4,9 @@
         selectionMode="multiple"
         freezeColumnsTo="description"
         freezeEndColumnsTo="verified"
+        [pageScrolling]="true"
+        [pageSize]="10"
+        bodyHeight="20rem"
         (columnFreeze)="onColumnFreezeChange($event)"
     >
         <fdp-table-toolbar title="Order Line Items" [hideItemCount]="true"> </fdp-table-toolbar>

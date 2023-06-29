@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { DialogWizardGeneratorComponent } from './components/dialog-wizard-generator/dialog-wizard-generator.component';
 import { WizardDialogData } from './interfaces/wizard-dialog-data.interface';
-import { WizardGeneratorFormsValue } from './interfaces/wizard-generator-item.interface';
+import { WizardGeneratorFormsValue } from './interfaces/wizard-generator-forms.interface';
 
 /**
  * @description Helper service to launch Wizard in dialog with minimal user input.

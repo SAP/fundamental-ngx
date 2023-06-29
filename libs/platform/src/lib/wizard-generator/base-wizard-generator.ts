@@ -4,15 +4,11 @@ import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import {
-    PreparedWizardGeneratorItem,
-    WizardGeneratorFormsValue,
-    WizardGeneratorItem
-} from './interfaces/wizard-generator-item.interface';
+import { PreparedWizardGeneratorItem, WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from './interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from './wizard-generator.service';
-import { WizardStepSubmittedForms } from './components/wizard-generator-step/wizard-generator-step.component';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { WizardGeneratorFormsValue, WizardStepSubmittedForms } from './interfaces/wizard-generator-forms.interface';
 
 /**
  * @description Default button labels.

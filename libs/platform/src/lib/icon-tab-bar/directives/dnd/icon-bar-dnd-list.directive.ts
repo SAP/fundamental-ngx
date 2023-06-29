@@ -2,14 +2,14 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular
 import { ReplaySubject, Subject } from 'rxjs';
 
 import { DragDrop, DragRef, DropListRef } from '@angular/cdk/drag-drop';
-import { IconBarDndItemDirective } from './icon-bar-dnd-item.directive';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
+import { IconTabBarDndItem, IconTabBarDndList } from '../../interfaces/icon-tab-bar-item.interface';
 
 @Directive({
     selector: '[fdpIconBarDndList], [fdp-icon-bar-dnd-list]'
 })
-export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
+export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit, OnDestroy {
     /**
      * @description Direction in which the list is oriented.
      */
@@ -66,18 +66,18 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 
     /**
      * @param dragItem
-     * @description Register IconBarDndItemDirective to current list
+     * @description Register IconTabBarDndItem to current list
      */
-    registerDragItem(dragItem: IconBarDndItemDirective): void {
+    registerDragItem(dragItem: IconTabBarDndItem): void {
         this._dragRefItems.push(dragItem.dragRef);
         this._dndItems$.next();
     }
 
     /**
      * @param dragItem
-     * @description Remove registered IconBarDndItemDirective to current list
+     * @description Remove registered IconTabBarDndItem to current list
      */
-    removeDragItem(dragItem: IconBarDndItemDirective): void {
+    removeDragItem(dragItem: IconTabBarDndItem): void {
         this._dragRefItems = this._dragRefItems.filter((item) => item !== dragItem.dragRef);
         this._dndItems$.next();
     }

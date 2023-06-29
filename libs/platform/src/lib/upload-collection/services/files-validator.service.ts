@@ -1,20 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { parserFileSize } from '@fundamental-ngx/cdk/utils';
-
-export interface FilesValidatorOutput {
-    validFiles?: File[];
-    typeMismatch?: File[];
-    filenameLengthExceed?: File[];
-    fileSizeExceed?: File[];
-}
-
-export interface FilesValidatorParams {
-    maxFileSize?: string;
-    maxFileNameLength?: number;
-    fileTypes?: string[];
-    mimeTypes?: string[];
-}
+import { FilesValidatorOutput, FilesValidatorParams } from '../models/upload-collection.models';
 
 @Injectable({ providedIn: 'root' })
 export class FilesValidatorService {

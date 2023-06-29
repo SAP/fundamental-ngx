@@ -57,24 +57,11 @@ import {
     MultiInputDataSource,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
-import { PlatformMultiInputComponent } from './multi-input.component';
 import { TextAlignment } from '../combobox';
 import { MultiInputConfig } from './multi-input.config';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type FdpMultiInputDataSource<T> = MultiInputDataSource<T> | Observable<T[]> | T[];
-
-export class MultiInputSelectionChangeEvent {
-    /**
-     * Multi Input selection change event
-     * @param source Multi Input component
-     * @param payload Selected value
-     */
-    constructor(
-        public source: PlatformMultiInputComponent,
-        public payload: any // Contains selected item
-    ) {}
-}
 
 @Directive()
 export abstract class BaseMultiInput extends CollectionBaseInput implements AfterViewInit, OnChanges, OnDestroy {
@@ -162,10 +149,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     get value(): any {
         return super.getValue();
     }
-
-    /** Event emitted when item is selected. */
-    @Output()
-    readonly selectionChange = new EventEmitter<MultiInputSelectionChangeEvent>();
 
     /** @hidden Emits event when the menu is opened/closed */
     @Output()
