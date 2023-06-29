@@ -1,3 +1,13 @@
+## [0.42.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.7...v0.42.1-rc.8) (2023-06-29)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** circular dependencies ([#10099](https://github.com/SAP/fundamental-ngx/issues/10099)) ([5fc2e54](https://github.com/SAP/fundamental-ngx/commit/5fc2e5481197bfb2fa709ebe21a08c510cf40f41))
+* **cdk:** fix import path ([#10103](https://github.com/SAP/fundamental-ngx/issues/10103)) ([5f1e74d](https://github.com/SAP/fundamental-ngx/commit/5f1e74d07f68144f4fa726e1c442840acd7fbdc2))
+
+
+
 ## [0.42.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.6...v0.42.1-rc.7) (2023-06-28)
 
 
