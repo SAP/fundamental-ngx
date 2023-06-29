@@ -172,7 +172,7 @@ describe('TableComponent Page Scrolling', async () => {
             expect(scrollTop).toBe(0);
         }));
 
-        it('should init table with scrollTop position 200, when TableState is used', fakeAsync(() => {
+        it('should init table with scrollTop position 89, when TableState is used', fakeAsync(() => {
             hostComponent.table.setTableState(initState(89));
             (hostComponent.table as any)._initScrollPosition();
             tick(200);
