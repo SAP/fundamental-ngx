@@ -3,7 +3,7 @@ import { FormError } from './form-error';
 import { FormStates } from './form-state';
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
-import { Nullable } from '@fundamental-ngx/core/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * FormField base class.
