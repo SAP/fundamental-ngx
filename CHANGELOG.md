@@ -1,3 +1,12 @@
+## [0.42.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.8...v0.42.1-rc.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* **platform:** table tbody focus ([#10102](https://github.com/SAP/fundamental-ngx/issues/10102)) ([5aec926](https://github.com/SAP/fundamental-ngx/commit/5aec926b652ebf1397c0efb56291a93fea373cb4))
+
+
+
 ## [0.42.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.7...v0.42.1-rc.8) (2023-06-29)
 
 
