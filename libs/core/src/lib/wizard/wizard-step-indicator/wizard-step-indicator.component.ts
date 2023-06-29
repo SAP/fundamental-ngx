@@ -12,13 +12,21 @@ import { WizardStepComponent } from '../wizard-step/wizard-step.component';
 import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_WIZARD_STEP_INDICATOR } from '../constants';
+import { WizardStepIndicator } from '../models/wizard-step';
 
 @Component({
     selector: 'fd-wizard-step-indicator',
     templateUrl: './wizard-step-indicator.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_WIZARD_STEP_INDICATOR,
+            useExisting: WizardStepIndicatorComponent
+        }
+    ]
 })
-export class WizardStepIndicatorComponent implements OnDestroy {
+export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDestroy {
     /**
      * The icon to use for this step.
      */

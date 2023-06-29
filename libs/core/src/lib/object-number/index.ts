@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './object-number.module';
+export * from './object-number.component';

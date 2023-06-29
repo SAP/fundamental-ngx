@@ -4,12 +4,13 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { BehaviorSubject, combineLatest, map, Subject, tap } from 'rxjs';
 import { ResponsiveBreakpoints, ViewportSizeObservable } from '@fundamental-ngx/cdk/utils';
 import { MessageStripAlertContainerComponent } from './message-strip-alert-container/message-strip-alert-container.component';
-import { MessageStripAlertComponent } from './message-strip-alert/message-strip-alert.component';
 import { MessageStripAlertPosition } from './message-strip-alert.position';
 import { OpenMessageStripAlertConfig } from './open-message-strip-alert.config';
 import { MessageStripAlertRef } from './message-strip-alert.ref';
 import { MessageStripAlertComponentData, MessageStripAlertContainerPosition } from './tokens';
 import { applyDefaultConfig } from './default-config';
+import { MessageStripAlert } from './message-strip-alert/message-strip-alert.interface';
+import { MessageStripAlertComponent } from './message-strip-alert/message-strip-alert.component';
 
 /**
  * Service that is responsible for opening and closing message strip alerts.
@@ -38,7 +39,7 @@ export class MessageStripAlertService {
     private _messageAlerts$ = new BehaviorSubject<
         Array<
             Required<OpenMessageStripAlertConfig> & {
-                portal: ComponentPortal<MessageStripAlertComponent>;
+                portal: ComponentPortal<MessageStripAlert>;
             }
         >
     >([]);
@@ -83,7 +84,7 @@ export class MessageStripAlertService {
     /**
      * Open a message strip alert with given configuration
      */
-    open<ComponentType = unknown>(c: OpenMessageStripAlertConfig<ComponentType>): MessageStripAlertRef<ComponentType> {
+    open<ComponentType = unknown>(c: OpenMessageStripAlertConfig<ComponentType>): MessageStripAlertRef {
         const config = applyDefaultConfig<ComponentType>(c);
         const alertRef = this.getMessageStripAlertRef(config);
         this._messageAlerts$.next([{ ...config, portal: alertRef.portal }, ...this._messageAlerts$.value]);
@@ -93,7 +94,7 @@ export class MessageStripAlertService {
     /** @hidden */
     private getMessageStripAlertRef<ComponentType = unknown>(
         config: Required<OpenMessageStripAlertConfig<ComponentType>>
-    ): MessageStripAlertRef<ComponentType> {
+    ): MessageStripAlertRef {
         const onDismiss$ = new Subject<void>();
         const alertRef = {
             portal: new ComponentPortal(
@@ -145,32 +146,32 @@ export class MessageStripAlertService {
                 map(
                     ([viewportSize, messageAlerts]): Record<
                         MessageStripAlertPosition,
-                        Array<ComponentPortal<MessageStripAlertComponent>>
+                        Array<ComponentPortal<MessageStripAlert>>
                     > => {
                         if (viewportSize < ResponsiveBreakpoints.M) {
                             return messageAlerts.reduce((acc, next) => {
                                 const position = next.position?.startsWith('top') ? 'top-middle' : 'bottom-middle';
                                 acc[position] = [...(acc[position] || []), next.portal];
                                 return acc;
-                            }, {} as Record<MessageStripAlertPosition, Array<ComponentPortal<MessageStripAlertComponent>>>);
+                            }, {} as Record<MessageStripAlertPosition, Array<ComponentPortal<MessageStripAlert>>>);
                         }
                         return messageAlerts.reduce((acc, next) => {
                             acc[next.position] = [...(acc[next.position] || []), next.portal];
                             return acc;
-                        }, {} as Record<MessageStripAlertPosition, Array<ComponentPortal<MessageStripAlertComponent>>>);
+                        }, {} as Record<MessageStripAlertPosition, Array<ComponentPortal<MessageStripAlert>>>);
                     }
                 ),
                 tap(
                     (
                         messageAlertsByPosition: Partial<
-                            Record<MessageStripAlertPosition, Array<ComponentPortal<MessageStripAlertComponent>>>
+                            Record<MessageStripAlertPosition, Array<ComponentPortal<MessageStripAlert>>>
                         >
                     ) => {
                         let topSectionIsOpened = false;
                         let bottomSectionIsOpened = false;
                         (
                             Object.entries(messageAlertsByPosition) as Array<
-                                [MessageStripAlertPosition, ComponentPortal<MessageStripAlertComponent>[]]
+                                [MessageStripAlertPosition, ComponentPortal<MessageStripAlert>[]]
                             >
                         ).forEach(([position, portals]) => {
                             topSectionIsOpened = topSectionIsOpened || position.startsWith('top');
@@ -188,9 +189,7 @@ export class MessageStripAlertService {
 
     /** @hidden */
     private syncExistingOverlays(
-        messageAlertsByPosition: Partial<
-            Record<MessageStripAlertPosition, ComponentPortal<MessageStripAlertComponent>[]>
-        >,
+        messageAlertsByPosition: Partial<Record<MessageStripAlertPosition, ComponentPortal<MessageStripAlert>[]>>,
         bottomSectionIsOpened: boolean,
         topSectionIsOpened: boolean
     ): void {

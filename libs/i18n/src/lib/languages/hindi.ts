@@ -43,7 +43,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         dismissLabel: 'खारिज करें'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

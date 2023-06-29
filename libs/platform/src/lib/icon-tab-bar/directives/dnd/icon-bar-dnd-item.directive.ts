@@ -5,19 +5,12 @@ import { takeUntil } from 'rxjs/operators';
 
 import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
-import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
-
-export interface ElementChord {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
+import { ElementChord, IconTabBarDndItem, IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 @Directive({
     selector: '[fdpIconBarDndItem], [fdp-icon-bar-dnd-item]'
 })
-export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
+export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit, OnDestroy {
     /**
      * @description Tab info
      */

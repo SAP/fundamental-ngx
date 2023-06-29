@@ -40,7 +40,7 @@
         [attr.id]="controlId"
         [attr.aria-active]="_isOpen"
         aria-live="polite"
-        [attr.aria-selected]="selected ? selected.selected : null"
+        [attr.aria-selected]="selected ? selected.selected : false"
         [attr.aria-expanded]="_isOpen"
         [attr.aria-disabled]="disabled"
         [attr.aria-controls]="controlId + '-list-box'"

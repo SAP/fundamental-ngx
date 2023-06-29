@@ -2,8 +2,10 @@ import { Component, Type, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, flushMicrotasks, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { MessageBoxConfig, MessageBoxHeaderComponent, MessageBoxHost, MessageBoxModule } from '../public_api';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { MessageBoxHeaderComponent } from './message-box-header.component';
+import { MessageBoxModule } from '../message-box.module';
+import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 
 @Component({
     template: `

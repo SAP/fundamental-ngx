@@ -25,7 +25,8 @@ import { SettingsGeneratorLayoutAccessorService } from './settings-generator-lay
 import { SettingsGeneratorReturnValue, SettingsGeneratorService } from './settings-generator.service';
 import { ThemeSelectorListComponent } from './controls/theme-selector-list/theme-selector-list.component';
 import { BehaviorSubject, filter, Observable, Subscription, takeUntil } from 'rxjs';
-import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
+import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
+import { SettingsGenerator } from './models/settings-generator.model';
 
 @Component({
     selector: 'fdp-settings-generator',
@@ -33,9 +34,16 @@ import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
     styleUrls: ['./settings-generator.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [SettingsGeneratorService, DestroyedService]
+    providers: [
+        SettingsGeneratorService,
+        DestroyedService,
+        {
+            provide: FDP_SETTINGS_GENERATOR,
+            useExisting: SettingsGeneratorComponent
+        }
+    ]
 })
-export class SettingsGeneratorComponent implements AfterViewInit, OnDestroy {
+export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy {
     /**
      * Settings Generator Element Ref.
      */
@@ -87,7 +95,6 @@ export class SettingsGeneratorComponent implements AfterViewInit, OnDestroy {
     constructor(
         private readonly _fgService: FormGeneratorService,
         private readonly _settingsLayoutService: SettingsGeneratorLayoutAccessorService,
-        private readonly _viewContainerRef: ViewContainerRef,
         private readonly _injector: Injector,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _destroy$: DestroyedService,

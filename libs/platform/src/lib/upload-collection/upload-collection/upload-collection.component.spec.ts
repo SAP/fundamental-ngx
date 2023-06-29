@@ -3,8 +3,8 @@ import { of } from 'rxjs';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService, uuidv4 } from '@fundamental-ngx/cdk/utils';
-import { FileSizeExceedEvent } from '../models/upload-collection-events.models';
 import {
+    FileSizeExceedEvent,
     UploadCollectionFile,
     UploadCollectionItem,
     UploadCollectionItemStatus

@@ -68,24 +68,11 @@ import {
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
-import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxConfig } from '../combobox.config';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
-
-export class ComboboxSelectionChangeEvent {
-    /**
-     * Combobox selection event
-     * @param source Combobox component
-     * @param payload Selected option
-     */
-    constructor(
-        public source: ComboboxComponent,
-        public payload: any // Contains selected item
-    ) {}
-}
 
 @Directive()
 export abstract class BaseCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
@@ -189,10 +176,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Whether list item options should be rendered as byline. */
     @Input()
     byline = false;
-
-    /** Event emitted when item is selected. */
-    @Output()
-    selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
 
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix

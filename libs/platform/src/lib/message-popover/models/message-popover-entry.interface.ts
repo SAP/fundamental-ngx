@@ -1,9 +1,8 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, TemplateRef } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
-import { MessagePopoverErrorText } from './message-popover-error.interface';
 
 export interface MessagePopoverEntry {
     heading: MessagePopoverErrorText;
@@ -16,4 +15,21 @@ export interface MessagePopoverEntry {
     errors: ValidationErrors | null;
     element?: ElementRef;
     formField?: PlatformFormFieldControl;
+}
+
+export interface MessagePopoverError {
+    group: FormStates | 'all';
+    state: ObjectStatus;
+    count: number;
+}
+
+export interface MessagePopoverErrorText {
+    message?: TemplateRef<any> | string | null;
+    type: 'templateRef' | 'directive' | 'string';
+    error?: any;
+}
+
+export interface MessagePopoverErrorGroup {
+    group?: string;
+    errors: MessagePopoverEntry[];
 }

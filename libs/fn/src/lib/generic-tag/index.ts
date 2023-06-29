@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './generic-tag.module';
+export * from './generic-tag.component';

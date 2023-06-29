@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
+    Inject,
     inject,
     Input,
     OnDestroy,
@@ -22,12 +23,12 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
-import { ListComponent, ListType, SelectionType } from './list.component';
 import { ListConfig } from './list.config';
-import { ActionListItemComponent } from './action-list-item/action-list-item.component';
 import { FdpListComponent } from './fdpListComponent.token';
 import merge from 'lodash-es/merge';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FdpList, ListType, SelectionType } from './models/list';
+import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
@@ -105,11 +106,6 @@ export interface ListAdvancedDescription {
 }
 
 export type ListDescription = string | ListAdvancedDescription;
-
-export class ActionChangeEvent {
-    /** Action List Item component */
-    source: ActionListItemComponent;
-}
 
 export class ModifyItemEvent {
     /** List Item component */
@@ -373,7 +369,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     _focused: boolean;
 
     /** @hidden */
-    private _listComponent = inject<ListComponent<unknown>>(FdpListComponent);
+    private _listComponent = inject<FdpList>(FdpListComponent);
 
     /** @hidden */
     private _avatarConfig: ListAvatarConfig = new ListAvatarConfig();
@@ -386,7 +382,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
         protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef<HTMLElement>,
         protected _listConfig: ListConfig,
-        @Optional() private readonly _list: ListComponent<any>
+        @Optional() @Inject(FD_LIST_UNREAD_INDICATOR) private readonly _list: ListUnreadIndicator
     ) {
         super(_changeDetectorRef);
     }

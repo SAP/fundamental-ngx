@@ -2,6 +2,6 @@
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
     "dest": "../../../../../dist/libs/core/content-density",
     "lib": {
-        "entryFile": "./public_api.ts"
+        "entryFile": "./index.ts"
     }
 }

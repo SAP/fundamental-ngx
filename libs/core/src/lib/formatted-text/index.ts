@@ -1,1 +1,2 @@
-export * from './public_api';
+export * from './formatted-text.module';
+export * from './formatted-text.component';

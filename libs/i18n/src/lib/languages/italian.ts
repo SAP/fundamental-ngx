@@ -43,7 +43,7 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         dismissLabel: 'Congedare'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Input'
+        multiInputAriaLabel: 'Multi Value Input'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

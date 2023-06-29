@@ -1,17 +1,16 @@
-import { Directive, EventEmitter, inject, OnDestroy, Output } from '@angular/core';
+import { Directive, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
 import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER, isDataSource } from '@fundamental-ngx/cdk/data-source';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { filter, startWith, takeUntil } from 'rxjs/operators';
 import { FDP_TABLE_STATE_DIRECTIVE } from '../constants';
-import { TableDataSource, TableDataSourceParser } from '../domain';
-import { TableInitialState } from '../models';
+import { ChildTableDataSource, TableDataSource, TableDataSourceParser } from '../domain';
+import { TableInitialState, TableRow } from '../models';
 import { TableService } from '../services/table.service';
 import { Table } from '../table';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: 'fdp-table[dataSource]',
+    selector: '[fdpTableDataSource]',
     standalone: true,
     providers: [
         DestroyedService,
@@ -22,6 +21,31 @@ import { Table } from '../table';
     ]
 })
 export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDataSource<T>> implements OnDestroy {
+    /**
+     * Data source.
+     * @param source
+     */
+    @Input()
+    set childDataSource(source: ChildTableDataSource<T> | null) {
+        this._childDataSource = source;
+        this._initializeChildDataSource();
+        this.childDataSourceChanged.next();
+    }
+
+    get childDataSource(): ChildTableDataSource<T> | null {
+        return this._childDataSource;
+    }
+
+    /** @hidden */
+    private _childDataSource: ChildTableDataSource<T> | null;
+
+    /** @hidden */
+    private _childDsSubscription = new Subscription();
+
+    /** Event emitted when child data source instance being changed. */
+    @Output()
+    childDataSourceChanged = new EventEmitter<void>();
+
     /** Event emitted when data loading is started. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDataRequested = new EventEmitter<void>();
@@ -45,6 +69,9 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     /** Items stream. */
     items$ = new BehaviorSubject<T[]>([]);
 
+    /** Child items stream. */
+    childItems$ = new Subject<Map<TableRow<T>, T[]>>();
+
     /** @hidden for data source handling */
     private _tableDsSubscription: Subscription | null;
 
@@ -59,6 +86,9 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
 
     /** @hidden */
     _internalLoadingState = false;
+
+    /** @hidden */
+    _internalChildrenLoadingState = false;
 
     /** @hidden */
     private readonly initialState = inject<TableInitialState>(FDP_TABLE_STATE_DIRECTIVE, {
@@ -92,6 +122,54 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
 
     /**
      * @hidden
+     * Initializes the child data source to fetch child rows.
+     */
+    private _initializeChildDataSource(): void {
+        if (isDataSource(this.childDataSource)) {
+            this.childDataSource?.unsubscribe();
+
+            this._childDsSubscription?.unsubscribe();
+        }
+        if (!this.childDataSource) {
+            return;
+        }
+
+        this._childDsSubscription = new Subscription();
+
+        this._childDsSubscription.add(
+            this.childDataSource.onDataRequested().subscribe(() => {
+                this._internalChildrenLoadingState = true;
+                this._tableService.setTableLoading(this._table.loadingState);
+            })
+        );
+
+        this._childDsSubscription.add(
+            this.childDataSource.onDataReceived().subscribe(() => {
+                this._internalChildrenLoadingState = false;
+                this._tableService.setTableLoading(this._table.loadingState);
+            })
+        );
+
+        this._childDsSubscription.add(
+            this.childDataSource.dataLoading
+                .pipe(
+                    filter((state) => !!state),
+                    takeUntil(this._destroyed$)
+                )
+                .subscribe((loadingStates) => {
+                    loadingStates.forEach((state) => state.row?.childItemsLoading$.next(state.loading));
+                })
+        );
+
+        this._childDsSubscription.add(
+            this.childDataSource.dataChanges.pipe(takeUntil(this._destroyed$)).subscribe((data) => {
+                this.childItems$.next(data);
+            })
+        );
+    }
+
+    /**
+     * @hidden
      * This is a single point of data entry to the component. We don't want to set data on different
      * places. If any new data comes in, or you do a search, and you want to pass initial data
      * its here.
@@ -107,7 +185,6 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
 
         this._tableDsSubscription.add(
             this.dataChanged$.subscribe((items) => {
-                // this._totalItems = dataSourceStream.dataProvider.totalItems;
                 this.totalItems$.next(dataSourceStream.dataProvider.totalItems);
                 this.items$.next(items);
             })

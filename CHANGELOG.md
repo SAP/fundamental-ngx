@@ -1,3 +1,101 @@
+## [0.42.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.8...v0.42.1-rc.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* **platform:** table tbody focus ([#10102](https://github.com/SAP/fundamental-ngx/issues/10102)) ([5aec926](https://github.com/SAP/fundamental-ngx/commit/5aec926b652ebf1397c0efb56291a93fea373cb4))
+
+
+
+## [0.42.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.7...v0.42.1-rc.8) (2023-06-29)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** circular dependencies ([#10099](https://github.com/SAP/fundamental-ngx/issues/10099)) ([5fc2e54](https://github.com/SAP/fundamental-ngx/commit/5fc2e5481197bfb2fa709ebe21a08c510cf40f41))
+* **cdk:** fix import path ([#10103](https://github.com/SAP/fundamental-ngx/issues/10103)) ([5f1e74d](https://github.com/SAP/fundamental-ngx/commit/5f1e74d07f68144f4fa726e1c442840acd7fbdc2))
+
+
+
+## [0.42.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.6...v0.42.1-rc.7) (2023-06-28)
+
+
+### Bug Fixes
+
+* dayjs adapter was enforcing double digits for month and day ([#10096](https://github.com/SAP/fundamental-ngx/issues/10096)) ([4932c63](https://github.com/SAP/fundamental-ngx/commit/4932c63525df26e6cfd0195320dcc53aac9eab79))
+
+
+
+## [0.42.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.5...v0.42.1-rc.6) (2023-06-28)
+
+
+### Bug Fixes
+
+* **platform:** fix expand all functionality ([#10097](https://github.com/SAP/fundamental-ngx/issues/10097)) ([76651de](https://github.com/SAP/fundamental-ngx/commit/76651de19cf2a983a5933796ba9161a4bdc47171))
+
+
+
+## [0.42.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.4...v0.42.1-rc.5) (2023-06-27)
+
+
+### Bug Fixes
+
+* **core:** add the correct styling for Select placeholder ([#10092](https://github.com/SAP/fundamental-ngx/issues/10092)) ([55c020b](https://github.com/SAP/fundamental-ngx/commit/55c020bfc746b508748c2fcbf018f367e4687e7c))
+
+
+
+## [0.42.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.3...v0.42.1-rc.4) (2023-06-27)
+
+
+### Bug Fixes
+
+* **core,platform:** update multi input aria-label ([#10071](https://github.com/SAP/fundamental-ngx/issues/10071)) ([28bacc5](https://github.com/SAP/fundamental-ngx/commit/28bacc5b9af59db086aebf26af19b0707a7632b0))
+
+
+
+## [0.42.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.2...v0.42.1-rc.3) (2023-06-27)
+
+
+
+## [0.42.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.1...v0.42.1-rc.2) (2023-06-27)
+
+
+### Features
+
+* **platform:** table children lazy load ([#10072](https://github.com/SAP/fundamental-ngx/issues/10072)) ([1360219](https://github.com/SAP/fundamental-ngx/commit/1360219a6d16d1777cb04400f3bea509f01590ff))
+
+
+
+## [0.42.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.0...v0.42.1-rc.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* **platform:** preserved state fixes ([#10084](https://github.com/SAP/fundamental-ngx/issues/10084)) ([8fd1826](https://github.com/SAP/fundamental-ngx/commit/8fd182689ca4adf1b26e40100889db85c0fd2c54))
+
+
+
+## [0.42.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.0...v0.42.1-rc.0) (2023-06-26)
+
+
+
+# [0.42.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.31...v0.42.0) (2023-06-26)
+
+
+
+# [0.42.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.30...v0.42.0-rc.31) (2023-06-21)
+
+
+
+# [0.42.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.29...v0.42.0-rc.30) (2023-06-21)
+
+
+### Bug Fixes
+
+* **core:** bug where token would not be removed from mobile mode ([#10056](https://github.com/SAP/fundamental-ngx/issues/10056)) ([871d69b](https://github.com/SAP/fundamental-ngx/commit/871d69b3709ef402bd93f4422b9f95b6cf6072da))
+
+
+
 # [0.42.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.42.0-rc.28...v0.42.0-rc.29) (2023-06-21)
 
 

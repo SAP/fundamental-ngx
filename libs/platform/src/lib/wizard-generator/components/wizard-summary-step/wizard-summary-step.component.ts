@@ -10,13 +10,13 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
-import { WizardGeneratorFormsValue, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
-import { WizardStepForms } from '../wizard-generator-step/wizard-generator-step.component';
 import {
     WizardGeneratorSummaryItem,
     FormattedFormStep
 } from '../../interfaces/wizard-generator-summary-item.interface';
+import { WizardGeneratorFormsValue, WizardStepForms } from '../../interfaces/wizard-generator-forms.interface';
 
 @Component({
     selector: 'fdp-wizard-summary-step',

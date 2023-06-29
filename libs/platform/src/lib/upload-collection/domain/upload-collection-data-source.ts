@@ -3,6 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { DataSource } from '@fundamental-ngx/platform/shared';
 import {
+    UploadCollectionItem,
     CancelUploadNewFileEvent,
     DeleteEvent,
     DownloadEvent,
@@ -11,8 +12,7 @@ import {
     NewFolderEvent,
     UpdateVersionEvent,
     UploadEvent
-} from '../models/upload-collection-events.models';
-import { UploadCollectionItem } from '../models/upload-collection.models';
+} from '../models/upload-collection.models';
 import { UploadCollectionDataProvider } from './upload-collection-data-provider';
 
 export class UploadCollectionDataSource implements DataSource<UploadCollectionItem> {

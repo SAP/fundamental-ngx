@@ -1,13 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SmartFilterBarSettingsDialogComponent } from './smart-filter-bar-settings-dialog.component';
-import { PlatformSmartFilterBarModule, SmartFilterSettingsDialogConfig } from '../../public_api';
-import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { SmartFilterBarVisibilityCategory } from '../../interfaces/smart-filter-bar-visibility-category';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
+import { PlatformSmartFilterBarModule } from '../../smart-filter-bar.module';
 
 const mockData: SmartFilterSettingsDialogConfig = {
     fields: [
@@ -49,6 +50,10 @@ describe('SmartFilterBarSettingsDialogComponent', () => {
                 {
                     provide: DialogConfig,
                     useValue: dialogConfig
+                },
+                {
+                    provide: FD_DIALOG_FOCUS_TRAP_ERROR,
+                    useValue: true
                 }
             ]
         }).compileComponents();

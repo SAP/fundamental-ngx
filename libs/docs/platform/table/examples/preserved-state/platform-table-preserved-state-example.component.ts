@@ -1,17 +1,21 @@
-import { ChangeDetectionStrategy, Component, inject, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    inject,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
-    CollectionCustomFilter,
     CollectionDateFilter,
     CollectionFilter,
-    CollectionGroup,
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionSort,
     CollectionStringFilter,
-    FilterNumberStrategy,
-    FilterType,
     SortDirection,
     TableColumnsChangeEvent,
     TableComponent,
@@ -24,7 +28,7 @@ import {
     TableSortChangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table';
-import { map, Observable, of } from 'rxjs';
+import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-preserved-state-example',
@@ -35,7 +39,8 @@ import { map, Observable, of } from 'rxjs';
         {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
-        }
+        },
+        DestroyedService
     ]
 })
 export class PlatformTablePreservedStateExampleComponent {
@@ -50,6 +55,8 @@ export class PlatformTablePreservedStateExampleComponent {
 
     private _dateTimeAdapter = inject<DatetimeAdapter<FdDate>>(DatetimeAdapter);
 
+    private readonly _cdr = inject(ChangeDetectorRef);
+
     source = new ExampleTableDataSource(new ExampleTableProvider(this.items, this._dateTimeAdapter));
 
     page = 1;
@@ -62,11 +69,53 @@ export class PlatformTablePreservedStateExampleComponent {
 
     applyScroll = false;
 
+    private readonly _destroy$ = inject(DestroyedService);
+
+    private _refresh$: Subject<void> = new Subject();
+
     toggleTable(): void {
         this.applyScroll = !this.displayTable;
         this.displayTable = !this.displayTable;
         this.items = [...ITEMS];
         this.source = new ExampleTableDataSource(new ExampleTableProvider(this.items, this._dateTimeAdapter));
+
+        this._cdr.detectChanges();
+
+        this._listenOnTableData();
+    }
+
+    /**
+     * Method that listens on table's dataReceived event, then switches to tableRowsSet event to restore the scroll position.
+     * This is needed for cases when there's a delay in data source data retrieval.
+     */
+    private _listenOnTableData(): void {
+        this._refresh$.next();
+        this._refresh$.complete();
+
+        this._refresh$ = new Subject();
+
+        if (!this.table) {
+            return;
+        }
+
+        const refresh = merge(this._destroy$, this._refresh$);
+
+        this.table._dataSourceDirective.onDataReceived
+            .pipe(
+                switchMap(() => this.table.tableRowsSet),
+                takeUntil(refresh)
+            )
+            .subscribe(() => {
+                if (!this.applyScroll) {
+                    return;
+                }
+                this.applyScroll = false;
+                this.table.tableScrollable.setScrollTop(this.tableOffset, false);
+            });
+    }
+
+    ngAfterViewInit(): void {
+        this._listenOnTableData();
     }
 
     /** Update current set of visible columns. */
@@ -104,14 +153,6 @@ export class PlatformTablePreservedStateExampleComponent {
 
     setTableOffset(offset: number): void {
         this.tableOffset = offset;
-    }
-
-    onTableRowsSet(): void {
-        if (!this.applyScroll) {
-            return;
-        }
-        this.applyScroll = false;
-        this.table.tableScrollable.setScrollTop(this.tableOffset, false);
     }
 }
 
@@ -162,7 +203,8 @@ export class ExampleTableProvider extends TableDataProvider<ExampleItem> {
                     (state.page.currentPage - 1) * state.page.pageSize,
                     state.page.currentPage * state.page.pageSize
                 );
-            })
+            }),
+            delay(1000)
         );
     }
 

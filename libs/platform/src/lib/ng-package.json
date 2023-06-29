@@ -3,7 +3,7 @@
     "dest": "../../../../dist/libs/platform",
     "deleteDestPath": true,
     "lib": {
-        "entryFile": "./public_api.ts"
+        "entryFile": "./index.ts"
     },
     "allowedNonPeerDependencies": [
         "focus-trap",

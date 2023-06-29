@@ -23,33 +23,9 @@ import { SearchComponent } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription, takeUntil } from 'rxjs';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
-import { FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
+import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
-
-export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
-
-export type Breakpoints = Record<ShellbarSizes, number>;
-
-export type ShellbarGroup = 'product' | 'search' | 'actions';
-
-export interface NormalizedBreakpoint {
-    size: ShellbarSizes;
-    min: number;
-    max: number;
-}
-
-export type ShellbarGroupFlexOptions = Partial<{
-    [key in ShellbarGroup]: {
-        /**
-         * Whether to shrink group.
-         */
-        shrink?: boolean;
-        /**
-         * Whether to apply flex-basis: auto style.
-         */
-        flexBasisAuto?: boolean;
-    };
-}>;
+import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -67,7 +43,11 @@ export type ShellbarGroupFlexOptions = Partial<{
         contentDensityObserverProviders({
             supportedContentDensity: [ContentDensityMode.COZY],
             restrictChildContentDensity: true
-        })
+        }),
+        {
+            provide: FD_SHELLBAR_COMPONENT,
+            useExisting: ShellbarComponent
+        }
     ]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {

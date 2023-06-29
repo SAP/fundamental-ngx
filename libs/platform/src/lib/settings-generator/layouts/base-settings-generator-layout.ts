@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Directive, ElementRef, inject, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import { SettingsGeneratorComponent } from '../settings-generator.component';
 import { SettingsGeneratorService } from '../settings-generator.service';
 import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SettingsModel } from '../models/settings.model';
+import { FDP_SETTINGS_GENERATOR } from '../tokens';
 
 @Directive()
 export abstract class BaseSettingsGeneratorLayout implements OnInit {
@@ -21,7 +21,7 @@ export abstract class BaseSettingsGeneratorLayout implements OnInit {
     /**
      * Settings generator component ref.
      */
-    protected _settingsGenerator = inject(SettingsGeneratorComponent);
+    protected _settingsGenerator = inject(FDP_SETTINGS_GENERATOR);
 
     /**
      * Subject to notify subscriptions to unsubscribe when component destroys.

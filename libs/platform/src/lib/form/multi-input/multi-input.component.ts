@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     forwardRef,
     Host,
     Inject,
@@ -11,6 +12,7 @@ import {
     Input,
     OnInit,
     Optional,
+    Output,
     QueryList,
     Self,
     SkipSelf,
@@ -40,7 +42,7 @@ import { BaseListItem, ListComponent, ModifyItemEvent, SelectionType } from '@fu
 
 import { InputType } from '../input/input.component';
 import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
-import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
+import { BaseMultiInput } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
@@ -48,8 +50,22 @@ import { MultiInputConfig } from './multi-input.config';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import equal from 'fast-deep-equal';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { firstValueFrom, Observable } from 'rxjs';
 
 let uniqueHiddenLabel = 0;
+
+export class MultiInputSelectionChangeEvent {
+    /**
+     * Multi Input selection change event
+     * @param source Multi Input component
+     * @param payload Selected value
+     */
+    constructor(
+        public source: PlatformMultiInputComponent,
+        public payload: any // Contains selected item
+    ) {}
+}
 
 @Component({
     selector: 'fdp-multi-input',
@@ -152,6 +168,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @Input()
     addOnButtonClickFn: () => void;
 
+    /** Event emitted when item is selected. */
+    @Output()
+    readonly selectionChange = new EventEmitter<MultiInputSelectionChangeEvent>();
+
     /** @hidden */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
@@ -167,6 +187,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     @ViewChildren(BaseListItem)
     private readonly _listItems: QueryList<BaseListItem>;
+
+    /** @hidden */
+    private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
     constructor(
@@ -195,7 +218,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
         /** @hidden */
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        readonly contentDensityObserver: ContentDensityObserver
+        readonly contentDensityObserver: ContentDensityObserver,
+        /** @hidden */
+        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>
     ) {
         super(
             cd,
@@ -226,6 +251,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new MultiInputDataSource(providers.get(this.entityClass)!);
         }
+
+        this._getAriaLabel();
     }
 
     /** @hidden */
@@ -471,5 +498,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this._viewContainerRef,
             injector
         );
+    }
+
+    /** @hidden */
+    private async _getAriaLabel(): Promise<void> {
+        const lang = await firstValueFrom(this._language);
+        this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }

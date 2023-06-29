@@ -126,9 +126,43 @@
                             (toggleGroupRow)="_toggleGroupRow($event)"
                             (cellClicked)="_onCellClick($event.index, $event.row)"
                         ></tr>
+                        <ng-container *ngIf="row.children.length === 0 && (row.childItemsLoading$ | async)">
+                            <tr fd-table-row *fdkRepeat="3">
+                                <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+                                    <fd-skeleton
+                                        style="margin: auto 0"
+                                        type="text"
+                                        textLines="1"
+                                        width="60%"
+                                    ></fd-skeleton>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <!-- Last rendered child row. -->
+                        <ng-container *ngIf="row.parent?.lastChild?.index === row.index">
+                            <tr
+                                tabindex="-1"
+                                aria-hidden="true"
+                                class="fd-table__intersection-spy"
+                                [fdkIntersectionSpy]="pageScrollingThreshold"
+                                (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
+                                [style.top.px]="pageScrollingThreshold * -1"
+                            ></tr>
+                        </ng-container>
                     </ng-container>
                 </ng-container>
+                <tr
+                    tabindex="-1"
+                    aria-hidden="true"
+                    *ngIf="pageScrolling"
+                    class="fd-table__intersection-spy"
+                    [fdkIntersectionSpy]="pageScrollingThreshold"
+                    (intersected)="$event && _onSpyIntersect($event)"
+                    [style.top.px]="pageScrollingThreshold * -1"
+                ></tr>
             </tbody>
+
+            <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
 
             <!-- the tbody element below is so the scrollbar renders correctly -->
             <tbody
