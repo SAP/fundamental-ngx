@@ -1,21 +1,13 @@
 import { Directive, Injector } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import {
-    BaseDynamicFormGeneratorControl,
-    DynamicFormControl,
-    dynamicFormFieldProvider,
-    dynamicFormGroupChildProvider
-} from '@fundamental-ngx/platform/form';
+import { BaseDynamicFormGeneratorControl, DynamicFormControl } from '@fundamental-ngx/platform/form';
 import { take } from 'rxjs/operators';
 import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
 import { SmartFilterBarService } from '../../smart-filter-bar.service';
 import { SmartFilterBarConditionsDialogComponent } from '../smart-filter-bar-conditions-dialog/smart-filter-bar-conditions-dialog.component';
 import { SmartFilterBar } from '../../smart-filter-bar.class';
-import { smartFilterBarProvider } from '../../providers/smart-filter-bar.provider';
 
-@Directive({
-    providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
-})
+@Directive()
 export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGeneratorControl {
     /** @hidden */
     protected constructor(

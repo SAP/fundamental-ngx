@@ -18,3 +18,5 @@ export * from './interfaces/wizard-generator-item.interface';
 export * from './interfaces/wizard-navigation-buttons.interface';
 export * from './interfaces/wizard-title.interface';
 export * from './interfaces/wizard-generator-summary-item.interface';
+export * from './interfaces/wizard-generator-forms.interface';
+export * from './interfaces/wizard-step.interface';

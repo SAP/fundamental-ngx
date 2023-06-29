@@ -5,9 +5,9 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { DynamicFormGeneratorSelectComponent } from '@fundamental-ngx/platform/form';
 import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
 import { WizardGeneratorService } from '../../wizard-generator.service';
-import { WizardStepForms } from './wizard-generator-step.component';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { firstValueFrom } from 'rxjs';
+import { WizardStepForms } from '../../interfaces/wizard-generator-forms.interface';
 
 const items = [
     {

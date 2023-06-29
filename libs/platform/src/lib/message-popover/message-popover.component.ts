@@ -16,10 +16,14 @@ import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '@fundamental-ngx/platform/form';
 import { countBy, flatten } from 'lodash-es';
 import { takeUntil } from 'rxjs';
-import { MessagePopoverEntry } from './models/message-popover-entry.interface';
-import { MessagePopoverError, MessagePopoverErrorGroup } from './models/message-popover-error.interface';
+import {
+    MessagePopoverEntry,
+    MessagePopoverError,
+    MessagePopoverErrorGroup
+} from './models/message-popover-entry.interface';
 import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
 import { convertFormState } from './utils';
+import { MessagePopover } from './models/message-popover.interface';
 
 @Component({
     selector: 'fdp-message-popover',
@@ -29,7 +33,7 @@ import { convertFormState } from './utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
-export class MessagePopoverComponent implements OnInit {
+export class MessagePopoverComponent implements MessagePopover, OnInit {
     /** Message Popover Wrapper component. */
     @Input()
     wrapper: MessagePopoverWrapper;

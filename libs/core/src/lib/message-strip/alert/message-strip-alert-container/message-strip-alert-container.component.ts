@@ -7,6 +7,7 @@ import { MessageStripAlertContainerFooterComponent } from '../message-strip-aler
 import { map, Observable, startWith } from 'rxjs';
 
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
+import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.interface';
 
 /**
  * This will be rendered in the overlay. It is responsible for rendering the alerts and the footer.
@@ -32,7 +33,7 @@ export class MessageStripAlertContainerComponent implements AfterViewInit {
     /**
      * The list of the elements that are attached to the container.
      */
-    attachedElements: ComponentPortal<MessageStripAlertComponent>[] = [];
+    attachedElements: ComponentPortal<MessageStripAlert>[] = [];
 
     /**
      * List of the rendered message strip alerts. It is used in the footer and is injected into the
@@ -46,7 +47,7 @@ export class MessageStripAlertContainerComponent implements AfterViewInit {
 
     /** @hidden */
     @ViewChildren(MessageStripAlertComponent)
-    alerts: QueryList<MessageStripAlertComponent>;
+    alerts: QueryList<MessageStripAlert>;
 
     /** @hidden */
     ngAfterViewInit(): void {

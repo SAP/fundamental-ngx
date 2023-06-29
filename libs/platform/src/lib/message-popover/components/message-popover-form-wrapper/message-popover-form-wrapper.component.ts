@@ -20,11 +20,14 @@ import {
 import { BehaviorSubject, filter, startWith, Subject, Subscription, switchMap, takeUntil, zip } from 'rxjs';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
-import { MessagePopoverComponent } from '../../message-popover.component';
-import { MessagePopoverEntry } from '../../models/message-popover-entry.interface';
-import { MessagePopoverErrorGroup, MessagePopoverErrorText } from '../../models/message-popover-error.interface';
+import {
+    MessagePopoverEntry,
+    MessagePopoverErrorGroup,
+    MessagePopoverErrorText
+} from '../../models/message-popover-entry.interface';
 import { MessagePopoverWrapper } from '../../models/message-popover-wrapper.interface';
 import { convertFormState } from '../../utils';
+import { MessagePopover } from '../../models/message-popover.interface';
 
 export type MessagePopoverForm = NgForm | FormGroupDirective;
 
@@ -38,7 +41,7 @@ export type MessagePopoverForm = NgForm | FormGroupDirective;
 })
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
     /** Message Popover instance. */
-    messagePopover$ = new Subject<MessagePopoverComponent>();
+    messagePopover$ = new Subject<MessagePopover>();
     /**
      * User-passed forms.
      */
@@ -127,7 +130,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     /**
      * Sets Message Popover component instance.
      */
-    setMessagePopover(messagePopover: MessagePopoverComponent): void {
+    setMessagePopover(messagePopover: MessagePopover): void {
         this.messagePopover$.next(messagePopover);
         // this.messagePopover = messagePopover;
     }

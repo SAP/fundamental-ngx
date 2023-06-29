@@ -1,6 +1,7 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
-import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
+import { FilesValidatorService } from '../services/files-validator.service';
+import { FilesValidatorOutput } from '../models/upload-collection.models';
 
 /**
  * Directive that handles the drag and drop feature of the file input.

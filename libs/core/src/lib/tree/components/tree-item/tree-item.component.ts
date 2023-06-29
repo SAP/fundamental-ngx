@@ -30,6 +30,7 @@ import { FdTreeAcceptableDataSource, FdTreeDataSource } from '../../data-source/
 import { TreeItem, TreeItemState } from '../../models/tree-item';
 import { TreeService, SelectionModeModel } from '../../tree.service';
 import { BaseTreeItem } from '../../models/base-tree-item.class';
+import { TreeItemDirective } from '../../directives/tree-item.directive';
 
 @Component({
     selector: 'fd-tree-item',
@@ -250,6 +251,14 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     clicked = this._clicked$.asObservable();
 
     /** @hidden */
+    public readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _treeItemDir = inject<TreeItemDirective<T, P>>(TreeItemDirective, {
+        optional: true
+    });
+
+    /** @hidden */
     private readonly _treeService = inject(TreeService);
 
     /** @hidden */
@@ -266,6 +275,12 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         optional: true,
         skipSelf: true
     });
+
+    /** @hidden */
+    constructor() {
+        super();
+        this._treeItemDir?.setTreeItem(this);
+    }
 
     /** @hidden */
     ngOnInit(): void {

@@ -7,17 +7,17 @@ import {
     HostBinding,
     HostListener,
     Input,
-    Output,
-    Renderer2
+    Output
 } from '@angular/core';
 import { NestedListTitleDirective } from '../nested-list-directives';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NestedItemLink } from '../nested-item/nested-item.interface';
 
 @Directive({
     selector: '[fdNestedLink], [fd-nested-list-link]'
 })
-export class NestedLinkDirective {
+export class NestedLinkDirective implements NestedItemLink {
     /** Function that is called on click event dispatch on this element. */
     @Input()
     onClickCallback: () => void;
@@ -62,7 +62,6 @@ export class NestedLinkDirective {
     /** @hidden */
     constructor(
         public changeDetRef: ChangeDetectorRef,
-        private _renderer: Renderer2,
         private _elementRef: ElementRef,
         private _itemService: NestedItemService
     ) {}

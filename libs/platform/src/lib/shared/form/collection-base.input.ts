@@ -5,8 +5,7 @@ import { BaseInput } from './base.input';
 import { isFunction, isJsObject, isString } from '../utils/lang';
 import { isSelectItem, SelectItem } from '../domain/data-model';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { PlatformFormFieldControl } from './form-control';
-import { PlatformFormField } from './form-field';
+import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 /**
  * Defines specific behavior for Input controls which deals with list of values including:

@@ -11,7 +11,8 @@ import {
     inject,
     Output,
     EventEmitter,
-    OnDestroy
+    OnDestroy,
+    HostBinding
 } from '@angular/core';
 
 import { FD_COMBOBOX_COMPONENT, ComboboxInterface } from '@fundamental-ngx/core/combobox';
@@ -22,10 +23,10 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
-import { ShellbarComponent, ShellbarSizes } from '../shellbar.component';
-import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
+import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ShellbarSizes } from '../model/shellbar-sizes';
 
 /**
  * The component that represents shellbar actions.
@@ -54,9 +55,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-shellbar__group]': 'true',
-        '[class.fd-shellbar__group--actions]': 'true',
-        '[class.fd-shellbar__group--shrink]': '_shellbar?.groupFlex?.actions?.shrink',
-        '[class.fd-shellbar__group--basis-auto]': '_shellbar?.groupFlex?.actions?.flexBasisAuto'
+        '[class.fd-shellbar__group--actions]': 'true'
     }
 })
 export class ShellbarActionsComponent implements OnDestroy {
@@ -124,9 +123,21 @@ export class ShellbarActionsComponent implements OnDestroy {
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _shellbar = inject(ShellbarComponent, {
+    private readonly _shellbar = inject(FD_SHELLBAR_COMPONENT, {
         optional: true
     });
+
+    /** @hidden */
+    @HostBinding('class.fd-shellbar__group--shrink')
+    private get _groupShrink(): boolean {
+        return !!this._shellbar?.groupFlex?.actions?.shrink;
+    }
+
+    /** @hidden */
+    @HostBinding('class.fd-shellbar__group--basis-auto')
+    private get _groupBasisAuto(): boolean {
+        return !!this._shellbar?.groupFlex?.actions?.flexBasisAuto;
+    }
 
     /** @hidden */
     private _searchComponent: Nullable<SearchComponent>;

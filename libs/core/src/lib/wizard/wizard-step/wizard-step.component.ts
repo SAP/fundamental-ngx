@@ -20,12 +20,12 @@ import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
-import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
-import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
+import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS, FD_WIZARD_STEP_INDICATOR } from '../constants';
 import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
+import { WizardStepIndicator } from '../models/wizard-step';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -116,8 +116,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     content: WizardContentComponent;
 
     /** @hidden */
-    @ContentChild(WizardStepIndicatorComponent)
-    stepIndicator: WizardStepIndicatorComponent;
+    @ContentChild(FD_WIZARD_STEP_INDICATOR)
+    stepIndicator: WizardStepIndicator<WizardStepComponent>;
 
     /** The wizard label span element. */
     @ViewChild('wizardLabel', { read: ElementRef })

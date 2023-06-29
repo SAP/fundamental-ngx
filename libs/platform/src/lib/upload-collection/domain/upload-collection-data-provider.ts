@@ -5,6 +5,10 @@ import { Observable, of } from 'rxjs';
 
 import { DataProvider } from '@fundamental-ngx/platform/shared';
 import {
+    GroupByType,
+    UploadCollectionFile,
+    UploadCollectionFolder,
+    UploadCollectionItem,
     CancelUploadNewFileEvent,
     DeleteEvent,
     DownloadEvent,
@@ -13,12 +17,6 @@ import {
     NewFolderEvent,
     UpdateVersionEvent,
     UploadEvent
-} from '../models/upload-collection-events.models';
-import {
-    GroupByType,
-    UploadCollectionFile,
-    UploadCollectionFolder,
-    UploadCollectionItem
 } from '../models/upload-collection.models';
 
 /**
