@@ -495,7 +495,6 @@ describe('Popover test suite', () => {
             await expect(await getAlertText()).toBe(alertText1);
             await acceptAlert();
 
-            await scrollIntoView(popoverMobileExample + button);
             await click(popoverMobileExample + button);
             await click(mobileFooterButton, 1);
             await expect(await getAlertText()).toBe(alertText2);
