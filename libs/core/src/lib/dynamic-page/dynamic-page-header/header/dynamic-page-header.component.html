@@ -18,9 +18,9 @@
                     <span
                         class="fd-dynamic-page__title"
                         [class.fd-dynamic-page__title--wrap]="titleWrap"
-                        fdIgnoreClickOnSelection
+                        fdkIgnoreClickOnSelection
                     >
-                        {{ title }}
+                        <ng-template [ngTemplateOutlet]="_titleTemplate ? titleRef : defaultTitle"></ng-template>
                     </span>
                     <ng-content select="fd-dynamic-page-title-content"></ng-content>
                     <div class="fd-dynamic-page__toolbar-container" (click)="stopPropagation($event)">
@@ -31,28 +31,24 @@
                     </div>
                 </div>
                 <div
-                    *ngIf="_collapsed && (subtitle || subtitleTemplate)"
+                    *ngIf="_collapsed && (subtitle || _subtitleTemplate)"
                     class="fd-dynamic-page__subtitle"
                     [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
-                    fdIgnoreClickOnSelection
+                    fdkIgnoreClickOnSelection
                 >
-                    <ng-container *ngIf="!subtitleTemplate; else subtitleRef">
-                        {{ subtitle }}
-                    </ng-container>
+                    <ng-container *ngTemplateOutlet="_subtitleTemplate ? subtitleRef : defaultSubtitle"></ng-container>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div
-    *ngIf="!_collapsed && (subtitle || subtitleTemplate)"
+    *ngIf="!_collapsed && (subtitle || _subtitleTemplate)"
     class="fd-dynamic-page__subtitle"
     [class.fd-dynamic-page__subtitle--wrap]="subtitleWrap"
-    fdIgnoreClickOnSelection
+    fdkIgnoreClickOnSelection
 >
-    <ng-container *ngIf="!subtitleTemplate; else subtitleRef">
-        {{ subtitle }}
-    </ng-container>
+    <ng-container *ngTemplateOutlet="_subtitleTemplate ? subtitleRef : defaultSubtitle"></ng-container>
 </div>
 
 <ng-template #dynamicPageGlobalActionsRef>
@@ -62,9 +58,31 @@
     <ng-content select="fd-dynamic-page-layout-actions"></ng-content>
 </ng-template>
 
+<ng-template #titleRef>
+    <ng-template
+        [ngTemplateOutlet]="_titleTemplate!.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: _collapsed }"
+    ></ng-template>
+</ng-template>
+
 <ng-template #subtitleRef>
     <ng-container
-        [ngTemplateOutlet]="subtitleTemplate"
+        [ngTemplateOutlet]="_subtitleTemplate!.templateRef"
         [ngTemplateOutletContext]="{ $implicit: _collapsed }"
     ></ng-container>
+</ng-template>
+
+<ng-template #defaultSubtitle>
+    {{ subtitle }}
+</ng-template>
+
+<ng-template #titleRef>
+    <ng-container
+        [ngTemplateOutlet]="_titleTemplate!.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: _collapsed }"
+    ></ng-container>
+</ng-template>
+
+<ng-template #defaultTitle>
+    {{ title }}
 </ng-template>

@@ -1,10 +1,17 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="overlay" *ngIf="visible">
     <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page">
-        <fd-dynamic-page-header
-            title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-            [subtitleTemplate]="subtitle"
-        >
+        <fd-dynamic-page-header title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
+            <span *fdDynamicPageHeaderTitle="let collapsed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit ({{
+                    collapsed ? 'collapsed' : 'not collapsed'
+                }})
+            </span>
+            <ng-container *fdDynamicPageHeaderSubtitle="let collapsed">
+                <span class="red-subtitle">Different parts</span> | <span class="blue-subtitle"> of the</span> |
+                <span class="green-subtitle">subtitle</span> | with
+                {{ collapsed ? 'collapsed' : 'not collapsed' }} header
+            </ng-container>
             <fd-breadcrumb>
                 <fd-breadcrumb-item>
                     <a fd-link href="#">Men</a>
@@ -199,8 +206,3 @@
         </fd-dynamic-page-footer>
     </fd-dynamic-page>
 </div>
-
-<ng-template #subtitle let-collapsed>
-    <span class="red-subtitle">Different parts</span> | <span class="blue-subtitle"> of the</span> |
-    <span class="green-subtitle">subtitle</span> | with {{ collapsed ? 'collapsed' : 'not collapsed' }} header
-</ng-template>

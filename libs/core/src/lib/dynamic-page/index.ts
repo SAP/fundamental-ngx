@@ -14,3 +14,6 @@ export * from './dynamic-page.module';
 export * from './dynamic-page.service';
 export * from './utils';
 export * from './deprecated-dynamic-page-compact.directive';
+export * from './models/title-directive-context';
+export * from './directives/dynamic-page-header-subtitle.directive';
+export * from './directives/dynamic-page-header-title.directive';

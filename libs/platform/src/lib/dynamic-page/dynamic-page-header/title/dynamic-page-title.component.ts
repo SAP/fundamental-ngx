@@ -14,6 +14,8 @@ import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dyn
 import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.component';
+import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
+import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 
 /**
  * Dynamic Page Title Component.
@@ -91,6 +93,14 @@ export class DynamicPageTitleComponent implements DynamicPageHeader {
     /** reference to image component */
     @ContentChild(DynamicPageTitleImageComponent)
     imageComponent: DynamicPageTitleImageComponent;
+
+    /** @hidden */
+    @ContentChild(DynamicPageHeaderTitleDirective)
+    _titleDirective: DynamicPageHeaderTitleDirective;
+
+    /** @hidden */
+    @ContentChild(DynamicPageHeaderSubtitleDirective)
+    _subtitleDirective: DynamicPageHeaderSubtitleDirective;
 
     /**
      * @hidden

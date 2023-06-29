@@ -6,11 +6,9 @@ import {
     ContentChild,
     ElementRef,
     Input,
-    NgZone,
     OnDestroy,
     OnInit,
     Renderer2,
-    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -26,6 +24,9 @@ import { addClassNameToElement } from '../../utils';
 import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
+import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
 
 export const ActionSquashBreakpointPx = 1280;
 
@@ -66,11 +67,18 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
     subtitleWrap = false;
 
     /**
-     * Template used to provide a custom content for the subtitle page header area
-     * Use it by passing an ng-template with implicit boolean value if the header is collapsed
+     * @hidden
+     * Template used to provide a custom content for the subtitle page header area.
      */
-    @Input()
-    subtitleTemplate: TemplateRef<any>;
+    @ContentChild(DynamicPageHeaderSubtitleDirective)
+    _subtitleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
+
+    /**
+     * @hidden
+     * Template used to provide a custom content for the title page header area.
+     */
+    @ContentChild(DynamicPageHeaderTitleDirective)
+    _titleTemplate: Nullable<DynamicPageHeaderSubtitleDirective>;
 
     /** @hidden */
     @ContentChild(FD_BREADCRUMB_COMPONENT)
@@ -102,7 +110,6 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         private _elementRef: ElementRef<HTMLElement>,
         private _renderer: Renderer2,
         private _dynamicPageService: DynamicPageService,
-        private _ngZone: NgZone,
         private _changeDetRef: ChangeDetectorRef
     ) {}
 

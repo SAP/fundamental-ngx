@@ -18,6 +18,8 @@ import { DynamicPageTitleImageComponent } from './dynamic-page-header/title/dyna
 import { DynamicPageComponent } from './dynamic-page.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { FacetModule } from '@fundamental-ngx/core/facets';
+import { DynamicPageHeaderSubtitleDirective } from './directives/dynamic-page-header-subtitle.directive';
+import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-header-title.directive';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,9 @@ import { FacetModule } from '@fundamental-ngx/core/facets';
         PlatformButtonModule,
         BreadcrumbModule,
         ScrollingModule,
-        FacetModule
+        FacetModule,
+        DynamicPageHeaderSubtitleDirective,
+        DynamicPageHeaderTitleDirective
     ],
     exports: [
         DynamicPageComponent,
@@ -50,7 +54,9 @@ import { FacetModule } from '@fundamental-ngx/core/facets';
         DynamicPageHeaderComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
-        DynamicPageTitleImageComponent
+        DynamicPageTitleImageComponent,
+        DynamicPageHeaderSubtitleDirective,
+        DynamicPageHeaderTitleDirective
     ]
 })
 export class PlatformDynamicPageModule {}

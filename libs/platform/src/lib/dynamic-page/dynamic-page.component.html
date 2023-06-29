@@ -11,12 +11,29 @@
         [title]="titleComponent.title"
         [titleWrap]="titleComponent.titleWrap"
         [subtitle]="titleComponent.subtitle"
-        [subtitleTemplate]="titleComponent.subtitleTemplate"
         [subtitleWrap]="titleComponent.subtitleWrap"
     >
         <fd-breadcrumb>
             <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>
         </fd-breadcrumb>
+
+        <ng-container *ngIf="titleComponent._subtitleDirective">
+            <ng-container
+                *fdDynamicPageHeaderSubtitle="let hidden"
+                [ngTemplateOutlet]="titleComponent._subtitleDirective.templateRef"
+                [ngTemplateOutletContext]="{ $implicit: hidden }"
+            >
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="titleComponent._titleDirective">
+            <ng-container
+                *fdDynamicPageHeaderTitle="let hidden"
+                [ngTemplateOutlet]="titleComponent._titleDirective.templateRef"
+                [ngTemplateOutletContext]="{ $implicit: hidden }"
+            >
+            </ng-container>
+        </ng-container>
 
         <fd-dynamic-page-title-content *ngIf="titleComponent.keyInfoComponent">
             <ng-container [ngTemplateOutlet]="titleComponent.keyInfoComponent.contentTemplateRef"></ng-container>
