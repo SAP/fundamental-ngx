@@ -141,8 +141,17 @@ fdk-dynamic-portal {
         border-spacing: 0;
     }
 
-    /** Temporary until arrow keyboard navigation not implemented */
-    .fd-table__body:focus {
+    .fd-table__body__focus-mock {
+        position: absolute;
+        top: var(--fdTable_Header_Cell_Height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    .fd-table__body:focus + .fd-table__body__focus-mock {
         outline-offset: -0.1875rem;
         outline-width: 0.0625rem;
         outline-width: var(--sapContent_FocusWidth, 0.0625rem);

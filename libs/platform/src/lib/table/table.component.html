@@ -162,6 +162,8 @@
                 ></tr>
             </tbody>
 
+            <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
+
             <!-- the tbody element below is so the scrollbar renders correctly -->
             <tbody
                 *ngIf="_virtualScrollDirective?.virtualScroll"
