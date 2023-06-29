@@ -1,3 +1,12 @@
+## [0.42.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.9...v0.42.1-rc.10) (2023-06-29)
+
+
+### Bug Fixes
+
+* **docs:** placeimg is shutting down so new placeholder site ([#10061](https://github.com/SAP/fundamental-ngx/issues/10061)) ([9a8a4d1](https://github.com/SAP/fundamental-ngx/commit/9a8a4d10469e775094f1fe43cd30580ca307fc73))
+
+
+
 ## [0.42.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.8...v0.42.1-rc.9) (2023-06-29)
 
 
