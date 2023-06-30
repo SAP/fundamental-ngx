@@ -1,3 +1,12 @@
+## [0.42.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.10...v0.42.1-rc.11) (2023-06-30)
+
+
+### Features
+
+* **platform,core:** custom title and subtitle template for dynamic page ([#10065](https://github.com/SAP/fundamental-ngx/issues/10065)) ([6cd0daa](https://github.com/SAP/fundamental-ngx/commit/6cd0daa1e48b4e9d26b25ccb0fc36d044a3fc40a))
+
+
+
 ## [0.42.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.9...v0.42.1-rc.10) (2023-06-29)
 
 
