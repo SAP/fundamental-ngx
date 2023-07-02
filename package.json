@@ -97,7 +97,7 @@
     "@nx/plugin": "16.1.0",
     "@nx/workspace": "16.1.0",
     "@schematics/angular": "15.2.8",
-    "@swc-node/register": "^1.4.2",
+    "@swc-node/register": "^1.6.6",
     "@swc/cli": "0.1.62",
     "@swc/core": "^1.2.173",
     "@types/google.visualization": "0.0.68",
