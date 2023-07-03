@@ -8,7 +8,7 @@ const pluralization = new PluralizationSet1();
  */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Избери всички'
+        selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Отиди на предишния елемент',

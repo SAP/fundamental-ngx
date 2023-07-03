@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_POLISH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Zaznacz wszystko'
+        selectAllLabel: 'Zaznacz wszystko ({{selectedItems}} z {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Idź do poprzedniego elementu',

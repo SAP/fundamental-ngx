@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Select all'
+        selectAllLabel: 'Select all ({{selectedItems}} of {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',

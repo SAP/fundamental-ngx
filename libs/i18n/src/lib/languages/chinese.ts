@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_CHINESE: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: '全选'
+        selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '上一项',

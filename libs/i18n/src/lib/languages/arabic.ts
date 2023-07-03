@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_ARABIC: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'تحديد الكل'
+        selectAllLabel: 'حدد الكل ({{selectedItems}} من {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',

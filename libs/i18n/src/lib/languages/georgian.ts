@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'ყველას არჩევა'
+        selectAllLabel: 'ყველას არჩევა ({{selectedItems}} {{totalItems}}-დან)'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',

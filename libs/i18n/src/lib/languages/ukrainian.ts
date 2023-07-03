@@ -7,7 +7,7 @@ const pluralization = new PluralizationSet1();
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Вибрати все'
+        selectAllLabel: 'Вибрати все ({{selectedItems}} з {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',

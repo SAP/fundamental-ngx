@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Selekto të gjitha'
+        selectAllLabel: 'Selekto të gjitha ({{ selectedItems }} nga {{ totalItems }})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',

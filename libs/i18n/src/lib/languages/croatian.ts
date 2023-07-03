@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_CROATIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Odaberi sve'
+        selectAllLabel: 'Odaberi sve ({{selectedItems}} od {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',

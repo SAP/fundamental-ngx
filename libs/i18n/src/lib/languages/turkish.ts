@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Hepsini seç'
+        selectAllLabel: 'Hepsini seç ({{selectedItems}}/{{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Önceki öğeye git',

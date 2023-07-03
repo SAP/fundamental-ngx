@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_CZECH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Vybrat vše'
+        selectAllLabel: 'Vybrat vše ({{selectedItems}} z {{totalItems}})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
