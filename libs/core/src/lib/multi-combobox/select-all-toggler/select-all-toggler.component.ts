@@ -17,8 +17,12 @@ import { ListFocusItem } from '@fundamental-ngx/core/list';
     template: `
         <fd-toolbar>
             <div fd-form-item class="fd-multi-combobox-select-all__form-item">
-                <fd-checkbox tabIndexValue="-1" [ngModel]="checkboxValue" [tristate]="true"></fd-checkbox>
-                {{ 'coreMultiComboBox.selectAllLabel' | fdTranslate }}
+                <fd-checkbox tabIndexValue="-1" [ngModel]="checkboxValue" [tristate]="true">
+                    {{
+                        'coreMultiComboBox.selectAllLabel'
+                            | fdTranslate : { selectedItems: selectedItems.length, totalItems: flatItems.length }
+                    }}
+                </fd-checkbox>
             </div>
         </fd-toolbar>
     `,
