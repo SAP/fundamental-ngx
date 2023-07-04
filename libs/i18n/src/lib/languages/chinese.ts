@@ -454,7 +454,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         sortDialogSortByHeader: '排序方式',
         sortDialogNotSortedLabel: '（未排序）',
         sortDialogConfirmBtnLabel: '确定',
-        sortDialogCancelBtnLabel: '取消'
+        sortDialogCancelBtnLabel: '取消',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: '上一项',

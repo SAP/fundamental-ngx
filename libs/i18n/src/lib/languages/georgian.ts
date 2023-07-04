@@ -457,7 +457,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         sortDialogSortByHeader: 'დალაგებულია',
         sortDialogNotSortedLabel: '(დაულაგებელია)',
         sortDialogConfirmBtnLabel: 'კარგი',
-        sortDialogCancelBtnLabel: 'გაუქმება'
+        sortDialogCancelBtnLabel: 'გაუქმება',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'წინაზე გადასვლა',

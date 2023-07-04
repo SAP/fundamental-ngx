@@ -456,7 +456,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         sortDialogSortByHeader: 'आधार पर छाँटे',
         sortDialogNotSortedLabel: '(क्रमबद्ध नहीं)',
         sortDialogConfirmBtnLabel: 'अनुमोदन',
-        sortDialogCancelBtnLabel: 'रद्द करें'
+        sortDialogCancelBtnLabel: 'रद्द करें',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'पिछले पर जाएं',

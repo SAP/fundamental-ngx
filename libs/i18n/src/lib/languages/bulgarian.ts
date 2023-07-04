@@ -525,7 +525,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         sortDialogSortByHeader: 'Сортирай по',
         sortDialogNotSortedLabel: '(Несортирано)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Отмени'
+        sortDialogCancelBtnLabel: 'Отмени',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Отиди на предишнита',

@@ -467,7 +467,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         sortDialogSortByHeader: 'Ordinato per',
         sortDialogNotSortedLabel: '(Non ordinato)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Annulla'
+        sortDialogCancelBtnLabel: 'Annulla',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Vai a Precedente',

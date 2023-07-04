@@ -464,7 +464,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         sortDialogSortByHeader: 'Rendit sipas',
         sortDialogNotSortedLabel: '(Not Sorted)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Anulo'
+        sortDialogCancelBtnLabel: 'Anulo',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Shko te paraardhësja',
