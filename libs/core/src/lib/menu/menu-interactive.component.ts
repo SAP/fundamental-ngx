@@ -50,6 +50,7 @@ export class MenuInteractiveComponent {
 
     /** @hidden */
     @HostBinding('attr.aria-haspopup')
+    @HostBinding('class.has-child')
     ariaHaspopup = false;
 
     /** @hidden */
