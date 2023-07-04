@@ -1,3 +1,12 @@
+## [0.42.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.12...v0.42.1-rc.13) (2023-07-04)
+
+
+### Bug Fixes
+
+* **platform:** add aria-description for select all checkbox ([#10100](https://github.com/SAP/fundamental-ngx/issues/10100)) ([58e1567](https://github.com/SAP/fundamental-ngx/commit/58e1567e49404f3d836a7597274c36ddaa4f08a5))
+
+
+
 ## [0.42.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.11...v0.42.1-rc.12) (2023-07-04)
 
 
