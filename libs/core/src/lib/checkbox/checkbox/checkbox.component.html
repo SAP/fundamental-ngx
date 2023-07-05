@@ -26,6 +26,8 @@
     [class]="labelClass"
     [attr.title]="title"
     [class.fd-checkbox__label--required]="required"
+    [class.fd-checkbox__label--wrap]="wrapLabel && valignLabel === 'middle'"
+    [class.fd-checkbox__label--wrap-top-aligned]="wrapLabel && valignLabel === 'top'"
     (click)="_onLabelClick($event)"
 >
     <span class="fd-checkbox__checkmark" aria-hidden="true"></span>
