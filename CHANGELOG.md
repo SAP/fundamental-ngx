@@ -1,3 +1,12 @@
+## [0.42.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.13...v0.42.1-rc.14) (2023-07-05)
+
+
+### Features
+
+* **core:** added select all toggler to the multi combo box ([#9876](https://github.com/SAP/fundamental-ngx/issues/9876)) ([66476d9](https://github.com/SAP/fundamental-ngx/commit/66476d93eabb6eb0a4090cd6bf01ad3ee30d24dc))
+
+
+
 ## [0.42.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.12...v0.42.1-rc.13) (2023-07-04)
 
 
