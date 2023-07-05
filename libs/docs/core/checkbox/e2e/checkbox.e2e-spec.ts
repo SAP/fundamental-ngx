@@ -1,7 +1,6 @@
 import { CheckboxPo } from './checkbox.po';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
-    applyState,
     browserIsSafari,
     click,
     executeScriptBeforeTagAttr,
@@ -24,7 +23,6 @@ import {
     altCustomLabel,
     customLabel,
     customLabelsArr,
-    emptyDataArr,
     emptyString,
     stateClassesArr
 } from './checkbox-content';
@@ -41,6 +39,7 @@ describe('checkbox test suite', () => {
         checkbox,
         checkboxInput,
         checkboxLabel,
+        checkboxCheckmark,
         link,
         tristateOutput
     } = checkboxPage;
@@ -53,14 +52,14 @@ describe('checkbox test suite', () => {
         it('should mark checkbox', async () => {
             await scrollIntoView(standardCheckbox);
 
-            await expect(await executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).toEqual(
+            await expect(await executeScriptBeforeTagAttr(standardCheckbox + checkboxCheckmark, 'content')).toEqual(
                 emptyString,
                 'mark is present'
             );
 
             await click(standardCheckbox + checkboxLabel);
 
-            await expect(await executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).not.toEqual(
+            await expect(await executeScriptBeforeTagAttr(standardCheckbox + checkboxCheckmark, 'content')).not.toEqual(
                 emptyString,
                 'mark is not present'
             );
@@ -199,7 +198,7 @@ describe('checkbox test suite', () => {
 
             for (let i = 0; i < checkboxCount; i++) {
                 await expect(
-                    await executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)
+                    await executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxCheckmark, 'content', i)
                 ).not.toEqual(emptyString);
             }
             const textArr = (await getText(reactiveFormCheckbox)).split('\n');
@@ -218,7 +217,7 @@ describe('checkbox test suite', () => {
 
             for (let i = 0; i < checkboxCount; i++) {
                 await expect(
-                    await executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)
+                    await executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxCheckmark, 'content', i)
                 ).toEqual(emptyString);
             }
             const textArr2 = (await getText(reactiveFormCheckbox)).split('\n');
