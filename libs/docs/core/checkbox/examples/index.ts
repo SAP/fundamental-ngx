@@ -4,6 +4,7 @@ import { CheckboxDefaultExampleComponent } from './checkbox-default-example.comp
 import { CheckboxReactiveFormsExampleComponent } from './checkbox-reactive-forms-example.component';
 import { CheckboxStatesExampleComponent } from './checkbox-states-example.component';
 import { CheckboxTristateExampleComponent } from './checkbox-tristate-example.component';
+import { CheckboxLabelWrappingExampleComponent } from './checkbox-label-wrapping-example.component';
 
 export * from './checkbox-custom-label-example.component';
 export * from './checkbox-custom-values-example.component';
@@ -18,5 +19,6 @@ export const examples = [
     CheckboxTristateExampleComponent,
     CheckboxCustomLabelExampleComponent,
     CheckboxCustomValuesExampleComponent,
-    CheckboxReactiveFormsExampleComponent
+    CheckboxReactiveFormsExampleComponent,
+    CheckboxLabelWrappingExampleComponent
 ];
