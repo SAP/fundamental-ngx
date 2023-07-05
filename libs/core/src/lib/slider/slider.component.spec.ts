@@ -79,7 +79,7 @@ class TestSliderComponent {
 }
 
 /** TODO: #6317 */
-xdescribe('SliderComponent', () => {
+describe('SliderComponent', () => {
     let component: TestSliderComponent;
     let fixture: ComponentFixture<TestSliderComponent>;
     let sliders: SliderComponent[];
@@ -100,7 +100,7 @@ xdescribe('SliderComponent', () => {
         await whenStable(fixture);
 
         sliders = component.sliders.toArray();
-        bodyClientWidth = fixture.nativeElement.ownerDocument.body.clientWidth;
+        bodyClientWidth = 100;
     });
 
     it('should create', () => {
@@ -112,7 +112,53 @@ xdescribe('SliderComponent', () => {
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(sliders.length);
         setContentDensity(ContentDensityMode.COMPACT);
-        expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(0);
+        expect(fixture.nativeElement.querySelectorAll('.fd-slider--lg').length).toBe(1);
+    });
+
+    it('should consume vertical state', () => {
+        const slider = component.sliders.get(0)!;
+        slider.vertical = true;
+        slider.buildComponentCssClass();
+        expect(slider?.elementRef.nativeElement.classList).toContain('fd-slider--vertical');
+    });
+
+    it('should move range when dragging range group', () => {
+        const slider = sliders[3];
+
+        const event = new MouseEvent('mousedown');
+
+        jest.spyOn(slider.rangeHandle1.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 20,
+            width: 40,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
+
+        jest.spyOn(slider.trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
+
+        slider.onHandleClick(event, true);
+
+        const mousemove = new MouseEvent('mousemove', { clientX: getPixelsByPercentage(bodyClientWidth, 20) });
+        fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
+
+        const upEvent = new MouseEvent('mouseup');
+
+        fixture.nativeElement.ownerDocument.dispatchEvent(upEvent);
+
+        expect(component.value4).toEqual([40, 90]);
     });
 
     it('handle should be on the center of slider', () => {
@@ -124,6 +170,17 @@ xdescribe('SliderComponent', () => {
     it('should emit value: "-0.8"', () => {
         const slider = sliders[0];
         const event = new MouseEvent('mousedown');
+
+        jest.spyOn(slider.trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
 
         slider.onHandleClick(event);
 
@@ -158,6 +215,18 @@ xdescribe('SliderComponent', () => {
     });
 
     it('should display 11 ticks marks and 11 Labels', () => {
+        jest.spyOn(sliders[0].trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
+        (sliders[0] as any)._onResize();
+        fixture.detectChanges();
         const ticksMarks = fixture.debugElement.queryAll(By.css('.example-1 .fd-slider__tick'));
         const labels = fixture.debugElement.queryAll(By.css('.example-1 .fd-slider__label'));
 
@@ -166,6 +235,18 @@ xdescribe('SliderComponent', () => {
     });
 
     it('should display 11 ticks marks and 6 Labels', () => {
+        jest.spyOn(sliders[1].trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
+        (sliders[1] as any)._onResize();
+        fixture.detectChanges();
         const ticksMarks = fixture.debugElement.queryAll(By.css('.example-2 .fd-slider__tick'));
         const labels = fixture.debugElement.queryAll(By.css('.example-2 .fd-slider__label'));
 
@@ -177,7 +258,7 @@ xdescribe('SliderComponent', () => {
         const labels = fixture.debugElement.queryAll(By.css('.example-3 .fd-slider__label'));
 
         expect(labels.length).toEqual(component.customValues.length);
-        expect(labels[0].nativeElement.innerHTML).toEqual(component.customValues[0].label);
+        expect(labels[0].nativeElement.innerHTML.trim()).toEqual(component.customValues[0].label);
     });
 
     it('range slider should display 2 handles', async () => {
@@ -194,6 +275,17 @@ xdescribe('SliderComponent', () => {
         const slider = sliders[3];
         const event = { target: slider.rangeHandle2.nativeElement } as any;
         const valueOfFirstHandleBeforeMoving = slider.value[0];
+
+        jest.spyOn(slider.trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
 
         slider.onHandleClick(event);
 

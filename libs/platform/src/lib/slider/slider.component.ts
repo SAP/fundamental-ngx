@@ -90,6 +90,10 @@ export class SliderComponent extends BaseInput {
     /** Hides display of colored progress bar. */
     @Input()
     hideProgressBar = false;
+
+    /** Whether the slider should be rendered vertically. */
+    @Input()
+    vertical = false;
     /**
      * Event fired when the state of the slider changes.
      * *$event* can be used to retrieve the new state of the slider.

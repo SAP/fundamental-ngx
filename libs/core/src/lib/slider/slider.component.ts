@@ -221,6 +221,12 @@ export class SliderComponent
     @Input()
     rangeSliderHandle2CurrentValuePrefix: string;
 
+    /**
+     * Whether slider should have vertical alignment.
+     */
+    @Input()
+    vertical = false;
+
     /** @hidden */
     _position: number | number[] = 0;
 
@@ -239,7 +245,7 @@ export class SliderComponent
     }
 
     /** @hidden */
-    @ViewChild('track', { read: ElementRef })
+    @ViewChild('track', { read: ElementRef, static: true })
     trackEl: ElementRef<HTMLDivElement>;
 
     /** @hidden */
@@ -253,6 +259,10 @@ export class SliderComponent
     /** @hidden */
     @ViewChild('rangeHandle2', { read: ElementRef })
     rangeHandle2: ElementRef<HTMLDivElement>;
+
+    /** @hidden */
+    @ViewChild('rangeGroupHandle', { read: ElementRef, static: false })
+    _rangeGroupHandle: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChildren(PopoverComponent)
@@ -304,6 +314,9 @@ export class SliderComponent
      * whether to use value with a prefix for announcing
      */
     _useSliderValuePrefix = true;
+
+    /** @hidden */
+    _handles = SliderRangeHandles;
 
     /** @hidden */
     private _min = 0;
@@ -428,6 +441,7 @@ export class SliderComponent
             this.disabled ? 'is-disabled' : '',
             this._isRange ? 'fd-slider--range' : '',
             this.showTicks && this.showTicksLabels ? 'fd-slider--with-labels' : '',
+            this.vertical ? 'fd-slider--vertical' : '',
             this.class,
             this._platform.EDGE || this._platform.TRIDENT ? 'fd-slider__alternative-tick-width' : ''
         ];
@@ -470,12 +484,29 @@ export class SliderComponent
     }
 
     /** @hidden */
-    onHandleClick(event: MouseEvent): void {
+    onHandleClick(event: MouseEvent, group = false): void {
         if (this.disabled) {
             return;
         }
 
-        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
+        let firstHandleCoords: { x: number; y: number };
+        let rangeSliderStartCoords: { x: number; y: number };
+
+        if (group) {
+            rangeSliderStartCoords = {
+                x: event.clientX,
+                y: event.clientY
+            };
+
+            const firstHandleRect = this.rangeHandle1.nativeElement.getBoundingClientRect();
+
+            firstHandleCoords = {
+                x: firstHandleRect.x + firstHandleRect.width / 2,
+                y: firstHandleRect.y + firstHandleRect.height / 2
+            };
+        }
+
+        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent: MouseEvent) => {
             this._updatePopoversPosition();
 
             if (!this._isRange) {
@@ -484,8 +515,20 @@ export class SliderComponent
                 return;
             }
 
+            let coords = {
+                clientX: moveEvent.clientX,
+                clientY: moveEvent.clientY
+            };
+
             let handleIndex: SliderRangeHandles;
-            if (event.target === this.rangeHandle1.nativeElement) {
+            if (group) {
+                handleIndex = SliderRangeHandles.Both;
+                // Mimic dragging first handle to calculate the difference between old and new values.
+                coords = {
+                    clientX: firstHandleCoords!.x + (moveEvent.clientX - rangeSliderStartCoords!.x),
+                    clientY: firstHandleCoords!.y + (moveEvent.clientY - rangeSliderStartCoords!.y)
+                };
+            } else if (event.target === this.rangeHandle1.nativeElement) {
                 handleIndex = SliderRangeHandles.First;
             } else if (event.target === this.rangeHandle2.nativeElement) {
                 handleIndex = SliderRangeHandles.Second;
@@ -493,7 +536,7 @@ export class SliderComponent
                 return;
             }
 
-            const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
+            const value = this._calculateValueFromPointerPosition(coords, false) as number;
             this._setRangeHandleValueAndPosition(handleIndex, value);
 
             this._setValue(this._constructRangeModelValue());
@@ -506,7 +549,7 @@ export class SliderComponent
     }
 
     /** @hidden */
-    onKeyDown(event: KeyboardEvent): void {
+    onKeyDown(event: KeyboardEvent, handle?: SliderRangeHandles): void {
         if (this.disabled) {
             return;
         }
@@ -516,52 +559,66 @@ export class SliderComponent
             return;
         }
         event.preventDefault();
+        const upActionKey = KeyUtil.isKeyCode(event, [UP_ARROW, this.isRtl() ? LEFT_ARROW : RIGHT_ARROW]);
+        const downActionKey = KeyUtil.isKeyCode(event, [DOWN_ARROW, this.isRtl() ? RIGHT_ARROW : LEFT_ARROW]);
 
-        const diff = event.shiftKey ? this.jump : this.step;
-        let newValue: number | SliderTickMark | null = null;
-        let prevValue = this._position as number;
-        let handleIndex: SliderRangeHandles | undefined;
-        if (this._isRange) {
-            if (event.target === this.rangeHandle1.nativeElement) {
-                prevValue = this._handle1Value;
-                handleIndex = SliderRangeHandles.First;
-            } else if (event.target === this.rangeHandle2.nativeElement) {
-                prevValue = this._handle2Value;
-                handleIndex = SliderRangeHandles.Second;
-            }
-        }
-        if (this.isRtl()) {
-            if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
-                newValue = prevValue + diff;
-            }
-
-            if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-                newValue = prevValue - diff;
-            }
-        } else {
-            if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-                newValue = prevValue - diff;
-            }
-
-            if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
-                newValue = prevValue + diff;
-            }
-        }
-
-        if (newValue === null) {
+        if (!upActionKey && !downActionKey) {
             return;
         }
 
-        newValue = this._processNewValue(newValue as number, !this._isRange);
-
+        const diff = event.shiftKey ? this.jump : this.step;
+        let newValue: number | SliderTickMark | null = null;
         if (!this._isRange) {
+            newValue = (this._position as number) + diff * (upActionKey ? 1 : -1);
+
+            if (newValue === null) {
+                return;
+            }
+
+            newValue = this._processNewValue(newValue as number, !this._isRange);
+
             this._setValue(newValue);
-        } else if (handleIndex) {
-            this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
-            this._setValue(this._constructRangeModelValue());
+            this._updatePopoversPosition();
+            return;
         }
 
+        this._handleRangeKeydown(
+            handle === SliderRangeHandles.Both ? [SliderRangeHandles.First, SliderRangeHandles.Second] : handle!,
+            diff,
+            upActionKey
+        );
+
         this._updatePopoversPosition();
+    }
+
+    /** @hidden */
+    private _handleRangeKeydown(handles: SliderRangeHandles | SliderRangeHandles[], diff: number, up: boolean): void {
+        handles = Array.isArray(handles) ? handles : [handles];
+        const valueMap = new Map<
+            SliderRangeHandles,
+            { prev: number | SliderTickMark | null; current: number | SliderTickMark | null }
+        >();
+        handles.forEach((handle) => {
+            const prevValue = handle === SliderRangeHandles.First ? this._handle1Value : this._handle2Value;
+            let newValue: number | SliderTickMark | null = prevValue + diff * (up ? 1 : -1);
+            if (newValue === null) {
+                return;
+            }
+
+            newValue = this._processNewValue(newValue as number, !this._isRange);
+
+            valueMap.set(handle, { prev: prevValue, current: newValue });
+        });
+
+        if (Array.from(valueMap.values()).some((entry) => entry.current === entry.prev)) {
+            return;
+        }
+
+        valueMap.forEach((entry, handle) => {
+            this._setRangeHandleValueAndPosition(handle, entry.current as number);
+        });
+
+        this._setValue(this._constructRangeModelValue());
     }
 
     /** @hidden */
@@ -614,9 +671,12 @@ export class SliderComponent
     }
 
     /** @hidden */
-    private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
-        const { left, width } = this.trackEl.nativeElement.getBoundingClientRect();
-        let percentage = (event.clientX - left) / width;
+    private _calculateValueFromPointerPosition(
+        coords: { clientY: number; clientX: number },
+        takeCustomValue = true
+    ): number | SliderTickMark {
+        const { left, width, bottom, height } = this.trackEl.nativeElement.getBoundingClientRect();
+        let percentage = this.vertical ? (bottom - coords.clientY) / height : (coords.clientX - left) / width;
 
         if (this._isRtl) {
             percentage = 1 - percentage;
@@ -659,11 +719,25 @@ export class SliderComponent
         if (handleIndex === SliderRangeHandles.First) {
             this._handle1Value = value;
             this._handle1Position = position;
-        }
-
-        if (handleIndex === SliderRangeHandles.Second) {
+        } else if (handleIndex === SliderRangeHandles.Second) {
             this._handle2Value = value;
             this._handle2Position = position;
+        } else if (handleIndex === SliderRangeHandles.Both) {
+            // Calculate how much steps being skipped.
+            const oldValueIndex = this._valuesBySteps.indexOf(this._handle1Value);
+            const newValueIndex = this._valuesBySteps.indexOf(value);
+            const diff = oldValueIndex - newValueIndex;
+            const handle2ValueIndex = this._valuesBySteps.indexOf(this._handle2Value);
+
+            if (diff === 0 || this._valuesBySteps.length <= handle2ValueIndex - diff) {
+                return;
+            }
+
+            const positionShift = position - this._handle1Position;
+            this._handle1Position = position;
+            this._handle2Position = this._handle2Position + positionShift;
+            this._handle1Value = value;
+            this._handle2Value = this._valuesBySteps[handle2ValueIndex - diff];
         }
 
         this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
@@ -761,7 +835,9 @@ export class SliderComponent
             return;
         }
 
-        return Math.floor(this.trackEl.nativeElement.getBoundingClientRect().width / MIN_DISTANCE_BETWEEN_TICKS);
+        const { width, height } = this.trackEl.nativeElement.getBoundingClientRect();
+
+        return Math.floor((this.vertical ? height : width) / MIN_DISTANCE_BETWEEN_TICKS);
     }
 
     /** @hidden */
