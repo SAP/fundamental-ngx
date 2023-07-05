@@ -23,7 +23,12 @@ import {
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
-import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import {
+    FocusKeyManagerItemDirective,
+    FocusKeyManagerListDirective,
+    Nullable,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
@@ -68,6 +73,22 @@ let paginationUniqueId = 0;
     preserveWhitespaces: true
 })
 export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
+    /** @hidden */
+    @ViewChild(FocusKeyManagerListDirective)
+    readonly _focusKeyManagerList: FocusKeyManagerListDirective;
+
+    /** @hidden */
+    @ViewChildren(FocusKeyManagerItemDirective)
+    readonly _focusKeyManagerItems: QueryList<FocusKeyManagerItemDirective>;
+
+    /** @hidden */
+    @ViewChild('pageInputElement', { read: ElementRef })
+    readonly _pageInputElement: ElementRef;
+
+    /** @hidden */
+    @ViewChild('currentPageElement', { read: ElementRef })
+    readonly _currentPageElement: ElementRef;
+
     /** Id for the pagination component. If omitted, a unique one is generated. */
     @Input()
     id: string = 'fd-pagination-' + paginationUniqueId++;
@@ -188,6 +209,51 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     ariaLabel: string;
 
+    /**
+     * @deprecated use i18n capabilities instead
+     * Label for the 'Page ' page button. Page number passed as function parameter.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    pageLabel: Nullable<(page: number) => string>;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Function to create current page aria label, current page passed as a parameter of the function
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    currentPageAriaLabel: Nullable<(currentPage: number) => string>;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Page label to be shown before current page input in mobile mode.
+     * In conjuction with @pageLabelAfterInputMobile generates the label for the input.
+     * Example: 'Page' + input + pageLabelAfterInputMobile
+     * This property is mainly provided to support i18n.
+     */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    @Input()
+    labelBeforeInputMobile: string;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Page label to be shown after current page input in mobile mode. Pages count passed as the function parameter.
+     * In conjuction with @pageLabelBeforeInputMobile generates the label for the input.
+     * Example: pageLabelBeforeInputMobile + input + 'of 500'.
+     * This property is mainly provided to support i18n.
+     */
+    @Input()
+    labelAfterInputMobile: Nullable<(pagesCount: number) => string>;
+
+    /**
+     * @deprecated use i18n capabilities instead
+     * Current page input aria label, parameters passed to the function (currentPage: number, pagesCount: number).
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    inputAriaLabel: Nullable<(currentPage: number, pagesCount: number) => string>;
+
     /** Event emitted when the page is changed. */
     @Output()
     pageChangeStart = new EventEmitter<number>();
@@ -204,22 +270,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     _pagesAfterCurrent: number[];
-
-    /** @hidden */
-    @ViewChild(FocusKeyManagerListDirective)
-    readonly _focusKeyManagerList: FocusKeyManagerListDirective;
-
-    /** @hidden */
-    @ViewChildren(FocusKeyManagerItemDirective)
-    readonly _focusKeyManagerItems: QueryList<FocusKeyManagerItemDirective>;
-
-    /** @hidden */
-    @ViewChild('pageInputElement', { read: ElementRef })
-    readonly _pageInputElement: ElementRef;
-
-    /** @hidden */
-    @ViewChild('currentPageElement', { read: ElementRef })
-    readonly _currentPageElement: ElementRef;
 
     /**
      * Retrieves an object that represents
@@ -296,51 +346,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private get _isRtl(): boolean {
         return this._rtlService?.rtl.value;
     }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the 'Page ' page button. Page number passed as function parameter.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    pageLabel: (page: number) => string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Function to create current page aria label, current page passed as a parameter of the function
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    currentPageAriaLabel: (currentPage: number) => string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Page label to be shown before current page input in mobile mode.
-     * In conjuction with @pageLabelAfterInputMobile generates the label for the input.
-     * Example: 'Page' + input + pageLabelAfterInputMobile
-     * This property is mainly provided to support i18n.
-     */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    @Input()
-    labelBeforeInputMobile: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Page label to be shown after current page input in mobile mode. Pages count passed as the function parameter.
-     * In conjuction with @pageLabelBeforeInputMobile generates the label for the input.
-     * Example: pageLabelBeforeInputMobile + input + 'of 500'.
-     * This property is mainly provided to support i18n.
-     */
-    @Input()
-    labelAfterInputMobile: (pagesCount: number) => string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Current page input aria label, parameters passed to the function (currentPage: number, pagesCount: number).
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    inputAriaLabel: (currentPage: number, pagesCount: number) => string;
 
     /** @hidden */
     constructor(

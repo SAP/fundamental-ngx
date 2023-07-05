@@ -68,6 +68,23 @@ export class MessageBoxContainerComponent
     }
 
     /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '', this._class];
+    }
+
+    /** Handle end of animations, updating the state of the Message Toast. */
+    @HostListener('@state.done', ['$event'])
+    onAnimationEnd(event: AnimationEvent): void {
+        const { toState } = event;
+
+        if (toState === 'hidden') {
+            this._messageBoxRef._endClose$.next();
+            this._messageBoxRef._endClose$.complete();
+        }
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         setTimeout(() => {
             this._loadContent();
@@ -76,16 +93,10 @@ export class MessageBoxContainerComponent
     }
 
     /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '', this._class];
-    }
-
-    /** @hidden */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
-        if (event instanceof ComponentRef<any>) {
+        if (event instanceof ComponentRef) {
             event.changeDetectorRef.markForCheck();
-        } else if (event instanceof EmbeddedViewRef<any>) {
+        } else if (event instanceof EmbeddedViewRef) {
             event.markForCheck();
         }
     }
@@ -113,17 +124,6 @@ export class MessageBoxContainerComponent
         this._createFromComponent(MessageBoxDefaultComponent);
         const instance = (this._componentRef as ComponentRef<MessageBoxDefaultComponent>).instance;
         instance._messageBoxContent = content;
-    }
-
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this._messageBoxRef._endClose$.next();
-            this._messageBoxRef._endClose$.complete();
-        }
     }
 
     /**

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { Component } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -32,8 +31,6 @@ describe('DialogContainerComponent', () => {
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useClass: DialogRef }
             ]
-        }).overrideModule(BrowserDynamicTestingModule, {
-            set: { entryComponents: [ContentTestComponent] }
         });
     }));
 

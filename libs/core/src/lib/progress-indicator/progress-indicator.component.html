@@ -32,23 +32,20 @@
 </div>
 
 <ng-template #indicatorContainer>
-    <div
-        class="fd-progress-indicator__container"
-        *ngIf="calculateProgressBarWidth() === 0 || calculateProgressBarWidth() as progressBarWidth"
-    >
+    <div class="fd-progress-indicator__container" *ngIf="_progressBarWidth >= 0">
         <div
-            *ngIf="progressBarWidth > 0"
+            *ngIf="_progressBarWidth > 0"
             class="fd-progress-indicator__progress-bar"
             [class.fd-progress-indicator__progress-bar--animated]="animate"
-            [style.min-width.%]="progressBarWidth"
-            [style.width.%]="progressBarWidth"
+            [style.min-width.%]="_progressBarWidth"
+            [style.width.%]="_progressBarWidth"
         >
-            <ng-container *ngIf="progressBarWidth > 50">
+            <ng-container *ngIf="_progressBarWidth > 50">
                 <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
             </ng-container>
         </div>
         <div class="fd-progress-indicator__remaining" [style.min-width]="0">
-            <ng-container *ngIf="progressBarWidth <= 50">
+            <ng-container *ngIf="_progressBarWidth <= 50">
                 <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
             </ng-container>
         </div>

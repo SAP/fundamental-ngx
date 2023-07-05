@@ -57,6 +57,9 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     /** @hidden */
     hasPopover = false;
 
+    /** @hidden */
+    _progressBarWidth = 0;
+
     /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -67,6 +70,10 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.valueText) {
             this._handleTruncation();
+        }
+
+        if ('valueNow' in changes || 'valueMin' in changes || 'valueMax' in changes) {
+            this._progressBarWidth = this.calculateProgressBarWidth();
         }
     }
 
