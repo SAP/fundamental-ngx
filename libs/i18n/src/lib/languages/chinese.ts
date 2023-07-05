@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Chinese language
  */
 export const FD_LANGUAGE_CHINESE: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '上一项',
         rightNavigationBtnLabel: '下一项'

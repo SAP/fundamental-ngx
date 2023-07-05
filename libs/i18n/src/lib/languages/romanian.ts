@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Romanian language
  */
 export const FD_LANGUAGE_ROMANIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Selectează tot ({{selectedItems}} din {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',
         rightNavigationBtnLabel: 'Go to next item'

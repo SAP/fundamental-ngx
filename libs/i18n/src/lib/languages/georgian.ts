@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Georgian language
  */
 export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'ყველას არჩევა ({{selectedItems}} {{totalItems}}-დან)'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',
         rightNavigationBtnLabel: 'მომდევნო ელემენტზე გადასვლა'

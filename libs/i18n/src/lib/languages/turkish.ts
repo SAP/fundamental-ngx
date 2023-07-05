@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Turkish language
  */
 export const FD_LANGUAGE_TURKISH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Hepsini seç ({{selectedItems}}/{{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Önceki öğeye git',
         rightNavigationBtnLabel: 'Sonraki öğeye git'

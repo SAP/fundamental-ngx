@@ -156,9 +156,9 @@
         class="fd-multi-combobox__list fd-list--multi-input"
         [id]="this._cva.id + '-result'"
         role="listbox"
-        [style.maxHeight]="!mobile && maxHeight"
-        [style.minWidth]="!mobile && minWidth + 'px'"
-        [style.maxWidth]="autoResize && maxWidth + 'px'"
+        [style.max-height]="!mobile && maxHeight"
+        [style.min-width]="!mobile && minWidth + 'px'"
+        [style.max-width]="autoResize && maxWidth + 'px'"
         [attr.aria-labelledby]="this._cva.id + '-search'"
         aria-multiselectable="true"
     >
@@ -167,6 +167,13 @@
             [type]="this._cva.state"
             [innerHtml]="this._cva.stateMessage"
         ></fd-form-message>
+        <fd-multi-combobox-select-all-toggler
+            *ngIf="showSelectAll"
+            [selectAllHandler]="_handleSelectAllItems"
+            [valueChanges]="selectionChange"
+            [selectedItems]="_selectedSuggestions"
+            [flatItems]="_flatSuggestions"
+        ></fd-multi-combobox-select-all-toggler>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">

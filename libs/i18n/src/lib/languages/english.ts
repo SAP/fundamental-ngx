@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for English language
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Select all ({{selectedItems}} of {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',
         rightNavigationBtnLabel: 'Go to next item'

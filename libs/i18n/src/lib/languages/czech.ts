@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Czech language
  */
 export const FD_LANGUAGE_CZECH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Vybrat vše ({{selectedItems}} z {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
         rightNavigationBtnLabel: 'Přejít na další položku'

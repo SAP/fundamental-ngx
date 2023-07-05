@@ -230,7 +230,7 @@ describe('DayjsDatetimeAdapter', () => {
 
         expect(createAndFormat(50)).toEqual('1950');
         expect(createAndFormat(99)).toEqual('1999');
-        expect(createAndFormat(100)).toEqual('100');
+        expect(createAndFormat(100)).toEqual('0100');
     });
 
     it('should create Date with low year number', () => {
@@ -246,7 +246,7 @@ describe('DayjsDatetimeAdapter', () => {
 
         expect(createAndFormat(50)).toBe('01/01/1950');
         expect(createAndFormat(99)).toBe('01/01/1999');
-        expect(createAndFormat(100)).toBe('01/01/100');
+        expect(createAndFormat(100)).toBe('01/01/0100');
     });
 
     it(`should get today's date`, () => {
