@@ -190,10 +190,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         return super.getValue();
     }
 
-    /** Event emitted when item is selected. */
-    @Output()
-    selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
-
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     @Output() onDataRequested = new EventEmitter<void>();
