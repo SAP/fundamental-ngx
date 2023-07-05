@@ -57,18 +57,18 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     flatItems: Array<unknown> = [];
 
     /** @hidden */
-    get allIsSelected(): boolean {
+    get allAreSelected(): boolean {
         return this.selectedItems.length === this.flatItems.length;
     }
 
     /** @hidden */
     get someAreSelected(): boolean {
-        return this.selectedItems.length > 0 && !this.allIsSelected;
+        return this.selectedItems.length > 0 && !this.allAreSelected;
     }
 
     /** @hidden */
     get checkboxValue(): boolean | null {
-        if (this.allIsSelected) {
+        if (this.allAreSelected) {
             return true;
         }
         if (this.someAreSelected) {
@@ -84,17 +84,23 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     private changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    @HostListener('click', ['$event'])
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
-    onKeyDown(event: KeyboardEvent): void {
-        event.preventDefault();
-        event.stopPropagation();
+    onKeyDown($event: KeyboardEvent): void {
+        $event.preventDefault();
+        this.change(!this.checkboxValue);
+    }
+
+    /** @hidden */
+    @HostListener('click')
+    onClick(): void {
+        this.elementRef.nativeElement.focus();
         this.change(!this.checkboxValue);
     }
 
     /** @hidden */
     ngOnInit(): void {
+        this.tabindex = 0;
         this.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
             this.changeDetector.detectChanges();
         });
