@@ -67,4 +67,13 @@ export class CheckboxDocsComponent {
             code: getAssetFromModuleAssets(checkboxCustomLabelTsCode)
         }
     ];
+
+    checkboxLabelWrapping: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'checkbox-label-wrapping-example',
+            component: 'CheckboxLabelWrappingExampleComponent',
+            code: getAssetFromModuleAssets('checkbox-label-wrapping-example.component.ts')
+        }
+    ];
 }
