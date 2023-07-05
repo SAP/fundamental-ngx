@@ -61,10 +61,10 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     @ViewChild('labelElement')
     labelElement: ElementRef;
 
-    /** @hidden Whether input label should be wrapped */
+    /** Whether input label should be wrapped */
     @Input() wrapLabel: boolean;
 
-    /** @hidden Whether input label should be wrapped */
+    /** Vertical position of the label compared to the checkbox box */
     @Input() valignLabel: 'top' | 'middle' = 'middle';
 
     /** Sets the `aria-label` attribute to the element. */
