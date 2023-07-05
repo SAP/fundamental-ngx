@@ -27,7 +27,6 @@ import {
         <fd-menu #extendedMenu>
             <li fd-menu-item>
                 <button fd-menu-interactive toggle [(ngModel)]="toggleValue">
-                    <fd-menu-addon position="before" glyph="cart"></fd-menu-addon>
                     <span fd-menu-title>Toggle button</span>
                 </button>
             </li>

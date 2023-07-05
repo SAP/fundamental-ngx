@@ -73,6 +73,7 @@ export class MenuInteractiveComponent {
             this._startAddonInstance = this.addonPortalOutlet.attachComponentPortal(
                 new ComponentPortal(MenuAddonDirective)
             ).instance;
+            this._startAddonInstance.setAddonPosition = 'before';
         }
         return this._startAddonInstance;
     }
