@@ -1,4 +1,3 @@
-export const emptyDataArr = ['""', null, undefined];
 export const emptyString = '""';
 export const customLabelsArr = ['Yes', 'No', 'I dont have an opinion'];
 export const allMarkedTrue =
