@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { VerticalNavigationComponent } from './vertical-navigation.component';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListNavigationItemComponent, ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
@@ -56,8 +54,9 @@ describe('VerticalNavigationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [VerticalNavigationComponent, TestVerticalNavigationComponent, LinkComponent],
-            imports: [IconModule, ListModule]
+            declarations: [VerticalNavigationComponent, TestVerticalNavigationComponent],
+            imports: [ListModule],
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
 

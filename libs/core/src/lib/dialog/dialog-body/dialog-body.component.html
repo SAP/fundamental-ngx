@@ -1,4 +1,9 @@
 <ng-content></ng-content>
-<div class="fd-dialog__loader" *ngIf="dialogRef.onLoading | async">
-    <fd-busy-indicator [loading]="true" size="l"></fd-busy-indicator>
+<div class="fd-dialog__loader fd-busy-indicator-dialog" *ngIf="dialogRef.onLoading | async">
+    <fdk-dynamic-portal
+        class="fd-text"
+        *ngIf="dialogRef.loadingContent"
+        [auto]="dialogRef.loadingContent"
+    ></fdk-dynamic-portal>
+    <fd-busy-indicator [loading]="true" size="l" [label]="dialogRef.loadingLabel"></fd-busy-indicator>
 </div>
