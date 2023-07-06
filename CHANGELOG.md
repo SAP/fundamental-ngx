@@ -1,3 +1,12 @@
+## [0.42.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.14...v0.42.1-rc.15) (2023-07-06)
+
+
+### Bug Fixes
+
+* **platform:** table checkbox space scroll bug ([#10129](https://github.com/SAP/fundamental-ngx/issues/10129)) ([0f3f03f](https://github.com/SAP/fundamental-ngx/commit/0f3f03f64c3c4a8f7f613c19b1031f20f9fb1ee1))
+
+
+
 ## [0.42.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.13...v0.42.1-rc.14) (2023-07-05)
 
 
