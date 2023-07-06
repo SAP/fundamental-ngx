@@ -25,6 +25,7 @@ import {
 } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_AVATAR_COMPONENT } from './tokens';
+import { NgIf } from '@angular/common';
 
 let avatarUniqueId = 0;
 
@@ -49,7 +50,9 @@ const ALTER_ICON_OPTIONS = {
     ],
     host: {
         '[attr.tabindex]': '_tabindex'
-    }
+    },
+    standalone: true,
+    imports: [NgIf]
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */
