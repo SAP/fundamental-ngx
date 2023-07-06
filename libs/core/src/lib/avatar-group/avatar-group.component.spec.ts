@@ -6,7 +6,11 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarGroupComponent, AvatarGroupType } from './avatar-group.component';
-import { AvatarGroupModule } from './avatar-group.module';
+import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
+import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
+import { AvatarGroupOverflowButtonTextDirective } from './directives/avatar-group-overflow-button-text.directive';
+import { AvatarGroupOverflowBodyDirective } from './directives/avatar-group-overflow-body.directive';
+import { AvatarGroupOverflowItemDirective } from './directives/avatar-group-overflow-item.directive';
 
 const NUMBER_OF_ITEMS = 20;
 
@@ -44,7 +48,20 @@ const NUMBER_OF_ITEMS = 20;
                 </fd-popover>
             </fd-avatar-group>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [
+        AvatarGroupComponent,
+        PopoverModule,
+        AvatarModule,
+        ButtonModule,
+        AvatarGroupTestComponent,
+        AvatarGroupItemDirective,
+        AvatarGroupOverflowButtonDirective,
+        AvatarGroupOverflowButtonTextDirective,
+        AvatarGroupOverflowBodyDirective,
+        AvatarGroupOverflowItemDirective
+    ]
 })
 class AvatarGroupTestComponent {
     @ViewChild('avatarGroup')
@@ -62,8 +79,7 @@ describe('AvatarGroupComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AvatarGroupTestComponent],
-            imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule]
+            imports: [AvatarGroupTestComponent]
         }).compileComponents();
     }));
 

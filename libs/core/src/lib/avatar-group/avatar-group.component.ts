@@ -43,7 +43,8 @@ let avatarGroupCount = 0;
             provide: AVATAR_GROUP_COMPONENT,
             useExisting: forwardRef(() => AvatarGroupComponent)
         }
-    ]
+    ],
+    standalone: true
 })
 export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */

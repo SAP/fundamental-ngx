@@ -25,7 +25,8 @@ import { AVATAR_GROUP_FOCUSABLE_AVATAR_DIRECTIVE, FocusableWithElementRef } from
         '[class.fd-avatar-group__overflow-body--no-padding]': 'noPadding',
         '[class.fd-avatar-group__overflow-body--no-horizontal-scroll]': 'noHorizontalScroll',
         '[class.fd-avatar-group__overflow-body--no-vertical-scroll]': 'noVerticalScroll'
-    }
+    },
+    standalone: true
 })
 export class AvatarGroupOverflowBodyDirective implements AfterViewInit, OnDestroy {
     /** Remove the padding from the overflow body. */

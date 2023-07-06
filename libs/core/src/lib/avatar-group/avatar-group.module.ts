@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AvatarGroupComponent } from './avatar-group.component';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
@@ -11,8 +10,7 @@ import { AvatarGroupFocusableAvatarDirective } from './directives/avatar-group-f
 import { AvatarGroupPopoverControlDirective } from './directives/avatar-group-popover-control.directive';
 
 @NgModule({
-    imports: [CommonModule],
-    exports: [
+    imports: [
         AvatarGroupComponent,
         AvatarGroupItemDirective,
         AvatarGroupFocusableAvatarDirective,
@@ -22,7 +20,7 @@ import { AvatarGroupPopoverControlDirective } from './directives/avatar-group-po
         AvatarGroupOverflowButtonDirective,
         AvatarGroupOverflowButtonTextDirective
     ],
-    declarations: [
+    exports: [
         AvatarGroupComponent,
         AvatarGroupItemDirective,
         AvatarGroupFocusableAvatarDirective,

@@ -2,13 +2,15 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarGroupModule } from '../avatar-group.module';
+import { AvatarGroupOverflowButtonDirective } from './avatar-group-overflow-button.directive';
 import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
 
 @Component({
     template: `<button #directiveElement fd-avatar-group-overflow-button [size]="size" [color]="color">
         Avatar Group Overflow Button
-    </button>`
+    </button>`,
+    standalone: true,
+    imports: [AvatarGroupOverflowButtonDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement', { static: false })
@@ -24,8 +26,7 @@ describe('AvatarGroupOverflowButtonDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarGroupModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
