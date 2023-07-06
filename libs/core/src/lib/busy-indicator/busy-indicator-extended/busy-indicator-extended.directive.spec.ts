@@ -1,6 +1,7 @@
 import { Component, ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BusyIndicatorModule } from '../busy-indicator.module';
+import { BusyIndicatorExtendedDirective } from './busy-indicator-extended.directive';
+import { BusyIndicatorComponent } from '../busy-indicator.component';
 
 @Component({
     template: ` <div class="fd-message-toast" #container>
@@ -21,7 +22,7 @@ describe('BusyIndicatorExtendedDirective', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [BusyIndicatorModule]
+            imports: [BusyIndicatorExtendedDirective, BusyIndicatorComponent]
         }).compileComponents();
     }));
 

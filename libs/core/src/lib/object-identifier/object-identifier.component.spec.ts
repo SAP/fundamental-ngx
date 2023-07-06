@@ -35,7 +35,8 @@ describe('ObjectIdentifierComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectIdentifierComponent, TestObjectIdentifierComponent, LinkComponent]
+            declarations: [ObjectIdentifierComponent, TestObjectIdentifierComponent],
+            imports: [LinkComponent]
         }).compileComponents();
     }));
 

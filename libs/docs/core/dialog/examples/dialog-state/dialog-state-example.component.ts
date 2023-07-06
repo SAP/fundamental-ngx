@@ -49,6 +49,10 @@ export class DialogStateExampleComponent {
             ariaLabelledBy: 'fd-dialog-header-7',
             ariaDescribedBy: 'fd-dialog-body-7'
         });
-        dialogRef.loading(true);
+        dialogRef.loading({
+            isLoading: true,
+            loadingLabel: 'Some loading label',
+            loadingContent: '... now loading data from a far far away server from far far away.'
+        });
     }
 }

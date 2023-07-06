@@ -8,7 +8,13 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { DynamicComponentService, InitialFocusModule, ResizeModule, TemplateModule } from '@fundamental-ngx/cdk/utils';
+import {
+    DynamicComponentService,
+    DynamicPortalComponent,
+    InitialFocusModule,
+    ResizeModule,
+    TemplateModule
+} from '@fundamental-ngx/cdk/utils';
 
 import { DialogComponent } from './dialog.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
@@ -54,7 +60,8 @@ const declarations = [
         A11yModule,
         ScrollbarModule,
         PortalModule,
-        OverlayModule
+        OverlayModule,
+        DynamicPortalComponent
     ],
     exports: [declarations, BarModule, TitleModule, TemplateModule, InitialFocusModule],
     providers: [DialogService, DynamicComponentService]
