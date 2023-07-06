@@ -1354,8 +1354,8 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>, event: KeyboardEvent | MouseEvent): void {
-        if (row.state !== 'readonly') {
+    _onRowClick(row: TableRow<T> | null, event: KeyboardEvent | MouseEvent): void {
+        if (row && row.state !== 'readonly') {
             return;
         }
 
@@ -1371,8 +1371,10 @@ export class TableComponent<T = any>
             }
         }
 
-        this._emitRowNavigate(row);
-        this._emitRowActivate(row);
+        if (row) {
+            this._emitRowNavigate(row);
+            this._emitRowActivate(row);
+        }
     }
 
     /** @hidden */
