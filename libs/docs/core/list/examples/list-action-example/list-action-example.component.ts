@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, inject } from '@angular/core';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-list-action-example',
     templateUrl: './list-action-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
 export class ListActionExampleComponent {
@@ -15,7 +16,8 @@ export class ListActionExampleComponent {
 
     items = [1, 2, 3, 4, 5];
 
-    constructor(private readonly _destroy$: DestroyedService) {}
+    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _cdr = inject(ChangeDetectorRef);
 
     loadMore(): void {
         this.loading = true;
@@ -25,6 +27,7 @@ export class ListActionExampleComponent {
             .subscribe((result) => {
                 this.items = this.items.concat(result);
                 this.loading = false;
+                this._cdr.detectChanges();
             });
     }
 
