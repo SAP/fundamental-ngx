@@ -30,6 +30,9 @@ export const sliderSchema: any = {
                 },
                 disabled: {
                     type: 'boolean'
+                },
+                vertical: {
+                    type: 'boolean'
                 }
             }
         }

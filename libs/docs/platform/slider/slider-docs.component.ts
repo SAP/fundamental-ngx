@@ -37,7 +37,8 @@ export class PlatformSliderDocsComponent {
             showTicks: true,
             showTicksLabels: true,
             mode: 'single',
-            disabled: false
+            disabled: false,
+            vertical: false
         }
     };
 

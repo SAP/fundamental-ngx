@@ -9,9 +9,10 @@ import { OnlyDigitsModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
+const EXPORTS = [SliderComponent, SliderPositionDirective];
+
 @NgModule({
-    declarations: [SliderComponent, SliderPositionDirective],
-    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule],
-    exports: [SliderComponent, ContentDensityModule]
+    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule, ...EXPORTS],
+    exports: [...EXPORTS]
 })
 export class SliderModule {}
