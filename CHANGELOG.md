@@ -1,3 +1,17 @@
+# [0.43.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.15...v0.43.0-rc.0) (2023-07-07)
+
+
+### chore
+
+* **deps:** update theming-base-content v.11.5.0 ([#10120](https://github.com/SAP/fundamental-ngx/issues/10120)) ([e61a532](https://github.com/SAP/fundamental-ngx/commit/e61a5328878180285a0ee279a604fdeab881cd79))
+
+
+### BREAKING CHANGES
+
+* **deps:** SAP-Icons: icon name changed from `clinical-tast-tracker` to `clinical-task-tracker`
+
+
+
 ## [0.42.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.14...v0.42.1-rc.15) (2023-07-06)
 
 
