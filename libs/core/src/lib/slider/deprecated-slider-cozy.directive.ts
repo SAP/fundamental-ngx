@@ -4,7 +4,8 @@ import { Directive, forwardRef } from '@angular/core';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-slider[cozy]',
-    providers: [{ provide: CONTENT_DENSITY_DIRECTIVE, useExisting: forwardRef(() => DeprecatedSliderCozyDirective) }]
+    providers: [{ provide: CONTENT_DENSITY_DIRECTIVE, useExisting: forwardRef(() => DeprecatedSliderCozyDirective) }],
+    standalone: true
 })
 export class DeprecatedSliderCozyDirective extends DeprecatedCozyDirective {
     /** @hidden */

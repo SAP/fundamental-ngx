@@ -46,6 +46,12 @@
 </component-example>
 <code-example [exampleFiles]="form"></code-example>
 
+<fd-docs-section-title id="vertical" componentName="slider">Vertical slider</fd-docs-section-title>
+<component-example>
+    <fd-vertical-slider-example></fd-vertical-slider-example>
+</component-example>
+<code-example [exampleFiles]="form"></code-example>
+
 <fd-docs-section-title id="playground-slider" componentName="slider"> Playground Area </fd-docs-section-title>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-slider
@@ -59,6 +65,7 @@
         [showTicksLabels]="data.properties.showTicksLabels"
         [mode]="data.properties.mode"
         [hideProgressBar]="data.properties.hideProgressBar"
+        [vertical]="data.properties.vertical"
     ></fd-slider>
 
     <p>Value: {{ value | json }}</p>
