@@ -51,7 +51,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     mobilePopoverButton = 'fd-dialog-body button';
     popoverMobileExample = 'fd-popover-mobile-example ';
     mobileInput = 'fd-dialog-body input';
-    mobileFooterButton = 'fd-dialog-footer button';
+    mobileFooterButton = '.fd-dialog__footer .fd-button';
 
     async open(): Promise<void> {
         await super.open(this.url);
