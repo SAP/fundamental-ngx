@@ -1070,6 +1070,7 @@ export class UploadCollectionComponent
             this._totalItems = initDataSource.dataProvider.totalItems;
 
             this._countUnvisibleItems();
+            this._cdr.detectChanges();
         });
 
         return initDataSource;
