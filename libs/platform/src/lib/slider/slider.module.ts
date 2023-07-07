@@ -10,8 +10,14 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
 import { SliderComponent } from './slider.component';
 
 @NgModule({
-    declarations: [SliderComponent],
-    imports: [CommonModule, SliderModule, FormsModule, PlatformContentDensityDeprecationsModule, ContentDensityModule],
-    exports: [SliderComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    imports: [
+        CommonModule,
+        SliderModule,
+        FormsModule,
+        PlatformContentDensityDeprecationsModule,
+        ContentDensityModule,
+        SliderComponent
+    ],
+    exports: [SliderComponent]
 })
 export class PlatformSliderModule {}

@@ -5,7 +5,8 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-slider-position]'
+    selector: '[fd-slider-position]',
+    standalone: true
 })
 export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
     /** Position of the slider */

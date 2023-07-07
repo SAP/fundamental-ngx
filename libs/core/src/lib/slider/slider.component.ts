@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -17,7 +18,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
@@ -36,8 +37,8 @@ import {
     takeUntil
 } from 'rxjs/operators';
 
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
+import { Nullable, OnlyDigitsDirective } from '@fundamental-ngx/cdk/utils';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -53,6 +54,9 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { SliderPositionDirective } from './slider-position.directive';
+import { NgTemplateOutlet, NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -80,7 +84,19 @@ let sliderId = 0;
         '(mouseenter)': 'this._componentHovered$.next(true)',
         '(mouseleave)': 'this._componentHovered$.next(false)',
         '(focusout)': 'onTouched()'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        NgIf,
+        NgFor,
+        SliderPositionDirective,
+        PopoverModule,
+        FormsModule,
+        OnlyDigitsDirective,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class SliderComponent
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, ControlValueAccessor, CssClassBuilder, FormItemControl
@@ -373,6 +389,25 @@ export class SliderComponent
         _contentDensityObserver.subscribe();
     }
 
+    /**
+     * @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-slider',
+            this.disabled ? 'is-disabled' : '',
+            this._isRange ? 'fd-slider--range' : '',
+            this.showTicks && this.showTicksLabels ? 'fd-slider--with-labels' : '',
+            this.vertical ? 'fd-slider--vertical' : '',
+            this.class,
+            this._platform.EDGE || this._platform.TRIDENT ? 'fd-slider__alternative-tick-width' : ''
+        ];
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this._subscribeToRtl();
@@ -407,11 +442,6 @@ export class SliderComponent
     }
 
     /** @hidden */
-    private isRtl(): boolean {
-        return this._rtlService?.rtl.getValue();
-    }
-
-    /** @hidden */
     getValuenow(position: number | number[], sliderValueTarget: SliderValueTargets): string | number {
         return this.customValues.length > 0
             ? this.customValues[position as number].label
@@ -428,24 +458,6 @@ export class SliderComponent
         return this.customValues.length > 0 ? this.customValues[this.max as number].label : this.max;
     }
 
-    /**
-     * @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-slider',
-            this.disabled ? 'is-disabled' : '',
-            this._isRange ? 'fd-slider--range' : '',
-            this.showTicks && this.showTicksLabels ? 'fd-slider--with-labels' : '',
-            this.vertical ? 'fd-slider--vertical' : '',
-            this.class,
-            this._platform.EDGE || this._platform.TRIDENT ? 'fd-slider__alternative-tick-width' : ''
-        ];
-    }
     /** @hidden */
     onChange: (value: SliderControlValue) => void = () => {};
 
@@ -559,8 +571,8 @@ export class SliderComponent
             return;
         }
         event.preventDefault();
-        const upActionKey = KeyUtil.isKeyCode(event, [UP_ARROW, this.isRtl() ? LEFT_ARROW : RIGHT_ARROW]);
-        const downActionKey = KeyUtil.isKeyCode(event, [DOWN_ARROW, this.isRtl() ? RIGHT_ARROW : LEFT_ARROW]);
+        const upActionKey = KeyUtil.isKeyCode(event, [UP_ARROW, this._isRtl ? LEFT_ARROW : RIGHT_ARROW]);
+        const downActionKey = KeyUtil.isKeyCode(event, [DOWN_ARROW, this._isRtl ? RIGHT_ARROW : LEFT_ARROW]);
 
         if (!upActionKey && !downActionKey) {
             return;
@@ -587,6 +599,32 @@ export class SliderComponent
             diff,
             upActionKey
         );
+
+        this._updatePopoversPosition();
+    }
+
+    /** @hidden */
+    _updateValueFromInput(value: string, target: SliderValueTargets): void {
+        const newValue = this._processNewValue(+value) as number;
+        if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
+            this._setValue(newValue);
+            this.handle.nativeElement.focus();
+            this._updatePopoversPosition();
+
+            return;
+        }
+
+        if (target === SliderValueTargets.RANGE_SLIDER1) {
+            this._setRangeHandleValueAndPosition(SliderRangeHandles.First, newValue);
+            this.rangeHandle1.nativeElement.focus();
+        }
+
+        if (target === SliderValueTargets.RANGE_SLIDER2) {
+            this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, newValue);
+            this.rangeHandle2.nativeElement.focus();
+        }
+
+        this._setValue(this._constructRangeModelValue());
 
         this._updatePopoversPosition();
     }
@@ -619,32 +657,6 @@ export class SliderComponent
         });
 
         this._setValue(this._constructRangeModelValue());
-    }
-
-    /** @hidden */
-    _updateValueFromInput(value: string, target: SliderValueTargets): void {
-        const newValue = this._processNewValue(+value) as number;
-        if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
-            this._setValue(newValue);
-            this.handle.nativeElement.focus();
-            this._updatePopoversPosition();
-
-            return;
-        }
-
-        if (target === SliderValueTargets.RANGE_SLIDER1) {
-            this._setRangeHandleValueAndPosition(SliderRangeHandles.First, newValue);
-            this.rangeHandle1.nativeElement.focus();
-        }
-
-        if (target === SliderValueTargets.RANGE_SLIDER2) {
-            this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, newValue);
-            this.rangeHandle2.nativeElement.focus();
-        }
-
-        this._setValue(this._constructRangeModelValue());
-
-        this._updatePopoversPosition();
     }
 
     /** @hidden */

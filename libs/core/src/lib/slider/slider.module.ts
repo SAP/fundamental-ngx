@@ -10,9 +10,10 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { DeprecatedSliderCozyDirective } from './deprecated-slider-cozy.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
+const EXPORTS = [SliderComponent, SliderPositionDirective, DeprecatedSliderCozyDirective];
+
 @NgModule({
-    declarations: [SliderComponent, SliderPositionDirective, DeprecatedSliderCozyDirective],
-    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule],
-    exports: [SliderComponent, DeprecatedSliderCozyDirective, ContentDensityModule]
+    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule, ...EXPORTS],
+    exports: [...EXPORTS]
 })
 export class SliderModule {}

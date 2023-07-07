@@ -65,7 +65,9 @@ import { PlatformSliderModule } from './slider.module';
             </fdp-form-field>
         </fdp-form-group>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
 })
 class TestSliderComponent {
     customValues: SliderCustomValue[] = [
@@ -122,8 +124,7 @@ describe('PlatformSliderComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestSliderComponent],
-            imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
+            imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule, TestSliderComponent]
         }).compileComponents();
     });
 

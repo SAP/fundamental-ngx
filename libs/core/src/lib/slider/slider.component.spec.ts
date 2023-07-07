@@ -4,7 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { ContentDensityMode, mockedLocalContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityMode,
+    ContentDensityModule,
+    mockedLocalContentDensityDirective
+} from '@fundamental-ngx/core/content-density';
 
 import { SliderComponent } from './slider.component';
 import { SliderModule } from './slider.module';
@@ -88,7 +92,7 @@ describe('SliderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestSliderComponent],
-            imports: [SliderModule, FormsModule],
+            imports: [SliderModule, FormsModule, ContentDensityModule],
             providers: [contentDensityDirectiveProvider]
         }).compileComponents();
     }));
