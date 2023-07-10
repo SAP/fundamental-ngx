@@ -26,7 +26,7 @@
     </ng-template>
 
     <ng-template #popoverFooterContent>
-        <fd-button-bar label="Accept" fdType="positive" (click)="accept()"> </fd-button-bar>
-        <fd-button-bar label="Decline" fdType="negative" (click)="decline()"> </fd-button-bar>
+        <fd-button-bar label="Accept" fdType="positive" (click)="accept(); popoverMobile.close()"> </fd-button-bar>
+        <fd-button-bar label="Decline" fdType="negative" (click)="decline(); popoverMobile.close()"> </fd-button-bar>
     </ng-template>
 </fd-popover>

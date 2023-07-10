@@ -161,23 +161,6 @@ export class PopoverComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (!this.mobile) {
-            if (!this.popoverBody) {
-                this._popoverService.templateContent = this.templateRef;
-            }
-            this._popoverService.initialise(
-                this.trigger || this.triggerOrigin.elementRef,
-                this,
-                this.popoverBody
-                    ? {
-                          template: this.templateRef,
-                          container: this.container,
-                          popoverBody: this.popoverBody
-                      }
-                    : null
-            );
-        }
-
         this._setupView();
     }
 
@@ -230,17 +213,13 @@ export class PopoverComponent
 
     /** Opens the popover. */
     open(): void {
-        this.isOpen = true;
         this._popoverService.open();
-        this.isOpenChange.emit(this.isOpen);
         this._cdr.markForCheck();
     }
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
-        this.isOpen = false;
         this._popoverService.close(focusActiveElement);
-        this.isOpenChange.emit(this.isOpen);
         this._cdr.markForCheck();
     }
 
@@ -275,7 +254,23 @@ export class PopoverComponent
 
     /** @hidden Select and instantiate popover view mode */
     private _setupView(): void {
-        if (this.mobile) {
+        if (!this.mobile) {
+            this._popoverService._mobile = false;
+            if (!this.popoverBody) {
+                this._popoverService.templateContent = this.templateRef;
+            }
+            this._popoverService.initialise(
+                this.trigger || this.triggerOrigin.elementRef,
+                this,
+                this.popoverBody
+                    ? {
+                          template: this.templateRef,
+                          container: this.container,
+                          popoverBody: this.popoverBody
+                      }
+                    : null
+            );
+        } else {
             this._setupMobileMode();
         }
 
@@ -288,6 +283,8 @@ export class PopoverComponent
             providers: [{ provide: POPOVER_COMPONENT, useValue: this }],
             parent: this._injector
         });
+
+        this._popoverService._mobile = true;
 
         this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
             {

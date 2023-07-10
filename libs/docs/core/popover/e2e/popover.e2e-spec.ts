@@ -488,13 +488,19 @@ describe('Popover test suite', () => {
             await expect(await getValue(mobileInput)).toBe('0');
         });
 
-        it('should check alert messages appears', async () => {
+        it('should check alert message appears', async () => {
             await scrollIntoView(popoverMobileExample + button);
             await click(popoverMobileExample + button);
+            await waitForElDisplayed(mobileFooterButton);
             await click(mobileFooterButton);
             await expect(await getAlertText()).toBe(alertText1);
             await acceptAlert();
+        });
 
+        it('should check alert message 2 appears', async () => {
+            await scrollIntoView(popoverMobileExample + button);
+            await click(popoverMobileExample + button);
+            await waitForElDisplayed(mobileFooterButton);
             await click(mobileFooterButton, 1);
             await expect(await getAlertText()).toBe(alertText2);
             await acceptAlert();
