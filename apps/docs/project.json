@@ -169,7 +169,7 @@
                     }
                 ],
                 "scripts": ["node_modules/marked/marked.min.js"],
-                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
+                "allowedCommonJsDependencies": ["moment", "highlight.js", "fast-deep-equal", "focus-trap", "dayjs"],
                 "vendorChunk": true,
                 "extractLicenses": false,
                 "buildOptimizer": false,
