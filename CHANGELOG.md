@@ -1,3 +1,12 @@
+# [0.43.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.0...v0.43.0-rc.1) (2023-07-10)
+
+
+### Bug Fixes
+
+* **platform:** table expand all event ([#10136](https://github.com/SAP/fundamental-ngx/issues/10136)) ([c224315](https://github.com/SAP/fundamental-ngx/commit/c22431594acf80bd44a82023db51fdd14dd78f00))
+
+
+
 # [0.43.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.15...v0.43.0-rc.0) (2023-07-07)
 
 
