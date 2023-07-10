@@ -479,4 +479,34 @@ describe('TableComponent Tree View', async () => {
             });
         });
     });
+
+    describe('Expand / Collapse All functions', () => {
+        it('should handle expand all button click', () => {
+            const loadChildRowsSpy = spyOn(hostComponent.table._tableRowService, 'loadChildRows');
+            const allRowsExpandedSpy = spyOn(hostComponent.table.allRowsExpanded, 'emit');
+            const rowsChangedSpy = spyOn(hostComponent.table, 'onTableRowsChanged');
+
+            hostComponent.table.expandAll();
+
+            expect(loadChildRowsSpy).not.toHaveBeenCalled();
+            expect(allRowsExpandedSpy).toHaveBeenCalled();
+            expect(rowsChangedSpy).toHaveBeenCalled();
+        });
+
+        it('should handle collapse all button click', () => {
+            const allRowsExpandedSpy = spyOn(hostComponent.table.allRowsCollapsed, 'emit');
+            const rowsChangedSpy = spyOn(hostComponent.table, 'onTableRowsChanged');
+
+            hostComponent.table.collapseAll();
+
+            hostComponent.table._tableRows.forEach((row) => {
+                expect(row.expanded).toBeFalsy();
+                if (row.parent) {
+                    expect(row.hidden).toBeTruthy();
+                }
+            });
+            expect(allRowsExpandedSpy).toHaveBeenCalled();
+            expect(rowsChangedSpy).toHaveBeenCalled();
+        });
+    });
 });
