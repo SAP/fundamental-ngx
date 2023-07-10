@@ -1,4 +1,5 @@
 {
+    "name": "<%= projectName %>",
     "sourceRoot": "libs/docs/<%= projectDirName %>/<%= name %>",
     "projectType": "library",
     "prefix": "fdp-doc",
