@@ -945,12 +945,9 @@ export class TableComponent<T = any>
     /** expand all rows */
     expandAll(): void {
         const expandableRows = this._tableRows.filter((row) => row.type === TableRowType.TREE);
-        if (!this._dataSourceDirective.childDataSource) {
-            this._markAsExpanded(expandableRows);
-            return;
+        if (this._dataSourceDirective.childDataSource) {
+            this._tableRowService.loadChildRows(expandableRows);
         }
-
-        this._tableRowService.loadChildRows(expandableRows);
         this._markAsExpanded(expandableRows);
         this.allRowsExpanded.emit();
     }
