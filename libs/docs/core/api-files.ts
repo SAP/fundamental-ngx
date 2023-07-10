@@ -23,6 +23,7 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
+    avatarGroup: ['AvatarGroupComponent'],
     avatarGroupLegacy: [
         'AvatarGroupLegacyComponent',
         'AvatarGroupLegacyItemDirective',

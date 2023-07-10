@@ -1,0 +1,50 @@
+{
+    "name": "core-avatar-group",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/core/src/lib/avatar-group/src",
+    "prefix": "fd",
+    "tags": ["scope:fd", "type:lib"],
+    "projectType": "library",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+            "options": {
+                "project": "libs/core/src/lib/avatar-group/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/src/lib/avatar-group/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/avatar-group/**/*.ts",
+                    "libs/core/src/lib/avatar-group/**/*.html"
+                ]
+            }
+        }
+    }
+}

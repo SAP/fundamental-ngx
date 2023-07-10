@@ -1,0 +1,11 @@
+{
+    "name": "@fundamental-ngx/core/avatar-group",
+    "version": "VERSION_PLACEHOLDER",
+    "peerDependencies": {
+        "@angular/common": "ANGULAR_VER_PLACEHOLDER",
+        "@angular/core": "ANGULAR_VER_PLACEHOLDER"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0"
+    }
+}

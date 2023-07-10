@@ -11,6 +11,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/action-bar', name: 'Action Bar' },
     { url: 'core/action-sheet', name: 'Action Sheet' },
     { url: 'core/avatar', name: 'Avatar' },
+    { url: 'core/avatar-group', name: 'Avatar Group' },
     { url: 'core/avatar-group-legacy', name: 'Avatar Group[Legacy]' },
     { url: 'core/bar', name: 'Bar' },
     { url: 'core/breadcrumb', name: 'Breadcrumb' },
