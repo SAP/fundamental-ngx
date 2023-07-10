@@ -2,7 +2,7 @@
 export default {
     displayName: 'core-src-lib-avatar-group',
     preset: '../../../../../jest.preset.js',
-    setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+    setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
     coverageDirectory: '../../../../../coverage/libs/core/src/lib/avatar-group',
     transform: {
         '^.+\\.(ts|mjs|js|html)$': [
