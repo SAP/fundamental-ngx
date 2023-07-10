@@ -3323,7 +3323,12 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.5.0", "@sap-theming/theming-base-content@^11.4.0":
+"@sap-theming/theming-base-content@11.6.1":
+  version "11.6.1"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.1.tgz#1368380b196d5445c7698c7a1a2725366cc1f9e3"
+  integrity sha512-07e1P2sOEl/CadBP3iejy/IpcHBWzojCNfly6WURM3HZeZLVvfGmLXVv0HQeJYfE8t+wRhDMJhnJvX5fjVH3Nw==
+
+"@sap-theming/theming-base-content@^11.4.0":
   version "11.5.0"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.5.0.tgz#d83c172d1d03a3b845ca6ed737b192dd70e4610e"
   integrity sha512-peN7VGjgcLj7gJTPlZWFgHV/0wkSEqu/yq2TYyZmMOcjqpIWeWI/mItGOFslfCmpyeVVp5lvrfWkbrRQrig/Kg==
