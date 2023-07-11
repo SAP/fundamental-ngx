@@ -1,3 +1,21 @@
+# [0.43.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.2...v0.43.0-rc.3) (2023-07-10)
+
+
+### Bug Fixes
+
+* **core:** redundant popover open/close/event things ([#10063](https://github.com/SAP/fundamental-ngx/issues/10063)) ([6c5b4ca](https://github.com/SAP/fundamental-ngx/commit/6c5b4ca4aa1e30a6d714168f9078962c84ddba79))
+
+
+
+# [0.43.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.1...v0.43.0-rc.2) (2023-07-10)
+
+
+### Bug Fixes
+
+* fixed sap-component generator ([#10150](https://github.com/SAP/fundamental-ngx/issues/10150)) ([ec62a02](https://github.com/SAP/fundamental-ngx/commit/ec62a020a3c86e8f39b5494f6879766df74875a9))
+
+
+
 # [0.43.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.0...v0.43.0-rc.1) (2023-07-10)
 
 

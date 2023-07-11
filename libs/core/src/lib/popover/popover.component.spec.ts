@@ -64,26 +64,18 @@ describe('PopoverComponent', () => {
 
     it('should open popover', () => {
         jest.spyOn(popoverServiceStub, 'open');
-        jest.spyOn(component.isOpenChange, 'emit');
-        component.isOpen = false;
 
         component.open();
 
         expect(popoverServiceStub.open).toHaveBeenCalled();
-        expect(component.isOpenChange.emit).toHaveBeenCalled();
-        expect(component.isOpen).toBe(true);
     });
 
     it('should close popover', () => {
         jest.spyOn(popoverServiceStub, 'close');
-        jest.spyOn(component.isOpenChange, 'emit');
-        component.isOpen = true;
 
         component.close();
 
         expect(popoverServiceStub.close).toHaveBeenCalled();
-        expect(component.isOpenChange.emit).toHaveBeenCalled();
-        expect(component.isOpen).toBe(false);
     });
 
     it('should add ne wposition', () => {

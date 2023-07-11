@@ -1,5 +1,14 @@
 import { strings } from '@angular-devkit/core';
-import { formatFiles, generateFiles, names, readJson, Tree, writeJson } from '@nx/devkit';
+import {
+    formatFiles,
+    generateFiles,
+    names,
+    ProjectConfiguration,
+    readJson,
+    readProjectConfiguration,
+    Tree,
+    writeJson
+} from '@nx/devkit';
 import { SchematicsException } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import {
@@ -12,6 +21,15 @@ import {
 import { addEslintJsonOverrides } from './utils/linting';
 import { componentGenerator, libraryGenerator, UnitTestRunner } from '@nx/angular/generators';
 import path from 'path';
+import { updateProjectConfiguration } from '@nrwl/devkit';
+
+const updateProjectData = (tree: Tree, projectName: string, patchData: Partial<ProjectConfiguration>) => {
+    const project = readProjectConfiguration(tree, projectName);
+    updateProjectConfiguration(tree, projectName, {
+        ...project,
+        ...patchData
+    });
+};
 
 export default async function (tree: Tree, schema: SapComponentSchema) {
     await libraryGenerator(tree, {
@@ -43,7 +61,7 @@ export default async function (tree: Tree, schema: SapComponentSchema) {
     updateComponentFiles(tree, schema);
     addEslintJsonOverrides(tree, getProjectName(schema));
     addDocsLibrary(tree, schema);
-    addDocsLibraryToNx(tree, schema);
+    addDocsLibraryToTsConfig(tree, schema);
     updateDocsRoutes(tree, schema);
     addDocsRouteToNav(tree, schema);
     updateApiFiles(tree, schema);
@@ -52,12 +70,8 @@ export default async function (tree: Tree, schema: SapComponentSchema) {
     return;
 }
 
-function addDocsLibraryToNx(tree: Tree, schema: SapComponentSchema) {
-    const projectName = `docs-${getProjectName(schema)}`;
+function addDocsLibraryToTsConfig(tree: Tree, schema: SapComponentSchema) {
     const pathToSource = `libs/docs/${getProjectDirName(schema)}/${schema.name}`;
-    const angularJson = readJson(tree, '/angular.json');
-    angularJson.projects[projectName] = pathToSource;
-    writeJson(tree, '/angular.json', angularJson);
 
     const tsconfigJson = readJson(tree, '/tsconfig.base.json');
     tsconfigJson.compilerOptions.paths[getDocImportPath(schema)] = [`${pathToSource}/index.ts`];
@@ -153,6 +167,7 @@ function addDocsRouteToNav(tree: Tree, schema: SapComponentSchema) {
 function addDocsLibrary(tree: Tree, schema: SapComponentSchema) {
     generateFiles(tree, path.join(__dirname, 'files/docs'), `libs/docs/${getProjectDirName(schema)}/${schema.name}`, {
         ...names(schema.name),
+        projectName: `docs-${getProjectName(schema)}`,
         moduleName: strings.classify(schema.name),
         projectTag: getProjectTag(schema),
         projectDirName: getProjectDirName(schema),
@@ -166,12 +181,7 @@ function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
     const newName = `${getProjectDirName(schema)}-${schema.name}`;
 
     function updateAngularJson() {
-        const angularJson = readJson(tree, '/angular.json');
-
-        angularJson.projects[newName] = angularJson.projects[oldName];
-        delete angularJson.projects[oldName];
-
-        writeJson(tree, '/angular.json', angularJson);
+        updateProjectData(tree, oldName, { name: newName });
     }
 
     function updateTsConfig() {
@@ -212,10 +222,10 @@ function updateLibraryData(tree: Tree, schema: SapComponentSchema): void {
             getImportPath(schema)
         );
 
-        // add created module to exports from root package's public_api.ts
-        let modulePublicApiContent = tree.read(`${getLibraryDirectory(schema, false)}/public_api.ts`)?.toString() ?? '';
+        // add created module to exports from root package's index.ts
+        let modulePublicApiContent = tree.read(`${getLibraryDirectory(schema, false)}/index.ts`)?.toString() ?? '';
         modulePublicApiContent = modulePublicApiContent + `export * from '${getImportPath(schema)}';\n`;
-        tree.write(`${getLibraryDirectory(schema, false)}/public_api.ts`, modulePublicApiContent);
+        tree.write(`${getLibraryDirectory(schema, false)}/index.ts`, modulePublicApiContent);
     }
 
     updateAngularJson();
