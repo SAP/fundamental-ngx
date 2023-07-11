@@ -1,11 +1,15 @@
-name: Create release
+name: Create Release
 
 on:
     workflow_dispatch:
     push:
         branches:
             - main
+            - tmp_hotfix_branch
 env:
+    IS_HOTFIX: ${{ github.ref == 'refs/heads/tmp_hotfix_branch' }}
+    IS_PRERELEASE: ${{ github.event_name == 'push' && github.ref != 'refs/heads/tmp_hotfix_branch' }}
+    IS_MANUAL: ${{ contains(github.event.head_commit.message, 'chore(release)') }}
     NX_CLOUD_DISTRIBUTED_EXECUTION: true
     NX_CLOUD_DISTRIBUTED_EXECUTION_AGENT_COUNT: 5
     NX_BRANCH: ${{ github.event.number || github.ref_name }}
@@ -33,27 +37,52 @@ jobs:
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
-    run-release:
-        name: Run release
+    create_release:
+        name: Create release
         runs-on: ubuntu-latest
+        outputs:
+            npmTag: ${{ steps.releaseTags.outputs.npm }}
+            ghTag: ${{ steps.releaseTags.outputs.gh }}
         needs: initialize_cloud
         steps:
             - name: Fetch from origin repo
               uses: actions/checkout@v3
               with:
-                  ref: main # always fetch from main branch
+                  ref: ${{ fromJSON('["tmp_hotfix_branch", "main"]')[env.IS_HOTFIX] }}
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
+
+            - uses: ./.github/actions/set-up-git
+              name: Set up git user
+              with:
+                  name: ${{ secrets.GH_NAME }}
+                  email: ${{ secrets.GH_EMAIL }}
 
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
 
+            # Does conventional version bump and creates a tag
             - name: Get next version
               id: bumpVersion
               uses: ./.github/actions/bump-version
               with:
-                  isPrerelease: ${{ github.event_name == 'push' }}
-                  writeFile: true
+                  isManual: ${{ env.IS_MANUAL }}
+                  isPrerelease: ${{ env.IS_PRERELEASE }}
+                  isHotfix: ${{ env.IS_HOTFIX }}
+
+            # Takes bump tag and creates the release tags for both gh and npm.
+            # See implementation for more details
+            - name: Get Release Tags
+              uses: ./.github/actions/release-tags
+              id: releaseTags
+              with:
+                  bumpTag: ${{ steps.bumpVersion.outputs.releaseTag }}
+                  bumpedVersion: ${{ steps.bumpVersion.outputs.newVersion }}
+
+            - name: Update using lerna # Skipping push, in case something goes wrong later during build/prepare
+              if: env.IS_MANUAL == 'false'
+              run: |
+                  npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --message="chore(release): publish %v [ci skip]" --no-push
 
             - name: Lint and build
               uses: ./.github/actions/parallel-commands
@@ -72,24 +101,16 @@ jobs:
               with:
                   projects: '["cdk", "core", "i18n", "platform", "moment-adapter", "datetime-adapter", "cx"]'
                   token: ${{ secrets.NPM_TOKEN }}
-                  releaseTag: ${{ steps.bumpVersion.outputs.releaseTag }}
+                  releaseTag: ${{ steps.releaseTags.outputs.npm }}
 
-            - name: Update Changelog
-              run: npx conventional-changelog-cli -p angular -i CHANGELOG.md -s
+            # This step is for pushing into the main repo if version has been updated by the CI.
+            # Commit is created by the lerna version command
+            # This Will NOT trigger this workflow again, so it is okay
+            - name: Push changes
+              if: env.IS_MANUAL == 'false'
+              run: git push --follow-tags
 
-            - uses: ./.github/actions/set-up-git
-              name: Set up git user
-              with:
-                  name: ${{ secrets.GH_NAME }}
-                  email: ${{ secrets.GH_EMAIL }}
-
-            - name: Commit Changes
-              run: |
-                  git add .
-                  git commit -m "chore(release): release v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]" --no-verify
-                  git tag -a v${{ steps.bumpVersion.outputs.newVersion }} -m "chore(release): release v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
-                  git push --follow-tags
-
+            # This will delete locally some tags to properly generate the release notes, so it should go after the push to upstream
             - name: Generate Release Body
               id: generate_body
               uses: ./.github/actions/generate-conventional-release-notes
@@ -100,11 +121,29 @@ jobs:
                   prerelease: ${{ steps.bumpVersion.outputs.isPrerelease }}
                   tag: v${{ steps.bumpVersion.outputs.newVersion }}
                   body: ${{ steps.generate_body.outputs.generatedReleaseNotes }}
+
+            # This step is for pushing into the main only the version change, without anything else.
+            # This is useful when user created a Hotfix, and we need to sync the version on main
+            # if hotfix version is higher than latest stable and RC versions.
+            - name: Update version on main
+              if: env.IS_HOTFIX == 'true' && steps.releaseTags.outputs.mainNeedsSync == 'true'
+              run: |
+                  git checkout -f main
+                  npx lerna version ${{ steps.bumpVersion.outputs.newVersion }} --yes --force-publish --no-push --no-changelog --no-git-tag-version --no-changelog
+                  git add .
+                  git commit -m "chore(release): sync version after hotfix v${{ steps.bumpVersion.outputs.newVersion }} [ci skip]"
+                  git push origin main
+
+            # This step is responsible for cleaning up the temporary hotfix branch
+            - name: Delete Temporary hotfix branch
+              if: env.IS_HOTFIX == 'true'
+              run: git push origin --delete tmp_hotfix_branch
+
     gh_pages:
         name: Github Pages deploy
         runs-on: ubuntu-latest
-        needs: run-release
-        if: ${{ github.event_name != 'push' }}
+        needs: create_release
+        if: ${{ needs.create_release.outputs.npmTag == 'latest' }}
         steps:
             - name: Checkout
               uses: actions/checkout@v3
@@ -127,7 +166,7 @@ jobs:
     stop_agents:
         if: ${{ always() }}
         needs:
-            - run-release
+            - create_release
             - gh_pages
         name: Nx Cloud - Stop Agents
         runs-on: ubuntu-latest
