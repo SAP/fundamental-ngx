@@ -1,5 +1,5 @@
 name: Get version
-description: Get version from package.json and check if pre-release
+description: Get version from lerna.json or package.json and check if pre-release
 
 outputs:
     pre-release:

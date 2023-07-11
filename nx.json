@@ -79,6 +79,7 @@
         "default": ["{projectRoot}/**/*", "sharedGlobals"],
         "sharedGlobals": [
             "{workspaceRoot}/package.json",
+            "{workspaceRoot}/lerna.json",
             "{workspaceRoot}/angular.json",
             "{workspaceRoot}/tsconfig.json",
             "{workspaceRoot}/nx.json"
