@@ -7,7 +7,7 @@
 
 <div class="fdk-initial-focus-examples">
     <div *ngIf="currentExample === 'select'">
-        <fd-select fdkInitialFocus=".fd-select__button" placeholder="Autofocusable select">
+        <fd-select fdkInitialFocus=".fd-select__control" placeholder="Autofocusable select">
             <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
         </fd-select>
     </div>
