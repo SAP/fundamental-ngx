@@ -7,13 +7,13 @@
 
 <div class="fdk-initial-focus-examples">
     <div *ngIf="currentExample === 'select'">
-        <fd-select fd-initial-focus=".fd-select__button" placeholder="Autofocusable select">
+        <fd-select fdkInitialFocus=".fd-select__button" placeholder="Autofocusable select">
             <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
         </fd-select>
     </div>
     <div *ngIf="currentExample === 'combobox'">
         <fd-combobox
-            fd-initial-focus
+            fdkInitialFocus
             inputId="comboboxID1"
             ariaLabel="Standard"
             maxHeight="250px"
@@ -24,7 +24,7 @@
     </div>
     <div *ngIf="currentExample === 'datepicker'">
         <fd-date-picker
-            fd-initial-focus=".fd-input-group__button"
+            fdkInitialFocus=".fd-input-group__button"
             type="single"
             inputId="datePicker"
             [(ngModel)]="date"
@@ -33,7 +33,7 @@
     <div *ngIf="currentExample === 'textarea'">
         <div fd-form-item>
             <fd-slider
-                fd-initial-focus
+                fdkInitialFocus
                 [focusLastElement]="true"
                 mode="range"
                 tooltipMode="editable"
