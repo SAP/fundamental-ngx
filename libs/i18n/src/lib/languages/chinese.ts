@@ -369,6 +369,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         headerMenuUnfreeze: '解冻标题菜单',
         headerMenuFilter: '筛选',
         defaultEmptyMessage: '没有找到相关数据',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: '重置',
         editableCellNumberPlaceholder: '输入值',
         editableCellDatePlaceholder: '输入值',

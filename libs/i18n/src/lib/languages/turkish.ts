@@ -371,6 +371,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtre',
         defaultEmptyMessage: 'Hiçbir veri bulunamadı',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Sıfırla',
         editableCellNumberPlaceholder: 'Değer gir',
         editableCellDatePlaceholder: 'Değer gir',

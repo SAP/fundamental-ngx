@@ -99,16 +99,18 @@
 
 <ng-container *ngIf="column?.filterable && !filteringFromHeaderDisabled">
     <ng-template fdkTemplate="filteringPopoverItem" let-popover="popover">
-        <i fd-list-icon glyph="filter"></i>
-        <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
-            <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
-                'platformTable.headerMenuFilter' | fdTranslate
-            }}</label>
-            <input
-                fd-form-control
-                [id]="'fdp-table-column-filtering-' + column.name"
-                (keydown.enter)="_setColumnHeaderFilterBy(column.key, $any($event.target)?.value); popover?.close()"
-            />
+        <div fd-list-link style="cursor: auto">
+            <i fd-list-icon glyph="filter"></i>
+            <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
+                <label fd-form-label [for]="'fdp-table-column-filtering-' + column.name">{{
+                    'platformTable.headerMenuFilter' | fdTranslate
+                }}</label>
+                <input
+                    fd-form-control
+                    [id]="'fdp-table-column-filtering-' + column.name"
+                    (keydown.enter)="_setColumnHeaderFilterBy(column.key, $any($event.target)?.value); popover?.close()"
+                />
+            </div>
         </div>
     </ng-template>
 </ng-container>

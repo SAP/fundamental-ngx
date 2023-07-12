@@ -374,6 +374,8 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No se encontraron datos',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Restablecer',
         editableCellNumberPlaceholder: 'Ingresar valor',
         editableCellDatePlaceholder: 'Ingresar valor',

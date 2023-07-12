@@ -523,6 +523,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         headerMenuUnfreeze: 'Розморозити',
         headerMenuFilter: 'Фільтр',
         defaultEmptyMessage: 'Нічого не знайдено',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Скинути',
         editableCellNumberPlaceholder: 'Введіть значення',
         editableCellDatePlaceholder: 'Введіть значення',

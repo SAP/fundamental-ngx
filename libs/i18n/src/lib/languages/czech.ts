@@ -374,6 +374,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtr',
         defaultEmptyMessage: 'Nenalezena žádná data',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Resetovat',
         editableCellNumberPlaceholder: 'Zadejte hodnotu',
         editableCellDatePlaceholder: 'Zadejte hodnotu',

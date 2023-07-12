@@ -88,6 +88,10 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     freezeEndColumnsTo: string;
 
     /** @hidden */
+    @Input()
+    disableSelectionCheckbox = false;
+
+    /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items);
