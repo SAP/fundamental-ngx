@@ -8,8 +8,7 @@ async function publish({ currentTryNumber = 1, packageJsonPath, tag, token, acce
             package: packageJsonPath,
             token,
             tag,
-            access,
-            dryRun: true
+            access
         });
         info(`Published ${result.package}@${result.version}`);
     } catch (e) {
