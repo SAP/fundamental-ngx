@@ -7,22 +7,22 @@
 
 <div class="fdk-initial-focus-examples">
     <div *ngIf="currentExample === 'link'">
-        <a fd-initial-focus [routerLink]="['./']" fd-link aria-label="Standard">Link with autofocus</a>
+        <a fdkInitialFocus [routerLink]="['./']" fd-link aria-label="Standard">Link with autofocus</a>
     </div>
     <div *ngIf="currentExample === 'button'">
-        <button fd-initial-focus fd-button>Button with autofocus</button>
+        <button fdkInitialFocus fd-button>Button with autofocus</button>
     </div>
     <div *ngIf="currentExample === 'input'">
         <div fd-form-item>
             <label fd-form-label for="input-1">Default Input</label>
-            <input fd-initial-focus fd-form-control type="text" id="input-1" placeholder="Input with autofocus" />
+            <input fdkInitialFocus fd-form-control type="text" id="input-1" placeholder="Input with autofocus" />
         </div>
     </div>
     <div *ngIf="currentExample === 'textarea'">
         <div fd-form-item>
             <label fd-form-label for="input-1">Default Textarea</label>
             <textarea
-                fd-initial-focus
+                fdkInitialFocus
                 fd-form-control
                 type="text"
                 id="textarea-1"

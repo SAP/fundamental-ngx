@@ -32,7 +32,7 @@
             </fd-button-bar>
             <fd-button-bar
                 *ngIf="mobileConfig?.cancelButtonText"
-                fd-initial-focus
+                fdkInitialFocus
                 [label]="mobileConfig.cancelButtonText!"
                 (click)="handleDismiss()"
             >
