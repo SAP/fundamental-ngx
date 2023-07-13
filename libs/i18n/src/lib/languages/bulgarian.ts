@@ -441,7 +441,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         headerMenuFilter: 'Филтър',
         defaultEmptyMessage: 'Няма намерени данни',
         noVisibleColumnsMessage:
-            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
+            'В момента в таблицата няма видими колони. Моля, изберете нужните колони в настройките на таблицата.',
         resetChangesButtonLabel: 'Нулиране',
         editableCellNumberPlaceholder: 'Въведи стойност',
         editableCellDatePlaceholder: 'Въведи стойност',
