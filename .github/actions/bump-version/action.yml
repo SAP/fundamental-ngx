@@ -10,8 +10,8 @@ inputs:
         description: Whether this is a hotfix
         required: false
         default: 'false'
-    writeFile:
-        description: Write to package.json
+    isManual:
+        description: Whether this was triggered manually (by a commit message)
         required: false
         default: 'false'
 outputs:

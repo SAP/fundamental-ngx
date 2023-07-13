@@ -146,6 +146,7 @@ export class TableService {
 
         if (!equal(prevSortRules, state.sortBy)) {
             this.setTableState(setCurrentPageToState(state, 1));
+            this.buildSortRulesMap();
             const evt = { current: state.sortBy, previous: prevSortRules };
 
             this.needFetch$.next();

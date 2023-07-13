@@ -1,0 +1,22 @@
+name: Get release tags
+description: Outputs the release tag for the NPM and Github
+
+inputs:
+    bumpedVersion:
+        description: The version that was bumped
+        required: true
+    bumpTag:
+        description: The tag that was determined by the bump
+        required: true
+
+outputs:
+    gh:
+        description: Github release tag
+    npm:
+        description: NPM release tag
+    mainNeedsSync:
+        description: Whether the main branch needs to be synced with the release branch
+
+runs:
+    using: node16
+    main: ./index.js
