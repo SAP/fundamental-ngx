@@ -131,7 +131,10 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             )
             .subscribe((scrollable) => {
                 this.calculateVirtualScrollRows();
-                this._table.getTableState().scrollTopPosition = scrollable.getScrollTop();
+                this._table.setTableState({
+                    ...this._table.getTableState(),
+                    scrollTopPosition: scrollable.getScrollTop()
+                });
             });
     }
 }
