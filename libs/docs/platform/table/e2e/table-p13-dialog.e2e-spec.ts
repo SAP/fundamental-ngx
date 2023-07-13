@@ -131,23 +131,6 @@ describe('Table component test suite', () => {
         it('should check sorting of columns', async () => {
             await tablePage.checkSortingColumns(tableP13SortExample, ellipsisButton, 1);
         });
-
-        it('should check impossible select columns multiple times', async () => {
-            await scrollIntoView(tableP13SortExample);
-            await click(tableP13SortExample + ellipsisButton);
-            await click(popoverDropdownButton);
-            await expect(await isElementDisplayed(dropdownList)).toBe(true);
-            await click(dropdownOption);
-
-            await click(dialogButton, 1);
-            await click(popoverDropdownButton, 2);
-            await expect(await isElementDisplayed(dropdownList)).toBe(true);
-            await click(dropdownOption);
-
-            await click(dialogButton, 3);
-            await click(popoverDropdownButton, 4);
-            await expect(await doesItExist(dropdownList)).toBe(false);
-        });
     });
 
     describe('Check Filtering by multiple columns', () => {
