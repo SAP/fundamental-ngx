@@ -22,7 +22,7 @@
         <fd-button-bar
             *ngIf="_defaultDialogContent?.approveButton"
             fdType="emphasized"
-            fd-initial-focus
+            fdkInitialFocus
             [label]="_defaultDialogContent?.approveButton || ''"
             [fdCozy]="_defaultDialogConfiguration.mobile"
             (click)="_approveButtonClicked()"

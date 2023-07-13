@@ -70,6 +70,13 @@ describe('CarouselComponent', () => {
         expect(component.carousel.slides.length).toEqual(8);
     });
 
+    it('should handle changes to visibleSlidesCount', () => {
+        jest.spyOn(component.carousel.slideChange, 'emit');
+        component.visibleItemsCount = 2;
+        fixture.detectChanges();
+        expect(component.carousel.slideChange.emit).toHaveBeenCalled();
+    });
+
     it('should left navigation button be disabled and right navigation button enabled on default carousel', async () => {
         await whenStable(fixture);
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));

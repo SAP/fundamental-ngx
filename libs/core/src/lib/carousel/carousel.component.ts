@@ -12,12 +12,14 @@ import {
     HostListener,
     Input,
     NgZone,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     QueryList,
     Renderer2,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -64,7 +66,9 @@ class CarouselActiveSlides {
         '[style.width]': 'width'
     }
 })
-export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class CarouselComponent
+    implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy
+{
     /** ID for the Carousel. */
     @Input()
     @HostBinding('attr.id')
@@ -247,6 +251,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** @hidden */
     ngOnInit(): void {
         this._subscribeToRtl();
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.visibleSlidesCount && this.slides?.length > 0) {
+            this._notifySlideChange(SlideDirection.None);
+        }
     }
 
     /** @hidden */
