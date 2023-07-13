@@ -374,6 +374,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         headerMenuUnfreeze: "Déverrouillage du menu d'en-tête",
         headerMenuFilter: 'Filtrer',
         defaultEmptyMessage: 'Aucune donnée trouvée',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Réinitialiser',
         editableCellNumberPlaceholder: 'Entrez une valeur',
         editableCellDatePlaceholder: 'Entrez une valeur',

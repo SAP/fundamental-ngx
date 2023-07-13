@@ -239,6 +239,9 @@ export class TableComponent<T = any>
     /** Text displayed when table has no items. */
     @Input()
     emptyTableMessage: string;
+    /** Text displayed when table has no visible columns. */
+    @Input()
+    noVisibleColumnsMessage: string;
     /** Table without horizontal borders. */
     @Input()
     noHorizontalBorders = false;

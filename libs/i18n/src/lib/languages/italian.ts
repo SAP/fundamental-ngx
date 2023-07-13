@@ -382,6 +382,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         headerMenuUnfreeze: 'Sblocca',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'Nessun dato trovato',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Reset',
         editableCellNumberPlaceholder: 'Inserisci valore',
         editableCellDatePlaceholder: 'Inserisci valore',

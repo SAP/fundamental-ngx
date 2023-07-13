@@ -26,6 +26,7 @@
         tabIndexValue="-1"
         *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
         labelClass="fd-table__checkbox-label"
+        [fdkDisabled]="_fdpTableService.visibleColumnsLength === 0 || disableSelectionCheckbox"
         [tristate]="true"
         [tristateSelectable]="false"
         [ngModel]="checkedState"

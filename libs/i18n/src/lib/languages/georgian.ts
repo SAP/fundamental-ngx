@@ -372,6 +372,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         headerMenuUnfreeze: 'მენიუს განბლოკვა',
         headerMenuFilter: 'ფილტრი',
         defaultEmptyMessage: 'მონაცემები ვერ მოიძებნა',
+        noVisibleColumnsMessage:
+            'ამჟამად, ცხრილში არ არის ხილული სვეტები. გთხოვთ, აირჩიოთ თქვენთვის საჭირო სვეტები ცხრილის პარამეტრებში.',
         resetChangesButtonLabel: 'გააუქმეთ ცვლილებები',
         editableCellNumberPlaceholder: 'შეიყვანეთ რიცხვი',
         editableCellDatePlaceholder: 'შეიყვანეთ თარიღი',

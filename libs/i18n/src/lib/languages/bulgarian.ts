@@ -440,6 +440,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         headerMenuUnfreeze: 'Размрази',
         headerMenuFilter: 'Филтър',
         defaultEmptyMessage: 'Няма намерени данни',
+        noVisibleColumnsMessage:
+            'В момента в таблицата няма видими колони. Моля, изберете нужните колони в настройките на таблицата.',
         resetChangesButtonLabel: 'Нулиране',
         editableCellNumberPlaceholder: 'Въведи стойност',
         editableCellDatePlaceholder: 'Въведи стойност',

@@ -370,6 +370,8 @@ export const FD_LANGUAGE_BELARUSIAN: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'No data found',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Reset',
         editableCellNumberPlaceholder: 'Enter value',
         editableCellDatePlaceholder: 'Enter value',

@@ -50,11 +50,15 @@
                     [freezeColumnsTo]="freezeColumnsTo"
                     [freezeEndColumnsTo]="freezeEndColumnsTo"
                     (fdkClicked)="_onRowClick(null, $event)"
+                    [disableSelectionCheckbox]="_dataSourceTableRows.length === 0"
                 ></tr>
             </thead>
 
             <tbody
-                *ngIf="!!this._tableRowsVisible.length; else emptyTableTemplate"
+                *ngIf="
+                    !!this._tableRowsVisible.length && _tableService.visibleColumnsLength > 0;
+                    else emptyTableTemplate
+                "
                 fd-table-body
                 fdkDndList
                 #tableBody
@@ -192,8 +196,11 @@
                         <div #noDataWrapper>
                             <ng-content select="fdp-table-no-data-wrapper"></ng-content>
                         </div>
-                        <div *ngIf="!noDataWrapper.hasChildNodes()">
+                        <div *ngIf="!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0">
                             {{ emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate) }}
+                        </div>
+                        <div *ngIf="_tableService.visibleColumnsLength === 0">
+                            {{ noVisibleColumnsMessage || ('platformTable.noVisibleColumnsMessage' | fdTranslate) }}
                         </div>
                     </ng-container>
                 </div>
