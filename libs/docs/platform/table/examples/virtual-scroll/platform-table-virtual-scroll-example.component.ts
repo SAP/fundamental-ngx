@@ -29,6 +29,13 @@ export class PlatformTableVirtualScrollExampleComponent implements OnInit {
         this.state = this._getDefaultState();
     }
 
+    /**
+     * Simulating scroll position update. Once table is initialized app can set back preserved scrolling table
+     * position so table can scroll it its original state.
+     *
+     * Note: Bellow scrollTopPosition property is set based on the scrolling position that was read from
+     * this table example. Just some number to showcase this.
+     */
     _getDefaultState(): TableState {
         return {
             columnKeys: [],
