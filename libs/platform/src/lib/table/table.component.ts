@@ -1971,7 +1971,6 @@ export class TableComponent<T = any>
     private _initScrollPosition(): void {
         const state = this.getTableState();
 
-        console.log(`_initScrollPosition: ${state.scrollTopPosition}  - ${this._tableRows.length}`);
         if (!state.scrollTopPosition || this._tableRows.length === 0) {
             return;
         }
