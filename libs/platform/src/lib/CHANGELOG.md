@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.9...v0.43.0-rc.10) (2023-07-13)
+
+
+### Bug Fixes
+
+* **platform:** table console error ([#10163](https://github.com/SAP/fundamental-ngx/issues/10163)) ([3228343](https://github.com/SAP/fundamental-ngx/commit/3228343906f527c1f2b0455ba582af6bc6f7d91f))
+
+
+
+
+
 # [0.43.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.8...v0.43.0-rc.9) (2023-07-13)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/core",
-  "version": "0.43.0-rc.9",
+  "version": "0.43.0-rc.10",
   "schematics": "./schematics/collection.json",
   "ng-update": {
     "migrations": "./schematics/migrations.json"
