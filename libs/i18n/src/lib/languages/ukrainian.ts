@@ -524,7 +524,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         headerMenuFilter: 'Фільтр',
         defaultEmptyMessage: 'Нічого не знайдено',
         noVisibleColumnsMessage:
-            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
+            'На даний момент у таблиці немає видимих стовпців. Виберіть потрібні стовпці в налаштуваннях таблиці.',
         resetChangesButtonLabel: 'Скинути',
         editableCellNumberPlaceholder: 'Введіть значення',
         editableCellDatePlaceholder: 'Введіть значення',

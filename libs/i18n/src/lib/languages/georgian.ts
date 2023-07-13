@@ -373,7 +373,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         headerMenuFilter: 'ფილტრი',
         defaultEmptyMessage: 'მონაცემები ვერ მოიძებნა',
         noVisibleColumnsMessage:
-            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
+            'ამჟამად, ცხრილში არ არის ხილული სვეტები. გთხოვთ, აირჩიოთ თქვენთვის საჭირო სვეტები ცხრილის პარამეტრებში.',
         resetChangesButtonLabel: 'გააუქმეთ ცვლილებები',
         editableCellNumberPlaceholder: 'შეიყვანეთ რიცხვი',
         editableCellDatePlaceholder: 'შეიყვანეთ თარიღი',
