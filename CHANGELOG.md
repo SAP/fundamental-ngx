@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.10...v0.43.0-rc.11) (2023-07-13)
+
+
+### Bug Fixes
+
+* **platform:** remove aria-labelledby from platform table header cells ([#10157](https://github.com/SAP/fundamental-ngx/issues/10157)) ([41877a3](https://github.com/SAP/fundamental-ngx/commit/41877a3ff4541623d32f0913c261961614d9080e))
+
+
+
+
+
 # [0.43.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.9...v0.43.0-rc.10) (2023-07-13)
 
 
