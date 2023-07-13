@@ -20,7 +20,18 @@ import { TabbableElementService } from '../../services/tabbable-element.service'
         }
     ]
 })
-export class DeprecatedInitialFocusDirective extends DeprecatedSelector {}
+export class DeprecatedInitialFocusDirective extends DeprecatedSelector {
+    /** @hidden */
+    private _initialFocusDirective = inject(InitialFocusDirective, { host: true });
+
+    /**
+     * CSS selector of an element that should be focused.
+     */
+    @Input('fd-initial-focus')
+    set initialFocusTarget(value: string) {
+        this._initialFocusDirective.fdkInitialFocus = value;
+    }
+}
 
 @Directive({
     selector: '[fdkInitialFocus], [fdInitialFocus], [fd-initial-focus]',
@@ -38,8 +49,8 @@ export class InitialFocusDirective implements AfterViewInit {
     /**
      * CSS selector of an element that should be focused.
      */
-    @Input('fd-initial-focus')
-    focusableItem = '.fd-initial-focus-item';
+    @Input()
+    fdkInitialFocus = '.fd-initial-focus-item';
 
     /**
      * Whether initial focus enabled for a current element.
@@ -105,13 +116,14 @@ export class InitialFocusDirective implements AfterViewInit {
      * Searches for an appropriate focusable element
      */
     private _getFocusableElement(): HTMLElement | null {
-        if (!this.focusableItem) {
+        if (!this.fdkInitialFocus) {
             return this._tabbableService.getTabbableElement(this._elmRef.nativeElement, this.focusLastElement);
         }
 
         const autoFocusableItems = this._elmRef.nativeElement.querySelectorAll(
-            this.focusableItem
+            this.fdkInitialFocus
         ) as NodeListOf<HTMLElement>;
+        console.log(autoFocusableItems);
 
         if (autoFocusableItems.length > 0) {
             return !this.focusLastElement ? autoFocusableItems[0] : autoFocusableItems[autoFocusableItems.length - 1];

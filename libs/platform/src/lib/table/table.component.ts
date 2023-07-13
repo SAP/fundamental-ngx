@@ -815,7 +815,9 @@ export class TableComponent<T = any>
                 })
         );
 
-        this._focusableGrid.shortRowFocus = 'first';
+        if (this._focusableGrid) {
+            this._focusableGrid.shortRowFocus = 'first';
+        }
     }
 
     /** @hidden */
@@ -1982,7 +1984,7 @@ export class TableComponent<T = any>
         this._subscriptions.add(
             this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
                 setTimeout(() => {
-                    if (this._tableHeaderResizer.focusedCellPosition) {
+                    if (this._tableHeaderResizer.focusedCellPosition && this._focusableGrid) {
                         this._focusableGrid.focusCell(this._tableHeaderResizer.focusedCellPosition);
                     }
                 });

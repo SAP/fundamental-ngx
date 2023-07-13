@@ -38,7 +38,7 @@ export class TabsPo extends CoreBaseComponentPo {
     titleField = '#playgroundtitle';
     counterField = '#playgroundcounter';
     iconSelect = '#playgroundicon ';
-    acceleratedIcon = this.iconSelect + 'option:nth-child(2)';
+    acceleratedIcon = this.iconSelect + 'option[value="accelerated"]';
     fdIcon = this.playGroundExample + 'fd-icon';
 
     async open(): Promise<void> {

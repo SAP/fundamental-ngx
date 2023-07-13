@@ -103,6 +103,13 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @HostBinding('class.fd-list__item--unread')
     unread = false;
 
+    /**
+     * Whether the list item is byline
+     */
+    @Input()
+    @HostBinding('class.fd-list__item--byline')
+    byline = false;
+
     /** @deprecated Text to be read by screen reader for selected list item */
     @Input()
     selectedListItemScreenReaderText: string;

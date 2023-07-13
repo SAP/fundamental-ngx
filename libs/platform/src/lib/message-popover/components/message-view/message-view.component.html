@@ -67,41 +67,47 @@
                     <span fd-list-title>{{ group.group }}</span>
                 </li>
                 <ng-container *ngFor="let item of group.errors; let i = index">
-                    <li
-                        fd-list-item
-                        [tabindex]="i === 0 ? 0 : -1"
-                        [ngClass]="{ 'fd-list__item--byline': !!item.description.message }"
-                        (click)="_showDetails(item)"
-                    >
-                        <a fd-list-link [navigationIndicator]="!!item.description.message">
+                    <li fd-list-item [tabindex]="i === 0 ? 0 : -1" [byline]="true" (click)="_showDetails(item)">
+                        <ng-template #itemIcon>
                             <span
                                 fd-object-status
                                 class="fd-list__icon"
                                 [status]="item.state"
                                 [glyph]="'message-' + item.type"
                             ></span>
+                        </ng-template>
+                        <ng-template #listSubtitle>
+                            <span class="fd-list__subtitle">
+                                <ng-template
+                                    [ngTemplateOutlet]="headingTemplate"
+                                    [ngTemplateOutletContext]="{ $implicit: item }"
+                                ></ng-template>
+                            </span>
+                        </ng-template>
+                        <span
+                            fd-list-link
+                            [navigationIndicator]="!!item.description.message"
+                            *ngIf="item.element && !!item.description.message; else anchorListLink"
+                        >
+                            <ng-template [ngTemplateOutlet]="itemIcon"></ng-template>
                             <span fd-list-content>
                                 <span fd-list-title>
-                                    <a
-                                        tabindex="0"
-                                        *ngIf="item.element && !!item.description.message; else textHeading"
-                                        fd-link
-                                        (click)="_focusElement($event, item)"
-                                    >
+                                    <a tabindex="0" fd-link (click)="_focusElement($event, item)">
                                         {{ item.fieldName }}
                                     </a>
-                                    <ng-template #textHeading>
-                                        {{ item.fieldName }}
-                                    </ng-template>
                                 </span>
-                                <span class="fd-list__subtitle">
-                                    <ng-template
-                                        [ngTemplateOutlet]="headingTemplate"
-                                        [ngTemplateOutletContext]="{ $implicit: item }"
-                                    ></ng-template>
-                                </span>
+                                <ng-template [ngTemplateOutlet]="listSubtitle"></ng-template>
                             </span>
-                        </a>
+                        </span>
+                        <ng-template #anchorListLink>
+                            <a fd-list-link [navigationIndicator]="!!item.description.message">
+                                <ng-template [ngTemplateOutlet]="itemIcon"></ng-template>
+                                <span fd-list-content>
+                                    <span fd-list-title>{{ item.fieldName }}</span>
+                                    <ng-template [ngTemplateOutlet]="listSubtitle"></ng-template>
+                                </span>
+                            </a>
+                        </ng-template>
                     </li>
                 </ng-container>
             </ng-container>
