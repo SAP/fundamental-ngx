@@ -2232,10 +2232,10 @@
   dependencies:
     "@sap-theming/theming-base-content" "^11.4.0"
 
-"@fundamental-styles/cx@0.28.3":
-  version "0.28.3"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.28.3.tgz#34bd4364865ae8136221579eb3cc1aacf3aa84b5"
-  integrity sha512-yT/BfN04r8ZF9crG9QJS+PfPvhYmzy+YtTjmqLPZ1ssbGGm909ytwL4mdZJ+0+ZMzkgZJphtA1U027B0FcBkww==
+"@fundamental-styles/cx@0.30.0-rc.35":
+  version "0.30.0-rc.35"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.30.0-rc.35.tgz#ba746cf0cb7ddb916749c4dee882df8cfeeffc70"
+  integrity sha512-YCU42FIgSxkhQljCWMn0DoSHEqLYWxUijsq6p6vUu3/orkz4xks1Gs+LWGzyscMOEKs+CWgl6j8i2Ft/7FYgMw==
 
 "@fundamental-styles/fn@0.25.1-rc.16":
   version "0.25.1-rc.16"
