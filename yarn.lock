@@ -2237,6 +2237,13 @@
   resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.28.3.tgz#34bd4364865ae8136221579eb3cc1aacf3aa84b5"
   integrity sha512-yT/BfN04r8ZF9crG9QJS+PfPvhYmzy+YtTjmqLPZ1ssbGGm909ytwL4mdZJ+0+ZMzkgZJphtA1U027B0FcBkww==
 
+"@fundamental-styles/fn@0.25.1-rc.16":
+  version "0.25.1-rc.16"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/fn/-/fn-0.25.1-rc.16.tgz#f79a805aee7cfedc93c8b7cedb161d17ef1f8d00"
+  integrity sha512-fKtnIw/X6SO9UUlnCxeYFApP8QnTp2ydRTYynvKIb31KR+XD1gkutyqaikzeESj92+m6drQyiJMoknnZ1vdl2g==
+  dependencies:
+    fundamental-styles "0.25.1-rc.16"
+
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -9512,10 +9519,15 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.28.3:
-  version "0.28.3"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.28.3.tgz#d0044b0ebeba43369982fc8912a50f3d06238160"
-  integrity sha512-FUhMJXqvQZACTm8PN+6s5RQtnBn6fU5zA+0Y4ZAP92fszVU1ZbuGhmHvOtxs41dcmfUV4UjJ/hW98coKtCY6KA==
+fundamental-styles@0.25.1-rc.16:
+  version "0.25.1-rc.16"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.25.1-rc.16.tgz#8560a5e1411ac3dfbf6d593ba4cd7b1f3124f3d5"
+  integrity sha512-/ETPbzv98pMtqT5nNODkamxDBJsDPJ4KG/f5XEAvExvdx0+IvESuZQES6n1F3He1o1zMGLJj4HVqp4UJFiRGsQ==
+
+fundamental-styles@0.30.0-rc.35:
+  version "0.30.0-rc.35"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.30.0-rc.35.tgz#0827fa49ced8990cf75f17ce917e4a46c52cd117"
+  integrity sha512-x+Dd/G5gxVv9wpPbV3CZzWM6gYfMoImojaOCG2cX8dvBUbyYF8ANERXOyWzcRBceA1yNDksLU5b8O1VRjknWgA==
 
 gauge@^4.0.3:
   version "4.0.4"
