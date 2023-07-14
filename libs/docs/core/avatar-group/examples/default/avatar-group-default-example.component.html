@@ -42,6 +42,20 @@
             <div style="width: 400px; height: 500px">hello!</div>
         </ng-template>
     </ng-container>
+    <fd-avatar
+        fdAvatarGroupItem
+        [forceVisibility]="true"
+        [details]="details"
+        [border]="true"
+        [size]="size"
+        role="img"
+        title="Bla bla"
+        label="Bla bla"
+        ariaLabel="Bla bla avatar"
+    ></fd-avatar>
+    <ng-template #details>
+        <div style="width: 400px; height: 500px">hello THERE!</div>
+    </ng-template>
 </fd-avatar-group>
 
 <fd-avatar-group #avatarGroup_GroupType [size]="size" type="group">

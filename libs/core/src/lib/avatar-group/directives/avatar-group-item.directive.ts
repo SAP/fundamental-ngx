@@ -1,5 +1,4 @@
-import { Directive, ElementRef, inject, Input, TemplateRef } from '@angular/core';
-import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
+import { Directive, Input, TemplateRef } from '@angular/core';
 import { DestroyedService, FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
@@ -21,16 +20,4 @@ export class AvatarGroupItemDirective extends FocusableItemDirective {
     /** @hidden */
     @Input()
     details?: TemplateRef<any>;
-
-    /** @hidden */
-    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
-
-    /** @hidden */
-    avatarGroupHostConfig = inject(AVATAR_GROUP_HOST_CONFIG);
-
-    /** @hidden */
-    constructor() {
-        super();
-        this.fdkFocusableItem = this.avatarGroupHostConfig.type === 'individual';
-    }
 }

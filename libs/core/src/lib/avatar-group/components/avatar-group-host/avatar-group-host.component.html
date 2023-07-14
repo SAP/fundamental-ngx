@@ -1,0 +1,28 @@
+<ng-content></ng-content>
+<ng-template>
+    <ng-container *ngIf="hiddenItems.length > 0">
+        <fd-popover
+            [noArrow]="false"
+            additionalBodyClass="fd-avatar-group__overflow-body"
+            *ngIf="type === 'individual'; else overflowButtonTemplate"
+        >
+            <fd-popover-control>
+                <ng-template [ngTemplateOutlet]="overflowButtonTemplate"></ng-template>
+            </fd-popover-control>
+            <fd-popover-body>
+                <ng-template [ngTemplateOutlet]="overflowPopoverBody"></ng-template>
+            </fd-popover-body>
+        </fd-popover>
+    </ng-container>
+    <ng-template #overflowButtonTemplate>
+        <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1">
+            +{{ hiddenItems.length }}
+        </fd-avatar-group-overflow-button>
+    </ng-template>
+
+    <ng-template #overflowPopoverBody>
+        <div style="width: 300px; height: 300px; display: flex; align-items: center; justify-content: space-around">
+            Hello there
+        </div>
+    </ng-template>
+</ng-template>

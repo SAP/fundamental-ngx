@@ -67,7 +67,7 @@ export class AvatarGroupDataExampleService {
 
     private _generateImage(): { imageUrl?: string; glyph?: string } | null {
         const option = Math.floor(Math.random() * 3);
-
+        return null;
         switch (option) {
             case 1:
                 return { imageUrl: `https://i.pravatar.cc/400?u=${this._generateId()}` };

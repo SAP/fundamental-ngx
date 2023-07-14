@@ -9,7 +9,10 @@ import {
     Input,
     NgZone,
     OnInit,
-    QueryList
+    QueryList,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef
 } from '@angular/core';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { combineLatest, delayWhen, map, Observable, startWith, takeUntil } from 'rxjs';
@@ -19,7 +22,7 @@ import {
     HasElementRef,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
-import { PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.directive';
 import { AvatarGroupItemPortalDirective } from '../../directives/avatar-group-item-portal.directive';
 import { AvatarGroupOverflowButtonComponent } from '../avatar-group-overflow-button.component';
@@ -40,23 +43,16 @@ import { AvatarGroupHostConfig } from '../../types';
         '[class.fd-avatar-group--l]': 'size === "l"',
         '[class.fd-avatar-group--xl]': 'size === "xl"'
     },
-    template: `
-        <ng-content></ng-content>
-        <ng-container *ngIf="hiddenItems.length > 0">
-            <fd-popover *ngIf="type === 'individual'; else overflowButtonTemplate">
-                <fd-popover-control>
-                    <ng-template [ngTemplateOutlet]="overflowButtonTemplate"></ng-template>
-                </fd-popover-control>
-            </fd-popover>
-        </ng-container>
-        <ng-template #overflowButtonTemplate>
-            <fd-avatar-group-overflow-button [size]="size" [colorAccent]="1">
-                {{ hiddenItems.length }}
-            </fd-avatar-group-overflow-button>
-        </ng-template>
-    `,
+    templateUrl: './avatar-group-host.component.html',
     standalone: true,
-    imports: [NgIf, PopoverComponent, PopoverControlComponent, NgTemplateOutlet, AvatarGroupOverflowButtonComponent],
+    imports: [
+        NgIf,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        NgTemplateOutlet,
+        AvatarGroupOverflowButtonComponent
+    ],
     providers: [DestroyedService],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -86,6 +82,10 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnInit, HasEleme
     portals: QueryList<AvatarGroupItemPortalDirective>;
 
     /** @hidden */
+    @ViewChild(TemplateRef)
+    viewMoreTemplate: TemplateRef<void>;
+
+    /** @hidden */
     elementRef = inject(ElementRef);
 
     /** @hidden */
@@ -108,6 +108,9 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnInit, HasEleme
 
     /** @hidden */
     private ngZone = inject(NgZone);
+
+    /** @hidden */
+    private viewContainerRef = inject(ViewContainerRef);
 
     /** @hidden */
     ngOnInit(): void {
@@ -143,29 +146,37 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnInit, HasEleme
 
     /** @hidden */
     calculateVisibility(containerWidth: number, items: AvatarGroupItemPortalDirective[]): void {
-        const visibleItems = new Set<AvatarGroupItemPortalDirective>();
-        let accWidth = 70;
+        const forcedVisibleItems = items.filter((i) => i.forceVisibility);
+        const visibleItems: AvatarGroupItemPortalDirective[] = [];
+        const visibleItemsWidth = forcedVisibleItems.reduce((acc, item) => acc + item.width, 0);
+        let accWidth = 70 + visibleItemsWidth;
         for (const item of items) {
-            const itemWidth =
-                item.element.getBoundingClientRect().width +
-                parseFloat(getComputedStyle(item.element).marginLeft) +
-                parseFloat(getComputedStyle(item.element).marginRight);
-            accWidth += itemWidth;
+            if (forcedVisibleItems.includes(item)) {
+                visibleItems.push(item);
+                continue;
+            }
+            accWidth += item.width;
             if (accWidth <= containerWidth) {
-                visibleItems.add(item);
+                visibleItems.push(item);
             } else {
                 break;
             }
         }
-        this.hiddenItems = items.filter((item) => !visibleItems.has(item));
+        this.hiddenItems = items.filter((item) => !visibleItems.includes(item));
         this._changeDetectorRef.detectChanges();
         items.forEach((item) => {
-            const shouldShow = visibleItems.has(item);
+            const shouldShow = visibleItems.includes(item);
             if (item.visible && !shouldShow) {
                 item.hide();
             } else if (!item.visible && shouldShow) {
                 item.show();
             }
         });
+        if (this.hiddenItems.length > 0) {
+            const embeddedView = visibleItems[visibleItems.length - 1].viewContainerRef.createEmbeddedView(
+                this.viewMoreTemplate
+            );
+            embeddedView.detectChanges();
+        }
     }
 }
