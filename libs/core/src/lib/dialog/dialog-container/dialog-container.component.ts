@@ -1,6 +1,5 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentRef,
@@ -38,7 +37,6 @@ import { takeUntil } from 'rxjs';
     selector: 'fd-dialog-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [dialogFade],
     providers: [DestroyedService]
 })
