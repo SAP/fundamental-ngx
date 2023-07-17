@@ -1,6 +1,5 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ComponentRef,
@@ -32,7 +31,6 @@ import { dialogFade } from '@fundamental-ngx/core/dialog';
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     animations: [dialogFade],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
 export class MessageBoxContainerComponent

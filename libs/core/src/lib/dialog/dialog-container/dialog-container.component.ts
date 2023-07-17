@@ -1,4 +1,5 @@
 import {
+    AfterContentChecked,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -38,13 +39,13 @@ import { takeUntil } from 'rxjs';
     selector: 'fd-dialog-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [dialogFade],
-    providers: [DestroyedService]
+    providers: [DestroyedService],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
-    implements AfterViewInit, CssClassBuilder
+    implements AfterViewInit, AfterContentChecked, CssClassBuilder
 {
     /** Custom classes */
     @Input()
@@ -82,6 +83,13 @@ export class DialogContainerComponent
             this._loadContent();
             this._listenOnClose();
         });
+    }
+
+    /** @hidden */
+    ngAfterContentChecked(): void {
+        if (this.portalOutlet) {
+            this._cdr.markForCheck();
+        }
     }
 
     /** @hidden */
