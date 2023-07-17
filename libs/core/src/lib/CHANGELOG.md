@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.12...v0.43.0-rc.13) (2023-07-17)
+
+
+### Bug Fixes
+
+* **core:** remove manual change detection from dialog container ([#10170](https://github.com/SAP/fundamental-ngx/issues/10170)) ([f350bd0](https://github.com/SAP/fundamental-ngx/commit/f350bd00c7afed61ac51d0d675a388af1a4d9ea5))
+
+
+
+
+
 # [0.43.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.11...v0.43.0-rc.12) (2023-07-13)
 
 **Note:** Version bump only for package @fundamental-ngx/core
