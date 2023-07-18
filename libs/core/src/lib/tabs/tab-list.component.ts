@@ -105,6 +105,10 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     @Input()
     selectDefaultOnTabsChange = false;
 
+    /** Whether to focus the first focusable element in a tab panel when using stacked tabs. */
+    @Input()
+    focusFirstFocusableElement = true;
+
     /** Event emitted when the selected panel changes. */
     @Output()
     selectedTabChange = new EventEmitter<TabPanelComponent>();
@@ -382,6 +386,10 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
                 .pipe(debounceTime(100), first(), takeUntil(this._onDestroy$))
                 .subscribe(() => (this._disableScrollSpy = false));
             scrollTop(containerElement, distanceToScroll);
+        }
+
+        if (this.focusFirstFocusableElement) {
+            tabPanel._focusFirstFocusableElement();
         }
     }
 
