@@ -158,6 +158,13 @@ export class TabPanelComponent implements OnChanges {
     }
 
     /** @hidden */
+    _focusFirstFocusableElement(): void {
+        this.elementRef.nativeElement
+            .querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+            ?.focus({ preventScroll: true });
+    }
+
+    /** @hidden */
     private _updateHost(): void {
         this._expandedClass = this.expanded;
     }
