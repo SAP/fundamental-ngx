@@ -26,10 +26,16 @@
         tabIndexValue="-1"
         *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
         labelClass="fd-table__checkbox-label"
+        [fdkDisabled]="_fdpTableService.visibleColumnsLength === 0 || disableSelectionCheckbox"
         [tristate]="true"
         [tristateSelectable]="false"
         [ngModel]="checkedState"
         (ngModelChange)="_tableRowService.toggleAllSelectableRows($event)"
+        [attr.aria-description]="
+            !checkedState
+                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
+                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
+        "
     ></fd-checkbox>
 </th>
 
@@ -52,7 +58,6 @@
         "
         [columnName]="column.name"
         [id]="rowId + '__' + column.name"
-        [attr.aria-labelledby]="rowId + '-header-cell-' + column.name"
         [attr.aria-colindex]="colIdx"
         [ngClass]="[
             'fdp-table__col--' + column.name,

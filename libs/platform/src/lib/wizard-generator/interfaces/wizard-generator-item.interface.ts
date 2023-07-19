@@ -3,26 +3,7 @@ import { Observable } from 'rxjs';
 import { DynamicFormGroup } from '@fundamental-ngx/platform/form';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { WizardGeneratorFormGroup } from './wizard-generator-form-group.interface';
-
-export interface WizardGeneratorFormsValue {
-    [key: string]: WizardStepFormsValue;
-}
-
-export interface WizardStepFormsValue {
-    [key: string]: {
-        [key: string]: any;
-    };
-}
-
-export interface WizardVisibleSteps {
-    [key: string]: boolean;
-}
-
-export interface WizardGeneratorDependencyFields {
-    [key: string]: {
-        [key: string]: string[];
-    };
-}
+import { WizardGeneratorDependencyFields, WizardGeneratorFormsValue } from './wizard-generator-forms.interface';
 
 export interface WizardGeneratorItem {
     /**

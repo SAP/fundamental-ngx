@@ -11,7 +11,12 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
-import { ActionChangeEvent, BaseListItem, IS_ACTIVE_CLASS } from '../base-list-item';
+import { BaseListItem, IS_ACTIVE_CLASS } from '../base-list-item';
+
+export class ActionChangeEvent {
+    /** Action List Item component */
+    source: ActionListItemComponent;
+}
 
 @Component({
     selector: 'fdp-action-list-item',

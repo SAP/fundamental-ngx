@@ -59,6 +59,7 @@
 
                 <button
                     fd-button
+                    [fdkDisabled]="rules.length === columns.length"
                     fdType="transparent"
                     glyph="add"
                     [attr.aria-label]="'platformTable.P13SortDialogAddNewSortBtnTitle' | fdTranslate"

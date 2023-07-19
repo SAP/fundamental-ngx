@@ -17,6 +17,8 @@ import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedDynamicPageCompactDirective } from './deprecated-dynamic-page-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { DynamicPageHeaderSubtitleDirective } from './directives/dynamic-page-header-subtitle.directive';
+import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-header-title.directive';
 
 @NgModule({
     declarations: [
@@ -38,7 +40,9 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         PopoverModule,
         IgnoreClickOnSelectionModule,
         ContentDensityModule,
-        ScrollbarModule
+        ScrollbarModule,
+        DynamicPageHeaderSubtitleDirective,
+        DynamicPageHeaderTitleDirective
     ],
     exports: [
         DynamicPageComponent,
@@ -50,7 +54,9 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
         DynamicPageWrapperDirective,
-        DeprecatedDynamicPageCompactDirective
+        DeprecatedDynamicPageCompactDirective,
+        DynamicPageHeaderSubtitleDirective,
+        DynamicPageHeaderTitleDirective
     ]
 })
 export class DynamicPageModule {}

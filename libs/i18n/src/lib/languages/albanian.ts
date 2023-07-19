@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Albanian language
  */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Selekto të gjitha ({{ selectedItems }} nga {{ totalItems }})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
         rightNavigationBtnLabel: 'Shko te artikulli tjetër'
@@ -376,6 +379,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         headerMenuUnfreeze: 'Menuja "Shkrije"',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No data found',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Rivendos',
         editableCellNumberPlaceholder: 'Shto vlerën',
         editableCellDatePlaceholder: 'Shto vlerën',
@@ -464,7 +469,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         sortDialogSortByHeader: 'Rendit sipas',
         sortDialogNotSortedLabel: '(Not Sorted)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Anulo'
+        sortDialogCancelBtnLabel: 'Anulo',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Shko te paraardhësja',

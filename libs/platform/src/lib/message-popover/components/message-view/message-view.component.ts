@@ -16,8 +16,7 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DestroyedService, resizeObservable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, takeUntil } from 'rxjs';
-import { MessagePopoverEntry } from '../../models/message-popover-entry.interface';
-import { MessagePopoverErrorGroup } from '../../models/message-popover-error.interface';
+import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
 
 @Component({
     selector: 'fdp-message-view',

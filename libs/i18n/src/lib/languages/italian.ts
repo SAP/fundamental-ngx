@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Italian language
  */
 export const FD_LANGUAGE_ITALIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Seleziona tutto ({{selectedItems}} di {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: "Vai all'elemento precedente",
         rightNavigationBtnLabel: "Vai all'elemento successivo"
@@ -379,6 +382,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         headerMenuUnfreeze: 'Sblocca',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'Nessun dato trovato',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Reset',
         editableCellNumberPlaceholder: 'Inserisci valore',
         editableCellDatePlaceholder: 'Inserisci valore',
@@ -467,7 +472,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         sortDialogSortByHeader: 'Ordinato per',
         sortDialogNotSortedLabel: '(Non ordinato)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Annulla'
+        sortDialogCancelBtnLabel: 'Annulla',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Vai a Precedente',

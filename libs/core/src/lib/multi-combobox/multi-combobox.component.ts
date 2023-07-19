@@ -89,6 +89,12 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {
+    /**
+     * Show select all checkbox
+     */
+    @Input()
+    showSelectAll = false;
+
     /** Provides selected items. */
     @Input()
     set selectedItems(value: T[]) {
@@ -413,14 +419,27 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      * Method that selects all possible options.
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
-    private _handleSelectAllItems(select: boolean): void {
+    _handleSelectAllItems = (select: boolean): void => {
         this._flatSuggestions.forEach((item) => (item.selected = select));
+        this._onEveryItem(this._suggestions, (item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
         this._rangeSelector.reset();
 
         this._propagateChange();
-    }
+    };
 
+    /**
+     * @hidden
+     * Iterate over every item and perform callback
+     */
+    private _onEveryItem(items: SelectableOptionItem[], callback: (item: SelectableOptionItem) => void): void {
+        items.forEach((item) => {
+            callback(item);
+            if (item.children && item.children.length > 0) {
+                this._onEveryItem(item.children, callback);
+            }
+        });
+    }
     /** @hidden */
     _navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {

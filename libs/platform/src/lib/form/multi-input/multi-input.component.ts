@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     forwardRef,
     Host,
     Inject,
@@ -11,6 +12,7 @@ import {
     Input,
     OnInit,
     Optional,
+    Output,
     QueryList,
     Self,
     SkipSelf,
@@ -40,7 +42,7 @@ import { BaseListItem, ListComponent, ModifyItemEvent, SelectionType } from '@fu
 
 import { InputType } from '../input/input.component';
 import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
-import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
+import { BaseMultiInput } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
@@ -52,6 +54,18 @@ import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i
 import { firstValueFrom, Observable } from 'rxjs';
 
 let uniqueHiddenLabel = 0;
+
+export class MultiInputSelectionChangeEvent {
+    /**
+     * Multi Input selection change event
+     * @param source Multi Input component
+     * @param payload Selected value
+     */
+    constructor(
+        public source: PlatformMultiInputComponent,
+        public payload: any // Contains selected item
+    ) {}
+}
 
 @Component({
     selector: 'fdp-multi-input',
@@ -153,6 +167,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** Callback function when add-on button clicked. */
     @Input()
     addOnButtonClickFn: () => void;
+
+    /** Event emitted when item is selected. */
+    @Output()
+    readonly selectionChange = new EventEmitter<MultiInputSelectionChangeEvent>();
 
     /** @hidden */
     @ViewChild(TokenizerComponent)

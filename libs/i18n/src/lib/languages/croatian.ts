@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Croatian language
  */
 export const FD_LANGUAGE_CROATIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Odaberi sve ({{selectedItems}} od {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',
         rightNavigationBtnLabel: 'Go to next item'
@@ -367,6 +370,8 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'No data found',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Reset',
         editableCellNumberPlaceholder: 'Enter value',
         editableCellDatePlaceholder: 'Enter value',
@@ -455,7 +460,9 @@ export const FD_LANGUAGE_CROATIAN: FdLanguage = {
         sortDialogSortByHeader: 'Sort By',
         sortDialogNotSortedLabel: '(Not Sorted)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Cancel'
+        sortDialogCancelBtnLabel: 'Cancel',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',

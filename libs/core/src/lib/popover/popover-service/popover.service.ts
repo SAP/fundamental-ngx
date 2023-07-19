@@ -39,6 +39,9 @@ export class PopoverService extends BasePopoverClass {
     _onLoad = new Subject<ElementRef>();
 
     /** @hidden */
+    _mobile = false;
+
+    /** @hidden */
     private _eventRef: (() => void)[] = [];
 
     /** @hidden */
@@ -388,7 +391,28 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _shouldClose(event: MouseEvent): boolean {
-        return this.isOpen && this.closeOnOutsideClick && !this._triggerContainsTarget(event);
+        return (
+            this.isOpen &&
+            this.closeOnOutsideClick &&
+            !this._triggerContainsTarget(event) &&
+            !this._targetIsPopoverMobileDialog(event)
+        );
+    }
+
+    /** @hidden */
+    private _targetIsPopoverMobileDialog(event: MouseEvent): boolean {
+        if (this._mobile) {
+            let el = (event.target as HTMLElement).parentElement;
+            while (el) {
+                if (el.hasAttribute('data-mobile-popover')) {
+                    return true;
+                } else {
+                    el = el.parentElement;
+                }
+            }
+        }
+
+        return false;
     }
 
     /** @hidden */

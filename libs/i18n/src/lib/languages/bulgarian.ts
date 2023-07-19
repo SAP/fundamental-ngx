@@ -7,6 +7,9 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI library for Bulgarian language
  */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Отиди на предишния елемент',
         rightNavigationBtnLabel: 'Отиди на следващия елемент'
@@ -437,6 +440,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         headerMenuUnfreeze: 'Размрази',
         headerMenuFilter: 'Филтър',
         defaultEmptyMessage: 'Няма намерени данни',
+        noVisibleColumnsMessage:
+            'В момента в таблицата няма видими колони. Моля, изберете нужните колони в настройките на таблицата.',
         resetChangesButtonLabel: 'Нулиране',
         editableCellNumberPlaceholder: 'Въведи стойност',
         editableCellDatePlaceholder: 'Въведи стойност',
@@ -525,7 +530,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         sortDialogSortByHeader: 'Сортирай по',
         sortDialogNotSortedLabel: '(Несортирано)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Отмени'
+        sortDialogCancelBtnLabel: 'Отмени',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Отиди на предишнита',

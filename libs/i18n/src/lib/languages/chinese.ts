@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Chinese language
  */
 export const FD_LANGUAGE_CHINESE: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: '上一项',
         rightNavigationBtnLabel: '下一项'
@@ -366,6 +369,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         headerMenuUnfreeze: '解冻标题菜单',
         headerMenuFilter: '筛选',
         defaultEmptyMessage: '没有找到相关数据',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: '重置',
         editableCellNumberPlaceholder: '输入值',
         editableCellDatePlaceholder: '输入值',
@@ -454,7 +459,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         sortDialogSortByHeader: '排序方式',
         sortDialogNotSortedLabel: '（未排序）',
         sortDialogConfirmBtnLabel: '确定',
-        sortDialogCancelBtnLabel: '取消'
+        sortDialogCancelBtnLabel: '取消',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: '上一项',

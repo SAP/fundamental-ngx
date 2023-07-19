@@ -16,7 +16,7 @@ export interface OpenMessageStripAlertConfig<ComponentType = unknown> {
      */
     position?: MessageStripAlertPosition;
     /** Content, that will be rendered inside the message strip when it appears */
-    content: string | TemplateRef<{ $implicit: MessageStripAlertRef<ComponentType> }> | Type<ComponentType>;
+    content: string | TemplateRef<{ $implicit: MessageStripAlertRef }> | Type<ComponentType>;
     /** Configuration for the message strip component */
     messageStrip?: Partial<MessageStripConfiguration>;
 }

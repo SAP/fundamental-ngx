@@ -6,6 +6,9 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI libarary for Ukrainian language
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Вибрати все ({{selectedItems}} з {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
         rightNavigationBtnLabel: 'Перейти до наступного елемента'
@@ -520,6 +523,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         headerMenuUnfreeze: 'Розморозити',
         headerMenuFilter: 'Фільтр',
         defaultEmptyMessage: 'Нічого не знайдено',
+        noVisibleColumnsMessage:
+            'На даний момент у таблиці немає видимих стовпців. Виберіть потрібні стовпці в налаштуваннях таблиці.',
         resetChangesButtonLabel: 'Скинути',
         editableCellNumberPlaceholder: 'Введіть значення',
         editableCellDatePlaceholder: 'Введіть значення',
@@ -608,7 +613,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         sortDialogSortByHeader: 'Сортувати за',
         sortDialogNotSortedLabel: '(Не відсортовано)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Скасувати'
+        sortDialogCancelBtnLabel: 'Скасувати',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',

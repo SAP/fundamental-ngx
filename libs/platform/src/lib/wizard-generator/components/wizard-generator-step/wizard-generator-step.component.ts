@@ -30,17 +30,8 @@ import {
     WizardGeneratorRefreshStrategy,
     WizardGeneratorService
 } from '../../wizard-generator.service';
-
-export interface WizardStepSubmittedForms {
-    [key: string]: SubmitFormEventResult;
-}
-
-export interface WizardStepForms {
-    [key: string]: {
-        title: string;
-        form: DynamicFormGroup;
-    };
-}
+import { WizardGeneratorStep } from '../../interfaces/wizard-step.interface';
+import { WizardStepForms, WizardStepSubmittedForms } from '../../interfaces/wizard-generator-forms.interface';
 
 @Component({
     selector: 'fdp-wizard-generator-step',
@@ -48,7 +39,7 @@ export interface WizardStepForms {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WizardGeneratorStepComponent implements OnInit, OnDestroy, OnChanges {
+export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit, OnDestroy, OnChanges {
     /**
      * @description Step Form Generator components.
      */

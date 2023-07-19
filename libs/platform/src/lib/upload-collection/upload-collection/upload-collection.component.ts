@@ -21,7 +21,7 @@ import { ColumnAlign, SelectionMode, TableRowSelectionChangeEvent } from '@funda
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
 import { MoveToComponent, MoveToComponentDialogData } from '../dialogs/move-to/move-to.component';
-import { FilesValidatorOutput, FilesValidatorService } from '../services/files-validator.service';
+import { FilesValidatorService } from '../services/files-validator.service';
 import {
     BreadcrumbList,
     ItemPerPage,
@@ -32,19 +32,20 @@ import {
     UploadCollectionFile,
     UploadCollectionFolder,
     UploadCollectionItem,
-    UploadCollectionItemStatus
-} from '../models/upload-collection.models';
-import {
+    UploadCollectionItemStatus,
     FilenameLengthExceedEvent,
     FileSizeExceedEvent,
     MoveToEvent,
     TypeMismatchEvent,
-    UpdateVersionEvent
-} from '../models/upload-collection-events.models';
+    UpdateVersionEvent,
+    FilesValidatorOutput,
+    UploadCollectionCmp
+} from '../models/upload-collection.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
+
 let randomId = 0;
 
 /**
@@ -57,7 +58,9 @@ let randomId = 0;
     styleUrls: ['./upload-collection.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class UploadCollectionComponent implements OnChanges, OnDestroy {
+export class UploadCollectionComponent
+    implements OnChanges, OnDestroy, UploadCollectionCmp<FdpUploadCollectionDataSource>
+{
     /** ID of the upload collection element. If none is provided, one will be generated. */
     @Input()
     id = `fdp-upload-collection-id-${randomId++}`;
@@ -349,7 +352,8 @@ export class UploadCollectionComponent implements OnChanges, OnDestroy {
         this._message = generateMessageStripeData(type, options);
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * Opens the file selector.
      */
     _fileNameChange(e: FocusEvent, currentItem: UploadCollectionItem): void {

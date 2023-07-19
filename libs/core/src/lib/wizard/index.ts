@@ -9,3 +9,4 @@ export * from './wizard-step-indicator/wizard-step-indicator.component';
 export * from './wizard-injection-token';
 export * from './wizard.service';
 export * from './deprecated-wizard-compact.directive';
+export * from './models/wizard-step';

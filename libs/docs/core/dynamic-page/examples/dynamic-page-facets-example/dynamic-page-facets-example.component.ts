@@ -17,6 +17,15 @@ import { Component } from '@angular/core';
             .fd-dynamic-page-section-example {
                 min-height: 20vh;
             }
+            .red-subtitle {
+                color: red;
+            }
+            .blue-subtitle {
+                color: blue;
+            }
+            .green-subtitle {
+                color: green;
+            }
         `
     ]
 })

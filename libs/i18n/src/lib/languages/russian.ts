@@ -7,6 +7,9 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI library for Russian language
  */
 export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Выбрать все ({{selectedItems}} из {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти к предыдущему элементу',
         rightNavigationBtnLabel: 'Перейти к следующему элементу'
@@ -522,6 +525,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         headerMenuUnfreeze: 'Разморозить',
         headerMenuFilter: 'Фильтр',
         defaultEmptyMessage: 'Ничего не найдено',
+        noVisibleColumnsMessage:
+            'Сейчас в таблице нет видимых столбцов. Пожалуйста, выберите нужные столбцы в настройках таблицы.',
         resetChangesButtonLabel: 'Сбросить',
         editableCellNumberPlaceholder: 'Введите значение',
         editableCellDatePlaceholder: 'Введите значение',
@@ -610,7 +615,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         sortDialogSortByHeader: 'Сортировать по',
         sortDialogNotSortedLabel: '(Не отсортировано)',
         sortDialogConfirmBtnLabel: 'ОК',
-        sortDialogCancelBtnLabel: 'Отменить'
+        sortDialogCancelBtnLabel: 'Отменить',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти к предыдущему',

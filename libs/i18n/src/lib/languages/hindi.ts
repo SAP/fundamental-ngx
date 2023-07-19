@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Hindi language
  */
 export const FD_LANGUAGE_HINDI: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'सबका चयन करें'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'पिछले वस्तु पर जाएं',
         rightNavigationBtnLabel: 'अगले वस्तु पर जाएं'
@@ -368,6 +371,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         headerMenuUnfreeze: 'हैडर मेनू अनफ्रीज',
         headerMenuFilter: 'फिल्टर',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'रीसेट करें',
         editableCellNumberPlaceholder: 'मूल्य दर्ज करें',
         editableCellDatePlaceholder: 'मूल्य दर्ज करें',
@@ -456,7 +461,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         sortDialogSortByHeader: 'आधार पर छाँटे',
         sortDialogNotSortedLabel: '(क्रमबद्ध नहीं)',
         sortDialogConfirmBtnLabel: 'अनुमोदन',
-        sortDialogCancelBtnLabel: 'रद्द करें'
+        sortDialogCancelBtnLabel: 'रद्द करें',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'पिछले पर जाएं',

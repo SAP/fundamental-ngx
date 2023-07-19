@@ -8,6 +8,9 @@ export type FdLanguageKey = string | FdLanguageKeyFunction;
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreMultiComboBox: {
+        selectAllLabel: FdLanguageKey;
+    };
     coreCarousel: {
         leftNavigationBtnLabel: FdLanguageKey;
         rightNavigationBtnLabel: FdLanguageKey;
@@ -463,6 +466,7 @@ export interface FdLanguage {
         headerMenuUnfreeze: FdLanguageKey;
         headerMenuFilter: FdLanguageKey;
         defaultEmptyMessage: FdLanguageKey;
+        noVisibleColumnsMessage: FdLanguageKey;
         resetChangesButtonLabel: FdLanguageKey;
         editableCellNumberPlaceholder: FdLanguageKey;
         editableCellDatePlaceholder: FdLanguageKey;
@@ -559,6 +563,8 @@ export interface FdLanguage {
         sortDialogNotSortedLabel: FdLanguageKey;
         sortDialogConfirmBtnLabel: FdLanguageKey;
         sortDialogCancelBtnLabel: FdLanguageKey;
+        selectAllCheckboxLabel: FdLanguageKey;
+        deselectAllCheckboxLabel: FdLanguageKey;
     };
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: FdLanguageKey;

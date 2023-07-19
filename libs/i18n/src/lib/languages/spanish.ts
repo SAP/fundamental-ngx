@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Spanish language
  */
 export const FD_LANGUAGE_SPANISH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Seleccionar todo ({{selectedItems}} de {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ir al item anterior',
         rightNavigationBtnLabel: 'Ir al proximo item'
@@ -371,6 +374,8 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No se encontraron datos',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Restablecer',
         editableCellNumberPlaceholder: 'Ingresar valor',
         editableCellDatePlaceholder: 'Ingresar valor',
@@ -459,7 +464,9 @@ export const FD_LANGUAGE_SPANISH: FdLanguage = {
         sortDialogSortByHeader: 'Ordenado por',
         sortDialogNotSortedLabel: '(No ordenado)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Cancelar'
+        sortDialogCancelBtnLabel: 'Cancelar',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Ir al anterior',

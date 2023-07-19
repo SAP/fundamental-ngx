@@ -3,6 +3,7 @@ export * from './settings-generator.module';
 export * from './settings-generator.component';
 export * from './models/settings.model';
 export * from './models/settings-config.model';
+export * from './models/settings-generator.model';
 
 export * from './layouts/settings-generator-sidebar-layout/settings-generator-sidebar-layout.component';
 export * from './settings-generator.service';

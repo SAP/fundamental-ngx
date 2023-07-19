@@ -1,0 +1,36 @@
+@import '@fundamental-styles/common-css/dist/sass/common-mixins';
+
+fd-multi-combobox-select-all-toggler {
+    display: block;
+    background-color: var(--sapBackgroundColor);
+    cursor: pointer;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    @include sap-fiori-focus();
+
+    .fd-toolbar {
+        padding-left: 1rem;
+        padding-right: 0;
+    }
+
+    .fd-multi-combobox-select-all__form-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: bold;
+
+        fd-checkbox {
+            pointer-events: none;
+
+            .fd-checkbox__checkmark {
+                @include sap-set-margin-end(0.5rem);
+            }
+
+            .fd-checkbox__text {
+                font-weight: bold !important;
+            }
+        }
+    }
+}

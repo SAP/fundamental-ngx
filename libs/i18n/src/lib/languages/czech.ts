@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Czech language
  */
 export const FD_LANGUAGE_CZECH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Vybrat vše ({{selectedItems}} z {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
         rightNavigationBtnLabel: 'Přejít na další položku'
@@ -371,6 +374,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtr',
         defaultEmptyMessage: 'Nenalezena žádná data',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Resetovat',
         editableCellNumberPlaceholder: 'Zadejte hodnotu',
         editableCellDatePlaceholder: 'Zadejte hodnotu',
@@ -459,7 +464,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         sortDialogSortByHeader: 'Seřazeno podle',
         sortDialogNotSortedLabel: '(Neřazeno)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Zrušit'
+        sortDialogCancelBtnLabel: 'Zrušit',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',

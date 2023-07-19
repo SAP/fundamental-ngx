@@ -239,6 +239,9 @@ export class TableComponent<T = any>
     /** Text displayed when table has no items. */
     @Input()
     emptyTableMessage: string;
+    /** Text displayed when table has no visible columns. */
+    @Input()
+    noVisibleColumnsMessage: string;
     /** Table without horizontal borders. */
     @Input()
     noHorizontalBorders = false;
@@ -814,7 +817,9 @@ export class TableComponent<T = any>
                 })
         );
 
-        this._focusableGrid.shortRowFocus = 'first';
+        if (this._focusableGrid) {
+            this._focusableGrid.shortRowFocus = 'first';
+        }
     }
 
     /** @hidden */
@@ -947,12 +952,9 @@ export class TableComponent<T = any>
     /** expand all rows */
     expandAll(): void {
         const expandableRows = this._tableRows.filter((row) => row.type === TableRowType.TREE);
-        if (!this._dataSourceDirective.childDataSource) {
-            this._markAsExpanded(expandableRows);
-            return;
+        if (this._dataSourceDirective.childDataSource) {
+            this._tableRowService.loadChildRows(expandableRows);
         }
-
-        this._tableRowService.loadChildRows(expandableRows);
         this._markAsExpanded(expandableRows);
         this.allRowsExpanded.emit();
     }
@@ -1356,8 +1358,8 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>, event: KeyboardEvent | MouseEvent): void {
-        if (row.state !== 'readonly') {
+    _onRowClick(row: TableRow<T> | null, event: KeyboardEvent | MouseEvent): void {
+        if (row && row.state !== 'readonly') {
             return;
         }
 
@@ -1373,8 +1375,10 @@ export class TableComponent<T = any>
             }
         }
 
-        this._emitRowNavigate(row);
-        this._emitRowActivate(row);
+        if (row) {
+            this._emitRowNavigate(row);
+            this._emitRowActivate(row);
+        }
     }
 
     /** @hidden */
@@ -1994,7 +1998,7 @@ export class TableComponent<T = any>
         this._subscriptions.add(
             this._tableService.tableLoading$.pipe(filter((loadingState) => !loadingState)).subscribe(() => {
                 setTimeout(() => {
-                    if (this._tableHeaderResizer.focusedCellPosition) {
+                    if (this._tableHeaderResizer.focusedCellPosition && this._focusableGrid) {
                         this._focusableGrid.focusCell(this._tableHeaderResizer.focusedCellPosition);
                     }
                 });

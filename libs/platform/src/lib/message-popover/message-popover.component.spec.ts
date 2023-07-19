@@ -5,8 +5,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { of } from 'rxjs';
 
 import { MessagePopoverComponent } from './message-popover.component';
-import { MessagePopoverErrorGroup } from './models/message-popover-error.interface';
 import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
+import { MessagePopoverErrorGroup } from './models/message-popover-entry.interface';
 
 const stubErrors: MessagePopoverErrorGroup[] = [
     {

@@ -22,8 +22,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { BaseComponent } from '../base';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates, isValidControlState } from '@fundamental-ngx/cdk/forms';
-import { PlatformFormFieldControl } from './form-control';
-import { PlatformFormField } from './form-field';
+import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 let randomId = 0;
 

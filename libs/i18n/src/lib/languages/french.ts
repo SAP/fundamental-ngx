@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for French language
  */
 export const FD_LANGUAGE_FRENCH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Tout sélectionner ({{selectedItems}} sur {{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: "Aller à l'élément précédent",
         rightNavigationBtnLabel: "Aller à l'élément suivant"
@@ -371,6 +374,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         headerMenuUnfreeze: "Déverrouillage du menu d'en-tête",
         headerMenuFilter: 'Filtrer',
         defaultEmptyMessage: 'Aucune donnée trouvée',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Réinitialiser',
         editableCellNumberPlaceholder: 'Entrez une valeur',
         editableCellDatePlaceholder: 'Entrez une valeur',
@@ -459,7 +464,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         sortDialogSortByHeader: 'Trié par',
         sortDialogNotSortedLabel: '(Non trié)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Annuler'
+        sortDialogCancelBtnLabel: 'Annuler',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Aller à la page précédente',

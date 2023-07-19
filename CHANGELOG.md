@@ -1,3 +1,214 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.43.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.12...v0.43.0-rc.13) (2023-07-17)
+
+
+### Bug Fixes
+
+* **core:** remove manual change detection from dialog container ([#10170](https://github.com/SAP/fundamental-ngx/issues/10170)) ([f350bd0](https://github.com/SAP/fundamental-ngx/commit/f350bd00c7afed61ac51d0d675a388af1a4d9ea5))
+
+
+
+
+
+# [0.43.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.11...v0.43.0-rc.12) (2023-07-13)
+
+
+### Bug Fixes
+
+* **platform:** various fixes for platform table ([#10164](https://github.com/SAP/fundamental-ngx/issues/10164)) ([82c39c3](https://github.com/SAP/fundamental-ngx/commit/82c39c3ad7415037bfa5860b563e4d33503d75ce))
+
+
+
+
+
+# [0.43.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.10...v0.43.0-rc.11) (2023-07-13)
+
+
+### Bug Fixes
+
+* **platform:** remove aria-labelledby from platform table header cells ([#10157](https://github.com/SAP/fundamental-ngx/issues/10157)) ([41877a3](https://github.com/SAP/fundamental-ngx/commit/41877a3ff4541623d32f0913c261961614d9080e))
+
+
+
+
+
+# [0.43.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.9...v0.43.0-rc.10) (2023-07-13)
+
+
+### Bug Fixes
+
+* **platform:** table console error ([#10163](https://github.com/SAP/fundamental-ngx/issues/10163)) ([3228343](https://github.com/SAP/fundamental-ngx/commit/3228343906f527c1f2b0455ba582af6bc6f7d91f))
+
+
+
+
+
+# [0.43.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.8...v0.43.0-rc.9) (2023-07-13)
+
+
+### Bug Fixes
+
+* **docs,core,platform:** various fixes from deffect hunt ([#10168](https://github.com/SAP/fundamental-ngx/issues/10168)) ([00b858b](https://github.com/SAP/fundamental-ngx/commit/00b858bcfb1a1e6963c36a7d768fe9dcf100a135))
+
+
+
+
+
+# [0.43.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.7...v0.43.0-rc.8) (2023-07-13)
+
+
+### Bug Fixes
+
+* **platform:** fixed table sort rules update ([#10167](https://github.com/SAP/fundamental-ngx/issues/10167)) ([457bfac](https://github.com/SAP/fundamental-ngx/commit/457bfac0dab855012614a02c802366c296479ab5))
+
+
+
+
+
+# [0.43.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.6...v0.43.0-rc.7) (2023-07-12)
+
+
+### Bug Fixes
+
+* **core:** carousel not updating when slide count changes ([#10153](https://github.com/SAP/fundamental-ngx/issues/10153)) ([32e0eae](https://github.com/SAP/fundamental-ngx/commit/32e0eaeb96de4e31f82cbd23f11b0dc79eccc3c0))
+
+
+
+
+
+# [0.43.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.5...v0.43.0-rc.6) (2023-07-12)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.43.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.4...v0.43.0-rc.5) (2023-07-12)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.43.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.3...v0.43.0-rc.4) (2023-07-11)
+
+
+
+# [0.43.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.2...v0.43.0-rc.3) (2023-07-10)
+
+
+### Bug Fixes
+
+* **core:** redundant popover open/close/event things ([#10063](https://github.com/SAP/fundamental-ngx/issues/10063)) ([6c5b4ca](https://github.com/SAP/fundamental-ngx/commit/6c5b4ca4aa1e30a6d714168f9078962c84ddba79))
+
+
+
+# [0.43.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.1...v0.43.0-rc.2) (2023-07-10)
+
+
+### Bug Fixes
+
+* fixed sap-component generator ([#10150](https://github.com/SAP/fundamental-ngx/issues/10150)) ([ec62a02](https://github.com/SAP/fundamental-ngx/commit/ec62a020a3c86e8f39b5494f6879766df74875a9))
+
+
+
+# [0.43.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.0...v0.43.0-rc.1) (2023-07-10)
+
+
+### Bug Fixes
+
+* **platform:** table expand all event ([#10136](https://github.com/SAP/fundamental-ngx/issues/10136)) ([c224315](https://github.com/SAP/fundamental-ngx/commit/c22431594acf80bd44a82023db51fdd14dd78f00))
+
+
+
+# [0.43.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.15...v0.43.0-rc.0) (2023-07-07)
+
+
+### chore
+
+* **deps:** update theming-base-content v.11.5.0 ([#10120](https://github.com/SAP/fundamental-ngx/issues/10120)) ([e61a532](https://github.com/SAP/fundamental-ngx/commit/e61a5328878180285a0ee279a604fdeab881cd79))
+
+
+### BREAKING CHANGES
+
+* **deps:** SAP-Icons: icon name changed from `clinical-tast-tracker` to `clinical-task-tracker`
+
+
+
+## [0.42.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.14...v0.42.1-rc.15) (2023-07-06)
+
+
+### Bug Fixes
+
+* **platform:** table checkbox space scroll bug ([#10129](https://github.com/SAP/fundamental-ngx/issues/10129)) ([0f3f03f](https://github.com/SAP/fundamental-ngx/commit/0f3f03f64c3c4a8f7f613c19b1031f20f9fb1ee1))
+
+
+
+## [0.42.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.13...v0.42.1-rc.14) (2023-07-05)
+
+
+### Features
+
+* **core:** added select all toggler to the multi combo box ([#9876](https://github.com/SAP/fundamental-ngx/issues/9876)) ([66476d9](https://github.com/SAP/fundamental-ngx/commit/66476d93eabb6eb0a4090cd6bf01ad3ee30d24dc))
+
+
+
+## [0.42.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.12...v0.42.1-rc.13) (2023-07-04)
+
+
+### Bug Fixes
+
+* **platform:** add aria-description for select all checkbox ([#10100](https://github.com/SAP/fundamental-ngx/issues/10100)) ([58e1567](https://github.com/SAP/fundamental-ngx/commit/58e1567e49404f3d836a7597274c36ddaa4f08a5))
+
+
+
+## [0.42.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.11...v0.42.1-rc.12) (2023-07-04)
+
+
+
+## [0.42.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.10...v0.42.1-rc.11) (2023-06-30)
+
+
+### Features
+
+* **platform,core:** custom title and subtitle template for dynamic page ([#10065](https://github.com/SAP/fundamental-ngx/issues/10065)) ([6cd0daa](https://github.com/SAP/fundamental-ngx/commit/6cd0daa1e48b4e9d26b25ccb0fc36d044a3fc40a))
+
+
+
+## [0.42.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.9...v0.42.1-rc.10) (2023-06-29)
+
+
+### Bug Fixes
+
+* **docs:** placeimg is shutting down so new placeholder site ([#10061](https://github.com/SAP/fundamental-ngx/issues/10061)) ([9a8a4d1](https://github.com/SAP/fundamental-ngx/commit/9a8a4d10469e775094f1fe43cd30580ca307fc73))
+
+
+
+## [0.42.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.8...v0.42.1-rc.9) (2023-06-29)
+
+
+### Bug Fixes
+
+* **platform:** table tbody focus ([#10102](https://github.com/SAP/fundamental-ngx/issues/10102)) ([5aec926](https://github.com/SAP/fundamental-ngx/commit/5aec926b652ebf1397c0efb56291a93fea373cb4))
+
+
+
+## [0.42.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.7...v0.42.1-rc.8) (2023-06-29)
+
+
+### Bug Fixes
+
+* **cdk,core,platform:** circular dependencies ([#10099](https://github.com/SAP/fundamental-ngx/issues/10099)) ([5fc2e54](https://github.com/SAP/fundamental-ngx/commit/5fc2e5481197bfb2fa709ebe21a08c510cf40f41))
+* **cdk:** fix import path ([#10103](https://github.com/SAP/fundamental-ngx/issues/10103)) ([5f1e74d](https://github.com/SAP/fundamental-ngx/commit/5f1e74d07f68144f4fa726e1c442840acd7fbdc2))
+
+
+
 ## [0.42.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.42.1-rc.6...v0.42.1-rc.7) (2023-06-28)
 
 

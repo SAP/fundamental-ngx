@@ -15,6 +15,14 @@ import { MessageStripComponent } from '../../message-strip.component';
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
 import { MessageStripAlertComponentData } from '../tokens';
 import { AutoDismissMessageStripDirective } from '../../auto-dismiss-message-strip.directive';
+import { MessageStripAlert } from './message-strip-alert.interface';
+
+export type MessageStripAlertPortalType<ComponentType> =
+    | DomPortal
+    | TemplatePortal<{
+          $implicit: MessageStripAlertRef;
+      }>
+    | ComponentPortal<ComponentType>;
 
 /**
  * The wrapper component, which is wrapping the Message Strip and passes
@@ -25,7 +33,9 @@ import { AutoDismissMessageStripDirective } from '../../auto-dismiss-message-str
     standalone: true,
     imports: [MessageStripComponent, PortalModule, AutoDismissMessageStripDirective]
 })
-export class MessageStripAlertComponent<ComponentType = unknown> implements OnDestroy, AfterViewInit {
+export class MessageStripAlertComponent<ComponentType = unknown>
+    implements MessageStripAlert, OnDestroy, AfterViewInit
+{
     /** @hidden */
     @ViewChild(AutoDismissMessageStripDirective)
     autoDismissMessageStripDirective: AutoDismissMessageStripDirective;
@@ -84,15 +94,10 @@ export class MessageStripAlertComponent<ComponentType = unknown> implements OnDe
         content:
             | string
             | TemplateRef<{
-                  $implicit: MessageStripAlertRef<ComponentType>;
+                  $implicit: MessageStripAlertRef;
               }>
             | Type<ComponentType>
-    ):
-        | DomPortal
-        | TemplatePortal<{
-              $implicit: MessageStripAlertRef<ComponentType>;
-          }>
-        | ComponentPortal<ComponentType> {
+    ): MessageStripAlertPortalType<ComponentType> {
         if (typeof content === 'string') {
             const textEl = this.renderer2.createText(content);
             this.renderer2.appendChild(this.viewContainerRef.element.nativeElement, textEl);

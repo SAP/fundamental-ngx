@@ -3,7 +3,11 @@ import { delay, map } from 'rxjs/operators';
 
 import { uuidv4 } from '@fundamental-ngx/cdk/utils';
 import { UploadCollectionDataProvider } from '../domain/upload-collection-data-provider';
+
 import {
+    UploadCollectionFile,
+    UploadCollectionItem,
+    UploadCollectionItemStatus,
     CancelUploadNewFileEvent,
     DeleteEvent,
     DownloadEvent,
@@ -13,11 +17,6 @@ import {
     UpdateVersionEvent,
     UploadCollectionNewItem,
     UploadEvent
-} from '../models/upload-collection-events.models';
-import {
-    UploadCollectionFile,
-    UploadCollectionItem,
-    UploadCollectionItemStatus
 } from '../models/upload-collection.models';
 
 const dataSource: UploadCollectionItem[] = [

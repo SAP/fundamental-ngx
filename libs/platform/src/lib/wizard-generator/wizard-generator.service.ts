@@ -4,21 +4,18 @@ import { map, take } from 'rxjs/operators';
 import { cloneDeep, concat, mergeWith, uniq } from 'lodash-es';
 
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
-import {
-    WizardGeneratorStepComponent,
-    WizardStepSubmittedForms
-} from './components/wizard-generator-step/wizard-generator-step.component';
 import { WizardGeneratorFormGroup, WizardGeneratorFormItem } from './interfaces/wizard-generator-form-group.interface';
+import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
+import { PreparedWizardGeneratorItem, WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
 import {
-    PreparedWizardGeneratorItem,
     WizardGeneratorDependencyFields,
     WizardGeneratorFormsValue,
-    WizardGeneratorItem,
+    WizardStepSubmittedForms,
     WizardVisibleSteps
-} from './interfaces/wizard-generator-item.interface';
-import { isFunction, selectStrategy } from '@fundamental-ngx/cdk/utils';
+} from './interfaces/wizard-generator-forms.interface';
+import { WizardGeneratorStep } from './interfaces/wizard-step.interface';
 
-export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
+export type StepsComponents = Map<string, WizardGeneratorStep>;
 
 export enum WizardGeneratorRefreshStrategy {
     REFRESH_STEP_VISIBILITY = 'refreshStepVisibility',
@@ -52,7 +49,7 @@ export class WizardGeneratorService {
     /**
      * @description Visible steps components
      */
-    stepsComponents: StepsComponents = new Map<string, WizardGeneratorStepComponent>();
+    stepsComponents: StepsComponents = new Map();
 
     /**
      * @description Object with steps that are dependencies for another steps.
@@ -283,7 +280,7 @@ export class WizardGeneratorService {
      * @param component Wizard Step component to add.
      * @param key Wizard Step ID.
      */
-    addWizardStepComponent(component: WizardGeneratorStepComponent, key: string): void {
+    addWizardStepComponent(component: WizardGeneratorStep, key: string): void {
         this.stepsComponents.set(key, component);
         this._stepsComponents$.next(this.stepsComponents);
     }

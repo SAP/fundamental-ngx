@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Turkish language
  */
 export const FD_LANGUAGE_TURKISH: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'Hepsini seç ({{selectedItems}}/{{totalItems}})'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'Önceki öğeye git',
         rightNavigationBtnLabel: 'Sonraki öğeye git'
@@ -368,6 +371,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         headerMenuUnfreeze: 'HeaderMenuUnfreeze',
         headerMenuFilter: 'Filtre',
         defaultEmptyMessage: 'Hiçbir veri bulunamadı',
+        noVisibleColumnsMessage:
+            'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Sıfırla',
         editableCellNumberPlaceholder: 'Değer gir',
         editableCellDatePlaceholder: 'Değer gir',
@@ -456,7 +461,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         sortDialogSortByHeader: 'Sıralama Ölçütü',
         sortDialogNotSortedLabel: '(Sıralanmadı)',
         sortDialogConfirmBtnLabel: 'OK',
-        sortDialogCancelBtnLabel: 'Vazgeç'
+        sortDialogCancelBtnLabel: 'Vazgeç',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Öncekine Git',

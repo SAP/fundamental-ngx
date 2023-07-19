@@ -4,6 +4,9 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Georgian language
  */
 export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
+    coreMultiComboBox: {
+        selectAllLabel: 'ყველას არჩევა ({{selectedItems}} {{totalItems}}-დან)'
+    },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',
         rightNavigationBtnLabel: 'მომდევნო ელემენტზე გადასვლა'
@@ -369,6 +372,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         headerMenuUnfreeze: 'მენიუს განბლოკვა',
         headerMenuFilter: 'ფილტრი',
         defaultEmptyMessage: 'მონაცემები ვერ მოიძებნა',
+        noVisibleColumnsMessage:
+            'ამჟამად, ცხრილში არ არის ხილული სვეტები. გთხოვთ, აირჩიოთ თქვენთვის საჭირო სვეტები ცხრილის პარამეტრებში.',
         resetChangesButtonLabel: 'გააუქმეთ ცვლილებები',
         editableCellNumberPlaceholder: 'შეიყვანეთ რიცხვი',
         editableCellDatePlaceholder: 'შეიყვანეთ თარიღი',
@@ -457,7 +462,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         sortDialogSortByHeader: 'დალაგებულია',
         sortDialogNotSortedLabel: '(დაულაგებელია)',
         sortDialogConfirmBtnLabel: 'კარგი',
-        sortDialogCancelBtnLabel: 'გაუქმება'
+        sortDialogCancelBtnLabel: 'გაუქმება',
+        selectAllCheckboxLabel: 'Select all',
+        deselectAllCheckboxLabel: 'Deselect all'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'წინაზე გადასვლა',

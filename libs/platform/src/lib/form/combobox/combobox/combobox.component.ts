@@ -4,11 +4,13 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     Host,
     Inject,
     Injector,
     OnInit,
     Optional,
+    Output,
     Self,
     SkipSelf,
     TemplateRef,
@@ -31,11 +33,23 @@ import {
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 
-import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
+import { BaseCombobox } from '../commons/base-combobox';
 import { ComboboxConfig } from '../combobox.config';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+
+export class ComboboxSelectionChangeEvent {
+    /**
+     * Combobox selection event
+     * @param source Combobox component
+     * @param payload Selected option
+     */
+    constructor(
+        public source: ComboboxComponent,
+        public payload: any // Contains selected item
+    ) {}
+}
 
 @Component({
     selector: 'fdp-combobox',
@@ -49,6 +63,9 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     ]
 })
 export class ComboboxComponent extends BaseCombobox implements ComboboxInterface, OnInit, AfterViewInit {
+    /** Event emitted when item is selected. */
+    @Output()
+    selectionChange = new EventEmitter<ComboboxSelectionChangeEvent>();
     /** @hidden */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef<HTMLInputElement>;

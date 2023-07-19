@@ -12,10 +12,15 @@ const aboveMinorVersion = (version) => {
     return `^${parsed!.major}.${parsed!.minor}.0`;
 };
 
+const angularVersion =
+    (packageJson.dependencies['@angular/core'] || packageJson.devDependencies['@angular/core'] || '').match(
+        /\d+\.\d+\.\d+/
+    )?.[0] || '';
+
 const versions = {
     VERSION_PLACEHOLDER: packageJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
-    ANGULAR_VER_PLACEHOLDER: `^${major(packageJson.dependencies['@angular/core'])}.0.0`,
+    ANGULAR_VER_PLACEHOLDER: `^${major(angularVersion)}.0.0`,
     RXJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.rxjs),
     FAST_DEEP_EQUAL_VER_PLACEHOLDER: packageJson.dependencies['fast-deep-equal'],
     FDSTYLES_VER_PLACEHOLDER: packageJson.dependencies['fundamental-styles'],
