@@ -28,7 +28,7 @@ class TestComponent {
     @ViewChild(DynamicPageComponent)
     dynamicPage: DynamicPageComponent;
 }
-xdescribe('DynamicPageComponent default values', () => {
+describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let dynamicPageComponent: DynamicPageComponent;
