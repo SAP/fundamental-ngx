@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.14...v0.43.0-rc.15) (2023-07-19)
+
+
+### Bug Fixes
+
+* **platform:** preserves table scrolling position ([#10098](https://github.com/SAP/fundamental-ngx/issues/10098)) ([ef240ff](https://github.com/SAP/fundamental-ngx/commit/ef240ffc6bc1a1330c98eb788f314b466daa17b0))
+
+
+
+
+
 # [0.43.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.13...v0.43.0-rc.14) (2023-07-19)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
