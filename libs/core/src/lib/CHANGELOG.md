@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.13...v0.43.0-rc.14) (2023-07-19)
+
+
+### Bug Fixes
+
+* **core:** add option to focus first focusable element in tab panel when using stacked tabs ([#10193](https://github.com/SAP/fundamental-ngx/issues/10193)) ([e50b451](https://github.com/SAP/fundamental-ngx/commit/e50b451c6de99db2aa1bf68ebddac29f9ccdcb72))
+
+
+
+
+
 # [0.43.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.12...v0.43.0-rc.13) (2023-07-17)
 
 
