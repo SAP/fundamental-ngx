@@ -1472,6 +1472,11 @@ export class TableComponent<T = any>
         });
     }
 
+    /** Manually update index after we add new items to the main array */
+    private _reIndexTableRows(): void {
+        this._tableRows.map((row, index) => (row.index = index));
+    }
+
     /** @hidden */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
@@ -1525,11 +1530,6 @@ export class TableComponent<T = any>
                     parentRow.children.push(...rows);
 
                     parentRow.lastChild = parentRow.children[parentRow.children.length - 1];
-
-                    this._tableRows.forEach((row, index) => {
-                        row.index = index;
-                    });
-
                     this._setTableRows(this._tableRows);
                 });
             });
@@ -1715,6 +1715,7 @@ export class TableComponent<T = any>
     private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
+        this._reIndexTableRows();
         this.onTableRowsChanged();
 
         this._calculateIsShownNavigationColumn();
