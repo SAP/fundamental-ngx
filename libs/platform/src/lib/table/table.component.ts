@@ -1530,11 +1530,6 @@ export class TableComponent<T = any>
                     parentRow.children.push(...rows);
 
                     parentRow.lastChild = parentRow.children[parentRow.children.length - 1];
-
-                    this._tableRows.forEach((row, index) => {
-                        row.index = index;
-                    });
-
                     this._setTableRows(this._tableRows);
                 });
             });
