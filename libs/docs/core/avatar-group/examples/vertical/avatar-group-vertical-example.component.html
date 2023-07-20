@@ -1,0 +1,110 @@
+<fd-avatar-group [size]="size" orientation="vertical">
+    <ng-container *ngFor="let person of people">
+        <ng-container *ngIf="!person.imageUrl && !person.glyph">
+            <fd-avatar
+                *fdAvatarGroupItem="details"
+                [circle]="true"
+                [border]="true"
+                [size]="size"
+                role="img"
+                [title]="person.firstName + ' ' + person.lastName"
+                [label]="person.firstName + ' ' + person.lastName"
+                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+            ></fd-avatar>
+        </ng-container>
+
+        <ng-container *ngIf="person.imageUrl">
+            <fd-avatar
+                *fdAvatarGroupItem="details"
+                [circle]="true"
+                [border]="true"
+                [size]="size"
+                [image]="person.imageUrl"
+                role="img"
+                [title]="person.firstName + ' ' + person.lastName"
+                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+            ></fd-avatar>
+        </ng-container>
+
+        <ng-container *ngIf="person.glyph">
+            <fd-avatar
+                *fdAvatarGroupItem="details"
+                [circle]="true"
+                [border]="true"
+                [size]="size"
+                [glyph]="person.glyph"
+                role="img"
+                [title]="person.firstName + ' ' + person.lastName"
+                [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+            ></fd-avatar>
+        </ng-container>
+        <ng-template #details>
+            <fd-quick-view [id]="person.id">
+                <fd-quick-view-title align="left" [id]="person.id + '-popover-header'">
+                    Business card
+                </fd-quick-view-title>
+                <fd-quick-view-subheader [id]="person.id + '-popover-subheader'">
+                    <fd-avatar
+                        *ngIf="!person.imageUrl && !person.glyph"
+                        [circle]="true"
+                        size="s"
+                        role="img"
+                        [label]="person.firstName + ' ' + person.lastName"
+                        [title]="person.firstName + ' ' + person.lastName"
+                        [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                    ></fd-avatar>
+
+                    <fd-avatar
+                        *ngIf="person.imageUrl"
+                        [circle]="true"
+                        size="s"
+                        role="img"
+                        [image]="person.imageUrl"
+                        [title]="person.firstName + ' ' + person.lastName"
+                        [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                    ></fd-avatar>
+
+                    <fd-avatar
+                        *ngIf="person.glyph"
+                        [circle]="true"
+                        size="s"
+                        role="img"
+                        [glyph]="person.glyph"
+                        [title]="person.firstName + ' ' + person.lastName"
+                        [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                    ></fd-avatar>
+                    <fd-quick-view-subheader-title
+                        >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
+                    >
+                    <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
+                </fd-quick-view-subheader>
+
+                <fd-quick-view-group [attr.aria-labelledby]="person.id + '-group-title'">
+                    <fd-quick-view-group-title [id]="person.id + '-group-title'"
+                        >Contact Details
+                    </fd-quick-view-group-title>
+                    <fd-quick-view-group-item>
+                        <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
+                        <fd-quick-view-group-item-content>
+                            <a fd-link [href]="'tel:' + person.phone">{{ person.phone }}</a>
+                        </fd-quick-view-group-item-content>
+                    </fd-quick-view-group-item>
+
+                    <fd-quick-view-group-item>
+                        <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
+                        <fd-quick-view-group-item-content>
+                            <a fd-link [href]="'tel:' + person.mobile">{{ person.mobile }}</a>
+                        </fd-quick-view-group-item-content>
+                    </fd-quick-view-group-item>
+
+                    <fd-quick-view-group-item>
+                        <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
+                        <fd-quick-view-group-item-content>
+                            <a fd-link [href]="'mailto:' + person.email">{{ person.email }}</a>
+                        </fd-quick-view-group-item-content>
+                    </fd-quick-view-group-item>
+                </fd-quick-view-group>
+            </fd-quick-view>
+        </ng-template>
+    </ng-container>
+</fd-avatar-group>

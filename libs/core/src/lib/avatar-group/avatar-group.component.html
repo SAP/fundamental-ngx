@@ -12,8 +12,9 @@
         [items]="avatars"
     >
         <fd-popover *ngFor="let item of avatars" [noArrow]="false" [focusAutoCapture]="true">
-            <fd-popover-control tabindex="-1">
+            <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
                 <ng-template
+                    #outletItem="fdAvatarGroupItemPortal"
                     cdkPortalOutlet
                     fdAvatarGroupItemPortal
                     [forceVisibility]="item.forceVisibility"
@@ -27,7 +28,7 @@
         </fd-popover>
         <ng-container *ngIf="avatarGroupHostComponent.hiddenItems$ | async as hiddenItems">
             <ng-container *ngIf="hiddenItems.length > 0">
-                <fd-popover [noArrow]="false" [focusAutoCapture]="true" placement="bottom">
+                <fd-popover [noArrow]="false" [focusAutoCapture]="true">
                     <fd-popover-control tabindex="-1">
                         <ng-template
                             [ngTemplateOutlet]="overflowButtonTemplate"
@@ -46,7 +47,7 @@
     </fd-avatar-group-host>
 </ng-container>
 <ng-template #groupType>
-    <fd-popover [noArrow]="false" [focusAutoCapture]="true" placement="bottom" #popoverComponent>
+    <fd-popover [noArrow]="false" [focusAutoCapture]="true" #popoverComponent>
         <fd-popover-control>
             <fd-avatar-group-host
                 #avatarGroupHostComponent

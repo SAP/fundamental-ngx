@@ -1,19 +1,42 @@
 <fd-docs-section-title id="default" componentName="AvatarGroup"> Avatar Group Standard Usage </fd-docs-section-title>
 <description>
-    <!-- TODO -->
+    <p>
+        The <code>fd-avatar-group</code> component is used to display a group of avatars. Visualization is done using
+        the <code>fd-avatar</code> component in conjunction with the <code>[fdAvatarGroupItem]</code> structural
+        directive. Every item can and in most cases should have a details template provided as well.<br />
+        Details template will be displayed in a popover when item is focused.
+    </p>
+    <p>
+        In this example, which is called <code>individual</code> type avatar group, which means that every item is
+        displayed separately, every item can be focused separately and details template will be displayed for that item.
+    </p>
 </description>
 <component-example>
     <fundamental-ngx-avatar-group-default-example></fundamental-ngx-avatar-group-default-example>
 </component-example>
 <code-example [exampleFiles]="avatarGroupDefaultExample"></code-example>
 
-<fd-docs-section-title id="group" componentName="AvatarGroup">
-    Avatar Group type group Standard Usage
-</fd-docs-section-title>
+<fd-docs-section-title id="group" componentName="AvatarGroup"> Group Type Standard Usage </fd-docs-section-title>
 <description>
-    <!-- TODO -->
+    <p>
+        The <code>fd-avatar-group</code> supports <code>group</code> type as well. In this case, all items are displayed
+        as one item. This is useful when there is a need to display a group of avatars in a limited space. In this case,
+        entire container can be focused and details template will be displayed for all items
+    </p>
 </description>
 <component-example>
     <fd-avatar-group-group-type-example></fd-avatar-group-group-type-example>
 </component-example>
-<code-example [exampleFiles]="avatarGroupDefaultExample"></code-example>
+<code-example [exampleFiles]="avatarGroupGroupExample"></code-example>
+
+<fd-docs-section-title id="vertical" componentName="AvatarGroup"> Vertical Avatar Group Usage </fd-docs-section-title>
+<description>
+    <p>
+        The <code>fd-avatar-group</code> supports <code>vertical</code> orientation as well. In this case, all items are
+        displayed in a vertical list and overflow is not supported.
+    </p>
+</description>
+<component-example>
+    <fd-avatar-group-vertical-example></fd-avatar-group-vertical-example>
+</component-example>
+<code-example [exampleFiles]="verticalAvatarGroupExample"></code-example>
