@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.15...v0.43.0-rc.16) (2023-07-20)
+
+
+### Bug Fixes
+
+* **platform:** update tablerows index ([#10191](https://github.com/SAP/fundamental-ngx/issues/10191)) ([53d4ad7](https://github.com/SAP/fundamental-ngx/commit/53d4ad7eda3c740129f739b1478f266a1951acf6))
+
+
+
+
+
 # [0.43.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.14...v0.43.0-rc.15) (2023-07-19)
 
 
