@@ -129,8 +129,12 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
                 filter(() => this.virtualScroll && !!this.bodyHeight),
                 takeUntil(this._destroy$)
             )
-            .subscribe(() => {
+            .subscribe((scrollable) => {
                 this.calculateVirtualScrollRows();
+                this._table.setTableState({
+                    ...this._table.getTableState(),
+                    scrollTopPosition: scrollable.getScrollTop()
+                });
             });
     }
 }

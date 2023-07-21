@@ -184,4 +184,13 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
             }
         }
     }
+
+    /** Set Scroll Position during component initialization. */
+    initializeScrollTop(scrollTop: number): void {
+        this.ngZone.runOutsideAngular(() => {
+            setTimeout(() => {
+                this.setScrollTop(scrollTop, false);
+            });
+        });
+    }
 }
