@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { SwitchComponent } from './switch.component';
 import { CommonModule } from '@angular/common';
@@ -35,6 +35,14 @@ describe('SwitchComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    it('should have no animations class on init, then remove the class when the switch is checked', fakeAsync(() => {
+        expect(component._switchLabelWrapperEl.nativeElement.classList).toContain('fd-switch-no-animate');
+        component.isChecked = true;
+        expect(component._switchLabelWrapperEl.nativeElement.classList).not.toContain('fd-switch-no-animate');
+        tick(500);
+        expect(component._switchLabelWrapperEl.nativeElement.classList).toContain('fd-switch-no-animate');
+    }));
 
     it('should accept custom id', () => {
         const id = 'custom-id';

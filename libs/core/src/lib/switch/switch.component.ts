@@ -123,6 +123,10 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
+    @ViewChild('switchEl', { read: ElementRef })
+    _switchLabelWrapperEl: ElementRef;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
@@ -159,9 +163,14 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
 
     /** Checked property of the switch. */
     set isChecked(value) {
+        this._switchLabelWrapperEl.nativeElement.classList.remove('fd-switch-no-animate');
         this.checked = value;
         this.onChange(value);
         this.checkedChange.emit(value);
+        setTimeout(() => {
+            // add the no-animate class after the transition duration, 100ms
+            this._switchLabelWrapperEl.nativeElement.classList.add('fd-switch-no-animate');
+        }, 100);
     }
     get isChecked(): boolean {
         return this.checked;

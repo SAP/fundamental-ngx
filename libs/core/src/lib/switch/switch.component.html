@@ -1,11 +1,12 @@
 <label
-    class="fd-switch"
+    class="fd-switch fd-switch-no-animate"
     (click)="focus()"
     [style.cursor]="disabled ? 'auto' : 'pointer'"
     [class.is-compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-switch--semantic]="semantic"
     [class.is-disabled]="disabled"
     [attr.aria-label]="ariaLabel"
+    #switchEl
 >
     <span *ngIf="isChecked ? activeText : inactiveText as text" class="fd-switch__text">
         {{ text }}
