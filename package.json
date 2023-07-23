@@ -84,7 +84,7 @@
     "@angular/language-service": "^15.0.0",
     "@angularclass/hmr": "3.0.0",
     "@babel/core": "7.21.3",
-    "@babel/runtime": "7.21.0",
+    "@babel/runtime": "7.22.6",
     "@commitlint/cli": "17.5.1",
     "@commitlint/config-conventional": "17.3.0",
     "@fundamental-styles/common-css": "0.29.4",
