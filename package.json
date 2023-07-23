@@ -134,7 +134,7 @@
     "eslint-plugin-markdown": "3.0.0",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "fs-extra": "10.1.0",
-    "git-semver-tags": "4.1.1",
+    "git-semver-tags": "5.0.1",
     "github-assistant": "0.3.4",
     "husky": "8.0.2",
     "jasmine-core": "4.5.0",
