@@ -803,6 +803,8 @@ export class TableComponent<T = any>
 
         this._listenToLoadingAndRefocusCell();
 
+        this._initScrollPosition();
+
         if (this.expandOnInit) {
             this.expandAll();
         }
@@ -1470,6 +1472,11 @@ export class TableComponent<T = any>
         });
     }
 
+    /** Manually update index after we add new items to the main array */
+    private _reIndexTableRows(): void {
+        this._tableRows.map((row, index) => (row.index = index));
+    }
+
     /** @hidden */
     private _listenToTableRowsPipe(): void {
         this._subscriptions.add(
@@ -1523,11 +1530,6 @@ export class TableComponent<T = any>
                     parentRow.children.push(...rows);
 
                     parentRow.lastChild = parentRow.children[parentRow.children.length - 1];
-
-                    this._tableRows.forEach((row, index) => {
-                        row.index = index;
-                    });
-
                     this._setTableRows(this._tableRows);
                 });
             });
@@ -1713,6 +1715,7 @@ export class TableComponent<T = any>
     private _setTableRows(rows = this._dataSourceTableRows): void {
         this._dataSourceTableRows = rows;
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
+        this._reIndexTableRows();
         this.onTableRowsChanged();
 
         this._calculateIsShownNavigationColumn();
@@ -1908,12 +1911,14 @@ export class TableComponent<T = any>
         this._subscriptions.add(
             this._tableScrollDispatcher
                 .scrolled()
-                .pipe(
-                    filter(() => this.pageScrolling),
-                    map((scrollable) => scrollable.elementRef.nativeElement)
-                )
-                .subscribe(({ scrollTop }) => {
+                .pipe(filter(() => this.pageScrolling))
+                .subscribe((scrollable) => {
+                    const scrollTop = scrollable.getScrollTop();
+
                     this.tableScrolled.emit(scrollTop);
+
+                    // Instead of having two places to record this possition, we could just subscribe once.
+                    this.getTableState().scrollTopPosition = scrollTop;
                 })
         );
     }
@@ -1965,6 +1970,16 @@ export class TableComponent<T = any>
                 )
             );
         });
+    }
+
+    /** @hidden */
+    private _initScrollPosition(): void {
+        const state = this.getTableState();
+
+        if (!state.scrollTopPosition || this._tableRows.length === 0) {
+            return;
+        }
+        this.tableScrollable.initializeScrollTop(state.scrollTopPosition);
     }
 
     /**

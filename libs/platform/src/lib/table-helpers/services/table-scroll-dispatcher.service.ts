@@ -28,6 +28,9 @@ export interface TableScrollable {
 
     /** Scrolls to overlapped cell. */
     scrollToOverlappedCell(rtl: boolean, freezableColumnsSize: number, freezableEndColumnSize: number): void;
+
+    /** Set Scroll Position during component initialization. */
+    initializeScrollTop(scrollTop: number): void;
 }
 
 export const TABLE_SCROLLABLE = new InjectionToken<TableScrollable>('Table Scrollable');

@@ -24,7 +24,8 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
     columnKeys: [],
     freezeToColumn: null,
     freezeToEndColumn: null,
-    searchInput: DEFAULT_TABLE_SEARCH_INPUT
+    searchInput: DEFAULT_TABLE_SEARCH_INPUT,
+    scrollTopPosition: 0
 };
 
 export const DEFAULT_HIGHLIGHTING_KEY = 'semantic';

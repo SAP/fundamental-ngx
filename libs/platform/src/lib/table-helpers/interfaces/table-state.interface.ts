@@ -5,4 +5,5 @@ export interface TableState extends CollectionState {
     columnKeys: string[];
     freezeToColumn: string | null;
     freezeToEndColumn: string | null;
+    scrollTopPosition: number;
 }
