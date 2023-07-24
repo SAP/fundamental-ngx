@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.17...v0.43.0-rc.18) (2023-07-24)
+
+
+### Bug Fixes
+
+* **core:** only stop propagation of scroll in the popover ([#10195](https://github.com/SAP/fundamental-ngx/issues/10195)) ([71ef496](https://github.com/SAP/fundamental-ngx/commit/71ef496a5a63411a8ab609d00246b8d951a727c2))
+
+
+
+
+
 # [0.43.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.16...v0.43.0-rc.17) (2023-07-24)
 
 **Note:** Version bump only for package @fundamental-ngx/core
