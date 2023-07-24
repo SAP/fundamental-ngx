@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -18,6 +19,7 @@ import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -36,7 +38,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     styleUrls: ['./popover-body.component.scss'],
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
 })
-export class PopoverBodyComponent {
+export class PopoverBodyComponent implements AfterViewInit {
     /** Whether to wrap content with fd-scrollbar directive. */
     _disableScrollbar = false;
 
@@ -46,6 +48,10 @@ export class PopoverBodyComponent {
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
+
+    /** @hidden */
+    @ViewChild(ScrollbarDirective)
+    _scrollbar: ScrollbarDirective;
 
     /** Whether the popover should have an arrow. */
     _noArrow = true;
@@ -111,6 +117,13 @@ export class PopoverBodyComponent {
         private _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        if (this._scrollbar) {
+            this._scrollbar._inPopover = true;
+        }
+    }
 
     /** @hidden */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
