@@ -50,7 +50,7 @@ let randomId = 0;
 
 /**
  * @deprecated
- * UploadCollection component is depricated since version 0.40.0
+ * UploadCollection component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-upload-collection',

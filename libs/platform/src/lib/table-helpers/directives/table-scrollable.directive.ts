@@ -155,8 +155,10 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
                 } else if (freezableColumnsSize && freezableEndColumnSize) {
                     // check to see if another element obstructs the active element
-                    const activeElLeft = activeEl.getBoundingClientRect().left;
-                    const activeElTop = activeEl.getBoundingClientRect().top;
+                    const activeElmRect = activeEl.getBoundingClientRect();
+                    const activeElLeft = activeElmRect.left;
+                    const activeElTop = activeElmRect.top;
+                    const activeElWidth = activeElmRect.width;
                     const topElementFromLeft = this._document.elementFromPoint(activeElLeft, activeElTop);
                     // if the activeEl is overlapped
                     if (
@@ -166,8 +168,8 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     ) {
                         const topElementX = topElementFromLeft.getBoundingClientRect().left;
                         const leftVal = isRtl
-                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
+                            ? (activeElLeft + activeElWidth - topElementX) * -1
+                            : activeElLeft + activeElWidth - topElementX;
                         tableScrollableEl.scrollBy({ top: 0, left: leftVal });
                     } else if (
                         topElementFromLeft &&
@@ -176,8 +178,8 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     ) {
                         const topElementX = topElementFromLeft.getBoundingClientRect().right;
                         const leftVal = isRtl
-                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
+                            ? (activeElLeft - activeElWidth - topElementX) * -1
+                            : activeElLeft - activeElWidth - topElementX;
                         tableScrollableEl.scrollBy({ top: 0, left: leftVal });
                     }
                 }

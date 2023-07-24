@@ -44,7 +44,7 @@ let defaultId = 0;
 
 /**
  * @deprecated
- * ApprovalFlowNode component is depricated since version 0.40.0
+ * ApprovalFlowNode component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-node',

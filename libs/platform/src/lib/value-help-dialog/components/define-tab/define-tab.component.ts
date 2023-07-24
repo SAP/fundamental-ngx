@@ -58,11 +58,11 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     @Input()
     conditions: ExtendedBaseEntity[] = [];
 
-    /** @depricated */
+    /** @deprecated */
     @Input()
     included: ExtendedIncludedEntity[] = [];
 
-    /** @depricated */
+    /** @deprecated */
     @Input()
     excluded: ExtendedExcludedEntity[] = [];
 

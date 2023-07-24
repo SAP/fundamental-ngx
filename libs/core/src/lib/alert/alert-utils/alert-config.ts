@@ -2,7 +2,7 @@ import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  *
  * Configuration for opening an alert with the AlertService.

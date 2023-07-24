@@ -7,7 +7,7 @@ import { AlertRef } from '../alert-utils/alert-ref';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  *
  * Service used to dynamically generate an alert as an overlay.

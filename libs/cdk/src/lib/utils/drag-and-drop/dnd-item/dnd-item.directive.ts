@@ -100,7 +100,7 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
     /** @hidden */
     getElementCoordinates(isBefore: boolean): ElementChord {
         /** Takes distance from the beginning of window page */
-        const rect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+        const rect = this.elementRef.nativeElement.getBoundingClientRect();
 
         const position: LinkPosition = isBefore ? 'before' : 'after';
 
@@ -288,12 +288,15 @@ export class DndItemDirective<T = any> implements DndItem, AfterContentInit, OnD
             return;
         }
 
-        const parentTop = parentElement.getBoundingClientRect().top;
-        const parentLeft = parentElement.getBoundingClientRect().left;
+        const parentElmRect = parentElement.getBoundingClientRect();
+        const elmRect = element.getBoundingClientRect();
+
+        const parentTop = parentElmRect.top;
+        const parentLeft = parentElmRect.left;
 
         return {
-            x: Math.abs(element.getBoundingClientRect().left - parentLeft),
-            y: Math.abs(element.getBoundingClientRect().top - parentTop)
+            x: Math.abs(elmRect.left - parentLeft),
+            y: Math.abs(elmRect.top - parentTop)
         };
     }
 

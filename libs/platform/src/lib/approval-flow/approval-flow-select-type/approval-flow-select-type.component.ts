@@ -11,7 +11,7 @@ export interface SelectTypeDialogFormData {
 
 /**
  * @deprecated
- * ApprovalFlowSelectType component is depricated since version 0.40.0
+ * ApprovalFlowSelectType component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-select-type',

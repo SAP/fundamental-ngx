@@ -29,7 +29,7 @@ const INTERVAL_IN_MS = 10;
 
 /**
  * @deprecated
- * ApprovalFlowUserList component is depricated since version 0.40.0
+ * ApprovalFlowUserList component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-user-list',
