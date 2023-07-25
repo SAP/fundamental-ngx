@@ -71,9 +71,13 @@ describe('SwitchComponent', () => {
 
         component.isChecked = true;
 
+        tick(500);
+
         expect(checkedChangeSpy).toHaveBeenCalledWith(true);
 
         component.isChecked = false;
+
+        tick(500);
 
         expect(checkedChangeSpy).toHaveBeenCalledWith(false);
     }));
