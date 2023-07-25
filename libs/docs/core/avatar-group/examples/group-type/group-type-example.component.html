@@ -1,4 +1,4 @@
-<fd-avatar-group [size]="'m'" type="group">
+<fd-avatar-group [size]="'m'" type="group" overflowPopoverTitle="Team members">
     <ng-container *ngFor="let person of people">
         <ng-container *ngIf="!person.imageUrl && !person.glyph">
             <fd-avatar
