@@ -106,10 +106,12 @@ describe('Switch test suite', () => {
             if ((await getElementClass(switchToggle, i)) !== disabledToggle) {
                 if ((await getAttributeByName(flag, 'aria-checked', i)) === 'true') {
                     await click(switchToggle, i);
+                    await new Promise((resolve) => setTimeout(resolve, 500));
                     await expect(await checkToggleState(section, i)).toBe(false, 'toggle is enabled');
                 }
                 if ((await getAttributeByName(flag, 'aria-checked', i)) === 'false') {
                     await click(switchToggle, i);
+                    await new Promise((resolve) => setTimeout(resolve, 500));
                     await expect(await checkToggleState(section, i)).toBe(true, 'toggle is disabled');
                 }
             }
@@ -122,6 +124,7 @@ describe('Switch test suite', () => {
         flag: string = section + toggleInput
     ): Promise<boolean | undefined> {
         if ((await getAttributeByName(section + toggle, 'class', i)) !== disabledToggle) {
+            await new Promise((resolve) => setTimeout(resolve, 500));
             if ((await getAttributeByName(flag, 'aria-checked', i)) === 'true') {
                 return true;
             }
