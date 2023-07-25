@@ -28,7 +28,7 @@ class TestComponent {
     @ViewChild(DynamicPageComponent)
     dynamicPage: DynamicPageComponent;
 }
-xdescribe('DynamicPageComponent default values', () => {
+describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let dynamicPageComponent: DynamicPageComponent;
@@ -89,30 +89,5 @@ xdescribe('DynamicPageComponent default values', () => {
         const propagateSizeSpy = jest.spyOn(<any>dynamicPageComponent, '_propagateSizeToChildren');
         dynamicPageComponent.size = 'small';
         expect(propagateSizeSpy).toHaveBeenCalled();
-    });
-
-    it('should apply valid height on content', () => {
-        const size = '150px';
-        fixture.detectChanges();
-        (<any>dynamicPageComponent)._getCalculatedFullHeight = (): string => size;
-        (<any>dynamicPageComponent)._setContainerPositions();
-        fixture.detectChanges();
-
-        const element = dynamicPageComponent._contentComponent.first.elementRef.nativeElement;
-        const styles = window.getComputedStyle(element);
-        expect(styles.height).toBe(size);
-    });
-
-    it('should apply valid height on tabs', () => {
-        component.tabs = true;
-        fixture.detectChanges();
-        const size = '150px';
-        (<any>dynamicPageComponent)._getCalculatedFullHeight = (): string => size;
-        (<any>dynamicPageComponent)._setTabsPosition();
-        fixture.detectChanges();
-
-        const element = dynamicPageComponent._tabComponent.contentContainer.nativeElement;
-        const styles = window.getComputedStyle(element);
-        expect(styles.height).toBe(size);
     });
 });

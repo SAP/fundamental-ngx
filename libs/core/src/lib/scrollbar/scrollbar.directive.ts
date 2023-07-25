@@ -101,6 +101,9 @@ export class ScrollbarDirective implements OnDestroy {
     }
 
     /** @hidden */
+    _inPopover = false;
+
+    /** @hidden */
     private _document: Document = inject(DOCUMENT);
     /** @hidden */
     private _noHorizontalScroll = false;
@@ -114,7 +117,9 @@ export class ScrollbarDirective implements OnDestroy {
     /** @hidden */
     @HostListener('scroll', ['$event'])
     onScroll(event: Event): void {
-        event.stopImmediatePropagation();
+        if (this._inPopover) {
+            event.stopImmediatePropagation();
+        }
     }
 
     /**

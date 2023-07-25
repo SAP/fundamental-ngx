@@ -14,6 +14,7 @@ import {
     OnDestroy,
     Optional,
     Renderer2,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
@@ -172,8 +173,12 @@ export class PopoverComponent
     }
 
     /** @hidden */
-    ngOnChanges(): void {
+    ngOnChanges(changes: SimpleChanges): void {
         this._popoverService.refreshConfiguration(this);
+
+        if (changes.disableScrollbar && this.popoverBody && this.popoverBody._scrollbar) {
+            this.popoverBody._scrollbar._inPopover = changes.disableScrollbar.currentValue;
+        }
     }
 
     /** @hidden */
