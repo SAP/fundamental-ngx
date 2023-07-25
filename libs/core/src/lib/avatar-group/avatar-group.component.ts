@@ -2,14 +2,16 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
-    inject,
     Input,
     QueryList,
+    ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import {
     DynamicPortalComponent,
@@ -18,7 +20,7 @@ import {
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { map, Observable, of } from 'rxjs';
+import { Observable, Subscription, debounceTime, map, of } from 'rxjs';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -98,6 +100,17 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
+    @ViewChild(AvatarGroupHostComponent)
+    set avatarGroupHostComponent(host: AvatarGroupHostComponent) {
+        if (this._avatarGroupHostHiddenItemsSubscription) {
+            this._avatarGroupHostHiddenItemsSubscription.unsubscribe();
+        }
+        this._avatarGroupHostHiddenItemsSubscription = host.hiddenItems$
+            .pipe(debounceTime(100))
+            .subscribe(() => this._cdr.detectChanges());
+    }
+
+    /** @hidden */
     @ContentChildren(AvatarGroupItemDirective)
     avatars: QueryList<AvatarGroupItemDirective>;
 
@@ -113,4 +126,10 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
         map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
     );
+
+    /** @hidden */
+    private _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    private _avatarGroupHostHiddenItemsSubscription: Subscription;
 }
