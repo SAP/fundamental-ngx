@@ -10,8 +10,5 @@
 
 // to prevent the transition when the switch is first rendered
 .fd-switch-no-animate * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
+    transition: none !important;
 }
