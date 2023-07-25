@@ -135,9 +135,7 @@
                 ></ng-container>
             </ng-container>
         </ng-container>
-        <ng-template #defaultTableCellTemplate>
-            {{ row.value | valueByPath : column.key }}
-        </ng-template>
+        <ng-template #defaultTableCellTemplate>{{ row.value | valueByPath : column.key }}</ng-template>
 
         <ng-template #editModeCell>
             <ng-container *ngIf="column?.editableColumnCellTemplate; else defaultEditableTableCellTemplate">
