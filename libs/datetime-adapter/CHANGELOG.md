@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.18...v0.43.0-rc.19) (2023-07-25)
+
+
+### Bug Fixes
+
+* **docs:** dayjs datetime adapter docs ([#10220](https://github.com/SAP/fundamental-ngx/issues/10220)) ([06aaa26](https://github.com/SAP/fundamental-ngx/commit/06aaa26777e81268e849c97a44741eb523641e14))
+
+
+
+
+
 # [0.43.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.17...v0.43.0-rc.18) (2023-07-24)
 
 **Note:** Version bump only for package @fundamental-ngx/datetime-adapter
