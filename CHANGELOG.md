@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.21...v0.43.0-rc.22) (2023-07-26)
+
+
+### Bug Fixes
+
+* **platform:** interpolation adding whitespace to table text ([#10223](https://github.com/SAP/fundamental-ngx/issues/10223)) ([71f8d07](https://github.com/SAP/fundamental-ngx/commit/71f8d0775507f3630ac588ea81842dcb84439815))
+
+
+
+
+
+# [0.43.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.20...v0.43.0-rc.21) (2023-07-26)
+
+
+### Bug Fixes
+
+* add focusAutoCapture to table popover ([#10226](https://github.com/SAP/fundamental-ngx/issues/10226)) ([65640e7](https://github.com/SAP/fundamental-ngx/commit/65640e7945d46b606ebd2542fc67f12b9e743d45))
+
+
+
+
+
+# [0.43.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.19...v0.43.0-rc.20) (2023-07-25)
+
+
+### Bug Fixes
+
+* **core,platform:** remove the i18n files for not translated languages ([#10225](https://github.com/SAP/fundamental-ngx/issues/10225)) ([f6a19f7](https://github.com/SAP/fundamental-ngx/commit/f6a19f79c8304d7518ee8f24a27caab42dfc6f34))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** remove English placeholder files for Arabic, Belarusian, Croatian, German, Portuguese, Romanian, Sinhala, Spanish as the translation is missing
+
+
+
+
+
+# [0.43.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.18...v0.43.0-rc.19) (2023-07-25)
+
+
+### Bug Fixes
+
+* **docs:** dayjs datetime adapter docs ([#10220](https://github.com/SAP/fundamental-ngx/issues/10220)) ([06aaa26](https://github.com/SAP/fundamental-ngx/commit/06aaa26777e81268e849c97a44741eb523641e14))
+
+
+
+
+
 # [0.43.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.17...v0.43.0-rc.18) (2023-07-24)
 
 

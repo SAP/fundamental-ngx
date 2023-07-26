@@ -1,6 +1,6 @@
 import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import dayjs, { Dayjs } from 'dayjs';
 
 import 'dayjs/locale/en';
@@ -8,11 +8,24 @@ import 'dayjs/locale/fr';
 import 'dayjs/locale/de';
 import 'dayjs/locale/bg';
 import 'dayjs/locale/ar';
+import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 
 @Component({
     selector: 'fd-date-picker-dayjs-adapter-example',
     templateUrl: './date-picker-dayjs-adapter-example.component.html',
-    providers: [{ provide: LOCALE_ID, useValue: 'fr' }]
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        { provide: LOCALE_ID, useValue: 'fr' },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: DAYJS_DATETIME_FORMATS
+        },
+        {
+            provide: DatetimeAdapter,
+            useClass: DayjsDatetimeAdapter
+        }
+    ]
 })
 export class DatePickerDayjsAdapterExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Dayjs>;

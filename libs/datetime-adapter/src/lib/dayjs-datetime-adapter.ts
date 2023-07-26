@@ -82,8 +82,9 @@ export class DayjsDatetimeAdapter extends DatetimeAdapter<Dayjs> {
         if (dayjs.locale() !== locale) {
             throw new Error(
                 `Failed to load locale ${locale}. ` +
-                    'Make sure it exists and is preloaded. You may use "loadLocale" function from this package to load the locale you need. ' +
-                    'List of supported locales can be found here: https://day.js.org/docs/en/i18n/i18n.'
+                    'Make sure it exists and is preloaded. See the imports at the top of the example file at ' +
+                    'https://sap.github.io/fundamental-ngx/#/core/dayjs-datetime-adapter' +
+                    'List of supported locales can be found here: https://github.com/iamkun/dayjs/tree/dev/src/locale.'
             );
         }
 

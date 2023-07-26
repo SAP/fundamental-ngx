@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.21...v0.43.0-rc.22) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.43.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.20...v0.43.0-rc.21) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.43.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.19...v0.43.0-rc.20) (2023-07-25)
+
+
+### Bug Fixes
+
+* **core,platform:** remove the i18n files for not translated languages ([#10225](https://github.com/SAP/fundamental-ngx/issues/10225)) ([f6a19f7](https://github.com/SAP/fundamental-ngx/commit/f6a19f79c8304d7518ee8f24a27caab42dfc6f34))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** remove English placeholder files for Arabic, Belarusian, Croatian, German, Portuguese, Romanian, Sinhala, Spanish as the translation is missing
+
+
+
+
+
+# [0.43.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.18...v0.43.0-rc.19) (2023-07-25)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 # [0.43.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.17...v0.43.0-rc.18) (2023-07-24)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
