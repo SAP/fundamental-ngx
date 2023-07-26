@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.25...v0.43.0-rc.26) (2023-07-26)
+
+
+### Bug Fixes
+
+* **platform:** add missing labels ([#10229](https://github.com/SAP/fundamental-ngx/issues/10229)) ([13756fd](https://github.com/SAP/fundamental-ngx/commit/13756fd702c1e2f93564562d7c7f2c7f5fb56ba4))
+
+
+
+
+
 # [0.43.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.24...v0.43.0-rc.25) (2023-07-26)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
