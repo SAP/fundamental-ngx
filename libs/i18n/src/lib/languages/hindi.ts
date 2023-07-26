@@ -360,7 +360,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         settingsCategoryVisible: 'दृश्यमान',
         settingsCategoryActive: 'सक्रिय',
         settingsCategoryVisibleAndActive: 'दृश्यमान और सक्रिय',
-        settingsCategoryMandatory: 'अनिवार्य'
+        settingsCategoryMandatory: 'अनिवार्य',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'छोटे से बड़े क्रम में क्रमबद्ध करें',

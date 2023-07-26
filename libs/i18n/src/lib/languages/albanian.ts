@@ -368,7 +368,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         settingsCategoryVisible: 'E dukshme',
         settingsCategoryActive: 'Aktiv',
         settingsCategoryVisibleAndActive: 'E dukshme dhe aktive',
-        settingsCategoryMandatory: 'I detyrueshëm'
+        settingsCategoryMandatory: 'I detyrueshëm',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Rendit në rritje',

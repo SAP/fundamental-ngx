@@ -512,7 +512,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         settingsCategoryVisible: 'Видимі',
         settingsCategoryActive: 'Активні',
         settingsCategoryVisibleAndActive: 'Видимі та активні',
-        settingsCategoryMandatory: "Обов'язкові"
+        settingsCategoryMandatory: "Обов'язкові",
+        manageFieldConditions: 'Показати умови для поля',
+        refreshButtonAriaLabel: 'Оновити'
     },
     platformTable: {
         headerMenuSortAsc: 'Сортувати за зростанням',

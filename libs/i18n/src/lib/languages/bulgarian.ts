@@ -429,7 +429,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         settingsCategoryVisible: 'Видими',
         settingsCategoryActive: 'Активни',
         settingsCategoryVisibleAndActive: 'Видими и Активни',
-        settingsCategoryMandatory: 'Задължителни'
+        settingsCategoryMandatory: 'Задължителни',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Сортирай Възходящо',

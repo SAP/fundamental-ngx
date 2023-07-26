@@ -359,7 +359,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         settingsCategoryVisible: 'Visible',
         settingsCategoryActive: 'Active',
         settingsCategoryVisibleAndActive: 'Visible and active',
-        settingsCategoryMandatory: 'Mandatory'
+        settingsCategoryMandatory: 'Mandatory',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Sort Ascending',
