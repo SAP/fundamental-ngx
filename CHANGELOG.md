@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.22...v0.43.0-rc.23) (2023-07-26)
+
+
+### Bug Fixes
+
+* **core:** only apply the animation/transition to the switch when the… ([#10200](https://github.com/SAP/fundamental-ngx/issues/10200)) ([0118c58](https://github.com/SAP/fundamental-ngx/commit/0118c5853b65afa1ec15562b1fe7fcc3ef004555))
+
+
+
+
+
 # [0.43.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.21...v0.43.0-rc.22) (2023-07-26)
 
 
