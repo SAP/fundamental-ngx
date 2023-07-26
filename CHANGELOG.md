@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.23...v0.43.0-rc.24) (2023-07-26)
+
+
+### Bug Fixes
+
+* **core:** correct icon placement ([#10228](https://github.com/SAP/fundamental-ngx/issues/10228)) ([f7927a6](https://github.com/SAP/fundamental-ngx/commit/f7927a66d4cfebb7ed9d20b362d7d86e5d84a5d0))
+
+
+
+
+
 # [0.43.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.22...v0.43.0-rc.23) (2023-07-26)
 
 
