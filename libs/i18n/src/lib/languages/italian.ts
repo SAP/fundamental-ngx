@@ -371,7 +371,9 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         settingsCategoryVisible: 'Visibile',
         settingsCategoryActive: 'Attivo',
         settingsCategoryVisibleAndActive: 'Visibile e attivo',
-        settingsCategoryMandatory: 'Obbligatorio'
+        settingsCategoryMandatory: 'Obbligatorio',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Ordine crescente',

@@ -358,7 +358,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         settingsCategoryVisible: '可见的',
         settingsCategoryActive: '使用中的',
         settingsCategoryVisibleAndActive: '可见的和使用中的',
-        settingsCategoryMandatory: '强制性的'
+        settingsCategoryMandatory: '强制性的',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: '升序排序',

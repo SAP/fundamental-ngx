@@ -456,6 +456,8 @@ export interface FdLanguage {
         settingsCategoryActive: FdLanguageKey;
         settingsCategoryVisibleAndActive: FdLanguageKey;
         settingsCategoryMandatory: FdLanguageKey;
+        manageFieldConditions: FdLanguageKey;
+        refreshButtonAriaLabel: FdLanguageKey;
     };
     platformTable: {
         headerMenuSortAsc: FdLanguageKey;

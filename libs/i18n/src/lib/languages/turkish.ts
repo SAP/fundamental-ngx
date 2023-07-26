@@ -360,7 +360,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         settingsCategoryVisible: 'Görünür',
         settingsCategoryActive: 'Etkin',
         settingsCategoryVisibleAndActive: 'Görünür ve aktif',
-        settingsCategoryMandatory: 'Zorunlu'
+        settingsCategoryMandatory: 'Zorunlu',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Artan Sıralama',
