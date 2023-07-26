@@ -7,3 +7,8 @@
 .fd-switch__invisible-text {
     display: none !important;
 }
+
+// to prevent the transition when the switch is first rendered
+.fd-switch-no-animate * {
+    transition: none !important;
+}
