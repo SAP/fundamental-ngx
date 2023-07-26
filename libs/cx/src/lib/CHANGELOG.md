@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.24...v0.43.0-rc.25) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/cx
+
+
+
+
+
 # [0.43.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.23...v0.43.0-rc.24) (2023-07-26)
 
 **Note:** Version bump only for package @fundamental-ngx/cx
