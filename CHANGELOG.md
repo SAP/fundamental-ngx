@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.20...v0.43.0-rc.21) (2023-07-26)
+
+
+### Bug Fixes
+
+* add focusAutoCapture to table popover ([#10226](https://github.com/SAP/fundamental-ngx/issues/10226)) ([65640e7](https://github.com/SAP/fundamental-ngx/commit/65640e7945d46b606ebd2542fc67f12b9e743d45))
+
+
+
+
+
 # [0.43.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.19...v0.43.0-rc.20) (2023-07-25)
 
 
