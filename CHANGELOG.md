@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.27...v0.43.0-rc.28) (2023-07-27)
+
+
+### Bug Fixes
+
+* **core:** provided wizard service ([#10233](https://github.com/SAP/fundamental-ngx/issues/10233)) ([92735ef](https://github.com/SAP/fundamental-ngx/commit/92735efc033f68efeaebbebd1fdd7c44e854a216))
+
+
+
+
+
 # [0.43.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.26...v0.43.0-rc.27) (2023-07-27)
 
 
