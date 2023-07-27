@@ -1,4 +1,11 @@
-import { Component, QueryList, TemplateRef, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    QueryList,
+    TemplateRef,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
@@ -6,8 +13,8 @@ import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundament
     selector: 'fd-wizard-visible-summary-example',
     templateUrl: './wizard-visible-summary-example.component.html',
     styleUrls: ['./wizard-visible-summary-example.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [WizardService]
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class WizardVisibleSummaryExampleComponent {
     step1status: WizardStepStatus = 'current';
