@@ -1,4 +1,12 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    QueryList,
+    ViewChild,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
 import { WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard';
 
 @Component({
@@ -6,10 +14,10 @@ import { WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard
     templateUrl: './wizard-loading-example.component.html',
     styleUrls: ['./wizard-loading-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-wizard-example'
-    },
-    providers: [WizardService]
+    }
 })
 export class WizardLoadingExampleComponent {
     /**

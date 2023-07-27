@@ -1,10 +1,11 @@
-import { Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-mobile-example',
     templateUrl: './wizard-mobile-example.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [
         `
             .fd-wizard-mobile-docs .fd-wizard {
@@ -15,8 +16,7 @@ import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundament
     ],
     host: {
         class: 'fd-wizard-mobile-docs'
-    },
-    providers: [WizardService]
+    }
 })
 export class WizardMobileExampleComponent {
     contentHeight = '450px';

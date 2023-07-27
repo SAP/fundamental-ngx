@@ -14,6 +14,7 @@ import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { DeprecatedWizardCompactDirective } from './deprecated-wizard-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
+import { WizardService } from './wizard.service';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         WizardContentComponent,
         DeprecatedWizardCompactDirective,
         ContentDensityModule
-    ]
+    ],
+    providers: [WizardService]
 })
 export class WizardModule {}
