@@ -37,6 +37,7 @@ import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-
 import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
 import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
 import { ListLoadingExampleComponent } from './examples/list-loading-example/list-loading-examples.component';
+import { PopoverModule, ShellbarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -64,7 +65,9 @@ const routes: Routes = [
         InputGroupModule,
         SharedDocumentationModule,
         SkeletonModule,
-        RepeatModule
+        RepeatModule,
+        PopoverModule,
+        ShellbarModule
     ],
     exports: [RouterModule],
     declarations: [
