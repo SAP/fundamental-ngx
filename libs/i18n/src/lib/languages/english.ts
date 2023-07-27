@@ -464,7 +464,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Cancel',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',

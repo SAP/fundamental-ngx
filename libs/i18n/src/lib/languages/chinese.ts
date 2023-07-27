@@ -463,7 +463,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         sortDialogConfirmBtnLabel: '确定',
         sortDialogCancelBtnLabel: '取消',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: '上一项',

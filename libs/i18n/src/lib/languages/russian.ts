@@ -619,7 +619,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         sortDialogConfirmBtnLabel: 'ОК',
         sortDialogCancelBtnLabel: 'Отменить',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти к предыдущему',

@@ -14,7 +14,7 @@
             *ngIf="row.value[selectableKey] !== false; else selectionMock"
             class="fd-table__cell--checkbox"
             [class.fd-table__cell--fixed]="fixed"
-            [attr.role]="_hasRowHeaderColumn ? 'gridcell' : 'rowheader'"
+            [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
             fd-table-cell
             fd-table-cell-selectable
             [focusable]="true"
@@ -27,7 +27,26 @@
             (click)="_toggleSingleSelectableRow()"
             (keydown.enter)="_toggleSingleSelectableRow()"
             (keydown.space)="_toggleSingleSelectableRow()"
-        ></td>
+        >
+            <!-- hidden text for screenreader -->
+            <span
+                style="
+                    position: absolute !important;
+                    height: 1px;
+                    width: 1px;
+                    overflow: hidden;
+                    clip: rect(1px, 1px, 1px, 1px);
+                    color: transparent;
+                "
+            >
+                <ng-container *ngIf="row.checked">
+                    {{ 'platformTable.deselectSingleRow' | fdTranslate }}
+                </ng-container>
+                <ng-container *ngIf="!row.checked">
+                    {{ 'platformTable.selectSingleRow' | fdTranslate }}
+                </ng-container>
+            </span>
+        </td>
     </ng-container>
 
     <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
