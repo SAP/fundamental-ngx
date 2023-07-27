@@ -129,6 +129,11 @@
                     },
                     {
                         "glob": "**/examples/**/*",
+                        "input": "libs/docs/i18n",
+                        "output": "./docs/shared/i18n"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
                         "input": "libs/docs/cx",
                         "output": "./docs/cx"
                     },
@@ -141,11 +146,6 @@
                         "glob": "filter.pipe.ts",
                         "input": "libs/docs/shared/src/lib/core-helpers/pipes",
                         "output": "./docs/core/shared/examples"
-                    },
-                    {
-                        "glob": "**/*",
-                        "input": "libs/docs/i18n/examples",
-                        "output": "./docs/platform/i18n/examples"
                     },
                     {
                         "glob": "**/*",
