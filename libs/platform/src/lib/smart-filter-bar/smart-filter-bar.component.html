@@ -23,7 +23,13 @@
             [disabled]="_loading"
             [label]="'platformSmartFilterBar.submitButtonLabel' | fdTranslate"
         ></fdp-button>
-        <fdp-button (click)="submitForm()" fd-toolbar-item glyph="synchronize" [disabled]="_loading"></fdp-button>
+        <fdp-button
+            (click)="submitForm()"
+            fd-toolbar-item
+            glyph="synchronize"
+            [disabled]="_loading"
+            [ariaLabel]="'platformSmartFilterBar.refreshButtonAriaLabel' | fdTranslate"
+        ></fdp-button>
         <fdp-button
             (click)="showFilteringSettings()"
             [label]="

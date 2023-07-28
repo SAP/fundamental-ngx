@@ -361,7 +361,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         settingsCategoryVisible: 'ხილვადი',
         settingsCategoryActive: 'აქტიური',
         settingsCategoryVisibleAndActive: 'ხილვადი და აქტიური',
-        settingsCategoryMandatory: 'სავალდებულო'
+        settingsCategoryMandatory: 'სავალდებულო',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'ზრდადობით დალაგება',
@@ -464,7 +466,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         sortDialogConfirmBtnLabel: 'კარგი',
         sortDialogCancelBtnLabel: 'გაუქმება',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'წინაზე გადასვლა',

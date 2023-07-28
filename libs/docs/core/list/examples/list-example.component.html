@@ -1,33 +1,72 @@
-<h3>Default List</h3>
+<fd-shellbar>
+    <fd-shellbar-logo>
+        <a href="#" class="fd-shellbar__logo fd-shellbar__logo--image-replaced" aria-label="SAP"></a>
+    </fd-shellbar-logo>
 
-<ul fd-list>
-    <li fd-list-item>
-        <span fd-list-title> List item 1 </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title> List item 2 </span>
-    </li>
-    <li fd-list-item [unread]="true">
-        <span fd-list-title> Unread List item 3 </span>
-    </li>
-    <li fd-list-item [unread]="true">
-        <span fd-list-title> Unread List item 4 </span>
-    </li>
-</ul>
+    <fd-shellbar-title> Corporate Portal </fd-shellbar-title>
 
-<h3>Compact mode</h3>
-
-<ul fd-list fdCompact>
-    <li fd-list-item>
-        <span fd-list-title> List item 1 </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title> List item 2 </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title> List item 3 </span>
-    </li>
-    <li fd-list-item>
-        <span fd-list-title> List item 4 </span>
-    </li>
-</ul>
+    <fd-shellbar-actions [closePopoverOnSelect]="true">
+        <fd-shellbar-user-menu
+            #shellbarUserMenu
+            [closeOnOutsideClick]="false"
+            [user]="user"
+            [fdPopoverTrigger]="userMenuPopover"
+            [noArrow]="true"
+        >
+        </fd-shellbar-user-menu>
+        <fd-shellbar-action glyph="question-mark" title="Help"></fd-shellbar-action>
+    </fd-shellbar-actions>
+    <fd-popover
+        #userMenuPopover
+        [placement]="'bottom-end'"
+        [focusAutoCapture]="true"
+        [focusTrapped]="true"
+        [fixedPosition]="true"
+        [noArrow]="true"
+    >
+        <fd-popover-body>
+            <ul fd-list>
+                <li fd-list-item id="shellbar-my-account" class="menu-item">
+                    <a fd-list-link (click)="onClick($event, 'My Account clicked')" class="menu-item-link">
+                        <span fd-list-title class="menu-item-title">My Account</span>
+                    </a>
+                </li>
+                <li fd-list-item id="shellbar-logout">
+                    <a fd-list-link (click)="onClick($event, 'logout clicked')">
+                        <span fd-list-title> List item 1 </span>
+                    </a>
+                </li>
+                <li
+                    fd-list-item
+                    [fdPopoverTrigger]="popover"
+                    (keyup.enter)="togglePopover(popover, $event)"
+                    (keyup.space)="togglePopover(popover, $event)"
+                    id="shellbar-settings"
+                >
+                    <span fd-list-title>Settings</span>
+                    <i fd-list-icon [glyph]="'navigation-right-arrow'" [class]="'submenu-arrow'"></i>
+                </li>
+            </ul>
+        </fd-popover-body>
+    </fd-popover>
+</fd-shellbar>
+<fd-popover [focusAutoCapture]="true" [focusTrapped]="true" [disableScrollbar]="true" #popover>
+    <fd-popover-body>
+        <ul fd-list>
+            <li fd-list-item id="shellbar-logout1">
+                <a
+                    fd-list-link
+                    (click)="onClick($event, 'list1 clicked')"
+                    (keydown.enter)="onClick($event, 'list1 clicked')"
+                >
+                    <span fd-list-title> List item 1 </span>
+                </a>
+            </li>
+            <li fd-list-item id="shellbar-logout2">
+                <a fd-list-link (click)="onClick($event, 'list2 clicked')">
+                    <span fd-list-title> List item 2 </span>
+                </a>
+            </li>
+        </ul>
+    </fd-popover-body>
+</fd-popover>

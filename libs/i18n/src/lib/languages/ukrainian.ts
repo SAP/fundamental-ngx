@@ -512,7 +512,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         settingsCategoryVisible: 'Видимі',
         settingsCategoryActive: 'Активні',
         settingsCategoryVisibleAndActive: 'Видимі та активні',
-        settingsCategoryMandatory: "Обов'язкові"
+        settingsCategoryMandatory: "Обов'язкові",
+        manageFieldConditions: 'Показати умови для поля',
+        refreshButtonAriaLabel: 'Оновити'
     },
     platformTable: {
         headerMenuSortAsc: 'Сортувати за зростанням',
@@ -615,7 +617,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Скасувати',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',

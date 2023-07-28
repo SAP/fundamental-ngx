@@ -358,7 +358,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         settingsCategoryVisible: '可见的',
         settingsCategoryActive: '使用中的',
         settingsCategoryVisibleAndActive: '可见的和使用中的',
-        settingsCategoryMandatory: '强制性的'
+        settingsCategoryMandatory: '强制性的',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: '升序排序',
@@ -461,7 +463,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         sortDialogConfirmBtnLabel: '确定',
         sortDialogCancelBtnLabel: '取消',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: '上一项',

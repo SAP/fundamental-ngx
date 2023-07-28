@@ -363,7 +363,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         settingsCategoryVisible: 'Visible',
         settingsCategoryActive: 'Actif',
         settingsCategoryVisibleAndActive: 'Visible et actif',
-        settingsCategoryMandatory: 'Obligatoire'
+        settingsCategoryMandatory: 'Obligatoire',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Tri ascendant',
@@ -466,7 +468,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Annuler',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Aller à la page précédente',

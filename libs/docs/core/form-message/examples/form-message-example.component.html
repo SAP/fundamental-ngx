@@ -98,3 +98,32 @@
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
+
+<div fd-form-item class="fd-custom-form-item-message">
+    <label fd-form-label for="group-message-custom-placement">
+        Message with custom placement - Changed Programmatically
+    </label>
+    <fd-form-input-message-group
+        placement="bottom"
+        [(isOpen)]="openCustom"
+        placementContainer="self"
+        [triggers]="[]"
+        [closeOnOutsideClick]="false"
+        [closeOnEscapeKey]="false"
+    >
+        <fd-input-group
+            id="group-message-2"
+            state="information"
+            [button]="true"
+            addOnText="Toggle Message"
+            (addOnButtonClicked)="openCustom = !openCustom"
+        >
+        </fd-input-group>
+        <fd-form-message type="information">
+            <div>
+                This message is controlled by&nbsp;<code>openCustom</code>&nbsp;variable.<br />
+                The popover itself is rendered inside <code>fd-form-input-message-group</code> element.
+            </div>
+        </fd-form-message>
+    </fd-form-input-message-group>
+</div>
