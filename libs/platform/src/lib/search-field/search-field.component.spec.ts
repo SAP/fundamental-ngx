@@ -246,7 +246,7 @@ describe('SearchFieldComponent', () => {
         expect(categoryButton.length).toBe(1);
 
         const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.innerText).toBe('Category');
+        expect(categoryLabel.nativeElement.textContent.trim()).toBe('Category');
     });
 
     it('should allow the user to set the text of the category label', () => {
@@ -257,7 +257,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.innerText).toBe('Categoría');
+        expect(categoryLabel.nativeElement.textContent.trim()).toBe('Categoría');
     });
 
     it('should allow the user to hide the category label', () => {
@@ -303,7 +303,7 @@ describe('SearchFieldComponent', () => {
 
         expect(component._currentCategory).toEqual(CATEGORIES[2]);
         let categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.innerText).toBe(CATEGORIES[2].label);
+        expect(categoryLabel.nativeElement.textContent.trim()).toBe(CATEGORIES[2].label);
         expect(host.inputValue?.category).toBe(CATEGORIES[2].value);
 
         // click on category button
@@ -319,7 +319,7 @@ describe('SearchFieldComponent', () => {
 
         expect(component._currentCategory).toEqual(CATEGORIES[1]);
         categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.innerText).toBe(CATEGORIES[1].label);
+        expect(categoryLabel.nativeElement.textContent.trim()).toBe(CATEGORIES[1].label);
         expect(host.inputValue?.category).toBe(CATEGORIES[1].value);
     }));
 
