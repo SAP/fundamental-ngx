@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     QueryList,
@@ -16,10 +17,10 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
     templateUrl: './wizard-branching-example.component.html',
     styleUrls: ['./wizard-branching-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-wizard-example'
-    },
-    providers: [WizardService]
+    }
 })
 export class WizardBranchingExampleComponent {
     /**

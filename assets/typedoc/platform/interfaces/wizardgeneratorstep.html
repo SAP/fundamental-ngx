@@ -1,0 +1,111 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-hierarchy">
+	<h3>Hierarchy</h3>
+	<ul class="tsd-hierarchy">
+		<li>
+			<span class="target">WizardGeneratorStep</span>
+		</li>
+	</ul>
+</section>
+<section class="tsd-panel">
+	<h3>Implemented by</h3>
+	<ul class="tsd-hierarchy">
+		<li><span class="tsd-signature-type">WizardGeneratorStepComponent</span></li>
+	</ul>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Properties</h2>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+		<a name="formGenerators" class="tsd-anchor"></a>
+		<h3>form<wbr>Generators</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">form<wbr>Generators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormGeneratorComponent</span><span class="tsd-signature-symbol">&gt;</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7ed34e0/libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts#L7">libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts:7</a></li>
+			</ul>
+		</aside>
+	</section>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Methods</h2>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+		<a name="getVisibleForms" class="tsd-anchor"></a>
+		<h3>get<wbr>Visible<wbr>Forms</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+			<li class="tsd-signature tsd-kind-icon">get<wbr>Visible<wbr>Forms<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardStepForms</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7ed34e0/libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts#L8">libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts:8</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">WizardStepForms</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+		<a name="refreshFormsVisibility" class="tsd-anchor"></a>
+		<h3>refresh<wbr>Forms<wbr>Visibility</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+			<li class="tsd-signature tsd-kind-icon">refresh<wbr>Forms<wbr>Visibility<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7ed34e0/libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts#L11">libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts:11</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+		<a name="submitForms" class="tsd-anchor"></a>
+		<h3>submit<wbr>Forms</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+			<li class="tsd-signature tsd-kind-icon">submit<wbr>Forms<span class="tsd-signature-symbol">(</span>skipIfUntouched<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">WizardStepSubmittedForms</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7ed34e0/libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts#L9">libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts:9</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5><span class="tsd-flag ts-flagOptional">Optional</span> skipIfUntouched: <span class="tsd-signature-type">boolean</span></h5>
+					</li>
+				</ul>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">WizardStepSubmittedForms</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+		<a name="updateFormsState" class="tsd-anchor"></a>
+		<h3>update<wbr>Forms<wbr>State</h3>
+		<!-- {log decorators} -->
+		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+			<li class="tsd-signature tsd-kind-icon">update<wbr>Forms<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/7ed34e0/libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts#L10">libs/platform/src/lib/wizard-generator/interfaces/wizard-step.interface.ts:10</a></li>
+					</ul>
+				</aside>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+			</li>
+		</ul>
+	</section>
+</section>
+</div>

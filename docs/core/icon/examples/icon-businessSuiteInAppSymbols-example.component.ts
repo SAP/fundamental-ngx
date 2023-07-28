@@ -219,6 +219,26 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'gate',
         'timeseries-waterfall-chart',
         'stages-warning',
-        'empty-warning'
+        'empty-warning',
+        'move-folder',
+        'remove-folder',
+        'match-case',
+        'match-whole-word',
+        'remove-total',
+        'after-total',
+        'before-total',
+        'workbook-filter',
+        'icon-update-filter',
+        'cell-lock',
+        'max-container',
+        'max-interval',
+        'min-interval',
+        'cross-order',
+        'empty-order',
+        'cross-sequence',
+        'empty-sequence',
+        'cross-union',
+        'empty-union',
+        'cross-target'
     ];
 }
