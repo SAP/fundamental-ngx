@@ -466,7 +466,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         sortDialogConfirmBtnLabel: 'კარგი',
         sortDialogCancelBtnLabel: 'გაუქმება',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'წინაზე გადასვლა',
