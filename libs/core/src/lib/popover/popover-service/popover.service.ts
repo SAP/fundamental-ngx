@@ -65,6 +65,9 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _templateData: Nullable<PopoverTemplate>;
 
+    /** @hidden */
+    private _placementContainer: BasePopoverClass['placementContainer'];
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -132,6 +135,15 @@ export class PopoverService extends BasePopoverClass {
         if ((!this._overlayRef || !this._overlayRef.hasAttached()) && !this.disabled && this._triggerElement) {
             const position = this._getPositionStrategy();
             this._overlayRef = this._overlay.create(this._getOverlayConfig(position));
+
+            if (this._placementContainer) {
+                const placementElement =
+                    this._placementContainer instanceof ElementRef
+                        ? this._placementContainer.nativeElement
+                        : this._placementContainer;
+
+                placementElement.append(this._overlayRef.hostElement);
+            }
 
             if (this._templateData) {
                 this._attachTemplate();
@@ -210,6 +222,7 @@ export class PopoverService extends BasePopoverClass {
      * Method that sets configuration/options, it detects if there is something changed and overwrites them
      */
     refreshConfiguration(config: BasePopoverClass): void {
+        this._placementContainer = config.placementContainer;
         const onlyChanged = Object.keys(new BasePopoverClass()).filter((key) => this[key] !== config[key]);
 
         if (onlyChanged.includes('isOpen')) {
@@ -218,6 +231,10 @@ export class PopoverService extends BasePopoverClass {
             } else {
                 this.close();
             }
+        }
+
+        if (onlyChanged.includes('placementContainer')) {
+            this._placementContainer = config.placementContainer;
         }
 
         /** TODO

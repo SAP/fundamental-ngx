@@ -135,6 +135,10 @@ export class BasePopoverClass {
     @Input()
     appendTo: Nullable<ElementRef | Element> = null;
 
+    /** Placement of the popover element. */
+    @Input()
+    placementContainer: Nullable<ElementRef | Element>;
+
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
     fixedPosition = false;
