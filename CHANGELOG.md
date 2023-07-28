@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.29...v0.43.0-rc.30) (2023-07-28)
+
+
+### Bug Fixes
+
+* **platform:** add new strings for platform table single selection cells ([#10235](https://github.com/SAP/fundamental-ngx/issues/10235)) ([3593d90](https://github.com/SAP/fundamental-ngx/commit/3593d90c8cc2184ce393dfd7ed2271c475fce63f))
+
+
+
+
+
 # [0.43.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.28...v0.43.0-rc.29) (2023-07-28)
 
 
