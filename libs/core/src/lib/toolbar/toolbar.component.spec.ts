@@ -1,23 +1,43 @@
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { firstValueFrom } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { OverflowPriority } from '@fundamental-ngx/cdk/utils';
+import { OverflowPriority, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
 
 import { ToolbarItemDirective } from './toolbar-item.directive';
 import { ToolbarComponent } from './toolbar.component';
 import { ToolbarModule } from './toolbar.module';
 
+export class ResizeObservableServiceMock {
+    private readonly observerMap = new Map<Element | ElementRef<Element>, Subject<ResizeObserverEntry[]>>();
+    observe(elementOrRef: Element | ElementRef<Element>): Subject<ResizeObserverEntry[]> {
+        const subj = new Subject<ResizeObserverEntry[]>();
+        this.observerMap.set(elementOrRef, subj);
+        return subj;
+    }
+
+    trigger(elementOrRef: Element | ElementRef<Element>, data: ResizeObserverEntry[]): void {
+        this.observerMap.get(elementOrRef)?.next(data);
+    }
+}
+
 describe('ToolbarComponent', () => {
     let toolbar: ToolbarComponent;
     let component: ToolbarTestComponent;
     let fixture: ComponentFixture<ToolbarTestComponent>;
+    let resizeService: ResizeObservableServiceMock;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ToolbarTestComponent],
-            imports: [ToolbarModule]
+            imports: [ToolbarModule],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
         }).compileComponents();
     }));
 
@@ -28,6 +48,7 @@ describe('ToolbarComponent', () => {
 
         component = fixture.componentInstance;
         toolbar = component.toolbar;
+        resizeService = TestBed.inject(ResizeObserverService) as any as ResizeObservableServiceMock;
 
         await whenStable(fixture);
     });
@@ -36,10 +57,14 @@ describe('ToolbarComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should overflow', async () => {
-        await fixture.whenRenderingDone();
-        const actualOverflowItems = await firstValueFrom(toolbar.overflowItems$);
-        expect(actualOverflowItems.length).toBeGreaterThan(0);
+    it('should overflow', (doneFn) => {
+        fixture.whenRenderingDone().then(() => {
+            toolbar.overflowItems$.subscribe((actualOverflowItems) => {
+                expect(actualOverflowItems.length).toBeGreaterThan(0);
+                doneFn();
+            });
+            resizeService.trigger(toolbar.toolbar.nativeElement, []);
+        });
     });
 });
 
@@ -47,15 +72,24 @@ describe('ToolbarComponent - Prioritization', () => {
     let toolbar: ToolbarComponent;
     let component: ToolbarOverflowPriorityTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowPriorityTestComponent>;
+    let resizeService: ResizeObservableServiceMock;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ToolbarModule],
-            declarations: [ToolbarOverflowPriorityTestComponent]
+            declarations: [ToolbarOverflowPriorityTestComponent],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
         }).compileComponents();
     }));
 
     beforeEach(async () => {
+        jest.spyOn(ToolbarItemDirective.prototype, 'width', 'get').mockImplementation(() => 150);
+        jest.spyOn(ToolbarComponent.prototype as any, '_toolbarWidth', 'get').mockImplementation(() => 450);
         fixture = TestBed.createComponent(ToolbarOverflowPriorityTestComponent);
 
         await whenStable(fixture);
@@ -63,17 +97,22 @@ describe('ToolbarComponent - Prioritization', () => {
         component = fixture.componentInstance;
         toolbar = component.toolbar;
         toolbar.toolbarItems = component.children;
+        resizeService = TestBed.inject(ResizeObserverService) as any as ResizeObservableServiceMock;
 
         await whenStable(fixture);
     });
 
-    it('should hide element to overflow by priority', async () => {
-        await fixture.whenRenderingDone();
-        const overflownItems: OverflowPriority[] = ['high', 'low', 'disappear', 'always'];
-        const actualOverflownItems = await firstValueFrom(toolbar.overflowItems$);
-        expect(actualOverflownItems.length).toBeGreaterThan(0);
+    it('should hide element to overflow by priority', (doneFn) => {
+        fixture.whenRenderingDone().then(() => {
+            const overflownItems: OverflowPriority[] = ['high', 'low', 'disappear', 'always'];
+            toolbar.overflowItems$.subscribe((actualOverflownItems) => {
+                expect(actualOverflownItems.length).toBeGreaterThan(0);
 
-        expect(actualOverflownItems.map((el) => el.priority)).toEqual(overflownItems);
+                expect(actualOverflownItems.map((el) => el.priority)).toEqual(overflownItems);
+                doneFn();
+            });
+            resizeService.trigger(toolbar.toolbar.nativeElement, []);
+        });
     });
 });
 
@@ -81,36 +120,54 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     let toolbar: ToolbarComponent;
     let component: ToolbarOverflowGroupingTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowGroupingTestComponent>;
+    let resizeService: ResizeObservableServiceMock;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ToolbarModule],
-            declarations: [ToolbarOverflowGroupingTestComponent]
+            declarations: [ToolbarOverflowGroupingTestComponent],
+            providers: [
+                {
+                    provide: ResizeObserverService,
+                    useClass: ResizeObservableServiceMock
+                }
+            ]
         }).compileComponents();
     }));
 
     beforeEach(async () => {
+        jest.spyOn(ToolbarItemDirective.prototype, 'width', 'get').mockImplementation(() => 150);
+        jest.spyOn(ToolbarComponent.prototype as any, '_toolbarWidth', 'get').mockImplementation(() => 600);
+
         fixture = TestBed.createComponent(ToolbarOverflowGroupingTestComponent);
 
         await whenStable(fixture);
 
         component = fixture.componentInstance;
         toolbar = component.toolbar;
+        resizeService = TestBed.inject(ResizeObserverService) as any as ResizeObservableServiceMock;
 
         await whenStable(fixture);
     });
 
-    it('should hide elements to overflow by group and priority', async () => {
-        const expectedOverflownItems: `${number} / ${OverflowPriority}`[] = [
-            '2 / low',
-            '2 / low',
-            '2 / disappear',
-            '0 / always'
-        ];
-        const actualOverflownItems = await firstValueFrom(toolbar.overflowItems$);
-        expect(actualOverflownItems.length).toBeGreaterThan(0);
+    it('should hide elements to overflow by group and priority', (doneFn) => {
+        fixture.whenRenderingDone().then(() => {
+            const expectedOverflownItems: `${number} / ${OverflowPriority}`[] = [
+                '2 / low',
+                '2 / low',
+                '2 / disappear',
+                '0 / always'
+            ];
+            toolbar.overflowItems$.subscribe((actualOverflownItems) => {
+                expect(actualOverflownItems.length).toBeGreaterThan(0);
 
-        expect(actualOverflownItems.map((el) => `${el.group} / ${el.priority}`)).toEqual(expectedOverflownItems);
+                expect(actualOverflownItems.map((el) => `${el.group} / ${el.priority}`)).toEqual(
+                    expectedOverflownItems
+                );
+                doneFn();
+            });
+            resizeService.trigger(toolbar.toolbar.nativeElement, []);
+        });
     });
 });
 

@@ -25,7 +25,7 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
 import { ListConfig } from './list.config';
 import { FdpListComponent } from './fdpListComponent.token';
-import merge from 'lodash-es/merge';
+import { merge } from 'lodash-es';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdpList, ListType, SelectionType } from './models/list';
 import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';

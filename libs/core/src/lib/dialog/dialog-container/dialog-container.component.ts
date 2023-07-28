@@ -13,7 +13,8 @@ import {
     Input,
     TemplateRef,
     Type,
-    ViewChild
+    ViewChild,
+    ViewRef
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 
@@ -109,6 +110,9 @@ export class DialogContainerComponent
 
     /** @hidden Load received content */
     protected _loadContent(): void {
+        if ((this._cdr as ViewRef).destroyed) {
+            return;
+        }
         if (this.childContent instanceof Type) {
             this._createFromComponent(this.childContent);
         } else if (this.childContent instanceof TemplateRef) {

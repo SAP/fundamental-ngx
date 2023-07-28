@@ -15,7 +15,7 @@ import {
 } from '../interfaces/collection-filter.interface';
 
 import { TableState } from '../interfaces/table-state.interface';
-import get from 'lodash-es/get';
+import { get } from 'lodash-es';
 import { TableRow } from '../models';
 import { isCollectionFilter } from '../utils';
 
