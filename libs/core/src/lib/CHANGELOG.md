@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.28...v0.43.0-rc.29) (2023-07-28)
+
+
+### Features
+
+* **core:** form message popover placement ([#10231](https://github.com/SAP/fundamental-ngx/issues/10231)) ([90bc352](https://github.com/SAP/fundamental-ngx/commit/90bc3529acfc675a28167322b239b6a51440a8de))
+
+
+
+
+
 # [0.43.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.27...v0.43.0-rc.28) (2023-07-27)
 
 
