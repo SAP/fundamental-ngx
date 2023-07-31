@@ -20,7 +20,7 @@ import { SPACE } from '@angular/cdk/keycodes';
 
 /**
  * @deprecated
- * ThumbnailImage component is depricated since version 0.40.0
+ * ThumbnailImage component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-thumbnail-image',

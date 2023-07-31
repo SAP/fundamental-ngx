@@ -1,7 +1,15 @@
-import { Component, ContentChild, HostListener, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    HostListener,
+    Input,
+    OnInit,
+    ViewEncapsulation,
+    signal
+} from '@angular/core';
 import { SectionInterface, SectionInterfaceContent } from './core-helpers/sections-toolbar/section.interface';
 import { SectionsToolbarComponent } from './core-helpers/sections-toolbar/sections-toolbar.component';
-import { BehaviorSubject } from 'rxjs';
 
 const SMALL_SCREEN_BREAKPOINT = 992;
 
@@ -9,6 +17,7 @@ const SMALL_SCREEN_BREAKPOINT = 992;
     selector: 'fd-base-documentation',
     template: '<ng-content></ng-content>',
     styleUrls: ['./documentation-base.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class DocumentationBaseComponent implements OnInit {
@@ -18,7 +27,7 @@ export class DocumentationBaseComponent implements OnInit {
     @ContentChild(SectionsToolbarComponent, { read: SectionsToolbarComponent })
     sectionsToolbar: SectionsToolbarComponent;
 
-    sideCollapsed = new BehaviorSubject(false);
+    sideCollapsed = signal(false);
 
     guides: SectionInterfaceContent[] = [];
 
@@ -31,6 +40,12 @@ export class DocumentationBaseComponent implements OnInit {
     sections: SectionInterface[] = [];
 
     smallScreen: boolean = window.innerWidth < SMALL_SCREEN_BREAKPOINT;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(): void {
+        this.windowSize();
+        this._isCollapsed();
+    }
 
     ngOnInit(): void {
         this.components.sort((el1, el2) => {
@@ -52,11 +67,11 @@ export class DocumentationBaseComponent implements OnInit {
     }
 
     handleMenuCollapseClick(): void {
-        this.sideCollapsed.next(!this.sideCollapsed.value);
+        this.sideCollapsed.update((collapsed) => !collapsed);
     }
 
     closeSideBar(): void {
-        this.sideCollapsed.next(true);
+        this.sideCollapsed.set(true);
     }
 
     onActivate(): void {
@@ -73,15 +88,9 @@ export class DocumentationBaseComponent implements OnInit {
         this.smallScreen = window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
 
-    @HostListener('window:resize', ['$event'])
-    onResize(): void {
-        this.windowSize();
-        this._isCollapsed();
-    }
-
     private _isCollapsed(): void {
         if (window.innerWidth < SMALL_SCREEN_BREAKPOINT) {
-            this.sideCollapsed.next(true);
+            this.sideCollapsed.set(true);
         }
     }
 }

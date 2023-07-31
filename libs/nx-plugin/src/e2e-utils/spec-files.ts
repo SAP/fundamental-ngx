@@ -17,7 +17,7 @@ async function getSpecFiles(projects: string[], context: ExecutorContext): Promi
         throw new Error('Project graph not available. Nx Console did not gave it to us.');
     }
     const projectGraph = context.projectGraph as ProjectGraph;
-    const directProjectDependencies = projectGraph.nodes[context.projectName as string].data.files.reduce(
+    const directProjectDependencies = (projectGraph.nodes[context.projectName as string].data as any).files.reduce(
         (deps, file) => {
             if (file.deps) {
                 file.deps.filter((dep) => !!context.workspace?.projects[dep]).forEach((dep: string) => deps.add(dep));

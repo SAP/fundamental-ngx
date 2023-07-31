@@ -79,6 +79,23 @@ export class DialogContainerComponent
     }
 
     /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
+    }
+
+    /** Handle end of animations, updating the state of the Message Toast. */
+    @HostListener('@state.done', ['$event'])
+    onAnimationEnd(event: AnimationEvent): void {
+        const { toState } = event;
+
+        if (toState === 'hidden') {
+            this._dialogRef._endClose$.next();
+            this._dialogRef._endClose$.complete();
+        }
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         setTimeout(() => {
             this._loadContent();
@@ -94,16 +111,10 @@ export class DialogContainerComponent
     }
 
     /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
-    }
-
-    /** @hidden */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
-        if (event instanceof ComponentRef<any>) {
+        if (event instanceof ComponentRef) {
             event.changeDetectorRef.markForCheck();
-        } else if (event instanceof EmbeddedViewRef<any>) {
+        } else if (event instanceof EmbeddedViewRef) {
             event.markForCheck();
         }
     }
@@ -135,17 +146,6 @@ export class DialogContainerComponent
         const instance = (this._componentRef as ComponentRef<DialogDefaultComponent>).instance;
         instance._defaultDialogContent = config;
         instance._defaultDialogConfiguration = this.dialogConfig;
-    }
-
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this._dialogRef._endClose$.next();
-            this._dialogRef._endClose$.complete();
-        }
     }
 
     /**

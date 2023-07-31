@@ -21,7 +21,7 @@ interface DialogRefData {
 
 /**
  * @deprecated
- * ThumbnailDetails component is depricated since version 0.40.0
+ * ThumbnailDetails component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-thumbnail-details',

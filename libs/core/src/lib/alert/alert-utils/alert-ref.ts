@@ -2,7 +2,7 @@ import { Observable, Subject } from 'rxjs';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  *
  * Reference to an alert component generated via the AlertService.

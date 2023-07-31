@@ -48,11 +48,6 @@ export class StackblitzModuleWrapper {
             mainComponent = tsFiles[0].componentName;
         }
 
-        const entryComponents: string = tsFiles
-            .filter((file) => file.entryComponent)
-            .map((file) => file.componentName)
-            .join(',\n      ');
-
         return `
 import { NgModule } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -69,9 +64,6 @@ ${imports}
     providers: [
         RtlService,
         ${providers}
-    ],
-    entryComponents: [
-        ${entryComponents}
     ],
     bootstrap: [
         ${mainComponent}

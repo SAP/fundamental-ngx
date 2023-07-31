@@ -1,12 +1,13 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { DialogDefaultContent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-dialog-object-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './dialog-object-example.component.html'
 })
 export class DialogObjectExampleComponent {
-    constructor(private _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
 
     @ViewChild('dialogContent', { read: TemplateRef })
     dialogContent: TemplateRef<any>;
@@ -42,9 +43,11 @@ export class DialogObjectExampleComponent {
         this._dialogReference.afterClosed.subscribe(
             (result) => {
                 this.closeReason = 'Dialog closed with result: ' + result;
+                this._cdr.detectChanges();
             },
             (error) => {
                 this.closeReason = 'Dialog dismissed with result: ' + error;
+                this._cdr.detectChanges();
             }
         );
     }

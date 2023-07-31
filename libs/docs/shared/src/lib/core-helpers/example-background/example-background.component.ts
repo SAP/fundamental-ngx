@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
     selector: 'background-switch',
     template: `
         <label fd-form-label> Switch background </label>
         <fd-switch style="margin-bottom: 18px" (checkedChange)="onChange()"></fd-switch>
-    `
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExampleBackgroundComponent {
     @Input()

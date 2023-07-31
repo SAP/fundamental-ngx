@@ -53,7 +53,7 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
 
 /**
  * @deprecated
- * ApprovalFlowAddNode component is depricated since version 0.40.0
+ * ApprovalFlowAddNode component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-add-node',

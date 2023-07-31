@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'separator',
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
                 border-bottom: 1px solid #e3e3e3;
             }
         `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SeparatorComponent {}

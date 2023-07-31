@@ -99,11 +99,6 @@ export class SplitterResizerComponent implements OnDestroy {
     ) {}
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._unsubscribe();
-    }
-
-    /** @hidden */
     @HostListener('mousedown', ['$event'])
     _onMouseDown(event: MouseEvent): void {
         event.preventDefault();
@@ -171,6 +166,11 @@ export class SplitterResizerComponent implements OnDestroy {
         this._isInFocus = false;
 
         this._cdr.markForCheck();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._unsubscribe();
     }
 
     /** @hidden */

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { of } from 'rxjs';
 import { delay, takeUntil } from 'rxjs/operators';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -9,6 +9,7 @@ const ITEMS_AMOUNT_ON_LOAD = 5;
 @Component({
     selector: 'fd-list-infinite-scroll-example',
     templateUrl: './list-infinite-scroll-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
 export class ListInfiniteScrollExampleComponent {
@@ -17,7 +18,11 @@ export class ListInfiniteScrollExampleComponent {
 
     loading = false;
 
-    constructor(private liveAnnouncer: LiveAnnouncer, private readonly _destroy$: DestroyedService) {}
+    constructor(
+        private liveAnnouncer: LiveAnnouncer,
+        private readonly _destroy$: DestroyedService,
+        private readonly _cdr: ChangeDetectorRef
+    ) {}
 
     loadMore(): void {
         this.loading = true;
@@ -28,6 +33,7 @@ export class ListInfiniteScrollExampleComponent {
                 this.items = this.items.concat(result);
                 this.loading = false;
                 this.liveAnnouncer.clear();
+                this._cdr.detectChanges();
             });
     }
 

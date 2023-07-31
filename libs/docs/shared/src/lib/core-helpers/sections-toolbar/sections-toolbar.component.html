@@ -1,4 +1,4 @@
-<div class="sidebar" [class.sidebar-collapsed]="sideCollapsed | async">
+<div class="sidebar" [class.sidebar-collapsed]="sideCollapsed()">
     <div class="fd-docs-search">
         <fd-input-group
             glyph="decline"
@@ -31,7 +31,7 @@
                         <ul fd-nested-list>
                             <ng-container
                                 *ngFor="
-                                    let item of $asSectionNestedContent(section.content) | sortBy: true:'name';
+                                    let item of $asSectionNestedContent(section.content) | sortBy : true : 'name';
                                     trackBy: trackBySectionContent
                                 "
                             >

@@ -7,7 +7,7 @@ import { isNodeApproved } from '../helpers';
 
 /**
  * @deprecated
- * ApprovalFlowToolbarActions component is depricated since version 0.40.0
+ * ApprovalFlowToolbarActions component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-toolbar-actions',

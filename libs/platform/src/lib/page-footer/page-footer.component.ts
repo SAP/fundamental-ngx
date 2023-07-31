@@ -12,7 +12,7 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * @deprecated
- * PlatformFooter component is depricated since version 0.40.0
+ * PlatformFooter component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-page-footer',

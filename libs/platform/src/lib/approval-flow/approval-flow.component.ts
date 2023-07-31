@@ -84,7 +84,7 @@ import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 let defaultId = 0;
 /**
  * @deprecated
- * Approval Flow component is depricated since version 0.40.0
+ * Approval Flow component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow',

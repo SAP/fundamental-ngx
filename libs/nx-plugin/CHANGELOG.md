@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.44.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.2-rc.0...v0.44.0-rc.0) (2023-07-31)
+
+
+### chore
+
+* angular 16 migration ([#10093](https://github.com/SAP/fundamental-ngx/issues/10093)) ([2303ad9](https://github.com/SAP/fundamental-ngx/commit/2303ad9d07e7745c66f7c0b438e90384e3b6a14b))
+
+
+### BREAKING CHANGES
+
+* Angular v. 16.1 and Typescript v. 5.1 support
+
+
+
+
+
 ## [0.43.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.1-rc.0...v0.43.2-rc.0) (2023-07-28)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-select-header',
+    selector: 'app-form-message-header',
     templateUrl: './form-message-header.component.html'
 })
 export class FormMessageHeaderComponent {}

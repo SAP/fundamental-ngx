@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
@@ -11,6 +11,7 @@ export interface TextData {
 
 @Component({
     selector: 'fd-component-based-message-box-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <button fd-button label="Open from Component" (click)="open()"></button>
         <p>{{ closeReason }}</p>
@@ -24,7 +25,7 @@ export interface TextData {
 export class ComponentBasedMessageBoxExampleComponent {
     closeReason: string;
 
-    constructor(private _messageBoxService: MessageBoxService) {}
+    constructor(private _messageBoxService: MessageBoxService, private _cdr: ChangeDetectorRef) {}
 
     open(): void {
         const messageBoxRef = this._messageBoxService.open<TextData>(MessageBoxExampleComponent, {
@@ -41,9 +42,11 @@ export class ComponentBasedMessageBoxExampleComponent {
         messageBoxRef.afterClosed.subscribe(
             (result) => {
                 this.closeReason = 'Message box closed with result: ' + result;
+                this._cdr.detectChanges();
             },
             (error) => {
                 this.closeReason = 'Message box dismissed with result: ' + error;
+                this._cdr.detectChanges();
             }
         );
     }
