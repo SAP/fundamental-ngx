@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, Inject } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    ElementRef,
+    ViewChild,
+    AfterViewInit,
+    Inject,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DestroyedService } from '@fundamental-ngx/cdk';
 import { takeUntil } from 'rxjs';
@@ -20,6 +29,7 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
         </h2>
     `,
     styleUrls: ['./docs-section-title.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService]
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {

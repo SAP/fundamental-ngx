@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
     inject,
@@ -18,6 +19,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
     selector: 'fd-code-snippet',
     styles: ['.bordered { border: 1px solid beige } code.hljs { width: 100%; background: transparent; }'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [DestroyedService],
     template: `
         <pre [class.bordered]="standAlone">

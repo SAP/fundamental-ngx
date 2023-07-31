@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Inject,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -44,7 +53,8 @@ type Version = {
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
-    providers: [MenuKeyboardService]
+    providers: [MenuKeyboardService],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @Output()

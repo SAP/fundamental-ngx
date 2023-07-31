@@ -42,7 +42,7 @@ describe('Tabs test suite', () => {
         threeTabsList,
         iconSelect,
         collapsibleTab,
-        acceleratedIcon,
+        accidentalLeaveIcon,
         fdIcon,
         filterMode,
         fdTabFF,
@@ -140,8 +140,8 @@ describe('Tabs test suite', () => {
         await click(iconOnlyMode);
         await click(compactCheckBox);
         await click(iconSelect);
-        await click(acceleratedIcon);
-        await expect(await getElementClass(fdIcon)).toContain('accelerated');
+        await click(accidentalLeaveIcon);
+        await expect(await getElementClass(fdIcon)).toContain('accidental');
     });
 
     it('should check set custom title in playground', async () => {
@@ -161,7 +161,7 @@ describe('Tabs test suite', () => {
     it('should check choosing icon for tab without icon mode', async () => {
         await scrollIntoView(playGroundExample);
         await click(iconSelect);
-        await click(acceleratedIcon);
+        await click(accidentalLeaveIcon);
         // icon should not exist cz by default tabs mode is not icon
         await expect(await doesItExist(fdIcon)).toBe(false);
         await click(modeSelect);

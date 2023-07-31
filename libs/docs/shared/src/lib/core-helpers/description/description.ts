@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'description',
@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
                 margin-bottom: 1.5rem;
             }
         `
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DescriptionComponent {}

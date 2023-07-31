@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-
-import { DynamicFormGeneratorSelectComponent } from '@fundamental-ngx/platform/form';
 import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
@@ -63,13 +60,7 @@ xdescribe('WizardGeneratorStepComponent', () => {
         TestBed.configureTestingModule({
             imports: [PlatformWizardGeneratorModule],
             declarations: [TestComponent]
-        })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: {
-                    entryComponents: [DynamicFormGeneratorSelectComponent]
-                }
-            })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

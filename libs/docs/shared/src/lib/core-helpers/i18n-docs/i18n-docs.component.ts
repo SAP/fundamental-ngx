@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FdLanguage, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { of, OperatorFunction, Observable } from 'rxjs';
@@ -12,7 +12,8 @@ export function getI18nKey(i18nKey: keyof FdLanguage): I18nRouteData {
 
 @Component({
     selector: 'fd-i18n-docs',
-    templateUrl: './i18n-docs.component.html'
+    templateUrl: './i18n-docs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class I18nDocsComponent {
     status = LoadStatus.Loading;

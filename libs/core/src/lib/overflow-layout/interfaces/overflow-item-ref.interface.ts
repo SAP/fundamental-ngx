@@ -7,7 +7,7 @@ export type OverflowItemDirectiveContext<T = any> = {
     globalIndex: number;
     first: boolean;
     last: boolean;
-    item: T;
+    item?: T;
 };
 
 export interface OverflowItemRef<T = any> {

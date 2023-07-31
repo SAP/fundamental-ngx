@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiDocsService } from '../../services/api-docs.service';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
@@ -6,15 +6,16 @@ import { MenuComponent } from '@fundamental-ngx/core/menu';
 @Component({
     selector: 'fd-api',
     templateUrl: './api.component.html',
-    styleUrls: ['./api.component.scss']
+    styleUrls: ['./api.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApiComponent implements OnInit {
+    @ViewChild('menu')
+    menu: MenuComponent;
+
     files: string[];
     activeFile: string;
     result: string;
-
-    @ViewChild('menu')
-    menu: MenuComponent;
 
     constructor(private route: ActivatedRoute, private apiService: ApiDocsService) {}
 

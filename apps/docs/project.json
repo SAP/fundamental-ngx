@@ -169,7 +169,7 @@
                     }
                 ],
                 "scripts": ["node_modules/marked/marked.min.js"],
-                "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
+                "allowedCommonJsDependencies": ["moment", "highlight.js", "fast-deep-equal", "focus-trap", "dayjs"],
                 "vendorChunk": true,
                 "extractLicenses": false,
                 "buildOptimizer": false,
@@ -182,12 +182,6 @@
                     "tsConfig": "apps/docs/tsconfig.app.json"
                 },
                 "production": {
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/docs/src/environments/environment.ts",
-                            "with": "apps/docs/src/environments/environment.prod.ts"
-                        }
-                    ],
                     "optimization": true,
                     "outputHashing": "all",
                     "sourceMap": false,
@@ -205,15 +199,10 @@
                 },
                 "production-unoptimized": {
                     "tsConfig": "apps/docs/tsconfig.netlify.json",
-                    "fileReplacements": [
-                        {
-                            "replace": "apps/docs/src/environments/environment.ts",
-                            "with": "apps/docs/src/environments/environment.prod.ts"
-                        }
-                    ],
                     "sourceMap": false,
                     "namedChunks": false,
-                    "vendorChunk": false
+                    "vendorChunk": false,
+                    "optimization": false
                 }
             },
             "outputs": ["{options.outputPath}"],

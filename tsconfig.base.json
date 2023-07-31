@@ -27,6 +27,9 @@
         "typeRoots": ["node_modules/@types"],
         "lib": ["es2018", "dom"],
         "esModuleInterop": true,
+        "jsx": "react",
+        "jsxFactory": "JSX.createElement",
+        "jsxFragmentFactory": "JSX.Fragment",
         "paths": {
             "@fundamental-ngx/cdk": ["libs/cdk/src/lib/index.ts"],
             "@fundamental-ngx/cdk/data-source": ["libs/cdk/src/lib/data-source/index.ts"],

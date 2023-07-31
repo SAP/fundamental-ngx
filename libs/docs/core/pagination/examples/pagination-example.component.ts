@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
 import { of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 import { PaginationComponent } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <fd-pagination
             [displayTotalItems]="false"
@@ -27,6 +28,8 @@ export class PaginationExampleComponent {
 
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
+    private _cdr = inject(ChangeDetectorRef);
+
     newPageClicked(event: number): void {
         of(1)
             .pipe(
@@ -40,13 +43,16 @@ export class PaginationExampleComponent {
                     /* update the currentPage when the http action is successful */
                     this.currentPage = event;
                     this.notification = 'page change success!';
+                    this._cdr.detectChanges();
                 },
                 () => {
                     /* do not update the currentPage when the http action fails */
                     this.notification = 'page change error!';
+                    this._cdr.detectChanges();
                 },
                 () => {
                     this.notification = 'New page selected: ' + this.currentPage;
+                    this._cdr.detectChanges();
                 }
             );
     }

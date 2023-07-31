@@ -6,7 +6,7 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 /**
  * @deprecated
- * Action Bar component is depricated since version 0.40.0
+ * Action Bar component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-action-bar',

@@ -7,7 +7,8 @@ import {
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges
+    SimpleChanges,
+    WritableSignal
 } from '@angular/core';
 import {
     SectionInterface,
@@ -15,7 +16,6 @@ import {
     SectionInterfaceContentLinear,
     SectionInterfaceContentNested
 } from './section.interface';
-import { BehaviorSubject } from 'rxjs';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 const SMALL_SCREEN_BREAKPOINT = 992;
@@ -32,17 +32,17 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
     readonly sideCollapsedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     @Input()
-    sideCollapsed: BehaviorSubject<boolean>;
+    sideCollapsed: WritableSignal<boolean>;
 
     search = '';
 
     displayedSections: SectionInterface[] = [];
 
+    private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
+
     private get _smallScreen(): boolean {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
-
-    private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
 
     /** @hidden type enforcing */
     $asSectionNestedContent = (sectionContent: SectionInterfaceContent[]): SectionInterfaceContentNested[] =>
@@ -107,11 +107,11 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
     }
 
     onItemClick(): void {
-        this.sideCollapsed.next(false);
+        this.sideCollapsed.set(false);
     }
 
     onActivate(): void {
-        if (this._smallScreen && !this.sideCollapsed.value) {
+        if (this._smallScreen && !this.sideCollapsed()) {
             this._setCollapseState(true);
         }
     }
@@ -123,7 +123,7 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
         }
 
         this.onActivate();
-        this.sideCollapsedChange.emit(this.sideCollapsed.value);
+        this.sideCollapsedChange.emit(this.sideCollapsed());
     }
 
     trackBySection(index: number, section: SectionInterface): string {
@@ -135,7 +135,7 @@ export class SectionsToolbarComponent implements OnInit, OnChanges {
     }
 
     private _setCollapseState(state: boolean): void {
-        this.sideCollapsed?.next(state);
+        this.sideCollapsed?.set(state);
         this.sideCollapsedChange.emit(state);
     }
 

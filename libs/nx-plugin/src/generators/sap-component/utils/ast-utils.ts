@@ -66,7 +66,7 @@ export function addModuleOrComponentExportToModule(host: Tree, modulePath: strin
     }
 
     const moduleDefinition = ts.createSourceFile(modulePath, moduleSource, ts.ScriptTarget.Latest, true);
-    const changes = addExportToModule(moduleDefinition, modulePath, moduleName, src);
+    const changes = addExportToModule(moduleDefinition as any, modulePath, moduleName, src);
 
     changes.forEach((change) => {
         if (change instanceof InsertChange) {

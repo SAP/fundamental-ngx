@@ -3,7 +3,7 @@ import { alertContainerNgIf } from './alert-animations';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  */
 @Component({

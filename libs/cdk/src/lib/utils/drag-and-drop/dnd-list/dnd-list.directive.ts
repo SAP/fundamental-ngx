@@ -423,8 +423,8 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         const VERTICAL_OFFSET = 20;
 
         /** Distances from the top of the screen */
-        const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();
-        const targetElementBound = <DOMRect>targetElement.nativeElement.getBoundingClientRect();
+        const draggedElementBound = draggedElement.nativeElement.getBoundingClientRect();
+        const targetElementBound = targetElement.nativeElement.getBoundingClientRect();
 
         if (draggedElementBound.top - targetElementBound.top > VERTICAL_OFFSET) {
             /** If an element is higher than the dragged element, it's for sure before */

@@ -86,13 +86,13 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * User-defined template for "Go Next" button.
      */
     @Input()
-    goNextButtonTemplate: TemplateRef<HTMLElement>;
+    goNextButtonTemplate: TemplateRef<any>;
 
     /**
      * User-defined template for "Finish" button.
      */
     @Input()
-    finishButtonTemplate: TemplateRef<HTMLElement>;
+    finishButtonTemplate: TemplateRef<any>;
 
     /**
      * User-defined template for summary step.
@@ -131,16 +131,6 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     stepsOrderChanged = false;
 
     /**
-     * @description Array of visible Wizard Steps.
-     */
-    set visibleItems(items: PreparedWizardGeneratorItem[]) {
-        this._visibleItems = items;
-    }
-    get visibleItems(): PreparedWizardGeneratorItem[] {
-        return this._visibleItems || this._wizardGeneratorService.items;
-    }
-
-    /**
      * @description Emits when some step status has been changed.
      */
     @Output()
@@ -169,8 +159,53 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     private _visibleItems: PreparedWizardGeneratorItem[];
 
+    /**
+     * @description Array of visible Wizard Steps.
+     */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    set visibleItems(items: PreparedWizardGeneratorItem[]) {
+        this._visibleItems = items;
+    }
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    get visibleItems(): PreparedWizardGeneratorItem[] {
+        return this._visibleItems || this._wizardGeneratorService.items;
+    }
+
     /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     constructor(private _wizardGeneratorService: WizardGeneratorService, private _cd: ChangeDetectorRef) {}
+
+    /**
+     * @hidden
+     */
+    _goNextFn: () => void = () => this.goNext.emit();
+
+    /**
+     * @hidden
+     */
+    _finishFn: () => void = () => this.finish.emit();
+
+    /**
+     * @description Custom step status change validator function.
+     * @param index Current step index.
+     * @returns {Promise<boolean>} If this step status can be changed.
+     */
+    stepClickValidatorFn(index: number): () => Promise<boolean> {
+        return async () => {
+            const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
+            const isSummaryStep = this._visibleItems[currentStepIndex]?.summary === true;
+
+            if (index === currentStepIndex || isSummaryStep) {
+                return true;
+            }
+
+            if (this._visibleItems.slice(0, index).find((i) => !i.completed && !i.summary)) {
+                return false;
+            }
+
+            return await firstValueFrom(this._wizardGeneratorService.validateStepForms(true));
+        };
+    }
 
     /**
      * @hidden
@@ -205,28 +240,6 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
         });
     }
 
-    /**
-     * @description Custom step status change validator function.
-     * @param index Current step index.
-     * @returns {Promise<boolean>} If this step status can be changed.
-     */
-    stepClickValidatorFn(index: number): () => Promise<boolean> {
-        return async () => {
-            const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
-            const isSummaryStep = this._visibleItems[currentStepIndex]?.summary === true;
-
-            if (index === currentStepIndex || isSummaryStep) {
-                return true;
-            }
-
-            if (this._visibleItems.slice(0, index).find((i) => !i.completed && !i.summary)) {
-                return false;
-            }
-
-            return await firstValueFrom(this._wizardGeneratorService.validateStepForms(true));
-        };
-    }
-
     /** @hidden */
     stepClicked(stepId: string): void {
         const stepIndex = this._wizardGeneratorService.getStepIndex(stepId);
@@ -242,14 +255,4 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     _trackFn(_index: number, item: WizardGeneratorItem): string {
         return item.id;
     }
-
-    /**
-     * @hidden
-     */
-    _goNextFn: () => void = () => this.goNext.emit();
-
-    /**
-     * @hidden
-     */
-    _finishFn: () => void = () => this.finish.emit();
 }

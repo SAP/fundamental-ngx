@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
@@ -10,7 +10,8 @@ const messageStripWidthExampleHtml = 'message-strip-width-example.component.html
 
 @Component({
     selector: 'app-message-strip',
-    templateUrl: './message-strip-docs.component.html'
+    templateUrl: './message-strip-docs.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageStripDocsComponent {
     data: any = {
@@ -71,7 +72,7 @@ export class MessageStripDocsComponent {
      */
     private _originalSchemaValues = Object.assign({}, this.data);
 
-    constructor(private schemaFactory: SchemaFactoryService) {
+    constructor(private schemaFactory: SchemaFactoryService, private readonly _cdr: ChangeDetectorRef) {
         this.schema = this.schemaFactory.getComponent('messageStrip');
     }
 
@@ -87,6 +88,7 @@ export class MessageStripDocsComponent {
         setTimeout(() => {
             this.data = Object.assign({}, this._originalSchemaValues);
             this.shouldShow = true;
+            this._cdr.detectChanges();
         });
     }
 }

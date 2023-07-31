@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 /**
  * @deprecated
- * Action Bar component is depricated since version 0.40.0
+ * Action Bar component is deprecated since version 0.40.0
  *
  * Children usage:
  * ```html

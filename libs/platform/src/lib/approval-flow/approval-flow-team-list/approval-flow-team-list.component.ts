@@ -6,7 +6,7 @@ import { trackByFn } from '../helpers';
 
 /**
  * @deprecated
- * ApprovalFlowTeamList component is depricated since version 0.40.0
+ * ApprovalFlowTeamList component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-team-list',
