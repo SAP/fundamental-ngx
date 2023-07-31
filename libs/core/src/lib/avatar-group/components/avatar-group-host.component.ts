@@ -2,7 +2,6 @@ import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -70,27 +69,19 @@ export class AvatarGroupHostComponent
     elementRef = inject(ElementRef);
 
     /** @hidden */
-    private resizeObserverService = inject(ResizeObserverService);
-
-    /** @hidden */
     hostResize$: Observable<number>;
 
     /** @hidden */
     hiddenItems$ = new BehaviorSubject<AvatarGroupItemRendererDirective[]>([]);
 
     /** @hidden */
+    private resizeObserverService = inject(ResizeObserverService);
+
+    /** @hidden */
     private _destroyed$ = inject(DestroyedService);
 
     /** @hidden */
     private _onChanges$ = new Subject<SimpleChanges>();
-
-    /** @hidden */
-    private _changeDetectorRef = inject(ChangeDetectorRef);
-
-    /** @hidden */
-    private getResizeNotifier(element: HTMLElement): Observable<number> {
-        return this.resizeObserverService.observe(element).pipe(map(() => element.getBoundingClientRect().width));
-    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -121,7 +112,6 @@ export class AvatarGroupHostComponent
                 hiddenItems.forEach((item) => item.hide());
                 console.log({ hiddenItems });
                 this.hiddenItems$.next(hiddenItems);
-                this._changeDetectorRef.detectChanges();
             });
     }
 
@@ -161,5 +151,10 @@ export class AvatarGroupHostComponent
             visibleItems,
             hiddenItems
         };
+    }
+
+    /** @hidden */
+    private getResizeNotifier(element: HTMLElement): Observable<number> {
+        return this.resizeObserverService.observe(element).pipe(map(() => element.getBoundingClientRect().width));
     }
 }

@@ -10,9 +10,6 @@ import { DestroyedService } from '@fundamental-ngx/cdk/utils';
     providers: [DestroyedService]
 })
 export class AvatarGroupItemDirective {
-    /** @hidden */
-    templateRef: TemplateRef<void> = inject(TemplateRef);
-
     /**
      * Text, which will be displayed when in overflow popover and activated
      * */
@@ -24,6 +21,9 @@ export class AvatarGroupItemDirective {
      * */
     @Input('fdAvatarGroupItemForceVisibility')
     forceVisibility = false;
+
+    /** @hidden */
+    templateRef: TemplateRef<void> = inject(TemplateRef);
 
     /**
      * Template for the details of the avatar group item.

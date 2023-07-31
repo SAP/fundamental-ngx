@@ -32,6 +32,18 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
     viewContainerRef = inject(ViewContainerRef);
 
     /** @hidden */
+    _element$ = new BehaviorSubject<Nullable<HTMLElement>>(null);
+
+    /** @hidden */
+    element$ = this._element$.asObservable();
+
+    /** @hidden */
+    keydown: Observable<KeyboardEvent> = this._element$.pipe(
+        filter((element) => !!element),
+        switchMap((element) => fromEvent(element as unknown as HTMLElement, 'keydown') as Observable<KeyboardEvent>)
+    );
+
+    /** @hidden */
     private templatePortal?: TemplatePortal<void>;
 
     /** @hidden */
@@ -39,9 +51,6 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
 
     /** @hidden */
     private embeddedViewRef: EmbeddedViewRef<void>;
-
-    /** @hidden */
-    private _element$ = new BehaviorSubject<Nullable<HTMLElement>>(null);
 
     /** @hidden */
     private lastSavedWidth = 0;
@@ -53,12 +62,6 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
     private hostConfig = inject(AVATAR_GROUP_HOST_CONFIG);
 
     /** @hidden */
-    keydown: Observable<KeyboardEvent> = this._element$.pipe(
-        filter((element) => !!element),
-        switchMap((element) => fromEvent(element as unknown as HTMLElement, 'keydown') as Observable<KeyboardEvent>)
-    );
-
-    /** @hidden */
     get visible(): boolean {
         return this.portalOutlet.hasAttached();
     }
@@ -67,9 +70,6 @@ export class AvatarGroupItemRendererDirective implements OnInit, FocusableItem {
     get element(): HTMLElement {
         return this.embeddedViewRef?.rootNodes[0] as HTMLElement;
     }
-
-    /** @hidden */
-    element$ = this._element$.asObservable();
 
     /** @hidden */
     get width(): number {

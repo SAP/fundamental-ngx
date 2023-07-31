@@ -52,22 +52,12 @@ export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective i
     @Input() colorAccent: Nullable<ColorAccent> = null;
 
     /** @hidden */
-    constructor() {
-        super();
-        this.fdkFocusableItem = inject(AVATAR_GROUP_HOST_CONFIG).type === 'individual';
-    }
-
-    /** @hidden */
     private ngClassDirective = inject(NgClass);
 
     /** @hidden */
-    private updateClass(): void {
-        this.ngClassDirective.klass = [
-            'fd-avatar fd-avatar--overflow',
-            'fd-avatar--' + this.size,
-            this.colorAccent ? 'fd-avatar--' + this.colorAccent : ''
-        ].join(' ');
-        this.ngClassDirective.ngDoCheck();
+    constructor() {
+        super();
+        this.fdkFocusableItem = inject(AVATAR_GROUP_HOST_CONFIG).type === 'individual';
     }
 
     /** @hidden */
@@ -78,5 +68,15 @@ export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective i
     /** @hidden */
     ngOnChanges(): void {
         this.updateClass();
+    }
+
+    /** @hidden */
+    private updateClass(): void {
+        this.ngClassDirective.klass = [
+            'fd-avatar fd-avatar--overflow',
+            'fd-avatar--' + this.size,
+            this.colorAccent ? 'fd-avatar--' + this.colorAccent : ''
+        ].join(' ');
+        this.ngClassDirective.ngDoCheck();
     }
 }

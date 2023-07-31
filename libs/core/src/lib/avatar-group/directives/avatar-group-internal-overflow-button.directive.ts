@@ -9,17 +9,15 @@ export class AvatarGroupInternalOverflowButtonDirective {
     /** @hidden */
     @Input('fdAvatarGroupInternalOverflowButton')
     set hiddenItems(value: AvatarGroupItemRendererDirective[] | null) {
-        this._hiddenItems = value || [];
-        console.log({ hiddenItems: this._hiddenItems });
-        if (this._hiddenItems.length > 0) {
-            this.show();
+        const hiddenItems = value || [];
+        console.log({ hiddenItems });
+        if (hiddenItems.length > 0) {
+            this.show(hiddenItems);
         } else {
             this.hide();
         }
     }
 
-    /** @hidden */
-    private _hiddenItems: AvatarGroupItemRendererDirective[] = [];
     /** @hidden */
     readonly templateRef: TemplateRef<{ $implicit: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
     /** @hidden */
@@ -28,8 +26,8 @@ export class AvatarGroupInternalOverflowButtonDirective {
     private embeddedView?: EmbeddedViewRef<any>;
 
     /** @hidden */
-    show(): void {
-        const context = { $implicit: this._hiddenItems };
+    show(hiddenItems: AvatarGroupItemRendererDirective[]): void {
+        const context = { $implicit: hiddenItems };
         if (this.embeddedView) {
             this.embeddedView.context = context;
             this.embeddedView.detectChanges();
