@@ -131,7 +131,7 @@ describe('DynamicPageTitleComponent', () => {
             const titleElement: HTMLElement = componentDebugElement.query(
                 By.css('.fd-dynamic-page__title')
             ).nativeElement;
-            expect(titleElement?.innerText).toBe('Sample');
+            expect(titleElement?.textContent?.trim()).toBe('Sample');
         });
     });
 
@@ -148,7 +148,7 @@ describe('DynamicPageTitleComponent', () => {
             const titleElement: HTMLElement = titleComponentDebugElement.query(
                 By.css('.fd-dynamic-page__subtitle')
             ).nativeElement;
-            expect(titleElement?.innerText).toBe('Some subtitle');
+            expect(titleElement?.textContent?.trim()).toBe('Some subtitle');
         });
     });
 
@@ -159,7 +159,7 @@ describe('DynamicPageTitleComponent', () => {
         });
         it('should render key info content', async () => {
             const keyInfoEl = componentDebugElement.query(By.css(`.${CLASS_NAME.dynamicPageKeyInfo}`));
-            expect(keyInfoEl?.nativeElement.innerText).toEqual('Key info content');
+            expect(keyInfoEl?.nativeElement.textContent?.trim()).toEqual('Key info content');
         });
     });
 });
