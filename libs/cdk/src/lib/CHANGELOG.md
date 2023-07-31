@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.44.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.0...v0.44.0-rc.1) (2023-07-31)
+
+
+### Features
+
+* **core,platform:** partial jest migration ([#10238](https://github.com/SAP/fundamental-ngx/issues/10238)) ([75130aa](https://github.com/SAP/fundamental-ngx/commit/75130aa85724060a515d99d675eb672b6d6eef6a))
+
+
+
+
+
 # [0.44.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.2-rc.0...v0.44.0-rc.0) (2023-07-31)
 
 
