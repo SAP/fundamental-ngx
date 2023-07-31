@@ -1,6 +1,7 @@
 <textarea
     #inputElementRef
     fd-form-control
+    [disabled]="disabled"
     [attr.id]="id"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledBy"
@@ -11,8 +12,7 @@
     [attr.cols]="cols"
     [attr.wrap]="wrapType"
     [attr.maxlength]="!showExceededText ? maxLength : null"
-    [attr.disabled]="disabled"
-    [attr.readonly]="readonly"
+    [attr.readonly]="readonly ? true : null"
     [(ngModel)]="value"
     [state]="getUpdatedState()"
     (paste)="handlePasteInteraction()"
