@@ -75,22 +75,22 @@ describe('MultiInputMobileComponent', () => {
 
     it('should open and close with approve', () => {
         component.ngOnInit();
-        spyOn(anyComponent._component, 'dialogApprove');
+        const approveSpy = jest.spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
         anyComponent._component.openChange.emit(true);
         fixture.detectChanges();
         component.handleApprove();
-        expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
+        expect(approveSpy).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
         component.ngOnInit();
-        spyOn(anyComponent._component, 'dialogDismiss');
+        const dismissSpy = jest.spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
         anyComponent._component.selected = [];
         anyComponent._component.openChange.emit(true);
         fixture.detectChanges();
         component.handleDismiss();
-        expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith([]);
+        expect(dismissSpy).toHaveBeenCalledWith([]);
     });
 });
