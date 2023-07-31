@@ -117,15 +117,9 @@ export class AvatarGroupHostComponent
                 takeUntil(this._destroyed$)
             )
             .subscribe(({ hiddenItems, visibleItems }) => {
-                /* take last item from the visibleItems which is not forced to be visible and push it to the hiddenItems
-                 * This is done to free up the space for the overflow button
-                 */
-                if (hiddenItems.length > 0) {
-                    const lastAllowedToBeHidden = visibleItems.reverse().findIndex((item) => !item.forceVisibility);
-                    hiddenItems.push(...visibleItems.splice(lastAllowedToBeHidden * -1, 1));
-                }
                 visibleItems.forEach((item) => item.show());
                 hiddenItems.forEach((item) => item.hide());
+                console.log({ hiddenItems });
                 this.hiddenItems$.next(hiddenItems);
                 this._changeDetectorRef.detectChanges();
             });
@@ -155,6 +149,13 @@ export class AvatarGroupHostComponent
             } else if (!item.forceVisibility) {
                 hiddenItems.push(item);
             }
+        }
+        /* take last item from the visibleItems which is not forced to be visible and push it to the hiddenItems
+         * This is done to free up the space for the overflow button
+         */
+        if (hiddenItems.length > 0) {
+            const lastAllowedToBeHidden = visibleItems.reverse().findIndex((item) => !item.forceVisibility);
+            hiddenItems.push(...visibleItems.splice(lastAllowedToBeHidden * -1, 1));
         }
         return {
             visibleItems,
