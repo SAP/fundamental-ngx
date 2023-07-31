@@ -21,14 +21,6 @@
             },
             "defaultConfiguration": "production"
         },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/variant-management/test.ts",
-                "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/variant-management/karma.conf.js"
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
@@ -36,6 +28,20 @@
                     "libs/platform/src/lib/variant-management/**/*.ts",
                     "libs/platform/src/lib/variant-management/**/*.html"
                 ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/platform/src/lib/variant-management/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         }
     },
