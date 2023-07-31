@@ -32,7 +32,7 @@ import {
 })
 export class TableWrapperComponent implements AfterContentInit, OnDestroy {
     /** @hidden */
-    private _contentDensitySettings: ContentDensityObserverTarget;
+    private _contentDensitySettings: ContentDensityObserverTarget | undefined;
 
     /** @hidden */
     constructor(private elementRef: ElementRef, private _contentDensityObserver: ContentDensityObserver) {}
@@ -65,6 +65,9 @@ export class TableWrapperComponent implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
+        if (!this._contentDensitySettings) {
+            return;
+        }
         this._contentDensityObserver.removeConsumer(this._contentDensitySettings);
     }
 }
