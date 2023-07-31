@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
@@ -96,13 +95,7 @@ xdescribe('FormGeneratorComponent', () => {
                 HostComponent
             ],
             providers: [FormGeneratorService]
-        })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: {
-                    entryComponents: [DynamicFormGeneratorInputComponent]
-                }
-            })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(async () => {
@@ -115,7 +108,7 @@ xdescribe('FormGeneratorComponent', () => {
     it('should render form title', async () => {
         await whenStable(fixture);
 
-        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.innerText).toEqual(
+        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.textContent?.trim()).toEqual(
             component.formTitle
         );
     });

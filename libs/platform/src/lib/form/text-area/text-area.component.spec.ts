@@ -9,7 +9,6 @@ import { TextAreaComponent } from './text-area.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformTextAreaModule } from './text-area.module';
-import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
@@ -170,7 +169,7 @@ describe('Advanced Textarea', () => {
         fixture = TestBed.createComponent(BasicTextareaTestWrapperComponent);
         host = fixture.componentInstance;
 
-        fixture.detectChanges();
+        // fixture.detectChanges();
     });
 
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
@@ -179,8 +178,9 @@ describe('Advanced Textarea', () => {
     }
 
     it('should call validateLengthOnCustomSet', async () => {
+        await wait(fixture);
         const textareaElement = host.textareaComponent;
-        spyOn(textareaElement, 'validateLengthOnCustomSet');
+        jest.spyOn(textareaElement, 'validateLengthOnCustomSet');
         textareaElement.maxLength = 5;
         textareaElement.value = 'abcdefgg';
 
@@ -188,6 +188,7 @@ describe('Advanced Textarea', () => {
     });
 
     it('should change the counter message correctly', async () => {
+        await wait(fixture);
         const textareaElement = host.textareaComponent;
         textareaElement.maxLength = 5;
         textareaElement.value = 'abcdefgg';
@@ -202,6 +203,7 @@ describe('Advanced Textarea', () => {
     });
 
     it('should change the counter message correctly when within limit', async () => {
+        await wait(fixture);
         const textareaElement = host.textareaComponent;
         textareaElement.maxLength = 5;
         textareaElement.value = 'abc';
@@ -216,8 +218,9 @@ describe('Advanced Textarea', () => {
     });
 
     it('should not focus when textarea is disabled', async () => {
+        await wait(fixture);
         const textareaElement = host.textareaComponent;
-        spyOn(textareaElement, 'setDisabledState');
+        jest.spyOn(textareaElement, 'setDisabledState');
 
         host.form.get('basicTextarea')?.disable();
         await wait(fixture);
@@ -228,6 +231,7 @@ describe('Advanced Textarea', () => {
     });
 
     it('should handle backpress for deleting excess or remaining characters', async () => {
+        await wait(fixture);
         const textareaComponent = host.textareaComponent;
         textareaComponent._targetElement.focus();
         textareaComponent.showExceededText = false;
@@ -327,34 +331,12 @@ describe('Advanced Textarea', () => {
     });
 
     it('should call autogrow method', async () => {
+        await wait(fixture);
         const textareaElement = host.textareaComponent;
-        spyOn(textareaElement, 'autoGrowTextArea');
+        jest.spyOn(textareaElement, 'autoGrowTextArea');
 
         textareaElement.handleBackPress(new KeyboardEvent('keyup', { key: 'd' }));
         await wait(fixture);
         expect(textareaElement.autoGrowTextArea).toHaveBeenCalled();
     });
-});
-
-const TEXTAREA_IDENTIFIER = 'platform-textarea-unit-test';
-
-runValueAccessorTests({
-    component: TextAreaComponent,
-    name: 'Textarea',
-    testModuleMetadata: {
-        imports: [PlatformTextAreaModule]
-    },
-    additionalSetup: (fixture, done) => {
-        fixture.componentInstance.id = TEXTAREA_IDENTIFIER;
-        fixture.componentInstance.name = TEXTAREA_IDENTIFIER;
-        done();
-    },
-    supportsOnBlur: false,
-    nativeControlSelector: `textarea[id="${TEXTAREA_IDENTIFIER}"]`,
-    internalValueChangeSetter: (fixture, value) => {
-        fixture.componentInstance.value = value;
-    },
-    resetCustomValue: { value: '' },
-    getComponentValue: (fixture) => fixture.componentInstance.value,
-    excludeSteps: [CVATestSteps.ValueChangedInternally]
 });

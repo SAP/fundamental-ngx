@@ -129,7 +129,7 @@ describe('PlatformTimePickerComponent', () => {
         const formControl = component.timePickerForm.get('timePicker') as FormControl;
         const inputEl = fixture.debugElement.query(By.css('.fd-input-group'));
 
-        expect(inputEl.nativeElement.classList.contains('is-error')).not.toBeTrue();
+        expect(inputEl.nativeElement.classList.contains('is-error')).not.toBe(true);
 
         formControl.markAsTouched();
         await wait(fixture);
@@ -137,7 +137,7 @@ describe('PlatformTimePickerComponent', () => {
         await wait(fixture);
 
         expect(formControl.value).toBeNull();
-        expect(inputEl.nativeElement.classList.contains('is-error')).toBeTrue();
+        expect(inputEl.nativeElement.classList.contains('is-error')).toBe(true);
     });
 });
 
