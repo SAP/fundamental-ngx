@@ -77,7 +77,7 @@ describe('MobileMultiComboboxComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        spyOn(anyComponent._component, '_dialogApprove');
+        const spy = jest.spyOn(anyComponent._component, '_dialogApprove');
         fixture.detectChanges();
 
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
@@ -85,14 +85,14 @@ describe('MobileMultiComboboxComponent', () => {
         fixture.detectChanges();
         component.handleApprove();
 
-        expect(anyComponent._component._dialogApprove).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.openChange.emit(true);
-        spyOn(anyComponent._component, '_dialogDismiss');
+        const spy = jest.spyOn(anyComponent._component, '_dialogDismiss');
         fixture.detectChanges();
 
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
@@ -100,6 +100,6 @@ describe('MobileMultiComboboxComponent', () => {
         fixture.detectChanges();
         component.handleDismiss();
 
-        expect(anyComponent._component._dialogDismiss).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 });

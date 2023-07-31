@@ -69,8 +69,7 @@ describe('FixedCardLayoutComponent', () => {
         for (let i = 0; i < sizes.length; i++) {
             it(`should have ${columns[i]} columns on Laptop width size value of ${sizes[i]}px`, async () => {
                 await whenStable(fixture);
-
-                spyOnProperty(component.fixedCardLayout, '_availableWidth', 'get').and.returnValue(sizes[i]);
+                jest.spyOn(component.fixedCardLayout, '_availableWidth', 'get').mockReturnValue(sizes[i]);
 
                 component.fixedCardLayout.updateLayout();
                 await whenStable(fixture);
@@ -90,7 +89,7 @@ describe('FixedCardLayoutComponent', () => {
 
     describe('Drag & drop', () => {
         it('should process drag & drop', () => {
-            const spy = spyOn(component.fixedCardLayout.cardDraggedDropped, 'emit').and.callThrough();
+            const spy = jest.spyOn(component.fixedCardLayout.cardDraggedDropped, 'emit');
 
             const event = {
                 container: {

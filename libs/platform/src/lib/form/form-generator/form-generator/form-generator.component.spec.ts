@@ -108,7 +108,7 @@ xdescribe('FormGeneratorComponent', () => {
     it('should render form title', async () => {
         await whenStable(fixture);
 
-        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.innerText).toEqual(
+        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.textContent?.trim()).toEqual(
             component.formTitle
         );
     });

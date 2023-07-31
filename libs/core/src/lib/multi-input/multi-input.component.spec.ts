@@ -49,9 +49,9 @@ describe('MultiInputComponent', () => {
 
     it('should handle search term change', async () => {
         await fixture.whenStable();
-        spyOn(component.searchTermChange, 'emit');
-        spyOn(component, 'filterFn');
-        spyOn(component, 'openChangeHandle').and.callThrough();
+        const searchTermChangeSpy = jest.spyOn(component.searchTermChange, 'emit');
+        const filterFnSpy = jest.spyOn(component, 'filterFn');
+        const openChangeHandleSpy = jest.spyOn(component, 'openChangeHandle');
 
         const text = 'test';
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
@@ -63,16 +63,16 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
 
         expect(component.searchTerm).toBe(text);
-        expect(component.searchTermChange.emit).toHaveBeenCalled();
-        expect(component.filterFn).toHaveBeenCalled();
-        expect(component.openChangeHandle).toHaveBeenCalledWith(true);
+        expect(searchTermChangeSpy).toHaveBeenCalled();
+        expect(filterFnSpy).toHaveBeenCalled();
+        expect(openChangeHandleSpy).toHaveBeenCalledWith(true);
     });
 
     it('should filter dropdown values', async () => {
         await fixture.whenStable();
         updateComponentInput('dropdownValues', ['test1', 'test2', 'foobar']);
 
-        spyOn(component, 'filterFn').and.callThrough();
+        const filterFnSpy = jest.spyOn(component, 'filterFn');
 
         const text = 'foo';
         const inputElement = fixture.nativeElement.querySelector('.fd-input');
@@ -80,7 +80,7 @@ describe('MultiInputComponent', () => {
         inputElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
-        expect(component.filterFn).toHaveBeenCalled();
+        expect(filterFnSpy).toHaveBeenCalled();
         expect(component.dropdownValues.length).toBe(3);
         const vm = await firstValueFrom(component._viewModel$);
         expect(vm.displayedOptions.length).toBe(1);
@@ -136,15 +136,15 @@ describe('MultiInputComponent', () => {
     it('should bring back values, if canceled on mobile mode and dont emit changes', async () => {
         component.mobile = true;
 
-        spyOn(component, 'onChange');
-        spyOn(component.selectedChange, 'emit');
+        const changeSpy = jest.spyOn(component, 'onChange');
+        const selectedChangeSpy = jest.spyOn(component.selectedChange, 'emit');
 
         await fixture.whenStable();
 
         component._handleSelect(true, component.dropdownValues[0]);
 
-        expect(component.onChange).not.toHaveBeenCalled();
-        expect(component.selectedChange.emit).not.toHaveBeenCalled();
+        expect(changeSpy).not.toHaveBeenCalled();
+        expect(selectedChangeSpy).not.toHaveBeenCalled();
 
         expect(component.selected).toEqual([component.dropdownValues[0]]);
 
@@ -156,8 +156,8 @@ describe('MultiInputComponent', () => {
     it('should emit changes values on approve', async () => {
         component.mobile = true;
 
-        spyOn(component, 'onChange');
-        spyOn(component.selectedChange, 'emit');
+        const changeSpy = jest.spyOn(component, 'onChange');
+        const selectedChangeSpy = jest.spyOn(component.selectedChange, 'emit');
 
         await fixture.whenStable();
 
@@ -169,13 +169,13 @@ describe('MultiInputComponent', () => {
 
         component.dialogApprove();
 
-        expect(component.onChange).toHaveBeenCalled();
-        expect(component.selectedChange.emit).toHaveBeenCalled();
+        expect(changeSpy).toHaveBeenCalled();
+        expect(selectedChangeSpy).toHaveBeenCalled();
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
     it('should focus the input and clear the search term after selection', async () => {
-        const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
+        const inputFocusSpy = jest.spyOn(component.searchInputElement.nativeElement, 'focus');
 
         await fixture.whenStable();
 
@@ -192,11 +192,11 @@ describe('MultiInputComponent', () => {
         const event = new MouseEvent('click');
         updateComponentInput('searchTerm', 'term');
         updateComponentInput('dropdownValues', ['term1', 'term2', 'value']);
-        spyOn(event, 'preventDefault');
-        spyOn(event, 'stopPropagation');
+        const preventSpy = jest.spyOn(event, 'preventDefault');
+        const propagationSpy = jest.spyOn(event, 'stopPropagation');
         component._showAllClicked(event);
-        expect(event.preventDefault).toHaveBeenCalled();
-        expect(event.stopPropagation).toHaveBeenCalled();
+        expect(preventSpy).toHaveBeenCalled();
+        expect(propagationSpy).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
 
         const vm = await firstValueFrom(component._viewModel$);
@@ -261,11 +261,11 @@ describe('MultiInputComponent', () => {
     });
 
     it('should not open dropdown when openDropdownOnAddOnClicked is false', () => {
-        spyOn(component.addOnButtonClicked, 'emit');
-        spyOn(component, 'openChangeHandle');
+        const buttonSpy = jest.spyOn(component.addOnButtonClicked, 'emit');
+        const openSpy = jest.spyOn(component, 'openChangeHandle');
         component.openDropdownOnAddOnClicked = false;
         component._addOnButtonClicked(new MouseEvent('click'));
-        expect(component.addOnButtonClicked.emit).toHaveBeenCalled();
-        expect(component.openChangeHandle).not.toHaveBeenCalled();
+        expect(buttonSpy).toHaveBeenCalled();
+        expect(openSpy).not.toHaveBeenCalled();
     });
 });

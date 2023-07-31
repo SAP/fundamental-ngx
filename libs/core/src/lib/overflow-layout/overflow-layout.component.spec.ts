@@ -5,6 +5,7 @@ import { OverflowLayoutItemDirective } from './directives/overflow-layout-item.d
 import { OverflowLayoutComponent } from './overflow-layout.component';
 
 import { OverflowLayoutModule } from './overflow-layout.module';
+import { OverflowLayoutService } from './overflow-layout.service';
 
 @Component({
     selector: 'fd-test-component',
@@ -47,6 +48,7 @@ export class TestComponent {
 describe('OverflowLayoutComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
+    let service: OverflowLayoutService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -55,10 +57,20 @@ describe('OverflowLayoutComponent', () => {
         }).compileComponents();
     });
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
+        await fixture.whenRenderingDone();
         fixture.detectChanges();
+        service = (component.overflowLayout as any)._overflowLayoutService;
+        jest.spyOn(
+            (component.overflowLayout as any)._elementRef.nativeElement,
+            'getBoundingClientRect'
+        ).mockImplementation(() => ({
+            width: component.containerWidth
+        }));
+        jest.spyOn(service as any, '_getElementWidth').mockImplementation((element) => component.elementsWidth);
+        service.fitVisibleItems();
     });
 
     it('should create', () => {
@@ -76,14 +88,14 @@ describe('OverflowLayoutComponent', () => {
     it('should render automatic amount of items', async () => {
         await fixture.whenStable();
 
-        const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth);
-        const visibleItemsCountSpy = spyOn(component.overflowLayout.visibleItemsCount, 'emit').and.callThrough();
+        const expectedAmount = Math.floor(component.containerWidth / component.elementsWidth) - 1; // Minus 'More' button container
+        const visibleItemsCountSpy = jest.spyOn(component.overflowLayout.visibleItemsCount, 'emit');
 
         component.maxItems = Infinity;
         fixture.detectChanges();
         await fixture.whenStable();
 
-        expect(visibleItemsCountSpy).toHaveBeenCalledWith(expectedAmount);
+        expect(visibleItemsCountSpy).toHaveBeenLastCalledWith(expectedAmount);
         expect(fixture.debugElement.queryAll(By.directive(OverflowLayoutItemDirective)).length).toEqual(expectedAmount);
     });
 

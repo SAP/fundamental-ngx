@@ -19,7 +19,7 @@ import {
 } from '@fundamental-ngx/platform/table';
 import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import get from 'lodash-es/get';
+import { get } from 'lodash-es';
 
 @Component({
     selector: 'fdp-smart-filter-bar-observable-example',
