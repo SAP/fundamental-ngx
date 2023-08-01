@@ -1,25 +1,27 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef } from '@angular/core';
 import { delay, of } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
 import { FdLanguage } from '../models';
 import { FdTranslatePipe } from './fd-translate.pipe';
+import { TestBed } from '@angular/core/testing';
 
 describe('FdTranslate pipe', () => {
     let pipe: FdTranslatePipe;
     const changeDetectorRefMock = { markForCheck: () => {} } as ChangeDetectorRef;
-
+    let destroyRef: DestroyRef;
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        destroyRef = TestBed.inject(DestroyRef);
+    });
     describe('pipe functionality', () => {
-        beforeEach(() => {
-            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH), changeDetectorRefMock);
-        });
-
         it("should return value by key, if it's available", () => {
-            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH), changeDetectorRefMock);
+            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH), destroyRef, changeDetectorRefMock);
             expect(pipe.transform('platformApprovalFlow.defaultWatchersLabel')).toBe('Watchers');
             expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 10 })).toBe('10 members');
         });
 
         it('should return empty string if value is not found', () => {
+            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH), destroyRef, changeDetectorRefMock);
             expect(pipe.transform('wrong')).toBe('');
         });
 
@@ -32,7 +34,7 @@ describe('FdTranslate pipe', () => {
                 }
             } as FdLanguage;
             const spy = jest.spyOn<any, any>(customLang.platformApprovalFlow, 'nodeMembersCount');
-            pipe = new FdTranslatePipe(of(customLang), changeDetectorRefMock);
+            pipe = new FdTranslatePipe(of(customLang), destroyRef, changeDetectorRefMock);
             expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 function members');
             expect(spy).toHaveBeenCalledWith({ count: 15 });
             expect(spy).toHaveBeenCalledTimes(1);
@@ -48,7 +50,7 @@ describe('FdTranslate pipe', () => {
                 }
             } as FdLanguage;
             const spy = jest.spyOn<any, any>(customLang.platformApprovalFlow, 'nodeMembersCount' as any);
-            pipe = new FdTranslatePipe(of(customLang), changeDetectorRefMock);
+            pipe = new FdTranslatePipe(of(customLang), destroyRef, changeDetectorRefMock);
             expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 members');
             expect(spy).toHaveBeenCalled();
         });
@@ -57,7 +59,7 @@ describe('FdTranslate pipe', () => {
                 ...FD_LANGUAGE_ENGLISH
             } as FdLanguage;
             delete (<any>customLang).platformApprovalFlow;
-            pipe = new FdTranslatePipe(of(customLang), changeDetectorRefMock);
+            pipe = new FdTranslatePipe(of(customLang), destroyRef, changeDetectorRefMock);
             expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 members');
         });
     });
@@ -68,7 +70,7 @@ describe('FdTranslate pipe', () => {
         const DELAY = 5;
 
         beforeEach(() => {
-            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH).pipe(delay(DELAY)), changeDetectorRefMock);
+            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH).pipe(delay(DELAY)), destroyRef, changeDetectorRefMock);
         });
 
         it('without params', (done) => {
