@@ -50,8 +50,7 @@ export class TestComponent {
     }
 }
 
-/** TODO: #6318 */
-xdescribe('WizardGeneratorStepComponent', () => {
+describe('WizardGeneratorStepComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let service: WizardGeneratorService;

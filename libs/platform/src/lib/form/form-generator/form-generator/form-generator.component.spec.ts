@@ -1,25 +1,14 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformInputModule } from '../../input/fdp-input.module';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
-import { PlatformCheckboxGroupModule } from '../../checkbox-group/checkbox-group.module';
-import { PlatformSelectModule } from '../../select';
-import { PlatformRadioGroupModule } from '../../radio-group/radio-group.module';
-import { PlatformTextAreaModule } from '../../text-area/text-area.module';
-import { PlatformDatePickerModule } from '../../date-picker/date-picker.module';
-import { PlatformSwitchModule } from '../../switch/switch.module';
 import { DynamicFormFieldItem } from '../interfaces/dynamic-form-item';
 import { FormGeneratorComponent } from './form-generator.component';
-import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
-import { DynamicFormControlFieldDirective } from '../dynamic-form-control-field.directive';
-import { DynamicFormGeneratorInputComponent } from '../controls/dynamic-form-generator-input/dynamic-form-generator-input.component';
 import { FormGeneratorService } from '../form-generator.service';
+import { PlatformFormGeneratorModule } from '../fdp-form-generator.module';
+import { BehaviorSubject, filter } from 'rxjs';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 
 @Component({
     template: `
@@ -36,11 +25,17 @@ export class HostComponent {
 
     formCreated = false;
 
-    form: FormGroup;
+    form: DynamicFormGroup;
 
     formValue: { [key: string]: any };
 
     formTitle = 'Test form title';
+
+    private _formCreatedSubj = new BehaviorSubject<boolean>(false);
+
+    formCreated$ = this._formCreatedSubj.pipe(filter((value) => value));
+
+    service = inject(FormGeneratorService);
 
     formItems: DynamicFormFieldItem[] = [
         {
@@ -51,9 +46,10 @@ export class HostComponent {
         }
     ];
 
-    onFormCreated(form): void {
+    onFormCreated(form: DynamicFormGroup): void {
         this.formCreated = true;
         this.form = form;
+        this._formCreatedSubj.next(true);
     }
 
     onFormSubmitted(formValue): void {
@@ -65,91 +61,81 @@ export class HostComponent {
     }
 }
 
-/** TODO: #6318 */
-xdescribe('FormGeneratorComponent', () => {
+describe('FormGeneratorComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
+    let service: FormGeneratorService;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                PlatformInputModule,
-                FormsModule,
-                ReactiveFormsModule,
-                PlatformButtonModule,
-                PlatformCheckboxGroupModule,
-                PlatformSelectModule,
-                PlatformRadioGroupModule,
-                PlatformTextAreaModule,
-                PlatformInputModule,
-                PlatformDatePickerModule,
-                PlatformSwitchModule,
-                BusyIndicatorModule
-            ],
-            declarations: [
-                DynamicFormControlDirective,
-                DynamicFormControlFieldDirective,
-                DynamicFormGeneratorInputComponent,
-                FormGeneratorComponent,
-                HostComponent
-            ],
-            providers: [FormGeneratorService]
+            imports: [PlatformFormGeneratorModule],
+            declarations: [HostComponent]
+            // providers: [FormGeneratorService, FormGeneratorComponentsAccessorService]
         }).compileComponents();
     }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
+        service = component.service;
         fixture.detectChanges();
         await whenStable(fixture);
     });
 
-    it('should render form title', async () => {
-        await whenStable(fixture);
-
-        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.textContent?.trim()).toEqual(
-            component.formTitle
-        );
+    it('should render form title', (doneFn) => {
+        component.formCreated$.subscribe(() => {
+            expect(
+                fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.textContent?.trim()
+            ).toEqual(component.formTitle);
+            doneFn();
+        });
     });
 
-    it('should create form', async () => {
-        await whenStable(fixture);
-
-        expect(component.formCreated).toBeTruthy();
+    it('should create form', (doneFn) => {
+        component.formCreated$.subscribe(() => {
+            expect(component.formCreated).toBeTruthy();
+            doneFn();
+        });
     });
 
-    it('should create form and pass form object', async () => {
-        await whenStable(fixture);
-        expect(component.form.controls).toBeTruthy();
+    it('should create form and pass form object', (doneFn) => {
+        component.formCreated$.subscribe(() => {
+            expect(component.form.controls).toBeTruthy();
+            doneFn();
+        });
     });
 
-    it('should submit form programmatically', async () => {
-        await whenStable(fixture);
+    it('should submit form programmatically', (doneFn) => {
+        component.formCreated$.subscribe(async () => {
+            const control = service.getFormControl(component.form, 'firstQuestion');
+            control.setValue(25);
 
-        component.form.controls.firstQuestion.setValue(25);
+            await new Promise((resolve) => setTimeout(() => resolve(null), 20));
 
-        await new Promise((resolve) => setTimeout(() => resolve(null), 20));
+            component.submitForm();
 
-        component.submitForm();
+            await new Promise((resolve) => setTimeout(() => resolve(null), 200));
+            fixture.detectChanges();
 
-        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
-        fixture.detectChanges();
-
-        expect(component.formValue).toBeTruthy();
+            expect(component.formValue).toBeTruthy();
+            doneFn();
+        });
     });
 
-    it('should not emit form value if form is invalid', async () => {
-        await whenStable(fixture);
-        component.form.controls.firstQuestion.setValue(0);
+    it('should not emit form value if form is invalid', (doneFn) => {
+        component.formCreated$.subscribe(async () => {
+            const control = service.getFormControl(component.form, 'firstQuestion');
+            control.setValue(0);
 
-        await new Promise((resolve) => setTimeout(() => resolve(null), 20));
+            await new Promise((resolve) => setTimeout(() => resolve(null), 20));
 
-        component.submitForm();
+            component.submitForm();
 
-        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
-        fixture.detectChanges();
+            await new Promise((resolve) => setTimeout(() => resolve(null), 200));
+            fixture.detectChanges();
 
-        expect(component.formValue).toBeFalsy();
+            expect(component.formValue).toBeFalsy();
+            doneFn();
+        });
     });
 });

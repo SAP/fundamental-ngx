@@ -64,7 +64,7 @@ describe('PlatformTableResetButtonComponent', () => {
     });
 
     it('should run reset on click', () => {
-        const resetSpy = spyOn(resettable, 'reset').and.callThrough();
+        const resetSpy = jest.spyOn(resettable, 'reset');
         const button = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
         resettable.isResetAvailableSubject$.next(true);

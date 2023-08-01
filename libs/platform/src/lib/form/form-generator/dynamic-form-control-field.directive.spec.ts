@@ -25,8 +25,7 @@ class HostComponent {
     shouldShow = true;
 }
 
-/** TODO: 6318 */
-xdescribe('DynamicFormControlFieldDirective', () => {
+describe('DynamicFormControlFieldDirective', () => {
     let fixture: ComponentFixture<HostComponent>;
 
     beforeEach(waitForAsync(() => {

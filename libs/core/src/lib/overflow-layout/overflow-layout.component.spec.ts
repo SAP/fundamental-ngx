@@ -69,7 +69,7 @@ describe('OverflowLayoutComponent', () => {
         ).mockImplementation(() => ({
             width: component.containerWidth
         }));
-        jest.spyOn(service as any, '_getElementWidth').mockImplementation((element) => component.elementsWidth);
+        jest.spyOn(service as any, '_getElementWidth').mockImplementation(() => component.elementsWidth);
         service.fitVisibleItems();
     });
 

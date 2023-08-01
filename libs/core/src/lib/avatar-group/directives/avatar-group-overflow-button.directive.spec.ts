@@ -40,18 +40,18 @@ describe('AvatarGroupOverflowButtonDirective', () => {
     });
 
     it('should assign classes', () => {
-        expect(component.ref.nativeElement).toHaveClass('fd-button');
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__more-button');
+        expect(component.ref.nativeElement.classList).toContain('fd-button');
+        expect(component.ref.nativeElement.classList).toContain('fd-avatar-group__more-button');
     });
 
     it('should assign class according to size', () => {
         component.size = 'm';
         fixture.detectChanges();
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__more-button--m');
+        expect(component.ref.nativeElement.classList).toContain('fd-avatar-group__more-button--m');
 
         component.size = 'xl';
         fixture.detectChanges();
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__more-button--xl');
+        expect(component.ref.nativeElement.classList).toContain('fd-avatar-group__more-button--xl');
     });
 
     it('should assign class according to color', () => {
@@ -61,6 +61,6 @@ describe('AvatarGroupOverflowButtonDirective', () => {
 
         component.color = 5;
         fixture.detectChanges();
-        expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__more-button--accent-color-5');
+        expect(component.ref.nativeElement.classList).toContain('fd-avatar-group__more-button--accent-color-5');
     });
 });
