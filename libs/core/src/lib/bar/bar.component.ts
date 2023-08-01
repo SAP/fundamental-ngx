@@ -94,7 +94,7 @@ export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestr
     buildComponentCssClass(): string[] {
         return [
             'fd-bar',
-            this._contentDensityObserver.isCozy ? 'fd-bar--cozy' : '', // TODO: fix in styles
+            this._contentDensityObserver.isCompact || this._contentDensityObserver.isCondensed ? '' : 'fd-bar--cozy', // TODO: fix in styles
             this.barDesign ? `fd-bar--${this.barDesign}` : '',
             this.inPage && !this.size ? 'fd-bar--page' : '',
             this.inPage && this.size ? `fd-bar--page-${this.size}` : '',
