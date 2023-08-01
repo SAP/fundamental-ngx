@@ -14,10 +14,11 @@ import { IconTabBarPopoverComponent } from './components/popovers/icon-tab-bar-p
 import { TextTypePopoverComponent } from './components/popovers/text-type-popover/text-type-popover.component';
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
-import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
+import { FdDnDEvent, IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import { generateTestConfig, getGetCenterCoordsOfElement } from './tests-helper';
+import { generateTestConfig } from './tests-helper';
+import { By } from '@angular/platform-browser';
 
 @Component({
     template: ` <fdp-icon-tab-bar
@@ -97,15 +98,22 @@ describe('IconTabBarComponent', () => {
         component.enableTabReordering = true;
         fixture.detectChanges();
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
-        const draggableItem = tabs[0];
-        const target = tabs[1];
-        const targetCoords = getGetCenterCoordsOfElement(target);
-        const initialTabsLength = tabs.length;
+        const items = fixture.debugElement.queryAll(By.directive(IconBarDndItemDirective));
 
-        emulateDnD(draggableItem, targetCoords);
+        const draggableItem = items[0];
+        const target = items[1];
+        const initialTabsLength = items.length;
+
+        const evt: FdDnDEvent = {
+            draggableItem: draggableItem.injector.get(IconBarDndItemDirective).dndItemData,
+            targetItem: target.injector.get(IconBarDndItemDirective).dndItemData,
+            action: 'insert'
+        };
+
+        target.componentInstance._onDropped(evt);
+
+        fixture.detectChanges();
         const updateTabsList = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
-
         expect(updateTabsList.length).toBeLessThan(initialTabsLength);
     });
 
@@ -128,7 +136,7 @@ describe('IconTabBarComponent', () => {
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
 
-        spyOn(component, 'selected');
+        jest.spyOn(component, 'selected');
         expect(someTab).toBeDefined();
         someTab?.click();
         fixture.detectChanges();
@@ -140,42 +148,23 @@ describe('IconTabBarComponent', () => {
         component.enableTabReordering = true;
         fixture.detectChanges();
 
-        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
-        const draggableItem = tabs[0];
-        const target = tabs[1];
-        const targetCoords = getGetCenterCoordsOfElement(target);
+        jest.spyOn(component, 'reordered');
 
-        spyOn(component, 'reordered');
-        emulateDnD(draggableItem, targetCoords);
+        const items = fixture.debugElement.queryAll(By.directive(IconBarDndItemDirective));
+
+        const draggableItem = items[0];
+        const target = items[1];
+
+        const evt: FdDnDEvent = {
+            draggableItem: draggableItem.injector.get(IconBarDndItemDirective).dndItemData,
+            targetItem: target.injector.get(IconBarDndItemDirective).dndItemData,
+            action: 'insert'
+        };
+
+        target.componentInstance._onDropped(evt);
+
+        fixture.detectChanges();
 
         expect(component.reordered).toHaveBeenCalled();
     });
 });
-
-// eslint-disable-next-line max-len
-function emulateDnD(draggableItem: HTMLElement, targetCoords: { clientX: number; clientY: number }): void {
-    const mousedown = createFakeMouseEvent('mousedown');
-    draggableItem.dispatchEvent(mousedown);
-    fixture.detectChanges();
-
-    // Need to move two times because cdk skip first moving
-    const firstMove = createFakeMouseEvent('mousemove', {
-        clientX: targetCoords.clientX - 50,
-        clientY: targetCoords.clientY - 50
-    });
-    draggableItem.dispatchEvent(firstMove);
-    fixture.detectChanges();
-    const finalMove = createFakeMouseEvent('mousemove', targetCoords);
-    draggableItem.dispatchEvent(finalMove);
-    fixture.detectChanges();
-
-    const mouseup = createFakeMouseEvent('mouseup');
-    draggableItem.dispatchEvent(mouseup);
-    fixture.detectChanges();
-}
-
-/** CDK validates events by checking "offsetX", "offsetY" and "buttons" params to not equal to "0" */
-function createFakeMouseEvent(type: string, eventInitDict?: MouseEventInit): MouseEvent {
-    return new MouseEvent(type, { buttons: 1, ...eventInitDict });
-}
