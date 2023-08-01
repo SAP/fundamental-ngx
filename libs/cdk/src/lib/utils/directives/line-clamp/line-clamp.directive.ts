@@ -1,17 +1,17 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
+    inject,
     Input,
-    AfterViewInit,
-    OnDestroy,
     OnChanges,
     Output,
-    Renderer2,
-    ChangeDetectorRef
+    Renderer2
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Nullable } from '../../models/nullable';
 import {
@@ -19,6 +19,8 @@ import {
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -89,7 +91,7 @@ export class LineClampTargetDirective implements OnChanges, AfterViewInit {
     exportAs: 'fdLineClamp',
     standalone: true
 })
-export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
+export class LineClampDirective implements OnChanges, AfterViewInit {
     /**
      * Count lines for clamping
      */
@@ -114,12 +116,18 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _lineClampTarget: HTMLElement;
     /** @hidden */
     private _originalText: string;
-    /** @hidden */
-    private windowResize$: Subscription;
+
     /** @hidden */
     private _isNativeSupport = true;
+
     /** @hidden */
     private _lineCount: number;
+
+    /** @hidden */
+    private viewportSize$ = inject(ViewportSizeObservable);
+
+    /** @hidden */
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     /**
@@ -145,18 +153,11 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
             this._checkLineCount();
         });
 
-        this.windowResize$ = fromEvent(window, 'resize')
-            .pipe(distinctUntilChanged(), debounceTime(200))
+        this.viewportSize$
+            .pipe(distinctUntilChanged(), debounceTime(200), takeUntilDestroyed(this._destroyRef))
             .subscribe({
                 next: () => this._checkLineCount()
             });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        if (this.windowResize$) {
-            this.windowResize$.unsubscribe();
-        }
     }
 
     /** @hidden */

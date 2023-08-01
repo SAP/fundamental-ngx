@@ -17,7 +17,7 @@ import { startWith } from 'rxjs/operators';
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DestroyedService, FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
 
@@ -27,8 +27,7 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
         {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableRowDirective
-        },
-        DestroyedService
+        }
     ]
 })
 export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnDestroy, OnInit {
@@ -83,19 +82,14 @@ export class TableRowDirective extends FocusableListDirective implements AfterVi
     active = false;
 
     /** @hidden */
-    private _propagateKeysSubscription: Subscription;
+    elementRef: ElementRef<HTMLTableRowElement> = inject(ElementRef);
 
+    /** @hidden */
+    private _propagateKeysSubscription: Subscription;
     /** @hidden */
     private readonly _changeDetRef = inject(ChangeDetectorRef);
     /** @hidden */
     private _tableService = inject(TableService);
-    /** @hidden */
-    public elementRef: ElementRef<HTMLTableRowElement> = inject(ElementRef);
-
-    /** @hidden */
-    constructor() {
-        super();
-    }
 
     /** @hidden */
     ngOnInit(): void {

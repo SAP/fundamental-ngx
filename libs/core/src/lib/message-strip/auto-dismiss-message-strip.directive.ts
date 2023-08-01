@@ -1,23 +1,19 @@
-import { Directive, ElementRef, inject, Input, isDevMode } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, Input, isDevMode } from '@angular/core';
 import { MessageStripComponent } from './message-strip.component';
 import { fromEvent, map, merge, Observable, of, startWith, takeUntil } from 'rxjs';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { switchMap } from 'rxjs/operators';
+import { destroyObservable } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-message-strip[mousePersist], fd-message-strip[duration], fd-message-strip[autoDismiss]',
     exportAs: 'fdAutoDismissMessageStrip',
     standalone: true,
-    providers: [DestroyedService],
     host: {
         '[style.display]': '!opened ? "none" : null'
     }
 })
 export class AutoDismissMessageStripDirective {
-    /** @hidden */
-    private messageStripComponent = inject(MessageStripComponent, { optional: false, host: true });
-
     /** Whether the message strip is dismissible */
     @Input() dismissible = true;
 
@@ -34,12 +30,15 @@ export class AutoDismissMessageStripDirective {
     opened = false;
 
     /** @hidden */
+    private messageStripComponent = inject(MessageStripComponent, { optional: false, host: true });
+
+    /** @hidden */
     private autoDismissTimeout?: ReturnType<typeof setTimeout>;
     /** @hidden */
     private elementRef = inject(ElementRef);
 
     /** @hidden */
-    private destroy$ = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /**
      * Mouse is hovering over the message strip.
@@ -94,7 +93,9 @@ export class AutoDismissMessageStripDirective {
                       })
                   )
                 : startAutoDismissTimer$;
-            source$.pipe(takeUntil(merge(this.destroy$, this.messageStripComponent.onDismiss))).subscribe();
+            source$
+                .pipe(takeUntil(merge(destroyObservable(this._destroyRef), this.messageStripComponent.onDismiss)))
+                .subscribe();
         }
     }
 

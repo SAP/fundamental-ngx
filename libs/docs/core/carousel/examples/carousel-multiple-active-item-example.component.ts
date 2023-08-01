@@ -3,20 +3,20 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     OnInit,
     ViewChild
 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-carousel-multiple-active-item-example',
     templateUrl: './carousel-multiple-active-item-example.component.html',
     styleUrls: ['./carousel-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')
@@ -25,17 +25,15 @@ export class CarouselMultipleActiveItemExampleComponent implements OnInit, After
     width = '900px';
     visibleSlidesCount = 3;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
     card1Visibility = true;
     card2Visibility = true;
     card3Visibility = true;
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, private readonly _destroy$: DestroyedService) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef, private readonly _destroyRef: DestroyRef) {}
 
     ngOnInit(): void {
         fromEvent(window, 'resize')
-            .pipe(debounceTime(60), takeUntil(this._destroy$))
+            .pipe(debounceTime(60), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this.updateLayout());
     }
 

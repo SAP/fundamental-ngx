@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     ElementRef,
     HostBinding,
     inject,
@@ -9,8 +10,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { debounceTime, distinctUntilChanged, startWith, takeUntil } from 'rxjs';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
 import { SidebarSettingsGeneratorConfig } from '../../models/settings-config.model';
 import {
     FormSettingsItem,
@@ -22,35 +23,18 @@ import {
 import { SettingsGeneratorContentComponent } from '../../settings-generator-content/settings-generator-content.component';
 import { FDP_SETTINGS_GENERATOR_CONFIG } from '../../tokens';
 import { BaseSettingsGeneratorLayout } from '../base-settings-generator-layout';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-settings-generator-sidebar-layout',
     templateUrl: './settings-generator-sidebar-layout.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
-    providers: [DestroyedService]
+    encapsulation: ViewEncapsulation.None
 })
 export class SettingsGeneratorSidebarLayoutComponent
     extends BaseSettingsGeneratorLayout
     implements OnInit, AfterViewInit
 {
-    /** @hidden */
-    @ViewChild('settingsGeneratorContent')
-    private readonly settingsGeneratorContent: SettingsGeneratorContentComponent;
-    /** @hidden */
-    protected _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
-    private readonly _config = inject<SidebarSettingsGeneratorConfig>(FDP_SETTINGS_GENERATOR_CONFIG);
-
-    /**
-     * Selected settings section.
-     */
-    _selectedIndex = -1;
-
-    /** @hidden */
-    _sidebarWidth: SidebarWidthConfiguration;
-
     /** @hidden */
     @HostBinding('class.fdp-settings-generator__sidebar-layout--mobile')
     _isMobile: boolean;
@@ -58,6 +42,23 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     @HostBinding('class')
     private readonly _initialClass = 'fdp-settings-generator__sidebar-layout';
+
+    /** @hidden */
+    @ViewChild('settingsGeneratorContent')
+    private readonly _settingsGeneratorContent: SettingsGeneratorContentComponent;
+
+    /**
+     * Selected settings section.
+     */
+    _selectedIndex = -1;
+    /** @hidden */
+    _sidebarWidth: SidebarWidthConfiguration;
+
+    /** @hidden */
+    protected _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _config = inject<SidebarSettingsGeneratorConfig>(FDP_SETTINGS_GENERATOR_CONFIG);
 
     /** @hidden */
     private _sidebarVisible = true;
@@ -79,7 +80,7 @@ export class SettingsGeneratorSidebarLayoutComponent
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._settingsGeneratorService.settings.pipe(takeUntil(this._destroy$)).subscribe((settings) => {
+        this._settingsGeneratorService.settings.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((settings) => {
             if (this._isSidebarSettings(settings) && settings.sidebarWidth) {
                 this._sidebarWidth = this._getNormalizedSidebarWidth(settings.sidebarWidth);
                 this._cdr.detectChanges();
@@ -106,7 +107,7 @@ export class SettingsGeneratorSidebarLayoutComponent
 
         // Currently we support only 2 level nesting of form groups.
         if (pathArray.length > 0) {
-            this.settingsGeneratorContent.setActiveTab(pathArray[1]);
+            this._settingsGeneratorContent.setActiveTab(pathArray[1]);
         }
 
         setTimeout(() => {
@@ -118,7 +119,7 @@ export class SettingsGeneratorSidebarLayoutComponent
     ngAfterViewInit(): void {
         if (this._settingsGenerator.elementRef.nativeElement && this._config.sidebar?.mobileBreakpoint) {
             resizeObservable(this._settingsGenerator.elementRef.nativeElement)
-                .pipe(startWith(null), debounceTime(30), distinctUntilChanged(), takeUntil(this._destroy$))
+                .pipe(startWith(null), debounceTime(30), distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     const { width } = this._settingsGenerator.elementRef.nativeElement.getBoundingClientRect();
                     const isMobile = width <= this._config.sidebar.mobileBreakpoint;

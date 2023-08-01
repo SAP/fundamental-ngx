@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
@@ -18,13 +19,7 @@ import {
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 
-import {
-    applyCssClass,
-    CssClassBuilder,
-    DestroyedService,
-    DynamicComponentContainer,
-    Nullable
-} from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, DynamicComponentContainer, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -33,7 +28,7 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogContentType } from '../dialog.types';
 import { dialogFade } from '../utils/dialog.animations';
 import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
-import { takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /** Dialog container where the dialog content is embedded. */
 @Component({
@@ -41,7 +36,6 @@ import { takeUntil } from 'rxjs';
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
     animations: [dialogFade],
-    providers: [DestroyedService],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogContainerComponent
@@ -70,7 +64,7 @@ export class DialogContainerComponent
     constructor(
         public dialogConfig: DialogConfig,
         private _dialogRef: DialogRef,
-        private _destroy$: DestroyedService,
+        private _destroyRef: DestroyRef,
         elementRef: ElementRef,
         changeDetectorRef: ChangeDetectorRef,
         injector: Injector
@@ -157,7 +151,7 @@ export class DialogContainerComponent
             this._animationState = 'hidden';
             this._cdr.detectChanges();
         };
-        this._dialogRef.afterClosed.pipe(takeUntil(this._destroy$)).subscribe({
+        this._dialogRef.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
             next: () => callback(),
             error: () => callback()
         });

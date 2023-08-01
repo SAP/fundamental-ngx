@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
@@ -16,12 +17,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
-import { DestroyedService, RtlService } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { BehaviorSubject } from 'rxjs';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -45,7 +47,6 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        DestroyedService,
         {
             provide: FD_BREADCRUMB_COMPONENT,
             useExisting: BreadcrumbComponent
@@ -113,7 +114,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
-        private _onDestroy$: DestroyedService,
+        private _destroyRef: DestroyRef,
         @Optional() private _rtlService: RtlService | null,
         private _cdr: ChangeDetectorRef
     ) {}
@@ -121,7 +122,7 @@ export class BreadcrumbComponent implements OnInit, AfterViewInit {
     /** @hidden */
     ngOnInit(): void {
         this._rtlService?.rtl
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((value) => this._placement$.next(value ? 'bottom-end' : 'bottom-start'));
     }
 

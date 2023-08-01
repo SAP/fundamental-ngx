@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     EventEmitter,
     forwardRef,
     Injector,
@@ -17,10 +18,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
-import { map, take, takeUntil } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
@@ -51,6 +51,7 @@ import { SmartFilterBarConditionFieldComponent } from './components/smart-filter
 import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const defaultColumnsLayout = 'XL4-L3-M2-S1';
 
@@ -88,7 +89,6 @@ const smartFilterBarProvider: Provider = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         smartFilterBarProvider,
-        DestroyedService,
         {
             provide: FDP_PRESET_MANAGED_COMPONENT,
             useExisting: SmartFilterBarComponent
@@ -100,6 +100,12 @@ const smartFilterBarProvider: Provider = {
     }
 })
 export class SmartFilterBarComponent extends SmartFilterBar implements AfterViewInit, OnDestroy {
+    /**
+     * @hidden
+     * Form generator component instance.
+     */
+    @ViewChild(FormGeneratorComponent) _formGenerator!: FormGeneratorComponent;
+
     /**
      * Subject which will provide configuration data: data source, columns definitions, etc.
      */
@@ -188,25 +194,19 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Output()
     searchInputChanged: EventEmitter<SearchInput> = new EventEmitter<SearchInput>();
-
-    /**
-     * Calculated array of filters to apply for the subject's data source.
-     */
-    filterBy: CollectionFilterGroup[] = [];
-    /**
-     * Search field value to apply for the subject's data source.
-     */
-    search: SearchInput | undefined;
-
     /** @hidden */
     @ContentChildren(SmartFilterBarToolbarItemDirective)
     private readonly _toolbarItemRefs: QueryList<SmartFilterBarToolbarItemDirective>;
 
     /**
-     * @hidden
-     * Form generator component instance.
+     * Calculated array of filters to apply for the subject's data source.
      */
-    @ViewChild(FormGeneratorComponent) _formGenerator!: FormGeneratorComponent;
+    filterBy: CollectionFilterGroup[] = [];
+
+    /**
+     * Search field value to apply for the subject's data source.
+     */
+    search: SearchInput | undefined;
     /** @Hidden */
     _toolbarItems: TemplateRef<any>[] = [];
     /** @hidden */
@@ -223,6 +223,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
     /** @hidden */
     private _subjectSubscriptions = new Subscription();
 
@@ -236,20 +237,20 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     private _ignorePresetChange = false;
 
     /** @hidden */
+    private _subject!: SmartFilterBarSubjectDirective;
+
+    /** @hidden */
     constructor(
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
         private _fgService: FormGeneratorService,
         private _injector: Injector,
-        private readonly _destroy$: DestroyedService
+        private readonly _destroyRef: DestroyRef
     ) {
         super();
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
-
-    /** @hidden */
-    private _subject!: SmartFilterBarSubjectDirective;
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -388,15 +389,17 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             this._setSelectedFilters([...this.subject.getDefaultFields(), ...this._selectedFilters]);
         }
 
-        this._formGenerator.form.valueChanges.pipe(debounceTime(50), takeUntil(this._destroy$)).subscribe(async () => {
-            const conditions = await this.getFormattedConditions();
-            this.smartFiltersChanged.emit({ filterBy: conditions, search: this.search, subject: this.subject });
+        this._formGenerator.form.valueChanges
+            .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
+            .subscribe(async () => {
+                const conditions = await this.getFormattedConditions();
+                this.smartFiltersChanged.emit({ filterBy: conditions, search: this.search, subject: this.subject });
 
-            if (!this.liveUpdate) {
-                return;
-            }
-            this._applyFiltering(conditions);
-        });
+                if (!this.liveUpdate) {
+                    return;
+                }
+                this._applyFiltering(conditions);
+            });
 
         this._formGeneratorReady.next(true);
     }

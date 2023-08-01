@@ -11,7 +11,7 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { ChangeDetectorRef, Directive, ElementRef, EventEmitter, inject } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, Directive, ElementRef, EventEmitter, inject } from '@angular/core';
 import { DataSourceDirective, MatchingBy, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
     CvaControl,
@@ -21,18 +21,10 @@ import {
     isSelectableOptionItem,
     SelectableOptionItem
 } from '@fundamental-ngx/cdk/forms';
-import {
-    coerceArraySafe,
-    DestroyedService,
-    isFunction,
-    isJsObject,
-    isString,
-    Nullable,
-    RangeSelector
-} from '@fundamental-ngx/cdk/utils';
+import { coerceArraySafe, isFunction, isJsObject, isString, Nullable, RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, skip, startWith, Subscription, takeUntil, timer } from 'rxjs';
+import { BehaviorSubject, skip, startWith, Subscription, timer } from 'rxjs';
 import {
     FdMultiComboboxAcceptableDataSource,
     FdMultiComboBoxDataSource
@@ -41,12 +33,32 @@ import { displayValue, flattenGroups, lookupValue, objectGet } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
 import { MultiComboboxConfig } from './multi-combobox-config';
 import { FD_MAP_LIMIT } from './multi-combobox.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type TextAlignment = 'left' | 'right';
 
 @Directive()
 export abstract class BaseMultiCombobox<T = any> {
+    abstract selectedItems: T[];
+    abstract group: boolean;
+    abstract groupKey: string;
+    abstract displayKey: string;
+    abstract secondaryKey: string;
+    abstract showSecondaryText: boolean;
+    abstract lookupKey: string;
+    abstract invalidEntryMessage: string;
+    abstract invalidEntryDisplayTime: number;
+    abstract limitless: boolean;
+    abstract isGroup: boolean;
+    abstract inputText: string;
+
+    abstract searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
+
+    abstract selectionChange: EventEmitter<MultiComboboxSelectionChangeEvent>;
+    abstract dataReceived: EventEmitter<boolean>;
+    abstract dataRequested: EventEmitter<boolean>;
     // Injection section
+
     /** @hidden */
     readonly cvaControl: CvaControl<T> = inject(CvaControl);
 
@@ -65,18 +77,6 @@ export abstract class BaseMultiCombobox<T = any> {
 
     /** Content Density Observer */
     readonly contentDensityObserver = inject(ContentDensityObserver);
-
-    /** @Hidden */
-    protected readonly _elmRef = inject(ElementRef<HTMLElement>);
-
-    /** @hidden */
-    protected readonly _cd = inject(ChangeDetectorRef);
-
-    /** @hidden */
-    protected readonly _mapLimit = inject(FD_MAP_LIMIT);
-
-    /** @Hidden */
-    protected readonly _destroyed$ = inject(DestroyedService);
 
     /**
      * @hidden
@@ -99,27 +99,20 @@ export abstract class BaseMultiCombobox<T = any> {
     /** @hidden */
     _fullFlatSuggestions: SelectableOptionItem[] = [];
 
-    abstract selectedItems: T[];
-    abstract group: boolean;
-    abstract groupKey: string;
-    abstract displayKey: string;
-    abstract secondaryKey: string;
-    abstract showSecondaryText: boolean;
-    abstract lookupKey: string;
-    abstract invalidEntryMessage: string;
-    abstract invalidEntryDisplayTime: number;
-    abstract limitless: boolean;
-    abstract isGroup: boolean;
-    abstract inputText: string;
-
-    abstract searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
-
-    abstract selectionChange: EventEmitter<MultiComboboxSelectionChangeEvent>;
-    abstract dataReceived: EventEmitter<boolean>;
-    abstract dataRequested: EventEmitter<boolean>;
-
     /** @hidden */
     selectedShown$ = new BehaviorSubject(false);
+
+    /** @Hidden */
+    protected readonly _elmRef = inject(ElementRef<HTMLElement>);
+
+    /** @hidden */
+    protected readonly _cd = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    protected readonly _mapLimit = inject(FD_MAP_LIMIT);
+
+    /** @Hidden */
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     protected _dataSource: FdMultiComboboxAcceptableDataSource<T>;
@@ -174,22 +167,6 @@ export abstract class BaseMultiCombobox<T = any> {
     private _dataSourceChanged = false;
 
     /** @hidden */
-    protected _displayFn = (value: any): string => displayValue(value, this.displayKey);
-
-    /** @hidden */
-    protected _secondaryFn = (value: any): string => {
-        if (isOptionItem(value)) {
-            return value.secondaryText ?? '';
-        } else if (isJsObject(value) && this.secondaryKey) {
-            const currentItem = objectGet(value, this.secondaryKey);
-
-            return isFunction(currentItem) ? currentItem() : currentItem;
-        } else {
-            return value;
-        }
-    };
-
-    /** @hidden */
     writeValue(value: any): void {
         this.selectedItems = coerceArraySafe(value);
         this._cva.writeValue(this.selectedItems);
@@ -209,6 +186,22 @@ export abstract class BaseMultiCombobox<T = any> {
         this._setSelectedSuggestions();
         this._emitChangeEvent();
     }
+
+    /** @hidden */
+    protected _displayFn = (value: any): string => displayValue(value, this.displayKey);
+
+    /** @hidden */
+    protected _secondaryFn = (value: any): string => {
+        if (isOptionItem(value)) {
+            return value.secondaryText ?? '';
+        } else if (isJsObject(value) && this.secondaryKey) {
+            const currentItem = objectGet(value, this.secondaryKey);
+
+            return isFunction(currentItem) ? currentItem() : currentItem;
+        } else {
+            return value;
+        }
+    };
 
     /**
      * @hidden
@@ -473,11 +466,13 @@ export abstract class BaseMultiCombobox<T = any> {
             this.dataSourceDirective.dataSourceProvider?.dataReceived.subscribe(this.dataReceived)
         );
 
-        this.dataSourceDirective.dataSourceChanged.pipe(startWith(true), takeUntil(this._destroyed$)).subscribe(() => {
-            this._dataSourceChanged = true;
-        });
+        this.dataSourceDirective.dataSourceChanged
+            .pipe(startWith(true), takeUntilDestroyed(this._destroyRef))
+            .subscribe(() => {
+                this._dataSourceChanged = true;
+            });
 
-        this.dataSourceDirective.dataChanged$.pipe(skip(0), takeUntil(this._destroyed$)).subscribe((data) => {
+        this.dataSourceDirective.dataChanged$.pipe(skip(0), takeUntilDestroyed(this._destroyRef)).subscribe((data) => {
             if (data.length === 0) {
                 this._processingEmptyData();
                 return;

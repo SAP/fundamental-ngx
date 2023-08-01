@@ -1,8 +1,8 @@
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, inject, NgZone, OnInit } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, inject, NgZone, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-    DestroyedService,
     FocusableCellPosition,
     FocusableItemPosition,
     KeyUtil,
@@ -10,18 +10,19 @@ import {
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { fromEvent } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { TableColumnResizeService } from '../services/table-column-resize.service';
 import { TableRowService } from '../services/table-row.service';
 
 @Directive({
     selector: '[fdpTableHeaderResizer]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
 export class TableHeaderResizerDirective implements OnInit {
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    focusedCellPosition: Nullable<FocusableCellPosition>;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _rtl = inject(RtlService, {
@@ -47,9 +48,6 @@ export class TableHeaderResizerDirective implements OnInit {
     private _focusinTimerId: any;
 
     /** @hidden */
-    focusedCellPosition: Nullable<FocusableCellPosition>;
-
-    /** @hidden */
     private get _headerCellFocused(): boolean {
         return this._document.activeElement?.tagName.toLowerCase() === 'th';
     }
@@ -57,7 +55,7 @@ export class TableHeaderResizerDirective implements OnInit {
     ngOnInit(): void {
         this._zone.runOutsideAngular(() => {
             fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe((event) => {
                     if (
                         (KeyUtil.isKeyCode(event, LEFT_ARROW) ||
@@ -81,7 +79,7 @@ export class TableHeaderResizerDirective implements OnInit {
                 });
 
             fromEvent(this._elmRef.nativeElement, 'focusin')
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     if (!this._focusinTimerId) {
                         return;
@@ -91,7 +89,7 @@ export class TableHeaderResizerDirective implements OnInit {
                 });
 
             fromEvent(this._elmRef.nativeElement, 'focusout')
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     this._focusinTimerId = setTimeout(() => {
                         this.focusedCellPosition = null;

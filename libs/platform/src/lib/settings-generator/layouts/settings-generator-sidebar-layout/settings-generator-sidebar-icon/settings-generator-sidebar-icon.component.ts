@@ -1,16 +1,24 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, ViewEncapsulation, inject } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    DestroyRef,
+    inject,
+    Input,
+    ViewEncapsulation
+} from '@angular/core';
 import { ThumbnailSettingsItem } from '../../../models/settings.model';
 import { ListAvatarConfig, ListIconConfig } from '@fundamental-ngx/platform/list';
 import { merge } from 'lodash-es';
-import { Observable, takeUntil } from 'rxjs';
-import { DestroyedService, isSubscribable } from '@fundamental-ngx/cdk/utils';
+import { Observable } from 'rxjs';
+import { isSubscribable } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-settings-generator-sidebar-icon',
     templateUrl: './settings-generator-sidebar-icon.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsGeneratorSidebarIconComponent {
     /** Thumbnail configuration. */
@@ -31,16 +39,16 @@ export class SettingsGeneratorSidebarIconComponent {
     }
 
     /** @hidden */
-    private _thumbnail: ThumbnailSettingsItem;
-
-    /** @hidden */
     _avatarConfig: ListAvatarConfig | undefined;
 
     /** @hidden */
     _iconConfig: ListIconConfig | undefined;
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private _thumbnail: ThumbnailSettingsItem;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);
@@ -70,7 +78,7 @@ export class SettingsGeneratorSidebarIconComponent {
     /** @hidden */
     private _getConfigFromObservable<T>(config: T | Observable<T>, callback: (config: T) => void): void {
         if (isSubscribable(config)) {
-            config.pipe(takeUntil(this._destroy$)).subscribe((_config) => {
+            config.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((_config) => {
                 callback(_config);
             });
 

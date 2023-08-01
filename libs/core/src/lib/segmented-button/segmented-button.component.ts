@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     forwardRef,
     HostBinding,
@@ -15,10 +16,11 @@ import {
 } from '@angular/core';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
-import { Subject, merge, fromEvent, asyncScheduler } from 'rxjs';
-import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { asyncScheduler, fromEvent, merge, Subject } from 'rxjs';
+import { destroyObservable, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export const isDisabledClass = 'is-disabled';
 
@@ -49,8 +51,7 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => SegmentedButtonComponent),
             multi: true
-        },
-        DestroyedService
+        }
     ]
 })
 export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
@@ -80,17 +81,25 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
     /** @hidden */
+    constructor(
+        private readonly _changeDetRef: ChangeDetectorRef,
+        private readonly _elementRef: ElementRef,
+        private readonly _destroyRef: DestroyRef
+    ) {}
+
+    /** @hidden */
+    @HostListener('click', ['$event'])
+    private _click(event: MouseEvent): void {
+        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
+            this.onTouched();
+        }
+    }
+
+    /** @hidden */
     onChange: (value: SegmentedButtonValue) => void = () => {};
 
     /** @hidden */
     onTouched = (): void => {};
-
-    /** @hidden */
-    constructor(
-        private readonly _changeDetRef: ChangeDetectorRef,
-        private readonly _elementRef: ElementRef,
-        private readonly _onDestroy$: DestroyedService
-    ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -135,17 +144,9 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     }
 
     /** @hidden */
-    @HostListener('click', ['$event'])
-    private _click(event: MouseEvent): void {
-        if (!this._elementRef.nativeElement.contains(event.relatedTarget)) {
-            this.onTouched();
-        }
-    }
-
-    /** @hidden */
     private _listenToButtonChanges(): void {
         this._buttons.changes
-            .pipe(startWith(1), observeOn(asyncScheduler), takeUntil(this._onDestroy$))
+            .pipe(startWith(1), observeOn(asyncScheduler), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._onRefresh$.next();
                 this._toggleDisableButtons(this._isDisabled);
@@ -158,7 +159,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
     private _listenToTriggerEvents(buttonComponent: ButtonComponent): void {
         const htmlElement = buttonComponent.elementRef.nativeElement;
 
-        const refresh$ = merge(this._onDestroy$, this._onRefresh$);
+        const refresh$ = merge(destroyObservable(this._destroyRef), this._onRefresh$);
 
         const triggerEvents$ = merge(
             fromEvent(htmlElement, 'click'),

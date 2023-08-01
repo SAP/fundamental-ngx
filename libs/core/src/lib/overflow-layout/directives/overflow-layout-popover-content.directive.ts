@@ -1,21 +1,20 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Directive, HostBinding, HostListener, Inject, Input, OnDestroy, Optional } from '@angular/core';
-import { DestroyedService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs';
+import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowPopoverContent } from '../interfaces/overflow-popover-content.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Directive to wrap Overlay Layout "More" popover content.
  * Used to apply keyboard navigation through the items.
  */
 @Directive({
-    selector: '[fdOverflowLayoutPopoverContent]',
-    providers: [DestroyedService]
+    selector: '[fdOverflowLayoutPopoverContent]'
 })
 export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent, OnDestroy {
     /**
@@ -38,14 +37,14 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     }
 
     /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-overflow-layout__popover-container';
+
+    /** @hidden */
     private _keyboardEventsManager: FocusKeyManager<OverflowLayoutFocusableItem>;
 
     /** @hidden */
     private _items: OverflowItemRef[];
-
-    /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fd-overflow-layout__popover-container';
 
     /** @hidden */
     private _dir: 'ltr' | 'rtl' = 'ltr';
@@ -53,12 +52,11 @@ export class OverflowLayoutPopoverContentDirective implements OverflowPopoverCon
     /** @hidden */
     constructor(
         @Inject(FD_OVERFLOW_CONTAINER) private _overflowContainer: OverflowContainer,
-        @Optional() private _rtl: RtlService,
-        private readonly _onDestroy$: DestroyedService
+        @Optional() private _rtl: RtlService
     ) {
         this._overflowContainer?.registerPopoverContent(this);
 
-        this._rtl?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((rtl) => {
+        this._rtl?.rtl.pipe(takeUntilDestroyed()).subscribe((rtl) => {
             this._dir = rtl ? 'rtl' : 'ltr';
             if (this._keyboardEventsManager) {
                 this._keyboardEventsManager = this._keyboardEventsManager.withHorizontalOrientation(this._dir);

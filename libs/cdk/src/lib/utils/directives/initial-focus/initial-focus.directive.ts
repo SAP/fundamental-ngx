@@ -1,13 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, inject, Input, NgZone } from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, inject, Input, NgZone } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { distinctUntilChanged, filter, take, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, take } from 'rxjs/operators';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
-import { DestroyedService } from '../../services';
 import { TabbableElementService } from '../../services/tabbable-element.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -37,7 +37,6 @@ export class DeprecatedInitialFocusDirective extends DeprecatedSelector {
     selector: '[fdkInitialFocus], [fdInitialFocus], [fd-initial-focus]',
     standalone: true,
     providers: [
-        DestroyedService,
         TabbableElementService,
         {
             provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
@@ -67,17 +66,17 @@ export class InitialFocusDirective implements AfterViewInit {
         return this._enabled$.getValue();
     }
 
-    /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
-    private readonly _enabled$ = new BehaviorSubject<boolean>(true);
-
     /**
      * Whether to focus last element in a found array of elements.
      */
     @Input()
     focusLastElement = false;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _enabled$ = new BehaviorSubject<boolean>(true);
 
     /** @hidden */
     constructor(
@@ -92,7 +91,7 @@ export class InitialFocusDirective implements AfterViewInit {
             .pipe(
                 distinctUntilChanged(),
                 filter((enabled) => enabled),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._executeOnEmpty(() => this._focus());
@@ -123,7 +122,6 @@ export class InitialFocusDirective implements AfterViewInit {
         const autoFocusableItems = this._elmRef.nativeElement.querySelectorAll(
             this.fdkInitialFocus
         ) as NodeListOf<HTMLElement>;
-        console.log(autoFocusableItems);
 
         if (autoFocusableItems.length > 0) {
             return !this.focusLastElement ? autoFocusableItems[0] : autoFocusableItems[autoFocusableItems.length - 1];

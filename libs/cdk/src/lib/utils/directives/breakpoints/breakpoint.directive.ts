@@ -1,6 +1,7 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 import {
     AfterViewInit,
+    DestroyRef,
     Directive,
     ElementRef,
     EmbeddedViewRef,
@@ -13,10 +14,11 @@ import {
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty, coerceElement } from '@angular/cdk/coercion';
 import { ViewportSizeObservable } from '../../tokens/viewport-size.observable';
-import { DestroyedService, ResizeObserverService } from '../../services';
-import { finalize, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { ResizeObserverService } from '../../services';
+import { finalize, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { BreakpointName, getBreakpointName } from './responsive-breakpoints';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Directive to show/hide element on specific breakpoint or range of window width.
@@ -25,8 +27,7 @@ import { BreakpointName, getBreakpointName } from './responsive-breakpoints';
 @Directive({
     selector:
         '[fdkBreakpoint], [fdkBreakpointS], [fdkBreakpointM], [fdkBreakpointL], [fdkBreakpointXL], [fdkBreakpointLt], [fdkBreakpointGt]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
 export class BreakpointDirective implements OnChanges, AfterViewInit {
     /**
@@ -93,6 +94,10 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
      */
     @Input('fdkBreakpointObserve')
     set observationSource(value: HTMLElement | ElementRef<HTMLElement>) {
+        if (!value) {
+            this._sizeObservable$.next(this.viewportSize$);
+            return;
+        }
         const element = coerceElement(value);
         this._sizeObservable$.next(
             this._resizeObserverService.observe(value).pipe(
@@ -106,11 +111,19 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     templateViewRef?: EmbeddedViewRef<unknown>;
 
     /** @hidden */
+    onChanges$ = new Subject<void>();
+
+    /** @hidden */
+    _sizeObservable$: BehaviorSubject<Observable<number>> = new BehaviorSubject<Observable<number>>(
+        inject(ViewportSizeObservable)
+    );
+    /** @hidden */
     private _showOnS = false;
     /** @hidden */
     private _showOnM = false;
     /** @hidden */
     private _showOnL = false;
+
     /** @hidden */
     private _showOnXL = false;
 
@@ -118,16 +131,10 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
     private viewportSize$ = inject(ViewportSizeObservable);
 
     /** @hidden */
-    private _destroyed$ = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _resizeObserverService = inject(ResizeObserverService);
-
-    /** @hidden */
-    onChanges$ = new Subject<void>();
-
-    /** @hidden */
-    _sizeObservable$: BehaviorSubject<Observable<number>> = new BehaviorSubject<Observable<number>>(this.viewportSize$);
 
     /** @hidden */
     constructor(private readonly templateRef: TemplateRef<any>, private readonly viewContainer: ViewContainerRef) {}
@@ -150,7 +157,7 @@ export class BreakpointDirective implements OnChanges, AfterViewInit {
                         this.templateViewRef = undefined;
                     }
                 }),
-                takeUntil(this._destroyed$),
+                takeUntilDestroyed(this._destroyRef),
                 finalize(() => {
                     this.viewContainer.clear();
                     this.templateViewRef = undefined;

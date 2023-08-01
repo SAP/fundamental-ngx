@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -18,8 +19,8 @@ import {
 } from '@angular/core';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { DestroyedService, KeyUtil, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
+import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -27,10 +28,10 @@ import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { LIST_COMPONENT } from './tab-list.token';
 import { TabListComponentInterface } from './tab-list-component.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -50,7 +51,6 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         contentDensityObserverProviders(),
-        DestroyedService,
         {
             provide: LIST_COMPONENT,
             useExisting: forwardRef(() => TabListComponent)
@@ -176,7 +176,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private _elRef: ElementRef,
         readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _onDestroy$: DestroyedService
+        private readonly _destroyRef: DestroyRef
     ) {}
 
     /** @hidden */
@@ -247,7 +247,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         return this.tabPanels.changes.pipe(
             startWith(this.tabPanels),
             map((tabPanels) => tabPanels.toArray()),
-            takeUntil(this._onDestroy$)
+            takeUntilDestroyed(this._destroyRef)
         );
     }
 
@@ -272,7 +272,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             .pipe(
                 filter(() => this.stackContent),
                 delay(0),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() =>
                 this._tabArray.filter((tab) => !tab.panel.disabled).forEach((tab) => tab.panel._expand(true))
@@ -284,7 +284,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._tabPanelsChange$
             .pipe(
                 map((tabPanels) => tabPanels.map((el) => new TabInfo(el))),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((tabs) => {
                 this._tabArray = tabs;
@@ -297,14 +297,14 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             .pipe(
                 map((tabPanels) => tabPanels.map((tab) => tab._expandedStateChange.asObservable())),
                 switchMap((tabPanels) => merge(...tabPanels)),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((event) => this._expandTab(event.target, event.state));
     }
 
     /** @hidden */
     private _listenOnTabPanelsAndInitiallyExpandTabPanel(): void {
-        this._tabPanelsChange$.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._tabPanelsChange$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const activeTab = this._tabArray.find((_tab) => _tab.active);
             let tab: Nullable<TabInfo>;
 
@@ -327,7 +327,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     private _listenOnPropertiesChange(): void {
         merge(this.tabPanelPropertyChanged, this.tabPanels.changes)
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._detectChanges());
     }
 
@@ -383,7 +383,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
             !this._init ? (this._disableScrollSpy = true) : (this._init = false);
             fromEvent(containerElement, 'scroll')
-                .pipe(debounceTime(100), first(), takeUntil(this._onDestroy$))
+                .pipe(debounceTime(100), first(), takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => (this._disableScrollSpy = false));
             scrollTop(containerElement, distanceToScroll);
         }

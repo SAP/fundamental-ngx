@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, inject, Injector, Input } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, inject, Injector, Input } from '@angular/core';
 import { MessageStripAlertService } from '../message-strip-alert.service';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs/operators';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { ComponentPortal, PortalModule } from '@angular/cdk/portal';
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
 import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition } from '../tokens';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * The component that represents the footer of the message strip alert container.
@@ -25,8 +25,7 @@ import { MessageStripAlertContainerAlertRefs, MessageStripAlertContainerPosition
         `
     ],
     standalone: true,
-    imports: [PortalModule],
-    providers: [DestroyedService]
+    imports: [PortalModule]
 })
 export class MessageStripAlertContainerFooterComponent implements AfterViewInit {
     /** @hidden */
@@ -46,7 +45,7 @@ export class MessageStripAlertContainerFooterComponent implements AfterViewInit 
     private position = inject(MessageStripAlertContainerPosition);
 
     /** @hidden */
-    private destroyed = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private messageStripAlertService = inject(MessageStripAlertService);
@@ -70,7 +69,7 @@ export class MessageStripAlertContainerFooterComponent implements AfterViewInit 
                                 providers: [
                                     {
                                         provide: MessageStripAlertContainerAlertRefs,
-                                        useValue: this.alertRefs$.pipe(takeUntil(this.destroyed))
+                                        useValue: this.alertRefs$.pipe(takeUntilDestroyed(this._destroyRef))
                                     }
                                 ]
                             })
@@ -79,7 +78,7 @@ export class MessageStripAlertContainerFooterComponent implements AfterViewInit 
                         this.footerComponentPortal = undefined;
                     }
                 }),
-                takeUntil(this.destroyed)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }

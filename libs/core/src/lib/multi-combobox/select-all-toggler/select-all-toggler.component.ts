@@ -2,15 +2,16 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     HostListener,
     inject,
     Input,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ListFocusItem } from '@fundamental-ngx/core/list';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-multi-combobox-select-all-toggler',
@@ -31,8 +32,7 @@ import { ListFocusItem } from '@fundamental-ngx/core/list';
         {
             provide: ListFocusItem,
             useExisting: SelectAllTogglerComponent
-        },
-        DestroyedService
+        }
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -78,7 +78,7 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     }
 
     /** @hidden */
-    private destroy$ = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private changeDetector: ChangeDetectorRef = inject(ChangeDetectorRef);
@@ -101,7 +101,7 @@ export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     /** @hidden */
     ngOnInit(): void {
         this.tabindex = 0;
-        this.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+        this.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.changeDetector.detectChanges();
         });
     }

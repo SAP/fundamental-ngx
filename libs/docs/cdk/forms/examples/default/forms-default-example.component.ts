@@ -1,9 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    DestroyRef,
+    inject,
+    Input,
+    ViewChild
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
-import { DestroyedService, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk';
 import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { cloneDeep } from 'lodash-es';
-import { takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fundamental-ngx-forms-default-example',
@@ -44,7 +52,6 @@ export class FormsDefaultExampleComponent {
     ],
     providers: [
         CvaControl,
-        DestroyedService,
         { provide: FD_FORM_FIELD_CONTROL, useExisting: CustomCdkControlExampleComponent, multi: true }
     ]
 })
@@ -65,13 +72,13 @@ export class CustomCdkControlExampleComponent {
 
     form: FormGroup;
     cvaControl: CvaControl<string[]> = inject(CvaControl);
-    _destroy$ = inject(DestroyedService);
+    _destroyRef = inject(DestroyRef);
 
     constructor(private readonly _formBuilder: FormBuilder) {}
 
     ngOnInit(): void {
         this.cvaControl.listenToChanges();
-        this.form?.valueChanges.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this.form?.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const formValue = Object.entries(cloneDeep(this.form.value)).reduce((acc, [currentKey, currentValue]) => {
                 if (currentValue) {
                     acc[currentKey] = currentValue;

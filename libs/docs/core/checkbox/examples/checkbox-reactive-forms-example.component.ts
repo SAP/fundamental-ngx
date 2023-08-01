@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { map, takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-checkbox-reactive-forms-example',
@@ -28,8 +28,7 @@ import { map, takeUntil } from 'rxjs/operators';
             Form Dirty: {{ registrationForm.dirty }}<br />
             Form Valid: {{ registrationForm.valid }}<br />
         </small>
-    `,
-    providers: [DestroyedService]
+    `
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {
     public registrationForm = new FormGroup({
@@ -41,7 +40,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
         })
     });
 
-    constructor(private readonly _destroy$: DestroyedService) {}
+    private readonly _destroyRef = inject(DestroyRef);
 
     ngOnInit(): void {
         this.setAgreementsOnAcceptAllChange();
@@ -59,7 +58,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
     private setAgreementsOnAcceptAllChange(): void {
         this.registrationForm
             .get('acceptAll')
-            ?.valueChanges.pipe(takeUntil(this._destroy$))
+            ?.valueChanges.pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((value) => this.acceptAll(value));
     }
 
@@ -79,7 +78,7 @@ export class CheckboxReactiveFormsExampleComponent implements OnInit {
                         return null;
                     }
                 }),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((acceptAllValue) =>
                 this.registrationForm.get('acceptAll')?.setValue(acceptAllValue, { emitEvent: false })

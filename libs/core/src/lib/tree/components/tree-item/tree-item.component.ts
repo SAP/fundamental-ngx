@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -18,19 +19,19 @@ import {
 } from '@angular/core';
 import { DataSource, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import {
-    DestroyedService,
     FDK_SELECTABLE_ITEM_PROVIDER,
     Nullable,
     SelectableItemDirective,
     SelectableItemToken,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
-import { distinctUntilChanged, filter, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import { distinctUntilChanged, filter, startWith, Subject, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource } from '../../data-source/tree-data-source';
 import { TreeItem, TreeItemState } from '../../models/tree-item';
-import { TreeService, SelectionModeModel } from '../../tree.service';
+import { SelectionModeModel, TreeService } from '../../tree.service';
 import { BaseTreeItem } from '../../models/base-tree-item.class';
 import { TreeItemDirective } from '../../directives/tree-item.directive';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-tree-item',
@@ -43,7 +44,6 @@ import { TreeItemDirective } from '../../directives/tree-item.directive';
         role: 'presentation'
     },
     providers: [
-        DestroyedService,
         {
             provide: FDK_SELECTABLE_ITEM_PROVIDER,
             useExisting: TreeItemComponent
@@ -88,9 +88,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         return this._parentId || this._parentTreeItem?.id;
     }
 
-    /** @hidden */
-    private _parentId: Nullable<string>;
-
     /**
      * Whether the tree item is navigatable.
      */
@@ -128,9 +125,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         return this._level || (this._parentTreeItem !== null ? this._parentTreeItem.level + 1 : 1);
     }
 
-    /** @hidden */
-    private _level: number;
-
     /**
      * Whether the tree item is expanded.
      */
@@ -160,15 +154,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         return this._expanded;
     }
 
-    /** @hidden */
-    private _expanded = false;
-
-    /**
-     * @hidden
-     * Whether the tree item should have a navigation indicator.
-     */
-    _navigationIndicator = false;
-
     /**
      * Event emitted when user clicks on tree item.
      */
@@ -180,6 +165,24 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
      */
     @Output()
     expandedChange = new EventEmitter<boolean>();
+
+    /** Tree item focusable container. */
+    @ViewChild('itemContainer', { read: ElementRef })
+    itemContainer: Nullable<ElementRef<HTMLElement>>;
+
+    /** Selectable item. */
+    @ViewChild(SelectableItemDirective)
+    selectableListItem: SelectableItemToken;
+
+    /** @hidden */
+    @ContentChildren(BaseTreeItem)
+    _projectedTreeItems: QueryList<BaseTreeItem>;
+
+    /**
+     * @hidden
+     * Whether the tree item should have a navigation indicator.
+     */
+    _navigationIndicator = false;
 
     /**
      * @hidden
@@ -196,6 +199,29 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     /** @hidden */
     _selectionModel: Nullable<SelectionModeModel>;
 
+    /** @Hidden */
+    _containerTabIndex = 0;
+
+    /** @hidden */
+    _setSize: number;
+    /** @hidden */
+    _currentPosition: number;
+
+    /** @hidden */
+    _totalChildrenLoaded = false;
+
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    private _parentId: Nullable<string>;
+
+    /** @hidden */
+    private _level: number;
+
+    /** @hidden */
+    private _expanded = false;
+
     /** Whether the tree item has any type of child nodes. */
     get hasChildren(): boolean {
         return !!this.childNodes || this.hasProjectedChildren;
@@ -211,21 +237,6 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
         return this._dsChildrenNumber > 0;
     }
 
-    /** @Hidden */
-    _containerTabIndex = 0;
-
-    /** Tree item focusable container. */
-    @ViewChild('itemContainer', { read: ElementRef })
-    itemContainer: Nullable<ElementRef<HTMLElement>>;
-
-    /** Selectable item. */
-    @ViewChild(SelectableItemDirective)
-    selectableListItem: SelectableItemToken;
-
-    /** @hidden */
-    @ContentChildren(BaseTreeItem)
-    _projectedTreeItems: QueryList<BaseTreeItem>;
-
     /** Whether the item is accessible via keyboard. */
     get keyboardAccessible(): boolean {
         return this._parentTreeItem === null
@@ -234,24 +245,14 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     }
 
     /** @hidden */
-    _setSize: number;
-    /** @hidden */
-    _currentPosition: number;
-
-    /** @hidden */
-    _totalChildrenLoaded = false;
-
-    /** @hidden */
     private _dsChildrenNumber = 0;
 
     /** @hidden */
     private readonly _clicked$ = new Subject<MouseEvent | KeyboardEvent>();
 
     /** Clicked behavior implementation. */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     clicked = this._clicked$.asObservable();
-
-    /** @hidden */
-    public readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     private readonly _treeItemDir = inject<TreeItemDirective<T, P>>(TreeItemDirective, {
@@ -268,7 +269,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     private readonly _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _parentTreeItem = inject(TreeItemComponent, {
@@ -284,12 +285,12 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
     /** @hidden */
     ngOnInit(): void {
-        this._treeService.selectionMode.pipe(takeUntil(this._destroy$)).subscribe((model) => {
+        this._treeService.selectionMode.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((model) => {
             this._selectionModel = model;
             this._cdr.detectChanges();
         });
 
-        this._treeService.navigationIndicator.pipe(takeUntil(this._destroy$)).subscribe((value) => {
+        this._treeService.navigationIndicator.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((value) => {
             this._navigationIndicator = value;
             this._cdr.detectChanges();
         });
@@ -299,7 +300,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
 
         this._dataSourceDirective.dataSourceProvider
             ?.getTotalItems()
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((totalItems) => {
                 this._dsChildrenNumber = totalItems;
                 this._totalChildrenLoaded = true;
@@ -310,7 +311,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
             .pipe(
                 filter((received) => received),
                 switchMap(() => this._dataSourceDirective.dataChanged$),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((data) => {
                 this.children = this._treeService.normalizeTreeItems(data, this.id, this.level + 1) as T[];
@@ -325,7 +326,7 @@ export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>
     /** @hidden */
     ngAfterViewInit(): void {
         this._projectedTreeItems.changes
-            .pipe(startWith(null), distinctUntilChanged(), takeUntil(this._destroy$))
+            .pipe(startWith(null), distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._cdr.detectChanges();
                 this._projectedTreeItems.forEach((treeItem, index) => {
