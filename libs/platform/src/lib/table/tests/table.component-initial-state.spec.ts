@@ -42,7 +42,7 @@ class TableHostComponent {
     source = new TableDataSource(new TableDataProviderMock());
 }
 
-describe('TableComponent Initial State', async () => {
+describe('TableComponent Initial State', () => {
     let hostComponent: TableHostComponent;
     let fixture: ComponentFixture<TableHostComponent>;
     let tableComponent: TableComponent<SourceItem>;
@@ -58,7 +58,7 @@ describe('TableComponent Initial State', async () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TableHostComponent);
         hostComponent = fixture.componentInstance;
-        spyOn(hostComponent.source, 'fetch').and.callThrough();
+        jest.spyOn(hostComponent.source, 'fetch');
 
         fixture.detectChanges();
 

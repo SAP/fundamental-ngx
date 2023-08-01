@@ -88,7 +88,7 @@ describe('TableCellHeaderPopoverComponent', () => {
     it('sort by cell header method should call TableService.setSort with a proper params', () => {
         const field = 'price.value';
         const direction = SortDirection.ASC;
-        const serviceSortSpy = spyOn(tableService, 'setSort').and.stub();
+        const serviceSortSpy = jest.spyOn(tableService, 'setSort');
 
         component._setColumnHeaderSortBy(field, direction);
 
@@ -105,7 +105,7 @@ describe('TableCellHeaderPopoverComponent', () => {
             strategy: FILTER_STRING_STRATEGY.CONTAINS,
             exclude: false
         };
-        const serviceFilterSpy = spyOn(tableService, 'addFilters').and.stub();
+        const serviceFilterSpy = jest.spyOn(tableService, 'addFilters');
 
         component._setColumnHeaderFilterBy(field, value);
 
@@ -115,7 +115,7 @@ describe('TableCellHeaderPopoverComponent', () => {
     it('group by cell header method should call TableService.setGroups with a proper params', () => {
         const field = 'price.value';
         const payload: CollectionGroup[] = [{ field, direction: SortDirection.NONE, showAsColumn: true }];
-        const serviceGroupSpy = spyOn(tableService, 'setGroups').and.stub();
+        const serviceGroupSpy = jest.spyOn(tableService, 'setGroups');
 
         component._setColumnHeaderGroupBy(field);
 
