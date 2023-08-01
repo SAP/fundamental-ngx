@@ -3,7 +3,7 @@
   "version": "0.43.0-rc.4",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
-  "description": "Fundamental Library for Angular is a themeable Fiori Angular component library.",
+  "description": "Fundamental Library for Angular is a themeable Fiori Angular component library",
   "homepage": "https://sap.github.io/fundamental-ngx",
   "repository": {
     "type": "git",
