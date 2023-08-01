@@ -7,6 +7,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     inject,
     Input,
@@ -15,17 +16,18 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -39,7 +41,6 @@ import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSi
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        DestroyedService,
         contentDensityObserverProviders({
             supportedContentDensity: [ContentDensityMode.COZY],
             restrictChildContentDensity: true
@@ -150,13 +151,15 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
         this._searchSubmitSubscription?.unsubscribe();
 
-        this._searchSubmitSubscription = component.searchSubmit.pipe(takeUntil(this._destroy$)).subscribe((state) => {
-            if (!state.text) {
-                this._showMobileSearch = false;
-                this._actions._setSearchVisibility(false);
-                this._cd.detectChanges();
-            }
-        });
+        this._searchSubmitSubscription = component.searchSubmit
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((state) => {
+                if (!state.text) {
+                    this._showMobileSearch = false;
+                    this._actions._setSearchVisibility(false);
+                    this._cd.detectChanges();
+                }
+            });
 
         this._cd.detectChanges();
     }
@@ -203,7 +206,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _breakpoints: NormalizedBreakpoint[] = this._normalizeBreakpoints({
@@ -225,7 +228,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
     /** @hidden */
     ngAfterViewInit(): void {
         resizeObservable(this._shellbar.nativeElement)
-            .pipe(debounceTime(10), takeUntil(this._destroy$))
+            .pipe(debounceTime(10), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._setCurrentBreakpoint());
 
         this._setSearchComponentListeners();
@@ -239,7 +242,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
 
     /** @hidden */
     private _setSearchComponentListeners(): void {
-        this._actions?.searchOpen.pipe(takeUntil(this._destroy$)).subscribe((showSearch) => {
+        this._actions?.searchOpen.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((showSearch) => {
             this._showMobileSearch = showSearch;
             this._cd.detectChanges();
             if (this._currentSize !== 's') {
@@ -252,7 +255,7 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
                 this._detachSearch();
             }
         });
-        this._currentSize$.pipe(distinctUntilChanged(), takeUntil(this._destroy$)).subscribe((size) => {
+        this._currentSize$.pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef)).subscribe((size) => {
             if (!this._searchPortal) {
                 return;
             }

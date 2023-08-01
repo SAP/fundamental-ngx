@@ -10,7 +10,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    DestroyedService,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
@@ -26,7 +25,7 @@ import {
     TableRowService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -38,8 +37,7 @@ import { takeUntil } from 'rxjs/operators';
         {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableHeaderRowComponent
-        },
-        DestroyedService
+        }
     ]
 })
 export class TableHeaderRowComponent extends TableRowDirective implements OnInit {
@@ -126,7 +124,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     /** @hidden */
     constructor() {
         super();
-        this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe((isRtl) => {
+        this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((isRtl) => {
             this._rtl = isRtl;
         });
     }
@@ -134,7 +132,7 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._tableColumnResizeService.markForCheck.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this._tableColumnResizeService.markForCheck.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._cdr.detectChanges();
         });
     }

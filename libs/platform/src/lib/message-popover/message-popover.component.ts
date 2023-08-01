@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     EventEmitter,
     Input,
     OnInit,
@@ -12,10 +13,9 @@ import {
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '@fundamental-ngx/platform/form';
 import { countBy, flatten } from 'lodash-es';
-import { takeUntil } from 'rxjs';
 import {
     MessagePopoverEntry,
     MessagePopoverError,
@@ -24,16 +24,20 @@ import {
 import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
 import { convertFormState } from './utils';
 import { MessagePopover } from './models/message-popover.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-message-popover',
     templateUrl: './message-popover.component.html',
     styleUrls: ['./message-popover.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessagePopoverComponent implements MessagePopover, OnInit {
+    /** @hidden */
+    @ViewChild('popover')
+    readonly _popover: PopoverComponent;
+
     /** Message Popover Wrapper component. */
     @Input()
     wrapper: MessagePopoverWrapper;
@@ -67,19 +71,15 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
     _filteredErrors: MessagePopoverErrorGroup[] = [];
 
     /** @hidden */
-    @ViewChild('popover')
-    private readonly _popover: PopoverComponent;
-
-    /** @hidden */
     private _groupedErrors: MessagePopoverErrorGroup[] = [];
 
     /** @hidden */
-    constructor(private readonly _cdr: ChangeDetectorRef, private readonly _destroy$: DestroyedService) {}
+    constructor(private readonly _cdr: ChangeDetectorRef, private readonly _destroyRef: DestroyRef) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.wrapper?.setMessagePopover(this);
-        this.wrapper?.errors.pipe(takeUntil(this._destroy$)).subscribe((errors) => {
+        this.wrapper?.errors.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((errors) => {
             this._groupedErrors = errors;
             this._errorTypes = [];
             const countedErrors = countBy(

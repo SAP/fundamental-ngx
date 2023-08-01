@@ -1,15 +1,15 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit } from '@angular/core';
 import {
+    AbstractDataProvider,
+    BaseDataSource,
+    DataProvider,
     DataSourceDirective,
     DataSourceParser,
-    BaseDataSource,
-    AbstractDataProvider,
-    DataProvider,
-    isDataSource,
-    FD_DATA_SOURCE_TRANSFORMER
+    FD_DATA_SOURCE_TRANSFORMER,
+    isDataSource
 } from '@fundamental-ngx/cdk/data-source';
-import { delay, isObservable, Observable, of, takeUntil } from 'rxjs';
+import { delay, isObservable, Observable, of } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export class ExampleDataSource<T> extends BaseDataSource<T> {
     constructor(public dataProvider: AbstractDataProvider<T>) {
@@ -68,7 +68,6 @@ export class ExampleDataSourceParser<T> implements DataSourceParser<T, ExampleDa
         }
     ],
     providers: [
-        DestroyedService,
         {
             provide: FD_DATA_SOURCE_TRANSFORMER,
             useClass: ExampleDataSourceParser<number>
@@ -88,7 +87,7 @@ export class DataSourceDefaultExampleComponent implements OnInit {
     isLoading = false;
 
     constructor(
-        private readonly _destroy$: DestroyedService,
+        private readonly _destroyRef: DestroyRef,
         private readonly _cd: ChangeDetectorRef,
         public readonly dataSourceDirective: DataSourceDirective<number>
     ) {}
@@ -96,12 +95,12 @@ export class DataSourceDefaultExampleComponent implements OnInit {
     ngOnInit(): void {
         this.dataSourceDirective.dataSource = this.arrayDataSource;
 
-        this.dataSourceDirective.dataChanged$.pipe(takeUntil(this._destroy$)).subscribe((data) => {
+        this.dataSourceDirective.dataChanged$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((data) => {
             this.currentData = data;
             this._cd.detectChanges();
         });
 
-        this.dataSourceDirective.isLoading.pipe(takeUntil(this._destroy$)).subscribe((isLoading) => {
+        this.dataSourceDirective.isLoading.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isLoading) => {
             this.isLoading = isLoading;
             this._cd.detectChanges;
         });

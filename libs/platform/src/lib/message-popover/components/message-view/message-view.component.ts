@@ -4,6 +4,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -13,17 +14,17 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { DestroyedService, resizeObservable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
-import { debounceTime, takeUntil } from 'rxjs';
+import { Nullable, resizeObservable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
+import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-message-view',
     templateUrl: './message-view.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DestroyedService, TabbableElementService],
+    providers: [TabbableElementService],
     animations: [
         trigger('openCloseList', [
             // ...
@@ -128,7 +129,7 @@ export class MessageViewComponent implements AfterViewInit {
 
     /** @hidden */
     constructor(
-        private readonly _destroy$: DestroyedService,
+        private readonly _destroyRef: DestroyRef,
         private readonly _tabbableService: TabbableElementService,
         @Inject(DOCUMENT) private readonly _document: Document
     ) {}
@@ -136,7 +137,7 @@ export class MessageViewComponent implements AfterViewInit {
     /** @hidden */
     ngAfterViewInit(): void {
         resizeObservable(this._detailsView.nativeElement)
-            .pipe(debounceTime(20), takeUntil(this._destroy$))
+            .pipe(debounceTime(20), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 const { height } = this._detailsView.nativeElement.getBoundingClientRect();
                 this._listView.nativeElement.style.minHeight = `${height}px`;

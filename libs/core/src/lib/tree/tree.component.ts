@@ -7,6 +7,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -26,7 +27,6 @@ import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import {
     applyCssClass,
     CssClassBuilder,
-    DestroyedService,
     KeyUtil,
     Nullable,
     RtlService,
@@ -35,7 +35,7 @@ import {
     SelectionService
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { distinctUntilChanged, filter, fromEvent, startWith, Subscription, switchMap, takeUntil } from 'rxjs';
+import { distinctUntilChanged, filter, fromEvent, startWith, Subscription, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource, FdTreeItemType } from './data-source/tree-data-source';
 import { TreeDataSourceParser } from './data-source/tree-data-source-parser';
 import { TreeItemDefDirective } from './directives/tree-item-def.directive';
@@ -44,6 +44,7 @@ import { BaseTreeItem } from './models/base-tree-item.class';
 import { TreeService } from './tree.service';
 import { SelectionPlacement, SelectionType } from './models/selection-type';
 import { TreeItem, TreeItemGeneric } from './models/tree-item';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-tree',
@@ -71,7 +72,6 @@ import { TreeItem, TreeItemGeneric } from './models/tree-item';
         contentDensityObserverProviders(),
         TreeService,
         SelectionService,
-        DestroyedService,
         {
             provide: FD_DATA_SOURCE_TRANSFORMER,
             useClass: TreeDataSourceParser
@@ -188,7 +188,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
     private readonly _dataSourceDirective = inject<DataSourceDirective<T, FdTreeDataSource<T>>>(DataSourceDirective);
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     public readonly elementRef = inject(ElementRef);
@@ -248,20 +248,22 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         this._openDataStream();
         this.buildComponentCssClass();
 
-        this._treeService.expandedLevel.pipe(distinctUntilChanged(), takeUntil(this._destroy$)).subscribe((level) => {
-            this._expandedLevel = level;
-            this.buildComponentCssClass();
-            this._cdr.detectChanges();
-        });
+        this._treeService.expandedLevel
+            .pipe(distinctUntilChanged(), takeUntilDestroyed(this._destroyRef))
+            .subscribe((level) => {
+                this._expandedLevel = level;
+                this.buildComponentCssClass();
+                this._cdr.detectChanges();
+            });
 
-        this._treeService.detectChanges.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this._treeService.detectChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._cdr.detectChanges();
         });
 
         if (this.selection !== 'none') {
             this._selectionService.setValue(this._cvaDirective.value);
 
-            this._cvaDirective.ngControl?.valueChanges?.pipe(takeUntil(this._destroy$)).subscribe(() => {
+            this._cvaDirective.ngControl?.valueChanges?.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
                 this._selectionService.setValue(this._cvaDirective.value);
             });
         }
@@ -297,7 +299,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             this._selectionService.setValue(this._cvaDirective.value);
 
             this._selectionSub = this._cvaDirective.ngControl?.valueChanges
-                ?.pipe(takeUntil(this._destroy$))
+                ?.pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     this._selectionService.setValue(this._cvaDirective.value);
                 });
@@ -310,7 +312,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             .pipe(
                 startWith(null),
                 filter(() => this.treeItemDef !== undefined),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._allItems = this._treeItemDirectives.toArray().map((item) => item.treeItem!);
@@ -325,7 +327,7 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
             .pipe(
                 startWith(null),
                 filter(() => !this.treeItemDef),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._allItems = this._projectedTreeItems.toArray();
@@ -489,6 +491,16 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         return item.id;
     }
 
+    /**
+     * @hidden
+     * Select list interface method implementation.
+     * Sets value for control value accessor and emits it.
+     * @param value value of the selection.
+     */
+    onChange(value: SelectableListValueType<any>): void {
+        this._cvaDirective.setValue(value, true);
+    }
+
     /** @hidden */
     private _expandTreeSection(treeItem: BaseTreeItem): void {
         if (treeItem.expanded) {
@@ -547,15 +559,5 @@ export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeI
         );
 
         this._dataSourceDirective.dataSourceProvider?.match();
-    }
-
-    /**
-     * @hidden
-     * Select list interface method implementation.
-     * Sets value for control value accessor and emits it.
-     * @param value value of the selection.
-     */
-    onChange(value: SelectableListValueType<any>): void {
-        this._cvaDirective.setValue(value, true);
     }
 }

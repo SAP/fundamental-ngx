@@ -18,12 +18,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
-import { CvaControl, CvaDirective, SelectItem } from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective, OptionItem, SelectableOptionItem, SelectItem } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteEvent,
     coerceArraySafe,
     ContentDensity,
-    DestroyedService,
     DynamicComponentService,
     FocusEscapeDirection,
     KeyUtil,
@@ -37,11 +36,9 @@ import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core
 
 import equal from 'fast-deep-equal';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-
-import { SelectableOptionItem, OptionItem } from '@fundamental-ngx/cdk/forms';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
 import { MobileMultiComboboxComponent } from './mobile/mobile-multi-combobox.component';
 import { MobileMultiComboboxModule } from './mobile/mobile-multi-combobox.module';
@@ -51,6 +48,7 @@ import { MultiComboboxDataSourceParser } from './data-source/multi-combobox-data
 
 import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
@@ -84,8 +82,7 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         {
             provide: MULTI_COMBOBOX_COMPONENT,
             useExisting: MultiComboboxComponent
-        },
-        DestroyedService
+        }
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {
@@ -103,9 +100,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     get selectedItems(): T[] {
         return this._selectedItems;
     }
-    /** @hidden */
-    private _selectedItems: T[] = [];
-
     /** Provides maximum height for the optionPanel. */
     @Input()
     maxHeight = '250px';
@@ -170,10 +164,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     set value(value: T[]) {
         this.setValue(value, true);
     }
+
     get value(): T[] {
         return this._cva.value;
     }
-
     /**
      * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
      * * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
@@ -244,12 +238,12 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     dataReceived = new EventEmitter<boolean>();
 
     /** @hidden */
-    @ViewChild(FD_LIST_COMPONENT)
-    private readonly listComponent: ListComponentInterface;
-
-    /** @hidden */
     @ViewChild('searchInputElement', { read: ElementRef })
     readonly searchInputElement: Nullable<ElementRef<HTMLInputElement>>;
+
+    /** @hidden */
+    @ViewChild(FD_LIST_COMPONENT)
+    private readonly listComponent: ListComponentInterface;
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
@@ -342,6 +336,9 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     openChange = new Subject<boolean>();
 
     /** @hidden */
+    private _selectedItems: T[] = [];
+
+    /** @hidden */
     constructor(
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
@@ -405,15 +402,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
     }
 
-    /** @hidden */
-    private _toggleSelectionByInputText(text = this.inputText): void {
-        const item = getSelectItemByInputValue<T>(this._fullFlatSuggestions, text);
-        if (item) {
-            this._toggleSelection(item);
-            this.inputText = '';
-        }
-    }
-
     /**
      * @hidden
      * Method that selects all possible options.
@@ -428,18 +416,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         this._propagateChange();
     };
 
-    /**
-     * @hidden
-     * Iterate over every item and perform callback
-     */
-    private _onEveryItem(items: SelectableOptionItem[], callback: (item: SelectableOptionItem) => void): void {
-        items.forEach((item) => {
-            callback(item);
-            if (item.children && item.children.length > 0) {
-                this._onEveryItem(item.children, callback);
-            }
-        });
-    }
     /** @hidden */
     _navigateByTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW]) && this.isOpen) {
@@ -483,20 +459,6 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._showList(false);
             this.inputText = '';
         }
-    }
-
-    /**
-     * @hidden
-     * Method to set input text as item label.
-     */
-    private _setInputTextFromOptionItem(item: OptionItem): void {
-        this.inputText = item.label;
-
-        if (this.mobile) {
-            return;
-        }
-
-        this._showList(false);
     }
 
     /** @hidden */
@@ -695,6 +657,41 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._onPrimaryButtonClick(this.isOpen);
         }
     }
+    /**
+     * @hidden
+     * Iterate over every item and perform callback
+     */
+    private _onEveryItem(items: SelectableOptionItem[], callback: (item: SelectableOptionItem) => void): void {
+        items.forEach((item) => {
+            callback(item);
+            if (item.children && item.children.length > 0) {
+                this._onEveryItem(item.children, callback);
+            }
+        });
+    }
+
+    /** @hidden */
+    private _toggleSelectionByInputText(text = this.inputText): void {
+        const item = getSelectItemByInputValue<T>(this._fullFlatSuggestions, text);
+        if (item) {
+            this._toggleSelection(item);
+            this.inputText = '';
+        }
+    }
+
+    /**
+     * @hidden
+     * Method to set input text as item label.
+     */
+    private _setInputTextFromOptionItem(item: OptionItem): void {
+        this.inputText = item.label;
+
+        if (this.mobile) {
+            return;
+        }
+
+        this._showList(false);
+    }
 
     /**
      * @hidden
@@ -784,7 +781,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         }
 
         resizeObservable(this._inputGroup.nativeElement)
-            .pipe(debounceTime(30), takeUntil(this._destroyed$))
+            .pipe(debounceTime(30), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._getOptionsListWidth());
     }
 

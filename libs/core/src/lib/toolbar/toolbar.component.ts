@@ -7,6 +7,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     forwardRef,
     Inject,
@@ -23,12 +24,11 @@ import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/c
 import {
     applyCssClass,
     CssClassBuilder,
-    DestroyedService,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, combineLatest, map, Observable, startWith, takeUntil } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
 import {
     ContentDensityMode,
@@ -36,6 +36,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { ToolbarItem } from './abstract-toolbar-item.class';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -60,8 +61,7 @@ export const enum OverflowPriorityEnum {
     providers: [
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT
-        }),
-        DestroyedService
+        })
     ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
@@ -175,12 +175,25 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     constructor(
         private _cd: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _destroy$: DestroyedService,
+        private readonly _destroyRef: DestroyRef,
         private resizeObserverService: ResizeObserverService,
         private ngZone: NgZone,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {
         _contentDensityObserver.subscribe();
+    }
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-toolbar',
+            `fd-toolbar--${this.fdType}`,
+            `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
+            `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
+            `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
+            `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
+        ];
     }
 
     /** @hidden */
@@ -244,7 +257,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
                 }
                 return [];
             }),
-            takeUntil(this._destroy$)
+            takeUntilDestroyed(this._destroyRef)
         );
         this.overflowItems$.subscribe((items) => {
             this.overflownItems = items;
@@ -275,19 +288,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     get elementRef(): ElementRef {
         return this.toolbar;
-    }
-
-    /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-toolbar',
-            `fd-toolbar--${this.fdType}`,
-            `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
-            `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
-            `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
-            `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
-        ];
     }
 
     /** Method triggering collapsible toolbar  */

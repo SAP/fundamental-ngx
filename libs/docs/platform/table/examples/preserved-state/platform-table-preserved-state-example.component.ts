@@ -2,11 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     inject,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
@@ -29,6 +29,7 @@ import {
     TableState
 } from '@fundamental-ngx/platform/table';
 import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { destroyObservable } from '@fundamental-ngx/cdk';
 
 @Component({
     selector: 'fdp-platform-table-preserved-state-example',
@@ -39,8 +40,7 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
         {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
-        },
-        DestroyedService
+        }
     ]
 })
 export class PlatformTablePreservedStateExampleComponent {
@@ -69,7 +69,7 @@ export class PlatformTablePreservedStateExampleComponent {
 
     applyScroll = false;
 
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     private _refresh$: Subject<void> = new Subject();
 
@@ -98,7 +98,7 @@ export class PlatformTablePreservedStateExampleComponent {
             return;
         }
 
-        const refresh = merge(this._destroy$, this._refresh$);
+        const refresh = merge(destroyObservable(this._destroyRef), this._refresh$);
 
         this.table._dataSourceDirective.onDataReceived
             .pipe(

@@ -5,7 +5,8 @@ import { TableCellDirective } from '@fundamental-ngx/core/table';
 import equal from 'fast-deep-equal';
 import { TableColumnResizeService } from '../services/table-column-resize.service';
 import { fromEvent } from 'rxjs';
-import { distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type TableColumnResizableSide = 'start' | 'end' | 'both';
 
@@ -79,13 +80,13 @@ export class PlatformTableCellResizableDirective
                     filter(() => this._tableColumnResizeService?.resizeInProgress !== true),
                     map((event) => this._getResizer(event) || { resizerPosition: 0, resizedColumn: this.columnName }),
                     distinctUntilChanged((prev, curr) => equal(prev, curr)),
-                    takeUntil(this._destroy$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe((data) => {
                     this._tableColumnResizeService.setInitialResizerPosition(data.resizerPosition, data.resizedColumn);
                 });
             fromEvent<FocusEvent>(this.elementRef.nativeElement, 'focus')
-                .pipe(takeUntil(this._destroy$))
+                .pipe(takeUntilDestroyed(this._destroyRef))
                 .subscribe(() => {
                     this._tableColumnResizeService.setInitialResizerPosition(0, this.columnName);
                 });

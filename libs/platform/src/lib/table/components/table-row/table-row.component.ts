@@ -20,7 +20,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    DestroyedService,
+    destroyObservable,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
@@ -44,6 +44,7 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { fromEvent, merge, Subject } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -55,8 +56,7 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
         {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableRowComponent
-        },
-        DestroyedService
+        }
     ]
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -112,9 +112,6 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     keyboardDrag = new EventEmitter<TableRowKeyboardDrag>();
 
     /** @hidden */
-    _hasRowHeaderColumn = false;
-
-    /** @hidden */
     @ViewChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE)
     private set _focusableViewCellItems(items: QueryList<FocusableItemDirective>) {
         this.setItems(items);
@@ -129,6 +126,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     private get _ariaSelected(): boolean {
         return !!this.row.checked;
     }
+
+    /** @hidden */
+    _hasRowHeaderColumn = false;
 
     /** @hidden */
     _rtl = false;
@@ -146,18 +146,18 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     readonly _tableColumnResizeService = inject(TableColumnResizeService);
 
     /** @hidden */
+    readonly _fdpTableService = inject(TableService);
+
+    /** @hidden */
+    readonly _tableRowService = inject(TableRowService);
+
+    /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();
 
     /** @hidden */
     private readonly _rtlService = inject(RtlService, {
         optional: true
     });
-
-    /** @hidden */
-    readonly _fdpTableService = inject(TableService);
-
-    /** @hidden */
-    readonly _tableRowService = inject(TableRowService);
 
     /** @hidden */
     private readonly _cdr = inject(ChangeDetectorRef);
@@ -176,14 +176,14 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     constructor() {
         super();
-        this._rtlService?.rtl.pipe(takeUntil(this._destroy$)).subscribe((rtl) => {
+        this._rtlService?.rtl.pipe(takeUntilDestroyed()).subscribe((rtl) => {
             this._rtl = rtl;
         });
 
         this._tableColumnResizeService.resizeInProgress$
             .pipe(
                 switchMap(() => this._tableColumnResizeService.markForCheck),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed()
             )
             .subscribe(() => {
                 this._cdr.markForCheck();
@@ -193,7 +193,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             fromEvent<KeyboardEvent>(this._elmRef.nativeElement, 'keydown')
                 .pipe(
                     filter(() => !!this._dndTableDirective),
-                    takeUntil(this._destroy$)
+                    takeUntilDestroyed()
                 )
                 .subscribe((event) => {
                     this._onKeyDown(event);
@@ -204,7 +204,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
-        this._fdpTableService.visibleColumns$.pipe(takeUntil(this._destroy$)).subscribe((columns) => {
+        this._fdpTableService.visibleColumns$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((columns) => {
             this._hasRowHeaderColumn = columns.some((c) => c.role === 'rowheader');
             this._cdr.markForCheck();
         });
@@ -213,7 +213,7 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
-        this._editableCells.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
+        this._editableCells.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             const cells = this._editableCells.toArray();
             if (cells.length > 0) {
                 this._tableRowService.updateEditableCells(this.row, cells);
@@ -240,9 +240,29 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     }
 
     /** @hidden */
+    _toggleGroupRow(): void {
+        this._tableRowService.toggleRow({ type: 'toggleRow', row: this.row });
+    }
+
+    /** @hidden */
+    _toggleSingleSelectableRow(): void {
+        this._tableRowService.toggleRow({ type: 'toggleSingleSelectableRow', row: this.row });
+    }
+
+    /** @hidden */
+    _toggleMultiSelectRow(row: TableRow<T>, event?: Event): void {
+        this._tableRowService.toggleRow({ ...{ row, event }, ...{ type: 'toggleMultiSelectRow' } });
+    }
+
+    /** @hidden */
+    _columnTrackBy(index: number, column: TableColumn): string {
+        return column.name;
+    }
+
+    /** @hidden */
     private _listenToRowExpansion(): void {
         this._refreshChildRows$.next();
-        const refresh = merge(this._refreshChildRows$, this._destroy$);
+        const refresh = merge(this._refreshChildRows$, destroyObservable(this._destroyRef));
         // Load items only once. Further loading will be covered by the lazy loading functionality.
         this.row?.expanded$
             ?.pipe(
@@ -273,25 +293,5 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
             this.index,
             event.shiftKey ? 'group' : 'shift'
         );
-    }
-
-    /** @hidden */
-    _toggleGroupRow(): void {
-        this._tableRowService.toggleRow({ type: 'toggleRow', row: this.row });
-    }
-
-    /** @hidden */
-    _toggleSingleSelectableRow(): void {
-        this._tableRowService.toggleRow({ type: 'toggleSingleSelectableRow', row: this.row });
-    }
-
-    /** @hidden */
-    _toggleMultiSelectRow(row: TableRow<T>, event?: Event): void {
-        this._tableRowService.toggleRow({ ...{ row, event }, ...{ type: 'toggleMultiSelectRow' } });
-    }
-
-    /** @hidden */
-    _columnTrackBy(index: number, column: TableColumn): string {
-        return column.name;
     }
 }

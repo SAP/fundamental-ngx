@@ -9,7 +9,6 @@ import {
     HostListener,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     QueryList,
     SimpleChanges,
@@ -17,16 +16,18 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
-import { NestedListKeyboardService } from '@fundamental-ngx/cx/nested-list';
+import {
+    NestedListComponent,
+    NestedListKeyboardService,
+    NestedListStateService,
+    PreparedNestedListComponent
+} from '@fundamental-ngx/cx/nested-list';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationModel } from './side-navigation-model';
-import { PreparedNestedListComponent } from '@fundamental-ngx/cx/nested-list';
-import { NestedListStateService } from '@fundamental-ngx/cx/nested-list';
-import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -41,7 +42,7 @@ import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
     providers: [NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationComponent
-    implements AfterContentInit, AfterViewInit, OnInit, OnChanges, OnDestroy, SideNavigationInterface
+    implements AfterContentInit, AfterViewInit, OnInit, OnChanges, SideNavigationInterface
 {
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
@@ -110,15 +111,12 @@ export class SideNavigationComponent
     additionalShellbarCssClass = 'fd-shellbar--cx-side-nav';
 
     /** @hidden */
-    private _keyboardSubscription = new Subscription();
-
-    /** @hidden */
     constructor(
         private keyboardService: NestedListKeyboardService,
         private nestedListState: NestedListStateService,
         private _cdRef: ChangeDetectorRef
     ) {
-        this._keyboardSubscription = this.keyboardService.refresh$.subscribe(() => {
+        this.keyboardService.refresh$.pipe(takeUntilDestroyed()).subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
         });
@@ -155,11 +153,6 @@ export class SideNavigationComponent
         if (this.sideNavigationConfiguration) {
             this.keyboardService.refreshItems(this.getLists());
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._keyboardSubscription?.unsubscribe();
     }
 
     /** @hidden */

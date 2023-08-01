@@ -1,15 +1,28 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, PAGE_DOWN, PAGE_UP, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { AfterViewInit, ContentChildren, Directive, EventEmitter, Input, Output, QueryList } from '@angular/core';
-import { merge, startWith, switchMap, takeUntil } from 'rxjs';
+import {
+    AfterViewInit,
+    ContentChildren,
+    DestroyRef,
+    Directive,
+    EventEmitter,
+    Input,
+    Output,
+    QueryList
+} from '@angular/core';
+import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
-import { DestroyedService } from '../../services';
 import { FocusableItemPosition } from '../focusable-item';
-import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, FocusableListPosition } from '../focusable-list';
+import {
+    FDK_FOCUSABLE_LIST_DIRECTIVE,
+    FocusableListDirective,
+    FocusableListPosition,
+    ScrollPosition
+} from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
-import { ScrollPosition } from '../focusable-list';
 import { FDK_FOCUSABLE_GRID_DIRECTIVE } from './focusable-grid.tokens';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface FocusableCellPosition {
     rowIndex: number;
@@ -24,8 +37,7 @@ export interface FocusableCellPosition {
         {
             provide: FDK_FOCUSABLE_GRID_DIRECTIVE,
             useExisting: FocusableGridDirective
-        },
-        DestroyedService
+        }
     ]
 })
 export class FocusableGridDirective implements AfterViewInit {
@@ -63,12 +75,12 @@ export class FocusableGridDirective implements AfterViewInit {
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
-    constructor(private readonly _destroy$: DestroyedService) {}
+    constructor(private readonly _destroyRef: DestroyRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._focusableLists.changes
-            .pipe(startWith(this._focusableLists), takeUntil(this._destroy$))
+            .pipe(startWith(this._focusableLists), takeUntilDestroyed(this._destroyRef))
             .subscribe((lists) =>
                 lists.forEach((list, index) =>
                     list._setGridPosition({ rowIndex: index, totalRows: this._focusableLists.length })
@@ -81,7 +93,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 switchMap((queryList: QueryList<FocusableListDirective>) =>
                     merge(...queryList.toArray().map((list) => list._gridListFocused$))
                 ),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focusedEvent) => {
                 this.rowFocused.emit(focusedEvent);
@@ -96,7 +108,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 switchMap((queryList: QueryList<FocusableListDirective>) =>
                     merge(...queryList.toArray().map((list) => list._gridItemFocused$))
                 ),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((focusedEvent) => {
                 this.itemFocused.emit(focusedEvent);
@@ -111,7 +123,7 @@ export class FocusableGridDirective implements AfterViewInit {
                 switchMap((queryList: QueryList<FocusableListDirective>) =>
                     merge(...queryList.toArray().map((list) => list._keydown$))
                 ),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(({ event, list, activeItemIndex }) => this._onKeydown(event, list, activeItemIndex));
     }

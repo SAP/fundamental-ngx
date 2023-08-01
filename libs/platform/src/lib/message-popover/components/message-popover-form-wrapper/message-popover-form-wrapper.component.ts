@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     Inject,
     Input,
     OnDestroy,
@@ -11,13 +12,13 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm, NgModel } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
+    FormFieldErrorDirectiveContext,
     PlatformFormField,
-    PlatformFormFieldControl,
-    FormFieldErrorDirectiveContext
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
-import { BehaviorSubject, filter, startWith, Subject, Subscription, switchMap, takeUntil, zip } from 'rxjs';
+import { BehaviorSubject, filter, startWith, Subject, Subscription, switchMap, zip } from 'rxjs';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
 import {
@@ -28,6 +29,7 @@ import {
 import { MessagePopoverWrapper } from '../../models/message-popover-wrapper.interface';
 import { convertFormState } from '../../utils';
 import { MessagePopover } from '../../models/message-popover.interface';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type MessagePopoverForm = NgForm | FormGroupDirective;
 
@@ -35,13 +37,28 @@ export type MessagePopoverForm = NgForm | FormGroupDirective;
     selector: 'fdp-message-popover-form-wrapper',
     templateUrl: './message-popover-form-wrapper.component.html',
     exportAs: 'messagePopoverWrapper',
-    providers: [DestroyedService],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
+    /** @hidden */
+    @ContentChildren(ControlContainer, { descendants: true })
+    private readonly _projectedForm: QueryList<MessagePopoverForm>;
+    /** @hidden */
+    @ContentChildren(NgModel, { descendants: true })
+    private readonly _projectedFormItems!: QueryList<NgModel>;
+
+    /** @hidden */
+    @ContentChildren(PlatformFormFieldControl, { descendants: true })
+    private readonly _projectedFormFieldControls!: QueryList<PlatformFormFieldControl>;
+
+    /** @hidden */
+    @ContentChildren(MessagePopoverFormItemDirective, { descendants: true })
+    private readonly _directiveItems!: QueryList<MessagePopoverFormItemDirective>;
+
     /** Message Popover instance. */
     messagePopover$ = new Subject<MessagePopover>();
+
     /**
      * User-passed forms.
      */
@@ -69,26 +86,16 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /** @hidden */
-    private _formFields: PlatformFormFieldControl[] = [];
-
-    /** @hidden */
-    @ContentChildren(ControlContainer, { descendants: true })
-    private readonly _projectedForm: QueryList<MessagePopoverForm>;
-
-    /** @hidden */
-    @ContentChildren(NgModel, { descendants: true })
-    private readonly _projectedFormItems!: QueryList<NgModel>;
-
-    /** @hidden */
-    @ContentChildren(PlatformFormFieldControl, { descendants: true })
-    private readonly _projectedFormFieldControls!: QueryList<PlatformFormFieldControl>;
-
-    /** @hidden */
-    @ContentChildren(MessagePopoverFormItemDirective, { descendants: true })
-    private readonly _directiveItems!: QueryList<MessagePopoverFormItemDirective>;
-
-    /** @hidden */
     private readonly _errors$ = new BehaviorSubject<MessagePopoverErrorGroup[]>([]);
+
+    /**
+     * Error models Observable. Emitted when form submitted and contains invalid fields.
+     */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    errors = this._errors$.asObservable();
+
+    /** @hidden */
+    private _formFields: PlatformFormFieldControl[] = [];
 
     /** @hidden */
     private _formErrorsSubscription: Subscription | undefined;
@@ -102,14 +109,9 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     /** @hidden */
     private _formSubmitted = false;
 
-    /**
-     * Error models Observable. Emitted when form submitted and contains invalid fields.
-     */
-    errors = this._errors$.asObservable();
-
     /** @hidden */
     constructor(
-        private readonly _destroy$: DestroyedService,
+        private readonly _destroyRef: DestroyRef,
         @Inject(FDP_MESSAGE_POPOVER_CONFIG) private readonly _config: MessagePopoverConfig
     ) {}
 
@@ -121,7 +123,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         }
         this._ngForms = this._projectedForm?.toArray();
         this._startListeningForErrors();
-        this._projectedForm?.changes.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this._projectedForm?.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._ngForms = this._projectedForm.toArray();
             this._startListeningForErrors();
         });
@@ -137,7 +139,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
 
     /**
      * Programmatically add new form to array of forms.
-     * @param form
+     * @param forms
      */
     addForms(forms: MessagePopoverForm | MessagePopoverForm[]): void {
         const formsArray = Array.isArray(forms) ? forms : [forms];
@@ -152,6 +154,11 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     addFormFields(formFields: PlatformFormFieldControl[]): void {
         this._formFields.push(...formFields);
         this._listenToFormFieldErrors(this._formFields);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._formItemErrorsSubscription.unsubscribe();
     }
 
     /**
@@ -177,7 +184,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         );
 
         this._formErrorsSubscription = zip(...formSubmitEvents)
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this._formSubmitted = true;
                 const errors =
@@ -213,11 +220,6 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
                 })
             );
         });
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._formItemErrorsSubscription.unsubscribe();
     }
 
     /** @hidden */
@@ -382,6 +384,8 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
      * @param field Form Field Control.
      * @param errorDirective Optional Error directive
      * @param section Section where text should be rendered.
+     * @param errorKey
+     * @param error
      */
     private _getErrorText(
         field: PlatformFormFieldControl,

@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     inject,
@@ -15,10 +16,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * A token is used to represent contextualizing information.
@@ -30,7 +31,7 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./token.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders(), DestroyedService],
+    providers: [contentDensityObserverProviders()],
     host: {
         '[style.max-width.%]': '100'
     }
@@ -52,12 +53,6 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     @ViewChild('viewContainer', { read: ViewContainerRef })
     readonly _viewContainer: ViewContainerRef;
 
-    /** @hidden */
-    private _selected = false;
-
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
     /** Whether the token is selected. */
     @Input()
     set selected(val: boolean) {
@@ -66,10 +61,10 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
         }
         this._selected = val;
     }
+
     get selected(): boolean {
         return this._selected;
     }
-
     /** Whether the token is read-only. */
     @Input()
     readOnly = false;
@@ -118,7 +113,13 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     totalCount: number;
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private _selected = false;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -132,13 +133,13 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
         this._viewContainer.createEmbeddedView(this._content);
 
         fromEvent(this.tokenWrapperElement.nativeElement, 'focus')
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this.elementFocused.emit(true);
             });
 
         fromEvent(this.tokenWrapperElement.nativeElement, 'blur')
-            .pipe(takeUntil(this._destroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this.elementFocused.emit(false);
             });

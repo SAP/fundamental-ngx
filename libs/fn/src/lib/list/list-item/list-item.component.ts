@@ -32,7 +32,6 @@ import { CheckboxContext } from '../list-item-checkbox.directive';
 import { ListComponent } from '../list/list.component';
 import { distinctUntilChanged, map, Observable } from 'rxjs';
 import { BooleanInput, coerceArray } from '@angular/cdk/coercion';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fn-list-item, [fn-list-item]',
@@ -42,7 +41,7 @@ import { DestroyedService } from '@fundamental-ngx/cdk/utils';
     host: {
         '[class.fn-list__item]': 'true'
     },
-    providers: [DestroyedService, FdkDisabledProvider, FdkReadonlyProvider],
+    providers: [FdkDisabledProvider, FdkReadonlyProvider],
     hostDirectives: [FocusableItemDirective]
 })
 export class ListItemComponent {
@@ -73,7 +72,6 @@ export class ListItemComponent {
 
     constructor(
         private _cd: ChangeDetectorRef,
-        private _destroy$: DestroyedService,
         @Optional() private _selectionService: SelectionService<HTMLElement>,
         @Optional() @Inject(SelectableItemToken) private _selectableItem: SelectableItemToken,
         @Optional() @Inject(ListComponent) private _listComponent: ListComponent | null,

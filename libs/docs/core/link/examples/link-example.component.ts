@@ -1,24 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, takeUntil } from 'rxjs';
-import { DestroyedService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { Component, inject } from '@angular/core';
+import { BehaviorSubject, of } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-link-example',
-    templateUrl: './link-example.component.html',
-    providers: [DestroyedService]
+    templateUrl: './link-example.component.html'
 })
-export class LinkExampleComponent implements OnInit {
+export class LinkExampleComponent {
     arrowRight$: BehaviorSubject<string> = new BehaviorSubject<string>('slim-arrow-right');
     arrowLeft$: BehaviorSubject<string> = new BehaviorSubject<string>('slim-arrow-left');
 
-    constructor(private rtlService: RtlService, private readonly _destroy$: DestroyedService) {}
-
-    ngOnInit(): void {
-        if (this.rtlService) {
-            this.rtlService.rtl.pipe(takeUntil(this._destroy$)).subscribe((value) => {
-                this.arrowRight$.next(value ? 'slim-arrow-left' : 'slim-arrow-right');
-                this.arrowLeft$.next(value ? 'slim-arrow-right' : 'slim-arrow-left');
-            });
-        }
+    constructor() {
+        const { rtl: rtl$ } = inject(RtlService, { optional: true }) || { rtl: of(false) };
+        rtl$.pipe(takeUntilDestroyed()).subscribe((value) => {
+            this.arrowRight$.next(value ? 'slim-arrow-left' : 'slim-arrow-right');
+            this.arrowLeft$.next(value ? 'slim-arrow-right' : 'slim-arrow-left');
+        });
     }
 }
