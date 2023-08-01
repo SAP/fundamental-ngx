@@ -81,7 +81,6 @@
                     : _tableColumnResizeService.getNextColumnsWidth(column.name)
         "
         [fdPopoverTrigger]="tablePopover.popover"
-        [cellFocusedEventAnnouncer]="null"
         (cellFocused)="_tableRowService.cellFocused($event)"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
