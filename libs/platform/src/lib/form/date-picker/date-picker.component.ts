@@ -24,6 +24,7 @@ import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/c
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import deprecated from "deprecated-decorator";
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -92,6 +93,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * Aria label for the date picker input.
      */
     @Input()
+    @deprecated('i18n capabilities (being translated in core date picker)')
     dateInputLabel: string;
 
     /**
@@ -99,6 +101,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * Aria label for the datepicker input.
      */
     @Input()
+    @deprecated('i18n capabilities (being translated in core date picker)')
     dateRangeInputLabel: string;
 
     /**
@@ -106,6 +109,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * Aria label for the button to show/hide the calendar.
      */
     @Input()
+    @deprecated('i18n capabilities (being translated in core date picker)')
     displayCalendarToggleLabel: string;
 
     /** Enables Today-Selection-Button if true */
@@ -161,6 +165,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
     @Input()
+    @deprecated('"state"')
     set datepickerState(state: FormStates) {
         if (isDevMode()) {
             console.warn('"datepickerState" is deprecated. Use "state" instead');

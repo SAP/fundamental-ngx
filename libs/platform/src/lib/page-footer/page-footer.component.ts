@@ -7,6 +7,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import deprecated from "deprecated-decorator";
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -19,6 +20,9 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
     templateUrl: './page-footer.component.html',
     styleUrls: ['./page-footer.component.scss'],
     encapsulation: ViewEncapsulation.None
+})
+@deprecated({
+    version: '0.40.0',
 })
 export class PlatformFooterComponent {
     /** logo template accpets the generic html */

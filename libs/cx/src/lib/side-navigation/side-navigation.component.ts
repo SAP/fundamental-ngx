@@ -28,6 +28,7 @@ import { SideNavigationModel } from './side-navigation-model';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import deprecated from "deprecated-decorator";
 
 /**
  * The side-navigation is a wrapping component representing
@@ -53,6 +54,7 @@ export class SideNavigationComponent
     /** @deprecated Not applicable to the CX side nav. */
     @Input()
     @HostBinding('class.fdx-side-nav--condensed')
+    @deprecated()
     condensed = false;
 
     /** Prevents the side navigation from truncating or wrapping, extending the width to its longest label. */

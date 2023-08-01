@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import deprecated from "deprecated-decorator";
 
 @Component({
     selector: 'fd-upload-collection-button-group',
@@ -53,6 +54,7 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Ok' button.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreUploadCollection.menuOkText\' key')
     okText: string;
 
     /**
@@ -60,6 +62,7 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Cancel' button.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreUploadCollection.menuCancelText\' key')
     cancelText: string;
 
     /**
@@ -67,6 +70,7 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Edit' aria-label.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreUploadCollection.menuEditAriaLabel\' key')
     editAriaLabel: string;
 
     /**
@@ -74,6 +78,7 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Delete' aria-label.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreUploadCollection.menuDeleteAriaLabel\' key')
     deleteAriaLabel: string;
 
     /**
@@ -81,6 +86,7 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Ok' aria-label.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreUploadCollection.menuOkAriaLabel\' key')
     okAriaLabel: string;
 
     /**
@@ -88,6 +94,7 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Cancel' aria-label.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreUploadCollection.menuCancelAriaLabel\' key')
     cancelAriaLabel: string;
 
     /** @hidden */

@@ -15,6 +15,7 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NgIf } from '@angular/common';
 import { MessageStripType } from './message-strip-type';
+import deprecated from "deprecated-decorator";
 
 let messageStripUniqueId = 0;
 
@@ -70,7 +71,9 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
      * @deprecated use i18n capabilities instead
      * Aria label for the dismiss button.
      */
-    @Input() dismissLabel: string;
+    @Input()
+    @deprecated('i18n capabilities \'coreMessageStrip.dismissLabel\' key')
+    dismissLabel: string;
 
     /** Width of the message-strip. */
     @Input() width: string;

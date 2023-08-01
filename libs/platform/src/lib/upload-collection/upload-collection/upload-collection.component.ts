@@ -43,6 +43,7 @@ import {
 } from '../models/upload-collection.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
+import deprecated from "deprecated-decorator";
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 
@@ -57,6 +58,9 @@ let randomId = 0;
     templateUrl: './upload-collection.component.html',
     styleUrls: ['./upload-collection.component.scss'],
     encapsulation: ViewEncapsulation.None
+})
+@deprecated({
+    version: '0.40.0'
 })
 export class UploadCollectionComponent
     implements OnChanges, OnDestroy, UploadCollectionCmp<FdpUploadCollectionDataSource>

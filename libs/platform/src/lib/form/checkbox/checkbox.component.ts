@@ -23,6 +23,7 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms
 
 import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import deprecated from "deprecated-decorator";
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -117,6 +118,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * Emitting checkbox change event
      */
     @Output()
+    @deprecated('"checkedChange"')
     // eslint-disable-next-line @angular-eslint/no-output-native
     readonly change: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
 
@@ -125,6 +127,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
      * Event emitted when the checkbox's `indeterminate` value changes.
      */
     @Output()
+    @deprecated('"indeterminate"')
     readonly indeterminateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /**

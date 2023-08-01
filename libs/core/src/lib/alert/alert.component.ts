@@ -23,6 +23,7 @@ import { AbstractFdNgxClass, Nullable } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
 import { MessageStripType } from '@fundamental-ngx/core/message-strip';
+import deprecated from "deprecated-decorator";
 
 let alertUniqueId = 0;
 
@@ -39,6 +40,10 @@ let alertUniqueId = 0;
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
+})
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip'
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
     /** @hidden */

@@ -1,15 +1,17 @@
 import { Injectable, isDevMode } from '@angular/core';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated use i18n capabilities instead
  * Provides i18n support for labels and meridian naming inside the time component.
  */
 @Injectable()
+@deprecated('i18n capabilities')
 export class TimeI18n {
     /** @hidden */
     constructor() {
         if (isDevMode()) {
-            console.warn('TimeI18n is deprecated and will furtherly be removed. Use i18n capabilities instead.');
+            console.warn('TimeI18n is deprecated and will be removed in next release. Use i18n capabilities instead.');
         }
     }
 

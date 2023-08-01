@@ -1,22 +1,10 @@
-import {
-    Component,
-    Input,
-    Optional,
-    Output,
-    EventEmitter,
-    OnChanges,
-    SimpleChanges,
-    OnInit,
-    ChangeDetectorRef,
-    ViewChildren,
-    QueryList,
-    ElementRef
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Optional, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { SPACE } from '@angular/cdk/keycodes';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated
@@ -27,6 +15,7 @@ import { SPACE } from '@angular/cdk/keycodes';
     templateUrl: './thumbnail-image.component.html',
     styleUrls: ['./thumbnail-image.component.scss']
 })
+@deprecated({ version: '0.40.0' })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** media list obejct contains group of Media object.*/
     @Input()

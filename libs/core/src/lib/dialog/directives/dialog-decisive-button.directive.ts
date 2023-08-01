@@ -1,4 +1,5 @@
 import { Directive } from '@angular/core';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated
@@ -11,4 +12,5 @@ import { Directive } from '@angular/core';
         '[class.fd-dialog__decisive-button]': 'true'
     }
 })
+@deprecated('fd-button-bar')
 export class DialogDecisiveButtonDirective {}

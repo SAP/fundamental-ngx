@@ -17,6 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import deprecated from "deprecated-decorator";
 
 let switchUniqueId = 0;
 
@@ -96,6 +97,7 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
      * Semantic Label Accept set for Accessibility
      */
     @Input()
+    @deprecated('i18n capabilities \'fnSwitch.semanticAcceptLabel\' key')
     semanticAcceptLabel: string;
 
     /**
@@ -103,6 +105,7 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
      * Semantic Label Decline set for Accessibility
      */
     @Input()
+    @deprecated('i18n capabilities \'fnSwitch.semanticDeclineLabel\' key')
     semanticDeclineLabel: string;
 
     /**

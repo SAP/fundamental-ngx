@@ -45,6 +45,7 @@ import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import deprecated from "deprecated-decorator";
 
 let selectUniqueId = 0;
 
@@ -146,6 +147,7 @@ export class SelectComponent<T = any>
      * Equal as extendedBodyTemplate as true.
      * Whether option components contain more than basic text. */
     @Input()
+    @deprecated()
     extendedBodyTemplate = false;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */

@@ -52,6 +52,7 @@ import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import deprecated from "deprecated-decorator";
 
 const defaultColumnsLayout = 'XL4-L3-M2-S1';
 
@@ -123,6 +124,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * @deprecated use i18n capabilities instead
      */
     @Input()
+    @deprecated('i18n capabilities')
     showFiltersLabel: string;
 
     /**
@@ -130,6 +132,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * @deprecated use i18n capabilities instead
      */
     @Input()
+    @deprecated('i18n capabilities')
     hideFiltersLabel: string;
 
     /**
@@ -137,6 +140,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * @deprecated use i18n capabilities instead
      */
     @Input()
+    @deprecated('i18n capabilities')
     filtersLabel: string;
 
     /**
@@ -156,6 +160,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * Condition strategy labels.
      */
     @Input()
+    @deprecated('i18n capabilities')
     defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
 
     /**
@@ -163,6 +168,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * Filters visibility category labels.
      */
     @Input()
+    @deprecated('i18n capabilities')
     filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels | undefined;
 
     /**

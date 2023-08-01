@@ -34,6 +34,7 @@ import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
 import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import deprecated from "deprecated-decorator";
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -141,6 +142,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.itemsPerPageLabel\' key')
     itemsPerPageLabel: string;
 
     /** Represents the options for items per page. */
@@ -175,6 +177,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.firstLabel\' key')
     firstLabel: string;
 
     /**
@@ -183,6 +186,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.previousLabel\' key')
     previousLabel: string;
 
     /**
@@ -191,6 +195,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.nextLabel\' key')
     nextLabel: string;
 
     /**
@@ -199,6 +204,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.lastLabel\' key')
     lastLabel: string;
 
     /**
@@ -207,6 +213,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.ariaLabel\' key')
     ariaLabel: string;
 
     /**
@@ -215,6 +222,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.pageLabel\' key')
     pageLabel: Nullable<(page: number) => string>;
 
     /**
@@ -223,6 +231,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.currentPageAriaLabel\' key')
     currentPageAriaLabel: Nullable<(currentPage: number) => string>;
 
     /**
@@ -234,6 +243,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     @Input()
+    @deprecated('i18n capabilities \'corePagination.labelBeforeInputMobile\' key')
     labelBeforeInputMobile: string;
 
     /**
@@ -244,6 +254,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support i18n.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.labelAfterInputMobile\' key')
     labelAfterInputMobile: Nullable<(pagesCount: number) => string>;
 
     /**
@@ -252,6 +263,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
+    @deprecated('i18n capabilities \'corePagination.inputAriaLabel\' key')
     inputAriaLabel: Nullable<(currentPage: number, pagesCount: number) => string>;
 
     /** Event emitted when the page is changed. */
@@ -440,6 +452,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @deprecated, use {@link paginationObject} getter instead */
+    @deprecated('paginationObject getter')
     getPaginationObject(): Pagination {
         return this.paginationObject;
     }

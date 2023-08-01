@@ -23,6 +23,7 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
+import deprecated from "deprecated-decorator";
 
 @Component({
     selector: 'fdp-datetime-picker',
@@ -102,6 +103,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * Aria label for the datetime picker input.
      */
     @Input()
+    @deprecated('i18n capabilities (being translated in core datetime picker)')
     datetimeInputLabel: string;
 
     /**
@@ -109,6 +111,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * Aria label for the button to show/hide the calendar.
      */
     @Input()
+    @deprecated('i18n capabilities (being translated in core datetime picker)')
     displayDatetimeToggleLabel: string;
 
     /** Whether a null input is considered valid. */
@@ -216,6 +219,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * Text and aria-label of the DateTimePicker 'OK' button.
      */
     @Input()
+    @deprecated('i18n capabilities')
     okLabel: string;
 
     /**
@@ -223,6 +227,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * Text and aria-label of the DateTimePicker 'Cancel' button.
      */
     @Input()
+    @deprecated('i18n capabilities')
     cancelLabel: string;
 
     /** Event emitted when the state of the isOpen property changes. */

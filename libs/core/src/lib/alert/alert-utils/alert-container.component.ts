@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated
@@ -29,6 +30,10 @@ import { alertContainerNgIf } from './alert-animations';
     animations: [alertContainerNgIf],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
+})
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip component'
 })
 export class AlertContainerComponent {
     /** @hidden */

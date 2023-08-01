@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     Component,
     Input,
@@ -14,6 +15,7 @@ import {
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
+import deprecated from "deprecated-decorator";
 
 let titleUniqueId = 0;
 
@@ -59,6 +61,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
      * Text displayed when table has no items.
      */
     @Input()
+    @deprecated('18n capabilities')
     emptyTableMessage: string;
 
     /** Uniq field from data source */

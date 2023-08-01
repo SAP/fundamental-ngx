@@ -37,6 +37,7 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import deprecated from "deprecated-decorator";
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -95,8 +96,10 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
      */
     @Input()
     fdType: ToolbarType = 'solid';
+
     /** @deprecated */
     @Input()
+    @deprecated()
     hasTitle = false;
 
     /** The title for the toolbar. */

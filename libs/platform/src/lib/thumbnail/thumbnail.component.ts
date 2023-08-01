@@ -1,16 +1,4 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    Optional,
-    Output,
-    ViewEncapsulation,
-    HostListener,
-    ViewChild,
-    forwardRef
-} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, forwardRef, HostListener, Input, OnInit, Optional, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
@@ -18,6 +6,7 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 import { ThumbnailImageComponent } from './thumbnail-image/thumbnail-image.component';
 import { Media } from './thumbnail.interfaces';
+import deprecated from "deprecated-decorator";
 
 let uniqueId = 0;
 
@@ -32,9 +21,9 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
         public source: T,
         /** The new value of a control. */
         public payload: K
-    ) {}
+    ) {
+    }
 }
-
 /**
  * @deprecated
  * Thumbnail component is deprecated since version 0.40.0
@@ -45,6 +34,7 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     styleUrls: ['./thumbnail.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
+@deprecated({ version: '0.40.0' })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
     /** List of media objects to display. */
     @Input()

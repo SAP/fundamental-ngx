@@ -37,6 +37,7 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
+import deprecated from "deprecated-decorator";
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -140,6 +141,7 @@ export class PopoverComponent
     /** @deprecated
      * Left for backward compatibility
      */
+    @deprecated()
     directiveRef: any;
 
     /** @hidden */
@@ -239,6 +241,7 @@ export class PopoverComponent
     /** @deprecated
      * Left for backward compatibility
      */
+    @deprecated('refreshPosition')
     updatePopover(): void {
         this.refreshPosition();
     }

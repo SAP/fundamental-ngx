@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     ChangeDetectionStrategy,
     Component,
@@ -20,13 +21,16 @@ import {
 } from '../../models';
 import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
+import deprecated from "deprecated-decorator";
 
 class ExtendedBaseEntity extends BaseEntity {
     id?: number;
 }
+
 class ExtendedIncludedEntity extends VhdIncludedEntity {
     id?: number;
 }
+
 class ExtendedExcludedEntity extends VhdExcludedEntity {
     id?: number;
 }
@@ -60,10 +64,12 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
 
     /** @deprecated */
     @Input()
+    @deprecated()
     included: ExtendedIncludedEntity[] = [];
 
     /** @deprecated */
     @Input()
+    @deprecated()
     excluded: ExtendedExcludedEntity[] = [];
 
     /** @hidden */
@@ -146,6 +152,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         this.conditionChange.emit(this._conditions);
         this._changeDetectorRef.markForCheck();
     }
+
     /** @hidden */
     addEmptyCondition(): void {
         const item = new ExtendedBaseEntity();

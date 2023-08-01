@@ -1,4 +1,5 @@
 import { Observable, Subject } from 'rxjs';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated
@@ -9,6 +10,10 @@ import { Observable, Subject } from 'rxjs';
  * It can be injected into the content component in the same way a service would be injected.
  * For a template, add let-alert to your ng-template tag. Now using *alert* in the template refers to this class.
  */
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip component'
+})
 export class AlertRef {
     /** @hidden */
     private readonly _afterDismissed: Subject<any> = new Subject<any>();

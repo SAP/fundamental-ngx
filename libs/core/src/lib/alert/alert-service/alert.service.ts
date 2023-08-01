@@ -4,6 +4,7 @@ import { AlertContainerComponent } from '../alert-utils/alert-container.componen
 import { AlertConfig } from '../alert-utils/alert-config';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from '../alert-utils/alert-ref';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated
@@ -13,6 +14,10 @@ import { AlertRef } from '../alert-utils/alert-ref';
  * Service used to dynamically generate an alert as an overlay.
  */
 @Injectable()
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip'
+})
 export class AlertService {
     /** @hidden */
     private alerts: ComponentRef<AlertComponent>[] = [];

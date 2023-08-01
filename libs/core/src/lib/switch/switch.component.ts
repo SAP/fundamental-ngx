@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import deprecated from "deprecated-decorator";
 
 let switchUniqueId = 0;
 let warnedAboutAriaLabeledBy = false;
@@ -106,6 +107,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      * Semantic Label Accept set for Accessibility
      */
     @Input()
+    @deprecated('i18n capabilities \'coreSwitch.semanticAcceptLabel\' key')
     semanticAcceptLabel: string;
 
     /**
@@ -113,6 +115,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      * Semantic Label Decline set for Accessibility
      */
     @Input()
+    @deprecated('i18n capabilities \'coreSwitch.semanticDeclineLabel\' key')
     semanticDeclineLabel: string;
 
     /**

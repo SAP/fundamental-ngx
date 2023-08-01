@@ -9,6 +9,7 @@ import {
 import { Subject } from 'rxjs';
 
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
+import deprecated from "deprecated-decorator";
 
 @Component({
     selector: 'fd-splitter',
@@ -36,6 +37,7 @@ export class SplitterComponent {
      * aria-label for the pagination item.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreSplitter.paginationItemAriaLabel\' key')
     paginationItemAriaLabel: string;
 
     /** @hidden */

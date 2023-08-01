@@ -25,6 +25,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import deprecated from "deprecated-decorator";
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
 
@@ -107,6 +108,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
+    @deprecated('"state"')
     set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');

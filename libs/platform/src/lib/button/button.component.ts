@@ -13,6 +13,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
+import deprecated from "deprecated-decorator";
 
 @Component({
     selector: 'fdp-button',
@@ -57,6 +58,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      * aria-selected for acccesiblity to the native HTML button
      */
     @Input()
+    @deprecated('`toggled` input property')
     ariaSelected: Nullable<boolean>;
 
     /** aria-disabled for acccesiblity to
@@ -82,6 +84,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      * propagate aria-pressed for accessiblity to the native HTML button
      */
     @Input()
+    @deprecated('`toggled` input property')
     ariaPressed: Nullable<boolean>;
 
     /** Specifies a name to

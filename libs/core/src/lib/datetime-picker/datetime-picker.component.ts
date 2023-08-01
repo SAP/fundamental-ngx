@@ -31,6 +31,7 @@ import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import deprecated from "deprecated-decorator";
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -170,6 +171,7 @@ export class DatetimePickerComponent<D>
      * Aria label for the datetime picker input.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreDatetimePicker.datetimeInputLabel\' key')
     datetimeInputLabel: string;
 
     /**
@@ -177,6 +179,7 @@ export class DatetimePickerComponent<D>
      * Aria label for the button to show/hide the calendar.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreDatetimePicker.displayDatetimeToggleLabel\' key')
     displayDatetimeToggleLabel: string;
 
     /**
@@ -184,6 +187,7 @@ export class DatetimePickerComponent<D>
      * Label for the "Date" button in display type switcher in mobile mode
      */
     @Input()
+    @deprecated('i18n capabilities \'coreDatetimePicker.displayTypeDateLabel\' key')
     displayTypeDateLabel: string;
 
     /**
@@ -191,6 +195,7 @@ export class DatetimePickerComponent<D>
      * Label for the "Time" button in display type switcher in mobile mode
      */
     @Input()
+    @deprecated('i18n capabilities \'coreDatetimePicker.displayTypeTimeLabel\' key')
     displayTypeTimeLabel: string;
 
     /** Whether a null input is considered valid. */
@@ -308,6 +313,7 @@ export class DatetimePickerComponent<D>
      * Text and aria-label of the DateTimePicker 'OK' button.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreDatetimePicker.datetimeOkLabel\' key')
     okLabel: string;
 
     /**
@@ -315,6 +321,7 @@ export class DatetimePickerComponent<D>
      * Text and aria-label of the DateTimePicker 'Cancel' button.
      */
     @Input()
+    @deprecated('i18n capabilities \'coreDatetimePicker.datetimeCancelLabel\' key')
     cancelLabel: string;
 
     /** @hidden */

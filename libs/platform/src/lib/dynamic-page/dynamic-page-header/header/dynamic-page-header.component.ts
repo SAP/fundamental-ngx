@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewCh
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import deprecated from "deprecated-decorator";
 
 /** Dynamic Page collapse change event */
 export class DynamicPageCollapseChangeEvent {
@@ -114,6 +115,7 @@ export class DynamicPageHeaderComponent {
 
     /** @deprecated - use `collapsedChange` instead */
     @Output()
+    @deprecated('`collapsedChange`')
     collapseChange = this.collapsedChange;
 
     /**

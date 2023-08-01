@@ -70,6 +70,7 @@ import {
 } from '../fdp-form.tokens';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
 import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
+import deprecated from "deprecated-decorator";
 
 let defaultId = 0;
 
@@ -115,6 +116,7 @@ export class FormFieldComponent
      * Defines hint placement
      */
     @Input()
+    @deprecated('`hint.placement`')
     hintPlacement: HintPlacement;
 
     /** Hint to be placed next to label */

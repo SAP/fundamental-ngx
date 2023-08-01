@@ -80,6 +80,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import deprecated from "deprecated-decorator";
 
 let defaultId = 0;
 /**
@@ -93,6 +94,7 @@ let defaultId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
+@deprecated()
 export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
     @Input() title: string;

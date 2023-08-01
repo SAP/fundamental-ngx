@@ -53,6 +53,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import deprecated from "deprecated-decorator";
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -201,6 +202,7 @@ export class SliderComponent
      * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
+    @deprecated('i18n capabilities')
     singleSliderCurrentValuePrefix: string;
 
     /**
@@ -210,6 +212,7 @@ export class SliderComponent
      * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
+    @deprecated('i18n capabilities')
     rangeSliderHandle1CurrentValuePrefix: string;
 
     /**
@@ -219,6 +222,7 @@ export class SliderComponent
      * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
+    @deprecated('i18n capabilities')
     rangeSliderHandle2CurrentValuePrefix: string;
 
     /** @hidden */

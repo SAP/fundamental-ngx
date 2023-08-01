@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated
@@ -24,5 +25,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     styleUrls: ['./action-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
+})
+@deprecated({
+    version: '0.40.0'
 })
 export class ActionBarComponent {}

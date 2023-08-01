@@ -50,6 +50,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
+import deprecated from "deprecated-decorator";
 
 export interface SearchInput {
     text: string;
@@ -225,6 +226,7 @@ export class SearchFieldComponent
      * Message announced by screen reader, when search suggestions opens.
      */
     @Input()
+    @deprecated('i18n capabilities')
     searchSuggestionMessage: string;
 
     /**
@@ -233,6 +235,7 @@ export class SearchFieldComponent
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
     @Input()
+    @deprecated('i18n capabilities')
     searchSuggestionNavigateMessage: string;
 
     /** Whether to always show search button. */

@@ -20,6 +20,7 @@ import { PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
 import { NestedListStateService } from '@fundamental-ngx/core/nested-list';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from './side-navigation.interface';
+import deprecated from "deprecated-decorator";
 
 /**
  * @deprecated use the vertical navigation component instead.
@@ -32,6 +33,10 @@ import { SideNavigationInterface } from './side-navigation.interface';
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [NestedListKeyboardService, NestedListStateService]
+})
+@deprecated({
+    alternative: 'VerticalNavigationComponent',
+    url: 'https://github.com/SAP/fundamental-ngx/tree/75130aa85724060a515d99d675eb672b6d6eef6a/libs/core/src/lib/vertical-navigation'
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {
     /**

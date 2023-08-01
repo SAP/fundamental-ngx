@@ -32,6 +32,7 @@ import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
+import deprecated from "deprecated-decorator";
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
@@ -107,6 +108,7 @@ export class CarouselComponent
      * Label for left navigation button
      */
     @Input()
+    @deprecated('i18n capabilities \'coreCarousel.leftNavigationBtnLabel\' key')
     leftNavigationBtnLabel: string;
 
     /**
@@ -114,6 +116,7 @@ export class CarouselComponent
      * Label for right navigation button
      */
     @Input()
+    @deprecated('i18n capabilities \'coreCarousel.rightNavigationBtnLabel\' key')
     rightNavigationBtnLabel: string;
 
     /** Shows/hides optional navigation button */

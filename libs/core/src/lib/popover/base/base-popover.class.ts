@@ -2,6 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from 
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import deprecated from "deprecated-decorator";
 
 @Directive()
 export class BasePopoverClass {
@@ -145,14 +146,17 @@ export class BasePopoverClass {
 
     /** @deprecated */
     @Input()
+    @deprecated()
     options;
 
     /** @deprecated */
     @Input()
+    @deprecated()
     addContainerClass;
 
     /** @deprecated */
     @Input()
+    @deprecated()
     additionalClasses;
 
     /** Event emitted when the state of the isOpen property changes. */

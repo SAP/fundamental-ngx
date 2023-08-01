@@ -13,6 +13,7 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from '../../constants';
+import deprecated from "deprecated-decorator";
 
 @Component({
     selector: 'fd-feed-list-item',
@@ -67,6 +68,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Text for more button
      */
     @Input()
+    @deprecated('i18n capabilities \'coreFeedListItem.moreLabel\' key')
     moreLabel: string;
 
     /**
@@ -74,6 +76,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Text for less button
      */
     @Input()
+    @deprecated('i18n capabilities \'coreFeedListItem.lessLabel\' key')
     lessLabel: string;
 
     /**

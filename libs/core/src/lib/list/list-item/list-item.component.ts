@@ -33,6 +33,7 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
+import deprecated from "deprecated-decorator";
 
 let listItemUniqueId = 0;
 
@@ -72,6 +73,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
      * Note, that it is being combined with internal values for this component
      */
     @Input()
+    @deprecated('native aria-describedby attribute')
     ariaDescribedBy: Nullable<string>;
 
     /** Whether there is no data inside list item */
@@ -112,14 +114,17 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
     /** @deprecated Text to be read by screen reader for selected list item */
     @Input()
+    @deprecated()
     selectedListItemScreenReaderText: string;
 
     /** @deprecated Text to be read by screen reader for navigated list item */
     @Input()
+    @deprecated()
     navigatedListItemScreenReaderText: string;
 
     /** @deprecated Text to be read by screen reader for navigatable list item */
     @Input()
+    @deprecated()
     navigatableListItemScreenReaderText: string;
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
