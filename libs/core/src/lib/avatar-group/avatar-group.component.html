@@ -29,7 +29,7 @@
         <fd-popover
             [noArrow]="false"
             [focusAutoCapture]="true"
-            *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent.hiddenItems; let hiddenItems"
+            *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent.hiddenItems(); let hiddenItems"
         >
             <fd-popover-control tabindex="-1">
                 <ng-template
@@ -47,14 +47,14 @@
     </fd-avatar-group-host>
 </ng-container>
 <ng-template #groupType>
-    <fd-popover [noArrow]="false" [focusAutoCapture]="true" #popoverComponent>
+    <fd-popover [noArrow]="false" [focusAutoCapture]="true" fdkResizeObserver #popoverResize="fdkResizeObserver">
         <fd-popover-control>
             <fd-avatar-group-host
                 #avatarGroupHostComponent
                 [type]="type"
                 [size]="size"
                 [orientation]="orientation"
-                [resizeTarget]="popoverComponent.elementRef.nativeElement"
+                [resizeEmitter]="popoverResize.resized"
                 [fdkFocusableItem]="true"
             >
                 <ng-container *ngFor="let item of avatars">
@@ -67,7 +67,7 @@
                     </ng-template>
                 </ng-container>
                 <ng-template
-                    [fdAvatarGroupInternalOverflowButton]="avatarGroupHostComponent.hiddenItems"
+                    [fdAvatarGroupInternalOverflowButton]="avatarGroupHostComponent.hiddenItems()"
                     let-hiddenItems
                 >
                     <ng-template

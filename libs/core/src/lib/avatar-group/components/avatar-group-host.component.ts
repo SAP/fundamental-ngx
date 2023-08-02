@@ -9,22 +9,12 @@ import {
     inject,
     Input,
     OnChanges,
-    OnInit,
     QueryList,
+    signal,
     SimpleChanges
 } from '@angular/core';
-import { DestroyedService, HasElementRef, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
-import {
-    animationFrames,
-    BehaviorSubject,
-    combineLatest,
-    delayWhen,
-    map,
-    Observable,
-    startWith,
-    Subject,
-    takeUntil
-} from 'rxjs';
+import { DestroyedService, HasElementRef, ResizeObserverDirective } from '@fundamental-ngx/cdk/utils';
+import { animationFrames, combineLatest, delayWhen, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
 import { AvatarGroupHostConfig } from '../types';
@@ -47,11 +37,10 @@ import { AvatarGroupHostConfig } from '../types';
     standalone: true,
     imports: [NgIf],
     providers: [DestroyedService],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [ResizeObserverDirective]
 })
-export class AvatarGroupHostComponent
-    implements AfterViewInit, OnInit, OnChanges, HasElementRef, AvatarGroupHostConfig
-{
+export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig {
     /** @hidden */
     @Input()
     type: AvatarGroupHostConfig['type'];
@@ -66,7 +55,7 @@ export class AvatarGroupHostComponent
 
     /** @hidden */
     @Input()
-    resizeTarget: HTMLElement;
+    resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
 
     /** @hidden */
     @Input()
@@ -80,17 +69,7 @@ export class AvatarGroupHostComponent
     elementRef = inject(ElementRef);
 
     /** @hidden */
-    hostResize$: Observable<number>;
-
-    /** @hidden */
-    hiddenItems$ = new BehaviorSubject<AvatarGroupItemRendererDirective[]>([]);
-
-    /** @hidden */
-    get hiddenItems(): AvatarGroupItemRendererDirective[] {
-        return this.hiddenItems$.value;
-    }
-    /** @hidden */
-    private resizeObserverService = inject(ResizeObserverService);
+    hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);
 
     /** @hidden */
     private _destroyed$ = inject(DestroyedService);
@@ -102,11 +81,6 @@ export class AvatarGroupHostComponent
     private _onChanges$ = new Subject<SimpleChanges>();
 
     /** @hidden */
-    ngOnInit(): void {
-        this.hostResize$ = this.getResizeNotifier(this.resizeTarget || this.elementRef.nativeElement);
-    }
-
-    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this._onChanges$.next(changes);
     }
@@ -114,7 +88,7 @@ export class AvatarGroupHostComponent
     /** @hidden */
     ngAfterViewInit(): void {
         combineLatest([
-            this.hostResize$,
+            this.resizeEmitter.pipe(map((entries) => entries[0].contentRect.width)),
             this.portals.changes.pipe(
                 startWith(this.portals),
                 map((r) => r.toArray())
@@ -130,7 +104,7 @@ export class AvatarGroupHostComponent
                 visibleItems.forEach((item) => item.show());
                 hiddenItems.forEach((item) => item.hide());
                 this._cdr.detectChanges();
-                this.hiddenItems$.next(hiddenItems);
+                this.hiddenItems.set(hiddenItems);
             });
     }
 
@@ -170,10 +144,5 @@ export class AvatarGroupHostComponent
             visibleItems,
             hiddenItems
         };
-    }
-
-    /** @hidden */
-    private getResizeNotifier(element: HTMLElement): Observable<number> {
-        return this.resizeObserverService.observe(element).pipe(map(() => element.getBoundingClientRect().width));
     }
 }
