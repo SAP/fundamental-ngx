@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * An element of the Bar.

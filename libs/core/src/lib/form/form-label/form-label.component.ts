@@ -12,7 +12,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let formLabelIdCount = 0;
 

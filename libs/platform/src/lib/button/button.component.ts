@@ -13,7 +13,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-button',

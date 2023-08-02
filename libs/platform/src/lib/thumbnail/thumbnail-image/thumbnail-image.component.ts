@@ -1,10 +1,23 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Optional, Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    Output,
+    QueryList,
+    SimpleChanges,
+    ViewChildren
+} from '@angular/core';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { SPACE } from '@angular/cdk/keycodes';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

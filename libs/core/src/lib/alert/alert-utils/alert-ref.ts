@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

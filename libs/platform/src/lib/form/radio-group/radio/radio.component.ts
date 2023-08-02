@@ -23,7 +23,7 @@ import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-n
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let uniqueId = 0;
 

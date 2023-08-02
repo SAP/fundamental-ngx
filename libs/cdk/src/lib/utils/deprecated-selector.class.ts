@@ -32,9 +32,7 @@ export abstract class DeprecatedSelector {
     /** @hidden */
     constructor() {
         if (isDevMode() && this._selectors) {
-            console.warn(
-                this._messageGenerator(this._selectors.deprecated, this._selectors.current)
-            );
+            console.warn(this._messageGenerator(this._selectors.deprecated, this._selectors.current));
         }
     }
 

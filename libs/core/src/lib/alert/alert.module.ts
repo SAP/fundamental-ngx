@@ -7,7 +7,7 @@ import { AlertContainerComponent } from './alert-utils/alert-container.component
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

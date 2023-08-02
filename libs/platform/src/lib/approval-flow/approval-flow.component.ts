@@ -80,7 +80,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let defaultId = 0;
 /**

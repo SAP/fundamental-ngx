@@ -27,7 +27,7 @@ import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ShellbarSizes } from '../model/shellbar-sizes';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * The component that represents shellbar actions.
@@ -77,7 +77,7 @@ export class ShellbarActionsComponent implements OnDestroy {
      * Label for the collapsed item menu.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreShellbar.collapsedItemMenuLabel\' key')
+    @deprecated("i18n capabilities 'coreShellbar.collapsedItemMenuLabel' key")
     collapsedItemMenuLabel: string;
 
     /**

@@ -70,7 +70,7 @@ import {
 } from '../fdp-form.tokens';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
 import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let defaultId = 0;
 

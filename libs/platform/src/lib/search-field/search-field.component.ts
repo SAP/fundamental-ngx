@@ -50,7 +50,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export interface SearchInput {
     text: string;

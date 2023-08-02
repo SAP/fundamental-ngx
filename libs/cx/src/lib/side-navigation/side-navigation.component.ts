@@ -28,7 +28,7 @@ import { SideNavigationModel } from './side-navigation-model';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * The side-navigation is a wrapping component representing

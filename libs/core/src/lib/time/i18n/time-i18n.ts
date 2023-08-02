@@ -1,5 +1,5 @@
 import { Injectable, isDevMode } from '@angular/core';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated use i18n capabilities instead

@@ -29,7 +29,7 @@ import { merge } from 'lodash-es';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdpList, ListType, SelectionType } from './models/list';
 import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;

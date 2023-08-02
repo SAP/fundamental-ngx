@@ -15,7 +15,7 @@ import {
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let titleUniqueId = 0;
 

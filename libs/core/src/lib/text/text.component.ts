@@ -8,7 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /** Type of hyphenation */
 export type HyphenationType = 'none' | 'manual' | 'auto' | null;
@@ -56,7 +56,7 @@ export class TextComponent {
      * Text for more button
      */
     @Input()
-    @deprecated('i18n capabilities \'coreText.moreLabel\' key')
+    @deprecated("i18n capabilities 'coreText.moreLabel' key")
     moreLabel: string;
 
     /**
@@ -64,7 +64,7 @@ export class TextComponent {
      * Text for less button
      */
     @Input()
-    @deprecated('i18n capabilities \'coreText.lessLabel\' key')
+    @deprecated("i18n capabilities 'coreText.lessLabel' key")
     lessLabel: string;
 
     /**

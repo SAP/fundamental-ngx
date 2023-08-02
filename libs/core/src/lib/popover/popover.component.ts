@@ -37,7 +37,7 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'

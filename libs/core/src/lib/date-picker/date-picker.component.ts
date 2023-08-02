@@ -38,7 +38,7 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { createMissingDateImplementationError } from './errors';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let datePickerCounter = 0;
 
@@ -147,7 +147,7 @@ export class DatePickerComponent<D>
      * Aria-label for the datepicker input.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.dateInputLabel\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.dateInputLabel' key")
     dateInputLabel: string;
 
     /**
@@ -155,7 +155,7 @@ export class DatePickerComponent<D>
      * Aria-label for the datepicker input.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.dateRangeInputLabel\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.dateRangeInputLabel' key")
     dateRangeInputLabel: string;
 
     /**
@@ -163,7 +163,7 @@ export class DatePickerComponent<D>
      * Aria-label for the button to show/hide the calendar.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.displayCalendarToggleLabel\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.displayCalendarToggleLabel' key")
     displayCalendarToggleLabel: string;
 
     /**
@@ -171,7 +171,7 @@ export class DatePickerComponent<D>
      * Value state "success" aria message.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.valueStateSuccessMessage\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.valueStateSuccessMessage' key")
     valueStateSuccessMessage: string;
 
     /**
@@ -179,7 +179,7 @@ export class DatePickerComponent<D>
      * Value state "information" aria message.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.valueStateInformationMessage\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.valueStateInformationMessage' key")
     valueStateInformationMessage: string;
 
     /**
@@ -187,7 +187,7 @@ export class DatePickerComponent<D>
      * Value state "warning" aria message.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.valueStateWarningMessage\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.valueStateWarningMessage' key")
     valueStateWarningMessage: string;
 
     /**
@@ -195,7 +195,7 @@ export class DatePickerComponent<D>
      * Value state "error" aria message.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreDatePicker.valueStateErrorMessage\' key')
+    @deprecated("i18n capabilities 'coreDatePicker.valueStateErrorMessage' key")
     valueStateErrorMessage: string;
 
     /** Whether a null input is considered valid. */

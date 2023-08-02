@@ -10,7 +10,7 @@ import {
     Renderer2,
     ElementRef
 } from '@angular/core';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-feed-input',
@@ -45,7 +45,7 @@ export class FeedInputComponent implements AfterViewInit {
      * Set title attribute for accessibility user image
      */
     @Input()
-    @deprecated('i18n capabilities \'platformFeedInput.userTitle\' key')
+    @deprecated("i18n capabilities 'platformFeedInput.userTitle' key")
     userTitle: string;
 
     /** @hidden Event emitted when user click on send button */

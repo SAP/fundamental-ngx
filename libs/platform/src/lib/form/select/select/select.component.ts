@@ -24,7 +24,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-select',

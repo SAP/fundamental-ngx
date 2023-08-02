@@ -4,7 +4,7 @@ import { AlertContainerComponent } from '../alert-utils/alert-container.componen
 import { AlertConfig } from '../alert-utils/alert-config';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from '../alert-utils/alert-ref';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

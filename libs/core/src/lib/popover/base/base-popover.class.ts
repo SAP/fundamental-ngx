@@ -2,7 +2,7 @@ import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from 
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 @Directive()
 export class BasePopoverClass {

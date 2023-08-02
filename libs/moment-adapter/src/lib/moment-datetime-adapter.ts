@@ -3,7 +3,7 @@ import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, 
 
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));

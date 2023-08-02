@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BarElementDirective } from '@fundamental-ngx/core/bar';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

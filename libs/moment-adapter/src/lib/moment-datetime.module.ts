@@ -3,7 +3,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/dateti
 
 import { MomentDatetimeAdapter } from './moment-datetime-adapter';
 import { MOMENT_DATETIME_FORMATS } from './moment-datetime-formats';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated Use `DatetimeAdapterRawModule` from `@fundamental-ngx/datetime-adapter` package instead.

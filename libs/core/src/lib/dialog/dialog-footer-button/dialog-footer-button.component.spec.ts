@@ -1,5 +1,5 @@
 import { DialogFooterButtonComponent } from './dialog-footer-button.component';
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
 
 describe('DialogFooterButtonComponent', () => {
     let component: DialogFooterButtonComponent;

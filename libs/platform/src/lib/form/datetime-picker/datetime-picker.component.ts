@@ -23,7 +23,7 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-datetime-picker',

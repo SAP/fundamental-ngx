@@ -52,7 +52,7 @@ import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 const defaultColumnsLayout = 'XL4-L3-M2-S1';
 

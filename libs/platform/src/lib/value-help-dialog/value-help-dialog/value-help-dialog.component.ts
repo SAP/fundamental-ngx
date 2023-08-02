@@ -38,7 +38,7 @@ import {
 import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
 import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 import { cloneDeep } from 'lodash-es';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export type FdpValueHelpDialogDataSource<T> =
     | ValueHelpDialogDataSource<T>
@@ -132,7 +132,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Select from list tab's and Search table settings
      * */
     @Input()
-    @deprecated('i18n capabilities \'platformVHD.selectTabTitle\' key')
+    @deprecated("i18n capabilities 'platformVHD.selectTabTitle' key")
     selectTabTitle: string;
 
     /** Selection mode for search table */
@@ -144,7 +144,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Text displayed when table has no items.
      */
     @Input()
-    @deprecated('i18n capabilities \'platformVHD.searchTableEmptyMessage\' key')
+    @deprecated("i18n capabilities 'platformVHD.searchTableEmptyMessage' key")
     searchTableEmptyMessage: string;
 
     /** Items per page for pagination below search table */
@@ -168,7 +168,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Define conditions tab's settings
      */
     @Input()
-    @deprecated('i18n capabilities \'platformVHD.defineTabTitle\' key')
+    @deprecated("i18n capabilities 'platformVHD.defineTabTitle' key")
     defineTabTitle: string;
 
     /** Custom strategies labels

@@ -45,7 +45,7 @@ import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let selectUniqueId = 0;
 

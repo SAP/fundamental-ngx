@@ -1,5 +1,5 @@
 import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

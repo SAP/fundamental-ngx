@@ -33,7 +33,7 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let listItemUniqueId = 0;
 

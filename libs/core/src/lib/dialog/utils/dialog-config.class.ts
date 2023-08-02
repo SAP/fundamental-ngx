@@ -4,14 +4,14 @@
  */
 import { Injectable, InjectionToken } from '@angular/core';
 import { DialogConfigBase } from '../base/dialog-config-base.class';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export const DIALOG_DEFAULT_CONFIG = new InjectionToken<DialogConfig>('Default DialogConfig');
 
 @Injectable()
 export class DialogConfig<T = any> extends DialogConfigBase<T> {
     /** @deprecated Use 'mobile' to set the dialog to full-screen mode. */
-    @deprecated('Use \'mobile\' to set the dialog to full-screen mode.')
+    @deprecated("Use 'mobile' to set the dialog to full-screen mode.")
     fullScreen?: boolean;
 
     /** Whether the dialog should be draggable. */

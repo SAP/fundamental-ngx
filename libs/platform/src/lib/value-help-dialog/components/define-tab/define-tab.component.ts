@@ -21,7 +21,7 @@ import {
 } from '../../models';
 import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 class ExtendedBaseEntity extends BaseEntity {
     id?: number;

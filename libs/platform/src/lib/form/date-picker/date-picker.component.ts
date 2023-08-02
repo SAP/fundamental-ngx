@@ -24,7 +24,7 @@ import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/c
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.

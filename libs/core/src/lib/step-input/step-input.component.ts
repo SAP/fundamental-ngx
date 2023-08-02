@@ -27,7 +27,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import NumberFormat = Intl.NumberFormat;
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 let stepInputUniqueId = 0;
 
@@ -89,7 +89,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
      * Sets Increment Button title attribute
      */
     @Input()
-    @deprecated('i18n capabilities \'coreStepInput.incrementButtonTitle\' key')
+    @deprecated("i18n capabilities 'coreStepInput.incrementButtonTitle' key")
     incrementButtonTitle: string;
 
     /**
@@ -97,7 +97,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
      * Sets Decrement Button title attribute
      */
     @Input()
-    @deprecated('i18n capabilities \'coreStepInput.decrementButtonTitle\' key')
+    @deprecated("i18n capabilities 'coreStepInput.decrementButtonTitle' key")
     decrementButtonTitle: string;
 
     /** Sets input aria-label attribute */

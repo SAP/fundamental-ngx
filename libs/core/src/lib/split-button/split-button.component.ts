@@ -27,7 +27,7 @@ import { SplitButtonActionTitle } from './split-button-utils/split-button.direct
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 const splitButtonTextClasses = [splitButtonTextClass];
@@ -72,7 +72,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
     @Input()
-    @deprecated('MenuItemComponent\'s title component text content')
+    @deprecated("MenuItemComponent's title component text content")
     mainActionTitle: string;
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
@@ -85,7 +85,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
      * Aria-label attribute used to describe expand button
      */
     @Input()
-    @deprecated('i18n capabilities \'coreSplitButton.expandButtonAriaLabel\' key')
+    @deprecated("i18n capabilities 'coreSplitButton.expandButtonAriaLabel' key")
     expandButtonAriaLabel: string;
 
     /** Title attribute used to describe expand button */

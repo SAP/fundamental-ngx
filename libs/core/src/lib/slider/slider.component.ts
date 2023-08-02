@@ -53,7 +53,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

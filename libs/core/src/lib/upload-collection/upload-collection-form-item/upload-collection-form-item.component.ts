@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fd-upload-collection-form-item',
@@ -14,7 +14,7 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
      * Value for the input's placeholder.
      */
     @Input()
-    @deprecated('i18n capabilities \'coreUploadCollection.formItemPlaceholder\' key')
+    @deprecated("i18n capabilities 'coreUploadCollection.formItemPlaceholder' key")
     placeholder: string;
 
     /** @hidden */

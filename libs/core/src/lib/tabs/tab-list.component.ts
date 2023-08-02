@@ -32,7 +32,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { LIST_COMPONENT } from './tab-list.token';
 import { TabListComponentInterface } from './tab-list-component.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -96,7 +96,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
      * Text visible in expand overflow trigger
      */
     @Input()
-    @deprecated('i18n capabilities \'coreTabs.tabListExpandButtonText\' key')
+    @deprecated("i18n capabilities 'coreTabs.tabListExpandButtonText' key")
     expandOverflowText: string;
 
     /** Initially selected tab (by id). First not disabled one if not specified. */

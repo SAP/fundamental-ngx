@@ -43,7 +43,7 @@ import {
 } from '../models/upload-collection.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 
@@ -146,7 +146,7 @@ export class UploadCollectionComponent
      * Allows to set own text for the 'No data' text label.
      */
     @Input()
-    @deprecated('i18n capabilities \'platformUploadCollection.noDataText\' key')
+    @deprecated("i18n capabilities 'platformUploadCollection.noDataText' key")
     noDataText: string;
 
     /**
@@ -154,7 +154,7 @@ export class UploadCollectionComponent
      * Allows to set own text for the 'No data' description label.
      */
     @Input()
-    @deprecated('i18n capabilities \'platformUploadCollection.noDataDescription\' key')
+    @deprecated("i18n capabilities 'platformUploadCollection.noDataDescription' key")
     noDataDescription: string;
 
     /** All action buttons will be disabled */

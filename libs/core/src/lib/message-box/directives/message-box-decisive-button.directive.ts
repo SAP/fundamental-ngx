@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated

@@ -1,8 +1,16 @@
-import { AfterViewInit, ChangeDetectorRef, Component, forwardRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    forwardRef,
+    HostListener,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 interface DialogRefData {
     selectedMedia: Media;

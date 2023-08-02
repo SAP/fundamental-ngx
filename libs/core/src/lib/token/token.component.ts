@@ -20,7 +20,7 @@ import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from "deprecated-decorator";
+import deprecated from 'deprecated-decorator';
 
 /**
  * A token is used to represent contextualizing information.
@@ -75,7 +75,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
      * label for close icon
      */
     @Input()
-    @deprecated('i18n capabilities \'coreToken.deleteButtonLabel\' key')
+    @deprecated("i18n capabilities 'coreToken.deleteButtonLabel' key")
     deleteButtonLabel: string;
 
     /**
@@ -83,7 +83,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
      * role description for token
      */
     @Input()
-    @deprecated('i18n capabilities \'coreToken.ariaRoleDescription\' key')
+    @deprecated("i18n capabilities 'coreToken.ariaRoleDescription' key")
     ariaRoleDescription: string;
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
