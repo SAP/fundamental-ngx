@@ -29,7 +29,7 @@
         <fd-popover
             [noArrow]="false"
             [focusAutoCapture]="true"
-            *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent.hiddenItems$ | async; let hiddenItems"
+            *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent.hiddenItems; let hiddenItems"
         >
             <fd-popover-control tabindex="-1">
                 <ng-template
@@ -67,7 +67,7 @@
                     </ng-template>
                 </ng-container>
                 <ng-template
-                    [fdAvatarGroupInternalOverflowButton]="avatarGroupHostComponent.hiddenItems$ | async"
+                    [fdAvatarGroupInternalOverflowButton]="avatarGroupHostComponent.hiddenItems"
                     let-hiddenItems
                 >
                     <ng-template

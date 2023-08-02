@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -13,7 +14,17 @@ import {
     SimpleChanges
 } from '@angular/core';
 import { DestroyedService, HasElementRef, ResizeObserverService } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, combineLatest, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
+import {
+    animationFrames,
+    BehaviorSubject,
+    combineLatest,
+    delayWhen,
+    map,
+    Observable,
+    startWith,
+    Subject,
+    takeUntil
+} from 'rxjs';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
 import { AvatarGroupHostConfig } from '../types';
@@ -75,10 +86,17 @@ export class AvatarGroupHostComponent
     hiddenItems$ = new BehaviorSubject<AvatarGroupItemRendererDirective[]>([]);
 
     /** @hidden */
+    get hiddenItems(): AvatarGroupItemRendererDirective[] {
+        return this.hiddenItems$.value;
+    }
+    /** @hidden */
     private resizeObserverService = inject(ResizeObserverService);
 
     /** @hidden */
     private _destroyed$ = inject(DestroyedService);
+
+    /** @hidden */
+    private _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
     private _onChanges$ = new Subject<SimpleChanges>();
@@ -105,12 +123,13 @@ export class AvatarGroupHostComponent
         ])
             .pipe(
                 map(([containerWidth, items]) => this.calculateVisibility(containerWidth, items)),
+                delayWhen(() => animationFrames()),
                 takeUntil(this._destroyed$)
             )
             .subscribe(({ hiddenItems, visibleItems }) => {
                 visibleItems.forEach((item) => item.show());
                 hiddenItems.forEach((item) => item.hide());
-                console.log({ hiddenItems });
+                this._cdr.detectChanges();
                 this.hiddenItems$.next(hiddenItems);
             });
     }

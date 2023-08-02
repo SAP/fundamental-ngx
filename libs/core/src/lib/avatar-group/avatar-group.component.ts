@@ -2,11 +2,13 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ContentChildren,
     Input,
     QueryList,
+    ViewChild,
     ViewChildren,
     ViewEncapsulation,
     inject
@@ -18,7 +20,7 @@ import {
     RtlService
 } from '@fundamental-ngx/cdk/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { Observable, map, of } from 'rxjs';
+import { Observable, Subscription, map, of } from 'rxjs';
 import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
 import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
@@ -112,7 +114,24 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
+    @ViewChild(AvatarGroupHostComponent)
+    set avatarGroupHost(avatarGroupHost: AvatarGroupHostComponent) {
+        if (this._avatarGroupHostHiddenItemsSubscription) {
+            this._avatarGroupHostHiddenItemsSubscription.unsubscribe();
+        }
+        this._avatarGroupHostHiddenItemsSubscription = avatarGroupHost.hiddenItems$.subscribe(() =>
+            this._cdr.detectChanges()
+        );
+    }
+
+    /** @hidden */
     contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
         map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
     );
+
+    /** @hidden */
+    private _avatarGroupHostHiddenItemsSubscription: Subscription;
+
+    /** @hidden */
+    private _cdr = inject(ChangeDetectorRef);
 }

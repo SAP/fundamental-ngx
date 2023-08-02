@@ -1,16 +1,15 @@
-import { Directive, EmbeddedViewRef, inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, inject, Input, OnDestroy, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AvatarGroupItemRendererDirective } from './avatar-group-item-renderer.directive';
 
 @Directive({
     selector: '[fdAvatarGroupInternalOverflowButton]',
     standalone: true
 })
-export class AvatarGroupInternalOverflowButtonDirective {
+export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
     /** @hidden */
     @Input('fdAvatarGroupInternalOverflowButton')
     set hiddenItems(value: AvatarGroupItemRendererDirective[] | null) {
         const hiddenItems = value || [];
-        console.log({ hiddenItems });
         if (hiddenItems.length > 0) {
             this.show(hiddenItems);
         } else {
@@ -42,5 +41,10 @@ export class AvatarGroupInternalOverflowButtonDirective {
     hide(): void {
         this.viewContainerRef.clear();
         this.embeddedView = undefined;
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this.hide();
     }
 }
