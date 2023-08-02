@@ -10,12 +10,12 @@ import deprecated from "deprecated-decorator";
  * @deprecated
  * ThumbnailImage component is deprecated since version 0.40.0
  */
+@deprecated({ version: '0.40.0' })
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
     styleUrls: ['./thumbnail-image.component.scss']
 })
-@deprecated({ version: '0.40.0' })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** media list obejct contains group of Media object.*/
     @Input()

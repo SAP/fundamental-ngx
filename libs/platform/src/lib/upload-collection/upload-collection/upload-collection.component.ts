@@ -53,14 +53,14 @@ let randomId = 0;
  * @deprecated
  * UploadCollection component is deprecated since version 0.40.0
  */
+@deprecated({
+    version: '0.40.0'
+})
 @Component({
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',
     styleUrls: ['./upload-collection.component.scss'],
     encapsulation: ViewEncapsulation.None
-})
-@deprecated({
-    version: '0.40.0'
 })
 export class UploadCollectionComponent
     implements OnChanges, OnDestroy, UploadCollectionCmp<FdpUploadCollectionDataSource>
@@ -146,6 +146,7 @@ export class UploadCollectionComponent
      * Allows to set own text for the 'No data' text label.
      */
     @Input()
+    @deprecated('i18n capabilities \'platformUploadCollection.noDataText\' key')
     noDataText: string;
 
     /**
@@ -153,6 +154,7 @@ export class UploadCollectionComponent
      * Allows to set own text for the 'No data' description label.
      */
     @Input()
+    @deprecated('i18n capabilities \'platformUploadCollection.noDataDescription\' key')
     noDataDescription: string;
 
     /** All action buttons will be disabled */

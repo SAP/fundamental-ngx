@@ -16,12 +16,12 @@ interface DialogRefData {
  * @deprecated
  * ThumbnailDetails component is deprecated since version 0.40.0
  */
+@deprecated({ version: '0.40.0' })
 @Component({
     selector: 'fdp-thumbnail-details',
     templateUrl: './thumbnail-details.component.html',
     styleUrls: ['./thumbnail-details.component.scss']
 })
-@deprecated({ version: '0.40.0' })
 export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     /** Reference to thumbnail images component */
     @ViewChild(forwardRef(() => ThumbnailImageComponent))

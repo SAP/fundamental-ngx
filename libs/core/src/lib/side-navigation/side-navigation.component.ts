@@ -27,16 +27,16 @@ import deprecated from "deprecated-decorator";
  * The side-navigation is a wrapping component representing
  * a left navigation that can always display or expand/collapse using the menu icon within the global navigation.
  */
+@deprecated({
+    alternative: 'VerticalNavigationComponent',
+    url: 'https://github.com/SAP/fundamental-ngx/tree/75130aa85724060a515d99d675eb672b6d6eef6a/libs/core/src/lib/vertical-navigation'
+})
 @Component({
     templateUrl: './side-navigation.component.html',
     selector: 'fd-side-nav',
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [NestedListKeyboardService, NestedListStateService]
-})
-@deprecated({
-    alternative: 'VerticalNavigationComponent',
-    url: 'https://github.com/SAP/fundamental-ngx/tree/75130aa85724060a515d99d675eb672b6d6eef6a/libs/core/src/lib/vertical-navigation'
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {
     /**

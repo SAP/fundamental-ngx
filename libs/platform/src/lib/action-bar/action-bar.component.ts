@@ -9,11 +9,11 @@ import deprecated from "deprecated-decorator";
  * @deprecated
  * Action Bar component is deprecated since version 0.40.0
  */
+@deprecated({ version: '0.40.0', alternative: '[fd-action-bar] from @fundamental-ngx/core' })
 @Component({
     selector: 'fdp-action-bar',
     templateUrl: './action-bar.component.html'
 })
-@deprecated({ version: '0.40.0', alternative: '[fd-action-bar] from @fundamental-ngx/core' })
 export class ActionBarComponent extends BaseComponent implements OnInit {
     /**
      * Actionbar title

@@ -87,6 +87,7 @@ let defaultId = 0;
  * @deprecated
  * Approval Flow component is deprecated since version 0.40.0
  */
+@deprecated()
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
@@ -94,7 +95,6 @@ let defaultId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-@deprecated()
 export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */
     @Input() title: string;

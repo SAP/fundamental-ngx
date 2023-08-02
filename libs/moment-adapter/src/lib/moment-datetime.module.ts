@@ -8,18 +8,18 @@ import deprecated from "deprecated-decorator";
 /**
  * @deprecated Use `DatetimeAdapterRawModule` from `@fundamental-ngx/datetime-adapter` package instead.
  */
+@deprecated('DatetimeAdapterRawModule from @fundamental-ngx/datetime-adapter package')
 @NgModule({
     providers: [{ provide: DatetimeAdapter, useClass: MomentDatetimeAdapter }]
 })
-@deprecated('DatetimeAdapterRawModule from @fundamental-ngx/datetime-adapter package')
 export class MomentDatetimeAdapterModule {}
 
 /**
  * @deprecated Use `DatetimeAdapterModule` from `@fundamental-ngx/datetime-adapter` package instead.
  */
+@deprecated('DatetimeAdapterModule from @fundamental-ngx/datetime-adapter package')
 @NgModule({
     imports: [MomentDatetimeAdapterModule],
     providers: [{ provide: DATE_TIME_FORMATS, useValue: MOMENT_DATETIME_FORMATS }]
 })
-@deprecated('DatetimeAdapterModule from @fundamental-ngx/datetime-adapter package')
 export class MomentDatetimeModule {}

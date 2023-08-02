@@ -15,14 +15,14 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
  * @deprecated
  * PlatformFooter component is deprecated since version 0.40.0
  */
+@deprecated({
+    version: '0.40.0',
+})
 @Component({
     selector: 'fdp-page-footer',
     templateUrl: './page-footer.component.html',
     styleUrls: ['./page-footer.component.scss'],
     encapsulation: ViewEncapsulation.None
-})
-@deprecated({
-    version: '0.40.0',
 })
 export class PlatformFooterComponent {
     /** logo template accpets the generic html */

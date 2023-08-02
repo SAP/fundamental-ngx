@@ -39,8 +39,8 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
  * It relies on moment implementation for formatting and translation purposes.
  *
  */
-@Injectable()
 @deprecated('DayjsDatetimeAdapter from `@fundamental-ngx/datetime-adapter` package')
+@Injectable()
 export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     /** @hidden */
     private _momentLocaleData: Locale;

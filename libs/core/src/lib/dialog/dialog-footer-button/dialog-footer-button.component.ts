@@ -6,9 +6,9 @@ import deprecated from "deprecated-decorator";
  * @deprecated
  * Consider using `fd-button-bar`
  */
+@deprecated('fd-button-bar')
 @Component({
     selector: 'fd-dialog-footer-button',
     template: '<ng-content></ng-content>'
 })
-@deprecated('fd-button-bar')
 export class DialogFooterButtonComponent extends BarElementDirective {}

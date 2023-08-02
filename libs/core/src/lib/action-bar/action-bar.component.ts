@@ -15,6 +15,10 @@ import deprecated from "deprecated-decorator";
  * <div fd-action-bar-title>
  * ```
  */
+
+@deprecated({
+    version: '0.40.0'
+})
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-action-bar]',
@@ -25,8 +29,5 @@ import deprecated from "deprecated-decorator";
     styleUrls: ['./action-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
-})
-@deprecated({
-    version: '0.40.0'
 })
 export class ActionBarComponent {}
