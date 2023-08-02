@@ -100,5 +100,5 @@ export class BaseButton {
     /** @hidden */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
-    _toggled = false;
+    _toggled: boolean;
 }
