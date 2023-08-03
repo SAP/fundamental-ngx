@@ -18,6 +18,8 @@ const carouselItems = `<fd-carousel-item>
 
 @Component({
     selector: 'fd-test-carousel',
+    standalone: true,
+    imports: [CarouselModule],
     template: `
         <fd-carousel
             [vertical]="vertical"
@@ -58,8 +60,7 @@ describe('CarouselComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCarouselComponent],
-            imports: [CarouselModule]
+            imports: [TestCarouselComponent]
         }).compileComponents();
     }));
 
@@ -178,6 +179,8 @@ describe('CarouselComponent', () => {
 
 @Component({
     selector: 'fd-test-multiple-active-item-carousel',
+    standalone: true,
+    imports: [CarouselModule],
     template: `
         <fd-carousel
             [visibleSlidesCount]="visibleItemsCount"
@@ -210,8 +213,7 @@ describe('CarouselComponent Multiple Active Item', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCarouselMultipleActiveItemComponent],
-            imports: [CarouselModule]
+            imports: [TestCarouselMultipleActiveItemComponent]
         }).compileComponents();
     }));
 
@@ -303,6 +305,8 @@ describe('CarouselComponent Multiple Active Item', () => {
 
 @Component({
     selector: 'fd-test-looping-navigation-carousel',
+    imports: [CarouselModule],
+    standalone: true,
     template: `
         <fd-carousel
             [visibleSlidesCount]="visibleItemsCount"
@@ -335,8 +339,7 @@ describe('CarouselComponent looping navigation', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCarouselLoopingNavigationComponent],
-            imports: [CarouselModule]
+            imports: [TestCarouselLoopingNavigationComponent]
         }).compileComponents();
     }));
 
