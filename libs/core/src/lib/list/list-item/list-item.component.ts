@@ -77,7 +77,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
         this._ariaDescribedBy = value;
     }
 
-    get ariaDescribedBy(): string {
+    get ariaDescribedBy(): Nullable<string> {
         return this._ariaDescribedBy;
     }
 

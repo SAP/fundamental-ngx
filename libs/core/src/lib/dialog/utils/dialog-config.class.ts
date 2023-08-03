@@ -10,23 +10,11 @@ export const DIALOG_DEFAULT_CONFIG = new InjectionToken<DialogConfig>('Default D
 @Injectable()
 export class DialogConfig<T = any> extends DialogConfigBase<T> {
     /** @deprecated Use 'mobile' to set the dialog to full-screen mode. */
-    set fullScreen(value: boolean | undefined) {
-        console.warn(
-            "Property fullScreen is deprecated. Use Use 'mobile' to set the dialog to full-screen mode. instead."
-        );
-        this._fullScreen = value;
-    }
-
-    get fullScreen(): boolean | undefined {
-        return this._fullScreen;
-    }
+    fullScreen?: boolean | undefined;
 
     /** Whether the dialog should be draggable. */
     draggable?: boolean;
 
     /** Whether the dialog should be resizable. */
     resizable?: boolean;
-
-    /** @hidden */
-    private _fullScreen?: boolean;
 }
