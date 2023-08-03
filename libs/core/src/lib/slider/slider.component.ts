@@ -51,7 +51,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import deprecated from 'deprecated-decorator';
+
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SliderComponent),
@@ -92,7 +92,7 @@ export class SliderComponent
     @Input()
     class: string;
 
-    /** Id of the element that labels slider. */
+    /** ID of the element that labels slider. */
     @Input()
     ariaLabelledBy: Nullable<string>;
 
@@ -200,7 +200,7 @@ export class SliderComponent
         console.warn('Property singleSliderCurrentValuePrefix is deprecated. Use i18n capabilities instead.');
         this._singleSliderCurrentValuePrefix = value;
     }
-    get singleSliderCurrentValuePrefix() {
+    get singleSliderCurrentValuePrefix(): string {
         return this._singleSliderCurrentValuePrefix;
     }
     /** @hidden */
@@ -217,7 +217,7 @@ export class SliderComponent
         console.warn('Property rangeSliderHandle1CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
         this._rangeSliderHandle1CurrentValuePrefix = value;
     }
-    get rangeSliderHandle1CurrentValuePrefix() {
+    get rangeSliderHandle1CurrentValuePrefix(): string {
         return this._rangeSliderHandle1CurrentValuePrefix;
     }
     /** @hidden */
@@ -234,7 +234,7 @@ export class SliderComponent
         console.warn('Property rangeSliderHandle2CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
         this._rangeSliderHandle2CurrentValuePrefix = value;
     }
-    get rangeSliderHandle2CurrentValuePrefix() {
+    get rangeSliderHandle2CurrentValuePrefix(): string {
         return this._rangeSliderHandle2CurrentValuePrefix;
     }
     /** @hidden */

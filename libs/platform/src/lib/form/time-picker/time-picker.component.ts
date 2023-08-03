@@ -61,7 +61,9 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     set meridian(value: boolean) {
         // eslint-disable-next-line max-len
         console.warn(
-            'Property meridian is deprecated. Use Meridian is deprecated. Use displayFormat and parseFormat inputs or DateTimeFormats.display.timeInput and DateTimeFormats.parse.timeInput instead. instead.'
+            'Property meridian is deprecated.' +
+            ' Use Meridian is deprecated.' +
+            ' Use displayFormat and parseFormat inputs or DateTimeFormats.display.timeInput and DateTimeFormats.parse.timeInput instead. instead.'
         );
         this._meridian = value;
     }
