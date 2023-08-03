@@ -17,6 +17,7 @@
     <div
         class="fd-carousel__content"
         [class.fd-carousel__content--horizontal]="!vertical"
+        [ngClass]="'fd-carousel__content--' + contentBackground"
         [style.width]="_contentSizePx"
     >
         <ng-container *ngIf="_showNavigationButtonInContent">
@@ -42,7 +43,11 @@
 </div>
 
 <ng-template #pageIndicatorContainer>
-    <div class="fd-carousel__page-indicator-container">
+    <div
+        class="fd-carousel__page-indicator-container"
+        [class.fd-carousel__page-indicator-container--no-border]="noPaginationContainerBorder"
+        [ngClass]="'fd-carousel__page-indicator-container--' + pageIndicatorBackground"
+    >
         <ng-container *ngIf="_showNavigationButtonInPageIndicatorContainer">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
@@ -83,27 +88,31 @@
 <ng-template #buttonLeft>
     <button
         fd-button
-        class="fd-carousel__button fd-carousel__button--left"
+        class="fd-carousel__button"
+        [class.fd-carousel__button--left]="!vertical"
+        [class.fd-carousel__button--up]="vertical"
         [style.z-index]="1"
         data-slide="previous"
         [attr.aria-label]="leftNavigationBtnLabel || ('coreCarousel.leftNavigationBtnLabel' | fdTranslate)"
         (click)="previous(); $event.stopPropagation()"
         [disabled]="leftButtonDisabled"
         [attr.title]="leftNavigationBtnLabel || ('coreCarousel.leftNavigationBtnLabel' | fdTranslate)"
-        glyph="slim-arrow-left"
+        [glyph]="vertical ? 'slim-arrow-up' : 'slim-arrow-left'"
     ></button>
 </ng-template>
 
 <ng-template #buttonRight>
     <button
         fd-button
-        class="fd-carousel__button fd-carousel__button--right"
+        class="fd-carousel__button"
+        [class.fd-carousel__button--right]="!vertical"
+        [class.fd-carousel__button--down]="vertical"
         [style.z-index]="1"
         data-slide="next"
         [attr.aria-label]="rightNavigationBtnLabel || ('coreCarousel.rightNavigationBtnLabel' | fdTranslate)"
         (click)="next(); $event.stopPropagation()"
         [disabled]="rightButtonDisabled"
         [attr.title]="rightNavigationBtnLabel || ('coreCarousel.rightNavigationBtnLabel' | fdTranslate)"
-        glyph="slim-arrow-right"
+        [glyph]="vertical ? 'slim-arrow-down' : 'slim-arrow-right'"
     ></button>
 </ng-template>

@@ -151,3 +151,28 @@
     <fd-carousel-auto-slides-example></fd-carousel-auto-slides-example>
 </component-example>
 <code-example [exampleFiles]="carouselAutoSlides"></code-example>
+<separator></separator>
+
+<fd-docs-section-title id="background-options" componentName="carousel">Background modifiers</fd-docs-section-title>
+<description>
+    <p>
+        The background of the Carousel Content and Page Indicator Container can be changed by providing
+        <code>[contentBackground]</code> and <code>[pageIndicatorBackground]</code> input properties.
+    </p>
+    <p>Background options can be following:</p>
+    <ul>
+        <li><code>translucent</code></li>
+        <li><code>transparent</code></li>
+        <li><code>solid</code></li>
+    </ul>
+    <p>The <b>default</b> background for the Carousel Content is <code>translucent</code>.</p>
+    <p>The <b>default</b> background for the Page Indicator Container is <code>solid</code>.</p>
+    <p>
+        Additionally, developers can pass <code>[noPaginationContainerBorder]="true"</code> to remove the border top or
+        bottom of the Pagination container.
+    </p>
+</description>
+<component-example>
+    <fd-carousel-background-example></fd-carousel-background-example>
+</component-example>
+<code-example [exampleFiles]="carouselAutoSlides"></code-example>

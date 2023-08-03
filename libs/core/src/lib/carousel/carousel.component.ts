@@ -38,6 +38,8 @@ const ICON_PAGE_INDICATOR_LIMIT = 8;
 
 export type PageIndicatorsOrientation = 'bottom' | 'top';
 
+export type CarouselBackgroundOptions = 'translucent' | 'transparent' | 'solid';
+
 export enum SlideDirection {
     None,
     NEXT,
@@ -163,6 +165,18 @@ export class CarouselComponent
     /** Is carousel is vertical. Default value is false. */
     @Input()
     vertical = false;
+
+    /** Whether to hide top border of the Pagination Container. */
+    @Input()
+    noPaginationContainerBorder = false;
+
+    /** Background configuration for the Content container. */
+    @Input()
+    contentBackground: CarouselBackgroundOptions = 'translucent';
+
+    /** Background configuration for the Pagination container */
+    @Input()
+    pageIndicatorBackground: CarouselBackgroundOptions = 'solid';
 
     /** Number of items to be visible at a time */
     @Input()
