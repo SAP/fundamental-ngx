@@ -20,7 +20,8 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER"
+    "rxjs": "RXJS_VER_PLACEHOLDER",
+    "deprecated-decorator": "0.1.6"
   },
   "dependencies": {
     "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",

@@ -48,6 +48,7 @@ export class SideNavigationComponent
     @Input()
     @HostBinding('class.fdx-side-nav--condensed')
     set condensed(value: boolean) {
+        console.warn('The "condensed" input is not applicable to the CX side nav.');
         this._condensed = value;
     }
 
