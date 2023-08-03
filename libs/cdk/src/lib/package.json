@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/cdk",
-  "version": "0.44.0-rc.4",
+  "version": "0.44.0-rc.5",
   "schematics": "./schematics/collection.json",
   "description": "Fundamental Library for Angular - CDK",
   "license": "Apache-2.0",
@@ -20,8 +20,8 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER",
-    "deprecated-decorator": "0.1.6"
+    "deprecated-decorator": "0.1.6",
+    "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
     "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
