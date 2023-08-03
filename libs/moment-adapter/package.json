@@ -17,7 +17,8 @@
   },
   "peerDependencies": {
     "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "deprecated-decorator": "0.1.6"
   },
   "ng-add": {
     "save": "dependencies"

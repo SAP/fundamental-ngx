@@ -25,7 +25,8 @@
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER"
+    "rxjs": "RXJS_VER_PLACEHOLDER",
+    "deprecated-decorator": "0.1.6"
   },
   "dependencies": {
     "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
@@ -34,8 +35,7 @@
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
-    "tslib": "^2.0.0",
-    "deprecated-decorator": "0.1.6"
+    "tslib": "^2.0.0"
   },
   "exports": {
     "./styles/fundamental-ngx-core.css": {
