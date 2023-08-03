@@ -19,5 +19,6 @@ export interface SearchComponent {
         categoryButtonClass: string;
         categoryDropdownButtonClass: string;
         removeGroupButtonClass: boolean;
+        helperClass?: string;
     };
 }
