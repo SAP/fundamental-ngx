@@ -1,16 +1,11 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
  * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  */
-@deprecated({
-    version: '0.16.0',
-    alternative: 'Message Strip component'
-})
 @Component({
     selector: 'fd-alert-container',
     template: ``,
@@ -39,4 +34,11 @@ export class AlertContainerComponent {
     /** @hidden */
     @HostBinding('class.fd-alert-container')
     fdAlertContainerClass = true;
+
+    /** @hidden */
+    constructor() {
+        console.warn(
+            'AlertContainerComponent is deprecated since version 0.16.0 and will be removed in future release. Message Strip component should be used instead.'
+        );
+    }
 }

@@ -80,14 +80,12 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import deprecated from 'deprecated-decorator';
 
 let defaultId = 0;
 /**
  * @deprecated
  * Approval Flow component is deprecated since version 0.40.0
  */
-@deprecated()
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',
@@ -277,7 +275,9 @@ export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
         private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         @Optional() private readonly _rtlService: RtlService
-    ) {}
+    ) {
+        console.log('ApprovalFlowComponent is deprecated and will be removed in next release.');
+    }
 
     /** Returns snapshot of the current and initial states of approval process */
     get approvalProcess(): ApprovalProcess {

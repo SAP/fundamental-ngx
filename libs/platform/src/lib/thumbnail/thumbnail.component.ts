@@ -18,7 +18,6 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 import { ThumbnailImageComponent } from './thumbnail-image/thumbnail-image.component';
 import { Media } from './thumbnail.interfaces';
-import deprecated from 'deprecated-decorator';
 
 let uniqueId = 0;
 
@@ -39,7 +38,6 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
  * @deprecated
  * Thumbnail component is deprecated since version 0.40.0
  */
-@deprecated({ version: '0.40.0' })
 @Component({
     selector: 'fdp-thumbnail',
     templateUrl: './thumbnail.component.html',
@@ -84,6 +82,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         private _cdr: ChangeDetectorRef
     ) {
         super(_changeDetectorRef);
+        console.warn('ThumbnailComponent is deprecated since version 0.40.0 and will be removed in next release.');
     }
 
     /** @hidden Select first media object on init. */

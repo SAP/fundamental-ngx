@@ -23,7 +23,6 @@ import { AbstractFdNgxClass, Nullable } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
 import { MessageStripType } from '@fundamental-ngx/core/message-strip';
-import deprecated from 'deprecated-decorator';
 
 let alertUniqueId = 0;
 
@@ -35,10 +34,6 @@ let alertUniqueId = 0;
  * The component that represents an alert. It can be only be used inline.
  * If the AlertService is used, this component is auto-generated.
  */
-@deprecated({
-    version: '0.16.0',
-    alternative: 'Message Strip'
-})
 @Component({
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
@@ -120,6 +115,7 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         super(elRef);
         this._setAlertConfig(alertConfig);
         this._setProperties();
+        console.warn('AlertComponent is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripComponent instead.');
     }
 
     /** @hidden */

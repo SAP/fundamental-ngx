@@ -4,12 +4,10 @@ import { map } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import deprecated from 'deprecated-decorator';
 /**
  * @deprecated
  * Action Bar component is deprecated since version 0.40.0
  */
-@deprecated({ version: '0.40.0', alternative: '[fd-action-bar] from @fundamental-ngx/core' })
 @Component({
     selector: 'fdp-action-bar',
     templateUrl: './action-bar.component.html'
@@ -52,6 +50,9 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     /** @hidden */
     constructor(@Optional() private _rtlService: RtlService, _cd: ChangeDetectorRef) {
         super(_cd);
+        console.warn(
+            'ActionBarComponent is deprecated since version 0.40.0 and will be removed in next release. Use [fd-action-bar] from @fundamental-ngx/core instead.'
+        );
     }
 
     /** @hidden */

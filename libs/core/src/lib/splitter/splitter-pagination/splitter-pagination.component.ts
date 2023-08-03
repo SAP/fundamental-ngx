@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { SplitterComponent } from '../splitter.component';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fd-splitter-pagination',
@@ -30,7 +29,6 @@ export class SplitterPaginationComponent {
      * @hidden
      * @deprecated use i18n capabilities instead
      */
-    @deprecated("i18n capabilities 'coreSplitter.paginationItemAriaLabel' key")
     get paginationItemAriaLabel(): string {
         return this._splitter.paginationItemAriaLabel;
     }

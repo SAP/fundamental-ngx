@@ -17,13 +17,11 @@ import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { SPACE } from '@angular/cdk/keycodes';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
  * ThumbnailImage component is deprecated since version 0.40.0
  */
-@deprecated({ version: '0.40.0' })
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',
@@ -67,7 +65,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         protected _changeDetectorRef: ChangeDetectorRef,
         private _dialogService: DialogService,
         @Optional() private _rtlService: RtlService
-    ) {}
+    ) {
+        console.warn('ThumbnailImage component is deprecated since version 0.40.0 and will be removed in next release');
+    }
 
     /** @hidden */
     ngOnInit(): void {

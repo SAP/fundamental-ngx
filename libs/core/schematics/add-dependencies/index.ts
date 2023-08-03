@@ -93,19 +93,6 @@ function addExternalLibraries(options: Schema): Rule {
             });
         }
 
-        if (
-            !hasPackage(tree, 'deprecated-decorator') ||
-            checkPackageVersion(tree, 'deprecated-decorator', '0.1.6', '<')
-        ) {
-            dependencies.push({
-                type: NodeDependencyType.Default,
-                // Will be replaced with the real version during sync-version script run
-                version: `0.1.6`,
-                name: 'deprecated-decorator',
-                overwrite: true
-            });
-        }
-
         dependencies.forEach((dependency) => {
             addPackageJsonDependency(tree, dependency);
 

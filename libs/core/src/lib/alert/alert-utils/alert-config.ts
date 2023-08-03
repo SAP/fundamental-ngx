@@ -1,5 +1,4 @@
 import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
@@ -8,10 +7,6 @@ import deprecated from 'deprecated-decorator';
  *
  * Configuration for opening an alert with the AlertService.
  */
-@deprecated({
-    version: '0.16.0',
-    alternative: 'Message Strip component'
-})
 export class AlertConfig implements DynamicComponentConfig {
     /** Whether the alert is dismissible. */
     dismissible = true;
@@ -45,4 +40,9 @@ export class AlertConfig implements DynamicComponentConfig {
 
     /** The container that the Alert is appended to. By default, it is appended to the body. */
     container?: HTMLElement | 'body' = 'body';
+
+    /** @hidden */
+    constructor() {
+        console.warn('AlertConfig is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.');
+    }
 }
