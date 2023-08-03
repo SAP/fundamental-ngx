@@ -29,7 +29,6 @@ import { merge } from 'lodash-es';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdpList, ListType, SelectionType } from './models/list';
 import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
-import deprecated from 'deprecated-decorator';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
@@ -159,8 +158,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * Attribute to hold avatar path
      */
     @Input()
-    @deprecated('Use `avatar` property for more flexible configuration.')
     set avatarSrc(value: Nullable<string>) {
+        console.warn('`avatarSrc` is deprecated. Use `avatar` property for more flexible configuration.');
         this._avatarConfig = merge(this._avatarConfig, { image: value });
     }
 
@@ -176,8 +175,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * Attribute to hold avatar title for a11y
      */
     @Input()
-    @deprecated('Use `avatar` property for more flexible configuration.')
     set avatarTitle(value: Nullable<string>) {
+        console.warn('`avatarTitle` is deprecated. Use `avatar` property for more flexible configuration.');
         this._avatarConfig = merge(this._avatarConfig, { ariaLabel: value });
     }
 
@@ -240,8 +239,8 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      * attribute to hold primary/title icon
      */
     @Input()
-    @deprecated('See `icon` input property for more flexible icon configuration.')
     set titleIcon(value: Nullable<string>) {
+        console.warn('`titleIcon` is deprecated. See `icon` input property for more flexible icon configuration.');
         this._iconConfig = merge(new ListIconConfig(), { glyph: value, ariaLabel: value });
     }
 

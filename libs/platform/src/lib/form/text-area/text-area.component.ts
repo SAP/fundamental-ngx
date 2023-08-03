@@ -108,7 +108,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    @deprecated('"state"')
     set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');

@@ -25,18 +25,14 @@ import {
 } from '@angular/core';
 import { Direction } from '@angular/cdk/bidi';
 import { debounceTime, take, takeUntil } from 'rxjs/operators';
-import { Subject, merge } from 'rxjs';
-
+import { merge, Subject } from 'rxjs';
 import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
-
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
-import deprecated from 'deprecated-decorator';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
-
 export type PageIndicatorsOrientation = 'bottom' | 'top';
 
 export enum SlideDirection {
@@ -44,12 +40,10 @@ export enum SlideDirection {
     NEXT,
     PREVIOUS
 }
-
 export interface FittingSlidesAndWidth {
     width: number;
     slides: number;
 }
-
 let carouselCounter = 0;
 
 class CarouselActiveSlides {
@@ -108,16 +102,32 @@ export class CarouselComponent
      * Label for left navigation button
      */
     @Input()
-    @deprecated("i18n capabilities 'coreCarousel.leftNavigationBtnLabel' key")
-    leftNavigationBtnLabel: string;
+    set leftNavigationBtnLabel(value: string) {
+        console.warn(
+            "Property leftNavigationBtnLabel is deprecated. Use i18n capabilities 'coreCarousel.leftNavigationBtnLabel' key instead."
+        );
+        this._leftNavigationBtnLabel = value;
+    }
+
+    get leftNavigationBtnLabel(): string {
+        return this._leftNavigationBtnLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Label for right navigation button
      */
     @Input()
-    @deprecated("i18n capabilities 'coreCarousel.rightNavigationBtnLabel' key")
-    rightNavigationBtnLabel: string;
+    set rightNavigationBtnLabel(value: string) {
+        console.warn(
+            "Property rightNavigationBtnLabel is deprecated. Use i18n capabilities 'coreCarousel.rightNavigationBtnLabel' key instead."
+        );
+        this._rightNavigationBtnLabel = value;
+    }
+
+    get rightNavigationBtnLabel(): string {
+        return this._rightNavigationBtnLabel;
+    }
 
     /** Shows/hides optional navigation button */
     @Input()
@@ -183,7 +193,9 @@ export class CarouselComponent
     readonly slideChange: EventEmitter<CarouselActiveSlides> = new EventEmitter<CarouselActiveSlides>();
 
     /** @hidden */
-    @ContentChildren(CarouselItemComponent, { descendants: true })
+    @ContentChildren(CarouselItemComponent, {
+        descendants: true
+    })
     slides: QueryList<CarouselItemComponent>;
 
     /** @hidden */
@@ -216,6 +228,12 @@ export class CarouselComponent
     get _contentSizePx(): string {
         return this._slidesWrapperSize ? `${this._slidesWrapperSize}px` : this.width;
     }
+
+    /** @hidden */
+    private _rightNavigationBtnLabel: string;
+
+    /** @hidden */
+    private _leftNavigationBtnLabel: string;
 
     /** @hidden */
     private _visibleSlidesCount: number | 'auto' = 1;
@@ -272,7 +290,6 @@ export class CarouselComponent
         if (this.slides.length > ICON_PAGE_INDICATOR_LIMIT) {
             this.numericIndicator = true;
         }
-
         if (this.slides.length > 0) {
             this._initializeCarousel();
         } else {
@@ -287,12 +304,10 @@ export class CarouselComponent
         // Keep copy of original slide array, for indicator purpose.
         // In case of looped carousel, original slides array changes.
         this._slidesCopy = this.slides.toArray();
-
         this._subscribeServiceEvents();
 
         // Subscribe to dynamic update of slides
         this.slides.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._onSlideUpdates());
-
         this._changeDetectorRef.markForCheck();
     }
 
@@ -301,7 +316,6 @@ export class CarouselComponent
         this._initializeServiceConfig();
         this._carouselService.initialise(this._config, this.slides, this.slideContainer);
         this._previousVisibleSlidesCount = this._visibleSlidesNumericCount;
-
         this._resizeContentContainer();
     }
 
@@ -346,6 +360,7 @@ export class CarouselComponent
 
     /** @hidden */
     get screenReaderLabel(): string {
+        // eslint-disable-next-line max-len
         return `${this.resourceStrings.fd_carousel_reader} ${this.currentActiveSlidesStartIndex + 1} ${
             this.resourceStrings.fd_carousel_of
         } ${this.pageIndicatorsCountArray.length}`;
@@ -355,7 +370,9 @@ export class CarouselComponent
     _focus(): void {
         const el = this._elementRef.nativeElement;
         if (el !== document.activeElement) {
-            el.focus({ preventScroll: true });
+            el.focus({
+                preventScroll: true
+            });
         }
     }
 
@@ -387,7 +404,6 @@ export class CarouselComponent
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
         this._preventDefaultBtnFocus();
         this._carouselService.pickPrevious();
-
         this._notifySlideChange(SlideDirection.PREVIOUS);
         this._changeDetectorRef.detectChanges();
     }
@@ -424,7 +440,9 @@ export class CarouselComponent
         const isFirst = this.currentActiveSlidesStartIndex === 0;
         const isLast = this.currentActiveSlidesStartIndex === this.pageIndicatorsCountArray.length - 1;
         if (isFirst || isLast) {
-            this._elementRef.nativeElement.focus({ preventScroll: true });
+            this._elementRef.nativeElement.focus({
+                preventScroll: true
+            });
         }
     }
 
@@ -465,7 +483,6 @@ export class CarouselComponent
                 this.leftButtonDisabled = false;
                 this.rightButtonDisabled = false;
             }
-
             if (this.slides.length === 1) {
                 this.leftButtonDisabled = true;
                 this.rightButtonDisabled = true;
@@ -493,7 +510,6 @@ export class CarouselComponent
         this._zone.onMicrotaskEmpty.pipe(take(1)).subscribe(() => {
             // Handles navigator button enabled/disabled state
             this._buttonVisibility();
-
             let arrayLength: number;
             // set page indicator count with fake array, to use in template
             if (this.loop && this._visibleSlidesNumericCount > 1) {
@@ -502,13 +518,9 @@ export class CarouselComponent
             } else {
                 arrayLength = this.slides.length - this._visibleSlidesNumericCount + 1;
             }
-
             const pageIndicatorsIfZeroCount = this.slides.length === 0 ? 0 : 1;
-
             this.pageIndicatorsCountArray = new Array(arrayLength > 0 ? arrayLength : pageIndicatorsIfZeroCount);
-
             this._goToFirstItem();
-
             this.slides.forEach((_slide, index) => {
                 if (
                     index >= this.currentActiveSlidesStartIndex &&
@@ -519,7 +531,6 @@ export class CarouselComponent
                     _slide.visibility = 'hidden';
                 }
             });
-
             this._changeDetectorRef.detectChanges();
         });
     }
@@ -580,17 +591,14 @@ export class CarouselComponent
     private _notifySlideChange(slideDirection: SlideDirection, firstActiveSlide?: CarouselItemInterface | null): void {
         const activeSlides: CarouselItemComponent[] = [];
         let firstActiveSlideIndex: number;
-
         if (this.loop) {
             firstActiveSlide = this._carouselService.active;
         }
-
         if (firstActiveSlide) {
             firstActiveSlideIndex = this.slides.toArray().findIndex((_item) => _item === firstActiveSlide);
         } else {
             firstActiveSlideIndex = this.currentActiveSlidesStartIndex;
         }
-
         for (let activeSlideIndex = 0; activeSlideIndex < this._visibleSlidesNumericCount; activeSlideIndex++) {
             const index = firstActiveSlideIndex + activeSlideIndex;
             const slide = this.slides.get(index);
@@ -599,7 +607,6 @@ export class CarouselComponent
                 slide.visibility = 'visible';
             }
         }
-
         this._manageSlideVisibility(firstActiveSlideIndex);
         const direction = slideDirection === SlideDirection.NEXT ? 'Next' : 'Previous';
         this.slideChange.emit(new CarouselActiveSlides(activeSlides, direction));
@@ -628,7 +635,6 @@ export class CarouselComponent
         const refreshDirection = (): void => {
             this.dir = this._isRtl() ? 'rtl' : 'ltr';
             this._carouselService.isRtl = this.dir === 'rtl';
-
             if (this._carouselService.items && this._carouselService.active) {
                 this._carouselService.goToItem(this._carouselService.active, false);
             }
@@ -739,40 +745,31 @@ export class CarouselComponent
                 slides: 1
             };
         }
-
         const { width } = this.carouselContainer.nativeElement.getBoundingClientRect();
         let maxSize = 0;
         let slidesCount = 0;
-
         const carouselSlides = this.slides.toArray();
         const previousSlides = carouselSlides.splice(0, this.currentActiveSlidesStartIndex);
-
         const getSlides = (slides: CarouselItemComponent[]): void => {
             for (const slide of slides) {
                 const slideWidth = slide.getWidth();
-
                 if (!slideWidth) {
                     break;
                 }
-
                 const newSize = maxSize + slideWidth;
-
                 if (newSize > width) {
                     break;
                 }
-
                 maxSize = newSize;
                 slidesCount++;
             }
         };
-
         getSlides(carouselSlides);
 
         // If with of the rest of the slides is lesser than carouse's viewport, add previous slides to it.
         if (maxSize < width) {
             getSlides(previousSlides);
         }
-
         return {
             width: maxSize,
             slides: slidesCount
@@ -784,7 +781,6 @@ export class CarouselComponent
         if (this._visibleSlidesCount !== 'auto') {
             return this._visibleSlidesCount;
         }
-
         const { slides } = this._getFittingSlidesAndWidth();
         return slides;
     }

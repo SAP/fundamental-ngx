@@ -32,9 +32,8 @@ import {
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import deprecated from 'deprecated-decorator';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -142,8 +141,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.itemsPerPageLabel' key")
-    itemsPerPageLabel: string;
+    set itemsPerPageLabel(value: string) {
+        console.warn(
+            "Property itemsPerPageLabel is deprecated. Use i18n capabilities 'corePagination.itemsPerPageLabel' key instead."
+        );
+        this._itemsPerPageLabel = value;
+    }
+
+    get itemsPerPageLabel(): string {
+        return this._itemsPerPageLabel;
+    }
+
+    /** @hidden */
+    private _itemsPerPageLabel: string;
 
     /** Represents the options for items per page. */
     @Input()
@@ -177,8 +187,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.firstLabel' key")
-    firstLabel: string;
+    set firstLabel(value: string) {
+        console.warn(
+            "Property firstLabel is deprecated. Use i18n capabilities 'corePagination.firstLabel' key instead."
+        );
+        this._firstLabel = value;
+    }
+
+    get firstLabel(): string {
+        return this._firstLabel;
+    }
+
+    /** @hidden */
+    private _firstLabel: string;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -186,8 +207,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.previousLabel' key")
-    previousLabel: string;
+    set previousLabel(value: string) {
+        console.warn(
+            "Property previousLabel is deprecated. Use i18n capabilities 'corePagination.previousLabel' key instead."
+        );
+        this._previousLabel = value;
+    }
+
+    get previousLabel(): string {
+        return this._previousLabel;
+    }
+
+    /** @hidden */
+    private _previousLabel: string;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -195,8 +227,17 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.nextLabel' key")
-    nextLabel: string;
+    set nextLabel(value: string) {
+        console.warn("Property nextLabel is deprecated. Use i18n capabilities 'corePagination.nextLabel' key instead.");
+        this._nextLabel = value;
+    }
+
+    get nextLabel(): string {
+        return this._nextLabel;
+    }
+
+    /** @hidden */
+    private _nextLabel: string;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -204,8 +245,17 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.lastLabel' key")
-    lastLabel: string;
+    set lastLabel(value: string) {
+        console.warn("Property lastLabel is deprecated. Use i18n capabilities 'corePagination.lastLabel' key instead.");
+        this._lastLabel = value;
+    }
+
+    get lastLabel(): string {
+        return this._lastLabel;
+    }
+
+    /** @hidden */
+    private _lastLabel: string;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -213,8 +263,17 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.ariaLabel' key")
-    ariaLabel: string;
+    set ariaLabel(value: string) {
+        console.warn("Property ariaLabel is deprecated. Use i18n capabilities 'corePagination.ariaLabel' key instead.");
+        this._ariaLabel = value;
+    }
+
+    get ariaLabel(): string {
+        return this._ariaLabel;
+    }
+
+    /** @hidden */
+    private _ariaLabel: string;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -222,8 +281,17 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.pageLabel' key")
-    pageLabel: Nullable<(page: number) => string>;
+    set pageLabel(value: Nullable<(page: number) => string>) {
+        console.warn("Property pageLabel is deprecated. Use i18n capabilities 'corePagination.pageLabel' key instead.");
+        this._pageLabel = value;
+    }
+
+    get pageLabel(): Nullable<(page: number) => string> {
+        return this._pageLabel;
+    }
+
+    /** @hidden */
+    private _pageLabel: Nullable<(page: number) => string>;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -231,8 +299,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.currentPageAriaLabel' key")
-    currentPageAriaLabel: Nullable<(currentPage: number) => string>;
+    set currentPageAriaLabel(value: Nullable<(currentPage: number) => string>) {
+        console.warn(
+            "Property currentPageAriaLabel is deprecated. Use i18n capabilities 'corePagination.currentPageAriaLabel' key instead."
+        );
+        this._currentPageAriaLabel = value;
+    }
+
+    get currentPageAriaLabel(): Nullable<(currentPage: number) => string> {
+        return this._currentPageAriaLabel;
+    }
+
+    /** @hidden */
+    private _currentPageAriaLabel: Nullable<(currentPage: number) => string>;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -243,8 +322,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     // eslint-disable-next-line @typescript-eslint/member-ordering
     @Input()
-    @deprecated("i18n capabilities 'corePagination.labelBeforeInputMobile' key")
-    labelBeforeInputMobile: string;
+    set labelBeforeInputMobile(value: string) {
+        console.warn(
+            "Property labelBeforeInputMobile is deprecated. Use i18n capabilities 'corePagination.labelBeforeInputMobile' key instead."
+        );
+        this._labelBeforeInputMobile = value;
+    }
+
+    get labelBeforeInputMobile(): string {
+        return this._labelBeforeInputMobile;
+    }
+
+    /** @hidden */
+    private _labelBeforeInputMobile: string;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -254,8 +344,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support i18n.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.labelAfterInputMobile' key")
-    labelAfterInputMobile: Nullable<(pagesCount: number) => string>;
+    set labelAfterInputMobile(value: Nullable<(pagesCount: number) => string>) {
+        console.warn(
+            "Property labelAfterInputMobile is deprecated. Use i18n capabilities 'corePagination.labelAfterInputMobile' key instead."
+        );
+        this._labelAfterInputMobile = value;
+    }
+
+    get labelAfterInputMobile(): Nullable<(pagesCount: number) => string> {
+        return this._labelAfterInputMobile;
+    }
+
+    /** @hidden */
+    private _labelAfterInputMobile: Nullable<(pagesCount: number) => string>;
 
     /**
      * @deprecated use i18n capabilities instead
@@ -263,8 +364,19 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * This property is mainly provided to support reading in the right language for screen reader.
      */
     @Input()
-    @deprecated("i18n capabilities 'corePagination.inputAriaLabel' key")
-    inputAriaLabel: Nullable<(currentPage: number, pagesCount: number) => string>;
+    set inputAriaLabel(value: Nullable<(currentPage: number, pagesCount: number) => string>) {
+        console.warn(
+            "Property inputAriaLabel is deprecated. Use i18n capabilities 'corePagination.inputAriaLabel' key instead."
+        );
+        this._inputAriaLabel = value;
+    }
+
+    get inputAriaLabel(): Nullable<(currentPage: number, pagesCount: number) => string> {
+        return this._inputAriaLabel;
+    }
+
+    /** @hidden */
+    private _inputAriaLabel: Nullable<(currentPage: number, pagesCount: number) => string>;
 
     /** Event emitted when the page is changed. */
     @Output()
@@ -374,17 +486,14 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         if (changes?.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
-
         if (!this.currentPage || this.currentPage < 1) {
             this.currentPage = 1;
         } else {
             const totalPages = this.paginationService.getTotalPages(this.paginationObject);
-
             if (this.currentPage > totalPages) {
                 this.currentPage = totalPages;
             }
         }
-
         this._refreshPages();
     }
 
@@ -452,8 +561,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @deprecated, use {@link paginationObject} getter instead */
-    @deprecated('paginationObject getter')
     getPaginationObject(): Pagination {
+        console.warn('PaginationComponent: getPaginationObject() is deprecated, use paginationObject getter instead');
         return this.paginationObject;
     }
 

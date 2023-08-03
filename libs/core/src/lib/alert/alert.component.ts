@@ -35,15 +35,15 @@ let alertUniqueId = 0;
  * The component that represents an alert. It can be only be used inline.
  * If the AlertService is used, this component is auto-generated.
  */
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip'
+})
 @Component({
     selector: 'fd-alert',
     templateUrl: './alert.component.html',
     styleUrls: ['./alert.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
-})
-@deprecated({
-    version: '0.16.0',
-    alternative: 'Message Strip'
 })
 export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit {
     /** @hidden */

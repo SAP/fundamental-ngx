@@ -1,11 +1,9 @@
 import { Directive } from '@angular/core';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
  * Consider using `fd-button-bar`
  */
-@deprecated('fd-button-bar')
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-message-box-decisive-button]',
@@ -14,4 +12,9 @@ import deprecated from 'deprecated-decorator';
     }
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class MessageBoxDecisiveButton {}
+export class MessageBoxDecisiveButton {
+    /** @hidden */
+    constructor() {
+        console.warn('`[fd-message-box-decisive-button]` is deprecated. Consider using `fd-button-bar`');
+    }
+}

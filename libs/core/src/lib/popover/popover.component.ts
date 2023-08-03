@@ -37,7 +37,6 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
-import deprecated from 'deprecated-decorator';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -91,9 +90,6 @@ export class PopoverComponent
         return this._trigger;
     }
 
-    /** @hidden */
-    private _trigger: ElementRef;
-
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
     fixedPosition = false;
@@ -141,8 +137,20 @@ export class PopoverComponent
     /** @deprecated
      * Left for backward compatibility
      */
-    @deprecated()
-    directiveRef: any;
+    set directiveRef(value: any) {
+        console.warn('Property directiveRef is deprecated. ');
+        this._directiveRef = value;
+    }
+
+    get directiveRef(): any {
+        return this._directiveRef;
+    }
+
+    /** @hidden */
+    private _directiveRef: any;
+
+    /** @hidden */
+    private _trigger: ElementRef;
 
     /** @hidden */
     private _clickEventListener: null | (() => void);
@@ -160,6 +168,25 @@ export class PopoverComponent
         @Optional() private readonly _dynamicComponentService: DynamicComponentService
     ) {
         super();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        const activeElement = document.activeElement;
+        if (
+            // popoverControl will be undefined when popover is used from "fdPopoverTrigger"
+            this.popoverControl?.elRef.nativeElement.children[0] === activeElement &&
+            activeElement?.tagName !== 'INPUT' &&
+            activeElement?.tagName !== 'TEXTAREA' &&
+            !activeElement?.classList.contains(SELECT_CLASS_NAMES.selectControl)
+        ) {
+            if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+                // prevent page scrolling on Space keydown
+                event.preventDefault();
+                this._popoverService.toggle();
+            }
+        }
     }
 
     /** @hidden */
@@ -188,25 +215,6 @@ export class PopoverComponent
         this._destroyMobileComponent();
         this._destroyEventListeners();
         this._popoverService.onDestroy();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    onKeyDown(event: KeyboardEvent): void {
-        const activeElement = document.activeElement;
-        if (
-            // popoverControl will be undefined when popover is used from "fdPopoverTrigger"
-            this.popoverControl?.elRef.nativeElement.children[0] === activeElement &&
-            activeElement?.tagName !== 'INPUT' &&
-            activeElement?.tagName !== 'TEXTAREA' &&
-            !activeElement?.classList.contains(SELECT_CLASS_NAMES.selectControl)
-        ) {
-            if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-                // prevent page scrolling on Space keydown
-                event.preventDefault();
-                this._popoverService.toggle();
-            }
-        }
     }
 
     /** Toggles menu open/close state */
@@ -241,8 +249,8 @@ export class PopoverComponent
     /** @deprecated
      * Left for backward compatibility
      */
-    @deprecated('refreshPosition')
     updatePopover(): void {
+        console.warn('updatePopover is Deprecated, use refreshPosition instead');
         this.refreshPosition();
     }
 

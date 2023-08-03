@@ -22,7 +22,6 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-n
 import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-time-picker',
@@ -59,10 +58,17 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      * Default value based on the current locale format option
      */
     @Input()
-    @deprecated(
-        'Meridian is deprecated. Use displayFormat and parseFormat inputs or DateTimeFormats.display.timeInput and DateTimeFormats.parse.timeInput instead.'
-    )
-    meridian: boolean;
+    set meridian(value: boolean) {
+        // eslint-disable-next-line max-len
+        console.warn(
+            'Property meridian is deprecated. Use Meridian is deprecated. Use displayFormat and parseFormat inputs or DateTimeFormats.display.timeInput and DateTimeFormats.parse.timeInput instead. instead.'
+        );
+        this._meridian = value;
+    }
+
+    get meridian(): boolean {
+        return this._meridian;
+    }
 
     /**
      * @Input When set to false, hides the input for seconds.
@@ -167,6 +173,9 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     /** @hidden */
     @ViewChild(TimePickerComponent)
     timePickerComponent: TimePickerComponent<D>;
+
+    /** @hidden */
+    private _meridian: boolean;
 
     /** @hidden */
     constructor(

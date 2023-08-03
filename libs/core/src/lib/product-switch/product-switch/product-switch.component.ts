@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fd-product-switch',
@@ -25,10 +24,21 @@ export class ProductSwitchComponent extends BasePopoverClass {
      * @deprecated use i18n capabilities instead
      * Input to set the aria label */
     @Input()
-    @deprecated("i18n capabilities 'coreProductSwitch.ariaLabel' key")
-    ariaLabel: string;
+    set ariaLabel(value: string) {
+        console.warn(
+            "Property ariaLabel is deprecated. Use i18n capabilities 'coreProductSwitch.ariaLabel' key instead."
+        );
+        this._ariaLabel = value;
+    }
+
+    get ariaLabel(): string {
+        return this._ariaLabel;
+    }
 
     /** Whether the product switch is disabled. */
     @Input()
     disabled = false;
+
+    /** @hidden */
+    private _ariaLabel: string;
 }

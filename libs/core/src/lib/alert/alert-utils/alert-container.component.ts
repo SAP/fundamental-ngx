@@ -7,6 +7,10 @@ import deprecated from 'deprecated-decorator';
  * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  */
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip component'
+})
 @Component({
     selector: 'fd-alert-container',
     template: ``,
@@ -30,10 +34,6 @@ import deprecated from 'deprecated-decorator';
     animations: [alertContainerNgIf],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
-})
-@deprecated({
-    version: '0.16.0',
-    alternative: 'Message Strip component'
 })
 export class AlertContainerComponent {
     /** @hidden */

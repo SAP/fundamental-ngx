@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import deprecated from 'deprecated-decorator';
 
 let switchUniqueId = 0;
 let warnedAboutAriaLabeledBy = false;
@@ -107,16 +106,32 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      * Semantic Label Accept set for Accessibility
      */
     @Input()
-    @deprecated("i18n capabilities 'coreSwitch.semanticAcceptLabel' key")
-    semanticAcceptLabel: string;
+    set semanticAcceptLabel(value: string) {
+        console.warn(
+            "Property semanticAcceptLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticAcceptLabel' key instead."
+        );
+        this._semanticAcceptLabel = value;
+    }
+
+    get semanticAcceptLabel(): string {
+        return this._semanticAcceptLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Semantic Label Decline set for Accessibility
      */
     @Input()
-    @deprecated("i18n capabilities 'coreSwitch.semanticDeclineLabel' key")
-    semanticDeclineLabel: string;
+    set semanticDeclineLabel(value: string) {
+        console.warn(
+            "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticDeclineLabel' key instead."
+        );
+        this._semanticDeclineLabel = value;
+    }
+
+    get semanticDeclineLabel(): string {
+        return this._semanticDeclineLabel;
+    }
 
     /**
      * Event fired when the state of the switch changes.
@@ -133,16 +148,22 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: (value: boolean) => void = () => {};
+    private _semanticDeclineLabel: string;
 
     /** @hidden */
-    onTouched = (): void => {};
+    private _semanticAcceptLabel: string;
 
     /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
+
+    /** @hidden */
+    onChange: (value: boolean) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnDestroy(): void {

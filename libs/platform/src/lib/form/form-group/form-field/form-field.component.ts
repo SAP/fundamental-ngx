@@ -70,7 +70,6 @@ import {
 } from '../fdp-form.tokens';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
 import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
-import deprecated from 'deprecated-decorator';
 
 let defaultId = 0;
 
@@ -116,8 +115,14 @@ export class FormFieldComponent
      * Defines hint placement
      */
     @Input()
-    @deprecated('`hint.placement`')
-    hintPlacement: HintPlacement;
+    set hintPlacement(value: HintPlacement) {
+        console.warn('Property hintPlacement is deprecated. Use `hint.placement` instead.');
+        this._hintPlacement = value;
+    }
+
+    get hintPlacement(): HintPlacement {
+        return this._hintPlacement;
+    }
 
     /** Hint to be placed next to label */
     @Input()
@@ -436,6 +441,9 @@ export class FormFieldComponent
     /** @hidden */
     private _errorDirectivesCdr: Subscription;
 
+    /** @hidden */
+    private _hintPlacement: HintPlacement;
+
     /** @hidden whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
         if (!this.inputMessageGroup || !this.labelCol) {
@@ -645,8 +653,7 @@ export class FormFieldComponent
 
     /** @hidden */
     hasErrors(): boolean {
-        const result = this._editable && !!this.control?.controlInvalid;
-        return result;
+        return this._editable && !!this.control?.controlInvalid;
     }
 
     /**

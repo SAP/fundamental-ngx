@@ -27,7 +27,6 @@ import { BaseToastConfig } from './classes/base-toast-config';
 import { BaseToastRef } from './classes/base-toast-ref';
 import { ToastContainerComponent } from './interfaces/toast-container-component.interface';
 import { ToastTextComponent } from './interfaces/toast-text-component.interface';
-import deprecated from 'deprecated-decorator';
 
 @Injectable()
 export abstract class BaseToastService<
@@ -120,8 +119,8 @@ export abstract class BaseToastService<
      * @deprecated.
      * Use `hideAll()` method instead.
      */
-    @deprecated('hideAll')
     dismissAll(): void {
+        console.warn('dismissAll() is deprecated. Use hideAll() instead.');
         this.hideAll();
     }
 

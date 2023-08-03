@@ -13,7 +13,6 @@ import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from '../../constants';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fd-feed-list-item',
@@ -68,16 +67,32 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Text for more button
      */
     @Input()
-    @deprecated("i18n capabilities 'coreFeedListItem.moreLabel' key")
-    moreLabel: string;
+    set moreLabel(value: string) {
+        console.warn(
+            "Property moreLabel is deprecated. Use i18n capabilities 'coreFeedListItem.moreLabel' key instead."
+        );
+        this._moreLabel = value;
+    }
+
+    get moreLabel(): string {
+        return this._moreLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for less button
      */
     @Input()
-    @deprecated("i18n capabilities 'coreFeedListItem.lessLabel' key")
-    lessLabel: string;
+    set lessLabel(value: string) {
+        console.warn(
+            "Property lessLabel is deprecated. Use i18n capabilities 'coreFeedListItem.lessLabel' key instead."
+        );
+        this._lessLabel = value;
+    }
+
+    get lessLabel(): string {
+        return this._lessLabel;
+    }
 
     /**
      * Apply rich feed text, please note - we use a formatted text component with this option, it has a list of controlled tags and attibutes.
@@ -110,6 +125,12 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      * Shows have you more line than max lines
      */
     hasMore = false;
+
+    /** @hidden */
+    private _moreLabel: string;
+
+    /** @hidden */
+    private _lessLabel: string;
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}

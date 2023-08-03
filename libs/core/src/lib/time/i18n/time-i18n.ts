@@ -1,20 +1,11 @@
 import { Injectable, isDevMode } from '@angular/core';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated use i18n capabilities instead
  * Provides i18n support for labels and meridian naming inside the time component.
  */
 @Injectable()
-@deprecated('i18n capabilities')
 export class TimeI18n {
-    /** @hidden */
-    constructor() {
-        if (isDevMode()) {
-            console.warn('TimeI18n is deprecated and will be removed in next release. Use i18n capabilities instead.');
-        }
-    }
-
     /** Aria label for entire component */
     componentAriaName = 'Time picker';
 
@@ -60,4 +51,11 @@ export class TimeI18n {
      */
     navigationInstruction =
         'To move between items in this list, press top arrow or bottom arrow. To switch between lists press left arrow or right arrow.';
+
+    /** @hidden */
+    constructor() {
+        if (isDevMode()) {
+            console.warn('TimeI18n is deprecated and will be removed in next release. Use i18n capabilities instead.');
+        }
+    }
 }

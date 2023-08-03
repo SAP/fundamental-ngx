@@ -20,7 +20,6 @@ import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundame
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import deprecated from 'deprecated-decorator';
 
 export class FileUploaderInvalidChangeEvent {
     /**
@@ -89,7 +88,6 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
      * @deprecated
      * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    @deprecated('"state"')
     set stateType(state: FormStates) {
         if (isDevMode()) {
             console.warn('"stateType" is deprecated. Use "state" instead');

@@ -18,13 +18,13 @@ export interface Theme {
     description?: string;
 }
 
-@Injectable()
 /**
  * @deprecated
  * Service providing theme switcher functionality.
  * Deprecated since 0.35.0 in favor of ThemingService from ThemingModule
  */
 @deprecated('ThemingService from ThemingModule')
+@Injectable()
 export class ThemesService {
     /** Available themes */
     themes: Theme[] = [

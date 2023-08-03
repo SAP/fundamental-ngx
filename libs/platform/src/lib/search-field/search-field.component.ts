@@ -50,7 +50,6 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import equal from 'fast-deep-equal';
-import deprecated from 'deprecated-decorator';
 
 export interface SearchInput {
     text: string;
@@ -126,7 +125,7 @@ export class SearchFieldComponent
         return this._appearance;
     }
 
-    /** Place holder text for search input field. */
+    /** Placeholder text for search input field. */
     @Input()
     placeholder: string;
 
@@ -226,8 +225,14 @@ export class SearchFieldComponent
      * Message announced by screen reader, when search suggestions opens.
      */
     @Input()
-    @deprecated('i18n capabilities')
-    searchSuggestionMessage: string;
+    set searchSuggestionMessage(value: string) {
+        console.warn('Property searchSuggestionMessage is deprecated. Use i18n capabilities instead.');
+        this._searchSuggestionMessage = value;
+    }
+
+    get searchSuggestionMessage(): string {
+        return this._searchSuggestionMessage;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
@@ -235,8 +240,14 @@ export class SearchFieldComponent
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
     @Input()
-    @deprecated('i18n capabilities')
-    searchSuggestionNavigateMessage: string;
+    set searchSuggestionNavigateMessage(value: string) {
+        console.warn('Property searchSuggestionNavigateMessage is deprecated. Use i18n capabilities instead.');
+        this._searchSuggestionNavigateMessage = value;
+    }
+
+    get searchSuggestionNavigateMessage(): string {
+        return this._searchSuggestionNavigateMessage;
+    }
 
     /** Whether to always show search button. */
     @Input()
@@ -258,6 +269,37 @@ export class SearchFieldComponent
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /** @hidden */
+    @ViewChild('categoryDropdown', { static: false })
+    categoryDropdown: PopoverComponent;
+
+    /** @hidden */
+    @ViewChild('inputGroup', { static: false })
+    inputGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('inputField', { static: false })
+    inputField: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('inputFieldTemplate')
+    inputFieldTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('suggestionMenuTemplate', { static: false })
+    suggestionMenuTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChildren(SearchFieldSuggestionDirective)
+    suggestionItems: QueryList<SearchFieldSuggestionDirective>;
+
+    /** @hidden */
+    get searchFieldValue(): SearchInput {
+        return {
+            text: this.inputText,
+            category: this._currentCategory?.value || null
+        };
+    }
     /** @hidden Focus state */
     get isFocused(): boolean {
         return this._document?.activeElement === this.inputField?.nativeElement;
@@ -315,6 +357,12 @@ export class SearchFieldComponent
     _isSearchDone = false;
 
     /** @hidden */
+    private _searchSuggestionMessage: string;
+
+    /** @hidden */
+    private _searchSuggestionNavigateMessage: string;
+
+    /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
 
     /** @hidden */
@@ -348,38 +396,6 @@ export class SearchFieldComponent
     private _appearance: Appearance;
 
     /** @hidden */
-    @ViewChild('categoryDropdown', { static: false })
-    categoryDropdown: PopoverComponent;
-
-    /** @hidden */
-    @ViewChild('inputGroup', { static: false })
-    inputGroup: ElementRef<HTMLElement>;
-
-    /** @hidden */
-    @ViewChild('inputField', { static: false })
-    inputField: ElementRef<HTMLElement>;
-
-    /** @hidden */
-    @ViewChild('inputFieldTemplate')
-    inputFieldTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChild('suggestionMenuTemplate', { static: false })
-    suggestionMenuTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    @ViewChildren(SearchFieldSuggestionDirective)
-    suggestionItems: QueryList<SearchFieldSuggestionDirective>;
-
-    /** @hidden */
-    get searchFieldValue(): SearchInput {
-        return {
-            text: this.inputText,
-            category: this._currentCategory?.value || null
-        };
-    }
-
-    /** @hidden */
     constructor(
         public elementRef: ElementRef<HTMLElement>,
         private readonly _overlay: Overlay,
@@ -394,6 +410,14 @@ export class SearchFieldComponent
         readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(_cd);
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeydown(event: KeyboardEvent): void {
+        if (this.mobile && this.isOpen && KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.showDialog(false);
+        }
     }
 
     /** @hidden */
@@ -433,14 +457,6 @@ export class SearchFieldComponent
         this._suggestionkeyManager?.destroy();
         this._onDestroy$.next();
         this._onDestroy$.complete();
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    handleKeydown(event: KeyboardEvent): void {
-        if (this.mobile && this.isOpen && KeyUtil.isKeyCode(event, [ESCAPE])) {
-            this.showDialog(false);
-        }
     }
 
     /**

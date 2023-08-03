@@ -146,16 +146,32 @@ export class UploadCollectionComponent
      * Allows to set own text for the 'No data' text label.
      */
     @Input()
-    @deprecated("i18n capabilities 'platformUploadCollection.noDataText' key")
-    noDataText: string;
+    set noDataText(value: string) {
+        console.warn(
+            "Property noDataText is deprecated. Use i18n capabilities 'platformUploadCollection.noDataText' key instead."
+        );
+        this._noDataText = value;
+    }
+
+    get noDataText(): string {
+        return this._noDataText;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Allows to set own text for the 'No data' description label.
      */
     @Input()
-    @deprecated("i18n capabilities 'platformUploadCollection.noDataDescription' key")
-    noDataDescription: string;
+    set noDataDescription(value: string) {
+        console.warn(
+            "Property noDataDescription is deprecated. Use i18n capabilities 'platformUploadCollection.noDataDescription' key instead."
+        );
+        this._noDataDescription = value;
+    }
+
+    get noDataDescription(): string {
+        return this._noDataDescription;
+    }
 
     /** All action buttons will be disabled */
     @Input()
@@ -279,18 +295,24 @@ export class UploadCollectionComponent
     _selectionMode = SelectionMode;
 
     /** @hidden */
-    private _dataSource: UploadCollectionDataSource;
-
-    /** @hidden */
-    private _contentDensityManuallySet = false;
-
-    /** @hidden */
     @ViewChild('fileInput')
     private readonly _uploadFilesRef: ElementRef;
 
     /** @hidden */
     @ViewChild('updateVersionInput')
     private readonly _updateVersionRef: ElementRef;
+
+    /** @hidden */
+    private _dataSource: UploadCollectionDataSource;
+
+    /** @hidden */
+    private _noDataDescription: string;
+
+    /** @hidden */
+    private _noDataText: string;
+
+    /** @hidden */
+    private _contentDensityManuallySet = false;
 
     /** @hidden */
     private readonly _imageExtensions: string[] = [

@@ -37,7 +37,6 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from 'deprecated-decorator';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -99,8 +98,14 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @deprecated */
     @Input()
-    @deprecated()
-    hasTitle = false;
+    set hasTitle(value: boolean) {
+        console.warn('Property hasTitle is deprecated. ');
+        this._hasTitle = value;
+    }
+
+    get hasTitle(): boolean {
+        return this._hasTitle;
+    }
 
     /** The title for the toolbar. */
     @Input()
@@ -153,6 +158,9 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
+
+    /** @hidden */
+    private _hasTitle = false;
 
     /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);

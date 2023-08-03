@@ -24,7 +24,6 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-select',
@@ -40,7 +39,6 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
      * Holds the control state of select
      */
     @Input()
-    @deprecated('"state"')
     set selectState(state: FormStates) {
         if (isDevMode()) {
             console.warn('"selectState" is deprecated. Use "state" instead');

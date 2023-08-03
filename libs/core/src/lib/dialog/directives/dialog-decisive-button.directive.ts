@@ -1,11 +1,9 @@
 import { Directive } from '@angular/core';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
  * Consider using `fd-button-bar`
  */
-@deprecated('fd-button-bar')
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-dialog-decisive-button]',
@@ -13,4 +11,9 @@ import deprecated from 'deprecated-decorator';
         '[class.fd-dialog__decisive-button]': 'true'
     }
 })
-export class DialogDecisiveButtonDirective {}
+export class DialogDecisiveButtonDirective {
+    /** @hidden */
+    constructor() {
+        console.warn('[fd-dialog-decisive-button] is deprecated, use fd-button-bar instead.');
+    }
+}

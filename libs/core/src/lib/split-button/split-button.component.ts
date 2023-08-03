@@ -27,7 +27,6 @@ import { SplitButtonActionTitle } from './split-button-utils/split-button.direct
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import deprecated from 'deprecated-decorator';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 const splitButtonTextClasses = [splitButtonTextClass];
@@ -72,8 +71,16 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
     @Input()
-    @deprecated("MenuItemComponent's title component text content")
-    mainActionTitle: string;
+    set mainActionTitle(value: string) {
+        console.warn(
+            "Property mainActionTitle is deprecated. Use MenuItemComponent's title component text content instead."
+        );
+        this._mainActionTitle = value;
+    }
+
+    get mainActionTitle(): string {
+        return this._mainActionTitle;
+    }
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
@@ -85,8 +92,16 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
      * Aria-label attribute used to describe expand button
      */
     @Input()
-    @deprecated("i18n capabilities 'coreSplitButton.expandButtonAriaLabel' key")
-    expandButtonAriaLabel: string;
+    set expandButtonAriaLabel(value: string) {
+        console.warn(
+            "Property expandButtonAriaLabel is deprecated. Use i18n capabilities 'coreSplitButton.expandButtonAriaLabel' key instead."
+        );
+        this._expandButtonAriaLabel = value;
+    }
+
+    get expandButtonAriaLabel(): string {
+        return this._expandButtonAriaLabel;
+    }
 
     /** Title attribute used to describe expand button */
     @Input()
@@ -138,6 +153,12 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     get typeClass(): string {
         return this.fdType ? `fd-button-split--${this.fdType}` : '';
     }
+
+    /** @hidden */
+    private _expandButtonAriaLabel: string;
+
+    /** @hidden */
+    private _mainActionTitle: string;
 
     /** @hidden */
     private _menuItemSubscriptions = new Subscription();

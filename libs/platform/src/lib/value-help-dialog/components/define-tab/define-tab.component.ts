@@ -21,7 +21,6 @@ import {
 } from '../../models';
 import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
-import deprecated from 'deprecated-decorator';
 
 class ExtendedBaseEntity extends BaseEntity {
     id?: number;
@@ -64,13 +63,25 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
 
     /** @deprecated */
     @Input()
-    @deprecated()
-    included: ExtendedIncludedEntity[] = [];
+    set included(value: ExtendedIncludedEntity[]) {
+        console.warn('Property included is deprecated. ');
+        this._included = value;
+    }
+
+    get included(): ExtendedIncludedEntity[] {
+        return this._included;
+    }
 
     /** @deprecated */
     @Input()
-    @deprecated()
-    excluded: ExtendedExcludedEntity[] = [];
+    set excluded(value: ExtendedExcludedEntity[]) {
+        console.warn('Property excluded is deprecated. ');
+        this._excluded = value;
+    }
+
+    get excluded(): ExtendedExcludedEntity[] {
+        return this._excluded;
+    }
 
     /** @hidden */
     @Input()
@@ -116,6 +127,12 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
 
     /** @hidden */
     _excludeStrategy: StategyItem[] = [];
+
+    /** @hidden */
+    private _included: ExtendedIncludedEntity[] = [];
+
+    /** @hidden */
+    private _excluded: ExtendedExcludedEntity[] = [];
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

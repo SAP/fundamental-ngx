@@ -8,7 +8,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fd-upload-collection-button-group',
@@ -54,52 +53,118 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Ok' button.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreUploadCollection.menuOkText' key")
-    okText: string;
+    set okText(value: string) {
+        console.warn(
+            "Property okText is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkText' key instead."
+        );
+        this._okText = value;
+    }
+
+    get okText(): string {
+        return this._okText;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Cancel' button.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreUploadCollection.menuCancelText' key")
-    cancelText: string;
+    set cancelText(value: string) {
+        console.warn(
+            "Property cancelText is deprecated. Use i18n capabilities 'coreUploadCollection.menuCancelText' key instead."
+        );
+        this._cancelText = value;
+    }
+
+    get cancelText(): string {
+        return this._cancelText;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Edit' aria-label.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreUploadCollection.menuEditAriaLabel' key")
-    editAriaLabel: string;
+    set editAriaLabel(value: string) {
+        console.warn(
+            "Property editAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuEditAriaLabel' key instead."
+        );
+        this._editAriaLabel = value;
+    }
+
+    get editAriaLabel(): string {
+        return this._editAriaLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Delete' aria-label.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreUploadCollection.menuDeleteAriaLabel' key")
-    deleteAriaLabel: string;
+    set deleteAriaLabel(value: string) {
+        console.warn(
+            "Property deleteAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuDeleteAriaLabel' key instead."
+        );
+        this._deleteAriaLabel = value;
+    }
+
+    get deleteAriaLabel(): string {
+        return this._deleteAriaLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Ok' aria-label.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreUploadCollection.menuOkAriaLabel' key")
-    okAriaLabel: string;
+    set okAriaLabel(value: string) {
+        console.warn(
+            "Property okAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkAriaLabel' key instead."
+        );
+        this._okAriaLabel = value;
+    }
+
+    get okAriaLabel(): string {
+        return this._okAriaLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Cancel' aria-label.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreUploadCollection.menuCancelAriaLabel' key")
-    cancelAriaLabel: string;
+    set cancelAriaLabel(value: string) {
+        console.warn(
+            "Property cancelAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuCancelAriaLabel' key instead."
+        );
+        this._cancelAriaLabel = value;
+    }
+
+    get cancelAriaLabel(): string {
+        return this._cancelAriaLabel;
+    }
 
     /** @hidden */
     @ViewChild('okButton')
     _okButton: ButtonComponent;
+
+    /** @hidden */
+    private _cancelAriaLabel: string;
+
+    /** @hidden */
+    private _okAriaLabel: string;
+
+    /** @hidden */
+    private _deleteAriaLabel: string;
+
+    /** @hidden */
+    private _editAriaLabel: string;
+
+    /** @hidden */
+    private _cancelText: string;
+
+    /** @hidden */
+    private _okText: string;
 
     /** @hidden */
     _editButtonClicked(event?: MouseEvent): void {

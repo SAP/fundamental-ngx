@@ -14,14 +14,14 @@ import deprecated from 'deprecated-decorator';
  * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  */
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip'
+})
 @NgModule({
     declarations: [AlertComponent, AlertContainerComponent],
     imports: [CommonModule, ButtonModule, MessageStripComponent],
     exports: [AlertComponent, AlertContainerComponent],
     providers: [AlertService, DynamicComponentService]
-})
-@deprecated({
-    version: '0.16.0',
-    alternative: 'Message Strip'
 })
 export class AlertModule {}

@@ -23,7 +23,6 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fdp-datetime-picker',
@@ -103,16 +102,32 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * Aria label for the datetime picker input.
      */
     @Input()
-    @deprecated('i18n capabilities (being translated in core datetime picker)')
-    datetimeInputLabel: string;
+    set datetimeInputLabel(value: string) {
+        console.warn(
+            'Property datetimeInputLabel is deprecated. Use i18n capabilities (being translated in core datetime picker) instead.'
+        );
+        this._datetimeInputLabel = value;
+    }
+
+    get datetimeInputLabel(): string {
+        return this._datetimeInputLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead (being translated in core datetime picker)
      * Aria label for the button to show/hide the calendar.
      */
     @Input()
-    @deprecated('i18n capabilities (being translated in core datetime picker)')
-    displayDatetimeToggleLabel: string;
+    set displayDatetimeToggleLabel(value: string) {
+        console.warn(
+            'Property displayDatetimeToggleLabel is deprecated. Use i18n capabilities (being translated in core datetime picker) instead.'
+        );
+        this._displayDatetimeToggleLabel = value;
+    }
+
+    get displayDatetimeToggleLabel(): string {
+        return this._displayDatetimeToggleLabel;
+    }
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -219,16 +234,28 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      * Text and aria-label of the DateTimePicker 'OK' button.
      */
     @Input()
-    @deprecated('i18n capabilities')
-    okLabel: string;
+    set okLabel(value: string) {
+        console.warn('Property okLabel is deprecated. Use i18n capabilities instead.');
+        this._okLabel = value;
+    }
+
+    get okLabel(): string {
+        return this._okLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text and aria-label of the DateTimePicker 'Cancel' button.
      */
     @Input()
-    @deprecated('i18n capabilities')
-    cancelLabel: string;
+    set cancelLabel(value: string) {
+        console.warn('Property cancelLabel is deprecated. Use i18n capabilities instead.');
+        this._cancelLabel = value;
+    }
+
+    get cancelLabel(): string {
+        return this._cancelLabel;
+    }
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -259,17 +286,22 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @ViewChild(DatetimePickerComponent, { static: true, read: NgControl })
     protected _control: NgControl;
 
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    disableFunction: (value: D) => boolean = () => false;
-
     /** @hidden */
     get _isRequired(): boolean {
         return !!this.formField?.required;
     }
+
+    /** @hidden */
+    private _datetimeInputLabel: string;
+
+    /** @hidden */
+    private _displayDatetimeToggleLabel: string;
+
+    /** @hidden */
+    private _okLabel: string;
+
+    /** @hidden */
+    private _cancelLabel: string;
 
     /** @hidden */
     constructor(
@@ -296,6 +328,13 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
         // default model value
         this.value = _dateTimeAdapter.now();
     }
+
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableFunction: (value: D) => boolean = () => false;
 
     /**
      * @hidden

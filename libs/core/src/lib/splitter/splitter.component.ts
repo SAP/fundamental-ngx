@@ -9,7 +9,6 @@ import {
 import { Subject } from 'rxjs';
 
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
-import deprecated from 'deprecated-decorator';
 
 @Component({
     selector: 'fd-splitter',
@@ -20,6 +19,10 @@ import deprecated from 'deprecated-decorator';
     host: { class: 'fd-splitter' }
 })
 export class SplitterComponent {
+    /** @hidden */
+    @ContentChildren(SplitterSplitPaneComponent, { descendants: true })
+    _panes: QueryList<SplitterSplitPaneComponent>;
+
     /** Id of the main pane. */
     @Input()
     set defaultPaneId(value: string) {
@@ -37,15 +40,22 @@ export class SplitterComponent {
      * aria-label for the pagination item.
      */
     @Input()
-    @deprecated("i18n capabilities 'coreSplitter.paginationItemAriaLabel' key")
-    paginationItemAriaLabel: string;
+    set paginationItemAriaLabel(value: string) {
+        console.warn(
+            "Property paginationItemAriaLabel is deprecated. Use i18n capabilities 'coreSplitter.paginationItemAriaLabel' key instead."
+        );
+        this._paginationItemAriaLabel = value;
+    }
+
+    get paginationItemAriaLabel(): string {
+        return this._paginationItemAriaLabel;
+    }
 
     /** @hidden */
     _defaultPaneId$ = new Subject<string>();
 
     /** @hidden */
-    @ContentChildren(SplitterSplitPaneComponent, { descendants: true })
-    _panes: QueryList<SplitterSplitPaneComponent>;
+    private _paginationItemAriaLabel: string;
 
     /** @hidden */
     private _defaultPaneId: string;

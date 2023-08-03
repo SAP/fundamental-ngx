@@ -34,12 +34,10 @@ export class FormLabelComponent implements OnChanges {
 
     /** @deprecated */
     @Input()
-    @deprecated()
     checkbox = false;
 
     /** @deprecated */
     @Input()
-    @deprecated()
     radio = false;
 
     /** Inline help body text */

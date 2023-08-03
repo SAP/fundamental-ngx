@@ -33,7 +33,6 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
-import deprecated from 'deprecated-decorator';
 
 let listItemUniqueId = 0;
 
@@ -73,8 +72,17 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
      * Note, that it is being combined with internal values for this component
      */
     @Input()
-    @deprecated('native aria-describedby attribute')
-    ariaDescribedBy: Nullable<string>;
+    set ariaDescribedBy(value: Nullable<string>) {
+        console.warn('Property ariaDescribedBy is deprecated. Use native aria-describedby attribute instead.');
+        this._ariaDescribedBy = value;
+    }
+
+    get ariaDescribedBy(): string {
+        return this._ariaDescribedBy;
+    }
+
+    /** @hidden */
+    private _ariaDescribedBy: Nullable<string>;
 
     /** Whether there is no data inside list item */
     @Input()
@@ -114,18 +122,45 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
     /** @deprecated Text to be read by screen reader for selected list item */
     @Input()
-    @deprecated()
-    selectedListItemScreenReaderText: string;
+    set selectedListItemScreenReaderText(value: string) {
+        console.warn('Property selectedListItemScreenReaderText is deprecated. ');
+        this._selectedListItemScreenReaderText = value;
+    }
+
+    get selectedListItemScreenReaderText(): string {
+        return this._selectedListItemScreenReaderText;
+    }
+
+    /** @hidden */
+    private _selectedListItemScreenReaderText: string;
 
     /** @deprecated Text to be read by screen reader for navigated list item */
     @Input()
-    @deprecated()
-    navigatedListItemScreenReaderText: string;
+    set navigatedListItemScreenReaderText(value: string) {
+        console.warn('Property navigatedListItemScreenReaderText is deprecated. ');
+        this._navigatedListItemScreenReaderText = value;
+    }
+
+    get navigatedListItemScreenReaderText(): string {
+        return this._navigatedListItemScreenReaderText;
+    }
+
+    /** @hidden */
+    private _navigatedListItemScreenReaderText: string;
 
     /** @deprecated Text to be read by screen reader for navigatable list item */
     @Input()
-    @deprecated()
-    navigatableListItemScreenReaderText: string;
+    set navigatableListItemScreenReaderText(value: string) {
+        console.warn('Property navigatableListItemScreenReaderText is deprecated. ');
+        this._navigatableListItemScreenReaderText = value;
+    }
+
+    get navigatableListItemScreenReaderText(): string {
+        return this._navigatableListItemScreenReaderText;
+    }
+
+    /** @hidden */
+    private _navigatableListItemScreenReaderText: string;
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()

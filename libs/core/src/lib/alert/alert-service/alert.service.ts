@@ -13,11 +13,11 @@ import deprecated from 'deprecated-decorator';
  *
  * Service used to dynamically generate an alert as an overlay.
  */
-@Injectable()
 @deprecated({
     version: '0.16.0',
     alternative: 'Message Strip'
 })
+@Injectable()
 export class AlertService {
     /** @hidden */
     private alerts: ComponentRef<AlertComponent>[] = [];
