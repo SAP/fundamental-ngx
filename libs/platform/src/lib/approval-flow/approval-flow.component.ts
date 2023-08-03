@@ -80,12 +80,14 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep, uniqBy } from 'lodash-es';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import deprecated from 'deprecated-decorator';
 
 let defaultId = 0;
 /**
  * @deprecated
  * Approval Flow component is deprecated since version 0.40.0
  */
+@deprecated()
 @Component({
     selector: 'fdp-approval-flow',
     templateUrl: './approval-flow.component.html',

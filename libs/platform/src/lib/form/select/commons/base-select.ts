@@ -40,6 +40,7 @@ import { SelectConfig } from '../select.config';
 import { TextAlignment } from '../../combobox';
 import { SelectOptionItem } from './../models/select.models';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import deprecated from 'deprecated-decorator';
 
 export type FdpSelectData<T> = SelectOptionItem[] | Observable<T[]> | T[];
 
@@ -47,6 +48,7 @@ export type FdpSelectData<T> = SelectOptionItem[] | Observable<T[]> | T[];
  * @deprecated
  * `FdpSelectionChangeEvent` will be removed in future versions in favour of plain value emission
  */
+@deprecated()
 export class FdpSelectionChangeEvent {
     /**
      * Select selection change event

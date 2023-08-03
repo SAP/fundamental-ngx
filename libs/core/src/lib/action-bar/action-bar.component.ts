@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
@@ -14,6 +15,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  * <div fd-action-bar-title>
  * ```
  */
+
+@deprecated({
+    version: '0.40.0'
+})
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-action-bar]',

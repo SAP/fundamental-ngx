@@ -24,9 +24,21 @@ export class ProductSwitchComponent extends BasePopoverClass {
      * @deprecated use i18n capabilities instead
      * Input to set the aria label */
     @Input()
-    ariaLabel: string;
+    set ariaLabel(value: string) {
+        console.warn(
+            "Property ariaLabel is deprecated. Use i18n capabilities 'coreProductSwitch.ariaLabel' key instead."
+        );
+        this._ariaLabel = value;
+    }
+
+    get ariaLabel(): string {
+        return this._ariaLabel;
+    }
 
     /** Whether the product switch is disabled. */
     @Input()
     disabled = false;
+
+    /** @hidden */
+    private _ariaLabel: string;
 }

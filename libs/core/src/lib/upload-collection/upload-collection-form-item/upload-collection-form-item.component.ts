@@ -13,21 +13,30 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
      * Value for the input's placeholder.
      */
     @Input()
-    placeholder: string;
+    set placeholder(value: string) {
+        console.warn(
+            "Property placeholder is deprecated. Use i18n capabilities 'coreUploadCollection.formItemPlaceholder' key instead."
+        );
+        this._placeholder = value;
+    }
+
+    get placeholder(): string {
+        return this._placeholder;
+    }
 
     /** @hidden */
     @Input()
     _editMode = false;
+
+    /** Event emitted when the dragged file exits the dropzone. */
+    @Output()
+    readonly fileNameChanged = new EventEmitter<string>();
 
     /** @hidden */
     _fileNameValue: string;
 
     /** @hidden */
     _extension: string;
-
-    /** Event emitted when the dragged file exits the dropzone. */
-    @Output()
-    readonly fileNameChanged = new EventEmitter<string>();
 
     /** Value of the text input. */
     set fileName(value) {
@@ -39,6 +48,9 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     get fileName(): string {
         return this._fileNameValue;
     }
+
+    /** @hidden */
+    private _placeholder: string;
 
     /** @hidden */
     onChange: (value: string) => void = () => {};

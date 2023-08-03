@@ -1,27 +1,29 @@
 import {
+    ChangeDetectorRef,
     Component,
+    ElementRef,
+    EventEmitter,
     Input,
+    OnChanges,
+    OnInit,
     Optional,
     Output,
-    EventEmitter,
-    OnChanges,
-    SimpleChanges,
-    OnInit,
-    ChangeDetectorRef,
-    ViewChildren,
     QueryList,
-    ElementRef
+    SimpleChanges,
+    ViewChildren
 } from '@angular/core';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { SPACE } from '@angular/cdk/keycodes';
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
  * ThumbnailImage component is deprecated since version 0.40.0
  */
+@deprecated({ version: '0.40.0' })
 @Component({
     selector: 'fdp-thumbnail-image',
     templateUrl: './thumbnail-image.component.html',

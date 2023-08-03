@@ -7,6 +7,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import deprecated from 'deprecated-decorator';
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -14,6 +15,9 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
  * @deprecated
  * PlatformFooter component is deprecated since version 0.40.0
  */
+@deprecated({
+    version: '0.40.0'
+})
 @Component({
     selector: 'fdp-page-footer',
     templateUrl: './page-footer.component.html',

@@ -120,6 +120,7 @@ export abstract class BaseToastService<
      * Use `hideAll()` method instead.
      */
     dismissAll(): void {
+        console.warn('dismissAll() is deprecated. Use hideAll() instead.');
         this.hideAll();
     }
 

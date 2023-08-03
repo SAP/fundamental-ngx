@@ -88,14 +88,32 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
      * Sets Increment Button title attribute
      */
     @Input()
-    incrementButtonTitle: string;
+    set incrementButtonTitle(value: string) {
+        console.warn(
+            "Property incrementButtonTitle is deprecated. Use i18n capabilities 'coreStepInput.incrementButtonTitle' key instead."
+        );
+        this._incrementButtonTitle = value;
+    }
+
+    get incrementButtonTitle(): string {
+        return this._incrementButtonTitle;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Sets Decrement Button title attribute
      */
     @Input()
-    decrementButtonTitle: string;
+    set decrementButtonTitle(value: string) {
+        console.warn(
+            "Property decrementButtonTitle is deprecated. Use i18n capabilities 'coreStepInput.decrementButtonTitle' key instead."
+        );
+        this._decrementButtonTitle = value;
+    }
+
+    get decrementButtonTitle(): string {
+        return this._decrementButtonTitle;
+    }
 
     /** Sets input aria-label attribute */
     @Input()
@@ -271,10 +289,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     private _firstEmittedValue: number;
 
     /** @hidden */
-    onChange: (value: Nullable<number>) => void = () => {};
+    private _decrementButtonTitle: string;
 
     /** @hidden */
-    onTouched = (): void => {};
+    private _incrementButtonTitle: string;
 
     /** @hidden */
     constructor(
@@ -286,6 +304,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     ) {
         this.locale = locale;
     }
+
+    /** @hidden */
+    onChange: (value: Nullable<number>) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -350,30 +374,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     }
 
     /** @hidden */
-    private _incrementOrDecrement(direction: 'increment' | 'decrement'): void {
-        if ((direction === 'increment' && this.canIncrement) || (direction === 'decrement' && this.canDecrement)) {
-            let _shouldChange = true;
-            if (this.value == null && this._firstEmittedValue) {
-                this._value = this._firstEmittedValue;
-                let _limit: number;
-                direction === 'increment' ? (_limit = this.max) : (_limit = this.min);
-                if (this._firstEmittedValue === _limit) {
-                    this._value = _limit;
-                    _shouldChange = false;
-                }
-            }
-            if (_shouldChange) {
-                this._value =
-                    direction === 'increment'
-                        ? this._cutFloatingNumberDistortion(this.value!, this.step)
-                        : this._cutFloatingNumberDistortion(this.value!, -this.step);
-            }
-            this._emitChangedValue();
-            this._updateViewValue();
-        }
-    }
-
-    /** @hidden */
     handleKeyDown(event: KeyboardEvent): void {
         const muteEvent = (evnt: Event): void => {
             evnt.stopPropagation();
@@ -433,6 +433,30 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     trackInputValue(event: any): void {
         const parsedValue = this._parseValue(event.target.value);
         this._value = parsedValue != null ? this._checkValueLimits(parsedValue) : null;
+    }
+
+    /** @hidden */
+    private _incrementOrDecrement(direction: 'increment' | 'decrement'): void {
+        if ((direction === 'increment' && this.canIncrement) || (direction === 'decrement' && this.canDecrement)) {
+            let _shouldChange = true;
+            if (this.value == null && this._firstEmittedValue) {
+                this._value = this._firstEmittedValue;
+                let _limit: number;
+                direction === 'increment' ? (_limit = this.max) : (_limit = this.min);
+                if (this._firstEmittedValue === _limit) {
+                    this._value = _limit;
+                    _shouldChange = false;
+                }
+            }
+            if (_shouldChange) {
+                this._value =
+                    direction === 'increment'
+                        ? this._cutFloatingNumberDistortion(this.value!, this.step)
+                        : this._cutFloatingNumberDistortion(this.value!, -this.step);
+            }
+            this._emitChangedValue();
+            this._updateViewValue();
+        }
     }
 
     /** @hidden */

@@ -42,11 +42,25 @@ export class FormLabelComponent implements OnChanges {
 
     /** @deprecated */
     @Input()
-    checkbox = false;
+    set checkbox(value: boolean) {
+        console.warn('Property checkbox is deprecated. ');
+        this._checkbox = value;
+    }
+
+    get checkbox(): boolean {
+        return this._checkbox;
+    }
 
     /** @deprecated */
     @Input()
-    radio = false;
+    set radio(value: boolean) {
+        console.warn('Property radio is deprecated. ');
+        this._radio = value;
+    }
+
+    get radio(): boolean {
+        return this._radio;
+    }
 
     /** Align label on end. */
     @Input()
@@ -130,6 +144,12 @@ export class FormLabelComponent implements OnChanges {
     get formLabelId(): string {
         return this._formLabelId;
     }
+
+    /** @hidden */
+    private _checkbox = false;
+
+    /** @hidden */
+    private _radio = false;
 
     /** @hidden */
     private _formLabelId = `fd-form-label-${++formLabelIdCount}`;

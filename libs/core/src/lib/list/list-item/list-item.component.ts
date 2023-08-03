@@ -72,7 +72,17 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
      * Note, that it is being combined with internal values for this component
      */
     @Input()
-    ariaDescribedBy: Nullable<string>;
+    set ariaDescribedBy(value: Nullable<string>) {
+        console.warn('Property ariaDescribedBy is deprecated. Use native aria-describedby attribute instead.');
+        this._ariaDescribedBy = value;
+    }
+
+    get ariaDescribedBy(): Nullable<string> {
+        return this._ariaDescribedBy;
+    }
+
+    /** @hidden */
+    private _ariaDescribedBy: Nullable<string>;
 
     /** Whether there is no data inside list item */
     @Input()
@@ -112,15 +122,45 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
     /** @deprecated Text to be read by screen reader for selected list item */
     @Input()
-    selectedListItemScreenReaderText: string;
+    set selectedListItemScreenReaderText(value: string) {
+        console.warn('Property selectedListItemScreenReaderText is deprecated. ');
+        this._selectedListItemScreenReaderText = value;
+    }
+
+    get selectedListItemScreenReaderText(): string {
+        return this._selectedListItemScreenReaderText;
+    }
+
+    /** @hidden */
+    private _selectedListItemScreenReaderText: string;
 
     /** @deprecated Text to be read by screen reader for navigated list item */
     @Input()
-    navigatedListItemScreenReaderText: string;
+    set navigatedListItemScreenReaderText(value: string) {
+        console.warn('Property navigatedListItemScreenReaderText is deprecated. ');
+        this._navigatedListItemScreenReaderText = value;
+    }
+
+    get navigatedListItemScreenReaderText(): string {
+        return this._navigatedListItemScreenReaderText;
+    }
+
+    /** @hidden */
+    private _navigatedListItemScreenReaderText: string;
 
     /** @deprecated Text to be read by screen reader for navigatable list item */
     @Input()
-    navigatableListItemScreenReaderText: string;
+    set navigatableListItemScreenReaderText(value: string) {
+        console.warn('Property navigatableListItemScreenReaderText is deprecated. ');
+        this._navigatableListItemScreenReaderText = value;
+    }
+
+    get navigatableListItemScreenReaderText(): string {
+        return this._navigatableListItemScreenReaderText;
+    }
+
+    /** @hidden */
+    private _navigatableListItemScreenReaderText: string;
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()

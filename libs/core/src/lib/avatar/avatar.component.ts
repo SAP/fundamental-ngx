@@ -118,10 +118,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /**
      * @deprecated
      * Deprecated according to Rename `backgroundImage` to `image`
-     * */
     /** Background image url. */
     @Input()
     set backgroundImage(value: string) {
+        console.warn('`backgroundImage` input property is deprecated. Use `image` instead.');
         this._setImage(value);
     }
 

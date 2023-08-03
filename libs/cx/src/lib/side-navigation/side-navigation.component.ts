@@ -44,16 +44,22 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class SideNavigationComponent
     implements AfterContentInit, AfterViewInit, OnInit, OnChanges, SideNavigationInterface
 {
+    /** @deprecated Not applicable to the CX side nav. */
+    @Input()
+    @HostBinding('class.fdx-side-nav--condensed')
+    set condensed(value: boolean) {
+        this._condensed = value;
+    }
+
+    get condensed(): boolean {
+        return this._condensed;
+    }
+
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
     @Input()
     sideNavigationConfiguration: Nullable<SideNavigationModel>;
-
-    /** @deprecated Not applicable to the CX side nav. */
-    @Input()
-    @HostBinding('class.fdx-side-nav--condensed')
-    condensed = false;
 
     /** Prevents the side navigation from truncating or wrapping, extending the width to its longest label. */
     @Input()
@@ -111,6 +117,9 @@ export class SideNavigationComponent
     additionalShellbarCssClass = 'fd-shellbar--cx-side-nav';
 
     /** @hidden */
+    private _condensed = false;
+
+    /** @hidden */
     constructor(
         private keyboardService: NestedListKeyboardService,
         private nestedListState: NestedListStateService,
@@ -126,7 +135,7 @@ export class SideNavigationComponent
     ngOnInit(): void {
         /** Set up condensed state */
         this.nestedListState.condensed =
-            this.condensed || !!(this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
+            this._condensed || !!(this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
 
         if (this.collapseWidth) {
             this.onResize();
@@ -159,7 +168,7 @@ export class SideNavigationComponent
     @HostListener('window:resize')
     onResize(): void {
         if (this.collapseWidth) {
-            this.condensed = window.innerWidth <= this.collapseWidth;
+            this._condensed = window.innerWidth <= this.collapseWidth;
         }
     }
 

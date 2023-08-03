@@ -5,6 +5,7 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
+import deprecated from 'deprecated-decorator';
 
 export interface ThemeServiceOutput {
     themeUrl: SafeResourceUrl;
@@ -17,12 +18,13 @@ export interface Theme {
     description?: string;
 }
 
-@Injectable()
 /**
  * @deprecated
  * Service providing theme switcher functionality.
  * Deprecated since 0.35.0 in favor of ThemingService from ThemingModule
  */
+@deprecated('ThemingService from ThemingModule')
+@Injectable()
 export class ThemesService {
     /** Available themes */
     themes: Theme[] = [

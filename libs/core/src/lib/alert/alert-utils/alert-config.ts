@@ -1,4 +1,5 @@
 import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated
@@ -7,6 +8,10 @@ import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
  *
  * Configuration for opening an alert with the AlertService.
  */
+@deprecated({
+    version: '0.16.0',
+    alternative: 'Message Strip component'
+})
 export class AlertConfig implements DynamicComponentConfig {
     /** Whether the alert is dismissible. */
     dismissible = true;

@@ -2,13 +2,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
-import { PlatformFooterComponent } from './page-footer.component';
 import { PlatformPageFooterModule } from './page-footer.module';
 
 @Component({
     selector: 'fdp-footer-test',
     template: `
-        <fdp-page-footer [logo]="logo" [content]="content"></fdp-page-footer>
+        <fdp-page-footer #platformPageFooter [logo]="logo" [content]="content"></fdp-page-footer>
 
         <ng-template #logo>
             <img id="fd-logo-1" src="/assets/images/logo-sap.svg" alt="" />
@@ -26,7 +25,7 @@ import { PlatformPageFooterModule } from './page-footer.module';
     `
 })
 class PlatformFooterTestComponent {
-    @ViewChild(PlatformFooterComponent, { static: true, read: ElementRef })
+    @ViewChild('platformPageFooter', { static: true, read: ElementRef })
     footerElementRef: ElementRef;
 }
 

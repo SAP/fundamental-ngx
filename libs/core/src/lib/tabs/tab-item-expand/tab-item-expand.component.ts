@@ -19,5 +19,17 @@ export class TabItemExpandComponent {
      * @deprecated use i18n capabilities instead
      * @hidden Text visible in the trigger */
     @Input()
-    label: string;
+    set label(value: string) {
+        console.warn(
+            "Property label is deprecated. Use i18n capabilities 'coreTabs.tabListExpandButtonText' key instead."
+        );
+        this._label = value;
+    }
+
+    get label(): string {
+        return this._label;
+    }
+
+    /** @hidden */
+    private _label: string;
 }

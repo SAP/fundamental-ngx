@@ -1,5 +1,5 @@
 import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { Subscription, of, Observable } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import {
@@ -13,10 +13,10 @@ import {
     SendRemindersData
 } from '@fundamental-ngx/platform/approval-flow';
 import {
-    DataProvider,
-    ProviderParams,
+    ApprovalFlowTeamDataSource,
     ApprovalFlowUserDataSource,
-    ApprovalFlowTeamDataSource
+    DataProvider,
+    ProviderParams
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep } from 'lodash-es';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -29,7 +29,7 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     private graphs = getGraphs();
 
     /** @hidden */
-    @ViewChild(ApprovalFlowComponent)
+    @ViewChild('approvalFlowComponent')
     _approvalFlow: ApprovalFlowComponent;
 
     @ViewChild('reminderTemplate') _reminderTemplate: TemplateRef<any>;

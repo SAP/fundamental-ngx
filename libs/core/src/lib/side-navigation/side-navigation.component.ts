@@ -20,12 +20,17 @@ import { PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
 import { NestedListStateService } from '@fundamental-ngx/core/nested-list';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from './side-navigation.interface';
+import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated use the vertical navigation component instead.
  * The side-navigation is a wrapping component representing
  * a left navigation that can always display or expand/collapse using the menu icon within the global navigation.
  */
+@deprecated({
+    alternative: 'VerticalNavigationComponent',
+    url: 'https://github.com/SAP/fundamental-ngx/tree/75130aa85724060a515d99d675eb672b6d6eef6a/libs/core/src/lib/vertical-navigation'
+})
 @Component({
     templateUrl: './side-navigation.component.html',
     selector: 'fd-side-nav',

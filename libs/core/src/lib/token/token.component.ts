@@ -74,14 +74,32 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
      * label for close icon
      */
     @Input()
-    deleteButtonLabel: string;
+    set deleteButtonLabel(value: string) {
+        console.warn(
+            "Property deleteButtonLabel is deprecated. Use i18n capabilities 'coreToken.deleteButtonLabel' key instead."
+        );
+        this._deleteButtonLabel = value;
+    }
+
+    get deleteButtonLabel(): string {
+        return this._deleteButtonLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * role description for token
      */
     @Input()
-    ariaRoleDescription: string;
+    set ariaRoleDescription(value: string) {
+        console.warn(
+            "Property ariaRoleDescription is deprecated. Use i18n capabilities 'coreToken.ariaRoleDescription' key instead."
+        );
+        this._ariaRoleDescription = value;
+    }
+
+    get ariaRoleDescription(): string {
+        return this._ariaRoleDescription;
+    }
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
@@ -111,6 +129,12 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     totalCount: number;
+
+    /** @hidden */
+    private _deleteButtonLabel: string;
+
+    /** @hidden */
+    private _ariaRoleDescription: string;
 
     /** @hidden */
     private _selected = false;
