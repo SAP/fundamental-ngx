@@ -7,10 +7,6 @@ import { BooleanInput } from '@angular/cdk/coercion';
     selector: '[fdTableCell], [fd-table-cell]',
     providers: [
         {
-            provide: FocusableItemDirective,
-            useExisting: TableCellDirective
-        },
-        {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: TableCellDirective
         }
