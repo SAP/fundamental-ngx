@@ -3,7 +3,7 @@ import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuModule } from '@fundamental-ngx/core/menu';
@@ -14,6 +14,7 @@ import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { I18nModule } from '@fundamental-ngx/i18n';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'fd-breadcrumb-test-component',
@@ -70,26 +71,53 @@ describe('BreadcrumbComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should handle onResize - enlarging the screen', fakeAsync(() => {
-        const hiddenItemsCountSpy = spyOn(component, '_onHiddenItemsCountChange').and.callThrough();
+    it('should handle onResize - enlarging the screen', (doneFn) => {
+        const containerWidth = 200;
+        const itemWidth = 50;
+        const hiddenItemsCountSpy = jest.spyOn(component, '_onHiddenItemsCountChange');
+        const done$ = new Subject<void>();
 
-        component.elementRef.nativeElement.parentElement!.style.width = '500px';
+        component.hiddenItemsCount.pipe(takeUntil(done$)).subscribe(() => {
+            expect(hiddenItemsCountSpy).toHaveBeenCalledWith(0);
+            done$.next();
+            done$.complete();
+            doneFn();
+        });
+
+        jest.spyOn(
+            (component as any)._overflowLayout._elementRef.nativeElement,
+            'getBoundingClientRect'
+        ).mockReturnValue({
+            width: containerWidth
+        });
+
+        jest.spyOn((component as any)._overflowLayout._overflowLayoutService, '_getElementWidth').mockImplementation(
+            () => itemWidth
+        );
         component.onResize();
+    });
 
-        tick(1000);
+    it('should handle onResize - shrinking the screen', (doneFn) => {
+        const containerWidth = 200;
+        const itemWidth = 100;
+        const hiddenItemsCountSpy = jest.spyOn(component, '_onHiddenItemsCountChange');
 
-        expect(hiddenItemsCountSpy).toHaveBeenCalledWith(0);
-    }));
+        component.hiddenItemsCount.subscribe(() => {
+            expect(hiddenItemsCountSpy).toHaveBeenCalledWith(2);
+            doneFn();
+        });
 
-    it('should handle onResize - shrinking the screen', fakeAsync(() => {
-        const hiddenItemsCountSpy = spyOn(component, '_onHiddenItemsCountChange').and.callThrough();
+        jest.spyOn(
+            (component as any)._overflowLayout._elementRef.nativeElement,
+            'getBoundingClientRect'
+        ).mockReturnValue({
+            width: containerWidth
+        });
 
-        component.elementRef.nativeElement.parentElement!.style.width = '200px';
+        jest.spyOn((component as any)._overflowLayout._overflowLayoutService, '_getElementWidth').mockImplementation(
+            () => itemWidth
+        );
         component.onResize();
         fixture.detectChanges();
-
-        tick(1000);
-
-        expect(hiddenItemsCountSpy).toHaveBeenCalledWith(2);
-    }));
+    });
 });

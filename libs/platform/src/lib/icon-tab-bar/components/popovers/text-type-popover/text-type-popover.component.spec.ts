@@ -98,7 +98,7 @@ describe('TextTypePopoverComponent', () => {
         component.extraTabs = tabs;
         component.ngOnChanges({ extraTabs: tabs } as unknown as SimpleChanges);
 
-        const emitSpy = spyOn(component.selectedExtraItem, 'emit');
+        const emitSpy = jest.spyOn(component.selectedExtraItem, 'emit');
         component._selectItem(component.extraTabs[0]);
 
         expect(emitSpy).toHaveBeenCalled();
@@ -111,7 +111,7 @@ describe('TextTypePopoverComponent', () => {
         component.parentTab = tabs[5];
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 
-        const emitSpy = spyOn(component.selectedSubItem, 'emit');
+        const emitSpy = jest.spyOn(component.selectedSubItem, 'emit');
         const subItem = component.parentTab.subItems?.[0];
         expect(subItem).toBeDefined();
         component._selectItem(subItem!);

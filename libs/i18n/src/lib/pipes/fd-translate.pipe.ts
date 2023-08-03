@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, DestroyRef, inject, Inject, Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, Inject, Pipe, PipeTransform } from '@angular/core';
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, skip } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -25,10 +25,11 @@ export class FdTranslatePipe implements PipeTransform {
     private _value: string | undefined;
 
     /** @hidden */
-    private readonly _onDestroy$ = inject(DestroyRef);
-
-    /** @hidden */
-    constructor(@Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>, private _cdr: ChangeDetectorRef) {
+    constructor(
+        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
+        private readonly _destroyRef: DestroyRef,
+        private _cdr: ChangeDetectorRef
+    ) {
         this._instantiateSubscription();
     }
 
@@ -49,7 +50,7 @@ export class FdTranslatePipe implements PipeTransform {
         ])
             .pipe(
                 map(([lang, key, args]) => this._translationResolver.resolve(lang, key, args)),
-                takeUntilDestroyed(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((value) => {
                 this._value = value;

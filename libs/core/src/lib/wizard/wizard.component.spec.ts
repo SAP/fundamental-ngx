@@ -81,6 +81,7 @@ describe('WizardComponent', () => {
     }));
 
     beforeEach(() => {
+        HTMLElement.prototype.scroll = () => {};
         fixture = TestBed.createComponent(TestWrapperComponent);
         component = fixture.componentInstance.wizardComponent;
         element = fixture.componentInstance.wizardElement;
@@ -93,6 +94,9 @@ describe('WizardComponent', () => {
     });
 
     it('should handle resize - screen getting smaller', fakeAsync(() => {
+        jest.spyOn((component as any)._elRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+            width: 1000
+        });
         component.resizeHandler();
         tick(10);
 
@@ -102,13 +106,16 @@ describe('WizardComponent', () => {
     }));
 
     it('should handle resize - screen getting bigger', fakeAsync(() => {
-        spyOn(element.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+        jest.spyOn((component as any)._elRef.nativeElement, 'getBoundingClientRect').mockReturnValue({
+            width: 1000
+        });
+        jest.spyOn(element.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 1 });
 
         component.resizeHandler();
         tick(10);
 
-        element.nativeElement.getBoundingClientRect.and.returnValue({ width: 2 });
-        step3.nativeElement.style.width = '200px';
+        jest.spyOn(element.nativeElement, 'getBoundingClientRect').mockReturnValue({ width: 2 });
+        jest.spyOn(step3.nativeElement, 'clientWidth', 'get').mockReturnValue(200);
 
         component.resizeHandler();
         tick(10);
@@ -130,7 +137,8 @@ describe('WizardComponent', () => {
     }));
 
     it('should handleStepOrStatusChanges', fakeAsync(() => {
-        spyOn(component.wrapperContainer.nativeElement.children[0], 'scrollTo');
+        component.wrapperContainer.nativeElement.children[0].scrollTo = () => {};
+        jest.spyOn(component.scrollbar, 'scroll');
 
         component.ngAfterViewInit();
         tick(10);
@@ -138,11 +146,11 @@ describe('WizardComponent', () => {
         component.steps.first.statusChange.emit();
         tick(10);
 
-        expect(component.wrapperContainer.nativeElement.children[0].scrollTo).toHaveBeenCalled();
+        expect(component.scrollbar.scroll).toHaveBeenCalled();
     }));
 
     it('should handleScrollSpyChange', fakeAsync(() => {
-        spyOnProperty(step3.nativeElement.children[0], 'id').and.returnValue('2');
+        jest.spyOn(step3.nativeElement.children[0], 'id', 'get').mockReturnValue('2');
 
         component.ngAfterViewInit();
         tick(10);

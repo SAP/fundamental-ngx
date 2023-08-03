@@ -34,7 +34,7 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.MULTIPLE;
         component.ngAfterViewInit();
 
-        const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
+        const emitChangeSpy = jest.spyOn(component.rowSelectionChange, 'emit');
 
         component._toggleMultiSelectRow(component._tableRows[0]);
 
@@ -50,7 +50,7 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.SINGLE;
         component.ngAfterViewInit();
 
-        const emitChangeSpy = spyOn(component.rowSelectionChange, 'emit').and.stub();
+        const emitChangeSpy = jest.spyOn(component.rowSelectionChange, 'emit');
 
         component._toggleSingleSelectableRow(component._tableRows[0]);
 
@@ -93,7 +93,7 @@ describe('TableComponent internal', () => {
 
     it('freezeTo method should call TableService.freezeTo and set freezable info', async () => {
         const columnKey = 'description';
-        const serviceFreezeToSpy = spyOn(tableService, 'freezeTo').and.stub();
+        const serviceFreezeToSpy = jest.spyOn(tableService, 'freezeTo');
 
         component.freezeToColumn(columnKey);
 

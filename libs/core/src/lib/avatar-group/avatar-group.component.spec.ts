@@ -77,39 +77,44 @@ describe('AvatarGroupComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    /** TODO: #6316 */
-    xit('should assign type class', () => {
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--group-type');
+    it('should assign type class', () => {
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain(
+            'fd-avatar-group--group-type'
+        );
 
         component.type = 'individual';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--individual-type');
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain(
+            'fd-avatar-group--individual-type'
+        );
     });
 
-    /** TODO: #6316 */
-    xit('should assign size class', () => {
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--s');
+    it('should assign size class', () => {
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain('fd-avatar-group--s');
 
         component.size = 'xs';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--xs');
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain('fd-avatar-group--xs');
 
         component.size = 'm';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--m');
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain('fd-avatar-group--m');
 
         component.size = 'l';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--l');
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain('fd-avatar-group--l');
 
         component.size = 'xl';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--xl');
+        expect(fixture.nativeElement.querySelector('.fd-avatar-group').classList).toContain('fd-avatar-group--xl');
     });
 
     it('should hide part of items and display overflow button', () => {
-        const resetSpy = spyOn(<any>component.avatarGroup, '_reset').and.callThrough();
-        const collapseSpy = spyOn(<any>component.avatarGroup, '_collapseItems').and.callThrough();
+        const resetSpy = jest.spyOn(component.avatarGroup as any, '_reset');
+        const collapseSpy = jest.spyOn(component.avatarGroup as any, '_collapseItems');
+
+        jest.spyOn(component.avatarGroup as any, '_avatarGroupWidth', 'get').mockReturnValue(500);
+        jest.spyOn(component.avatarGroup.mainItems.first._element, 'offsetWidth', 'get').mockReturnValue(50);
 
         (<any>component.avatarGroup)._onResize();
         fixture.detectChanges();
