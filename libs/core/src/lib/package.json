@@ -34,7 +34,8 @@
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "lodash-es": "LODASH_ES_VER_PLACEHOLDER",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "deprecated-decorator": "0.1.6"
   },
   "exports": {
     "./styles/fundamental-ngx-core.css": {

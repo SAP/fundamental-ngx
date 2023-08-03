@@ -1,10 +1,10 @@
-import { Rule, Tree, SchematicContext, chain } from '@angular-devkit/schematics';
-import { NodeDependency, NodeDependencyType, addPackageJsonDependency } from '@schematics/angular/utility/dependencies';
+import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
+import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 import { Schema } from '../models/schema';
 import {
+    checkPackageVersion,
     getPackageVersionFromPackageJson,
     hasPackage,
-    checkPackageVersion,
     installDependencies
 } from '../utils/package-utils';
 
@@ -89,6 +89,19 @@ function addExternalLibraries(options: Schema): Rule {
                 // Will be replaced with the real version during sync-version script run
                 version: `VERSION_PLACEHOLDER`,
                 name: '@fundamental-ngx/cdk',
+                overwrite: true
+            });
+        }
+
+        if (
+            !hasPackage(tree, 'deprecated-decorator') ||
+            checkPackageVersion(tree, 'deprecated-decorator', '0.1.6', '<')
+        ) {
+            dependencies.push({
+                type: NodeDependencyType.Default,
+                // Will be replaced with the real version during sync-version script run
+                version: `0.1.6`,
+                name: 'deprecated-decorator',
                 overwrite: true
             });
         }
