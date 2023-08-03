@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 import { CarouselItemInterface } from '../carousel.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 
 export type Visibility = 'visible' | 'hidden';
 
@@ -10,7 +11,9 @@ let carouselItemCounter = 0;
     selector: 'fd-carousel-item',
     templateUrl: './carousel-item.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [BusyIndicatorComponent]
 })
 export class CarouselItemComponent implements CarouselItemInterface {
     /** Id of the Carousel items. */

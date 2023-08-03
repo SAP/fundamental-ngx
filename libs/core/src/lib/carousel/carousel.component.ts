@@ -32,6 +32,9 @@ import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf, NgTemplateOutlet, NgClass, NgFor } from '@angular/common';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
@@ -66,7 +69,9 @@ class CarouselActiveSlides {
     providers: [CarouselService],
     host: {
         '[style.width]': 'width'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, NgClass, NgFor, ButtonModule, FdTranslatePipe]
 })
 export class CarouselComponent
     implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy
