@@ -1,292 +1,155 @@
-<div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>T = <span class="tsd-signature-type">any</span></h4>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">DndItemDirective</span>
-		</li>
-	</ul>
-</section>
+<div class="fd-tsdoc-container"> 
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">DndItem</span></li>
-		<li><span class="tsd-signature-type">AfterContentInit</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="applyDragItemClass" class="tsd-anchor"></a>
-		<h3>apply<wbr>Drag<wbr>Item<wbr>Class</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">apply<wbr>Drag<wbr>Item<wbr>Class<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L34">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:34</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether to apply &quot;fd-dnd-item&quot; class.</p>
-			</div>
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">default</dt>
-				<dd><p>true</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="classWhenElementDragged" class="tsd-anchor"></a>
-		<h3>class<wbr>When<wbr>Element<wbr>Dragged</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">class<wbr>When<wbr>Element<wbr>Dragged<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;fd-dnd-on-drag&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L68">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:68</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Class added to element, when it&#39;s dragged.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="containerSelector" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> container<wbr>Selector</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">container<wbr>Selector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L38">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:38</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Container selector</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="elementRef" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> element<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>DndItem</span>.<span>elementRef</span></p>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="item" class="tsd-anchor"></a>
-		<h3>item</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>DndItem</span>.<span>item</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L27">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:27</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Item reference. Used for cases when <code>[items]</code> array of dnd list is different than <code>dndItems</code> content children.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="listDraggable" class="tsd-anchor"></a>
-		<h3>list<wbr>Draggable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">list<wbr>Draggable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>DndItem</span>.<span>listDraggable</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L71">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:71</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines if every element in list is draggable</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="moved" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> moved</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">moved<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ElementPosition</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>DndItem</span>.<span>moved</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L42">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:42</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event thrown when the element is moved by 1px</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="released" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> released</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">released<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>DndItem</span>.<span>released</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L46">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:46</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event thrown when the element is released</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="started" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> started</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">started<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>DndItem</span>.<span>started</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L50">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:50</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event thrown when the element is started to be dragged</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="stickInPlace" class="tsd-anchor"></a>
-		<h3>stick<wbr>InPlace</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">stick<wbr>InPlace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L57">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:57</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p> Defines if the item is prevented from being moved by other elements.
-				So nothing can be placed just before and just after it</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="draggable" class="tsd-anchor"></a>
-		<h3>draggable</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> draggable<span class="tsd-signature-symbol">(</span>draggable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L61">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:61</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Defines if element is draggable</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>draggable: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_placeAfter" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _place<wbr>After</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_place<wbr>After<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span>, cloneNode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Node</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L310">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:310</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>IE11 equivalent of Node.after() Method</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>element: <span class="tsd-signature-type">Element</span></h5>
-					</li>
-					<li>
-						<h5>cloneNode: <span class="tsd-signature-type">Node</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setDisabledState" class="tsd-anchor"></a>
-		<h3>set<wbr>Disabled<wbr>State</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Disabled<wbr>State<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>DndItem</span>.<span>setDisabledState</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L243">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:243</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Sets the disabled state of the dnd item.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>state: <span class="tsd-signature-type">boolean</span></h5>
-						<div class="tsd-comment tsd-typography">
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section> 
+<section class="tsd-panel tsd-hierarchy">
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">DndItemDirective</span></li></ul></section>
+<section class="tsd-panel">
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-interface">DndItem</span></li>
+<li><span class="tsd-signature-type ">AfterContentInit</span></li>
+<li><span class="tsd-signature-type ">OnDestroy</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="applyDragItemClass" class="tsd-anchor"></a>
+<h3><span>apply<wbr/>Drag<wbr/>Item<wbr/>Class</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">apply<wbr/>Drag<wbr/>Item<wbr/>Class</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to apply &quot;fd-dnd-item&quot; class.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Default</dt><dd><pre><code class="language-ts"><span class="hl-3">true</span>
+</code></pre>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L34">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:34</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="classWhenElementDragged" class="tsd-anchor"></a>
+<h3><span>class<wbr/>When<wbr/>Element<wbr/>Dragged</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">class<wbr/>When<wbr/>Element<wbr/>Dragged</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;fd-dnd-on-drag&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Class added to element, when it&#39;s dragged.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L68">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:68</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="containerSelector" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>container<wbr/>Selector</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">container<wbr/>Selector</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Container selector</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L38">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:38</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="elementRef" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>element<wbr/>Ref</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">element<wbr/>Ref</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#elementRef">elementRef</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L95">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:95</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="item" class="tsd-anchor"></a>
+<h3><span>item</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">item</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Item reference. Used for cases when <code>[items]</code> array of dnd list is different than <code>dndItems</code> content children.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#item">item</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L27">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:27</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="listDraggable" class="tsd-anchor"></a>
+<h3><span>list<wbr/>Draggable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">list<wbr/>Draggable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines if every element in list is draggable</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#listDraggable">listDraggable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L71">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:71</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="moved" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>moved</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">moved</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">ElementPosition</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event thrown when the element is moved by 1px</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#moved">moved</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L42">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:42</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="released" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>released</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">released</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event thrown when the element is released</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#released">released</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L46">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:46</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="started" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>started</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">started</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event thrown when the element is started to be dragged</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#started">started</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L50">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:50</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="stickInPlace" class="tsd-anchor"></a>
+<h3><span>stick<wbr/>In<wbr/>Place</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">stick<wbr/>In<wbr/>Place</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines if the item is prevented from being moved by other elements.
+So nothing can be placed just before and just after it</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L57">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:57</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="draggable" class="tsd-anchor"></a>
+<h3><span>draggable</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="draggable.draggable-1"><span class="tsd-signature-symbol">set</span> draggable<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">draggable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines if element is draggable</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">draggable</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L60">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:60</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setDisabledState" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Disabled<wbr/>State</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setDisabledState.setDisabledState-1"><span class="tsd-kind-call-signature">set<wbr/>Disabled<wbr/>State</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">state</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets the disabled state of the dnd item.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">state</span>: <span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/DndItem.html">DndItem</a>.<a href="../interfaces/DndItem.html#setDisabledState">setDisabledState</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts#L243">libs/cdk/src/lib/utils/drag-and-drop/dnd-item/dnd-item.directive.ts:243</a></li></ul></aside></li></ul></section></section></div>

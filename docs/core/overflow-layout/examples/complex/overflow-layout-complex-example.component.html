@@ -209,7 +209,7 @@
 
                     <div class="fd-popover__body-content">
                         <ng-container *ngIf="overflowPopoverStage === 'main'">
-                            <ng-container *ngFor="let person of items; let i = index">
+                            <ng-container *ngFor="let person of $any(items); let i = index">
                                 <ng-container
                                     *ngTemplateOutlet="
                                         person.templateRef;

@@ -1,424 +1,254 @@
-<div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>T = <span class="tsd-signature-type">any</span></h4>
-		</li>
-	</ul>
-</section>
+<div class="fd-tsdoc-container"> 
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">TableRowService</span>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Table<wbr>Row<wbr>Service&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableRowService</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-				</aside>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T = <span class="tsd-signature-type">any</span></h4>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableRowService</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="cellClicked_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cell<wbr>Clicked$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">cell<wbr>Clicked$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CellClickedModel</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L50">libs/platform/src/lib/table-helpers/services/table-row.service.ts:50</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream that emits when table cell being clicked.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="cellFocused_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> cell<wbr>Focused$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">cell<wbr>Focused$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FocusableItemPosition</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L56">libs/platform/src/lib/table-helpers/services/table-row.service.ts:56</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream that emits when the table cell being focused.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="editableCells" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> editable<wbr>Cells</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">editable<wbr>Cells<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">EditableTableCell</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L62">libs/platform/src/lib/table-helpers/services/table-row.service.ts:62</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Editable cells map.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="loadChildRows_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> load<wbr>Child<wbr>Rows$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">load<wbr>Child<wbr>Rows$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L68">libs/platform/src/lib/table-helpers/services/table-row.service.ts:68</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream to load child items for a particular rows.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="scrollToOverlappedCell_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> scroll<wbr>ToOverlapped<wbr>Cell$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">scroll<wbr>ToOverlapped<wbr>Cell$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L53">libs/platform/src/lib/table-helpers/services/table-row.service.ts:53</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream that emits when scrolling to overlapped cell is needed.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="toggleAllSelectableRows_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> toggle<wbr>All<wbr>Selectable<wbr>Rows$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">toggle<wbr>All<wbr>Selectable<wbr>Rows$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L47">libs/platform/src/lib/table-helpers/services/table-row.service.ts:47</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream that emits when toggling all selectable rows is needed.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="toggleRow_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> toggle<wbr>Row$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">toggle<wbr>Row$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ToggleRowModel</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L59">libs/platform/src/lib/table-helpers/services/table-row.service.ts:59</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Toggle row stream.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="cellClicked" class="tsd-anchor"></a>
-		<h3>cell<wbr>Clicked</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">cell<wbr>Clicked<span class="tsd-signature-symbol">(</span>evt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CellClickedModel</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L81">libs/platform/src/lib/table-helpers/services/table-row.service.ts:81</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p><code>cellClicked$</code> stream trigger.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>evt: <span class="tsd-signature-type">CellClickedModel</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="cellFocused" class="tsd-anchor"></a>
-		<h3>cell<wbr>Focused</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">cell<wbr>Focused<span class="tsd-signature-symbol">(</span>evt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FocusableItemPosition</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L86">libs/platform/src/lib/table-helpers/services/table-row.service.ts:86</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p><code>cellFocused$</code> stream trigger.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>evt: <span class="tsd-signature-type">FocusableItemPosition</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="groupTableRows" class="tsd-anchor"></a>
-		<h3>group<wbr>Table<wbr>Rows</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">group<wbr>Table<wbr>Rows<span class="tsd-signature-symbol">(</span>sourceRows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span>, groups<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span>, groupRulesMap<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L96">libs/platform/src/lib/table-helpers/services/table-row.service.ts:96</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Groups the table rows.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>sourceRows: <span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-					<li>
-						<h5>groups: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-					<li>
-						<h5>groupRulesMap: <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="loadChildRows" class="tsd-anchor"></a>
-		<h3>load<wbr>Child<wbr>Rows</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">load<wbr>Child<wbr>Rows<span class="tsd-signature-symbol">(</span>rows<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L136">libs/platform/src/lib/table-helpers/services/table-row.service.ts:136</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Triggers stream to load child items for a particular rows.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>rows: <span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="removeEditableCells" class="tsd-anchor"></a>
-		<h3>remove<wbr>Editable<wbr>Cells</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">remove<wbr>Editable<wbr>Cells<span class="tsd-signature-symbol">(</span>row<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L131">libs/platform/src/lib/table-helpers/services/table-row.service.ts:131</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Removes editable cells of particular row.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>row: <span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="scrollToOverlappedCell" class="tsd-anchor"></a>
-		<h3>scroll<wbr>ToOverlapped<wbr>Cell</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">scroll<wbr>ToOverlapped<wbr>Cell<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L76">libs/platform/src/lib/table-helpers/services/table-row.service.ts:76</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p><code>scrollToOverlappedCell$</code> stream trigger.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="toggleAllSelectableRows" class="tsd-anchor"></a>
-		<h3>toggle<wbr>All<wbr>Selectable<wbr>Rows</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">toggle<wbr>All<wbr>Selectable<wbr>Rows<span class="tsd-signature-symbol">(</span>selectAll<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L91">libs/platform/src/lib/table-helpers/services/table-row.service.ts:91</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p><code>toggleAllSelectableRows$</code> stream trigger.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>selectAll: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="toggleRow" class="tsd-anchor"></a>
-		<h3>toggle<wbr>Row</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">toggle<wbr>Row<span class="tsd-signature-symbol">(</span>evt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ToggleRowModel</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L71">libs/platform/src/lib/table-helpers/services/table-row.service.ts:71</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p><code>toggleRow$</code> stream trigger.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>evt: <span class="tsd-signature-type">ToggleRowModel</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="updateEditableCells" class="tsd-anchor"></a>
-		<h3>update<wbr>Editable<wbr>Cells</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">update<wbr>Editable<wbr>Cells<span class="tsd-signature-symbol">(</span>row<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, cells<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">EditableTableCell</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L126">libs/platform/src/lib/table-helpers/services/table-row.service.ts:126</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Sets editable cells for particular row.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>row: <span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-					<li>
-						<h5>cells: <span class="tsd-signature-type">EditableTableCell</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">TableRowService</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Constructors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
+<h3><span>constructor</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="constructor.new_TableRowService"><span class="tsd-kind-constructor-signature">new <wbr/>Table<wbr/>Row<wbr/>Service</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">TableRowService</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">TableRowService</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="cellClicked_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>cell<wbr/>Clicked$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">cell<wbr/>Clicked$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">CellClickedModel</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream that emits when table cell being clicked.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L50">platform/src/lib/table-helpers/services/table-row.service.ts:50</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="cellFocused_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>cell<wbr/>Focused$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">cell<wbr/>Focused$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">FocusableItemPosition</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream that emits when the table cell being focused.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L56">platform/src/lib/table-helpers/services/table-row.service.ts:56</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="editableCells" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>editable<wbr/>Cells</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">editable<wbr/>Cells</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-class">EditableTableCell</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Editable cells map.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L62">platform/src/lib/table-helpers/services/table-row.service.ts:62</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="loadChildRows_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>load<wbr/>Child<wbr/>Rows$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">load<wbr/>Child<wbr/>Rows$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream to load child items for a particular rows.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L68">platform/src/lib/table-helpers/services/table-row.service.ts:68</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="scrollToOverlappedCell_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>scroll<wbr/>To<wbr/>Overlapped<wbr/>Cell$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">scroll<wbr/>To<wbr/>Overlapped<wbr/>Cell$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream that emits when scrolling to overlapped cell is needed.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L53">platform/src/lib/table-helpers/services/table-row.service.ts:53</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="toggleAllSelectableRows_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>toggle<wbr/>All<wbr/>Selectable<wbr/>Rows$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">toggle<wbr/>All<wbr/>Selectable<wbr/>Rows$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream that emits when toggling all selectable rows is needed.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L47">platform/src/lib/table-helpers/services/table-row.service.ts:47</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="toggleRow_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>toggle<wbr/>Row$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">toggle<wbr/>Row$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-alias">ToggleRowModel</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggle row stream.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L59">platform/src/lib/table-helpers/services/table-row.service.ts:59</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="cellClicked" class="tsd-anchor"></a>
+<h3><span>cell<wbr/>Clicked</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="cellClicked.cellClicked-1"><span class="tsd-kind-call-signature">cell<wbr/>Clicked</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">evt</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p><code>cellClicked$</code> stream trigger.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">evt</span>: <span class="tsd-signature-type tsd-kind-interface">CellClickedModel</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L81">platform/src/lib/table-helpers/services/table-row.service.ts:81</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="cellFocused" class="tsd-anchor"></a>
+<h3><span>cell<wbr/>Focused</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="cellFocused.cellFocused-1"><span class="tsd-kind-call-signature">cell<wbr/>Focused</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">evt</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p><code>cellFocused$</code> stream trigger.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">evt</span>: <span class="tsd-signature-type ">FocusableItemPosition</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L86">platform/src/lib/table-helpers/services/table-row.service.ts:86</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="groupTableRows" class="tsd-anchor"></a>
+<h3><span>group<wbr/>Table<wbr/>Rows</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="groupTableRows.groupTableRows-1"><span class="tsd-kind-call-signature">group<wbr/>Table<wbr/>Rows</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">sourceRows</span>, <span class="tsd-kind-parameter">groups</span>, <span class="tsd-kind-parameter">groupRulesMap</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Groups the table rows.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">sourceRows</span>: <span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">groups</span>: <span class="tsd-signature-type ">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">groupRulesMap</span>: <span class="tsd-signature-type ">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-interface">CollectionGroup</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L96">platform/src/lib/table-helpers/services/table-row.service.ts:96</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="loadChildRows" class="tsd-anchor"></a>
+<h3><span>load<wbr/>Child<wbr/>Rows</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="loadChildRows.loadChildRows-1"><span class="tsd-kind-call-signature">load<wbr/>Child<wbr/>Rows</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">rows</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Triggers stream to load child items for a particular rows.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">rows</span>: <span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L136">platform/src/lib/table-helpers/services/table-row.service.ts:136</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="removeEditableCells" class="tsd-anchor"></a>
+<h3><span>remove<wbr/>Editable<wbr/>Cells</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="removeEditableCells.removeEditableCells-1"><span class="tsd-kind-call-signature">remove<wbr/>Editable<wbr/>Cells</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">row</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Removes editable cells of particular row.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">row</span>: <span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L131">platform/src/lib/table-helpers/services/table-row.service.ts:131</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="scrollToOverlappedCell" class="tsd-anchor"></a>
+<h3><span>scroll<wbr/>To<wbr/>Overlapped<wbr/>Cell</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="scrollToOverlappedCell.scrollToOverlappedCell-1"><span class="tsd-kind-call-signature">scroll<wbr/>To<wbr/>Overlapped<wbr/>Cell</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p><code>scrollToOverlappedCell$</code> stream trigger.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L76">platform/src/lib/table-helpers/services/table-row.service.ts:76</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="toggleAllSelectableRows" class="tsd-anchor"></a>
+<h3><span>toggle<wbr/>All<wbr/>Selectable<wbr/>Rows</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="toggleAllSelectableRows.toggleAllSelectableRows-1"><span class="tsd-kind-call-signature">toggle<wbr/>All<wbr/>Selectable<wbr/>Rows</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">selectAll</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p><code>toggleAllSelectableRows$</code> stream trigger.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">selectAll</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L91">platform/src/lib/table-helpers/services/table-row.service.ts:91</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="toggleRow" class="tsd-anchor"></a>
+<h3><span>toggle<wbr/>Row</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="toggleRow.toggleRow-1"><span class="tsd-kind-call-signature">toggle<wbr/>Row</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">evt</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p><code>toggleRow$</code> stream trigger.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">evt</span>: <span class="tsd-signature-type tsd-kind-type-alias">ToggleRowModel</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L71">platform/src/lib/table-helpers/services/table-row.service.ts:71</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="updateEditableCells" class="tsd-anchor"></a>
+<h3><span>update<wbr/>Editable<wbr/>Cells</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="updateEditableCells.updateEditableCells-1"><span class="tsd-kind-call-signature">update<wbr/>Editable<wbr/>Cells</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">row</span>, <span class="tsd-kind-parameter">cells</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets editable cells for particular row.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">row</span>: <span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">cells</span>: <span class="tsd-signature-type tsd-kind-class">EditableTableCell</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/services/table-row.service.ts#L126">platform/src/lib/table-helpers/services/table-row.service.ts:126</a></li></ul></aside></li></ul></section></section></div>

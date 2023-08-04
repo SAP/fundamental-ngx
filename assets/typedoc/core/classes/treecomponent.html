@@ -1,239 +1,137 @@
-<div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdTreeAcceptableDataSource</span></h4>
-		</li>
-		<li>
-			<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TreeItem</span> = <span class="tsd-signature-type">FdTreeItemType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h4>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">TreeComponent</span>
-		</li>
-	</ul>
-</section>
+<div class="fd-tsdoc-container"> 
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">CssClassBuilder</span></li>
-		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">OnChanges</span></li>
-		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-		<li><span class="tsd-signature-type">SelectComponentRootToken</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dataReceived" class="tsd-anchor"></a>
-		<h3>data<wbr>Received</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">data<wbr>Received<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L135">libs/core/src/lib/tree/tree.component.ts:135</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event emitted when data loading is finished.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dataRequested" class="tsd-anchor"></a>
-		<h3>data<wbr>Requested</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">data<wbr>Requested<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L131">libs/core/src/lib/tree/tree.component.ts:131</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event emitted when data loading is started.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="independentSections" class="tsd-anchor"></a>
-		<h3>independent<wbr>Sections</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">independent<wbr>Sections<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L108">libs/core/src/lib/tree/tree.component.ts:108</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the sections should be dependent for selection mode.
-					If true, selection control will shift, according to the level.
-				If false, selection control will stay on the same place ignoring the item level.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="noBorder" class="tsd-anchor"></a>
-		<h3>no<wbr>Border</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">no<wbr>Border<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L92">libs/core/src/lib/tree/tree.component.ts:92</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the tree should be borderless.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedChange" class="tsd-anchor"></a>
-		<h3>selected<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of SelectComponentRootToken.selectedChange</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L139">libs/core/src/lib/tree/tree.component.ts:139</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event emitted when selected state changed.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selection" class="tsd-anchor"></a>
-		<h3>selection</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectionType</span><span class="tsd-signature-symbol"> = &#x27;none&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L96">libs/core/src/lib/tree/tree.component.ts:96</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Type of tree items selection.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectionPlacement" class="tsd-anchor"></a>
-		<h3>selection<wbr>Placement</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selection<wbr>Placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SelectionPlacement</span><span class="tsd-signature-symbol"> = &#x27;none&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L100">libs/core/src/lib/tree/tree.component.ts:100</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Placement of the selection control.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="navigationIndicator" class="tsd-anchor"></a>
-		<h3>navigation<wbr>Indicator</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> navigationIndicator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> navigationIndicator<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L122">libs/core/src/lib/tree/tree.component.ts:122</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether the Tree component has navigation indicators.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L114">libs/core/src/lib/tree/tree.component.ts:114</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether the Tree component has navigation indicators.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="treeItemDef" class="tsd-anchor"></a>
-		<h3>tree<wbr>Item<wbr>Def</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> treeItemDef<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> treeItemDef<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L153">libs/core/src/lib/tree/tree.component.ts:153</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Tree item template definition.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/tree/tree.component.ts#L146">libs/core/src/lib/tree/tree.component.ts:146</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Tree item template definition.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type tsd-kind-type-alias">FdTreeAcceptableDataSource</span></h4></li>
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type tsd-kind-interface">TreeItem</span> = <span class="tsd-signature-type tsd-kind-type-alias">FdTreeItemType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section> 
+<section class="tsd-panel tsd-hierarchy">
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">TreeComponent</span></li></ul></section>
+<section class="tsd-panel">
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-interface">CssClassBuilder</span></li>
+<li><span class="tsd-signature-type ">OnInit</span></li>
+<li><span class="tsd-signature-type ">OnChanges</span></li>
+<li><span class="tsd-signature-type ">AfterViewInit</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">SelectComponentRootToken</span></li>
+<li><span class="tsd-signature-type ">OnDestroy</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dataReceived" class="tsd-anchor"></a>
+<h3><span>data<wbr/>Received</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">data<wbr/>Received</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event emitted when data loading is finished.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L135">libs/core/src/lib/tree/tree.component.ts:135</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dataRequested" class="tsd-anchor"></a>
+<h3><span>data<wbr/>Requested</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">data<wbr/>Requested</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event emitted when data loading is started.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L131">libs/core/src/lib/tree/tree.component.ts:131</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="independentSections" class="tsd-anchor"></a>
+<h3><span>independent<wbr/>Sections</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">independent<wbr/>Sections</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the sections should be dependent for selection mode.
+If true, selection control will shift, according to the level.
+If false, selection control will stay on the same place ignoring the item level.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L108">libs/core/src/lib/tree/tree.component.ts:108</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="noBorder" class="tsd-anchor"></a>
+<h3><span>no<wbr/>Border</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">no<wbr/>Border</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the tree should be borderless.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L92">libs/core/src/lib/tree/tree.component.ts:92</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectedChange" class="tsd-anchor"></a>
+<h3><span>selected<wbr/>Change</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selected<wbr/>Change</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event emitted when selected state changed.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="SelectComponentRootToken.html">SelectComponentRootToken</a>.<a href="SelectComponentRootToken.html#selectedChange">selectedChange</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L139">libs/core/src/lib/tree/tree.component.ts:139</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selection" class="tsd-anchor"></a>
+<h3><span>selection</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selection</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">SelectionType</span><span class="tsd-signature-symbol"> = &#39;none&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Type of tree items selection.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L96">libs/core/src/lib/tree/tree.component.ts:96</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectionPlacement" class="tsd-anchor"></a>
+<h3><span>selection<wbr/>Placement</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selection<wbr/>Placement</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">SelectionPlacement</span><span class="tsd-signature-symbol"> = &#39;none&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Placement of the selection control.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L100">libs/core/src/lib/tree/tree.component.ts:100</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="navigationIndicator" class="tsd-anchor"></a>
+<h3><span>navigation<wbr/>Indicator</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="navigationIndicator.navigationIndicator-1"><span class="tsd-signature-symbol">get</span> navigationIndicator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-signature tsd-kind-icon" id="navigationIndicator.navigationIndicator-2"><span class="tsd-signature-symbol">set</span> navigationIndicator<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L122">libs/core/src/lib/tree/tree.component.ts:122</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the Tree component has navigation indicators.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L113">libs/core/src/lib/tree/tree.component.ts:113</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="treeItemDef" class="tsd-anchor"></a>
+<h3><span>tree<wbr/>Item<wbr/>Def</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="treeItemDef.treeItemDef-1"><span class="tsd-signature-symbol">get</span> treeItemDef<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+<li class="tsd-signature tsd-kind-icon" id="treeItemDef.treeItemDef-2"><span class="tsd-signature-symbol">set</span> treeItemDef<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L153">libs/core/src/lib/tree/tree.component.ts:153</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Tree item template definition.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">TreeItemDefDirective</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TreeItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/tree/tree.component.ts#L145">libs/core/src/lib/tree/tree.component.ts:145</a></li></ul></aside></li></ul></section></section></div>

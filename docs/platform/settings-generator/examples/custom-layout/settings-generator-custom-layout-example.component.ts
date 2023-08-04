@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     inject,
     QueryList,
@@ -11,15 +12,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DestroyedService } from '@fundamental-ngx/cdk';
 import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { AnyDynamicFormFieldItem } from '@fundamental-ngx/platform/form';
 import {
     BaseSettingsGeneratorLayout,
     BaseSettingsModel,
-    SettingsModel,
+    SettingsGeneratorComponent,
     SettingsGeneratorLayoutAccessorService,
-    SettingsGeneratorComponent
+    SettingsModel
 } from '@fundamental-ngx/platform/settings-generator';
 import { take } from 'rxjs/operators';
 
@@ -31,11 +31,10 @@ import { take } from 'rxjs/operators';
                 <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
             </fd-tab>
         </fd-tab-list>
-    `,
-    providers: [DestroyedService]
+    `
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
-    protected _destroy$ = inject(DestroyedService);
+    protected _destroyRef = inject(DestroyRef);
 
     @ViewChildren(TabPanelComponent)
     tabPanels: QueryList<TabPanelComponent>;

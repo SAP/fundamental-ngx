@@ -1,0 +1,30 @@
+<div class="fd-tsdoc-container">
+<section class="tsd-panel">
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="generateApprovalFlowGraph"><span class="tsd-kind-call-signature">generate<wbr/>Approval<wbr/>Flow<wbr/>Graph</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">nodes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-interface">ApprovalFlowGraph</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Algorithm in short:</p>
+<ol>
+<li>Find all possible paths (longest path length = amount of the columns in the graph)</li>
+<li>Trim paths (remove blank nodes at the end of the paths)</li>
+<li>Make all paths the same length (= longest path length) to make every unique node be present at the same index across all paths</li>
+<li>Sort paths by their likeness between each other to avoid paths crossing</li>
+<li>Remove &quot;duplicate&quot; nodes in paths (make every unique node be present only once across all paths)</li>
+<li>Remove empty paths</li>
+<li>Transform paths into the columns</li>
+<li>Trim columns (remove space nodes at the end of columns)</li>
+<li>Remove columns which contain only blank and empty nodes</li>
+<li>Transform columns into the graph columns</li>
+</ol>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">nodes</span>: <span class="tsd-signature-type tsd-kind-type-alias">ApprovalGraphNode</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-interface">ApprovalFlowGraph</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/approval-flow/approval-flow-graph.ts#L40">platform/src/lib/approval-flow/approval-flow-graph.ts:40</a></li></ul></aside></li></ul></section></div>

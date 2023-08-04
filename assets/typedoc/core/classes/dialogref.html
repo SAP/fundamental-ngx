@@ -1,279 +1,178 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>Reference to a dialog component
-				It can be injected into the content component through the constructor.
-			For a template, it is declared as part of the implicit context, see examples.</p>
-		</div>
-	</div>
-</section>
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>T = <span class="tsd-signature-type">any</span></h4>
-		</li>
-		<li>
-			<h4>P = <span class="tsd-signature-type">any</span></h4>
-		</li>
-	</ul>
-</section>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Reference to a dialog component
+It can be injected into the content component through the constructor.
+For a template, it is declared as part of the implicit context, see examples.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section> 
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li>
+<li>
+<h4><span class="tsd-kind-type-parameter">P</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">DialogRefBase</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">DialogRef</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="afterClosed" class="tsd-anchor"></a>
-		<h3>after<wbr>Closed</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">after<wbr>Closed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DialogRefBase</span>.<span>afterClosed</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L17">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:17</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Observable that is triggered when the dialog is closed.
-				On close a <em>result</em> is passed back. On dismiss, an <em>error</em> is returned instead.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="afterLoaded" class="tsd-anchor"></a>
-		<h3>after<wbr>Loaded</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">after<wbr>Loaded<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DialogRefBase</span>.<span>afterLoaded</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L20">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:20</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Observable that is triggered when the modal view is initialised.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="data" class="tsd-anchor"></a>
-		<h3>data</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DialogRefBase</span>.<span>data</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L23">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:23</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Data passed from the calling component to the content.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="onHide" class="tsd-anchor"></a>
-		<h3>on<wbr>Hide</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Hide<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L20">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:20</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Observable that is triggered whenever the dialog should be visually hidden or visible.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="onLoading" class="tsd-anchor"></a>
-		<h3>on<wbr>Loading</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L23">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:23</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Observable that is triggered whenever the dialog should be displayed in loading state.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="close" class="tsd-anchor"></a>
-		<h3>close</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span>result<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>DialogRefBase</span>.<span>close</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L29">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:29</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Closes the dialog and passes the argument to the afterClosed observable.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> result: <span class="tsd-signature-type">P</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Value passed back to the observable as a result.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="dismiss" class="tsd-anchor"></a>
-		<h3>dismiss</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">dismiss<span class="tsd-signature-symbol">(</span>reason<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>DialogRefBase</span>.<span>dismiss</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L38">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:38</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Dismisses the dialog and passes the argument to the afterClosed observable as an error.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> reason: <span class="tsd-signature-type">any</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Value passed back to the observable as an error.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="hide" class="tsd-anchor"></a>
-		<h3>hide</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">hide<span class="tsd-signature-symbol">(</span>isHidden<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L34">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:34</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Visually hides the dialog.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>isHidden: <span class="tsd-signature-type">boolean</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Value used to determine if dialog window should be hidden or visible.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="loaded" class="tsd-anchor"></a>
-		<h3>loaded</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">loaded<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>DialogRefBase</span>.<span>loaded</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L43">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:43</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Function that is called after the view of modal is initialised.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="loading" class="tsd-anchor"></a>
-		<h3>loading</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">loading<span class="tsd-signature-symbol">(</span>isLoading<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L42">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:42</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Displays the dialog in loading state.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>isLoading: <span class="tsd-signature-type">boolean</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Value used to determine if dialog window should be displayed in loading state.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">DialogRefBase</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">DialogRef</span></li></ul></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="afterClosed" class="tsd-anchor"></a>
+<h3><span>after<wbr/>Closed</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">after<wbr/>Closed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Observable that is triggered when the dialog is closed.
+On close a <em>result</em> is passed back. On dismiss, an <em>error</em> is returned instead.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DialogRefBase.html">DialogRefBase</a>.<a href="DialogRefBase.html#afterClosed">afterClosed</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L17">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:17</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="afterLoaded" class="tsd-anchor"></a>
+<h3><span>after<wbr/>Loaded</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">after<wbr/>Loaded</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Observable that is triggered when the modal view is initialised.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DialogRefBase.html">DialogRefBase</a>.<a href="DialogRefBase.html#afterLoaded">afterLoaded</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L20">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:20</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="data" class="tsd-anchor"></a>
+<h3><span>data</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">data</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-parameter">T</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Data passed from the calling component to the content.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DialogRefBase.html">DialogRefBase</a>.<a href="DialogRefBase.html#data">data</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L23">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:23</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="onHide" class="tsd-anchor"></a>
+<h3><span>on<wbr/>Hide</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">on<wbr/>Hide</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Observable that is triggered whenever the dialog should be visually hidden or visible.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L20">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:20</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="onLoading" class="tsd-anchor"></a>
+<h3><span>on<wbr/>Loading</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">on<wbr/>Loading</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Observable that is triggered whenever the dialog should be displayed in loading state.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L23">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:23</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="close" class="tsd-anchor"></a>
+<h3><span>close</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="close.close-1"><span class="tsd-kind-call-signature">close</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">result</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Closes the dialog and passes the argument to the afterClosed observable.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">result</span>: <span class="tsd-signature-type tsd-kind-type-parameter">P</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Value passed back to the observable as a result.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DialogRefBase.html">DialogRefBase</a>.<a href="DialogRefBase.html#close">close</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L29">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:29</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="dismiss" class="tsd-anchor"></a>
+<h3><span>dismiss</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="dismiss.dismiss-1"><span class="tsd-kind-call-signature">dismiss</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">reason</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Dismisses the dialog and passes the argument to the afterClosed observable as an error.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">reason</span>: <span class="tsd-signature-type">any</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Value passed back to the observable as an error.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DialogRefBase.html">DialogRefBase</a>.<a href="DialogRefBase.html#dismiss">dismiss</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L38">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:38</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="hide" class="tsd-anchor"></a>
+<h3><span>hide</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="hide.hide-1"><span class="tsd-kind-call-signature">hide</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">isHidden</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Visually hides the dialog.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">isHidden</span>: <span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Value used to determine if dialog window should be hidden or visible.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L34">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:34</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="loaded" class="tsd-anchor"></a>
+<h3><span>loaded</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="loaded.loaded-1"><span class="tsd-kind-call-signature">loaded</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Function that is called after the view of modal is initialised.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DialogRefBase.html">DialogRefBase</a>.<a href="DialogRefBase.html#loaded">loaded</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/base/dialog-ref-base.class.ts#L43">libs/core/src/lib/dialog/base/dialog-ref-base.class.ts:43</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="loading" class="tsd-anchor"></a>
+<h3><span>loading</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="loading.loading-1"><span class="tsd-kind-call-signature">loading</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">isLoading</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Displays the dialog in loading state.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">isLoading</span>: <span class="tsd-signature-type">boolean</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Value used to determine if dialog window should be displayed in loading state.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/dialog/utils/dialog-ref.class.ts#L42">libs/core/src/lib/dialog/utils/dialog-ref.class.ts:42</a></li></ul></aside></li></ul></section></section></div>

@@ -1,392 +1,238 @@
 <div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Reset button.</p>
+<p>Used to reset resettable state by click.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">FiltersComponent</span>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">FiltersComponent</span></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">Resettable</span></li>
-		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="ACTIVE_STEP" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> ACTIVE_<wbr>STEP</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">ACTIVE_<wbr>STEP<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">typeof ACTIVE_STEP</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L51">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:51</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Reference to the available steps</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="activeFilter" class="tsd-anchor"></a>
-		<h3>active<wbr>Filter</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">active<wbr>Filter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TableViewSettingsFilterComponent</span><span class="tsd-signature-symbol"> = null</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L66">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:66</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Currently selected filter to drill down</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="activeFilterColumnKey" class="tsd-anchor"></a>
-		<h3>active<wbr>Filter<wbr>Column<wbr>Key</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">active<wbr>Filter<wbr>Column<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = null</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L69">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:69</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Table column key associated with the currently selected filter</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="activeFilterStepView" class="tsd-anchor"></a>
-		<h3>active<wbr>Filter<wbr>Step<wbr>View</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">active<wbr>Filter<wbr>Step<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FiltersViewStep</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L95">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:95</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Current step component to render</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="activeStep" class="tsd-anchor"></a>
-		<h3>active<wbr>Step</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">active<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ACTIVE_STEP</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L63">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:63</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Currently selected step</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="columns" class="tsd-anchor"></a>
-		<h3>columns</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">columns<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TableColumn</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L57">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:57</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Table columns. Used to retrieve a column key</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dialogRef" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> dialog<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">dialog<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DialogRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FiltersDialogData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="filterBy" class="tsd-anchor"></a>
-		<h3>filter<wbr>By</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">filter<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CollectionFilter</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L54">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:54</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Currently applied filters rules</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isResetAvailable_" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Reset<wbr>Available$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Reset<wbr>Available$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>Resettable</span>.<span>isResetAvailable$</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L74">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:74</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Indicates when reset command is available</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="viewSettingsFilters" class="tsd-anchor"></a>
-		<h3>view<wbr>Settings<wbr>Filters</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">view<wbr>Settings<wbr>Filters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TableViewSettingsFilterComponent</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L60">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:60</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Declared filters options</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="setActiveFilterStepView" class="tsd-anchor"></a>
-		<h3>set<wbr>Active<wbr>Filter<wbr>Step<wbr>View</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> setActiveFilterStepView<span class="tsd-signature-symbol">(</span>view<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FiltersViewStep</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L89">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:89</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Current FiltersViewStep component to render.
-							The fd-dialog component relies on named projected content.
-							It means we must define all projected dialog options in the same view withing fd-dialog.
-							In order to keep filters steps as separate components
-							and do not break dialog content we are using this ViewChild hook
-							keeping reference to the conditionally rendered active step.
-						Each &quot;FilterStepView&quot; has template refs for dialog.title and dialog.body template</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>view: <span class="tsd-signature-type">FiltersViewStep</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="applyFilter" class="tsd-anchor"></a>
-		<h3>apply<wbr>Filter</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">apply<wbr>Filter<span class="tsd-signature-symbol">(</span>filter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CollectionFilter</span>, __namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableViewSettingsFilterComponent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L134">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:134</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Apply filter rule changes and emit the event</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>filter: <span class="tsd-signature-type">CollectionFilter</span></h5>
-					</li>
-					<li>
-						<h5>__namedParameters: <span class="tsd-signature-type">TableViewSettingsFilterComponent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="cancel" class="tsd-anchor"></a>
-		<h3>cancel</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">cancel<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L165">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:165</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Close dialog</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="confirm" class="tsd-anchor"></a>
-		<h3>confirm</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">confirm<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L170">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:170</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Confirm changes and close dialog</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="goToFilters" class="tsd-anchor"></a>
-		<h3>go<wbr>ToFilters</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">go<wbr>ToFilters<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L128">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:128</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Go back to the top filters list</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngAfterViewInit" class="tsd-anchor"></a>
-		<h3>ng<wbr>After<wbr>View<wbr>Init</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>After<wbr>View<wbr>Init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of AfterViewInit.ngAfterViewInit</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L113">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:113</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Need it to keep activeFilterStepView rendering up to date</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="reset" class="tsd-anchor"></a>
-		<h3>reset</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">reset<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>Resettable</span>.<span>reset</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L158">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:158</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Reset changes to the initial state</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="selectFilter" class="tsd-anchor"></a>
-		<h3>select<wbr>Filter</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">select<wbr>Filter<span class="tsd-signature-symbol">(</span>filter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectableFilter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L118">libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:118</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Select filter to drill down</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>filter: <span class="tsd-signature-type">SelectableFilter</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-interface">Resettable</span></li>
+<li><span class="tsd-signature-type ">AfterViewInit</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ACTIVE_STEP" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>ACTIVE_<wbr/>STEP</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">ACTIVE_<wbr/>STEP</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type tsd-kind-enum">ACTIVE_STEP</span><span class="tsd-signature-symbol"> = ACTIVE_STEP</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Reference to the available steps</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L51">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:51</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="activeFilter" class="tsd-anchor"></a>
+<h3><span>active<wbr/>Filter</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">active<wbr/>Filter</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-class">TableViewSettingsFilterComponent</span><span class="tsd-signature-symbol"> = null</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Currently selected filter to drill down</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L66">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:66</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="activeFilterColumnKey" class="tsd-anchor"></a>
+<h3><span>active<wbr/>Filter<wbr/>Column<wbr/>Key</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">active<wbr/>Filter<wbr/>Column<wbr/>Key</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = null</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Table column key associated with the currently selected filter</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L69">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:69</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="activeFilterStepView" class="tsd-anchor"></a>
+<h3><span>active<wbr/>Filter<wbr/>Step<wbr/>View</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">active<wbr/>Filter<wbr/>Step<wbr/>View</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">FiltersViewStep</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Current step component to render</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L95">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:95</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="activeStep" class="tsd-anchor"></a>
+<h3><span>active<wbr/>Step</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">active<wbr/>Step</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-enum">ACTIVE_STEP</span><span class="tsd-signature-symbol"> = ACTIVE_STEP.SELECT_FILTER</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Currently selected step</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L63">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:63</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="columns" class="tsd-anchor"></a>
+<h3><span>columns</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">columns</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-class">TableColumn</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Table columns. Used to retrieve a column key</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L57">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:57</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dialogRef" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>dialog<wbr/>Ref</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">dialog<wbr/>Ref</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DialogRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">FiltersDialogData</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L99">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:99</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="filterBy" class="tsd-anchor"></a>
+<h3><span>filter<wbr/>By</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">filter<wbr/>By</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">CollectionFilter</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Currently applied filters rules</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L54">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:54</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isResetAvailable_" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>is<wbr/>Reset<wbr/>Available$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">is<wbr/>Reset<wbr/>Available$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Indicates when reset command is available</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/Resettable.html">Resettable</a>.<a href="../interfaces/Resettable.html#isResetAvailable_">isResetAvailable$</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L74">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:74</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="viewSettingsFilters" class="tsd-anchor"></a>
+<h3><span>view<wbr/>Settings<wbr/>Filters</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">view<wbr/>Settings<wbr/>Filters</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-class">TableViewSettingsFilterComponent</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Declared filters options</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L60">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:60</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setActiveFilterStepView" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Active<wbr/>Filter<wbr/>Step<wbr/>View</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setActiveFilterStepView.setActiveFilterStepView-1"><span class="tsd-signature-symbol">set</span> setActiveFilterStepView<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">view</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Current FiltersViewStep component to render.
+The fd-dialog component relies on named projected content.
+It means we must define all projected dialog options in the same view withing fd-dialog.
+In order to keep filters steps as separate components
+and do not break dialog content we are using this ViewChild hook
+keeping reference to the conditionally rendered active step.
+Each &quot;FilterStepView&quot; has template refs for dialog.title and dialog.body template</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">view</span>: <span class="tsd-signature-type tsd-kind-interface">FiltersViewStep</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L88">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:88</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="applyFilter" class="tsd-anchor"></a>
+<h3><span>apply<wbr/>Filter</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="applyFilter.applyFilter-1"><span class="tsd-kind-call-signature">apply<wbr/>Filter</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">filter</span>, <span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Apply filter rule changes and emit the event</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">filter</span>: <span class="tsd-signature-type tsd-kind-type-alias">CollectionFilter</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">__namedParameters</span>: <span class="tsd-signature-type tsd-kind-class">TableViewSettingsFilterComponent</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L134">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:134</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="cancel" class="tsd-anchor"></a>
+<h3><span>cancel</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="cancel.cancel-1"><span class="tsd-kind-call-signature">cancel</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Close dialog</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L165">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:165</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="confirm" class="tsd-anchor"></a>
+<h3><span>confirm</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="confirm.confirm-1"><span class="tsd-kind-call-signature">confirm</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Confirm changes and close dialog</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L170">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:170</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="goToFilters" class="tsd-anchor"></a>
+<h3><span>go<wbr/>To<wbr/>Filters</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="goToFilters.goToFilters-1"><span class="tsd-kind-call-signature">go<wbr/>To<wbr/>Filters</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Go back to the top filters list</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L128">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:128</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ngAfterViewInit" class="tsd-anchor"></a>
+<h3><span>ng<wbr/>After<wbr/>View<wbr/>Init</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="ngAfterViewInit.ngAfterViewInit-1"><span class="tsd-kind-call-signature">ng<wbr/>After<wbr/>View<wbr/>Init</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Need it to keep activeFilterStepView rendering up to date</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of AfterViewInit.ngAfterViewInit</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L113">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:113</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="reset" class="tsd-anchor"></a>
+<h3><span>reset</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="reset.reset-1"><span class="tsd-kind-call-signature">reset</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Reset changes to the initial state</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/Resettable.html">Resettable</a>.<a href="../interfaces/Resettable.html#reset">reset</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L158">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:158</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectFilter" class="tsd-anchor"></a>
+<h3><span>select<wbr/>Filter</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="selectFilter.selectFilter-1"><span class="tsd-kind-call-signature">select<wbr/>Filter</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">filter</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Select filter to drill down</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">filter</span>: <span class="tsd-signature-type tsd-kind-interface">SelectableFilter</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts#L118">platform/src/lib/table/components/table-view-settings-dialog/filtering/filters.component.ts:118</a></li></ul></aside></li></ul></section></section></div>

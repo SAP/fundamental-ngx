@@ -1,625 +1,321 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<dl class="tsd-comment-tags">
-			<dt class="fd-tsd-comment-tag-pill">description</dt>
-			<dd><p>Form Generator component represents a high-level component
-				which includes @see FormGroup inside.</p>
-			</dd>
-		</dl>
-	</div>
-</section>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Form Generator component represents a high-level component
+which includes</p>
+</dd><dt class="fd-tsd-comment-tag-pill">See</dt><dd><p>FormGroup inside.</p>
+</dd></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">FormGeneratorComponent</span>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">FormGeneratorComponent</span></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-		<li><span class="tsd-signature-type">OnChanges</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="columnLayout" class="tsd-anchor"></a>
-		<h3>column<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L131">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:131</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Specify the column layout in the format <code>XLn-Ln-Mn-Sn</code>
-						where n is the number of columns and can be different for each size.
-						eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L,
-					and M sizes and single-column layout for S size.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="fieldColumnLayout" class="tsd-anchor"></a>
-		<h3>field<wbr>Column<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">field<wbr>Column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnLayout</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L167">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:167</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines field&#39;s column layout.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="fields" class="tsd-anchor"></a>
-		<h3>fields</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormGeneratorFieldComponent</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L223">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:223</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Inner form fields</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="form" class="tsd-anchor"></a>
-		<h3>form</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DynamicFormGroup</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L236">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:236</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Dynamically generated form. @see FormGeneratorService</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formControlItems" class="tsd-anchor"></a>
-		<h3>form<wbr>Control<wbr>Items</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Control<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DynamicFormGroupControl</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L240">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:240</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>List of the form controls.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formCreated" class="tsd-anchor"></a>
-		<h3>form<wbr>Created</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Created<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormGroup</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L196">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:196</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Event which notifies parent component that the form has been successfully created
-					and all controls are in place.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formGroup" class="tsd-anchor"></a>
-		<h3>form<wbr>Group</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FormGroupDirective</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L219">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:219</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Inner form group directive.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formLoading" class="tsd-anchor"></a>
-		<h3>form<wbr>Loading</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Loading<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L250">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:250</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Flag representing that form is loading</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formName" class="tsd-anchor"></a>
-		<h3>form<wbr>Name</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L86">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:86</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Unique form name</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formSubmitted" class="tsd-anchor"></a>
-		<h3>form<wbr>Submitted</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Submitted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L203">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:203</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Event which notifies parent component that the form has been successfully validated
-					and submitted. Contains form</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formSubmittedStatus" class="tsd-anchor"></a>
-		<h3>form<wbr>Submitted<wbr>Status</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Submitted<wbr>Status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubmitFormEventResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L209">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:209</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Event which notifies parent component that the form was submitted.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formSubmittedStatus_" class="tsd-anchor"></a>
-		<h3>form<wbr>Submitted<wbr>Status$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Submitted<wbr>Status$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SubmitFormEventResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L260">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:260</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream of last form submission status.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="formValue_" class="tsd-anchor"></a>
-		<h3>form<wbr>Value$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">form<wbr>Value$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DynamicFormValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L265">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:265</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream of last form submission value.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="gapColumnLayout" class="tsd-anchor"></a>
-		<h3>gap<wbr>Column<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">gap<wbr>Column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnLayout</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L173">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:173</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines gap column layout.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="hideMainTItle" class="tsd-anchor"></a>
-		<h3>hide<wbr>MainTItle</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">hide<wbr>MainTItle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L115">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:115</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether to hide main title. Default is false.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="hint" class="tsd-anchor"></a>
-		<h3>hint</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">hint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HintInput</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L122">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:122</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Hint for the main title</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="inlineColumnLayout" class="tsd-anchor"></a>
-		<h3>inline<wbr>Column<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">inline<wbr>Column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnLayout</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L181">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:181</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Inline column layout</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="labelColumnLayout" class="tsd-anchor"></a>
-		<h3>label<wbr>Column<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">label<wbr>Column<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnLayout</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L161">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:161</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines label&#39;s column layout.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="loading_" class="tsd-anchor"></a>
-		<h3>loading$</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">loading$<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L255">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:255</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stream of form loading state.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="mainTitle" class="tsd-anchor"></a>
-		<h3>main<wbr>Title</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">main<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L109">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:109</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Form main title.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="ngForm" class="tsd-anchor"></a>
-		<h3>ng<wbr>Form</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">ng<wbr>Form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NgForm</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L215">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:215</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Represents the form instance. @see NgForm</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="shouldShowFields" class="tsd-anchor"></a>
-		<h3>should<wbr>Show<wbr>Fields</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">should<wbr>Show<wbr>Fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> = {}</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L245">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:245</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Set of flags representing if particular form item should be visible to the user.</p>
-			</div>
-		</div>
-		<div class="tsd-type-declaration">
-			<h4>Type declaration</h4>
-			<ul class="tsd-parameters">
-				<li class="tsd-parameter-index-signature">
-					<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">boolean</span></h5>
-				</li>
-			</ul>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="unifiedLayout" class="tsd-anchor"></a>
-		<h3>unified<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">unified<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L177">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:177</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether all form items should have identical layout provided for form group.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-		<a name="formFields" class="tsd-anchor"></a>
-		<h3>form<wbr>Fields</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> formFields<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PlatformFormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L226">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:226</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Array of form field controls.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PlatformFormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="formItems" class="tsd-anchor"></a>
-		<h3>form<wbr>Items</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> formItems<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyDynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> formItems<span class="tsd-signature-symbol">(</span>formItems<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DynamicFormItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyDynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L101">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:101</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DynamicFormItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyDynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L93">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:93</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>List of @see DynamicFormItem representing the list of items
-							to be rendered in the form.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>formItems: <span class="tsd-signature-type">DynamicFormItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyDynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="labelLayout" class="tsd-anchor"></a>
-		<h3>label<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> labelLayout<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LabelLayout</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> labelLayout<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">LabelLayout</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L153">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:153</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">LabelLayout</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L140">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:140</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-						<dd><p>Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.</p>
-							<p>Defines form field label placement.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">LabelLayout</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getHintOptions" class="tsd-anchor"></a>
-		<h3>get<wbr>Hint<wbr>Options</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Hint<wbr>Options<span class="tsd-signature-symbol">(</span>guiOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">BaseDynamicFormItemGuiOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DynamicFormItemGuiOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FieldHintOptions</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L443">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:443</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
-							will combine default value of hints for form generator with provided options.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> guiOptions: <span class="tsd-signature-type">BaseDynamicFormItemGuiOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DynamicFormItemGuiOptions</span></h5>
-						<div class="tsd-comment tsd-typography">
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FieldHintOptions</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="refreshStepsVisibility" class="tsd-anchor"></a>
-		<h3>refresh<wbr>Steps<wbr>Visibility</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">refresh<wbr>Steps<wbr>Visibility<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L348">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:348</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Refreshes form items visibility with &#39;when&#39; condition.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="submit" class="tsd-anchor"></a>
-		<h3>submit</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">submit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L426">libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:426</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Programmatically submit form.
-							This method also calls validation for the form items.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">OnDestroy</span></li>
+<li><span class="tsd-signature-type ">OnChanges</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="columnLayout" class="tsd-anchor"></a>
+<h3><span>column<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">column<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Specify the column layout in the format <code>XLn-Ln-Mn-Sn</code>
+where n is the number of columns and can be different for each size.
+eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L,
+and M sizes and single-column layout for S size.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L131">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:131</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="fieldColumnLayout" class="tsd-anchor"></a>
+<h3><span>field<wbr/>Column<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">field<wbr/>Column<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">ColumnLayout</span><span class="tsd-signature-symbol"> = DefaultVerticalFieldLayout</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines field&#39;s column layout.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L167">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:167</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="fields" class="tsd-anchor"></a>
+<h3><span>fields</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">fields</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">FormGeneratorFieldComponent</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Inner form fields</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L223">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:223</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="form" class="tsd-anchor"></a>
+<h3><span>form</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">DynamicFormGroup</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Dynamically generated form.</p>
+</dd><dt class="fd-tsd-comment-tag-pill">See</dt><dd><p>FormGeneratorService</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L236">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:236</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formControlItems" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Control<wbr/>Items</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Control<wbr/>Items</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">DynamicFormGroupControl</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>List of the form controls.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L240">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:240</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formCreated" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Created</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Created</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">DynamicFormGroup</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Event which notifies parent component that the form has been successfully created
+and all controls are in place.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L196">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:196</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formGroup" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Group</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Group</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">FormGroupDirective</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Inner form group directive.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L219">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:219</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formLoading" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Loading</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Loading</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Flag representing that form is loading</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L250">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:250</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formName" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Name</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Unique form name</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L86">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:86</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formSubmitted" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Submitted</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Submitted</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-alias">DynamicFormValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Event which notifies parent component that the form has been successfully validated
+and submitted. Contains form</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L203">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:203</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formSubmittedStatus" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Submitted<wbr/>Status</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Submitted<wbr/>Status</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">SubmitFormEventResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Event which notifies parent component that the form was submitted.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L209">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:209</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formSubmittedStatus_" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Submitted<wbr/>Status$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Submitted<wbr/>Status$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">SubmitFormEventResult</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream of last form submission status.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L260">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:260</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formValue_" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Value$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">form<wbr/>Value$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-alias">DynamicFormValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream of last form submission value.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L265">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:265</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="gapColumnLayout" class="tsd-anchor"></a>
+<h3><span>gap<wbr/>Column<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">gap<wbr/>Column<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">ColumnLayout</span><span class="tsd-signature-symbol"> = DefaultGapLayout</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines gap column layout.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L173">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:173</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="hideMainTItle" class="tsd-anchor"></a>
+<h3><span>hide<wbr/>MainTItle</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">hide<wbr/>MainTItle</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to hide main title. Default is false.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L115">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:115</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="hint" class="tsd-anchor"></a>
+<h3><span>hint</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">hint</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">HintInput</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Hint for the main title</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L122">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:122</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="inlineColumnLayout" class="tsd-anchor"></a>
+<h3><span>inline<wbr/>Column<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">inline<wbr/>Column<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">ColumnLayout</span><span class="tsd-signature-symbol"> = DefaultVerticalFieldLayout</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Inline column layout</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L181">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:181</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="labelColumnLayout" class="tsd-anchor"></a>
+<h3><span>label<wbr/>Column<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">label<wbr/>Column<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">ColumnLayout</span><span class="tsd-signature-symbol"> = DefaultVerticalLabelLayout</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines label&#39;s column layout.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L161">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:161</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="loading_" class="tsd-anchor"></a>
+<h3><span>loading$</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">loading$</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">BehaviorSubject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stream of form loading state.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L255">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:255</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="mainTitle" class="tsd-anchor"></a>
+<h3><span>main<wbr/>Title</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">main<wbr/>Title</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Form main title.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L109">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:109</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ngForm" class="tsd-anchor"></a>
+<h3><span>ng<wbr/>Form</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">ng<wbr/>Form</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">NgForm</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Represents the form instance.</p>
+</dd><dt class="fd-tsd-comment-tag-pill">See</dt><dd><p>NgForm</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L215">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:215</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="shouldShowFields" class="tsd-anchor"></a>
+<h3><span>should<wbr/>Show<wbr/>Fields</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">should<wbr/>Show<wbr/>Fields</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><br/><span>    </span>[<span class="tsd-kind-index-signature">key</span>: <span class="tsd-signature-type">string</span>]<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol"> = {}</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set of flags representing if particular form item should be visible to the user.</p>
+</div></div>
+<div class="tsd-type-declaration">
+<h4>Type declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-index-signature">
+<h5><span class="tsd-signature-symbol">[</span><span class="tsd-kind-parameter">key</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L245">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:245</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="unifiedLayout" class="tsd-anchor"></a>
+<h3><span>unified<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">unified<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether all form items should have identical layout provided for form group.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L177">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:177</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formFields" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Fields</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="formFields.formFields-1"><span class="tsd-signature-symbol">get</span> formFields<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">PlatformFormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Array of form field controls.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">PlatformFormFieldControl</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L226">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:226</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="formItems" class="tsd-anchor"></a>
+<h3><span>form<wbr/>Items</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="formItems.formItems-1"><span class="tsd-signature-symbol">get</span> formItems<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-alias">DynamicFormItem</span><span class="tsd-signature-symbol">[]</span></li>
+<li class="tsd-signature tsd-kind-icon" id="formItems.formItems-2"><span class="tsd-signature-symbol">set</span> formItems<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">formItems</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-alias">DynamicFormItem</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L101">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:101</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">formItems</span>: <span class="tsd-signature-type tsd-kind-type-alias">DynamicFormItem</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>List of</p>
+</dd><dt class="fd-tsd-comment-tag-pill">See</dt><dd><p>DynamicFormItem representing the list of items
+to be rendered in the form.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L92">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:92</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="labelLayout" class="tsd-anchor"></a>
+<h3><span>label<wbr/>Layout</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="labelLayout.labelLayout-1"><span class="tsd-signature-symbol">get</span> labelLayout<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-alias">LabelLayout</span></li>
+<li class="tsd-signature tsd-kind-icon" id="labelLayout.labelLayout-2"><span class="tsd-signature-symbol">set</span> labelLayout<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-alias">LabelLayout</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L153">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:153</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-alias">LabelLayout</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.</p>
+<p>Defines form field label placement.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L139">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:139</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getHintOptions" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Hint<wbr/>Options</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getHintOptions.getHintOptions-1"><span class="tsd-kind-call-signature">get<wbr/>Hint<wbr/>Options</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">guiOptions</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">FieldHintOptions</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">guiOptions</span>: <span class="tsd-signature-type tsd-kind-interface">BaseDynamicFormItemGuiOptions</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">DynamicFormItemGuiOptions</span></h5>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">FieldHintOptions</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
+will combine default value of hints for form generator with provided options.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L443">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:443</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="refreshStepsVisibility" class="tsd-anchor"></a>
+<h3><span>refresh<wbr/>Steps<wbr/>Visibility</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="refreshStepsVisibility.refreshStepsVisibility-1"><span class="tsd-kind-call-signature">refresh<wbr/>Steps<wbr/>Visibility</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Refreshes form items visibility with &#39;when&#39; condition.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L348">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:348</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="submit" class="tsd-anchor"></a>
+<h3><span>submit</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="submit.submit-1"><span class="tsd-kind-call-signature">submit</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Programmatically submit form.
+This method also calls validation for the form items.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/form-generator/form-generator.component.ts#L426">platform/src/lib/form/form-generator/form-generator/form-generator.component.ts:426</a></li></ul></aside></li></ul></section></section></div>

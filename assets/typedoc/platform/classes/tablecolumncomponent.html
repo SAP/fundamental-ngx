@@ -1,464 +1,270 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>The component that represents a table column.</p>
-			<pre><code class="language-html"><span style="color: #800000">&lt;fdp-column</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">name</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;name&quot;</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">key</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;name&quot;</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">label</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;Name&quot;</span>
-<span style="color: #000000"> </span><span style="color: #CD3131">align</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;start&quot;</span><span style="color: #800000">&gt;</span>
-<span style="color: #800000">&lt;/fdp-column&gt;</span>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The component that represents a table column.</p>
+<pre><code class="language-html"><span class="hl-4">&lt;</span><span class="hl-5">fdp-column</span><br/><span class="hl-2"> </span><span class="hl-6">name</span><span class="hl-2">=</span><span class="hl-7">&quot;name&quot;</span><br/><span class="hl-2"> </span><span class="hl-6">key</span><span class="hl-2">=</span><span class="hl-7">&quot;name&quot;</span><br/><span class="hl-2"> </span><span class="hl-6">label</span><span class="hl-2">=</span><span class="hl-7">&quot;Name&quot;</span><br/><span class="hl-2"> </span><span class="hl-9">align</span><span class="hl-2">=</span><span class="hl-7">&quot;start&quot;</span><span class="hl-4">&gt;</span><br/><span class="hl-4">&lt;/</span><span class="hl-5">fdp-column</span><span class="hl-4">&gt;</span><br/><br/><span class="hl-4">&lt;</span><span class="hl-5">fdp-column</span><br/><span class="hl-2"> </span><span class="hl-6">name</span><span class="hl-2">=</span><span class="hl-7">&quot;price&quot;</span><br/><span class="hl-2"> </span><span class="hl-6">key</span><span class="hl-2">=</span><span class="hl-7">&quot;price.value&quot;</span><span class="hl-4">&gt;</span><br/><span class="hl-2"> </span><span class="hl-4">&lt;</span><span class="hl-5">fdp-table-header</span><span class="hl-2"> </span><span class="hl-6">*fdpHeaderCellDef</span><span class="hl-4">&gt;</span><span class="hl-2">Price</span><span class="hl-4">&lt;/</span><span class="hl-5">fdp-table-header</span><span class="hl-4">&gt;</span><br/><span class="hl-2"> </span><span class="hl-4">&lt;</span><span class="hl-5">fdp-table-cell</span><span class="hl-2"> </span><span class="hl-6">*fdpCellDef</span><span class="hl-2">=</span><span class="hl-7">&quot;let item&quot;</span><span class="hl-4">&gt;</span><br/><span class="hl-2">  {{item.price.value}} {{item.price.currency}}</span><br/><span class="hl-2"> </span><span class="hl-4">&lt;/</span><span class="hl-5">fdp-table-cell</span><span class="hl-4">&gt;</span><br/><span class="hl-4">&lt;/</span><span class="hl-5">fdp-column</span><span class="hl-4">&gt;</span>
 </code></pre>
-		</div>
-		<p><fdp-column
-			name="price"
-			key="price.value">
-			&lt;fdp-table-header *fdpHeaderCellDef&gt;Price</fdp-table-header>
-			&lt;fdp-table-cell *fdpCellDef=&quot;let item&quot;&gt;
-			{{item.price.value}} {{item.price.currency}}
-			</fdp-table-cell>
-		</fdp-column></p>
-		<pre><code>
-</code></pre>
-	</div>
-</section>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">TableColumn</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">TableColumnComponent</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">TableColumn</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">TableColumnComponent</span></li></ul></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">OnChanges</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="align" class="tsd-anchor"></a>
-		<h3>align</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">align<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ColumnAlignValue</span><span class="tsd-signature-symbol"> = &#x27;start&#x27;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>align</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L69">libs/platform/src/lib/table/components/table-column/table-column.component.ts:69</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Cell text alignment.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="applyText" class="tsd-anchor"></a>
-		<h3>apply<wbr>Text</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">apply<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>applyText</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L118">libs/platform/src/lib/table/components/table-column/table-column.component.ts:118</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="columnCellTemplate" class="tsd-anchor"></a>
-		<h3>column<wbr>Cell<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">column<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>columnCellTemplate</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L125">libs/platform/src/lib/table/components/table-column/table-column.component.ts:125</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column cell template</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="dataType" class="tsd-anchor"></a>
-		<h3>data<wbr>Type</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">data<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FilterableColumnDataType</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>dataType</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L88">libs/platform/src/lib/table/components/table-column/table-column.component.ts:88</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Data type the column represents. Default is &#39;string&#39;</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="editableColumnCellTemplate" class="tsd-anchor"></a>
-		<h3>editable<wbr>Column<wbr>Cell<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">editable<wbr>Column<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>editableColumnCellTemplate</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L128">libs/platform/src/lib/table/components/table-column/table-column.component.ts:128</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Editable column cell template.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="endFreezable" class="tsd-anchor"></a>
-		<h3>end<wbr>Freezable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">end<wbr>Freezable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>endFreezable</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L100">libs/platform/src/lib/table/components/table-column/table-column.component.ts:100</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Toggles freeze feature for the column.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="filterable" class="tsd-anchor"></a>
-		<h3>filterable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">filterable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>filterable</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L77">libs/platform/src/lib/table/components/table-column/table-column.component.ts:77</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Toggles filter feature for the column.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="freezable" class="tsd-anchor"></a>
-		<h3>freezable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">freezable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>freezable</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L96">libs/platform/src/lib/table/components/table-column/table-column.component.ts:96</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Toggles freeze feature for the column.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="groupable" class="tsd-anchor"></a>
-		<h3>groupable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">groupable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>groupable</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L92">libs/platform/src/lib/table/components/table-column/table-column.component.ts:92</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Toggles grouping feature for the column.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="headerCellPopoverTemplate" class="tsd-anchor"></a>
-		<h3>header<wbr>Cell<wbr>Popover<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">header<wbr>Cell<wbr>Popover<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>headerCellPopoverTemplate</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L134">libs/platform/src/lib/table/components/table-column/table-column.component.ts:134</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column header popover template.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="headerCellTemplate" class="tsd-anchor"></a>
-		<h3>header<wbr>Cell<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">header<wbr>Cell<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>headerCellTemplate</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L131">libs/platform/src/lib/table/components/table-column/table-column.component.ts:131</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column header template</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="headerOverflows" class="tsd-anchor"></a>
-		<h3>header<wbr>Overflows</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">header<wbr>Overflows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>headerOverflows</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L137">libs/platform/src/lib/table/components/table-column/table-column.component.ts:137</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Stores information for the header cell if the ellipsis are visible after the column resize</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="key" class="tsd-anchor"></a>
-		<h3>key</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>key</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L62">libs/platform/src/lib/table/components/table-column/table-column.component.ts:62</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column data accessor.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="label" class="tsd-anchor"></a>
-		<h3>label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>label</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L66">libs/platform/src/lib/table/components/table-column/table-column.component.ts:66</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column header label.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="name" class="tsd-anchor"></a>
-		<h3>name</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>name</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L58">libs/platform/src/lib/table/components/table-column/table-column.component.ts:58</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column unique identifier.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="noWrap" class="tsd-anchor"></a>
-		<h3>no<wbr>Wrap</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">no<wbr>Wrap<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>noWrap</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L114">libs/platform/src/lib/table/components/table-column/table-column.component.ts:114</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the text should wrap, when text is too long for 1 line</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="responsiveState" class="tsd-anchor"></a>
-		<h3>responsive<wbr>State</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">responsive<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdpColumnResponsiveState</span><span class="tsd-signature-symbol"> = &#x27;visible&#x27;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>responsiveState</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L170">libs/platform/src/lib/table/components/table-column/table-column.component.ts:170</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Responsive state of the column.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="role" class="tsd-anchor"></a>
-		<h3>role</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">role<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"cell"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"rowheader"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"gridcell"</span><span class="tsd-signature-symbol"> = &#x27;gridcell&#x27;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>role</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L122">libs/platform/src/lib/table/components/table-column/table-column.component.ts:122</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Column role attribute.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="sortable" class="tsd-anchor"></a>
-		<h3>sortable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">sortable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>sortable</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L73">libs/platform/src/lib/table/components/table-column/table-column.component.ts:73</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Toggles sort feature for the column.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="visible" class="tsd-anchor"></a>
-		<h3>visible</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableColumn</span>.<span>visible</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L81">libs/platform/src/lib/table/components/table-column/table-column.component.ts:81</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Initial visibility state of the column. Default <code>true</code>.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="fdpEditableCellDef" class="tsd-anchor"></a>
-		<h3>fdp<wbr>Editable<wbr>Cell<wbr>Def</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> fdpEditableCellDef<span class="tsd-signature-symbol">(</span>fdpEditableCellDef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdpEditableCellDef</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L153">libs/platform/src/lib/table/components/table-column/table-column.component.ts:153</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Editable column cell template definition.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>fdpEditableCellDef: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdpEditableCellDef</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-		<a name="width" class="tsd-anchor"></a>
-		<h3>width</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> width<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> width<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L108">libs/platform/src/lib/table/components/table-column/table-column.component.ts:108</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Width of the column cells.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L104">libs/platform/src/lib/table/components/table-column/table-column.component.ts:104</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Width of the column cells.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">string</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">OnInit</span></li>
+<li><span class="tsd-signature-type ">OnChanges</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="align" class="tsd-anchor"></a>
+<h3><span>align</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">align</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">ColumnAlignValue</span><span class="tsd-signature-symbol"> = &#39;start&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Cell text alignment.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#align">align</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L69">platform/src/lib/table/components/table-column/table-column.component.ts:69</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="applyText" class="tsd-anchor"></a>
+<h3><span>apply<wbr/>Text</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">apply<wbr/>Text</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to apply fd-table-text (text-shadow) to the cell content, if disabled noWrap has no effect.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#applyText">applyText</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L118">platform/src/lib/table/components/table-column/table-column.component.ts:118</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="columnCellTemplate" class="tsd-anchor"></a>
+<h3><span>column<wbr/>Cell<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">column<wbr/>Cell<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column cell template</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#columnCellTemplate">columnCellTemplate</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L125">platform/src/lib/table/components/table-column/table-column.component.ts:125</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dataType" class="tsd-anchor"></a>
+<h3><span>data<wbr/>Type</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">data<wbr/>Type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-enum">FilterableColumnDataType</span><span class="tsd-signature-symbol"> = FilterableColumnDataType.STRING</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Data type the column represents. Default is &#39;string&#39;</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#dataType">dataType</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L88">platform/src/lib/table/components/table-column/table-column.component.ts:88</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="editableColumnCellTemplate" class="tsd-anchor"></a>
+<h3><span>editable<wbr/>Column<wbr/>Cell<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">editable<wbr/>Column<wbr/>Cell<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Editable column cell template.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#editableColumnCellTemplate">editableColumnCellTemplate</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L128">platform/src/lib/table/components/table-column/table-column.component.ts:128</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="endFreezable" class="tsd-anchor"></a>
+<h3><span>end<wbr/>Freezable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">end<wbr/>Freezable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggles freeze feature for the column.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#endFreezable">endFreezable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L100">platform/src/lib/table/components/table-column/table-column.component.ts:100</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="filterable" class="tsd-anchor"></a>
+<h3><span>filterable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">filterable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggles filter feature for the column.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#filterable">filterable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L77">platform/src/lib/table/components/table-column/table-column.component.ts:77</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="freezable" class="tsd-anchor"></a>
+<h3><span>freezable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">freezable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggles freeze feature for the column.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#freezable">freezable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L96">platform/src/lib/table/components/table-column/table-column.component.ts:96</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="groupable" class="tsd-anchor"></a>
+<h3><span>groupable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">groupable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggles grouping feature for the column.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#groupable">groupable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L92">platform/src/lib/table/components/table-column/table-column.component.ts:92</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="headerCellPopoverTemplate" class="tsd-anchor"></a>
+<h3><span>header<wbr/>Cell<wbr/>Popover<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">header<wbr/>Cell<wbr/>Popover<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column header popover template.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#headerCellPopoverTemplate">headerCellPopoverTemplate</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L134">platform/src/lib/table/components/table-column/table-column.component.ts:134</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="headerCellTemplate" class="tsd-anchor"></a>
+<h3><span>header<wbr/>Cell<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">header<wbr/>Cell<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column header template</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#headerCellTemplate">headerCellTemplate</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L131">platform/src/lib/table/components/table-column/table-column.component.ts:131</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="headerOverflows" class="tsd-anchor"></a>
+<h3><span>header<wbr/>Overflows</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">header<wbr/>Overflows</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Stores information for the header cell if the ellipsis are visible after the column resize</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#headerOverflows">headerOverflows</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L137">platform/src/lib/table/components/table-column/table-column.component.ts:137</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="key" class="tsd-anchor"></a>
+<h3><span>key</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">key</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column data accessor.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#key">key</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L62">platform/src/lib/table/components/table-column/table-column.component.ts:62</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="label" class="tsd-anchor"></a>
+<h3><span>label</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">label</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column header label.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#label">label</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L66">platform/src/lib/table/components/table-column/table-column.component.ts:66</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="name" class="tsd-anchor"></a>
+<h3><span>name</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column unique identifier.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#name">name</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L58">platform/src/lib/table/components/table-column/table-column.component.ts:58</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="noWrap" class="tsd-anchor"></a>
+<h3><span>no<wbr/>Wrap</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">no<wbr/>Wrap</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the text should wrap, when text is too long for 1 line</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#noWrap">noWrap</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L114">platform/src/lib/table/components/table-column/table-column.component.ts:114</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="responsiveState" class="tsd-anchor"></a>
+<h3><span>responsive<wbr/>State</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">responsive<wbr/>State</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">FdpColumnResponsiveState</span><span class="tsd-signature-symbol"> = &#39;visible&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Responsive state of the column.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#responsiveState">responsiveState</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L170">platform/src/lib/table/components/table-column/table-column.component.ts:170</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="role" class="tsd-anchor"></a>
+<h3><span>role</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">role</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;cell&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;rowheader&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;gridcell&quot;</span><span class="tsd-signature-symbol"> = &#39;gridcell&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Column role attribute.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#role">role</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L122">platform/src/lib/table/components/table-column/table-column.component.ts:122</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="sortable" class="tsd-anchor"></a>
+<h3><span>sortable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">sortable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggles sort feature for the column.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#sortable">sortable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L73">platform/src/lib/table/components/table-column/table-column.component.ts:73</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="visible" class="tsd-anchor"></a>
+<h3><span>visible</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">visible</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Initial visibility state of the column. Default <code>true</code>.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableColumn.html">TableColumn</a>.<a href="TableColumn.html#visible">visible</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L81">platform/src/lib/table/components/table-column/table-column.component.ts:81</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="fdpEditableCellDef" class="tsd-anchor"></a>
+<h3><span>fdp<wbr/>Editable<wbr/>Cell<wbr/>Def</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="fdpEditableCellDef.fdpEditableCellDef-1"><span class="tsd-signature-symbol">set</span> fdpEditableCellDef<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">fdpEditableCellDef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Editable column cell template definition.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">fdpEditableCellDef</span>: <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">FdpEditableCellDef</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L152">platform/src/lib/table/components/table-column/table-column.component.ts:152</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="width" class="tsd-anchor"></a>
+<h3><span>width</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="width.width-1"><span class="tsd-signature-symbol">get</span> width<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="width.width-2"><span class="tsd-signature-symbol">set</span> width<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Width of the column cells.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides TableColumn.width</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L108">platform/src/lib/table/components/table-column/table-column.component.ts:108</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Width of the column cells.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides TableColumn.width</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table/components/table-column/table-column.component.ts#L103">platform/src/lib/table/components/table-column/table-column.component.ts:103</a></li></ul></aside></li></ul></section></section></div>

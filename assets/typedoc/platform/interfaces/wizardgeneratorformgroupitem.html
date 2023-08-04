@@ -1,155 +1,68 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">DynamicFormFieldGroup</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">WizardGeneratorFormGroupItem</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-		<a name="dependencyFields" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> dependency<wbr>Fields</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">dependency<wbr>Fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WizardGeneratorDependencyFields</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/interfaces/wizard-generator-form-group.interface.ts#L61">libs/platform/src/lib/wizard-generator/interfaces/wizard-generator-form-group.interface.ts:61</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Object of dependency fields that are used with <code>when</code> function</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-		<a name="guiOptions" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> gui<wbr>Options</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">gui<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">BaseDynamicFormItemGuiOptions</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DynamicFormFieldGroup</span>.<span>guiOptions</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L89">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:89</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Additional set of options that can affect UI of the form field group.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-		<a name="id" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> id</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DynamicFormFieldGroup</span>.<span>id</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L56">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:56</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>ID of the form item, if not provided, name will be used instead</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-		<a name="items" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> items</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">AnyDynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DynamicFormFieldGroup</span>.<span>items</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L76">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:76</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>List of @see DynamicFormItem representing the list of items
-					to be rendered in the form.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-		<a name="message" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> message</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DynamicFormFieldGroup</span>.<span>message</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L69">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:69</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Display name of the form item.</p>
-				</dd>
-				<dt class="fd-tsd-comment-tag-pill">param</dt>
-				<dd><p>the form value hash.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-		<a name="name" class="tsd-anchor"></a>
-		<h3>name</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DynamicFormFieldGroup</span>.<span>name</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L62">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:62</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Name of the form item in form.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-		<a name="rank" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> rank</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">rank<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>DynamicFormFieldGroup</span>.<span>rank</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L83">libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:83</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Rank is used for ordering.
-					Than lower number then higher priority.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-interface">DynamicFormFieldGroup</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">WizardGeneratorFormGroupItem</span></li></ul></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dependencyFields" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>dependency<wbr/>Fields</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">dependency<wbr/>Fields</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type tsd-kind-interface">WizardGeneratorDependencyFields</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Object of dependency fields that are used with <code>when</code> function</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/interfaces/wizard-generator-form-group.interface.ts#L61">platform/src/lib/wizard-generator/interfaces/wizard-generator-form-group.interface.ts:61</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="guiOptions" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>gui<wbr/>Options</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">gui<wbr/>Options</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type tsd-kind-interface">BaseDynamicFormItemGuiOptions</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Additional set of options that can affect UI of the form field group.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DynamicFormFieldGroup.html">DynamicFormFieldGroup</a>.<a href="DynamicFormFieldGroup.html#guiOptions">guiOptions</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L89">platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:89</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="id" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>id</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>ID of the form item, if not provided, name will be used instead</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DynamicFormFieldGroup.html">DynamicFormFieldGroup</a>.<a href="DynamicFormFieldGroup.html#id">id</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L56">platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:56</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="items" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>items</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">items</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type tsd-kind-type-alias">DynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-interface">AnyDynamicFormFieldItem</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>List of</p>
+</dd><dt class="fd-tsd-comment-tag-pill">See</dt><dd><p>DynamicFormItem representing the list of items
+to be rendered in the form.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DynamicFormFieldGroup.html">DynamicFormFieldGroup</a>.<a href="DynamicFormFieldGroup.html#items">items</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L76">platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:76</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="message" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>message</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">message</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Display name of the form item.</p>
+</dd><dt class="fd-tsd-comment-tag-pill">Param</dt><dd><p>the form value hash.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DynamicFormFieldGroup.html">DynamicFormFieldGroup</a>.<a href="DynamicFormFieldGroup.html#message">message</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L69">platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:69</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="name" class="tsd-anchor"></a>
+<h3><span>name</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Name of the form item in form.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DynamicFormFieldGroup.html">DynamicFormFieldGroup</a>.<a href="DynamicFormFieldGroup.html#name">name</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L62">platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:62</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="rank" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span>rank</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">rank</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Rank is used for ordering.
+Than lower number then higher priority.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="DynamicFormFieldGroup.html">DynamicFormFieldGroup</a>.<a href="DynamicFormFieldGroup.html#rank">rank</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts#L83">platform/src/lib/form/form-generator/interfaces/dynamic-form-item.ts:83</a></li></ul></aside></section></section></div>

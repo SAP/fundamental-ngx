@@ -1,247 +1,131 @@
-<div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>T = <span class="tsd-signature-type">any</span></h4>
-		</li>
-	</ul>
-</section>
+<div class="fd-tsdoc-container"> 
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">TableDraggable</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="tsd-signature-type">TableDraggableDirective</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Table<wbr>Draggable&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableDraggable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-				</aside>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T = <span class="tsd-signature-type">any</span></h4>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableDraggable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dragDropInProgress" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drag<wbr>Drop<wbr>InProgress</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">drag<wbr>Drop<wbr>InProgress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L10">libs/platform/src/lib/table-helpers/models/directives.ts:10</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dragoverPredicate" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> dragover<wbr>Predicate</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">dragover<wbr>Predicate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DragoverPredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L15">libs/platform/src/lib/table-helpers/models/directives.ts:15</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dropMode" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drop<wbr>Mode</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">drop<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdDndDropType</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L13">libs/platform/src/lib/table-helpers/models/directives.ts:13</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dropPredicate" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drop<wbr>Predicate</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">drop<wbr>Predicate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DropPredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L14">libs/platform/src/lib/table-helpers/models/directives.ts:14</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="enableRowReordering" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> enable<wbr>Row<wbr>Reordering</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">enable<wbr>Row<wbr>Reordering<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L11">libs/platform/src/lib/table-helpers/models/directives.ts:11</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isTreeTable" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Tree<wbr>Table</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Tree<wbr>Table<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L12">libs/platform/src/lib/table-helpers/models/directives.ts:12</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="rowsRearrange" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> rows<wbr>Rearrange</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">rows<wbr>Rearrange<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRowsRearrangeEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L16">libs/platform/src/lib/table-helpers/models/directives.ts:16</a></li>
-			</ul>
-		</aside>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="dragDropItemDrop" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drag<wbr>Drop<wbr>Item<wbr>Drop</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">drag<wbr>Drop<wbr>Item<wbr>Drop<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDropEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L18">libs/platform/src/lib/table-helpers/models/directives.ts:18</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>event: <span class="tsd-signature-type">FdDropEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="dragDropStart" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drag<wbr>Drop<wbr>Start</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">drag<wbr>Drop<wbr>Start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L19">libs/platform/src/lib/table-helpers/models/directives.ts:19</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="dragRowFromKeyboard" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drag<wbr>Row<wbr>From<wbr>Keyboard</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">drag<wbr>Row<wbr>From<wbr>Keyboard<span class="tsd-signature-symbol">(</span>dir<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Event</span>, currentRowIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, mode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"shift"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"group"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L17">libs/platform/src/lib/table-helpers/models/directives.ts:17</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>dir: <span class="tsd-signature-type">string</span></h5>
-					</li>
-					<li>
-						<h5>event: <span class="tsd-signature-type">Event</span></h5>
-					</li>
-					<li>
-						<h5>currentRowIndex: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>mode: <span class="tsd-signature-type">"shift"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"group"</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="dropCancelled" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> drop<wbr>Cancelled</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">drop<wbr>Cancelled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L21">libs/platform/src/lib/table-helpers/models/directives.ts:21</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setTable" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> set<wbr>Table</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Table<span class="tsd-signature-symbol">(</span>table<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Table</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/models/directives.ts#L20">libs/platform/src/lib/table-helpers/models/directives.ts:20</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>table: <span class="tsd-signature-type">Table</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">TableDraggable</span>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">TableDraggableDirective</span></li></ul></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Constructors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
+<h3><span>constructor</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="constructor.new_TableDraggable"><span class="tsd-kind-constructor-signature">new <wbr/>Table<wbr/>Draggable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">TableDraggable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">TableDraggable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dragDropInProgress" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drag<wbr/>Drop<wbr/>In<wbr/>Progress</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">drag<wbr/>Drop<wbr/>In<wbr/>Progress</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L10">platform/src/lib/table-helpers/models/directives.ts:10</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dragoverPredicate" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>dragover<wbr/>Predicate</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">dragover<wbr/>Predicate</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DragoverPredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L15">platform/src/lib/table-helpers/models/directives.ts:15</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dropMode" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drop<wbr/>Mode</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">drop<wbr/>Mode</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">FdDndDropType</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L13">platform/src/lib/table-helpers/models/directives.ts:13</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dropPredicate" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drop<wbr/>Predicate</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">drop<wbr/>Predicate</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DropPredicate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L14">platform/src/lib/table-helpers/models/directives.ts:14</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="enableRowReordering" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>enable<wbr/>Row<wbr/>Reordering</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">enable<wbr/>Row<wbr/>Reordering</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L11">platform/src/lib/table-helpers/models/directives.ts:11</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isTreeTable" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Tree<wbr/>Table</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">is<wbr/>Tree<wbr/>Table</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L12">platform/src/lib/table-helpers/models/directives.ts:12</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rowsRearrange" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>rows<wbr/>Rearrange</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">rows<wbr/>Rearrange</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">TableRowsRearrangeEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L16">platform/src/lib/table-helpers/models/directives.ts:16</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dragDropItemDrop" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drag<wbr/>Drop<wbr/>Item<wbr/>Drop</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dragDropItemDrop.dragDropItemDrop-1"><span class="tsd-kind-call-signature">drag<wbr/>Drop<wbr/>Item<wbr/>Drop</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">event</span>: <span class="tsd-signature-type ">FdDropEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">TableRow</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L18">platform/src/lib/table-helpers/models/directives.ts:18</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dragDropStart" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drag<wbr/>Drop<wbr/>Start</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dragDropStart.dragDropStart-1"><span class="tsd-kind-call-signature">drag<wbr/>Drop<wbr/>Start</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L19">platform/src/lib/table-helpers/models/directives.ts:19</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dragRowFromKeyboard" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drag<wbr/>Row<wbr/>From<wbr/>Keyboard</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dragRowFromKeyboard.dragRowFromKeyboard-1"><span class="tsd-kind-call-signature">drag<wbr/>Row<wbr/>From<wbr/>Keyboard</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">dir</span>, <span class="tsd-kind-parameter">event</span>, <span class="tsd-kind-parameter">currentRowIndex</span>, <span class="tsd-kind-parameter">mode</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">dir</span>: <span class="tsd-signature-type">string</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">event</span>: <span class="tsd-signature-type ">Event</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">currentRowIndex</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">mode</span>: <span class="tsd-signature-type">&quot;shift&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;group&quot;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L17">platform/src/lib/table-helpers/models/directives.ts:17</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dropCancelled" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>drop<wbr/>Cancelled</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dropCancelled.dropCancelled-1"><span class="tsd-kind-call-signature">drop<wbr/>Cancelled</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L21">platform/src/lib/table-helpers/models/directives.ts:21</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setTable" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>set<wbr/>Table</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setTable.setTable-1"><span class="tsd-kind-call-signature">set<wbr/>Table</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">table</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">table</span>: <span class="tsd-signature-type tsd-kind-class">Table</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/models/directives.ts#L20">platform/src/lib/table-helpers/models/directives.ts:20</a></li></ul></aside></li></ul></section></section></div>

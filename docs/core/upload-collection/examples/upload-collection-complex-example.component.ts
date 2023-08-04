@@ -1,4 +1,13 @@
-import { Component, ContentChildren, Input, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
+    Input,
+    QueryList,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FileUploaderComponent } from '@fundamental-ngx/core/file-uploader';
 import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
@@ -15,6 +24,7 @@ interface FileItem {
 
 @Component({
     selector: 'fd-upload-collection-complex-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './upload-collection-complex-example.component.html'
 })
 export class UploadCollectionComplexExampleComponent {
@@ -44,7 +54,7 @@ export class UploadCollectionComplexExampleComponent {
 
     private readonly _rangeSelector = new RangeSelector();
 
-    constructor(private _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
 
     alert(message: string): void {
         window.alert(message);
@@ -81,6 +91,7 @@ export class UploadCollectionComplexExampleComponent {
         dialogRef.afterClosed.subscribe((result) => {
             if (result === 'Yes') {
                 this.deleteClicked(event, file);
+                this._cdr.detectChanges();
             }
         });
     }

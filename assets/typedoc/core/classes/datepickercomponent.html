@@ -1,1256 +1,715 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>The datetime picker component is an opinionated composition of the fd-popover and
-			fd-calendar components to accomplish the UI pattern for picking a date.</p>
-		</div>
-		<p>Supports Angular Forms.</p>
-		<pre><code class="language-html"><span style="color: #800000">&lt;fd-date-picker</span><span style="color: #000000"> </span><span style="color: #FF0000">[(ngModel)]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;date&quot;</span><span style="color: #800000">&gt;&lt;/fd-date-picker&gt;</span>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The datetime picker component is an opinionated composition of the fd-popover and
+fd-calendar components to accomplish the UI pattern for picking a date.</p>
+<p>Supports Angular Forms.</p>
+<pre><code class="language-html"><span class="hl-0">&lt;</span><span class="hl-1">fd-date-picker</span><span class="hl-2"> </span><span class="hl-3">[(ngModel)]</span><span class="hl-2">=</span><span class="hl-4">&quot;date&quot;</span><span class="hl-0">&gt;&lt;/</span><span class="hl-1">fd-date-picker</span><span class="hl-0">&gt;</span>
 </code></pre>
-	</div>
-</section>
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>D</h4>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">DatePickerComponent</span>
-		</li>
-	</ul>
-</section>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section> 
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
-		<li><span class="tsd-signature-type">Validator</span></li>
-		<li><span class="tsd-signature-type">FormItemControl</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="activeView" class="tsd-anchor"></a>
-		<h3>active<wbr>View</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">active<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FdCalendarView</span><span class="tsd-signature-symbol"> = &#x27;day&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L199">libs/core/src/lib/date-picker/date-picker.component.ts:199</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Actually shown active view one of &#39;day&#39; | &#39;month&#39; | &#39;year&#39; in calendar component</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="activeViewChange" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> active<wbr>View<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">active<wbr>View<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdCalendarView</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L360">libs/core/src/lib/date-picker/date-picker.component.ts:360</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event thrown every time calendar active view is changed</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="aggregatedYearGrid" class="tsd-anchor"></a>
-		<h3>aggregated<wbr>Year<wbr>Grid</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aggregated<wbr>Year<wbr>Grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarYearGrid</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L294">libs/core/src/lib/date-picker/date-picker.component.ts:294</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Object to customize aggregated year grid,
-				Row, Columns and method to display year can be modified</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="allowNull" class="tsd-anchor"></a>
-		<h3>allow<wbr>Null</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">allow<wbr>Null<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L195">libs/core/src/lib/date-picker/date-picker.component.ts:195</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether a null input is considered valid.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="appendTo" class="tsd-anchor"></a>
-		<h3>append<wbr>To</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">append<wbr>To<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L210">libs/core/src/lib/date-picker/date-picker.component.ts:210</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The element to which the popover should be appended.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="ariaLabelledBy" class="tsd-anchor"></a>
-		<h3>aria<wbr>Labelled<wbr>By</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>FormItemControl</span>.<span>ariaLabelledBy</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L321">libs/core/src/lib/date-picker/date-picker.component.ts:321</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>aria-labelledby for element describing date-picker.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="buttonFocusable" class="tsd-anchor"></a>
-		<h3>button<wbr>Focusable</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">button<wbr>Focusable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L267">libs/core/src/lib/date-picker/date-picker.component.ts:267</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether AddOn Button should be focusable</p>
-			</div>
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">default</dt>
-				<dd><p>true</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="closeOnDateChoose" class="tsd-anchor"></a>
-		<h3>close<wbr>OnDate<wbr>Choose</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">close<wbr>OnDate<wbr>Choose<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L218">libs/core/src/lib/date-picker/date-picker.component.ts:218</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines if date picker should be closed after date choose</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dateInputLabel" class="tsd-anchor"></a>
-		<h3>date<wbr>Input<wbr>Label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">date<wbr>Input<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L149">libs/core/src/lib/date-picker/date-picker.component.ts:149</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Aria-label for the datepicker input.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dateRangeInputLabel" class="tsd-anchor"></a>
-		<h3>date<wbr>Range<wbr>Input<wbr>Label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">date<wbr>Range<wbr>Input<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L156">libs/core/src/lib/date-picker/date-picker.component.ts:156</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Aria-label for the datepicker input.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="disableFunction" class="tsd-anchor"></a>
-		<h3>disable<wbr>Function</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">disable<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L394">libs/core/src/lib/date-picker/date-picker.component.ts:394</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Function used to disable certain dates in the calendar.</p>
-			</div>
-		</div>
-		<div class="tsd-type-declaration">
-			<h4>Type declaration</h4>
-			<ul class="tsd-parameters">
-				<li class="tsd-parameter-signature">
-					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Function used to disable certain dates in the calendar.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">D</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="disableRangeEndFunction" class="tsd-anchor"></a>
-		<h3>disable<wbr>Range<wbr>End<wbr>Function</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">disable<wbr>Range<wbr>End<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L408">libs/core/src/lib/date-picker/date-picker.component.ts:408</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Function used to disable certain dates in the calendar for the range end selection.</p>
-			</div>
-		</div>
-		<div class="tsd-type-declaration">
-			<h4>Type declaration</h4>
-			<ul class="tsd-parameters">
-				<li class="tsd-parameter-signature">
-					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Function used to disable certain dates in the calendar for the range end selection.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">D</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="disableRangeStartFunction" class="tsd-anchor"></a>
-		<h3>disable<wbr>Range<wbr>Start<wbr>Function</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">disable<wbr>Range<wbr>Start<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L401">libs/core/src/lib/date-picker/date-picker.component.ts:401</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Function used to disable certain dates in the calendar for the range start selection.</p>
-			</div>
-		</div>
-		<div class="tsd-type-declaration">
-			<h4>Type declaration</h4>
-			<ul class="tsd-parameters">
-				<li class="tsd-parameter-signature">
-					<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Function used to disable certain dates in the calendar for the range start selection.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>value: <span class="tsd-signature-type">D</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="disabled" class="tsd-anchor"></a>
-		<h3>disabled</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L214">libs/core/src/lib/date-picker/date-picker.component.ts:214</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the date picker is disabled.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="displayCalendarToggleLabel" class="tsd-anchor"></a>
-		<h3>display<wbr>Calendar<wbr>Toggle<wbr>Label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">display<wbr>Calendar<wbr>Toggle<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L163">libs/core/src/lib/date-picker/date-picker.component.ts:163</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Aria-label for the button to show/hide the calendar.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="inline" class="tsd-anchor"></a>
-		<h3>inline</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">inline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L317">libs/core/src/lib/date-picker/date-picker.component.ts:317</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Should date picker be inlined.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="inputId" class="tsd-anchor"></a>
-		<h3>input<wbr>Id</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">input<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L94">libs/core/src/lib/date-picker/date-picker.component.ts:94</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>ID attribute for input element inside DatePicker component</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isOpen" class="tsd-anchor"></a>
-		<h3>is<wbr>Open</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L313">libs/core/src/lib/date-picker/date-picker.component.ts:313</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether the date picker is open. Can be used through two-way binding.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="isOpenChange" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> is<wbr>Open<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">is<wbr>Open<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L348">libs/core/src/lib/date-picker/date-picker.component.ts:348</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event emitted when the state of the isOpen property changes.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="markWeekends" class="tsd-anchor"></a>
-		<h3>mark<wbr>Weekends</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">mark<wbr>Weekends<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L303">libs/core/src/lib/date-picker/date-picker.component.ts:303</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether user wants to mark sunday/saturday with <code>fd-calendar__item--weekend</code> class</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="nextButtonDisableFunction" class="tsd-anchor"></a>
-		<h3>next<wbr>Button<wbr>Disable<wbr>Function</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">next<wbr>Button<wbr>Disable<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NavigationButtonDisableFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L238">libs/core/src/lib/date-picker/date-picker.component.ts:238</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Function used to disable next button in the calendar header.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="placeholder" class="tsd-anchor"></a>
-		<h3>placeholder</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L90">libs/core/src/lib/date-picker/date-picker.component.ts:90</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Date picker input placeholder string</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="placement" class="tsd-anchor"></a>
-		<h3>placement</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Placement</span><span class="tsd-signature-symbol"> = &#x27;bottom-start&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L206">libs/core/src/lib/date-picker/date-picker.component.ts:206</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p> The placement of the popover. It can be one of: top, top-start, top-end, bottom,
-				bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="preventScrollOnFocus" class="tsd-anchor"></a>
-		<h3>prevent<wbr>Scroll<wbr>OnFocus</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">prevent<wbr>Scroll<wbr>OnFocus<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L341">libs/core/src/lib/date-picker/date-picker.component.ts:341</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="previousButtonDisableFunction" class="tsd-anchor"></a>
-		<h3>previous<wbr>Button<wbr>Disable<wbr>Function</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">previous<wbr>Button<wbr>Disable<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NavigationButtonDisableFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L232">libs/core/src/lib/date-picker/date-picker.component.ts:232</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Function used to disable previous button in the calendar header.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="rangeHoverEffect" class="tsd-anchor"></a>
-		<h3>range<wbr>Hover<wbr>Effect</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">range<wbr>Hover<wbr>Effect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L138">libs/core/src/lib/date-picker/date-picker.component.ts:138</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether user wants to mark day cells on hover.
-				Works only on range mode, when start date is selected on Day View.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="required" class="tsd-anchor"></a>
-		<h3>required</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">required<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L98">libs/core/src/lib/date-picker/date-picker.component.ts:98</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>If it is mandatory field</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedDate" class="tsd-anchor"></a>
-		<h3>selected<wbr>Date</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L123">libs/core/src/lib/date-picker/date-picker.component.ts:123</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The currently selected CalendarDay model</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedDateChange" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> selected<wbr>Date<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L352">libs/core/src/lib/date-picker/date-picker.component.ts:352</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Fired when a new date is selected.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedRangeDate" class="tsd-anchor"></a>
-		<h3>selected<wbr>Range<wbr>Date</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L127">libs/core/src/lib/date-picker/date-picker.component.ts:127</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The currently selected FdDates model start and end in range mode.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="selectedRangeDateChange" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> selected<wbr>Range<wbr>Date<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">selected<wbr>Range<wbr>Date<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L356">libs/core/src/lib/date-picker/date-picker.component.ts:356</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Event thrown every time selected first or last date in range mode is changed</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showTodayButton" class="tsd-anchor"></a>
-		<h3>show<wbr>Today<wbr>Button</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Today<wbr>Button<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L222">libs/core/src/lib/date-picker/date-picker.component.ts:222</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Enables Today-Selection-Button if true</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showWeekNumbers" class="tsd-anchor"></a>
-		<h3>show<wbr>Week<wbr>Numbers</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Week<wbr>Numbers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L309">libs/core/src/lib/date-picker/date-picker.component.ts:309</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether user wants to show week numbers next to days</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="specialDaysRules" class="tsd-anchor"></a>
-		<h3>special<wbr>Days<wbr>Rules</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">special<wbr>Days<wbr>Rules<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SpecialDayRule</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L277">libs/core/src/lib/date-picker/date-picker.component.ts:277</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Special days mark, it can be used by passing array of object with
-					Special day number, list 1-20 [class:<code>fd-calendar__special-day--{{number}}</code>] is available there:
-					<a href="https://sap.github.io/fundamental-styles/components/calendar.html">https://sap.github.io/fundamental-styles/components/calendar.html</a> calendar special days section
-					Rule accepts method with FdDate object as a parameter. ex:
-				<code>rule: (fdDate: FdDate) =&gt; fdDate.getDay() === 1</code>, which will mark all sundays as special day.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="startingDayOfWeek" class="tsd-anchor"></a>
-		<h3>starting<wbr>Day<wbr>OfWeek</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">starting<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DaysOfWeek</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L131">libs/core/src/lib/date-picker/date-picker.component.ts:131</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="todayButtonLabel" class="tsd-anchor"></a>
-		<h3>today<wbr>Button<wbr>Label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">today<wbr>Button<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Today&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L226">libs/core/src/lib/date-picker/date-picker.component.ts:226</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Label for Today-Selection-Button</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="type" class="tsd-anchor"></a>
-		<h3>type</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarType</span><span class="tsd-signature-symbol"> = &#x27;single&#x27;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L86">libs/core/src/lib/date-picker/date-picker.component.ts:86</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The type of calendar, &#39;single&#39; for single date selection or &#39;range&#39; for a range of dates.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="useValidation" class="tsd-anchor"></a>
-		<h3>use<wbr>Validation</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">use<wbr>Validation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L142">libs/core/src/lib/date-picker/date-picker.component.ts:142</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether to validate the date picker input.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="valueStateErrorMessage" class="tsd-anchor"></a>
-		<h3>value<wbr>State<wbr>Error<wbr>Message</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">value<wbr>State<wbr>Error<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L191">libs/core/src/lib/date-picker/date-picker.component.ts:191</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Value state &quot;error&quot; aria message.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="valueStateInformationMessage" class="tsd-anchor"></a>
-		<h3>value<wbr>State<wbr>Information<wbr>Message</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">value<wbr>State<wbr>Information<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L177">libs/core/src/lib/date-picker/date-picker.component.ts:177</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Value state &quot;information&quot; aria message.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="valueStateSuccessMessage" class="tsd-anchor"></a>
-		<h3>value<wbr>State<wbr>Success<wbr>Message</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">value<wbr>State<wbr>Success<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L170">libs/core/src/lib/date-picker/date-picker.component.ts:170</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Value state &quot;success&quot; aria message.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="valueStateWarningMessage" class="tsd-anchor"></a>
-		<h3>value<wbr>State<wbr>Warning<wbr>Message</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">value<wbr>State<wbr>Warning<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L184">libs/core/src/lib/date-picker/date-picker.component.ts:184</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Value state &quot;warning&quot; aria message.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="yearGrid" class="tsd-anchor"></a>
-		<h3>year<wbr>Grid</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">year<wbr>Grid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CalendarYearGrid</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L284">libs/core/src/lib/date-picker/date-picker.component.ts:284</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Object to customize year grid,
-				Row, Columns and method to display year can be modified</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="message" class="tsd-anchor"></a>
-		<h3>message</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> message<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L102">libs/core/src/lib/date-picker/date-picker.component.ts:102</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Text displayed in message</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>message: <span class="tsd-signature-type">string</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="messageTriggers" class="tsd-anchor"></a>
-		<h3>message<wbr>Triggers</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> messageTriggers<span class="tsd-signature-symbol">(</span>triggers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L113">libs/core/src/lib/date-picker/date-picker.component.ts:113</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The trigger events that will open/close the message box.
-						Accepts any <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a>.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>triggers: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="processInputOnBlur" class="tsd-anchor"></a>
-		<h3>process<wbr>Input<wbr>OnBlur</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> processInputOnBlur<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> processInputOnBlur<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L333">libs/core/src/lib/date-picker/date-picker.component.ts:333</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to recalculate value from the input as user types or on blur.
-						By default, updates the value as user types.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L329">libs/core/src/lib/date-picker/date-picker.component.ts:329</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to recalculate value from the input as user types or on blur.
-						By default, updates the value as user types.</p>
-					</div>
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">default</dt>
-						<dd><p>false</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>v: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-set-signature tsd-parent-kind-class">
-		<a name="state" class="tsd-anchor"></a>
-		<h3>state</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-set-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L246">libs/core/src/lib/date-picker/date-picker.component.ts:246</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p> The state of the form control - applies css classes.
-							Also, this is applied to message.
-						Can be <code>success</code>, <code>error</code>, <code>warning</code>, <code>information</code> or blank for default.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>state: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_isDateValid" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>Date<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_is<wbr>Date<wbr>Valid<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">date</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L821">libs/core/src/lib/date-picker/date-picker.component.ts:821</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that returns info if given date model is valid</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">date</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_isEndDateValid" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>End<wbr>Date<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_is<wbr>End<wbr>Date<wbr>Valid<span class="tsd-signature-symbol">(</span>endDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L811">libs/core/src/lib/date-picker/date-picker.component.ts:811</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that returns info if end date model given is valid</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>endDate: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_isRangeModelValid" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>Range<wbr>Model<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_is<wbr>Range<wbr>Model<wbr>Valid<span class="tsd-signature-symbol">(</span>fdRangeDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L803">libs/core/src/lib/date-picker/date-picker.component.ts:803</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that returns info if range date model given is valid</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>fdRangeDate: <span class="tsd-signature-type">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_isSingleModelValid" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>Single<wbr>Model<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_is<wbr>Single<wbr>Model<wbr>Valid<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L798">libs/core/src/lib/date-picker/date-picker.component.ts:798</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that returns info if single model given is valid</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-		<a name="_isStartDateValid" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _is<wbr>Start<wbr>Date<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-			<li class="tsd-signature tsd-kind-icon">_is<wbr>Start<wbr>Date<wbr>Valid<span class="tsd-signature-symbol">(</span>startDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L816">libs/core/src/lib/date-picker/date-picker.component.ts:816</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that returns info if start date model given is valid</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>startDate: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="closeCalendar" class="tsd-anchor"></a>
-		<h3>close<wbr>Calendar</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">close<wbr>Calendar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L510">libs/core/src/lib/date-picker/date-picker.component.ts:510</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Closes the calendar if it is open</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="handleCalendarActiveViewChange" class="tsd-anchor"></a>
-		<h3>handle<wbr>Calendar<wbr>Active<wbr>View<wbr>Change</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">handle<wbr>Calendar<wbr>Active<wbr>View<wbr>Change<span class="tsd-signature-symbol">(</span>activeView<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdCalendarView</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L478">libs/core/src/lib/date-picker/date-picker.component.ts:478</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that handle calendar active view change and throws event.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>activeView: <span class="tsd-signature-type">FdCalendarView</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isModelValid" class="tsd-anchor"></a>
-		<h3>is<wbr>Model<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Model<wbr>Valid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L758">libs/core/src/lib/date-picker/date-picker.component.ts:758</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that provides information if model selected date/dates have properly types and are valid</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="openCalendar" class="tsd-anchor"></a>
-		<h3>open<wbr>Calendar</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">open<wbr>Calendar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L491">libs/core/src/lib/date-picker/date-picker.component.ts:491</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Opens the calendar</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="toggleCalendar" class="tsd-anchor"></a>
-		<h3>toggle<wbr>Calendar</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">toggle<wbr>Calendar<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/date-picker/date-picker.component.ts#L500">libs/core/src/lib/date-picker/date-picker.component.ts:500</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Toggles the calendar open or closed</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">D</span></h4></li></ul></section> 
+<section class="tsd-panel tsd-hierarchy">
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">DatePickerComponent</span></li></ul></section>
+<section class="tsd-panel">
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">OnInit</span></li>
+<li><span class="tsd-signature-type ">OnDestroy</span></li>
+<li><span class="tsd-signature-type ">AfterViewInit</span></li>
+<li><span class="tsd-signature-type ">ControlValueAccessor</span></li>
+<li><span class="tsd-signature-type ">Validator</span></li>
+<li><span class="tsd-signature-type tsd-kind-interface">FormItemControl</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="activeView" class="tsd-anchor"></a>
+<h3><span>active<wbr/>View</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">active<wbr/>View</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">FdCalendarView</span><span class="tsd-signature-symbol"> = &#39;day&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Actually shown active view one of &#39;day&#39; | &#39;month&#39; | &#39;year&#39; in calendar component</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L260">libs/core/src/lib/date-picker/date-picker.component.ts:260</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="activeViewChange" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>active<wbr/>View<wbr/>Change</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">active<wbr/>View<wbr/>Change</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-alias">FdCalendarView</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event thrown every time calendar active view is changed</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L418">libs/core/src/lib/date-picker/date-picker.component.ts:418</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="aggregatedYearGrid" class="tsd-anchor"></a>
+<h3><span>aggregated<wbr/>Year<wbr/>Grid</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">aggregated<wbr/>Year<wbr/>Grid</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">CalendarYearGrid</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Object to customize aggregated year grid,
+Row, Columns and method to display year can be modified</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L352">libs/core/src/lib/date-picker/date-picker.component.ts:352</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="allowNull" class="tsd-anchor"></a>
+<h3><span>allow<wbr/>Null</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">allow<wbr/>Null</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether a null input is considered valid.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L256">libs/core/src/lib/date-picker/date-picker.component.ts:256</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="appendTo" class="tsd-anchor"></a>
+<h3><span>append<wbr/>To</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">append<wbr/>To</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The element to which the popover should be appended.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L271">libs/core/src/lib/date-picker/date-picker.component.ts:271</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ariaLabelledBy" class="tsd-anchor"></a>
+<h3><span>aria<wbr/>Labelled<wbr/>By</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">aria<wbr/>Labelled<wbr/>By</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>aria-labelledby for element describing date-picker.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/FormItemControl.html">FormItemControl</a>.<a href="../interfaces/FormItemControl.html#ariaLabelledBy">ariaLabelledBy</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L379">libs/core/src/lib/date-picker/date-picker.component.ts:379</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="buttonFocusable" class="tsd-anchor"></a>
+<h3><span>button<wbr/>Focusable</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">button<wbr/>Focusable</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether AddOn Button should be focusable</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Default</dt><dd><pre><code class="language-ts"><span class="hl-8">true</span>
+</code></pre>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L325">libs/core/src/lib/date-picker/date-picker.component.ts:325</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="closeOnDateChoose" class="tsd-anchor"></a>
+<h3><span>close<wbr/>On<wbr/>Date<wbr/>Choose</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">close<wbr/>On<wbr/>Date<wbr/>Choose</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines if date picker should be closed after date choose</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L279">libs/core/src/lib/date-picker/date-picker.component.ts:279</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="disableFunction" class="tsd-anchor"></a>
+<h3><span>disable<wbr/>Function</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">disable<wbr/>Function</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-type-declaration">
+<h4>Type declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures">
+<li class="tsd-signature" id="disableFunction.__type.__type-1"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Function used to disable certain dates in the calendar.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></li></ul></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L480">libs/core/src/lib/date-picker/date-picker.component.ts:480</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="disableRangeEndFunction" class="tsd-anchor"></a>
+<h3><span>disable<wbr/>Range<wbr/>End<wbr/>Function</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">disable<wbr/>Range<wbr/>End<wbr/>Function</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-type-declaration">
+<h4>Type declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures">
+<li class="tsd-signature" id="disableRangeEndFunction.__type-2.__type-3"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Function used to disable certain dates in the calendar for the range end selection.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></li></ul></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L494">libs/core/src/lib/date-picker/date-picker.component.ts:494</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="disableRangeStartFunction" class="tsd-anchor"></a>
+<h3><span>disable<wbr/>Range<wbr/>Start<wbr/>Function</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">disable<wbr/>Range<wbr/>Start<wbr/>Function</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-type-declaration">
+<h4>Type declaration</h4>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures">
+<li class="tsd-signature" id="disableRangeStartFunction.__type-4.__type-5"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Function used to disable certain dates in the calendar for the range start selection.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></li></ul></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L487">libs/core/src/lib/date-picker/date-picker.component.ts:487</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="disabled" class="tsd-anchor"></a>
+<h3><span>disabled</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">disabled</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the date picker is disabled.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L275">libs/core/src/lib/date-picker/date-picker.component.ts:275</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="inline" class="tsd-anchor"></a>
+<h3><span>inline</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">inline</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Should date picker be inlined.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L375">libs/core/src/lib/date-picker/date-picker.component.ts:375</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="inputId" class="tsd-anchor"></a>
+<h3><span>input<wbr/>Id</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">input<wbr/>Id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>ID attribute for input element inside DatePicker component</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L92">libs/core/src/lib/date-picker/date-picker.component.ts:92</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isOpen" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Open</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">is<wbr/>Open</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the date picker is open. Can be used through two-way binding.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L371">libs/core/src/lib/date-picker/date-picker.component.ts:371</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isOpenChange" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>is<wbr/>Open<wbr/>Change</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">is<wbr/>Open<wbr/>Change</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event emitted when the state of the isOpen property changes.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L406">libs/core/src/lib/date-picker/date-picker.component.ts:406</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="markWeekends" class="tsd-anchor"></a>
+<h3><span>mark<wbr/>Weekends</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">mark<wbr/>Weekends</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether user wants to mark sunday/saturday with <code>fd-calendar__item--weekend</code> class</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L361">libs/core/src/lib/date-picker/date-picker.component.ts:361</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="nextButtonDisableFunction" class="tsd-anchor"></a>
+<h3><span>next<wbr/>Button<wbr/>Disable<wbr/>Function</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">next<wbr/>Button<wbr/>Disable<wbr/>Function</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">NavigationButtonDisableFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Function used to disable next button in the calendar header.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L299">libs/core/src/lib/date-picker/date-picker.component.ts:299</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="placeholder" class="tsd-anchor"></a>
+<h3><span>placeholder</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">placeholder</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Date picker input placeholder string</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L88">libs/core/src/lib/date-picker/date-picker.component.ts:88</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="placement" class="tsd-anchor"></a>
+<h3><span>placement</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">placement</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">Placement</span><span class="tsd-signature-symbol"> = &#39;bottom-start&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The placement of the popover. It can be one of: top, top-start, top-end, bottom,
+ bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L267">libs/core/src/lib/date-picker/date-picker.component.ts:267</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="preventScrollOnFocus" class="tsd-anchor"></a>
+<h3><span>prevent<wbr/>Scroll<wbr/>On<wbr/>Focus</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">prevent<wbr/>Scroll<wbr/>On<wbr/>Focus</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to prevent page scrolling when focusing date picker input field after calendar has been closed.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L399">libs/core/src/lib/date-picker/date-picker.component.ts:399</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="previousButtonDisableFunction" class="tsd-anchor"></a>
+<h3><span>previous<wbr/>Button<wbr/>Disable<wbr/>Function</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">previous<wbr/>Button<wbr/>Disable<wbr/>Function</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">NavigationButtonDisableFunction</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Function used to disable previous button in the calendar header.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L293">libs/core/src/lib/date-picker/date-picker.component.ts:293</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rangeHoverEffect" class="tsd-anchor"></a>
+<h3><span>range<wbr/>Hover<wbr/>Effect</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">range<wbr/>Hover<wbr/>Effect</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether user wants to mark day cells on hover.
+Works only on range mode, when start date is selected on Day View.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L136">libs/core/src/lib/date-picker/date-picker.component.ts:136</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="required" class="tsd-anchor"></a>
+<h3><span>required</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">required</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>If it is mandatory field</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L96">libs/core/src/lib/date-picker/date-picker.component.ts:96</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectedDate" class="tsd-anchor"></a>
+<h3><span>selected<wbr/>Date</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selected<wbr/>Date</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The currently selected CalendarDay model</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L121">libs/core/src/lib/date-picker/date-picker.component.ts:121</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectedDateChange" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>selected<wbr/>Date<wbr/>Change</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selected<wbr/>Date<wbr/>Change</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Fired when a new date is selected.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L410">libs/core/src/lib/date-picker/date-picker.component.ts:410</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectedRangeDate" class="tsd-anchor"></a>
+<h3><span>selected<wbr/>Range<wbr/>Date</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selected<wbr/>Range<wbr/>Date</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-class">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The currently selected FdDates model start and end in range mode.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L125">libs/core/src/lib/date-picker/date-picker.component.ts:125</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="selectedRangeDateChange" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>selected<wbr/>Range<wbr/>Date<wbr/>Change</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">selected<wbr/>Range<wbr/>Date<wbr/>Change</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">DateRange</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Event thrown every time selected first or last date in range mode is changed</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L414">libs/core/src/lib/date-picker/date-picker.component.ts:414</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="showTodayButton" class="tsd-anchor"></a>
+<h3><span>show<wbr/>Today<wbr/>Button</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">show<wbr/>Today<wbr/>Button</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Enables Today-Selection-Button if true</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L283">libs/core/src/lib/date-picker/date-picker.component.ts:283</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="showWeekNumbers" class="tsd-anchor"></a>
+<h3><span>show<wbr/>Week<wbr/>Numbers</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">show<wbr/>Week<wbr/>Numbers</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether user wants to show week numbers next to days</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L367">libs/core/src/lib/date-picker/date-picker.component.ts:367</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="specialDaysRules" class="tsd-anchor"></a>
+<h3><span>special<wbr/>Days<wbr/>Rules</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">special<wbr/>Days<wbr/>Rules</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">SpecialDayRule</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Special days mark, it can be used by passing array of object with
+Special day number, list 1-20 [class:<code>fd-calendar__special-day--{{number}}</code>] is available there:
+<a href="https://sap.github.io/fundamental-styles/components/calendar.html">https://sap.github.io/fundamental-styles/components/calendar.html</a> calendar special days section
+Rule accepts method with FdDate object as a parameter. ex:
+<code>rule: (fdDate: FdDate) =&gt; fdDate.getDay() === 1</code>, which will mark all sundays as special day.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L335">libs/core/src/lib/date-picker/date-picker.component.ts:335</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="startingDayOfWeek" class="tsd-anchor"></a>
+<h3><span>starting<wbr/>Day<wbr/>Of<wbr/>Week</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">starting<wbr/>Day<wbr/>Of<wbr/>Week</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">DaysOfWeek</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L129">libs/core/src/lib/date-picker/date-picker.component.ts:129</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="todayButtonLabel" class="tsd-anchor"></a>
+<h3><span>today<wbr/>Button<wbr/>Label</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">today<wbr/>Button<wbr/>Label</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;Today&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Label for Today-Selection-Button</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L287">libs/core/src/lib/date-picker/date-picker.component.ts:287</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="type" class="tsd-anchor"></a>
+<h3><span>type</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-type-alias">CalendarType</span><span class="tsd-signature-symbol"> = &#39;single&#39;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The type of calendar, &#39;single&#39; for single date selection or &#39;range&#39; for a range of dates.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L84">libs/core/src/lib/date-picker/date-picker.component.ts:84</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="useValidation" class="tsd-anchor"></a>
+<h3><span>use<wbr/>Validation</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">use<wbr/>Validation</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to validate the date picker input.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L140">libs/core/src/lib/date-picker/date-picker.component.ts:140</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="yearGrid" class="tsd-anchor"></a>
+<h3><span>year<wbr/>Grid</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">year<wbr/>Grid</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-interface">CalendarYearGrid</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Object to customize year grid,
+Row, Columns and method to display year can be modified</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L342">libs/core/src/lib/date-picker/date-picker.component.ts:342</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dateInputLabel" class="tsd-anchor"></a>
+<h3><span>date<wbr/>Input<wbr/>Label</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dateInputLabel.dateInputLabel-1"><span class="tsd-signature-symbol">get</span> dateInputLabel<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="dateInputLabel.dateInputLabel-2"><span class="tsd-signature-symbol">set</span> dateInputLabel<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L154">libs/core/src/lib/date-picker/date-picker.component.ts:154</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Aria-label for the datepicker input.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L146">libs/core/src/lib/date-picker/date-picker.component.ts:146</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dateRangeInputLabel" class="tsd-anchor"></a>
+<h3><span>date<wbr/>Range<wbr/>Input<wbr/>Label</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dateRangeInputLabel.dateRangeInputLabel-1"><span class="tsd-signature-symbol">get</span> dateRangeInputLabel<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="dateRangeInputLabel.dateRangeInputLabel-2"><span class="tsd-signature-symbol">set</span> dateRangeInputLabel<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L170">libs/core/src/lib/date-picker/date-picker.component.ts:170</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Aria-label for the datepicker input.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L162">libs/core/src/lib/date-picker/date-picker.component.ts:162</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="displayCalendarToggleLabel" class="tsd-anchor"></a>
+<h3><span>display<wbr/>Calendar<wbr/>Toggle<wbr/>Label</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="displayCalendarToggleLabel.displayCalendarToggleLabel-1"><span class="tsd-signature-symbol">get</span> displayCalendarToggleLabel<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="displayCalendarToggleLabel.displayCalendarToggleLabel-2"><span class="tsd-signature-symbol">set</span> displayCalendarToggleLabel<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L186">libs/core/src/lib/date-picker/date-picker.component.ts:186</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Aria-label for the button to show/hide the calendar.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L178">libs/core/src/lib/date-picker/date-picker.component.ts:178</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="message" class="tsd-anchor"></a>
+<h3><span>message</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="message.message-1"><span class="tsd-signature-symbol">set</span> message<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Text displayed in message</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L99">libs/core/src/lib/date-picker/date-picker.component.ts:99</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="messageTriggers" class="tsd-anchor"></a>
+<h3><span>message<wbr/>Triggers</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="messageTriggers.messageTriggers-1"><span class="tsd-signature-symbol">set</span> messageTriggers<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">triggers</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The trigger events that will open/close the message box.
+ Accepts any <a href="https://www.w3schools.com/jsref/dom_obj_event.asp">HTML DOM Events</a>.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">triggers</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L110">libs/core/src/lib/date-picker/date-picker.component.ts:110</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="processInputOnBlur" class="tsd-anchor"></a>
+<h3><span>process<wbr/>Input<wbr/>On<wbr/>Blur</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="processInputOnBlur.processInputOnBlur-1"><span class="tsd-signature-symbol">get</span> processInputOnBlur<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-signature tsd-kind-icon" id="processInputOnBlur.processInputOnBlur-2"><span class="tsd-signature-symbol">set</span> processInputOnBlur<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">v</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L391">libs/core/src/lib/date-picker/date-picker.component.ts:391</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to recalculate value from the input as user types or on blur.
+By default, updates the value as user types.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">v</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Default</dt><dd><pre><code class="language-ts"><span class="hl-8">false</span>
+</code></pre>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L386">libs/core/src/lib/date-picker/date-picker.component.ts:386</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="state" class="tsd-anchor"></a>
+<h3><span>state</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="state.state-1"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">state</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The state of the form control - applies css classes.
+ Also, this is applied to message.
+ Can be <code>success</code>, <code>error</code>, <code>warning</code>, <code>information</code> or blank for default.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">state</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">FormStates</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L306">libs/core/src/lib/date-picker/date-picker.component.ts:306</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="valueStateErrorMessage" class="tsd-anchor"></a>
+<h3><span>value<wbr/>State<wbr/>Error<wbr/>Message</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="valueStateErrorMessage.valueStateErrorMessage-1"><span class="tsd-signature-symbol">get</span> valueStateErrorMessage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="valueStateErrorMessage.valueStateErrorMessage-2"><span class="tsd-signature-symbol">set</span> valueStateErrorMessage<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L250">libs/core/src/lib/date-picker/date-picker.component.ts:250</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Value state &quot;error&quot; aria message.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L242">libs/core/src/lib/date-picker/date-picker.component.ts:242</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="valueStateInformationMessage" class="tsd-anchor"></a>
+<h3><span>value<wbr/>State<wbr/>Information<wbr/>Message</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="valueStateInformationMessage.valueStateInformationMessage-1"><span class="tsd-signature-symbol">get</span> valueStateInformationMessage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="valueStateInformationMessage.valueStateInformationMessage-2"><span class="tsd-signature-symbol">set</span> valueStateInformationMessage<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L218">libs/core/src/lib/date-picker/date-picker.component.ts:218</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Value state &quot;information&quot; aria message.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L210">libs/core/src/lib/date-picker/date-picker.component.ts:210</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="valueStateSuccessMessage" class="tsd-anchor"></a>
+<h3><span>value<wbr/>State<wbr/>Success<wbr/>Message</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="valueStateSuccessMessage.valueStateSuccessMessage-1"><span class="tsd-signature-symbol">get</span> valueStateSuccessMessage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="valueStateSuccessMessage.valueStateSuccessMessage-2"><span class="tsd-signature-symbol">set</span> valueStateSuccessMessage<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L202">libs/core/src/lib/date-picker/date-picker.component.ts:202</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Value state &quot;success&quot; aria message.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L194">libs/core/src/lib/date-picker/date-picker.component.ts:194</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="valueStateWarningMessage" class="tsd-anchor"></a>
+<h3><span>value<wbr/>State<wbr/>Warning<wbr/>Message</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="valueStateWarningMessage.valueStateWarningMessage-1"><span class="tsd-signature-symbol">get</span> valueStateWarningMessage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="valueStateWarningMessage.valueStateWarningMessage-2"><span class="tsd-signature-symbol">set</span> valueStateWarningMessage<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L234">libs/core/src/lib/date-picker/date-picker.component.ts:234</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Value state &quot;warning&quot; aria message.</p>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L226">libs/core/src/lib/date-picker/date-picker.component.ts:226</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="closeCalendar" class="tsd-anchor"></a>
+<h3><span>close<wbr/>Calendar</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="closeCalendar.closeCalendar-1"><span class="tsd-kind-call-signature">close<wbr/>Calendar</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Closes the calendar if it is open</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L599">libs/core/src/lib/date-picker/date-picker.component.ts:599</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="handleCalendarActiveViewChange" class="tsd-anchor"></a>
+<h3><span>handle<wbr/>Calendar<wbr/>Active<wbr/>View<wbr/>Change</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="handleCalendarActiveViewChange.handleCalendarActiveViewChange-1"><span class="tsd-kind-call-signature">handle<wbr/>Calendar<wbr/>Active<wbr/>View<wbr/>Change</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">activeView</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Method that handle calendar active view change and throws event.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">activeView</span>: <span class="tsd-signature-type tsd-kind-type-alias">FdCalendarView</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L567">libs/core/src/lib/date-picker/date-picker.component.ts:567</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isModelValid" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Model<wbr/>Valid</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isModelValid.isModelValid-1"><span class="tsd-kind-call-signature">is<wbr/>Model<wbr/>Valid</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Method that provides information if model selected date/dates have properly types and are valid</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L860">libs/core/src/lib/date-picker/date-picker.component.ts:860</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="openCalendar" class="tsd-anchor"></a>
+<h3><span>open<wbr/>Calendar</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="openCalendar.openCalendar-1"><span class="tsd-kind-call-signature">open<wbr/>Calendar</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Opens the calendar</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L580">libs/core/src/lib/date-picker/date-picker.component.ts:580</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="toggleCalendar" class="tsd-anchor"></a>
+<h3><span>toggle<wbr/>Calendar</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="toggleCalendar.toggleCalendar-1"><span class="tsd-kind-call-signature">toggle<wbr/>Calendar</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toggles the calendar open or closed</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/date-picker/date-picker.component.ts#L589">libs/core/src/lib/date-picker/date-picker.component.ts:589</a></li></ul></aside></li></ul></section></section></div>

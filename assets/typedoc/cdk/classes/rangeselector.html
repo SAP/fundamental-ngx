@@ -1,216 +1,113 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>Utility type, that allows to track and select ranges of elements while using multi-selection.</p>
-		</div>
-		<dl class="tsd-comment-tags">
-			<dt class="fd-tsd-comment-tag-pill">usage</dt>
-			<dd><p>Imagine we have a simple list of checkboxes:</p>
-				<pre><code class="language-html"><span style="color: #800000">&lt;input</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">#checkboxInput</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">*ngFor</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;let o of options; let idx = index&quot;</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">type</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;checkbox&quot;</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">[checked]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;selectionModel.checked(o)&quot;</span>
-<span style="color: #000000"> </span><span style="color: #FF0000">(click)</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;toggle(idx, $event)&quot;</span>
-<span style="color: #000000"> </span><span style="color: #800000">&gt;</span>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Utility type, that allows to track and select ranges of elements while using multi-selection.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Usage</dt><dd><p>Imagine we have a simple list of checkboxes:</p>
+<pre><code class="language-html"><span class="hl-4">&lt;</span><span class="hl-5">input</span><br/><span class="hl-1"> </span><span class="hl-6">#checkboxInput</span><br/><span class="hl-1"> </span><span class="hl-6">*ngFor</span><span class="hl-1">=</span><span class="hl-7">&quot;let o of options; let idx = index&quot;</span><br/><span class="hl-1"> </span><span class="hl-6">type</span><span class="hl-1">=</span><span class="hl-7">&quot;checkbox&quot;</span><br/><span class="hl-1"> </span><span class="hl-6">[checked]</span><span class="hl-1">=</span><span class="hl-7">&quot;selectionModel.checked(o)&quot;</span><br/><span class="hl-1"> </span><span class="hl-6">(click)</span><span class="hl-1">=</span><span class="hl-7">&quot;toggle(idx, $event)&quot;</span><br/><span class="hl-1"> </span><span class="hl-4">&gt;</span>
 </code></pre>
-				<p>With the given layout the logic should be as follows:</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">YourComponent</span><span style="color: #000000"> {</span>
-<span style="color: #000000"> </span><span style="color: #001080">options</span><span style="color: #000000"> = [</span><span style="color: #A31515">&#039;a&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;b&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;c&#039;</span><span style="color: #000000">];</span>
-<span style="color: #000000"> </span><span style="color: #0000FF">readonly</span><span style="color: #000000"> </span><span style="color: #001080">selectionModel</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">SelectionModel</span><span style="color: #000000">(</span><span style="color: #0000FF">true</span><span style="color: #000000">);</span>
-
-<span style="color: #000000"> </span><span style="color: #0000FF">private</span><span style="color: #000000"> </span><span style="color: #0000FF">readonly</span><span style="color: #000000"> </span><span style="color: #001080">_rangeSelector</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RangeSelector</span><span style="color: #000000">();</span>
-
-
-<span style="color: #000000"> </span><span style="color: #795E26">toggle</span><span style="color: #000000">(</span><span style="color: #001080">idx</span><span style="color: #000000">: </span><span style="color: #267F99">number</span><span style="color: #000000">, </span><span style="color: #001080">event</span><span style="color: #000000">: </span><span style="color: #267F99">PointerEvent</span><span style="color: #000000">): </span><span style="color: #267F99">void</span><span style="color: #000000"> {</span>
-<span style="color: #000000">     </span><span style="color: #008000">// getting the toggled value of the checkbox</span>
-<span style="color: #000000">     </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">toggledSelection</span><span style="color: #000000"> = </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #001080">target</span><span style="color: #000000">.</span><span style="color: #001080">value</span><span style="color: #000000">;</span>
-
-<span style="color: #000000">     </span><span style="color: #008000">// registering the selection of current checkbox</span>
-<span style="color: #000000">     </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">_rangeSelector</span><span style="color: #000000">.</span><span style="color: #795E26">onRangeElementToggled</span><span style="color: #000000">(</span><span style="color: #001080">idx</span><span style="color: #000000">, </span><span style="color: #001080">event</span><span style="color: #000000">);</span>
-
-<span style="color: #000000">     </span><span style="color: #008000">// Apply value to each element in range.</span>
-<span style="color: #000000">     </span><span style="color: #008000">// If checkbox was toggled without shift pressed or without previously selected one,</span>
-<span style="color: #000000">     </span><span style="color: #008000">// this method will select only it.</span>
-<span style="color: #000000">     </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">_rangeSelector</span><span style="color: #000000">.</span><span style="color: #795E26">applyValueToEachInRange</span><span style="color: #000000">(</span><span style="color: #001080">idx</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">         </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">toggledSelection</span><span style="color: #000000">) {</span>
-<span style="color: #000000">             </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">selectionModel</span><span style="color: #000000">.</span><span style="color: #795E26">select</span><span style="color: #000000">(</span><span style="color: #001080">options</span><span style="color: #000000">[</span><span style="color: #001080">idx</span><span style="color: #000000">]);</span>
-<span style="color: #000000">         } </span><span style="color: #AF00DB">else</span><span style="color: #000000"> {</span>
-<span style="color: #000000">             </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">selectionModel</span><span style="color: #000000">.</span><span style="color: #795E26">deselect</span><span style="color: #000000">(</span><span style="color: #001080">options</span><span style="color: #000000">[</span><span style="color: #001080">idx</span><span style="color: #000000">]);</span>
-<span style="color: #000000">         }</span>
-<span style="color: #000000">     });</span>
-<span style="color: #000000"> }</span>
-<span style="color: #000000">}</span>
+<p>With the given layout the logic should be as follows:</p>
+<pre><code class="language-typescript"><span class="hl-8">export</span><span class="hl-1"> </span><span class="hl-3">class</span><span class="hl-1"> </span><span class="hl-9">YourComponent</span><span class="hl-1"> {</span><br/><span class="hl-1"> </span><span class="hl-2">options</span><span class="hl-1"> = [</span><span class="hl-0">&#39;a&#39;</span><span class="hl-1">, </span><span class="hl-0">&#39;b&#39;</span><span class="hl-1">, </span><span class="hl-0">&#39;c&#39;</span><span class="hl-1">];</span><br/><span class="hl-1"> </span><span class="hl-3">readonly</span><span class="hl-1"> </span><span class="hl-2">selectionModel</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-10">SelectionModel</span><span class="hl-1">(</span><span class="hl-3">true</span><span class="hl-1">);</span><br/><br/><span class="hl-1"> </span><span class="hl-3">private</span><span class="hl-1"> </span><span class="hl-3">readonly</span><span class="hl-1"> </span><span class="hl-2">_rangeSelector</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-10">RangeSelector</span><span class="hl-1">();</span><br/><br/><br/><span class="hl-1"> </span><span class="hl-10">toggle</span><span class="hl-1">(</span><span class="hl-2">idx</span><span class="hl-1">: </span><span class="hl-9">number</span><span class="hl-1">, </span><span class="hl-2">event</span><span class="hl-1">: </span><span class="hl-9">PointerEvent</span><span class="hl-1">): </span><span class="hl-9">void</span><span class="hl-1"> {</span><br/><span class="hl-1">     </span><span class="hl-11">// getting the toggled value of the checkbox</span><br/><span class="hl-1">     </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-12">toggledSelection</span><span class="hl-1"> = </span><span class="hl-2">event</span><span class="hl-1">.</span><span class="hl-2">target</span><span class="hl-1">.</span><span class="hl-2">value</span><span class="hl-1">;</span><br/><br/><span class="hl-1">     </span><span class="hl-11">// registering the selection of current checkbox</span><br/><span class="hl-1">     </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-2">_rangeSelector</span><span class="hl-1">.</span><span class="hl-10">onRangeElementToggled</span><span class="hl-1">(</span><span class="hl-2">idx</span><span class="hl-1">, </span><span class="hl-2">event</span><span class="hl-1">);</span><br/><br/><span class="hl-1">     </span><span class="hl-11">// Apply value to each element in range.</span><br/><span class="hl-1">     </span><span class="hl-11">// If checkbox was toggled without shift pressed or without previously selected one,</span><br/><span class="hl-1">     </span><span class="hl-11">// this method will select only it.</span><br/><span class="hl-1">     </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-2">_rangeSelector</span><span class="hl-1">.</span><span class="hl-10">applyValueToEachInRange</span><span class="hl-1">(</span><span class="hl-2">idx</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">         </span><span class="hl-8">if</span><span class="hl-1"> (</span><span class="hl-2">toggledSelection</span><span class="hl-1">) {</span><br/><span class="hl-1">             </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-2">selectionModel</span><span class="hl-1">.</span><span class="hl-10">select</span><span class="hl-1">(</span><span class="hl-2">options</span><span class="hl-1">[</span><span class="hl-2">idx</span><span class="hl-1">]);</span><br/><span class="hl-1">         } </span><span class="hl-8">else</span><span class="hl-1"> {</span><br/><span class="hl-1">             </span><span class="hl-3">this</span><span class="hl-1">.</span><span class="hl-2">selectionModel</span><span class="hl-1">.</span><span class="hl-10">deselect</span><span class="hl-1">(</span><span class="hl-2">options</span><span class="hl-1">[</span><span class="hl-2">idx</span><span class="hl-1">]);</span><br/><span class="hl-1">         }</span><br/><span class="hl-1">     });</span><br/><span class="hl-1"> }</span><br/><span class="hl-1">}</span>
 </code></pre>
-			</dd>
-		</dl>
-	</div>
-</section>
+</dd></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">RangeSelector</span>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Range<wbr>Selector<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RangeSelector</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">RangeSelector</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-		<a name="lastRangeSelectionState" class="tsd-anchor"></a>
-		<h3>last<wbr>Range<wbr>Selection<wbr>State</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lastRangeSelectionState<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RangeSelectionState</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/helpers/range-selector.ts#L58">libs/cdk/src/lib/utils/helpers/range-selector.ts:58</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Last registered selection state (either multiple or single).
-						Is updated on each <code>onRangeElementClicked</code> invokation. Will be <code>null</code> initially or once <code>reset()</code> is called.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RangeSelectionState</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="applyValueToEachInRange" class="tsd-anchor"></a>
-		<h3>apply<wbr>Value<wbr>ToEach<wbr>InRange</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">apply<wbr>Value<wbr>ToEach<wbr>InRange<span class="tsd-signature-symbol">(</span>selectionMethod<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/helpers/range-selector.ts#L102">libs/cdk/src/lib/utils/helpers/range-selector.ts:102</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Allows to apply selection to each item in selection range.
-						Accepts a function to apply selection to each item by registered index.</p>
-					</div>
-					<p>See usage example on this class itself.</p>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>selectionMethod: <span class="tsd-signature-type">function</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-signature">
-								<ul class="tsd-signatures tsd-kind-type-literal">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>index: <span class="tsd-signature-type">number</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onRangeElementToggled" class="tsd-anchor"></a>
-		<h3>on<wbr>Range<wbr>Element<wbr>Toggled</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Range<wbr>Element<wbr>Toggled<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TouchEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RangeSelectionState</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/helpers/range-selector.ts#L74">libs/cdk/src/lib/utils/helpers/range-selector.ts:74</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>The method that should be used to register each checkbox toggle.
-							Accepts two arguments: <code>index</code> and <code>event</code>. If none provided, will reset existing state.
-						Otherwise will register current index as last checked.</p>
-					</div>
-					<p>If toggling was done with &quot;shift&quot; pressed and there&#39;s a previously registered index, will register a range selection.
-					At the same time if checkbox was toggled without shift pressed or without previously selected one, this method will select only it.</p>
-					<p>After calling this method it&#39;s recommended to use <code>applyValueToEachInRange</code> to actually toggle each checkbox in range.</p>
-					<p>See usage example on this class itself.</p>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> index: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> event: <span class="tsd-signature-type">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TouchEvent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RangeSelectionState</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="reset" class="tsd-anchor"></a>
-		<h3>reset</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">reset<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/helpers/range-selector.ts#L117">libs/cdk/src/lib/utils/helpers/range-selector.ts:117</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Resets selection state. Useful when the list of selectable items is changed (e.g. by filtering, sorting, page change)</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">RangeSelector</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Constructors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
+<h3><span>constructor</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="constructor.new_RangeSelector"><span class="tsd-kind-constructor-signature">new <wbr/>Range<wbr/>Selector</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">RangeSelector</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">RangeSelector</span></h4></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="lastRangeSelectionState" class="tsd-anchor"></a>
+<h3><span>last<wbr/>Range<wbr/>Selection<wbr/>State</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="lastRangeSelectionState.lastRangeSelectionState-1"><span class="tsd-signature-symbol">get</span> lastRangeSelectionState<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">RangeSelectionState</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Last registered selection state (either multiple or single).
+Is updated on each <code>onRangeElementClicked</code> invokation. Will be <code>null</code> initially or once <code>reset()</code> is called.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">RangeSelectionState</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/helpers/range-selector.ts#L58">libs/cdk/src/lib/utils/helpers/range-selector.ts:58</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="applyValueToEachInRange" class="tsd-anchor"></a>
+<h3><span>apply<wbr/>Value<wbr/>To<wbr/>Each<wbr/>In<wbr/>Range</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="applyValueToEachInRange.applyValueToEachInRange-1"><span class="tsd-kind-call-signature">apply<wbr/>Value<wbr/>To<wbr/>Each<wbr/>In<wbr/>Range</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">selectionMethod</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Allows to apply selection to each item in selection range.
+Accepts a function to apply selection to each item by registered index.</p>
+<p>See usage example on this class itself.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">selectionMethod</span>: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">index</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter-signature">
+<ul class="tsd-signatures">
+<li class="tsd-signature"><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">index</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">index</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/helpers/range-selector.ts#L102">libs/cdk/src/lib/utils/helpers/range-selector.ts:102</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="onRangeElementToggled" class="tsd-anchor"></a>
+<h3><span>on<wbr/>Range<wbr/>Element<wbr/>Toggled</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="onRangeElementToggled.onRangeElementToggled-1"><span class="tsd-kind-call-signature">on<wbr/>Range<wbr/>Element<wbr/>Toggled</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">index</span><span class="tsd-signature-symbol">?</span>, <span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">RangeSelectionState</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The method that should be used to register each checkbox toggle.
+Accepts two arguments: <code>index</code> and <code>event</code>. If none provided, will reset existing state.
+Otherwise will register current index as last checked.</p>
+<p>If toggling was done with &quot;shift&quot; pressed and there&#39;s a previously registered index, will register a range selection.
+At the same time if checkbox was toggled without shift pressed or without previously selected one, this method will select only it.</p>
+<p>After calling this method it&#39;s recommended to use <code>applyValueToEachInRange</code> to actually toggle each checkbox in range.</p>
+<p>See usage example on this class itself.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">index</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">event</span>: <span class="tsd-signature-type ">KeyboardEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">MouseEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">TouchEvent</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">RangeSelectionState</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/helpers/range-selector.ts#L74">libs/cdk/src/lib/utils/helpers/range-selector.ts:74</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="reset" class="tsd-anchor"></a>
+<h3><span>reset</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="reset.reset-1"><span class="tsd-kind-call-signature">reset</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Resets selection state. Useful when the list of selectable items is changed (e.g. by filtering, sorting, page change)</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/helpers/range-selector.ts#L117">libs/cdk/src/lib/utils/helpers/range-selector.ts:117</a></li></ul></aside></li></ul></section></section></div>

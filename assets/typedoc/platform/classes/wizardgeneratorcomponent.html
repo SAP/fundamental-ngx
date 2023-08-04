@@ -1,684 +1,377 @@
 <div class="fd-tsdoc-container">
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Base Wizard Generator component with necessary inputs and methods.</p>
+</dd></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">BaseWizardGenerator</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">WizardGeneratorComponent</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-		<a name="_wizardGeneratorService" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _wizard<wbr>Generator<wbr>Service</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_wizard<wbr>Generator<wbr>Service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WizardGeneratorService</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>_wizardGeneratorService</span></p>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="contentHeight" class="tsd-anchor"></a>
-		<h3>content<wbr>Height</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">content<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>contentHeight</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L111">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:111</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Custom height to use for the wizard&#39;s content pane. By default, this value is calc(100vh - 144px), where 144px
-				is the combined height of the shellbar, wizard header and wizard footer.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="customSummaryStepTemplate" class="tsd-anchor"></a>
-		<h3>custom<wbr>Summary<wbr>Step<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">custom<wbr>Summary<wbr>Step<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L42">libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:42</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>User-defined template for Summary step.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="displaySummaryStep" class="tsd-anchor"></a>
-		<h3>display<wbr>Summary<wbr>Step</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">display<wbr>Summary<wbr>Step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>displaySummaryStep</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L117">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:117</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Boolean flag indicating whether to display Summary step in Wizard progress bar.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="finishButtonTemplate" class="tsd-anchor"></a>
-		<h3>finish<wbr>Button<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">finish<wbr>Button<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L30">libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:30</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>User-defined template for &quot;Finish&quot; button.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="goNextButtonTemplate" class="tsd-anchor"></a>
-		<h3>go<wbr>Next<wbr>Button<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">go<wbr>Next<wbr>Button<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L36">libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:36</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>User-defined template for &quot;Go Next&quot; button.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="navigationButtons" class="tsd-anchor"></a>
-		<h3>navigation<wbr>Buttons</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">navigation<wbr>Buttons<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>navigationButtons</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L104">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:104</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>If navigation buttons should be visible.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="responsivePaddings" class="tsd-anchor"></a>
-		<h3>responsive<wbr>Paddings</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">responsive<wbr>Paddings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>responsivePaddings</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L53">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:53</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Whether or not apply responsive paddings styling.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="reviewButtonTemplate" class="tsd-anchor"></a>
-		<h3>review<wbr>Button<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">review<wbr>Button<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L48">libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:48</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>User-defined template for &quot;Review&quot; button</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="unifiedLayout" class="tsd-anchor"></a>
-		<h3>unified<wbr>Layout</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">unified<wbr>Layout<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>unifiedLayout</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L121">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:121</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether all form items should have identical layout provided for form group.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="wizardCreated" class="tsd-anchor"></a>
-		<h3>wizard<wbr>Created</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">wizard<wbr>Created<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>wizardCreated</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L132">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:132</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Flag indicating that wizard is ready to be shown</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="wizardFinished" class="tsd-anchor"></a>
-		<h3>wizard<wbr>Finished</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">wizard<wbr>Finished<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WizardGeneratorFormsValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseWizardGenerator</span>.<span>wizardFinished</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L127">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:127</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">description</dt>
-				<dd><p>Emits wizard value when it&#39;s completed.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-		<a name="appendToWizard" class="tsd-anchor"></a>
-		<h3>append<wbr>ToWizard</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> appendToWizard<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> appendToWizard<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L98">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:98</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to append the step to the wizard. If false, each step will be displayed on a different page.
-						Default is true.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L94">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:94</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether to append the step to the wizard. If false, each step will be displayed on a different page.
-						Default is true.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="isBranchingStep" class="tsd-anchor"></a>
-		<h3>is<wbr>Branching<wbr>Step</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isBranchingStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L171">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:171</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether current step is a branching step.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="isCurrentStepCompleted" class="tsd-anchor"></a>
-		<h3>is<wbr>Current<wbr>Step<wbr>Completed</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isCurrentStepCompleted<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L186">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:186</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether the current step is completed</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="isFirstStep" class="tsd-anchor"></a>
-		<h3>is<wbr>First<wbr>Step</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isFirstStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L156">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:156</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Whether or not Wizard is currently on the first step</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="isLastStep" class="tsd-anchor"></a>
-		<h3>is<wbr>Last<wbr>Step</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isLastStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L163">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:163</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Whether or not Wizard is currently on the last step</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="isNextStepSummary" class="tsd-anchor"></a>
-		<h3>is<wbr>Next<wbr>Step<wbr>Summary</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isNextStepSummary<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L180">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:180</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether the next step is a Summary step.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-		<a name="isSummaryStep" class="tsd-anchor"></a>
-		<h3>is<wbr>Summary<wbr>Step</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isSummaryStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L137">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:137</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Is current step is summary step.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-		<a name="items" class="tsd-anchor"></a>
-		<h3>items</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> items<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> items<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L85">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:85</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L70">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:70</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Array of Wizard Steps.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>items: <span class="tsd-signature-type">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-		<a name="navigationButtonLabels" class="tsd-anchor"></a>
-		<h3>navigation<wbr>Button<wbr>Labels</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> navigationButtonLabels<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardNavigationButtons</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> navigationButtonLabels<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardNavigationButtons</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L62">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:62</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">WizardNavigationButtons</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L59">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:59</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Button labels to be used in Wizard navigation</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">WizardNavigationButtons</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-		<a name="visibleItems" class="tsd-anchor"></a>
-		<h3>visible<wbr>Items</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> visibleItems<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> visibleItems<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L149">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:149</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L146">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:146</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Array of visible Wizard Steps.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>items: <span class="tsd-signature-type">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="finish" class="tsd-anchor"></a>
-		<h3>finish</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">finish<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseWizardGenerator</span>.<span>finish</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L357">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:357</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Completes the wizard and emits it&#39;s formatted value.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="goBack" class="tsd-anchor"></a>
-		<h3>go<wbr>Back</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">go<wbr>Back<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseWizardGenerator</span>.<span>goBack</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L279">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:279</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Reverts Wizard progress one step back.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="goNext" class="tsd-anchor"></a>
-		<h3>go<wbr>Next</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">go<wbr>Next<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseWizardGenerator</span>.<span>goNext</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L301">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:301</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Progresses the Wizard one step further.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="stepStatusChanged" class="tsd-anchor"></a>
-		<h3>step<wbr>Status<wbr>Changed</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">step<wbr>Status<wbr>Changed<span class="tsd-signature-symbol">(</span>stepId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WizardStepStatus</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseWizardGenerator</span>.<span>stepStatusChanged</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L383">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:383</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Callback function to update steps status.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>stepId: <span class="tsd-signature-type">string</span></h5>
-					</li>
-					<li>
-						<h5>status: <span class="tsd-signature-type">WizardStepStatus</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>New step status.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="submitStepForms" class="tsd-anchor"></a>
-		<h3>submit<wbr>Step<wbr>Forms</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">submit<wbr>Step<wbr>Forms<span class="tsd-signature-symbol">(</span>currentStepIndex<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">WizardStepSubmittedForms</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseWizardGenerator</span>.<span>submitStepForms</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L344">libs/platform/src/lib/wizard-generator/base-wizard-generator.ts:344</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">description</dt>
-						<dd><p>Submits step forms.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> currentStepIndex: <span class="tsd-signature-type">string</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>current step index.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">WizardStepSubmittedForms</span><span class="tsd-signature-symbol">&gt;</span></h4>
-				<p>Observable with form values.</p>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">BaseWizardGenerator</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">WizardGeneratorComponent</span></li></ul></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="_wizardGeneratorService" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>_wizard<wbr/>Generator<wbr/>Service</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">_wizard<wbr/>Generator<wbr/>Service</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-class">WizardGeneratorService</span></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#_wizardGeneratorService">_wizardGeneratorService</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L227">platform/src/lib/wizard-generator/base-wizard-generator.ts:227</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="contentHeight" class="tsd-anchor"></a>
+<h3><span>content<wbr/>Height</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">content<wbr/>Height</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Custom height to use for the wizard&#39;s content pane. By default, this value is calc(100vh - 144px), where 144px
+is the combined height of the shellbar, wizard header and wizard footer.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#contentHeight">contentHeight</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L111">platform/src/lib/wizard-generator/base-wizard-generator.ts:111</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="customSummaryStepTemplate" class="tsd-anchor"></a>
+<h3><span>custom<wbr/>Summary<wbr/>Step<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">custom<wbr/>Summary<wbr/>Step<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>User-defined template for Summary step.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L42">platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:42</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="displaySummaryStep" class="tsd-anchor"></a>
+<h3><span>display<wbr/>Summary<wbr/>Step</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">display<wbr/>Summary<wbr/>Step</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Boolean flag indicating whether to display Summary step in Wizard progress bar.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#displaySummaryStep">displaySummaryStep</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L117">platform/src/lib/wizard-generator/base-wizard-generator.ts:117</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="finishButtonTemplate" class="tsd-anchor"></a>
+<h3><span>finish<wbr/>Button<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">finish<wbr/>Button<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>User-defined template for &quot;Finish&quot; button.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L30">platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:30</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="goNextButtonTemplate" class="tsd-anchor"></a>
+<h3><span>go<wbr/>Next<wbr/>Button<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">go<wbr/>Next<wbr/>Button<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>User-defined template for &quot;Go Next&quot; button.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L36">platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:36</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="navigationButtons" class="tsd-anchor"></a>
+<h3><span>navigation<wbr/>Buttons</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">navigation<wbr/>Buttons</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>If navigation buttons should be visible.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#navigationButtons">navigationButtons</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L104">platform/src/lib/wizard-generator/base-wizard-generator.ts:104</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="responsivePaddings" class="tsd-anchor"></a>
+<h3><span>responsive<wbr/>Paddings</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">responsive<wbr/>Paddings</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Whether or not apply responsive paddings styling.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#responsivePaddings">responsivePaddings</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L53">platform/src/lib/wizard-generator/base-wizard-generator.ts:53</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="reviewButtonTemplate" class="tsd-anchor"></a>
+<h3><span>review<wbr/>Button<wbr/>Template</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">review<wbr/>Button<wbr/>Template</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>User-defined template for &quot;Review&quot; button</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts#L48">platform/src/lib/wizard-generator/components/wizard-generator/wizard-generator.component.ts:48</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="unifiedLayout" class="tsd-anchor"></a>
+<h3><span>unified<wbr/>Layout</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">unified<wbr/>Layout</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether all form items should have identical layout provided for form group.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#unifiedLayout">unifiedLayout</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L121">platform/src/lib/wizard-generator/base-wizard-generator.ts:121</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="wizardCreated" class="tsd-anchor"></a>
+<h3><span>wizard<wbr/>Created</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">wizard<wbr/>Created</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Flag indicating that wizard is ready to be shown</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#wizardCreated">wizardCreated</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L132">platform/src/lib/wizard-generator/base-wizard-generator.ts:132</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="wizardFinished" class="tsd-anchor"></a>
+<h3><span>wizard<wbr/>Finished</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">wizard<wbr/>Finished</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">WizardGeneratorFormsValue</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Emits wizard value when it&#39;s completed.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#wizardFinished">wizardFinished</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L127">platform/src/lib/wizard-generator/base-wizard-generator.ts:127</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="appendToWizard" class="tsd-anchor"></a>
+<h3><span>append<wbr/>To<wbr/>Wizard</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="appendToWizard.appendToWizard-1"><span class="tsd-signature-symbol">get</span> appendToWizard<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-signature tsd-kind-icon" id="appendToWizard.appendToWizard-2"><span class="tsd-signature-symbol">set</span> appendToWizard<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.appendToWizard</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L98">platform/src/lib/wizard-generator/base-wizard-generator.ts:98</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to append the step to the wizard. If false, each step will be displayed on a different page.
+Default is true.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.appendToWizard</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L93">platform/src/lib/wizard-generator/base-wizard-generator.ts:93</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="isBranchingStep" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Branching<wbr/>Step</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="isBranchingStep.isBranchingStep-1"><span class="tsd-signature-symbol">get</span> isBranchingStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether current step is a branching step.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.isBranchingStep</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L171">platform/src/lib/wizard-generator/base-wizard-generator.ts:171</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="isCurrentStepCompleted" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Current<wbr/>Step<wbr/>Completed</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="isCurrentStepCompleted.isCurrentStepCompleted-1"><span class="tsd-signature-symbol">get</span> isCurrentStepCompleted<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the current step is completed</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.isCurrentStepCompleted</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L186">platform/src/lib/wizard-generator/base-wizard-generator.ts:186</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="isFirstStep" class="tsd-anchor"></a>
+<h3><span>is<wbr/>First<wbr/>Step</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="isFirstStep.isFirstStep-1"><span class="tsd-signature-symbol">get</span> isFirstStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Whether or not Wizard is currently on the first step</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.isFirstStep</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L156">platform/src/lib/wizard-generator/base-wizard-generator.ts:156</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="isLastStep" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Last<wbr/>Step</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="isLastStep.isLastStep-1"><span class="tsd-signature-symbol">get</span> isLastStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Whether or not Wizard is currently on the last step</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.isLastStep</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L163">platform/src/lib/wizard-generator/base-wizard-generator.ts:163</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="isNextStepSummary" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Next<wbr/>Step<wbr/>Summary</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="isNextStepSummary.isNextStepSummary-1"><span class="tsd-signature-symbol">get</span> isNextStepSummary<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the next step is a Summary step.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.isNextStepSummary</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L180">platform/src/lib/wizard-generator/base-wizard-generator.ts:180</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="isSummaryStep" class="tsd-anchor"></a>
+<h3><span>is<wbr/>Summary<wbr/>Step</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="isSummaryStep.isSummaryStep-1"><span class="tsd-signature-symbol">get</span> isSummaryStep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Is current step is summary step.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.isSummaryStep</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L137">platform/src/lib/wizard-generator/base-wizard-generator.ts:137</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="items" class="tsd-anchor"></a>
+<h3><span>items</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="items.items-1"><span class="tsd-signature-symbol">get</span> items<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-interface">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></li>
+<li class="tsd-signature tsd-kind-icon" id="items.items-2"><span class="tsd-signature-symbol">set</span> items<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">items</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-interface">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.items</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L85">platform/src/lib/wizard-generator/base-wizard-generator.ts:85</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">items</span>: <span class="tsd-signature-type tsd-kind-interface">WizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Array of Wizard Steps.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.items</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L69">platform/src/lib/wizard-generator/base-wizard-generator.ts:69</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="navigationButtonLabels" class="tsd-anchor"></a>
+<h3><span>navigation<wbr/>Button<wbr/>Labels</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="navigationButtonLabels.navigationButtonLabels-1"><span class="tsd-signature-symbol">get</span> navigationButtonLabels<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-interface">WizardNavigationButtons</span></li>
+<li class="tsd-signature tsd-kind-icon" id="navigationButtonLabels.navigationButtonLabels-2"><span class="tsd-signature-symbol">set</span> navigationButtonLabels<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-interface">WizardNavigationButtons</span></h4><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.navigationButtonLabels</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L62">platform/src/lib/wizard-generator/base-wizard-generator.ts:62</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-interface">WizardNavigationButtons</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Button labels to be used in Wizard navigation</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.navigationButtonLabels</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L58">platform/src/lib/wizard-generator/base-wizard-generator.ts:58</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="visibleItems" class="tsd-anchor"></a>
+<h3><span>visible<wbr/>Items</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="visibleItems.visibleItems-1"><span class="tsd-signature-symbol">get</span> visibleItems<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></li>
+<li class="tsd-signature tsd-kind-icon" id="visibleItems.visibleItems-2"><span class="tsd-signature-symbol">set</span> visibleItems<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">items</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.visibleItems</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L149">platform/src/lib/wizard-generator/base-wizard-generator.ts:149</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">items</span>: <span class="tsd-signature-type ">PreparedWizardGeneratorItem</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Array of visible Wizard Steps.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseWizardGenerator.visibleItems</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L146">platform/src/lib/wizard-generator/base-wizard-generator.ts:146</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="finish" class="tsd-anchor"></a>
+<h3><span>finish</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="finish.finish-1"><span class="tsd-kind-call-signature">finish</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Completes the wizard and emits it&#39;s formatted value.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#finish">finish</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L357">platform/src/lib/wizard-generator/base-wizard-generator.ts:357</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="goBack" class="tsd-anchor"></a>
+<h3><span>go<wbr/>Back</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="goBack.goBack-1"><span class="tsd-kind-call-signature">go<wbr/>Back</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Reverts Wizard progress one step back.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#goBack">goBack</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L279">platform/src/lib/wizard-generator/base-wizard-generator.ts:279</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="goNext" class="tsd-anchor"></a>
+<h3><span>go<wbr/>Next</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="goNext.goNext-1"><span class="tsd-kind-call-signature">go<wbr/>Next</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Progresses the Wizard one step further.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#goNext">goNext</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L301">platform/src/lib/wizard-generator/base-wizard-generator.ts:301</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="stepStatusChanged" class="tsd-anchor"></a>
+<h3><span>step<wbr/>Status<wbr/>Changed</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="stepStatusChanged.stepStatusChanged-1"><span class="tsd-kind-call-signature">step<wbr/>Status<wbr/>Changed</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">stepId</span>, <span class="tsd-kind-parameter">status</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">stepId</span>: <span class="tsd-signature-type">string</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">status</span>: <span class="tsd-signature-type ">WizardStepStatus</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>New step status.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Callback function to update steps status.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#stepStatusChanged">stepStatusChanged</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L383">platform/src/lib/wizard-generator/base-wizard-generator.ts:383</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="submitStepForms" class="tsd-anchor"></a>
+<h3><span>submit<wbr/>Step<wbr/>Forms</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="submitStepForms.submitStepForms-1"><span class="tsd-kind-call-signature">submit<wbr/>Step<wbr/>Forms</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">currentStepIndex</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">WizardStepSubmittedForms</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">currentStepIndex</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>current step index.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">WizardStepSubmittedForms</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Observable with form values.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Description</dt><dd><p>Submits step forms.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseWizardGenerator.html">BaseWizardGenerator</a>.<a href="BaseWizardGenerator.html#submitStepForms">submitStepForms</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/wizard-generator/base-wizard-generator.ts#L344">platform/src/lib/wizard-generator/base-wizard-generator.ts:344</a></li></ul></aside></li></ul></section></section></div>

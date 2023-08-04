@@ -1,439 +1,337 @@
-<div class="fd-tsdoc-container">
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>P = <span class="tsd-signature-type">any</span></h4>
-		</li>
-	</ul>
-</section>
+<div class="fd-tsdoc-container"> 
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">P</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">BaseDismissibleToastService</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">MessageToastService</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="injector" class="tsd-anchor"></a>
-		<h3>injector</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">injector<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Injector</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseDismissibleToastService</span>.<span>injector</span></p>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="overlay" class="tsd-anchor"></a>
-		<h3>overlay</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">overlay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Overlay</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from <span>BaseDismissibleToastService</span>.<span>overlay</span></p>
-		</aside>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-protected">
-		<a name="animateToast" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> animate<wbr>Toast</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">animate<wbr>Toast&lt;T&gt;<span class="tsd-signature-symbol">(</span>toastRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseToastDurationDismissibleRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>animateToast</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible.service.ts#L14">libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible.service.ts:14</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Animates the old Toast out and the new one in.</p>
-					</div>
-				</div>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T</h4>
-					</li>
-				</ul>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>toastRef: <span class="tsd-signature-type">BaseToastDurationDismissibleRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-		<a name="attachToastContainerComponent" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> attach<wbr>Toast<wbr>Container<wbr>Component</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">attach<wbr>Toast<wbr>Container<wbr>Component<span class="tsd-signature-symbol">(</span>overlayRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OverlayRef</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>attachToastContainerComponent</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L198">libs/cdk/src/lib/utils/toast/base-toast.service.ts:198</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Attaches the Toast container component to the overlay.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>overlayRef: <span class="tsd-signature-type">OverlayRef</span></h5>
-					</li>
-					<li>
-						<h5>config: <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-protected">
-		<a name="createContentComponentInjector" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> create<wbr>Content<wbr>Component<wbr>Injector</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">create<wbr>Content<wbr>Component<wbr>Injector&lt;T&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span>, toastRef<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ToastContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Injector</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>createContentComponentInjector</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L218">libs/cdk/src/lib/utils/toast/base-toast.service.ts:218</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Creates an injector to be used inside a Toast component.</p>
-					</div>
-				</div>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T</h4>
-					</li>
-				</ul>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>config: <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Config that was used to create the Toast.</p>
-						</div>
-					</li>
-					<li>
-						<h5>toastRef: <span class="tsd-signature-type">BaseToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ToastContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Reference to the Toast.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Injector</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="dismissAll" class="tsd-anchor"></a>
-		<h3>dismiss<wbr>All</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">dismiss<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>dismissAll</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L122">libs/cdk/src/lib/utils/toast/base-toast.service.ts:122</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">deprecated.</dt>
-						<dd><p>Use <code>hideAll()</code> method instead.</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="hasOpenMessageToasts" class="tsd-anchor"></a>
-		<h3>has<wbr>Open<wbr>Message<wbr>Toasts</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">has<wbr>Open<wbr>Message<wbr>Toasts<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>hasOpenMessageToasts</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L114">libs/cdk/src/lib/utils/toast/base-toast.service.ts:114</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Returns <code>true</code> if there are some message toasts currently open. <code>False</code> otherwise.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="hideAll" class="tsd-anchor"></a>
-		<h3>hide<wbr>All</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">hide<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>hideAll</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L107">libs/cdk/src/lib/utils/toast/base-toast.service.ts:107</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Dismisses all Toasts.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
-		<a name="open" class="tsd-anchor"></a>
-		<h3>open</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">open&lt;T&gt;<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MessageToastTextComponent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>BaseDismissibleToastService</span>.<span>open</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/message-toast/message-toast.service.ts#L35">libs/core/src/lib/message-toast/message-toast.service.ts:35</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Opens toast with a provided message.</p>
-					</div>
-				</div>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T = <span class="tsd-signature-type">any</span></h4>
-					</li>
-				</ul>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>message: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Message to display in a Message Toast.</p>
-						</div>
-					</li>
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> config: <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Toast configuration.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MessageToastTextComponent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-				<p>Toast reference.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
-		<a name="openFromComponent" class="tsd-anchor"></a>
-		<h3>open<wbr>From<wbr>Component</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">open<wbr>From<wbr>Component&lt;T&gt;<span class="tsd-signature-symbol">(</span>component<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>BaseDismissibleToastService</span>.<span>openFromComponent</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/message-toast/message-toast.service.ts#L68">libs/core/src/lib/message-toast/message-toast.service.ts:68</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Opens a Toast with provided component inside.</p>
-					</div>
-				</div>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T</h4>
-					</li>
-				</ul>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>component: <span class="tsd-signature-type">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Component to render inside a Toast.</p>
-						</div>
-					</li>
-					<li>
-						<h5>config: <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Toast configuration.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
-				<p>Toast reference.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="openFromString" class="tsd-anchor"></a>
-		<h3>open<wbr>From<wbr>String</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">open<wbr>From<wbr>String<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, config<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastTextComponent</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>BaseDismissibleToastService</span>.<span>openFromString</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/message-toast/message-toast.service.ts#L53">libs/core/src/lib/message-toast/message-toast.service.ts:53</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Opens a Toast with provided message as a content.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>message: <span class="tsd-signature-type">string</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>string to render inside a Toast.</p>
-						</div>
-					</li>
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> config: <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Toast configuration</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MessageToastTextComponent</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="openFromTemplate" class="tsd-anchor"></a>
-		<h3>open<wbr>From<wbr>Template</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">open<wbr>From<wbr>Template<span class="tsd-signature-symbol">(</span>template<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>BaseDismissibleToastService</span>.<span>openFromTemplate</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/message-toast/message-toast.service.ts#L78">libs/core/src/lib/message-toast/message-toast.service.ts:78</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Opens a Toast with provided Template Reference.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>template: <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Template Reference to render inside a Toast.</p>
-						</div>
-					</li>
-					<li>
-						<h5>config: <span class="tsd-signature-type">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>Toast configuration.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
-				<p>Toast reference.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-		<a name="setNewPositionStrategy" class="tsd-anchor"></a>
-		<h3>set<wbr>New<wbr>Position<wbr>Strategy</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>New<wbr>Position<wbr>Strategy<span class="tsd-signature-symbol">(</span>newStrategy<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BaseToastPosition</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>BaseDismissibleToastService</span>.<span>setNewPositionStrategy</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L130">libs/cdk/src/lib/utils/toast/base-toast.service.ts:130</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Sets new position strategy for all Toast items.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>newStrategy: <span class="tsd-signature-type">BaseToastPosition</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>New Position Strategy</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">BaseDismissibleToastService</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">MessageToastService</span></li></ul></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="defaultConfig" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>default<wbr/>Config</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">default<wbr/>Config</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Hidden</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#defaultConfig">defaultConfig</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L21">libs/core/src/lib/message-toast/message-toast.service.ts:21</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="injector" class="tsd-anchor"></a>
+<h3><span>injector</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">injector</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Injector</span></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#injector">injector</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L64">libs/cdk/src/lib/utils/toast/base-toast.service.ts:64</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="overlay" class="tsd-anchor"></a>
+<h3><span>overlay</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">overlay</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Overlay</span></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#overlay">overlay</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L64">libs/cdk/src/lib/utils/toast/base-toast.service.ts:64</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="toastContainerComponent" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>toast<wbr/>Container<wbr/>Component</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">toast<wbr/>Container<wbr/>Component</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type tsd-kind-class">MessageToastComponent</span><span class="tsd-signature-symbol"> = MessageToastComponent</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Hidden</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#toastContainerComponent">toastContainerComponent</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L15">libs/core/src/lib/message-toast/message-toast.service.ts:15</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="toastDataInjectionToken" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>toast<wbr/>Data<wbr/>Injection<wbr/>Token</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">toast<wbr/>Data<wbr/>Injection<wbr/>Token</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">InjectionToken</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = MESSAGE_TOAST_DATA</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Hidden</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#toastDataInjectionToken">toastDataInjectionToken</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L17">libs/core/src/lib/message-toast/message-toast.service.ts:17</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="toastPositionStrategy" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>toast<wbr/>Position<wbr/>Strategy</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">toast<wbr/>Position<wbr/>Strategy</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type tsd-kind-class">ToastBottomCenterPosition</span><span class="tsd-signature-symbol"> = ToastBottomCenterPosition</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Hidden</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#toastPositionStrategy">toastPositionStrategy</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L19">libs/core/src/lib/message-toast/message-toast.service.ts:19</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="toastTextComponent" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>toast<wbr/>Text<wbr/>Component</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">toast<wbr/>Text<wbr/>Component</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">typeof </span><span class="tsd-signature-type tsd-kind-class">MessageToastTextComponent</span><span class="tsd-signature-symbol"> = MessageToastTextComponent</span></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Hidden</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#toastTextComponent">toastTextComponent</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L13">libs/core/src/lib/message-toast/message-toast.service.ts:13</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="animateToast" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>animate<wbr/>Toast</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="animateToast.animateToast-1"><span class="tsd-kind-call-signature">animate<wbr/>Toast</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">toastRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Animates the old Toast out and the new one in.</p>
+</div></div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">toastRef</span>: <span class="tsd-signature-type tsd-kind-class">BaseToastDurationDismissibleRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-class">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#animateToast">animateToast</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible.service.ts#L14">libs/cdk/src/lib/utils/toast/classes/duration-dismissible/base-toast-duration-dismissible.service.ts:14</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="attachToastContainerComponent" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>attach<wbr/>Toast<wbr/>Container<wbr/>Component</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="attachToastContainerComponent.attachToastContainerComponent-1"><span class="tsd-kind-call-signature">attach<wbr/>Toast<wbr/>Container<wbr/>Component</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">overlayRef</span>, <span class="tsd-kind-parameter">config</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Attaches the Toast container component to the overlay.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">overlayRef</span>: <span class="tsd-signature-type ">OverlayRef</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">config</span>: <span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">BaseToastDurationDismissibleContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#attachToastContainerComponent">attachToastContainerComponent</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L200">libs/cdk/src/lib/utils/toast/base-toast.service.ts:200</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="createContentComponentInjector" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>create<wbr/>Content<wbr/>Component<wbr/>Injector</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="createContentComponentInjector.createContentComponentInjector-1"><span class="tsd-kind-call-signature">create<wbr/>Content<wbr/>Component<wbr/>Injector</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">config</span>, <span class="tsd-kind-parameter">toastRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Injector</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Creates an injector to be used inside a Toast component.</p>
+</div></div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">config</span>: <span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Config that was used to create the Toast.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">toastRef</span>: <span class="tsd-signature-type tsd-kind-class">BaseToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type tsd-kind-interface">ToastContainerComponent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Reference to the Toast.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Injector</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#createContentComponentInjector">createContentComponentInjector</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L220">libs/cdk/src/lib/utils/toast/base-toast.service.ts:220</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="dismissAll" class="tsd-anchor"></a>
+<h3><span>dismiss<wbr/>All</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="dismissAll.dismissAll-1"><span class="tsd-kind-call-signature">dismiss<wbr/>All</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>@deprecated.
+Use <code>hideAll()</code> method instead.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#dismissAll">dismissAll</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L123">libs/cdk/src/lib/utils/toast/base-toast.service.ts:123</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="hasOpenMessageToasts" class="tsd-anchor"></a>
+<h3><span>has<wbr/>Open<wbr/>Message<wbr/>Toasts</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="hasOpenMessageToasts.hasOpenMessageToasts-1"><span class="tsd-kind-call-signature">has<wbr/>Open<wbr/>Message<wbr/>Toasts</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Returns <code>true</code> if there are some message toasts currently open. <code>False</code> otherwise.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#hasOpenMessageToasts">hasOpenMessageToasts</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L115">libs/cdk/src/lib/utils/toast/base-toast.service.ts:115</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="hideAll" class="tsd-anchor"></a>
+<h3><span>hide<wbr/>All</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="hideAll.hideAll-1"><span class="tsd-kind-call-signature">hide<wbr/>All</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Dismisses all Toasts.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#hideAll">hideAll</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L108">libs/cdk/src/lib/utils/toast/base-toast.service.ts:108</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="open" class="tsd-anchor"></a>
+<h3><span>open</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="open.open-1"><span class="tsd-kind-call-signature">open</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span>, <span class="tsd-kind-parameter">config</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-class">MessageToastTextComponent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Opens toast with a provided message.</p>
+</div></div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span> = <span class="tsd-signature-type">any</span></h4></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Message to display in a Message Toast.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">config</span>: <span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toast configuration.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-class">MessageToastTextComponent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Toast reference.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#open">open</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L35">libs/core/src/lib/message-toast/message-toast.service.ts:35</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="openFromComponent" class="tsd-anchor"></a>
+<h3><span>open<wbr/>From<wbr/>Component</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="openFromComponent.openFromComponent-1"><span class="tsd-kind-call-signature">open<wbr/>From<wbr/>Component</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">component</span>, <span class="tsd-kind-parameter">config</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Opens a Toast with provided component inside.</p>
+</div></div>
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">T</span></h4></li></ul></section>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">component</span>: <span class="tsd-signature-type ">Type</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Component to render inside a Toast.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">config</span>: <span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toast configuration.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">T</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Toast reference.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#openFromComponent">openFromComponent</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L68">libs/core/src/lib/message-toast/message-toast.service.ts:68</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="openFromString" class="tsd-anchor"></a>
+<h3><span>open<wbr/>From<wbr/>String</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="openFromString.openFromString-1"><span class="tsd-kind-call-signature">open<wbr/>From<wbr/>String</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">message</span>, <span class="tsd-kind-parameter">config</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">MessageToastTextComponent</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Opens a Toast with provided message as a content.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">message</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>string to render inside a Toast.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">config</span>: <span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toast configuration</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">MessageToastTextComponent</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#openFromString">openFromString</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L53">libs/core/src/lib/message-toast/message-toast.service.ts:53</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="openFromTemplate" class="tsd-anchor"></a>
+<h3><span>open<wbr/>From<wbr/>Template</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="openFromTemplate.openFromTemplate-1"><span class="tsd-kind-call-signature">open<wbr/>From<wbr/>Template</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">template</span>, <span class="tsd-kind-parameter">config</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Opens a Toast with provided Template Reference.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">template</span>: <span class="tsd-signature-type ">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Template Reference to render inside a Toast.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">config</span>: <span class="tsd-signature-type tsd-kind-class">MessageToastConfig</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">P</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Toast configuration.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">MessageToastRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">EmbeddedViewRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><p>Toast reference.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#openFromTemplate">openFromTemplate</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/message-toast/message-toast.service.ts#L78">libs/core/src/lib/message-toast/message-toast.service.ts:78</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="setNewPositionStrategy" class="tsd-anchor"></a>
+<h3><span>set<wbr/>New<wbr/>Position<wbr/>Strategy</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="setNewPositionStrategy.setNewPositionStrategy-1"><span class="tsd-kind-call-signature">set<wbr/>New<wbr/>Position<wbr/>Strategy</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">newStrategy</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets new position strategy for all Toast items.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">newStrategy</span>: <span class="tsd-signature-type tsd-kind-class">BaseToastPosition</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>New Position Strategy</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from <a href="BaseDismissibleToastService.html">BaseDismissibleToastService</a>.<a href="BaseDismissibleToastService.html#setNewPositionStrategy">setNewPositionStrategy</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/cdk/src/lib/utils/toast/base-toast.service.ts#L132">libs/cdk/src/lib/utils/toast/base-toast.service.ts:132</a></li></ul></aside></li></ul></section></section></div>

@@ -1,769 +1,481 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>All form components share the same information (value, name, placeholder,.. ) as well as
-			the same behavior given by ControlValueAccessor.</p>
-		</div>
-		<p>Even this is not ideal solution there is no other way then use inheritance to reuse some of the
-			common logic. It should be possible to use some kind of compositions with Proxies but something
-		similar that exists in Aspect Oriented Programing.</p>
-		<p>Usually try to fire stateChange only for things that can change dynamically in runtime. We don&#39;t expect
-		that e.g. placeholder will change after component is created</p>
-	</div>
-</section>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>All form components share the same information (value, name, placeholder,.. ) as well as
+the same behavior given by ControlValueAccessor.</p>
+<p>Even this is not ideal solution there is no other way then use inheritance to reuse some of the
+common logic. It should be possible to use some kind of compositions with Proxies but something
+similar that exists in Aspect Oriented Programing.</p>
+<p>Usually try to fire stateChange only for things that can change dynamically in runtime. We don&#39;t expect
+that e.g. placeholder will change after component is created</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">BaseComponent</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">BaseInput</span>
-					<ul class="tsd-hierarchy">
-						<li>
-							<span class="tsd-signature-type">CheckboxComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">PlatformDatePickerComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">PlatformDatetimePickerComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">InputComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">InputGroupComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">PlatformFileUploaderComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">RadioButtonComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">StepInputComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">SwitchComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">TextAreaComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">PlatformTimePickerComponent</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">CollectionBaseInput</span>
-						</li>
-						<li>
-							<span class="tsd-signature-type">SliderComponent</span>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">BaseComponent</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">BaseInput</span>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">CollectionBaseInput</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">CheckboxComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">PlatformDatePickerComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">PlatformDatetimePickerComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">InputComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">InputGroupComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">PlatformFileUploaderComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">RadioButtonComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">StepInputComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">SwitchComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">TextAreaComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">PlatformTimePickerComponent</span></li>
+<li><span class="tsd-signature-type tsd-kind-class">SliderComponent</span></li></ul></li></ul></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">PlatformFormFieldControl</span></li>
-		<li><span class="tsd-signature-type">ControlValueAccessor</span></li>
-		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">DoCheck</span></li>
-		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
-		<a name="_cd" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _cd</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_cd<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ChangeDetectorRef</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from BaseComponent._cd</p>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-		<a name="_elementRef" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> _element<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L153">libs/platform/src/lib/shared/form/base.input.ts:153</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Reference to internal Input element</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="ariaDescribedBy" class="tsd-anchor"></a>
-		<h3>aria<wbr>Described<wbr>By</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Described<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from BaseComponent.ariaDescribedBy</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/base.ts#L32">libs/platform/src/lib/shared/base.ts:32</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Sets the <code>aria-describedby</code> attribute to the element.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="ariaLabel" class="tsd-anchor"></a>
-		<h3>aria<wbr>Label</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides BaseComponent.ariaLabel</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L121">libs/platform/src/lib/shared/form/base.input.ts:121</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Sets control aria-label attribute value</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="ariaLabelledBy" class="tsd-anchor"></a>
-		<h3>aria<wbr>Labelled<wbr>By</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Labelled<wbr>By<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides BaseComponent.ariaLabelledBy</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L117">libs/platform/src/lib/shared/form/base.input.ts:117</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Binds to control aria-labelledBy attribute</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="controlContainer" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> control<wbr>Container</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">control<wbr>Container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ControlContainer</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="elementRef" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> element<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.elementRef</p>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="focused" class="tsd-anchor"></a>
-		<h3>focused</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">focused<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.focused</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L158">libs/platform/src/lib/shared/form/base.input.ts:158</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>See @FormFieldControl</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="id" class="tsd-anchor"></a>
-		<h3>id</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.id</p>
-			<p>Inherited from BaseComponent.id</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/base.ts#L36">libs/platform/src/lib/shared/base.ts:36</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>id for the Element</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="name" class="tsd-anchor"></a>
-		<h3>name</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from BaseComponent.name</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/base.ts#L40">libs/platform/src/lib/shared/base.ts:40</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>name for the element</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="ngControl" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> ng<wbr>Control</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">ng<wbr>Control<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NgControl</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.ngControl</p>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="ngForm" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> ng<wbr>Form</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">ng<wbr>Form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NgForm</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="placeholder" class="tsd-anchor"></a>
-		<h3>placeholder</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.placeholder</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L58">libs/platform/src/lib/shared/form/base.input.ts:58</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Input placeholder</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="readonly" class="tsd-anchor"></a>
-		<h3>readonly</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">readonly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L113">libs/platform/src/lib/shared/form/base.input.ts:113</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>readOnly Value to Mark component read only</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="required" class="tsd-anchor"></a>
-		<h3>required</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">required<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.required</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L178">libs/platform/src/lib/shared/form/base.input.ts:178</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>set when input field is mandatory form field</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="stateChanges" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> state<wbr>Changes</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">state<wbr>Changes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of PlatformFormFieldControl.stateChanges</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L172">libs/platform/src/lib/shared/form/base.input.ts:172</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>See @FormFieldControl</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="stateMessage" class="tsd-anchor"></a>
-		<h3>state<wbr>Message</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">state<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L88">libs/platform/src/lib/shared/form/base.input.ts:88</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Holds the message with respect to state</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-		<a name="width" class="tsd-anchor"></a>
-		<h3>width</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Inherited from BaseComponent.width</p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/base.ts#L50">libs/platform/src/lib/shared/base.ts:50</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>width of the element</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-		<a name="controlInvalid" class="tsd-anchor"></a>
-		<h3>control<wbr>Invalid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> controlInvalid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L161">libs/platform/src/lib/shared/form/base.input.ts:161</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether control has errors</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="disabled" class="tsd-anchor"></a>
-		<h3>disabled</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> disabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> disabled<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L102">libs/platform/src/lib/shared/form/base.input.ts:102</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether the input is disabled</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L99">libs/platform/src/lib/shared/form/base.input.ts:99</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Whether the input is disabled</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="editable" class="tsd-anchor"></a>
-		<h3>editable</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> editable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> editable<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">BooleanInput</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L135">libs/platform/src/lib/shared/form/base.input.ts:135</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Tell the component if we are in editing mode.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L127">libs/platform/src/lib/shared/form/base.input.ts:127</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Tell the component if we are in editing mode.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">BooleanInput</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="state" class="tsd-anchor"></a>
-		<h3>state</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FormStates</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormStates</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L74">libs/platform/src/lib/shared/form/base.input.ts:74</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p> The state of the form control - applies css classes.
-						Can be &#39;success&#39;, &#39;error&#39;, &#39;warning&#39;, &#39;default&#39;, &#39;information&#39;.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">FormStates</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L67">libs/platform/src/lib/shared/form/base.input.ts:67</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p> The state of the form control - applies css classes.
-						Can be &#39;success&#39;, &#39;error&#39;, &#39;warning&#39;, &#39;default&#39;, &#39;information&#39;.</p>
-					</div>
-					<dl class="tsd-comment-tags">
-						<dt class="fd-tsd-comment-tag-pill">default</dt>
-						<dd><p>&#39;default&#39;</p>
-						</dd>
-					</dl>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>state: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">FormStates</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="value" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> value</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L145">libs/platform/src/lib/shared/form/base.input.ts:145</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>need to make  these value accessor as abstract to be implemented by subclasses. Having them
-							in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
-						which we need to programmatically wraps components set/get value</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L147">libs/platform/src/lib/shared/form/base.input.ts:147</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>need to make  these value accessor as abstract to be implemented by subclasses. Having them
-							in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
-						which we need to programmatically wraps components set/get value</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="_onFocusChanged" class="tsd-anchor"></a>
-		<h3>_on<wbr>Focus<wbr>Changed</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">_on<wbr>Focus<wbr>Changed<span class="tsd-signature-symbol">(</span>isFocused<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L294">libs/platform/src/lib/shared/form/base.input.ts:294</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Keeps track of element focus</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>isFocused: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="focus" class="tsd-anchor"></a>
-		<h3>focus</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">focus<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of PlatformFormFieldControl.focus</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L324">libs/platform/src/lib/shared/form/base.input.ts:324</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>In most of the cases when working with input element directly you should be just find to assing
-						variable to this element</p>
-					</div>
-					<pre><code><span style="color: #000000">&lt;</span><span style="color: #001080">input</span><span style="color: #000000"> #</span><span style="color: #001080">inputElementRef</span><span style="color: #000000"> </span><span style="color: #001080">fd</span><span style="color: #000000">-</span><span style="color: #001080">form</span><span style="color: #000000">-</span><span style="color: #001080">control</span><span style="color: #000000"> ...&gt;</span>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">PlatformFormFieldControl</span></li>
+<li><span class="tsd-signature-type ">ControlValueAccessor</span></li>
+<li><span class="tsd-signature-type ">OnInit</span></li>
+<li><span class="tsd-signature-type ">DoCheck</span></li>
+<li><span class="tsd-signature-type ">AfterViewInit</span></li>
+<li><span class="tsd-signature-type ">OnDestroy</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected tsd-is-inherited"><a id="_cd" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>_cd</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">_cd</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ChangeDetectorRef</span></div><aside class="tsd-sources">
+<p>Inherited from BaseComponent._cd</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/base.ts#L62">platform/src/lib/shared/base.ts:62</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="_elementRef" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>_element<wbr/>Ref</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">_element<wbr/>Ref</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Reference to internal Input element</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L153">platform/src/lib/shared/form/base.input.ts:153</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="ariaDescribedBy" class="tsd-anchor"></a>
+<h3><span>aria<wbr/>Described<wbr/>By</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">aria<wbr/>Described<wbr/>By</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets the <code>aria-describedby</code> attribute to the element.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseComponent.ariaDescribedBy</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/base.ts#L32">platform/src/lib/shared/base.ts:32</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ariaLabel" class="tsd-anchor"></a>
+<h3><span>aria<wbr/>Label</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">aria<wbr/>Label</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets control aria-label attribute value</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides BaseComponent.ariaLabel</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L121">platform/src/lib/shared/form/base.input.ts:121</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ariaLabelledBy" class="tsd-anchor"></a>
+<h3><span>aria<wbr/>Labelled<wbr/>By</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">aria<wbr/>Labelled<wbr/>By</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Binds to control aria-labelledBy attribute</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides BaseComponent.ariaLabelledBy</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L117">platform/src/lib/shared/form/base.input.ts:117</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="controlContainer" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>control<wbr/>Container</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">control<wbr/>Container</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ControlContainer</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L191">platform/src/lib/shared/form/base.input.ts:191</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="elementRef" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>element<wbr/>Ref</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">element<wbr/>Ref</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Corresponding element reference.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#elementRef">elementRef</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L189">platform/src/lib/shared/form/base.input.ts:189</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="focused" class="tsd-anchor"></a>
+<h3><span>focused</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">focused</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>See</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Form Field Control</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#focused">focused</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L158">platform/src/lib/shared/form/base.input.ts:158</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="id" class="tsd-anchor"></a>
+<h3><span>id</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>id for the Element</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#id">id</a></p>
+<p>Inherited from BaseComponent.id</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/base.ts#L36">platform/src/lib/shared/base.ts:36</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="name" class="tsd-anchor"></a>
+<h3><span>name</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>name for the element</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseComponent.name</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/base.ts#L40">platform/src/lib/shared/base.ts:40</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ngControl" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>ng<wbr/>Control</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">ng<wbr/>Control</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">NgControl</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Each input should inject its own ngControl and we should retrieve it</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#ngControl">ngControl</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L190">platform/src/lib/shared/form/base.input.ts:190</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ngForm" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>ng<wbr/>Form</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">ng<wbr/>Form</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">NgForm</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L192">platform/src/lib/shared/form/base.input.ts:192</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="placeholder" class="tsd-anchor"></a>
+<h3><span>placeholder</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">placeholder</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Input placeholder</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#placeholder">placeholder</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L58">platform/src/lib/shared/form/base.input.ts:58</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="readonly" class="tsd-anchor"></a>
+<h3><span>readonly</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">readonly</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>readOnly Value to Mark component read only</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L113">platform/src/lib/shared/form/base.input.ts:113</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="required" class="tsd-anchor"></a>
+<h3><span>required</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">required</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>set when input field is mandatory form field</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#required">required</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L178">platform/src/lib/shared/form/base.input.ts:178</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="stateChanges" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>state<wbr/>Changes</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">state<wbr/>Changes</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Subject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>See</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Form Field Control</dt><dd></dd></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#stateChanges">stateChanges</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L172">platform/src/lib/shared/form/base.input.ts:172</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="stateMessage" class="tsd-anchor"></a>
+<h3><span>state<wbr/>Message</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">state<wbr/>Message</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Holds the message with respect to state</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L88">platform/src/lib/shared/form/base.input.ts:88</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="width" class="tsd-anchor"></a>
+<h3><span>width</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">width</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>width of the element</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Inherited from BaseComponent.width</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/base.ts#L50">platform/src/lib/shared/base.ts:50</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="controlInvalid" class="tsd-anchor"></a>
+<h3><span>control<wbr/>Invalid</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="controlInvalid.controlInvalid-1"><span class="tsd-signature-symbol">get</span> controlInvalid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether control has errors</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#controlInvalid">controlInvalid</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L161">platform/src/lib/shared/form/base.input.ts:161</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="disabled" class="tsd-anchor"></a>
+<h3><span>disabled</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="disabled.disabled-1"><span class="tsd-signature-symbol">get</span> disabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-signature tsd-kind-icon" id="disabled.disabled-2"><span class="tsd-signature-symbol">set</span> disabled<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the control is disabled.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#disabled">disabled</a></p>
+<p>Overrides BaseComponent.disabled</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L102">platform/src/lib/shared/form/base.input.ts:102</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether the input is disabled</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#disabled">disabled</a></p>
+<p>Overrides BaseComponent.disabled</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L98">platform/src/lib/shared/form/base.input.ts:98</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="editable" class="tsd-anchor"></a>
+<h3><span>editable</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="editable.editable-1"><span class="tsd-signature-symbol">get</span> editable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+<li class="tsd-signature tsd-kind-icon" id="editable.editable-2"><span class="tsd-signature-symbol">set</span> editable<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>This should be coming from Parent.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#editable">editable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L135">platform/src/lib/shared/form/base.input.ts:135</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Tell the component if we are in editing mode.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type ">BooleanInput</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#editable">editable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L126">platform/src/lib/shared/form/base.input.ts:126</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="state" class="tsd-anchor"></a>
+<h3><span>state</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="state.state-1"><span class="tsd-signature-symbol">get</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">FormStates</span></li>
+<li class="tsd-signature tsd-kind-icon" id="state.state-2"><span class="tsd-signature-symbol">set</span> state<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">state</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">FormStates</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L74">platform/src/lib/shared/form/base.input.ts:74</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The state of the form control - applies css classes.
+ Can be &#39;success&#39;, &#39;error&#39;, &#39;warning&#39;, &#39;default&#39;, &#39;information&#39;.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">state</span>: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">FormStates</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Default</dt><dd><pre><code class="language-ts"><span class="hl-1">&#39;default&#39;</span>
 </code></pre>
-					<p>and this default behavior used. For other cases implement focus.</p>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5><span class="tsd-flag ts-flagOptional">Optional</span> event: <span class="tsd-signature-type">MouseEvent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="ngDoCheck" class="tsd-anchor"></a>
-		<h3>ng<wbr>DoCheck</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">ng<wbr>DoCheck<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of DoCheck.ngDoCheck</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L223">libs/platform/src/lib/shared/form/base.input.ts:223</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Re-validate and emit event to parent container on every CD cycle as they are some errors
-						that we can&#39;t subscribe to.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="onContainerClick" class="tsd-anchor"></a>
-		<h3>on<wbr>Container<wbr>Click</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">on<wbr>Container<wbr>Click<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MouseEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of PlatformFormFieldControl.onContainerClick</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L309">libs/platform/src/lib/shared/form/base.input.ts:309</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Handles even when we click on parent container which is the FormField Wrapping this
-						control</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>event: <span class="tsd-signature-type">MouseEvent</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-		<a name="setValue" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> set<wbr>Value</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, emitOnChange<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L356">libs/platform/src/lib/shared/form/base.input.ts:356</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Used to change the value of a control.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">any</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>the value to be applied</p>
-						</div>
-					</li>
-					<li>
-						<h5>emitOnChange: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>whether to emit &quot;onChange&quot; event.
-							Should be &quot;false&quot;, if the change is made programmatically (internally) by the control, &quot;true&quot; otherwise</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-		<a name="updateErrorState" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> update<wbr>Error<wbr>State</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-			<li class="tsd-signature tsd-kind-icon">update<wbr>Error<wbr>State<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L334">libs/platform/src/lib/shared/form/base.input.ts:334</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p> Need re-validates errors on every CD iteration to make sure we are also
-						covering non-control errors, errors that happens outside of this control</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="writeValue" class="tsd-anchor"></a>
-		<h3>write<wbr>Value</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">write<wbr>Value<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of ControlValueAccessor.writeValue</p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/shared/form/base.input.ts#L284">libs/platform/src/lib/shared/form/base.input.ts:284</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Each sub class must override this method as inheritance does not work</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">any</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+</dd></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L66">platform/src/lib/shared/form/base.input.ts:66</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="value" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>value</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="value.value-1"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+<li class="tsd-signature tsd-kind-icon" id="value.value-2"><span class="tsd-signature-symbol">set</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>need to make  these value accessor as abstract to be implemented by subclasses. Having them
+in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
+which we need to programmatically wraps components set/get value</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#value">value</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L145">platform/src/lib/shared/form/base.input.ts:145</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Each input control has always a value. Need to make sure we keep a convention for
+input fields</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">any</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#value">value</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L147">platform/src/lib/shared/form/base.input.ts:147</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="_onFocusChanged" class="tsd-anchor"></a>
+<h3><span>_on<wbr/>Focus<wbr/>Changed</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="_onFocusChanged._onFocusChanged-1"><span class="tsd-kind-call-signature">_on<wbr/>Focus<wbr/>Changed</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">isFocused</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Keeps track of element focus</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">isFocused</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L294">platform/src/lib/shared/form/base.input.ts:294</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="focus" class="tsd-anchor"></a>
+<h3><span>focus</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="focus.focus-1"><span class="tsd-kind-call-signature">focus</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>In most of the cases when working with input element directly you should be just find to assing
+variable to this element</p>
+<pre><code><span class="hl-2">&lt;</span><span class="hl-3">input</span><span class="hl-2"> #</span><span class="hl-3">inputElementRef</span><span class="hl-2"> </span><span class="hl-3">fd</span><span class="hl-2">-</span><span class="hl-3">form</span><span class="hl-2">-</span><span class="hl-3">control</span><span class="hl-2"> ...&gt;</span>
+</code></pre>
+<p>and this default behavior used. For other cases implement focus.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">event</span>: <span class="tsd-signature-type ">MouseEvent</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#focus">focus</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L324">platform/src/lib/shared/form/base.input.ts:324</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="ngDoCheck" class="tsd-anchor"></a>
+<h3><span>ng<wbr/>Do<wbr/>Check</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="ngDoCheck.ngDoCheck-1"><span class="tsd-kind-call-signature">ng<wbr/>Do<wbr/>Check</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Re-validate and emit event to parent container on every CD cycle as they are some errors
+that we can&#39;t subscribe to.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of DoCheck.ngDoCheck</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L223">platform/src/lib/shared/form/base.input.ts:223</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="onContainerClick" class="tsd-anchor"></a>
+<h3><span>on<wbr/>Container<wbr/>Click</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="onContainerClick.onContainerClick-1"><span class="tsd-kind-call-signature">on<wbr/>Container<wbr/>Click</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">event</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Handles even when we click on parent container which is the FormField Wrapping this
+control</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">event</span>: <span class="tsd-signature-type ">MouseEvent</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="PlatformFormFieldControl.html">PlatformFormFieldControl</a>.<a href="PlatformFormFieldControl.html#onContainerClick">onContainerClick</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L309">platform/src/lib/shared/form/base.input.ts:309</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="setValue" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>set<wbr/>Value</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+<li class="tsd-signature tsd-kind-icon" id="setValue.setValue-1"><span class="tsd-kind-call-signature">set<wbr/>Value</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span>, <span class="tsd-kind-parameter">emitOnChange</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Used to change the value of a control.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">any</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>the value to be applied</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">emitOnChange</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>whether to emit &quot;onChange&quot; event.
+Should be &quot;false&quot;, if the change is made programmatically (internally) by the control, &quot;true&quot; otherwise</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L356">platform/src/lib/shared/form/base.input.ts:356</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="updateErrorState" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>update<wbr/>Error<wbr/>State</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+<li class="tsd-signature tsd-kind-icon" id="updateErrorState.updateErrorState-1"><span class="tsd-kind-call-signature">update<wbr/>Error<wbr/>State</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Need re-validates errors on every CD iteration to make sure we are also
+ covering non-control errors, errors that happens outside of this control</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L334">platform/src/lib/shared/form/base.input.ts:334</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="writeValue" class="tsd-anchor"></a>
+<h3><span>write<wbr/>Value</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="writeValue.writeValue-1"><span class="tsd-kind-call-signature">write<wbr/>Value</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Each sub class must override this method as inheritance does not work</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">any</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of ControlValueAccessor.writeValue</p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/shared/form/base.input.ts#L284">platform/src/lib/shared/form/base.input.ts:284</a></li></ul></aside></li></ul></section></section></div>

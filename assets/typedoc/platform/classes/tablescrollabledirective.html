@@ -1,365 +1,198 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>Table Scrollable.
-				That directive should be assigned to table scrollable area.
-				It registers itself in table scroll dispatcher
-			and notify once element scrolled.</p>
-		</div>
-		<p>For internal usage.</p>
-	</div>
-</section>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Table Scrollable.
+That directive should be assigned to table scrollable area.
+It registers itself in table scroll dispatcher
+and notify once element scrolled.</p>
+<p>For internal usage.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">TableScrollableDirective</span>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">TableScrollableDirective</span></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">TableScrollable</span></li>
-		<li><span class="tsd-signature-type">OnInit</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="_elementHorizontalScrollStream" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _element<wbr>Horizontal<wbr>Scroll<wbr>Stream</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_element<wbr>Horizontal<wbr>Scroll<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L70">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:70</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Horizontal scroll stream</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="_elementScrollStream" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _element<wbr>Scroll<wbr>Stream</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_element<wbr>Scroll<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L46">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:46</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Scroll events stream</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-		<a name="_elementVerticalScrollStream" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagPrivate">Private</span> _element<wbr>Vertical<wbr>Scroll<wbr>Stream</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">_element<wbr>Vertical<wbr>Scroll<wbr>Stream<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L64">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:64</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Vertical scroll stream</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="elementRef" class="tsd-anchor"></a>
-		<h3>element<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>TableScrollable</span>.<span>elementRef</span></p>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Get scrollable ElementRef of.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-		<a name="ngZone" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> ng<wbr>Zone</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">ng<wbr>Zone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NgZone</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-		<a name="scrollDispatcher" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> scroll<wbr>Dispatcher</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">scroll<wbr>Dispatcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TableScrollDispatcherService</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getHorizontalScrollStream" class="tsd-anchor"></a>
-		<h3>get<wbr>Horizontal<wbr>Scroll<wbr>Stream</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Horizontal<wbr>Scroll<wbr>Stream<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>getHorizontalScrollStream</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L103">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:103</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Returns observable that emits when a horizontal scroll event is happened on the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getScrollLeft" class="tsd-anchor"></a>
-		<h3>get<wbr>Scroll<wbr>Left</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Scroll<wbr>Left<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>getScrollLeft</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L113">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:113</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Returns scrollLeft position of the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getScrollStream" class="tsd-anchor"></a>
-		<h3>get<wbr>Scroll<wbr>Stream</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Scroll<wbr>Stream<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>getScrollStream</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L93">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:93</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Returns observable that emits when a scroll event is fired on the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getScrollTop" class="tsd-anchor"></a>
-		<h3>get<wbr>Scroll<wbr>Top</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Scroll<wbr>Top<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>getScrollTop</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L108">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:108</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Returns scrollTop position of the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getVerticalScrollStream" class="tsd-anchor"></a>
-		<h3>get<wbr>Vertical<wbr>Scroll<wbr>Stream</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Vertical<wbr>Scroll<wbr>Stream<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>getVerticalScrollStream</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L98">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:98</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Returns observable that emits when a vertical scroll event is happened on the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Event</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="initializeScrollTop" class="tsd-anchor"></a>
-		<h3>initialize<wbr>Scroll<wbr>Top</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">initialize<wbr>Scroll<wbr>Top<span class="tsd-signature-symbol">(</span>scrollTop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>initializeScrollTop</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L189">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:189</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set Scroll Position during component initialization.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>scrollTop: <span class="tsd-signature-type">number</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="scrollToOverlappedCell" class="tsd-anchor"></a>
-		<h3>scroll<wbr>ToOverlapped<wbr>Cell</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">scroll<wbr>ToOverlapped<wbr>Cell<span class="tsd-signature-symbol">(</span>rtl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, freezableColumnsSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, freezableEndColumnSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>scrollToOverlappedCell</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L136">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:136</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Scrolls to overlapped cell.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>rtl: <span class="tsd-signature-type">boolean</span></h5>
-					</li>
-					<li>
-						<h5>freezableColumnsSize: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>freezableEndColumnSize: <span class="tsd-signature-type">number</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setScrollLeft" class="tsd-anchor"></a>
-		<h3>set<wbr>Scroll<wbr>Left</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Scroll<wbr>Left<span class="tsd-signature-symbol">(</span>scrollLeft<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitEvent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>setScrollLeft</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L127">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:127</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set scrollLeft position of the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>scrollLeft: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>emitEvent: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setScrollTop" class="tsd-anchor"></a>
-		<h3>set<wbr>Scroll<wbr>Top</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Scroll<wbr>Top<span class="tsd-signature-symbol">(</span>scrollTop<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitEvent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>TableScrollable</span>.<span>setScrollTop</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L118">libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:118</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set scrollTop position of the host element.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>scrollTop: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>emitEvent: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-interface">TableScrollable</span></li>
+<li><span class="tsd-signature-type ">OnInit</span></li>
+<li><span class="tsd-signature-type ">OnDestroy</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="elementRef" class="tsd-anchor"></a>
+<h3><span>element<wbr/>Ref</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">element<wbr/>Ref</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Get scrollable ElementRef of.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#elementRef">elementRef</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L74">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:74</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="ngZone" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>ng<wbr/>Zone</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">ng<wbr/>Zone</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">NgZone</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L76">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:76</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="scrollDispatcher" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>scroll<wbr/>Dispatcher</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">scroll<wbr/>Dispatcher</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type tsd-kind-class">TableScrollDispatcherService</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L75">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:75</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getHorizontalScrollStream" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Horizontal<wbr/>Scroll<wbr/>Stream</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getHorizontalScrollStream.getHorizontalScrollStream-1"><span class="tsd-kind-call-signature">get<wbr/>Horizontal<wbr/>Scroll<wbr/>Stream</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Event</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Returns observable that emits when a horizontal scroll event is happened on the host element.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Event</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#getHorizontalScrollStream">getHorizontalScrollStream</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L100">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:100</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getScrollLeft" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Scroll<wbr/>Left</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getScrollLeft.getScrollLeft-1"><span class="tsd-kind-call-signature">get<wbr/>Scroll<wbr/>Left</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Returns scrollLeft position of the host element.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#getScrollLeft">getScrollLeft</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L110">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:110</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getScrollStream" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Scroll<wbr/>Stream</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getScrollStream.getScrollStream-1"><span class="tsd-kind-call-signature">get<wbr/>Scroll<wbr/>Stream</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Event</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Returns observable that emits when a scroll event is fired on the host element.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Event</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#getScrollStream">getScrollStream</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L90">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:90</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getScrollTop" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Scroll<wbr/>Top</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getScrollTop.getScrollTop-1"><span class="tsd-kind-call-signature">get<wbr/>Scroll<wbr/>Top</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Returns scrollTop position of the host element.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#getScrollTop">getScrollTop</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L105">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:105</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getVerticalScrollStream" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Vertical<wbr/>Scroll<wbr/>Stream</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getVerticalScrollStream.getVerticalScrollStream-1"><span class="tsd-kind-call-signature">get<wbr/>Vertical<wbr/>Scroll<wbr/>Stream</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Event</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Returns observable that emits when a vertical scroll event is happened on the host element.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Event</span><span class="tsd-signature-symbol">&gt;</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#getVerticalScrollStream">getVerticalScrollStream</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L95">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:95</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="initializeScrollTop" class="tsd-anchor"></a>
+<h3><span>initialize<wbr/>Scroll<wbr/>Top</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="initializeScrollTop.initializeScrollTop-1"><span class="tsd-kind-call-signature">initialize<wbr/>Scroll<wbr/>Top</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">scrollTop</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set Scroll Position during component initialization.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">scrollTop</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#initializeScrollTop">initializeScrollTop</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L188">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:188</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="scrollToOverlappedCell" class="tsd-anchor"></a>
+<h3><span>scroll<wbr/>To<wbr/>Overlapped<wbr/>Cell</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="scrollToOverlappedCell.scrollToOverlappedCell-1"><span class="tsd-kind-call-signature">scroll<wbr/>To<wbr/>Overlapped<wbr/>Cell</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">rtl</span>, <span class="tsd-kind-parameter">freezableColumnsSize</span>, <span class="tsd-kind-parameter">freezableEndColumnSize</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Scrolls to overlapped cell.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">rtl</span>: <span class="tsd-signature-type">boolean</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">freezableColumnsSize</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">freezableEndColumnSize</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#scrollToOverlappedCell">scrollToOverlappedCell</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L133">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:133</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setScrollLeft" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Scroll<wbr/>Left</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setScrollLeft.setScrollLeft-1"><span class="tsd-kind-call-signature">set<wbr/>Scroll<wbr/>Left</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">scrollLeft</span>, <span class="tsd-kind-parameter">emitEvent</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set scrollLeft position of the host element.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">scrollLeft</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">emitEvent</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#setScrollLeft">setScrollLeft</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L124">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:124</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setScrollTop" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Scroll<wbr/>Top</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setScrollTop.setScrollTop-1"><span class="tsd-kind-call-signature">set<wbr/>Scroll<wbr/>Top</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">scrollTop</span>, <span class="tsd-kind-parameter">emitEvent</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set scrollTop position of the host element.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">scrollTop</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">emitEvent</span>: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/TableScrollable.html">TableScrollable</a>.<a href="../interfaces/TableScrollable.html#setScrollTop">setScrollTop</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-scrollable.directive.ts#L115">platform/src/lib/table-helpers/directives/table-scrollable.directive.ts:115</a></li></ul></aside></li></ul></section></section></div>

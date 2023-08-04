@@ -1,485 +1,313 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<dl class="tsd-comment-tags">
-			<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-			<dd><p>UploadCollection component is depricated since version 0.40.0</p>
-			</dd>
-		</dl>
-	</div>
-</section>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>UploadCollection component is deprecated since version 0.40.0</p>
+</dd></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">UploadCollectionComponent</span>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">UploadCollectionComponent</span></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnChanges</span></li>
-		<li><span class="tsd-signature-type">OnDestroy</span></li>
-		<li><span class="tsd-signature-type">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FdpUploadCollectionDataSource</span><span class="tsd-signature-symbol">&gt;</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="disabled" class="tsd-anchor"></a>
-		<h3>disabled</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>disabled</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L156">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:156</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>All action buttons will be disabled</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="enablePagination" class="tsd-anchor"></a>
-		<h3>enable<wbr>Pagination</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">enable<wbr>Pagination<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>enablePagination</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L168">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:168</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows to show/hide pagination</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="fileSizeExceed" class="tsd-anchor"></a>
-		<h3>file<wbr>Size<wbr>Exceed</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">file<wbr>Size<wbr>Exceed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FileSizeExceedEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>fileSizeExceed</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L211">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:211</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The event is triggered when the file size of an uploaded file is exceeded
-				(only if the maxFileSize property was provided by the application).</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="fileTypes" class="tsd-anchor"></a>
-		<h3>file<wbr>Types</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">file<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>fileTypes</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L114">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:114</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines the allowed file types for the upload.
-					The chosen files will be checked against an array of file types.
-					If at least one file does not fit the file type requirements,
-				the upload is prevented. Example: [&quot;jpg&quot;, &quot;png&quot;, &quot;bmp&quot;].</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="filenameLengthExceed" class="tsd-anchor"></a>
-		<h3>filename<wbr>Length<wbr>Exceed</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">filename<wbr>Length<wbr>Exceed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">FilenameLengthExceedEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>filenameLengthExceed</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L204">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:204</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The event is triggered when the name of a chosen file is longer than the value specified
-				with the maxFilenameLength property (only if provided by the application).</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="hierarchy" class="tsd-anchor"></a>
-		<h3>hierarchy</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">hierarchy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>hierarchy</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L164">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:164</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows to support hierarchy</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="id" class="tsd-anchor"></a>
-		<h3>id</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>id</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L66">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:66</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>ID of the upload collection element. If none is provided, one will be generated.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="maxFileSize" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>File<wbr>Size</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">max<wbr>File<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>maxFileSize</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L121">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:121</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Specifies a file size limit in megabytes that prevents the upload
-				if at least one file exceeds the limit.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="maxFilenameLength" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Filename<wbr>Length</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">max<wbr>Filename<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>maxFilenameLength</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L129">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:129</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Specifies the maximum length of a file name.
-					If the maximum file name length is exceeded,
-				the corresponding event &#39;filenameLengthExceed&#39; is triggered.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="mimeTypes" class="tsd-anchor"></a>
-		<h3>mime<wbr>Types</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">mime<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>mimeTypes</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L138">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:138</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Defines the allowed MIME types of files to be uploaded.
-					The chosen files will be checked against an array of MIME types.
-					If at least one file does not fit the MIME type requirements, the upload is prevented.
-				Example: mimeTypes [&quot;image/png&quot;, &quot;image/jpeg&quot;].</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="multiple" class="tsd-anchor"></a>
-		<h3>multiple</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">multiple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>multiple</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L179">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:179</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Gives to select multiple files from the same folder and then upload them.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="noDataDescription" class="tsd-anchor"></a>
-		<h3>no<wbr>Data<wbr>Description</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<wbr>Description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>noDataDescription</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L152">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:152</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Allows to set own text for the &#39;No data&#39; description label.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="noDataText" class="tsd-anchor"></a>
-		<h3>no<wbr>Data<wbr>Text</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">no<wbr>Data<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>noDataText</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L145">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:145</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<dl class="tsd-comment-tags">
-				<dt class="fd-tsd-comment-tag-pill">deprecated</dt>
-				<dd><p>use i18n capabilities instead
-					Allows to set own text for the &#39;No data&#39; text label.</p>
-				</dd>
-			</dl>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="readonly" class="tsd-anchor"></a>
-		<h3>readonly</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">readonly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>readonly</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L160">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:160</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>All action buttons will be invisible</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="sameFileNameAllowed" class="tsd-anchor"></a>
-		<h3>same<wbr>File<wbr>Name<wbr>Allowed</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">same<wbr>File<wbr>Name<wbr>Allowed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>sameFileNameAllowed</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L190">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:190</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows to use the same name for a file when editing the file name.
-				&#39;Same name&#39; refers to an already existing file name in the list.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="showSearch" class="tsd-anchor"></a>
-		<h3>show<wbr>Search</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">show<wbr>Search<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>showSearch</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L183">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:183</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Allows to show/hide search</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="terminationEnabled" class="tsd-anchor"></a>
-		<h3>termination<wbr>Enabled</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">termination<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>terminationEnabled</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L175">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:175</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>If true, the button that is used to terminate the instant file upload gets visible.
-				The button normally appears when a file is being uploaded.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="typeMismatch" class="tsd-anchor"></a>
-		<h3>type<wbr>Mismatch</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">type<wbr>Mismatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TypeMismatchEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Implementation of <span>UploadCollectionCmp</span>.<span>typeMismatch</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L197">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:197</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>The event is triggered when the file type or the MIME type don&#39;t match the permitted types
-				(only if the fileTypes property or the mimeTypes property are provided by the application).</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Accessors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="dataSource" class="tsd-anchor"></a>
-		<h3>data<wbr>Source</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> dataSource<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UploadCollectionDataSource</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> dataSource<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UploadCollectionDataSource</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>UploadCollectionCmp</span>.<span>dataSource</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L103">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:103</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>List of items</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">UploadCollectionDataSource</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>UploadCollectionCmp</span>.<span>dataSource</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L98">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:98</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>List of items</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">UploadCollectionDataSource</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-		<a name="itemsPerPage" class="tsd-anchor"></a>
-		<h3>items<wbr>Per<wbr>Page</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> itemsPerPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ItemPerPage</span><span class="tsd-signature-symbol">[]</span></li>
-			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> itemsPerPage<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ItemPerPage</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>UploadCollectionCmp</span>.<span>itemsPerPage</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L92">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:92</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Defines the number of items on the page</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ItemPerPage</span><span class="tsd-signature-symbol">[]</span></h4>
-			</li>
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>UploadCollectionCmp</span>.<span>itemsPerPage</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L70">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:70</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Defines the number of items on the page</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ItemPerPage</span><span class="tsd-signature-symbol">[]</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="showMessage" class="tsd-anchor"></a>
-		<h3>show<wbr>Message</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">show<wbr>Message<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageType</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MessageOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Implementation of <span>UploadCollectionCmp</span>.<span>showMessage</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L351">libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:351</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Show meessage for types NEW FOLDER CREATE, REMOVE, MOVE TO, UPDATE_VERSION, FILE_RENAMED</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>type: <span class="tsd-signature-type">MessageType</span></h5>
-					</li>
-					<li>
-						<h5>options: <span class="tsd-signature-type">MessageOptions</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">OnChanges</span></li>
+<li><span class="tsd-signature-type ">OnDestroy</span></li>
+<li><span class="tsd-signature-type tsd-kind-interface">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-alias">FdpUploadCollectionDataSource</span><span class="tsd-signature-symbol">&gt;</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="disabled" class="tsd-anchor"></a>
+<h3><span class="deprecated">disabled</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">disabled</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>All action buttons will be disabled</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#disabled">disabled</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L174">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:174</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="enablePagination" class="tsd-anchor"></a>
+<h3><span class="deprecated">enable<wbr/>Pagination</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">enable<wbr/>Pagination</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Allows to show/hide pagination</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#enablePagination">enablePagination</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L186">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:186</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="fileSizeExceed" class="tsd-anchor"></a>
+<h3><span class="deprecated">file<wbr/>Size<wbr/>Exceed</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">file<wbr/>Size<wbr/>Exceed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">FileSizeExceedEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The event is triggered when the file size of an uploaded file is exceeded
+(only if the maxFileSize property was provided by the application).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#fileSizeExceed">fileSizeExceed</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L229">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:229</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="fileTypes" class="tsd-anchor"></a>
+<h3><span class="deprecated">file<wbr/>Types</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">file<wbr/>Types</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines the allowed file types for the upload.
+The chosen files will be checked against an array of file types.
+If at least one file does not fit the file type requirements,
+the upload is prevented. Example: [&quot;jpg&quot;, &quot;png&quot;, &quot;bmp&quot;].</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#fileTypes">fileTypes</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L114">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:114</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="filenameLengthExceed" class="tsd-anchor"></a>
+<h3><span class="deprecated">filename<wbr/>Length<wbr/>Exceed</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">filename<wbr/>Length<wbr/>Exceed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">FilenameLengthExceedEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The event is triggered when the name of a chosen file is longer than the value specified
+with the maxFilenameLength property (only if provided by the application).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#filenameLengthExceed">filenameLengthExceed</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L222">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:222</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="hierarchy" class="tsd-anchor"></a>
+<h3><span class="deprecated">hierarchy</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">hierarchy</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Allows to support hierarchy</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#hierarchy">hierarchy</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L182">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:182</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="id" class="tsd-anchor"></a>
+<h3><span class="deprecated">id</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">id</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>ID of the upload collection element. If none is provided, one will be generated.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#id">id</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L66">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:66</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="maxFileSize" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="deprecated">max<wbr/>File<wbr/>Size</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">max<wbr/>File<wbr/>Size</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Specifies a file size limit in megabytes that prevents the upload
+if at least one file exceeds the limit.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#maxFileSize">maxFileSize</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L121">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:121</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="maxFilenameLength" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="deprecated">max<wbr/>Filename<wbr/>Length</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">max<wbr/>Filename<wbr/>Length</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">number</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Specifies the maximum length of a file name.
+If the maximum file name length is exceeded,
+the corresponding event &#39;filenameLengthExceed&#39; is triggered.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#maxFilenameLength">maxFilenameLength</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L129">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:129</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="mimeTypes" class="tsd-anchor"></a>
+<h3><span class="deprecated">mime<wbr/>Types</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">mime<wbr/>Types</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines the allowed MIME types of files to be uploaded.
+The chosen files will be checked against an array of MIME types.
+If at least one file does not fit the MIME type requirements, the upload is prevented.
+Example: mimeTypes [&quot;image/png&quot;, &quot;image/jpeg&quot;].</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#mimeTypes">mimeTypes</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L138">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:138</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="multiple" class="tsd-anchor"></a>
+<h3><span class="deprecated">multiple</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">multiple</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gives to select multiple files from the same folder and then upload them.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#multiple">multiple</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L197">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:197</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="readonly" class="tsd-anchor"></a>
+<h3><span class="deprecated">readonly</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">readonly</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>All action buttons will be invisible</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#readonly">readonly</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L178">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:178</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="sameFileNameAllowed" class="tsd-anchor"></a>
+<h3><span class="deprecated">same<wbr/>File<wbr/>Name<wbr/>Allowed</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">same<wbr/>File<wbr/>Name<wbr/>Allowed</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Allows to use the same name for a file when editing the file name.
+&#39;Same name&#39; refers to an already existing file name in the list.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#sameFileNameAllowed">sameFileNameAllowed</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L208">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:208</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="showSearch" class="tsd-anchor"></a>
+<h3><span class="deprecated">show<wbr/>Search</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">show<wbr/>Search</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Allows to show/hide search</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#showSearch">showSearch</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L201">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:201</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="terminationEnabled" class="tsd-anchor"></a>
+<h3><span class="deprecated">termination<wbr/>Enabled</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">termination<wbr/>Enabled</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>If true, the button that is used to terminate the instant file upload gets visible.
+The button normally appears when a file is being uploaded.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#terminationEnabled">terminationEnabled</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L193">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:193</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="typeMismatch" class="tsd-anchor"></a>
+<h3><span class="deprecated">type<wbr/>Mismatch</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">type<wbr/>Mismatch</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-class">TypeMismatchEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-interface">UploadCollectionCmp</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The event is triggered when the file type or the MIME type don&#39;t match the permitted types
+(only if the fileTypes property or the mimeTypes property are provided by the application).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#typeMismatch">typeMismatch</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L215">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:215</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Accessors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dataSource" class="tsd-anchor"></a>
+<h3><span class="deprecated">data<wbr/>Source</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dataSource.dataSource-1"><span class="tsd-signature-symbol">get</span> dataSource<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">UploadCollectionDataSource</span></li>
+<li class="tsd-signature tsd-kind-icon" id="dataSource.dataSource-2"><span class="tsd-signature-symbol">set</span> dataSource<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">UploadCollectionDataSource</span></h4><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#dataSource">dataSource</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L103">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:103</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>List of items</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type tsd-kind-class">UploadCollectionDataSource</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#dataSource">dataSource</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L97">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:97</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="itemsPerPage" class="tsd-anchor"></a>
+<h3><span class="deprecated">items<wbr/>Per<wbr/>Page</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="itemsPerPage.itemsPerPage-1"><span class="tsd-signature-symbol">get</span> itemsPerPage<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">ItemPerPage</span><span class="tsd-signature-symbol">[]</span></li>
+<li class="tsd-signature tsd-kind-icon" id="itemsPerPage.itemsPerPage-2"><span class="tsd-signature-symbol">set</span> itemsPerPage<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">ItemPerPage</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#itemsPerPage">itemsPerPage</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L92">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:92</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Defines the number of items on the page</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-interface">ItemPerPage</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#itemsPerPage">itemsPerPage</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L69">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:69</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="noDataDescription" class="tsd-anchor"></a>
+<h3><span class="deprecated">no<wbr/>Data<wbr/>Description</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="noDataDescription.noDataDescription-1"><span class="tsd-signature-symbol">get</span> noDataDescription<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="noDataDescription.noDataDescription-2"><span class="tsd-signature-symbol">set</span> noDataDescription<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#noDataDescription">noDataDescription</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L168">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:168</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Allows to set own text for the &#39;No data&#39; description label.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#noDataDescription">noDataDescription</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L160">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:160</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="noDataText" class="tsd-anchor"></a>
+<h3><span class="deprecated">no<wbr/>Data<wbr/>Text</span></h3>
+<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="noDataText.noDataText-1"><span class="tsd-signature-symbol">get</span> noDataText<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+<li class="tsd-signature tsd-kind-icon" id="noDataText.noDataText-2"><span class="tsd-signature-symbol">set</span> noDataText<span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#noDataText">noDataText</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L152">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:152</a></li></ul></aside></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"><dt class="fd-tsd-comment-tag-pill">Deprecated</dt><dd><p>use i18n capabilities instead
+Allows to set own text for the &#39;No data&#39; text label.</p>
+</dd></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#noDataText">noDataText</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L144">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:144</a></li></ul></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="showMessage" class="tsd-anchor"></a>
+<h3><span class="deprecated">show<wbr/>Message</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="showMessage.showMessage-1"><span class="tsd-kind-call-signature">show<wbr/>Message</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">type</span>, <span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Show meessage for types NEW FOLDER CREATE, REMOVE, MOVE TO, UPDATE_VERSION, FILE_RENAMED</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">type</span>: <span class="tsd-signature-type tsd-kind-enum">MessageType</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-type tsd-kind-interface">MessageOptions</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Implementation of <a href="../interfaces/UploadCollectionCmp.html">UploadCollectionCmp</a>.<a href="../interfaces/UploadCollectionCmp.html#showMessage">showMessage</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts#L377">platform/src/lib/upload-collection/upload-collection/upload-collection.component.ts:377</a></li></ul></aside></li></ul></section></section></div>

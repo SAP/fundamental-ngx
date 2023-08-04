@@ -276,10 +276,6 @@ Apache-2.0
 @fundamental-ngx/datetime-adapter
 Apache-2.0
 
-@fundamental-ngx/fn/button
-
-@fundamental-ngx/fn/utils
-
 @fundamental-ngx/i18n
 
 @fundamental-ngx/moment-adapter
@@ -470,15 +466,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-
-focus-visible
-W3C
-All Reports in this Repository are licensed by Contributors under the 
-[W3C Software and Document
-License](http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document). Contributions to
-Specifications are made under the [W3C CLA](https://www.w3.org/community/about/agreements/cla/).
-
 
 
 fundamental-styles

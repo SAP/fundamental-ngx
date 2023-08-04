@@ -1,192 +1,112 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="tsd-signature-type">TableVirtualScroll</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="target">TableVirtualScrollDirective</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">TableVirtualScroll</span>
+<ul class="tsd-hierarchy">
+<li><span class="target">TableVirtualScrollDirective</span></li></ul></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">OnChanges</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Table<wbr>Virtual<wbr>Scroll<wbr>Directive<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TableVirtualScrollDirective</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Inherited from <span>TableVirtualScroll</span>.<span>constructor</span></p>
-				</aside>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TableVirtualScrollDirective</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="bodyHeight" class="tsd-anchor"></a>
-		<h3>body<wbr>Height</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">body<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L36">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:36</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Body height.</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="renderAhead" class="tsd-anchor"></a>
-		<h3>render<wbr>Ahead</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">render<wbr>Ahead<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 40</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L32">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:32</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Cache size for the virtualScroll, default is 40 in each direction</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="rowHeight" class="tsd-anchor"></a>
-		<h3>row<wbr>Height</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">row<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableVirtualScroll</span>.<span>rowHeight</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L43">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:43</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Height of the row, required for the virtualScroll,
-				default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
-		<a name="virtualScroll" class="tsd-anchor"></a>
-		<h3>virtual<wbr>Scroll</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">virtual<wbr>Scroll<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<p>Overrides <span>TableVirtualScroll</span>.<span>virtualScroll</span></p>
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L28">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:28</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether to show only visible rows in matter of performance
-				false by default, when true setting bodyHeight and rowHeight is required.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="calculateVirtualScrollRows" class="tsd-anchor"></a>
-		<h3>calculate<wbr>Virtual<wbr>Scroll<wbr>Rows</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">calculate<wbr>Virtual<wbr>Scroll<wbr>Rows<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>TableVirtualScroll</span>.<span>calculateVirtualScrollRows</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L81">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:81</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Calculates rows in viewport.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="listenOnVirtualScroll" class="tsd-anchor"></a>
-		<h3>listen<wbr>OnVirtual<wbr>Scroll</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">listen<wbr>OnVirtual<wbr>Scroll<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>TableVirtualScroll</span>.<span>listenOnVirtualScroll</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L125">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:125</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Initialises scroll listener.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-		<a name="setTable" class="tsd-anchor"></a>
-		<h3>set<wbr>Table</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Table<span class="tsd-signature-symbol">(</span>table<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Table</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<p>Overrides <span>TableVirtualScroll</span>.<span>setTable</span></p>
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L74">libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:74</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Sets table reference.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>table: <span class="tsd-signature-type">Table</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">OnChanges</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Constructors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a id="constructor" class="tsd-anchor"></a>
+<h3><span>constructor</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+<li class="tsd-signature tsd-kind-icon" id="constructor.new_TableVirtualScrollDirective"><span class="tsd-kind-constructor-signature">new <wbr/>Table<wbr/>Virtual<wbr/>Scroll<wbr/>Directive</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">TableVirtualScrollDirective</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">TableVirtualScrollDirective</span></h4><aside class="tsd-sources">
+<p>Inherited from <a href="TableVirtualScroll.html">TableVirtualScroll</a>.<a href="TableVirtualScroll.html#constructor">constructor</a></p></aside></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="bodyHeight" class="tsd-anchor"></a>
+<h3><span>body<wbr/>Height</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">body<wbr/>Height</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Body height.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L34">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:34</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="renderAhead" class="tsd-anchor"></a>
+<h3><span>render<wbr/>Ahead</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">render<wbr/>Ahead</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 40</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Cache size for the virtualScroll, default is 40 in each direction</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L30">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:30</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="rowHeight" class="tsd-anchor"></a>
+<h3><span>row<wbr/>Height</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">row<wbr/>Height</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Height of the row, required for the virtualScroll,
+default is 44px in cozy, 32px in compact and 24px in condensed (set automatically)</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableVirtualScroll.html">TableVirtualScroll</a>.<a href="TableVirtualScroll.html#rowHeight">rowHeight</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L41">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:41</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="virtualScroll" class="tsd-anchor"></a>
+<h3><span>virtual<wbr/>Scroll</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">virtual<wbr/>Scroll</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Whether to show only visible rows in matter of performance
+false by default, when true setting bodyHeight and rowHeight is required.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableVirtualScroll.html">TableVirtualScroll</a>.<a href="TableVirtualScroll.html#virtualScroll">virtualScroll</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L26">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:26</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="calculateVirtualScrollRows" class="tsd-anchor"></a>
+<h3><span>calculate<wbr/>Virtual<wbr/>Scroll<wbr/>Rows</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="calculateVirtualScrollRows.calculateVirtualScrollRows-1"><span class="tsd-kind-call-signature">calculate<wbr/>Virtual<wbr/>Scroll<wbr/>Rows</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Calculates rows in viewport.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableVirtualScroll.html">TableVirtualScroll</a>.<a href="TableVirtualScroll.html#calculateVirtualScrollRows">calculateVirtualScrollRows</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L79">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:79</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="listenOnVirtualScroll" class="tsd-anchor"></a>
+<h3><span>listen<wbr/>On<wbr/>Virtual<wbr/>Scroll</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="listenOnVirtualScroll.listenOnVirtualScroll-1"><span class="tsd-kind-call-signature">listen<wbr/>On<wbr/>Virtual<wbr/>Scroll</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Initialises scroll listener.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableVirtualScroll.html">TableVirtualScroll</a>.<a href="TableVirtualScroll.html#listenOnVirtualScroll">listenOnVirtualScroll</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L123">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:123</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setTable" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Table</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setTable.setTable-1"><span class="tsd-kind-call-signature">set<wbr/>Table</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">table</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets table reference.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">table</span>: <span class="tsd-signature-type tsd-kind-class">Table</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<p>Overrides <a href="TableVirtualScroll.html">TableVirtualScroll</a>.<a href="TableVirtualScroll.html#setTable">setTable</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts#L72">platform/src/lib/table-helpers/directives/table-virtual-scroll.directive.ts:72</a></li></ul></aside></li></ul></section></section></div>

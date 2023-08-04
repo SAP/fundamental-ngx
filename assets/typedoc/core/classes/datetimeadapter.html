@@ -1,1648 +1,1145 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>Datetime Adapter is an abstract class that must be implemented by each adapter.
-				It&#39;s used to encapsulate a date/time manipulations as result
-			others places that uses it remain date type agnostic.</p>
-		</div>
-	</div>
-</section>
-<section class="tsd-panel tsd-type-parameters">
-	<h3>Type parameters</h3>
-	<ul class="tsd-type-parameters">
-		<li>
-			<h4>D</h4>
-		</li>
-	</ul>
-</section>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Datetime Adapter is an abstract class that must be implemented by each adapter.
+It&#39;s used to encapsulate a date/time manipulations as result
+others places that uses it remain date type agnostic.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section> 
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">D</span></h4></li></ul></section> 
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">DatetimeAdapter</span>
-			<ul class="tsd-hierarchy">
-				<li>
-					<span class="tsd-signature-type">FdDatetimeAdapter</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Constructors</h2>
-	<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-		<a name="constructor" class="tsd-anchor"></a>
-		<h3>constructor</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Datetime<wbr>Adapter&lt;D&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DatetimeAdapter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-				</aside>
-				<h4 class="tsd-type-parameters-title">Type parameters</h4>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>D</h4>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DatetimeAdapter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-		<a name="locale" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagProtected">Protected</span> locale</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">locale<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L12">libs/core/src/lib/datetime/datetime-adapter.ts:12</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>current locale</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="localeChanges" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> locale<wbr>Changes</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">locale<wbr>Changes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L18">libs/core/src/lib/datetime/datetime-adapter.ts:18</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>locale changes stream</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="addCalendarDays" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> add<wbr>Calendar<wbr>Days</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">add<wbr>Calendar<wbr>Days<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, days<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L254">libs/core/src/lib/datetime/datetime-adapter.ts:254</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Adds the given number of days to the date. Days are counted as if moving one cell on the
-						calendar for each day.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to add days to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>days: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The number of days to add (may be negative).</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>A new date equal to the given one with the specified number of days added.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="addCalendarMonths" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> add<wbr>Calendar<wbr>Months</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">add<wbr>Calendar<wbr>Months<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, months<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L245">libs/core/src/lib/datetime/datetime-adapter.ts:245</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Adds the given number of months to the date. Months are counted as if flipping a page on the
-							calendar for each month and then finding the closest date in the new month. For example when
-						adding 1 month to Jan 31, 2017, the resulting date will be Feb 28, 2017.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to add months to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>months: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The number of months to add (may be negative).</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>A new date equal to the given one with the specified number of months added.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="addCalendarYears" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> add<wbr>Calendar<wbr>Years</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">add<wbr>Calendar<wbr>Years<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, years<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L235">libs/core/src/lib/datetime/datetime-adapter.ts:235</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Adds the given number of years to the date. Years are counted as if flipping 12 pages on the
-							calendar for each year and then finding the closest date in the new month. For example when
-						adding 1 year to Feb 29, 2016, the resulting date will be Feb 28, 2017.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to add years to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>years: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The number of years to add (may be negative).</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>A new date equal to the given one with the specified number of years added.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="clone" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> clone</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L261">libs/core/src/lib/datetime/datetime-adapter.ts:261</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Clones the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to clone</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>A new date equal to the given date.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="compareDate" class="tsd-anchor"></a>
-		<h3>compare<wbr>Date</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">compare<wbr>Date<span class="tsd-signature-symbol">(</span>first<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, second<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L362">libs/core/src/lib/datetime/datetime-adapter.ts:362</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Compares two dates.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>first: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The first date to compare.</p>
-						</div>
-					</li>
-					<li>
-						<h5>second: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The second date to compare.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>0 if the dates are equal, a number less than 0 if the first date is earlier,
-				a number greater than 0 if the first date is later.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="createDate" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> create<wbr>Date</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">create<wbr>Date<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L213">libs/core/src/lib/datetime/datetime-adapter.ts:213</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Creates a date with the given year, month, and date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>year: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The full year of the date. (e.g. 1989).</p>
-						</div>
-					</li>
-					<li>
-						<h5>month: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The month of the date (1 = January). Must be an integer 1 - 12.</p>
-						</div>
-					</li>
-					<li>
-						<h5>date: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The month date. Must be an integer 1 - length of the given month.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>The new date, or null if invalid.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="dateTimesEqual" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> date<wbr>Times<wbr>Equal</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">date<wbr>Times<wbr>Equal<span class="tsd-signature-symbol">(</span>date1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span>, date2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L278">libs/core/src/lib/datetime/datetime-adapter.ts:278</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that check equality of 2 dates taking into account time value as well</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date1: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The first date to compare with</p>
-						</div>
-					</li>
-					<li>
-						<h5>date2: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The second date to compare with</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If dates are equal or not</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="datesEqual" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> dates<wbr>Equal</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">dates<wbr>Equal<span class="tsd-signature-symbol">(</span>date1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span>, date2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L270">libs/core/src/lib/datetime/datetime-adapter.ts:270</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that check equality of 2 dates.
-						Does not take into account time value</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date1: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The first date to compare with</p>
-						</div>
-					</li>
-					<li>
-						<h5>date2: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The second date to compare with</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If dates are equal or not</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="format" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> format</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span>, displayFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L204">libs/core/src/lib/datetime/datetime-adapter.ts:204</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Formats a date as a string according to the given format.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The value to format.</p>
-						</div>
-					</li>
-					<li>
-						<h5>displayFormat: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The format to use to display the date as a string.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-				<p>The formatted date string.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="fromNow" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> from<wbr>Now</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">from<wbr>Now<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L336">libs/core/src/lib/datetime/datetime-adapter.ts:336</a></li>
-					</ul>
-				</aside>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date being referenced.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-				<p>String representing how much time has passed since the date param.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getAmountOfWeeks" class="tsd-anchor"></a>
-		<h3>get<wbr>Amount<wbr>OfWeeks</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Amount<wbr>OfWeeks<span class="tsd-signature-symbol">(</span>year<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, month<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, firstDayOfWeek<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L345">libs/core/src/lib/datetime/datetime-adapter.ts:345</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Get Amount of weeks in given month/year</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>year: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The year of the date</p>
-						</div>
-					</li>
-					<li>
-						<h5>month: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The month of the date</p>
-						</div>
-					</li>
-					<li>
-						<h5>firstDayOfWeek: <span class="tsd-signature-type">number</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The first day of week. 1 - Sunday, 2 - Monday...</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>Number of weeks in the given month</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getDate" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Date</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Date<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L48">libs/core/src/lib/datetime/datetime-adapter.ts:48</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the day of month of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the date of the month from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The date number (min 1, max 31).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getDateNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Date<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Date<wbr>Names<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L129">libs/core/src/lib/datetime/datetime-adapter.ts:129</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of names for the dates of the month.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-				<p>An ordered list of all date of the month names, starting with &#39;1&#39;.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getDayOfWeek" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Day<wbr>OfWeek</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L55">libs/core/src/lib/datetime/datetime-adapter.ts:55</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the day of the week component of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the day of the week from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The day of week number (min 1, max 7, 1 = Sunday).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getDayOfWeekNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Day<wbr>OfWeek<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Day<wbr>OfWeek<wbr>Names<span class="tsd-signature-symbol">(</span>style<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"long"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"short"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"narrow"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L136">libs/core/src/lib/datetime/datetime-adapter.ts:136</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of names for the days of the week.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>style: <span class="tsd-signature-type">"long"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"short"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"narrow"</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The naming style (e.g. long = &#39;Sunday&#39;, short = &#39;Sun&#39;, narrow = &#39;S&#39;).</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-				<p>An ordered list of all weekday names, starting with Sunday.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getDayPeriodNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Day<wbr>Period<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Day<wbr>Period<wbr>Names<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L174">libs/core/src/lib/datetime/datetime-adapter.ts:174</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of day periods.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></h4>
-				<p>List of day periods, starts from AM [&#39;AM&#39;, &#39;PM&#39;].</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getFirstDayOfWeek" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>First<wbr>Day<wbr>OfWeek</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>First<wbr>Day<wbr>OfWeek<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L180">libs/core/src/lib/datetime/datetime-adapter.ts:180</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the first day of the week.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The first day of the week (0-indexed, 0 = Sunday).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getHourNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Hour<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Hour<wbr>Names<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L156">libs/core/src/lib/datetime/datetime-adapter.ts:156</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of hour names.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>options: <span class="tsd-signature-type">object</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>meridian<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>two<wbr>Digit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-				<p>An ordered list of all hours (0 - 24).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getHours" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Hours</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Hours<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L62">libs/core/src/lib/datetime/datetime-adapter.ts:62</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets hours of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the hours from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The hours number (min 0, max 23).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getMinuteNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Minute<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Minute<wbr>Names<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L162">libs/core/src/lib/datetime/datetime-adapter.ts:162</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of minute names.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>options: <span class="tsd-signature-type">object</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>two<wbr>Digit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-				<p>An ordered list of all hours (0 - 24).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getMinutes" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Minutes</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Minutes<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L69">libs/core/src/lib/datetime/datetime-adapter.ts:69</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets minutes of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the minutes from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The minutes number (min 0, max 59).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getMonth" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Month</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Month<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L41">libs/core/src/lib/datetime/datetime-adapter.ts:41</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the month of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the month from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The month number (min 1, max 12).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getMonthNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Month<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Month<wbr>Names<span class="tsd-signature-symbol">(</span>style<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"long"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"short"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"narrow"</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L123">libs/core/src/lib/datetime/datetime-adapter.ts:123</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of names for the months.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>style: <span class="tsd-signature-type">"long"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"short"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"narrow"</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The naming style (e.g. long = &#39;January&#39;, short = &#39;Jan&#39;, narrow = &#39;J&#39;).</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-				<p>An ordered list of all month names, starting with January.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getNumDaysInMonth" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Num<wbr>Days<wbr>InMonth</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Num<wbr>Days<wbr>InMonth<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L187">libs/core/src/lib/datetime/datetime-adapter.ts:187</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the number of days in the month of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date whose month should be checked.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The number of days in the month of the given date.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getSecondNames" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Second<wbr>Names</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Second<wbr>Names<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L168">libs/core/src/lib/datetime/datetime-adapter.ts:168</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets a list of second names.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>options: <span class="tsd-signature-type">object</span></h5>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>two<wbr>Digit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
-				<p>An ordered list of all hours (0 - 24).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getSeconds" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Seconds</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Seconds<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L76">libs/core/src/lib/datetime/datetime-adapter.ts:76</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets seconds of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the seconds from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The seconds number (min 0, max 59).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getWeekName" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Week<wbr>Name</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Week<wbr>Name<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L150">libs/core/src/lib/datetime/datetime-adapter.ts:150</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the name for the week of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to get the week name from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-				<p>The name of the the week.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getWeekNumber" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Week<wbr>Number</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Week<wbr>Number<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L116">libs/core/src/lib/datetime/datetime-adapter.ts:116</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets week number of the given date</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the week number from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The week number (min 1, max 53).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getYear" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Year</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Year<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L34">libs/core/src/lib/datetime/datetime-adapter.ts:34</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the year component of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to extract the year from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-				<p>The year number.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="getYearName" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Year<wbr>Name</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">get<wbr>Year<wbr>Name<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L143">libs/core/src/lib/datetime/datetime-adapter.ts:143</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the name for the year of the given date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to get the year name from.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-				<p>The name of the given year (e.g. &#39;2020&#39;).</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isBetween" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Between</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Between<span class="tsd-signature-symbol">(</span>dateToCheck<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, startDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, endDate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L287">libs/core/src/lib/datetime/datetime-adapter.ts:287</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method to check if date is between 2 dates</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>dateToCheck: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to check if it&#39;s in a range</p>
-						</div>
-					</li>
-					<li>
-						<h5>startDate: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The start date of a range</p>
-						</div>
-					</li>
-					<li>
-						<h5>endDate: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The end date of a range</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If date is in a given date range</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isTimeFormatIncludesDayPeriod" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Time<wbr>Format<wbr>Includes<wbr>Day<wbr>Period</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Time<wbr>Format<wbr>Includes<wbr>Day<wbr>Period<span class="tsd-signature-symbol">(</span>displayFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L309">libs/core/src/lib/datetime/datetime-adapter.ts:309</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Format option includes period info.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>displayFormat: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The format to use to display the date as a string.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If time format includes period info.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isTimeFormatIncludesHours" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Time<wbr>Format<wbr>Includes<wbr>Hours</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Time<wbr>Format<wbr>Includes<wbr>Hours<span class="tsd-signature-symbol">(</span>displayFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L316">libs/core/src/lib/datetime/datetime-adapter.ts:316</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Format option includes hours info.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>displayFormat: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The format to use to display the date as a string.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If time format includes minutes info.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isTimeFormatIncludesMinutes" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Time<wbr>Format<wbr>Includes<wbr>Minutes</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Time<wbr>Format<wbr>Includes<wbr>Minutes<span class="tsd-signature-symbol">(</span>displayFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L323">libs/core/src/lib/datetime/datetime-adapter.ts:323</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Format option includes minutes info.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>displayFormat: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The format to use to display the date as a string.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If time format includes minutes info.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isTimeFormatIncludesSeconds" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Time<wbr>Format<wbr>Includes<wbr>Seconds</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Time<wbr>Format<wbr>Includes<wbr>Seconds<span class="tsd-signature-symbol">(</span>displayFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L330">libs/core/src/lib/datetime/datetime-adapter.ts:330</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Format option includes seconds info.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>displayFormat: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The format to use to display the date as a string.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-				<p>If time format includes seconds info.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="isValid" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> is<wbr>Valid</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">date</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L293">libs/core/src/lib/datetime/datetime-adapter.ts:293</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Method that checks validity of current date.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to be checked</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">date</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="now" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> now</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">now<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L225">libs/core/src/lib/datetime/datetime-adapter.ts:225</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets date and time at this moment.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>date and time at this moment.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="parse" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> parse</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, parseFormat<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L196">libs/core/src/lib/datetime/datetime-adapter.ts:196</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Parses a date from a user-provided value.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>value: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The value to parse.</p>
-						</div>
-					</li>
-					<li>
-						<h5>parseFormat: <span class="tsd-signature-type">unknown</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The expected format of the value being parsed
-							(type is implementation-dependent).</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">D</span></h4>
-				<p>The parsed date.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setHours" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> set<wbr>Hours</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Hours<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, hours<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L83">libs/core/src/lib/datetime/datetime-adapter.ts:83</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set hours.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to set hours to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>hours: <span class="tsd-signature-type">number</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>The new date instance.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setLocale" class="tsd-anchor"></a>
-		<h3>set<wbr>Locale</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Locale<span class="tsd-signature-symbol">(</span>locale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L24">libs/core/src/lib/datetime/datetime-adapter.ts:24</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Sets the locale used for all dates.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>locale: <span class="tsd-signature-type">string</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The new locale.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setMinutes" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> set<wbr>Minutes</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Minutes<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, minutes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L90">libs/core/src/lib/datetime/datetime-adapter.ts:90</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set minutes.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to set minutes to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>minutes: <span class="tsd-signature-type">number</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>The new date instance.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setSeconds" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> set<wbr>Seconds</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Seconds<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, seconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L97">libs/core/src/lib/datetime/datetime-adapter.ts:97</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set seconds.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to set seconds to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>seconds: <span class="tsd-signature-type">number</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>The new date instance.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setTime" class="tsd-anchor"></a>
-		<h3>set<wbr>Time</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Time<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span>, hours<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, minutes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, seconds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L104">libs/core/src/lib/datetime/datetime-adapter.ts:104</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Set hours, minutes and seconds at once.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to set time to.</p>
-						</div>
-					</li>
-					<li>
-						<h5>hours: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>minutes: <span class="tsd-signature-type">number</span></h5>
-					</li>
-					<li>
-						<h5>seconds: <span class="tsd-signature-type">number</span></h5>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>The new date instance.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="toIso8601" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> to<wbr>Iso8601</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">to<wbr>Iso8601<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L302">libs/core/src/lib/datetime/datetime-adapter.ts:302</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets the RFC 3339 compatible string (<a href="https://tools.ietf.org/html/rfc3339">https://tools.ietf.org/html/rfc3339</a>) for the given date.
-							This method is used to generate date strings that are compatible with native HTML attributes
-						such as the <code>min</code> or <code>max</code> attribute of an <code>&lt;input&gt;</code>.</p>
-					</div>
-				</div>
-				<h4 class="tsd-parameters-title">Parameters</h4>
-				<ul class="tsd-parameters">
-					<li>
-						<h5>date: <span class="tsd-signature-type">D</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<p>The date to get the ISO date string for.</p>
-						</div>
-					</li>
-				</ul>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-				<p>The ISO date string date string.</p>
-			</li>
-		</ul>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="today" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> today</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">today<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">D</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/datetime/datetime-adapter.ts#L219">libs/core/src/lib/datetime/datetime-adapter.ts:219</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Gets today&#39;s date where time value is set to 0</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">D</span></h4>
-				<p>Today&#39;s date.</p>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">DatetimeAdapter</span>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type tsd-kind-class">FdDatetimeAdapter</span></li></ul></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Constructors</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="constructor" class="tsd-anchor"></a>
+<h3><span>constructor</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="constructor.new_DatetimeAdapter"><span class="tsd-kind-constructor-signature">new <wbr/>Datetime<wbr/>Adapter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-class">DatetimeAdapter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<section class="tsd-panel">
+<h4>Type Parameters</h4>
+<ul class="tsd-type-parameter-list">
+<li>
+<h4><span class="tsd-kind-type-parameter">D</span></h4></li></ul></section>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-class">DatetimeAdapter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a id="locale" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span>locale</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">locale</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>current locale</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L12">libs/core/src/lib/datetime/datetime-adapter.ts:12</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="localeChanges" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>locale<wbr/>Changes</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">locale<wbr/>Changes</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>locale changes stream</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L18">libs/core/src/lib/datetime/datetime-adapter.ts:18</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="addCalendarDays" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>add<wbr/>Calendar<wbr/>Days</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="addCalendarDays.addCalendarDays-1"><span class="tsd-kind-call-signature">add<wbr/>Calendar<wbr/>Days</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">days</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Adds the given number of days to the date. Days are counted as if moving one cell on the
+calendar for each day.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to add days to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">days</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The number of days to add (may be negative).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>A new date equal to the given one with the specified number of days added.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L254">libs/core/src/lib/datetime/datetime-adapter.ts:254</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="addCalendarMonths" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>add<wbr/>Calendar<wbr/>Months</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="addCalendarMonths.addCalendarMonths-1"><span class="tsd-kind-call-signature">add<wbr/>Calendar<wbr/>Months</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">months</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Adds the given number of months to the date. Months are counted as if flipping a page on the
+calendar for each month and then finding the closest date in the new month. For example when
+adding 1 month to Jan 31, 2017, the resulting date will be Feb 28, 2017.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to add months to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">months</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The number of months to add (may be negative).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>A new date equal to the given one with the specified number of months added.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L245">libs/core/src/lib/datetime/datetime-adapter.ts:245</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="addCalendarYears" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>add<wbr/>Calendar<wbr/>Years</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="addCalendarYears.addCalendarYears-1"><span class="tsd-kind-call-signature">add<wbr/>Calendar<wbr/>Years</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">years</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Adds the given number of years to the date. Years are counted as if flipping 12 pages on the
+calendar for each year and then finding the closest date in the new month. For example when
+adding 1 year to Feb 29, 2016, the resulting date will be Feb 28, 2017.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to add years to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">years</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The number of years to add (may be negative).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>A new date equal to the given one with the specified number of years added.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L235">libs/core/src/lib/datetime/datetime-adapter.ts:235</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="clone" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>clone</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="clone.clone-1"><span class="tsd-kind-call-signature">clone</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Clones the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to clone</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>A new date equal to the given date.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L261">libs/core/src/lib/datetime/datetime-adapter.ts:261</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="compareDate" class="tsd-anchor"></a>
+<h3><span>compare<wbr/>Date</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="compareDate.compareDate-1"><span class="tsd-kind-call-signature">compare<wbr/>Date</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">first</span>, <span class="tsd-kind-parameter">second</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Compares two dates.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">first</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The first date to compare.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">second</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The second date to compare.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>0 if the dates are equal, a number less than 0 if the first date is earlier,
+    a number greater than 0 if the first date is later.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L362">libs/core/src/lib/datetime/datetime-adapter.ts:362</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="createDate" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>create<wbr/>Date</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="createDate.createDate-1"><span class="tsd-kind-call-signature">create<wbr/>Date</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">year</span>, <span class="tsd-kind-parameter">month</span>, <span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Creates a date with the given year, month, and date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">year</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The full year of the date. (e.g. 1989).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">month</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The month of the date (1 = January). Must be an integer 1 - 12.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The month date. Must be an integer 1 - length of the given month.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>The new date, or null if invalid.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L213">libs/core/src/lib/datetime/datetime-adapter.ts:213</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="dateTimesEqual" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>date<wbr/>Times<wbr/>Equal</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="dateTimesEqual.dateTimesEqual-1"><span class="tsd-kind-call-signature">date<wbr/>Times<wbr/>Equal</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date1</span>, <span class="tsd-kind-parameter">date2</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Method that check equality of 2 dates taking into account time value as well</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date1</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The first date to compare with</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">date2</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The second date to compare with</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If dates are equal or not</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L278">libs/core/src/lib/datetime/datetime-adapter.ts:278</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="datesEqual" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>dates<wbr/>Equal</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="datesEqual.datesEqual-1"><span class="tsd-kind-call-signature">dates<wbr/>Equal</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date1</span>, <span class="tsd-kind-parameter">date2</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Method that check equality of 2 dates.
+Does not take into account time value</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date1</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The first date to compare with</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">date2</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The second date to compare with</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If dates are equal or not</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L270">libs/core/src/lib/datetime/datetime-adapter.ts:270</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="format" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>format</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="format.format-1"><span class="tsd-kind-call-signature">format</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">displayFormat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Formats a date as a string according to the given format.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The value to format.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">displayFormat</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The format to use to display the date as a string.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The formatted date string.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L204">libs/core/src/lib/datetime/datetime-adapter.ts:204</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="fromNow" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> <span>from<wbr/>Now</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="fromNow.fromNow-1"><span class="tsd-kind-call-signature">from<wbr/>Now</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date being referenced.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>String representing how much time has passed since the date param.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L336">libs/core/src/lib/datetime/datetime-adapter.ts:336</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getAmountOfWeeks" class="tsd-anchor"></a>
+<h3><span>get<wbr/>Amount<wbr/>Of<wbr/>Weeks</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getAmountOfWeeks.getAmountOfWeeks-1"><span class="tsd-kind-call-signature">get<wbr/>Amount<wbr/>Of<wbr/>Weeks</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">year</span>, <span class="tsd-kind-parameter">month</span>, <span class="tsd-kind-parameter">firstDayOfWeek</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Get Amount of weeks in given month/year</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">year</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The year of the date</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">month</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The month of the date</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">firstDayOfWeek</span>: <span class="tsd-signature-type">number</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The first day of week. 1 - Sunday, 2 - Monday...</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>Number of weeks in the given month</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L345">libs/core/src/lib/datetime/datetime-adapter.ts:345</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getDate" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Date</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getDate.getDate-1"><span class="tsd-kind-call-signature">get<wbr/>Date</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the day of month of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the date of the month from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The date number (min 1, max 31).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L48">libs/core/src/lib/datetime/datetime-adapter.ts:48</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getDateNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Date<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getDateNames.getDateNames-1"><span class="tsd-kind-call-signature">get<wbr/>Date<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of names for the dates of the month.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><p>An ordered list of all date of the month names, starting with &#39;1&#39;.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L129">libs/core/src/lib/datetime/datetime-adapter.ts:129</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getDayOfWeek" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Day<wbr/>Of<wbr/>Week</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getDayOfWeek.getDayOfWeek-1"><span class="tsd-kind-call-signature">get<wbr/>Day<wbr/>Of<wbr/>Week</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the day of the week component of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the day of the week from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The day of week number (min 1, max 7, 1 = Sunday).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L55">libs/core/src/lib/datetime/datetime-adapter.ts:55</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getDayOfWeekNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Day<wbr/>Of<wbr/>Week<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getDayOfWeekNames.getDayOfWeekNames-1"><span class="tsd-kind-call-signature">get<wbr/>Day<wbr/>Of<wbr/>Week<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">style</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of names for the days of the week.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">style</span>: <span class="tsd-signature-type">&quot;long&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;short&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;narrow&quot;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The naming style (e.g. long = &#39;Sunday&#39;, short = &#39;Sun&#39;, narrow = &#39;S&#39;).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><p>An ordered list of all weekday names, starting with Sunday.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L136">libs/core/src/lib/datetime/datetime-adapter.ts:136</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getDayPeriodNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Day<wbr/>Period<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getDayPeriodNames.getDayPeriodNames-1"><span class="tsd-kind-call-signature">get<wbr/>Day<wbr/>Period<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of day periods.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></h4><p>List of day periods, starts from AM [&#39;AM&#39;, &#39;PM&#39;].</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L174">libs/core/src/lib/datetime/datetime-adapter.ts:174</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getFirstDayOfWeek" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>First<wbr/>Day<wbr/>Of<wbr/>Week</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getFirstDayOfWeek.getFirstDayOfWeek-1"><span class="tsd-kind-call-signature">get<wbr/>First<wbr/>Day<wbr/>Of<wbr/>Week</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the first day of the week.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The first day of the week (0-indexed, 0 = Sunday).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L180">libs/core/src/lib/datetime/datetime-adapter.ts:180</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getHourNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Hour<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getHourNames.getHourNames-1"><span class="tsd-kind-call-signature">get<wbr/>Hour<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of hour names.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">meridian</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">twoDigit</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">meridian</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5></li>
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">two<wbr/>Digit</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><p>An ordered list of all hours (0 - 24).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L156">libs/core/src/lib/datetime/datetime-adapter.ts:156</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getHours" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Hours</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getHours.getHours-1"><span class="tsd-kind-call-signature">get<wbr/>Hours</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets hours of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the hours from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The hours number (min 0, max 23).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L62">libs/core/src/lib/datetime/datetime-adapter.ts:62</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getMinuteNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Minute<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getMinuteNames.getMinuteNames-1"><span class="tsd-kind-call-signature">get<wbr/>Minute<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of minute names.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">twoDigit</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">two<wbr/>Digit</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><p>An ordered list of all hours (0 - 24).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L162">libs/core/src/lib/datetime/datetime-adapter.ts:162</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getMinutes" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Minutes</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getMinutes.getMinutes-1"><span class="tsd-kind-call-signature">get<wbr/>Minutes</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets minutes of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the minutes from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The minutes number (min 0, max 59).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L69">libs/core/src/lib/datetime/datetime-adapter.ts:69</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getMonth" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Month</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getMonth.getMonth-1"><span class="tsd-kind-call-signature">get<wbr/>Month</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the month of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the month from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The month number (min 1, max 12).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L41">libs/core/src/lib/datetime/datetime-adapter.ts:41</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getMonthNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Month<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getMonthNames.getMonthNames-1"><span class="tsd-kind-call-signature">get<wbr/>Month<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">style</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of names for the months.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">style</span>: <span class="tsd-signature-type">&quot;long&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;short&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;narrow&quot;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The naming style (e.g. long = &#39;January&#39;, short = &#39;Jan&#39;, narrow = &#39;J&#39;).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><p>An ordered list of all month names, starting with January.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L123">libs/core/src/lib/datetime/datetime-adapter.ts:123</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getNumDaysInMonth" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Num<wbr/>Days<wbr/>In<wbr/>Month</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getNumDaysInMonth.getNumDaysInMonth-1"><span class="tsd-kind-call-signature">get<wbr/>Num<wbr/>Days<wbr/>In<wbr/>Month</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the number of days in the month of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date whose month should be checked.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The number of days in the month of the given date.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L187">libs/core/src/lib/datetime/datetime-adapter.ts:187</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getSecondNames" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Second<wbr/>Names</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getSecondNames.getSecondNames-1"><span class="tsd-kind-call-signature">get<wbr/>Second<wbr/>Names</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">options</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets a list of second names.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">options</span>: <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">twoDigit</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><span class="tsd-kind-property">two<wbr/>Digit</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5></li></ul></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4><p>An ordered list of all hours (0 - 24).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L168">libs/core/src/lib/datetime/datetime-adapter.ts:168</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getSeconds" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Seconds</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getSeconds.getSeconds-1"><span class="tsd-kind-call-signature">get<wbr/>Seconds</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets seconds of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the seconds from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The seconds number (min 0, max 59).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L76">libs/core/src/lib/datetime/datetime-adapter.ts:76</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getWeekName" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Week<wbr/>Name</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getWeekName.getWeekName-1"><span class="tsd-kind-call-signature">get<wbr/>Week<wbr/>Name</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the name for the week of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to get the week name from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The name of the the week.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L150">libs/core/src/lib/datetime/datetime-adapter.ts:150</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getWeekNumber" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Week<wbr/>Number</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getWeekNumber.getWeekNumber-1"><span class="tsd-kind-call-signature">get<wbr/>Week<wbr/>Number</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets week number of the given date</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the week number from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The week number (min 1, max 53).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L116">libs/core/src/lib/datetime/datetime-adapter.ts:116</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getYear" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Year</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getYear.getYear-1"><span class="tsd-kind-call-signature">get<wbr/>Year</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the year component of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to extract the year from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><p>The year number.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L34">libs/core/src/lib/datetime/datetime-adapter.ts:34</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="getYearName" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>get<wbr/>Year<wbr/>Name</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="getYearName.getYearName-1"><span class="tsd-kind-call-signature">get<wbr/>Year<wbr/>Name</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the name for the year of the given date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to get the year name from.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The name of the given year (e.g. &#39;2020&#39;).</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L143">libs/core/src/lib/datetime/datetime-adapter.ts:143</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isBetween" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Between</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isBetween.isBetween-1"><span class="tsd-kind-call-signature">is<wbr/>Between</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">dateToCheck</span>, <span class="tsd-kind-parameter">startDate</span>, <span class="tsd-kind-parameter">endDate</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Method to check if date is between 2 dates</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">dateToCheck</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to check if it&#39;s in a range</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">startDate</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The start date of a range</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">endDate</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The end date of a range</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If date is in a given date range</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L287">libs/core/src/lib/datetime/datetime-adapter.ts:287</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isTimeFormatIncludesDayPeriod" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Day<wbr/>Period</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isTimeFormatIncludesDayPeriod.isTimeFormatIncludesDayPeriod-1"><span class="tsd-kind-call-signature">is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Day<wbr/>Period</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">displayFormat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Format option includes period info.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">displayFormat</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The format to use to display the date as a string.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If time format includes period info.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L309">libs/core/src/lib/datetime/datetime-adapter.ts:309</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isTimeFormatIncludesHours" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Hours</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isTimeFormatIncludesHours.isTimeFormatIncludesHours-1"><span class="tsd-kind-call-signature">is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Hours</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">displayFormat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Format option includes hours info.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">displayFormat</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The format to use to display the date as a string.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If time format includes minutes info.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L316">libs/core/src/lib/datetime/datetime-adapter.ts:316</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isTimeFormatIncludesMinutes" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Minutes</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isTimeFormatIncludesMinutes.isTimeFormatIncludesMinutes-1"><span class="tsd-kind-call-signature">is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Minutes</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">displayFormat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Format option includes minutes info.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">displayFormat</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The format to use to display the date as a string.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If time format includes minutes info.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L323">libs/core/src/lib/datetime/datetime-adapter.ts:323</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isTimeFormatIncludesSeconds" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Seconds</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isTimeFormatIncludesSeconds.isTimeFormatIncludesSeconds-1"><span class="tsd-kind-call-signature">is<wbr/>Time<wbr/>Format<wbr/>Includes<wbr/>Seconds</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">displayFormat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Format option includes seconds info.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">displayFormat</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The format to use to display the date as a string.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><p>If time format includes seconds info.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L330">libs/core/src/lib/datetime/datetime-adapter.ts:330</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="isValid" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>is<wbr/>Valid</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="isValid.isValid-1"><span class="tsd-kind-call-signature">is<wbr/>Valid</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Method that checks validity of current date.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-alias">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type tsd-kind-type-parameter">D</span><span class="tsd-signature-symbol">&gt;</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to be checked</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L293">libs/core/src/lib/datetime/datetime-adapter.ts:293</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="now" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>now</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="now.now-1"><span class="tsd-kind-call-signature">now</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets date and time at this moment.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>date and time at this moment.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L225">libs/core/src/lib/datetime/datetime-adapter.ts:225</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="parse" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>parse</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="parse.parse-1"><span class="tsd-kind-call-signature">parse</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">value</span>, <span class="tsd-kind-parameter">parseFormat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Parses a date from a user-provided value.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">value</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The value to parse.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">parseFormat</span>: <span class="tsd-signature-type">unknown</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The expected format of the value being parsed
+    (type is implementation-dependent).</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>The parsed date.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L196">libs/core/src/lib/datetime/datetime-adapter.ts:196</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setHours" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>set<wbr/>Hours</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setHours.setHours-1"><span class="tsd-kind-call-signature">set<wbr/>Hours</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">hours</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set hours.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to set hours to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">hours</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>The new date instance.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L83">libs/core/src/lib/datetime/datetime-adapter.ts:83</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setLocale" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Locale</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setLocale.setLocale-1"><span class="tsd-kind-call-signature">set<wbr/>Locale</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">locale</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets the locale used for all dates.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">locale</span>: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The new locale.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L24">libs/core/src/lib/datetime/datetime-adapter.ts:24</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setMinutes" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>set<wbr/>Minutes</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setMinutes.setMinutes-1"><span class="tsd-kind-call-signature">set<wbr/>Minutes</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">minutes</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set minutes.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to set minutes to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">minutes</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>The new date instance.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L90">libs/core/src/lib/datetime/datetime-adapter.ts:90</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setSeconds" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>set<wbr/>Seconds</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setSeconds.setSeconds-1"><span class="tsd-kind-call-signature">set<wbr/>Seconds</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">seconds</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set seconds.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to set seconds to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">seconds</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>The new date instance.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L97">libs/core/src/lib/datetime/datetime-adapter.ts:97</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setTime" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Time</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setTime.setTime-1"><span class="tsd-kind-call-signature">set<wbr/>Time</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span>, <span class="tsd-kind-parameter">hours</span>, <span class="tsd-kind-parameter">minutes</span>, <span class="tsd-kind-parameter">seconds</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Set hours, minutes and seconds at once.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to set time to.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li>
+<li>
+<h5><span class="tsd-kind-parameter">hours</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">minutes</span>: <span class="tsd-signature-type">number</span></h5></li>
+<li>
+<h5><span class="tsd-kind-parameter">seconds</span>: <span class="tsd-signature-type">number</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>The new date instance.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L104">libs/core/src/lib/datetime/datetime-adapter.ts:104</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="toIso8601" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>to<wbr/>Iso8601</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="toIso8601.toIso8601-1"><span class="tsd-kind-call-signature">to<wbr/>Iso8601</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets the RFC 3339 compatible string (<a href="https://tools.ietf.org/html/rfc3339">https://tools.ietf.org/html/rfc3339</a>) for the given date.
+This method is used to generate date strings that are compatible with native HTML attributes
+such as the <code>min</code> or <code>max</code> attribute of an <code>&lt;input&gt;</code>.</p>
+</div></div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">date</span>: <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h5>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>The date to get the ISO date string for.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><p>The ISO date string date string.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L302">libs/core/src/lib/datetime/datetime-adapter.ts:302</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="today" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> <span>today</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="today.today-1"><span class="tsd-kind-call-signature">today</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type tsd-kind-type-parameter">D</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Gets today&#39;s date where time value is set to 0</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type tsd-kind-type-parameter">D</span></h4><p>Today&#39;s date.</p>
+
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/datetime/datetime-adapter.ts#L219">libs/core/src/lib/datetime/datetime-adapter.ts:219</a></li></ul></aside></li></ul></section></section></div>

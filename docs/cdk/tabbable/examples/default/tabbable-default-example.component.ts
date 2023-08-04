@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, inject } from '@angular/core';
-import { TabbableElementService } from '@fundamental-ngx/cdk';
+import { TabbableElementService } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-tabbable-default-example',

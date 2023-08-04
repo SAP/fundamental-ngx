@@ -1,9 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-table-toolbar-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './table-toolbar-example.component.html'
 })
 export class TableToolbarExampleComponent implements OnInit {
@@ -14,7 +15,7 @@ export class TableToolbarExampleComponent implements OnInit {
     myForm: FormGroup;
     loading = false;
 
-    constructor(private _dialogService: DialogService, private _fb: FormBuilder) {}
+    constructor(private _dialogService: DialogService, private _fb: FormBuilder, private _cdr: ChangeDetectorRef) {}
 
     ngOnInit(): void {
         this.tableRows = [
@@ -84,9 +85,11 @@ export class TableToolbarExampleComponent implements OnInit {
                 });
                 this.searchInputChanged(this.searchTerm);
                 this.myForm.setValue({ nameInput: '', typeInput: '', regionInput: '' });
+                this._cdr.detectChanges();
             },
             (error) => {
                 this.confirmationReason = 'Dialog dismissed with result: ' + error;
+                this._cdr.detectChanges();
             }
         );
     }

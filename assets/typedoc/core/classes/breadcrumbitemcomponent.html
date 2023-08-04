@@ -1,112 +1,65 @@
 <div class="fd-tsdoc-container">
 <section class="tsd-panel tsd-comment">
-	<div class="tsd-comment tsd-typography">
-		<div class="lead">
-			<p>Breadcrumb item directive. Must have child breadcrumb link directives.</p>
-		</div>
-		<pre><code class="language-html"><span style="color: #800000">&lt;fd-breadcrumb-item&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;a</span><span style="color: #000000"> </span><span style="color: #FF0000">fd-link</span><span style="color: #000000"> </span><span style="color: #FF0000">[routerLink]</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;&#039;#&#039;&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Breadcrumb Link</span><span style="color: #800000">&lt;/a&gt;</span>
-<span style="color: #800000">&lt;/fd-breadcrumb-item&gt;</span>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Breadcrumb item directive. Must have child breadcrumb link directives.</p>
+<pre><code class="language-html"><span class="hl-0">&lt;</span><span class="hl-1">fd-breadcrumb-item</span><span class="hl-0">&gt;</span><br/><span class="hl-2">    </span><span class="hl-0">&lt;</span><span class="hl-1">a</span><span class="hl-2"> </span><span class="hl-3">fd-link</span><span class="hl-2"> </span><span class="hl-3">[routerLink]</span><span class="hl-2">=</span><span class="hl-4">&quot;&#39;#&#39;&quot;</span><span class="hl-0">&gt;</span><span class="hl-2">Breadcrumb Link</span><span class="hl-0">&lt;/</span><span class="hl-1">a</span><span class="hl-0">&gt;</span><br/><span class="hl-0">&lt;/</span><span class="hl-1">fd-breadcrumb-item</span><span class="hl-0">&gt;</span>
 </code></pre>
-	</div>
-</section>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div></section>
 <section class="tsd-panel tsd-hierarchy">
-	<h3>Hierarchy</h3>
-	<ul class="tsd-hierarchy">
-		<li>
-			<span class="target">BreadcrumbItemComponent</span>
-		</li>
-	</ul>
-</section>
+<h3>Hierarchy</h3>
+<ul class="tsd-hierarchy">
+<li><span class="target">BreadcrumbItemComponent</span></li></ul></section>
 <section class="tsd-panel">
-	<h3>Implements</h3>
-	<ul class="tsd-hierarchy">
-		<li><span class="tsd-signature-type">AfterViewInit</span></li>
-	</ul>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="breadcrumbItemPortal" class="tsd-anchor"></a>
-		<h3>breadcrumb<wbr>Item<wbr>Portal</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">breadcrumb<wbr>Item<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L43">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:43</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>In case there is no link in Item and breadcrumb item is non-interactive, we move whole item content to menu item title</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="elementRef" class="tsd-anchor"></a>
-		<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> element<wbr>Ref</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">element<wbr>Ref<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="linkContentPortal" class="tsd-anchor"></a>
-		<h3>link<wbr>Content<wbr>Portal</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">link<wbr>Content<wbr>Portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L46">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:46</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>When breadcrumb item has link in it, we are moving link content to menu item title</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="portal" class="tsd-anchor"></a>
-		<h3>portal</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">portal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L51">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:51</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Breadcrumb item dom portal.</p>
-			</div>
-		</div>
-	</section>
-</section>
-<section class="tsd-panel-group tsd-member-group ">
-	<h2>Methods</h2>
-	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="setPortal" class="tsd-anchor"></a>
-		<h3>set<wbr>Portal</h3>
-		<!-- {log decorators} -->
-		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">set<wbr>Portal<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-		</ul>
-		<ul class="tsd-descriptions">
-			<li class="tsd-description">
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/26ebcc6/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L72">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:72</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Sets breadcrumb item dom portal.</p>
-					</div>
-				</div>
-				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-			</li>
-		</ul>
-	</section>
-</section>
-</div>
+<h4>Implements</h4>
+<ul class="tsd-hierarchy">
+<li><span class="tsd-signature-type ">AfterViewInit</span></li></ul></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Properties</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="breadcrumbItemPortal" class="tsd-anchor"></a>
+<h3><span>breadcrumb<wbr/>Item<wbr/>Portal</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">breadcrumb<wbr/>Item<wbr/>Portal</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">Element</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>In case there is no link in Item and breadcrumb item is non-interactive, we move whole item content to menu item title</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L43">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:43</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="elementRef" class="tsd-anchor"></a>
+<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> <span>element<wbr/>Ref</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">element<wbr/>Ref</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">ElementRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L57">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:57</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="linkContentPortal" class="tsd-anchor"></a>
+<h3><span>link<wbr/>Content<wbr/>Portal</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">link<wbr/>Content<wbr/>Portal</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>When breadcrumb item has link in it, we are moving link content to menu item title</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L46">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:46</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="portal" class="tsd-anchor"></a>
+<h3><span>portal</span></h3>
+<div class="tsd-signature tsd-kind-icon"><span class="tsd-kind-property">portal</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">DomPortal</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Breadcrumb item dom portal.</p>
+</div></div>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L51">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:51</a></li></ul></aside></section></section>
+<section class="tsd-panel-group tsd-member-group">
+<h2>Methods</h2>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="setPortal" class="tsd-anchor"></a>
+<h3><span>set<wbr/>Portal</span></h3>
+<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+<li class="tsd-signature tsd-kind-icon" id="setPortal.setPortal-1"><span class="tsd-kind-call-signature">set<wbr/>Portal</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li></ul>
+<ul class="tsd-descriptions">
+<li class="tsd-description">
+<div class="tsd-comment tsd-typography">
+<div class="lead"><p>Sets breadcrumb item dom portal.</p>
+</div></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+<div class="tsd-comment tsd-typography"><dl class="tsd-comment-tags"></dl></div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/42b01fa/libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts#L72">libs/core/src/lib/breadcrumb/breadcrumb-item.component.ts:72</a></li></ul></aside></li></ul></section></section></div>

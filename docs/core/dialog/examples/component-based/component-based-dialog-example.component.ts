@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { DialogExampleComponent } from './dialog-example.component';
 
 @Component({
     selector: 'fd-component-based-dialog-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <button fd-button label="Open from Component" (click)="open()"></button>
         <p>{{ closeReason }}</p>
@@ -12,7 +13,7 @@ import { DialogExampleComponent } from './dialog-example.component';
 export class ComponentBasedDialogExampleComponent {
     closeReason: string;
 
-    constructor(private _dialogService: DialogService) {}
+    constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}
 
     open(): void {
         const dialogRef = this._dialogService.open(DialogExampleComponent, {
@@ -48,9 +49,11 @@ export class ComponentBasedDialogExampleComponent {
         dialogRef.afterClosed.subscribe(
             (result) => {
                 this.closeReason = 'Dialog closed with result: ' + result;
+                this._cdr.detectChanges();
             },
             (error) => {
                 this.closeReason = 'Dialog dismissed with result: ' + error;
+                this._cdr.detectChanges();
             }
         );
     }
