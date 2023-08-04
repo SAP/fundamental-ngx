@@ -27,6 +27,7 @@ import { SplitButtonActionTitle } from './split-button-utils/split-button.direct
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 const splitButtonTextClasses = [splitButtonTextClass];
@@ -72,7 +73,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
     @Input()
     set mainActionTitle(value: string) {
-        console.warn(
+        warnOnce(
             "Property mainActionTitle is deprecated. Use MenuItemComponent's title component text content instead."
         );
         this._mainActionTitle = value;
@@ -93,7 +94,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
      */
     @Input()
     set expandButtonAriaLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property expandButtonAriaLabel is deprecated. Use i18n capabilities 'coreSplitButton.expandButtonAriaLabel' key instead."
         );
         this._expandButtonAriaLabel = value;

@@ -27,7 +27,7 @@ import {
     LabelLayout,
     HintInput
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { FormGeneratorService } from '../form-generator.service';
@@ -139,7 +139,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     @Input()
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
             );
         }

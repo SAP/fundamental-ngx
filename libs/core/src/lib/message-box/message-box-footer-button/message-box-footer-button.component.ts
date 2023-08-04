@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BarElementDirective } from '@fundamental-ngx/core/bar';
-
+import { warnOnce } from '@fundamental-ngx/core/utils';
 /**
  * @deprecated
  * Consider using `fd-button-bar`
@@ -13,6 +13,6 @@ export class MessageBoxFooterButtonComponent extends BarElementDirective {
     /** @hidden */
     constructor() {
         super();
-        console.warn('`fd-message-box-footer-button` is deprecated. Consider using `fd-button-bar`');
+        warnOnce('`fd-message-box-footer-button` is deprecated. Consider using `fd-button-bar`');
     }
 }

@@ -13,7 +13,7 @@ import {
     ViewChildren
 } from '@angular/core';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { SPACE } from '@angular/cdk/keycodes';
@@ -66,7 +66,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         private _dialogService: DialogService,
         @Optional() private _rtlService: RtlService
     ) {
-        console.warn('ThumbnailImage component is deprecated since version 0.40.0 and will be removed in next release');
+        warnOnce('ThumbnailImage component is deprecated since version 0.40.0 and will be removed in next release');
     }
 
     /** @hidden */

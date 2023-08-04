@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BarElementDirective } from '@fundamental-ngx/core/bar';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * @deprecated
@@ -13,6 +14,6 @@ export class DialogFooterButtonComponent extends BarElementDirective {
     /** @hidden */
     constructor() {
         super();
-        console.warn('fd-dialog-footer-button is deprecated, use fd-button-bar instead.');
+        warnOnce('fd-dialog-footer-button is deprecated, use fd-button-bar instead.');
     }
 }

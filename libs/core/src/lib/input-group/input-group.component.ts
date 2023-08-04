@@ -19,7 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
 import {
@@ -67,7 +67,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Input()
     set inputTemplate(value: TemplateRef<any>) {
         if (isDevMode()) {
-            console.warn('"inputTemplate" is deprecated. Use "fd-input-group-input" directive instead');
+            warnOnce('"inputTemplate" is deprecated. Use "fd-input-group-input" directive instead');
         }
 
         this._inputTemplate = value;
@@ -159,7 +159,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Input()
     set ariaLabelledby(value: Nullable<string>) {
         if (isDevMode()) {
-            console.warn('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
+            warnOnce('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
         }
         this.ariaLabelledBy = value;
     }

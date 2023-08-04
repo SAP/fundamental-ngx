@@ -11,6 +11,7 @@ import {
     AfterViewInit,
     ViewChild
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
@@ -61,7 +62,7 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
      */
     @Input()
     set emptyTableMessage(value: string) {
-        console.warn('Property emptyTableMessage is deprecated. Use 18n capabilities instead.');
+        warnOnce('Property emptyTableMessage is deprecated. Use 18n capabilities instead.');
         this._emptyTableMessage = value;
     }
 

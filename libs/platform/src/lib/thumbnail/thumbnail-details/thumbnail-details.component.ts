@@ -10,6 +10,7 @@ import {
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 interface DialogRefData {
     selectedMedia: Media;
@@ -49,9 +50,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
-        console.warn(
-            'ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.'
-        );
+        warnOnce('ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.');
     }
 
     /** @hidden */

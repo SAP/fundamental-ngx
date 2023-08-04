@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-
+import { warnOnce } from '@fundamental-ngx/core/utils';
 /**
  * @deprecated
  * Consider using `fd-button-bar`
@@ -14,6 +14,6 @@ import { Directive } from '@angular/core';
 export class DialogDecisiveButtonDirective {
     /** @hidden */
     constructor() {
-        console.warn('[fd-dialog-decisive-button] is deprecated, use fd-button-bar instead.');
+        warnOnce('[fd-dialog-decisive-button] is deprecated, use fd-button-bar instead.');
     }
 }

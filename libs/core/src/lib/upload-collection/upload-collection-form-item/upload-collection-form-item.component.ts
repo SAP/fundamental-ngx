@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-upload-collection-form-item',
@@ -14,7 +15,7 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
      */
     @Input()
     set placeholder(value: string) {
-        console.warn(
+        warnOnce(
             "Property placeholder is deprecated. Use i18n capabilities 'coreUploadCollection.formItemPlaceholder' key instead."
         );
         this._placeholder = value;

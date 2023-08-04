@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { startWith, takeUntil, take } from 'rxjs/operators';
+import { warnOnce } from '../../helpers';
 import { selectStrategy } from '../../async-strategy';
 import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
@@ -69,7 +70,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      */
     @Input()
     set replaceMode(value: boolean) {
-        console.warn('`replaceMode` input is deprecated. Use `dropMode` property instead.');
+        warnOnce('`replaceMode` input is deprecated. Use `dropMode` property instead.');
         this._replaceMode = value;
         this.dropMode = value ? 'group' : 'shift';
         this._detectedDropMode = this.dropMode;

@@ -1,4 +1,4 @@
-import { Nullable, DynamicComponentConfig } from '@fundamental-ngx/cdk/utils';
+import { Nullable, DynamicComponentConfig, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated
@@ -43,7 +43,7 @@ export class AlertConfig implements DynamicComponentConfig {
 
     /** @hidden */
     constructor() {
-        console.warn(
+        warnOnce(
             'AlertConfig is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.'
         );
     }

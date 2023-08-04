@@ -19,7 +19,7 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 export class FileUploaderInvalidChangeEvent {
     /**
@@ -90,13 +90,13 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     @Input()
     set stateType(state: FormStates) {
         if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
+            warnOnce('"stateType" is deprecated. Use "state" instead');
         }
         super.state = state;
     }
     get stateType(): FormStates {
         if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
+            warnOnce('"stateType" is deprecated. Use "state" instead');
         }
         return super.state;
     }

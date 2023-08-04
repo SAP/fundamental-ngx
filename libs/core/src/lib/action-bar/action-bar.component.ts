@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * @deprecated
@@ -29,6 +30,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 export class ActionBarComponent {
     /** @hidden */
     constructor() {
-        console.warn('ActionBarComponent is deprecated since version 0.40.0 and will be removed in future release.');
+        warnOnce('ActionBarComponent is deprecated since version 0.40.0 and will be removed in future release.');
     }
 }

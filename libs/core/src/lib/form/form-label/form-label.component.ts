@@ -12,6 +12,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 let formLabelIdCount = 0;
 
@@ -43,7 +44,7 @@ export class FormLabelComponent implements OnChanges {
     /** @deprecated */
     @Input()
     set checkbox(value: boolean) {
-        console.warn('Property checkbox is deprecated. ');
+        warnOnce('Property checkbox is deprecated. ');
         this._checkbox = value;
     }
 
@@ -54,7 +55,7 @@ export class FormLabelComponent implements OnChanges {
     /** @deprecated */
     @Input()
     set radio(value: boolean) {
-        console.warn('Property radio is deprecated. ');
+        warnOnce('Property radio is deprecated. ');
         this._radio = value;
     }
 
@@ -74,7 +75,7 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     set inlineHelpTitle(title: Nullable<string>) {
         if (isDevMode()) {
-            console.warn('inlineHelpTitle is deprecated, use inlineHelpContent instead');
+            warnOnce('inlineHelpTitle is deprecated, use inlineHelpContent instead');
         }
         this.inlineHelpContent = title;
     }

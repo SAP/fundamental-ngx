@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-upload-collection-button-group',
@@ -54,9 +55,7 @@ export class UploadCollectionButtonGroupComponent {
      */
     @Input()
     set okText(value: string) {
-        console.warn(
-            "Property okText is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkText' key instead."
-        );
+        warnOnce("Property okText is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkText' key instead.");
         this._okText = value;
     }
 
@@ -70,7 +69,7 @@ export class UploadCollectionButtonGroupComponent {
      */
     @Input()
     set cancelText(value: string) {
-        console.warn(
+        warnOnce(
             "Property cancelText is deprecated. Use i18n capabilities 'coreUploadCollection.menuCancelText' key instead."
         );
         this._cancelText = value;
@@ -86,7 +85,7 @@ export class UploadCollectionButtonGroupComponent {
      */
     @Input()
     set editAriaLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property editAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuEditAriaLabel' key instead."
         );
         this._editAriaLabel = value;
@@ -102,7 +101,7 @@ export class UploadCollectionButtonGroupComponent {
      */
     @Input()
     set deleteAriaLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property deleteAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuDeleteAriaLabel' key instead."
         );
         this._deleteAriaLabel = value;
@@ -118,7 +117,7 @@ export class UploadCollectionButtonGroupComponent {
      */
     @Input()
     set okAriaLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property okAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkAriaLabel' key instead."
         );
         this._okAriaLabel = value;
@@ -134,7 +133,7 @@ export class UploadCollectionButtonGroupComponent {
      */
     @Input()
     set cancelAriaLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property cancelAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuCancelAriaLabel' key instead."
         );
         this._cancelAriaLabel = value;

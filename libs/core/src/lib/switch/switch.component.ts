@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
@@ -91,7 +91,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     @Input()
     set ariaLabelledby(value: Nullable<string>) {
         if (isDevMode() && !warnedAboutAriaLabeledBy) {
-            console.warn('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
+            warnOnce('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
             warnedAboutAriaLabeledBy = true;
         }
         this.ariaLabelledBy = value;
@@ -107,7 +107,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      */
     @Input()
     set semanticAcceptLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property semanticAcceptLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticAcceptLabel' key instead."
         );
         this._semanticAcceptLabel = value;
@@ -123,7 +123,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      */
     @Input()
     set semanticDeclineLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticDeclineLabel' key instead."
         );
         this._semanticDeclineLabel = value;

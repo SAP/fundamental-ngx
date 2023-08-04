@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /** @deprecated */
 @Component({
@@ -33,7 +34,7 @@ export class VhdSearchComponent {
 
     /** @hidden */
     constructor() {
-        console.warn(
+        warnOnce(
             '"VhdSearchComponent" is deprecated. Messages from it is no longer in use. ' +
                 'In order to configure custom messages, use i18n tools instead.'
         );

@@ -9,7 +9,7 @@ import {
     OnInit,
     OnChanges
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from '../../constants';
@@ -68,9 +68,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      */
     @Input()
     set moreLabel(value: string) {
-        console.warn(
-            "Property moreLabel is deprecated. Use i18n capabilities 'coreFeedListItem.moreLabel' key instead."
-        );
+        warnOnce("Property moreLabel is deprecated. Use i18n capabilities 'coreFeedListItem.moreLabel' key instead.");
         this._moreLabel = value;
     }
 
@@ -84,9 +82,7 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
      */
     @Input()
     set lessLabel(value: string) {
-        console.warn(
-            "Property lessLabel is deprecated. Use i18n capabilities 'coreFeedListItem.lessLabel' key instead."
-        );
+        warnOnce("Property lessLabel is deprecated. Use i18n capabilities 'coreFeedListItem.lessLabel' key instead.");
         this._lessLabel = value;
     }
 
