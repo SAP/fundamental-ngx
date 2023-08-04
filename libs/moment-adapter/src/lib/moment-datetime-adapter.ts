@@ -3,7 +3,6 @@ import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, 
 
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import deprecated from 'deprecated-decorator';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -39,7 +38,6 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
  * It relies on moment implementation for formatting and translation purposes.
  *
  */
-@deprecated('DayjsDatetimeAdapter from `@fundamental-ngx/datetime-adapter` package')
 @Injectable()
 export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     /** @hidden */

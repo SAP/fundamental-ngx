@@ -10,7 +10,6 @@ import {
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
-import deprecated from 'deprecated-decorator';
 
 interface DialogRefData {
     selectedMedia: Media;
@@ -24,7 +23,6 @@ interface DialogRefData {
  * @deprecated
  * ThumbnailDetails component is deprecated since version 0.40.0
  */
-@deprecated({ version: '0.40.0' })
 @Component({
     selector: 'fdp-thumbnail-details',
     templateUrl: './thumbnail-details.component.html',
@@ -50,7 +48,11 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     maxImages = this.dialogRef.data.maxImages;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {}
+    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
+        console.warn(
+            'ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.'
+        );
+    }
 
     /** @hidden */
     ngOnInit(): void {

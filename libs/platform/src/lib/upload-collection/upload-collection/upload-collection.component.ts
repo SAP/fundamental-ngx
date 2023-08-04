@@ -43,7 +43,6 @@ import {
 } from '../models/upload-collection.models';
 import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
-import deprecated from 'deprecated-decorator';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 
@@ -53,9 +52,6 @@ let randomId = 0;
  * @deprecated
  * UploadCollection component is deprecated since version 0.40.0
  */
-@deprecated({
-    version: '0.40.0'
-})
 @Component({
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',
@@ -358,7 +354,9 @@ export class UploadCollectionComponent
         private readonly _filesValidatorService: FilesValidatorService,
         private readonly _cdr: ChangeDetectorRef,
         private _injector: Injector
-    ) {}
+    ) {
+        console.warn('The Upload Collection component is deprecated and will be removed in next release.');
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

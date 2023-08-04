@@ -11,26 +11,23 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NestedListDirective } from '@fundamental-ngx/core/nested-list';
-import { NestedListKeyboardService } from '@fundamental-ngx/core/nested-list';
+import {
+    NestedListDirective,
+    NestedListKeyboardService,
+    NestedListStateService,
+    PreparedNestedListComponent
+} from '@fundamental-ngx/core/nested-list';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationModel } from './side-navigation-model';
-import { PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
-import { NestedListStateService } from '@fundamental-ngx/core/nested-list';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from './side-navigation.interface';
-import deprecated from 'deprecated-decorator';
 
 /**
  * @deprecated use the vertical navigation component instead.
  * The side-navigation is a wrapping component representing
  * a left navigation that can always display or expand/collapse using the menu icon within the global navigation.
  */
-@deprecated({
-    alternative: 'VerticalNavigationComponent',
-    url: 'https://github.com/SAP/fundamental-ngx/tree/75130aa85724060a515d99d675eb672b6d6eef6a/libs/core/src/lib/vertical-navigation'
-})
 @Component({
     templateUrl: './side-navigation.component.html',
     selector: 'fd-side-nav',
@@ -83,6 +80,11 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
         });
+        console.warn(`
+            SideNavigationComponent is deprecated since version 0.40.0 and will be removed in future release.
+            Use the vertical navigation component instead.
+            For more information check the documentation.
+        `);
     }
 
     /** @hidden */
