@@ -11,6 +11,7 @@ import {
     Inject,
     Input,
     isDevMode,
+    OnInit,
     Optional,
     Output,
     Self,
@@ -23,6 +24,7 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms
 
 import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -44,7 +46,7 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
-export class CheckboxComponent extends BaseInput implements AfterViewInit {
+export class CheckboxComponent extends BaseInput implements AfterViewInit, OnInit {
     /**
      * Checkbox tooltip
      */
@@ -63,7 +65,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     set isBinary(value: boolean) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 '"isBinary" is deprecated and has no effect anymore \n' +
                     'Checkbox is binary by default. Use "tristate" input if you need to have indeterminate checkbox.'
             );
@@ -93,7 +95,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input('value')
     set checkboxTrueValue(trueValue: any) {
         if (isDevMode()) {
-            console.warn('"value" input is deprecated. Use "values" instead');
+            warnOnce('"value" input is deprecated. Use "values" instead');
         }
         this.values = this.values ? { ...this.values, trueValue } : { trueValue };
     }
@@ -150,6 +152,17 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;
         this.tabIndexValue = tabIndexValue;
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        super.ngOnInit();
+        if (this.change.observed) {
+            warnOnce('`change` event is deprecated. Use `checkedChange` instead');
+        }
+        if (this.indeterminateChange.observed) {
+            warnOnce('`indeterminateChange` event is deprecated. Use `indeterminate` instead');
+        }
     }
 
     /** update controller on checkbox state change */

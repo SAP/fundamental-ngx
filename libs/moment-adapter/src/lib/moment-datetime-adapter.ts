@@ -2,7 +2,7 @@ import { Inject, Injectable, InjectionToken, isDevMode, LOCALE_ID, Optional } fr
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
 
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -57,7 +57,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         this.setLocale(localeId || moment.locale());
 
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 'MomentDatetimeAdapter is deprecated. ' +
                     'Use "DayjsDatetimeAdapter" from "@fundamental-ngx/datetime-adapter" package instead.'
             );

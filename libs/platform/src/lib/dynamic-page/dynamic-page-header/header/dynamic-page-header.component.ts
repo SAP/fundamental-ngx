@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild, TemplateRef } from '@angular/core';
+import { tap } from 'rxjs';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageConfig } from '../../dynamic-page.config';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /** Dynamic Page collapse change event */
 export class DynamicPageCollapseChangeEvent {
@@ -114,7 +115,11 @@ export class DynamicPageHeaderComponent {
 
     /** @deprecated - use `collapsedChange` instead */
     @Output()
-    collapseChange = this.collapsedChange;
+    collapseChange = this.collapsedChange.pipe(
+        tap(() =>
+            warnOnce('`collapseChange` is deprecated and will be removed next release. Use `collapsedChange` instead.')
+        )
+    );
 
     /**
      * @hidden

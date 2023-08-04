@@ -1,19 +1,17 @@
-import { Directive, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { DestroyRef, Directive, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { BehaviorSubject, filter } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE, ROW_HEIGHT } from '../constants';
 import { TableVirtualScroll } from '../models';
 import { TableScrollDispatcherService } from '../services/table-scroll-dispatcher.service';
 import { Table } from '../table';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fdp-table[virtualScroll]',
     standalone: true,
     providers: [
-        DestroyedService,
         {
             provide: FDP_TABLE_VIRTUAL_SCROLL_DIRECTIVE,
             useExisting: TableVirtualScrollDirective
@@ -58,7 +56,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
     private readonly _tableScrollDispatcher = inject(TableScrollDispatcherService);
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -127,7 +125,7 @@ export class TableVirtualScrollDirective extends TableVirtualScroll implements O
             .verticallyScrolled()
             .pipe(
                 filter(() => this.virtualScroll && !!this.bodyHeight),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((scrollable) => {
                 this.calculateVirtualScrollRows();

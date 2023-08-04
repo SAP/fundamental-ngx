@@ -1,25 +1,17 @@
-import { ChangeDetectorRef, Inject, OnDestroy, Pipe, PipeTransform } from '@angular/core';
-import {
-    BehaviorSubject,
-    combineLatest,
-    distinctUntilChanged,
-    filter,
-    map,
-    Observable,
-    skip,
-    Subject,
-    takeUntil
-} from 'rxjs';
+import { ChangeDetectorRef, DestroyRef, Inject, Pipe, PipeTransform } from '@angular/core';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, skip } from 'rxjs';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
 import { FD_LANGUAGE } from '../utils/tokens';
 import { TranslationResolver } from '../utils/translation-resolver';
 
 @Pipe({
     name: 'fdTranslate',
-    pure: false // required to update the value when the observable is resolved
+    pure: false, // required to update the value when the observable is resolved
+    standalone: true
 })
-export class FdTranslatePipe implements PipeTransform, OnDestroy {
+export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
 
@@ -33,16 +25,12 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
     private _value: string | undefined;
 
     /** @hidden */
-    private readonly _onDestroy$ = new Subject<void>();
-
-    /** @hidden */
-    constructor(@Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>, private _cdr: ChangeDetectorRef) {
+    constructor(
+        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
+        private readonly _destroyRef: DestroyRef,
+        private _cdr: ChangeDetectorRef
+    ) {
         this._instantiateSubscription();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
     }
 
     /** Translate a key with arguments and, optionally, default value */
@@ -62,7 +50,7 @@ export class FdTranslatePipe implements PipeTransform, OnDestroy {
         ])
             .pipe(
                 map(([lang, key, args]) => this._translationResolver.resolve(lang, key, args)),
-                takeUntil(this._onDestroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((value) => {
                 this._value = value;

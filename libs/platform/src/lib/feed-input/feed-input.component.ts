@@ -10,6 +10,7 @@ import {
     Renderer2,
     ElementRef
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-feed-input',
@@ -44,7 +45,14 @@ export class FeedInputComponent implements AfterViewInit {
      * Set title attribute for accessibility user image
      */
     @Input()
-    userTitle: string;
+    set userTitle(value: string) {
+        warnOnce("Property userTitle is deprecated. Use i18n capabilities 'platformFeedInput.userTitle' key instead.");
+        this._userTitle = value;
+    }
+
+    get userTitle(): string {
+        return this._userTitle;
+    }
 
     /** @hidden Event emitted when user click on send button */
     @Output()
@@ -57,6 +65,9 @@ export class FeedInputComponent implements AfterViewInit {
 
     /** @hidden Textarea entered value */
     value: string | null;
+
+    /** @hidden */
+    private _userTitle: string;
 
     /** @hidden */
     constructor(private _renderer: Renderer2) {}

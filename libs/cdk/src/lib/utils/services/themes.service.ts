@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { warnOnce } from '../helpers';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
 
@@ -17,12 +18,12 @@ export interface Theme {
     description?: string;
 }
 
-@Injectable()
 /**
  * @deprecated
  * Service providing theme switcher functionality.
  * Deprecated since 0.35.0 in favor of ThemingService from ThemingModule
  */
+@Injectable()
 export class ThemesService {
     /** Available themes */
     themes: Theme[] = [
@@ -77,7 +78,9 @@ export class ThemesService {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {}
+    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {
+        warnOnce('ThemesService is deprecated since 0.35.0 in favor of ThemingService from ThemingModule');
+    }
 
     /**
      * Set theme according to additional URL parameter.

@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { RangeSelector, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import {
@@ -38,7 +38,7 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 let warnedAboutChecked = false;
 const warnAboutChecked = (): void => {
     if (isDevMode() && !warnedAboutChecked) {
-        console.warn('The fdp-checkbox-group[checked] property is deprecated. Use fdp-checkbox-group[value] instead');
+        warnOnce('The fdp-checkbox-group[checked] property is deprecated. Use fdp-checkbox-group[value] instead');
         warnedAboutChecked = true;
     }
 };

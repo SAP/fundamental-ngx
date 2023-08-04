@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
-import { takeUntil } from 'rxjs';
+import { ChangeDetectorRef, DestroyRef, inject, Injectable } from '@angular/core';
 import { CvaDirective } from './cva.directive';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Base ControlValueAccessor control class.
@@ -25,15 +24,15 @@ export class CvaControl<T> {
     protected _changeDetector = inject(ChangeDetectorRef);
 
     /** @Hidden */
-    protected _destroy$ = inject(DestroyedService);
+    protected _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     listenToChanges(): void {
-        this.cvaDirective?.markForCheck.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this.cvaDirective?.markForCheck.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._changeDetector.detectChanges();
         });
 
-        this.cvaDirective?.detectChanges.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this.cvaDirective?.detectChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._changeDetector.detectChanges();
         });
     }

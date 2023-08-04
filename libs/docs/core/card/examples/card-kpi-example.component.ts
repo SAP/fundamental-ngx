@@ -3,20 +3,20 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     ViewChild
 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { delay, takeUntil, tap } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 import { GoogleChartService, Visualization } from './card-kpi-google-charts.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-card-kpi-example',
     templateUrl: './card-kpi-example.component.html',
     styleUrls: ['./card-kpi-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardKpiExampleComponent implements AfterViewInit {
     isLoading = true;
@@ -27,7 +27,7 @@ export class CardKpiExampleComponent implements AfterViewInit {
     constructor(
         private googleChartService: GoogleChartService,
         private changeDetectorRef: ChangeDetectorRef,
-        private readonly _destroy$: DestroyedService
+        private readonly _destroyRef: DestroyRef
     ) {}
 
     ngAfterViewInit(): void {
@@ -42,7 +42,7 @@ export class CardKpiExampleComponent implements AfterViewInit {
                 }),
                 // postpone until the next tick to get view updated
                 delay(0),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((visualization) => {
                 this.drawChart(visualization);

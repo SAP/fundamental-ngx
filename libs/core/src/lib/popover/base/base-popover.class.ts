@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Directive()
 export class BasePopoverClass {
@@ -145,15 +145,35 @@ export class BasePopoverClass {
 
     /** @deprecated */
     @Input()
-    options;
+    set options(value: any) {
+        warnOnce('Property options is deprecated. ');
+        this._options = value;
+    }
+
+    get options(): any {
+        return this._options;
+    }
+    /** @deprecated */
+    @Input()
+    set addContainerClass(value: any) {
+        warnOnce('Property addContainerClass is deprecated. ');
+        this._addContainerClass = value;
+    }
+
+    get addContainerClass(): any {
+        return this._addContainerClass;
+    }
 
     /** @deprecated */
     @Input()
-    addContainerClass;
+    set additionalClasses(value: any) {
+        warnOnce('Property additionalClasses is deprecated. ');
+        this._additionalClasses = value;
+    }
 
-    /** @deprecated */
-    @Input()
-    additionalClasses;
+    get additionalClasses(): any {
+        return this._additionalClasses;
+    }
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -164,6 +184,15 @@ export class BasePopoverClass {
 
     /** @hidden ID for the popover body. */
     _bodyId: string | null = null;
+
+    /** @hidden */
+    private _addContainerClass;
+
+    /** @hidden */
+    private _additionalClasses;
+
+    /** @hidden */
+    private _options;
 }
 
 /**

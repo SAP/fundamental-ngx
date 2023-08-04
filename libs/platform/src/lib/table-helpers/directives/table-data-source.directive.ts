@@ -1,19 +1,18 @@
 import { Directive, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER, isDataSource } from '@fundamental-ngx/cdk/data-source';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { filter, startWith, takeUntil } from 'rxjs/operators';
+import { filter, startWith } from 'rxjs/operators';
 import { FDP_TABLE_STATE_DIRECTIVE } from '../constants';
 import { ChildTableDataSource, TableDataSource, TableDataSourceParser } from '../domain';
 import { TableInitialState, TableRow } from '../models';
 import { TableService } from '../services/table.service';
 import { Table } from '../table';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     selector: '[fdpTableDataSource]',
     standalone: true,
     providers: [
-        DestroyedService,
         {
             provide: FD_DATA_SOURCE_TRANSFORMER,
             useClass: TableDataSourceParser
@@ -36,12 +35,6 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
         return this._childDataSource;
     }
 
-    /** @hidden */
-    private _childDataSource: ChildTableDataSource<T> | null;
-
-    /** @hidden */
-    private _childDsSubscription = new Subscription();
-
     /** Event emitted when child data source instance being changed. */
     @Output()
     childDataSourceChanged = new EventEmitter<void>();
@@ -54,15 +47,6 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     readonly onDataReceived = new EventEmitter<void>();
 
-    /** @hidden */
-    set totalItems(value: number) {
-        this.totalItems$.next(value);
-    }
-
-    get totalItems(): number {
-        return this.totalItems$.value;
-    }
-
     /** Total items count stream. */
     totalItems$ = new BehaviorSubject<number>(0);
 
@@ -72,14 +56,8 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     /** Child items stream. */
     childItems$ = new Subject<Map<TableRow<T>, T[]>>();
 
-    /** @hidden for data source handling */
-    private _tableDsSubscription: Subscription | null;
-
     /** @hidden */
     _tableDataSource: TableDataSource<T>;
-
-    /** @hidden */
-    private _table: Table;
 
     /** @hidden */
     _firstLoadingDone = false;
@@ -91,6 +69,27 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     _internalChildrenLoadingState = false;
 
     /** @hidden */
+    private _childDataSource: ChildTableDataSource<T> | null;
+
+    /** @hidden */
+    private _childDsSubscription = new Subscription();
+
+    /** @hidden */
+    set totalItems(value: number) {
+        this.totalItems$.next(value);
+    }
+
+    get totalItems(): number {
+        return this.totalItems$.value;
+    }
+
+    /** @hidden for data source handling */
+    private _tableDsSubscription: Subscription | null;
+
+    /** @hidden */
+    private _table: Table;
+
+    /** @hidden */
     private readonly initialState = inject<TableInitialState>(FDP_TABLE_STATE_DIRECTIVE, {
         optional: true
     });
@@ -99,11 +98,8 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
     private readonly _tableService = inject(TableService);
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
     initializeDataSource(): void {
-        this.dataSourceChanged.pipe(startWith(true), takeUntil(this._destroy$)).subscribe(() => {
+        this.dataSourceChanged.pipe(startWith(true), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._closeDataSource();
             this._listenToDataSource();
         });
@@ -154,7 +150,7 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
             this.childDataSource.dataLoading
                 .pipe(
                     filter((state) => !!state),
-                    takeUntil(this._destroyed$)
+                    takeUntilDestroyed(this._destroyRef)
                 )
                 .subscribe((loadingStates) => {
                     loadingStates.forEach((state) => state.row?.childItemsLoading$.next(state.loading));
@@ -162,7 +158,7 @@ export class TableDataSourceDirective<T> extends DataSourceDirective<T, TableDat
         );
 
         this._childDsSubscription.add(
-            this.childDataSource.dataChanges.pipe(takeUntil(this._destroyed$)).subscribe((data) => {
+            this.childDataSource.dataChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((data) => {
                 this.childItems$.next(data);
             })
         );

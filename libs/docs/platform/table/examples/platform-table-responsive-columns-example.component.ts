@@ -3,20 +3,20 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { DestroyedService, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { TableComponent, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import { Observable, of } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-platform-table-responsive-columns-example',
     templateUrl: './platform-table-responsive-columns-example.component.html',
-    providers: [DestroyedService],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
@@ -30,7 +30,7 @@ export class PlatformTableResponsiveColumnsExampleComponent implements AfterView
 
     currentTableWidth = 0;
 
-    constructor(private _onDestroy$: DestroyedService, private _cdr: ChangeDetectorRef) {
+    constructor(private _destroyRef: DestroyRef, private _cdr: ChangeDetectorRef) {
         this.source = new TableDataSource(new TableDataProviderExample());
     }
 
@@ -44,7 +44,7 @@ export class PlatformTableResponsiveColumnsExampleComponent implements AfterView
 
     ngAfterViewInit(): void {
         resizeObservable(this.table.nativeElement)
-            .pipe(takeUntil(this._onDestroy$))
+            .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 this.currentTableWidth = Math.ceil(this.table.nativeElement.getBoundingClientRect().width);
                 this._cdr.detectChanges();

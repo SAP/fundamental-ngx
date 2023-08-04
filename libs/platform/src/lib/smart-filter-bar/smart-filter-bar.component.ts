@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     EventEmitter,
     forwardRef,
     Injector,
@@ -17,12 +18,11 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
-import { map, take, takeUntil } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
@@ -51,6 +51,7 @@ import { SmartFilterBarConditionFieldComponent } from './components/smart-filter
 import { getSelectItemValue } from './helpers';
 import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const defaultColumnsLayout = 'XL4-L3-M2-S1';
 
@@ -88,7 +89,6 @@ const smartFilterBarProvider: Provider = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         smartFilterBarProvider,
-        DestroyedService,
         {
             provide: FDP_PRESET_MANAGED_COMPONENT,
             useExisting: SmartFilterBarComponent
@@ -100,6 +100,12 @@ const smartFilterBarProvider: Provider = {
     }
 })
 export class SmartFilterBarComponent extends SmartFilterBar implements AfterViewInit, OnDestroy {
+    /**
+     * @hidden
+     * Form generator component instance.
+     */
+    @ViewChild(FormGeneratorComponent) _formGenerator!: FormGeneratorComponent;
+
     /**
      * Subject which will provide configuration data: data source, columns definitions, etc.
      */
@@ -117,21 +123,42 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * @deprecated use i18n capabilities instead
      */
     @Input()
-    showFiltersLabel: string;
+    set showFiltersLabel(value: string) {
+        warnOnce('Property showFiltersLabel is deprecated. Use i18n capabilities instead.');
+        this._showFiltersLabel = value;
+    }
+
+    get showFiltersLabel(): string {
+        return this._showFiltersLabel;
+    }
 
     /**
      * 'Hide filters' button label.
      * @deprecated use i18n capabilities instead
      */
     @Input()
-    hideFiltersLabel: string;
+    set hideFiltersLabel(value: string) {
+        warnOnce('Property hideFiltersLabel is deprecated. Use i18n capabilities instead.');
+        this._hideFiltersLabel = value;
+    }
+
+    get hideFiltersLabel(): string {
+        return this._hideFiltersLabel;
+    }
 
     /**
      * 'Filters' button label.
      * @deprecated use i18n capabilities instead
      */
     @Input()
-    filtersLabel: string;
+    set filtersLabel(value: string) {
+        warnOnce('Property filtersLabel is deprecated. Use i18n capabilities instead.');
+        this._filtersLabel = value;
+    }
+
+    get filtersLabel(): string {
+        return this._filtersLabel;
+    }
 
     /**
      * Whether smart filter bar background should be transparent.
@@ -150,14 +177,28 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      * Condition strategy labels.
      */
     @Input()
-    defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
+    set defineStrategyLabels(value: SmartFilterBarStrategyLabels | undefined) {
+        warnOnce('Property defineStrategyLabels is deprecated. Use i18n capabilities instead.');
+        this._defineStrategyLabels = value;
+    }
+
+    get defineStrategyLabels(): SmartFilterBarStrategyLabels | undefined {
+        return this._defineStrategyLabels;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Filters visibility category labels.
      */
     @Input()
-    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels | undefined;
+    set filtersVisibilityCategoryLabels(value: SmartFilterBarVisibilityCategoryLabels | undefined) {
+        warnOnce('Property filtersVisibilityCategoryLabels is deprecated. Use i18n capabilities instead.');
+        this._filtersVisibilityCategoryLabels = value;
+    }
+
+    get filtersVisibilityCategoryLabels(): SmartFilterBarVisibilityCategoryLabels | undefined {
+        return this._filtersVisibilityCategoryLabels;
+    }
 
     /**
      * Columns layout.
@@ -188,25 +229,19 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Output()
     searchInputChanged: EventEmitter<SearchInput> = new EventEmitter<SearchInput>();
-
-    /**
-     * Calculated array of filters to apply for the subject's data source.
-     */
-    filterBy: CollectionFilterGroup[] = [];
-    /**
-     * Search field value to apply for the subject's data source.
-     */
-    search: SearchInput | undefined;
-
     /** @hidden */
     @ContentChildren(SmartFilterBarToolbarItemDirective)
     private readonly _toolbarItemRefs: QueryList<SmartFilterBarToolbarItemDirective>;
 
     /**
-     * @hidden
-     * Form generator component instance.
+     * Calculated array of filters to apply for the subject's data source.
      */
-    @ViewChild(FormGeneratorComponent) _formGenerator!: FormGeneratorComponent;
+    filterBy: CollectionFilterGroup[] = [];
+
+    /**
+     * Search field value to apply for the subject's data source.
+     */
+    search: SearchInput | undefined;
     /** @Hidden */
     _toolbarItems: TemplateRef<any>[] = [];
     /** @hidden */
@@ -222,7 +257,23 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     }
 
     /** @hidden */
+    private _hideFiltersLabel: string;
+
+    /** @hidden */
+    private _showFiltersLabel: string;
+
+    /** @hidden */
+    private _filtersLabel: string;
+
+    /** @hidden */
+    private _defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
+
+    /** @hidden */
+    private _filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels | undefined;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
+
     /** @hidden */
     private _subjectSubscriptions = new Subscription();
 
@@ -236,20 +287,20 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     private _ignorePresetChange = false;
 
     /** @hidden */
+    private _subject!: SmartFilterBarSubjectDirective;
+
+    /** @hidden */
     constructor(
         private _dialogService: DialogService,
         private _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService,
         private _fgService: FormGeneratorService,
         private _injector: Injector,
-        private readonly _destroy$: DestroyedService
+        private readonly _destroyRef: DestroyRef
     ) {
         super();
         this._fgService.addComponent(SmartFilterBarConditionFieldComponent, [SMART_FILTER_BAR_RENDERER_COMPONENT]);
     }
-
-    /** @hidden */
-    private _subject!: SmartFilterBarSubjectDirective;
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -388,15 +439,17 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
             this._setSelectedFilters([...this.subject.getDefaultFields(), ...this._selectedFilters]);
         }
 
-        this._formGenerator.form.valueChanges.pipe(debounceTime(50), takeUntil(this._destroy$)).subscribe(async () => {
-            const conditions = await this.getFormattedConditions();
-            this.smartFiltersChanged.emit({ filterBy: conditions, search: this.search, subject: this.subject });
+        this._formGenerator.form.valueChanges
+            .pipe(debounceTime(50), takeUntilDestroyed(this._destroyRef))
+            .subscribe(async () => {
+                const conditions = await this.getFormattedConditions();
+                this.smartFiltersChanged.emit({ filterBy: conditions, search: this.search, subject: this.subject });
 
-            if (!this.liveUpdate) {
-                return;
-            }
-            this._applyFiltering(conditions);
-        });
+                if (!this.liveUpdate) {
+                    return;
+                }
+                this._applyFiltering(conditions);
+            });
 
         this._formGeneratorReady.next(true);
     }

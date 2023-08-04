@@ -57,7 +57,7 @@ class TableHostComponent {
     showIdColumn = false;
 }
 
-describe('TableComponent Host', async () => {
+describe('TableComponent Host', () => {
     let hostComponent: TableHostComponent;
     let fixture: ComponentFixture<TableHostComponent>;
     let tableComponent: TableComponent<SourceItem>;
@@ -76,7 +76,7 @@ describe('TableComponent Host', async () => {
         hostComponent = fixture.componentInstance;
 
         const originFetch = hostComponent.source.fetch;
-        spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) => {
+        jest.spyOn(hostComponent.source, 'fetch').mockImplementation((state: TableState) => {
             dataSourceLastFetchState = state;
             return originFetch.call(hostComponent.source, state);
         });
@@ -116,12 +116,12 @@ describe('TableComponent Host', async () => {
 
             it('should be render using column.label option', () => {
                 const nameHeaderCell = tableHeaderCells[0];
-                expect(nameHeaderCell.nativeElement.innerText.trim()).toBe('Name');
+                expect(nameHeaderCell.nativeElement.textContent.trim()).toBe('Name');
             });
 
             it('should be render using fdpHeaderCellDef template option', () => {
                 const priceHeaderCell = tableHeaderCells[1];
-                expect(priceHeaderCell.nativeElement.innerText.trim()).toBe('Price Header');
+                expect(priceHeaderCell.nativeElement.textContent.trim()).toBe('Price Header');
             });
         });
 
@@ -132,18 +132,18 @@ describe('TableComponent Host', async () => {
 
             it('should be render using column.width option', () => {
                 const nameCell = tableRowCells2DArray[0][0];
-                expect(nameCell.nativeElement.offsetWidth).toBe(hostComponent.customColumnWidth);
+                expect(parseInt(nameCell.styles.width!, 10)).toBe(hostComponent.customColumnWidth);
             });
 
             it('should be render using column.key option', () => {
                 const nameCell = tableRowCells2DArray[0][0];
-                expect(nameCell.nativeElement.innerText.trim()).toBe(tableComponent._tableRows[0].value.name);
+                expect(nameCell.nativeElement.textContent.trim()).toBe(tableComponent._tableRows[0].value.name);
             });
 
             it('should be render using fdpHeaderCellDef template option', () => {
                 const priceCell = tableRowCells2DArray[0][1];
                 const price = tableComponent._tableRows[0].value.price;
-                expect(priceCell.nativeElement.innerText.trim()).toBe(`${price.value} ${price.currency}`);
+                expect(priceCell.nativeElement.textContent.trim()).toBe(`${price.value} ${price.currency}`);
             });
         });
     });
@@ -195,11 +195,11 @@ describe('TableComponent Host', async () => {
 
                 const selectionCell = tableRowCells2DArray[0][0];
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
 
                 selectionCell.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
             });
 
             it('should unselect by clicking on selected cell', () => {
@@ -208,11 +208,11 @@ describe('TableComponent Host', async () => {
 
                 const selectionCell = tableRowCells2DArray[0][0];
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
 
                 selectionCell.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
             });
 
             it('should select new cell and unselected previous one', () => {
@@ -221,16 +221,16 @@ describe('TableComponent Host', async () => {
 
                 const newlySelectedCell = tableRowCells2DArray[1][0];
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
 
                 newlySelectedCell.nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
-                expect(tableComponent._tableRowsVisible[1].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
+                expect(tableComponent._tableRowsVisible[1].checked).toBe(true);
             });
 
             it('should emit RowSelectionChange event', () => {
-                const emitSpy = spyOn(tableComponent.rowSelectionChange, 'emit').and.callThrough();
+                const emitSpy = jest.spyOn(tableComponent.rowSelectionChange, 'emit');
 
                 // Select first row
                 tableRowCells2DArray[0][0].nativeElement.dispatchEvent(new MouseEvent('click'));
@@ -280,34 +280,34 @@ describe('TableComponent Host', async () => {
                 tableComponent._tableRowsVisible[0].checked = false;
                 fixture.detectChanges();
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
 
                 getSelectionCheckbox(tableRowCells2DArray[0][0]).nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
             });
 
             it('should unselect by clicking on selected cell', () => {
                 tableComponent._tableRowsVisible[0].checked = true;
                 fixture.detectChanges();
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
 
                 getSelectionCheckbox(tableRowCells2DArray[0][0]).nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeFalse();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(false);
             });
 
             it('should select new cell and keep previous ones', () => {
                 getSelectionCheckbox(tableRowCells2DArray[0][0]).nativeElement.dispatchEvent(new MouseEvent('click'));
                 getSelectionCheckbox(tableRowCells2DArray[1][0]).nativeElement.dispatchEvent(new MouseEvent('click'));
 
-                expect(tableComponent._tableRowsVisible[0].checked).toBeTrue();
-                expect(tableComponent._tableRowsVisible[1].checked).toBeTrue();
+                expect(tableComponent._tableRowsVisible[0].checked).toBe(true);
+                expect(tableComponent._tableRowsVisible[1].checked).toBe(true);
             });
 
             it('should emit RowSelectionChange event', () => {
-                const emitSpy = spyOn(tableComponent.rowSelectionChange, 'emit').and.callThrough();
+                const emitSpy = jest.spyOn(tableComponent.rowSelectionChange, 'emit');
                 const firstRowCheckbox = getSelectionCheckbox(tableRowCells2DArray[0][0]);
                 const secondRowCheckbox = getSelectionCheckbox(tableRowCells2DArray[1][0]);
 
@@ -359,12 +359,12 @@ describe('TableComponent Host', async () => {
                 // Select all
                 selectAllCheckbox.nativeElement.dispatchEvent(new MouseEvent('click'));
                 fixture.detectChanges();
-                expect(tableComponent._tableRows.every((row) => row.checked)).toBeTrue();
+                expect(tableComponent._tableRows.every((row) => row.checked)).toBe(true);
 
                 // Unselect all
                 selectAllCheckbox.nativeElement.dispatchEvent(new MouseEvent('click'));
                 fixture.detectChanges();
-                expect(tableComponent._tableRows.every((row) => !row.checked)).toBeTrue();
+                expect(tableComponent._tableRows.every((row) => !row.checked)).toBe(true);
             });
         });
     });
@@ -413,8 +413,8 @@ describe('TableComponent Host', async () => {
                 fixture.detectChanges();
                 calculateTableElementsMetaData();
 
-                expect(tableRowCells2DArray[0][0].nativeElement.innerText).toContain('invalid - 25');
-                expect(tableRowCells2DArray[26][0].nativeElement.innerText).toContain('valid - 25');
+                expect(tableRowCells2DArray[0][0].nativeElement.textContent).toContain('invalid - 25');
+                expect(tableRowCells2DArray[26][0].nativeElement.textContent).toContain('valid - 25');
             });
         });
 
@@ -446,11 +446,11 @@ describe('TableComponent Host', async () => {
                 fixture.detectChanges();
                 calculateTableElementsMetaData();
 
-                expect(tableRowCells2DArray[0][0].nativeElement.innerText).toContain('Status: invalid');
-                expect(tableRowCells2DArray[1][0].nativeElement.innerText).toContain('Client Verified: false');
+                expect(tableRowCells2DArray[0][0].nativeElement.textContent).toContain('Status: invalid');
+                expect(tableRowCells2DArray[1][0].nativeElement.textContent).toContain('Client Verified: false');
 
-                expect(tableRowCells2DArray[27][0].nativeElement.innerText).toContain('Status: valid');
-                expect(tableRowCells2DArray[28][0].nativeElement.innerText).toContain('Client Verified: true');
+                expect(tableRowCells2DArray[27][0].nativeElement.textContent).toContain('Status: valid');
+                expect(tableRowCells2DArray[28][0].nativeElement.textContent).toContain('Client Verified: true');
             });
         });
     });
@@ -519,8 +519,8 @@ describe('TableComponent Host', async () => {
             calculateTableElementsMetaData();
 
             expect(tableHeaderCells.length).toBe(2);
-            expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');
-            expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');
+            expect(tableHeaderCells[0].nativeElement.textContent.trim()).toBe('Name');
+            expect(tableHeaderCells[1].nativeElement.textContent.trim()).toBe('Status');
 
             hostComponent.showIdColumn = true;
             fixture.detectChanges();
@@ -529,9 +529,9 @@ describe('TableComponent Host', async () => {
             calculateTableElementsMetaData();
 
             expect(tableHeaderCells.length).toBe(3);
-            expect(tableHeaderCells[0].nativeElement.innerText.trim()).toBe('Name');
-            expect(tableHeaderCells[1].nativeElement.innerText.trim()).toBe('Status');
-            expect(tableHeaderCells[2].nativeElement.innerText.trim()).toBe('ID');
+            expect(tableHeaderCells[0].nativeElement.textContent.trim()).toBe('Name');
+            expect(tableHeaderCells[1].nativeElement.textContent.trim()).toBe('Status');
+            expect(tableHeaderCells[2].nativeElement.textContent.trim()).toBe('ID');
         }));
     });
 
@@ -545,7 +545,7 @@ describe('TableComponent Host', async () => {
         });
 
         it('should set and remove navigation', () => {
-            const spy = spyOn(tableComponent.rowNavigate, 'emit').and.callThrough();
+            const spy = jest.spyOn(tableComponent.rowNavigate, 'emit');
 
             tableComponent.setRowNavigation(0, true);
 
@@ -581,7 +581,7 @@ describe('TableComponent Host', async () => {
                     row.nativeElement.classList.contains(rowClass)
                 );
 
-                expect(rowsClassesAssigned).toBeTrue();
+                expect(rowsClassesAssigned).toBe(true);
             });
 
             it('should apply custom class using function', () => {
@@ -594,7 +594,7 @@ describe('TableComponent Host', async () => {
                     row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status)
                 );
 
-                expect(rowsClassesAssigned).toBeTrue();
+                expect(rowsClassesAssigned).toBe(true);
             });
         });
     });

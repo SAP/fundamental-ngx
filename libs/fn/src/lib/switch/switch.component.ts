@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let switchUniqueId = 0;
@@ -96,14 +96,30 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
      * Semantic Label Accept set for Accessibility
      */
     @Input()
-    semanticAcceptLabel: string;
+    set semanticAcceptLabel(value: string) {
+        console.warn("i18n capabilities 'fnSwitch.semanticAcceptLabel' key");
+        this._semanticAcceptLabel = value;
+    }
+
+    get semanticAcceptLabel(): string {
+        return this._semanticAcceptLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Semantic Label Decline set for Accessibility
      */
     @Input()
-    semanticDeclineLabel: string;
+    set semanticDeclineLabel(value: string) {
+        warnOnce(
+            "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'fnSwitch.semanticDeclineLabel' key instead."
+        );
+        this._semanticDeclineLabel = value;
+    }
+
+    get semanticDeclineLabel(): string {
+        return this._semanticDeclineLabel;
+    }
 
     /**
      * Event fired when the state of the switch changes.
@@ -113,18 +129,23 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
+    private _semanticAcceptLabel: string;
+    /** @hidden */
+    private _semanticDeclineLabel: string;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
+
+    constructor(
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
 
     /** @hidden */
     onChange: (value: boolean) => void = () => {};
 
     /** @hidden */
     onTouched = (): void => {};
-
-    constructor(
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
 
     /** @hidden */
     ngOnInit(): void {

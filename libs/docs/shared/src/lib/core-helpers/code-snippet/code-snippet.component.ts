@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     ElementRef,
     inject,
     Input,
@@ -12,15 +13,14 @@ import {
 } from '@angular/core';
 import { ExampleFile } from '../code-example/example-file';
 import hljs from 'highlight.js';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, isObservable, merge, of, Subject, takeUntil } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { destroyObservable } from '@fundamental-ngx/cdk';
 
 @Component({
     selector: 'fd-code-snippet',
     styles: ['.bordered { border: 1px solid beige } code.hljs { width: 100%; background: transparent; }'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService],
     template: `
         <pre [class.bordered]="standAlone">
             <code class="hljs" [class]="file.language" *ngIf="file" [innerHTML]="_highlightedCode | async"></code>
@@ -48,7 +48,7 @@ export class CodeSnippetComponent implements AfterViewInit, OnChanges {
 
     private _refresh$ = new Subject<void>();
 
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     private readonly _sanitizer = inject(DomSanitizer);
 
@@ -78,7 +78,7 @@ export class CodeSnippetComponent implements AfterViewInit, OnChanges {
 
         const code$ = isObservable(this.file.code) ? this.file.code : of(this.file.code);
 
-        code$.pipe(takeUntil(merge(this._refresh$, this._destroy$))).subscribe((code) => {
+        code$.pipe(takeUntil(merge(this._refresh$, destroyObservable(this._destroyRef)))).subscribe((code) => {
             this._highlightedCode.next(
                 this._sanitizer.bypassSecurityTrustHtml(
                     hljs.highlight(code, {

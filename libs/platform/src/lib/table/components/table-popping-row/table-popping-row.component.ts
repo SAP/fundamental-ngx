@@ -1,14 +1,14 @@
 import {
-    Component,
-    ViewEncapsulation,
     ChangeDetectionStrategy,
-    Input,
-    HostBinding,
+    Component,
     EventEmitter,
+    HostBinding,
+    inject,
+    Input,
     Output,
-    inject
+    ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, FDK_FOCUSABLE_LIST_DIRECTIVE } from '@fundamental-ngx/cdk/utils';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE } from '@fundamental-ngx/cdk/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
     isTreeRow,
@@ -29,8 +29,7 @@ import {
         {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TablePoppingRowComponent
-        },
-        DestroyedService
+        }
     ]
 })
 export class TablePoppingRowComponent<T> extends TableRowDirective {

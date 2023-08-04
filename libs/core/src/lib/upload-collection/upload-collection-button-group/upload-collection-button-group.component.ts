@@ -8,6 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-upload-collection-button-group',
@@ -53,46 +54,116 @@ export class UploadCollectionButtonGroupComponent {
      * Text for the 'Ok' button.
      */
     @Input()
-    okText: string;
+    set okText(value: string) {
+        warnOnce("Property okText is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkText' key instead.");
+        this._okText = value;
+    }
+
+    get okText(): string {
+        return this._okText;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Cancel' button.
      */
     @Input()
-    cancelText: string;
+    set cancelText(value: string) {
+        warnOnce(
+            "Property cancelText is deprecated. Use i18n capabilities 'coreUploadCollection.menuCancelText' key instead."
+        );
+        this._cancelText = value;
+    }
+
+    get cancelText(): string {
+        return this._cancelText;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Edit' aria-label.
      */
     @Input()
-    editAriaLabel: string;
+    set editAriaLabel(value: string) {
+        warnOnce(
+            "Property editAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuEditAriaLabel' key instead."
+        );
+        this._editAriaLabel = value;
+    }
+
+    get editAriaLabel(): string {
+        return this._editAriaLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Delete' aria-label.
      */
     @Input()
-    deleteAriaLabel: string;
+    set deleteAriaLabel(value: string) {
+        warnOnce(
+            "Property deleteAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuDeleteAriaLabel' key instead."
+        );
+        this._deleteAriaLabel = value;
+    }
+
+    get deleteAriaLabel(): string {
+        return this._deleteAriaLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Ok' aria-label.
      */
     @Input()
-    okAriaLabel: string;
+    set okAriaLabel(value: string) {
+        warnOnce(
+            "Property okAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuOkAriaLabel' key instead."
+        );
+        this._okAriaLabel = value;
+    }
+
+    get okAriaLabel(): string {
+        return this._okAriaLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text for the 'Cancel' aria-label.
      */
     @Input()
-    cancelAriaLabel: string;
+    set cancelAriaLabel(value: string) {
+        warnOnce(
+            "Property cancelAriaLabel is deprecated. Use i18n capabilities 'coreUploadCollection.menuCancelAriaLabel' key instead."
+        );
+        this._cancelAriaLabel = value;
+    }
+
+    get cancelAriaLabel(): string {
+        return this._cancelAriaLabel;
+    }
 
     /** @hidden */
     @ViewChild('okButton')
     _okButton: ButtonComponent;
+
+    /** @hidden */
+    private _cancelAriaLabel: string;
+
+    /** @hidden */
+    private _okAriaLabel: string;
+
+    /** @hidden */
+    private _deleteAriaLabel: string;
+
+    /** @hidden */
+    private _editAriaLabel: string;
+
+    /** @hidden */
+    private _cancelText: string;
+
+    /** @hidden */
+    private _okText: string;
 
     /** @hidden */
     _editButtonClicked(event?: MouseEvent): void {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk';
+import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';

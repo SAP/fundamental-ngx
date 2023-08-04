@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * @deprecated
@@ -14,6 +15,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  * <div fd-action-bar-title>
  * ```
  */
+
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-action-bar]',
@@ -25,4 +27,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActionBarComponent {}
+export class ActionBarComponent {
+    /** @hidden */
+    constructor() {
+        warnOnce('ActionBarComponent is deprecated since version 0.40.0 and will be removed in future release.');
+    }
+}

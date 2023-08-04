@@ -22,7 +22,7 @@ import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
-import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, KeyUtil, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,
@@ -119,7 +119,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         );
 
         if (!deprecationWarningShown && isDevMode()) {
-            console.warn(
+            warnOnce(
                 `[DEPRECATION] Platform Multi Combobox component is deprecated since v0.39.0. Please migrate to Core's version.`
             );
             deprecationWarningShown = true;

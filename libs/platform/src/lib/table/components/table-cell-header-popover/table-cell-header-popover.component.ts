@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     EventEmitter,
     inject,
     Input,
@@ -12,7 +13,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
 import {
     CollectionStringFilter,
@@ -23,14 +24,14 @@ import {
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-table-cell-header-popover',
     templateUrl: './table-cell-header-popover.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [DestroyedService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** Column definition. */
@@ -73,15 +74,6 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     _popoverItems$ = new BehaviorSubject<TemplateRef<any>[]>([]);
 
     /** @hidden */
-    protected readonly SORT_DIRECTION = SortDirection;
-
-    /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
-    private readonly _tableService = inject(TableService);
-
-    /** @hidden */
     _headerPopoverTriggers: TriggerConfig[] = [
         {
             trigger: 'click',
@@ -104,8 +96,17 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     ];
 
     /** @hidden */
+    protected readonly SORT_DIRECTION = SortDirection;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    private readonly _tableService = inject(TableService);
+
+    /** @hidden */
     ngAfterViewInit(): void {
-        this._popoverItems.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
+        this._popoverItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._popoverItems$.next(this._popoverItems.map((t) => t.templateRef));
         });
     }

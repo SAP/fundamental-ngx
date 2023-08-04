@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     EmbeddedViewRef,
     HostBinding,
@@ -14,10 +15,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
-import { applyCssClass, DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { DynamicComponentContainer } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs';
+import { applyCssClass, CssClassBuilder, DynamicComponentContainer } from '@fundamental-ngx/cdk/utils';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
 import { MessageBoxContent } from '../utils/message-box-content.class';
@@ -25,13 +23,13 @@ import { MessageBoxDefaultComponent } from '../message-box-default/message-box-d
 import { MessageBoxContentType } from '../message-box-content.type';
 import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { dialogFade } from '@fundamental-ngx/core/dialog';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /** Message box container where the message box content is embedded. */
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    animations: [dialogFade],
-    providers: [DestroyedService]
+    animations: [dialogFade]
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>
@@ -59,7 +57,7 @@ export class MessageBoxContainerComponent
     constructor(
         public messageBoxConfig: MessageBoxConfig,
         private _messageBoxRef: MessageBoxRef,
-        private _destroy$: DestroyedService,
+        private _destroyRef: DestroyRef,
         elementRef: ElementRef,
         changeDetectorRef: ChangeDetectorRef,
         injector: Injector
@@ -135,7 +133,7 @@ export class MessageBoxContainerComponent
             this._animationState = 'hidden';
             this._cdr.detectChanges();
         };
-        this._messageBoxRef.afterClosed.pipe(takeUntil(this._destroy$)).subscribe({
+        this._messageBoxRef.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
             next: () => callback(),
             error: () => callback()
         });

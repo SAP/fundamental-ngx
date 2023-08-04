@@ -22,7 +22,6 @@ import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@an
 import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-
 import { BehaviorSubject, combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
 import {
     debounceTime,
@@ -35,9 +34,8 @@ import {
     take,
     takeUntil
 } from 'rxjs/operators';
-
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -59,9 +57,7 @@ export const SLIDER_VALUE_ACCESSOR = {
     useExisting: forwardRef(() => SliderComponent),
     multi: true
 };
-
 let sliderId = 0;
-
 @Component({
     selector: 'fd-slider',
     templateUrl: './slider.component.html',
@@ -73,7 +69,9 @@ let sliderId = 0;
         registerFormItemControl(SliderComponent),
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT,
-            modifiers: { [ContentDensityMode.COZY]: 'fd-slider--lg' }
+            modifiers: {
+                [ContentDensityMode.COZY]: 'fd-slider--lg'
+            }
         })
     ],
     host: {
@@ -94,7 +92,7 @@ export class SliderComponent
     @Input()
     class: string;
 
-    /** Id of the element that labels slider. */
+    /** ID of the element that labels slider. */
     @Input()
     ariaLabelledBy: Nullable<string>;
 
@@ -109,7 +107,6 @@ export class SliderComponent
         if (((this.max - newValue) / this.step) % 1 !== 0) {
             return;
         }
-
         this._min = value;
     }
     get min(): number {
@@ -123,7 +120,6 @@ export class SliderComponent
         if (((newValue - this.min) / this.step) % 1 !== 0) {
             return;
         }
-
         this._max = value;
     }
     get max(): number {
@@ -137,7 +133,6 @@ export class SliderComponent
         if (((this.max - this.min) / newValue) % 1 !== 0) {
             return;
         }
-
         this._step = value;
     }
     get step(): number {
@@ -201,7 +196,15 @@ export class SliderComponent
      * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    singleSliderCurrentValuePrefix: string;
+    set singleSliderCurrentValuePrefix(value: string) {
+        warnOnce('Property singleSliderCurrentValuePrefix is deprecated. Use i18n capabilities instead.');
+        this._singleSliderCurrentValuePrefix = value;
+    }
+    get singleSliderCurrentValuePrefix(): string {
+        return this._singleSliderCurrentValuePrefix;
+    }
+    /** @hidden */
+    private _singleSliderCurrentValuePrefix: string;
 
     /**
      * @hidden range slider handle 1 current value supporting string
@@ -210,7 +213,15 @@ export class SliderComponent
      * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    rangeSliderHandle1CurrentValuePrefix: string;
+    set rangeSliderHandle1CurrentValuePrefix(value: string) {
+        warnOnce('Property rangeSliderHandle1CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
+        this._rangeSliderHandle1CurrentValuePrefix = value;
+    }
+    get rangeSliderHandle1CurrentValuePrefix(): string {
+        return this._rangeSliderHandle1CurrentValuePrefix;
+    }
+    /** @hidden */
+    private _rangeSliderHandle1CurrentValuePrefix: string;
 
     /**
      * @hidden range slider handle 2 current value supporting string
@@ -219,7 +230,15 @@ export class SliderComponent
      * * @deprecated no longer used, use i18n capabilities instead
      */
     @Input()
-    rangeSliderHandle2CurrentValuePrefix: string;
+    set rangeSliderHandle2CurrentValuePrefix(value: string) {
+        warnOnce('Property rangeSliderHandle2CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
+        this._rangeSliderHandle2CurrentValuePrefix = value;
+    }
+    get rangeSliderHandle2CurrentValuePrefix(): string {
+        return this._rangeSliderHandle2CurrentValuePrefix;
+    }
+    /** @hidden */
+    private _rangeSliderHandle2CurrentValuePrefix: string;
 
     /** @hidden */
     _position: number | number[] = 0;
@@ -239,19 +258,27 @@ export class SliderComponent
     }
 
     /** @hidden */
-    @ViewChild('track', { read: ElementRef })
+    @ViewChild('track', {
+        read: ElementRef
+    })
     trackEl: ElementRef<HTMLDivElement>;
 
     /** @hidden */
-    @ViewChild('handle', { read: ElementRef })
+    @ViewChild('handle', {
+        read: ElementRef
+    })
     handle: ElementRef<HTMLDivElement>;
 
     /** @hidden */
-    @ViewChild('rangeHandle1', { read: ElementRef })
+    @ViewChild('rangeHandle1', {
+        read: ElementRef
+    })
     rangeHandle1: ElementRef<HTMLDivElement>;
 
     /** @hidden */
-    @ViewChild('rangeHandle2', { read: ElementRef })
+    @ViewChild('rangeHandle2', {
+        read: ElementRef
+    })
     rangeHandle2: ElementRef<HTMLDivElement>;
 
     /** @hidden */
@@ -354,7 +381,8 @@ export class SliderComponent
         private readonly _renderer: Renderer2,
         private readonly _platform: Platform,
         private readonly _liveAnnouncer: LiveAnnouncer,
-        @Optional() private readonly _rtlService: RtlService,
+        @Optional()
+        private readonly _rtlService: RtlService,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
         _contentDensityObserver.subscribe();
@@ -365,11 +393,9 @@ export class SliderComponent
         this._subscribeToRtl();
         this._attachResizeListener();
         this._onResize();
-
         if (this._valuesBySteps.length === 0) {
             this._constructValuesBySteps();
         }
-
         this.buildComponentCssClass();
     }
 
@@ -463,7 +489,6 @@ export class SliderComponent
         if (this.disabled || this._isRange) {
             return;
         }
-
         this._setValue(this._calculateValueFromPointerPosition(event));
         this._updatePopoversPosition();
         this.handle.nativeElement.focus();
@@ -474,16 +499,12 @@ export class SliderComponent
         if (this.disabled) {
             return;
         }
-
         const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
             this._updatePopoversPosition();
-
             if (!this._isRange) {
                 this._setValue(this._calculateValueFromPointerPosition(moveEvent));
-
                 return;
             }
-
             let handleIndex: SliderRangeHandles;
             if (event.target === this.rangeHandle1.nativeElement) {
                 handleIndex = SliderRangeHandles.First;
@@ -492,13 +513,10 @@ export class SliderComponent
             } else {
                 return;
             }
-
             const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
             this._setRangeHandleValueAndPosition(handleIndex, value);
-
             this._setValue(this._constructRangeModelValue());
         });
-
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
             unsubscribeFromMousemove();
             unsubscribeFromMouseup();
@@ -510,13 +528,11 @@ export class SliderComponent
         if (this.disabled) {
             return;
         }
-
         const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, ENTER, SPACE];
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
         }
         event.preventDefault();
-
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
         let prevValue = this._position as number;
@@ -534,7 +550,6 @@ export class SliderComponent
             if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 newValue = prevValue + diff;
             }
-
             if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
                 newValue = prevValue - diff;
             }
@@ -542,25 +557,20 @@ export class SliderComponent
             if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
                 newValue = prevValue - diff;
             }
-
             if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 newValue = prevValue + diff;
             }
         }
-
         if (newValue === null) {
             return;
         }
-
         newValue = this._processNewValue(newValue as number, !this._isRange);
-
         if (!this._isRange) {
             this._setValue(newValue);
         } else if (handleIndex) {
             this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
             this._setValue(this._constructRangeModelValue());
         }
-
         this._updatePopoversPosition();
     }
 
@@ -571,22 +581,17 @@ export class SliderComponent
             this._setValue(newValue);
             this.handle.nativeElement.focus();
             this._updatePopoversPosition();
-
             return;
         }
-
         if (target === SliderValueTargets.RANGE_SLIDER1) {
             this._setRangeHandleValueAndPosition(SliderRangeHandles.First, newValue);
             this.rangeHandle1.nativeElement.focus();
         }
-
         if (target === SliderValueTargets.RANGE_SLIDER2) {
             this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, newValue);
             this.rangeHandle2.nativeElement.focus();
         }
-
         this._setValue(this._constructRangeModelValue());
-
         this._updatePopoversPosition();
     }
 
@@ -597,9 +602,7 @@ export class SliderComponent
         } else {
             this._initSingeMode((value ?? 0) as number | SliderTickMark);
         }
-
         this._value = value;
-
         if (emitEvent) {
             this.onChange(value);
         }
@@ -609,7 +612,6 @@ export class SliderComponent
     /** @hidden */
     private _updatePopoversPosition(): void {
         this._cdr.detectChanges();
-
         this._popovers.forEach((popover) => popover.refreshPosition());
     }
 
@@ -617,13 +619,10 @@ export class SliderComponent
     private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
         const { left, width } = this.trackEl.nativeElement.getBoundingClientRect();
         let percentage = (event.clientX - left) / width;
-
         if (this._isRtl) {
             percentage = 1 - percentage;
         }
-
         const newValue = this.min + percentage * (this.max - this.min);
-
         return this._processNewValue(newValue, takeCustomValue);
     }
 
@@ -632,40 +631,35 @@ export class SliderComponent
         if (newValue > this.max) {
             newValue = this.max;
         }
-
         if (newValue < this.min) {
             newValue = this.min;
         }
-
         this._useSliderValuePrefix = false;
         this._cdr.markForCheck();
-
         const stepDiffArray = this._valuesBySteps
-            .map((stepValue) => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
+            .map((stepValue) => ({
+                diff: Math.abs(stepValue - newValue),
+                value: stepValue
+            }))
             .sort((a, b) => a.diff - b.diff);
         let value: SliderTickMark | number = stepDiffArray[0].value;
-
         if (takeCustomValue && this.customValues.length > 0) {
             value = this.customValues[value];
         }
-
         return value;
     }
 
     /** @hidden */
     private _setRangeHandleValueAndPosition(handleIndex: SliderRangeHandles, value: number): void {
         const position = this._calcProgress(value, true);
-
         if (handleIndex === SliderRangeHandles.First) {
             this._handle1Value = value;
             this._handle1Position = position;
         }
-
         if (handleIndex === SliderRangeHandles.Second) {
             this._handle2Value = value;
             this._handle2Position = position;
         }
-
         this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
     }
 
@@ -677,14 +671,11 @@ export class SliderComponent
             Math.min(this._handle1Value, this._handle2Value),
             Math.max(this._handle1Value, this._handle2Value)
         ];
-
         rangeLowerValue = rangeValue[0];
         rangeHigherValue = rangeValue[1];
-
         if (this.customValues.length > 0) {
             const min = this.customValues[rangeValue[0]] || this.customValues[0];
             const max = this.customValues[rangeValue[1]] || this.customValues[this.customValues.length - 1];
-
             rangeValue = [min, max];
             rangeLowerValue = rangeValue[0].label;
             rangeHigherValue = rangeValue[1].label;
@@ -709,8 +700,11 @@ export class SliderComponent
     /** @hidden */
     private _constructValuesBySteps(): void {
         try {
-            this._valuesBySteps = Array.from({ length: (this.max - this.min) / this.step + 1 }, (_, i) =>
-                Number((this.min + i * this.step).toFixed(2))
+            this._valuesBySteps = Array.from(
+                {
+                    length: (this.max - this.min) / this.step + 1
+                },
+                (_, i) => Number((this.min + i * this.step).toFixed(2))
             );
         } catch (e) {}
     }
@@ -719,10 +713,8 @@ export class SliderComponent
     private _constructTickMarks(): void {
         if (!this.showTicks) {
             this._tickMarks = [];
-
             return;
         }
-
         if (this.customValues.length) {
             this.min = 0;
             this.max = this.customValues.length - 1;
@@ -737,20 +729,34 @@ export class SliderComponent
             const tickMarksCount = total / this.step + 1;
             if (this._maxTickMarksNumber !== undefined && tickMarksCount > this._maxTickMarksNumber) {
                 this._tickMarks = [
-                    { position: 0, value: 0, label: `${this.min}` },
-                    { position: 100, value: total, label: `${this.max}` }
+                    {
+                        position: 0,
+                        value: 0,
+                        label: `${this.min}`
+                    },
+                    {
+                        position: 100,
+                        value: total,
+                        label: `${this.max}`
+                    }
                 ];
-
                 return;
             }
-
             if (tickMarksCount % 1 === 0) {
-                this._tickMarks = Array.from({ length: tickMarksCount }, (_, i) => {
-                    const value = Math.round(i * this.step * 100) / 100;
-                    const position = (value / (this.max - this.min)) * 100;
-
-                    return { value, position, label: `${this.min + value}` };
-                });
+                this._tickMarks = Array.from(
+                    {
+                        length: tickMarksCount
+                    },
+                    (_, i) => {
+                        const value = Math.round(i * this.step * 100) / 100;
+                        const position = (value / (this.max - this.min)) * 100;
+                        return {
+                            value,
+                            position,
+                            label: `${this.min + value}`
+                        };
+                    }
+                );
             }
         }
     }
@@ -760,26 +766,21 @@ export class SliderComponent
         if (!this.trackEl || !this.trackEl.nativeElement) {
             return;
         }
-
         return Math.floor(this.trackEl.nativeElement.getBoundingClientRect().width / MIN_DISTANCE_BETWEEN_TICKS);
     }
 
     /** @hidden */
     private _calcProgress(value: number, skipRtl = false): number {
         let progress = ((value - this.min) / (this.max - this.min)) * 100;
-
         if (!skipRtl && this._isRtl) {
             progress = 100 - progress;
         }
-
         if (progress > 100) {
             return 100;
         }
-
         if (progress < 0) {
             return 0;
         }
-
         return progress;
     }
 
@@ -790,7 +791,6 @@ export class SliderComponent
             this._handle2Position = this._calcProgress(this._handle2Value);
             this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
         }
-
         this._progress = this._calcProgress(this._position as number, true);
     }
 
@@ -804,7 +804,6 @@ export class SliderComponent
         if (!this._rtlService) {
             return;
         }
-
         this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
             this._cdr.markForCheck();
@@ -815,24 +814,20 @@ export class SliderComponent
     private _initSingeMode(value: number | SliderTickMark): void {
         if (this.customValues.length > 0) {
             this._initSingeModeWithCustomValue(value as SliderTickMark);
-
             return;
         }
-
         this._initSingeModeDefault(coerceNumberProperty(value, this.min));
     }
 
     /** @hidden */
     private _initSingeModeDefault(value: number): void {
         this._position = value;
-
         this._progress = this._calcProgress(value, true);
     }
 
     /** @hidden */
     private _initSingeModeWithCustomValue(sliderTickMark: SliderTickMark): void {
         const value = (this._getCustomValuesPosition(sliderTickMark) as number) || this.min;
-
         this._initSingeModeDefault(value);
     }
 
@@ -840,20 +835,16 @@ export class SliderComponent
     private _initRangeMode(value: number[] | SliderTickMark[]): void {
         if (this.customValues.length > 0) {
             this._initRangeModeWithCustomValues(value as SliderTickMark[]);
-
             return;
         }
-
         const firstHandle = coerceNumberProperty(value[0], this.min);
         const secondHandle = coerceNumberProperty(value[1], this.max);
-
         this._initRangeModeDefault([firstHandle, secondHandle]);
     }
 
     /** @hidden */
     private _initRangeModeDefault([firstHandle, secondHandle]: number[]): void {
         this._position = [firstHandle, secondHandle];
-
         this._setRangeHandleValueAndPosition(SliderRangeHandles.First, firstHandle);
         this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, secondHandle);
     }
@@ -861,7 +852,6 @@ export class SliderComponent
     /** @hidden */
     private _initRangeModeWithCustomValues([firstHandle, secondHandle]: SliderTickMark[]): void {
         const value = this._getCustomValuesPosition([firstHandle, secondHandle]) || [this.min, this.max];
-
         this._initRangeModeDefault(value as number[]);
     }
 
@@ -870,7 +860,6 @@ export class SliderComponent
         this.min = 0;
         this.max = this.customValues.length - 1;
         this.step = 1;
-
         return this._getCustomValuesPositions(value);
     }
 
@@ -879,32 +868,26 @@ export class SliderComponent
         if (!value || (value as SliderTickMark[]).length === 0) {
             return this._isRange ? [0, this.customValues.length - 1] : 0;
         }
-
         if (Array.isArray(value)) {
             let [firstHandle, secondHandle] = value;
             if (!this._instanceOfCustomValue(firstHandle)) {
                 firstHandle = this.customValues[0];
             }
-
             if (!this._instanceOfCustomValue(secondHandle)) {
                 secondHandle = this.customValues[this.customValues.length - 1];
             }
-
             const firstHandlePosition = this.customValues.findIndex((item) => item.value === firstHandle.value);
             const secondHandlePosition = this.customValues.findIndex((item) => item.value === secondHandle.value);
-
             const indexes = [
                 firstHandlePosition >= 0 ? firstHandlePosition : 0,
                 secondHandlePosition >= 0 ? secondHandlePosition : this.customValues.length - 1
             ];
-
             return indexes;
         } else {
             let firstHandle = value as SliderTickMark;
             if (!this._instanceOfCustomValue(firstHandle)) {
                 firstHandle = this.customValues[0];
             }
-
             return this.customValues.findIndex((item) => item.value === firstHandle.value) || 0;
         }
     }

@@ -23,6 +23,7 @@ import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-n
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 let uniqueId = 0;
 
@@ -58,13 +59,13 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     @Input()
     set stateType(state: FormStates) {
         if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
+            warnOnce('"stateType" is deprecated. Use "state" instead');
         }
         super.state = state;
     }
     get stateType(): FormStates {
         if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
+            warnOnce('"stateType" is deprecated. Use "state" instead');
         }
         return super.state;
     }

@@ -20,7 +20,7 @@ import {
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
@@ -109,13 +109,13 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     @Input()
     set stateType(state: FormStates) {
         if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
+            warnOnce('"stateType" is deprecated. Use "state" instead');
         }
         super.state = state;
     }
     get stateType(): FormStates {
         if (isDevMode()) {
-            console.warn('"stateType" is deprecated. Use "state" instead');
+            warnOnce('"stateType" is deprecated. Use "state" instead');
         }
         return super.state;
     }
