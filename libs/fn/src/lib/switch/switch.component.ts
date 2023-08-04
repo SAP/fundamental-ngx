@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let switchUniqueId = 0;
@@ -111,7 +111,7 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
      */
     @Input()
     set semanticDeclineLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'fnSwitch.semanticDeclineLabel' key instead."
         );
         this._semanticDeclineLabel = value;

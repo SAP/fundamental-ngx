@@ -22,7 +22,7 @@ import { Validators } from '@angular/forms';
 import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
@@ -124,7 +124,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Input()
     set showFiltersLabel(value: string) {
-        console.warn('Property showFiltersLabel is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property showFiltersLabel is deprecated. Use i18n capabilities instead.');
         this._showFiltersLabel = value;
     }
 
@@ -138,7 +138,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Input()
     set hideFiltersLabel(value: string) {
-        console.warn('Property hideFiltersLabel is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property hideFiltersLabel is deprecated. Use i18n capabilities instead.');
         this._hideFiltersLabel = value;
     }
 
@@ -152,7 +152,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Input()
     set filtersLabel(value: string) {
-        console.warn('Property filtersLabel is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property filtersLabel is deprecated. Use i18n capabilities instead.');
         this._filtersLabel = value;
     }
 
@@ -178,7 +178,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Input()
     set defineStrategyLabels(value: SmartFilterBarStrategyLabels | undefined) {
-        console.warn('Property defineStrategyLabels is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property defineStrategyLabels is deprecated. Use i18n capabilities instead.');
         this._defineStrategyLabels = value;
     }
 
@@ -192,7 +192,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
      */
     @Input()
     set filtersVisibilityCategoryLabels(value: SmartFilterBarVisibilityCategoryLabels | undefined) {
-        console.warn('Property filtersVisibilityCategoryLabels is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property filtersVisibilityCategoryLabels is deprecated. Use i18n capabilities instead.');
         this._filtersVisibilityCategoryLabels = value;
     }
 

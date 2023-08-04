@@ -22,6 +22,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamenta
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
@@ -103,7 +104,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     @Input()
     set datetimeInputLabel(value: string) {
-        console.warn(
+        warnOnce(
             'Property datetimeInputLabel is deprecated. Use i18n capabilities (being translated in core datetime picker) instead.'
         );
         this._datetimeInputLabel = value;
@@ -119,7 +120,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     @Input()
     set displayDatetimeToggleLabel(value: string) {
-        console.warn(
+        warnOnce(
             'Property displayDatetimeToggleLabel is deprecated. Use i18n capabilities (being translated in core datetime picker) instead.'
         );
         this._displayDatetimeToggleLabel = value;
@@ -235,7 +236,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     @Input()
     set okLabel(value: string) {
-        console.warn('Property okLabel is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property okLabel is deprecated. Use i18n capabilities instead.');
         this._okLabel = value;
     }
 
@@ -249,7 +250,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     @Input()
     set cancelLabel(value: string) {
-        console.warn('Property cancelLabel is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property cancelLabel is deprecated. Use i18n capabilities instead.');
         this._cancelLabel = value;
     }
 

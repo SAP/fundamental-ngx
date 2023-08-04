@@ -10,6 +10,7 @@ import {
     Renderer2,
     ElementRef
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-feed-input',
@@ -45,9 +46,7 @@ export class FeedInputComponent implements AfterViewInit {
      */
     @Input()
     set userTitle(value: string) {
-        console.warn(
-            "Property userTitle is deprecated. Use i18n capabilities 'platformFeedInput.userTitle' key instead."
-        );
+        warnOnce("Property userTitle is deprecated. Use i18n capabilities 'platformFeedInput.userTitle' key instead.");
         this._userTitle = value;
     }
 

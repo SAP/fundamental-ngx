@@ -10,6 +10,7 @@ import {
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import {
     BaseEntity,
@@ -64,7 +65,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     /** @deprecated */
     @Input()
     set included(value: ExtendedIncludedEntity[]) {
-        console.warn('Property included is deprecated. ');
+        warnOnce('Property included is deprecated. ');
         this._included = value;
     }
 
@@ -75,7 +76,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     /** @deprecated */
     @Input()
     set excluded(value: ExtendedExcludedEntity[]) {
-        console.warn('Property excluded is deprecated. ');
+        warnOnce('Property excluded is deprecated. ');
         this._excluded = value;
     }
 

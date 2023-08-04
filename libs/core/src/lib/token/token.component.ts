@@ -16,7 +16,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -75,7 +75,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
      */
     @Input()
     set deleteButtonLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property deleteButtonLabel is deprecated. Use i18n capabilities 'coreToken.deleteButtonLabel' key instead."
         );
         this._deleteButtonLabel = value;
@@ -91,7 +91,7 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
      */
     @Input()
     set ariaRoleDescription(value: string) {
-        console.warn(
+        warnOnce(
             "Property ariaRoleDescription is deprecated. Use i18n capabilities 'coreToken.ariaRoleDescription' key instead."
         );
         this._ariaRoleDescription = value;

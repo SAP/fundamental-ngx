@@ -37,6 +37,7 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -138,7 +139,7 @@ export class PopoverComponent
      * Left for backward compatibility
      */
     set directiveRef(value: any) {
-        console.warn('Property directiveRef is deprecated. ');
+        warnOnce('Property directiveRef is deprecated. ');
         this._directiveRef = value;
     }
 

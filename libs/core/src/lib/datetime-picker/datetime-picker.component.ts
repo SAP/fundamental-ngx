@@ -29,7 +29,7 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 /**
@@ -171,7 +171,7 @@ export class DatetimePickerComponent<D>
      */
     @Input()
     set datetimeInputLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property datetimeInputLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeInputLabel' key instead."
         );
         this._datetimeInputLabel = value;
@@ -187,7 +187,7 @@ export class DatetimePickerComponent<D>
      */
     @Input()
     set displayDatetimeToggleLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property displayDatetimeToggleLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayDatetimeToggleLabel' key instead."
         );
         this._displayDatetimeToggleLabel = value;
@@ -203,7 +203,7 @@ export class DatetimePickerComponent<D>
      */
     @Input()
     set displayTypeDateLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property displayTypeDateLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayTypeDateLabel' key instead."
         );
         this._displayTypeDateLabel = value;
@@ -219,7 +219,7 @@ export class DatetimePickerComponent<D>
      */
     @Input()
     set displayTypeTimeLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property displayTypeTimeLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayTypeTimeLabel' key instead."
         );
         this._displayTypeTimeLabel = value;
@@ -343,7 +343,7 @@ export class DatetimePickerComponent<D>
      */
     @Input()
     set okLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property okLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeOkLabel' key instead."
         );
         this._okLabel = value;
@@ -359,7 +359,7 @@ export class DatetimePickerComponent<D>
      */
     @Input()
     set cancelLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property cancelLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeCancelLabel' key instead."
         );
         this._cancelLabel = value;

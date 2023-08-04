@@ -34,7 +34,7 @@ import { FormItemControl, PopoverFormMessageService, registerFormItemControl } f
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { createMissingDateImplementationError } from './errors';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let datePickerCounter = 0;
@@ -145,7 +145,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set dateInputLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property dateInputLabel is deprecated. Use i18n capabilities 'coreDatePicker.dateInputLabel' key instead."
         );
         this._dateInputLabel = value;
@@ -161,7 +161,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set dateRangeInputLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property dateRangeInputLabel is deprecated. Use i18n capabilities 'coreDatePicker.dateRangeInputLabel' key instead."
         );
         this._dateRangeInputLabel = value;
@@ -177,7 +177,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set displayCalendarToggleLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property displayCalendarToggleLabel is deprecated. Use i18n capabilities 'coreDatePicker.displayCalendarToggleLabel' key instead."
         );
         this._displayCalendarToggleLabel = value;
@@ -193,7 +193,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set valueStateSuccessMessage(value: string) {
-        console.warn(
+        warnOnce(
             "Property valueStateSuccessMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateSuccessMessage' key instead."
         );
         this._valueStateSuccessMessage = value;
@@ -209,7 +209,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set valueStateInformationMessage(value: string) {
-        console.warn(
+        warnOnce(
             "Property valueStateInformationMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateInformationMessage' key instead."
         );
         this._valueStateInformationMessage = value;
@@ -225,7 +225,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set valueStateWarningMessage(value: string) {
-        console.warn(
+        warnOnce(
             "Property valueStateWarningMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateWarningMessage' key instead."
         );
         this._valueStateWarningMessage = value;
@@ -241,7 +241,7 @@ export class DatePickerComponent<D>
      */
     @Input()
     set valueStateErrorMessage(value: string) {
-        console.warn(
+        warnOnce(
             "Property valueStateErrorMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateErrorMessage' key instead."
         );
         this._valueStateErrorMessage = value;

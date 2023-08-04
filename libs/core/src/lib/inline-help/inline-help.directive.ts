@@ -20,7 +20,7 @@ import {
 import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
@@ -87,7 +87,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     @Input('fd-inline-help-template')
     set inlineHelpTemplate(template: Nullable<TemplateRef<any>>) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 '[fd-inline-help-template] is deprecated and will be removed in the future, use [fd-inline-help] instead.'
             );
         }

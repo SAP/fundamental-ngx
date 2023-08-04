@@ -23,7 +23,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamenta
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -93,7 +93,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @Input()
     set dateInputLabel(value: string) {
-        console.warn(
+        warnOnce(
             'Property dateInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
         );
         this._dateInputLabel = value;
@@ -108,7 +108,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @Input()
     set dateRangeInputLabel(value: string) {
-        console.warn(
+        warnOnce(
             'Property dateRangeInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
         );
         this._dateRangeInputLabel = value;
@@ -124,7 +124,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @Input()
     set displayCalendarToggleLabel(value: string) {
-        console.warn(
+        warnOnce(
             'Property displayCalendarToggleLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
         );
         this._displayCalendarToggleLabel = value;
@@ -189,13 +189,13 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     set datepickerState(state: FormStates) {
         if (isDevMode()) {
-            console.warn('"datepickerState" is deprecated. Use "state" instead');
+            warnOnce('"datepickerState" is deprecated. Use "state" instead');
         }
         this.state = state;
     }
     get datepickerState(): FormStates {
         if (isDevMode()) {
-            console.warn('"datepickerState" is deprecated. Use "state" instead');
+            warnOnce('"datepickerState" is deprecated. Use "state" instead');
         }
         return this.state;
     }

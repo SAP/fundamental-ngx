@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
+import { warnOnce } from '../helpers';
 
 /**
  * @deprecated Use Angular's built-in `DestroyRef` and `takeUntilDestroyed` instead.
@@ -10,7 +11,7 @@ export class DestroyedService extends ReplaySubject<void> implements OnDestroy {
     /** @hidden */
     constructor() {
         super(1);
-        console.warn(
+        warnOnce(
             `DestroyedService is deprecated. Use Angular's built-in 'DestroyRef' and 'takeUntilDestroyed' instead.`
         );
     }

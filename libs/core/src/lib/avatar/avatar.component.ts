@@ -21,7 +21,8 @@ import {
     Size,
     applyCssClass,
     getRandomColorAccent,
-    CssClassBuilder
+    CssClassBuilder,
+    warnOnce
 } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_AVATAR_COMPONENT } from './tokens';
@@ -121,7 +122,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     /** Background image url. */
     @Input()
     set backgroundImage(value: string) {
-        console.warn('`backgroundImage` input property is deprecated. Use `image` instead.');
+        warnOnce('`backgroundImage` input property is deprecated. Use `image` instead.');
         this._setImage(value);
     }
 

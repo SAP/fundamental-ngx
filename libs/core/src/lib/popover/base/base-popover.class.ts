@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Directive()
 export class BasePopoverClass {
@@ -146,7 +146,7 @@ export class BasePopoverClass {
     /** @deprecated */
     @Input()
     set options(value: any) {
-        console.warn('Property options is deprecated. ');
+        warnOnce('Property options is deprecated. ');
         this._options = value;
     }
 
@@ -156,7 +156,7 @@ export class BasePopoverClass {
     /** @deprecated */
     @Input()
     set addContainerClass(value: any) {
-        console.warn('Property addContainerClass is deprecated. ');
+        warnOnce('Property addContainerClass is deprecated. ');
         this._addContainerClass = value;
     }
 
@@ -167,7 +167,7 @@ export class BasePopoverClass {
     /** @deprecated */
     @Input()
     set additionalClasses(value: any) {
-        console.warn('Property additionalClasses is deprecated. ');
+        warnOnce('Property additionalClasses is deprecated. ');
         this._additionalClasses = value;
     }
 

@@ -7,6 +7,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -38,7 +39,7 @@ export class PlatformFooterComponent {
 
     /** @hidden */
     constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {
-        console.warn('PlatformFooterComponent component is deprecated since version 0.40.0');
+        warnOnce('PlatformFooterComponent component is deprecated since version 0.40.0');
     }
 
     /** @hidden */

@@ -34,7 +34,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -226,7 +226,7 @@ export class SearchFieldComponent
      */
     @Input()
     set searchSuggestionMessage(value: string) {
-        console.warn('Property searchSuggestionMessage is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property searchSuggestionMessage is deprecated. Use i18n capabilities instead.');
         this._searchSuggestionMessage = value;
     }
 
@@ -241,7 +241,7 @@ export class SearchFieldComponent
      */
     @Input()
     set searchSuggestionNavigateMessage(value: string) {
-        console.warn('Property searchSuggestionNavigateMessage is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property searchSuggestionNavigateMessage is deprecated. Use i18n capabilities instead.');
         this._searchSuggestionNavigateMessage = value;
     }
 

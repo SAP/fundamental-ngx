@@ -12,7 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
@@ -82,7 +82,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         private _cdr: ChangeDetectorRef
     ) {
         super(_changeDetectorRef);
-        console.warn('ThumbnailComponent is deprecated since version 0.40.0 and will be removed in next release.');
+        warnOnce('ThumbnailComponent is deprecated since version 0.40.0 and will be removed in next release.');
     }
 
     /** @hidden Select first media object on init. */

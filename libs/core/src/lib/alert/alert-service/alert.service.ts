@@ -2,7 +2,7 @@ import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { AlertConfig } from '../alert-utils/alert-config';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from '../alert-utils/alert-ref';
 
 /**
@@ -22,7 +22,7 @@ export class AlertService {
 
     /** @hidden */
     constructor(private dynamicComponentService: DynamicComponentService) {
-        console.warn(
+        warnOnce(
             'AlertService is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripAlertService instead.'
         );
     }

@@ -27,7 +27,13 @@ import { takeUntil } from 'rxjs/operators';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import { ContentDensityService, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    ContentDensityService,
+    FocusEscapeDirection,
+    KeyUtil,
+    TemplateDirective,
+    warnOnce
+} from '@fundamental-ngx/cdk/utils';
 import {
     CollectionBaseInput,
     PlatformFormFieldControl,
@@ -55,7 +61,7 @@ export class FdpSelectionChangeEvent {
     constructor(
         public payload: any // Contains selected item
     ) {
-        console.warn('FdpSelectionChangeEvent will be removed in future versions in favour of plain value emission');
+        warnOnce('FdpSelectionChangeEvent will be removed in future versions in favour of plain value emission');
     }
 }
 

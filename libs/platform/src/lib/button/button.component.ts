@@ -9,7 +9,7 @@ import {
     Output
 } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
@@ -58,7 +58,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      */
     @Input()
     set ariaSelected(value: Nullable<boolean>) {
-        console.warn('Property ariaSelected is deprecated. Use `toggled` input property instead.');
+        warnOnce('Property ariaSelected is deprecated. Use `toggled` input property instead.');
         this._ariaSelected = value;
     }
 
@@ -90,7 +90,7 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      */
     @Input()
     set ariaPressed(value: Nullable<boolean>) {
-        console.warn('Property ariaPressed is deprecated. Use `toggled` input property instead.');
+        warnOnce('Property ariaPressed is deprecated. Use `toggled` input property instead.');
         this._ariaPressed = value;
     }
 

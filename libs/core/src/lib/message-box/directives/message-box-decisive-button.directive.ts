@@ -1,4 +1,5 @@
 import { Directive } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * @deprecated
@@ -15,6 +16,6 @@ import { Directive } from '@angular/core';
 export class MessageBoxDecisiveButton {
     /** @hidden */
     constructor() {
-        console.warn('`[fd-message-box-decisive-button]` is deprecated. Consider using `fd-button-bar`');
+        warnOnce('`[fd-message-box-decisive-button]` is deprecated. Consider using `fd-button-bar`');
     }
 }

@@ -1,4 +1,5 @@
 import { Injectable, isDevMode } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated use i18n capabilities instead
@@ -55,7 +56,7 @@ export class TimeI18n {
     /** @hidden */
     constructor() {
         if (isDevMode()) {
-            console.warn('TimeI18n is deprecated and will be removed in next release. Use i18n capabilities instead.');
+            warnOnce('TimeI18n is deprecated and will be removed in next release. Use i18n capabilities instead.');
         }
     }
 }

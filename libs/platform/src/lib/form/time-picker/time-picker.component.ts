@@ -22,6 +22,7 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-n
 import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-time-picker',
@@ -60,7 +61,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     @Input()
     set meridian(value: boolean) {
         // eslint-disable-next-line max-len
-        console.warn(
+        warnOnce(
             'Property meridian is deprecated.' +
                 ' Use Meridian is deprecated.' +
                 ' Use displayFormat and parseFormat inputs or DateTimeFormats.display.timeInput and DateTimeFormats.parse.timeInput instead. instead.'

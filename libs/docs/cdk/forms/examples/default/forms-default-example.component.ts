@@ -8,7 +8,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
-import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk';
+import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { cloneDeep } from 'lodash-es';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
