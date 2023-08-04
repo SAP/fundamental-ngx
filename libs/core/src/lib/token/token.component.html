@@ -3,7 +3,7 @@
     class="fd-token"
     role="option"
     tabindex="0"
-    [attr.aria-roledescription]="ariaRoleDescription"
+    [attr.aria-roledescription]="ariaRoleDescription || ('coreToken.ariaRoleDescription' | fdTranslate)"
     (click)="tokenClickHandler($event)"
     (keydown)="tokenKeydownHandler($event)"
     [attr.aria-setsize]="totalCount"

@@ -95,9 +95,17 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
      */
     @Input()
     fdType: ToolbarType = 'solid';
+
     /** @deprecated */
     @Input()
-    hasTitle = false;
+    set hasTitle(value: boolean) {
+        console.warn('Property hasTitle is deprecated. ');
+        this._hasTitle = value;
+    }
+
+    get hasTitle(): boolean {
+        return this._hasTitle;
+    }
 
     /** The title for the toolbar. */
     @Input()
@@ -150,6 +158,9 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
+
+    /** @hidden */
+    private _hasTitle = false;
 
     /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);

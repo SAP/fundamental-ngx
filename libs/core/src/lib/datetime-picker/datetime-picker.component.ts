@@ -170,28 +170,64 @@ export class DatetimePickerComponent<D>
      * Aria label for the datetime picker input.
      */
     @Input()
-    datetimeInputLabel: string;
+    set datetimeInputLabel(value: string) {
+        console.warn(
+            "Property datetimeInputLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeInputLabel' key instead."
+        );
+        this._datetimeInputLabel = value;
+    }
+
+    get datetimeInputLabel(): string {
+        return this._datetimeInputLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Aria label for the button to show/hide the calendar.
      */
     @Input()
-    displayDatetimeToggleLabel: string;
+    set displayDatetimeToggleLabel(value: string) {
+        console.warn(
+            "Property displayDatetimeToggleLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayDatetimeToggleLabel' key instead."
+        );
+        this._displayDatetimeToggleLabel = value;
+    }
+
+    get displayDatetimeToggleLabel(): string {
+        return this._displayDatetimeToggleLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Label for the "Date" button in display type switcher in mobile mode
      */
     @Input()
-    displayTypeDateLabel: string;
+    set displayTypeDateLabel(value: string) {
+        console.warn(
+            "Property displayTypeDateLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayTypeDateLabel' key instead."
+        );
+        this._displayTypeDateLabel = value;
+    }
+
+    get displayTypeDateLabel(): string {
+        return this._displayTypeDateLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Label for the "Time" button in display type switcher in mobile mode
      */
     @Input()
-    displayTypeTimeLabel: string;
+    set displayTypeTimeLabel(value: string) {
+        console.warn(
+            "Property displayTypeTimeLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayTypeTimeLabel' key instead."
+        );
+        this._displayTypeTimeLabel = value;
+    }
+
+    get displayTypeTimeLabel(): string {
+        return this._displayTypeTimeLabel;
+    }
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -203,7 +239,8 @@ export class DatetimePickerComponent<D>
      * but 12 will be kept as 12.
      * Only uses by time component and does not change input format
      */
-    @Input() keepTwoDigitsTime = false;
+    @Input()
+    keepTwoDigitsTime = false;
 
     /**
      *  The state of the form control - applies css classes.
@@ -222,9 +259,6 @@ export class DatetimePickerComponent<D>
         }
         return this._state;
     }
-
-    /** @hidden */
-    private _state: FormStates = 'default';
 
     /**
      * Whether AddOn Button should be focusable
@@ -308,17 +342,32 @@ export class DatetimePickerComponent<D>
      * Text and aria-label of the DateTimePicker 'OK' button.
      */
     @Input()
-    okLabel: string;
+    set okLabel(value: string) {
+        console.warn(
+            "Property okLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeOkLabel' key instead."
+        );
+        this._okLabel = value;
+    }
+
+    get okLabel(): string {
+        return this._okLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Text and aria-label of the DateTimePicker 'Cancel' button.
      */
     @Input()
-    cancelLabel: string;
+    set cancelLabel(value: string) {
+        console.warn(
+            "Property cancelLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeCancelLabel' key instead."
+        );
+        this._cancelLabel = value;
+    }
 
-    /** @hidden */
-    _processInputOnBlur = false;
+    get cancelLabel(): string {
+        return this._cancelLabel;
+    }
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -359,12 +408,19 @@ export class DatetimePickerComponent<D>
     _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
-    @ViewChild('inputGroupComponent', { read: ElementRef })
+    @ViewChild('inputGroupComponent', {
+        read: ElementRef
+    })
     _inputGroupElement: ElementRef;
 
     /** @hidden */
-    @ViewChild(InputGroupInputDirective, { read: ElementRef })
+    @ViewChild(InputGroupInputDirective, {
+        read: ElementRef
+    })
     _inputElement: ElementRef<HTMLInputElement>;
+
+    /** @hidden */
+    _processInputOnBlur = false;
 
     /**
      * @hidden
@@ -396,6 +452,27 @@ export class DatetimePickerComponent<D>
 
     /** @hidden whether to display date or time in mobile mode */
     _displayType: 'date' | 'time' = 'date';
+
+    /** @hidden */
+    private _okLabel: string;
+
+    /** @hidden */
+    private _datetimeInputLabel: string;
+
+    /** @hidden */
+    private _displayDatetimeToggleLabel: string;
+
+    /** @hidden */
+    private _displayTypeDateLabel: string;
+
+    /** @hidden */
+    private _displayTypeTimeLabel: string;
+
+    /** @hidden */
+    private _state: FormStates = 'default';
+
+    /** @hidden */
+    private _cancelLabel: string;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

@@ -8,7 +8,7 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
 
 @Component({
     template: `
-        <fd-side-nav>
+        <fd-side-nav #sideNavigationComponent>
             <div fd-side-nav-main>
                 <ul fd-nested-list [textOnly]="true">
                     <li fd-nested-list-item>
@@ -87,7 +87,7 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
     `
 })
 class TestNestedContainerComponent {
-    @ViewChild(SideNavigationComponent)
+    @ViewChild('sideNavigationComponent')
     sideNav: SideNavigationComponent;
 
     expanded = false;

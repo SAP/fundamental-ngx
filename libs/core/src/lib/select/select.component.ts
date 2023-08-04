@@ -97,6 +97,19 @@ export class SelectComponent<T = any>
         OnDestroy,
         FormItemControl
 {
+    /** @deprecated
+     * it is handled internally by controlTemplate != null|undefined is
+     * Equal as extendedBodyTemplate as true.
+     * Whether option components contain more than basic text. */
+    @Input()
+    set extendedBodyTemplate(value: boolean) {
+        this._extendedBodyTemplate = value;
+    }
+
+    get extendedBodyTemplate(): boolean {
+        return this._extendedBodyTemplate;
+    }
+
     /** Id of the control. */
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
@@ -140,13 +153,6 @@ export class SelectComponent<T = any>
     get value(): any {
         return this._internalValue;
     }
-
-    /** @deprecated
-     * it is handled internally by controlTemplate != null|undefined is
-     * Equal as extendedBodyTemplate as true.
-     * Whether option components contain more than basic text. */
-    @Input()
-    extendedBodyTemplate = false;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
@@ -299,6 +305,9 @@ export class SelectComponent<T = any>
             switchMap(() => merge(..._options.map((option) => option.selectionChange)))
         );
     });
+
+    /** @hidden */
+    private _extendedBodyTemplate = false;
 
     /** @hidden */
     private _controlElemFontSize = 0;

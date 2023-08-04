@@ -1,16 +1,16 @@
 import {
+    ChangeDetectorRef,
     Component,
+    ElementRef,
+    EventEmitter,
     Input,
+    OnChanges,
+    OnInit,
     Optional,
     Output,
-    EventEmitter,
-    OnChanges,
-    SimpleChanges,
-    OnInit,
-    ChangeDetectorRef,
-    ViewChildren,
     QueryList,
-    ElementRef
+    SimpleChanges,
+    ViewChildren
 } from '@angular/core';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -65,7 +65,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         protected _changeDetectorRef: ChangeDetectorRef,
         private _dialogService: DialogService,
         @Optional() private _rtlService: RtlService
-    ) {}
+    ) {
+        console.warn('ThumbnailImage component is deprecated since version 0.40.0 and will be removed in next release');
+    }
 
     /** @hidden */
     ngOnInit(): void {

@@ -54,7 +54,9 @@ export class FdpSelectionChangeEvent {
      */
     constructor(
         public payload: any // Contains selected item
-    ) {}
+    ) {
+        console.warn('FdpSelectionChangeEvent will be removed in future versions in favour of plain value emission');
+    }
 }
 
 @Directive()

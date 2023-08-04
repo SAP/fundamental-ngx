@@ -27,6 +27,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 @Component({
     selector: 'fdp-test-approval-flow',
     template: ` <fdp-approval-flow
+        #approvalFlowComponent
         [title]="title"
         [value]="value"
         [userDataSource]="userDataSource"
@@ -35,7 +36,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
     ></fdp-approval-flow>`
 })
 class TestPlatformApprovalFlowComponent {
-    @ViewChild(ApprovalFlowComponent, { static: true }) component: ApprovalFlowComponent;
+    @ViewChild('approvalFlowComponent', { static: true }) component: ApprovalFlowComponent;
     title = TEST_APPROVAL_FLOW_TITLE;
     value = simpleGraph;
     userDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());

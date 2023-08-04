@@ -76,7 +76,16 @@ export class ShellbarActionsComponent implements OnDestroy {
      * Label for the collapsed item menu.
      */
     @Input()
-    collapsedItemMenuLabel: string;
+    set collapsedItemMenuLabel(value: string) {
+        console.warn(
+            "Property collapsedItemMenuLabel is deprecated. Use i18n capabilities 'coreShellbar.collapsedItemMenuLabel' key instead."
+        );
+        this._collapsedItemMenuLabel = value;
+    }
+
+    get collapsedItemMenuLabel(): string {
+        return this._collapsedItemMenuLabel;
+    }
 
     /**
      * Event emitted when search opened.
@@ -120,6 +129,12 @@ export class ShellbarActionsComponent implements OnDestroy {
     showSearch = false;
 
     /** @hidden */
+    currentSize: ShellbarSizes;
+
+    /** @hidden */
+    private _collapsedItemMenuLabel: string;
+
+    /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);
 
     /** @hidden */
@@ -141,9 +156,6 @@ export class ShellbarActionsComponent implements OnDestroy {
 
     /** @hidden */
     private _searchComponent: Nullable<SearchComponent>;
-
-    /** @hidden */
-    currentSize: ShellbarSizes;
 
     /** @hidden */
     _toggleSearch: () => void = () => {

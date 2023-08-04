@@ -142,14 +142,32 @@ export class UploadCollectionComponent
      * Allows to set own text for the 'No data' text label.
      */
     @Input()
-    noDataText: string;
+    set noDataText(value: string) {
+        console.warn(
+            "Property noDataText is deprecated. Use i18n capabilities 'platformUploadCollection.noDataText' key instead."
+        );
+        this._noDataText = value;
+    }
+
+    get noDataText(): string {
+        return this._noDataText;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Allows to set own text for the 'No data' description label.
      */
     @Input()
-    noDataDescription: string;
+    set noDataDescription(value: string) {
+        console.warn(
+            "Property noDataDescription is deprecated. Use i18n capabilities 'platformUploadCollection.noDataDescription' key instead."
+        );
+        this._noDataDescription = value;
+    }
+
+    get noDataDescription(): string {
+        return this._noDataDescription;
+    }
 
     /** All action buttons will be disabled */
     @Input()
@@ -273,18 +291,24 @@ export class UploadCollectionComponent
     _selectionMode = SelectionMode;
 
     /** @hidden */
-    private _dataSource: UploadCollectionDataSource;
-
-    /** @hidden */
-    private _contentDensityManuallySet = false;
-
-    /** @hidden */
     @ViewChild('fileInput')
     private readonly _uploadFilesRef: ElementRef;
 
     /** @hidden */
     @ViewChild('updateVersionInput')
     private readonly _updateVersionRef: ElementRef;
+
+    /** @hidden */
+    private _dataSource: UploadCollectionDataSource;
+
+    /** @hidden */
+    private _noDataDescription: string;
+
+    /** @hidden */
+    private _noDataText: string;
+
+    /** @hidden */
+    private _contentDensityManuallySet = false;
 
     /** @hidden */
     private readonly _imageExtensions: string[] = [
@@ -330,7 +354,9 @@ export class UploadCollectionComponent
         private readonly _filesValidatorService: FilesValidatorService,
         private readonly _cdr: ChangeDetectorRef,
         private _injector: Injector
-    ) {}
+    ) {
+        console.warn('The Upload Collection component is deprecated and will be removed in next release.');
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

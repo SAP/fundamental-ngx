@@ -69,6 +69,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      */
     @Input()
     set replaceMode(value: boolean) {
+        console.warn('`replaceMode` input is deprecated. Use `dropMode` property instead.');
         this._replaceMode = value;
         this.dropMode = value ? 'group' : 'shift';
         this._detectedDropMode = this.dropMode;

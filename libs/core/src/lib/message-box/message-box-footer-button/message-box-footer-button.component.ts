@@ -9,4 +9,10 @@ import { BarElementDirective } from '@fundamental-ngx/core/bar';
     selector: 'fd-message-box-footer-button',
     template: '<ng-content></ng-content>'
 })
-export class MessageBoxFooterButtonComponent extends BarElementDirective {}
+export class MessageBoxFooterButtonComponent extends BarElementDirective {
+    /** @hidden */
+    constructor() {
+        super();
+        console.warn('`fd-message-box-footer-button` is deprecated. Consider using `fd-button-bar`');
+    }
+}

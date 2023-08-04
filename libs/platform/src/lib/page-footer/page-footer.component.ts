@@ -37,7 +37,9 @@ export class PlatformFooterComponent {
     public screenHeight: any;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {}
+    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {
+        console.warn('PlatformFooterComponent component is deprecated since version 0.40.0');
+    }
 
     /** @hidden */
     @HostListener('window:resize', ['$event'])

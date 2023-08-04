@@ -50,6 +50,9 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     /** @hidden */
     constructor(@Optional() private _rtlService: RtlService, _cd: ChangeDetectorRef) {
         super(_cd);
+        console.warn(
+            'ActionBarComponent is deprecated since version 0.40.0 and will be removed in next release. Use [fd-action-bar] from @fundamental-ngx/core instead.'
+        );
     }
 
     /** @hidden */

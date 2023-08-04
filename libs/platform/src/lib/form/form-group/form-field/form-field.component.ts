@@ -115,7 +115,14 @@ export class FormFieldComponent
      * Defines hint placement
      */
     @Input()
-    hintPlacement: HintPlacement;
+    set hintPlacement(value: HintPlacement) {
+        console.warn('Property hintPlacement is deprecated. Use `hint.placement` instead.');
+        this._hintPlacement = value;
+    }
+
+    get hintPlacement(): HintPlacement {
+        return this._hintPlacement;
+    }
 
     /** Hint to be placed next to label */
     @Input()
@@ -434,6 +441,9 @@ export class FormFieldComponent
     /** @hidden */
     private _errorDirectivesCdr: Subscription;
 
+    /** @hidden */
+    private _hintPlacement: HintPlacement;
+
     /** @hidden whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
         if (!this.inputMessageGroup || !this.labelCol) {
@@ -643,8 +653,7 @@ export class FormFieldComponent
 
     /** @hidden */
     hasErrors(): boolean {
-        const result = this._editable && !!this.control?.controlInvalid;
-        return result;
+        return this._editable && !!this.control?.controlInvalid;
     }
 
     /**

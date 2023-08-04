@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     Component,
     Input,
@@ -59,7 +60,14 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
      * Text displayed when table has no items.
      */
     @Input()
-    emptyTableMessage: string;
+    set emptyTableMessage(value: string) {
+        console.warn('Property emptyTableMessage is deprecated. Use 18n capabilities instead.');
+        this._emptyTableMessage = value;
+    }
+
+    get emptyTableMessage(): string {
+        return this._emptyTableMessage;
+    }
 
     /** Uniq field from data source */
     @Input()
@@ -109,9 +117,6 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     /** @hidden */
     _selectedMap: { [key: string]: boolean } = {};
 
-    /** @hidden */
-    private selectedItems: T[] = [];
-
     /** Selection type getters */
     get isSingleSelection(): boolean {
         return this.selection === 'single';
@@ -124,6 +129,12 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     get isMultiSelection(): boolean {
         return this.selection === 'multi';
     }
+
+    /** @hidden */
+    private selectedItems: T[] = [];
+
+    /** @hidden */
+    private _emptyTableMessage: string;
 
     /** @hidden */
     ngAfterViewInit(): void {

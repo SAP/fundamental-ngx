@@ -11,6 +11,7 @@ import {
     Inject,
     Input,
     isDevMode,
+    OnInit,
     Optional,
     Output,
     Self,
@@ -44,7 +45,7 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
-export class CheckboxComponent extends BaseInput implements AfterViewInit {
+export class CheckboxComponent extends BaseInput implements AfterViewInit, OnInit {
     /**
      * Checkbox tooltip
      */
@@ -150,6 +151,17 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         // case: fdp-checkbox passed in declarative fdp-checkbox-group without id and name.
         this.name = `fdp-checkbox-${nextUniqueId++}`;
         this.tabIndexValue = tabIndexValue;
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        super.ngOnInit();
+        if (this.change.observed) {
+            console.warn('`change` event is deprecated. Use `checkedChange` instead');
+        }
+        if (this.indeterminateChange.observed) {
+            console.warn('`indeterminateChange` event is deprecated. Use `indeterminate` instead');
+        }
     }
 
     /** update controller on checkbox state change */

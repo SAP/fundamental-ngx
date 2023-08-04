@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     ChangeDetectionStrategy,
     Component,
@@ -24,9 +25,11 @@ import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 class ExtendedBaseEntity extends BaseEntity {
     id?: number;
 }
+
 class ExtendedIncludedEntity extends VhdIncludedEntity {
     id?: number;
 }
+
 class ExtendedExcludedEntity extends VhdExcludedEntity {
     id?: number;
 }
@@ -60,11 +63,25 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
 
     /** @deprecated */
     @Input()
-    included: ExtendedIncludedEntity[] = [];
+    set included(value: ExtendedIncludedEntity[]) {
+        console.warn('Property included is deprecated. ');
+        this._included = value;
+    }
+
+    get included(): ExtendedIncludedEntity[] {
+        return this._included;
+    }
 
     /** @deprecated */
     @Input()
-    excluded: ExtendedExcludedEntity[] = [];
+    set excluded(value: ExtendedExcludedEntity[]) {
+        console.warn('Property excluded is deprecated. ');
+        this._excluded = value;
+    }
+
+    get excluded(): ExtendedExcludedEntity[] {
+        return this._excluded;
+    }
 
     /** @hidden */
     @Input()
@@ -112,6 +129,12 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
     _excludeStrategy: StategyItem[] = [];
 
     /** @hidden */
+    private _included: ExtendedIncludedEntity[] = [];
+
+    /** @hidden */
+    private _excluded: ExtendedExcludedEntity[] = [];
+
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('conditions' in changes) {
             this._conditions = (this.conditions as ExtendedIncludedEntity[]) || [];
@@ -146,6 +169,7 @@ export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterVi
         this.conditionChange.emit(this._conditions);
         this._changeDetectorRef.markForCheck();
     }
+
     /** @hidden */
     addEmptyCondition(): void {
         const item = new ExtendedBaseEntity();

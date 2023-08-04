@@ -21,7 +21,11 @@ export class AlertService {
     private alertContainerRef?: ComponentRef<AlertContainerComponent>;
 
     /** @hidden */
-    constructor(private dynamicComponentService: DynamicComponentService) {}
+    constructor(private dynamicComponentService: DynamicComponentService) {
+        console.warn(
+            'AlertService is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripAlertService instead.'
+        );
+    }
 
     /**
      * Returns true if there are some alerts currently open. False otherwise.

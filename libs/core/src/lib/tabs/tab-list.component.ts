@@ -95,7 +95,16 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
      * Text visible in expand overflow trigger
      */
     @Input()
-    expandOverflowText: string;
+    set expandOverflowText(value: string) {
+        console.warn(
+            "Property expandOverflowText is deprecated. Use i18n capabilities 'coreTabs.tabListExpandButtonText' key instead."
+        );
+        this._expandOverflowText = value;
+    }
+
+    get expandOverflowText(): string {
+        return this._expandOverflowText;
+    }
 
     /** Initially selected tab (by id). First not disabled one if not specified. */
     @Input()
@@ -146,10 +155,6 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     contentContainer: ElementRef;
 
     /** @hidden */
-    @ViewChild(OverflowLayoutComponent)
-    private _overflowLayout: OverflowLayoutComponent;
-
-    /** @hidden */
     @ViewChild('menu', { read: MenuComponent })
     menu: MenuComponent;
 
@@ -165,11 +170,18 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** Event is thrown always when tab is selected by keyboard actions */
     readonly tabSelected: Subject<number> = new Subject<number>();
 
+    /** @hidden */
+    @ViewChild(OverflowLayoutComponent)
+    private _overflowLayout: OverflowLayoutComponent;
+
     /** Event is thrown always, when some property is changed */
     readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _expandOverflowText: string;
 
     /** @hidden */
     constructor(

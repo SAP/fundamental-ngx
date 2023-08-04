@@ -19,4 +19,11 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     exports: [AlertComponent, AlertContainerComponent],
     providers: [AlertService, DynamicComponentService]
 })
-export class AlertModule {}
+export class AlertModule {
+    /** @hidden */
+    constructor() {
+        console.warn(
+            'AlertModule is deprecated since version 0.16.0 and will be removed in next release. Message Strip component should be used instead.'
+        );
+    }
+}

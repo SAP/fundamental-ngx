@@ -34,4 +34,11 @@ export class AlertContainerComponent {
     /** @hidden */
     @HostBinding('class.fd-alert-container')
     fdAlertContainerClass = true;
+
+    /** @hidden */
+    constructor() {
+        console.warn(
+            'AlertContainerComponent is deprecated since version 0.16.0 and will be removed in future release. Message Strip component should be used instead.'
+        );
+    }
 }

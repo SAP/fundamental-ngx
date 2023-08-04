@@ -2,14 +2,14 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
+    forwardRef,
+    HostListener,
     Input,
     OnInit,
     Optional,
     Output,
-    ViewEncapsulation,
-    HostListener,
     ViewChild,
-    forwardRef
+    ViewEncapsulation
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
@@ -34,7 +34,6 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
         public payload: K
     ) {}
 }
-
 /**
  * @deprecated
  * Thumbnail component is deprecated since version 0.40.0
@@ -83,6 +82,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         private _cdr: ChangeDetectorRef
     ) {
         super(_changeDetectorRef);
+        console.warn('ThumbnailComponent is deprecated since version 0.40.0 and will be removed in next release.');
     }
 
     /** @hidden Select first media object on init. */

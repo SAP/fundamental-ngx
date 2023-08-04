@@ -22,3 +22,4 @@ export * from './tokens/viewport-size.observable';
 export * from './toast';
 export * from './async-strategy';
 export * from './directives/breakpoints/responsive-breakpoints';
+export * from './deprecated-selector.class';

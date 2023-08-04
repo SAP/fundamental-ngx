@@ -17,12 +17,12 @@ export interface Theme {
     description?: string;
 }
 
-@Injectable()
 /**
  * @deprecated
  * Service providing theme switcher functionality.
  * Deprecated since 0.35.0 in favor of ThemingService from ThemingModule
  */
+@Injectable()
 export class ThemesService {
     /** Available themes */
     themes: Theme[] = [
@@ -77,7 +77,9 @@ export class ThemesService {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {}
+    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {
+        console.warn('ThemesService is deprecated since 0.35.0 in favor of ThemingService from ThemingModule');
+    }
 
     /**
      * Set theme according to additional URL parameter.

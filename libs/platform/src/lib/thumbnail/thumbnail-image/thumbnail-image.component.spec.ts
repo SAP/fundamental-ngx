@@ -14,7 +14,7 @@ import { PlatformThumbnailModule } from '../thumbnail.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
-    template: `<fdp-thumbnail-image [mediaList]="mediaList"></fdp-thumbnail-image>`
+    template: `<fdp-thumbnail-image #thumbnailImageComponent [mediaList]="mediaList"></fdp-thumbnail-image>`
 })
 class DefaultThumbnailImageTestComponent {
     mediaList: Media[] = [
@@ -36,7 +36,7 @@ class DefaultThumbnailImageTestComponent {
         }
     ];
 
-    @ViewChild(ThumbnailImageComponent, { static: true })
+    @ViewChild('thumbnailImageComponent', { static: true })
     thumbnailImage: ThumbnailImageComponent;
 }
 

@@ -57,7 +57,14 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      * aria-selected for acccesiblity to the native HTML button
      */
     @Input()
-    ariaSelected: Nullable<boolean>;
+    set ariaSelected(value: Nullable<boolean>) {
+        console.warn('Property ariaSelected is deprecated. Use `toggled` input property instead.');
+        this._ariaSelected = value;
+    }
+
+    get ariaSelected(): Nullable<boolean> {
+        return this._ariaSelected;
+    }
 
     /** aria-disabled for acccesiblity to
      *  the native HTML button*/
@@ -82,7 +89,14 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      * propagate aria-pressed for accessiblity to the native HTML button
      */
     @Input()
-    ariaPressed: Nullable<boolean>;
+    set ariaPressed(value: Nullable<boolean>) {
+        console.warn('Property ariaPressed is deprecated. Use `toggled` input property instead.');
+        this._ariaPressed = value;
+    }
+
+    get ariaPressed(): Nullable<boolean> {
+        return this._ariaPressed;
+    }
 
     /** Specifies a name to
      *  the native HTML button */
@@ -109,6 +123,12 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      */
     @HostBinding('attr.tabindex')
     tabIndex = '-1';
+
+    /** @hidden */
+    private _ariaSelected: Nullable<boolean>;
+
+    /** @hidden */
+    private _ariaPressed: Nullable<boolean>;
 
     /** @hidden */
     constructor(protected _changeDetector: ChangeDetectorRef, private _elementRef: ElementRef) {

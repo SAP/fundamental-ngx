@@ -33,7 +33,7 @@ function callCoreSchematic(options: Schema): Rule {
 
         addPackageJsonDependency(tree, {
             type: NodeDependencyType.Default,
-            // Will be replaced with the real version during sync-version scipt run
+            // Will be replaced with the real version during sync-version script run
             version: `VERSION_PLACEHOLDER`,
             name: '@fundamental-ngx/core'
         });

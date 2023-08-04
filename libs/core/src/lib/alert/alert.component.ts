@@ -115,6 +115,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         super(elRef);
         this._setAlertConfig(alertConfig);
         this._setProperties();
+        console.warn(
+            'AlertComponent is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripComponent instead.'
+        );
     }
 
     /** @hidden */

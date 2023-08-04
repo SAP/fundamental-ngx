@@ -45,6 +45,7 @@ export type FdpValueHelpDialogDataSource<T> =
     | ObservableValueHelpDialogDataSource<T>;
 
 let vhiUniqueId = 0;
+
 @Component({
     selector: 'fdp-value-help-dialog',
     templateUrl: './value-help-dialog.component.html',
@@ -130,7 +131,16 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Select from list tab's and Search table settings
      * */
     @Input()
-    selectTabTitle: string;
+    set selectTabTitle(value: string) {
+        console.warn(
+            "Property selectTabTitle is deprecated. Use i18n capabilities 'platformVHD.selectTabTitle' key instead."
+        );
+        this._selectTabTitle = value;
+    }
+
+    get selectTabTitle(): string {
+        return this._selectTabTitle;
+    }
 
     /** Selection mode for search table */
     @Input()
@@ -141,7 +151,16 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Text displayed when table has no items.
      */
     @Input()
-    searchTableEmptyMessage: string;
+    set searchTableEmptyMessage(value: string) {
+        console.warn(
+            "Property searchTableEmptyMessage is deprecated. Use i18n capabilities 'platformVHD.searchTableEmptyMessage' key instead."
+        );
+        this._searchTableEmptyMessage = value;
+    }
+
+    get searchTableEmptyMessage(): string {
+        return this._searchTableEmptyMessage;
+    }
 
     /** Items per page for pagination below search table */
     @Input()
@@ -164,7 +183,16 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * Define conditions tab's settings
      */
     @Input()
-    defineTabTitle: string;
+    set defineTabTitle(value: string) {
+        console.warn(
+            "Property defineTabTitle is deprecated. Use i18n capabilities 'platformVHD.defineTabTitle' key instead."
+        );
+        this._defineTabTitle = value;
+    }
+
+    get defineTabTitle(): string {
+        return this._defineTabTitle;
+    }
 
     /** Custom strategies labels
      * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
@@ -232,6 +260,15 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** handles rtl service
      * @hidden */
     _dir = 'ltr';
+
+    /** @hidden */
+    private _searchTableEmptyMessage: string;
+
+    /** @hidden */
+    private _selectTabTitle: string;
+
+    /** @hidden */
+    private _defineTabTitle: string;
 
     /** @hidden */
     private _destroyed = new Subject<void>();
@@ -381,7 +418,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
             dialogPanelClass: `fdp-value-help-dialog ${this.mobile ? 'fdp-value-help-dialog-mobile' : ''}`,
             ...this.dialogConfig,
 
-            fullScreen: this.mobile,
+            mobile: this.mobile,
             maxWidth: this.mobile ? undefined : '92%',
             width: this.mobile ? undefined : '1080px',
             height: this.mobile ? undefined : '98%'

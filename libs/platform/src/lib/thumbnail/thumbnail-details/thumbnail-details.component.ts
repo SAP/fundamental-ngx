@@ -2,10 +2,10 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
+    forwardRef,
     HostListener,
     OnInit,
-    ViewChild,
-    forwardRef
+    ViewChild
 } from '@angular/core';
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -29,6 +29,10 @@ interface DialogRefData {
     styleUrls: ['./thumbnail-details.component.scss']
 })
 export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
+    /** Reference to thumbnail images component */
+    @ViewChild(forwardRef(() => ThumbnailImageComponent))
+    thumbnailImage: ThumbnailImageComponent;
+
     /** @hidden Start index of currently active items */
     currentActiveSlidesStartIndex = 0;
 
@@ -37,18 +41,18 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
 
     /** @hidden Make right navigation button disabled */
     rightButtonDisabled = false;
-
     /** medialist to display */
     mediaList = this.dialogRef.data.mediaList;
+
     /** max limit  */
     maxImages = this.dialogRef.data.maxImages;
 
-    /** Reference to thumbnail images component */
-    @ViewChild(forwardRef(() => ThumbnailImageComponent))
-    thumbnailImage: ThumbnailImageComponent;
-
     /** @hidden */
-    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {}
+    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
+        console.warn(
+            'ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.'
+        );
+    }
 
     /** @hidden */
     ngOnInit(): void {

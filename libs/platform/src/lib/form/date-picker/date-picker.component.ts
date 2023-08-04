@@ -92,21 +92,47 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      * Aria label for the date picker input.
      */
     @Input()
-    dateInputLabel: string;
+    set dateInputLabel(value: string) {
+        console.warn(
+            'Property dateInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
+        );
+        this._dateInputLabel = value;
+    }
 
+    get dateInputLabel(): string {
+        return this._dateInputLabel;
+    }
     /**
      * @deprecated use i18n capabilities instead (being translated in core date picker)
      * Aria label for the datepicker input.
      */
     @Input()
-    dateRangeInputLabel: string;
+    set dateRangeInputLabel(value: string) {
+        console.warn(
+            'Property dateRangeInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
+        );
+        this._dateRangeInputLabel = value;
+    }
+
+    get dateRangeInputLabel(): string {
+        return this._dateRangeInputLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead (being translated in core date picker)
      * Aria label for the button to show/hide the calendar.
      */
     @Input()
-    displayCalendarToggleLabel: string;
+    set displayCalendarToggleLabel(value: string) {
+        console.warn(
+            'Property displayCalendarToggleLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
+        );
+        this._displayCalendarToggleLabel = value;
+    }
+
+    get displayCalendarToggleLabel(): string {
+        return this._displayCalendarToggleLabel;
+    }
 
     /** Enables Today-Selection-Button if true */
     @Input()
@@ -263,14 +289,45 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Output()
     readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
-    /** @hidden */
-    private _datePickerValid = true;
-
     /**
      * @hidden core date-picker as child
      */
     @ViewChild(FdDatePickerComponent)
     fdDatePickerComponent: FdDatePickerComponent<D>;
+
+    /** @hidden */
+    private _datePickerValid = true;
+
+    /** @hidden */
+    private _dateRangeInputLabel: string;
+
+    /** @hidden */
+    private _displayCalendarToggleLabel: string;
+
+    /** @hidden */
+    private _dateInputLabel: string;
+
+    /** @hidden */
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
+        elementRef: ElementRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() @SkipSelf() controlContainer: ControlContainer,
+        @Optional() @Self() public ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
+        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+    }
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -294,28 +351,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     disableRangeEndFunction: (value: D) => boolean = () => false;
-
-    /** @hidden */
-    constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef,
-        @Optional() @Self() public ngControl: NgControl,
-        @Optional() @SkipSelf() controlContainer: ControlContainer,
-        @Optional() @Self() public ngForm: NgForm,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
-        @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {
-        super(_changeDetectorRef, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
-
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-    }
 
     /** @hidden */
     writeValue(value: D | DateRange<D> | null): void {

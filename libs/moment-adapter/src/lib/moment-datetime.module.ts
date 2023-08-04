@@ -10,7 +10,15 @@ import { MOMENT_DATETIME_FORMATS } from './moment-datetime-formats';
 @NgModule({
     providers: [{ provide: DatetimeAdapter, useClass: MomentDatetimeAdapter }]
 })
-export class MomentDatetimeAdapterModule {}
+export class MomentDatetimeAdapterModule {
+    /** @hidden */
+    constructor(private _adapter: DatetimeAdapter<Date>) {
+        console.warn(
+            'MomentDatetimeAdapterModule is deprecated since version 0.20.0 and will be removed in future release.' +
+                ' Use DatetimeAdapterRawModule from @fundamental-ngx/datetime-adapter package instead.'
+        );
+    }
+}
 
 /**
  * @deprecated Use `DatetimeAdapterModule` from `@fundamental-ngx/datetime-adapter` package instead.
@@ -19,4 +27,12 @@ export class MomentDatetimeAdapterModule {}
     imports: [MomentDatetimeAdapterModule],
     providers: [{ provide: DATE_TIME_FORMATS, useValue: MOMENT_DATETIME_FORMATS }]
 })
-export class MomentDatetimeModule {}
+export class MomentDatetimeModule {
+    /** @hidden */
+    constructor(private _adapter: DatetimeAdapter<Date>) {
+        console.warn(
+            'MomentDatetimeModule is deprecated since version 0.20.0 and will be removed in future release.' +
+                ' Use DatetimeAdapterModule from @fundamental-ngx/datetime-adapter package instead.'
+        );
+    }
+}

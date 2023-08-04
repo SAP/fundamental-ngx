@@ -40,4 +40,11 @@ export class AlertConfig implements DynamicComponentConfig {
 
     /** The container that the Alert is appended to. By default, it is appended to the body. */
     container?: HTMLElement | 'body' = 'body';
+
+    /** @hidden */
+    constructor() {
+        console.warn(
+            'AlertConfig is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.'
+        );
+    }
 }
