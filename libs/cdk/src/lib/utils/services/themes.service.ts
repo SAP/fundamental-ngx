@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { warnOnce } from '@fundamental-ngx/core/utils';
+import { warnOnce } from '../helpers';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
 

@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { startWith, takeUntil, take } from 'rxjs/operators';
-import { warnOnce } from '@fundamental-ngx/core/utils';
+import { warnOnce } from '../../helpers';
 import { selectStrategy } from '../../async-strategy';
 import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
