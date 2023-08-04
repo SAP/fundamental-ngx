@@ -15,7 +15,7 @@ export class MomentDatetimeAdapterModule {
     constructor(private _adapter: DatetimeAdapter<Date>) {
         console.warn(
             'MomentDatetimeAdapterModule is deprecated since version 0.20.0 and will be removed in future release.' +
-            ' Use DatetimeAdapterRawModule from @fundamental-ngx/datetime-adapter package instead.'
+                ' Use DatetimeAdapterRawModule from @fundamental-ngx/datetime-adapter package instead.'
         );
     }
 }
@@ -28,12 +28,11 @@ export class MomentDatetimeAdapterModule {
     providers: [{ provide: DATE_TIME_FORMATS, useValue: MOMENT_DATETIME_FORMATS }]
 })
 export class MomentDatetimeModule {
-
     /** @hidden */
     constructor(private _adapter: DatetimeAdapter<Date>) {
         console.warn(
             'MomentDatetimeModule is deprecated since version 0.20.0 and will be removed in future release.' +
-            ' Use DatetimeAdapterModule from @fundamental-ngx/datetime-adapter package instead.'
+                ' Use DatetimeAdapterModule from @fundamental-ngx/datetime-adapter package instead.'
         );
     }
 }

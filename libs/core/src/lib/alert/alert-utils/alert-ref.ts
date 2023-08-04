@@ -21,7 +21,9 @@ export class AlertRef {
 
     /** @hidden */
     constructor() {
-        console.warn('AlertRef is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.');
+        console.warn(
+            'AlertRef is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.'
+        );
         this.afterDismissed = this._afterDismissed.asObservable();
     }
 

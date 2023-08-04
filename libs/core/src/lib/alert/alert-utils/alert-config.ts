@@ -43,6 +43,8 @@ export class AlertConfig implements DynamicComponentConfig {
 
     /** @hidden */
     constructor() {
-        console.warn('AlertConfig is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.');
+        console.warn(
+            'AlertConfig is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.'
+        );
     }
 }

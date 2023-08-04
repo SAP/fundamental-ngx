@@ -22,7 +22,9 @@ export class AlertService {
 
     /** @hidden */
     constructor(private dynamicComponentService: DynamicComponentService) {
-        console.warn('AlertService is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripAlertService instead.');
+        console.warn(
+            'AlertService is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripAlertService instead.'
+        );
     }
 
     /**

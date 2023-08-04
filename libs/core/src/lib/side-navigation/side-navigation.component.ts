@@ -1,5 +1,22 @@
-import { AfterContentInit, AfterViewInit, Component, ContentChild, HostBinding, HostListener, Input, OnInit, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
-import { NestedListDirective, NestedListKeyboardService, NestedListStateService, PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
+import {
+    AfterContentInit,
+    AfterViewInit,
+    Component,
+    ContentChild,
+    HostBinding,
+    HostListener,
+    Input,
+    OnInit,
+    QueryList,
+    ViewChildren,
+    ViewEncapsulation
+} from '@angular/core';
+import {
+    NestedListDirective,
+    NestedListKeyboardService,
+    NestedListStateService,
+    PreparedNestedListComponent
+} from '@fundamental-ngx/core/nested-list';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationModel } from './side-navigation-model';

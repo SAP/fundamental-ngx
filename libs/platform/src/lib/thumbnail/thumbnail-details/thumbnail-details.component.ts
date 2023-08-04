@@ -49,7 +49,9 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
 
     /** @hidden */
     constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
-        console.warn('ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.');
+        console.warn(
+            'ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.'
+        );
     }
 
     /** @hidden */
