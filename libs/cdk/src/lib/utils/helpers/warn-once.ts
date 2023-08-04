@@ -1,9 +1,9 @@
-const callers = new Set();
+const messages = new Set<string>();
 
 /** @hidden */
 export function warnOnce(message: string): void {
-    if (!callers.has(message)) {
+    if (!messages.has(message)) {
         console.warn(message);
-        callers.add(message);
+        messages.add(message);
     }
 }
