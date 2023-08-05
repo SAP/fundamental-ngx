@@ -19,7 +19,7 @@ import {
     PlatformButtonTruncateExampleComponent,
     PlatformButtonTypesExampleComponent
 } from './examples/platform-button-examples.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 import { moduleDeprecationsProvider } from '@fundamental-ngx/core';
 
 const routes: Routes = [
