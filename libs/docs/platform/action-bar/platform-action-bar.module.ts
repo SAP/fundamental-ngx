@@ -17,7 +17,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
 import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
