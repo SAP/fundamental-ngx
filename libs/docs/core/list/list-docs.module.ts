@@ -7,7 +7,7 @@ import {
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-ngx/core/list';
+import {  ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
@@ -89,6 +89,6 @@ const routes: Routes = [
         ListInteractiveExampleComponent,
         ListLoadingExampleComponent
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedListContentDensityDirective), currentComponentProvider('list')]
+    providers: [ currentComponentProvider('list')]
 })
 export class ListDocsModule {}
