@@ -16,7 +16,7 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
-import { DeprecatedDynamicPageCompactDirective, DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import {  DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { TextModule } from '@fundamental-ngx/core/text';
@@ -69,7 +69,7 @@ const routes: Routes = [
         DynamicPageFacetsExampleComponent
     ],
     providers: [
-        moduleDeprecationsProvider(DeprecatedDynamicPageCompactDirective),
+        
         currentComponentProvider('dynamic-page')
     ]
 })

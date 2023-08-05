@@ -14,7 +14,6 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
 import { IgnoreClickOnSelectionModule } from '@fundamental-ngx/cdk/utils';
-import { DeprecatedDynamicPageCompactDirective } from './deprecated-dynamic-page-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { DynamicPageHeaderSubtitleDirective } from './directives/dynamic-page-header-subtitle.directive';
@@ -31,8 +30,7 @@ import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-heade
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
         DynamicPageWrapperDirective,
-        DeprecatedDynamicPageCompactDirective
-    ],
+            ],
     imports: [
         CommonModule,
         ButtonModule,
@@ -54,8 +52,7 @@ import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-heade
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
         DynamicPageWrapperDirective,
-        DeprecatedDynamicPageCompactDirective,
-        DynamicPageHeaderSubtitleDirective,
+                DynamicPageHeaderSubtitleDirective,
         DynamicPageHeaderTitleDirective
     ]
 })
