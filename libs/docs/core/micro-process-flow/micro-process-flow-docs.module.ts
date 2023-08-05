@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {
-    DeprecatedMicroProcessFlowContentDensityDirective,
-    MicroProcessFlowModule
+        MicroProcessFlowModule
 } from '@fundamental-ngx/core/micro-process-flow';
 import { IconModule } from '@fundamental-ngx/core/icon';
 
@@ -62,7 +61,7 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     providers: [
-        moduleDeprecationsProvider(DeprecatedMicroProcessFlowContentDensityDirective),
+        
         currentComponentProvider('micro-process-flow')
     ]
 })
