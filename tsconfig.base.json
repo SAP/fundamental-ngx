@@ -207,7 +207,6 @@
             "@fundamental-ngx/docs/core/object-number": ["libs/docs/core/object-number/index.ts"],
             "@fundamental-ngx/docs/core/object-page": ["libs/docs/core/object-page/index.ts"],
             "@fundamental-ngx/docs/core/object-status": ["libs/docs/core/object-status/index.ts"],
-            "@fundamental-ngx/docs/core/old-content-density": ["libs/docs/core/old-content-density/index.ts"],
             "@fundamental-ngx/docs/core/overflow-layout": ["libs/docs/core/overflow-layout/index.ts"],
             "@fundamental-ngx/docs/core/pagination": ["libs/docs/core/pagination/index.ts"],
             "@fundamental-ngx/docs/core/panel": ["libs/docs/core/panel/index.ts"],

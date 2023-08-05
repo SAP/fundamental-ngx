@@ -155,11 +155,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/core/global-config').then((m) => m.GlobalConfigDocsModule)
             },
             {
-                path: 'old-content-density',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/old-content-density').then((m) => m.ContentDensityDocsModule)
-            },
-            {
                 path: 'content-density',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/core/content-density').then((m) => m.ContentDensityDocsModule)
