@@ -6,7 +6,7 @@ import { InputGroupHeaderComponent } from './input-group-header/input-group-head
 import { InputGroupDocsComponent } from './input-group-docs.component';
 import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { DeprecatedInputGroupCompactDirective, InputGroupModule } from '@fundamental-ngx/core/input-group';
+import {  InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
@@ -25,7 +25,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [examples, InputGroupDocsComponent, InputGroupHeaderComponent],
     providers: [
-        moduleDeprecationsProvider(DeprecatedInputGroupCompactDirective),
+        
         currentComponentProvider('input-group')
     ]
 })
