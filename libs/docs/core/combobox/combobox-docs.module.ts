@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ListModule } from '@fundamental-ngx/core/list';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { ComboboxModule, DeprecatedComboboxContentDensityDirective } from '@fundamental-ngx/core/combobox';
+import { ComboboxModule,  } from '@fundamental-ngx/core/combobox';
 
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
@@ -29,7 +29,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent, ComboboxBylineExampleComponent],
     providers: [
-        moduleDeprecationsProvider(DeprecatedComboboxContentDensityDirective),
+        
         currentComponentProvider('combobox')
     ]
 })
