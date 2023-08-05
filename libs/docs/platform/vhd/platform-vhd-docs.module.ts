@@ -29,7 +29,7 @@ import {
     PlatformVhdTokenExampleComponent
 } from './examples';
 import { PlatformVhdLoadingExampleComponent } from './examples/platform-vhd-loading-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 import { PlatformVhdInitialLoadingExampleComponent } from './examples/initial-loading/platform-vhd-initial-loading-example.component';
 
 const routes: Routes = [
