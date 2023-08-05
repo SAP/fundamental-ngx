@@ -13,7 +13,7 @@ import { PlatformRadioGroupContentExampleComponent } from './examples/platform-r
 import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
 import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
