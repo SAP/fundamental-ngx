@@ -15,7 +15,7 @@ import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-
 import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
 import { MultiInputCustomItemExampleComponent } from './examples/multi-input-custom-item-example/multi-input-custom-item-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { DeprecatedMultiInputCompactDirective, MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import {  MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
@@ -60,7 +60,7 @@ const routes: Routes = [
         MultiInputAddonClickedExampleComponent
     ],
     providers: [
-        moduleDeprecationsProvider(DeprecatedMultiInputCompactDirective),
+        
         currentComponentProvider('multi-input')
     ]
 })

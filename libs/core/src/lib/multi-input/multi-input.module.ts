@@ -11,11 +11,10 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { AutoCompleteModule } from '@fundamental-ngx/cdk/utils';
-import { DeprecatedMultiInputCompactDirective } from './deprecated-multi-input-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [MultiInputComponent, DeprecatedMultiInputCompactDirective],
+    declarations: [MultiInputComponent, ],
     imports: [
         CommonModule,
         TokenModule,
@@ -31,6 +30,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         AutoCompleteModule,
         ContentDensityModule
     ],
-    exports: [MultiInputComponent, DeprecatedMultiInputCompactDirective, ContentDensityModule]
+    exports: [MultiInputComponent,  ContentDensityModule]
 })
 export class MultiInputModule {}
