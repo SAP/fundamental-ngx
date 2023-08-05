@@ -15,8 +15,7 @@ import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { COMPONENTS } from './examples';
 import { SliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
-import { DeprecatedSliderCozyDirective, SliderModule } from '@fundamental-ngx/core/slider';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { SliderModule } from '@fundamental-ngx/core/slider';
 
 const routes: Routes = [
     {
@@ -40,6 +39,6 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [SliderHeaderComponent, SliderDocsComponent, ...COMPONENTS],
-    providers: [moduleDeprecationsProvider(DeprecatedSliderCozyDirective), currentComponentProvider('slider')]
+    providers: [currentComponentProvider('slider')]
 })
 export class SliderDocsModule {}
