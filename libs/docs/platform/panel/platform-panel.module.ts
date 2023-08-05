@@ -14,7 +14,7 @@ import { PlatformPanelFixedHeightExampleComponent } from './examples/platform-pa
 import { PlatformPanelCompactExampleComponent } from './examples/platform-panel-compact-example.component';
 import { PlatformPanelActionsExampleComponent } from './examples/platform-panel-actions-example.component';
 import { PlatformPanelConfigExampleComponent } from './examples/platform-panel-config-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
