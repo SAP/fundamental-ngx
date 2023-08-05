@@ -22,7 +22,6 @@ import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { DeprecatedShellbarCompactDirective } from './deprecated-shellbar-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PortalModule } from '@angular/cdk/portal';
 
@@ -38,8 +37,7 @@ import { PortalModule } from '@angular/cdk/portal';
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
         ShellbarSidenavDirective,
-        DeprecatedShellbarCompactDirective
-    ],
+            ],
     imports: [
         CommonModule,
         PopoverModule,
@@ -67,8 +65,7 @@ import { PortalModule } from '@angular/cdk/portal';
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
         ShellbarSidenavDirective,
-        DeprecatedShellbarCompactDirective,
-        ContentDensityModule
+                ContentDensityModule
     ]
 })
 export class ShellbarModule {}
