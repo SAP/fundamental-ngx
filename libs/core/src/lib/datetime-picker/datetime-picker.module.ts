@@ -12,11 +12,10 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { I18nModule } from '@fundamental-ngx/i18n';
-import { DeprecatedDateTimePickerContentDensityDirective } from './deprecated-date-time-picker-content-density.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [DatetimePickerComponent, DeprecatedDateTimePickerContentDensityDirective],
+    declarations: [DatetimePickerComponent, ],
     imports: [
         CommonModule,
         IconModule,
@@ -32,6 +31,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         FormMessageModule,
         ContentDensityModule
     ],
-    exports: [DatetimePickerComponent, DeprecatedDateTimePickerContentDensityDirective, ContentDensityModule]
+    exports: [DatetimePickerComponent,  ContentDensityModule]
 })
 export class DatetimePickerModule {}
