@@ -11,7 +11,7 @@ import {
 } from './examples/menu-examples.component';
 
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
-import { DeprecatedMenuCompactDirective, MenuModule } from '@fundamental-ngx/core/menu';
+import {  MenuModule } from '@fundamental-ngx/core/menu';
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
@@ -40,6 +40,6 @@ const routes: Routes = [
         MenuWithSubmenuExampleComponent,
         MenuScrollbarExampleComponent
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedMenuCompactDirective), currentComponentProvider('menu')]
+    providers: [ currentComponentProvider('menu')]
 })
 export class MenuDocsModule {}

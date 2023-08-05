@@ -12,7 +12,6 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { DynamicComponentService, InitialFocusModule } from '@fundamental-ngx/cdk/utils';
-import { DeprecatedMenuCompactDirective } from './directives/deprecated-menu-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -27,8 +26,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuTitleDirective,
         SubmenuComponent,
         MenuTriggerDirective,
-        DeprecatedMenuCompactDirective
-    ],
+            ],
     exports: [
         MenuComponent,
         MenuItemComponent,
@@ -39,8 +37,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuTitleDirective,
         MenuAddonDirective,
         MenuTriggerDirective,
-        DeprecatedMenuCompactDirective,
-        ContentDensityModule
+                ContentDensityModule
     ],
     providers: [DynamicComponentService]
 })
