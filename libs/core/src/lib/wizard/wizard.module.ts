@@ -11,7 +11,6 @@ import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.com
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
-import { DeprecatedWizardCompactDirective } from './deprecated-wizard-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { WizardService } from './wizard.service';
@@ -25,8 +24,7 @@ import { WizardService } from './wizard.service';
         WizardStepIndicatorComponent,
         WizardContentComponent,
         WizardNextStepComponent,
-        DeprecatedWizardCompactDirective
-    ],
+            ],
     imports: [
         CommonModule,
         IconModule,
@@ -44,8 +42,7 @@ import { WizardService } from './wizard.service';
         WizardStepIndicatorComponent,
         WizardNextStepComponent,
         WizardContentComponent,
-        DeprecatedWizardCompactDirective,
-        ContentDensityModule
+                ContentDensityModule
     ],
     providers: [WizardService]
 })

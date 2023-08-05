@@ -15,7 +15,7 @@ import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.c
 import { WizardBranchingExampleComponent } from './examples/wizard-branching-example.component';
 import { WizardDialogExampleComponent } from './examples/wizard-dialog-example.component';
 import { WizardNgForExampleComponent } from './examples/wizard-ngfor-example.component';
-import { DeprecatedWizardCompactDirective, WizardModule } from '@fundamental-ngx/core/wizard';
+import {  WizardModule } from '@fundamental-ngx/core/wizard';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { FormGroupModule, FormModule } from '@fundamental-ngx/core/form';
@@ -69,6 +69,6 @@ const routes: Routes = [
         WizardVisibleSummaryExampleComponent,
         WizardLoadingExampleComponent
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedWizardCompactDirective), currentComponentProvider('wizard')]
+    providers: [ currentComponentProvider('wizard')]
 })
 export class WizardDocsModule {}
