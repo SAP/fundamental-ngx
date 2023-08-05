@@ -11,7 +11,7 @@ import { FileUploaderMaxExampleComponent } from './examples/file-uploader-max-ex
 import { FileUploaderCompactExampleComponent } from './examples/file-uploader-compact-example/file-uploader-compact-example.component';
 import { FileUploaderMinExampleComponent } from './examples/file-uploader-min-example/file-uploader-min-example.component';
 import { FileUploaderTruncationExampleComponent } from './examples/file-uploader-truncation-example/file-uploader-truncation-example.component';
-import { DeprecatedFileUploaderContentDensityDirective, FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
+import {  FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
@@ -40,7 +40,7 @@ const routes: Routes = [
         FileUploaderTruncationExampleComponent
     ],
     providers: [
-        moduleDeprecationsProvider(DeprecatedFileUploaderContentDensityDirective),
+        
         currentComponentProvider('file-uploader')
     ]
 })
