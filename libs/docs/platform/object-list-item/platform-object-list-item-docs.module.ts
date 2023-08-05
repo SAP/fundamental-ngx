@@ -24,7 +24,7 @@ import { PlatformObjectListItemBorderLessExampleComponent } from './examples/pla
 import { PlatformObjectListItemWithRowSelectionExampleComponent } from './examples/platform-object-list-item-with-row-selection-example.component';
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
