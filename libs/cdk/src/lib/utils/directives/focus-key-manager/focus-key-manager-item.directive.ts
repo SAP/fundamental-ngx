@@ -1,35 +1,14 @@
 import { FocusableOption, FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, forwardRef, HostBinding, HostListener, Input } from '@angular/core';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
 import { FocusKeyManagerListDirective } from './focus-key-manager-list.directive';
 import { FOCUSABLE_ITEM } from './focus-key-manager.tokens';
-
-@Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-focus-key-manager-item], [fdFocusKeyManagerItem]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel(
-                '[fdkFocusKeyManagerItem]',
-                '[fd-focus-key-manager-item], [fdFocusKeyManagerItem]'
-            )
-        }
-    ]
-})
-export class DeprecatedFocusKeyManagerItemDirective extends DeprecatedSelector {}
 
 /** Directive to apply Angular Material FocusKeyManager to lists.
  * To be used with FocusKeyManagerItemDirective
  */
 @Directive({
-    selector: '[fdkFocusKeyManagerItem], [fd-focus-key-manager-item], [fdFocusKeyManagerItem]',
+    selector: '[fdkFocusKeyManagerItem]',
     standalone: true,
     providers: [{ provide: FOCUSABLE_ITEM, useExisting: forwardRef(() => FocusKeyManagerItemDirective) }]
 })

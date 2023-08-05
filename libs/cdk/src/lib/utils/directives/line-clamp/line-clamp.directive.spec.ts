@@ -5,9 +5,11 @@ import { By } from '@angular/platform-browser';
 import { LineClampDirective, LineClampTargetDirective } from './line-clamp.directive';
 
 @Component({
-    template: `<div fd-lineclamp [fdLineclampState]="true" [fdLineClampLines]="rows">
-        <div fd-lineclamp-target [fdLineClampTargetText]="text"></div>
-    </div>`
+    template: `<div fdkLineClamp [fdLineclampState]="true" [fdLineClampLines]="rows">
+        <div fdkLineClampTarget [fdLineClampTargetText]="text"></div>
+    </div>`,
+    standalone: true,
+    imports: [LineClampDirective, LineClampTargetDirective]
 })
 class TestComponent {
     @Input()
@@ -23,8 +25,7 @@ describe('LineClampDirective', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [LineClampDirective, LineClampTargetDirective]
+            imports: [TestComponent]
         });
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;

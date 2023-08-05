@@ -15,24 +15,6 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
 import { RtlService } from '../../services/rtl.service';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
-
-@Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdResize], [fd-resize]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkResize]', '[fdResize], [fd-resize]')
-        }
-    ]
-})
-export class DeprecatedResizeDirective extends DeprecatedSelector {}
 
 interface ResizeMove {
     x: number;
@@ -40,7 +22,7 @@ interface ResizeMove {
 }
 
 @Directive({
-    selector: '[fdkResize], [fdResize], [fd-resize]',
+    selector: '[fdkResize]',
     standalone: true
 })
 export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
