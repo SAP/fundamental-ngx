@@ -15,4 +15,3 @@ export * from './directives/table-popover.directive';
 export * from './table-wrapper.component';
 export * from './table.service';
 export * from './deprecated-table-compact.directive';
-export * from './deprecated-table-condensed.directive';

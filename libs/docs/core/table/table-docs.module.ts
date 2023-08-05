@@ -33,11 +33,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
-import {
-    DeprecatedTableCompactDirective,
-    DeprecatedTableCondensedDirective,
-    TableModule
-} from '@fundamental-ngx/core/table';
+import { DeprecatedTableCompactDirective, TableModule } from '@fundamental-ngx/core/table';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
@@ -109,10 +105,6 @@ const routes: Routes = [
         TableLoadingExampleComponent,
         TableFixedExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedTableCompactDirective),
-        moduleDeprecationsProvider(DeprecatedTableCondensedDirective),
-        currentComponentProvider('table')
-    ]
+    providers: [moduleDeprecationsProvider(DeprecatedTableCompactDirective), currentComponentProvider('table')]
 })
 export class TableDocsModule {}
