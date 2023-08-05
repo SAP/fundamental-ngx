@@ -6,11 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
-import {
-    DATA_PROVIDERS,
-    DataProvider,
-    platformContentDensityModuleDeprecationsProvider
-} from '@fundamental-ngx/platform/shared';
+import { DATA_PROVIDERS, DataProvider } from '@fundamental-ngx/platform/shared';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
@@ -81,7 +77,6 @@ const routes: Routes = [
     providers: [
         { provide: DATA_PROVIDERS, useClass: DataProvider as any },
         { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true },
-        platformContentDensityModuleDeprecationsProvider('fdp-multi-input'),
         currentComponentProvider('multi-input')
     ]
 })
