@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ActionSheetModule, DeprecatedActionSheetCompactDirective } from '@fundamental-ngx/core/action-sheet';
+import { ActionSheetModule,  } from '@fundamental-ngx/core/action-sheet';
 import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-header.component';
 import { ActionSheetDocsComponent } from './action-sheet-docs.component';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
@@ -24,7 +24,7 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [ActionSheetDocsComponent, ActionSheetHeaderComponent, examples],
     providers: [
-        moduleDeprecationsProvider(DeprecatedActionSheetCompactDirective),
+        
         currentComponentProvider('action-sheet')
     ]
 })
