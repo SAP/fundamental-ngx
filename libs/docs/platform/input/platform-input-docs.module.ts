@@ -14,7 +14,7 @@ import { PlatformInputExampleComponent } from './examples/platform-input-example
 import { PlatformInputReactiveValidationExampleComponent } from './examples/platform-input-reactive-validation-example.component';
 import { PlatformInputAutoCompleteValidationExampleComponent } from './examples/platform-input-auto-complete-validation-example.component';
 import { PlatformInputReactiveMinMaxValidationExampleComponent } from './examples/platform-input-reactive-min-max-validation-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
