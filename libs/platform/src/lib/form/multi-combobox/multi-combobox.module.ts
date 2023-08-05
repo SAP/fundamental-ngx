@@ -14,7 +14,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -34,10 +33,9 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         StandardListItemModule,
         PlatformAutoCompleteModule,
         I18nModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],
     providers: [DynamicComponentService],
-    exports: [MultiComboboxComponent, TemplateModule, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    exports: [MultiComboboxComponent, TemplateModule, ContentDensityModule]
 })
 export class PlatformMultiComboboxModule {}

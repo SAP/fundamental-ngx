@@ -98,6 +98,6 @@ const routes: Routes = [
         PlatformListFreeContentExampleComponent,
         PlatformListLoadingExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fd-list'), currentComponentProvider('list')]
+    providers: [currentComponentProvider('list')]
 })
 export class PlatformListDocsModule {}

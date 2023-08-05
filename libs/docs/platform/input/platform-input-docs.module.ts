@@ -15,7 +15,6 @@ import { PlatformInputReactiveValidationExampleComponent } from './examples/plat
 import { PlatformInputAutoCompleteValidationExampleComponent } from './examples/platform-input-auto-complete-validation-example.component';
 import { PlatformInputReactiveMinMaxValidationExampleComponent } from './examples/platform-input-reactive-min-max-validation-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -47,6 +46,6 @@ const routes: Routes = [
         PlatformInputAutoCompleteValidationExampleComponent,
         PlatformInputReactiveMinMaxValidationExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-input'), currentComponentProvider('input')]
+    providers: [currentComponentProvider('input')]
 })
 export class PlatformInputDocsModule {}

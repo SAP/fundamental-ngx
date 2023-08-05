@@ -14,7 +14,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { ComboboxComponent } from './combobox/combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [ComboboxComponent],
@@ -29,10 +28,9 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         PlatformAutoCompleteModule,
         FormModule,
         I18nModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],
     providers: [DynamicComponentService],
-    exports: [ComboboxComponent, TemplateModule, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    exports: [ComboboxComponent, TemplateModule, ContentDensityModule]
 })
 export class PlatformComboboxModule {}

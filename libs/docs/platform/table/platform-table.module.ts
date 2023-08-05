@@ -162,12 +162,7 @@ const routes: Routes = [
         AdvancedExamplesDocsComponent,
         AdvancedScrollingExampleComponent
     ],
-    providers: [
-        RtlService,
-        platformContentDensityModuleDeprecationsProvider('fdp-table'),
-        currentComponentProvider('table'),
-        ExampleChildService
-    ],
+    providers: [RtlService, currentComponentProvider('table'), ExampleChildService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PlatformTableDocsModule {}

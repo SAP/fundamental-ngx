@@ -12,7 +12,6 @@ import { PlatformDocsSplitMenuButtonTypesComponent } from './examples/platform-s
 import { PlatformDocsSplitMenuButtonIconsComponent } from './examples/platform-split-button-icons-example.component';
 import { PlatformDocsSplitMenuButtonBehaviorComponent } from './examples/platform-split-button-behaviors-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -39,9 +38,6 @@ const routes: Routes = [
         PlatformDocsSplitMenuButtonTypesComponent,
         PlatformDocsSplitMenuButtonIconsComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-split-menu-button'),
-        currentComponentProvider('split-menu-button')
-    ]
+    providers: [currentComponentProvider('split-menu-button')]
 })
 export class PlatformSplitMenuButtonDocsModule {}

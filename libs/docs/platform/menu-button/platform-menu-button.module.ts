@@ -11,7 +11,6 @@ import { PlatformMenuButtonCompactExampleComponent } from './examples/platform-m
 import { PlatformMenuButtonCozyExampleComponent } from './examples/platform-menu-button-cozy-examples.component';
 import { PlatformMenuButtonExampleComponent } from './examples/platform-menu-button-examples.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -38,9 +37,6 @@ const routes: Routes = [
         PlatformMenuButtonCozyExampleComponent,
         PlatformMenuButtonExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-menu-button'),
-        currentComponentProvider('menu-button')
-    ]
+    providers: [currentComponentProvider('menu-button')]
 })
 export class PlatformMenuButtonDocsModule {}

@@ -15,7 +15,6 @@ import { PlatformPanelCompactExampleComponent } from './examples/platform-panel-
 import { PlatformPanelActionsExampleComponent } from './examples/platform-panel-actions-example.component';
 import { PlatformPanelConfigExampleComponent } from './examples/platform-panel-config-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -40,6 +39,6 @@ const routes: Routes = [
         PlatformPanelActionsExampleComponent,
         PlatformPanelConfigExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-panel'), currentComponentProvider('panel')]
+    providers: [currentComponentProvider('panel')]
 })
 export class PlatformPanelDocsModule {}

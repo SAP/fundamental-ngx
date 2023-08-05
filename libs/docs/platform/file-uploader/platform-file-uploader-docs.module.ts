@@ -17,7 +17,6 @@ import { PlatformFileUploaderCompactExampleComponent } from './examples/platform
 import { PlatformFileUploaderFileTypesExampleComponent } from './examples/platform-file-uploader-file-types-example.component';
 import { PlatformFileUploaderReactiveExampleComponent } from './examples/platform-file-uploader-reactive-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -49,9 +48,6 @@ const routes: Routes = [
         PlatformButtonModule,
         FormsModule
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-file-uploader'),
-        currentComponentProvider('file-uploader')
-    ]
+    providers: [currentComponentProvider('file-uploader')]
 })
 export class PlatformFileUploaderDocsModule {}

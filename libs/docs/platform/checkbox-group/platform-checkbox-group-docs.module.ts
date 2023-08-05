@@ -15,7 +15,6 @@ import { PlatformCheckboxGroupListComponent } from './examples/platform-checkbox
 import { PlatformCheckboxGroupContentCheckboxComponent } from './examples/platform-checkbox-group-content-checkbox.component';
 import { PlatformCheckboxGroupListObjectComponent } from './examples/platform-checkbox-group-list-object.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -45,9 +44,6 @@ const routes: Routes = [
         PlatformCheckboxGroupListObjectComponent,
         PlatformCheckboxGroupContentCheckboxComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-checkbox-group'),
-        currentComponentProvider('checkbox-group')
-    ]
+    providers: [currentComponentProvider('checkbox-group')]
 })
 export class PlatformCheckboxGroupDocsModule {}

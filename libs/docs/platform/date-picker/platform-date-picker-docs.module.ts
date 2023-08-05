@@ -16,7 +16,6 @@ import { PlatformDatePickerDisableFuncExampleComponent } from './examples/platfo
 import { PlatformDatePickerFormatExampleComponent } from './examples/platform-date-picker-format-example.component';
 import { PlatformDatePickerUpdateOnBlurExampleComponent } from './examples/platform-date-picker-update-on-blur-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -48,9 +47,6 @@ const routes: Routes = [
         FdpFormGroupModule
     ],
     exports: [RouterModule],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-date-picker'),
-        currentComponentProvider('date-picker')
-    ]
+    providers: [currentComponentProvider('date-picker')]
 })
 export class PlatformDatePickerDocsModule {}

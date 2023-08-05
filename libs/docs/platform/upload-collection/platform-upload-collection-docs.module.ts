@@ -18,7 +18,6 @@ import { PlatformUploadCollectionReadonlyExampleComponent } from './examples/pla
 import { PlatformUploadCollectionTurnOffExampleComponent } from './examples/platform-upload-collection-turn-off-example.component';
 import { PlatformUploadCollectionHeaderComponent } from './platform-upload-collection-header/platform-upload-collection-header.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -42,9 +41,6 @@ const routes: Routes = [
         PlatformUploadCollectionReadonlyExampleComponent,
         PlatformUploadCollectionTurnOffExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-upload-collection'),
-        currentComponentProvider('upload-collection')
-    ]
+    providers: [currentComponentProvider('upload-collection')]
 })
 export class PlatformUploadCollectionDocsModule {}

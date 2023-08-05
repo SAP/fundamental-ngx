@@ -46,7 +46,6 @@ const routes: Routes = [
         PlatformButtonStateExampleComponent
     ],
     providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-button'),
         moduleDeprecationsProvider(DeprecatedButtonAriaPressed),
         moduleDeprecationsProvider(DeprecatedButtonAriaSelected),
         currentComponentProvider('button')

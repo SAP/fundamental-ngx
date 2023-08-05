@@ -49,6 +49,6 @@ const routes: Routes = [
         PlatformMenuXPositionExampleComponent,
         PlatformMenuWithIconsExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-menu'), currentComponentProvider('menu')]
+    providers: [currentComponentProvider('menu')]
 })
 export class PlatformMenuDocsModule {}

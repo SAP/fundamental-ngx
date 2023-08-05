@@ -6,7 +6,6 @@ import { FormControlModule } from '@fundamental-ngx/core/form';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { TextAreaComponent } from './text-area.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
@@ -16,11 +15,10 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ReactiveFormsModule,
         FormControlModule,
         PipeModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule,
         I18nModule
     ],
-    exports: [TextAreaComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule],
+    exports: [TextAreaComponent, ContentDensityModule],
     declarations: [TextAreaComponent]
 })
 export class PlatformTextAreaModule {}

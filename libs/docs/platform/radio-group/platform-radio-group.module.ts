@@ -14,7 +14,6 @@ import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-
 import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -44,10 +43,6 @@ const routes: Routes = [
         PlatformRadioGroupListExampleComponent,
         PlatformRadioGroupListItemsExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-radio-group'),
-        platformContentDensityModuleDeprecationsProvider('fdp-radio-button'),
-        currentComponentProvider('radio-group')
-    ]
+    providers: [currentComponentProvider('radio-group')]
 })
 export class PlatformRadioGroupDocsModule {}

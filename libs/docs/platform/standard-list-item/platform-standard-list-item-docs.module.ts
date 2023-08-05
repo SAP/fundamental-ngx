@@ -67,10 +67,6 @@ const routes: Routes = [
         PlatformNonByLineStandardListItemExampleComponent,
         PlatformStandardListUnreadExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-list'),
-        platformContentDensityModuleDeprecationsProvider('fdp-standard-list-item'),
-        currentComponentProvider('standard-list-item')
-    ]
+    providers: [currentComponentProvider('standard-list-item')]
 })
 export class PlatformStandardListItemDocsModule {}

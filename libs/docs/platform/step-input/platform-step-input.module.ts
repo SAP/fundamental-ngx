@@ -12,7 +12,6 @@ import { PlatformNumberStepInputFormExampleComponent } from './examples/platform
 import { PlatformNumberStepInputTemplateFormExampleComponent } from './examples/platform-number-step-input-template-example.component';
 import { PlatformNumberStepInputStateExampleComponent } from './examples/platform-number-step-input-state-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -40,9 +39,6 @@ const routes: Routes = [
         PlatformNumberStepInputTemplateFormExampleComponent,
         PlatformNumberStepInputStateExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-number-step-input'),
-        currentComponentProvider('step-input')
-    ]
+    providers: [currentComponentProvider('step-input')]
 })
 export class PlatformStepInputDocsModule {}

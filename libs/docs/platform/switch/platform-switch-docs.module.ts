@@ -13,7 +13,6 @@ import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/swi
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 import { SwitchConfigExampleComponent } from './examples/switch-config-example/switch-config-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -37,6 +36,6 @@ const routes: Routes = [
         SwitchSizesExampleComponent,
         SwitchConfigExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-switch'), currentComponentProvider('switch')]
+    providers: [currentComponentProvider('switch')]
 })
 export class PlatformSwitchDocsModule {}

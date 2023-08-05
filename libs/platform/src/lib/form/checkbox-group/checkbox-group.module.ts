@@ -6,18 +6,10 @@ import { FormGroupModule } from '@fundamental-ngx/core/form';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { PlatformCheckboxModule } from '../checkbox/checkbox.module';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        PlatformCheckboxModule,
-        FormsModule,
-        FormGroupModule,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
-    exports: [CheckboxGroupComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule],
+    imports: [CommonModule, PlatformCheckboxModule, FormsModule, FormGroupModule, ContentDensityModule],
+    exports: [CheckboxGroupComponent, ContentDensityModule],
     declarations: [CheckboxGroupComponent]
 })
 export class PlatformCheckboxGroupModule {}

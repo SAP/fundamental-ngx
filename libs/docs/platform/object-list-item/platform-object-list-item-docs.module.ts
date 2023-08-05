@@ -25,7 +25,6 @@ import { PlatformObjectListItemWithRowSelectionExampleComponent } from './exampl
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -61,10 +60,6 @@ const routes: Routes = [
         PlatformObjectListItemWithRowNavigationExampleComponent,
         PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-list'),
-        platformContentDensityModuleDeprecationsProvider('fdp-object-list-item'),
-        currentComponentProvider('object-list-item')
-    ]
+    providers: [currentComponentProvider('object-list-item')]
 })
 export class PlatformObjectListItemDocsModule {}

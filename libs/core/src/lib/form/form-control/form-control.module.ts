@@ -7,16 +7,7 @@ import { TextareaFormControlDirective } from './textarea-form-control.directive'
 
 @NgModule({
     imports: [CommonModule, ContentDensityModule],
-    exports: [
-        FormControlComponent,
-        InputFormControlDirective,
-        TextareaFormControlDirective,
-        ContentDensityModule
-    ],
-    declarations: [
-        FormControlComponent,
-        InputFormControlDirective,
-        TextareaFormControlDirective,
-    ]
+    exports: [FormControlComponent, InputFormControlDirective, TextareaFormControlDirective, ContentDensityModule],
+    declarations: [FormControlComponent, InputFormControlDirective, TextareaFormControlDirective]
 })
 export class FormControlModule {}

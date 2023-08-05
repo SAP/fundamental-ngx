@@ -55,6 +55,6 @@ const routes: Routes = [
         SliderFormFieldExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-slider'), currentComponentProvider('slider')]
+    providers: [currentComponentProvider('slider')]
 })
 export class PlatformSliderDocsModule {}

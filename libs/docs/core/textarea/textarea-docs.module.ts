@@ -35,8 +35,6 @@ const routes: Routes = [
         TextareaFormGroupExampleComponent,
         TextareaInlineHelpExampleComponent
     ],
-    providers: [
-        currentComponentProvider('textarea')
-    ]
+    providers: [currentComponentProvider('textarea')]
 })
 export class TextareaDocsModule {}

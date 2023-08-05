@@ -28,7 +28,6 @@ import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-fo
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -53,7 +52,6 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: [
         { provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true },
-        platformContentDensityModuleDeprecationsProvider('fdp-multi-combobox'),
         currentComponentProvider('multi-combobox')
     ],
     declarations: [

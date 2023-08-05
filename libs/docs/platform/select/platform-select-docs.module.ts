@@ -22,7 +22,6 @@ import { PlatformSelectColumnsExampleComponent } from './examples/platform-selec
 import { PlatformSelectNoneExampleComponent } from './examples/platform-select-none/platform-select-none-example.component';
 import { PlatformSelectNoWrapExampleComponent } from './examples/platform-select-nowrap/platform-select-nowrap-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -60,6 +59,6 @@ const routes: Routes = [
         PlatformSelectNoneExampleComponent,
         PlatformSelectNoWrapExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-select'), currentComponentProvider('select')]
+    providers: [currentComponentProvider('select')]
 })
 export class PlatformSelectDocsModules {}

@@ -21,7 +21,6 @@ import { PlatformInputGroupCompactExampleComponent } from './examples/platform-i
 import { PlatformInputGroupDisabledExampleComponent } from './examples/platform-input-group-disabled-example.component';
 import { PlatformInputGroupFormExampleComponent } from './examples/platform-input-group-form-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -52,10 +51,6 @@ const routes: Routes = [
         PlatformInputGroupDisabledExampleComponent,
         PlatformInputGroupFormExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-input-group'),
-        platformContentDensityModuleDeprecationsProvider('fdp-input-group-addon-body'),
-        currentComponentProvider('input-group')
-    ]
+    providers: [currentComponentProvider('input-group')]
 })
 export class PlatformInputGroupDocsModule {}

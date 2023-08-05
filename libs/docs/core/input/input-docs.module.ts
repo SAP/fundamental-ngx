@@ -35,8 +35,6 @@ const routes: Routes = [
         InputFormGroupExampleComponent,
         InputInlineHelpExampleComponent
     ],
-    providers: [
-        currentComponentProvider('input')
-    ]
+    providers: [currentComponentProvider('input')]
 })
 export class InputDocsModule {}

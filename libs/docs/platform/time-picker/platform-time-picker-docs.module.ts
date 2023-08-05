@@ -13,7 +13,6 @@ import { PlatformTimePickerBasicExampleComponent } from './examples/platform-tim
 import { PlatformTimePickerReactiveExampleComponent } from './examples/platform-time-picker-reactive-example.component';
 import { PlatformTimePickerTemplateExampleComponent } from './examples/platform-time-picker-template-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -42,9 +41,6 @@ const routes: Routes = [
         PlatformTimePickerReactiveExampleComponent,
         PlatformTimePickerTemplateExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-time-picker'),
-        currentComponentProvider('time-picker')
-    ]
+    providers: [currentComponentProvider('time-picker')]
 })
 export class PlatformTimePickerDocsModule {}

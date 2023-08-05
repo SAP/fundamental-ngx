@@ -70,9 +70,6 @@ const routes: Routes = [
         PlatformVhdStrategyLabelExampleComponent,
         PlatformVhdInitialLoadingExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-value-help-dialog'),
-        currentComponentProvider('vhd')
-    ]
+    providers: [currentComponentProvider('vhd')]
 })
 export class PlatformVhdDocsModule {}

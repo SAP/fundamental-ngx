@@ -19,7 +19,6 @@ import { PlatformTextareaCounterExampleComponent } from './examples/platform-tex
 import { PlatformTextareaCounterTemplateExampleComponent } from './examples/platform-textarea-counter-template-example.component';
 import { PlatformTextareaAutogrowExampleComponent } from './examples/platform-textarea-autogrow-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -50,6 +49,6 @@ const routes: Routes = [
         PlatformTextareaCounterTemplateExampleComponent,
         PlatformTextareaAutogrowExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-textarea'), currentComponentProvider('textarea')]
+    providers: [currentComponentProvider('textarea')]
 })
 export class PlatformTextareaDocsModule {}

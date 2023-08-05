@@ -25,7 +25,6 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { I18nModule } from '@fundamental-ngx/i18n';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
@@ -74,17 +73,10 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         InfiniteScrollModule,
         PlatformSearchFieldModule,
         ContentDensityModule,
-        PlatformContentDensityDeprecationsModule,
         ScrollbarModule,
         SkeletonModule,
         RepeatModule
     ],
-    exports: [
-        PlatformValueHelpDialogComponent,
-        VhdFilterComponent,
-        VhdSearchComponent,
-        ContentDensityModule,
-        PlatformContentDensityDeprecationsModule
-    ]
+    exports: [PlatformValueHelpDialogComponent, VhdFilterComponent, VhdSearchComponent, ContentDensityModule]
 })
 export class PlatformValueHelpDialogModule {}

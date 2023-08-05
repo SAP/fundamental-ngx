@@ -19,7 +19,6 @@ import { PlatformSearchFieldCategoriesExampleComponent } from './examples/platfo
 import { PlatformSearchFieldDataSourceExampleComponent } from './examples/platform-search-field-data-source-example.component';
 import { PlatformSearchFieldMobileExampleComponent } from './examples/platform-search-field-mobile/platform-search-field-mobile-example.component';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -45,7 +44,6 @@ const routes: Routes = [
     ],
     providers: [
         { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true },
-        platformContentDensityModuleDeprecationsProvider('fdp-search-field'),
         currentComponentProvider('search-field')
     ]
 })
