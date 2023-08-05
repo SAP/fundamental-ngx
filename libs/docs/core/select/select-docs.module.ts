@@ -16,8 +16,7 @@ import { SelectModeExampleComponent } from './examples/select-mode-example/selec
 import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
 import { SelectCustomComparatorExample } from './examples/select-custom-comparator-example/select-custom-comparator-example.component';
 import {
-    DeprecatedSelectCompactDirective,
-    DeprecatedSelectCSSClasses,
+        DeprecatedSelectCSSClasses,
     SelectModule
 } from '@fundamental-ngx/core/select';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -61,7 +60,7 @@ const routes: Routes = [
         SelectCustomComparatorExample
     ],
     providers: [
-        moduleDeprecationsProvider(DeprecatedSelectCompactDirective),
+        
         moduleDeprecationsProvider(DeprecatedSelectCSSClasses),
         currentComponentProvider('select')
     ]
