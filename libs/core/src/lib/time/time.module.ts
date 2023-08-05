@@ -8,12 +8,11 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { TimeColumnComponent } from './time-column/time-column.component';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
-import { DeprecatedTimeContentDensityDirective } from './deprecated-time-content-density.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
-    declarations: [TimeComponent, TimeColumnComponent, DeprecatedTimeContentDensityDirective],
+    declarations: [TimeComponent, TimeColumnComponent, ],
     imports: [
         CommonModule,
         FormsModule,
@@ -24,6 +23,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ContentDensityModule,
         I18nModule
     ],
-    exports: [TimeComponent, TimeColumnComponent, DeprecatedTimeContentDensityDirective, ContentDensityModule]
+    exports: [TimeComponent, TimeColumnComponent,  ContentDensityModule]
 })
 export class TimeModule {}

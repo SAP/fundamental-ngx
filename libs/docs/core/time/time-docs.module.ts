@@ -16,7 +16,7 @@ import { TimeSizesExampleComponent } from './examples/time-sizes-example.compone
 import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example/time-no-spinners-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { DeprecatedTimeContentDensityDirective, TimeModule } from '@fundamental-ngx/core/time';
+import {  TimeModule } from '@fundamental-ngx/core/time';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
@@ -46,6 +46,6 @@ const routes: Routes = [
         TimeNoSpinnersExampleComponent,
         TimeSizesExampleComponent
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedTimeContentDensityDirective), currentComponentProvider('time')]
+    providers: [ currentComponentProvider('time')]
 })
 export class TimeDocsModule {}
