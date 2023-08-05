@@ -12,10 +12,9 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { PaginationComponent } from './pagination.component';
 import { PaginationService } from './pagination.service';
-import { DeprecatedPaginationCompactDirective } from './deprecated-pagination-compact.directive';
 
 @NgModule({
-    declarations: [PaginationComponent, DeprecatedPaginationCompactDirective],
+    declarations: [PaginationComponent, ],
     imports: [
         CommonModule,
         ButtonModule,
@@ -29,6 +28,6 @@ import { DeprecatedPaginationCompactDirective } from './deprecated-pagination-co
         ContentDensityModule
     ],
     providers: [PaginationService],
-    exports: [PaginationComponent, DeprecatedPaginationCompactDirective]
+    exports: [PaginationComponent, ]
 })
 export class PaginationModule {}
