@@ -12,7 +12,7 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [TimePickerComponent, ],
+    declarations: [TimePickerComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -23,12 +23,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ContentDensityModule,
         I18nModule
     ],
-    exports: [
-        TimePickerComponent,
-        PopoverModule,
-        InputGroupModule,
-        TimeModule,
-                ContentDensityModule
-    ]
+    exports: [TimePickerComponent, PopoverModule, InputGroupModule, TimeModule, ContentDensityModule]
 })
 export class TimePickerModule {}

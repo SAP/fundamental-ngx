@@ -22,8 +22,8 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { DatePickerModule,  } from '@fundamental-ngx/core/date-picker';
-import { moduleDeprecationsProvider, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
 import { DatePickerDisableFocusScrollExampleComponent } from './examples/date-picker-disable-focus-scroll-example.component';
 
@@ -69,9 +69,6 @@ const routes: Routes = [
         DatePickerUpdateOnBlurExampleComponent,
         DatePickerDisableFocusScrollExampleComponent
     ],
-    providers: [
-        
-        currentComponentProvider('date-picker')
-    ]
+    providers: [currentComponentProvider('date-picker')]
 })
 export class DatePickerDocsModule {}

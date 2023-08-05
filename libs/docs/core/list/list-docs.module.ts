@@ -7,12 +7,12 @@ import {
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import {  ListModule } from '@fundamental-ngx/core/list';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
-import { DragAndDropModule, moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
+import { DragAndDropModule, RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -89,6 +89,6 @@ const routes: Routes = [
         ListInteractiveExampleComponent,
         ListLoadingExampleComponent
     ],
-    providers: [ currentComponentProvider('list')]
+    providers: [currentComponentProvider('list')]
 })
 export class ListDocsModule {}

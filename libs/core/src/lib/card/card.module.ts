@@ -42,8 +42,8 @@ const components = [
     CardKpiAnalyticsLabelDirective,
     CardKpiAnalyticsContentDirective,
     CardFooterComponent,
-    CardFooterActionItemDirective,
-    ];
+    CardFooterActionItemDirective
+];
 
 @NgModule({
     declarations: [...components],

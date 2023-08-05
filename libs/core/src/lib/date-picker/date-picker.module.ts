@@ -14,7 +14,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { BarModule } from '@fundamental-ngx/core/bar';
 
 @NgModule({
-    declarations: [DatePickerComponent, ],
+    declarations: [DatePickerComponent],
     imports: [
         CommonModule,
         IconModule,
@@ -28,6 +28,6 @@ import { BarModule } from '@fundamental-ngx/core/bar';
         BarModule,
         ContentDensityModule
     ],
-    exports: [DatePickerComponent,  ContentDensityModule]
+    exports: [DatePickerComponent, ContentDensityModule]
 })
 export class DatePickerModule {}

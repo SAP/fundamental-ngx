@@ -9,7 +9,7 @@ import { StepInputComponent } from './step-input.component';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [StepInputComponent, ],
+    declarations: [StepInputComponent],
     imports: [
         CommonModule,
         ButtonModule,
@@ -19,6 +19,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ContentDensityModule,
         I18nModule
     ],
-    exports: [StepInputComponent,  ContentDensityModule]
+    exports: [StepInputComponent, ContentDensityModule]
 })
 export class StepInputModule {}

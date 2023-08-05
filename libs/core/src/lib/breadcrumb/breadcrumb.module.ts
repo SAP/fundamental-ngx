@@ -28,12 +28,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ButtonModule,
         I18nModule
     ],
-    exports: [
-        BreadcrumbComponent,
-        BreadcrumbItemComponent,
-        LinkModule,
-                ContentDensityModule
-    ],
-    declarations: [BreadcrumbComponent, BreadcrumbItemComponent, ]
+    exports: [BreadcrumbComponent, BreadcrumbItemComponent, LinkModule, ContentDensityModule],
+    declarations: [BreadcrumbComponent, BreadcrumbItemComponent]
 })
 export class BreadcrumbModule {}

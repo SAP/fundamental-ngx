@@ -25,8 +25,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuInteractiveDirective,
         MenuTitleDirective,
         SubmenuComponent,
-        MenuTriggerDirective,
-            ],
+        MenuTriggerDirective
+    ],
     exports: [
         MenuComponent,
         MenuItemComponent,
@@ -37,7 +37,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MenuTitleDirective,
         MenuAddonDirective,
         MenuTriggerDirective,
-                ContentDensityModule
+        ContentDensityModule
     ],
     providers: [DynamicComponentService]
 })

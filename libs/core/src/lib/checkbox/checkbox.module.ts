@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [CheckboxComponent, ],
+    declarations: [CheckboxComponent],
     imports: [CommonModule, FormsModule, ContentDensityModule],
-    exports: [CheckboxComponent,  ContentDensityModule]
+    exports: [CheckboxComponent, ContentDensityModule]
 })
 export class CheckboxModule {}

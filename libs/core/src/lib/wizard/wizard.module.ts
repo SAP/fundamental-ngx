@@ -23,8 +23,8 @@ import { WizardService } from './wizard.service';
         WizardStepComponent,
         WizardStepIndicatorComponent,
         WizardContentComponent,
-        WizardNextStepComponent,
-            ],
+        WizardNextStepComponent
+    ],
     imports: [
         CommonModule,
         IconModule,
@@ -42,7 +42,7 @@ import { WizardService } from './wizard.service';
         WizardStepIndicatorComponent,
         WizardNextStepComponent,
         WizardContentComponent,
-                ContentDensityModule
+        ContentDensityModule
     ],
     providers: [WizardService]
 })

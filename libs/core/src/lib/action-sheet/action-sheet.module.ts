@@ -16,13 +16,13 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ActionSheetControlComponent,
         ActionSheetItemComponent,
         ActionSheetBodyComponent,
-                ContentDensityModule
+        ContentDensityModule
     ],
     declarations: [
         ActionSheetComponent,
         ActionSheetControlComponent,
         ActionSheetItemComponent,
-        ActionSheetBodyComponent,
-            ]
+        ActionSheetBodyComponent
+    ]
 })
 export class ActionSheetModule {}

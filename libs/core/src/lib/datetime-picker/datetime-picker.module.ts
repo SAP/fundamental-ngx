@@ -15,7 +15,7 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [DatetimePickerComponent, ],
+    declarations: [DatetimePickerComponent],
     imports: [
         CommonModule,
         IconModule,
@@ -31,6 +31,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         FormMessageModule,
         ContentDensityModule
     ],
-    exports: [DatetimePickerComponent,  ContentDensityModule]
+    exports: [DatetimePickerComponent, ContentDensityModule]
 })
 export class DatetimePickerModule {}

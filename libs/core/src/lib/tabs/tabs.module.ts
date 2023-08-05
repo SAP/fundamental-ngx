@@ -48,8 +48,8 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective,
-            ],
+        TabSeparatorDirective
+    ],
     imports: [
         CommonModule,
         IconModule,
@@ -79,7 +79,7 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         TabCounterHeaderDirective,
         TabProcessIconDirective,
         TabSeparatorDirective,
-                ContentDensityModule
+        ContentDensityModule
     ]
 })
 export class TabsModule {}

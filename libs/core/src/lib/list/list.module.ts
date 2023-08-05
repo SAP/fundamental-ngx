@@ -41,8 +41,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ListTitleTextDirective,
         ListNavigationItemComponent,
         ListNavigationItemArrowDirective,
-        ListNavigationItemTextDirective,
-            ],
+        ListNavigationItemTextDirective
+    ],
     imports: [CommonModule, FormModule, IconModule, ContentDensityModule],
     exports: [
         ListComponent,
@@ -63,7 +63,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ListNavigationItemComponent,
         ListNavigationItemArrowDirective,
         ListNavigationItemTextDirective,
-                ContentDensityModule
+        ContentDensityModule
     ]
 })
 export class ListModule {}

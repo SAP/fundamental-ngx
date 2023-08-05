@@ -10,16 +10,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ButtonModule, FormControlModule, ContentDensityModule],
-    exports: [
-        FileUploaderComponent,
-        FileUploaderSelectDirective,
-        FileUploaderDragndropDirective,
-                ContentDensityModule
-    ],
-    declarations: [
-        FileUploaderComponent,
-        FileUploaderSelectDirective,
-        FileUploaderDragndropDirective,
-            ]
+    exports: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective, ContentDensityModule],
+    declarations: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective]
 })
 export class FileUploaderModule {}

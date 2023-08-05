@@ -35,8 +35,8 @@ import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
         TableInnerDirective,
         TableTextDirective,
         TableIconDirective,
-        TableFixedDirective,
-            ],
+        TableFixedDirective
+    ],
     exports: [
         TableComponent,
         TableResponsiveWrapperDirective,
@@ -52,7 +52,7 @@ import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
         TableTextDirective,
         TableIconDirective,
         TableFixedDirective,
-                ContentDensityModule
+        ContentDensityModule
     ],
     providers: [TableService]
 })

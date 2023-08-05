@@ -12,9 +12,8 @@ import {
     ButtonToggledExampleComponent,
     ButtonTypesExampleComponent
 } from './examples/button-examples.component';
-import { ButtonModule,  } from '@fundamental-ngx/core/button';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {
@@ -44,6 +43,6 @@ const routes: Routes = [
         ButtonMenuExampleComponent,
         ButtonToggledExampleComponent
     ],
-    providers: [ currentComponentProvider('button')]
+    providers: [currentComponentProvider('button')]
 })
 export class ButtonDocsModule {}

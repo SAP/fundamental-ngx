@@ -14,8 +14,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MicroProcessFlowItemComponent,
         MicroProcessFlowIconComponent,
         MicroProcessFlowIntermediaryItemDirective,
-        MicroProcessFlowFocusableItemDirective,
-            ],
+        MicroProcessFlowFocusableItemDirective
+    ],
     imports: [CommonModule, IconModule, ContentDensityModule],
     exports: [
         MicroProcessFlowComponent,
@@ -23,7 +23,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         MicroProcessFlowIconComponent,
         MicroProcessFlowIntermediaryItemDirective,
         MicroProcessFlowFocusableItemDirective,
-        ContentDensityModule,
-            ]
+        ContentDensityModule
+    ]
 })
 export class MicroProcessFlowModule {}

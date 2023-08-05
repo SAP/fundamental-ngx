@@ -11,11 +11,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
-    declarations: [
-        TokenComponent,
-        TokenizerComponent,
-        TokenizerInputDirective,
-            ],
+    declarations: [TokenComponent, TokenizerComponent, TokenizerInputDirective],
     imports: [
         CommonModule,
         InputGroupModule,
@@ -25,11 +21,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ContentDensityModule,
         I18nModule
     ],
-    exports: [
-        TokenComponent,
-        TokenizerComponent,
-        TokenizerInputDirective,
-                ContentDensityModule
-    ]
+    exports: [TokenComponent, TokenizerComponent, TokenizerInputDirective, ContentDensityModule]
 })
 export class TokenModule {}

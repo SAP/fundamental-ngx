@@ -8,13 +8,8 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [PanelComponent, PanelContentDirective, PanelTitleDirective, ],
+    declarations: [PanelComponent, PanelContentDirective, PanelTitleDirective],
     imports: [CommonModule, ButtonModule, ContentDensityModule],
-    exports: [
-        PanelComponent,
-        PanelContentDirective,
-        PanelTitleDirective,
-        ContentDensityModule,
-            ]
+    exports: [PanelComponent, PanelContentDirective, PanelTitleDirective, ContentDensityModule]
 })
 export class PanelModule {}

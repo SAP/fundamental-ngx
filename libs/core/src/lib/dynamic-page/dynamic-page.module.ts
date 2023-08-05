@@ -29,8 +29,8 @@ import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-heade
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
-        DynamicPageWrapperDirective,
-            ],
+        DynamicPageWrapperDirective
+    ],
     imports: [
         CommonModule,
         ButtonModule,
@@ -52,7 +52,7 @@ import { DynamicPageHeaderTitleDirective } from './directives/dynamic-page-heade
         DynamicPageFooterComponent,
         DynamicPageTitleContentComponent,
         DynamicPageWrapperDirective,
-                DynamicPageHeaderSubtitleDirective,
+        DynamicPageHeaderSubtitleDirective,
         DynamicPageHeaderTitleDirective
     ]
 })

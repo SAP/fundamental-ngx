@@ -20,8 +20,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CalendarMonthViewComponent,
         CalendarYearViewComponent,
         CalendarAggregatedYearViewComponent,
-        CalendarCloseButtonDirective,
-            ],
+        CalendarCloseButtonDirective
+    ],
     imports: [CommonModule, IconModule, ButtonModule, ContentDensityModule],
     exports: [
         CalendarComponent,
@@ -31,7 +31,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CalendarMonthViewComponent,
         CalendarAggregatedYearViewComponent,
         CalendarCloseButtonDirective,
-                ContentDensityModule
+        ContentDensityModule
     ]
 })
 export class CalendarModule {}

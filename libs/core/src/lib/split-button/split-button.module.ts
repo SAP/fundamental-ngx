@@ -10,7 +10,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
     imports: [CommonModule, ButtonModule, MenuModule, ContentDensityModule, I18nModule],
-    declarations: [SplitButtonComponent, SplitButtonActionTitle, ],
-    exports: [SplitButtonComponent, SplitButtonActionTitle, ContentDensityModule, ]
+    declarations: [SplitButtonComponent, SplitButtonActionTitle],
+    exports: [SplitButtonComponent, SplitButtonActionTitle, ContentDensityModule]
 })
 export class SplitButtonModule {}

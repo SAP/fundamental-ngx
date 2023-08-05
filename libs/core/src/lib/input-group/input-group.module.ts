@@ -19,7 +19,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupInputDirective,
         InputGroupTextareaDirective,
         InputGroupAddOnDirective,
-                InputGroupAddonButtonDirective
+        InputGroupAddonButtonDirective
     ],
     imports: [CommonModule, ButtonModule, IconModule, FormsModule, ContentDensityModule],
     exports: [
@@ -27,7 +27,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         InputGroupInputDirective,
         InputGroupTextareaDirective,
         InputGroupAddOnDirective,
-                ContentDensityModule,
+        ContentDensityModule,
         InputGroupAddonButtonDirective
     ]
 })

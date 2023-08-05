@@ -6,8 +6,7 @@ import { InputGroupHeaderComponent } from './input-group-header/input-group-head
 import { InputGroupDocsComponent } from './input-group-docs.component';
 import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
-import {  InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 const routes: Routes = [
     {
@@ -24,9 +23,6 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InputGroupModule],
     exports: [RouterModule],
     declarations: [examples, InputGroupDocsComponent, InputGroupHeaderComponent],
-    providers: [
-        
-        currentComponentProvider('input-group')
-    ]
+    providers: [currentComponentProvider('input-group')]
 })
 export class InputGroupDocsModules {}

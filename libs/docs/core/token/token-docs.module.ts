@@ -11,8 +11,7 @@ import { TokenSelectedExampleComponent } from './examples/token-selected-example
 import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
-import {  TokenModule } from '@fundamental-ngx/core/token';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { TokenModule } from '@fundamental-ngx/core/token';
 
 const routes: Routes = [
     {
@@ -38,9 +37,6 @@ const routes: Routes = [
         TokenReadOnlyExampleComponent,
         TokenizerCompactExampleComponent
     ],
-    providers: [
-        
-        currentComponentProvider('token')
-    ]
+    providers: [currentComponentProvider('token')]
 })
 export class TokenDocsModule {}

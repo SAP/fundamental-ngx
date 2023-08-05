@@ -17,8 +17,8 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
         BarMiddleDirective,
         BarRightDirective,
         BarElementDirective,
-        ButtonBarComponent,
-            ],
+        ButtonBarComponent
+    ],
     imports: [CommonModule, ButtonModule, ContentDensityModule],
     exports: [
         BarComponent,
@@ -27,7 +27,7 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
         BarRightDirective,
         BarElementDirective,
         ButtonBarComponent,
-                ContentDensityModule
+        ContentDensityModule
     ]
 })
 export class BarModule {}

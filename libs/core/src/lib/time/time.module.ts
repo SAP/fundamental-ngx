@@ -12,7 +12,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 @NgModule({
-    declarations: [TimeComponent, TimeColumnComponent, ],
+    declarations: [TimeComponent, TimeColumnComponent],
     imports: [
         CommonModule,
         FormsModule,
@@ -23,6 +23,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         ContentDensityModule,
         I18nModule
     ],
-    exports: [TimeComponent, TimeColumnComponent,  ContentDensityModule]
+    exports: [TimeComponent, TimeColumnComponent, ContentDensityModule]
 })
 export class TimeModule {}

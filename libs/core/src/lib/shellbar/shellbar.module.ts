@@ -36,8 +36,8 @@ import { PortalModule } from '@angular/cdk/portal';
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective,
-            ],
+        ShellbarSidenavDirective
+    ],
     imports: [
         CommonModule,
         PopoverModule,
@@ -65,7 +65,7 @@ import { PortalModule } from '@angular/cdk/portal';
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
         ShellbarSidenavDirective,
-                ContentDensityModule
+        ContentDensityModule
     ]
 })
 export class ShellbarModule {}
