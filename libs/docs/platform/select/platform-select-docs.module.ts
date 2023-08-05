@@ -21,7 +21,7 @@ import { PlatformSelectMobileExampleComponent } from './examples/platform-select
 import { PlatformSelectColumnsExampleComponent } from './examples/platform-select-columns/platform-select-columns-example.component';
 import { PlatformSelectNoneExampleComponent } from './examples/platform-select-none/platform-select-none-example.component';
 import { PlatformSelectNoWrapExampleComponent } from './examples/platform-select-nowrap/platform-select-nowrap-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
