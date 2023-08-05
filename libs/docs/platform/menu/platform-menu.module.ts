@@ -15,7 +15,7 @@ import { PlatformMenuCascadeExampleComponent } from './examples/platform-menu-ca
 import { PlatformMenuScrollingExampleComponent } from './examples/platform-menu-scrolling-example.component';
 import { PlatformMenuXPositionExampleComponent } from './examples/platform-menu-x-position-example.component';
 import { PlatformMenuWithIconsExampleComponent } from './examples/platform-menu-with-icons-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 
 const routes: Routes = [
