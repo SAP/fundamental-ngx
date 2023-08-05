@@ -11,7 +11,6 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { PortalModule } from '@angular/cdk/portal';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
-import { DeprecatedBreadcrumbsCompactDirective } from './deprecated-breadcrumbs-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
@@ -33,9 +32,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         BreadcrumbComponent,
         BreadcrumbItemComponent,
         LinkModule,
-        DeprecatedBreadcrumbsCompactDirective,
-        ContentDensityModule
+                ContentDensityModule
     ],
-    declarations: [BreadcrumbComponent, BreadcrumbItemComponent, DeprecatedBreadcrumbsCompactDirective]
+    declarations: [BreadcrumbComponent, BreadcrumbItemComponent, ]
 })
 export class BreadcrumbModule {}
