@@ -28,14 +28,14 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { CalendarModule, DeprecatedCalendarContentDensityDirective } from '@fundamental-ngx/core/calendar';
+import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
+import { RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 const routes: Routes = [
@@ -90,6 +90,6 @@ const routes: Routes = [
         CardLinkListExampleComponent,
         CardLoadingExampleComponent
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedCalendarContentDensityDirective), currentComponentProvider('card')]
+    providers: [currentComponentProvider('card')]
 })
 export class CardDocsModule {}
