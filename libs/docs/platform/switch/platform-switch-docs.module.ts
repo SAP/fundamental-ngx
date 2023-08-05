@@ -12,7 +12,7 @@ import { SwitchFormsExampleComponent } from './examples/switch-form-example/swit
 import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
 import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 import { SwitchConfigExampleComponent } from './examples/switch-config-example/switch-config-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 
 const routes: Routes = [
     {
