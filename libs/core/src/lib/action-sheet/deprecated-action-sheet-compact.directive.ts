@@ -3,7 +3,7 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: `fd-action-sheet[compact], fd-action-sheet-body[compact], [fd-action-sheet-item][compact]`,
+    selector: 'fd-action-sheet[compact], fd-action-sheet-body[compact], [fd-action-sheet-item][compact]',
     providers: [
         {
             provide: CONTENT_DENSITY_DIRECTIVE,
