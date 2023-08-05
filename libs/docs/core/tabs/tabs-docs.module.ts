@@ -10,7 +10,7 @@ import {
     TabNavigationExampleChildSecondComponent,
     TabNavigationExampleChildThirdComponent
 } from './examples';
-import { DeprecatedTabsCompactDirective, TabsModule } from '@fundamental-ngx/core/tabs';
+import {  TabsModule } from '@fundamental-ngx/core/tabs';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -50,6 +50,6 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent],
-    providers: [moduleDeprecationsProvider(DeprecatedTabsCompactDirective), currentComponentProvider('tabs')]
+    providers: [ currentComponentProvider('tabs')]
 })
 export class TabsDocsModule {}
