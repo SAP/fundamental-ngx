@@ -10,7 +10,6 @@ export const guides: SectionInterfaceContent[] = [
 export const components: SectionInterfaceContent[] = [
     { url: 'core/action-bar', name: 'Action Bar' },
     { url: 'core/action-sheet', name: 'Action Sheet' },
-    { url: 'core/alert', name: 'Alert' },
     { url: 'core/avatar', name: 'Avatar' },
     { url: 'core/avatar-group', name: 'Avatar Group' },
     { url: 'core/bar', name: 'Bar' },

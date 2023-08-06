@@ -26,10 +26,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/core/action-sheet').then((m) => m.ActionSheetDocsModule)
             },
             {
-                path: 'alert',
-                loadChildren: () => import('@fundamental-ngx/docs/core/alert').then((m) => m.AlertDocsModule)
-            },
-            {
                 path: 'avatar',
                 loadChildren: () => import('@fundamental-ngx/docs/core/avatar').then((m) => m.AvatarDocsModule)
             },
