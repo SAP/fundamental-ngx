@@ -86,10 +86,10 @@
         class="fd-carousel__button fd-carousel__button--left"
         [style.z-index]="1"
         data-slide="previous"
-        [attr.aria-label]="leftNavigationBtnLabel || ('coreCarousel.leftNavigationBtnLabel' | fdTranslate)"
+        [attr.aria-label]="'coreCarousel.leftNavigationBtnLabel' | fdTranslate"
         (click)="previous(); $event.stopPropagation()"
         [disabled]="leftButtonDisabled"
-        [attr.title]="leftNavigationBtnLabel || ('coreCarousel.leftNavigationBtnLabel' | fdTranslate)"
+        [attr.title]="'coreCarousel.leftNavigationBtnLabel' | fdTranslate"
         glyph="slim-arrow-left"
     ></button>
 </ng-template>
@@ -100,10 +100,10 @@
         class="fd-carousel__button fd-carousel__button--right"
         [style.z-index]="1"
         data-slide="next"
-        [attr.aria-label]="rightNavigationBtnLabel || ('coreCarousel.rightNavigationBtnLabel' | fdTranslate)"
+        [attr.aria-label]="'coreCarousel.rightNavigationBtnLabel' | fdTranslate"
         (click)="next(); $event.stopPropagation()"
         [disabled]="rightButtonDisabled"
-        [attr.title]="rightNavigationBtnLabel || ('coreCarousel.rightNavigationBtnLabel' | fdTranslate)"
+        [attr.title]="'coreCarousel.rightNavigationBtnLabel' | fdTranslate"
         glyph="slim-arrow-right"
     ></button>
 </ng-template>
