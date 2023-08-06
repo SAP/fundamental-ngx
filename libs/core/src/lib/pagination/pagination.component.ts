@@ -23,13 +23,7 @@ import {
 import { firstValueFrom, Observable, Subscription } from 'rxjs';
 import { NgModel } from '@angular/forms';
 
-import {
-    FocusKeyManagerItemDirective,
-    FocusKeyManagerListDirective,
-    Nullable,
-    RtlService,
-    warnOnce
-} from '@fundamental-ngx/cdk/utils';
+import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
@@ -136,26 +130,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     itemsPerPageTemplate: TemplateRef<any>;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for options for items per page.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set itemsPerPageLabel(value: string) {
-        warnOnce(
-            "Property itemsPerPageLabel is deprecated. Use i18n capabilities 'corePagination.itemsPerPageLabel' key instead."
-        );
-        this._itemsPerPageLabel = value;
-    }
-
-    get itemsPerPageLabel(): string {
-        return this._itemsPerPageLabel;
-    }
-
-    /** @hidden */
-    private _itemsPerPageLabel: string;
-
     /** Represents the options for items per page. */
     @Input()
     set itemsPerPageOptions(value: number[]) {
@@ -181,201 +155,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     displayTextTemplate: TemplateRef<any>;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the 'first' page button.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set firstLabel(value: string) {
-        warnOnce("Property firstLabel is deprecated. Use i18n capabilities 'corePagination.firstLabel' key instead.");
-        this._firstLabel = value;
-    }
-
-    get firstLabel(): string {
-        return this._firstLabel;
-    }
-
-    /** @hidden */
-    private _firstLabel: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the 'previous' page button.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set previousLabel(value: string) {
-        warnOnce(
-            "Property previousLabel is deprecated. Use i18n capabilities 'corePagination.previousLabel' key instead."
-        );
-        this._previousLabel = value;
-    }
-
-    get previousLabel(): string {
-        return this._previousLabel;
-    }
-
-    /** @hidden */
-    private _previousLabel: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the 'next' page button.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set nextLabel(value: string) {
-        console.warn("Property nextLabel is deprecated. Use i18n capabilities 'corePagination.nextLabel' key instead.");
-        this._nextLabel = value;
-    }
-
-    get nextLabel(): string {
-        return this._nextLabel;
-    }
-
-    /** @hidden */
-    private _nextLabel: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the 'last' page button.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set lastLabel(value: string) {
-        console.warn("Property lastLabel is deprecated. Use i18n capabilities 'corePagination.lastLabel' key instead.");
-        this._lastLabel = value;
-    }
-
-    get lastLabel(): string {
-        return this._lastLabel;
-    }
-
-    /** @hidden */
-    private _lastLabel: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria label for the navigation element
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set ariaLabel(value: string) {
-        console.warn("Property ariaLabel is deprecated. Use i18n capabilities 'corePagination.ariaLabel' key instead.");
-        this._ariaLabel = value;
-    }
-
-    get ariaLabel(): string {
-        return this._ariaLabel;
-    }
-
-    /** @hidden */
-    private _ariaLabel: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the 'Page ' page button. Page number passed as function parameter.
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set pageLabel(value: Nullable<(page: number) => string>) {
-        console.warn("Property pageLabel is deprecated. Use i18n capabilities 'corePagination.pageLabel' key instead.");
-        this._pageLabel = value;
-    }
-
-    get pageLabel(): Nullable<(page: number) => string> {
-        return this._pageLabel;
-    }
-
-    /** @hidden */
-    private _pageLabel: Nullable<(page: number) => string>;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Function to create current page aria label, current page passed as a parameter of the function
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set currentPageAriaLabel(value: Nullable<(currentPage: number) => string>) {
-        warnOnce(
-            "Property currentPageAriaLabel is deprecated. Use i18n capabilities 'corePagination.currentPageAriaLabel' key instead."
-        );
-        this._currentPageAriaLabel = value;
-    }
-
-    get currentPageAriaLabel(): Nullable<(currentPage: number) => string> {
-        return this._currentPageAriaLabel;
-    }
-
-    /** @hidden */
-    private _currentPageAriaLabel: Nullable<(currentPage: number) => string>;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Page label to be shown before current page input in mobile mode.
-     * In conjuction with @pageLabelAfterInputMobile generates the label for the input.
-     * Example: 'Page' + input + pageLabelAfterInputMobile
-     * This property is mainly provided to support i18n.
-     */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    @Input()
-    set labelBeforeInputMobile(value: string) {
-        warnOnce(
-            "Property labelBeforeInputMobile is deprecated. Use i18n capabilities 'corePagination.labelBeforeInputMobile' key instead."
-        );
-        this._labelBeforeInputMobile = value;
-    }
-
-    get labelBeforeInputMobile(): string {
-        return this._labelBeforeInputMobile;
-    }
-
-    /** @hidden */
-    private _labelBeforeInputMobile: string;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Page label to be shown after current page input in mobile mode. Pages count passed as the function parameter.
-     * In conjuction with @pageLabelBeforeInputMobile generates the label for the input.
-     * Example: pageLabelBeforeInputMobile + input + 'of 500'.
-     * This property is mainly provided to support i18n.
-     */
-    @Input()
-    set labelAfterInputMobile(value: Nullable<(pagesCount: number) => string>) {
-        warnOnce(
-            "Property labelAfterInputMobile is deprecated. Use i18n capabilities 'corePagination.labelAfterInputMobile' key instead."
-        );
-        this._labelAfterInputMobile = value;
-    }
-
-    get labelAfterInputMobile(): Nullable<(pagesCount: number) => string> {
-        return this._labelAfterInputMobile;
-    }
-
-    /** @hidden */
-    private _labelAfterInputMobile: Nullable<(pagesCount: number) => string>;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Current page input aria label, parameters passed to the function (currentPage: number, pagesCount: number).
-     * This property is mainly provided to support reading in the right language for screen reader.
-     */
-    @Input()
-    set inputAriaLabel(value: Nullable<(currentPage: number, pagesCount: number) => string>) {
-        warnOnce(
-            "Property inputAriaLabel is deprecated. Use i18n capabilities 'corePagination.inputAriaLabel' key instead."
-        );
-        this._inputAriaLabel = value;
-    }
-
-    get inputAriaLabel(): Nullable<(currentPage: number, pagesCount: number) => string> {
-        return this._inputAriaLabel;
-    }
-
-    /** @hidden */
-    private _inputAriaLabel: Nullable<(currentPage: number, pagesCount: number) => string>;
 
     /** Event emitted when the page is changed. */
     @Output()
@@ -466,11 +245,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _translationResolver = new TranslationResolver();
 
     /** @hidden */
-    private get _isRtl(): boolean {
-        return this._rtlService?.rtl.value;
-    }
-
-    /** @hidden */
     constructor(
         private readonly paginationService: PaginationService,
         private readonly _cdr: ChangeDetectorRef,
@@ -559,12 +333,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this.goToPage(this._lastPage);
     }
 
-    /** @deprecated, use {@link paginationObject} getter instead */
-    getPaginationObject(): Pagination {
-        warnOnce('PaginationComponent: getPaginationObject() is deprecated, use paginationObject getter instead');
-        return this.paginationObject;
-    }
-
     /** @hidden */
     _onChangePerPage = (event: number): void => {
         this.itemsPerPage = event;
@@ -645,16 +413,15 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     private async _announcePage(page: number): Promise<void> {
-        let label: string;
-        if (this.currentPageAriaLabel) {
-            label = this.currentPageAriaLabel(page);
-        } else {
-            const lang = await firstValueFrom(this._language);
-            label = this._translationResolver.resolve(lang, 'corePagination.currentPageAriaLabel', {
-                pageNumber: page,
-                totalCount: this.totalItems
-            });
-        }
-        this._liveAnnouncer.announce(label);
+        await this._liveAnnouncer.announce(
+            this._translationResolver.resolve(
+                await firstValueFrom(this._language),
+                'corePagination.currentPageAriaLabel',
+                {
+                    pageNumber: page,
+                    totalCount: this.totalItems
+                }
+            )
+        );
     }
 }
