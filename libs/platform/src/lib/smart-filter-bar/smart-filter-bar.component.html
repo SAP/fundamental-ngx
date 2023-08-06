@@ -33,10 +33,7 @@
         <fdp-button
             (click)="showFilteringSettings()"
             [label]="
-                filtersLabel
-                    ? filtersLabel + ' (' + _selectedFilters.length + ')'
-                    : ('platformSmartFilterBar.filtersButtonLabel'
-                      | fdTranslate : { filtersCount: _selectedFilters.length })
+                'platformSmartFilterBar.filtersButtonLabel' | fdTranslate : { filtersCount: _selectedFilters.length }
             "
             fd-toolbar-item
             [disabled]="_loading"
