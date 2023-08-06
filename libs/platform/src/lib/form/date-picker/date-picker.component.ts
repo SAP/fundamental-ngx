@@ -87,53 +87,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     useValidation = true;
 
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core date picker)
-     * Aria label for the date picker input.
-     */
-    @Input()
-    set dateInputLabel(value: string) {
-        warnOnce(
-            'Property dateInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
-        );
-        this._dateInputLabel = value;
-    }
-
-    get dateInputLabel(): string {
-        return this._dateInputLabel;
-    }
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core date picker)
-     * Aria label for the datepicker input.
-     */
-    @Input()
-    set dateRangeInputLabel(value: string) {
-        warnOnce(
-            'Property dateRangeInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
-        );
-        this._dateRangeInputLabel = value;
-    }
-
-    get dateRangeInputLabel(): string {
-        return this._dateRangeInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core date picker)
-     * Aria label for the button to show/hide the calendar.
-     */
-    @Input()
-    set displayCalendarToggleLabel(value: string) {
-        warnOnce(
-            'Property displayCalendarToggleLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
-        );
-        this._displayCalendarToggleLabel = value;
-    }
-
-    get displayCalendarToggleLabel(): string {
-        return this._displayCalendarToggleLabel;
-    }
-
     /** Enables Today-Selection-Button if true */
     @Input()
     showTodayButton = false;
@@ -297,15 +250,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /** @hidden */
     private _datePickerValid = true;
-
-    /** @hidden */
-    private _dateRangeInputLabel: string;
-
-    /** @hidden */
-    private _displayCalendarToggleLabel: string;
-
-    /** @hidden */
-    private _dateInputLabel: string;
 
     /** @hidden */
     constructor(
