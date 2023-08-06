@@ -8,7 +8,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     Optional,
     Output,
     Self,
@@ -23,7 +22,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamenta
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -132,25 +131,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         }
 
         return super.state;
-    }
-
-    /**
-     * @deprecated
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    @Input()
-    set datepickerState(state: FormStates) {
-        if (isDevMode()) {
-            warnOnce('"datepickerState" is deprecated. Use "state" instead');
-        }
-        this.state = state;
-    }
-    get datepickerState(): FormStates {
-        if (isDevMode()) {
-            warnOnce('"datepickerState" is deprecated. Use "state" instead');
-        }
-        return this.state;
     }
 
     /**
@@ -275,14 +255,12 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param value
      */
     @Input()
     disableFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param value
      */
     @Input()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -290,7 +268,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param value
      */
     @Input()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
