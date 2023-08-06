@@ -74,7 +74,7 @@
   "devDependencies": {
     "@actions/core": "1.10.0",
     "@angular-devkit/build-angular": "16.1.0",
-    "@angular-devkit/core": "16.1.0",
+    "@angular-devkit/core": "16.1.8",
     "@angular-devkit/schematics": "16.1.0",
     "@angular-eslint/eslint-plugin": "16.1.0",
     "@angular-eslint/eslint-plugin-template": "16.1.0",
