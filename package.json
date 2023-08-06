@@ -82,7 +82,7 @@
     "@angular/cli": "~16.1.0",
     "@angular/compiler-cli": "16.1.0",
     "@angular/language-service": "16.1.0",
-    "@babel/core": "7.21.3",
+    "@babel/core": "7.22.9",
     "@babel/runtime": "7.21.0",
     "@commitlint/cli": "17.5.1",
     "@commitlint/config-conventional": "17.3.0",
