@@ -24,7 +24,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_CHECKBOX_COMPONENT } from '../tokens';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 let checkboxUniqueId = 0;
 
@@ -51,7 +51,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
     ],
     host: { '[attr.tabindex]': '-1' },
     standalone: true,
-    imports: [NgIf, FormsModule]
+    imports: [NgIf, FormsModule, NgClass]
 })
 export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */

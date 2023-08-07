@@ -5,7 +5,6 @@ import { Component, ViewChild } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { CheckboxModule } from '../checkbox.module';
-import { By } from '@angular/platform-browser';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): HTMLInputElement {
     return fixture.nativeElement.querySelector('input');
@@ -20,13 +19,14 @@ function checkboxDetectChanges(checkbox: CheckboxComponent): void {
 }
 
 @Component({
-    template: ` <fd-checkbox [(ngModel)]="value"></fd-checkbox> `,
+    template: ` <fd-checkbox [(ngModel)]="value" [displayOnly]="displayOnly"></fd-checkbox> `,
     standalone: true,
     imports: [FormsModule, CheckboxComponent]
 })
 class TestCheckboxWrapperComponent {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
     value: any = false;
+    displayOnly = false;
 }
 
 describe('CheckboxComponent', () => {
@@ -203,17 +203,17 @@ describe('CheckboxComponent', () => {
     });
 
     it('should render display-only mode', async () => {
-        checkbox.displayOnly = true;
+        hostComponent.displayOnly = true;
         fixture.detectChanges();
         await fixture.whenStable();
 
-        expect(fixture.debugElement.query(By.css('input')).nativeElement.classList).toContain('is-display');
+        expect(getCheckboxInput(fixture).classList).toContain('is-display');
     });
 
     it('should ignore user interactions when rendered in display-only mode', async () => {
         // Check usual interaction
         const oldValue = hostComponent.value;
-        const checkboxInput = fixture.debugElement.query(By.css('input')).nativeElement;
+        const checkboxInput = getCheckboxInput(fixture);
         checkboxInput.dispatchEvent(new Event('click'));
         fixture.detectChanges();
         await fixture.whenStable();
