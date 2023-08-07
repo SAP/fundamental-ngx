@@ -7,8 +7,8 @@ import { RtlService } from '../../services/rtl.service';
 
 @Component({
     template: `
-        <ul fd-focus-key-manager-list>
-            <li fd-focus-key-manager-item></li>
+        <ul fdkFocusKeyManagerList>
+            <li fdkFocusKeyManagerItem></li>
         </ul>
     `
 })

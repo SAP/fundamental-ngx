@@ -4,7 +4,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 
 @Component({
     template: `
-        <button fd-initial-focus [enabled]="enabled" [attr.tabindex]="rootElementTabIndex" #elementToFocus>
+        <button fdkInitialFocus [enabled]="enabled" [attr.tabindex]="rootElementTabIndex" #elementToFocus>
             <span>Non Focusable</span>
             <span tabindex="0" #nestedElementToFocus>Focusable</span>
             <button>Focusable</button>

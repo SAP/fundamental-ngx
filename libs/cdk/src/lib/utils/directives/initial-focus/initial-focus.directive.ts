@@ -1,20 +1,13 @@
 import { AfterViewInit, DestroyRef, Directive, ElementRef, inject, Input, NgZone } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, filter, take } from 'rxjs/operators';
-import { FD_DEPRECATED_DIRECTIVE_SELECTOR, getDeprecatedModel } from '../../deprecated-selector.class';
 import { TabbableElementService } from '../../services/tabbable-element.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     selector: '[fdkInitialFocus]',
     standalone: true,
-    providers: [
-        TabbableElementService,
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkInitialFocus]', '[fdInitialFocus], [fd-initial-focus]')
-        }
-    ]
+    providers: [TabbableElementService]
 })
 export class InitialFocusDirective implements AfterViewInit {
     /**
