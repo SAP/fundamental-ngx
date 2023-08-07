@@ -48,7 +48,6 @@
     "@angular/platform-browser-dynamic": "16.1.0",
     "@angular/router": "16.1.0",
     "@fundamental-styles/cx": "0.28.3",
-    "@fundamental-styles/fn": "0.25.1-rc.16",
     "@nx/angular": "16.5.5",
     "@sap-theming/theming-base-content": "11.6.1",
     "@stackblitz/sdk": "1.8.2",
