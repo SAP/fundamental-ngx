@@ -1,21 +1,16 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FeedListItemComponent } from './feed-list-item.component';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, I18nModule } from '@fundamental-ngx/i18n';
+import { of } from 'rxjs';
 
 const componentClassPrefix = 'fd-feed-list__item';
 
-@Component({
-    selector: 'fd-formatted-text',
-    template: ``
-})
-class FormattedTextTestComponent {
-    @Input()
-    htmlText = '';
-}
+const moreLabel = 'more button text'.toLowerCase();
+const lessLabel = 'less button text'.toLowerCase();
 
 describe('FeedListItemComponent', () => {
     let component: FeedListItemComponent;
@@ -23,8 +18,17 @@ describe('FeedListItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FeedListItemComponent, FormattedTextTestComponent],
-            imports: [PipeModule, LinkModule, I18nModule]
+            declarations: [FeedListItemComponent],
+            imports: [PipeModule, LinkModule, I18nModule],
+            providers: [
+                {
+                    provide: FD_LANGUAGE,
+                    useValue: of({
+                        ...FD_LANGUAGE_ENGLISH,
+                        coreFeedListItem: { ...FD_LANGUAGE_ENGLISH.coreFeedListItem, moreLabel, lessLabel }
+                    })
+                }
+            ]
         })
             .overrideComponent(FeedListItemComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -44,7 +48,7 @@ describe('FeedListItemComponent', () => {
 
     it('should render author title with link', () => {
         const authorTitle = 'John Doe';
-        const authorLink = 'http://example.com';
+        const authorLink = 'https://example.com';
         component.authorTitle = authorTitle;
         component.authorLink = authorLink;
         fixture.detectChanges();
@@ -74,14 +78,9 @@ describe('FeedListItemComponent', () => {
     });
 
     it(`should label's more and less buttons`, async () => {
-        const moreLabel = 'more button text'.toLowerCase();
-        const lessLabel = 'less button text'.toLowerCase();
-
         component.isCollapsed = true;
         component.isRichText = false;
         component.hasMore = true;
-        component.moreLabel = moreLabel;
-        component.lessLabel = lessLabel;
         fixture.detectChanges();
         await fixture.whenStable();
         let text = component.elementRef.nativeElement
