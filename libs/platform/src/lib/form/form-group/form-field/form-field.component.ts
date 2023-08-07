@@ -11,7 +11,6 @@ import {
     forwardRef,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -53,13 +52,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '../../helpers';
-import {
-    DefaultHorizontalFieldLayout,
-    DefaultHorizontalLabelLayout,
-    DefaultVerticalFieldLayout,
-    DefaultVerticalLabelLayout,
-    FORM_GROUP_CHILD_FIELD_TOKEN
-} from '../constants';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
 import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
@@ -128,30 +121,6 @@ export class FormFieldComponent
     /** Hint to be placed next to label */
     @Input()
     hint: Nullable<FieldHintInput>;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     * Define form field label placement
-     */
-    @Input()
-    set labelLayout(value: LabelLayout) {
-        if (isDevMode()) {
-            warnOnce(
-                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
-            );
-        }
-        this._labelLayout = value;
-
-        this.labelColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
-        this.fieldColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
-    }
-
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
 
     /**
      * Indicates when form field label should not be displayed

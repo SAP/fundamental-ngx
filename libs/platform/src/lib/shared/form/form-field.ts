@@ -48,11 +48,6 @@ export abstract class PlatformFormField extends FormField {
      */
     noLabelLayout: boolean;
     /**
-     * @deprecated
-     * Define form field label placement
-     */
-    labelLayout: LabelLayout;
-    /**
      * Define hint placement
      */
     hintPlacement: HintPlacement;
