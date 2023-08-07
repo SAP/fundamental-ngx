@@ -10,7 +10,11 @@ export const API_FILES = {
     forms: ['FormsComponent'],
     dataSource: ['DataSourceComponent'],
     utils: ['UtilsComponent'],
+    selectableList: ['SelectableListDirective', 'SelectableItemDirective', 'SelectionService'],
+    focusableList: ['FocusableListDirective'],
     focusableItem: ['FocusableItemComponent'],
     tabbable: [''],
-    focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective']
+    disabled: ['DisabledBehaviorDirective'],
+    focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective'],
+    dnd: ['DndListDirective', 'DndItemDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective']
 };
