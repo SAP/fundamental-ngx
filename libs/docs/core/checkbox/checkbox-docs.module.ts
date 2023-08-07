@@ -8,6 +8,7 @@ import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxModule, DeprecatedCheckboxContentDensityDirective } from '@fundamental-ngx/core/checkbox';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { CheckboxDisplayModeExampleComponent } from './examples/checkbox-display-mode-example.component';
 
 const routes: Routes = [
     {
@@ -22,8 +23,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [FormModule, CheckboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
-    exports: [RouterModule],
-    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent],
+    exports: [RouterModule, CheckboxDisplayModeExampleComponent],
+    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent, CheckboxDisplayModeExampleComponent],
     providers: [
         moduleDeprecationsProvider(DeprecatedCheckboxContentDensityDirective),
         currentComponentProvider('checkbox')

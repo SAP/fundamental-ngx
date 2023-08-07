@@ -13,10 +13,13 @@
     [attr.aria-describedby]="ariaDescribedBy"
     [attr.aria-disabled]="disabled"
     [attr.aria-required]="required"
+    [class.is-display]="displayOnly"
     [class]="state ? 'is-' + state : ''"
     (click)="_onInputClick($event)"
     (blur)="_onBlur()"
     (focus)="_onFocus()"
+    (keyup.enter)="_onLabelKeydown($event)"
+    (keyup.space)="_onLabelKeydown($event)"
 />
 
 <label
@@ -28,6 +31,8 @@
     [class.fd-checkbox__label--required]="required"
     [class.fd-checkbox__label--wrap]="wrapLabel && valignLabel === 'middle'"
     [class.fd-checkbox__label--wrap-top-aligned]="wrapLabel && valignLabel === 'top'"
+    (keyup.enter)="_onLabelKeydown($event)"
+    (keyup.space)="_onLabelKeydown($event)"
     (click)="_onLabelClick($event)"
 >
     <span class="fd-checkbox__checkmark" aria-hidden="true"></span>

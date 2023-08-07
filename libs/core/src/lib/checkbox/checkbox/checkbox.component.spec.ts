@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { CheckboxModule } from '../checkbox.module';
+import { By } from '@angular/platform-browser';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): HTMLInputElement {
     return fixture.nativeElement.querySelector('input');
@@ -19,7 +20,9 @@ function checkboxDetectChanges(checkbox: CheckboxComponent): void {
 }
 
 @Component({
-    template: ` <fd-checkbox [(ngModel)]="value"></fd-checkbox> `
+    template: ` <fd-checkbox [(ngModel)]="value"></fd-checkbox> `,
+    standalone: true,
+    imports: [FormsModule, CheckboxComponent]
 })
 class TestCheckboxWrapperComponent {
     @ViewChild(CheckboxComponent) checkboxRef: CheckboxComponent;
@@ -33,8 +36,7 @@ describe('CheckboxComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, CheckboxModule],
-            declarations: [TestCheckboxWrapperComponent]
+            imports: [TestCheckboxWrapperComponent]
         }).compileComponents();
     }));
 
@@ -186,7 +188,7 @@ describe('CheckboxComponent', () => {
     it('should use custom values for third state', async () => {
         checkbox.tristate = true;
         checkbox.tristateSelectable = true;
-        checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maby' };
+        checkbox.values = { trueValue: 'Yes', falseValue: 'No', thirdStateValue: 'Maybe' };
         hostComponent.value = 'Yes';
         fixture.detectChanges();
 
@@ -195,9 +197,40 @@ describe('CheckboxComponent', () => {
         checkbox.nextValue();
         expect(hostComponent.value).toBe('No');
         checkbox.nextValue();
-        expect(hostComponent.value).toBe('Maby');
+        expect(hostComponent.value).toBe('Maybe');
         checkbox.nextValue();
         expect(hostComponent.value).toBe('Yes');
+    });
+
+    it('should render display-only mode', async () => {
+        checkbox.displayOnly = true;
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(fixture.debugElement.query(By.css('input')).nativeElement.classList).toContain('is-display');
+    });
+
+    it('should ignore user interactions when rendered in display-only mode', async () => {
+        // Check usual interaction
+        const oldValue = hostComponent.value;
+        const checkboxInput = fixture.debugElement.query(By.css('input')).nativeElement;
+        checkboxInput.dispatchEvent(new Event('click'));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // Toggle happened
+        expect(hostComponent.value).not.toEqual(oldValue);
+
+        checkbox.displayOnly = true;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        checkboxInput.dispatchEvent(new Event('click'));
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        // Toggle didn't happen
+        expect(hostComponent.value).not.toEqual(oldValue);
     });
 });
 
