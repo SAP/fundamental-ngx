@@ -5,7 +5,8 @@ import { OverflowPriorityEnum } from './toolbar.component';
 
 @Directive({
     selector: '[fd-toolbar-item], [fdOverflowGroup], [fdOverflowPriority]',
-    providers: [{ provide: ToolbarItem, useExisting: forwardRef(() => ToolbarItemDirective) }]
+    providers: [{ provide: ToolbarItem, useExisting: forwardRef(() => ToolbarItemDirective) }],
+    standalone: true
 })
 export class ToolbarItemDirective implements ToolbarItem {
     /** @hidden */

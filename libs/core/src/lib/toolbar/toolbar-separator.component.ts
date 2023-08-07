@@ -7,6 +7,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-toolbar__separator'
-    }
+    },
+    standalone: true
 })
 export class ToolbarSeparatorComponent {}

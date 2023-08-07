@@ -39,6 +39,12 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { ToolbarSeparatorComponent } from './toolbar-separator.component';
+import { ToolbarSpacerDirective } from './toolbar-spacer.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -64,6 +70,16 @@ export const enum OverflowPriorityEnum {
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT
         })
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        ToolbarSpacerDirective,
+        ToolbarSeparatorComponent,
+        PopoverModule,
+        ButtonModule,
+        NgFor,
+        DynamicPortalComponent
     ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
@@ -142,10 +158,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string;
-
-    /** @hidden */
-    @ViewChild('toolbar')
-    toolbar: ElementRef;
 
     /** @hidden */
     @ViewChild('titleElement')
