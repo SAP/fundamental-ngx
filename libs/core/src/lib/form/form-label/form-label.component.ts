@@ -3,7 +3,6 @@ import {
     Component,
     HostBinding,
     Input,
-    isDevMode,
     OnChanges,
     TemplateRef,
     ViewEncapsulation
@@ -67,18 +66,6 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     @HostBinding('class.fd-form-label__wrapper--align-end')
     alignLabelEnd = false;
-
-    /**
-     * Inline help body text.
-     * @deprecated Use inlineHelpContent instead
-     * */
-    @Input()
-    set inlineHelpTitle(title: Nullable<string>) {
-        if (isDevMode()) {
-            warnOnce('inlineHelpTitle is deprecated, use inlineHelpContent instead');
-        }
-        this.inlineHelpContent = title;
-    }
 
     /** Inline help content. Could be just a string or complex template */
     @Input()
