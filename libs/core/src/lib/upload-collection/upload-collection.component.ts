@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-upload-collection',
@@ -8,7 +9,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
         <ng-content></ng-content>
     </ul>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ListModule]
 })
 export class UploadCollectionComponent {
     /** Whether or not this is the small upload collection. */

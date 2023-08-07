@@ -1,30 +1,18 @@
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
-import { warnOnce } from '@fundamental-ngx/cdk/utils';
+import { ControlValueAccessor, FormsModule } from '@angular/forms';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'fd-upload-collection-form-item',
     host: { class: 'fd-upload-collection__form-item' },
     templateUrl: './upload-collection-form-item.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, FormControlModule, FormsModule, FdTranslatePipe]
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value for the input's placeholder.
-     */
-    @Input()
-    set placeholder(value: string) {
-        warnOnce(
-            "Property placeholder is deprecated. Use i18n capabilities 'coreUploadCollection.formItemPlaceholder' key instead."
-        );
-        this._placeholder = value;
-    }
-
-    get placeholder(): string {
-        return this._placeholder;
-    }
-
     /** @hidden */
     @Input()
     _editMode = false;
@@ -49,9 +37,6 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     get fileName(): string {
         return this._fileNameValue;
     }
-
-    /** @hidden */
-    private _placeholder: string;
 
     /** @hidden */
     onChange: (value: string) => void = () => {};
