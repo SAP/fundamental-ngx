@@ -1,18 +1,18 @@
 <textarea
     #inputElementRef
     fd-form-control
+    [disabled]="disabled"
     [attr.id]="id"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledBy"
     [attr.aria-describedby]="id + '-counter'"
     [attr.aria-required]="required"
     [attr.placeholder]="placeholder"
-    [disabled]="disabled"
-    [readonly]="readonly"
-    [rows]="growing ? 2 : height ? 2 : growingMaxLines"
-    [cols]="cols"
-    [wrap]="wrapType"
-    [maxlength]="!showExceededText ? maxLength : null"
+    [attr.rows]="growing ? 2 : height ? 2 : growingMaxLines"
+    [attr.cols]="cols"
+    [attr.wrap]="wrapType"
+    [attr.maxlength]="!showExceededText ? maxLength : null"
+    [attr.readonly]="readonly ? true : null"
     [(ngModel)]="value"
     [state]="getUpdatedState()"
     (paste)="handlePasteInteraction()"
@@ -36,7 +36,7 @@
                 (exceededCharCount === 1
                     ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
                     : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
-                ) | fdTranslate: { count: exceededCharCount }:'&nbsp;&nbsp;'
+                ) | fdTranslate : { count: exceededCharCount } : '&nbsp;&nbsp;'
             "
         ></span>
     </ng-container>
@@ -46,7 +46,7 @@
                 (exceededCharCount === 1
                     ? 'platformTextarea.counterMessageCharactersRemainingSingular'
                     : 'platformTextarea.counterMessageCharactersRemainingPlural'
-                ) | fdTranslate: { count: exceededCharCount }:'&nbsp;&nbsp;'
+                ) | fdTranslate : { count: exceededCharCount } : '&nbsp;&nbsp;'
             "
         ></span>
     </ng-template>

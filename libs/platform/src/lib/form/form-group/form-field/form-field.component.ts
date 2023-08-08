@@ -31,6 +31,7 @@ import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cd
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import {
     Column,
@@ -115,7 +116,14 @@ export class FormFieldComponent
      * Defines hint placement
      */
     @Input()
-    hintPlacement: HintPlacement;
+    set hintPlacement(value: HintPlacement) {
+        warnOnce('Property hintPlacement is deprecated. Use `hint.placement` instead.');
+        this._hintPlacement = value;
+    }
+
+    get hintPlacement(): HintPlacement {
+        return this._hintPlacement;
+    }
 
     /** Hint to be placed next to label */
     @Input()
@@ -129,7 +137,7 @@ export class FormFieldComponent
     @Input()
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
             );
         }
@@ -434,6 +442,9 @@ export class FormFieldComponent
     /** @hidden */
     private _errorDirectivesCdr: Subscription;
 
+    /** @hidden */
+    private _hintPlacement: HintPlacement;
+
     /** @hidden whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
         if (!this.inputMessageGroup || !this.labelCol) {
@@ -643,8 +654,7 @@ export class FormFieldComponent
 
     /** @hidden */
     hasErrors(): boolean {
-        const result = this._editable && !!this.control?.controlInvalid;
-        return result;
+        return this._editable && !!this.control?.controlInvalid;
     }
 
     /**

@@ -19,7 +19,7 @@ import {
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { AbstractFdNgxClass, Nullable } from '@fundamental-ngx/cdk/utils';
+import { AbstractFdNgxClass, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from './alert-utils/alert-ref';
 import { AlertConfig } from './alert-utils/alert-config';
 import { MessageStripType } from '@fundamental-ngx/core/message-strip';
@@ -115,6 +115,9 @@ export class AlertComponent extends AbstractFdNgxClass implements OnInit, AfterV
         super(elRef);
         this._setAlertConfig(alertConfig);
         this._setProperties();
+        warnOnce(
+            'AlertComponent is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripComponent instead.'
+        );
     }
 
     /** @hidden */

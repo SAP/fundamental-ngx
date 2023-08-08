@@ -38,6 +38,7 @@
         (keydown)="removeSelectedTokens($event)"
         (addOnButtonClicked)="addOnButtonClick($event)"
         (click)="onInputGroupClicked()"
+        [glyphAriaLabel]="glyphAriaLabel"
     >
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
             >Contains {{ selected.length || 'no' }} token</span

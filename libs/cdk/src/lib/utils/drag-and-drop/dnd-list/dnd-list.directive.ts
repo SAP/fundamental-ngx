@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { startWith, takeUntil, take } from 'rxjs/operators';
+import { warnOnce } from '../../helpers';
 import { selectStrategy } from '../../async-strategy';
 import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
@@ -69,6 +70,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      */
     @Input()
     set replaceMode(value: boolean) {
+        warnOnce('`replaceMode` input is deprecated. Use `dropMode` property instead.');
         this._replaceMode = value;
         this.dropMode = value ? 'group' : 'shift';
         this._detectedDropMode = this.dropMode;
@@ -423,8 +425,8 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         const VERTICAL_OFFSET = 20;
 
         /** Distances from the top of the screen */
-        const draggedElementBound = <DOMRect>draggedElement.nativeElement.getBoundingClientRect();
-        const targetElementBound = <DOMRect>targetElement.nativeElement.getBoundingClientRect();
+        const draggedElementBound = draggedElement.nativeElement.getBoundingClientRect();
+        const targetElementBound = targetElement.nativeElement.getBoundingClientRect();
 
         if (draggedElementBound.top - targetElementBound.top > VERTICAL_OFFSET) {
             /** If an element is higher than the dragged element, it's for sure before */

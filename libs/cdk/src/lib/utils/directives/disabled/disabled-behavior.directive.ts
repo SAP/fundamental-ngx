@@ -1,18 +1,18 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { BehaviorSubject, filter, ReplaySubject } from 'rxjs';
 import { DisabledBehavior } from './disabled-behavior.interface';
 import { setDisabledState } from './set-disabled-state';
 import { FDK_DISABLED_DIRECTIVE } from './fdk-disabled.token';
 import { DisabledViewModifier } from './disabled-view-modifier.interface';
 import { FdkClickedProvider } from '../clicked';
-import { DestroyedService } from '../../services/destroyed.service';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -35,13 +35,12 @@ export class DeprecatedDisabledBehaviorDirective extends DeprecatedSelector {}
             provide: FDK_DISABLED_DIRECTIVE,
             useExisting: DisabledBehaviorDirective
         },
-        DestroyedService,
         FdkClickedProvider
     ]
 })
 export class DisabledBehaviorDirective
     extends ReplaySubject<boolean>
-    implements OnDestroy, AfterViewInit, DisabledBehavior, DisabledViewModifier
+    implements AfterViewInit, DisabledBehavior, DisabledViewModifier
 {
     /** @hidden */
     @Input()
@@ -75,10 +74,11 @@ export class DisabledBehaviorDirective
     /** @hidden */
     constructor(
         private _elementRef: ElementRef<HTMLElement>,
-        private _destroy$: DestroyedService,
+        private _destroyRef: DestroyRef,
         private _clicked: FdkClickedProvider
     ) {
         super(1);
+        this._destroyRef.onDestroy(() => this.complete());
     }
 
     /** @hidden */
@@ -96,13 +96,8 @@ export class DisabledBehaviorDirective
                     this._disabled = isDisabled;
                     this.next(isDisabled);
                 }),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.complete();
     }
 }

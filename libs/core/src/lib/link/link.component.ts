@@ -18,7 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { DomPortal, Portal } from '@angular/cdk/portal';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
@@ -101,7 +101,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
     ) {
         if (isDevMode() && this.elementRef.nativeElement.hasAttribute('fd-breadcrumb-link')) {
-            console.warn('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
+            warnOnce('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
         }
     }
 

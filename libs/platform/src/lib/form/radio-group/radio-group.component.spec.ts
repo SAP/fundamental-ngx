@@ -110,7 +110,6 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioGroupReactiveFdpGroupComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
@@ -346,7 +345,6 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioGroupTemplateDrivenFdpGroupComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     async function wait(componentFixture: ComponentFixture<any>): Promise<void> {
@@ -505,10 +503,10 @@ runValueAccessorTests({
         done();
     },
     supportsOnBlur: false,
-    internalValueChangeSetter: null,
+    // internalValueChangeSetter: null,
     // TODO: uncomment internalValueChangeSetter after ngx-cva-test-suite@1.1.0 is released
-    // internalValueChangeSetter: (fixture, value) => {
-    //     fixture.componentInstance.viewRadioButtons.find((b) => b.value === value)._valueChange(value, true);
-    // },
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.viewRadioButtons.find((b) => b.value === value)?._valueChange(value, true);
+    },
     getComponentValue: (fixture) => fixture.componentInstance.value
 });

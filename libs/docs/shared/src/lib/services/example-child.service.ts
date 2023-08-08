@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject } from 'rxjs';
 
 /**

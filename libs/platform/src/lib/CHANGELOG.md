@@ -3,6 +3,272 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.44.1-rc.1...v0.44.1-rc.2) (2023-08-07)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.44.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.44.1-rc.0...v0.44.1-rc.1) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.44.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.44.0...v0.44.1-rc.0) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.7...v0.44.0) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.6...v0.44.0-rc.7) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.5...v0.44.0-rc.6) (2023-08-04)
+
+
+### Bug Fixes
+
+* removed `deprecated-decorator` ([#10294](https://github.com/SAP/fundamental-ngx/issues/10294)) ([c970974](https://github.com/SAP/fundamental-ngx/commit/c9709746ef2acb5a3daec7c197365952743ab1a1))
+
+
+
+
+
+# [0.44.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.4...v0.44.0-rc.5) (2023-08-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.3...v0.44.0-rc.4) (2023-08-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.2...v0.44.0-rc.3) (2023-08-01)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.1...v0.44.0-rc.2) (2023-08-01)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.44.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.0...v0.44.0-rc.1) (2023-07-31)
+
+
+### Features
+
+* **core,platform:** partial jest migration ([#10238](https://github.com/SAP/fundamental-ngx/issues/10238)) ([75130aa](https://github.com/SAP/fundamental-ngx/commit/75130aa85724060a515d99d675eb672b6d6eef6a))
+
+
+
+
+
+# [0.44.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.2-rc.0...v0.44.0-rc.0) (2023-07-31)
+
+
+### chore
+
+* angular 16 migration ([#10093](https://github.com/SAP/fundamental-ngx/issues/10093)) ([2303ad9](https://github.com/SAP/fundamental-ngx/commit/2303ad9d07e7745c66f7c0b438e90384e3b6a14b))
+
+
+### BREAKING CHANGES
+
+* Angular v. 16.1 and Typescript v. 5.1 support
+
+
+
+
+
+## [0.43.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.1-rc.0...v0.43.2-rc.0) (2023-07-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.43.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.0...v0.43.1-rc.0) (2023-07-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.30...v0.43.0) (2023-07-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.29...v0.43.0-rc.30) (2023-07-28)
+
+
+### Bug Fixes
+
+* **platform:** add new strings for platform table single selection cells ([#10235](https://github.com/SAP/fundamental-ngx/issues/10235)) ([3593d90](https://github.com/SAP/fundamental-ngx/commit/3593d90c8cc2184ce393dfd7ed2271c475fce63f))
+
+
+
+
+
+# [0.43.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.28...v0.43.0-rc.29) (2023-07-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.27...v0.43.0-rc.28) (2023-07-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.26...v0.43.0-rc.27) (2023-07-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.25...v0.43.0-rc.26) (2023-07-26)
+
+
+### Bug Fixes
+
+* **platform:** add missing labels ([#10229](https://github.com/SAP/fundamental-ngx/issues/10229)) ([13756fd](https://github.com/SAP/fundamental-ngx/commit/13756fd702c1e2f93564562d7c7f2c7f5fb56ba4))
+
+
+
+
+
+# [0.43.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.24...v0.43.0-rc.25) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.23...v0.43.0-rc.24) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.22...v0.43.0-rc.23) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.21...v0.43.0-rc.22) (2023-07-26)
+
+
+### Bug Fixes
+
+* **platform:** interpolation adding whitespace to table text ([#10223](https://github.com/SAP/fundamental-ngx/issues/10223)) ([71f8d07](https://github.com/SAP/fundamental-ngx/commit/71f8d0775507f3630ac588ea81842dcb84439815))
+
+
+
+
+
+# [0.43.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.20...v0.43.0-rc.21) (2023-07-26)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.19...v0.43.0-rc.20) (2023-07-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.18...v0.43.0-rc.19) (2023-07-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.17...v0.43.0-rc.18) (2023-07-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.16...v0.43.0-rc.17) (2023-07-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.43.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.15...v0.43.0-rc.16) (2023-07-20)
+
+
+### Bug Fixes
+
+* **platform:** update tablerows index ([#10191](https://github.com/SAP/fundamental-ngx/issues/10191)) ([53d4ad7](https://github.com/SAP/fundamental-ngx/commit/53d4ad7eda3c740129f739b1478f266a1951acf6))
+
+
+
+
+
 # [0.43.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.43.0-rc.14...v0.43.0-rc.15) (2023-07-19)
 
 

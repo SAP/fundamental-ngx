@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { IndicatorStates } from '@fundamental-ngx/core/notification';
 
@@ -15,6 +15,7 @@ export type Notification = {
 
 @Component({
     selector: 'fd-notification-group-example',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './notification-group-example.component.html'
 })
 export class NotificationGroupExampleComponent {

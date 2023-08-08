@@ -429,7 +429,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         settingsCategoryVisible: 'Видими',
         settingsCategoryActive: 'Активни',
         settingsCategoryVisibleAndActive: 'Видими и Активни',
-        settingsCategoryMandatory: 'Задължителни'
+        settingsCategoryMandatory: 'Задължителни',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Сортирай Възходящо',
@@ -532,7 +534,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Отмени',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Отиди на предишнита',

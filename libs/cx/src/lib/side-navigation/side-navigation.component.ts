@@ -9,7 +9,6 @@ import {
     HostListener,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     QueryList,
     SimpleChanges,
@@ -17,16 +16,19 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
-import { NestedListKeyboardService } from '@fundamental-ngx/cx/nested-list';
+import {
+    NestedListComponent,
+    NestedListKeyboardService,
+    NestedListStateService,
+    PreparedNestedListComponent
+} from '@fundamental-ngx/cx/nested-list';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationModel } from './side-navigation-model';
-import { PreparedNestedListComponent } from '@fundamental-ngx/cx/nested-list';
-import { NestedListStateService } from '@fundamental-ngx/cx/nested-list';
-import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -41,18 +43,25 @@ import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
     providers: [NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationComponent
-    implements AfterContentInit, AfterViewInit, OnInit, OnChanges, OnDestroy, SideNavigationInterface
+    implements AfterContentInit, AfterViewInit, OnInit, OnChanges, SideNavigationInterface
 {
+    /** @deprecated Not applicable to the CX side nav. */
+    @Input()
+    @HostBinding('class.fdx-side-nav--condensed')
+    set condensed(value: boolean) {
+        warnOnce('The "condensed" input is not applicable to the CX side nav.');
+        this._condensed = value;
+    }
+
+    get condensed(): boolean {
+        return this._condensed;
+    }
+
     /**
      * Side navigation configuration, to pass whole model object, instead of creating HTML from scratch
      */
     @Input()
     sideNavigationConfiguration: Nullable<SideNavigationModel>;
-
-    /** @deprecated Not applicable to the CX side nav. */
-    @Input()
-    @HostBinding('class.fdx-side-nav--condensed')
-    condensed = false;
 
     /** Prevents the side navigation from truncating or wrapping, extending the width to its longest label. */
     @Input()
@@ -110,7 +119,7 @@ export class SideNavigationComponent
     additionalShellbarCssClass = 'fd-shellbar--cx-side-nav';
 
     /** @hidden */
-    private _keyboardSubscription = new Subscription();
+    private _condensed = false;
 
     /** @hidden */
     constructor(
@@ -118,7 +127,7 @@ export class SideNavigationComponent
         private nestedListState: NestedListStateService,
         private _cdRef: ChangeDetectorRef
     ) {
-        this._keyboardSubscription = this.keyboardService.refresh$.subscribe(() => {
+        this.keyboardService.refresh$.pipe(takeUntilDestroyed()).subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());
         });
@@ -128,7 +137,7 @@ export class SideNavigationComponent
     ngOnInit(): void {
         /** Set up condensed state */
         this.nestedListState.condensed =
-            this.condensed || !!(this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
+            this._condensed || !!(this.sideNavigationConfiguration && this.sideNavigationConfiguration.condensed);
 
         if (this.collapseWidth) {
             this.onResize();
@@ -158,15 +167,10 @@ export class SideNavigationComponent
     }
 
     /** @hidden */
-    ngOnDestroy(): void {
-        this._keyboardSubscription?.unsubscribe();
-    }
-
-    /** @hidden */
     @HostListener('window:resize')
     onResize(): void {
         if (this.collapseWidth) {
-            this.condensed = window.innerWidth <= this.collapseWidth;
+            this._condensed = window.innerWidth <= this.collapseWidth;
         }
     }
 

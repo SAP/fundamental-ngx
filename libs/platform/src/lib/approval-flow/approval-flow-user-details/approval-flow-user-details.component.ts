@@ -6,7 +6,7 @@ import { ApprovalUser } from '../interfaces';
 
 /**
  * @deprecated
- * ApprovalFlowUserDetails component is depricated since version 0.40.0
+ * ApprovalFlowUserDetails component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-user-details',

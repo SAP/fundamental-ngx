@@ -15,10 +15,12 @@ import {
     SelectionMode,
     TableDataSource,
     TableDraggable,
-    TableRowToggleOpenStateEvent
+    TableRowToggleOpenStateEvent,
+    TableRowType
 } from '@fundamental-ngx/platform/table-helpers';
 import { PlatformTableModule } from '../table.module';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { TableRowComponent } from '../components/table-row/table-row.component';
 
 @Component({
     template: `
@@ -42,7 +44,7 @@ class TableHostComponent {
     relationKey = 'children';
 }
 
-describe('TableComponent Tree View', async () => {
+describe('TableComponent Tree View', () => {
     let hostComponent: TableHostComponent;
     let fixture: ComponentFixture<TableHostComponent>;
     let tableComponent: TableComponent<SourceItem>;
@@ -74,7 +76,7 @@ describe('TableComponent Tree View', async () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(TableHostComponent);
         hostComponent = fixture.componentInstance;
-        spyOn(hostComponent.source, 'fetch').and.callThrough();
+        jest.spyOn(hostComponent.source, 'fetch');
 
         fixture.detectChanges();
 
@@ -98,7 +100,7 @@ describe('TableComponent Tree View', async () => {
         });
 
         it('should emit event when parent item collapsed/expanded', () => {
-            const emitSpy = spyOn(tableComponent.rowToggleOpenState, 'emit').and.callThrough();
+            const emitSpy = jest.spyOn(tableComponent.rowToggleOpenState, 'emit');
 
             firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -122,7 +124,7 @@ describe('TableComponent Tree View', async () => {
             );
 
             expect(emitSpy).toHaveBeenCalledTimes(2);
-            expect(emitSpy.calls.argsFor(1)).toEqual([event2]);
+            expect(emitSpy).toHaveBeenLastCalledWith(event2);
         });
 
         it('should react to toggling/collapsing with changing rows count', async () => {
@@ -196,7 +198,7 @@ describe('TableComponent Tree View', async () => {
         });
 
         it('should emit event after rearranging rows', async () => {
-            const emitSpy = spyOn(dndDirective.rowsRearrange, 'emit').and.callThrough();
+            const emitSpy = jest.spyOn(dndDirective.rowsRearrange, 'emit');
 
             firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -228,7 +230,7 @@ describe('TableComponent Tree View', async () => {
 
             calculateTableElementsMetaData();
 
-            expect(tableComponent._tableRows[0].expanded).toBeTrue();
+            expect(tableComponent._tableRows[0].expanded).toBe(true);
             expect(tableComponent._tableRows[2].level).toEqual(1);
             expect(tableComponent._tableRows[3].level).toEqual(2);
         });
@@ -259,7 +261,9 @@ describe('TableComponent Tree View', async () => {
         });
 
         it('should change type for row with 0 children to "item"', async () => {
+            let firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
             expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
+            expect(firstRow.row.type).toEqual(TableRowType.TREE);
 
             firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -278,7 +282,9 @@ describe('TableComponent Tree View', async () => {
 
             calculateTableElementsMetaData();
 
-            expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
+            firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
+
+            expect(firstRow.row.type).toEqual(TableRowType.ITEM);
         });
 
         it('should have correct order of items before and after drag and drop', async () => {
@@ -385,7 +391,7 @@ describe('TableComponent Tree View', async () => {
             hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
             hostComponent.table.ngAfterViewInit();
 
-            const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+            const emitChangeSpy = jest.spyOn(hostComponent.table.rowSelectionChange, 'emit');
 
             hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0]);
 
@@ -396,7 +402,7 @@ describe('TableComponent Tree View', async () => {
             hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
             hostComponent.table.ngAfterViewInit();
 
-            const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+            const emitChangeSpy = jest.spyOn(hostComponent.table.rowSelectionChange, 'emit');
 
             hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0]);
 
@@ -406,7 +412,7 @@ describe('TableComponent Tree View', async () => {
             });
 
             expect(emitChangeSpy).toHaveBeenCalled();
-            expect(selected).toBeFalse();
+            expect(selected).toBe(false);
             expect(hostComponent.table._tableRows.filter((r) => r.checked).length).toEqual(1);
         });
 
@@ -416,13 +422,13 @@ describe('TableComponent Tree View', async () => {
             hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
             hostComponent.table.ngAfterViewInit();
 
-            const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+            const emitChangeSpy = jest.spyOn(hostComponent.table.rowSelectionChange, 'emit');
 
             hostComponent.table._toggleMultiSelectRow(rows[0].children[0]);
 
             expect(emitChangeSpy).toHaveBeenCalled();
             expect(rows.filter((r) => r.checked).length).toEqual(1);
-            expect(rows[0].checked).toBeFalse();
+            expect(rows[0].checked).toBe(false);
         });
 
         describe('with Tristate mode enabled', () => {
@@ -435,7 +441,7 @@ describe('TableComponent Tree View', async () => {
                 hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
                 hostComponent.table.ngAfterViewInit();
 
-                const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+                const emitChangeSpy = jest.spyOn(hostComponent.table.rowSelectionChange, 'emit');
 
                 hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0]);
 
@@ -445,7 +451,7 @@ describe('TableComponent Tree View', async () => {
                 });
 
                 expect(emitChangeSpy).toHaveBeenCalled();
-                expect(selected).toBeTrue();
+                expect(selected).toBe(true);
                 expect(hostComponent.table._tableRows.filter((r) => r.checked).length).toEqual(3);
             });
 
@@ -454,7 +460,7 @@ describe('TableComponent Tree View', async () => {
                 hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
                 hostComponent.table.ngAfterViewInit();
 
-                const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+                const emitChangeSpy = jest.spyOn(hostComponent.table.rowSelectionChange, 'emit');
                 hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[0]);
 
                 expect(emitChangeSpy).toHaveBeenCalled();
@@ -467,7 +473,7 @@ describe('TableComponent Tree View', async () => {
                 hostComponent.table.selectionMode = SelectionMode.MULTIPLE;
                 hostComponent.table.ngAfterViewInit();
 
-                const emitChangeSpy = spyOn(hostComponent.table.rowSelectionChange, 'emit').and.stub();
+                const emitChangeSpy = jest.spyOn(hostComponent.table.rowSelectionChange, 'emit');
                 hostComponent.table._toggleMultiSelectRow(hostComponent.table._tableRows[0].children[0]);
                 expect(emitChangeSpy).toHaveBeenCalled();
 
@@ -475,16 +481,16 @@ describe('TableComponent Tree View', async () => {
                 expect(emitChangeSpy).toHaveBeenCalled();
 
                 expect(hostComponent.table._tableRows.filter((r) => r.checked || r.checked === null).length).toEqual(3);
-                expect(hostComponent.table._tableRows[0].checked).toBeTrue();
+                expect(hostComponent.table._tableRows[0].checked).toBe(true);
             });
         });
     });
 
     describe('Expand / Collapse All functions', () => {
         it('should handle expand all button click', () => {
-            const loadChildRowsSpy = spyOn(hostComponent.table._tableRowService, 'loadChildRows');
-            const allRowsExpandedSpy = spyOn(hostComponent.table.allRowsExpanded, 'emit');
-            const rowsChangedSpy = spyOn(hostComponent.table, 'onTableRowsChanged');
+            const loadChildRowsSpy = jest.spyOn(hostComponent.table._tableRowService, 'loadChildRows');
+            const allRowsExpandedSpy = jest.spyOn(hostComponent.table.allRowsExpanded, 'emit');
+            const rowsChangedSpy = jest.spyOn(hostComponent.table, 'onTableRowsChanged');
 
             hostComponent.table.expandAll();
 
@@ -494,8 +500,8 @@ describe('TableComponent Tree View', async () => {
         });
 
         it('should handle collapse all button click', () => {
-            const allRowsExpandedSpy = spyOn(hostComponent.table.allRowsCollapsed, 'emit');
-            const rowsChangedSpy = spyOn(hostComponent.table, 'onTableRowsChanged');
+            const allRowsExpandedSpy = jest.spyOn(hostComponent.table.allRowsCollapsed, 'emit');
+            const rowsChangedSpy = jest.spyOn(hostComponent.table, 'onTableRowsChanged');
 
             hostComponent.table.collapseAll();
 

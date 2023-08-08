@@ -25,7 +25,7 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
 
 /**
  * @deprecated
- * ApprovalFlowApproverDetails component is depricated since version 0.40.0
+ * ApprovalFlowApproverDetails component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-approval-flow-approver-details',

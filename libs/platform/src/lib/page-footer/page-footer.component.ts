@@ -7,12 +7,13 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * @deprecated
- * PlatformFooter component is depricated since version 0.40.0
+ * PlatformFooter component is deprecated since version 0.40.0
  */
 @Component({
     selector: 'fdp-page-footer',
@@ -37,7 +38,9 @@ export class PlatformFooterComponent {
     public screenHeight: any;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {}
+    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {
+        warnOnce('PlatformFooterComponent component is deprecated since version 0.40.0');
+    }
 
     /** @hidden */
     @HostListener('window:resize', ['$event'])

@@ -19,7 +19,7 @@ describe('TableServiceService', () => {
     it('should propagate keys', () => {
         const keys = ['test1', 'test2'];
 
-        spyOn(service.propagateKeys$, 'next');
+        jest.spyOn(service.propagateKeys$, 'next');
 
         service.changeKeys(keys);
 

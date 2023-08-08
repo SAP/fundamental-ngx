@@ -45,7 +45,7 @@ class TableHostComponent {
     source = new TableDataSource(new TableDataProviderWithPaging());
 }
 
-describe('TableComponent Page Scrolling', async () => {
+describe('TableComponent Page Scrolling', () => {
     let hostComponent: TableHostComponent;
     let fixture: ComponentFixture<TableHostComponent>;
     let tableComponent: TableComponent<SourceItem>;
@@ -63,7 +63,7 @@ describe('TableComponent Page Scrolling', async () => {
         hostComponent = fixture.componentInstance;
 
         const originFetch = hostComponent.source.fetch;
-        spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) =>
+        jest.spyOn(hostComponent.source, 'fetch').mockImplementation((state: TableState) =>
             originFetch.call(hostComponent.source, state)
         );
 
@@ -78,14 +78,6 @@ describe('TableComponent Page Scrolling', async () => {
     const calculateTableElementsMetaData = (): void => {
         tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body tbody .fd-table__row'));
         tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
-    };
-
-    const tableBodyScrollTop = async (scrollTop): Promise<void> => {
-        const container = tableBodyContainer.nativeElement as HTMLElement;
-        container.scrollTop = scrollTop;
-        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
-        fixture.detectChanges();
-        calculateTableElementsMetaData();
     };
 
     beforeEach(() => {
@@ -106,54 +98,51 @@ describe('TableComponent Page Scrolling', async () => {
 
     it('should have table body height = 20rem', () => {
         expect(tableBodyContainer.styles.height).toBe('20rem');
-        const container = tableBodyContainer.nativeElement as HTMLElement;
-        expect(container.scrollHeight).toBeGreaterThan(container.clientHeight);
     });
 
     it('should not trigger fetch if scrolled not to the bottom', () => {
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
-        const container = tableBodyContainer.nativeElement as HTMLElement;
-        container.scrollTop = 100;
+        hostComponent.table._onSpyIntersect(false);
         fixture.detectChanges();
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
     });
 
     it('should trigger fetch when scrolled to the bottom', async () => {
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
-        const container = tableBodyContainer.nativeElement as HTMLElement;
-        await tableBodyScrollTop(container.scrollHeight);
+        hostComponent.table._onSpyIntersect(true);
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
     });
 
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should get new 50 items per each request', async () => {
-        await tableBodyScrollTop(999999);
+    it('should get new 50 items per each request', async () => {
+        expect(tableBodyRows.length).toBe(50);
+        hostComponent.table._onSpyIntersect(true);
+        calculateTableElementsMetaData();
 
         expect(tableBodyRows.length).toBe(100);
-
-        await tableBodyScrollTop(999999);
+        hostComponent.table._onSpyIntersect(true);
+        calculateTableElementsMetaData();
 
         expect(tableBodyRows.length).toBe(150);
     });
 
-    // TODO: flaky test  https://github.com/SAP/fundamental-ngx/issues/7534
-    xit('should stop fetching on scroll if currentPage is the last one', async () => {
-        await tableBodyScrollTop(999999); // 100
-        await tableBodyScrollTop(999999); // 150
-        await tableBodyScrollTop(999999); // 200
+    it('should stop fetching on scroll if currentPage is the last one', async () => {
+        hostComponent.table._onSpyIntersect(true); // 100
+        hostComponent.table._onSpyIntersect(true); // 150
+        hostComponent.table._onSpyIntersect(true); // 200
+        calculateTableElementsMetaData();
 
         expect(tableBodyRows.length).toBe(200);
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
 
         // try one more
-        await tableBodyScrollTop(0);
-        await tableBodyScrollTop(999999);
+        hostComponent.table._onSpyIntersect(true);
+        calculateTableElementsMetaData();
 
         expect(tableBodyRows.length).toBe(200);
         expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
     });
 
-    describe('With Initial Scrolling position', async () => {
+    describe('With Initial Scrolling position', () => {
         const initState = (scrollTop): TableState => {
             const defaultState = (hostComponent.table as any)._tableService.getDefaultState();
             return {

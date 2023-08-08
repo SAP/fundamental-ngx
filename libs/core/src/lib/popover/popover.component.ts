@@ -14,6 +14,7 @@ import {
     OnDestroy,
     Optional,
     Renderer2,
+    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
@@ -36,6 +37,7 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -89,9 +91,6 @@ export class PopoverComponent
         return this._trigger;
     }
 
-    /** @hidden */
-    private _trigger: ElementRef;
-
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
     fixedPosition = false;
@@ -139,7 +138,20 @@ export class PopoverComponent
     /** @deprecated
      * Left for backward compatibility
      */
-    directiveRef: any;
+    set directiveRef(value: any) {
+        warnOnce('Property directiveRef is deprecated. ');
+        this._directiveRef = value;
+    }
+
+    get directiveRef(): any {
+        return this._directiveRef;
+    }
+
+    /** @hidden */
+    private _directiveRef: any;
+
+    /** @hidden */
+    private _trigger: ElementRef;
 
     /** @hidden */
     private _clickEventListener: null | (() => void);
@@ -160,30 +172,6 @@ export class PopoverComponent
     }
 
     /** @hidden */
-    ngAfterViewInit(): void {
-        this._setupView();
-    }
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        if (this.popoverControl && this.triggers.includes('click')) {
-            this.popoverControl._tabbable = true;
-        }
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        this._popoverService.refreshConfiguration(this);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._destroyMobileComponent();
-        this._destroyEventListeners();
-        this._popoverService.onDestroy();
-    }
-
-    /** @hidden */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         const activeElement = document.activeElement;
@@ -200,6 +188,34 @@ export class PopoverComponent
                 this._popoverService.toggle();
             }
         }
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._setupView();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.popoverControl && this.triggers.includes('click')) {
+            this.popoverControl._tabbable = true;
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        this._popoverService.refreshConfiguration(this);
+
+        if (changes.disableScrollbar && this.popoverBody && this.popoverBody._scrollbar) {
+            this.popoverBody._scrollbar._inPopover = changes.disableScrollbar.currentValue;
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._destroyMobileComponent();
+        this._destroyEventListeners();
+        this._popoverService.onDestroy();
     }
 
     /** Toggles menu open/close state */
@@ -235,6 +251,7 @@ export class PopoverComponent
      * Left for backward compatibility
      */
     updatePopover(): void {
+        console.warn('updatePopover is Deprecated, use refreshPosition instead');
         this.refreshPosition();
     }
 

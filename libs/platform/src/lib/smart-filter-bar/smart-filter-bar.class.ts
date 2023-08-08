@@ -8,16 +8,8 @@ import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type'
 
 @Directive()
 export abstract class SmartFilterBar implements PresetManagedComponent<SmartFilterBarManagedPreset> {
-    /** Component name used in Preset managed component. */
-    @Input()
-    name = 'platformSmartFilterBar';
-
-    /** Event emitted when smart filter bar configuration has been changed. */
-    @Output()
-    presetChanged = new EventEmitter<SmartFilterBarManagedPreset>();
-
     /** @hidden */
-    defineStrategyLabels?: SmartFilterBarStrategyLabels;
+    abstract defineStrategyLabels?: SmartFilterBarStrategyLabels;
 
     abstract search: SearchInput | undefined;
 
@@ -31,4 +23,12 @@ export abstract class SmartFilterBar implements PresetManagedComponent<SmartFilt
     abstract getCurrentPreset(): SmartFilterBarManagedPreset;
 
     abstract getFormattedConditions(): Promise<CollectionFilterGroup[]>;
+
+    /** Component name used in Preset managed component. */
+    @Input()
+    name = 'platformSmartFilterBar';
+
+    /** Event emitted when smart filter bar configuration has been changed. */
+    @Output()
+    presetChanged = new EventEmitter<SmartFilterBarManagedPreset>();
 }

@@ -9,7 +9,7 @@ import {
     ToastTopCenterPosition,
     ToastTopLeftPosition,
     ToastTopRightPosition
-} from '@fundamental-ngx/cdk';
+} from '@fundamental-ngx/cdk/utils';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({

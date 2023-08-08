@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
-import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx/cdk';
+import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-example',

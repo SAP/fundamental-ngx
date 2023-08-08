@@ -1,8 +1,9 @@
 import { Observable, Subject } from 'rxjs';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  *
  * Reference to an alert component generated via the AlertService.
@@ -10,14 +11,22 @@ import { Observable, Subject } from 'rxjs';
  * For a template, add let-alert to your ng-template tag. Now using *alert* in the template refers to this class.
  */
 export class AlertRef {
+    /** Observable that is triggered when the alert is dismissed. */
+    afterDismissed: Observable<any>;
+
+    /** Data passed from the service open method. */
+    data: any;
+
     /** @hidden */
     private readonly _afterDismissed: Subject<any> = new Subject<any>();
 
-    /** Observable that is triggered when the alert is dismissed. */
-    public afterDismissed: Observable<any> = this._afterDismissed.asObservable();
-
-    /** Data passed from the service open method. */
-    public data: any;
+    /** @hidden */
+    constructor() {
+        warnOnce(
+            'AlertRef is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.'
+        );
+        this.afterDismissed = this._afterDismissed.asObservable();
+    }
 
     /**
      * Dismisses the alert.

@@ -1,8 +1,17 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, Inject } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    ElementRef,
+    Inject,
+    Input,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DestroyedService } from '@fundamental-ngx/cdk';
-import { takeUntil } from 'rxjs';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-docs-section-title',
@@ -20,7 +29,7 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
         </h2>
     `,
     styleUrls: ['./docs-section-title.component.scss'],
-    providers: [DestroyedService]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @ViewChild('title', { read: ElementRef })
@@ -39,13 +48,13 @@ export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     constructor(
         private readonly activatedRoute: ActivatedRoute,
         @Inject(CURRENT_LIB) private readonly currentLib: Libraries,
-        private readonly _destroy$: DestroyedService
+        private readonly _destroyRef: DestroyRef
     ) {
         this.currentLibrary = this.currentLib;
     }
 
     ngOnInit(): void {
-        this.activatedRoute.fragment.pipe(takeUntil(this._destroy$)).subscribe((fragment) => {
+        this.activatedRoute.fragment.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((fragment) => {
             this.idFromUrl = fragment;
             this.handleUrlFragment();
         });

@@ -360,7 +360,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         settingsCategoryVisible: 'दृश्यमान',
         settingsCategoryActive: 'सक्रिय',
         settingsCategoryVisibleAndActive: 'दृश्यमान और सक्रिय',
-        settingsCategoryMandatory: 'अनिवार्य'
+        settingsCategoryMandatory: 'अनिवार्य',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'छोटे से बड़े क्रम में क्रमबद्ध करें',
@@ -463,7 +465,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         sortDialogConfirmBtnLabel: 'अनुमोदन',
         sortDialogCancelBtnLabel: 'रद्द करें',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'पिछले पर जाएं',

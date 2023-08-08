@@ -105,12 +105,10 @@ export class AvatarGroupComponent implements AvatarGroupInterface, OnChanges, On
         }
 
         const elementStyles = getComputedStyle(this.mainItems.first._element);
+        const marginLeft = elementStyles.marginLeft || '0';
+        const marginRight = elementStyles.marginRight || '0';
 
-        return (
-            this._avatarGroupItemWidth +
-            parseInt(elementStyles.marginLeft, 10) +
-            parseInt(elementStyles.marginRight, 10)
-        );
+        return this._avatarGroupItemWidth + parseInt(marginLeft, 10) + parseInt(marginRight, 10);
     }
 
     /** @hidden FocusKeyManager instance */

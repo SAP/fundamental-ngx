@@ -1,4 +1,5 @@
 import { Directive } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * @deprecated
@@ -12,4 +13,9 @@ import { Directive } from '@angular/core';
     }
 })
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class MessageBoxDecisiveButton {}
+export class MessageBoxDecisiveButton {
+    /** @hidden */
+    constructor() {
+        warnOnce('`[fd-message-box-decisive-button]` is deprecated. Consider using `fd-button-bar`');
+    }
+}

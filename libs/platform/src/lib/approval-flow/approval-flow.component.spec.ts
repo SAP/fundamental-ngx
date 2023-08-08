@@ -27,6 +27,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 @Component({
     selector: 'fdp-test-approval-flow',
     template: ` <fdp-approval-flow
+        #approvalFlowComponent
         [title]="title"
         [value]="value"
         [userDataSource]="userDataSource"
@@ -35,7 +36,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
     ></fdp-approval-flow>`
 })
 class TestPlatformApprovalFlowComponent {
-    @ViewChild(ApprovalFlowComponent, { static: true }) component: ApprovalFlowComponent;
+    @ViewChild('approvalFlowComponent', { static: true }) component: ApprovalFlowComponent;
     title = TEST_APPROVAL_FLOW_TITLE;
     value = simpleGraph;
     userDataSource = new ApprovalFlowUserDataSource(new UserDataProvider());
@@ -56,10 +57,14 @@ describe('ApprovalFlowComponent', () => {
         }).compileComponents();
     });
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestPlatformApprovalFlowComponent);
         host = fixture.componentInstance;
         component = host.component;
+        jest.spyOn(component, '_setScrollPosition').mockImplementation((pos) => {
+            component._graphContainerEl.nativeElement.scrollLeft = pos;
+        });
+        await fixture.whenRenderingDone();
         fixture.detectChanges();
     });
 
@@ -106,7 +111,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should call watcher click handler on watcher click', () => {
-        spyOn(component, '_onWatcherClick').and.callThrough();
+        jest.spyOn(component, '_onWatcherClick');
 
         const watchersContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__watchers');
         const watcher = watchersContainer.querySelector('fd-avatar');
@@ -129,7 +134,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should call keydown handler if arrow key was pressed', () => {
-        spyOn(component, '_onNodeKeyDown').and.callThrough();
+        jest.spyOn(component, '_onNodeKeyDown');
 
         const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
@@ -148,35 +153,33 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should increment step count after nextSlide call', async () => {
+        component._graphContainerEl.nativeElement.scrollLeft = 0;
+        jest.spyOn(component._graphEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(20000);
         const prevCountRight = component._carouselStepsRight;
 
         component.nextSlide();
-        // wait until smooth scrolling is done
-        await new Promise((r) => setTimeout(r, 1000));
 
         expect(prevCountRight > component._carouselStepsRight).toBeTruthy();
     });
 
     it('should decrement step count after previousSlide call', async () => {
+        component._graphContainerEl.nativeElement.scrollLeft = 0;
+        jest.spyOn(component._graphEl.nativeElement, 'scrollWidth', 'get').mockReturnValue(20000);
         expect(component._carouselStepsLeft).toBe(0);
 
         // scroll as far to the right as we can
         component._setScrollPosition(10000);
-        // wait until smooth scrolling is done
-        await new Promise((r) => setTimeout(r, 1000));
+        component._graphContainerEl.nativeElement.scrollLeft = 10000;
 
         const prevCountLeft = component._carouselStepsLeft;
         expect(prevCountLeft).not.toBe(0);
 
         component.nextSlide(-1);
-        // wait until smooth scrolling is done
-        await new Promise((r) => setTimeout(r, 1000));
-
         expect(prevCountLeft > component._carouselStepsLeft).toBeTruthy();
     });
 
     it('should open adding node dialog for the empty graph', () => {
-        const dialogSpy = spyOn(fixture.componentRef.injector.get(DialogService), 'open').and.returnValue({
+        const dialogSpy = jest.spyOn(fixture.componentRef.injector.get(DialogService), 'open').mockReturnValue({
             afterClosed: of(null)
         } as any);
 
@@ -184,14 +187,16 @@ describe('ApprovalFlowComponent', () => {
 
         expect(dialogSpy).toHaveBeenCalled();
 
-        const diagogSpyArgs = dialogSpy.calls.mostRecent().args[1]?.data as AddNodeDialogRefData;
+        const lastCall = dialogSpy.mock.lastCall!;
+
+        const diagogSpyArgs = lastCall[1]!.data as AddNodeDialogRefData;
 
         expect(diagogSpyArgs.nodeTarget).toEqual('empty');
         expect(diagogSpyArgs.showNodeTypeSelect).toEqual(false);
     });
 
     it('should enter edit mode', fakeAsync(() => {
-        const watchersSpy = spyOn(component.watcherDataSource, 'match').and.callThrough();
+        const watchersSpy = jest.spyOn(component.watcherDataSource, 'match');
 
         component._enterEditMode();
 
@@ -202,7 +207,7 @@ describe('ApprovalFlowComponent', () => {
     }));
 
     it('should save edit mode changes', () => {
-        const approvalSpy = spyOn(component.valueChange, 'emit').and.callThrough();
+        const approvalSpy = jest.spyOn(component.valueChange, 'emit');
 
         component._saveEditModeChanges();
 
@@ -217,7 +222,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should add node to the graph', () => {
-        const dialogSpy = spyOn(TestBed.inject(DialogService), 'open').and.returnValue({
+        const dialogSpy = jest.spyOn(TestBed.inject(DialogService), 'open').mockReturnValue({
             afterClosed: of({
                 node: Object.assign({}, simpleGraph.nodes[0], { status: 'not started' }),
                 nodeType: APPROVAL_FLOW_NODE_TYPES.SERIAL

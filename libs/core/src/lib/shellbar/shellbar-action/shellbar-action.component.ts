@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents a shellbar action.
@@ -32,7 +33,7 @@ export class ShellbarActionComponent {
 
     /** Callback that hanldles the response to clicks on any of the actions. */
     @Input()
-    callback: (event: MouseEvent) => void;
+    callback: Nullable<(event: MouseEvent) => void>;
 
     /** The action label. */
     @Input()

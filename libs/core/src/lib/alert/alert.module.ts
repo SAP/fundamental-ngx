@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert-service/alert.service';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  */
 @NgModule({
@@ -19,4 +19,11 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
     exports: [AlertComponent, AlertContainerComponent],
     providers: [AlertService, DynamicComponentService]
 })
-export class AlertModule {}
+export class AlertModule {
+    /** @hidden */
+    constructor() {
+        warnOnce(
+            'AlertModule is deprecated since version 0.16.0 and will be removed in next release. Message Strip component should be used instead.'
+        );
+    }
+}

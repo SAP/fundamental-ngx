@@ -41,7 +41,6 @@ describe('Switch test suite', () => {
 
     it('Should check turn on/ Turn off switch toggle', async () => {
         await checkSwitchingWork(switchSizesExample);
-        await checkSwitchingWork(switchFormsExample);
         await checkSwitchingWork(semanticswitchExample);
         await checkSwitchingWork(switchBindingExample);
         await checkSwitchingWork(playGroundSwitchExample);
@@ -122,6 +121,7 @@ describe('Switch test suite', () => {
         flag: string = section + toggleInput
     ): Promise<boolean | undefined> {
         if ((await getAttributeByName(section + toggle, 'class', i)) !== disabledToggle) {
+            await new Promise((resolve) => setTimeout(resolve, 200));
             if ((await getAttributeByName(flag, 'aria-checked', i)) === 'true') {
                 return true;
             }

@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     Input,
@@ -17,7 +18,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription, takeUntil, tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
@@ -25,7 +26,8 @@ import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 const splitButtonTextClasses = [splitButtonTextClass];
@@ -70,7 +72,16 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
     @Input()
-    mainActionTitle: string;
+    set mainActionTitle(value: string) {
+        warnOnce(
+            "Property mainActionTitle is deprecated. Use MenuItemComponent's title component text content instead."
+        );
+        this._mainActionTitle = value;
+    }
+
+    get mainActionTitle(): string {
+        return this._mainActionTitle;
+    }
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
@@ -82,7 +93,16 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
      * Aria-label attribute used to describe expand button
      */
     @Input()
-    expandButtonAriaLabel: string;
+    set expandButtonAriaLabel(value: string) {
+        warnOnce(
+            "Property expandButtonAriaLabel is deprecated. Use i18n capabilities 'coreSplitButton.expandButtonAriaLabel' key instead."
+        );
+        this._expandButtonAriaLabel = value;
+    }
+
+    get expandButtonAriaLabel(): string {
+        return this._expandButtonAriaLabel;
+    }
 
     /** Title attribute used to describe expand button */
     @Input()
@@ -136,6 +156,12 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     }
 
     /** @hidden */
+    private _expandButtonAriaLabel: string;
+
+    /** @hidden */
+    private _mainActionTitle: string;
+
+    /** @hidden */
     private _menuItemSubscriptions = new Subscription();
 
     /** @hidden */
@@ -150,7 +176,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     constructor(
         private _cdRef: ChangeDetectorRef,
-        private _destroy$: DestroyedService,
+        private _destroyRef: DestroyRef,
         private _contentDensityObserver: ContentDensityObserver,
         private _renderer: Renderer2
     ) {}
@@ -195,7 +221,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     ngAfterViewInit(): void {
         this._contentDensityObserver.isCompact$
-            .pipe(tap(this._addButtonTextClass), takeUntil(this._destroy$))
+            .pipe(tap(this._addButtonTextClass), takeUntilDestroyed(this._destroyRef))
             .subscribe();
     }
 

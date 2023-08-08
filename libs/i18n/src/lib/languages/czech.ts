@@ -363,7 +363,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         settingsCategoryVisible: 'Viditelné',
         settingsCategoryActive: 'Aktivní',
         settingsCategoryVisibleAndActive: 'Viditelné a aktivní',
-        settingsCategoryMandatory: 'Povinné'
+        settingsCategoryMandatory: 'Povinné',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Seřadit vzestupně',
@@ -466,7 +468,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Zrušit',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',

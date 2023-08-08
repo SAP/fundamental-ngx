@@ -1,14 +1,13 @@
-import { Directive, ElementRef, EventEmitter, inject, Input, Output } from '@angular/core';
-import { map, takeUntil } from 'rxjs';
+import { DestroyRef, Directive, ElementRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { map } from 'rxjs';
 import { intersectionObservable } from '../../functions';
-import { DestroyedService } from '../../services';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     selector: '[fdkIntersectionSpy]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
-export class IntersectionSpyDirective {
+export class IntersectionSpyDirective implements OnInit {
     /** Intersection offset in px. */
     @Input('fdkIntersectionSpy')
     offset = 20;
@@ -21,7 +20,7 @@ export class IntersectionSpyDirective {
     intersected = new EventEmitter<boolean>();
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _elementRef = inject(ElementRef);
@@ -31,7 +30,7 @@ export class IntersectionSpyDirective {
         intersectionObservable(this._elementRef.nativeElement, this.viewportOptions)
             .pipe(
                 map((entries) => entries[0]),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((entry) => {
                 this.intersected.emit(entry.isIntersecting);

@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
@@ -91,7 +91,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     @Input()
     set ariaLabelledby(value: Nullable<string>) {
         if (isDevMode() && !warnedAboutAriaLabeledBy) {
-            console.warn('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
+            warnOnce('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
             warnedAboutAriaLabeledBy = true;
         }
         this.ariaLabelledBy = value;
@@ -106,14 +106,32 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      * Semantic Label Accept set for Accessibility
      */
     @Input()
-    semanticAcceptLabel: string;
+    set semanticAcceptLabel(value: string) {
+        warnOnce(
+            "Property semanticAcceptLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticAcceptLabel' key instead."
+        );
+        this._semanticAcceptLabel = value;
+    }
+
+    get semanticAcceptLabel(): string {
+        return this._semanticAcceptLabel;
+    }
 
     /**
      * @deprecated use i18n capabilities instead
      * Semantic Label Decline set for Accessibility
      */
     @Input()
-    semanticDeclineLabel: string;
+    set semanticDeclineLabel(value: string) {
+        warnOnce(
+            "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticDeclineLabel' key instead."
+        );
+        this._semanticDeclineLabel = value;
+    }
+
+    get semanticDeclineLabel(): string {
+        return this._semanticDeclineLabel;
+    }
 
     /**
      * Event fired when the state of the switch changes.
@@ -123,19 +141,29 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     readonly checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** @hidden */
+    @ViewChild('switchEl', { read: ElementRef })
+    _switchLabelWrapperEl: ElementRef;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: (value: boolean) => void = () => {};
+    private _semanticDeclineLabel: string;
 
     /** @hidden */
-    onTouched = (): void => {};
+    private _semanticAcceptLabel: string;
 
     /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
+
+    /** @hidden */
+    onChange: (value: boolean) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -159,9 +187,14 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
 
     /** Checked property of the switch. */
     set isChecked(value) {
+        this._switchLabelWrapperEl.nativeElement.classList.remove('fd-switch-no-animate');
         this.checked = value;
         this.onChange(value);
         this.checkedChange.emit(value);
+        setTimeout(() => {
+            // add the no-animate class after the transition duration, 100ms
+            this._switchLabelWrapperEl.nativeElement.classList.add('fd-switch-no-animate');
+        }, 100);
     }
     get isChecked(): boolean {
         return this.checked;

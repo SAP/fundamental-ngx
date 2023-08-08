@@ -9,12 +9,10 @@ import { FdpTableDataSource } from './models/data-source.type';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
-import cloneDeep from 'lodash-es/cloneDeep';
-import set from 'lodash-es/set';
+import { cloneDeep, set, get } from 'lodash-es';
 import { GroupTableRowValueType, TreeLike } from './models/tree-table.model';
 import { CollectionGroup } from './interfaces/collection-group.interface';
 import { SortDirection } from './enums/sort-direction.enum';
-import get from 'lodash-es/get';
 import { isObservable } from 'rxjs';
 
 /** @hidden */

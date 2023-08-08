@@ -57,10 +57,13 @@ class TestComponent {
 describe('DynamicPageComponent default values', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
-    let dynamicPageServiceSpy: jasmine.SpyObj<DynamicPageService>;
+    let dynamicPageServiceSpy: Partial<DynamicPageService>;
 
     beforeEach(waitForAsync(() => {
-        dynamicPageServiceSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
+        dynamicPageServiceSpy = {
+            expandHeader: jest.fn(),
+            collapseHeader: jest.fn()
+        };
 
         TestBed.configureTestingModule({
             imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
@@ -110,7 +113,7 @@ describe('DynamicPageComponent default values', () => {
     it('should render content in view', () => {
         fixture.detectChanges();
         const contentEl = fixture.debugElement.query(By.css('.' + CLASS_NAME.dynamicPageContent)).nativeElement;
-        expect(contentEl.innerText).toBe('DynamicPage Content Text');
+        expect(contentEl.textContent.trim()).toBe('DynamicPage Content Text');
     });
 
     it('should collapse header on click of title', async () => {
@@ -127,7 +130,7 @@ describe('DynamicPageComponent default values', () => {
         const throttleTime = 100;
         const contentEl = fixture.debugElement.query(By.css('fd-dynamic-page-content'));
 
-        const emitSpy = spyOn(component.dynamicPageHeaderComponent.collapsedChange, 'emit');
+        const emitSpy = jest.spyOn(component.dynamicPageHeaderComponent.collapsedChange, 'emit');
 
         contentEl.nativeElement.dispatchEvent(new Event('scroll'));
 

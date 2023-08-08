@@ -82,8 +82,8 @@ describe('DialogHeaderComponent', () => {
         await wait(fixture);
         const footerEl = fixture.nativeElement.querySelector('[fd-bar]');
 
-        expect(footerEl).toHaveClass('fd-dialog__header');
-        expect(footerEl).toHaveClass('is-cozy');
+        expect(footerEl.classList).toContain('fd-dialog__header');
+        expect(footerEl.classList).toContain('is-cozy');
     });
 
     it('should use default template', async () => {

@@ -1,13 +1,13 @@
-import { Directive, ElementRef, NgZone, OnDestroy, OnInit, forwardRef, inject } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { DestroyRef, Directive, ElementRef, forwardRef, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import {
     TABLE_SCROLLABLE,
     TableScrollable,
     TableScrollDispatcherService
 } from '../services/table-scroll-dispatcher.service';
-import { Observable, Observer, fromEvent } from 'rxjs';
-import { filter, share, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, Observable, Observer } from 'rxjs';
+import { filter, share, tap } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Table Scrollable.
@@ -21,10 +21,7 @@ import { DOCUMENT } from '@angular/common';
     selector: '[fdpTableScrollable]',
     exportAs: 'tableScrollable',
     standalone: true,
-    providers: [
-        { provide: TABLE_SCROLLABLE, useExisting: forwardRef(() => TableScrollableDirective) },
-        DestroyedService
-    ]
+    providers: [{ provide: TABLE_SCROLLABLE, useExisting: forwardRef(() => TableScrollableDirective) }]
 })
 export class TableScrollableDirective implements TableScrollable, OnInit, OnDestroy {
     /** @hidden */
@@ -37,7 +34,7 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
     private _prevScrollLeft = 0;
 
     /** @hidden */
-    private readonly _destroyed$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
@@ -56,7 +53,7 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
             }
             return true;
         }),
-        takeUntil(this._destroyed$),
+        takeUntilDestroyed(this._destroyRef),
         share()
     );
 
@@ -155,8 +152,10 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     activeEl.scrollIntoView({ block: 'nearest', inline: 'center' });
                 } else if (freezableColumnsSize && freezableEndColumnSize) {
                     // check to see if another element obstructs the active element
-                    const activeElLeft = activeEl.getBoundingClientRect().left;
-                    const activeElTop = activeEl.getBoundingClientRect().top;
+                    const activeElmRect = activeEl.getBoundingClientRect();
+                    const activeElLeft = activeElmRect.left;
+                    const activeElTop = activeElmRect.top;
+                    const activeElWidth = activeElmRect.width;
                     const topElementFromLeft = this._document.elementFromPoint(activeElLeft, activeElTop);
                     // if the activeEl is overlapped
                     if (
@@ -166,8 +165,8 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     ) {
                         const topElementX = topElementFromLeft.getBoundingClientRect().left;
                         const leftVal = isRtl
-                            ? (activeElLeft + activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft + activeEl.getBoundingClientRect().width - topElementX;
+                            ? (activeElLeft + activeElWidth - topElementX) * -1
+                            : activeElLeft + activeElWidth - topElementX;
                         tableScrollableEl.scrollBy({ top: 0, left: leftVal });
                     } else if (
                         topElementFromLeft &&
@@ -176,8 +175,8 @@ export class TableScrollableDirective implements TableScrollable, OnInit, OnDest
                     ) {
                         const topElementX = topElementFromLeft.getBoundingClientRect().right;
                         const leftVal = isRtl
-                            ? (activeElLeft - activeEl.getBoundingClientRect().width - topElementX) * -1
-                            : activeElLeft - activeEl.getBoundingClientRect().width - topElementX;
+                            ? (activeElLeft - activeElWidth - topElementX) * -1
+                            : activeElLeft - activeElWidth - topElementX;
                         tableScrollableEl.scrollBy({ top: 0, left: leftVal });
                     }
                 }

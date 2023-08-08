@@ -46,7 +46,7 @@ describe('TabListComponent', () => {
 
     it('should initially open first tab', async () => {
         await whenStable(fixture);
-        expect(testComponent.tabs.first.expanded).toBeTrue();
+        expect(testComponent.tabs.first.expanded).toBe(true);
     });
 
     it('should update tab storing structures', async () => {
@@ -56,7 +56,7 @@ describe('TabListComponent', () => {
 
     it('should select tab', async () => {
         await whenStable(fixture);
-        const tabChangeSpy = spyOn(component.selectedTabChange, 'emit');
+        const tabChangeSpy = jest.spyOn(component.selectedTabChange, 'emit');
         const firstActiveTab = testComponent.tabs.first;
         const secondActiveTab = testComponent.tabs.last;
 
@@ -65,8 +65,8 @@ describe('TabListComponent', () => {
         await whenStable(fixture);
 
         expect(tabChangeSpy).toHaveBeenCalled();
-        expect(firstActiveTab.expanded).toBeFalse();
-        expect(secondActiveTab.expanded).toBeTrue();
+        expect(firstActiveTab.expanded).toBe(false);
+        expect(secondActiveTab.expanded).toBe(true);
     });
 
     it('should update on tab panels change', async () => {
@@ -86,7 +86,7 @@ describe('TabListComponent', () => {
 
         await whenStable(fixture);
 
-        const tabChangeSpy = spyOn(component.selectedTabChange, 'emit');
+        const tabChangeSpy = jest.spyOn(component.selectedTabChange, 'emit');
         fixture.componentInstance.showDisabled = false;
 
         await whenStable(fixture);
@@ -145,9 +145,22 @@ describe('TabListComponent', () => {
 
     it('should respect maximum number of visible tabs', async () => {
         await whenStable(fixture);
+        const containerWidth = 200;
+        const itemWidth = 50;
 
-        const visibleTabsSpy = spyOn(component.visibleItemsCount, 'emit').and.callThrough();
-        const hiddenTabsSpy = spyOn(component.hiddenItemsCount, 'emit').and.callThrough();
+        const visibleTabsSpy = jest.spyOn(component.visibleItemsCount, 'emit');
+        const hiddenTabsSpy = jest.spyOn(component.hiddenItemsCount, 'emit');
+
+        jest.spyOn(
+            (component as any)._overflowLayout._elementRef.nativeElement,
+            'getBoundingClientRect'
+        ).mockReturnValue({
+            width: containerWidth
+        });
+
+        jest.spyOn((component as any)._overflowLayout._overflowLayoutService, '_getElementWidth').mockImplementation(
+            () => itemWidth
+        );
 
         testComponent.maxVisibleTabs = 1;
 
@@ -166,6 +179,6 @@ describe('TabListComponent', () => {
         await whenStable(fixture);
 
         const someTabActive = component._tabArray.some((tab) => tab.active);
-        expect(someTabActive).toBeFalse();
+        expect(someTabActive).toBe(false);
     });
 });

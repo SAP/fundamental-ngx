@@ -360,7 +360,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         settingsCategoryVisible: 'Görünür',
         settingsCategoryActive: 'Etkin',
         settingsCategoryVisibleAndActive: 'Görünür ve aktif',
-        settingsCategoryMandatory: 'Zorunlu'
+        settingsCategoryMandatory: 'Zorunlu',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Artan Sıralama',
@@ -463,7 +465,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Vazgeç',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Öncekine Git',

@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Inject,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -23,7 +32,6 @@ import {
     FD_LANGUAGE_ITALIAN,
     FD_LANGUAGE_POLISH,
     FD_LANGUAGE_RUSSIAN,
-    FD_LANGUAGE_SPANISH,
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN
 } from '@fundamental-ngx/i18n';
@@ -45,7 +53,8 @@ type Version = {
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
-    providers: [MenuKeyboardService]
+    providers: [MenuKeyboardService],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @Output()
@@ -78,25 +87,16 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     translations = [
         { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },
-        // { name: 'العربية', value: FD_LANGUAGE_ARABIC }, TODO: uncomment when translations are provided
-        // { name: 'Беларускі', value: FD_LANGUAGE_BELARUSIAN }, TODO: uncomment when translations are provided
         { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
         { name: '简体中文', value: FD_LANGUAGE_CHINESE },
-        // { name: 'Hrvatski', value: FD_LANGUAGE_CROATIAN }, TODO: uncomment when translations are provided
         { name: 'Český', value: FD_LANGUAGE_CZECH },
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
         { name: 'Français', value: FD_LANGUAGE_FRENCH },
         { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
-        // { name: 'Deutsch', value: FD_LANGUAGE_GERMAN }, TODO: uncomment when translations are provided
-        // { name: 'עִברִית', value: FD_LANGUAGE_HEBREW }, TODO: uncomment when translations are provided
         { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
         { name: 'Polski', value: FD_LANGUAGE_POLISH },
-        // { name: 'Português', value: FD_LANGUAGE_PORTUGUESE }, TODO: uncomment when translations are provided
-        // { name: 'Română', value: FD_LANGUAGE_ROMANIAN }, TODO: uncomment when translations are provided
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
-        // { name: 'සිංහල', value: FD_LANGUAGE_SINHALA }, TODO: uncomment when translations are provided
-        { name: 'Española', value: FD_LANGUAGE_SPANISH },
         { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
         { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
     ];

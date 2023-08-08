@@ -1,6 +1,14 @@
-import { ElementRef, FactorySansProvider, inject, Injectable, InjectFlags, Injector, Renderer2 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, distinctUntilChanged, map, takeUntil } from 'rxjs';
+import {
+    DestroyRef,
+    ElementRef,
+    FactorySansProvider,
+    inject,
+    Injectable,
+    InjectFlags,
+    Injector,
+    Renderer2
+} from '@angular/core';
+import { BehaviorSubject, distinctUntilChanged, map } from 'rxjs';
 import { ContentDensityObserverSettings } from '../classes/content-density-observer.settings';
 import { ContentDensityObserverTarget } from '../content-density.types';
 import { getChangesSource$ } from '../helpers/get-changes-source.provider';
@@ -8,6 +16,7 @@ import { GlobalContentDensityService } from '../services/global-content-density.
 import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityMode } from '../types/content-density.mode';
 import { defaultContentDensityObserverConfigs } from '../variables/default-content-density-consumer-config';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const isFactoryProvider = (obj: any): obj is FactorySansProvider => !!(obj && (obj as FactorySansProvider).useFactory);
 
@@ -61,18 +70,21 @@ const initialContentDensity = (
 @Injectable()
 export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> {
     /** @hidden */
+    readonly config: ContentDensityObserverSettings;
+    /** @hidden */
     private readonly _isCompact$ = new BehaviorSubject<boolean>(false);
     /** @hidden */
     private readonly _isCozy$ = new BehaviorSubject<boolean>(false);
     /** @hidden */
     private readonly _isCondensed$ = new BehaviorSubject<boolean>(false);
     /** @hidden */
-    readonly config: ContentDensityObserverSettings;
-    /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCompact$ = this._isCompact$.asObservable();
     /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCozy$ = this._isCozy$.asObservable();
     /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     readonly isCondensed$ = this._isCondensed$.asObservable();
     /** @hidden */
     get isCompact(): boolean {
@@ -107,7 +119,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     private _renderer: Renderer2 | null = inject(Renderer2);
 
     /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _elementRef: ElementRef<any> | null = inject(ElementRef);
@@ -128,13 +140,10 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
     constructor(private _injector: Injector, private _providedConfig?: ContentDensityObserverSettings) {
         super(initialContentDensity(_injector, _providedConfig));
 
-        const destroySub = this._destroy$.subscribe({
-            complete: () => {
-                destroySub.unsubscribe();
-                this.complete();
-                if (this.config.debug) {
-                    console.log('ContentDensityObserver: destroyed');
-                }
+        this._destroyRef.onDestroy(() => {
+            this.complete();
+            if (this.config.debug) {
+                console.log('ContentDensityObserver: destroyed');
             }
         });
 
@@ -172,7 +181,7 @@ export class ContentDensityObserver extends BehaviorSubject<ContentDensityMode> 
                     return density;
                 }),
                 distinctUntilChanged(),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((density) => {
                 this.next(density);

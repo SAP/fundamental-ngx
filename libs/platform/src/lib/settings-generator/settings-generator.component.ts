@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     HostBinding,
     Inject,
@@ -15,7 +16,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { BaseSettingsGeneratorLayout } from './layouts/base-settings-generator-layout';
 import { SettingsGeneratorSidebarLayoutComponent } from './layouts/settings-generator-sidebar-layout/settings-generator-sidebar-layout.component';
@@ -24,9 +25,10 @@ import { SettingsModel } from './models/settings.model';
 import { SettingsGeneratorLayoutAccessorService } from './settings-generator-layout-accessor.service';
 import { SettingsGeneratorReturnValue, SettingsGeneratorService } from './settings-generator.service';
 import { ThemeSelectorListComponent } from './controls/theme-selector-list/theme-selector-list.component';
-import { BehaviorSubject, filter, Observable, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, Observable, Subscription } from 'rxjs';
 import { FDP_SETTINGS_GENERATOR, FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
 import { SettingsGenerator } from './models/settings-generator.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-settings-generator',
@@ -36,7 +38,6 @@ import { SettingsGenerator } from './models/settings-generator.model';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         SettingsGeneratorService,
-        DestroyedService,
         {
             provide: FDP_SETTINGS_GENERATOR,
             useExisting: SettingsGeneratorComponent
@@ -44,10 +45,18 @@ import { SettingsGenerator } from './models/settings-generator.model';
     ]
 })
 export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy {
+    /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fdp-settings-generator';
+    /** @hidden */
+    @ViewChild('renderer', { read: ViewContainerRef })
+    private readonly _viewRef: ViewContainerRef;
+
     /**
      * Settings Generator Element Ref.
      */
     elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
     /**
      * Settings configuration.
      */
@@ -72,14 +81,6 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
     private readonly _settingsGeneratorService = inject(SettingsGeneratorService);
 
     /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fdp-settings-generator';
-
-    /** @hidden */
-    @ViewChild('renderer', { read: ViewContainerRef })
-    private readonly _viewRef: ViewContainerRef;
-
-    /** @hidden */
     private _currentLayout: string;
 
     /** @hidden */
@@ -97,7 +98,7 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         private readonly _settingsLayoutService: SettingsGeneratorLayoutAccessorService,
         private readonly _injector: Injector,
         private readonly _cdr: ChangeDetectorRef,
-        private readonly _destroy$: DestroyedService,
+        private readonly _destroyRef: DestroyRef,
         @Inject(FDP_SETTINGS_GENERATOR_CONFIG) private readonly _config: SettingsConfig
     ) {
         this._settingsLayoutService.addLayout('sidebar', SettingsGeneratorSidebarLayoutComponent);
@@ -112,7 +113,7 @@ export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewI
         this._viewReady.next(true);
 
         // We need to notify children components to update their classes.
-        this._settingsGeneratorService.mobileState$.pipe(takeUntil(this._destroy$)).subscribe(() => {
+        this._settingsGeneratorService.mobileState$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._cdr.markForCheck();
         });
     }

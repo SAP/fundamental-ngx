@@ -144,9 +144,7 @@ describe('SmartFilterBarSubjectDirective', () => {
 
     it('should return field variants', async () => {
         // With Jest runner value being transformed with LodashWrapper for some reason.
-        const options = (await firstValueFrom(component.directive.getFieldVariants('status'))).map(
-            (o) => o.value.__wrapped__.status
-        );
+        const options = (await firstValueFrom(component.directive.getFieldVariants('status'))).map((o) => o.value);
         expect(options.filter((o: string, i: number) => options.indexOf(o) === i)).toEqual(['valid', 'invalid']);
     });
 

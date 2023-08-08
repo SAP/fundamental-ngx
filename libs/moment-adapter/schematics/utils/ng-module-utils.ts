@@ -76,7 +76,7 @@ function isNgModuleCallExpression(callExpression: ts.CallExpression): boolean {
 
 // Borrowed from the Angular CDK
 export function getProjectFromWorkspace(workspace: WorkspaceSchema, projectName?: string): WorkspaceProject {
-    const key = projectName || workspace.defaultProject;
+    const key = projectName;
     const project = key && workspace.projects[key];
 
     if (!project) {

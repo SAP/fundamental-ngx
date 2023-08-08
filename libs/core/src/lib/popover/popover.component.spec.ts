@@ -6,6 +6,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverService } from './popover-service/popover.service';
 import { PopoverComponent } from './popover.component';
 import { PopoverModule } from './popover.module';
+import { SimpleChanges } from '@angular/core';
 
 describe('PopoverComponent', () => {
     let component: PopoverComponent;
@@ -57,7 +58,7 @@ describe('PopoverComponent', () => {
     it('should call _popoverService.refreshConfiguration from ngOnChanges', () => {
         jest.spyOn(popoverServiceStub, 'refreshConfiguration');
 
-        component.ngOnChanges();
+        component.ngOnChanges({} as SimpleChanges);
 
         expect(popoverServiceStub.refreshConfiguration).toHaveBeenCalled();
     });

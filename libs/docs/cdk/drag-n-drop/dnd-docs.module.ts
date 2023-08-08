@@ -7,7 +7,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DndHeaderComponent } from './dnd-header/dnd-header.component';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/fn/shared';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
 import { DndDocsComponent } from './dnd-docs.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { DisabledExampleComponent } from './examples/disabled-example/disabled-example.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
                 path: '',
                 component: DndDocsComponent
             },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.tabs } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.dnd } }
         ]
     }
 ];

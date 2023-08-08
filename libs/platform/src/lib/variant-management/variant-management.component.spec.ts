@@ -58,13 +58,16 @@ describe('VariantManagementComponent', () => {
     });
 
     it('should set variants', () => {
-        const setVariantSpy = spyOn(component, 'selectVariant').and.callThrough();
-        const setVariantEventSpy = spyOn(component.activeVariantChange, 'emit').and.callThrough();
+        const setVariantSpy = jest.spyOn(component, 'selectVariant');
+        const setVariantEventSpy = jest.spyOn(component.activeVariantChange, 'emit');
 
         component.variants = mockVariants;
 
-        expect(setVariantSpy).toHaveBeenCalledOnceWith(selectedVariantItem);
-        expect(setVariantEventSpy).toHaveBeenCalledOnceWith(selectedVariantItem);
+        expect(setVariantSpy).toBeCalledTimes(1);
+        expect(setVariantSpy).toHaveBeenLastCalledWith(selectedVariantItem);
+
+        expect(setVariantEventSpy).toBeCalledTimes(1);
+        expect(setVariantEventSpy).toHaveBeenLastCalledWith(selectedVariantItem);
     });
 
     it('should return original variant data', () => {
@@ -86,14 +89,14 @@ describe('VariantManagementComponent', () => {
         component.updateActivePreset(newData, 'test');
 
         expect(component.getActiveVariantData().test).toEqual(newData);
-        expect(component._variantChanged).toBeTrue();
+        expect(component._variantChanged).toBe(true);
 
         component.saveCurrentVariant();
 
-        expect(component._variantChanged).toBeFalse();
+        expect(component._variantChanged).toBe(false);
 
         component.updateActivePreset(newData, 'test');
 
-        expect(component._variantChanged).toBeFalse();
+        expect(component._variantChanged).toBe(false);
     });
 });

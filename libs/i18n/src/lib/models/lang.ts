@@ -456,6 +456,8 @@ export interface FdLanguage {
         settingsCategoryActive: FdLanguageKey;
         settingsCategoryVisibleAndActive: FdLanguageKey;
         settingsCategoryMandatory: FdLanguageKey;
+        manageFieldConditions: FdLanguageKey;
+        refreshButtonAriaLabel: FdLanguageKey;
     };
     platformTable: {
         headerMenuSortAsc: FdLanguageKey;
@@ -565,6 +567,8 @@ export interface FdLanguage {
         sortDialogCancelBtnLabel: FdLanguageKey;
         selectAllCheckboxLabel: FdLanguageKey;
         deselectAllCheckboxLabel: FdLanguageKey;
+        deselectSingleRow: FdLanguageKey;
+        selectSingleRow: FdLanguageKey;
     };
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: FdLanguageKey;

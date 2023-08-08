@@ -4,6 +4,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     HostBinding,
     Input,
     NgZone,
@@ -16,10 +17,11 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { DestroyedService, FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { first, startWith, takeUntil } from 'rxjs';
+import { first, startWith } from 'rxjs';
 import { TableCellDirective } from './directives/table-cell.directive';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export const FdTableContentDensityProviderParams = {
     supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.CONDENSED, ContentDensityMode.COZY]
@@ -103,7 +105,7 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
     constructor(
         private readonly _tableService: TableService,
         private readonly _contentDensityObserver: ContentDensityObserver,
-        private readonly _destroy$: DestroyedService,
+        private readonly _destroyRef: DestroyRef,
         private readonly _ngZone: NgZone
     ) {
         this._contentDensityObserver.subscribe();
@@ -112,7 +114,7 @@ export class TableComponent implements AfterContentInit, AfterViewInit {
     /** @hidden */
     ngAfterContentInit(): void {
         this._cells.changes
-            .pipe(startWith(this._cells), takeUntil(this._destroy$))
+            .pipe(startWith(this._cells), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => this._updateCells());
     }
 

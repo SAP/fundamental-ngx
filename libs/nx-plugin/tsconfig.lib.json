@@ -3,9 +3,12 @@
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
         "declaration": true,
-        "types": ["node"]
+        "types": ["node"],
+        "jsx": "react",
+        "jsxFactory": "JSX.createElement",
+        "jsxFragmentFactory": "JSX.Fragment"
     },
     "files": ["./src/index.ts"],
     "include": ["**/*.ts"],
-    "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+    "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

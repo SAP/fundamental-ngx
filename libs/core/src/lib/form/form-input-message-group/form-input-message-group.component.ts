@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    Output,
+    ViewChild,
+    ViewEncapsulation,
+    inject
+} from '@angular/core';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
@@ -46,6 +56,13 @@ export class FormInputMessageGroupComponent {
     @Input()
     placement: Placement = 'bottom-start';
 
+    /**
+     * @experimental
+     * Container element, in which form message popover will be rendered.
+     */
+    @Input()
+    placementContainer: 'body' | 'self' = 'body';
+
     /** Whether the message is open. Can be used through two-way binding. */
     @Input()
     isOpen = false;
@@ -53,6 +70,13 @@ export class FormInputMessageGroupComponent {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** @hidden */
+    @ViewChild('popoverPlacementContainer', { static: false, read: ElementRef })
+    _popoverPlacementContainer: ElementRef | undefined;
+
+    /** @hidden */
+    readonly _elementRef = inject(ElementRef);
 
     /**
      * Function is called every time message changes isOpen attribute

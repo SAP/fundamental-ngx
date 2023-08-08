@@ -368,7 +368,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         settingsCategoryVisible: 'E dukshme',
         settingsCategoryActive: 'Aktiv',
         settingsCategoryVisibleAndActive: 'E dukshme dhe aktive',
-        settingsCategoryMandatory: 'I detyrueshëm'
+        settingsCategoryMandatory: 'I detyrueshëm',
+        manageFieldConditions: 'Manage field conditions',
+        refreshButtonAriaLabel: 'Refresh'
     },
     platformTable: {
         headerMenuSortAsc: 'Rendit në rritje',
@@ -471,7 +473,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Anulo',
         selectAllCheckboxLabel: 'Select all',
-        deselectAllCheckboxLabel: 'Deselect all'
+        deselectAllCheckboxLabel: 'Deselect all',
+        deselectSingleRow: 'To deselect row, press SPACEBAR',
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Shko te paraardhësja',

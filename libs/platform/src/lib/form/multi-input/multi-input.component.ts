@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -97,6 +98,10 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** boolean type represents the focus set for the respective multi input */
     @Input()
     autofocus = false;
+
+    /**  */
+    @Input()
+    glyphAriaLabel: string;
 
     /** @hidden */
     @ViewChild(ListComponent)

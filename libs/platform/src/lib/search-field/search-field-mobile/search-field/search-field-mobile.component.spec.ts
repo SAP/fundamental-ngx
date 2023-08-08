@@ -69,12 +69,12 @@ describe('SearchFieldMobileComponent', () => {
         anyComponent._component.mobile = true;
         component.ngOnInit();
         anyComponent._component.isOpenChange.emit(true);
-        spyOn(anyComponent._component, 'dialogApprove');
+        const spy = jest.spyOn(anyComponent._component, 'dialogApprove');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
         component._handleApprove();
-        expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should open and close with dismiss', () => {
@@ -82,11 +82,11 @@ describe('SearchFieldMobileComponent', () => {
         component.ngOnInit();
         anyComponent._component.inputText = 'test';
         anyComponent._component.isOpenChange.emit(true);
-        spyOn(anyComponent._component, 'dialogDismiss');
+        const spy = jest.spyOn(anyComponent._component, 'dialogDismiss');
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
         component._handleDismiss();
-        expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith();
+        expect(spy).toHaveBeenCalledWith();
     });
 });

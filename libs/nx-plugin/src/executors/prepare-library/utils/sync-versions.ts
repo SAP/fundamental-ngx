@@ -1,6 +1,6 @@
 import { logger, ProjectConfiguration } from '@nx/devkit';
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { parse, major } from 'semver';
+import { parse, major, minor } from 'semver';
 import { PrepareOptions } from './prepare.options';
 import { glob } from 'glob';
 
@@ -20,7 +20,7 @@ const angularVersion =
 const versions = {
     VERSION_PLACEHOLDER: packageJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
-    ANGULAR_VER_PLACEHOLDER: `^${major(angularVersion)}.0.0`,
+    ANGULAR_VER_PLACEHOLDER: `^${major(angularVersion)}.${minor(angularVersion)}.0`,
     RXJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.rxjs),
     FAST_DEEP_EQUAL_VER_PLACEHOLDER: packageJson.dependencies['fast-deep-equal'],
     FDSTYLES_VER_PLACEHOLDER: packageJson.dependencies['fundamental-styles'],

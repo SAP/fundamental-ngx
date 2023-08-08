@@ -2,12 +2,12 @@ import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { AlertConfig } from '../alert-utils/alert-config';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { AlertRef } from '../alert-utils/alert-ref';
 
 /**
  * @deprecated
- * Alert component is depricated since version 0.16.0
+ * Alert component is deprecated since version 0.16.0
  * Message Strip component should be used instead.
  *
  * Service used to dynamically generate an alert as an overlay.
@@ -21,7 +21,11 @@ export class AlertService {
     private alertContainerRef?: ComponentRef<AlertContainerComponent>;
 
     /** @hidden */
-    constructor(private dynamicComponentService: DynamicComponentService) {}
+    constructor(private dynamicComponentService: DynamicComponentService) {
+        warnOnce(
+            'AlertService is deprecated since version 0.16.0 and will be removed in next release. Use MessageStripAlertService instead.'
+        );
+    }
 
     /**
      * Returns true if there are some alerts currently open. False otherwise.

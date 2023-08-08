@@ -14,6 +14,8 @@ import { Component } from '@angular/core';
 export class FormMessageExampleComponent {
     open = false;
 
+    openCustom = false;
+
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
 
     selected: string[] = ['Apple', 'Banana'];

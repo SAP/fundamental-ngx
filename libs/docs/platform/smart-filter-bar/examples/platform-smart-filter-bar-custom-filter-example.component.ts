@@ -26,7 +26,7 @@ import {
 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import get from 'lodash-es/get';
+import { get } from 'lodash-es';
 import {
     BaseSmartFilterBarConditionField,
     SmartFilterBarCondition,

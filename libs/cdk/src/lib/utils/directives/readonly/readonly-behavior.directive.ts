@@ -1,16 +1,16 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, ElementRef, Input } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { takeUntil, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { FDK_READONLY_DIRECTIVE } from './fdk-readonly.token';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { setReadonlyState } from './set-readonly-state';
-import { DestroyedService } from '../../services/destroyed.service';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -32,14 +32,10 @@ export class DeprecatedReadonlyBehaviorDirective extends DeprecatedSelector {}
         {
             provide: FDK_READONLY_DIRECTIVE,
             useExisting: ReadonlyBehaviorDirective
-        },
-        DestroyedService
+        }
     ]
 })
-export class ReadonlyBehaviorDirective
-    extends ReplaySubject<boolean>
-    implements ReadonlyBehavior, AfterViewInit, OnDestroy
-{
+export class ReadonlyBehaviorDirective extends ReplaySubject<boolean> implements ReadonlyBehavior, AfterViewInit {
     /** @Hidden */
     @Input()
     set fdkReadonly(value: BooleanInput) {
@@ -56,8 +52,9 @@ export class ReadonlyBehaviorDirective
     private readonly _readonlyInput$ = new BehaviorSubject(false);
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _destroy$: DestroyedService) {
+    constructor(private _elementRef: ElementRef<HTMLElement>, private _destroyRef: DestroyRef) {
         super(1);
+        this._destroyRef.onDestroy(() => this.complete());
     }
 
     /** @Hidden */
@@ -76,13 +73,8 @@ export class ReadonlyBehaviorDirective
                         this.next(isReadonly);
                     }
                 }),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.complete();
     }
 }
