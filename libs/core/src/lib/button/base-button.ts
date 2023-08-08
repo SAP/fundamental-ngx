@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Directive, HostBinding, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
@@ -60,6 +61,17 @@ export class BaseButton {
     @Input()
     ariaLabel: Nullable<string>;
 
+    /** @hidden */
+    @HostBinding('class.fd-button--toggled')
+    @HostBinding('attr.aria-pressed')
+    _toggled: boolean;
+
+    /** @hidden */
+    _disabled = false;
+
+    /** @hidden */
+    _ariaDisabled: boolean;
+
     /** Whether button is in toggled state. */
     @Input()
     set toggled(value: BooleanInput) {
@@ -90,15 +102,4 @@ export class BaseButton {
     get ariaDisabled(): boolean {
         return this._ariaDisabled;
     }
-
-    /** @hidden */
-    _disabled = false;
-
-    /** @hidden */
-    _ariaDisabled: boolean;
-
-    /** @hidden */
-    @HostBinding('class.fd-button--toggled')
-    @HostBinding('attr.aria-pressed')
-    _toggled = false;
 }
