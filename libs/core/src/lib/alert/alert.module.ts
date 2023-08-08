@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AlertComponent } from './alert.component';
 import { AlertService } from './alert-service/alert.service';
 import { AlertContainerComponent } from './alert-utils/alert-container.component';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
@@ -22,7 +22,7 @@ import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 export class AlertModule {
     /** @hidden */
     constructor() {
-        console.warn(
+        warnOnce(
             'AlertModule is deprecated since version 0.16.0 and will be removed in next release. Message Strip component should be used instead.'
         );
     }

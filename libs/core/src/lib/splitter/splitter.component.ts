@@ -9,6 +9,7 @@ import {
 import { Subject } from 'rxjs';
 
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-splitter',
@@ -41,7 +42,7 @@ export class SplitterComponent {
      */
     @Input()
     set paginationItemAriaLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property paginationItemAriaLabel is deprecated. Use i18n capabilities 'coreSplitter.paginationItemAriaLabel' key instead."
         );
         this._paginationItemAriaLabel = value;

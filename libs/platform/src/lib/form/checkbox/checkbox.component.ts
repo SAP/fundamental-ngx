@@ -24,6 +24,7 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms
 
 import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -64,7 +65,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit, OnIni
     @Input()
     set isBinary(value: boolean) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 '"isBinary" is deprecated and has no effect anymore \n' +
                     'Checkbox is binary by default. Use "tristate" input if you need to have indeterminate checkbox.'
             );
@@ -94,7 +95,7 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit, OnIni
     @Input('value')
     set checkboxTrueValue(trueValue: any) {
         if (isDevMode()) {
-            console.warn('"value" input is deprecated. Use "values" instead');
+            warnOnce('"value" input is deprecated. Use "values" instead');
         }
         this.values = this.values ? { ...this.values, trueValue } : { trueValue };
     }
@@ -157,10 +158,10 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit, OnIni
     ngOnInit(): void {
         super.ngOnInit();
         if (this.change.observed) {
-            console.warn('`change` event is deprecated. Use `checkedChange` instead');
+            warnOnce('`change` event is deprecated. Use `checkedChange` instead');
         }
         if (this.indeterminateChange.observed) {
-            console.warn('`indeterminateChange` event is deprecated. Use `indeterminate` instead');
+            warnOnce('`indeterminateChange` event is deprecated. Use `indeterminate` instead');
         }
     }
 

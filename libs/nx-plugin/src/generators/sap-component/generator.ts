@@ -79,7 +79,13 @@ function addDocsLibraryToTsConfig(tree: Tree, schema: SapComponentSchema) {
 }
 
 function updateApiFiles(tree: Tree, schema: SapComponentSchema) {
-    const filePath = `libs/docs/${getProjectDirName(schema)}/shared/src/lib/api-files.ts`;
+    const projectDirName = getProjectDirName(schema);
+    let filePath;
+    if (projectDirName === 'platform' || projectDirName === 'fn') {
+        filePath = `libs/docs/${projectDirName}/shared/api-files.ts`;
+    } else {
+        filePath = `libs/docs/${projectDirName}/shared/src/lib/api-files.ts`;
+    }
     const content = tree.read(filePath);
     const tsSourceFile = ts.createSourceFile(filePath, content?.toString() ?? '', ts.ScriptTarget.Latest, true);
     const statement = getVariableStatement(tsSourceFile, 'API_FILES');

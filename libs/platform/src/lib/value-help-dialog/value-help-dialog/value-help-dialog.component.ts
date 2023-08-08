@@ -20,7 +20,7 @@ import { isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -132,7 +132,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      * */
     @Input()
     set selectTabTitle(value: string) {
-        console.warn(
+        warnOnce(
             "Property selectTabTitle is deprecated. Use i18n capabilities 'platformVHD.selectTabTitle' key instead."
         );
         this._selectTabTitle = value;
@@ -152,7 +152,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      */
     @Input()
     set searchTableEmptyMessage(value: string) {
-        console.warn(
+        warnOnce(
             "Property searchTableEmptyMessage is deprecated. Use i18n capabilities 'platformVHD.searchTableEmptyMessage' key instead."
         );
         this._searchTableEmptyMessage = value;
@@ -184,7 +184,7 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
      */
     @Input()
     set defineTabTitle(value: string) {
-        console.warn(
+        warnOnce(
             "Property defineTabTitle is deprecated. Use i18n capabilities 'platformVHD.defineTabTitle' key instead."
         );
         this._defineTabTitle = value;

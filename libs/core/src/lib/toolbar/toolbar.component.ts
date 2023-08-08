@@ -26,7 +26,8 @@ import {
     CssClassBuilder,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
-    ResizeObserverService
+    ResizeObserverService,
+    warnOnce
 } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
@@ -99,7 +100,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @deprecated */
     @Input()
     set hasTitle(value: boolean) {
-        console.warn('Property hasTitle is deprecated. ');
+        warnOnce('Property hasTitle is deprecated. ');
         this._hasTitle = value;
     }
 

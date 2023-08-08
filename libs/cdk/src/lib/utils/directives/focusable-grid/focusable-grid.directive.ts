@@ -6,6 +6,7 @@ import {
     DestroyRef,
     Directive,
     EventEmitter,
+    inject,
     Input,
     Output,
     QueryList
@@ -13,13 +14,8 @@ import {
 import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
-import { FocusableItemPosition } from '../focusable-item';
-import {
-    FDK_FOCUSABLE_LIST_DIRECTIVE,
-    FocusableListDirective,
-    FocusableListPosition,
-    ScrollPosition
-} from '../focusable-list';
+import { FocusableItemPosition, FocusableListPosition } from '../focusable-item';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, ScrollPosition } from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
 import { FDK_FOCUSABLE_GRID_DIRECTIVE } from './focusable-grid.tokens';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -68,14 +64,14 @@ export class FocusableGridDirective implements AfterViewInit {
     readonly rowFocused = new EventEmitter<FocusableListPosition>();
 
     /** @hidden */
-    private _wrapHorizontally = false;
-
-    /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_LIST_DIRECTIVE, { descendants: true })
     private readonly _focusableLists: QueryList<FocusableListDirective>;
 
     /** @hidden */
-    constructor(private readonly _destroyRef: DestroyRef) {}
+    private _wrapHorizontally = false;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     ngAfterViewInit(): void {

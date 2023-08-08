@@ -47,7 +47,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { resizeObservable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
     FieldHintOptions,
@@ -215,7 +215,7 @@ export class FormGroupComponent
     @Input()
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
             );
         }

@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.44.1-rc.1...v0.44.1-rc.2) (2023-08-07)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+## [0.44.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.44.1-rc.0...v0.44.1-rc.1) (2023-08-04)
+
+
+### Bug Fixes
+
+* project generator using wrong path for fn and platform ([#10301](https://github.com/SAP/fundamental-ngx/issues/10301)) ([0622175](https://github.com/SAP/fundamental-ngx/commit/0622175f68c3504c63e8ea76d357b7a44598b90e))
+
+
+
+
+
+## [0.44.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.44.0...v0.44.1-rc.0) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.44.0](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.7...v0.44.0) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.44.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.6...v0.44.0-rc.7) (2023-08-04)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
 # [0.44.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.44.0-rc.5...v0.44.0-rc.6) (2023-08-04)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin

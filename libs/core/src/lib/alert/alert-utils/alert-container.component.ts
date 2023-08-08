@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
 import { alertContainerNgIf } from './alert-animations';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated
@@ -37,7 +38,7 @@ export class AlertContainerComponent {
 
     /** @hidden */
     constructor() {
-        console.warn(
+        warnOnce(
             'AlertContainerComponent is deprecated since version 0.16.0 and will be removed in future release. Message Strip component should be used instead.'
         );
     }

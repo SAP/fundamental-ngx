@@ -15,7 +15,7 @@ import {
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
-import { uuidv4 } from '@fundamental-ngx/cdk/utils';
+import { warnOnce, uuidv4 } from '@fundamental-ngx/core/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import { ColumnAlign, SelectionMode, TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
@@ -143,7 +143,7 @@ export class UploadCollectionComponent
      */
     @Input()
     set noDataText(value: string) {
-        console.warn(
+        warnOnce(
             "Property noDataText is deprecated. Use i18n capabilities 'platformUploadCollection.noDataText' key instead."
         );
         this._noDataText = value;
@@ -159,7 +159,7 @@ export class UploadCollectionComponent
      */
     @Input()
     set noDataDescription(value: string) {
-        console.warn(
+        warnOnce(
             "Property noDataDescription is deprecated. Use i18n capabilities 'platformUploadCollection.noDataDescription' key instead."
         );
         this._noDataDescription = value;
@@ -355,7 +355,7 @@ export class UploadCollectionComponent
         private readonly _cdr: ChangeDetectorRef,
         private _injector: Injector
     ) {
-        console.warn('The Upload Collection component is deprecated and will be removed in next release.');
+        warnOnce('The Upload Collection component is deprecated and will be removed in next release.');
     }
 
     /** @hidden */

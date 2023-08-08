@@ -1,4 +1,5 @@
 import { Observable, Subject } from 'rxjs';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /**
  * @deprecated
@@ -21,7 +22,7 @@ export class AlertRef {
 
     /** @hidden */
     constructor() {
-        console.warn(
+        warnOnce(
             'AlertRef is deprecated since version 0.16.0 and will be removed in next release. Use Message Strip instead.'
         );
         this.afterDismissed = this._afterDismissed.asObservable();

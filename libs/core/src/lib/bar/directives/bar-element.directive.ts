@@ -1,4 +1,5 @@
 import { Directive, HostBinding, Input } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * An element of the Bar.
@@ -11,7 +12,7 @@ export class BarElementDirective {
     /** @deprecated */
     @Input()
     set isTitle(value: boolean) {
-        console.warn('isTitle is deprecated, it will be automatically set.');
+        warnOnce('isTitle is deprecated, it will be automatically set.');
         this._isTitle = value;
     }
 

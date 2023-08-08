@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -89,7 +89,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
      */
     @Input()
     set incrementButtonTitle(value: string) {
-        console.warn(
+        warnOnce(
             "Property incrementButtonTitle is deprecated. Use i18n capabilities 'coreStepInput.incrementButtonTitle' key instead."
         );
         this._incrementButtonTitle = value;
@@ -105,7 +105,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
      */
     @Input()
     set decrementButtonTitle(value: string) {
-        console.warn(
+        warnOnce(
             "Property decrementButtonTitle is deprecated. Use i18n capabilities 'coreStepInput.decrementButtonTitle' key instead."
         );
         this._decrementButtonTitle = value;

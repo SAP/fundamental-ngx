@@ -28,6 +28,7 @@ import { SideNavigationModel } from './side-navigation-model';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -48,7 +49,7 @@ export class SideNavigationComponent
     @Input()
     @HostBinding('class.fdx-side-nav--condensed')
     set condensed(value: boolean) {
-        console.warn('The "condensed" input is not applicable to the CX side nav.');
+        warnOnce('The "condensed" input is not applicable to the CX side nav.');
         this._condensed = value;
     }
 

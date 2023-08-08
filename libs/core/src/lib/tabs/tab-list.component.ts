@@ -20,7 +20,7 @@ import {
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
-import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, scrollTop, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -96,7 +96,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
      */
     @Input()
     set expandOverflowText(value: string) {
-        console.warn(
+        warnOnce(
             "Property expandOverflowText is deprecated. Use i18n capabilities 'coreTabs.tabListExpandButtonText' key instead."
         );
         this._expandOverflowText = value;

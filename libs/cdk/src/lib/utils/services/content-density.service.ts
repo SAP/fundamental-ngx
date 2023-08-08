@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 import { isCompactDensity } from '../functions/is-compact-density';
 import { ContentDensity } from '../interfaces/content-density';
+import { warnOnce } from '../helpers';
 
 export const DEFAULT_CONTENT_DENSITY: ContentDensity = 'cozy';
 
@@ -17,7 +18,7 @@ export class ContentDensityService {
     /** @hidden */
     constructor() {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 `[Deprecated] ContentDensityService is deprecated and will be removed in the next major version.
                  Please use ContentDensityControllerService instead, or use the ContentDensityModule forRoot method.`
             );

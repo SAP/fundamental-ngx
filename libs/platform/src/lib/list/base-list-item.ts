@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { ColorAccent, KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Size, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
@@ -159,7 +159,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      */
     @Input()
     set avatarSrc(value: Nullable<string>) {
-        console.warn('`avatarSrc` is deprecated. Use `avatar` property for more flexible configuration.');
+        warnOnce('`avatarSrc` is deprecated. Use `avatar` property for more flexible configuration.');
         this._avatarConfig = merge(this._avatarConfig, { image: value });
     }
 
@@ -176,7 +176,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      */
     @Input()
     set avatarTitle(value: Nullable<string>) {
-        console.warn('`avatarTitle` is deprecated. Use `avatar` property for more flexible configuration.');
+        warnOnce('`avatarTitle` is deprecated. Use `avatar` property for more flexible configuration.');
         this._avatarConfig = merge(this._avatarConfig, { ariaLabel: value });
     }
 
@@ -240,7 +240,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      */
     @Input()
     set titleIcon(value: Nullable<string>) {
-        console.warn('`titleIcon` is deprecated. See `icon` input property for more flexible icon configuration.');
+        warnOnce('`titleIcon` is deprecated. See `icon` input property for more flexible icon configuration.');
         this._iconConfig = merge(new ListIconConfig(), { glyph: value, ariaLabel: value });
     }
 

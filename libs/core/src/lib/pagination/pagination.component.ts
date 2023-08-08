@@ -27,7 +27,8 @@ import {
     FocusKeyManagerItemDirective,
     FocusKeyManagerListDirective,
     Nullable,
-    RtlService
+    RtlService,
+    warnOnce
 } from '@fundamental-ngx/cdk/utils';
 
 import { Pagination } from './pagination.model';
@@ -142,7 +143,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     set itemsPerPageLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property itemsPerPageLabel is deprecated. Use i18n capabilities 'corePagination.itemsPerPageLabel' key instead."
         );
         this._itemsPerPageLabel = value;
@@ -188,9 +189,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     set firstLabel(value: string) {
-        console.warn(
-            "Property firstLabel is deprecated. Use i18n capabilities 'corePagination.firstLabel' key instead."
-        );
+        warnOnce("Property firstLabel is deprecated. Use i18n capabilities 'corePagination.firstLabel' key instead.");
         this._firstLabel = value;
     }
 
@@ -208,7 +207,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     set previousLabel(value: string) {
-        console.warn(
+        warnOnce(
             "Property previousLabel is deprecated. Use i18n capabilities 'corePagination.previousLabel' key instead."
         );
         this._previousLabel = value;
@@ -300,7 +299,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     set currentPageAriaLabel(value: Nullable<(currentPage: number) => string>) {
-        console.warn(
+        warnOnce(
             "Property currentPageAriaLabel is deprecated. Use i18n capabilities 'corePagination.currentPageAriaLabel' key instead."
         );
         this._currentPageAriaLabel = value;
@@ -323,7 +322,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     // eslint-disable-next-line @typescript-eslint/member-ordering
     @Input()
     set labelBeforeInputMobile(value: string) {
-        console.warn(
+        warnOnce(
             "Property labelBeforeInputMobile is deprecated. Use i18n capabilities 'corePagination.labelBeforeInputMobile' key instead."
         );
         this._labelBeforeInputMobile = value;
@@ -345,7 +344,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     set labelAfterInputMobile(value: Nullable<(pagesCount: number) => string>) {
-        console.warn(
+        warnOnce(
             "Property labelAfterInputMobile is deprecated. Use i18n capabilities 'corePagination.labelAfterInputMobile' key instead."
         );
         this._labelAfterInputMobile = value;
@@ -365,7 +364,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      */
     @Input()
     set inputAriaLabel(value: Nullable<(currentPage: number, pagesCount: number) => string>) {
-        console.warn(
+        warnOnce(
             "Property inputAriaLabel is deprecated. Use i18n capabilities 'corePagination.inputAriaLabel' key instead."
         );
         this._inputAriaLabel = value;
@@ -562,7 +561,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @deprecated, use {@link paginationObject} getter instead */
     getPaginationObject(): Pagination {
-        console.warn('PaginationComponent: getPaginationObject() is deprecated, use paginationObject getter instead');
+        warnOnce('PaginationComponent: getPaginationObject() is deprecated, use paginationObject getter instead');
         return this.paginationObject;
     }
 

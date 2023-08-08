@@ -31,6 +31,7 @@ import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cd
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import {
     Column,
@@ -116,7 +117,7 @@ export class FormFieldComponent
      */
     @Input()
     set hintPlacement(value: HintPlacement) {
-        console.warn('Property hintPlacement is deprecated. Use `hint.placement` instead.');
+        warnOnce('Property hintPlacement is deprecated. Use `hint.placement` instead.');
         this._hintPlacement = value;
     }
 
@@ -136,7 +137,7 @@ export class FormFieldComponent
     @Input()
     set labelLayout(value: LabelLayout) {
         if (isDevMode()) {
-            console.warn(
+            warnOnce(
                 'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
             );
         }

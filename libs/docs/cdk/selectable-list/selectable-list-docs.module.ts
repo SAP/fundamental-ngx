@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/fn/shared';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
 import { SelectableListDocsComponent } from './selectable-list-docs.component';
 import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
                 path: '',
                 component: SelectableListDocsComponent
             },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.tabs } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.selectableList } }
         ]
     }
 ];

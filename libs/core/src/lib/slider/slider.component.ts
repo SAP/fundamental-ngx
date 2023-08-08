@@ -35,7 +35,7 @@ import {
     takeUntil
 } from 'rxjs/operators';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -197,7 +197,7 @@ export class SliderComponent
      */
     @Input()
     set singleSliderCurrentValuePrefix(value: string) {
-        console.warn('Property singleSliderCurrentValuePrefix is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property singleSliderCurrentValuePrefix is deprecated. Use i18n capabilities instead.');
         this._singleSliderCurrentValuePrefix = value;
     }
     get singleSliderCurrentValuePrefix(): string {
@@ -214,7 +214,7 @@ export class SliderComponent
      */
     @Input()
     set rangeSliderHandle1CurrentValuePrefix(value: string) {
-        console.warn('Property rangeSliderHandle1CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property rangeSliderHandle1CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
         this._rangeSliderHandle1CurrentValuePrefix = value;
     }
     get rangeSliderHandle1CurrentValuePrefix(): string {
@@ -231,7 +231,7 @@ export class SliderComponent
      */
     @Input()
     set rangeSliderHandle2CurrentValuePrefix(value: string) {
-        console.warn('Property rangeSliderHandle2CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
+        warnOnce('Property rangeSliderHandle2CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
         this._rangeSliderHandle2CurrentValuePrefix = value;
     }
     get rangeSliderHandle2CurrentValuePrefix(): string {
