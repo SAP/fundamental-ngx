@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.4](https://github.com/SAP/fundamental-ngx/compare/v0.43.3...v0.43.4) (2023-08-08)
+
+
+### Bug Fixes
+
+* aria-pressed should not be applied for all buttons ([4603f95](https://github.com/SAP/fundamental-ngx/commit/4603f9532e981eea5e4b9df0ae64db8997c87aad))
+
+
+
+
+
 ## [0.43.3](https://github.com/SAP/fundamental-ngx/compare/v0.43.2...v0.43.3) (2023-08-04)
 
 
