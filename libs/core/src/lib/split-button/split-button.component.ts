@@ -79,6 +79,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._mainActionTitle = value;
     }
 
+    /** @deprecated */
     get mainActionTitle(): string {
         return this._mainActionTitle;
     }
@@ -87,22 +88,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
      * Leave empty for default (Action button).'*/
     @Input()
     fdType: ButtonType;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label attribute used to describe expand button
-     */
-    @Input()
-    set expandButtonAriaLabel(value: string) {
-        warnOnce(
-            "Property expandButtonAriaLabel is deprecated. Use i18n capabilities 'coreSplitButton.expandButtonAriaLabel' key instead."
-        );
-        this._expandButtonAriaLabel = value;
-    }
-
-    get expandButtonAriaLabel(): string {
-        return this._expandButtonAriaLabel;
-    }
 
     /** Title attribute used to describe expand button */
     @Input()
@@ -154,9 +139,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     get typeClass(): string {
         return this.fdType ? `fd-button-split--${this.fdType}` : '';
     }
-
-    /** @hidden */
-    private _expandButtonAriaLabel: string;
 
     /** @hidden */
     private _mainActionTitle: string;
