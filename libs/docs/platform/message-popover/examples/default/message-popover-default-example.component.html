@@ -6,6 +6,7 @@
             <fdp-input
                 fdpMessagePopoverFormItem="Required Input"
                 [(ngModel)]="templateFormValue.input1"
+                [errorTypes]="{ required: { heading: 'Required field empty', type: 'information' } }"
                 [required]="true"
                 name="input1"
             ></fdp-input>
@@ -17,6 +18,7 @@
                 type="email"
                 email
                 [(ngModel)]="templateFormValue.input2"
+                [errorTypes]="{ required: { heading: 'Required field empty', type: 'information' } }"
                 [required]="true"
                 name="input2"
             ></fdp-input>

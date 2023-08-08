@@ -25,13 +25,39 @@ import { MessagePopoverWrapper } from './models/message-popover-wrapper.interfac
 import { convertFormState } from './utils';
 import { MessagePopover } from './models/message-popover.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MessageViewComponent } from './components/message-view/message-view.component';
+import { InitialFocusDirective, DeprecatedInitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
     selector: 'fdp-message-popover',
     templateUrl: './message-popover.component.html',
     styleUrls: ['./message-popover.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        PopoverModule,
+        ButtonModule,
+        NgClass,
+        BarModule,
+        SegmentedButtonModule,
+        FormsModule,
+        NgFor,
+        ObjectStatusModule,
+        InitialFocusDirective,
+        DeprecatedInitialFocusDirective,
+        MessageViewComponent,
+        FdTranslatePipe
+    ]
 })
 export class MessagePopoverComponent implements MessagePopover, OnInit {
     /** @hidden */
