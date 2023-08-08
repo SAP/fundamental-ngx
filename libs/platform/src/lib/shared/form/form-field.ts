@@ -5,7 +5,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 
 import { FormError, FormFieldErrorDirectiveContext } from './form-error';
-import { LabelLayout, Column, HintPlacement, ColumnLayout } from './form-options';
+import { Column, HintPlacement, ColumnLayout } from './form-options';
 
 /**
  * FormField base class.
@@ -220,14 +220,6 @@ export abstract class FormGroupContainer {
      * Indicates when labels should not be displayed.
      */
     noLabelLayout: boolean;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     *
-     * Defines form field label placement.
-     */
-    labelLayout: LabelLayout;
 
     /**
      * Defines label's column layout.
