@@ -67,12 +67,7 @@
 </div>
 
 <ng-template #input>
-    <ng-container *ngIf="inputTemplate">
-        <ng-container *ngTemplateOutlet="inputTemplate"></ng-container>
-    </ng-container>
-
     <input
-        *ngIf="!inputTemplate"
         [(ngModel)]="inputText"
         [id]="_inputId"
         [attr.aria-labelledby]="_inputAriaLabelledBy"
