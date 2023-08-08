@@ -22,10 +22,10 @@
     (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
     (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
     [attr.aria-description]="
-            !checkedState
-                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
-                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
-        "
+        !checkedState
+            ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
+            : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
+    "
 >
     <fd-checkbox
         tabIndexValue="-1"
