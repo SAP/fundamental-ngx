@@ -13,7 +13,6 @@ import {
 } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
 import { startWith, takeUntil, take } from 'rxjs/operators';
-import { warnOnce } from '../../helpers';
 import { selectStrategy } from '../../async-strategy';
 import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
@@ -60,25 +59,6 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      */
     @Input()
     threshold = 0.3;
-
-    /**
-     * @deprecated
-     * Use `dropMode` property for better configuration.
-     *
-     * @description
-     * When enabled, the Replace Indicator will appear on a whole element, instead of horizontal/vertical line before/after an element.
-     */
-    @Input()
-    set replaceMode(value: boolean) {
-        warnOnce('`replaceMode` input is deprecated. Use `dropMode` property instead.');
-        this._replaceMode = value;
-        this.dropMode = value ? 'group' : 'shift';
-        this._detectedDropMode = this.dropMode;
-    }
-
-    get replaceMode(): boolean {
-        return this._replaceMode;
-    }
 
     /** @hidden */
     private _replaceMode = false;
