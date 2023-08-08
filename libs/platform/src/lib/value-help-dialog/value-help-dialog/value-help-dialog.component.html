@@ -270,10 +270,9 @@
             [loading]="loadingState && !_firstLoadingDone"
             [uid]="id"
             [displayedData]="_displayedData"
-            [tabTitle]="selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate)"
+            [tabTitle]="'platformVHD.selectTabTitle' | fdTranslate"
             [mobile]="mobile"
             [selection]="searchSelection"
-            [emptyTableMessage]="searchTableEmptyMessage || ('platformVHD.searchTableEmptyMessage' | fdTranslate)"
             [uniqueKey]="uniqueKey"
             [pageSize]="searchTablePageSize"
             [defaultMobileHeaders]="searchTableMobileHeaders"
@@ -289,7 +288,7 @@
             [strategyLabels]="defineStrategyLabels"
             [conditions]="conditionItems"
             [uid]="id"
-            [tabTitle]="defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate)"
+            [tabTitle]="'platformVHD.defineTabTitle' | fdTranslate"
             [mobile]="mobile"
             (conditionChange)="onConditionChange($event)"
         ></fdp-define-tab>
@@ -349,7 +348,7 @@
                 fd-tab-link
                 [active]="selectedTab === _tabTypes.selectFromList"
                 [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
-                ><span fd-tab-tag>{{ selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }}</span></a
+                ><span fd-tab-tag>{{ 'platformVHD.selectTabTitle' | fdTranslate }}</span></a
             >
         </div>
         <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
@@ -357,7 +356,7 @@
                 fd-tab-link
                 [active]="selectedTab === _tabTypes.defineConditions"
                 [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
-                ><span fd-tab-tag>{{ defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }}</span></a
+                ><span fd-tab-tag>{{ 'platformVHD.defineTabTitle' | fdTranslate }}</span></a
             >
         </div>
     </nav>
@@ -368,7 +367,7 @@
         <div fd-bar [inPage]="true" *ngIf="showSelectionTab">
             <div fd-bar-left>
                 <fd-bar-element>
-                    {{ selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }}
+                    {{ 'platformVHD.selectTabTitle' | fdTranslate }}
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -378,8 +377,7 @@
                         (click)="switchTab(_tabTypes.selectFromList)"
                         [title]="
                             'platformVHD.selectMobileTabTitle'
-                                | fdTranslate
-                                    : { title: selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate) }
+                                | fdTranslate : { title: 'platformVHD.selectTabTitle' | fdTranslate }
                         "
                     ></fd-button-bar>
                 </fd-bar-element>
@@ -388,7 +386,7 @@
         <div fd-bar [inPage]="true" *ngIf="showDefineTab">
             <div fd-bar-left>
                 <fd-bar-element>
-                    {{ defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }}
+                    {{ 'platformVHD.defineTabTitle' | fdTranslate }}
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -397,8 +395,7 @@
                         glyph="navigation-right-arrow"
                         [title]="
                             'platformVHD.selectMobileTabTitle'
-                                | fdTranslate
-                                    : { title: defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate) }
+                                | fdTranslate : { title: 'platformVHD.defineTabTitle' | fdTranslate }
                         "
                         (click)="switchTab(_tabTypes.defineConditions)"
                     >
@@ -416,7 +413,7 @@
                 *ngTemplateOutlet="
                     tabLink;
                     context: {
-                        title: selectTabTitle || ('platformVHD.selectTabTitle' | fdTranslate),
+                        title: 'platformVHD.selectTabTitle' | fdTranslate,
                         type: selectedTab
                     }
                 "
@@ -430,7 +427,7 @@
                 *ngTemplateOutlet="
                     tabLink;
                     context: {
-                        title: defineTabTitle || ('platformVHD.defineTabTitle' | fdTranslate),
+                        title: 'platformVHD.defineTabTitle' | fdTranslate,
                         type: selectedTab
                     }
                 "

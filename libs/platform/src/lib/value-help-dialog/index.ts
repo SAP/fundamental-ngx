@@ -4,7 +4,6 @@ export * from './components/base-tab/vhd-base-tab.component';
 export * from './components/define-tab/define-tab.component';
 export * from './components/select-tab/select-tab.component';
 export * from './components/value-help-dialog-filter/value-help-dialog-filter.component';
-export * from './components/value-help-dialog-search/value-help-dialog-search.component';
 export * from './constans';
 export * from './directives/condition-count-message.directive';
 export * from './models';
