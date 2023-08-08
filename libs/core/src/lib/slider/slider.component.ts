@@ -35,7 +35,7 @@ import {
     takeUntil
 } from 'rxjs/operators';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -188,57 +188,6 @@ export class SliderComponent
     /** Whether the control is disabled. */
     @Input()
     disabled = false;
-
-    /**
-     * slider current value verbose string.
-     * This will be read only once by screen reader and upon slider value change,
-     * this string will not be read.
-     * @deprecated no longer used, use i18n capabilities instead
-     */
-    @Input()
-    set singleSliderCurrentValuePrefix(value: string) {
-        warnOnce('Property singleSliderCurrentValuePrefix is deprecated. Use i18n capabilities instead.');
-        this._singleSliderCurrentValuePrefix = value;
-    }
-    get singleSliderCurrentValuePrefix(): string {
-        return this._singleSliderCurrentValuePrefix;
-    }
-    /** @hidden */
-    private _singleSliderCurrentValuePrefix: string;
-
-    /**
-     * @hidden range slider handle 1 current value supporting string
-     * This will be read only once by screen reader and upon slider value change,
-     * this string will not be read.
-     * * @deprecated no longer used, use i18n capabilities instead
-     */
-    @Input()
-    set rangeSliderHandle1CurrentValuePrefix(value: string) {
-        warnOnce('Property rangeSliderHandle1CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
-        this._rangeSliderHandle1CurrentValuePrefix = value;
-    }
-    get rangeSliderHandle1CurrentValuePrefix(): string {
-        return this._rangeSliderHandle1CurrentValuePrefix;
-    }
-    /** @hidden */
-    private _rangeSliderHandle1CurrentValuePrefix: string;
-
-    /**
-     * @hidden range slider handle 2 current value supporting string
-     * This will be read only once by screen reader and upon slider value change,
-     * this string will not be read.
-     * * @deprecated no longer used, use i18n capabilities instead
-     */
-    @Input()
-    set rangeSliderHandle2CurrentValuePrefix(value: string) {
-        warnOnce('Property rangeSliderHandle2CurrentValuePrefix is deprecated. Use i18n capabilities instead.');
-        this._rangeSliderHandle2CurrentValuePrefix = value;
-    }
-    get rangeSliderHandle2CurrentValuePrefix(): string {
-        return this._rangeSliderHandle2CurrentValuePrefix;
-    }
-    /** @hidden */
-    private _rangeSliderHandle2CurrentValuePrefix: string;
 
     /** @hidden */
     _position: number | number[] = 0;
