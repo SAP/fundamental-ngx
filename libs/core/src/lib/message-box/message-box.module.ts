@@ -7,7 +7,6 @@ import { MessageBoxService } from './services/message-box.service';
 import { MessageBoxBodyComponent } from './message-box-body/message-box-body.component';
 import { MessageBoxFooterComponent } from './message-box-footer/message-box-footer.component';
 import { MessageBoxHeaderComponent } from './message-box-header/message-box-header.component';
-import { MessageBoxDecisiveButton } from './directives/message-box-decisive-button.directive';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -26,7 +25,6 @@ const declarations = [
     MessageBoxDefaultComponent,
     MessageBoxFooterComponent,
     MessageBoxHeaderComponent,
-    MessageBoxDecisiveButton,
     MessageBoxBodyComponent,
     MessageBoxComponent
 ];

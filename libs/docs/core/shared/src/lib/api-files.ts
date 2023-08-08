@@ -191,7 +191,6 @@ export const API_FILES = {
         'MessageBoxService',
         'MessageBoxComponent',
         'MessageBoxBodyComponent',
-        'MessageBoxDecisiveButton',
         'MessageBoxHeaderComponent',
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
