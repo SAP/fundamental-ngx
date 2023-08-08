@@ -231,14 +231,6 @@ export class PopoverComponent
         this._popoverService.applyNewPosition(positions);
     }
 
-    /** @deprecated
-     * Left for backward compatibility
-     */
-    updatePopover(): void {
-        console.warn('updatePopover is Deprecated, use refreshPosition instead');
-        this.refreshPosition();
-    }
-
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
         this._popoverService.refreshPosition();
