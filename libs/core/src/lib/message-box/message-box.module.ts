@@ -14,12 +14,10 @@ import { TitleModule } from '@fundamental-ngx/core/title';
 import { MessageBoxDefaultComponent } from './message-box-default/message-box-default.component';
 import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { InitialFocusModule } from '@fundamental-ngx/cdk/utils';
-import { MessageBoxFooterButtonComponent } from './message-box-footer-button/message-box-footer-button.component';
 import { MessageBoxSemanticIconComponent } from './message-box-semantic-icon/message-box-semantic-icon.component';
 import { PortalModule } from '@angular/cdk/portal';
 
 const declarations = [
-    MessageBoxFooterButtonComponent,
     MessageBoxSemanticIconComponent,
     MessageBoxContainerComponent,
     MessageBoxDefaultComponent,
