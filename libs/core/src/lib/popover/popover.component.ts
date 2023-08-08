@@ -37,7 +37,6 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -134,21 +133,6 @@ export class PopoverComponent
     /** @hidden - template for Dialog footer content */
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
-
-    /** @deprecated
-     * Left for backward compatibility
-     */
-    set directiveRef(value: any) {
-        warnOnce('Property directiveRef is deprecated. ');
-        this._directiveRef = value;
-    }
-
-    get directiveRef(): any {
-        return this._directiveRef;
-    }
-
-    /** @hidden */
-    private _directiveRef: any;
 
     /** @hidden */
     private _trigger: ElementRef;
