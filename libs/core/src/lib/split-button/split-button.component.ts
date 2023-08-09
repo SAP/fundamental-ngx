@@ -27,7 +27,6 @@ import { SplitButtonActionTitle } from './split-button-utils/split-button.direct
 import { MainAction } from './main-action';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 const splitButtonTextClasses = [splitButtonTextClass];
@@ -69,20 +68,6 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** The icon to include in the button. See the icon page for the list of icons. */
     @Input()
     disabled: boolean;
-
-    /** @deprecated The Title for main action button. This will be deprecated as an input but will remain a property on this component. */
-    @Input()
-    set mainActionTitle(value: string) {
-        warnOnce(
-            "Property mainActionTitle is deprecated. Use MenuItemComponent's title component text content instead."
-        );
-        this._mainActionTitle = value;
-    }
-
-    /** @deprecated */
-    get mainActionTitle(): string {
-        return this._mainActionTitle;
-    }
 
     /** The type of the button. Types include 'standard', 'positive', 'medium', and 'negative'.
      * Leave empty for default (Action button).'*/
@@ -131,6 +116,9 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     /** @hidden */
     @ViewChild('menuActionButton', { read: ElementRef })
     menuActionBtn: ElementRef;
+
+    /** The Title for main action button */
+    mainActionTitle: string;
 
     /** @hidden */
     mainButtonWidth: string;
