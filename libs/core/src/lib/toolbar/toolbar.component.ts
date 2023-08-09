@@ -12,7 +12,6 @@ import {
     forwardRef,
     Inject,
     Input,
-    NgZone,
     Optional,
     QueryList,
     SkipSelf,
@@ -149,9 +148,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     overflownItems: ToolbarItem[] = [];
 
     /** @hidden */
-    private _hasTitle = false;
-
-    /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
 
     /** @hidden */
@@ -166,9 +162,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     private _shouldOverflow = false;
 
     /** @hidden */
-    private _initialised = false;
-
-    /** @hidden */
     private shouldOverflow$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
@@ -177,7 +170,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroyRef: DestroyRef,
         private resizeObserverService: ResizeObserverService,
-        private ngZone: NgZone,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {
         _contentDensityObserver.subscribe();
@@ -263,7 +255,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             this.overflownItems = items;
             this._cd.detectChanges();
         });
-        this._initialised = true;
         this.buildComponentCssClass();
     }
 
