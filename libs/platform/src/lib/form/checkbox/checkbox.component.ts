@@ -10,7 +10,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     Optional,
     Output,
     Self,
@@ -23,7 +22,6 @@ import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms
 
 import { FdCheckboxValues, CheckboxComponent as FdCheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -60,17 +58,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     @Input()
     tristate = false;
 
-    /** @deprecated */
-    @Input()
-    set isBinary(value: boolean) {
-        if (isDevMode()) {
-            warnOnce(
-                '"isBinary" is deprecated and has no effect anymore \n' +
-                    'Checkbox is binary by default. Use "tristate" input if you need to have indeterminate checkbox.'
-            );
-        }
-    }
-
     // this is undesired to have "checked" input instead of "value"
     // but it was done this way initially and we have to keep this in order to not break anything
     /**
@@ -88,16 +75,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /** when true indeterminate state can be selected */
     @Input()
     tristateSelectable = false;
-
-    /** value for checkbox control when it's state is checked. */
-    // eslint-disable-next-line @angular-eslint/no-input-rename
-    @Input('value')
-    set checkboxTrueValue(trueValue: any) {
-        if (isDevMode()) {
-            warnOnce('"value" input is deprecated. Use "values" instead');
-        }
-        this.values = this.values ? { ...this.values, trueValue } : { trueValue };
-    }
 
     /** Values returned by control. */
     @Input()
