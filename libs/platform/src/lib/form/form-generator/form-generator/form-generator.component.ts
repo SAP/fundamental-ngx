@@ -5,7 +5,6 @@ import {
     EventEmitter,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     Output,
@@ -24,10 +23,9 @@ import {
     FieldHintOptions,
     PlatformFormFieldControl,
     HintOptions,
-    LabelLayout,
     HintInput
 } from '@fundamental-ngx/platform/shared';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { FormGeneratorService } from '../form-generator.service';
@@ -45,13 +43,7 @@ import {
     DynamicFormGroupControls
 } from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
-import {
-    DefaultGapLayout,
-    DefaultHorizontalFieldLayout,
-    DefaultHorizontalLabelLayout,
-    DefaultVerticalFieldLayout,
-    DefaultVerticalLabelLayout
-} from '../../form-group/constants';
+import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
 import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
 import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
 
@@ -129,30 +121,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     @Input()
     columnLayout: Nullable<string>;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     *
-     * Defines form field label placement.
-     */
-    @Input()
-    set labelLayout(value: LabelLayout) {
-        if (isDevMode()) {
-            warnOnce(
-                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
-            );
-        }
-        this._labelLayout = value;
-
-        this.labelColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
-        this.fieldColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
-    }
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
 
     /**
      * Defines label's column layout.
@@ -292,9 +260,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _labelLayout: LabelLayout;
 
     /** @hidden */
     private readonly _defaultHintOptions: FieldHintOptions;
