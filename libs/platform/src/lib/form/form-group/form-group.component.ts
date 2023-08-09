@@ -54,8 +54,6 @@ import {
     FormGroupContainer,
     HintInput,
     HintOptions,
-    HintPlacement,
-    LabelLayout,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -372,11 +370,6 @@ export class FormGroupComponent
 
     /** @hidden */
     private _useForm = false;
-    /** @hidden */
-    private _hintPlacement: HintPlacement = 'right';
-
-    /** @hidden */
-    private _labelLayout: LabelLayout;
 
     /** @hidden */
     protected _destroyed = new Subject<void>();
@@ -618,7 +611,6 @@ export class FormGroupComponent
      */
     private _updateFormFieldProperties(formField: PlatformFormField): void {
         if (this.unifiedLayout) {
-            formField.hintPlacement = this._hintPlacement;
             formField.editable = this.editable;
             formField.noLabelLayout = this.noLabelLayout;
         }

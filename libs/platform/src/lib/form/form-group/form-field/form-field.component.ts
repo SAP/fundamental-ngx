@@ -30,7 +30,6 @@ import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cd
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import {
     Column,
@@ -41,7 +40,6 @@ import {
     FormFieldErrorDirectiveContext,
     FormFieldGroup,
     FormGroupContainer,
-    HintPlacement,
     LabelLayout,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
@@ -103,20 +101,6 @@ export class FormFieldComponent
      */
     @Input()
     id: string = (++defaultId).toString();
-
-    /**
-     * @deprecated use `hint.placement` input instead
-     * Defines hint placement
-     */
-    @Input()
-    set hintPlacement(value: HintPlacement) {
-        warnOnce('Property hintPlacement is deprecated. Use `hint.placement` instead.');
-        this._hintPlacement = value;
-    }
-
-    get hintPlacement(): HintPlacement {
-        return this._hintPlacement;
-    }
 
     /** Hint to be placed next to label */
     @Input()
@@ -411,9 +395,6 @@ export class FormFieldComponent
     /** @hidden */
     private _errorDirectivesCdr: Subscription;
 
-    /** @hidden */
-    private _hintPlacement: HintPlacement;
-
     /** @hidden whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
         if (!this.inputMessageGroup || !this.labelCol) {
@@ -569,7 +550,7 @@ export class FormFieldComponent
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.hint || changes.hintPlacement) {
+        if (changes.hint) {
             this._updateHintOptions();
             this._formFieldLayoutService.setNeedsInlineHelp(
                 this,
@@ -899,13 +880,11 @@ export class FormFieldComponent
         if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
             this.hintOptions = {
                 ...this._defaultHintOptions,
-                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
                 content: this.hint
             };
         } else if (typeof this.hint === 'object') {
             this.hintOptions = {
                 ...this._defaultHintOptions,
-                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
                 ...this.hint
             };
         }

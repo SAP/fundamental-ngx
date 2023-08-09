@@ -5,7 +5,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Observable, Subject } from 'rxjs';
 
 import { FormError, FormFieldErrorDirectiveContext } from './form-error';
-import { Column, HintPlacement, ColumnLayout } from './form-options';
+import { Column, ColumnLayout } from './form-options';
 
 /**
  * FormField base class.
@@ -47,10 +47,7 @@ export abstract class PlatformFormField extends FormField {
      * Indicates when form field label should not be displayed
      */
     noLabelLayout: boolean;
-    /**
-     * Define hint placement
-     */
-    hintPlacement: HintPlacement;
+
     /**
      * A reference to the underlying FormFieldControl.
      */

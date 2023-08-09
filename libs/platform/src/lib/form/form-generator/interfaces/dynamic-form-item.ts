@@ -8,7 +8,6 @@ import {
     ColumnLayout,
     FieldHintInput,
     HintInput,
-    HintPlacement,
     InlineLayout,
     LabelLayout,
     SelectItem
@@ -371,13 +370,6 @@ export interface BaseDynamicFormItemGuiOptions {
      * If set, hint icon is added to control label or group heading with tooltip message as a value.
      */
     hint?: HintInput;
-
-    /**
-     * @deprecated Use `hint.placement` instead
-     * @description
-     * Define hint placement.
-     */
-    hintPlacement?: HintPlacement;
 }
 
 export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions {
