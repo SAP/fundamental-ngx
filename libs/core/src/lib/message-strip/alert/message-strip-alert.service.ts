@@ -11,7 +11,7 @@ import { MessageStripAlertComponentData, MessageStripAlertContainerPosition } fr
 import { applyDefaultConfig } from './default-config';
 import { MessageStripAlert } from './message-strip-alert/message-strip-alert.interface';
 import { MessageStripAlertComponent } from './message-strip-alert/message-strip-alert.component';
-import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { patchLanguage } from '@fundamental-ngx/i18n';
 
 /**
  * Service that is responsible for opening and closing message strip alerts.
@@ -125,19 +125,11 @@ export class MessageStripAlertService {
                             provide: MessageStripAlertRef,
                             useFactory: () => alertRef
                         },
-                        {
-                            provide: FD_LANGUAGE,
-                            useValue: this.injector.get(FD_LANGUAGE).pipe(
-                                map((lang) => ({
-                                    ...lang,
-                                    coreMessageStrip: {
-                                        ...lang.coreMessageStrip,
-                                        dismissLabel:
-                                            config.messageStrip.dismissLabel || lang.coreMessageStrip.dismissLabel
-                                    }
-                                }))
-                            )
-                        }
+                        patchLanguage((lang) => ({
+                            coreMessageStrip: {
+                                dismissLabel: config.messageStrip.dismissLabel || lang.coreMessageStrip.dismissLabel
+                            }
+                        }))
                     ],
                     parent: this.injector
                 })
