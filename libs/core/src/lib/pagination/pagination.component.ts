@@ -37,8 +37,6 @@ interface CurrentShowing {
     from: number;
     to: number;
     totalCount: number;
-    /** @deprecated has been renamed to "totalCount" */
-    of: number;
 }
 
 let paginationUniqueId = 0;
@@ -219,7 +217,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     _currentShowing: CurrentShowing = {
         from: 0,
         to: 0,
-        of: 0,
         totalCount: 0
     };
 
@@ -368,7 +365,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._currentShowing = {
             from: this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * itemsPerPage + 1,
             to: Math.min((this.currentPage - 1) * itemsPerPage + itemsPerPage, this.totalItems),
-            of: this.totalItems,
             totalCount: this.totalItems
         };
 
