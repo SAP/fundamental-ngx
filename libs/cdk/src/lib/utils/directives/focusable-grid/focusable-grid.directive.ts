@@ -14,13 +14,8 @@ import {
 import { merge, startWith, switchMap } from 'rxjs';
 import { KeyUtil } from '../../functions';
 import { Nullable } from '../../models/nullable';
-import { FocusableItemPosition } from '../focusable-item';
-import {
-    FDK_FOCUSABLE_LIST_DIRECTIVE,
-    FocusableListDirective,
-    FocusableListPosition,
-    ScrollPosition
-} from '../focusable-list';
+import { FocusableItemPosition, FocusableListPosition } from '../focusable-item';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective, ScrollPosition } from '../focusable-list';
 import { findLastIndex } from 'lodash-es';
 import { FDK_FOCUSABLE_GRID_DIRECTIVE } from './focusable-grid.tokens';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
