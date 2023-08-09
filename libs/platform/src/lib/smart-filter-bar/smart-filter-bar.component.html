@@ -1,5 +1,5 @@
 <div>
-    <fd-toolbar [hasTitle]="true" fdType="transparent">
+    <fd-toolbar fdType="transparent">
         <ng-container *ngIf="_toolbarItems">
             <ng-container *ngFor="let template of _toolbarItems">
                 <ng-template [ngTemplateOutlet]="template"></ng-template>
