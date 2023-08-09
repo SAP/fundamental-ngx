@@ -114,7 +114,7 @@
                 *ngFor="let listItem of _suggestions"
                 [title]="listItem.label"
                 [description]="listItem.description || ''"
-                [avatarSrc]="listItem.avatarSrc"
+                [avatar]="listItem.avatarSrc"
                 [value]="listItem.value"
                 (itemSelected)="selectionMode !== 'multi' && addToArray(listItem, true)"
                 (itemCheckboxSelected)="_checkboxSelected(listItem, $event)"
