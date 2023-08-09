@@ -12,6 +12,7 @@ import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { TokenModule } from '@fundamental-ngx/core/token';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 const routes: Routes = [
     {
@@ -25,7 +26,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [FormModule, TokenModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [
+        FormModule,
+        TokenModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FdPatchLanguageDirective
+    ],
     exports: [RouterModule],
     declarations: [
         TokenDocsComponent,
