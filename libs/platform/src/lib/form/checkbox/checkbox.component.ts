@@ -11,7 +11,6 @@ import {
     Inject,
     Input,
     isDevMode,
-    OnInit,
     Optional,
     Output,
     Self,
@@ -46,7 +45,7 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxComponent), multi: true }]
 })
-export class CheckboxComponent extends BaseInput implements AfterViewInit, OnInit {
+export class CheckboxComponent extends BaseInput implements AfterViewInit {
     /**
      * Checkbox tooltip
      */
@@ -115,21 +114,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit, OnIni
     readonly checkedChange = new EventEmitter<any>();
 
     /**
-     * @deprecated use "checkedChange" instead
-     * Emitting checkbox change event
-     */
-    @Output()
-    // eslint-disable-next-line @angular-eslint/no-output-native
-    readonly change: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
-
-    /**
-     * @deprecated rely on checkbox state directly instead
-     * Event emitted when the checkbox's `indeterminate` value changes.
-     */
-    @Output()
-    readonly indeterminateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-    /**
      * @hidden
      * is needed for the checkbox group to access component values
      */
@@ -153,18 +137,6 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit, OnIni
         this.name = `fdp-checkbox-${nextUniqueId++}`;
         this.tabIndexValue = tabIndexValue;
     }
-
-    /** @hidden */
-    ngOnInit(): void {
-        super.ngOnInit();
-        if (this.change.observed) {
-            warnOnce('`change` event is deprecated. Use `checkedChange` instead');
-        }
-        if (this.indeterminateChange.observed) {
-            warnOnce('`indeterminateChange` event is deprecated. Use `indeterminate` instead');
-        }
-    }
-
     /** update controller on checkbox state change */
     public onModelChange(value: any): void {
         this.value = value;
@@ -181,7 +153,5 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit, OnIni
         const event = new PlatformCheckboxChange();
         event.source = this;
         event.checked = this.value;
-        this.change.emit(event);
-        this.indeterminateChange.emit(this.value === this.coreCheckbox?.values.thirdStateValue);
     }
 }
