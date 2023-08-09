@@ -322,11 +322,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         this._cd.detectChanges();
     }
 
-    /** @hidden */
-    // get elementRef(): ElementRef {
-    //     return this.toolbar;
-    // }
-
     /** Method triggering collapsible toolbar  */
     updateCollapsibleItems(): void {
         this._refreshOverflow$.next();
