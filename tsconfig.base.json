@@ -234,7 +234,6 @@
             "@fundamental-ngx/docs/core/tabs": ["libs/docs/core/tabs/index.ts"],
             "@fundamental-ngx/docs/core/text": ["libs/docs/core/text/index.ts"],
             "@fundamental-ngx/docs/core/textarea": ["libs/docs/core/textarea/index.ts"],
-            "@fundamental-ngx/docs/core/theme-switcher": ["libs/docs/core/theme-switcher/index.ts"],
             "@fundamental-ngx/docs/core/theming": ["libs/docs/core/theming/index.ts"],
             "@fundamental-ngx/docs/core/tile": ["libs/docs/core/tile/index.ts"],
             "@fundamental-ngx/docs/core/time": ["libs/docs/core/time/index.ts"],

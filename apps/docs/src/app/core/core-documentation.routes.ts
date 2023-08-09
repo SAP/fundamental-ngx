@@ -374,11 +374,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/core/textarea').then((m) => m.TextareaDocsModule)
             },
             {
-                path: 'theme-switcher',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/theme-switcher').then((m) => m.ThemeSwitcherDocsModule)
-            },
-            {
                 path: 'theming',
                 loadChildren: () => import('@fundamental-ngx/docs/core/theming').then((m) => m.ThemingDocsModule)
             },

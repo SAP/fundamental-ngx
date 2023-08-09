@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RtlService } from './services/rtl.service';
-import { ThemesService } from './services/themes.service';
 import {
     AutoCompleteModule,
     ClickedBehaviorModule,
@@ -68,6 +67,6 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         BreakpointModule,
         IntersectionSpyDirective
     ],
-    providers: [RtlService, ThemesService]
+    providers: [RtlService]
 })
 export class UtilsModule {}
