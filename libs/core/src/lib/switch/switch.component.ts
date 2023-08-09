@@ -102,38 +102,6 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     ariaLabelledBy: Nullable<string>;
 
     /**
-     * @deprecated use i18n capabilities instead
-     * Semantic Label Accept set for Accessibility
-     */
-    @Input()
-    set semanticAcceptLabel(value: string) {
-        warnOnce(
-            "Property semanticAcceptLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticAcceptLabel' key instead."
-        );
-        this._semanticAcceptLabel = value;
-    }
-
-    get semanticAcceptLabel(): string {
-        return this._semanticAcceptLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Semantic Label Decline set for Accessibility
-     */
-    @Input()
-    set semanticDeclineLabel(value: string) {
-        warnOnce(
-            "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticDeclineLabel' key instead."
-        );
-        this._semanticDeclineLabel = value;
-    }
-
-    get semanticDeclineLabel(): string {
-        return this._semanticDeclineLabel;
-    }
-
-    /**
      * Event fired when the state of the switch changes.
      * *$event* can be used to retrieve the new state of the switch.
      */
@@ -146,12 +114,6 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _semanticDeclineLabel: string;
-
-    /** @hidden */
-    private _semanticAcceptLabel: string;
 
     /** @hidden */
     constructor(
