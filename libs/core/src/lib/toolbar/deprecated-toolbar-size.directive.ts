@@ -17,7 +17,8 @@ type ToolbarSize = 'cozy' | 'compact' | 'condensed' | null;
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedToolbarSizeDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedToolbarSizeDirective
     extends BehaviorSubject<LocalContentDensityMode>
