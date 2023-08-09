@@ -272,6 +272,7 @@ describe('Approval flow', () => {
             await click(afDefaultExample + editExampleButton);
             await waitForElDisplayed(addNode);
             await click(addNode, 1);
+            await waitForElDisplayed(detailsDialogParallelSerialSelect);
             await click(detailsDialogParallelSerialSelect);
             await click(detailsDialogParallelSerialSelectOption);
             await click(detailsDialogUserTeamButton);
@@ -295,6 +296,7 @@ describe('Approval flow', () => {
             (await browserIsFirefox()) ? await click(addNode, 2) : await click(addNode, 1);
             await click(detailsDialogParallelSerialSelect);
             await click(detailsDialogParallelSerialSelectOption, 1);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
@@ -317,6 +319,7 @@ describe('Approval flow', () => {
             await click(approvalFlowNodeCheckbox, 3);
             await waitForElDisplayed(topActionButtons);
             await click(topActionButtons);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
@@ -337,6 +340,7 @@ describe('Approval flow', () => {
             await click(approvalFlowNodeActionMenu, 3);
             await waitForElDisplayed(approvalFlowNodeActionMenuItem);
             await click(approvalFlowNodeActionMenuItem);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
@@ -360,6 +364,7 @@ describe('Approval flow', () => {
             await pause(500);
             await waitForElDisplayed(approverOptionListItem);
             await click(approverOptionListItem, 2);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await click(radioButton);
@@ -392,6 +397,7 @@ describe('Approval flow', () => {
             await pause(500);
             await waitForElDisplayed(approverOptionListItem);
             await click(approverOptionListItem, 1);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await click(radioButton);
@@ -459,6 +465,7 @@ describe('Approval flow', () => {
             await waitForElDisplayed(approvalFlowNodeActionMenuItem);
             await click(approvalFlowNodeActionMenuItem);
             await waitForElDisplayed(detailsDialog);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await waitForElDisplayed(dialogCheckbox);
@@ -479,6 +486,7 @@ describe('Approval flow', () => {
             await waitForElDisplayed(approvalFlowNodeActionMenuItem);
             await click(approvalFlowNodeActionMenuItem, 1);
             await waitForElDisplayed(detailsDialog);
+            await waitForElDisplayed(detailsDialogUserTeamButton);
             await click(detailsDialogUserTeamButton);
             await pause(500);
             await waitForElDisplayed(dialogCheckbox);
