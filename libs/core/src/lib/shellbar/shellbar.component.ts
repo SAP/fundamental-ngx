@@ -1,4 +1,4 @@
-import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
+import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -28,6 +28,8 @@ import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
 import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
 import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { NgIf } from '@angular/common';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -49,7 +51,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             provide: FD_SHELLBAR_COMPONENT,
             useExisting: ShellbarComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [NgIf, PortalModule, FdTranslatePipe]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
@@ -146,7 +150,8 @@ export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDes
             addonClass: 'fd-shellbar__search-field-addon',
             categoryButtonClass: 'fd-shellbar__search-category',
             categoryDropdownButtonClass: 'fd-shellbar__search-dropdown',
-            removeGroupButtonClass: true
+            removeGroupButtonClass: true,
+            helperClass: 'fd-shellbar__search-field-helper'
         };
 
         this._searchSubmitSubscription?.unsubscribe();

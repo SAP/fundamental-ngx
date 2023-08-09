@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 /**
  * The component that represents a shellbar action.
@@ -24,7 +27,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
             provide: FD_SHELLBAR_ACTION_COMPONENT,
             useExisting: ShellbarActionComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule, ContentDensityDirective, NgIf]
 })
 export class ShellbarActionComponent {
     /** The glyph (icon) name */

@@ -3,6 +3,11 @@ import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf, NgFor } from '@angular/common';
 
 /**
  * The component that represents a product menu.
@@ -17,7 +22,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     selector: 'fd-product-menu',
     templateUrl: './product-menu.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, ButtonModule, ContentDensityDirective, MenuModule, NgFor, IconModule]
 })
 export class ProductMenuComponent {
     /** Whether the popover should close when the escape key is pressed. */
