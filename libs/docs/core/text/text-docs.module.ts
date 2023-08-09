@@ -11,6 +11,7 @@ import { TextMaxLinesComponent } from './examples/text-max-lines.component';
 import { TextHyphenationComponent } from './examples/text-hyphenation.component';
 import { TextExpandableComponent } from './examples/text-expandable.component';
 import { TextModule } from '@fundamental-ngx/core/text';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 const routes: Routes = [
     {
@@ -24,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TextModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TextModule, FdPatchLanguageDirective],
     exports: [RouterModule],
     declarations: [
         TextDocsComponent,
