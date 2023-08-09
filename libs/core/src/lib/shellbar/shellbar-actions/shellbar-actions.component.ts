@@ -22,11 +22,13 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
-import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
+import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ShellbarSizes } from '../model/shellbar-sizes';
+import { ShellbarActionsMobileComponent } from '../shellbar-actions-mobile/shellbar-actions-mobile.component';
+import { NgIf } from '@angular/common';
 
 /**
  * The component that represents shellbar actions.
@@ -56,7 +58,9 @@ import { ShellbarSizes } from '../model/shellbar-sizes';
     host: {
         '[class.fd-shellbar__group]': 'true',
         '[class.fd-shellbar__group--actions]': 'true'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, PortalModule, ShellbarActionsMobileComponent, ShellbarActionComponent, ShellbarUserMenuComponent]
 })
 export class ShellbarActionsComponent implements OnDestroy {
     /** The user data. */

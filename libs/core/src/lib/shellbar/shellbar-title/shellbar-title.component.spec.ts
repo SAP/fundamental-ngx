@@ -8,7 +8,7 @@ describe('ShellbarTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ShellbarTitleComponent]
+            imports: [ShellbarTitleComponent]
         }).compileComponents();
     }));
 

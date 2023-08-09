@@ -4,6 +4,7 @@ import { Directive } from '@angular/core';
     selector: '[fdShellbarSidenav], [fd-shellbar-side-nav]',
     host: {
         class: 'fd-shellbar__button'
-    }
+    },
+    standalone: true
 })
 export class ShellbarSidenavDirective {}
