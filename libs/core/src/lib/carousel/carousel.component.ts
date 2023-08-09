@@ -30,10 +30,15 @@ import { resizeObservable, RtlService, warnOnce } from '@fundamental-ngx/cdk/uti
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf, NgTemplateOutlet, NgClass, NgFor } from '@angular/common';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
 export type PageIndicatorsOrientation = 'bottom' | 'top';
+
+export type CarouselBackgroundOptions = 'translucent' | 'transparent' | 'solid';
 
 export enum SlideDirection {
     None,
@@ -59,7 +64,9 @@ class CarouselActiveSlides {
     providers: [CarouselService],
     host: {
         '[style.width]': 'width'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, NgClass, NgFor, ButtonModule, FdTranslatePipe]
 })
 export class CarouselComponent
     implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy
@@ -176,6 +183,18 @@ export class CarouselComponent
     /** Is carousel is vertical. Default value is false. */
     @Input()
     vertical = false;
+
+    /** Whether to hide top border of the Pagination Container. */
+    @Input()
+    noPaginationContainerBorder = false;
+
+    /** Background configuration for the Content container. */
+    @Input()
+    contentBackground: CarouselBackgroundOptions = 'translucent';
+
+    /** Background configuration for the Pagination container */
+    @Input()
+    pageIndicatorBackground: CarouselBackgroundOptions = 'solid';
 
     /** Number of items to be visible at a time */
     @Input()
