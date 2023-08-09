@@ -141,7 +141,10 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** Avatar component properties. @see AvatarComponent for more details */
     @Input()
-    set avatar(value: Partial<ListAvatarConfig> | string) {
+    set avatar(value: Nullable<Partial<ListAvatarConfig> | string>) {
+        if (!value) {
+            return;
+        }
         value = typeof value === 'string' ? { image: value } : value;
         this._avatarConfig = merge(new ListAvatarConfig(), value);
     }
