@@ -42,27 +42,21 @@
     </fd-dialog-body>
 
     <fd-dialog-footer fdCompact>
-        <fd-dialog-footer-button *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)">
-            <button
-                fd-button
-                fd-dialog-decisive-button
+        <ng-container *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)">
+            <fd-button-bar
                 fdType="emphasized"
                 [label]="'platformApprovalFlow.userDetailsSendReminderBtnLabel' | fdTranslate"
                 [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
                 (click)="_sendReminder()"
-            ></button>
-        </fd-dialog-footer-button>
+            ></fd-button-bar>
+        </ng-container>
 
-        <fd-dialog-footer-button>
-            <button
-                fd-button
-                fdkInitialFocus
-                fd-dialog-decisive-button
-                fdType="transparent"
-                [label]="'platformApprovalFlow.userDetailsCancelBtnLabel' | fdTranslate"
-                (click)="dialogRef.close('Cancel')"
-            ></button>
-        </fd-dialog-footer-button>
+        <fd-button-bar
+            fdkInitialFocus
+            fdType="transparent"
+            [label]="'platformApprovalFlow.userDetailsCancelBtnLabel' | fdTranslate"
+            (click)="dialogRef.close('Cancel')"
+        ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>
 
