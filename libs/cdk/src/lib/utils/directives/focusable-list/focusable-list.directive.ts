@@ -18,7 +18,7 @@ import {
     SimpleChanges
 } from '@angular/core';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { FocusableItemDirective, FocusableItemPosition } from '../focusable-item/focusable-item.directive';
+import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItem,
@@ -29,9 +29,7 @@ import {
 import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
 import { merge, Subject } from 'rxjs';
 import { Nullable } from '../../models/nullable';
-import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { destroyObservable, getNativeElement } from '../../helpers';
-import { HasElementRef } from '../../interfaces';
+import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { intersectionObservable, KeyUtil } from '../../functions';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
@@ -105,7 +103,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
-    readonly _projectedFocusableItems: QueryList<FocusableItemDirective>;
+    readonly _projectedFocusableItems: QueryList<FocusableItem>;
 
     /** @hidden */
     get _focusableItems(): QueryList<FocusableItem> {
@@ -125,21 +123,13 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
 
     /** @hidden */
-    readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
-
-    /** @hidden */
-    readonly _gridListFocused$ = new Subject<FocusableListPosition>();
-
-    /** @hidden */
-    readonly _keydown$ = new Subject<FocusableListKeydownEvent>();
-    /** @hidden */
     _isVisible = false;
 
     /** @hidden */
-    protected _focusable = false;
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    protected readonly _destroyRef = inject(DestroyRef);
+    protected _focusable = false;
 
     /** @hidden */
     private _gridPosition: { rowIndex: number; totalRows: number };
@@ -252,7 +242,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** Set items programmatically. */
-    setItems(items: QueryList<FocusableItemDirective>): void {
+    setItems(items: QueryList<FocusableItem>): void {
         this._items = items;
         this._listenOnItems();
     }
@@ -383,36 +373,6 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                 }),
                 takeUntil(merge(this._refreshItems$, destroyObservable(this._destroyRef))),
                 finalize(() => focusListenerDestroyers.forEach((d) => d()))
-            )
-            .subscribe();
-    }
-
-    /** @hidden */
-    private _listenOnItems(): void {
-        const refresh$ = merge(this._refresh$, destroyObservable(this._destroyRef));
-        this._refresh$.next();
-        this._focusableItems.changes
-            .pipe(
-                startWith(null),
-                map(() => this._focusableItems.toArray()),
-                tap((items: FocusableItemDirective[]): void => {
-                    const focusableItems: FocusableItem[] = items.map((item, index) => ({
-                        index,
-                        focusable: () => item.fdkFocusableItem,
-                        elementRef: item.elementRef,
-                        focus: () => item.elementRef.nativeElement.focus(),
-                        keydown: item._keydown$
-                    }));
-
-                    const direction = this.navigationDirection === 'grid' ? 'horizontal' : this.navigationDirection;
-
-                    this._initializeFocusManager(focusableItems, {
-                        direction,
-                        contentDirection: this.contentDirection,
-                        wrap: this.wrap
-                    });
-                }),
-                takeUntil(refresh$)
             )
             .subscribe();
     }
