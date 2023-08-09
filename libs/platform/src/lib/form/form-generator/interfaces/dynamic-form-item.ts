@@ -4,14 +4,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
-import {
-    ColumnLayout,
-    FieldHintInput,
-    HintInput,
-    InlineLayout,
-    LabelLayout,
-    SelectItem
-} from '@fundamental-ngx/platform/shared';
+import { ColumnLayout, FieldHintInput, HintInput, InlineLayout, SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
@@ -390,13 +383,6 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * Inline layout for list based form item.
      */
     inlineLayout?: InlineLayout;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     * Define form field label placement.
-     */
-    layout?: LabelLayout;
 
     /**
      * @description
