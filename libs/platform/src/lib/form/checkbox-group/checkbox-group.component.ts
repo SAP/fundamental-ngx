@@ -9,7 +9,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     Optional,
     Output,
     QueryList,
@@ -20,7 +19,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { RangeSelector, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { SelectionModel } from '@angular/cdk/collections';
 
 import {
@@ -34,14 +33,6 @@ import {
     PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
-
-let warnedAboutChecked = false;
-const warnAboutChecked = (): void => {
-    if (isDevMode() && !warnedAboutChecked) {
-        warnOnce('The fdp-checkbox-group[checked] property is deprecated. Use fdp-checkbox-group[value] instead');
-        warnedAboutChecked = true;
-    }
-};
 
 /**
  * Checkbox group implementation based on the
@@ -79,20 +70,6 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         return this._inlineCurrentValue$.value;
     }
 
-    /**
-     * @deprecated
-     * Establishes two way binding, when checkbox group used outside form.
-     */
-    @Input()
-    set checked(checkedValues: string[]) {
-        warnAboutChecked();
-        this.value = checkedValues;
-    }
-    get checked(): string[] {
-        warnAboutChecked();
-        return this.value;
-    }
-
     /** Children checkboxes passed as content */
     @ContentChildren(CheckboxComponent)
     contentCheckboxes: QueryList<CheckboxComponent>;
@@ -105,18 +82,11 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     @Output()
     readonly valueChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
-    /**
-     * @deprecated - use "valueChange" instead
-     * Emits checked change event
-     */
-    @Output()
-    readonly checkedChange = this.valueChange;
+    /** @hidden */
+    readonly _selectionModel = new SelectionModel(true);
 
     /** @hidden */
     private readonly _rangeSelector = new RangeSelector();
-
-    /** @hidden */
-    readonly _selectionModel = new SelectionModel(true);
 
     /** @hidden */
     constructor(
@@ -203,28 +173,28 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         this._updateSelectionModelByValue();
     }
 
-    /** @inheritdoc */
-    protected setValue(value: any, emitOnChange = true): void {
-        super.setValue(coerceArraySafe(value), emitOnChange);
-    }
-
     /**
      * access display value for objects, acts as checkbox label.
      */
-    public getDisplayValue(item: any): string {
+    getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
     /**
      * access lookup value for objects, acts as checkbox value.
      */
-    public getLookupValue(item: any): string {
+    getLookupValue(item: any): string {
         return this.lookupValue(item);
     }
 
     /** @hidden */
-    public getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
+    getListItemDisabledValue(item: CheckboxGroupComponent['list'][number]): boolean {
         return this.disabled || !!(<SelectItem>item)?.disabled;
+    }
+
+    /** @inheritdoc */
+    protected setValue(value: any, emitOnChange = true): void {
+        super.setValue(coerceArraySafe(value), emitOnChange);
     }
 
     /** @hidden */
