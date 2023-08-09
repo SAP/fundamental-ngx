@@ -63,7 +63,7 @@ describe('ToolbarComponent', () => {
                 expect(actualOverflowItems.length).toBeGreaterThan(0);
                 doneFn();
             });
-            resizeService.trigger(toolbar.toolbar.nativeElement, []);
+            resizeService.trigger(toolbar.elementRef.nativeElement, []);
         });
     });
 });
@@ -111,7 +111,7 @@ describe('ToolbarComponent - Prioritization', () => {
                 expect(actualOverflownItems.map((el) => el.priority)).toEqual(overflownItems);
                 doneFn();
             });
-            resizeService.trigger(toolbar.toolbar.nativeElement, []);
+            resizeService.trigger(toolbar.elementRef.nativeElement, []);
         });
     });
 });
@@ -166,7 +166,7 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
                 );
                 doneFn();
             });
-            resizeService.trigger(toolbar.toolbar.nativeElement, []);
+            resizeService.trigger(toolbar.elementRef.nativeElement, []);
         });
     });
 });

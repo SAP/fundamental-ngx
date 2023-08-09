@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     Component,
     ComponentRef,
+    DestroyRef,
     ElementRef,
     EmbeddedViewRef,
     EventEmitter,
@@ -22,8 +23,8 @@ import {
     TemplatePortal
 } from '@angular/cdk/portal';
 import { coerceElement } from '@angular/cdk/coercion';
-import { BehaviorSubject, filter, map, takeUntil, tap } from 'rxjs';
-import { DestroyedService } from '../../services';
+import { BehaviorSubject, filter, map, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * A component that can be used to attach a portal to a DOM element, without explicitly creating portal instances on place.
@@ -34,8 +35,7 @@ import { DestroyedService } from '../../services';
     selector: 'fdk-dynamic-portal',
     standalone: true,
     imports: [PortalModule],
-    template: ` <ng-template cdkPortalOutlet></ng-template>`,
-    providers: [DestroyedService]
+    template: ` <ng-template cdkPortalOutlet></ng-template>`
 })
 export class DynamicPortalComponent implements AfterViewInit {
     /** The DOM element to attach */
@@ -76,7 +76,7 @@ export class DynamicPortalComponent implements AfterViewInit {
     >(undefined);
 
     /** @hidden */
-    private destroy$ = inject(DestroyedService);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private viewContainerRef = inject(ViewContainerRef);
@@ -107,7 +107,7 @@ export class DynamicPortalComponent implements AfterViewInit {
                     return new ComponentPortal(content);
                 }),
                 filter(Boolean),
-                takeUntil(this.destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((portal) => {
                 const ref = portalOutlet.attach(portal);
