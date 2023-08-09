@@ -6,7 +6,6 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    isDevMode,
     OnDestroy,
     Output,
     ViewChild,
@@ -14,12 +13,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let switchUniqueId = 0;
-let warnedAboutAriaLabeledBy = false;
 
 /**
  * The Switch component is used to activate or deactivate an element.
@@ -86,16 +84,6 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     /** aria-label attribute of the inner input element. */
     @Input()
     ariaLabel: Nullable<string>;
-
-    /** @deprecated renamed to "ariaLabelledBy" */
-    @Input()
-    set ariaLabelledby(value: Nullable<string>) {
-        if (isDevMode() && !warnedAboutAriaLabeledBy) {
-            warnOnce('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
-            warnedAboutAriaLabeledBy = true;
-        }
-        this.ariaLabelledBy = value;
-    }
 
     /** aria-labelledby attribute of the inner input element. */
     @Input()
