@@ -9,7 +9,8 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedCheckboxContentDensityDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedCheckboxContentDensityDirective extends DeprecatedCompactDirective {
     /** @hidden */
