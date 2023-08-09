@@ -3237,10 +3237,10 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.6.1":
-  version "11.6.1"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.1.tgz#1368380b196d5445c7698c7a1a2725366cc1f9e3"
-  integrity sha512-07e1P2sOEl/CadBP3iejy/IpcHBWzojCNfly6WURM3HZeZLVvfGmLXVv0HQeJYfE8t+wRhDMJhnJvX5fjVH3Nw==
+"@sap-theming/theming-base-content@11.6.4":
+  version "11.6.4"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.4.tgz#828b314c5036b054d4bae20243b382e1eb57c7cf"
+  integrity sha512-ub3W9qRO4Kt1nrXJBvTqUbQjpAhcQNGcIh1CTopVStpGGhEP1a2VPeXxJQPL37FCzIFeN898OBiQgCgQNpVqYQ==
 
 "@sap-theming/theming-base-content@^11.4.0":
   version "11.6.3"

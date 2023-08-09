@@ -55,13 +55,8 @@ describe('CarouselDirective', () => {
     beforeEach(() => {
         TestBed.resetTestingModule();
         TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [
-                HorizontalCarouselComponent,
-                VerticalCarouselComponent,
-                CarouselItemDirective,
-                CarouselDirective
-            ],
+            imports: [CommonModule, CarouselItemDirective, CarouselDirective],
+            declarations: [HorizontalCarouselComponent, VerticalCarouselComponent],
             providers: [CarouselService]
         }).compileComponents();
     });
