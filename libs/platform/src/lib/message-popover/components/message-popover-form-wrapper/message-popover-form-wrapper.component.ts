@@ -10,8 +10,8 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm, NgModel } from '@angular/forms';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     FormFieldErrorDirectiveContext,
@@ -38,18 +38,16 @@ export type MessagePopoverForm = NgForm | FormGroupDirective;
     templateUrl: './message-popover-form-wrapper.component.html',
     exportAs: 'messagePopoverWrapper',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
     /** @hidden */
     @ContentChildren(ControlContainer, { descendants: true })
     private readonly _projectedForm: QueryList<MessagePopoverForm>;
-    /** @hidden */
-    @ContentChildren(NgModel, { descendants: true })
-    private readonly _projectedFormItems!: QueryList<NgModel>;
 
     /** @hidden */
-    @ContentChildren(PlatformFormFieldControl, { descendants: true })
+    @ContentChildren(FD_FORM_FIELD_CONTROL, { descendants: true })
     private readonly _projectedFormFieldControls!: QueryList<PlatformFormFieldControl>;
 
     /** @hidden */
@@ -121,9 +119,7 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
         if (this._ngForms.length > 0) {
             return;
         }
-        this._ngForms = this._projectedForm?.toArray();
-        this._startListeningForErrors();
-        this._projectedForm?.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+        this._projectedForm?.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._ngForms = this._projectedForm.toArray();
             this._startListeningForErrors();
         });
@@ -248,11 +244,16 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
                     .forEach((errorKey) => {
                         const errorObj = control.errors![errorKey];
 
-                        const errorTextModel = this._getConfigErrorModel(errorKey);
+                        const errorTextModel = this._getConfigErrorModel(errorKey, field.errorTypes);
+                        const errorConfig = field?.errorTypes ? field?.errorTypes[errorKey] : null;
+                        const errorState =
+                            errorConfig && this._isAdvancedError(errorConfig) && errorConfig.type
+                                ? errorConfig.type
+                                : 'error';
                         const error: MessagePopoverEntry = {
                             name: controlName,
                             type: errorTextModel.type,
-                            state: convertFormState('error'),
+                            state: convertFormState(errorState),
                             fieldName: field?.label ?? '',
                             element: field?.elementRef,
                             heading: {
@@ -435,8 +436,12 @@ export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper
     }
 
     /** @hidden */
-    private _getConfigErrorModel(errorKey: string): MessagePopoverErrorConfig {
-        const configError = this._config.errors[errorKey];
+    private _getConfigErrorModel(
+        errorKey: string,
+        customErrorTypes?: MessagePopoverConfig['errors']
+    ): MessagePopoverErrorConfig {
+        const configError =
+            customErrorTypes && customErrorTypes[errorKey] ? customErrorTypes[errorKey] : this._config.errors[errorKey];
         const isPlainError = !this._isAdvancedError(configError);
         const errorType = isPlainError ? 'error' : configError.type;
         const headingMessage = isPlainError ? configError : configError.heading;
