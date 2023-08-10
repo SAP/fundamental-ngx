@@ -12,6 +12,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 const routes: Routes = [
     {
@@ -32,7 +33,8 @@ const routes: Routes = [
         MenuModule,
         ActionSheetModule,
         AvatarModule,
-        ToolbarModule
+        ToolbarModule,
+        FdPatchLanguageDirective
     ],
     exports: [RouterModule],
     declarations: [FeedListItemHeaderComponent, FeedListItemDocsComponent, ...examples],
