@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/moment-adapter",
-  "version": "0.44.1-rc.3",
+  "version": "0.45.0-rc.0",
   "schematics": "./schematics/collection.json",
   "description": "Datetime adapter for SAP Fundamentals, based on Moment.js package",
   "license": "Apache-2.0",
