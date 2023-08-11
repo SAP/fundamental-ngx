@@ -6,15 +6,14 @@ import {
     EventEmitter,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    Inject
+    Inject,
+    inject,
+    DestroyRef
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
@@ -29,6 +28,8 @@ import { CalendarService } from '../../calendar.service';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgIf, NgFor } from '@angular/common';
 
 /** Component representing the day view of the calendar. */
 @Component({
@@ -40,9 +41,32 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
         '[attr.id]': 'viewId',
         class: 'fd-calendar__dates'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgFor]
 })
-export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
+export class CalendarDayViewComponent<D> implements OnInit, OnChanges, FocusableCalendarView {
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param date date type
+     */
+    @Input()
+    disableFunction: DisableDateFunction<D>;
+
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param date date representation
+     */
+    @Input()
+    disableRangeStartFunction: DisableDateFunction<D>;
+
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param date date representation
+     */
+    @Input()
+    disableRangeEndFunction: DisableDateFunction<D>;
+
     /** Currently displayed month and year for days */
     @Input()
     set currentlyDisplayed(currentlyDisplayed: CalendarCurrent) {
@@ -55,9 +79,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     get currentlyDisplayed(): CalendarCurrent {
         return this._currentlyDisplayed;
     }
-
-    /** @hidden */
-    private _currentlyDisplayed: CalendarCurrent;
 
     /** The currently selected date model in single mode. */
     @Input()
@@ -72,9 +93,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     get selectedDate(): Nullable<D> {
         return this._selectedDate;
     }
-
-    /** @hidden */
-    private _selectedDate: Nullable<D>;
 
     /** The currently selected FdDates model start and end in range mode. */
     @Input()
@@ -96,9 +114,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     get selectedRangeDate(): DateRange<D> {
         return this._selectedRangeDate;
     }
-
-    /** @hidden */
-    private _selectedRangeDate: DateRange<D>;
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
@@ -137,7 +152,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
     /**
      * Special days mark, it can be used by passing array of object with
-     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * Special day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:
      * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
      * Rule accepts method with date object as a parameter. ex:
      * `rule: (date: D) => this.dateAdapter.getDay(date) === 1`, which will mark all sundays as special day.
@@ -173,11 +188,14 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      */
     _weeks: string[];
 
-    /**
-     * @hidden
-     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
-     */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    private _selectedRangeDate: DateRange<D>;
+
+    /** @hidden */
+    private _selectedDate: Nullable<D>;
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /**
      * @hidden
@@ -188,6 +206,9 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     private _isOnRangePick = false;
     /** @hidden */
     private _isInitiated = false;
+
+    /** @hidden */
+    private _currentlyDisplayed: CalendarCurrent;
 
     /**
      * @hidden
@@ -200,27 +221,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * Variable that contains short weekday names.
      */
     private _longWeekDays: string[];
-
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param date date type
-     */
-    @Input()
-    disableFunction: DisableDateFunction<D>;
-
-    /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param date date representation
-     */
-    @Input()
-    disableRangeStartFunction: DisableDateFunction<D>;
-
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param date date representation
-     */
-    @Input()
-    disableRangeEndFunction: DisableDateFunction<D>;
 
     /** @hidden */
     constructor(
@@ -242,7 +242,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
         this._buildDayViewGrid();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._refreshShortWeekDays();
             this._buildDayViewGrid();
             this.changeDetRef.markForCheck();
@@ -259,13 +259,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             this._refreshShortWeekDays();
         }
     }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
     /**
      * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
      * @param day CalendarDay object to be selected.
@@ -857,15 +850,15 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
 
         this.calendarService.focusEscapeFunction = this.focusEscapeFunction;
 
-        this.calendarService.onFocusIdChange.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this.calendarService.onFocusIdChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.focusOnCellByIndex(index);
         });
 
-        this.calendarService.onKeySelect.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this.calendarService.onKeySelect.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this.selectDate(this._calendarDayList[index]);
         });
 
-        this.calendarService.onListStartApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this.calendarService.onListStartApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this._selectPreviousMonth();
             /**
              * Calculate focused cell in new grid
@@ -886,7 +879,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
             this.focusOnCellByIndex(index - 7 * (originalAmountOfWeeks - prevMonthAmountOfWeeks));
         });
 
-        this.calendarService.onListEndApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+        this.calendarService.onListEndApproach.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((index) => {
             this._selectNextMonth();
             // trigger rendering for new grid so focus can be set
             this.changeDetRef.detectChanges();

@@ -12,7 +12,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     buttonChange = 'button[label="Change"]';
     disabledDateTimePickerButton = '.is-disabled button';
     disabledDateTimePickerInput = '.is-disabled input';
-    activeDay = '.fd-calendar__item--current';
+    activeDay = '.fd-calendar__item--today';
     calendarYearsSection = '.fd-calendar__content--years';
     selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
@@ -30,7 +30,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     period = '//span[contains(text(), " PM ")]/parent::li';
     optionButton = 'div.fd-select__control';
     countryOption = 'ul.fd-select-options';
-    calendarItem = '.fd-calendar__table td.fd-calendar__item';
+    calendarItem = '.fd-calendar__content td.fd-calendar__item';
     buttonText = ' .fd-button__text';
 
     filterCalendarValue = async (name: string): Promise<string> => `[id*="${name}"]`;
@@ -38,7 +38,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     getOptionById = async (id: string): Promise<string> => `#${id}`;
 
     clickDayInCalendarButtonByValue = async (dayNumber: number): Promise<void> => {
-        await click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
+        await click('.fd-calendar__content td.fd-calendar__item:not(.fd-calendar__item--other)', dayNumber - 1);
     };
 
     yearInCalendarByValue = async (year: number): Promise<string> => `[data-fd-calendar-year="${year}"]`;

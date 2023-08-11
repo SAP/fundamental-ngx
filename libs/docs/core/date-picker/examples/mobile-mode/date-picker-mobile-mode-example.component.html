@@ -1,0 +1,30 @@
+<p>Landscape date picker:</p>
+<fd-date-picker
+    [rangeHoverEffect]="true"
+    [mobile]="true"
+    [mobileConfig]="mobileLandscapeConfig"
+    [mobileLandscape]="true"
+    type="range"
+    [(ngModel)]="selectedRange1"
+>
+</fd-date-picker>
+<br />
+<div>Selected First Date: {{ selectedRange1?.start?.toDateString() || 'null' }}</div>
+<br />
+<div>Selected Last Date: {{ selectedRange1?.end?.toDateString() || 'null' }}</div>
+
+<br />
+<p>Portrait date picker:</p>
+<fd-date-picker
+    [rangeHoverEffect]="true"
+    [mobile]="true"
+    [mobileConfig]="mobilePortraitConfig"
+    [mobilePortrait]="true"
+    type="range"
+    [(ngModel)]="selectedRange2"
+>
+</fd-date-picker>
+<br />
+<div>Selected First Date: {{ selectedRange2?.start?.toDateString() || 'null' }}</div>
+<br />
+<div>Selected Last Date: {{ selectedRange2?.end?.toDateString() || 'null' }}</div>

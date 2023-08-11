@@ -190,6 +190,33 @@
 </component-example>
 <code-example [exampleFiles]="datePickerDisableScroll"></code-example>
 
+<separator></separator>
+
+<fd-docs-section-title id="mobile-mode" componentName="date-picker">Mobile mode</fd-docs-section-title>
+<description>
+    To use Date picker in mobile mode:
+    <ul>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+        <li>
+            Set <code>[mobileLandscape]="true"</code> to render Calendar in Landscape mode, or
+            <code>[mobilePortrait]="true"</code> for a Portrait mode.
+        </li>
+    </ul>
+
+    Date picker Mobile Mode can be configured <strong>globally</strong> by providing
+    <code>MOBILE_MODE_CONFIG</code> token. Check
+    <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
+</description>
+<component-example name="ex12">
+    <fd-date-picker-mobile-mode-example></fd-date-picker-mobile-mode-example>
+</component-example>
+<code-example [exampleFiles]="datePickerMobile"></code-example>
+
 <!-- Moment example is commented due to the lack of DatetimeAdapter<Moment> implementation  -->
 <!-- <separator></separator>
 

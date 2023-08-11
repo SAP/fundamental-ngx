@@ -9,7 +9,8 @@ import { Directive, forwardRef } from '@angular/core';
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedCalendarContentDensityDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedCalendarContentDensityDirective extends DeprecatedCompactDirective {
     /** @hidden */

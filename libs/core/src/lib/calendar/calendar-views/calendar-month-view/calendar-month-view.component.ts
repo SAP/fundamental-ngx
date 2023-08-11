@@ -22,6 +22,8 @@ import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgFor } from '@angular/common';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -32,7 +34,9 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     host: {
         '[attr.id]': 'viewId'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgFor, ButtonModule]
 })
 export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */

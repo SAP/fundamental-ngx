@@ -7,6 +7,7 @@ import { ROUTES } from './core-documentation.routes';
 import {
     COMBOBOX_MOBILE_CONFIG,
     CURRENT_LIB,
+    DATE_PICKER_MOBILE_CONFIG,
     DocsThemeService,
     MENU_MOBILE_CONFIG,
     MULTI_INPUT_MOBILE_CONFIG,
@@ -40,7 +41,8 @@ import { CoreSchemaModule } from '@fundamental-ngx/docs/core/schema';
         { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: POPOVER_MOBILE_CONFIG, multi: true },
-        { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true }
+        { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true },
+        { provide: MOBILE_MODE_CONFIG, useValue: DATE_PICKER_MOBILE_CONFIG, multi: true }
     ]
 })
 export class CoreDocumentationModule {}

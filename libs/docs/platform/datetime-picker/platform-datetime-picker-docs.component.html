@@ -56,3 +56,30 @@
     <fdp-platform-datetime-picker-update-on-blur-example></fdp-platform-datetime-picker-update-on-blur-example>
 </component-example>
 <code-example [exampleFiles]="dateTimePickerUpdateOnBlur"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="mobile-mode" componentName="datetime-picker"> Mobile mode </fd-docs-section-title>
+<description>
+    To use Datetime picker in mobile mode:
+    <ul>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+        <li>
+            Set <code>[mobileLandscape]="true"</code> to render Calendar in Landscape mode, or
+            <code>[mobilePortrait]="true"</code> for a Portrait mode.
+        </li>
+    </ul>
+
+    Datetime picker Mobile Mode can be configured <strong>globally</strong> by providing
+    <code>MOBILE_MODE_CONFIG</code> token. Check
+    <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
+</description>
+<component-example>
+    <fdp-platform-datetime-picker-mobile-example></fdp-platform-datetime-picker-mobile-example>
+</component-example>
+<code-example [exampleFiles]="datetimePickerMobile"></code-example>

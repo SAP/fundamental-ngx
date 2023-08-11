@@ -29,10 +29,11 @@ export class CalendarPo extends CoreBaseComponentPo {
     yearRangeBtn = '.fd-calendar__action.ng-star-inserted' + this.button;
     monthBtn = '.fd-calendar__action.ng-star-inserted:nth-of-type(2)' + this.button;
     yearBtn = '.fd-calendar__action.ng-star-inserted:nth-of-type(3)' + this.button;
-    currentDay = '.fd-calendar__item--current';
-    selectedDays = '.fd-calendar__item.is-active';
+    currentDay = '.fd-calendar__item--today';
+    selectedDays = '.fd-calendar__item.fd-calendar__item--selected';
     weekendDays = '.fd-calendar__item--weekend';
     calendarItem = ' td.fd-calendar__item:not(.hidden-day)';
+    calendarMyItem = 'td.fd-calendar__my-item:not(.hidden-day)';
     selectionOutput = '> div';
     calendarOptions = 'fd-checkbox label';
     okBtn = 'fd-button-bar' + this.button;

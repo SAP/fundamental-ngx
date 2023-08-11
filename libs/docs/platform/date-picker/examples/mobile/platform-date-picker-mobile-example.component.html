@@ -1,0 +1,52 @@
+<fdp-form-group
+    #ffg
+    [formGroup]="datePickerForm"
+    [object]="formInitialData"
+    (onSubmit)="onSubmit(ffg)"
+    columnLayout="XL2-L2-M1-S1"
+>
+    <fdp-form-field
+        #ffl1
+        id="birthday"
+        [column]="1"
+        [rank]="1"
+        [required]="true"
+        placeholder="Enter your birthday"
+        label="Mobile date picker in portrait mode:"
+        [validators]="requiredDateValidator"
+    >
+        <fdp-date-picker
+            name="birthday"
+            type="single"
+            [allowNull]="false"
+            [mobile]="true"
+            [mobilePortrait]="true"
+            [mobileConfig]="mobilePortraitConfig"
+            [formControl]="ffl1.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+    <fdp-form-field
+        #ffl2
+        id="holiday"
+        [column]="1"
+        [rank]="2"
+        [required]="true"
+        placeholder="Select holidays"
+        label="Mobile date picker in landscape mode:"
+        [validators]="requiredDateValidator"
+    >
+        <fdp-date-picker
+            name="holiday"
+            type="range"
+            [allowNull]="false"
+            [mobile]="true"
+            [mobileLandscape]="true"
+            [mobileConfig]="mobileLandscapeConfig"
+            [formControl]="ffl2.formControl"
+            dateInputLabel="date input mm/dd/yyy"
+        >
+        </fdp-date-picker>
+    </fdp-form-field>
+</fdp-form-group>
