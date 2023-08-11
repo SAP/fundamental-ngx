@@ -10,7 +10,7 @@ export class DatePicker extends PlatformBaseComponentPo {
     calendarExpanded = '.fd-popover__body fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
 
-    currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
+    currentDay = '//*[contains(@class, "fd-calendar__item--today") or contains(@class, "is-active")]';
 
     buttonGerman = 'fd-segmented-button button:nth-child(2)';
     buttonBulgarian = 'fd-segmented-button button:nth-child(3)';

@@ -23,6 +23,7 @@ import {
 } from '@fundamental-ngx/core/datetime-picker';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { moduleDeprecationsProvider, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { DatetimeMobileExampleComponent } from './examples/datetime-mobile/datetime-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -58,7 +59,8 @@ const routes: Routes = [
         DatetimeProgramExampleComponent,
         DatetimeDisabledExampleComponent,
         DatetimePickerAllowNullExampleComponent,
-        DatetimePickerComplexI18nExampleComponent
+        DatetimePickerComplexI18nExampleComponent,
+        DatetimeMobileExampleComponent
     ],
     providers: [
         moduleDeprecationsProvider(DeprecatedDateTimePickerContentDensityDirective),

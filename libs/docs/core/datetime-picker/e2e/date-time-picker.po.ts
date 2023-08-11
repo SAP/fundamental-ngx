@@ -12,7 +12,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     buttonChange = 'button[label="Change"]';
     disabledDateTimePickerButton = '.is-disabled button';
     disabledDateTimePickerInput = '.is-disabled input';
-    activeDay = '.fd-calendar__item--current';
+    activeDay = '.fd-calendar__item--today';
     calendarYearsSection = '.fd-calendar__content--years';
     selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';

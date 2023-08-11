@@ -1,8 +1,4 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
-
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../../calendar.service';
 import { CalendarAggregatedYear } from '../../models/aggregated-year';
@@ -14,8 +10,7 @@ describe('CalendarAggregatedYearViewComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, IconModule, ButtonModule, FdDatetimeModule],
-            declarations: [CalendarAggregatedYearViewComponent],
+            imports: [FdDatetimeModule, CalendarAggregatedYearViewComponent],
             providers: [CalendarService]
         }).compileComponents();
     }));

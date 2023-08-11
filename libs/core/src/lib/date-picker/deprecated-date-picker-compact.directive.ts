@@ -9,7 +9,8 @@ import { CONTENT_DENSITY_DIRECTIVE, DeprecatedCompactDirective } from '@fundamen
             provide: CONTENT_DENSITY_DIRECTIVE,
             useExisting: forwardRef(() => DeprecatedDatePickerCompactDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DeprecatedDatePickerCompactDirective extends DeprecatedCompactDirective {
     /** @hidden */

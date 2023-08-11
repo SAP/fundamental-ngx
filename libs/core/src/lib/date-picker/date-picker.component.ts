@@ -3,19 +3,23 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ComponentRef,
     ElementRef,
     EventEmitter,
     forwardRef,
+    inject,
     Inject,
+    Injector,
     Input,
     OnDestroy,
     OnInit,
     Optional,
     Output,
+    TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator, FormsModule } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -34,8 +38,19 @@ import { FormItemControl, PopoverFormMessageService, registerFormItemControl } f
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { createMissingDateImplementationError } from './errors';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from './tokens';
+import { DatePickerMobileComponent } from './date-picker-mobile/date-picker-mobile.component';
+import { DatePicker } from './date-picker.model';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { NgTemplateOutlet, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 
 let datePickerCounter = 0;
 
@@ -69,15 +84,35 @@ let datePickerCounter = 0;
             useExisting: forwardRef(() => DatePickerComponent),
             multi: true
         },
+        {
+            provide: FD_DATE_PICKER_COMPONENT,
+            useExisting: DatePickerComponent
+        },
         registerFormItemControl(DatePickerComponent),
         PopoverFormMessageService,
-        PopoverService
+        PopoverService,
+        DynamicComponentService
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        PopoverModule,
+        NgIf,
+        FormMessageModule,
+        InputGroupModule,
+        FormsModule,
+        CalendarComponent,
+        BarModule,
+        ButtonModule,
+        NgSwitch,
+        NgSwitchCase,
+        FdTranslatePipe
+    ]
 })
 export class DatePickerComponent<D>
-    implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
+    implements DatePicker<D>, OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
 {
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -102,9 +137,6 @@ export class DatePickerComponent<D>
         this._popoverFormMessage.message = message;
     }
 
-    /** @hidden */
-    _message: string | null = null;
-
     /** The trigger events that will open/close the message box.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -112,9 +144,6 @@ export class DatePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
-
-    /** @hidden */
-    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /** The currently selected CalendarDay model */
     @Input()
@@ -398,8 +427,21 @@ export class DatePickerComponent<D>
     @Input()
     preventScrollOnFocus = false;
 
-    /** @hidden */
-    _processInputOnBlur = false;
+    /** Whether date picker should rendered in mobile mode. */
+    @Input()
+    mobile = false;
+
+    /** Mobile mode configuration. */
+    @Input()
+    mobileConfig: MobileModeConfig;
+
+    /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
+    @Input()
+    mobileLandscape = false;
+
+    /** Whether calendar is used inside mobile in portrait mode */
+    @Input()
+    mobilePortrait = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
@@ -432,6 +474,23 @@ export class DatePickerComponent<D>
         read: ElementRef
     })
     _inputElement: ElementRef<HTMLInputElement>;
+
+    /** @hidden */
+    @ViewChild('controlTemplate')
+    private readonly _controlTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('calendarTemplate')
+    private readonly _calendarTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    _message: string | null = null;
+
+    /** @hidden */
+    _processInputOnBlur = false;
+
+    /** @hidden */
+    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /** @hidden The value of the input */
     _inputFieldDate: string | null = null;
@@ -472,32 +531,14 @@ export class DatePickerComponent<D>
     /** @hidden */
     private _state: FormStates = 'default';
 
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param date date representation
-     */
-    @Input()
-    disableFunction: (value: D) => boolean = () => false;
-
-    /**
-     * Function used to disable certain dates in the calendar for the range start selection.
-     * @param date date representation
-     */
-    @Input()
-    disableRangeStartFunction: (value: D) => boolean = () => false;
-
-    /**
-     * Function used to disable certain dates in the calendar for the range end selection.
-     * @param date date representation
-     */
-    @Input()
-    disableRangeEndFunction: (value: D) => boolean = () => false;
+    /** @hidden */
+    private readonly _injector = inject(Injector);
 
     /** @hidden */
-    onChange: (value: any) => void = () => {};
+    private readonly _dynamicComponentService = inject(DynamicComponentService);
 
     /** @hidden */
-    onTouched: any = () => {};
+    private _mobileComponentRef: Nullable<ComponentRef<DatePickerMobileComponent<D>>>;
 
     /** @hidden */
     get _rangeDelimiter(): string {
@@ -541,6 +582,45 @@ export class DatePickerComponent<D>
         }
     }
 
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param date date representation
+     */
+    @Input()
+    disableFunction: (value: D) => boolean = () => false;
+
+    /**
+     * Function used to disable certain dates in the calendar for the range start selection.
+     * @param date date representation
+     */
+    @Input()
+    disableRangeStartFunction: (value: D) => boolean = () => false;
+
+    /**
+     * Function used to disable certain dates in the calendar for the range end selection.
+     * @param date date representation
+     */
+    @Input()
+    disableRangeEndFunction: (value: D) => boolean = () => false;
+
+    /** @hidden */
+    onChange: (value: any) => void = () => {};
+
+    /** @hidden */
+    onTouched: any = () => {};
+
+    /** @hidden */
+    dialogApprove(): void {}
+
+    /** @hidden */
+    dialogDismiss(prevValue: D | DateRange<D>): void {
+        if (this._isDateRange(prevValue)) {
+            this.handleRangeDateChange(prevValue);
+        } else {
+            this.handleSingleDateChange(prevValue);
+        }
+    }
+
     /** @hidden */
     ngOnInit(): void {
         this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
@@ -552,6 +632,10 @@ export class DatePickerComponent<D>
     /** @hidden */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
+
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
     }
 
     /** @hidden */
@@ -559,17 +643,18 @@ export class DatePickerComponent<D>
         this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
+        this._mobileComponentRef?.destroy();
     }
 
     /**
      * Method that handle calendar active view change and throws event.
      */
-    public handleCalendarActiveViewChange(activeView: FdCalendarView): void {
+    handleCalendarActiveViewChange(activeView: FdCalendarView): void {
         this.activeViewChange.emit(activeView);
     }
 
     /** @hidden */
-    public closeFromCalendar(): void {
+    closeFromCalendar(): void {
         if (this.type === 'single' && this.closeOnDateChoose) {
             this.onTouched();
             this.closeCalendar();
@@ -578,15 +663,19 @@ export class DatePickerComponent<D>
 
     /** Opens the calendar */
     openCalendar(): void {
-        if (!this.disabled) {
-            this.isOpen = true;
-            this.isOpenChange.emit(this.isOpen);
-            this._changeMessageVisibility();
+        if (this.disabled) {
+            return;
         }
+        this.isOpen = true;
+        this.isOpenChange.emit(this.isOpen);
+        this._changeMessageVisibility();
     }
 
     /** Toggles the calendar open or closed */
-    public toggleCalendar(): void {
+    toggleCalendar(): void {
+        if (this.disabled) {
+            return;
+        }
         this.isOpen = !this.isOpen;
         this.isOpenChange.emit(this.isOpen);
         if (!this.isOpen) {
@@ -596,28 +685,30 @@ export class DatePickerComponent<D>
     }
 
     /** Closes the calendar if it is open */
-    public closeCalendar(): void {
-        if (this.isOpen) {
-            this.isOpen = false;
-            this.isOpenChange.emit(this.isOpen);
-            this._changeMessageVisibility();
+    closeCalendar(): void {
+        if (!this.isOpen) {
+            return;
         }
+        this.isOpen = false;
+        this.isOpenChange.emit(this.isOpen);
+        this._changeMessageVisibility();
     }
 
     /**
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected single date changed
      */
-    public handleSingleDateChange(date: D): void {
-        if (date) {
-            this.selectedDate = date;
-            this.selectedDateChange.emit(date);
-            this.onChange(date);
-            this.formatInputDate(date);
-            this._isInvalidDateInput = !this.isModelValid();
-            if (this.closeOnDateChoose && this.type === 'single') {
-                this.closeCalendar();
-            }
+    handleSingleDateChange(date: D): void {
+        if (!date) {
+            return;
+        }
+        this.selectedDate = date;
+        this.selectedDateChange.emit(date);
+        this.onChange(date);
+        this.formatInputDate(date);
+        this._isInvalidDateInput = !this.isModelValid();
+        if (this.closeOnDateChoose && this.type === 'single') {
+            this.closeCalendar();
         }
     }
 
@@ -625,17 +716,18 @@ export class DatePickerComponent<D>
      * @hidden
      * Method that is triggered date formatting in the date control
      */
-    public formatInputDate(date: Nullable<D>): void {
-        if (date) {
-            this._inputFieldDate = this._formatDate(date);
+    formatInputDate(date: Nullable<D>): void {
+        if (!date) {
+            return;
         }
+        this._inputFieldDate = this._formatDate(date);
     }
 
     /**
      * @hidden
      * Method that is triggered by events from calendar component, when there is selected range date changed
      */
-    public handleRangeDateChange(dates: DateRange<D>): void {
+    handleRangeDateChange(dates: DateRange<D>): void {
         const startChanged = !this._dateTimeAdapter.datesEqual(dates.start, this.selectedRangeDate.start);
         const endChanged = !this._dateTimeAdapter.datesEqual(dates.end, this.selectedRangeDate.end);
         if (dates && (startChanged || endChanged)) {
@@ -675,7 +767,7 @@ export class DatePickerComponent<D>
      * @hidden
      * Method that is triggered when the text input is confirmed to ba changed, by clicking enter, or blur
      */
-    public handleInputChange(strDate: string, isTypeEvent: boolean): void {
+    handleInputChange(strDate: string, isTypeEvent: boolean): void {
         if ((isTypeEvent && this.processInputOnBlur) || (!isTypeEvent && !this.processInputOnBlur)) {
             // if processInputOnBlur === true, ignore type event
             // if processInputOnBlur === false, ignore blur/enter event
@@ -865,6 +957,11 @@ export class DatePickerComponent<D>
         }
     }
 
+    /** Returns current selected date. */
+    getSelectedDate(): D | DateRange<D> {
+        return this.selectedDate || this.selectedRangeDate;
+    }
+
     /** @hidden */
     _changeMessageVisibility(): void {
         if (this.isOpen) {
@@ -954,5 +1051,35 @@ export class DatePickerComponent<D>
         this._popoverFormMessage.message = this._message || '';
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.messageType = this._state;
+    }
+
+    /** @hidden */
+    private _setUpMobileMode(): void {
+        const injector = Injector.create({
+            providers: [
+                { provide: FD_DATE_PICKER_COMPONENT, useValue: this },
+                {
+                    provide: FD_DATE_PICKER_MOBILE_CONFIG,
+                    useValue: { calendarTemplate: this._calendarTemplate, controlTemplate: this._controlTemplate }
+                }
+            ],
+            parent: this._injector
+        });
+
+        this._mobileComponentRef = this._dynamicComponentService.createDynamicComponent(
+            {},
+            DatePickerMobileComponent<D>,
+            {
+                container: 'body'
+            },
+            {
+                injector
+            }
+        );
+    }
+
+    /** @hidden */
+    private _isDateRange(value: any): value is DateRange<D> {
+        return !!value && value.start && value.end;
     }
 }

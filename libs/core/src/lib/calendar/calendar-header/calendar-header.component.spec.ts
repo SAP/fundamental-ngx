@@ -1,7 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarService } from '../calendar.service';
 import { CalendarHeaderComponent } from './calendar-header.component';
 
@@ -11,8 +10,7 @@ describe('Calendar2HeaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [CalendarHeaderComponent],
-            imports: [ButtonModule, FdDatetimeModule],
+            imports: [FdDatetimeModule, CalendarHeaderComponent],
             providers: [CalendarService]
         }).compileComponents();
     }));

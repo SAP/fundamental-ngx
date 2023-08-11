@@ -1,4 +1,4 @@
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -24,6 +24,8 @@ import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/c
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -45,7 +47,9 @@ import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatePickerComponent, multi: true }],
     host: {
         '(blur)': 'onTouched()'
-    }
+    },
+    standalone: true,
+    imports: [DatePickerComponent, FormsModule]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
     /**
@@ -272,6 +276,22 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @Input()
     preventScrollOnFocus = false;
+
+    /** Whether date picker should rendered in mobile mode. */
+    @Input()
+    mobile = false;
+
+    /** Mobile mode configuration. */
+    @Input()
+    mobileConfig: MobileModeConfig;
+
+    /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
+    @Input()
+    mobileLandscape = false;
+
+    /** Whether calendar is used inside mobile in portrait mode */
+    @Input()
+    mobilePortrait = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()

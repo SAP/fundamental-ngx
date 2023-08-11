@@ -1,4 +1,8 @@
-<table class="fd-calendar__table" role="grid" [attr.aria-roledescription]="_viewRoleDescription">
+<table
+    class="fd-calendar__content fd-calendar__content--dates"
+    role="grid"
+    [attr.aria-roledescription]="_viewRoleDescription"
+>
     <thead class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row" role="row">
             <th
@@ -14,7 +18,9 @@
                 *ngFor="let day of shortWeekDays; index as i"
                 [attr.aria-label]="longWeekDays[i]"
             >
-                <span class="fd-calendar__text">{{ day }}</span>
+                <div class="fd-calendar__text-wrapper">
+                    <span class="fd-calendar__text">{{ day }}</span>
+                </div>
             </th>
         </tr>
     </thead>
@@ -29,22 +35,24 @@
                 [attr.id]="viewId + '-week-' + _weeks[rowIndex]"
                 [attr.aria-labelledby]="_weekNumbersColumnHeaderId + ' ' + (viewId + '-week-' + _weeks[rowIndex])"
             >
-                <span *ngIf="_weeks && _weeks[rowIndex]" class="fd-calendar__text">
-                    {{ _weeks[rowIndex] }}
-                </span>
+                <div class="fd-calendar__text-wrapper" *ngIf="_weeks && _weeks[rowIndex]">
+                    <span class="fd-calendar__text">
+                        {{ _weeks[rowIndex] }}
+                    </span>
+                </div>
             </th>
 
             <td
                 class="fd-calendar__item"
                 role="gridcell"
                 *ngFor="let cell of row; let cellIndex = index"
-                [class.is-active]="cell.selectedFirst || cell.selectedLast || cell.selected"
+                [class.fd-calendar__item--selected]="cell.selectedFirst || cell.selectedLast || cell.selected"
                 [class.fd-calendar__item--range]="
                     (cell.selectedRange || cell.hoverRange) && !cell.selectedFirst && !cell.selectedLast
                 "
-                [class.fd-calendar__item--current]="cell.current"
+                [class.fd-calendar__item--today]="cell.current"
                 [class.fd-calendar__item--weekend]="cell.weekend && markWeekends && cell.monthStatus === 'current'"
-                [class.fd-calendar__item--other-month]="cell.monthStatus !== 'current'"
+                [class.fd-calendar__item--other]="cell.monthStatus !== 'current'"
                 [class.is-disabled]="cell.disabled"
                 [class]="cell.specialNumber ? 'fd-calendar__special-day--' + cell.specialNumber : ''"
                 [attr.id]="cell.id"
@@ -57,23 +65,25 @@
                 (mouseenter)="_refreshHoverRange(cell)"
                 (keydown)="_onKeydownDayHandler($event, cell, _getIndex(rowIndex, cellIndex))"
             >
-                <span
-                    class="fd-calendar__text"
-                    role="button"
-                    [attr.aria-labelledby]="
-                        cell.id +
-                        '-aria-label ' +
-                        (cell.selectedFirst ? _dateRangeStartLabelId + ' ' : '') +
-                        (cell.selectedLast ? _dateRangeEndLabelId + ' ' : '') +
-                        (cell.current ? _todayLabelId + ' ' : '') +
-                        (cell.selected && calType === 'single' ? _selectedDateLabelId + ' ' : '') +
-                        (cell.past ? _dateInPastLabelId : '')
-                    "
-                    >{{ cell.label }}</span
-                >
-                <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
-                    {{ cell.ariaLabel }}
-                </span>
+                <div class="fd-calendar__text-wrapper">
+                    <span
+                        class="fd-calendar__text"
+                        role="button"
+                        [attr.aria-labelledby]="
+                            cell.id +
+                            '-aria-label ' +
+                            (cell.selectedFirst ? _dateRangeStartLabelId + ' ' : '') +
+                            (cell.selectedLast ? _dateRangeEndLabelId + ' ' : '') +
+                            (cell.current ? _todayLabelId + ' ' : '') +
+                            (cell.selected && calType === 'single' ? _selectedDateLabelId + ' ' : '') +
+                            (cell.past ? _dateInPastLabelId : '')
+                        "
+                        >{{ cell.label }}</span
+                    >
+                    <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
+                        {{ cell.ariaLabel }}
+                    </span>
+                </div>
             </td>
         </tr>
         <tr class="fd-calendar__row" *ngIf="_dayViewGrid.length <= 5">

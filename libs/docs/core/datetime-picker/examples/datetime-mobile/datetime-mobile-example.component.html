@@ -1,0 +1,28 @@
+<p>Landscape Datetime picker:</p>
+<label fd-form-label for="dateTimePickerMobileLandscape">DateTime Picker</label>
+<fd-datetime-picker
+    [mobile]="true"
+    [mobileConfig]="mobileLandscapeConfig"
+    [mobileLandscape]="true"
+    inputId="dateTimePickerMobileLandscape"
+    [(ngModel)]="date1"
+></fd-datetime-picker>
+
+<br />
+<br />
+<span> Selected: {{ date1 || 'null' }} </span>
+<br />
+<p>portrait Datetime picker:</p>
+
+<label fd-form-label for="dateTimePickerMobilePortrait">DateTime Picker</label>
+<fd-datetime-picker
+    [mobile]="true"
+    [mobileConfig]="mobilePortraitConfig"
+    [mobilePortrait]="true"
+    inputId="dateTimePickerMobilePortrait"
+    [(ngModel)]="date2"
+></fd-datetime-picker>
+
+<br />
+<br />
+<span> Selected: {{ date2 || 'null' }} </span>

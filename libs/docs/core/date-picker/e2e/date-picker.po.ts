@@ -29,7 +29,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
     selectedTimeLine = '> div';
     selectedItem = '.is-active';
-    currentItem = 'td.fd-calendar__item--current ';
+    currentItem = 'td.fd-calendar__item--today ';
     itemText = ' .fd-calendar__text';
     buttonText = ' .fd-button__text';
     message = '.fd-form-message--';

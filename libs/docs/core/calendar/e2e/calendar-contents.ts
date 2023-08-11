@@ -11,5 +11,5 @@ export const tuesdayStartDate = 'Tue';
 export const fridayStartDate = 'Fri';
 export const currentDayClass = 'current';
 export const otherMonth = 'fd-calendar__item--other-month';
-export const currentItem = 'fd-calendar__item--current';
+export const currentItem = 'fd-calendar__item--today';
 export const activeItem = 'is-active';

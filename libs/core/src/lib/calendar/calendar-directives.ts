@@ -9,7 +9,8 @@ import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
         class: 'fd-calendar__close-button',
         '[attr.aria-label]': '_ariaLabel',
         '[attr.title]': '_title'
-    }
+    },
+    standalone: true
 })
 export class CalendarCloseButtonDirective {
     /** @hidden */

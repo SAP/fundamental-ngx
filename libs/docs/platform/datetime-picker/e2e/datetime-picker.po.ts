@@ -29,7 +29,7 @@ export class DateTimePicker extends PlatformBaseComponentPo {
     altCalendarItem = 'table td.fd-calendar__item';
     currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
 
-    currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
+    currentDay = '//*[contains(@class, "fd-calendar__item--today") or contains(@class, "is-active")]';
 
     selectYearButton = '.fd-calendar__action:nth-child(3) .fd-button';
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';

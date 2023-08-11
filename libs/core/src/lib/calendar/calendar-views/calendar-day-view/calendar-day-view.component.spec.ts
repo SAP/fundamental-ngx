@@ -13,8 +13,7 @@ describe('CalendarDayViewComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdDatetimeModule],
-            declarations: [CalendarDayViewComponent],
+            imports: [FdDatetimeModule, CalendarDayViewComponent],
             providers: [CalendarService]
         }).compileComponents();
     }));

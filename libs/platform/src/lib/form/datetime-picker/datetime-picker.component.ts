@@ -14,7 +14,7 @@ import {
     SkipSelf,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
 import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
@@ -24,12 +24,15 @@ import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { warnOnce } from '@fundamental-ngx/core/utils';
 import { createMissingDateImplementationError } from './errors';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
     selector: 'fdp-datetime-picker',
     templateUrl: './datetime-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatetimePickerComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformDatetimePickerComponent, multi: true }],
+    standalone: true,
+    imports: [DatetimePickerComponent, FormsModule]
 })
 export class PlatformDatetimePickerComponent<D> extends BaseInput implements AfterViewInit {
     /**
@@ -257,6 +260,22 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     get cancelLabel(): string {
         return this._cancelLabel;
     }
+
+    /** Whether date picker should rendered in mobile mode. */
+    @Input()
+    mobile = false;
+
+    /** Mobile mode configuration. */
+    @Input()
+    mobileConfig: MobileModeConfig;
+
+    /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
+    @Input()
+    mobileLandscape = false;
+
+    /** Whether calendar is used inside mobile in portrait mode */
+    @Input()
+    mobilePortrait = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
