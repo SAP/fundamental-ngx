@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.0...v0.45.1-rc.1) (2023-08-11)
+
+
+### Bug Fixes
+
+* **platform:** announce row index ([#10265](https://github.com/SAP/fundamental-ngx/issues/10265)) ([68f1a84](https://github.com/SAP/fundamental-ngx/commit/68f1a846e5fe489b5cd449b8ee16758cb8fd6635))
+
+
+
+
+
 ## [0.45.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.0...v0.45.1-rc.0) (2023-08-11)
 
 
