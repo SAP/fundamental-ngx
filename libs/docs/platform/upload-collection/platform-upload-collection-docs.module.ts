@@ -17,7 +17,6 @@ import { PlatformUploadCollectionDisabledExampleComponent } from './examples/pla
 import { PlatformUploadCollectionReadonlyExampleComponent } from './examples/platform-upload-collection-readonly-example.component';
 import { PlatformUploadCollectionTurnOffExampleComponent } from './examples/platform-upload-collection-turn-off-example.component';
 import { PlatformUploadCollectionHeaderComponent } from './platform-upload-collection-header/platform-upload-collection-header.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -42,9 +41,6 @@ const routes: Routes = [
         PlatformUploadCollectionReadonlyExampleComponent,
         PlatformUploadCollectionTurnOffExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-upload-collection'),
-        currentComponentProvider('upload-collection')
-    ]
+    providers: [currentComponentProvider('upload-collection')]
 })
 export class PlatformUploadCollectionDocsModule {}

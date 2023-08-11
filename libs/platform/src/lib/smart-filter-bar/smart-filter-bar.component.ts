@@ -22,7 +22,7 @@ import { Validators } from '@angular/forms';
 import { BehaviorSubject, debounceTime, filter, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
 import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
@@ -45,11 +45,9 @@ import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition
 import { SmartFilterSettingsDialogConfig } from './interfaces/smart-filter-bar-settings-dialog-config';
 import { SmartFilterBarService } from './smart-filter-bar.service';
 import { SMART_FILTER_BAR_RENDERER_COMPONENT } from './constants';
-import { SmartFilterBarVisibilityCategoryLabels } from './interfaces/smart-filter-bar-visibility-category';
 import { SmartFilterBar } from './smart-filter-bar.class';
 import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { getSelectItemValue } from './helpers';
-import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -117,49 +115,6 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     get subject(): SmartFilterBarSubjectDirective {
         return this._subject;
     }
-
-    /**
-     * 'Show filters' button label.
-     * @deprecated use i18n capabilities instead
-     */
-    @Input()
-    set showFiltersLabel(value: string) {
-        warnOnce('Property showFiltersLabel is deprecated. Use i18n capabilities instead.');
-        this._showFiltersLabel = value;
-    }
-
-    get showFiltersLabel(): string {
-        return this._showFiltersLabel;
-    }
-
-    /**
-     * 'Hide filters' button label.
-     * @deprecated use i18n capabilities instead
-     */
-    @Input()
-    set hideFiltersLabel(value: string) {
-        warnOnce('Property hideFiltersLabel is deprecated. Use i18n capabilities instead.');
-        this._hideFiltersLabel = value;
-    }
-
-    get hideFiltersLabel(): string {
-        return this._hideFiltersLabel;
-    }
-
-    /**
-     * 'Filters' button label.
-     * @deprecated use i18n capabilities instead
-     */
-    @Input()
-    set filtersLabel(value: string) {
-        warnOnce('Property filtersLabel is deprecated. Use i18n capabilities instead.');
-        this._filtersLabel = value;
-    }
-
-    get filtersLabel(): string {
-        return this._filtersLabel;
-    }
-
     /**
      * Whether smart filter bar background should be transparent.
      */
@@ -170,34 +125,6 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
 
     get transparent(): boolean {
         return this._transparent;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Condition strategy labels.
-     */
-    @Input()
-    set defineStrategyLabels(value: SmartFilterBarStrategyLabels | undefined) {
-        warnOnce('Property defineStrategyLabels is deprecated. Use i18n capabilities instead.');
-        this._defineStrategyLabels = value;
-    }
-
-    get defineStrategyLabels(): SmartFilterBarStrategyLabels | undefined {
-        return this._defineStrategyLabels;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Filters visibility category labels.
-     */
-    @Input()
-    set filtersVisibilityCategoryLabels(value: SmartFilterBarVisibilityCategoryLabels | undefined) {
-        warnOnce('Property filtersVisibilityCategoryLabels is deprecated. Use i18n capabilities instead.');
-        this._filtersVisibilityCategoryLabels = value;
-    }
-
-    get filtersVisibilityCategoryLabels(): SmartFilterBarVisibilityCategoryLabels | undefined {
-        return this._filtersVisibilityCategoryLabels;
     }
 
     /**
@@ -255,21 +182,6 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
     get _loading(): boolean {
         return this._subject?.getDataSource() ? this._subject.getDataSource().isDataLoading : true;
     }
-
-    /** @hidden */
-    private _hideFiltersLabel: string;
-
-    /** @hidden */
-    private _showFiltersLabel: string;
-
-    /** @hidden */
-    private _filtersLabel: string;
-
-    /** @hidden */
-    private _defineStrategyLabels: SmartFilterBarStrategyLabels | undefined;
-
-    /** @hidden */
-    private _filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels | undefined;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -332,8 +244,7 @@ export class SmartFilterBarComponent extends SmartFilterBar implements AfterView
         const dialogData: SmartFilterSettingsDialogConfig = {
             fields: columns,
             filterBy: this.filterBy,
-            selectedFilters: this._selectedFilters,
-            visibilityCategories: this.filtersVisibilityCategoryLabels
+            selectedFilters: this._selectedFilters
         };
 
         const dialogRef = this._dialogService.open(

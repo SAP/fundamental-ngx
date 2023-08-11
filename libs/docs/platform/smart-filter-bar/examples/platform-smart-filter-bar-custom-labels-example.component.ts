@@ -1,46 +1,53 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import {
-    SmartFilterBarStrategyLabels,
-    SmartFilterBarVisibilityCategoryLabels
-} from '@fundamental-ngx/platform/smart-filter-bar';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-labels-example',
     templateUrl: './platform-smart-filter-bar-custom-labels-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FD_LANGUAGE,
+            useValue: of({
+                ...FD_LANGUAGE_ENGLISH,
+                platformSmartFilterBar: {
+                    ...FD_LANGUAGE_ENGLISH.platformSmartFilterBar,
+
+                    // Strategy labels
+                    filterConditionContains: 'custom "contains" label',
+                    filterConditionEqualTo: 'custom "equal to" label',
+                    filterConditionBetween: 'custom "between" label',
+                    filterConditionBeginsWith: 'custom "starts with" label',
+                    filterConditionEndsWith: 'custom "ends with" label',
+                    filterConditionLessThan: 'custom "less than" label',
+                    filterConditionLessThanOrEqualTo: 'custom "less than or equal to" label',
+                    filterConditionGreaterThan: 'custom "greater than" label',
+                    filterConditionGreaterThanOrEqualTo: 'custom "greater than or equal to" label',
+                    filterConditionAfter: 'custom "after" label',
+                    filterConditionOnOrAfter: 'custom "on or after" label',
+                    filterConditionBefore: 'custom "before" label',
+                    filterConditionBeforeOrOn: 'custom "before or on" label',
+
+                    // Filters visibility category labels
+                    settingsCategoryAll: 'Custom "All" label',
+                    settingsCategoryVisible: 'Custom "Visible" label',
+                    settingsCategoryActive: 'Custom "Active" label',
+                    settingsCategoryVisibleAndActive: 'Custom "Visible and active" label',
+                    settingsCategoryMandatory: 'Custom "Mandatory" label'
+                }
+            })
+        }
+    ]
 })
 export class PlatformSmartFilterBarCustomLabelsExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;
     readonly filterTypeEnum = FilterType;
 
     source: ExampleItem[] = ITEMS;
-
-    defineStrategyLabels: SmartFilterBarStrategyLabels = {
-        contains: 'custom "contains" label',
-        equalTo: 'custom "equal to" label',
-        between: 'custom "between" label',
-        beginsWith: 'custom "starts with" label',
-        endsWith: 'custom "ends with" label',
-        lessThan: 'custom "less than" label',
-        lessThanOrEqualTo: 'custom "less than or equal to" label',
-        greaterThan: 'custom "greater than" label',
-        greaterThanOrEqualTo: 'custom "greater than or equal to" label',
-        after: 'custom "after" label',
-        onOrAfter: 'custom "on or after" label',
-        before: 'custom "before" label',
-        beforeOrOn: 'custom "before or on" label'
-    };
-
-    filtersVisibilityCategoryLabels: SmartFilterBarVisibilityCategoryLabels = {
-        all: 'Custom "All" label',
-        visible: 'Custom "Visible" label',
-        active: 'Custom "Active" label',
-        visibleAndActive: 'Custom "Visible and active" label',
-        mandatory: 'Custom "Mandatory" label'
-    };
 
     constructor() {}
 

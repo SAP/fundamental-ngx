@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UploadCollectionModule } from '../upload-collection.module';
 
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group.component';
 
@@ -9,7 +8,7 @@ describe('UploadCollectionButtonGroupComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [UploadCollectionModule]
+            imports: [UploadCollectionButtonGroupComponent]
         }).compileComponents();
     });
 

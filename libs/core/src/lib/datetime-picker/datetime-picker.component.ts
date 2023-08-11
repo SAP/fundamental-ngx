@@ -29,7 +29,7 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 /**
@@ -165,70 +165,6 @@ export class DatetimePickerComponent<D>
     @Input()
     activeView: FdCalendarView = 'day';
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria label for the datetime picker input.
-     */
-    @Input()
-    set datetimeInputLabel(value: string) {
-        warnOnce(
-            "Property datetimeInputLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeInputLabel' key instead."
-        );
-        this._datetimeInputLabel = value;
-    }
-
-    get datetimeInputLabel(): string {
-        return this._datetimeInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria label for the button to show/hide the calendar.
-     */
-    @Input()
-    set displayDatetimeToggleLabel(value: string) {
-        warnOnce(
-            "Property displayDatetimeToggleLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayDatetimeToggleLabel' key instead."
-        );
-        this._displayDatetimeToggleLabel = value;
-    }
-
-    get displayDatetimeToggleLabel(): string {
-        return this._displayDatetimeToggleLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the "Date" button in display type switcher in mobile mode
-     */
-    @Input()
-    set displayTypeDateLabel(value: string) {
-        warnOnce(
-            "Property displayTypeDateLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayTypeDateLabel' key instead."
-        );
-        this._displayTypeDateLabel = value;
-    }
-
-    get displayTypeDateLabel(): string {
-        return this._displayTypeDateLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for the "Time" button in display type switcher in mobile mode
-     */
-    @Input()
-    set displayTypeTimeLabel(value: string) {
-        warnOnce(
-            "Property displayTypeTimeLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.displayTypeTimeLabel' key instead."
-        );
-        this._displayTypeTimeLabel = value;
-    }
-
-    get displayTypeTimeLabel(): string {
-        return this._displayTypeTimeLabel;
-    }
-
     /** Whether a null input is considered valid. */
     @Input()
     allowNull = true;
@@ -337,38 +273,6 @@ export class DatetimePickerComponent<D>
     @Input()
     preventScrollOnFocus = false;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text and aria-label of the DateTimePicker 'OK' button.
-     */
-    @Input()
-    set okLabel(value: string) {
-        warnOnce(
-            "Property okLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeOkLabel' key instead."
-        );
-        this._okLabel = value;
-    }
-
-    get okLabel(): string {
-        return this._okLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text and aria-label of the DateTimePicker 'Cancel' button.
-     */
-    @Input()
-    set cancelLabel(value: string) {
-        warnOnce(
-            "Property cancelLabel is deprecated. Use i18n capabilities 'coreDatetimePicker.datetimeCancelLabel' key instead."
-        );
-        this._cancelLabel = value;
-    }
-
-    get cancelLabel(): string {
-        return this._cancelLabel;
-    }
-
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange = new EventEmitter<boolean>();
@@ -454,25 +358,7 @@ export class DatetimePickerComponent<D>
     _displayType: 'date' | 'time' = 'date';
 
     /** @hidden */
-    private _okLabel: string;
-
-    /** @hidden */
-    private _datetimeInputLabel: string;
-
-    /** @hidden */
-    private _displayDatetimeToggleLabel: string;
-
-    /** @hidden */
-    private _displayTypeDateLabel: string;
-
-    /** @hidden */
-    private _displayTypeTimeLabel: string;
-
-    /** @hidden */
     private _state: FormStates = 'default';
-
-    /** @hidden */
-    private _cancelLabel: string;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();

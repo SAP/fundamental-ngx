@@ -5,14 +5,12 @@ import { take } from 'rxjs/operators';
 import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
 import { SmartFilterBarService } from '../../smart-filter-bar.service';
 import { SmartFilterBarConditionsDialogComponent } from '../smart-filter-bar-conditions-dialog/smart-filter-bar-conditions-dialog.component';
-import { SmartFilterBar } from '../../smart-filter-bar.class';
 
 @Directive()
 export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGeneratorControl {
     /** @hidden */
     protected constructor(
         protected _dialogService: DialogService,
-        protected _smartFilterBar: SmartFilterBar,
         protected _smartFilterBarService: SmartFilterBarService,
         protected _injector: Injector
     ) {
@@ -31,8 +29,7 @@ export abstract class BaseSmartFilterBarConditionField extends BaseDynamicFormGe
             filterType: this.formItem.guiOptions?.additionalData.type,
             conditions: currentValue || [],
             choices: this.formItem.guiOptions?.additionalData.choices,
-            controlType: this.formItem.guiOptions?.additionalData.controlType,
-            defineStrategyLabels: this._smartFilterBar.defineStrategyLabels
+            controlType: this.formItem.guiOptions?.additionalData.controlType
         };
 
         const dialogRef = this._dialogService.open(

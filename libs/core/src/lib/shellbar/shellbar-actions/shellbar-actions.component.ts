@@ -25,7 +25,7 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
 import { CdkPortalOutlet, DomPortal } from '@angular/cdk/portal';
 import { FD_SHELLBAR_ACTION_COMPONENT, FD_SHELLBAR_COMPONENT } from '../tokens';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ShellbarSizes } from '../model/shellbar-sizes';
 
 /**
@@ -72,22 +72,6 @@ export class ShellbarActionsComponent implements OnDestroy {
     closePopoverOnSelect = false;
 
     /**
-     * @deprecated use i18n capabilities instead
-     * Label for the collapsed item menu.
-     */
-    @Input()
-    set collapsedItemMenuLabel(value: string) {
-        warnOnce(
-            "Property collapsedItemMenuLabel is deprecated. Use i18n capabilities 'coreShellbar.collapsedItemMenuLabel' key instead."
-        );
-        this._collapsedItemMenuLabel = value;
-    }
-
-    get collapsedItemMenuLabel(): string {
-        return this._collapsedItemMenuLabel;
-    }
-
-    /**
      * Event emitted when search opened.
      */
     @Output()
@@ -130,9 +114,6 @@ export class ShellbarActionsComponent implements OnDestroy {
 
     /** @hidden */
     currentSize: ShellbarSizes;
-
-    /** @hidden */
-    private _collapsedItemMenuLabel: string;
 
     /** @hidden */
     private readonly _cd = inject(ChangeDetectorRef);

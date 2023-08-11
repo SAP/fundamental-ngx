@@ -4,7 +4,7 @@
     </ng-container>
 
     <ng-template #multipleItems>
-        {{ 'platformApprovalFlow.userListSelectedItemsCountPlural' | fdTranslate: { count: _selectedItems.length } }}
+        {{ 'platformApprovalFlow.userListSelectedItemsCountPlural' | fdTranslate : { count: _selectedItems.length } }}
     </ng-template>
 </div>
 
@@ -20,8 +20,7 @@
     <fdp-standard-list-item
         *ngFor="let _user of _displayUsers; trackBy: _trackByFn"
         [attr.id]="_idPrefix + _user.id"
-        [avatarSrc]="_user.imgUrl"
-        [avatarTitle]="_user.name"
+        [avatar]="{ image: _user.imgUrl, ariaLabel: _user.name }"
         [description]="_user.description"
         [ariaLabel]="_user.name"
         [title]="_user.name"

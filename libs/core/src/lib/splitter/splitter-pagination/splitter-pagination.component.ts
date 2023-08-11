@@ -25,14 +25,6 @@ export class SplitterPaginationComponent {
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onPageChange = new EventEmitter<string>();
 
-    /**
-     * @hidden
-     * @deprecated use i18n capabilities instead
-     */
-    get paginationItemAriaLabel(): string {
-        return this._splitter.paginationItemAriaLabel;
-    }
-
     /** @Hidden */
     constructor(private readonly _splitter: SplitterComponent) {}
 

@@ -16,7 +16,6 @@ import { PlatformFileUploaderMaxFileSizeExampleComponent } from './examples/plat
 import { PlatformFileUploaderCompactExampleComponent } from './examples/platform-file-uploader-compact-example.component';
 import { PlatformFileUploaderFileTypesExampleComponent } from './examples/platform-file-uploader-file-types-example.component';
 import { PlatformFileUploaderReactiveExampleComponent } from './examples/platform-file-uploader-reactive-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -49,9 +48,6 @@ const routes: Routes = [
         PlatformButtonModule,
         FormsModule
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-file-uploader'),
-        currentComponentProvider('file-uploader')
-    ]
+    providers: [currentComponentProvider('file-uploader')]
 })
 export class PlatformFileUploaderDocsModule {}

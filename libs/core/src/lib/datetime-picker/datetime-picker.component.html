@@ -19,12 +19,8 @@
                 [buttonFocusable]="buttonFocusable"
                 glyph="date-time"
                 [isExpanded]="isOpen"
-                [glyphAriaLabel]="
-                    displayDatetimeToggleLabel || ('coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate)
-                "
-                [iconTitle]="
-                    displayDatetimeToggleLabel || ('coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate)
-                "
+                [glyphAriaLabel]="'coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate"
+                [iconTitle]="'coreDatetimePicker.displayDatetimeToggleLabel' | fdTranslate"
                 (addOnButtonClicked)="togglePopover()"
             >
                 <input
@@ -32,7 +28,7 @@
                     class="fd-input"
                     fd-input-group-input
                     [attr.aria-labelledby]="ariaLabelledBy"
-                    [attr.aria-label]="datetimeInputLabel || ('coreDatetimePicker.datetimeInputLabel' | fdTranslate)"
+                    [attr.aria-label]="'coreDatetimePicker.datetimeInputLabel' | fdTranslate"
                     [attr.id]="inputId"
                     [attr.aria-required]="required"
                     [placeholder]="placeholder"
@@ -58,12 +54,12 @@
                     <fd-segmented-button [(ngModel)]="_displayType">
                         <button
                             fd-button
-                            [label]="displayTypeDateLabel || ('coreDatetimePicker.displayTypeDateLabel' | fdTranslate)"
+                            [label]="'coreDatetimePicker.displayTypeDateLabel' | fdTranslate"
                             value="date"
                         ></button>
                         <button
                             fd-button
-                            [label]="displayTypeTimeLabel || ('coreDatetimePicker.displayTypeTimeLabel' | fdTranslate)"
+                            [label]="'coreDatetimePicker.displayTypeTimeLabel' | fdTranslate"
                             value="time"
                         ></button>
                     </fd-segmented-button>
@@ -111,8 +107,8 @@
                                     fd-button
                                     fdType="emphasized"
                                     [disabled]="!_tempDate"
-                                    [label]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
-                                    [ariaLabel]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
+                                    [label]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
+                                    [ariaLabel]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
                                     (click)="submit()"
                                 ></button>
                             </fd-bar-element>
@@ -120,10 +116,8 @@
                                 <button
                                     fd-button
                                     fdType="transparent"
-                                    [label]="cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)"
-                                    [ariaLabel]="
-                                        cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)
-                                    "
+                                    [label]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
+                                    [ariaLabel]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
                                     (click)="cancel()"
                                 ></button>
                             </fd-bar-element>

@@ -21,10 +21,9 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { CalendarModule, DeprecatedCalendarContentDensityDirective } from '@fundamental-ngx/core/calendar';
+import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
@@ -68,9 +67,6 @@ const routes: Routes = [
         CalendarSpecialDayExampleComponent,
         CalendarMarkHoverComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedCalendarContentDensityDirective),
-        currentComponentProvider('calendar')
-    ]
+    providers: [currentComponentProvider('calendar')]
 })
 export class CalendarDocsModule {}

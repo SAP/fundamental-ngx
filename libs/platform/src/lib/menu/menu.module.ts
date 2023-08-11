@@ -8,26 +8,11 @@ import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { MenuComponent } from './menu.component';
 import { MenuItemComponent } from './menu-item.component';
 import { MenuTriggerDirective } from './menu-trigger.directive';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        OverlayModule,
-        BidiModule,
-        ScrollingModule,
-        PipeModule,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
+    imports: [CommonModule, OverlayModule, BidiModule, ScrollingModule, PipeModule, ContentDensityModule],
     declarations: [MenuComponent, MenuItemComponent, MenuTriggerDirective],
-    exports: [
-        MenuComponent,
-        MenuItemComponent,
-        MenuTriggerDirective,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ]
+    exports: [MenuComponent, MenuItemComponent, MenuTriggerDirective, ContentDensityModule]
 })
 export class PlatformMenuModule {}

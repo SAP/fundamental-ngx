@@ -10,7 +10,6 @@ import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/c
 import { CalendarComponent } from './calendar.component';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { CalendarCloseButtonDirective } from './calendar-directives';
-import { DeprecatedCalendarContentDensityDirective } from './deprecated-calendar-content-density.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -21,8 +20,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CalendarMonthViewComponent,
         CalendarYearViewComponent,
         CalendarAggregatedYearViewComponent,
-        CalendarCloseButtonDirective,
-        DeprecatedCalendarContentDensityDirective
+        CalendarCloseButtonDirective
     ],
     imports: [CommonModule, IconModule, ButtonModule, ContentDensityModule],
     exports: [
@@ -33,7 +31,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CalendarMonthViewComponent,
         CalendarAggregatedYearViewComponent,
         CalendarCloseButtonDirective,
-        DeprecatedCalendarContentDensityDirective,
         ContentDensityModule
     ]
 })

@@ -7,7 +7,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     OnInit,
     Optional,
     Output,
@@ -18,8 +17,8 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export class FileUploaderInvalidChangeEvent {
     /**
@@ -84,23 +83,6 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     @Input()
     fileLimit: number;
 
-    /**
-     * @deprecated
-     * set state of individual checkbox. Used by CBG to set checkbox states */
-    @Input()
-    set stateType(state: FormStates) {
-        if (isDevMode()) {
-            warnOnce('"stateType" is deprecated. Use "state" instead');
-        }
-        super.state = state;
-    }
-    get stateType(): FormStates {
-        if (isDevMode()) {
-            warnOnce('"stateType" is deprecated. Use "state" instead');
-        }
-        return super.state;
-    }
-
     /** Event emitted when valid file is uploded. */
     @Output()
     selectionChange: EventEmitter<FileUploaderSelectionChangeEvent> =
@@ -113,22 +95,15 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     /** Files upladed hidden field to store file data */
     files: File[];
 
-    /**
-     * Control Value Accessor
-     */
-    writeValue(value: File): void {
-        super.writeValue(value);
-    }
-
     /** Sets value file data*/
     @Input()
     set value(value: File) {
         super.setValue(value);
     }
+
     get value(): File {
         return super.getValue();
     }
-
     /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -141,6 +116,13 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
         readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(_cd, elementRef, ngControl, controlContainer, ngForm, formField, formControl);
+    }
+
+    /**
+     * Control Value Accessor
+     */
+    writeValue(value: File): void {
+        super.writeValue(value);
     }
 
     /** @hidden */

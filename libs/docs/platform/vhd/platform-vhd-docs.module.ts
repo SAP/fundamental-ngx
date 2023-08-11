@@ -29,7 +29,7 @@ import {
     PlatformVhdTokenExampleComponent
 } from './examples';
 import { PlatformVhdLoadingExampleComponent } from './examples/platform-vhd-loading-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 import { PlatformVhdInitialLoadingExampleComponent } from './examples/initial-loading/platform-vhd-initial-loading-example.component';
 
 const routes: Routes = [
@@ -70,9 +70,6 @@ const routes: Routes = [
         PlatformVhdStrategyLabelExampleComponent,
         PlatformVhdInitialLoadingExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-value-help-dialog'),
-        currentComponentProvider('vhd')
-    ]
+    providers: [currentComponentProvider('vhd')]
 })
 export class PlatformVhdDocsModule {}

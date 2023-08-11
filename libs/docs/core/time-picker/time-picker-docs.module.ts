@@ -15,9 +15,8 @@ import { TimePickerAllowNullExampleComponent } from './examples/time-picker-allo
 import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { DeprecatedTimepickerCompactDirective, TimePickerModule } from '@fundamental-ngx/core/time-picker';
+import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {
@@ -52,9 +51,6 @@ const routes: Routes = [
         TimePickerDisabledExampleComponent,
         TimePickerAllowNullExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedTimepickerCompactDirective),
-        currentComponentProvider('time-picker')
-    ]
+    providers: [currentComponentProvider('time-picker')]
 })
 export class TimePickerDocsModule {}

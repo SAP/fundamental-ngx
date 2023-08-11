@@ -7,7 +7,7 @@ describe('UploadCollectionFormItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [UploadCollectionFormItemComponent]
+            imports: [UploadCollectionFormItemComponent]
         }).compileComponents();
     });
 

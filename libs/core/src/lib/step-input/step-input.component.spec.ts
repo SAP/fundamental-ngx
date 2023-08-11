@@ -4,8 +4,12 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { BehaviorSubject } from 'rxjs';
 
 const initialValue = 100;
+
+const lang$ = new BehaviorSubject(FD_LANGUAGE_ENGLISH);
 
 @Component({
     template: `
@@ -21,11 +25,15 @@ const initialValue = 100;
             [ariaLabel]="ariaLabel"
             [incrementButtonIcon]="incrementButtonIcon"
             [decrementButtonIcon]="decrementButtonIcon"
-            [incrementButtonTitle]="incrementButtonTitle"
-            [decrementButtonTitle]="decrementButtonTitle"
         >
         </fd-step-input>
-    `
+    `,
+    providers: [
+        {
+            provide: FD_LANGUAGE,
+            useValue: lang$
+        }
+    ]
 })
 class TestWrapperComponent {
     @ViewChild(StepInputComponent, { static: true })
@@ -55,10 +63,6 @@ class TestWrapperComponent {
     incrementButtonIcon: string | null = null;
 
     decrementButtonIcon: string | null = null;
-
-    incrementButtonTitle: string | null = null;
-
-    decrementButtonTitle: string | null = null;
 }
 
 describe('StepInputComponent', () => {
@@ -198,8 +202,10 @@ describe('StepInputComponent', () => {
         const decrementButtonTitle = 'Dec Button Title';
 
         testComponent.inputTitle = inputTitle;
-        testComponent.incrementButtonTitle = incrementButtonTitle;
-        testComponent.decrementButtonTitle = decrementButtonTitle;
+        lang$.next({
+            ...lang$.value,
+            coreStepInput: { ...lang$.value.coreStepInput, incrementButtonTitle, decrementButtonTitle }
+        });
 
         await whenStable(fixture);
 

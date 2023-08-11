@@ -16,10 +16,10 @@
             tabindex="-1"
             type="button"
             [disabled]="!canDecrement"
-            [title]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
+            [title]="'coreStepInput.decrementButtonTitle' | fdTranslate"
             [glyph]="decrementButtonIcon"
             (blur)="onTouched()"
-            [attr.aria-label]="decrementButtonTitle || ('coreStepInput.decrementButtonTitle' | fdTranslate)"
+            [attr.aria-label]="'coreStepInput.decrementButtonTitle' | fdTranslate"
             [attr.aria-controls]="inputId"
         ></button>
         <input
@@ -57,10 +57,10 @@
             tabindex="-1"
             type="button"
             [disabled]="!canIncrement"
-            [title]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
+            [title]="'coreStepInput.incrementButtonTitle' | fdTranslate"
             [glyph]="incrementButtonIcon"
             (blur)="onTouched()"
-            [attr.aria-label]="incrementButtonTitle || ('coreStepInput.incrementButtonTitle' | fdTranslate)"
+            [attr.aria-label]="'coreStepInput.incrementButtonTitle' | fdTranslate"
             [attr.aria-controls]="inputId"
         ></button>
     </div>

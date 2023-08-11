@@ -11,7 +11,6 @@ import { PlatformDocsSplitMenuButtonComponent } from './platform-split-menu-butt
 import { PlatformDocsSplitMenuButtonTypesComponent } from './examples/platform-split-button-types-example.component';
 import { PlatformDocsSplitMenuButtonIconsComponent } from './examples/platform-split-button-icons-example.component';
 import { PlatformDocsSplitMenuButtonBehaviorComponent } from './examples/platform-split-button-behaviors-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -39,9 +38,6 @@ const routes: Routes = [
         PlatformDocsSplitMenuButtonTypesComponent,
         PlatformDocsSplitMenuButtonIconsComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-split-menu-button'),
-        currentComponentProvider('split-menu-button')
-    ]
+    providers: [currentComponentProvider('split-menu-button')]
 })
 export class PlatformSplitMenuButtonDocsModule {}

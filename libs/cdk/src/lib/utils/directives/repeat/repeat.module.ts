@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 
-import { DeprecatedRepeatDirective, RepeatDirective } from './repeat.directive';
+import { RepeatDirective } from './repeat.directive';
 
 @NgModule({
-    imports: [RepeatDirective, DeprecatedRepeatDirective],
-    exports: [RepeatDirective, DeprecatedRepeatDirective]
+    imports: [RepeatDirective],
+    exports: [RepeatDirective]
 })
 export class RepeatModule {}

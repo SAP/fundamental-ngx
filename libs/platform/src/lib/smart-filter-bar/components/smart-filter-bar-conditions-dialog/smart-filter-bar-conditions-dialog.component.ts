@@ -164,18 +164,14 @@ export class SmartFilterBarConditionsDialogComponent {
             this.config.dataType
         );
 
-        let labelsConfig = this.config.defineStrategyLabels;
-
-        if (!labelsConfig) {
-            labelsConfig = { ...this._conditionLabelKeys };
-            for (const strategyItem in labelsConfig) {
-                if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
-                    const translationKey = labelsConfig[strategyItem];
-                    labelsConfig[strategyItem] = this._translationResolver.resolve(
-                        this._language,
-                        'platformSmartFilterBar.' + translationKey
-                    );
-                }
+        const labelsConfig = { ...this._conditionLabelKeys };
+        for (const strategyItem in labelsConfig) {
+            if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
+                const translationKey = labelsConfig[strategyItem];
+                labelsConfig[strategyItem] = this._translationResolver.resolve(
+                    this._language,
+                    'platformSmartFilterBar.' + translationKey
+                );
             }
         }
 

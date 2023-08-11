@@ -2,7 +2,6 @@ export * from './fundamental-ngx.module';
 
 export * from '@fundamental-ngx/core/action-bar';
 export * from '@fundamental-ngx/core/action-sheet';
-export * from '@fundamental-ngx/core/alert';
 export * from '@fundamental-ngx/core/avatar';
 export * from '@fundamental-ngx/core/avatar-group';
 export * from '@fundamental-ngx/core/bar';

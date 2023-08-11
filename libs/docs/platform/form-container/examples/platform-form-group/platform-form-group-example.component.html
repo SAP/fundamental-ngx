@@ -70,10 +70,9 @@
             id="basicTextarea1"
             label="Basic Textarea"
             placeholder="Start entering detailed description"
-            hint="This is tooltip help"
+            [hint]="{ content: 'This is tooltip help', placement: 'left' }"
             [column]="1"
             [rank]="20"
-            hintPlacement="left"
         >
             <fdp-textarea name="basicTextarea1" [formControl]="ff1.formControl"></fdp-textarea>
         </fdp-form-field>

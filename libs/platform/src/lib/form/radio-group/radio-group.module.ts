@@ -8,7 +8,6 @@ import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { RadioGroupComponent } from './radio-group.component';
 import { RadioButtonComponent } from './radio/radio.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     imports: [
@@ -18,15 +17,9 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         RadioModule,
         ReactiveFormsModule,
         PipeModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],
-    exports: [
-        RadioGroupComponent,
-        RadioButtonComponent,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
+    exports: [RadioGroupComponent, RadioButtonComponent, ContentDensityModule],
     declarations: [RadioGroupComponent, RadioButtonComponent]
 })
 export class PlatformRadioGroupModule {}

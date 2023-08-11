@@ -1,4 +1,6 @@
 <fd-token>Bibendum</fd-token>
 <fd-token>Lorem</fd-token>
-<fd-token deleteButtonLabel="Deletable" ariaRoleDescription="token">Dolor</fd-token>
-<fd-token deleteButtonLabel="Deletable" ariaRoleDescription="token">Filter</fd-token>
+<ng-container [fdPatchLanguage]="{ coreToken: { deleteButtonLabel: 'Deletable', ariaRoleDescription: 'token' } }">
+    <fd-token>Dolor</fd-token>
+    <fd-token>Filter</fd-token>
+</ng-container>

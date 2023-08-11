@@ -49,21 +49,18 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button>
-            <fdp-button
-                (click)="applyConditions()"
-                buttonType="emphasized"
-                [label]="'platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate"
-            ></fdp-button>
-        </fd-dialog-footer-button>
+        <fd-button-bar
+            (click)="applyConditions()"
+            fdType="emphasized"
+            [label]="'platformSmartFilterBar.defineConditionsSubmitButtonLabel' | fdTranslate"
+        >
+        </fd-button-bar>
 
-        <fd-dialog-footer-button>
-            <fdp-button
-                (click)="_cancel()"
-                buttonType="transparent"
-                [label]="'platformSmartFilterBar.defineConditionsCancelButton' | fdTranslate"
-            ></fdp-button>
-        </fd-dialog-footer-button>
+        <fd-button-bar
+            (click)="_cancel()"
+            fdType="transparent"
+            [label]="'platformSmartFilterBar.defineConditionsCancelButton' | fdTranslate"
+        ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>
 

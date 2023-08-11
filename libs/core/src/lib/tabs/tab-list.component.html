@@ -74,12 +74,7 @@
         </ng-container>
 
         <ng-container *fdOverflowExpand="let tabs; items: _tabArray">
-            <fd-item-expand
-                [fdMenuTrigger]="menu"
-                [label]="expandOverflowText"
-                *ngIf="tabs.length > 0"
-                (keydown)="_onTriggerKeydown($event, menu)"
-            >
+            <fd-item-expand [fdMenuTrigger]="menu" *ngIf="tabs.length > 0" (keydown)="_onTriggerKeydown($event, menu)">
             </fd-item-expand>
 
             <fd-menu #menu>

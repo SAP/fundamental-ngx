@@ -42,26 +42,18 @@
 
     <fd-dialog-footer fdCompact>
         <ng-container>
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
-                    fdType="emphasized"
-                    [label]="'platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate"
-                    (click)="_submit()"
-                ></button>
-            </fd-dialog-footer-button>
+            <fd-button-bar
+                fdType="emphasized"
+                [label]="'platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate"
+                (click)="_submit()"
+            ></fd-button-bar>
 
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fdkInitialFocus
-                    fd-dialog-decisive-button
-                    fdType="transparent"
-                    [label]="'platformApprovalFlow.selectTypeDialogCancelButton' | fdTranslate"
-                    (click)="_dialogRef.close()"
-                ></button>
-            </fd-dialog-footer-button>
+            <fd-button-bar
+                fdkInitialFocus
+                fdType="transparent"
+                [label]="'platformApprovalFlow.selectTypeDialogCancelButton' | fdTranslate"
+                (click)="_dialogRef.close()"
+            ></fd-button-bar>
         </ng-container>
     </fd-dialog-footer>
 </fd-dialog>

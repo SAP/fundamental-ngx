@@ -18,7 +18,6 @@ import { NestedListStateService } from './nested-list-state.service';
 import { RouterModule } from '@angular/router';
 import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { DeprecatedNestedListCompactDirective } from './deprecated-nested-list-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -33,8 +32,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         NestedListPopoverComponent,
         PreparedNestedListComponent,
         NestedListExpandIconComponent,
-        NestedListContentDirective,
-        DeprecatedNestedListCompactDirective
+        NestedListContentDirective
     ],
     exports: [
         NestedListDirective,
@@ -47,7 +45,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PreparedNestedListComponent,
         NestedListExpandIconComponent,
         NestedListContentDirective,
-        DeprecatedNestedListCompactDirective,
         ContentDensityModule
     ],
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]

@@ -6,18 +6,10 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { SplitMenuButtonComponent } from './split-menu-button.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [SplitMenuButtonComponent],
-    imports: [
-        ButtonModule,
-        CommonModule,
-        PlatformMenuModule,
-        PipeModule,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
-    exports: [SplitMenuButtonComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    imports: [ButtonModule, CommonModule, PlatformMenuModule, PipeModule, ContentDensityModule],
+    exports: [SplitMenuButtonComponent, ContentDensityModule]
 })
 export class PlatformSplitMenuButtonModule {}

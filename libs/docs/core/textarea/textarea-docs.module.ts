@@ -10,9 +10,8 @@ import {
     TextareaStateExampleComponent
 } from './examples/textarea-examples.component';
 import { TextareaFormGroupExampleComponent } from './examples/textarea-form-group-example.component';
-import { DeprecatedFormControlContentDensityDirective, FormModule } from '@fundamental-ngx/core/form';
+import { FormModule } from '@fundamental-ngx/core/form';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {
@@ -36,9 +35,6 @@ const routes: Routes = [
         TextareaFormGroupExampleComponent,
         TextareaInlineHelpExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedFormControlContentDensityDirective),
-        currentComponentProvider('textarea')
-    ]
+    providers: [currentComponentProvider('textarea')]
 })
 export class TextareaDocsModule {}

@@ -5,28 +5,10 @@ import { tap } from 'rxjs/operators';
 import { FDK_READONLY_DIRECTIVE } from './fdk-readonly.token';
 import { ReadonlyBehavior } from './readonly-behavior.interface';
 import { setReadonlyState } from './set-readonly-state';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fnReadonly]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkReadonly]', '[fnReadonly]')
-        }
-    ]
-})
-export class DeprecatedReadonlyBehaviorDirective extends DeprecatedSelector {}
-
-@Directive({
-    selector: '[fdkReadonly], [fnReadonly]',
+    selector: '[fdkReadonly]',
     standalone: true,
     providers: [
         {

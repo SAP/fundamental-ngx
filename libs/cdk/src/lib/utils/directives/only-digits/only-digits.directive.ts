@@ -17,27 +17,9 @@ import {
 } from '@angular/cdk/keycodes';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { KeyUtil } from '../../functions';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdOnlyDigits], [fd-only-digits]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkOnlyDigits]', '[fdOnlyDigits], [fd-only-digits]')
-        }
-    ]
-})
-export class DeprecatedOnlyDigitsDirective extends DeprecatedSelector {}
-
-@Directive({
-    selector: '[fdkOnlyDigits], [fdOnlyDigits], [fd-only-digits]',
+    selector: '[fdkOnlyDigits]',
     standalone: true
 })
 export class OnlyDigitsDirective {

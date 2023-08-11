@@ -16,10 +16,8 @@ import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogService } from './dialog-service/dialog.service';
 import { DialogContainerComponent } from './dialog-container/dialog-container.component';
-import { DialogFooterButtonComponent } from './dialog-footer-button/dialog-footer-button.component';
 import { DialogDefaultComponent } from './dialog-default/dialog-default.component';
 import { DialogCloseButtonComponent } from './dialog-close-button/dialog-close-button.component';
-import { DialogDecisiveButtonDirective } from './directives/dialog-decisive-button.directive';
 import { DialogTitleDirective } from './directives/dialog-title.directive';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { PortalModule } from '@angular/cdk/portal';
@@ -33,8 +31,6 @@ const declarations = [
     DialogDefaultComponent,
     DialogContainerComponent,
     DialogCloseButtonComponent,
-    DialogFooterButtonComponent,
-    DialogDecisiveButtonDirective,
     DialogTitleDirective
 ];
 

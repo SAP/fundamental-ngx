@@ -78,13 +78,8 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
 })
 export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {
-    constructor(
-        dialogService: DialogService,
-        smartFilterBar: SmartFilterBar,
-        smartFilterBarService: SmartFilterBarService,
-        injector: Injector
-    ) {
-        super(dialogService, smartFilterBar, smartFilterBarService, injector);
+    constructor(dialogService: DialogService, smartFilterBarService: SmartFilterBarService, injector: Injector) {
+        super(dialogService, smartFilterBarService, injector);
     }
 }
 

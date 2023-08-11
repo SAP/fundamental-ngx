@@ -6,9 +6,8 @@
                 id="templateExample"
                 label="Detailed description"
                 placeholder="Start entering detailed description"
-                hint="This is tooltip help"
+                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                 [rank]="10"
-                hintPlacement="left"
                 [validators]="textareaValidator"
             >
                 <fdp-textarea
