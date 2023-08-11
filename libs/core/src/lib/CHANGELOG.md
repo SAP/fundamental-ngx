@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.0...v0.45.1-rc.0) (2023-08-11)
+
+
+### Bug Fixes
+
+* **core:** no initial aria-pressed value for buttons ([#10268](https://github.com/SAP/fundamental-ngx/issues/10268)) ([fb5844a](https://github.com/SAP/fundamental-ngx/commit/fb5844a6d9231cdaf327ce085f87917c6d72f548))
+
+
+
+
+
 # [0.45.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.0-rc.0...v0.45.0) (2023-08-11)
 
 **Note:** Version bump only for package @fundamental-ngx/core
