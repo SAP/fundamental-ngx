@@ -34,6 +34,9 @@ const defaultConfigSrc = 'platform-form-generator-global-config-example.ts';
 const loadingFormGeneratorhtml = 'loading/platform-form-generator-loading-example.component.html';
 const loadingFormGeneratorSrc = 'loading/platform-form-generator-loading-example.component.ts';
 
+const showNewItemsFormGeneratorhtml = 'platform-form-generator-show-new-items-example.component.html';
+const showNewItemsFormGeneratorSrc = 'platform-form-generator-show-new-items-example.component.ts';
+
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 @Component({
@@ -192,6 +195,20 @@ export class PlatformFormGeneratorDocsComponent {
             code: getAssetFromModuleAssets(loadingFormGeneratorSrc),
             fileName: 'platform-form-generator-loading-example',
             component: 'PlatformFormGeneratorLoadingExampleComponent'
+        }
+    ];
+
+    showNewItemsFormGenerator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(showNewItemsFormGeneratorhtml),
+            fileName: 'platform-form-generator-show-new-items-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(showNewItemsFormGeneratorSrc),
+            fileName: 'platform-form-generator-show-new-items-example',
+            component: 'PlatformFormGeneratorShowNewItemsExampleComponent'
         }
     ];
 

@@ -192,3 +192,22 @@
 <code-example [exampleFiles]="loadingFormGenerator"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="new" componentName="form-generator"> Adding New Items </fd-docs-section-title>
+<description>
+    <p>
+        We can add new items to the generated form after its initialization by utilizing the <code>shouldShow</code> and
+        <code>when</code> properties of each form item object in our <code>JSON</code>. In this example, we'll use a
+        custom form item `PlatformFormGeneratorCustomAddNewItemComponent` which the user can click to add another item.
+    </p>
+    <p>
+        Note that <code>shouldShow</code> dictates whether or not a form item will be present in the form value upon
+        submission, and <code>when</code> is used to show or hide a form item to the user in the rendered template.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-show-new-items-example></fdp-platform-form-generator-show-new-items-example>
+</component-example>
+<code-example [exampleFiles]="showNewItemsFormGenerator"></code-example>
+
+<separator></separator>

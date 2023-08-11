@@ -1,0 +1,5 @@
+<fdp-form-generator mainTitle="Add New Items Example" [formItems]="formItems" (formSubmitted)="onFormSubmitted($event)">
+    <fdp-button type="submit" label="Submit form"></fdp-button>
+</fdp-form-generator>
+
+<p *ngIf="formValue">Form value: {{ formValue | json }}</p>
