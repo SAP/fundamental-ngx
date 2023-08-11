@@ -21,6 +21,11 @@
     "
     (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
     (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+    [attr.aria-description]="
+        !checkedState
+            ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
+            : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
+    "
 >
     <fd-checkbox
         tabIndexValue="-1"
@@ -31,11 +36,6 @@
         [tristateSelectable]="false"
         [ngModel]="checkedState"
         (ngModelChange)="_tableRowService.toggleAllSelectableRows($event)"
-        [attr.aria-description]="
-            !checkedState
-                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
-                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
-        "
     ></fd-checkbox>
 </th>
 
@@ -81,7 +81,6 @@
                     : _tableColumnResizeService.getNextColumnsWidth(column.name)
         "
         [fdPopoverTrigger]="tablePopover.popover"
-        [cellFocusedEventAnnouncer]="null"
         (cellFocused)="_tableRowService.cellFocused($event)"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
