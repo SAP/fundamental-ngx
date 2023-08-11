@@ -6,10 +6,9 @@
                 id="basicTextarea12"
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
-                hint="This is tooltip help"
+                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                 [column]="1"
                 [rank]="1"
-                hintPlacement="left"
             >
                 <fdp-textarea name="basicTextarea12" [formControl]="ff1.formControl"></fdp-textarea>
             </fdp-form-field>
@@ -62,9 +61,8 @@
                 id="basicTextarea16"
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
-                hint="This is tooltip help"
+                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                 [rank]="1"
-                hintPlacement="left"
             >
                 <fdp-textarea name="basicTextarea16" [formControl]="ff1.formControl"></fdp-textarea>
             </fdp-form-field>
@@ -83,9 +81,8 @@
                 id="basicTextarea17"
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
-                hint="This is tooltip help"
+                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                 [rank]="3"
-                hintPlacement="left"
             >
                 <fdp-textarea name="basicTextarea17" [formControl]="ff3.formControl"></fdp-textarea>
             </fdp-form-field>

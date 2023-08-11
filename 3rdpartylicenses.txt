@@ -83,8 +83,6 @@ Apache-2.0
 
 @fundamental-ngx/core/action-sheet
 
-@fundamental-ngx/core/alert
-
 @fundamental-ngx/core/avatar
 
 @fundamental-ngx/core/avatar-group

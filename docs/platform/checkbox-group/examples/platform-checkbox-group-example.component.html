@@ -44,33 +44,19 @@
 <h3>Checkboxes with different context</h3>
 <div>Qualification form</div>
 <fdp-form-group #fg [formGroup]="form1">
-    <fdp-form-field
-        #ffr1
-        id="education"
-        [validators]="validators"
-        hintPlacement="left"
-        [rank]="1"
-        [i18Strings]="graduation"
-    >
+    <fdp-form-field #ffr1 id="education" [validators]="validators" [rank]="1" [i18Strings]="graduation">
         <fdp-checkbox name="education" title="minimum education level" [formControl]="ffr1.formControl"
             >Graduated</fdp-checkbox
         >
     </fdp-form-field>
 
-    <fdp-form-field
-        #ffr2
-        id="engineering"
-        [validators]="validators"
-        hintPlacement="left"
-        [rank]="2"
-        [i18Strings]="engineering"
-    >
+    <fdp-form-field #ffr2 id="engineering" [validators]="validators" [rank]="2" [i18Strings]="engineering">
         <fdp-checkbox name="engineering" title="have engineering degree" [formControl]="ffr2.formControl">
             Engineering completed
         </fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #ffr3 id="work" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="work">
+    <fdp-form-field #ffr3 id="work" [validators]="validators" [rank]="3" [i18Strings]="work">
         <fdp-checkbox name="work" title="Work experience" [formControl]="ffr3.formControl">
             5 year of work experience
         </fdp-checkbox>
@@ -122,11 +108,11 @@
         <fdp-checkbox name="apple" title="apple" formControlName="apple">Apple</fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field id="banana" hintPlacement="left" [rank]="2" [validators]="validators" [i18Strings]="banana">
+    <fdp-form-field id="banana" [rank]="2" [validators]="validators" [i18Strings]="banana">
         <fdp-checkbox name="engineering" title="banana" formControlName="banana">Banana</fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field id="grapes" [validators]="validators" hintPlacement="left" [rank]="3" [i18Strings]="grape">
+    <fdp-form-field id="grapes" [validators]="validators" [rank]="3" [i18Strings]="grape">
         <fdp-checkbox name="grapes" title="grapes" formControlName="grapes">Grapes</fdp-checkbox>
     </fdp-form-field>
 
