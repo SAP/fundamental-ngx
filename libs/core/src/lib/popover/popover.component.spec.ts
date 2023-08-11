@@ -90,7 +90,7 @@ describe('PopoverComponent', () => {
     it('should update popover', () => {
         jest.spyOn(component, 'refreshPosition');
 
-        component.updatePopover();
+        component.refreshPosition();
 
         expect(component.refreshPosition).toHaveBeenCalled();
     });

@@ -6,7 +6,7 @@
                 fdType="transparent"
                 glyph="overflow"
                 class="fd-shellbar__button"
-                [attr.aria-label]="collapsedItemMenuLabel || ('coreShellbar.collapsedItemMenuLabel' | fdTranslate)"
+                [attr.aria-label]="'coreShellbar.collapsedItemMenuLabel' | fdTranslate"
             >
                 <span *ngIf="totalNotifications" class="fd-button__badge">
                     {{ totalNotifications }}

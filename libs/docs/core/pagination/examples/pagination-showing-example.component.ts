@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
             ariaLabel="Pagination with displayTextTemplate property"
         ></fd-pagination>
         <ng-template #customDisplayTextTemplate let-showing="showing">
-            From {{ showing.from }} to {{ showing.to }}. Total items {{ showing.of }}
+            From {{ showing.from }} to {{ showing.to }}. Total items {{ showing.totalCount }}
         </ng-template>
     `
 })

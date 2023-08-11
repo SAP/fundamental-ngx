@@ -34,7 +34,6 @@ import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { I18nModule } from '@fundamental-ngx/i18n';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { TableHelpersModule } from '@fundamental-ngx/platform/table-helpers';
 
@@ -147,7 +146,6 @@ const EXPORTABLE_DECLARATIONS = [
         ScrollbarModule,
         PlatformDatePickerModule,
         PlatformSwitchModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule,
         SkeletonModule,
         RepeatModule,

@@ -15,9 +15,7 @@ import { TableInnerDirective } from './directives/table-inner.directive';
 import { TableTextDirective } from './directives/table-text.directive';
 import { TableIconDirective } from './directives/table-icon.directive';
 import { TableService } from './table.service';
-import { DeprecatedTableCompactDirective } from './deprecated-table-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { DeprecatedTableCondensedDirective } from './deprecated-table-condensed.directive';
 import { TableFixedDirective } from './directives/table-fixed.directive';
 import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
 
@@ -37,9 +35,7 @@ import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
         TableInnerDirective,
         TableTextDirective,
         TableIconDirective,
-        TableFixedDirective,
-        DeprecatedTableCompactDirective,
-        DeprecatedTableCondensedDirective
+        TableFixedDirective
     ],
     exports: [
         TableComponent,
@@ -56,8 +52,6 @@ import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
         TableTextDirective,
         TableIconDirective,
         TableFixedDirective,
-        DeprecatedTableCompactDirective,
-        DeprecatedTableCondensedDirective,
         ContentDensityModule
     ],
     providers: [TableService]

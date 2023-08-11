@@ -26,10 +26,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/core/action-sheet').then((m) => m.ActionSheetDocsModule)
             },
             {
-                path: 'alert',
-                loadChildren: () => import('@fundamental-ngx/docs/core/alert').then((m) => m.AlertDocsModule)
-            },
-            {
                 path: 'avatar',
                 loadChildren: () => import('@fundamental-ngx/docs/core/avatar').then((m) => m.AvatarDocsModule)
             },
@@ -153,11 +149,6 @@ export const ROUTES: Routes = [
                 path: 'global-config',
                 loadChildren: () =>
                     import('@fundamental-ngx/docs/core/global-config').then((m) => m.GlobalConfigDocsModule)
-            },
-            {
-                path: 'old-content-density',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/old-content-density').then((m) => m.ContentDensityDocsModule)
             },
             {
                 path: 'content-density',
@@ -381,11 +372,6 @@ export const ROUTES: Routes = [
             {
                 path: 'textarea',
                 loadChildren: () => import('@fundamental-ngx/docs/core/textarea').then((m) => m.TextareaDocsModule)
-            },
-            {
-                path: 'theme-switcher',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/core/theme-switcher').then((m) => m.ThemeSwitcherDocsModule)
             },
             {
                 path: 'theming',

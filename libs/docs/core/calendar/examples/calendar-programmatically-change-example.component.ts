@@ -12,7 +12,7 @@ import {
     template: `
         <fd-calendar calType="single" [(ngModel)]="date"> </fd-calendar>
         <br />
-        <div>Selected Date: {{ date.toDate() | date: 'shortDate' }}</div>
+        <div>Selected Date: {{ date.toDate() | date : 'shortDate' }}</div>
         <button fd-button label="Next Day" (click)="changeDay()"></button>
     `,
     styles: [

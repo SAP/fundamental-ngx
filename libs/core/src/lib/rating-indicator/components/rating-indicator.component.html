@@ -5,7 +5,7 @@
     <!-- Available rate values -->
     <ng-container *ngFor="let rate of _rates; index as i; trackBy: trackByFn">
         <input
-            [attr.aria-label]="i | ratingStarLabel: _rates.length:allowHalves"
+            [attr.aria-label]="i | ratingStarLabel : _rates.length : allowHalves"
             role="button"
             type="radio"
             class="fd-rating-indicator__input"

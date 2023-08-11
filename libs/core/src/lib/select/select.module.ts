@@ -10,11 +10,10 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { SelectComponent } from './select.component';
 import { OptionComponent } from './option/option.component';
-import { DeprecatedSelectCompactDirective } from './deprecated-select-compact.directive';
 
 @NgModule({
-    declarations: [SelectComponent, OptionComponent, DeprecatedSelectCompactDirective],
-    exports: [SelectComponent, OptionComponent, DeprecatedSelectCompactDirective, ContentDensityModule],
+    declarations: [SelectComponent, OptionComponent],
+    exports: [SelectComponent, OptionComponent, ContentDensityModule],
     imports: [
         BusyIndicatorModule,
         CommonModule,

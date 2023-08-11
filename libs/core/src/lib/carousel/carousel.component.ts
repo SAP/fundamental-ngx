@@ -26,7 +26,7 @@ import {
 import { Direction } from '@angular/cdk/bidi';
 import { debounceTime, take, takeUntil } from 'rxjs/operators';
 import { merge, Subject } from 'rxjs';
-import { resizeObservable, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
@@ -96,38 +96,6 @@ export class CarouselComponent
     /** If carousel is in circular loop */
     @Input()
     loop = false;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for left navigation button
-     */
-    @Input()
-    set leftNavigationBtnLabel(value: string) {
-        warnOnce(
-            "Property leftNavigationBtnLabel is deprecated. Use i18n capabilities 'coreCarousel.leftNavigationBtnLabel' key instead."
-        );
-        this._leftNavigationBtnLabel = value;
-    }
-
-    get leftNavigationBtnLabel(): string {
-        return this._leftNavigationBtnLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Label for right navigation button
-     */
-    @Input()
-    set rightNavigationBtnLabel(value: string) {
-        warnOnce(
-            "Property rightNavigationBtnLabel is deprecated. Use i18n capabilities 'coreCarousel.rightNavigationBtnLabel' key instead."
-        );
-        this._rightNavigationBtnLabel = value;
-    }
-
-    get rightNavigationBtnLabel(): string {
-        return this._rightNavigationBtnLabel;
-    }
 
     /** Shows/hides optional navigation button */
     @Input()

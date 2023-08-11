@@ -29,7 +29,6 @@ import {
     forwardRef,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -47,7 +46,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
-import { resizeObservable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
     FieldHintOptions,
@@ -55,8 +54,6 @@ import {
     FormGroupContainer,
     HintInput,
     HintOptions,
-    HintPlacement,
-    LabelLayout,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -77,7 +74,6 @@ import {
     DefaultHorizontalFieldLayout,
     DefaultHorizontalLabelLayout,
     DefaultVerticalFieldLayout,
-    DefaultVerticalLabelLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
@@ -205,30 +201,6 @@ export class FormGroupComponent
      */
     @Input()
     hint: HintInput;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     *
-     * Defines form field label placement.
-     */
-    @Input()
-    set labelLayout(value: LabelLayout) {
-        if (isDevMode()) {
-            warnOnce(
-                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
-            );
-        }
-        this._labelLayout = value;
-
-        this.labelColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
-        this.fieldColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
-    }
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
 
     /**
      * Defines column layout for inline items.
@@ -398,11 +370,6 @@ export class FormGroupComponent
 
     /** @hidden */
     private _useForm = false;
-    /** @hidden */
-    private _hintPlacement: HintPlacement = 'right';
-
-    /** @hidden */
-    private _labelLayout: LabelLayout;
 
     /** @hidden */
     protected _destroyed = new Subject<void>();
@@ -644,7 +611,6 @@ export class FormGroupComponent
      */
     private _updateFormFieldProperties(formField: PlatformFormField): void {
         if (this.unifiedLayout) {
-            formField.hintPlacement = this._hintPlacement;
             formField.editable = this.editable;
             formField.noLabelLayout = this.noLabelLayout;
         }

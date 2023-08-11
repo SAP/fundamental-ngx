@@ -191,13 +191,11 @@ export const API_FILES = {
         'MessageBoxService',
         'MessageBoxComponent',
         'MessageBoxBodyComponent',
-        'MessageBoxDecisiveButton',
         'MessageBoxHeaderComponent',
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
         'MessageBoxSemanticIconComponent',
-        'MessageBoxContainerComponent',
-        'MessageBoxFooterButtonComponent'
+        'MessageBoxContainerComponent'
     ],
     notification: [
         'NotificationTitleDirective',

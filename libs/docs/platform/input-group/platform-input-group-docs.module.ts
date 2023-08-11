@@ -20,7 +20,6 @@ import { PlatformInputGroupStandardExampleComponent } from './examples/platform-
 import { PlatformInputGroupCompactExampleComponent } from './examples/platform-input-group-compact-example.component';
 import { PlatformInputGroupDisabledExampleComponent } from './examples/platform-input-group-disabled-example.component';
 import { PlatformInputGroupFormExampleComponent } from './examples/platform-input-group-form-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -52,10 +51,6 @@ const routes: Routes = [
         PlatformInputGroupDisabledExampleComponent,
         PlatformInputGroupFormExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-input-group'),
-        platformContentDensityModuleDeprecationsProvider('fdp-input-group-addon-body'),
-        currentComponentProvider('input-group')
-    ]
+    providers: [currentComponentProvider('input-group')]
 })
 export class PlatformInputGroupDocsModule {}

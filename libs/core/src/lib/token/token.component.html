@@ -3,7 +3,7 @@
     class="fd-token"
     role="option"
     tabindex="0"
-    [attr.aria-roledescription]="ariaRoleDescription || ('coreToken.ariaRoleDescription' | fdTranslate)"
+    [attr.aria-roledescription]="'coreToken.ariaRoleDescription' | fdTranslate"
     (click)="tokenClickHandler($event)"
     (keydown)="tokenKeydownHandler($event)"
     [attr.aria-setsize]="totalCount"
@@ -19,7 +19,7 @@
     <span
         (click)="closeClickHandler($event)"
         role="button"
-        [attr.aria-label]="deleteButtonLabel || ('coreToken.deleteButtonLabel' | fdTranslate)"
+        [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
         *ngIf="!readOnly"
         class="fd-token__close"
     ></span>

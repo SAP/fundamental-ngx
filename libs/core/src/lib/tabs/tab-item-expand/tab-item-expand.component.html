@@ -1,6 +1,4 @@
 <a class="fd-tabs__link" role="tab" [attr.tabindex]="0">
-    <span *ngIf="label || ('coreTabs.tabListExpandButtonText' | fdTranslate) as expandButtonText" fd-tab-tag>{{
-        expandButtonText
-    }}</span>
+    <span fd-tab-tag>{{ 'coreTabs.tabListExpandButtonText' | fdTranslate }}</span>
     <fd-icon glyph="slim-arrow-down" aria-label="See More"></fd-icon>
 </a>

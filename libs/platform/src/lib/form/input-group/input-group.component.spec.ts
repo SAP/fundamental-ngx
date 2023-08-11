@@ -97,10 +97,9 @@ describe('InputGroup component', () => {
                 #ff
                 id="qty"
                 placeholder="Placeholder"
-                hint="This is tooltip help"
+                [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                 zone="zLeft"
                 rank="1"
-                hintPlacement="left"
                 [required]="true"
             >
                 <fdp-input-group name="qty" [formControl]="ff.formControl">

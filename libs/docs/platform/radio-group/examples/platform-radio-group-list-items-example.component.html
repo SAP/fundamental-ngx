@@ -55,14 +55,7 @@
 <form #listform3="ngForm" (ngSubmit)="onSubmit(listform3)">
     <div>Qualification form</div>
     <fdp-form-group #fg [formGroup]="form6">
-        <fdp-form-field
-            #ffr1
-            id="education"
-            [required]="true"
-            hintPlacement="left"
-            [rank]="1"
-            [i18Strings]="graduation"
-        >
+        <fdp-form-field #ffr1 id="education" [required]="true" [rank]="1" [i18Strings]="graduation">
             <fdp-radio-group
                 name="education"
                 [list]="items1"
@@ -72,14 +65,7 @@
             >
         </fdp-form-field>
 
-        <fdp-form-field
-            #ffr2
-            id="engineering"
-            [required]="true"
-            hintPlacement="left"
-            [rank]="2"
-            [i18Strings]="engineering"
-        >
+        <fdp-form-field #ffr2 id="engineering" [required]="true" [rank]="2" [i18Strings]="engineering">
             <fdp-radio-group
                 name="engineering"
                 [list]="items2"
@@ -90,7 +76,7 @@
             </fdp-radio-group>
         </fdp-form-field>
 
-        <fdp-form-field #ffr3 id="work" [required]="true" hintPlacement="left" [rank]="3" [i18Strings]="work">
+        <fdp-form-field #ffr3 id="work" [required]="true" [rank]="3" [i18Strings]="work">
             <fdp-radio-group name="work" [list]="items3" title="Work experience" [formControl]="ffr3.formControl">
                 5 year of work experience
             </fdp-radio-group>

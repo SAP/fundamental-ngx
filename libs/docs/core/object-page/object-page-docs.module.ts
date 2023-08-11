@@ -8,14 +8,13 @@ import { ObjectPageDocsHeaderComponent } from './object-page-header/object-page-
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { DeprecatedDynamicPageCompactDirective, DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { TextModule } from '@fundamental-ngx/core/text';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { ObjectPageDocsComponent } from './object-page-docs.component';
 import { ObjectPageExampleComponent } from './examples/object-page-example.component';
 
@@ -48,9 +47,6 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [ObjectPageDocsComponent, ObjectPageDocsHeaderComponent, ObjectPageExampleComponent],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedDynamicPageCompactDirective),
-        currentComponentProvider('object-page')
-    ]
+    providers: [currentComponentProvider('object-page')]
 })
 export class ObjectPageDocsModule {}

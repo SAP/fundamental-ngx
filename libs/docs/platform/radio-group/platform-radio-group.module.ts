@@ -13,7 +13,6 @@ import { PlatformRadioGroupContentExampleComponent } from './examples/platform-r
 import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
 import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -44,10 +43,6 @@ const routes: Routes = [
         PlatformRadioGroupListExampleComponent,
         PlatformRadioGroupListItemsExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-radio-group'),
-        platformContentDensityModuleDeprecationsProvider('fdp-radio-button'),
-        currentComponentProvider('radio-group')
-    ]
+    providers: [currentComponentProvider('radio-group')]
 })
 export class PlatformRadioGroupDocsModule {}

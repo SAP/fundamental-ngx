@@ -9,7 +9,7 @@ describe('UploadCollectionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [UploadCollectionComponent],
+            imports: [UploadCollectionComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));

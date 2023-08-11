@@ -6,7 +6,6 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    isDevMode,
     OnDestroy,
     Output,
     ViewChild,
@@ -14,12 +13,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 let switchUniqueId = 0;
-let warnedAboutAriaLabeledBy = false;
 
 /**
  * The Switch component is used to activate or deactivate an element.
@@ -87,51 +85,9 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     @Input()
     ariaLabel: Nullable<string>;
 
-    /** @deprecated renamed to "ariaLabelledBy" */
-    @Input()
-    set ariaLabelledby(value: Nullable<string>) {
-        if (isDevMode() && !warnedAboutAriaLabeledBy) {
-            warnOnce('fd-switch[ariaLabelledby] is deprecated. Use fd-switch[ariaLabelledBy] instead');
-            warnedAboutAriaLabeledBy = true;
-        }
-        this.ariaLabelledBy = value;
-    }
-
     /** aria-labelledby attribute of the inner input element. */
     @Input()
     ariaLabelledBy: Nullable<string>;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Semantic Label Accept set for Accessibility
-     */
-    @Input()
-    set semanticAcceptLabel(value: string) {
-        warnOnce(
-            "Property semanticAcceptLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticAcceptLabel' key instead."
-        );
-        this._semanticAcceptLabel = value;
-    }
-
-    get semanticAcceptLabel(): string {
-        return this._semanticAcceptLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Semantic Label Decline set for Accessibility
-     */
-    @Input()
-    set semanticDeclineLabel(value: string) {
-        warnOnce(
-            "Property semanticDeclineLabel is deprecated. Use i18n capabilities 'coreSwitch.semanticDeclineLabel' key instead."
-        );
-        this._semanticDeclineLabel = value;
-    }
-
-    get semanticDeclineLabel(): string {
-        return this._semanticDeclineLabel;
-    }
 
     /**
      * Event fired when the state of the switch changes.
@@ -146,12 +102,6 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _semanticDeclineLabel: string;
-
-    /** @hidden */
-    private _semanticAcceptLabel: string;
 
     /** @hidden */
     constructor(

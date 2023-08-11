@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { AutoCompleteDirective, DeprecatedAutoCompleteDirective } from './auto-complete.directive';
+import { AutoCompleteDirective } from './auto-complete.directive';
 
 @NgModule({
-    imports: [AutoCompleteDirective, DeprecatedAutoCompleteDirective],
-    exports: [AutoCompleteDirective, DeprecatedAutoCompleteDirective],
+    imports: [AutoCompleteDirective],
+    exports: [AutoCompleteDirective],
     declarations: []
 })
 export class AutoCompleteModule {}

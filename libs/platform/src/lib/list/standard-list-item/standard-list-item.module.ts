@@ -16,7 +16,6 @@ import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-sta
 import { StandardListItemComponent } from './standard-list-item.component';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [StandardListItemComponent],
@@ -35,9 +34,8 @@ import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platf
         AvatarModule,
         RouterModule,
         PlatformObjectStatusModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],
-    exports: [StandardListItemComponent, ContentDensityModule, PlatformContentDensityDeprecationsModule]
+    exports: [StandardListItemComponent, ContentDensityModule]
 })
 export class StandardListItemModule {}

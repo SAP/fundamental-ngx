@@ -22,7 +22,8 @@ import { LINK_CLASS_NAME } from '@fundamental-ngx/core/link';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-item]',
-    host: { class: 'fd-upload-collection__item' }
+    host: { class: 'fd-upload-collection__item' },
+    standalone: true
 })
 export class UploadCollectionItemDirective implements AfterContentInit, OnDestroy, AfterViewInit {
     /** The name of the file, not including the type extension. */

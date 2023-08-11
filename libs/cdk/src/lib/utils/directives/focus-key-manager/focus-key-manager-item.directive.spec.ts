@@ -6,10 +6,10 @@ import { FocusKeyManagerItemDirective } from './focus-key-manager-item.directive
 
 @Component({
     template: `
-        <ul fd-focus-key-manager-list>
-            <li #item fd-focus-key-manager-item></li>
+        <ul fdkFocusKeyManagerList>
+            <li #item fdkFocusKeyManagerItem></li>
 
-            <li #initialFocus fd-focus-key-manager-item initialFocus></li>
+            <li #initialFocus fdkFocusKeyManagerItem initialFocus></li>
         </ul>
     `
 })

@@ -21,8 +21,7 @@ import {
     Size,
     applyCssClass,
     getRandomColorAccent,
-    CssClassBuilder,
-    warnOnce
+    CssClassBuilder
 } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_AVATAR_COMPONENT } from './tokens';
@@ -115,16 +114,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** Whether component should be focusable & clicable */
     @Input() clickable = false;
-
-    /**
-     * @deprecated
-     * Deprecated according to Rename `backgroundImage` to `image`
-    /** Background image url. */
-    @Input()
-    set backgroundImage(value: string) {
-        warnOnce('`backgroundImage` input property is deprecated. Use `image` instead.');
-        this._setImage(value);
-    }
 
     /** Background image resource: url or base64. */
     @Input()

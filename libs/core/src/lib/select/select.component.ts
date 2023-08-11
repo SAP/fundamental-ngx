@@ -48,9 +48,6 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let selectUniqueId = 0;
 
-/** @deprecated use `import { FormStates } from "@fundamental-ngx/cdk/forms"` instead */
-export type SelectControlState = FormStates;
-
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
 export const SELECT_PANEL_MAX_HEIGHT = 250;

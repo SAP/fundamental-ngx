@@ -12,8 +12,7 @@
 
             <fdp-standard-list-item
                 [attr.id]="'approval-team-' + team.id"
-                [avatarSrc]="''"
-                [avatarTitle]="team.name"
+                [avatar]="{ image: '', ariaLabel: team.name }"
                 [description]="team.description || team.members.length + ' members'"
                 [title]="team.name"
                 (click)="_showTeamDetails(team)"

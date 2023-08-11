@@ -31,7 +31,6 @@ export * from './lib/core-helpers/pipes/sort.pipe';
 export * from './lib/core-helpers/pipes/filter.pipe';
 export * from './lib/utilities';
 export * from './lib/services/copy.service';
-export * from './lib/services/docs-theme.service';
 export * from './lib/services/api-docs.service';
 export * from './lib/services/docs.service';
 export * from './lib/tokens/package-json.token';

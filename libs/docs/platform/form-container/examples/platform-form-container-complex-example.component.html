@@ -4,10 +4,9 @@
         id="basicTextarea22"
         label="Basic Textarea"
         placeholder="Start entering detailed description"
-        hint="This is tooltip help"
+        [hint]="{ content: 'This is tooltip help', placement: 'left' }"
         [column]="1"
         [rank]="1"
-        hintPlacement="left"
     >
         <fdp-textarea name="basicTextarea22" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
@@ -38,10 +37,9 @@
         id="number"
         label="Step Input"
         placeholder="Things quantity"
-        hint="This is tooltip to help"
+        [hint]="{ content: 'This is tooltip to help', placement: 'left' }"
         [column]="2"
         [rank]="7"
-        hintPlacement="left"
     >
         <fdp-number-step-input name="qty" [formControl]="ff7.formControl"></fdp-number-step-input>
     </fdp-form-field>

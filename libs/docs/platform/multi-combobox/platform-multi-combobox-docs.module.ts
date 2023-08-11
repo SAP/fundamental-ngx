@@ -27,7 +27,6 @@ import { MultiComboboxColumnsExampleComponent } from './examples/multi-combobox-
 import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-forms/multi-combobox-forms-example.component';
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -53,7 +52,6 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: [
         { provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true },
-        platformContentDensityModuleDeprecationsProvider('fdp-multi-combobox'),
         currentComponentProvider('multi-combobox')
     ],
     declarations: [

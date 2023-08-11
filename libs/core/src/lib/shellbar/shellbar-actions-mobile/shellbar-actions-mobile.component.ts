@@ -21,10 +21,6 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     @Input()
     shellbarActions: QueryList<ShellbarActionComponent>;
 
-    /** @hidden */
-    @Input()
-    collapsedItemMenuLabel: string;
-
     /**
      * Whether the search is present in the shellbar.
      */
@@ -32,11 +28,11 @@ export class ShellbarActionsMobileComponent implements AfterContentChecked {
     searchExists = false;
 
     /** @hidden */
-    totalNotifications: number;
-
-    /** @hidden */
     @Output()
     showSearch = new EventEmitter<void>();
+
+    /** @hidden */
+    totalNotifications: number;
 
     /** @hidden */
     actionClicked(item: ShellbarActionComponent, event: MouseEvent): void {

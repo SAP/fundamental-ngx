@@ -25,12 +25,10 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { I18nModule } from '@fundamental-ngx/i18n';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
-import { VhdSearchComponent } from './components/value-help-dialog-search/value-help-dialog-search.component';
 import { VhdBaseTab } from './components/base-tab/vhd-base-tab.component';
 import { SelectTabComponent } from './components/select-tab/select-tab.component';
 import { DefineTabComponent } from './components/define-tab/define-tab.component';
@@ -41,7 +39,6 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
     declarations: [
         PlatformValueHelpDialogComponent,
         VhdFilterComponent,
-        VhdSearchComponent,
         VhdBaseTab,
         SelectTabComponent,
         DefineTabComponent,
@@ -74,17 +71,10 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         InfiniteScrollModule,
         PlatformSearchFieldModule,
         ContentDensityModule,
-        PlatformContentDensityDeprecationsModule,
         ScrollbarModule,
         SkeletonModule,
         RepeatModule
     ],
-    exports: [
-        PlatformValueHelpDialogComponent,
-        VhdFilterComponent,
-        VhdSearchComponent,
-        ContentDensityModule,
-        PlatformContentDensityDeprecationsModule
-    ]
+    exports: [PlatformValueHelpDialogComponent, VhdFilterComponent, ContentDensityModule]
 })
 export class PlatformValueHelpDialogModule {}

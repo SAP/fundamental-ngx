@@ -8,10 +8,8 @@ import {
     EventEmitter,
     forwardRef,
     Input,
-    isDevMode,
     OnDestroy,
     Output,
-    TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -19,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
 
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
 import {
@@ -63,20 +61,6 @@ let addOnInputRandomId = 0;
     }
 })
 export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
-    /** @deprecated Input template, use fd-input-group-input directive instead. */
-    @Input()
-    set inputTemplate(value: TemplateRef<any>) {
-        if (isDevMode()) {
-            warnOnce('"inputTemplate" is deprecated. Use "fd-input-group-input" directive instead');
-        }
-
-        this._inputTemplate = value;
-    }
-
-    get inputTemplate(): TemplateRef<any> {
-        return this._inputTemplate;
-    }
-
     /**
      * The placement of the add-on.
      * Options include *before* and *after*
@@ -155,15 +139,6 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Input()
     iconTitle: Nullable<string>;
 
-    /** @deprecated renamed to "ariaLabelledBy" */
-    @Input()
-    set ariaLabelledby(value: Nullable<string>) {
-        if (isDevMode()) {
-            warnOnce('"ariaLabelledby" is deprecated. Use "ariaLabelledBy" instead');
-        }
-        this.ariaLabelledBy = value;
-    }
-
     /** the associated ids for the input aria-labelledby field */
     @Input()
     ariaLabelledBy: Nullable<string>;
@@ -216,17 +191,8 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
      */
     inShellbar = false;
 
-    /** @hidden */
-    private _inputTemplate: TemplateRef<any>;
-
     /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    onChange: any = () => {};
-
-    /** @hidden */
-    onTouched: any = () => {};
 
     /** Value of the text input. */
     set inputText(value) {
@@ -234,10 +200,10 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
 
         this.onChange(value);
     }
+
     get inputText(): string {
         return this._inputTextValue;
     }
-
     /** @hidden
      *  Calculate the correct ids for input aria-labelledby
      */
@@ -259,6 +225,12 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     ) {
         this._contentDensityObserver.subscribe();
     }
+
+    /** @hidden */
+    onChange: any = () => {};
+
+    /** @hidden */
+    onTouched: any = () => {};
 
     /** @hidden */
     get elementRef(): ElementRef<HTMLElement> {

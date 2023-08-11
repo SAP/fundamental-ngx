@@ -1,12 +1,12 @@
 import { ElementRef, Injectable, OnDestroy } from '@angular/core';
-import { MessageStates } from './form-message.component';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 @Injectable()
 export class PopoverFormMessageService implements OnDestroy {
     /** @hidden */
-    private _type: MessageStates;
+    private _type: FormStates;
 
     /** @hidden */
     private _message: string;
@@ -18,7 +18,7 @@ export class PopoverFormMessageService implements OnDestroy {
     constructor(private _popoverService: PopoverService) {}
 
     /** @hidden */
-    set messageType(type: MessageStates) {
+    set messageType(type: FormStates) {
         this._type = type;
         this._updatePopover();
     }

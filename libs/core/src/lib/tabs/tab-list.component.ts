@@ -20,7 +20,7 @@ import {
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
-import { KeyUtil, Nullable, scrollTop, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -89,22 +89,6 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** Whether to enable collapsing expanded tab on expanded tab click */
     @Input()
     collapsibleTabs = false;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text visible in expand overflow trigger
-     */
-    @Input()
-    set expandOverflowText(value: string) {
-        warnOnce(
-            "Property expandOverflowText is deprecated. Use i18n capabilities 'coreTabs.tabListExpandButtonText' key instead."
-        );
-        this._expandOverflowText = value;
-    }
-
-    get expandOverflowText(): string {
-        return this._expandOverflowText;
-    }
 
     /** Initially selected tab (by id). First not disabled one if not specified. */
     @Input()
@@ -179,9 +163,6 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _expandOverflowText: string;
 
     /** @hidden */
     constructor(

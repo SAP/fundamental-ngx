@@ -13,8 +13,7 @@
 >
     <fdp-standard-list-item
         *fdpItemDef="let address"
-        [avatarSrc]="address.img"
-        [avatarTitle]="address.imgInfo"
+        [avatar]="{ image: address.img, ariaLabel: address.imgInfo }"
         [description]="address.description"
         [secondary]="address.info"
         [title]="address.name"

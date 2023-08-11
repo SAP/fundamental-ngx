@@ -14,27 +14,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 import { ViewportRuler } from '@angular/cdk/overlay';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdOverflowList], [fd-overflow-list]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkOverflowList]', '[fdOverflowList], [fd-overflow-list]')
-        }
-    ]
-})
-export class DeprecatedOverflowListDirective extends DeprecatedSelector {}
-
-@Directive({
-    selector: '[fdkOverflowList], [fdOverflowList], [fd-overflow-list]',
+    selector: '[fdkOverflowList]',
     standalone: true
 })
 export class OverflowListDirective implements AfterViewInit, OnDestroy {

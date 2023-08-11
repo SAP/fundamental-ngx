@@ -12,8 +12,8 @@ const LIST_WIDTH = 500;
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'test-component',
     template: `
-        <div #dirRoot class="list" fdOverflowList (overflowChanged)="onOverflowed($event)">
-            <div *ngFor="let item of items" fdOverflowListItem class="list-item">{{ item }}</div>
+        <div #dirRoot class="list" fdkOverflowList (overflowChanged)="onOverflowed($event)">
+            <div *ngFor="let item of items" fdkOverflowListItem class="list-item">{{ item }}</div>
         </div>
     `,
     styles: [

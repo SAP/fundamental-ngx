@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { warnOnce } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Represents a list of tab-panels.
@@ -15,20 +14,4 @@ import { warnOnce } from '@fundamental-ngx/cdk/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabItemExpandComponent {
-    /**
-     * @deprecated use i18n capabilities instead
-     * @hidden Text visible in the trigger */
-    @Input()
-    set label(value: string) {
-        warnOnce("Property label is deprecated. Use i18n capabilities 'coreTabs.tabListExpandButtonText' key instead.");
-        this._label = value;
-    }
-
-    get label(): string {
-        return this._label;
-    }
-
-    /** @hidden */
-    private _label: string;
-}
+export class TabItemExpandComponent {}

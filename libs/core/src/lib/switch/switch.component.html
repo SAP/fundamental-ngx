@@ -43,8 +43,8 @@
             <span *ngIf="semantic" [id]="_semanticLabelId" aria-hidden="true" class="fd-switch__invisible-text">
                 {{
                     checked
-                        ? semanticAcceptLabel || ('coreSwitch.semanticAcceptLabel' | fdTranslate)
-                        : semanticDeclineLabel || ('coreSwitch.semanticDeclineLabel' | fdTranslate)
+                        ? ('coreSwitch.semanticAcceptLabel' | fdTranslate)
+                        : ('coreSwitch.semanticDeclineLabel' | fdTranslate)
                 }}
             </span>
         </div>

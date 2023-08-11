@@ -6,19 +6,10 @@ import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { PlatformDatetimePickerComponent } from './datetime-picker.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [PlatformDatetimePickerComponent],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        DatetimePickerModule,
-        PipeModule,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
-    exports: [PlatformDatetimePickerComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, DatetimePickerModule, PipeModule, ContentDensityModule],
+    exports: [PlatformDatetimePickerComponent, ContentDensityModule]
 })
 export class PlatformDatetimePickerModule {}

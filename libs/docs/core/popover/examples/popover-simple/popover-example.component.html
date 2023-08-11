@@ -45,12 +45,12 @@
         </fd-popover-control>
         <fd-popover-body>
             <div fd-popover-body-header id="popover-bar-simple-header-2">
-                <div fd-bar barDesign="header-with-subheader" [cozy]="true">
+                <div fd-bar barDesign="header-with-subheader" fdCozy>
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
-                <div fd-bar barDesign="subheader" [cozy]="true" id="popover-bar-simple-header-3">
+                <div fd-bar barDesign="subheader" fdCozy id="popover-bar-simple-header-3">
                     <div fd-bar-middle>
                         <fd-bar-element [fullWidth]="true"
                             >SubHeader Middle section with Full Width Element
@@ -60,7 +60,7 @@
             </div>
             <fd-avatar [circle]="true" style="margin: 1rem" size="xl" glyph="group"></fd-avatar>
             <div fd-popover-body-footer>
-                <div fd-bar barDesign="footer" [cozy]="true">
+                <div fd-bar barDesign="footer" fdCozy>
                     <div fd-bar-right>
                         <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
                         <fd-button-bar label="Cancel"></fd-button-bar>

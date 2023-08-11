@@ -22,7 +22,6 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamenta
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
@@ -97,38 +96,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
     activeView: FdCalendarView = 'day';
-
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core datetime picker)
-     * Aria label for the datetime picker input.
-     */
-    @Input()
-    set datetimeInputLabel(value: string) {
-        warnOnce(
-            'Property datetimeInputLabel is deprecated. Use i18n capabilities (being translated in core datetime picker) instead.'
-        );
-        this._datetimeInputLabel = value;
-    }
-
-    get datetimeInputLabel(): string {
-        return this._datetimeInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core datetime picker)
-     * Aria label for the button to show/hide the calendar.
-     */
-    @Input()
-    set displayDatetimeToggleLabel(value: string) {
-        warnOnce(
-            'Property displayDatetimeToggleLabel is deprecated. Use i18n capabilities (being translated in core datetime picker) instead.'
-        );
-        this._displayDatetimeToggleLabel = value;
-    }
-
-    get displayDatetimeToggleLabel(): string {
-        return this._displayDatetimeToggleLabel;
-    }
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -230,34 +197,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     @Input()
     preventScrollOnFocus = false;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text and aria-label of the DateTimePicker 'OK' button.
-     */
-    @Input()
-    set okLabel(value: string) {
-        warnOnce('Property okLabel is deprecated. Use i18n capabilities instead.');
-        this._okLabel = value;
-    }
-
-    get okLabel(): string {
-        return this._okLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text and aria-label of the DateTimePicker 'Cancel' button.
-     */
-    @Input()
-    set cancelLabel(value: string) {
-        warnOnce('Property cancelLabel is deprecated. Use i18n capabilities instead.');
-        this._cancelLabel = value;
-    }
-
-    get cancelLabel(): string {
-        return this._cancelLabel;
-    }
-
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     readonly isOpenChange = new EventEmitter<boolean>();
@@ -291,18 +230,6 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
     get _isRequired(): boolean {
         return !!this.formField?.required;
     }
-
-    /** @hidden */
-    private _datetimeInputLabel: string;
-
-    /** @hidden */
-    private _displayDatetimeToggleLabel: string;
-
-    /** @hidden */
-    private _okLabel: string;
-
-    /** @hidden */
-    private _cancelLabel: string;
 
     /** @hidden */
     constructor(

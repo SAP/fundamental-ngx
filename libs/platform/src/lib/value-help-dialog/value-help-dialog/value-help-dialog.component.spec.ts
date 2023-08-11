@@ -5,6 +5,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { PlatformValueHelpDialogComponent } from './value-help-dialog.component';
 import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { of } from 'rxjs';
 
 @Component({
     template: `
@@ -13,11 +15,8 @@ import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
             dialogTitle="Simple value help dialog"
             uniqueKey="id"
             tokenViewField="name"
-            selectTabTitle="Select from list"
-            defineTabTitle="Define Conditions"
             [dataSource]="data"
         >
-            <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
             <fdp-value-help-dialog-filter
                 main="true"
                 key="name"
@@ -41,7 +40,20 @@ import { PlatformValueHelpDialogModule } from '../value-help-dialog.module';
                 [exclude]="true"
             ></fdp-value-help-dialog-filter>
         </fdp-value-help-dialog>
-    `
+    `,
+    providers: [
+        {
+            provide: FD_LANGUAGE,
+            useValue: of({
+                ...FD_LANGUAGE_ENGLISH,
+                platformVHD: {
+                    ...FD_LANGUAGE_ENGLISH.platformVHD,
+                    selectTabTitle: 'Select from list',
+                    defineTabTitle: 'Define Conditions'
+                }
+            })
+        }
+    ]
 })
 class TestWrapperComponent {
     data = Array(10)

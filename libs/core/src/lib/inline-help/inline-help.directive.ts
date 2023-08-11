@@ -5,7 +5,6 @@ import {
     EmbeddedViewRef,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -20,7 +19,7 @@ import {
 import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
@@ -79,22 +78,6 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
 
     /** @hidden */
     private _srViewRef: EmbeddedViewRef<any>;
-
-    /**
-     * Inline help template to display inside generated popover
-     * @deprecated Use `fd-inline-help` instead
-     * */
-    @Input('fd-inline-help-template')
-    set inlineHelpTemplate(template: Nullable<TemplateRef<any>>) {
-        if (isDevMode()) {
-            warnOnce(
-                '[fd-inline-help-template] is deprecated and will be removed in the future, use [fd-inline-help] instead.'
-            );
-        }
-        this._popoverService.updateContent(null, template);
-
-        this._setupScreenreaderElement(template);
-    }
 
     /** @hidden */
     constructor(

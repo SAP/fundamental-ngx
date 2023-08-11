@@ -2,16 +2,14 @@
 <fdp-list [navigationIndicator]="true" selectionMode="multi" [selection]="true" [hasByLine]="true">
     <fdp-standard-list-item
         [title]="'Title 1'"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         description="First text item in Byline (Standard text item)"
         ariaLabel="Navigate to get more information on"
     >
     </fdp-standard-list-item>
     <fdp-standard-list-item
         [title]="'Title 2'"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         description="Second text item in Byline (Standard text item)"
         ariaLabel="Navigate to get more information on"
     >
@@ -19,8 +17,7 @@
     <fdp-standard-list-item
         [title]="'Title 3'"
         description="Third text item in Byline (Standard text item)"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         ariaLabel="Navigate to get more information on"
     >
     </fdp-standard-list-item>

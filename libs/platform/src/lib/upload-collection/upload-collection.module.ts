@@ -24,7 +24,6 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button';
 import { PlatformPipeModule } from '@fundamental-ngx/platform/shared';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 import { UploadCollectionDragnDropDirective } from './directives/upload-collection-dragndrop.directive';
 import { UploadCollectionComponent } from './upload-collection/upload-collection.component';
@@ -59,9 +58,8 @@ import { I18nModule } from '@fundamental-ngx/i18n';
         PlatformPipeModule,
         PlatformMenuButtonModule,
         RouterModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule
     ],
-    exports: [UploadCollectionComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    exports: [UploadCollectionComponent, ContentDensityModule]
 })
 export class PlatformUploadCollectionModule {}
