@@ -163,7 +163,7 @@
     "ng-packagr": "16.1.0",
     "ngx-cva-test-suite": "2.0.0",
     "nx": "16.5.5",
-    "nx-cloud": "16.1.1",
+    "nx-cloud": "16.3.0",
     "postcss": "^8.4.21",
     "postcss-import": "15.1.0",
     "postcss-preset-env": "9.0.0",
