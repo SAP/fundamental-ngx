@@ -94,7 +94,7 @@
     "@nx/linter": "16.5.5",
     "@nx/plugin": "16.5.5",
     "@nx/workspace": "16.5.5",
-    "@schematics/angular": "16.1.0",
+    "@schematics/angular": "16.2.0",
     "@swc-node/register": "^1.4.2",
     "@swc/cli": "0.1.62",
     "@swc/core": "^1.2.173",
