@@ -16,6 +16,7 @@ import {
     DialogInnerPopoverComponent,
     DialogInnerPopoverExampleComponent
 } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import { DialogSwipeExampleComponent } from './examples/dialog-swipe/dialog-swipe-example.component';
 
 const routes: Routes = [
     {
@@ -46,7 +47,8 @@ const routes: Routes = [
         DialogDocsComponent,
         DialogDocsHeaderComponent,
         DialogInnerPopoverComponent,
-        DialogInnerPopoverExampleComponent
+        DialogInnerPopoverExampleComponent,
+        DialogSwipeExampleComponent
     ],
     providers: [DialogService, currentComponentProvider('dialog')]
 })

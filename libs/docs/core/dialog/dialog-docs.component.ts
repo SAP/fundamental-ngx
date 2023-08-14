@@ -45,6 +45,9 @@ const formDialogHtml = 'dialog-form/form-dialog-example.component.html';
 
 const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts';
 
+const dialogSwipeTs = 'dialog-swipe/dialog-swipe-example.component.ts';
+const dialogSwipeHtml = 'dialog-swipe/dialog-swipe-example.component.html';
+
 @Component({
     selector: 'app-dialog',
     templateUrl: './dialog-docs.component.html'
@@ -288,6 +291,21 @@ export class DialogDocsComponent {
             code: getAssetFromModuleAssets(popoverDialogTs),
             fileName: 'dialog-inner-popover',
             component: 'DialogInnerPopoverComponent'
+        }
+    ];
+
+    swipeDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dialogSwipeHtml),
+            fileName: 'dialog-swipe-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(dialogSwipeTs),
+            fileName: 'dialog-swipe-example',
+            component: 'DialogSwipeExampleComponent',
+            main: true
         }
     ];
 

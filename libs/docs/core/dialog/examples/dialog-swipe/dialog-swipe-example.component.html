@@ -1,0 +1,42 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #swipeDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <span fd-title *ngIf="elementSelected">
+                <button fd-button glyph="arrow-left" fdType="transparent" (click)="returnToMain()"></button>
+                <strong id="fd-dialog-header-10" style="font-size: 16px">{{ dialogTitle }}</strong>
+            </span>
+            <h1 id="fd-dialog-header-10" fd-title *ngIf="!elementSelected">{{ dialogTitle }}</h1>
+        </fd-dialog-header>
+        <fd-dialog-body>
+            <ul fd-list [byline]="true" [navigationIndicator]="true" *ngIf="!elementSelected">
+                <li fd-list-item *ngFor="let message of messageList; index as i">
+                    <a fd-list-link [navigationIndicator]="true" (click)="openElement(i)">
+                        <span fd-list-thumbnail><fd-icon [glyph]="message.icon"></fd-icon></span>
+                        <div fd-list-content>
+                            <div fd-list-title>{{ message.messageTitle }}</div>
+                            <div fd-list-byline>{{ message.messageInfo }}</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <span *ngIf="elementSelected"
+                >{{ content }} - Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
+                Vivamus ut laoreet lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                cubilia curae;<br />
+                Aenean sagittis aliquam justo et suscipit. Nam molestie, magna at elementum pulvinar,<br />
+                nisi enim venenatis ante, id convallis mi neque nec risus.
+            </span>
+        </fd-dialog-body>
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Close"
+                (click)="dialog.close('Close')"
+                ariaLabel="Close"
+                *ngIf="!elementSelected"
+            ></fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open Swipe Dialog" (click)="openDialog(swipeDialog)"></button>
