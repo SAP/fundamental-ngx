@@ -9,23 +9,11 @@ export class DialogSwipeExampleComponent {
     elementSelected: boolean = false;
     dialogTitle: string = 'Swipe Dialog';
     messageList = [
-        {
-            icon: 'error',
-            messageTitle: 'File not uploaded',
-            messageInfo: 'Uploaded file does not meet security requirements'
-        },
-        {
-            icon: 'error',
-            messageTitle: 'Missing required documents',
-            messageInfo: 'The following documents were not found ...'
-        },
-        { icon: 'warning', messageTitle: 'Missing Data', messageInfo: 'Missing the folowing data ...' },
-        {
-            icon: 'message-information',
-            messageTitle: 'Changes to upload policy',
-            messageInfo: 'For better security measures the following ...'
-        },
-        { icon: 'incident', messageTitle: 'Improvement Survey', messageInfo: 'Complete the following survey' }
+        {icon: 'error',messageTitle: 'File not uploaded',messageInfo: 'Uploaded file does not meet security requirements'},
+        {icon: 'error',messageTitle: 'Missing required documents',messageInfo: 'The following documents were not found ...'},
+        {icon: 'warning', messageTitle: 'Missing Data', messageInfo: 'Missing the folowing data ...'},
+        {icon: 'message-information',messageTitle: 'Changes to upload policy',messageInfo: 'For better security measures the following ...'},
+        {icon: 'incident', messageTitle: 'Improvement Survey', messageInfo: 'Complete the following survey'}
     ];
     content: string = '';
 
