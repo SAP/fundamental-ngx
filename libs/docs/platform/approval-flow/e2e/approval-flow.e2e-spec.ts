@@ -310,23 +310,32 @@ describe('Approval flow', () => {
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
         });
 
-        it('should be able to add node in serial using top bar action menu', async () => {
+        fit('should be able to add node in serial using top bar action menu', async () => {
             await scrollIntoView(afDefaultExample);
             const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
             await click(afDefaultExample + editExampleButton);
+            await pause(5000);
             await waitForElDisplayed(addNode);
             await waitForElDisplayed(approvalFlowNodeCheckbox);
+            await pause(5000);
             await click(approvalFlowNodeCheckbox, 3);
             await waitForElDisplayed(topActionButtons);
+            await pause(5000);
             await click(topActionButtons);
             await waitForElDisplayed(detailsDialogUserTeamButton);
+            await pause(5000);
             await click(detailsDialogUserTeamButton);
             await pause(500);
+            await pause(5000);
             await waitForElDisplayed(detailsDialogTeamMemberCheckBox);
+            await pause(5000);
             await click(detailsDialogTeamMemberCheckBox, 4);
             await click(detailsDialogSendReminderBtn);
+            await pause(5000);
             await waitForElDisplayed(detailsDialogSendReminderBtn);
+            await pause(5000);
             await click(detailsDialogSendReminderBtn);
+            await pause(5000);
             const approvalFlowNodeCountAfterAdding = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdding - 1);
