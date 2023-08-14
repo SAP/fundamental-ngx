@@ -27,7 +27,7 @@ export class DateTimePicker extends PlatformBaseComponentPo {
     calendarYearsSection = '.fd-calendar__content--years';
     calendarItem = 'td.fd-calendar__item';
     altCalendarItem = 'table td.fd-calendar__item';
-    currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
+    currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other'))]";
 
     currentDay = '//*[contains(@class, "fd-calendar__item--today") or contains(@class, "is-active")]';
 
@@ -50,7 +50,7 @@ export class DateTimePicker extends PlatformBaseComponentPo {
 
     getCurrentDayIndex = async (): Promise<number | undefined> => {
         for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
-            if ((await getElementClass(this.currentMonthCalendarItem, i)).includes('current')) {
+            if ((await getElementClass(this.currentMonthCalendarItem, i)).includes('today')) {
                 return i;
             }
         }
@@ -61,7 +61,7 @@ export class DateTimePicker extends PlatformBaseComponentPo {
     dayInDisabledFunctionsCalendarByIndex = (index: string): string => `[data-fd-calendar-day="${index}"]`;
 
     dayInCalendarButtonByValue = (index: string): string =>
-        `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+        `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other'))]`;
 
     yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
 

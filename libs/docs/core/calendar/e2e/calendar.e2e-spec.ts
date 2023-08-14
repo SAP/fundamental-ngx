@@ -31,7 +31,8 @@ import {
     tuesdayStartDate,
     fridayStartDate,
     otherMonth,
-    portraitAttribute
+    portraitAttribute,
+    calendarDayActiveClass
 } from './calendar-contents';
 
 describe('calendar test suite', () => {
@@ -50,6 +51,7 @@ describe('calendar test suite', () => {
         leftArrowBtn,
         rightArrowBtn,
         calendarItem,
+        calendarMyItem,
         yearBtn,
         yearRangeBtn,
         okBtn,
@@ -246,8 +248,8 @@ describe('calendar test suite', () => {
         it('should check ability to mark weekends', async () => {
             await click(specialDaysCalendar + calendarOptions);
             for (let i = 0; i < (await getElementArrayLength(saturdays)); i++) {
-                await expect(await getElementClass(saturdays, i)).toContain('special-day');
-                await expect(await getElementClass(sundays, i)).toContain('special-day');
+                await expect(await getElementClass(saturdays, i)).toContain('-legend-');
+                await expect(await getElementClass(sundays, i)).toContain('-legend-');
             }
         });
 
@@ -266,37 +268,37 @@ describe('calendar test suite', () => {
             expect(
                 await (
                     await $(
-                        `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${endDate.getDate()}"]:not(.fd-calendar__item--other-month)`
+                        `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${endDate.getDate()}"]:not(.fd-calendar__item--other)`
                     )
                 ).getAttribute('class')
-            ).toContain('special-day');
+            ).toContain('-legend-');
 
             expect(
                 await (
                     await $(
                         `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${
                             endDate.getDate() + 1
-                        }"]:not(.fd-calendar__item--other-month)`
+                        }"]:not(.fd-calendar__item--other)`
                     )
                 ).getAttribute('class')
-            ).not.toContain('special-day');
+            ).not.toContain('-legend-');
         });
 
         it('should check ability to mark all Mondays', async () => {
             await click(specialDaysCalendar + calendarOptions, 2);
             for (let i = 0; i < (await getElementArrayLength(mondays)); i++) {
-                await expect(await getElementClass(mondays, i)).toContain('special-day');
+                await expect(await getElementClass(mondays, i)).toContain('-legend-');
             }
             await click(specialDaysCalendar + calendarOptions, 2);
             for (let i = 0; i < (await getElementArrayLength(mondays)); i++) {
-                await expect(await getElementClass(mondays, i)).not.toContain('special-day');
+                await expect(await getElementClass(mondays, i)).not.toContain('-legend-');
             }
         });
 
         it('should check ability to mark past days', async () => {
             await click(specialDaysCalendar + calendarOptions, 3);
             for (let i = (await getCurrentDayIndex(specialDaysCalendar)) - 1; i !== 0; i--) {
-                await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('special-day');
+                await expect(await getElementClass(specialDaysCalendar + calendarItem, i)).toContain('-legend-');
             }
         });
 
@@ -304,6 +306,7 @@ describe('calendar test suite', () => {
             await checkCurrentDayHighlighted(specialDaysCalendar);
             await checkSingleSelection(specialDaysCalendar, calendarItem);
             await checkChangeMonthByNavArrows(specialDaysCalendar);
+            // await pause(20000);
             await checkChangeDateByCalendarOverview(specialDaysCalendar, monthBtn);
             await checkChangeDateByCalendarOverview(specialDaysCalendar, yearBtn);
             await checkChangeYearByYearRange(specialDaysCalendar);
@@ -445,10 +448,10 @@ describe('calendar test suite', () => {
 
         await scrollIntoView(calendar + selector);
         await click(calendar + selector);
-        const calendarItemsClass = await getAttributeByName(calendar + calendarItem, classAttribute, itemIndex);
+        const calendarItemsClass = await getAttributeByName(calendar + calendarMyItem, classAttribute, itemIndex);
 
-        itemIndex = calendarItemsClass.includes(currentDayClass) ? itemIndex + 1 : itemIndex;
-        await click(calendar + calendarItem, itemIndex);
+        itemIndex = calendarItemsClass.includes(activeClass) ? itemIndex + 1 : itemIndex;
+        await click(calendar + calendarMyItem, itemIndex);
 
         await expect(await getText(calendar + selector)).not.toEqual(startDate);
     }
@@ -460,11 +463,11 @@ describe('calendar test suite', () => {
         await scrollIntoView(calendar + yearBtn);
         await click(calendar + yearBtn);
         await click(calendar + yearRangeBtn);
-        await click(calendar + calendarItem);
-        const calendarItemsClass = await getAttributeByName(calendar + calendarItem, classAttribute);
+        await click(calendar + calendarMyItem);
+        const calendarItemsClass = await getAttributeByName(calendar + calendarMyItem, classAttribute);
 
         index = calendarItemsClass.includes(currentDayClass) ? index + 1 : index;
-        await click(calendar + calendarItem, index);
+        await click(calendar + calendarMyItem, index);
 
         await expect(await getText(calendar + yearBtn)).not.toEqual(startYear);
     }
@@ -483,7 +486,9 @@ describe('calendar test suite', () => {
 
         await click(calendar + selector, index);
 
-        await expect(await getAttributeByName(calendar + selector, classAttribute, index)).toContain(activeClass);
+        await expect(await getAttributeByName(calendar + selector, classAttribute, index)).toContain(
+            calendarDayActiveClass
+        );
         await expect(await getElementArrayLength(calendar + selectedDays)).toBe(1);
     }
 
@@ -503,7 +508,7 @@ describe('calendar test suite', () => {
         await expect(await getElementArrayLength(calendar + currentDay)).toBe(1);
     }
 
-    async function getCurrentDayIndex(selector: string, Class: string = 'current'): Promise<number> {
+    async function getCurrentDayIndex(selector: string, Class: string = 'today'): Promise<number> {
         for (let i = 0; i < (await getElementArrayLength(selector + calendarItem)); i++) {
             if ((await getElementClass(selector + calendarItem, i)).includes(Class)) {
                 return i;

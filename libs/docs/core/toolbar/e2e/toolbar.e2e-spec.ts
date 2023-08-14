@@ -11,6 +11,7 @@ import {
     getValue,
     isElementClickable,
     isElementDisplayed,
+    pause,
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,

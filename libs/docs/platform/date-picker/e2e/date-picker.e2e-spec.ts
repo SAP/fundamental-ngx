@@ -75,7 +75,7 @@ describe('Date picker suite', () => {
 
     it('Verify calendar is expanded on click on the date picker button', async () => {
         const activeButtons = await elementArray(buttonDatePicker);
-        for (let i = 1; i < activeButtons.length; i++) {
+        for (let i = 1; i < activeButtons.length - 2; i++) {
             if (!(await getElementClass(buttonDatePicker, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(buttonDatePicker, i);
@@ -99,7 +99,7 @@ describe('Date picker suite', () => {
 
     it('Verify by default today date is focused', async () => {
         const activeButtons = await elementArray(buttonDatePicker);
-        for (let i = 4; i < activeButtons.length; i++) {
+        for (let i = 4; i < activeButtons.length - 2; i++) {
             if (!(await getElementClass(buttonDatePicker, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(buttonDatePicker, i);

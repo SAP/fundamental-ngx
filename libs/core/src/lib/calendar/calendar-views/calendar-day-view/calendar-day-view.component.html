@@ -54,7 +54,7 @@
                 [class.fd-calendar__item--weekend]="cell.weekend && markWeekends && cell.monthStatus === 'current'"
                 [class.fd-calendar__item--other]="cell.monthStatus !== 'current'"
                 [class.is-disabled]="cell.disabled"
-                [class]="cell.specialNumber ? 'fd-calendar__special-day--' + cell.specialNumber : ''"
+                [class]="cell.specialNumber ? 'fd-calendar__item--legend-' + cell.specialNumber : ''"
                 [attr.id]="cell.id"
                 [attr.data-fd-calendar-date-day]="cell.label"
                 [attr.data-fd-calendar-day]="cell.index"
