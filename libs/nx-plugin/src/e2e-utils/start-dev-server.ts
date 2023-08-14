@@ -5,6 +5,12 @@ const waitOn = require('wait-on');
 
 const parallel = Math.ceil(require('os').cpus().length * 0.75);
 
+/**
+ * Starts the dev server and waits for it to be available if devServerTarget is provided,
+ * otherwise returns the baseUrl after it becomes available.
+ * @param opts
+ * @param context
+ */
 export async function startDevServer(
     opts: TestAppOptions,
     context: ExecutorContext

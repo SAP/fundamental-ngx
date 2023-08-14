@@ -17,7 +17,6 @@ export default async function (options: TestAppOptions, context: ExecutorContext
         ...options // coming from cli
     };
     const e2eFiles = await specFiles(combinedOptions, context);
-    let success;
     if (e2eFiles.length === 0) {
         logger.info('No spec files found');
         return { success: true };
@@ -25,12 +24,10 @@ export default async function (options: TestAppOptions, context: ExecutorContext
 
     const { baseUrl } = await startDevServer(combinedOptions, context);
     try {
-        success = await runWdio(baseUrl, e2eFiles, context);
-        return { success };
+        return { success: await runWdio(baseUrl, e2eFiles, context) };
     } catch (e) {
         logger.error(e.message);
-        success = false;
-        return { success };
+        return { success: false };
     }
     // return { success: true };
 }
