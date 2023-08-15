@@ -26,7 +26,7 @@ import { MessagePopover, MessagePopoverState } from './models/message-popover.in
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MessageViewComponent } from './components/message-view/message-view.component';
-import { InitialFocusDirective, DeprecatedInitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { FormsModule } from '@angular/forms';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -53,7 +53,6 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
         NgFor,
         ObjectStatusModule,
         InitialFocusDirective,
-        DeprecatedInitialFocusDirective,
         MessageViewComponent,
         FdTranslatePipe
     ]
