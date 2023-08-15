@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.2...v0.45.1-rc.3) (2023-08-15)
+
+
+### Bug Fixes
+
+* **core:** dialog bar cozy issue ([#10264](https://github.com/SAP/fundamental-ngx/issues/10264)) ([6c6d1ab](https://github.com/SAP/fundamental-ngx/commit/6c6d1ab2b117612986a4ab8bdc587b3fd6e903dd))
+
+
+
+
+
 ## [0.45.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.1...v0.45.1-rc.2) (2023-08-13)
 
 **Note:** Version bump only for package @fundamental-ngx/core
