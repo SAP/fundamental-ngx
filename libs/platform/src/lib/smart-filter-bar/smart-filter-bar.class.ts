@@ -4,13 +4,9 @@ import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { CollectionFilterGroup } from '@fundamental-ngx/platform/table';
 import { SmartFilterBarManagedPreset } from './interfaces/smart-filter-bar-change';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
-import { SmartFilterBarStrategyLabels } from './interfaces/strategy-labels.type';
 
 @Directive()
 export abstract class SmartFilterBar implements PresetManagedComponent<SmartFilterBarManagedPreset> {
-    /** @hidden */
-    abstract defineStrategyLabels?: SmartFilterBarStrategyLabels;
-
     abstract search: SearchInput | undefined;
 
     /** @hidden */

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ListModule } from './list.module';
 import { ListMessageDirective } from './list-message.directive';
-import { MessageStates } from '@fundamental-ngx/core/form';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 @Component({
     template: ` <li #directiveElement fd-list-message [type]="type">List Item Test Text</li> `
@@ -10,7 +10,7 @@ import { MessageStates } from '@fundamental-ngx/core/form';
 class TestComponent {
     @ViewChild(ListMessageDirective, { static: true })
     directive: ListMessageDirective;
-    type: MessageStates;
+    type: FormStates;
 }
 
 describe('ListMessageDirective', () => {

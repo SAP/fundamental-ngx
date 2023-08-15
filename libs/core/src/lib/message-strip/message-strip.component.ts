@@ -66,20 +66,6 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** Aria label for the message-strip component element. */
     @Input() ariaLabel: Nullable<string>;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria label for the dismiss button.
-     */
-    @Input()
-    set dismissLabel(value: string) {
-        console.warn("dismissLabel is deprecated. Use i18n capabilities 'coreMessageStrip.dismissLabel' key instead.");
-        this._dismissLabel = value;
-    }
-
-    get dismissLabel(): string {
-        return this._dismissLabel;
-    }
-
     /** Width of the message-strip. */
     @Input() width: string;
 
@@ -92,9 +78,6 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** Event fired when the message-strip is dismissed. */
     @Output() // eslint-disable-next-line @angular-eslint/no-output-on-prefix
     onDismiss: EventEmitter<void> = new EventEmitter<void>();
-
-    /** @hidden */
-    private _dismissLabel: string;
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}

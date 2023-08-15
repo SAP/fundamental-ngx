@@ -13,4 +13,3 @@ export * from './calendar-directives';
 export * from './calendar.service';
 export * from './types';
 export * from './models/calendar-current';
-export * from './deprecated-calendar-content-density.directive';

@@ -217,8 +217,6 @@ export interface UploadCollectionCmp<T = any> {
     maxFileSize?: string;
     maxFilenameLength?: number;
     mimeTypes: string[];
-    noDataText: string;
-    noDataDescription: string;
     disabled: boolean;
     readonly: boolean;
     hierarchy: boolean;

@@ -47,7 +47,7 @@ export class VhdPo extends PlatformBaseComponentPo {
     dropdownOptions = 'ul li[fd-option]';
     xBtn = 'button[glyph="decline"]';
     conditionsButton = 'fd-popover .fd-select__control .fd-button';
-    cancelButton = '.fd-dialog__decisive-button';
+    cancelButton = '[data-dismiss-dialog]';
     dialog = '.fd-dialog ';
     dialogButton = this.dialog + '.fd-button';
     dialogInput = '.fd-dialog .fd-input';

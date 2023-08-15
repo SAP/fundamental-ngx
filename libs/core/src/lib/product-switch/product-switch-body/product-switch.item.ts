@@ -5,11 +5,6 @@ export interface ProductSwitchItem {
     /** Subtitle of product */
     subtitle?: string;
 
-    /** @deprecated
-     * Use icon property instead
-     */
-    image?: string;
-
     /** Callback function that will be called on selecting this product from dropdown */
     callback?: (event: MouseEvent) => void;
 

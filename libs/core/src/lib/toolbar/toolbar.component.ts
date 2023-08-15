@@ -12,7 +12,6 @@ import {
     forwardRef,
     Inject,
     Input,
-    NgZone,
     Optional,
     QueryList,
     SkipSelf,
@@ -26,8 +25,7 @@ import {
     CssClassBuilder,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
-    ResizeObserverService,
-    warnOnce
+    ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
@@ -97,17 +95,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     fdType: ToolbarType = 'solid';
 
-    /** @deprecated */
-    @Input()
-    set hasTitle(value: boolean) {
-        warnOnce('Property hasTitle is deprecated. ');
-        this._hasTitle = value;
-    }
-
-    get hasTitle(): boolean {
-        return this._hasTitle;
-    }
-
     /** The title for the toolbar. */
     @Input()
     title: string;
@@ -161,9 +148,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     overflownItems: ToolbarItem[] = [];
 
     /** @hidden */
-    private _hasTitle = false;
-
-    /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
 
     /** @hidden */
@@ -178,9 +162,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     private _shouldOverflow = false;
 
     /** @hidden */
-    private _initialised = false;
-
-    /** @hidden */
     private shouldOverflow$ = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
@@ -189,7 +170,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroyRef: DestroyRef,
         private resizeObserverService: ResizeObserverService,
-        private ngZone: NgZone,
         @Optional() @SkipSelf() @Inject(DYNAMIC_PAGE_HEADER_TOKEN) private _dynamicPageHeader?: DynamicPageHeader
     ) {
         _contentDensityObserver.subscribe();
@@ -202,7 +182,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
-            `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
+            `${this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
             `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
         ];
@@ -275,7 +255,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             this.overflownItems = items;
             this._cd.detectChanges();
         });
-        this._initialised = true;
         this.buildComponentCssClass();
     }
 

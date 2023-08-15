@@ -17,11 +17,11 @@ import { ListBylineButtonExampleComponent } from './examples/list-byline-button-
 import { ListBylineInteractiveExampleComponent } from './examples/list-byline-interactive-example/list-byline-interactive-example.component';
 import { ListBylineWrapExampleComponent } from './examples/list-byline-wrap-example/list-byline-wrap-example.component';
 import { ListBylineLoadingExampleComponent } from './examples/list-byline-loading-example/list-byline-loading-examples.component';
-import { DeprecatedListContentDensityDirective, ListModule } from '@fundamental-ngx/core/list';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { RadioModule } from '@fundamental-ngx/core/radio';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
+import { RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ListBylineUnreadExampleComponent } from './examples/list-byline-unread-example/list-byline-unread-example.component';
 
@@ -62,9 +62,6 @@ const routes: Routes = [
         ListBylineLoadingExampleComponent,
         ListBylineUnreadExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedListContentDensityDirective),
-        currentComponentProvider('list-byline')
-    ]
+    providers: [currentComponentProvider('list-byline')]
 })
 export class ListDocsModule {}

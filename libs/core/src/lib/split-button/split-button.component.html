@@ -25,10 +25,8 @@
         [glyph]="glyph"
         [fdType]="fdType"
         [disabled]="disabled"
-        [ariaLabel]="expandButtonAriaLabel || ('coreSplitButton.expandButtonAriaLabel' | fdTranslate)"
-        [attr.title]="
-            expandButtonTitle || expandButtonAriaLabel || ('coreSplitButton.expandButtonAriaLabel' | fdTranslate)
-        "
+        [ariaLabel]="'coreSplitButton.expandButtonAriaLabel' | fdTranslate"
+        [attr.title]="expandButtonTitle || 'coreSplitButton.expandButtonAriaLabel' | fdTranslate"
         [class.is-active]="menu.isOpen"
     ></button>
     <ng-content select="fd-menu"></ng-content>

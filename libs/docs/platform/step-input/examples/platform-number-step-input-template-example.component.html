@@ -5,10 +5,9 @@
                 id="quantity-template-driven"
                 label="Quantity"
                 placeholder="Things quantity"
-                hint="This is tooltip to help"
+                [hint]="{ content: 'This is tooltip to help', placement: 'left' }"
                 zone="zLeft"
                 [rank]="10"
-                hintPlacement="left"
                 [validators]="stepInputQtyValidators"
             >
                 <fdp-number-step-input

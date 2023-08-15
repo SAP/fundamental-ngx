@@ -28,7 +28,6 @@ import { I18nModule } from '@fundamental-ngx/i18n';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
-import { DeprecatedTabsCompactDirective } from './deprecated-tabs-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
@@ -49,8 +48,7 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective,
-        DeprecatedTabsCompactDirective
+        TabSeparatorDirective
     ],
     imports: [
         CommonModule,
@@ -81,7 +79,6 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
         TabCounterHeaderDirective,
         TabProcessIconDirective,
         TabSeparatorDirective,
-        DeprecatedTabsCompactDirective,
         ContentDensityModule
     ]
 })

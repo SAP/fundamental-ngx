@@ -10,7 +10,6 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
 import { ActionListItemModule } from './action-list-item/action-list-item.module';
@@ -43,7 +42,6 @@ import { LoadMoreContentDirective } from './load-more-content.directive';
         PipeModule,
         BusyIndicatorModule,
         InfiniteScrollModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule,
         StandardListItemModule,
         ObjectListItemModule,
@@ -57,7 +55,6 @@ import { LoadMoreContentDirective } from './load-more-content.directive';
         ListFooterComponent,
         ListGroupHeaderComponent,
         ListItemDef,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule,
         StandardListItemModule,
         ObjectListItemModule,

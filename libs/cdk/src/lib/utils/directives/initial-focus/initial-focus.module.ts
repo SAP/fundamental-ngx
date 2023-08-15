@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { InitialFocusDirective, DeprecatedInitialFocusDirective } from './initial-focus.directive';
+import { InitialFocusDirective } from './initial-focus.directive';
 
 @NgModule({
-    imports: [InitialFocusDirective, DeprecatedInitialFocusDirective],
-    exports: [InitialFocusDirective, DeprecatedInitialFocusDirective]
+    imports: [InitialFocusDirective],
+    exports: [InitialFocusDirective]
 })
 export class InitialFocusModule {}

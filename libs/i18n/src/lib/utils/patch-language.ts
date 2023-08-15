@@ -1,4 +1,4 @@
-import { Provider, SkipSelf } from '@angular/core';
+import { FactoryProvider, SkipSelf } from '@angular/core';
 import { cloneDeep, merge } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { FD_LANGUAGE } from './tokens';
 
 /**
  * DI utility function, that allows to override `FD_LANGUAGE` injection token with part of the language object, that is used globally
- * @param languagePatch part of the language object to be overriden
+ * @param languagePatch part of the language object to be overriden, or a function that returns such object and receives existing language as a parameter
  *
  * @example
  * ```typescript
@@ -36,10 +36,17 @@ import { FD_LANGUAGE } from './tokens';
  * export class SomeComponent {}
  * ```
  */
-export function patchLanguage(languagePatch: FdLanguagePatch): Provider {
+export function patchLanguage(
+    languagePatch: FdLanguagePatch | ((lang: FdLanguage) => FdLanguagePatch)
+): FactoryProvider {
     return {
         provide: FD_LANGUAGE,
-        useFactory: (lang$: Observable<FdLanguage>) => lang$.pipe(map((lang) => merge(cloneDeep(lang), languagePatch))),
+        useFactory: (lang$: Observable<FdLanguage>) =>
+            lang$.pipe(
+                map((lang) =>
+                    merge(cloneDeep(lang), typeof languagePatch === 'function' ? languagePatch(lang) : languagePatch)
+                )
+            ),
         deps: [[new SkipSelf(), FD_LANGUAGE]]
     };
 }

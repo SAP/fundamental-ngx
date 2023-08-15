@@ -65,7 +65,7 @@ export class TablePo extends PlatformBaseComponentPo {
     dialogItem = '.fd-list__item.ng-star-inserted';
     dialogItemText = '.fd-select-item--active  .fd-list__title';
     dialogMoveToBottom = '[title="Move to Bottom"]';
-    footerButtonOk = 'fd-dialog-footer-button button';
+    footerButtonOk = 'fd-button-bar button';
     columnHeader = '[role="columnheader"] fdp-table-header-cell-content > div';
     popoverDropdownButton = 'fd-dialog-body fd-popover-control .fd-button';
     buttonAdd = '[title="Add new"]';

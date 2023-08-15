@@ -1,8 +1,0 @@
-{
-    "name": "docs-core-alert",
-    "sourceRoot": "libs/docs/core/alert",
-    "projectType": "library",
-    "prefix": "fundamental-ngx",
-    "targets": {},
-    "tags": ["type:lib", "scope:docs"]
-}

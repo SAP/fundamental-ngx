@@ -20,11 +20,6 @@ import {
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
 import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
 import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
-import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItem,
     FocusableListPosition,
@@ -59,19 +54,6 @@ interface FocusableListConfig {
     direction?: 'vertical' | 'horizontal';
     contentDirection?: 'ltr' | 'rtl' | null;
 }
-
-@Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fnFocusableList]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkFocusableList]', '[fnFocusableList]')
-        }
-    ]
-})
-export class DeprecatedFocusableListDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkFocusableList]',

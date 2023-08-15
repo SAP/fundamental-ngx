@@ -26,10 +26,6 @@
                                 "message": "Use imports from nested packages instead"
                             },
                             {
-                                "name": "@fundamental-ngx/fn",
-                                "message": "Use imports from nested packages instead"
-                            },
-                            {
                                 "name": "@fundamental-ngx/cdk",
                                 "message": "Use imports from nested packages instead"
                             }

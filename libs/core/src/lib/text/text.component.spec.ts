@@ -3,6 +3,10 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { TextComponent } from './text.component';
 import { TextModule } from './text.module';
 import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
+import { patchLanguage } from '@fundamental-ngx/i18n';
+
+const moreLabel = 'label more'.toLowerCase();
+const lessLabel = 'label less'.toLowerCase();
 
 describe('TextComponent', () => {
     let component: TextComponent;
@@ -14,7 +18,10 @@ describe('TextComponent', () => {
             schemas: [NO_ERRORS_SCHEMA]
         })
             .overrideComponent(TextComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+                set: {
+                    changeDetection: ChangeDetectionStrategy.Default,
+                    providers: [patchLanguage({ coreText: { moreLabel, lessLabel } })]
+                }
             })
             .compileComponents();
     });
@@ -70,27 +77,22 @@ describe('TextComponent', () => {
     });
 
     it(`should set labels for more and less buttons`, fakeAsync(() => {
-        const moreLabel = 'label more'.toLowerCase();
-        const lessLabel = 'label less'.toLowerCase();
-
         component.maxLines = 1;
         component.expandable = true;
         component._hasMore = true;
 
-        component.moreLabel = moreLabel;
-        component.lessLabel = lessLabel;
         fixture.detectChanges();
         tick();
 
         const button = fixture.nativeElement.querySelector('.fd-text__link--more .fd-link__content');
 
-        expect(button.innerHTML.toLowerCase()).toEqual(moreLabel);
+        expect(button.innerHTML.toLowerCase().trim()).toEqual(moreLabel);
 
         component.isCollapsed = false;
         fixture.detectChanges();
         tick();
 
-        expect(button.innerHTML.toLowerCase()).toEqual(lessLabel);
+        expect(button.innerHTML.toLowerCase().trim()).toEqual(lessLabel);
     }));
 
     it('should have ability to toggle text view', () => {

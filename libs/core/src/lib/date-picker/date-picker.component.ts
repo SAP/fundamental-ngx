@@ -34,7 +34,7 @@ import { FormItemControl, PopoverFormMessageService, registerFormItemControl } f
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { createMissingDateImplementationError } from './errors';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let datePickerCounter = 0;
@@ -138,118 +138,6 @@ export class DatePickerComponent<D>
     /** Whether to validate the date picker input. */
     @Input()
     useValidation = true;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label for the datepicker input.
-     */
-    @Input()
-    set dateInputLabel(value: string) {
-        warnOnce(
-            "Property dateInputLabel is deprecated. Use i18n capabilities 'coreDatePicker.dateInputLabel' key instead."
-        );
-        this._dateInputLabel = value;
-    }
-
-    get dateInputLabel(): string {
-        return this._dateInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label for the datepicker input.
-     */
-    @Input()
-    set dateRangeInputLabel(value: string) {
-        warnOnce(
-            "Property dateRangeInputLabel is deprecated. Use i18n capabilities 'coreDatePicker.dateRangeInputLabel' key instead."
-        );
-        this._dateRangeInputLabel = value;
-    }
-
-    get dateRangeInputLabel(): string {
-        return this._dateRangeInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label for the button to show/hide the calendar.
-     */
-    @Input()
-    set displayCalendarToggleLabel(value: string) {
-        warnOnce(
-            "Property displayCalendarToggleLabel is deprecated. Use i18n capabilities 'coreDatePicker.displayCalendarToggleLabel' key instead."
-        );
-        this._displayCalendarToggleLabel = value;
-    }
-
-    get displayCalendarToggleLabel(): string {
-        return this._displayCalendarToggleLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "success" aria message.
-     */
-    @Input()
-    set valueStateSuccessMessage(value: string) {
-        warnOnce(
-            "Property valueStateSuccessMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateSuccessMessage' key instead."
-        );
-        this._valueStateSuccessMessage = value;
-    }
-
-    get valueStateSuccessMessage(): string {
-        return this._valueStateSuccessMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "information" aria message.
-     */
-    @Input()
-    set valueStateInformationMessage(value: string) {
-        warnOnce(
-            "Property valueStateInformationMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateInformationMessage' key instead."
-        );
-        this._valueStateInformationMessage = value;
-    }
-
-    get valueStateInformationMessage(): string {
-        return this._valueStateInformationMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "warning" aria message.
-     */
-    @Input()
-    set valueStateWarningMessage(value: string) {
-        warnOnce(
-            "Property valueStateWarningMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateWarningMessage' key instead."
-        );
-        this._valueStateWarningMessage = value;
-    }
-
-    get valueStateWarningMessage(): string {
-        return this._valueStateWarningMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "error" aria message.
-     */
-    @Input()
-    set valueStateErrorMessage(value: string) {
-        warnOnce(
-            "Property valueStateErrorMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateErrorMessage' key instead."
-        );
-        this._valueStateErrorMessage = value;
-    }
-
-    get valueStateErrorMessage(): string {
-        return this._valueStateErrorMessage;
-    }
 
     /** Whether a null input is considered valid. */
     @Input()
@@ -449,27 +337,6 @@ export class DatePickerComponent<D>
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private _dateInputLabel: string;
-
-    /** @hidden */
-    private _dateRangeInputLabel: string;
-
-    /** @hidden */
-    private _displayCalendarToggleLabel: string;
-
-    /** @hidden */
-    private _valueStateSuccessMessage: string;
-
-    /** @hidden */
-    private _valueStateInformationMessage: string;
-
-    /** @hidden */
-    private _valueStateWarningMessage: string;
-
-    /** @hidden */
-    private _valueStateErrorMessage: string;
-
-    /** @hidden */
     private _state: FormStates = 'default';
 
     /**
@@ -502,15 +369,6 @@ export class DatePickerComponent<D>
     /** @hidden */
     get _rangeDelimiter(): string {
         return this._dateTimeFormats.rangeDelimiter;
-    }
-
-    /**
-     * Date input aria label based on type
-     * @hidden
-     */
-    get _dateInputArialLabel(): string {
-        // return either input value or a key for "fdTranslate" pipe
-        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
     }
 
     /**

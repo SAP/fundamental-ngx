@@ -1,10 +1,4 @@
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
-import {
-    DndItemDirective,
-    DndKeyboardGroupDirective,
-    DndKeyboardItemDirective,
-    DndListDirective
-} from "@fundamental-ngx/cdk";
 
 /**
  * Files to display in the API tab of each component.
@@ -17,13 +11,13 @@ export const API_FILES = {
     forms: ['CvaDirective'],
     dataSource: ['DataSourceDirective'],
     utils: ['UtilsComponent'],
+    selectableList: ['SelectableListDirective', 'SelectableItemDirective', 'SelectionService'],
     focusableItem: ['FocusableItemComponent'],
     tabbable: [''],
-    focusableGrid: ['FocusableGridDirective', 'FocusableItemDirective'],
+    focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective'],
     disabled: ['DisabledBehaviorDirective'],
     clicked: ['ClickedDirective'],
     focusableList: ['FocusableListDirective', 'FocusableItemDirective'],
-    dnd: ['DndItemDirective', 'DndListDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective'],
-    initialFocus: ['InitialFocusDirective'],
-    selectableList: ['SelectableListDirective']
+    dnd: ['DndListDirective', 'DndItemDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective'],
+    initialFocus: ['InitialFocusDirective']
 };

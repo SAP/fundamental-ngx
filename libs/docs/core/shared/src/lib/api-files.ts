@@ -160,7 +160,12 @@ export const API_FILES = {
         'MenuTitleDirective',
         'MenuKeyboardService'
     ],
-    messageStrip: ['MessageStripComponent'],
+    messageStrip: [
+        'MessageStripComponent',
+        'AutoDismissMessageStripDirective',
+        'MessageStripAlertService',
+        'MessageStripAlertRef'
+    ],
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
     microProcessFlow: ['MicroProcessFlowComponent', 'MicroProcessFlowItemComponent', 'MicroProcessFlowIconComponent'],
     momentDatetimeAdapter: ['MomentDatetimeAdapter'],
@@ -186,13 +191,11 @@ export const API_FILES = {
         'MessageBoxService',
         'MessageBoxComponent',
         'MessageBoxBodyComponent',
-        'MessageBoxDecisiveButton',
         'MessageBoxHeaderComponent',
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
         'MessageBoxSemanticIconComponent',
-        'MessageBoxContainerComponent',
-        'MessageBoxFooterButtonComponent'
+        'MessageBoxContainerComponent'
     ],
     notification: [
         'NotificationTitleDirective',

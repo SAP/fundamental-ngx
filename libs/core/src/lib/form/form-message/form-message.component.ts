@@ -11,10 +11,6 @@ import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
-
-/** @deprecated use FormStates instead */
-export type MessageStates = FormStates;
-
 /**
  * Form message. Intended to be displayed with a form control for validation purposes.
  */

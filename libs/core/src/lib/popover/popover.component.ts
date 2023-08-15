@@ -37,7 +37,6 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -135,21 +134,6 @@ export class PopoverComponent
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
 
-    /** @deprecated
-     * Left for backward compatibility
-     */
-    set directiveRef(value: any) {
-        warnOnce('Property directiveRef is deprecated. ');
-        this._directiveRef = value;
-    }
-
-    get directiveRef(): any {
-        return this._directiveRef;
-    }
-
-    /** @hidden */
-    private _directiveRef: any;
-
     /** @hidden */
     private _trigger: ElementRef;
 
@@ -245,14 +229,6 @@ export class PopoverComponent
      */
     applyNewPosition(positions: ConnectedPosition[]): void {
         this._popoverService.applyNewPosition(positions);
-    }
-
-    /** @deprecated
-     * Left for backward compatibility
-     */
-    updatePopover(): void {
-        console.warn('updatePopover is Deprecated, use refreshPosition instead');
-        this.refreshPosition();
     }
 
     /** Method called to refresh position of opened popover */

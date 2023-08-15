@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { FocusableItemDirective, DeprecatedFocusableItemDirective } from './focusable-item.directive';
+import { FocusableItemDirective } from './focusable-item.directive';
 
 @NgModule({
-    imports: [FocusableItemDirective, DeprecatedFocusableItemDirective],
-    exports: [FocusableItemDirective, DeprecatedFocusableItemDirective]
+    imports: [FocusableItemDirective],
+    exports: [FocusableItemDirective]
 })
 export class FocusableItemModule {}

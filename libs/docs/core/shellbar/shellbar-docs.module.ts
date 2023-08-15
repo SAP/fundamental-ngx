@@ -7,7 +7,7 @@ import { ShellbarDocsComponent } from './shellbar-docs.component';
 import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
 import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
-import { DeprecatedShellbarCompactDirective, ShellbarModule } from '@fundamental-ngx/core/shellbar';
+import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
@@ -15,7 +15,6 @@ import { TileModule } from '@fundamental-ngx/core/tile';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
-import { InitialFocusModule, moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
 import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
@@ -55,6 +54,6 @@ const routes: Routes = [
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent
     ],
-    providers: [moduleDeprecationsProvider(DeprecatedShellbarCompactDirective), currentComponentProvider('shellbar')]
+    providers: [currentComponentProvider('shellbar')]
 })
 export class ShellbarDocsModule {}

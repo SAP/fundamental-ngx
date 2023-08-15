@@ -6,4 +6,3 @@ export * from './select-mobile/select-mobile.component';
 export * from './select.interface';
 export * from './options.interface';
 export * from './select-key-manager.service';
-export * from './deprecated-select-compact.directive';
