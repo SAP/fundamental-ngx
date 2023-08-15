@@ -1,29 +1,33 @@
+import { DialogModule } from '@angular/cdk/dialog';
+import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     ContentChildren,
     inject,
     Input,
     QueryList,
-    ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { AVATAR_GROUP_HOST_CONFIG } from './tokens';
-import { AvatarGroupHostConfig } from './types';
-import { AvatarGroupHostComponent } from './components/avatar-group-host/avatar-group-host.component';
-import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 import {
     DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { map, Observable, of } from 'rxjs';
-import { DialogModule } from '@angular/cdk/dialog';
-import { DomPortal } from '@angular/cdk/portal';
-import { AvatarGroupItemPortalDirective } from './directives/avatar-group-item-portal.directive';
+import { AvatarGroupHostComponent } from './components/avatar-group-host.component';
+import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
+import { DefaultAvatarGroupOverflowBodyComponent } from './components/default-avatar-group-overflow-body/default-avatar-group-overflow-body.component';
+import { AvatarGroupItemRendererDirective } from './directives/avatar-group-item-renderer.directive';
+import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
+import { AvatarGroupOverflowBodyDirective } from './directives/avatar-group-overflow-body.directive';
+import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
+import { AVATAR_GROUP_HOST_CONFIG } from './tokens';
+import { AvatarGroupHostConfig } from './types';
 
 @Component({
     selector: 'fd-avatar-group',
@@ -49,7 +53,9 @@ import { AvatarGroupItemPortalDirective } from './directives/avatar-group-item-p
         FocusableListDirective,
         AsyncPipe,
         DialogModule,
-        AvatarGroupItemPortalDirective
+        AvatarGroupItemRendererDirective,
+        AvatarGroupOverflowButtonComponent,
+        DefaultAvatarGroupOverflowBodyComponent
     ]
 })
 export class AvatarGroupComponent implements AvatarGroupHostConfig {
@@ -73,38 +79,38 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /**
      * The spacing between the items depends on the size of the avatars in the group.
-     *
+     * The size is also used for the default overflow button.
      * `xs`, `s`, `m`, `l`, `xl`
      */
     @Input()
     size: AvatarGroupHostConfig['size'] = 'l';
+
+    /**
+     * The title which is displayed when user opens the overflow popover.
+     * This takes effect only when default overflow popover body is used,
+     * otherwise the title should be set on the custom overflow popover body component.
+     */
+    @Input()
+    overflowPopoverTitle: string;
+
+    /** @hidden */
+    @ViewChildren(AvatarGroupItemRendererDirective)
+    avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
     @ContentChildren(AvatarGroupItemDirective)
     avatars: QueryList<AvatarGroupItemDirective>;
 
     /** @hidden */
-    @ViewChild(FocusableListDirective)
-    focusableList: FocusableListDirective;
+    @ContentChild(AvatarGroupOverflowButtonDirective)
+    overflowButton: AvatarGroupOverflowButtonDirective;
+
+    /** @hidden */
+    @ContentChild(AvatarGroupOverflowBodyDirective)
+    avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
     contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
         map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
     );
-
-    /** @hidden */
-    protected _domPortalsCache = new WeakMap<AvatarGroupItemDirective, DomPortal>();
-
-    /** @hidden */
-    domPortal(avatarGroupItem: AvatarGroupItemDirective): DomPortal<HTMLElement> {
-        const cachedValue = this._domPortalsCache.get(avatarGroupItem);
-        return cachedValue || this._createDomPortal(avatarGroupItem);
-    }
-
-    /** @hidden */
-    private _createDomPortal(avatarGroupItem: AvatarGroupItemDirective): DomPortal<HTMLElement> {
-        const portal = new DomPortal(avatarGroupItem.elementRef.nativeElement);
-        this._domPortalsCache.set(avatarGroupItem, portal);
-        return portal;
-    }
 }

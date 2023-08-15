@@ -41,10 +41,4 @@ fd-avatar-group {
             display: inline-block;
         }
     }
-
-    > .fd-avatar {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-    }
 }

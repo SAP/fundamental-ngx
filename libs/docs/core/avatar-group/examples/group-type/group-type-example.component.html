@@ -1,11 +1,11 @@
-<fd-avatar-group [size]="size" overflowPopoverTitle="Team members">
+<fd-avatar-group [size]="'m'" type="group">
     <ng-container *ngFor="let person of people">
         <ng-container *ngIf="!person.imageUrl && !person.glyph">
             <fd-avatar
                 *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
                 [circle]="true"
                 [border]="true"
-                [size]="size"
+                [size]="'m'"
                 role="img"
                 [title]="person.firstName + ' ' + person.lastName"
                 [label]="person.firstName + ' ' + person.lastName"
@@ -18,7 +18,7 @@
                 *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
                 [circle]="true"
                 [border]="true"
-                [size]="size"
+                [size]="'m'"
                 [image]="person.imageUrl"
                 role="img"
                 [title]="person.firstName + ' ' + person.lastName"
@@ -31,19 +31,17 @@
                 *fdAvatarGroupItem="details; title: person.firstName + ' ' + person.lastName"
                 [circle]="true"
                 [border]="true"
-                [size]="size"
+                [size]="'m'"
                 [glyph]="person.glyph"
                 role="img"
                 [title]="person.firstName + ' ' + person.lastName"
                 [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
             ></fd-avatar>
         </ng-container>
+
         <ng-template #details>
             <fd-quick-view [id]="person.id">
-                <fd-quick-view-title align="left" [id]="person.id + '-popover-header'">
-                    Business card
-                </fd-quick-view-title>
-                <fd-quick-view-subheader [id]="person.id + '-popover-subheader'">
+                <fd-quick-view-subheader>
                     <fd-avatar
                         *ngIf="!person.imageUrl && !person.glyph"
                         [circle]="true"
@@ -53,25 +51,23 @@
                         [title]="person.firstName + ' ' + person.lastName"
                         [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                     ></fd-avatar>
-
                     <fd-avatar
                         *ngIf="person.imageUrl"
                         [circle]="true"
                         size="s"
                         role="img"
-                        [image]="person.imageUrl"
                         [title]="person.firstName + ' ' + person.lastName"
                         [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                        [image]="person.imageUrl"
                     ></fd-avatar>
-
                     <fd-avatar
                         *ngIf="person.glyph"
                         [circle]="true"
                         size="s"
                         role="img"
-                        [glyph]="person.glyph"
                         [title]="person.firstName + ' ' + person.lastName"
                         [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+                        [glyph]="person.glyph"
                     ></fd-avatar>
                     <fd-quick-view-subheader-title
                         >{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title
@@ -79,10 +75,8 @@
                     <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
                 </fd-quick-view-subheader>
 
-                <fd-quick-view-group [attr.aria-labelledby]="person.id + '-group-title'">
-                    <fd-quick-view-group-title [id]="person.id + '-group-title'"
-                        >Contact Details
-                    </fd-quick-view-group-title>
+                <fd-quick-view-group>
+                    <fd-quick-view-group-title>Contact Details</fd-quick-view-group-title>
                     <fd-quick-view-group-item>
                         <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                         <fd-quick-view-group-item-content>

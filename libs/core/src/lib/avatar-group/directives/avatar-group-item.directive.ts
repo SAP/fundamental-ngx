@@ -1,23 +1,46 @@
-import { Directive, Input, TemplateRef } from '@angular/core';
-import { DestroyedService, FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { Directive, inject, Input, TemplateRef } from '@angular/core';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
+/**
+ * Avatar group item directive, used to provide a template for the avatar group item.
+ */
 @Directive({
-    selector: 'fd-avatar[fdAvatarGroupItem]',
+    selector: '[fdAvatarGroupItem]',
     standalone: true,
-    providers: [
-        {
-            provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
-            useExisting: FocusableItemDirective
-        },
-        DestroyedService
-    ]
+    providers: [DestroyedService]
 })
-export class AvatarGroupItemDirective extends FocusableItemDirective {
+export class AvatarGroupItemDirective {
     /** @hidden */
-    @Input()
+    templateRef: TemplateRef<void> = inject(TemplateRef);
+
+    /**
+     * Text, which will be displayed when in overflow popover and activated
+     * */
+    @Input('fdAvatarGroupItemTitle')
+    title: string;
+
+    /**
+     * If set to true, item will never be hidden in overflow popover
+     * */
+    @Input('fdAvatarGroupItemForceVisibility')
     forceVisibility = false;
 
+    /**
+     * Template for the details of the avatar group item.
+     * This template it used to render additional information in the overflow popover.
+     * */
+    @Input('fdAvatarGroupItem')
+    set details(detailsTemplate: TemplateRef<void> | string) {
+        if (typeof detailsTemplate === 'string') {
+            return;
+        }
+        this._details = detailsTemplate;
+    }
+
+    get details(): TemplateRef<void> {
+        return this._details;
+    }
+
     /** @hidden */
-    @Input()
-    details?: TemplateRef<any>;
+    private _details: TemplateRef<void>;
 }

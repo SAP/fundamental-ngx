@@ -5,6 +5,7 @@
         {
             "files": ["*.ts"],
             "rules": {
+                "@angular-eslint/no-host-metadata-property": "off",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {
