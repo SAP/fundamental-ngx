@@ -1,1 +1,91 @@
-<fd-avatar-group></fd-avatar-group>
+<fd-avatar-group #avatarGroup_IndividualType [size]="size">
+    <ng-container *ngFor="let person of people">
+        <fd-avatar
+            fdAvatarGroupItem
+            [details]="details"
+            *ngIf="!person.imageUrl && !person.glyph"
+            [circle]="true"
+            [border]="true"
+            [size]="size"
+            role="img"
+            [title]="person.firstName + ' ' + person.lastName"
+            [label]="person.firstName + ' ' + person.lastName"
+            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+        ></fd-avatar>
+
+        <fd-avatar
+            fdAvatarGroupItem
+            [details]="details"
+            *ngIf="person.imageUrl"
+            [circle]="true"
+            [border]="true"
+            [size]="size"
+            [image]="person.imageUrl"
+            role="img"
+            [title]="person.firstName + ' ' + person.lastName"
+            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+        ></fd-avatar>
+
+        <fd-avatar
+            fdAvatarGroupItem
+            [details]="details"
+            *ngIf="person.glyph"
+            [circle]="true"
+            [border]="true"
+            [size]="size"
+            [glyph]="person.glyph"
+            role="img"
+            [title]="person.firstName + ' ' + person.lastName"
+            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+        ></fd-avatar>
+        <ng-template #details>
+            <div style="width: 400px; height: 500px">hello!</div>
+        </ng-template>
+    </ng-container>
+</fd-avatar-group>
+
+<fd-avatar-group #avatarGroup_GroupType [size]="size" type="group">
+    <ng-container *ngFor="let person of people">
+        <fd-avatar
+            fdAvatarGroupItem
+            [details]="details"
+            *ngIf="!person.imageUrl && !person.glyph"
+            [circle]="true"
+            [border]="true"
+            [size]="size"
+            role="img"
+            [title]="person.firstName + ' ' + person.lastName"
+            [label]="person.firstName + ' ' + person.lastName"
+            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+        ></fd-avatar>
+
+        <fd-avatar
+            fdAvatarGroupItem
+            [details]="details"
+            *ngIf="person.imageUrl"
+            [circle]="true"
+            [border]="true"
+            [size]="size"
+            [image]="person.imageUrl"
+            role="img"
+            [title]="person.firstName + ' ' + person.lastName"
+            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+        ></fd-avatar>
+
+        <fd-avatar
+            fdAvatarGroupItem
+            [details]="details"
+            *ngIf="person.glyph"
+            [circle]="true"
+            [border]="true"
+            [size]="size"
+            [glyph]="person.glyph"
+            role="img"
+            [title]="person.firstName + ' ' + person.lastName"
+            [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
+        ></fd-avatar>
+        <ng-template #details>
+            <div style="width: 400px; height: 500px">hello!</div>
+        </ng-template>
+    </ng-container>
+</fd-avatar-group>

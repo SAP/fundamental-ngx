@@ -1,0 +1,50 @@
+@import '@fundamental-styles/common-css/dist/sass/common-mixins';
+@import 'fundamental-styles/dist/avatar-group';
+
+@mixin fd-avatar-element() {
+    > .fd-popover__control > fd-popover-control > .fd-avatar {
+        @content;
+    }
+}
+
+fd-avatar-group {
+    display: block;
+
+    .fd-avatar-group.fd-avatar-group--individual-type {
+        gap: initial;
+
+        > fd-popover {
+            > .fd-popover__control > fd-popover-control {
+                display: block;
+                height: 100%;
+            }
+            @include fd-avatar-element() {
+                @include sap-set-margin-begin(var(--fdAvatarGroupItemsGap));
+            }
+        }
+
+        > fd-popover:first-child {
+            @include fd-avatar-element() {
+                @include sap-set-margin-x-equal(0);
+            }
+        }
+    }
+
+    > .fd-popover-custom {
+        width: 100%;
+
+        .fd-popover__control {
+            display: inline-block;
+        }
+
+        .fd-avatar-group {
+            display: inline-block;
+        }
+    }
+
+    > .fd-avatar {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+}

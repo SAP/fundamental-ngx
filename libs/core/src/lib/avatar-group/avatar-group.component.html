@@ -1,1 +1,60 @@
-<p>avatar-group works!</p>
+<ng-content></ng-content>
+<ng-container *ngIf="type === 'individual'; else groupType">
+    <fd-avatar-group-host
+        [type]="type"
+        [size]="size"
+        [orientation]="orientation"
+        fdkFocusableList
+        [contentDirection]="contentDirection$ | async"
+        [wrap]="true"
+        [navigationDirection]="orientation"
+        [items]="avatars"
+    >
+        <ng-container *ngFor="let item of avatars">
+            <fd-popover
+                additionalBodyClass="fd-avatar-group__overflow-body"
+                [noArrow]="false"
+                [focusAutoCapture]="true"
+            >
+                <fd-popover-control tabindex="-1">
+                    <ng-template
+                        cdkPortalOutlet
+                        fdAvatarGroupItemPortal
+                        [forceVisibility]="item.forceVisibility"
+                        [domPortal]="domPortal(item)"
+                        [avatarGroupItem]="item"
+                    >
+                    </ng-template>
+                </fd-popover-control>
+                <fd-popover-body *ngIf="item.details">
+                    <ng-template [ngTemplateOutlet]="item.details"></ng-template>
+                </fd-popover-body>
+            </fd-popover>
+        </ng-container>
+    </fd-avatar-group-host>
+</ng-container>
+<ng-template #groupType>
+    <fd-popover additionalBodyClass="fd-avatar-group__overflow-body" [noArrow]="false" #popoverComponent>
+        <fd-popover-control>
+            <fd-avatar-group-host
+                [type]="type"
+                [size]="size"
+                [orientation]="orientation"
+                [resizeTarget]="popoverComponent.elementRef.nativeElement"
+                [fdkFocusableItem]="true"
+            >
+                <ng-container *ngFor="let item of avatars">
+                    <ng-template
+                        cdkPortalOutlet
+                        fdAvatarGroupItemPortal
+                        [forceVisibility]="item.forceVisibility"
+                        [domPortal]="domPortal(item)"
+                        [avatarGroupItem]="item"
+                    >
+                    </ng-template>
+                </ng-container>
+            </fd-avatar-group-host>
+        </fd-popover-control>
+        <fd-popover-body> Hello world </fd-popover-body>
+    </fd-popover>
+</ng-template>
