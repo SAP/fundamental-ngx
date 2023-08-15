@@ -6,8 +6,7 @@ import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { PopoverMobileComponent } from './popover-mobile.component';
 
 @NgModule({
-    declarations: [PopoverMobileComponent],
-    imports: [CommonModule, DialogModule, ButtonModule],
+    imports: [CommonModule, DialogModule, ButtonModule, PopoverMobileComponent],
     exports: [PopoverMobileComponent],
     providers: [DynamicComponentService]
 })
