@@ -1,4 +1,4 @@
-.fd-overflow-layout.fd-avatar-group {
+.fd-overflow-layout.fd-avatar-group-legacy {
     justify-content: start;
     .fd-overflow-layout__item {
         position: relative;
@@ -27,7 +27,7 @@
     }
 }
 
-.fd-overflow-layout__popover-container--avatar-group {
+.fd-overflow-layout__popover-container--avatar-group-legacy {
     max-height: 18.5rem;
     .fd-popover__body-content {
         padding: 0.75rem;
