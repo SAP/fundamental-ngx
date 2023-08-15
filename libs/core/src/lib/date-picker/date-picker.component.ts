@@ -308,14 +308,18 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     @ViewChild(CalendarComponent, { static: false })
-    set _calendarComponent(calendar: CalendarComponent<D>) {
+    private set _calendarCmp(calendar: CalendarComponent<D>) {
         if (!this.isOpen) {
             return;
         }
 
         calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
         calendar?.initialFocus();
+        this._calendarComponent = calendar;
     }
+
+    /** @hidden */
+    _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
     @ViewChild('inputGroupComponent', {

@@ -309,14 +309,18 @@ export class DatetimePickerComponent<D>
 
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent, { static: false })
-    set _calendarComponent(calendar: CalendarComponent<D>) {
+    private set _calendarCmp(calendar: CalendarComponent<D>) {
         if (!this.isOpen) {
             return;
         }
 
         calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
         calendar?.initialFocus();
+        this._calendarComponent = calendar;
     }
+
+    /** @hidden */
+    _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
     @ViewChild('inputGroupComponent', {
@@ -699,7 +703,6 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
         this._calendarPendingDate = date;
-        this._calendarComponent?.setCurrentlyDisplayed(date);
     }
 
     /**
