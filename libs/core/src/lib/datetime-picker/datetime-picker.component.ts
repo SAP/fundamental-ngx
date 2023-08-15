@@ -308,8 +308,15 @@ export class DatetimePickerComponent<D>
     }
 
     /** @hidden Reference to the inner calendar component. */
-    @ViewChild(CalendarComponent)
-    _calendarComponent: CalendarComponent<D>;
+    @ViewChild(CalendarComponent, { static: false })
+    set _calendarComponent(calendar: CalendarComponent<D>) {
+        if (!this.isOpen) {
+            return;
+        }
+
+        calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+        calendar?.initialFocus();
+    }
 
     /** @hidden */
     @ViewChild('inputGroupComponent', {
@@ -359,6 +366,9 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private _state: FormStates = 'default';
+
+    /** @hidden */
+    private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -668,10 +678,6 @@ export class DatetimePickerComponent<D>
                 preventScroll: this.preventScrollOnFocus
             });
         }
-        // focus calendar cell on opening
-        if (isOpen && this._calendarComponent) {
-            this._calendarComponent.initialFocus();
-        }
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
@@ -692,9 +698,8 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
-        if (this._calendarComponent) {
-            this._calendarComponent.setCurrentlyDisplayed(date);
-        }
+        this._calendarPendingDate = date;
+        this._calendarComponent?.setCurrentlyDisplayed(date);
     }
 
     /**
