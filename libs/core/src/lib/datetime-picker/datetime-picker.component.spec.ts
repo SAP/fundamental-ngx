@@ -21,6 +21,8 @@ describe('DatetimePickerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent<DatetimePickerComponent<FdDate>>(DatetimePickerComponent);
         component = fixture.componentInstance;
+        component.isOpen = true;
+        component._showPopoverContents = true;
         component.ngOnInit();
         component.date = new FdDate();
         fixture.detectChanges();
@@ -123,6 +125,8 @@ describe('DatetimePickerComponent', () => {
     });
 
     it('should hide message on open', () => {
+        component.isOpen = false;
+        fixture.detectChanges();
         const hideSpy = jest.spyOn((<any>component)._popoverFormMessage, 'hide');
         component.openPopover();
         expect(hideSpy).toHaveBeenCalled();

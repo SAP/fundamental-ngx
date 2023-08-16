@@ -138,8 +138,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
     /** Checked property of the switch. */
     set isChecked(value) {
         this._switchLabelWrapperEl.nativeElement.classList.remove('fd-switch-no-animate');
-        this.checked = value;
-        this.onChange(value);
+        this.writeValue(value);
         this.checkedChange.emit(value);
         setTimeout(() => {
             // add the no-animate class after the transition duration, 100ms
@@ -156,6 +155,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      */
     writeValue(value: any): void {
         this.checked = value;
+        this.onChange(value);
         this._changeDetectorRef.detectChanges();
     }
 

@@ -308,7 +308,18 @@ export class DatetimePickerComponent<D>
     }
 
     /** @hidden Reference to the inner calendar component. */
-    @ViewChild(CalendarComponent)
+    @ViewChild(CalendarComponent, { static: false })
+    private set _calendarCmp(calendar: CalendarComponent<D>) {
+        if (!this.isOpen) {
+            return;
+        }
+
+        calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+        calendar?.initialFocus();
+        this._calendarComponent = calendar;
+    }
+
+    /** @hidden */
     _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
@@ -358,7 +369,13 @@ export class DatetimePickerComponent<D>
     _displayType: 'date' | 'time' = 'date';
 
     /** @hidden */
+    _showPopoverContents = false;
+
+    /** @hidden */
     private _state: FormStates = 'default';
+
+    /** @hidden */
+    private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
@@ -410,6 +427,11 @@ export class DatetimePickerComponent<D>
 
         if (['displayHours', 'displayMinutes', 'displaySeconds', 'meridian'].some((input) => input in changes)) {
             this._calculateTimeOptions();
+        }
+
+        if ('isOpen' in changes) {
+            this._showPopoverContents = this.isOpen;
+            this._changeDetRef.detectChanges();
         }
     }
 
@@ -493,6 +515,8 @@ export class DatetimePickerComponent<D>
     /** Opens the popover. */
     openPopover(): void {
         if (!this.isOpen && !this.disabled) {
+            this._showPopoverContents = true;
+            this._changeDetRef.detectChanges();
             this.isOpen = true;
             this._onOpenStateChanged(this.isOpen);
         }
@@ -500,12 +524,13 @@ export class DatetimePickerComponent<D>
 
     /** Closes the popover and refresh model */
     closePopover(): void {
-        if (this.isOpen) {
-            this.onClose.emit();
-            this.isOpen = false;
-            this._onOpenStateChanged(this.isOpen);
-            this.handleOnTouched();
+        if (!this.isOpen) {
+            return;
         }
+        this.onClose.emit();
+        this.isOpen = false;
+        this._onOpenStateChanged(this.isOpen);
+        this.handleOnTouched();
     }
 
     /** @hidden */
@@ -668,10 +693,6 @@ export class DatetimePickerComponent<D>
                 preventScroll: this.preventScrollOnFocus
             });
         }
-        // focus calendar cell on opening
-        if (isOpen && this._calendarComponent) {
-            this._calendarComponent.initialFocus();
-        }
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
@@ -692,9 +713,7 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
-        if (this._calendarComponent) {
-            this._calendarComponent.setCurrentlyDisplayed(date);
-        }
+        this._calendarPendingDate = date;
     }
 
     /**
