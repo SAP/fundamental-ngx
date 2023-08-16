@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Avatar group overflow body component, used to provide a template for the avatar group overflow body.
@@ -7,10 +7,11 @@ import { Component, Input } from '@angular/core';
     selector: 'fd-avatar-group-overflow-body',
     templateUrl: './avatar-group-overflow-body.component.html',
     host: {
-        class: 'fd-popover__wrapper',
-        '[style.display]': '"flex"',
-        '[style.flex-direction]': '"column"'
+        class: 'fd-popover__wrapper'
     },
+    styleUrls: ['./avatar-group-overflow-body.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
 export class AvatarGroupOverflowBodyComponent {

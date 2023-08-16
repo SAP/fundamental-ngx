@@ -1,8 +1,17 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, forwardRef, inject, Input, OnChanges, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    forwardRef,
+    HostBinding,
+    inject,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import {
     ColorAccent,
-    DestroyedService,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItemDirective,
     Nullable,
@@ -19,18 +28,17 @@ import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
     selector: 'fd-avatar-group-overflow-button',
     template: ` <ng-content></ng-content>`,
     host: {
-        role: 'button',
-        '[class.fd-avatar--circle]': 'circle'
+        role: 'button'
     },
     hostDirectives: [NgClass],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     standalone: true,
     providers: [
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: forwardRef(() => AvatarGroupOverflowButtonComponent)
-        },
-        DestroyedService
+        }
     ]
 })
 export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective implements OnChanges, OnInit {
@@ -44,6 +52,7 @@ export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective i
      * Whether the overflow button should be displayed as a circle.
      */
     @Input()
+    @HostBinding('class.fd-avatar--circle')
     circle = false;
 
     /**

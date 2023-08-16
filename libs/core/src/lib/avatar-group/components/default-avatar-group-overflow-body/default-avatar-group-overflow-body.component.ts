@@ -2,19 +2,21 @@ import { PortalModule } from '@angular/cdk/portal';
 import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    inject,
     Input,
     OnDestroy,
     QueryList,
     Renderer2,
-    ViewChildren
+    ViewChildren,
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { elementClick$, FocusableListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FocusableListDirective, RtlService, elementClick$ } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
-import { map, merge, startWith, Subscription } from 'rxjs';
+import { Subscription, map, merge, startWith } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AvatarGroupItemRendererDirective } from '../../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.directive';
@@ -34,11 +36,12 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
     ],
     host: {
         class: 'fd-popover__wrapper',
-        '[style.display]': '"flex"',
-        '[style.flex-direction]': '"column"',
         '[style.max-width.rem]': '20'
     },
-    standalone: true
+    styleUrls: ['./default-avatar-group-overflow-body.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, OnDestroy {
     /** @hidden */

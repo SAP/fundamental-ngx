@@ -12,7 +12,8 @@ import {
     OnChanges,
     QueryList,
     signal,
-    SimpleChanges
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HasElementRef, ResizeObserverDirective } from '@fundamental-ngx/cdk/utils';
@@ -39,7 +40,8 @@ import { AvatarGroupHostConfig } from '../types';
     standalone: true,
     imports: [NgIf],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    hostDirectives: [ResizeObserverDirective]
+    hostDirectives: [ResizeObserverDirective],
+    encapsulation: ViewEncapsulation.None
 })
 export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig {
     /** @hidden */

@@ -7,10 +7,12 @@
     "projectType": "library",
     "targets": {
         "build": {
-            "executor": "@nx/angular:package",
+            "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
-                "project": "libs/core/src/lib/avatar-group/ng-package.json"
+                "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.json",
+                "project": "libs/core/src/lib/avatar-group/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
             },
             "configurations": {
                 "production": {
