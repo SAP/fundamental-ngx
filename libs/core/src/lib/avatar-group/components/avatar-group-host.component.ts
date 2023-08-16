@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     inject,
     Input,
@@ -13,8 +14,9 @@ import {
     signal,
     SimpleChanges
 } from '@angular/core';
-import { DestroyedService, HasElementRef, ResizeObserverDirective } from '@fundamental-ngx/cdk/utils';
-import { animationFrames, combineLatest, delayWhen, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { HasElementRef, ResizeObserverDirective } from '@fundamental-ngx/cdk/utils';
+import { animationFrames, combineLatest, delayWhen, map, Observable, startWith, Subject } from 'rxjs';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
 import { AvatarGroupHostConfig } from '../types';
@@ -36,7 +38,6 @@ import { AvatarGroupHostConfig } from '../types';
     template: '<ng-content></ng-content>',
     standalone: true,
     imports: [NgIf],
-    providers: [DestroyedService],
     changeDetection: ChangeDetectionStrategy.OnPush,
     hostDirectives: [ResizeObserverDirective]
 })
@@ -72,7 +73,7 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasEl
     hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);
 
     /** @hidden */
-    private _destroyed$ = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _cdr = inject(ChangeDetectorRef);
@@ -98,7 +99,7 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasEl
             .pipe(
                 map(([containerWidth, items]) => this.calculateVisibility(containerWidth, items)),
                 delayWhen(() => animationFrames()),
-                takeUntil(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(({ hiddenItems, visibleItems }) => {
                 visibleItems.forEach((item) => item.show());
