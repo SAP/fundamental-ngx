@@ -46,7 +46,7 @@
             [attr.aria-hidden]="!isOpen"
             [style.display]="'block'"
         >
-            <ng-container *ngIf="isOpen">
+            <ng-container *ngIf="_showPopoverContents">
                 <div class="fd-datetime__wrapper">
                     <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
                         {{ _message }}

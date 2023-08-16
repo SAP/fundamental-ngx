@@ -369,6 +369,9 @@ export class DatetimePickerComponent<D>
     _displayType: 'date' | 'time' = 'date';
 
     /** @hidden */
+    _showPopoverContents = false;
+
+    /** @hidden */
     private _state: FormStates = 'default';
 
     /** @hidden */
@@ -424,6 +427,11 @@ export class DatetimePickerComponent<D>
 
         if (['displayHours', 'displayMinutes', 'displaySeconds', 'meridian'].some((input) => input in changes)) {
             this._calculateTimeOptions();
+        }
+
+        if ('isOpen' in changes) {
+            this._showPopoverContents = this.isOpen;
+            this._changeDetRef.detectChanges();
         }
     }
 
@@ -507,6 +515,8 @@ export class DatetimePickerComponent<D>
     /** Opens the popover. */
     openPopover(): void {
         if (!this.isOpen && !this.disabled) {
+            this._showPopoverContents = true;
+            this._changeDetRef.detectChanges();
             this.isOpen = true;
             this._onOpenStateChanged(this.isOpen);
         }
@@ -514,12 +524,13 @@ export class DatetimePickerComponent<D>
 
     /** Closes the popover and refresh model */
     closePopover(): void {
-        if (this.isOpen) {
-            this.onClose.emit();
-            this.isOpen = false;
-            this._onOpenStateChanged(this.isOpen);
-            this.handleOnTouched();
+        if (!this.isOpen) {
+            return;
         }
+        this.onClose.emit();
+        this.isOpen = false;
+        this._onOpenStateChanged(this.isOpen);
+        this.handleOnTouched();
     }
 
     /** @hidden */

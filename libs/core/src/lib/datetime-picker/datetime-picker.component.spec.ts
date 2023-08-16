@@ -22,6 +22,7 @@ describe('DatetimePickerComponent', () => {
         fixture = TestBed.createComponent<DatetimePickerComponent<FdDate>>(DatetimePickerComponent);
         component = fixture.componentInstance;
         component.isOpen = true;
+        component._showPopoverContents = true;
         component.ngOnInit();
         component.date = new FdDate();
         fixture.detectChanges();

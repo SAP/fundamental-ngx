@@ -12,13 +12,15 @@ import {
     OnInit,
     Optional,
     Output,
+    QueryList,
     SimpleChanges,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import {
@@ -257,7 +259,21 @@ export class DatePickerComponent<D>
 
     /** Whether the date picker is open. Can be used through two-way binding. */
     @Input()
-    isOpen = false;
+    set isOpen(value: boolean) {
+        if (value === this._isOpen) {
+            return;
+        }
+        this._isOpen = value;
+        this._showPopoverContents = value;
+        this._changeDetectionRef.detectChanges();
+    }
+
+    get isOpen(): boolean {
+        return this._isOpen;
+    }
+
+    /** @hidden */
+    private _isOpen = false;
 
     /** Should date picker be inlined. */
     @Input()
@@ -306,17 +322,9 @@ export class DatePickerComponent<D>
     @Output()
     readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
-    /** @hidden */
-    @ViewChild(CalendarComponent, { static: false })
-    private set _calendarCmp(calendar: CalendarComponent<D>) {
-        if (!this.isOpen) {
-            return;
-        }
-
-        calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
-        calendar?.initialFocus();
-        this._calendarComponent = calendar;
-    }
+    /** @hideen */
+    @ViewChildren(CalendarComponent)
+    private readonly _calendars: QueryList<CalendarComponent<D>>;
 
     /** @hidden */
     _calendarComponent: CalendarComponent<D>;
@@ -338,6 +346,9 @@ export class DatePickerComponent<D>
 
     /** @hidden Whether the date input is invalid */
     _isInvalidDateInput = false;
+
+    /** @hidden */
+    _showPopoverContents = false;
 
     /** @hidden */
     readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
@@ -425,6 +436,7 @@ export class DatePickerComponent<D>
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if ('isOpen' in changes) {
+            this._showPopoverContents = this.isOpen;
             this._changeDetectionRef.detectChanges();
         }
     }
@@ -432,6 +444,15 @@ export class DatePickerComponent<D>
     /** @hidden */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
+
+        this._calendars.changes.pipe(startWith(null), takeUntil(this._onDestroy$)).subscribe(() => {
+            const calendar = this._calendars.first;
+            this._calendarComponent = calendar;
+            setTimeout(() => {
+                calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+                calendar?.initialFocus();
+            });
+        });
     }
 
     /** @hidden */
@@ -830,6 +851,8 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     private _setOpenState(isOpen: boolean): void {
+        this._showPopoverContents = isOpen;
+        this._changeDetectionRef.detectChanges();
         this.isOpen = isOpen;
         this.isOpenChange.emit(this.isOpen);
         this._changeDetectionRef.detectChanges();
