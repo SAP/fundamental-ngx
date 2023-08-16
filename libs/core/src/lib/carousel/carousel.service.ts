@@ -186,6 +186,10 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _centerActive(index: number): void {
+        const size = this._getSize(this.items.first);
+        if (isNaN(size)) {
+            return;
+        }
         const middleIndex = Math.ceil(this.items.length / 2);
         const offset = Math.ceil(this.elementsAtOnce / 2);
         const missingItems = index + offset - middleIndex;

@@ -44,41 +44,43 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
-        <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-            {{ _message }}
-        </fd-form-message>
-        <ng-content></ng-content>
+        <ng-container *ngIf="_showPopoverContents">
+            <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+                {{ _message }}
+            </fd-form-message>
+            <ng-content></ng-content>
 
-        <fd-calendar
-            (closeCalendar)="closeFromCalendar()"
-            [activeView]="activeView"
-            [markWeekends]="markWeekends"
-            [specialDaysRules]="specialDaysRules"
-            [showWeekNumbers]="showWeekNumbers"
-            [aggregatedYearGrid]="aggregatedYearGrid"
-            [yearGrid]="yearGrid"
-            (activeViewChange)="handleCalendarActiveViewChange($event)"
-            [calType]="type"
-            [rangeHoverEffect]="rangeHoverEffect"
-            [disableFunction]="disableFunction ? disableFunction : null"
-            [disableRangeStartFunction]="disableRangeStartFunction ? disableRangeStartFunction : null"
-            [disableRangeEndFunction]="disableRangeEndFunction ? disableRangeEndFunction : null"
-            [selectedDate]="selectedDate"
-            [selectedRangeDate]="selectedRangeDate"
-            (selectedRangeDateChange)="handleRangeDateChange($event)"
-            (selectedDateChange)="handleSingleDateChange($event)"
-            [startingDayOfWeek]="startingDayOfWeek"
-            [previousButtonDisableFunction]="previousButtonDisableFunction"
-            [nextButtonDisableFunction]="nextButtonDisableFunction"
-        ></fd-calendar>
+            <fd-calendar
+                (closeCalendar)="closeFromCalendar()"
+                [activeView]="activeView"
+                [markWeekends]="markWeekends"
+                [specialDaysRules]="specialDaysRules"
+                [showWeekNumbers]="showWeekNumbers"
+                [aggregatedYearGrid]="aggregatedYearGrid"
+                [yearGrid]="yearGrid"
+                (activeViewChange)="handleCalendarActiveViewChange($event)"
+                [calType]="type"
+                [rangeHoverEffect]="rangeHoverEffect"
+                [disableFunction]="disableFunction"
+                [disableRangeStartFunction]="disableRangeStartFunction"
+                [disableRangeEndFunction]="disableRangeEndFunction"
+                [selectedDate]="selectedDate"
+                [selectedRangeDate]="selectedRangeDate"
+                (selectedRangeDateChange)="handleRangeDateChange($event)"
+                (selectedDateChange)="handleSingleDateChange($event)"
+                [startingDayOfWeek]="startingDayOfWeek"
+                [previousButtonDisableFunction]="previousButtonDisableFunction"
+                [nextButtonDisableFunction]="nextButtonDisableFunction"
+            ></fd-calendar>
 
-        <div *ngIf="showTodayButton" fd-bar barDesign="footer">
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>
-                </fd-bar-element>
+            <div *ngIf="showTodayButton" fd-bar barDesign="footer">
+                <div fd-bar-right>
+                    <fd-bar-element>
+                        <button fd-button [label]="todayButtonLabel" (click)="onTodayButtonClick()"></button>
+                    </fd-bar-element>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </fd-popover-body>
 </fd-popover>
 
