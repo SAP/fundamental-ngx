@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.5](https://github.com/SAP/fundamental-ngx/compare/v0.43.4...v0.43.5) (2023-08-16)
+
+
+### Bug Fixes
+
+* **core:** datepicker perf optimisation ([725aa1b](https://github.com/SAP/fundamental-ngx/commit/725aa1bc6c5022f9e7bca74632dc41df31a51ec1))
+
+
+
+
+
 ## [0.43.4](https://github.com/SAP/fundamental-ngx/compare/v0.43.3...v0.43.4) (2023-08-08)
 
 
