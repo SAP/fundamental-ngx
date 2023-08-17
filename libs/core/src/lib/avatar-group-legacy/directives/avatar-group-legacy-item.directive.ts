@@ -6,6 +6,7 @@ import { AVATAR_GROUP_LEGACY_COMPONENT } from '../tokens';
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-avatar-group-legacy-item]',
+    host: { class: 'fd-avatar-group-legacy__item' },
     standalone: true
 })
 export class AvatarGroupLegacyItemDirective implements FocusableOption {
