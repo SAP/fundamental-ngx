@@ -41,6 +41,8 @@ describe('DatePickerComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent<DatePickerComponent<FdDate>>(DatePickerComponent);
         component = fixture.componentInstance;
+        component.isOpen = true;
+        component._showPopoverContents = true;
         fixture.detectChanges();
     });
 

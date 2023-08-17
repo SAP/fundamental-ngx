@@ -308,6 +308,9 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[0];
+        datepicker.isOpen = true;
+        datepicker.fdDatePickerComponent._showPopoverContents = true;
+        fixture.detectChanges();
         jest.spyOn(datepicker.selectedDateChange, 'emit');
         jest.spyOn(datepicker, 'onChange');
 
@@ -329,6 +332,9 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[1];
+        datepicker.isOpen = true;
+        datepicker.fdDatePickerComponent._showPopoverContents = true;
+        fixture.detectChanges();
         jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
         jest.spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2000, 10, 10);
@@ -350,6 +356,9 @@ describe('TestDatePickerComponent', () => {
         await wait(fixture);
 
         const datepicker = host.datepicker.toArray()[1];
+        datepicker.isOpen = true;
+        datepicker.fdDatePickerComponent._showPopoverContents = true;
+        fixture.detectChanges();
         jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
         jest.spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
