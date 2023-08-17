@@ -24,8 +24,6 @@ const routes: Routes = [
     imports: [FormModule, CheckboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule, CheckboxDisplayModeExampleComponent],
     declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent, CheckboxDisplayModeExampleComponent],
-    providers: [
-        currentComponentProvider('checkbox')
-    ]
+    providers: [currentComponentProvider('checkbox')]
 })
 export class CheckboxDocsModule {}
