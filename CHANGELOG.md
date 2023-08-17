@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.4...v0.45.1-rc.5) (2023-08-17)
+
+
+### Bug Fixes
+
+* add shared to scope-enum ([#10352](https://github.com/SAP/fundamental-ngx/issues/10352)) ([8d36223](https://github.com/SAP/fundamental-ngx/commit/8d362234a586c33da7b0cbc694bebd86b6af8000))
+
+
+
+
+
 ## [0.45.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.3...v0.45.1-rc.4) (2023-08-16)
 
 
