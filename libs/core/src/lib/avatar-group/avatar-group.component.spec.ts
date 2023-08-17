@@ -7,7 +7,7 @@ describe('AvatarGroupComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [AvatarGroupComponent]
+            imports: [AvatarGroupComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(AvatarGroupComponent);

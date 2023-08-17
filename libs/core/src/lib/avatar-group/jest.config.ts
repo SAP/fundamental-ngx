@@ -1,22 +1,9 @@
-/* eslint-disable */
+import baseConfig from '../../../../../jest.config.base';
+
 export default {
-    displayName: 'core-src-lib-avatar-group',
+    ...baseConfig,
+    displayName: 'core-avatar-group',
     preset: '../../../../../jest.preset.js',
-    setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
-    coverageDirectory: '../../../../../coverage/libs/core/src/lib/avatar-group',
-    transform: {
-        '^.+\\.(ts|mjs|js|html)$': [
-            'jest-preset-angular',
-            {
-                tsconfig: '<rootDir>/tsconfig.spec.json',
-                stringifyContentPathRegex: '\\.(html|svg)$'
-            }
-        ]
-    },
-    transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-    snapshotSerializers: [
-        'jest-preset-angular/build/serializers/no-ng-attributes',
-        'jest-preset-angular/build/serializers/ng-snapshot',
-        'jest-preset-angular/build/serializers/html-comment'
-    ]
+    setupFilesAfterEnv: ['<rootDir>/test-setup.ts', '../../../../../jest-extended-matchers.ts'],
+    coverageDirectory: '../../../../../dist/coverage/core-avatar-group'
 };
