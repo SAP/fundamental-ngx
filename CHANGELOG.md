@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.4...v0.45.1-rc.5) (2023-08-17)
+
+
+### Bug Fixes
+
+* add shared to scope-enum ([#10352](https://github.com/SAP/fundamental-ngx/issues/10352)) ([8d36223](https://github.com/SAP/fundamental-ngx/commit/8d362234a586c33da7b0cbc694bebd86b6af8000))
+
+
+
+
+
+## [0.45.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.3...v0.45.1-rc.4) (2023-08-16)
+
+
+### Bug Fixes
+
+* **core:** datepicker optimization ([#10348](https://github.com/SAP/fundamental-ngx/issues/10348)) ([33b31c4](https://github.com/SAP/fundamental-ngx/commit/33b31c4d29aadc7209f62604733cdd8c90439208))
+
+
+
+
+
+## [0.45.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.2...v0.45.1-rc.3) (2023-08-15)
+
+
+### Bug Fixes
+
+* **core:** dialog bar cozy issue ([#10264](https://github.com/SAP/fundamental-ngx/issues/10264)) ([6c6d1ab](https://github.com/SAP/fundamental-ngx/commit/6c6d1ab2b117612986a4ab8bdc587b3fd6e903dd))
+
+
+
+
+
 ## [0.45.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.1...v0.45.1-rc.2) (2023-08-13)
 
 **Note:** Version bump only for package fundamental-ngx
