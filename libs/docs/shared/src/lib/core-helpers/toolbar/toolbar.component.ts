@@ -142,7 +142,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             id: this._docsService.getLernaJson().version,
             url: ''
         };
-        console.log(this.version);
         this.library = this._route.snapshot.data['library'] || 'core';
 
         this._themingService.currentTheme
