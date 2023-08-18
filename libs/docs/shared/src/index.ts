@@ -34,6 +34,7 @@ export * from './lib/services/copy.service';
 export * from './lib/services/api-docs.service';
 export * from './lib/services/docs.service';
 export * from './lib/tokens/package-json.token';
+export * from './lib/tokens/lerna-json.token';
 export * from './lib/tokens/current-component.token';
 export * from './lib/getAsset';
 export * from './lib/services/example-child.service';

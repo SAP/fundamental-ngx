@@ -11,7 +11,7 @@ import {
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { CURRENT_LIB, Libraries } from '../../utilities';
+import { Libraries } from '../../utilities';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
@@ -76,10 +76,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     themes: CompleteThemeDefinition[];
 
-    version: Version = {
-        id: this._docsService.getPackageJson().version,
-        url: ''
-    };
+    version: Version;
 
     versions: Version[];
 
@@ -135,13 +132,17 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _routerService: Router,
         private _contentDensityService: GlobalContentDensityService,
         private _themingService: ThemingService,
-        @Inject(CURRENT_LIB) private _currentLib: Libraries,
         @Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>,
         private _route: ActivatedRoute,
         private _domSanitizer: DomSanitizer,
         private _docsService: DocsService,
         private _http: HttpClient
     ) {
+        this.version = {
+            id: this._docsService.getLernaJson().version,
+            url: ''
+        };
+        console.log(this.version);
         this.library = this._route.snapshot.data['library'] || 'core';
 
         this._themingService.currentTheme
