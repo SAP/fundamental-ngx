@@ -46,85 +46,87 @@
             [attr.aria-hidden]="!isOpen"
             [style.display]="'block'"
         >
-            <div class="fd-datetime__wrapper">
-                <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
-                    {{ _message }}
-                </fd-form-message>
-                <div class="fd-datetime__display-type-switcher">
-                    <fd-segmented-button [(ngModel)]="_displayType">
-                        <button
-                            fd-button
-                            [label]="'coreDatetimePicker.displayTypeDateLabel' | fdTranslate"
-                            value="date"
-                        ></button>
-                        <button
-                            fd-button
-                            [label]="'coreDatetimePicker.displayTypeTimeLabel' | fdTranslate"
-                            value="time"
-                        ></button>
-                    </fd-segmented-button>
-                </div>
-                <ng-content></ng-content>
-                <div class="fd-datetime__container">
-                    <fd-calendar
-                        [class.fd-datetime__active-display-type]="_displayType === 'date'"
-                        calType="single"
-                        [activeView]="activeView"
-                        [disableFunction]="disableFunction || null"
-                        [selectedDate]="_tempDate"
-                        [escapeFocusFunction]="null"
-                        [markWeekends]="markWeekends"
-                        [specialDaysRules]="specialDaysRules"
-                        [showWeekNumbers]="showWeekNumbers"
-                        [aggregatedYearGrid]="aggregatedYearGrid"
-                        [yearGrid]="yearGrid"
-                        [startingDayOfWeek]="startingDayOfWeek"
-                        (activeViewChange)="handleCalendarActiveViewChange($event)"
-                        (selectedDateChange)="handleDateChange($event)"
-                        (isValidDateChange)="setInvalidDateInputHandler($event)"
-                    ></fd-calendar>
-                    <div class="fd-datetime__separator"></div>
-                    <fd-time
-                        *ngIf="isOpen"
-                        [class.fd-datetime__active-display-type]="_displayType === 'time'"
-                        [disabled]="disabled"
-                        [elementsAtOnce]="5"
-                        [keepTwoDigits]="keepTwoDigitsTime"
-                        [ngModel]="_tempTime"
-                        [spinnerButtons]="spinnerButtons"
-                        [meridian]="_meridian"
-                        [displaySeconds]="_displaySeconds"
-                        [displayMinutes]="_displayMinutes"
-                        [displayHours]="_displayHours"
-                        (ngModelChange)="handleTimeChange($event)"
-                    ></fd-time>
-                </div>
-                <div fd-popover-body-footer *ngIf="showFooter">
-                    <div fd-bar barDesign="footer">
-                        <div fd-bar-right>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="emphasized"
-                                    [disabled]="!_tempDate"
-                                    [label]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
-                                    [ariaLabel]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
-                                    (click)="submit()"
-                                ></button>
-                            </fd-bar-element>
-                            <fd-bar-element>
-                                <button
-                                    fd-button
-                                    fdType="transparent"
-                                    [label]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
-                                    [ariaLabel]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
-                                    (click)="cancel()"
-                                ></button>
-                            </fd-bar-element>
+            <ng-container *ngIf="_showPopoverContents">
+                <div class="fd-datetime__wrapper">
+                    <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
+                        {{ _message }}
+                    </fd-form-message>
+                    <div class="fd-datetime__display-type-switcher">
+                        <fd-segmented-button [(ngModel)]="_displayType">
+                            <button
+                                fd-button
+                                [label]="'coreDatetimePicker.displayTypeDateLabel' | fdTranslate"
+                                value="date"
+                            ></button>
+                            <button
+                                fd-button
+                                [label]="'coreDatetimePicker.displayTypeTimeLabel' | fdTranslate"
+                                value="time"
+                            ></button>
+                        </fd-segmented-button>
+                    </div>
+                    <ng-content></ng-content>
+                    <div class="fd-datetime__container">
+                        <fd-calendar
+                            [class.fd-datetime__active-display-type]="_displayType === 'date'"
+                            calType="single"
+                            [activeView]="activeView"
+                            [disableFunction]="disableFunction || null"
+                            [selectedDate]="_tempDate"
+                            [escapeFocusFunction]="null"
+                            [markWeekends]="markWeekends"
+                            [specialDaysRules]="specialDaysRules"
+                            [showWeekNumbers]="showWeekNumbers"
+                            [aggregatedYearGrid]="aggregatedYearGrid"
+                            [yearGrid]="yearGrid"
+                            [startingDayOfWeek]="startingDayOfWeek"
+                            (activeViewChange)="handleCalendarActiveViewChange($event)"
+                            (selectedDateChange)="handleDateChange($event)"
+                            (isValidDateChange)="setInvalidDateInputHandler($event)"
+                        ></fd-calendar>
+                        <div class="fd-datetime__separator"></div>
+                        <fd-time
+                            *ngIf="isOpen"
+                            [class.fd-datetime__active-display-type]="_displayType === 'time'"
+                            [disabled]="disabled"
+                            [elementsAtOnce]="5"
+                            [keepTwoDigits]="keepTwoDigitsTime"
+                            [ngModel]="_tempTime"
+                            [spinnerButtons]="spinnerButtons"
+                            [meridian]="_meridian"
+                            [displaySeconds]="_displaySeconds"
+                            [displayMinutes]="_displayMinutes"
+                            [displayHours]="_displayHours"
+                            (ngModelChange)="handleTimeChange($event)"
+                        ></fd-time>
+                    </div>
+                    <div fd-popover-body-footer *ngIf="showFooter">
+                        <div fd-bar barDesign="footer">
+                            <div fd-bar-right>
+                                <fd-bar-element>
+                                    <button
+                                        fd-button
+                                        fdType="emphasized"
+                                        [disabled]="!_tempDate"
+                                        [label]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
+                                        [ariaLabel]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
+                                        (click)="submit()"
+                                    ></button>
+                                </fd-bar-element>
+                                <fd-bar-element>
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        [label]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
+                                        [ariaLabel]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
+                                        (click)="cancel()"
+                                    ></button>
+                                </fd-bar-element>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </fd-popover-body>
     </fd-popover>
 </div>

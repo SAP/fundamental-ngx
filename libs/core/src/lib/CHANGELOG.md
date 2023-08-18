@@ -3,6 +3,63 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.45.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.4...v0.45.1-rc.5) (2023-08-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.45.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.3...v0.45.1-rc.4) (2023-08-16)
+
+
+### Bug Fixes
+
+* **core:** datepicker optimization ([#10348](https://github.com/SAP/fundamental-ngx/issues/10348)) ([33b31c4](https://github.com/SAP/fundamental-ngx/commit/33b31c4d29aadc7209f62604733cdd8c90439208))
+
+
+
+
+
+## [0.45.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.2...v0.45.1-rc.3) (2023-08-15)
+
+
+### Bug Fixes
+
+* **core:** dialog bar cozy issue ([#10264](https://github.com/SAP/fundamental-ngx/issues/10264)) ([6c6d1ab](https://github.com/SAP/fundamental-ngx/commit/6c6d1ab2b117612986a4ab8bdc587b3fd6e903dd))
+
+
+
+
+
+## [0.45.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.1...v0.45.1-rc.2) (2023-08-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.45.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.0...v0.45.1-rc.1) (2023-08-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.45.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.0...v0.45.1-rc.0) (2023-08-11)
+
+
+### Bug Fixes
+
+* **core:** no initial aria-pressed value for buttons ([#10268](https://github.com/SAP/fundamental-ngx/issues/10268)) ([fb5844a](https://github.com/SAP/fundamental-ngx/commit/fb5844a6d9231cdaf327ce085f87917c6d72f548))
+
+
+
+
+
 # [0.45.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.0-rc.0...v0.45.0) (2023-08-11)
 
 **Note:** Version bump only for package @fundamental-ngx/core

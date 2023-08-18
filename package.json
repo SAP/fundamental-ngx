@@ -84,7 +84,7 @@
     "@babel/core": "7.21.3",
     "@babel/runtime": "7.21.0",
     "@commitlint/cli": "17.5.1",
-    "@commitlint/config-conventional": "17.3.0",
+    "@commitlint/config-conventional": "17.7.0",
     "@fundamental-styles/common-css": "0.29.4",
     "@jsdevtools/npm-publish": "2.2.1",
     "@nx/devkit": "16.5.5",
