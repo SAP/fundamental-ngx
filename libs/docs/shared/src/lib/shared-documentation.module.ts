@@ -20,6 +20,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { PACKAGE_JSON } from './tokens/package-json.token';
 import { DocsService } from './services/docs.service';
 import { DocumentationBaseComponent } from './documentation-base.component';
+import { LERNA_JSON } from './tokens/lerna-json.token';
 
 /** PROVIDES DEPENDENCIES REQUIRED TO BUILD DOCUMENTATION SHELL */
 
@@ -50,13 +51,20 @@ import { DocumentationBaseComponent } from './documentation-base.component';
     schemas: [NO_ERRORS_SCHEMA]
 })
 export class SharedDocumentationModule {
-    static forRoot(packageJson: Record<string, any>): ModuleWithProviders<SharedDocumentationModule> {
+    static forRoot(props: {
+        packageJson: Record<string, any>;
+        lernaJson: Record<string, any>;
+    }): ModuleWithProviders<SharedDocumentationModule> {
         return {
             ngModule: SharedDocumentationModule,
             providers: [
                 {
                     provide: PACKAGE_JSON,
-                    useValue: packageJson
+                    useValue: props.packageJson
+                },
+                {
+                    provide: LERNA_JSON,
+                    useValue: props.lernaJson
                 },
                 DocsService
             ]
