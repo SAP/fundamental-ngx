@@ -8,27 +8,24 @@ In `fundamental-ngx` are multiple methods for creating a release. In general the
 
 ## Stable releases
 
-`Stable` releases can be created via github workflow manual dispatch. In this case, scripts will take the
-latest commit from the `main` branch, and create a release from it. This is a fully automatic process.
-`Stable` releases also can be triggered from the CLI, and in this case, the user can specify the version of the release,
-if needed. This is a semi-automatic process, since the user can specify the version of the release, but the rest
-of the process is fully automatic.
-The command for the release with the specified version is:
+`Stable` releases can be triggered either via github workflow `Create Release`, or via CLI. The scripts will take the
+latest commit from the `main` branch, and create a release from it. The release from the CLI allows the user to specify the version of the release, if needed.
 
-```bash
-npx lerna version ${version}
-```
-
-Or if you want to use the conventional commits to determine next version automatically, then you can use:
+The command to trigger the next release automatically:
 
 ```bash
 npx lerna version --conventional-graduate
 ```
 
+The command for specific version release is:
+
+```bash
+npx lerna version ${version}
+```
+
 ## Prereleases
 
-`Prerelease`, aka `rc` releases are created automatically after every merge into the `main` branch. This is a fully
-automatic process, and the version of the release is determined using the conventional commits.
+`Prerelease`, a.k.a. `rc` releases are created automatically after every merge into the `main` branch. The version of the release is determined using the conventional commits.
 
 While we are under `v1` stage, BREAKING CHANGES are incrementing the minor version, and the rest of the changes
 are incrementing the patch version. After we reach `v1`, BREAKING CHANGES will increment the major version, and
@@ -42,17 +39,16 @@ contain `BREAKING CHANGE` again.
 
 ## Hotfix releases
 
-`Hotfix` releases are also created automatically, but the difference from `Stable` is the source of the release.
+`Hotfix` releases are created for older versions.
 
-Let's go through the process of creating a hotfix:
-Imagine that the latest release was 0.40.0, and you want to add one patch to that release, but you do not want to
-include all the changes from the 0.40.1 release to the latest RC release, which is 0.40.1-rc.\*. In this case you need
-to do the following:
+Steps(hotfix for the latest version of `0.40.x`):
 
--   `git checkout v0.40.0`
--   `git cherry-pick <commit-hash>` or make changes you want to make and commit them
--   `npm run hotfix-release`
+1. `git checkout v0.40.3` - let's assume `0.40.3` is the latest version of `0.40`
+2. introduce the change either with `git cherry-pick <commit-hash>` or make changes manually
+3. build, run, pack, and test the libraries, ask for peer-review
+4. `npm run hotfix-release` - this will trigger the hotfix release from the workflows
 
+Background:
 After this, lerna determines that the next version should be `0.40.1`, and CI will create a release from the HEAD.
 CI also finds out that the `0.40.1` is newer than the latest RC release, which is `0.40.1-rc.*`, and updates the main
 branch version to `0.40.1`. Also it must be noted that the npm will mark this release as the `latest`.
