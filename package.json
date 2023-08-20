@@ -113,7 +113,7 @@
     "@wdio/sauce-service": "7.16.16",
     "@wdio/spec-reporter": "7.7.3",
     "ajv-formats": "2.1.1",
-    "autoprefixer": "10.4.14",
+    "autoprefixer": "10.4.15",
     "axe-core": "4.5.2",
     "axe-html-reporter": "2.2.3",
     "axios": "1.2.0",
