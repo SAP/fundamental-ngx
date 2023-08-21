@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
@@ -7,6 +7,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     selector: 'fdp-dynamic-form-generator-checkbox',
     templateUrl: './dynamic-form-generator-checkbox.component.html',
     encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
 export class DynamicFormGeneratorCheckboxComponent extends BaseDynamicFormGeneratorControl {

@@ -40,7 +40,12 @@ export type DynamicFormItem<
     U extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
 > = DynamicFormFieldGroup | DynamicFormFieldItem<T, U>;
 
-export interface DynamicFormFieldGroup {
+export type DynamicFormItemMap<
+    T extends Record<string, any> = Record<string, any>,
+    U extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
+> = DynamicFormFieldGroupMap | DynamicFormFieldItem<T, U>;
+
+export interface BaseDynamicFormFieldGroup {
     /**
      * @description
      * ID of the form item, if not provided, name will be used instead
@@ -62,13 +67,6 @@ export interface DynamicFormFieldGroup {
 
     /**
      * @description
-     * List of @see DynamicFormItem representing the list of items
-     * to be rendered in the form.
-     */
-    items?: DynamicFormFieldItem[];
-
-    /**
-     * @description
      * Rank is used for ordering.
      * Than lower number then higher priority.
      */
@@ -79,6 +77,24 @@ export interface DynamicFormFieldGroup {
      * Additional set of options that can affect UI of the form field group.
      */
     guiOptions?: BaseDynamicFormItemGuiOptions;
+}
+
+export interface DynamicFormFieldGroup extends BaseDynamicFormFieldGroup {
+    /**
+     * @description
+     * List of @see DynamicFormItem representing the list of items
+     * to be rendered in the form.
+     */
+    items?: DynamicFormFieldItem[];
+}
+
+export interface DynamicFormFieldGroupMap extends BaseDynamicFormFieldGroup {
+    /**
+     * @description
+     * Map of @see DynamicFormItem representing the list of items
+     * to be rendered in the form.
+     */
+    items?: Map<string, DynamicFormItemMap>;
 }
 
 export type FdpFormGeneratorAsyncProperty<T = string> = T | Promise<T> | Observable<T>;

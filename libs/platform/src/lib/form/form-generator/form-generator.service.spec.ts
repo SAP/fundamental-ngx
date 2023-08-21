@@ -5,15 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorService } from './form-generator.service';
-import { DynamicFormFieldItem } from './interfaces/dynamic-form-item';
+import { DynamicFormItemMap } from './interfaces/dynamic-form-item';
 import {
     defaultFormGeneratorItemConfigProvider,
     dynamicFormFieldProvider,
     dynamicFormGroupChildProvider
 } from './providers/providers';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
+import { mapFormItems } from './helpers';
 
-export const dummyFormItemsWithWhenCondition: DynamicFormFieldItem[] = [
+export const dummyFormItemsWithWhenCondition: Map<string, DynamicFormItemMap> = mapFormItems([
     {
         type: 'input',
         name: 'shouldBeVisible',
@@ -26,9 +27,9 @@ export const dummyFormItemsWithWhenCondition: DynamicFormFieldItem[] = [
         message: 'Should be hidden',
         when: (answers) => answers.shouldBeVisible === true
     }
-];
+]);
 
-export const dummyFormItems: DynamicFormFieldItem[] = [
+export const dummyFormItems: Map<string, DynamicFormItemMap> = mapFormItems([
     {
         type: 'input',
         name: 'something',
@@ -36,9 +37,9 @@ export const dummyFormItems: DynamicFormFieldItem[] = [
         default: 'test',
         transformer: (value: string) => `${value}!!!`
     }
-];
+]);
 
-export const brokenFormItems: DynamicFormFieldItem[] = [
+export const brokenFormItems: Map<string, DynamicFormItemMap> = mapFormItems([
     {
         type: 'notExistingControlType',
         name: 'shouldNotBeInForm',
@@ -51,7 +52,7 @@ export const brokenFormItems: DynamicFormFieldItem[] = [
         message: 'wow',
         default: 'test'
     }
-];
+]);
 
 @Component({
     template: `
@@ -95,7 +96,7 @@ describe('FormGeneratorService', () => {
     });
 
     it('should create empty form', async () => {
-        const form = await service.generateForm('dummyForm', []);
+        const form = await service.generateForm('dummyForm', new Map());
         // There's always a default group called 'ungrouped'.
         expect(Object.keys(form.controls).length).toBe(1);
     });

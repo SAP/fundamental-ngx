@@ -13,7 +13,7 @@
         [inlineColumnLayout]="inlineColumnLayout"
         [useForm]="true"
     >
-        <ng-container *ngFor="let error of _errorModels">
+        <ng-container *ngFor="let error of _errorModels; trackBy: _errorsTrackBy">
             <span *fdpFormFieldError="error.type; let directiveError">
                 <ng-container *ngIf="_isAdvancedError(directiveError)">
                     <ng-container *ngIf="directiveError.heading">
@@ -71,7 +71,7 @@
                     [gapColumnLayout]="field.formItem.guiOptions?.gapColumnLayout"
                     [formName]="field.formItem.name"
                 >
-                    <ng-container *ngFor="let groupField of field | getOrderedFieldControls">
+                    <ng-container *ngFor="let groupField of field | getOrderedFieldControls; trackBy: _groupTrackFn">
                         <ng-container
                             *fdpDynamicFormControlField="
                                 groupField;

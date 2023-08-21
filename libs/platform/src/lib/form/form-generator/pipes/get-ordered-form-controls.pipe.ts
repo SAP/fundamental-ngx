@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DynamicFormControl, DynamicFormControlGroup, DynamicFormGroupControl } from '../dynamic-form-control';
 
-@Pipe({ name: 'getOrderedFieldControls' })
+@Pipe({ name: 'getOrderedFieldControls', pure: false })
 export class GetOrderedFieldControlsPipe implements PipeTransform {
     /** @hidden */
     transform(field: DynamicFormGroupControl): DynamicFormControl[] {

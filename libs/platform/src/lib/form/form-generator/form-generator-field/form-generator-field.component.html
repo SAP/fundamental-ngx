@@ -16,7 +16,7 @@
     [formGroup]="form"
     #formField
 >
-    <ng-container *ngFor="let error of _errorModels">
+    <ng-container *ngFor="let error of _errorModels; trackBy: _errorsTrackBy">
         <span *fdpFormFieldError="error.type; let directiveError">
             <ng-container *ngIf="_isAdvancedError(directiveError)">
                 <ng-container *ngIf="directiveError.heading">

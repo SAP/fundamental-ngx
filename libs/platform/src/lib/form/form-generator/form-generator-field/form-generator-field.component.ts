@@ -108,6 +108,11 @@ export class FormGeneratorFieldComponent implements OnInit {
     }
 
     /** @hidden */
+    _errorsTrackBy(_: number, error: { type: string; value: any }): string {
+        return error.type;
+    }
+
+    /** @hidden */
     private _getErrors(): { type: string; value: any }[] {
         const registeredErrors = this._fgService.validationErrorHints;
 
