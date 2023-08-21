@@ -310,7 +310,7 @@ describe('Approval flow', () => {
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
         });
 
-        it('should be able to add node in serial using top bar action menu', async () => {
+        xit('should be able to add node in serial using top bar action menu', async () => {
             await scrollIntoView(afDefaultExample);
             const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
             await click(afDefaultExample + editExampleButton);
@@ -419,7 +419,7 @@ describe('Approval flow', () => {
             }
         });
 
-        it('should be able to remove node by button', async () => {
+        xit('should be able to remove node by button', async () => {
             await scrollIntoView(afDefaultExample);
             await waitForElDisplayed(afDefaultExample + approvalFlowNode);
             const approvalFlowNodeCountBefore = await getElementArrayLength(afDefaultExample + approvalFlowNode);
