@@ -12,13 +12,13 @@ At fundamental-ngx we have two main CI workflows:
 ## Create Release
 
 Create release is triggered when a new commit is pushed to the `main` branch or `tmp_hotfix_branch` branch.
-Commit message is very important, because on it might depend the versioning of the release.
+Commit message is very important, because on it might depend on the versioning of the release.
 In General, we use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) to determine the versioning
 of the release, and pipeline determines what should be the next version, but manually defining the version
 through CLI is also possible.
-For more information about the versioning, see [Versioning](VERSIONING.md).
+For more information about the versioning, see [Versioning](README.md#versioning).
 
-For detailed information about the usage of the pipeline, see [Create Release](CREATE_RELEASE.md).
+For detailed information about the usage of the pipeline, see [Create Release](README.md#creation-of-the-release).
 
 Create release workflow consists of multiple jobs:
 

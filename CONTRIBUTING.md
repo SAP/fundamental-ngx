@@ -297,9 +297,9 @@ Before you submit your Pull Request (PR) consider the following guidelines:
     git push origin my-fix-branch
     ```
 
-**Make sure you rebase before you push - to guaranteee your branch is not outdated!**
+**Make sure you rebase before you push - to guarantee your branch is not outdated!**
 
-_There should not be any Merge commits. When they are you haven't properly rebased_!
+There should not be any Merge commits. When they are you haven't properly rebased!
 
 1. In GitHub, Create Pull Request.
 
@@ -347,7 +347,7 @@ from the main (upstream) repository:
 
 ## <a name="ci-pipeline"></a> CI PipeLine
 
-Full description of current CI PipeLine can be found [here](<https://github.com/SAP/fundamental-ngx/wiki/Deploy-(Release-and-Pre-Release)-pipe-line-description>).
+Full description of current CI PipeLine can be found [here](docs/CI.md).
 
 ## <a name="rules"></a> Coding Rules
 
@@ -355,9 +355,8 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 
 -   All features or bug fixes **must be tested** by one or more specs (unit-tests).
 -   All public API methods **must be documented**. [Documentation Guideline](https://github.com/SAP/fundamental-ngx/wiki/Documenting-Code)
--   We follow [Google's JavaScript Style Guide][js-style-guide], but wrap all code at
-    **100 characters**. An automated formatter is available, see
-    [DEVELOPER.md](docs/DEVELOPER.md#clang-format).
+-   We follow [Google's JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html). An automated formatter is available, see
+    [developer readme](docs/README.md#formatting).
 -   Rules are also mentioned in our [Code Contribution Guideline](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline)
 
 ## <a name="cla"></a> Signing the CLA
