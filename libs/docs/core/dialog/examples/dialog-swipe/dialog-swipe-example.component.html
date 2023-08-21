@@ -1,31 +1,46 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #swipeDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <span fd-title *ngIf="elementSelected">
-                <button fd-button glyph="arrow-left" fdType="transparent" (click)="returnToMain()"></button>
+            <span fd-title *ngIf="messageSelected">
+                <button fd-button glyph="arrow-left" fdType="transparent" (click)="returnToPrevious()"></button>
                 <strong id="fd-dialog-header-10" style="font-size: 16px">{{ dialogTitle }}</strong>
             </span>
-            <h1 id="fd-dialog-header-10" fd-title *ngIf="!elementSelected">{{ dialogTitle }}</h1>
+            <h1 id="fd-dialog-header-10" fd-title *ngIf="!messageSelected">{{ dialogTitle }}</h1>
         </fd-dialog-header>
         <fd-dialog-body>
-            <ul fd-list [byline]="true" [navigationIndicator]="true" *ngIf="!elementSelected">
-                <li fd-list-item *ngFor="let message of messageList; index as i">
-                    <a fd-list-link [navigationIndicator]="true" (click)="openElement(i)">
-                        <span fd-list-thumbnail><fd-icon [glyph]="message.icon"></fd-icon></span>
-                        <div fd-list-content>
-                            <div fd-list-title>{{ message.messageTitle }}</div>
-                            <div fd-list-byline>{{ message.messageInfo }}</div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <span *ngIf="elementSelected"
-                >{{ content }} - Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-                Vivamus ut laoreet lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                cubilia curae;<br />
-                Aenean sagittis aliquam justo et suscipit. Nam molestie, magna at elementum pulvinar,<br />
-                nisi enim venenatis ante, id convallis mi neque nec risus.
-            </span>
+            <div *ngIf="!messageSelected">
+                <ul fd-list [byline]="true" [navigationIndicator]="true">
+                    <li fd-list-item *ngFor="let message of messageList; index as i">
+                        <a fd-list-link [navigationIndicator]="true" (click)="openMessage(message)">
+                            <span fd-list-thumbnail><fd-icon [glyph]="message.icon"></fd-icon></span>
+                            <div fd-list-content>
+                                <div fd-list-title>{{ message.messageTitle }}</div>
+                                <div fd-list-byline>{{ message.messageInfo }}</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="messageSelected">
+                <ul fd-list [byline]="true" [navigationIndicator]="true" *ngIf="!subMessageSelected">
+                    <li fd-list-item *ngFor="let n of arrList; index as i">
+                        <a fd-list-link [navigationIndicator]="true" (click)="openSubMessage(i + 1)">
+                            <span fd-list-thumbnail><fd-icon [glyph]="newMessage.icon"></fd-icon></span>
+                            <div fd-list-content>
+                                <div fd-list-title>{{ newMessage.messageTitle }}</div>
+                                <div fd-list-byline>{{ newMessage.messageInfo }}</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <span *ngIf="subMessageSelected"
+                    >{{ newMessage.messageInfo }} - Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
+                    Vivamus ut laoreet lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+                    cubilia curae;<br />
+                    Aenean sagittis aliquam justo et suscipit. Nam molestie, magna at elementum pulvinar,<br />
+                    nisi enim venenatis ante, id convallis mi neque nec risus.
+                </span>
+            </div>
         </fd-dialog-body>
         <fd-dialog-footer>
             <fd-button-bar
@@ -33,7 +48,7 @@
                 label="Close"
                 (click)="dialog.close('Close')"
                 ariaLabel="Close"
-                *ngIf="!elementSelected"
+                *ngIf="!messageSelected"
             ></fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
