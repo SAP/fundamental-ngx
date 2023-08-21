@@ -15,7 +15,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlStatus, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormControlStatus, FormGroupDirective, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
 import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge, of } from 'rxjs';
 import {
@@ -31,9 +31,7 @@ import { FormGeneratorFieldComponent } from '../form-generator-field/form-genera
 
 import { FormGeneratorService } from '../form-generator.service';
 import {
-    BaseDynamicFormItemGuiOptions,
     DynamicFormItem,
-    DynamicFormItemGuiOptions,
     DynamicFormItemMap,
     DynamicFormItemValidationObject,
     DynamicFormValue
@@ -49,6 +47,13 @@ import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayou
 import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
 import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
 import { getParentItem, isFormFieldItem, mapFormItems, transformFormItem } from '../helpers';
+import { GetOrderedFieldControlsPipe } from '../pipes/get-ordered-form-controls.pipe';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { DynamicFormControlFieldDirective } from '../dynamic-form-control-field.directive';
+import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { GetHintOptionsPipe } from '../pipes/get-hint-options.pipe';
 
 let formUniqueId = 0;
 
@@ -82,6 +87,21 @@ export interface SubmitFormEventResult {
             useFactory: (formGenerator: FormGeneratorComponent) => formGenerator.doCheck$,
             deps: [FormGeneratorComponent]
         }
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        BusyIndicatorModule,
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgFor,
+        NgTemplateOutlet,
+        DynamicFormControlFieldDirective,
+        FormGeneratorFieldComponent,
+        SkeletonModule,
+        GetOrderedFieldControlsPipe,
+        GetHintOptionsPipe
     ]
 })
 export class FormGeneratorComponent implements OnDestroy, OnChanges {
@@ -407,31 +427,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     submit(): void {
         this.formGroup.onSubmit(new Event('submit'));
-    }
-
-    /**
-     * @description
-     * Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
-     * will combine default value of hints for form generator with provided options.
-     * @param guiOptions
-     */
-    getHintOptions(
-        guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions
-    ): FieldHintOptions | undefined {
-        if (!guiOptions?.hint) {
-            return;
-        }
-        const formItemHintOptions = guiOptions.hint;
-        if (typeof formItemHintOptions === 'string' || formItemHintOptions instanceof TemplateRef) {
-            return {
-                ...this._defaultHintOptions,
-                content: formItemHintOptions
-            };
-        }
-        return {
-            ...this._defaultHintOptions,
-            ...formItemHintOptions
-        };
     }
 
     /** @hidden */

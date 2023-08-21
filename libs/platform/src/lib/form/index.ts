@@ -51,6 +51,7 @@ export * from './form-generator/interfaces/form-generator-module-config';
 export * from './form-generator/providers/providers';
 export * from './form-generator/form-generator-field/form-generator-field.component';
 export * from './form-generator/form-generator-components-accessor.service';
+export * from './form-generator/pipes/get-hint-options.pipe';
 
 export * from './form-group/constants';
 export * from './form-group/config/default-form-field-hint-options';

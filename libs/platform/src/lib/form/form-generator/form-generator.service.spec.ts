@@ -13,6 +13,8 @@ import {
 } from './providers/providers';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { mapFormItems } from './helpers';
+import { PlatformFormGeneratorModule } from './fdp-form-generator.module';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 export const dummyFormItemsWithWhenCondition: Map<string, DynamicFormItemMap> = mapFormItems([
     {
@@ -58,8 +60,8 @@ export const brokenFormItems: Map<string, DynamicFormItemMap> = mapFormItems([
     template: `
         <ng-container [formGroup]="form">
             <fdp-slider
-                [fdContentDensity]="formItem.guiOptions?.contentDensity"
-                [customValues]="formItem.choices"
+                [fdContentDensity]="$any(formItem.guiOptions?.contentDensity)"
+                [customValues]="$any(formItem.choices)"
                 [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
                 [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
                 [name]="name"
@@ -67,6 +69,8 @@ export const brokenFormItems: Map<string, DynamicFormItemMap> = mapFormItems([
             ></fdp-slider>
         </ng-container>
     `,
+    standalone: true,
+    imports: [PlatformFormGeneratorModule, PlatformSliderModule, ReactiveFormsModule, ContentDensityModule],
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
 export class TestCustomComponent extends BaseDynamicFormGeneratorControl {
@@ -80,8 +84,7 @@ describe('FormGeneratorService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCustomComponent],
-            imports: [FormsModule, ReactiveFormsModule, PlatformSliderModule],
+            imports: [FormsModule, ReactiveFormsModule, TestCustomComponent],
             providers: [
                 defaultFormGeneratorItemConfigProvider,
                 FormGeneratorService,

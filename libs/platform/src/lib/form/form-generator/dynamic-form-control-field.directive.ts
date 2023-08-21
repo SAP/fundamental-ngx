@@ -9,7 +9,8 @@ import { DynamicFormControl } from './dynamic-form-control';
  * Structural directive, which hides current form item and toggles validation rules for it.
  */
 @Directive({
-    selector: '[fdpDynamicFormControlField]'
+    selector: '[fdpDynamicFormControlField]',
+    standalone: true
 })
 export class DynamicFormControlFieldDirective implements OnInit {
     /**
