@@ -1,5 +1,6 @@
 export * from './form-helpers';
 export * from './helpers';
+export * from './models/field.model';
 
 export * from './auto-complete/auto-complete.directive';
 export * from './auto-complete/auto-complete.module';
