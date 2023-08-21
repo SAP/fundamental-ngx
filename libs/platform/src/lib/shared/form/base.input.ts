@@ -5,7 +5,9 @@ import {
     DoCheck,
     ElementRef,
     Host,
+    inject,
     Inject,
+    InjectionToken,
     Input,
     isDevMode,
     OnDestroy,
@@ -17,12 +19,14 @@ import {
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { BaseComponent } from '../base';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates, isValidControlState } from '@fundamental-ngx/cdk/forms';
 import { PlatformFormField, PlatformFormFieldControl } from './form-field';
+
+export const FDP_DO_CHECK = new InjectionToken<Observable<void>>('FdpInputDoCheckTrigger');
 
 let randomId = 0;
 
@@ -147,20 +151,23 @@ export abstract class BaseInput
     abstract set value(value: any);
 
     /**
-     * Reference to internal Input element
-     */
-    @ViewChild('inputElementRef', { static: true, read: ElementRef })
-    protected _elementRef: ElementRef;
-
-    /**
      * See @FormFieldControl
      */
     focused = false;
+
+    /** set when input field is mandatory form field */
+    required: boolean;
 
     /** Whether control has errors */
     get controlInvalid(): boolean {
         return this._controlInvalid;
     }
+
+    /**
+     * Reference to internal Input element
+     */
+    @ViewChild('inputElementRef', { static: true, read: ElementRef })
+    protected _elementRef: ElementRef;
 
     /**
      * @hidden
@@ -174,14 +181,8 @@ export abstract class BaseInput
     /** @hidden */
     readonly formField: PlatformFormField | null = null;
 
-    /** set when input field is mandatory form field */
-    required: boolean;
-
     /** @hidden */
-    onChange: (value: any) => void = () => {};
-
-    /** @hidden */
-    onTouched = (): void => {};
+    readonly _doCheck$ = inject(FDP_DO_CHECK, { optional: true });
 
     /** @hidden */
     protected constructor(
@@ -207,7 +208,17 @@ export abstract class BaseInput
 
         // We have to ignore "formField" if there is "formControl" wrapper
         this.formField = formField && !formControl ? formField : null;
+
+        this._doCheck$?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+            this.ngDoCheck();
+        });
     }
+
+    /** @hidden */
+    onChange: (value: any) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnInit(): void {

@@ -57,16 +57,7 @@ import {
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import {
-    Field,
-    FieldColumn,
-    FieldGroup,
-    getField,
-    getFormField,
-    isFieldChild,
-    isFieldGroupChild,
-    isFieldGroupWrapperChild
-} from '../form-helpers';
+import { getField, getFormField, isFieldChild, isFieldGroupChild, isFieldGroupWrapperChild } from '../form-helpers';
 import { FormFieldErrorDirective } from './form-field-error/form-field-error.directive';
 import { FormFieldComponent } from './form-field/form-field.component';
 import {
@@ -81,6 +72,7 @@ import { FormFieldLayoutService } from './services/form-field-layout.service';
 import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
 import { contentDensityObserverProviders, ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { FormField } from '@fundamental-ngx/cdk/forms';
+import { Field, FieldColumn, FieldGroup } from '../models/field.model';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,

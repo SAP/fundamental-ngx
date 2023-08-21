@@ -13,6 +13,7 @@ import {
     DynamicFormFieldItem,
     DynamicFormItem,
     DynamicFormItemChoiceTypes,
+    DynamicFormItemMap,
     DynamicFormValue,
     PreparedDynamicFormFieldItem
 } from './interfaces/dynamic-form-item';
@@ -22,6 +23,7 @@ import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-c
 import { DynamicFormGroup } from './interfaces/dynamic-form-group';
 import { FormGeneratorConfig } from './interfaces/form-generator-module-config';
 import { defaultFormGeneratorConfig, FORM_GENERATOR_CONFIG, FORM_GENERATOR_ITEM_CONFIG } from './providers/providers';
+import { isFormFieldItem } from './helpers';
 
 /**
  * @description Form generator service
@@ -78,7 +80,8 @@ export class FormGeneratorService implements OnDestroy {
      * @param formItems the list of form items which used for form control generation.
      * @returns `FormGroup` class with the list of `DynamicFormControl` control classes.
      */
-    async generateForm(formName: string, formItems: DynamicFormItem[]): Promise<DynamicFormGroup> {
+    async generateForm(formName: string, formItems: Map<string, DynamicFormItemMap>): Promise<DynamicFormGroup> {
+        const existingForm = this.forms.get(formName);
         const form = this._fb.group({}) as DynamicFormGroup;
 
         const defaultFormGroup = new DynamicFormControlGroup(
@@ -88,11 +91,13 @@ export class FormGeneratorService implements OnDestroy {
             {}
         );
 
+        defaultFormGroup.formItem.items = new Map();
+
         formItems = this._transformFormItems(formItems);
 
         formItems.forEach((formItem) => {
-            if (!this.isFormFieldItem(formItem)) {
-                if (!formItem.items?.length) {
+            if (!isFormFieldItem(formItem)) {
+                if (!formItem.items || formItem.items.size === 0) {
                     return;
                 }
 
@@ -125,7 +130,7 @@ export class FormGeneratorService implements OnDestroy {
 
             defaultFormGroup.addControl(formItem.name, formControl);
 
-            defaultFormGroup.formItem.items = [...[formItem]];
+            defaultFormGroup.formItem.items?.set(formItem.name, formItem);
 
             formControl.updateValueAndValidity({ emitEvent: false });
         });
@@ -136,9 +141,9 @@ export class FormGeneratorService implements OnDestroy {
 
         // After we created initial form, we need to get dynamic labels, choices and value
         for (const key of formControlNames) {
-            const formItem = formItems.find((fi) => fi.name === key);
+            const formItem = formItems.get(key);
 
-            if (!this.isFormFieldItem(formItem)) {
+            if (!isFormFieldItem(formItem)) {
                 continue;
             }
 
@@ -162,9 +167,44 @@ export class FormGeneratorService implements OnDestroy {
             defaultFormGroup.controls[key].formItem = formItem as PreparedDynamicFormFieldItem;
         }
 
+        Object.keys(form.controls).forEach((controlName) => {
+            const newControl = form.get(controlName) as DynamicFormControlGroup;
+            const oldControl = existingForm?.get(controlName) as DynamicFormControlGroup;
+            this._cloneOldFormGroup(newControl, oldControl);
+        });
+
         this.forms.set(formName, form);
 
         return form;
+    }
+
+    /**
+     * Adds new control to a form.
+     * @param control Control to add
+     * @param form Form of the control to be added.
+     * @param path Group path.
+     */
+    async addControl(control: DynamicFormItem, form: DynamicFormGroup, path: string[] = []): Promise<void> {
+        const formGroup = this.getFormControl(form, ...path);
+
+        if (formGroup instanceof DynamicFormControlGroup) {
+            const formControl = this._generateDynamicFormItem(control as PreparedDynamicFormFieldItem, form);
+            formGroup.addControl(control.name, formControl);
+            return;
+        }
+    }
+
+    /**
+     * Removes the control with given name from the form.
+     * @param controlName
+     * @param path
+     */
+    removeControl(controlName: string, form: DynamicFormGroup, path: string[] = []): void {
+        const formGroup = this.getFormControl(form, ...path);
+
+        if (formGroup instanceof DynamicFormControlGroup) {
+            formGroup.removeControl(controlName);
+        }
     }
 
     /**
@@ -184,7 +224,7 @@ export class FormGeneratorService implements OnDestroy {
         for (const [i, control] of Object.entries(form.controls)) {
             const formItem = control.formItem;
 
-            if (!this.isFormFieldItem(formItem)) {
+            if (!isFormFieldItem(formItem)) {
                 formValue[i] = await this.getFormValue(control as DynamicFormControlGroup, renderValue);
                 continue;
             }
@@ -256,15 +296,6 @@ export class FormGeneratorService implements OnDestroy {
     async checkVisibleFormItems(form: DynamicFormGroup): Promise<{ [key: string]: boolean }> {
         const formValue = this._getFormValueWithoutUngrouped(cloneDeep(form.value));
         return await this._checkFormControlsVisibility(form, formValue);
-    }
-
-    /**
-     * Is current form item is a field item.
-     * @param item form item.
-     * @returns is current form item is a field.
-     */
-    isFormFieldItem(item: any): item is DynamicFormFieldItem {
-        return !!(item as DynamicFormFieldItem).type;
     }
 
     /**
@@ -397,7 +428,7 @@ export class FormGeneratorService implements OnDestroy {
         for (const [key, control] of Object.entries(form.controls)) {
             const formItem = control.formItem;
 
-            if (!this.isFormFieldItem(formItem)) {
+            if (!isFormFieldItem(formItem)) {
                 const groupVisibleItems = await this._checkFormControlsVisibility(
                     control as DynamicFormControlGroup,
                     formValue
@@ -505,18 +536,18 @@ export class FormGeneratorService implements OnDestroy {
     }
 
     /** @hidden */
-    private _getMergedFormFieldItemConfig(formItem: DynamicFormFieldItem): DynamicFormFieldItem {
+    private _getMergedFormFieldItemConfig(formItem: DynamicFormItemMap): DynamicFormItemMap {
         return merge(cloneDeep(this._defaultItemConfig), formItem);
     }
 
     /** @hidden */
-    private _transformFormItems(formItems: DynamicFormItem[]): DynamicFormItem[] {
+    private _transformFormItems(formItems: Map<string, DynamicFormItemMap>): Map<string, DynamicFormItemMap> {
         formItems.forEach((item, index) => {
-            if (!this.isFormFieldItem(item)) {
+            if (!isFormFieldItem(item)) {
                 return;
             }
 
-            formItems[index] = this._getMergedFormFieldItemConfig(item);
+            formItems.set(index, this._getMergedFormFieldItemConfig(item));
         });
 
         return formItems;
@@ -527,7 +558,7 @@ export class FormGeneratorService implements OnDestroy {
         for (const control of Object.values(form.controls)) {
             const formItem = control.formItem;
 
-            if (!this.isFormFieldItem(formItem)) {
+            if (!isFormFieldItem(formItem)) {
                 await this._triggerFieldsOnchange(control as DynamicFormControlGroup);
                 continue;
             }
@@ -537,5 +568,26 @@ export class FormGeneratorService implements OnDestroy {
                 await this._getFunctionValue(obj);
             }
         }
+    }
+
+    /** @hidden */
+    private _cloneOldFormGroup(newGroup: DynamicFormControlGroup, oldGroup?: DynamicFormControlGroup): void {
+        Object.keys(newGroup.controls).forEach((controlName) => {
+            const control = newGroup.get(controlName);
+            const oldControl = oldGroup?.get(controlName) as DynamicFormControlGroup;
+            if (!oldControl) {
+                return;
+            }
+            if (control instanceof DynamicFormControlGroup) {
+                this._cloneOldFormGroup(control, oldControl);
+                return;
+            }
+
+            control?.setValue(oldControl.value, { emitEvent: false });
+
+            if (oldControl.touched) {
+                control?.markAsTouched();
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, ContentChild, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 
 import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
 
 /**
  * This extends core implementation  to support richer extensibility and instead of relying
@@ -17,6 +18,23 @@ import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponent {
+    /**
+     * To allow user to determine what event he wants to trigger the messages to show
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     */
+    @Input()
+    triggers: (string | TriggerConfig)[] = [
+        {
+            trigger: 'focusin',
+            openAction: true,
+            closeAction: false
+        },
+        {
+            trigger: 'focusout',
+            openAction: false,
+            closeAction: true
+        }
+    ];
     /**
      * Custom trigger element.
      */

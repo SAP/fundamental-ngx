@@ -1,22 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { FormMessageModule } from '@fundamental-ngx/core/form';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { FormGeneratorComponentsAccessorService } from './form-generator-components-accessor.service';
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
 import { DynamicFormControlFieldDirective } from './dynamic-form-control-field.directive';
-import { PlatformInputModule } from '../input/fdp-input.module';
-import { FdpFormGroupModule } from '../form-group/fdp-form.module';
-import { PlatformCheckboxGroupModule } from '../checkbox-group/checkbox-group.module';
-import { PlatformSelectModule } from '../select/select.module';
-import { PlatformRadioGroupModule } from '../radio-group/radio-group.module';
-import { PlatformTextAreaModule } from '../text-area/text-area.module';
-import { PlatformDatePickerModule } from '../date-picker/date-picker.module';
-import { PlatformSwitchModule } from '../switch/switch.module';
 import { DynamicFormControlDirective } from './dynamic-form-control.directive';
 import { DynamicFormGeneratorCheckboxComponent } from './controls/dynamic-form-generator-checkbox/dynamic-form-generator-checkbox.component';
 import { DynamicFormGeneratorInputComponent } from './controls/dynamic-form-generator-input/dynamic-form-generator-input.component';
@@ -30,8 +15,6 @@ import { FormGeneratorFieldComponent } from './form-generator-field/form-generat
 import { DynamicFormGeneratorMultiInputComponent } from './controls/dynamic-form-generator-multi-input/dynamic-form-generator-multi-input.component';
 import { FormGeneratorModuleConfig } from './interfaces/form-generator-module-config';
 import { GetOrderedFieldControlsPipe } from './pipes/get-ordered-form-controls.pipe';
-import { PlatformMultiComboboxModule } from '../multi-combobox/multi-combobox.module';
-import { PlatformMultiInputModule } from '../multi-input/multi-input.module';
 import {
     defaultFormGeneratorConfigProvider,
     defaultFormGeneratorItemConfigProvider,
@@ -39,9 +22,8 @@ import {
     FORM_GENERATOR_ITEM_CONFIG
 } from './providers/providers';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { DynamicFormGeneratorObjectStatusComponent } from './controls/dynamic-form-generator-object-status/dynamic-form-generator-object-status.component';
-import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { GetHintOptionsPipe } from './pipes/get-hint-options.pipe';
 
 /**
  * Adds Form Generator functionality to your application.
@@ -51,7 +33,7 @@ import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-sta
  * * With `withConfig()` method which allows passing custom default configuration.
  */
 @NgModule({
-    declarations: [
+    imports: [
         FormGeneratorComponent,
         DynamicFormControlFieldDirective,
         DynamicFormControlDirective,
@@ -65,30 +47,8 @@ import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-sta
         FormGeneratorFieldComponent,
         DynamicFormGeneratorMultiInputComponent,
         GetOrderedFieldControlsPipe,
-        DynamicFormGeneratorObjectStatusComponent
-    ],
-    imports: [
-        CommonModule,
-        FdpFormGroupModule,
-        PlatformInputModule,
-        FormsModule,
-        ReactiveFormsModule,
-        PlatformButtonModule,
-        PlatformCheckboxGroupModule,
-        PlatformSelectModule,
-        PlatformRadioGroupModule,
-        PlatformTextAreaModule,
-        PlatformInputModule,
-        PlatformDatePickerModule,
-        PlatformSwitchModule,
-        FormMessageModule,
-        BusyIndicatorModule,
-        PlatformMultiComboboxModule,
-        PlatformMultiInputModule,
-        ContentDensityModule,
-        SkeletonModule,
-        ListModule,
-        PlatformObjectStatusModule
+        DynamicFormGeneratorObjectStatusComponent,
+        GetHintOptionsPipe
     ],
     providers: [
         FormGeneratorService,
@@ -109,7 +69,8 @@ import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-sta
         DynamicFormGeneratorSwitchComponent,
         FormGeneratorFieldComponent,
         ContentDensityModule,
-        DynamicFormGeneratorObjectStatusComponent
+        DynamicFormGeneratorObjectStatusComponent,
+        GetHintOptionsPipe
     ]
 })
 export class PlatformFormGeneratorModule {

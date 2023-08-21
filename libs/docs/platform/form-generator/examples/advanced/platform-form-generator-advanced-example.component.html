@@ -1,0 +1,22 @@
+<fdp-form-generator
+    columnLayout="XL2-L2-M2-S1"
+    mainTitle="Default Form Generator example"
+    [formItems]="questions"
+    (formSubmitted)="onFormSubmitted($event)"
+    (formCreated)="onFormCreated()"
+>
+</fdp-form-generator>
+
+<p>Form created: {{ formCreated }}</p>
+
+<p *ngIf="formValue">Form value: {{ formValue | json }}</p>
+
+<div *ngIf="formCreated" fd-bar barDesign="footer">
+    <div fd-bar-left>
+        <fdp-button (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+    </div>
+    <div fd-bar-right>
+        <fd-button-bar (click)="addControl()" label="Add new control"></fd-button-bar>
+        <fd-button-bar *ngIf="newControlIndex > 0" (click)="removeControl()" label="Remove control"></fd-button-bar>
+    </div>
+</div>
