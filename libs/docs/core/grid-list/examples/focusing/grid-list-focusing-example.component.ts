@@ -1,6 +1,17 @@
 import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 
-import { GridListItemComponent, GridListItemOutputEvent, GridListItemType } from '@fundamental-ngx/core/grid-list';
+import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    GridListItemComponent,
+    GridListItemOutputEvent,
+    GridListItemType,
+    GridListModule
+} from '@fundamental-ngx/core/grid-list';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 interface GridListItem {
     id: number;
@@ -15,7 +26,9 @@ interface GridListItem {
     templateUrl: './grid-list-focusing-example.component.html',
     styleUrls: ['./grid-list-focusing-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [GridListModule, ButtonModule, ContentDensityDirective, NgFor, AvatarModule, LinkComponent, RouterLink]
 })
 export class GridListFocusingItemExampleComponent {
     list: GridListItem[] = [

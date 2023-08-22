@@ -1,4 +1,3 @@
-import { MessageBoxPo } from './message-box.po';
 import {
     click,
     doesItExist,
@@ -14,6 +13,7 @@ import {
     waitForNotPresent
 } from '../../../../../e2e';
 import { buttonClassArr, iconsArr } from './message-box';
+import { MessageBoxPo } from './message-box.po';
 
 describe('Message-box test suits', () => {
     const messageBoxPage = new MessageBoxPo();

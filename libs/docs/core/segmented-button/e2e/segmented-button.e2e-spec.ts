@@ -1,4 +1,3 @@
-import { SegmentedButtonPo } from './segmented-button.po';
 import {
     acceptAlert,
     click,
@@ -9,6 +8,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { SegmentedButtonPo } from './segmented-button.po';
 
 describe('Select component:', () => {
     const segmentedButtonPage = new SegmentedButtonPo();

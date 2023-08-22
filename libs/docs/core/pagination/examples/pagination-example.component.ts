@@ -1,7 +1,9 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PaginationComponent, PaginationModule } from '@fundamental-ngx/core/pagination';
 import { of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { PaginationComponent } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-example',
@@ -18,7 +20,9 @@ import { PaginationComponent } from '@fundamental-ngx/core/pagination';
         <button fd-button label="Go to page 1" (click)="goToPage(1)"></button>
 
         <div *ngIf="notification">{{ notification }}</div>
-    `
+    `,
+    standalone: true,
+    imports: [PaginationModule, ButtonModule, NgIf]
 })
 export class PaginationExampleComponent {
     totalItems = 50;

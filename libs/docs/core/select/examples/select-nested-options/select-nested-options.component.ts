@@ -1,9 +1,14 @@
+import { JsonPipe, NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-select-nested-options',
     templateUrl: './select-nested-options.component.html',
-    styleUrls: ['select-nested-options.component.scss']
+    styleUrls: ['select-nested-options.component.scss'],
+    standalone: true,
+    imports: [SelectModule, ListModule, NgFor, NgClass, ListSecondaryDirective, JsonPipe]
 })
 export class SelectNestedOptionsComponent {
     selectedValue: string;

@@ -35,10 +35,10 @@ export class StackblitzDependencies {
         'lodash-es'
     ];
 
-    static getDependencies(packageInfo: Record<string, any>): Record<string, any> {
+    static getDependencies(packageInfo: Record<string, any>, lernaInfo: Record<string, any>): Record<string, any> {
         const _dependencies: Record<string, any> = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = packageInfo.version));
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = lernaInfo.version));
 
         [...this._dependencies, ...this._ngDependencies].forEach((dep) => {
             if (packageInfo.dependencies && packageInfo.dependencies[dep]) {

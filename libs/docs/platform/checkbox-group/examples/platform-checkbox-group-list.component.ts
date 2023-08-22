@@ -1,9 +1,23 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-list',
-    templateUrl: './platform-checkbox-group-list.component.html'
+    templateUrl: './platform-checkbox-group-list.component.html',
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CheckboxGroupComponent,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgIf
+    ]
 })
 export class PlatformCheckboxGroupListComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];

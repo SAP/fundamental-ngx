@@ -1,6 +1,7 @@
 import { ExecutorContext, readTargetOptions } from '@nx/devkit';
-import { readdirSync, renameSync, readFileSync, writeFileSync } from 'fs';
-import { Application, TSConfigReader, DefaultTheme, Reflection, PageEvent } from 'typedoc';
+import { readFileSync, readdirSync, renameSync, writeFileSync } from 'fs';
+import { join } from 'path';
+import { Application, DefaultTheme, PageEvent, Reflection, TSConfigReader } from 'typedoc';
 import { FdThemeContext } from './theme';
 
 export class FdTheme extends DefaultTheme {
@@ -33,6 +34,7 @@ export default async function compileTypedocs(_options: any, context: ExecutorCo
     app.bootstrap({
         tsconfig: tsConfig,
         out: outputPath,
+        json: join(outputPath, 'typedoc.json'),
         entryPoints: [projectPath],
         hideGenerator: true,
         excludePrivate: true,
@@ -54,6 +56,7 @@ export default async function compileTypedocs(_options: any, context: ExecutorCo
     const outputDir = outputPath;
 
     await app.generateDocs(project, outputDir);
+    await app.generateJson(project, join(outputDir, 'typedoc.json'));
 
     for (const f of getFiles(outputPath)) {
         const contents = readFileSync(f, 'utf-8').replace(`<!DOCTYPE html>\n`, '');

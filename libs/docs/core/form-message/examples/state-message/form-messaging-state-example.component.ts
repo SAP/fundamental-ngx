@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import {
+    FormControlModule,
+    FormInputMessageGroupModule,
+    FormItemModule,
+    FormLabelModule,
+    FormMessageModule
+} from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-form-messaging-state-example',
@@ -9,6 +16,8 @@ import { Component } from '@angular/core';
                 margin-bottom: 40px !important;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [FormItemModule, FormLabelModule, FormInputMessageGroupModule, FormControlModule, FormMessageModule]
 })
 export class FormMessagingStateExampleComponent {}

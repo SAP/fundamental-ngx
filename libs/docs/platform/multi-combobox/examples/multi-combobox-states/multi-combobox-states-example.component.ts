@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
+import {
+    FdpFormGroupModule,
+    PlatformComboboxModule,
+    PlatformMultiComboboxModule
+} from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
@@ -9,7 +14,9 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     templateUrl: './multi-combobox-states-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformComboboxModule, PlatformMultiComboboxModule]
 })
 export class MultiComboboxStatesExampleComponent {
     dataSource = [

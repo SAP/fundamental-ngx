@@ -1,7 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets,
+    SeparatorComponent
+} from '@fundamental-ngx/docs/shared';
 import { PlatformTableActivableExampleComponent } from '../../examples/platform-table-activable-example.component';
+import { PlatformTableNavigatableRowIndicatorExampleComponent } from '../../examples/platform-table-navigatable-row-indicator-example.component';
 
 const platformTableActivableRowSrc = 'platform-table-activable-example.component.html';
 const platformTableActivableRowTsSrc = 'platform-table-activable-example.component.ts';
@@ -13,7 +24,18 @@ const platformTableNavigatableRowTsSrc = 'platform-table-navigatable-row-indicat
     selector: 'fd-clickable-rows-docs',
     templateUrl: './clickable-rows-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformTableActivableExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTableNavigatableRowIndicatorExampleComponent,
+        FdDatetimeModule
+    ]
 })
 export class ClickableRowsDocsComponent {
     childService = inject(ExampleChildService);

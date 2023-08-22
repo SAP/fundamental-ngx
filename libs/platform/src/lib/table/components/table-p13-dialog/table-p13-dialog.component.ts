@@ -41,16 +41,16 @@ const dialogConfig: DialogConfig = {
  * ...
  * <fdp-table-p13-dialog [table]="myTable">
  *   <!-- Sort Panel -->
- *   <fdp-table-p13n-sort></fdp-table-p13n-sort>
+ *   <fdp-table-p13-sort></fdp-table-p13-sort>
  *
  *   <!-- Filter Panel -->
- *   <fdp-table-p13n-filter></fdp-table-p13n-filter>
+ *   <fdp-table-p13-filter></fdp-table-p13-filter>
  *
  *   <!-- Group Panel -->
- *   <fdp-table-p13n-group></fdp-table-p13n-group>
+ *   <fdp-table-p13-group></fdp-table-p13-group>
  *
  *   <!-- Columns Panel -->
- *   <fdp-table-p13n-columns></fdp-table-p13n-columns>
+ *   <fdp-table-p13-columns></fdp-table-p13-columns>
  * </fdp-table-p13-dialog>
  * ```
  * */

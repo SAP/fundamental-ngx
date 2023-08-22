@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { Observable, Subject, of } from 'rxjs';
 import { delay, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-multi-input-async-example',
-    templateUrl: './multi-input-async-example.component.html'
+    templateUrl: './multi-input-async-example.component.html',
+    standalone: true,
+    imports: [MultiInputModule, FormsModule, AsyncPipe, JsonPipe]
 })
 export class MultiInputAsyncExampleComponent {
     readonly searchValue$ = new Subject<string>();

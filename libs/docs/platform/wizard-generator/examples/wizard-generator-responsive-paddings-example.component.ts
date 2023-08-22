@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
+import { JsonPipe, NgIf } from '@angular/common';
+import {
+    PlatformWizardGeneratorModule,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-responsive-paddings-example',
-    templateUrl: './wizard-generator-responsive-paddings-example.component.html'
+    templateUrl: './wizard-generator-responsive-paddings-example.component.html',
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorResponsivePaddingsExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

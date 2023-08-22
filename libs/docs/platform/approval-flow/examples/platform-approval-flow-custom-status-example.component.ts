@@ -1,7 +1,13 @@
 import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, TitleCasePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import {
     ApprovalFlowComponent,
     ApprovalNode,
@@ -10,6 +16,7 @@ import {
     ApprovalStatus,
     ApprovalTeam,
     ApprovalUser,
+    PlatformApprovalFlowModule,
     SendRemindersData
 } from '@fundamental-ngx/platform/approval-flow';
 import {
@@ -19,12 +26,22 @@ import {
     ProviderParams
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep } from 'lodash-es';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fdp-platform-approval-flow-status-example',
-    templateUrl: './platform-approval-flow-custom-status-example.component.html'
+    templateUrl: './platform-approval-flow-custom-status-example.component.html',
+    standalone: true,
+    imports: [
+        PlatformApprovalFlowModule,
+        NgSwitch,
+        NgSwitchCase,
+        NgIf,
+        FormsModule,
+        NgFor,
+        MultiInputModule,
+        ContentDensityDirective,
+        TitleCasePipe
+    ]
 })
 export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestroy {
     private graphs = getGraphs();

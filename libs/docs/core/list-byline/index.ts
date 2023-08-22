@@ -1,1 +1,19 @@
-export * from './list-byline-docs.module';
+import { Routes } from '@angular/router';
+import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { API_FILES } from '../shared/src';
+
+export const ROUTES: Routes = [
+    {
+        path: '',
+        loadComponent: () =>
+            import('./list-byline-header/list-byline-header.component').then((c) => c.ListBylineHeaderComponent),
+        providers: [currentComponentProvider('list-byline'), ApiDocsService],
+        children: [
+            {
+                path: '',
+                loadComponent: () => import('./list-byline-docs.component').then((c) => c.ListBylineDocsComponent)
+            },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.list } }
+        ]
+    }
+];

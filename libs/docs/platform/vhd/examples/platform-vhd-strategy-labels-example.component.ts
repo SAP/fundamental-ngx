@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
-import {
-    VhdDataProvider,
-    VhdValue,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource,
-    VhdIncludedEntity,
-    VhdExcludedEntity,
-    VhdDefineIncludeStrategy,
-    VhdDefineExcludeStrategy
-} from '@fundamental-ngx/platform/value-help-dialog';
+import { NgFor, NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
 import { patchLanguage } from '@fundamental-ngx/i18n';
+import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
+    VhdDataProvider,
+    VhdDefineExcludeStrategy,
+    VhdDefineIncludeStrategy,
+    VhdExcludedEntity,
+    VhdIncludedEntity,
+    VhdValue,
+    VhdValueChangeEvent
+} from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
     id: number;
@@ -62,7 +67,9 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
                 defineConditionConditionStrategyLabelBetween: 'FROM...TO'
             }
         })
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule, NgIf, TokenModule, ContentDensityDirective, NgFor, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     filters: FilterData[];

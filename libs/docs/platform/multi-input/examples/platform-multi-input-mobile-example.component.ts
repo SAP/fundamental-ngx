@@ -1,6 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 export interface User {
@@ -12,7 +14,9 @@ export interface User {
     selector: 'fdp-platform-multi-input-mobile-example',
     templateUrl: './platform-multi-input-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformMultiInputModule, FormsModule, ReactiveFormsModule]
 })
 export class PlatformMultiInputMobileExampleComponent {
     _dataSource = [

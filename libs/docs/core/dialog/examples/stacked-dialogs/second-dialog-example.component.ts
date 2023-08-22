@@ -1,5 +1,10 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     template: `
@@ -27,7 +32,9 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                 </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>
-    `
+    `,
+    standalone: true,
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, InitialFocusDirective]
 })
 export class SecondDialogExampleComponent {
     constructor(public dialogRef: DialogRef) {}

@@ -1,8 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-select-mode-example',
-    templateUrl: './select-mode-example.component.html'
+    templateUrl: './select-mode-example.component.html',
+    standalone: true,
+    imports: [SelectModule, NgFor, ContentDensityDirective]
 })
 export class SelectModeExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

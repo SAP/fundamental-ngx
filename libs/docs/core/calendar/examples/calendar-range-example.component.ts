@@ -1,12 +1,15 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent, DateRange } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { DateRange } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-range-example',
@@ -31,7 +34,9 @@ import { DateRange } from '@fundamental-ngx/core/calendar';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [CalendarComponent, FormsModule, DatePipe, FdDatetimeModule]
 })
 export class CalendarRangeExampleComponent {
     selected: DateRange<FdDate> = new DateRange(new FdDate(2019, 10, 11), new FdDate(2019, 10, 19));

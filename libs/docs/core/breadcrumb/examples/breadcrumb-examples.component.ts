@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
     selector: 'fd-breadcrumb-routerLink-example',
@@ -10,7 +13,9 @@ import { Component } from '@angular/core';
                 width: 100%;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [BreadcrumbModule, LinkComponent, RouterLink]
 })
 export class BreadcrumbRouterLinkExampleComponent {
     showIcon = true;
@@ -34,6 +39,8 @@ export class BreadcrumbRouterLinkExampleComponent {
                 width: 100%;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [BreadcrumbModule, LinkComponent]
 })
 export class BreadcrumbHrefExampleComponent {}

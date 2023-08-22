@@ -15,6 +15,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { correctPassword, invalidBirthday, simplePassword, validBirthday } from './form-generator';
 import {
     birthdayYearErrorMessage,
     frameworkErrorMessage,
@@ -22,7 +23,6 @@ import {
     requiredErrorMessage,
     termsErrorMesssage
 } from './form-generator-contents';
-import { correctPassword, invalidBirthday, simplePassword, validBirthday } from './form-generator';
 import { FormGeneratorPo } from './form-generator.po';
 
 describe('Form generator test suite', () => {

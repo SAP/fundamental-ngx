@@ -1,6 +1,19 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets,
+    SeparatorComponent
+} from '@fundamental-ngx/docs/shared';
+import { PlatformTableFilterableExampleComponent } from '../../examples/platform-table-filterable-example.component';
+import { PlatformTableGroupableExampleComponent } from '../../examples/platform-table-groupable-example.component';
+import { PlatformTableSortableExampleComponent } from '../../examples/platform-table-sortable-example.component';
 
 const platformTableSortableSrc = 'platform-table-sortable-example.component.html';
 const platformTableSortableTsSrc = 'platform-table-sortable-example.component.ts';
@@ -12,7 +25,20 @@ const platformTableFilterableTsSrc = 'platform-table-filterable-example.componen
     selector: 'fd-settings-dialog-docs',
     templateUrl: './settings-dialog-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        RouterLink,
+        ComponentExampleComponent,
+        PlatformTableSortableExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTableFilterableExampleComponent,
+        PlatformTableGroupableExampleComponent,
+        FdDatetimeModule
+    ]
 })
 export class SettingsDialogDocsComponent {
     childService = inject(ExampleChildService);

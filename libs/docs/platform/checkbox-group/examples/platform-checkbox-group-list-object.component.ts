@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-list-object',
-    templateUrl: './platform-checkbox-group-list-object.component.html'
+    templateUrl: './platform-checkbox-group-list-object.component.html',
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxGroupComponent, ContentDensityDirective]
 })
 export class PlatformCheckboxGroupListObjectComponent {
     countryCurrency = [new Country('Australia', 'AUD'), new Country('India', 'INR'), new Country('USA', 'USD')];

@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    PlatformLinkDisabledEmphasizedExampleComponent,
+    PlatformLinkDisabledExampleComponent,
+    PlatformLinkEmphasizedExampleComponent,
+    PlatformLinkIconExampleComponent,
+    PlatformLinkInvertedExampleComponent,
+    PlatformLinkStandardExampleComponent,
+    PlatformLinkTruncatedExampleComponent
+} from './examples/platform-link-examples.component';
 
 const standardlinkSrc = 'platform-link-standard-example.component.html';
 const emphasizedlinkSrc = 'platform-link-emphasized-example.component.html';
@@ -12,7 +29,22 @@ const iconlinkSrc = 'platform-link-icon-example.component.html';
 
 @Component({
     selector: 'app-link',
-    templateUrl: './platform-link-docs.component.html'
+    templateUrl: './platform-link-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformLinkIconExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformLinkStandardExampleComponent,
+        PlatformLinkEmphasizedExampleComponent,
+        PlatformLinkDisabledExampleComponent,
+        PlatformLinkDisabledEmphasizedExampleComponent,
+        PlatformLinkInvertedExampleComponent,
+        PlatformLinkTruncatedExampleComponent
+    ]
 })
 export class PlatformLinkDocsComponent {
     standardLink: ExampleFile[] = [

@@ -1,10 +1,27 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { FormsModule } from '@angular/forms';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverComponent as PopoverComponent_1,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-input-auto-complete-validation-example',
     templateUrl: './platform-input-auto-complete-validation-example.component.html',
-    styleUrls: ['./platform-input-auto-complete-validation-example.component.scss']
+    styleUrls: ['./platform-input-auto-complete-validation-example.component.scss'],
+    standalone: true,
+    imports: [
+        PopoverComponent_1,
+        PopoverControlComponent,
+        PlatformInputModule,
+        FormsModule,
+        PopoverBodyComponent,
+        NgFor
+    ]
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
     public inputText: string;

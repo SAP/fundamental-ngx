@@ -1,5 +1,6 @@
+import { DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -7,6 +8,8 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 
 @Component({
     selector: 'fd-time-picker-form-example',
@@ -21,7 +24,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, FormItemModule, FormLabelModule, TimePickerModule, NgIf, DatePipe]
 })
 export class TimePickerFormExampleComponent {
     customForm = new FormGroup({

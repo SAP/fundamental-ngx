@@ -1,5 +1,23 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    ToolbarOverflowGroupingExampleComponent,
+    ToolbarOverflowPriorityExampleComponent,
+    ToolbarSeparatorExampleComponent,
+    ToolbarSizeExampleComponent,
+    ToolbarSpacerExampleComponent,
+    ToolbarTitleExampleComponent,
+    ToolbarTypeExampleComponent
+} from './examples/toolbar-example.component';
+import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
 
 const toolbarTypeExampleHtml = 'toolbar-type-example.component.html';
 const toolbarTitleExampleHtml = 'toolbar-title-example.component.html';
@@ -14,7 +32,23 @@ const toolbarSizeExampleHtml = 'toolbar-size-example.component.html';
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar-docs.component.html',
-    styleUrls: ['./toolbar-docs.component.scss']
+    styleUrls: ['./toolbar-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ToolbarTypeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ToolbarTitleExampleComponent,
+        ToolbarOverflowExampleComponent,
+        ToolbarOverflowPriorityExampleComponent,
+        ToolbarOverflowGroupingExampleComponent,
+        ToolbarSizeExampleComponent,
+        ToolbarSpacerExampleComponent,
+        ToolbarSeparatorExampleComponent
+    ]
 })
 export class ToolbarDocsComponent {
     toolbarTypeExample: ExampleFile[] = [

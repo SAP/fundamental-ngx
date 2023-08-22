@@ -1,11 +1,27 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import { Observable } from 'rxjs';
 
 @Component({
     selector: 'fd-table-pagination-example',
-    templateUrl: './table-pagination-example.component.html'
+    templateUrl: './table-pagination-example.component.html',
+    standalone: true,
+    imports: [
+        FocusableGridDirective,
+        TableModule,
+        NgFor,
+        LinkComponent,
+        IconModule,
+        PaginationModule,
+        ToolbarItemDirective
+    ]
 })
 export class TablePaginationExampleComponent implements OnInit {
     tableRows: any[];

@@ -1,6 +1,18 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
+import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-dynamic-page-example',
@@ -17,6 +29,21 @@ import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/
                 background-color: rgb(255, 255, 255);
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        DynamicPageModule,
+        ToolbarComponent,
+        ContentDensityDirective,
+        PlatformSmartFilterBarModule,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        BarModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformSmartFilterBarDynamicPageExampleComponent {

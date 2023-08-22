@@ -1,4 +1,3 @@
-import { FormContainerPo } from './form-container.po';
 import {
     browserIsSafari,
     clearValue,
@@ -18,6 +17,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { FormContainerPo } from './form-container.po';
 
 describe('Form Container test suite', () => {
     const formContainerPage = new FormContainerPo();

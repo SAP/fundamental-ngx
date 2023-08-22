@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets, getAsset } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAsset,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { IllustratedMessageDialogExampleComponent } from './examples/illustrated-message-dialog-example.component';
+import { IllustratedMessageDotExampleComponent } from './examples/illustrated-message-dot-example.component';
+import { IllustratedMessageExampleComponent } from './examples/illustrated-message-example.component';
+import { IllustratedMessageInlineExampleComponent } from './examples/illustrated-message-inline-example.component';
+import { IllustratedMessageSpotExampleComponent } from './examples/illustrated-message-spot-example.component';
 
 const illustratedMessageSrc = 'illustrated-message-example.component.html';
 const illustratedMessageTsCode = 'illustrated-message-example.component.ts';
@@ -24,7 +38,20 @@ const illusratedMessageInlineHtmlSrc = 'illustrated-message-inline-example.compo
 
 @Component({
     selector: 'app-illustrated-message',
-    templateUrl: './illustrated-message-docs.component.html'
+    templateUrl: './illustrated-message-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        IllustratedMessageExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        IllustratedMessageDialogExampleComponent,
+        IllustratedMessageSpotExampleComponent,
+        IllustratedMessageDotExampleComponent,
+        IllustratedMessageInlineExampleComponent
+    ]
 })
 export class IllustratedMessageDocsComponent {
     illustratedMessageExample: ExampleFile[] = [

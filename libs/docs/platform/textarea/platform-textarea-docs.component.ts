@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformTextareaAutogrowExampleComponent } from './examples/platform-textarea-autogrow-example.component';
+import { PlatformTextareaBasicExampleComponent } from './examples/platform-textarea-basic-example.component';
+import { PlatformTextareaCounterExampleComponent } from './examples/platform-textarea-counter-example.component';
+import { PlatformTextareaCounterTemplateExampleComponent } from './examples/platform-textarea-counter-template-example.component';
 
 const platformBasicTextareaSrc = 'platform-textarea-basic-example.component.html';
 const platformBasicTextareaTsCode = 'platform-textarea-basic-example.component.ts';
@@ -14,7 +26,19 @@ const platformAutogrowTextareaTsCode = 'platform-textarea-autogrow-example.compo
 
 @Component({
     selector: 'app-textarea',
-    templateUrl: './platform-textarea-docs.component.html'
+    templateUrl: './platform-textarea-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformTextareaBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTextareaAutogrowExampleComponent,
+        PlatformTextareaCounterExampleComponent,
+        PlatformTextareaCounterTemplateExampleComponent
+    ]
 })
 export class PlatformTextareaDocsComponent {
     textareaBasic: ExampleFile[] = [

@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ScrollSpyCustomExampleComponent } from './examples/scroll-spy-custom-example/scroll-spy-custom-example.component';
+import { ScrollSpyOffsetExampleComponent } from './examples/scroll-spy-custom-offset/scroll-spy-offset-example.component';
+import { ScrollSpyExampleComponent } from './examples/scroll-spy-example/scroll-spy-example.component';
 
 const standardSCSS = 'scroll-spy-example/scroll-spy-example.component.scss';
 const customSCSS = 'scroll-spy-custom-example/scroll-spy-custom-example.component.scss';
@@ -13,7 +24,18 @@ const customT = 'scroll-spy-custom-example/scroll-spy-custom-example.component.t
 @Component({
     selector: 'app-scroll-spy-docs',
     templateUrl: './scroll-spy-docs.component.html',
-    styleUrls: ['./scroll-spy-docs.component.scss']
+    styleUrls: ['./scroll-spy-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ScrollSpyExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ScrollSpyCustomExampleComponent,
+        ScrollSpyOffsetExampleComponent
+    ]
 })
 export class ScrollSpyDocsComponent {
     scrollSpy: ExampleFile[] = [

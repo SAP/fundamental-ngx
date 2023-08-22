@@ -1,4 +1,13 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-dynamic-page-dynamic-container-height-example',
@@ -25,6 +34,21 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 height: 10vh;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        DynamicPageModule,
+        NgFor,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        CdkScrollable,
+        BarModule
     ]
 })
 export class DynamicPageDynamicContainerHeightExampleComponent {

@@ -1,3 +1,4 @@
+import { AsyncPipe, NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -9,14 +10,17 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { CopyService } from '../../services/copy.service';
-import { ExampleFile } from './example-file';
-import { height } from '../../utilities';
-import { StackblitzService } from '../stackblitz/stackblitz.service';
-import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
-import { isObservable, Observable, of, ReplaySubject, shareReplay, switchMap, tap, zip } from 'rxjs';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageStripAlertService, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { Observable, ReplaySubject, isObservable, of, shareReplay, switchMap, tap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
-import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip';
+import { CopyService } from '../../services/copy.service';
+import { height } from '../../utilities';
+import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
+import { StackblitzService } from '../stackblitz/stackblitz.service';
+import { ExampleFile } from './example-file';
 
 enum ExampleEntityState {
     loading,
@@ -35,7 +39,19 @@ interface ExamplesEntity {
     styleUrls: ['./code-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [height({ time: 200 })],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        BusyIndicatorComponent,
+        MessageStripComponent,
+        TabsModule,
+        NgFor,
+        CodeSnippetComponent,
+        AsyncPipe,
+        TitleCasePipe
+    ]
 })
 export class CodeExampleComponent implements OnInit {
     @ViewChildren(CodeSnippetComponent)

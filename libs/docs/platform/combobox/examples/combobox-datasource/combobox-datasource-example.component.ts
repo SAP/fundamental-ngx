@@ -1,14 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { of } from 'rxjs';
 
+import { JsonPipe } from '@angular/common';
+import {
+    ComboboxSelectionChangeEvent,
+    FdpFormGroupModule,
+    PlatformComboboxModule
+} from '@fundamental-ngx/platform/form';
 import { ArrayComboBoxDataSource, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-datasource-example',
     templateUrl: './combobox-datasource-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformComboboxModule, JsonPipe]
 })
 export class ComboboxDatasourceExampleComponent {
     dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];

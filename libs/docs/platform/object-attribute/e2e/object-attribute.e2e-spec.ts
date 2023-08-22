@@ -1,4 +1,3 @@
-import { ObjectAttributePo } from './object-attribute.po';
 import {
     checkElementTextValue,
     getAttributeByName,
@@ -7,6 +6,7 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { labelAttribute, linkText, standaloneText } from './object-attribute-contents';
+import { ObjectAttributePo } from './object-attribute.po';
 
 describe('object attribute test suite', () => {
     const objectAttributePage = new ObjectAttributePo();

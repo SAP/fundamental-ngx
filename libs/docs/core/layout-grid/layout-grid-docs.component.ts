@@ -1,6 +1,22 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { LayoutGridBasicExampleComponent } from './examples/layout-grid-basic-example.component';
+import { LayoutGridGrowingExampleComponent } from './examples/layout-grid-growing-example.component';
+import { LayoutGridNestingExampleComponent } from './examples/layout-grid-nesting-example.component';
+import { LayoutGridNoGapExampleComponent } from './examples/layout-grid-no-gap-example.component';
+import { LayoutGridOffsetExampleComponent } from './examples/layout-grid-offset-example.component';
+import { LayoutGridResponsiveExampleComponent } from './examples/layout-grid-responsive-example.component';
+import { LayoutGridResponsiveOffsetExampleComponent } from './examples/layout-grid-responsive-offset-example.component';
+import { LayoutGridRowExampleComponent } from './examples/layout-grid-row-example.component';
 
 const layoutGridBlockSrc = 'example-layout-grid-block.component.ts';
 
@@ -37,6 +53,22 @@ const layoutGridNoGapSrc = 'layout-grid-no-gap-example.component.html';
                 margin-right: 0.5rem;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        LayoutGridBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        LayoutGridGrowingExampleComponent,
+        LayoutGridOffsetExampleComponent,
+        LayoutGridResponsiveExampleComponent,
+        LayoutGridResponsiveOffsetExampleComponent,
+        LayoutGridRowExampleComponent,
+        LayoutGridNoGapExampleComponent,
+        LayoutGridNestingExampleComponent
     ]
 })
 export class LayoutGridDocsComponent {

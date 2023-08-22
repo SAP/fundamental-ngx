@@ -1,4 +1,3 @@
-import { PanelPo } from './panel.po';
 import {
     click,
     getAttributeByName,
@@ -11,6 +10,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { PanelPo } from './panel.po';
 
 describe('Panel test suite', () => {
     const panelPage = new PanelPo();

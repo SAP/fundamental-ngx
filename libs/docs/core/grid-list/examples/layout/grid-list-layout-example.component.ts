@@ -1,4 +1,9 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { GridListModule } from '@fundamental-ngx/core/grid-list';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 interface GridListItem {
     id: number;
@@ -12,7 +17,9 @@ interface GridListItem {
     templateUrl: './grid-list-layout-example.component.html',
     styleUrls: ['./grid-list-layout-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [GridListModule, NgFor, AvatarModule, LinkComponent, RouterLink]
 })
 export class GridListLayoutExampleComponent {
     layoutPattern = 'XL4-L3-M2-S1';

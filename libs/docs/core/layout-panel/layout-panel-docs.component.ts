@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { LayoutPanelEdgeBleedExampleComponent } from './examples/layout-panel-edge-bleed-example.component';
+import { LayoutPanelExampleComponent } from './examples/layout-panel-examples.component';
+import { LayoutPanelFooterVariationsExampleComponent } from './examples/layout-panel-footer-variations-example.component';
+import { LayoutPanelTransparentExampleComponent } from './examples/layout-panel-transparent-example.component';
 
 const panelEdgeBleedSrc = 'layout-panel-edge-bleed-example.component.html';
 const panelEdgeBleedSrcTs = 'layout-panel-edge-bleed-example.component.ts';
@@ -10,7 +22,19 @@ const panelFooterVariationsSrc = 'layout-panel-footer-variations-example.compone
 
 @Component({
     selector: 'app-layout-panel',
-    templateUrl: './layout-panel-docs.component.html'
+    templateUrl: './layout-panel-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        LayoutPanelExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        LayoutPanelEdgeBleedExampleComponent,
+        LayoutPanelTransparentExampleComponent,
+        LayoutPanelFooterVariationsExampleComponent
+    ]
 })
 export class LayoutPanelDocsComponent {
     panelBasic: ExampleFile[] = [

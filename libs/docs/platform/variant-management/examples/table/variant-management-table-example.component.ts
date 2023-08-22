@@ -7,12 +7,18 @@ import {
     CollectionStringFilter,
     FilterableColumnDataType,
     PlatformTableManagedPreset,
+    PlatformTableModule,
     SortDirection,
     TableDataProvider,
     TableDataSource,
     TableState
 } from '@fundamental-ngx/platform/table';
-import { Variant } from '@fundamental-ngx/platform/variant-management';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { Variant, VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 import { Observable, of } from 'rxjs';
 
 export interface TablePreset {
@@ -29,6 +35,14 @@ export interface TablePreset {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        VariantManagementModule,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
     ]
 })
 export class VariantManagementTableExampleComponent {

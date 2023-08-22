@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    TitleElisionExampleComponent,
+    TitleSemanticExampleComponent,
+    TitleVisualExampleComponent,
+    TitleWrappingExampleComponent
+} from './examples/title-examples.component';
 
 const titleSemanticHtml = 'title-semantic-example.component.html';
 const titleElisionHtml = 'title-elision-example.component.html';
@@ -9,7 +22,18 @@ const titleWrappingHtml = 'title-wrapping-example.component.html';
 
 @Component({
     selector: 'app-title',
-    templateUrl: './title-docs.component.html'
+    templateUrl: './title-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TitleSemanticExampleComponent,
+        CodeExampleComponent,
+        TitleVisualExampleComponent,
+        TitleElisionExampleComponent,
+        TitleWrappingExampleComponent
+    ]
 })
 export class TitleDocsComponent {
     titleSemanticExample: ExampleFile[] = [

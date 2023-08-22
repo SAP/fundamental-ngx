@@ -1,5 +1,5 @@
+import { checkElArrIsClickable, click, getElementArrayLength, getElementSize } from '../../../../../e2e';
 import { TimelinePo } from './timeline.po';
-import { click, getElementArrayLength, getElementSize, checkElArrIsClickable } from '../../../../../e2e';
 
 describe('Timeline test suite', () => {
     const timelinePage = new TimelinePo();

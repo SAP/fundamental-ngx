@@ -2,18 +2,26 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
-    TableDataSource,
     CollectionBooleanFilter,
     CollectionDateFilter,
     CollectionNumberFilter,
     CollectionStringFilter,
+    FilterableColumnDataType,
+    PlatformTableModule,
     SortDirection,
     TableDataProvider,
+    TableDataSource,
     TableState
 } from '@fundamental-ngx/platform/table';
-import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-p13-filter-example',
@@ -25,6 +33,16 @@ import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpCellDef,
+        FdpTableCell,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableP13FilterExampleComponent {

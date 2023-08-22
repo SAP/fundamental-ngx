@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
-import { ModifyItemEvent } from '@fundamental-ngx/platform/list';
+import { ModifyItemEvent, PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 @Component({
     selector: 'fdp-platform-list-with-buttons-example',
-    templateUrl: './platform-list-with-buttons-example.component.html'
+    templateUrl: './platform-list-with-buttons-example.component.html',
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformListWithButtonsExampleComponent {
     _modifyRow(event: ModifyItemEvent): void {

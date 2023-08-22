@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-status-indicator-circular-fill-clock',
-    templateUrl: './status-indicator-cirular-fill-clockwise.component.html'
+    templateUrl: './status-indicator-cirular-fill-clockwise.component.html',
+    standalone: true,
+    imports: [StatusIndicatorModule]
 })
 export class StatusIndicatorCircularFillClockComponent {
     /* eslint-disable max-len */

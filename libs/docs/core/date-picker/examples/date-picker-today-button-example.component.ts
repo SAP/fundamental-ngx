@@ -1,13 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { DateRange } from '@fundamental-ngx/core/calendar';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-date-picker-today-button-example',
@@ -41,7 +46,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, DatePickerComponent, FormsModule, ContentDensityDirective, FdDatetimeModule]
 })
 export class DatePickerTodayButtonExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

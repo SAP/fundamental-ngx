@@ -1,7 +1,11 @@
+import { AsyncPipe, NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FdLanguage, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
-import { of, OperatorFunction, Observable } from 'rxjs';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FD_LANGUAGE_ENGLISH, FdLanguage } from '@fundamental-ngx/i18n';
+import { Observable, OperatorFunction, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { I18nDocsLoaderService } from './i18n-docs-loader.service';
 
@@ -13,7 +17,18 @@ export function getI18nKey(i18nKey: keyof FdLanguage): I18nRouteData {
 @Component({
     selector: 'fd-i18n-docs',
     templateUrl: './i18n-docs.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        NgSwitch,
+        NgSwitchCase,
+        BusyIndicatorComponent,
+        FocusableGridDirective,
+        TableModule,
+        NgFor,
+        AsyncPipe
+    ]
 })
 export class I18nDocsComponent {
     status = LoadStatus.Loading;

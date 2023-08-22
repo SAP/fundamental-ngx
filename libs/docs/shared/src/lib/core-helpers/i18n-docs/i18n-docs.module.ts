@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { I18nDocsComponent } from './i18n-docs.component';
+import { NgModule } from '@angular/core';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { I18nDocsComponent } from './i18n-docs.component';
 
 @NgModule({
-    declarations: [I18nDocsComponent],
-    imports: [CommonModule, BusyIndicatorModule, TableModule],
+    imports: [CommonModule, BusyIndicatorModule, TableModule, I18nDocsComponent],
     exports: [I18nDocsComponent]
 })
 export class I18nDocsModule {}

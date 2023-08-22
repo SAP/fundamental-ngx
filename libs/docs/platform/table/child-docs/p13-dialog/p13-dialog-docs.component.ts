@@ -1,6 +1,20 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets,
+    SeparatorComponent
+} from '@fundamental-ngx/docs/shared';
+import { PlatformTableP13ColumnsExampleComponent } from '../../examples/platform-table-p13-columns-example.component';
+import { PlatformTableP13FilterExampleComponent } from '../../examples/platform-table-p13-filter-example.component';
+import { PlatformTableP13GroupExampleComponent } from '../../examples/platform-table-p13-group-example.component';
+import { PlatformTableP13SortExampleComponent } from '../../examples/platform-table-p13-sort-example.component';
 const platformTableP13ColumnSrc = 'platform-table-p13-columns-example.component.html';
 const platformTableP13ColumnTsSrc = 'platform-table-p13-columns-example.component.ts';
 const platformTableP13SortSrc = 'platform-table-p13-sort-example.component.html';
@@ -13,7 +27,20 @@ const platformTableP13GroupTsSrc = 'platform-table-p13-group-example.component.t
 @Component({
     selector: 'fdp-doc-p13-dialog-docs',
     templateUrl: './p13-dialog-docs.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformTableP13ColumnsExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTableP13SortExampleComponent,
+        PlatformTableP13FilterExampleComponent,
+        PlatformTableP13GroupExampleComponent,
+        FdDatetimeModule
+    ]
 })
 export class P13DialogDocsComponent {
     childService = inject(ExampleChildService);

@@ -1,13 +1,31 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { TruncateExampleComponent } from './examples/truncate-example.component';
+import { TruncateTextExampleComponent } from './examples/truncate-text-example.component';
 
 const truncateTs = 'truncate-example.component.ts';
 const truncateTextTs = 'truncate-text-example.component.ts';
 
 @Component({
     selector: 'app-truncate',
-    templateUrl: './truncate-docs.component.html'
+    templateUrl: './truncate-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TruncateExampleComponent,
+        CodeExampleComponent,
+        TruncateTextExampleComponent
+    ]
 })
 export class TruncateDocsComponent {
     truncate: ExampleFile[] = [

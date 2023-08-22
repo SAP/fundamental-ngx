@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig } from '@fundamental-ngx/platform/message-popover';
+import { FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FdpFormGroupModule, PlatformInputModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import {
+    FDP_MESSAGE_POPOVER_CONFIG,
+    MessagePopoverComponent,
+    MessagePopoverConfig,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
 
 interface MaxErrorModel {
     max: number;
@@ -52,6 +60,18 @@ const customErrorsConfig: MessagePopoverConfig = {
             provide: FDP_MESSAGE_POPOVER_CONFIG,
             useValue: customErrorsConfig
         }
+    ],
+    standalone: true,
+    imports: [
+        MessagePopoverFormWrapperComponent,
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformInputModule,
+        PlatformTextAreaModule,
+        BarModule,
+        MessagePopoverComponent,
+        PlatformButtonModule
     ]
 })
 export class MessagePopoverCustomConfigExampleComponent {

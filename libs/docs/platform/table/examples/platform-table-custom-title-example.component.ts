@@ -1,14 +1,32 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { ToolbarLabelDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-custom-title-example',
     templateUrl: './platform-table-custom-title-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        ToolbarLabelDirective,
+        ToolbarSeparatorComponent,
+        PlatformButtonModule,
+        FdDatetimeModule
+    ]
 })
 export class PlatformTableCustomTitleExampleComponent {
     source: TableDataSource<ExampleItem>;

@@ -18,8 +18,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { DateTimePicker } from './date-time-picker.po';
 import { currentDay, date, date2, date3, date4, dates, i18n, testText, year2030 } from './date-time-picker-contents';
+import { DateTimePicker } from './date-time-picker.po';
 
 describe('Datetime picker suite', () => {
     const dateTimePickerPage = new DateTimePicker();

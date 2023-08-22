@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,17 +9,51 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { TableComponent, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
-import { Observable, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import {
+    PlatformTableModule,
+    TableComponent,
+    TableDataProvider,
+    TableDataSource,
+    TableState
+} from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    PlatformTableColumnResponsiveDirective,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-responsive-columns-example',
     templateUrl: './platform-table-responsive-columns-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformTableColumnResponsiveDirective,
+        FdpCellDef,
+        FdpTableCell,
+        NgIf,
+        ObjectStatusModule,
+        FdDatetimeModule
+    ]
 })
 export class PlatformTableResponsiveColumnsExampleComponent implements AfterViewInit {
     source: TableDataSource<ExampleItem>;

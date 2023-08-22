@@ -1,4 +1,3 @@
-import { FlexibleColumnLayoutPo } from './flexible-column-layout.po';
 import {
     click,
     doesItExist,
@@ -11,6 +10,7 @@ import {
     waitForNotDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { FlexibleColumnLayoutPo } from './flexible-column-layout.po';
 
 describe('Flexible column layout component test', () => {
     const flexibleColumnLayoutPage = new FlexibleColumnLayoutPo();

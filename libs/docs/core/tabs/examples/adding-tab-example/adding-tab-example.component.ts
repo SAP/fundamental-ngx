@@ -1,9 +1,14 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({
     selector: 'fd-adding-tab-example',
     templateUrl: './adding-tab-example.component.html',
-    styleUrls: ['./adding-tab-example.component.scss']
+    styleUrls: ['./adding-tab-example.component.scss'],
+    standalone: true,
+    imports: [TabsModule, NgFor, ButtonModule]
 })
 export class AddingTabExampleComponent {
     tabs = [

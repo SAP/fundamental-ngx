@@ -1,4 +1,3 @@
-import { FeedListItemPo } from './feed-list-item.po';
 import {
     browserIsSafari,
     click,
@@ -15,6 +14,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { alertText, testTextLess, testTextMore } from './feed-list-item-contents';
+import { FeedListItemPo } from './feed-list-item.po';
 
 describe('Feed list item test suite:', () => {
     const feedListItemPage = new FeedListItemPo();

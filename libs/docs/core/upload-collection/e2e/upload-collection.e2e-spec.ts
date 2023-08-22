@@ -1,4 +1,3 @@
-import { UploadCollectionPo } from './upload-collection.po';
 import {
     acceptAlert,
     browserIsSafari,
@@ -25,6 +24,7 @@ import {
     imageText,
     testText
 } from './upload-collection-contents';
+import { UploadCollectionPo } from './upload-collection.po';
 
 describe('File uploader component test', () => {
     const uploadCollectionPage = new UploadCollectionPo();

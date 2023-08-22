@@ -1,9 +1,14 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-select-adding-example',
     templateUrl: './select-adding-example.component.html',
-    styleUrls: ['./select-adding-example.component.scss']
+    styleUrls: ['./select-adding-example.component.scss'],
+    standalone: true,
+    imports: [ButtonModule, SelectModule, NgFor]
 })
 export class SelectAddingExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

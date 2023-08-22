@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import {
     FormattedFormStep,
+    PlatformWizardGeneratorModule,
     WizardGeneratorFormsValue,
     WizardGeneratorItem,
     WizardTitle
@@ -10,7 +18,20 @@ import {
 
 @Component({
     selector: 'fdp-wizard-generator-customizable-embeded-example',
-    templateUrl: './wizard-generator-customizable-embeded-example.component.html'
+    templateUrl: './wizard-generator-customizable-embeded-example.component.html',
+    standalone: true,
+    imports: [
+        PlatformWizardGeneratorModule,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgFor,
+        TitleComponent,
+        LayoutGridModule,
+        FormLabelModule,
+        PlatformLinkModule,
+        NgIf,
+        JsonPipe
+    ]
 })
 export class WizardGeneratorCustomizableEmbededExampleComponent {
     wizardTitle: WizardTitle = {

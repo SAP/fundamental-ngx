@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import {
-    ItemPerPage,
-    FilenameLengthExceedEvent,
     FileSizeExceedEvent,
+    FilenameLengthExceedEvent,
+    ItemPerPage,
     TypeMismatchEvent,
     UploadCollectionDataSource,
     UploadCollectionItem
@@ -12,11 +12,15 @@ import {
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 import { PlatformUploadCollectionDataProviderExample } from './platform-upload-collection-base-data-provider';
 
 @Component({
     selector: 'fdp-upload-collection-example',
-    templateUrl: './platform-upload-collection-example.component.html'
+    templateUrl: './platform-upload-collection-example.component.html',
+    standalone: true,
+    imports: [PlatformUploadCollectionModule, ContentDensityDirective]
 })
 export class PlatformUploadCollectionExampleComponent {
     dataSource: UploadCollectionDataSource;

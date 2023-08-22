@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 
 @Component({
     selector: 'fd-checkbox-label-wrapping-example',
@@ -29,6 +30,8 @@ import { Component } from '@angular/core';
                 max-width: 300px;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [CheckboxComponent]
 })
 export class CheckboxLabelWrappingExampleComponent {}

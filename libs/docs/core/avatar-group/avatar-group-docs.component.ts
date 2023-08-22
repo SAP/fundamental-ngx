@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AvatarGroupGroupTypeExampleComponent } from './examples/avatar-group-group-type-example.component';
+import { AvatarGroupIndividualTypeExampleComponent } from './examples/avatar-group-individual-type-example.component';
 
 const avatarGroupIndividualTs = 'avatar-group-individual-type-example.component.ts';
 const avatarGroupIndividualHtml = 'avatar-group-individual-type-example.component.html';
@@ -10,7 +20,17 @@ const avatarGroupDataServiceTs = 'avatar-group-data-example.service.ts';
 
 @Component({
     selector: 'app-avatar-group',
-    templateUrl: './avatar-group-docs.component.html'
+    templateUrl: './avatar-group-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        AvatarGroupIndividualTypeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        AvatarGroupGroupTypeExampleComponent
+    ]
 })
 export class AvatarGroupDocsComponent {
     individualType: ExampleFile[] = [

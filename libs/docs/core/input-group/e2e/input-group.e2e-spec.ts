@@ -1,8 +1,6 @@
-import { InputGroupPo } from './input-group.po';
 import {
     clearValue,
     click,
-    focusElement,
     getElementArrayLength,
     getElementClass,
     getElementPlaceholder,
@@ -19,6 +17,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { smallTestText, testText } from './input-group-contents';
+import { InputGroupPo } from './input-group.po';
 
 describe('Input group component test', () => {
     const inputGroupPage = new InputGroupPo();

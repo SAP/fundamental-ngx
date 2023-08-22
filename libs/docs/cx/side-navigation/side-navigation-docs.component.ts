@@ -1,9 +1,44 @@
 import { Component } from '@angular/core';
-import { getExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { SideNavigationCozyWideIcon3LevelExampleComponent } from './examples/side-navigation-cozy-wide-icon-3-level-example.component';
+import { SideNavigationCozyWideTextOnly1LevelExampleComponent } from './examples/side-navigation-cozy-wide-text-only-1-level-example.component';
+import { SideNavigationCozyWideTextOnly3LevelExampleComponent } from './examples/side-navigation-cozy-wide-text-only-3-level-example.component';
+import { SideNavigationDynamicWidthExampleComponent } from './examples/side-navigation-dynamic-width-example.component';
+import { SideNavigationCollapseExampleComponent } from './examples/side-navigation-expand-collapse-example.component';
+import { SideNavigationFilterExampleComponent } from './examples/side-navigation-filter-example.component';
+import { SideNavigationMobileExampleComponent } from './examples/side-navigation-mobile-example.component';
+import { SideNavigationNarrowExampleComponent } from './examples/side-navigation-narrow-example.component';
+import { SideNavigationOverflowExampleComponent } from './examples/side-navigation-overflow-example.component';
+import { SideNavigationShellbarExampleComponent } from './examples/side-navigation-shellbar-example.component';
+import { SideNavigationWideIcon1LevelExampleComponent } from './examples/side-navigation-wide-icon-1-level-example.component';
 
 @Component({
     selector: 'app-side-navigation',
-    templateUrl: './side-navigation-docs.component.html'
+    templateUrl: './side-navigation-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        SideNavigationWideIcon1LevelExampleComponent,
+        CodeExampleComponent,
+        DescriptionComponent,
+        SideNavigationCozyWideTextOnly1LevelExampleComponent,
+        SideNavigationCozyWideTextOnly3LevelExampleComponent,
+        SideNavigationCozyWideIcon3LevelExampleComponent,
+        SideNavigationCollapseExampleComponent,
+        SideNavigationDynamicWidthExampleComponent,
+        SideNavigationFilterExampleComponent,
+        SideNavigationNarrowExampleComponent,
+        SideNavigationOverflowExampleComponent,
+        SideNavigationShellbarExampleComponent,
+        SideNavigationMobileExampleComponent
+    ]
 })
 export class SideNavigationDocsComponent {
     sideNavigationCozyWideTextOnly3LevelExample = [

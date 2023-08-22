@@ -1,8 +1,36 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { RouterLink } from '@angular/router';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AutoLabelDialogExampleComponent } from './examples/auto-label/auto-label-dialog-example.component';
+import { ComponentBasedDialogExampleComponent } from './examples/component-based/component-based-dialog-example.component';
+import { DialogBackdropContainerExampleComponent } from './examples/dialog-backdrop-container/dialog-backdrop-container-example.component';
+import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
+import { DialogConfigurationExampleComponent } from './examples/dialog-configuration/dialog-configuration-example.component';
+import { FormDialogExampleComponent } from './examples/dialog-form/form-dialog-example.component';
+import { DialogInnerPopoverComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import { DialogMobileExampleComponent } from './examples/dialog-mobile/dialog-mobile-example.component';
+import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
+import { DialogPositionExampleComponent } from './examples/dialog-position/dialog-position-example.component';
+import { DialogStateExampleComponent } from './examples/dialog-state/dialog-state-example.component';
+import { DialogStackedExampleComponent } from './examples/stacked-dialogs/dialog-stacked-example.component';
+import { TemplateBasedDialogExampleComponent } from './examples/template-based/template-based-dialog-example.component';
 
 const dialogExamplesScss = 'dialog-examples.component.scss';
 
@@ -47,7 +75,36 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
 
 @Component({
     selector: 'app-dialog',
-    templateUrl: './dialog-docs.component.html'
+    templateUrl: './dialog-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TemplateBasedDialogExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        FormDialogExampleComponent,
+        ComponentBasedDialogExampleComponent,
+        DialogObjectExampleComponent,
+        DialogStateExampleComponent,
+        RouterLink,
+        DialogConfigurationExampleComponent,
+        AutoLabelDialogExampleComponent,
+        DialogPositionExampleComponent,
+        DialogMobileExampleComponent,
+        DialogComplexExampleComponent,
+        DialogStackedExampleComponent,
+        DialogBackdropContainerExampleComponent,
+        DialogInnerPopoverComponent,
+        PlayGroundComponent,
+        ButtonModule,
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule
+    ]
 })
 export class DialogDocsComponent {
     schema: Schema;

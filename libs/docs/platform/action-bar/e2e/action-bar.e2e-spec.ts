@@ -1,4 +1,3 @@
-import { ActionBarPo } from './action-bar.po';
 import {
     acceptAlert,
     checkElArrIsClickable,
@@ -9,6 +8,7 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { actionBarDescriptions, actionBarTitles, alertMsg } from './action-bar-contents';
+import { ActionBarPo } from './action-bar.po';
 
 describe('Action Bar Test Suite', () => {
     const actionBarPage = new ActionBarPo();

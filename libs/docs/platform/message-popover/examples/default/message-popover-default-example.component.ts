@@ -1,20 +1,44 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl,
     AsyncValidatorFn,
     FormBuilder,
     FormGroup,
     FormGroupDirective,
+    FormsModule,
+    ReactiveFormsModule,
     ValidationErrors,
     Validators
 } from '@angular/forms';
-import { delay, Observable, of } from 'rxjs';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import {
+    MessagePopoverComponent,
+    MessagePopoverFormItemDirective,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
+import { Observable, delay, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-message-popover-default-example',
     templateUrl: './message-popover-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        MessagePopoverFormWrapperComponent,
+        FormsModule,
+        FormItemModule,
+        FormLabelModule,
+        PlatformInputModule,
+        MessagePopoverFormItemDirective,
+        BarModule,
+        MessagePopoverComponent,
+        PlatformButtonModule,
+        ReactiveFormsModule
+    ]
 })
 export class MessagePopoverDefaultExampleComponent {
     templateFormValue = {

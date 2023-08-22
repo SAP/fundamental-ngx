@@ -1,6 +1,21 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    PlatformInfoLabelExampleComponent,
+    PlatformInfoLableAriaLabelExampleComponent,
+    PlatformInfoLableNumericIconExampleComponent,
+    PlatformInfoLableTextExampleComponent,
+    PlatformInfoLableTextIconExampleComponent
+} from './examples/platform-info-label-example.component';
 
 const PlatformInfoLableDefaultExample = 'platform-info-label-example.component.html';
 const PlatformInfoLableNumericExample = 'platform-info-label-numeric-example.component.html';
@@ -12,7 +27,20 @@ const PlatfromInfoLableAriaLabelExample = 'platform-info-label-aria-label-exampl
 
 @Component({
     selector: 'fd-platform-info-label-docs',
-    templateUrl: './platform-info-label-docs.component.html'
+    templateUrl: './platform-info-label-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        PlatformInfoLabelExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        PlatformInfoLableTextExampleComponent,
+        PlatformInfoLableTextIconExampleComponent,
+        PlatformInfoLableNumericIconExampleComponent,
+        PlatformInfoLableAriaLabelExampleComponent
+    ]
 })
 export class PlatformInfoLabelDocsComponent {
     platformDefaultInfoLabelHtmlType: ExampleFile[] = [

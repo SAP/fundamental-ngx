@@ -1,4 +1,3 @@
-import { SelectPo } from './select.po';
 import {
     click,
     getAttributeByName,
@@ -23,6 +22,7 @@ import {
     testTextValue7,
     titleTestText
 } from './select-contents';
+import { SelectPo } from './select.po';
 
 describe('Select test suite', () => {
     const selectPage = new SelectPo();

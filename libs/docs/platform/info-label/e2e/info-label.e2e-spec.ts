@@ -1,34 +1,25 @@
-import { InfoLabelPO } from './info-label.po';
+import {
+    browserIsSafari,
+    getAttributeByName,
+    getElementAriaLabel,
+    getText,
+    refreshPage,
+    waitForPresent
+} from '../../../../../e2e';
 import {
     ariaLabelExample,
     ariaLabelledByAttribute,
     ariaSuccessLabel,
-    cssAlignmentAttribute,
     decimalLabel,
-    defaultLabelText,
-    infoLabelText,
-    labelContentAlignmentCenter,
-    labelContentAlignmentStart,
     labelIconAttribute,
     labelIconAttributeValue,
     largeNumberLabel,
     numberLabel,
     safariAriaLabelExample,
     safariAriaSuccessLabel,
-    safariIconInfoLabelText,
-    safariInfoLabelText,
     safariLargeNumberLabel
 } from './info-label-page-contents';
-import {
-    browserIsSafari,
-    elementArray,
-    getAttributeByName,
-    getElementAriaLabel,
-    getText,
-    refreshPage,
-    waitForElDisplayed,
-    waitForPresent
-} from '../../../../../e2e';
+import { InfoLabelPO } from './info-label.po';
 
 // TODO: https://github.com/SAP/fundamental-ngx/issues/8798
 xdescribe('Info Label component test suite', () => {

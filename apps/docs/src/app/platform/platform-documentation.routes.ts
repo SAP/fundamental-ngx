@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
-import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
+import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
+import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 export const ROUTES: Routes = [
@@ -19,280 +19,203 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'button',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/button').then((m) => m.PlatformButtonDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/button').then((m) => m.ROUTES)
             },
             {
                 path: 'action-bar',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/action-bar').then((m) => m.PlatformActionBarDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/action-bar').then((m) => m.ROUTES)
             },
             {
                 path: 'checkbox',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/checkbox').then((m) => m.CheckboxDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/checkbox').then((m) => m.ROUTES)
             },
             {
                 path: 'checkbox-group',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/checkbox-group').then(
-                        (m) => m.PlatformCheckboxGroupDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/checkbox-group').then((m) => m.ROUTES)
             },
             {
                 path: 'date-picker',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/date-picker').then((m) => m.PlatformDatePickerDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/date-picker').then((m) => m.ROUTES)
             },
             {
                 path: 'datetime-picker',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/datetime-picker').then(
-                        (m) => m.PlatformDatetimePickerDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/datetime-picker').then((m) => m.ROUTES)
             },
             {
                 path: 'dynamic-page',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/dynamic-page').then((m) => m.PlatformDynamicPageDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/dynamic-page').then((m) => m.ROUTES)
             },
             {
                 path: 'page-footer',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/page-footer').then((m) => m.PlatformDocPageFooterModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/page-footer').then((m) => m.ROUTES)
             },
             {
                 path: 'form-generator',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/form-generator').then(
-                        (m) => m.PlatformFormGeneratorDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/form-generator').then((m) => m.ROUTES)
             },
             {
                 path: 'form-container',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/form-container').then(
-                        (m) => m.PlatformFormContainerDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/form-container').then((m) => m.ROUTES)
             },
             {
                 path: 'link',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/link').then((m) => m.PlatformLinkDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/link').then((m) => m.ROUTES)
             },
             {
                 path: 'menu',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/menu').then((m) => m.PlatformMenuDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/menu').then((m) => m.ROUTES)
             },
             {
                 path: 'menu-button',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/menu-button').then((m) => m.PlatformMenuButtonDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/menu-button').then((m) => m.ROUTES)
             },
             {
                 path: 'search-field',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/search-field').then((m) => m.PlatformSearchFieldDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/search-field').then((m) => m.ROUTES)
             },
             {
                 path: 'select',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/select').then((m) => m.PlatformSelectDocsModules)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/select').then((m) => m.ROUTES)
             },
             {
                 path: 'radio-group',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/radio-group').then((m) => m.PlatformRadioGroupDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/radio-group').then((m) => m.ROUTES)
             },
             {
                 path: 'split-menu-button',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/split-menu-button').then(
-                        (m) => m.PlatformSplitMenuButtonDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/split-menu-button').then((m) => m.ROUTES)
             },
             {
                 path: 'info-label',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/info-label').then((m) => m.PlatformInfoLabelDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/info-label').then((m) => m.ROUTES)
             },
             {
                 path: 'table',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/table').then((m) => m.PlatformTableDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/table').then((m) => m.ROUTES)
             },
             {
                 path: 'textarea',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/textarea').then((m) => m.PlatformTextareaDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/textarea').then((m) => m.ROUTES)
             },
             {
                 path: 'panel',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/panel').then((m) => m.PlatformPanelDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/panel').then((m) => m.ROUTES)
             },
             {
                 path: 'switch',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/switch').then((m) => m.PlatformSwitchDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/switch').then((m) => m.ROUTES)
             },
             {
                 path: 'input',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/input').then((m) => m.PlatformInputDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/input').then((m) => m.ROUTES)
             },
             {
                 path: 'step-input',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/step-input').then((m) => m.PlatformStepInputDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/step-input').then((m) => m.ROUTES)
             },
             {
                 path: 'object-status',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/object-status').then((m) => m.PlatformObjectStatusDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/object-status').then((m) => m.ROUTES)
             },
             {
                 path: 'object-marker',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/object-marker').then((m) => m.PlatformObjectMarkerDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/object-marker').then((m) => m.ROUTES)
             },
             {
                 path: 'object-attribute',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/object-attribute').then(
-                        (m) => m.PlatformObjectAttributeDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/object-attribute').then((m) => m.ROUTES)
             },
             {
                 path: 'input-group',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/input-group').then((m) => m.PlatformInputGroupDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/input-group').then((m) => m.ROUTES)
             },
             {
                 path: 'combobox',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/combobox').then((m) => m.PlatformComboboxDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/combobox').then((m) => m.ROUTES)
             },
             {
                 path: 'list',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/list').then((m) => m.PlatformListDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/list').then((m) => m.ROUTES)
             },
             {
                 path: 'standard-list-item',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/standard-list-item').then(
-                        (m) => m.PlatformStandardListItemDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/standard-list-item').then((m) => m.ROUTES)
             },
             {
                 path: 'thumbnail',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/thumbnail').then((m) => m.PlatformThumbnailDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/thumbnail').then((m) => m.ROUTES)
             },
             {
                 path: 'time-picker',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/time-picker').then((m) => m.PlatformTimePickerDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/time-picker').then((m) => m.ROUTES)
             },
             {
                 path: 'action-list-item',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/action-list-item').then(
-                        (m) => m.PlatformActionListItemDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/action-list-item').then((m) => m.ROUTES)
             },
             {
                 path: 'display-list-item',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/display-list-item').then(
-                        (m) => m.PlatformDisplayListItemDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/display-list-item').then((m) => m.ROUTES)
             },
             {
                 path: 'object-list-item',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/object-list-item').then(
-                        (m) => m.PlatformObjectListItemDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/object-list-item').then((m) => m.ROUTES)
             },
             {
                 path: 'value-help-dialog',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/vhd').then((m) => m.PlatformVhdDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/vhd').then((m) => m.ROUTES)
             },
             {
                 path: 'multi-combobox',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/multi-combobox').then(
-                        (m) => m.PlatformMultiComboboxDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/multi-combobox').then((m) => m.ROUTES)
             },
             {
                 path: 'multi-input',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/multi-input').then((m) => m.PlatformMultiInputDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/multi-input').then((m) => m.ROUTES)
             },
             {
                 path: 'feed-input',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/feed-input').then((m) => m.PlatformFeedInputDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/feed-input').then((m) => m.ROUTES)
             },
             {
                 path: 'file-uploader',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/file-uploader').then((m) => m.PlatformFileUploaderDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/file-uploader').then((m) => m.ROUTES)
             },
             {
                 path: 'upload-collection',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/upload-collection').then(
-                        (m) => m.PlatformUploadCollectionDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/upload-collection').then((m) => m.ROUTES)
             },
             {
                 path: 'approval-flow',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/approval-flow').then((m) => m.PlatformApprovalFlowDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/approval-flow').then((m) => m.ROUTES)
             },
             {
                 path: 'slider',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/slider').then((m) => m.PlatformSliderDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/slider').then((m) => m.ROUTES)
             },
             {
                 path: 'wizard-generator',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/wizard-generator').then(
-                        (m) => m.PlatformWizardGeneratorDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/wizard-generator').then((m) => m.ROUTES)
             },
             {
                 path: 'icon-tab-bar',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/icon-tab-bar').then((m) => m.PlatformIconTabBarDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/icon-tab-bar').then((m) => m.ROUTES)
             },
             {
                 path: 'smart-filter-bar',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/smart-filter-bar').then(
-                        (m) => m.PlatformSmartFilterBarDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/smart-filter-bar').then((m) => m.ROUTES)
             },
             {
                 path: 'message-popover',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/message-popover').then((m) => m.MessagePopoverDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/platform/message-popover').then((m) => m.ROUTES)
             },
             {
                 path: 'variant-management',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/variant-management').then(
-                        (m) => m.VariantManagementDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/variant-management').then((m) => m.ROUTES)
             },
             {
                 path: 'settings-generator',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/settings-generator').then(
-                        (m) => m.SettingsGeneratorDocsModule
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/platform/settings-generator').then((m) => m.ROUTES)
             }
         ]
     }

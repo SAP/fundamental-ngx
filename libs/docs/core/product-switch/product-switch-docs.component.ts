@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ProductSwitchDndExampleComponent } from './examples/product-switch-dnd-example.component';
+import { ProductSwitchListComponent } from './examples/product-switch-list/product-switch-list-example.component';
+import { ProductSwitchSmallExampleComponent } from './examples/product-switch-small-example.component';
 
 const smallProductSwitchH = 'product-switch-small-example.component.html';
 const smallProductSwitchTs = 'product-switch-small-example.component.ts';
@@ -13,7 +24,18 @@ const listProductSwitchTs = 'product-switch-list/product-switch-list-example.com
 
 @Component({
     selector: 'app-product-switch',
-    templateUrl: './product-switch-docs.component.html'
+    templateUrl: './product-switch-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ProductSwitchDndExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ProductSwitchSmallExampleComponent,
+        ProductSwitchListComponent
+    ]
 })
 export class ProductSwitchDocsComponent {
     productSwitchBasicExample: ExampleFile[] = [

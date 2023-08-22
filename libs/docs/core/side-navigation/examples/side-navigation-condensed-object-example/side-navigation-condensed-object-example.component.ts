@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { SideNavigationModel } from '@fundamental-ngx/core/side-navigation';
+import { SideNavigationModel, SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 
 @Component({
     selector: 'fd-side-navigation-condensed-object-example',
-    templateUrl: 'side-navigation-condensed-object-example.component.html'
+    templateUrl: 'side-navigation-condensed-object-example.component.html',
+    standalone: true,
+    imports: [SideNavigationModule]
 })
 export class SideNavigationCondensedObjectExampleComponent {
     sideNavigationConfiguration: SideNavigationModel = {

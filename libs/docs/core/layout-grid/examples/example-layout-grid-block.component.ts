@@ -16,7 +16,8 @@ const BACKGROUND_COLORS = ['#30c5d2', '#32b5c8', '#3694b5', '#3a73a2', '#3f528f'
                 justify-content: center;
             }
         `
-    ]
+    ],
+    standalone: true
 })
 export class ExampleLayoutGridBlockComponent {
     @Input()

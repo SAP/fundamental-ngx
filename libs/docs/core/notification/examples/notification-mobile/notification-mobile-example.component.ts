@@ -1,8 +1,13 @@
-import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { IndicatorStates } from '@fundamental-ngx/core/notification';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
+import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 export type Notification = {
     avatar: string;
@@ -18,7 +23,21 @@ export type Notification = {
 @Component({
     selector: 'fd-notification-mobile-example',
     templateUrl: './notification-mobile-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        PopoverTriggerDirective,
+        PopoverComponent,
+        NotificationModule,
+        ActionSheetModule,
+        TabsModule,
+        NgIf,
+        NgTemplateOutlet,
+        NgFor,
+        AvatarModule,
+        MessageToastModule
+    ]
 })
 export class NotificationMobileExampleComponent {
     @ViewChild(ActionSheetComponent)

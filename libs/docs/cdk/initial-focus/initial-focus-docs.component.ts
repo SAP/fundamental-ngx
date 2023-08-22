@@ -1,9 +1,29 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { InitialFocusDefaultExampleComponent } from './examples/default/initial-focus-default-example.component';
+import { NestedElementsExampleComponent } from './examples/nested-elements-example/nested-elements-example.component';
 
 @Component({
     selector: 'app-initial-focus',
-    templateUrl: './initial-focus-docs.component.html'
+    templateUrl: './initial-focus-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        InitialFocusDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        NestedElementsExampleComponent
+    ]
 })
 export class InitialFocusDocsComponent {
     initialFocusDefaultExample: ExampleFile[] = [

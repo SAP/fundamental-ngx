@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformActionListItemBorderLessExampleComponent } from './examples/platform-action-list-item-border-less-example.component';
+import { PlatformActionListItemExampleComponent } from './examples/platform-action-list-item-example.component';
 
 const aliSrc = 'platform-action-list-item-example.component.html';
 const aliSrcTs = 'platform-action-list-item-example.component.ts';
@@ -9,7 +19,17 @@ const borderLessALITs = 'platform-action-list-item-border-less-example.component
 
 @Component({
     selector: 'app-action-list-item',
-    templateUrl: './platform-action-list-item-docs.component.html'
+    templateUrl: './platform-action-list-item-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformActionListItemExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformActionListItemBorderLessExampleComponent
+    ]
 })
 export class PlatformActionListItemDocsComponent {
     simpleALI: ExampleFile[] = [

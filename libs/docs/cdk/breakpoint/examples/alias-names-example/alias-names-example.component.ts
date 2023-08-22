@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BreakpointDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdk-breakpoint-alias-names-example',
@@ -12,6 +13,8 @@ import { Component } from '@angular/core';
         <ng-template [fdkBreakpointLt]="1900">
             <div>Will be visible on screen width less than 1900px</div>
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [BreakpointDirective]
 })
 export class AliasNamesExampleComponent {}

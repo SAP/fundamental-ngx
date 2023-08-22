@@ -1,12 +1,38 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
-import { ShellbarMenuItem, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
-import { SearchInput, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
+import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    ShellbarActionComponent,
+    ShellbarActionsComponent,
+    ShellbarComponent,
+    ShellbarLogoComponent,
+    ShellbarSidenavDirective,
+    ShellbarSubtitleComponent,
+    ShellbarUser,
+    ShellbarUserMenu
+} from '@fundamental-ngx/core/shellbar';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
+import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/side-navigation.module';
 
 @Component({
     selector: 'fundamental-ngx-side-navigation-shellbar-example',
     templateUrl: './side-navigation-shellbar-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ShellbarComponent,
+        ButtonModule,
+        ShellbarSidenavDirective,
+        ShellbarLogoComponent,
+        ShellbarSubtitleComponent,
+        PlatformSearchFieldModule,
+        ShellbarActionsComponent,
+        NgFor,
+        ShellbarActionComponent,
+        CxSideNavigationModule,
+        CxNestedListModule
+    ]
 })
 export class SideNavigationShellbarExampleComponent {
     condensed = true;

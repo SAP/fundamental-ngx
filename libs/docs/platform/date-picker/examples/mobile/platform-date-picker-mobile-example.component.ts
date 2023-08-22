@@ -1,14 +1,25 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    ValidatorFn,
+    Validators
+} from '@angular/forms';
 import { DateRange } from '@fundamental-ngx/core/calendar';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-date-picker-mobile-example',
     templateUrl: './platform-date-picker-mobile-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickerMobileExampleComponent {
     birthday: FdDate = new FdDate(1990, 1, 2);

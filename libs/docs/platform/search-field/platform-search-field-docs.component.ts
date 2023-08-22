@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformSearchFieldBasicExampleComponent } from './examples/platform-search-field-basic-example.component';
+import { PlatformSearchFieldCategoriesExampleComponent } from './examples/platform-search-field-categories-example.component';
+import { PlatformSearchFieldDataSourceExampleComponent } from './examples/platform-search-field-data-source-example.component';
+import { PlatformSearchFieldMobileExampleComponent } from './examples/platform-search-field-mobile/platform-search-field-mobile-example.component';
 
 const platformSearchFieldExampleScss = 'platform-search-field-example.component.scss';
 const platformBasicSearchFieldSrc = 'platform-search-field-basic-example.component.html';
@@ -17,7 +30,20 @@ const platformSearchFieldMobileModeTsCode =
 
 @Component({
     selector: 'app-search-field',
-    templateUrl: './platform-search-field-docs.component.html'
+    templateUrl: './platform-search-field-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformSearchFieldBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformSearchFieldCategoriesExampleComponent,
+        PlatformSearchFieldDataSourceExampleComponent,
+        RouterLink,
+        PlatformSearchFieldMobileExampleComponent
+    ]
 })
 export class PlatformSearchFieldDocsComponent {
     searchFieldBasic: ExampleFile[] = [

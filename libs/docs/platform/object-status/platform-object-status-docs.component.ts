@@ -1,5 +1,23 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformObjectStatusClickableAndIconExampleComponent } from './examples/platform-object-status-clickable-and-icon-example.component';
+import {
+    PlatformObjectStatusExampleComponent,
+    PlatformObjectStatusGenericExampleComponent,
+    PlatformObjectStatusInvertedGenericTextExampleComponent,
+    PlatformObjectStatusInvertedTextExampleComponent,
+    PlatformObjectStatusTextExampleComponent,
+    PlatformObjectStatusTextIconExampleComponent
+} from './examples/platform-object-status-example.component';
+import { PlatformObjectStatusLargeExampleComponent } from './examples/platform-object-status-large-example.component';
 
 const PlatformObjectStatusDefaultExampleScss = 'platform-object-status-example.component.scss';
 const PlatformObjectStatusDefaultExample = 'platform-object-status-example.component.html';
@@ -18,7 +36,23 @@ const PlatformObjectStatusLargeExampleTs = 'platform-object-status-large-example
     selector: 'fdp-platform-object-status-docs',
     templateUrl: './platform-object-status-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformObjectStatusExampleComponent,
+        CodeExampleComponent,
+        PlatformObjectStatusTextExampleComponent,
+        SeparatorComponent,
+        PlatformObjectStatusTextIconExampleComponent,
+        PlatformObjectStatusGenericExampleComponent,
+        PlatformObjectStatusClickableAndIconExampleComponent,
+        PlatformObjectStatusInvertedTextExampleComponent,
+        PlatformObjectStatusInvertedGenericTextExampleComponent,
+        PlatformObjectStatusLargeExampleComponent
+    ]
 })
 export class PlatformObjectStatusDocsComponent {
     platformDefaultObjectStatusHtmlType: ExampleFile[] = [

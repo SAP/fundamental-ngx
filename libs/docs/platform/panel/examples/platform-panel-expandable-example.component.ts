@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { PanelConfig, PanelExpandChangeEvent } from '@fundamental-ngx/platform/panel';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PanelConfig, PanelExpandChangeEvent, PlatformPanelModule } from '@fundamental-ngx/platform/panel';
 import { PlatformConfig } from '@fundamental-ngx/platform/shared';
 
 @Component({
@@ -25,7 +26,9 @@ import { PlatformConfig } from '@fundamental-ngx/platform/shared';
             useFactory: PanelConfig.createProviderFactory({ contentDensity: 'compact' }),
             deps: [PlatformConfig]
         }
-    ]
+    ],
+    standalone: true,
+    imports: [PlatformButtonModule, PlatformPanelModule]
 })
 export class PlatformPanelExpandableExampleComponent {
     public expanded = true;

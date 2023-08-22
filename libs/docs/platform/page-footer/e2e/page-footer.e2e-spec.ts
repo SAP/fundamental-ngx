@@ -1,6 +1,6 @@
-import { PageFooterPo } from './page-footer.po';
 import { checkElementTextValue, getElementArrayLength, isElementClickable, scrollIntoView } from '../../../../../e2e';
 import { footerTextArr } from './page-footer-contents';
+import { PageFooterPo } from './page-footer.po';
 
 describe('Page Footer test suite:', () => {
     const pageFooterPage = new PageFooterPo();

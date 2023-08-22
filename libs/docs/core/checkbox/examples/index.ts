@@ -1,10 +1,10 @@
 import { CheckboxCustomLabelExampleComponent } from './checkbox-custom-label-example.component';
 import { CheckboxCustomValuesExampleComponent } from './checkbox-custom-values-example.component';
 import { CheckboxDefaultExampleComponent } from './checkbox-default-example.component';
+import { CheckboxLabelWrappingExampleComponent } from './checkbox-label-wrapping-example.component';
 import { CheckboxReactiveFormsExampleComponent } from './checkbox-reactive-forms-example.component';
 import { CheckboxStatesExampleComponent } from './checkbox-states-example.component';
 import { CheckboxTristateExampleComponent } from './checkbox-tristate-example.component';
-import { CheckboxLabelWrappingExampleComponent } from './checkbox-label-wrapping-example.component';
 
 export * from './checkbox-custom-label-example.component';
 export * from './checkbox-custom-values-example.component';

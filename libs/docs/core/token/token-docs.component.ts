@@ -1,6 +1,19 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { TokenCompactExampleComponent } from './examples/token-compact-example/token-compact-example.component';
+import { TokenExampleComponent } from './examples/token-example/token-example.component';
+import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
+import { TokenSelectedExampleComponent } from './examples/token-selected-example/token-selected-example.component';
+import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenizerExampleComponent } from './examples/tokenizer-example/tokenizer-example.component';
 
 const basicTokenH = 'token-example/token-example.component.html';
 const basicTokenTs = 'token-example/token-example.component.ts';
@@ -24,7 +37,20 @@ const tokenizerCompactTsCode = 'tokenizer-compact-example/tokenizer-compact-exam
     selector: 'app-token-docs',
     templateUrl: './token-docs.component.html',
     styleUrls: ['./token-docs.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        TokenExampleComponent,
+        CodeExampleComponent,
+        TokenSelectedExampleComponent,
+        TokenReadOnlyExampleComponent,
+        TokenCompactExampleComponent,
+        DescriptionComponent,
+        TokenizerExampleComponent,
+        TokenizerCompactExampleComponent
+    ]
 })
 export class TokenDocsComponent {
     basicToken: ExampleFile[] = [

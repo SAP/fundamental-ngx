@@ -24,6 +24,14 @@
                             "outputHashing": "all",
                             "sourceMap": false,
                             "vendorChunk": false
+                        },
+                        "development": {
+                            "buildOptimizer": false,
+                            "extractLicenses": false,
+                            "namedChunks": true,
+                            "optimization": false,
+                            "sourceMap": true,
+                            "vendorChunk": true
                         }
                     },
                     "options": {
@@ -55,8 +63,12 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "fundamental-ngx-example:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "fundamental-ngx-example:build:development"
                         }
                     },
+                    "defaultConfiguration": "development",
                     "options": {
                         "browserTarget": "fundamental-ngx-example:build"
                     }

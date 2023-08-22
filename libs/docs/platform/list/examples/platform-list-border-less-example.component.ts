@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Address[] = new Array(6).fill(undefined).map((_, i) => ({ name: `Name${i + 1}` }));
 
 @Component({
     selector: 'fdp-platform-list-border-less-example',
-    templateUrl: './platform-list-border-less-example.component.html'
+    templateUrl: './platform-list-border-less-example.component.html',
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformListBorderLessExampleComponent {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());

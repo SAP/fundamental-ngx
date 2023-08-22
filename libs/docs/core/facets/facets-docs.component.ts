@@ -1,6 +1,25 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { CustomFacetExampleComponent } from './examples/custom-facet-example.component';
+import {
+    FacetGroupExampleComponent,
+    FacetLoadingExampleComponent,
+    FormFacetExampleComponent,
+    FormLinkFacetExampleComponent,
+    ImageFacetExampleComponent,
+    KeyValueFacetAlignmentExampleComponent,
+    KeyValueFacetExampleComponent,
+    RatingIndicatorFacetExampleComponent
+} from './examples/facet-examples.component';
 
 const FacetGroupExample = 'facet-group-example.component.html';
 const FormFacetExample = 'form-facet-example.component.html';
@@ -15,7 +34,24 @@ const FacetLoadingExample = 'facet-loading-example.component.html';
 
 @Component({
     selector: 'app-facet',
-    templateUrl: './facet-docs.component.html'
+    templateUrl: './facet-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        FacetGroupExampleComponent,
+        CodeExampleComponent,
+        FormFacetExampleComponent,
+        FormLinkFacetExampleComponent,
+        KeyValueFacetExampleComponent,
+        KeyValueFacetAlignmentExampleComponent,
+        ImageFacetExampleComponent,
+        RatingIndicatorFacetExampleComponent,
+        CustomFacetExampleComponent,
+        RouterLink,
+        FacetLoadingExampleComponent
+    ]
 })
 export class FacetsDocsComponent {
     facetGroup: ExampleFile[] = [
