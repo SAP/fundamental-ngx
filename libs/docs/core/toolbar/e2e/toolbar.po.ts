@@ -35,7 +35,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     overflowInput = 'fd-toolbar-overflow-example .fd-input';
 
     clickDayInCalendarButtonByValue = async (dayNumber: number): Promise<void> => {
-        await click('.fd-calendar__table td.fd-calendar__item:not(.fd-calendar__item--other-month)', dayNumber - 1);
+        await click('.fd-calendar__content td.fd-calendar__item:not(.fd-calendar__item--other)', dayNumber - 1);
     };
 
     async open(): Promise<void> {

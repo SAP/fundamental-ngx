@@ -122,7 +122,7 @@
             <ng-container *ngIf="loading && !displayedData.length">
                 <tr fd-table-row *fdkRepeat="3">
                     <td fd-table-cell *fdkRepeat="3">
-                        <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+                        <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
                     </td>
                 </tr>
             </ng-container>

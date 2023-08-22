@@ -1,14 +1,32 @@
 <fd-docs-section-title id="message-strip-basic" componentName="message-strip">
     Message Strip Types
 </fd-docs-section-title>
-<description
-    >A number of message strip types are available. They offer preset styling for different contextual situations. Can
-    be one of 'warning', 'success', 'information', 'error' or normal (default).
+<description>
+    <p>
+        A number of message strip types are available. They offer preset styling for different contextual situations.
+        Can be one of 'warning', 'success', 'information', 'error' or normal (default).
+    </p>
 </description>
 <component-example>
     <fd-message-strip-example></fd-message-strip-example>
 </component-example>
 <code-example [exampleFiles]="messageStripBasicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="message-strip-custom-icon" componentName="message-strip">
+    Custom Icons
+</fd-docs-section-title>
+<description>
+    <p>
+        If you want to have a custom icon, that is also supported using the <code>*fdMessageStripIcon</code>
+        directive.
+    </p>
+</description>
+<component-example>
+    <fd-message-strip-custom-icon-example></fd-message-strip-custom-icon-example>
+</component-example>
+<code-example [exampleFiles]="messageStripCustomIconExample"></code-example>
 
 <separator></separator>
 
@@ -37,6 +55,23 @@
     <fd-message-strip-width-example></fd-message-strip-width-example>
 </component-example>
 <code-example [exampleFiles]="messageStripWidthExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="message-strip-indication-color" componentName="message-strip">
+    Message Strips Indication Colors
+</fd-docs-section-title>
+<description>
+    <p>
+        If the application needs a custom Message Strip, other than the semantic variations, then the colours from
+        Inverted Object Status/Tag control should be used. Use the input <code>[indicationColor]</code> with values
+        number from 1 to 10 for the first set, and 1b to 10b for the second set.
+    </p>
+</description>
+<component-example>
+    <fd-message-strip-indication-colors-example></fd-message-strip-indication-colors-example>
+</component-example>
+<code-example [exampleFiles]="messageStripIndicationColorsExample"></code-example>
 
 <separator></separator>
 

@@ -12,6 +12,7 @@
                     <div
                         class="fd-slider__tick"
                         fd-slider-position
+                        [vertical]="vertical"
                         [position]="tick.position || 0"
                         [class.fd-slider__tick--in-range]="
                             !hideProgressBar &&
@@ -30,6 +31,7 @@
                     *ngIf="first || last || i % tickmarksBetweenLabels === 0"
                     class="fd-slider__label"
                     fd-slider-position
+                    [vertical]="vertical"
                     [position]="tick.position || 0"
                 >
                     {{ tick.label }}
@@ -40,17 +42,32 @@
 </div>
 
 <ng-template #singleModeTrack>
-    <div *ngIf="!hideProgressBar" class="fd-slider__track-range" [style.width.%]="_progress"></div>
+    <div
+        *ngIf="!hideProgressBar"
+        class="fd-slider__track-range"
+        [style.height.%]="vertical ? _progress : null"
+        [style.width.%]="vertical ? null : _progress"
+    ></div>
 </ng-template>
 
 <ng-template #rangeModeTrack>
     <div
         *ngIf="!hideProgressBar"
         class="fd-slider__track-range"
-        [style.width.%]="_rangeProgress"
+        [style.height.%]="vertical ? _rangeProgress : null"
+        [style.width.%]="vertical ? null : _rangeProgress"
         fd-slider-position
+        [vertical]="vertical"
         [position]="_handle1Position < _handle2Position ? _handle1Position : _handle2Position"
-    ></div>
+    >
+        <div
+            class="fd-slider__track-focus-range"
+            (mousedown)="onHandleClick($event, true)"
+            (keydown)="onKeyDown($event, _handles.Both)"
+            tabindex="0"
+            #rangeGroupHandle
+        ></div>
+    </div>
 </ng-template>
 
 <ng-template #singleMode>
@@ -80,6 +97,7 @@
                 : getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
         "
         fd-slider-position
+        [vertical]="vertical"
         [position]="_progress"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (focus)="_handleFocused$.next(true)"
@@ -133,9 +151,10 @@
                 : getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)
         "
         fd-slider-position
+        [vertical]="vertical"
         [position]="_handle1Position"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
-        (keydown)="onKeyDown($event)"
+        (keydown)="onKeyDown($event, _handles.First)"
         (focus)="_rangeHandle1Focused$.next(true)"
         (blur)="_rangeHandle1Focused$.next(false)"
     ></div>
@@ -166,9 +185,10 @@
                 : getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)
         "
         fd-slider-position
+        [vertical]="vertical"
         [position]="_handle2Position"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
-        (keydown)="onKeyDown($event)"
+        (keydown)="onKeyDown($event, _handles.Second)"
         (focus)="_rangeHandle2Focused$.next(true)"
         (blur)="_rangeHandle2Focused$.next(false)"
     ></div>

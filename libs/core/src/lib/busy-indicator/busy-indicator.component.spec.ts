@@ -1,13 +1,16 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BusyIndicatorComponent } from './busy-indicator.component';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     template: `
         <fd-busy-indicator [loading]="loading" [size]="size" [block]="block">
             <button *ngIf="hasContent">Button</button>
         </fd-busy-indicator>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, BusyIndicatorComponent]
 })
 class TestWrapperComponent {
     block = true;
@@ -22,7 +25,7 @@ describe('BusyIndicatorComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent, BusyIndicatorComponent]
+            imports: [TestWrapperComponent]
         })
             .overrideComponent(BusyIndicatorComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

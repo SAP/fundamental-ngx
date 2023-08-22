@@ -1,5 +1,5 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet, NgFor, NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -18,6 +18,12 @@ import { Nullable, resizeObservable, TabbableElementService } from '@fundamental
 import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'fdp-message-view',
@@ -85,6 +91,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
                 animate('0.1s .1s cubic-bezier(0, 0, 0.2, 1)')
             ])
         ])
+    ],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        CdkScrollable,
+        ScrollbarDirective,
+        ListModule,
+        NgFor,
+        NgIf,
+        ObjectStatusModule,
+        LinkComponent,
+        FdTranslatePipe
     ]
 })
 export class MessageViewComponent implements AfterViewInit {

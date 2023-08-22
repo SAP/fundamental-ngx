@@ -3,14 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CalendarModule } from '@fundamental-ngx/core/calendar';
-import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PlatformDatetimePickerModule } from './datetime-picker.module';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
@@ -82,15 +76,9 @@ describe('PlatformDatetimePickerComponent', () => {
             imports: [
                 PlatformDatetimePickerModule,
                 FdDatetimeModule,
-                CalendarModule,
-                DatetimePickerModule,
-                PopoverModule,
                 FdpFormGroupModule,
                 FormsModule,
                 FormModule,
-                IconModule,
-                InputGroupModule,
-                ButtonModule,
                 ReactiveFormsModule
             ]
         }).compileComponents();

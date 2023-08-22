@@ -18,7 +18,9 @@ import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
             (formSubmitted)="onFormSubmitted($event)"
             (formCreated)="onFormCreated($event)"
         ></fdp-form-generator>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformFormGeneratorModule]
 })
 export class HostComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
@@ -68,9 +70,7 @@ describe('FormGeneratorComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformFormGeneratorModule],
-            declarations: [HostComponent]
-            // providers: [FormGeneratorService, FormGeneratorComponentsAccessorService]
+            imports: [HostComponent]
         }).compileComponents();
     }));
 

@@ -7,7 +7,10 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { LineClampDirective, LineClampTargetDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { NgIf } from '@angular/common';
 
 /** Type of hyphenation */
 export type HyphenationType = 'none' | 'manual' | 'auto' | null;
@@ -17,7 +20,9 @@ export type HyphenationType = 'none' | 'manual' | 'auto' | null;
     templateUrl: './text.component.html',
     styleUrls: ['./text.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [LineClampDirective, LineClampTargetDirective, LinkComponent, FdTranslatePipe, NgIf],
+    standalone: true
 })
 export class TextComponent {
     /**

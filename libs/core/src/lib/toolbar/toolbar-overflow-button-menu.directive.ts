@@ -5,6 +5,7 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
     selector: '[fdToolbarOverflowButtonMenu], [fd-toolbar-overflow-button-menu]',
     host: {
         class: 'fd-toolbar__overflow-button--menu'
-    }
+    },
+    standalone: true
 })
 export class ToolbarOverflowButtonMenuDirective extends ToolbarItemDirective {}

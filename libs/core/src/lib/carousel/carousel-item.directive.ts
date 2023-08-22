@@ -4,7 +4,8 @@ let carouselItemCounter = 0;
 
 @Directive({
     selector: '[fd-carousel-item], [fdCarouselItem]',
-    exportAs: 'fdCarouselItem'
+    exportAs: 'fdCarouselItem',
+    standalone: true
 })
 export class CarouselItemDirective {
     /** Value of the item , to keep some information inside */

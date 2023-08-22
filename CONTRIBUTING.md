@@ -143,12 +143,20 @@ The following is the list of supported scopes:
 -   **platform**
 -   **docs**
 -   **e2e**
+-   **cdk**
+-   **cx**
 
 There are currently a few exceptions to the "use package name" rule:
 
 -   **changelog**: used for updating the release notes in CHANGELOG.md
 -   **docs**: used for docs-app (angular.io) related changes within the /aio directory of the
     repo
+-   **shared**: changes across documentation shared by several modules
+-   **ci**: changes to CI tooling
+-   **release**: release commits (auto-generated)
+-   **deps**: changes to dependencies (auto-generated)
+-   **deps-dev**: changes to dev dependencies (auto-generated)
+-   **changelog**
 
 ### Multiple scopes
 

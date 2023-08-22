@@ -1,4 +1,5 @@
 import {
+    CSP_NONCE,
     Directive,
     ElementRef,
     HostBinding,
@@ -105,6 +106,12 @@ export class ScrollbarDirective implements OnDestroy {
 
     /** @hidden */
     private _document: Document = inject(DOCUMENT);
+
+    /** @hidden */
+    private readonly _csp_nonce = inject(CSP_NONCE, {
+        optional: true
+    });
+
     /** @hidden */
     private _noHorizontalScroll = false;
 
@@ -113,14 +120,6 @@ export class ScrollbarDirective implements OnDestroy {
 
     /** @hidden */
     private _alwaysVisible = false;
-
-    /** @hidden */
-    @HostListener('scroll', ['$event'])
-    onScroll(event: Event): void {
-        if (this._inPopover) {
-            event.stopImmediatePropagation();
-        }
-    }
 
     /**
      * @hidden
@@ -131,7 +130,18 @@ export class ScrollbarDirective implements OnDestroy {
         if (!styleSheet && isPlatformBrowser(platform)) {
             styleSheet = renderer2.createElement('style');
             styleSheet!.innerHTML = scrollbarStyles.cssSource;
+            if (this._csp_nonce) {
+                styleSheet?.setAttribute('nonce', this._csp_nonce);
+            }
             renderer2.appendChild(this._document.head, styleSheet);
+        }
+    }
+
+    /** @hidden */
+    @HostListener('scroll', ['$event'])
+    onScroll(event: Event): void {
+        if (this._inPopover) {
+            event.stopImmediatePropagation();
         }
     }
 

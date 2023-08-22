@@ -4,7 +4,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Directive({
-    selector: '[fdPopoverContainer]'
+    selector: '[fdPopoverContainer]',
+    standalone: true
 })
 export class PopoverContainerDirective implements OnInit, OnDestroy {
     /** Subject which emits when popover position refresh is required. */

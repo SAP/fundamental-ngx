@@ -1,15 +1,30 @@
 import {
+    AfterViewInit,
     Component,
+    ComponentRef,
+    DestroyRef,
     ElementRef,
+    EmbeddedViewRef,
+    EventEmitter,
     inject,
     Input,
-    OnChanges,
-    SimpleChanges,
+    Output,
+    Renderer2,
     TemplateRef,
+    ViewChild,
     ViewContainerRef
 } from '@angular/core';
-import { ComponentPortal, ComponentType, DomPortal, Portal, PortalModule, TemplatePortal } from '@angular/cdk/portal';
+import {
+    CdkPortalOutlet,
+    ComponentPortal,
+    ComponentType,
+    DomPortal,
+    PortalModule,
+    TemplatePortal
+} from '@angular/cdk/portal';
 import { coerceElement } from '@angular/cdk/coercion';
+import { BehaviorSubject, filter, map, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * A component that can be used to attach a portal to a DOM element, without explicitly creating portal instances on place.
@@ -20,35 +35,88 @@ import { coerceElement } from '@angular/cdk/coercion';
     selector: 'fdk-dynamic-portal',
     standalone: true,
     imports: [PortalModule],
-    template: ` <ng-template [cdkPortalOutlet]="portal"></ng-template>`
+    template: ` <ng-template cdkPortalOutlet></ng-template>`
 })
-export class DynamicPortalComponent implements OnChanges {
+export class DynamicPortalComponent implements AfterViewInit {
     /** The DOM element to attach */
-    @Input() domElement: HTMLElement | ElementRef<HTMLElement>;
+    @Input()
+    set domElement(value: HTMLElement | ElementRef<HTMLElement> | string) {
+        this.portalContent$.next(value);
+    }
 
     /** The component to attach */
     @Input()
-    component: ComponentType<any>;
+    set component(value: ComponentType<any>) {
+        this.portalContent$.next(value);
+    }
 
     /** The template to attach */
     @Input()
-    template: TemplateRef<any>;
+    set template(value: TemplateRef<any>) {
+        this.portalContent$.next(value);
+    }
 
-    /** Portal associated with the Portal outlet. */
-    portal?: Portal<any>;
+    /** The Content which should be attached and can be any of the items */
+    @Input()
+    set auto(value: DynamicPortalComponent['domElement' | 'component' | 'template']) {
+        this.portalContent$.next(value);
+    }
+
+    /** Emits when the portal is attached */
+    @Output()
+    attached = new EventEmitter<ComponentRef<any> | EmbeddedViewRef<any> | Element>();
+
+    /** @hidden */
+    @ViewChild(CdkPortalOutlet)
+    portalOutlet?: CdkPortalOutlet;
+
+    /** @hidden */
+    private portalContent$ = new BehaviorSubject<
+        DynamicPortalComponent['domElement' | 'component' | 'template'] | undefined
+    >(undefined);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private viewContainerRef = inject(ViewContainerRef);
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        this.portal?.detach();
-        if (changes['domElement']) {
-            this.portal = new DomPortal(coerceElement(this.domElement));
-        } else if (changes['component']) {
-            this.portal = new ComponentPortal(this.component);
-        } else if (changes['template']) {
-            this.portal = new TemplatePortal(this.template, this.viewContainerRef);
-        }
+    private renderer = inject(Renderer2);
+
+    /** @hidden */
+    private elementRef = inject(ElementRef);
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        const portalOutlet = this.portalOutlet as CdkPortalOutlet;
+        this.portalContent$
+            .pipe(
+                tap(() => portalOutlet.detach()),
+                filter(Boolean),
+                map((content) => {
+                    if (typeof content === 'string') {
+                        const textElement = this.renderer.createText(content);
+                        this.renderer.appendChild(this.elementRef.nativeElement, textElement);
+                        return new DomPortal(textElement);
+                    } else if (content instanceof HTMLElement || content instanceof ElementRef) {
+                        return new DomPortal(coerceElement(content as HTMLElement | ElementRef<HTMLElement>));
+                    } else if (content instanceof TemplateRef) {
+                        return new TemplatePortal(content, this.viewContainerRef);
+                    }
+                    return new ComponentPortal(content);
+                }),
+                filter(Boolean),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe((portal) => {
+                const ref = portalOutlet.attach(portal);
+                if (portal instanceof DomPortal) {
+                    // DomPortal Attachment does not refer return Ref, like other portals
+                    this.attached.emit(portal.element);
+                } else {
+                    this.attached.emit(ref);
+                }
+            });
     }
 }

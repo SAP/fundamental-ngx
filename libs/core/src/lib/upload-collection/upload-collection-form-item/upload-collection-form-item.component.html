@@ -2,7 +2,7 @@
     *ngIf="_editMode"
     fd-form-control
     required
-    style="pointer-events: all"
+    [style.pointer-events]="'all'"
     class="fd-input"
     type="text"
     [attr.placeholder]="'coreUploadCollection.formItemPlaceholder' | fdTranslate"

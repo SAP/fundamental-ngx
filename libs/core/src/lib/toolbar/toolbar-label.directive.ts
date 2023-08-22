@@ -7,6 +7,7 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
     selector: '[fd-toolbar-label]',
     host: {
         class: 'fd-label fd-toolbar__overflow-label'
-    }
+    },
+    standalone: true
 })
 export class ToolbarLabelDirective extends ToolbarItemDirective {}

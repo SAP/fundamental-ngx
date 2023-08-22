@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { CarouselComponent, PageIndicatorsOrientation } from './carousel.component';
+import { CarouselBackgroundOptions, CarouselComponent, PageIndicatorsOrientation } from './carousel.component';
 import { CarouselModule } from './carousel.module';
 
 const carouselItems = `<fd-carousel-item>
@@ -18,8 +18,11 @@ const carouselItems = `<fd-carousel-item>
 
 @Component({
     selector: 'fd-test-carousel',
+    standalone: true,
+    imports: [CarouselModule],
     template: `
         <fd-carousel
+            [vertical]="vertical"
             [visibleSlidesCount]="visibleItemsCount"
             [pageIndicatorContainer]="showPageIndicatorContainer"
             [pageIndicator]="showPageIndicator"
@@ -27,6 +30,9 @@ const carouselItems = `<fd-carousel-item>
             [navigatorInPageIndicator]="navigatorInPageIndicator"
             [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
+            [noPaginationContainerBorder]="noPaginationContainerBorder"
+            [contentBackground]="contentBackground"
+            [pageIndicatorBackground]="pageIndicatorBackground"
             >${carouselItems}</fd-carousel
         >
     `
@@ -35,6 +41,7 @@ class TestCarouselComponent {
     @ViewChild(CarouselComponent)
     carousel: CarouselComponent;
 
+    vertical = false;
     visibleItemsCount = 1;
     showPageIndicatorContainer = true;
     showPageIndicator = true;
@@ -42,6 +49,9 @@ class TestCarouselComponent {
     navigatorInPageIndicator = true;
     pageIndicatorContainerPlacement: PageIndicatorsOrientation = 'top';
     isCircular = false;
+    noPaginationContainerBorder = false;
+    contentBackground: CarouselBackgroundOptions;
+    pageIndicatorBackground: CarouselBackgroundOptions;
 }
 
 describe('CarouselComponent', () => {
@@ -50,8 +60,7 @@ describe('CarouselComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCarouselComponent],
-            imports: [CarouselModule]
+            imports: [TestCarouselComponent]
         }).compileComponents();
     }));
 
@@ -63,6 +72,69 @@ describe('CarouselComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should apply background config', async () => {
+        const backgroundOptions: CarouselBackgroundOptions[] = ['solid', 'translucent', 'transparent'];
+
+        // Apply properties in a separate loop to exclude possibility of incorrect property binding.
+        backgroundOptions.forEach((option) => {
+            component.contentBackground = option;
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-carousel__content').classList).toContain(
+                `fd-carousel__content--${option}`
+            );
+        });
+
+        backgroundOptions.forEach((option) => {
+            component.pageIndicatorBackground = option;
+            fixture.detectChanges();
+            expect(fixture.nativeElement.querySelector('.fd-carousel__page-indicator-container').classList).toContain(
+                `fd-carousel__page-indicator-container--${option}`
+            );
+        });
+    });
+
+    it('should change icons for vertical carousel', async () => {
+        component.vertical = false;
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.fd-carousel__content').classList).toContain(
+            'fd-carousel__content--horizontal'
+        );
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--left')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--up')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--right')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--down')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.fd-carousel__button--left .sap-icon--slim-arrow-left')
+        ).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--left .sap-icon--slim-arrow-up')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.fd-carousel__button--right .sap-icon--slim-arrow-right')
+        ).toBeTruthy();
+        expect(
+            fixture.nativeElement.querySelector('.fd-carousel__button--right .sap-icon--slim-arrow-down')
+        ).toBeFalsy();
+
+        component.vertical = true;
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.fd-carousel__content').classList).not.toContain(
+            'fd-carousel__content--horizontal'
+        );
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--left')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--up')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--right')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--down')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--up .sap-icon--slim-arrow-left')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.fd-carousel__button--up .sap-icon--slim-arrow-up')).toBeTruthy();
+        expect(
+            fixture.nativeElement.querySelector('.fd-carousel__button--down .sap-icon--slim-arrow-right')
+        ).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.fd-carousel__button--down .sap-icon--slim-arrow-down')
+        ).toBeTruthy();
     });
 
     it('should have 8 carousel items', async () => {
@@ -107,6 +179,8 @@ describe('CarouselComponent', () => {
 
 @Component({
     selector: 'fd-test-multiple-active-item-carousel',
+    standalone: true,
+    imports: [CarouselModule],
     template: `
         <fd-carousel
             [visibleSlidesCount]="visibleItemsCount"
@@ -139,8 +213,7 @@ describe('CarouselComponent Multiple Active Item', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCarouselMultipleActiveItemComponent],
-            imports: [CarouselModule]
+            imports: [TestCarouselMultipleActiveItemComponent]
         }).compileComponents();
     }));
 
@@ -232,6 +305,8 @@ describe('CarouselComponent Multiple Active Item', () => {
 
 @Component({
     selector: 'fd-test-looping-navigation-carousel',
+    imports: [CarouselModule],
+    standalone: true,
     template: `
         <fd-carousel
             [visibleSlidesCount]="visibleItemsCount"
@@ -264,8 +339,7 @@ describe('CarouselComponent looping navigation', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestCarouselLoopingNavigationComponent],
-            imports: [CarouselModule]
+            imports: [TestCarouselLoopingNavigationComponent]
         }).compileComponents();
     }));
 

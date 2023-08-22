@@ -23,6 +23,8 @@ import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-
 import { CalendarYearGrid } from '../../models/calendar-year-grid';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-calendar-aggregated-year-view',
@@ -32,7 +34,9 @@ import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.id]': 'viewId'
-    }
+    },
+    standalone: true,
+    imports: [NgFor, ButtonModule]
 })
 export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */

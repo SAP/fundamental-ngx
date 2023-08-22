@@ -6,9 +6,9 @@ const Configuration = {
             'always',
             ['core', 'platform', 'docs', 'e2e', 'release', 'deps', 'deps-dev', 'changelog', 'ci', 'cx', 'cdk', 'shared']
         ],
-        'body-max-line-length': [2, 'always', 200],
-        'footer-max-line-length': [2, 'always', 200],
-        'header-max-length': [2, 'always', 200]
+        'body-max-line-length': [2, 'always', 400],
+        'footer-max-line-length': [2, 'always', 400],
+        'header-max-length': [2, 'always', 400]
     }
 };
 

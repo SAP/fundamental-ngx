@@ -61,6 +61,9 @@ export class FocusableItemDirective implements FocusableItem {
     @Output()
     readonly cellFocused = new EventEmitter<FocusableItemPosition>();
 
+    /** Element reference. */
+    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
     /** @hidden */
     readonly keydown = new Subject<KeyboardEvent>();
 
@@ -73,8 +76,6 @@ export class FocusableItemDirective implements FocusableItem {
         return this._tabbable ? 0 : -1;
     }
 
-    /** Element reference. */
-    readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
     /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
     /** @hidden */
@@ -88,7 +89,6 @@ export class FocusableItemDirective implements FocusableItem {
 
     /** @hidden */
     private _tabbable = true;
-
     /** @hidden */
     private _timerId: ReturnType<typeof setTimeout> | null;
     /** @hidden */

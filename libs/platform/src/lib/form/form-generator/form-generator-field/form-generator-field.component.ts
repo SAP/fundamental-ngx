@@ -17,6 +17,10 @@ import { DynamicFormControl } from '../dynamic-form-control';
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { DynamicFormItemValidationObject } from '../interfaces/dynamic-form-item';
+import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 
 const formFieldProvider: Provider = {
     provide: FD_FORM_FIELD,
@@ -32,7 +36,9 @@ const formGroupChildProvider: Provider = {
     selector: 'fdp-form-generator-field',
     templateUrl: './form-generator-field.component.html',
     providers: [formFieldProvider, formGroupChildProvider],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, NgFor, NgIf, DynamicFormControlDirective]
 })
 export class FormGeneratorFieldComponent implements OnInit {
     /**
@@ -108,6 +114,16 @@ export class FormGeneratorFieldComponent implements OnInit {
     }
 
     /** @hidden */
+    _errorsTrackBy(_: number, error: { type: string; value: any }): string {
+        return error.type;
+    }
+
+    /** @hidden */
+    _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
+        return error.heading && error.description && error.type;
+    }
+
+    /** @hidden */
     private _getErrors(): { type: string; value: any }[] {
         const registeredErrors = this._fgService.validationErrorHints;
 
@@ -128,10 +144,5 @@ export class FormGeneratorFieldComponent implements OnInit {
         });
 
         return returnErrors;
-    }
-
-    /** @hidden */
-    _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
-        return error.heading && error.description && error.type;
     }
 }

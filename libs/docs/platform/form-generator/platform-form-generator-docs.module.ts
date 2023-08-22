@@ -29,6 +29,8 @@ import { PlatformFormGeneratorGroupingExampleComponent } from './examples/platfo
 import { PlatformFormGeneratorInlineHelpExampleComponent } from './examples/platform-form-generator-inline-help-example.component';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { PlatformFormGeneratorLoadingExampleComponent } from './examples/loading/platform-form-generator-loading-example.component';
+import { PlatformFormGeneratorAdvancedExampleComponent } from './examples/advanced/platform-form-generator-advanced-example.component';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 const routes: Routes = [
     {
@@ -51,7 +53,8 @@ const routes: Routes = [
         PlatformButtonModule,
         PlatformSliderModule,
         BusyIndicatorModule,
-        TableModule
+        TableModule,
+        BarModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -68,7 +71,8 @@ const routes: Routes = [
         PlatformFormGeneratorCustomFieldLayoutExampleComponent,
         PlatformFormGeneratorGroupingExampleComponent,
         PlatformFormGeneratorInlineHelpExampleComponent,
-        PlatformFormGeneratorLoadingExampleComponent
+        PlatformFormGeneratorLoadingExampleComponent,
+        PlatformFormGeneratorAdvancedExampleComponent
     ],
     providers: [currentComponentProvider('form-generator')]
 })

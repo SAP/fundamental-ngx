@@ -20,6 +20,9 @@ const datePickerSingleDisableH = 'date-picker-disable-func-example/date-picker-d
 const datePickerUpdateOnBlurSrcTs = 'date-picker-update-on-blur-example.component.ts';
 const datePickerDisableScrollSrcTs = 'date-picker-disable-focus-scroll-example.component.ts';
 
+const datePickerMobileTs = 'mobile-mode/date-picker-mobile-mode-example.component.ts';
+const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component.html';
+
 @Component({
     selector: 'app-date-picker',
     templateUrl: './date-picker-docs.component.html'
@@ -166,6 +169,21 @@ export class DatePickerDocsComponent {
             component: 'DatePickerDisableFocusScrollExampleComponent',
             code: getAssetFromModuleAssets(datePickerDisableScrollSrcTs),
             fileName: 'date-picker-disable-focus-scroll-example'
+        }
+    ];
+
+    datePickerMobile: ExampleFile[] = [
+        {
+            language: 'typescript',
+            component: 'DatePickerMobileModeExampleComponent',
+            code: getAssetFromModuleAssets(datePickerMobileTs),
+            fileName: 'date-picker-mobile-mode-example'
+        },
+        {
+            language: 'html',
+            component: 'DatePickerMobileModeExampleComponent',
+            code: getAssetFromModuleAssets(datePickerMobileH),
+            fileName: 'date-picker-mobile-mode-example'
         }
     ];
 }

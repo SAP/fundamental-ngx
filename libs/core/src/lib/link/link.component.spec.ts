@@ -4,7 +4,9 @@ import { Component, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-tabs',
-    template: ` <a fd-link>Test Link</a> `
+    template: ` <a fd-link>Test Link</a> `,
+    standalone: true,
+    imports: [LinkComponent]
 })
 class TestLinkComponent {
     @ViewChild(LinkComponent, { static: true })
@@ -17,7 +19,7 @@ describe('LinkComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [LinkComponent, TestLinkComponent]
+            imports: [TestLinkComponent]
         }).compileComponents();
     }));
 

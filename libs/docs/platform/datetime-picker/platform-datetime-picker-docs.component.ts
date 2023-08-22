@@ -9,6 +9,9 @@ const datetimePickerTemplateHtml = 'platform-datetime-picker-template-example.co
 const datetimePickerTemplateTs = 'platform-datetime-picker-template-example.component.ts';
 const datetimePickerUpdateOnBlurTs = 'platform-datetime-picker-update-on-blur-example.component.ts';
 
+const datetimePickerMobileHtml = 'mobile/platform-datetime-picker-mobile-example.component.html';
+const datetimePickerMobileeTs = 'mobile/platform-datetime-picker-mobile-example.component.ts';
+
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 @Component({
@@ -78,6 +81,20 @@ export class PlatformDatetimePickerDocsComponent {
             code: getAssetFromModuleAssets(datetimePickerUpdateOnBlurTs),
             fileName: 'platform-datetime-picker-update-on-blur-example',
             component: 'PlatformDatetimePickerUpdateOnBlurExampleComponent'
+        }
+    ];
+
+    datetimePickerMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datetimePickerMobileHtml),
+            fileName: 'platform-datetime-PlatformDatetimePickerMobileExampleComponent-disable-function-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(datetimePickerMobileeTs),
+            fileName: 'platform-datetime-picker-mobile-example',
+            component: 'PlatformDatetimePickerMobileExampleComponent'
         }
     ];
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -13,10 +14,10 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { SliderTickMark } from '@fundamental-ngx/core/slider';
+import { SliderTickMark, SliderComponent as SliderComponent_1 } from '@fundamental-ngx/core/slider';
 import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 
 export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
@@ -36,7 +37,9 @@ export class SliderChangeEvent<T extends SliderControlValue = any> {
     templateUrl: './slider.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SliderComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SliderComponent, multi: true }],
+    standalone: true,
+    imports: [SliderComponent_1, FormsModule]
 })
 export class SliderComponent extends BaseInput {
     /** User's custom classes */
@@ -90,6 +93,10 @@ export class SliderComponent extends BaseInput {
     /** Hides display of colored progress bar. */
     @Input()
     hideProgressBar = false;
+
+    /** Whether the slider should be rendered vertically. */
+    @Input()
+    vertical = false;
     /**
      * Event fired when the state of the slider changes.
      * *$event* can be used to retrieve the new state of the slider.

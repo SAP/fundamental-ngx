@@ -8,7 +8,7 @@ describe('ShellbarLogoComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ShellbarLogoComponent]
+            imports: [ShellbarLogoComponent]
         }).compileComponents();
     }));
 

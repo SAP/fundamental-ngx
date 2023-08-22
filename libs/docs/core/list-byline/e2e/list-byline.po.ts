@@ -8,7 +8,7 @@ export class ListBylinePo extends CoreBaseComponentPo {
 
     button = ' button';
     checkbox = ' fd-checkbox';
-    radioButton = ' .fd-radio__label';
+    radioButtonLabel = '.fd-radio__label';
     radioButtonInput = '.fd-radio';
     listItem = ' .fd-list__item';
 

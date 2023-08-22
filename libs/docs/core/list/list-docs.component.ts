@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { _secondaryListItemTypes } from '@fundamental-ngx/core/list';
 
 const listSortPipe = 'sort.pipe.ts';
 const listSrc = 'list-example.component.html';
@@ -193,4 +194,5 @@ export class ListDocsComponent {
             fileName: 'list-loading-example'
         }
     ];
+    readonly _secondaryListItemTypes = _secondaryListItemTypes;
 }

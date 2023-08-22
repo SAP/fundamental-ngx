@@ -2,7 +2,8 @@ import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: 'fd-toolbar-spacer'
+    selector: 'fd-toolbar-spacer',
+    standalone: true
 })
 export class ToolbarSpacerDirective {
     /** Determines the width of spacer when fixed property is set to true

@@ -14,6 +14,7 @@ export class CheckboxPo extends CoreBaseComponentPo {
     checkbox = 'fd-checkbox';
     checkboxInput = this.checkbox + ' input';
     checkboxLabel = this.checkbox + ' label';
+    checkboxCheckmark = this.checkboxLabel + ' span.fd-checkbox__checkmark';
     link = this.checkbox + ' a';
     tristateOutput = this.tristateCheckbox + 'div';
 

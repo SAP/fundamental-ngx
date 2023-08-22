@@ -17,7 +17,8 @@ import { CarouselItemDirective } from './carousel-item.directive';
     host: {
         class: 'fd-carousel_'
     },
-    providers: [CarouselService]
+    providers: [CarouselService],
+    standalone: true
 })
 export class CarouselDirective implements AfterContentInit {
     /** Configuration for carousel */

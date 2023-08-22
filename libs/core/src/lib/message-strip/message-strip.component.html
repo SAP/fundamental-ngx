@@ -1,3 +1,18 @@
+<ng-container *ngIf="shouldShowIcon">
+    <div class="fd-message-strip__icon-container" aria-hidden="true">
+        <ng-container *ngIf="icon; else typeSpecificIcon">
+            <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
+        </ng-container>
+        <ng-template #typeSpecificIcon>
+            <fd-icon [glyph]="typeSpecificIconName"></fd-icon>
+        </ng-template>
+    </div>
+</ng-container>
+
+<p class="fd-message-strip__text">
+    <ng-content></ng-content>
+</p>
+
 <button
     class="fd-message-strip__close"
     fd-button
@@ -10,6 +25,3 @@
     [attr.aria-label]="'coreMessageStrip.dismissLabel' | fdTranslate"
     [attr.title]="'coreMessageStrip.dismissLabel' | fdTranslate"
 ></button>
-<p class="fd-message-strip__text">
-    <ng-content></ng-content>
-</p>

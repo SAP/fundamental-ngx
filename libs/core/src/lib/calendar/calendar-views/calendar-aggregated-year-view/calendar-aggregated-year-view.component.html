@@ -1,50 +1,52 @@
-<div class="fd-calendar__years">
-    <table class="fd-calendar__table" role="grid" [attr.aria-roledescription]="_viewRoleDescription">
-        <tbody class="fd-calendar__group" role="rowgroup">
-            <tr class="fd-calendar__row" *ngFor="let colYears of _calendarYearListGrid; let rowIndex = index">
-                <td
-                    class="fd-calendar__item"
-                    role="gridcell"
-                    *ngFor="let cell of colYears; let colIndex = index"
-                    [class.fd-calendar__item--current]="cell.current"
-                    [class.is-active]="cell.selected"
-                    [attr.id]="cell.id"
-                    [attr.tabindex]="cell.tabIndex"
-                    [attr.data-fd-calendar-years]="cell.years.startYear + '-' + cell.years.endYear"
-                    (keydown)="_onKeydownYearHandler($event, cell.index)"
-                    (click)="selectYear(cell, $event)"
+<table
+    class="fd-calendar__content fd-calendar__content--years"
+    role="grid"
+    [attr.aria-roledescription]="_viewRoleDescription"
+>
+    <tbody class="fd-calendar__group" role="rowgroup">
+        <tr class="fd-calendar__row" *ngFor="let colYears of _calendarYearListGrid; let rowIndex = index">
+            <td
+                class="fd-calendar__my-item"
+                role="gridcell"
+                *ngFor="let cell of colYears; let colIndex = index"
+                [class.fd-calendar__my-item--current]="cell.current"
+                [class.is-active]="cell.selected"
+                [attr.id]="cell.id"
+                [attr.tabindex]="cell.tabIndex"
+                [attr.data-fd-calendar-years]="cell.years.startYear + '-' + cell.years.endYear"
+                (keydown)="_onKeydownYearHandler($event, cell.index)"
+                (click)="selectYear(cell, $event)"
+            >
+                <button
+                    fd-button
+                    fdType="transparent"
+                    class="fd-calendar__my-item-button"
+                    [class.is-active]="cell.current"
+                    tabindex="-1"
                 >
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        class="fd-calendar__item-button"
-                        [class.is-active]="cell.current"
-                        tabindex="-1"
+                    <span
+                        class="fd-calendar__text"
+                        [attr.aria-labelledby]="
+                            cell.id +
+                            '-aria-label ' +
+                            (cell.current ? _todayLabelId + ' ' : '') +
+                            (cell.selected ? _selectedDateLabelId : '')
+                        "
                     >
-                        <span
-                            class="fd-calendar__text"
-                            [attr.aria-labelledby]="
-                                cell.id +
-                                '-aria-label ' +
-                                (cell.current ? _todayLabelId + ' ' : '') +
-                                (cell.selected ? _selectedDateLabelId : '')
-                            "
-                        >
-                            {{ cell.label }}
-                        </span>
-                    </button>
-
-                    <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
-                        {{ cell.ariaLabel }}
+                        {{ cell.label }}
                     </span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                </button>
 
-    <!-- Hidden elements for aria purposes -->
-    <div hidden aria-hidden="true">
-        <div [attr.id]="_todayLabelId">{{ _todayAriaLabel }}</div>
-        <div [attr.id]="_selectedDateLabelId">{{ _selectedDateAriaLabel }}</div>
-    </div>
+                <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
+                    {{ cell.ariaLabel }}
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Hidden elements for aria purposes -->
+<div hidden aria-hidden="true">
+    <div [attr.id]="_todayLabelId">{{ _todayAriaLabel }}</div>
+    <div [attr.id]="_selectedDateLabelId">{{ _selectedDateAriaLabel }}</div>
 </div>
