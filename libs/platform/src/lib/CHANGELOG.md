@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.0...v0.46.0-rc.1) (2023-08-22)
+
+
+### Features
+
+* **core,platform:** calendar horizon, datepicker mobile mode ([#10373](https://github.com/SAP/fundamental-ngx/issues/10373)) ([dabd4dd](https://github.com/SAP/fundamental-ngx/commit/dabd4ddbd2cf70de7b4f9dec578566d8e7d8b41d))
+
+
+
+
+
 # [0.46.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.1...v0.46.0-rc.0) (2023-08-22)
 
 
