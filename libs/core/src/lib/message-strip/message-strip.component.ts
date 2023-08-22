@@ -90,10 +90,6 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @ContentChild(MessageStripIconDirective)
     icon: MessageStripIconDirective;
 
-    /** Custom icon component */
-    @ContentChild(MessageStripIconDirective)
-    icon: MessageStripIconDirective;
-
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
 

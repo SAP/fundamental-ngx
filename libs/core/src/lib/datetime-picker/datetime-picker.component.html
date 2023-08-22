@@ -77,12 +77,12 @@
                 <fd-segmented-button [(ngModel)]="_displayType">
                     <button
                         fd-button
-                        [label]="displayTypeDateLabel || ('coreDatetimePicker.displayTypeDateLabel' | fdTranslate)"
+                        [label]="'coreDatetimePicker.displayTypeDateLabel' | fdTranslate"
                         value="date"
                     ></button>
                     <button
                         fd-button
-                        [label]="displayTypeTimeLabel || ('coreDatetimePicker.displayTypeTimeLabel' | fdTranslate)"
+                        [label]="'coreDatetimePicker.displayTypeTimeLabel' | fdTranslate"
                         value="time"
                     ></button>
                 </fd-segmented-button>
@@ -139,8 +139,8 @@
                                 fd-button
                                 fdType="emphasized"
                                 [disabled]="!_tempDate"
-                                [label]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
-                                [ariaLabel]="okLabel || ('coreDatetimePicker.datetimeOkLabel' | fdTranslate)"
+                                [label]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
+                                [ariaLabel]="'coreDatetimePicker.datetimeOkLabel' | fdTranslate"
                                 (click)="submit()"
                             ></button>
                         </fd-bar-element>
@@ -148,8 +148,8 @@
                             <button
                                 fd-button
                                 fdType="transparent"
-                                [label]="cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)"
-                                [ariaLabel]="cancelLabel || ('coreDatetimePicker.datetimeCancelLabel' | fdTranslate)"
+                                [label]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
+                                [ariaLabel]="'coreDatetimePicker.datetimeCancelLabel' | fdTranslate"
                                 (click)="cancel()"
                             ></button>
                         </fd-bar-element>
