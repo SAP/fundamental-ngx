@@ -82,7 +82,7 @@ describe('Datetime picker suite', () => {
 
     it('verify calendar by clicking on the date time picker button', async () => {
         const activeButtonsLength = await getElementArrayLength(datePickerButton);
-        for (let i = 1; i < activeButtonsLength; i++) {
+        for (let i = 1; i < activeButtonsLength - 2; i++) {
             if (!(await getElementClass(datePickerGroup, i)).includes('is-disabled')) {
                 await sendKeys(['Escape']);
                 await scrollIntoView(datePickerButton, i);
@@ -320,7 +320,7 @@ describe('Datetime picker suite', () => {
 
     it('should check that OK buttons have correct text', async () => {
         const datepickerButtonsLength = await getElementArrayLength(datePickerButton);
-        for (let i = 0; i < datepickerButtonsLength; i++) {
+        for (let i = 0; i < datepickerButtonsLength - 2; i++) {
             if (!(await getElementClass(datePickerButton, i)).includes('disabled')) {
                 await click(datePickerButton, i);
                 await expect((await getText(okButton + buttonText)).trim()).toEqual('Ok');

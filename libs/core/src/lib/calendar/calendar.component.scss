@@ -4,3 +4,7 @@
 .fd-has-display-block {
     display: block;
 }
+
+.fd-calendar__text {
+    max-width: calc(100% - 0.375rem);
+}

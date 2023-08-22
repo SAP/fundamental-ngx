@@ -1,0 +1,35 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title *ngIf="mobileConfig?.title">{{ mobileConfig.title }}</h1>
+            <button
+                title="Close"
+                fd-dialog-close-button
+                *ngIf="mobileConfig?.hasCloseButton"
+                [mobile]="true"
+                (click)="handleDismiss()"
+            ></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="dateTimePickerConfig?.pickerTemplate || null"></ng-container>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                *ngIf="mobileConfig?.approveButtonText"
+                fdType="emphasized"
+                [label]="mobileConfig.approveButtonText!"
+                (click)="handleApprove()"
+            >
+            </fd-button-bar>
+            <fd-button-bar
+                *ngIf="mobileConfig?.cancelButtonText"
+                fdkInitialFocus
+                [label]="mobileConfig.cancelButtonText!"
+                (click)="handleDismiss()"
+            >
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

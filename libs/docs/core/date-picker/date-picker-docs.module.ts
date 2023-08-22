@@ -26,6 +26,7 @@ import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
 import { DatePickerDisableFocusScrollExampleComponent } from './examples/date-picker-disable-focus-scroll-example.component';
+import { DatePickerMobileModeExampleComponent } from './examples/mobile-mode/date-picker-mobile-mode-example.component';
 
 const routes: Routes = [
     {
@@ -67,7 +68,8 @@ const routes: Routes = [
         DatePickerDisableFuncExampleComponent,
         DatePickerRangeDisabledExampleComponent,
         DatePickerUpdateOnBlurExampleComponent,
-        DatePickerDisableFocusScrollExampleComponent
+        DatePickerDisableFocusScrollExampleComponent,
+        DatePickerMobileModeExampleComponent
     ],
     providers: [currentComponentProvider('date-picker')]
 })

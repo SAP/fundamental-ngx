@@ -1,4 +1,6 @@
-.fd-datetime {
+$block: fd-datetime;
+
+.#{$block} {
     display: block;
 
     &__wrapper {
@@ -6,17 +8,30 @@
         max-width: 80vw;
     }
 
+    &__mobile-control {
+        display: inline-block;
+        max-width: 100%;
+    }
+
     &__container {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 16px;
+        margin: 0 1rem;
+        &--mobile-portrait {
+            > *:not(.#{$block}__mobile-display) {
+                display: none !important;
+            }
+            // .#{$block}__mobile-display {
+            //     display: block !important;
+            // }
+        }
     }
 
     &__separator {
         background-color: lightgrey;
-        width: 1px;
-        margin: 42px 28px;
+        width: 0.0625rem;
+        margin: 2.625rem 1.75rem;
         align-self: stretch;
     }
 
@@ -29,10 +44,13 @@
         display: none;
         width: 100%;
         justify-content: center;
+        &--mobile {
+            display: flex;
+        }
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 60rem) {
     .fd-datetime {
         &__display-type-switcher {
             display: flex;

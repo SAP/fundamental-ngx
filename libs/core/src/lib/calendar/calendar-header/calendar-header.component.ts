@@ -23,6 +23,8 @@ import { FdCalendarView } from '../types';
 import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 /**
  * Internal use only.
@@ -36,7 +38,9 @@ import { CalendarService } from '../calendar.service';
     host: {
         '[attr.id]': 'viewId'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ButtonModule, NgIf]
 })
 export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */
@@ -68,7 +72,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     @Input()
     id: string;
 
-    /** Whether close button should be shown */
+    /** Whether calendar should be rendered in mobile landscape mode. */
     @Input()
     mobileLandscape = false;
 
@@ -83,10 +87,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** Event emitted when the next button is clicked. */
     @Output()
     readonly nextClicked: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Event thrown, when the close button is clicked */
-    @Output()
-    readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** Aria label for the previous button. Depends on the active view. */
     previousAriaLabel: string;
@@ -272,11 +272,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this.activeView = type === this.activeView ? 'day' : type;
 
         this.activeViewChange.emit(this.activeView);
-    }
-
-    /** @hidden */
-    _emitClose(): void {
-        this.closeClicked.emit();
     }
 
     /** @hidden */

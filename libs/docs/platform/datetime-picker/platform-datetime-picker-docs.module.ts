@@ -13,6 +13,7 @@ import { PlatformDatetimePickerReactiveExampleComponent } from './examples/platf
 import { PlatformDatetimePickerTemplateExampleComponent } from './examples/platform-datetime-picker-template-example.component';
 import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/platform-datetime-picker-update-on-blur-example.component';
 import { PlatformDatetimePickerHeaderComponent } from './platform-datetime-picker-header/platform-datetime-picker-header.component';
+import { PlatformDatetimePickerMobileExampleComponent } from './examples/mobile/platform-datetime-picker-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -41,7 +42,8 @@ const routes: Routes = [
         PlatformDatetimePickerReactiveExampleComponent,
         PlatformDatetimePickerTemplateExampleComponent,
         PlatformDatetimePickerDisableFunctionExampleComponent,
-        PlatformDatetimePickerUpdateOnBlurExampleComponent
+        PlatformDatetimePickerUpdateOnBlurExampleComponent,
+        PlatformDatetimePickerMobileExampleComponent
     ],
     providers: [currentComponentProvider('datetime-picker')]
 })

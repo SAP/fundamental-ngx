@@ -24,6 +24,9 @@ const dateTimeDisabledTs = 'datetime-disabled-example/datetime-disabled-example.
 const dateTimeFormHtml = 'datetime-form-example/datetime-form-example.component.html';
 const dateTimeFormTs = 'datetime-form-example/datetime-form-example.component.ts';
 
+const dateTimeMobileHtml = 'datetime-mobile/datetime-mobile-example.component.html';
+const dateTimeMobileTs = 'datetime-mobile/datetime-mobile-example.component.ts';
+
 @Component({
     selector: 'app-datetime-picker-docs',
     templateUrl: './datetime-picker-docs.component.html',
@@ -130,6 +133,21 @@ export class DatetimePickerDocsComponent {
             code: getAssetFromModuleAssets(datetimeUpdateOnBlurSrcTs),
             fileName: 'datetime-picker-update-on-blur-example',
             component: 'DateTimePickerUpdateOnBlurExampleComponent'
+        }
+    ];
+
+    datetimeMobile: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(dateTimeMobileTs),
+            fileName: 'datetime-mobile-example',
+            component: 'DatetimeMobileExampleComponent'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dateTimeMobileHtml),
+            fileName: 'datetime-mobile-example',
+            component: 'DatetimeMobileExampleComponent'
         }
     ];
 }

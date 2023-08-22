@@ -35,3 +35,8 @@ export const SEARCH_FIELD_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.SEARCH_FIELD,
     config: { dialogConfig: MOBILE_DIALOG_PORTRAIT }
 };
+
+export const DATE_PICKER_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.DATE_PICKER,
+    config: { dialogConfig: MOBILE_DIALOG_PORTRAIT }
+};

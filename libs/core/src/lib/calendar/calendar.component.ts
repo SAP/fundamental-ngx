@@ -36,8 +36,13 @@ import { createMissingDateImplementationError } from './calendar-errors';
 import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
 import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 
 let calendarUniqueId = 0;
 
@@ -76,7 +81,19 @@ let calendarUniqueId = 0;
         '[attr.id]': 'id',
         class: 'fd-calendar fd-has-display-block'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ContentDensityModule,
+        CalendarHeaderComponent,
+        NgIf,
+        NgSwitch,
+        NgSwitchCase,
+        CalendarDayViewComponent,
+        CalendarMonthViewComponent,
+        CalendarYearViewComponent,
+        CalendarAggregatedYearViewComponent
+    ]
 })
 export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
     /** The currently selected date model in single mode. */
@@ -127,7 +144,7 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /**
      * Special days mark, it can be used by passing array of object with
-     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * Special day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:
      * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
      * Rule accepts method with D object as a parameter. ex:
      * `rule: (fdDate: D) => fdDate.getDay() === 1`, which will mark all sundays as special day.
@@ -231,16 +248,39 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     _currentlyDisplayed: CalendarCurrent;
 
     /** @hidden */
+    previousButtonDisabled: boolean;
+
+    /** @hidden */
+    nextButtonDisabled: boolean;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private _adapterStartingDayOfWeek: DaysOfWeek;
 
     /** @hidden */
-    previousButtonDisabled: boolean;
-
-    /** @hidden */
-    nextButtonDisabled: boolean;
+    constructor(
+        private _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        _contentDensityObserver: ContentDensityObserver,
+        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
+        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
+        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
+    ) {
+        if (!this._dateTimeAdapter) {
+            throw createMissingDateImplementationError('DateTimeAdapter');
+        }
+        if (!this._dateTimeFormats) {
+            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
+        }
+        _contentDensityObserver.subscribe();
+        // set default value
+        this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+        this.selectedDate = this._dateTimeAdapter.today();
+        this._changeDetectorRef.markForCheck();
+        this._listenToLocaleChanges();
+    }
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
@@ -275,29 +315,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
 
     /** @hidden */
     onTouched: () => void = () => {};
-
-    /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _contentDensityObserver: ContentDensityObserver,
-        // Use @Optional to avoid angular injection error message and throw our own which is more precise one
-        @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
-    ) {
-        if (!this._dateTimeAdapter) {
-            throw createMissingDateImplementationError('DateTimeAdapter');
-        }
-        if (!this._dateTimeFormats) {
-            throw createMissingDateImplementationError('DATE_TIME_FORMATS');
-        }
-        _contentDensityObserver.subscribe();
-        // set default value
-        this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
-        this.selectedDate = this._dateTimeAdapter.today();
-        this._changeDetectorRef.markForCheck();
-        this._listenToLocaleChanges();
-    }
 
     /** @hidden */
     ngOnInit(): void {

@@ -1,89 +1,77 @@
-<header class="fd-calendar__header">
-    <div class="fd-calendar__navigation" [class.fd-calendar__navigation--main]="mobileLandscape">
-        <div class="fd-calendar__action fd-calendar__action--arrow-left">
-            <button
-                #prevButton
-                fd-button
-                fdType="transparent"
-                glyph="slim-arrow-left"
-                [attr.id]="_prevButtonId"
-                [disabled]="previousButtonDisabled"
-                [attr.title]="previousAriaLabel"
-                [ariaLabel]="previousAriaLabel"
-                type="button"
-                (click)="previousClicked.emit()"
-            ></button>
-        </div>
-        <ng-container *ngIf="isOnDayView || isOnMonthView">
-            <div class="fd-calendar__action">
-                <!-- Select month button -->
-                <button
-                    fd-button
-                    type="button"
-                    fdType="transparent"
-                    [attr.aria-labelledby]="_monthButtonLabelId + ' ' + _selectMonthButtonAriaLabelId"
-                    [attr.data-fd-calendar-month]="currentlyDisplayed.month"
-                    (click)="_processViewChange('month', $event)"
-                >
-                    <span [attr.id]="_monthButtonLabelId">{{ selectMonthLabel }}</span>
-                </button>
-            </div>
-            <div class="fd-calendar__action">
-                <!-- Select year button -->
-                <button
-                    fd-button
-                    type="button"
-                    fdType="transparent"
-                    [attr.aria-labelledby]="_yearButtonLabelId + ' ' + _selectYearButtonAriaLabelId"
-                    [attr.data-fd-calendar-year]="currentlyDisplayed.year"
-                    (click)="_processViewChange('year', $event)"
-                >
-                    <span [attr.id]="_yearButtonLabelId">{{ selectYearLabel }}</span>
-                </button>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="isOnAggregatedYearsView || isOnYearView">
-            <div class="fd-calendar__action" aria-live="polite">
-                <button
-                    fd-button
-                    fdType="transparent"
-                    [attr.aria-labelledby]="_yearsRangeButtonLabelId + ' ' + _selectYearsRangeButtonAriaLabelId"
-                    (click)="_processViewChange('aggregatedYear', $event)"
-                    type="button"
-                >
-                    <span [attr.id]="_yearsRangeButtonLabelId">{{ selectAggregatedYearLabel }}</span>
-                </button>
-            </div>
-        </ng-container>
-        <div class="fd-calendar__action fd-calendar__action--arrow-right">
-            <button
-                fd-button
-                fdType="transparent"
-                glyph="slim-arrow-right"
-                [attr.id]="_nextButtonId"
-                [disabled]="nextButtonDisabled"
-                [attr.title]="nextAriaLabel"
-                [ariaLabel]="nextAriaLabel"
-                (click)="nextClicked.emit()"
-                type="button"
-            ></button>
-        </div>
+<header class="fd-calendar__navigation" [class.fd-calendar__navigation--main]="mobileLandscape">
+    <div class="fd-calendar__action fd-calendar__action--arrow-left">
         <button
-            *ngIf="mobileLandscape"
+            #prevButton
             fd-button
-            fd-calendar-close-button
-            class="fd-calendar__close-button--navigation"
-            type="button"
-            glyph="decline"
             fdType="transparent"
-            (click)="_emitClose()"
+            glyph="slim-arrow-left"
+            [attr.id]="_prevButtonId"
+            [disabled]="previousButtonDisabled"
+            [attr.title]="previousAriaLabel"
+            [ariaLabel]="previousAriaLabel"
+            type="button"
+            (click)="previousClicked.emit()"
         ></button>
     </div>
-
-    <!-- Hidden elements for aria purposes -->
-    <div hidden aria-hidden="true">
-        <div [attr.id]="_selectMonthButtonAriaLabelId">{{ selectMonthAriaLabel }}</div>
-        <div [attr.id]="_selectYearButtonAriaLabelId">{{ selectYearAriaLabel }}</div>
-        <div [attr.id]="_selectYearsRangeButtonAriaLabelId">{{ selectAggregatedYearAriaLabel }}</div>
+    <ng-container *ngIf="isOnDayView || isOnMonthView">
+        <div class="fd-calendar__action">
+            <!-- Select month button -->
+            <button
+                fd-button
+                type="button"
+                fdType="transparent"
+                [attr.aria-labelledby]="_monthButtonLabelId + ' ' + _selectMonthButtonAriaLabelId"
+                [attr.data-fd-calendar-month]="currentlyDisplayed.month"
+                (click)="_processViewChange('month', $event)"
+            >
+                <span [attr.id]="_monthButtonLabelId">{{ selectMonthLabel }}</span>
+            </button>
+        </div>
+        <div class="fd-calendar__action">
+            <!-- Select year button -->
+            <button
+                fd-button
+                type="button"
+                fdType="transparent"
+                [attr.aria-labelledby]="_yearButtonLabelId + ' ' + _selectYearButtonAriaLabelId"
+                [attr.data-fd-calendar-year]="currentlyDisplayed.year"
+                (click)="_processViewChange('year', $event)"
+            >
+                <span [attr.id]="_yearButtonLabelId">{{ selectYearLabel }}</span>
+            </button>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="isOnAggregatedYearsView || isOnYearView">
+        <div class="fd-calendar__action" aria-live="polite">
+            <button
+                fd-button
+                fdType="transparent"
+                [attr.aria-labelledby]="_yearsRangeButtonLabelId + ' ' + _selectYearsRangeButtonAriaLabelId"
+                (click)="_processViewChange('aggregatedYear', $event)"
+                type="button"
+            >
+                <span [attr.id]="_yearsRangeButtonLabelId">{{ selectAggregatedYearLabel }}</span>
+            </button>
+        </div>
+    </ng-container>
+    <div class="fd-calendar__action fd-calendar__action--arrow-right">
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="slim-arrow-right"
+            [attr.id]="_nextButtonId"
+            [disabled]="nextButtonDisabled"
+            [attr.title]="nextAriaLabel"
+            [ariaLabel]="nextAriaLabel"
+            (click)="nextClicked.emit()"
+            type="button"
+        ></button>
     </div>
 </header>
+
+<!-- Hidden elements for aria purposes -->
+<div hidden aria-hidden="true">
+    <div [attr.id]="_selectMonthButtonAriaLabelId">{{ selectMonthAriaLabel }}</div>
+    <div [attr.id]="_selectYearButtonAriaLabelId">{{ selectYearAriaLabel }}</div>
+    <div [attr.id]="_selectYearsRangeButtonAriaLabelId">{{ selectAggregatedYearAriaLabel }}</div>
+</div>
