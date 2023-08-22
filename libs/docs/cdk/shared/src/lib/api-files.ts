@@ -1,4 +1,5 @@
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
+
 /**
  * Files to display in the API tab of each component.
  * Names should be without hyphens, and capitalized where hyphens occur normally.
@@ -7,14 +8,16 @@
  */
 export const API_FILES = {
     breakpoint: ['BreakpointDirective'],
-    forms: ['FormsComponent'],
-    dataSource: ['DataSourceComponent'],
+    forms: ['CvaDirective'],
+    dataSource: ['DataSourceDirective'],
     utils: ['UtilsComponent'],
     selectableList: ['SelectableListDirective', 'SelectableItemDirective', 'SelectionService'],
-    focusableList: ['FocusableListDirective'],
     focusableItem: ['FocusableItemComponent'],
     tabbable: [''],
-    disabled: ['DisabledBehaviorDirective'],
     focusableGrid: ['FocusableGridDirective', 'FocusableListDirective', 'FocusableItemDirective'],
-    dnd: ['DndListDirective', 'DndItemDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective']
+    disabled: ['DisabledBehaviorDirective'],
+    clicked: ['ClickedDirective'],
+    focusableList: ['FocusableListDirective', 'FocusableItemDirective'],
+    dnd: ['DndListDirective', 'DndItemDirective', 'DndKeyboardGroupDirective', 'DndKeyboardItemDirective'],
+    initialFocus: ['InitialFocusDirective']
 };

@@ -20,7 +20,7 @@ const routes: Routes = [
         component: InitialFocusHeaderComponent,
         children: [
             { path: '', component: InitialFocusDocsComponent },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.utils } }
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.initialFocus } }
         ]
     }
 ];
