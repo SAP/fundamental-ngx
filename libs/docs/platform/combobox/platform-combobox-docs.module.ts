@@ -28,7 +28,6 @@ import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobo
 import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
 import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -59,7 +58,6 @@ const routes: Routes = [
             useValue: COMBOBOX_MOBILE_CONFIG,
             multi: true
         },
-        platformContentDensityModuleDeprecationsProvider('fdp-combobox'),
         currentComponentProvider('combobox')
     ],
     declarations: [

@@ -77,6 +77,14 @@ export class MessageStripDocsComponent {
         }
     ];
 
+    messageStripAutoDismissExampleFiles: ExampleFile[] = [
+        {
+            language: 'ts',
+            fileName: 'message-strip-auto-dismiss-example',
+            code: getAssetFromModuleAssets('message-strip-auto-dismiss-example.component.ts')
+        }
+    ];
+
     schema: Schema;
 
     /**

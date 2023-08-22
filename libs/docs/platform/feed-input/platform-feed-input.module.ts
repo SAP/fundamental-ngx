@@ -12,6 +12,7 @@ import { PlatformFeedInputPlaceholderExampleComponent } from './examples/platfor
 import { PlatformFeedInputNoAvatarExampleComponent } from './examples/platform-feed-input-no-avatar-example/platform-feed-input-no-avatar-example.component';
 import { PlatformFeedInputDisabledExampleComponent } from './examples/platform-feed-input-disabled-example/platform-feed-input-disabled-example.component';
 import { PlatformFeedInputMaxHeightExampleComponent } from './examples/platform-feed-input-max-height-example/platform-feed-input-max-height-example.component';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 const routes: Routes = [
     {
@@ -34,7 +35,12 @@ const routes: Routes = [
         PlatformFeedInputDisabledExampleComponent,
         PlatformFeedInputMaxHeightExampleComponent
     ],
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformFeedInputModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformFeedInputModule,
+        FdPatchLanguageDirective
+    ],
     exports: [RouterModule],
     providers: [currentComponentProvider('feed-input')]
 })

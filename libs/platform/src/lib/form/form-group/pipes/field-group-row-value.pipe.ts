@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { KeyValue } from '@angular/common';
-import { FieldColumn, FieldGroup } from '../../form-helpers';
+import { FieldColumn, FieldGroup } from '../../models/field.model';
 
 @Pipe({ name: 'fieldGroupRowValue' })
 export class FieldGroupRowValuePipe implements PipeTransform {

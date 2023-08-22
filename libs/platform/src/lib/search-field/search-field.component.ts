@@ -34,7 +34,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -220,35 +220,6 @@ export class SearchFieldComponent
     @Input()
     ariaLabelledby: string;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Message announced by screen reader, when search suggestions opens.
-     */
-    @Input()
-    set searchSuggestionMessage(value: string) {
-        warnOnce('Property searchSuggestionMessage is deprecated. Use i18n capabilities instead.');
-        this._searchSuggestionMessage = value;
-    }
-
-    get searchSuggestionMessage(): string {
-        return this._searchSuggestionMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Second part of message for search suggestion.
-     * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
-     */
-    @Input()
-    set searchSuggestionNavigateMessage(value: string) {
-        warnOnce('Property searchSuggestionNavigateMessage is deprecated. Use i18n capabilities instead.');
-        this._searchSuggestionNavigateMessage = value;
-    }
-
-    get searchSuggestionNavigateMessage(): string {
-        return this._searchSuggestionNavigateMessage;
-    }
-
     /** Whether to always show search button. */
     @Input()
     forceSearchButton = false;
@@ -355,12 +326,6 @@ export class SearchFieldComponent
 
     /** @hidden */
     _isSearchDone = false;
-
-    /** @hidden */
-    private _searchSuggestionMessage: string;
-
-    /** @hidden */
-    private _searchSuggestionNavigateMessage: string;
 
     /** @hidden */
     private _suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
@@ -727,30 +692,20 @@ export class SearchFieldComponent
     private async _updateSearchAnnoucementText(): Promise<void> {
         // create search suggestion message with count.
         const suggestionCount = this._getSuggestionsLength();
-        let { searchSuggestionMessage, searchSuggestionNavigateMessage } = this;
-        if (searchSuggestionMessage) {
-            searchSuggestionMessage = suggestionCount + ' ' + searchSuggestionMessage;
-        }
-        if (!searchSuggestionMessage || !searchSuggestionNavigateMessage) {
-            const lang = await firstValueFrom(this._language$);
-            if (!searchSuggestionMessage) {
-                searchSuggestionMessage = this._translationResolver.resolve(
-                    lang,
-                    'platformSearchField.searchSuggestionMessage',
-                    { count: suggestionCount }
-                );
-            }
-            if (!searchSuggestionNavigateMessage) {
-                searchSuggestionNavigateMessage = this._translationResolver.resolve(
-                    lang,
-                    'platformSearchField.searchSuggestionNavigateMessage'
-                );
-            }
-        }
+        const lang = await firstValueFrom(this._language$);
+        const searchSuggestionMessage = this._translationResolver.resolve(
+            lang,
+            'platformSearchField.searchSuggestionMessage',
+            { count: suggestionCount }
+        );
+        const searchSuggestionNavigateMessage = this._translationResolver.resolve(
+            lang,
+            'platformSearchField.searchSuggestionNavigateMessage'
+        );
         this._currentSearchSuggestionAnnoucementMessage =
             searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
         if (this.inputText?.length > 0) {
-            this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
+            await this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
         }
     }
 
@@ -761,7 +716,7 @@ export class SearchFieldComponent
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicModule(
+        await this._dynamicComponentService.createDynamicModule(
             { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
             PlatformSearchFieldMobileModule,
             SearchFieldMobileComponent,

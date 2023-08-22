@@ -6,18 +6,10 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { InputComponent } from './input.component';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 
 @NgModule({
     declarations: [InputComponent],
-    imports: [
-        CommonModule,
-        FormModule,
-        FormsModule,
-        PipeModule,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
-    exports: [InputComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
+    imports: [CommonModule, FormModule, FormsModule, PipeModule, ContentDensityModule],
+    exports: [InputComponent, ContentDensityModule]
 })
 export class PlatformInputModule {}

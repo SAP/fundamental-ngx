@@ -6,11 +6,10 @@ import { FormInputMessageGroupModule, FormMessageModule } from '@fundamental-ngx
 import { A11yModule } from '@angular/cdk/a11y';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { StepInputComponent } from './step-input.component';
-import { DeprecatedStepInputCompactDirective } from './deprecated-step-input-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
-    declarations: [StepInputComponent, DeprecatedStepInputCompactDirective],
+    declarations: [StepInputComponent],
     imports: [
         CommonModule,
         ButtonModule,
@@ -20,6 +19,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ContentDensityModule,
         I18nModule
     ],
-    exports: [StepInputComponent, DeprecatedStepInputCompactDirective, ContentDensityModule]
+    exports: [StepInputComponent, ContentDensityModule]
 })
 export class StepInputModule {}

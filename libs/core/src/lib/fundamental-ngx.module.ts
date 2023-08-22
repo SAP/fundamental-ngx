@@ -32,7 +32,6 @@ import { TextModule } from '@fundamental-ngx/core/text';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { NotificationModule } from '@fundamental-ngx/core/notification';
-import { AlertModule } from '@fundamental-ngx/core/alert';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -99,7 +98,6 @@ import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
     exports: [
         ActionBarModule,
         ActionSheetModule,
-        AlertModule,
         AvatarModule,
         AvatarGroupModule,
         BarModule,

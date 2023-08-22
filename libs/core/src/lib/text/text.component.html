@@ -17,10 +17,7 @@
         *ngIf="_expandable && _hasMore"
         (keydown.enter)="toggleTextView()"
         (click)="toggleTextView()"
-        >{{
-            isCollapsed
-                ? moreLabel || ('coreText.moreLabel' | fdTranslate)
-                : lessLabel || ('coreText.lessLabel' | fdTranslate)
-        }}</a
     >
+        {{ isCollapsed ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate) }}
+    </a>
 </p>

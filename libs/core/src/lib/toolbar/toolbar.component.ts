@@ -27,8 +27,7 @@ import {
     CssClassBuilder,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
-    ResizeObserverService,
-    warnOnce
+    ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
 import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
 import { TitleToken } from '@fundamental-ngx/core/title';
@@ -114,17 +113,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     fdType: ToolbarType = 'solid';
 
-    /** @deprecated */
-    @Input()
-    set hasTitle(value: boolean) {
-        warnOnce('Property hasTitle is deprecated. ');
-        this._hasTitle = value;
-    }
-
-    get hasTitle(): boolean {
-        return this._hasTitle;
-    }
-
     /** The title for the toolbar. */
     @Input()
     title: string;
@@ -191,9 +179,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     private readonly _role = 'toolbar';
 
     /** @hidden */
-    private _hasTitle = false;
-
-    /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
 
     /** @hidden */
@@ -228,7 +213,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
             'fd-toolbar',
             `fd-toolbar--${this.fdType}`,
             `${this.active && this.fdType === 'info' ? 'fd-toolbar--active' : ''}`,
-            `${this.hasTitle || this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
+            `${this.title || this.titleComponent ? 'fd-toolbar--title' : ''}`,
             `${this.clearBorder ? 'fd-toolbar--clear' : ''}`,
             `${this._dynamicPageHeader ? 'fd-dynamic-page__toolbar' : ''}`
         ];

@@ -18,7 +18,6 @@ import { PlatformTextareaBasicExampleComponent } from './examples/platform-texta
 import { PlatformTextareaCounterExampleComponent } from './examples/platform-textarea-counter-example.component';
 import { PlatformTextareaCounterTemplateExampleComponent } from './examples/platform-textarea-counter-template-example.component';
 import { PlatformTextareaAutogrowExampleComponent } from './examples/platform-textarea-autogrow-example.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 const routes: Routes = [
     {
@@ -50,6 +49,6 @@ const routes: Routes = [
         PlatformTextareaCounterTemplateExampleComponent,
         PlatformTextareaAutogrowExampleComponent
     ],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-textarea'), currentComponentProvider('textarea')]
+    providers: [currentComponentProvider('textarea')]
 })
 export class PlatformTextareaDocsModule {}

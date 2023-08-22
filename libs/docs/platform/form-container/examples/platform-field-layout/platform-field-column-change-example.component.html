@@ -5,10 +5,9 @@
             id="basicTextarea-ex1"
             label="XL: 1, L: 2, M: 1, S: 1"
             placeholder="XL: 1, L: 2, M: 1, S: 1"
-            hint="XL: 1, L: 2, M: 1, S: 1"
+            [hint]="{ content: 'XL: 1, L: 2, M: 1, S: 1', placement: 'left' }"
             [columnLayout]="{ XL: 1, L: 2, M: 1, S: 1 }"
             [rank]="1"
-            hintPlacement="left"
         >
             <fdp-textarea name="basicTextarea-ex1" [formControl]="ff1.formControl"></fdp-textarea>
         </fdp-form-field>
@@ -16,8 +15,7 @@
             #ff2
             id="seasons0-ex1"
             label="XL: 1, L: 1, M: 2, S: 1"
-            hint="XL: 1, L: 1, M: 2, S: 1"
-            hintPlacement="left"
+            [hint]="{ content: 'XL: 1, L: 1, M: 2, S: 1', placement: 'left' }"
             [columnLayout]="{ XL: 1, L: 1, M: 2, S: 1 }"
             [rank]="2"
         >

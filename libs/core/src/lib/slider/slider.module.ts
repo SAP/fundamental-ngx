@@ -7,10 +7,9 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SliderPositionDirective } from './slider-position.directive';
 import { OnlyDigitsModule } from '@fundamental-ngx/cdk/utils';
 import { I18nModule } from '@fundamental-ngx/i18n';
-import { DeprecatedSliderCozyDirective } from './deprecated-slider-cozy.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
-const EXPORTS = [SliderComponent, SliderPositionDirective, DeprecatedSliderCozyDirective];
+const EXPORTS = [SliderComponent, SliderPositionDirective];
 
 @NgModule({
     imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule, ContentDensityModule, I18nModule, ...EXPORTS],

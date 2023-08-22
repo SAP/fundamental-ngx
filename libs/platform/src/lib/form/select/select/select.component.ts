@@ -8,7 +8,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     Optional,
     Self,
     SkipSelf,
@@ -19,8 +18,7 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
-import { DynamicComponentService, warnOnce } from '@fundamental-ngx/cdk/utils';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
@@ -34,24 +32,6 @@ import { SelectConfig } from '../select.config';
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }]
 })
 export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {
-    /**
-     * @deprecated
-     * Holds the control state of select
-     */
-    @Input()
-    set selectState(state: FormStates) {
-        if (isDevMode()) {
-            warnOnce('"selectState" is deprecated. Use "state" instead');
-        }
-        super.state = state;
-    }
-    get selectState(): FormStates {
-        if (isDevMode()) {
-            warnOnce('"selectState" is deprecated. Use "state" instead');
-        }
-        return super.state;
-    }
-
     /**
      * Directly sets value to the component that at the ends up at writeValue as well fires
      * change detections

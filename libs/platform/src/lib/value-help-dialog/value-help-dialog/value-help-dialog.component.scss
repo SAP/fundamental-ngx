@@ -25,7 +25,6 @@ $block: fdp-value-help-dialog;
 
     &__advanced-search,
     .fd-dialog__body {
-        background-color: #f7f7f7;
         background-color: var(--sapBackgroundColor, #f7f7f7);
     }
 
@@ -75,7 +74,6 @@ $block: fdp-value-help-dialog;
             min-height: 2.5rem;
             box-shadow: none;
             border-bottom: none;
-            background-color: #fff;
             background-color: var(--sapObjectHeader_Background, #fff);
             position: relative;
             z-index: 2;
@@ -122,7 +120,6 @@ $block: fdp-value-help-dialog;
         padding: 0 2rem 1rem;
 
         &.#{$block}__selection-row {
-            background-color: #f7f7f7;
             background-color: var(--sapBackgroundColor, #f7f7f7);
         }
     }
@@ -135,10 +132,8 @@ $block: fdp-value-help-dialog;
         flex: 1 1 auto;
         overflow: hidden;
         align-items: center;
-        border: 1px solid #89919a;
-        border-color: var(--sapContent_ForegroundBorderColor, #89919a);
+        border: 1px solid var(--sapContent_ForegroundBorderColor, #89919a);
         margin-right: 0.5rem;
-        border-radius: 0.25rem;
         border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
         background: none;
 

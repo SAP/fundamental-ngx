@@ -9,7 +9,7 @@ import {
     OnInit,
     OnChanges
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from '../../constants';
@@ -63,34 +63,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     ariaLabelledby: string;
 
     /**
-     * @deprecated use i18n capabilities instead
-     * Text for more button
-     */
-    @Input()
-    set moreLabel(value: string) {
-        warnOnce("Property moreLabel is deprecated. Use i18n capabilities 'coreFeedListItem.moreLabel' key instead.");
-        this._moreLabel = value;
-    }
-
-    get moreLabel(): string {
-        return this._moreLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text for less button
-     */
-    @Input()
-    set lessLabel(value: string) {
-        warnOnce("Property lessLabel is deprecated. Use i18n capabilities 'coreFeedListItem.lessLabel' key instead.");
-        this._lessLabel = value;
-    }
-
-    get lessLabel(): string {
-        return this._lessLabel;
-    }
-
-    /**
      * Apply rich feed text, please note - we use a formatted text component with this option, it has a list of controlled tags and attibutes.
      * This feature should be handled with care as it allows for countless custom layouts.
      */
@@ -103,14 +75,14 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     @Input()
     mobile = false;
 
-    /** @hidden */
-    maxCharsAtDefault = false;
-
     /**
      * Apply body class by default
      */
     @HostBinding('class.fd-feed-list__body')
     isFeedListItemBody = true;
+
+    /** @hidden */
+    maxCharsAtDefault = false;
 
     /**
      * Shows toggle state of feed text - more or less
@@ -123,13 +95,17 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
     hasMore = false;
 
     /** @hidden */
-    private _moreLabel: string;
-
-    /** @hidden */
-    private _lessLabel: string;
-
-    /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
+
+    /** @hidden
+     * CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [CSS_CLASS_NAME.item, this.class, this.isRichText ? '' : `${CSS_CLASS_NAME.item}--collapsible`];
+    }
 
     /** @hidden */
     setHasMore(): void {
@@ -160,16 +136,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
         }
         this.maxCharsAtDefault && this.setDefaultMaxChars();
         this.setHasMore();
-    }
-
-    /** @hidden
-     * CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [CSS_CLASS_NAME.item, this.class, this.isRichText ? '' : `${CSS_CLASS_NAME.item}--collapsible`];
     }
 
     /** @hidden */

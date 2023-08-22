@@ -14,11 +14,6 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
 import { TabbableElementService } from '../../services';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { FocusableObserver } from './focusable.observer';
 import { fromEvent, Subject } from 'rxjs';
@@ -35,19 +30,6 @@ export interface FocusableItemPosition {
     totalRows: number;
     totalCols: number;
 }
-
-@Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fnFocusableItem]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkFocusableItem]', '[fnFocusableItem]')
-        }
-    ]
-})
-export class DeprecatedFocusableItemDirective extends DeprecatedSelector {}
 
 @Directive({
     selector: '[fdkFocusableItem]',

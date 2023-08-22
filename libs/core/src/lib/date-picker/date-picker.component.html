@@ -19,11 +19,13 @@
             <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
-            <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-                {{ _message }}
-            </fd-form-message>
-            <ng-content></ng-content>
-            <ng-template [ngTemplateOutlet]="calendarTemplate"></ng-template>
+            <ng-container *ngIf="_showPopoverContents">
+                <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+                    {{ _message }}
+                </fd-form-message>
+                <ng-content></ng-content>
+                <ng-template [ngTemplateOutlet]="calendarTemplate"></ng-template>
+            </ng-container>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
@@ -38,8 +40,8 @@
         [buttonFocusable]="buttonFocusable"
         glyph="appointment-2"
         [isExpanded]="isOpen"
-        [glyphAriaLabel]="displayCalendarToggleLabel || ('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)"
-        [iconTitle]="displayCalendarToggleLabel || ('coreDatePicker.displayCalendarToggleLabel' | fdTranslate)"
+        [glyphAriaLabel]="'coreDatePicker.displayCalendarToggleLabel' | fdTranslate"
+        [iconTitle]="'coreDatePicker.displayCalendarToggleLabel' | fdTranslate"
         (addOnButtonClicked)="toggleCalendar()"
     >
         <input
@@ -53,7 +55,7 @@
             aria-autocomplete="none"
             [attr.aria-expanded]="isOpen"
             [attr.aria-labelledby]="ariaLabelledBy"
-            [attr.aria-label]="_dateInputArialLabel || (_dateInputArialLabelKey | fdTranslate)"
+            [attr.aria-label]="_dateInputArialLabelKey | fdTranslate"
             [attr.aria-required]="required"
             [attr.aria-describedby]="_formValueStateMessageId"
             [ngModel]="_inputFieldDate"
@@ -103,18 +105,18 @@
 <div style="display: none" aria-hidden="true">
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
         <ng-container [ngSwitch]="state">
-            <ng-container *ngSwitchCase="'success'">{{
-                valueStateSuccessMessage || ('coreDatePicker.valueStateSuccessMessage' | fdTranslate)
-            }}</ng-container>
-            <ng-container *ngSwitchCase="'information'">{{
-                valueStateInformationMessage || ('coreDatePicker.valueStateInformationMessage' | fdTranslate)
-            }}</ng-container>
-            <ng-container *ngSwitchCase="'warning'">{{
-                valueStateWarningMessage || ('coreDatePicker.valueStateWarningMessage' | fdTranslate)
-            }}</ng-container>
-            <ng-container *ngSwitchCase="'error'">{{
-                valueStateErrorMessage || ('coreDatePicker.valueStateErrorMessage' | fdTranslate)
-            }}</ng-container>
+            <ng-container *ngSwitchCase="'success'">
+                {{ 'coreDatePicker.valueStateSuccessMessage' | fdTranslate }}</ng-container
+            >
+            <ng-container *ngSwitchCase="'information'">
+                {{ 'coreDatePicker.valueStateInformationMessage' | fdTranslate }}</ng-container
+            >
+            <ng-container *ngSwitchCase="'warning'">
+                {{ 'coreDatePicker.valueStateWarningMessage' | fdTranslate }}</ng-container
+            >
+            <ng-container *ngSwitchCase="'error'">
+                {{ 'coreDatePicker.valueStateErrorMessage' | fdTranslate }}
+            </ng-container>
         </ng-container>
         {{ _message }}
     </div>

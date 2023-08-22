@@ -11,8 +11,8 @@ import { TokenSelectedExampleComponent } from './examples/token-selected-example
 import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
 import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { DeprecatedTokenizerContentDensityDirective, TokenModule } from '@fundamental-ngx/core/token';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 const routes: Routes = [
     {
@@ -26,7 +26,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [FormModule, TokenModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [
+        FormModule,
+        TokenModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FdPatchLanguageDirective
+    ],
     exports: [RouterModule],
     declarations: [
         TokenDocsComponent,
@@ -38,9 +44,6 @@ const routes: Routes = [
         TokenReadOnlyExampleComponent,
         TokenizerCompactExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedTokenizerContentDensityDirective),
-        currentComponentProvider('token')
-    ]
+    providers: [currentComponentProvider('token')]
 })
 export class TokenDocsModule {}

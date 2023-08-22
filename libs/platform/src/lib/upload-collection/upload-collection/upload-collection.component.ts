@@ -137,38 +137,6 @@ export class UploadCollectionComponent
     @Input()
     mimeTypes: string[] = [];
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Allows to set own text for the 'No data' text label.
-     */
-    @Input()
-    set noDataText(value: string) {
-        warnOnce(
-            "Property noDataText is deprecated. Use i18n capabilities 'platformUploadCollection.noDataText' key instead."
-        );
-        this._noDataText = value;
-    }
-
-    get noDataText(): string {
-        return this._noDataText;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Allows to set own text for the 'No data' description label.
-     */
-    @Input()
-    set noDataDescription(value: string) {
-        warnOnce(
-            "Property noDataDescription is deprecated. Use i18n capabilities 'platformUploadCollection.noDataDescription' key instead."
-        );
-        this._noDataDescription = value;
-    }
-
-    get noDataDescription(): string {
-        return this._noDataDescription;
-    }
-
     /** All action buttons will be disabled */
     @Input()
     disabled = false;
@@ -302,11 +270,6 @@ export class UploadCollectionComponent
     private _dataSource: UploadCollectionDataSource;
 
     /** @hidden */
-    private _noDataDescription: string;
-
-    /** @hidden */
-    private _noDataText: string;
-
     /** @hidden */
     private _contentDensityManuallySet = false;
 

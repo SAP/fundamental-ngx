@@ -16,13 +16,8 @@ import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsiv
 import { BarHeaderComponent } from './bar-header/bar-header.component';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import {
-    BarModule,
-    DeprecatedBarButtonContentDensityDirective,
-    DeprecatedBarContentDensityDirective
-} from '@fundamental-ngx/core/bar';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
 
@@ -61,10 +56,6 @@ const routes: Routes = [
         BarCustomShellbarExampleComponent,
         BarWithTitleExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedBarContentDensityDirective),
-        moduleDeprecationsProvider(DeprecatedBarButtonContentDensityDirective),
-        currentComponentProvider('bar')
-    ]
+    providers: [currentComponentProvider('bar')]
 })
 export class BarDocsModule {}

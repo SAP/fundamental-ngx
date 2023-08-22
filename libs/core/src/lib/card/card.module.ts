@@ -24,7 +24,6 @@ import { CardKpiAnalyticsDirective } from './kpi/card-kpi-analytics.directive';
 import { CardKpiAnalyticsLabelDirective } from './kpi/card-kpi-analytics-label.directive';
 import { CardKpiAnalyticsContentDirective } from './kpi/card-kpi-analytics-content.directive';
 import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
-import { DeprecatedCardContentDensityDirective } from './deprecated-card-content-density.directive';
 
 const components = [
     CardComponent,
@@ -43,8 +42,7 @@ const components = [
     CardKpiAnalyticsLabelDirective,
     CardKpiAnalyticsContentDirective,
     CardFooterComponent,
-    CardFooterActionItemDirective,
-    DeprecatedCardContentDensityDirective
+    CardFooterActionItemDirective
 ];
 
 @NgModule({

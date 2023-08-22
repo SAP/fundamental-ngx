@@ -9,14 +9,6 @@ export type HintInput = HintContent | HintOptions;
 export type FieldHintInput = HintContent | FieldHintOptions;
 
 export interface HintOptions {
-    /**
-     * Text of the hint
-     *
-     * @deprecated
-     * Use `content` instead
-     * */
-    text?: string;
-
     /** Text or the template of the hint */
     content: HintContent;
 

@@ -5,4 +5,3 @@ export * from './action-sheet-control/action-sheet-control.component';
 export * from './action-sheet-body/action-sheet-body.component';
 export * from './action-sheet-mobile/action-sheet-mobile.module';
 export * from './action-sheet-mobile/action-sheet-mobile.component';
-export * from './deprecated-action-sheet-compact.directive';

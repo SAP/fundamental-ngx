@@ -25,8 +25,6 @@ import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
-import { TimeI18n } from './i18n/time-i18n';
-import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
@@ -174,11 +172,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      */
     activeMeridianViewItem?: MeridianViewItem;
 
-    /** Component aria-label */
-    get _componentAriaLabel(): string | undefined {
-        return this._timeI18nLabels?.componentAriaName;
-    }
-
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -192,8 +185,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
         readonly _contentDensityObserver: ContentDensityObserver,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _timeI18nLabels: TimeI18n
+        @Optional() private _rtlService: RtlService
     ) {
         if (!_dateTimeAdapter) {
             throw createMissingDateImplementationError('DateTimeAdapter');
@@ -368,58 +360,6 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
     /** @hidden */
     isActive(view: FdTimeActiveView): boolean {
         return this.activeView === view;
-    }
-
-    /** Configuration for hours column */
-    getHoursConfig(): TimeColumnConfig | undefined {
-        if (!this._timeI18nLabels) {
-            return;
-        }
-        return {
-            decreaseLabel: this._timeI18nLabels.decreaseHoursLabel,
-            increaseLabel: this._timeI18nLabels.increaseHoursLabel,
-            label: this._timeI18nLabels.hoursLabel,
-            navigationInstruction: this._timeI18nLabels.navigationInstruction
-        };
-    }
-
-    /** Configuration for minutes column */
-    getMinutesConfig(): TimeColumnConfig | undefined {
-        if (!this._timeI18nLabels) {
-            return;
-        }
-        return {
-            decreaseLabel: this._timeI18nLabels.decreaseMinutesLabel,
-            increaseLabel: this._timeI18nLabels.increaseMinutesLabel,
-            label: this._timeI18nLabels.minutesLabel,
-            navigationInstruction: this._timeI18nLabels.navigationInstruction
-        };
-    }
-
-    /** Configuration for seconds column */
-    getSecondsConfig(): TimeColumnConfig | undefined {
-        if (!this._timeI18nLabels) {
-            return;
-        }
-        return {
-            decreaseLabel: this._timeI18nLabels.decreaseSecondsLabel,
-            increaseLabel: this._timeI18nLabels.increaseSecondsLabel,
-            label: this._timeI18nLabels.secondsLabel,
-            navigationInstruction: this._timeI18nLabels.navigationInstruction
-        };
-    }
-
-    /** Configuration for period column */
-    getPeriodConfig(): TimeColumnConfig | undefined {
-        if (!this._timeI18nLabels) {
-            return;
-        }
-        return {
-            decreaseLabel: this._timeI18nLabels.decreasePeriodLabel,
-            increaseLabel: this._timeI18nLabels.increasePeriodLabel,
-            label: this._timeI18nLabels.periodLabel,
-            navigationInstruction: this._timeI18nLabels.navigationInstruction
-        };
     }
 
     /** @hidden */

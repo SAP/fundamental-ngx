@@ -11,7 +11,6 @@ import { ShellbarTitleComponent } from './shellbar-title/shellbar-title.componen
 import { ShellbarUserMenuComponent } from './user-menu/shellbar-user-menu.component';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions-mobile/shellbar-actions-mobile.component';
-import { DeprecatedShellbarCompactDirective } from './deprecated-shellbar-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -25,8 +24,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ShellbarLogoComponent,
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
-        ShellbarSidenavDirective,
-        DeprecatedShellbarCompactDirective
+        ShellbarSidenavDirective
     ],
     exports: [
         ShellbarComponent,
@@ -39,7 +37,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ShellbarTitleComponent,
         ShellbarUserMenuComponent,
         ShellbarSidenavDirective,
-        DeprecatedShellbarCompactDirective,
         ContentDensityModule
     ]
 })

@@ -50,12 +50,13 @@ customThemingConfig.customThemes = [
     ]
 })
 export class CustomThemeExampleComponent implements OnDestroy {
-    themes = this._themingService.getThemes();
+    themes: CompleteThemeDefinition[];
     currentTheme: CompleteThemeDefinition | null;
 
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(private _themingService: ThemingService) {
+        this.themes = this._themingService.getThemes();
         this._themingService.init();
         this._themingService.currentTheme
             .pipe(takeUntil(this._onDestroy$))

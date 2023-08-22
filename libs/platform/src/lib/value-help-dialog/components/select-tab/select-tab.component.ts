@@ -11,7 +11,6 @@ import {
     AfterViewInit,
     ViewChild
 } from '@angular/core';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
@@ -55,20 +54,6 @@ export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, Afte
     /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
     @Input()
     selection: VdhTableSelection = 'single';
-
-    /**
-     * @deprecated use 18n capabilities instead
-     * Text displayed when table has no items.
-     */
-    @Input()
-    set emptyTableMessage(value: string) {
-        warnOnce('Property emptyTableMessage is deprecated. Use 18n capabilities instead.');
-        this._emptyTableMessage = value;
-    }
-
-    get emptyTableMessage(): string {
-        return this._emptyTableMessage;
-    }
 
     /** Uniq field from data source */
     @Input()

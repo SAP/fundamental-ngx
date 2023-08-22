@@ -70,20 +70,6 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     /** Aria label for the message-strip component element. */
     @Input() ariaLabel: Nullable<string>;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria label for the dismiss button.
-     */
-    @Input()
-    set dismissLabel(value: string) {
-        console.warn("dismissLabel is deprecated. Use i18n capabilities 'coreMessageStrip.dismissLabel' key instead.");
-        this._dismissLabel = value;
-    }
-
-    get dismissLabel(): string {
-        return this._dismissLabel;
-    }
-
     /** Width of the message-strip. */
     @Input() width: string;
 
@@ -104,8 +90,9 @@ export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder
     @ContentChild(MessageStripIconDirective)
     icon: MessageStripIconDirective;
 
-    /** @hidden */
-    private _dismissLabel: string;
+    /** Custom icon component */
+    @ContentChild(MessageStripIconDirective)
+    icon: MessageStripIconDirective;
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}

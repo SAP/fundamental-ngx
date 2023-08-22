@@ -1,7 +1,7 @@
 <div class="fdp-thumbnail-image-container" role="listbox">
     <div
         #thumbnailImage
-        *ngFor="let image of mediaList | slice: 0:maxImages; let i = index"
+        *ngFor="let image of mediaList | slice : 0 : maxImages; let i = index"
         [class]="isHorizontal ? 'fdp-thumbnail-image--horizontal' : 'fdp-thumbnail-image'"
         [class.fdp-thumbnail-image--selected]="image.selected"
         [class.fdp-thumbnail-image--overlay]="image.overlayRequired"

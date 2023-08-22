@@ -26,11 +26,10 @@ import { ListLinkDirective } from '../directives/list-link.directive';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { LIST_ITEM_COMPONENT, ListItemInterface, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
@@ -67,23 +66,6 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @HostBinding('attr.aria-selected')
     selected = false;
 
-    /**
-     * @deprecated Sets aria-describedby attribute for list item.
-     * Note, that it is being combined with internal values for this component
-     */
-    @Input()
-    set ariaDescribedBy(value: Nullable<string>) {
-        warnOnce('Property ariaDescribedBy is deprecated. Use native aria-describedby attribute instead.');
-        this._ariaDescribedBy = value;
-    }
-
-    get ariaDescribedBy(): Nullable<string> {
-        return this._ariaDescribedBy;
-    }
-
-    /** @hidden */
-    private _ariaDescribedBy: Nullable<string>;
-
     /** Whether there is no data inside list item */
     @Input()
     @HostBinding('class.fd-list__item--no-data')
@@ -119,48 +101,6 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     @Input()
     @HostBinding('class.fd-list__item--byline')
     byline = false;
-
-    /** @deprecated Text to be read by screen reader for selected list item */
-    @Input()
-    set selectedListItemScreenReaderText(value: string) {
-        warnOnce('Property selectedListItemScreenReaderText is deprecated. ');
-        this._selectedListItemScreenReaderText = value;
-    }
-
-    get selectedListItemScreenReaderText(): string {
-        return this._selectedListItemScreenReaderText;
-    }
-
-    /** @hidden */
-    private _selectedListItemScreenReaderText: string;
-
-    /** @deprecated Text to be read by screen reader for navigated list item */
-    @Input()
-    set navigatedListItemScreenReaderText(value: string) {
-        warnOnce('Property navigatedListItemScreenReaderText is deprecated. ');
-        this._navigatedListItemScreenReaderText = value;
-    }
-
-    get navigatedListItemScreenReaderText(): string {
-        return this._navigatedListItemScreenReaderText;
-    }
-
-    /** @hidden */
-    private _navigatedListItemScreenReaderText: string;
-
-    /** @deprecated Text to be read by screen reader for navigatable list item */
-    @Input()
-    set navigatableListItemScreenReaderText(value: string) {
-        warnOnce('Property navigatableListItemScreenReaderText is deprecated. ');
-        this._navigatableListItemScreenReaderText = value;
-    }
-
-    get navigatableListItemScreenReaderText(): string {
-        return this._navigatableListItemScreenReaderText;
-    }
-
-    /** @hidden */
-    private _navigatableListItemScreenReaderText: string;
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     @Output()

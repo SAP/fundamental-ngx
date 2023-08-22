@@ -8,7 +8,6 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    isDevMode,
     OnInit,
     Optional,
     Output,
@@ -54,22 +53,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ]
 })
 export class BreadcrumbComponent implements OnInit, AfterViewInit {
-    /**
-     * @deprecated
-     * Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.
-     *
-     * The element to act as the breadcrumb container. When provided, the breadcrumb's responsive collapsing behavior
-     * performs better. When not provided, the immediate parent element's width will be used.
-     */
-    @Input()
-    set containerElement(_: HTMLElement) {
-        if (isDevMode()) {
-            console.warn(
-                'Breadcrumbs component now uses more advanced calculation mechanism without the need of specifying the container element.'
-            );
-        }
-    }
-
     /** Whether to append items to the overflow dropdown in reverse order. Default is true. */
     @Input()
     reverse = false;

@@ -10,6 +10,7 @@ import { MessageStripHeaderComponent } from './message-strip-header/message-stri
 import { MessageStripAlertExampleComponent } from './examples/message-strip-alert-example.component';
 import { MessageStripIndicationColorsExampleComponent } from './examples/message-strip-indication-colors-example.component';
 import { MessageStripCustomIconExampleComponent } from './examples/message-strip-custom-icon-example.component';
+import { MessageStripAutoDismissExampleComponent } from './examples/message-strip-auto-dismiss-example.component';
 
 const routes: Routes = [
     {
@@ -33,7 +34,9 @@ const routes: Routes = [
         MessageStripWidthExampleComponent,
         MessageStripAlertExampleComponent,
         MessageStripIndicationColorsExampleComponent,
-        MessageStripCustomIconExampleComponent
+        MessageStripCustomIconExampleComponent,
+        MessageStripAlertExampleComponent,
+        MessageStripAutoDismissExampleComponent
     ],
     providers: [currentComponentProvider('message-strip')]
 })

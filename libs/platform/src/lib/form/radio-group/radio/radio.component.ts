@@ -8,7 +8,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     Optional,
     Output,
     Self,
@@ -21,9 +20,7 @@ import { FocusableOption } from '@angular/cdk/a11y';
 
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 
 let uniqueId = 0;
 
@@ -50,24 +47,6 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
     }
     get value(): any {
         return super.getValue();
-    }
-
-    /**
-     * @deprecated
-     * set state of individual radio.Used by RBG to set radio states
-     */
-    @Input()
-    set stateType(state: FormStates) {
-        if (isDevMode()) {
-            warnOnce('"stateType" is deprecated. Use "state" instead');
-        }
-        super.state = state;
-    }
-    get stateType(): FormStates {
-        if (isDevMode()) {
-            warnOnce('"stateType" is deprecated. Use "state" instead');
-        }
-        return super.state;
     }
 
     /** used for radio button creation if list value present */

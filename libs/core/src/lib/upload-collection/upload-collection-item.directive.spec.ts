@@ -1,7 +1,19 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { UploadCollectionItemDirective } from './upload-collection-item.directive';
-import { UploadCollectionModule } from './upload-collection.module';
+import {
+    UploadCollectionDescriptionDirective,
+    UploadCollectionStatusGroupDirective,
+    UploadCollectionTextSeparatorDirective,
+    UploadCollectionThumbnailDirective,
+    UploadCollectionTitleDirective
+} from './upload-collection-simple.directives';
+import { UploadCollectionFormItemComponent } from './upload-collection-form-item/upload-collection-form-item.component';
+import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
 
 @Component({
     template: `
@@ -35,13 +47,28 @@ import { UploadCollectionModule } from './upload-collection.module';
             </div>
             <fd-upload-collection-button-group></fd-upload-collection-button-group>
         </li>
-    `
+    `,
+    standalone: true,
+    imports: [
+        UploadCollectionThumbnailDirective,
+        UploadCollectionItemDirective,
+        ListModule,
+        UploadCollectionTitleDirective,
+        IconModule,
+        LinkModule,
+        UploadCollectionFormItemComponent,
+        UploadCollectionDescriptionDirective,
+        UploadCollectionTextSeparatorDirective,
+        UploadCollectionStatusGroupDirective,
+        ObjectStatusModule,
+        UploadCollectionButtonGroupComponent
+    ]
 })
 class TestComponent {
     @ViewChild(UploadCollectionItemDirective)
     item: UploadCollectionItemDirective;
 
-    @ViewChild('directiveElement')
+    @ViewChild(ListItemComponent, { read: ElementRef })
     ref: ElementRef;
 }
 
@@ -51,9 +78,7 @@ describe('UploadCollectionItemDirective', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [UploadCollectionModule],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [TestComponent]
         }).compileComponents();
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
@@ -67,7 +92,7 @@ describe('UploadCollectionItemDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-upload-collection__item');
+        expect(component.ref.nativeElement.className).toContain('fd-upload-collection__item');
     });
 
     it('should set the fileName and extension', () => {

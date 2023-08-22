@@ -10,4 +10,3 @@ export * from './prepared-nested-list/prepared-nested-list.component';
 export * from './nested-content/nested-list-content.directive';
 export * from './nested-list-state.service';
 export * from './nested-list-keyboard.service';
-export * from './deprecated-nested-list-compact.directive';

@@ -20,7 +20,6 @@ import { ListNavigationItemComponent } from './list-navigation-item/list-navigat
 import { ListNavigationItemArrowDirective } from './directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from './directives/list-navigation-item-text.directive';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { DeprecatedListContentDensityDirective } from './deprecated-list-content-density,directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @NgModule({
@@ -41,8 +40,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ListTitleTextDirective,
         ListNavigationItemComponent,
         ListNavigationItemArrowDirective,
-        ListNavigationItemTextDirective,
-        DeprecatedListContentDensityDirective
+        ListNavigationItemTextDirective
     ],
     imports: [CommonModule, FormModule, IconModule, ContentDensityModule, ListSecondaryDirective],
     exports: [
@@ -64,7 +62,6 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         ListNavigationItemComponent,
         ListNavigationItemArrowDirective,
         ListNavigationItemTextDirective,
-        DeprecatedListContentDensityDirective,
         ContentDensityModule
     ]
 })

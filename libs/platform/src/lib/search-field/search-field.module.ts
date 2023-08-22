@@ -11,7 +11,6 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
 import { SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe } from './search-field.component';
 import { I18nModule } from '@fundamental-ngx/i18n';
-import { PlatformContentDensityDeprecationsModule } from '@fundamental-ngx/platform/shared';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @NgModule({
@@ -23,18 +22,11 @@ import { SelectModule } from '@fundamental-ngx/core/select';
         MenuModule,
         PipeModule,
         PlatformMenuModule,
-        PlatformContentDensityDeprecationsModule,
         ContentDensityModule,
         I18nModule,
         SelectModule
     ],
-    exports: [
-        SearchFieldComponent,
-        SearchFieldSuggestionDirective,
-        SuggestionMatchesPipe,
-        PlatformContentDensityDeprecationsModule,
-        ContentDensityModule
-    ],
+    exports: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe, ContentDensityModule],
     declarations: [SearchFieldComponent, SearchFieldSuggestionDirective, SuggestionMatchesPipe],
     providers: [DynamicComponentService]
 })

@@ -8,8 +8,7 @@ import {
 } from './examples/breadcrumb-examples.component';
 import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header.component';
 import { BreadcrumbDocsComponent } from './breadcrumb-docs.component';
-import { BreadcrumbModule, DeprecatedBreadcrumbsCompactDirective } from '@fundamental-ngx/core/breadcrumb';
-import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 
 const routes: Routes = [
     {
@@ -31,9 +30,6 @@ const routes: Routes = [
         BreadcrumbHrefExampleComponent,
         BreadcrumbRouterLinkExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedBreadcrumbsCompactDirective),
-        currentComponentProvider('breadcrumb')
-    ]
+    providers: [currentComponentProvider('breadcrumb')]
 })
 export class BreadcrumbDocsModule {}

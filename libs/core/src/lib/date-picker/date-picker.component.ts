@@ -16,12 +16,15 @@ import {
     Optional,
     Output,
     TemplateRef,
+    QueryList,
+    SimpleChanges,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator, FormsModule } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import {
@@ -38,7 +41,7 @@ import { FormItemControl, PopoverFormMessageService, registerFormItemControl } f
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { createMissingDateImplementationError } from './errors';
-import { DynamicComponentService, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from './tokens';
@@ -168,118 +171,6 @@ export class DatePickerComponent<D>
     @Input()
     useValidation = true;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label for the datepicker input.
-     */
-    @Input()
-    set dateInputLabel(value: string) {
-        warnOnce(
-            "Property dateInputLabel is deprecated. Use i18n capabilities 'coreDatePicker.dateInputLabel' key instead."
-        );
-        this._dateInputLabel = value;
-    }
-
-    get dateInputLabel(): string {
-        return this._dateInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label for the datepicker input.
-     */
-    @Input()
-    set dateRangeInputLabel(value: string) {
-        warnOnce(
-            "Property dateRangeInputLabel is deprecated. Use i18n capabilities 'coreDatePicker.dateRangeInputLabel' key instead."
-        );
-        this._dateRangeInputLabel = value;
-    }
-
-    get dateRangeInputLabel(): string {
-        return this._dateRangeInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Aria-label for the button to show/hide the calendar.
-     */
-    @Input()
-    set displayCalendarToggleLabel(value: string) {
-        warnOnce(
-            "Property displayCalendarToggleLabel is deprecated. Use i18n capabilities 'coreDatePicker.displayCalendarToggleLabel' key instead."
-        );
-        this._displayCalendarToggleLabel = value;
-    }
-
-    get displayCalendarToggleLabel(): string {
-        return this._displayCalendarToggleLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "success" aria message.
-     */
-    @Input()
-    set valueStateSuccessMessage(value: string) {
-        warnOnce(
-            "Property valueStateSuccessMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateSuccessMessage' key instead."
-        );
-        this._valueStateSuccessMessage = value;
-    }
-
-    get valueStateSuccessMessage(): string {
-        return this._valueStateSuccessMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "information" aria message.
-     */
-    @Input()
-    set valueStateInformationMessage(value: string) {
-        warnOnce(
-            "Property valueStateInformationMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateInformationMessage' key instead."
-        );
-        this._valueStateInformationMessage = value;
-    }
-
-    get valueStateInformationMessage(): string {
-        return this._valueStateInformationMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "warning" aria message.
-     */
-    @Input()
-    set valueStateWarningMessage(value: string) {
-        warnOnce(
-            "Property valueStateWarningMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateWarningMessage' key instead."
-        );
-        this._valueStateWarningMessage = value;
-    }
-
-    get valueStateWarningMessage(): string {
-        return this._valueStateWarningMessage;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Value state "error" aria message.
-     */
-    @Input()
-    set valueStateErrorMessage(value: string) {
-        warnOnce(
-            "Property valueStateErrorMessage is deprecated. Use i18n capabilities 'coreDatePicker.valueStateErrorMessage' key instead."
-        );
-        this._valueStateErrorMessage = value;
-    }
-
-    get valueStateErrorMessage(): string {
-        return this._valueStateErrorMessage;
-    }
-
     /** Whether a null input is considered valid. */
     @Input()
     allowNull = true;
@@ -397,7 +288,21 @@ export class DatePickerComponent<D>
 
     /** Whether the date picker is open. Can be used through two-way binding. */
     @Input()
-    isOpen = false;
+    set isOpen(value: boolean) {
+        if (value === this._isOpen) {
+            return;
+        }
+        this._isOpen = value;
+        this._showPopoverContents = value;
+        this._changeDetectionRef.detectChanges();
+    }
+
+    get isOpen(): boolean {
+        return this._isOpen;
+    }
+
+    /** @hidden */
+    private _isOpen = false;
 
     /** Should date picker be inlined. */
     @Input()
@@ -459,8 +364,11 @@ export class DatePickerComponent<D>
     @Output()
     readonly activeViewChange = new EventEmitter<FdCalendarView>();
 
+    /** @hideen */
+    @ViewChildren(CalendarComponent)
+    private readonly _calendars: QueryList<CalendarComponent<D>>;
+
     /** @hidden */
-    @ViewChild(CalendarComponent)
     _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
@@ -499,34 +407,19 @@ export class DatePickerComponent<D>
     _isInvalidDateInput = false;
 
     /** @hidden */
+    _showPopoverContents = false;
+
+    /** @hidden */
     readonly _formValueStateMessageId = `fd-date-picker-form-message-${datePickerCounter++}`;
+
+    /** @hidden */
+    private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    private _dateInputLabel: string;
-
-    /** @hidden */
-    private _dateRangeInputLabel: string;
-
-    /** @hidden */
-    private _displayCalendarToggleLabel: string;
-
-    /** @hidden */
-    private _valueStateSuccessMessage: string;
-
-    /** @hidden */
-    private _valueStateInformationMessage: string;
-
-    /** @hidden */
-    private _valueStateWarningMessage: string;
-
-    /** @hidden */
-    private _valueStateErrorMessage: string;
 
     /** @hidden */
     private _state: FormStates = 'default';
@@ -543,15 +436,6 @@ export class DatePickerComponent<D>
     /** @hidden */
     get _rangeDelimiter(): string {
         return this._dateTimeFormats.rangeDelimiter;
-    }
-
-    /**
-     * Date input aria label based on type
-     * @hidden
-     */
-    get _dateInputArialLabel(): string {
-        // return either input value or a key for "fdTranslate" pipe
-        return this.type === 'range' ? this.dateRangeInputLabel : this.dateInputLabel;
     }
 
     /**
@@ -630,8 +514,25 @@ export class DatePickerComponent<D>
     }
 
     /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if ('isOpen' in changes) {
+            this._showPopoverContents = this.isOpen;
+            this._changeDetectionRef.detectChanges();
+        }
+    }
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
+
+        this._calendars.changes.pipe(startWith(null), takeUntil(this._onDestroy$)).subscribe(() => {
+            const calendar = this._calendars.first;
+            this._calendarComponent = calendar;
+            setTimeout(() => {
+                calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+                calendar?.initialFocus();
+            });
+        });
 
         if (this.mobile) {
             this._setUpMobileMode();
@@ -666,8 +567,7 @@ export class DatePickerComponent<D>
         if (this.disabled) {
             return;
         }
-        this.isOpen = true;
-        this.isOpenChange.emit(this.isOpen);
+        this._setOpenState(true);
         this._changeMessageVisibility();
     }
 
@@ -676,8 +576,7 @@ export class DatePickerComponent<D>
         if (this.disabled) {
             return;
         }
-        this.isOpen = !this.isOpen;
-        this.isOpenChange.emit(this.isOpen);
+        this._setOpenState(!this.isOpen);
         if (!this.isOpen) {
             this.onTouched();
         }
@@ -689,8 +588,7 @@ export class DatePickerComponent<D>
         if (!this.isOpen) {
             return;
         }
-        this.isOpen = false;
-        this.isOpenChange.emit(this.isOpen);
+        this._setOpenState(false);
         this._changeMessageVisibility();
     }
 
@@ -981,10 +879,6 @@ export class DatePickerComponent<D>
                 preventScroll: this.preventScrollOnFocus
             });
         }
-        // focus calendar cell on opening
-        if (isOpen && this._calendarComponent) {
-            this._calendarComponent.initialFocus();
-        }
     }
 
     /** @hidden */
@@ -1023,9 +917,8 @@ export class DatePickerComponent<D>
 
     /** @hidden */
     private _refreshCurrentlyDisplayedCalendarDate(date: Nullable<D>): void {
-        if (this._calendarComponent) {
-            this._calendarComponent.setCurrentlyDisplayed(date);
-        }
+        this._calendarPendingDate = date;
+        this._calendarComponent?.setCurrentlyDisplayed(date);
     }
 
     /** @hidden */
@@ -1051,6 +944,15 @@ export class DatePickerComponent<D>
         this._popoverFormMessage.message = this._message || '';
         this._popoverFormMessage.triggers = this._messageTriggers;
         this._popoverFormMessage.messageType = this._state;
+    }
+
+    /** @hidden */
+    private _setOpenState(isOpen: boolean): void {
+        this._showPopoverContents = isOpen;
+        this._changeDetectionRef.detectChanges();
+        this.isOpen = isOpen;
+        this.isOpenChange.emit(this.isOpen);
+        this._changeDetectionRef.detectChanges();
     }
 
     /** @hidden */

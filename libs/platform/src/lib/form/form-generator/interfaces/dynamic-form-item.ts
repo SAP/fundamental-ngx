@@ -4,15 +4,7 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
-import {
-    ColumnLayout,
-    FieldHintInput,
-    HintInput,
-    HintPlacement,
-    InlineLayout,
-    LabelLayout,
-    SelectItem
-} from '@fundamental-ngx/platform/shared';
+import { ColumnLayout, FieldHintInput, HintInput, InlineLayout, SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
 import { DynamicFormGroup } from './dynamic-form-group';
 import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
@@ -48,7 +40,12 @@ export type DynamicFormItem<
     U extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
 > = DynamicFormFieldGroup | DynamicFormFieldItem<T, U>;
 
-export interface DynamicFormFieldGroup {
+export type DynamicFormItemMap<
+    T extends Record<string, any> = Record<string, any>,
+    U extends BaseDynamicFormFieldItem = AnyDynamicFormFieldItem
+> = DynamicFormFieldGroupMap | DynamicFormFieldItem<T, U>;
+
+export interface BaseDynamicFormFieldGroup {
     /**
      * @description
      * ID of the form item, if not provided, name will be used instead
@@ -70,13 +67,6 @@ export interface DynamicFormFieldGroup {
 
     /**
      * @description
-     * List of @see DynamicFormItem representing the list of items
-     * to be rendered in the form.
-     */
-    items?: DynamicFormFieldItem[];
-
-    /**
-     * @description
      * Rank is used for ordering.
      * Than lower number then higher priority.
      */
@@ -87,6 +77,24 @@ export interface DynamicFormFieldGroup {
      * Additional set of options that can affect UI of the form field group.
      */
     guiOptions?: BaseDynamicFormItemGuiOptions;
+}
+
+export interface DynamicFormFieldGroup extends BaseDynamicFormFieldGroup {
+    /**
+     * @description
+     * List of @see DynamicFormItem representing the list of items
+     * to be rendered in the form.
+     */
+    items?: DynamicFormFieldItem[];
+}
+
+export interface DynamicFormFieldGroupMap extends BaseDynamicFormFieldGroup {
+    /**
+     * @description
+     * Map of @see DynamicFormItem representing the list of items
+     * to be rendered in the form.
+     */
+    items?: Map<string, DynamicFormItemMap>;
 }
 
 export type FdpFormGeneratorAsyncProperty<T = string> = T | Promise<T> | Observable<T>;
@@ -371,13 +379,6 @@ export interface BaseDynamicFormItemGuiOptions {
      * If set, hint icon is added to control label or group heading with tooltip message as a value.
      */
     hint?: HintInput;
-
-    /**
-     * @deprecated Use `hint.placement` instead
-     * @description
-     * Define hint placement.
-     */
-    hintPlacement?: HintPlacement;
 }
 
 export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions {
@@ -398,13 +399,6 @@ export interface DynamicFormItemGuiOptions extends BaseDynamicFormItemGuiOptions
      * Inline layout for list based form item.
      */
     inlineLayout?: InlineLayout;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     * Define form field label placement.
-     */
-    layout?: LabelLayout;
 
     /**
      * @description

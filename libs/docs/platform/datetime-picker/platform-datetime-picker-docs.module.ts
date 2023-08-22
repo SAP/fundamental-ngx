@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformDatetimePickerModule } from '@fundamental-ngx/platform/form';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
 
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
@@ -46,9 +45,6 @@ const routes: Routes = [
         PlatformDatetimePickerUpdateOnBlurExampleComponent,
         PlatformDatetimePickerMobileExampleComponent
     ],
-    providers: [
-        platformContentDensityModuleDeprecationsProvider('fdp-datetime-picker'),
-        currentComponentProvider('datetime-picker')
-    ]
+    providers: [currentComponentProvider('datetime-picker')]
 })
 export class PlatformDatetimePickerDocsModule {}

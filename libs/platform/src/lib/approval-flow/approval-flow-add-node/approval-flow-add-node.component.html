@@ -151,96 +151,70 @@
 
     <fd-dialog-footer>
         <ng-container *ngIf="!_selectMode">
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fd-dialog-decisive-button
-                    fdType="emphasized"
-                    [label]="'platformApprovalFlow.addNodeAddActionBtnLabel' | fdTranslate"
-                    [disabled]="_isMainSubmitButtonDisabled"
-                    (click)="_submit()"
-                ></button>
-            </fd-dialog-footer-button>
-
-            <fd-dialog-footer-button>
-                <button
-                    fd-button
-                    fdkInitialFocus
-                    fd-dialog-decisive-button
-                    fdType="transparent"
-                    [label]="'platformApprovalFlow.addNodeCancelActionBtnLabel' | fdTranslate"
-                    (click)="dialogRef.close()"
-                ></button>
-            </fd-dialog-footer-button>
+            <fd-button-bar
+                fdType="emphasized"
+                [label]="'platformApprovalFlow.addNodeAddActionBtnLabel' | fdTranslate"
+                [disabled]="_isMainSubmitButtonDisabled"
+                (click)="_submit()"
+            >
+            </fd-button-bar>
+            <fd-button-bar
+                fdkInitialFocus
+                fdType="transparent"
+                [label]="'platformApprovalFlow.addNodeCancelActionBtnLabel' | fdTranslate"
+                (click)="dialogRef.close()"
+            ></fd-button-bar>
         </ng-container>
 
         <ng-container *ngIf="_selectMode">
             <ng-container *ngIf="viewService.isSelectUserMode">
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdType="emphasized"
-                        [label]="'platformApprovalFlow.addNodeSelectApproverActionBtnLabel' | fdTranslate"
-                        [disabled]="!_selectedApprovers.length"
-                        (click)="_confirmSelectedApprovers()"
-                    ></button>
-                </fd-dialog-footer-button>
+                <fd-button-bar
+                    fdType="emphasized"
+                    [label]="'platformApprovalFlow.addNodeSelectApproverActionBtnLabel' | fdTranslate"
+                    [disabled]="!_selectedApprovers.length"
+                    (click)="_confirmSelectedApprovers()"
+                ></fd-button-bar>
 
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdkInitialFocus
-                        fdType="transparent"
-                        [label]="'platformApprovalFlow.addNodeCancelApproverSelectionActionBtnLabel' | fdTranslate"
-                        (click)="_exitSelectMode()"
-                    ></button>
-                </fd-dialog-footer-button>
+                <fd-button-bar
+                    fdkInitialFocus
+                    fdType="transparent"
+                    [label]="'platformApprovalFlow.addNodeCancelApproverSelectionActionBtnLabel' | fdTranslate"
+                    (click)="_exitSelectMode()"
+                ></fd-button-bar>
             </ng-container>
 
             <ng-container *ngIf="viewService.isSelectTeamMode">
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdType="emphasized"
-                        [label]="'platformApprovalFlow.addNodeSelectApproverActionBtnLabel' | fdTranslate"
-                        [disabled]="!_selectedTeam && !viewService.team"
-                        (click)="_confirmSelectedTeam()"
-                    ></button>
-                </fd-dialog-footer-button>
+                <fd-button-bar
+                    fdType="emphasized"
+                    [label]="'platformApprovalFlow.addNodeSelectApproverActionBtnLabel' | fdTranslate"
+                    [disabled]="!_selectedTeam && !viewService.team"
+                    (click)="_confirmSelectedTeam()"
+                ></fd-button-bar>
 
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdkInitialFocus
-                        fdType="transparent"
-                        [label]="'platformApprovalFlow.addNodeCancelApproverSelectionActionBtnLabel' | fdTranslate"
-                        (click)="_exitSelectMode()"
-                    ></button>
-                </fd-dialog-footer-button>
+                <fd-button-bar
+                    fdkInitialFocus
+                    fdType="transparent"
+                    [label]="'platformApprovalFlow.addNodeCancelApproverSelectionActionBtnLabel' | fdTranslate"
+                    (click)="_exitSelectMode()"
+                ></fd-button-bar>
             </ng-container>
 
             <ng-container *ngIf="viewService.isTeamMembersMode">
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdkInitialFocus
-                        fdType="transparent"
-                        [label]="'platformApprovalFlow.addNodeApproverOrTeamDetailsCloseActionBtnLabel' | fdTranslate"
-                        (click)="_exitTeamMembersMode()"
-                    ></button>
-                </fd-dialog-footer-button>
+                <fd-button-bar
+                    fdkInitialFocus
+                    fdType="transparent"
+                    [label]="'platformApprovalFlow.addNodeApproverOrTeamDetailsCloseActionBtnLabel' | fdTranslate"
+                    (click)="_exitTeamMembersMode()"
+                ></fd-button-bar>
             </ng-container>
 
             <ng-container *ngIf="viewService.isUserDetailsMode">
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdkInitialFocus
-                        fdType="transparent"
-                        [label]="'platformApprovalFlow.addNodeApproverOrTeamDetailsCloseActionBtnLabel' | fdTranslate"
-                        (click)="_exitUserDetailsMode()"
-                    ></button>
-                </fd-dialog-footer-button>
+                <fd-button-bar
+                    fdkInitialFocus
+                    fdType="transparent"
+                    [label]="'platformApprovalFlow.addNodeApproverOrTeamDetailsCloseActionBtnLabel' | fdTranslate"
+                    (click)="_exitUserDetailsMode()"
+                ></fd-button-bar>
             </ng-container>
         </ng-container>
     </fd-dialog-footer>

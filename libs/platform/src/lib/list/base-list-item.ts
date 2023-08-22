@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { ColorAccent, KeyUtil, Size, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
@@ -141,47 +141,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
 
     /** Avatar component properties. @see AvatarComponent for more details */
     @Input()
-    set avatar(value: Partial<ListAvatarConfig> | string) {
+    set avatar(value: Nullable<Partial<ListAvatarConfig> | string>) {
+        if (!value) {
+            return;
+        }
         value = typeof value === 'string' ? { image: value } : value;
         this._avatarConfig = merge(new ListAvatarConfig(), value);
     }
 
     get avatar(): ListAvatarConfig {
         return this._avatarConfig;
-    }
-
-    /**
-     * @deprecated
-     * Use `avatar` property for more flexible configuration.
-     *
-     * @description
-     * Attribute to hold avatar path
-     */
-    @Input()
-    set avatarSrc(value: Nullable<string>) {
-        warnOnce('`avatarSrc` is deprecated. Use `avatar` property for more flexible configuration.');
-        this._avatarConfig = merge(this._avatarConfig, { image: value });
-    }
-
-    get avatarSrc(): Nullable<string> {
-        return this.avatar?.image;
-    }
-
-    /**
-     * @deprecated
-     * Use `avatar` property for more flexible configuration.
-     *
-     * @description
-     * Attribute to hold avatar title for a11y
-     */
-    @Input()
-    set avatarTitle(value: Nullable<string>) {
-        warnOnce('`avatarTitle` is deprecated. Use `avatar` property for more flexible configuration.');
-        this._avatarConfig = merge(this._avatarConfig, { ariaLabel: value });
-    }
-
-    get avatarTitle(): Nullable<string> {
-        return this.avatar?.ariaLabel;
     }
 
     /** attribute to hold counter value */
@@ -232,21 +201,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
      */
     @Input()
     titleWrap?: boolean;
-
-    /**
-     * @deprecated See `icon` input property for more flexible icon configuration.
-     * @description
-     * attribute to hold primary/title icon
-     */
-    @Input()
-    set titleIcon(value: Nullable<string>) {
-        warnOnce('`titleIcon` is deprecated. See `icon` input property for more flexible icon configuration.');
-        this._iconConfig = merge(new ListIconConfig(), { glyph: value, ariaLabel: value });
-    }
-
-    get titleIcon(): Nullable<string> {
-        return this._iconConfig.glyph;
-    }
 
     /**
      * List item icon configuration.

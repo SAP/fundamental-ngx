@@ -1,13 +1,5 @@
 <fdp-form-group #fg1 [useForm]="true" [formGroup]="form" mainTitle="Custom control in form container">
-    <fdp-form-field
-        #ff1
-        id="customControl"
-        label="Custom control"
-        [column]="1"
-        [rank]="1"
-        hintPlacement="left"
-        [required]="true"
-    >
+    <fdp-form-field #ff1 id="customControl" label="Custom control" [column]="1" [rank]="1" [required]="true">
         <fdk-custom-control-example
             tabindex="0"
             name="customControl"
@@ -24,7 +16,6 @@
         label="Multi-combobox control"
         [column]="1"
         [rank]="2"
-        hintPlacement="left"
         [required]="true"
         placeholder="Select something"
     >

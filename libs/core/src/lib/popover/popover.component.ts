@@ -37,7 +37,7 @@ import { PopoverMobileComponent } from './popover-mobile/popover-mobile.componen
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
-import { warnOnce } from '@fundamental-ngx/core/utils';
+import { NgIf } from '@angular/common';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -67,7 +67,9 @@ let cdkPopoverUniqueId = 0;
         class: 'fd-popover-custom',
         '[class.fd-popover-custom--mobile]': 'mobile',
         '[attr.id]': 'id'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, CdkOverlayOrigin]
 })
 export class PopoverComponent
     extends BasePopoverClass
@@ -134,21 +136,6 @@ export class PopoverComponent
     /** @hidden - template for Dialog footer content */
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
-
-    /** @deprecated
-     * Left for backward compatibility
-     */
-    set directiveRef(value: any) {
-        warnOnce('Property directiveRef is deprecated. ');
-        this._directiveRef = value;
-    }
-
-    get directiveRef(): any {
-        return this._directiveRef;
-    }
-
-    /** @hidden */
-    private _directiveRef: any;
 
     /** @hidden */
     private _trigger: ElementRef;
@@ -245,14 +232,6 @@ export class PopoverComponent
      */
     applyNewPosition(positions: ConnectedPosition[]): void {
         this._popoverService.applyNewPosition(positions);
-    }
-
-    /** @deprecated
-     * Left for backward compatibility
-     */
-    updatePopover(): void {
-        console.warn('updatePopover is Deprecated, use refreshPosition instead');
-        this.refreshPosition();
     }
 
     /** Method called to refresh position of opened popover */

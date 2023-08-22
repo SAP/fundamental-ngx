@@ -8,7 +8,6 @@ import {
     Host,
     Inject,
     Input,
-    isDevMode,
     Optional,
     Output,
     Self,
@@ -23,7 +22,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamenta
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { PlatformFormFieldControl, BaseInput, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 
@@ -91,53 +90,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     useValidation = true;
 
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core date picker)
-     * Aria label for the date picker input.
-     */
-    @Input()
-    set dateInputLabel(value: string) {
-        warnOnce(
-            'Property dateInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
-        );
-        this._dateInputLabel = value;
-    }
-
-    get dateInputLabel(): string {
-        return this._dateInputLabel;
-    }
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core date picker)
-     * Aria label for the datepicker input.
-     */
-    @Input()
-    set dateRangeInputLabel(value: string) {
-        warnOnce(
-            'Property dateRangeInputLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
-        );
-        this._dateRangeInputLabel = value;
-    }
-
-    get dateRangeInputLabel(): string {
-        return this._dateRangeInputLabel;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead (being translated in core date picker)
-     * Aria label for the button to show/hide the calendar.
-     */
-    @Input()
-    set displayCalendarToggleLabel(value: string) {
-        warnOnce(
-            'Property displayCalendarToggleLabel is deprecated. Use i18n capabilities (being translated in core date picker) instead.'
-        );
-        this._displayCalendarToggleLabel = value;
-    }
-
-    get displayCalendarToggleLabel(): string {
-        return this._displayCalendarToggleLabel;
-    }
-
     /** Enables Today-Selection-Button if true */
     @Input()
     showTodayButton = false;
@@ -183,25 +135,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         }
 
         return super.state;
-    }
-
-    /**
-     * @deprecated
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    @Input()
-    set datepickerState(state: FormStates) {
-        if (isDevMode()) {
-            warnOnce('"datepickerState" is deprecated. Use "state" instead');
-        }
-        this.state = state;
-    }
-    get datepickerState(): FormStates {
-        if (isDevMode()) {
-            warnOnce('"datepickerState" is deprecated. Use "state" instead');
-        }
-        return this.state;
     }
 
     /**
@@ -319,15 +252,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     private _datePickerValid = true;
 
     /** @hidden */
-    private _dateRangeInputLabel: string;
-
-    /** @hidden */
-    private _displayCalendarToggleLabel: string;
-
-    /** @hidden */
-    private _dateInputLabel: string;
-
-    /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef,
@@ -351,14 +275,12 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /**
      * Function used to disable certain dates in the calendar.
-     * @param value
      */
     @Input()
     disableFunction: (value: D) => boolean = () => false;
 
     /**
      * Function used to disable certain dates in the calendar for the range start selection.
-     * @param value
      */
     @Input()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -366,7 +288,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /**
      * Function used to disable certain dates in the calendar for the range end selection.
-     * @param value
      */
     @Input()
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

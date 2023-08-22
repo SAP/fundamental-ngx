@@ -14,14 +14,16 @@ import { FD_OBJECT_STATUS_COMPONENT, ObjectStatusComponent } from '@fundamental-
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-thumbnail]',
-    host: { class: 'fd-upload-collection__thumbnail' }
+    host: { class: 'fd-upload-collection__thumbnail' },
+    standalone: true
 })
 export class UploadCollectionThumbnailDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-title]',
-    host: { class: 'fd-upload-collection__title' }
+    host: { class: 'fd-upload-collection__title' },
+    standalone: true
 })
 export class UploadCollectionTitleDirective {
     /** @hidden */
@@ -31,28 +33,32 @@ export class UploadCollectionTitleDirective {
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-description]',
-    host: { class: 'fd-upload-collection__description' }
+    host: { class: 'fd-upload-collection__description' },
+    standalone: true
 })
 export class UploadCollectionDescriptionDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-text-separator], fd-upload-collection-text-separator',
-    host: { class: 'fd-upload-collection__text-separator' }
+    host: { class: 'fd-upload-collection__text-separator' },
+    standalone: true
 })
 export class UploadCollectionTextSeparatorDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-status-group]',
-    host: { class: 'fd-upload-collection__status-group' }
+    host: { class: 'fd-upload-collection__status-group' },
+    standalone: true
 })
 export class UploadCollectionStatusGroupDirective {}
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-upload-collection-status-item]',
-    host: { class: 'fd-upload-collection__status-group-item' }
+    host: { class: 'fd-upload-collection__status-group-item' },
+    standalone: true
 })
 export class UploadCollectionStatusItemDirective implements OnInit {
     /** @hidden */
@@ -68,7 +74,8 @@ export class UploadCollectionStatusItemDirective implements OnInit {
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-upload-collection-title-container]'
+    selector: '[fd-upload-collection-title-container]',
+    standalone: true
 })
 export class UploadCollectionTitleContainerDirective {
     /** @hidden */

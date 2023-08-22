@@ -4,7 +4,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { DELETE } from '@angular/cdk/keycodes';
 
-import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
+import { createKeyboardEvent, FieldHintOptions } from '@fundamental-ngx/platform/shared';
 import { TextAreaComponent } from './text-area.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
@@ -21,10 +21,9 @@ import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
                     [id]="'basicTextarea'"
                     label="Basic Textarea with Platform Forms"
                     [placeholder]="'Start entering detailed description'"
-                    hint="This is tooltip help"
+                    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                     zone="zLeft"
                     rank="10"
-                    [hintPlacement]="'left'"
                     [validators]="textareaValidator"
                 >
                     <fdp-textarea
@@ -114,7 +113,7 @@ describe('Basic Textarea', () => {
         const textareaPlaceholder = host.basicTextareaField.placeholder;
         expect(textareaPlaceholder).toBe('Start entering detailed description');
 
-        const textareaHint = host.basicTextareaField.hint;
+        const textareaHint = (host.basicTextareaField.hint as FieldHintOptions).content;
         expect(textareaHint).toBe('This is tooltip help');
 
         const textareaDefaultValue = host.form.get('basicTextarea')?.value;

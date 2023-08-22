@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-truncate-text-example',
-    template: ` <p>{{ text | truncate: 30 }}</p> `
+    template: ` <p>{{ text | truncate : 30 }}</p> `
 })
 export class TruncateTextExampleComponent {
     text =

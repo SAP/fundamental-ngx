@@ -12,6 +12,7 @@ import { NumberStepInputComponent } from './number-step-input.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { StepInputChangeEvent } from '../base.step-input';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { FieldHintOptions } from '@fundamental-ngx/platform/shared';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -403,10 +404,9 @@ describe('NumberStepInputComponent main functionality', () => {
                     id="qty"
                     label="Basic Number Step-Input with Platform Forms"
                     placeholder="Start entering qty"
-                    hint="This is tooltip help"
+                    [hint]="{ content: 'This is tooltip help', placement: 'left' }"
                     zone="zLeft"
                     rank="10"
-                    hintPlacement="left"
                     [validators]="stepInputValidators"
                 >
                     <fdp-number-step-input name="qty" [formControl]="ff.formControl"></fdp-number-step-input>
@@ -476,7 +476,7 @@ describe('Basic number Step Input withing platforms form', () => {
         const controlPlaceholder = host.stepInputFormField.placeholder;
         expect(controlPlaceholder).toBe('Start entering qty');
 
-        const controlHint = host.stepInputFormField.hint;
+        const controlHint = (host.stepInputFormField.hint as FieldHintOptions).content;
         expect(controlHint).toBe('This is tooltip help');
 
         const controlDefaultValue = host.form.get('qty')?.value;

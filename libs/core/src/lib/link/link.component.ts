@@ -7,7 +7,6 @@ import {
     ElementRef,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -18,7 +17,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { applyCssClass, CssClassBuilder, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
@@ -27,7 +26,7 @@ import { NgIf } from '@angular/common';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fdLink], [fd-link], [fd-breadcrumb-link]',
+    selector: '[fdLink], [fd-link]',
     templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -102,11 +101,7 @@ export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterV
         public readonly elementRef: ElementRef<HTMLElement>,
         private changeDetectorRef: ChangeDetectorRef,
         @Inject('linkRouterTarget') readonly routerLink: RouterLink
-    ) {
-        if (isDevMode() && this.elementRef.nativeElement.hasAttribute('fd-breadcrumb-link')) {
-            warnOnce('The fd-breadcrumb-link attribute is deprecated. Please use fd-link instead.');
-        }
-    }
+    ) {}
 
     /** @hidden */
     ngOnChanges(): void {

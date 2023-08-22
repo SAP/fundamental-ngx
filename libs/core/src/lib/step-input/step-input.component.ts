@@ -20,7 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { KeyUtil, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { SafeHtml } from '@angular/platform-browser';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -82,38 +82,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** Sets icon displayed in Decrement Button */
     @Input()
     decrementButtonIcon = 'less';
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Sets Increment Button title attribute
-     */
-    @Input()
-    set incrementButtonTitle(value: string) {
-        warnOnce(
-            "Property incrementButtonTitle is deprecated. Use i18n capabilities 'coreStepInput.incrementButtonTitle' key instead."
-        );
-        this._incrementButtonTitle = value;
-    }
-
-    get incrementButtonTitle(): string {
-        return this._incrementButtonTitle;
-    }
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Sets Decrement Button title attribute
-     */
-    @Input()
-    set decrementButtonTitle(value: string) {
-        warnOnce(
-            "Property decrementButtonTitle is deprecated. Use i18n capabilities 'coreStepInput.decrementButtonTitle' key instead."
-        );
-        this._decrementButtonTitle = value;
-    }
-
-    get decrementButtonTitle(): string {
-        return this._decrementButtonTitle;
-    }
 
     /** Sets input aria-label attribute */
     @Input()
@@ -287,12 +255,6 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
 
     /** @hidden */
     private _firstEmittedValue: number;
-
-    /** @hidden */
-    private _decrementButtonTitle: string;
-
-    /** @hidden */
-    private _incrementButtonTitle: string;
 
     /** @hidden */
     constructor(

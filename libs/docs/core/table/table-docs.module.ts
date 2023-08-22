@@ -33,11 +33,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
-import {
-    DeprecatedTableCompactDirective,
-    DeprecatedTableCondensedDirective,
-    TableModule
-} from '@fundamental-ngx/core/table';
+import { TableModule } from '@fundamental-ngx/core/table';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
@@ -45,7 +41,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { moduleDeprecationsProvider, RepeatModule } from '@fundamental-ngx/cdk/utils';
+import { RepeatModule } from '@fundamental-ngx/cdk/utils';
 import { SkeletonModule } from '../../../core/src/lib/skeleton';
 import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
 import { TableFixedExampleComponent } from './examples/table-fixed-example.component';
@@ -109,10 +105,6 @@ const routes: Routes = [
         TableLoadingExampleComponent,
         TableFixedExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedTableCompactDirective),
-        moduleDeprecationsProvider(DeprecatedTableCondensedDirective),
-        currentComponentProvider('table')
-    ]
+    providers: [currentComponentProvider('table')]
 })
 export class TableDocsModule {}

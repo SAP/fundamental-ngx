@@ -7,13 +7,13 @@ import { TruncateDirective } from './truncate.directive';
 @Component({
     template: `
         <span fdkTruncate [fdkTruncateState]="true" [fdkTruncateWidth]="pixLength">
-            This element should by truncated by width as fdTruncateWidth is provided
+            This element should by truncated by width as fdkTruncateWidth is provided
         </span>
         <span fdkTruncate [fdkTruncateState]="false" [fdkTruncateWidth]="pixLength">
-            This element should not be truncated as fdTruncateState is false
+            This element should not be truncated as fdkTruncateState is false
         </span>
         <span style="color:red;" fdkTruncate [fdkTruncateState]="true">
-            This element should not be truncated as fdTruncateState is false
+            This element should not be truncated as fdkTruncateState is false
         </span>
     `
 })
@@ -46,12 +46,12 @@ describe('TruncateDirective', () => {
         expect(truncate).toBeTruthy();
     });
 
-    it('Should truncate when fdTruncateState is true', () => {
+    it('Should truncate when fdkTruncateState is true', () => {
         expect(truncate[0].nativeElement.style.maxWidth).toBe(`${component.pixLength}px`);
         expect(truncate[2].nativeElement.style.maxWidth).toBe(`200px`);
     });
 
-    it('Should not truncate when fdTruncateState is false', () => {
+    it('Should not truncate when fdkTruncateState is false', () => {
         expect(truncate[1].nativeElement.style.maxWidth).toBe('');
     });
 

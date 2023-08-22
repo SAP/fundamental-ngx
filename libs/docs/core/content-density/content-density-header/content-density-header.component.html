@@ -27,19 +27,6 @@
             Please note that <code>forRoot()</code> method should be called from root module <b>always</b>, if you want
             to make globallly available content density mode and service to manage that.
         </fd-message-strip>
-
-        <fd-message-strip type="error" [dismissible]="false">
-            <p>
-                Previously used <code>ContentDensityService</code> is deprecated in favor of new
-                <code>ContentDensityModule</code> and it's components. To continue using old service without issues,
-                please remove it from providers array of root module and replace it by importing
-                <code>ContentDensityModule.forRoot()</code> in your root module
-            </p>
-            <p>
-                If you are looking for documentation related to old approach,
-                <a fd-link routerLink="/core/old-content-density">you can find it here</a>
-            </p>
-        </fd-message-strip>
     </description>
     <import module="ContentDensityModule" subPackage="content-density"></import>
 

@@ -22,6 +22,6 @@
     *ngIf="dismissible"
     (click)="dismiss()"
     [attr.aria-controls]="id"
-    [attr.aria-label]="dismissLabel || ('coreMessageStrip.dismissLabel' | fdTranslate)"
-    [attr.title]="dismissLabel || ('coreMessageStrip.dismissLabel' | fdTranslate)"
+    [attr.aria-label]="'coreMessageStrip.dismissLabel' | fdTranslate"
+    [attr.title]="'coreMessageStrip.dismissLabel' | fdTranslate"
 ></button>

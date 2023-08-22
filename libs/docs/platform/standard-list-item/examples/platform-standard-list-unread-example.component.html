@@ -3,8 +3,7 @@
     <fdp-list-group-header groupHeaderTitle="Group header 1"></fdp-list-group-header>
     <fdp-standard-list-item
         [title]="'List item 1'"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         [description]="{
             text: 'First text item in Byline (Standard text item)',
             title: 'Separate text for a description title'
@@ -14,8 +13,7 @@
     </fdp-standard-list-item>
     <fdp-standard-list-item
         [title]="'List item 2'"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         description="Second text item in Byline (Standard text item)"
     >
     </fdp-standard-list-item>
@@ -26,16 +24,14 @@
     <fdp-list-group-header groupHeaderTitle="Group header 1"></fdp-list-group-header>
     <fdp-standard-list-item
         [title]="'List item 1'"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         description="First text item in Byline (Standard text item)"
         [unRead]="true"
     >
     </fdp-standard-list-item>
     <fdp-standard-list-item
         [title]="'List item 2'"
-        avatarSrc="https://picsum.photos/400/400?nature"
-        avatarTitle="nature"
+        [avatar]="{ image: 'https://picsum.photos/400/400?nature', ariaLabel: 'nature' }"
         description="Second text item in Byline (Standard text item)"
     >
     </fdp-standard-list-item>

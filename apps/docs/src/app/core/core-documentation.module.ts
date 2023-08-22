@@ -8,7 +8,6 @@ import {
     COMBOBOX_MOBILE_CONFIG,
     CURRENT_LIB,
     DATE_PICKER_MOBILE_CONFIG,
-    DocsThemeService,
     MENU_MOBILE_CONFIG,
     MULTI_INPUT_MOBILE_CONFIG,
     POPOVER_MOBILE_CONFIG,
@@ -34,7 +33,6 @@ import { CoreSchemaModule } from '@fundamental-ngx/docs/core/schema';
     ],
     providers: [
         StackblitzService,
-        DocsThemeService,
         { provide: CURRENT_LIB, useValue: 'core' },
         { provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true },

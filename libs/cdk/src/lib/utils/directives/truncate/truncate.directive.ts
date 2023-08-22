@@ -1,27 +1,9 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnChanges } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { Nullable } from '../../models/nullable';
-import {
-    DeprecatedSelector,
-    FD_DEPRECATED_DIRECTIVE_SELECTOR,
-    getDeprecatedModel
-} from '../../deprecated-selector.class';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdTruncate], [fd-truncate]',
-    standalone: true,
-    providers: [
-        {
-            provide: FD_DEPRECATED_DIRECTIVE_SELECTOR,
-            useValue: getDeprecatedModel('[fdkTemplate]', '[fdTruncate], [fd-truncate]')
-        }
-    ]
-})
-export class DeprecatedTruncateSelectorDirective extends DeprecatedSelector {}
-
-@Directive({
-    selector: '[fdkTruncate], [fdTruncate], [fd-truncate]',
+    selector: '[fdkTruncate]',
     standalone: true
 })
 export class TruncateDirective implements OnChanges, AfterViewInit {

@@ -1,11 +1,8 @@
-import { A11yModule } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverService } from './popover-service/popover.service';
 import { PopoverComponent } from './popover.component';
-import { PopoverModule } from './popover.module';
 import { SimpleChanges } from '@angular/core';
 
 describe('PopoverComponent', () => {
@@ -15,7 +12,7 @@ describe('PopoverComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, OverlayModule, A11yModule],
+            imports: [PopoverComponent],
             providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
         })
             .overrideComponent(PopoverComponent, {
@@ -90,7 +87,7 @@ describe('PopoverComponent', () => {
     it('should update popover', () => {
         jest.spyOn(component, 'refreshPosition');
 
-        component.updatePopover();
+        component.refreshPosition();
 
         expect(component.refreshPosition).toHaveBeenCalled();
     });

@@ -11,7 +11,6 @@ import {
     forwardRef,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -31,7 +30,6 @@ import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cd
 import { uniqBy } from 'lodash-es';
 import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { warnOnce } from '@fundamental-ngx/core/utils';
 
 import {
     Column,
@@ -42,7 +40,6 @@ import {
     FormFieldErrorDirectiveContext,
     FormFieldGroup,
     FormGroupContainer,
-    HintPlacement,
     LabelLayout,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
@@ -53,13 +50,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '../../helpers';
-import {
-    DefaultHorizontalFieldLayout,
-    DefaultHorizontalLabelLayout,
-    DefaultVerticalFieldLayout,
-    DefaultVerticalLabelLayout,
-    FORM_GROUP_CHILD_FIELD_TOKEN
-} from '../constants';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
 import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
@@ -111,47 +102,9 @@ export class FormFieldComponent
     @Input()
     id: string = (++defaultId).toString();
 
-    /**
-     * @deprecated use `hint.placement` input instead
-     * Defines hint placement
-     */
-    @Input()
-    set hintPlacement(value: HintPlacement) {
-        warnOnce('Property hintPlacement is deprecated. Use `hint.placement` instead.');
-        this._hintPlacement = value;
-    }
-
-    get hintPlacement(): HintPlacement {
-        return this._hintPlacement;
-    }
-
     /** Hint to be placed next to label */
     @Input()
     hint: Nullable<FieldHintInput>;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     * Define form field label placement
-     */
-    @Input()
-    set labelLayout(value: LabelLayout) {
-        if (isDevMode()) {
-            warnOnce(
-                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
-            );
-        }
-        this._labelLayout = value;
-
-        this.labelColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
-        this.fieldColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
-    }
-
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
 
     /**
      * Indicates when form field label should not be displayed
@@ -442,9 +395,6 @@ export class FormFieldComponent
     /** @hidden */
     private _errorDirectivesCdr: Subscription;
 
-    /** @hidden */
-    private _hintPlacement: HintPlacement;
-
     /** @hidden whether label and control are vertically aligned */
     private get _isHorizontalAlignment(): boolean {
         if (!this.inputMessageGroup || !this.labelCol) {
@@ -600,7 +550,7 @@ export class FormFieldComponent
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.hint || changes.hintPlacement) {
+        if (changes.hint) {
             this._updateHintOptions();
             this._formFieldLayoutService.setNeedsInlineHelp(
                 this,
@@ -930,13 +880,11 @@ export class FormFieldComponent
         if (typeof this.hint === 'string' || this.hint instanceof TemplateRef) {
             this.hintOptions = {
                 ...this._defaultHintOptions,
-                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
                 content: this.hint
             };
         } else if (typeof this.hint === 'object') {
             this.hintOptions = {
                 ...this._defaultHintOptions,
-                placement: this.hintPlacement ? this.hintPlacement : this._defaultHintOptions.placement,
                 ...this.hint
             };
         }

@@ -5,7 +5,6 @@ import {
     EventEmitter,
     Inject,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     Output,
@@ -16,25 +15,24 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlStatus, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormControlStatus, FormGroupDirective, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge, of } from 'rxjs';
 import {
     ColumnLayout,
     FieldHintOptions,
     PlatformFormFieldControl,
     HintOptions,
-    LabelLayout,
-    HintInput
+    HintInput,
+    FDP_DO_CHECK
 } from '@fundamental-ngx/platform/shared';
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
 import { FormGeneratorService } from '../form-generator.service';
 import {
-    BaseDynamicFormItemGuiOptions,
     DynamicFormItem,
-    DynamicFormItemGuiOptions,
+    DynamicFormItemMap,
     DynamicFormItemValidationObject,
     DynamicFormValue
 } from '../interfaces/dynamic-form-item';
@@ -45,17 +43,21 @@ import {
     DynamicFormGroupControls
 } from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
-import {
-    DefaultGapLayout,
-    DefaultHorizontalFieldLayout,
-    DefaultHorizontalLabelLayout,
-    DefaultVerticalFieldLayout,
-    DefaultVerticalLabelLayout
-} from '../../form-group/constants';
+import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
 import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
 import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
+import { getParentItem, isFormFieldItem, mapFormItems, transformFormItem } from '../helpers';
+import { GetOrderedFieldControlsPipe } from '../pipes/get-ordered-form-controls.pipe';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { DynamicFormControlFieldDirective } from '../dynamic-form-control-field.directive';
+import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { GetHintOptionsPipe } from '../pipes/get-hint-options.pipe';
 
 let formUniqueId = 0;
+
+export type FormGeneratorAcceptableItems = DynamicFormItem[] | Observable<DynamicFormItem[]>;
 
 export const FDP_FORM_IGNORED_STATUSES: FormControlStatus[] = ['INVALID', 'PENDING', 'DISABLED'];
 
@@ -78,7 +80,29 @@ export interface SubmitFormEventResult {
     selector: 'fdp-form-generator',
     templateUrl: './form-generator.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: FDP_DO_CHECK,
+            useFactory: (formGenerator: FormGeneratorComponent) => formGenerator.doCheck$,
+            deps: [FormGeneratorComponent]
+        }
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        BusyIndicatorModule,
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgFor,
+        NgTemplateOutlet,
+        DynamicFormControlFieldDirective,
+        FormGeneratorFieldComponent,
+        SkeletonModule,
+        GetOrderedFieldControlsPipe,
+        GetHintOptionsPipe
+    ]
 })
 export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /** @description Unique form name */
@@ -90,15 +114,16 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      * to be rendered in the form.
      */
     @Input()
-    set formItems(formItems: DynamicFormItem[]) {
+    set formItems(formItems: FormGeneratorAcceptableItems) {
         if (!formItems) {
             return;
         }
 
-        this._formItems = formItems.map((item, index) => ({ ...item, rank: item.rank || index }));
-        this._generateForm();
+        formItems = isObservable(formItems) ? formItems : of(formItems);
+
+        this._onFormItemsChange(formItems);
     }
-    get formItems(): DynamicFormItem[] {
+    get formItems(): FormGeneratorAcceptableItems {
         return this._formItems;
     }
 
@@ -129,30 +154,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     @Input()
     columnLayout: Nullable<string>;
-
-    /**
-     * @deprecated
-     * Use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties.
-     *
-     * Defines form field label placement.
-     */
-    @Input()
-    set labelLayout(value: LabelLayout) {
-        if (isDevMode()) {
-            warnOnce(
-                'LabelLayout input property is deprecated. Please use labelColumnLayout, fieldColumnLayout and gapColumnLayout properties instead'
-            );
-        }
-        this._labelLayout = value;
-
-        this.labelColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalLabelLayout : DefaultVerticalLabelLayout;
-        this.fieldColumnLayout =
-            this._labelLayout === 'horizontal' ? DefaultHorizontalFieldLayout : DefaultVerticalFieldLayout;
-    }
-    get labelLayout(): LabelLayout {
-        return this._labelLayout;
-    }
 
     /**
      * Defines label's column layout.
@@ -222,6 +223,9 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     @ViewChildren(FormGeneratorFieldComponent)
     fields: QueryList<FormGeneratorFieldComponent>;
 
+    /** @hidden */
+    doCheck$ = new Subject<void>();
+
     /** Array of form field controls. */
     get formFields(): PlatformFormFieldControl[] {
         return this.fields
@@ -264,7 +268,8 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
      */
     formValue$ = new BehaviorSubject<DynamicFormValue>({});
 
-    /** @hidden
+    /**
+     * @hidden
      * To differentiate between first loading when skeletons be shown and subsequent loadings when busy indicator be shown
      */
     _firstLoadingDone = false;
@@ -280,12 +285,15 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     /**
      * @hidden
      */
-    private _formItems: DynamicFormItem[];
+    private _formItems: FormGeneratorAcceptableItems;
 
     /**
      * @hidden
      */
     private _formValueSubscription: Subscription;
+
+    /** @hidden */
+    private _refresh$ = new Subject<void>();
 
     /**
      * @hidden
@@ -294,13 +302,13 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private _labelLayout: LabelLayout;
-
-    /** @hidden */
     private readonly _defaultHintOptions: FieldHintOptions;
 
     /** @hidden */
     private _ngSubmitSubscription: Subscription | undefined;
+
+    /** @hidden */
+    private _mappedFormitems: Map<string, DynamicFormItemMap> = new Map();
 
     /** @hidden */
     constructor(
@@ -356,6 +364,7 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     async _onSubmit(): Promise<void> {
         this.form.markAllAsTouched();
         this._cd.detectChanges();
+        this.doCheck$.next();
 
         const formValue = await this._fgService.getFormValue(this.form);
 
@@ -372,13 +381,72 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
     }
 
     /**
+     * Adds new control to an existing form.
+     * @param control Control configuration to add.
+     * @param path Path of the control.
+     */
+    async addControl(control: DynamicFormItem, path?: string[]): Promise<void> {
+        this._addControlToFormItems(control, path);
+        this._fgService.addControl(control, this.form, path);
+
+        this.formControlItems = this._getOrderedControls(this.form.controls);
+
+        this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
+    }
+
+    /**
+     * Removes the control with the given name by the given path.
+     * @param name Name of the control.
+     * @param path Path of the control.
+     */
+    async removeControl(name: string, path: string[]): Promise<void> {
+        this._removeControlFromItems(name, path);
+        this._fgService.removeControl(name, this.form, path);
+        this.formControlItems = this._getOrderedControls(this.form.controls);
+
+        this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
+    }
+
+    /**
+     *
+     * @hidden
+     */
+    _trackFn(index: number, value: DynamicFormGroupControl): string {
+        return `${index}_${value.formItem.name}`;
+    }
+
+    /** @hidden */
+    _groupTrackFn(index: number, value: DynamicFormGroupControl): string {
+        return (value as DynamicFormControlGroup).formItem.name;
+    }
+
+    /**
+     *
+     * @description Programmatically submit form.
+     * This method also calls validation for the form items.
+     */
+    submit(): void {
+        this.formGroup.onSubmit(new Event('submit'));
+    }
+
+    /** @hidden */
+    _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
+        return error.heading && error.description && error.type;
+    }
+
+    /** @hidden */
+    _errorsTrackBy(_: number, error: { type: string; value: any }): string {
+        return error.type;
+    }
+
+    /**
      * @hidden
      */
     private async _generateForm(): Promise<void> {
         this.formLoading = true;
         this.loading$.next(this.formLoading);
 
-        const form = await this._fgService.generateForm(this.formName, this.formItems);
+        const form = await this._fgService.generateForm(this.formName, this._mappedFormitems);
 
         this._formValueSubscription?.unsubscribe();
 
@@ -410,61 +478,11 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
         this._listenToSubmit();
     }
 
-    /**
-     *
-     * @hidden
-     */
-    _trackFn(index: number, value: DynamicFormGroupControl): string {
-        return `${index}_${value.formItem.name}`;
-    }
-
-    /**
-     *
-     * @description Programmatically submit form.
-     * This method also calls validation for the form items.
-     */
-    submit(): void {
-        this.formGroup.onSubmit(new Event('submit'));
-    }
-
     /** @hidden */
     private _getOrderedControls(controls: DynamicFormGroupControls): (DynamicFormControl | DynamicFormControlGroup)[] {
         return Object.values(controls).sort(
             (a, b) => (a.formItem?.rank ?? -Infinity) - (b.formItem?.rank ?? -Infinity)
         );
-    }
-
-    /**
-     * @description
-     * Used for extracting hintOptions from GuiOptions. This will coerce string | HintOptions to FieldHintOptions,
-     * will combine default value of hints for form generator with provided options.
-     * @param guiOptions
-     */
-    getHintOptions(
-        guiOptions?: BaseDynamicFormItemGuiOptions | DynamicFormItemGuiOptions
-    ): FieldHintOptions | undefined {
-        if (!guiOptions?.hint) {
-            return;
-        }
-        const formItemHintOptions = guiOptions.hint;
-        const placement = guiOptions.hintPlacement || this._defaultHintOptions.placement;
-        if (typeof formItemHintOptions === 'string' || formItemHintOptions instanceof TemplateRef) {
-            return {
-                ...this._defaultHintOptions,
-                placement,
-                content: formItemHintOptions
-            };
-        }
-        return {
-            ...this._defaultHintOptions,
-            placement,
-            ...formItemHintOptions
-        };
-    }
-
-    /** @hidden */
-    _isAdvancedError(error: any): error is DynamicFormItemValidationObject {
-        return error.heading && error.description && error.type;
     }
 
     /** @hidden */
@@ -493,7 +511,6 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
                         startWith(this.formGroup.status),
                         filter((status: FormControlStatus) => status !== 'PENDING'),
                         take(1),
-                        // filter((status) => status !== 'INVALID'),
                         takeUntil(this._onDestroy$)
                     )
                 )
@@ -502,5 +519,64 @@ export class FormGeneratorComponent implements OnDestroy, OnChanges {
                 await this._onSubmit();
                 this._listenToSubmit();
             });
+    }
+
+    /** @hidden */
+    private _onFormItemsChange(items: Observable<DynamicFormItem[]>): void {
+        this._refresh$.next();
+        this._refresh$.complete();
+
+        this._refresh$ = new Subject();
+
+        items.pipe(takeUntil(merge(this._refresh$, this._onDestroy$))).subscribe((formItems) => {
+            this._mappedFormitems = mapFormItems(formItems);
+            this._generateForm();
+        });
+    }
+
+    /** @hidden */
+    private _applyRank(items: DynamicFormItem[]): DynamicFormItem[] {
+        items = items.map((item, index) => {
+            item.rank = item.rank || index;
+            if (item.items) {
+                item.items = this._applyRank(item.items);
+            }
+            return item;
+        });
+
+        return items;
+    }
+
+    /** @hidden */
+    private _addControlToFormItems(item: DynamicFormItem, path?: string[]): void {
+        if (!path) {
+            this._mappedFormitems.set(item.name, transformFormItem(item, this._mappedFormitems.size));
+            return;
+        }
+
+        const parentItem = getParentItem(path, this._mappedFormitems);
+
+        if (!parentItem || isFormFieldItem(parentItem)) {
+            return;
+        }
+
+        parentItem.items = parentItem.items || new Map();
+        parentItem.items.set(item.name, transformFormItem(item, parentItem.items.size));
+    }
+
+    /** @hidden */
+    private _removeControlFromItems(name: string, path?: string[]): void {
+        if (!path) {
+            this._mappedFormitems.delete(name);
+            return;
+        }
+
+        const parentItem = getParentItem(path, this._mappedFormitems);
+
+        if (!parentItem || isFormFieldItem(parentItem)) {
+            return;
+        }
+
+        parentItem.items?.delete(name);
     }
 }

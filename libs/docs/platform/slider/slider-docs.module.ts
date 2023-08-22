@@ -10,7 +10,7 @@ import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 
 import { PlatformSliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
-import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+
 import { CommonModule } from '@angular/common';
 import { SliderBasicExampleComponent } from './examples/base/slider-basic-example.component';
 import { SliderRangeExampleComponent } from './examples/range/slider-range-example.component';
@@ -55,6 +55,6 @@ const routes: Routes = [
         SliderFormFieldExampleComponent
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [platformContentDensityModuleDeprecationsProvider('fdp-slider'), currentComponentProvider('slider')]
+    providers: [currentComponentProvider('slider')]
 })
 export class PlatformSliderDocsModule {}

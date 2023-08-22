@@ -20,7 +20,7 @@ import { isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
 import {
     ArrayValueHelpDialogDataSource,
@@ -126,41 +126,9 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     @Input()
     conditionDisplayFn = defaultConditionDisplayFn;
 
-    /**
-     * @deprecated use i18n capabilities instead
-     * Select from list tab's and Search table settings
-     * */
-    @Input()
-    set selectTabTitle(value: string) {
-        warnOnce(
-            "Property selectTabTitle is deprecated. Use i18n capabilities 'platformVHD.selectTabTitle' key instead."
-        );
-        this._selectTabTitle = value;
-    }
-
-    get selectTabTitle(): string {
-        return this._selectTabTitle;
-    }
-
     /** Selection mode for search table */
     @Input()
     searchSelection: VdhTableSelection = 'multi';
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Text displayed when table has no items.
-     */
-    @Input()
-    set searchTableEmptyMessage(value: string) {
-        warnOnce(
-            "Property searchTableEmptyMessage is deprecated. Use i18n capabilities 'platformVHD.searchTableEmptyMessage' key instead."
-        );
-        this._searchTableEmptyMessage = value;
-    }
-
-    get searchTableEmptyMessage(): string {
-        return this._searchTableEmptyMessage;
-    }
 
     /** Items per page for pagination below search table */
     @Input()
@@ -177,22 +145,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** Loading state */
     @Input()
     loading: boolean | undefined;
-
-    /**
-     * @deprecated use i18n capabilities instead
-     * Define conditions tab's settings
-     */
-    @Input()
-    set defineTabTitle(value: string) {
-        warnOnce(
-            "Property defineTabTitle is deprecated. Use i18n capabilities 'platformVHD.defineTabTitle' key instead."
-        );
-        this._defineTabTitle = value;
-    }
-
-    get defineTabTitle(): string {
-        return this._defineTabTitle;
-    }
 
     /** Custom strategies labels
      * Allowed keys: contains, equalTo, between, startsWith, endsWith, lessThan, lessThanEqual, greaterThan, greaterThanEqual, empty
@@ -260,9 +212,6 @@ export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnD
     /** handles rtl service
      * @hidden */
     _dir = 'ltr';
-
-    /** @hidden */
-    private _searchTableEmptyMessage: string;
 
     /** @hidden */
     private _selectTabTitle: string;

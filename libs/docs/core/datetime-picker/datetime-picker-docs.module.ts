@@ -17,12 +17,9 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import {
-    DatetimePickerModule,
-    DeprecatedDateTimePickerContentDensityDirective
-} from '@fundamental-ngx/core/datetime-picker';
+import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { moduleDeprecationsProvider, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { DatetimeMobileExampleComponent } from './examples/datetime-mobile/datetime-mobile-example.component';
 
 const routes: Routes = [
@@ -62,9 +59,6 @@ const routes: Routes = [
         DatetimePickerComplexI18nExampleComponent,
         DatetimeMobileExampleComponent
     ],
-    providers: [
-        moduleDeprecationsProvider(DeprecatedDateTimePickerContentDensityDirective),
-        currentComponentProvider('datetime-picker')
-    ]
+    providers: [currentComponentProvider('datetime-picker')]
 })
 export class DatetimePickerDocsModule {}
