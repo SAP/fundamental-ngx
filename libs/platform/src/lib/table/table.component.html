@@ -135,7 +135,7 @@
                             <tr fd-table-row *fdkRepeat="3">
                                 <td fd-table-cell *fdkRepeat="_tableColumnsLength">
                                     <fd-skeleton
-                                        style="margin: auto 0"
+                                        [style.margin]="'auto 0'"
                                         type="text"
                                         textLines="1"
                                         width="60%"
@@ -183,7 +183,7 @@
     <tbody *ngIf="!_dataSourceDirective._firstLoadingDone" fd-table-body>
         <tr fd-table-row *fdkRepeat="3">
             <td fd-table-cell *fdkRepeat="_tableColumnsLength">
-                <fd-skeleton style="margin: auto 0" type="text" textLines="1" width="60%"></fd-skeleton>
+                <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
             </td>
         </tr>
     </tbody>

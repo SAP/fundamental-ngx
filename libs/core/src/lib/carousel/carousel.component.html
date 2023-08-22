@@ -37,7 +37,7 @@
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
-    <div style="display: none" role="region" [attr.id]="id + '-accessibility'" aria-live="polite" dir="ltr">
+    <div [style.display]="'none'" role="region" [attr.id]="id + '-accessibility'" aria-live="polite" dir="ltr">
         {{ screenReaderLabel }}
     </div>
 </div>

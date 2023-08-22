@@ -59,7 +59,7 @@
     </fd-popover-body>
 </fd-popover>
 
-<div style="display: none" aria-hidden="true">
+<div [style.display]="'none'" aria-hidden="true">
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
         <ng-container [ngSwitch]="state">
             <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>

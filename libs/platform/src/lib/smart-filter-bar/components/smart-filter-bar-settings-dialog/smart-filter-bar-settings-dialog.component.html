@@ -73,7 +73,7 @@
 </fd-dialog>
 
 <ng-template #loadingTpl>
-    <div style="text-align: center; margin: 1rem">
+    <div [style.text-align]="'center'" [style.margin.rem]="1">
         <fd-busy-indicator [loading]="true"></fd-busy-indicator>
     </div>
 </ng-template>

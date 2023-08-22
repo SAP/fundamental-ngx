@@ -14,7 +14,7 @@
 
     <!-- Toolbar -->
     <fd-toolbar class="fdp-upload-collection__toolbar">
-        <div style="flex: 1 auto">
+        <div [style.flex]="'1 auto'">
             <fd-breadcrumb [id]="id + '-breadcrumb'">
                 <fd-breadcrumb-item>
                     <ng-template #multipleBreadcrumbs>
@@ -48,7 +48,7 @@
             </fd-breadcrumb>
         </div>
 
-        <fd-toolbar-spacer style="max-width: 3rem"></fd-toolbar-spacer>
+        <fd-toolbar-spacer [style.max-width.rem]="3"></fd-toolbar-spacer>
         <ng-container *ngIf="readonly || selectedItems.length === 0">
             <fd-input-group
                 *ngIf="showSearch"
