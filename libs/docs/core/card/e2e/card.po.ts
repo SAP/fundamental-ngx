@@ -26,7 +26,7 @@ export class CardPo extends CoreBaseComponentPo {
     ftCardListItems = 'fd-card-footer-example fd-card:first-of-type li';
     ftFooter = 'fd-card-footer-example fd-card-footer';
     ftCardFooterActionItems =
-        'fd-card-footer-example fd-card:first-of-type fd-card-footer .fd-card__footer-actions-item';
+        'fd-card-footer-example fd-card:first-of-type fd-card-footer .fd-card__footer-actions button';
     // analytical card examples
     kpiCardHeader = 'fd-card-kpi-example fd-card-header';
     kpiCardTitle = 'fd-card-kpi-example .fd-card__title';

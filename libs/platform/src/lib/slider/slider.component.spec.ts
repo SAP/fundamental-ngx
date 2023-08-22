@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { SliderCustomValue } from '@fundamental-ngx/core/slider';
+import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { PlatformSliderModule } from './slider.module';
 
@@ -22,6 +22,7 @@ import { PlatformSliderModule } from './slider.module';
                     tooltipMode="readonly"
                     name="value1"
                     formControlName="value1"
+                    [vertical]="vertical"
                 >
                 </fdp-slider>
             </fdp-form-field>
@@ -65,7 +66,9 @@ import { PlatformSliderModule } from './slider.module';
             </fdp-form-field>
         </fdp-form-group>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
 })
 class TestSliderComponent {
     customValues: SliderCustomValue[] = [
@@ -113,6 +116,8 @@ class TestSliderComponent {
     get value6(): number {
         return this.customForm.controls['value6'].value!;
     }
+
+    vertical = false;
 }
 
 describe('PlatformSliderComponent', () => {
@@ -122,8 +127,7 @@ describe('PlatformSliderComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestSliderComponent],
-            imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
+            imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule, TestSliderComponent]
         }).compileComponents();
     });
 
@@ -133,7 +137,7 @@ describe('PlatformSliderComponent', () => {
 
         await whenStable(fixture);
 
-        bodyClientWidth = fixture.nativeElement.ownerDocument.body.clientWidth;
+        bodyClientWidth = 100;
     });
 
     it('should create', () => {
@@ -191,6 +195,19 @@ describe('PlatformSliderComponent', () => {
     });
 
     it('should display 11 ticks marks and 11 Labels', () => {
+        const sliderComponent = fixture.debugElement.query(By.directive(SliderComponent)).componentInstance;
+        jest.spyOn(sliderComponent.trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
+        (sliderComponent as any)._onResize();
+        fixture.detectChanges();
         const ticksMarks = fixture.debugElement.queryAll(By.css('.example-1 .fd-slider__tick'));
         const labels = fixture.debugElement.queryAll(By.css('.example-1 .fd-slider__label'));
 
@@ -199,6 +216,19 @@ describe('PlatformSliderComponent', () => {
     });
 
     it('should display 11 ticks marks and 6 Labels', () => {
+        const sliders = fixture.debugElement.queryAll(By.directive(SliderComponent)).map((el) => el.componentInstance);
+        jest.spyOn(sliders[1].trackEl.nativeElement as any, 'getBoundingClientRect').mockImplementation(() => ({
+            height: 2,
+            width: bodyClientWidth,
+            x: 0,
+            y: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0
+        }));
+        (sliders[1] as any)._onResize();
+        fixture.detectChanges();
         const ticksMarks = fixture.debugElement.queryAll(By.css('.example-2 .fd-slider__tick'));
         const labels = fixture.debugElement.queryAll(By.css('.example-2 .fd-slider__label'));
 
@@ -219,6 +249,14 @@ describe('PlatformSliderComponent', () => {
         await whenStable(fixture);
 
         expect(handles.length).toEqual(2);
+    });
+
+    it('should consume vertical state', () => {
+        const slider = fixture.debugElement.query(By.directive(SliderComponent));
+        expect(slider.nativeElement.classList).not.toContain('fd-slider--vertical');
+        component.vertical = true;
+        fixture.detectChanges();
+        expect(slider.nativeElement.classList).toContain('fd-slider--vertical');
     });
 
     // TODO investigate and fix - ticket #4893

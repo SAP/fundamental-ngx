@@ -6,6 +6,7 @@ import { SliderRangeExampleComponent } from './range/slider-range-example.compon
 import { SliderTicksAndLabelsExampleComponent } from './ticks-and-labels/slider-ticks-and-labels-example.component';
 import { SliderTooltipExampleComponent } from './tooltip/slider-tooltip-example.component';
 import { SliderFormExampleComponent } from './form/slider-form-example.component';
+import { VerticalSliderExampleComponent } from './vertical/vertical-slider-example.component';
 
 export const COMPONENTS = [
     SliderBasicExampleComponent,
@@ -15,5 +16,6 @@ export const COMPONENTS = [
     SliderCustomValuesExampleComponent,
     SliderTooltipExampleComponent,
     SliderCozyExampleComponent,
-    SliderFormExampleComponent
+    SliderFormExampleComponent,
+    VerticalSliderExampleComponent
 ];

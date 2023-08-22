@@ -1,7 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { TextComponent } from './text.component';
-import { TextModule } from './text.module';
 import { ChangeDetectionStrategy, NO_ERRORS_SCHEMA } from '@angular/core';
 import { patchLanguage } from '@fundamental-ngx/i18n';
 
@@ -14,7 +13,7 @@ describe('TextComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [TextModule],
+            imports: [TextComponent],
             schemas: [NO_ERRORS_SCHEMA]
         })
             .overrideComponent(TextComponent, {

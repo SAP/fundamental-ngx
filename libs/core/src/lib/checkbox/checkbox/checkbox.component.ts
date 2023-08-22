@@ -8,24 +8,23 @@ import {
     EventEmitter,
     forwardRef,
     HostBinding,
-    Inject,
     Input,
     OnDestroy,
-    Optional,
     Output,
     Renderer2,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
-import { LIST_ITEM_COMPONENT, ListItemInterface, Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_CHECKBOX_COMPONENT } from '../tokens';
+import { NgClass, NgIf } from '@angular/common';
 
 let checkboxUniqueId = 0;
 
@@ -50,7 +49,9 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
         registerFormItemControl(CheckboxComponent),
         contentDensityObserverProviders()
     ],
-    host: { '[attr.tabindex]': '-1' }
+    host: { '[attr.tabindex]': '-1' },
+    standalone: true,
+    imports: [NgIf, FormsModule, NgClass]
 })
 export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
@@ -60,6 +61,12 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     /** @hidden */
     @ViewChild('labelElement')
     labelElement: ElementRef;
+
+    /** Whether input label should be wrapped */
+    @Input() wrapLabel: boolean;
+
+    /** Vertical position of the label compared to the checkbox box */
+    @Input() valignLabel: 'top' | 'middle' = 'middle';
 
     /** Sets the `aria-label` attribute to the element. */
     @Input()
@@ -123,6 +130,10 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     @Input()
     required = false;
 
+    /** Whether the checkbox should be rendered in display-only mode. */
+    @Input()
+    displayOnly = false;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -131,6 +142,7 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     set values(checkboxValues: FdCheckboxValues) {
         this._values = { ...FD_CHECKBOX_VALUES_DEFAULT, ...(checkboxValues ?? {}) };
     }
+
     get values(): FdCheckboxValues {
         return this._values;
     }
@@ -179,8 +191,7 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _changeDetectorRef: ChangeDetectorRef,
         private renderer: Renderer2,
-        readonly _contentDensityObserver: ContentDensityObserver,
-        @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
+        readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this.tabIndexValue = tabIndexValue;
     }
@@ -274,11 +285,24 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     }
 
     /** @hidden handles click on the label associated with native checkbox input */
-    _onLabelClick(event: Event): void {
+    _onLabelClick(event: MouseEvent): void {
         // We have to stop propagation for click events on the input label.
         // By default, when a user clicks on a label element, a generated click event will be
         // dispatched on the associated input element. This will lead to duplicated "click" event dispatched from the component
         event.stopPropagation();
+
+        // If we have display-only mode, stop any possible actions by label click event.
+        this._handleDisplayOnlyMode(event);
+    }
+
+    /**
+     * @hidden
+     * Event handler for cases when checkbox was toggled with the help of keyboard.
+     * @param event
+     */
+    _onLabelKeydown(event: Event): void {
+        // If we have display-only mode, stop any possible actions by label click event.
+        this._handleDisplayOnlyMode(event);
     }
 
     /** @hidden handles click on the native checkbox input */
@@ -287,8 +311,20 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
         // This is needed in order to set the value to the component before any external listeners will receive it.
         // Otherwise checkbox might be out of sync.
         event.stopPropagation();
+        if (this.displayOnly) {
+            return;
+        }
         this.nextValue();
         this.elementRef.nativeElement.dispatchEvent(new MouseEvent(event.type, event));
+    }
+
+    /** @hidden */
+    private _handleDisplayOnlyMode(event: Event): void {
+        if (!this.displayOnly) {
+            return;
+        }
+        event.preventDefault();
+        event.stopImmediatePropagation();
     }
 
     /** @hidden Based on current control value sets new control state. */

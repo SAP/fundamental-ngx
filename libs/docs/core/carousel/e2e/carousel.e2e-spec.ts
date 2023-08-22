@@ -215,17 +215,17 @@ describe('Carousel test suite', () => {
 
     describe('carousel with looped navigation example', () => {
         it('should check loop navigation', async () => {
-            const firstImg = await getAttributeByName(displayedImg, imgSource, 5);
+            const firstImg = await getAttributeByName(displayedImg, imgSource, 6);
 
-            await click(navBtns, 14);
+            await click(navBtns, 16);
             // pause for animation to complete
             await pause(1500);
-            await expect(await getAttributeByName(displayedImg, imgSource, 5)).not.toBe(firstImg);
+            await expect(await getAttributeByName(displayedImg, imgSource, 6)).not.toBe(firstImg);
 
-            await click(navBtns, 15);
+            await click(navBtns, 17);
             // pause for animation to complete
             await pause(1500);
-            await expect(await getAttributeByName(displayedImg, imgSource, 5)).toBe(firstImg);
+            await expect(await getAttributeByName(displayedImg, imgSource, 6)).toBe(firstImg);
         });
     });
 

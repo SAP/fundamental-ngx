@@ -10,6 +10,8 @@ import {
     DestroyRef,
     ElementRef,
     forwardRef,
+    HostBinding,
+    inject,
     Inject,
     Input,
     Optional,
@@ -36,6 +38,12 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { ToolbarItem } from './abstract-toolbar-item.class';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { ToolbarSeparatorComponent } from './toolbar-separator.component';
+import { ToolbarSpacerDirective } from './toolbar-spacer.directive';
+import { NgIf, NgFor } from '@angular/common';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -61,6 +69,16 @@ export const enum OverflowPriorityEnum {
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT
         })
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        ToolbarSpacerDirective,
+        ToolbarSeparatorComponent,
+        PopoverModule,
+        ButtonModule,
+        NgFor,
+        DynamicPortalComponent
     ]
 })
 export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssClassBuilder, AfterContentInit {
@@ -119,9 +137,15 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     @Input()
     tabindex = -1;
 
-    /** @hidden */
-    @ViewChild('toolbar')
-    toolbar: ElementRef;
+    /** Toolbar Aria-label attribute. */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string;
+
+    /** Toolbar Aria-labelledby attribute. */
+    @Input()
+    @HostBinding('attr.aria-labelledby')
+    ariaLabelledBy: string;
 
     /** @hidden */
     @ViewChild('titleElement')
@@ -147,6 +171,13 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     overflownItems: ToolbarItem[] = [];
 
+    /** HTML Element Reference. */
+    readonly elementRef = inject(ElementRef);
+
+    /** @hidden */
+    @HostBinding('attr.role')
+    private readonly _role = 'toolbar';
+
     /** @hidden */
     private _titleComponent$: BehaviorSubject<TitleToken | null> = new BehaviorSubject<TitleToken | null>(null);
 
@@ -155,7 +186,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
 
     /** @hidden */
     private get _toolbarWidth(): number {
-        return (this.toolbar.nativeElement as HTMLElement).clientWidth - OVERFLOW_SPACE;
+        return (this.elementRef.nativeElement as HTMLElement).clientWidth - OVERFLOW_SPACE;
     }
 
     /** @hidden */
@@ -191,7 +222,7 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** @hidden */
     ngAfterViewInit(): void {
         this.overflowItems$ = combineLatest([
-            this.resizeObserverService.observe(this.toolbar.nativeElement).pipe(map(() => this._toolbarWidth)),
+            this.resizeObserverService.observe(this.elementRef.nativeElement).pipe(map(() => this._toolbarWidth)),
             this.toolbarItems.changes.pipe(
                 startWith(this.toolbarItems),
                 map((toolbarItems) => toolbarItems.toArray())
@@ -274,11 +305,6 @@ export class ToolbarComponent implements AfterViewInit, AfterViewChecked, CssCla
     /** Change detection reference */
     detectChanges(): void {
         this._cd.detectChanges();
-    }
-
-    /** @hidden */
-    get elementRef(): ElementRef {
-        return this.toolbar;
     }
 
     /** Method triggering collapsible toolbar  */

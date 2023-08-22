@@ -70,6 +70,21 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="label-wrapping" componentName="checkbox">
+    Checkbox with label wrapping
+</fd-docs-section-title>
+<description>
+    Checkbox labels by default do not wrap. If you want to wrap the labels, then you should use
+    <code>fd-checkbox[wrapLabel]</code>
+    input
+</description>
+<component-example>
+    <fd-checkbox-label-wrapping-example></fd-checkbox-label-wrapping-example>
+</component-example>
+<code-example [exampleFiles]="checkboxLabelWrapping"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="states" componentName="checkbox"> Checkbox styling properties </fd-docs-section-title>
 <description>
     Checkbox can be but in various states by modifying following properties:
@@ -92,3 +107,17 @@
     <fd-checkbox-states-example></fd-checkbox-states-example>
 </component-example>
 <code-example [exampleFiles]="checkboxStates"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="display-mode" componentName="checkbox">
+    Checkbox with Display-only mode
+</fd-docs-section-title>
+<description>
+    For cases when users should not interact with the Checkbox, developers can set it to 'Display-only' mode with
+    <code>[displayOnly]="true"</code> input property.
+</description>
+<component-example>
+    <fd-checkbox-display-mode-example></fd-checkbox-display-mode-example>
+</component-example>
+<code-example [exampleFiles]="checkboxDisplayOnlyMode"></code-example>

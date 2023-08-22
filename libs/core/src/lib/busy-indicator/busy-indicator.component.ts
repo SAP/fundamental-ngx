@@ -11,6 +11,7 @@ import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { TAB } from '@angular/cdk/keycodes';
 import { FD_BUSY_INDICATOR_COMPONENT } from './tokens';
+import { NgIf } from '@angular/common';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
 
@@ -35,7 +36,9 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[attr.title]': 'title',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block'
-    }
+    },
+    standalone: true,
+    imports: [NgIf]
 })
 export class BusyIndicatorComponent {
     /** Whether to display the loading indicator animation. */
@@ -60,7 +63,7 @@ export class BusyIndicatorComponent {
 
     /** add loading label value */
     @Input()
-    label: string;
+    label?: string;
 
     /** Aria live attribute value. */
     @Input()

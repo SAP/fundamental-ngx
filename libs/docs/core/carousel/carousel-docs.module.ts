@@ -22,6 +22,7 @@ import { CarouselLoopedNavigationExampleComponent } from './examples/carousel-lo
 import { CarouselErrorMessageExampleComponent } from './examples/carousel-error-message-example.component';
 import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
 import { CarouselAutoSlidesExampleComponent } from './examples/carousel-auto-slides-example.component';
+import { CarouselBackgroundExampleComponent } from './examples/carousel-background-example.component';
 
 const routes: Routes = [
     {
@@ -60,7 +61,8 @@ const routes: Routes = [
         CarouselLoopedNavigationExampleComponent,
         CarouselErrorMessageExampleComponent,
         CarouselLoadingContentExampleComponent,
-        CarouselAutoSlidesExampleComponent
+        CarouselAutoSlidesExampleComponent,
+        CarouselBackgroundExampleComponent
     ],
     providers: [currentComponentProvider('carousel')]
 })

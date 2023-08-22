@@ -1,16 +1,21 @@
-import { ChangeDetectorRef, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-slider-position]'
+    selector: '[fd-slider-position]',
+    standalone: true
 })
 export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
     /** Position of the slider */
     @Input()
     position: number;
+
+    /** Whether the slider is rendered vertically. */
+    @Input()
+    vertical = false;
 
     /** @hidden */
     private _isRtl = false;
@@ -20,8 +25,8 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     constructor(
-        private readonly _cd: ChangeDetectorRef,
         private readonly _elementRef: ElementRef<HTMLElement>,
+        private readonly _renderer: Renderer2,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -44,10 +49,13 @@ export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     private _setPosition(): void {
-        const { style } = this._elementRef.nativeElement;
+        if (this.vertical) {
+            this._renderer.setStyle(this._elementRef.nativeElement, 'bottom', `${this.position}%`);
+            return;
+        }
 
-        style.left = !this._isRtl ? `${this.position}%` : 'unset';
-        style.right = this._isRtl ? `${this.position}%` : 'unset';
+        this._renderer.setStyle(this._elementRef.nativeElement, 'left', !this._isRtl ? `${this.position}%` : 'unset');
+        this._renderer.setStyle(this._elementRef.nativeElement, 'right', this._isRtl ? `${this.position}%` : 'unset');
     }
 
     /** @hidden Rtl change subscription */
