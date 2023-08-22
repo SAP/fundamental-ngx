@@ -45,16 +45,14 @@ const routes: Routes = [
         ListModule,
         SegmentedButtonModule,
         TableModule,
-        ToolbarModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ToolbarModule,
         ResizableCardLayoutDocsComponent,
         ResizableCardLayoutDocsHeaderComponent,
         ResizableCardLayoutExampleComponent,
         ResizableCardLayoutExampleLayoutConfigComponent,
         ResizableCardLayoutExampleItemConfigComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('resizable-card-layout')]
 })
 export class ResizableCardLayoutDocsModule {}

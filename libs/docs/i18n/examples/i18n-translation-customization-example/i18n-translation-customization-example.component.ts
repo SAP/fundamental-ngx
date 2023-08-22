@@ -1,10 +1,23 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FdLanguagePatch } from '@fundamental-ngx/i18n';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
+import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { TranslationWrapper2Component } from './translation-wrapper-2.component';
+import { TranslationWrapper1Component } from './translation-wrapper-1.component';
 
 @Component({
     selector: 'app-i18n-translation-customization-example',
     templateUrl: './i18n-translation-customization-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormLabelModule,
+        PlatformTextAreaModule,
+        FdPatchLanguageDirective,
+        TranslationWrapper1Component,
+        TranslationWrapper2Component
+    ]
 })
 export class PlatformI18nTranslationCustomizationExampleComponent {
     /** part of the language object to be overriden using `fdPatchLanguage` directive */

@@ -31,10 +31,7 @@ const routes: Routes = [
         FeedInputModule,
         SharedDocumentationPageModule,
         AvatarModule,
-        FormControlModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FormControlModule,
         FeedInputHeaderComponent,
         FeedInputDocsComponent,
         FeedInputExampleComponent,
@@ -44,6 +41,7 @@ const routes: Routes = [
         FeedInputGrowExampleComponent,
         FeedInputCircleAvatarExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('feed-input')]
 })
 export class FeedInputDocsModule {}

@@ -25,9 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FormModule,
+        InlineHelpModule,
         TextareaDocsComponent,
         TextareaHeaderComponent,
         TextareaExampleComponent,
@@ -35,6 +37,7 @@ const routes: Routes = [
         TextareaFormGroupExampleComponent,
         TextareaInlineHelpExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('textarea')]
 })
 export class TextareaDocsModule {}

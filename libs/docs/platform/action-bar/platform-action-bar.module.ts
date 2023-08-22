@@ -36,10 +36,7 @@ const routes: Routes = [
         PlatformActionBarModule,
         PlatformButtonModule,
         PlatformMenuModule,
-        PlatformActionButtonGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformActionButtonGroupModule,
         PlatformActionBarDocsComponent,
         PlatformActionBarHeaderComponent,
         PlatformActionBarExamplesComponent,
@@ -50,6 +47,7 @@ const routes: Routes = [
         PlatformActionBarWithPositiveNegativeActionsExampleComponent,
         PlatformActionBarCozyModeExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('action-bar')]
 })
 export class PlatformActionBarDocsModule {}

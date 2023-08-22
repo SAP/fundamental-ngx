@@ -29,15 +29,13 @@ const routes: Routes = [
         FormModule,
         PopoverModule,
         InputGroupModule,
-        MultiInputModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        MultiInputModule,
         FormMessageDocsComponent,
         FormMessageHeaderComponent,
         FormMessageExampleComponent,
         FormMessagingStateExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('form-message')]
 })
 export class FormMessageDocsModule {}

@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformActionListItemBorderLessExampleComponent } from './examples/platform-action-list-item-border-less-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformActionListItemExampleComponent } from './examples/platform-action-list-item-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const aliSrc = 'platform-action-list-item-example.component.html';
 const aliSrcTs = 'platform-action-list-item-example.component.ts';
@@ -9,7 +16,17 @@ const borderLessALITs = 'platform-action-list-item-border-less-example.component
 
 @Component({
     selector: 'app-action-list-item',
-    templateUrl: './platform-action-list-item-docs.component.html'
+    templateUrl: './platform-action-list-item-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformActionListItemExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformActionListItemBorderLessExampleComponent
+    ]
 })
 export class PlatformActionListItemDocsComponent {
     simpleALI: ExampleFile[] = [

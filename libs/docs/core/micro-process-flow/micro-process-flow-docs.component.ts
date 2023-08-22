@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { MicroProcessFlowCustomWidthExampleComponent } from './examples/micro-process-flow-custom-width-example.component';
+import { MicroProcessFlowObjectBetweenNodesExampleComponent } from './examples/micro-process-flow-object-between-nodes-example.component';
+import { MicroProcessFlowOverflowExampleComponent } from './examples/micro-process-flow-overflow-example.component';
+import { MicroProcessFlowPopoverExampleComponent } from './examples/micro-process-flow-popover-example.component';
+import { MicroProcessFlowOtherControlsExampleComponent } from './examples/micro-process-flow-other-controls-example.component';
+import { RouterLink } from '@angular/router';
+import { MicroProcessFlowIndependentItemsExampleComponent } from './examples/micro-process-flow-independent-items-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { MicroProcessFlowExampleComponent } from './examples/micro-process-flow-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const microProcessFlowExampleHtml = 'micro-process-flow-example.component.html';
 const microProcessFlowExampleTs = 'micro-process-flow-example.component.ts';
@@ -23,7 +36,23 @@ const microProcessFlowObjectBetweenNodesExampleHtml = 'micro-process-flow-object
 const microProcessFlowObjectBetweenNodesExampleTs = 'micro-process-flow-object-between-nodes-example.component.ts';
 @Component({
     selector: 'app-micro-process-flow-docs',
-    templateUrl: './micro-process-flow-docs.component.html'
+    templateUrl: './micro-process-flow-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MicroProcessFlowExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MicroProcessFlowIndependentItemsExampleComponent,
+        RouterLink,
+        MicroProcessFlowOtherControlsExampleComponent,
+        MicroProcessFlowPopoverExampleComponent,
+        MicroProcessFlowOverflowExampleComponent,
+        MicroProcessFlowObjectBetweenNodesExampleComponent,
+        MicroProcessFlowCustomWidthExampleComponent
+    ]
 })
 export class MicroProcessFlowDocsComponent {
     basicExample: ExampleFile[] = [

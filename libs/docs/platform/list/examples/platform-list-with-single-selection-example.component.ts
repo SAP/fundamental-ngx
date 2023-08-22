@@ -3,6 +3,11 @@ import { Observable, of } from 'rxjs';
 
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
+import { StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { FormsModule } from '@angular/forms';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 
 const LIST_ELEMENTS: Address[] = [
     { id: '1', name: 'Name1' },
@@ -31,7 +36,9 @@ export class ListDataProvider extends DataProvider<Address> {
 }
 @Component({
     selector: 'fdp-platform-list-with-single-selection-example',
-    templateUrl: './platform-list-with-single-selection-example.component.html'
+    templateUrl: './platform-list-with-single-selection-example.component.html',
+    standalone: true,
+    imports: [ToolbarComponent, ToolbarLabelDirective, PlatformListModule, FormsModule, StandardListItemModule]
 })
 export class PlatformListWithSingleSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());

@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { RatingIndicatorSize } from '@fundamental-ngx/core/rating-indicator';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor, JsonPipe } from '@angular/common';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 
 @Component({
     selector: 'fd-ri-dynamic-example',
-    templateUrl: './ri-dynamic-example.component.html'
+    templateUrl: './ri-dynamic-example.component.html',
+    standalone: true,
+    imports: [RatingIndicatorModule, NgIf, FormsModule, NgFor, JsonPipe]
 })
 export class RatingIndicatorDynamicExampleComponent {
     config = {

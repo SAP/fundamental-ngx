@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-template-based-message-box-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './template-based-message-box-example.component.html'
+    templateUrl: './template-based-message-box-example.component.html',
+    standalone: true,
+    imports: [MessageBoxModule, TitleComponent, BarModule, InitialFocusDirective, ButtonModule]
 })
 export class TemplateBasedMessageBoxExampleComponent {
     confirmationReason: string;

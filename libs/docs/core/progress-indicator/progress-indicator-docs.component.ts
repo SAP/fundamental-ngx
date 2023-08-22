@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ProgressIndicatorAnimationComponent as ProgressIndicatorAnimationComponent_1 } from './examples/progress-indicator-animation.component';
+import { ProgressIndicatorTruncationComponent as ProgressIndicatorTruncationComponent_1 } from './examples/progress-indicator-truncation.component';
+import { ProgressIndicatorStateComponent as ProgressIndicatorStateComponent_1 } from './examples/progress-indicator-state.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { ProgressIndicatorDefaultComponent as ProgressIndicatorDefaultComponent_1 } from './examples/progress-indicator-default.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const ProgressIndicatorDefaultComponent = 'progress-indicator-default.component.html';
 const ProgressIndicatorDefaultComponentTs = 'progress-indicator-default.component.ts';
@@ -14,7 +23,19 @@ const ProgressIndicatorStateComponentTs = 'progress-indicator-state.component.ts
 @Component({
     selector: 'fd-progress-indicator-docs',
     templateUrl: './progress-indicator-docs.component.html',
-    styleUrls: ['progress-indicator-docs.component.scss']
+    styleUrls: ['progress-indicator-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ProgressIndicatorDefaultComponent_1,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ProgressIndicatorStateComponent_1,
+        ProgressIndicatorTruncationComponent_1,
+        ProgressIndicatorAnimationComponent_1
+    ]
 })
 export class ProgressIndicatorDocsComponent {
     defaultProgressIndicatorHtmlType: ExampleFile[] = [

@@ -17,6 +17,10 @@ import {
 } from '@fundamental-ngx/platform/form';
 import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
 import { take } from 'rxjs/operators';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
 
 @Component({
     selector: 'fdp-settings-generator-slider',
@@ -33,7 +37,9 @@ import { take } from 'rxjs/operators';
             </ng-container>
         </ng-container>
     `,
-    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
+    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl<SliderDynamicFormControl> {
     constructor() {
@@ -54,7 +60,9 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
     selector: 'fdp-settings-generator-custom-control-example',
     templateUrl: './settings-generator-custom-control-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SettingsGeneratorModule, BarModule]
 })
 export class SettingsGeneratorCustomControlExampleComponent {
     // By specifying first generic type of SettingsModel we are notifying typescipt's suggestions engine to include SliderDynamicFormControl type into available `items` options.

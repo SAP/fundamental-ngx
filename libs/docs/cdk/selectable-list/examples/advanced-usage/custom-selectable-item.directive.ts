@@ -8,7 +8,8 @@ import { Directive, ElementRef, forwardRef } from '@angular/core';
             provide: FDK_SELECTABLE_ITEM_PROVIDER,
             useExisting: forwardRef(() => CustomSelectableItemDirective)
         }
-    ]
+    ],
+    standalone: true
 })
 export class CustomSelectableItemDirective implements Partial<SelectableItemToken<HTMLElement, string>> {
     private _isSelected = false;

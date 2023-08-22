@@ -31,15 +31,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), CommonModule, SharedDocumentationPageModule, PlatformThumbnailModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        SharedDocumentationPageModule,
+        PlatformThumbnailModule,
         PlatformThumbnailDocsComponent,
         PlatformThumbnailHeaderComponent,
         PlatformThumbnailBasicExampleComponent,
         PlatformThumbnailHorizontalExampleComponent,
         PlatformThumbnailVideoMediaExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('thumbnail')]
 })
 export class PlatformThumbnailDocsModule {}

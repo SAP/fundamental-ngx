@@ -32,9 +32,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SideNavigationModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        SideNavigationModule,
         SideNavigationDocsComponent,
         SideNavigationHeaderComponent,
         SideNavigationExampleComponent,
@@ -49,6 +50,7 @@ const routes: Routes = [
         SideNavigationMultipleSelectedExampleComponent,
         SideNavigationNonSelectableExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('side-navigation')]
 })
 export class SideNavigationDocsModule {}

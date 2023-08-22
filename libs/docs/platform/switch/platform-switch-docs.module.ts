@@ -25,9 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformSwitchModule, FdpFormGroupModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformSwitchModule,
+        FdpFormGroupModule,
         SwitchHeaderComponent,
         SwitchDocsComponent,
         DisabledSwitchExampleComponent,
@@ -36,6 +38,7 @@ const routes: Routes = [
         SwitchSizesExampleComponent,
         SwitchConfigExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('switch')]
 })
 export class PlatformSwitchDocsModule {}

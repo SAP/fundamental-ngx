@@ -1,4 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdk-initial-focus-default-example',
@@ -14,7 +22,18 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        InitialFocusDirective,
+        LinkComponent,
+        RouterLink,
+        FormItemModule,
+        FormLabelModule,
+        FormControlModule
+    ]
 })
 export class InitialFocusDefaultExampleComponent {
     currentExample: string;

@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
 import { DragoverPredicate, DropPredicate, FdDndDropEventMode, FdDropEvent, isOdd } from '@fundamental-ngx/cdk/utils';
 import { delay, of } from 'rxjs';
+import { NgFor, NgStyle } from '@angular/common';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
     selector: 'fd-dnd-disabled-example',
@@ -31,6 +38,17 @@ import { delay, of } from 'rxjs';
                 background-color: red;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        CheckboxComponent,
+        BusyIndicatorComponent,
+        DragAndDropModule,
+        NgFor,
+        NgStyle
     ]
 })
 export class DisabledExampleComponent {

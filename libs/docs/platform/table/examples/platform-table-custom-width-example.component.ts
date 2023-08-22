@@ -3,12 +3,25 @@ import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-custom-width-example',
     templateUrl: './platform-table-custom-width-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformButtonModule
+    ]
 })
 export class PlatformTableCustomWidthExampleComponent {
     source: TableDataSource<ExampleItem>;

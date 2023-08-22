@@ -8,13 +8,48 @@ import {
 } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { FormsModule } from '@angular/forms';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-wizard-dialog-example',
     templateUrl: './wizard-dialog-example.component.html',
     styleUrls: ['./wizard-dialog-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        WizardModule,
+        MessageStripComponent,
+        FormItemModule,
+        FormLabelModule,
+        FormControlModule,
+        FormsModule,
+        LayoutGridModule,
+        LinkComponent,
+        RouterLink,
+        BarModule,
+        NgIf,
+        ButtonModule
+    ]
 })
 export class WizardDialogExampleComponent {
     step1status: WizardStepStatus = 'current';

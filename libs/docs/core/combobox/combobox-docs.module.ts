@@ -24,9 +24,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [ListModule, FormModule, ComboboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [
+        ListModule,
+        FormModule,
+        ComboboxModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        examples,
+        ComboboxDocsComponent,
+        ComboboxHeaderComponent,
+        ComboboxBylineExampleComponent
+    ],
     exports: [RouterModule],
-    declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent, ComboboxBylineExampleComponent],
     providers: [currentComponentProvider('combobox')]
 })
 export class ComboboxDocsModule {}

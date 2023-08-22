@@ -1,10 +1,27 @@
 import { Component } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-dialog-state-example',
     templateUrl: './dialog-state-example.component.html',
-    styleUrls: ['../dialog-examples.component.scss']
+    styleUrls: ['../dialog-examples.component.scss'],
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        InitialFocusDirective,
+        ButtonModule
+    ]
 })
 export class DialogStateExampleComponent {
     constructor(public dialogService: DialogService) {}

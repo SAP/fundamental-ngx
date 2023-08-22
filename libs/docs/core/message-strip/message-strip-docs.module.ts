@@ -24,9 +24,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
         MessageStripHeaderComponent,
         MessageStripDocsComponent,
         MessageStripExampleComponent,
@@ -38,6 +38,7 @@ const routes: Routes = [
         MessageStripAlertExampleComponent,
         MessageStripAutoDismissExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('message-strip')]
 })
 export class MessageStripDocsModule {}

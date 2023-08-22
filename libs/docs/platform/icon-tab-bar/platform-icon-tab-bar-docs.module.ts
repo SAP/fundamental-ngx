@@ -26,7 +26,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformIconTabBarModule,
         PlatformIconTabBarDocsComponent,
         PlatformIconTabBarHeaderComponent,
         PlatformIconTabBarTextTypeExampleComponent,
@@ -36,7 +39,6 @@ const routes: Routes = [
         PlatformIconTabBarIconOnlyTypeExampleComponent,
         PlatformIconTabBarConfigurablePaddingsExampleComponent
     ],
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformIconTabBarModule],
     providers: [currentComponentProvider('icon-tab-bar')]
 })
 export class PlatformIconTabBarDocsModule {}

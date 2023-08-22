@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @Component({
     selector: 'fd-bar-custom-shellbar-example',
     templateUrl: './bar-custom-shellbar-example.component.html',
-    styleUrls: ['./bar-custom-shellbar-example.component.scss']
+    styleUrls: ['./bar-custom-shellbar-example.component.scss'],
+    standalone: true,
+    imports: [BarModule, ComboboxModule, ContentDensityDirective, FormsModule, ButtonModule, AvatarModule]
 })
 export class BarCustomShellbarExampleComponent {
     searchTerm = '';

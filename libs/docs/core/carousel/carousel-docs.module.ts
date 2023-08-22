@@ -45,10 +45,7 @@ const routes: Routes = [
         SegmentedButtonModule,
         TableModule,
         MessagePageModule,
-        ToolbarModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ToolbarModule,
         CarouselDocsComponent,
         CarouselHeaderComponent,
         CarouselOneActiveItemExampleComponent,
@@ -64,6 +61,7 @@ const routes: Routes = [
         CarouselAutoSlidesExampleComponent,
         CarouselBackgroundExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('carousel')]
 })
 export class CarouselDocsModule {}

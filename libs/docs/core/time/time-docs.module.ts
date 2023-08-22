@@ -30,9 +30,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, FdDatetimeModule, TimeModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FormModule,
+        FdDatetimeModule,
+        TimeModule,
         TimeDocsComponent,
         TimeHeaderComponent,
         TimeExampleComponent,
@@ -45,6 +48,7 @@ const routes: Routes = [
         TimeNoSpinnersExampleComponent,
         TimeSizesExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('time')]
 })
 export class TimeDocsModule {}

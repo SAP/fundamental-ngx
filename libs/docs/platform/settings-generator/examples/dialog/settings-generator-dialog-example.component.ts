@@ -13,6 +13,16 @@ import { ThemingService } from '@fundamental-ngx/core/theming';
 import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, delay, map, of } from 'rxjs';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessagePopoverComponent } from '@fundamental-ngx/platform/message-popover';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
+import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 export interface UserModel {
     email: string;
@@ -61,7 +71,20 @@ export class ExampleUserService {
     templateUrl: './settings-generator-dialog-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ExampleUserService]
+    providers: [ExampleUserService],
+    standalone: true,
+    imports: [
+        TitleComponent,
+        DialogModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        MessagePopoverFormWrapperComponent,
+        SettingsGeneratorModule,
+        TemplateDirective,
+        BarModule,
+        MessagePopoverComponent,
+        ButtonModule
+    ]
 })
 export class SettingsGeneratorDialogExampleComponent {
     confirmationReason: string;

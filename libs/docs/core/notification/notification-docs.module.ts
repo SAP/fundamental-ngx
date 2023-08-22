@@ -46,10 +46,7 @@ const routes: Routes = [
         ListModule,
         ActionSheetModule,
         MessageToastModule,
-        PopoverModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PopoverModule,
         NotificationDocsComponent,
         NotificationExampleContentComponent,
         NotificationDocsHeaderComponent,
@@ -59,6 +56,7 @@ const routes: Routes = [
         NotificationGroupExampleComponent,
         NotificationMobileExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('notification')]
 })
 export class NotificationDocsModule {}

@@ -27,15 +27,13 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         FocusableGridModule,
-        DisabledBehaviorModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        DisabledBehaviorModule,
         FocusableGridHeaderComponent,
         FocusableGridDocsComponent,
         DefaultExampleComponent,
         ShortRowsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('focusable-grid')]
 })
 export class FocusableGridDocsModule {}

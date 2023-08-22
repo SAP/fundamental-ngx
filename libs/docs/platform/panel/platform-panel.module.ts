@@ -27,9 +27,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformPanelModule, PlatformButtonModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformPanelModule,
+        PlatformButtonModule,
         PlatformPanelDocsComponent,
         PlatformPanelHeaderComponent,
         PlatformPanelExpandableExampleComponent,
@@ -39,6 +41,7 @@ const routes: Routes = [
         PlatformPanelActionsExampleComponent,
         PlatformPanelConfigExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('panel')]
 })
 export class PlatformPanelDocsModule {}

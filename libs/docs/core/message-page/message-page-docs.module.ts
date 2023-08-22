@@ -29,9 +29,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MessagePageModule, LinkModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        MessagePageModule,
+        LinkModule,
         MessagePageHeaderComponent,
         MessagePageDocsComponent,
         MessagePageFilterExampleComponent,
@@ -42,6 +44,7 @@ const routes: Routes = [
         MessagePageCustomIconExampleComponent,
         MessagePageNoIconExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('message-page')]
 })
 export class MessagePageDocsModule {}

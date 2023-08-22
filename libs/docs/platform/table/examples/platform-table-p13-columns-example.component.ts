@@ -3,12 +3,18 @@ import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-p13-columns-example',
     templateUrl: './platform-table-p13-columns-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [TableDataSourceDirective, TableHeaderResizerDirective, PlatformTableModule, TableInitialStateDirective]
 })
 export class PlatformTableP13ColumnsExampleComponent {
     source: TableDataSource<ExampleItem>;

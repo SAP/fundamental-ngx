@@ -39,10 +39,7 @@ const routes: Routes = [
         SelectModule,
         DialogModule,
         ListModule,
-        FormModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FormModule,
         SelectDocsComponent,
         SelectFormsComponent,
         SelectHeaderComponent,
@@ -56,6 +53,7 @@ const routes: Routes = [
         SelectSemanticStateExampleComponent,
         SelectCustomComparatorExample
     ],
+    exports: [RouterModule],
     providers: [moduleDeprecationsProvider(DeprecatedSelectCSSClasses), currentComponentProvider('select')]
 })
 export class SelectDocsModules {}

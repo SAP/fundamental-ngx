@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DirectiveUsageExampleComponent } from './examples/directive-usage/directive-usage-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { ContentDensityExampleComponent } from './examples/content-density-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeSnippetComponent } from '../../shared/src/lib/core-helpers/code-snippet/code-snippet.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const contentDensityUserComponentSrc = 'content-density-user/content-density-user.component.ts';
 const contentDensityUserComponentScssSrc = 'content-density-user/content-density-user.component.scss';
@@ -13,7 +21,18 @@ const directiveUsageExampleComponentSrcHTMLSrc = 'directive-usage/directive-usag
 
 @Component({
     selector: 'app-content-density-docs',
-    templateUrl: 'content-density-docs.component.html'
+    templateUrl: 'content-density-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        CodeSnippetComponent,
+        SeparatorComponent,
+        ComponentExampleComponent,
+        ContentDensityExampleComponent,
+        CodeExampleComponent,
+        DirectiveUsageExampleComponent
+    ]
 })
 export class ContentDensityDocsComponent {
     contentDensityExample: ExampleFile[] = [

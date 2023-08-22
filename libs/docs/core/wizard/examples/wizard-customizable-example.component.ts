@@ -8,6 +8,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { NgIf } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-wizard-customizable-example',
@@ -17,7 +23,9 @@ import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundament
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    standalone: true,
+    imports: [ButtonModule, A11yModule, NgIf, WizardModule, ContentDensityDirective, BarModule]
 })
 export class WizardCustomizableExampleComponent {
     /**

@@ -43,10 +43,7 @@ const routes: Routes = [
         SegmentedButtonModule,
         SharedDocumentationPageModule,
         RouterModule.forChild(routes),
-        PipeModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PipeModule,
         DatetimeExampleComponent,
         DatetimePickerDocsComponent,
         DatetimeFormExampleComponent,
@@ -59,6 +56,7 @@ const routes: Routes = [
         DatetimePickerComplexI18nExampleComponent,
         DatetimeMobileExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('datetime-picker')]
 })
 export class DatetimePickerDocsModule {}

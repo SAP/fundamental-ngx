@@ -2,6 +2,19 @@ import { Component } from '@angular/core';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-dynamic-page-column-layout-example',
@@ -22,6 +35,23 @@ import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layo
                 min-height: 20vh;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        FlexibleColumnLayoutModule,
+        DynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ContentDensityDirective,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ToolbarSeparatorComponent,
+        CdkScrollable,
+        BarModule,
+        TabsModule,
+        NgFor
     ]
 })
 export class DynamicPageColumnLayoutExampleComponent {

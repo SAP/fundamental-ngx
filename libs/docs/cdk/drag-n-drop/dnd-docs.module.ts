@@ -35,10 +35,13 @@ const routes: Routes = [
         SegmentedButtonModule,
         CheckboxModule,
         FormsModule,
-        BusyIndicatorModule
+        BusyIndicatorModule,
+        DndHeaderComponent,
+        DndDocsComponent,
+        DefaultExampleComponent,
+        DisabledExampleComponent
     ],
     exports: [RouterModule],
-    declarations: [DndHeaderComponent, DndDocsComponent, DefaultExampleComponent, DisabledExampleComponent],
     providers: [currentComponentProvider('drag-n-drop')]
 })
 export class DndDocsModule {}

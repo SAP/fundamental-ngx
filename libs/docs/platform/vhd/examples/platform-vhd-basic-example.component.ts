@@ -12,6 +12,11 @@ import {
 } from '@fundamental-ngx/platform/value-help-dialog';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface ExampleTestModel {
     id: number;
@@ -57,7 +62,9 @@ const data = exampleDataSource();
 
 @Component({
     selector: 'fdp-platform-vhd-basic-example',
-    templateUrl: './platform-vhd-basic-example.component.html'
+    templateUrl: './platform-vhd-basic-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, NgIf, TokenModule, ContentDensityDirective, NgFor, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdBasicExampleComponent {
     filters = data.filters;

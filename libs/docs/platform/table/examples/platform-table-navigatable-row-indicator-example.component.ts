@@ -9,12 +9,25 @@ import {
     TableState,
     TableRowActivateEvent
 } from '@fundamental-ngx/platform/table';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',
     templateUrl: './platform-table-navigatable-row-indicator-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformButtonModule
+    ]
 })
 export class PlatformTableNavigatableRowIndicatorExampleComponent {
     source: TableDataSource<ExampleItem>;

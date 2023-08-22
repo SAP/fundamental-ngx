@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-slider-form-field-example',
@@ -12,7 +15,9 @@ import { FormControl, FormGroup } from '@angular/forms';
                 overflow: visible;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, SliderComponent, JsonPipe]
 })
 export class SliderFormFieldExampleComponent {
     customForm = new FormGroup({

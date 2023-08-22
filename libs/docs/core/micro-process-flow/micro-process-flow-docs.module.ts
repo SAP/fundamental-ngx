@@ -34,17 +34,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        MicroProcessFlowDocsComponent,
-        MicroProcessFlowHeaderComponent,
-        MicroProcessFlowExampleComponent,
-        MicroProcessFlowOtherControlsExampleComponent,
-        MicroProcessFlowPopoverExampleComponent,
-        MicroProcessFlowOverflowExampleComponent,
-        MicroProcessFlowIndependentItemsExampleComponent,
-        MicroProcessFlowCustomWidthExampleComponent,
-        MicroProcessFlowObjectBetweenNodesExampleComponent
-    ],
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
@@ -54,7 +43,16 @@ const routes: Routes = [
         PopoverModule,
         ListModule,
         AvatarModule,
-        InfoLabelModule
+        InfoLabelModule,
+        MicroProcessFlowDocsComponent,
+        MicroProcessFlowHeaderComponent,
+        MicroProcessFlowExampleComponent,
+        MicroProcessFlowOtherControlsExampleComponent,
+        MicroProcessFlowPopoverExampleComponent,
+        MicroProcessFlowOverflowExampleComponent,
+        MicroProcessFlowIndependentItemsExampleComponent,
+        MicroProcessFlowCustomWidthExampleComponent,
+        MicroProcessFlowObjectBetweenNodesExampleComponent
     ],
     exports: [RouterModule],
     providers: [currentComponentProvider('micro-process-flow')]

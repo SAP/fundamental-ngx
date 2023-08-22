@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FormattedTextScriptExampleComponent } from './examples/script/formatted-text-script-example.component';
+import { FormattedTextLinksExampleComponent } from './examples/links/formatted-text-links-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { FormattedTextExampleComponent } from './examples/base/formatted-text-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const formattedTextHtml = 'base/formatted-text-example.component.html';
 const formattedTextTs = 'base/formatted-text-example.component.ts';
@@ -13,7 +20,17 @@ const scriptFormattedTextTs = 'script/formatted-text-script-example.component.ts
 
 @Component({
     selector: 'app-input',
-    templateUrl: './formatted-text-docs.component.html'
+    templateUrl: './formatted-text-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        FormattedTextExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        FormattedTextLinksExampleComponent,
+        FormattedTextScriptExampleComponent
+    ]
 })
 export class FormattedTextDocsComponent {
     formattedTextExample: ExampleFile[] = [

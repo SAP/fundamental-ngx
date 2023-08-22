@@ -8,12 +8,18 @@ import {
     TableState,
     TableRowSelectionChangeEvent
 } from '@fundamental-ngx/platform/table';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-multiple-row-selection-example',
     templateUrl: './platform-table-multiple-row-selection-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [TableDataSourceDirective, TableHeaderResizerDirective, PlatformTableModule, TableInitialStateDirective]
 })
 export class PlatformTableMultipleRowSelectionExampleComponent {
     source: TableDataSource<ExampleItem>;

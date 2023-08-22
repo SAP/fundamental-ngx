@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { BarCustomShellbarExampleComponent } from './examples/bar-custom-shellbar-example.component';
+import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsive-example.component';
+import { BarPageExampleComponent } from './examples/bar-page-example.component';
+import { BarWithTitleExampleComponent } from './examples/bar-with-title-example.component';
+import {
+    BarSubHeaderExampleComponent,
+    BarHeaderSubHeaderExampleComponent,
+    BarFooterExampleComponent,
+    BarFloatingFooterExampleComponent
+} from './examples/bar-simple-examples.component';
+import { BarHeaderExampleComponent } from './examples/bar-header-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { BarDefaultExampleComponent } from './examples/bar-default-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const barCustomShellbarExampleScss = 'bar-custom-shellbar-example.component.scss';
 
@@ -23,7 +40,25 @@ const barCustomShellbarExampleTs = 'bar-custom-shellbar-example.component.ts';
 
 @Component({
     selector: 'app-bar',
-    templateUrl: './bar-docs.component.html'
+    templateUrl: './bar-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        BarDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        BarHeaderExampleComponent,
+        BarSubHeaderExampleComponent,
+        BarHeaderSubHeaderExampleComponent,
+        BarFooterExampleComponent,
+        BarFloatingFooterExampleComponent,
+        BarWithTitleExampleComponent,
+        BarPageExampleComponent,
+        BarPageResponsiveExampleComponent,
+        BarCustomShellbarExampleComponent
+    ]
 })
 export class BarDocsComponent {
     barDefaultExample: ExampleFile[] = [

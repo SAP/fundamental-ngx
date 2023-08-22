@@ -6,6 +6,11 @@ import {
     VhdValueChangeEvent,
     ValueHelpDialogDataSource
 } from '@fundamental-ngx/platform/value-help-dialog';
+import { NgFor } from '@angular/common';
+import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 interface ExampleTestModel {
     id: number;
@@ -49,7 +54,9 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 
 @Component({
     selector: 'fdp-platform-vhd-multi-input-example',
-    templateUrl: './platform-vhd-multi-input-example.component.html'
+    templateUrl: './platform-vhd-multi-input-example.component.html',
+    standalone: true,
+    imports: [MultiInputModule, FormsModule, ButtonModule, PlatformValueHelpDialogModule, NgFor]
 })
 export class PlatformVhdMultiInputExampleComponent implements OnInit {
     filters: FilterData[];

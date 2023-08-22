@@ -46,10 +46,7 @@ const routes: Routes = [
         PlatformTextAreaModule,
         BarModule,
         FormModule,
-        PlatformFormGeneratorModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformFormGeneratorModule,
         examples,
         MessagePopoverDocsComponent,
         MessagePopoverHeaderComponent,
@@ -57,6 +54,7 @@ const routes: Routes = [
         FormContainerExampleComponent,
         MessagePopoverCustomConfigExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('message-popover')]
 })
 export class MessagePopoverDocsModule {}

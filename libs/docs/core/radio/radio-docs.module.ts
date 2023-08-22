@@ -20,9 +20,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, RadioModule, FormModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        RadioModule,
+        FormModule,
+        examples,
+        RadioDocsComponent,
+        RadioHeaderComponent
+    ],
     exports: [RouterModule],
-    declarations: [examples, RadioDocsComponent, RadioHeaderComponent],
     providers: [currentComponentProvider('radio')]
 })
 export class RadioDocsModule {}

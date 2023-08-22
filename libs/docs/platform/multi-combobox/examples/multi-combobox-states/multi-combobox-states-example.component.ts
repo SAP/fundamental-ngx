@@ -3,13 +3,18 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
+import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-multi-combobox-states-example',
     templateUrl: './multi-combobox-states-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformComboboxModule, PlatformMultiComboboxModule]
 })
 export class MultiComboboxStatesExampleComponent {
     dataSource = [

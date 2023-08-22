@@ -2,6 +2,17 @@ import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
+import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
+import { PaginationMobileExampleComponent } from './examples/pagination-mobile/pagination-mobile-example.component';
+import { PaginationPerPageExampleComponent } from './examples/pagination-per-page/pagination-per-page-example.component';
+import { PaginationShowingExampleComponent } from './examples/pagination-showing-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PaginationExampleComponent } from './examples/pagination-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const paginationSrc = 'pagination-example.component.ts';
 
@@ -15,7 +26,21 @@ const paginationMobileTs = 'pagination-mobile/pagination-mobile-example.componen
 
 @Component({
     selector: 'app-pagination',
-    templateUrl: './pagination-docs.component.html'
+    templateUrl: './pagination-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        PaginationExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        PaginationShowingExampleComponent,
+        PaginationPerPageExampleComponent,
+        PaginationMobileExampleComponent,
+        PlayGroundComponent,
+        PaginationModule
+    ]
 })
 export class PaginationDocsComponent {
     schema: Schema;

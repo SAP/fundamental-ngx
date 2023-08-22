@@ -1,10 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { SplitterComponent, SplitterSplitPaneComponent } from '@fundamental-ngx/core/splitter';
+import { SplitterModule } from '@fundamental-ngx/core/splitter';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @Component({
     selector: 'fd-slider-api-example',
-    templateUrl: './splitter-api-example.component.html'
+    templateUrl: './splitter-api-example.component.html',
+    standalone: true,
+    imports: [BarModule, SplitterModule]
 })
 export class SplitterApiExampleComponent {
     @ViewChild(SplitterComponent)

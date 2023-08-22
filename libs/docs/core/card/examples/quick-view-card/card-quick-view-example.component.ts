@@ -1,9 +1,29 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { CardModule } from '@fundamental-ngx/core/card';
 
 @Component({
     selector: 'fd-card-quick-view-example',
     templateUrl: 'card-quick-view-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        CardModule,
+        QuickViewModule,
+        AvatarModule,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        LinkComponent,
+        NgSwitchDefault,
+        ButtonModule,
+        ContentDensityDirective
+    ]
 })
 export class CardQuickViewExampleComponent {
     data = {

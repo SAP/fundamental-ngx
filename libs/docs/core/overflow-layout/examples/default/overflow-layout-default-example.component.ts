@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { NgFor } from '@angular/common';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
 @Component({
     selector: 'fd-overflow-layout-default-example',
@@ -10,7 +14,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [OverflowLayoutModule, NgFor, InfoLabelModule, ButtonModule]
 })
 export class OverflowLayoutDefaultExampleComponent {
     itemsToRender = new Array(10).fill(null);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -7,6 +7,9 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-datetime-form-example',
@@ -20,7 +23,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, FormItemModule, FormLabelModule, DatetimePickerComponent]
 })
 export class DatetimeFormExampleComponent {
     customForm = new FormGroup({

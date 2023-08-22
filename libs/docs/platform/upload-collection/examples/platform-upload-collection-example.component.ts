@@ -13,10 +13,14 @@ import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { PlatformUploadCollectionDataProviderExample } from './platform-upload-collection-base-data-provider';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 
 @Component({
     selector: 'fdp-upload-collection-example',
-    templateUrl: './platform-upload-collection-example.component.html'
+    templateUrl: './platform-upload-collection-example.component.html',
+    standalone: true,
+    imports: [PlatformUploadCollectionModule, ContentDensityDirective]
 })
 export class PlatformUploadCollectionExampleComponent {
     dataSource: UploadCollectionDataSource;

@@ -17,6 +17,20 @@ import {
     FilterableColumnDataType,
     CollectionSort
 } from '@fundamental-ngx/platform/table';
+import { NgFor } from '@angular/common';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { FormsModule } from '@angular/forms';
+import {
+    FdpEditableCellDef,
+    FdpTableCell,
+    FdpEditableCellFormDirective,
+    FdpCellDef
+} from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-editable-rows-example',
@@ -28,6 +42,21 @@ import {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpEditableCellDef,
+        FdpTableCell,
+        FormsModule,
+        FdpEditableCellFormDirective,
+        PlatformInputModule,
+        SelectModule,
+        NgFor,
+        FdpCellDef
     ]
 })
 export class PlatformTableEditableRowsExampleComponent {

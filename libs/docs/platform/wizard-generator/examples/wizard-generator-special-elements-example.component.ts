@@ -7,6 +7,8 @@ import {
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fundamental-ngx-wizard-generator-special-elements-example',
@@ -20,7 +22,9 @@ import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorSpecialElementsExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

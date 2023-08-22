@@ -24,9 +24,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), ObjectMarkerModule, SharedDocumentationPageModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        ObjectMarkerModule,
+        SharedDocumentationPageModule,
         ObjectMarkerDocsComponent,
         ObjectMarkerHeaderComponent,
         ObjectMarkerExampleComponent,
@@ -34,6 +35,7 @@ const routes: Routes = [
         ObjectMarkerClickableExampleComponent,
         ObjectMarkerTextExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('object-marker')]
 })
 export class ObjectMarkerDocsModule {}

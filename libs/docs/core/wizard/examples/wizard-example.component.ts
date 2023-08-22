@@ -8,6 +8,21 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { FormsModule } from '@angular/forms';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { NgIf } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-wizard-example',
@@ -17,7 +32,25 @@ import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundament
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    standalone: true,
+    imports: [
+        ButtonModule,
+        A11yModule,
+        NgIf,
+        WizardModule,
+        TitleComponent,
+        MessageStripComponent,
+        ContentDensityDirective,
+        FormItemModule,
+        FormLabelModule,
+        FormControlModule,
+        FormsModule,
+        LayoutGridModule,
+        LinkComponent,
+        RouterLink,
+        BarModule
+    ]
 })
 export class WizardExampleComponent {
     /**

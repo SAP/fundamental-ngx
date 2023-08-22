@@ -25,9 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TextModule, FdPatchLanguageDirective],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        TextModule,
+        FdPatchLanguageDirective,
         TextDocsComponent,
         TextHeaderComponent,
         TextBasicComponent,
@@ -36,6 +38,7 @@ const routes: Routes = [
         TextHyphenationComponent,
         TextExpandableComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('text')]
 })
 export class TextDocsModule {}

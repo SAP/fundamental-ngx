@@ -12,8 +12,17 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @NgModule({
-    declarations: [SchemaComponent, SchemaGroupComponent, AsFormControlPipe, AsFormGroupPipe],
-    imports: [CommonModule, ReactiveFormsModule, FormModule, CheckboxModule, ButtonModule],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormModule,
+        CheckboxModule,
+        ButtonModule,
+        SchemaComponent,
+        SchemaGroupComponent,
+        AsFormControlPipe,
+        AsFormGroupPipe
+    ],
     exports: [SchemaComponent]
 })
 export class SchemaModule {

@@ -31,9 +31,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TileModule, AvatarModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        TileModule,
+        AvatarModule,
         TileDocsComponent,
         TileGenericExampleComponent,
         TileColumnsExampleComponent,
@@ -47,6 +49,7 @@ const routes: Routes = [
         TileDocsHeaderComponent,
         ClickableTileExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('tile')]
 })
 export class TileDocsModule {}

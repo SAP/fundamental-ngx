@@ -26,7 +26,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformFeedInputModule,
+        FdPatchLanguageDirective,
         PlatformFeedInputHeaderComponent,
         PlatformFeedInputDocsComponent,
         PlatformFeedInputExampleComponent,
@@ -34,12 +38,6 @@ const routes: Routes = [
         PlatformFeedInputNoAvatarExampleComponent,
         PlatformFeedInputDisabledExampleComponent,
         PlatformFeedInputMaxHeightExampleComponent
-    ],
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        PlatformFeedInputModule,
-        FdPatchLanguageDirective
     ],
     exports: [RouterModule],
     providers: [currentComponentProvider('feed-input')]

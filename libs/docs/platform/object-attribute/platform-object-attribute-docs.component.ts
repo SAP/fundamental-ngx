@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformObjectAttributeLinkExampleComponent } from './examples/platform-object-attribute-link-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    PlatformObjectAttributeExampleComponent,
+    PlatformObjectAttributeTruncateExampleComponent
+} from './examples/platform-object-attribute-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const objectAttribute = 'platform-object-attribute-example.component.html';
 const objectAttributeTruncate = 'platform-object-attribute-truncate-example.component.html';
@@ -9,7 +19,18 @@ const objectAttributeLinkTs = 'platform-object-attribute-link-example.component.
 
 @Component({
     selector: 'app-object-attribute',
-    templateUrl: './platform-object-attribute-docs.component.html'
+    templateUrl: './platform-object-attribute-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformObjectAttributeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformObjectAttributeTruncateExampleComponent,
+        PlatformObjectAttributeLinkExampleComponent
+    ]
 })
 export class PlatformObjectAttributeDocsComponent {
     objectAttribute: ExampleFile[] = [

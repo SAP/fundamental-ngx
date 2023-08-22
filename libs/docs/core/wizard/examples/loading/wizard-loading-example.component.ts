@@ -8,6 +8,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { NgIf } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-wizard-loading-example',
@@ -17,7 +24,9 @@ import { WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    standalone: true,
+    imports: [ButtonModule, A11yModule, NgIf, WizardModule, RepeatDirective, SkeletonModule, BarModule]
 })
 export class WizardLoadingExampleComponent {
     /**

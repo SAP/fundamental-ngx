@@ -49,18 +49,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         ListModule,
         BusyIndicatorModule,
-        IconModule
-    ],
-    exports: [RouterModule],
-    providers: [
-        {
-            provide: MOBILE_MODE_CONFIG,
-            useValue: COMBOBOX_MOBILE_CONFIG,
-            multi: true
-        },
-        currentComponentProvider('combobox')
-    ],
-    declarations: [
+        IconModule,
         PlatformComboboxHeaderComponent,
         PlatformComboboxDocsComponent,
         ComboboxStandardComponent,
@@ -73,6 +62,15 @@ const routes: Routes = [
         ComboboxStateComponent,
         ComboboxBylineExampleComponent,
         ComboboxLoadingExampleComponent
+    ],
+    exports: [RouterModule],
+    providers: [
+        {
+            provide: MOBILE_MODE_CONFIG,
+            useValue: COMBOBOX_MOBILE_CONFIG,
+            multi: true
+        },
+        currentComponentProvider('combobox')
     ]
 })
 export class PlatformComboboxDocsModule {}

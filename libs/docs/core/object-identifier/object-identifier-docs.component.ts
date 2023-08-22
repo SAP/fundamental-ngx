@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    ObjectIdentifierDefaultExampleComponent,
+    ObjectIdentifierBoldExampleComponent,
+    ObjectIdentifierLinkExampleComponent,
+    ObjectIdentifierDescriptiveExampleComponent
+} from './examples/object-identifier-components';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const ObjectIdentifierDefaultExample = 'object-identifier-default-example.component.html';
 const ObjectIdentifierLinksExample = 'object-identifier-link-example.component.html';
@@ -10,7 +22,20 @@ const ObjectIdentifierTableExampleTs = 'object-identifier-table-example.componen
 
 @Component({
     selector: 'app-object-identifier',
-    templateUrl: './object-identifier-docs.component.html'
+    templateUrl: './object-identifier-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ObjectIdentifierDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ObjectIdentifierBoldExampleComponent,
+        ObjectIdentifierLinkExampleComponent,
+        ObjectIdentifierDescriptiveExampleComponent,
+        ObjectIdentifierTableExampleComponent
+    ]
 })
 export class ObjectIdentifierDocsComponent {
     defaultObjectIdentifier: ExampleFile[] = [

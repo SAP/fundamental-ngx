@@ -30,16 +30,14 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         ClickedBehaviorModule,
-        FocusableItemModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FocusableItemModule,
         ClickedDocsComponent,
         ClickedHeaderComponent,
         BasicExampleComponent,
         ProviderExampleComponent,
         UsageWithProviderDirective
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('clicked')]
 })
 export class ClickedDocsModule {}

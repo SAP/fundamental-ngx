@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { _messageStripIndicationColors } from '@fundamental-ngx/core/message-strip';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { MessageStripIconDirective } from '@fundamental-ngx/core/message-strip';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-message-strip-indication-colors-example',
@@ -17,7 +21,9 @@ import { _messageStripIndicationColors } from '@fundamental-ngx/core/message-str
                 gap: 1rem;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [NgFor, MessageStripComponent, MessageStripIconDirective, IconModule]
 })
 export class MessageStripIndicationColorsExampleComponent {
     indicationColors = _messageStripIndicationColors;

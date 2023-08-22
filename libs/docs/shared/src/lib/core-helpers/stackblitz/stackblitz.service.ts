@@ -5,7 +5,6 @@ import { StackblitzDependencies } from './stackblitz-dependencies';
 import { StackblitzProject } from './interfaces/stackblitz-project';
 import { CURRENT_LIB, Libraries } from '../../utilities';
 import { ExampleFile } from '../code-example/example-file';
-import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
 import { DocsService } from '../../services/docs.service';
 import { getAsset } from '../../getAsset';
 import { first, tap, zip } from 'rxjs';
@@ -19,6 +18,18 @@ interface GeneratedFiles {
     scss?: GeneratedFile;
     ts?: GeneratedFile;
     html?: GeneratedFile;
+}
+
+export interface StackblitzFileObject {
+    path: string;
+    name: string;
+}
+
+/**
+ * Retuens formatted import string.
+ */
+function getImport(file: StackblitzFileObject): string {
+    return `import { ${file.name} } from '${file.path}'`;
 }
 
 @Injectable()
@@ -57,17 +68,16 @@ export class StackblitzService {
                 'src/polyfills.ts': this.polyfills,
                 'src/styles.scss': this.styles,
                 'angular.json': this.angular,
-                /**
-                 * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
-                 * https://github.com/stackblitz/core/issues/1364
-                 */
                 'tsconfig.json': this.tsconfig
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
             template: 'angular-cli',
             tags: ['stackblitz', 'sdk'],
-            dependencies: StackblitzDependencies.getDependencies(this._docsService.getPackageJson())
+            dependencies: StackblitzDependencies.getDependencies(
+                this._docsService.getPackageJson(),
+                this._docsService.getLernaJson()
+            )
         };
     }
 
@@ -79,7 +89,7 @@ export class StackblitzService {
             let generatedFiles: GeneratedFiles | undefined;
 
             /**
-             * Main Component Will be bootstrapped on app module and added to index.html
+             * Main Component Will be bootstrapped in main.ts and added to index.html
              * */
             const mainComponent: boolean = exampleFiles.length === 1 || !!example.main;
 
@@ -116,7 +126,7 @@ export class StackblitzService {
             }
         }
 
-        defaultProjectInfo.files['src/app/app.module.ts'] = this.getModule(stackBlitzFiles);
+        defaultProjectInfo.files['src/main.ts'] = this.getMainFile(stackBlitzFiles);
 
         const mainFileSelector: string =
             stackBlitzFiles.find((file) => file.main)?.selector || stackBlitzFiles[0].selector;
@@ -124,8 +134,8 @@ export class StackblitzService {
         defaultProjectInfo.files['src/index.html'] = `
 <html>
     <head>
-        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_fiori_3.css" />
+        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css" />
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_horizon.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
     </head>
@@ -141,13 +151,18 @@ export class StackblitzService {
         const libraryPrefix = this.getLibraryPrefix();
         const componentName: string = this.transformSnakeCaseToPascalCase(fileName);
 
+        // Since we don't know what part of the library is used, import all modules.
         return `
 import { Component } from '@angular/core';
+import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 @Component({
     selector: '${libraryPrefix}${fileName}',
     templateUrl: './${fileName}.component.html',
-    styleUrls: ['./${fileName}.component.scss']
+    styleUrls: ['./${fileName}.component.scss'],
+    standalone: true,
+    imports: [FundamentalNgxCoreModule, FundamentalNgxPlatformModule]
 })
 export class ${componentName} {}`;
     }
@@ -211,8 +226,19 @@ export class ${componentName} {}`;
         };
     }
 
-    private getModule(files: StackblitzFile[]): string {
-        return StackblitzModuleWrapper.GetModule(files);
+    private getMainFile(files: StackblitzFile[]): string {
+        // Main component that will be added as a root, if there is no component with main flag, first is chosen
+        const mainComponent = files.find((file) => file.main) || files[0];
+
+        return `
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+${getImport({ name: mainComponent.componentName, path: './app/' + mainComponent.basis })};
+
+bootstrapApplication(${mainComponent.componentName}, {
+    providers: [provideAnimations(), RtlService]
+});`;
     }
 
     private handleHtmlFile(

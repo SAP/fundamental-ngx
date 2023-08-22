@@ -17,9 +17,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        GlobalConfigDocsComponent,
+        GlobalConfigHeaderComponent
+    ],
     exports: [RouterModule],
-    declarations: [GlobalConfigDocsComponent, GlobalConfigHeaderComponent],
     providers: [currentComponentProvider('global-config')]
 })
 export class GlobalConfigDocsModule {}

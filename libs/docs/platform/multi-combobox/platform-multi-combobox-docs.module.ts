@@ -47,14 +47,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformComboboxModule,
         PlatformMultiComboboxModule,
-        BusyIndicatorModule
-    ],
-    exports: [RouterModule],
-    providers: [
-        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true },
-        currentComponentProvider('multi-combobox')
-    ],
-    declarations: [
+        BusyIndicatorModule,
         PlatformMultiComboboxHeaderComponent,
         PlatformMultiComboboxDocsComponent,
         MultiComboboxDatasourceExampleComponent,
@@ -64,6 +57,11 @@ const routes: Routes = [
         MultiComboboxFormsExampleComponent,
         MultiComboboxStatesExampleComponent,
         MultiComboboxLoadingExampleComponent
+    ],
+    exports: [RouterModule],
+    providers: [
+        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true },
+        currentComponentProvider('multi-combobox')
     ]
 })
 export class PlatformMultiComboboxDocsModule {}

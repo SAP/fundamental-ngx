@@ -20,10 +20,25 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep } from 'lodash-es';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
 
 @Component({
     selector: 'fdp-platform-approval-flow-example',
-    templateUrl: './platform-approval-flow-example.component.html'
+    templateUrl: './platform-approval-flow-example.component.html',
+    standalone: true,
+    imports: [
+        PlatformApprovalFlowModule,
+        NgIf,
+        FormsModule,
+        NgFor,
+        MultiInputModule,
+        ContentDensityDirective,
+        TitleCasePipe
+    ]
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     private graphs = getGraphs();

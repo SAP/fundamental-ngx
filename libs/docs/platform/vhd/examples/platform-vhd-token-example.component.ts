@@ -6,6 +6,9 @@ import {
     VhdValueChangeEvent,
     ValueHelpDialogDataSource
 } from '@fundamental-ngx/platform/value-help-dialog';
+import { NgFor } from '@angular/common';
+import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface ExampleTestModel {
     id: number;
@@ -42,7 +45,9 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 
 @Component({
     selector: 'fdp-platform-vhd-token-example',
-    templateUrl: './platform-vhd-token-example.component.html'
+    templateUrl: './platform-vhd-token-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, PlatformValueHelpDialogModule, NgFor]
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {
     filters: FilterData[];

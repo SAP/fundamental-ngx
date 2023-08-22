@@ -9,7 +9,8 @@ interface ComponentData {
     selector: 'fd-message-toast-content-example',
     template: `<div>
         {{ ref.data.content }}
-    </div>`
+    </div>`,
+    standalone: true
 })
 export class MessageToastContentExampleComponent {
     constructor(public ref: MessageToastRef<ComponentData>) {

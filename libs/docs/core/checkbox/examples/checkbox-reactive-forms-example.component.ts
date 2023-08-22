@@ -1,7 +1,9 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { JsonPipe } from '@angular/common';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 
 @Component({
     selector: 'fd-checkbox-reactive-forms-example',
@@ -28,7 +30,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             Form Dirty: {{ registrationForm.dirty }}<br />
             Form Valid: {{ registrationForm.valid }}<br />
         </small>
-    `
+    `,
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, CheckboxComponent, JsonPipe]
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {
     public registrationForm = new FormGroup({

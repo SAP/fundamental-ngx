@@ -3,11 +3,15 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DateRange } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 
 @Component({
     selector: 'fd-date-picker-mobile-mode-example',
     templateUrl: './date-picker-mobile-mode-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [DatePickerComponent, FormsModule]
 })
 export class DatePickerMobileModeExampleComponent {
     selectedRange1: Nullable<DateRange<FdDate>>;

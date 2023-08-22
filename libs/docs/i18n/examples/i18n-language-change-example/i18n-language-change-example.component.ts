@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FdLanguage, FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
+import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
     selector: 'app-language-change-example',
@@ -11,7 +16,9 @@ import { BehaviorSubject } from 'rxjs';
             provide: FD_LANGUAGE,
             useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
         }
-    ]
+    ],
+    standalone: true,
+    imports: [SegmentedButtonModule, FormsModule, ButtonModule, FormLabelModule, PlatformTextAreaModule]
 })
 export class PlatformLanguageChangeExampleComponent {
     lang = 'en';

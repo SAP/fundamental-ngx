@@ -31,9 +31,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformUploadCollectionModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformUploadCollectionModule,
         PlatformUploadCollectionHeaderComponent,
         PlatformUploadColletionDocsComponent,
         PlatformUploadCollectionExampleComponent,
@@ -41,6 +42,7 @@ const routes: Routes = [
         PlatformUploadCollectionReadonlyExampleComponent,
         PlatformUploadCollectionTurnOffExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('upload-collection')]
 })
 export class PlatformUploadCollectionDocsModule {}

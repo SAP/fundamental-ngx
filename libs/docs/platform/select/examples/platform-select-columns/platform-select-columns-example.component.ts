@@ -2,11 +2,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-select-columns-example',
     templateUrl: './platform-select-columns-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformSelectModule]
 })
 export class PlatformSelectColumnsExampleComponent {
     option: OptionItem[] = [

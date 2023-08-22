@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 import moment, { Moment } from 'moment';
+import { FormsModule } from '@angular/forms';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 @Component({
     selector: 'fd-moment-datetime-formats-example',
@@ -19,7 +21,6 @@ import moment, { Moment } from 'moment';
                     dateInput: 'l',
                     timeInput: 'h:mm A',
                     dateTimeInput: 'l h:mm A',
-
                     dateA11yLabel: 'YYYY MMMM DD',
                     monthA11yLabel: 'MMMM',
                     yearA11yLabel: 'YYYY'
@@ -31,7 +32,9 @@ import moment, { Moment } from 'moment';
             provide: DatetimeAdapter,
             useClass: MomentDatetimeAdapter
         }
-    ]
+    ],
+    standalone: true,
+    imports: [DatetimePickerComponent, FormsModule]
 })
 export class MomentDatetimeFormatsExampleComponent {
     date: Moment = moment();

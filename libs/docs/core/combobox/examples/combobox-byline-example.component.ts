@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { ComboboxItem } from '@fundamental-ngx/core/combobox';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { JsonPipe } from '@angular/common';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { FormsModule } from '@angular/forms';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
 
 export interface ExampleItem {
     name: string;
@@ -10,7 +17,9 @@ export interface ExampleItem {
 @Component({
     selector: 'fd-combobox-byline-example',
     templateUrl: './combobox-byline-example.component.html',
-    styleUrls: ['combobox-example.component.scss']
+    styleUrls: ['combobox-example.component.scss'],
+    standalone: true,
+    imports: [FormItemModule, FormLabelModule, ComboboxModule, FormsModule, ListModule, IconModule, JsonPipe]
 })
 export class ComboboxBylineExampleComponent {
     values: ExampleItem[] = [

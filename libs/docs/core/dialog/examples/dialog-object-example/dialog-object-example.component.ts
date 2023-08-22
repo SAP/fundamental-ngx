@@ -1,10 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { DialogDefaultContent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-dialog-object-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './dialog-object-example.component.html'
+    templateUrl: './dialog-object-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, BarModule, InputGroupModule, InitialFocusDirective]
 })
 export class DialogObjectExampleComponent {
     constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}

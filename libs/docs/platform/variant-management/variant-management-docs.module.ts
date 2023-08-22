@@ -36,16 +36,14 @@ const routes: Routes = [
         PlatformDynamicPageModule,
         BreadcrumbModule,
         ToolbarModule,
-        BarModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        BarModule,
         examples,
         VariantManagementDocsComponent,
         VariantManagementHeaderComponent,
         VariantManagementTableExampleComponent,
         VariantManagementDynamicPageExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('variant-management')]
 })
 export class VariantManagementDocsModule {}

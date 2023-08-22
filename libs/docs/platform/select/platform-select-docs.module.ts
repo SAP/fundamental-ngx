@@ -43,10 +43,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformSelectModule,
         ReactiveFormsModule,
-        PlatformButtonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformButtonModule,
         PlatformSelectDocsComponent,
         PlatformSelectFormsComponent,
         PlatformSelectHeaderComponent,
@@ -59,6 +56,7 @@ const routes: Routes = [
         PlatformSelectNoneExampleComponent,
         PlatformSelectNoWrapExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('select')]
 })
 export class PlatformSelectDocsModules {}

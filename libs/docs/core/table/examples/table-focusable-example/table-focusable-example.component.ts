@@ -1,8 +1,27 @@
 import { Component } from '@angular/core';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { StepInputModule } from '@fundamental-ngx/core/step-input';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor } from '@angular/common';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-table-focusable-example',
-    templateUrl: './table-focusable-example.component.html'
+    templateUrl: './table-focusable-example.component.html',
+    standalone: true,
+    imports: [
+        FocusableGridDirective,
+        TableModule,
+        NgFor,
+        LinkComponent,
+        StepInputModule,
+        IconModule,
+        SplitButtonModule,
+        MenuModule
+    ]
 })
 export class TableFocusableExampleComponent {
     tableRows = [

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-tabs-example',
-    templateUrl: './tabs-example.component.html'
+    templateUrl: './tabs-example.component.html',
+    standalone: true,
+    imports: [FormLabelModule, TabsModule, RouterLinkActive, RouterLink]
 })
 export class TabsExampleComponent {}

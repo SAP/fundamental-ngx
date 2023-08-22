@@ -37,10 +37,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationModule,
         SharedDocumentationPageModule,
-        ObjectNumberModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ObjectNumberModule,
         ObjectNumberHeaderComponent,
         ObjectNumberDocsComponent,
         ObjectNumberBasicExampleComponent,
@@ -51,6 +48,7 @@ const routes: Routes = [
         ObjectNumberDecimalExampleComponent,
         ObjectNumberTruncationExampleComponent
     ],
+    exports: [RouterModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [currentComponentProvider('object-number')]
 })

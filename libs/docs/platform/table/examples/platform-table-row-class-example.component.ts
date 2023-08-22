@@ -9,6 +9,11 @@ import {
     TableDataSource,
     TableState
 } from '@fundamental-ngx/platform/table';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-row-class-example',
@@ -24,6 +29,14 @@ import {
                 opacity: 0.5;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformButtonModule
     ]
 })
 export class PlatformTableRowClassExampleComponent {

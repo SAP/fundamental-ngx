@@ -37,16 +37,7 @@ const routes: Routes = [
         TextModule,
         ButtonModule,
         ReactiveFormsModule,
-        CheckboxModule
-    ],
-    exports: [
-        RouterModule,
-        TreeWithFormsExampleComponent,
-        NavigatableTreeExampleComponent,
-        TreeHighlightIndicatorsExampleComponent,
-        TreeActionButtonsExampleComponent
-    ],
-    declarations: [
+        CheckboxModule,
         TreeDocsComponent,
         TreeHeaderComponent,
         SimpleTreeExampleComponent,
@@ -55,6 +46,13 @@ const routes: Routes = [
         TreeHighlightIndicatorsExampleComponent,
         TreeActionButtonsExampleComponent,
         LazilyLoadedTreeItemsExampleComponent
+    ],
+    exports: [
+        RouterModule,
+        TreeWithFormsExampleComponent,
+        NavigatableTreeExampleComponent,
+        TreeHighlightIndicatorsExampleComponent,
+        TreeActionButtonsExampleComponent
     ],
     providers: [currentComponentProvider('tree')]
 })

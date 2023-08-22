@@ -64,10 +64,12 @@ const routes: Routes = [
         FormModule,
         FdDatetimeModule,
         DatetimePickerModule,
-        TitleModule
+        TitleModule,
+        ToolbarDocsComponent,
+        ToolbarHeaderComponent,
+        ...examples
     ],
     exports: [RouterModule],
-    declarations: [ToolbarDocsComponent, ToolbarHeaderComponent, ...examples],
     providers: [moduleDeprecationsProvider(DeprecatedToolbarSizeDirective), currentComponentProvider('toolbar')]
 })
 export class ToolbarDocsModule {}

@@ -48,7 +48,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformWizardGeneratorModule,
+        PlatformButtonModule,
+        DialogModule,
+        BarModule,
+        LayoutGridModule,
+        PlatformLinkModule,
+        IconModule,
         PlatformWizardGeneratorDocsComponent,
         PlatformWizardGeneratorHeaderComponent,
         WizardGeneratorDefaultExampleComponent,
@@ -66,17 +75,6 @@ const routes: Routes = [
         WizardGeneratorVisibilityBetweenStepsExampleComponent,
         WizardGeneratorSpecialElementsExampleComponent,
         WizardGeneratorLoadingExampleComponent
-    ],
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        PlatformWizardGeneratorModule,
-        PlatformButtonModule,
-        DialogModule,
-        BarModule,
-        LayoutGridModule,
-        PlatformLinkModule,
-        IconModule
     ],
     providers: [currentComponentProvider('wizard-generator')]
 })

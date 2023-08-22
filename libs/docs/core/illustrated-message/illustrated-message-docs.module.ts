@@ -33,10 +33,7 @@ const routes: Routes = [
         IllustratedMessageModule,
         ButtonModule,
         DialogModule,
-        CardModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        CardModule,
         IllustratedMessageDocsComponent,
         IllustratedMessageHeaderComponent,
         IllustratedMessageExampleComponent,
@@ -45,6 +42,7 @@ const routes: Routes = [
         IllustratedMessageDotExampleComponent,
         IllustratedMessageInlineExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('illustrated-message')]
 })
 export class IllustratedMessageDocsModule {}

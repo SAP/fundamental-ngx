@@ -32,9 +32,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformSearchFieldModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformSearchFieldModule,
         PlatformSearchFieldDocsComponent,
         PlatformSearchFieldHeaderComponent,
         PlatformSearchFieldBasicExampleComponent,
@@ -42,6 +43,7 @@ const routes: Routes = [
         PlatformSearchFieldDataSourceExampleComponent,
         PlatformSearchFieldMobileExampleComponent
     ],
+    exports: [RouterModule],
     providers: [
         { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true },
         currentComponentProvider('search-field')

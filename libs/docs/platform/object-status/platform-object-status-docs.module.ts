@@ -30,9 +30,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformObjectStatusModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformObjectStatusModule,
         PlatformObjectStatusDocsComponent,
         PlatformObjectStatusExampleComponent,
         PlatformObjectStatusTextExampleComponent,
@@ -44,6 +45,7 @@ const routes: Routes = [
         PlatformObjectStatusLargeExampleComponent,
         PlatformObjectStatusHeaderComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('object-status')]
 })
 export class PlatformObjectStatusDocsModule {}

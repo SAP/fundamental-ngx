@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FocusableItemPosition, FocusableListPosition } from '@fundamental-ngx/cdk/utils';
+import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
+import { NgFor, NgIf } from '@angular/common';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-grid-default-example',
@@ -34,7 +38,9 @@ import { FocusableItemPosition, FocusableListPosition } from '@fundamental-ngx/c
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FocusableGridDirective, NgFor, FocusableListDirective, FocusableItemDirective, NgIf]
 })
 export class DefaultExampleComponent {
     constructor() {}

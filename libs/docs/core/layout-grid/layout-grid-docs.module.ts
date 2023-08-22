@@ -19,9 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutGridModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        LayoutGridModule,
+        examples,
+        LayoutGridDocsComponent,
+        LayoutGridDocsHeaderComponent
+    ],
     exports: [RouterModule],
-    declarations: [examples, LayoutGridDocsComponent, LayoutGridDocsHeaderComponent],
     providers: [currentComponentProvider('layout-grid')]
 })
 export class LayoutGridDocsModule {}

@@ -38,10 +38,7 @@ const routes: Routes = [
         PlatformTextAreaModule,
         FdpFormGroupModule,
         PlatformButtonModule,
-        FormMessageModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FormMessageModule,
         PlatformTextareaDocsComponent,
         PlatformTextareaHeaderComponent,
         PlatformTextareaBasicExampleComponent,
@@ -49,6 +46,7 @@ const routes: Routes = [
         PlatformTextareaCounterTemplateExampleComponent,
         PlatformTextareaAutogrowExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('textarea')]
 })
 export class PlatformTextareaDocsModule {}

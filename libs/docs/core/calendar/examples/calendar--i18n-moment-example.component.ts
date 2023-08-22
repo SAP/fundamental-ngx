@@ -11,6 +11,11 @@ import 'moment/locale/ja';
 import 'moment/locale/tr';
 import 'moment/locale/zh-cn';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-calendar-i18n-moment-example',
@@ -30,7 +35,9 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
             <button fd-button label="Turkish" value="tr"></button>
             <button fd-button label="Chinese" value="zh"></button>
         </fd-segmented-button>
-        <fd-calendar [(ngModel)]="date"></fd-calendar>`
+        <fd-calendar [(ngModel)]="date"></fd-calendar>`,
+    standalone: true,
+    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, CalendarComponent]
 })
 export class CalendarI18nMomentExampleComponent {
     date = moment();

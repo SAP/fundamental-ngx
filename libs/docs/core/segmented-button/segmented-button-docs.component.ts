@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { SegmentedButtonFormExampleComponent } from './examples/segmented-button-form-example/segmented-button-form-example.component';
+import { SegmentedButtonComplexExampleComponent } from './examples/segmented-button-complex-example/segmented-button-complex-example.component';
+import { SegmentedButtonToggleExampleComponent } from './examples/segmented-button-toggle-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { SegmentedButtonDefaultExampleComponent } from './examples/segmented-button-default-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const segmentedDefaultExample = 'segmented-button-default-example.component.html';
 const segmentedDefaultExampleTs = 'segmented-button-default-example.component.ts';
@@ -13,7 +22,19 @@ const segmentedButtonCustomHtml = 'segmented-button-complex-example/segmented-bu
 
 @Component({
     selector: 'app-segmented-button',
-    templateUrl: './segmented-button-docs.component.html'
+    templateUrl: './segmented-button-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SegmentedButtonDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SegmentedButtonToggleExampleComponent,
+        SegmentedButtonComplexExampleComponent,
+        SegmentedButtonFormExampleComponent
+    ]
 })
 export class SegmentedButtonDocsComponent {
     defaultToggleHtml: ExampleFile[] = [

@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { map } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @Component({
     selector: 'fd-bar-default-example',
-    templateUrl: './bar-default-example.component.html'
+    templateUrl: './bar-default-example.component.html',
+    standalone: true,
+    imports: [BarModule, AvatarModule, AsyncPipe]
 })
 export class BarDefaultExampleComponent implements OnInit {
     navigationArrow$: Observable<string>;

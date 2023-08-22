@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button';
 
 @Component({
     selector: 'fdp-platform-menu-button-compact-example',
-    templateUrl: './platform-menu-button-compact-example.component.html'
+    templateUrl: './platform-menu-button-compact-example.component.html',
+    standalone: true,
+    imports: [PlatformMenuButtonModule, ContentDensityDirective, PlatformMenuModule]
 })
 export class PlatformMenuButtonCompactExampleComponent {
     basicMenuData: any[];

@@ -7,6 +7,12 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormsModule } from '@angular/forms';
+import { PlatformTimePickerModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-time-picker-template-example',
@@ -23,7 +29,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformTimePickerModule, FormsModule, ContentDensityDirective, ButtonModule, NgIf]
 })
 export class PlatformTimePickerTemplateExampleComponent {
     time24h: FdDate = new FdDate().setTime(18, 0, 0);

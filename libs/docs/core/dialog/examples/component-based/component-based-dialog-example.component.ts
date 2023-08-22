@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { DialogExampleComponent } from './dialog-example.component';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-component-based-dialog-example',
@@ -8,7 +9,9 @@ import { DialogExampleComponent } from './dialog-example.component';
     template: `
         <button fd-button label="Open from Component" (click)="open()"></button>
         <p>{{ closeReason }}</p>
-    `
+    `,
+    standalone: true,
+    imports: [ButtonModule]
 })
 export class ComponentBasedDialogExampleComponent {
     closeReason: string;

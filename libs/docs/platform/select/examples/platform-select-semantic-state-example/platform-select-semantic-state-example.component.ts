@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { OptionItem } from '@fundamental-ngx/platform/shared';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;
@@ -17,7 +19,9 @@ export class Fruit {
 @Component({
     selector: 'fdp-select-semantic-state-example',
     templateUrl: './platform-select-semantic-state-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformSelectModule, ContentDensityDirective]
 })
 export class PlatformSelectSemanticStateExampleComponent {
     userList = [

@@ -7,8 +7,14 @@ abstract class TypeEnforcerPipe<AsType, OriginalType = any> implements PipeTrans
     }
 }
 
-@Pipe({ name: 'asFormGroup' })
+@Pipe({
+    name: 'asFormGroup',
+    standalone: true
+})
 export class AsFormGroupPipe extends TypeEnforcerPipe<FormGroup, AbstractControl> implements PipeTransform {}
 
-@Pipe({ name: 'asFormControl' })
+@Pipe({
+    name: 'asFormControl',
+    standalone: true
+})
 export class AsFormControlPipe extends TypeEnforcerPipe<FormControl, AbstractControl> implements PipeTransform {}

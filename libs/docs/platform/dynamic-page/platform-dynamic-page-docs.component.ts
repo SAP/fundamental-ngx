@@ -3,6 +3,18 @@ import { Subscription } from 'rxjs';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 import { PlatformDynamicPagePageOverflowService } from './examples/platform-dynamic-page-page-overflow.service';
+import { PlatformDynamicPageFacetsExampleComponent } from './examples/platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component';
+import { PlatformDynamicPageFlexibleColumnExampleComponent } from './examples/platform-dynamic-page-flexible-column-example.component';
+import { PlatformDynamicPageNonCollapsibleExampleComponent } from './examples/platform-dynamic-page-non-collapsible-example.component';
+import { PlatformDynamicPageResponsivePaddingExampleComponent } from './examples/platform-dynamic-page-responsive-padding-example.component';
+import { PlatformDynamicPageTabbedExampleComponent } from './examples/platform-dynamic-page-tabbed-example.component';
+import { PlatformDynamicPageSnapScrollExampleComponent } from './examples/platform-dynamic-page-snap-scroll-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformDynamicPageExampleComponent } from './examples/platform-dynamic-page-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const dynamicPageBasicExample = 'platform-dynamic-page-example.component.html';
 const dynamicPageBasicExampleScss = 'platform-dynamic-page-example.component.scss';
@@ -39,7 +51,22 @@ const platformDynamicPagePageOverflowServiceTs = 'platform-dynamic-page-page-ove
 
 @Component({
     selector: 'app-dynamic-page',
-    templateUrl: './platform-dynamic-page-docs.component.html'
+    templateUrl: './platform-dynamic-page-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformDynamicPageExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformDynamicPageSnapScrollExampleComponent,
+        PlatformDynamicPageTabbedExampleComponent,
+        PlatformDynamicPageResponsivePaddingExampleComponent,
+        PlatformDynamicPageNonCollapsibleExampleComponent,
+        PlatformDynamicPageFlexibleColumnExampleComponent,
+        PlatformDynamicPageFacetsExampleComponent
+    ]
 })
 export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;

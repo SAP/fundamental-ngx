@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { GridListItemOutputEvent, GridListItemType, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { NgFor } from '@angular/common';
+import { GridListModule } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -15,7 +20,9 @@ interface GridListItem {
     templateUrl: './grid-list-single-select-right-example.component.html',
     styleUrls: ['./grid-list-single-select-right-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [GridListModule, NgFor, AvatarModule, LinkComponent, RouterLink]
 })
 export class GridListSingleSelectRightExampleComponent {
     list: GridListItem[] = [

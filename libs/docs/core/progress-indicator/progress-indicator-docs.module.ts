@@ -23,9 +23,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ProgressIndicatorModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ProgressIndicatorModule,
         ProgressIndicatorDocsComponent,
         ProgressIndicatorHeaderComponent,
         ProgressIndicatorDefaultComponent,
@@ -33,6 +34,7 @@ const routes: Routes = [
         ProgressIndicatorTruncationComponent,
         ProgressIndicatorAnimationComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('progress-indicator')]
 })
 export class ProgressIndicatorDocsModule {}

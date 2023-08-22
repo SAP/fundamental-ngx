@@ -28,16 +28,14 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         SelectModule,
         ContentDensityModule,
-        ObjectStatusModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ObjectStatusModule,
         ContentDensityDocsComponent,
         ContentDensityHeaderComponent,
         ContentDensityExampleComponent,
         DirectiveUsageExampleComponent,
         ContentDensityUserComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('content-density')]
 })
 export class ContentDensityDocsModule {}

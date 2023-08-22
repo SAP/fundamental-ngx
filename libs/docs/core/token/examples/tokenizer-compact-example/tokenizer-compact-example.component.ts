@@ -1,9 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { NgFor } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { FormItemModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-tokenizer-compact-example',
-    templateUrl: './tokenizer-compact-example.component.html'
+    templateUrl: './tokenizer-compact-example.component.html',
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FormItemModule,
+        TokenModule,
+        ContentDensityDirective,
+        NgFor,
+        FormControlModule
+    ]
 })
 export class TokenizerCompactExampleComponent implements OnInit {
     tokenizerExampleForm: FormGroup;

@@ -1,6 +1,25 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformStandardListUnreadExampleComponent } from './examples/platform-standard-list-unread-example.component';
+import { PlatformStandardListItemWithNavigationExampleComponent } from './examples/platform-standard-list-item-with-navigation-example.component';
+import { PlatformStandardListItemWithSelectionExampleComponent } from './examples/platform-standard-list-item-with-selection-example.component';
+import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './examples/platform-standard-list-item-with-single-selection-example.component';
+import { PlatformStandardListItemWithFooterExampleComponent } from './examples/platform-standard-list-item-with-footer-example.component';
+import { PlatformStandardListItemBorderLessExampleComponent } from './examples/platform-standard-list-item-border-less-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    PlatformNonByLineStandardListItemExampleComponent,
+    PlatformStandardListItemtWithGroupHeaderExampleComponent,
+    PlatformStandardListItemExampleComponent,
+    PlatformStandardListItemWithSecondaryTypeExampleComponent,
+    PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent
+} from './examples/platform-standard-list-item-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { RouterLink } from '@angular/router';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const sliSrc = 'platform-standard-list-item-example.component.html';
 const unreadListItemSrc = 'platform-standard-list-unread-example.component.html';
@@ -21,7 +40,27 @@ const sli = 'platform-non-byline-standard-list-item-example.component.html';
 
 @Component({
     selector: 'app-standard-list-item',
-    templateUrl: './platform-standard-list-item-docs.component.html'
+    templateUrl: './platform-standard-list-item-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        RouterLink,
+        ComponentExampleComponent,
+        PlatformNonByLineStandardListItemExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformStandardListItemBorderLessExampleComponent,
+        PlatformStandardListItemWithFooterExampleComponent,
+        PlatformStandardListItemtWithGroupHeaderExampleComponent,
+        PlatformStandardListItemExampleComponent,
+        PlatformStandardListItemWithSecondaryTypeExampleComponent,
+        PlatformStandardListItemWithSingleSelectionExampleComponent,
+        PlatformStandardListItemWithSelectionExampleComponent,
+        PlatformStandardListItemWithNavigationExampleComponent,
+        PlatformStandardListItemWithInvertedSecondaryTypeExampleComponent,
+        PlatformStandardListUnreadExampleComponent
+    ]
 })
 export class PlatformStandardListItemDocsComponent {
     simpleSLI: ExampleFile[] = [

@@ -45,10 +45,12 @@ const routes: Routes = [
         ButtonModule,
         FormModule,
         InputGroupModule,
-        SegmentedButtonModule
+        SegmentedButtonModule,
+        examples,
+        TabsHeaderComponent,
+        TabsDocsComponent
     ],
     exports: [RouterModule],
-    declarations: [examples, TabsHeaderComponent, TabsDocsComponent],
     providers: [currentComponentProvider('tabs')]
 })
 export class TabsDocsModule {}

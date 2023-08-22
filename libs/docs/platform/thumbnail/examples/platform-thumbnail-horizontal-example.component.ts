@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 
 import { Media } from '@fundamental-ngx/platform/thumbnail';
+import { PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
 
 @Component({
     selector: 'fdp-platform-thumbnail-horizontal-example',
-    templateUrl: './platform-thumbnail-horizontal-example.component.html'
+    templateUrl: './platform-thumbnail-horizontal-example.component.html',
+    standalone: true,
+    imports: [PlatformThumbnailModule]
 })
 export class PlatformThumbnailHorizontalExampleComponent {
     data: Media[] = [

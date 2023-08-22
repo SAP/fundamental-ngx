@@ -75,10 +75,7 @@ const routes: Routes = [
         DragAndDropModule,
         PlatformInputModule,
         PlatformButtonModule,
-        FdpFormGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FdpFormGroupModule,
         PlatformListDocsComponent,
         PlatformListHeaderComponent,
         PlatformListExampleComponent,
@@ -98,6 +95,7 @@ const routes: Routes = [
         PlatformListFreeContentExampleComponent,
         PlatformListLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('list')]
 })
 export class PlatformListDocsModule {}

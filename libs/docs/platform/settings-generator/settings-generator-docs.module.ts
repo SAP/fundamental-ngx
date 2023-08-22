@@ -51,17 +51,7 @@ const routes: Routes = [
         AsyncOrSyncPipe,
         ReactiveFormsModule,
         PlatformSliderModule,
-        FormsModule
-    ],
-    exports: [
-        RouterModule,
-        SettingsGeneratorDialogExampleComponent,
-        SettingsGeneratorMessagePopoverExampleComponent,
-        SettingsGeneratorCustomControlExampleComponent,
-        SettingsGeneratorCustomLayoutExampleComponent,
-        SettingsGeneratorTabsLayoutComponent
-    ],
-    declarations: [
+        FormsModule,
         examples,
         SettingsGeneratorDocsComponent,
         SettingsGeneratorHeaderComponent,
@@ -71,6 +61,14 @@ const routes: Routes = [
         SettingsGeneratorCustomLayoutExampleComponent,
         SettingsGeneratorTabsLayoutComponent,
         PlatformFormGeneratorCustomSliderElementComponent
+    ],
+    exports: [
+        RouterModule,
+        SettingsGeneratorDialogExampleComponent,
+        SettingsGeneratorMessagePopoverExampleComponent,
+        SettingsGeneratorCustomControlExampleComponent,
+        SettingsGeneratorCustomLayoutExampleComponent,
+        SettingsGeneratorTabsLayoutComponent
     ],
     providers: [currentComponentProvider('settings-generator')]
 })

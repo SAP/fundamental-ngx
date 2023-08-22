@@ -6,11 +6,18 @@ import {
     WizardGeneratorFormsValue,
     WizardGeneratorItem
 } from '@fundamental-ngx/platform/wizard-generator';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-external-navigation-example',
     templateUrl: './wizard-generator-external-navigation-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule, NgIf, BarModule, PlatformButtonModule, ContentDensityDirective, JsonPipe]
 })
 export class WizardGeneratorExternalNavigationExampleComponent {
     @ViewChild(WizardGeneratorComponent)

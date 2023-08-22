@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { map } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 
 @Component({
     selector: 'fd-action-bar-long-string-title-truncation-example',
-    templateUrl: './action-bar-long-string-title-truncation-example.component.html'
+    templateUrl: './action-bar-long-string-title-truncation-example.component.html',
+    standalone: true,
+    imports: [ActionBarModule, ButtonModule, AsyncPipe]
 })
 export class ActionBarLongStringTitleTruncationExampleComponent implements OnInit {
     navigationArrow$: Observable<string>;

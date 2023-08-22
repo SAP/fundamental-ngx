@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { NotificationModule } from '@fundamental-ngx/core/notification';
 
 @Component({
     selector: 'fd-notification-options-example',
     templateUrl: './notification-options-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NotificationModule, AvatarModule, ButtonModule, MessageStripComponent, ActionSheetModule]
 })
 export class NotificationOptionsExampleComponent {
     @ViewChild(ActionSheetComponent)

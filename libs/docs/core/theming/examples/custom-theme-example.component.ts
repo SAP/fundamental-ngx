@@ -7,6 +7,9 @@ import {
 } from '@fundamental-ngx/core/theming';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgFor, JsonPipe } from '@angular/common';
 
 const customThemingConfig = new BaseThemingConfig();
 
@@ -47,7 +50,9 @@ customThemingConfig.customThemes = [
             provide: THEMING_CONFIG_TOKEN,
             useValue: customThemingConfig
         }
-    ]
+    ],
+    standalone: true,
+    imports: [NgFor, ButtonModule, FormLabelModule, JsonPipe]
 })
 export class CustomThemeExampleComponent implements OnDestroy {
     themes: CompleteThemeDefinition[];

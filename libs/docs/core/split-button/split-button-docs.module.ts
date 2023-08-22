@@ -24,9 +24,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SplitButtonModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        SplitButtonModule,
         SplitButtonDocsComponent,
         SplitButtonHeaderComponent,
         ButtonSplitTypesIconsComponent,
@@ -36,6 +37,7 @@ const routes: Routes = [
         ButtonSplitProgrammaticalExampleComponent,
         ButtonSplitBehaviorsComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('split-button')]
 })
 export class SplitButtonDocsModule {}

@@ -9,10 +9,13 @@ import {
     UploadCollectionDataSource
 } from '@fundamental-ngx/platform/upload-collection';
 import { PlatformUploadCollectionDataProviderExample } from './platform-upload-collection-base-data-provider';
+import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 
 @Component({
     selector: 'fdp-upload-collection-turn-off-example',
-    templateUrl: './platform-upload-collection-turn-off-example.component.html'
+    templateUrl: './platform-upload-collection-turn-off-example.component.html',
+    standalone: true,
+    imports: [PlatformUploadCollectionModule]
 })
 export class PlatformUploadCollectionTurnOffExampleComponent {
     dataSource: UploadCollectionDataSource;

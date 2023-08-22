@@ -1,14 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-forms-example',
     templateUrl: './combobox-forms-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformComboboxModule, NgIf, JsonPipe]
 })
 export class ComboboxFormsExampleComponent {
     dataSource = [

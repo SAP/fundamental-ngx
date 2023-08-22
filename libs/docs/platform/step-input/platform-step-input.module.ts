@@ -28,10 +28,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformStepInputModule,
-        FdpFormGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FdpFormGroupModule,
         PlatformStepInputDocsComponent,
         PlatformStepInputHeaderComponent,
         PlatformNumberStepInputExampleComponent,
@@ -39,6 +36,7 @@ const routes: Routes = [
         PlatformNumberStepInputTemplateFormExampleComponent,
         PlatformNumberStepInputStateExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('step-input')]
 })
 export class PlatformStepInputDocsModule {}

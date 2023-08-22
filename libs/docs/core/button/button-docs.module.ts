@@ -4,16 +4,14 @@ import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule }
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { ButtonHeaderComponent } from './button-header/button-header.component';
 import { ButtonDocsComponent } from './button-docs.component';
-import {
-    ButtonIconsExampleComponent,
-    ButtonMenuExampleComponent,
-    ButtonSizesExampleComponent,
-    ButtonStateExampleComponent,
-    ButtonToggledExampleComponent,
-    ButtonTypesExampleComponent
-} from './examples/button-examples.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { ButtonTypesExampleComponent } from './examples/button-types-example.component';
+import { ButtonIconsExampleComponent } from './examples/button-icons-example.component';
+import { ButtonMenuExampleComponent } from './examples/button-menu-example.component';
+import { ButtonSizesExampleComponent } from './examples/button-sizes-example.component';
+import { ButtonStateExampleComponent } from './examples/button-state-example.component';
+import { ButtonToggledExampleComponent } from './examples/button-toggled-example.component';
 
 const routes: Routes = [
     {
@@ -31,9 +29,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ButtonModule, CarouselModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ButtonModule,
+        CarouselModule,
         ButtonDocsComponent,
         ButtonHeaderComponent,
         ButtonTypesExampleComponent,
@@ -43,6 +43,7 @@ const routes: Routes = [
         ButtonMenuExampleComponent,
         ButtonToggledExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('button')]
 })
 export class ButtonDocsModule {}

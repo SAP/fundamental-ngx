@@ -1,5 +1,18 @@
 import { Component, TemplateRef } from '@angular/core';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { FormsModule } from '@angular/forms';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 interface Fruit {
     id: number;
@@ -9,7 +22,26 @@ interface Fruit {
 
 @Component({
     selector: 'fd-dialog-complex-example',
-    templateUrl: './dialog-complex-example.component.html'
+    templateUrl: './dialog-complex-example.component.html',
+    standalone: true,
+    imports: [
+        DialogModule,
+        TemplateDirective,
+        BarModule,
+        TitleComponent,
+        InputGroupModule,
+        InitialFocusDirective,
+        FormsModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgIf,
+        ListModule,
+        NgFor,
+        NgClass,
+        ListSecondaryDirective,
+        ButtonModule,
+        AsyncPipe
+    ]
 })
 export class DialogComplexExampleComponent {
     fruitCollection: Fruit[] = [

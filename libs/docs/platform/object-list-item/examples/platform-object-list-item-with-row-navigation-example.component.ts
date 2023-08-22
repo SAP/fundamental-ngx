@@ -3,6 +3,10 @@ import { Observable, of } from 'rxjs';
 
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectListItemModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Product[] = [
     {
@@ -144,7 +148,9 @@ export class ListDataProvider extends DataProvider<Product> {
 }
 @Component({
     selector: 'fdp-platform-object-list-item-with-row-navigation-example',
-    templateUrl: './platform-object-list-item-with-row-navigation-example.component.html'
+    templateUrl: './platform-object-list-item-with-row-navigation-example.component.html',
+    standalone: true,
+    imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusModule]
 })
 export class PlatformObjectListItemWithRowNavigationExampleComponent {
     _dataSource: ListDataSource<Product> = new ListDataSource<Product>(new ListDataProvider());

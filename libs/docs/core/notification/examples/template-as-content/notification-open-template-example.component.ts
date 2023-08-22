@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { NotificationService } from '@fundamental-ngx/core/notification';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { NotificationModule } from '@fundamental-ngx/core/notification';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-notification-open-template-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './notification-open-template-example.component.html',
-    styles: ['.action-button {margin-left: 12px;}']
+    styles: ['.action-button {margin-left: 12px;}'],
+    standalone: true,
+    imports: [ButtonModule, NotificationModule, AvatarModule]
 })
 export class NotificationOpenTemplateExampleComponent {
     @ViewChild('notificationTemplate') notificationTemplate: TemplateRef<unknown>;

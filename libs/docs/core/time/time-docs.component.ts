@@ -2,6 +2,20 @@ import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { TimeFormExampleComponent } from './examples/time-form-example.component';
+import { TimeTwoDigitsExampleComponent } from './examples/time-two-digits-example/time-two-digits-example.component';
+import { TimeOnlyHoursExampleComponent } from './examples/time-only-hours-example.component';
+import { TimeNoSecondsExampleComponent } from './examples/time-no-seconds-example.component';
+import { TimeProgrammaticallyExampleComponent } from './examples/time-programmatically-example.component';
+import { TimeSizesExampleComponent } from './examples/time-sizes-example.component';
+import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example/time-no-spinners-example.component';
+import { Time12ExampleComponent } from './examples/time-12-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { TimeExampleComponent } from './examples/time-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const timeFormScssSrc = 'time-form-example.component.scss';
 
@@ -29,7 +43,24 @@ const timeFormTsSrc = 'time-form-example.component.ts';
 
 @Component({
     selector: 'app-time',
-    templateUrl: './time-docs.component.html'
+    templateUrl: './time-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TimeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        Time12ExampleComponent,
+        TimeNoSpinnersExampleComponent,
+        TimeSizesExampleComponent,
+        TimeProgrammaticallyExampleComponent,
+        TimeNoSecondsExampleComponent,
+        TimeOnlyHoursExampleComponent,
+        TimeTwoDigitsExampleComponent,
+        TimeFormExampleComponent
+    ]
 })
 export class TimeDocsComponent {
     schema: Schema;

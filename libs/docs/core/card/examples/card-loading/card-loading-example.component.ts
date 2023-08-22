@@ -1,9 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { CardModule } from '@fundamental-ngx/core/card';
 
 @Component({
     selector: 'fd-card-loading-example',
     templateUrl: './card-loading-example.component.html',
     styleUrls: ['./card-loading-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CardModule, SkeletonModule, ListModule, RepeatDirective]
 })
 export class CardLoadingExampleComponent {}

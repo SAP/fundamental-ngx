@@ -1,12 +1,35 @@
 import { Component, ChangeDetectionStrategy, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-snap-scroll-example',
     templateUrl: './platform-dynamic-page-snap-scroll-example.component.html',
     styleUrls: ['./platform-dynamic-page-snap-scroll-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        PlatformDynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ContentDensityDirective,
+        ToolbarItemDirective,
+        ToolbarSeparatorComponent,
+        BarModule
+    ]
 })
 export class PlatformDynamicPageSnapScrollExampleComponent implements OnDestroy {
     @ViewChild('overlay')

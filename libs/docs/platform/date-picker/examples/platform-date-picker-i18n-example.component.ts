@@ -4,6 +4,11 @@ import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
 import dayjs from 'dayjs';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 // Dayjs locale data required for this example
 import 'dayjs/locale/fr';
@@ -43,12 +48,10 @@ const CUSTOM_DATETIME_FORMATS = {
 @Component({
     selector: 'fdp-platform-date-picker-i18n-example',
     templateUrl: './platform-date-picker-i18n-example.component.html',
-
     // Note that this can be provided in the root of your application.
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-
         { provide: LOCALE_ID, useValue: 'fr' },
         {
             provide: DatetimeAdapter,
@@ -63,7 +66,9 @@ const CUSTOM_DATETIME_FORMATS = {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickeri18nExampleComponent {
     date = dayjs();

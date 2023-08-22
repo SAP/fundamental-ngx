@@ -3,6 +3,12 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
 import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { of } from 'rxjs';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-labels-example',
@@ -16,7 +22,6 @@ import { of } from 'rxjs';
                 ...FD_LANGUAGE_ENGLISH,
                 platformSmartFilterBar: {
                     ...FD_LANGUAGE_ENGLISH.platformSmartFilterBar,
-
                     // Strategy labels
                     filterConditionContains: 'custom "contains" label',
                     filterConditionEqualTo: 'custom "equal to" label',
@@ -31,7 +36,6 @@ import { of } from 'rxjs';
                     filterConditionOnOrAfter: 'custom "on or after" label',
                     filterConditionBefore: 'custom "before" label',
                     filterConditionBeforeOrOn: 'custom "before or on" label',
-
                     // Filters visibility category labels
                     settingsCategoryAll: 'Custom "All" label',
                     settingsCategoryVisible: 'Custom "Visible" label',
@@ -41,6 +45,15 @@ import { of } from 'rxjs';
                 }
             })
         }
+    ],
+    standalone: true,
+    imports: [
+        PlatformSmartFilterBarModule,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
     ]
 })
 export class PlatformSmartFilterBarCustomLabelsExampleComponent {

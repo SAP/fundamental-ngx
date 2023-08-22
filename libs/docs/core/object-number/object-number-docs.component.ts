@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    ObjectNumberBasicExampleComponent,
+    ObjectNumberStatusExampleComponent,
+    ObjectNumberLargeExampleComponent,
+    ObjectNumberBoldExampleComponent,
+    ObjectNumberUnitsExampleComponent,
+    ObjectNumberDecimalExampleComponent,
+    ObjectNumberTruncationExampleComponent
+} from './examples/object-number-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const basicHtml = 'object-number-basic-example.component.html';
 const boldHtml = 'object-number-bold-example.component.html';
@@ -12,7 +26,22 @@ const truncationHtml = 'object-number-truncation-example.component.html';
 
 @Component({
     selector: 'app-object-number',
-    templateUrl: './object-number-docs.component.html'
+    templateUrl: './object-number-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        ObjectNumberBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        ObjectNumberStatusExampleComponent,
+        ObjectNumberLargeExampleComponent,
+        ObjectNumberBoldExampleComponent,
+        ObjectNumberUnitsExampleComponent,
+        ObjectNumberDecimalExampleComponent,
+        ObjectNumberTruncationExampleComponent
+    ]
 })
 export class ObjectNumberDocsComponent {
     basic: ExampleFile[] = [

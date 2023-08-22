@@ -49,10 +49,7 @@ const routes: Routes = [
         ToolbarModule,
         PlatformListModule,
         PlatformButtonModule,
-        StandardListItemModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        StandardListItemModule,
         PlatformStandardListItemDocsComponent,
         PlatformStandardListItemHeaderComponent,
         PlatformStandardListItemExampleComponent,
@@ -67,6 +64,7 @@ const routes: Routes = [
         PlatformNonByLineStandardListItemExampleComponent,
         PlatformStandardListUnreadExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('standard-list-item')]
 })
 export class PlatformStandardListItemDocsModule {}

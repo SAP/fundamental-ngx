@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TimeModule } from '@fundamental-ngx/core/time';
 
 @Component({
     selector: 'fd-time-sizes-example',
@@ -9,7 +12,9 @@ import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/cor
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
-    ]
+    ],
+    standalone: true,
+    imports: [TimeModule, ContentDensityDirective, FormsModule]
 })
 export class TimeSizesExampleComponent {
     timeCompact = new FdDate();

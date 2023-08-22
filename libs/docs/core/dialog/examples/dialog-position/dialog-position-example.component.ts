@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-dialog-position-example',
-    templateUrl: './dialog-position-example.component.html'
+    templateUrl: './dialog-position-example.component.html',
+    standalone: true,
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, ButtonModule]
 })
 export class DialogPositionExampleComponent {
     constructor(public _dialogService: DialogService) {}

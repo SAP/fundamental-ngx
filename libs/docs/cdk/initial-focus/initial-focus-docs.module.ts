@@ -35,10 +35,13 @@ const routes: Routes = [
         ComboboxModule,
         DatePickerModule,
         StepInputModule,
-        SliderModule
+        SliderModule,
+        examples,
+        InitialFocusDocsComponent,
+        InitialFocusHeaderComponent,
+        NestedElementsExampleComponent
     ],
     exports: [RouterModule, NestedElementsExampleComponent],
-    declarations: [examples, InitialFocusDocsComponent, InitialFocusHeaderComponent, NestedElementsExampleComponent],
     providers: [currentComponentProvider('initial-focus')]
 })
 export class InitialFocusDocsModule {}

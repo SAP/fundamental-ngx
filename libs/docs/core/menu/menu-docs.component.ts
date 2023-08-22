@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
+import { RouterLink } from '@angular/router';
+import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
+import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    MenuExampleComponent,
+    MenuAddonExampleComponent,
+    MenuSeparatorExampleComponent
+} from './examples/menu-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const menuHtml = 'menu-example.component.html';
 const menuAddonHtml = 'menu-addon-example.component.html';
@@ -13,7 +27,22 @@ const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
 
 @Component({
     selector: 'app-menu',
-    templateUrl: './menu-docs.component.html'
+    templateUrl: './menu-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MenuExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MenuAddonExampleComponent,
+        MenuSeparatorExampleComponent,
+        MenuScrollbarExampleComponent,
+        MenuWithSubmenuExampleComponent,
+        RouterLink,
+        MenuMobileExampleComponent
+    ]
 })
 export class MenuDocsComponent {
     menuBasic: ExampleFile[] = [

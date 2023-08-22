@@ -6,6 +6,15 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { SliderComponent } from '@fundamental-ngx/core/slider';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdk-initial-focus-nested-elements-example',
@@ -32,6 +41,19 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        SelectModule,
+        InitialFocusDirective,
+        NgFor,
+        ComboboxModule,
+        DatePickerComponent,
+        FormsModule,
+        FormItemModule,
+        SliderComponent
     ]
 })
 export class NestedElementsExampleComponent {

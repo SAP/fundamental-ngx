@@ -29,9 +29,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, AvatarModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        AvatarModule,
         AvatarAccentColorsExampleComponent,
         AvatarBackgroundImageExampleComponent,
         AvatarBordersExampleComponent,
@@ -46,6 +47,7 @@ const routes: Routes = [
         AvatarZoomIconExampleComponent,
         AvatarDefaultImageWithAlternativeOptionsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('avatar')]
 })
 export class AvatarDocsModule {}

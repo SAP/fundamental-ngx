@@ -25,7 +25,6 @@ import { LERNA_JSON } from './tokens/lerna-json.token';
 /** PROVIDES DEPENDENCIES REQUIRED TO BUILD DOCUMENTATION SHELL */
 
 @NgModule({
-    declarations: [ToolbarDocsComponent, DocumentationBaseComponent, SectionsToolbarComponent, SortByPipe, FilterPipe],
     imports: [
         MenuModule,
         FormsModule,
@@ -37,7 +36,12 @@ import { LERNA_JSON } from './tokens/lerna-json.token';
         ShellbarModule,
         InputGroupModule,
         SideNavigationModule,
-        MarkdownModule.forChild()
+        MarkdownModule.forChild(),
+        ToolbarDocsComponent,
+        DocumentationBaseComponent,
+        SectionsToolbarComponent,
+        SortByPipe,
+        FilterPipe
     ],
     exports: [
         CommonModule,

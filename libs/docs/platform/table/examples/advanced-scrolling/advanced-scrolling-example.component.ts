@@ -19,12 +19,27 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { TableVirtualScrollDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-doc-advanced-scrolling-example',
     templateUrl: './advanced-scrolling-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        TableDraggableDirective,
+        TableVirtualScrollDirective
+    ]
 })
 export class AdvancedScrollingExampleComponent {
     source: TableDataSource<ExampleItem>;

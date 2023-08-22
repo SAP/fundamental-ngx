@@ -14,6 +14,11 @@ import {
     TableState
 } from '@fundamental-ngx/platform/table';
 import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
+import { FdpCellDef, FdpTableCell } from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-p13-filter-example',
@@ -25,6 +30,15 @@ import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpCellDef,
+        FdpTableCell
     ]
 })
 export class PlatformTableP13FilterExampleComponent {

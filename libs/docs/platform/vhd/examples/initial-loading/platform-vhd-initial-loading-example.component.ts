@@ -11,6 +11,11 @@ import {
     VhdDefineExcludeStrategy
 } from '@fundamental-ngx/platform/value-help-dialog';
 import { Observable } from 'rxjs';
+import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface ExampleTestModel {
     id: number;
@@ -56,7 +61,9 @@ const data = exampleDataSource();
 
 @Component({
     selector: 'fdp-platform-vhd-initial-loading-example',
-    templateUrl: './platform-vhd-initial-loading-example.component.html'
+    templateUrl: './platform-vhd-initial-loading-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, NgIf, TokenModule, ContentDensityDirective, NgFor, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdInitialLoadingExampleComponent {
     filters = data.filters;

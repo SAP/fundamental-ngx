@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
 
 export interface Name {
     title: string;
@@ -6,7 +9,9 @@ export interface Name {
 
 @Component({
     selector: 'fdp-platform-list-with-navigation-example',
-    templateUrl: './platform-list-with-navigation-example.component.html'
+    templateUrl: './platform-list-with-navigation-example.component.html',
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformListWithNavigationExampleComponent {
     items: Name[] = [{ title: 'Item1' }, { title: 'Item2' }, { title: 'Item3' }];

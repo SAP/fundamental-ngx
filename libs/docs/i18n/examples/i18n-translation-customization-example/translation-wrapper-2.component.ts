@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { patchLanguage } from '@fundamental-ngx/i18n';
+import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'app-translation-wrapper-2',
@@ -25,6 +27,8 @@ import { patchLanguage } from '@fundamental-ngx/i18n';
                 counterMessageCharactersRemainingPlural: '{{ count }} Zeichen übrig'
             }
         })
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, PlatformTextAreaModule]
 })
 export class TranslationWrapper2Component {}

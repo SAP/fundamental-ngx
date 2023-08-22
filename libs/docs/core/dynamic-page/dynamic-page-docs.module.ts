@@ -54,10 +54,7 @@ const routes: Routes = [
         ObjectNumberModule,
         ObjectStatusModule,
         CdkScrollableModule,
-        InlineHelpModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        InlineHelpModule,
         DynamicPageDocsComponent,
         DynamicPageDocsHeaderComponent,
         DynamicPageExampleComponent,
@@ -67,6 +64,7 @@ const routes: Routes = [
         DynamicPageDynamicContainerHeightExampleComponent,
         DynamicPageFacetsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('dynamic-page')]
 })
 export class DynamicPageDocsModule {}

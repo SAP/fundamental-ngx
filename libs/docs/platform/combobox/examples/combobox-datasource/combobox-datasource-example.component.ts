@@ -3,12 +3,17 @@ import { of } from 'rxjs';
 
 import { ArrayComboBoxDataSource, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { JsonPipe } from '@angular/common';
+import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-datasource-example',
     templateUrl: './combobox-datasource-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformComboboxModule, JsonPipe]
 })
 export class ComboboxDatasourceExampleComponent {
     dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];

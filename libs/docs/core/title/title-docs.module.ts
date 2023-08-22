@@ -24,9 +24,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TitleModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        TitleModule,
         TitleDocsComponent,
         TitleHeaderComponent,
         TitleSemanticExampleComponent,
@@ -34,6 +35,7 @@ const routes: Routes = [
         TitleVisualExampleComponent,
         TitleWrappingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('title')]
 })
 export class TitleDocsModule {}

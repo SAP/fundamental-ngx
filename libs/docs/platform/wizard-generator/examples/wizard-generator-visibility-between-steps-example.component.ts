@@ -9,10 +9,14 @@ import {
     WizardGeneratorItem,
     WizardTitle
 } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-wizard-generator-visibility-between-steps-example',
-    templateUrl: './wizard-generator-visibility-between-steps-example.component.html'
+    templateUrl: './wizard-generator-visibility-between-steps-example.component.html',
+    standalone: true,
+    imports: [PlatformButtonModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorVisibilityBetweenStepsExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {

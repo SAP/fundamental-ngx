@@ -21,9 +21,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [PlatformObjectMarkerDocsComponent, ObjectMarkerHeaderComponent, ...COMPONENTS],
     exports: [RouterModule],
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformObjectMarkerModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformObjectMarkerModule,
+        PlatformObjectMarkerDocsComponent,
+        ObjectMarkerHeaderComponent,
+        ...COMPONENTS
+    ],
     providers: [currentComponentProvider('object-marker')]
 })
 export class PlatformObjectMarkerDocsModule {}

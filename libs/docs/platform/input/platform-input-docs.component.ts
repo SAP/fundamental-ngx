@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformInputAutoCompleteValidationExampleComponent } from './examples/platform-input-auto-complete-validation-example.component';
+import { PlatformInputReactiveMinMaxValidationExampleComponent } from './examples/platform-input-reactive-min-max-validation-example.component';
+import { PlatformInputReactiveValidationExampleComponent } from './examples/platform-input-reactive-validation-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformInputExampleComponent } from './examples/platform-input-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const platformInputDefaultTypesSrc = 'platform-input-example.component.html';
 const platformInputDefaultTypesTsSrc = 'platform-input-example.component.ts';
@@ -22,7 +30,18 @@ const platformInputReactiveFormMinMaxValidationTypesTsSrc =
 
 @Component({
     selector: 'fd-platform-input-docs',
-    templateUrl: './platform-input-docs.component.html'
+    templateUrl: './platform-input-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformInputExampleComponent,
+        CodeExampleComponent,
+        PlatformInputReactiveValidationExampleComponent,
+        PlatformInputReactiveMinMaxValidationExampleComponent,
+        PlatformInputAutoCompleteValidationExampleComponent
+    ]
 })
 export class PlatformInputDocsComponent {
     defaultInputType: ExampleFile[] = [

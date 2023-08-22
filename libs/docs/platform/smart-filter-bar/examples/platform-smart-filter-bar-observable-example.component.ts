@@ -20,12 +20,27 @@ import {
 import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { get } from 'lodash-es';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
     selector: 'fdp-smart-filter-bar-observable-example',
     templateUrl: './platform-smart-filter-bar-observable-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        PlatformSmartFilterBarModule,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
+    ]
 })
 export class PlatformSmartFilterBarObservableExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;

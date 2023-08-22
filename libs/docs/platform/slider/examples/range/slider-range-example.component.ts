@@ -1,12 +1,17 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { SliderCustomValue } from '@fundamental-ngx/platform/slider';
+import { JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
 
 @Component({
     selector: 'fdp-slider-range-example',
     templateUrl: './slider-range-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [SliderComponent, FormsModule, JsonPipe]
 })
 export class SliderRangeExampleComponent {
     value = [20, 70];

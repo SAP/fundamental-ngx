@@ -17,13 +17,33 @@ import {
     SectionInterfaceContentNested
 } from './section.interface';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { SortByPipe } from '../pipes/sort.pipe';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NestedListModule } from '@fundamental-ngx/core/nested-list';
+import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
+import { FormsModule } from '@angular/forms';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 const SMALL_SCREEN_BREAKPOINT = 992;
 @Component({
     selector: 'sections-toolbar',
     templateUrl: './sections-toolbar.component.html',
     styleUrls: ['./sections-toolbar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        InputGroupModule,
+        FormsModule,
+        SideNavigationModule,
+        NestedListModule,
+        NgFor,
+        NgIf,
+        NgTemplateOutlet,
+        RouterLinkActive,
+        RouterLink,
+        SortByPipe
+    ]
 })
 export class SectionsToolbarComponent implements OnInit, OnChanges {
     @Input() sections: SectionInterface[];

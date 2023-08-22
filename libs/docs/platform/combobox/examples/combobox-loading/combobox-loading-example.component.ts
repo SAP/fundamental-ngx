@@ -3,12 +3,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DATA_PROVIDERS, BaseDataProvider, ComboBoxDataSource } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
+import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-loading-example',
     templateUrl: './combobox-loading-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformComboboxModule, FormsModule]
 })
 export class ComboboxLoadingExampleComponent {
     private options = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];

@@ -39,10 +39,7 @@ const routes: Routes = [
         FormModule,
         ShellbarModule,
         PlatformSearchFieldModule,
-        ProductSwitchModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ProductSwitchModule,
         SideNavigationCozyWideTextOnly1LevelExampleComponent,
         SideNavigationCozyWideTextOnly3LevelExampleComponent,
         SideNavigationNarrowExampleComponent,
@@ -57,6 +54,7 @@ const routes: Routes = [
         SideNavigationCollapseExampleComponent,
         SideNavigationHeaderComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('side-navigation')]
 })
 export class SideNavigationDocsModule {}

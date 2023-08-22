@@ -26,8 +26,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectIdentifierModule, TableModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ObjectIdentifierModule,
+        TableModule,
         ObjectIdentifierDocsComponent,
         ObjectIdentifierHeaderComponent,
         ObjectIdentifierDefaultExampleComponent,

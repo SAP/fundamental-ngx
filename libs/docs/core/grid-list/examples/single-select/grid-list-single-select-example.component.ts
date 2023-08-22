@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { GridListItemOutputEvent, GridListItemType, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
+import { NgFor, NgIf } from '@angular/common';
+import { GridListModule } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -16,7 +18,9 @@ interface GridListItem {
     templateUrl: './grid-list-single-select-example.component.html',
     styleUrls: ['./grid-list-single-select-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [GridListModule, NgFor, NgIf]
 })
 export class GridListSingleSelectExampleComponent {
     list: GridListItem[] = [

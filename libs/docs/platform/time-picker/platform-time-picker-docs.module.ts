@@ -31,16 +31,14 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         FdDatetimeModule,
         PlatformTimePickerModule,
-        FdpFormGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FdpFormGroupModule,
         PlatformTimePickerDocsComponent,
         PlatformTimePickerHeaderComponent,
         PlatformTimePickerBasicExampleComponent,
         PlatformTimePickerReactiveExampleComponent,
         PlatformTimePickerTemplateExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('time-picker')]
 })
 export class PlatformTimePickerDocsModule {}

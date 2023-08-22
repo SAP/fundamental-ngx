@@ -46,10 +46,7 @@ const routes: Routes = [
         RadioModule,
         SharedDocumentationModule,
         SkeletonModule,
-        RepeatModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        RepeatModule,
         ListBylineDocsComponent,
         ListBylineHeaderComponent,
         ListBylineSelectionExampleComponent,
@@ -62,6 +59,7 @@ const routes: Routes = [
         ListBylineLoadingExampleComponent,
         ListBylineUnreadExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('list-byline')]
 })
 export class ListDocsModule {}

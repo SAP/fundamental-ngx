@@ -19,9 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, InfiniteScrollModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        InfiniteScrollModule,
+        InfiniteScrollDocsComponent,
+        InfiniteScrollHeaderComponent,
+        InfiniteScrollBasicExampleComponent
+    ],
     exports: [RouterModule],
-    declarations: [InfiniteScrollDocsComponent, InfiniteScrollHeaderComponent, InfiniteScrollBasicExampleComponent],
     providers: [currentComponentProvider('infinite-scroll')]
 })
 export class InfiniteScrollDocsModule {}

@@ -36,10 +36,7 @@ const routes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         BusyIndicatorModule,
-        FormModule
-    ],
-    exports: [RouterModule, MultiComboboxResponsiveTokenizerExampleComponent],
-    declarations: [
+        FormModule,
         MultiComboboxDocsComponent,
         MultiComboboxHeaderComponent,
         MultiComboboxDatasourceExampleComponent,
@@ -51,6 +48,7 @@ const routes: Routes = [
         MultiComboboxLoadingExampleComponent,
         MultiComboboxResponsiveTokenizerExampleComponent
     ],
+    exports: [RouterModule, MultiComboboxResponsiveTokenizerExampleComponent],
     providers: [currentComponentProvider('multi-combobox')]
 })
 export class MultiComboboxDocsModule {}

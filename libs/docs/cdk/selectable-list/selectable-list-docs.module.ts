@@ -24,15 +24,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SelectableListModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        SelectableListModule,
         SelectableListHeaderComponent,
         SelectableListDocsComponent,
         DefaultExampleComponent,
         CustomSelectableItemDirective,
         AdvancedUsageComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('selectable-list')]
 })
 export class SelectableListDocsModule {}

@@ -58,10 +58,7 @@ const routes: Routes = [
         TextModule,
         ObjectStatusModule,
         RatingIndicatorModule,
-        ObjectNumberModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ObjectNumberModule,
         PlatformDynamicPageDocsComponent,
         PlatformDynamicPageHeaderComponent,
         PlatformDynamicPageExampleComponent,
@@ -72,6 +69,7 @@ const routes: Routes = [
         PlatformDynamicPageFlexibleColumnExampleComponent,
         PlatformDynamicPageFacetsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('dynamic-page')]
 })
 export class PlatformDynamicPageDocsModule {}

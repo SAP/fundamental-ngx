@@ -30,7 +30,15 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 /** THIS MODULE PROVIDES BASIC SET OF DEPENDENCIES NEEDED TO CREATE COMPONENT EXAMPLE PAGE */
 @NgModule({
-    declarations: [
+    imports: [
+        FormsModule,
+        CommonModule,
+        RouterModule,
+        SchemaModule,
+        sharedCoreModules,
+        I18nDocsModule,
+        MarkdownModule.forChild(),
+        BusyIndicatorModule,
         ApiComponent,
         ImportComponent,
         HeaderComponent,
@@ -47,16 +55,6 @@ import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
         DatetimeImportantComponent,
         DeprecatedAlertsComponent,
         DocPageComponent
-    ],
-    imports: [
-        FormsModule,
-        CommonModule,
-        RouterModule,
-        SchemaModule,
-        sharedCoreModules,
-        I18nDocsModule,
-        MarkdownModule.forChild(),
-        BusyIndicatorModule
     ],
     providers: [CopyService, ApiDocsService],
     exports: [

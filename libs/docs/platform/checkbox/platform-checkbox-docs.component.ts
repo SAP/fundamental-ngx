@@ -12,10 +12,35 @@ const triCheckboxSrc = 'platform-tristate-checkbox.component.ts';
 const a11yCheckboxhtml = 'platform-checkbox-a11y.component.html';
 const a11yCheckboxSrc = 'platform-checkbox-a11y.component.ts';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformChekboxA11yExampleComponent } from './examples/platform-checkbox-a11y.component';
+import { PlatformChekboxStyleComponent } from './examples/platform-checkbox-error-handling.component';
+import { PlatformChekboxTristateComponent } from './examples/platform-tristate-checkbox.component';
+import { PlatformCozyChekboxExampleComponent } from './examples/platform-multiselect-checkbox.component';
+import { PlatformChekboxNoFormComponent } from './examples/platform-binary-checkbox-no-form.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformCompactChekboxExampleComponent } from './examples/platform-binary-checkbox.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-checkbox',
-    templateUrl: 'platform-checkbox-docs.component.html'
+    templateUrl: 'platform-checkbox-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformCompactChekboxExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformChekboxNoFormComponent,
+        PlatformCozyChekboxExampleComponent,
+        PlatformChekboxTristateComponent,
+        PlatformChekboxStyleComponent,
+        PlatformChekboxA11yExampleComponent
+    ]
 })
 export class PlatformCheckboxDocsComponent {
     multiselectCheckbox: ExampleFile[] = [

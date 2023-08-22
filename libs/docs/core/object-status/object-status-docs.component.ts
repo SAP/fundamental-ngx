@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import {
+    ObjectStatusTextExampleComponent,
+    ObjectStatusTextIconExampleComponent,
+    ObjectStatusGenericExampleComponent,
+    ObjectStatusClickableAndIconExampleComponent,
+    ObjectStatusInvertedTextExampleComponent,
+    ObjectStatusInvertedGenericTextExampleComponent,
+    ObjectStatusLargeExampleComponent
+} from './examples/object-status-examples.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { ObjectStatusDefaultExampleComponent } from './examples/object-status-default-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const objectStatusExamplesScss = 'object-status-examples.component.scss';
 
@@ -15,7 +30,23 @@ const ObjectStatusLargeExample = 'object-status-large-example.component.html';
 
 @Component({
     selector: 'app-object-status',
-    templateUrl: './object-status-docs.component.html'
+    templateUrl: './object-status-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        ObjectStatusDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ObjectStatusTextExampleComponent,
+        DescriptionComponent,
+        ObjectStatusTextIconExampleComponent,
+        ObjectStatusGenericExampleComponent,
+        ObjectStatusClickableAndIconExampleComponent,
+        ObjectStatusInvertedTextExampleComponent,
+        ObjectStatusInvertedGenericTextExampleComponent,
+        ObjectStatusLargeExampleComponent
+    ]
 })
 export class ObjectStatusDocsComponent {
     defaultObjectStatusHtmlType: ExampleFile[] = [

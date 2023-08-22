@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { NotificationMobileExampleComponent } from './examples/notification-mobile/notification-mobile-example.component';
+import { NotificationGroupExampleComponent } from './examples/notification-group/notification-group-example.component';
+import { NotificationComponentAsContentExampleComponent } from './examples/component-as-content/notification-component-as-content-example.component';
+import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { NotificationOptionsExampleComponent } from './examples/notification-options/notification-options-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const componentAsContentTs = 'component-as-content/notification-component-as-content-example.component.ts';
 const contentTs = 'component-as-content/notification-content.component.ts';
@@ -15,7 +25,20 @@ const mobileH = 'notification-mobile/notification-mobile-example.component.html'
 
 @Component({
     selector: 'app-notification',
-    templateUrl: './notification-docs.component.html'
+    templateUrl: './notification-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        NotificationOptionsExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        NotificationOpenTemplateExampleComponent,
+        NotificationComponentAsContentExampleComponent,
+        NotificationGroupExampleComponent,
+        NotificationMobileExampleComponent
+    ]
 })
 export class NotificationDocsComponent {
     componentAsContent: ExampleFile[] = [

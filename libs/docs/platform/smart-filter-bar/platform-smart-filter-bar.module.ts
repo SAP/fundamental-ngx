@@ -64,10 +64,7 @@ const routes: Routes = [
         BreadcrumbModule,
         ToolbarModule,
         BarModule,
-        TitleModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TitleModule,
         PlatformSmartFilterBarDocsComponent,
         PlatformSmartFilterBarHeaderComponent,
         PlatformSmartFilterBarBasicExampleComponent,
@@ -79,6 +76,7 @@ const routes: Routes = [
         PlatformSmartFilterBarDynamicPageExampleComponent,
         PlatformSmartFilterBarLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('smart-filter-bar')]
 })
 export class PlatformSmartFilterBarDocsModule {}

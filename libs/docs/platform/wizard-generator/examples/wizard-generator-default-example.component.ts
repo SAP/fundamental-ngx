@@ -2,10 +2,14 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-default-example',
-    templateUrl: './wizard-generator-default-example.component.html'
+    templateUrl: './wizard-generator-default-example.component.html',
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorDefaultExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

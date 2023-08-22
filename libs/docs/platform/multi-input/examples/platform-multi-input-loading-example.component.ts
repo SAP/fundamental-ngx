@@ -3,6 +3,10 @@ import { BaseDataProvider, MultiInputDataSource } from '@fundamental-ngx/platfor
 
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
+import { PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 const OPTIONS = [
     { state: 'Alabama', city: 'Montgomery' },
@@ -61,7 +65,9 @@ const OPTIONS = [
 @Component({
     selector: 'fdp-platform-multi-input-loading-example',
     templateUrl: './platform-multi-input-loading-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformMultiInputModule, FormsModule]
 })
 export class PlatformMultiInputLoadingExampleComponent {
     readonly dataSource = new MultiInputDataSource(new DelayedBaseDataProvider(OPTIONS));

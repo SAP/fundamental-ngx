@@ -9,12 +9,26 @@ import {
     TableRowSelectionChangeEvent,
     TableGroupChangeEvent
 } from '@fundamental-ngx/platform/table';
+import { FdpCellDef, FdpTableCell } from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-groupable-example',
     templateUrl: './platform-table-groupable-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpCellDef,
+        FdpTableCell
+    ]
 })
 export class PlatformTableGroupableExampleComponent {
     source: TableDataSource<ExampleItem>;

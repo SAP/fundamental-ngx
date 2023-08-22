@@ -7,6 +7,9 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FormsModule } from '@angular/forms';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-datetime-mobile-example',
@@ -22,7 +25,9 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, DatetimePickerComponent, FormsModule]
 })
 export class DatetimeMobileExampleComponent {
     mobileLandscapeConfig: MobileModeConfig = {

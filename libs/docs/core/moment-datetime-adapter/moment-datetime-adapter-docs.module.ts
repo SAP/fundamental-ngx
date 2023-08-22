@@ -41,16 +41,14 @@ const routes: Routes = [
         InputGroupModule,
         MomentDatetimeModule,
         DatePickerModule,
-        DatetimePickerModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        DatetimePickerModule,
         MomentDatetimeAdapterDocsComponent,
         MomentDatetimeAdapterHeaderComponent,
         DatePickerMomentAdapterExampleComponent,
         MomentAdapterOptionsExampleComponent,
         MomentDatetimeFormatsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [
         { provide: CURRENT_LIB, useValue: 'moment-adapter' },
         currentComponentProvider('moment-datetime-adapter')

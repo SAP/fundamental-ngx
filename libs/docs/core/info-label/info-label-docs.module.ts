@@ -24,9 +24,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, InfoLabelModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        InfoLabelModule,
         InfoLabelDocsComponent,
         InfoLabelHeaderComponent,
         InfoLableDefaultExampleComponent,
@@ -34,6 +35,7 @@ const routes: Routes = [
         InfoLableTextIconExampleComponent,
         InfoLableNumericIconExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('info-label')]
 })
 export class InfoLabelDocsModule {}

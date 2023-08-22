@@ -3,13 +3,19 @@ import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgFor } from '@angular/common';
+import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 
 const ITEMS_AMOUNT_ON_LOAD = 5;
 
 @Component({
     selector: 'fd-list-infinite-scroll-example',
     templateUrl: './list-infinite-scroll-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [BusyIndicatorComponent, ListModule, InfiniteScrollModule, NgFor]
 })
 export class ListInfiniteScrollExampleComponent {
     // List that is displayed to the user

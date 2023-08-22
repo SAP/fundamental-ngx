@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-select-forms',
     templateUrl: './select-forms.component.html',
-    styleUrls: ['select-forms.component.scss']
+    styleUrls: ['select-forms.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, SelectModule, NgFor]
 })
 export class SelectFormsComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

@@ -31,16 +31,14 @@ const routes: Routes = [
         FormattedTextModule,
         FormModule,
         PopoverModule,
-        InputGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        InputGroupModule,
         FormattedTextDocsComponent,
         FormattedTextHeaderComponent,
         FormattedTextExampleComponent,
         FormattedTextLinksExampleComponent,
         FormattedTextScriptExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('formatted-text')]
 })
 export class FormattedTextDocsModule {}

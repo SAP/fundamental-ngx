@@ -32,16 +32,14 @@ const routes: Routes = [
         FlexibleColumnLayoutModule,
         DynamicPageModule,
         ToolbarModule,
-        ButtonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ButtonModule,
         FlexibleColumnLayoutDocsComponent,
         FlexibleColumnLayoutExampleComponent,
         FlexibleColumnLayoutDynamicPageExampleComponent,
         FlexibleColumnLayoutDocsHeaderComponent,
         FlexibleColumnLayoutCustomConfigExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('flexible-column-layout')]
 })
 export class FlexibleColumnLayoutDocsModule {}

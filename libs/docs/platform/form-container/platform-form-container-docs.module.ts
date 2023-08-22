@@ -55,24 +55,20 @@ const routes: Routes = [
         PlatformComboboxModule,
         PlatformSelectModule,
         FdpFormGroupModule,
-        TableModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TableModule,
         PlatformFormContainerDocsComponent,
         PlatformFormContainerHeaderComponent,
         PlatformFormContainerRecommendedExampleComponent,
         PlatformFormContainerPossibleExampleComponent,
         PlatformFormContainerNotRecommendedExampleComponent,
         PlatformFormContainerComplexExampleComponent,
-
         PlatformFormBasicExampleComponent,
         PlatformFormGroupExampleComponent,
-
         PlatformFieldColumnChangeExampleComponent,
         PlatformFieldIsInlineChangeExampleComponent,
         PlatformFormCustomLayoutComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('form-container')]
 })
 export class PlatformFormContainerDocsModule {}

@@ -36,16 +36,14 @@ const routes: Routes = [
         IconModule,
         PopoverModule,
         DialogModule,
-        TitleModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TitleModule,
         QuickViewDocsComponent,
         QuickViewDocsHeaderComponent,
         QuickViewBaseExampleComponent,
         QuickViewPopoverExampleComponent,
         QuickViewDialogExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('quick-view')]
 })
 export class QuickViewDocsModule {}

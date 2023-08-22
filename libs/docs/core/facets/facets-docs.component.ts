@@ -1,6 +1,22 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import { CustomFacetExampleComponent } from './examples/custom-facet-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    FacetGroupExampleComponent,
+    FormFacetExampleComponent,
+    FormLinkFacetExampleComponent,
+    KeyValueFacetExampleComponent,
+    KeyValueFacetAlignmentExampleComponent,
+    ImageFacetExampleComponent,
+    RatingIndicatorFacetExampleComponent,
+    FacetLoadingExampleComponent
+} from './examples/facet-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const FacetGroupExample = 'facet-group-example.component.html';
 const FormFacetExample = 'form-facet-example.component.html';
@@ -15,7 +31,24 @@ const FacetLoadingExample = 'facet-loading-example.component.html';
 
 @Component({
     selector: 'app-facet',
-    templateUrl: './facet-docs.component.html'
+    templateUrl: './facet-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        FacetGroupExampleComponent,
+        CodeExampleComponent,
+        FormFacetExampleComponent,
+        FormLinkFacetExampleComponent,
+        KeyValueFacetExampleComponent,
+        KeyValueFacetAlignmentExampleComponent,
+        ImageFacetExampleComponent,
+        RatingIndicatorFacetExampleComponent,
+        CustomFacetExampleComponent,
+        RouterLink,
+        FacetLoadingExampleComponent
+    ]
 })
 export class FacetsDocsComponent {
     facetGroup: ExampleFile[] = [

@@ -19,9 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectStatusModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ObjectStatusModule,
+        ThemingDocsComponent,
+        ThemingHeaderComponent,
+        examples
+    ],
     exports: [RouterModule],
-    declarations: [ThemingDocsComponent, ThemingHeaderComponent, examples],
     providers: [currentComponentProvider('theming')]
 })
 export class ThemingDocsModule {}

@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets, getAsset } from '@fundamental-ngx/docs/shared';
+import { IllustratedMessageInlineExampleComponent } from './examples/illustrated-message-inline-example.component';
+import { IllustratedMessageDotExampleComponent } from './examples/illustrated-message-dot-example.component';
+import { IllustratedMessageSpotExampleComponent } from './examples/illustrated-message-spot-example.component';
+import { IllustratedMessageDialogExampleComponent } from './examples/illustrated-message-dialog-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { IllustratedMessageExampleComponent } from './examples/illustrated-message-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const illustratedMessageSrc = 'illustrated-message-example.component.html';
 const illustratedMessageTsCode = 'illustrated-message-example.component.ts';
@@ -24,7 +34,20 @@ const illusratedMessageInlineHtmlSrc = 'illustrated-message-inline-example.compo
 
 @Component({
     selector: 'app-illustrated-message',
-    templateUrl: './illustrated-message-docs.component.html'
+    templateUrl: './illustrated-message-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        IllustratedMessageExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        IllustratedMessageDialogExampleComponent,
+        IllustratedMessageSpotExampleComponent,
+        IllustratedMessageDotExampleComponent,
+        IllustratedMessageInlineExampleComponent
+    ]
 })
 export class IllustratedMessageDocsComponent {
     illustratedMessageExample: ExampleFile[] = [

@@ -55,10 +55,7 @@ const routes: Routes = [
         TokenModule,
         ToolbarModule,
         PlatformValueHelpDialogModule,
-        CheckboxModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        CheckboxModule,
         PlatformVhdDocsComponent,
         PlatformVhdHeaderComponent,
         PlatformVhdBasicExampleComponent,
@@ -70,6 +67,7 @@ const routes: Routes = [
         PlatformVhdStrategyLabelExampleComponent,
         PlatformVhdInitialLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('vhd')]
 })
 export class PlatformVhdDocsModule {}

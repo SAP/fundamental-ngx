@@ -20,9 +20,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, DataSourceModule, SelectModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        DataSourceModule,
+        SelectModule,
+        examples,
+        DataSourceDocsComponent,
+        DataSourceHeaderComponent
+    ],
     exports: [RouterModule],
-    declarations: [examples, DataSourceDocsComponent, DataSourceHeaderComponent],
     providers: [currentComponentProvider('data-source')]
 })
 export class DataSourceDocsModule {}

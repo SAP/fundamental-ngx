@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-radio-group-disabled-example',
-    templateUrl: './platform-radio-group-disabled-example.component.html'
+    templateUrl: './platform-radio-group-disabled-example.component.html',
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformRadioGroupModule, ContentDensityDirective]
 })
 export class PlatformRadioGroupDisabledExampleComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];

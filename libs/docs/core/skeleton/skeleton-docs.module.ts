@@ -40,15 +40,13 @@ const routes: Routes = [
         ButtonModule,
         ListModule,
         TableModule,
-        SkeletonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        SkeletonModule,
         SkeletonHeaderComponent,
         SkeletonDocsComponent,
         SkeletonComponentExampleComponent,
         SkeletonComplexExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('skeleton')]
 })
 export class SkeletonDocsModule {}

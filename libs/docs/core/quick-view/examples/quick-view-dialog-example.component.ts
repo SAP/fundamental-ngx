@@ -1,9 +1,39 @@
 import { Component, TemplateRef } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-quick-view-dialog-example',
-    templateUrl: './quick-view-dialog-example.component.html'
+    templateUrl: './quick-view-dialog-example.component.html',
+    standalone: true,
+    imports: [
+        DialogModule,
+        TemplateDirective,
+        BarModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        QuickViewModule,
+        AvatarModule,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        LinkComponent,
+        NgSwitchDefault,
+        ContentDensityDirective,
+        ButtonModule
+    ]
 })
 export class QuickViewDialogExampleComponent {
     data = {

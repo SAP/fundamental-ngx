@@ -5,10 +5,16 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { AsyncPipe } from '@angular/common';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 
 @Component({
     selector: 'fd-action-bar-mobile-example',
-    templateUrl: './action-bar-mobile-example.component.html'
+    templateUrl: './action-bar-mobile-example.component.html',
+    standalone: true,
+    imports: [ActionBarModule, ButtonModule, MenuModule, AsyncPipe]
 })
 export class ActionBarMobileExampleComponent implements OnInit {
     navigationArrow$: Observable<string>;

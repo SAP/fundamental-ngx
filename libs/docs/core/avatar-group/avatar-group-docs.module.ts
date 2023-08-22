@@ -39,15 +39,13 @@ const routes: Routes = [
         QuickViewModule,
         BarModule,
         LinkModule,
-        TitleModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TitleModule,
         AvatarGroupDocsComponent,
         AvatarGroupHeaderComponent,
         AvatarGroupGroupTypeExampleComponent,
         AvatarGroupIndividualTypeExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('avatar-group')]
 })
 export class AvatarGroupDocsModule {}

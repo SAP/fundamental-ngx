@@ -10,10 +10,39 @@ import {
     WizardTitle,
     FormattedFormStep
 } from '@fundamental-ngx/platform/wizard-generator';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { NgFor, NgIf, JsonPipe } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-wizard-generator-customizable-example',
-    templateUrl: './wizard-generator-customizable-example.component.html'
+    templateUrl: './wizard-generator-customizable-example.component.html',
+    standalone: true,
+    imports: [
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgFor,
+        TitleComponent,
+        LayoutGridModule,
+        FormLabelModule,
+        PlatformLinkModule,
+        DialogModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        InitialFocusDirective,
+        NgIf,
+        JsonPipe
+    ]
 })
 export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     @ViewChild('goNextTemplate') goNextTemplate: TemplateRef<any>;

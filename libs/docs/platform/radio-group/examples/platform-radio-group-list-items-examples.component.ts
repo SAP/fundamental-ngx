@@ -1,10 +1,25 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, NgForm } from '@angular/forms';
+import { FormGroup, FormControl, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { NgIf } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',
-    templateUrl: './platform-radio-group-list-items-example.component.html'
+    templateUrl: './platform-radio-group-list-items-example.component.html',
+    standalone: true,
+    imports: [
+        FormsModule,
+        FdpFormGroupModule,
+        ReactiveFormsModule,
+        PlatformRadioGroupModule,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgIf
+    ]
 })
 export class PlatformRadioGroupListItemsExampleComponent {
     favoriteOption = '';

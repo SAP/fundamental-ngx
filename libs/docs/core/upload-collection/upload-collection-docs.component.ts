@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { UploadCollectionEmptyExampleComponent } from './examples/upload-collection-empty-example.component';
+import { UploadCollectionComplexExampleComponent } from './examples/upload-collection-complex-example.component';
+import { UploadCollectionCustomExampleComponent } from './examples/upload-collection-custom-example.component';
+import { UploadCollectionSmallExampleComponent } from './examples/upload-collection-small-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { UploadCollectionExampleComponent } from './examples/upload-collection-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const uploadCollectionHtml = 'upload-collection-example.component.html';
 const uploadCollectionTs = 'upload-collection-example.component.ts';
@@ -15,7 +25,20 @@ const uploadCollectionEmptyTs = 'upload-collection-empty-example.component.ts';
 
 @Component({
     selector: 'app-upload-collection',
-    templateUrl: './upload-collection-docs.component.html'
+    templateUrl: './upload-collection-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        UploadCollectionExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        UploadCollectionSmallExampleComponent,
+        UploadCollectionCustomExampleComponent,
+        UploadCollectionComplexExampleComponent,
+        UploadCollectionEmptyExampleComponent
+    ]
 })
 export class UploadCollectionDocsComponent {
     uploadCollection: ExampleFile[] = [

@@ -9,10 +9,14 @@ import {
     WizardGeneratorItem,
     WizardTitle
 } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-wizard-generator-condition-example',
-    templateUrl: './wizard-generator-condition-example.component.html'
+    templateUrl: './wizard-generator-condition-example.component.html',
+    standalone: true,
+    imports: [PlatformButtonModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorConditionExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {

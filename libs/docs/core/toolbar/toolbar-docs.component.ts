@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    ToolbarTypeExampleComponent,
+    ToolbarTitleExampleComponent,
+    ToolbarOverflowPriorityExampleComponent,
+    ToolbarOverflowGroupingExampleComponent,
+    ToolbarSizeExampleComponent,
+    ToolbarSpacerExampleComponent,
+    ToolbarSeparatorExampleComponent
+} from './examples/toolbar-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const toolbarTypeExampleHtml = 'toolbar-type-example.component.html';
 const toolbarTitleExampleHtml = 'toolbar-title-example.component.html';
@@ -14,7 +29,23 @@ const toolbarSizeExampleHtml = 'toolbar-size-example.component.html';
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar-docs.component.html',
-    styleUrls: ['./toolbar-docs.component.scss']
+    styleUrls: ['./toolbar-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ToolbarTypeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ToolbarTitleExampleComponent,
+        ToolbarOverflowExampleComponent,
+        ToolbarOverflowPriorityExampleComponent,
+        ToolbarOverflowGroupingExampleComponent,
+        ToolbarSizeExampleComponent,
+        ToolbarSpacerExampleComponent,
+        ToolbarSeparatorExampleComponent
+    ]
 })
 export class ToolbarDocsComponent {
     toolbarTypeExample: ExampleFile[] = [

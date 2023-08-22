@@ -7,6 +7,9 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-datetime-picker-basic-example',
@@ -23,7 +26,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [PlatformDatetimePickerComponent, ContentDensityDirective, ButtonModule]
 })
 export class PlatformDatetimePickerBasicExampleComponent {
     date1: FdDate = new FdDate(2020, 11, 27, 14, 30);

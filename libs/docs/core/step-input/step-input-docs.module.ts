@@ -27,9 +27,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, StepInputModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FormModule,
+        StepInputModule,
         StepInputDocsComponent,
         StepInputHeaderComponent,
         StepInputLocaleExampleComponent,
@@ -40,6 +42,7 @@ const routes: Routes = [
         StepInputCurrencyExampleComponent,
         StepInputFormExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('step-input')]
 })
 export class StepInputDocsModule {}

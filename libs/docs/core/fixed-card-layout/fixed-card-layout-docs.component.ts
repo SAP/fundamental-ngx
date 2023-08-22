@@ -1,5 +1,16 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FixedCardLayoutMaxColumnsExampleComponent } from './examples/max-columns/fixed-card-layout-max-columns-example.component';
+import { FixedCardLayoutCustomColumnWidthExampleComponent } from './examples/custom-column-width/fixed-card-layout-custom-column-width-example.component';
+import { FixedCardLayoutCustomWidthExampleComponent } from './examples/custom-width/fixed-card-layout-custom-width-example.component';
+import { FixedCardLayoutMobileExampleComponent } from './examples/mobile/fixed-card-layout-mobile-examples.component';
+import { FixedCardLayoutDisabledDragExampleComponent } from './examples/disabled-drag-drop/fixed-card-layout-disabled-drag.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { FixedCardLayoutExampleComponent } from './examples/default/fixed-card-layout-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const fixedCardLayoutH = 'default/fixed-card-layout-examples.component.html';
 const disabledDragFixedCardLayoutH = 'disabled-drag-drop/fixed-card-layout-disabled-drag.component.html';
@@ -13,7 +24,21 @@ const maxColumnsTs = 'max-columns/fixed-card-layout-max-columns-example.componen
 
 @Component({
     selector: 'fd-fixed-card-layout-docs',
-    templateUrl: './fixed-card-layout-docs.component.html'
+    templateUrl: './fixed-card-layout-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        FixedCardLayoutExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        FixedCardLayoutDisabledDragExampleComponent,
+        FixedCardLayoutMobileExampleComponent,
+        FixedCardLayoutCustomWidthExampleComponent,
+        FixedCardLayoutCustomColumnWidthExampleComponent,
+        FixedCardLayoutMaxColumnsExampleComponent
+    ]
 })
 export class FixedCardLayoutDocsComponent {
     defaultFixedCardLayout: ExampleFile[] = [

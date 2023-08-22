@@ -1,12 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformFileUploaderModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-compact-example',
     templateUrl: './platform-file-uploader-compact-example.component.html',
     styleUrls: ['platform-file-uploader-compact-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformFileUploaderModule, ContentDensityDirective, FormsModule, NgFor]
 })
 export class PlatformFileUploaderCompactExampleComponent {
     files: File[];

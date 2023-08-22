@@ -26,10 +26,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformTextAreaModule,
         SegmentedButtonModule,
-        I18nModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        I18nModule,
         PlatformI18nHeaderComponent,
         PlatformI18nDocsComponent,
         PlatformLanguageChangeExampleComponent,
@@ -37,6 +34,7 @@ const routes: Routes = [
         TranslationWrapper1Component,
         TranslationWrapper2Component
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('i18n')]
 })
 export class PlatformI18nDocsModule {}

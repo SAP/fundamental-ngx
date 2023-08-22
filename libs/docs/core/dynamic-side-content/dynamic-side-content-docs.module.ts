@@ -23,15 +23,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, DynamicSideContentModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        DynamicSideContentModule,
         DynamicSideContentHeaderComponent,
         DynamicSideContentDocsComponent,
         DynamicSideContentBasicExampleComponent,
         DynamicSideContentPositioningExampleComponent,
         DynamicSideContentSizeExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('dynamic-side-content')]
 })
 export class DynamicSideContentDocsModule {}

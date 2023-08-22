@@ -2,6 +2,16 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ButtonSplitTemplateExampleComponent } from './examples/split-button-template-example.component';
+import { ButtonSplitProgrammaticalExampleComponent } from './examples/split-button-programmatical-example.component';
+import { ButtonSplitTypesIconsComponent } from './examples/split-button-icons-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { ButtonSplitTypesExampleComponent } from './examples/split-button-types-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { ButtonSplitBehaviorsComponent } from './examples/split-button-behaviors-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const buttonSplitOptionsExampleTs = 'split-button-options-example.component.ts';
 const buttonSplitProgrammaticalyExampleTs = 'split-button-programmatical-example.component.ts';
@@ -20,7 +30,20 @@ const buttonSplitTemplateExample = 'split-button-template-example.component.html
     selector: 'app-split-button',
     templateUrl: './split-button-docs.component.html',
     styleUrls: ['./split-button-docs.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ButtonSplitBehaviorsComponent,
+        CodeExampleComponent,
+        ButtonSplitTypesExampleComponent,
+        SeparatorComponent,
+        ButtonSplitTypesIconsComponent,
+        ButtonSplitProgrammaticalExampleComponent,
+        ButtonSplitTemplateExampleComponent
+    ]
 })
 export class SplitButtonDocsComponent {
     schema: Schema;

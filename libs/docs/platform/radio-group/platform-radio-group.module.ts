@@ -32,10 +32,7 @@ const routes: Routes = [
         PlatformRadioGroupModule,
         PlatformButtonModule,
         FdpFormGroupModule,
-        MessageToastModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        MessageToastModule,
         PlatformRadioGroupDocsComponent,
         PlatformRadioGroupHeaderComponent,
         PlatformRadioGroupContentExampleComponent,
@@ -43,6 +40,7 @@ const routes: Routes = [
         PlatformRadioGroupListExampleComponent,
         PlatformRadioGroupListItemsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('radio-group')]
 })
 export class PlatformRadioGroupDocsModule {}

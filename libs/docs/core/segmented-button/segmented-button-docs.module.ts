@@ -24,9 +24,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, SegmentedButtonModule, TextModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        SegmentedButtonModule,
+        TextModule,
         SegmentedButtonDocsComponent,
         SegmentedButtonHeaderComponent,
         SegmentedButtonToggleExampleComponent,
@@ -34,6 +36,7 @@ const routes: Routes = [
         SegmentedButtonFormExampleComponent,
         SegmentedButtonComplexExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('segmented-button')]
 })
 export class SegmentedButtonDocsModule {}

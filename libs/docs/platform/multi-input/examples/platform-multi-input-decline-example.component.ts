@@ -1,12 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'fdp-platform-multi-input-decline-example',
     templateUrl: './platform-multi-input-decline-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FormsModule, FdpFormGroupModule, PlatformMultiInputModule, ReactiveFormsModule]
 })
 export class PlatformMultiInputDeclineExampleComponent {
     list_elements = [

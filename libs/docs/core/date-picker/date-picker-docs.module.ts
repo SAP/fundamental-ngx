@@ -48,10 +48,7 @@ const routes: Routes = [
         InputGroupModule,
         FdDatetimeModule,
         DatePickerModule,
-        PipeModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PipeModule,
         DatePickerDocsComponent,
         DatePickerHeaderComponent,
         DatePickerI18nExampleComponent,
@@ -71,6 +68,7 @@ const routes: Routes = [
         DatePickerDisableFocusScrollExampleComponent,
         DatePickerMobileModeExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('date-picker')]
 })
 export class DatePickerDocsModule {}

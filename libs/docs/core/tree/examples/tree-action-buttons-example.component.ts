@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TreeItem } from '@fundamental-ngx/core/tree';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf } from '@angular/common';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { TreeModule } from '@fundamental-ngx/core/tree';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 
 interface AdditionalTreeItemData {
     title: string;
@@ -10,7 +16,9 @@ interface AdditionalTreeItemData {
     selector: 'fd-tree-action-buttons-example',
     templateUrl: './tree-action-buttons-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [DataSourceDirective, CvaDirective, TreeModule, IconModule, NgIf, ButtonModule]
 })
 export class TreeActionButtonsExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;

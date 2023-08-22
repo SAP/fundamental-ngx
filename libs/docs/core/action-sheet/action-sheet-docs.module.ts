@@ -19,9 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ActionSheetModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ActionSheetModule,
+        ActionSheetDocsComponent,
+        ActionSheetHeaderComponent,
+        examples
+    ],
     exports: [RouterModule],
-    declarations: [ActionSheetDocsComponent, ActionSheetHeaderComponent, examples],
     providers: [currentComponentProvider('action-sheet')]
 })
 export class ActionSheetDocsModule {}

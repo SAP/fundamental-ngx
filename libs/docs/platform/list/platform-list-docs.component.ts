@@ -28,10 +28,57 @@ const listWithFreeContentTs = 'platform-list-free-content-example.component.ts';
 const loadingListSrc = 'loading/platform-list-loading-example.component.html';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformListLoadingExampleComponent } from './examples/loading/platform-list-loading-example.component';
+import { PlatformListFreeContentExampleComponent } from './examples/platform-list-free-content-example.component';
+import { PlatformListWithButtonsExampleComponent } from './examples/platform-list-with-buttons-example.component';
+import { PlatformListWithMoreButtonExampleComponent } from './examples/platform-list-with-more-button-example.component';
+import { PlatformListWithInfiniteScrollExampleComponent } from './examples/platform-list-with-infinite-scroll-example.component';
+import { PlatformListWithNavigationExampleComponent } from './examples/platform-list-with-navigation-example.component';
+import { PlatformListWithSingleSelectionExampleComponent } from './examples/platform-list-with-single-selection-example.component';
+import { PlatformListWithSelectionExampleComponent } from './examples/platform-list-with-selection-example.component';
+import { PlatformListWithDeleteButtonExampleComponent } from './examples/platform-list-with-delete-button-example.component';
+import { PlatformListWithItemCounterExampleComponent } from './examples/platform-list-with-item-counter-example.component';
+import {
+    PlatformListWithGroupHeaderExampleComponent,
+    PlatformListExampleComponent,
+    PlatformListWithNoDataExampleComponent,
+    PlatformListWithUnReadExampleComponent
+} from './examples/platform-list-example.component';
+import { PlatformListWithFooterExampleComponent } from './examples/platform-list-with-footer-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformListBorderLessExampleComponent } from './examples/platform-list-border-less-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-list',
-    templateUrl: './platform-list-docs.component.html'
+    templateUrl: './platform-list-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformListBorderLessExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformListWithFooterExampleComponent,
+        PlatformListWithGroupHeaderExampleComponent,
+        PlatformListExampleComponent,
+        PlatformListWithItemCounterExampleComponent,
+        PlatformListWithDeleteButtonExampleComponent,
+        PlatformListWithSelectionExampleComponent,
+        PlatformListWithSingleSelectionExampleComponent,
+        PlatformListWithNavigationExampleComponent,
+        PlatformListWithInfiniteScrollExampleComponent,
+        PlatformListWithMoreButtonExampleComponent,
+        PlatformListWithButtonsExampleComponent,
+        PlatformListWithNoDataExampleComponent,
+        PlatformListWithUnReadExampleComponent,
+        PlatformListFreeContentExampleComponent,
+        PlatformListLoadingExampleComponent
+    ]
 })
 export class PlatformListDocsComponent {
     simpleList: ExampleFile[] = [

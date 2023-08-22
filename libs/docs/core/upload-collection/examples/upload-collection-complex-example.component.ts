@@ -12,6 +12,39 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FileUploaderComponent } from '@fundamental-ngx/core/file-uploader';
 import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { UploadCollectionButtonGroupComponent } from '@fundamental-ngx/core/upload-collection';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { UploadCollectionFormItemComponent } from '@fundamental-ngx/core/upload-collection';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import {
+    UploadCollectionThumbnailDirective,
+    UploadCollectionTitleContainerDirective,
+    UploadCollectionTitleDirective,
+    UploadCollectionDescriptionDirective,
+    UploadCollectionTextSeparatorDirective,
+    UploadCollectionStatusGroupDirective,
+    UploadCollectionStatusItemDirective
+} from '@fundamental-ngx/core/upload-collection';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { UploadCollectionItemDirective as UploadCollectionItemDirective_1 } from '@fundamental-ngx/core/upload-collection';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { NgFor, NgIf } from '@angular/common';
+import { UploadCollectionComponent } from '@fundamental-ngx/core/upload-collection';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
+import { ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 
 interface FileItem {
     fileName: string;
@@ -25,7 +58,42 @@ interface FileItem {
 @Component({
     selector: 'fd-upload-collection-complex-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './upload-collection-complex-example.component.html'
+    templateUrl: './upload-collection-complex-example.component.html',
+    standalone: true,
+    imports: [
+        ToolbarComponent,
+        ToolbarLabelDirective,
+        ToolbarSpacerDirective,
+        FileUploaderModule,
+        ContentDensityDirective,
+        FormsModule,
+        ButtonModule,
+        UploadCollectionComponent,
+        NgFor,
+        ListModule,
+        UploadCollectionItemDirective_1,
+        CheckboxComponent,
+        UploadCollectionThumbnailDirective,
+        IconModule,
+        UploadCollectionTitleContainerDirective,
+        LinkComponent,
+        UploadCollectionTitleDirective,
+        UploadCollectionFormItemComponent,
+        NgIf,
+        ObjectMarkerModule,
+        UploadCollectionDescriptionDirective,
+        UploadCollectionTextSeparatorDirective,
+        UploadCollectionStatusGroupDirective,
+        ObjectStatusModule,
+        UploadCollectionStatusItemDirective,
+        UploadCollectionButtonGroupComponent,
+        MessagePageModule,
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule
+    ]
 })
 export class UploadCollectionComplexExampleComponent {
     @Input()

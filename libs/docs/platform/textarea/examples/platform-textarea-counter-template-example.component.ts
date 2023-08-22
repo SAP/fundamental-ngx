@@ -1,10 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ValidatorFn, Validators } from '@angular/forms';
+import { ValidatorFn, Validators, FormsModule } from '@angular/forms';
+import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'fdp-platform-textarea-counter-template-example',
     templateUrl: './platform-textarea-counter-template-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, FdpFormGroupModule, PlatformTextAreaModule, FormsModule]
 })
 export class PlatformTextareaCounterTemplateExampleComponent {
     textareaValidator: ValidatorFn[];

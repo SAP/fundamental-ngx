@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SelectableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { NgFor } from '@angular/common';
+import { SelectableListDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-selectable-list-default-example',
@@ -18,7 +21,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SelectableListDirective, NgFor, SelectableItemDirective]
 })
 export class DefaultExampleComponent {
     selectableItems = new Array(5).fill(undefined);

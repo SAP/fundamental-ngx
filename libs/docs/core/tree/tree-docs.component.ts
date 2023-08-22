@@ -3,6 +3,15 @@ import { Schema } from '@fundamental-ngx/docs/schema';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 import { TreeActionButtonsExampleComponent } from './examples/tree-action-buttons-example.component';
 import { TreeWithFormsExampleComponent } from './examples/tree-with-forms-example.component';
+import { LazilyLoadedTreeItemsExampleComponent } from './examples/lazily-loaded-tree-items-example.component';
+import { TreeHighlightIndicatorsExampleComponent } from './examples/tree-highlight-indicators-example.component';
+import { NavigatableTreeExampleComponent } from './examples/navigatable-tree-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { SimpleTreeExampleComponent } from './examples/simple-tree-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const simpleTreeExample = 'simple-tree-example.component.ts';
 const simpleTreeExampleHtml = 'simple-tree-example.component.html';
@@ -19,7 +28,21 @@ const lazyLoadingExampleHtml = 'lazily-loaded-tree-items-example.component.html'
 
 @Component({
     selector: 'app-tree',
-    templateUrl: './tree-docs.component.html'
+    templateUrl: './tree-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SimpleTreeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        NavigatableTreeExampleComponent,
+        TreeHighlightIndicatorsExampleComponent,
+        TreeActionButtonsExampleComponent,
+        TreeWithFormsExampleComponent,
+        LazilyLoadedTreeItemsExampleComponent
+    ]
 })
 export class TreeDocsComponent {
     simpleExample: ExampleFile[] = [

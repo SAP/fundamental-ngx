@@ -9,10 +9,14 @@ import {
     WizardGeneratorItem,
     WizardTitle
 } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-wizard-generator-visible-summary-branching-example',
-    templateUrl: './wizard-generator-visible-summary-branching-example.component.html'
+    templateUrl: './wizard-generator-visible-summary-branching-example.component.html',
+    standalone: true,
+    imports: [PlatformButtonModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {

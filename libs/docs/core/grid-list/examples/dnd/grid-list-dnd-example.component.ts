@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 import { FdDropEvent } from '@fundamental-ngx/cdk/utils';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
+import { GridListModule } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -13,7 +21,18 @@ interface GridListItem {
     templateUrl: './grid-list-dnd-example.component.html',
     styleUrls: ['./grid-list-dnd-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        GridListModule,
+        DragAndDropModule,
+        ContentDensityDirective,
+        ButtonModule,
+        NgFor,
+        AvatarModule,
+        LinkComponent,
+        RouterLink
+    ]
 })
 export class GridListDndExampleComponent {
     list: GridListItem[] = [

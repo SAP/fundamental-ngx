@@ -33,10 +33,12 @@ const routes: Routes = [
         SharedDocumentationModule,
         SharedDocumentationPageModule,
         SplitterModule,
-        BarModule
+        BarModule,
+        SplitterHeaderComponent,
+        SplitterDocsComponent,
+        ...COMPONENTS
     ],
     exports: [RouterModule],
-    declarations: [SplitterHeaderComponent, SplitterDocsComponent, ...COMPONENTS],
     providers: [currentComponentProvider('splitter')]
 })
 export class SplitterDocsModule {}

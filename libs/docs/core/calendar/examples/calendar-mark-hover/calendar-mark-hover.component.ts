@@ -7,6 +7,9 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-mark-hover',
@@ -20,7 +23,9 @@ import { DateRange } from '@fundamental-ngx/core/calendar';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [CalendarComponent, FormsModule, DatePipe]
 })
 export class CalendarMarkHoverComponent {
     rangeDate = new DateRange(new FdDate(2020, 10, 25), new FdDate(2020, 10, 26));

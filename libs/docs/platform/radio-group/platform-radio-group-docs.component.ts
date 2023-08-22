@@ -10,10 +10,29 @@ const disabledRadioGroupSrc = 'platform-radio-group-disabled-example.component.h
 const disabledRadioGroupSrcCode = 'platform-radio-group-disabled-examples.component.ts';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
+import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
+import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformRadioGroupContentExampleComponent } from './examples/platform-radio-group-content-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-radio-group',
-    templateUrl: './platform-radio-group-docs.component.html'
+    templateUrl: './platform-radio-group-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformRadioGroupContentExampleComponent,
+        CodeExampleComponent,
+        PlatformRadioGroupListExampleComponent,
+        PlatformRadioGroupListItemsExampleComponent,
+        PlatformRadioGroupDisabledExampleComponent
+    ]
 })
 export class PlatformRadioGroupDocsComponent {
     listItemsRadioGroup: ExampleFile[] = [

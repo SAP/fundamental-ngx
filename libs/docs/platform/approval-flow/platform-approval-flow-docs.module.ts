@@ -38,15 +38,13 @@ const routes: Routes = [
         PlatformApprovalFlowModule,
         FdDatetimeModule,
         MultiInputModule,
-        MessageToastModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        MessageToastModule,
         PlatformApprovalFlowHeaderComponent,
         PlatformApprovalFlowDocsComponent,
         PlatformApprovalFlowExampleComponent,
         PlatformApprovalFlowCustomStatusExampleComponent
     ],
+    exports: [RouterModule],
     providers: [RtlService, currentComponentProvider('approval-flow')]
 })
 export class PlatformApprovalFlowDocsModule {}

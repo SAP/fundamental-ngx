@@ -4,6 +4,10 @@ import { BaseDataProvider, MultiComboBoxDataSource } from '@fundamental-ngx/plat
 import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { JsonPipe } from '@angular/common';
+import { PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 const OPTIONS = [
     { name: 'Apple', type: 'Fruits' },
@@ -19,7 +23,9 @@ const OPTIONS = [
 @Component({
     selector: 'fdp-multi-combobox-loading-example',
     templateUrl: './multi-combobox-loading-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformMultiComboboxModule, JsonPipe]
 })
 export class MultiComboboxLoadingExampleComponent {
     dataSource = new MultiComboBoxDataSource(new DelayedBaseDataProvider(OPTIONS));

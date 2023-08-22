@@ -36,16 +36,14 @@ const routes: Routes = [
         InputGroupModule,
         DayjsDatetimeAdapterModule,
         DatePickerModule,
-        DatetimePickerModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        DatetimePickerModule,
         DayjsDatetimeAdapterDocsComponent,
         DayjsDatetimeAdapterHeaderComponent,
         DatePickerDayjsAdapterExampleComponent,
         DayjsAdapterOptionsExampleComponent,
         DayjsDatetimeFormatsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [
         {
             provide: 'CURRENT_LIB',

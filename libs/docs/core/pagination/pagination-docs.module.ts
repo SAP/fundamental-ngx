@@ -32,10 +32,7 @@ const routes: Routes = [
         PaginationModule,
         ToolbarModule,
         SelectModule,
-        SegmentedButtonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        SegmentedButtonModule,
         PaginationDocsComponent,
         PaginationHeaderComponent,
         PaginationExampleComponent,
@@ -43,6 +40,7 @@ const routes: Routes = [
         PaginationPerPageExampleComponent,
         PaginationMobileExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('pagination')]
 })
 export class PaginationDocsModule {}

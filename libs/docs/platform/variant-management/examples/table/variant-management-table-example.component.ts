@@ -14,6 +14,11 @@ import {
 } from '@fundamental-ngx/platform/table';
 import { Variant } from '@fundamental-ngx/platform/variant-management';
 import { Observable, of } from 'rxjs';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 
 export interface TablePreset {
     renamedPlatformTable: PlatformTableManagedPreset;
@@ -29,6 +34,14 @@ export interface TablePreset {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        VariantManagementModule,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
     ]
 })
 export class VariantManagementTableExampleComponent {

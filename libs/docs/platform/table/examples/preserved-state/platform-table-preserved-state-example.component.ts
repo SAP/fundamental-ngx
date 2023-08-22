@@ -30,6 +30,13 @@ import {
 } from '@fundamental-ngx/platform/table';
 import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { destroyObservable } from '@fundamental-ngx/cdk';
+import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-table-preserved-state-example',
@@ -41,6 +48,16 @@ import { destroyObservable } from '@fundamental-ngx/cdk';
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        TableDraggableDirective
     ]
 })
 export class PlatformTablePreservedStateExampleComponent {

@@ -31,15 +31,13 @@ const routes: Routes = [
         ToolbarModule,
         PlatformListModule,
         PlatformButtonModule,
-        ActionListItemModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ActionListItemModule,
         PlatformActionListItemDocsComponent,
         PlatformActionListItemHeaderComponent,
         PlatformActionListItemExampleComponent,
         PlatformActionListItemBorderLessExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('action-list-item')]
 })
 export class PlatformActionListItemDocsModule {}

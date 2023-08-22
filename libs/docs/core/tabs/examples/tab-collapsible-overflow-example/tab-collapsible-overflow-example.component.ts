@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-collapsible-overflow-example',
-    templateUrl: './tab-collapsible-overflow-example.component.html'
+    templateUrl: './tab-collapsible-overflow-example.component.html',
+    standalone: true,
+    imports: [FormLabelModule, TabsModule, NgFor]
 })
 export class TabCollapsibleOverflowExampleComponent {
     tabs: { title: string; content: string }[] = [];

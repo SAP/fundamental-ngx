@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    PlatformInfoLabelExampleComponent,
+    PlatformInfoLableTextExampleComponent,
+    PlatformInfoLableTextIconExampleComponent,
+    PlatformInfoLableNumericIconExampleComponent,
+    PlatformInfoLableAriaLabelExampleComponent
+} from './examples/platform-info-label-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const PlatformInfoLableDefaultExample = 'platform-info-label-example.component.html';
 const PlatformInfoLableNumericExample = 'platform-info-label-numeric-example.component.html';
@@ -12,7 +24,20 @@ const PlatfromInfoLableAriaLabelExample = 'platform-info-label-aria-label-exampl
 
 @Component({
     selector: 'fd-platform-info-label-docs',
-    templateUrl: './platform-info-label-docs.component.html'
+    templateUrl: './platform-info-label-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        PlatformInfoLabelExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        PlatformInfoLableTextExampleComponent,
+        PlatformInfoLableTextIconExampleComponent,
+        PlatformInfoLableNumericIconExampleComponent,
+        PlatformInfoLableAriaLabelExampleComponent
+    ]
 })
 export class PlatformInfoLabelDocsComponent {
     platformDefaultInfoLabelHtmlType: ExampleFile[] = [

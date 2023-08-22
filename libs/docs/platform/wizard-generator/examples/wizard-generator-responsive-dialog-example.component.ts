@@ -9,10 +9,14 @@ import {
     WizardDialogGeneratorService,
     WizardGeneratorFormsValue
 } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-wizard-generator-responsive-dialog-example',
-    templateUrl: './wizard-generator-responsive-dialog-example.component.html'
+    templateUrl: './wizard-generator-responsive-dialog-example.component.html',
+    standalone: true,
+    imports: [PlatformButtonModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestroy {
     wizardValue: WizardGeneratorFormsValue | undefined;

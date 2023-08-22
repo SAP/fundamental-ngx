@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { FormHeaderModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-checkbox-states-example',
@@ -20,7 +24,9 @@ import { Component } from '@angular/core';
             <p>Compact:</p>
             <fd-checkbox [(ngModel)]="checkboxValue7" fdCompact label="Compact label"></fd-checkbox>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [FormHeaderModule, CheckboxComponent, FormsModule, ContentDensityDirective]
 })
 export class CheckboxStatesExampleComponent {
     public checkboxValue1 = false;

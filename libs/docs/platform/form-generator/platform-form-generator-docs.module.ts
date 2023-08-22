@@ -54,10 +54,7 @@ const routes: Routes = [
         PlatformSliderModule,
         BusyIndicatorModule,
         TableModule,
-        BarModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        BarModule,
         PlatformFormGeneratorDocsComponent,
         PlatformFormGeneratorHeaderComponent,
         PlatformFormGeneratorExampleComponent,
@@ -74,6 +71,7 @@ const routes: Routes = [
         PlatformFormGeneratorLoadingExampleComponent,
         PlatformFormGeneratorAdvancedExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('form-generator')]
 })
 export class PlatformFormGeneratorDocsModule {}

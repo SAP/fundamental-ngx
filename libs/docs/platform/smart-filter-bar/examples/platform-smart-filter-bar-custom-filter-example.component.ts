@@ -36,6 +36,15 @@ import {
     SmartFilterBar
 } from '@fundamental-ngx/platform/smart-filter-bar';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
     selector: 'fdp-smart-filter-bar-slider-example',
@@ -51,7 +60,9 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
             </ng-container>
         </ng-container>
     `,
-    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
+    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGeneratorControl {
     constructor() {
@@ -75,7 +86,9 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
             </ng-container>
         </ng-container>
     `,
-    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
+    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {
     constructor(dialogService: DialogService, smartFilterBarService: SmartFilterBarService, injector: Injector) {
@@ -85,7 +98,16 @@ export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilter
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-filter-example',
-    templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html'
+    templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html',
+    standalone: true,
+    imports: [
+        PlatformSmartFilterBarModule,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
+    ]
 })
 export class PlatformSmartFilterBarCustomFilterExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;

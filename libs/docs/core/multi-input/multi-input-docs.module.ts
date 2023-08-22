@@ -39,10 +39,7 @@ const routes: Routes = [
         FormModule,
         MultiInputModule,
         ListModule,
-        IconModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        IconModule,
         MultiInputDocsComponent,
         MultiInputHeaderComponent,
         MultiInputExampleComponent,
@@ -58,6 +55,7 @@ const routes: Routes = [
         MultiInputDropdownWidthExampleComponent,
         MultiInputAddonClickedExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('multi-input')]
 })
 export class MultiInputDocsModule {}

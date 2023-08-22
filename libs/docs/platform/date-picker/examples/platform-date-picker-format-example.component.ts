@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DateRange } from '@fundamental-ngx/core/calendar';
 import {
@@ -10,6 +10,8 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     ...FD_DATETIME_FORMATS,
@@ -38,7 +40,9 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickerFormatExampleComponent {
     form = new FormGroup({

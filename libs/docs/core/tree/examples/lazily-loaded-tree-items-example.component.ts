@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DataProvider } from '@fundamental-ngx/cdk/data-source';
 import { FdTreeDataSource, TreeItem } from '@fundamental-ngx/core/tree';
 import { delay, Observable, of } from 'rxjs';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { TreeModule } from '@fundamental-ngx/core/tree';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { FormsModule } from '@angular/forms';
 
 let index = 0;
 let totalIndex = 0;
@@ -10,7 +15,9 @@ let totalIndex = 0;
     selector: 'fd-lazily-loaded-tree-items-example',
     templateUrl: './lazily-loaded-tree-items-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormsModule, DataSourceDirective, CvaDirective, TreeModule, IconModule]
 })
 export class LazilyLoadedTreeItemsExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;

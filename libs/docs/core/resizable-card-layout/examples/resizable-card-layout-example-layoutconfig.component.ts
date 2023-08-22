@@ -4,11 +4,39 @@ import {
     ResizableCardLayoutConfig,
     ResizedEvent
 } from '@fundamental-ngx/core/resizable-card-layout';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-resizable-card-layout-example-layoutconfig',
     templateUrl: './resizable-card-layout-example-layoutconfig.component.html',
-    styleUrls: ['./resizable-card-layout-example.component.scss']
+    styleUrls: ['./resizable-card-layout-example.component.scss'],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        DynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        ResizableCardLayoutModule,
+        CardModule,
+        ListModule,
+        NgFor
+    ]
 })
 export class ResizableCardLayoutExampleLayoutConfigComponent implements OnInit {
     layoutConfig: ResizableCardLayoutConfig;

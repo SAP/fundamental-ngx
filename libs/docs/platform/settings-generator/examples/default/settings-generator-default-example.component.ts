@@ -14,6 +14,9 @@ import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/plat
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, map, share, take } from 'rxjs/operators';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 interface UserModel {
     email: string;
@@ -69,7 +72,9 @@ class ExampleUserService {
     selector: 'fdp-settings-generator-default-example',
     templateUrl: './settings-generator-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ExampleUserService]
+    providers: [ExampleUserService],
+    standalone: true,
+    imports: [TitleComponent, SettingsGeneratorModule, BarModule]
 })
 export class SettingsGeneratorDefaultExampleComponent implements AfterViewInit {
     @ViewChild('privacyContent')

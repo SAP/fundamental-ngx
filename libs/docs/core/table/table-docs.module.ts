@@ -80,10 +80,7 @@ const routes: Routes = [
         PopoverModule,
         SkeletonModule,
         RepeatModule,
-        TitleModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TitleModule,
         TableDocsComponent,
         TableExampleComponent,
         TableColumnSortingExampleComponent,
@@ -105,6 +102,7 @@ const routes: Routes = [
         TableLoadingExampleComponent,
         TableFixedExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('table')]
 })
 export class TableDocsModule {}

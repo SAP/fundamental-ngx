@@ -31,9 +31,7 @@ const routes: Routes = [
         VerticalNavigationModule,
         TableModule,
         ListModule,
-        IconModule
-    ],
-    declarations: [
+        IconModule,
         VerticalNavigationDocsComponent,
         VerticalNavigationHeaderComponent,
         VerticalNavigationDefaultExampleComponent,

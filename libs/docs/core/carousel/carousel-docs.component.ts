@@ -1,5 +1,22 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { CarouselBackgroundExampleComponent } from './examples/carousel-background-example.component';
+import { CarouselAutoSlidesExampleComponent } from './examples/carousel-auto-slides-example.component';
+import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
+import { CarouselErrorMessageExampleComponent } from './examples/carousel-error-message-example.component';
+import { CarouselLoopedNavigationExampleComponent } from './examples/carousel-looped-navigation-example.component';
+import { CarouselContentNavigationExampleComponent } from './examples/carousel-content-navigation-example.component';
+import { CarouselHiddenNavigationExampleComponent } from './examples/carousel-hidden-navigation-example.component';
+import { CarouselNoPageIndicatorExampleComponent } from './examples/carousel-no-page-indicator-example.component';
+import { CarouselDynamicItemsExampleComponent } from './examples/carousel-dynamic-items-example.component';
+import { CarouselMultipleActiveItemExampleComponent } from './examples/carousel-multiple-active-item-example.component';
+import { CarouselVerticalDirectionExampleComponent } from './examples/carousel-vertical-direction-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { CarouselOneActiveItemExampleComponent } from './examples/carousel-one-active-item-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const carouselExampleScss = 'carousel-example.component.scss';
 
@@ -28,7 +45,27 @@ const carouselAutoSlidesHtml = 'carousel-auto-slides-example.component.html';
 
 @Component({
     selector: 'app-input',
-    templateUrl: './carousel-docs.component.html'
+    templateUrl: './carousel-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        CarouselOneActiveItemExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        CarouselVerticalDirectionExampleComponent,
+        CarouselMultipleActiveItemExampleComponent,
+        CarouselDynamicItemsExampleComponent,
+        CarouselNoPageIndicatorExampleComponent,
+        CarouselHiddenNavigationExampleComponent,
+        CarouselContentNavigationExampleComponent,
+        CarouselLoopedNavigationExampleComponent,
+        CarouselErrorMessageExampleComponent,
+        CarouselLoadingContentExampleComponent,
+        CarouselAutoSlidesExampleComponent,
+        CarouselBackgroundExampleComponent
+    ]
 })
 export class CarouselDocsComponent {
     carouselSingle: ExampleFile[] = [

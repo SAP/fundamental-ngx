@@ -39,10 +39,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         BarModule,
         ComboboxModule,
-        TitleModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TitleModule,
         BarDocsComponent,
         BarHeaderComponent,
         BarDefaultExampleComponent,
@@ -56,6 +53,7 @@ const routes: Routes = [
         BarCustomShellbarExampleComponent,
         BarWithTitleExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('bar')]
 })
 export class BarDocsModule {}

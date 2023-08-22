@@ -24,15 +24,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ScrollbarModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ScrollbarModule,
         ScrollbarDocsComponent,
         ScrollbarHeaderComponent,
         ScrollbarExampleComponent,
         ScrollbarNoHorizontalExampleComponent,
         ScrollbarNoVerticalExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('scrollbar')]
 })
 export class ScrollbarDocsModule {}

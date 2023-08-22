@@ -27,9 +27,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ActionBarModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ActionBarModule,
         ActionBarDocsComponent,
         ActionBarHeaderComponent,
         ActionBarBackExampleComponent,
@@ -38,6 +39,7 @@ const routes: Routes = [
         ActionBarContextualMenuExampleComponent,
         ActionBarLongStringTitleTruncationExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('action-bar')]
 })
 export class ActionBarDocsModule {}

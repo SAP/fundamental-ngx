@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx/cdk/utils';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
+import { NgTemplateOutlet, NgFor, NgStyle } from '@angular/common';
 
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-example',
@@ -26,7 +28,9 @@ import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgTemplateOutlet, DragAndDropModule, NgFor, NgStyle]
 })
 export class DefaultExampleComponent {
     private _cdr = inject(ChangeDetectorRef);

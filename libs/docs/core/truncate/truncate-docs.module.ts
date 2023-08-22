@@ -21,14 +21,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TruncateModule, PipeModule, IconModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        TruncateModule,
+        PipeModule,
+        IconModule,
         TruncateDocsComponent,
         TruncateExampleComponent,
         TruncateTextExampleComponent,
         TruncateDocsHeaderComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('truncate')]
 })
 export class TruncateDocsModule {}

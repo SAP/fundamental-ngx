@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataProvider } from '@fundamental-ngx/cdk/data-source';
 import {
     FdTreeDataSource,
@@ -8,6 +8,14 @@ import {
     TreeItem,
     TreeItemState
 } from '@fundamental-ngx/core/tree';
+import { JsonPipe } from '@angular/common';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { TreeModule } from '@fundamental-ngx/core/tree';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 let itemsIndex = 0;
 
@@ -15,7 +23,20 @@ let itemsIndex = 0;
     selector: 'fd-tree-with-forms-example',
     templateUrl: './tree-with-forms-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        CheckboxComponent,
+        ReactiveFormsModule,
+        DataSourceDirective,
+        CvaDirective,
+        TreeModule,
+        IconModule,
+        JsonPipe
+    ]
 })
 export class TreeWithFormsExampleComponent {
     selectionPlacement: SelectionPlacement = 'none';

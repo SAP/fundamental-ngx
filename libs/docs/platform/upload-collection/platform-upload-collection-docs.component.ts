@@ -14,10 +14,29 @@ const uploadCollectionTurnOffTs = 'platform-upload-collection-turn-off-example.c
 const uploadCollectionTurnOffHtml = 'platform-upload-collection-turn-off-example.component.html';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformUploadCollectionTurnOffExampleComponent } from './examples/platform-upload-collection-turn-off-example.component';
+import { PlatformUploadCollectionReadonlyExampleComponent } from './examples/platform-upload-collection-readonly-example.component';
+import { PlatformUploadCollectionDisabledExampleComponent } from './examples/platform-upload-collection-disabled-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformUploadCollectionExampleComponent } from './examples/platform-upload-collection-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-platform-upload-collection',
-    templateUrl: './platform-upload-collection-docs.component.html'
+    templateUrl: './platform-upload-collection-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformUploadCollectionExampleComponent,
+        CodeExampleComponent,
+        PlatformUploadCollectionDisabledExampleComponent,
+        PlatformUploadCollectionReadonlyExampleComponent,
+        PlatformUploadCollectionTurnOffExampleComponent
+    ]
 })
 export class PlatformUploadColletionDocsComponent {
     uploadCollection: ExampleFile[] = [

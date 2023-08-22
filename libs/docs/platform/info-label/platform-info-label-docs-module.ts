@@ -27,9 +27,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformInfoLabelModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformInfoLabelModule,
         PlatformInfoLabelDocsComponent,
         PlatformInfoLabelHeaderComponent,
         PlatformInfoLabelExampleComponent,
@@ -38,6 +39,7 @@ const routes: Routes = [
         PlatformInfoLableTextIconExampleComponent,
         PlatformInfoLableAriaLabelExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('info-label')]
 })
 export class PlatformInfoLabelDocsModule {}

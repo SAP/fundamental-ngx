@@ -1,6 +1,24 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { SideNavigationCondensedObjectExampleComponent } from './examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
+import { SideNavigationObjectExampleComponent } from './examples/side-navigation-object-example/side-navigation-object-example.component';
+import { SideNavigationCondensedExampleComponent } from './examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
+import { SideNavigationProgrammaticallyExampleComponent } from './examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component';
+import { SideNavigationMultipleSelectedExampleComponent } from './examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
+import { SideNavigationThreeLevelsExampleComponent } from './examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component';
+import { SideNavigationNonSelectableExampleComponent } from './examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    SideNavigationExampleComponent,
+    SideNavigationTitlesExampleComponent,
+    SideNavigationCompactExampleComponent,
+    SideNavigationIconsExampleComponent
+} from './examples/side-navigation-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const sideNavigationScssCode = 'side-navigation-examples.component.scss';
 
@@ -45,7 +63,26 @@ const sideNavigationCondensedObjectSrcTs =
 
 @Component({
     selector: 'app-side-navigation',
-    templateUrl: './side-navigation-docs.component.html'
+    templateUrl: './side-navigation-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SideNavigationExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SideNavigationTitlesExampleComponent,
+        SideNavigationCompactExampleComponent,
+        SideNavigationNonSelectableExampleComponent,
+        SideNavigationThreeLevelsExampleComponent,
+        SideNavigationMultipleSelectedExampleComponent,
+        SideNavigationProgrammaticallyExampleComponent,
+        SideNavigationIconsExampleComponent,
+        SideNavigationCondensedExampleComponent,
+        SideNavigationObjectExampleComponent,
+        SideNavigationCondensedObjectExampleComponent
+    ]
 })
 export class SideNavigationDocsComponent {
     oneLevelSideNav: ExampleFile[] = [

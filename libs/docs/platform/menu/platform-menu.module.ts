@@ -37,10 +37,7 @@ const routes: Routes = [
         ButtonModule,
         AvatarModule,
         ScrollingModule,
-        ScrollbarDirective
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ScrollbarDirective,
         PlatformMenuDocsComponent,
         PlatformMenuHeaderComponent,
         PlatformMenuBasicExampleComponent,
@@ -49,6 +46,7 @@ const routes: Routes = [
         PlatformMenuXPositionExampleComponent,
         PlatformMenuWithIconsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('menu')]
 })
 export class PlatformMenuDocsModule {}

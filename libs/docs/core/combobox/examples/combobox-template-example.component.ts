@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { FormsModule } from '@angular/forms';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 
 @Component({
     selector: 'fd-combobox-template-example',
-    templateUrl: './combobox-template-example.component.html'
+    templateUrl: './combobox-template-example.component.html',
+    standalone: true,
+    imports: [ComboboxModule, FormsModule, ListModule, JsonPipe]
 })
 export class ComboboxTemplateExampleComponent {
     values = [

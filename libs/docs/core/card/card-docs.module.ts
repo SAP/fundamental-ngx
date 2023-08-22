@@ -69,10 +69,7 @@ const routes: Routes = [
         MenuModule,
         LinkModule,
         SkeletonModule,
-        RepeatModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        RepeatModule,
         CardDocsComponent,
         CardHeaderComponent,
         CardExampleComponent,
@@ -90,6 +87,7 @@ const routes: Routes = [
         CardLinkListExampleComponent,
         CardLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('card')]
 })
 export class CardDocsModule {}

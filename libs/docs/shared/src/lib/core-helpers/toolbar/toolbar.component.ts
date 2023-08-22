@@ -9,7 +9,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Libraries } from '../../utilities';
 
@@ -37,6 +37,16 @@ import {
 } from '@fundamental-ngx/i18n';
 import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 import { DocsService } from '../../services/docs.service';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { NgIf, NgTemplateOutlet, NgFor, LowerCasePipe } from '@angular/common';
+import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
+import { ProductMenuComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarLogoComponent } from '@fundamental-ngx/core/shellbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ShellbarSidenavDirective } from '@fundamental-ngx/core/shellbar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
@@ -54,7 +64,24 @@ type Version = {
     templateUrl: './toolbar.component.html',
     styleUrls: ['./toolbar.component.scss'],
     providers: [MenuKeyboardService],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ShellbarComponent,
+        ButtonModule,
+        ShellbarSidenavDirective,
+        ContentDensityDirective,
+        ShellbarLogoComponent,
+        RouterLink,
+        ProductMenuComponent,
+        ShellbarActionsComponent,
+        NgIf,
+        MenuModule,
+        NgTemplateOutlet,
+        NgFor,
+        IconModule,
+        LowerCasePipe
+    ]
 })
 export class ToolbarDocsComponent implements OnInit, OnDestroy {
     @Output()

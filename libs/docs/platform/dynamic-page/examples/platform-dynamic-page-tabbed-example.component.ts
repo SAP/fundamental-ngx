@@ -6,12 +6,35 @@ import {
     DynamicPageBackgroundType
 } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-tabbed-example',
     templateUrl: './platform-dynamic-page-tabbed-example.component.html',
     styleUrls: ['./platform-dynamic-page-tabbed-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        PlatformDynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        BarModule
+    ]
 })
 export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
     @ViewChild('overlay')

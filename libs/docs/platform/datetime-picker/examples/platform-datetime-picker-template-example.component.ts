@@ -7,6 +7,10 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-datetime-picker-template-example',
@@ -23,7 +27,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformDatetimePickerComponent, FormsModule, NgIf]
 })
 export class PlatformDatetimePickerTemplateExampleComponent {
     date: FdDate = FdDate.getNow();

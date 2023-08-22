@@ -22,15 +22,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MessageToastModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        MessageToastModule,
         MessageToastHeaderComponent,
         MessageToastDocsComponent,
         MessageToastContentExampleComponent,
         MessageToastExampleComponent,
         MessageToastPositionExampleComponent
     ],
+    exports: [RouterModule],
     providers: [MessageToastService, currentComponentProvider('message-toast')]
 })
 export class MessageToastDocsModule {}

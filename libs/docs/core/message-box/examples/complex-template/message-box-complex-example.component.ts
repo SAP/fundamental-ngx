@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
 import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-message-box-complex-example',
@@ -44,7 +48,9 @@ import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
                 </ng-template>
             </fd-message-box-footer>
         </fd-message-box>
-    `
+    `,
+    standalone: true,
+    imports: [MessageBoxModule, TemplateDirective, BarModule, TitleComponent]
 })
 export class MessageBoxComplexExampleComponent {
     constructor(public messageBoxRef: MessageBoxRef) {}

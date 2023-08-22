@@ -27,20 +27,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        PlatformPageFooterDocsComponent,
-        PlatformPageFooterHeaderComponent,
-        PlatformPageFooterExampleComponent,
-        PlatformPageFooterWithIconExampleComponent,
-        PlatformPageFooterMultipleLineExampleComponent
-    ],
     exports: [RouterModule],
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformPageFooterModule,
         PlatformLinkModule,
-        LinkModule
+        LinkModule,
+        PlatformPageFooterDocsComponent,
+        PlatformPageFooterHeaderComponent,
+        PlatformPageFooterExampleComponent,
+        PlatformPageFooterWithIconExampleComponent,
+        PlatformPageFooterMultipleLineExampleComponent
     ],
     providers: [currentComponentProvider('page-footer')]
 })

@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
+import { NgFor } from '@angular/common';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-object-identifier-table-example',
-    templateUrl: './object-identifier-table-example.component.html'
+    templateUrl: './object-identifier-table-example.component.html',
+    standalone: true,
+    imports: [FocusableGridDirective, TableModule, NgFor, ObjectIdentifierModule]
 })
 export class ObjectIdentifierTableExampleComponent {
     tableRows = [

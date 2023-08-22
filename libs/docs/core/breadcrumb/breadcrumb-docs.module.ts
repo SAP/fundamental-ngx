@@ -22,14 +22,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BreadcrumbModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        BreadcrumbModule,
         BreadcrumbDocsComponent,
         BreadcrumbHeaderComponent,
         BreadcrumbHrefExampleComponent,
         BreadcrumbRouterLinkExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('breadcrumb')]
 })
 export class BreadcrumbDocsModule {}

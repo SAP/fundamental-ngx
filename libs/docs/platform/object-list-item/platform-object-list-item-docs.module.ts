@@ -48,10 +48,7 @@ const routes: Routes = [
         ObjectMarkerModule,
         ObjectStatusModule,
         PlatformObjectStatusModule,
-        PlatformMenuModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformMenuModule,
         PlatformObjectListItemDocsComponent,
         PlatformObjectListItemHeaderComponent,
         PlatformObjectListItemBorderLessExampleComponent,
@@ -60,6 +57,7 @@ const routes: Routes = [
         PlatformObjectListItemWithRowNavigationExampleComponent,
         PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('object-list-item')]
 })
 export class PlatformObjectListItemDocsModule {}

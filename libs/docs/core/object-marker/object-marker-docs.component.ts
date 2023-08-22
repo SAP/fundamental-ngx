@@ -1,5 +1,16 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ObjectMarkerClickableExampleComponent } from './examples/object-marker-clickable-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    ObjectMarkerExampleComponent,
+    ObjectMarkerTextExampleComponent,
+    ObjectMarkerIconAndTextExampleComponent
+} from './examples/object-marker-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const ObjectMarkerExample = 'object-marker-example.component.html';
 const ObjectMarkerIconandText = 'object-marker-Icon-text-example.component.html';
@@ -9,7 +20,19 @@ const ObjectMarkerClickAble = 'object-marker-clickable-example.component.ts';
 
 @Component({
     selector: 'fd-object-marker-docs',
-    templateUrl: './object-marker-docs.component.html'
+    templateUrl: './object-marker-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ObjectMarkerExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ObjectMarkerTextExampleComponent,
+        ObjectMarkerIconAndTextExampleComponent,
+        ObjectMarkerClickableExampleComponent
+    ]
 })
 export class ObjectMarkerDocsComponent {
     objectMarkerIconOnly: ExampleFile[] = [

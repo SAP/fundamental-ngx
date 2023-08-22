@@ -41,10 +41,7 @@ const routes: Routes = [
         TileModule,
         LayoutPanelModule,
         SegmentedButtonModule,
-        PlatformSearchFieldModule
-    ],
-    exports: [RouterModule, ShellbarResponsiveExampleComponent, ShellbarGrowingGroupExampleComponent],
-    declarations: [
+        PlatformSearchFieldModule,
         ShellbarDocsComponent,
         ShellbarDocsHeaderComponent,
         ShellbarBasicExampleComponent,
@@ -54,6 +51,7 @@ const routes: Routes = [
         ShellbarResponsiveExampleComponent,
         ShellbarGrowingGroupExampleComponent
     ],
+    exports: [RouterModule, ShellbarResponsiveExampleComponent, ShellbarGrowingGroupExampleComponent],
     providers: [currentComponentProvider('shellbar')]
 })
 export class ShellbarDocsModule {}

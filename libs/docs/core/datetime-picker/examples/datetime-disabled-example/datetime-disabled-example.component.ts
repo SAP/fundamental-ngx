@@ -6,6 +6,8 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { FormsModule } from '@angular/forms';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 @Component({
     selector: 'fd-datetime-disabled-example',
@@ -19,7 +21,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [DatetimePickerComponent, FormsModule]
 })
 export class DatetimeDisabledExampleComponent {
     date = FdDate.getNow();

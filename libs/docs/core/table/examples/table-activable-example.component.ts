@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor } from '@angular/common';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-table-activable-example',
-    templateUrl: './table-activable-example.component.html'
+    templateUrl: './table-activable-example.component.html',
+    standalone: true,
+    imports: [FocusableGridDirective, TableModule, NgFor, LinkComponent]
 })
 export class TableActivableExampleComponent implements OnInit {
     tableRows: any[];

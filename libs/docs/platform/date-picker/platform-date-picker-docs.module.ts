@@ -29,7 +29,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        SegmentedButtonModule,
+        PlatformLinkModule,
+        FdDatetimeModule,
+        PlatformDatePickerModule,
+        FdpFormGroupModule,
         PlatformDatePickerDocsComponent,
         PlatformDatePickerExampleComponent,
         PlatformDatePickerDisableFuncExampleComponent,
@@ -38,15 +45,6 @@ const routes: Routes = [
         PlatformDatePickerFormatExampleComponent,
         PlatformDatePickerUpdateOnBlurExampleComponent,
         PlatformDatePickerMobileExampleComponent
-    ],
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        SegmentedButtonModule,
-        PlatformLinkModule,
-        FdDatetimeModule,
-        PlatformDatePickerModule,
-        FdpFormGroupModule
     ],
     exports: [RouterModule],
     providers: [currentComponentProvider('date-picker')]

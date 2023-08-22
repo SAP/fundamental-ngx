@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormGroup, FormGroupDirective, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { MessagePopoverComponent } from '@fundamental-ngx/platform/message-popover';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
 interface MaxErrorModel {
     max: number;
@@ -15,7 +22,19 @@ interface MaxLengthErrorModel {
     selector: 'fdp-message-popover-form-container-example',
     templateUrl: './form-container-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MessagePopoverFormWrapperComponent,
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformInputModule,
+        PlatformTextAreaModule,
+        BarModule,
+        MessagePopoverComponent,
+        PlatformButtonModule
+    ]
 })
 export class FormContainerExampleComponent {
     personalInfoForm: FormGroup;

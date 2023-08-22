@@ -2,12 +2,16 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormGeneratorService, DynamicFormGroup } from '@fundamental-ngx/platform/form';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-onchange-example',
     templateUrl: './wizard-generator-onchange-example.component.html',
     // Provide local form generator service here to ignore other example forms on the page.
-    providers: [FormGeneratorService]
+    providers: [FormGeneratorService],
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorOnchangeExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

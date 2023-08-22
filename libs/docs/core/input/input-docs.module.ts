@@ -25,9 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FormModule,
+        InlineHelpModule,
         InputDocsComponent,
         InputHeaderComponent,
         InputExampleComponent,
@@ -35,6 +37,7 @@ const routes: Routes = [
         InputFormGroupExampleComponent,
         InputInlineHelpExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('input')]
 })
 export class InputDocsModule {}

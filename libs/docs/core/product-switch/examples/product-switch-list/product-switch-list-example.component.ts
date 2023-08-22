@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
+import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 
 @Component({
     selector: 'fd-product-switch-list-example',
-    templateUrl: './product-switch-list-example.component.html'
+    templateUrl: './product-switch-list-example.component.html',
+    standalone: true,
+    imports: [ProductSwitchModule]
 })
 export class ProductSwitchListComponent {
     list: ProductSwitchItem[] = [

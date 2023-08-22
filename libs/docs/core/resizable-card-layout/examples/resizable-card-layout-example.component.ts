@@ -1,11 +1,43 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ResizedEvent } from '@fundamental-ngx/core/resizable-card-layout';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-resizable-card-layout-example',
     templateUrl: './resizable-card-layout-example.component.html',
     styleUrls: ['./resizable-card-layout-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        DynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        ResizableCardLayoutModule,
+        CardModule,
+        ListModule,
+        NgFor,
+        FocusableGridDirective,
+        TableModule
+    ]
 })
 export class ResizableCardLayoutExampleComponent {
     visible = false;

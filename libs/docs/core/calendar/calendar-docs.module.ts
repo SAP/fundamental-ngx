@@ -47,10 +47,7 @@ const routes: Routes = [
         SelectModule,
         SegmentedButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes)
-    ],
-    exports: [RouterModule],
-    declarations: [
+        RouterModule.forChild(routes),
         CalendarDocsComponent,
         CalendarHeaderComponent,
         CalendarRangeExampleComponent,
@@ -67,6 +64,7 @@ const routes: Routes = [
         CalendarSpecialDayExampleComponent,
         CalendarMarkHoverComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('calendar')]
 })
 export class CalendarDocsModule {}

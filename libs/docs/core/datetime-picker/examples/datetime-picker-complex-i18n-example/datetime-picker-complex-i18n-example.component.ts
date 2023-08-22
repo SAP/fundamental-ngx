@@ -17,6 +17,11 @@ import {
     FdLanguage
 } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { DatetimePickerComponent as DatetimePickerComponent_1 } from '@fundamental-ngx/core/datetime-picker';
+import { NgFor } from '@angular/common';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 const placeholders = new Map([
     ['en-ca', 'mm/dd/yyyy, hh:mm a'],
@@ -44,7 +49,9 @@ const placeholders = new Map([
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, SelectModule, NgFor, DatetimePickerComponent_1, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {
     locale = 'en-ca';

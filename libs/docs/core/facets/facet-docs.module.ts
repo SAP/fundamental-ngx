@@ -49,10 +49,7 @@ const routes: Routes = [
         IconModule,
         LinkModule,
         TextModule,
-        SkeletonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        SkeletonModule,
         FacetsDocsComponent,
         FacetDocsHeaderComponent,
         FacetGroupExampleComponent,
@@ -65,6 +62,7 @@ const routes: Routes = [
         CustomFacetExampleComponent,
         FacetLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('facets')]
 })
 export class FacetDocsModule {}

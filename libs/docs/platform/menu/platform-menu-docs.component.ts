@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformMenuScrollingExampleComponent } from './examples/platform-menu-scrolling-example.component';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { PlatformMenuCascadeExampleComponent } from './examples/platform-menu-cascade-example.component';
+import { PlatformMenuXPositionExampleComponent } from './examples/platform-menu-x-position-example.component';
+import { PlatformMenuWithIconsExampleComponent } from './examples/platform-menu-with-icons-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformMenuBasicExampleComponent } from './examples/platform-menu-basic-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const platformBasicMenuSrc = 'platform-menu-basic-example.component.html';
 const platformBasicMenuTsCode = 'platform-menu-basic-example.component.ts';
@@ -19,7 +31,22 @@ const platformWithIconsMenuTsCode = 'platform-menu-with-icons-example.component.
 
 @Component({
     selector: 'app-menu',
-    templateUrl: './platform-menu-docs.component.html'
+    templateUrl: './platform-menu-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformMenuBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformMenuWithIconsExampleComponent,
+        PlatformMenuXPositionExampleComponent,
+        PlatformMenuCascadeExampleComponent,
+        LinkComponent,
+        RouterLink,
+        PlatformMenuScrollingExampleComponent
+    ]
 })
 export class PlatformMenuDocsComponent {
     menuBasic: ExampleFile[] = [

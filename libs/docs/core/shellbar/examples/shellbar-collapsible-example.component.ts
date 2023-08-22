@@ -2,10 +2,39 @@ import { Component } from '@angular/core';
 import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 import { ShellbarMenuItem, ShellbarSizes, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
 import { SearchInput, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
+import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ShellbarActionComponent } from '@fundamental-ngx/core/shellbar';
+import { NgFor } from '@angular/common';
+import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { ShellbarSubtitleComponent } from '@fundamental-ngx/core/shellbar';
+import { ProductMenuComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarLogoComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',
-    templateUrl: './shellbar-collapsible-example.component.html'
+    templateUrl: './shellbar-collapsible-example.component.html',
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        ShellbarComponent,
+        ShellbarLogoComponent,
+        ProductMenuComponent,
+        ShellbarSubtitleComponent,
+        PlatformSearchFieldModule,
+        ContentDensityDirective,
+        ShellbarActionsComponent,
+        NgFor,
+        ShellbarActionComponent,
+        ProductSwitchModule
+    ]
 })
 export class ShellbarCollapsibleExampleComponent {
     currentSize: ShellbarSizes = 'xl';

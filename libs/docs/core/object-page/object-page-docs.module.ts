@@ -43,10 +43,12 @@ const routes: Routes = [
         AvatarModule,
         ObjectNumberModule,
         ObjectStatusModule,
-        CdkScrollableModule
+        CdkScrollableModule,
+        ObjectPageDocsComponent,
+        ObjectPageDocsHeaderComponent,
+        ObjectPageExampleComponent
     ],
     exports: [RouterModule],
-    declarations: [ObjectPageDocsComponent, ObjectPageDocsHeaderComponent, ObjectPageExampleComponent],
     providers: [currentComponentProvider('object-page')]
 })
 export class ObjectPageDocsModule {}

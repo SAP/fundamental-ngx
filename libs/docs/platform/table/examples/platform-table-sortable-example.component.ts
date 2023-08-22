@@ -9,6 +9,10 @@ import {
     TableDataProvider,
     TableState
 } from '@fundamental-ngx/platform/table';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-sortable-example',
@@ -20,7 +24,9 @@ import {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
-    ]
+    ],
+    standalone: true,
+    imports: [TableDataSourceDirective, TableHeaderResizerDirective, PlatformTableModule, TableInitialStateDirective]
 })
 export class PlatformTableSortableExampleComponent {
     source: TableDataSource<ExampleItem>;

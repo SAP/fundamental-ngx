@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { PlatformFeedInputModule } from '@fundamental-ngx/platform/feed-input';
 
 @Component({
     selector: 'fdp-feed-input-no-avatar-example',
-    templateUrl: './platform-feed-input-no-avatar-example.component.html'
+    templateUrl: './platform-feed-input-no-avatar-example.component.html',
+    standalone: true,
+    imports: [PlatformFeedInputModule]
 })
 export class PlatformFeedInputNoAvatarExampleComponent {}

@@ -26,7 +26,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        TimelineModule,
+        AvatarModule,
+        ScrollbarModule,
         TimelineDocsComponent,
         TimelineHeaderDocsComponent,
         TimelineBasicExampleComponent,
@@ -34,13 +39,6 @@ const routes: Routes = [
         TimelineHorizontalDoubleSideExampleComponent,
         TimelineVerticalDoubleSideExampleComponent,
         TimelineLoadingExampleComponent
-    ],
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        TimelineModule,
-        AvatarModule,
-        ScrollbarModule
     ],
     exports: [RouterModule],
     providers: [currentComponentProvider('timeline')]

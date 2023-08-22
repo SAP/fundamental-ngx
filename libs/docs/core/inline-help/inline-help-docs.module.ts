@@ -29,10 +29,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         FormModule,
         InlineHelpModule,
-        ObjectStatusModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ObjectStatusModule,
         InlineHelpDocsComponent,
         InlineHelpHeaderComponent,
         InlineHelpExampleComponent,
@@ -40,6 +37,7 @@ const routes: Routes = [
         InlineHelpTriggerExampleComponent,
         InlineHelpTemplateExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('inline-help')]
 })
 export class InlineHelpDocsModule {}

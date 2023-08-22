@@ -40,10 +40,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformButtonModule,
         IconModule,
-        PlatformInputGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformInputGroupModule,
         PlatformInputGroupDocsComponent,
         PlatformInputGroupHeaderComponent,
         PlatformInputGroupStandardExampleComponent,
@@ -51,6 +48,7 @@ const routes: Routes = [
         PlatformInputGroupDisabledExampleComponent,
         PlatformInputGroupFormExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('input-group')]
 })
 export class PlatformInputGroupDocsModule {}

@@ -25,9 +25,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FileUploaderModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FileUploaderModule,
         FileUploaderDocsComponent,
         FileUploaderHeaderComponent,
         FileUploaderExampleComponent,
@@ -38,6 +39,7 @@ const routes: Routes = [
         FileUploaderMinExampleComponent,
         FileUploaderTruncationExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('file-uploader')]
 })
 export class FileUploaderDocsModule {}

@@ -7,6 +7,9 @@ import {
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
 } from '@fundamental-ngx/core/datetime';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-datetime-picker-update-on-blur-example',
@@ -31,7 +34,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [PlatformDatetimePickerComponent, FormsModule, DatePipe]
 })
 export class PlatformDatetimePickerUpdateOnBlurExampleComponent {
     date = new FdDate(2020, 11, 27, 14, 30);

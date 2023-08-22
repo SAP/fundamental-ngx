@@ -22,15 +22,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ProductSwitchModule, ShellbarModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ProductSwitchModule,
+        ShellbarModule,
         ProductSwitchDocsComponent,
         ProductSwitchListComponent,
         ProductSwitchDocsHeaderComponent,
         ProductSwitchDndExampleComponent,
         ProductSwitchSmallExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('product-switch')]
 })
 export class ProductSwitchDocsModule {}

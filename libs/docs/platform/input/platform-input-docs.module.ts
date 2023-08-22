@@ -35,10 +35,7 @@ const routes: Routes = [
         PlatformInputModule,
         PlatformButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes)
-    ],
-    exports: [RouterModule],
-    declarations: [
+        RouterModule.forChild(routes),
         PlatformInputExampleComponent,
         PlatformInputHeaderComponent,
         PlatformInputDocsComponent,
@@ -46,6 +43,7 @@ const routes: Routes = [
         PlatformInputAutoCompleteValidationExampleComponent,
         PlatformInputReactiveMinMaxValidationExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('input')]
 })
 export class PlatformInputDocsModule {}

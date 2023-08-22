@@ -1,9 +1,13 @@
 import { Component, ViewChild, ElementRef, inject } from '@angular/core';
 import { TabbableElementService } from '@fundamental-ngx/cdk/utils';
+import { DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fundamental-ngx-tabbable-default-example',
-    templateUrl: './tabbable-default-example.component.html'
+    templateUrl: './tabbable-default-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, DisabledBehaviorDirective]
 })
 export class TabbableDefaultExampleComponent {
     @ViewChild('section')

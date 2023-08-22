@@ -1,10 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-menu-with-icons-example',
     templateUrl: './platform-menu-with-icons-example.component.html',
     styleUrls: ['./platform-menu-example-styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [ButtonModule, PlatformMenuModule, MenuModule]
 })
 export class PlatformMenuWithIconsExampleComponent {
     item = '';

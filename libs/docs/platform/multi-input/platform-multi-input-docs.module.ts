@@ -44,20 +44,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        PlatformMultiInputDocsComponent,
-        PlatformMultiInputExampleComponent,
-        PlatformMultiInputHeaderComponent,
-        PlatformMultiInputGroupedExampleComponent,
-        PlatformMultiInputComplexExampleComponent,
-        PlatformMultiInputDeclineExampleComponent,
-        PlatformMultiInputDeclineExampleComponent,
-        PlatformMultiInputDisabledExampleComponent,
-        PlatformMultiInputMobileExampleComponent,
-        PlatformMultiInputReactiveExampleComponent,
-        PlatformMultiInputCompactExampleComponent,
-        PlatformMultiInputLoadingExampleComponent
-    ],
     imports: [
         CommonModule,
         FormsModule,
@@ -71,7 +57,19 @@ const routes: Routes = [
         DialogModule,
         InputGroupModule,
         SharedDocumentationModule,
-        PlatformButtonModule
+        PlatformButtonModule,
+        PlatformMultiInputDocsComponent,
+        PlatformMultiInputExampleComponent,
+        PlatformMultiInputHeaderComponent,
+        PlatformMultiInputGroupedExampleComponent,
+        PlatformMultiInputComplexExampleComponent,
+        PlatformMultiInputDeclineExampleComponent,
+        PlatformMultiInputDeclineExampleComponent,
+        PlatformMultiInputDisabledExampleComponent,
+        PlatformMultiInputMobileExampleComponent,
+        PlatformMultiInputReactiveExampleComponent,
+        PlatformMultiInputCompactExampleComponent,
+        PlatformMultiInputLoadingExampleComponent
     ],
     exports: [RouterModule],
     providers: [

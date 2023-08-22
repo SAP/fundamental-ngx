@@ -37,10 +37,7 @@ const routes: Routes = [
         TimePickerModule,
         SegmentedButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes)
-    ],
-    exports: [RouterModule],
-    declarations: [
+        RouterModule.forChild(routes),
         TimePickerDocsComponent,
         TimePickerHeaderComponent,
         TimePickerExampleComponent,
@@ -51,6 +48,7 @@ const routes: Routes = [
         TimePickerDisabledExampleComponent,
         TimePickerAllowNullExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('time-picker')]
 })
 export class TimePickerDocsModule {}

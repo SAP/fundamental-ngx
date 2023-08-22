@@ -31,16 +31,14 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         BreakpointModule,
-        TableModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        TableModule,
         BreakpointDocsComponent,
         BreakpointHeaderComponent,
         BasicExampleComponent,
         AliasNamesExampleComponent,
         DifferentObserveTargetExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('breakpoint')]
 })
 export class BreakpointDocsModule {}

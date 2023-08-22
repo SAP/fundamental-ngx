@@ -1,14 +1,19 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { JsonPipe } from '@angular/common';
+import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-select-forms',
     templateUrl: './platform-select-forms.component.html',
     styleUrls: ['platform-select-forms.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformSelectModule, JsonPipe]
 })
 export class PlatformSelectFormsComponent {
     fromData: OptionItem[] = [

@@ -30,16 +30,14 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformObjectAttributeModule,
-        PlatformLinkModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformLinkModule,
         PlatformObjectAttributeDocsComponent,
         PlatformObjectAttributeHeaderComponent,
         PlatformObjectAttributeExampleComponent,
         PlatformObjectAttributeTruncateExampleComponent,
         PlatformObjectAttributeLinkExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('object-attribute')]
 })
 export class PlatformObjectAttributeDocsModule {}

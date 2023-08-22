@@ -50,10 +50,7 @@ const routes: Routes = [
         DialogModule,
         FileUploaderModule,
         CheckboxModule,
-        InputGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        InputGroupModule,
         UploadCollectionHeaderComponent,
         UploadCollectionDocsComponent,
         UploadCollectionExampleComponent,
@@ -62,6 +59,7 @@ const routes: Routes = [
         UploadCollectionEmptyExampleComponent,
         UploadCollectionComplexExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('upload-collection')]
 })
 export class UploadCollectionDocsModule {}

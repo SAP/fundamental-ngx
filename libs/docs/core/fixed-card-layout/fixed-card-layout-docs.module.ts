@@ -47,10 +47,7 @@ const routes: Routes = [
         TableModule,
         ToolbarModule,
         FormModule,
-        ScrollbarModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ScrollbarModule,
         FixedCardLayoutDocsComponent,
         FixedCardLayoutExampleComponent,
         FixedCardLayoutDisabledDragExampleComponent,
@@ -60,6 +57,7 @@ const routes: Routes = [
         FixedCardLayoutCustomColumnWidthExampleComponent,
         FixedCardLayoutMaxColumnsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('fixed-card-layout')]
 })
 export class FixedCardLayoutDocsModule {}

@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-platform-split-button-icons-example',
-    templateUrl: 'platform-split-button-icons-example.component.html'
+    templateUrl: 'platform-split-button-icons-example.component.html',
+    standalone: true,
+    imports: [ContentDensityDirective, PlatformSplitMenuButtonModule, PlatformMenuModule]
 })
 export class PlatformDocsSplitMenuButtonIconsComponent {
     label1 = 'Option 1';

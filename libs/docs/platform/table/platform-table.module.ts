@@ -116,10 +116,7 @@ const routes: Routes = [
         PlatformMenuModule,
         PopoverModule,
         PlatformListModule,
-        ListModule
-    ],
-    exports: [RouterModule, AdvancedExamplesDocsComponent, AdvancedScrollingExampleComponent],
-    declarations: [
+        ListModule,
         PlatformTableDocsComponent,
         PlatformTableHeaderComponent,
         PlatformTableDefaultExampleComponent,
@@ -162,6 +159,7 @@ const routes: Routes = [
         AdvancedExamplesDocsComponent,
         AdvancedScrollingExampleComponent
     ],
+    exports: [RouterModule, AdvancedExamplesDocsComponent, AdvancedScrollingExampleComponent],
     providers: [RtlService, currentComponentProvider('table'), ExampleChildService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

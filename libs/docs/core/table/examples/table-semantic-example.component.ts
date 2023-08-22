@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { TableStatuses } from '@fundamental-ngx/core/table';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-table-semantic-example',
-    templateUrl: './table-semantic-example.component.html'
+    templateUrl: './table-semantic-example.component.html',
+    standalone: true,
+    imports: [FocusableGridDirective, TableModule, CheckboxComponent, FormsModule, NgFor, LinkComponent]
 })
 export class TableSemanticExampleComponent {
     private readonly _rangeSelector = new RangeSelector();

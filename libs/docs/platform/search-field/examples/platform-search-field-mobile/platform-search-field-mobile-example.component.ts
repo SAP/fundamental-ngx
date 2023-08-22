@@ -1,11 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-mobile-example',
     templateUrl: './platform-search-field-mobile-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [PlatformSearchFieldModule]
 })
 export class PlatformSearchFieldMobileExampleComponent {
     searchTerm = '';

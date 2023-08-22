@@ -17,6 +17,11 @@ import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 import { isObservable, Observable, of, ReplaySubject, shareReplay, switchMap, tap, zip } from 'rxjs';
 import { catchError, map, startWith } from 'rxjs/operators';
 import { MessageStripAlertService } from '@fundamental-ngx/core/message-strip';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { NgIf, NgFor, AsyncPipe, TitleCasePipe } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 enum ExampleEntityState {
     loading,
@@ -35,7 +40,19 @@ interface ExamplesEntity {
     styleUrls: ['./code-example.component.scss'],
     encapsulation: ViewEncapsulation.None,
     animations: [height({ time: 200 })],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        BusyIndicatorComponent,
+        MessageStripComponent,
+        TabsModule,
+        NgFor,
+        CodeSnippetComponent,
+        AsyncPipe,
+        TitleCasePipe
+    ]
 })
 export class CodeExampleComponent implements OnInit {
     @ViewChildren(CodeSnippetComponent)

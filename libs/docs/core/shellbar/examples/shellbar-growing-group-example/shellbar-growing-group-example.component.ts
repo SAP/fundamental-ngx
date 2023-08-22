@@ -8,12 +8,31 @@ import {
     ShellbarUserMenu
 } from '@fundamental-ngx/core/shellbar';
 import { SearchInput, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
+import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ShellbarActionComponent } from '@fundamental-ngx/core/shellbar';
+import { NgFor } from '@angular/common';
+import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarSubtitleComponent } from '@fundamental-ngx/core/shellbar';
+import { ProductMenuComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarLogoComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-shellbar-growing-group-example',
     templateUrl: './shellbar-growing-group-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ShellbarComponent,
+        ShellbarLogoComponent,
+        ProductMenuComponent,
+        ShellbarSubtitleComponent,
+        ShellbarActionsComponent,
+        NgFor,
+        ShellbarActionComponent,
+        ProductSwitchModule
+    ]
 })
 export class ShellbarGrowingGroupExampleComponent {
     groupConfig: ShellbarGroupFlexOptions = {

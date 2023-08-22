@@ -67,10 +67,7 @@ const routes: Routes = [
         SkeletonModule,
         RepeatModule,
         PopoverModule,
-        ShellbarModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ShellbarModule,
         ListDocsComponent,
         ListHeaderComponent,
         ListExampleComponent,
@@ -89,6 +86,7 @@ const routes: Routes = [
         ListInteractiveExampleComponent,
         ListLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('list')]
 })
 export class ListDocsModule {}

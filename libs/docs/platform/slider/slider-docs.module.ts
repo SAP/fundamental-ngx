@@ -39,10 +39,7 @@ const routes: Routes = [
         PlatformSliderModule,
         FormsModule,
         FdpFormGroupModule,
-        CommonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        CommonModule,
         SliderHeaderComponent,
         PlatformSliderDocsComponent,
         SliderBasicExampleComponent,
@@ -54,6 +51,7 @@ const routes: Routes = [
         SliderCozyExampleComponent,
         SliderFormFieldExampleComponent
     ],
+    exports: [RouterModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [currentComponentProvider('slider')]
 })

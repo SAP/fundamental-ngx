@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SelectItem } from '@fundamental-ngx/platform/shared';
+import { NgIf, JsonPipe } from '@angular/common';
+import { CheckboxComponent } from '@fundamental-ngx/platform/form';
+import { CheckboxGroupComponent } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-examples',
-    templateUrl: './platform-checkbox-group-example.component.html'
+    templateUrl: './platform-checkbox-group-example.component.html',
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CheckboxGroupComponent,
+        CheckboxComponent,
+        NgIf,
+        JsonPipe
+    ]
 })
 export class PlatformCheckboxGroupExampleComponent {
     fruits: string[] = ['Apple', 'Banana', 'Grapes'];

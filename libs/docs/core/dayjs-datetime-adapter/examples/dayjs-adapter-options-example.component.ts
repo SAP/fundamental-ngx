@@ -5,6 +5,7 @@ import {
     DAYJS_DATETIME_FORMATS,
     DayjsDatetimeAdapter
 } from '@fundamental-ngx/datetime-adapter';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 @Component({
     selector: 'fd-dayjs-adapter-options-example',
@@ -15,6 +16,8 @@ import {
         { provide: DATE_TIME_FORMATS, useValue: DAYJS_DATETIME_FORMATS },
         { provide: DatetimeAdapter, useClass: DayjsDatetimeAdapter },
         { provide: DAYJS_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } }
-    ]
+    ],
+    standalone: true,
+    imports: [DatetimePickerComponent]
 })
 export class DayjsAdapterOptionsExampleComponent {}

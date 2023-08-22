@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-dynamic-page-tabs-example',
@@ -19,6 +31,22 @@ import { MessageToastService } from '@fundamental-ngx/core/message-toast';
                 min-height: 20vh;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        DynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        TabsModule,
+        NgFor,
+        CdkScrollable,
+        BarModule
     ]
 })
 export class DynamicPageTabsExampleComponent {

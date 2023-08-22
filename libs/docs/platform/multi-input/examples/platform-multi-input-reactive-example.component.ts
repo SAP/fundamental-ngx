@@ -1,13 +1,29 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-multi-input-reactive-example',
     templateUrl: './platform-multi-input-reactive-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [
+        FormsModule,
+        FdpFormGroupModule,
+        ReactiveFormsModule,
+        PlatformMultiInputModule,
+        NgIf,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        JsonPipe
+    ]
 })
 export class PlatformMultiInputReactiveExampleComponent {
     _datasource = [

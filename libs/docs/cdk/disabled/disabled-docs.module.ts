@@ -31,16 +31,14 @@ const routes: Routes = [
         DisabledBehaviorModule,
         FocusableListModule,
         ClickedBehaviorModule,
-        ButtonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        ButtonModule,
         DisabledHeaderComponent,
         DisabledDocsComponent,
         DefaultExampleComponent,
         DiExampleComponent,
         DisabledRecipientDirective
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('disabled')]
 })
 export class DisabledDocsModule {}

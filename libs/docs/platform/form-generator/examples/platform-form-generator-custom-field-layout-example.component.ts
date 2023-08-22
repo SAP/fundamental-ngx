@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 import { Validators } from '@angular/forms';
 
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { NgIf, JsonPipe } from '@angular/common';
+import { FormGeneratorComponent as FormGeneratorComponent_1 } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -14,7 +17,9 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     selector: 'fdp-platform-form-generator-custom-field-layout-example',
     templateUrl: './platform-form-generator-custom-field-layout-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [FormGeneratorComponent_1, NgIf, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

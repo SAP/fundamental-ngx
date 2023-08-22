@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { WizardLoadingExampleComponent } from './examples/loading/wizard-loading-example.component';
+import { RouterLink } from '@angular/router';
+import { WizardVisibleSummaryExampleComponent } from './examples/wizard-visible-summary-example.component';
+import { WizardNgForExampleComponent } from './examples/wizard-ngfor-example.component';
+import { WizardDialogExampleComponent } from './examples/wizard-dialog-example.component';
+import { WizardBranchingExampleComponent } from './examples/wizard-branching-example.component';
+import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.component';
+import { WizardCustomizableExampleComponent } from './examples/wizard-customizable-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { WizardExampleComponent } from './examples/wizard-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const wizardScss = 'wizard-example.component.scss';
 
@@ -23,7 +37,24 @@ const wizardVisibleSummaryTs = 'wizard-visible-summary-example.component.ts';
 
 @Component({
     selector: 'app-wizard',
-    templateUrl: './wizard-docs.component.html'
+    templateUrl: './wizard-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        WizardExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        WizardCustomizableExampleComponent,
+        WizardMobileExampleComponent,
+        WizardBranchingExampleComponent,
+        WizardDialogExampleComponent,
+        WizardNgForExampleComponent,
+        WizardVisibleSummaryExampleComponent,
+        RouterLink,
+        WizardLoadingExampleComponent
+    ]
 })
 export class WizardDocsComponent {
     wizardExample: ExampleFile[] = [

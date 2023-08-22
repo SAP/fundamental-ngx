@@ -20,9 +20,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LinkModule, ShellbarModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        LinkModule,
+        ShellbarModule,
+        LinkDocsComponent,
+        LinkHeaderComponent,
+        LinkExampleComponent
+    ],
     exports: [RouterModule],
-    declarations: [LinkDocsComponent, LinkHeaderComponent, LinkExampleComponent],
     providers: [currentComponentProvider('link')]
 })
 export class LinkDocsModule {}

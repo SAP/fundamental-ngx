@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
+import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarTitleComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarLogoComponent } from '@fundamental-ngx/core/shellbar';
+import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-shellbar-basic-example',
-    templateUrl: './shellbar-basic-example.component.html'
+    templateUrl: './shellbar-basic-example.component.html',
+    standalone: true,
+    imports: [ShellbarComponent, ShellbarLogoComponent, ShellbarTitleComponent, ShellbarActionsComponent]
 })
 export class ShellbarBasicExampleComponent {
     user: ShellbarUser = {

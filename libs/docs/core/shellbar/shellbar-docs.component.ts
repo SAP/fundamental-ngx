@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
+import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
+import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
+import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
+import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const sideNavShellbarScss = 'shellbar-side-nav/shellbar-side-nav-example.component.scss';
 const sideNavResponsiveShellbarScss =
@@ -18,7 +29,21 @@ const sideNavResponsiveShellbarHtml =
 
 @Component({
     selector: 'app-shellbar',
-    templateUrl: './shellbar-docs.component.html'
+    templateUrl: './shellbar-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        SeparatorComponent,
+        ComponentExampleComponent,
+        ShellbarBasicExampleComponent,
+        CodeExampleComponent,
+        ShellbarCollapsibleExampleComponent,
+        ShellbarResponsiveExampleComponent,
+        ShellbarSideNavExampleComponent,
+        ShellbarSideNavResponsiveExampleComponent,
+        ShellbarGrowingGroupExampleComponent
+    ]
 })
 export class ShellbarDocsComponent {
     shellbarBasicExample: ExampleFile[] = [

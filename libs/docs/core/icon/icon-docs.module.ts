@@ -21,15 +21,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, IconModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        IconModule,
         IconDocsComponent,
         IconHeaderComponent,
         IconExampleComponent,
         IconTNTExampleComponent,
         IconBusinessSuiteInAppSymbolsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('icon')]
 })
 export class IconDocsModule {}

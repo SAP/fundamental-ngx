@@ -34,10 +34,12 @@ const routes: Routes = [
         ActionSheetModule,
         AvatarModule,
         ToolbarModule,
-        FdPatchLanguageDirective
+        FdPatchLanguageDirective,
+        FeedListItemHeaderComponent,
+        FeedListItemDocsComponent,
+        ...examples
     ],
     exports: [RouterModule],
-    declarations: [FeedListItemHeaderComponent, FeedListItemDocsComponent, ...examples],
     providers: [currentComponentProvider('feed-list-item')]
 })
 export class FeedListItemDocsModule {}

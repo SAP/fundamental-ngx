@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformActionBarCozyModeExampleComponent } from './examples/platform-action-bar-cozy-mode-example.component';
+import { PlatformActionBarWithPositiveNegativeActionsExampleComponent } from './examples/platform-action-bar-positive-and-negative-action-example.component';
+import { PlatformActionBarWithContextualMenuExampleComponent } from './examples/platform-action-bar-contextual-menu-example.component';
+import { PlatformActionBarWithLongPageTitleExampleComponent } from './examples/platform-action-bar-with-long-title-example.component';
+import { PlatformActionBarWithDescriptionExampleComponent } from './examples/platform-action-bar-with-description-example.component';
+import { PlatformActionBarWithBackButtonExampleComponent } from './examples/platform-action-bar-with-back-button-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformActionBarExamplesComponent } from './examples/platform-action-bar-simple-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 const simpleActionBarHtml = 'platform-action-bar-simple-example.component.html';
 const simpleActionBarTs = 'platform-action-bar-simple-example.component.ts';
 const actionBarBackButtonTS = 'platform-action-bar-with-back-button-example.component.ts';
@@ -25,7 +37,22 @@ const cozyModeExampleTs = 'platform-action-bar-cozy-mode-example.component.ts';
 @Component({
     selector: 'app-platform-action-bar',
     templateUrl: './platform-action-bar-docs.component.html',
-    styleUrls: ['./platform-action-bar-docs.component.scss']
+    styleUrls: ['./platform-action-bar-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformActionBarExamplesComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformActionBarWithBackButtonExampleComponent,
+        PlatformActionBarWithDescriptionExampleComponent,
+        PlatformActionBarWithLongPageTitleExampleComponent,
+        PlatformActionBarWithContextualMenuExampleComponent,
+        PlatformActionBarWithPositiveNegativeActionsExampleComponent,
+        PlatformActionBarCozyModeExampleComponent
+    ]
 })
 export class PlatformActionBarDocsComponent {
     simpleActionBar: ExampleFile[] = [

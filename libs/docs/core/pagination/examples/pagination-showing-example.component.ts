@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-showing-example',
@@ -14,7 +15,9 @@ import { Component } from '@angular/core';
         <ng-template #customDisplayTextTemplate let-showing="showing">
             From {{ showing.from }} to {{ showing.to }}. Total items {{ showing.totalCount }}
         </ng-template>
-    `
+    `,
+    standalone: true,
+    imports: [PaginationModule]
 })
 export class PaginationShowingExampleComponent {
     totalItems = 50;

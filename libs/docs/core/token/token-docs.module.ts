@@ -31,10 +31,7 @@ const routes: Routes = [
         TokenModule,
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        FdPatchLanguageDirective
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FdPatchLanguageDirective,
         TokenDocsComponent,
         TokenHeaderComponent,
         TokenExampleComponent,
@@ -44,6 +41,7 @@ const routes: Routes = [
         TokenReadOnlyExampleComponent,
         TokenizerCompactExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('token')]
 })
 export class TokenDocsModule {}

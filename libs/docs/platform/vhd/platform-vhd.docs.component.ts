@@ -1,5 +1,18 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformVhdInitialLoadingExampleComponent } from './examples/initial-loading/platform-vhd-initial-loading-example.component';
+import { PlatformVhdLoadingExampleComponent } from './examples/platform-vhd-loading-example.component';
+import { PlatformVhdMobileExampleComponent } from './examples/platform-vhd-mobile-example.component';
+import { PlatformVhdMultiInputExampleComponent } from './examples/platform-vhd-multi-input-example.component';
+import { PlatformVhdInputExampleComponent } from './examples/platform-vhd-input-example.component';
+import { PlatformVhdTokenExampleComponent } from './examples/platform-vhd-token-example.component';
+import { PlatformVhdStrategyLabelExampleComponent } from './examples/platform-vhd-strategy-labels-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformVhdBasicExampleComponent } from './examples/platform-vhd-basic-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const basicVhdHtml = 'platform-vhd-basic-example.component.html';
 const basicVhdTs = 'platform-vhd-basic-example.component.ts';
@@ -27,7 +40,23 @@ const initialLoadingVhdTs = 'initial-loading/platform-vhd-initial-loading-exampl
 
 @Component({
     selector: 'app-platform-vhd',
-    templateUrl: './platform-vhd.docs.component.html'
+    templateUrl: './platform-vhd.docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformVhdBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformVhdStrategyLabelExampleComponent,
+        PlatformVhdTokenExampleComponent,
+        PlatformVhdInputExampleComponent,
+        PlatformVhdMultiInputExampleComponent,
+        PlatformVhdMobileExampleComponent,
+        PlatformVhdLoadingExampleComponent,
+        PlatformVhdInitialLoadingExampleComponent
+    ]
 })
 export class PlatformVhdDocsComponent {
     basicValueHelpDialog: ExampleFile[] = [

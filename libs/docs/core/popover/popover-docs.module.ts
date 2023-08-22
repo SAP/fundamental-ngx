@@ -57,10 +57,7 @@ const routes: Routes = [
         SegmentedButtonModule,
         FormModule,
         CheckboxModule,
-        LinkModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        LinkModule,
         PopoverDocsComponent,
         PopoverCFillComponent,
         PopoverHeaderComponent,
@@ -79,6 +76,7 @@ const routes: Routes = [
         PopoverMobileExampleComponent,
         PopoverDynamicContainerHeightExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('popover')]
 })
 export class PopoverDocsModule {}

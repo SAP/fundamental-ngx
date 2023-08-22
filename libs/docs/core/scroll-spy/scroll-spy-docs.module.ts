@@ -22,15 +22,18 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ScrollSpyModule, ScrollbarModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ScrollSpyModule,
+        ScrollbarModule,
         ScrollSpyDocsComponent,
         ScrollSpyHeaderComponent,
         ScrollSpyExampleComponent,
         ScrollSpyOffsetExampleComponent,
         ScrollSpyCustomExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('scroll-spy')]
 })
 export class ScrollSpyDocsModules {}

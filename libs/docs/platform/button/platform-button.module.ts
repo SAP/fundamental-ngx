@@ -34,9 +34,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformButtonModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformButtonModule,
         PlatformButtonDocsComponent,
         PlatformButtonHeaderComponent,
         PlatformButtonTypesExampleComponent,
@@ -45,6 +46,7 @@ const routes: Routes = [
         PlatformButtonTruncateExampleComponent,
         PlatformButtonStateExampleComponent
     ],
+    exports: [RouterModule],
     providers: [
         moduleDeprecationsProvider(DeprecatedButtonAriaPressed),
         moduleDeprecationsProvider(DeprecatedButtonAriaSelected),

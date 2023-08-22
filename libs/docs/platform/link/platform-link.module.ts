@@ -36,9 +36,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformLinkModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformLinkModule,
         PlatformLinkDocsComponent,
         PlatformLinkHeaderComponent,
         PlatformLinkDisabledEmphasizedExampleComponent,
@@ -49,6 +50,7 @@ const routes: Routes = [
         PlatformLinkStandardExampleComponent,
         PlatformLinkTruncatedExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('link')]
 })
 export class PlatformLinkDocsModule {}

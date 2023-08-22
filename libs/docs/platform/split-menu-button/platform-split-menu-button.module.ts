@@ -28,16 +28,14 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformSplitMenuButtonModule,
-        PlatformMenuModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformMenuModule,
         PlatformDocsSplitMenuButtonComponent,
         PlatformDocsSplitMenuButtonHeaderComponent,
         PlatformDocsSplitMenuButtonBehaviorComponent,
         PlatformDocsSplitMenuButtonTypesComponent,
         PlatformDocsSplitMenuButtonIconsComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('split-menu-button')]
 })
 export class PlatformSplitMenuButtonDocsModule {}

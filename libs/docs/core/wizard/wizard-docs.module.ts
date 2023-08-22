@@ -54,10 +54,7 @@ const routes: Routes = [
         DialogModule,
         A11yModule,
         SkeletonModule,
-        RepeatModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        RepeatModule,
         WizardHeaderComponent,
         WizardDocsComponent,
         WizardExampleComponent,
@@ -69,6 +66,7 @@ const routes: Routes = [
         WizardVisibleSummaryExampleComponent,
         WizardLoadingExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('wizard')]
 })
 export class WizardDocsModule {}

@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { GridListItemType } from '@fundamental-ngx/core/grid-list';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { NgFor } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { GridListModule } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -15,7 +22,9 @@ interface GridListItem {
     templateUrl: './grid-list-example.component.html',
     styleUrls: ['./grid-list-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [GridListModule, ButtonModule, ContentDensityDirective, NgFor, AvatarModule, LinkComponent, RouterLink]
 })
 export class GridListDefaultExampleComponent {
     list: GridListItem[] = [

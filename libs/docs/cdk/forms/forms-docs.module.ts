@@ -31,10 +31,13 @@ const routes: Routes = [
         FdpFormGroupModule,
         ReactiveFormsModule,
         CheckboxModule,
-        MultiComboboxModule
+        MultiComboboxModule,
+        examples,
+        FormsDocsComponent,
+        FormsHeaderComponent,
+        CustomCdkControlExampleComponent
     ],
     exports: [RouterModule],
-    declarations: [examples, FormsDocsComponent, FormsHeaderComponent, CustomCdkControlExampleComponent],
     providers: [currentComponentProvider('forms')]
 })
 export class FormsDocsModule {}

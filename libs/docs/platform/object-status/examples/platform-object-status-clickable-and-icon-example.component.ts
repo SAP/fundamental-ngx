@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { IndicationColorType } from '@fundamental-ngx/platform/object-status';
+import { NgFor } from '@angular/common';
+import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-clickable-and-icon-example',
     templateUrl: './platform-object-status-clickable-and-icon-example.component.html',
-    styleUrls: ['./platform-object-status-clickable-and-icon-example.component.scss']
+    styleUrls: ['./platform-object-status-clickable-and-icon-example.component.scss'],
+    standalone: true,
+    imports: [PlatformObjectStatusModule, NgFor]
 })
 export class PlatformObjectStatusClickableAndIconExampleComponent {
     items: IndicationColorType[] = [1, 2, 3, 4, 5, 6, 7, 8];

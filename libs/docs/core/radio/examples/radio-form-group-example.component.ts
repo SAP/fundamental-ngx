@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { NgFor } from '@angular/common';
+import { FieldSetModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-radio-form-group-example',
     templateUrl: './radio-form-group-example.component.html',
-    styleUrls: ['radio-form-group-example.component.scss']
+    styleUrls: ['radio-form-group-example.component.scss'],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, FieldSetModule, NgFor, FormItemModule, RadioModule]
 })
 export class RadioFormGroupExampleComponent {
     radioInput = {

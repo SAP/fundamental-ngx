@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { CheckboxDisplayModeExampleComponent } from './examples/checkbox-display-mode-example.component';
+import { CheckboxStatesExampleComponent } from './examples/checkbox-states-example.component';
+import { CheckboxLabelWrappingExampleComponent } from './examples/checkbox-label-wrapping-example.component';
+import { CheckboxCustomLabelExampleComponent } from './examples/checkbox-custom-label-example.component';
+import { CheckboxReactiveFormsExampleComponent } from './examples/checkbox-reactive-forms-example.component';
+import { CheckboxCustomValuesExampleComponent } from './examples/checkbox-custom-values-example.component';
+import { CheckboxTristateExampleComponent } from './examples/checkbox-tristate-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { CheckboxDefaultExampleComponent } from './examples/checkbox-default-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const checkboxDefaultTsCode = 'checkbox-default-example.component.ts';
 const checkboxTristateTsCode = 'checkbox-tristate-example.component.ts';
@@ -13,7 +26,23 @@ const checkboxDisplayOnlyMode = 'checkbox-display-mode-example.component.ts';
 
 @Component({
     selector: 'app-input',
-    templateUrl: './checkbox-docs.component.html'
+    templateUrl: './checkbox-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        CheckboxDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        CheckboxTristateExampleComponent,
+        CheckboxCustomValuesExampleComponent,
+        CheckboxReactiveFormsExampleComponent,
+        CheckboxCustomLabelExampleComponent,
+        CheckboxLabelWrappingExampleComponent,
+        CheckboxStatesExampleComponent,
+        CheckboxDisplayModeExampleComponent
+    ]
 })
 export class CheckboxDocsComponent {
     checkboxDefault: ExampleFile[] = [

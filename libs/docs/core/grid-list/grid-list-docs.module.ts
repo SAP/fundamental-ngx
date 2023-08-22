@@ -41,10 +41,12 @@ const routes: Routes = [
         AvatarModule,
         LinkModule,
         TitleModule,
-        ButtonModule
+        ButtonModule,
+        GridListDocsComponent,
+        GridListHeaderComponent,
+        ...COMPONENTS
     ],
     exports: [RouterModule],
-    declarations: [GridListDocsComponent, GridListHeaderComponent, ...COMPONENTS],
     providers: [currentComponentProvider('grid-list')]
 })
 export class GridListDocsModule {}

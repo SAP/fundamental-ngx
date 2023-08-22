@@ -28,9 +28,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectStatusModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ObjectStatusModule,
         ObjectStatusDocsComponent,
         ObjectStatusHeaderComponent,
         ObjectStatusDefaultExampleComponent,
@@ -42,6 +43,7 @@ const routes: Routes = [
         ObjectStatusInvertedTextExampleComponent,
         ObjectStatusLargeExampleComponent
     ],
+    exports: [RouterModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [currentComponentProvider('object-status')]
 })

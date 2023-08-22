@@ -19,9 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, UtilsModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        UtilsModule,
+        examples,
+        TabbableDocsComponent,
+        TabbableHeaderComponent
+    ],
     exports: [RouterModule],
-    declarations: [examples, TabbableDocsComponent, TabbableHeaderComponent],
     providers: [currentComponentProvider('tabbable')]
 })
 export class TabbableDocsModule {}

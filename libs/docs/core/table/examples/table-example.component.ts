@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor } from '@angular/common';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-table-example',
-    templateUrl: './table-example.component.html'
+    templateUrl: './table-example.component.html',
+    standalone: true,
+    imports: [FocusableGridDirective, TableModule, NgFor, LinkComponent, IconModule]
 })
 export class TableExampleComponent implements OnInit {
     tableRows: any[];

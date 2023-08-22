@@ -40,10 +40,10 @@ const routes: Routes = [
         QuickViewModule,
         BarModule,
         LinkModule,
-        TitleModule
+        TitleModule,
+        examples
     ],
     exports: [RouterModule],
-    declarations: [examples],
     providers: [currentComponentProvider('overflow-layout')]
 })
 export class OverflowLayoutDocsModule {}

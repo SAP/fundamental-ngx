@@ -38,16 +38,14 @@ const routes: Routes = [
         InputGroupModule,
         A11yModule,
         MultiInputModule,
-        CheckboxModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        CheckboxModule,
         examples,
         DialogDocsComponent,
         DialogDocsHeaderComponent,
         DialogInnerPopoverComponent,
         DialogInnerPopoverExampleComponent
     ],
+    exports: [RouterModule],
     providers: [DialogService, currentComponentProvider('dialog')]
 })
 export class DialogDocsModule {}

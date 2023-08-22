@@ -1,5 +1,16 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    InfoLableDefaultExampleComponent,
+    InfoLableTextExampleComponent,
+    InfoLableTextIconExampleComponent,
+    InfoLableNumericIconExampleComponent
+} from './examples/info-label-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const InfoLableDefaultExample = 'info-label-default-example.component.html';
 const InfoLableTextExample = 'info-label-text-example.component.html';
@@ -8,7 +19,19 @@ const InfoLableNumericIconExample = 'info-label-icon-numeric-example.component.h
 
 @Component({
     selector: 'app-info-label',
-    templateUrl: './info-label-docs.component.html'
+    templateUrl: './info-label-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        InfoLableDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        InfoLableTextExampleComponent,
+        InfoLableTextIconExampleComponent,
+        InfoLableNumericIconExampleComponent
+    ]
 })
 export class InfoLabelDocsComponent {
     defaultInfoLabelHtmlType: ExampleFile[] = [

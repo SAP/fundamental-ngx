@@ -21,9 +21,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, RatingIndicatorModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        RatingIndicatorModule,
+        RatingIndicatorDocsComponent,
+        RatingIndicatorDocsHeaderComponent,
+        ...examples
+    ],
     exports: [RouterModule],
-    declarations: [RatingIndicatorDocsComponent, RatingIndicatorDocsHeaderComponent, ...examples],
     providers: [currentComponentProvider('rating-indicator')]
 })
 export class RatingIndicatorDocsModule {}

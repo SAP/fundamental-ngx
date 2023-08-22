@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 
 @Component({
     selector: 'fd-checkbox-custom-values-example',
@@ -24,7 +26,9 @@ import { Component } from '@angular/core';
             </fd-checkbox>
             Value: {{ checkboxValue2 }}
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [CheckboxComponent, FormsModule]
 })
 export class CheckboxCustomValuesExampleComponent {
     checkboxValue1 = 'Yes';

@@ -16,6 +16,7 @@ import hljs from 'highlight.js';
 import { BehaviorSubject, isObservable, merge, of, Subject, takeUntil } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { destroyObservable } from '@fundamental-ngx/cdk';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'fd-code-snippet',
@@ -26,7 +27,9 @@ import { destroyObservable } from '@fundamental-ngx/cdk';
             <code class="hljs" [class]="file.language" *ngIf="file" [innerHTML]="_highlightedCode | async"></code>
             <code #contentBasedElement class="hljs" [class]="language" *ngIf="contentBased"><ng-content></ng-content></code>
         </pre>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, AsyncPipe]
 })
 export class CodeSnippetComponent implements AfterViewInit, OnChanges {
     @Input()

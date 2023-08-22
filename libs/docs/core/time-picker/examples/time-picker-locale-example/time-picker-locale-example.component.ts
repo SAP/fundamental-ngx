@@ -6,6 +6,12 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { FormsModule } from '@angular/forms';
+import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
+import { NgFor, NgIf, DatePipe } from '@angular/common';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-time-picker-locale-example',
@@ -28,7 +34,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormItemModule, FormLabelModule, SelectModule, NgFor, TimePickerModule, FormsModule, NgIf, DatePipe]
 })
 export class TimePickerLocaleExampleComponent implements OnInit {
     time = new FdDate().setTime(15, 30, 0);

@@ -1,5 +1,19 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    TileGenericExampleComponent,
+    TileColumnsExampleComponent,
+    LaunchTileExampleComponent,
+    KpiTileExampleComponent,
+    ActionTileExampleComponent,
+    BadgeTileExampleComponent,
+    FeedTileExampleComponent,
+    ClickableTileExampleComponent
+} from './examples/tile-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const tileGenericSrc = 'tile-generic-example.component.html';
 const tileColumnsSrc = 'tile-columns-example.component.html';
@@ -14,7 +28,22 @@ const clickableSrc = 'clickable-tile-example.component.html';
 
 @Component({
     selector: 'app-tile',
-    templateUrl: './tile-docs.component.html'
+    templateUrl: './tile-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TileGenericExampleComponent,
+        CodeExampleComponent,
+        TileColumnsExampleComponent,
+        LaunchTileExampleComponent,
+        KpiTileExampleComponent,
+        ActionTileExampleComponent,
+        BadgeTileExampleComponent,
+        FeedTileExampleComponent,
+        ClickableTileExampleComponent
+    ]
 })
 export class TileDocsComponent {
     genericTile: ExampleFile[] = [

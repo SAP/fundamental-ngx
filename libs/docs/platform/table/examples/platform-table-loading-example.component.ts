@@ -4,6 +4,11 @@ import { Observable, of } from 'rxjs';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
 import { delay } from 'rxjs/operators';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-loading-example',
@@ -16,6 +21,14 @@ import { delay } from 'rxjs/operators';
                 margin-bottom: 16px;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformButtonModule
     ]
 })
 export class PlatformTableLoadingExampleComponent {

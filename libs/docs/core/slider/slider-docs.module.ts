@@ -35,10 +35,12 @@ const routes: Routes = [
         SharedDocumentationModule,
         SharedDocumentationPageModule,
         SliderModule,
-        FormsModule
+        FormsModule,
+        SliderHeaderComponent,
+        SliderDocsComponent,
+        ...COMPONENTS
     ],
     exports: [RouterModule],
-    declarations: [SliderHeaderComponent, SliderDocsComponent, ...COMPONENTS],
     providers: [currentComponentProvider('slider')]
 })
 export class SliderDocsModule {}

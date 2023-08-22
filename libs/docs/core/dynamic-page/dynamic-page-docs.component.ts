@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { DynamicPageDynamicContainerHeightExampleComponent } from './examples/dynamic-page-dynamic-container-height-example/dynamic-page-dynamic-container-height-example.component';
+import { DynamicPageFacetsExampleComponent } from './examples/dynamic-page-facets-example/dynamic-page-facets-example.component';
+import { DynamicPageResponsiveExampleComponent } from './examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component';
+import { DynamicPageColumnLayoutExampleComponent } from './examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component';
+import { DynamicPageTabsExampleComponent } from './examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { DynamicPageExampleComponent } from './examples/dynamic-page-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const dynamicPageBasicExample = 'dynamic-page-example.component.html';
 const dynamicPageBasicExampleTsCode = 'dynamic-page-example.component.ts';
@@ -19,7 +30,21 @@ const dynamicPageFacetsExampleTsCode = 'dynamic-page-facets-example/dynamic-page
 
 @Component({
     selector: 'app-dynamic-page',
-    templateUrl: './dynamic-page-docs.component.html'
+    templateUrl: './dynamic-page-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DynamicPageExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DynamicPageTabsExampleComponent,
+        DynamicPageColumnLayoutExampleComponent,
+        DynamicPageResponsiveExampleComponent,
+        DynamicPageFacetsExampleComponent,
+        DynamicPageDynamicContainerHeightExampleComponent
+    ]
 })
 export class DynamicPageDocsComponent {
     dynamicPageBasic: ExampleFile[] = [

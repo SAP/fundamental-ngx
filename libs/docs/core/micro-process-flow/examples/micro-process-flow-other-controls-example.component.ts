@@ -1,9 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { NgFor } from '@angular/common';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
+import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 
 @Component({
     selector: 'fd-micro-process-flow-other-controls-example',
     templateUrl: './micro-process-flow-other-controls-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MicroProcessFlowModule, StatusIndicatorModule, AvatarModule, NgFor, InfoLabelModule]
 })
 export class MicroProcessFlowOtherControlsExampleComponent {
     /* eslint-disable max-len */

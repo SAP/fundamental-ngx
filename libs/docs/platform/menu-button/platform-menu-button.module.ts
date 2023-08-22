@@ -27,16 +27,14 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformMenuButtonModule,
-        PlatformMenuModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformMenuModule,
         PlatformMenuButtonDocsComponent,
         PlatformMenuButtonHeaderComponent,
         PlatformMenuButtonCompactExampleComponent,
         PlatformMenuButtonCozyExampleComponent,
         PlatformMenuButtonExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('menu-button')]
 })
 export class PlatformMenuButtonDocsModule {}

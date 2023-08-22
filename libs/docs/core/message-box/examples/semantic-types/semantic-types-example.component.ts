@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core/message-box';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-semantic-types-example',
@@ -9,7 +10,9 @@ import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core/message
         // The MessageBoxService is already provided on the MessageBoxModule module.
         // We do it at the component level here, due to the limitations of our example generation script.
         MessageBoxService
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule]
 })
 export class SemanticTypesExampleComponent {
     title = 'Fruit facts';

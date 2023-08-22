@@ -22,6 +22,13 @@ import {
     SettingsModel
 } from '@fundamental-ngx/platform/settings-generator';
 import { take } from 'rxjs/operators';
+import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { NgIf, NgFor } from '@angular/common';
+import { MessagePopoverComponent } from '@fundamental-ngx/platform/message-popover';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
+import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
 @Component({
     selector: 'fdp-settings-generator-tabs-layout',
@@ -31,7 +38,9 @@ import { take } from 'rxjs/operators';
                 <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
             </fd-tab>
         </fd-tab-list>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, TabsModule, NgFor, SettingsGeneratorModule, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
     protected _destroyRef = inject(DestroyRef);
@@ -68,7 +77,9 @@ export interface FlatSettingsLayout extends BaseSettingsModel<AnyDynamicFormFiel
     selector: 'fdp-settings-generator-custom-layout-example',
     templateUrl: './settings-generator-custom-layout-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MessagePopoverFormWrapperComponent, SettingsGeneratorModule, BarModule, MessagePopoverComponent]
 })
 export class SettingsGeneratorCustomLayoutExampleComponent {
     @ViewChild('firstTabContent')

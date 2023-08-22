@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { TextExpandableComponent } from './examples/text-expandable.component';
+import { TextHyphenationComponent } from './examples/text-hyphenation.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { TextMaxLinesComponent } from './examples/text-max-lines.component';
+import { TextWhitespacesComponent } from './examples/text-whitespaces.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { TextBasicComponent } from './examples/text-basic.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const textHyphenationScss = 'text-hyphenation.component.scss';
 
@@ -16,7 +26,20 @@ const textExpandableTs = 'text-expandable.component.ts';
 
 @Component({
     selector: 'app-input',
-    templateUrl: './text-docs.component.html'
+    templateUrl: './text-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        TextBasicComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        TextWhitespacesComponent,
+        TextMaxLinesComponent,
+        DescriptionComponent,
+        TextHyphenationComponent,
+        TextExpandableComponent
+    ]
 })
 export class TextDocsComponent {
     textBasic: ExampleFile[] = [

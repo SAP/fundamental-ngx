@@ -28,16 +28,6 @@ const routes: Routes = [
     }
 ];
 @NgModule({
-    declarations: [
-        PlatformFileUploaderHeaderComponent,
-        PlatformFileUploaderExampleComponent,
-        PlatformFileUploaderReactiveExampleComponent,
-        PlatformFileUploaderDocsComponent,
-        PlatformFileUploaderCompactExampleComponent,
-        PlatformFileUploaderMaxFileSizeExampleComponent,
-        PlatformFileUploaderMinFileSizeExampleComponent,
-        PlatformFileUploaderFileTypesExampleComponent
-    ],
     exports: [RouterModule],
     imports: [
         CommonModule,
@@ -46,7 +36,15 @@ const routes: Routes = [
         PlatformFileUploaderModule,
         FdpFormGroupModule,
         PlatformButtonModule,
-        FormsModule
+        FormsModule,
+        PlatformFileUploaderHeaderComponent,
+        PlatformFileUploaderExampleComponent,
+        PlatformFileUploaderReactiveExampleComponent,
+        PlatformFileUploaderDocsComponent,
+        PlatformFileUploaderCompactExampleComponent,
+        PlatformFileUploaderMaxFileSizeExampleComponent,
+        PlatformFileUploaderMinFileSizeExampleComponent,
+        PlatformFileUploaderFileTypesExampleComponent
     ],
     providers: [currentComponentProvider('file-uploader')]
 })

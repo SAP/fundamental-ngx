@@ -31,10 +31,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformCheckboxModule,
         FdpFormGroupModule,
-        PlatformButtonModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        PlatformButtonModule,
         PlatformCheckboxDocsComponent,
         PlatformCheckboxHeaderComponent,
         PlatformCozyChekboxExampleComponent,
@@ -44,6 +41,7 @@ const routes: Routes = [
         PlatformChekboxTristateComponent,
         PlatformChekboxA11yExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('checkbox')]
 })
 export class CheckboxDocsModule {}

@@ -27,9 +27,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MenuModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        MenuModule,
         MenuDocsComponent,
         MenuHeaderComponent,
         MenuExampleComponent,
@@ -39,6 +40,7 @@ const routes: Routes = [
         MenuWithSubmenuExampleComponent,
         MenuScrollbarExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('menu')]
 })
 export class MenuDocsModule {}

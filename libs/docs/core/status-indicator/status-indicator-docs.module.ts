@@ -28,9 +28,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, StatusIndicatorModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        StatusIndicatorModule,
         StatusIndicatorDocsComponent,
         StatusIndicatorHeaderComponent,
         StatusIndicatorDefaultComponent,
@@ -43,6 +44,7 @@ const routes: Routes = [
         StatusIndicatorLinearFillTypeComponent,
         StatusIndicatorClickableTypeComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('status-indicator')]
 })
 export class StatusIndicatorDocsModule {}

@@ -36,16 +36,14 @@ const routes: Routes = [
         ToolbarModule,
         PlatformListModule,
         PlatformButtonModule,
-        DisplayListItemModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        DisplayListItemModule,
         PlatformDisplayListItemDocsComponent,
         PlatformDisplayListItemHeaderComponent,
         PlatformDisplayListItemExampleComponent,
         PlatformDisplayListItemBorderLessExampleComponent,
         PlatformDisplayListItemWithNavigationExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('display-list-item')]
 })
 export class PlatformDisplayListItemDocsModule {}

@@ -1,10 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
 
 @Component({
     selector: 'fd-file-uploader-max-example',
     templateUrl: './file-uploader-max-example.component.html',
     styleUrls: ['./file-uploader-max-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FileUploaderModule, FormsModule, NgFor]
 })
 export class FileUploaderMaxExampleComponent {
     files: File[];

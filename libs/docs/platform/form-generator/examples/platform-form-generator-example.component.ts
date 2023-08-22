@@ -9,6 +9,9 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { NgIf, JsonPipe } from '@angular/common';
+import { FormGeneratorComponent as FormGeneratorComponent_1 } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -31,7 +34,9 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormGeneratorComponent_1, NgIf, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

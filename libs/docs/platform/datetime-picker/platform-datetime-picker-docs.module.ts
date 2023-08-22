@@ -32,10 +32,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         FdDatetimeModule,
         PlatformDatetimePickerModule,
-        FdpFormGroupModule
-    ],
-    exports: [RouterModule],
-    declarations: [
+        FdpFormGroupModule,
         PlatformDatetimePickerDocsComponent,
         PlatformDatetimePickerHeaderComponent,
         PlatformDatetimePickerBasicExampleComponent,
@@ -45,6 +42,7 @@ const routes: Routes = [
         PlatformDatetimePickerUpdateOnBlurExampleComponent,
         PlatformDatetimePickerMobileExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('datetime-picker')]
 })
 export class PlatformDatetimePickerDocsModule {}

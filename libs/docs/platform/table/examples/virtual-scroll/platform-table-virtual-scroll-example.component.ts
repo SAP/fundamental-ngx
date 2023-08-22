@@ -10,12 +10,27 @@ import {
     TableRowsRearrangeEvent,
     TableService
 } from '@fundamental-ngx/platform/table';
+import { TableVirtualScrollDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-virtual-scroll-example',
     templateUrl: './platform-table-virtual-scroll-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        TableDraggableDirective,
+        TableVirtualScrollDirective
+    ]
 })
 export class PlatformTableVirtualScrollExampleComponent implements OnInit {
     source: TableDataSource<ExampleItem>;

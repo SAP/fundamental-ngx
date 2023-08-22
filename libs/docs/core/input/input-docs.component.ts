@@ -1,5 +1,16 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    InputExampleComponent,
+    InputInlineHelpExampleComponent,
+    InputStateExampleComponent
+} from './examples/input-examples.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const formGroupInputScss = 'input-form-group-example.component.scss';
 
@@ -11,7 +22,19 @@ const formGroupInputTs = 'input-form-group-example.component.ts';
 
 @Component({
     selector: 'app-input',
-    templateUrl: './input-docs.component.html'
+    templateUrl: './input-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        InputExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        InputInlineHelpExampleComponent,
+        InputStateExampleComponent,
+        InputFormGroupExampleComponent
+    ]
 })
 export class InputDocsComponent {
     inputsFormHtml: ExampleFile[] = [

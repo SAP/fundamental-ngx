@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FormMessagingStateExampleComponent } from './examples/state-message/form-messaging-state-example.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { FormMessageExampleComponent } from './examples/form-message-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const formMessageHtml = 'form-message-example.component.html';
 const formMessageTs = 'form-message-example.component.ts';
@@ -8,7 +14,16 @@ const formMessageStateTs = 'state-message/form-messaging-state-example.component
 
 @Component({
     selector: 'app-input',
-    templateUrl: './form-message-docs.component.html'
+    templateUrl: './form-message-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        FormMessageExampleComponent,
+        CodeExampleComponent,
+        FormMessagingStateExampleComponent
+    ]
 })
 export class FormMessageDocsComponent {
     formMessageExample: ExampleFile[] = [

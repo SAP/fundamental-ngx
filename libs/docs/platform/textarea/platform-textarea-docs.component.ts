@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { PlatformTextareaCounterTemplateExampleComponent } from './examples/platform-textarea-counter-template-example.component';
+import { PlatformTextareaCounterExampleComponent } from './examples/platform-textarea-counter-example.component';
+import { PlatformTextareaAutogrowExampleComponent } from './examples/platform-textarea-autogrow-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformTextareaBasicExampleComponent } from './examples/platform-textarea-basic-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const platformBasicTextareaSrc = 'platform-textarea-basic-example.component.html';
 const platformBasicTextareaTsCode = 'platform-textarea-basic-example.component.ts';
@@ -14,7 +23,19 @@ const platformAutogrowTextareaTsCode = 'platform-textarea-autogrow-example.compo
 
 @Component({
     selector: 'app-textarea',
-    templateUrl: './platform-textarea-docs.component.html'
+    templateUrl: './platform-textarea-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformTextareaBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTextareaAutogrowExampleComponent,
+        PlatformTextareaCounterExampleComponent,
+        PlatformTextareaCounterTemplateExampleComponent
+    ]
 })
 export class PlatformTextareaDocsComponent {
     textareaBasic: ExampleFile[] = [

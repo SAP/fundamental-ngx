@@ -10,6 +10,11 @@ import {
     BaseDynamicFormFieldItem,
     DynamicFormItemChoice
 } from '@fundamental-ngx/platform/form';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgIf, JsonPipe } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-form-generator-slider',
@@ -26,7 +31,9 @@ import {
             </ng-container>
         </ng-container>
     `,
-    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
+    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class PlatformFormGeneratorCustomSliderElementComponent extends BaseDynamicFormGeneratorControl {
     constructor() {
@@ -41,7 +48,9 @@ export interface SliderDynamicFormControl extends BaseDynamicFormFieldItem<{ val
 
 @Component({
     selector: 'fdp-platform-form-generator-custom-component-example',
-    templateUrl: './platform-form-generator-custom-component-example.component.html'
+    templateUrl: './platform-form-generator-custom-component-example.component.html',
+    standalone: true,
+    imports: [FormGeneratorComponent, PlatformButtonModule, NgIf, JsonPipe]
 })
 export class PlatformFormGeneratorCustomComponentExampleComponent {
     formCreated = false;

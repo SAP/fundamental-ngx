@@ -17,6 +17,14 @@ import {
     TableFilterChangeEvent,
     FilterType
 } from '@fundamental-ngx/platform/table';
+import { FormsModule } from '@angular/forms';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpViewSettingsFilterCustomDef } from '@fundamental-ngx/platform/table-helpers';
+import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
+import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-filterable-example',
@@ -28,6 +36,17 @@ import {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
         }
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpViewSettingsFilterCustomDef,
+        FdpFormGroupModule,
+        PlatformInputModule,
+        FormsModule
     ]
 })
 export class PlatformTableFilterableExampleComponent {

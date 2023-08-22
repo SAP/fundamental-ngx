@@ -4,12 +4,39 @@ import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
 import { DynamicPageComponent } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-flexible-column-example',
     templateUrl: './platform-dynamic-page-flexible-column-example.component.html',
     styleUrls: ['./platform-dynamic-page-flexible-column-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        FlexibleColumnLayoutModule,
+        CdkScrollable,
+        PlatformDynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        BarModule
+    ]
 })
 export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDestroy {
     /**

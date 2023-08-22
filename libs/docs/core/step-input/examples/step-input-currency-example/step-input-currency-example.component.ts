@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { StepInputModule } from '@fundamental-ngx/core/step-input';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-step-input-currency-example',
@@ -33,7 +35,9 @@ import { Component } from '@angular/core';
                 <small>Value: {{ value3 }}</small>
             </div>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [FormLabelModule, StepInputModule]
 })
 export class StepInputCurrencyExampleComponent {
     value1: number | null = 0;

@@ -23,9 +23,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutPanelModule, TableModule],
-    exports: [RouterModule],
-    declarations: [
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        LayoutPanelModule,
+        TableModule,
         LayoutPanelDocsComponent,
         LayoutPanelExampleComponent,
         LayoutPanelDocsHeaderComponent,
@@ -33,6 +35,7 @@ const routes: Routes = [
         LayoutPanelTransparentExampleComponent,
         LayoutPanelFooterVariationsExampleComponent
     ],
+    exports: [RouterModule],
     providers: [currentComponentProvider('layout-panel')]
 })
 export class LayoutPanelDocsModule {}

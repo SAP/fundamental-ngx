@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FileUploaderMaxExampleComponent } from './examples/file-uploader-max-example/file-uploader-max-example.component';
+import { FileUploaderMinExampleComponent } from './examples/file-uploader-min-example/file-uploader-min-example.component';
+import { FileUploaderDragDisabledExampleComponent } from './examples/file-uploader-drag-disabled-example/file-uploader-drag-disabled-example.component';
+import { FileUploaderCompactExampleComponent } from './examples/file-uploader-compact-example/file-uploader-compact-example.component';
+import { FileUploaderTruncationExampleComponent } from './examples/file-uploader-truncation-example/file-uploader-truncation-example.component';
+import { FileUploaderDisabledExampleComponent } from './examples/file-uploader-disabled-example/file-uploader-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { FileUploaderExampleComponent } from './examples/file-uploader-example/file-uploader-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const fileUploaderCompactH = 'file-uploader-compact-example/file-uploader-compact-example.component.html';
 const fileUploaderCompactT = 'file-uploader-compact-example/file-uploader-compact-example.component.ts';
@@ -23,7 +35,22 @@ const fileUploaderMinH = 'file-uploader-min-example/file-uploader-min-example.co
 @Component({
     selector: 'app-file-uploader',
     templateUrl: './file-uploader-docs.component.html',
-    styleUrls: ['./file-uploader-docs.component.scss']
+    styleUrls: ['./file-uploader-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        FileUploaderExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        FileUploaderDisabledExampleComponent,
+        FileUploaderTruncationExampleComponent,
+        FileUploaderCompactExampleComponent,
+        FileUploaderDragDisabledExampleComponent,
+        FileUploaderMinExampleComponent,
+        FileUploaderMaxExampleComponent
+    ]
 })
 export class FileUploaderDocsComponent {
     fileUpladerCompactExample: ExampleFile[] = [

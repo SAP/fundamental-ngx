@@ -1,6 +1,21 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { NgIf } from '@angular/common';
+import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
+import { MessageStripAutoDismissExampleComponent } from './examples/message-strip-auto-dismiss-example.component';
+import { MessageStripAlertExampleComponent } from './examples/message-strip-alert-example.component';
+import { MessageStripIndicationColorsExampleComponent } from './examples/message-strip-indication-colors-example.component';
+import { MessageStripWidthExampleComponent } from './examples/message-strip-width-example.component';
+import { MessageStripNoIconExampleComponent } from './examples/message-strip-noicon-example.component';
+import { MessageStripCustomIconExampleComponent } from './examples/message-strip-custom-icon-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { MessageStripExampleComponent } from './examples/message-strip-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const messageStripExampleScs = 'message-strip-example.component.scss';
 
@@ -11,7 +26,25 @@ const messageStripWidthExampleHtml = 'message-strip-width-example.component.html
 @Component({
     selector: 'app-message-strip',
     templateUrl: './message-strip-docs.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MessageStripExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MessageStripCustomIconExampleComponent,
+        MessageStripNoIconExampleComponent,
+        MessageStripWidthExampleComponent,
+        MessageStripIndicationColorsExampleComponent,
+        MessageStripAlertExampleComponent,
+        MessageStripAutoDismissExampleComponent,
+        PlayGroundComponent,
+        NgIf,
+        MessageStripComponent
+    ]
 })
 export class MessageStripDocsComponent {
     data: any = {

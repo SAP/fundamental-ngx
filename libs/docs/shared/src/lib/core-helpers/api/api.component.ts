@@ -2,12 +2,17 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/
 import { ActivatedRoute } from '@angular/router';
 import { ApiDocsService } from '../../services/api-docs.service';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-api',
     templateUrl: './api.component.html',
     styleUrls: ['./api.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, ButtonModule, MenuModule, NgFor]
 })
 export class ApiComponent implements OnInit {
     @ViewChild('menu')

@@ -22,9 +22,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FocusableListModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FocusableListModule,
+        FocusableListHeaderComponent,
+        FocusableListDocsComponent,
+        DefaultExampleComponent
+    ],
     exports: [RouterModule],
-    declarations: [FocusableListHeaderComponent, FocusableListDocsComponent, DefaultExampleComponent],
     providers: [currentComponentProvider('focusable-list')]
 })
 export class FocusableListDocsModule {}

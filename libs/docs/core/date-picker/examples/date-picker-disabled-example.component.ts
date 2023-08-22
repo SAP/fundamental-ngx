@@ -7,6 +7,8 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormsModule } from '@angular/forms';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 
 @Component({
     selector: 'fd-date-picker-disabled-example',
@@ -22,7 +24,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [DatePickerComponent, FormsModule]
 })
 export class DatePickerDisabledExampleComponent {
     date: Nullable<FdDate> = new FdDate();

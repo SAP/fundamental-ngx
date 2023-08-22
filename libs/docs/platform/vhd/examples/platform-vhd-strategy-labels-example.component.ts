@@ -11,6 +11,11 @@ import {
     VhdDefineExcludeStrategy
 } from '@fundamental-ngx/platform/value-help-dialog';
 import { patchLanguage } from '@fundamental-ngx/i18n';
+import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface ExampleTestModel {
     id: number;
@@ -62,7 +67,9 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
                 defineConditionConditionStrategyLabelBetween: 'FROM...TO'
             }
         })
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule, NgIf, TokenModule, ContentDensityDirective, NgFor, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     filters: FilterData[];

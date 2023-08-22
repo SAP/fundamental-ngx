@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { SplitterApiExampleComponent } from './examples/api/splitter-api-example.component';
+import { SplitterRequiredParentWidthExampleComponent } from './examples/required-parent-width/splitter-required-parent-width-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { SplitterDefaultExampleComponent } from './examples/default/splitter-default-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const splitterDefaultHtml = 'default/splitter-default-example.component.html';
 const splitterDefaultTs = 'default/splitter-default-example.component.ts';
@@ -13,7 +21,18 @@ const splitterApiTs = 'api/splitter-api-example.component.ts';
 
 @Component({
     selector: 'app-splitter',
-    templateUrl: './splitter-docs.component.html'
+    templateUrl: './splitter-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SplitterDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SplitterRequiredParentWidthExampleComponent,
+        SplitterApiExampleComponent
+    ]
 })
 export class SplitterDocsComponent {
     default: ExampleFile[] = [

@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormsModule } from '@angular/forms';
+import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
+import { SwitchFormsExampleComponent } from './examples/switch-form-example/switch-forms-example.component';
+import { SemanticSwitchExampleComponent } from './examples/semantic-switch-example/semantic-switch-example.component';
+import { SwitchBindingExampleComponent } from './examples/switch-binding-example/switch-binding-example.component';
+import { DisabledSwitchExampleComponent } from './examples/disabled-switch-example/disabled-switch-example.component';
+import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
+import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const switchSizeExampleScssCode = 'switch-sizes-example/switch-sizes-example.component.scss';
 const switchDisableExampleScssCode = 'disabled-switch-example/disabled-switch-example.component.scss';
@@ -21,7 +35,24 @@ const semanticSwitchExampleTs = 'semantic-switch-example/semantic-switch-example
 
 @Component({
     selector: 'app-switch',
-    templateUrl: './switch-docs.component.html'
+    templateUrl: './switch-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SwitchSizesExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DisabledSwitchExampleComponent,
+        SwitchBindingExampleComponent,
+        SemanticSwitchExampleComponent,
+        SwitchFormsExampleComponent,
+        PlayGroundComponent,
+        SwitchModule,
+        FormsModule,
+        ContentDensityDirective
+    ]
 })
 export class SwitchDocsComponent {
     schema: Schema;

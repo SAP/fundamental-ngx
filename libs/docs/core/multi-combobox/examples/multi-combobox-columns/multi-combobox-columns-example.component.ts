@@ -1,9 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
+import { JsonPipe } from '@angular/common';
+import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
+import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemModule } from '@fundamental-ngx/core/form';
 @Component({
     selector: 'fd-multi-combobox-columns-example',
     templateUrl: './multi-combobox-columns-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormItemModule, FormLabelModule, CvaDirective, DataSourceDirective, MultiComboboxModule, JsonPipe]
 })
 export class MultiComboboxColumnsExampleComponent {
     dataSource = [
