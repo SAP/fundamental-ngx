@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.3...v0.46.0-rc.4) (2023-08-22)
+
+
+### Bug Fixes
+
+* **core,platform:** fix csp style-src ([#10376](https://github.com/SAP/fundamental-ngx/issues/10376)) ([6eba063](https://github.com/SAP/fundamental-ngx/commit/6eba063937da9b560e2413f53143bfec660eb60b))
+
+
+
+
+
 # [0.46.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.2...v0.46.0-rc.3) (2023-08-22)
 
 **Note:** Version bump only for package @fundamental-ngx/core
