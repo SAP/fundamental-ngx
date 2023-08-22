@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.1...v0.46.0-rc.2) (2023-08-22)
+
+
+### Bug Fixes
+
+* missing breaking changes ([#10374](https://github.com/SAP/fundamental-ngx/issues/10374)) ([0c90d93](https://github.com/SAP/fundamental-ngx/commit/0c90d9337076683a3bedb06a4c212c63f4b05d73))
+
+
+### BREAKING CHANGES
+
+* `.fd-calendar__close-button--navigation` button has been removed for landscape mode. Instead developers should implement own buttons for scenarios when calendar is used in dialog.
+**Navigation**
+Before:
+```
+<header class="fd-calendar__header">
+    <div class="fd-calendar__navigation">
+...
+    </div>
+</header>
+```
+After:
+```
+<header class="fd-calendar__navigation">
+...
+</header>
+```
+**Calendar Day**
+Before:
+```
+<td role="gridcell" class="fd-calendar__item">
+    <span class="fd-calendar__text" role="button">8</span>
+</td>
+```
+After:
+```
+<td role="gridcell" class="fd-calendar__item">
+    <div class="fd-calendar__text-wrapper">
+        <span class="fd-calendar__text" role="button">8</span>
+    </div>
+</td>
+```
+**Calendar Container**
+Before:
+```
+<div class="fd-calendar__content fd-calendar__content--dates" id="IO0cp341">
+    <table class="fd-calendar__table" role="grid">
+        <thead class="fd-calendar__group">
+...
+    </table>
+</div>
+```
+After:
+```
+<table class="fd-calendar__content" id="IO0cp341" role="grid">
+    <thead class="fd-calendar__group">
+...
+</table
+```
+
+
+
+
+
 # [0.46.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.0...v0.46.0-rc.1) (2023-08-22)
 
 
