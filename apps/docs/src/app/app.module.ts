@@ -13,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
 import { SharedDocumentationModule } from '@fundamental-ngx/docs/shared';
 import packageJson from '../../../../package.json';
+import lernaJson from '../../../../lerna.json';
 
 const routes: Routes = [
     {
@@ -60,7 +61,7 @@ const routes: Routes = [
         ThemingModule,
         ContentDensityModule.forRoot({ storage: 'localStorage' }),
         ClickedBehaviorModule.forRoot(),
-        SharedDocumentationModule.forRoot(packageJson),
+        SharedDocumentationModule.forRoot({ packageJson, lernaJson }),
         SkeletonModule
     ],
     bootstrap: [AppComponent],

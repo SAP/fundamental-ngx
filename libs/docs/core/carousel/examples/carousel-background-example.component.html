@@ -1,0 +1,62 @@
+<p>Transparent Carousel Content:</p>
+<ng-container
+    *ngTemplateOutlet="
+        renderer;
+        context: { contentBackground: 'transparent', paginationBackground: 'solid', noPaginationBorder: false }
+    "
+></ng-container>
+<p>Solid Carousel Content:</p>
+<ng-container
+    *ngTemplateOutlet="
+        renderer;
+        context: { contentBackground: 'solid', paginationBackground: 'solid', noPaginationBorder: false }
+    "
+></ng-container>
+<p>Transparent Page Indicator Container:</p>
+<ng-container
+    *ngTemplateOutlet="
+        renderer;
+        context: { contentBackground: 'solid', paginationBackground: 'transparent', noPaginationBorder: false }
+    "
+></ng-container>
+<p>Translucent Page Indicator Container:</p>
+<ng-container
+    *ngTemplateOutlet="
+        renderer;
+        context: { contentBackground: 'solid', paginationBackground: 'translucent', noPaginationBorder: false }
+    "
+></ng-container>
+<p>Page Indicator Container with no border:</p>
+<ng-container
+    *ngTemplateOutlet="
+        renderer;
+        context: { contentBackground: 'solid', paginationBackground: 'solid', noPaginationBorder: true }
+    "
+></ng-container>
+
+<ng-template
+    #renderer
+    let-contentBackground="contentBackground"
+    let-paginationBackground="paginationBackground"
+    let-noPaginationBorder="noPaginationBorder"
+>
+    <div style="display: flex; justify-content: center">
+        <fd-carousel
+            width="500px"
+            [contentBackground]="contentBackground"
+            [pageIndicatorBackground]="paginationBackground"
+            [noPaginationContainerBorder]="noPaginationBorder"
+        >
+            <fd-carousel-item>
+                <img
+                    src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20400%22%20preserveAspectRatio%3D%22none%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%20%20%20%20%20%20%20%20%20%20%23holder%20text%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20fill%3A%20%23ccc%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20font-family%3A%20sans-serif%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20font-size%3A%2040px%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20font-weight%3A%20400%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%3C%2Fstyle%3E%0A%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%3Cg%20id%3D%22holder%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22transparent%22%3E%3C%2Frect%3E%0A%20%20%20%20%20%20%20%20%3Cg%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20text-anchor%3D%22middle%22%20x%3D%2250%25%22%20y%3D%2250%25%22%20dy%3D%22.3em%22%3E500%20x%20400%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fsvg%3E"
+                />
+            </fd-carousel-item>
+            <fd-carousel-item>
+                <img
+                    src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20400%22%20preserveAspectRatio%3D%22none%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3Cstyle%20type%3D%22text%2Fcss%22%3E%0A%20%20%20%20%20%20%20%20%20%20%23holder%20text%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20fill%3A%20%23ccc%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20font-family%3A%20sans-serif%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20font-size%3A%2040px%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20font-weight%3A%20400%3B%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%3C%2Fstyle%3E%0A%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%3Cg%20id%3D%22holder%22%3E%0A%20%20%20%20%20%20%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22transparent%22%3E%3C%2Frect%3E%0A%20%20%20%20%20%20%20%20%3Cg%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20text-anchor%3D%22middle%22%20x%3D%2250%25%22%20y%3D%2250%25%22%20dy%3D%22.3em%22%3E500%20x%20400%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fsvg%3E"
+                />
+            </fd-carousel-item>
+        </fd-carousel>
+    </div>
+</ng-template>

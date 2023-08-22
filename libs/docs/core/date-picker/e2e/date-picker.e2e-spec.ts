@@ -446,7 +446,7 @@ xdescribe('Date picker suite', () => {
             await click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount - 1) {
-            await click(altCalendarItem + ':not(.fd-calendar__item--other-month)', currentDayIndex + 1);
+            await click(altCalendarItem + ':not(.fd-calendar__item--other)', currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${await getCurrentMonth(true)}/${await getNextDay(true)}/${currentYear

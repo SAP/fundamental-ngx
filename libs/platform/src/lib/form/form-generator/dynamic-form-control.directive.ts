@@ -17,7 +17,8 @@ import { Observable, of } from 'rxjs';
  * based on the information provided in `formItem` input
  */
 @Directive({
-    selector: '[fdpDynamicFormControl]'
+    selector: '[fdpDynamicFormControl]',
+    standalone: true
 })
 export class DynamicFormControlDirective implements OnInit {
     /**

@@ -10,7 +10,7 @@ export class DatePicker extends PlatformBaseComponentPo {
     calendarExpanded = '.fd-popover__body fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
 
-    currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
+    currentDay = '//*[contains(@class, "fd-calendar__item--today") or contains(@class, "is-active")]';
 
     buttonGerman = 'fd-segmented-button button:nth-child(2)';
     buttonBulgarian = 'fd-segmented-button button:nth-child(3)';
@@ -25,7 +25,7 @@ export class DatePicker extends PlatformBaseComponentPo {
     filterCalendarValue = (name: string): string => `//td[contains(@id,"-view-${name}")]`;
 
     dayInCalendarButtonByValue = (index: string): string =>
-        `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+        `//span[text()="${index}"]/ancestor::td[not (contains(@class, 'fd-calendar__item--other'))]`;
 
     yearInCalendarByValue = (year: number): string => `[data-fd-calendar-year="${year}"]`;
     monthInCalendarByValue = (month: number): string => `[data-fd-calendar-month="${month}"]`;

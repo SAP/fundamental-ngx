@@ -10,6 +10,9 @@ const datepickerFormatTs = 'platform-date-picker-format-example.component.ts';
 const datepickerFormatHtml = 'platform-date-picker-format-example.component.html';
 const datePickerUpdateOnBlurSrcTs = 'platform-date-picker-update-on-blur-example.component.ts';
 
+const datepickerMobileTs = 'mobile/platform-date-picker-mobile-example.component.ts';
+const datepickerMobileHtml = 'mobile/platform-date-picker-mobile-example.component.html';
+
 import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 @Component({
@@ -80,6 +83,21 @@ export class PlatformDatePickerDocsComponent {
             component: 'DatePickerUpdateOnBlurExampleComponent',
             code: getAssetFromModuleAssets(datePickerUpdateOnBlurSrcTs),
             fileName: 'date-picker-update-on-blur-example'
+        }
+    ];
+
+    datePickerMobile: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(datepickerMobileTs),
+            fileName: 'platform-date-picker-mobile-example',
+            component: 'PlatformDatePickerMobileExampleComponent'
+        },
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(datepickerMobileHtml),
+            fileName: 'platform-date-picker-mobile-example',
+            component: 'PlatformDatePickerMobileExampleComponent'
         }
     ];
 }

@@ -6,6 +6,7 @@ import { CheckboxHeaderComponent } from './checkbox-header/checkbox-header.compo
 import { CheckboxDocsComponent } from './checkbox-docs.component';
 import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { CheckboxDisplayModeExampleComponent } from './examples/checkbox-display-mode-example.component';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 
 const routes: Routes = [
@@ -21,8 +22,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [FormModule, CheckboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
-    exports: [RouterModule],
-    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent],
+    exports: [RouterModule, CheckboxDisplayModeExampleComponent],
+    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent, CheckboxDisplayModeExampleComponent],
     providers: [currentComponentProvider('checkbox')]
 })
 export class CheckboxDocsModule {}

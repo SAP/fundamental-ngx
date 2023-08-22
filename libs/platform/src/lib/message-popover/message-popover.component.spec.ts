@@ -1,12 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { I18nModule } from '@fundamental-ngx/i18n';
 import { of } from 'rxjs';
 
 import { MessagePopoverComponent } from './message-popover.component';
 import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
 import { MessagePopoverErrorGroup } from './models/message-popover-entry.interface';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const stubErrors: MessagePopoverErrorGroup[] = [
     {
@@ -101,8 +100,7 @@ describe('MessagePopoverComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PopoverModule, I18nModule],
-            declarations: [MessagePopoverComponent],
+            imports: [MessagePopoverComponent, NoopAnimationsModule],
             schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
         }).compileComponents();
 

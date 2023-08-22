@@ -34,7 +34,8 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
-    /** @hidden
+    /**
+     * @hidden
      * For internal usage
      * Control element, which will be rendered inside dialog.
      * List element, which will be rendered inside dialog.

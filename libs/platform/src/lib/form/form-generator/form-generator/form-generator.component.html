@@ -13,9 +13,9 @@
         [inlineColumnLayout]="inlineColumnLayout"
         [useForm]="true"
     >
-        <ng-container *ngFor="let error of _errorModels">
+        <ng-container *ngFor="let error of _errorModels; trackBy: _errorsTrackBy">
             <span *fdpFormFieldError="error.type; let directiveError">
-                <ng-container *ngIf="_isAdvancedError(directiveError)">
+                <ng-container *ngIf="_isAdvancedError(directiveError); else simpleErrorTemplate">
                     <ng-container *ngIf="directiveError.heading">
                         <span *fdpFormFieldErrorHeading="let validationError; type: directiveError.type">
                             {{ validationError.heading }}
@@ -27,11 +27,11 @@
                         </span>
                     </ng-container>
                 </ng-container>
-                <ng-container *ngIf="!_isAdvancedError(directiveError)">
+                <ng-template #simpleErrorTemplate>
                     <span *fdpFormFieldErrorHeading="let validationError">
                         {{ error.value ? error.value : validationError }}
                     </span>
-                </ng-container>
+                </ng-template>
             </span>
         </ng-container>
         <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn">
@@ -52,7 +52,7 @@
                     *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
                 >
                     <fdp-form-generator-field
-                        [hintOptions]="getHintOptions(field.formItem.guiOptions)"
+                        [hintOptions]="field.formItem.guiOptions | getHintOptions"
                         [form]="form"
                         [shouldShow]="shouldShowFields[field.formItem.name] !== false"
                         [field]="field"
@@ -64,14 +64,14 @@
             </ng-template>
             <ng-template #groupRenderer>
                 <fdp-form-field-group
-                    [hintOptions]="getHintOptions(field.formItem.guiOptions)"
+                    [hintOptions]="field.formItem.guiOptions | getHintOptions"
                     [label]="field.formItem.message || ''"
                     [labelColumnLayout]="field.formItem.guiOptions?.labelColumnLayout"
                     [fieldColumnLayout]="field.formItem.guiOptions?.fieldColumnLayout"
                     [gapColumnLayout]="field.formItem.guiOptions?.gapColumnLayout"
                     [formName]="field.formItem.name"
                 >
-                    <ng-container *ngFor="let groupField of field | getOrderedFieldControls">
+                    <ng-container *ngFor="let groupField of field | getOrderedFieldControls; trackBy: _groupTrackFn">
                         <ng-container
                             *fdpDynamicFormControlField="
                                 groupField;
@@ -79,7 +79,7 @@
                             "
                         >
                             <fdp-form-generator-field
-                                [hintOptions]="getHintOptions(groupField.formItem.guiOptions)"
+                                [hintOptions]="groupField.formItem.guiOptions | getHintOptions"
                                 [form]="form"
                                 [field]="groupField"
                                 [shouldShow]="shouldShowFields[groupField.formItem.name!] !== false"

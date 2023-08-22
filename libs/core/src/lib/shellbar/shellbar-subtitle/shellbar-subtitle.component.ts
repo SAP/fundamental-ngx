@@ -20,6 +20,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 display: flex;
             }
         `
-    ]
+    ],
+    standalone: true
 })
 export class ShellbarSubtitleComponent {}

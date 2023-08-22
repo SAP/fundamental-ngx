@@ -15,7 +15,9 @@ import { DynamicFormControl } from './dynamic-form-control';
         <div class="should-hide" *fdpDynamicFormControlField="control; show: !shouldShow">
             <p>This is hidden</p>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [DynamicFormControlFieldDirective]
 })
 class HostComponent {
     control = new DynamicFormControl('default value', {
@@ -30,7 +32,7 @@ describe('DynamicFormControlFieldDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DynamicFormControlFieldDirective, HostComponent]
+            imports: [HostComponent]
         }).compileComponents();
     }));
 

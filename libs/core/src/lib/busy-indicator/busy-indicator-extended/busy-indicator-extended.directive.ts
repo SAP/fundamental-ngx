@@ -6,7 +6,8 @@ const messageToastClass = 'fd-message-toast';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-busy-indicator-extended]'
+    selector: '[fd-busy-indicator-extended]',
+    standalone: true
 })
 export class BusyIndicatorExtendedDirective implements AfterContentInit {
     /** @hidden */

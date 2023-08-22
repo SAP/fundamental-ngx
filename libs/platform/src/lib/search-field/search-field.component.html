@@ -124,6 +124,7 @@
                     <fd-icon glyph="synchronize"></fd-icon>
                 </button>
             </span>
+            <div *ngIf="appearance?.helperClass" [ngClass]="appearance?.helperClass"></div>
         </div>
     </div>
 </ng-template>

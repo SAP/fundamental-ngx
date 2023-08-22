@@ -3,22 +3,26 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ComponentRef,
     ElementRef,
     EventEmitter,
     forwardRef,
+    inject,
     Inject,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
+    TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator, FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -29,8 +33,21 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { DateTimePicker } from './datetime-picker.model';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from './tokens';
+import { DatetimePickerMobileComponent } from './datetime-picker-mobile/datetime-picker-mobile.component';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TimeModule } from '@fundamental-ngx/core/time';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { NgTemplateOutlet, NgIf, NgClass } from '@angular/common';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -55,15 +72,47 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
             useExisting: forwardRef(() => DatetimePickerComponent),
             multi: true
         },
+        {
+            provide: FD_DATETIME_PICKER_COMPONENT,
+            useExisting: DatetimePickerComponent
+        },
         registerFormItemControl(DatetimePickerComponent),
         PopoverFormMessageService,
-        PopoverService
+        PopoverService,
+        DynamicComponentService
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fd-datetime'
+    },
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        PopoverModule,
+        InputGroupModule,
+        FormsModule,
+        NgIf,
+        FormMessageModule,
+        SegmentedButtonModule,
+        ButtonModule,
+        CalendarComponent,
+        NgClass,
+        TimeModule,
+        BarModule,
+        FdTranslatePipe
+    ]
 })
 export class DatetimePickerComponent<D>
-    implements OnInit, OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor, Validator, FormItemControl
+    implements
+        DateTimePicker<D>,
+        OnInit,
+        OnDestroy,
+        OnChanges,
+        AfterViewInit,
+        ControlValueAccessor,
+        Validator,
+        FormItemControl
 {
     /** Placeholder for the inner input element. */
     @Input()
@@ -117,9 +166,6 @@ export class DatetimePickerComponent<D>
         this._popoverFormMessage.message = message;
     }
 
-    /** @hidden */
-    _message: string | null = null;
-
     /** The trigger events that will open/close the message box.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
@@ -127,9 +173,6 @@ export class DatetimePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
-
-    /** @hidden */
-    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /**
      * Whether the time component shows minutes.
@@ -205,7 +248,7 @@ export class DatetimePickerComponent<D>
 
     /**
      * Special days mark, it can be used by passing array of object with
-     * Special day number, list 1-20 [class:`fd-calendar__special-day--{{number}}`] is available there:
+     * Special day number, list 1-20 [class:`fd-calendar__item--legend-{{number}}`] is available there:
      * https://sap.github.io/fundamental-styles/components/calendar.html calendar special days section
      * Rule accepts method with FdDate object as a parameter. ex:
      * `rule: (fdDate: FdDate) => fdDate.getDay() === 1`, which will mark all sundays as special day.
@@ -273,6 +316,22 @@ export class DatetimePickerComponent<D>
     @Input()
     preventScrollOnFocus = false;
 
+    /** Whether to render datetime picker in mobile mode. */
+    @Input()
+    mobile = false;
+
+    /** Mobile mode configuration. */
+    @Input()
+    mobileConfig: MobileModeConfig;
+
+    /** Whether calendar is used inside mobile in landscape mode, it also adds close button on right side */
+    @Input()
+    mobileLandscape = false;
+
+    /** Whether calendar is used inside mobile in portrait mode */
+    @Input()
+    mobilePortrait = false;
+
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange = new EventEmitter<boolean>();
@@ -335,6 +394,16 @@ export class DatetimePickerComponent<D>
     _inputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
+    @ViewChild('pickerTemplate')
+    private readonly _pickerTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    _message: string | null = null;
+
+    /** @hidden */
+    _messageTriggers: string[] = ['focusin', 'focusout'];
+
+    /** @hidden */
     _processInputOnBlur = false;
 
     /**
@@ -378,26 +447,19 @@ export class DatetimePickerComponent<D>
     private _calendarPendingDate: Nullable<D>;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _injector = inject(Injector);
+
+    /** @hidden */
+    private readonly _dynamicComponentService = inject(DynamicComponentService);
+
+    /** @hidden */
+    private _mobileComponentRef: Nullable<ComponentRef<DatetimePickerMobileComponent<D>>>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     private _touched = false;
-
-    /** @hidden */
-    onChange: (value: D | null) => void = () => {};
-
-    /** @hidden */
-    onTouched = (): void => {};
-
-    /**
-     * Function used to disable certain dates in the calendar.
-     * @param fdDate FdDate
-     */
-    @Input()
-    disableFunction: (value: D) => boolean = () => false;
 
     /** @hidden */
     constructor(
@@ -418,6 +480,19 @@ export class DatetimePickerComponent<D>
         // default model value
         this.date = _dateTimeAdapter.now();
     }
+
+    /**
+     * Function used to disable certain dates in the calendar.
+     * @param fdDate FdDate
+     */
+    @Input()
+    disableFunction: (value: D) => boolean = () => false;
+
+    /** @hidden */
+    onChange: (value: D | null) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnChanges(changes): void {
@@ -443,28 +518,29 @@ export class DatetimePickerComponent<D>
 
         this._calculateTimeOptions();
 
-        this._dateTimeAdapter.localeChanges
-            .pipe(
-                takeUntil(this._onDestroy$),
-                filter(() => this._inputFieldDate !== '')
-            )
-            .subscribe(() => {
+        this._subscriptions.add(
+            this._dateTimeAdapter.localeChanges.pipe(filter(() => this._inputFieldDate !== '')).subscribe(() => {
                 this._setInput(this.date);
                 this._calculateTimeOptions();
                 this._changeDetRef.detectChanges();
-            });
+            })
+        );
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+        this._mobileComponentRef?.destroy();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._InitialiseVariablesInMessageService();
+
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
+
         // update bindings after rendering
         // is needed to preperly reflect error state
         setTimeout(() => {
@@ -675,6 +751,21 @@ export class DatetimePickerComponent<D>
     }
 
     /** @hidden */
+    dialogApprove(): void {
+        this.isOpen = false;
+        this.submit();
+    }
+
+    /** Method used to restore original value for mobile mode. */
+    dialogDismiss(value: D): void {
+        this.date = value;
+        this.isOpen = false;
+        this._setInput(this.date);
+
+        this.onChange(this.date);
+    }
+
+    /** @hidden */
     _changeMessageVisibility(): void {
         if (this.isOpen) {
             this._popoverFormMessage.hide();
@@ -770,5 +861,30 @@ export class DatetimePickerComponent<D>
         // default hours option based on format option
         this._displayHours =
             this.displayHours != null ? this.displayHours : this._dateTimeAdapter.isTimeFormatIncludesHours(format);
+    }
+
+    /** @hidden */
+    private _setUpMobileMode(): void {
+        const injector = Injector.create({
+            providers: [
+                { provide: FD_DATETIME_PICKER_COMPONENT, useValue: this },
+                {
+                    provide: FD_DATETIME_PICKER_MOBILE_CONFIG,
+                    useValue: { pickerTemplate: this._pickerTemplate }
+                }
+            ],
+            parent: this._injector
+        });
+
+        this._mobileComponentRef = this._dynamicComponentService.createDynamicComponent(
+            {},
+            DatetimePickerMobileComponent<D>,
+            {
+                container: 'body'
+            },
+            {
+                injector
+            }
+        );
     }
 }

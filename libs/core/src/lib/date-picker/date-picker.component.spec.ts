@@ -2,14 +2,9 @@ import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/t
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
-import { FormMessageModule } from '@fundamental-ngx/core/form';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CalendarModule, CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
+import { CalendarType, DateRange } from '@fundamental-ngx/core/calendar';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { By } from '@angular/platform-browser';
@@ -25,16 +20,7 @@ describe('DatePickerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FdDatetimeModule,
-                CalendarModule,
-                PopoverModule,
-                FormsModule,
-                IconModule,
-                InputGroupModule,
-                ButtonModule,
-                FormMessageModule
-            ]
+            imports: [FdDatetimeModule, FormsModule, DatePickerComponent]
         }).compileComponents();
     }));
 

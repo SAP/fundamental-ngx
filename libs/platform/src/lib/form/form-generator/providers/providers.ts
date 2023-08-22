@@ -1,4 +1,4 @@
-import { forwardRef, InjectionToken, Provider } from '@angular/core';
+import { forwardRef, InjectionToken, Provider, StaticProvider } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FD_FORM_FIELD } from '@fundamental-ngx/cdk/forms';
 
@@ -7,12 +7,12 @@ import { FormFieldComponent } from '../../form-group/form-field/form-field.compo
 import { DynamicFormFieldItem } from '../interfaces/dynamic-form-item';
 import { FormGeneratorConfig } from '../interfaces/form-generator-module-config';
 
-export const dynamicFormFieldProvider: Provider = {
+export const dynamicFormFieldProvider: StaticProvider = {
     provide: FD_FORM_FIELD,
     useExisting: forwardRef(() => FormFieldComponent)
 };
 
-export const dynamicFormGroupChildProvider: Provider = {
+export const dynamicFormGroupChildProvider: StaticProvider = {
     provide: FORM_GROUP_CHILD_FIELD_TOKEN,
     useExisting: forwardRef(() => FormFieldComponent)
 };

@@ -9,12 +9,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { NgIf, NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 
 @Component({
     selector: 'fd-shellbar-actions-mobile',
     templateUrl: './shellbar-actions-mobile.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ActionSheetModule, ButtonModule, NgIf, NgFor, FdTranslatePipe]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */

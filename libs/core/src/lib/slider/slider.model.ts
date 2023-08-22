@@ -6,7 +6,8 @@ export enum SliderValueTargets {
 
 export enum SliderRangeHandles {
     First,
-    Second
+    Second,
+    Both
 }
 
 export interface SliderTickMark {

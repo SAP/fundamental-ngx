@@ -1,39 +1,52 @@
-<div style="display: flex; justify-content: center">
-    <fd-carousel [navigatorInPageIndicator]="false" carouselIndicatorsOrientation="top" width="500px">
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/1" alt="first image" />
-        </fd-carousel-item>
+<p>Horizontal navigation:</p>
+<ng-container *ngTemplateOutlet="renderer; context: { $implicit: false }"></ng-container>
+<p>Vertical navigation:</p>
+<ng-container *ngTemplateOutlet="renderer; context: { $implicit: true }"></ng-container>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/2" alt="second image" />
-        </fd-carousel-item>
+<ng-template #renderer let-direction>
+    <div style="display: flex; justify-content: center">
+        <fd-carousel
+            [navigatorInPageIndicator]="false"
+            carouselIndicatorsOrientation="top"
+            width="500px"
+            height="550px"
+            [vertical]="direction"
+        >
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/1" alt="first image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/3" alt="third image" />
-        </fd-carousel-item>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/2" alt="second image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/4" alt="forth image" />
-        </fd-carousel-item>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/3" alt="third image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/5" alt="fifth image" />
-        </fd-carousel-item>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/4" alt="forth image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/6" alt="sixth image" />
-        </fd-carousel-item>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/5" alt="fifth image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/7" alt="seventh image" />
-        </fd-carousel-item>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/6" alt="sixth image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?nature/8" alt="eight image" />
-        </fd-carousel-item>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/7" alt="seventh image" />
+            </fd-carousel-item>
 
-        <fd-carousel-item>
-            <img src="https://picsum.photos/500/500?sports/1" alt="ninth image" />
-        </fd-carousel-item>
-    </fd-carousel>
-</div>
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?nature/8" alt="eight image" />
+            </fd-carousel-item>
+
+            <fd-carousel-item>
+                <img src="https://picsum.photos/500/500?sports/1" alt="ninth image" />
+            </fd-carousel-item>
+        </fd-carousel>
+    </div>
+</ng-template>

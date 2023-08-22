@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl,
     AsyncValidatorFn,
@@ -13,7 +13,8 @@ import { delay, Observable, of } from 'rxjs';
 @Component({
     selector: 'fdp-message-popover-default-example',
     templateUrl: './message-popover-default-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class MessagePopoverDefaultExampleComponent {
     templateFormValue = {

@@ -10,7 +10,6 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -22,16 +21,41 @@ import {
     MessagePopoverErrorGroup
 } from './models/message-popover-entry.interface';
 import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
-import { convertFormState } from './utils';
-import { MessagePopover } from './models/message-popover.interface';
+import { convertFormState, convertFormStateToMessagePopoverState } from './utils';
+import { MessagePopover, MessagePopoverState } from './models/message-popover.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MessageViewComponent } from './components/message-view/message-view.component';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { FormsModule } from '@angular/forms';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 @Component({
     selector: 'fdp-message-popover',
     templateUrl: './message-popover.component.html',
     styleUrls: ['./message-popover.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        PopoverModule,
+        ButtonModule,
+        NgClass,
+        BarModule,
+        SegmentedButtonModule,
+        FormsModule,
+        NgFor,
+        ObjectStatusModule,
+        InitialFocusDirective,
+        MessageViewComponent,
+        FdTranslatePipe
+    ]
 })
 export class MessagePopoverComponent implements MessagePopover, OnInit {
     /** @hidden */
@@ -65,7 +89,7 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
     _priorityFormState: FormStates;
 
     /** @hidden */
-    _priorityState: ObjectStatus;
+    _priorityState: MessagePopoverState;
 
     /** @hidden */
     _filteredErrors: MessagePopoverErrorGroup[] = [];
@@ -96,7 +120,7 @@ export class MessagePopoverComponent implements MessagePopover, OnInit {
             });
 
             this._priorityFormState = getFormState(errorTypes);
-            this._priorityState = convertFormState(this._priorityFormState);
+            this._priorityState = convertFormStateToMessagePopoverState(this._priorityFormState);
 
             this._priorityStateItemsCount = countedErrors[this._priorityFormState];
             this._filterErrors();

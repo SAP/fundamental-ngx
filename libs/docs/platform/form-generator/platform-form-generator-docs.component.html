@@ -192,3 +192,35 @@
 <code-example [exampleFiles]="loadingFormGenerator"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="advanced" componentName="form-generator">
+    Advanced control management
+</fd-docs-section-title>
+<description>
+    <p>There are several options on how to manage the control visibility in Form Generator:</p>
+    <ul>
+        <li>
+            With <code>when</code> function. This function reacts on form value changes and calculates whether the
+            particular control should be visible or not;
+        </li>
+        <li>
+            With <code>addControl</code> and <code>removeControl</code> methods. The logic of calling these methods
+            should be implemented by the developers;
+        </li>
+        <li>
+            With custom control that has inner form. This method allows developers to create groups of controls that can
+            be added or removed on the fly;
+        </li>
+    </ul>
+    <p>
+        The difference between <code>addControl/removeControl</code> and control with inner form is that with first
+        case, control can be placed into any group of Form Generator, where second option will be bound to the control
+        itself.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-form-generator-advanced-example></fdp-platform-form-generator-advanced-example>
+</component-example>
+<code-example [exampleFiles]="loadingFormGenerator"></code-example>
+
+<separator></separator>

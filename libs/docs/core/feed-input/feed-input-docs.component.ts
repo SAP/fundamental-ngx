@@ -7,6 +7,7 @@ const feedInputPlaceholderH = 'feed-input-placeholder-example/feed-input-placeho
 const feedInputNoAvatarH = 'feed-input-no-avatar-example/feed-input-no-avatar-example.component.html';
 const feedInputDisabledH = 'feed-input-disabled-example/feed-input-disabled-example.component.html';
 const feedInputMaxHeightH = 'feed-input-grow-example/feed-input-grow-example.component.html';
+const feedInputCircleAvatarH = 'feed-input-circle-avatar-example/feed-input-circle-avatar-example.component.html';
 
 @Component({
     selector: 'app-feed-input',
@@ -50,6 +51,13 @@ export class FeedInputDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(feedInputMaxHeightH),
             fileName: 'feed-input-max-height-example'
+        }
+    ];
+    feedInputCircleAvatar: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(feedInputCircleAvatarH),
+            fileName: 'feed-input-circle-avatar-example'
         }
     ];
 }

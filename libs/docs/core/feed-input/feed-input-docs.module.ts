@@ -12,6 +12,7 @@ import { FeedInputGrowExampleComponent } from './examples/feed-input-grow-exampl
 import { FeedInputModule } from '@fundamental-ngx/core/feed-input';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { FormControlModule } from '@fundamental-ngx/core/form';
+import { FeedInputCircleAvatarExampleComponent } from './examples/feed-input-circle-avatar-example/feed-input-circle-avatar-example.component';
 
 const routes: Routes = [
     {
@@ -40,7 +41,8 @@ const routes: Routes = [
         FeedInputPlaceholderExampleComponent,
         FeedInputNoAvatarExampleComponent,
         FeedInputDisabledExampleComponent,
-        FeedInputGrowExampleComponent
+        FeedInputGrowExampleComponent,
+        FeedInputCircleAvatarExampleComponent
     ],
     providers: [currentComponentProvider('feed-input')]
 })

@@ -3,6 +3,104 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.2...v0.46.0-rc.3) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.46.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.1...v0.46.0-rc.2) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.46.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.0...v0.46.0-rc.1) (2023-08-22)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.46.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.45.1...v0.46.0-rc.0) (2023-08-22)
+
+
+### Features
+
+* **core,platform,cx:** horizon 2023 update ([#10276](https://github.com/SAP/fundamental-ngx/issues/10276)) ([dfab60d](https://github.com/SAP/fundamental-ngx/commit/dfab60d4c8810d3ec25d797cfc75649d34bdc11a)), closes [#9950](https://github.com/SAP/fundamental-ngx/issues/9950) [#9992](https://github.com/SAP/fundamental-ngx/issues/9992) [#9950](https://github.com/SAP/fundamental-ngx/issues/9950) [#10067](https://github.com/SAP/fundamental-ngx/issues/10067) [#10091](https://github.com/SAP/fundamental-ngx/issues/10091) [#10066](https://github.com/SAP/fundamental-ngx/issues/10066) [#10125](https://github.com/SAP/fundamental-ngx/issues/10125) [#10275](https://github.com/SAP/fundamental-ngx/issues/10275) [#10274](https://github.com/SAP/fundamental-ngx/issues/10274) [#10315](https://github.com/SAP/fundamental-ngx/issues/10315) [#10314](https://github.com/SAP/fundamental-ngx/issues/10314) [#10317](https://github.com/SAP/fundamental-ngx/issues/10317)
+
+
+### BREAKING CHANGES
+
+* **core,platform,cx:** Vertical carousel markup change: Previously navigation buttons had icons `sap-icon--slim-arrow-left` and `sap-icon--slim-arrow-left` ignoring the direction. Now if vertical navigation is applied, buttons will have icons `sap-icon--slim-arrow-up` and `sap-icon--slim-arrow-down` respectively.
+Toolbar markup change: Removed inner `<div class="fd-toolbar">...</div>`. Now classes and other attributes applied to the root `fd-toolbar` element.
+Radio button: Projected content now wrapped with `<span class="fd-radio__text">`
+
+
+
+
+
+## [0.45.1](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.11...v0.45.1) (2023-08-21)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.45.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.10...v0.45.1-rc.11) (2023-08-21)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.45.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.9...v0.45.1-rc.10) (2023-08-20)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.45.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.8...v0.45.1-rc.9) (2023-08-19)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.45.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.7...v0.45.1-rc.8) (2023-08-19)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.45.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.6...v0.45.1-rc.7) (2023-08-19)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.45.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.5...v0.45.1-rc.6) (2023-08-19)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 ## [0.45.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.45.1-rc.4...v0.45.1-rc.5) (2023-08-17)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

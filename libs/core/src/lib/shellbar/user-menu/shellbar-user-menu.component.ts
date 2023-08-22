@@ -4,6 +4,10 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { NgIf, NgFor } from '@angular/common';
 
 /**
  * This Component extends popover component and passes all the options and events from outside to popover component
@@ -12,7 +16,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fd-shellbar-user-menu',
     templateUrl: './shellbar-user-menu.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, ButtonModule, MenuModule, AvatarModule, NgFor]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */

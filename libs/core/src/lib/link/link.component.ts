@@ -19,9 +19,10 @@ import {
 import { RouterLink } from '@angular/router';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 import { map, startWith, Subject, takeUntil, tap } from 'rxjs';
-import { DomPortal, Portal } from '@angular/cdk/portal';
+import { DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_LINK_COMPONENT } from './tokens';
+import { NgIf } from '@angular/common';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -44,7 +45,9 @@ import { FD_LINK_COMPONENT } from './tokens';
                 [new Optional(), new Self(), RouterLink]
             ]
         }
-    ]
+    ],
+    imports: [NgIf, PortalModule],
+    standalone: true
 })
 export class LinkComponent implements OnChanges, OnInit, CssClassBuilder, AfterViewInit, OnDestroy {
     /** @hidden */

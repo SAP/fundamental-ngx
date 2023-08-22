@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TitleComponent } from './title.component';
-import { TitleModule } from './title.module';
 
 describe('TitleComponent', () => {
     let component: TitleComponent;
@@ -8,7 +7,7 @@ describe('TitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TitleModule]
+            imports: [TitleComponent]
         }).compileComponents();
     }));
 

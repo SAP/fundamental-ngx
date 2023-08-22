@@ -3,7 +3,6 @@
     [activeView]="activeView"
     [id]="id"
     [calendarYearGrid]="yearGrid"
-    [mobileLandscape]="mobileLandscape"
     (closeClicked)="closeClicked.emit()"
     (nextClicked)="handleNextArrowClick()"
     (previousClicked)="handlePreviousArrowClick()"
@@ -12,59 +11,52 @@
     (activeViewChange)="handleActiveViewChange($event)"
 ></fd-calendar-header>
 <ng-container [ngSwitch]="activeView" *ngIf="_currentlyDisplayed">
-    <div
-        class="fd-calendar__content"
-        [class.fd-calendar__content--dates]="activeView === 'day'"
-        [class.fd-calendar__content--months]="activeView === 'month'"
-        [class.fd-calendar__content--years]="activeView === 'year' || activeView === 'aggregatedYear'"
+    <fd-calendar-day-view
+        *ngSwitchCase="'day'"
+        [selectedDate]="selectedDate"
+        [showWeekNumbers]="showWeekNumbers"
+        [markWeekends]="markWeekends"
+        (selectedDateChange)="selectedDateChanged($event)"
+        [selectedRangeDate]="selectedRangeDate"
+        (selectedRangeDateChange)="selectedRangeDateChanged($event)"
+        [currentlyDisplayed]="_currentlyDisplayed"
+        [startingDayOfWeek]="getWeekStartDay()"
+        [disableFunction]="disableFunction"
+        [disableRangeEndFunction]="disableRangeEndFunction"
+        [disableRangeStartFunction]="disableRangeStartFunction"
+        [calType]="calType"
+        [id]="id"
+        [rangeHoverEffect]="rangeHoverEffect"
+        [specialDaysRules]="specialDaysRules"
+        [focusEscapeFunction]="escapeFocusFunction"
+        (nextMonthSelect)="displayNextMonth()"
+        (previousMonthSelect)="displayPreviousMonth()"
+    ></fd-calendar-day-view>
+    <fd-calendar-month-view
+        *ngSwitchCase="'month'"
+        [monthSelected]="_currentlyDisplayed.month"
+        [year]="_currentlyDisplayed.year"
+        [id]="id"
+        [focusEscapeFunction]="escapeFocusFunction"
+        (monthClicked)="handleMonthViewChange($event)"
+    ></fd-calendar-month-view>
+    <fd-calendar-year-view
+        *ngSwitchCase="'year'"
+        [yearSelected]="_currentlyDisplayed.year"
+        [yearViewGrid]="yearGrid"
+        [id]="id"
+        [focusEscapeFunction]="escapeFocusFunction"
+        (yearClicked)="selectedYear($event)"
     >
-        <fd-calendar-day-view
-            *ngSwitchCase="'day'"
-            [selectedDate]="selectedDate"
-            [showWeekNumbers]="showWeekNumbers"
-            [markWeekends]="markWeekends"
-            (selectedDateChange)="selectedDateChanged($event)"
-            [selectedRangeDate]="selectedRangeDate"
-            (selectedRangeDateChange)="selectedRangeDateChanged($event)"
-            [currentlyDisplayed]="_currentlyDisplayed"
-            [startingDayOfWeek]="getWeekStartDay()"
-            [disableFunction]="disableFunction"
-            [disableRangeEndFunction]="disableRangeEndFunction"
-            [disableRangeStartFunction]="disableRangeStartFunction"
-            [calType]="calType"
-            [id]="id"
-            [rangeHoverEffect]="rangeHoverEffect"
-            [specialDaysRules]="specialDaysRules"
-            [focusEscapeFunction]="escapeFocusFunction"
-            (nextMonthSelect)="displayNextMonth()"
-            (previousMonthSelect)="displayPreviousMonth()"
-        ></fd-calendar-day-view>
-        <fd-calendar-month-view
-            *ngSwitchCase="'month'"
-            [monthSelected]="_currentlyDisplayed.month"
-            [year]="_currentlyDisplayed.year"
-            [id]="id"
-            [focusEscapeFunction]="escapeFocusFunction"
-            (monthClicked)="handleMonthViewChange($event)"
-        ></fd-calendar-month-view>
-        <fd-calendar-year-view
-            *ngSwitchCase="'year'"
-            [yearSelected]="_currentlyDisplayed.year"
-            [yearViewGrid]="yearGrid"
-            [id]="id"
-            [focusEscapeFunction]="escapeFocusFunction"
-            (yearClicked)="selectedYear($event)"
-        >
-        </fd-calendar-year-view>
-        <fd-calendar-aggregated-year-view
-            *ngSwitchCase="'aggregatedYear'"
-            (yearsClicked)="selectedYears($event)"
-            [yearSelected]="_currentlyDisplayed.year"
-            [yearViewGrid]="yearGrid"
-            [aggregatedYearsViewGrid]="aggregatedYearGrid"
-            [id]="id"
-            [focusEscapeFunction]="escapeFocusFunction"
-        >
-        </fd-calendar-aggregated-year-view>
-    </div>
+    </fd-calendar-year-view>
+    <fd-calendar-aggregated-year-view
+        *ngSwitchCase="'aggregatedYear'"
+        (yearsClicked)="selectedYears($event)"
+        [yearSelected]="_currentlyDisplayed.year"
+        [yearViewGrid]="yearGrid"
+        [aggregatedYearsViewGrid]="aggregatedYearGrid"
+        [id]="id"
+        [focusEscapeFunction]="escapeFocusFunction"
+    >
+    </fd-calendar-aggregated-year-view>
 </ng-container>

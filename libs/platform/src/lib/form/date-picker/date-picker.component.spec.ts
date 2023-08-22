@@ -1,19 +1,13 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
-import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PlatformDatePickerModule } from './date-picker.module';
 import { PlatformDatePickerComponent } from './date-picker.component';
-import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 
 @Component({
     selector: 'fdp-test-date-picker',
@@ -78,20 +72,7 @@ describe('TestDatePickerComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestDatePickerComponent],
-            imports: [
-                PlatformDatePickerModule,
-                CalendarModule,
-                DatePickerModule,
-                PopoverModule,
-                FdDatetimeModule,
-                FdpFormGroupModule,
-                FormsModule,
-                FormModule,
-                IconModule,
-                InputGroupModule,
-                ButtonModule,
-                ReactiveFormsModule
-            ]
+            imports: [PlatformDatePickerModule, ReactiveFormsModule, FdDatetimeModule, FormModule, FdpFormGroupModule]
         }).compileComponents();
     }));
 
