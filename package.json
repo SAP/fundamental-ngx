@@ -161,7 +161,7 @@
     "lerna": "7.1.0",
     "lint-staged": "13.2.3",
     "nan": "2.17.0",
-    "ng-packagr": "16.1.0",
+    "ng-packagr": "16.2.0",
     "ngx-cva-test-suite": "2.0.0",
     "nx": "16.5.5",
     "nx-cloud": "16.1.1",
