@@ -12,7 +12,7 @@ export class RatingIndicatorPo extends CoreBaseComponentPo {
     touchedInputsBasicExample = 'fd-rating-indicator-example input.ng-dirty';
     inputsDynamicChanges = 'fd-ri-dynamic-example input.ng-pristine';
     touchedInputsDynamicChanges = 'fd-ri-dynamic-example input.ng-dirty';
-    sizeRatingIndicator = '[area-label="Total raiting"]';
+    sizeRatingIndicator = '[aria-label="Total raiting"]';
     starsRatingDisplayMode = 'fd-ri-display-mode-example .fd-rating-indicator__label';
     textDisplayMode = 'fd-ri-display-mode-example .fd-rating-indicator__dynamic-text';
 
