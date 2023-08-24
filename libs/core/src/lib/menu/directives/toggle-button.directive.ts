@@ -1,7 +1,7 @@
-import { AfterViewInit, Directive, HostListener, inject } from '@angular/core';
+import { AfterViewInit, DestroyRef, Directive, HostListener, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
-import { takeUntil, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { TOGGLE_MENU_ITEM } from '../menu.tokens';
 
@@ -17,7 +17,6 @@ import { TOGGLE_MENU_ITEM } from '../menu.tokens';
     ],
     providers: [
         CvaControl,
-        DestroyedService,
         { provide: FD_FORM_FIELD_CONTROL, useExisting: ToggleButtonDirective, multi: true },
         { provide: TOGGLE_MENU_ITEM, useExisting: ToggleButtonDirective }
     ]
@@ -27,7 +26,7 @@ export class ToggleButtonDirective implements AfterViewInit {
     private _cvaControl = inject<CvaControl<boolean>>(CvaControl);
 
     /** @hidden */
-    private _destroy$ = inject(DestroyedService)!;
+    private _destroyRef = inject(DestroyRef)!;
 
     /** @hidden */
     private _interactiveItemComponent = inject(MenuInteractiveComponent, { host: true });
@@ -48,7 +47,7 @@ export class ToggleButtonDirective implements AfterViewInit {
                 tap((value: boolean) => {
                     this._interactiveItemComponent.startAddon._addonGlyph.glyph = value ? 'accept' : undefined;
                 }),
-                takeUntil(this._destroy$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }

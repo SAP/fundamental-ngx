@@ -1,21 +1,18 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, inject, Input, NgZone, Renderer2 } from '@angular/core';
 import { DomPortal } from '@angular/cdk/portal';
-import { BehaviorSubject, Observable, Subject, combineLatest, tap, delayWhen, takeUntil } from 'rxjs';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { AfterViewInit, Directive, ElementRef, HostListener, inject, Input, NgZone, Renderer2 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, combineLatest, delayWhen, Observable, Subject, tap } from 'rxjs';
 import { MenuItemComponent } from '../../menu-item/menu-item.component';
 import { FD_MENU_ITEM_COMPONENT } from '../../menu.tokens';
 
 @Directive({
     selector: 'li[fd-menu-item][fdMenuSegmentedButtonOption]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
 export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
     /** @hidden */
     @Input() value: T;
 
-    /** @hidden */
-    private _clicked = new Subject<void>();
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
@@ -23,10 +20,13 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
     readonly menuItem = inject<MenuItemComponent>(FD_MENU_ITEM_COMPONENT, { host: true });
 
     /** @hidden */
-    readonly clicked: Observable<void> = this._clicked.asObservable();
+    readonly clicked: Observable<void>;
 
     /** @hidden */
     readonly renderer2 = inject(Renderer2);
+
+    /** @hidden */
+    private _clicked = new Subject<void>();
 
     /** @hidden */
     private _dotElement: HTMLSpanElement;
@@ -39,8 +39,8 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
 
     /** @hidden */
     constructor() {
+        this.clicked = this._clicked.asObservable();
         const ngZone = inject(NgZone);
-        const destroyed$ = inject(DestroyedService);
         combineLatest([this._viewInit$.pipe(delayWhen(() => ngZone.onStable.asObservable())), this._selected$])
             .pipe(
                 tap(() => {
@@ -48,12 +48,21 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
                         this._createDot();
                     }
                 }),
-                tap(([_, selected]) => {
+                tap(([, selected]) => {
                     selected ? this._showDot() : this._hideDot();
                 }),
-                takeUntil(destroyed$)
+                takeUntilDestroyed()
             )
             .subscribe();
+    }
+
+    /** @hidden */
+    @HostListener('click', ['$event'])
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    _onClick($event: MouseEvent | KeyboardEvent): void {
+        $event.preventDefault();
+        this._clicked.next();
     }
 
     /** @hidden */
@@ -83,15 +92,6 @@ export class SegmentedButtonOptionDirective<T> implements AfterViewInit {
     private _hideDot(): void {
         this.renderer2.setAttribute(this._dotElement, 'aria-hidden', 'true');
         this.renderer2.setStyle(this._dotElement, 'display', 'none');
-    }
-
-    /** @hidden */
-    @HostListener('click', ['$event'])
-    @HostListener('keydown.enter', ['$event'])
-    @HostListener('keydown.space', ['$event'])
-    _onClick($event: MouseEvent | KeyboardEvent): void {
-        $event.preventDefault();
-        this._clicked.next();
     }
 
     /** @hidden */

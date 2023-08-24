@@ -1,17 +1,16 @@
 import { CdkPortalOutlet, ComponentPortal, DomPortal, Portal, TemplatePortal } from '@angular/cdk/portal';
-import { ComponentRef, Directive, EmbeddedViewRef, inject, Input, OnDestroy } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { ComponentRef, DestroyRef, Directive, EmbeddedViewRef, inject, Input, OnDestroy } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { combineLatest, first, map, Observable, of, shareReplay, Subject, tap } from 'rxjs';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { MenuComponent } from '../menu.component';
 import { FD_MENU_COMPONENT, TOGGLE_MENU_ITEM } from '../menu.tokens';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-menu-addon[glyph]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
 export class GlyphMenuAddonDirective implements OnDestroy {
     /**
@@ -42,7 +41,7 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     private _glyphName$ = new Subject<string | undefined>();
 
     /** @hidden */
-    private _destroyed$ = inject(DestroyedService);
+    private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     setGlyphPortalOutlet(outlet: CdkPortalOutlet): void {
@@ -90,7 +89,7 @@ export class GlyphMenuAddonDirective implements OnDestroy {
                         })
                     );
                 }),
-                takeUntil(this._destroyed$)
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe();
     }
