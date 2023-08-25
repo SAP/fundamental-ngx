@@ -54,6 +54,14 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
+function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is OptionItem<ItemType, ValueType> {
+    return isOptionItemBase<ValueType>(candidate) && 'item' in candidate;
+}
+
+function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionItemBase<ValueType> {
+    return typeof candidate === 'object' && candidate !== null && 'value' in candidate && 'label' in candidate;
+}
+
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
  * limited number of pre-defined options with a filter-enabled context.
@@ -77,7 +85,7 @@ import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent
+export class MultiInputComponent<ItemType = any, ValueType = any>
     implements
         MultiInputInterface,
         ControlValueAccessor,
@@ -114,7 +122,7 @@ export class MultiInputComponent
 
     /** Values to be displayed in the unfiltered dropdown. */
     @Input()
-    dropdownValues: any[] = [];
+    dropdownValues: Array<ItemType | OptionItem<ItemType, ValueType>> = [];
 
     /** Whether to open the dropdown when the addon button is clicked. */
     @Input()
@@ -139,11 +147,12 @@ export class MultiInputComponent
 
     /** Selected dropdown items. */
     @Input()
-    set selected(values: any[]) {
+    set selected(values: ValueType[]) {
         this._selectionModel.clear();
         values?.forEach((item) => this._selectionModel.select(item));
     }
-    get selected(): any[] {
+
+    get selected(): ValueType[] {
         return this._selectionModel.selected;
     }
 
@@ -166,7 +175,7 @@ export class MultiInputComponent
      * See multi input examples for details.
      */
     @Input()
-    valueFn = this._defaultValueFn;
+    valueFn: (item: ItemType) => ValueType = this._defaultValueFn;
 
     /**
      * Display function. Accepts an object of the same type as the
@@ -175,7 +184,7 @@ export class MultiInputComponent
      * See multi input examples for details.
      */
     @Input()
-    displayFn = this._defaultDisplay;
+    displayFn: (item: ItemType) => string = this._defaultDisplay;
 
     /**
      * Parse function. Used for submitting new tokens. Accepts a string by default.
@@ -262,7 +271,7 @@ export class MultiInputComponent
     mobileConfig: MobileModeConfig = { hasCloseButton: true, approveButtonText: 'Select' };
 
     /**
-     * Whether or not to return results where the input matches the entire string. By default, only results that start
+     * Whether to return results where the input matches the entire string. By default, only results that start
      * with the input search term will be returned.
      */
     @Input()
@@ -295,7 +304,7 @@ export class MultiInputComponent
 
     /** Event emitted when the selected items change. Use *$event* to access the new selected array. */
     @Output()
-    readonly selectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
+    readonly selectedChange: EventEmitter<ValueType[]> = new EventEmitter<ValueType[]>();
 
     /** Whether multi input popover body should be opened */
     @Input()
@@ -342,16 +351,16 @@ export class MultiInputComponent
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    readonly optionItems$ = new BehaviorSubject<OptionItem[]>([]);
+    readonly optionItems$ = new BehaviorSubject<OptionItem<ItemType, ValueType>[]>([]);
 
     /** @hidden */
     readonly _searchTermCtrl = new FormControl('');
 
     /** @hidden */
-    readonly _selectionModel = new SelectionModel<any>(true);
+    readonly _selectionModel = new SelectionModel<ValueType>(true);
 
     /** @hidden */
-    readonly _viewModel$: Observable<ViewModel> = this._getViewModel();
+    readonly _viewModel$: Observable<ViewModel<ItemType, ValueType>> = this._getViewModel();
 
     /** @hidden */
     _dir: string;
@@ -366,12 +375,6 @@ export class MultiInputComponent
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
-    onChange: (value: any) => void = () => {};
-
-    /** @hidden */
-    onTouched = (): void => {};
-
-    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -383,6 +386,40 @@ export class MultiInputComponent
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
+
+    /** @hidden CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        // TODO: this icon flip may be addressed in styles in the future
+        if (this.glyph === 'value-help' && this._dir === 'rtl') {
+            const icon = this.elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
+            if (icon) {
+                icon.style.transform = 'scaleX(-1)';
+            }
+        }
+
+        return ['fd-multi-input', 'fd-multi-input-custom', this.class];
+    }
+
+    /** @hidden */
+    @HostListener('focusout', ['$event'])
+    private _focusOut(event: FocusEvent): void {
+        if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
+            this.onTouched();
+        }
+    }
+
+    /** @hidden */
+    _trackBy = (index: number, item: any): ValueType => this.valueFn(item.value);
+
+    /** @hidden */
+    onChange: (value: any) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -449,23 +486,6 @@ export class MultiInputComponent
         this._subscriptions.unsubscribe();
     }
 
-    /** @hidden CssClassBuilder interface implementation
-     * function must return single string
-     * function is responsible for order which css classes are applied
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        // TODO: this icon flip may be addressed in styles in the future
-        if (this.glyph === 'value-help' && this._dir === 'rtl') {
-            const icon = this.elementRef.nativeElement.querySelector('.sap-icon--value-help') as HTMLElement;
-            if (icon) {
-                icon.style.transform = 'scaleX(-1)';
-            }
-        }
-
-        return ['fd-multi-input', 'fd-multi-input-custom', this.class];
-    }
-
     /** @hidden */
     registerOnChange(fn: (selected: any[]) => void): void {
         this.onChange = fn;
@@ -489,7 +509,7 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    writeValue(selected: any[]): void {
+    writeValue(selected: ValueType[]): void {
         this.selected = selected;
 
         this._changeDetRef.markForCheck();
@@ -753,8 +773,8 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _defaultValueFn(value: any): any {
-        return value;
+    private _defaultValueFn(value: ItemType | ValueType): ValueType {
+        return value as ValueType;
     }
 
     /** @hidden */
@@ -763,7 +783,7 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _defaultParse(str: any): string {
+    private _defaultParse(str: string): string {
         return str;
     }
 
@@ -820,8 +840,11 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _getOptionItem(item: any): OptionItem {
-        const { label, value } = this._getValueAndLabel(item);
+    private _getOptionItem(item: ItemType | OptionItem<ItemType, ValueType>): OptionItem<ItemType, ValueType> {
+        if (isOptionItem<ItemType, ValueType>(item)) {
+            return item;
+        }
+        const { label, value } = this._getValueAndLabelOfItem(item);
         return {
             item,
             label,
@@ -831,25 +854,33 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _getValueAndLabel(itemOrValue: any, optionItems: OptionItem[] = []): OptionItemBase {
-        if (optionItems.length > 0) {
-            itemOrValue = optionItems.find((c) => c.value === itemOrValue)?.item ?? itemOrValue;
-        }
-        const defaultDisplay = typeof itemOrValue === 'object' ? itemOrValue[Object.keys(itemOrValue)[0]] : itemOrValue;
-        const value = this.valueFn(itemOrValue) ?? defaultDisplay;
-        const label = this.displayFn(itemOrValue) ?? defaultDisplay;
+    private _getValueAndLabelOfItem(item: ItemType): OptionItemBase<ValueType> {
+        const defaultDisplay = typeof item === 'object' && item !== null ? item[Object.keys(item)[0]] : item;
+        const value = this.valueFn(item) ?? defaultDisplay;
+        const label = this.displayFn(item) ?? defaultDisplay;
         return { label, value };
     }
 
     /** @hidden */
-    private _getViewModel(): Observable<ViewModel> {
+    private _getItemByValue(
+        value: ValueType,
+        optionItems: OptionItem<ItemType, ValueType>[] = []
+    ): ItemType | undefined {
+        return optionItems.find((c) => c.value === value)?.item;
+    }
+
+    /** @hidden */
+    private _getViewModel(): Observable<ViewModel<ItemType, ValueType>> {
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
             this._selectionModel.changed.pipe(startWith(null)),
             this.optionItems$
         ]).pipe(
             map(([, , optionItems]) => {
-                const selected = this.selected.map((c) => this._getValueAndLabel(c, optionItems));
+                const selected = this.selected.map((v) => {
+                    const item = this._getItemByValue(v, optionItems);
+                    return this._getValueAndLabelOfItem(item as ItemType);
+                });
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value ?? '';
                 const filtered = this.filterFn(
@@ -866,30 +897,23 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    @HostListener('focusout', ['$event'])
-    private _focusOut(event: FocusEvent): void {
-        if (!this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
-            this.onTouched();
-        }
-    }
-
-    /** @hidden */
     private async _getAriaLabel(): Promise<void> {
         const lang = await firstValueFrom(this._language);
         this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }
 
-interface OptionItem<T = any> extends OptionItemBase {
-    item: T;
+export interface OptionItem<ItemType = any, ValueType = any> extends OptionItemBase<ValueType> {
+    item: ItemType;
     isSelected: boolean;
 }
-interface OptionItemBase {
+
+export interface OptionItemBase<ValueType = any> {
     label: string;
-    value: any;
+    value: ValueType;
 }
 
-interface ViewModel {
-    selectedOptions: OptionItemBase[];
-    displayedOptions: OptionItem[];
+interface ViewModel<ItemType = any, ValueType = any> {
+    selectedOptions: OptionItemBase<ValueType>[];
+    displayedOptions: OptionItem<ItemType, ValueType>[];
 }

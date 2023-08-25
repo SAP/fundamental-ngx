@@ -62,7 +62,7 @@
                 tabindex="-1"
             >
                 <fd-token
-                    *ngFor="let option of viewModel.selectedOptions; trackBy: valueFn"
+                    *ngFor="let option of viewModel.selectedOptions; trackBy: _trackBy"
                     [disabled]="disabled"
                     (onCloseClick)="_onTokenClick(option.value, false, $event)"
                     (onRemove)="_onTokenClick(option.value, false)"
@@ -104,14 +104,14 @@
             class="fd-multi-input-menu-overflow"
             [selection]="true"
             [mobileMode]="mobile"
-            [style.maxHeight]="!mobile ? maxHeight : 'auto'"
+            [style.max-height]="!mobile ? maxHeight : 'auto'"
             [byline]="byline"
             (focusEscapeList)="handleListFocusEscape($event)"
-            [style.minWidth]="'100%'"
+            [style.min-width]="'100%'"
             aria-multiselectable="true"
         >
             <li
-                *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: valueFn"
+                *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: _trackBy"
                 fd-list-item
                 [attr.aria-label]="option.label"
                 (click)="_onCheckboxClick(option.value, $event, idx, true)"

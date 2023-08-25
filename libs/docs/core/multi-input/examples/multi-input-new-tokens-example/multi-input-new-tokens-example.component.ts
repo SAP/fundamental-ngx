@@ -23,11 +23,11 @@ export class MultiInputNewTokensExampleComponent {
 
     selected: Item[] = [];
 
-    displayFunc(obj: any): string {
+    displayFunc(obj: Item): string {
         return obj.name;
     }
 
-    parseFunc(value: string): Record<string, any> {
+    parseFunc(value: string): Item {
         return { name: value };
     }
 
