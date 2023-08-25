@@ -6,6 +6,7 @@ import { By } from '@angular/platform-browser';
 import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { PlatformSliderModule } from './slider.module';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-test-slider',
@@ -68,7 +69,7 @@ import { PlatformSliderModule } from './slider.module';
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
+    imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule, ContentDensityModule]
 })
 class TestSliderComponent {
     customValues: SliderCustomValue[] = [

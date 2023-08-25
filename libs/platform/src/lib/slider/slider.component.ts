@@ -17,7 +17,7 @@ import {
 import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { SliderTickMark, SliderComponent as SliderComponent_1 } from '@fundamental-ngx/core/slider';
+import { SliderTickMark, SliderComponent as CoreSliderComponent } from '@fundamental-ngx/core/slider';
 import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 
 export type SliderCustomValue = Omit<SliderTickMark, 'position'>;
@@ -39,7 +39,7 @@ export class SliderChangeEvent<T extends SliderControlValue = any> {
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SliderComponent, multi: true }],
     standalone: true,
-    imports: [SliderComponent_1, FormsModule]
+    imports: [CoreSliderComponent, FormsModule]
 })
 export class SliderComponent extends BaseInput {
     /** User's custom classes */
