@@ -33,7 +33,7 @@ import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 
 import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DateTimePicker } from './datetime-picker.model';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -369,17 +369,12 @@ export class DatetimePickerComponent<D>
     /** @hidden Reference to the inner calendar component. */
     @ViewChild(CalendarComponent, { static: false })
     private set _calendarCmp(calendar: CalendarComponent<D>) {
-        if (!this.isOpen) {
-            return;
-        }
-
-        calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
-        calendar?.initialFocus();
+        setTimeout(() => {
+            calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
+            calendar?.initialFocus();
+        });
         this._calendarComponent = calendar;
     }
-
-    /** @hidden */
-    _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
     @ViewChild('inputGroupComponent', {
@@ -396,6 +391,9 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     @ViewChild('pickerTemplate')
     private readonly _pickerTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
     _message: string | null = null;
@@ -451,6 +449,11 @@ export class DatetimePickerComponent<D>
 
     /** @hidden */
     private readonly _dynamicComponentService = inject(DynamicComponentService);
+
+    /** @hidden */
+    private readonly _focusTrapService = inject(FocusTrapService, {
+        optional: true
+    });
 
     /** @hidden */
     private _mobileComponentRef: Nullable<ComponentRef<DatetimePickerMobileComponent<D>>>;
@@ -591,6 +594,7 @@ export class DatetimePickerComponent<D>
     /** Opens the popover. */
     openPopover(): void {
         if (!this.isOpen && !this.disabled) {
+            this._focusTrapService?.pauseCurrentFocusTrap();
             this._showPopoverContents = true;
             this._changeDetRef.detectChanges();
             this.isOpen = true;
@@ -606,6 +610,7 @@ export class DatetimePickerComponent<D>
         this.onClose.emit();
         this.isOpen = false;
         this._onOpenStateChanged(this.isOpen);
+        this._focusTrapService?.unpauseCurrentFocusTrap();
         this.handleOnTouched();
     }
 

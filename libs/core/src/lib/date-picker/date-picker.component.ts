@@ -41,7 +41,7 @@ import { FormItemControl, PopoverFormMessageService, registerFormItemControl } f
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
 import { createMissingDateImplementationError } from './errors';
-import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from './tokens';
@@ -431,6 +431,11 @@ export class DatePickerComponent<D>
     private readonly _dynamicComponentService = inject(DynamicComponentService);
 
     /** @hidden */
+    private readonly _focusTrapService = inject(FocusTrapService, {
+        optional: true
+    });
+
+    /** @hidden */
     private _mobileComponentRef: Nullable<ComponentRef<DatePickerMobileComponent<D>>>;
 
     /** @hidden */
@@ -529,6 +534,11 @@ export class DatePickerComponent<D>
             const calendar = this._calendars.first;
             this._calendarComponent = calendar;
             setTimeout(() => {
+                if (this._calendarComponent) {
+                    this._focusTrapService?.pauseCurrentFocusTrap();
+                } else {
+                    this._focusTrapService?.unpauseCurrentFocusTrap();
+                }
                 calendar?.setCurrentlyDisplayed(this._calendarPendingDate);
                 calendar?.initialFocus();
             });
