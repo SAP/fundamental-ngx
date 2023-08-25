@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import { KeyUtil } from '../../functions/key-util';
@@ -44,6 +45,10 @@ export class AutoCompleteDirective {
     /** Whether the auto complete directive should be enabled */
     @Input()
     enable = true;
+
+    /** Matcher function for testing the str for a search term */
+    @Input()
+    matcher = (str: string, searchTerm: string): boolean => str.startsWith(searchTerm);
 
     /** Display function. Accepts an object of the same type as the
      * items passed to dropdownValues as argument, and outputs a string.
@@ -95,7 +100,7 @@ export class AutoCompleteDirective {
                 this.oldValue = this.inputText;
 
                 const item = this.options.find((option) =>
-                    this.displayFn(option).toLocaleLowerCase().startsWith(this.inputText.toLocaleLowerCase())
+                    this.matcher(this.displayFn(option).toLocaleLowerCase(), this.inputText.toLocaleLowerCase())
                 );
 
                 if (item) {
