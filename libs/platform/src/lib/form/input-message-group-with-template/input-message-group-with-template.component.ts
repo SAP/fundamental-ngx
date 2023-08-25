@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, V
 
 import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
 import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverControlComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
+import { NgTemplateOutlet } from '@angular/common';
 
 /**
  * This extends core implementation  to support richer extensibility and instead of relying
@@ -14,7 +16,9 @@ import { TriggerConfig } from '@fundamental-ngx/core/popover';
     templateUrl: './input-message-group-with-template.component.html',
     styleUrls: ['./input-message-group-with-template.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PopoverComponent, PopoverControlComponent, NgTemplateOutlet, PopoverBodyComponent]
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InputMessageGroupWithTemplate extends FormInputMessageGroupComponent {

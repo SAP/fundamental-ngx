@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
-import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 import { SettingsGeneratorService } from '../../settings-generator.service';
 
 import { SettingsGeneratorSectionComponent } from './settings-generator-section.component';
+import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 
 class SettingsGeneratorServiceStub {
     _addFormGenerator(_: string[]): void {}
@@ -16,8 +15,7 @@ describe('SettingsGeneratorSectionComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PipeModule, PlatformFormGeneratorModule],
-            declarations: [SettingsGeneratorSectionComponent],
+            imports: [PlatformFormGeneratorModule, SettingsGeneratorSectionComponent],
             providers: [
                 {
                     provide: SettingsGeneratorService,

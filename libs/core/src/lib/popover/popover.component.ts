@@ -226,6 +226,11 @@ export class PopoverComponent
         this._cdr.markForCheck();
     }
 
+    /** Temporary sets the ignoring of the event triggers. */
+    setIgnoreTriggers(ignore: boolean): void {
+        this._popoverService.setIgnoreTriggers(ignore);
+    }
+
     /**
      * Method called to change position of popover,
      * recommended to be used only when popover is opened, otherwise change position or cdkPlacement

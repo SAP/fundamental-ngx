@@ -4,23 +4,49 @@ import {
     Component,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
 import { WizardDialogData } from '../../interfaces/wizard-dialog-data.interface';
 import { WizardTitle } from '../../interfaces/wizard-title.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
+import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-dialog-wizard-generator',
     templateUrl: './dialog-wizard-generator.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [WizardGeneratorService, FormGeneratorService]
+    providers: [WizardGeneratorService, FormGeneratorService],
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        WizardBodyComponent,
+        NgIf,
+        BarModule,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgTemplateOutlet,
+        MessageBoxModule,
+        InitialFocusDirective
+    ]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /** @hidden */
@@ -78,11 +104,13 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     reviewButtonTemplate?: TemplateRef<HTMLElement>;
 
     /** @hidden */
+    private readonly _messageBoxService = inject(MessageBoxService);
+
+    /** @hidden */
     constructor(
         _wizardGeneratorService: WizardGeneratorService,
         _cd: ChangeDetectorRef,
-        private _dialogRef: DialogRef<WizardDialogData>,
-        private _dialogService: DialogService
+        private _dialogRef: DialogRef<WizardDialogData>
     ) {
         super(_wizardGeneratorService, _cd);
 
@@ -134,9 +162,9 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const template = this.confirmationDialogTemplate || this.defaultConfirmationDialogTemplate;
 
-        const dialogRef = this._dialogService.open(template, { responsivePadding: true });
+        const messageBoxRef = this._messageBoxService.open(template, { responsivePadding: true });
 
-        dialogRef.afterClosed
+        messageBoxRef.afterClosed
             .pipe(
                 filter((result) => result),
                 takeUntil(this._onDestroy$)

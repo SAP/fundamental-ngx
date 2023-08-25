@@ -4,12 +4,20 @@ import {
     FormattedFormStep,
     WizardGeneratorSummaryItem
 } from '../../../interfaces/wizard-generator-summary-item.interface';
+import { NgFor } from '@angular/common';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fdp-wizard-summary-section',
     templateUrl: './wizard-summary-section.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgFor, TitleComponent, LayoutGridModule, FormLabelModule, PlatformLinkModule, FdTranslatePipe]
 })
 export class WizardSummarySectionComponent {
     /**

@@ -32,7 +32,8 @@ export const inputGroupInputChildProvider: Provider = {
     selector: 'fdp-input-group-input',
     template: '',
     providers: [inputGroupInputChildProvider],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class InputGroupInputComponent {
     /** InputType 'text' | 'number' | 'email' | 'password' */

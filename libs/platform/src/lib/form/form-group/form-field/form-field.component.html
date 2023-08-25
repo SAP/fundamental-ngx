@@ -28,11 +28,6 @@
         [class]="_fieldColumnLayoutClass"
         [attr.aria-labelledby]="'fdp-form-label-' + id"
     >
-        <!--
-         Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to
-         all the field e.g.: [triggers]="['mouseenter', 'mouseleave']"
-         -->
-
         <ng-template #triggerItem>
             <ng-content></ng-content>
         </ng-template>
@@ -62,6 +57,32 @@
             </ng-container>
         </fd-form-message>
     </fdp-input-message-group>
+</ng-template>
+
+<ng-template #innerErrorRenderers>
+    <ng-container *ngIf="hasErrors() && groupedErrors.length > 0">
+        <ng-container *ngFor="let error of groupedErrors">
+            <ng-template
+                [ngIf]="error.directive._headingTemplateRef"
+                [ngTemplateOutlet]="error.directive._headingTemplateRef"
+                [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+            >
+            </ng-template>
+            <ng-container *ngIf="error.directive._headingTemplateRef && error.directive._descriptionTemplateRef">
+                <br />
+            </ng-container>
+            <ng-template
+                [ngIf]="error.directive._descriptionTemplateRef"
+                [ngTemplateOutlet]="error.directive._descriptionTemplateRef"
+                [ngTemplateOutletContext]="{ $implicit: error.error, label: label }"
+            >
+            </ng-template>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="groupedErrors.length === 0 && hasErrors() && i18Strings">
+        <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
+        </ng-container>
+    </ng-container>
 </ng-template>
 
 <ng-template #labelTemplate>

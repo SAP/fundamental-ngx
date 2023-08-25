@@ -9,7 +9,7 @@ import {
     ViewEncapsulation,
     inject
 } from '@angular/core';
-import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Component({
@@ -74,6 +74,10 @@ export class FormInputMessageGroupComponent {
     /** @hidden */
     @ViewChild('popoverPlacementContainer', { static: false, read: ElementRef })
     _popoverPlacementContainer: ElementRef | undefined;
+
+    /** @hidden */
+    @ViewChild('popover')
+    _popover: PopoverComponent;
 
     /** @hidden */
     readonly _elementRef = inject(ElementRef);

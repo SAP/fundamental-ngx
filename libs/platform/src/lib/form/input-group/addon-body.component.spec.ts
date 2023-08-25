@@ -8,7 +8,9 @@ import { ContentDensityModule, ContentDensityMode } from '@fundamental-ngx/core/
 @Component({
     template: `<fdp-input-group-addon-body [fdContentDensity]="contentDensity" [hasButton]="hasButton"
         >$</fdp-input-group-addon-body
-    >`
+    >`,
+    standalone: true,
+    imports: [InputGroupAddonBodyComponent, ContentDensityModule]
 })
 class TextAddonHostComponent {
     @ViewChild(InputGroupAddonBodyComponent) addon: InputGroupAddonBodyComponent;
@@ -22,8 +24,7 @@ describe('Input group addon with a text', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TextAddonHostComponent, InputGroupAddonBodyComponent],
-            imports: [ContentDensityModule]
+            imports: [TextAddonHostComponent]
         }).compileComponents();
     }));
 

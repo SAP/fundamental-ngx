@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 // Increasing integer for generating unique ids for radio components.
 let nextUniqueId = 0;
@@ -10,7 +11,9 @@ let nextUniqueId = 0;
     selector: 'fdp-option',
     template: `<li fd-option [id]="id" [value]="value" [disabled]="disabled"><ng-content></ng-content></li>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SelectModule]
 })
 export class OptionComponent {
     /** Option id attribute */

@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormStates } from './form-state';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export interface FormFieldErrorContext<T> {
     label: string;
@@ -33,4 +34,9 @@ export interface FormErrorDescription<T = any> {
 export interface FormFieldErrorDirectiveContext {
     directive: FormError;
     error: any;
+}
+
+export interface FormFieldAdvancedStateMessage {
+    template: Nullable<TemplateRef<any>>;
+    hasErrors: boolean;
 }

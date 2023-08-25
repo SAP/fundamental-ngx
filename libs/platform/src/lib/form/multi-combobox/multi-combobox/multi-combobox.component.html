@@ -155,6 +155,7 @@
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fdp-multi-combobox__list fd-list--multi-input"
+        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
         [id]="id + '-result'"
         role="listbox"
         [style.maxHeight]="!mobile && maxHeight"
@@ -172,6 +173,16 @@
             [type]="state || 'default'"
             [innerHtml]="stateMessage"
         ></li>
+
+        <li
+            *ngIf="advancedStateMessage?.hasErrors && advancedStateMessage?.template"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state || 'default'"
+        >
+            <ng-template [ngTemplateOutlet]="advancedStateMessage!.template!"></ng-template>
+        </li>
 
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">

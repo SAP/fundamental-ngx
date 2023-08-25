@@ -22,7 +22,8 @@ import {
     SimpleChanges,
     SkipSelf,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewChildren
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
@@ -62,6 +63,11 @@ import {
 } from '../fdp-form.tokens';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
 import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FormLabelModule, FormMessageModule, FormItemModule } from '@fundamental-ngx/core/form';
+import { NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
 
 let defaultId = 0;
 
@@ -87,7 +93,21 @@ const formGroupChildProvider: Provider = {
     templateUrl: 'form-field.component.html',
     styleUrls: ['./form-field.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService]
+    providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
+    standalone: true,
+    imports: [
+        FormItemModule,
+        NgIf,
+        NgTemplateOutlet,
+        InputMessageGroupWithTemplate,
+        NgFor,
+        FormMessageModule,
+        FormLabelModule,
+        LinkComponent,
+        IconModule,
+        InlineHelpModule,
+        AsyncPipe
+    ]
 })
 export class FormFieldComponent
     implements PlatformFormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit, OnChanges
@@ -287,15 +307,23 @@ export class FormFieldComponent
     formFieldExtras?: ElementRef<HTMLElement>;
 
     /** @hidden */
-    @ContentChildren(FormFieldErrorDirective)
-    private _errorDirectiveQuery: QueryList<FormError>;
-
-    /** @hidden */
     @ViewChild('labelCol') labelCol?: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ViewChild(InputMessageGroupWithTemplate, { read: ElementRef })
     inputMessageGroup: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    @ViewChild('innerErrorRenderers')
+    innerErrorRenderers: TemplateRef<any>;
+
+    /** @hidden */
+    @ContentChildren(FormFieldErrorDirective)
+    private _errorDirectiveQuery: QueryList<FormError>;
+
+    /** @hidden */
+    @ViewChildren(InputMessageGroupWithTemplate)
+    private readonly _inputMessageGroupCmp: QueryList<InputMessageGroupWithTemplate>;
 
     /** Combined Error directives from field itself and parent form container. */
     get errorDirectives(): FormError[] {
@@ -589,6 +617,7 @@ export class FormFieldComponent
         });
         this._updateControlProperties();
         this._validateErrorHandler();
+        this._listenToFormMessage();
         this._cd.detectChanges();
     }
 
@@ -752,6 +781,25 @@ export class FormFieldComponent
      */
     isStringHint(hintOptions: HintContent): hintOptions is string {
         return typeof hintOptions === 'string';
+    }
+
+    /**
+     * @hidden
+     * Listens to form message component changes and passes its instance to the form control component.
+     */
+    private _listenToFormMessage(): void {
+        this._inputMessageGroupCmp.changes
+            .pipe(
+                startWith(null),
+                map(() => this._inputMessageGroupCmp.first),
+                takeUntil(this._destroyed$)
+            )
+            .subscribe((component) => {
+                if (!this.control) {
+                    return;
+                }
+                this.control!.formMessage = component;
+            });
     }
 
     /** @hidden */

@@ -1,4 +1,5 @@
 <fd-popover
+    #popover
     (isOpenChange)="openChanged($event)"
     additionalBodyClass="fd-popover__body--input-message-group"
     [closeOnOutsideClick]="closeOnOutsideClick"
@@ -7,6 +8,7 @@
     [isOpen]="isOpen"
     [placement]="placement"
     [triggers]="triggers"
+    [disableScrollbar]="true"
     class="fd-form-input-message-group fd-popover--input-message-group"
 >
     <fd-popover-control>

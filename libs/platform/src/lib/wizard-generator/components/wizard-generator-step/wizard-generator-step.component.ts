@@ -32,12 +32,16 @@ import {
 } from '../../wizard-generator.service';
 import { WizardGeneratorStep } from '../../interfaces/wizard-step.interface';
 import { WizardStepForms, WizardStepSubmittedForms } from '../../interfaces/wizard-generator-forms.interface';
+import { NgIf, NgFor } from '@angular/common';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fdp-wizard-generator-step',
     templateUrl: './wizard-generator-step.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, TitleComponent, NgFor, FormGeneratorComponent]
 })
 export class WizardGeneratorStepComponent implements WizardGeneratorStep, OnInit, OnDestroy, OnChanges {
     /**

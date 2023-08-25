@@ -16,11 +16,13 @@
     [value]="value"
     [state]="state"
     [stateMessage]="stateMessage"
+    [advancedStateMessage]="advancedStateMessage"
     [mobile]="mobile"
     [mobileConfig]="mobileConfig"
     [inline]="inline"
     [(ngModel)]="value"
     (valueChange)="_onSelection($event)"
+    (isOpenChange)="_onOpenChange($event)"
 >
     <ng-content></ng-content>
     <li fd-option *ngIf="noValueLabel" [disabled]="false" [value]="null">

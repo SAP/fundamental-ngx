@@ -18,11 +18,11 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
-import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ContentDensityModule, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     ComboBoxDataSource,
@@ -38,6 +38,14 @@ import { ComboboxConfig } from '../combobox.config';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
+import { ListSecondaryDirective, ListModule } from '@fundamental-ngx/core/list';
+import { FormMessageModule, FormInputMessageGroupModule } from '@fundamental-ngx/core/form';
+import { AutoCompleteDirective } from '../../auto-complete/auto-complete.directive';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverBodyComponent, PopoverControlComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
+import { NgTemplateOutlet, NgIf, NgFor, NgClass } from '@angular/common';
 
 export class ComboboxSelectionChangeEvent {
     /**
@@ -60,6 +68,26 @@ export class ComboboxSelectionChangeEvent {
     providers: [
         { provide: FD_FORM_FIELD_CONTROL, useExisting: ComboboxComponent, multi: true },
         contentDensityObserverProviders()
+    ],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        FormInputMessageGroupModule,
+        InputGroupModule,
+        FormsModule,
+        AutoCompleteDirective,
+        NgIf,
+        FormMessageModule,
+        ListModule,
+        NgFor,
+        NgClass,
+        ListSecondaryDirective,
+        SearchHighlightPipe,
+        FdTranslatePipe,
+        ContentDensityModule
     ]
 })
 export class ComboboxComponent extends BaseCombobox implements ComboboxInterface, OnInit, AfterViewInit {

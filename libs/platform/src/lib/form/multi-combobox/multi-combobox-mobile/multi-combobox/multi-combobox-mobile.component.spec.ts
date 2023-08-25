@@ -35,8 +35,7 @@ describe('MultiComboboxMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule],
-            declarations: [MultiComboboxMobileComponent],
+            imports: [DialogModule, NoopAnimationsModule, MultiComboboxMobileComponent],
             providers: [
                 DynamicComponentService,
                 {

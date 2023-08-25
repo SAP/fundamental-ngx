@@ -1,20 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
-import { TitleModule } from '@fundamental-ngx/core/title';
-import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 import {
     FORM_GENERATOR_CONFIG,
     FORM_GENERATOR_ITEM_CONFIG,
     FormGeneratorModuleConfig,
     PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { WizardGeneratorStepComponent } from './components/wizard-generator-step/wizard-generator-step.component';
 import { WizardBodyComponent } from './components/wizard-body/wizard-body.component';
 import { DialogWizardGeneratorComponent } from './components/dialog-wizard-generator/dialog-wizard-generator.component';
@@ -26,9 +16,6 @@ import { WizardGeneratorFinishButtonDirective } from './directives/wizard-genera
 import { WizardGeneratorComponent } from './components/wizard-generator/wizard-generator.component';
 import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generator-summary-step.directive';
 import { WizardGeneratorReviewButtonDirective } from './directives/wizard-generator-review-button.directive';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { RepeatModule } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Adds Wizard Generator functionality to your application.
@@ -38,7 +25,8 @@ import { RepeatModule } from '@fundamental-ngx/cdk/utils';
  * * With `withConfig()` method which allows passing custom default configuration.
  */
 @NgModule({
-    declarations: [
+    imports: [
+        PlatformFormGeneratorModule,
         WizardGeneratorComponent,
         WizardGeneratorStepComponent,
         WizardBodyComponent,
@@ -49,21 +37,6 @@ import { RepeatModule } from '@fundamental-ngx/cdk/utils';
         WizardGeneratorFinishButtonDirective,
         WizardGeneratorSummaryStepDirective,
         WizardGeneratorReviewButtonDirective
-    ],
-    imports: [
-        CommonModule,
-        DialogModule,
-        I18nModule,
-        ButtonModule,
-        WizardModule,
-        PlatformFormGeneratorModule,
-        PlatformButtonModule,
-        LayoutGridModule,
-        TitleModule,
-        FormLabelModule,
-        PlatformLinkModule,
-        SkeletonModule,
-        RepeatModule
     ],
     exports: [
         WizardGeneratorComponent,

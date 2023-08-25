@@ -8,7 +8,8 @@ import { StepInputComponent } from './base.step-input';
  * This directive is intendant to be a bridge between input control and BaseStepInput Component.
  */
 @Directive({
-    selector: '[fdpStepInputControl]'
+    selector: '[fdpStepInputControl]',
+    standalone: true
 })
 export class StepInputControlDirective {
     /** @hidden */

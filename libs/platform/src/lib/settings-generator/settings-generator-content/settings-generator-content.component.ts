@@ -11,8 +11,8 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
+import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
 import {
     GroupedFormSettingsItem,
     GroupedTemplateSettingsItem,
@@ -21,12 +21,29 @@ import {
     SettingsTemplateTab,
     TemplateSettingsItem
 } from '../models/settings.model';
+import { SettingsGeneratorSectionComponent } from './settings-generator-section/settings-generator-section.component';
+import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fdp-settings-generator-content',
     templateUrl: './settings-generator-content.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TitleComponent,
+        NgIf,
+        ButtonModule,
+        SkeletonModule,
+        TabsModule,
+        NgFor,
+        SettingsGeneratorSectionComponent,
+        NgTemplateOutlet,
+        AsyncOrSyncPipe
+    ]
 })
 export class SettingsGeneratorContentComponent {
     /** @hidden */

@@ -9,7 +9,7 @@ import { TextAreaComponent } from './text-area.component';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { FormFieldComponent } from '../form-group/form-field/form-field.component';
 import { PlatformTextAreaModule } from './text-area.module';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-test-textarea',
@@ -78,7 +78,7 @@ describe('Basic Textarea', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule, ContentDensityModule],
             declarations: [BasicTextareaTestWrapperComponent]
         }).compileComponents();
     }));
@@ -159,7 +159,7 @@ describe('Advanced Textarea', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
+            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule, ContentDensityModule],
             declarations: [BasicTextareaTestWrapperComponent]
         }).compileComponents();
     }));

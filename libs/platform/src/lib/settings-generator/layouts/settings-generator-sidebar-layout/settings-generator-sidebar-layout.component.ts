@@ -10,7 +10,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { AsyncOrSyncPipe, Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
 import { SidebarSettingsGeneratorConfig } from '../../models/settings-config.model';
 import {
@@ -24,12 +24,26 @@ import { SettingsGeneratorContentComponent } from '../../settings-generator-cont
 import { FDP_SETTINGS_GENERATOR_CONFIG } from '../../tokens';
 import { BaseSettingsGeneratorLayout } from '../base-settings-generator-layout';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SettingsGeneratorSidebarIconComponent } from './settings-generator-sidebar-icon/settings-generator-sidebar-icon.component';
+import { NgFor, NgIf } from '@angular/common';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fdp-settings-generator-sidebar-layout',
     templateUrl: './settings-generator-sidebar-layout.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        ListModule,
+        NgFor,
+        NgIf,
+        SettingsGeneratorSidebarIconComponent,
+        SkeletonModule,
+        SettingsGeneratorContentComponent,
+        AsyncOrSyncPipe
+    ]
 })
 export class SettingsGeneratorSidebarLayoutComponent
     extends BaseSettingsGeneratorLayout

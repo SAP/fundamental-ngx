@@ -13,12 +13,17 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
 
 export class FileUploaderInvalidChangeEvent {
     /**
@@ -48,7 +53,9 @@ export class FileUploaderSelectionChangeEvent {
     selector: 'fdp-file-uploader',
     templateUrl: './platform-file-uploader.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true,
+    imports: [FileUploaderModule, FormsModule, ContentDensityModule]
 })
 export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     /** Button value */

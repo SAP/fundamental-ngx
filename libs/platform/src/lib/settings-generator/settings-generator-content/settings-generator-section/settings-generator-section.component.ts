@@ -15,8 +15,9 @@ import {
     SettingsTemplateTab,
     TemplateSettingsItem
 } from '../../models/settings.model';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { SettingsGeneratorService } from '../../settings-generator.service';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | SettingsItem;
 
@@ -24,7 +25,9 @@ export type SettingsSectionItemsModel = SettingsTemplateTab | SettingsFormTab | 
     selector: 'fdp-settings-generator-section',
     templateUrl: './settings-generator-section.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, FormGeneratorComponent, NgTemplateOutlet, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorSectionComponent {
     /**

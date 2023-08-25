@@ -68,6 +68,9 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _placementContainer: BasePopoverClass['placementContainer'];
 
+    /** @hidden */
+    private _ignoreTriggers = false;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -208,6 +211,11 @@ export class PopoverService extends BasePopoverClass {
         }
     }
 
+    /** Temporary sets the ignoring of the event triggers. */
+    setIgnoreTriggers(ignore: boolean): void {
+        this._ignoreTriggers = ignore;
+    }
+
     /** Equivalent for ngOnDestroy method, whether component is destroyed, this method should be called */
     onDestroy(): void {
         this._onDestroy$.next();
@@ -269,6 +277,9 @@ export class PopoverService extends BasePopoverClass {
             this._normalizeTriggers().forEach((trigger) => {
                 this._eventRef.push(
                     this._renderer.listen(this._triggerElement.nativeElement, trigger.trigger, (event: Event) => {
+                        if (this._ignoreTriggers) {
+                            return;
+                        }
                         const closeAction = !!trigger.closeAction;
                         const openAction = !!trigger.openAction;
                         this.toggle(openAction, closeAction);

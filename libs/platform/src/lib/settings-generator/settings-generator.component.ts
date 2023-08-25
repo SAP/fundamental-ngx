@@ -42,7 +42,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             provide: FDP_SETTINGS_GENERATOR,
             useExisting: SettingsGeneratorComponent
         }
-    ]
+    ],
+    standalone: true
 })
 export class SettingsGeneratorComponent implements SettingsGenerator, AfterViewInit, OnDestroy {
     /** @hidden */

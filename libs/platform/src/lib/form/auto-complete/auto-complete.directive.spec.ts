@@ -42,7 +42,8 @@ describe('AutoCompleteDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AutoCompleteDirective, TestComponent]
+            imports: [AutoCompleteDirective],
+            declarations: [TestComponent]
         }).compileComponents();
     }));
 
