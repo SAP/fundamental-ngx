@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-menu-with-icons-example',

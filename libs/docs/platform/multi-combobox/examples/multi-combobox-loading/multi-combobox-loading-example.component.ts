@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BaseDataProvider, MultiComboBoxDataSource } from '@fundamental-ngx/platform/shared';
 
-import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { JsonPipe } from '@angular/common';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import {
+    FdpFormGroupModule,
+    MultiComboboxSelectionChangeEvent,
+    PlatformMultiComboboxModule
+} from '@fundamental-ngx/platform/form';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { JsonPipe } from '@angular/common';
-import { PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 const OPTIONS = [
     { name: 'Apple', type: 'Fruits' },

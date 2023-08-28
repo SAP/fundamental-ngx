@@ -1,10 +1,10 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { NgFor } from '@angular/common';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-list-action-example',

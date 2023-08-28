@@ -1,14 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
-import { FdDropEvent } from '@fundamental-ngx/cdk/utils';
-import { RouterLink } from '@angular/router';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DragAndDropModule, FdDropEvent } from '@fundamental-ngx/cdk/utils';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { GridListModule } from '@fundamental-ngx/core/grid-list';
+import { GridListItemOutputEvent, GridListModule } from '@fundamental-ngx/core/grid-list';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 interface GridListItem {
     id: number;

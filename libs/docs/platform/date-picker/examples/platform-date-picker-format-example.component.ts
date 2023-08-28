@@ -3,15 +3,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 
 import { DateRange } from '@fundamental-ngx/core/calendar';
 import {
-    DatetimeAdapter,
-    DateTimeFormats,
     DATE_TIME_FORMATS,
+    DateTimeFormats,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     ...FD_DATETIME_FORMATS,

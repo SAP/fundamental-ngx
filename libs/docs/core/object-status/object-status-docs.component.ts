@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
 import {
-    ObjectStatusTextExampleComponent,
-    ObjectStatusTextIconExampleComponent,
-    ObjectStatusGenericExampleComponent,
-    ObjectStatusClickableAndIconExampleComponent,
-    ObjectStatusInvertedTextExampleComponent,
-    ObjectStatusInvertedGenericTextExampleComponent,
-    ObjectStatusLargeExampleComponent
-} from './examples/object-status-examples.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { ObjectStatusDefaultExampleComponent } from './examples/object-status-default-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import {
+    ObjectStatusClickableAndIconExampleComponent,
+    ObjectStatusGenericExampleComponent,
+    ObjectStatusInvertedGenericTextExampleComponent,
+    ObjectStatusInvertedTextExampleComponent,
+    ObjectStatusLargeExampleComponent,
+    ObjectStatusTextExampleComponent,
+    ObjectStatusTextIconExampleComponent
+} from './examples/object-status-examples.component';
 
 const objectStatusExamplesScss = 'object-status-examples.component.scss';
 

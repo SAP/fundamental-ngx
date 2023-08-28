@@ -1,20 +1,22 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarGeneratorExampleService } from './avatar-generator-example.service';
-import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
-import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent as PopoverComponent_1 } from '@fundamental-ngx/core/popover';
-import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
+import {
+    PopoverBodyComponent,
+    PopoverBodyHeaderDirective,
+    PopoverComponent,
+    PopoverComponent as PopoverComponent_1,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { AvatarGeneratorExampleService } from './avatar-generator-example.service';
 
 @Component({
     selector: 'fd-overflow-layout-complex-example',

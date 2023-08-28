@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { FocusableListModule } from '@fundamental-ngx/cdk/utils';
 import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { FocusableListDocsComponent } from './focusable-list-docs.component';
 import { FocusableListHeaderComponent } from './focusable-list-header/focusable-list-header.component';
-import { DefaultExampleComponent } from './examples/default-example/default-example.component';
-import { FocusableListModule } from '@fundamental-ngx/cdk/utils';
 
 const routes: Routes = [
     {

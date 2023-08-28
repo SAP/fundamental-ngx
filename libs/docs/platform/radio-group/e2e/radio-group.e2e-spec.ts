@@ -1,4 +1,3 @@
-import { RadioButtonGroupPage } from './radio-group.po';
 import {
     browserIsFirefox,
     click,
@@ -11,6 +10,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { RadioButtonGroupPage } from './radio-group.po';
 
 import {
     ariaChecked,

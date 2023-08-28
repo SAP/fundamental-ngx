@@ -1,31 +1,32 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { FormsModule } from '@angular/forms';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
-    TableDataSource,
     CollectionBooleanFilter,
+    CollectionCustomFilter,
     CollectionDateFilter,
     CollectionFilter,
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter,
+    FilterNumberStrategy,
+    FilterType,
+    PlatformTableModule,
     SortDirection,
     TableDataProvider,
-    TableState,
+    TableDataSource,
     TableFilterSelectOption,
-    FilterType,
-    CollectionCustomFilter,
-    FilterNumberStrategy
+    TableState
 } from '@fundamental-ngx/platform/table';
-import { FormsModule } from '@angular/forms';
-import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
-import { FdpViewSettingsFilterCustomDef } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import {
+    FdpViewSettingsFilterCustomDef,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-initial-state-example',

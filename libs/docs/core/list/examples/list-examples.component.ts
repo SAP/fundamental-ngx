@@ -1,18 +1,22 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { PopoverComponent } from '@fundamental-ngx/core';
-import { ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
-import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { NgClass } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent as PopoverComponent_1 } from '@fundamental-ngx/core/popover';
-import { ShellbarActionComponent } from '@fundamental-ngx/core/shellbar';
-import { PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
-import { ShellbarUserMenuComponent } from '@fundamental-ngx/core/shellbar';
-import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
-import { ShellbarTitleComponent } from '@fundamental-ngx/core/shellbar';
-import { ShellbarLogoComponent } from '@fundamental-ngx/core/shellbar';
-import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import {
+    PopoverBodyComponent,
+    PopoverComponent as PopoverComponent_1,
+    PopoverTriggerDirective
+} from '@fundamental-ngx/core/popover';
+import {
+    ShellbarActionComponent,
+    ShellbarActionsComponent,
+    ShellbarComponent,
+    ShellbarLogoComponent,
+    ShellbarTitleComponent,
+    ShellbarUser,
+    ShellbarUserMenu,
+    ShellbarUserMenuComponent
+} from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-list-example',

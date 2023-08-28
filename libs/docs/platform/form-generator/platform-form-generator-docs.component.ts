@@ -34,27 +34,30 @@ const defaultConfigSrc = 'platform-form-generator-global-config-example.ts';
 const loadingFormGeneratorhtml = 'loading/platform-form-generator-loading-example.component.html';
 const loadingFormGeneratorSrc = 'loading/platform-form-generator-loading-example.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    CodeSnippetComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformFormGeneratorAdvancedExampleComponent } from './examples/advanced/platform-form-generator-advanced-example.component';
 import { PlatformFormGeneratorLoadingExampleComponent } from './examples/loading/platform-form-generator-loading-example.component';
-import { CodeSnippetComponent } from '../../shared/src/lib/core-helpers/code-snippet/code-snippet.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { PlatformFormGeneratorInlineHelpExampleComponent } from './examples/platform-form-generator-inline-help-example.component';
-import { PlatformFormGeneratorCustomFieldLayoutExampleComponent } from './examples/platform-form-generator-custom-field-layout-example.component';
-import { RouterLink } from '@angular/router';
-import { PlatformFormGeneratorGroupingExampleComponent } from './examples/platform-form-generator-grouping-example.component';
-import { PlatformFormGeneratorNoColonsExampleComponent } from './examples/platform-form-generator-no-colons-example.component';
-import { PlatformFormGeneratorFieldLayoutExampleComponent } from './examples/platform-form-generator-field-layout-example.component';
-import { PlatformFormGeneratorCustomErrorExampleComponent } from './examples/platform-form-generator-custom-error-example.component';
-import { PlatformFormGeneratorProgramaticSubmitComponent } from './examples/platform-form-generator-programatic-submit.component';
 import { PlatformFormGeneratorCustomComponentExampleComponent } from './examples/platform-form-generator-custom-component-example.component';
-import { PlatformFormGeneratorObservableExampleComponent } from './examples/platform-form-generator-observable-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformFormGeneratorCustomErrorExampleComponent } from './examples/platform-form-generator-custom-error-example.component';
+import { PlatformFormGeneratorCustomFieldLayoutExampleComponent } from './examples/platform-form-generator-custom-field-layout-example.component';
 import { PlatformFormGeneratorExampleComponent } from './examples/platform-form-generator-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformFormGeneratorFieldLayoutExampleComponent } from './examples/platform-form-generator-field-layout-example.component';
+import { PlatformFormGeneratorGroupingExampleComponent } from './examples/platform-form-generator-grouping-example.component';
+import { PlatformFormGeneratorInlineHelpExampleComponent } from './examples/platform-form-generator-inline-help-example.component';
+import { PlatformFormGeneratorNoColonsExampleComponent } from './examples/platform-form-generator-no-colons-example.component';
+import { PlatformFormGeneratorObservableExampleComponent } from './examples/platform-form-generator-observable-example.component';
+import { PlatformFormGeneratorProgramaticSubmitComponent } from './examples/platform-form-generator-programatic-submit.component';
 
 @Component({
     selector: 'app-form-generator',

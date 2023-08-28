@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { StandardListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Address[] = new Array(6).fill(undefined).map((_, i) => ({ name: `Name${i + 1}` }));
 

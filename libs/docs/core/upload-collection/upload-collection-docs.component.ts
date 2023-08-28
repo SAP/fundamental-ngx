@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { UploadCollectionEmptyExampleComponent } from './examples/upload-collection-empty-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { UploadCollectionComplexExampleComponent } from './examples/upload-collection-complex-example.component';
 import { UploadCollectionCustomExampleComponent } from './examples/upload-collection-custom-example.component';
-import { UploadCollectionSmallExampleComponent } from './examples/upload-collection-small-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { UploadCollectionEmptyExampleComponent } from './examples/upload-collection-empty-example.component';
 import { UploadCollectionExampleComponent } from './examples/upload-collection-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { UploadCollectionSmallExampleComponent } from './examples/upload-collection-small-example.component';
 
 const uploadCollectionHtml = 'upload-collection-example.component.html';
 const uploadCollectionTs = 'upload-collection-example.component.ts';

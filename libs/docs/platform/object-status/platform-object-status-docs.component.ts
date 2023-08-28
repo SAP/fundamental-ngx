@@ -1,20 +1,23 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformObjectStatusLargeExampleComponent } from './examples/platform-object-status-large-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformObjectStatusClickableAndIconExampleComponent } from './examples/platform-object-status-clickable-and-icon-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import {
     PlatformObjectStatusExampleComponent,
-    PlatformObjectStatusTextExampleComponent,
-    PlatformObjectStatusTextIconExampleComponent,
     PlatformObjectStatusGenericExampleComponent,
+    PlatformObjectStatusInvertedGenericTextExampleComponent,
     PlatformObjectStatusInvertedTextExampleComponent,
-    PlatformObjectStatusInvertedGenericTextExampleComponent
+    PlatformObjectStatusTextExampleComponent,
+    PlatformObjectStatusTextIconExampleComponent
 } from './examples/platform-object-status-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformObjectStatusLargeExampleComponent } from './examples/platform-object-status-large-example.component';
 
 const PlatformObjectStatusDefaultExampleScss = 'platform-object-status-example.component.scss';
 const PlatformObjectStatusDefaultExample = 'platform-object-status-example.component.html';

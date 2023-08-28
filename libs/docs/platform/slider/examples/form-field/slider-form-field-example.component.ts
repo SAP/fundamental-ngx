@@ -1,8 +1,8 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
-import { SliderComponent } from '@fundamental-ngx/platform/slider';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
 
 @Component({
     selector: 'fdp-slider-form-field-example',

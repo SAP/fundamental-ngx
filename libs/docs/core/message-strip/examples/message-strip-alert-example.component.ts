@@ -1,15 +1,16 @@
-import { Component, inject, OnDestroy, TemplateRef } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnDestroy, TemplateRef, inject } from '@angular/core';
+import { ButtonModule, ButtonModule as ButtonModule_1 } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityDirective,
+    ContentDensityDirective as ContentDensityDirective_1
+} from '@fundamental-ngx/core/content-density';
+import { LinkModule } from '@fundamental-ngx/core/link';
 import {
     MessageStripAlertContainerAlertRefs,
     MessageStripAlertRef,
     MessageStripAlertService
 } from '@fundamental-ngx/core/message-strip';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { LinkModule } from '@fundamental-ngx/core/link';
-import { ContentDensityDirective as ContentDensityDirective_1 } from '@fundamental-ngx/core/content-density';
-import { ButtonModule as ButtonModule_1 } from '@fundamental-ngx/core/button';
 
 let itemIndex = 0;
 

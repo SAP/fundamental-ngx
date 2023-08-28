@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 
 @Component({
     selector: 'fd-bar-custom-shellbar-example',

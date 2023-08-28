@@ -1,4 +1,3 @@
-import { ObjectMarkerPo } from './object-marker.po';
 import {
     checkElArrIsClickable,
     getElementAriaLabel,
@@ -8,6 +7,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { iconStatusesList } from './object-marker-contents';
+import { ObjectMarkerPo } from './object-marker.po';
 
 describe('Object marker test suite', () => {
     const objectMarkerPage = new ObjectMarkerPo();

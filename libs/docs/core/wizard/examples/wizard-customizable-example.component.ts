@@ -1,3 +1,5 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,13 +9,10 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
-import { NgIf } from '@angular/common';
-import { A11yModule } from '@angular/cdk/a11y';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-customizable-example',

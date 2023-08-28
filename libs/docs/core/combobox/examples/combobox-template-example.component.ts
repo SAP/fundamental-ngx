@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
 import { JsonPipe } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-combobox-template-example',

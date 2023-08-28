@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { NgFor } from '@angular/common';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ListAvatarConfig, PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 export interface ListItem {
     title: string;

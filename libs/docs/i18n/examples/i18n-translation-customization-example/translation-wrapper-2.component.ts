@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { patchLanguage } from '@fundamental-ngx/i18n';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'app-translation-wrapper-2',

@@ -1,4 +1,3 @@
-import { MenuPo } from './menu.po';
 import {
     browserIsSafari,
     click,
@@ -10,12 +9,11 @@ import {
     isElementClickable,
     mouseHoverElement,
     refreshPage,
-    sendKeys,
     waitForElDisplayed,
     waitForNotPresent,
     waitForPresent
 } from '../../../../../e2e';
-import { emptyValuesArr } from './menu-contents';
+import { MenuPo } from './menu.po';
 
 describe('Menu test suite', () => {
     const menuPage = new MenuPo();

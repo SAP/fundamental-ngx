@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-form-basic-example',

@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PanelFixedHeightExampleComponent } from './examples/panel-fixed-height-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PanelCompactExampleComponent } from './examples/panel-compact-example.component';
-import { PanelFixedExampleComponent } from './examples/panel-fixed-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { PanelExpandableExampleComponent } from './examples/panel-expandable-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PanelFixedExampleComponent } from './examples/panel-fixed-example.component';
+import { PanelFixedHeightExampleComponent } from './examples/panel-fixed-height-example.component';
 
 const panelExpandableSrc = 'panel-expandable-example.component.html';
 const panelFixedSrc = 'panel-fixed-example.component.html';

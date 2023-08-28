@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { TileModule } from '@fundamental-ngx/core/tile';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
-import { TileDocsComponent } from './tile-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import {
     ActionTileExampleComponent,
     BadgeTileExampleComponent,
@@ -16,8 +16,8 @@ import {
     TileColumnsExampleComponent,
     TileGenericExampleComponent
 } from './examples/tile-examples.component';
-import { TileModule } from '@fundamental-ngx/core/tile';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
+import { TileDocsComponent } from './tile-docs.component';
 
 const routes: Routes = [
     {

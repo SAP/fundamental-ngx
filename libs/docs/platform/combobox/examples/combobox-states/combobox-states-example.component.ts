@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import {
+    ComboboxSelectionChangeEvent,
+    FdpFormGroupModule,
+    PlatformComboboxModule
+} from '@fundamental-ngx/platform/form';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-combobox-states-example',

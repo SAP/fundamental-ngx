@@ -1,12 +1,12 @@
-import { ObjectStatusPo } from './object-status.po';
 import {
+    checkElArrIsClickable,
     getElementArrayLength,
     getElementClass,
     getTextArr,
-    waitForElDisplayed,
-    checkElArrIsClickable
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { genericColorText, objStatusText, semanticText } from './object-status-contents';
+import { ObjectStatusPo } from './object-status.po';
 
 describe('Object Status test suite', () => {
     const objectStatusPage = new ObjectStatusPo();

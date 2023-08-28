@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
+import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -10,41 +10,42 @@ import {
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter,
-    isCollectionFilter,
+    FilterType,
+    FilterableColumnDataType,
     TableDataProvider,
     TableDataSource,
     TableState,
-    FilterableColumnDataType,
-    FilterType
+    isCollectionFilter
 } from '@fundamental-ngx/platform/table';
 
 import {
+    BaseDynamicFormGeneratorControl,
     dynamicFormFieldProvider,
-    dynamicFormGroupChildProvider,
-    BaseDynamicFormGeneratorControl
+    dynamicFormGroupChildProvider
 } from '@fundamental-ngx/platform/form';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { get } from 'lodash-es';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
 import {
     BaseSmartFilterBarConditionField,
+    PlatformSmartFilterBarModule,
     SmartFilterBarCondition,
     SmartFilterBarCustomFilterConfig,
     SmartFilterBarService,
-    smartFilterBarProvider,
-    SmartFilterBar
+    smartFilterBarProvider
 } from '@fundamental-ngx/platform/smart-filter-bar';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
-import { SliderComponent } from '@fundamental-ngx/platform/slider';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { get } from 'lodash-es';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-smart-filter-bar-slider-example',

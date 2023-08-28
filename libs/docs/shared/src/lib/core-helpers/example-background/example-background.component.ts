@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SwitchModule } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'background-switch',

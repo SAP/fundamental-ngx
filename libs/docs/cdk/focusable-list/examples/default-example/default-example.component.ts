@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FocusableListItemFocusedEvent } from '@fundamental-ngx/cdk/utils';
-import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { NgFor } from '@angular/common';
-import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+    FocusableItemDirective,
+    FocusableListDirective,
+    FocusableListItemFocusedEvent
+} from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-list-default-example',

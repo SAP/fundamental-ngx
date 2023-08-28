@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -7,9 +8,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-date-picker-disable-func-example',

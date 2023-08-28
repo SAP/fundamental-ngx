@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
-import { CustomCdkControlExampleComponent } from './examples/default/forms-default-example.component';
-import { FormsHeaderComponent } from './forms-header/forms-header.component';
-import { FormsDocsComponent } from './forms-docs.component';
-import { examples } from './examples';
 import { FormsModule } from '@fundamental-ngx/cdk/forms';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { examples } from './examples';
+import { CustomCdkControlExampleComponent } from './examples/default/forms-default-example.component';
+import { FormsDocsComponent } from './forms-docs.component';
+import { FormsHeaderComponent } from './forms-header/forms-header.component';
 
 const routes: Routes = [
     {

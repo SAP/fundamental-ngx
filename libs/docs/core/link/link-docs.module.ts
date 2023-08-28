@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { LinkHeaderComponent } from './link-header/link-header.component';
-import { LinkDocsComponent } from './link-docs.component';
-import { LinkExampleComponent } from './examples/link-example.component';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { LinkExampleComponent } from './examples/link-example.component';
+import { LinkDocsComponent } from './link-docs.component';
+import { LinkHeaderComponent } from './link-header/link-header.component';
 
 const routes: Routes = [
     {

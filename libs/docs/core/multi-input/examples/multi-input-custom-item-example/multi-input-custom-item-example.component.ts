@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { JsonPipe } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 @Component({

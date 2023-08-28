@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MenuModule } from '@fundamental-ngx/core/menu';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-action-bar-contextual-menu-example',

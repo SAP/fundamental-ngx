@@ -1,34 +1,36 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
-import { DialogInnerPopoverComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
-import { DialogBackdropContainerExampleComponent } from './examples/dialog-backdrop-container/dialog-backdrop-container-example.component';
-import { DialogStackedExampleComponent } from './examples/stacked-dialogs/dialog-stacked-example.component';
-import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
-import { DialogMobileExampleComponent } from './examples/dialog-mobile/dialog-mobile-example.component';
-import { DialogPositionExampleComponent } from './examples/dialog-position/dialog-position-example.component';
-import { AutoLabelDialogExampleComponent } from './examples/auto-label/auto-label-dialog-example.component';
-import { DialogConfigurationExampleComponent } from './examples/dialog-configuration/dialog-configuration-example.component';
 import { RouterLink } from '@angular/router';
-import { DialogStateExampleComponent } from './examples/dialog-state/dialog-state-example.component';
-import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AutoLabelDialogExampleComponent } from './examples/auto-label/auto-label-dialog-example.component';
 import { ComponentBasedDialogExampleComponent } from './examples/component-based/component-based-dialog-example.component';
+import { DialogBackdropContainerExampleComponent } from './examples/dialog-backdrop-container/dialog-backdrop-container-example.component';
+import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
+import { DialogConfigurationExampleComponent } from './examples/dialog-configuration/dialog-configuration-example.component';
 import { FormDialogExampleComponent } from './examples/dialog-form/form-dialog-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { DialogInnerPopoverComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import { DialogMobileExampleComponent } from './examples/dialog-mobile/dialog-mobile-example.component';
+import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
+import { DialogPositionExampleComponent } from './examples/dialog-position/dialog-position-example.component';
+import { DialogStateExampleComponent } from './examples/dialog-state/dialog-state-example.component';
+import { DialogStackedExampleComponent } from './examples/stacked-dialogs/dialog-stacked-example.component';
 import { TemplateBasedDialogExampleComponent } from './examples/template-based/template-based-dialog-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const dialogExamplesScss = 'dialog-examples.component.scss';
 

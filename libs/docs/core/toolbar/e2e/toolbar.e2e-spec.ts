@@ -1,4 +1,3 @@
-import { ToolbarPo } from './toolbar.po';
 import {
     browserIsSafari,
     checkElementScreenshot,
@@ -11,7 +10,6 @@ import {
     getValue,
     isElementClickable,
     isElementDisplayed,
-    pause,
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
@@ -20,6 +18,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { currentDay, date, fruitArr, placeholder, testText } from './toolbar-contents';
+import { ToolbarPo } from './toolbar.po';
 
 describe('Toolbar test suite', () => {
     const toolbarPage = new ToolbarPo();

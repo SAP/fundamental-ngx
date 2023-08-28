@@ -9,11 +9,11 @@ import {
 } from '@angular/core';
 import { delay, tap } from 'rxjs/operators';
 
-import { GoogleChartService, Visualization } from './card-kpi-google-charts.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { GoogleChartService, Visualization } from './card-kpi-google-charts.service';
 
 @Component({
     selector: 'fd-card-kpi-example',

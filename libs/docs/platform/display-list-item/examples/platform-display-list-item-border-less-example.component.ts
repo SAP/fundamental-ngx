@@ -1,8 +1,7 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { DisplayListItemModule } from '@fundamental-ngx/platform/list';
-import { NgFor } from '@angular/common';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { DisplayListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
 
 export interface Movie {
     title: string;

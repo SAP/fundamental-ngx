@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { MultiInputAddonClickedExampleComponent } from './examples/multi-input-addon-clicked-example/multi-input-addon-clicked-example.component';
-import { MultiInputDropdownWidthExampleComponent } from './examples/multi-input-dropdown-width-example/multi-input-dropdown-width-example.component';
-import { MultiInputCustomItemExampleComponent } from './examples/multi-input-custom-item-example/multi-input-custom-item-example.component';
-import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
-import { MultiInputFormExampleComponent } from './examples/multi-input-form-example/multi-input-form-example.component';
-import { MultiInputAsyncExampleComponent } from './examples/multi-input-async-example/multi-input-async-example.component';
-import { MultiInputFilterExampleComponent } from './examples/multi-input-filter-example/multi-input-filter-example.component';
-import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
-import { MultiInputDisplaywithExampleComponent } from './examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
-import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
 import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { MultiInputAddonClickedExampleComponent } from './examples/multi-input-addon-clicked-example/multi-input-addon-clicked-example.component';
+import { MultiInputAsyncExampleComponent } from './examples/multi-input-async-example/multi-input-async-example.component';
 import { MultiInputCompactExampleComponent } from './examples/multi-input-compact-example/multi-input-compact-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { MultiInputCustomItemExampleComponent } from './examples/multi-input-custom-item-example/multi-input-custom-item-example.component';
+import { MultiInputDisplaywithExampleComponent } from './examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
+import { MultiInputDropdownWidthExampleComponent } from './examples/multi-input-dropdown-width-example/multi-input-dropdown-width-example.component';
 import { MultiInputExampleComponent } from './examples/multi-input-example/multi-input-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { MultiInputFilterExampleComponent } from './examples/multi-input-filter-example/multi-input-filter-example.component';
+import { MultiInputFormExampleComponent } from './examples/multi-input-form-example/multi-input-form-example.component';
+import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
+import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
+import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 
 const simpleH = 'multi-input-example/multi-input-example.component.html';
 const simpleT = 'multi-input-example/multi-input-example.component.ts';

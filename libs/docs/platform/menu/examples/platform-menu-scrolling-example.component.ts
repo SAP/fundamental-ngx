@@ -1,8 +1,8 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
 @Component({
     selector: 'fdp-platform-menu-scrolling-example',

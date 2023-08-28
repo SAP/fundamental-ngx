@@ -1,13 +1,12 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormsModule } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface Option {
     name: string;

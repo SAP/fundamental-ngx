@@ -1,4 +1,3 @@
-import { TimePo } from './time.po';
 import {
     browserIsFirefox,
     checkElementScreenshot,
@@ -20,6 +19,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { sections } from './time-contents';
+import { TimePo } from './time.po';
 
 describe('Time component test', () => {
     const timePage = new TimePo();

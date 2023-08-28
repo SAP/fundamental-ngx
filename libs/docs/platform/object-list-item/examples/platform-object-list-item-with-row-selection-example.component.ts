@@ -1,16 +1,17 @@
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
-import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectListItemModule } from '@fundamental-ngx/platform/list';
 import { FormsModule } from '@angular/forms';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
-import { ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatus, ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
+import {
+    BaseListItem,
+    ObjectListItemModule,
+    PlatformListModule,
+    SelectionChangeEvent
+} from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Product[] = [
     {

@@ -1,10 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { JsonPipe, NgIf } from '@angular/common';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { NgIf, JsonPipe } from '@angular/common';
-import { FormGeneratorComponent as FormGeneratorComponent_1 } from '@fundamental-ngx/platform/form';
+import {
+    DynamicFormItem,
+    DynamicFormValue,
+    FormGeneratorComponent,
+    FormGeneratorComponent as FormGeneratorComponent_1
+} from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {

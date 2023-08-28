@@ -1,7 +1,12 @@
 import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
+import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import {
     ApprovalFlowComponent,
     ApprovalNode,
@@ -10,6 +15,7 @@ import {
     ApprovalStatus,
     ApprovalTeam,
     ApprovalUser,
+    PlatformApprovalFlowModule,
     SendRemindersData
 } from '@fundamental-ngx/platform/approval-flow';
 import {
@@ -19,12 +25,6 @@ import {
     ProviderParams
 } from '@fundamental-ngx/platform/shared';
 import { cloneDeep } from 'lodash-es';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
-import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
 
 @Component({
     selector: 'fdp-platform-approval-flow-example',

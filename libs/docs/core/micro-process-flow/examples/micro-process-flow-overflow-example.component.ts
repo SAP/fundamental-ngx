@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { MicroProcessFlowItemType } from '@fundamental-ngx/core/micro-process-flow';
 import { NgFor } from '@angular/common';
-import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { MicroProcessFlowItemType, MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 
 interface ExampleItem {
     state: MicroProcessFlowItemType;

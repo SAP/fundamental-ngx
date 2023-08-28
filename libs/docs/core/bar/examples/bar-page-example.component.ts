@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { map } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-bar-page-example',

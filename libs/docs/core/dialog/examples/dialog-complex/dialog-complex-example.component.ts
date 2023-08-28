@@ -1,18 +1,15 @@
-import { Component, TemplateRef } from '@angular/core';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { CdkScrollable } from '@angular/cdk/overlay';
+import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { Component, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { TitleComponent } from '@fundamental-ngx/core/title';
+import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 interface Fruit {
     id: number;

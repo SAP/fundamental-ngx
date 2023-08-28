@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 @Component({
     selector: 'fd-inline-help-trigger-example',

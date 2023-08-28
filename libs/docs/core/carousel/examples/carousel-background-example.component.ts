@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { CarouselItemComponent } from '@fundamental-ngx/core/carousel';
-import { CarouselComponent } from '@fundamental-ngx/core/carousel';
 import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
 
 @Component({
     selector: 'fd-carousel-background-example',

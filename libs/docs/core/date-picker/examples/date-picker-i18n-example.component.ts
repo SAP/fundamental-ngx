@@ -1,12 +1,12 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
-import { DATE_TIME_FORMATS, DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
-import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 import { FormsModule } from '@angular/forms';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { DATE_TIME_FORMATS, DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately

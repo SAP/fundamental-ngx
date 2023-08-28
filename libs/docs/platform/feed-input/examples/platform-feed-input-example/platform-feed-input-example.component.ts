@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FdPatchLanguageDirective } from '../../../../../i18n/src/lib/directives/patch-language.directive';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 import { PlatformFeedInputModule } from '@fundamental-ngx/platform/feed-input';
 
 @Component({

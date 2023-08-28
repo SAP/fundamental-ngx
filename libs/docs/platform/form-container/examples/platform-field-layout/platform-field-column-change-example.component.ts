@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { CheckboxGroupComponent, FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { RESPONSIVE_BREAKPOINTS_CONFIG } from '@fundamental-ngx/platform/shared';
-import { CheckboxGroupComponent } from '@fundamental-ngx/platform/form';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 const DEFAULT_NEW_BREAKPOINTS_CONFIG = {
     S: 800,

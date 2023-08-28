@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import {
     PlatformInfoLabelExampleComponent,
-    PlatformInfoLableTextExampleComponent,
-    PlatformInfoLableTextIconExampleComponent,
+    PlatformInfoLableAriaLabelExampleComponent,
     PlatformInfoLableNumericIconExampleComponent,
-    PlatformInfoLableAriaLabelExampleComponent
+    PlatformInfoLableTextExampleComponent,
+    PlatformInfoLableTextIconExampleComponent
 } from './examples/platform-info-label-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const PlatformInfoLableDefaultExample = 'platform-info-label-example.component.html';
 const PlatformInfoLableNumericExample = 'platform-info-label-numeric-example.component.html';

@@ -1,20 +1,20 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import {
-    DatetimeAdapter,
-    DATE_TIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core/datetime';
-import { SliderComponent } from '@fundamental-ngx/core/slider';
-import { FormItemModule } from '@fundamental-ngx/core/form';
 import { FormsModule } from '@angular/forms';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { SelectModule } from '@fundamental-ngx/core/select';
-import { NgIf, NgFor } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import {
+    DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter
+} from '@fundamental-ngx/core/datetime';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { SliderComponent } from '@fundamental-ngx/core/slider';
 
 @Component({
     selector: 'fdk-initial-focus-nested-elements-example',

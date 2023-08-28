@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { CdkDrag, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CdkTable, CdkTableModule } from '@angular/cdk/table';
-import { moveItemInArray, CdkDropList, CdkDragHandle, CdkDrag } from '@angular/cdk/drag-drop';
+import { Component, ViewChild } from '@angular/core';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { TableModule } from '@fundamental-ngx/core/table';

@@ -1,6 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { NgFor } from '@angular/common';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({

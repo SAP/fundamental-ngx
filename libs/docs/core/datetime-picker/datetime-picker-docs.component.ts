@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DatetimeMobileExampleComponent } from './examples/datetime-mobile/datetime-mobile-example.component';
 import { RouterLink } from '@angular/router';
-import { DateTimePickerUpdateOnBlurExampleComponent } from './examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component';
-import { DatetimePickerComplexI18nExampleComponent } from './examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
-import { DatetimeImportantComponent } from '../../shared/src/lib/common-components/datetime-important/datetime-important.component';
-import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
-import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
-import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DatetimeImportantComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { DatetimePickerAllowNullExampleComponent } from './examples/datetime-allow-null-example/datetime-allow-null-example.component';
-import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
 import { DatetimeExampleComponent } from './examples/datetime-example/datetime-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
+import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
+import { DatetimeMobileExampleComponent } from './examples/datetime-mobile/datetime-mobile-example.component';
+import { DatetimePickerComplexI18nExampleComponent } from './examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
+import { DateTimePickerUpdateOnBlurExampleComponent } from './examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component';
+import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
 
 const datetimeUpdateOnBlurSrcTs =
     'datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component.ts';

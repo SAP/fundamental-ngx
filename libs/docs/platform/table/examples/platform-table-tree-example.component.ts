@@ -3,8 +3,9 @@ import { DropPredicate } from '@fundamental-ngx/cdk/utils';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
-    newTableRow,
+    PlatformTableModule,
     TableComponent,
     TableDataProvider,
     TableDataSource,
@@ -12,16 +13,15 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableRowType,
     TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableDraggableDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { delay, tap } from 'rxjs/operators';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-tree-example',

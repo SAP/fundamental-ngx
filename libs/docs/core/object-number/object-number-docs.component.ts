@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import {
     ObjectNumberBasicExampleComponent,
-    ObjectNumberStatusExampleComponent,
-    ObjectNumberLargeExampleComponent,
     ObjectNumberBoldExampleComponent,
-    ObjectNumberUnitsExampleComponent,
     ObjectNumberDecimalExampleComponent,
-    ObjectNumberTruncationExampleComponent
+    ObjectNumberLargeExampleComponent,
+    ObjectNumberStatusExampleComponent,
+    ObjectNumberTruncationExampleComponent,
+    ObjectNumberUnitsExampleComponent
 } from './examples/object-number-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const basicHtml = 'object-number-basic-example.component.html';
 const boldHtml = 'object-number-bold-example.component.html';

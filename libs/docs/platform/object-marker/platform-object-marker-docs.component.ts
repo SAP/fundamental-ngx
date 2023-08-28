@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ObjectMarkerTextAndIconExampleComponent } from './examples/object-marker-text-and-icon/object-marker-text-and-icon-example.component';
 import { ObjectMarkerIconAndTextClickableExampleComponent } from './examples/object-marker-text-clickable/object-marker-text-clickable-example.component';
 import { ObjectMarkerTextOnlyExampleComponent } from './examples/object-marker-text-only-example/object-marker-text-only-example.component';
-import { ObjectMarkerTextAndIconExampleComponent } from './examples/object-marker-text-and-icon/object-marker-text-and-icon-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { ObjectMarkerExampleComponent } from './examples/object-marker/object-marker-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const platformObjectMarkerExampleScss = 'object-marker-example.scss';
 const platformObjectMarkerDefaultExampleHtml = 'object-marker/object-marker-example.component.html';

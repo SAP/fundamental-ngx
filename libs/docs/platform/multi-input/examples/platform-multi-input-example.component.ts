@@ -1,10 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { MultiInputSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { FormsModule } from '@angular/forms';
-import { PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import {
+    FdpFormGroupModule,
+    MultiInputSelectionChangeEvent,
+    PlatformMultiInputModule
+} from '@fundamental-ngx/platform/form';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-multi-input-example',

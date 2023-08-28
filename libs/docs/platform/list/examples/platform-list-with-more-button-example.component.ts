@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { StandardListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 export interface User {
     firstName: string;

@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformObjectListItemExampleComponent } from './examples/platform-object-list-item-example.component';
-import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
-import { PlatformObjectListItemWithRowNavigationExampleComponent } from './examples/platform-object-list-item-with-row-navigation-example.component';
-import { PlatformObjectListItemWithRowSelectionExampleComponent } from './examples/platform-object-list-item-with-row-selection-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformObjectListItemBorderLessExampleComponent } from './examples/platform-object-list-item-border-less-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformObjectListItemExampleComponent } from './examples/platform-object-list-item-example.component';
+import { PlatformObjectListItemWithRowNavigationExampleComponent } from './examples/platform-object-list-item-with-row-navigation-example.component';
+import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
+import { PlatformObjectListItemWithRowSelectionExampleComponent } from './examples/platform-object-list-item-with-row-selection-example.component';
 
 const borderLessOLISrc = 'platform-object-list-item-border-less-example.component.html';
 const borderLessOLITs = 'platform-object-list-item-border-less-example.component.ts';

@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { SliderChangeEvent } from '@fundamental-ngx/platform/slider';
 import { FormsModule } from '@angular/forms';
-import { SliderComponent } from '@fundamental-ngx/platform/slider';
+import { SliderChangeEvent, SliderComponent } from '@fundamental-ngx/platform/slider';
 
 @Component({
     selector: 'fdp-slider-basic-example',

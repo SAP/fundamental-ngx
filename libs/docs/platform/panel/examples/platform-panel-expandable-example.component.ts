@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
-import { PanelConfig, PanelExpandChangeEvent } from '@fundamental-ngx/platform/panel';
-import { PlatformConfig } from '@fundamental-ngx/platform/shared';
-import { PlatformPanelModule } from '@fundamental-ngx/platform/panel';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PanelConfig, PanelExpandChangeEvent, PlatformPanelModule } from '@fundamental-ngx/platform/panel';
+import { PlatformConfig } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-panel-expandable-example',

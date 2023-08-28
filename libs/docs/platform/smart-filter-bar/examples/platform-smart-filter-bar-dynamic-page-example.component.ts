@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
+import { FilterableColumnDataType, FilterType, PlatformTableModule } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-dynamic-page-example',

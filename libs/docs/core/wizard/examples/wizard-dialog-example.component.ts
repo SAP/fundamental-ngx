@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -6,24 +8,18 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf } from '@angular/common';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { RouterLink } from '@angular/router';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { FormsModule } from '@angular/forms';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { RouterLink } from '@angular/router';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-dialog-example',

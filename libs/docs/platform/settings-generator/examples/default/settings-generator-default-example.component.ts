@@ -1,22 +1,25 @@
 import {
-    Component,
+    AfterViewInit,
     ChangeDetectionStrategy,
-    TemplateRef,
-    ViewChild,
     ChangeDetectorRef,
+    Component,
     Injectable,
-    AfterViewInit
+    TemplateRef,
+    ViewChild
 } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { ListAvatarConfig } from '@fundamental-ngx/platform/list';
-import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
+import {
+    SettingsGeneratorComponent,
+    SettingsGeneratorModule,
+    SettingsModel
+} from '@fundamental-ngx/platform/settings-generator';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, map, share, take } from 'rxjs/operators';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
-import { TitleComponent } from '@fundamental-ngx/core/title';
 
 interface UserModel {
     email: string;

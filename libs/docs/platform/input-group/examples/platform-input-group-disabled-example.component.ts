@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fdp-input-group-disabled-example',

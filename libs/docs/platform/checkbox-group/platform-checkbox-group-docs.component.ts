@@ -1,4 +1,17 @@
 import { Component } from '@angular/core';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformCheckboxGroupContentCheckboxComponent } from './examples/platform-checkbox-group-content-checkbox.component';
+import { PlatformCheckboxGroupExampleComponent } from './examples/platform-checkbox-group-examples.component';
+import { PlatformCheckboxGroupListObjectComponent } from './examples/platform-checkbox-group-list-object.component';
+import { PlatformCheckboxGroupListComponent } from './examples/platform-checkbox-group-list.component';
 const listCheckboxGroupHtml = 'platform-checkbox-group-list.component.html';
 const listCheckboxGroupTs = 'platform-checkbox-group-list.component.ts';
 const listObjectCheckboxGroupHtml = 'platform-checkbox-group-list-object.component.html';
@@ -7,16 +20,6 @@ const contentCheckboxGroupHtml = 'platform-checkbox-group-content-checkbox.compo
 const contentCheckboxGroupTs = 'platform-checkbox-group-content-checkbox.component.ts';
 const checkboxGroupExampleHtml = 'platform-checkbox-group-example.component.html';
 const checkboxGroupExampleTs = 'platform-checkbox-group-examples.component.ts';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformCheckboxGroupExampleComponent } from './examples/platform-checkbox-group-examples.component';
-import { PlatformCheckboxGroupContentCheckboxComponent } from './examples/platform-checkbox-group-content-checkbox.component';
-import { PlatformCheckboxGroupListObjectComponent } from './examples/platform-checkbox-group-list-object.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { PlatformCheckboxGroupListComponent } from './examples/platform-checkbox-group-list.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-checkbox-group',

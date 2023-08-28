@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
-import { MessageBoxExampleComponent } from './message-box-example.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageBoxExampleComponent } from './message-box-example.component';
 
 export interface TextData {
     title: string;

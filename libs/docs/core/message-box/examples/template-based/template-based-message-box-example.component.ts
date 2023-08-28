@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 
-import { MessageBoxService } from '@fundamental-ngx/core/message-box';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-template-based-message-box-example',

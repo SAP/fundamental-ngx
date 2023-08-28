@@ -1,9 +1,8 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { OptionItem } from '@fundamental-ngx/platform/shared';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { JsonPipe } from '@angular/common';
-import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { OptionItem } from '@fundamental-ngx/platform/shared';
 
 export class Fruit {
     id: string;

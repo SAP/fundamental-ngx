@@ -1,9 +1,9 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { NgIf } from '@angular/common';
-import { TimeModule } from '@fundamental-ngx/core/time';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { TimeModule } from '@fundamental-ngx/core/time';
 
 @Component({
     selector: 'fd-time-form-example',

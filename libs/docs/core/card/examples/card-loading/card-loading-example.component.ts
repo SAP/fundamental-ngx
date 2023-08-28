@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { CardModule } from '@fundamental-ngx/core/card';
 
 @Component({
     selector: 'fd-card-loading-example',

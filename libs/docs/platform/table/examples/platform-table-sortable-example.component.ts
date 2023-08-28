@@ -1,18 +1,20 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
-    TableDataSource,
-    TableSortChangeEvent,
+    PlatformTableModule,
     SortDirection,
     TableDataProvider,
+    TableDataSource,
+    TableSortChangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-sortable-example',

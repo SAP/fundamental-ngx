@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { RatingIndicatorDocsHeaderComponent } from './rating-indicator-docs-header/rating-indicator-docs-header.component';
 import { RatingIndicatorDocsComponent } from './rating-indicator-docs.component';
 
-import { examples } from './examples';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { examples } from './examples';
 
 const routes: Routes = [
     {

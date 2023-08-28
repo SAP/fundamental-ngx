@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 
 @Component({

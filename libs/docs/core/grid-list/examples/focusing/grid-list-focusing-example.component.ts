@@ -1,13 +1,17 @@
 import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 
-import { GridListItemComponent, GridListItemOutputEvent, GridListItemType } from '@fundamental-ngx/core/grid-list';
-import { RouterLink } from '@angular/router';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { NgFor } from '@angular/common';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { RouterLink } from '@angular/router';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { GridListModule } from '@fundamental-ngx/core/grid-list';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    GridListItemComponent,
+    GridListItemOutputEvent,
+    GridListItemType,
+    GridListModule
+} from '@fundamental-ngx/core/grid-list';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 interface GridListItem {
     id: number;

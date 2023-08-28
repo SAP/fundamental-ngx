@@ -9,10 +9,10 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'fd-docs-section-title',

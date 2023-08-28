@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { TitleModule } from '@fundamental-ngx/core/title';
 import { AvatarGroupDocsComponent } from './avatar-group-docs.component';
 import { AvatarGroupHeaderComponent } from './avatar-group-header/avatar-group-header.component';
 import { AvatarGroupGroupTypeExampleComponent } from './examples/avatar-group-group-type-example.component';
 import { AvatarGroupIndividualTypeExampleComponent } from './examples/avatar-group-individual-type-example.component';
-import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { TitleModule } from '@fundamental-ngx/core/title';
-import { LinkModule } from '@fundamental-ngx/core/link';
 
 const routes: Routes = [
     {

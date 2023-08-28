@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
-import { MessagePageDocsComponent } from './message-page-docs.component';
-import { MessagePageHeaderComponent } from './message-page-header/message-page-header.component';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 import {
     MessagePageActionsExampleComponent,
     MessagePageCustomIconExampleComponent,
@@ -14,8 +14,8 @@ import {
     MessagePageNoItemsExampleComponent,
     MessagePageSearchExampleComponent
 } from './examples/message-page-examples.component';
-import { MessagePageModule } from '@fundamental-ngx/core/message-page';
-import { LinkModule } from '@fundamental-ngx/core/link';
+import { MessagePageDocsComponent } from './message-page-docs.component';
+import { MessagePageHeaderComponent } from './message-page-header/message-page-header.component';
 
 const routes: Routes = [
     {

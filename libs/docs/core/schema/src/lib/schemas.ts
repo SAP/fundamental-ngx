@@ -1,17 +1,17 @@
 import { Schemas } from '@fundamental-ngx/docs/schema';
 
 // components
-import { buttonSchema } from './button.schema';
 import { alertSchema } from './alert.schema';
-import { inputGroupSchema } from './input-group.schema';
-import { paginationSchema } from './pagination.schema';
-import { tabsSchema } from './tabs.schema';
+import { buttonSchema } from './button.schema';
 import { dialogSchema } from './dialog.schema';
+import { inputGroupSchema } from './input-group.schema';
 import { messageStripSchema } from './message-strip.schema';
-import { tableSchema } from './table.schema';
-import { timeSchema } from './time.schema';
-import { switchSchema } from './switch.schema';
+import { paginationSchema } from './pagination.schema';
 import { sliderSchema } from './slider.schema';
+import { switchSchema } from './switch.schema';
+import { tableSchema } from './table.schema';
+import { tabsSchema } from './tabs.schema';
+import { timeSchema } from './time.schema';
 
 export const COMPONENT_SCHEMAS: Schemas = {
     button: buttonSchema,

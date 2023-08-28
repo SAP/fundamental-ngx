@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import {
-    ToolbarTypeExampleComponent,
-    ToolbarTitleExampleComponent,
-    ToolbarOverflowPriorityExampleComponent,
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
     ToolbarOverflowGroupingExampleComponent,
+    ToolbarOverflowPriorityExampleComponent,
+    ToolbarSeparatorExampleComponent,
     ToolbarSizeExampleComponent,
     ToolbarSpacerExampleComponent,
-    ToolbarSeparatorExampleComponent
+    ToolbarTitleExampleComponent,
+    ToolbarTypeExampleComponent
 } from './examples/toolbar-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
 
 const toolbarTypeExampleHtml = 'toolbar-type-example.component.html';
 const toolbarTitleExampleHtml = 'toolbar-title-example.component.html';

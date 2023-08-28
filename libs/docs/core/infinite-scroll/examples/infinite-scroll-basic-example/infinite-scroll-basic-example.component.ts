@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 
 @Component({

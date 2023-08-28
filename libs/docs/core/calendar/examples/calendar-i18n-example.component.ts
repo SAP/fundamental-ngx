@@ -1,4 +1,6 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent, CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,9 +8,6 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
-import { FormsModule } from '@angular/forms';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 
 // i18n aria labels service provider
 @Injectable()

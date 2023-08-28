@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-c-fill',

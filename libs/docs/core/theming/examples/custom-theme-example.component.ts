@@ -1,4 +1,7 @@
+import { JsonPipe, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import {
     BaseThemingConfig,
     CompleteThemeDefinition,
@@ -7,9 +10,6 @@ import {
 } from '@fundamental-ngx/core/theming';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgFor, JsonPipe } from '@angular/common';
 
 const customThemingConfig = new BaseThemingConfig();
 

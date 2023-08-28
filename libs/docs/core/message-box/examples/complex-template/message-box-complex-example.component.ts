@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 
-import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { MessageBoxModule, MessageBoxRef } from '@fundamental-ngx/core/message-box';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-message-box-complex-example',

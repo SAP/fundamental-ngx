@@ -1,5 +1,5 @@
-import { TokenPo } from './token.po';
 import {
+    checkElArrIsClickable,
     click,
     doesItExist,
     getElementArrayLength,
@@ -10,9 +10,9 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForPresent,
-    checkElArrIsClickable
+    waitForPresent
 } from '../../../../../e2e';
+import { TokenPo } from './token.po';
 
 describe('Token component test', () => {
     const tokenPage = new TokenPo();

@@ -1,9 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { SvgConfig } from '@fundamental-ngx/core/illustrated-message';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
 import { getAsset } from '@fundamental-ngx/docs/shared';
 import { zip } from 'rxjs';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 
 const sceneSvg = 'assets/images/sapIllus-Scene-NoMail.svg';
 const dialogSvg = 'assets/images/sapIllus-Dialog-NoMail.svg';

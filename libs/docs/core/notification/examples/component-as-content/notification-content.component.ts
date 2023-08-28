@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NotificationRef } from '@fundamental-ngx/core/notification';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NotificationModule } from '@fundamental-ngx/core/notification';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { NotificationModule, NotificationRef } from '@fundamental-ngx/core/notification';
 
 @Component({
     selector: 'fd-notification-example-content',

@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { StatusIndicatorClickableTypeComponent } from './examples/status-indicator-clickable-type.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { StatusIndicatorAngeledFillingComponent } from './examples/status-indicator-angled-filling.component';
 import { StatusIndicatorCircularFillAntiClockComponent } from './examples/status-indicator-cirular-fill-anti-clockwise.component';
 import { StatusIndicatorCircularFillClockComponent } from './examples/status-indicator-cirular-fill-clockwise.component';
-import { StatusIndicatorAngeledFillingComponent } from './examples/status-indicator-angled-filling.component';
-import { StatusIndicatorLinearFillTypeComponent } from './examples/status-indicator-linear-fill-type.component';
-import { StatusIndicatorLabelComponent as StatusIndicatorLabelComponent_1 } from './examples/status-indicator-label.component';
-import { StatusIndicatorFillTypeComponent as StatusIndicatorFillTypeComponent_1 } from './examples/status-indicator-fill-type.component';
-import { StatusIndicatorSizeComponent as StatusIndicatorSizeComponent_1 } from './examples/status-indicator-size.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { StatusIndicatorClickableTypeComponent } from './examples/status-indicator-clickable-type.component';
 import { StatusIndicatorDefaultComponent as StatusIndicatorDefaultComponent_1 } from './examples/status-indicator-default.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { StatusIndicatorFillTypeComponent as StatusIndicatorFillTypeComponent_1 } from './examples/status-indicator-fill-type.component';
+import { StatusIndicatorLabelComponent as StatusIndicatorLabelComponent_1 } from './examples/status-indicator-label.component';
+import { StatusIndicatorLinearFillTypeComponent } from './examples/status-indicator-linear-fill-type.component';
+import { StatusIndicatorSizeComponent as StatusIndicatorSizeComponent_1 } from './examples/status-indicator-size.component';
 
 const StatusIndicatorDefaultComponent = 'status-indicator-default.component.html';
 const StatusIndicatorSizeComponent = 'status-indicator-size.component.html';

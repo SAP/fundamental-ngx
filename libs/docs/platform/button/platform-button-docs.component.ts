@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    PlatformButtonIconsExampleComponent,
+    PlatformButtonSizesExampleComponent,
+    PlatformButtonStateExampleComponent,
+    PlatformButtonTruncateExampleComponent,
+    PlatformButtonTypesExampleComponent
+} from './examples/platform-button-examples.component';
 const buttonIconsExample = 'platform-button-icons-example.component.html';
 const buttonSizesExample = 'platform-button-sizes-example.component.html';
 const buttonStateExample = 'platform-button-state-example.component.html';
 const buttonTypesExample = 'platform-button-types-example.component.html';
 const buttonTruncateExample = 'platform-button-truncate-example.component.html';
 const buttonScss = 'platform-button-examples.scss';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import {
-    PlatformButtonTypesExampleComponent,
-    PlatformButtonSizesExampleComponent,
-    PlatformButtonIconsExampleComponent,
-    PlatformButtonStateExampleComponent,
-    PlatformButtonTruncateExampleComponent
-} from './examples/platform-button-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-button',

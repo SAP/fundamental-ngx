@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { Product } from './platform-object-list-item-with-row-selection-example.component';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectListItemModule } from '@fundamental-ngx/platform/list';
 import { NgFor } from '@angular/common';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { Component } from '@angular/core';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
+import { Product } from './platform-object-list-item-with-row-selection-example.component';
 @Component({
     selector: 'fdp-platform-object-list-item-border-less-example',
     templateUrl: './platform-object-list-item-border-less-example.component.html',

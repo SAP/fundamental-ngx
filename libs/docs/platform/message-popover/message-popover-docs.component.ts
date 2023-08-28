@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
-import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
-import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config/message-popover-custom-config-example.component';
-import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
 import { RouterLink } from '@angular/router';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config/message-popover-custom-config-example.component';
 import { MessagePopoverDefaultExampleComponent } from './examples/default/message-popover-default-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
+import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
 
 @Component({
     selector: 'app-message-popover',

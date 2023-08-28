@@ -1,8 +1,7 @@
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { RatingIndicatorSize } from '@fundamental-ngx/core/rating-indicator';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor, JsonPipe } from '@angular/common';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { RatingIndicatorModule, RatingIndicatorSize } from '@fundamental-ngx/core/rating-indicator';
 
 @Component({
     selector: 'fd-ri-dynamic-example',

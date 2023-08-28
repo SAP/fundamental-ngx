@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SwitchModule } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'fd-switch-binding-example',

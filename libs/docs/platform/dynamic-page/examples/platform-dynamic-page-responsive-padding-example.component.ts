@@ -1,16 +1,14 @@
-import { Component, ChangeDetectionStrategy, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 import { NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-responsive-padding-example',

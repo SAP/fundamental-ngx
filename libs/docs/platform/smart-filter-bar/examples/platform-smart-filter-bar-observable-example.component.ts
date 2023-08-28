@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -10,22 +12,22 @@ import {
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter,
-    isCollectionFilter,
+    FilterType,
+    FilterableColumnDataType,
     ObservableTableDataProvider,
+    PlatformTableModule,
     TableDataSource,
     TableState,
-    FilterableColumnDataType,
-    FilterType
+    isCollectionFilter
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { get } from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { get } from 'lodash-es';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
     selector: 'fdp-smart-filter-bar-observable-example',

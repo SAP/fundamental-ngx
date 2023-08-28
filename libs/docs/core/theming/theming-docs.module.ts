@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ThemingHeaderComponent } from './theming-header/theming-header.component';
-import { ThemingDocsComponent } from './theming-docs.component';
-import { examples } from './examples';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { examples } from './examples';
+import { ThemingDocsComponent } from './theming-docs.component';
+import { ThemingHeaderComponent } from './theming-header/theming-header.component';
 
 const routes: Routes = [
     {

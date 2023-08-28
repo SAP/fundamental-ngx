@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-radio-group-list-items-example',

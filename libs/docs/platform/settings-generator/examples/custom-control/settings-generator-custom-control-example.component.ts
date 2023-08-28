@@ -6,6 +6,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import {
     BaseDynamicFormFieldItem,
     BaseDynamicFormGeneratorControl,
@@ -15,12 +17,13 @@ import {
     DynamicFormValue,
     FormGeneratorService
 } from '@fundamental-ngx/platform/form';
-import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
-import { take } from 'rxjs/operators';
+import {
+    SettingsGeneratorComponent,
+    SettingsGeneratorModule,
+    SettingsModel
+} from '@fundamental-ngx/platform/settings-generator';
 import { SliderComponent } from '@fundamental-ngx/platform/slider';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-settings-generator-slider',

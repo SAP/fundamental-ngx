@@ -1,4 +1,3 @@
-import { DisplayListItemPo } from './display-list-item.po';
 import {
     checkElArrIsClickable,
     checkElementText,
@@ -11,6 +10,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { navTitlesArr, navUrl } from './display-list-item-contents';
+import { DisplayListItemPo } from './display-list-item.po';
 
 describe('Display List Item test suite:', () => {
     const displayListPage = new DisplayListItemPo();

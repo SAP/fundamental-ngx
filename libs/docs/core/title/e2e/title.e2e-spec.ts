@@ -1,4 +1,3 @@
-import { TitlePo } from './title.po';
 import {
     getAttributeByName,
     getElementClass,
@@ -7,6 +6,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { titleLevels, titleLevelsReversed } from './title-contents';
+import { TitlePo } from './title.po';
 
 describe('Wizard component test', () => {
     const titlePage = new TitlePo();

@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { BehaviorSubject, of } from 'rxjs';
 
 @Component({
     selector: 'fd-link-example',

@@ -1,11 +1,9 @@
+import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
-import { NgIf } from '@angular/common';
+import { FormLabelModule, FormMessageModule } from '@fundamental-ngx/core/form';
+import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-textarea-basic-example',

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { StandardListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 interface Item {
     title: string;

@@ -1,21 +1,16 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
-import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
-import { DynamicPageComponent } from '@fundamental-ngx/platform/dynamic-page';
-import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbComponent, BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { DynamicPageComponent, PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-flexible-column-example',

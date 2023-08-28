@@ -1,10 +1,8 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { NgIf, NgFor } from '@angular/common';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-micro-process-flow-popover-example',

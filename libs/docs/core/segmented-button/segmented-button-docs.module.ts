@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { SegmentedButtonDefaultExampleComponent } from './examples/segmented-button-default-example.component';
+import { SegmentedButtonToggleExampleComponent } from './examples/segmented-button-toggle-example.component';
 import { SegmentedButtonDocsComponent } from './segmented-button-docs.component';
 import { SegmentedButtonHeaderComponent } from './segmented-button-header/segmented-button-header.component';
-import { SegmentedButtonToggleExampleComponent } from './examples/segmented-button-toggle-example.component';
-import { SegmentedButtonDefaultExampleComponent } from './examples/segmented-button-default-example.component';
 
-import { SegmentedButtonFormExampleComponent } from './examples/segmented-button-form-example/segmented-button-form-example.component';
-import { SegmentedButtonComplexExampleComponent } from './examples/segmented-button-complex-example/segmented-button-complex-example.component';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TextModule } from '@fundamental-ngx/core/text';
+import { SegmentedButtonComplexExampleComponent } from './examples/segmented-button-complex-example/segmented-button-complex-example.component';
+import { SegmentedButtonFormExampleComponent } from './examples/segmented-button-form-example/segmented-button-form-example.component';
 
 const routes: Routes = [
     {

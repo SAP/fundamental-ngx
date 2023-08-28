@@ -1,5 +1,5 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { NgIf, JsonPipe } from '@angular/common';
 import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { UsageWithProviderDirective } from './usage-with-provider.directive';
 

@@ -7,11 +7,9 @@ import {
     PlatformButtonModule
 } from '@fundamental-ngx/platform/button';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
-import { PlatformButtonDocsComponent } from './platform-button-docs.component';
-import { PlatformButtonHeaderComponent } from './platform-button-header/platform-button-header.component';
 import {
     PlatformButtonIconsExampleComponent,
     PlatformButtonSizesExampleComponent,
@@ -19,6 +17,8 @@ import {
     PlatformButtonTruncateExampleComponent,
     PlatformButtonTypesExampleComponent
 } from './examples/platform-button-examples.component';
+import { PlatformButtonDocsComponent } from './platform-button-docs.component';
+import { PlatformButtonHeaderComponent } from './platform-button-header/platform-button-header.component';
 
 import { moduleDeprecationsProvider } from '@fundamental-ngx/core';
 

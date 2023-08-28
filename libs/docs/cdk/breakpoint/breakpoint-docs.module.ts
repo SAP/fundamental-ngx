@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BreakpointModule } from '@fundamental-ngx/cdk/utils';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { BreakpointDocsComponent } from './breakpoint-docs.component';
 import { BreakpointHeaderComponent } from './breakpoint-header/breakpoint-header.component';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
-import { BreakpointModule } from '@fundamental-ngx/cdk/utils';
 import { AliasNamesExampleComponent } from './examples/alias-names-example/alias-names-example.component';
-import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
-import { TableModule } from '@fundamental-ngx/core/table';
+import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
 import { DifferentObserveTargetExampleComponent } from './examples/different-observe-target-example.component';
 
 const routes: Routes = [

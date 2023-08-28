@@ -1,19 +1,18 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
 
 // Dayjs locale data required for this example
-import 'dayjs/locale/es';
-import 'dayjs/locale/en-gb';
-import 'dayjs/locale/de';
-import 'dayjs/locale/fr';
-import 'dayjs/locale/bg';
-import 'dayjs/locale/pl';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { DatePickerComponent as DatePickerComponent_1 } from '@fundamental-ngx/core/date-picker';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DatePickerComponent, DatePickerComponent as DatePickerComponent_1 } from '@fundamental-ngx/core/date-picker';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import 'dayjs/locale/bg';
+import 'dayjs/locale/de';
+import 'dayjs/locale/en-gb';
+import 'dayjs/locale/es';
+import 'dayjs/locale/fr';
+import 'dayjs/locale/pl';
 
 @Component({
     selector: 'fd-date-picker-complex-i18n-example',

@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-no-items-template-example',

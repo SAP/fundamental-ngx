@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
-import { ActionChangeEvent } from '@fundamental-ngx/platform/list';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ActionListItemModule } from '@fundamental-ngx/platform/list';
 import { NgFor } from '@angular/common';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ActionChangeEvent, ActionListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
 
 export interface Action {
     title: string;

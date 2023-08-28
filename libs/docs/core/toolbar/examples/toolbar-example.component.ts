@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import {
+    ToolbarComponent,
+    ToolbarItemDirective,
+    ToolbarLabelDirective,
+    ToolbarSeparatorComponent,
+    ToolbarSpacerDirective
+} from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-toolbar-type-example',

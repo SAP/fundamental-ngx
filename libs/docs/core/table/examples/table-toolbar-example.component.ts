@@ -1,23 +1,18 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { NgFor, NgIf } from '@angular/common';
-import { TableModule } from '@fundamental-ngx/core/table';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TableModule } from '@fundamental-ngx/core/table';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-table-toolbar-example',

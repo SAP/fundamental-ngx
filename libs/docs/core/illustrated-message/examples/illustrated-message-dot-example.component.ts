@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { SvgConfig } from '@fundamental-ngx/core/illustrated-message';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
 
 @Component({
     selector: 'fd-illustrated-message-dot-example',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
-import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-object-based-message-box-example',

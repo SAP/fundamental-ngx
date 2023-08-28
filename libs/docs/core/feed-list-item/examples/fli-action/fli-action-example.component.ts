@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 
 @Component({

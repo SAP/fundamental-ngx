@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { GlobalConfigHeaderComponent } from './global-config-header/global-config-header.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { GlobalConfigDocsComponent } from './global-config-docs.component';
+import { GlobalConfigHeaderComponent } from './global-config-header/global-config-header.component';
 
 const routes: Routes = [
     {

@@ -1,3 +1,5 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,14 +9,11 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
-import { NgIf } from '@angular/common';
-import { A11yModule } from '@angular/cdk/a11y';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { WizardModule, WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-loading-example',

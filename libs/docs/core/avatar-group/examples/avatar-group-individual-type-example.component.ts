@@ -1,22 +1,24 @@
-import { Component, ViewChild } from '@angular/core';
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { Component, ViewChild } from '@angular/core';
 
-import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
-import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
-import { PopoverBodyComponent as PopoverBodyComponent_1 } from '@fundamental-ngx/core/popover';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent as PopoverComponent_1 } from '@fundamental-ngx/core/popover';
 import { NgFor, NgIf, SlicePipe } from '@angular/common';
-import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupComponent, AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import {
+    PopoverBodyComponent,
+    PopoverBodyComponent as PopoverBodyComponent_1,
+    PopoverBodyHeaderDirective,
+    PopoverComponent,
+    PopoverComponent as PopoverComponent_1,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({
     selector: 'fd-avatar-group-individual-type-example',

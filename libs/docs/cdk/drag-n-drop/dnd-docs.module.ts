@@ -5,10 +5,10 @@ import { DisabledBehaviorModule, DragAndDropModule } from '@fundamental-ngx/cdk/
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { DndHeaderComponent } from './dnd-header/dnd-header.component';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { DndDocsComponent } from './dnd-docs.component';
+import { DndHeaderComponent } from './dnd-header/dnd-header.component';
 import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { DisabledExampleComponent } from './examples/disabled-example/disabled-example.component';
 

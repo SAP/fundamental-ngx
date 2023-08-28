@@ -1,9 +1,9 @@
+import { JsonPipe, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@fundamental-ngx/core/theming';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgFor, JsonPipe } from '@angular/common';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@fundamental-ngx/core/theming';
 
 @Component({
     selector: 'fd-theming-url-example',

@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DatePickerMobileModeExampleComponent } from './examples/mobile-mode/date-picker-mobile-mode-example.component';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DatePickerAllowNullExampleComponent } from './examples/date-picker-allow-null-example.component';
 import { DatePickerDisableFocusScrollExampleComponent } from './examples/date-picker-disable-focus-scroll-example.component';
+import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
 import { DatePickerDisabledExampleComponent } from './examples/date-picker-disabled-example.component';
+import { DatePickerFormExampleComponent } from './examples/date-picker-form-example.component';
+import { DatePickerFormRangeExampleComponent } from './examples/date-picker-form-range-example.component';
+import { DatePickerFormatExampleComponent } from './examples/date-picker-format-example.component';
+import { DatePickerI18nExampleComponent } from './examples/date-picker-i18n-example.component';
 import { DatePickerPositionExampleComponent } from './examples/date-picker-position-example.component';
 import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
-import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
-import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
-import { DatePickerFormRangeExampleComponent } from './examples/date-picker-form-range-example.component';
-import { DatePickerFormExampleComponent } from './examples/date-picker-form-example.component';
-import { DatePickerAllowNullExampleComponent } from './examples/date-picker-allow-null-example.component';
-import { DatePickerFormatExampleComponent } from './examples/date-picker-format-example.component';
-import { DatePickerTodayButtonExampleComponent } from './examples/date-picker-today-button-example.component';
-import { DatePickerI18nExampleComponent } from './examples/date-picker-i18n-example.component';
-import { RouterLink } from '@angular/router';
 import { DatePickerRangeExampleComponent } from './examples/date-picker-range-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { DatePickerSingleExampleComponent } from './examples/date-picker-single-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { DatePickerTodayButtonExampleComponent } from './examples/date-picker-today-button-example.component';
+import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
+import { DatePickerMobileModeExampleComponent } from './examples/mobile-mode/date-picker-mobile-mode-example.component';
 
 const datePickerRangeSrc = 'date-picker-range-example.component.ts';
 const datePickerSingleSrc = 'date-picker-single-example.component.ts';

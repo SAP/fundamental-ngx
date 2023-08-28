@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { TextareaHeaderComponent } from './textarea-header/textarea-header.component';
-import { TextareaDocsComponent } from './textarea-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import {
     TextareaExampleComponent,
     TextareaInlineHelpExampleComponent,
     TextareaStateExampleComponent
 } from './examples/textarea-examples.component';
 import { TextareaFormGroupExampleComponent } from './examples/textarea-form-group-example.component';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { TextareaDocsComponent } from './textarea-docs.component';
+import { TextareaHeaderComponent } from './textarea-header/textarea-header.component';
 
 const routes: Routes = [
     {

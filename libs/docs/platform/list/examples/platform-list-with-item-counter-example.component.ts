@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { StandardListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 export interface Counter {
     title: string;

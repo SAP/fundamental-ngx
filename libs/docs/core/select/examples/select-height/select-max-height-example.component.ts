@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({

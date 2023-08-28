@@ -1,12 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets,
+    SeparatorComponent
+} from '@fundamental-ngx/docs/shared';
 import { PlatformTablePreservedStateExampleComponent } from '../../examples/preserved-state/platform-table-preserved-state-example.component';
-import { SeparatorComponent } from '../../../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { ComponentExampleComponent } from '../../../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const platformTableActivableRowSrc = 'preserved-state/platform-table-preserved-state-example.component.html';
 const platformTableActivableRowTsSrc = 'preserved-state/platform-table-preserved-state-example.component.ts';

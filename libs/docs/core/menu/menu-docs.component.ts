@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
 import { RouterLink } from '@angular/router';
-import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
-import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import {
-    MenuExampleComponent,
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
     MenuAddonExampleComponent,
+    MenuExampleComponent,
     MenuSeparatorExampleComponent
 } from './examples/menu-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
+import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
+import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
 const menuHtml = 'menu-example.component.html';
 const menuAddonHtml = 'menu-addon-example.component.html';

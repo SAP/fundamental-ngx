@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { DisabledBehaviorModule, FocusableGridModule } from '@fundamental-ngx/cdk/utils';
 import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { ShortRowsExampleComponent } from './examples/short-rows-example/short-rows-example.component';
 import { FocusableGridDocsComponent } from './focusable-grid-docs.component';
 import { FocusableGridHeaderComponent } from './focusable-grid-header/focusable-grid-header.component';
-import { DefaultExampleComponent } from './examples/default-example/default-example.component';
-import { DisabledBehaviorModule, FocusableGridModule } from '@fundamental-ngx/cdk/utils';
-import { ShortRowsExampleComponent } from './examples/short-rows-example/short-rows-example.component';
 
 const routes: Routes = [
     {

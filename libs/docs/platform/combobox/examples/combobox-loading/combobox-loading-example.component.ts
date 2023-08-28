@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { DATA_PROVIDERS, BaseDataProvider, ComboBoxDataSource } from '@fundamental-ngx/platform/shared';
+import { FormsModule } from '@angular/forms';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { FdpFormGroupModule, PlatformComboboxModule } from '@fundamental-ngx/platform/form';
+import { BaseDataProvider, ComboBoxDataSource, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { FormsModule } from '@angular/forms';
-import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-loading-example',

@@ -1,4 +1,3 @@
-import { BarPo } from './bar.po';
 import {
     checkElementScreenshot,
     getElementArrayLength,
@@ -11,6 +10,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { BarPo } from './bar.po';
 
 describe('Bar test suite:', () => {
     const barPage: BarPo = new BarPo();

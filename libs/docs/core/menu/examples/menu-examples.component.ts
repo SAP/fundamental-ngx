@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MenuModule } from '@fundamental-ngx/core/menu';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-menu-example',

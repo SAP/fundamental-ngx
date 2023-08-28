@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { InputGroupHeaderComponent } from './input-group-header/input-group-header.component';
-import { InputGroupDocsComponent } from './input-group-docs.component';
-import { examples } from './examples';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { examples } from './examples';
+import { InputGroupDocsComponent } from './input-group-docs.component';
+import { InputGroupHeaderComponent } from './input-group-header/input-group-header.component';
 
 const routes: Routes = [
     {

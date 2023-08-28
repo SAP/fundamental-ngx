@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Media } from '@fundamental-ngx/platform/thumbnail';
-import { PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
+import { Media, PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
 
 @Component({
     selector: 'fdp-platform-thumbnail-video-media-example',

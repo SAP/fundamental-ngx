@@ -1,4 +1,3 @@
-import { WizardGeneratorPO } from './wizard-generator.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -30,6 +29,7 @@ import {
     secondAdress,
     textArr
 } from './wizard-generator';
+import { WizardGeneratorPO } from './wizard-generator.po';
 
 describe('Wizard generator test suite', () => {
     const wizardGeneratorPage = new WizardGeneratorPO();

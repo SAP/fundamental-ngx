@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { FieldSetModule } from '@fundamental-ngx/core/form';
+import { FieldSetModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-combobox-disabled-example',

@@ -3,16 +3,15 @@ import {
     AbstractControl,
     FormControl,
     FormGroup,
-    ValidatorFn,
-    Validators,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ValidatorFn,
+    Validators
 } from '@angular/forms';
 import { DateRange } from '@fundamental-ngx/core/calendar';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-date-picker-mobile-example',

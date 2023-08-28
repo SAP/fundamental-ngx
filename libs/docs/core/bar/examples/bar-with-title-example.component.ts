@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { TitleComponent } from '@fundamental-ngx/core/title';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-bar-with-title-example',

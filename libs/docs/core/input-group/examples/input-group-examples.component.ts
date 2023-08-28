@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
-import { FormInputMessageGroupModule } from '@fundamental-ngx/core/form';
-import { FormHeaderModule } from '@fundamental-ngx/core/form';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    FormControlModule,
+    FormHeaderModule,
+    FormInputMessageGroupModule,
+    FormItemModule,
+    FormLabelModule,
+    FormMessageModule
+} from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-input-group-button-example',

@@ -5,21 +5,21 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
 
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
     currentComponentProvider,
     SharedDocumentationModule,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 
-import { PlatformInputGroupHeaderComponent } from './platform-input-group-header/platform-input-group-header.component';
 import { PlatformInputGroupDocsComponent } from './platform-input-group-docs.component';
+import { PlatformInputGroupHeaderComponent } from './platform-input-group-header/platform-input-group-header.component';
 
-import { PlatformInputGroupStandardExampleComponent } from './examples/platform-input-group-standard-example.component';
 import { PlatformInputGroupCompactExampleComponent } from './examples/platform-input-group-compact-example.component';
 import { PlatformInputGroupDisabledExampleComponent } from './examples/platform-input-group-disabled-example.component';
 import { PlatformInputGroupFormExampleComponent } from './examples/platform-input-group-form-example.component';
+import { PlatformInputGroupStandardExampleComponent } from './examples/platform-input-group-standard-example.component';
 
 const routes: Routes = [
     {

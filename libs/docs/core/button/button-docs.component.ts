@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
-import { ButtonTypesExampleComponent } from './examples/button-types-example.component';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ButtonIconsExampleComponent } from './examples/button-icons-example.component';
 import { ButtonMenuExampleComponent } from './examples/button-menu-example.component';
 import { ButtonSizesExampleComponent } from './examples/button-sizes-example.component';
-import { ButtonIconsExampleComponent } from './examples/button-icons-example.component';
 import { ButtonStateExampleComponent } from './examples/button-state-example.component';
 import { ButtonToggledExampleComponent } from './examples/button-toggled-example.component';
+import { ButtonTypesExampleComponent } from './examples/button-types-example.component';
 
 const buttonOptionsExample = 'button-menu-example.component';
 const buttonIconsExample = 'button-icons-example.component';

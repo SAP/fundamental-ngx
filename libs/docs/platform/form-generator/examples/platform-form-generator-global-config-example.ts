@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PlatformFormGeneratorModule, FormGeneratorModuleConfig } from '@fundamental-ngx/platform/form';
+import { FormGeneratorModuleConfig, PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 
 const DEFAULT_FORM_GENERATOR_CONFIG: Partial<FormGeneratorModuleConfig> = {
     itemConfig: {

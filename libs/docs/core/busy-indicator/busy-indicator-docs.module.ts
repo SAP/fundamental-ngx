@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
-import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
-import { examples } from './examples';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
+import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
+import { examples } from './examples';
 
 const routes: Routes = [
     {

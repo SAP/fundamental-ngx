@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { FormsModule } from '@angular/forms';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-options-example',

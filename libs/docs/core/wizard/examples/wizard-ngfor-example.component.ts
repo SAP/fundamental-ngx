@@ -1,3 +1,5 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,15 +9,12 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
-import { NgIf, NgFor } from '@angular/common';
-import { A11yModule } from '@angular/cdk/a11y';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 export type WizardStep = {
     status: WizardStepStatus;

@@ -1,9 +1,9 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-scroll-spy-example',

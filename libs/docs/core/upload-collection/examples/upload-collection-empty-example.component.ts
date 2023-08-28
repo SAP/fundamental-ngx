@@ -1,6 +1,6 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
-import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'fd-upload-collection-empty-example',

@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FdLanguagePatch } from '@fundamental-ngx/i18n';
-import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { TranslationWrapper2Component } from './translation-wrapper-2.component';
+import { FdLanguagePatch, FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
+import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { TranslationWrapper1Component } from './translation-wrapper-1.component';
+import { TranslationWrapper2Component } from './translation-wrapper-2.component';
 
 @Component({
     selector: 'app-i18n-translation-customization-example',

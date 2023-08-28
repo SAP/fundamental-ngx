@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
     currentComponentProvider,
@@ -8,13 +9,11 @@ import {
     I18nDocsComponent,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformStandardListItemHeaderComponent } from './platform-standard-list-item-header/platform-standard-list-item-header.component';
-import { PlatformStandardListItemDocsComponent } from './platform-standard-list-item-docs.component';
+import { PlatformStandardListItemBorderLessExampleComponent } from './examples/platform-standard-list-item-border-less-example.component';
 import {
     PlatformNonByLineStandardListItemExampleComponent,
     PlatformStandardListItemExampleComponent,
@@ -23,10 +22,11 @@ import {
     PlatformStandardListItemWithSecondaryTypeExampleComponent
 } from './examples/platform-standard-list-item-example.component';
 import { PlatformStandardListItemWithFooterExampleComponent } from './examples/platform-standard-list-item-with-footer-example.component';
-import { PlatformStandardListItemBorderLessExampleComponent } from './examples/platform-standard-list-item-border-less-example.component';
 import { PlatformStandardListItemWithNavigationExampleComponent } from './examples/platform-standard-list-item-with-navigation-example.component';
-import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './examples/platform-standard-list-item-with-single-selection-example.component';
 import { PlatformStandardListItemWithSelectionExampleComponent } from './examples/platform-standard-list-item-with-selection-example.component';
+import { PlatformStandardListItemWithSingleSelectionExampleComponent } from './examples/platform-standard-list-item-with-single-selection-example.component';
+import { PlatformStandardListItemDocsComponent } from './platform-standard-list-item-docs.component';
+import { PlatformStandardListItemHeaderComponent } from './platform-standard-list-item-header/platform-standard-list-item-header.component';
 
 import { PlatformStandardListUnreadExampleComponent } from './examples/platform-standard-list-unread-example.component';
 

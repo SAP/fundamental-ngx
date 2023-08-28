@@ -1,8 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { GridListItemOutputEvent, GridListItemType, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 import { NgFor, NgIf } from '@angular/common';
-import { GridListModule } from '@fundamental-ngx/core/grid-list';
+import {
+    GridListItemOutputEvent,
+    GridListItemType,
+    GridListModule,
+    GridListSelectionEvent
+} from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;

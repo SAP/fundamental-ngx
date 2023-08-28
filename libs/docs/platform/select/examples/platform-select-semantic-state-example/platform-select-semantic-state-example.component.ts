@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { OptionItem } from '@fundamental-ngx/platform/shared';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { OptionItem } from '@fundamental-ngx/platform/shared';
 
 export class Fruit {
     id: string;

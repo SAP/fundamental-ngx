@@ -1,9 +1,8 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FieldSetModule, FormItemModule } from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { NgFor } from '@angular/common';
-import { FieldSetModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-radio-form-group-example',

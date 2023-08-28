@@ -3,14 +3,14 @@ import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-    WizardGeneratorItem,
-    WizardTitle,
-    WizardDialogGeneratorService,
-    WizardGeneratorFormsValue
-} from '@fundamental-ngx/platform/wizard-generator';
-import { NgIf, JsonPipe } from '@angular/common';
+import { JsonPipe, NgIf } from '@angular/common';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import {
+    WizardDialogGeneratorService,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem,
+    WizardTitle
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-responsive-dialog-example',

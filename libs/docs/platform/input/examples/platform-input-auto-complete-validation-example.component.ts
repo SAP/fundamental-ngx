@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { NgFor } from '@angular/common';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverComponent as PopoverComponent_1,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent as PopoverComponent_1 } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fdp-platform-input-auto-complete-validation-example',

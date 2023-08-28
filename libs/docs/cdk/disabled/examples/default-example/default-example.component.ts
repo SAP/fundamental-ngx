@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
-import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
+import { DisabledBehaviorDirective, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-example',

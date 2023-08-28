@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-scroll-example',

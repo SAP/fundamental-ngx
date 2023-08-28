@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { MomentDatetimeFormatsExampleComponent } from './examples/moment-datetime-formats-example.component';
-import { MomentAdapterOptionsExampleComponent } from './examples/moment-adapter-options-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { DatePickerMomentAdapterExampleComponent } from './examples/date-picker-moment-adapter-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { MomentAdapterOptionsExampleComponent } from './examples/moment-adapter-options-example.component';
+import { MomentDatetimeFormatsExampleComponent } from './examples/moment-datetime-formats-example.component';
 
 const datePickerMomentAdapterSrcTs = 'date-picker-moment-adapter-example.component.ts';
 const datePickerMomentAdapterSrcHtml = 'date-picker-moment-adapter-example.component.html';

@@ -1,16 +1,16 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
     VhdDataProvider,
     VhdValue,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
-import { NgFor } from '@angular/common';
-import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormsModule } from '@angular/forms';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 interface ExampleTestModel {
     id: number;

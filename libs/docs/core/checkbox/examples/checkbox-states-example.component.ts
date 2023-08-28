@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormHeaderModule } from '@fundamental-ngx/core/form';
 
 @Component({

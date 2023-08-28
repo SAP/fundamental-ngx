@@ -1,10 +1,10 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { AsyncPipe } from '@angular/common';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 @Component({

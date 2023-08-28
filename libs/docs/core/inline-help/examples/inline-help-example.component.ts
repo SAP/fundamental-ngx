@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { map } from 'rxjs/operators';
-import { Placement } from '@fundamental-ngx/core/shared';
 import { AsyncPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormControlModule } from '@fundamental-ngx/core/form';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-inline-help-example',

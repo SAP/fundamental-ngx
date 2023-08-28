@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
-import { FeedListItemHeaderComponent } from './feed-list-item-header/feed-list-item-header.component';
 import { FeedListItemDocsComponent } from './feed-list-item-docs.component';
+import { FeedListItemHeaderComponent } from './feed-list-item-header/feed-list-item-header.component';
 
-import { examples } from './examples';
-import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
-import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
+import { examples } from './examples';
 
 const routes: Routes = [
     {

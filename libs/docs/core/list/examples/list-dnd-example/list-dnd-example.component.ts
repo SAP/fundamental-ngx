@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ListModule } from '@fundamental-ngx/core/list';
 

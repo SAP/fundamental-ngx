@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { HeaderTabsComponent } from '../../../shared/src/lib/core-helpers/header-tabs/header-tabs.component';
-import { DescriptionComponent } from '../../../shared/src/lib/core-helpers/description/description';
-import { HeaderComponent } from '../../../shared/src/lib/core-helpers/header/header.component';
-import { DocPageComponent } from '../../../shared/src/lib/core-helpers/doc-page/doc-page.component';
+import {
+    DescriptionComponent,
+    DocPageComponent,
+    HeaderComponent,
+    HeaderTabsComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'fd-global-config-header',

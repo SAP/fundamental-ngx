@@ -19,21 +19,24 @@ const PlatformMultiInputCompactExampleComponentTs = 'platform-multi-input-compac
 const PlatformMultiInputLoadingExampleComponent = 'platform-multi-input-loading-example.component.html';
 const PlatformMultiInputLoadingExampleComponentTs = 'platform-multi-input-loading-example.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformMultiInputLoadingExampleComponent as PlatformMultiInputLoadingExampleComponent_1 } from './examples/platform-multi-input-loading-example.component';
-import { PlatformMultiInputReactiveExampleComponent } from './examples/platform-multi-input-reactive-example.component';
-import { PlatformMultiInputMobileExampleComponent } from './examples/platform-multi-input-mobile-example.component';
-import { PlatformMultiInputDisabledExampleComponent } from './examples/platform-multi-input-disabled.component';
-import { PlatformMultiInputDeclineExampleComponent } from './examples/platform-multi-input-decline-example.component';
-import { PlatformMultiInputGroupedExampleComponent } from './examples/platform-multi-input-grouped-example.component';
-import { PlatformMultiInputComplexExampleComponent } from './examples/platform-multi-input-complex-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformMultiInputCompactExampleComponent as PlatformMultiInputCompactExampleComponent_1 } from './examples/platform-multi-input-compact-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PlatformMultiInputComplexExampleComponent } from './examples/platform-multi-input-complex-example.component';
+import { PlatformMultiInputDeclineExampleComponent } from './examples/platform-multi-input-decline-example.component';
+import { PlatformMultiInputDisabledExampleComponent } from './examples/platform-multi-input-disabled.component';
 import { PlatformMultiInputExampleComponent } from './examples/platform-multi-input-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformMultiInputGroupedExampleComponent } from './examples/platform-multi-input-grouped-example.component';
+import { PlatformMultiInputLoadingExampleComponent as PlatformMultiInputLoadingExampleComponent_1 } from './examples/platform-multi-input-loading-example.component';
+import { PlatformMultiInputMobileExampleComponent } from './examples/platform-multi-input-mobile-example.component';
+import { PlatformMultiInputReactiveExampleComponent } from './examples/platform-multi-input-reactive-example.component';
 
 @Component({
     selector: 'fd-platform-multi-input-docs',

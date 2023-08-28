@@ -1,30 +1,33 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
 import { RouterLink } from '@angular/router';
-import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
-import { TableFixedExampleComponent } from './examples/table-fixed-example.component';
-import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
-import { TableNavigatableRowExampleComponent } from './examples/table-navigatable-row-example.component';
-import { TablePopinExampleComponent } from './examples/table-popin-example/table-popin-example.component';
-import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
-import { TableSemanticExampleComponent } from './examples/table-semantic-example.component';
-import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
-import { TableFocusableExampleComponent } from './examples/table-focusable-example/table-focusable-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { TableLoadingExampleComponent } from './examples/loading/table-loading-example.component';
 import { TableActivableExampleComponent } from './examples/table-activable-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
+import { TableCdkExampleComponent } from './examples/table-cdk-example.component';
+import { TableCheckboxesExampleComponent } from './examples/table-checkboxes-example.component';
 import { TableColumnSortingExampleComponent } from './examples/table-column-sorting-example.component';
 import { TableCustomColumnsExampleComponent } from './examples/table-custom-columns-example/table-custom-columns-example.component';
-import { TableFooterExampleComponent } from './examples/table-footer-example.component';
-import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
-import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { TableExampleComponent } from './examples/table-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { TableFixedExampleComponent } from './examples/table-fixed-example.component';
+import { TableFocusableExampleComponent } from './examples/table-focusable-example/table-focusable-example.component';
+import { TableFooterExampleComponent } from './examples/table-footer-example.component';
+import { TableNavigatableRowExampleComponent } from './examples/table-navigatable-row-example.component';
+import { TablePaginationExampleComponent } from './examples/table-pagination-example.component';
+import { TablePopinExampleComponent } from './examples/table-popin-example/table-popin-example.component';
+import { TableResponsiveExampleComponent } from './examples/table-responsive-example.component';
+import { TableSemanticExampleComponent } from './examples/table-semantic-example.component';
+import { TableToolbarExampleComponent } from './examples/table-toolbar-example.component';
+import { TableWithoutBordersExampleComponent } from './examples/table-without-borders-example.component';
 
 const tableColumnSortPipeTs = 'sort.pipe.ts';
 const tableColumnFilterPipeTs = 'filter.pipe.ts';

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { HeaderTabsComponent } from '../../../shared/src/lib/core-helpers/header-tabs/header-tabs.component';
-import { ImportComponent } from '../../../shared/src/lib/core-helpers/import/import.component';
-import { DatetimeImportantComponent } from '../../../shared/src/lib/common-components/datetime-important/datetime-important.component';
 import { RouterLink } from '@angular/router';
-import { DescriptionComponent } from '../../../shared/src/lib/core-helpers/description/description';
-import { HeaderComponent } from '../../../shared/src/lib/core-helpers/header/header.component';
-import { DocPageComponent } from '../../../shared/src/lib/core-helpers/doc-page/doc-page.component';
+import {
+    DatetimeImportantComponent,
+    DescriptionComponent,
+    DocPageComponent,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'app-datetime-picker-header',

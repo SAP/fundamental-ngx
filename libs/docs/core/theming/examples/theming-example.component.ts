@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ThemingService } from '@fundamental-ngx/core/theming';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ThemingService } from '@fundamental-ngx/core/theming';
 
 @Component({
     selector: 'fd-theming-example',

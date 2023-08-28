@@ -1,7 +1,6 @@
+import { NgFor, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
-import { FdDndDropEventMode, FdDndDropType, FdDropEvent } from '@fundamental-ngx/cdk/utils';
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { NgTemplateOutlet, NgFor, NgStyle } from '@angular/common';
+import { DragAndDropModule, FdDndDropEventMode, FdDropEvent } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-example',

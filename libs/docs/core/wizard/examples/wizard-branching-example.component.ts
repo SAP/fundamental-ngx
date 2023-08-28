@@ -1,3 +1,6 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,27 +11,23 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormsModule } from '@angular/forms';
-import { RadioModule } from '@fundamental-ngx/core/radio';
-import { FormGroupModule } from '@fundamental-ngx/core/form';
-import { FormLegendModule } from '@fundamental-ngx/core/form';
-import { FieldSetModule } from '@fundamental-ngx/core/form';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
-import { NgIf } from '@angular/common';
-import { A11yModule } from '@angular/cdk/a11y';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    FieldSetModule,
+    FormControlModule,
+    FormGroupModule,
+    FormItemModule,
+    FormLabelModule,
+    FormLegendModule
+} from '@fundamental-ngx/core/form';
+import { RadioButtonComponent, RadioModule } from '@fundamental-ngx/core/radio';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-branching-example',

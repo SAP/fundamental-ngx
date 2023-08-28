@@ -6,15 +6,15 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { LinkModule } from '@fundamental-ngx/core/link';
+import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { TitleModule } from '@fundamental-ngx/core/title';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { OverflowLayoutHeaderComponent } from './overflow-layout-header/overflow-layout-header.component';
-import { OverflowLayoutDocsComponent } from './overflow-layout-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { examples } from './examples';
-import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
+import { OverflowLayoutDocsComponent } from './overflow-layout-docs.component';
+import { OverflowLayoutHeaderComponent } from './overflow-layout-header/overflow-layout-header.component';
 
 const routes: Routes = [
     {

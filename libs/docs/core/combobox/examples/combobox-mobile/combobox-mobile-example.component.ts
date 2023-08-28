@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FormsModule } from '@angular/forms';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
     selector: 'fd-combobox-mobile-example',

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
-import { FocusableItemHeaderComponent } from './focusable-item-header/focusable-item-header.component';
-import { FocusableItemDocsComponent } from './focusable-item-docs.component';
-import { examples } from './examples';
 import { FocusableItemModule } from '@fundamental-ngx/cdk/utils';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { examples } from './examples';
+import { FocusableItemDocsComponent } from './focusable-item-docs.component';
+import { FocusableItemHeaderComponent } from './focusable-item-header/focusable-item-header.component';
 
 const routes: Routes = [
     {

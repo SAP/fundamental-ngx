@@ -8,8 +8,7 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-datetime-form-example',

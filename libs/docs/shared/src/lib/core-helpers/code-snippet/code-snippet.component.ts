@@ -1,22 +1,22 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
     ElementRef,
-    inject,
     Input,
-    isDevMode,
     OnChanges,
     SimpleChanges,
-    ViewChild
+    ViewChild,
+    inject,
+    isDevMode
 } from '@angular/core';
-import { ExampleFile } from '../code-example/example-file';
-import hljs from 'highlight.js';
-import { BehaviorSubject, isObservable, merge, of, Subject, takeUntil } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { destroyObservable } from '@fundamental-ngx/cdk';
-import { NgIf, AsyncPipe } from '@angular/common';
+import hljs from 'highlight.js';
+import { BehaviorSubject, Subject, isObservable, merge, of, takeUntil } from 'rxjs';
+import { ExampleFile } from '../code-example/example-file';
 
 @Component({
     selector: 'fd-code-snippet',

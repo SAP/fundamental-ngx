@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { CheckboxHeaderComponent } from './checkbox-header/checkbox-header.component';
-import { CheckboxDocsComponent } from './checkbox-docs.component';
-import { examples } from './examples';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { CheckboxDisplayModeExampleComponent } from './examples/checkbox-display-mode-example.component';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { CheckboxDocsComponent } from './checkbox-docs.component';
+import { CheckboxHeaderComponent } from './checkbox-header/checkbox-header.component';
+import { examples } from './examples';
+import { CheckboxDisplayModeExampleComponent } from './examples/checkbox-display-mode-example.component';
 
 const routes: Routes = [
     {

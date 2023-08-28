@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { CalendarComponent, CalendarYearGrid } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { CalendarYearGrid } from '@fundamental-ngx/core/calendar';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-grid-example',

@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 import moment from 'moment';
 
 // Import moment locale data required for this example
-import 'moment/locale/en-gb';
-import 'moment/locale/fa';
-import 'moment/locale/de';
-import 'moment/locale/es';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import 'moment/locale/bg';
+import 'moment/locale/de';
+import 'moment/locale/en-gb';
+import 'moment/locale/es';
+import 'moment/locale/fa';
 import 'moment/locale/ja';
 import 'moment/locale/tr';
 import 'moment/locale/zh-cn';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormsModule } from '@angular/forms';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-calendar-i18n-moment-example',

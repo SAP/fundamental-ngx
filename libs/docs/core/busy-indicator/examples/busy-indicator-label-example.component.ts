@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { BusyIndicatorExtendedDirective } from '@fundamental-ngx/core/busy-indicator';
+import { BusyIndicatorComponent, BusyIndicatorExtendedDirective } from '@fundamental-ngx/core/busy-indicator';
 
 @Component({
     selector: 'fd-busy-indicator-label-example',

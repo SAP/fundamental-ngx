@@ -10,8 +10,8 @@ import {
     ToastTopLeftPosition,
     ToastTopRightPosition
 } from '@fundamental-ngx/cdk/utils';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-message-toast-position-example',

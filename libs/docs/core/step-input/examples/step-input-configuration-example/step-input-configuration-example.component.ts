@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { StepInputModule } from '@fundamental-ngx/core/step-input';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { StepInputModule } from '@fundamental-ngx/core/step-input';
 
 @Component({
     selector: 'fd-step-input-configuration-example',

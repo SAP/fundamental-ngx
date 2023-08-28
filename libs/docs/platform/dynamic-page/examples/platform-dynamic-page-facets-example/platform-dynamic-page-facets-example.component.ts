@@ -1,27 +1,27 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page-page-overflow.service';
+import { NgIf } from '@angular/common';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FacetModule } from '@fundamental-ngx/core/facets';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FacetModule } from '@fundamental-ngx/core/facets';
-import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { DynamicPageHeaderSubtitleDirective } from '@fundamental-ngx/platform/dynamic-page';
-import { DynamicPageHeaderTitleDirective } from '@fundamental-ngx/platform/dynamic-page';
-import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
-import { NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import {
+    DynamicPageHeaderSubtitleDirective,
+    DynamicPageHeaderTitleDirective,
+    PlatformDynamicPageModule
+} from '@fundamental-ngx/platform/dynamic-page';
+import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-facets-example',

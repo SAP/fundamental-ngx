@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
-import { ExampleBackgroundComponent } from '../example-background/example-background.component';
-import { DirectionalityComponent } from '../directionality/directionality.component';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
+import { DirectionalityComponent } from '../directionality/directionality.component';
+import { ExampleBackgroundComponent } from '../example-background/example-background.component';
 
 let componentExampleUniqueId = 0;
 

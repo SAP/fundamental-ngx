@@ -1,7 +1,6 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { NgIf, JsonPipe } from '@angular/common';
-import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
-import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { ClickedBehaviorModule, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-fn-click-basic-example',

@@ -1,13 +1,13 @@
-import sdk from '@stackblitz/sdk';
 import { Inject, Injectable } from '@angular/core';
-import { StackblitzFile } from './interfaces/stackblitz-parameters';
-import { StackblitzDependencies } from './stackblitz-dependencies';
-import { StackblitzProject } from './interfaces/stackblitz-project';
+import sdk from '@stackblitz/sdk';
+import { first, tap, zip } from 'rxjs';
+import { getAsset } from '../../getAsset';
+import { DocsService } from '../../services/docs.service';
 import { CURRENT_LIB, Libraries } from '../../utilities';
 import { ExampleFile } from '../code-example/example-file';
-import { DocsService } from '../../services/docs.service';
-import { getAsset } from '../../getAsset';
-import { first, tap, zip } from 'rxjs';
+import { StackblitzFile } from './interfaces/stackblitz-parameters';
+import { StackblitzProject } from './interfaces/stackblitz-project';
+import { StackblitzDependencies } from './stackblitz-dependencies';
 
 interface GeneratedFile {
     path: string;

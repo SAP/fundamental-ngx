@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { BusyIndicatorExtendedDirective } from '@fundamental-ngx/core/busy-indicator';
+import { BusyIndicatorComponent, BusyIndicatorExtendedDirective } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-busy-indicator-extended-example',

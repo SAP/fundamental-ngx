@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DisplayListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { DisplayListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
 
 @Component({
     selector: 'fdp-display-list-item-example',

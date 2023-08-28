@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/platform/form';
 import { OptionItem } from '@fundamental-ngx/platform/shared';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
-import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;

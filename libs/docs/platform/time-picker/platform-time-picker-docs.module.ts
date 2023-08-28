@@ -4,14 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/platform/form';
-import { PlatformTimePickerDocsComponent } from './platform-time-picker-docs.component';
-import { PlatformTimePickerHeaderComponent } from './platform-time-picker-header/platform-time-picker-header.component';
 import { PlatformTimePickerBasicExampleComponent } from './examples/platform-time-picker-basic-example.component';
 import { PlatformTimePickerReactiveExampleComponent } from './examples/platform-time-picker-reactive-example.component';
 import { PlatformTimePickerTemplateExampleComponent } from './examples/platform-time-picker-template-example.component';
+import { PlatformTimePickerDocsComponent } from './platform-time-picker-docs.component';
+import { PlatformTimePickerHeaderComponent } from './platform-time-picker-header/platform-time-picker-header.component';
 
 const routes: Routes = [
     {

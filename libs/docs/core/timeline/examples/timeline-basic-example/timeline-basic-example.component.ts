@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { TIMELINE_EXAMPLE_DATA } from './timeline-example-data';
 import { DatePipe } from '@angular/common';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { Component } from '@angular/core';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
+import { TIMELINE_EXAMPLE_DATA } from './timeline-example-data';
 
 @Component({
     selector: 'fd-timeline-basic-example',

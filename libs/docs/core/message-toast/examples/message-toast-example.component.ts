@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MessageToastContentExampleComponent } from './message-toast-content-example.component';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-message-toast-example',

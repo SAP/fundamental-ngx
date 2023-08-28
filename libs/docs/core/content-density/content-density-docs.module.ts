@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ContentDensityHeaderComponent } from './content-density-header/content-density-header.component';
-import { ContentDensityDocsComponent } from './content-density-docs.component';
-import { ContentDensityExampleComponent } from './examples/content-density-example.component';
-import { SelectModule } from '@fundamental-ngx/core/select';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { DirectiveUsageExampleComponent } from './examples/directive-usage/directive-usage-example.component';
-import { ContentDensityUserComponent } from './examples/content-density-user/content-density-user.component';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { ContentDensityDocsComponent } from './content-density-docs.component';
+import { ContentDensityHeaderComponent } from './content-density-header/content-density-header.component';
+import { ContentDensityExampleComponent } from './examples/content-density-example.component';
+import { ContentDensityUserComponent } from './examples/content-density-user/content-density-user.component';
+import { DirectiveUsageExampleComponent } from './examples/directive-usage/directive-usage-example.component';
 
 const routes: Routes = [
     {

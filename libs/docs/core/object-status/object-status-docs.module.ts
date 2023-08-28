@@ -1,8 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ObjectStatusDocsComponent } from './object-status-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { ObjectStatusDefaultExampleComponent } from './examples/object-status-default-example.component';
 import {
     ObjectStatusClickableAndIconExampleComponent,
     ObjectStatusGenericExampleComponent,
@@ -12,9 +13,8 @@ import {
     ObjectStatusTextExampleComponent,
     ObjectStatusTextIconExampleComponent
 } from './examples/object-status-examples.component';
+import { ObjectStatusDocsComponent } from './object-status-docs.component';
 import { ObjectStatusHeaderComponent } from './object-status-header/object-status-header.component';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ObjectStatusDefaultExampleComponent } from './examples/object-status-default-example.component';
 
 const routes: Routes = [
     {

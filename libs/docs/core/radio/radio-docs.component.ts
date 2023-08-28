@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { RadioExamplesComponent } from './examples/radio-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
 
 const formHtml = 'radio-example.component.html';
 const formTs = 'radio-examples.component.ts';

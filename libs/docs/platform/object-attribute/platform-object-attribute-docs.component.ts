@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformObjectAttributeLinkExampleComponent } from './examples/platform-object-attribute-link-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import {
     PlatformObjectAttributeExampleComponent,
     PlatformObjectAttributeTruncateExampleComponent
 } from './examples/platform-object-attribute-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformObjectAttributeLinkExampleComponent } from './examples/platform-object-attribute-link-example.component';
 
 const objectAttribute = 'platform-object-attribute-example.component.html';
 const objectAttributeTruncate = 'platform-object-attribute-truncate-example.component.html';

@@ -1,18 +1,22 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets, getExampleFile } from '@fundamental-ngx/docs/shared';
-import { CodeSnippetComponent } from '../../shared/src/lib/core-helpers/code-snippet/code-snippet.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { SettingsGeneratorDialogExampleComponent } from './examples/dialog/settings-generator-dialog-example.component';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    CodeSnippetComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
 import { SettingsGeneratorCustomControlExampleComponent } from './examples/custom-control/settings-generator-custom-control-example.component';
 import { SettingsGeneratorCustomLayoutExampleComponent } from './examples/custom-layout/settings-generator-custom-layout-example.component';
-import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/message-popover/settings-generator-message-popover-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { SettingsGeneratorDefaultExampleComponent } from './examples/default/settings-generator-default-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { RouterLink } from '@angular/router';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { SettingsGeneratorDialogExampleComponent } from './examples/dialog/settings-generator-dialog-example.component';
+import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/message-popover/settings-generator-message-popover-example.component';
 
 @Component({
     selector: 'app-settings-generator',

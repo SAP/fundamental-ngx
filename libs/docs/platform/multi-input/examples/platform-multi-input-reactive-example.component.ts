@@ -1,12 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { JsonPipe, NgIf } from '@angular/common';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { NgIf, JsonPipe } from '@angular/common';
-import { PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-multi-input-reactive-example',

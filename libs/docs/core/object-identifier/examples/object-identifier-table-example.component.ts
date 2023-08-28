@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
 import { NgFor } from '@angular/common';
-import { TableModule } from '@fundamental-ngx/core/table';
+import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
     selector: 'fd-object-identifier-table-example',

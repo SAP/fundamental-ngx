@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { DynamicSideContentSizeExampleComponent } from './examples/dynamic-side-content-size-example.component';
-import { DynamicSideContentPositioningExampleComponent } from './examples/dynamic-side-content-positioning-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { DynamicSideContentBasicExampleComponent } from './examples/dynamic-side-content-basic-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { DynamicSideContentPositioningExampleComponent } from './examples/dynamic-side-content-positioning-example.component';
+import { DynamicSideContentSizeExampleComponent } from './examples/dynamic-side-content-size-example.component';
 
 const exampleScssCode = 'dynamic-side-content.component.scss';
 

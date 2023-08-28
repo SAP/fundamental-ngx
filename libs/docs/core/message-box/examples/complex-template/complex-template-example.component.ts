@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
-import { MessageBoxComplexExampleComponent } from './message-box-complex-example.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageBoxComplexExampleComponent } from './message-box-complex-example.component';
 
 @Component({
     selector: 'fd-complex-template-example',

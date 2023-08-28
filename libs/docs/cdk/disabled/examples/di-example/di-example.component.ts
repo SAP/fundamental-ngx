@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
+import { ClickedBehaviorModule, DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DisabledRecipientDirective } from './disabled-recipient.directive';
-import { DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-di-example',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 import dayjs, { Dayjs } from 'dayjs';
-import { FormsModule } from '@angular/forms';
-import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 @Component({
     selector: 'fd-dayjs-datetime-formats-example',

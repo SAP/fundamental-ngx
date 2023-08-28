@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ProviderExampleComponent } from './examples/provider-example/provider-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { ProviderExampleComponent } from './examples/provider-example/provider-example.component';
 
 const defaultExampleHtml = 'basic-example/basic-example.component.html';
 const defaultExampleTs = 'basic-example/basic-example.component.ts';

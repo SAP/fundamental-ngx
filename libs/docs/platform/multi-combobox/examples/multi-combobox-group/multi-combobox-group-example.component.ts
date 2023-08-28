@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { JsonPipe } from '@angular/common';
-import { PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import {
+    FdpFormGroupModule,
+    MultiComboboxSelectionChangeEvent,
+    PlatformMultiComboboxModule
+} from '@fundamental-ngx/platform/form';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-multi-combobox-group-example',

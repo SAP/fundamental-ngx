@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { SuggestionItem, SearchInput, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import {
+    PlatformSearchFieldModule,
+    SearchInput,
+    SuggestionItem,
+    ValueLabelItem
+} from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-categories-example',

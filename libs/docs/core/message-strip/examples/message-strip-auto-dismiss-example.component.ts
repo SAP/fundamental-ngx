@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { AutoDismissMessageStripDirective } from '@fundamental-ngx/core/message-strip';
-import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     selector: 'message-strip-auto-dismiss-example',

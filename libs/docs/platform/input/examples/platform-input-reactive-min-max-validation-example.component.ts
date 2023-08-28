@@ -1,8 +1,7 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgIf, JsonPipe } from '@angular/common';
-import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
 
 const MAX_VALUE = 10;
 const MIN_VALUE = 5;

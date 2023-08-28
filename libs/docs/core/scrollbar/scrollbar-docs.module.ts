@@ -5,8 +5,8 @@ import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { ScrollbarHeaderComponent } from './scrollbar-header/scrollbar-header.component';
 import { ScrollbarDocsComponent } from './scrollbar-docs.component';
+import { ScrollbarHeaderComponent } from './scrollbar-header/scrollbar-header.component';
 
 import { ScrollbarExampleComponent } from './examples/scrollbar-example.component';
 import { ScrollbarNoHorizontalExampleComponent } from './examples/scrollbar-no-horizontal-example.component';

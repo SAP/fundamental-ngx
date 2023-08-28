@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
-import { DataSourceHeaderComponent } from './data-source-header/data-source-header.component';
-import { DataSourceDocsComponent } from './data-source-docs.component';
-import { examples } from './examples';
 import { DataSourceModule } from '@fundamental-ngx/cdk/data-source';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { DataSourceDocsComponent } from './data-source-docs.component';
+import { DataSourceHeaderComponent } from './data-source-header/data-source-header.component';
+import { examples } from './examples';
 
 const routes: Routes = [
     {

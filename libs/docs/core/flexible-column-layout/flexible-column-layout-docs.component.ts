@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    CodeSnippetComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { FlexibleColumnLayoutCustomConfigExampleComponent } from './examples/custom-config/flexible-column-layout-custom-config-example.component';
-import { CodeSnippetComponent } from '../../shared/src/lib/core-helpers/code-snippet/code-snippet.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { FlexibleColumnLayoutDynamicPageExampleComponent } from './examples/dynamic-page/flexible-column-layout-dynamic-page-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { FlexibleColumnLayoutExampleComponent } from './examples/default/flexible-column-layout-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { FlexibleColumnLayoutDynamicPageExampleComponent } from './examples/dynamic-page/flexible-column-layout-dynamic-page-example.component';
 
 const defaultFlexibleColumnLayoutScss = 'default/flexible-column-layout-example.component.scss';
 const flexibleColumnLayoutDynamicPageScss = 'dynamic-page/flexible-column-layout-dynamic-page-example.component.scss';

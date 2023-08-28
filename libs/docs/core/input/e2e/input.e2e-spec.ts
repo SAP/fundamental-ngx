@@ -19,6 +19,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { longLine, number, special_characters, text } from './input';
 import {
     informationInputLabelText,
     inputMessageText,
@@ -29,7 +30,6 @@ import {
     validInputLabelText,
     warningInputLabelText
 } from './input-page-contents';
-import { longLine, number, special_characters, text } from './input';
 import { InputPo } from './input.po';
 
 describe('Input should ', () => {

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
-import { SelectableListDocsComponent } from './selectable-list-docs.component';
-import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
-import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { SelectableListModule } from '@fundamental-ngx/cdk/utils';
+import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { AdvancedUsageComponent } from './examples/advanced-usage/advanced-usage.component';
 import { CustomSelectableItemDirective } from './examples/advanced-usage/custom-selectable-item.directive';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { SelectableListDocsComponent } from './selectable-list-docs.component';
+import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
 
 const routes: Routes = [
     {

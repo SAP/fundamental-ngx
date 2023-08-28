@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
-import { ComboboxItem } from '@fundamental-ngx/core/combobox';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ComboboxItem, ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { FormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 export interface ExampleItem {
     name: string;

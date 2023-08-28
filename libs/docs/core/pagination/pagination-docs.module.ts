@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { PaginationHeaderComponent } from './pagination-header/pagination-header.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { PaginationDocsComponent } from './pagination-docs.component';
+import { PaginationHeaderComponent } from './pagination-header/pagination-header.component';
 
-import { PaginationExampleComponent } from './examples/pagination-example.component';
-import { PaginationShowingExampleComponent } from './examples/pagination-showing-example.component';
-import { PaginationPerPageExampleComponent } from './examples/pagination-per-page/pagination-per-page-example.component';
-import { PaginationMobileExampleComponent } from './examples/pagination-mobile/pagination-mobile-example.component';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { SelectModule } from '@fundamental-ngx/core/select';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { PaginationExampleComponent } from './examples/pagination-example.component';
+import { PaginationMobileExampleComponent } from './examples/pagination-mobile/pagination-mobile-example.component';
+import { PaginationPerPageExampleComponent } from './examples/pagination-per-page/pagination-per-page-example.component';
+import { PaginationShowingExampleComponent } from './examples/pagination-showing-example.component';
 
 const routes: Routes = [
     {

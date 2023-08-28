@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CarouselItemComponent } from '@fundamental-ngx/core/carousel';
-import { CarouselComponent } from '@fundamental-ngx/core/carousel';
+import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
 
 @Component({
     selector: 'fd-carousel-loading-content-example',

@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { SliderCustomValue } from '@fundamental-ngx/platform/slider';
 import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SliderComponent } from '@fundamental-ngx/platform/slider';
+import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/platform/slider';
 
 @Component({
     selector: 'fdp-slider-custom-values-example',

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({

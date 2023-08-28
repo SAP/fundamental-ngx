@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-card-compact-example',

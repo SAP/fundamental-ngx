@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,22 +9,29 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { TableComponent, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
-import { Observable, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { NgIf } from '@angular/common';
-import { FdpCellDef, FdpTableCell } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableColumnResponsiveDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import {
+    PlatformTableModule,
+    TableComponent,
+    TableDataProvider,
+    TableDataSource,
+    TableState
+} from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    PlatformTableColumnResponsiveDirective,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-table-responsive-columns-example',

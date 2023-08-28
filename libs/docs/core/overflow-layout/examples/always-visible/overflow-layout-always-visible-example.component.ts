@@ -1,7 +1,7 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
-import { NgFor } from '@angular/common';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
 @Component({

@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { defaultFormGeneratorHintOptions } from '@fundamental-ngx/platform/form';
-import { HeaderTabsComponent } from '../../../shared/src/lib/core-helpers/header-tabs/header-tabs.component';
-import { ImportComponent } from '../../../shared/src/lib/core-helpers/import/import.component';
 import { NgFor } from '@angular/common';
-import { TableModule } from '@fundamental-ngx/core/table';
+import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { DescriptionComponent } from '../../../shared/src/lib/core-helpers/description/description';
-import { HeaderComponent } from '../../../shared/src/lib/core-helpers/header/header.component';
-import { DocPageComponent } from '../../../shared/src/lib/core-helpers/doc-page/doc-page.component';
+import { TableModule } from '@fundamental-ngx/core/table';
+import {
+    DescriptionComponent,
+    DocPageComponent,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
+import { defaultFormGeneratorHintOptions } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fd-platform-form-generator-header',

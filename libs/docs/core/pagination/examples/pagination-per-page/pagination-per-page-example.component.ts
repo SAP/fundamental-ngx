@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { PaginationModule } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-per-page-example',

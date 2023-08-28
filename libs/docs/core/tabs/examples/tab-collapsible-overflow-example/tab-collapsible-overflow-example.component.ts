@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { Component } from '@angular/core';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({
     selector: 'fd-collapsible-overflow-example',

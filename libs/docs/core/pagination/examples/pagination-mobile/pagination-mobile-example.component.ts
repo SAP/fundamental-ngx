@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-pagination-mobile-example',

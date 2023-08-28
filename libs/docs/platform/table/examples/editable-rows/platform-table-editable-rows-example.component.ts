@@ -1,36 +1,36 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
-    TableDataSource,
     CollectionBooleanFilter,
     CollectionDateFilter,
     CollectionFilter,
     CollectionNumberFilter,
     CollectionSelectFilter,
+    CollectionSort,
     CollectionStringFilter,
+    FilterableColumnDataType,
+    PlatformTableModule,
+    SaveRowsEvent,
     SortDirection,
     TableDataProvider,
-    TableState,
-    SaveRowsEvent,
-    FilterableColumnDataType,
-    CollectionSort
+    TableDataSource,
+    TableState
 } from '@fundamental-ngx/platform/table';
-import { NgFor } from '@angular/common';
-import { SelectModule } from '@fundamental-ngx/core/select';
-import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { FormsModule } from '@angular/forms';
 import {
+    FdpCellDef,
     FdpEditableCellDef,
-    FdpTableCell,
     FdpEditableCellFormDirective,
-    FdpCellDef
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
 } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-editable-rows-example',

@@ -1,24 +1,25 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import {
     AbstractControl,
     AsyncValidatorFn,
     FormBuilder,
     FormGroup,
     FormGroupDirective,
-    ValidationErrors,
-    Validators,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ValidationErrors,
+    Validators
 } from '@angular/forms';
-import { delay, Observable, of } from 'rxjs';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { MessagePopoverComponent } from '@fundamental-ngx/platform/message-popover';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { MessagePopoverFormItemDirective } from '@fundamental-ngx/platform/message-popover';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    MessagePopoverComponent,
+    MessagePopoverFormItemDirective,
+    MessagePopoverFormWrapperComponent
+} from '@fundamental-ngx/platform/message-popover';
+import { Observable, delay, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-message-popover-default-example',

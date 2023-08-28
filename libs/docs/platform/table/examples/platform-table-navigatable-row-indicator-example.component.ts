@@ -2,18 +2,20 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
+    PlatformTableModule,
     TableComponent,
     TableDataProvider,
     TableDataSource,
-    TableState,
-    TableRowActivateEvent
+    TableRowActivateEvent,
+    TableState
 } from '@fundamental-ngx/platform/table';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',

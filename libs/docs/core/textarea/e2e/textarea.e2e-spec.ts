@@ -1,4 +1,3 @@
-import { TextareaPo } from './textarea.po';
 import {
     browserIsSafari,
     click,
@@ -19,6 +18,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { TextareaPo } from './textarea.po';
 
 import { formMessageTestText, sections, states, styleArr } from './textarea-contents';
 

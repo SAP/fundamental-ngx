@@ -1,20 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformDynamicPagePageOverflowService } from './examples/platform-dynamic-page-page-overflow.service';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformDynamicPageExampleComponent } from './examples/platform-dynamic-page-example.component';
 import { PlatformDynamicPageFacetsExampleComponent } from './examples/platform-dynamic-page-facets-example/platform-dynamic-page-facets-example.component';
 import { PlatformDynamicPageFlexibleColumnExampleComponent } from './examples/platform-dynamic-page-flexible-column-example.component';
 import { PlatformDynamicPageNonCollapsibleExampleComponent } from './examples/platform-dynamic-page-non-collapsible-example.component';
+import { PlatformDynamicPagePageOverflowService } from './examples/platform-dynamic-page-page-overflow.service';
 import { PlatformDynamicPageResponsivePaddingExampleComponent } from './examples/platform-dynamic-page-responsive-padding-example.component';
-import { PlatformDynamicPageTabbedExampleComponent } from './examples/platform-dynamic-page-tabbed-example.component';
 import { PlatformDynamicPageSnapScrollExampleComponent } from './examples/platform-dynamic-page-snap-scroll-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { PlatformDynamicPageExampleComponent } from './examples/platform-dynamic-page-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformDynamicPageTabbedExampleComponent } from './examples/platform-dynamic-page-tabbed-example.component';
 
 const dynamicPageBasicExample = 'platform-dynamic-page-example.component.html';
 const dynamicPageBasicExampleScss = 'platform-dynamic-page-example.component.scss';

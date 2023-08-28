@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-card-footer-example',

@@ -1,25 +1,28 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    InputGroupButtonExampleComponent,
+    InputGroupComplexExampleComponent,
+    InputGroupIconExampleComponent,
+    InputGroupStatesExampleComponent,
+    InputGroupTextCompactExampleComponent,
+    InputGroupTextExampleComponent
+} from './examples/input-group-examples.component';
 import { InputGroupFormExampleComponent } from './examples/input-group-form-example/input-group-form-example.component';
 import { InputGroupSearchExampleComponent } from './examples/input-group-search-example/input-group-search-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import {
-    InputGroupTextExampleComponent,
-    InputGroupIconExampleComponent,
-    InputGroupButtonExampleComponent,
-    InputGroupTextCompactExampleComponent,
-    InputGroupComplexExampleComponent,
-    InputGroupStatesExampleComponent
-} from './examples/input-group-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const inputGroupButtonSrc = 'input-group-button-example.component.html';
 const inputGroupIconSrc = 'input-group-icon-example.component.html';

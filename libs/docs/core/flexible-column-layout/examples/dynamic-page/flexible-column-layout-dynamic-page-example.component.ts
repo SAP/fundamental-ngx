@@ -1,11 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
-import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-flexible-column-layout-dynamic-page-example',

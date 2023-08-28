@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { ValidatorFn, Validators, FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { PlatformStepInputModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { Component } from '@angular/core';
+import { FormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-number-step-input-template-example',

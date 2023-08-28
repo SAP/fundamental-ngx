@@ -9,15 +9,18 @@ const contentRadioGroupSrcCode = 'platform-radio-group-content-examples.componen
 const disabledRadioGroupSrc = 'platform-radio-group-disabled-example.component.html';
 const disabledRadioGroupSrcCode = 'platform-radio-group-disabled-examples.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
-import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
-import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformRadioGroupContentExampleComponent } from './examples/platform-radio-group-content-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
+import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
+import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
 
 @Component({
     selector: 'app-radio-group',

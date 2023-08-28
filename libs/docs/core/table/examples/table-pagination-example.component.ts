@@ -1,14 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { Observable } from 'rxjs';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { PaginationModule } from '@fundamental-ngx/core/pagination';
+import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { NgFor } from '@angular/common';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'fd-table-pagination-example',

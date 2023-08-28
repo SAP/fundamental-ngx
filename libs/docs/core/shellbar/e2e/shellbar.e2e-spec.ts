@@ -1,4 +1,3 @@
-import { ShellbarPo } from './shellbar.po';
 import {
     click,
     clickAndMoveElement,
@@ -19,6 +18,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { ShellbarPo } from './shellbar.po';
 
 describe('shellbar test suite', () => {
     const shellbarPage = new ShellbarPo();

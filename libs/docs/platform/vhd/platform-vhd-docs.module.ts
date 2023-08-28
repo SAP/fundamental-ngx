@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
@@ -12,14 +12,12 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { TokenModule } from '@fundamental-ngx/core/token';
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
-import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
-import { PlatformVhdHeaderComponent } from './platform-vhd-header/platform-vhd-header.component';
 import {
     PlatformVhdBasicExampleComponent,
     PlatformVhdInputExampleComponent,
@@ -29,6 +27,8 @@ import {
     PlatformVhdTokenExampleComponent
 } from './examples';
 import { PlatformVhdLoadingExampleComponent } from './examples/platform-vhd-loading-example.component';
+import { PlatformVhdHeaderComponent } from './platform-vhd-header/platform-vhd-header.component';
+import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
 
 import { PlatformVhdInitialLoadingExampleComponent } from './examples/initial-loading/platform-vhd-initial-loading-example.component';
 

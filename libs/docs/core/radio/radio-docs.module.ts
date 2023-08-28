@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { RadioHeaderComponent } from './radio-header/radio-header.component';
-import { RadioDocsComponent } from './radio-docs.component';
-import { examples } from './examples';
-import { RadioModule } from '@fundamental-ngx/core/radio';
 import { FormModule } from '@fundamental-ngx/core/form';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { examples } from './examples';
+import { RadioDocsComponent } from './radio-docs.component';
+import { RadioHeaderComponent } from './radio-header/radio-header.component';
 
 const routes: Routes = [
     {

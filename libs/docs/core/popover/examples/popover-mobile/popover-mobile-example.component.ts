@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormsModule } from '@angular/forms';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-mobile-example',

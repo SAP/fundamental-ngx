@@ -1,13 +1,12 @@
+import { NgFor, UpperCasePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { TableComponent } from '@fundamental-ngx/core/table';
-import { TableCustomDialogComponent } from './table-custom-dialog.component';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { NgFor, UpperCasePipe } from '@angular/common';
-import { TableModule } from '@fundamental-ngx/core/table';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { TableComponent, TableModule } from '@fundamental-ngx/core/table';
+import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {
     key: string;

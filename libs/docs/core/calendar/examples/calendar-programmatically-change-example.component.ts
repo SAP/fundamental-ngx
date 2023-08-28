@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,10 +10,6 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { DatePipe } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormsModule } from '@angular/forms';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-programmatically-change-example',

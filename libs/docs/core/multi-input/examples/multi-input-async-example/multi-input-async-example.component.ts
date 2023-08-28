@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
-import { delay, startWith, switchMap } from 'rxjs/operators';
 import { AsyncPipe, JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { Observable, Subject, of } from 'rxjs';
+import { delay, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-multi-input-async-example',

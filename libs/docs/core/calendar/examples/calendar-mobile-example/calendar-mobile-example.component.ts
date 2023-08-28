@@ -1,4 +1,10 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DatePipe } from '@angular/common';
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CalendarCloseButtonDirective, CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,17 +12,9 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { DatePipe } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { FormsModule } from '@angular/forms';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { CalendarCloseButtonDirective } from '@fundamental-ngx/core/calendar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-calendar-mobile-example',

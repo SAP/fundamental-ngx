@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
+import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
+import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
+import { TileModule } from '@fundamental-ngx/core/tile';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
+import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
+import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
+import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
+import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
+import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
 import { ShellbarDocsHeaderComponent } from './shellbar-docs-header/shellbar-docs-header.component';
 import { ShellbarDocsComponent } from './shellbar-docs.component';
-import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
-import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
-import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
-import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
-import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
-import { TileModule } from '@fundamental-ngx/core/tile';
-import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
-import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
-import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
 
 const routes: Routes = [
     {

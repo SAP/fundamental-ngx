@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
     selector: 'fd-breadcrumb-routerLink-example',

@@ -1,9 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { ListComponent } from '@fundamental-ngx/core/list';
 import { FocusEscapeDirection } from '@fundamental-ngx/cdk/utils';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
+import { ListComponent, ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-list-keyboard-example',

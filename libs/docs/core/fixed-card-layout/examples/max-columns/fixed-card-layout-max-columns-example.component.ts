@@ -1,9 +1,9 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'fd-fixed-card-layout-max-columns-example',

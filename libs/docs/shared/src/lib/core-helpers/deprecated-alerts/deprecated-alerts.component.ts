@@ -1,9 +1,9 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Optional } from '@angular/core';
-import { ModuleDeprecation, ModuleDeprecations } from '@fundamental-ngx/cdk/utils';
 import { RouterLink } from '@angular/router';
+import { ModuleDeprecation, ModuleDeprecations } from '@fundamental-ngx/cdk/utils';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-deprecated-alerts',

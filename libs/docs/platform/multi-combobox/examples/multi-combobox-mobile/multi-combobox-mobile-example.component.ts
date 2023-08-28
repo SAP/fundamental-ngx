@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { JsonPipe } from '@angular/common';
-import { PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import {
+    FdpFormGroupModule,
+    MultiComboboxSelectionChangeEvent,
+    PlatformMultiComboboxModule
+} from '@fundamental-ngx/platform/form';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-multi-combobox-mobile-example',

@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformFileUploaderReactiveExampleComponent } from './examples/platform-file-uploader-reactive-example.component';
-import { PlatformFileUploaderFileTypesExampleComponent } from './examples/platform-file-uploader-file-types-example.component';
-import { PlatformFileUploaderMinFileSizeExampleComponent } from './examples/platform-file-uploader-min-file-size-example.component';
-import { PlatformFileUploaderMaxFileSizeExampleComponent } from './examples/platform-file-uploader-max-file-size-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformFileUploaderCompactExampleComponent } from './examples/platform-file-uploader-compact-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { PlatformFileUploaderExampleComponent } from './examples/platform-file-uploader-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformFileUploaderFileTypesExampleComponent } from './examples/platform-file-uploader-file-types-example.component';
+import { PlatformFileUploaderMaxFileSizeExampleComponent } from './examples/platform-file-uploader-max-file-size-example.component';
+import { PlatformFileUploaderMinFileSizeExampleComponent } from './examples/platform-file-uploader-min-file-size-example.component';
+import { PlatformFileUploaderReactiveExampleComponent } from './examples/platform-file-uploader-reactive-example.component';
 
 const platformFileUploadDefaultTypesSrc = 'platform-file-uploader-example.component.html';
 const platformFileUploadDefaultTypesScssSrc = 'platform-file-uploader-example.component.scss';

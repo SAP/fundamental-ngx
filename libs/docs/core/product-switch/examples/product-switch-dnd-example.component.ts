@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
-import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
-import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
-import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
+import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-product-switch-dnd-example',

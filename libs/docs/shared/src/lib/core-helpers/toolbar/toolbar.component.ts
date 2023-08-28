@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,23 +9,35 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Libraries } from '../../utilities';
 
+import { LowerCasePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
-import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
-    FdLanguage,
+    ContentDensityDirective,
+    ContentDensityMode,
+    GlobalContentDensityService
+} from '@fundamental-ngx/core/content-density';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { MenuComponent, MenuKeyboardService, MenuModule } from '@fundamental-ngx/core/menu';
+import {
+    ProductMenuComponent,
+    ShellbarActionsComponent,
+    ShellbarComponent,
+    ShellbarLogoComponent,
+    ShellbarMenuItem,
+    ShellbarSidenavDirective,
+    ShellbarSizes
+} from '@fundamental-ngx/core/shellbar';
+import {
     FD_LANGUAGE,
     FD_LANGUAGE_ALBANIAN,
     FD_LANGUAGE_BULGARIAN,
-    FD_LANGUAGE_CZECH,
     FD_LANGUAGE_CHINESE,
+    FD_LANGUAGE_CZECH,
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_FRENCH,
     FD_LANGUAGE_GEORGIAN,
@@ -33,20 +46,12 @@ import {
     FD_LANGUAGE_POLISH,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_TURKISH,
-    FD_LANGUAGE_UKRAINIAN
+    FD_LANGUAGE_UKRAINIAN,
+    FdLanguage
 } from '@fundamental-ngx/i18n';
-import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
+import { BehaviorSubject, Subject, filter, fromEvent } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { MenuModule } from '@fundamental-ngx/core/menu';
-import { NgIf, NgTemplateOutlet, NgFor, LowerCasePipe } from '@angular/common';
-import { ShellbarActionsComponent } from '@fundamental-ngx/core/shellbar';
-import { ProductMenuComponent } from '@fundamental-ngx/core/shellbar';
-import { ShellbarLogoComponent } from '@fundamental-ngx/core/shellbar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ShellbarSidenavDirective } from '@fundamental-ngx/core/shellbar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 

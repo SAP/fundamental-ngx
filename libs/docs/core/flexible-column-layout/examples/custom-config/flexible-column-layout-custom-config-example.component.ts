@@ -1,12 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
     FD_FLEXIBLE_LAYOUT_CONFIG,
     FlexibleColumnLayout,
+    FlexibleColumnLayoutModule,
     FlexibleLayoutConfig
 } from '@fundamental-ngx/core/flexible-column-layout';
-import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
-import { NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 const CustomFlexibleCardLayoutConfig: FlexibleLayoutConfig = {
     layouts: {

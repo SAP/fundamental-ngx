@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { InputHeaderComponent } from './input-header/input-header.component';
-import { InputDocsComponent } from './input-docs.component';
-import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import {
     InputExampleComponent,
     InputInlineHelpExampleComponent,
     InputStateExampleComponent
 } from './examples/input-examples.component';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { InputFormGroupExampleComponent } from './examples/input-form-group-example.component';
+import { InputDocsComponent } from './input-docs.component';
+import { InputHeaderComponent } from './input-header/input-header.component';
 
 const routes: Routes = [
     {

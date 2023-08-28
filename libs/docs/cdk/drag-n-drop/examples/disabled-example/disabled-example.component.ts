@@ -1,13 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
-import { DragoverPredicate, DropPredicate, FdDndDropEventMode, FdDropEvent, isOdd } from '@fundamental-ngx/cdk/utils';
-import { delay, of } from 'rxjs';
 import { NgFor, NgStyle } from '@angular/common';
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+    DragAndDropModule,
+    DragoverPredicate,
+    DropPredicate,
+    FdDndDropEventMode,
+    FdDropEvent,
+    isOdd
+} from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { delay, of } from 'rxjs';
 
 @Component({
     selector: 'fd-dnd-disabled-example',

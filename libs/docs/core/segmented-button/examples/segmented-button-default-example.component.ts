@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TextComponent } from '@fundamental-ngx/core/text';
 

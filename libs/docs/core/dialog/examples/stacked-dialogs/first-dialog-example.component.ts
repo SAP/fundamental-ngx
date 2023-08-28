@@ -1,12 +1,11 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { SecondDialogExampleComponent } from './second-dialog-example.component';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { SecondDialogExampleComponent } from './second-dialog-example.component';
 
 @Component({
     template: `

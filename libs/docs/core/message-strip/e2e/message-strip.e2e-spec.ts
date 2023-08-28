@@ -12,8 +12,8 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 
-import { messageTypes, playgroundStates, sections } from './message-strip.contents';
 import { customMessage, customWidth } from './message-strip';
+import { messageTypes, playgroundStates, sections } from './message-strip.contents';
 import { MessageStripPo } from './message-strip.po';
 
 describe('Message-strip test suite', () => {

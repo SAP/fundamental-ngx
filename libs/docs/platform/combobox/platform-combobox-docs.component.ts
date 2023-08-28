@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
-import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
-import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
-import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
 import { ComboboxColumnsExampleComponent } from './examples/combobox-columns/combobox-columns-example.component';
 import { ComboboxDatasourceExampleComponent } from './examples/combobox-datasource/combobox-datasource-example.component';
+import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
+import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
+import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
 import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
-import { RouterLink } from '@angular/router';
-import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { ComboboxStandardComponent } from './examples/combobox-standard/combobox-standard.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
+import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
 
 const comboboxStandardHtml = 'combobox-standard/combobox-standard.component.html';
 const comboboxStandardTs = 'combobox-standard/combobox-standard.component.ts';

@@ -17,23 +17,26 @@ const sliderTooltipTs = 'tooltip/slider-tooltip-example.component.ts';
 const sliderCozyHtml = 'cozy/slider-cozy-example.component.html';
 const sliderCozyTs = 'cozy/slider-cozy-example.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { SliderComponent } from '@fundamental-ngx/platform/slider';
-import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
+import { SliderBasicExampleComponent } from './examples/base/slider-basic-example.component';
 import { SliderCozyExampleComponent } from './examples/cozy/slider-cozy-example.component';
+import { SliderCustomValuesExampleComponent } from './examples/custom-values/slider-custom-values-example.component';
 import { SliderDisabledExampleComponent } from './examples/disabled/slider-disabled-example.component';
 import { SliderFormFieldExampleComponent } from './examples/form-field/slider-form-field-example.component';
 import { SliderRangeExampleComponent } from './examples/range/slider-range-example.component';
-import { SliderCustomValuesExampleComponent } from './examples/custom-values/slider-custom-values-example.component';
 import { SliderTicksAndLabelsExampleComponent } from './examples/ticks-and-labels/slider-ticks-and-labels-example.component';
 import { SliderTooltipExampleComponent } from './examples/tooltip/slider-tooltip-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { SliderBasicExampleComponent } from './examples/base/slider-basic-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 @Component({
     selector: 'app-slider',

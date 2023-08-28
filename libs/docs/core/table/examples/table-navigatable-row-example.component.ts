@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { RouterLink } from '@angular/router';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { NgFor, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ObjectStatus, ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 
 interface TableIem {
     column1: string;

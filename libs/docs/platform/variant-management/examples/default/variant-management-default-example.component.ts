@@ -1,14 +1,18 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
-import { FilterableColumnDataType, FilterType, PlatformTableManagedPreset } from '@fundamental-ngx/platform/table';
-import { Variant } from '@fundamental-ngx/platform/variant-management';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
-import { VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
+import { PlatformSmartFilterBarModule, SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
+import {
+    FilterType,
+    FilterableColumnDataType,
+    PlatformTableManagedPreset,
+    PlatformTableModule
+} from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { Variant, VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 
 export interface CombinedVariantManagementPreset {
     platformSmartFilterBar?: SmartFilterBarManagedPreset;

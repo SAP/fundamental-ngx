@@ -1,5 +1,7 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -7,8 +9,6 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
-import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'fd-date-picker-form-range-example',

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CheckboxComponent } from '@fundamental-ngx/platform/form';
-import { CheckboxGroupComponent } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent, CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-content-checkbox',

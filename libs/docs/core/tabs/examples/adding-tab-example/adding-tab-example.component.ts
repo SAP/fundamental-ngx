@@ -1,6 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgFor } from '@angular/common';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({

@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { RatingIndicatorDynamicExampleComponent } from './examples/ri-dynamic-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { RatingIndicatorExampleComponent } from './examples/rating-indicator-examples.component';
 import { RatingIndicatorRatingsExampleComponent } from './examples/rating-indicator-ratings.component';
 import { RatingIndicatorSizesExampleComponent } from './examples/rating-indicator-sizes.component';
 import { RatingIndicatorCustomIconExampleComponent } from './examples/ri-custom-icon-example.component';
 import { RatingIndicatorDisplayModeComponent } from './examples/ri-display-mode-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { RatingIndicatorExampleComponent } from './examples/rating-indicator-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { RatingIndicatorDynamicExampleComponent } from './examples/ri-dynamic-example.component';
 
 const sizeRatingHtml = 'rating-indicator-sizes.component.html';
 const sizesRatingTs = 'rating-indicator-sizes.component.ts';

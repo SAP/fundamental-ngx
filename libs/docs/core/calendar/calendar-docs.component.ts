@@ -1,25 +1,28 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
-import { CalendarFormExamplesComponent } from './examples/calendar-form-example/calendar-form-example.component';
-import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
-import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
-import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
-import { CalendarRangeExampleComponent } from './examples/calendar-range-example.component';
-import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
-import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-day-example/calendar-special-day-example.component';
-import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
-import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
-import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
 import { RouterLink } from '@angular/router';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { CalendarDisabledNavigationButtonsExampleComponent } from './examples/calendar-disabled-navigation-buttons-example/calendar-disabled-navigation-buttons-example.component';
+import { CalendarFormExamplesComponent } from './examples/calendar-form-example/calendar-form-example.component';
+import { CalendarGridExampleComponent } from './examples/calendar-grid-example/calendar-grid-example.component';
+import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
+import { CalendarMarkHoverComponent } from './examples/calendar-mark-hover/calendar-mark-hover.component';
+import { CalendarMobileExampleComponent } from './examples/calendar-mobile-example/calendar-mobile-example.component';
+import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
+import { CalendarOptionsExampleComponent } from './examples/calendar-options-example/calendar-options-example.component';
+import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
+import { CalendarRangeExampleComponent } from './examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from './examples/calendar-single-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { CalendarSpecialDayExampleComponent } from './examples/calendar-special-day-example/calendar-special-day-example.component';
 
 const calendarFormSourceScss = 'calendar-form-example/calendar-form-example.component.scss';
 

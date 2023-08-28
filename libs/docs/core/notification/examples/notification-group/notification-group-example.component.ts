@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { IndicatorStates } from '@fundamental-ngx/core/notification';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { NgIf, NgTemplateOutlet, NgFor } from '@angular/common';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { NotificationModule } from '@fundamental-ngx/core/notification';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 export type Notification = {
     avatar: string;

@@ -1,19 +1,19 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
 
-import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
-import dayjs from 'dayjs';
-import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
+import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
+import dayjs from 'dayjs';
 
 // Dayjs locale data required for this example
-import 'dayjs/locale/fr';
-import 'dayjs/locale/de';
 import 'dayjs/locale/bg';
+import 'dayjs/locale/de';
+import 'dayjs/locale/fr';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately

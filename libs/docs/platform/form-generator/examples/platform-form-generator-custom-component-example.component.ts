@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 
+import { JsonPipe, NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
-    dynamicFormFieldProvider,
-    dynamicFormGroupChildProvider,
-    BaseDynamicFormGeneratorControl,
-    FormGeneratorService,
-    DynamicFormItem,
-    DynamicFormValue,
     BaseDynamicFormFieldItem,
-    DynamicFormItemChoice
+    BaseDynamicFormGeneratorControl,
+    DynamicFormItem,
+    DynamicFormItemChoice,
+    DynamicFormValue,
+    FormGeneratorComponent,
+    FormGeneratorService,
+    dynamicFormFieldProvider,
+    dynamicFormGroupChildProvider
 } from '@fundamental-ngx/platform/form';
 import { SliderComponent } from '@fundamental-ngx/platform/slider';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgIf, JsonPipe } from '@angular/common';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-form-generator-slider',

@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ExampleChildService } from '../../services/example-child.service';
 import { SeparatorComponent } from '../seperator/seperator.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { RouterLinkActive, RouterLink } from '@angular/router';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({
     selector: 'fd-header-tabs',

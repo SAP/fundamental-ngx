@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
+import { JsonPipe, NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
+    PlatformWizardGeneratorModule,
     WizardGeneratorComponent,
     WizardGeneratorFormsValue,
     WizardGeneratorItem
 } from '@fundamental-ngx/platform/wizard-generator';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { NgIf, JsonPipe } from '@angular/common';
-import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-external-navigation-example',

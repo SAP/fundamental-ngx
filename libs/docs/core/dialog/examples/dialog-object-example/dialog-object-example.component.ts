@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
-import { DialogDefaultContent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogDefaultContent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 @Component({
     selector: 'fd-dialog-object-example',

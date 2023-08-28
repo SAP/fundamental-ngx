@@ -1,6 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-icon-businessSuiteInAppSymbols-example',

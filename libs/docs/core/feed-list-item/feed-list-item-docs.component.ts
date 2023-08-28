@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { FliMobileExampleComponent } from './examples/fli-mobile/fli-mobile-example.component';
-import { FliFooterExampleComponent } from './examples/fli-footer/fli-footer-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { FliActionExampleComponent } from './examples/fli-action/fli-action-example.component';
 import { FliAvatarExampleComponent } from './examples/fli-avatar/fli-avatar-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { FliFooterExampleComponent } from './examples/fli-footer/fli-footer-example.component';
+import { FliMobileExampleComponent } from './examples/fli-mobile/fli-mobile-example.component';
 import { FliSimpleExampleComponent } from './examples/fli-simple/fli-simple-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const fliSimpleH = 'fli-simple/fli-simple-example.component.html';
 const fliSimpleT = 'fli-simple/fli-simple-example.component.ts';

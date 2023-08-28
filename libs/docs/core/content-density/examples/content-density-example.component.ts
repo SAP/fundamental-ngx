@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 import { AsyncPipe } from '@angular/common';
-import { ContentDensityUserComponent } from './content-density-user/content-density-user.component';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { ContentDensityUserComponent } from './content-density-user/content-density-user.component';
 
 @Component({
     selector: 'fd-content-density-example',

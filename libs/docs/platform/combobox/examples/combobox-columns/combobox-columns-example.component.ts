@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { JsonPipe } from '@angular/common';
-import { PlatformComboboxModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import {
+    ComboboxSelectionChangeEvent,
+    FdpFormGroupModule,
+    PlatformComboboxModule
+} from '@fundamental-ngx/platform/form';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-combobox-columns-example',

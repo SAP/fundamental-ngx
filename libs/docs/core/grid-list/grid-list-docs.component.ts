@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { GridListFocusingItemExampleComponent } from './examples/focusing/grid-list-focusing-example.component';
-import { GridListLayoutExampleComponent } from './examples/layout/grid-list-layout-example.component';
-import { GridListDndExampleComponent } from './examples/dnd/grid-list-dnd-example.component';
-import { GridListFooterExampleComponent } from './examples/footer/grid-list-footer-example.component';
-import { GridListMoreExampleComponent } from './examples/more/grid-list-more-example.component';
-import { GridListStatusesExampleComponent } from './examples/statuses/grid-list-statuses-example.component';
-import { GridListStatesExampleComponent } from './examples/states/grid-list-states-example.component';
-import { GridListGroupExampleComponent } from './examples/group/grid-list-group-example.component';
-import { GridListDeleteExampleComponent } from './examples/delete/grid-list-delete-example.component';
-import { GridListMultiSelectExampleComponent } from './examples/multi-select/grid-list-multi-select-example.component';
-import { GridListSingleSelectRightExampleComponent } from './examples/single-select-right/grid-list-single-select-right-example.component';
-import { GridListSingleSelectLeftExampleComponent } from './examples/single-select-left/grid-list-single-select-left-example.component';
-import { GridListSingleSelectExampleComponent } from './examples/single-select/grid-list-single-select-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { GridListDefaultExampleComponent } from './examples/default/grid-list-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { GridListDeleteExampleComponent } from './examples/delete/grid-list-delete-example.component';
+import { GridListDndExampleComponent } from './examples/dnd/grid-list-dnd-example.component';
+import { GridListFocusingItemExampleComponent } from './examples/focusing/grid-list-focusing-example.component';
+import { GridListFooterExampleComponent } from './examples/footer/grid-list-footer-example.component';
+import { GridListGroupExampleComponent } from './examples/group/grid-list-group-example.component';
+import { GridListLayoutExampleComponent } from './examples/layout/grid-list-layout-example.component';
+import { GridListMoreExampleComponent } from './examples/more/grid-list-more-example.component';
+import { GridListMultiSelectExampleComponent } from './examples/multi-select/grid-list-multi-select-example.component';
+import { GridListSingleSelectLeftExampleComponent } from './examples/single-select-left/grid-list-single-select-left-example.component';
+import { GridListSingleSelectRightExampleComponent } from './examples/single-select-right/grid-list-single-select-right-example.component';
+import { GridListSingleSelectExampleComponent } from './examples/single-select/grid-list-single-select-example.component';
+import { GridListStatesExampleComponent } from './examples/states/grid-list-states-example.component';
+import { GridListStatusesExampleComponent } from './examples/statuses/grid-list-statuses-example.component';
 
 const gridListDefaultTs = 'default/grid-list-example.component.ts';
 const gridListSingleSelectTs = 'single-select/grid-list-single-select-example.component.ts';

@@ -1,8 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform/search-field';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { PlatformSearchFieldModule, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-basic-example',

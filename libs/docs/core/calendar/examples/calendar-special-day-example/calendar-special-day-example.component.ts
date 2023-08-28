@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -7,9 +10,6 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { FormsModule } from '@angular/forms';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-special-day-example',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
+import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 
 @Component({
     selector: 'fd-moment-adapter-options-example',

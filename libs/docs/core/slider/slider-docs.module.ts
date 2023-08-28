@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import {
     ApiComponent,
     currentComponentProvider,
@@ -10,12 +11,11 @@ import {
     SharedDocumentationModule,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 
+import { SliderModule } from '@fundamental-ngx/core/slider';
 import { COMPONENTS } from './examples';
 import { SliderDocsComponent } from './slider-docs.component';
 import { SliderHeaderComponent } from './slider-header/slider-header.component';
-import { SliderModule } from '@fundamental-ngx/core/slider';
 
 const routes: Routes = [
     {

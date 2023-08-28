@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormsModule } from '@angular/forms';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-combobox-example',

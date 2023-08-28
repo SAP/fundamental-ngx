@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { InfoLabelDocsComponent } from './info-label-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import {
     InfoLableDefaultExampleComponent,
     InfoLableNumericIconExampleComponent,
     InfoLableTextExampleComponent,
     InfoLableTextIconExampleComponent
 } from './examples/info-label-examples.component';
+import { InfoLabelDocsComponent } from './info-label-docs.component';
 import { InfoLabelHeaderComponent } from './info-label-header/info-label-header.component';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 
 const routes: Routes = [
     {

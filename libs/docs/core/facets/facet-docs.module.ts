@@ -9,9 +9,9 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextModule } from '@fundamental-ngx/core/text';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { FacetsDocsComponent } from './facets-docs.component';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { CustomFacetExampleComponent } from './examples/custom-facet-example.component';
 import {
     FacetGroupExampleComponent,
@@ -24,7 +24,7 @@ import {
     RatingIndicatorFacetExampleComponent
 } from './examples/facet-examples.component';
 import { FacetDocsHeaderComponent } from './facet-header/facet-docs-header.component';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { FacetsDocsComponent } from './facets-docs.component';
 
 const routes: Routes = [
     {

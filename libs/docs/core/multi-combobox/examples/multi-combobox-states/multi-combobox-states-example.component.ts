@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
-import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { CvaDirective, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
     selector: 'fd-multi-combobox-states-example',

@@ -11,8 +11,6 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
-import { PlatformLinkHeaderComponent } from './platform-link-header/platform-link-header.component';
-import { PlatformLinkDocsComponent } from './platform-link-docs.component';
 import {
     PlatformLinkDisabledEmphasizedExampleComponent,
     PlatformLinkDisabledExampleComponent,
@@ -22,6 +20,8 @@ import {
     PlatformLinkStandardExampleComponent,
     PlatformLinkTruncatedExampleComponent
 } from './examples/platform-link-examples.component';
+import { PlatformLinkDocsComponent } from './platform-link-docs.component';
+import { PlatformLinkHeaderComponent } from './platform-link-header/platform-link-header.component';
 
 const routes: Routes = [
     {

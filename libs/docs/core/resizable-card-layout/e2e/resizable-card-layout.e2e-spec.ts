@@ -1,4 +1,3 @@
-import { ResizableCardLayoutPo } from './resizable-card-layout.po';
 import {
     browserIsFirefox,
     click,
@@ -13,6 +12,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { ResizableCardLayoutPo } from './resizable-card-layout.po';
 
 import { blockExamples } from './resizable-card-layout.contents';
 

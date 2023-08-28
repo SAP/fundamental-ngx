@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { SelectCustomComparatorExample } from './examples/select-custom-comparator-example/select-custom-comparator-example.component';
-import { SelectFormsComponent } from './examples/select-forms/select-forms.component';
-import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { SelectAddingExampleComponent } from './examples/select-adding-example/select-adding-example.component';
+import { SelectCustomComparatorExample } from './examples/select-custom-comparator-example/select-custom-comparator-example.component';
+import { SelectCustomTriggerComponent } from './examples/select-custom-trigger/select-custom-trigger.component';
+import { SelectFormsComponent } from './examples/select-forms/select-forms.component';
 import { SelectMaxHeightExampleComponent } from './examples/select-height/select-max-height-example.component';
 import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
-import { RouterLink } from '@angular/router';
-import { SelectNestedOptionsComponent } from './examples/select-nested-options/select-nested-options.component';
-import { SelectCustomTriggerComponent } from './examples/select-custom-trigger/select-custom-trigger.component';
-import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { SelectNestedOptionsComponent } from './examples/select-nested-options/select-nested-options.component';
+import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
+import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component';
 
 const selectProgressiveScss = 'select-programmatic-example/select-programmatic-example.component.scss';
 const selectNestedScss = 'select-nested-options/select-nested-options.component.scss';

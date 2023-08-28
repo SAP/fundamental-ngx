@@ -8,14 +8,13 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
-import { CarouselItemComponent } from '@fundamental-ngx/core/carousel';
-import { CarouselComponent } from '@fundamental-ngx/core/carousel';
+import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-carousel-multiple-active-item-example',

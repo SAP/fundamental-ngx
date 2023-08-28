@@ -4,16 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformDatetimePickerModule } from '@fundamental-ngx/platform/form';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { PlatformDatetimePickerDocsComponent } from './platform-datetime-picker-docs.component';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { PlatformDatetimePickerMobileExampleComponent } from './examples/mobile/platform-datetime-picker-mobile-example.component';
 import { PlatformDatetimePickerBasicExampleComponent } from './examples/platform-datetime-picker-basic-example.component';
 import { PlatformDatetimePickerDisableFunctionExampleComponent } from './examples/platform-datetime-picker-disable-function-example.component';
 import { PlatformDatetimePickerReactiveExampleComponent } from './examples/platform-datetime-picker-reactive-example.component';
 import { PlatformDatetimePickerTemplateExampleComponent } from './examples/platform-datetime-picker-template-example.component';
 import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/platform-datetime-picker-update-on-blur-example.component';
+import { PlatformDatetimePickerDocsComponent } from './platform-datetime-picker-docs.component';
 import { PlatformDatetimePickerHeaderComponent } from './platform-datetime-picker-header/platform-datetime-picker-header.component';
-import { PlatformDatetimePickerMobileExampleComponent } from './examples/mobile/platform-datetime-picker-mobile-example.component';
 
 const routes: Routes = [
     {

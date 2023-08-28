@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { TableModule } from '@fundamental-ngx/core/table';
+import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
     selector: 'fd-layout-panel-edge-bleed-example',

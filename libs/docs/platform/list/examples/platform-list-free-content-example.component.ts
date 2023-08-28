@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
-import { Observable, of } from 'rxjs';
 import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'fdp-doc-platform-list-free-content-example',

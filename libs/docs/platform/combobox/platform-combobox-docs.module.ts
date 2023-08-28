@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import { FdpFormGroupModule, PlatformComboboxModule } from '@fundamental-ngx/platform/form';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
     COMBOBOX_MOBILE_CONFIG,
@@ -15,19 +16,18 @@ import {
     I18nDocsComponent,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
+import { ComboboxColumnsExampleComponent } from './examples/combobox-columns/combobox-columns-example.component';
+import { ComboboxDatasourceExampleComponent } from './examples/combobox-datasource/combobox-datasource-example.component';
+import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
+import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
+import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
+import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
+import { ComboboxStandardComponent } from './examples/combobox-standard/combobox-standard.component';
+import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
+import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
 import { PlatformComboboxDocsComponent } from './platform-combobox-docs.component';
 import { PlatformComboboxHeaderComponent } from './platform-combobox-header/platform-combobox-header.component';
-import { ComboboxStandardComponent } from './examples/combobox-standard/combobox-standard.component';
-import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
-import { ComboboxDatasourceExampleComponent } from './examples/combobox-datasource/combobox-datasource-example.component';
-import { ComboboxColumnsExampleComponent } from './examples/combobox-columns/combobox-columns-example.component';
-import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
-import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
-import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
-import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
-import { ComboboxBylineExampleComponent } from './examples/combobox-byline/combobox-byline-example.component';
-import { ComboboxLoadingExampleComponent } from './examples/combobox-loading/combobox-loading-example.component';
 
 const routes: Routes = [
     {

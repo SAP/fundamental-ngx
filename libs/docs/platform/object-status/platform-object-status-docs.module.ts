@@ -5,8 +5,7 @@ import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
-import { PlatformObjectStatusHeaderComponent } from './platform-object-status-header/platform-object-status-header.component';
-import { PlatformObjectStatusDocsComponent } from './platform-object-status-docs.component';
+import { PlatformObjectStatusClickableAndIconExampleComponent } from './examples/platform-object-status-clickable-and-icon-example.component';
 import {
     PlatformObjectStatusExampleComponent,
     PlatformObjectStatusGenericExampleComponent,
@@ -15,8 +14,9 @@ import {
     PlatformObjectStatusTextExampleComponent,
     PlatformObjectStatusTextIconExampleComponent
 } from './examples/platform-object-status-example.component';
-import { PlatformObjectStatusClickableAndIconExampleComponent } from './examples/platform-object-status-clickable-and-icon-example.component';
 import { PlatformObjectStatusLargeExampleComponent } from './examples/platform-object-status-large-example.component';
+import { PlatformObjectStatusDocsComponent } from './platform-object-status-docs.component';
+import { PlatformObjectStatusHeaderComponent } from './platform-object-status-header/platform-object-status-header.component';
 
 const routes: Routes = [
     {

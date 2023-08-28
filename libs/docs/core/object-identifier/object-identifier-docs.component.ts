@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import {
-    ObjectIdentifierDefaultExampleComponent,
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
     ObjectIdentifierBoldExampleComponent,
-    ObjectIdentifierLinkExampleComponent,
-    ObjectIdentifierDescriptiveExampleComponent
+    ObjectIdentifierDefaultExampleComponent,
+    ObjectIdentifierDescriptiveExampleComponent,
+    ObjectIdentifierLinkExampleComponent
 } from './examples/object-identifier-components';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
 
 const ObjectIdentifierDefaultExample = 'object-identifier-default-example.component.html';
 const ObjectIdentifierLinksExample = 'object-identifier-link-example.component.html';

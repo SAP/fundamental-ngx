@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DataProvider } from '@fundamental-ngx/cdk/data-source';
-import { FdMultiComboBoxDataSource, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
-import { Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { JsonPipe } from '@angular/common';
-import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
-import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DataProvider, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import {
+    FdMultiComboBoxDataSource,
+    MultiComboboxModule,
+    MultiComboboxSelectionChangeEvent
+} from '@fundamental-ngx/core/multi-combobox';
+import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 const OPTIONS = [
     { name: 'Apple', type: 'Fruits' },

@@ -14,19 +14,18 @@ import {
     isEnabled,
     refreshPage,
     scrollIntoView,
-    sendKeys,
     setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { FeedInputPo } from './feed-input.po';
+import { eight_lines_text, four_lines_text } from './feed-input';
 import {
     avatar_tooltip,
     default_avatar_class,
     placeholders_array,
     send_button_tooltip
 } from './feed-input-page-contents';
-import { eight_lines_text, four_lines_text } from './feed-input';
+import { FeedInputPo } from './feed-input.po';
 
 describe('Verify Feed Input component', () => {
     const {

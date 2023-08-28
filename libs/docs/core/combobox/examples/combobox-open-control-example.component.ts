@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-combobox-open-control-example',

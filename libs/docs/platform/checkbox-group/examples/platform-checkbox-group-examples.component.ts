@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import { JsonPipe, NgIf } from '@angular/common';
+import { CheckboxComponent, CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { NgIf, JsonPipe } from '@angular/common';
-import { CheckboxComponent } from '@fundamental-ngx/platform/form';
-import { CheckboxGroupComponent } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-examples',

@@ -1,4 +1,6 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     AbstractDataProvider,
     BaseDataSource,
@@ -8,10 +10,8 @@ import {
     FD_DATA_SOURCE_TRANSFORMER,
     isDataSource
 } from '@fundamental-ngx/cdk/data-source';
-import { delay, isObservable, Observable, of } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NgFor } from '@angular/common';
 import { SelectModule } from '@fundamental-ngx/core/select';
+import { Observable, delay, isObservable, of } from 'rxjs';
 
 export class ExampleDataSource<T> extends BaseDataSource<T> {
     constructor(public dataProvider: AbstractDataProvider<T>) {

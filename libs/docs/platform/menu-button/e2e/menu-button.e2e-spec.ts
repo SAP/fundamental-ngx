@@ -1,14 +1,3 @@
-import { MenuButtonPo } from './menu-button.po';
-import {
-    compactClass,
-    cozyAndCompactBtnTextArr,
-    disabledState,
-    selectedItem,
-    tooltipAttr,
-    truncatedBtnNoIconTooltipText,
-    truncatedBtnText,
-    truncatedBtnTooltipText
-} from './menu-button-contents';
 import {
     click,
     getAttributeByName,
@@ -20,6 +9,17 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import {
+    compactClass,
+    cozyAndCompactBtnTextArr,
+    disabledState,
+    selectedItem,
+    tooltipAttr,
+    truncatedBtnNoIconTooltipText,
+    truncatedBtnText,
+    truncatedBtnTooltipText
+} from './menu-button-contents';
+import { MenuButtonPo } from './menu-button.po';
 
 describe('Menu button test suite', () => {
     const menuBtnPage = new MenuButtonPo();

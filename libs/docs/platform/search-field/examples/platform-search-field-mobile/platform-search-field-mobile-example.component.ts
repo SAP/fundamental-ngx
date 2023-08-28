@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { PlatformSearchFieldModule, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-mobile-example',

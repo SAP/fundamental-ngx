@@ -1,10 +1,10 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { RadioModule } from '@fundamental-ngx/core/radio';
-import { IconModule } from '@fundamental-ngx/core/icon';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { NgFor } from '@angular/common';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { RadioModule } from '@fundamental-ngx/core/radio';
 
 @Component({
     selector: 'fd-list-byline-selection-example',

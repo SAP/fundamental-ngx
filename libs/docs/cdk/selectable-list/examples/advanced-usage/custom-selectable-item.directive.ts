@@ -1,5 +1,5 @@
-import { FDK_SELECTABLE_ITEM_PROVIDER, SelectableItemToken } from '@fundamental-ngx/cdk/utils';
 import { Directive, ElementRef, forwardRef } from '@angular/core';
+import { FDK_SELECTABLE_ITEM_PROVIDER, SelectableItemToken } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fdCustomItem]',

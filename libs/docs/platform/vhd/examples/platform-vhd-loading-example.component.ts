@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
     VhdDataProvider,
     VhdValue,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
-import { NgFor } from '@angular/common';
-import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface ExampleTestModel {
     id: number;

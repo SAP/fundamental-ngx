@@ -1,9 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { JsonPipe, NgIf } from '@angular/common';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { map } from 'rxjs/operators';
-import { NgIf, JsonPipe } from '@angular/common';
-import { CheckboxComponent } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-tristate-checkbox',

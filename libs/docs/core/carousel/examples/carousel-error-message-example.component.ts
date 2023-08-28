@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 import { CarouselComponent } from '@fundamental-ngx/core/carousel';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 
 @Component({
     selector: 'fd-carousel-error-message-example',

@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FacetModule } from '@fundamental-ngx/core/facets';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { TextComponent } from '@fundamental-ngx/core/text';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FacetModule } from '@fundamental-ngx/core/facets';
 
 @Component({
     selector: 'fd-facet-group-example',

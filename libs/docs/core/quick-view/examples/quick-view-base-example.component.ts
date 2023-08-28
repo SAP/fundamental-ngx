@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { Component } from '@angular/core';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 
 @Component({

@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { BusyIndicatorSize } from '@fundamental-ngx/core/busy-indicator';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { BusyIndicatorComponent, BusyIndicatorSize } from '@fundamental-ngx/core/busy-indicator';
 
 @Component({
     selector: 'fd-busy-indicator-size-example',

@@ -1,5 +1,7 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { DaysOfWeek } from '@fundamental-ngx/core/calendar';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent, DaysOfWeek } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -7,11 +9,8 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { NgFor } from '@angular/common';
-import { SelectModule } from '@fundamental-ngx/core/select';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormsModule } from '@angular/forms';
-import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-calendar-monday-start-example',

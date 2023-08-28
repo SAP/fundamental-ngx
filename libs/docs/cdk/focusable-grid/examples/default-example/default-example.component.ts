@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FocusableItemPosition, FocusableListPosition } from '@fundamental-ngx/cdk/utils';
-import { FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
-import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { NgFor, NgIf } from '@angular/common';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+    FocusableGridDirective,
+    FocusableItemDirective,
+    FocusableItemPosition,
+    FocusableListDirective,
+    FocusableListPosition
+} from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-grid-default-example',

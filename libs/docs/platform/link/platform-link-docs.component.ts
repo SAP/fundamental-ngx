@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import {
-    PlatformLinkIconExampleComponent,
-    PlatformLinkStandardExampleComponent,
-    PlatformLinkEmphasizedExampleComponent,
-    PlatformLinkDisabledExampleComponent,
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
     PlatformLinkDisabledEmphasizedExampleComponent,
+    PlatformLinkDisabledExampleComponent,
+    PlatformLinkEmphasizedExampleComponent,
+    PlatformLinkIconExampleComponent,
     PlatformLinkInvertedExampleComponent,
+    PlatformLinkStandardExampleComponent,
     PlatformLinkTruncatedExampleComponent
 } from './examples/platform-link-examples.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const standardlinkSrc = 'platform-link-standard-example.component.html';
 const emphasizedlinkSrc = 'platform-link-emphasized-example.component.html';

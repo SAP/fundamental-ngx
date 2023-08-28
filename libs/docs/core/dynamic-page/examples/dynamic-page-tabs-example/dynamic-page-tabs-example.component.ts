@@ -1,17 +1,15 @@
-import { Component } from '@angular/core';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { BarModule } from '@fundamental-ngx/core/bar';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
-import { LinkComponent } from '@fundamental-ngx/core/link';
+import { NgFor, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
-import { NgIf, NgFor } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-dynamic-page-tabs-example',

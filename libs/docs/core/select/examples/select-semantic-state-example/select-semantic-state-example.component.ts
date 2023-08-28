@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormItemModule, FormMessageModule } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
-import { FormItemModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-select-semantic-state-example',

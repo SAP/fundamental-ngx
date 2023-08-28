@@ -11,11 +11,11 @@ import {
     I18nDocsComponent,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { PlatformUploadColletionDocsComponent } from './platform-upload-collection-docs.component';
-import { PlatformUploadCollectionExampleComponent } from './examples/platform-upload-collection-example.component';
 import { PlatformUploadCollectionDisabledExampleComponent } from './examples/platform-upload-collection-disabled-example.component';
+import { PlatformUploadCollectionExampleComponent } from './examples/platform-upload-collection-example.component';
 import { PlatformUploadCollectionReadonlyExampleComponent } from './examples/platform-upload-collection-readonly-example.component';
 import { PlatformUploadCollectionTurnOffExampleComponent } from './examples/platform-upload-collection-turn-off-example.component';
+import { PlatformUploadColletionDocsComponent } from './platform-upload-collection-docs.component';
 import { PlatformUploadCollectionHeaderComponent } from './platform-upload-collection-header/platform-upload-collection-header.component';
 
 const routes: Routes = [

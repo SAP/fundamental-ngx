@@ -1,19 +1,21 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import {
-    FilterableColumnDataType,
     FilterType,
+    FilterableColumnDataType,
+    PlatformTableModule,
     TableDataProvider,
     TableDataSource,
     TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { Observable } from 'rxjs';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-loading-example',

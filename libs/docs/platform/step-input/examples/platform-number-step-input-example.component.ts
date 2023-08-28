@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
-import { StepInputChangeEvent, StepInputAlign } from '@fundamental-ngx/platform/form';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { PlatformStepInputModule } from '@fundamental-ngx/platform/form';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { PlatformStepInputModule, StepInputAlign, StepInputChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-number-step-input-example',

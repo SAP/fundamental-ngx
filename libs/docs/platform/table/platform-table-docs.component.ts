@@ -6,8 +6,22 @@ import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
-import { ExampleChildService, ExampleFile, getAsset, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAsset,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import {
+    PlatformTableModule,
     TableColumnFreezeEvent,
     TableDataSource,
     TableFilterChangeEvent,
@@ -15,37 +29,30 @@ import {
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { PlatformTableEditableRowsExampleComponent } from './examples/editable-rows/platform-table-editable-rows-example.component';
+import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
+import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
+import { PlatformTableCustomColumnExampleComponent } from './examples/platform-table-custom-column-example.component';
+import { PlatformTableCustomTitleExampleComponent } from './examples/platform-table-custom-title-example.component';
+import { PlatformTableCustomWidthExampleComponent } from './examples/platform-table-custom-width-example.component';
 import { ExampleItem } from './examples/platform-table-data-items-example';
 import { TableDataProviderExample } from './examples/platform-table-data-provider-example';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlayGroundComponent } from '../../shared/src/lib/core-helpers/playground/playground.component';
-import { PlatformTableColumnsNgforExampleComponent } from './examples/platform-table-columns-ngfor-example.component';
-import { PlatformTableInitialLoadingExampleComponent } from './examples/initial-loading/platform-table-initial-loading-example.component';
-import { PlatformTableResponsiveColumnsExampleComponent } from './examples/platform-table-responsive-columns-example.component';
-import { PlatformTableEditableRowsExampleComponent } from './examples/editable-rows/platform-table-editable-rows-example.component';
-import { PlatformTableNoOuterBordersExampleComponent } from './examples/platform-table-no-outer-borders-example.component';
-import { PlatformTableWrapExampleComponent } from './examples/platform-table-wrap-example.component';
-import { PlatformTableRowClassExampleComponent } from './examples/platform-table-row-class-example.component';
-import { PlatformTableSemanticExampleComponent } from './examples/platform-table-semantic-example.component';
-import { PlatformTableNoItemsTemplateExampleComponent } from './examples/platform-table-no-items-template-example.component';
-import { PlatformTableTreeExampleComponent } from './examples/platform-table-tree-example.component';
+import { PlatformTableDefaultExampleComponent } from './examples/platform-table-default-example.component';
+import { PlatformTableFreezableExampleComponent } from './examples/platform-table-freezable-example.component';
 import { PlatformTableInitialStateExampleComponent } from './examples/platform-table-initial-state-example.component';
 import { PlatformTableLoadingExampleComponent } from './examples/platform-table-loading-example.component';
-import { PlatformTableFreezableExampleComponent } from './examples/platform-table-freezable-example.component';
-import { PlatformTableCustomTitleExampleComponent } from './examples/platform-table-custom-title-example.component';
-import { PlatformTableCustomColumnExampleComponent } from './examples/platform-table-custom-column-example.component';
-import { PlatformTableCustomWidthExampleComponent } from './examples/platform-table-custom-width-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { PlatformTableDefaultExampleComponent } from './examples/platform-table-default-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformTableNoItemsTemplateExampleComponent } from './examples/platform-table-no-items-template-example.component';
+import { PlatformTableNoOuterBordersExampleComponent } from './examples/platform-table-no-outer-borders-example.component';
+import { PlatformTableResponsiveColumnsExampleComponent } from './examples/platform-table-responsive-columns-example.component';
+import { PlatformTableRowClassExampleComponent } from './examples/platform-table-row-class-example.component';
+import { PlatformTableSemanticExampleComponent } from './examples/platform-table-semantic-example.component';
+import { PlatformTableTreeExampleComponent } from './examples/platform-table-tree-example.component';
+import { PlatformTableWrapExampleComponent } from './examples/platform-table-wrap-example.component';
 
 const platformTableDefaultSrc = 'platform-table-default-example.component.html';
 const platformTableDefaultTsSrc = 'platform-table-default-example.component.ts';

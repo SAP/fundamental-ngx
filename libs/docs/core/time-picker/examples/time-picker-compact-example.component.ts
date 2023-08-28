@@ -1,4 +1,7 @@
+import { DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,9 +9,6 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { NgIf, DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 
 @Component({

@@ -1,15 +1,12 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { SortByPipe } from '../../../../shared/src/lib/core-helpers/pipes/sort.pipe';
-import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { NgFor, NgClass, NgIf } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { ToolbarComponent, ToolbarLabelDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { SortByPipe } from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'fd-list-data-example',

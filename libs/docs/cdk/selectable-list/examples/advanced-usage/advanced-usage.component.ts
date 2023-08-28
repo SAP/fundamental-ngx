@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CustomSelectableItemDirective } from './custom-selectable-item.directive';
-import { SelectableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { NgFor } from '@angular/common';
-import { SelectableListDirective } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SelectableItemDirective, SelectableListDirective } from '@fundamental-ngx/cdk/utils';
+import { CustomSelectableItemDirective } from './custom-selectable-item.directive';
 
 @Component({
     selector: 'fundamental-ngx-selectable-list-advanced-usage',

@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ComplexTemplateExampleComponent } from './examples/complex-template/complex-template-example.component';
-import { MessageBoxMobileExampleComponent } from './examples/mobile-mode/message-box-mobile-example.component';
-import { MessageBoxPositionExampleComponent } from './examples/custom-position/message-box-position-example.component';
 import { RouterLink } from '@angular/router';
-import { SemanticTypesExampleComponent } from './examples/semantic-types/semantic-types-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ComplexTemplateExampleComponent } from './examples/complex-template/complex-template-example.component';
 import { ComponentBasedMessageBoxExampleComponent } from './examples/component-based/component-based-message-box-example.component';
-import { TemplateBasedMessageBoxExampleComponent } from './examples/template-based/template-based-message-box-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { MessageBoxPositionExampleComponent } from './examples/custom-position/message-box-position-example.component';
+import { MessageBoxMobileExampleComponent } from './examples/mobile-mode/message-box-mobile-example.component';
 import { ObjectBasedMessageBoxExampleComponent } from './examples/object-based/object-based-message-box-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { SemanticTypesExampleComponent } from './examples/semantic-types/semantic-types-example.component';
+import { TemplateBasedMessageBoxExampleComponent } from './examples/template-based/template-based-message-box-example.component';
 
 const templateBasedTs = 'template-based/template-based-message-box-example.component.ts';
 const templateBasedHtml = 'template-based/template-based-message-box-example.component.html';

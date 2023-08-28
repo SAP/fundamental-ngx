@@ -13,15 +13,18 @@ const uploadCollectionReadonlyHtml = 'platform-upload-collection-readonly-exampl
 const uploadCollectionTurnOffTs = 'platform-upload-collection-turn-off-example.component.ts';
 const uploadCollectionTurnOffHtml = 'platform-upload-collection-turn-off-example.component.html';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PlatformUploadCollectionTurnOffExampleComponent } from './examples/platform-upload-collection-turn-off-example.component';
-import { PlatformUploadCollectionReadonlyExampleComponent } from './examples/platform-upload-collection-readonly-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformUploadCollectionDisabledExampleComponent } from './examples/platform-upload-collection-disabled-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { PlatformUploadCollectionExampleComponent } from './examples/platform-upload-collection-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformUploadCollectionReadonlyExampleComponent } from './examples/platform-upload-collection-readonly-example.component';
+import { PlatformUploadCollectionTurnOffExampleComponent } from './examples/platform-upload-collection-turn-off-example.component';
 
 @Component({
     selector: 'app-platform-upload-collection',

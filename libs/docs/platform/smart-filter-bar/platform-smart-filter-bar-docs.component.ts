@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PlatformSmartFilterBarLoadingExampleComponent } from './examples/loading/platform-smart-filter-bar-loading-example.component';
-import { PlatformSmartFilterBarDynamicPageExampleComponent } from './examples/platform-smart-filter-bar-dynamic-page-example.component';
-import { PlatformSmartFilterBarCustomLabelsExampleComponent } from './examples/platform-smart-filter-bar-custom-labels-example.component';
-import { PlatformSmartFilterBarCustomFilterExampleComponent } from './examples/platform-smart-filter-bar-custom-filter-example.component';
-import { PlatformSmartFilterBarObservableExampleComponent } from './examples/platform-smart-filter-bar-observable-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { PlatformSmartFilterBarBasicExampleComponent } from './examples/platform-smart-filter-bar-basic-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformSmartFilterBarCustomFilterExampleComponent } from './examples/platform-smart-filter-bar-custom-filter-example.component';
+import { PlatformSmartFilterBarCustomLabelsExampleComponent } from './examples/platform-smart-filter-bar-custom-labels-example.component';
+import { PlatformSmartFilterBarDynamicPageExampleComponent } from './examples/platform-smart-filter-bar-dynamic-page-example.component';
+import { PlatformSmartFilterBarObservableExampleComponent } from './examples/platform-smart-filter-bar-observable-example.component';
 
 const platformBasicSfbSrc = 'platform-smart-filter-bar-basic-example.component.html';
 const platformBasicSfbTsCode = 'platform-smart-filter-bar-basic-example.component.ts';

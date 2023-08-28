@@ -2,20 +2,14 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
+import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
-    TableDataSource,
-    TableDataProvider,
-    TableState,
-    TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent,
-    TableService
-} from '@fundamental-ngx/platform/table';
-import { TableVirtualScrollDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+    TableDataSourceDirective,
+    TableDraggableDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective,
+    TableVirtualScrollDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-virtual-scroll-example',

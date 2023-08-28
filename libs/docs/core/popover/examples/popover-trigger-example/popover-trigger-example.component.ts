@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-trigger-example',

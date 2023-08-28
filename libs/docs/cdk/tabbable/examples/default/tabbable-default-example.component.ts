@@ -1,6 +1,5 @@
-import { Component, ViewChild, ElementRef, inject } from '@angular/core';
-import { TabbableElementService } from '@fundamental-ngx/cdk/utils';
-import { DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { DisabledBehaviorDirective, TabbableElementService } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({

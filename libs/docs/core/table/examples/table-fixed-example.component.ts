@@ -1,8 +1,8 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { NgFor } from '@angular/common';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({

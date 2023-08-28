@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     FdpFormGroupModule,
     PlatformCheckboxGroupModule,
     PlatformCheckboxModule
 } from '@fundamental-ngx/platform/form';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { PlatformCheckboxGroupContentCheckboxComponent } from './examples/platform-checkbox-group-content-checkbox.component';
+import { PlatformCheckboxGroupExampleComponent } from './examples/platform-checkbox-group-examples.component';
+import { PlatformCheckboxGroupListObjectComponent } from './examples/platform-checkbox-group-list-object.component';
+import { PlatformCheckboxGroupListComponent } from './examples/platform-checkbox-group-list.component';
 import { PlatformCheckboxGroupDocsComponent } from './platform-checkbox-group-docs.component';
 import { PlatformCheckboxGroupHeaderComponent } from './platform-checkbox-group-header/platform-checkbox-group-header.component';
-import { PlatformCheckboxGroupExampleComponent } from './examples/platform-checkbox-group-examples.component';
-import { PlatformCheckboxGroupListComponent } from './examples/platform-checkbox-group-list.component';
-import { PlatformCheckboxGroupContentCheckboxComponent } from './examples/platform-checkbox-group-content-checkbox.component';
-import { PlatformCheckboxGroupListObjectComponent } from './examples/platform-checkbox-group-list-object.component';
 
 const routes: Routes = [
     {

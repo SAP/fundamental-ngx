@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FormItemModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
 import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/side-navigation.module';
 
 @Component({

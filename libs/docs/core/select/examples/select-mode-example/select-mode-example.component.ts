@@ -1,6 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { NgFor } from '@angular/common';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({

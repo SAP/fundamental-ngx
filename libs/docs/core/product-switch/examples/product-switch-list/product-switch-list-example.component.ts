@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
-import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 
 @Component({
     selector: 'fd-product-switch-list-example',

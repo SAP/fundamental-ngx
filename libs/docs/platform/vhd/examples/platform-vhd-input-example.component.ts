@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import {
-    VhdDataProvider,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
-} from '@fundamental-ngx/platform/value-help-dialog';
-import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
-import { TokenModule } from '@fundamental-ngx/core/token';
 import { NgFor, NgIf } from '@angular/common';
-import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
+    VhdDataProvider,
+    VhdValueChangeEvent
+} from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
     id: number;

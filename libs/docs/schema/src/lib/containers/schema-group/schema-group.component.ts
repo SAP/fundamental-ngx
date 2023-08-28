@@ -1,15 +1,17 @@
+import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
-import { FormGroup, FormControl, AbstractControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import {
+    FieldSetModule,
+    FormControlModule,
+    FormItemModule,
+    FormLabelModule,
+    FormLegendModule
+} from '@fundamental-ngx/core/form';
 import { Properties } from '../../models/schema.model';
 import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pipe';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormLegendModule } from '@fundamental-ngx/core/form';
-import { FieldSetModule } from '@fundamental-ngx/core/form';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 
 @Component({
     selector: 'schema-group',

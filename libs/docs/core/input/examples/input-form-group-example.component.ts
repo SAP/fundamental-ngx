@@ -1,18 +1,16 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
     FormArray,
     FormBuilder,
     FormControl,
     FormGroup,
-    Validators,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Validators
 } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgFor } from '@angular/common';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-input-form-group-example',

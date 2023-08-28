@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { MenuModule } from '@fundamental-ngx/core/menu';
+import { MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 
 @Component({

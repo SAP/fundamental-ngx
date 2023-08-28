@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
 
-import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
-import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
 import { PlatformRadioGroupContentExampleComponent } from './examples/platform-radio-group-content-examples.component';
 import { PlatformRadioGroupDisabledExampleComponent } from './examples/platform-radio-group-disabled-examples.component';
 import { PlatformRadioGroupListExampleComponent } from './examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './examples/platform-radio-group-list-items-examples.component';
+import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
+import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
 
 const routes: Routes = [
     {

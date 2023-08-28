@@ -1,14 +1,14 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import {
     ApiComponent,
     currentComponentProvider,
     SharedDocumentationModule,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ObjectNumberDocsComponent } from './object-number-docs.component';
 import {
     ObjectNumberBasicExampleComponent,
     ObjectNumberBoldExampleComponent,
@@ -18,8 +18,8 @@ import {
     ObjectNumberTruncationExampleComponent,
     ObjectNumberUnitsExampleComponent
 } from './examples/object-number-examples.component';
+import { ObjectNumberDocsComponent } from './object-number-docs.component';
 import { ObjectNumberHeaderComponent } from './object-number-header/object-number-header.component';
-import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 
 const routes: Routes = [
     {

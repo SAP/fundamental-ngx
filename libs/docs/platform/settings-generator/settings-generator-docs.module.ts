@@ -2,21 +2,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
-import { SettingsGeneratorHeaderComponent } from './settings-generator-header/settings-generator-header.component';
-import { SettingsGeneratorDocsComponent } from './settings-generator-docs.component';
-import { examples } from './examples';
-import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
-import { SettingsGeneratorDialogExampleComponent } from './examples/dialog/settings-generator-dialog-example.component';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/message-popover/settings-generator-message-popover-example.component';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { I18nModule } from '@fundamental-ngx/i18n';
+import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
+import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
+import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
+import { examples } from './examples';
 import {
     PlatformFormGeneratorCustomSliderElementComponent,
     SettingsGeneratorCustomControlExampleComponent
@@ -25,6 +21,10 @@ import {
     SettingsGeneratorCustomLayoutExampleComponent,
     SettingsGeneratorTabsLayoutComponent
 } from './examples/custom-layout/settings-generator-custom-layout-example.component';
+import { SettingsGeneratorDialogExampleComponent } from './examples/dialog/settings-generator-dialog-example.component';
+import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/message-popover/settings-generator-message-popover-example.component';
+import { SettingsGeneratorDocsComponent } from './settings-generator-docs.component';
+import { SettingsGeneratorHeaderComponent } from './settings-generator-header/settings-generator-header.component';
 
 const routes: Routes = [
     {

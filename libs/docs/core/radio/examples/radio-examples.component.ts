@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+    FieldSetModule,
+    FormGroupModule,
+    FormHeaderModule,
+    FormItemModule,
+    FormLegendModule
+} from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { FormGroupModule } from '@fundamental-ngx/core/form';
-import { FormLegendModule } from '@fundamental-ngx/core/form';
-import { FieldSetModule } from '@fundamental-ngx/core/form';
-import { FormHeaderModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-radio-example',

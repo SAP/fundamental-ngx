@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
-import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { RouterLink } from '@angular/router';
-import { PopoverDropdownExampleComponent } from './examples/popover-dropdown/popover-dropdown-example.component';
-import { PopoverDynamicExampleComponent } from './examples/popover-dynamic/popover-dynamic-example.component';
-import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
-import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
-import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
-import { PopoverContainerExampleComponent } from './examples/popover-container-example/popover-container-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { PopoverCFillComponent } from './examples/popover-c-fill/popover-c-fill.component';
-import { PopoverDialogExampleComponent } from './examples/popover-dialog/popover-dialog-example.component';
-import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
-import { PopoverPlacementExampleComponent } from './examples/popover-placement/popover-placement-example.component';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
-import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { PopoverContainerExampleComponent } from './examples/popover-container-example/popover-container-example.component';
+import { PopoverDialogExampleComponent } from './examples/popover-dialog/popover-dialog-example.component';
+import { PopoverDropdownExampleComponent } from './examples/popover-dropdown/popover-dropdown-example.component';
+import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
+import { PopoverDynamicExampleComponent } from './examples/popover-dynamic/popover-dynamic-example.component';
+import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
+import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
+import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
+import { PopoverPlacementExampleComponent } from './examples/popover-placement/popover-placement-example.component';
+import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
+import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
 import { PopoverExampleComponent } from './examples/popover-simple/popover-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 
 const popoverSrcScss = 'popover-simple/popover-example.component.scss';
 const popoverProgrammaticScssSrc = 'popover-programmatic/popover-programmatic-open-example.component.scss';

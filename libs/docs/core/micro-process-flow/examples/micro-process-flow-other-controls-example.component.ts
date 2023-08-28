@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-micro-process-flow-other-controls-example',

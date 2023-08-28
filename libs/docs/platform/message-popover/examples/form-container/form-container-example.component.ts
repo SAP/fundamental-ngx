@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormGroupDirective, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { MessagePopoverComponent } from '@fundamental-ngx/platform/message-popover';
+import { FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
-import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FdpFormGroupModule, PlatformInputModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
 interface MaxErrorModel {
     max: number;

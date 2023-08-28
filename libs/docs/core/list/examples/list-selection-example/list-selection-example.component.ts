@@ -1,10 +1,10 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { RadioModule } from '@fundamental-ngx/core/radio';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { NgFor } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ListModule } from '@fundamental-ngx/core/list';
+import { RadioModule } from '@fundamental-ngx/core/radio';
 
 @Component({
     selector: 'fd-list-selection-example',

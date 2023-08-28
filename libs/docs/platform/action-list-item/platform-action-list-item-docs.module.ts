@@ -5,13 +5,13 @@ import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { ActionListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
-import { PlatformActionListItemHeaderComponent } from './platform-action-list-item-header/platform-action-list-item-header.component';
-import { PlatformActionListItemDocsComponent } from './platform-action-list-item-docs.component';
-import { PlatformActionListItemExampleComponent } from './examples/platform-action-list-item-example.component';
 import { PlatformActionListItemBorderLessExampleComponent } from './examples/platform-action-list-item-border-less-example.component';
+import { PlatformActionListItemExampleComponent } from './examples/platform-action-list-item-example.component';
+import { PlatformActionListItemDocsComponent } from './platform-action-list-item-docs.component';
+import { PlatformActionListItemHeaderComponent } from './platform-action-list-item-header/platform-action-list-item-header.component';
 
 const routes: Routes = [
     {

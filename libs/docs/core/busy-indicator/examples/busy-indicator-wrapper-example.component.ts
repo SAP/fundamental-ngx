@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
 import { FormsModule } from '@angular/forms';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-busy-indicator-wrapper-example',

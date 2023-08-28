@@ -1,13 +1,13 @@
+import { AsyncPipe, NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FdLanguage, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
-import { of, OperatorFunction, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { I18nDocsLoaderService } from './i18n-docs-loader.service';
-import { TableModule } from '@fundamental-ngx/core/table';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { NgIf, NgSwitch, NgSwitchCase, NgFor, AsyncPipe } from '@angular/common';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { FD_LANGUAGE_ENGLISH, FdLanguage } from '@fundamental-ngx/i18n';
+import { Observable, OperatorFunction, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { I18nDocsLoaderService } from './i18n-docs-loader.service';
 
 /** utility function to provide type safe FdLanguage key as route data, wrapped in an object needed for I18nDocsComponent */
 export function getI18nKey(i18nKey: keyof FdLanguage): I18nRouteData {

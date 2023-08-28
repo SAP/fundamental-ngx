@@ -1,7 +1,6 @@
+import { JsonPipe, NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { NgFor, NgClass, JsonPipe } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({

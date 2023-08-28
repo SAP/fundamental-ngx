@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PanelModule } from '@fundamental-ngx/core/panel';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PanelModule } from '@fundamental-ngx/core/panel';
 
 @Component({
     selector: 'fd-panel-expandable-example',

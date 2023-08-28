@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
+import { PlatformSearchFieldModule, SearchInput, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 import { SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
-import { SearchInput, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
 import { SearchFieldDataProvider } from './platform-search-field-data-source-example.service';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-data-source-example',

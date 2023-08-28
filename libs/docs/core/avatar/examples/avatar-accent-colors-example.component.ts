@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 @Component({

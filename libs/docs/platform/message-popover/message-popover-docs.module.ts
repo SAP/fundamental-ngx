@@ -3,8 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     FdpFormGroupModule,
@@ -13,13 +13,13 @@ import {
     PlatformSwitchModule,
     PlatformTextAreaModule
 } from '@fundamental-ngx/platform/form';
-import { MessagePopoverHeaderComponent } from './message-popover-header/message-popover-header.component';
-import { MessagePopoverDocsComponent } from './message-popover-docs.component';
-import { examples } from './examples';
 import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
-import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
-import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
+import { examples } from './examples';
 import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config/message-popover-custom-config-example.component';
+import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
+import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
+import { MessagePopoverDocsComponent } from './message-popover-docs.component';
+import { MessagePopoverHeaderComponent } from './message-popover-header/message-popover-header.component';
 
 const routes: Routes = [
     {

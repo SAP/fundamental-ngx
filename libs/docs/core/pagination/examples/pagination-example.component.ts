@@ -1,10 +1,9 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PaginationComponent, PaginationModule } from '@fundamental-ngx/core/pagination';
 import { of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
-import { PaginationComponent } from '@fundamental-ngx/core/pagination';
-import { NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PaginationModule } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-example',

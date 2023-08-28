@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { NgFor } from '@angular/common';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `

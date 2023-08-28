@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef } from '@angular/core';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 const ITEMS_AMOUNT_ON_LOAD = 5;
 

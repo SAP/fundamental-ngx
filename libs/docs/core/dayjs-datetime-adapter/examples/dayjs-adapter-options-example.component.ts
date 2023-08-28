@@ -1,11 +1,11 @@
-import { Component, LOCALE_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import {
-    DAYJS_DATE_TIME_ADAPTER_OPTIONS,
     DAYJS_DATETIME_FORMATS,
+    DAYJS_DATE_TIME_ADAPTER_OPTIONS,
     DayjsDatetimeAdapter
 } from '@fundamental-ngx/datetime-adapter';
-import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 @Component({
     selector: 'fd-dayjs-adapter-options-example',

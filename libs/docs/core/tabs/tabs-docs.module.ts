@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { TabsHeaderComponent } from './tabs-header/tabs-header.component';
-import { TabsDocsComponent } from './tabs-docs.component';
-import {
-    examples,
-    TabNavigationExampleChildFirstComponent,
-    TabNavigationExampleChildSecondComponent,
-    TabNavigationExampleChildThirdComponent
-} from './examples';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { TitleModule } from '@fundamental-ngx/core/title';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import {
+    TabNavigationExampleChildFirstComponent,
+    TabNavigationExampleChildSecondComponent,
+    TabNavigationExampleChildThirdComponent,
+    examples
+} from './examples';
+import { TabsDocsComponent } from './tabs-docs.component';
+import { TabsHeaderComponent } from './tabs-header/tabs-header.component';
 
 const routes: Routes = [
     {

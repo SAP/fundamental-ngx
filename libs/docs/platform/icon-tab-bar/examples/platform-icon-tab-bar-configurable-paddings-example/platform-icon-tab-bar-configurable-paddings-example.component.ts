@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 import { cloneDeep } from 'lodash-es';
 import { textTypeConfig } from '../config-for-examples/text-type.config';
-import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 
 @Component({
     selector: 'fd-platform-icon-tab-bar-configurable-paddings-example',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { DialogExampleComponent } from './dialog-example.component';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-component-based-dialog-example',

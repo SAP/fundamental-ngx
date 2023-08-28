@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ArrayMultiComboBoxDataSource, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
-import { of } from 'rxjs';
 import { JsonPipe } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import {
+    ArrayMultiComboBoxDataSource,
+    MultiComboboxModule,
+    MultiComboboxSelectionChangeEvent
+} from '@fundamental-ngx/core/multi-combobox';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'fd-multi-combobox-datasource-example',

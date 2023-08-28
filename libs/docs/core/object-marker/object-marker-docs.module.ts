@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ObjectMarkerDocsComponent } from './object-marker-docs.component';
-import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { ObjectMarkerClickableExampleComponent } from './examples/object-marker-clickable-example.component';
 import {
     ObjectMarkerExampleComponent,
     ObjectMarkerIconAndTextExampleComponent,
     ObjectMarkerTextExampleComponent
 } from './examples/object-marker-example.component';
-import { ObjectMarkerClickableExampleComponent } from './examples/object-marker-clickable-example.component';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectMarkerDocsComponent } from './object-marker-docs.component';
+import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
 
 const routes: Routes = [
     {

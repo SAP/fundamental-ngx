@@ -7,12 +7,12 @@ import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule }
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformPageFooterModule } from '@fundamental-ngx/platform/page-footer';
-import { PlatformPageFooterDocsComponent } from './platform-page-footer-docs.component';
 import {
     PlatformPageFooterExampleComponent,
     PlatformPageFooterMultipleLineExampleComponent,
     PlatformPageFooterWithIconExampleComponent
 } from './examples/platform-page-footer-example.component';
+import { PlatformPageFooterDocsComponent } from './platform-page-footer-docs.component';
 import { PlatformPageFooterHeaderComponent } from './platform-page-footer-header/platform-page-footer-header.component';
 
 const routes: Routes = [

@@ -1,22 +1,21 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
-import { DisplayedColumn } from './table-custom-columns-example.component';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { FilterPipe } from '../../../../shared/src/lib/core-helpers/pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { NgIf, NgFor } from '@angular/common';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { FormsModule } from '@angular/forms';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { FilterPipe } from '@fundamental-ngx/docs/shared';
+import { DisplayedColumn } from './table-custom-columns-example.component';
 
 @Component({
     template: `

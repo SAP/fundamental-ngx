@@ -1,8 +1,7 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
-import { MenuItemComponent } from '@fundamental-ngx/core/menu';
-import { NgFor, NgTemplateOutlet, NgIf } from '@angular/common';
-import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-menu-with-submenu-example',

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { ResponsiveBreakpoints } from '@fundamental-ngx/cdk/utils';
-import { DifferentObserveTargetExampleComponent } from './examples/different-observe-target-example.component';
-import { AliasNamesExampleComponent } from './examples/alias-names-example/alias-names-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
+import { FocusableGridDirective, ResponsiveBreakpoints } from '@fundamental-ngx/cdk/utils';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AliasNamesExampleComponent } from './examples/alias-names-example/alias-names-example.component';
+import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
+import { DifferentObserveTargetExampleComponent } from './examples/different-observe-target-example.component';
 
 const defaultExampleHtml = 'basic-example/basic-example.component.html';
 const defaultExampleTs = 'basic-example/basic-example.component.ts';

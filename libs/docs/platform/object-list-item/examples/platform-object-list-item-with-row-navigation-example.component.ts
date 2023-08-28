@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
-import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectListItemModule } from '@fundamental-ngx/platform/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import {
+    BaseListItem,
+    ObjectListItemModule,
+    PlatformListModule,
+    SelectionChangeEvent
+} from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Product[] = [
     {

@@ -1,9 +1,8 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NgIf, JsonPipe } from '@angular/common';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { JsonPipe, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FdpFormGroupModule, PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-input-group-form-example',

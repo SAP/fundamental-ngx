@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,6 +8,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { destroyObservable } from '@fundamental-ngx/cdk';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
@@ -16,6 +19,7 @@ import {
     CollectionSelectFilter,
     CollectionSort,
     CollectionStringFilter,
+    PlatformTableModule,
     SortDirection,
     TableColumnsChangeEvent,
     TableComponent,
@@ -28,15 +32,13 @@ import {
     TableSortChangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableDraggableDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
-import { destroyObservable } from '@fundamental-ngx/cdk';
-import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
-import { NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fdp-platform-table-preserved-state-example',

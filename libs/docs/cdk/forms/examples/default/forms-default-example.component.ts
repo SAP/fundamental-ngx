@@ -1,25 +1,28 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     DestroyRef,
-    inject,
     Input,
     ViewChild,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { cloneDeep } from 'lodash-es';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
+import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
-import { NgIf, NgFor } from '@angular/common';
-import { CvaDirective as CvaDirective_1 } from '@fundamental-ngx/cdk/forms';
+import {
+    CvaControl,
+    CvaDirective,
+    CvaDirective as CvaDirective_1,
+    FD_FORM_FIELD_CONTROL
+} from '@fundamental-ngx/cdk/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { cloneDeep } from 'lodash-es';
 
 @Component({
     selector: 'fundamental-ngx-forms-default-example',

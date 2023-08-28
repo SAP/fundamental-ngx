@@ -1,10 +1,9 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiDocsService } from '../../services/api-docs.service';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { MenuModule } from '@fundamental-ngx/core/menu';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf, NgFor } from '@angular/common';
+import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import { ApiDocsService } from '../../services/api-docs.service';
 
 @Component({
     selector: 'fd-api',

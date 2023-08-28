@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile } from '@fundamental-ngx/docs/shared';
-import { HeaderTabsComponent } from '../../../shared/src/lib/core-helpers/header-tabs/header-tabs.component';
-import { ImportComponent } from '../../../shared/src/lib/core-helpers/import/import.component';
-import { CodeSnippetComponent } from '../../../shared/src/lib/core-helpers/code-snippet/code-snippet.component';
-import { DescriptionComponent } from '../../../shared/src/lib/core-helpers/description/description';
-import { HeaderComponent } from '../../../shared/src/lib/core-helpers/header/header.component';
-import { DocPageComponent } from '../../../shared/src/lib/core-helpers/doc-page/doc-page.component';
+import {
+    CodeSnippetComponent,
+    DescriptionComponent,
+    DocPageComponent,
+    ExampleFile,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'app-datetime-datetime-adapter-header',

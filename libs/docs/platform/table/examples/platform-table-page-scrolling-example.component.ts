@@ -1,20 +1,23 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { finalize, delay } from 'rxjs/operators';
+import { delay, finalize } from 'rxjs/operators';
 
+import { AsyncPipe } from '@angular/common';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import {
-    TableDataSource,
+    PlatformTableModule,
     TableDataProvider,
-    TableState,
-    TableRowSelectionChangeEvent
+    TableDataSource,
+    TableRowSelectionChangeEvent,
+    TableState
 } from '@fundamental-ngx/platform/table';
-import { AsyncPipe } from '@angular/common';
-import { FdpCellDef, FdpTableCell } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-page-scrolling-example',

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { map } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { Component, OnInit } from '@angular/core';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-action-bar-long-string-title-truncation-example',

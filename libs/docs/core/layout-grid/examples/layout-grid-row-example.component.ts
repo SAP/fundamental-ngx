@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.component';
+import { Component } from '@angular/core';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { ExampleLayoutGridBlockComponent } from './example-layout-grid-block.component';
 
 @Component({
     selector: 'fd-layout-grid-row-example',

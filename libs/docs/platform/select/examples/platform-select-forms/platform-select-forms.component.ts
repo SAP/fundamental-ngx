@@ -1,11 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { OptionItem } from '@fundamental-ngx/platform/shared';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 import { JsonPipe } from '@angular/common';
-import { PlatformSelectModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/platform/form';
+import { OptionItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-select-forms',

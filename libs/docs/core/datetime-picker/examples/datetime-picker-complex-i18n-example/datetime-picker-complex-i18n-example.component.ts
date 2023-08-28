@@ -1,4 +1,6 @@
+import { NgFor } from '@angular/common';
 import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,7 +8,12 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
+import {
+    DatetimePickerComponent,
+    DatetimePickerComponent as DatetimePickerComponent_1
+} from '@fundamental-ngx/core/datetime-picker';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SelectModule } from '@fundamental-ngx/core/select';
 import {
     FD_LANGUAGE,
     FD_LANGUAGE_BULGARIAN,
@@ -17,11 +24,6 @@ import {
     FdLanguage
 } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import { DatetimePickerComponent as DatetimePickerComponent_1 } from '@fundamental-ngx/core/datetime-picker';
-import { NgFor } from '@angular/common';
-import { SelectModule } from '@fundamental-ngx/core/select';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 const placeholders = new Map([
     ['en-ca', 'mm/dd/yyyy, hh:mm a'],

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormsModule } from '@angular/forms';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { TimeModule } from '@fundamental-ngx/core/time';
 
 @Component({

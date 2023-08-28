@@ -1,6 +1,6 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'fd-scrollbar-example',

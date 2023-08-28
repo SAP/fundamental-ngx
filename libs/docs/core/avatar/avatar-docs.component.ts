@@ -1,22 +1,25 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
-import { AvatarDefaultImageWithAlternativeOptionsExampleComponent } from './examples/avatar-default-image-with-alternative-options-example.component';
-import { AvatarBordersExampleComponent } from './examples/avatar-borders-example.component';
-import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-example.component';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
 import { AvatarAccentColorsExampleComponent } from './examples/avatar-accent-colors-example.component';
-import { AvatarTileExampleComponent } from './examples/avatar-tile-example.component';
-import { AvatarPlaceholderExampleComponent } from './examples/avatar-placeholder-example.component';
-import { AvatarTransparentExampleComponent } from './examples/avatar-transparent-example.component';
 import { AvatarBackgroundImageExampleComponent } from './examples/avatar-background-image-example.component';
+import { AvatarBordersExampleComponent } from './examples/avatar-borders-example.component';
 import { AvatarCircleExampleComponent } from './examples/avatar-circle-example.component';
-import { AvatarInitialsExampleComponent } from './examples/avatar-initials-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
+import { AvatarDefaultImageWithAlternativeOptionsExampleComponent } from './examples/avatar-default-image-with-alternative-options-example.component';
 import { AvatarIconExampleComponent } from './examples/avatar-icon-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { AvatarInitialsExampleComponent } from './examples/avatar-initials-example.component';
+import { AvatarPlaceholderExampleComponent } from './examples/avatar-placeholder-example.component';
+import { AvatarTileExampleComponent } from './examples/avatar-tile-example.component';
+import { AvatarTransparentExampleComponent } from './examples/avatar-transparent-example.component';
+import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-example.component';
 
 @Component({
     selector: 'app-avatar',

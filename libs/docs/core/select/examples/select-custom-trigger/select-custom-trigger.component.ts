@@ -1,6 +1,6 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { NgFor, NgIf } from '@angular/common';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({

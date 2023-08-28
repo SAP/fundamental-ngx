@@ -17,14 +17,14 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { InputGroupPo } from './input-group.po';
+import { email_value, numeric_value, string_value } from './input-group';
 import {
     inputWithFormLabel,
     inputWithFormPlaceholder,
     standardInputLabels,
     standardInputPlaceholders
 } from './input-group-page-contents';
-import { email_value, numeric_value, string_value } from './input-group';
+import { InputGroupPo } from './input-group.po';
 
 declare const $$: any;
 

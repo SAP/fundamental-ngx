@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DataProvider } from '@fundamental-ngx/cdk/data-source';
-import { FdTreeDataSource, TreeItem } from '@fundamental-ngx/core/tree';
-import { delay, Observable, of } from 'rxjs';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { TreeModule } from '@fundamental-ngx/core/tree';
-import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { FormsModule } from '@angular/forms';
+import { DataProvider, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { FdTreeDataSource, TreeItem, TreeModule } from '@fundamental-ngx/core/tree';
+import { Observable, delay, of } from 'rxjs';
 
 let index = 0;
 let totalIndex = 0;

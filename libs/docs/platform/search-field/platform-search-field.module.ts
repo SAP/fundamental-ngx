@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
-    currentComponentProvider,
-    getI18nKey,
     I18nDocsComponent,
     SEARCH_FIELD_MOBILE_CONFIG,
-    SharedDocumentationPageModule
+    SharedDocumentationPageModule,
+    currentComponentProvider,
+    getI18nKey
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
-import { PlatformSearchFieldHeaderComponent } from './platform-search-field-header/platform-search-field-header.component';
-import { PlatformSearchFieldDocsComponent } from './platform-search-field-docs.component';
 import { PlatformSearchFieldBasicExampleComponent } from './examples/platform-search-field-basic-example.component';
 import { PlatformSearchFieldCategoriesExampleComponent } from './examples/platform-search-field-categories-example.component';
 import { PlatformSearchFieldDataSourceExampleComponent } from './examples/platform-search-field-data-source-example.component';
 import { PlatformSearchFieldMobileExampleComponent } from './examples/platform-search-field-mobile/platform-search-field-mobile-example.component';
+import { PlatformSearchFieldDocsComponent } from './platform-search-field-docs.component';
+import { PlatformSearchFieldHeaderComponent } from './platform-search-field-header/platform-search-field-header.component';
 
 const routes: Routes = [
     {

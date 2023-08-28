@@ -1,19 +1,19 @@
-import { RouterModule, Routes } from '@angular/router';
-import { PlatformInputHeaderComponent } from './platform-input-header/platform-input-header.component';
-import { PlatformInputDocsComponent } from './platform-input-docs.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { PlatformInputDocsComponent } from './platform-input-docs.component';
+import { PlatformInputHeaderComponent } from './platform-input-header/platform-input-header.component';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { PlatformInputExampleComponent } from './examples/platform-input-example.component';
-import { PlatformInputReactiveValidationExampleComponent } from './examples/platform-input-reactive-validation-example.component';
 import { PlatformInputAutoCompleteValidationExampleComponent } from './examples/platform-input-auto-complete-validation-example.component';
+import { PlatformInputExampleComponent } from './examples/platform-input-example.component';
 import { PlatformInputReactiveMinMaxValidationExampleComponent } from './examples/platform-input-reactive-min-max-validation-example.component';
+import { PlatformInputReactiveValidationExampleComponent } from './examples/platform-input-reactive-validation-example.component';
 
 const routes: Routes = [
     {

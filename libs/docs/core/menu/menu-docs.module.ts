@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { MenuHeaderComponent } from './menu-header/menu-header.component';
-import { MenuDocsComponent } from './menu-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import {
     MenuAddonExampleComponent,
     MenuExampleComponent,
     MenuSeparatorExampleComponent
 } from './examples/menu-examples.component';
+import { MenuDocsComponent } from './menu-docs.component';
+import { MenuHeaderComponent } from './menu-header/menu-header.component';
 
-import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
 import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
+import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
 const routes: Routes = [
     {

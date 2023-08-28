@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import {
     ChildTableDataSource,
     CollectionBooleanFilter,
@@ -7,24 +8,23 @@ import {
     CollectionNumberFilter,
     CollectionStringFilter,
     FdpTableDataSource,
-    FilterableColumnDataType,
     FilterType,
+    FilterableColumnDataType,
     SortDirection,
     TableChildrenDataProvider,
     TableDataProvider,
     TableDataSource,
+    TableDataSourceDirective,
+    TableDraggableDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective,
     TableRow,
     TableState,
+    TableVirtualScrollDirective,
     TreeTableItem
 } from '@fundamental-ngx/platform/table-helpers';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { TableVirtualScrollDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDraggableDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-doc-advanced-scrolling-example',

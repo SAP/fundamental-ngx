@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
-import { SwitchConfig } from '@fundamental-ngx/platform/form';
 import { JsonPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlatformSwitchModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformSwitchModule, SwitchConfig } from '@fundamental-ngx/platform/form';
 
 export const switchConfigFactory = SwitchConfig.createProviderFactory({
     contentDensity: 'compact'

@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ColumnLayout } from '@fundamental-ngx/platform/shared';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
+import { ColumnLayout } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-form-custom-layout',

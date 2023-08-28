@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
     currentComponentProvider,
@@ -13,11 +13,11 @@ import {
     I18nDocsComponent,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { PlatformApprovalFlowHeaderComponent } from './platform-approval-flow-header/platform-approval-flow-header.component';
-import { PlatformApprovalFlowDocsComponent } from './platform-approval-flow-docs.component';
-import { PlatformApprovalFlowExampleComponent } from './examples/platform-approval-flow-example.component';
+import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
 import { PlatformApprovalFlowCustomStatusExampleComponent } from './examples/platform-approval-flow-custom-status-example.component';
+import { PlatformApprovalFlowExampleComponent } from './examples/platform-approval-flow-example.component';
+import { PlatformApprovalFlowDocsComponent } from './platform-approval-flow-docs.component';
+import { PlatformApprovalFlowHeaderComponent } from './platform-approval-flow-header/platform-approval-flow-header.component';
 
 const routes: Routes = [
     {

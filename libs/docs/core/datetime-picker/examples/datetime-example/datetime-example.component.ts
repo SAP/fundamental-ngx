@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,7 +7,6 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { FormsModule } from '@angular/forms';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 

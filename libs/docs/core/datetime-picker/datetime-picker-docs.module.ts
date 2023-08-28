@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { DatetimePickerHeaderComponent } from './datetime-picker-header/datetime-picker-header.component';
-import { DatetimePickerDocsComponent } from './datetime-picker-docs.component';
-import { DatetimePickerComplexI18nExampleComponent } from './examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
-import { DatetimeExampleComponent } from './examples/datetime-example/datetime-example.component';
-import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
-import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
-import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
-import { DateTimePickerUpdateOnBlurExampleComponent } from './examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component';
-import { DatetimePickerAllowNullExampleComponent } from './examples/datetime-allow-null-example/datetime-allow-null-example.component';
-import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { SelectModule } from '@fundamental-ngx/core/select';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PipeModule } from '@fundamental-ngx/cdk/utils';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { DatetimePickerDocsComponent } from './datetime-picker-docs.component';
+import { DatetimePickerHeaderComponent } from './datetime-picker-header/datetime-picker-header.component';
+import { DatetimePickerAllowNullExampleComponent } from './examples/datetime-allow-null-example/datetime-allow-null-example.component';
+import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
+import { DatetimeExampleComponent } from './examples/datetime-example/datetime-example.component';
+import { DatetimeFormExampleComponent } from './examples/datetime-form-example/datetime-form-example.component';
+import { DatetimeFormatExampleComponent } from './examples/datetime-format-example/datetime-format-example.component';
 import { DatetimeMobileExampleComponent } from './examples/datetime-mobile/datetime-mobile-example.component';
+import { DatetimePickerComplexI18nExampleComponent } from './examples/datetime-picker-complex-i18n-example/datetime-picker-complex-i18n-example.component';
+import { DateTimePickerUpdateOnBlurExampleComponent } from './examples/datetime-picker-update-on-blur-example/datetime-picker-update-on-blur-example.component';
+import { DatetimeProgramExampleComponent } from './examples/datetime-program-example/datetime-program-example.component';
 
 const routes: Routes = [
     {

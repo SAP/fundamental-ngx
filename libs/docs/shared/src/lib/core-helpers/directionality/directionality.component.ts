@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormsModule } from '@angular/forms';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SwitchModule } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'rtl-switch',

@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { FeedInputCircleAvatarExampleComponent } from './examples/feed-input-circle-avatar-example/feed-input-circle-avatar-example.component';
-import { FeedInputGrowExampleComponent } from './examples/feed-input-grow-example/feed-input-grow-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
 import { FeedInputDisabledExampleComponent } from './examples/feed-input-disabled-example/feed-input-disabled-example.component';
+import { FeedInputExampleComponent } from './examples/feed-input-example/feed-input-example.component';
+import { FeedInputGrowExampleComponent } from './examples/feed-input-grow-example/feed-input-grow-example.component';
 import { FeedInputNoAvatarExampleComponent } from './examples/feed-input-no-avatar-example/feed-input-no-avatar-example.component';
 import { FeedInputPlaceholderExampleComponent } from './examples/feed-input-placeholder-example/feed-input-placeholder-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { FeedInputExampleComponent } from './examples/feed-input-example/feed-input-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const feedInputH = 'feed-input-example/feed-input-example.component.html';
 const feedInputPlaceholderH = 'feed-input-placeholder-example/feed-input-placeholder-example.component.html';

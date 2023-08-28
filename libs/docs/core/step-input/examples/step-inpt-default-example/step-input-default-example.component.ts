@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { StepInputModule } from '@fundamental-ngx/core/step-input';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { StepInputModule } from '@fundamental-ngx/core/step-input';
 
 @Component({
     selector: 'fd-step-input-default-example',

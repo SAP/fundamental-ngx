@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { CheckboxGroupComponent } from '@fundamental-ngx/platform/form';
-import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-list-object',

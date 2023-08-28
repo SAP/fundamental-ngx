@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, inject, NgZone, TemplateRef, ViewChild } from '@angular/core';
-import { DynamicFormItem } from '@fundamental-ngx/platform/form';
-import { HintOptions } from '@fundamental-ngx/platform/shared';
-import { first } from 'rxjs';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { HintOptions } from '@fundamental-ngx/platform/shared';
+import { first } from 'rxjs';
 
 @Component({
     selector: 'fdp-platform-form-generator-inline-help-example',

@@ -1,24 +1,24 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ContentChildren, QueryList } from '@angular/core';
-import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
-import { UploadCollectionButtonGroupComponent } from '@fundamental-ngx/core/upload-collection';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { UploadCollectionFormItemComponent } from '@fundamental-ngx/core/upload-collection';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import {
+    UploadCollectionButtonGroupComponent,
+    UploadCollectionComponent,
+    UploadCollectionDescriptionDirective,
+    UploadCollectionFormItemComponent,
+    UploadCollectionItemDirective,
+    UploadCollectionItemDirective as UploadCollectionItemDirective_1,
+    UploadCollectionStatusGroupDirective,
+    UploadCollectionStatusItemDirective,
+    UploadCollectionTextSeparatorDirective,
     UploadCollectionThumbnailDirective,
     UploadCollectionTitleContainerDirective,
-    UploadCollectionTitleDirective,
-    UploadCollectionDescriptionDirective,
-    UploadCollectionTextSeparatorDirective,
-    UploadCollectionStatusGroupDirective,
-    UploadCollectionStatusItemDirective
+    UploadCollectionTitleDirective
 } from '@fundamental-ngx/core/upload-collection';
-import { UploadCollectionItemDirective as UploadCollectionItemDirective_1 } from '@fundamental-ngx/core/upload-collection';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { NgFor, NgIf } from '@angular/common';
-import { UploadCollectionComponent } from '@fundamental-ngx/core/upload-collection';
 
 @Component({
     selector: 'fd-upload-collection-custom-example',

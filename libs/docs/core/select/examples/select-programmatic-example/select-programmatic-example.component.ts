@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { SelectModule } from '@fundamental-ngx/core/select';
+import { Component } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-select-programmatic-example',

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 
-import { GroupFunction } from '@fundamental-ngx/core/combobox';
 import { FormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxModule, GroupFunction } from '@fundamental-ngx/core/combobox';
 
 export type ComboboxItem = { name: string; type: string };
 

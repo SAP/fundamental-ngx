@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { WizardGeneratorLoadingExampleComponent } from './examples/loading/wizard-generator-loading-example.component';
-import { WizardGeneratorSpecialElementsExampleComponent } from './examples/wizard-generator-special-elements-example.component';
-import { WizardGeneratorVisibilityBetweenStepsExampleComponent } from './examples/wizard-generator-visibility-between-steps-example.component';
-import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-generator-onchange-example.component';
+import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
+import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
+import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-generator-customizable-example.component';
+import { WizardGeneratorDefaultExampleComponent } from './examples/wizard-generator-default-example.component';
+import { WizardGeneratorDialogExampleComponent } from './examples/wizard-generator-dialog-example.component';
 import { WizardGeneratorExternalNavigationExampleComponent } from './examples/wizard-generator-external-navigation-example.component';
-import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
+import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-generator-onchange-example.component';
 import { WizardGeneratorResponsiveDialogExampleComponent } from './examples/wizard-generator-responsive-dialog-example.component';
+import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
+import { WizardGeneratorSpecialElementsExampleComponent } from './examples/wizard-generator-special-elements-example.component';
+import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
+import { WizardGeneratorVisibilityBetweenStepsExampleComponent } from './examples/wizard-generator-visibility-between-steps-example.component';
 import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './examples/wizard-generator-visible-summary-branching-example.component';
 import { WizardGeneratorVisibleSummaryExampleComponent } from './examples/wizard-generator-visible-summary-example.component';
-import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
-import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
-import { RouterLink } from '@angular/router';
-import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-generator-customizable-example.component';
-import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
-import { WizardGeneratorDialogExampleComponent } from './examples/wizard-generator-dialog-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { WizardGeneratorDefaultExampleComponent } from './examples/wizard-generator-default-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
 
 const defaultHtmlExample = 'wizard-generator-default-example.component.html';
 const defaultTsExample = 'wizard-generator-default-example.component.ts';

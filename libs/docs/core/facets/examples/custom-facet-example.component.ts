@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { FacetModule } from '@fundamental-ngx/core/facets';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fd-custom-facet-example',

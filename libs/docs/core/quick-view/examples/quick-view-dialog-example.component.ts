@@ -1,17 +1,16 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-quick-view-dialog-example',

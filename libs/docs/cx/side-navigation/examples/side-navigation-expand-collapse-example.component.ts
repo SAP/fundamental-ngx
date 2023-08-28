@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
 import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/side-navigation.module';
 

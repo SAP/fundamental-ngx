@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     DateTimeFormats,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimePipesModule
 } from '@fundamental-ngx/core/datetime';
-import { DateRange } from '@fundamental-ngx/core/calendar';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdDatetimePipesModule } from '@fundamental-ngx/core/datetime';
-import { FormsModule } from '@angular/forms';
-import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,

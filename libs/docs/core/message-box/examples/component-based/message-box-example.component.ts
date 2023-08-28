@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
-import { TextData } from './component-based-message-box-example.component';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { MessageBoxModule, MessageBoxRef } from '@fundamental-ngx/core/message-box';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
+import { TextData } from './component-based-message-box-example.component';
 
 @Component({
     template: `

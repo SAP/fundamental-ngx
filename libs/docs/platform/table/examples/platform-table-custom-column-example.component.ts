@@ -2,32 +2,34 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import {
-    TableDataSource,
-    TableDataProvider,
-    TableState,
-    TableRowSelectionChangeEvent,
-    SortDirection
-} from '@fundamental-ngx/platform/table';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PlatformInputModule } from '@fundamental-ngx/platform/form';
-import { FdpCellDef, FdpTableCell } from '@fundamental-ngx/platform/table-helpers';
-import { NgFor, NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { TableCellHeaderPopoverDirective } from '@fundamental-ngx/platform/table-helpers';
-import { FdpHeaderCellDef, FdpTableHeader } from '@fundamental-ngx/platform/table-helpers';
-import { TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '@fundamental-ngx/platform/table';
-import { TableHeaderResizerDirective } from '@fundamental-ngx/platform/table-helpers';
-import { TableDataSourceDirective } from '@fundamental-ngx/platform/table-helpers';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
+import {
+    PlatformTableModule,
+    SortDirection,
+    TableDataProvider,
+    TableDataSource,
+    TableRowSelectionChangeEvent,
+    TableState
+} from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpHeaderCellDef,
+    FdpTableCell,
+    FdpTableHeader,
+    TableCellHeaderPopoverDirective,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-custom-column-example',

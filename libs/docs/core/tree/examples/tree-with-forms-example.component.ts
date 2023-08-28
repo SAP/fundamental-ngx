@@ -1,21 +1,13 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DataProvider } from '@fundamental-ngx/cdk/data-source';
-import {
-    FdTreeDataSource,
-    SelectionPlacement,
-    TreeComponent,
-    TreeItem,
-    TreeItemState
-} from '@fundamental-ngx/core/tree';
-import { JsonPipe } from '@angular/common';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { TreeModule } from '@fundamental-ngx/core/tree';
+import { DataProvider, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
-import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FdTreeDataSource, SelectionPlacement, TreeItem, TreeItemState, TreeModule } from '@fundamental-ngx/core/tree';
 
 let itemsIndex = 0;
 

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { InfiniteScrollHeaderComponent } from './infinite-scroll-header/infinite-scroll-header.component';
-import { InfiniteScrollDocsComponent } from './infinite-scroll-docs.component';
-import { InfiniteScrollBasicExampleComponent } from './examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
 import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
+import { InfiniteScrollBasicExampleComponent } from './examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
+import { InfiniteScrollDocsComponent } from './infinite-scroll-docs.component';
+import { InfiniteScrollHeaderComponent } from './infinite-scroll-header/infinite-scroll-header.component';
 
 const routes: Routes = [
     {

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import {
     ApiComponent,
     currentComponentProvider,
@@ -8,22 +9,21 @@ import {
     I18nDocsComponent,
     SharedDocumentationPageModule
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { ObjectListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
-import { PlatformObjectListItemHeaderComponent } from './platform-object-list-item-header/platform-object-list-item-header.component';
-import { PlatformObjectListItemDocsComponent } from './platform-object-list-item-docs.component';
-import { PlatformObjectListItemExampleComponent } from './examples/platform-object-list-item-example.component';
 import { PlatformObjectListItemBorderLessExampleComponent } from './examples/platform-object-list-item-border-less-example.component';
-import { PlatformObjectListItemWithRowSelectionExampleComponent } from './examples/platform-object-list-item-with-row-selection-example.component';
+import { PlatformObjectListItemExampleComponent } from './examples/platform-object-list-item-example.component';
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
+import { PlatformObjectListItemWithRowSelectionExampleComponent } from './examples/platform-object-list-item-with-row-selection-example.component';
+import { PlatformObjectListItemDocsComponent } from './platform-object-list-item-docs.component';
+import { PlatformObjectListItemHeaderComponent } from './platform-object-list-item-header/platform-object-list-item-header.component';
 
 const routes: Routes = [
     {

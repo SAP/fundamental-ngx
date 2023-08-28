@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { ProgressIndicatorAnimationComponent as ProgressIndicatorAnimationComponent_1 } from './examples/progress-indicator-animation.component';
-import { ProgressIndicatorTruncationComponent as ProgressIndicatorTruncationComponent_1 } from './examples/progress-indicator-truncation.component';
-import { ProgressIndicatorStateComponent as ProgressIndicatorStateComponent_1 } from './examples/progress-indicator-state.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { ProgressIndicatorDefaultComponent as ProgressIndicatorDefaultComponent_1 } from './examples/progress-indicator-default.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { ProgressIndicatorStateComponent as ProgressIndicatorStateComponent_1 } from './examples/progress-indicator-state.component';
+import { ProgressIndicatorTruncationComponent as ProgressIndicatorTruncationComponent_1 } from './examples/progress-indicator-truncation.component';
 
 const ProgressIndicatorDefaultComponent = 'progress-indicator-default.component.html';
 const ProgressIndicatorDefaultComponentTs = 'progress-indicator-default.component.ts';

@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { IndicationColorType } from '@fundamental-ngx/platform/object-status';
 import { NgFor } from '@angular/common';
-import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { Component } from '@angular/core';
+import { IndicationColorType, PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-clickable-and-icon-example',

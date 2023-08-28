@@ -5,12 +5,12 @@ import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
 
 import { FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/platform/form';
-import { PlatformStepInputDocsComponent } from './platform-step-input-docs.component';
-import { PlatformStepInputHeaderComponent } from './platform-step-input-header/platform-step-input-header.component';
 import { PlatformNumberStepInputExampleComponent } from './examples/platform-number-step-input-example.component';
 import { PlatformNumberStepInputFormExampleComponent } from './examples/platform-number-step-input-reactive-example.component';
-import { PlatformNumberStepInputTemplateFormExampleComponent } from './examples/platform-number-step-input-template-example.component';
 import { PlatformNumberStepInputStateExampleComponent } from './examples/platform-number-step-input-state-example.component';
+import { PlatformNumberStepInputTemplateFormExampleComponent } from './examples/platform-number-step-input-template-example.component';
+import { PlatformStepInputDocsComponent } from './platform-step-input-docs.component';
+import { PlatformStepInputHeaderComponent } from './platform-step-input-header/platform-step-input-header.component';
 
 const routes: Routes = [
     {

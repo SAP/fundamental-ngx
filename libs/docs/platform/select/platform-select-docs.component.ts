@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformSelectColumnsExampleComponent } from './examples/platform-select-columns/platform-select-columns-example.component';
+import { PlatformSelectCustomTriggerComponent } from './examples/platform-select-custom-trigger/platform-select-custom-trigger.component';
 import { PlatformSelectFormsComponent } from './examples/platform-select-forms/platform-select-forms.component';
-import { PlatformSelectNoWrapExampleComponent } from './examples/platform-select-nowrap/platform-select-nowrap-example.component';
-import { PlatformSelectNoneExampleComponent } from './examples/platform-select-none/platform-select-none-example.component';
 import { PlatformSelectMaxHeightExampleComponent } from './examples/platform-select-height/platform-select-max-height-example.component';
 import { PlatformSelectMobileExampleComponent } from './examples/platform-select-mobile-example/platform-select-mobile-example.component';
-import { RouterLink } from '@angular/router';
-import { PlatformSelectCustomTriggerComponent } from './examples/platform-select-custom-trigger/platform-select-custom-trigger.component';
-import { PlatformSelectSemanticStateExampleComponent } from './examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component';
-import { PlatformSelectColumnsExampleComponent } from './examples/platform-select-columns/platform-select-columns-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
 import { PlatformSelectModeExampleComponent } from './examples/platform-select-mode-example/platform-select-mode-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { PlatformSelectNoneExampleComponent } from './examples/platform-select-none/platform-select-none-example.component';
+import { PlatformSelectNoWrapExampleComponent } from './examples/platform-select-nowrap/platform-select-nowrap-example.component';
+import { PlatformSelectSemanticStateExampleComponent } from './examples/platform-select-semantic-state-example/platform-select-semantic-state-example.component';
 
 const selectModeHtml = 'platform-select-mode-example/platform-select-mode-example.component.html';
 const selectModeTs = 'platform-select-mode-example/platform-select-mode-example.component.ts';

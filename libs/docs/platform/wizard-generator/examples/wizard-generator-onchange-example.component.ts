@@ -1,9 +1,12 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { FormGeneratorService, DynamicFormGroup } from '@fundamental-ngx/platform/form';
-import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
-import { NgIf, JsonPipe } from '@angular/common';
-import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
+import { DynamicFormGroup, FormGeneratorService } from '@fundamental-ngx/platform/form';
+import {
+    PlatformWizardGeneratorModule,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
     selector: 'fdp-wizard-generator-onchange-example',

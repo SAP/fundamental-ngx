@@ -1,25 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { FilterPipe } from '../../../shared/src/lib/core-helpers/pipes/filter.pipe';
-import { SortByPipe } from '../../../shared/src/lib/core-helpers/pipes/sort.pipe';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { NgFor } from '@angular/common';
-import { TableModule } from '@fundamental-ngx/core/table';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormsModule } from '@angular/forms';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
-import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { ToolbarComponent, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { FilterPipe, SortByPipe } from '@fundamental-ngx/docs/shared';
 
 const rows = [
     {

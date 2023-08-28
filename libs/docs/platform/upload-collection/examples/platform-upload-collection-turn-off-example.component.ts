@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import {
-    ItemPerPage,
-    FilenameLengthExceedEvent,
     FileSizeExceedEvent,
+    FilenameLengthExceedEvent,
+    ItemPerPage,
+    PlatformUploadCollectionModule,
     TypeMismatchEvent,
     UploadCollectionDataSource
 } from '@fundamental-ngx/platform/upload-collection';
 import { PlatformUploadCollectionDataProviderExample } from './platform-upload-collection-base-data-provider';
-import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 
 @Component({
     selector: 'fdp-upload-collection-turn-off-example',

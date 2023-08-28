@@ -1,16 +1,19 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
-import { TokenizerExampleComponent } from './examples/tokenizer-example/tokenizer-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
 import { TokenCompactExampleComponent } from './examples/token-compact-example/token-compact-example.component';
+import { TokenExampleComponent } from './examples/token-example/token-example.component';
 import { TokenReadOnlyExampleComponent } from './examples/token-readonly-example/token-readonly-example.component';
 import { TokenSelectedExampleComponent } from './examples/token-selected-example/token-selected-example.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { TokenExampleComponent } from './examples/token-example/token-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { TokenizerCompactExampleComponent } from './examples/tokenizer-compact-example/tokenizer-compact-example.component';
+import { TokenizerExampleComponent } from './examples/tokenizer-example/tokenizer-example.component';
 
 const basicTokenH = 'token-example/token-example.component.html';
 const basicTokenTs = 'token-example/token-example.component.ts';

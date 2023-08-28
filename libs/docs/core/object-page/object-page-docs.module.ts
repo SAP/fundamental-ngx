@@ -1,22 +1,22 @@
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ObjectPageDocsHeaderComponent } from './object-page-header/object-page-docs-header.component';
-import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { FacetModule } from '@fundamental-ngx/core/facets';
-import { TextModule } from '@fundamental-ngx/core/text';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
-import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ObjectPageDocsComponent } from './object-page-docs.component';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { TextModule } from '@fundamental-ngx/core/text';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { ObjectPageExampleComponent } from './examples/object-page-example.component';
+import { ObjectPageDocsComponent } from './object-page-docs.component';
+import { ObjectPageDocsHeaderComponent } from './object-page-header/object-page-docs-header.component';
 
 const routes: Routes = [
     {

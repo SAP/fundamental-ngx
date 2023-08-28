@@ -1,11 +1,9 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemModule, FormLabelModule, FormMessageModule } from '@fundamental-ngx/core/form';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 interface ComboboxItem {
     displayedValue: string;

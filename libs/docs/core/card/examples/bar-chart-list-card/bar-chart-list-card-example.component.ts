@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CardBarComponent } from './card-bar.component';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { CardBarComponent } from './card-bar.component';
 
 @Component({
     selector: 'fd-bar-chart-list-card-example',

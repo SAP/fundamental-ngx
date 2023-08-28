@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NotificationService } from '@fundamental-ngx/core/notification';
 import { NotificationExampleContentComponent } from './notification-content.component';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-notification-component-as-content-example',

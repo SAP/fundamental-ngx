@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import {
-    VhdDataProvider,
-    VhdValue,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
-} from '@fundamental-ngx/platform/value-help-dialog';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NgFor } from '@angular/common';
-import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
+    VhdDataProvider,
+    VhdValue,
+    VhdValueChangeEvent
+} from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
     id: number;

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
 import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({
     selector: 'fd-default-tab-example',

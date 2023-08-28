@@ -1,34 +1,32 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
-    inject,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
 import { AnyDynamicFormFieldItem } from '@fundamental-ngx/platform/form';
+import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 import {
     BaseSettingsGeneratorLayout,
     BaseSettingsModel,
     SettingsGeneratorComponent,
     SettingsGeneratorLayoutAccessorService,
+    SettingsGeneratorModule,
     SettingsModel
 } from '@fundamental-ngx/platform/settings-generator';
 import { take } from 'rxjs/operators';
-import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { NgIf, NgFor } from '@angular/common';
-import { MessagePopoverComponent } from '@fundamental-ngx/platform/message-popover';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { SettingsGeneratorModule } from '@fundamental-ngx/platform/settings-generator';
-import { MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
 @Component({
     selector: 'fdp-settings-generator-tabs-layout',

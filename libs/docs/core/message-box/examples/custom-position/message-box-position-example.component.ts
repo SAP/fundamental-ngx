@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-message-box-position-example',

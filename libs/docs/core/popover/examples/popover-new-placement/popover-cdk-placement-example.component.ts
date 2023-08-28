@@ -1,16 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
-import { PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { PopoverComponent as PopoverComponent_1 } from '@fundamental-ngx/core/popover';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NgFor } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverComponent as PopoverComponent_1,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-popover-cdk-placement-example',

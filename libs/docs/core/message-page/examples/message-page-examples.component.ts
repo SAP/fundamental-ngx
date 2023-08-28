@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 

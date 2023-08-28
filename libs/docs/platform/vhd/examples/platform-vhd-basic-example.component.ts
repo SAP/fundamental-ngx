@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 
+import { NgFor, NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
 import {
-    VhdDataProvider,
-    VhdValue,
-    VhdValueChangeEvent,
+    PlatformValueHelpDialogModule,
     ValueHelpDialogDataSource,
-    VhdIncludedEntity,
-    VhdExcludedEntity,
+    VhdDataProvider,
+    VhdDefineExcludeStrategy,
     VhdDefineIncludeStrategy,
-    VhdDefineExcludeStrategy
+    VhdExcludedEntity,
+    VhdIncludedEntity,
+    VhdValue,
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { TokenModule } from '@fundamental-ngx/core/token';
-import { NgIf, NgFor } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 
 interface ExampleTestModel {
     id: number;

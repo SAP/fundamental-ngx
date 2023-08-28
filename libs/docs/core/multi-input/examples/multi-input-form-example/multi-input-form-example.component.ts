@@ -1,10 +1,8 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { FieldSetModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
-import { FormItemModule } from '@fundamental-ngx/core/form';
-import { FieldSetModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-multi-input-form-example',

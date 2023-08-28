@@ -12,28 +12,28 @@ import {
 
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
-import { PlatformWizardGeneratorDocsComponent } from './platform-wizard-generator-docs.component';
-import { PlatformWizardGeneratorHeaderComponent } from './platform-wizard-generator-header/platform-wizard-generator-header.component';
+import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
+import { WizardGeneratorLoadingExampleComponent } from './examples/loading/wizard-generator-loading-example.component';
+import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
+import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
+import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-generator-customizable-example.component';
 import { WizardGeneratorDefaultExampleComponent } from './examples/wizard-generator-default-example.component';
 import { WizardGeneratorDialogExampleComponent } from './examples/wizard-generator-dialog-example.component';
-import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
-import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-generator-customizable-example.component';
-import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
-import { WizardGeneratorResponsiveDialogExampleComponent } from './examples/wizard-generator-responsive-dialog-example.component';
-import { WizardGeneratorVisibleSummaryExampleComponent } from './examples/wizard-generator-visible-summary-example.component';
-import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './examples/wizard-generator-visible-summary-branching-example.component';
-import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
-import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
 import { WizardGeneratorExternalNavigationExampleComponent } from './examples/wizard-generator-external-navigation-example.component';
 import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-generator-onchange-example.component';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { WizardGeneratorVisibilityBetweenStepsExampleComponent } from './examples/wizard-generator-visibility-between-steps-example.component';
+import { WizardGeneratorResponsiveDialogExampleComponent } from './examples/wizard-generator-responsive-dialog-example.component';
+import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
 import { WizardGeneratorSpecialElementsExampleComponent } from './examples/wizard-generator-special-elements-example.component';
-import { WizardGeneratorLoadingExampleComponent } from './examples/loading/wizard-generator-loading-example.component';
+import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
+import { WizardGeneratorVisibilityBetweenStepsExampleComponent } from './examples/wizard-generator-visibility-between-steps-example.component';
+import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './examples/wizard-generator-visible-summary-branching-example.component';
+import { WizardGeneratorVisibleSummaryExampleComponent } from './examples/wizard-generator-visible-summary-example.component';
+import { PlatformWizardGeneratorDocsComponent } from './platform-wizard-generator-docs.component';
+import { PlatformWizardGeneratorHeaderComponent } from './platform-wizard-generator-header/platform-wizard-generator-header.component';
 
 const routes: Routes = [
     {

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent, currentComponentProvider, SharedDocumentationPageModule } from '@fundamental-ngx/docs/shared';
+import { TitleModule } from '@fundamental-ngx/core/title';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { TitleHeaderComponent } from './title-header/title-header.component';
-import { TitleDocsComponent } from './title-docs.component';
+import { ApiComponent, SharedDocumentationPageModule, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import {
     TitleElisionExampleComponent,
     TitleSemanticExampleComponent,
     TitleVisualExampleComponent,
     TitleWrappingExampleComponent
 } from './examples/title-examples.component';
-import { TitleModule } from '@fundamental-ngx/core/title';
+import { TitleDocsComponent } from './title-docs.component';
+import { TitleHeaderComponent } from './title-header/title-header.component';
 
 const routes: Routes = [
     {

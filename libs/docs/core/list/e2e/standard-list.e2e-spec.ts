@@ -1,4 +1,3 @@
-import { StandardListPo } from './standard-list.po';
 import {
     browserIsFirefox,
     click,
@@ -15,6 +14,7 @@ import {
     waitForElDisplayed,
     waitForNotDisplayed
 } from '../../../../../e2e';
+import { StandardListPo } from './standard-list.po';
 
 describe('Standard List test suite', () => {
     const standardListPage = new StandardListPo();

@@ -4,11 +4,11 @@ import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { AsyncPipe } from '@angular/common';
-import { MenuModule } from '@fundamental-ngx/core/menu';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-action-bar-mobile-example',

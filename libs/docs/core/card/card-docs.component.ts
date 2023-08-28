@@ -1,25 +1,28 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
-import { CardLoadingExampleComponent } from './examples/card-loading/card-loading-example.component';
 import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { BarChartListCardExampleComponent } from './examples/bar-chart-list-card/bar-chart-list-card-example.component';
+import { CardCalendarExampleComponent } from './examples/calendar-card/card-calendar-example.component';
+import { CardCompactExampleComponent } from './examples/card-compact-example.component';
+import { CardExampleComponent } from './examples/card-example.component';
+import { CardFooterExampleComponent } from './examples/card-footer-example.component';
+import { CardKpiExampleComponent } from './examples/card-kpi-example.component';
+import { CardLoaderExampleComponent } from './examples/card-loader-example.component';
+import { CardLoadingExampleComponent } from './examples/card-loading/card-loading-example.component';
+import { CardTableExampleComponent } from './examples/card-table-example.component';
 import { CardLinkListExampleComponent } from './examples/link-list-card/card-link-list-example.component';
 import { CardListExampleComponent } from './examples/list-card/card-list-example.component';
-import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
-import { CardCalendarExampleComponent } from './examples/calendar-card/card-calendar-example.component';
 import { CardObjectExampleComponent } from './examples/object-card/card-object-example.component';
-import { BarChartListCardExampleComponent } from './examples/bar-chart-list-card/bar-chart-list-card-example.component';
-import { CardTableExampleComponent } from './examples/card-table-example.component';
-import { CardKpiExampleComponent } from './examples/card-kpi-example.component';
-import { CardFooterExampleComponent } from './examples/card-footer-example.component';
-import { CardLoaderExampleComponent } from './examples/card-loader-example.component';
-import { CardCompactExampleComponent } from './examples/card-compact-example.component';
-import { SeparatorComponent } from '../../shared/src/lib/core-helpers/seperator/seperator.component';
-import { CodeExampleComponent } from '../../shared/src/lib/core-helpers/code-example/code-example.component';
-import { CardExampleComponent } from './examples/card-example.component';
-import { ComponentExampleComponent } from '../../shared/src/lib/core-helpers/component-example/component-example.component';
-import { DescriptionComponent } from '../../shared/src/lib/core-helpers/description/description';
-import { DocsSectionTitleComponent } from '../../shared/src/lib/core-helpers/docs-section-title/docs-section-title.component';
+import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
 
 const cardExampleScss = 'card-example.component.scss';
 const cardKpiExampleScss = 'card-kpi-example.component.scss';

@@ -1,9 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
-import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
-import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 
 @Component({
     selector: 'fd-flexible-column-layout-example',
