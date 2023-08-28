@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.6...v0.46.0-rc.7) (2023-08-28)
+
+
+### Bug Fixes
+
+* **core:** datepicker outer focustrap ([#10396](https://github.com/SAP/fundamental-ngx/issues/10396)) ([ee7d631](https://github.com/SAP/fundamental-ngx/commit/ee7d6317c8434160fe30e3d51584f85287554ccb))
+
+
+
+
+
 # [0.46.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.5...v0.46.0-rc.6) (2023-08-23)
 
 
