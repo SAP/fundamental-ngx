@@ -421,7 +421,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _trackBy = (index: number, item: any): ValueType => this.valueFn(item.value);
+    _trackBy = (index: number, optionItem: _OptionItem<ItemType, ValueType>): ValueType =>
+        this.valueFn(optionItem?.item);
 
     /** @hidden */
     onChange: (value: any) => void = () => {};
@@ -857,10 +858,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         if (isOptionItem<ItemType, ValueType>(item)) {
             return item;
         }
-        const existingItem = this.optionItems$.getValue().find((c) => c.item === item);
-        if (existingItem) {
-            return existingItem;
-        }
         const { label, value } = this._getValueAndLabelOfItem(item);
         return {
             item,
@@ -873,8 +870,16 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     private _getValueAndLabelOfItem(item: ItemType): OptionItemBase<ValueType> {
         const defaultDisplay = typeof item === 'object' && item !== null ? item[Object.keys(item)[0]] : item;
-        const value = this.valueFn(item) ?? defaultDisplay;
-        const label = this.displayFn(item) ?? defaultDisplay;
+        let value = this.valueFn(item) ?? defaultDisplay;
+        let label = this.displayFn(item) ?? defaultDisplay;
+        if (isOptionItemBase(item)) {
+            if (this.valueFn === this._defaultValueFn) {
+                value = item.value;
+            }
+            if (this.displayFn === this._defaultDisplay) {
+                label = item.label;
+            }
+        }
         return { label, value };
     }
 
@@ -894,7 +899,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this.optionItems$
         ]).pipe(
             map(([, , optionItems]) => {
-                const selected = this.selected.map((v) => this._getOptionItemByValue(v, optionItems)!);
+                const selected = this.selected.map(
+                    (v) => this._getOptionItemByValue(v, optionItems) || this._getOptionItem(v as any)
+                );
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value ?? '';
                 const filtered = this.filterFn(
@@ -904,7 +911,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 const displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
                     this._getOptionItem(item)
                 );
-                displayedOptions.forEach((c) => (c.isSelected = selected.findIndex((d) => d.value === c.value) > -1));
+                displayedOptions.forEach((c) => (c.isSelected = selected.findIndex((d) => d?.value === c.value) > -1));
                 return { selectedOptions: selected, displayedOptions };
             })
         );
@@ -930,6 +937,6 @@ export interface OptionItemBase<ValueType = any> {
 }
 
 interface ViewModel<ItemType = any, ValueType = any> {
-    selectedOptions: OptionItemBase<ValueType>[];
+    selectedOptions: _OptionItem<ItemType, ValueType>[];
     displayedOptions: _OptionItem<ItemType, ValueType>[];
 }
