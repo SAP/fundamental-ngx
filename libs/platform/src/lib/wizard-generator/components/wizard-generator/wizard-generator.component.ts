@@ -14,13 +14,20 @@ import { WizardGeneratorFinishButtonDirective } from '../../directives/wizard-ge
 import { WizardGeneratorGoNextButtonDirective } from '../../directives/wizard-generator-go-next-button.directive';
 import { WizardGeneratorSummaryStepDirective } from '../../directives/wizard-generator-summary-step.directive';
 import { WizardGeneratorReviewButtonDirective } from '../../directives/wizard-generator-review-button.directive';
+import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
+import { NgIf } from '@angular/common';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fdp-wizard-generator',
     templateUrl: './wizard-generator.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [WizardGeneratorService, FormGeneratorService]
+    providers: [WizardGeneratorService, FormGeneratorService],
+    standalone: true,
+    imports: [NgIf, WizardBodyComponent, WizardModule, RepeatDirective, SkeletonModule]
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**

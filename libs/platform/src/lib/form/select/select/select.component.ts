@@ -14,7 +14,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
@@ -22,6 +22,10 @@ import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
+import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { NgIf, NgFor, NgTemplateOutlet, NgClass } from '@angular/common';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fdp-select',
@@ -29,7 +33,9 @@ import { SelectConfig } from '../select.config';
     styleUrls: ['./select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }]
+    providers: [DynamicComponentService, { provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }],
+    standalone: true,
+    imports: [SelectModule, FormsModule, NgIf, NgFor, IconModule, NgTemplateOutlet, NgClass, ListSecondaryDirective]
 })
 export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {
     /**
@@ -119,6 +125,14 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
     /** @hidden */
     _onSelection(value: any): void {
         this.setValue(value);
+    }
+
+    /** @hidden */
+    _onOpenChange(isOpen: boolean): void {
+        if (isOpen) {
+            this.formMessage._popover.close();
+        }
+        this.formMessage._popover.setIgnoreTriggers(isOpen);
     }
 
     /** @hidden */

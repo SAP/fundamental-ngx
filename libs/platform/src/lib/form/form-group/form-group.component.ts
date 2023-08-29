@@ -41,7 +41,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormGroup, NgForm } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormGroup, NgForm, FormsModule } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
@@ -70,9 +70,19 @@ import {
 import { generateColumnClass, normalizeColumnLayout } from './helpers';
 import { FormFieldLayoutService } from './services/form-field-layout.service';
 import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
-import { contentDensityObserverProviders, ContentDensityObserver } from '@fundamental-ngx/core/content-density';
+import {
+    contentDensityObserverProviders,
+    ContentDensityObserver,
+    ContentDensityModule
+} from '@fundamental-ngx/core/content-density';
 import { FormField } from '@fundamental-ngx/cdk/forms';
 import { Field, FieldColumn, FieldGroup } from '../models/field.model';
+import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
+import { NgIf, NgTemplateOutlet, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -163,7 +173,22 @@ let formGroupUniqueId = 0;
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [formGroupProvider, FormFieldLayoutService, contentDensityObserverProviders()]
+    providers: [formGroupProvider, FormFieldLayoutService, contentDensityObserverProviders()],
+    standalone: true,
+    imports: [
+        NgIf,
+        FormsModule,
+        NgTemplateOutlet,
+        NgFor,
+        FormGroupHeaderComponent,
+        LinkComponent,
+        IconModule,
+        InlineHelpModule,
+        AsyncPipe,
+        KeyValuePipe,
+        FieldGroupRowValuePipe,
+        ContentDensityModule
+    ]
 })
 export class FormGroupComponent
     implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges

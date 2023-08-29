@@ -17,7 +17,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
@@ -39,9 +39,21 @@ import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-com
 import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { MultiComboboxConfig } from '../multi-combobox.config';
-import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { AutoCompleteEvent, AutoCompleteDirective } from '../../auto-complete/auto-complete.directive';
+import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgTemplateOutlet, NgFor, NgClass } from '@angular/common';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FormControlModule, FormInputMessageGroupModule, FormMessageModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 
 let deprecationWarningShown = false;
 
@@ -66,6 +78,29 @@ let deprecationWarningShown = false;
             multi: true
         },
         contentDensityObserverProviders()
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        FormInputMessageGroupModule,
+        InputGroupModule,
+        TokenModule,
+        NgFor,
+        FormControlModule,
+        FormsModule,
+        AutoCompleteDirective,
+        FormMessageModule,
+        ListModule,
+        CheckboxComponent,
+        NgClass,
+        ListSecondaryDirective,
+        SearchHighlightPipe,
+        FdTranslatePipe,
+        ContentDensityModule
     ]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {

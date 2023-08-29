@@ -15,16 +15,25 @@ import {
     Optional,
     Self,
     SkipSelf,
+    TemplateRef,
     ViewChild
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { BaseComponent } from '../base';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates, isValidControlState } from '@fundamental-ngx/cdk/forms';
+import {
+    FD_FORM_FIELD,
+    FD_FORM_FIELD_CONTROL,
+    FormFieldAdvancedStateMessage,
+    FormStates,
+    isValidControlState
+} from '@fundamental-ngx/cdk/forms';
 import { PlatformFormField, PlatformFormFieldControl } from './form-field';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
 
 export const FDP_DO_CHECK = new InjectionToken<Observable<void>>('FdpInputDoCheckTrigger');
 
@@ -46,20 +55,27 @@ export abstract class BaseInput
     extends BaseComponent
     implements PlatformFormFieldControl, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
 {
-    /** @hidden */
-    protected defaultId = `fdp-input-id-${randomId++}`;
-    /** @hidden */
-    protected _disabled: boolean;
-    /** @hidden */
-    protected _value: any;
-    /** @hidden */
-    protected _editable = true;
-    /** @hidden */
-    protected _destroyed = new Subject<void>();
-
     /** Input placeholder */
     @Input()
     placeholder: string;
+
+    /**
+     * To allow user to determine what event he wants to trigger the messages to show
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     */
+    @Input()
+    triggers: (string | TriggerConfig)[] = [
+        {
+            trigger: 'focusin',
+            openAction: true,
+            closeAction: false
+        },
+        {
+            trigger: 'focusout',
+            openAction: false,
+            closeAction: true
+        }
+    ];
 
     /**
      *  The state of the form control - applies css classes.
@@ -91,12 +107,9 @@ export abstract class BaseInput
     @Input()
     stateMessage: Nullable<string>;
 
-    /**
-     * @hidden
-     * The state of the form control - applies css classes.
-     * Can be `success`, `error`, `warning`, `information` or 'default'
-     */
-    protected _state: FormStates | undefined;
+    /** Advanced form message configuration. Used for components that can render form messages in its template. */
+    @Input()
+    stateMessageConfig: Nullable<TemplateRef<any>>;
 
     /** Whether the input is disabled */
     @Input()
@@ -141,6 +154,12 @@ export abstract class BaseInput
     }
 
     /**
+     * Reference to internal Input element
+     */
+    @ViewChild('inputElementRef', { static: true, read: ElementRef })
+    protected _elementRef: ElementRef;
+
+    /**
      * need to make  these value accessor as abstract to be implemented by subclasses. Having them
      * in superclass have issue getting reference to them with Object.getOwnPropertyDescripton
      * which we need to programmatically wraps components set/get value
@@ -150,6 +169,9 @@ export abstract class BaseInput
 
     abstract set value(value: any);
 
+    /** @hidden */
+    formMessage: FormInputMessageGroupComponent;
+
     /**
      * See @FormFieldControl
      */
@@ -158,21 +180,17 @@ export abstract class BaseInput
     /** set when input field is mandatory form field */
     required: boolean;
 
+    /** @hidden */
+    innerErrorsTemplate?: TemplateRef<any>;
+
     /** Whether control has errors */
     get controlInvalid(): boolean {
         return this._controlInvalid;
     }
 
-    /**
-     * Reference to internal Input element
-     */
-    @ViewChild('inputElementRef', { static: true, read: ElementRef })
-    protected _elementRef: ElementRef;
+    /** @hidden */
+    advancedStateMessage: Nullable<FormFieldAdvancedStateMessage>;
 
-    /**
-     * @hidden
-     */
-    private _controlInvalid = false;
     /**
      * See @FormFieldControl
      */
@@ -183,6 +201,29 @@ export abstract class BaseInput
 
     /** @hidden */
     readonly _doCheck$ = inject(FDP_DO_CHECK, { optional: true });
+
+    /**
+     * @hidden
+     * The state of the form control - applies css classes.
+     * Can be `success`, `error`, `warning`, `information` or 'default'
+     */
+    protected _state: FormStates | undefined;
+
+    /** @hidden */
+    protected defaultId = `fdp-input-id-${randomId++}`;
+    /** @hidden */
+    protected _disabled: boolean;
+    /** @hidden */
+    protected _value: any;
+    /** @hidden */
+    protected _editable = true;
+    /** @hidden */
+    protected _destroyed = new Subject<void>();
+
+    /**
+     * @hidden
+     */
+    private _controlInvalid = false;
 
     /** @hidden */
     protected constructor(
@@ -255,6 +296,22 @@ export abstract class BaseInput
         } else {
             this.ariaLabelledBy += ' ' + labelAndHelpId;
         }
+
+        this.innerErrorsTemplate = this.formField?.innerErrorRenderers;
+
+        this.stateChanges
+            .pipe(
+                filter(() => !!this.formField),
+                takeUntil(this._destroyed)
+            )
+            .subscribe(() => {
+                this.advancedStateMessage = {
+                    template: this.formField!.innerErrorRenderers,
+                    hasErrors: this.formField!.hasErrors()
+                };
+                this._cd.detectChanges();
+            });
+
         this._cd.detectChanges();
     }
 

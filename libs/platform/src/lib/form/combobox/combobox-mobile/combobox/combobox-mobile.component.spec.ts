@@ -44,8 +44,7 @@ describe('ComboboxMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule],
-            declarations: [ComboboxMobileComponent],
+            imports: [DialogModule, NoopAnimationsModule, ComboboxMobileComponent],
             providers: [
                 DynamicComponentService,
                 { provide: COMBOBOX_COMPONENT, useValue: new ComboboxInputComponent() }

@@ -3,7 +3,8 @@ import { FormError, FormErrorDescription, FormFieldErrorContext } from '@fundame
 import { FDP_FORM_ERROR_DIRECTIVE } from './tokens';
 
 @Directive({
-    selector: '[fdpFormFieldErrorDescription]'
+    selector: '[fdpFormFieldErrorDescription]',
+    standalone: true
 })
 export class FormFieldErrorDescriptionDirective<T = any> implements FormErrorDescription {
     /** Used to connect data with model for typings support. */

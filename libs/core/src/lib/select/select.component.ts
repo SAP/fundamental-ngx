@@ -44,7 +44,7 @@ import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormFieldAdvancedStateMessage, FormStates } from '@fundamental-ngx/cdk/forms';
 
 let selectUniqueId = 0;
 
@@ -215,6 +215,10 @@ export class SelectComponent<T = any>
     /** Additional classname for the select dropdown button element. */
     @Input()
     selectDropdownButtonClass: Nullable<string>;
+
+    /** Holds advanced message renderer with respect to state. */
+    @Input()
+    advancedStateMessage: Nullable<FormFieldAdvancedStateMessage>;
 
     /** Event emitted when the popover open state changes. */
     @Output()

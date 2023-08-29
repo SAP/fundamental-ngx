@@ -44,7 +44,8 @@ export const inputGroupAddonChildProvider: Provider = {
     selector: 'fdp-input-group-addon',
     template: '<ng-template><ng-content></ng-content></ng-template>',
     providers: [inputGroupAddonChildProvider],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class InputGroupAddonComponent implements AfterContentInit {
     /** @hidden */
@@ -89,7 +90,6 @@ export class InputGroupAddonComponent implements AfterContentInit {
             return;
         }
 
-        // button.contentDensity = this._contentDensity;
         button.disabled = this._disabled;
 
         button.markForCheck();

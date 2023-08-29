@@ -17,12 +17,16 @@ import {
     FormattedFormStep
 } from '../../interfaces/wizard-generator-summary-item.interface';
 import { WizardGeneratorFormsValue, WizardStepForms } from '../../interfaces/wizard-generator-forms.interface';
+import { WizardSummarySectionComponent } from './wizard-summary-section/wizard-summary-section.component';
+import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'fdp-wizard-summary-step',
     templateUrl: './wizard-summary-step.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, NgFor, WizardSummarySectionComponent, NgTemplateOutlet]
 })
 export class WizardSummaryStepComponent {
     /**

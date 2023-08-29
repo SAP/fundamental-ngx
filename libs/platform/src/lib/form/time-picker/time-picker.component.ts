@@ -16,10 +16,10 @@ import {
     SkipSelf,
     ViewChild
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 
-import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
+import { TimePickerComponent, TimePickerModule } from '@fundamental-ngx/core/time-picker';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
@@ -28,7 +28,9 @@ import { warnOnce } from '@fundamental-ngx/cdk/utils';
     selector: 'fdp-time-picker',
     templateUrl: './time-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformTimePickerComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: PlatformTimePickerComponent, multi: true }],
+    standalone: true,
+    imports: [TimePickerModule, FormsModule]
 })
 export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
     /**

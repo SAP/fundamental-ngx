@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { PlatformFileUploaderModule } from './platform-file-uploader.module';
 import { FileUploaderSelectionChangeEvent, PlatformFileUploaderComponent } from './platform-file-uploader.component';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 
 @Component({
@@ -61,7 +61,7 @@ describe('PlatformFileUploaderComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [PlatformFileUploaderTestComponent],
-            imports: [FormsModule, FdpFormGroupModule, PlatformFileUploaderModule]
+            imports: [FormsModule, FdpFormGroupModule, PlatformFileUploaderModule, ContentDensityModule]
         }).compileComponents();
     });
 

@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
 import { CSS_CLASS_NAME } from './constants';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 
 /**
  * Fundamental input group addon body component
@@ -9,7 +13,9 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     selector: 'fdp-input-group-addon-body',
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    imports: [ContentDensityModule],
+    standalone: true
 })
 export class InputGroupAddonBodyComponent implements OnInit {
     /**

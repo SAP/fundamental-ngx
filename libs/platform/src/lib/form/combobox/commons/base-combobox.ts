@@ -382,8 +382,17 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         this.isOpen = isOpen;
         this.onTouched();
         this.openChange.next(isOpen);
+        this._onOpenChange(this.isOpen);
 
         this.cd.detectChanges();
+    }
+
+    /** @hidden */
+    _onOpenChange(isOpen: boolean): void {
+        if (isOpen) {
+            this.formMessage._popover.close();
+        }
+        this.formMessage._popover.setIgnoreTriggers(isOpen);
     }
 
     /** @hidden */

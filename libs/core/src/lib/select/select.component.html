@@ -84,7 +84,7 @@
         tabindex="-1"
         [mobileMode]="mobile"
         [dropdownMode]="true"
-        [hasMessage]="!!stateMessage"
+        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
         [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
         [attr.tooltip]="triggerValue"
@@ -98,6 +98,16 @@
             [type]="state || 'default'"
             [innerHtml]="stateMessage"
         ></li>
+
+        <li
+            *ngIf="advancedStateMessage?.hasErrors && advancedStateMessage?.template"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state || 'default'"
+        >
+            <ng-template [ngTemplateOutlet]="advancedStateMessage!.template!"></ng-template>
+        </li>
 
         <ng-content></ng-content>
     </ul>

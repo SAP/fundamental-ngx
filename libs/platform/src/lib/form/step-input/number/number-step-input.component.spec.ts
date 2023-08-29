@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
@@ -11,11 +11,14 @@ import { PlatformStepInputModule } from '../step-input.module';
 import { NumberStepInputComponent } from './number-step-input.component';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { StepInputChangeEvent } from '../base.step-input';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FieldHintOptions } from '@fundamental-ngx/platform/shared';
 
 @Component({
-    template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
+    template: `<fdp-number-step-input name="number"></fdp-number-step-input>`,
+    standalone: true,
+    imports: [PlatformStepInputModule],
+    providers: [RtlService]
 })
 class NumberStepInputDefaultValuesHostComponent {
     @ViewChild(NumberStepInputComponent) stepInputCmp: NumberStepInputComponent;
@@ -27,9 +30,7 @@ describe('NumberStepInputComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformStepInputModule],
-            declarations: [NumberStepInputDefaultValuesHostComponent],
-            providers: [RtlService]
+            imports: [NumberStepInputDefaultValuesHostComponent]
         }).compileComponents();
     }));
 
@@ -82,7 +83,10 @@ describe('NumberStepInputComponent default values', () => {
             [fdContentDensity]="contentDensity"
             (valueChange)="onValueChanged($event)"
         ></fdp-number-step-input>
-    `
+    `,
+    standalone: true,
+    imports: [PlatformStepInputModule, ContentDensityModule],
+    providers: [RtlService]
 })
 class NumberStepInputMainFunctionalityHostComponent {
     @ViewChild(NumberStepInputComponent) stepInputCmp: NumberStepInputComponent;
@@ -111,9 +115,7 @@ describe('NumberStepInputComponent main functionality', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformStepInputModule],
-            declarations: [NumberStepInputMainFunctionalityHostComponent],
-            providers: [RtlService]
+            imports: [NumberStepInputMainFunctionalityHostComponent]
         }).compileComponents();
     }));
 
@@ -417,7 +419,10 @@ describe('NumberStepInputComponent main functionality', () => {
             </fdp-form-group>
             <button type="submit" #submitButton>Submit</button>
         </form>
-    `
+    `,
+    standalone: true,
+    imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule, NgIf],
+    providers: [RtlService]
 })
 class NumberStepInputFormTestWrapperComponent {
     @ViewChild(NumberStepInputComponent)
@@ -445,9 +450,7 @@ describe('Basic number Step Input withing platforms form', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
-            declarations: [NumberStepInputFormTestWrapperComponent],
-            providers: [RtlService]
+            imports: [NumberStepInputFormTestWrapperComponent]
         }).compileComponents();
     }));
 

@@ -11,7 +11,8 @@ export interface AutoCompleteEvent {
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdp-auto-complete]'
+    selector: '[fdp-auto-complete]',
+    standalone: true
 })
 export class AutoCompleteDirective {
     /** Values that will fill missing text in the input. */

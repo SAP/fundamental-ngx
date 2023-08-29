@@ -21,12 +21,30 @@ import {
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fdp-combobox-mobile',
     templateUrl: './combobox-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogModule,
+        NgIf,
+        TitleComponent,
+        TemplateDirective,
+        BarModule,
+        NgTemplateOutlet,
+        CdkScrollable,
+        ScrollbarDirective
+    ]
 })
 export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
     /** @hidden */

@@ -13,12 +13,17 @@ import {
 import { firstValueFrom, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { WizardModule, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from '../../interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
+import { WizardSummaryStepComponent } from '../wizard-summary-step/wizard-summary-step.component';
+import { WizardGeneratorStepComponent } from '../wizard-generator-step/wizard-generator-step.component';
+import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 
 export interface WizardStepChange {
     id: string;
@@ -29,7 +34,18 @@ export interface WizardStepChange {
     selector: 'fdp-wizard-body',
     templateUrl: './wizard-body.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        WizardModule,
+        NgFor,
+        WizardGeneratorStepComponent,
+        WizardSummaryStepComponent,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgTemplateOutlet
+    ]
 })
 export class WizardBodyComponent implements OnInit, OnDestroy {
     /**

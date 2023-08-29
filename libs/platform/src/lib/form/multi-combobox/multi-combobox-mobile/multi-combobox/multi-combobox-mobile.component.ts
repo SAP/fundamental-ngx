@@ -21,11 +21,34 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 import { SelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { MULTICOMBOBOX_COMPONENT, MultiComboboxInterface } from '../../multi-combobox.interface';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { NgIf, NgTemplateOutlet, AsyncPipe } from '@angular/common';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fdp-multi-combobox-mobile',
     templateUrl: './multi-combobox-mobile.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogModule,
+        NgIf,
+        TitleComponent,
+        TemplateDirective,
+        BarModule,
+        NgTemplateOutlet,
+        ButtonModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxInterface> implements OnInit, OnDestroy {
     /** @hidden */

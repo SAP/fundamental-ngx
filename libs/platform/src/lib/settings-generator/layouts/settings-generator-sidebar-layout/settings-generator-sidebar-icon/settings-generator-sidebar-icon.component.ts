@@ -13,12 +13,18 @@ import { merge } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { isSubscribable } from '@fundamental-ngx/cdk/utils';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgIf } from '@angular/common';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fdp-settings-generator-sidebar-icon',
     templateUrl: './settings-generator-sidebar-icon.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, SkeletonModule, IconModule, AvatarModule]
 })
 export class SettingsGeneratorSidebarIconComponent {
     /** Thumbnail configuration. */

@@ -40,6 +40,8 @@ import {
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
 import { RadioButtonComponent } from './radio/radio.component';
+import { FormItemModule, FormGroupModule } from '@fundamental-ngx/core/form';
+import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
 
 /**
  * Radio group implementation based on the
@@ -55,7 +57,9 @@ let nextUniqueId = 0;
     templateUrl: './radio-group.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => RadioGroupComponent), multi: true }],
+    standalone: true,
+    imports: [FormGroupModule, NgIf, NgFor, FormItemModule, NgTemplateOutlet, RadioButtonComponent]
 })
 export class RadioGroupComponent
     extends InLineLayoutCollectionBaseInput

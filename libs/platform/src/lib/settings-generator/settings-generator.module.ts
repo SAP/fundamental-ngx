@@ -1,17 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
-import { SplitterModule } from '@fundamental-ngx/core/splitter';
-import { PortalModule } from '@angular/cdk/portal';
-import { TitleModule } from '@fundamental-ngx/core/title';
 import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
-import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { ClickedBehaviorModule, PipeModule } from '@fundamental-ngx/cdk/utils';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
 
 import { FDP_SETTINGS_GENERATOR_DEFAULT_CONFIG } from './default-config';
 import { SettingsConfig } from './models/settings-config.model';
@@ -29,22 +18,8 @@ import { FDP_SETTINGS_GENERATOR_CONFIG } from './tokens';
 
 @NgModule({
     imports: [
-        CommonModule,
-        ListModule,
-        IconModule,
-        AvatarModule,
-        SplitterModule,
-        PortalModule,
-        TitleModule,
-        PlatformFormGeneratorModule,
-        TabsModule,
         ClickedBehaviorModule.forRoot(),
-        PipeModule,
-        SkeletonModule,
-        ButtonModule,
-        ScrollbarModule
-    ],
-    declarations: [
+        PlatformFormGeneratorModule,
         SettingsGeneratorComponent,
         SettingsGeneratorSidebarLayoutComponent,
         SettingsGeneratorContentComponent,

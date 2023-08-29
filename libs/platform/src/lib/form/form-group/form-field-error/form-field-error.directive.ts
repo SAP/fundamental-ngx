@@ -16,7 +16,8 @@ import { FDP_FORM_ERROR_DIRECTIVE } from './tokens';
             provide: FDP_FORM_ERROR_DIRECTIVE,
             useExisting: FormFieldErrorDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class FormFieldErrorDirective<T = any> implements FormError<T>, OnInit {
     /** Used to connect data with model for typings support. */

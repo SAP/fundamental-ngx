@@ -7,7 +7,8 @@ import { StepInputActionButton } from './step-input-action-button';
  * This Directive is used to be assigned to increment button.
  */
 @Directive({
-    selector: '[fdpStepInputIncrement]'
+    selector: '[fdpStepInputIncrement]',
+    standalone: true
 })
 export class StepInputIncrementDirective extends StepInputActionButton {
     /** @hidden */

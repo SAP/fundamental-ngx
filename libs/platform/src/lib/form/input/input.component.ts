@@ -32,10 +32,11 @@ import {
     Self,
     SkipSelf
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { BaseInput, PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { FormControlModule } from '@fundamental-ngx/core/form';
 
 const VALID_INPUT_TYPES = ['text', 'number', 'email', 'password'];
 
@@ -51,7 +52,9 @@ export type InputType = 'text' | 'number' | 'email' | 'password';
     templateUrl: 'input.component.html',
     styleUrls: ['./input.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: InputComponent, multi: true }]
+    providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: InputComponent, multi: true }],
+    standalone: true,
+    imports: [FormControlModule, FormsModule]
 })
 export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     /** Input type */

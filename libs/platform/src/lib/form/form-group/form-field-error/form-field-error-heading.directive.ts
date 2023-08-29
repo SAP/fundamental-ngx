@@ -4,7 +4,8 @@ import { FormError, FormErrorHeading, FormFieldErrorContext } from '@fundamental
 import { FDP_FORM_ERROR_DIRECTIVE } from './tokens';
 
 @Directive({
-    selector: '[fdpFormFieldErrorHeading]'
+    selector: '[fdpFormFieldErrorHeading]',
+    standalone: true
 })
 export class FormFieldErrorHeadingDirective<T = any> implements FormErrorHeading {
     /** Used to connect data with model for typings support. */

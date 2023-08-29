@@ -38,7 +38,8 @@ const formGroupChildProvider: Provider = {
     styleUrls: ['./form-field-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [formFieldGroupProvider, formGroupChildProvider]
+    providers: [formFieldGroupProvider, formGroupChildProvider],
+    standalone: true
 })
 export class FormFieldGroupComponent implements FormFieldGroup, OnInit, OnDestroy {
     /**

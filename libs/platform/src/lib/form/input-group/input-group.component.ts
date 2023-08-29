@@ -31,6 +31,8 @@ import { CSS_CLASS_NAME, INPUT_GROUP_CHILD_TOKEN } from './constants';
 import { InputGroupConfig } from './input-group.config';
 import { InputGroupAddonComponent } from './addon.component';
 import { InputGroupInputComponent } from './input.component';
+import { InputGroupAddonBodyComponent } from './addon-body.component';
+import { NgFor, NgTemplateOutlet, NgIf } from '@angular/common';
 
 /**
  * Fundamental input group component
@@ -53,7 +55,9 @@ import { InputGroupInputComponent } from './input.component';
     providers: [
         { provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => InputGroupComponent), multi: true },
         contentDensityObserverProviders()
-    ]
+    ],
+    standalone: true,
+    imports: [NgFor, InputGroupAddonBodyComponent, NgTemplateOutlet, NgIf, InputComponent]
 })
 export class InputGroupComponent extends BaseInput implements OnInit, AfterContentInit, AfterViewInit {
     /** Input value */

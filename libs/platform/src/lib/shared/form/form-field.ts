@@ -6,6 +6,8 @@ import { Observable, Subject } from 'rxjs';
 
 import { FormError, FormFieldErrorDirectiveContext } from './form-error';
 import { Column, ColumnLayout } from './form-options';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
 
 /**
  * FormField base class.
@@ -80,6 +82,9 @@ export abstract class PlatformFormField extends FormField {
     /** Event emitted when errors being changed. */
     errorsChange$: Subject<void>;
 
+    /** @hidden */
+    innerErrorRenderers?: TemplateRef<any>;
+
     /**
      * Set default columns layout
      */
@@ -93,6 +98,9 @@ export abstract class PlatformFormField extends FormField {
 
     /** Sets error directives from parent container */
     setErrorDirectives: (directives: QueryList<FormError>) => void;
+
+    /** Whether form field has validation errors. */
+    hasErrors: () => boolean;
 }
 
 export abstract class FormFieldGroup {
@@ -124,6 +132,27 @@ export abstract class FormFieldGroup {
 export type FdpFormFieldControl<T = any> = FormFieldControl<T>;
 
 export abstract class PlatformFormFieldControl<T = any> implements FormFieldControl<T> {
+    /**
+     * To allow user to determine what event he wants to trigger the messages to show
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     */
+    abstract triggers: (string | TriggerConfig)[];
+
+    /** State message configuration. Used for components that can render form message inside its template. */
+    abstract stateMessageConfig: Nullable<TemplateRef<any>>;
+
+    /** Method for focusing on the element */
+    abstract focus(event?: MouseEvent): void;
+
+    /**
+     * Handles even when we click on parent container which is the FormField Wrapping this
+     * control
+     */
+    abstract onContainerClick(event: MouseEvent): void;
+
+    /** @hidden */
+    formMessage: Nullable<FormInputMessageGroupComponent>;
+
     /**
      * Each input control has always a value. Need to make sure we keep a convention for
      * input fields
@@ -183,15 +212,6 @@ export abstract class PlatformFormFieldControl<T = any> implements FormFieldCont
 
     /** Form field instance. */
     formField: Nullable<PlatformFormField>;
-
-    /** Method for focusing on the element */
-    abstract focus(event?: MouseEvent): void;
-
-    /**
-     * Handles even when we click on parent container which is the FormField Wrapping this
-     * control
-     */
-    abstract onContainerClick(event: MouseEvent): void;
 }
 
 /**

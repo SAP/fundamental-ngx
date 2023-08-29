@@ -7,7 +7,8 @@ import { StepInputActionButton } from './step-input-action-button';
  * This Directive is used to be assigned to decrement button.
  */
 @Directive({
-    selector: '[fdpStepInputDecrement]'
+    selector: '[fdpStepInputDecrement]',
+    standalone: true
 })
 export class StepInputDecrementDirective extends StepInputActionButton {
     /** @hidden */
