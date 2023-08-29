@@ -8,7 +8,10 @@ interface Item {
 
 @Component({
     selector: 'fd-multi-input-option-item-example',
-    template: ` <fd-multi-input [selected]="selected" [dropdownValues]="objectValues"> </fd-multi-input> `
+    template: `
+        <fd-multi-input placeholder="Search here..." [selected]="selected" [dropdownValues]="objectValues">
+        </fd-multi-input>
+    `
 })
 export class MultiInputOptionItemExampleComponent {
     selected = [
