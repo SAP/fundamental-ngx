@@ -80,6 +80,7 @@
                     (onComplete)="_handleComplete($event)"
                     #searchInputElement
                     [displayFn]="displayFn"
+                    [matcher]="typeAheadMatcher"
                     [inputText]="_searchTermCtrl.value || ''"
                     [options]="dropdownValues"
                     [enable]="autoComplete && !mobile"
@@ -116,7 +117,7 @@
                 [attr.aria-label]="option.label"
                 (click)="_onCheckboxClick(option.value, $event, idx, true)"
                 (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
-                [selected]="option.isSelected"
+                [selected]="!!option.isSelected"
             >
                 <fd-checkbox (click)="_onCheckboxClick(option.value, $event, idx)" [value]="option.isSelected">
                     <!-- TODO -->

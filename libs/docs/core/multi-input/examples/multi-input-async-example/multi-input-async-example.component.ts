@@ -17,8 +17,8 @@ export class MultiInputAsyncExampleComponent {
     readonly dropdownValues$: Observable<OptionItem[]>;
     selected = [];
 
-    displayFn = (v): string => v.label;
-    valueFn = (v): string => v.value;
+    displayFn = (v: OptionItem): string => v.label;
+    valueFn = (v: OptionItem): string => v.value;
 
     constructor(private http: HttpClient) {
         this.dropdownValues$ = this.searchValue$.pipe(

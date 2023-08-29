@@ -59,6 +59,8 @@ const widthT = 'multi-input-dropdown-width-example/multi-input-dropdown-width-ex
 const addonH = 'multi-input-addon-clicked-example/multi-input-addon-clicked-example.component.html';
 const addonT = 'multi-input-addon-clicked-example/multi-input-addon-clicked-example.component.ts';
 
+const optionItemT = 'multi-input-option-item-example/multi-input-option-item-example.component.ts';
+
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
@@ -251,6 +253,14 @@ export class MultiInputDocsComponent {
             component: 'MultiInputAddonClickedExampleComponent',
             code: getAssetFromModuleAssets(addonT),
             fileName: 'multi-input-addon-clicked-example'
+        }
+    ];
+    optionItemT: ExampleFile[] = [
+        {
+            code: getAssetFromModuleAssets(optionItemT),
+            fileName: 'multi-input-option-item-example',
+            component: 'MultiInputOptionItemExampleComponent',
+            language: 'typescript'
         }
     ];
 }

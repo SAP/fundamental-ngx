@@ -54,7 +54,7 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
-function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is OptionItem<ItemType, ValueType> {
+function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is _OptionItem<ItemType, ValueType> {
     return isOptionItemBase<ValueType>(candidate) && 'item' in candidate;
 }
 
@@ -122,7 +122,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** Values to be displayed in the unfiltered dropdown. */
     @Input()
-    dropdownValues: Array<ItemType | OptionItem<ItemType, ValueType>> = [];
+    dropdownValues: Array<ItemType | _OptionItem<ItemType, ValueType>> = [];
 
     /** Whether to open the dropdown when the addon button is clicked. */
     @Input()
@@ -184,7 +184,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
      * See multi input examples for details.
      */
     @Input()
-    displayFn: (item: ItemType) => string = this._defaultDisplay;
+    displayFn: (item: ItemType) => string = this._defaultDisplay as unknown as (item: ItemType) => string;
 
     /**
      * Parse function. Used for submitting new tokens. Accepts a string by default.
@@ -351,7 +351,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    readonly optionItems$ = new BehaviorSubject<OptionItem<ItemType, ValueType>[]>([]);
+    readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
 
     /** @hidden */
     readonly _searchTermCtrl = new FormControl('');
@@ -364,6 +364,14 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     _dir: string;
+
+    /** typeahead matcher function */
+    get typeAheadMatcher(): (item: string, searchTerm: string) => boolean {
+        if (this.includes) {
+            return (item: string, searchTerm: string) => item.includes(searchTerm);
+        }
+        return (item: string, searchTerm: string) => item.startsWith(searchTerm);
+    }
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -767,7 +775,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 const displayedValue = this.displayFn(item);
                 const term = typeof displayedValue === 'string' ? displayedValue.toLocaleLowerCase() : '';
 
-                return this.includes ? term.includes(searchLower) : term.startsWith(searchLower);
+                return this.typeAheadMatcher(term, searchLower);
             }
         });
     }
@@ -778,8 +786,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _defaultDisplay(str: any): string {
-        return str;
+    private _defaultDisplay(str: ItemType): string | undefined {
+        if (typeof str === 'string') {
+            return str;
+        }
+        if (isOptionItemBase(str)) {
+            return str.label;
+        }
     }
 
     /** @hidden */
@@ -840,9 +853,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _getOptionItem(item: ItemType | OptionItem<ItemType, ValueType>): OptionItem<ItemType, ValueType> {
+    private _getOptionItem(item: ItemType | _OptionItem<ItemType, ValueType>): _OptionItem<ItemType, ValueType> {
         if (isOptionItem<ItemType, ValueType>(item)) {
             return item;
+        }
+        const existingItem = this.optionItems$.getValue().find((c) => c.item === item);
+        if (existingItem) {
+            return existingItem;
         }
         const { label, value } = this._getValueAndLabelOfItem(item);
         return {
@@ -862,11 +879,11 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _getItemByValue(
+    private _getOptionItemByValue(
         value: ValueType,
-        optionItems: OptionItem<ItemType, ValueType>[] = []
-    ): ItemType | undefined {
-        return optionItems.find((c) => c.value === value)?.item;
+        optionItems: _OptionItem<ItemType, ValueType>[] = []
+    ): _OptionItem<ItemType, ValueType> | undefined {
+        return optionItems.find((c) => c.value === value);
     }
 
     /** @hidden */
@@ -877,10 +894,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this.optionItems$
         ]).pipe(
             map(([, , optionItems]) => {
-                const selected = this.selected.map((v) => {
-                    const item = this._getItemByValue(v, optionItems);
-                    return this._getValueAndLabelOfItem(item as ItemType);
-                });
+                const selected = this.selected.map((v) => this._getOptionItemByValue(v, optionItems)!);
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value ?? '';
                 const filtered = this.filterFn(
@@ -903,10 +917,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 }
 
-export interface OptionItem<ItemType = any, ValueType = any> extends OptionItemBase<ValueType> {
+interface _OptionItem<ItemType = any, ValueType = any> extends OptionItemBase<ValueType> {
     item: ItemType;
-    isSelected: boolean;
+    isSelected?: boolean;
 }
+
+export type OptionItem<ItemType = any, ValueType = any> = Omit<_OptionItem<ItemType, ValueType>, 'isSelected'>;
 
 export interface OptionItemBase<ValueType = any> {
     label: string;
@@ -915,5 +931,5 @@ export interface OptionItemBase<ValueType = any> {
 
 interface ViewModel<ItemType = any, ValueType = any> {
     selectedOptions: OptionItemBase<ValueType>[];
-    displayedOptions: OptionItem<ItemType, ValueType>[];
+    displayedOptions: _OptionItem<ItemType, ValueType>[];
 }
