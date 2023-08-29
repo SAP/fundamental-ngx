@@ -25,6 +25,13 @@ export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
     private embeddedView?: EmbeddedViewRef<any>;
 
     /** @hidden */
+    static ngTemplateContextGuard(
+        _directive: AvatarGroupInternalOverflowButtonDirective,
+        context: unknown
+    ): context is { $implicit: AvatarGroupItemRendererDirective[] } {
+        return true;
+    }
+    /** @hidden */
     show(hiddenItems: AvatarGroupItemRendererDirective[]): void {
         const context = { $implicit: hiddenItems };
         if (this.embeddedView) {

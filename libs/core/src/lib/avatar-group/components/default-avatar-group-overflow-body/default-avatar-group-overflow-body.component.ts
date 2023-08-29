@@ -72,16 +72,16 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
         return !!this._rtlService?.rtl.value;
     }
     /** @hidden */
-    private changeDetectorRef = inject(ChangeDetectorRef);
-
-    /** @hidden */
     private _itemClickSubscription: Subscription;
 
     /** @hidden */
-    private _renderer = inject(Renderer2);
+    private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
-    private _rtlService = inject(RtlService, { optional: true });
+    private readonly _renderer = inject(Renderer2);
+
+    /** @hidden */
+    private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
     ngAfterViewInit(): void {

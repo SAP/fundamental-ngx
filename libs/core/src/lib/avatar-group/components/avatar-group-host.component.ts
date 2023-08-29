@@ -68,14 +68,14 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasEl
     @ContentChildren(AvatarGroupItemRendererDirective, { descendants: true })
     portals: QueryList<AvatarGroupItemRendererDirective>;
 
-    /** @hidden */
+    /** The reference to the host element */
     elementRef = inject(ElementRef);
 
     /** @hidden */
     hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);
 
     /** @hidden */
-    private _destroyRef = inject(DestroyRef);
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _cdr = inject(ChangeDetectorRef);
