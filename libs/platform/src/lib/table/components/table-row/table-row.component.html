@@ -30,14 +30,14 @@
         >
             <!-- hidden text for screenreader -->
             <span
-                [ngStyle]="{
-                    position: 'absolute !important',
-                    height: '1px',
-                    width: '1px',
-                    overflow: 'hidden',
-                    clip: 'rect(1px, 1px, 1px, 1px)',
-                    color: 'transparent'
-                }"
+                style="
+                    position: absolute !important;
+                    height: 1px;
+                    width: 1px;
+                    overflow: hidden;
+                    clip: rect(1px, 1px, 1px, 1px);
+                    color: transparent;
+                "
             >
                 <ng-container *ngIf="row.checked">
                     {{ 'platformTable.deselectSingleRow' | fdTranslate }}
