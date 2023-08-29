@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.7...v0.46.0-rc.8) (2023-08-29)
+
+
+### Bug Fixes
+
+* **platform:** form generator dropdown messages ([#10395](https://github.com/SAP/fundamental-ngx/issues/10395)) ([8cdb72e](https://github.com/SAP/fundamental-ngx/commit/8cdb72e619df3498676f4180b2f1055301db9cd1))
+
+
+
+
+
 # [0.46.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.6...v0.46.0-rc.7) (2023-08-28)
 
 
