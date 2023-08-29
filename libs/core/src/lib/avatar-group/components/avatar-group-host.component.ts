@@ -129,6 +129,9 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasEl
         const hiddenItems: AvatarGroupItemRendererDirective[] = [];
         let accWidth = items.reduce((acc, item) => (item.forceVisibility ? acc + item.width : acc), 0);
         for (const item of items) {
+            if (item.forceVisibility) {
+                continue;
+            }
             accWidth += item.width;
             if (accWidth <= containerWidth) {
                 visibleItems.push(item);
