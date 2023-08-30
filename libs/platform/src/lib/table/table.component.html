@@ -44,7 +44,7 @@
                     fdp-table-header-row
                     [rowId]="id"
                     [fixed]="fixed"
-                    [isShownSelectionColumn]="_isShownSelectionColumn"
+                    [isShownSelectionColumn]="isSelectionColumnShown"
                     [checkedState]="_checkedState"
                     [selectionMode]="_selectionMode"
                     [selectionColumnWidth]="_selectionColumnWidth"
@@ -56,10 +56,7 @@
             </thead>
 
             <tbody
-                *ngIf="
-                    !!this._tableRowsVisible.length && _tableService.visibleColumnsLength > 0;
-                    else emptyTableTemplate
-                "
+                *ngIf="!!_tableRowsVisible.length && _tableService.visibleColumnsLength > 0; else emptyTableTemplate"
                 fd-table-body
                 fdkDndList
                 #tableBody
@@ -98,7 +95,7 @@
                             [class]="row | rowClasses : rowsClass"
                             [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
                             [focusable]="rowsActivable || !!row.navigatable"
-                            [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
+                            [hoverable]="rowsActivable || isSelectionColumnShown || !!row.navigatable"
                             [activable]="rowsActivable || !!row.navigatable"
                             [active]="rowIndex === _navigatedRowIndex"
                             [highlightActive]="highlightNavigatedRow"
