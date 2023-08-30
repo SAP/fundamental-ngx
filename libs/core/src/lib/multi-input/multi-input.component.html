@@ -102,6 +102,7 @@
             [byline]="byline"
             (focusEscapeList)="handleListFocusEscape($event)"
             [style.minWidth]="'100%'"
+            aria-multiselectable="true"
         >
             <li
                 *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: valueFn"
