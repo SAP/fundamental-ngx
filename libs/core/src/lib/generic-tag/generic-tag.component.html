@@ -1,0 +1,9 @@
+<span
+    class="fd-generic-tag__icon"
+    [class]="type ? 'sap-icon--message-' + type : ''"
+    role="presentation"
+    aria-hidden="true"
+>
+</span>
+<span class="fd-generic-tag__name" *ngIf="name">{{ name }}</span>
+<span class="fd-generic-tag__value" *ngIf="value">{{ value }}</span>

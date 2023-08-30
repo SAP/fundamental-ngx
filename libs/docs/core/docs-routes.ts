@@ -173,6 +173,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/core/global-config').then(configureCoreRoutes)
             },
             {
+                path: 'generic-tag',
+                loadChildren: () => import('@fundamental-ngx/docs/core/generic-tag').then((m) => m.GenericTagDocsModule)
+            },
+            {
                 path: 'content-density',
                 loadChildren: () => import('@fundamental-ngx/docs/core/content-density').then(configureCoreRoutes)
             },
