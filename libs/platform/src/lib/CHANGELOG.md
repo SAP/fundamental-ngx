@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.8...v0.46.0-rc.9) (2023-08-31)
+
+
+### Bug Fixes
+
+* **platform:** custom row height ([#10439](https://github.com/SAP/fundamental-ngx/issues/10439)) ([3302769](https://github.com/SAP/fundamental-ngx/commit/3302769aa8be647006287b75d46e41e97c66a0eb))
+
+
+
+
+
 # [0.46.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.7...v0.46.0-rc.8) (2023-08-29)
 
 
