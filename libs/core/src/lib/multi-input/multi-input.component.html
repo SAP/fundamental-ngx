@@ -1,7 +1,11 @@
 <ng-container *ngIf="_viewModel$ | async as viewModel">
     <div class="fd-multi-input fd-multi-input-custom">
         <div class="fd-multi-input-field">
-            <ng-container [ngTemplateOutlet]="control" *ngIf="mobile"></ng-container>
+            <ng-container
+                [ngTemplateOutlet]="control"
+                [ngTemplateOutletContext]="{ displayAddonButton: displayAddonButton }"
+                *ngIf="mobile"
+            ></ng-container>
 
             <fd-popover
                 additionalBodyClass="fd-popover-custom-list"
@@ -17,7 +21,9 @@
             >
                 <fd-popover-control>
                     <form (submit)="_onSubmit()">
-                        <ng-container *ngTemplateOutlet="control"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="control; context: { displayAddonButton: displayAddonButton }"
+                        ></ng-container>
                     </form>
                 </fd-popover-control>
 
@@ -33,16 +39,16 @@
         </div>
     </div>
 
-    <ng-template #control>
+    <ng-template #control let-showAddonButton="displayAddonButton">
         <fd-input-group
             class="fd-multi-input-input-group-custom"
             [state]="state"
             [buttonFocusable]="buttonFocusable"
-            [button]="displayAddonButton"
+            [button]="showAddonButton"
             [disabled]="disabled"
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
-            [glyph]="displayAddonButton ? glyph : ''"
+            [glyph]="showAddonButton ? glyph : ''"
             [iconTitle]="title"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
         >
