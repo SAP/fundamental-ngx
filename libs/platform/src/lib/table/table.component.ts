@@ -105,7 +105,7 @@ import {
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components';
+import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
 
 interface ToolbarContext {
     counter: Observable<number>;
@@ -466,7 +466,7 @@ export class TableComponent<T = any>
     readonly customEditableCells: QueryList<EditableTableCell>;
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
-    readonly tableToolbar: TableToolbarWithTemplate;
+    readonly tableToolbar: TableToolbarInterface;
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
