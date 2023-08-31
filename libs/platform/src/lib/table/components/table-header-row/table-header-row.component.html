@@ -80,7 +80,7 @@
                     : _tableColumnResizeService.getColumnWidthStyle(column.name)
                     : _tableColumnResizeService.getNextColumnsWidth(column.name)
         "
-        [fdPopoverTrigger]="tablePopover.popover"
+        [fdPopoverTrigger]="_isColumnHasHeaderMenu(column) ? tablePopover.popover : null"
         (cellFocused)="_tableRowService.cellFocused($event)"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
@@ -98,7 +98,7 @@
                 #tablePopover
                 [disabled]="!_isColumnHasHeaderMenu(column)"
                 [column]="column"
-                [popoverTemplate]="column.headerCellPopoverTemplate"
+                [popoverTemplate]="_isColumnHasHeaderMenu(column) ? column.headerCellPopoverTemplate : null"
                 [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$ | async"
             ></fdp-table-cell-header-popover>
         </fdp-table-header-cell-content>
