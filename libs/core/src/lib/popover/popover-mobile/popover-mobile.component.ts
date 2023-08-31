@@ -27,7 +27,7 @@ import { PopoverChildContent } from '../popover-child-content.interface';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { TitleComponent } from '@fundamental-ngx/core/title';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 let mobilePopoverUniqueId = 0;
 
@@ -37,7 +37,7 @@ let mobilePopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [DialogModule, TitleComponent, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
+    imports: [DialogModule, TitleModule, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     /** @hidden */

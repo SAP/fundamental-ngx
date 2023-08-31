@@ -21,23 +21,24 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
+import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import equal from 'fast-deep-equal';
 import { BasePopoverClass } from './base/base-popover.class';
+import { PopoverBodyDirective } from './popover-body.directive';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
-import { PopoverService } from './popover-service/popover.service';
+import { PopoverChildContent } from './popover-child-content.interface';
 import { PopoverControlComponent } from './popover-control/popover-control.component';
-import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
 import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
-import { PopoverChildContent } from './popover-child-content.interface';
+import { PopoverService, PopoverTemplate } from './popover-service/popover.service';
+import { POPOVER_COMPONENT } from './popover.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
-import { NgIf } from '@angular/common';
 
 export const SELECT_CLASS_NAMES = {
     selectControl: 'fd-select__control'
@@ -69,7 +70,7 @@ let cdkPopoverUniqueId = 0;
         '[attr.id]': 'id'
     },
     standalone: true,
-    imports: [NgIf, CdkOverlayOrigin]
+    imports: [NgIf, CdkOverlayOrigin, NgTemplateOutlet]
 })
 export class PopoverComponent
     extends BasePopoverClass
@@ -127,6 +128,10 @@ export class PopoverComponent
     /** @hidden */
     @ContentChild(PopoverBodyComponent)
     popoverBody: PopoverBodyComponent;
+
+    /** @hidden */
+    @ContentChild(PopoverBodyDirective)
+    popoverBodyDirective: PopoverBodyDirective;
 
     /** @hidden */
     @ContentChild(PopoverControlComponent)
@@ -270,19 +275,30 @@ export class PopoverComponent
             this._popoverService.initialise(
                 this.trigger || this.triggerOrigin.elementRef,
                 this,
-                this.popoverBody
-                    ? {
-                          template: this.templateRef,
-                          container: this.container,
-                          popoverBody: this.popoverBody
-                      }
-                    : null
+                this._getPopoverBodyContent()
             );
         } else {
             this._setupMobileMode();
         }
 
         this._cdr.detectChanges();
+    }
+
+    /**
+     * Depending on a used popover body type, returns a popover body content
+     **/
+    private _getPopoverBodyContent(): PopoverTemplate | TemplateRef<void> | null {
+        if (this.popoverBody) {
+            return {
+                template: this.templateRef,
+                container: this.container,
+                popoverBody: this.popoverBody
+            };
+        }
+        if (this.popoverBodyDirective) {
+            return this.popoverBodyDirective.templateRef;
+        }
+        return null;
     }
 
     /** @hidden Open Popover in mobile mode */
