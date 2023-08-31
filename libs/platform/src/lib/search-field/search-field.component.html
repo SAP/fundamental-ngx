@@ -64,8 +64,10 @@
                 [attr.aria-label]="ariaLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
                 [attr.aria-controls]="_menuId"
-                [attr.aria-expanded]="_showDropdown ? 'true' : 'false'"
-                aria-haspopup="true"
+                [attr.aria-expanded]="
+                    (_dropdownValues$ | async)?.length !== 0 ? (_showDropdown ? 'true' : 'false') : null
+                "
+                [attr.aria-haspopup]="(_dropdownValues$ | async)?.length !== 0"
                 autocomplete="off"
                 (keydown)="onKeydown($event)"
                 (keydown.enter)="onSearchSubmit($event)"
