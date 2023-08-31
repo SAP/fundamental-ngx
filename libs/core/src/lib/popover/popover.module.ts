@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 
-import { PopoverControlComponent } from './popover-control/popover-control.component';
-import { PopoverBodyComponent } from './popover-body/popover-body.component';
-import { PopoverBodyHeaderDirective } from './popover-body/popover-body-directives/popover-body-header.directive';
 import { PopoverBodyFooterDirective } from './popover-body/popover-body-directives/popover-body-footer.directive';
+import { PopoverBodyHeaderDirective } from './popover-body/popover-body-directives/popover-body-header.directive';
+import { PopoverBodyComponent } from './popover-body/popover-body.component';
+import { PopoverControlComponent } from './popover-control/popover-control.component';
 
-import { PopoverComponent } from './popover.component';
-import { PopoverTriggerDirective } from './popover-trigger.directive';
+import { PopoverBodyDirective } from './popover-body.directive';
 import { PopoverContainerDirective } from './popover-container/popover-container.directive';
+import { PopoverTriggerDirective } from './popover-trigger.directive';
+import { PopoverComponent } from './popover.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { PopoverContainerDirective } from './popover-container/popover-container
         PopoverBodyFooterDirective,
         PopoverComponent,
         PopoverTriggerDirective,
-        PopoverContainerDirective
+        PopoverContainerDirective,
+        PopoverBodyDirective
     ],
     exports: [
         PopoverControlComponent,
@@ -26,7 +28,8 @@ import { PopoverContainerDirective } from './popover-container/popover-container
         PopoverBodyFooterDirective,
         PopoverComponent,
         PopoverTriggerDirective,
-        PopoverContainerDirective
+        PopoverContainerDirective,
+        PopoverBodyDirective
     ]
 })
 export class PopoverModule {}

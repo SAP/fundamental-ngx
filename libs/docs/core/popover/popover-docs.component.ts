@@ -303,4 +303,21 @@ export class PopoverDocsComponent {
             fileName: 'popover-dynamic-container-height-example'
         }
     ];
+
+    lazyLoadBody: ExampleFile[] = [
+        {
+            name: 'PopoverLazyInitOfBodyExampleComponent',
+            language: 'typescript',
+            component: 'PopoverLazyInitOfBodyExampleComponent',
+            code: getAssetFromModuleAssets('popover-lazy-init-of-body/popover-lazy-init-of-body-example.component.ts'),
+            fileName: 'popover-lazy-init-of-body-example'
+        },
+        {
+            name: 'PopoverLazyLoadedBodyComponent',
+            language: 'typescript',
+            component: 'PopoverLazyLoadedBodyComponent',
+            code: getAssetFromModuleAssets('popover-lazy-init-of-body/popover-lazy-loaded-body.component.ts'),
+            fileName: 'popover-lazy-loaded-body'
+        }
+    ];
 }
