@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.9...v0.46.0-rc.10) (2023-08-31)
+
+
+### Bug Fixes
+
+* **platform:** cell height instead of tbody ([#10440](https://github.com/SAP/fundamental-ngx/issues/10440)) ([702c568](https://github.com/SAP/fundamental-ngx/commit/702c5689a03efc223ad23aa66ff2966b96511eb7))
+
+
+
+
+
 # [0.46.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.8...v0.46.0-rc.9) (2023-08-31)
 
 
