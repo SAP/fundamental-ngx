@@ -5,8 +5,10 @@ import {
     Input,
     OnChanges,
     ViewEncapsulation,
-    OnInit
+    OnInit,
+    inject
 } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
 import { applyCssClass, CssClassBuilder, NullableObject, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_GENERIC_TAG_COMPONENT } from './tokens';
 
@@ -29,7 +31,9 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
         '[attr.tabindex]': '0',
         '[attr.aria-roledescription]': 'ariaRoleDescription',
         role: 'button'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgClass]
 })
 export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -45,11 +49,12 @@ export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     type: Nullable<GenericTagType>;
 
     /**
+     * Required input
      * The KPI Name of the Generic tag. Standard text.
      * Always use a meaningful title. Keep it simple and try to use no more than 3 words.
      */
-    @Input()
-    name: Nullable<string>;
+    @Input({ required: true })
+    name!: string;
 
     /**
      * The KPI Value of the Generic tag.
@@ -65,7 +70,7 @@ export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     ariaRoleDescription: Nullable<string> = 'Generic Tag';
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden */
     ngOnChanges(): void {

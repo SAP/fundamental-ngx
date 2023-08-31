@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { GenericTagComponent } from './generic-tag.component';
 
 @NgModule({
-    imports: [CommonModule],
-    exports: [GenericTagComponent],
-    declarations: [GenericTagComponent]
+    imports: [CommonModule, GenericTagComponent],
+    exports: [GenericTagComponent]
 })
 export class GenericTagModule {}
