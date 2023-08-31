@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.10...v0.46.0-rc.11) (2023-08-31)
+
+
+### Features
+
+* **core:** removed addon button on mobile mode in multi-input ([#10443](https://github.com/SAP/fundamental-ngx/issues/10443)) ([9e6b944](https://github.com/SAP/fundamental-ngx/commit/9e6b9447cd4c703ece309f04f6d75d0dad98e997))
+
+
+
+
+
 # [0.46.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.9...v0.46.0-rc.10) (2023-08-31)
 
 **Note:** Version bump only for package @fundamental-ngx/core
