@@ -4,13 +4,15 @@ import { ApiDocsService } from './services/api-docs.service';
 import { currentComponentProvider } from './tokens/current-component.token';
 import { hasI18nProvider } from './tokens/has-i18n.token';
 
+type CanBeArray<T> = T | T[];
+
 export function configureRoutes<ApiFiles = Record<string, string[]>>(
     apiFiles: ApiFiles
 ): (routesImport: {
     ROUTES: Routes;
     LIBRARY_NAME: string;
     API_FILE_KEY?: keyof ApiFiles;
-    I18N_KEY?: keyof FdLanguage;
+    I18N_KEY?: CanBeArray<keyof FdLanguage>;
 }) => Routes {
     return ({ ROUTES: routes, LIBRARY_NAME: libraryName, API_FILE_KEY: apiFilesKey, I18N_KEY: i18nKey }) => {
         const primaryRoute = routes.find((route) => route.data && route.data.primary);

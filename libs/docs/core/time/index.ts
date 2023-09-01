@@ -17,3 +17,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'time';
 export const API_FILE_KEY = 'time';
+export const I18N_KEY = 'coreTime';

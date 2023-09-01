@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { FdLanguage } from '@fundamental-ngx/i18n';
 
 export const ROUTES: Routes = [
     {
@@ -17,3 +18,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'token';
 export const API_FILE_KEY = 'token';
+export const I18N_KEY = ['coreToken', 'coreTokenizer'] as Array<keyof FdLanguage>;

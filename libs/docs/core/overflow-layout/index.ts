@@ -21,3 +21,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'overflow-layout';
 export const API_FILE_KEY = 'overflowLayout';
+export const I18N_KEY = 'coreOverflowLayout';

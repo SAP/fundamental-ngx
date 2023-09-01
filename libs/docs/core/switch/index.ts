@@ -17,3 +17,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'switch';
 export const API_FILE_KEY = 'switch';
+export const I18N_KEY = 'coreSwitch';

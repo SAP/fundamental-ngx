@@ -17,3 +17,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'text';
 export const API_FILE_KEY = 'text';
+export const I18N_KEY = 'coreText';

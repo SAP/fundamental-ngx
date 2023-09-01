@@ -21,3 +21,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'datetime-picker';
 export const API_FILE_KEY = 'datetimePicker';
+export const I18N_KEY = 'coreDatetimePicker';

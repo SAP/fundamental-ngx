@@ -18,3 +18,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'date-picker';
 export const API_FILE_KEY = 'datePicker';
+export const I18N_KEY = 'coreDatePicker';

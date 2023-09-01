@@ -20,3 +20,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'multi-combobox';
 export const API_FILE_KEY = 'multiCombobox';
+export const I18N_KEY = 'coreMultiComboBox';

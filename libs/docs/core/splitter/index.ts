@@ -18,3 +18,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'splitter';
 export const API_FILE_KEY = 'splitter';
+export const I18N_KEY = 'coreSplitter';

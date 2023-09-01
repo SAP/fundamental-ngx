@@ -21,3 +21,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'vertical-navigation';
 export const API_FILE_KEY = 'verticalNavigation';
+export const I18N_KEY = 'coreNavigation';

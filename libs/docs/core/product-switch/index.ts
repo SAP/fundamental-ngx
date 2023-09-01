@@ -20,3 +20,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'product-switch';
 export const API_FILE_KEY = 'productSwitch';
+export const I18N_KEY = 'coreProductSwitch';
