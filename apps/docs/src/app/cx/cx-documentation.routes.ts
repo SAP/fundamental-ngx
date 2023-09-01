@@ -1,7 +1,11 @@
 import { Routes } from '@angular/router';
+import { API_FILES } from '@fundamental-ngx/docs/cx/shared';
+import { configureRoutes } from '@fundamental-ngx/docs/shared';
 import { HomeDocsComponent } from './component-docs/cx-home/cx-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { CxDocumentationComponent } from './documentation/cx-documentation.component';
+
+const configureCxRoutes = configureRoutes(API_FILES);
 
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 export const ROUTES: Routes = [
@@ -18,7 +22,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'side-navigation',
-                loadChildren: () => import('@fundamental-ngx/docs/cx/side-navigation').then((m) => m.ROUTES)
+                loadChildren: () => import('@fundamental-ngx/docs/cx/side-navigation').then(configureCxRoutes)
             }
         ]
     }

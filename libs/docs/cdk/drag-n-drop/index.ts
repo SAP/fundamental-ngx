@@ -15,3 +15,4 @@ export const ROUTES: Routes = [
 ];
 
 export const LIBRARY_NAME = 'drag-n-drop';
+export const API_FILE_KEY = 'dnd';

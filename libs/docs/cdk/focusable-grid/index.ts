@@ -19,3 +19,4 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'focusable-grid';
+export const API_FILE_KEY = 'focusableGrid';

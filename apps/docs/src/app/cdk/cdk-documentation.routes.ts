@@ -5,13 +5,7 @@ import { HomeDocsComponent } from './component-docs/cdk-home/cdk-home.component'
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { CDKDocumentationComponent } from './documentation/cdk-documentation.component';
 
-const configureCdkRoutes = (config: {
-    apiFilesKey: keyof typeof API_FILES;
-}): ((params: { ROUTES: Routes; LIBRARY_NAME: string }) => Routes) =>
-    configureRoutes({
-        apiFiles: API_FILES,
-        ...config
-    });
+const configureCdkRoutes = configureRoutes(API_FILES);
 
 // BEING UPDATED WITH THE SAP-COMPONENT SCHEMATIC; DO NOT MODIFY THE STRUCTURE!
 export const ROUTES: Routes = [
@@ -28,77 +22,51 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'control-value-accessor',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/forms').then(configureCdkRoutes({ apiFilesKey: 'forms' }))
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/forms').then(configureCdkRoutes)
             },
             {
                 path: 'data-source',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/data-source').then(
-                        configureCdkRoutes({ apiFilesKey: 'dataSource' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/data-source').then(configureCdkRoutes)
             },
             {
                 path: 'drag-n-drop',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/drag-n-drop').then(configureCdkRoutes({ apiFilesKey: 'dnd' }))
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/drag-n-drop').then(configureCdkRoutes)
             },
             {
                 path: 'focusable-item',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/focusable-item').then(
-                        configureCdkRoutes({ apiFilesKey: 'focusableItem' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-item').then(configureCdkRoutes)
             },
             {
                 path: 'selectable-list',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/selectable-list').then(
-                        configureCdkRoutes({ apiFilesKey: 'selectableList' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/selectable-list').then(configureCdkRoutes)
             },
             {
                 path: 'focusable-list',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/focusable-list').then(
-                        configureCdkRoutes({ apiFilesKey: 'focusableList' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-list').then(configureCdkRoutes)
             },
             {
                 path: 'focusable-grid',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/focusable-grid').then(
-                        configureCdkRoutes({ apiFilesKey: 'focusableGrid' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/focusable-grid').then(configureCdkRoutes)
             },
             {
                 path: 'disabled',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/disabled').then(configureCdkRoutes({ apiFilesKey: 'disabled' }))
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/disabled').then(configureCdkRoutes)
             },
             {
                 path: 'clicked',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/clicked').then(configureCdkRoutes({ apiFilesKey: 'clicked' }))
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/clicked').then(configureCdkRoutes)
             },
             {
                 path: 'tabbable',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/tabbable').then(configureCdkRoutes({ apiFilesKey: 'tabbable' }))
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/tabbable').then(configureCdkRoutes)
             },
             {
                 path: 'initial-focus',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/initial-focus').then(
-                        configureCdkRoutes({ apiFilesKey: 'initialFocus' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/initial-focus').then(configureCdkRoutes)
             },
             {
                 path: 'breakpoint',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/cdk/breakpoint').then(
-                        configureCdkRoutes({ apiFilesKey: 'breakpoint' })
-                    )
+                loadChildren: () => import('@fundamental-ngx/docs/cdk/breakpoint').then(configureCdkRoutes)
             }
         ]
     }

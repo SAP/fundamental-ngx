@@ -17,3 +17,4 @@ export const ROUTES: Routes = [
     }
 ];
 export const LIBRARY_NAME = 'breakpoint';
+export const API_FILE_KEY = 'breakpoint';

@@ -15,3 +15,4 @@ export const ROUTES: Routes = [
 ];
 
 export const LIBRARY_NAME = 'forms';
+export const API_FILE_KEY = 'forms';
