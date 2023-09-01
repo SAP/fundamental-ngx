@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { AnimationEvent } from '@angular/animations';
 import {
     AfterContentChecked,
     AfterViewInit,
@@ -15,7 +17,6 @@ import {
     Type,
     ViewChild
 } from '@angular/core';
-import { AnimationEvent } from '@angular/animations';
 
 import {
     applyCssClass,
@@ -25,14 +26,15 @@ import {
     Nullable
 } from '@fundamental-ngx/cdk/utils';
 
-import { DialogRef } from '../utils/dialog-ref.class';
-import { DialogConfig } from '../utils/dialog-config.class';
-import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
-import { DialogDefaultContent } from '../utils/dialog-default-content.class';
-import { DialogContentType } from '../dialog.types';
-import { dialogFade } from '../utils/dialog.animations';
 import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import { takeUntil } from 'rxjs';
+import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
+import { DialogContentType } from '../dialog.types';
+import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogContainer } from '../utils/dialog-container.model';
+import { DialogDefaultContent } from '../utils/dialog-default-content.class';
+import { DialogRef } from '../utils/dialog-ref.class';
+import { dialogFade } from '../utils/dialog.animations';
 
 /** Dialog container where the dialog content is embedded. */
 @Component({
@@ -45,7 +47,7 @@ import { takeUntil } from 'rxjs';
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>
-    implements AfterViewInit, AfterContentChecked, CssClassBuilder
+    implements DialogContainer<any>, AfterViewInit, AfterContentChecked, CssClassBuilder
 {
     /** Custom classes */
     @Input()
@@ -68,13 +70,30 @@ export class DialogContainerComponent
     /** @hidden */
     constructor(
         public dialogConfig: DialogConfig,
-        private _dialogRef: DialogRef,
+        public ref: DialogRef,
         private _destroy$: DestroyedService,
         elementRef: ElementRef,
         changeDetectorRef: ChangeDetectorRef,
         injector: Injector
     ) {
         super(elementRef, injector, changeDetectorRef);
+    }
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
+    }
+
+    /** Handle end of animations, updating the state of the Message Toast. */
+    @HostListener('@state.done', ['$event'])
+    onAnimationEnd(event: AnimationEvent): void {
+        const { toState } = event;
+
+        if (toState === 'hidden') {
+            this.ref._endClose$.next();
+            this.ref._endClose$.complete();
+        }
     }
 
     /** @hidden */
@@ -93,16 +112,10 @@ export class DialogContainerComponent
     }
 
     /** @hidden */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
-    }
-
-    /** @hidden */
     protected _attached(event: CdkPortalOutletAttachedRef): void {
-        if (event instanceof ComponentRef<any>) {
+        if (event instanceof ComponentRef) {
             event.changeDetectorRef.markForCheck();
-        } else if (event instanceof EmbeddedViewRef<any>) {
+        } else if (event instanceof EmbeddedViewRef) {
             event.markForCheck();
         }
     }
@@ -122,7 +135,7 @@ export class DialogContainerComponent
 
     /** @hidden Returns context for embedded template*/
     private _templateContext(): { $implicit: DialogRef; dialogConfig: DialogConfig } {
-        return { $implicit: this._dialogRef, dialogConfig: this.dialogConfig };
+        return { $implicit: this.ref, dialogConfig: this.dialogConfig };
     }
 
     /** @hidden Load Dialog component from passed object */
@@ -131,17 +144,6 @@ export class DialogContainerComponent
         const instance = (this._componentRef as ComponentRef<DialogDefaultComponent>).instance;
         instance._defaultDialogContent = config;
         instance._defaultDialogConfiguration = this.dialogConfig;
-    }
-
-    /** Handle end of animations, updating the state of the Message Toast. */
-    @HostListener('@state.done', ['$event'])
-    onAnimationEnd(event: AnimationEvent): void {
-        const { toState } = event;
-
-        if (toState === 'hidden') {
-            this._dialogRef._endClose$.next();
-            this._dialogRef._endClose$.complete();
-        }
     }
 
     /**
@@ -153,7 +155,7 @@ export class DialogContainerComponent
             this._animationState = 'hidden';
             this._cdr.detectChanges();
         };
-        this._dialogRef.afterClosed.pipe(takeUntil(this._destroy$)).subscribe({
+        this.ref.afterClosed.pipe(takeUntil(this._destroy$)).subscribe({
             next: () => callback(),
             error: () => callback()
         });

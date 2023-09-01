@@ -1,13 +1,16 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { ComponentRef, Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogContainer } from '../utils/dialog-container.model';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 
 /** Service used to dynamically generate a dialog. */
 @Injectable()
-export abstract class DialogBaseService<T> implements OnDestroy {
+export abstract class DialogBaseService<T extends DialogContainer<any>> implements OnDestroy {
+    abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
     /** @hidden Collection of existing dialog references */
     protected _dialogs: ComponentRef<T>[] = [];
 
@@ -23,8 +26,12 @@ export abstract class DialogBaseService<T> implements OnDestroy {
     }
 
     /** Dismisses all currently open dialogs. */
-    dismissAll(): void {
-        this._dialogs.forEach((item) => this._destroyDialog(item));
+    dismissAll(reason?: any): void {
+        this._dialogs.forEach((item) => {
+            item.instance.ref.dismiss(reason);
+            item.destroy();
+        });
+        this._dialogs = [];
     }
 
     /** @hidden */
@@ -32,8 +39,6 @@ export abstract class DialogBaseService<T> implements OnDestroy {
         this._destroy$.next();
         this._destroy$.complete();
     }
-
-    abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
 
     /** @hidden Extends configuration using default values*/
     protected _applyDefaultConfig(config: DialogConfig, defaultConfig: DialogConfig): DialogConfig {
