@@ -1,3 +1,5 @@
+import { AnimationEvent } from '@angular/animations';
+import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -14,16 +16,14 @@ import {
     Type,
     ViewChild
 } from '@angular/core';
-import { AnimationEvent } from '@angular/animations';
-import { applyCssClass, CssClassBuilder, DynamicComponentContainer } from '@fundamental-ngx/cdk/utils';
-import { MessageBoxConfig } from '../utils/message-box-config.class';
-import { MessageBoxRef } from '../utils/message-box-ref.class';
-import { MessageBoxContent } from '../utils/message-box-content.class';
-import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
-import { MessageBoxContentType } from '../message-box-content.type';
-import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
-import { dialogFade } from '@fundamental-ngx/core/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CssClassBuilder, DynamicComponentContainer, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { DialogContainer, dialogFade } from '@fundamental-ngx/core/dialog';
+import { MessageBoxContentType } from '../message-box-content.type';
+import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
+import { MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxContent } from '../utils/message-box-content.class';
+import { MessageBoxRef } from '../utils/message-box-ref.class';
 
 /** Message box container where the message box content is embedded. */
 @Component({
@@ -33,7 +33,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>
-    implements AfterViewInit, CssClassBuilder
+    implements DialogContainer<any>, AfterViewInit, CssClassBuilder
 {
     /** Custom classes */
     @Input()
@@ -56,7 +56,7 @@ export class MessageBoxContainerComponent
     /** @hidden */
     constructor(
         public messageBoxConfig: MessageBoxConfig,
-        private _messageBoxRef: MessageBoxRef,
+        public ref: MessageBoxRef,
         private _destroyRef: DestroyRef,
         elementRef: ElementRef,
         changeDetectorRef: ChangeDetectorRef,
@@ -77,8 +77,8 @@ export class MessageBoxContainerComponent
         const { toState } = event;
 
         if (toState === 'hidden') {
-            this._messageBoxRef._endClose$.next();
-            this._messageBoxRef._endClose$.complete();
+            this.ref._endClose$.next();
+            this.ref._endClose$.complete();
         }
     }
 
@@ -114,7 +114,7 @@ export class MessageBoxContainerComponent
 
     /** @hidden Returns context for embedded template*/
     private _templateContext(): { $implicit: MessageBoxRef; messageBoxConfig: MessageBoxConfig } {
-        return { $implicit: this._messageBoxRef, messageBoxConfig: this.messageBoxConfig };
+        return { $implicit: this.ref, messageBoxConfig: this.messageBoxConfig };
     }
 
     /** @hidden Load Dialog component from passed object */
@@ -133,7 +133,7 @@ export class MessageBoxContainerComponent
             this._animationState = 'hidden';
             this._cdr.detectChanges();
         };
-        this._messageBoxRef.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+        this.ref.afterClosed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
             next: () => callback(),
             error: () => callback()
         });
