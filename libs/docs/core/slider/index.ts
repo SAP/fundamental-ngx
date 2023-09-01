@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import {
     ApiComponent,
     ApiDocsService,
@@ -6,7 +7,6 @@ import {
     currentComponentProvider,
     getI18nKey
 } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {

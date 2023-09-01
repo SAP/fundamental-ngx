@@ -127,4 +127,4 @@ export const API_FILES = {
         'SettingsGeneratorSidebarIconComponent',
         'ThemeSelectorListComponent'
     ]
-};
+} as const;

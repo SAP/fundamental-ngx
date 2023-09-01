@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedToolbarSizeDirective } from '@fundamental-ngx/core/toolbar';
+import { API_FILES } from '@fundamental-ngx/docs/core/shared';
 import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {

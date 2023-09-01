@@ -26,6 +26,7 @@ export * from './lib/core-helpers/stackblitz/stackblitz.service';
 export * from './lib/core-helpers/toolbar/toolbar.component';
 export * from './lib/documentation-base.component';
 export * from './lib/getAsset';
+export * from './lib/router-utils';
 export * from './lib/services/api-docs.service';
 export * from './lib/services/copy.service';
 export * from './lib/services/docs.service';
