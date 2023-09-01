@@ -28,6 +28,7 @@ import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-fo
 import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
 import { platformContentDensityModuleDeprecationsProvider } from '@fundamental-ngx/platform/shared';
+import { MultiComboboxRemoteDatasourceExampleComponent } from './examples/multi-combobox-remote-datasource/multi-combobox-remote-datasource-example.component';
 
 const routes: Routes = [
     {
@@ -65,7 +66,8 @@ const routes: Routes = [
         MultiComboboxColumnsExampleComponent,
         MultiComboboxFormsExampleComponent,
         MultiComboboxStatesExampleComponent,
-        MultiComboboxLoadingExampleComponent
+        MultiComboboxLoadingExampleComponent,
+        MultiComboboxRemoteDatasourceExampleComponent
     ]
 })
 export class PlatformMultiComboboxDocsModule {}

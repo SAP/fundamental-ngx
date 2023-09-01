@@ -1,3 +1,4 @@
+import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -18,7 +19,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
@@ -219,11 +219,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._suggestions.find((s) => s.value === token.value);
-        if (optionItem) {
-            this.toggleSelection(optionItem);
-            this._rangeSelector.reset();
-        }
+        this.toggleSelection(token);
+        this._rangeSelector.reset();
     }
 
     /** @hidden */
