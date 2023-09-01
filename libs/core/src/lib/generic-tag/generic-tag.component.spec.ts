@@ -5,7 +5,9 @@ import { GenericTagComponent } from './generic-tag.component';
 
 @Component({
     selector: 'fd-test-generic-tag',
-    template: ` <div fd-generic-tag [type]="type" [name]="name" [value]="value"></div> `
+    template: ` <div fd-generic-tag [type]="type" [name]="name" [value]="value"></div> `,
+    standalone: true,
+    imports: [GenericTagComponent]
 })
 class TestGenericTagComponent {
     @ViewChild(GenericTagComponent, { static: true, read: ElementRef })
@@ -23,7 +25,7 @@ describe('GenericTagComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [GenericTagComponent, TestGenericTagComponent],
+            imports: [TestGenericTagComponent],
             schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents();
     }));
