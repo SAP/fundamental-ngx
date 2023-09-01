@@ -17,13 +17,11 @@ import { SeparatorComponent } from './core-helpers/seperator/seperator.component
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { SchemaModule } from '@fundamental-ngx/docs/schema';
 import { DatetimeImportantComponent } from './common-components/datetime-important/datetime-important.component';
-import { ApiComponent } from './core-helpers/api/api.component';
 import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.component';
 import { DeprecatedAlertsComponent } from './core-helpers/deprecated-alerts/deprecated-alerts.component';
 import { DocPageComponent } from './core-helpers/doc-page/doc-page.component';
 import { DocsSectionTitleComponent } from './core-helpers/docs-section-title/docs-section-title.component';
 import { HeaderTabsComponent } from './core-helpers/header-tabs/header-tabs.component';
-import { I18nDocsModule } from './core-helpers/i18n-docs/i18n-docs.module';
 import { ApiDocsService } from './services/api-docs.service';
 import { CopyService } from './services/copy.service';
 import { sharedCoreModules } from './shared-core-modules';
@@ -36,10 +34,8 @@ import { sharedCoreModules } from './shared-core-modules';
         RouterModule,
         SchemaModule,
         sharedCoreModules,
-        I18nDocsModule,
         MarkdownModule.forChild(),
         BusyIndicatorModule,
-        ApiComponent,
         ImportComponent,
         HeaderComponent,
         SeparatorComponent,
@@ -62,7 +58,6 @@ import { sharedCoreModules } from './shared-core-modules';
         ReactiveFormsModule,
         SchemaModule,
         CommonModule,
-        ApiComponent,
         ImportComponent,
         HeaderComponent,
         SeparatorComponent,
@@ -78,8 +73,7 @@ import { sharedCoreModules } from './shared-core-modules';
         sharedCoreModules,
         DatetimeImportantComponent,
         DeprecatedAlertsComponent,
-        DocPageComponent,
-        I18nDocsModule
+        DocPageComponent
     ]
 })
 export class SharedDocumentationPageModule {}

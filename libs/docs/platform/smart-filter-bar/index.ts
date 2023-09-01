@@ -1,12 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import {
-    ApiComponent,
-    ApiDocsService,
-    I18nDocsComponent,
-    currentComponentProvider,
-    getI18nKey
-} from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -15,7 +7,6 @@ export const ROUTES: Routes = [
             import('./platform-smart-filter-bar-header/platform-smart-filter-bar-header.component').then(
                 (c) => c.PlatformSmartFilterBarHeaderComponent
             ),
-        providers: [currentComponentProvider('smart-filter-bar'), ApiDocsService],
         children: [
             {
                 path: '',
@@ -23,9 +14,13 @@ export const ROUTES: Routes = [
                     import('./platform-smart-filter-bar-docs.component').then(
                         (c) => c.PlatformSmartFilterBarDocsComponent
                     )
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.smartFilterBar } },
-            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformSmartFilterBar') }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'smart-filter-bar';
+export const API_FILE_KEY = 'smartFilterBar';
+export const I18N_KEY = 'platformSmartFilterBar';

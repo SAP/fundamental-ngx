@@ -9,11 +9,6 @@ import { Observable, OperatorFunction, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { I18nDocsLoaderService } from './i18n-docs-loader.service';
 
-/** utility function to provide type safe FdLanguage key as route data, wrapped in an object needed for I18nDocsComponent */
-export function getI18nKey(i18nKey: keyof FdLanguage): I18nRouteData {
-    return { i18nKey };
-}
-
 @Component({
     selector: 'fd-i18n-docs',
     templateUrl: './i18n-docs.component.html',

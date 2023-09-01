@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./variant-management-header/variant-management-header.component').then(
                 (c) => c.VariantManagementHeaderComponent
             ),
-        providers: [currentComponentProvider('variant-management'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./variant-management-docs.component').then((c) => c.VariantManagementDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.variantManagement } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'variant-management';
+export const API_FILE_KEY = 'variantManagement';

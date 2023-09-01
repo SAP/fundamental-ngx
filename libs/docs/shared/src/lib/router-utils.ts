@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
 import { FdLanguage } from '@fundamental-ngx/i18n';
-import { ApiComponent } from './core-helpers/api/api.component';
-import { getI18nKey, I18nDocsComponent } from './core-helpers/i18n-docs/i18n-docs.component';
 import { ApiDocsService } from './services/api-docs.service';
 import { currentComponentProvider } from './tokens/current-component.token';
+import { hasI18nProvider } from './tokens/has-i18n.token';
 
-export function configureRoutes<ApiFiles extends Record<string, string[]> = Record<string, string[]>>(
+export function configureRoutes<ApiFiles = Record<string, string[]>>(
     apiFiles: ApiFiles
 ): (routesImport: {
     ROUTES: Routes;
@@ -16,18 +15,27 @@ export function configureRoutes<ApiFiles extends Record<string, string[]> = Reco
     return ({ ROUTES: routes, LIBRARY_NAME: libraryName, API_FILE_KEY: apiFilesKey, I18N_KEY: i18nKey }) => {
         const primaryRoute = routes.find((route) => route.data && route.data.primary);
         if (primaryRoute) {
-            primaryRoute.providers = [...(primaryRoute.providers || []), currentComponentProvider(libraryName)];
+            primaryRoute.providers = primaryRoute.providers || [];
+            primaryRoute.providers.push(currentComponentProvider(libraryName));
+            if (i18nKey) {
+                primaryRoute.providers.push(hasI18nProvider(true));
+            }
             primaryRoute.children = primaryRoute.children || [];
             if (apiFilesKey) {
                 primaryRoute.children.push({
                     path: 'api',
-                    component: ApiComponent,
+                    loadComponent: () => import('./core-helpers/api/api.component').then((m) => m.ApiComponent),
                     data: { content: apiFiles[apiFilesKey] },
                     providers: [ApiDocsService]
                 });
             }
             if (i18nKey) {
-                primaryRoute.children.push({ path: 'i18n', data: getI18nKey(i18nKey), component: I18nDocsComponent });
+                primaryRoute.children.push({
+                    path: 'i18n',
+                    data: { i18nKey },
+                    loadComponent: () =>
+                        import('./core-helpers/i18n-docs/i18n-docs.component').then((m) => m.I18nDocsComponent)
+                });
             }
         }
         return routes;

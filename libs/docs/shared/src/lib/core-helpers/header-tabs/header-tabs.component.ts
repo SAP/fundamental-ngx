@@ -1,8 +1,9 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ExampleChildService } from '../../services/example-child.service';
+import { HAS_I18N } from '../../tokens/has-i18n.token';
 import { SeparatorComponent } from '../seperator/seperator.component';
 
 @Component({
@@ -14,7 +15,7 @@ import { SeparatorComponent } from '../seperator/seperator.component';
     imports: [TabsModule, RouterLinkActive, RouterLink, NgIf, SeparatorComponent, AsyncPipe]
 })
 export class HeaderTabsComponent {
-    @Input() hasI18n = false;
+    hasI18n = inject(HAS_I18N);
 
     observedLink = inject(ExampleChildService, {
         optional: true

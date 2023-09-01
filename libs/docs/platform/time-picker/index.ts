@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./platform-time-picker-header/platform-time-picker-header.component').then(
                 (c) => c.PlatformTimePickerHeaderComponent
             ),
-        providers: [currentComponentProvider('time-picker'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-time-picker-docs.component').then((c) => c.PlatformTimePickerDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.timePicker } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'time-picker';
+export const API_FILE_KEY = 'timePicker';

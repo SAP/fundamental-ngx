@@ -1,12 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import {
-    ApiComponent,
-    ApiDocsService,
-    I18nDocsComponent,
-    currentComponentProvider,
-    getI18nKey
-} from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -15,15 +7,18 @@ export const ROUTES: Routes = [
             import('./platform-combobox-header/platform-combobox-header.component').then(
                 (c) => c.PlatformComboboxHeaderComponent
             ),
-        providers: [currentComponentProvider('combobox'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-combobox-docs.component').then((c) => c.PlatformComboboxDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } },
-            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformCombobox') }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'combobox';
+export const API_FILE_KEY = 'combobox';
+export const I18N_KEY = 'platformCombobox';

@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./platform-file-uploader-header/platform-file-uploader-header.component').then(
                 (c) => c.PlatformFileUploaderHeaderComponent
             ),
-        providers: [currentComponentProvider('file-uploader'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-file-uploader-docs.component').then((c) => c.PlatformFileUploaderDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.fileUploader } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'file-uploader';
+export const API_FILE_KEY = 'fileUploader';

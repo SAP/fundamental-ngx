@@ -5,7 +5,7 @@ const t = require('@babel/types');
 const { sync: globSync } = require('fast-glob');
 const { readFileSync, writeFileSync } = require('fs');
 
-const files = globSync('libs/docs/core/*/index.ts', {
+const files = globSync('libs/docs/platform/*/index.ts', {
     // ignore: ['libs/docs/cdk/forms/index.ts', 'libs/docs/cdk/data-source/index.ts', 'libs/docs/cdk/drag-n-drop/index.ts']
 });
 
