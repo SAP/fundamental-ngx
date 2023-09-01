@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
+import { FdLanguage } from '@fundamental-ngx/i18n';
 import { ApiComponent } from './core-helpers/api/api.component';
+import { getI18nKey, I18nDocsComponent } from './core-helpers/i18n-docs/i18n-docs.component';
 import { ApiDocsService } from './services/api-docs.service';
 import { currentComponentProvider } from './tokens/current-component.token';
 
 interface RouterConfiguration<ApiFiles extends Record<string, string[]> = Record<string, string[]>> {
     apiFiles: ApiFiles;
     apiFilesKey: keyof ApiFiles;
+    i18nKey?: keyof FdLanguage;
 }
 
 export function configureRoutes(
@@ -22,7 +25,12 @@ export function configureRoutes(
                     component: ApiComponent,
                     data: { content: configuration.apiFiles[configuration.apiFilesKey] },
                     providers: [ApiDocsService]
-                }
+                },
+                ...(configuration.i18nKey
+                    ? ([
+                          { path: 'i18n', data: getI18nKey(configuration.i18nKey), component: I18nDocsComponent }
+                      ] as Routes)
+                    : [])
             ];
         }
         return routes;

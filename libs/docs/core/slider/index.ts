@@ -1,25 +1,20 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import {
-    ApiComponent,
-    ApiDocsService,
-    I18nDocsComponent,
-    currentComponentProvider,
-    getI18nKey
-} from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('./slider-header/slider-header.component').then((c) => c.SliderHeaderComponent),
-        providers: [currentComponentProvider('slider'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () => import('./slider-docs.component').then((c) => c.SliderDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.slider } },
-            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('coreSlider') }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'slider';
+export const API_FILE_KEY = 'slider';
+export const I18N_KEY = 'coreSlider';

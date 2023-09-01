@@ -1,19 +1,20 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () =>
             import('./feed-input-header/feed-input-header.component').then((c) => c.FeedInputHeaderComponent),
-        providers: [currentComponentProvider('feed-input'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () => import('./feed-input-docs.component').then((c) => c.FeedInputDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.feedInput } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'feed-input';
+export const API_FILE_KEY = 'feedInput';

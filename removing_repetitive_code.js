@@ -5,8 +5,8 @@ const t = require('@babel/types');
 const { sync: globSync } = require('fast-glob');
 const { readFileSync, writeFileSync } = require('fs');
 
-const files = globSync('libs/docs/cdk/*/index.ts', {
-    ignore: ['libs/docs/cdk/forms/index.ts', 'libs/docs/cdk/data-source/index.ts', 'libs/docs/cdk/drag-n-drop/index.ts']
+const files = globSync('libs/docs/core/*/index.ts', {
+    // ignore: ['libs/docs/cdk/forms/index.ts', 'libs/docs/cdk/data-source/index.ts', 'libs/docs/cdk/drag-n-drop/index.ts']
 });
 
 for (const filePath of files) {
@@ -34,7 +34,18 @@ for (const filePath of files) {
                 return property.key.name === 'providers';
             });
             if (indexOfProviders !== -1) {
-                objExpressionPath.node.properties.splice(indexOfProviders, 1);
+                const providersProperty = properties[indexOfProviders];
+                const providers = providersProperty.value.elements.filter((arrElm) => {
+                    if (t.isCallExpression(arrElm) && arrElm.callee.name === 'currentComponentProvider') {
+                        return false;
+                    }
+                    return !(t.isIdentifier(arrElm) && arrElm.name === 'ApiDocsService');
+                });
+                if (providers.length === 0) {
+                    objExpressionPath.node.properties.splice(indexOfProviders, 1);
+                } else {
+                    providersProperty.value.elements = providers;
+                }
             }
             objExpressionPath.node.properties.push(
                 t.objectProperty(
@@ -51,28 +62,52 @@ for (const filePath of files) {
             const pathProperty = properties.find((property) => {
                 return property.key.name === 'path';
             });
-            let apiFileKey;
-            if (pathProperty && pathProperty.value.value === 'api') {
-                objExpressionPath.traverse({
-                    MemberExpression: (memberExpressionPath) => {
-                        if (memberExpressionPath.node.object.name === 'API_FILES') {
-                            apiFileKey = memberExpressionPath.node.property.name.toString();
+            if (pathProperty) {
+                if (pathProperty.value.value === 'api') {
+                    let apiFileKey;
+                    objExpressionPath.traverse({
+                        MemberExpression: (memberExpressionPath) => {
+                            if (memberExpressionPath.node.object.name === 'API_FILES') {
+                                apiFileKey = memberExpressionPath.node.property.name.toString();
+                            }
                         }
-                    }
-                });
-                objExpressionPath.parent.elements.splice(
-                    objExpressionPath.parent.elements.indexOf(objExpressionPath.node),
-                    1
-                );
-                if (!apiFileKey) {
-                    console.log(filePath);
-                    ast.program.body.push(
-                        t.exportNamedDeclaration(
-                            t.variableDeclaration('const', [
-                                t.variableDeclarator(t.identifier('API_FILE_KEY'), t.stringLiteral(apiFileKey))
-                            ])
-                        )
+                    });
+                    objExpressionPath.parent.elements.splice(
+                        objExpressionPath.parent.elements.indexOf(objExpressionPath.node),
+                        1
                     );
+                    if (apiFileKey) {
+                        ast.program.body.push(
+                            t.exportNamedDeclaration(
+                                t.variableDeclaration('const', [
+                                    t.variableDeclarator(t.identifier('API_FILE_KEY'), t.stringLiteral(apiFileKey))
+                                ])
+                            )
+                        );
+                    }
+                }
+                if (pathProperty.value.value === 'i18n') {
+                    let i18nKey;
+                    objExpressionPath.traverse({
+                        CallExpression: (callExpression) => {
+                            if (callExpression.node.callee.name === 'getI18nKey') {
+                                i18nKey = callExpression.node.arguments[0].value;
+                            }
+                        }
+                    });
+                    objExpressionPath.parent.elements.splice(
+                        objExpressionPath.parent.elements.indexOf(objExpressionPath.node),
+                        1
+                    );
+                    if (i18nKey) {
+                        ast.program.body.push(
+                            t.exportNamedDeclaration(
+                                t.variableDeclaration('const', [
+                                    t.variableDeclarator(t.identifier('I18N_KEY'), t.stringLiteral(i18nKey))
+                                ])
+                            )
+                        );
+                    }
                 }
             }
         }

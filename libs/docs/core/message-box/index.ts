@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,13 +7,16 @@ export const ROUTES: Routes = [
             import('./message-box-docs-header/message-box-docs-header.component').then(
                 (c) => c.MessageBoxDocsHeaderComponent
             ),
-        providers: [currentComponentProvider('message-box'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () => import('./message-box-docs.component').then((c) => c.MessageBoxDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.messageBox } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'message-box';
+export const API_FILE_KEY = 'messageBox';
