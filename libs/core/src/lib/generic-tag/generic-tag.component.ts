@@ -1,15 +1,15 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
     Input,
     OnChanges,
-    ViewEncapsulation,
     OnInit,
+    ViewEncapsulation,
     inject
 } from '@angular/core';
-import { NgClass, NgIf } from '@angular/common';
-import { applyCssClass, CssClassBuilder, NullableObject, Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FD_GENERIC_TAG_COMPONENT } from './tokens';
 
 export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
@@ -72,16 +72,6 @@ export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     readonly elementRef = inject(ElementRef);
 
-    /** @hidden */
-    ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -90,6 +80,16 @@ export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     @applyCssClass
     buildComponentCssClass(): string[] {
         return buildObjectStatusCssClasses(this);
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 }
 
