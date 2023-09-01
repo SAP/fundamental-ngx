@@ -1750,6 +1750,7 @@ export class TableComponent<T = any>
                     tap(() => {
                         this._setSelectionColumnWidth();
                     }),
+                    filter(() => Array.from(ROW_HEIGHT.values()).includes(this.rowHeight)),
                     filter(() => !this._rowHeightManuallySet)
                 )
                 .subscribe((contentDensity) => {
