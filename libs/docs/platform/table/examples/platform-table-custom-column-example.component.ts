@@ -6,7 +6,7 @@ import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -65,7 +65,8 @@ import {
         PlatformInputModule,
         FormsModule,
         ObjectStatusModule,
-        AsyncPipe
+        AsyncPipe,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableCustomColumnExampleComponent {

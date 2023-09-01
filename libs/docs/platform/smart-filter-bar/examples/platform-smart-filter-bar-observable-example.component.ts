@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
@@ -41,7 +41,8 @@ import { map, take } from 'rxjs/operators';
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
-        TableInitialStateDirective
+        TableInitialStateDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformSmartFilterBarObservableExampleComponent {

@@ -37,13 +37,13 @@ export class DisabledDocsComponent {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
             fileName: 'disabled-default-example',
-            component: 'fdkDisabledDefaultExample'
+            component: 'DisabledDefaultExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-default-example',
-            component: 'fdkDisabledDefaultExample'
+            component: 'DisabledDefaultExampleComponent'
         }
     ];
     diExample: ExampleFile[] = [
@@ -51,19 +51,19 @@ export class DisabledDocsComponent {
             code: getAssetFromModuleAssets(diExampleHtml),
             language: 'html',
             fileName: 'disabled-di-example',
-            component: 'fdkDisabledDIExample'
+            component: 'DisabledDIExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(diExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-di-example',
-            component: 'fdkDisabledDIExample'
+            component: 'DisabledDIExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(diRecipientExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-recipient.directive',
-            component: 'fdkDisabledRecipientDirective'
+            component: 'DisabledRecipientDirective'
         }
     ];
 

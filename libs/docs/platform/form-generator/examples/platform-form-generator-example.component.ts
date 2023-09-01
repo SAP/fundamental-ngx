@@ -14,7 +14,7 @@ import {
     DynamicFormItem,
     DynamicFormValue,
     FormGeneratorComponent,
-    FormGeneratorComponent as FormGeneratorComponent_1
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
@@ -40,7 +40,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         }
     ],
     standalone: true,
-    imports: [FormGeneratorComponent_1, NgIf, PlatformButtonModule, JsonPipe]
+    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

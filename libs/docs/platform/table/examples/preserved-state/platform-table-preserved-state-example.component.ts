@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { destroyObservable } from '@fundamental-ngx/cdk';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -59,7 +59,8 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        TableDraggableDirective
+        TableDraggableDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformTablePreservedStateExampleComponent {

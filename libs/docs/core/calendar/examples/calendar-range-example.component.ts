@@ -7,7 +7,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 @Component({
@@ -35,7 +36,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [CalendarComponent, FormsModule, DatePipe]
+    imports: [CalendarComponent, FormsModule, DatePipe, FdDatetimeModule]
 })
 export class CalendarRangeExampleComponent {
     selected: DateRange<FdDate> = new DateRange(new FdDate(2019, 10, 11), new FdDate(2019, 10, 19));

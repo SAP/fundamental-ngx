@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { Observable, of } from 'rxjs';
 
 import { FormsModule } from '@angular/forms';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
     CollectionBooleanFilter,
@@ -47,7 +47,8 @@ import {
         FdpViewSettingsFilterCustomDef,
         FdpFormGroupModule,
         PlatformInputModule,
-        FormsModule
+        FormsModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableFilterableExampleComponent {

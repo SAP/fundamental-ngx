@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
@@ -54,7 +54,8 @@ import { of } from 'rxjs';
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
-        TableInitialStateDirective
+        TableInitialStateDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformSmartFilterBarCustomLabelsExampleComponent {

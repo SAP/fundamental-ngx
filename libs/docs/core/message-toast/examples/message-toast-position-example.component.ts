@@ -11,7 +11,7 @@ import {
     ToastTopRightPosition
 } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-message-toast-position-example',
@@ -25,7 +25,7 @@ import { MessageToastService } from '@fundamental-ngx/core/message-toast';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonModule, MessageToastModule]
 })
 export class MessageToastPositionExampleComponent {
     @ViewChild('boundedButton', { read: ElementRef })

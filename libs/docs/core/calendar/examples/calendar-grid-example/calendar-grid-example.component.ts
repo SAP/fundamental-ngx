@@ -4,7 +4,8 @@ import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 @Component({
@@ -22,7 +23,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [CalendarComponent]
+    imports: [CalendarComponent, FdDatetimeModule]
 })
 export class CalendarGridExampleComponent {
     yearGrid: CalendarYearGrid = {

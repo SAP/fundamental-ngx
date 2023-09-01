@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
     TableDataSourceDirective,
@@ -23,7 +23,8 @@ import {
         PlatformTableModule,
         TableInitialStateDirective,
         TableDraggableDirective,
-        TableVirtualScrollDirective
+        TableVirtualScrollDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableVirtualScrollExampleComponent implements OnInit {

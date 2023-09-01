@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -27,6 +28,7 @@ const approvalFlowStatusSrc = 'platform-approval-flow-custom-status-example.comp
         CodeExampleComponent,
         SeparatorComponent,
         DescriptionComponent,
+        MessageToastModule,
         PlatformApprovalFlowCustomStatusExampleComponent
     ]
 })
@@ -36,14 +38,14 @@ export class PlatformApprovalFlowDocsComponent {
             language: 'html',
             code: getAssetFromModuleAssets(approvalFlowSrc),
             fileName: 'platform-approval-flow-example',
-            name: 'approval-flow-example.component.html'
+            name: 'approval-flow-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(approvalFlowTsSrc),
             fileName: 'platform-approval-flow-example',
             component: 'PlatformApprovalFlowExampleComponent',
-            name: 'approval-flow-example.component.ts'
+            name: 'approval-flow-example'
         }
     ];
 
@@ -51,15 +53,15 @@ export class PlatformApprovalFlowDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(approvalFlowStatusSrc),
-            fileName: 'platform-approval-flow-custom-status-example.component',
-            name: 'platform-approval-flow-custom-status-example.component.html'
+            fileName: 'platform-approval-flow-custom-status-example',
+            name: 'platform-approval-flow-custom-status-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(approvalFlowStatusTsSrc),
             fileName: 'platform-approval-flow-custom-status-example',
             component: 'PlatformApprovalFlowCustomStatusExampleComponent',
-            name: 'platform-approval-flow-custom-status-example.component.ts'
+            name: 'platform-approval-flow-custom-status-example'
         }
     ];
 }

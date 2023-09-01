@@ -6,7 +6,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
@@ -72,7 +73,7 @@ import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
         }
     ],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormItemModule, FormLabelModule, DatePickerComponent]
+    imports: [FormsModule, ReactiveFormsModule, FormItemModule, FormLabelModule, DatePickerComponent, FdDatetimeModule]
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({

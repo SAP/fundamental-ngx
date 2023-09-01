@@ -50,10 +50,10 @@ export class VariantManagementDocsComponent {
 
     variantManagementDynamicPageExample: ExampleFile[] = [
         getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.html', {
-            fileName: 'variant-management-dynamic-page-example.component'
+            fileName: 'variant-management-dynamic-page-example'
         }),
         getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.ts', {
-            fileName: 'variant-management-dynamic-page-example.component',
+            fileName: 'variant-management-dynamic-page-example',
             component: 'VariantManagementDynamicPageExampleComponent'
         })
     ];

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import {
@@ -30,7 +31,8 @@ import { Observable } from 'rxjs';
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,
-        TableInitialStateDirective
+        TableInitialStateDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformSmartFilterBarLoadingExampleComponent {

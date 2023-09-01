@@ -33,34 +33,34 @@ export class ClickedDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'fd-clicked-basic-example',
-            component: 'FdClickedBasicExample'
+            fileName: 'clicked-basic-example',
+            component: 'ClickedBasicExample'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
-            fileName: 'fd-clicked-basic-example',
-            component: 'FdClickedBasicExample'
+            language: 'typescript',
+            fileName: 'clicked-basic-example',
+            component: 'ClickedBasicExample'
         }
     ];
     providerExample = [
         {
             code: getAssetFromModuleAssets(providerExampleHtml),
             language: 'html',
-            fileName: 'fd-clicked-provider-example',
-            component: 'FdClickedProviderExample'
+            fileName: 'clicked-provider-example',
+            component: 'ClickedProviderExample'
         },
         {
             code: getAssetFromModuleAssets(providerExampleTs),
-            language: 'ts',
-            fileName: 'fd-clicked-provider-example',
-            component: 'FdClickedProviderExample'
+            language: 'typescript',
+            fileName: 'clicked-provider-example',
+            component: 'ClickedProviderExample'
         },
         {
             code: getAssetFromModuleAssets(providerExampleDirectiveTs),
-            language: 'ts',
-            fileName: 'fd-clicked-provider-directive-example',
-            component: 'FdClickedProviderDirectiveExample'
+            language: 'typescript',
+            fileName: 'clicked-provider-directive-example',
+            component: 'ClickedProviderDirectiveExample'
         }
     ];
 }

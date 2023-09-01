@@ -8,7 +8,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 @Component({
@@ -37,7 +38,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [CalendarComponent, FormsModule, ButtonModule, DatePipe]
+    imports: [CalendarComponent, FormsModule, ButtonModule, DatePipe, FdDatetimeModule]
 })
 export class CalendarProgrammaticallyChangeExampleComponent {
     date: FdDate = this.datetimeAdapter.today();

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-form-generator-loading-example',
     templateUrl: './platform-form-generator-loading-example.component.html',
     standalone: true,
-    imports: [FormGeneratorComponent]
+    imports: [PlatformFormGeneratorModule]
 })
 export class PlatformFormGeneratorLoadingExampleComponent {}

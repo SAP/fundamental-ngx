@@ -7,7 +7,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import {
     DeprecatedToolbarSizeDirective,
     ToolbarComponent,
@@ -48,7 +48,8 @@ import {
         ToolbarItemDirective,
         ToolbarSeparatorComponent,
         CdkScrollable,
-        BarModule
+        BarModule,
+        MessageToastModule
     ]
 })
 export class DynamicPageResponsiveExampleComponent {

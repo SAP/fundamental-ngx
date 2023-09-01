@@ -7,7 +7,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 const DATE = new FdDate(2022, 1, 10);
@@ -26,7 +27,7 @@ const DATE = new FdDate(2022, 1, 10);
         }
     ],
     standalone: true,
-    imports: [NgIf, FormsModule, ReactiveFormsModule, DatePickerComponent]
+    imports: [NgIf, FormsModule, ReactiveFormsModule, DatePickerComponent, FdDatetimeModule]
 })
 export class DatePickerRangeDisabledExampleComponent {
     customForm = new FormGroup({

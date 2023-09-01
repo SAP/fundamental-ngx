@@ -40,21 +40,21 @@ export class BreakpointDocsComponent {
         {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
-            fileName: 'basic-example.component',
-            component: 'FdkBreakpointBasicExample'
+            fileName: 'basic-example',
+            component: 'BasicExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
-            fileName: 'basic-example.component',
-            component: 'FdkBreakpointBasicExample'
+            language: 'typescript',
+            fileName: 'basic-example',
+            component: 'BasicExampleComponent'
         }
     ];
     aliasExample = [
         {
             code: getAssetFromModuleAssets(aliasNamesExampleTs),
-            language: 'ts',
-            fileName: 'alias-names-example.component',
+            language: 'typescript',
+            fileName: 'alias-names-example',
             component: 'AliasNamesExampleComponent'
         }
     ];
@@ -62,8 +62,8 @@ export class BreakpointDocsComponent {
     differentSourceExample = [
         {
             code: getAssetFromModuleAssets(differentSourceExampleTs),
-            language: 'ts',
-            fileName: 'different-observe-target-example.component',
+            language: 'typescript',
+            fileName: 'different-observe-target-example',
             component: 'DifferentObserveTargetExampleComponent'
         }
     ];

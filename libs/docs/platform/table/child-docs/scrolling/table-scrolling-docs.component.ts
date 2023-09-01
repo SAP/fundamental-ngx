@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -30,7 +31,8 @@ const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-vi
         PlatformTablePageScrollingExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        PlatformTableVirtualScrollExampleComponent
+        PlatformTableVirtualScrollExampleComponent,
+        FdDatetimeModule
     ]
 })
 export class TableScrollingDocsComponent {

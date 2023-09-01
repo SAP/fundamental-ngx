@@ -87,7 +87,7 @@ export class CardDocsComponent {
             fileName: 'card-example'
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: getAssetFromModuleAssets(cardExampleTs),
             fileName: 'card-example'
         },

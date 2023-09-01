@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
@@ -51,7 +51,8 @@ import { Observable, of } from 'rxjs';
         FdpCellDef,
         FdpTableCell,
         NgIf,
-        ObjectStatusModule
+        ObjectStatusModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableResponsiveColumnsExampleComponent implements AfterViewInit {

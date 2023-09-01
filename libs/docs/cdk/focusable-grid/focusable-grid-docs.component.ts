@@ -40,7 +40,7 @@ export class FocusableGridDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'focusable-grid-default-example',
             component: 'DefaultExampleComponent'
         }
@@ -55,7 +55,7 @@ export class FocusableGridDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(shortRowsExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'short-rows-example',
             component: 'ShortRowsExampleComponent'
         }

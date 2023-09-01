@@ -7,7 +7,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 @Component({
@@ -42,7 +43,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [NgIf, FormsModule, ReactiveFormsModule, DatePickerComponent]
+    imports: [NgIf, FormsModule, ReactiveFormsModule, DatePickerComponent, FdDatetimeModule]
 })
 export class DatePickerFormRangeExampleComponent {
     customForm = new FormGroup({

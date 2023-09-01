@@ -9,6 +9,8 @@ import {
     SeparatorComponent,
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
+import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
+import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
 import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config/message-popover-custom-config-example.component';
 import { MessagePopoverDefaultExampleComponent } from './examples/default/message-popover-default-example.component';
 import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
@@ -24,8 +26,10 @@ import { FormGeneratorComponentExample } from './examples/form-generator/form-ge
         ComponentExampleComponent,
         MessagePopoverDefaultExampleComponent,
         CodeExampleComponent,
+        PlatformFormGeneratorModule,
         SeparatorComponent,
         RouterLink,
+        PlatformMessagePopoverModule,
         FormContainerExampleComponent,
         MessagePopoverCustomConfigExampleComponent,
         FormGeneratorComponentExample

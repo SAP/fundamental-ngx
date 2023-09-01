@@ -19,7 +19,7 @@ export class ImportComponent implements OnInit {
     get file(): ExampleFile {
         return {
             code: `import { ${this.module} } from '${this.library}';`,
-            language: 'ts'
+            language: 'typescript'
         };
     }
 

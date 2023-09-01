@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DatetimeAdapter, FdDatetimeAdapterModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 import moment, { Moment } from 'moment';
@@ -34,7 +34,7 @@ import moment, { Moment } from 'moment';
         }
     ],
     standalone: true,
-    imports: [DatetimePickerComponent, FormsModule]
+    imports: [DatetimePickerComponent, FormsModule, FdDatetimeAdapterModule]
 })
 export class MomentDatetimeFormatsExampleComponent {
     date: Moment = moment();

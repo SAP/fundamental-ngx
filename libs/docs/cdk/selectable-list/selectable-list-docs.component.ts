@@ -41,7 +41,7 @@ export class SelectableListDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'selectable-list-default-example',
             component: 'SelectableListDefaultExample'
         }
@@ -56,13 +56,13 @@ export class SelectableListDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(advancedExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'selectable-list-advanced-example',
             component: 'SelectableListAdvancedExample'
         },
         {
             code: getAssetFromModuleAssets(advancedExampleCustomDirTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'selectable-list-advanced-example-custom-item',
             component: 'SelectableListAdvancedExampleCustomItem'
         }

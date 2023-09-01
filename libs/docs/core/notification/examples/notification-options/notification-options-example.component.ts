@@ -3,7 +3,7 @@ import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/a
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { NotificationModule } from '@fundamental-ngx/core/notification';
 
 @Component({
@@ -11,7 +11,14 @@ import { NotificationModule } from '@fundamental-ngx/core/notification';
     templateUrl: './notification-options-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NotificationModule, AvatarModule, ButtonModule, MessageStripComponent, ActionSheetModule]
+    imports: [
+        NotificationModule,
+        AvatarModule,
+        ButtonModule,
+        MessageStripComponent,
+        ActionSheetModule,
+        MessageToastModule
+    ]
 })
 export class NotificationOptionsExampleComponent {
     @ViewChild(ActionSheetComponent)

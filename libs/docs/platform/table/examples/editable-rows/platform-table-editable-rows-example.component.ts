@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
@@ -56,7 +56,8 @@ import {
         PlatformInputModule,
         SelectModule,
         NgFor,
-        FdpCellDef
+        FdpCellDef,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableEditableRowsExampleComponent {

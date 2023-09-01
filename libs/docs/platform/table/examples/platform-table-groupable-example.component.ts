@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     PlatformTableModule,
     TableDataProvider,
@@ -30,7 +30,8 @@ import {
         PlatformTableModule,
         TableInitialStateDirective,
         FdpCellDef,
-        FdpTableCell
+        FdpTableCell,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableGroupableExampleComponent {

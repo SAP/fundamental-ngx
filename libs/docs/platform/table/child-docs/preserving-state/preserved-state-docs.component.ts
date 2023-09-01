@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -27,7 +28,8 @@ const platformTableActivableRowTsSrc = 'preserved-state/platform-table-preserved
         ComponentExampleComponent,
         PlatformTablePreservedStateExampleComponent,
         CodeExampleComponent,
-        SeparatorComponent
+        SeparatorComponent,
+        FdDatetimeModule
     ]
 })
 export class PreservedStateDocsComponent {
@@ -38,15 +40,15 @@ export class PreservedStateDocsComponent {
         {
             language: 'html',
             code: getAssetFromModuleAssets(platformTableActivableRowSrc),
-            fileName: 'platform-table-preserved-state-example.component',
-            name: 'platform-table-preserved-state-example.component.html'
+            fileName: 'platform-table-preserved-state-example',
+            name: 'platform-table-preserved-state-example'
         },
         {
             language: 'typescript',
             code: getAssetFromModuleAssets(platformTableActivableRowTsSrc),
             fileName: 'platform-table-preserved-state-example',
             component: 'PlatformTablePreservedStateExampleComponent',
-            name: 'platform-table-preserved-state-example.component.ts'
+            name: 'platform-table-preserved-state-example'
         }
     ];
 

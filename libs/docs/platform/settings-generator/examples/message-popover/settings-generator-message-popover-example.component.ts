@@ -12,7 +12,11 @@ import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    MessagePopoverComponent,
+    MessagePopoverFormWrapperComponent,
+    PlatformMessagePopoverModule
+} from '@fundamental-ngx/platform/message-popover';
 import {
     SettingsGeneratorComponent,
     SettingsGeneratorModule,
@@ -83,7 +87,8 @@ class ExampleUserService {
         MessagePopoverFormWrapperComponent,
         SettingsGeneratorModule,
         BarModule,
-        MessagePopoverComponent
+        MessagePopoverComponent,
+        PlatformMessagePopoverModule
     ]
 })
 export class SettingsGeneratorMessagePopoverExampleComponent implements AfterViewInit {

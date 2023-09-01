@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
@@ -21,7 +21,8 @@ import { Observable, of } from 'rxjs';
         TableHeaderResizerDirective,
         PlatformTableModule,
         TableInitialStateDirective,
-        PlatformButtonModule
+        PlatformButtonModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableWrapExampleComponent {

@@ -7,7 +7,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -39,7 +40,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
         }
     ],
     standalone: true,
-    imports: [CalendarComponent, FormsModule, FormLabelModule, SelectModule, NgFor]
+    imports: [CalendarComponent, FormsModule, FormLabelModule, SelectModule, NgFor, FdDatetimeModule]
 })
 export class CalendarMondayStartExampleComponent {
     date: FdDate = new FdDate(2020, 10, 25);

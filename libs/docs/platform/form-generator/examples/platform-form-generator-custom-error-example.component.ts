@@ -6,15 +6,15 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     FormGeneratorComponent,
-    FormGeneratorComponent as FormGeneratorComponent_1,
-    FormGeneratorService
+    FormGeneratorService,
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-form-generator-custom-error-example',
     templateUrl: './platform-form-generator-custom-error-example.component.html',
     standalone: true,
-    imports: [FormGeneratorComponent_1, NgIf, PlatformButtonModule]
+    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule]
 })
 export class PlatformFormGeneratorCustomErrorExampleComponent {
     formCreated = false;

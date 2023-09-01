@@ -10,6 +10,7 @@ import {
     FD_DATETIME_FORMATS,
     FdDate,
     FdDatetimeAdapter,
+    FdDatetimeModule,
     FdDatetimePipesModule
 } from '@fundamental-ngx/core/datetime';
 
@@ -54,7 +55,7 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         }
     ],
     standalone: true,
-    imports: [DatePickerComponent, FormsModule, FdDatetimePipesModule]
+    imports: [DatePickerComponent, FormsModule, FdDatetimePipesModule, FdDatetimeModule]
 })
 export class DatePickerFormatExampleComponent {
     date: FdDate;

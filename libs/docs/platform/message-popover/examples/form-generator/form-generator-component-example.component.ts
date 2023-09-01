@@ -15,7 +15,7 @@ import {
     DynamicFormItemValidationResult,
     DynamicFormValue,
     FormGeneratorComponent,
-    FormGeneratorComponent as FormGeneratorComponent_1
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
@@ -46,7 +46,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     standalone: true,
     imports: [
         MessagePopoverFormWrapperComponent,
-        FormGeneratorComponent_1,
+        PlatformFormGeneratorModule,
         BarModule,
         MessagePopoverComponent,
         NgIf,

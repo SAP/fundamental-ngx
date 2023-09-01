@@ -9,7 +9,7 @@ import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
@@ -45,7 +45,8 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         CdkScrollable,
         IconModule,
         InlineHelpModule,
-        BarModule
+        BarModule,
+        MessageToastModule
     ]
 })
 export class DynamicPageExampleComponent {

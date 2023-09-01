@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
 import {
     CollectionBooleanFilter,
@@ -63,7 +63,7 @@ import { map, take } from 'rxjs/operators';
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, SliderComponent]
+    imports: [FormsModule, ReactiveFormsModule, SliderComponent, FdDatetimeModule]
 })
 export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGeneratorControl {
     constructor() {

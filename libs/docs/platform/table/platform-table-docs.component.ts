@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -131,7 +131,8 @@ const illustrationDialogNoMail = '/assets/images/sapIllus-Dialog-NoMail.svg';
         PlatformTableModule,
         TableInitialStateDirective,
         ContentDensityDirective,
-        PlatformButtonModule
+        PlatformButtonModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableDocsComponent {

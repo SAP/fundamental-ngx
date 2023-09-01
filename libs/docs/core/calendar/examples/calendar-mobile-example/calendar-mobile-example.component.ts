@@ -10,7 +10,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -41,7 +42,8 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         FormsModule,
         BarModule,
         ButtonModule,
-        DatePipe
+        DatePipe,
+        FdDatetimeModule
     ]
 })
 export class CalendarMobileExampleComponent {

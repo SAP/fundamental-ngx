@@ -28,7 +28,7 @@ export class FocusableListDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'focusable-list-default-example',
             component: 'FocusableListDefaultExample'
         }

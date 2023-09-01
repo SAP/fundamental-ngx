@@ -8,7 +8,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 @Component({
@@ -36,7 +37,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [ButtonModule, DatePickerComponent, FormsModule]
+    imports: [ButtonModule, DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerDisableFocusScrollExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

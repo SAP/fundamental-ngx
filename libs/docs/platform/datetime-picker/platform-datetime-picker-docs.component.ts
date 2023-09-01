@@ -13,6 +13,7 @@ const datetimePickerMobileHtml = 'mobile/platform-datetime-picker-mobile-example
 const datetimePickerMobileeTs = 'mobile/platform-datetime-picker-mobile-example.component.ts';
 
 import { RouterLink } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -45,6 +46,7 @@ import { PlatformDatetimePickerUpdateOnBlurExampleComponent } from './examples/p
         PlatformDatetimePickerDisableFunctionExampleComponent,
         PlatformDatetimePickerUpdateOnBlurExampleComponent,
         RouterLink,
+        FdDatetimeModule,
         PlatformDatetimePickerMobileExampleComponent
     ]
 })

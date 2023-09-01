@@ -1,13 +1,14 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { CalendarComponent, FdCalendarView } from '@fundamental-ngx/core/calendar';
 import { CardModule } from '@fundamental-ngx/core/card';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-card-calendar-example',
     templateUrl: 'card-calendar-example.component.html',
     styleUrls: ['./card-calendar-example.component.scss'],
     standalone: true,
-    imports: [CardModule, CalendarComponent]
+    imports: [CardModule, CalendarComponent, FdDatetimeModule]
 })
 export class CardCalendarExampleComponent {
     calendarViewSubTitle = 'For Today';

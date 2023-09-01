@@ -1,10 +1,11 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { DatePickerComponent, DatePickerComponent as DatePickerComponent_1 } from '@fundamental-ngx/core/date-picker';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { MomentDatetimeModule } from '@fundamental-ngx/moment-adapter';
 import moment, { Moment } from 'moment';
 
 import 'moment/locale/ar';
@@ -18,7 +19,14 @@ import 'moment/locale/fr';
     templateUrl: './date-picker-moment-adapter-example.component.html',
     providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
     standalone: true,
-    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, DatePickerComponent_1]
+    imports: [
+        FormLabelModule,
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        DatePickerComponent,
+        MomentDatetimeModule
+    ]
 })
 export class DatePickerMomentAdapterExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Moment>;

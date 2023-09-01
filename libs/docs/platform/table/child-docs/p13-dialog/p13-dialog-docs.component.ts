@@ -1,5 +1,6 @@
 import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -37,7 +38,8 @@ const platformTableP13GroupTsSrc = 'platform-table-p13-group-example.component.t
         SeparatorComponent,
         PlatformTableP13SortExampleComponent,
         PlatformTableP13FilterExampleComponent,
-        PlatformTableP13GroupExampleComponent
+        PlatformTableP13GroupExampleComponent,
+        FdDatetimeModule
     ]
 })
 export class P13DialogDocsComponent {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ToolbarLabelDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
@@ -24,7 +24,8 @@ import {
         TableInitialStateDirective,
         ToolbarLabelDirective,
         ToolbarSeparatorComponent,
-        PlatformButtonModule
+        PlatformButtonModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableCustomTitleExampleComponent {

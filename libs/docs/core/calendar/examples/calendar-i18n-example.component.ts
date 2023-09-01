@@ -6,7 +6,8 @@ import {
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 
 // i18n aria labels service provider
@@ -51,7 +52,7 @@ export class CalendarI18nChineseLabels extends CalendarI18nLabels {
         }
     ],
     standalone: true,
-    imports: [CalendarComponent, FormsModule]
+    imports: [CalendarComponent, FormsModule, FdDatetimeModule]
 })
 export class CalendarI18nExampleComponent {
     date: FdDate = new FdDate(2020, 10, 25);

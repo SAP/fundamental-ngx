@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-action-sheet-compact-example',
     templateUrl: './action-sheet-compact-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ActionSheetModule, ContentDensityDirective, ButtonModule]
+    imports: [ActionSheetModule, ContentDensityDirective, ButtonModule, MessageToastModule]
 })
 export class ActionSheetCompactExampleComponent {
     @ViewChild(ActionSheetComponent)

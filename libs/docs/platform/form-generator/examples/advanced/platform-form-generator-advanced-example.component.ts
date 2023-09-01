@@ -14,7 +14,7 @@ import {
     DynamicFormItem,
     DynamicFormValue,
     FormGeneratorComponent,
-    FormGeneratorComponent as FormGeneratorComponent_1
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 import { BehaviorSubject } from 'rxjs';
 
@@ -43,7 +43,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         }
     ],
     standalone: true,
-    imports: [FormGeneratorComponent_1, NgIf, BarModule, PlatformButtonModule, JsonPipe]
+    imports: [NgIf, BarModule, PlatformButtonModule, JsonPipe, PlatformFormGeneratorModule]
 })
 export class PlatformFormGeneratorAdvancedExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

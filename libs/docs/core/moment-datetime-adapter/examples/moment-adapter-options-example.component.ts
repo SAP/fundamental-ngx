@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDatetimeAdapterModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 
@@ -11,6 +11,6 @@ import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundam
         { provide: MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } }
     ],
     standalone: true,
-    imports: [DatetimePickerComponent]
+    imports: [DatetimePickerComponent, FdDatetimeAdapterModule]
 })
 export class MomentAdapterOptionsExampleComponent {}

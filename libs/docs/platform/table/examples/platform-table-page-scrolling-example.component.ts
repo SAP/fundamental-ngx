@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, finalize } from 'rxjs/operators';
 
 import { AsyncPipe } from '@angular/common';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     PlatformTableModule,
     TableDataProvider,
@@ -32,7 +32,8 @@ import {
         TableInitialStateDirective,
         FdpCellDef,
         FdpTableCell,
-        AsyncPipe
+        AsyncPipe,
+        FdDatetimeModule
     ]
 })
 export class PlatformTablePageScrollingExampleComponent {

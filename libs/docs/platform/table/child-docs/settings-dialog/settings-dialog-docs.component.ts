@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -35,7 +36,8 @@ const platformTableFilterableTsSrc = 'platform-table-filterable-example.componen
         CodeExampleComponent,
         SeparatorComponent,
         PlatformTableFilterableExampleComponent,
-        PlatformTableGroupableExampleComponent
+        PlatformTableGroupableExampleComponent,
+        FdDatetimeModule
     ]
 })
 export class SettingsDialogDocsComponent {

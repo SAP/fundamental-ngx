@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import {
     ChildTableDataSource,
@@ -38,7 +38,8 @@ import { delay } from 'rxjs/operators';
         PlatformTableModule,
         TableInitialStateDirective,
         TableDraggableDirective,
-        TableVirtualScrollDirective
+        TableVirtualScrollDirective,
+        FdDatetimeModule
     ]
 })
 export class AdvancedScrollingExampleComponent {

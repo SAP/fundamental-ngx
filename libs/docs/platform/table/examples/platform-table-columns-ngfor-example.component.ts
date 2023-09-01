@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEnca
 import { Observable, of } from 'rxjs';
 
 import { NgFor } from '@angular/common';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
 import {
@@ -41,7 +41,8 @@ export interface ExampleItem {
         PlatformButtonModule,
         NgFor,
         FdpCellDef,
-        FdpTableCell
+        FdpTableCell,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableColumnsNgforExampleComponent {

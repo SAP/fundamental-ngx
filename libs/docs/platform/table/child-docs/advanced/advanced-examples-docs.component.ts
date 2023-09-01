@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -24,7 +25,8 @@ const platformTablePageScrollingTsSrc = 'advanced-scrolling/advanced-scrolling-e
         DescriptionComponent,
         ComponentExampleComponent,
         AdvancedScrollingExampleComponent,
-        CodeExampleComponent
+        CodeExampleComponent,
+        FdDatetimeModule
     ]
 })
 export class AdvancedExamplesDocsComponent {

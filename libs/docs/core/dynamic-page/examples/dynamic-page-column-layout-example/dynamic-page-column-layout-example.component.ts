@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgFor, NgIf } from '@angular/common';
@@ -48,7 +48,8 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         CdkScrollable,
         BarModule,
         TabsModule,
-        NgFor
+        NgFor,
+        MessageToastModule
     ]
 })
 export class DynamicPageColumnLayoutExampleComponent {

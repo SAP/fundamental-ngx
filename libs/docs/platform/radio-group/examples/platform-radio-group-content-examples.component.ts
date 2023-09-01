@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
 
@@ -17,7 +17,8 @@ import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/p
         PlatformRadioGroupModule,
         ContentDensityDirective,
         PlatformButtonModule,
-        NgIf
+        NgIf,
+        MessageToastModule
     ]
 })
 export class PlatformRadioGroupContentExampleComponent {

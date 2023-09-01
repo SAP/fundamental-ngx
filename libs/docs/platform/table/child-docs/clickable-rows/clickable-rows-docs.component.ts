@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -32,7 +33,8 @@ const platformTableNavigatableRowTsSrc = 'platform-table-navigatable-row-indicat
         PlatformTableActivableExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
-        PlatformTableNavigatableRowIndicatorExampleComponent
+        PlatformTableNavigatableRowIndicatorExampleComponent,
+        FdDatetimeModule
     ]
 })
 export class ClickableRowsDocsComponent {
