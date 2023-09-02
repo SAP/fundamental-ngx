@@ -14,7 +14,7 @@
 
     <div
         class="collapsed-overlay"
-        [class.overlay-init]="baseDocumentation.sideCollapsed() === false"
+        [class.overlay-init]="!baseDocumentation.sideCollapsed()"
         *ngIf="baseDocumentation.smallScreen"
         (click)="baseDocumentation.closeSideBar()"
     ></div>

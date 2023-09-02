@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 
+import { importProvidersFrom } from '@angular/core';
+import { PlatformSchemaModule } from '@fundamental-ngx/docs/platform/schema';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { configureRoutes } from '@fundamental-ngx/docs/shared';
+import { configureRoutes, CURRENT_LIB, StackblitzService } from '@fundamental-ngx/docs/shared';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
@@ -13,6 +15,11 @@ export const ROUTES: Routes = [
     {
         path: '',
         component: PlatformDocumentationComponent,
+        providers: [
+            { provide: CURRENT_LIB, useValue: 'platform' },
+            StackblitzService,
+            importProvidersFrom(PlatformSchemaModule)
+        ],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: PlatformHomeComponent },

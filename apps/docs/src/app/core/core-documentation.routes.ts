@@ -1,6 +1,20 @@
+import { importProvidersFrom } from '@angular/core';
 import { Routes } from '@angular/router';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
+import { CoreSchemaModule } from '@fundamental-ngx/docs/core/schema';
 import { API_FILES } from '@fundamental-ngx/docs/core/shared';
-import { configureRoutes } from '@fundamental-ngx/docs/shared';
+import {
+    COMBOBOX_MOBILE_CONFIG,
+    configureRoutes,
+    CURRENT_LIB,
+    DATE_PICKER_MOBILE_CONFIG,
+    MENU_MOBILE_CONFIG,
+    MULTI_INPUT_MOBILE_CONFIG,
+    POPOVER_MOBILE_CONFIG,
+    SEARCH_FIELD_MOBILE_CONFIG,
+    SELECT_MOBILE_CONFIG,
+    StackblitzService
+} from '@fundamental-ngx/docs/shared';
 import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
@@ -12,6 +26,18 @@ export const ROUTES: Routes = [
     {
         path: '',
         component: CoreDocumentationComponent,
+        providers: [
+            StackblitzService,
+            { provide: CURRENT_LIB, useValue: 'core' },
+            { provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: POPOVER_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: DATE_PICKER_MOBILE_CONFIG, multi: true },
+            importProvidersFrom(CoreSchemaModule)
+        ],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeDocsComponent },

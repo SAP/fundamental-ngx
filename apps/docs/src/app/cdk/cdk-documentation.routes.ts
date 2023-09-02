@@ -1,6 +1,17 @@
 import { Routes } from '@angular/router';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import { API_FILES } from '@fundamental-ngx/docs/cdk/shared';
-import { configureRoutes } from '@fundamental-ngx/docs/shared';
+import {
+    COMBOBOX_MOBILE_CONFIG,
+    configureRoutes,
+    CURRENT_LIB,
+    MENU_MOBILE_CONFIG,
+    MULTI_INPUT_MOBILE_CONFIG,
+    POPOVER_MOBILE_CONFIG,
+    SEARCH_FIELD_MOBILE_CONFIG,
+    SELECT_MOBILE_CONFIG,
+    StackblitzService
+} from '@fundamental-ngx/docs/shared';
 import { HomeDocsComponent } from './component-docs/cdk-home/cdk-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { CDKDocumentationComponent } from './documentation/cdk-documentation.component';
@@ -12,6 +23,17 @@ export const ROUTES: Routes = [
     {
         path: '',
         component: CDKDocumentationComponent,
+        providers: [
+            // @todo Needs schema module!
+            StackblitzService,
+            { provide: CURRENT_LIB, useValue: 'cdk' },
+            { provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: POPOVER_MOBILE_CONFIG, multi: true },
+            { provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true }
+        ],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeDocsComponent },
