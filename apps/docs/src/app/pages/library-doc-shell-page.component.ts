@@ -1,17 +1,16 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import {
     DocumentationBaseComponent,
+    SectionInterface,
     SectionsToolbarComponent,
     ToolbarDocsComponent
 } from '@fundamental-ngx/docs/shared';
-import { sections } from './core-documentation-data';
 
 @Component({
-    selector: 'core-documentation',
-    templateUrl: './core-documentation.component.html',
+    templateUrl: './library-doc-shell-page.component.html',
     standalone: true,
     imports: [
         DocumentationBaseComponent,
@@ -22,6 +21,6 @@ import { sections } from './core-documentation-data';
         CdkScrollable
     ]
 })
-export class CoreDocumentationComponent {
-    sections = sections;
+export class LibraryDocShellPageComponent {
+    sections: SectionInterface[] = inject(ActivatedRoute).snapshot.data.sections;
 }

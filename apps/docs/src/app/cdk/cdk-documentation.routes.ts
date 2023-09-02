@@ -12,7 +12,7 @@ import {
     SELECT_MOBILE_CONFIG,
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
-import { CDKDocumentationComponent } from './documentation/cdk-documentation.component';
+import { sections } from './cdk-documentation-data';
 
 const configureCdkRoutes = configureRoutes(API_FILES);
 
@@ -20,7 +20,11 @@ const configureCdkRoutes = configureRoutes(API_FILES);
 export const ROUTES: Routes = [
     {
         path: '',
-        component: CDKDocumentationComponent,
+        loadComponent: () =>
+            import('../pages/library-doc-shell-page.component').then((m) => m.LibraryDocShellPageComponent),
+        data: {
+            sections
+        },
         providers: [
             // @todo Needs schema module!
             StackblitzService,

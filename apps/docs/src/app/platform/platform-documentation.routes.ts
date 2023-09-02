@@ -4,7 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import { PlatformSchemaModule } from '@fundamental-ngx/docs/platform/schema';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { configureRoutes, CURRENT_LIB, StackblitzService } from '@fundamental-ngx/docs/shared';
-import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
+import { sections } from './platform-documentation-data';
 
 const configurePlatformRoutes = configureRoutes(API_FILES);
 
@@ -12,7 +12,11 @@ const configurePlatformRoutes = configureRoutes(API_FILES);
 export const ROUTES: Routes = [
     {
         path: '',
-        component: PlatformDocumentationComponent,
+        loadComponent: () =>
+            import('../pages/library-doc-shell-page.component').then((m) => m.LibraryDocShellPageComponent),
+        data: {
+            sections
+        },
         providers: [
             { provide: CURRENT_LIB, useValue: 'platform' },
             StackblitzService,

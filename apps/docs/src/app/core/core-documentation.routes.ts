@@ -15,7 +15,7 @@ import {
     SELECT_MOBILE_CONFIG,
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
-import { CoreDocumentationComponent } from './documentation/core-documentation.component';
+import { sections } from './core-documentation-data';
 
 const configureCoreRoutes = configureRoutes(API_FILES);
 
@@ -23,7 +23,11 @@ const configureCoreRoutes = configureRoutes(API_FILES);
 export const ROUTES: Routes = [
     {
         path: '',
-        component: CoreDocumentationComponent,
+        loadComponent: () =>
+            import('../pages/library-doc-shell-page.component').then((m) => m.LibraryDocShellPageComponent),
+        data: {
+            sections
+        },
         providers: [
             StackblitzService,
             { provide: CURRENT_LIB, useValue: 'core' },

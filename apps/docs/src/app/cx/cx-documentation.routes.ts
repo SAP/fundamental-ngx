@@ -12,7 +12,7 @@ import {
     SELECT_MOBILE_CONFIG,
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
-import { CxDocumentationComponent } from './documentation/cx-documentation.component';
+import { sections } from './cx-documentation-data';
 
 const configureCxRoutes = configureRoutes(API_FILES);
 
@@ -20,7 +20,11 @@ const configureCxRoutes = configureRoutes(API_FILES);
 export const ROUTES: Routes = [
     {
         path: '',
-        component: CxDocumentationComponent,
+        loadComponent: () =>
+            import('../pages/library-doc-shell-page.component').then((m) => m.LibraryDocShellPageComponent),
+        data: {
+            sections
+        },
         providers: [
             // @todo needs schema module
             StackblitzService,
