@@ -21,3 +21,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'action-bar';
 export const API_FILE_KEY = 'actionbar';
+export const I18N_KEY = 'platformActionBar';

@@ -21,3 +21,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'select';
 export const API_FILE_KEY = 'select';
+export const I18N_KEY = 'platformSelect';

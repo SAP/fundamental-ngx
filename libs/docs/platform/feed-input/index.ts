@@ -21,3 +21,4 @@ export const ROUTES: Routes = [
 ];
 export const LIBRARY_NAME = 'feed-input';
 export const API_FILE_KEY = 'feedInput';
+export const I18N_KEY = 'platformFeedInput';
