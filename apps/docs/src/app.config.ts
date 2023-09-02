@@ -11,13 +11,13 @@ import { MarkdownModule } from 'ngx-markdown';
 import { BehaviorSubject } from 'rxjs';
 import lernaJson from '../../../lerna.json';
 import packageJson from '../../../package.json';
-import { routes } from './app.routes';
+import { ROUTES as applicationRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideAnimations(),
         provideHttpClient(),
-        provideRouter(routes, withPreloading(PreloadAllModules), withHashLocation()),
+        provideRouter(applicationRoutes, withPreloading(PreloadAllModules), withHashLocation()),
         provideTheming({ defaultTheme: 'sap_horizon' }),
         provideContentDensity({ storage: 'localStorage' }),
         provideFdkClicked(),
