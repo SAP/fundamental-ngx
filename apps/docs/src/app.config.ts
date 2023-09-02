@@ -11,7 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { BehaviorSubject } from 'rxjs';
 import lernaJson from '../../../lerna.json';
 import packageJson from '../../../package.json';
-import { ROUTES as applicationRoutes } from './app.routes';
+import { ROUTES as applicationRoutes } from './environments/app.routes';
 
 export const appConfig: ApplicationConfig = {
     providers: [
