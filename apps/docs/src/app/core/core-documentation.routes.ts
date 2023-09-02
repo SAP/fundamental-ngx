@@ -54,7 +54,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'i18n',
-                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.PlatformI18nDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.ROUTES)
             },
             {
                 path: 'action-bar',
