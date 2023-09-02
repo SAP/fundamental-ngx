@@ -13,7 +13,6 @@ import {
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
 import { HomeDocsComponent } from './component-docs/cdk-home/cdk-home.component';
-import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { CDKDocumentationComponent } from './documentation/cdk-documentation.component';
 
 const configureCdkRoutes = configureRoutes(API_FILES);
@@ -37,7 +36,11 @@ export const ROUTES: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeDocsComponent },
-            { path: 'new-component', component: NewComponentComponent },
+            {
+                path: 'new-component',
+                loadComponent: () =>
+                    import('../pages/new-component-page.component').then((m) => m.NewComponentPageComponent)
+            },
             {
                 path: 'i18n',
                 loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.PlatformI18nDocsModule)

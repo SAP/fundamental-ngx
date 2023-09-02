@@ -4,7 +4,6 @@ import { importProvidersFrom } from '@angular/core';
 import { PlatformSchemaModule } from '@fundamental-ngx/docs/platform/schema';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { configureRoutes, CURRENT_LIB, StackblitzService } from '@fundamental-ngx/docs/shared';
-import { NewComponentComponent } from './component-docs/new-component/new-component.component';
 import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 
@@ -23,7 +22,11 @@ export const ROUTES: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: PlatformHomeComponent },
-            { path: 'new-component', component: NewComponentComponent },
+            {
+                path: 'new-component',
+                loadComponent: () =>
+                    import('../pages/new-component-page.component').then((m) => m.NewComponentPageComponent)
+            },
             {
                 path: 'i18n',
                 loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.PlatformI18nDocsModule)
