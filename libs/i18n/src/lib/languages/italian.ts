@@ -153,7 +153,13 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         ariaRoleDescription: 'gettone'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: (params) => {
+            const count = params['count'];
+            if (count === 1) {
+                return '1 più articoli';
+            }
+            return `Altri ${count} articoli`;
+        }
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
