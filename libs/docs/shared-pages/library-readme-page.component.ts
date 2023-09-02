@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { CURRENT_LIB } from '@fundamental-ngx/docs/shared';
 import { MarkdownModule } from 'ngx-markdown';
-import { CURRENT_LIB } from '../utilities/libraries';
 
 @Component({
     template: `

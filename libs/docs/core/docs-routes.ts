@@ -23,7 +23,7 @@ const configureCoreRoutes = configureRoutes(API_FILES);
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('@fundamental-ngx/docs/shared/pages').then((m) => m.LibraryDocShellPageComponent),
+        loadComponent: () => import('@fundamental-ngx/docs/shared-pages').then((m) => m.LibraryDocShellPageComponent),
         data: {
             sections
         },
@@ -44,12 +44,12 @@ export const ROUTES: Routes = [
             {
                 path: 'home',
                 loadComponent: () =>
-                    import('@fundamental-ngx/docs/shared/pages').then((m) => m.LibraryReadmePageComponent)
+                    import('@fundamental-ngx/docs/shared-pages').then((m) => m.LibraryReadmePageComponent)
             },
             {
                 path: 'new-component',
                 loadComponent: () =>
-                    import('@fundamental-ngx/docs/shared/pages').then((m) => m.NewComponentPageComponent)
+                    import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
             {
                 path: 'i18n',

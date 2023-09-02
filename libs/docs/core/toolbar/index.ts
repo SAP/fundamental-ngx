@@ -10,7 +10,8 @@ export const ROUTES: Routes = [
         children: [
             {
                 path: '',
-                loadComponent: () => import('./toolbar-docs.component').then((c) => c.ToolbarDocsComponent)
+                loadComponent: () =>
+                    import('./toolbar-documentation.component').then((c) => c.ToolbarDocumentationComponent)
             }
         ],
         data: {

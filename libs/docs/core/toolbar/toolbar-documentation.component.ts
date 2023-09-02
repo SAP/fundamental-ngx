@@ -31,8 +31,8 @@ const toolbarSizeExampleHtml = 'toolbar-size-example.component.html';
 
 @Component({
     selector: 'fd-docs-toolbar',
-    templateUrl: './toolbar-docs.component.html',
-    styleUrls: ['./toolbar-docs.component.scss'],
+    templateUrl: './toolbar-documentation.component.html',
+    styleUrls: ['./toolbar-documentation.component.scss'],
     standalone: true,
     imports: [
         DocsSectionTitleComponent,
@@ -50,7 +50,7 @@ const toolbarSizeExampleHtml = 'toolbar-size-example.component.html';
         ToolbarSeparatorExampleComponent
     ]
 })
-export class ToolbarDocsComponent {
+export class ToolbarDocumentationComponent {
     toolbarTypeExample: ExampleFile[] = [
         {
             language: 'html',
