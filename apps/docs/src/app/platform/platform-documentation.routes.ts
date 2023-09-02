@@ -4,7 +4,6 @@ import { importProvidersFrom } from '@angular/core';
 import { PlatformSchemaModule } from '@fundamental-ngx/docs/platform/schema';
 import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
 import { configureRoutes, CURRENT_LIB, StackblitzService } from '@fundamental-ngx/docs/shared';
-import { PlatformHomeComponent } from './component-docs/platform-home/platform-home.component';
 import { PlatformDocumentationComponent } from './documentation/platform-documentation.component';
 
 const configurePlatformRoutes = configureRoutes(API_FILES);
@@ -21,7 +20,11 @@ export const ROUTES: Routes = [
         ],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: PlatformHomeComponent },
+            {
+                path: 'home',
+                loadComponent: () =>
+                    import('../pages/library-readme-page.component').then((m) => m.LibraryReadmePageComponent)
+            },
             {
                 path: 'new-component',
                 loadComponent: () =>

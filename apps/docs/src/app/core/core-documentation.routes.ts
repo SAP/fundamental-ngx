@@ -15,7 +15,6 @@ import {
     SELECT_MOBILE_CONFIG,
     StackblitzService
 } from '@fundamental-ngx/docs/shared';
-import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
 
 const configureCoreRoutes = configureRoutes(API_FILES);
@@ -39,7 +38,11 @@ export const ROUTES: Routes = [
         ],
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeDocsComponent },
+            {
+                path: 'home',
+                loadComponent: () =>
+                    import('../pages/library-readme-page.component').then((m) => m.LibraryReadmePageComponent)
+            },
             {
                 path: 'new-component',
                 loadComponent: () =>
