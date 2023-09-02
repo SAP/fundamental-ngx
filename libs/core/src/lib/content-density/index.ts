@@ -13,7 +13,9 @@ export * from './services/global-content-density.service';
 export * from './helpers/density-type-checkers';
 export * from './tokens/content-density-directive';
 
-export * from './testing/mocked-local-content-density-directive';
 export * from './classes/content-density-observer.settings';
-export * from './variables/default-content-density-consumer-config';
+export * from './testing/mocked-local-content-density-directive';
 export * from './types/content-density.mode';
+export * from './variables/default-content-density-consumer-config';
+
+export * from './provide-content-density';

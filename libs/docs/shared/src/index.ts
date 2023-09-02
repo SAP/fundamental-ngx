@@ -29,7 +29,6 @@ export * from './lib/services/docs.service';
 export * from './lib/services/example-child.service';
 export * from './lib/shared-core-modules';
 export * from './lib/shared-documentation-page.module';
-export * from './lib/shared-documentation.module';
 export * from './lib/tokens/current-component.token';
 export * from './lib/tokens/has-i18n.token';
 export * from './lib/tokens/lerna-json.token';

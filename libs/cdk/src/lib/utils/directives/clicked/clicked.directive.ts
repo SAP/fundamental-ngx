@@ -1,4 +1,5 @@
-import { Directive, EventEmitter, Output } from '@angular/core';
+import { Directive, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
+import { ClickedBehaviorModuleForRootLoadedOnce } from './provide-fdk-clicked';
 
 @Directive({
     selector: '[fdkClicked]'
@@ -14,4 +15,15 @@ export class ClickedDirective {
      * through your eyes.
      */
     @Output() fdkClicked = new EventEmitter<MouseEvent | KeyboardEvent>();
+
+    /** @hidden */
+    constructor(@Inject(ClickedBehaviorModuleForRootLoadedOnce) clickedBehaviorModuleForRootLoadedOnce: boolean) {
+        if (!clickedBehaviorModuleForRootLoadedOnce && isDevMode()) {
+            console.warn(
+                'ClickedBehaviorModule.forRoot() was not called from RootModule, ' +
+                    'or provideFdkClicked() was not called during the bootstrap of application. ' +
+                    'You will not be able to use (fdkClicked) events in HostListeners.'
+            );
+        }
+    }
 }
