@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
@@ -14,38 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 import lernaJson from '../../../../lerna.json';
 import packageJson from '../../../../package.json';
 import { AppComponent } from './app.component';
-
-const routes: Routes = [
-    {
-        path: 'core',
-        data: {
-            library: 'Core'
-        },
-        loadChildren: () => import('./core/core-documentation.routes').then((m) => m.ROUTES)
-    },
-    {
-        path: 'platform',
-        data: {
-            library: 'Platform'
-        },
-        loadChildren: () => import('./platform/platform-documentation.routes').then((m) => m.ROUTES)
-    },
-    {
-        path: 'cx',
-        data: {
-            library: 'CX'
-        },
-        loadChildren: () => import('./cx/cx-documentation.routes').then((m) => m.ROUTES)
-    },
-    {
-        path: 'cdk',
-        data: {
-            library: 'CDK'
-        },
-        loadChildren: () => import('./cdk/cdk-documentation.routes').then((m) => m.ROUTES)
-    },
-    { path: '', redirectTo: 'core', pathMatch: 'full' }
-];
+import { routes } from './app.routes';
 
 @NgModule({
     declarations: [AppComponent],
