@@ -71,6 +71,10 @@ export class BaseButton {
     @Input()
     ariaLabel: Nullable<string>;
 
+    /** adding native aria-description to the componenet */
+    @Input()
+    ariaDescription: Nullable<string>;
+
     /** Whether button is in toggled state. */
     @Input()
     set toggled(value: BooleanInput) {
