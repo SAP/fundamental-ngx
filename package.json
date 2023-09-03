@@ -49,7 +49,7 @@
     "@angular/router": "16.1.0",
     "@fundamental-styles/cx": "0.30.0-rc.35",
     "@fundamental-styles/fn": "0.25.1-rc.16",
-    "@nx/angular": "16.5.5",
+    "@nx/angular": "16.7.4",
     "@sap-theming/theming-base-content": "11.6.4",
     "@stackblitz/sdk": "1.8.2",
     "@swc/helpers": "0.5.1",
