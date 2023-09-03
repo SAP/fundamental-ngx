@@ -38,7 +38,8 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     host: {
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
-        '[attr.aria-label]': 'buttonArialabel'
+        '[attr.aria-label]': 'buttonArialabel',
+        '[attr.aria-description]': 'buttonAriaDescription'
     },
     providers: [
         contentDensityObserverProviders(),
@@ -67,12 +68,28 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
         if (this.specialButtonType.includes(this.fdType)) {
             if (this.label != null) {
-                return this.label + ', ' + this.fdType;
+                return this.label;
             }
 
             if (this.glyph != null) {
-                return this.fdType + ', ' + this.glyph.split('-').join(' ');
+                return this.glyph.split('-').join(' ');
             }
+        }
+
+        return null;
+    }
+
+    /**
+     * Calculate aria-description attribute
+     * @hidden
+     */
+    get buttonAriaDescription(): string | null {
+        if (this.ariaDescription) {
+            return this.ariaDescription;
+        }
+
+        if (this.specialButtonType.includes(this.fdType)) {
+            return this.fdType;
         }
 
         return null;
