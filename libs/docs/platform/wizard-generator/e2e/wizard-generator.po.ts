@@ -23,7 +23,7 @@ export class WizardGeneratorPO extends PlatformBaseComponentPo {
     button = '.fd-button';
     listItem = '.fd-list__item';
     nextStepBtn = '.fd-wizard__next-step .fd-button';
-    nextStepBtn2 = '.fd-button[aria-label*="emphasized"]';
+    nextStepBtn2 = '.fd-button[aria-description*="emphasized"]';
     listItemText = this.listItem + ' span';
     errorMessage = '.fd-form-message--error span';
     input = '.fd-input';
