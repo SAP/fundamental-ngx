@@ -61,6 +61,10 @@ export class BaseButton {
     @Input()
     ariaLabel: Nullable<string>;
 
+    /** adding native aria-description to the componenet */
+    @Input()
+    ariaDescription: Nullable<string>;
+
     /** @hidden */
     @HostBinding('class.fd-button--toggled')
     @HostBinding('attr.aria-pressed')
