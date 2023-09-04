@@ -631,10 +631,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             const finder = (item: SelectableOptionItem): boolean =>
                 item.label === selectedItem || item.value === selectedItem;
             const idFromFullFlatSuggestions = this._fullFlatSuggestions.findIndex(finder);
-            const idFromSuggestions = this._suggestions.findIndex(finder);
+            const idFromSuggestions = (this._suggestions || []).findIndex(finder);
             const itemIndex = Math.max(idFromFullFlatSuggestions, idFromSuggestions);
             const collection = idFromFullFlatSuggestions !== -1 ? this._fullFlatSuggestions : this._suggestions;
-            if (collection === this._suggestions) {
+            if (this._suggestions && collection === this._suggestions) {
                 this._fullFlatSuggestions.push(collection[itemIndex]);
             }
             if (itemIndex > -1) {

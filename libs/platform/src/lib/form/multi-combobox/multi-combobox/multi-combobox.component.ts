@@ -1,5 +1,23 @@
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Host, Inject, Injector, isDevMode, OnInit, Optional, Self, SkipSelf, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    Host,
+    Inject,
+    Injector,
+    OnInit,
+    Optional,
+    Self,
+    SkipSelf,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation,
+    isDevMode
+} from '@angular/core';
 import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
@@ -15,7 +33,7 @@ import { FormControlModule, FormInputMessageGroupComponent, FormMessageComponent
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
+import { TokenModule, TokenizerComponent } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
