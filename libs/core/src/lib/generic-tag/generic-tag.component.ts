@@ -98,7 +98,7 @@ type GenericTagData = NullableObject<{
     class: string;
 }>;
 
-export const buildObjectStatusCssClasses = (data: GenericTagData): string[] => [
+const buildObjectStatusCssClasses = (data: GenericTagData): string[] => [
     'fd-generic-tag',
     data.type ? `fd-generic-tag--${data.type}` : '',
     data.class || ''
