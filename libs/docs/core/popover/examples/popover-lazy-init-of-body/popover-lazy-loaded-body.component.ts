@@ -8,7 +8,8 @@ let componentConstructorCounter = 0;
         <div style="width: 300px; height: 400px; border: 1px solid red">
             Component constructor counter: {{ componentConstructorCounter }}
         </div>
-    `
+    `,
+    standalone: true
 })
 export class PopoverLazyLoadedBodyComponent {
     componentConstructorCounter = ++componentConstructorCounter;

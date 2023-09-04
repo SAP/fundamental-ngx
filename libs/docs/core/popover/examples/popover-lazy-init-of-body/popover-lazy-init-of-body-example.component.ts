@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    PopoverBodyDirective,
+    PopoverBodyFooterDirective,
+    PopoverBodyHeaderDirective,
+    PopoverComponent,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
+import { PopoverLazyLoadedBodyComponent } from './popover-lazy-loaded-body.component';
 
 @Component({
     selector: 'fd-popover-lazy-init-of-body-example',
@@ -13,6 +22,16 @@ import { Component } from '@angular/core';
                 <div fd-popover-body-footer>Footer</div>
             </ng-template>
         </fd-popover>
-    `
+    `,
+    imports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyDirective,
+        PopoverBodyHeaderDirective,
+        PopoverBodyFooterDirective,
+        ButtonModule,
+        PopoverLazyLoadedBodyComponent
+    ],
+    standalone: true
 })
 export class PopoverLazyInitOfBodyExampleComponent {}

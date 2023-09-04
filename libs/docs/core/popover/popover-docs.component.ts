@@ -18,6 +18,7 @@ import { PopoverDropdownExampleComponent } from './examples/popover-dropdown/pop
 import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
 import { PopoverDynamicExampleComponent } from './examples/popover-dynamic/popover-dynamic-example.component';
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
+import { PopoverLazyInitOfBodyExampleComponent } from './examples/popover-lazy-init-of-body/popover-lazy-init-of-body-example.component';
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
 import { PopoverPlacementExampleComponent } from './examples/popover-placement/popover-placement-example.component';
@@ -90,7 +91,8 @@ const dynamicContainerHeightTsSrc =
         PopoverDropdownExampleComponent,
         RouterLink,
         PopoverMobileExampleComponent,
-        PopoverDynamicContainerHeightExampleComponent
+        PopoverDynamicContainerHeightExampleComponent,
+        PopoverLazyInitOfBodyExampleComponent
     ]
 })
 export class PopoverDocsComponent {
