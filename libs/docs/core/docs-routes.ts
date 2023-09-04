@@ -174,7 +174,7 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'generic-tag',
-                loadChildren: () => import('@fundamental-ngx/docs/core/generic-tag').then((m) => m.GenericTagDocsModule)
+                loadChildren: () => import('@fundamental-ngx/docs/core/generic-tag').then(configureCoreRoutes)
             },
             {
                 path: 'content-density',
