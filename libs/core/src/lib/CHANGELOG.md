@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
+
+
+### Bug Fixes
+
+* **core:** move button type in aria-description ([#10472](https://github.com/SAP/fundamental-ngx/issues/10472)) ([f6b7a03](https://github.com/SAP/fundamental-ngx/commit/f6b7a039ad3feeab6a5f279473418b7bce3664ff))
+
+
+### Features
+
+* **core:** removed addon button on mobile mode in multi-input ([#10444](https://github.com/SAP/fundamental-ngx/issues/10444)) ([fc23f27](https://github.com/SAP/fundamental-ngx/commit/fc23f2779ad33d4d3dbe22f4a589e9fbea9cfaa1))
+
+
+
+
+
 ## [0.43.5](https://github.com/SAP/fundamental-ngx/compare/v0.43.4...v0.43.5) (2023-08-16)
 
 
