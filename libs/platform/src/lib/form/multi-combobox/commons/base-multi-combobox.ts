@@ -634,7 +634,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             const idFromSuggestions = (this._suggestions || []).findIndex(finder);
             const itemIndex = Math.max(idFromFullFlatSuggestions, idFromSuggestions);
             const collection = idFromFullFlatSuggestions !== -1 ? this._fullFlatSuggestions : this._suggestions;
-            if (this._suggestions && collection === this._suggestions) {
+            if (idFromFullFlatSuggestions === -1 && idFromSuggestions === -1) {
+                this._convertToOptionItems([selectedItem]).forEach((optionItem: SelectableOptionItem) => {
+                    optionItem.selected = true;
+                    this._selectedSuggestions.push(optionItem);
+                });
+            } else if (this._suggestions && collection === this._suggestions) {
                 this._fullFlatSuggestions.push(collection[itemIndex]);
             }
             if (itemIndex > -1) {

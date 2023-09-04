@@ -24,11 +24,23 @@ import equal from 'fast-deep-equal';
 
 import { DynamicComponentService, KeyUtil, SearchHighlightPipe, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import { DATA_PROVIDERS, DataProvider, MultiComboBoxDataSource, OptionItem, PlatformFormField, PlatformFormFieldControl, SelectableOptionItem } from '@fundamental-ngx/platform/shared';
+import {
+    DATA_PROVIDERS,
+    DataProvider,
+    MultiComboBoxDataSource,
+    OptionItem,
+    PlatformFormField,
+    PlatformFormFieldControl,
+    SelectableOptionItem
+} from '@fundamental-ngx/platform/shared';
 
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { ContentDensityModule, ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 import { FormControlModule, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
