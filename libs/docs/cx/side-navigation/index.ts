@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,15 @@ export const ROUTES: Routes = [
             import('./side-navigation-header/side-navigation-header.component').then(
                 (c) => c.SideNavigationHeaderComponent
             ),
-        providers: [currentComponentProvider('side-navigation'), ApiDocsService],
+        data: { primary: true },
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./side-navigation-docs.component').then((c) => c.SideNavigationDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.sideNavigation } }
+            }
         ]
     }
 ];
+export const LIBRARY_NAME = 'side-navigation';
+export const API_FILE_KEY = 'sideNavigation';

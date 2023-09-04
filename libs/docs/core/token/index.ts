@@ -1,18 +1,21 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
+import { FdLanguage } from '@fundamental-ngx/i18n';
 
 export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () => import('./token-header/token-header.component').then((c) => c.TokenHeaderComponent),
-        providers: [currentComponentProvider('token'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () => import('./token-docs.component').then((c) => c.TokenDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.token } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'token';
+export const API_FILE_KEY = 'token';
+export const I18N_KEY = ['coreToken', 'coreTokenizer'] as Array<keyof FdLanguage>;

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, CURRENT_LIB, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
+import { CURRENT_LIB } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -10,17 +9,22 @@ export const ROUTES: Routes = [
                 (c) => c.MomentDatetimeAdapterHeaderComponent
             ),
         providers: [
-            { provide: CURRENT_LIB, useValue: 'moment-adapter' },
-            currentComponentProvider('moment-datetime-adapter'),
-            ApiDocsService
+            {
+                provide: CURRENT_LIB,
+                useValue: 'moment-adapter'
+            }
         ],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./moment-datetime-adapter-docs.component').then((c) => c.MomentDatetimeAdapterDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.momentDatetimeAdapter } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'moment-datetime-adapter';
+export const API_FILE_KEY = 'momentDatetimeAdapter';

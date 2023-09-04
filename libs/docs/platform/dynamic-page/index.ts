@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./platform-dynamic-page-header/platform-dynamic-page-header.component').then(
                 (c) => c.PlatformDynamicPageHeaderComponent
             ),
-        providers: [currentComponentProvider('dynamic-page'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-dynamic-page-docs.component').then((c) => c.PlatformDynamicPageDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.dynamicPage } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'dynamic-page';
+export const API_FILE_KEY = 'dynamicPage';

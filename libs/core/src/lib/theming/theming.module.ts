@@ -1,31 +1,19 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaseThemingConfig } from './config';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ThemingConfig } from './interfaces/theming-config.interface';
+import { provideTheming } from './provide-theming';
 import { ThemingService } from './theming.service';
-import { THEMING_CONFIG_TOKEN } from './tokens';
 
 @NgModule({
     imports: [CommonModule],
-    providers: [
-        {
-            provide: THEMING_CONFIG_TOKEN,
-            useValue: new BaseThemingConfig()
-        },
-        ThemingService
-    ]
+    providers: [ThemingService]
 })
 export class ThemingModule {
     /** Module with providers */
     static withConfig(config: Partial<ThemingConfig>): ModuleWithProviders<ThemingModule> {
         return {
             ngModule: ThemingModule,
-            providers: [
-                {
-                    provide: THEMING_CONFIG_TOKEN,
-                    useValue: config
-                }
-            ]
+            providers: [provideTheming(config)]
         };
     }
 }

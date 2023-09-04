@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./platform-form-container-header/platform-form-container-header.component').then(
                 (c) => c.PlatformFormContainerHeaderComponent
             ),
-        providers: [currentComponentProvider('form-container'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-form-container-docs.component').then((c) => c.PlatformFormContainerDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.formContainer } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'form-container';
+export const API_FILE_KEY = 'formContainer';

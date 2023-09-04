@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,7 +7,6 @@ export const ROUTES: Routes = [
             import('./platform-object-attribute-header/platform-object-attribute-header.component').then(
                 (c) => c.PlatformObjectAttributeHeaderComponent
             ),
-        providers: [currentComponentProvider('object-attribute'), ApiDocsService],
         children: [
             {
                 path: '',
@@ -17,8 +14,12 @@ export const ROUTES: Routes = [
                     import('./platform-object-attribute-docs.component').then(
                         (c) => c.PlatformObjectAttributeDocsComponent
                     )
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectAttribute } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'object-attribute';
+export const API_FILE_KEY = 'objectAttribute';

@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 import { DeprecatedButtonAriaPressed, DeprecatedButtonAriaSelected } from '@fundamental-ngx/platform/button';
 
 export const ROUTES: Routes = [
@@ -13,17 +11,19 @@ export const ROUTES: Routes = [
             ),
         providers: [
             moduleDeprecationsProvider(DeprecatedButtonAriaPressed),
-            moduleDeprecationsProvider(DeprecatedButtonAriaSelected),
-            currentComponentProvider('button'),
-            ApiDocsService
+            moduleDeprecationsProvider(DeprecatedButtonAriaSelected)
         ],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-button-docs.component').then((c) => c.PlatformButtonDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.button } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'button';
+export const API_FILE_KEY = 'button';

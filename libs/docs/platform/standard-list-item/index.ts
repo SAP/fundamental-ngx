@@ -1,12 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import {
-    ApiComponent,
-    ApiDocsService,
-    I18nDocsComponent,
-    currentComponentProvider,
-    getI18nKey
-} from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -15,7 +7,6 @@ export const ROUTES: Routes = [
             import('./platform-standard-list-item-header/platform-standard-list-item-header.component').then(
                 (c) => c.PlatformStandardListItemHeaderComponent
             ),
-        providers: [currentComponentProvider('standard-list-item'), ApiDocsService],
         children: [
             {
                 path: '',
@@ -23,9 +14,13 @@ export const ROUTES: Routes = [
                     import('./platform-standard-list-item-docs.component').then(
                         (c) => c.PlatformStandardListItemDocsComponent
                     )
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.standardlistitem } },
-            { path: 'i18n', component: I18nDocsComponent, data: getI18nKey('platformStandardListItem') }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'standard-list-item';
+export const API_FILE_KEY = 'standardlistitem';
+export const I18N_KEY = 'platformStandardListItem';

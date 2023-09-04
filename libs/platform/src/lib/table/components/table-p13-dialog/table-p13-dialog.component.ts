@@ -13,15 +13,15 @@ import {
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
 
-import { TableP13SortComponent } from './table-p13-sort.component';
-import { TableP13GroupComponent } from './table-p13-group.component';
-import { TableP13FilterComponent } from './table-p13-filter.component';
 import { TableP13ColumnsComponent } from './table-p13-columns.component';
+import { TableP13FilterComponent } from './table-p13-filter.component';
+import { TableP13GroupComponent } from './table-p13-group.component';
+import { TableP13SortComponent } from './table-p13-sort.component';
 
-import { SortDialogData, SortDialogResultData, P13SortingDialogComponent } from './sorting/sorting.component';
-import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
-import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
 import { ColumnsDialogData, ColumnsDialogResultData, P13ColumnsDialogComponent } from './columns/columns.component';
+import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
+import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
+import { P13SortingDialogComponent, SortDialogData, SortDialogResultData } from './sorting/sorting.component';
 
 const dialogConfig: DialogConfig = {
     responsivePadding: true,

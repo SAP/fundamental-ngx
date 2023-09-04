@@ -1,14 +1,6 @@
 import { Routes } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import {
-    ApiComponent,
-    ApiDocsService,
-    ExampleChildService,
-    I18nDocsComponent,
-    currentComponentProvider,
-    getI18nKey
-} from '@fundamental-ngx/docs/shared';
+import { ExampleChildService } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -17,18 +9,16 @@ export const ROUTES: Routes = [
             import('./platform-table-header/platform-table-header.component').then(
                 (c) => c.PlatformTableHeaderComponent
             ),
-        providers: [currentComponentProvider('table'), ApiDocsService, ExampleChildService, RtlService],
+        providers: [ExampleChildService, RtlService],
         children: [
-            { path: '', redirectTo: 'basic', pathMatch: 'full' },
+            {
+                path: '',
+                redirectTo: 'basic',
+                pathMatch: 'full'
+            },
             {
                 path: 'basic',
                 loadComponent: () => import('./platform-table-docs.component').then((c) => c.PlatformTableDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.table } },
-            {
-                path: 'i18n',
-                component: I18nDocsComponent,
-                data: getI18nKey('platformTable')
             },
             {
                 path: 'p13-dialog-table',
@@ -77,6 +67,12 @@ export const ROUTES: Routes = [
                         (c) => c.AdvancedExamplesDocsComponent
                     )
             }
-        ]
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'table';
+export const API_FILE_KEY = 'table';
+export const I18N_KEY = 'platformTable';

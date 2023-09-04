@@ -1,18 +1,13 @@
 import { AsyncPipe, NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { TableModule } from '@fundamental-ngx/core/table';
-import { FD_LANGUAGE_ENGLISH, FdLanguage } from '@fundamental-ngx/i18n';
-import { Observable, OperatorFunction, of } from 'rxjs';
+import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
+import { Observable, OperatorFunction, combineLatest, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { I18nDocsLoaderService } from './i18n-docs-loader.service';
-
-/** utility function to provide type safe FdLanguage key as route data, wrapped in an object needed for I18nDocsComponent */
-export function getI18nKey(i18nKey: keyof FdLanguage): I18nRouteData {
-    return { i18nKey };
-}
 
 @Component({
     selector: 'fd-i18n-docs',
@@ -33,9 +28,12 @@ export function getI18nKey(i18nKey: keyof FdLanguage): I18nRouteData {
 export class I18nDocsComponent {
     status = LoadStatus.Loading;
     readonly loadStatus = LoadStatus;
-    readonly data$ = this._getData();
+    readonly data$: Observable<TranslationProperty[]>;
+    private lang$ = inject(FD_LANGUAGE);
 
-    constructor(private _route: ActivatedRoute, private i18nDocsLoader: I18nDocsLoaderService) {}
+    constructor(private _route: ActivatedRoute, private i18nDocsLoader: I18nDocsLoaderService) {
+        this.data$ = this._getData();
+    }
 
     private _getData(): Observable<TranslationProperty[]> {
         const data = this._route.snapshot.data as I18nRouteData;
@@ -43,7 +41,7 @@ export class I18nDocsComponent {
             this.status = LoadStatus.Loaded;
             return of([]);
         }
-        return this.i18nDocsLoader.typeDoc$.pipe(
+        return combineLatest([this.lang$, this.i18nDocsLoader.typeDoc$]).pipe(
             this._parseTypedoc(data.i18nKey),
             catchError((error) => {
                 console.error(error);
@@ -55,16 +53,22 @@ export class I18nDocsComponent {
 
     private _parseTypedoc(
         componentName: keyof FdLanguage
-    ): OperatorFunction<Record<string, any>, TranslationProperty[]> {
-        return map((doc) => {
+    ): OperatorFunction<[FdLanguage, Record<string, any>], TranslationProperty[]> {
+        return map(([lang, doc]) => {
             this.status = LoadStatus.Loaded;
             const fdLangData = doc?.['children']?.find((c) => c.name === 'FdLanguage');
             const componentTranslations = fdLangData?.children?.find((c) => c.name === componentName);
             return componentTranslations?.type?.declaration?.children.map(
                 (c): TranslationProperty => ({
                     key: c.name,
-                    englishTranslation: FD_LANGUAGE_ENGLISH[componentName][c.name],
-                    params: c.comment?.tags?.filter((t) => t.tag === 'param').map((t) => t.param) ?? []
+                    translation: lang[componentName][c.name],
+                    params:
+                        c.comment?.blockTags?.reduce((acc: string[], { tag, name }) => {
+                            if (tag === '@param') {
+                                acc.push(name);
+                            }
+                            return acc;
+                        }, []) ?? []
                 })
             );
         });
@@ -79,7 +83,7 @@ enum LoadStatus {
 
 interface TranslationProperty {
     key: string;
-    englishTranslation: string;
+    translation: string;
     params: string[];
 }
 

@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {
@@ -9,13 +7,16 @@ export const ROUTES: Routes = [
             import('./focusable-item-header/focusable-item-header.component').then(
                 (c) => c.FocusableItemHeaderComponent
             ),
-        providers: [currentComponentProvider('focusable-item'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () => import('./focusable-item-docs.component').then((c) => c.FocusableItemDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.focusableItem } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'focusable-item';
+export const API_FILE_KEY = 'focusableItem';

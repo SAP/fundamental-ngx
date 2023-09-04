@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./content-density-header/content-density-header.component').then(
                 (c) => c.ContentDensityHeaderComponent
             ),
-        providers: [currentComponentProvider('content-density'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./content-density-docs.component').then((c) => c.ContentDensityDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.contentDensity } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'content-density';
+export const API_FILE_KEY = 'contentDensity';

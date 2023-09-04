@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { API_FILES } from '@fundamental-ngx/docs/platform/shared';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./platform-object-status-header/platform-object-status-header.component').then(
                 (c) => c.PlatformObjectStatusHeaderComponent
             ),
-        providers: [currentComponentProvider('object-status'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./platform-object-status-docs.component').then((c) => c.PlatformObjectStatusDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.objectStatus } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'object-status';
+export const API_FILE_KEY = 'objectStatus';

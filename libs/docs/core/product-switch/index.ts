@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {
@@ -9,13 +7,17 @@ export const ROUTES: Routes = [
             import('./product-switch-docs-header/product-switch-docs-header.component').then(
                 (c) => c.ProductSwitchDocsHeaderComponent
             ),
-        providers: [currentComponentProvider('product-switch'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () => import('./product-switch-docs.component').then((c) => c.ProductSwitchDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.productSwitch } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'product-switch';
+export const API_FILE_KEY = 'productSwitch';
+export const I18N_KEY = 'coreProductSwitch';

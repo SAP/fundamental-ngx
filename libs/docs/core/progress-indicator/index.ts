@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ApiComponent, ApiDocsService, currentComponentProvider } from '@fundamental-ngx/docs/shared';
-import { API_FILES } from '../shared/src';
 
 export const ROUTES: Routes = [
     {
@@ -9,14 +7,17 @@ export const ROUTES: Routes = [
             import('./progress-indicator-header/progress-indicator-header.component').then(
                 (c) => c.ProgressIndicatorHeaderComponent
             ),
-        providers: [currentComponentProvider('progress-indicator'), ApiDocsService],
         children: [
             {
                 path: '',
                 loadComponent: () =>
                     import('./progress-indicator-docs.component').then((c) => c.ProgressIndicatorDocsComponent)
-            },
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.progressIndicator } }
-        ]
+            }
+        ],
+        data: {
+            primary: true
+        }
     }
 ];
+export const LIBRARY_NAME = 'progress-indicator';
+export const API_FILE_KEY = 'progressIndicator';
