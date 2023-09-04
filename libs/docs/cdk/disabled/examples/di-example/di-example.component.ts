@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ClickedBehaviorModule, DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DisabledRecipientDirective } from './disabled-recipient.directive';
 
 @Component({
     selector: 'fundamental-ngx-cdk-disabled-di-example',
@@ -10,7 +13,9 @@ import { Component } from '@angular/core';
                 opacity: 0.5;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [DisabledBehaviorDirective, DisabledRecipientDirective, ButtonModule, ClickedBehaviorModule]
 })
 export class DiExampleComponent {
     rootElementDisabled = false;

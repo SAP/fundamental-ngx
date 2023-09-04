@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
@@ -9,7 +10,9 @@ import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/mess
         // The MessageBoxService is already provided on the MessageBoxModule module.
         // We do it at the component level here, due to the limitations of our example generation script.
         MessageBoxService
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule]
 })
 export class MessageBoxPositionExampleComponent {
     title = 'Fruit facts';

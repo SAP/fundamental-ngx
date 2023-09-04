@@ -20,19 +20,6 @@ import {
     waitForNotPresent,
     waitForPresent
 } from '../../../../../e2e';
-import { ApprovalFlowPo } from './approval-flow.po';
-import {
-    approved_node_status,
-    details_dialog_cancel_btn,
-    details_dialog_header,
-    details_dialog_send_reminder_btn,
-    dueDateMessage,
-    node_statuses,
-    nodeOptionsArr,
-    rejected_node_status,
-    remainder_text,
-    watchers_block_title
-} from './approval-flow-contents';
 import {
     disableAddingAfterOption,
     disableAddingBeforeOption,
@@ -44,6 +31,19 @@ import {
     editModeOption,
     setStatusOption
 } from './approval-flow';
+import {
+    approved_node_status,
+    details_dialog_cancel_btn,
+    details_dialog_header,
+    details_dialog_send_reminder_btn,
+    dueDateMessage,
+    nodeOptionsArr,
+    node_statuses,
+    rejected_node_status,
+    remainder_text,
+    watchers_block_title
+} from './approval-flow-contents';
+import { ApprovalFlowPo } from './approval-flow.po';
 
 describe('Approval flow', () => {
     const approvalFlowPage = new ApprovalFlowPo();

@@ -1,10 +1,14 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ThemingService } from '@fundamental-ngx/core/theming';
 
 @Component({
     selector: 'fd-theming-example',
     templateUrl: './theming-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgFor, ButtonModule]
 })
 export class ThemingExampleComponent {
     themes = this._themingService.getThemes();

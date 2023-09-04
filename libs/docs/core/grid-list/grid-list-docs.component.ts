@@ -1,6 +1,27 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { GridListDefaultExampleComponent } from './examples/default/grid-list-example.component';
+import { GridListDeleteExampleComponent } from './examples/delete/grid-list-delete-example.component';
+import { GridListDndExampleComponent } from './examples/dnd/grid-list-dnd-example.component';
+import { GridListFocusingItemExampleComponent } from './examples/focusing/grid-list-focusing-example.component';
+import { GridListFooterExampleComponent } from './examples/footer/grid-list-footer-example.component';
+import { GridListGroupExampleComponent } from './examples/group/grid-list-group-example.component';
+import { GridListLayoutExampleComponent } from './examples/layout/grid-list-layout-example.component';
+import { GridListMoreExampleComponent } from './examples/more/grid-list-more-example.component';
+import { GridListMultiSelectExampleComponent } from './examples/multi-select/grid-list-multi-select-example.component';
+import { GridListSingleSelectLeftExampleComponent } from './examples/single-select-left/grid-list-single-select-left-example.component';
+import { GridListSingleSelectRightExampleComponent } from './examples/single-select-right/grid-list-single-select-right-example.component';
+import { GridListSingleSelectExampleComponent } from './examples/single-select/grid-list-single-select-example.component';
+import { GridListStatesExampleComponent } from './examples/states/grid-list-states-example.component';
+import { GridListStatusesExampleComponent } from './examples/statuses/grid-list-statuses-example.component';
 
 const gridListDefaultTs = 'default/grid-list-example.component.ts';
 const gridListSingleSelectTs = 'single-select/grid-list-single-select-example.component.ts';
@@ -36,7 +57,28 @@ const gridListFocusingHtml = 'focusing/grid-list-focusing-example.component.html
 
 @Component({
     selector: 'app-grid-list',
-    templateUrl: './grid-list-docs.component.html'
+    templateUrl: './grid-list-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        GridListDefaultExampleComponent,
+        CodeExampleComponent,
+        GridListSingleSelectExampleComponent,
+        GridListSingleSelectLeftExampleComponent,
+        GridListSingleSelectRightExampleComponent,
+        GridListMultiSelectExampleComponent,
+        GridListDeleteExampleComponent,
+        GridListGroupExampleComponent,
+        GridListStatesExampleComponent,
+        GridListStatusesExampleComponent,
+        GridListMoreExampleComponent,
+        GridListFooterExampleComponent,
+        GridListDndExampleComponent,
+        GridListLayoutExampleComponent,
+        GridListFocusingItemExampleComponent
+    ]
 })
 export class GridListDocsComponent {
     private _scssFileCode = getAssetFromModuleAssets(scssFileCode);

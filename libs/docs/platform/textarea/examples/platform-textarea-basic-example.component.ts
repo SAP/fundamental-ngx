@@ -1,10 +1,25 @@
+import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormLabelModule, FormMessageModule } from '@fundamental-ngx/core/form';
+import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-textarea-basic-example',
     templateUrl: './platform-textarea-basic-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        NgIf,
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformTextAreaModule,
+        ContentDensityDirective,
+        FormLabelModule,
+        FormMessageModule
+    ]
 })
 export class PlatformTextareaBasicExampleComponent {
     form: FormGroup;

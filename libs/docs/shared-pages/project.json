@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "docs-shared-pages",
+    "root": "libs/docs/shared-pages",
+    "targets": {},
+    "tags": ["scope:docs", "type:lib"]
+}

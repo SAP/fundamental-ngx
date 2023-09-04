@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformTableModule, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { delay } from 'rxjs/operators';
 
 @Component({
@@ -16,6 +22,15 @@ import { delay } from 'rxjs/operators';
                 margin-bottom: 16px;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformButtonModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableLoadingExampleComponent {

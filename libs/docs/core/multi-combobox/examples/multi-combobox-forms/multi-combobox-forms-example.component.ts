@@ -1,11 +1,26 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
     selector: 'fd-multi-combobox-forms-example',
     templateUrl: './multi-combobox-forms-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FormItemModule,
+        FormLabelModule,
+        CvaDirective,
+        DataSourceDirective,
+        MultiComboboxModule,
+        JsonPipe
+    ]
 })
 export class MultiComboboxFormsExampleComponent {
     dataSource = [

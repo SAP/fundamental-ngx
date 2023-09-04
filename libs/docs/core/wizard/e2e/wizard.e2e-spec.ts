@@ -1,8 +1,6 @@
-import { WizardPo } from './wizard.po';
 import {
     browserIsSafari,
     click,
-    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getElementClass,
@@ -19,6 +17,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { WizardPo } from './wizard.po';
 import { firstAdress, firstAdressLength, fullName, secAdress, update } from './wizard.tags';
 
 describe('Wizard component test', () => {

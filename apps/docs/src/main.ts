@@ -1,7 +1,5 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { NgModuleRef } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { appConfig } from './app.config';
 
-import { AppModule } from './app/app.module';
-
-const bootstrap = (): Promise<NgModuleRef<AppModule>> => platformBrowserDynamic().bootstrapModule(AppModule);
-bootstrap().catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));

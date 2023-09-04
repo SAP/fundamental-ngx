@@ -1,4 +1,3 @@
-import { SplitButtonPo } from './split-button.po';
 import {
     acceptAlert,
     click,
@@ -11,6 +10,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { SplitButtonPo } from './split-button.po';
 
 describe('Split-button test suite', () => {
     const splitButtonPage = new SplitButtonPo();

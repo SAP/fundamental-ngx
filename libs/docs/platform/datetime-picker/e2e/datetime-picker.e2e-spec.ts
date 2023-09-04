@@ -7,7 +7,6 @@ import {
     getElementPlaceholder,
     getText,
     getValue,
-    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -16,7 +15,7 @@ import {
     waitForPresent,
     waitForUnclickable
 } from '../../../../../e2e';
-import { compactDate, currentDate, date, highlightedColor, text, year2030 } from './datetime-picker';
+import { compactDate, currentDate, date, text, year2030 } from './datetime-picker';
 import { DateTimePicker } from './datetime-picker.po';
 
 let dateTimePickerPage: DateTimePicker;

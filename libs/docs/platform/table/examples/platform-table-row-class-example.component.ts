@@ -1,14 +1,21 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
-    TableRowClass,
+    PlatformTableModule,
     TableComponent,
     TableDataProvider,
     TableDataSource,
+    TableRowClass,
     TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-row-class-example',
@@ -24,6 +31,15 @@ import {
                 opacity: 0.5;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        PlatformButtonModule,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableRowClassExampleComponent {

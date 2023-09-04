@@ -1,4 +1,3 @@
-import { PaginationPo } from './pagination.po';
 import {
     click,
     doesItExist,
@@ -14,12 +13,13 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import {
+    ResultsArr2,
     basicPaginationTestArr,
     itemPaginationTestArr,
     playgroundLabelArr,
-    resultsArr,
-    ResultsArr2
+    resultsArr
 } from './pagination-contents';
+import { PaginationPo } from './pagination.po';
 
 describe('Pagination test suite:', () => {
     const paginationPage = new PaginationPo();

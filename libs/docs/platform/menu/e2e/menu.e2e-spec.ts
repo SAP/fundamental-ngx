@@ -1,4 +1,3 @@
-import { MenuPo } from './menu.po';
 import {
     browserIsSafari,
     click,
@@ -11,6 +10,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { MenuPo } from './menu.po';
 
 describe('Menu component test suite', () => {
     const menuPage = new MenuPo();

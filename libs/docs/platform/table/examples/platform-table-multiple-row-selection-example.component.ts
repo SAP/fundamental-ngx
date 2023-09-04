@@ -1,19 +1,33 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
-    TableDataSource,
+    PlatformTableModule,
     TableDataProvider,
-    TableState,
-    TableRowSelectionChangeEvent
+    TableDataSource,
+    TableRowSelectionChangeEvent,
+    TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-multiple-row-selection-example',
     templateUrl: './platform-table-multiple-row-selection-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdDatetimeModule
+    ]
 })
 export class PlatformTableMultipleRowSelectionExampleComponent {
     source: TableDataSource<ExampleItem>;

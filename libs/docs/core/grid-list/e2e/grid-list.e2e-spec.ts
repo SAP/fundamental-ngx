@@ -1,4 +1,3 @@
-import { GridListPo } from './grid-list.po';
 import {
     acceptAlert,
     click,
@@ -15,6 +14,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { isSelected, productTitle, text, textLocked } from './grid-list-content';
+import { GridListPo } from './grid-list.po';
 
 describe('Grid-list test suite', () => {
     const gridListPage = new GridListPo();

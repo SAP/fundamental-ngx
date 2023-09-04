@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { CURRENT_LIB, Libraries } from '../../utilities';
 import { ExampleFile } from '../code-example/example-file';
+import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 
 @Component({
     selector: 'import',
     template: ` <fd-code-snippet [file]="file"></fd-code-snippet>`,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CodeSnippetComponent]
 })
 export class ImportComponent implements OnInit {
     @Input() module: string;
@@ -16,7 +19,7 @@ export class ImportComponent implements OnInit {
     get file(): ExampleFile {
         return {
             code: `import { ${this.module} } from '${this.library}';`,
-            language: 'ts'
+            language: 'typescript'
         };
     }
 

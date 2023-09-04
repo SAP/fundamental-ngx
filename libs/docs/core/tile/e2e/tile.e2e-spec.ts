@@ -1,4 +1,3 @@
-import { TilePo } from './tile.po';
 import {
     getAttributeByName,
     getElementArrayLength,
@@ -9,6 +8,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { TilePo } from './tile.po';
 
 describe('Tile component test', () => {
     const tilePage = new TilePo();

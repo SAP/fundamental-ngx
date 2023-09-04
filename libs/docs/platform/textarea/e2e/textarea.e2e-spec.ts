@@ -1,21 +1,3 @@
-import { TextareaPo } from './textarea.po';
-import {
-    basic_text_area_label,
-    basic_text_area_popover,
-    basicTextareaPlaceholderArr,
-    compact_text_area_label,
-    counterTextareaPlaceholderArr,
-    disabled_text_area_label,
-    growingTextareaPlaceholderArr,
-    no_platforms_form_text_area_label,
-    readonly_text_area_label
-} from './textarea-page-content';
-import {
-    fifty_character_string,
-    forty_nine_character_string,
-    multiple_lines_text,
-    multiple_lines_text_8_lines
-} from './textarea';
 import {
     addValue,
     browserIsSafari,
@@ -41,6 +23,24 @@ import {
     waitForPresent,
     waitTextToBePresentInValue
 } from '../../../../../e2e';
+import {
+    fifty_character_string,
+    forty_nine_character_string,
+    multiple_lines_text,
+    multiple_lines_text_8_lines
+} from './textarea';
+import {
+    basicTextareaPlaceholderArr,
+    basic_text_area_label,
+    basic_text_area_popover,
+    compact_text_area_label,
+    counterTextareaPlaceholderArr,
+    disabled_text_area_label,
+    growingTextareaPlaceholderArr,
+    no_platforms_form_text_area_label,
+    readonly_text_area_label
+} from './textarea-page-content';
+import { TextareaPo } from './textarea.po';
 
 describe('Verify Textarea component', () => {
     const textareaPage = new TextareaPo();

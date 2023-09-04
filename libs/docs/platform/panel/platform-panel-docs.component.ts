@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformPanelActionsExampleComponent } from './examples/platform-panel-actions-example.component';
+import { PlatformPanelCompactExampleComponent } from './examples/platform-panel-compact-example.component';
+import { PlatformPanelConfigExampleComponent } from './examples/platform-panel-config-example.component';
+import { PlatformPanelExpandableExampleComponent } from './examples/platform-panel-expandable-example.component';
+import { PlatformPanelFixedExampleComponent } from './examples/platform-panel-fixed-example.component';
+import { PlatformPanelFixedHeightExampleComponent } from './examples/platform-panel-fixed-height-example.component';
 
 const panelExpandableHtmlExample = 'platform-panel-expandable-example.component.html';
 const panelExpandableTsExample = 'platform-panel-expandable-example.component.ts';
@@ -13,7 +27,21 @@ const panelConfigTsExample = 'platform-panel-config-example.component.ts';
 
 @Component({
     selector: 'app-panel',
-    templateUrl: './platform-panel-docs.component.html'
+    templateUrl: './platform-panel-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformPanelExpandableExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformPanelFixedExampleComponent,
+        PlatformPanelCompactExampleComponent,
+        PlatformPanelFixedHeightExampleComponent,
+        PlatformPanelActionsExampleComponent,
+        PlatformPanelConfigExampleComponent
+    ]
 })
 export class PlatformPanelDocsComponent {
     panelExpandable: ExampleFile[] = [

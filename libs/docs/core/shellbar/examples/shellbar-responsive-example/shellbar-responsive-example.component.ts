@@ -1,13 +1,50 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
-import { ShellbarMenuItem, ShellbarSizes, ShellbarUser, ShellbarUserMenu } from '@fundamental-ngx/core/shellbar';
-import { SearchInput, SuggestionItem, ValueLabelItem } from '@fundamental-ngx/platform/search-field';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import {
+    ProductMenuComponent,
+    ShellbarActionComponent,
+    ShellbarActionsComponent,
+    ShellbarComponent,
+    ShellbarLogoComponent,
+    ShellbarMenuItem,
+    ShellbarSizes,
+    ShellbarSubtitleComponent,
+    ShellbarUser,
+    ShellbarUserMenu
+} from '@fundamental-ngx/core/shellbar';
+import {
+    PlatformSearchFieldModule,
+    SearchInput,
+    SuggestionItem,
+    ValueLabelItem
+} from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fd-shellbar-responsive-example',
     templateUrl: './shellbar-responsive-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        ShellbarComponent,
+        ShellbarLogoComponent,
+        ProductMenuComponent,
+        ShellbarSubtitleComponent,
+        PlatformSearchFieldModule,
+        ContentDensityDirective,
+        ShellbarActionsComponent,
+        NgFor,
+        ShellbarActionComponent,
+        ProductSwitchModule
+    ]
 })
 export class ShellbarResponsiveExampleComponent {
     currentSize: ShellbarSizes = 'm';

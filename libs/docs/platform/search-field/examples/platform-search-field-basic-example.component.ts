@@ -1,12 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform/search-field';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformSearchFieldModule, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-basic-example',
     templateUrl: './platform-search-field-basic-example.component.html',
     styleUrls: ['./platform-search-field-basic-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [PlatformSearchFieldModule, ContentDensityDirective]
 })
 export class PlatformSearchFieldBasicExampleComponent {
     suggestions: SuggestionItem[] = Array.from({ length: 40 }, (element, index) => ({

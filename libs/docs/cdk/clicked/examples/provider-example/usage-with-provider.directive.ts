@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 @Directive({
     selector: '[fdClickedUsageWithProvider]',
-    providers: [FdkClickedProvider]
+    providers: [FdkClickedProvider],
+    standalone: true
 })
 export class UsageWithProviderDirective {
     @Output() anyOutputName: Observable<MouseEvent | KeyboardEvent>;

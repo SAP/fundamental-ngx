@@ -1,12 +1,37 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
+import { NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-example',
     templateUrl: './platform-dynamic-page-example.component.html',
     styleUrls: ['./platform-dynamic-page-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        PlatformDynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        IconModule,
+        InlineHelpModule,
+        BarModule
+    ]
 })
 export class PlatformDynamicPageExampleComponent implements OnDestroy {
     @ViewChild('overlay')

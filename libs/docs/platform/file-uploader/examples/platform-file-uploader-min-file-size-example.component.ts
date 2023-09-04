@@ -1,12 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+    FdpFormGroupModule,
+    FileUploaderInvalidChangeEvent,
+    FileUploaderSelectionChangeEvent,
+    PlatformFileUploaderModule
+} from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-min-file-size-example',
     templateUrl: './platform-file-uploader-min-file-size-example.component.html',
     styleUrls: ['./platform-file-uploader-min-file-size-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformFileUploaderModule, FormsModule, NgFor]
 })
 export class PlatformFileUploaderMinFileSizeExampleComponent {
     files: File[];

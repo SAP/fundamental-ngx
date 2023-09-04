@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     selector: 'message-strip-auto-dismiss-example',
@@ -14,6 +16,8 @@ import { Component } from '@angular/core';
             will be dismissed in 5 seconds after mouse leaves.
         </fd-message-strip>
         <button fd-button (click)="messageStripComponent.open()">Open message strip</button>
-    `
+    `,
+    standalone: true,
+    imports: [MessageStripComponent, AutoDismissMessageStripDirective, ButtonModule]
 })
 export class MessageStripAutoDismissExampleComponent {}

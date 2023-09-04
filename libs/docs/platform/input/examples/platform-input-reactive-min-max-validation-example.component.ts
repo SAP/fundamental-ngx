@@ -1,12 +1,16 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platform/form';
 
 const MAX_VALUE = 10;
 const MIN_VALUE = 5;
 
 @Component({
     selector: 'fdp-platform-input-reactive-min-max-validation-example',
-    templateUrl: './platform-input-reactive-min-max-validation-example.component.html'
+    templateUrl: './platform-input-reactive-min-max-validation-example.component.html',
+    standalone: true,
+    imports: [FormsModule, FdpFormGroupModule, PlatformInputModule, ReactiveFormsModule, NgIf, JsonPipe]
 })
 export class PlatformInputReactiveMinMaxValidationExampleComponent implements AfterViewInit {
     formGroupRegister: FormGroup;

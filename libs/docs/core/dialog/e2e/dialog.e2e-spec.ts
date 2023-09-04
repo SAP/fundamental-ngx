@@ -29,6 +29,7 @@ import {
     waitForNotPresent,
     waitForPresent
 } from '../../../../../e2e';
+import { papayaFruit } from './dialog';
 import {
     approvedStatus,
     bottomRightPosition,
@@ -38,17 +39,12 @@ import {
     customClass,
     defaultPrice,
     dismissedStatus,
-    emptyValuesArr,
     escapeStatus,
     mobileClass,
     mobileProperty,
     noMobileSpacingClass,
-    outlineProperty,
-    styleAttribute,
-    topPaddingProperty
+    styleAttribute
 } from './dialog-contents';
-import { papayaFruit } from './dialog';
-import waitForDisplayed from 'webdriverio/build/commands/element/waitForDisplayed';
 
 describe('dialog test suite', () => {
     const dialogPage = new DialogPo();

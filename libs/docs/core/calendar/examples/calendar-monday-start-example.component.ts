@@ -1,12 +1,17 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { DaysOfWeek } from '@fundamental-ngx/core/calendar';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent, DaysOfWeek } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fd-calendar-monday-start-example',
@@ -33,7 +38,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [CalendarComponent, FormsModule, FormLabelModule, SelectModule, NgFor, FdDatetimeModule]
 })
 export class CalendarMondayStartExampleComponent {
     date: FdDate = new FdDate(2020, 10, 25);

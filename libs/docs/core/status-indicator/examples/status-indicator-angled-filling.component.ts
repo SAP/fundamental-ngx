@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-status-indicator-angled-filling',
-    templateUrl: './status-indicator-angled-filling.component.html'
+    templateUrl: './status-indicator-angled-filling.component.html',
+    standalone: true,
+    imports: [StatusIndicatorModule]
 })
 export class StatusIndicatorAngeledFillingComponent {
     /* eslint-disable max-len */

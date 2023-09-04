@@ -1,6 +1,30 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DatePickerAllowNullExampleComponent } from './examples/date-picker-allow-null-example.component';
+import { DatePickerDisableFocusScrollExampleComponent } from './examples/date-picker-disable-focus-scroll-example.component';
+import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
+import { DatePickerDisabledExampleComponent } from './examples/date-picker-disabled-example.component';
+import { DatePickerFormExampleComponent } from './examples/date-picker-form-example.component';
+import { DatePickerFormRangeExampleComponent } from './examples/date-picker-form-range-example.component';
+import { DatePickerFormatExampleComponent } from './examples/date-picker-format-example.component';
+import { DatePickerI18nExampleComponent } from './examples/date-picker-i18n-example.component';
+import { DatePickerPositionExampleComponent } from './examples/date-picker-position-example.component';
+import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
+import { DatePickerRangeExampleComponent } from './examples/date-picker-range-example.component';
+import { DatePickerSingleExampleComponent } from './examples/date-picker-single-example.component';
+import { DatePickerTodayButtonExampleComponent } from './examples/date-picker-today-button-example.component';
+import { DatePickerUpdateOnBlurExampleComponent } from './examples/date-picker-update-on-blur-example.component';
+import { DatePickerMobileModeExampleComponent } from './examples/mobile-mode/date-picker-mobile-mode-example.component';
 
 const datePickerRangeSrc = 'date-picker-range-example.component.ts';
 const datePickerSingleSrc = 'date-picker-single-example.component.ts';
@@ -25,7 +49,31 @@ const datePickerMobileH = 'mobile-mode/date-picker-mobile-mode-example.component
 
 @Component({
     selector: 'app-date-picker',
-    templateUrl: './date-picker-docs.component.html'
+    templateUrl: './date-picker-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DatePickerSingleExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DatePickerRangeExampleComponent,
+        RouterLink,
+        DatePickerI18nExampleComponent,
+        DatePickerTodayButtonExampleComponent,
+        DatePickerFormatExampleComponent,
+        DatePickerAllowNullExampleComponent,
+        DatePickerFormExampleComponent,
+        DatePickerFormRangeExampleComponent,
+        DatePickerDisableFuncExampleComponent,
+        DatePickerUpdateOnBlurExampleComponent,
+        DatePickerRangeDisabledExampleComponent,
+        DatePickerPositionExampleComponent,
+        DatePickerDisabledExampleComponent,
+        DatePickerDisableFocusScrollExampleComponent,
+        DatePickerMobileModeExampleComponent
+    ]
 })
 export class DatePickerDocsComponent {
     datePickerSingle: ExampleFile[] = [

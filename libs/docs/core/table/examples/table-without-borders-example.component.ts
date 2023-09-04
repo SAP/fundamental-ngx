@@ -1,8 +1,15 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
     selector: 'fd-table-without-borders-example',
-    templateUrl: './table-without-borders-example.component.html'
+    templateUrl: './table-without-borders-example.component.html',
+    standalone: true,
+    imports: [FocusableGridDirective, TableModule, NgFor, LinkComponent, IconModule]
 })
 export class TableWithoutBordersExampleComponent implements OnInit {
     tableRows: any[];

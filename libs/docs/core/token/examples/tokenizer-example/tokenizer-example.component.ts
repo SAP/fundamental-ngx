@@ -1,9 +1,14 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControlModule, FormItemModule } from '@fundamental-ngx/core/form';
+import { TokenModule } from '@fundamental-ngx/core/token';
 
 @Component({
     selector: 'fd-tokenizer-example',
-    templateUrl: './tokenizer-example.component.html'
+    templateUrl: './tokenizer-example.component.html',
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, FormItemModule, TokenModule, NgFor, FormControlModule]
 })
 export class TokenizerExampleComponent implements OnInit {
     tokenizerExampleForm: FormGroup;

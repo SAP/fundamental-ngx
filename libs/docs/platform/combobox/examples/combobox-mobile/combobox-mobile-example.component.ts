@@ -1,14 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { JsonPipe } from '@angular/common';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import {
+    ComboboxSelectionChangeEvent,
+    FdpFormGroupModule,
+    PlatformComboboxModule
+} from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-mobile-example',
     templateUrl: './combobox-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformComboboxModule, JsonPipe]
 })
 export class ComboboxMobileExampleComponent {
     dataSource = [

@@ -1,12 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+    FdpFormGroupModule,
+    FileUploaderInvalidChangeEvent,
+    FileUploaderSelectionChangeEvent,
+    PlatformFileUploaderModule
+} from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-file-types-example',
     templateUrl: './platform-file-uploader-file-types-example.component.html',
     styleUrls: ['platform-file-uploader-file-types-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformFileUploaderModule, FormsModule, NgFor]
 })
 export class PlatformFileUploaderFileTypesExampleComponent {
     files: File[];

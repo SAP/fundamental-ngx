@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 
+import { NgFor, NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TokenModule } from '@fundamental-ngx/core/token';
 import {
-    VhdDataProvider,
-    VhdValue,
-    VhdValueChangeEvent,
+    PlatformValueHelpDialogModule,
     ValueHelpDialogDataSource,
-    VhdIncludedEntity,
-    VhdExcludedEntity,
+    VhdDataProvider,
+    VhdDefineExcludeStrategy,
     VhdDefineIncludeStrategy,
-    VhdDefineExcludeStrategy
+    VhdExcludedEntity,
+    VhdIncludedEntity,
+    VhdValue,
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -57,7 +62,9 @@ const data = exampleDataSource();
 
 @Component({
     selector: 'fdp-platform-vhd-basic-example',
-    templateUrl: './platform-vhd-basic-example.component.html'
+    templateUrl: './platform-vhd-basic-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, NgIf, TokenModule, ContentDensityDirective, NgFor, PlatformValueHelpDialogModule]
 })
 export class PlatformVhdBasicExampleComponent {
     filters = data.filters;

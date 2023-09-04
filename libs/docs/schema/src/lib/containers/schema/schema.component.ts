@@ -1,13 +1,16 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Properties, Schema } from '../../models/schema.model';
+import { SchemaGroupComponent } from '../schema-group/schema-group.component';
 
 @Component({
     selector: 'schema',
     templateUrl: 'schema.component.html',
-    styleUrls: ['schema.component.scss']
+    styleUrls: ['schema.component.scss'],
+    standalone: true,
+    imports: [SchemaGroupComponent]
 })
 export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     @Input() schema: Schema;

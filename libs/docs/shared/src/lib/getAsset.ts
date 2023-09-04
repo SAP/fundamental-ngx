@@ -1,10 +1,10 @@
-import { ExampleFile } from './core-helpers/code-example/example-file';
-import { inject } from '@angular/core';
-import { CURRENT_LIB } from './utilities';
-import { CURRENT_COMPONENT } from './tokens/current-component.token';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ExampleFile } from './core-helpers/code-example/example-file';
+import { CURRENT_COMPONENT } from './tokens/current-component.token';
+import { CURRENT_LIB } from './utilities';
 
 const fileExtensionToLanguage = {
     ts: 'typescript',

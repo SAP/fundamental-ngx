@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DatePickerDayjsAdapterExampleComponent } from './examples/date-picker-dayjs-adapter-example.component';
+import { DayjsAdapterOptionsExampleComponent } from './examples/dayjs-adapter-options-example.component';
+import { DayjsDatetimeFormatsExampleComponent } from './examples/dayjs-datetime-formats-example.component';
 
 const datePickerDayjsAdapterSrcTs = 'date-picker-dayjs-adapter-example.component.ts';
 const datePickerDayjsAdapterSrcHtml = 'date-picker-dayjs-adapter-example.component.html';
@@ -11,7 +22,18 @@ const dayjsDatetimeFormatsSrcHtml = 'dayjs-datetime-formats-example.component.ht
 
 @Component({
     selector: 'app-dayjs-datetime-adapter',
-    templateUrl: './dayjs-datetime-adapter-docs.component.html'
+    templateUrl: './dayjs-datetime-adapter-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DatePickerDayjsAdapterExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DayjsAdapterOptionsExampleComponent,
+        DayjsDatetimeFormatsExampleComponent
+    ]
 })
 export class DayjsDatetimeAdapterDocsComponent {
     datePickerDayjsAdapter: ExampleFile[] = [

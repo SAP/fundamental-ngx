@@ -1,9 +1,22 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdpFormGroupModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-switch-forms-example',
-    templateUrl: './switch-forms-example.component.html'
+    templateUrl: './switch-forms-example.component.html',
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformSwitchModule,
+        ContentDensityDirective,
+        NgIf,
+        JsonPipe
+    ]
 })
 export class SwitchFormsExampleComponent {
     customForm = new FormGroup({

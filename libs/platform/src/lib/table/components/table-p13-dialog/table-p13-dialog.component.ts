@@ -13,15 +13,15 @@ import {
     TableState
 } from '@fundamental-ngx/platform/table-helpers';
 
-import { TableP13SortComponent } from './table-p13-sort.component';
-import { TableP13GroupComponent } from './table-p13-group.component';
-import { TableP13FilterComponent } from './table-p13-filter.component';
 import { TableP13ColumnsComponent } from './table-p13-columns.component';
+import { TableP13FilterComponent } from './table-p13-filter.component';
+import { TableP13GroupComponent } from './table-p13-group.component';
+import { TableP13SortComponent } from './table-p13-sort.component';
 
-import { SortDialogData, SortDialogResultData, P13SortingDialogComponent } from './sorting/sorting.component';
-import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
-import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
 import { ColumnsDialogData, ColumnsDialogResultData, P13ColumnsDialogComponent } from './columns/columns.component';
+import { FilterDialogData, FilterDialogResultData, P13FilteringDialogComponent } from './filtering/filtering.component';
+import { GroupDialogData, GroupDialogResultData, P13GroupingDialogComponent } from './grouping/grouping.component';
+import { P13SortingDialogComponent, SortDialogData, SortDialogResultData } from './sorting/sorting.component';
 
 const dialogConfig: DialogConfig = {
     responsivePadding: true,
@@ -41,16 +41,16 @@ const dialogConfig: DialogConfig = {
  * ...
  * <fdp-table-p13-dialog [table]="myTable">
  *   <!-- Sort Panel -->
- *   <fdp-table-p13n-sort></fdp-table-p13n-sort>
+ *   <fdp-table-p13-sort></fdp-table-p13-sort>
  *
  *   <!-- Filter Panel -->
- *   <fdp-table-p13n-filter></fdp-table-p13n-filter>
+ *   <fdp-table-p13-filter></fdp-table-p13-filter>
  *
  *   <!-- Group Panel -->
- *   <fdp-table-p13n-group></fdp-table-p13n-group>
+ *   <fdp-table-p13-group></fdp-table-p13-group>
  *
  *   <!-- Columns Panel -->
- *   <fdp-table-p13n-columns></fdp-table-p13n-columns>
+ *   <fdp-table-p13-columns></fdp-table-p13-columns>
  * </fdp-table-p13-dialog>
  * ```
  * */

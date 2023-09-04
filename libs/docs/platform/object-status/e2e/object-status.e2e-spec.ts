@@ -1,4 +1,3 @@
-import { ObjectStatusPo } from './object-status.po';
 import {
     acceptAlert,
     checkElementDisplayed,
@@ -12,6 +11,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { defaultStatusText, indicationColorText, semanticStatusText } from './object-status-contents';
+import { ObjectStatusPo } from './object-status.po';
 
 describe('object status test suite', () => {
     const objectStatusPage = new ObjectStatusPo();

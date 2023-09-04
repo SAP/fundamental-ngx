@@ -1,6 +1,21 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { TimePickerAllowNullExampleComponent } from './examples/time-picker-allow-null-example.component';
+import { TimePickerCompactExampleComponent } from './examples/time-picker-compact-example.component';
+import { TimePickerDisabledExampleComponent } from './examples/time-picker-disabled-example.component';
+import { TimePickerExampleComponent } from './examples/time-picker-example.component';
+import { TimePickerFormExampleComponent } from './examples/time-picker-form-example.component';
+import { TimePickerFormatExampleComponent } from './examples/time-picker-format-example.component';
+import { TimePickerLocaleExampleComponent } from './examples/time-picker-locale-example/time-picker-locale-example.component';
 
 const timePickerFormScssSrc = 'time-picker-form-example.component.scss';
 
@@ -21,7 +36,22 @@ const timePickerFormTsSrc = 'time-picker-form-example.component.ts';
 
 @Component({
     selector: 'app-time-picker',
-    templateUrl: './time-picker-docs.component.html'
+    templateUrl: './time-picker-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TimePickerExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        TimePickerFormatExampleComponent,
+        TimePickerDisabledExampleComponent,
+        TimePickerCompactExampleComponent,
+        TimePickerAllowNullExampleComponent,
+        TimePickerFormExampleComponent,
+        TimePickerLocaleExampleComponent
+    ]
 })
 export class TimePickerDocsComponent {
     defaultTimePicker: ExampleFile[] = [

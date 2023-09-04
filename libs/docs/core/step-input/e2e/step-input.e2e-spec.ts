@@ -1,4 +1,3 @@
-import { StepInputPo } from './step-input.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -18,6 +17,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { sections } from './step-input-content';
+import { StepInputPo } from './step-input.po';
 
 describe('Step input component test suit', () => {
     const stepInputPage = new StepInputPo();

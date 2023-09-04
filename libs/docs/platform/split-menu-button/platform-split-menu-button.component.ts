@@ -6,11 +6,33 @@ const splitMenuButtonIconsCode = 'platform-split-button-icons-example.component.
 const splitMenuButtonBehaviorHtml = 'platform-split-button-behaviors-example.component.html';
 const splitMenuButtonBehaviorCode = 'platform-split-button-behaviors-example.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformDocsSplitMenuButtonBehaviorComponent } from './examples/platform-split-button-behaviors-example.component';
+import { PlatformDocsSplitMenuButtonIconsComponent } from './examples/platform-split-button-icons-example.component';
+import { PlatformDocsSplitMenuButtonTypesComponent } from './examples/platform-split-button-types-example.component';
 
 @Component({
     selector: 'app-split-menu-button',
-    templateUrl: './platform-split-menu-button.component.html'
+    templateUrl: './platform-split-menu-button.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformDocsSplitMenuButtonBehaviorComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformDocsSplitMenuButtonTypesComponent,
+        PlatformDocsSplitMenuButtonIconsComponent
+    ]
 })
 export class PlatformDocsSplitMenuButtonComponent {
     splitMenuButtonBehavior: ExampleFile[] = [

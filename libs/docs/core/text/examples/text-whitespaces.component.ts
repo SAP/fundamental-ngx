@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { TextComponent } from '@fundamental-ngx/core/text';
 
 @Component({
     selector: 'fd-text-whitespaces',
-    templateUrl: './text-whitespaces.component.html'
+    templateUrl: './text-whitespaces.component.html',
+    standalone: true,
+    imports: [TextComponent]
 })
 export class TextWhitespacesComponent {
     text = `    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididuntut labore et

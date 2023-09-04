@@ -12,6 +12,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class SeparatorComponent {}

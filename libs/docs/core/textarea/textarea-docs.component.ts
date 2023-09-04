@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    TextareaExampleComponent,
+    TextareaInlineHelpExampleComponent,
+    TextareaStateExampleComponent
+} from './examples/textarea-examples.component';
+import { TextareaFormGroupExampleComponent } from './examples/textarea-form-group-example.component';
 
 const formGroupInputScss = 'textarea-form-group-example.component.scss';
 
@@ -12,7 +26,19 @@ const formGroupInputTs = 'textarea-form-group-example.component.ts';
 
 @Component({
     selector: 'app-input',
-    templateUrl: './textarea-docs.component.html'
+    templateUrl: './textarea-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        TextareaExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        TextareaInlineHelpExampleComponent,
+        TextareaStateExampleComponent,
+        TextareaFormGroupExampleComponent
+    ]
 })
 export class TextareaDocsComponent {
     textareaHtml: ExampleFile[] = [

@@ -1,4 +1,3 @@
-import { MessagePagePo } from './message-page.po';
 import {
     checkElArrIsClickable,
     click,
@@ -10,6 +9,7 @@ import {
     waitForElDisplayed
 } from '../../../../../e2e';
 import { subtitleTextArr, titleTextArr } from './message-page-content';
+import { MessagePagePo } from './message-page.po';
 
 describe('Message Page test suite', () => {
     const messagePage = new MessagePagePo();

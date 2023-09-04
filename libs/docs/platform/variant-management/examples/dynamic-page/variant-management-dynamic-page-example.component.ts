@@ -1,8 +1,24 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
-import { FilterableColumnDataType, FilterType, PlatformTableManagedPreset } from '@fundamental-ngx/platform/table';
-import { Variant } from '@fundamental-ngx/platform/variant-management';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
+import { PlatformSmartFilterBarModule, SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
+import {
+    FilterType,
+    FilterableColumnDataType,
+    PlatformTableManagedPreset,
+    PlatformTableModule
+} from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { Variant, VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 
 export interface CombinedVariantManagementPreset {
     platformSmartFilterBar?: SmartFilterBarManagedPreset;
@@ -26,7 +42,24 @@ export interface CombinedVariantManagementPreset {
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        VariantManagementModule,
+        PlatformDynamicPageModule,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        PlatformSmartFilterBarModule,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        BarModule
+    ]
 })
 export class VariantManagementDynamicPageExampleComponent implements OnDestroy {
     @ViewChild('overlay')

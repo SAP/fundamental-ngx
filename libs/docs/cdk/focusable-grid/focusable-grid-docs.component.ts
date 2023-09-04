@@ -1,5 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { ShortRowsExampleComponent } from './examples/short-rows-example/short-rows-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
 const defaultExampleTs = 'default-example/default-example.component.ts';
@@ -10,7 +19,16 @@ const shortRowsExampleTs = 'short-rows-example/short-rows-example.component.ts';
 @Component({
     selector: 'app-tabs',
     templateUrl: './focusable-grid-docs.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DefaultExampleComponent,
+        CodeExampleComponent,
+        ShortRowsExampleComponent
+    ]
 })
 export class FocusableGridDocsComponent {
     defaultExample: ExampleFile[] = [
@@ -22,7 +40,7 @@ export class FocusableGridDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'focusable-grid-default-example',
             component: 'DefaultExampleComponent'
         }
@@ -37,7 +55,7 @@ export class FocusableGridDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(shortRowsExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'short-rows-example',
             component: 'ShortRowsExampleComponent'
         }

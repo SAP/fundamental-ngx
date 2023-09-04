@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
 
 @Component({
     selector: 'fdp-platform-split-button-types-example',
-    templateUrl: 'platform-split-button-types-example.component.html'
+    templateUrl: 'platform-split-button-types-example.component.html',
+    standalone: true,
+    imports: [PlatformSplitMenuButtonModule, ContentDensityDirective, PlatformMenuModule]
 })
 export class PlatformDocsSplitMenuButtonTypesComponent {
     selectedCozyItem: string;

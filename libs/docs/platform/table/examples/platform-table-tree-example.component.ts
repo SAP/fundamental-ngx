@@ -2,26 +2,42 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 import { DropPredicate } from '@fundamental-ngx/cdk/utils';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
-    newTableRow,
+    PlatformTableModule,
     TableComponent,
     TableDataProvider,
     TableDataSource,
     TableRow,
     TableRowSelectionChangeEvent,
-    TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableRowType,
+    TableRowsRearrangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableDraggableDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { delay, tap } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-table-tree-example',
     templateUrl: './platform-table-tree-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        TableDraggableDirective,
+        PlatformButtonModule,
+        FdDatetimeModule
+    ]
 })
 export class PlatformTableTreeExampleComponent {
     @ViewChild(TableComponent)

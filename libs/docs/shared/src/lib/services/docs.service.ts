@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { PACKAGE_JSON } from '../tokens/package-json.token';
 import { LERNA_JSON } from '../tokens/lerna-json.token';
+import { PACKAGE_JSON } from '../tokens/package-json.token';
 
 @Injectable()
 export class DocsService {

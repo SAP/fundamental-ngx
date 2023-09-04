@@ -1,4 +1,5 @@
 import {
+    checkElArrIsClickable,
     click,
     doesItExist,
     getAttributeByName,
@@ -11,8 +12,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForPresent,
-    checkElArrIsClickable
+    waitForPresent
 } from '../../../../../e2e';
 import { DynamicPagePo } from './dynamic-page.po';
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 interface Item {
     title: string;
@@ -8,7 +9,9 @@ interface Item {
 
 @Component({
     selector: 'fdp-platform-standard-list-item-with-footer-example',
-    templateUrl: './platform-standard-list-item-with-footer-example.component.html'
+    templateUrl: './platform-standard-list-item-with-footer-example.component.html',
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule]
 })
 export class PlatformStandardListItemWithFooterExampleComponent {
     items: Item[] = [

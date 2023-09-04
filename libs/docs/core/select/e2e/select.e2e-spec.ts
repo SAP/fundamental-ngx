@@ -1,4 +1,3 @@
-import { SelectPo } from './select.po';
 import {
     browserIsSafari,
     click,
@@ -11,6 +10,7 @@ import {
     waitForInvisibilityOf,
     waitForPresent
 } from '../../../../../e2e';
+import { SelectPo } from './select.po';
 
 fdescribe('Select component:', () => {
     const selectPage = new SelectPo();

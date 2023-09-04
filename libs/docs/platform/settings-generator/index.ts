@@ -1,9 +1,23 @@
-export * from './settings-generator-docs.module';
+import { Routes } from '@angular/router';
 
-export * from './examples/dialog/settings-generator-dialog-example.component';
-
-export * from './examples/message-popover/settings-generator-message-popover-example.component';
-
-export * from './examples/custom-control/settings-generator-custom-control-example.component';
-
-export * from './examples/custom-layout/settings-generator-custom-layout-example.component';
+export const ROUTES: Routes = [
+    {
+        path: '',
+        loadComponent: () =>
+            import('./settings-generator-header/settings-generator-header.component').then(
+                (c) => c.SettingsGeneratorHeaderComponent
+            ),
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                    import('./settings-generator-docs.component').then((c) => c.SettingsGeneratorDocsComponent)
+            }
+        ],
+        data: {
+            primary: true
+        }
+    }
+];
+export const LIBRARY_NAME = 'settings-generator';
+export const API_FILE_KEY = 'settingsGenerator';

@@ -13,7 +13,7 @@ import {
     TableState
 } from '@fundamental-ngx/platform/table';
 
-import { ITEMS, ExampleItem } from './platform-table-data-items-example';
+import { ExampleItem, ITEMS } from './platform-table-data-items-example';
 
 /**
  * Table Data Provider Example

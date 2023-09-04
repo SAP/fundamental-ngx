@@ -1,10 +1,17 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-template-based-dialog-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './template-based-dialog-example.component.html'
+    templateUrl: './template-based-dialog-example.component.html',
+    standalone: true,
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, ButtonModule]
 })
 export class TemplateBasedDialogExampleComponent {
     confirmationReason: string;

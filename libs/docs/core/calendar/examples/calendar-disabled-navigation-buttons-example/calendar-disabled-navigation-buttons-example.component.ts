@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { CalendarCurrent, FdCalendarView, NavigationButtonDisableFunction } from '@fundamental-ngx/core/calendar';
+import {
+    CalendarComponent,
+    CalendarCurrent,
+    FdCalendarView,
+    NavigationButtonDisableFunction
+} from '@fundamental-ngx/core/calendar';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-calendar-disabled-navigation-buttons-example',
-    templateUrl: 'calendar-disabled-navigation-buttons-example.html'
+    templateUrl: 'calendar-disabled-navigation-buttons-example.html',
+    standalone: true,
+    imports: [CalendarComponent, FdDatetimeModule]
 })
 export class CalendarDisabledNavigationButtonsExampleComponent {
     /**

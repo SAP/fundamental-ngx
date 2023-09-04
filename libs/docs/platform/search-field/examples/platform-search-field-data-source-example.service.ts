@@ -1,4 +1,4 @@
-import { of, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { DataProvider } from '@fundamental-ngx/platform/shared';
 

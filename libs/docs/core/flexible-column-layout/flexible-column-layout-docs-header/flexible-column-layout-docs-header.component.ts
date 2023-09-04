@@ -1,4 +1,11 @@
 import { Component } from '@angular/core';
+import {
+    DescriptionComponent,
+    DocPageComponent,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'fd-flexible-column-layout-docs-header',
@@ -9,6 +16,8 @@ import { Component } from '@angular/core';
                 color: red;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class FlexibleColumnLayoutDocsHeaderComponent {}

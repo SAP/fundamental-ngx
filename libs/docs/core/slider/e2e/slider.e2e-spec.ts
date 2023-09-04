@@ -1,4 +1,3 @@
-import { SliderPo } from './slider.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -19,6 +18,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { cozySliderClass, disabledAttribute } from './slider-contents';
+import { SliderPo } from './slider.po';
 
 describe('slider test suite', () => {
     const sliderPage = new SliderPo();

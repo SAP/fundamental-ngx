@@ -1,4 +1,6 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FocusableGridDirective, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-grid-short-rows-default-example',
@@ -29,7 +31,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FocusableGridDirective, NgFor, FocusableListDirective, NgIf, FocusableItemDirective]
 })
 export class ShortRowsExampleComponent {
     constructor() {}

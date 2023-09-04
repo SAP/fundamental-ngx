@@ -1,4 +1,3 @@
-import { BusyIndicatorPo } from './busy-indicator.po';
 import {
     addValue,
     browserIsSafari,
@@ -14,6 +13,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { sizeL, sizeM, sizeS } from './busy-indicator-contents';
+import { BusyIndicatorPo } from './busy-indicator.po';
 
 describe('Busy Indicator test suite:', () => {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();

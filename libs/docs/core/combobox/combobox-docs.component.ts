@@ -1,6 +1,31 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ComboboxAsyncExampleComponent } from './examples/combobox-async-example.component';
+import { ComboboxBylineExampleComponent } from './examples/combobox-byline-example.component';
+import { ComboboxColumnsExampleComponent } from './examples/combobox-columns-example.component';
+import { ComboboxDisabledExampleComponent } from './examples/combobox-disabled-example.component';
+import { ComboboxDisplaywithExampleComponent } from './examples/combobox-displaywith-example.component';
+import { ComboboxDynamicExampleComponent } from './examples/combobox-dynamic-example.component';
+import { ComboboxExampleComponent } from './examples/combobox-example.component';
+import { ComboboxFormsExampleComponent } from './examples/combobox-forms-example.component';
+import { ComboboxGroupExampleComponent } from './examples/combobox-group-example.component';
+import { ComboboxHeightExampleComponent } from './examples/combobox-height-example.component';
+import { ComboboxIncludesExampleComponent } from './examples/combobox-includes-example.component';
+import { ComboboxMobileExampleComponent } from './examples/combobox-mobile/combobox-mobile-example.component';
+import { ComboboxOpenControlExampleComponent } from './examples/combobox-open-control-example.component';
+import { ComboboxSearchFieldExampleComponent } from './examples/combobox-search-field-example.component';
+import { ComboboxSearchFunctionExampleComponent } from './examples/combobox-search-function-example.component';
+import { ComboboxTemplateExampleComponent } from './examples/combobox-template-example.component';
 
 const comboboxScss = 'combobox-example.component.scss';
 
@@ -40,7 +65,32 @@ const comboboxBylineTs = 'combobox-byline-example.component.ts';
 
 @Component({
     selector: 'fd-combobox-docs',
-    templateUrl: './combobox-docs.component.html'
+    templateUrl: './combobox-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ComboboxExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ComboboxSearchFieldExampleComponent,
+        ComboboxDynamicExampleComponent,
+        ComboboxSearchFunctionExampleComponent,
+        RouterLink,
+        ComboboxMobileExampleComponent,
+        ComboboxDisplaywithExampleComponent,
+        ComboboxOpenControlExampleComponent,
+        ComboboxAsyncExampleComponent,
+        ComboboxTemplateExampleComponent,
+        ComboboxColumnsExampleComponent,
+        ComboboxGroupExampleComponent,
+        ComboboxHeightExampleComponent,
+        ComboboxIncludesExampleComponent,
+        ComboboxFormsExampleComponent,
+        ComboboxDisabledExampleComponent,
+        ComboboxBylineExampleComponent
+    ]
 })
 export class ComboboxDocsComponent {
     comboboxBasicExample: ExampleFile[] = [

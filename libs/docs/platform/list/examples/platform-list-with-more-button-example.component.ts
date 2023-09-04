@@ -1,7 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 export interface User {
     firstName: string;
@@ -131,7 +134,9 @@ export class ListDataProvider extends DataProvider<User> {
 @Component({
     selector: 'fdp-platform-list-with-more-button-example',
     templateUrl: './platform-list-with-more-button-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformListModule, StandardListItemModule, BusyIndicatorComponent, NgIf, AsyncPipe]
 })
 export class PlatformListWithMoreButtonExampleComponent {
     _dataSource = new ListDataSource<User>(new ListDataProvider());

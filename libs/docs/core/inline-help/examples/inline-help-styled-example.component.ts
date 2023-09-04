@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 @Component({
     selector: 'fd-inline-help-styled-example',
@@ -13,6 +15,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
             }
         `
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [IconModule, InlineHelpModule]
 })
 export class InlineHelpStyledExampleComponent {}

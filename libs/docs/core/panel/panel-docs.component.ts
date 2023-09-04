@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PanelCompactExampleComponent } from './examples/panel-compact-example.component';
+import { PanelExpandableExampleComponent } from './examples/panel-expandable-examples.component';
+import { PanelFixedExampleComponent } from './examples/panel-fixed-example.component';
+import { PanelFixedHeightExampleComponent } from './examples/panel-fixed-height-example.component';
 
 const panelExpandableSrc = 'panel-expandable-example.component.html';
 const panelFixedSrc = 'panel-fixed-example.component.html';
@@ -9,7 +21,19 @@ const panelFixedHeightSrc = 'panel-fixed-height-example.component.html';
 
 @Component({
     selector: 'app-panel',
-    templateUrl: './panel-docs.component.html'
+    templateUrl: './panel-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PanelExpandableExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PanelFixedExampleComponent,
+        PanelCompactExampleComponent,
+        PanelFixedHeightExampleComponent
+    ]
 })
 export class PanelDocsComponent {
     panelExpandable: ExampleFile[] = [

@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-    DatetimeAdapter,
-    DATE_TIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core/datetime';
+import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter
+} from '@fundamental-ngx/core/datetime';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-date-picker-update-on-blur-example',
@@ -32,7 +35,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, PlatformDatePickerComponent, FormsModule]
 })
 export class PlatformDatePickerUpdateOnBlurExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

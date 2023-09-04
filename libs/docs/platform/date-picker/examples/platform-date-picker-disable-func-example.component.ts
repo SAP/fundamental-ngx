@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-    DatetimeAdapter,
     DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-date-picker-disable-func-example',
@@ -23,7 +24,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickerDisableFuncExampleComponent {
     customForm = new FormGroup({

@@ -1,10 +1,13 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PlatformObjectAttributeModule } from '@fundamental-ngx/platform/object-attribute';
 
 @Component({
     selector: 'fdp-platform-object-attribute-link-example',
     templateUrl: './platform-object-attribute-link-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformObjectAttributeModule]
 })
 export class PlatformObjectAttributeLinkExampleComponent {
     constructor(private router: Router) {}

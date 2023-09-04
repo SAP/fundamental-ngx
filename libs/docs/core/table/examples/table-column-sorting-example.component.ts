@@ -1,5 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { ToolbarComponent, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { FilterPipe, SortByPipe } from '@fundamental-ngx/docs/shared';
 
 const rows = [
     {
@@ -50,7 +64,30 @@ interface ExampleRow {
 @Component({
     selector: 'fd-table-column-sorting-example',
     templateUrl: './table-column-sorting-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ToolbarComponent,
+        ToolbarSpacerDirective,
+        ContentDensityDirective,
+        InputGroupModule,
+        FormsModule,
+        ButtonModule,
+        FocusableGridDirective,
+        TableModule,
+        NgFor,
+        LinkComponent,
+        IconModule,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        ListModule,
+        FormItemModule,
+        FormLabelModule,
+        FormControlModule,
+        SortByPipe,
+        FilterPipe
+    ]
 })
 export class TableColumnSortingExampleComponent implements OnInit {
     tableRows: ExampleRow[];

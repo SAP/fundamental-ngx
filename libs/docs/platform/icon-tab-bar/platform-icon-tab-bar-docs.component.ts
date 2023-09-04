@@ -1,7 +1,22 @@
 import { Component } from '@angular/core';
 import { TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
+import { PlatformIconTabBarFilterTypeExampleComponent } from './examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component';
+import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
+import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component';
+import { PlatformIconTabBarProcessTypeExampleComponent } from './examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component';
+import { PlatformIconTabBarTextTypeExampleComponent } from './examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component';
 
 const iconTabBarTextTypeHtml =
     'platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.html';
@@ -50,7 +65,22 @@ export interface IconTabBarItem extends TabConfig {
 
 @Component({
     selector: 'fd-icon-tab-bar-docs',
-    templateUrl: './platform-icon-tab-bar-docs.component.html'
+    templateUrl: './platform-icon-tab-bar-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformIconTabBarTextTypeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformIconTabBarIconOnlyTypeExampleComponent,
+        PlatformIconTabBarIconTypeExampleComponent,
+        PlatformIconTabBarFilterTypeExampleComponent,
+        PlatformIconTabBarProcessTypeExampleComponent,
+        MessageStripComponent,
+        PlatformIconTabBarConfigurablePaddingsExampleComponent
+    ]
 })
 export class PlatformIconTabBarDocsComponent {
     iconTabBarTextTypeFiles: ExampleFile[] = [

@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ObjectMarkerTextAndIconExampleComponent } from './examples/object-marker-text-and-icon/object-marker-text-and-icon-example.component';
+import { ObjectMarkerIconAndTextClickableExampleComponent } from './examples/object-marker-text-clickable/object-marker-text-clickable-example.component';
+import { ObjectMarkerTextOnlyExampleComponent } from './examples/object-marker-text-only-example/object-marker-text-only-example.component';
+import { ObjectMarkerExampleComponent } from './examples/object-marker/object-marker-example.component';
 
 const platformObjectMarkerExampleScss = 'object-marker-example.scss';
 const platformObjectMarkerDefaultExampleHtml = 'object-marker/object-marker-example.component.html';
@@ -20,7 +31,18 @@ const platformObjectMarkerTextOnlyExampleTs =
 
 @Component({
     selector: 'fdp-platform-object-marker',
-    templateUrl: './platform-object-marker-docs.component.html'
+    templateUrl: './platform-object-marker-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ObjectMarkerExampleComponent,
+        CodeExampleComponent,
+        ObjectMarkerTextAndIconExampleComponent,
+        ObjectMarkerTextOnlyExampleComponent,
+        ObjectMarkerIconAndTextClickableExampleComponent
+    ]
 })
 export class PlatformObjectMarkerDocsComponent {
     platformDefaultObjectMarkerHtmlType: ExampleFile[] = [

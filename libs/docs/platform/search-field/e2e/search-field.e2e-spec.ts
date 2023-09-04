@@ -1,3 +1,4 @@
+import { checkElArrIsClickable } from 'e2e/wdio/helper/assertion-helper';
 import {
     browserIsIE,
     click,
@@ -12,9 +13,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { SearchFieldPo } from './search-field.po';
 import { expected_category, search_placeholder } from './search-field-content';
-import { checkElArrIsClickable } from 'e2e/wdio/helper/assertion-helper';
+import { SearchFieldPo } from './search-field.po';
 
 describe('Search field', () => {
     const {

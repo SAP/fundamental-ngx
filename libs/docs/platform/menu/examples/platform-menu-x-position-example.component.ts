@@ -1,10 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
 @Component({
     selector: 'fdp-platform-menu-x-position-example',
     templateUrl: './platform-menu-x-position-example.component.html',
     styleUrls: ['./platform-menu-example-styles.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [ButtonModule, PlatformMenuModule, AvatarModule]
 })
 export class PlatformMenuXPositionExampleComponent {
     item = '';

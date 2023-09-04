@@ -1,9 +1,31 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { VariantManagementDefaultExampleComponent } from './examples/default/variant-management-default-example.component';
+import { VariantManagementDynamicPageExampleComponent } from './examples/dynamic-page/variant-management-dynamic-page-example.component';
+import { VariantManagementTableExampleComponent } from './examples/table/variant-management-table-example.component';
 
 @Component({
     selector: 'app-variant-management',
-    templateUrl: './variant-management-docs.component.html'
+    templateUrl: './variant-management-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        VariantManagementDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        VariantManagementTableExampleComponent,
+        VariantManagementDynamicPageExampleComponent
+    ]
 })
 export class VariantManagementDocsComponent {
     variantManagementDefaultExample: ExampleFile[] = [
@@ -28,10 +50,10 @@ export class VariantManagementDocsComponent {
 
     variantManagementDynamicPageExample: ExampleFile[] = [
         getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.html', {
-            fileName: 'variant-management-dynamic-page-example.component'
+            fileName: 'variant-management-dynamic-page-example'
         }),
         getExampleFile('dynamic-page/variant-management-dynamic-page-example.component.ts', {
-            fileName: 'variant-management-dynamic-page-example.component',
+            fileName: 'variant-management-dynamic-page-example',
             component: 'VariantManagementDynamicPageExampleComponent'
         })
     ];

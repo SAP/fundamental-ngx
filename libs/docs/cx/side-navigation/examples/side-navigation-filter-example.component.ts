@@ -1,9 +1,17 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FormItemModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { CxNestedListModule } from '../../../../cx/src/lib/nested-list/nested-list.module';
+import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/side-navigation.module';
 
 @Component({
     selector: 'fundamental-ngx-side-navigation-filter-example',
     templateUrl: './side-navigation-filter-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CxSideNavigationModule, FormItemModule, InputGroupModule, FormsModule, CxNestedListModule, NgFor]
 })
 export class SideNavigationFilterExampleComponent implements OnInit {
     searchTerm = '';

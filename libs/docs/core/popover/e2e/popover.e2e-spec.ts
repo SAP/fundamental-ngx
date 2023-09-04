@@ -1,4 +1,3 @@
-import { PopoverPo } from './popover.po';
 import {
     acceptAlert,
     browserIsSafari,
@@ -18,6 +17,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { PopoverPo } from './popover.po';
 
 import {
     alertText1,

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,6 +7,8 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
@@ -22,7 +25,9 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, DatetimePickerComponent, FormsModule]
 })
 export class DatetimeMobileExampleComponent {
     mobileLandscapeConfig: MobileModeConfig = {

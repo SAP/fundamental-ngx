@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
     VhdDataProvider,
     VhdValue,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
@@ -51,7 +54,9 @@ const data = exampleDataSource();
 
 @Component({
     selector: 'fdp-platform-vhd-loading-example',
-    templateUrl: './platform-vhd-loading-example.component.html'
+    templateUrl: './platform-vhd-loading-example.component.html',
+    standalone: true,
+    imports: [ButtonModule, PlatformValueHelpDialogModule, NgFor]
 })
 export class PlatformVhdLoadingExampleComponent {
     filters = data.filters;

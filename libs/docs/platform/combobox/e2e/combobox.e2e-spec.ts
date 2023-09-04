@@ -21,8 +21,8 @@ import {
     waitForPresent,
     waitForUnclickable
 } from '../../../../../e2e';
-import { ComboBoxPo } from './combobox.po';
 import { activeTypeNames, appleOption, bananaOption, notActiveTypeNames } from './combobox.page-content';
+import { ComboBoxPo } from './combobox.po';
 
 describe('Combobox test suite', () => {
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
