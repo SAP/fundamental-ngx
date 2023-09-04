@@ -425,5 +425,6 @@ export const API_FILES = {
         'MultiComboboxSelectionChangeEvent',
         'MultiComboboxDataSourceParser',
         'FdMultiComboBoxDataSource'
-    ]
+    ],
+    genericTag: ['GenericTagComponent']
 };

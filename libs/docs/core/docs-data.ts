@@ -33,6 +33,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/file-uploader', name: 'File Uploader' },
     { url: 'core/form-message', name: 'Form Message' },
     { url: 'core/formatted-text', name: 'Formatted Text' },
+    { url: 'core/generic-tag', name: 'Generic Tag' },
     { url: 'core/info-label', name: 'Info Label' },
     { url: 'core/inline-help', name: 'Inline Help' },
     { url: 'core/input', name: 'Input' },
