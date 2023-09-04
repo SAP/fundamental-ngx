@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.13...v0.46.0-rc.14) (2023-09-04)
+
+
+### Features
+
+* **core:** introduce Generic Tag new component ([#10435](https://github.com/SAP/fundamental-ngx/issues/10435)) ([2238161](https://github.com/SAP/fundamental-ngx/commit/223816124378caab1bda8179a2fc1c97b986a921))
+* **docs:** examples standalone migration ([#10409](https://github.com/SAP/fundamental-ngx/issues/10409)) ([3eb7071](https://github.com/SAP/fundamental-ngx/commit/3eb7071d7f5a266d9ab7ee36a05bbf105af81413)), closes [#10458](https://github.com/SAP/fundamental-ngx/issues/10458)
+
+
+
+
+
 # [0.46.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.12...v0.46.0-rc.13) (2023-09-03)
 
 **Note:** Version bump only for package @fundamental-ngx/core
