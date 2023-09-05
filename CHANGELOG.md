@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.18...v0.46.0-rc.19) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** search field a11y fixes ([#10451](https://github.com/SAP/fundamental-ngx/issues/10451)) ([bb9f6b8](https://github.com/SAP/fundamental-ngx/commit/bb9f6b84b5bf927006f41c925c48c9aa1a321276))
+
+
+
+
+
 # [0.46.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.17...v0.46.0-rc.18) (2023-09-05)
 
 
