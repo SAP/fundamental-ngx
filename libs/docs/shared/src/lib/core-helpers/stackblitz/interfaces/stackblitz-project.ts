@@ -4,5 +4,5 @@ export interface StackblitzProject {
     description: string;
     template: string;
     tags: string[];
-    dependencies: Record<string, any>;
+    dependencies?: Record<string, any>;
 }
