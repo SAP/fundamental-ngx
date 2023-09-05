@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.21) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** default element style breaking standalone tokens ([#10416](https://github.com/SAP/fundamental-ngx/issues/10416)) ([d447fb8](https://github.com/SAP/fundamental-ngx/commit/d447fb83c947931b5b7e0bf001708ac5e166828a))
+* object status in content density example ([#10417](https://github.com/SAP/fundamental-ngx/issues/10417)) ([2557f85](https://github.com/SAP/fundamental-ngx/commit/2557f85989e6bd36026c1be38381aa185b7e4850))
+* **platform:** issues with toolbar in p13 dialog ([#10420](https://github.com/SAP/fundamental-ngx/issues/10420)) ([cc37fc0](https://github.com/SAP/fundamental-ngx/commit/cc37fc00e03a82fd5be363d19f7d813367fec1a6))
+
+
+
+
+
 # [0.46.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.19...v0.46.0-rc.20) (2023-09-05)
 
 
