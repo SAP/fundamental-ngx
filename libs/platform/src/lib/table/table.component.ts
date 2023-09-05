@@ -105,7 +105,7 @@ import {
 import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components';
+import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
 
 interface ToolbarContext {
     counter: Observable<number>;
@@ -384,6 +384,12 @@ export class TableComponent<T = any>
     @Input()
     forceCheckedAllState = false;
 
+    /**
+     * aria-labelledby attribute value for the table.
+     */
+    @Input()
+    ariaLabelledBy: string;
+
     /** @hidden */
     private _shouldCheckNewRows = false;
 
@@ -466,7 +472,7 @@ export class TableComponent<T = any>
     readonly customEditableCells: QueryList<EditableTableCell>;
     /** @hidden */
     @ContentChild(TABLE_TOOLBAR)
-    readonly tableToolbar: TableToolbarWithTemplate;
+    readonly tableToolbar: TableToolbarInterface;
     /** @hidden */
     get initialSortBy(): CollectionSort[] {
         return this.initialState?.initialSortBy ?? [];
@@ -527,6 +533,15 @@ export class TableComponent<T = any>
                 this._dndLoadingState)
         );
     }
+
+    /** @hidden */
+    get _ariaLabelledBy(): string | null {
+        if (this.ariaLabelledBy) {
+            return this.ariaLabelledBy;
+        }
+        return this.tableToolbar?.tableToolbarTitleId || null;
+    }
+
     /**
      * @hidden
      * Representation of combined table rows.
