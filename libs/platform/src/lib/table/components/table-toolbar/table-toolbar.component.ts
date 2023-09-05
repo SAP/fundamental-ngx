@@ -11,12 +11,12 @@ import {
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { takeUntil } from 'rxjs/operators';
+import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
+import { takeUntil } from 'rxjs/operators';
+import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarLeftActionsComponent } from './table-toolbar-left-actions.component';
-import { TableToolbarInterface, TABLE_TOOLBAR } from './table-toolbar';
-import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 
 export type EditMode = 'none' | 'inline';
 
