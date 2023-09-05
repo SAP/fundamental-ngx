@@ -1,18 +1,18 @@
-import { ElementRef, Injectable, Injector, Optional, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
 import {
+    ConnectedOverlayPositionChange,
     ConnectedPosition,
     FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayConfig,
     OverlayRef,
-    ViewportRuler,
-    ConnectedOverlayPositionChange
+    ViewportRuler
 } from '@angular/cdk/overlay';
-import { merge, Observable, Subject } from 'rxjs';
+import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
+import { ElementRef, Injectable, Injector, Optional, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Observable, Subject, merge } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { RtlService, Nullable, isOdd } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService, isOdd } from '@fundamental-ngx/cdk/utils';
 import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 
 import { BasePopoverClass, TriggerConfig } from '../base/base-popover.class';
@@ -49,6 +49,9 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _refresh$: Observable<boolean | void>;
+
+    /** @hidden */
+    private _stopCloseListening$ = new Subject<void>();
 
     /** @hidden */
     private readonly _placementRefresh$ = new Subject<void>();
@@ -98,8 +101,16 @@ export class PopoverService extends BasePopoverClass {
      * - templateData - in case of having already PopoverBodyComponent, there is way to pass container, template containing
      *   PopoverComponent and PopoverComponent instance
      */
-    initialise(triggerElement: ElementRef, config?: BasePopoverClass, templateData?: PopoverTemplate | null): void {
-        this._templateData = templateData;
+    initialise(
+        triggerElement: ElementRef,
+        config?: BasePopoverClass,
+        templateData?: PopoverTemplate | TemplateRef<void> | null
+    ): void {
+        if (templateData instanceof TemplateRef) {
+            this.templateContent = templateData;
+        } else {
+            this._templateData = templateData;
+        }
         this._triggerElement = triggerElement;
 
         if (config) {
@@ -120,7 +131,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
-        if (this._overlayRef) {
+        if (this._overlayRef && this._overlayRef.hasAttached()) {
             this._overlayRef.dispose();
 
             const prevState = this.isOpen;
@@ -154,6 +165,7 @@ export class PopoverService extends BasePopoverClass {
                 this._attachBodyComponent();
             }
 
+            this._stopCloseListening$.next();
             this._listenForPositionChange(position.positionChanges);
 
             if (this.fillControlMode) {
@@ -169,7 +181,6 @@ export class PopoverService extends BasePopoverClass {
             this._detectChanges();
 
             this._listenOnClose();
-            this._listenOnOutClicks();
             this._focusFirstTabbableElement();
             this._onLoad.next(this._getPopoverBody()._elementRef);
             this._overlayRef.updatePosition();
@@ -223,6 +234,7 @@ export class PopoverService extends BasePopoverClass {
         this._removeTriggerListeners();
         if (this._overlayRef) {
             this._overlayRef.detach();
+            this._overlayRef.dispose();
         }
     }
 
@@ -400,21 +412,20 @@ export class PopoverService extends BasePopoverClass {
 
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
     private _listenOnClose(): void {
-        const closeEvents$ = merge(this._overlayRef.detachments(), this._getPopoverBody().onClose);
-
-        closeEvents$.pipe(takeUntil(this._refresh$)).subscribe(() => this.close());
+        const closeEvents$ = merge(
+            this._overlayRef.detachments(),
+            this._getPopoverBody().onClose,
+            this._outsideClicks$()
+        );
+        const finalizer$ = merge(this._stopCloseListening$, this._refresh$);
+        closeEvents$.pipe(takeUntil(finalizer$)).subscribe(() => this.close());
     }
 
     /** Listener for click events */
-    private _listenOnOutClicks(): void {
-        const closeEvents$ = merge(this._overlayRef.backdropClick(), this._overlayRef._outsidePointerEvents);
-
-        closeEvents$
-            .pipe(
-                filter((event) => this._shouldClose(event)),
-                takeUntil(this._refresh$)
-            )
-            .subscribe(() => this.close());
+    private _outsideClicks$(): Observable<MouseEvent> {
+        return merge(this._overlayRef.backdropClick(), this._overlayRef._outsidePointerEvents).pipe(
+            filter((event) => this._shouldClose(event))
+        );
     }
 
     /** @hidden */
