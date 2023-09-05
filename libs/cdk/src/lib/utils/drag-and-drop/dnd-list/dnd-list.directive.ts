@@ -12,9 +12,9 @@ import {
     QueryList
 } from '@angular/core';
 import { merge, Observable, Subject } from 'rxjs';
-import { startWith, takeUntil, take } from 'rxjs/operators';
+import { startWith, take, takeUntil } from 'rxjs/operators';
 import { selectStrategy } from '../../async-strategy';
-import { ElementChord, FdDropEvent, LinkPosition, ElementPosition, DndItem, FdDndDropType } from '../dnd.interfaces';
+import { DndItem, ElementChord, ElementPosition, FdDndDropType, FdDropEvent, LinkPosition } from '../dnd.interfaces';
 import { DND_ITEM, DND_LIST } from '../tokens';
 
 export type DropPredicate<T> = (
@@ -59,9 +59,6 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
      */
     @Input()
     threshold = 0.3;
-
-    /** @hidden */
-    private _replaceMode = false;
 
     /** Array of items, that will be sorted */
     @Input()
@@ -109,6 +106,10 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     dndItems: QueryList<DndItem<T>>;
 
     /** @hidden */
+    @HostBinding('class')
+    private readonly _initialClass = 'fd-dnd-list';
+
+    /** @hidden */
     private _elementsCoordinates: ElementChord[];
 
     /** @hidden */
@@ -130,10 +131,6 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     private _draggable = true;
 
     /** @hidden */
-    @HostBinding('class')
-    private readonly _initialClass = 'fd-dnd-list';
-
-    /** @hidden */
     private _detectedDropMode: 'shift' | 'group';
 
     /** @hidden */
@@ -151,13 +148,33 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         this._changeDraggableState(this._draggable);
-        this.dndItems.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe(() => this._refreshQueryList());
+        this.dndItems.changes
+            .pipe(startWith(null), takeUntil(this._onDestroy$))
+            .subscribe(() => this.refreshQueryList());
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
+    }
+
+    /**
+     * Refreshes the indexes of the items.
+     */
+    refreshQueryList(): void {
+        const refresh$ = merge(this._refresh$, this._onDestroy$);
+        this._refresh$.next();
+
+        this._dndItemReference = this.dndItems.toArray();
+
+        this._changeDraggableState(this._draggable);
+
+        this.dndItems.forEach((item, index) => {
+            item.moved.pipe(takeUntil(refresh$)).subscribe((position: ElementPosition) => this.onMove(position, index));
+            item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
+            item.released.pipe(takeUntil(refresh$)).subscribe(async () => await this.dragEnd(index));
+        });
     }
 
     /** Method called when the item is being moved by 1 px */
@@ -378,22 +395,6 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
         this._removeAllReplaceIndicators();
         this._indicatorsRemoved = false;
         this._dndItemReference[closestItemIndex].createReplaceIndicator();
-    }
-
-    /** @hidden */
-    private _refreshQueryList(): void {
-        const refresh$ = merge(this._refresh$, this._onDestroy$);
-        this._refresh$.next();
-
-        this._dndItemReference = this.dndItems.toArray();
-
-        this._changeDraggableState(this._draggable);
-
-        this.dndItems.forEach((item, index) => {
-            item.moved.pipe(takeUntil(refresh$)).subscribe((position: ElementPosition) => this.onMove(position, index));
-            item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
-            item.released.pipe(takeUntil(refresh$)).subscribe(async () => await this.dragEnd(index));
-        });
     }
 
     /**
