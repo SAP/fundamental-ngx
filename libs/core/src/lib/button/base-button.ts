@@ -1,5 +1,5 @@
-import { Directive, HostBinding, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
