@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.24) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** fix dragdrop with virtual scroll ([#10476](https://github.com/SAP/fundamental-ngx/issues/10476)) ([010e001](https://github.com/SAP/fundamental-ngx/commit/010e001652714a277df4cfc6a409f707500f641c))
+* **platform:** table header cells without popovers should have aria-haspopup false ([#10448](https://github.com/SAP/fundamental-ngx/issues/10448)) ([e1e0251](https://github.com/SAP/fundamental-ngx/commit/e1e0251864072a86b8a453a6f70415f0f9964dfa))
+
+
+
+
+
 # [0.46.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.22...v0.46.0-rc.23) (2023-09-05)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
