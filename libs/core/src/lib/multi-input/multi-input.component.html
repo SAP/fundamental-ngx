@@ -108,7 +108,8 @@
             [style.max-height]="!mobile ? maxHeight : 'auto'"
             [byline]="byline"
             (focusEscapeList)="handleListFocusEscape($event)"
-            [style.min-width]="'100%'"
+            [style.minWidth]="'100%'"
+            aria-multiselectable="true"
         >
             <li
                 *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: _trackBy"
