@@ -168,7 +168,18 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         ariaRoleDescription: 'токен'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `Ще 1 елемент`;
+                case 'few':
+                    return `Ще ${count} елемента`;
+                default:
+                    return `Ще ${count} елементів`;
+            }
+        }
     },
     coreUploadCollection: {
         menuOkText: 'ОК',

@@ -167,7 +167,16 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         ariaRoleDescription: 'жетон'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return 'Още 1 елемент';
+                default:
+                    return 'Още {{ count }} елемента';
+            }
+        }
     },
     coreUploadCollection: {
         menuOkText: 'OK',
