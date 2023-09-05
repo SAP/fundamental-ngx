@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import 'dayjs/locale/bg';
 import 'dayjs/locale/de';
@@ -26,7 +26,14 @@ import 'dayjs/locale/pl';
         }
     ],
     standalone: true,
-    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, DatePickerComponent, FdDatetimeModule]
+    imports: [
+        FormLabelComponent,
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        DatePickerComponent,
+        FdDatetimeModule
+    ]
 })
 export class DatePickerComplexI18nExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<FdDate>;

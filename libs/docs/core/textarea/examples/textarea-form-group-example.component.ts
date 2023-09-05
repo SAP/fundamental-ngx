@@ -1,7 +1,12 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FieldSetModule, FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import {
+    FieldsetComponent,
+    FormControlModule,
+    FormItemComponent,
+    FormLabelComponent
+} from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-textarea-form-group-example',
@@ -11,9 +16,9 @@ import { FieldSetModule, FormControlModule, FormItemModule, FormLabelModule } fr
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        FieldSetModule,
-        FormItemModule,
-        FormLabelModule,
+        FieldsetComponent,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule,
         JsonPipe
     ]

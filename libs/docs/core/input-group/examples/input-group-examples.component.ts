@@ -3,11 +3,11 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     FormControlModule,
-    FormHeaderModule,
-    FormInputMessageGroupModule,
-    FormItemModule,
-    FormLabelModule,
-    FormMessageModule
+    FormHeaderComponent,
+    FormInputMessageGroupComponent,
+    FormItemComponent,
+    FormLabelComponent,
+    FormMessageComponent
 } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
@@ -15,7 +15,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
     selector: 'fd-input-group-button-example',
     templateUrl: './input-group-button-example.component.html',
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, InputGroupModule]
+    imports: [FormItemComponent, FormLabelComponent, InputGroupModule]
 })
 export class InputGroupButtonExampleComponent {}
 
@@ -23,7 +23,7 @@ export class InputGroupButtonExampleComponent {}
     selector: 'fd-input-group-icon-example',
     templateUrl: './input-group-icon-example.component.html',
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, InputGroupModule]
+    imports: [FormItemComponent, FormLabelComponent, InputGroupModule]
 })
 export class InputGroupIconExampleComponent {}
 
@@ -31,7 +31,7 @@ export class InputGroupIconExampleComponent {}
     selector: 'fd-input-group-text-example',
     templateUrl: './input-group-text-example.component.html',
     standalone: true,
-    imports: [FormHeaderModule, FormItemModule, FormLabelModule, InputGroupModule]
+    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, InputGroupModule]
 })
 export class InputGroupTextExampleComponent {}
 
@@ -39,7 +39,7 @@ export class InputGroupTextExampleComponent {}
     selector: 'fd-input-group-text-compact-example',
     templateUrl: './input-group-text-compact-example.component.html',
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, InputGroupModule, ContentDensityDirective]
+    imports: [FormItemComponent, FormLabelComponent, InputGroupModule, ContentDensityDirective]
 })
 export class InputGroupTextCompactExampleComponent {}
 
@@ -47,7 +47,7 @@ export class InputGroupTextCompactExampleComponent {}
     selector: 'fd-input-group-complex-example',
     templateUrl: './input-group-complex-example.component.html',
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, InputGroupModule, FormControlModule, ButtonModule]
+    imports: [FormItemComponent, FormLabelComponent, InputGroupModule, FormControlModule, ButtonModule]
 })
 export class InputGroupComplexExampleComponent {}
 
@@ -55,6 +55,12 @@ export class InputGroupComplexExampleComponent {}
     selector: 'fd-input-group-states-example',
     templateUrl: './input-group-states-example.component.html',
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, FormInputMessageGroupModule, InputGroupModule, FormMessageModule]
+    imports: [
+        FormItemComponent,
+        FormLabelComponent,
+        FormInputMessageGroupComponent,
+        InputGroupModule,
+        FormMessageComponent
+    ]
 })
 export class InputGroupStatesExampleComponent {}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { StepInputModule } from '@fundamental-ngx/core/step-input';
 
 @Component({
@@ -21,7 +21,7 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
         </div>
     `,
     standalone: true,
-    imports: [FormLabelModule, StepInputModule, ContentDensityDirective]
+    imports: [FormLabelComponent, StepInputModule, ContentDensityDirective]
 })
 export class StepInputDefaultExampleComponent {
     value1: number | null = 0;

@@ -4,7 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import {
     PopoverBodyComponent,
     PopoverComponent,
@@ -19,7 +19,7 @@ import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
     templateUrl: './popover-cdk-placement-example.component.html',
     standalone: true,
     imports: [
-        FormLabelModule,
+        FormLabelComponent,
         SegmentedButtonModule,
         FormsModule,
         NgFor,

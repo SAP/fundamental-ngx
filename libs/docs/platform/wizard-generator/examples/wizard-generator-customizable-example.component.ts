@@ -9,7 +9,7 @@ import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -33,7 +33,7 @@ import {
         NgFor,
         TitleComponent,
         LayoutGridModule,
-        FormLabelModule,
+        FormLabelComponent,
         PlatformLinkModule,
         DialogModule,
         CdkScrollable,

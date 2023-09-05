@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormLabelComponent } from './form-label.component';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { LinkModule } from '@fundamental-ngx/core/link';
 
+/**
+ * @deprecated
+ * Import `FormLabelComponent` directly as a standalone component.
+ */
 @NgModule({
-    imports: [CommonModule, IconModule, InlineHelpModule, LinkModule],
-    exports: [FormLabelComponent],
-    declarations: [FormLabelComponent]
+    imports: [FormLabelComponent],
+    exports: [FormLabelComponent]
 })
 export class FormLabelModule {}

@@ -1,10 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormHeaderComponent } from './form-header.component';
 
+/**
+ * @deprecated
+ * Import `FormHeaderComponent` directly as a standalone component.
+ */
 @NgModule({
-    imports: [CommonModule],
-    exports: [FormHeaderComponent],
-    declarations: [FormHeaderComponent]
+    imports: [FormHeaderComponent],
+    exports: [FormHeaderComponent]
 })
 export class FormHeaderModule {}

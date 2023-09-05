@@ -8,9 +8,9 @@ import {
     NgZone,
     ViewEncapsulation
 } from '@angular/core';
-import { FormItemControl, FORM_ITEM_CONTROL } from './../form-item-control/form-item-control';
-import { FormLabelComponent } from './../form-label/form-label.component';
 import { first } from 'rxjs';
+import { FORM_ITEM_CONTROL, FormItemControl } from './../form-item-control/form-item-control';
+import { FormLabelComponent } from './../form-label/form-label.component';
 
 /**
  * Directive to be applied to the parent of a form control.
@@ -28,7 +28,8 @@ import { first } from 'rxjs';
     template: ` <ng-content></ng-content>`,
     styleUrls: ['./form-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class FormItemComponent implements AfterViewInit {
     /** Whether the form item is inline. */

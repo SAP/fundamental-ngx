@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
@@ -68,7 +68,7 @@ const CUSTOM_DATETIME_FORMATS = {
         }
     ],
     standalone: true,
-    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, PlatformDatePickerComponent]
+    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickeri18nExampleComponent {
     date = dayjs();

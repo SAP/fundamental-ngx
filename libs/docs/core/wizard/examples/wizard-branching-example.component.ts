@@ -18,12 +18,12 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
-    FieldSetModule,
+    FieldsetComponent,
     FormControlModule,
-    FormGroupModule,
-    FormItemModule,
-    FormLabelModule,
-    FormLegendModule
+    FormGroupComponent,
+    FormItemComponent,
+    FormLabelComponent,
+    FormLegendDirective
 } from '@fundamental-ngx/core/form';
 import { RadioButtonComponent, RadioModule } from '@fundamental-ngx/core/radio';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -44,13 +44,13 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         A11yModule,
         NgIf,
         WizardModule,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule,
         ContentDensityDirective,
-        FieldSetModule,
-        FormLegendModule,
-        FormGroupModule,
+        FieldsetComponent,
+        FormLegendDirective,
+        FormGroupComponent,
         RadioModule,
         FormsModule,
         BarModule,

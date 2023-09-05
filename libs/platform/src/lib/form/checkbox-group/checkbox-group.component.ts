@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -17,24 +18,23 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
+import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
-import { SelectionModel } from '@angular/cdk/collections';
 
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormGroupComponent } from '@fundamental-ngx/core/form';
 import {
+    coerceArraySafe,
     InLineLayoutCollectionBaseInput,
+    PlatformFormField,
+    PlatformFormFieldControl,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService,
-    coerceArraySafe,
-    SelectItem,
-    PlatformFormField,
-    PlatformFormFieldControl
+    SelectItem
 } from '@fundamental-ngx/platform/shared';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
-import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
-import { FormGroupModule } from '@fundamental-ngx/core/form';
 
 /**
  * Checkbox group implementation based on the
@@ -48,7 +48,7 @@ import { FormGroupModule } from '@fundamental-ngx/core/form';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }],
     standalone: true,
-    imports: [FormGroupModule, NgIf, NgFor, NgTemplateOutlet, CheckboxComponent, FormsModule]
+    imports: [FormGroupComponent, NgIf, NgFor, NgTemplateOutlet, CheckboxComponent, FormsModule]
 })
 export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /**

@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormModule } from '../form.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormHeaderComponent } from './form-header.component';
 
 @Component({
-    template: ` <div #componentElement fd-form-header>Test Text</div> `
+    template: ` <div #componentElement fd-form-header>Test Text</div> `,
+    standalone: true,
+    imports: [FormHeaderComponent]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -16,8 +18,7 @@ describe('FormHeaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [FormModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

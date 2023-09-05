@@ -8,7 +8,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 
@@ -35,7 +35,7 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
         }
     ],
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, SelectModule, NgFor, TimePickerModule, FormsModule, NgIf, DatePipe]
+    imports: [FormItemComponent, FormLabelComponent, SelectModule, NgFor, TimePickerModule, FormsModule, NgIf, DatePipe]
 })
 export class TimePickerLocaleExampleComponent implements OnInit {
     time = new FdDate().setTime(15, 30, 0);

@@ -9,7 +9,7 @@ import {
     FdDatetimeAdapter,
     FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-date-picker-disable-func-example',
@@ -25,7 +25,14 @@ import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
         }
     ],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormItemModule, FormLabelModule, DatePickerComponent, FdDatetimeModule]
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FormItemComponent,
+        FormLabelComponent,
+        DatePickerComponent,
+        FdDatetimeModule
+    ]
 })
 export class DatePickerDisableFuncExampleComponent {
     customForm = new FormGroup({

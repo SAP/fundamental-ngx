@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PlatformStepInputModule, StepInputAlign, StepInputChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -9,7 +9,7 @@ import { PlatformStepInputModule, StepInputAlign, StepInputChangeEvent } from '@
     templateUrl: './platform-number-step-input-example.component.html',
     styleUrls: ['./platform-number-step-input-example.component.scss'],
     standalone: true,
-    imports: [FormLabelModule, PlatformStepInputModule, ContentDensityDirective]
+    imports: [FormLabelComponent, PlatformStepInputModule, ContentDensityDirective]
 })
 export class PlatformNumberStepInputExampleComponent {
     readonly stepInputAlign = StepInputAlign;

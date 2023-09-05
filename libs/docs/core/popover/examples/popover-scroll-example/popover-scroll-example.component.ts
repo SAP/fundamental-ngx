@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
@@ -12,7 +12,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     styleUrls: ['./popover-scroll-example.component.scss'],
     standalone: true,
     imports: [
-        FormLabelModule,
+        FormLabelComponent,
         PopoverComponent,
         PopoverControlComponent,
         ButtonModule,

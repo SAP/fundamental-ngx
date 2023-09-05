@@ -11,7 +11,7 @@ import {
     FdDatetimeAdapter,
     FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-date-picker-single-example',
@@ -35,7 +35,7 @@ import { FormLabelModule } from '@fundamental-ngx/core/form';
         }
     ],
     standalone: true,
-    imports: [FormLabelModule, DatePickerComponent, FormsModule, ContentDensityDirective, FdDatetimeModule]
+    imports: [FormLabelComponent, DatePickerComponent, FormsModule, ContentDensityDirective, FdDatetimeModule]
 })
 export class DatePickerSingleExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

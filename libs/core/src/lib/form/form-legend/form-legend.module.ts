@@ -1,10 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormLegendDirective } from './form-legend.directive';
 
+/**
+ * @deprecated
+ * Import `FormLegendDirective` directly as a standalone directive.
+ */
 @NgModule({
-    imports: [CommonModule],
-    exports: [FormLegendDirective],
-    declarations: [FormLegendDirective]
+    imports: [FormLegendDirective],
+    exports: [FormLegendDirective]
 })
 export class FormLegendModule {}

@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { FormattedTextComponent } from './formatted-text.component';
 
 @NgModule({
-    declarations: [FormattedTextComponent],
     exports: [FormattedTextComponent],
-    imports: [CommonModule]
+    imports: [CommonModule, FormattedTextComponent]
 })
 export class FormattedTextModule {}

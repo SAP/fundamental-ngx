@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_UKRAINIAN, FdLanguage } from '@fundamental-ngx/i18n';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
@@ -18,7 +18,7 @@ import { BehaviorSubject } from 'rxjs';
         }
     ],
     standalone: true,
-    imports: [SegmentedButtonModule, FormsModule, ButtonModule, FormLabelModule, PlatformTextAreaModule]
+    imports: [SegmentedButtonModule, FormsModule, ButtonModule, FormLabelComponent, PlatformTextAreaModule]
 })
 export class PlatformLanguageChangeExampleComponent {
     lang = 'en';

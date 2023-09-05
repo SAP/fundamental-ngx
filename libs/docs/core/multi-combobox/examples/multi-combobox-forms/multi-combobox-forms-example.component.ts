@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
@@ -14,8 +14,8 @@ import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundame
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         CvaDirective,
         DataSourceDirective,
         MultiComboboxModule,

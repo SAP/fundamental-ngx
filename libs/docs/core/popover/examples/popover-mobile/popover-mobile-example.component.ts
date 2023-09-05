@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 
 @Component({
@@ -14,8 +14,8 @@ import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core
         ButtonModule,
         PopoverTriggerDirective,
         PopoverComponent,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule,
         FormsModule,
         BarModule

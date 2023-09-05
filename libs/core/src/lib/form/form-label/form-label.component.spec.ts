@@ -1,10 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { FormModule } from '../form.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormLabelComponent } from './form-label.component';
 
 @Component({
-    template: ` <label #componentElement fd-form-label>Test Text</label> `
+    template: ` <label #componentElement fd-form-label>Test Text</label> `,
+    standalone: true,
+    imports: [FormLabelComponent]
 })
 class TestComponent {
     @ViewChild(FormLabelComponent)
@@ -21,8 +22,7 @@ describe('FormLabelComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [FormModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FieldsetComponent } from './fieldset.component';
 
+/**
+ * @deprecated
+ * Import `FieldsetComponent` directly as a standalone component.
+ */
 @NgModule({
-    imports: [CommonModule],
-    exports: [FieldsetComponent],
-    declarations: [FieldsetComponent]
+    imports: [FieldsetComponent],
+    exports: [FieldsetComponent]
 })
 export class FieldSetModule {}

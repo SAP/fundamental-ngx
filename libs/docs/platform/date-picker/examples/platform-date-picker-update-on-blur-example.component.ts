@@ -8,7 +8,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -37,7 +37,7 @@ import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
         }
     ],
     standalone: true,
-    imports: [FormLabelModule, PlatformDatePickerComponent, FormsModule]
+    imports: [FormLabelComponent, PlatformDatePickerComponent, FormsModule]
 })
 export class PlatformDatePickerUpdateOnBlurExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

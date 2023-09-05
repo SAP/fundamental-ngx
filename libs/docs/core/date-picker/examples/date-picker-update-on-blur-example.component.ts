@@ -10,7 +10,7 @@ import {
     FdDatetimeAdapter,
     FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-date-picker-update-on-blur-example',
@@ -30,7 +30,7 @@ import { FormLabelModule } from '@fundamental-ngx/core/form';
         }
     ],
     standalone: true,
-    imports: [FormLabelModule, DatePickerComponent, FormsModule, FdDatetimeModule]
+    imports: [FormLabelComponent, DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerUpdateOnBlurExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

@@ -7,7 +7,7 @@ import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FacetModule } from '@fundamental-ngx/core/facets';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -43,7 +43,7 @@ import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page
         ContentDensityDirective,
         ToolbarSeparatorComponent,
         FacetModule,
-        FormLabelModule,
+        FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
         ObjectStatusModule,
