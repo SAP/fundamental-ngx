@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** fix dragdrop with virtual scroll ([#10478](https://github.com/SAP/fundamental-ngx/issues/10478)) ([3fd2328](https://github.com/SAP/fundamental-ngx/commit/3fd232870d70decb0d987dc50a9d38de13481985))
+
+
+### Features
+
+* **core:** added ability to pass OptionItem to multi-input ([#10430](https://github.com/SAP/fundamental-ngx/issues/10430)) ([a12ca62](https://github.com/SAP/fundamental-ngx/commit/a12ca6266f8d66abc7dcf08ab7c10dd602984f65))
+
+
+
+
+
 ## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** fix dragdrop with virtual scroll ([#10478](https://github.com/SAP/fundamental-ngx/issues/10478)) ([3fd2328](https://github.com/SAP/fundamental-ngx/commit/3fd232870d70decb0d987dc50a9d38de13481985))
+* **platform:** fixed non-existent predefined selected value selection token in multi-combobox ([#10479](https://github.com/SAP/fundamental-ngx/issues/10479)) ([ec8bfe0](https://github.com/SAP/fundamental-ngx/commit/ec8bfe06b0e8406fe01380db25aa0cd044136e9f))
+* **platform:** search field aria-haspopup should only be true when there are dropdown values ([#10431](https://github.com/SAP/fundamental-ngx/issues/10431)) ([0f8db50](https://github.com/SAP/fundamental-ngx/commit/0f8db506dfaa7475bbe1c06e9b7be5448a5f1c16))
+
+
+### Features
+
+* **platform:** added input for table aria-labelledby value ([#10477](https://github.com/SAP/fundamental-ngx/issues/10477)) ([d6d8471](https://github.com/SAP/fundamental-ngx/commit/d6d84711f383dedebfb1f4923b533a500b57a469))
+
+
+
+
+
 ## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
 
 

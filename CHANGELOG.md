@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** add aria-multiselectable to multi input ([#10433](https://github.com/SAP/fundamental-ngx/issues/10433)) ([93701c2](https://github.com/SAP/fundamental-ngx/commit/93701c2a36bdc3f2080e04b28e6f6925251c52c9))
+* **platform:** fix dragdrop with virtual scroll ([#10478](https://github.com/SAP/fundamental-ngx/issues/10478)) ([3fd2328](https://github.com/SAP/fundamental-ngx/commit/3fd232870d70decb0d987dc50a9d38de13481985))
+* **platform:** fixed non-existent predefined selected value selection token in multi-combobox ([#10479](https://github.com/SAP/fundamental-ngx/issues/10479)) ([ec8bfe0](https://github.com/SAP/fundamental-ngx/commit/ec8bfe06b0e8406fe01380db25aa0cd044136e9f))
+* **platform:** search field aria-haspopup should only be true when there are dropdown values ([#10431](https://github.com/SAP/fundamental-ngx/issues/10431)) ([0f8db50](https://github.com/SAP/fundamental-ngx/commit/0f8db506dfaa7475bbe1c06e9b7be5448a5f1c16))
+
+
+### Features
+
+* **core:** added ability to pass OptionItem to multi-input ([#10430](https://github.com/SAP/fundamental-ngx/issues/10430)) ([a12ca62](https://github.com/SAP/fundamental-ngx/commit/a12ca6266f8d66abc7dcf08ab7c10dd602984f65))
+* **core:** added template based popover body ([#10474](https://github.com/SAP/fundamental-ngx/issues/10474)) ([e94fab6](https://github.com/SAP/fundamental-ngx/commit/e94fab60db87ddcd0507ebe9256f635b5e5029e9))
+* **platform:** added input for table aria-labelledby value ([#10477](https://github.com/SAP/fundamental-ngx/issues/10477)) ([d6d8471](https://github.com/SAP/fundamental-ngx/commit/d6d84711f383dedebfb1f4923b533a500b57a469))
+
+
+
+
+
 ## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
 
 

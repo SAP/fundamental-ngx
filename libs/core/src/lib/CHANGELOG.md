@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** add aria-multiselectable to multi input ([#10433](https://github.com/SAP/fundamental-ngx/issues/10433)) ([93701c2](https://github.com/SAP/fundamental-ngx/commit/93701c2a36bdc3f2080e04b28e6f6925251c52c9))
+
+
+### Features
+
+* **core:** added ability to pass OptionItem to multi-input ([#10430](https://github.com/SAP/fundamental-ngx/issues/10430)) ([a12ca62](https://github.com/SAP/fundamental-ngx/commit/a12ca6266f8d66abc7dcf08ab7c10dd602984f65))
+* **core:** added template based popover body ([#10474](https://github.com/SAP/fundamental-ngx/issues/10474)) ([e94fab6](https://github.com/SAP/fundamental-ngx/commit/e94fab60db87ddcd0507ebe9256f635b5e5029e9))
+
+
+
+
+
 ## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
 
 
