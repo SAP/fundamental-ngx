@@ -5,6 +5,8 @@ import {
     inject,
     Input,
     OnInit,
+    Pipe,
+    PipeTransform,
     QueryList,
     ViewChildren,
     ViewEncapsulation
@@ -143,9 +145,16 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
     }
+}
+
+/** @hidden */
+@Pipe({ name: 'isColumnHasHeaderMenu' })
+export class IsColumnHasHeaderMenuPipe implements PipeTransform {
+    /** @hidden */
+    private readonly _fdpTableService = inject(TableService);
 
     /** @hidden */
-    _isColumnHasHeaderMenu(column: TableColumn): boolean {
+    transform(column: TableColumn): boolean {
         return (
             column.sortable ||
             column.groupable ||

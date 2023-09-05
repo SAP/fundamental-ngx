@@ -66,7 +66,7 @@
             column._endFreezed ? 'fd-table__cell--fixed-end' : '',
             column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
             isLast && (_fdpTableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
-            _isColumnHasHeaderMenu(column) ? 'fd-table__item--clickable' : ''
+            (column | isColumnHasHeaderMenu) ? 'fd-table__item--clickable' : ''
         ]"
         [ngStyle]="
             column
@@ -80,7 +80,7 @@
                     : _tableColumnResizeService.getColumnWidthStyle(column.name)
                     : _tableColumnResizeService.getNextColumnsWidth(column.name)
         "
-        [fdPopoverTrigger]="_isColumnHasHeaderMenu(column) ? tablePopover.popover : null"
+        [fdPopoverTrigger]="(column | isColumnHasHeaderMenu) ? tablePopover.popover : null"
         (cellFocused)="_tableRowService.cellFocused($event)"
         (keydown.arrowLeft)="_tableRowService.scrollToOverlappedCell()"
         (keydown.arrowRight)="_tableRowService.scrollToOverlappedCell()"
@@ -96,9 +96,9 @@
             <!-- Header menu -->
             <fdp-table-cell-header-popover
                 #tablePopover
-                [disabled]="!_isColumnHasHeaderMenu(column)"
+                [disabled]="!(column | isColumnHasHeaderMenu)"
                 [column]="column"
-                [popoverTemplate]="_isColumnHasHeaderMenu(column) ? column.headerCellPopoverTemplate : null"
+                [popoverTemplate]="(column | isColumnHasHeaderMenu) ? column.headerCellPopoverTemplate : null"
                 [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$ | async"
             ></fdp-table-cell-header-popover>
         </fdp-table-header-cell-content>
