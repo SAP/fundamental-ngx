@@ -5,7 +5,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent } from './popover.component';
 
 @Directive({
-    selector: '[fdPopoverTrigger], [fd-popover-trigger]'
+    selector: '[fdPopoverTrigger], [fd-popover-trigger]',
+    standalone: true
 })
 export class PopoverTriggerDirective implements OnDestroy {
     /** Set reference to Popover Component */

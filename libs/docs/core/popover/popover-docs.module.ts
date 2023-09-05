@@ -32,6 +32,8 @@ import { PopoverFocusExampleComponent } from './examples/popover-focus-example/p
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 import { PopoverDynamicContainerHeightExampleComponent } from './examples/popover-dynamic-container-height/popover-dynamic-container-height-example.component';
+import { PopoverLazyLoadedBodyComponent } from './examples/popover-lazy-init-of-body/popover-lazy-loaded-body.component';
+import { PopoverLazyInitOfBodyExampleComponent } from './examples/popover-lazy-init-of-body/popover-lazy-init-of-body-example.component';
 
 const routes: Routes = [
     {
@@ -77,7 +79,9 @@ const routes: Routes = [
         PopoverFocusExampleComponent,
         PopoverTriggerExampleComponent,
         PopoverMobileExampleComponent,
-        PopoverDynamicContainerHeightExampleComponent
+        PopoverDynamicContainerHeightExampleComponent,
+        PopoverLazyInitOfBodyExampleComponent,
+        PopoverLazyLoadedBodyComponent
     ],
     providers: [currentComponentProvider('popover')]
 })

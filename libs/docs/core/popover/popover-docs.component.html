@@ -213,3 +213,22 @@
     <fd-popover-dynamic-container-height-example></fd-popover-dynamic-container-height-example>
 </component-example>
 <code-example [exampleFiles]="dynamicContainerHeight"></code-example>
+
+<fd-docs-section-title id="lazy-init-of-body" componentName="popover">
+    Lazy initialization of popover body
+</fd-docs-section-title>
+<description>
+    <p>
+        By default, popover body is initialized immediately after popover is created. This may cause performance issues
+        when popover body contains heavy content.
+    </p>
+    <p>
+        To avoid this, you can use <code>fdPopoverBody</code> directive instead of <code>fd-popover-body</code>
+        element. This will delay initialization of popover body until popover is opened and will destroy it when popover
+        is closed.
+    </p>
+</description>
+<component-example>
+    <fd-popover-lazy-init-of-body-example></fd-popover-lazy-init-of-body-example>
+</component-example>
+<code-example [exampleFiles]="lazyLoadBody"></code-example>

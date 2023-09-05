@@ -10,9 +10,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { ConnectionPositionPair, CdkScrollable } from '@angular/cdk/overlay';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { CdkTrapFocus, A11yModule } from '@angular/cdk/a11y';
 
 import { Subject } from 'rxjs';
 
@@ -20,6 +20,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -36,7 +37,9 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['./popover-body.component.scss'],
-    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
+    providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
+    standalone: true,
+    imports: [A11yModule, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
 })
 export class PopoverBodyComponent implements AfterViewInit {
     /** Whether to wrap content with fd-scrollbar directive. */
@@ -152,13 +155,10 @@ export class PopoverBodyComponent implements AfterViewInit {
             if (rtl === 'rtl') {
                 overlayX = position.overlayX === 'end' ? 'start' : 'end';
             }
-            // TODO: Remove after new fundamental-styles version release.
-            const originY = position.originY === 'bottom' ? 'end' : position.originY;
-            // End TODO
             this._arrowClasses =
                 `fd-popover__body--${overlayX === 'start' ? 'after' : 'before'}` +
                 ` fd-popover__body--arrow-${overlayX === 'start' ? 'left' : 'right'}` +
-                ` fd-popover__body--arrow-y-${originY} `;
+                ` fd-popover__body--arrow-y-${position.originY} `;
         } else {
             this._arrowClasses = 'fd-popover__body--no-arrow';
         }
