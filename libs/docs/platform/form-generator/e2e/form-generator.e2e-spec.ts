@@ -60,7 +60,7 @@ describe('Form generator test suite', () => {
         await waitForPresent(formGeneratorPage.root);
         await waitForElDisplayed(formGeneratorPage.title);
         await pause(300);
-        if ((await doesItExist(busyIndicator)) === true) {
+        if (await doesItExist(busyIndicator)) {
             await pause(2000);
         }
     }, 1);
@@ -78,7 +78,7 @@ describe('Form generator test suite', () => {
             await checkPermissionsValidation(defaultExample);
         });
 
-        it('should check birtday year validation', async () => {
+        it('should check birthday year validation', async () => {
             await checkBirthdayValidation(defaultExample);
         });
 
@@ -100,7 +100,7 @@ describe('Form generator test suite', () => {
             await checkPermissionsValidation(fieldLayoutExample);
         });
 
-        it('should check birtday year error message', async () => {
+        it('should check birthday year error message', async () => {
             await checkBirthdayValidation(fieldLayoutExample);
         });
 
@@ -122,7 +122,7 @@ describe('Form generator test suite', () => {
             await checkPermissionsValidation(observableExample);
         });
 
-        it('should check birtday year error message', async () => {
+        it('should check birthday year error message', async () => {
             await checkBirthdayValidation(observableExample);
         });
 
@@ -144,7 +144,7 @@ describe('Form generator test suite', () => {
             await checkPermissionsValidation(programmaticExample);
         });
 
-        it('should check birtday year error message', async () => {
+        it('should check birthday year error message', async () => {
             await checkBirthdayValidation(programmaticExample);
         });
 
@@ -156,15 +156,15 @@ describe('Form generator test suite', () => {
     xit('should check custom controls example', async () => {
         await scrollIntoView(sliderPoint);
         await clickAndMoveElement(sliderPoint, -400, 0);
-        await expect(await doesItExist(formValue)).toBe(false, 'form value row exists');
+        expect(await doesItExist(formValue))
+            .withContext('form value row exists')
+            .toBe(false);
         await click(customExample + submitButton);
-        if (!(await browserIsSafari())) {
-            await expect(await getText(formValue)).toEqual(
-                'Form value: { "some_slider": { "value": 10, "label": "Ten" } }'
-            );
+        if (!browserIsSafari()) {
+            expect(await getText(formValue)).toEqual('Form value: { "some_slider": { "value": 10, "label": "Ten" } }');
         }
-        if (await browserIsSafari()) {
-            await expect(await getText(formValue)).toEqual(
+        if (browserIsSafari()) {
+            expect(await getText(formValue)).toEqual(
                 'Form value: {\n' +
                     '  "some_slider": {\n' +
                     '    "value": 10,\n' +
@@ -181,7 +181,9 @@ describe('Form generator test suite', () => {
         await checkValidationMessage(errorExample, validationInput, requiredErrorMessage, 1);
         await setValue(errorExample + validationInput, '1');
         await setValue(errorExample + validationInput, '1', 1);
-        await expect(await doesItExist(errorMessage)).toBe(false, 'error message still visible');
+        expect(await doesItExist(errorMessage))
+            .withContext('error message still visible')
+            .toBe(false);
     });
 
     it('should check RTL', async () => {
@@ -190,42 +192,55 @@ describe('Form generator test suite', () => {
 
     async function checkPasswordValidation(section: string): Promise<void> {
         await waitForElDisplayed(section);
+        await pause(500);
         await scrollIntoView(section + passwordInput);
         await setValue(section + passwordInput, simplePassword);
         await checkValidationMessage(section, passwordInput, passwordConditionsErrorMessage);
         await setValue(section + passwordInput, correctPassword);
-        await expect(await doesItExist(errorMessage)).toBe(false, 'error message exists');
+        expect(await doesItExist(errorMessage))
+            .withContext('error message exists')
+            .toBe(false);
     }
 
     async function checkBirthdayValidation(section: string): Promise<void> {
         await waitForElDisplayed(section);
+        await pause(500);
         await scrollIntoView(section + dateInput);
         await setValue(section + dateInput, invalidBirthday);
         await checkValidationMessage(section, calendarInputGroup, birthdayYearErrorMessage);
         await setValue(section + dateInput, validBirthday);
-        await expect(await doesItExist(errorMessage)).toBe(false, 'error message exists');
+        expect(await doesItExist(errorMessage))
+            .withContext('error message exists')
+            .toBe(false);
     }
 
     async function checkPermissionsValidation(section: string): Promise<void> {
         await waitForElDisplayed(section);
+        await pause(500);
         await scrollIntoView(section + radioButtonLabel, 1);
         await checkValidationMessage(section, radioButtonLabel, termsErrorMesssage, 1);
         await click(section + radioButtonLabel);
-        await expect(await doesItExist(errorMessage)).toBe(false, 'error message exists');
+        expect(await doesItExist(errorMessage))
+            .withContext('error message exists')
+            .toBe(false);
     }
 
     async function checkFrameworkValidation(section: string): Promise<void> {
         await waitForElDisplayed(section);
+        await pause(500);
         await scrollIntoView(section + radioButtonLabel);
         await checkValidationMessage(section, radioButtonLabel, frameworkErrorMessage, 3);
         await checkValidationMessage(section, radioButtonLabel, frameworkErrorMessage, 4);
         await click(section + radioButtonLabel, 2);
-        await expect(await doesItExist(errorMessage)).toBe(false, 'error message exists');
+        expect(await doesItExist(errorMessage))
+            .withContext('error message exists')
+            .toBe(false);
     }
 
     async function checkFormValidation(section: string): Promise<void> {
         await waitForElDisplayed(section);
         await scrollIntoView(section);
+        await pause(500);
         await click(section + nameInput);
 
         const nameLength = (await getValue(section + nameInput)).length;
@@ -250,20 +265,20 @@ describe('Form generator test suite', () => {
         await checkValidationMessage(section, calendarInputGroup, requiredErrorMessage);
 
         if (section === defaultExample) {
-            await expect(await getElementClass(section + select, 1)).toContain(
-                'is-error',
-                'element is not highlighted by error'
-            );
+            expect(await getElementClass(section + select, 1))
+                .withContext('element is not highlighted by error')
+                .toContain('is-error');
         }
 
         for (let i = 0; i < (await getElementArrayLength(section + radioButton)); i++) {
-            await expect(await getElementClass(section + radioButton, i)).toContain(
-                'is-error',
-                'no error for radio button'
-            );
+            expect(await getElementClass(section + radioButton, i))
+                .withContext('no error for radio button')
+                .toContain('is-error');
         }
         for (let i = 0; i < (await getElementArrayLength(section + checkbox)); i++) {
-            await expect(await getElementClass(section + checkbox, i)).toContain('is-error', 'no error for checkbox');
+            expect(await getElementClass(section + checkbox, i))
+                .withContext('no error for checkbox')
+                .toContain('is-error');
         }
     }
 
@@ -276,7 +291,11 @@ describe('Form generator test suite', () => {
         await click(section + item, i);
         // pause for element to be created
         await pause(1000);
-        await expect(await waitForElDisplayed(errorMessage)).toBe(true, 'error message is not displayed');
-        await expect(await getText(errorMessage)).toEqual(message, 'error message is not match');
+        expect(await waitForElDisplayed(errorMessage))
+            .withContext('error message is not displayed')
+            .toBe(true);
+        expect(await getText(errorMessage))
+            .withContext('error message is not match')
+            .toEqual(message);
     }
 });
