@@ -1,17 +1,18 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { ElementRef, EventEmitter, Injector } from '@angular/core';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import { Observable } from 'rxjs';
 
-import { TableState } from './interfaces/table-state.interface';
-import { CollectionSort } from './interfaces/collection-sort.interface';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { TableDataSource } from './domain';
 import { CollectionFilter } from './interfaces/collection-filter.interface';
 import { CollectionGroup } from './interfaces/collection-group.interface';
+import { CollectionSort } from './interfaces/collection-sort.interface';
+import { TableState } from './interfaces/table-state.interface';
+import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow } from './models';
 import { TableScrollable } from './services/table-scroll-dispatcher.service';
 import { TableColumn } from './table-column';
-import { TableDataSource } from './domain';
-import { PlatformTableManagedPreset, SaveRowsEvent, TableInitialState, TableRow } from './models';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 export abstract class Table<T = any> implements PresetManagedComponent<PlatformTableManagedPreset> {
     abstract readonly name: string;
@@ -55,30 +56,11 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
 
     abstract readonly tableScrollable: TableScrollable;
 
-    /** Toolbar Sort Settings button click event */
-    readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Toolbar Filter Settings button click event */
-    readonly openTableFilterSettings: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Toolbar Group Settings button click event */
-    readonly openTableGroupSettings: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Toolbar Column Settings button click event */
-    readonly openTableColumnSettings: EventEmitter<void> = new EventEmitter<void>();
-
-    /** Event fired when empty row added. */
-    readonly emptyRowAdded: EventEmitter<void>;
-
-    /** Event fired when save button pressed. */
-    readonly save: EventEmitter<SaveRowsEvent<T>>;
-
-    /** Event fired when cancel button pressed. */
-    readonly cancel: EventEmitter<void>;
-
     abstract _tableRowsVisible: TableRow<T>[];
 
     abstract _tableRows: TableRow<T>[];
+
+    abstract _tableRowsInViewPortPlaceholder: number[];
 
     /** Get table state */
     abstract getTableState(): TableState;
@@ -183,4 +165,27 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract toggleExpandableTableRow(row: TableRow<T>, forceFetch?: boolean);
 
     abstract onTableRowsChanged(): void;
+
+    abstract refreshDndList(): void;
+
+    /** Toolbar Sort Settings button click event */
+    readonly openTableSortSettings: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Toolbar Filter Settings button click event */
+    readonly openTableFilterSettings: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Toolbar Group Settings button click event */
+    readonly openTableGroupSettings: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Toolbar Column Settings button click event */
+    readonly openTableColumnSettings: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Event fired when empty row added. */
+    readonly emptyRowAdded: EventEmitter<void>;
+
+    /** Event fired when save button pressed. */
+    readonly save: EventEmitter<SaveRowsEvent<T>>;
+
+    /** Event fired when cancel button pressed. */
+    readonly cancel: EventEmitter<void>;
 }
