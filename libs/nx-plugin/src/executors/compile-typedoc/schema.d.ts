@@ -1,1 +1,3 @@
-export interface CompileTypedocExecutorSchema {} // eslint-disable-line
+export interface CompileTypedocExecutorSchema {
+    outputPath: string;
+}

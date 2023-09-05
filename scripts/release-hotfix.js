@@ -7,6 +7,14 @@ const execAndLog = (command) => {
     console.log(execSync(command, { maxBuffer: Infinity, encoding: 'utf8' }));
 };
 
+/**
+ * Releases a hotfix from the current HEAD.
+ * This will create a new branch from the current HEAD, bump the patch version and push the changes to the remote.
+ * The rest of the process will be handled by the CI.
+ *
+ * If the process fails after creating the branch, but before actually pushing changes to the remote,
+ * you can run `git checkout main` and `git branch -D tmp_hotfix_branch` to clean up.
+ */
 const releaseHotfix = async () => {
     if (semver.prerelease(currentVersion, undefined)) {
         throw new Error('Cannot release a hotfix from a prerelease version');

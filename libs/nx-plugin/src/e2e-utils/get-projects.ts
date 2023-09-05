@@ -1,6 +1,13 @@
 import { ExecutorContext } from '@nx/devkit';
 import { affectedProjects } from './affected-projects';
 
+/**
+ * Returns a list of projects to run the executor on.
+ * @param context
+ * @param affected
+ * @param base
+ * @param head
+ */
 export async function getProjects(
     context: ExecutorContext,
     affected: boolean = false,

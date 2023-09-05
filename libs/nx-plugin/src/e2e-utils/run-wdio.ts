@@ -2,6 +2,12 @@ import { ExecutorContext, logger } from '@nx/devkit';
 import { spawn } from 'child_process';
 import { unlinkSync, writeFileSync } from 'fs';
 
+/**
+ * Runs the wdio command.
+ * @param baseUrl
+ * @param e2eFiles
+ * @param context
+ */
 export async function runWdio(baseUrl: string, e2eFiles: string[], context: ExecutorContext): Promise<boolean> {
     const wdioConfig = `wdio_${context.projectName}.conf.js`;
     writeFileSync(
