@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.19...v0.46.0-rc.20) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** checkbox label container gap issue ([#10418](https://github.com/SAP/fundamental-ngx/issues/10418)) ([ed6cdc3](https://github.com/SAP/fundamental-ngx/commit/ed6cdc31623c984cc945aba8c2d38cca6a4aacf8))
+
+
+
+
+
+# [0.46.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.18...v0.46.0-rc.19) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 # [0.46.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.17...v0.46.0-rc.18) (2023-09-05)
 
 

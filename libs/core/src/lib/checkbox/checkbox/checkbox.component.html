@@ -35,8 +35,8 @@
     (click)="_onLabelClick($event)"
 >
     <span class="fd-checkbox__checkmark" aria-hidden="true"></span>
-    <div class="fd-checkbox__label-container">
-        <ng-container *ngIf="label">
+    <div class="fd-checkbox__label-container" *ngIf="label">
+        <ng-container>
             <span class="fd-checkbox__text">
                 {{ label }}
             </span>
