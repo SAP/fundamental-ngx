@@ -21,6 +21,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { MultiInputDropdownWidthExampleComponent } from './examples/multi-input-dropdown-width-example/multi-input-dropdown-width-example.component';
 import { MultiInputAddonClickedExampleComponent } from './examples/multi-input-addon-clicked-example/multi-input-addon-clicked-example.component';
+import { MultiInputOptionItemExampleComponent } from './examples/multi-input-option-item-example/multi-input-option-item-example.component';
 
 const routes: Routes = [
     {
@@ -57,7 +58,8 @@ const routes: Routes = [
         MultiInputIncludesExampleComponent,
         MultiInputCustomItemExampleComponent,
         MultiInputDropdownWidthExampleComponent,
-        MultiInputAddonClickedExampleComponent
+        MultiInputAddonClickedExampleComponent,
+        MultiInputOptionItemExampleComponent
     ],
     providers: [
         moduleDeprecationsProvider(DeprecatedMultiInputCompactDirective),
