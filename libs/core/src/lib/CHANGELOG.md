@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.24) (2023-09-05)
+
+
+### Features
+
+* **core:** added template based popover body ([#10455](https://github.com/SAP/fundamental-ngx/issues/10455)) ([23f16b5](https://github.com/SAP/fundamental-ngx/commit/23f16b55fd33ed2062a0c9966b8510fb057ba2c1))
+
+
+
+
+
 # [0.46.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.22...v0.46.0-rc.23) (2023-09-05)
 
 **Note:** Version bump only for package @fundamental-ngx/core
