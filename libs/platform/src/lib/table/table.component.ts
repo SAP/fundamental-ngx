@@ -384,6 +384,12 @@ export class TableComponent<T = any>
     @Input()
     forceCheckedAllState = false;
 
+    /**
+     * aria-labelledby attribute value for the table.
+     */
+    @Input()
+    ariaLabelledBy: string;
+
     /** @hidden */
     private _shouldCheckNewRows = false;
 
@@ -527,6 +533,15 @@ export class TableComponent<T = any>
                 this._dndLoadingState)
         );
     }
+
+    /** @hidden */
+    get _ariaLabelledBy(): string | null {
+        if (this.ariaLabelledBy) {
+            return this.ariaLabelledBy;
+        }
+        return this.tableToolbar?.tableToolbarTitleId || null;
+    }
+
     /**
      * @hidden
      * Representation of combined table rows.
