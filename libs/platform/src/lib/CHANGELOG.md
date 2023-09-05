@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.22) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** issues with toolbar in p13 dialog ([#10420](https://github.com/SAP/fundamental-ngx/issues/10420)) ([cc37fc0](https://github.com/SAP/fundamental-ngx/commit/cc37fc00e03a82fd5be363d19f7d813367fec1a6))
+
+
+
+
+
 # [0.46.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.21) (2023-09-05)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.22) (2023-09-05)
+
+
+### Bug Fixes
+
+* **core:** add aria-multiselectable to multi input options list ([#10449](https://github.com/SAP/fundamental-ngx/issues/10449)) ([a06a6f3](https://github.com/SAP/fundamental-ngx/commit/a06a6f30e831a71f8d9d8371534b6f8fd570cabd))
+* **core:** default element style breaking standalone tokens ([#10416](https://github.com/SAP/fundamental-ngx/issues/10416)) ([d447fb8](https://github.com/SAP/fundamental-ngx/commit/d447fb83c947931b5b7e0bf001708ac5e166828a))
+
+
+
+
+
 # [0.46.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.20...v0.46.0-rc.21) (2023-09-05)
 
 
