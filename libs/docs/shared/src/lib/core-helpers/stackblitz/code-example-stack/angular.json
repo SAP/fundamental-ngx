@@ -36,7 +36,6 @@
                     },
                     "options": {
                         "assets": [
-                            "src/favicon.ico",
                             "src/assets",
                             {
                                 "glob": "**/css_variables.css",
@@ -52,10 +51,23 @@
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "outputPath": "dist",
-                        "polyfills": "src/polyfills.ts",
+                        "polyfills": ["zone.js"],
                         "scripts": [],
-                        "styles": ["src/styles.scss"],
-                        "tsConfig": "src/tsconfig.app.json"
+                        "styles": [
+                            "node_modules/fundamental-styles/dist/icon.css",
+                            "src/styles.scss",
+                            {
+                                "input": "src/theming/sap_fiori_3_fonts.css",
+                                "inject": false,
+                                "bundleName": "sap_fiori_3_fonts"
+                            },
+                            {
+                                "input": "src/theming/sap_horizon_fonts.css",
+                                "inject": false,
+                                "bundleName": "sap_horizon_fonts"
+                            }
+                        ],
+                        "tsConfig": "tsconfig.json"
                     }
                 },
                 "serve": {
