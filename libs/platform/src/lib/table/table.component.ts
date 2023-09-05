@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
@@ -28,6 +29,7 @@ import {
 } from '@angular/core';
 
 import {
+    DndListDirective,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableGridDirective,
     KeyUtil,
@@ -459,6 +461,9 @@ export class TableComponent<T = any>
     @ViewChild('tableBody', { read: ElementRef })
     private readonly _tableBody: ElementRef<HTMLElement>;
     /** @hidden */
+    @ViewChild(DndListDirective)
+    private readonly _dndDirective: Nullable<DndListDirective<TableRow>>;
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
     /** @hidden */
@@ -579,6 +584,8 @@ export class TableComponent<T = any>
      * Optimizes performance due to skipping initial setup of the component.
      */
     _tableRowsInViewPortPlaceholder: number[] = [];
+    /** @hidden */
+    _dndTableRowsPlaceholder: TableRow[] = [];
     /** @hidden */
     _isShownSelectionColumn = false;
     /** @hidden */
@@ -719,6 +726,7 @@ export class TableComponent<T = any>
      */
     setRowsInViewport(startIndex = 0, length: number): void {
         this._tableRowsInViewPortPlaceholder = new Array(length).fill(null).map((_, i) => i + startIndex);
+        this._dndTableRowsPlaceholder = this._tableRows.slice(startIndex, length);
         this._cdr.detectChanges();
     }
 
@@ -1194,6 +1202,16 @@ export class TableComponent<T = any>
         });
 
         return currentPreset;
+    }
+
+    /**
+     * Manually triggers list item event listeners for drag&drop list directive.
+     */
+    refreshDndList(): void {
+        if (this._virtualScrollDirective?.virtualScroll !== true) {
+            return;
+        }
+        this._dndDirective?.refreshQueryList();
     }
 
     /**

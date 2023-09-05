@@ -67,7 +67,7 @@
                 [noBorderX]="noBorderX || noBorders"
                 [noBorderY]="noBorderY || noBorders"
                 [tabIndex]="pageScrolling ? 0 : -1"
-                [items]="_tableRows"
+                [items]="_dndTableRowsPlaceholder"
                 [draggable]="isDraggable"
                 [dropMode]="_dndTableDirective?.dropMode ?? 'group'"
                 (itemDropped)="_dndTableDirective?.dragDropItemDrop($event)"

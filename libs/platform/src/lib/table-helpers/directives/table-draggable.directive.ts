@@ -78,7 +78,9 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
     private readonly _ngZone = inject(NgZone);
 
     /** @hidden */
-    private readonly _cdr = inject(ChangeDetectorRef);
+    private readonly _cdr = inject(ChangeDetectorRef, {
+        host: true
+    });
 
     /** @hidden */
     dragDropInProgress = false;
@@ -136,6 +138,8 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
 
         this._onZoneFree(() => {
             if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
+                event.draggedItemIndex = this._table._tableRowsInViewPortPlaceholder[event.draggedItemIndex];
+                event.replacedItemIndex = this._table._tableRowsInViewPortPlaceholder[event.replacedItemIndex];
                 const dragRow = this._table._tableRows.find(
                     (row) => row === this._table._tableRowsVisible[event.draggedItemIndex]
                 );
@@ -146,7 +150,6 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
                 if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
                     return;
                 }
-
                 this._dragDropUpdateDragParentRowAttributes(dragRow);
                 this._dragDropRearrangeTreeRows(dragRow, dropRow, event);
                 this._dragDropUpdateDropRowAttributes(dragRow, dropRow, event.mode);
@@ -159,6 +162,7 @@ export class TableDraggableDirective<T = any> extends TableDraggable<T> {
 
                 this._cdr.detectChanges();
                 this._emitRowsRearrangeEvent(dragRow, dropRow, event);
+                this._table.refreshDndList();
             }
         });
     }
