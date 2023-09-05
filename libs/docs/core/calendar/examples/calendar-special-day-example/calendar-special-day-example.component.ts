@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
@@ -20,7 +24,9 @@ import { SpecialDayRule } from '@fundamental-ngx/core/shared';
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [CalendarComponent, CheckboxComponent, FormsModule, FdDatetimeModule]
 })
 export class CalendarSpecialDayExampleComponent {
     specialDays: SpecialDayRule<FdDate>[] = [];

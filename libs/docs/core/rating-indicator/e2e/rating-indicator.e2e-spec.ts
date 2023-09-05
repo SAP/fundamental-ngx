@@ -1,4 +1,3 @@
-import { RatingIndicatorPo } from './rating-indicator.po';
 import {
     click,
     currentPlatformName,
@@ -15,6 +14,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { RatingIndicatorPo } from './rating-indicator.po';
 
 describe('Rating indicator test suite', () => {
     const ratingIndicatorPage = new RatingIndicatorPo();

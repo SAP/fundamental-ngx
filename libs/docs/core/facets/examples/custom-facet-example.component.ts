@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FacetModule } from '@fundamental-ngx/core/facets';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fd-custom-facet-example',
@@ -15,6 +17,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
                 flex-direction: column;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [FacetModule, ObjectStatusModule]
 })
 export class CustomFacetExampleComponent {}

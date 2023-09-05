@@ -1,19 +1,16 @@
-import { runCommonTests } from './table-common-tests';
-import { TablePo } from './table.po';
 import {
     browserIsSafari,
     click,
-    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getText,
-    isElementDisplayed,
     refreshPage,
     scrollIntoView,
     setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { runCommonTests } from './table-common-tests';
 import {
     astroTestText,
     nameEndTestText,
@@ -26,6 +23,7 @@ import {
     testText5,
     testText7
 } from './table-contents';
+import { TablePo } from './table.po';
 
 describe('Table component test suite', () => {
     const tablePage = new TablePo('/table/p13-dialog-table');

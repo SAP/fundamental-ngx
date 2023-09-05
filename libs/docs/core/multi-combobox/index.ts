@@ -1,3 +1,23 @@
-export * from './multi-combobox-docs.module';
+import { Routes } from '@angular/router';
 
-export * from './examples/tokenizer/multi-combobox-responsive-tokenizer-example.component';
+export const ROUTES: Routes = [
+    {
+        path: '',
+        loadComponent: () =>
+            import('./multi-combobox-header/multi-combobox-header.component').then(
+                (c) => c.MultiComboboxHeaderComponent
+            ),
+        children: [
+            {
+                path: '',
+                loadComponent: () => import('./multi-combobox-docs.component').then((c) => c.MultiComboboxDocsComponent)
+            }
+        ],
+        data: {
+            primary: true
+        }
+    }
+];
+export const LIBRARY_NAME = 'multi-combobox';
+export const API_FILE_KEY = 'multiCombobox';
+export const I18N_KEY = 'coreMultiComboBox';

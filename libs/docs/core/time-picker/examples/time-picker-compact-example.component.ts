@@ -1,4 +1,7 @@
+import { DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -6,6 +9,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
 
 @Component({
     selector: 'fd-time-picker-compact-example',
@@ -19,7 +23,9 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [TimePickerModule, ContentDensityDirective, FormsModule, NgIf, DatePipe]
 })
 export class TimePickerCompactExampleComponent {
     timeObject = new FdDate().setTime(12, 0, 0);

@@ -12,8 +12,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { ObjectListItemPo } from './object-list-item.po';
 import { navUrl } from './object-list-item-contents';
+import { ObjectListItemPo } from './object-list-item.po';
 
 describe('Object list item suite:', () => {
     const objListPage = new ObjectListItemPo();

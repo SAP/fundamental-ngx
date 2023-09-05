@@ -1,6 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets,
+    SeparatorComponent
+} from '@fundamental-ngx/docs/shared';
+import { PlatformTablePageScrollingExampleComponent } from '../../examples/platform-table-page-scrolling-example.component';
+import { PlatformTableVirtualScrollExampleComponent } from '../../examples/virtual-scroll/platform-table-virtual-scroll-example.component';
 
 const platformTablePageScrollingSrc = 'platform-table-page-scrolling-example.component.html';
 const platformTablePageScrollingTsSrc = 'platform-table-page-scrolling-example.component.ts';
@@ -10,7 +22,18 @@ const platformVirtualScrollTableDefaultTsSrc = 'virtual-scroll/platform-table-vi
     selector: 'fd-table-scrolling-docs',
     templateUrl: './table-scrolling-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformTablePageScrollingExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTableVirtualScrollExampleComponent,
+        FdDatetimeModule
+    ]
 })
 export class TableScrollingDocsComponent {
     childService = inject(ExampleChildService);

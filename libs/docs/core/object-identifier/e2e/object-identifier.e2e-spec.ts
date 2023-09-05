@@ -1,4 +1,3 @@
-import { ObjectIdentifierPo } from './object-identifier.po';
 import {
     getElementArrayLength,
     isElementClickable,
@@ -7,6 +6,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { ObjectIdentifierPo } from './object-identifier.po';
 
 describe('Object identifier test suite', () => {
     const objectIdentifierPage = new ObjectIdentifierPo();

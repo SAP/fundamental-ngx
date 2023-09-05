@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { SwitchModule } from '@fundamental-ngx/core/switch';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DisabledSwitchExampleComponent } from './examples/disabled-switch-example/disabled-switch-example.component';
+import { SemanticSwitchExampleComponent } from './examples/semantic-switch-example/semantic-switch-example.component';
+import { SwitchBindingExampleComponent } from './examples/switch-binding-example/switch-binding-example.component';
+import { SwitchFormsExampleComponent } from './examples/switch-form-example/switch-forms-example.component';
+import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
 
 const switchSizeExampleScssCode = 'switch-sizes-example/switch-sizes-example.component.scss';
 const switchDisableExampleScssCode = 'disabled-switch-example/disabled-switch-example.component.scss';
@@ -21,7 +38,24 @@ const semanticSwitchExampleTs = 'semantic-switch-example/semantic-switch-example
 
 @Component({
     selector: 'app-switch',
-    templateUrl: './switch-docs.component.html'
+    templateUrl: './switch-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SwitchSizesExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DisabledSwitchExampleComponent,
+        SwitchBindingExampleComponent,
+        SemanticSwitchExampleComponent,
+        SwitchFormsExampleComponent,
+        PlayGroundComponent,
+        SwitchModule,
+        FormsModule,
+        ContentDensityDirective
+    ]
 })
 export class SwitchDocsComponent {
     schema: Schema;

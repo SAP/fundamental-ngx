@@ -1,6 +1,6 @@
 import { getElementArrayLength, getElementClass, isElementDisplayed } from '../../../../../e2e';
-import { InfoLabelPo } from './info-label.po';
 import { colorsArr } from './info-label-contents';
+import { InfoLabelPo } from './info-label.po';
 
 describe('Info Label component test suite', () => {
     const infoLabelPage = new InfoLabelPo();

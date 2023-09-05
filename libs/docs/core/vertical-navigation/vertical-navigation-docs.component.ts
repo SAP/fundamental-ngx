@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { VerticalNavigationCondensedExampleComponent } from './examples/vertical-navigation-condensed-example.component';
+import { VerticalNavigationDefaultExampleComponent } from './examples/vertical-navigation-default-example.component';
+import { VerticalNavigationGroupingExampleComponent } from './examples/vertical-navigation-grouping-example.component';
+import { VerticalNavigationNoIconsExampleComponent } from './examples/vertical-navigation-no-icons-example.component';
 
 const VerticalNavigationDefaultExample = 'vertical-navigation-default-example.component.html';
 const VerticalNavigationGroupingExample = 'vertical-navigation-grouping-example.component.html';
@@ -8,7 +20,19 @@ const VerticalNavigationNoIconsExample = 'vertical-navigation-no-icons-example.c
 
 @Component({
     selector: 'app-vertical-navigation',
-    templateUrl: './vertical-navigation-docs.component.html'
+    templateUrl: './vertical-navigation-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        VerticalNavigationDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        VerticalNavigationCondensedExampleComponent,
+        VerticalNavigationNoIconsExampleComponent,
+        VerticalNavigationGroupingExampleComponent
+    ]
 })
 export class VerticalNavigationDocsComponent {
     defaultVerticalNavigation: ExampleFile[] = [

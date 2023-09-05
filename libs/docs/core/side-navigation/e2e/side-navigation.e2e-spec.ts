@@ -8,8 +8,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { SideNavigationPo } from './side-navigation.po';
 import { blockExamples } from './side-navigation-content';
+import { SideNavigationPo } from './side-navigation.po';
 
 describe('Side-navigation test suite', () => {
     const sideNavigationPage = new SideNavigationPo();

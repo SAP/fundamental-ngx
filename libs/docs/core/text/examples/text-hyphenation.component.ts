@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { TextComponent } from '@fundamental-ngx/core/text';
 
 @Component({
     selector: 'fd-text-hyphenation',
     templateUrl: './text-hyphenation.component.html',
-    styleUrls: ['./text-hyphenation.component.scss']
+    styleUrls: ['./text-hyphenation.component.scss'],
+    standalone: true,
+    imports: [TextComponent]
 })
 export class TextHyphenationComponent {
     text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

@@ -1,4 +1,3 @@
-import { ActionListItemPo } from './action-list-item.po';
 import {
     acceptAlert,
     checkElementTextValue,
@@ -12,6 +11,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { alertTextArr, btnText } from './action-list-item-contents';
+import { ActionListItemPo } from './action-list-item.po';
 
 describe('Action List Item Test Suite:', () => {
     const actionListPage = new ActionListItemPo();

@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { RatingIndicatorExampleComponent } from './examples/rating-indicator-examples.component';
+import { RatingIndicatorRatingsExampleComponent } from './examples/rating-indicator-ratings.component';
+import { RatingIndicatorSizesExampleComponent } from './examples/rating-indicator-sizes.component';
+import { RatingIndicatorCustomIconExampleComponent } from './examples/ri-custom-icon-example.component';
+import { RatingIndicatorDisplayModeComponent } from './examples/ri-display-mode-example.component';
+import { RatingIndicatorDynamicExampleComponent } from './examples/ri-dynamic-example.component';
 
 const sizeRatingHtml = 'rating-indicator-sizes.component.html';
 const sizesRatingTs = 'rating-indicator-sizes.component.ts';
@@ -22,7 +35,20 @@ const displayModeTs = 'ri-display-mode-example.component.ts';
 
 @Component({
     selector: 'app-rating-indicator',
-    templateUrl: './rating-indicator-docs.component.html'
+    templateUrl: './rating-indicator-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        RatingIndicatorExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        RatingIndicatorDisplayModeComponent,
+        RatingIndicatorCustomIconExampleComponent,
+        RatingIndicatorSizesExampleComponent,
+        RatingIndicatorRatingsExampleComponent,
+        RatingIndicatorDynamicExampleComponent
+    ]
 })
 export class RatingIndicatorDocsComponent {
     ratingIndicatorSizes: ExampleFile[] = [

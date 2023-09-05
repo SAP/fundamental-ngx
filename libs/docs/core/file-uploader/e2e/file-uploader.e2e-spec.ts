@@ -1,4 +1,3 @@
-import { FileUploaderPo } from './file-uploader.po';
 import {
     getAlertText,
     getAttributeByName,
@@ -12,6 +11,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { FileUploaderPo } from './file-uploader.po';
 
 import { imagePath, placeholderTestTextArr, titleValue } from './file-uploader-contents';
 

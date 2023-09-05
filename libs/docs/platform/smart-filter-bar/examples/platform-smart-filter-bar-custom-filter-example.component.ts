@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
-import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
+import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -10,32 +10,42 @@ import {
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter,
-    isCollectionFilter,
+    FilterType,
+    FilterableColumnDataType,
     TableDataProvider,
     TableDataSource,
     TableState,
-    FilterableColumnDataType,
-    FilterType
+    isCollectionFilter
 } from '@fundamental-ngx/platform/table';
 
 import {
+    BaseDynamicFormGeneratorControl,
     dynamicFormFieldProvider,
-    dynamicFormGroupChildProvider,
-    BaseDynamicFormGeneratorControl
+    dynamicFormGroupChildProvider
 } from '@fundamental-ngx/platform/form';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { get } from 'lodash-es';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
+import { SliderComponent } from '@fundamental-ngx/platform/slider';
 import {
     BaseSmartFilterBarConditionField,
+    PlatformSmartFilterBarModule,
     SmartFilterBarCondition,
     SmartFilterBarCustomFilterConfig,
     SmartFilterBarService,
-    smartFilterBarProvider,
-    SmartFilterBar
+    smartFilterBarProvider
 } from '@fundamental-ngx/platform/smart-filter-bar';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { get } from 'lodash-es';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-smart-filter-bar-slider-example',
@@ -51,7 +61,9 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
             </ng-container>
         </ng-container>
     `,
-    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
+    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, SliderComponent, FdDatetimeModule]
 })
 export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGeneratorControl {
     constructor() {
@@ -75,7 +87,9 @@ export class PlatformSmartFilterBarSliderComponent extends BaseDynamicFormGenera
             </ng-container>
         </ng-container>
     `,
-    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider]
+    viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider, smartFilterBarProvider],
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, PlatformDatePickerComponent]
 })
 export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilterBarConditionField {
     constructor(dialogService: DialogService, smartFilterBarService: SmartFilterBarService, injector: Injector) {
@@ -85,7 +99,16 @@ export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilter
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-custom-filter-example',
-    templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html'
+    templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html',
+    standalone: true,
+    imports: [
+        PlatformSmartFilterBarModule,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
+    ]
 })
 export class PlatformSmartFilterBarCustomFilterExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;

@@ -1,9 +1,30 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { TableModule } from '@fundamental-ngx/core/table';
+import {
+    DescriptionComponent,
+    DocPageComponent,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 import { defaultFormFieldHintOptions } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'app-form-container-header',
-    templateUrl: './platform-form-container-header.component.html'
+    templateUrl: './platform-form-container-header.component.html',
+    standalone: true,
+    imports: [
+        DocPageComponent,
+        HeaderComponent,
+        DescriptionComponent,
+        FocusableGridDirective,
+        TableModule,
+        NgFor,
+        ImportComponent,
+        HeaderTabsComponent
+    ]
 })
 export class PlatformFormContainerHeaderComponent {
     defaultHintOptions = Object.keys(defaultFormFieldHintOptions).map((propName) => [

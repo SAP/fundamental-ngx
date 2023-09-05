@@ -1,5 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AdvancedUsageComponent } from './examples/advanced-usage/advanced-usage.component';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
 const defaultExampleTs = 'default-example/default-example.component.ts';
@@ -11,7 +20,16 @@ const advancedExampleCustomDirTs = 'advanced-usage/custom-selectable-item.direct
 @Component({
     selector: 'app-tabs',
     templateUrl: './selectable-list-docs.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        DefaultExampleComponent,
+        CodeExampleComponent,
+        DescriptionComponent,
+        AdvancedUsageComponent
+    ]
 })
 export class SelectableListDocsComponent {
     defaultExample: ExampleFile[] = [
@@ -23,7 +41,7 @@ export class SelectableListDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'selectable-list-default-example',
             component: 'SelectableListDefaultExample'
         }
@@ -38,13 +56,13 @@ export class SelectableListDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(advancedExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'selectable-list-advanced-example',
             component: 'SelectableListAdvancedExample'
         },
         {
             code: getAssetFromModuleAssets(advancedExampleCustomDirTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'selectable-list-advanced-example-custom-item',
             component: 'SelectableListAdvancedExampleCustomItem'
         }

@@ -1,6 +1,20 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ShellbarBasicExampleComponent } from './examples/shellbar-basic-example.component';
+import { ShellbarCollapsibleExampleComponent } from './examples/shellbar-collapsible-example.component';
+import { ShellbarGrowingGroupExampleComponent } from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
+import { ShellbarResponsiveExampleComponent } from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
+import { ShellbarSideNavResponsiveExampleComponent } from './examples/shellbar-side-nav-responsive/shellbar-side-nav-responsive-example.component';
+import { ShellbarSideNavExampleComponent } from './examples/shellbar-side-nav/shellbar-side-nav-example.component';
 
 const sideNavShellbarScss = 'shellbar-side-nav/shellbar-side-nav-example.component.scss';
 const sideNavResponsiveShellbarScss =
@@ -18,7 +32,21 @@ const sideNavResponsiveShellbarHtml =
 
 @Component({
     selector: 'app-shellbar',
-    templateUrl: './shellbar-docs.component.html'
+    templateUrl: './shellbar-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        SeparatorComponent,
+        ComponentExampleComponent,
+        ShellbarBasicExampleComponent,
+        CodeExampleComponent,
+        ShellbarCollapsibleExampleComponent,
+        ShellbarResponsiveExampleComponent,
+        ShellbarSideNavExampleComponent,
+        ShellbarSideNavResponsiveExampleComponent,
+        ShellbarGrowingGroupExampleComponent
+    ]
 })
 export class ShellbarDocsComponent {
     shellbarBasicExample: ExampleFile[] = [

@@ -1,5 +1,10 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FocusableListItemFocusedEvent } from '@fundamental-ngx/cdk/utils';
+import {
+    FocusableItemDirective,
+    FocusableListDirective,
+    FocusableListItemFocusedEvent
+} from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fundamental-ngx-focusable-list-default-example',
@@ -28,7 +33,9 @@ import { FocusableListItemFocusedEvent } from '@fundamental-ngx/cdk/utils';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FocusableListDirective, NgFor, FocusableItemDirective]
 })
 export class DefaultExampleComponent {
     focusableItems = new Array(5).fill(undefined);

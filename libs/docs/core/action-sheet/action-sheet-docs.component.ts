@@ -1,10 +1,30 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { ActionSheetCompactExampleComponent } from './examples/action-sheet-compact/action-sheet-compact-example.component';
+import { ActionSheetDefaultExampleComponent } from './examples/action-sheet-default/action-sheet-default-example.component';
+import { ActionSheetMobileExampleComponent } from './examples/action-sheet-mobile/action-sheet-mobile-example.component';
 
 @Component({
     selector: 'app-action-sheet',
-    templateUrl: './action-sheet-docs.component.html'
+    templateUrl: './action-sheet-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        ActionSheetDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ActionSheetCompactExampleComponent,
+        ActionSheetMobileExampleComponent
+    ]
 })
 export class ActionSheetDocsComponent {
     actionSheetCompactExample: ExampleFile[] = [

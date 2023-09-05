@@ -1,9 +1,24 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-checkbox-error-handling',
-    templateUrl: 'platform-checkbox-error-handling.component.html'
+    templateUrl: 'platform-checkbox-error-handling.component.html',
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CheckboxComponent,
+        LinkComponent,
+        PlatformButtonModule,
+        NgIf,
+        JsonPipe
+    ]
 })
 export class PlatformChekboxStyleComponent {
     customForm = new FormGroup({

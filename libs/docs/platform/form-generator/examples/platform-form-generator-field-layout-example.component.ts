@@ -1,13 +1,20 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import {
-    DatetimeAdapter,
     DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import {
+    DynamicFormItem,
+    DynamicFormValue,
+    FormGeneratorComponent,
+    PlatformFormGeneratorModule
+} from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -30,7 +37,9 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorFieldLayoutExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

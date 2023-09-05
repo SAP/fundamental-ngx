@@ -1,14 +1,3 @@
-import { SplitMenuButtonPo } from './split-menu-button.po';
-import {
-    behaviorBtnTextArr,
-    compactButtonClass,
-    iconAttr,
-    iconBtnTextArr,
-    iconLabel,
-    standardBtnText,
-    standardBtnText2,
-    typesBtnTextArr
-} from './split-menu-button-page-contents';
 import {
     acceptAlert,
     browserIsIEorSafari,
@@ -23,6 +12,17 @@ import {
     waitForNotDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import {
+    behaviorBtnTextArr,
+    compactButtonClass,
+    iconAttr,
+    iconBtnTextArr,
+    iconLabel,
+    standardBtnText,
+    standardBtnText2,
+    typesBtnTextArr
+} from './split-menu-button-page-contents';
+import { SplitMenuButtonPo } from './split-menu-button.po';
 
 declare const $$: any;
 

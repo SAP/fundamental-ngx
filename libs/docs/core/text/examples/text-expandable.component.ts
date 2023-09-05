@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { TextComponent } from '@fundamental-ngx/core/text';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-text-expandable',
-    templateUrl: './text-expandable.component.html'
+    templateUrl: './text-expandable.component.html',
+    standalone: true,
+    imports: [TextComponent, FdPatchLanguageDirective]
 })
 export class TextExpandableComponent {
     text = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.

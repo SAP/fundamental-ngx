@@ -8,7 +8,6 @@ import {
     click,
     clickRightMouseBtn,
     doubleClick,
-    focusElement,
     getElementArrayLength,
     getText,
     getValue,

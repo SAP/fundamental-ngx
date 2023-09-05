@@ -1,10 +1,27 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeSnippetComponent,
+    DescriptionComponent,
+    DocPageComponent,
+    ExampleFile,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'app-datetime-datetime-adapter-header',
-    templateUrl: './dayjs-datetime-adapter-header.component.html'
+    templateUrl: './dayjs-datetime-adapter-header.component.html',
+    standalone: true,
+    imports: [
+        DocPageComponent,
+        HeaderComponent,
+        DescriptionComponent,
+        CodeSnippetComponent,
+        ImportComponent,
+        HeaderTabsComponent
+    ]
 })
 export class DayjsDatetimeAdapterHeaderComponent {
     installSnippet: ExampleFile = {

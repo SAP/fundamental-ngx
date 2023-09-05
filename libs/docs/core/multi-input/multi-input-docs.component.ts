@@ -1,6 +1,27 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { MultiInputAddonClickedExampleComponent } from './examples/multi-input-addon-clicked-example/multi-input-addon-clicked-example.component';
+import { MultiInputAsyncExampleComponent } from './examples/multi-input-async-example/multi-input-async-example.component';
+import { MultiInputCompactExampleComponent } from './examples/multi-input-compact-example/multi-input-compact-example.component';
+import { MultiInputCustomItemExampleComponent } from './examples/multi-input-custom-item-example/multi-input-custom-item-example.component';
+import { MultiInputDisplaywithExampleComponent } from './examples/multi-input-displaywith-example/multi-input-displaywith-example.component';
+import { MultiInputDropdownWidthExampleComponent } from './examples/multi-input-dropdown-width-example/multi-input-dropdown-width-example.component';
+import { MultiInputExampleComponent } from './examples/multi-input-example/multi-input-example.component';
+import { MultiInputFilterExampleComponent } from './examples/multi-input-filter-example/multi-input-filter-example.component';
+import { MultiInputFormExampleComponent } from './examples/multi-input-form-example/multi-input-form-example.component';
+import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
+import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
+import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
 
 const simpleH = 'multi-input-example/multi-input-example.component.html';
 const simpleT = 'multi-input-example/multi-input-example.component.ts';
@@ -41,7 +62,28 @@ const addonT = 'multi-input-addon-clicked-example/multi-input-addon-clicked-exam
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
-    styleUrls: ['./multi-input-docs.component.scss']
+    styleUrls: ['./multi-input-docs.component.scss'],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MultiInputExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MultiInputCompactExampleComponent,
+        RouterLink,
+        MultiInputMobileExampleComponent,
+        MultiInputDisplaywithExampleComponent,
+        MultiInputIncludesExampleComponent,
+        MultiInputFilterExampleComponent,
+        MultiInputAsyncExampleComponent,
+        MultiInputFormExampleComponent,
+        MultiInputNewTokensExampleComponent,
+        MultiInputCustomItemExampleComponent,
+        MultiInputDropdownWidthExampleComponent,
+        MultiInputAddonClickedExampleComponent
+    ]
 })
 export class MultiInputDocsComponent {
     multiInputBasic: ExampleFile[] = [

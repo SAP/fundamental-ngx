@@ -7,8 +7,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { QuickViewPo } from './quick-view.po';
 import { address, companyName, email, mobile, phone, popoverHeaderValue } from './quick-view-content';
+import { QuickViewPo } from './quick-view.po';
 
 const quickViewPage: QuickViewPo = new QuickViewPo();
 const {

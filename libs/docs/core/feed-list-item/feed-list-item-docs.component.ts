@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { FliActionExampleComponent } from './examples/fli-action/fli-action-example.component';
+import { FliAvatarExampleComponent } from './examples/fli-avatar/fli-avatar-example.component';
+import { FliFooterExampleComponent } from './examples/fli-footer/fli-footer-example.component';
+import { FliMobileExampleComponent } from './examples/fli-mobile/fli-mobile-example.component';
+import { FliSimpleExampleComponent } from './examples/fli-simple/fli-simple-example.component';
 
 const fliSimpleH = 'fli-simple/fli-simple-example.component.html';
 const fliSimpleT = 'fli-simple/fli-simple-example.component.ts';
@@ -19,7 +32,20 @@ const fliMobileT = 'fli-mobile/fli-mobile-example.component.ts';
 
 @Component({
     selector: 'app-feed-list-item-doc',
-    templateUrl: './feed-list-item-docs.component.html'
+    templateUrl: './feed-list-item-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        FliSimpleExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        FliAvatarExampleComponent,
+        FliActionExampleComponent,
+        FliFooterExampleComponent,
+        FliMobileExampleComponent
+    ]
 })
 export class FeedListItemDocsComponent {
     fliSimpleExample: ExampleFile[] = [

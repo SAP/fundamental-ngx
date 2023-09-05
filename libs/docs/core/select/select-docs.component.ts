@@ -1,5 +1,24 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { SelectAddingExampleComponent } from './examples/select-adding-example/select-adding-example.component';
+import { SelectCustomComparatorExample } from './examples/select-custom-comparator-example/select-custom-comparator-example.component';
+import { SelectCustomTriggerComponent } from './examples/select-custom-trigger/select-custom-trigger.component';
+import { SelectFormsComponent } from './examples/select-forms/select-forms.component';
+import { SelectMaxHeightExampleComponent } from './examples/select-height/select-max-height-example.component';
+import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
+import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
+import { SelectNestedOptionsComponent } from './examples/select-nested-options/select-nested-options.component';
+import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
+import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component';
 
 const selectProgressiveScss = 'select-programmatic-example/select-programmatic-example.component.scss';
 const selectNestedScss = 'select-nested-options/select-nested-options.component.scss';
@@ -43,6 +62,25 @@ const selectCustomComparatorTs = 'select-custom-comparator-example/select-custom
                 margin-bottom: 0.5rem;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SelectModeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SelectSemanticStateExampleComponent,
+        SelectCustomTriggerComponent,
+        SelectNestedOptionsComponent,
+        RouterLink,
+        SelectMobileExampleComponent,
+        SelectMaxHeightExampleComponent,
+        SelectAddingExampleComponent,
+        SelectProgrammaticExampleComponent,
+        SelectFormsComponent,
+        SelectCustomComparatorExample
     ]
 })
 export class SelectDocsComponent {

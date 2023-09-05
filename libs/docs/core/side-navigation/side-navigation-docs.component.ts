@@ -1,6 +1,27 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { SideNavigationCondensedExampleComponent } from './examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
+import { SideNavigationCondensedObjectExampleComponent } from './examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
+import {
+    SideNavigationCompactExampleComponent,
+    SideNavigationExampleComponent,
+    SideNavigationIconsExampleComponent,
+    SideNavigationTitlesExampleComponent
+} from './examples/side-navigation-examples.component';
+import { SideNavigationMultipleSelectedExampleComponent } from './examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
+import { SideNavigationNonSelectableExampleComponent } from './examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component';
+import { SideNavigationObjectExampleComponent } from './examples/side-navigation-object-example/side-navigation-object-example.component';
+import { SideNavigationProgrammaticallyExampleComponent } from './examples/side-navigation-programmatically-example/side-navigation-programmatically-example.component';
+import { SideNavigationThreeLevelsExampleComponent } from './examples/side-navigation-three-levels-example/side-navigation-three-levels-example.component';
 
 const sideNavigationScssCode = 'side-navigation-examples.component.scss';
 
@@ -45,7 +66,26 @@ const sideNavigationCondensedObjectSrcTs =
 
 @Component({
     selector: 'app-side-navigation',
-    templateUrl: './side-navigation-docs.component.html'
+    templateUrl: './side-navigation-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SideNavigationExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SideNavigationTitlesExampleComponent,
+        SideNavigationCompactExampleComponent,
+        SideNavigationNonSelectableExampleComponent,
+        SideNavigationThreeLevelsExampleComponent,
+        SideNavigationMultipleSelectedExampleComponent,
+        SideNavigationProgrammaticallyExampleComponent,
+        SideNavigationIconsExampleComponent,
+        SideNavigationCondensedExampleComponent,
+        SideNavigationObjectExampleComponent,
+        SideNavigationCondensedObjectExampleComponent
+    ]
 })
 export class SideNavigationDocsComponent {
     oneLevelSideNav: ExampleFile[] = [

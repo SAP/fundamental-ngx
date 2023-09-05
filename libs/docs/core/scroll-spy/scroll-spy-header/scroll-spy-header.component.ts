@@ -1,8 +1,17 @@
 import { Component } from '@angular/core';
+import {
+    DescriptionComponent,
+    DocPageComponent,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'app-scroll-spy-header',
     templateUrl: './scroll-spy-header.component.html',
-    styleUrls: ['./scroll-spy-header.component.scss']
+    styleUrls: ['./scroll-spy-header.component.scss'],
+    standalone: true,
+    imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
 export class ScrollSpyHeaderComponent {}

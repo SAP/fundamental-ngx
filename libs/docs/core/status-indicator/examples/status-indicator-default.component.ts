@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-status-indicator-default',
-    templateUrl: './status-indicator-default.component.html'
+    templateUrl: './status-indicator-default.component.html',
+    standalone: true,
+    imports: [StatusIndicatorModule]
 })
 export class StatusIndicatorDefaultComponent {
     /* eslint-disable max-len */

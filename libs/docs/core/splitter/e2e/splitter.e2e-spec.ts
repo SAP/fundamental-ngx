@@ -1,4 +1,3 @@
-import { SplitterPo } from './spltiller.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -11,6 +10,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { SplitterPo } from './spltiller.po';
 
 describe('Standard List test suite', () => {
     const splitterPage = new SplitterPo();

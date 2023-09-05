@@ -1,9 +1,15 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-multi-input-mobile-example',
-    templateUrl: './multi-input-mobile-example.component.html'
+    templateUrl: './multi-input-mobile-example.component.html',
+    standalone: true,
+    imports: [FormLabelModule, MultiInputModule, FormsModule, JsonPipe]
 })
 export class MultiInputMobileExampleComponent {
     selectedValues: any[] = [];

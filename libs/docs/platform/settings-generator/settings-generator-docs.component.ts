@@ -1,9 +1,43 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets, getExampleFile } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    CodeSnippetComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { SettingsGeneratorCustomControlExampleComponent } from './examples/custom-control/settings-generator-custom-control-example.component';
+import { SettingsGeneratorCustomLayoutExampleComponent } from './examples/custom-layout/settings-generator-custom-layout-example.component';
+import { SettingsGeneratorDefaultExampleComponent } from './examples/default/settings-generator-default-example.component';
+import { SettingsGeneratorDialogExampleComponent } from './examples/dialog/settings-generator-dialog-example.component';
+import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/message-popover/settings-generator-message-popover-example.component';
 
 @Component({
     selector: 'app-settings-generator',
-    templateUrl: './settings-generator-docs.component.html'
+    templateUrl: './settings-generator-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        RouterLink,
+        ComponentExampleComponent,
+        SettingsGeneratorDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SettingsGeneratorMessagePopoverExampleComponent,
+        SettingsGeneratorCustomLayoutExampleComponent,
+        SettingsGeneratorCustomControlExampleComponent,
+        SettingsGeneratorDialogExampleComponent,
+        NgIf,
+        CodeSnippetComponent,
+        AsyncPipe
+    ]
 })
 export class SettingsGeneratorDocsComponent {
     defaultConfigExample = getAssetFromModuleAssets('default/default-config.ts');

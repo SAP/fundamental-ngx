@@ -1,4 +1,3 @@
-import { ListBylinePo } from './list-byline.po';
 import {
     click,
     getAttributeByName,
@@ -9,6 +8,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { ListBylinePo } from './list-byline.po';
 
 describe('List byline test suite', () => {
     const listBylinePage = new ListBylinePo();

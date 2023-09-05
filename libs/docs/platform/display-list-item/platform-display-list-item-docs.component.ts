@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformDisplayListItemBorderLessExampleComponent } from './examples/platform-display-list-item-border-less-example.component';
+import { PlatformDisplayListItemWithNavigationExampleComponent } from './examples/platform-display-list-item-with-navigation-example.component';
 
 const dliSrc = 'platform-display-list-item-example.component.html';
 const borderLessDLISrc = 'platform-display-list-item-border-less-example.component.html';
@@ -10,7 +20,17 @@ const dliWithNavigationTs = 'platform-display-list-item-with-navigation-example.
 
 @Component({
     selector: 'app-standard-list-item',
-    templateUrl: './platform-display-list-item-docs.component.html'
+    templateUrl: './platform-display-list-item-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformDisplayListItemBorderLessExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformDisplayListItemWithNavigationExampleComponent
+    ]
 })
 export class PlatformDisplayListItemDocsComponent {
     simpleDLI: ExampleFile[] = [

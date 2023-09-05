@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "docs-cdk",
+    "root": "libs/docs/cdk",
+    "targets": {},
+    "tags": ["scope:docs", "type:lib"]
+}

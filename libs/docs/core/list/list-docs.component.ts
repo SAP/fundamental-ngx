@@ -1,7 +1,34 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { _secondaryListItemTypes } from '@fundamental-ngx/core/list';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ListActionExampleComponent } from './examples/list-action-example/list-action-example.component';
+import { ListBorderlessExampleComponent } from './examples/list-borderless-example/list-borderless-example.component';
+import { ListDataExampleComponent } from './examples/list-data-example/list-data-example.component';
+import { ListDndExampleComponent } from './examples/list-dnd-example/list-dnd-example.component';
+import {
+    ListComplexExampleComponent,
+    ListExampleComponent,
+    ListIconExampleComponent,
+    ListSecondaryExampleComponent
+} from './examples/list-examples.component';
+import { ListInfiniteScrollExampleComponent } from './examples/list-infinite-scroll-example.component';
+import { ListInteractiveExampleComponent } from './examples/list-interactive-example/list-interactive-example.component';
+import { ListKeyboardExampleComponent } from './examples/list-keyboard-example/list-keyboard-example.component';
+import { ListLoadingExampleComponent } from './examples/list-loading-example/list-loading-examples.component';
+import { ListNavIndicatorExampleComponent } from './examples/list-nav-indicator-example/list-nav-indicator-example.component';
+import { ListNavigationExampleComponent } from './examples/list-navigation-example/list-navigation-example.component';
+import { ListSelectionExampleComponent } from './examples/list-selection-example/list-selection-example.component';
 
 const listSortPipe = 'sort.pipe.ts';
 const listSrc = 'list-example.component.html';
@@ -28,7 +55,32 @@ const listLoadingHtml = 'list-loading-example/list-loading-example.component.htm
 
 @Component({
     selector: 'app-list',
-    templateUrl: './list-docs.component.html'
+    templateUrl: './list-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ListExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ListNavigationExampleComponent,
+        ListNavIndicatorExampleComponent,
+        ListActionExampleComponent,
+        RouterLink,
+        ListDataExampleComponent,
+        NgFor,
+        ListSecondaryExampleComponent,
+        ListIconExampleComponent,
+        ListBorderlessExampleComponent,
+        ListInteractiveExampleComponent,
+        ListComplexExampleComponent,
+        ListSelectionExampleComponent,
+        ListKeyboardExampleComponent,
+        ListDndExampleComponent,
+        ListInfiniteScrollExampleComponent,
+        ListLoadingExampleComponent
+    ]
 })
 export class ListDocsComponent {
     simpleList: ExampleFile[] = [

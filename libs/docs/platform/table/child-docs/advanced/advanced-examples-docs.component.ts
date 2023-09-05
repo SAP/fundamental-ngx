@@ -1,6 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AdvancedScrollingExampleComponent } from '../../examples/advanced-scrolling/advanced-scrolling-example.component';
 const platformTablePageScrollingSrc = 'advanced-scrolling/advanced-scrolling-example.component.html';
 const platformTablePageScrollingTsSrc = 'advanced-scrolling/advanced-scrolling-example.component.ts';
 
@@ -8,7 +18,16 @@ const platformTablePageScrollingTsSrc = 'advanced-scrolling/advanced-scrolling-e
     selector: 'fdp-doc-advanced-examples-docs',
     templateUrl: './advanced-examples-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        AdvancedScrollingExampleComponent,
+        CodeExampleComponent,
+        FdDatetimeModule
+    ]
 })
 export class AdvancedExamplesDocsComponent {
     childService = inject(ExampleChildService);

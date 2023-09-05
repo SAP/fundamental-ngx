@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
     VhdDataProvider,
     VhdValue,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 interface ExampleTestModel {
     id: number;
@@ -50,7 +54,9 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 
 @Component({
     selector: 'fdp-platform-vhd-mobile-example',
-    templateUrl: './platform-vhd-mobile-example.component.html'
+    templateUrl: './platform-vhd-mobile-example.component.html',
+    standalone: true,
+    imports: [InputGroupModule, ButtonModule, PlatformValueHelpDialogModule, NgFor]
 })
 export class PlatformVhdMobileExampleComponent implements OnInit {
     filters: FilterData[];

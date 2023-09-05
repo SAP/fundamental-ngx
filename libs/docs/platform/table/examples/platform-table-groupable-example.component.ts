@@ -1,20 +1,38 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
-    TableDataSource,
+    PlatformTableModule,
     TableDataProvider,
-    TableState,
+    TableDataSource,
+    TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
-    TableGroupChangeEvent
+    TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-groupable-example',
     templateUrl: './platform-table-groupable-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpCellDef,
+        FdpTableCell,
+        FdDatetimeModule
+    ]
 })
 export class PlatformTableGroupableExampleComponent {
     source: TableDataSource<ExampleItem>;

@@ -1,9 +1,21 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-multiselect-checkbox',
-    templateUrl: 'platform-multiselect-checkbox.component.html'
+    templateUrl: 'platform-multiselect-checkbox.component.html',
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        CheckboxComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        ContentDensityDirective,
+        JsonPipe
+    ]
 })
 export class PlatformCozyChekboxExampleComponent {
     field1: string[] = [];

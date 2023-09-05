@@ -1,4 +1,3 @@
-import { MultiComboboxPo } from './multi-combobox.po';
 import {
     click,
     doesItExist,
@@ -13,6 +12,7 @@ import {
     waitForNotPresent,
     waitForPresent
 } from '../../../../../e2e';
+import { MultiComboboxPo } from './multi-combobox.po';
 
 describe('multi-combobox test suite', () => {
     const multiComboboxPage = new MultiComboboxPo();

@@ -1,5 +1,3 @@
-import { runCommonTests } from './table-common-tests';
-import { TablePo } from './table.po';
 import {
     browserIsSafari,
     checkElArrIsClickable,
@@ -10,7 +8,9 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { runCommonTests } from './table-common-tests';
 import { tableCellArr } from './table-contents';
+import { TablePo } from './table.po';
 
 describe('Table component test suite', () => {
     const tablePage = new TablePo('/table/clickable-rows');

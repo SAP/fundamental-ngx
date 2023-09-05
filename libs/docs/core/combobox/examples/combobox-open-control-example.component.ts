@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-combobox-open-control-example',
-    templateUrl: './combobox-open-control-example.component.html'
+    templateUrl: './combobox-open-control-example.component.html',
+    standalone: true,
+    imports: [FormItemModule, FormLabelModule, ComboboxModule]
 })
 export class ComboboxOpenControlExampleComponent {
     dropdownValues = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];

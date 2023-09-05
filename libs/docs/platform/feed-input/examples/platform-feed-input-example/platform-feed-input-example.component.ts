@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
+import { PlatformFeedInputModule } from '@fundamental-ngx/platform/feed-input';
 
 @Component({
     selector: 'fdp-platform-feed-input-example',
-    templateUrl: './platform-feed-input-example.component.html'
+    templateUrl: './platform-feed-input-example.component.html',
+    standalone: true,
+    imports: [PlatformFeedInputModule, FdPatchLanguageDirective]
 })
 export class PlatformFeedInputExampleComponent {
     feedValue: string;

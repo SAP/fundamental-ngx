@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import {
-    ItemPerPage,
-    FilenameLengthExceedEvent,
     FileSizeExceedEvent,
+    FilenameLengthExceedEvent,
+    ItemPerPage,
+    PlatformUploadCollectionModule,
     TypeMismatchEvent,
     UploadCollectionDataSource
 } from '@fundamental-ngx/platform/upload-collection';
@@ -12,7 +13,9 @@ import { PlatformUploadCollectionDataProviderExample } from './platform-upload-c
 
 @Component({
     selector: 'fdp-upload-collection-readonly-example',
-    templateUrl: './platform-upload-collection-readonly-example.component.html'
+    templateUrl: './platform-upload-collection-readonly-example.component.html',
+    standalone: true,
+    imports: [PlatformUploadCollectionModule]
 })
 export class PlatformUploadCollectionReadonlyExampleComponent {
     dataSource: UploadCollectionDataSource;

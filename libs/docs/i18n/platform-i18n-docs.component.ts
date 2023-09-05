@@ -1,5 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    CodeSnippetComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformLanguageChangeExampleComponent } from './examples/i18n-language-change-example/i18n-language-change-example.component';
+import { PlatformI18nTranslationCustomizationExampleComponent } from './examples/i18n-translation-customization-example/i18n-translation-customization-example.component';
 
 const translationCustomizationExampleComponentHtml =
     'i18n-translation-customization-example/i18n-translation-customization-example.component.html';
@@ -15,7 +26,18 @@ const languageChangeExampleComponentTs = 'i18n-language-change-example/i18n-lang
 @Component({
     selector: 'app-button',
     templateUrl: './platform-i18n-docs.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        CodeSnippetComponent,
+        SeparatorComponent,
+        ComponentExampleComponent,
+        PlatformI18nTranslationCustomizationExampleComponent,
+        CodeExampleComponent,
+        PlatformLanguageChangeExampleComponent
+    ]
 })
 export class PlatformI18nDocsComponent {
     basicUsageExample = {

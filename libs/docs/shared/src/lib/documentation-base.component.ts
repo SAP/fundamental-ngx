@@ -18,7 +18,8 @@ const SMALL_SCREEN_BREAKPOINT = 992;
     template: '<ng-content></ng-content>',
     styleUrls: ['./documentation-base.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class DocumentationBaseComponent implements OnInit {
     @Input() content: HTMLElement;

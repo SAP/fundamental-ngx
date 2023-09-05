@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
+import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ShellbarActionsComponent, ShellbarComponent } from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-product-switch-dnd-example',
-    templateUrl: './product-switch-dnd-example.component.html'
+    templateUrl: './product-switch-dnd-example.component.html',
+    standalone: true,
+    imports: [ShellbarComponent, ShellbarActionsComponent, ProductSwitchModule]
 })
 export class ProductSwitchDndExampleComponent {
     list: ProductSwitchItem[] = [

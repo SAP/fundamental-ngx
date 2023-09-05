@@ -1,4 +1,3 @@
-import { RadioButtonPo } from './radio-button.po';
 import {
     click,
     getAttributeByName,
@@ -8,6 +7,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { RadioButtonPo } from './radio-button.po';
 
 describe('Radio button component test', () => {
     const radioButtonPage = new RadioButtonPo();

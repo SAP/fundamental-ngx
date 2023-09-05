@@ -1,4 +1,14 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+    FormControlModule,
+    FormInputMessageGroupModule,
+    FormItemModule,
+    FormLabelModule,
+    FormMessageModule
+} from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-form-message-example',
@@ -9,6 +19,17 @@ import { Component } from '@angular/core';
                 margin-bottom: 40px !important;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        FormItemModule,
+        FormLabelModule,
+        FormInputMessageGroupModule,
+        FormControlModule,
+        FormMessageModule,
+        InputGroupModule,
+        MultiInputModule,
+        FormsModule
     ]
 })
 export class FormMessageExampleComponent {

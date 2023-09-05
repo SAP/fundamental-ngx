@@ -1,8 +1,12 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { map } from 'rxjs/operators';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { Placement } from '@fundamental-ngx/core/shared';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-inline-help-example',
@@ -19,7 +23,9 @@ import { Placement } from '@fundamental-ngx/core/shared';
                 justify-content: center;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [IconModule, InlineHelpModule, FormControlModule, AsyncPipe]
 })
 export class InlineHelpExampleComponent {
     rtlDirection$: Observable<Placement>;

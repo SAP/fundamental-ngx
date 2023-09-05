@@ -1,11 +1,15 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { SliderCustomValue } from '@fundamental-ngx/core/slider';
+import { FormsModule } from '@angular/forms';
+import { SliderComponent, SliderCustomValue } from '@fundamental-ngx/core/slider';
 
 @Component({
     selector: 'fd-vertical-slider-example',
     templateUrl: './vertical-slider-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SliderComponent, FormsModule, JsonPipe]
 })
 export class VerticalSliderExampleComponent {
     value = [20, 70];

@@ -1,8 +1,13 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-multi-input-example',
-    templateUrl: './multi-input-example.component.html'
+    templateUrl: './multi-input-example.component.html',
+    standalone: true,
+    imports: [MultiInputModule, FormsModule, JsonPipe]
 })
 export class MultiInputExampleComponent {
     selected = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry'];

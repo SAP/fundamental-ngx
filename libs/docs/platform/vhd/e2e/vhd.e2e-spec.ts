@@ -1,4 +1,3 @@
-import { VhdPo } from './vhd.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -19,9 +18,9 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { conditionsValues, customLabels, inputIDs } from './vhd-contents';
 import { searchValues, valueOne, valueZero } from './vhd';
-import waitForDisplayed from 'webdriverio/build/commands/element/waitForDisplayed';
+import { conditionsValues, customLabels, inputIDs } from './vhd-contents';
+import { VhdPo } from './vhd.po';
 
 describe('Value help dialog test suite', () => {
     const valueHelpDialogPage = new VhdPo();

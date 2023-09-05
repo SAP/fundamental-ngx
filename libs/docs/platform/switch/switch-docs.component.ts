@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DisabledSwitchExampleComponent } from './examples/disabled-switch-example/disabled-switch-example.component';
+import { SemanticSwitchExampleComponent } from './examples/semantic-switch-example/semantic-switch-example.component';
+import { SwitchConfigExampleComponent } from './examples/switch-config-example/switch-config-example.component';
+import { SwitchFormsExampleComponent } from './examples/switch-form-example/switch-forms-example.component';
+import { SwitchSizesExampleComponent } from './examples/switch-sizes-example/switch-sizes-example.component';
 
 const switchSizeHtml = 'switch-sizes-example/switch-sizes-example.component.html';
 const switchDisableHtml = 'disabled-switch-example/disabled-switch-example.component.html';
@@ -14,7 +27,20 @@ const switchConfigExampleTs = 'switch-config-example/switch-config-example.compo
 
 @Component({
     selector: 'app-switch',
-    templateUrl: './switch-docs.component.html'
+    templateUrl: './switch-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SwitchSizesExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DisabledSwitchExampleComponent,
+        SemanticSwitchExampleComponent,
+        SwitchFormsExampleComponent,
+        SwitchConfigExampleComponent
+    ]
 })
 export class SwitchDocsComponent {
     switchSize: ExampleFile[] = [

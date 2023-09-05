@@ -1,16 +1,44 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    PlatformButtonIconsExampleComponent,
+    PlatformButtonSizesExampleComponent,
+    PlatformButtonStateExampleComponent,
+    PlatformButtonTruncateExampleComponent,
+    PlatformButtonTypesExampleComponent
+} from './examples/platform-button-examples.component';
 const buttonIconsExample = 'platform-button-icons-example.component.html';
 const buttonSizesExample = 'platform-button-sizes-example.component.html';
 const buttonStateExample = 'platform-button-state-example.component.html';
 const buttonTypesExample = 'platform-button-types-example.component.html';
 const buttonTruncateExample = 'platform-button-truncate-example.component.html';
 const buttonScss = 'platform-button-examples.scss';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'app-button',
-    templateUrl: './platform-button-docs.component.html'
+    templateUrl: './platform-button-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformButtonTypesExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformButtonSizesExampleComponent,
+        PlatformButtonIconsExampleComponent,
+        PlatformButtonStateExampleComponent,
+        PlatformButtonTruncateExampleComponent
+    ]
 })
 export class PlatformButtonDocsComponent {
     schema: Schema;

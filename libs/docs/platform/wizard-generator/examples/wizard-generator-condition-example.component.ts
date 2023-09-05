@@ -3,6 +3,8 @@ import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { JsonPipe, NgIf } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     WizardDialogGeneratorService,
     WizardGeneratorFormsValue,
@@ -12,7 +14,9 @@ import {
 
 @Component({
     selector: 'fdp-wizard-generator-condition-example',
-    templateUrl: './wizard-generator-condition-example.component.html'
+    templateUrl: './wizard-generator-condition-example.component.html',
+    standalone: true,
+    imports: [PlatformButtonModule, NgIf, JsonPipe]
 })
 export class WizardGeneratorConditionExampleComponent implements OnDestroy {
     wizardTitle: WizardTitle = {

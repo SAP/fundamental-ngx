@@ -1,5 +1,19 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformSmartFilterBarLoadingExampleComponent } from './examples/loading/platform-smart-filter-bar-loading-example.component';
+import { PlatformSmartFilterBarBasicExampleComponent } from './examples/platform-smart-filter-bar-basic-example.component';
+import { PlatformSmartFilterBarCustomFilterExampleComponent } from './examples/platform-smart-filter-bar-custom-filter-example.component';
+import { PlatformSmartFilterBarCustomLabelsExampleComponent } from './examples/platform-smart-filter-bar-custom-labels-example.component';
+import { PlatformSmartFilterBarDynamicPageExampleComponent } from './examples/platform-smart-filter-bar-dynamic-page-example.component';
+import { PlatformSmartFilterBarObservableExampleComponent } from './examples/platform-smart-filter-bar-observable-example.component';
 
 const platformBasicSfbSrc = 'platform-smart-filter-bar-basic-example.component.html';
 const platformBasicSfbTsCode = 'platform-smart-filter-bar-basic-example.component.ts';
@@ -21,7 +35,21 @@ const platformLoadingSfbTsCode = 'loading/platform-smart-filter-bar-loading-exam
 
 @Component({
     selector: 'app-smart-filter-bar',
-    templateUrl: './platform-smart-filter-bar-docs.component.html'
+    templateUrl: './platform-smart-filter-bar-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformSmartFilterBarBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformSmartFilterBarObservableExampleComponent,
+        PlatformSmartFilterBarCustomFilterExampleComponent,
+        PlatformSmartFilterBarCustomLabelsExampleComponent,
+        PlatformSmartFilterBarDynamicPageExampleComponent,
+        PlatformSmartFilterBarLoadingExampleComponent
+    ]
 })
 export class PlatformSmartFilterBarDocsComponent {
     sfbBasic: ExampleFile[] = [

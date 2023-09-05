@@ -9,9 +9,10 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
     selector: 'fd-docs-section-title',
@@ -29,7 +30,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         </h2>
     `,
     styleUrls: ['./docs-section-title.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [RouterLink, IconModule]
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @ViewChild('title', { read: ElementRef })

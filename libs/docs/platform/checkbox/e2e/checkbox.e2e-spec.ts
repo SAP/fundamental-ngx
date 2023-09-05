@@ -1,11 +1,3 @@
-import { CheckboxPO } from './checkbox.po';
-import {
-    a11yCheckboxAriaLabel,
-    a11yCheckboxAriaLabelledBy,
-    checkboxErrorTooltip,
-    disabledCheckboxTitle,
-    markingDisplayStyle
-} from './checkbox-page-contents';
 import {
     acceptAlert,
     browserIsFirefox,
@@ -22,6 +14,14 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import {
+    a11yCheckboxAriaLabel,
+    a11yCheckboxAriaLabelledBy,
+    checkboxErrorTooltip,
+    disabledCheckboxTitle,
+    markingDisplayStyle
+} from './checkbox-page-contents';
+import { CheckboxPO } from './checkbox.po';
 
 describe('Checkbox test suite', () => {
     const {

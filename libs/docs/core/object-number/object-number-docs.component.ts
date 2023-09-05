@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    ObjectNumberBasicExampleComponent,
+    ObjectNumberBoldExampleComponent,
+    ObjectNumberDecimalExampleComponent,
+    ObjectNumberLargeExampleComponent,
+    ObjectNumberStatusExampleComponent,
+    ObjectNumberTruncationExampleComponent,
+    ObjectNumberUnitsExampleComponent
+} from './examples/object-number-examples.component';
 
 const basicHtml = 'object-number-basic-example.component.html';
 const boldHtml = 'object-number-bold-example.component.html';
@@ -12,7 +29,22 @@ const truncationHtml = 'object-number-truncation-example.component.html';
 
 @Component({
     selector: 'app-object-number',
-    templateUrl: './object-number-docs.component.html'
+    templateUrl: './object-number-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        ObjectNumberBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        ObjectNumberStatusExampleComponent,
+        ObjectNumberLargeExampleComponent,
+        ObjectNumberBoldExampleComponent,
+        ObjectNumberUnitsExampleComponent,
+        ObjectNumberDecimalExampleComponent,
+        ObjectNumberTruncationExampleComponent
+    ]
 })
 export class ObjectNumberDocsComponent {
     basic: ExampleFile[] = [

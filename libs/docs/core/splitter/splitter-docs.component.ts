@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { SplitterApiExampleComponent } from './examples/api/splitter-api-example.component';
+import { SplitterDefaultExampleComponent } from './examples/default/splitter-default-example.component';
+import { SplitterRequiredParentWidthExampleComponent } from './examples/required-parent-width/splitter-required-parent-width-example.component';
 
 const splitterDefaultHtml = 'default/splitter-default-example.component.html';
 const splitterDefaultTs = 'default/splitter-default-example.component.ts';
@@ -13,7 +24,18 @@ const splitterApiTs = 'api/splitter-api-example.component.ts';
 
 @Component({
     selector: 'app-splitter',
-    templateUrl: './splitter-docs.component.html'
+    templateUrl: './splitter-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SplitterDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SplitterRequiredParentWidthExampleComponent,
+        SplitterApiExampleComponent
+    ]
 })
 export class SplitterDocsComponent {
     default: ExampleFile[] = [

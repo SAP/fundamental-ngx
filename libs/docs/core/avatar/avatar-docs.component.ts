@@ -1,10 +1,48 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { AvatarAccentColorsExampleComponent } from './examples/avatar-accent-colors-example.component';
+import { AvatarBackgroundImageExampleComponent } from './examples/avatar-background-image-example.component';
+import { AvatarBordersExampleComponent } from './examples/avatar-borders-example.component';
+import { AvatarCircleExampleComponent } from './examples/avatar-circle-example.component';
+import { AvatarDefaultImageWithAlternativeOptionsExampleComponent } from './examples/avatar-default-image-with-alternative-options-example.component';
+import { AvatarIconExampleComponent } from './examples/avatar-icon-example.component';
+import { AvatarInitialsExampleComponent } from './examples/avatar-initials-example.component';
+import { AvatarPlaceholderExampleComponent } from './examples/avatar-placeholder-example.component';
+import { AvatarTileExampleComponent } from './examples/avatar-tile-example.component';
+import { AvatarTransparentExampleComponent } from './examples/avatar-transparent-example.component';
+import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-example.component';
 
 @Component({
     selector: 'app-avatar',
-    templateUrl: './avatar-docs.component.html'
+    templateUrl: './avatar-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        AvatarIconExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        AvatarInitialsExampleComponent,
+        AvatarCircleExampleComponent,
+        AvatarBackgroundImageExampleComponent,
+        AvatarTransparentExampleComponent,
+        AvatarPlaceholderExampleComponent,
+        AvatarTileExampleComponent,
+        AvatarAccentColorsExampleComponent,
+        AvatarZoomIconExampleComponent,
+        AvatarBordersExampleComponent,
+        AvatarDefaultImageWithAlternativeOptionsExampleComponent
+    ]
 })
 export class AvatarDocsComponent {
     avatarIcon: ExampleFile[] = [

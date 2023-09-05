@@ -20,8 +20,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { errorText, favoriteColor, labelsArray, maxValidation, placeholdersArray } from './input-page-contents';
 import { autocompleteOption, longLine, number, special_characters, text } from './input';
+import { errorText, favoriteColor, labelsArray, maxValidation, placeholdersArray } from './input-page-contents';
 import { InputPo } from './input.po';
 
 declare const $$: any;

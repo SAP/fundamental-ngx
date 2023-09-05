@@ -1,5 +1,22 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformFieldColumnChangeExampleComponent } from './examples/platform-field-layout/platform-field-column-change-example.component';
+import { PlatformFieldIsInlineChangeExampleComponent } from './examples/platform-field-layout/platform-field-isinline-change-example.component';
+import { PlatformFormBasicExampleComponent } from './examples/platform-form-basic/platform-form-basic-example.component';
+import { PlatformFormContainerComplexExampleComponent } from './examples/platform-form-container-complex-example.component';
+import { PlatformFormContainerNotRecommendedExampleComponent } from './examples/platform-form-container-not-recommended-example.component';
+import { PlatformFormContainerPossibleExampleComponent } from './examples/platform-form-container-possible-example.component';
+import { PlatformFormContainerRecommendedExampleComponent } from './examples/platform-form-container-recommended-example.component';
+import { PlatformFormCustomLayoutComponent } from './examples/platform-form-custom-layout.component';
+import { PlatformFormGroupExampleComponent } from './examples/platform-form-group/platform-form-group-example.component';
 
 const platformFormLayoutContainerSrc = 'platform-form-container-recommended-example.component.html';
 const platformFormLayoutContainerTsCode = 'platform-form-container-recommended-example.component.ts';
@@ -18,7 +35,24 @@ const platformFormFieldInlineLayoutTsCode = 'platform-field-layout/platform-fiel
 
 @Component({
     selector: 'app-form-container',
-    templateUrl: './platform-form-container-docs.component.html'
+    templateUrl: './platform-form-container-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformFormContainerRecommendedExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformFormContainerPossibleExampleComponent,
+        PlatformFormContainerNotRecommendedExampleComponent,
+        PlatformFormContainerComplexExampleComponent,
+        PlatformFormBasicExampleComponent,
+        PlatformFormGroupExampleComponent,
+        PlatformFieldColumnChangeExampleComponent,
+        PlatformFieldIsInlineChangeExampleComponent,
+        PlatformFormCustomLayoutComponent
+    ]
 })
 export class PlatformFormContainerDocsComponent {
     formContainerRecommended: ExampleFile[] = [

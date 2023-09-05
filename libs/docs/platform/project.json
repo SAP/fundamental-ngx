@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "docs-platform",
+    "root": "libs/docs/platform",
+    "targets": {},
+    "tags": ["scope:docs", "type:lib"]
+}

@@ -12,22 +12,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { date, date1, date10, date11, date12, date2, date3, date5, date8, date9, text, year2025 } from './date-picker';
 import { DatePicker } from './date-picker.po';
-import {
-    date,
-    date1,
-    date10,
-    date11,
-    date12,
-    date2,
-    date3,
-    date5,
-    date8,
-    date9,
-    highlightedColor,
-    text,
-    year2025
-} from './date-picker';
 
 describe('Date picker suite', () => {
     const datePickerPage: DatePicker = new DatePicker();

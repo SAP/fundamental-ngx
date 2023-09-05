@@ -1,19 +1,52 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ButtonIconsExampleComponent } from './examples/button-icons-example.component';
+import { ButtonMenuExampleComponent } from './examples/button-menu-example.component';
+import { ButtonSizesExampleComponent } from './examples/button-sizes-example.component';
+import { ButtonStateExampleComponent } from './examples/button-state-example.component';
+import { ButtonToggledExampleComponent } from './examples/button-toggled-example.component';
+import { ButtonTypesExampleComponent } from './examples/button-types-example.component';
 
-const buttonScss = 'button-examples.component.scss';
-const buttonOptionsExample = 'button-menu-example.component.html';
-const buttonIconsExample = 'button-icons-example.component.html';
-const buttonSizesExample = 'button-sizes-example.component.html';
-const buttonStateExample = 'button-state-example.component.html';
-const buttonTypesExample = 'button-types-example.component.html';
-const buttonToggledExample = 'button-toggled-example.component.html';
+const buttonOptionsExample = 'button-menu-example.component';
+const buttonIconsExample = 'button-icons-example.component';
+const buttonSizesExample = 'button-sizes-example.component';
+const buttonStateExample = 'button-state-example.component';
+const buttonTypesExample = 'button-types-example.component';
+const buttonToggledExample = 'button-toggled-example.component';
 
 @Component({
     selector: 'app-button',
-    templateUrl: './button-docs.component.html'
+    templateUrl: './button-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ButtonTypesExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ButtonMenuExampleComponent,
+        ButtonSizesExampleComponent,
+        ButtonIconsExampleComponent,
+        ButtonStateExampleComponent,
+        ButtonToggledExampleComponent,
+        PlayGroundComponent,
+        ButtonModule,
+        ContentDensityDirective
+    ]
 })
 export class ButtonDocsComponent {
     schema: Schema;
@@ -32,54 +65,84 @@ export class ButtonDocsComponent {
     buttonHtmlOptions: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(buttonOptionsExample),
+            code: getAssetFromModuleAssets(`${buttonOptionsExample}.html`),
+            fileName: 'button-menu-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(`${buttonOptionsExample}.ts`),
             fileName: 'button-menu-example',
-            scssFileCode: getAssetFromModuleAssets(buttonScss)
+            component: 'ButtonMenuExampleComponent'
         }
     ];
 
     buttonHtmlType: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(buttonTypesExample),
+            code: getAssetFromModuleAssets(`${buttonTypesExample}.html`),
+            fileName: 'button-types-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(`${buttonTypesExample}.ts`),
             fileName: 'button-types-example',
-            scssFileCode: getAssetFromModuleAssets(buttonScss)
+            component: 'ButtonTypesExampleComponent'
         }
     ];
 
     buttonHtmlSize: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(buttonSizesExample),
+            code: getAssetFromModuleAssets(`${buttonSizesExample}.html`),
+            fileName: 'button-sizes-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(`${buttonSizesExample}.ts`),
             fileName: 'button-sizes-example',
-            scssFileCode: getAssetFromModuleAssets(buttonScss)
+            component: 'ButtonSizesExampleComponent'
         }
     ];
 
     buttonHtmlIcon: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(buttonIconsExample),
+            code: getAssetFromModuleAssets(`${buttonIconsExample}.html`),
+            fileName: 'button-icons-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(`${buttonIconsExample}.ts`),
             fileName: 'button-icons-example',
-            scssFileCode: getAssetFromModuleAssets(buttonScss)
+            component: 'ButtonIconsExampleComponent'
         }
     ];
 
     buttonHtmlState: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(buttonStateExample),
+            code: getAssetFromModuleAssets(`${buttonStateExample}.html`),
+            fileName: 'button-state-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(`${buttonStateExample}.ts`),
             fileName: 'button-state-example',
-            scssFileCode: getAssetFromModuleAssets(buttonScss)
+            component: 'ButtonStateExampleComponent'
         }
     ];
 
     buttonHtmlToggled: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(buttonToggledExample),
+            code: getAssetFromModuleAssets(`${buttonToggledExample}.html`),
+            fileName: 'button-toggled-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(`${buttonToggledExample}.ts`),
             fileName: 'button-toggled-example',
-            scssFileCode: getAssetFromModuleAssets(buttonScss)
+            component: 'ButtonToggledExampleComponent'
         }
     ];
 

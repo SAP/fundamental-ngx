@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { JsonPipe } from '@angular/common';
+import { FdpSelectionChangeEvent, PlatformSelectModule } from '@fundamental-ngx/platform/form';
 import { OptionItem } from '@fundamental-ngx/platform/shared';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;
@@ -19,7 +20,9 @@ export class Fruit {
     selector: 'fdp-select-max-height-example',
     templateUrl: './platform-select-max-height-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformSelectModule, JsonPipe]
 })
 export class PlatformSelectMaxHeightExampleComponent {
     selectedValue: string;

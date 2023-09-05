@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { MessageToastExampleComponent } from './examples/message-toast-example.component';
+import { MessageToastPositionExampleComponent } from './examples/message-toast-position-example.component';
 
 const messageToastExampleScss = 'message-toast-example.component.scss';
 
@@ -12,7 +22,17 @@ const messageToastPositionExampleHtml = 'message-toast-position-example.componen
 
 @Component({
     selector: 'app-message-toast',
-    templateUrl: './message-toast-docs.component.html'
+    templateUrl: './message-toast-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MessageToastExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MessageToastPositionExampleComponent
+    ]
 })
 export class MessageToastDocsComponent {
     messageToastComponentExample: ExampleFile[] = [

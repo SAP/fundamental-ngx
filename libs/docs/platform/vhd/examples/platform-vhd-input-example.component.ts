@@ -1,9 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgFor, NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import {
+    PlatformValueHelpDialogModule,
+    ValueHelpDialogDataSource,
     VhdDataProvider,
-    VhdValueChangeEvent,
-    ValueHelpDialogDataSource
+    VhdValueChangeEvent
 } from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
@@ -48,7 +56,19 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
 
 @Component({
     selector: 'fdp-platform-vhd-input-example',
-    templateUrl: './platform-vhd-input-example.component.html'
+    templateUrl: './platform-vhd-input-example.component.html',
+    standalone: true,
+    imports: [
+        FormLabelModule,
+        InputGroupModule,
+        ButtonModule,
+        ContentDensityDirective,
+        PlatformValueHelpDialogModule,
+        NgFor,
+        TokenModule,
+        ToolbarItemDirective,
+        NgIf
+    ]
 })
 export class PlatformVhdInputExampleComponent implements OnInit {
     filters: FilterData[];

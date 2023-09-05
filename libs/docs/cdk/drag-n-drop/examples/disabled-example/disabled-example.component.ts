@@ -1,5 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, ViewEncapsulation } from '@angular/core';
-import { DragoverPredicate, DropPredicate, FdDndDropEventMode, FdDropEvent, isOdd } from '@fundamental-ngx/cdk/utils';
+import { NgFor, NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+    DragAndDropModule,
+    DragoverPredicate,
+    DropPredicate,
+    FdDndDropEventMode,
+    FdDropEvent,
+    isOdd
+} from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { delay, of } from 'rxjs';
 
 @Component({
@@ -31,6 +44,17 @@ import { delay, of } from 'rxjs';
                 background-color: red;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        CheckboxComponent,
+        BusyIndicatorComponent,
+        DragAndDropModule,
+        NgFor,
+        NgStyle
     ]
 })
 export class DisabledExampleComponent {

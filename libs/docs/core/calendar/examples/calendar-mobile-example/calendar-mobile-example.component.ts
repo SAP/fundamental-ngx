@@ -1,12 +1,21 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DatePipe } from '@angular/common';
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CalendarCloseButtonDirective, CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-calendar-mobile-example',
@@ -21,7 +30,21 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
             useValue: FD_DATETIME_FORMATS
         }
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CalendarCloseButtonDirective,
+        CdkScrollable,
+        ScrollbarDirective,
+        CalendarComponent,
+        FormsModule,
+        BarModule,
+        ButtonModule,
+        DatePipe,
+        FdDatetimeModule
+    ]
 })
 export class CalendarMobileExampleComponent {
     datePicked: FdDate = FdDate.getNow();

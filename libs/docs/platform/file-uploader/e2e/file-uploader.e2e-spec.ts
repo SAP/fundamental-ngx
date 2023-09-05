@@ -10,8 +10,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { FileUploaderPo } from './file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from './file-uploader.page-content';
+import { FileUploaderPo } from './file-uploader.po';
 
 describe('File uploader test suite', () => {
     const fileUploaderPage: FileUploaderPo = new FileUploaderPo();

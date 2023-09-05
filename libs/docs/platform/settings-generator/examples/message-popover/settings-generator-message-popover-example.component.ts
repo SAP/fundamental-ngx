@@ -9,11 +9,22 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
-import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import {
+    MessagePopoverComponent,
+    MessagePopoverFormWrapperComponent,
+    PlatformMessagePopoverModule
+} from '@fundamental-ngx/platform/message-popover';
+import {
+    SettingsGeneratorComponent,
+    SettingsGeneratorModule,
+    SettingsModel
+} from '@fundamental-ngx/platform/settings-generator';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay, map, share, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 interface UserModel {
     email: string;
@@ -69,7 +80,16 @@ class ExampleUserService {
     templateUrl: './settings-generator-message-popover-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ExampleUserService]
+    providers: [ExampleUserService],
+    standalone: true,
+    imports: [
+        TitleComponent,
+        MessagePopoverFormWrapperComponent,
+        SettingsGeneratorModule,
+        BarModule,
+        MessagePopoverComponent,
+        PlatformMessagePopoverModule
+    ]
 })
 export class SettingsGeneratorMessagePopoverExampleComponent implements AfterViewInit {
     @ViewChild('privacyContent')

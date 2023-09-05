@@ -1,13 +1,20 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+import {
+    FdpFormGroupModule,
+    MultiInputSelectionChangeEvent,
+    PlatformMultiInputModule
+} from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
-import { MultiInputSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-multi-input-example',
     templateUrl: './platform-multi-input-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformMultiInputModule, FormsModule]
 })
 export class PlatformMultiInputExampleComponent {
     _datasource = [

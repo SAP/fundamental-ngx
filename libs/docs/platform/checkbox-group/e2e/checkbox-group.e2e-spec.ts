@@ -1,4 +1,3 @@
-import { CheckboxGroupPO } from './checkbox-group.po';
 import {
     checkIfDisabled,
     checkLabels,
@@ -38,6 +37,7 @@ import {
     threeFruitsArr,
     workExpierenceErrorMessage
 } from './checkbox-group-page-content';
+import { CheckboxGroupPO } from './checkbox-group.po';
 
 describe('Checkbox group test suite', () => {
     const checkboxGroupPage = new CheckboxGroupPO();

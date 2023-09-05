@@ -1,4 +1,3 @@
-import { FormattedTextPo } from './formatted-text.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -7,6 +6,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { FormattedTextPo } from './formatted-text.po';
 
 describe('Formatted text component', () => {
     const formattedTextPage = new FormattedTextPo();

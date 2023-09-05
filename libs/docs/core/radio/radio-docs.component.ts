@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { RadioExamplesComponent } from './examples/radio-examples.component';
+import { RadioFormGroupExampleComponent } from './examples/radio-form-group-example.component';
 
 const formHtml = 'radio-example.component.html';
 const formTs = 'radio-examples.component.ts';
@@ -9,7 +19,17 @@ const formGroupInputTs = 'radio-form-group-example.component.ts';
 
 @Component({
     selector: 'app-radio',
-    templateUrl: './radio-docs.component.html'
+    templateUrl: './radio-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        RadioExamplesComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DescriptionComponent,
+        RadioFormGroupExampleComponent
+    ]
 })
 export class RadioDocsComponent {
     radioFormHtml: ExampleFile[] = [

@@ -1,6 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ExampleChildService, ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleChildService,
+    ExampleFile,
+    getAssetFromModuleAssets,
+    SeparatorComponent
+} from '@fundamental-ngx/docs/shared';
+import { PlatformTableMultipleRowSelectionExampleComponent } from '../../examples/platform-table-multiple-row-selection-example.component';
+import { PlatformTableSingleRowSelectionExampleComponent } from '../../examples/platform-table-single-row-selection-example.component';
 
 const platformTableSingleRowSelectionSrc = 'platform-table-single-row-selection-example.component.html';
 const platformTableSingleRowSelectionTsSrc = 'platform-table-single-row-selection-example.component.ts';
@@ -10,7 +22,18 @@ const platformTableMultipleRowSelectionTsSrc = 'platform-table-multiple-row-sele
     selector: 'fd-row-selection-docs',
     templateUrl: './row-selection-docs.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformTableSingleRowSelectionExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformTableMultipleRowSelectionExampleComponent,
+        FdDatetimeModule
+    ]
 })
 export class RowSelectionDocsComponent {
     childService = inject(ExampleChildService);

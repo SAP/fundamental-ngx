@@ -1,17 +1,14 @@
-import { ProductSwitchPo } from './product-switch.po';
 import {
-    applyState,
+    checkElArrIsClickable,
     click,
     clickAndMoveElement,
-    getElementArrayLength,
     getText,
     isElementDisplayed,
     refreshPage,
     waitForElDisplayed,
-    waitForPresent,
-    checkElArrIsClickable
+    waitForPresent
 } from '../../../../../e2e';
-import { emptyDataArr, focusAttribute } from './product-switch-contents';
+import { ProductSwitchPo } from './product-switch.po';
 
 describe('product switch test suite', () => {
     const productSwitchPage = new ProductSwitchPo();

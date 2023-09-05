@@ -1,14 +1,25 @@
 import { Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators, AbstractControl, FormControl } from '@angular/forms';
-
-import { DateRange } from '@fundamental-ngx/core/calendar';
 import {
-    DatetimeAdapter,
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    ValidatorFn,
+    Validators
+} from '@angular/forms';
+
+import { NgIf } from '@angular/common';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
     DATE_TIME_FORMATS,
+    DatetimeAdapter,
+    FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-date-picker-example',
@@ -24,6 +35,15 @@ import {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
+    ],
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformDatePickerComponent,
+        ContentDensityDirective,
+        NgIf
     ]
 })
 export class PlatformDatePickerExampleComponent {

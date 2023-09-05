@@ -1,7 +1,21 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FilterPipe } from '@fundamental-ngx/docs/shared';
 import { DisplayedColumn } from './table-custom-columns-example.component';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `
@@ -71,7 +85,28 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                 <fd-button-bar fd-initial-focus label="Cancel" (click)="dismiss()"> </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>
-    `
+    `,
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        TemplateDirective,
+        BarModule,
+        ContentDensityDirective,
+        ButtonModule,
+        InputGroupModule,
+        FormsModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgIf,
+        MessageStripComponent,
+        ListModule,
+        CdkDropList,
+        CheckboxComponent,
+        NgFor,
+        CdkDrag,
+        FilterPipe
+    ]
 })
 export class TableCustomDialogComponent {
     columns: DisplayedColumn[] = [];

@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { TreeItem } from '@fundamental-ngx/core/tree';
+import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { TreeItem, TreeModule } from '@fundamental-ngx/core/tree';
 
 interface AdditionalTreeItemData {
     title: string;
@@ -10,7 +13,9 @@ interface AdditionalTreeItemData {
     selector: 'fd-tree-highlight-indicators-example',
     templateUrl: './tree-highlight-indicators-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [DataSourceDirective, CvaDirective, TreeModule, IconModule]
 })
 export class TreeHighlightIndicatorsExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;

@@ -1,7 +1,6 @@
 import {
     click,
     clickWithOption,
-    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     isElementDisplayed,

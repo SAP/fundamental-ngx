@@ -1,6 +1,22 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { MultiComboboxColumnsExampleComponent } from './examples/multi-combobox-columns/multi-combobox-columns-example.component';
+import { MultiComboboxDatasourceExampleComponent } from './examples/multi-combobox-datasource/multi-combobox-datasource-example.component';
+import { MultiComboboxFormsExampleComponent } from './examples/multi-combobox-forms/multi-combobox-forms-example.component';
+import { MultiComboboxGroupExampleComponent } from './examples/multi-combobox-group/multi-combobox-group-example.component';
+import { MultiComboboxLoadingExampleComponent } from './examples/multi-combobox-loading/multi-combobox-loading-example.component';
+import { MultiComboboxMobileExampleComponent } from './examples/multi-combobox-mobile/multi-combobox-mobile-example.component';
+import { MultiComboboxStatesExampleComponent } from './examples/multi-combobox-states/multi-combobox-states-example.component';
 
 const multiComboboxDatasourceHtml = 'multi-combobox-datasource/multi-combobox-datasource-example.component.html';
 const multiComboboxDatasourceTs = 'multi-combobox-datasource/multi-combobox-datasource-example.component.ts';
@@ -19,7 +35,23 @@ const multiComboboxLoadingTs = 'multi-combobox-loading/multi-combobox-loading-ex
 
 @Component({
     selector: 'platform-multi-combobox-docs',
-    templateUrl: './platform-multi-combobox-docs.component.html'
+    templateUrl: './platform-multi-combobox-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MultiComboboxDatasourceExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        RouterLink,
+        MultiComboboxMobileExampleComponent,
+        MultiComboboxGroupExampleComponent,
+        MultiComboboxColumnsExampleComponent,
+        MultiComboboxStatesExampleComponent,
+        MultiComboboxFormsExampleComponent,
+        MultiComboboxLoadingExampleComponent
+    ]
 })
 export class PlatformMultiComboboxDocsComponent {
     multiComboboxDatasourceExample: ExampleFile[] = [

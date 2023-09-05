@@ -1,5 +1,5 @@
-import { DynamicSideContentPo } from './dynamic-side-content.po';
 import { refreshPage, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { DynamicSideContentPo } from './dynamic-side-content.po';
 
 describe('dynamic side content test suite', () => {
     const dynamicSideContentPage = new DynamicSideContentPo();

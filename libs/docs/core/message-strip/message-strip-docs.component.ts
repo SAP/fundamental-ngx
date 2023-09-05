@@ -1,6 +1,24 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { MessageStripAlertExampleComponent } from './examples/message-strip-alert-example.component';
+import { MessageStripAutoDismissExampleComponent } from './examples/message-strip-auto-dismiss-example.component';
+import { MessageStripCustomIconExampleComponent } from './examples/message-strip-custom-icon-example.component';
+import { MessageStripExampleComponent } from './examples/message-strip-example.component';
+import { MessageStripIndicationColorsExampleComponent } from './examples/message-strip-indication-colors-example.component';
+import { MessageStripNoIconExampleComponent } from './examples/message-strip-noicon-example.component';
+import { MessageStripWidthExampleComponent } from './examples/message-strip-width-example.component';
 
 const messageStripExampleScs = 'message-strip-example.component.scss';
 
@@ -11,7 +29,25 @@ const messageStripWidthExampleHtml = 'message-strip-width-example.component.html
 @Component({
     selector: 'app-message-strip',
     templateUrl: './message-strip-docs.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MessageStripExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MessageStripCustomIconExampleComponent,
+        MessageStripNoIconExampleComponent,
+        MessageStripWidthExampleComponent,
+        MessageStripIndicationColorsExampleComponent,
+        MessageStripAlertExampleComponent,
+        MessageStripAutoDismissExampleComponent,
+        PlayGroundComponent,
+        NgIf,
+        MessageStripComponent
+    ]
 })
 export class MessageStripDocsComponent {
     data: any = {
@@ -55,7 +91,7 @@ export class MessageStripDocsComponent {
 
     messageStripCustomIconExample: ExampleFile[] = [
         {
-            language: 'ts',
+            language: 'typescript',
             fileName: 'message-strip-custom-icon-example',
             code: getAssetFromModuleAssets('message-strip-custom-icon-example.component.ts')
         }
@@ -63,7 +99,7 @@ export class MessageStripDocsComponent {
 
     messageStripIndicationColorsExample: ExampleFile[] = [
         {
-            language: 'ts',
+            language: 'typescript',
             fileName: 'message-strip-indication-colors-example',
             code: getAssetFromModuleAssets('message-strip-indication-colors-example.component.ts')
         }
@@ -71,7 +107,7 @@ export class MessageStripDocsComponent {
 
     messageStripAlertExampleFiles: ExampleFile[] = [
         {
-            language: 'ts',
+            language: 'typescript',
             fileName: 'message-strip-alert-example',
             code: getAssetFromModuleAssets('message-strip-alert-example.component.ts')
         }
@@ -79,7 +115,7 @@ export class MessageStripDocsComponent {
 
     messageStripAutoDismissExampleFiles: ExampleFile[] = [
         {
-            language: 'ts',
+            language: 'typescript',
             fileName: 'message-strip-auto-dismiss-example',
             code: getAssetFromModuleAssets('message-strip-auto-dismiss-example.component.ts')
         }
