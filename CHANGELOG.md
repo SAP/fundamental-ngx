@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.15...v0.46.0-rc.16) (2023-09-05)
+
+
+### Features
+
+* **platform:** added aria-labelledby to the table ([#10446](https://github.com/SAP/fundamental-ngx/issues/10446)) ([73ee20f](https://github.com/SAP/fundamental-ngx/commit/73ee20f6f22c8782c08003d50707ecb4ca4e683c))
+
+
+
+
+
 # [0.46.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.14...v0.46.0-rc.15) (2023-09-05)
 
 **Note:** Version bump only for package fundamental-ngx
