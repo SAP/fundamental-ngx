@@ -131,34 +131,32 @@
 </ng-template>
 
 <ng-template #suggestionMenuTemplate>
-    <div
-        class="fdp-search-field__suggestion-dropdown"
-        [attr.dir]="_dir"
-        *ngIf="(_dropdownValues$ | async | suggestionMatches : inputText : mobile)?.length"
-    >
-        <nav
-            class="fd-menu"
-            tabindex="-1"
-            [class.is-compact]="contentDensityObserver.isCompact$ | async"
-            [class.fd-menu--mobile]="mobile"
-            [class.fd-menu--overflow]="!mobile"
-            [attr.id]="_menuId"
-            #menu
-            (keydown)="onKeydown($event)"
-        >
-            <ul class="fd-menu__list" role="menu">
-                <li
-                    fdpSearchFieldSuggestion
-                    class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
-                    *ngFor="let value of _dropdownValues$ | async | suggestionMatches : inputText : mobile"
-                    (keydown.enter)="onItemClick(value); $event.preventDefault()"
-                    (keydown.tab)="onItemClick(value)"
-                    (keyup.space)="onItemClick(value); $event.stopPropagation()"
-                    (click)="onItemClick(value)"
-                    [innerHTML]="value | highlight : inputText : true : true"
-                    role="menuitem"
-                ></li>
-            </ul>
-        </nav>
-    </div>
+    <ng-container *ngIf="_dropdownValues$ | async | suggestionMatches : inputText : mobile as suggestions">
+        <div class="fdp-search-field__suggestion-dropdown" [attr.dir]="_dir" *ngIf="suggestions?.length">
+            <nav
+                class="fd-menu"
+                tabindex="-1"
+                [class.is-compact]="contentDensityObserver.isCompact$ | async"
+                [class.fd-menu--mobile]="mobile"
+                [class.fd-menu--overflow]="!mobile"
+                [attr.id]="_menuId"
+                #menu
+                (keydown)="onKeydown($event)"
+            >
+                <ul class="fd-menu__list" role="menu">
+                    <li
+                        fdpSearchFieldSuggestion
+                        class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
+                        *ngFor="let value of suggestions"
+                        (keydown.enter)="onItemClick(value); $event.preventDefault()"
+                        (keydown.tab)="onItemClick(value)"
+                        (keyup.space)="onItemClick(value); $event.stopPropagation()"
+                        (click)="onItemClick(value)"
+                        [innerHTML]="value | highlight : inputText : true : true"
+                        role="menuitem"
+                    ></li>
+                </ul>
+            </nav>
+        </div>
+    </ng-container>
 </ng-template>
