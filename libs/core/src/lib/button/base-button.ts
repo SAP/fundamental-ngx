@@ -1,5 +1,5 @@
-import { Directive, HostBinding, Input } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
@@ -70,6 +70,10 @@ export class BaseButton {
     /** adding native aria-label to the component */
     @Input()
     ariaLabel: Nullable<string>;
+
+    /** adding native aria-description to the componenet */
+    @Input()
+    ariaDescription: Nullable<string>;
 
     /** Whether button is in toggled state. */
     @Input()
