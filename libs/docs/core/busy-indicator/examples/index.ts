@@ -5,10 +5,10 @@ import { BusyIndicatorSizeExampleComponent } from './busy-indicator-size-example
 import { BusyIndicatorWrapperExampleComponent } from './busy-indicator-wrapper-example.component';
 
 export * from './busy-indicator-basic-example.component';
+export * from './busy-indicator-extended-example.component';
+export * from './busy-indicator-label-example.component';
 export * from './busy-indicator-size-example.component';
 export * from './busy-indicator-wrapper-example.component';
-export * from './busy-indicator-label-example.component';
-export * from './busy-indicator-extended-example.component';
 
 export const examples = [
     BusyIndicatorSizeExampleComponent,

@@ -1,17 +1,16 @@
-import { NotificationPo } from './notification.po';
 import {
     click,
     doesItExist,
     getElementClass,
     getText,
     isElementDisplayed,
-    pause,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
     waitForNotDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { NotificationPo } from './notification.po';
 
 describe('Notification component test', () => {
     const notificationPage = new NotificationPo();

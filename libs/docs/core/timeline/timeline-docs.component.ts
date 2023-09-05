@@ -1,5 +1,17 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { TimelineLoadingExampleComponent } from './examples/loading/timeline-loading-example.component';
+import { TimelineBasicExampleComponent } from './examples/timeline-basic-example/timeline-basic-example.component';
+import { TimelineHorizontalAxisExampleComponent } from './examples/timeline-horizontal-axis-example.component';
+import { TimelineHorizontalDoubleSideExampleComponent } from './examples/timeline-horizontal-double-side-example.component';
+import { TimelineVerticalDoubleSideExampleComponent } from './examples/timeline-vertical-double-side-example.component';
 
 const timelineBasicDataExampleTs = 'timeline-basic-example/timeline-example-data.ts';
 const timelineBasicExampleTs = 'timeline-basic-example/timeline-basic-example.component.ts';
@@ -13,7 +25,19 @@ const timelineLoadingExampleTs = 'loading/timeline-loading-example.component.ts'
 
 @Component({
     selector: 'fd-timeline-docs',
-    templateUrl: './timeline-docs.component.html'
+    templateUrl: './timeline-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TimelineBasicExampleComponent,
+        CodeExampleComponent,
+        TimelineHorizontalAxisExampleComponent,
+        TimelineHorizontalDoubleSideExampleComponent,
+        TimelineVerticalDoubleSideExampleComponent,
+        TimelineLoadingExampleComponent
+    ]
 })
 export class TimelineDocsComponent {
     timelineBasicExample: ExampleFile[] = [

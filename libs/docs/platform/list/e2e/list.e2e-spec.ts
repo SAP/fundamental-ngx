@@ -1,4 +1,3 @@
-import { ListPo } from './list.po';
 import {
     acceptAlert,
     browserIsIE,
@@ -25,7 +24,6 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import {
-    borderStyleAttr,
     compactClass,
     listTypeAttr,
     loadMoreClass,
@@ -35,6 +33,7 @@ import {
     noDataText,
     selectionAttr
 } from './list-contents';
+import { ListPo } from './list.po';
 
 declare const $$: any;
 

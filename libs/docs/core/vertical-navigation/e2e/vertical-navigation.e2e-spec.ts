@@ -1,4 +1,3 @@
-import { VerticalNavigationPo } from './vertical-navigation.po';
 import {
     click,
     doesItExist,
@@ -10,6 +9,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { VerticalNavigationPo } from './vertical-navigation.po';
 
 describe('Vertical navigation component tests', function () {
     const verticalNavigationPage = new VerticalNavigationPo();

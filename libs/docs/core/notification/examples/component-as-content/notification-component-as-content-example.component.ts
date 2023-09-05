@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NotificationService } from '@fundamental-ngx/core/notification';
 import { NotificationExampleContentComponent } from './notification-content.component';
 
@@ -8,7 +9,9 @@ import { NotificationExampleContentComponent } from './notification-content.comp
     template: `
         <button fd-button label="Open from Component" (click)="open()"></button>
         <span style="margin-left: 24px;">{{ closeReason }}</span>
-    `
+    `,
+    standalone: true,
+    imports: [ButtonModule]
 })
 export class NotificationComponentAsContentExampleComponent {
     public closeReason: string;

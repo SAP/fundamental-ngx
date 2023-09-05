@@ -1,15 +1,37 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
-import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
-import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
-import { DynamicPageComponent } from '@fundamental-ngx/platform/dynamic-page';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbComponent, BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { DynamicPageComponent, PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-flexible-column-example',
     templateUrl: './platform-dynamic-page-flexible-column-example.component.html',
     styleUrls: ['./platform-dynamic-page-flexible-column-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        FlexibleColumnLayoutModule,
+        CdkScrollable,
+        PlatformDynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        BarModule
+    ]
 })
 export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDestroy {
     /**

@@ -1,10 +1,14 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { JsonPipe, NgIf } from '@angular/common';
+import { AfterViewInit, Component } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckboxComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-platform-tristate-checkbox',
-    templateUrl: 'platform-tristate-checkbox.component.html'
+    templateUrl: 'platform-tristate-checkbox.component.html',
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxComponent, NgIf, JsonPipe]
 })
 export class PlatformChekboxTristateComponent implements AfterViewInit {
     public havana = false;

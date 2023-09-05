@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { ResizableCardLayoutExampleItemConfigComponent } from './examples/resizable-card-layout-example-itemconfig.component';
+import { ResizableCardLayoutExampleLayoutConfigComponent } from './examples/resizable-card-layout-example-layoutconfig.component';
+import { ResizableCardLayoutExampleComponent } from './examples/resizable-card-layout-example.component';
 
 const defaultResizeCardScss = 'resizable-card-layout-example.component.scss';
 
@@ -13,7 +23,17 @@ const defaultResizeCardItemTs = 'resizable-card-layout-example-itemconfig.compon
 
 @Component({
     selector: 'app-resizable-card-layout',
-    templateUrl: './resizable-card-layout-docs.component.html'
+    templateUrl: './resizable-card-layout-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ResizableCardLayoutExampleComponent,
+        CodeExampleComponent,
+        ResizableCardLayoutExampleLayoutConfigComponent,
+        ResizableCardLayoutExampleItemConfigComponent
+    ]
 })
 export class ResizableCardLayoutDocsComponent {
     resizableCardLayoutDefault: ExampleFile[] = [

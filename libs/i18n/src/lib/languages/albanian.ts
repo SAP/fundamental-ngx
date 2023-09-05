@@ -150,7 +150,13 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         ariaRoleDescription: 'shenjë'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: (params) => {
+            const count = params['count'];
+            if (count === 1) {
+                return '1 artikuj më shumë';
+            }
+            return `${count} artikuj të tjerë`;
+        }
     },
     coreUploadCollection: {
         menuOkText: 'Ok',

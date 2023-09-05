@@ -1,5 +1,21 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    MessagePageActionsExampleComponent,
+    MessagePageCustomIconExampleComponent,
+    MessagePageErrorExampleComponent,
+    MessagePageFilterExampleComponent,
+    MessagePageNoIconExampleComponent,
+    MessagePageNoItemsExampleComponent,
+    MessagePageSearchExampleComponent
+} from './examples/message-page-examples.component';
 
 const messagePageFilterExample = 'message-page-filter-example.component.html';
 const messagePageSearchExample = 'message-page-search-example.component.html';
@@ -11,7 +27,21 @@ const messagePageNoIconExample = 'message-page-no-icon-example.component.html';
 
 @Component({
     selector: 'app-message-page',
-    templateUrl: './message-page-docs.component.html'
+    templateUrl: './message-page-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MessagePageFilterExampleComponent,
+        CodeExampleComponent,
+        MessagePageSearchExampleComponent,
+        MessagePageNoItemsExampleComponent,
+        MessagePageErrorExampleComponent,
+        MessagePageActionsExampleComponent,
+        MessagePageCustomIconExampleComponent,
+        MessagePageNoIconExampleComponent
+    ]
 })
 export class MessagePageDocsComponent {
     messagePageFilterExample: ExampleFile[] = [

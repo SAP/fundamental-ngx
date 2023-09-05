@@ -1,10 +1,14 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 type CarType = { id: string; name: string };
 
 @Component({
     selector: 'fd-select-custom-comparator-example',
-    templateUrl: './select-custom-comparator-example.component.html'
+    templateUrl: './select-custom-comparator-example.component.html',
+    standalone: true,
+    imports: [SelectModule, NgFor]
 })
 export class SelectCustomComparatorExample {
     carTypes: CarType[] = [

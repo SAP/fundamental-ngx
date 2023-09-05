@@ -1,4 +1,3 @@
-import { IconTabBarPO } from './icon-tab-bar.po';
 import {
     click,
     clickAndMoveElement,
@@ -14,6 +13,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { IconTabBarPO } from './icon-tab-bar.po';
 
 import { paddingsSizes } from './icon-tab-bar-contents';
 

@@ -1,4 +1,3 @@
-import { ButtonPo } from './button.po';
 import {
     getElementArrayLength,
     getElementClass,
@@ -10,6 +9,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { ButtonPo } from './button.po';
 
 describe('Button test suite:', () => {
     const buttonPage = new ButtonPo();

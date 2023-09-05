@@ -1,6 +1,29 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { AddingTabExampleComponent } from './examples/adding-tab-example/adding-tab-example.component';
+import { DefaultTabExampleComponent } from './examples/default-tab/default-tab-example.component';
+import { TabCollapsibleExampleComponent } from './examples/tab-collapsible-example/tab-collapsible-example.component';
+import { TabCollapsibleOverflowExampleComponent } from './examples/tab-collapsible-overflow-example/tab-collapsible-overflow-example.component';
+import { TabCounterComponent } from './examples/tab-counter-example/tab-counter.component';
+import { TabFilterExampleComponent } from './examples/tab-filter-example/tab-filter-example.component';
+import { TabFormElementExampleComponent } from './examples/tab-form-element-example/tab-form-element-example.component';
+import { TabIconOnlyExampleComponent } from './examples/tab-icon-only-example/tab-icon-only-example.component';
+import { TabProcessExampleComponent } from './examples/tab-process-example/tab-process-example.component';
+import { TabSelectionExampleComponent } from './examples/tab-selection-example/tab-selection-example.component';
+import { TabStackedContentExampleComponent } from './examples/tab-stacked-content-example/tab-stacked-content-example.component';
+import { TabsExampleComponent } from './examples/tabs-example/tabs-example-component';
 
 const tabSrc = 'tabs-example/tabs-example.component.html';
 const tabForm = 'tab-form-element-example/tab-form-element-example.component.html';
@@ -26,7 +49,30 @@ const defaultTabH = 'default-tab/default-tab-example.component.html';
     selector: 'app-tabs',
     templateUrl: './tabs-docs.component.html',
     styleUrls: ['tabs-docs.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        TabsExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        TabFormElementExampleComponent,
+        TabCounterComponent,
+        TabIconOnlyExampleComponent,
+        TabProcessExampleComponent,
+        TabFilterExampleComponent,
+        TabSelectionExampleComponent,
+        AddingTabExampleComponent,
+        TabCollapsibleOverflowExampleComponent,
+        TabStackedContentExampleComponent,
+        TabCollapsibleExampleComponent,
+        DefaultTabExampleComponent,
+        PlayGroundComponent,
+        TabsModule,
+        ContentDensityDirective
+    ]
 })
 export class TabsDocsComponent {
     schema: Schema;

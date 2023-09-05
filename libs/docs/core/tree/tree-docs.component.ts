@@ -1,7 +1,18 @@
 import { Component } from '@angular/core';
-import { Schema } from '@fundamental-ngx/docs/schema';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { LazilyLoadedTreeItemsExampleComponent } from './examples/lazily-loaded-tree-items-example.component';
+import { NavigatableTreeExampleComponent } from './examples/navigatable-tree-example.component';
+import { SimpleTreeExampleComponent } from './examples/simple-tree-example.component';
 import { TreeActionButtonsExampleComponent } from './examples/tree-action-buttons-example.component';
+import { TreeHighlightIndicatorsExampleComponent } from './examples/tree-highlight-indicators-example.component';
 import { TreeWithFormsExampleComponent } from './examples/tree-with-forms-example.component';
 
 const simpleTreeExample = 'simple-tree-example.component.ts';
@@ -19,7 +30,21 @@ const lazyLoadingExampleHtml = 'lazily-loaded-tree-items-example.component.html'
 
 @Component({
     selector: 'app-tree',
-    templateUrl: './tree-docs.component.html'
+    templateUrl: './tree-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SimpleTreeExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        NavigatableTreeExampleComponent,
+        TreeHighlightIndicatorsExampleComponent,
+        TreeActionButtonsExampleComponent,
+        TreeWithFormsExampleComponent,
+        LazilyLoadedTreeItemsExampleComponent
+    ]
 })
 export class TreeDocsComponent {
     simpleExample: ExampleFile[] = [

@@ -1,5 +1,19 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformFileUploaderCompactExampleComponent } from './examples/platform-file-uploader-compact-example.component';
+import { PlatformFileUploaderExampleComponent } from './examples/platform-file-uploader-example.component';
+import { PlatformFileUploaderFileTypesExampleComponent } from './examples/platform-file-uploader-file-types-example.component';
+import { PlatformFileUploaderMaxFileSizeExampleComponent } from './examples/platform-file-uploader-max-file-size-example.component';
+import { PlatformFileUploaderMinFileSizeExampleComponent } from './examples/platform-file-uploader-min-file-size-example.component';
+import { PlatformFileUploaderReactiveExampleComponent } from './examples/platform-file-uploader-reactive-example.component';
 
 const platformFileUploadDefaultTypesSrc = 'platform-file-uploader-example.component.html';
 const platformFileUploadDefaultTypesScssSrc = 'platform-file-uploader-example.component.scss';
@@ -22,7 +36,21 @@ const platformFileUploadReactiveTsSrc = 'platform-file-uploader-reactive-example
 
 @Component({
     selector: 'fd-platform-file-uploader-docs',
-    templateUrl: './platform-file-uploader-docs.component.html'
+    templateUrl: './platform-file-uploader-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformFileUploaderExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformFileUploaderCompactExampleComponent,
+        PlatformFileUploaderMaxFileSizeExampleComponent,
+        PlatformFileUploaderMinFileSizeExampleComponent,
+        PlatformFileUploaderFileTypesExampleComponent,
+        PlatformFileUploaderReactiveExampleComponent
+    ]
 })
 export class PlatformFileUploaderDocsComponent {
     defaultFileUploadType: ExampleFile[] = [

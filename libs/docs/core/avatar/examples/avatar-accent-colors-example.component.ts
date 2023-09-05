@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-avatar-accent-colors-example',
@@ -10,6 +11,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [AvatarModule]
 })
 export class AvatarAccentColorsExampleComponent {}

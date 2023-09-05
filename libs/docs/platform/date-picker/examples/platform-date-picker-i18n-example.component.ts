@@ -1,14 +1,19 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
-import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
+import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
+import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 import dayjs from 'dayjs';
 
 // Dayjs locale data required for this example
-import 'dayjs/locale/fr';
-import 'dayjs/locale/de';
 import 'dayjs/locale/bg';
+import 'dayjs/locale/de';
+import 'dayjs/locale/fr';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately
@@ -43,12 +48,10 @@ const CUSTOM_DATETIME_FORMATS = {
 @Component({
     selector: 'fdp-platform-date-picker-i18n-example',
     templateUrl: './platform-date-picker-i18n-example.component.html',
-
     // Note that this can be provided in the root of your application.
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-
         { provide: LOCALE_ID, useValue: 'fr' },
         {
             provide: DatetimeAdapter,
@@ -63,7 +66,9 @@ const CUSTOM_DATETIME_FORMATS = {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, PlatformDatePickerComponent]
 })
 export class PlatformDatePickeri18nExampleComponent {
     date = dayjs();

@@ -1,4 +1,17 @@
-import { SwitchPo } from './switch.po';
+import {
+    browserIsSafari,
+    click,
+    getAttributeByName,
+    getCSSPropertyByName,
+    getElementAriaLabel,
+    getElementSize,
+    isElementClickable,
+    pause,
+    refreshPage,
+    scrollIntoView,
+    waitForElDisplayed,
+    waitForPresent
+} from '../../../../../e2e';
 import {
     default_compact_switch_alternative_text,
     default_switch_alternative_text,
@@ -7,22 +20,7 @@ import {
     semantic_compact_switch_alternative_text,
     semantic_switch_alternative_text
 } from './swich-page-content';
-import {
-    browserIsIEorSafari,
-    browserIsSafari,
-    click,
-    getAttributeByName,
-    getCSSPropertyByName,
-    getElementAriaLabel,
-    getElementSize,
-    isElementClickable,
-    mouseHoverElement,
-    pause,
-    refreshPage,
-    scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
-} from '../../../../../e2e';
+import { SwitchPo } from './switch.po';
 
 describe('Verify Switch component', () => {
     const switchPage = new SwitchPo();

@@ -7,6 +7,7 @@ export interface ExampleFile<
 > {
     code: ProvidedCodeType;
     scssFileCode?: ProvidedScssCodeType;
+    scssFileName?: string;
     standalone?: boolean;
     pure?: boolean;
     language: string;

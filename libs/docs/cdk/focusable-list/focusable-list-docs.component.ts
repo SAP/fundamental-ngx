@@ -1,5 +1,12 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
 const defaultExampleTs = 'default-example/default-example.component.ts';
@@ -7,7 +14,9 @@ const defaultExampleTs = 'default-example/default-example.component.ts';
 @Component({
     selector: 'app-tabs',
     templateUrl: './focusable-list-docs.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [DocsSectionTitleComponent, ComponentExampleComponent, DefaultExampleComponent, CodeExampleComponent]
 })
 export class FocusableListDocsComponent {
     defaultExample: ExampleFile[] = [
@@ -19,7 +28,7 @@ export class FocusableListDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'focusable-list-default-example',
             component: 'FocusableListDefaultExample'
         }

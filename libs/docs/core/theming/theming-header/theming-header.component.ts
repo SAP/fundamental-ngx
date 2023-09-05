@@ -1,9 +1,28 @@
 import { Component } from '@angular/core';
-import { ExampleFile } from '@fundamental-ngx/docs/shared';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import {
+    CodeSnippetComponent,
+    DescriptionComponent,
+    DocPageComponent,
+    ExampleFile,
+    HeaderComponent,
+    HeaderTabsComponent,
+    ImportComponent
+} from '@fundamental-ngx/docs/shared';
 
 @Component({
     selector: 'fd-theming-header',
-    templateUrl: './theming-header.component.html'
+    templateUrl: './theming-header.component.html',
+    standalone: true,
+    imports: [
+        DocPageComponent,
+        HeaderComponent,
+        DescriptionComponent,
+        CodeSnippetComponent,
+        MessageStripComponent,
+        ImportComponent,
+        HeaderTabsComponent
+    ]
 })
 export class ThemingHeaderComponent {
     assetsChunk: ExampleFile = {

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { MessageBoxModule, MessageBoxRef } from '@fundamental-ngx/core/message-box';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { TextData } from './component-based-message-box-example.component';
 
 @Component({
@@ -29,7 +31,9 @@ import { TextData } from './component-based-message-box-example.component';
                 ></fd-button-bar>
             </fd-message-box-footer>
         </fd-message-box>
-    `
+    `,
+    standalone: true,
+    imports: [MessageBoxModule, TitleComponent, BarModule]
 })
 export class MessageBoxExampleComponent {
     constructor(public messageBoxRef: MessageBoxRef<TextData>) {}

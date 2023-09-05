@@ -24,6 +24,7 @@ import { patchLanguage } from '@fundamental-ngx/i18n';
                 }
             }
         })
-    ]
+    ],
+    standalone: true
 })
 export class TranslationWrapper1Component {}

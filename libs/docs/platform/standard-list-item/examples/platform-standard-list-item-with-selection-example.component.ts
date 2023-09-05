@@ -1,8 +1,10 @@
-import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
-import { SelectionType } from '@fundamental-ngx/platform/list';
+import { FormsModule } from '@angular/forms';
+import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
+import { PlatformListModule, SelectionType, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Address[] = [
     {
@@ -58,7 +60,9 @@ export class ListDataProvider extends DataProvider<Address> {
 }
 @Component({
     selector: 'fdp-platform-standard-list-item-with-selection-example',
-    templateUrl: './platform-standard-list-item-with-selection-example.component.html'
+    templateUrl: './platform-standard-list-item-with-selection-example.component.html',
+    standalone: true,
+    imports: [ToolbarComponent, ToolbarLabelDirective, PlatformListModule, FormsModule, StandardListItemModule]
 })
 export class PlatformStandardListItemWithSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Address>(new ListDataProvider());

@@ -1,4 +1,3 @@
-import { TimePickerPo } from './time-picker.po';
 import {
     browserIsSafari,
     clearValue,
@@ -18,6 +17,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { TimePickerPo } from './time-picker.po';
 
 describe('Time-picker component test', () => {
     const timePickerPage = new TimePickerPo();

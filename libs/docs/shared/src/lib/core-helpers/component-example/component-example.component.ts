@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardDialogGeneratorService } from '@fundamental-ngx/platform/wizard-generator';
+import { DirectionalityComponent } from '../directionality/directionality.component';
+import { ExampleBackgroundComponent } from '../example-background/example-background.component';
 
 let componentExampleUniqueId = 0;
 
@@ -28,7 +31,9 @@ let componentExampleUniqueId = 0;
         WizardDialogGeneratorService
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ContentDensityDirective, DirectionalityComponent, ExampleBackgroundComponent]
 })
 export class ComponentExampleComponent implements OnInit {
     @Input()

@@ -1,4 +1,3 @@
-import { FacetsPo } from './facets.po';
 import {
     click,
     getElementArrayLength,
@@ -8,6 +7,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { FacetsPo } from './facets.po';
 
 describe('dynamic side content test suite', () => {
     const facetsPage = new FacetsPo();

@@ -1,3 +1,6 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,9 +11,23 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { FormsModule } from '@angular/forms';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    FieldSetModule,
+    FormControlModule,
+    FormGroupModule,
+    FormItemModule,
+    FormLabelModule,
+    FormLegendModule
+} from '@fundamental-ngx/core/form';
+import { RadioButtonComponent, RadioModule } from '@fundamental-ngx/core/radio';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-branching-example',
@@ -20,7 +37,28 @@ import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-wizard-example'
-    }
+    },
+    standalone: true,
+    imports: [
+        ButtonModule,
+        A11yModule,
+        NgIf,
+        WizardModule,
+        FormItemModule,
+        FormLabelModule,
+        FormControlModule,
+        ContentDensityDirective,
+        FieldSetModule,
+        FormLegendModule,
+        FormGroupModule,
+        RadioModule,
+        FormsModule,
+        BarModule,
+        DialogModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        InitialFocusDirective
+    ]
 })
 export class WizardBranchingExampleComponent {
     /**

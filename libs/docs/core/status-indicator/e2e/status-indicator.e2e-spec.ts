@@ -1,5 +1,5 @@
-import { StatusIndicatorPo } from './status-indicator.po';
 import { acceptAlert, browserIsSafari, click, getAlertText, scrollIntoView } from '../../../../../e2e';
+import { StatusIndicatorPo } from './status-indicator.po';
 
 describe('Status indicator component test', () => {
     const statusIndicatorPage = new StatusIndicatorPo();

@@ -1,9 +1,9 @@
-import { TablePo } from './table.po';
 import {
     acceptAlert,
     browserIsFirefox,
     browserIsSafari,
     browserIsSafariorFF,
+    checkElArrIsClickable,
     click,
     clickAndMoveElement,
     getAlertText,
@@ -20,10 +20,10 @@ import {
     scrollIntoView,
     setValue,
     waitForElDisplayed,
-    waitForPresent,
-    checkElArrIsClickable
+    waitForPresent
 } from '../../../../../e2e';
 import { alertText, componentExampleArr, dateTestText, tableCellArr, tableCellArr2, testText } from './table-content';
+import { TablePo } from './table.po';
 
 describe('Table test suite', () => {
     const tablePage = new TablePo();

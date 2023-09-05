@@ -1,5 +1,20 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    ObjectIdentifierBoldExampleComponent,
+    ObjectIdentifierDefaultExampleComponent,
+    ObjectIdentifierDescriptiveExampleComponent,
+    ObjectIdentifierLinkExampleComponent
+} from './examples/object-identifier-components';
+import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
 
 const ObjectIdentifierDefaultExample = 'object-identifier-default-example.component.html';
 const ObjectIdentifierLinksExample = 'object-identifier-link-example.component.html';
@@ -10,7 +25,20 @@ const ObjectIdentifierTableExampleTs = 'object-identifier-table-example.componen
 
 @Component({
     selector: 'app-object-identifier',
-    templateUrl: './object-identifier-docs.component.html'
+    templateUrl: './object-identifier-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        ObjectIdentifierDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        ObjectIdentifierBoldExampleComponent,
+        ObjectIdentifierLinkExampleComponent,
+        ObjectIdentifierDescriptiveExampleComponent,
+        ObjectIdentifierTableExampleComponent
+    ]
 })
 export class ObjectIdentifierDocsComponent {
     defaultObjectIdentifier: ExampleFile[] = [

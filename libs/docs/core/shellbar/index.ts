@@ -1,5 +1,21 @@
-export * from './shellbar-docs.module';
+import { Routes } from '@angular/router';
 
-export * from './examples/shellbar-responsive-example/shellbar-responsive-example.component';
-
-export * from './examples/shellbar-growing-group-example/shellbar-growing-group-example.component';
+export const ROUTES: Routes = [
+    {
+        path: '',
+        loadComponent: () =>
+            import('./shellbar-docs-header/shellbar-docs-header.component').then((c) => c.ShellbarDocsHeaderComponent),
+        children: [
+            {
+                path: '',
+                loadComponent: () => import('./shellbar-docs.component').then((c) => c.ShellbarDocsComponent)
+            }
+        ],
+        data: {
+            primary: true
+        }
+    }
+];
+export const LIBRARY_NAME = 'shellbar';
+export const API_FILE_KEY = 'shellbar';
+export const I18N_KEY = 'coreShellbar';

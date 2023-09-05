@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DynamicSideContentBasicExampleComponent } from './examples/dynamic-side-content-basic-example.component';
+import { DynamicSideContentPositioningExampleComponent } from './examples/dynamic-side-content-positioning-example.component';
+import { DynamicSideContentSizeExampleComponent } from './examples/dynamic-side-content-size-example.component';
 
 const exampleScssCode = 'dynamic-side-content.component.scss';
 
@@ -12,7 +23,18 @@ const sizeExampleHtmlCode = 'dynamic-side-content-size-example.component.html';
 const sizeExampleTsCode = 'dynamic-side-content-size-example.component.ts';
 
 @Component({
-    templateUrl: './dynamic-side-content-docs.component.html'
+    templateUrl: './dynamic-side-content-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DynamicSideContentBasicExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DynamicSideContentPositioningExampleComponent,
+        DynamicSideContentSizeExampleComponent
+    ]
 })
 export class DynamicSideContentDocsComponent {
     basic: ExampleFile[] = [

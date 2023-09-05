@@ -1,14 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { of } from 'rxjs';
 
-import { DATA_PROVIDERS, ArrayComboBoxDataSource } from '@fundamental-ngx/platform/shared';
-import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { JsonPipe } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    FdpFormGroupModule,
+    MultiComboboxSelectionChangeEvent,
+    PlatformMultiComboboxModule
+} from '@fundamental-ngx/platform/form';
+import { ArrayComboBoxDataSource, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-multi-combobox-datasource-example',
     templateUrl: './multi-combobox-datasource-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
+    providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
+    standalone: true,
+    imports: [FdpFormGroupModule, PlatformMultiComboboxModule, ButtonModule, JsonPipe]
 })
 export class MultiComboboxDatasourceExampleComponent {
     isLimitless = true;

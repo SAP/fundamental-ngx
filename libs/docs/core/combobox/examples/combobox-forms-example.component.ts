@@ -1,5 +1,9 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { FormItemModule, FormLabelModule, FormMessageModule } from '@fundamental-ngx/core/form';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 interface ComboboxItem {
     displayedValue: string;
@@ -9,7 +13,18 @@ interface ComboboxItem {
 @Component({
     selector: 'fd-combobox-forms-example',
     templateUrl: 'combobox-forms-example.component.html',
-    styleUrls: ['combobox-forms-example.component.scss']
+    styleUrls: ['combobox-forms-example.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FormItemModule,
+        FormLabelModule,
+        ComboboxModule,
+        ListModule,
+        FormMessageModule,
+        JsonPipe
+    ]
 })
 export class ComboboxFormsExampleComponent {
     customForm = new FormGroup({

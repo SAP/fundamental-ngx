@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Schemas, SCHEMAS } from '../../consts/schemas';
+import { SCHEMAS, Schemas } from '../../consts/schemas';
 import { Properties, Schema } from '../../models/schema.model';
 
 @Injectable()

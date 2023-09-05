@@ -1,4 +1,3 @@
-import { FormMessagePo } from './form-message.po';
 import {
     browserIsSafari,
     click,
@@ -14,6 +13,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { FormMessagePo } from './form-message.po';
 
 import {
     clickEventMessage,

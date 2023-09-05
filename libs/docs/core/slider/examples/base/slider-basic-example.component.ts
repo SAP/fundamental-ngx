@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { SliderComponent } from '@fundamental-ngx/core/slider';
 
 @Component({
     selector: 'fd-slider-basic-example',
     templateUrl: './slider-basic-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SliderComponent, FormsModule]
 })
 export class SliderBasicExampleComponent {
     value = 50;

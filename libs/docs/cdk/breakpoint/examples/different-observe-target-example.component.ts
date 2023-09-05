@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BreakpointDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdk-different-observe-target-example',
@@ -39,6 +40,8 @@ import { Component } from '@angular/core';
                 }
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [BreakpointDirective]
 })
 export class DifferentObserveTargetExampleComponent {}

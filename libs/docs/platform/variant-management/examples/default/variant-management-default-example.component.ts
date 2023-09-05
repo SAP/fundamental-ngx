@@ -1,8 +1,18 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
-import { FilterableColumnDataType, FilterType, PlatformTableManagedPreset } from '@fundamental-ngx/platform/table';
-import { Variant } from '@fundamental-ngx/platform/variant-management';
+import { PlatformSmartFilterBarModule, SmartFilterBarManagedPreset } from '@fundamental-ngx/platform/smart-filter-bar';
+import {
+    FilterType,
+    FilterableColumnDataType,
+    PlatformTableManagedPreset,
+    PlatformTableModule
+} from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
+import { Variant, VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 
 export interface CombinedVariantManagementPreset {
     platformSmartFilterBar?: SmartFilterBarManagedPreset;
@@ -12,7 +22,16 @@ export interface CombinedVariantManagementPreset {
 @Component({
     selector: 'fdp-doc-variant-management-default-example',
     templateUrl: './variant-management-default-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        VariantManagementModule,
+        PlatformSmartFilterBarModule,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective
+    ]
 })
 export class VariantManagementDefaultExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;

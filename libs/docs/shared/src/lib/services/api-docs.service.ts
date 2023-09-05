@@ -1,5 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { CURRENT_LIB, Libraries } from '../utilities/libraries';

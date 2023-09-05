@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
-import { Media } from '@fundamental-ngx/platform/thumbnail';
+import { Media, PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
 
 @Component({
     selector: 'fdp-platform-thumbnail-video-media-example',
-    templateUrl: './platform-thumbnail-video-media-example.component.html'
+    templateUrl: './platform-thumbnail-video-media-example.component.html',
+    standalone: true,
+    imports: [PlatformThumbnailModule]
 })
 export class PlatformThumbnailVideoMediaExampleComponent {
     data: Media[] = [

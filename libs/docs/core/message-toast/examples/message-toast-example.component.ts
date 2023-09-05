@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MessageToastContentExampleComponent } from './message-toast-content-example.component';
 
 @Component({
@@ -12,7 +13,9 @@ import { MessageToastContentExampleComponent } from './message-toast-content-exa
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ButtonModule, MessageToastModule]
 })
 export class MessageToastExampleComponent {
     constructor(public messageToastService: MessageToastService) {}

@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SliderComponent } from '@fundamental-ngx/core/slider';
 
 @Component({
     selector: 'fd-slider-form-example',
     templateUrl: './slider-form-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, SliderComponent]
 })
 export class SliderFormExampleComponent {
     customForm = new FormGroup({

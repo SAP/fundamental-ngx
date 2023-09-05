@@ -1,13 +1,35 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    BreadcrumbHrefExampleComponent,
+    BreadcrumbRouterLinkExampleComponent
+} from './examples/breadcrumb-examples.component';
 
 const breadcrumbHrefExample = 'breadcrumb-href-example.component.html';
 const breadcrumbRouterLinkExample = 'breadcrumb-routerLink-example.component.html';
 
 @Component({
     selector: 'app-breadcrumb',
-    templateUrl: './breadcrumb-docs.component.html'
+    templateUrl: './breadcrumb-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        BreadcrumbRouterLinkExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        BreadcrumbHrefExampleComponent
+    ]
 })
 export class BreadcrumbDocsComponent {
     breadcrumbRouterLinkHtml: ExampleFile[] = [

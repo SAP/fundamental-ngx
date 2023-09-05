@@ -143,7 +143,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         ariaRoleDescription: 'टोकन'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: '{{ count }} अधिक'
     },
     coreUploadCollection: {
         menuOkText: 'ठीक है',

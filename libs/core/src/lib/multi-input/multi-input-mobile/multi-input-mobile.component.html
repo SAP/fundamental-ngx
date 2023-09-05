@@ -11,7 +11,12 @@
             <ng-template fdkTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element class="custom-multi-input-mobile-control-element">
-                        <ng-container *ngTemplateOutlet="childContent?.controlTemplate || null"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                childContent?.controlTemplate || null;
+                                context: { displayAddonButton: false }
+                            "
+                        ></ng-container>
                     </fd-bar-element>
                     <fd-bar-element class="custom-multi-input-select-all-bar-element">
                         <button

@@ -1,5 +1,3 @@
-import { PanelPo } from './panel.po';
-import { action_panel_delete_button, action_panel_edit_button, expandable_panel_header } from './panel-page-content';
 import {
     click,
     doesItExist,
@@ -10,6 +8,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { action_panel_delete_button, action_panel_edit_button, expandable_panel_header } from './panel-page-content';
+import { PanelPo } from './panel.po';
 
 describe('Verify Panel', () => {
     const panelPage = new PanelPo();

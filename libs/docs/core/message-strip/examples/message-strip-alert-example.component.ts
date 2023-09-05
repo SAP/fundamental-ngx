@@ -1,13 +1,16 @@
-import { Component, inject, OnDestroy, TemplateRef } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnDestroy, TemplateRef, inject } from '@angular/core';
+import { ButtonModule, ButtonModule as ButtonModule_1 } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityDirective,
+    ContentDensityDirective as ContentDensityDirective_1
+} from '@fundamental-ngx/core/content-density';
+import { LinkModule } from '@fundamental-ngx/core/link';
 import {
     MessageStripAlertContainerAlertRefs,
     MessageStripAlertRef,
     MessageStripAlertService
 } from '@fundamental-ngx/core/message-strip';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { LinkModule } from '@fundamental-ngx/core/link';
 
 let itemIndex = 0;
 
@@ -87,7 +90,9 @@ class ExampleStripAlertFooterComponent {
                 justify-content: space-between;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule_1, ContentDensityDirective_1]
 })
 export class MessageStripAlertExampleComponent {
     private messageStripAlertService = inject(MessageStripAlertService);

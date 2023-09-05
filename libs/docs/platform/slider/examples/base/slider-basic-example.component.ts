@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { SliderChangeEvent } from '@fundamental-ngx/platform/slider';
+import { FormsModule } from '@angular/forms';
+import { SliderChangeEvent, SliderComponent } from '@fundamental-ngx/platform/slider';
 
 @Component({
     selector: 'fdp-slider-basic-example',
     templateUrl: './slider-basic-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [SliderComponent, FormsModule]
 })
 export class SliderBasicExampleComponent {
     value1 = 50;

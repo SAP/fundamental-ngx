@@ -1,24 +1,29 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
-    inject,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { AsyncOrSyncPipe } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
 import { AnyDynamicFormFieldItem } from '@fundamental-ngx/platform/form';
+import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 import {
     BaseSettingsGeneratorLayout,
     BaseSettingsModel,
     SettingsGeneratorComponent,
     SettingsGeneratorLayoutAccessorService,
+    SettingsGeneratorModule,
     SettingsModel
 } from '@fundamental-ngx/platform/settings-generator';
 import { take } from 'rxjs/operators';
@@ -31,7 +36,9 @@ import { take } from 'rxjs/operators';
                 <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
             </fd-tab>
         </fd-tab-list>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, TabsModule, NgFor, SettingsGeneratorModule, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
     protected _destroyRef = inject(DestroyRef);
@@ -68,7 +75,9 @@ export interface FlatSettingsLayout extends BaseSettingsModel<AnyDynamicFormFiel
     selector: 'fdp-settings-generator-custom-layout-example',
     templateUrl: './settings-generator-custom-layout-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [MessagePopoverFormWrapperComponent, SettingsGeneratorModule, BarModule, MessagePopoverComponent]
 })
 export class SettingsGeneratorCustomLayoutExampleComponent {
     @ViewChild('firstTabContent')

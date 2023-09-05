@@ -1,5 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
 import { DisabledExampleComponent } from './examples/disabled-example/disabled-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
@@ -11,7 +20,17 @@ const disabledExampleTs = 'disabled-example/disabled-example.component.ts';
 @Component({
     selector: 'app-dnd',
     templateUrl: './dnd-docs.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        DisabledExampleComponent
+    ]
 })
 export class DndDocsComponent {
     defaultExample: ExampleFile[] = [
@@ -19,13 +38,13 @@ export class DndDocsComponent {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
             fileName: 'disabled-default-example',
-            component: 'fdkDisabledDefaultExample'
+            component: 'DisabledDefaultExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-default-example',
-            component: 'fdkDisabledDefaultExample'
+            component: 'DisabledDefaultExampleComponent'
         }
     ];
 
@@ -38,7 +57,7 @@ export class DndDocsComponent {
         },
         {
             code: getAssetFromModuleAssets(disabledExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-example',
             component: 'DisabledExampleComponent'
         }

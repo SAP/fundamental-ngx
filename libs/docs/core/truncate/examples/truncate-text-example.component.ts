@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { TruncatePipe } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fd-truncate-text-example',
-    template: ` <p>{{ text | truncate : 30 }}</p> `
+    template: ` <p>{{ text | truncate : 30 }}</p> `,
+    standalone: true,
+    imports: [TruncatePipe]
 })
 export class TruncateTextExampleComponent {
     text =

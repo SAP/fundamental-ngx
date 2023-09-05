@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
     DateTimeFormats,
     FD_DATETIME_FORMATS,
     FdDate,
-    FdDatetimeAdapter
+    FdDatetimeAdapter,
+    FdDatetimePipesModule
 } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
@@ -40,7 +43,9 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_FD_DATETIME_FORMATS
         }
-    ]
+    ],
+    standalone: true,
+    imports: [DatetimePickerComponent, FormsModule, FdDatetimePipesModule]
 })
 export class DatetimeFormatExampleComponent {
     date = FdDate.getNow();

@@ -1,8 +1,12 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 
 @Component({
     selector: 'fd-rating-indicator-ratings',
-    templateUrl: './rating-indicator-ratings.component.html'
+    templateUrl: './rating-indicator-ratings.component.html',
+    standalone: true,
+    imports: [RatingIndicatorModule, JsonPipe]
 })
 export class RatingIndicatorRatingsExampleComponent {
     testRatingData1 = {

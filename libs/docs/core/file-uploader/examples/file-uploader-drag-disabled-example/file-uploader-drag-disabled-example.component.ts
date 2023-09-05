@@ -1,10 +1,15 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
 
 @Component({
     selector: 'fd-file-uploader-drag-disabled-example',
     templateUrl: './file-uploader-drag-disabled-example.component.html',
     styleUrls: ['./file-uploader-drag-disabled-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FileUploaderModule, FormsModule, NgFor]
 })
 export class FileUploaderDragDisabledExampleComponent {
     files: File[];

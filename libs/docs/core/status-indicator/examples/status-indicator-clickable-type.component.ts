@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 @Component({
     selector: 'fd-status-indicator-linear-clickable-type',
-    templateUrl: './status-indicator-clickable-type.component.html'
+    templateUrl: './status-indicator-clickable-type.component.html',
+    standalone: true,
+    imports: [StatusIndicatorModule]
 })
 export class StatusIndicatorClickableTypeComponent {
     fillPercentage = 35;

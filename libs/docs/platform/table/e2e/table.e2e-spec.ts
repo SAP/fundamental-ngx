@@ -1,5 +1,3 @@
-import { runCommonTests } from './table-common-tests';
-import { TablePo } from './table.po';
 import {
     browserIsSafari,
     click,
@@ -20,16 +18,18 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { runCommonTests } from './table-common-tests';
 import {
+    freezeTableCellArr,
     placeholderTestText,
     tableCellArr,
     tableCellArr3,
     tableCellArr6,
     tableCellArr7,
     testText,
-    testText3,
-    freezeTableCellArr
+    testText3
 } from './table-contents';
+import { TablePo } from './table.po';
 
 describe('Table component test suite', () => {
     const tablePage = new TablePo('/table/basic');

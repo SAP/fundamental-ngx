@@ -1,18 +1,23 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
-    FdDatetimeAdapter,
     FD_DATETIME_FORMATS,
-    FdDate
+    FdDate,
+    FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     DynamicFormItemValidationResult,
     DynamicFormValue,
-    FormGeneratorComponent
+    FormGeneratorComponent,
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
+import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -37,6 +42,16 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         }
+    ],
+    standalone: true,
+    imports: [
+        MessagePopoverFormWrapperComponent,
+        PlatformFormGeneratorModule,
+        BarModule,
+        MessagePopoverComponent,
+        NgIf,
+        PlatformButtonModule,
+        JsonPipe
     ]
 })
 export class FormGeneratorComponentExample {

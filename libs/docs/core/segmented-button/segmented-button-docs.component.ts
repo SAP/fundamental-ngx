@@ -1,6 +1,18 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { SegmentedButtonComplexExampleComponent } from './examples/segmented-button-complex-example/segmented-button-complex-example.component';
+import { SegmentedButtonDefaultExampleComponent } from './examples/segmented-button-default-example.component';
+import { SegmentedButtonFormExampleComponent } from './examples/segmented-button-form-example/segmented-button-form-example.component';
+import { SegmentedButtonToggleExampleComponent } from './examples/segmented-button-toggle-example.component';
 
 const segmentedDefaultExample = 'segmented-button-default-example.component.html';
 const segmentedDefaultExampleTs = 'segmented-button-default-example.component.ts';
@@ -13,7 +25,19 @@ const segmentedButtonCustomHtml = 'segmented-button-complex-example/segmented-bu
 
 @Component({
     selector: 'app-segmented-button',
-    templateUrl: './segmented-button-docs.component.html'
+    templateUrl: './segmented-button-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        SegmentedButtonDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        SegmentedButtonToggleExampleComponent,
+        SegmentedButtonComplexExampleComponent,
+        SegmentedButtonFormExampleComponent
+    ]
 })
 export class SegmentedButtonDocsComponent {
     defaultToggleHtml: ExampleFile[] = [

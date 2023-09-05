@@ -1,11 +1,3 @@
-import { LinkPo } from './link.po';
-import {
-    defaultLink_alt_text,
-    googleLink,
-    iconLinkAriaLabel,
-    standardLinksAltTextArray,
-    truncatedLink_alt_text
-} from './link-page-contents';
 import {
     browserIsSafari,
     click,
@@ -20,6 +12,14 @@ import {
     scrollIntoView,
     waitForElDisplayed
 } from '../../../../../e2e';
+import {
+    defaultLink_alt_text,
+    googleLink,
+    iconLinkAriaLabel,
+    standardLinksAltTextArray,
+    truncatedLink_alt_text
+} from './link-page-contents';
+import { LinkPo } from './link.po';
 
 describe('Link component test suite', () => {
     const linkPage = new LinkPo();

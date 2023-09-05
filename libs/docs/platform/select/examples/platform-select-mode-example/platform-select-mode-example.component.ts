@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { FdpSelectionChangeEvent, SelectOptionItem } from '@fundamental-ngx/platform/form';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdpSelectionChangeEvent, PlatformSelectModule, SelectOptionItem } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;
@@ -17,7 +18,9 @@ export class Fruit {
 @Component({
     selector: 'fdp-select-mode-example',
     templateUrl: './platform-select-mode-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformSelectModule, ContentDensityDirective]
 })
 export class PlatformSelectModeExampleComponent {
     userList = [

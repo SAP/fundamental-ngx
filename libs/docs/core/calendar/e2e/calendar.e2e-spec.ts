@@ -19,6 +19,7 @@ import {
 import {
     activeClass,
     activeItem,
+    calendarDayActiveClass,
     classAttribute,
     compactAttribute,
     currentDayClass,
@@ -26,13 +27,12 @@ import {
     customYearLabel,
     customYearRangeLabel,
     disabledAttribute,
+    fridayStartDate,
     landscapeAttribute,
     mondayStartDate,
-    tuesdayStartDate,
-    fridayStartDate,
     otherMonth,
     portraitAttribute,
-    calendarDayActiveClass
+    tuesdayStartDate
 } from './calendar-contents';
 
 describe('calendar test suite', () => {

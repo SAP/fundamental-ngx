@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 
 @Component({
     selector: 'fd-split-button-behaviors-example',
@@ -9,7 +12,9 @@ import { Component } from '@angular/core';
                 margin-right: 12px;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [FormLabelModule, SplitButtonModule, MenuModule]
 })
 export class ButtonSplitBehaviorsComponent {
     mainActionObject = {

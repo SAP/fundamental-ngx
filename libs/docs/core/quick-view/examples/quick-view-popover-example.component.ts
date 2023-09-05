@@ -1,4 +1,10 @@
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component } from '@angular/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 
 @Component({
     selector: 'fd-quick-view-popover-example',
@@ -13,6 +19,20 @@ import { Component } from '@angular/core';
                 width: 100%;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        ButtonModule,
+        PopoverBodyComponent,
+        QuickViewModule,
+        AvatarModule,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        LinkComponent,
+        NgSwitchDefault
     ]
 })
 export class QuickViewPopoverExampleComponent {

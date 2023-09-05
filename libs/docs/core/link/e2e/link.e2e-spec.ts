@@ -1,4 +1,3 @@
-import { LinkPo } from './link.po';
 import {
     getElementAriaLabel,
     getElementArrayLength,
@@ -8,6 +7,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { LinkPo } from './link.po';
 
 describe('Link test suite', () => {
     const linkPage = new LinkPo();

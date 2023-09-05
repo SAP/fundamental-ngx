@@ -1,7 +1,26 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { JsonPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SliderComponent } from '@fundamental-ngx/core/slider';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    PlayGroundComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { SliderBasicExampleComponent } from './examples/base/slider-basic-example.component';
+import { SliderCozyExampleComponent } from './examples/cozy/slider-cozy-example.component';
+import { SliderCustomValuesExampleComponent } from './examples/custom-values/slider-custom-values-example.component';
+import { SliderDisabledExampleComponent } from './examples/disabled/slider-disabled-example.component';
+import { SliderFormExampleComponent } from './examples/form/slider-form-example.component';
+import { SliderRangeExampleComponent } from './examples/range/slider-range-example.component';
+import { SliderTicksAndLabelsExampleComponent } from './examples/ticks-and-labels/slider-ticks-and-labels-example.component';
+import { SliderTooltipExampleComponent } from './examples/tooltip/slider-tooltip-example.component';
+import { VerticalSliderExampleComponent } from './examples/vertical/vertical-slider-example.component';
 
 const sliderBasicTs = 'base/slider-basic-example.component.ts';
 const sliderRangeTs = 'range/slider-range-example.component.ts';
@@ -23,7 +42,26 @@ const sliderFormHtml = 'form/slider-form-example.component.html';
 
 @Component({
     selector: 'app-slider',
-    templateUrl: './slider-docs.component.html'
+    templateUrl: './slider-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        SliderBasicExampleComponent,
+        CodeExampleComponent,
+        SliderTooltipExampleComponent,
+        SliderTicksAndLabelsExampleComponent,
+        SliderCustomValuesExampleComponent,
+        SliderRangeExampleComponent,
+        SliderDisabledExampleComponent,
+        SliderCozyExampleComponent,
+        SliderFormExampleComponent,
+        VerticalSliderExampleComponent,
+        PlayGroundComponent,
+        SliderComponent,
+        FormsModule,
+        JsonPipe
+    ]
 })
 export class SliderDocsComponent {
     schema: Schema;

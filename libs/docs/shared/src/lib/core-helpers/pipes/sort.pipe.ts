@@ -8,7 +8,11 @@ const sort = (a, b, key?: string): number => {
     }
 };
 
-@Pipe({ name: 'sortBy', pure: false })
+@Pipe({
+    name: 'sortBy',
+    pure: false,
+    standalone: true
+})
 export class SortByPipe implements PipeTransform {
     transform(tableRows: any[], ascending: boolean, sortKey?: string): any[] {
         const ascModifier: number = ascending ? 1 : -1;

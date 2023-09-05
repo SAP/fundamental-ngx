@@ -1,9 +1,11 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fd-docs-content-density-user',
@@ -27,7 +29,9 @@ import {
             defaultContentDensity: ContentDensityMode.COMPACT
         })
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [ObjectStatusModule, AsyncPipe]
 })
 export class ContentDensityUserComponent {
     constructor(readonly _contentDensityObserver: ContentDensityObserver) {

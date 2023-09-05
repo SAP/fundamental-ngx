@@ -1,6 +1,23 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import {
+    MenuAddonExampleComponent,
+    MenuExampleComponent,
+    MenuSeparatorExampleComponent
+} from './examples/menu-examples.component';
+import { MenuMobileExampleComponent } from './examples/menu-mobile-example.component';
+import { MenuScrollbarExampleComponent } from './examples/menu-scrollbar-example.component';
+import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 
 const menuHtml = 'menu-example.component.html';
 const menuAddonHtml = 'menu-addon-example.component.html';
@@ -13,7 +30,22 @@ const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
 
 @Component({
     selector: 'app-menu',
-    templateUrl: './menu-docs.component.html'
+    templateUrl: './menu-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MenuExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        MenuAddonExampleComponent,
+        MenuSeparatorExampleComponent,
+        MenuScrollbarExampleComponent,
+        MenuWithSubmenuExampleComponent,
+        RouterLink,
+        MenuMobileExampleComponent
+    ]
 })
 export class MenuDocsComponent {
     menuBasic: ExampleFile[] = [

@@ -1,6 +1,19 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { NotificationComponentAsContentExampleComponent } from './examples/component-as-content/notification-component-as-content-example.component';
+import { NotificationGroupExampleComponent } from './examples/notification-group/notification-group-example.component';
+import { NotificationMobileExampleComponent } from './examples/notification-mobile/notification-mobile-example.component';
+import { NotificationOptionsExampleComponent } from './examples/notification-options/notification-options-example.component';
+import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
 
 const componentAsContentTs = 'component-as-content/notification-component-as-content-example.component.ts';
 const contentTs = 'component-as-content/notification-content.component.ts';
@@ -15,7 +28,20 @@ const mobileH = 'notification-mobile/notification-mobile-example.component.html'
 
 @Component({
     selector: 'app-notification',
-    templateUrl: './notification-docs.component.html'
+    templateUrl: './notification-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        NotificationOptionsExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        NotificationOpenTemplateExampleComponent,
+        NotificationComponentAsContentExampleComponent,
+        NotificationGroupExampleComponent,
+        NotificationMobileExampleComponent
+    ]
 })
 export class NotificationDocsComponent {
     componentAsContent: ExampleFile[] = [

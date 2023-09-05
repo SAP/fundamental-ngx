@@ -1,14 +1,14 @@
+import { Injectable, inject } from '@angular/core';
+import { ThemingService } from '@fundamental-ngx/core/theming';
 import sdk from '@stackblitz/sdk';
-import { Inject, Injectable } from '@angular/core';
-import { StackblitzFile } from './interfaces/stackblitz-parameters';
-import { StackblitzDependencies } from './stackblitz-dependencies';
-import { StackblitzProject } from './interfaces/stackblitz-project';
-import { CURRENT_LIB, Libraries } from '../../utilities';
-import { ExampleFile } from '../code-example/example-file';
-import { StackblitzModuleWrapper } from './stackblitz-module-wrapper';
-import { DocsService } from '../../services/docs.service';
-import { getAsset } from '../../getAsset';
 import { first, tap, zip } from 'rxjs';
+import { getAsset } from '../../getAsset';
+import { DocsService } from '../../services/docs.service';
+import { CURRENT_LIB } from '../../utilities';
+import { ExampleFile } from '../code-example/example-file';
+import { StackblitzFile } from './interfaces/stackblitz-parameters';
+import { StackblitzProject } from './interfaces/stackblitz-project';
+import { StackblitzDependencies } from './stackblitz-dependencies';
 
 interface GeneratedFile {
     path: string;
@@ -21,30 +21,59 @@ interface GeneratedFiles {
     html?: GeneratedFile;
 }
 
+export interface StackblitzFileObject {
+    path: string;
+    name: string;
+}
+
+/**
+ * Retuens formatted import string.
+ */
+function getImport(file: StackblitzFileObject): string {
+    return `import { ${file.name} } from '${file.path}'`;
+}
+
 @Injectable()
 export class StackblitzService {
-    polyfills: string;
     main: string;
     styles: string;
     tsconfig: string;
     angular: string;
+    packageJson: string;
+    stackblitzrc: string;
+    fioriFonts: string;
+    horizonFonts: string;
 
-    constructor(@Inject(CURRENT_LIB) private currentLib: Libraries, private _docsService: DocsService) {
+    /** @hidden */
+    private readonly _themingService = inject(ThemingService, {
+        optional: true
+    });
+
+    /** @hidden */
+    private readonly _currentLib = inject(CURRENT_LIB);
+    /** @hidden */
+    private readonly _docsService = inject(DocsService);
+
+    constructor() {
         zip(
-            getAsset('./stackblitz/example-stack/main.ts'),
             getAsset('./stackblitz/example-stack/styles.scss'),
             getAsset('./stackblitz/example-stack/tsconfig.json'),
             getAsset('./stackblitz/example-stack/angular.json'),
-            getAsset('./stackblitz/example-stack/polyfills.ts')
+            getAsset('./stackblitz/example-stack/package.json'),
+            getAsset('./stackblitz/example-stack/stackblitzrc'),
+            getAsset('./stackblitz/example-stack/theming/sap_fiori_3_fonts.css'),
+            getAsset('./stackblitz/example-stack/theming/sap_horizon_fonts.css')
         )
             .pipe(
                 first(),
-                tap(([main, styles, tsconfig, angular, polyfills]) => {
-                    this.main = main;
+                tap(([styles, tsconfig, angular, packageJson, stackblitzrc, fioriFonts, horizonFonts]) => {
                     this.styles = styles;
                     this.tsconfig = tsconfig;
                     this.angular = angular;
-                    this.polyfills = polyfills;
+                    this.packageJson = this._setDependencies(packageJson);
+                    this.stackblitzrc = stackblitzrc;
+                    this.fioriFonts = fioriFonts;
+                    this.horizonFonts = horizonFonts;
                 })
             )
             .subscribe();
@@ -53,21 +82,21 @@ export class StackblitzService {
     defaultProjectInfo(): StackblitzProject {
         return {
             files: {
-                'src/main.ts': this.main,
-                'src/polyfills.ts': this.polyfills,
+                // Main file content will be populated later when the project structure is formed.
+                'src/main.ts': '',
                 'src/styles.scss': this.styles,
+                'src/theming/sap_fiori_3_fonts.css': this.fioriFonts,
+                'src/theming/sap_horizon_fonts.css': this.horizonFonts,
                 'angular.json': this.angular,
-                /**
-                 * We're providing custom tsconfig with "enableIvy": false due to the StackBlitz issue
-                 * https://github.com/stackblitz/core/issues/1364
-                 */
-                'tsconfig.json': this.tsconfig
+                'tsconfig.json': this.tsconfig,
+                'package.json': this.packageJson,
+                '.stackblitzrc': this.stackblitzrc
+                // TODO: We need to somehow store the lockfile of generated package.json file
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
-            template: 'angular-cli',
-            tags: ['stackblitz', 'sdk'],
-            dependencies: StackblitzDependencies.getDependencies(this._docsService.getPackageJson())
+            template: 'node',
+            tags: ['stackblitz', 'sdk']
         };
     }
 
@@ -79,7 +108,7 @@ export class StackblitzService {
             let generatedFiles: GeneratedFiles | undefined;
 
             /**
-             * Main Component Will be bootstrapped on app module and added to index.html
+             * Main Component Will be bootstrapped in main.ts and added to index.html
              * */
             const mainComponent: boolean = exampleFiles.length === 1 || !!example.main;
 
@@ -116,7 +145,7 @@ export class StackblitzService {
             }
         }
 
-        defaultProjectInfo.files['src/app/app.module.ts'] = this.getModule(stackBlitzFiles);
+        defaultProjectInfo.files['src/main.ts'] = this.getMainFile(stackBlitzFiles);
 
         const mainFileSelector: string =
             stackBlitzFiles.find((file) => file.main)?.selector || stackBlitzFiles[0].selector;
@@ -124,8 +153,8 @@ export class StackblitzService {
         defaultProjectInfo.files['src/index.html'] = `
 <html>
     <head>
-        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
-        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_fiori_3.css" />
+        <link rel="stylesheet" href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css" />
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/theming/sap_horizon.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
         <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
     </head>
@@ -137,23 +166,39 @@ export class StackblitzService {
         sdk.openProject(<any>defaultProjectInfo);
     }
 
+    private _setDependencies(packageJson: string): string {
+        const parsedPackageJson = JSON.parse(packageJson);
+
+        parsedPackageJson['dependencies'] = StackblitzDependencies.getDependencies(
+            this._docsService.getPackageJson(),
+            this._docsService.getLernaJson()
+        );
+
+        return JSON.stringify(parsedPackageJson, null, 4);
+    }
+
     private getDefaultTypescriptFile(fileName: string): string {
         const libraryPrefix = this.getLibraryPrefix();
         const componentName: string = this.transformSnakeCaseToPascalCase(fileName);
 
+        // Since we don't know what part of the library is used, import all modules.
         return `
 import { Component } from '@angular/core';
+import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
+import { FundamentalNgxPlatformModule } from '@fundamental-ngx/platform';
 
 @Component({
     selector: '${libraryPrefix}${fileName}',
     templateUrl: './${fileName}.component.html',
-    styleUrls: ['./${fileName}.component.scss']
+    styleUrls: ['./${fileName}.component.scss'],
+    standalone: true,
+    imports: [FundamentalNgxCoreModule, FundamentalNgxPlatformModule]
 })
 export class ${componentName} {}`;
     }
 
     private getLibraryPrefix(): string {
-        if (this.currentLib === 'platform') {
+        if (this._currentLib === 'platform') {
             return 'fdp-';
         } else {
             return 'fd-';
@@ -211,8 +256,30 @@ export class ${componentName} {}`;
         };
     }
 
-    private getModule(files: StackblitzFile[]): string {
-        return StackblitzModuleWrapper.GetModule(files);
+    private getMainFile(files: StackblitzFile[]): string {
+        // Main component that will be added as a root, if there is no component with main flag, first is chosen
+        const mainComponent = files.find((file) => file.main) || files[0];
+
+        return `
+import { ApplicationRef } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ThemingService, provideTheming } from '@fundamental-ngx/core/theming';
+${getImport({ name: mainComponent.componentName, path: './app/' + mainComponent.basis })};
+
+bootstrapApplication(${mainComponent.componentName}, {
+    providers: [
+      provideAnimations(),
+      provideRouter([]),
+      RtlService,
+      provideTheming({
+        defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'
+      }),
+    ],
+  }).then((appRef: ApplicationRef) => appRef.injector.get(ThemingService).init());
+  `;
     }
 
     private handleHtmlFile(

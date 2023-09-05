@@ -1,4 +1,3 @@
-import { SliderPo } from './slider.po';
 import {
     browserIsFirefox,
     browserIsSafari,
@@ -16,6 +15,7 @@ import {
     setValue,
     waitForElDisplayed
 } from '../../../../../e2e';
+import { SliderPo } from './slider.po';
 
 declare const $$: any;
 

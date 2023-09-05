@@ -7,7 +7,7 @@
             <thead fd-table-header>
                 <tr fd-table-row>
                     <th fd-table-cell>Key</th>
-                    <th fd-table-cell>Default English value</th>
+                    <th fd-table-cell>Translation</th>
                     <th fd-table-cell>Properties</th>
                 </tr>
             </thead>
@@ -17,7 +17,7 @@
                         <strong>{{ row.key }}</strong>
                     </td>
                     <td fd-table-cell>
-                        {{ row.englishTranslation }}
+                        {{ row.translation }}
                     </td>
                     <td fd-table-cell>
                         <ul *ngIf="row.params.length">

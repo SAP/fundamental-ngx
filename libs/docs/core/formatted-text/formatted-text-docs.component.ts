@@ -1,6 +1,16 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { FormattedTextExampleComponent } from './examples/base/formatted-text-example.component';
+import { FormattedTextLinksExampleComponent } from './examples/links/formatted-text-links-example.component';
+import { FormattedTextScriptExampleComponent } from './examples/script/formatted-text-script-example.component';
 
 const formattedTextHtml = 'base/formatted-text-example.component.html';
 const formattedTextTs = 'base/formatted-text-example.component.ts';
@@ -13,7 +23,17 @@ const scriptFormattedTextTs = 'script/formatted-text-script-example.component.ts
 
 @Component({
     selector: 'app-input',
-    templateUrl: './formatted-text-docs.component.html'
+    templateUrl: './formatted-text-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        ComponentExampleComponent,
+        FormattedTextExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        FormattedTextLinksExampleComponent,
+        FormattedTextScriptExampleComponent
+    ]
 })
 export class FormattedTextDocsComponent {
     formattedTextExample: ExampleFile[] = [

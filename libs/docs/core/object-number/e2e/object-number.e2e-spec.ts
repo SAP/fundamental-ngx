@@ -1,4 +1,3 @@
-import { ObjectNumberPo } from './object-number.po';
 import {
     getAttributeByName,
     getElementArrayLength,
@@ -16,6 +15,7 @@ import {
     styledObjExampleText,
     unitAttr
 } from './object-number-content';
+import { ObjectNumberPo } from './object-number.po';
 
 describe('object number test suite', () => {
     const objectNumberPage = new ObjectNumberPo();

@@ -1,9 +1,39 @@
 import { Component } from '@angular/core';
-import { ExampleFile, getExampleFile } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getExampleFile
+} from '@fundamental-ngx/docs/shared';
+import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
+import { PlatformMessagePopoverModule } from '@fundamental-ngx/platform/message-popover';
+import { MessagePopoverCustomConfigExampleComponent } from './examples/custom-config/message-popover-custom-config-example.component';
+import { MessagePopoverDefaultExampleComponent } from './examples/default/message-popover-default-example.component';
+import { FormContainerExampleComponent } from './examples/form-container/form-container-example.component';
+import { FormGeneratorComponentExample } from './examples/form-generator/form-generator-component-example.component';
 
 @Component({
     selector: 'app-message-popover',
-    templateUrl: './message-popover-docs.component.html'
+    templateUrl: './message-popover-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        MessagePopoverDefaultExampleComponent,
+        CodeExampleComponent,
+        PlatformFormGeneratorModule,
+        SeparatorComponent,
+        RouterLink,
+        PlatformMessagePopoverModule,
+        FormContainerExampleComponent,
+        MessagePopoverCustomConfigExampleComponent,
+        FormGeneratorComponentExample
+    ]
 })
 export class MessagePopoverDocsComponent {
     messagePopoverDefaultExample: ExampleFile[] = [

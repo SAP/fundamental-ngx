@@ -1,5 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { DefaultExampleComponent } from './examples/default-example/default-example.component';
+import { DiExampleComponent } from './examples/di-example/di-example.component';
 
 const defaultExampleHtml = 'default-example/default-example.component.html';
 const defaultExampleTs = 'default-example/default-example.component.ts';
@@ -11,7 +20,16 @@ const diRecipientExampleTs = 'di-example/disabled-recipient.directive.ts';
 @Component({
     selector: 'app-tabs',
     templateUrl: './disabled-docs.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        DefaultExampleComponent,
+        CodeExampleComponent,
+        DiExampleComponent
+    ]
 })
 export class DisabledDocsComponent {
     defaultExample: ExampleFile[] = [
@@ -19,13 +37,13 @@ export class DisabledDocsComponent {
             code: getAssetFromModuleAssets(defaultExampleHtml),
             language: 'html',
             fileName: 'disabled-default-example',
-            component: 'fdkDisabledDefaultExample'
+            component: 'DisabledDefaultExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(defaultExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-default-example',
-            component: 'fdkDisabledDefaultExample'
+            component: 'DisabledDefaultExampleComponent'
         }
     ];
     diExample: ExampleFile[] = [
@@ -33,19 +51,19 @@ export class DisabledDocsComponent {
             code: getAssetFromModuleAssets(diExampleHtml),
             language: 'html',
             fileName: 'disabled-di-example',
-            component: 'fdkDisabledDIExample'
+            component: 'DisabledDIExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(diExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-di-example',
-            component: 'fdkDisabledDIExample'
+            component: 'DisabledDIExampleComponent'
         },
         {
             code: getAssetFromModuleAssets(diRecipientExampleTs),
-            language: 'ts',
+            language: 'typescript',
             fileName: 'disabled-recipient.directive',
-            component: 'fdkDisabledRecipientDirective'
+            component: 'DisabledRecipientDirective'
         }
     ];
 

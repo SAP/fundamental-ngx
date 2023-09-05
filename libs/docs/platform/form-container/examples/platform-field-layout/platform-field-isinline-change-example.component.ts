@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import {
+    CheckboxGroupComponent,
+    FdpFormGroupModule,
+    PlatformComboboxModule,
+    PlatformRadioGroupModule,
+    PlatformSelectModule,
+    PlatformTextAreaModule
+} from '@fundamental-ngx/platform/form';
 import { OptionItem, RESPONSIVE_BREAKPOINTS_CONFIG } from '@fundamental-ngx/platform/shared';
 
 const DEFAULT_NEW_BREAKPOINTS_CONFIG = {
@@ -31,6 +39,17 @@ export class Fruit {
             provide: RESPONSIVE_BREAKPOINTS_CONFIG,
             useValue: DEFAULT_NEW_BREAKPOINTS_CONFIG
         }
+    ],
+    standalone: true,
+    imports: [
+        FdpFormGroupModule,
+        FormsModule,
+        ReactiveFormsModule,
+        PlatformTextAreaModule,
+        CheckboxGroupComponent,
+        PlatformSelectModule,
+        PlatformRadioGroupModule,
+        PlatformComboboxModule
     ]
 })
 export class PlatformFieldIsInlineChangeExampleComponent {

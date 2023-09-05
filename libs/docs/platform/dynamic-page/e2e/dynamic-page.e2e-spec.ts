@@ -12,8 +12,8 @@ import {
     waitForNotDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { DynamicPagePo } from './dynamic-page.po';
 import { main_button_title } from './dynamic-page-contents';
+import { DynamicPagePo } from './dynamic-page.po';
 
 describe('Dynamic Page Layout test suite:', () => {
     const dynamicPageLayoutPage = new DynamicPagePo();

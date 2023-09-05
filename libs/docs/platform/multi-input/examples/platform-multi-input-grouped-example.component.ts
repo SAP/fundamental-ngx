@@ -1,12 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-multi-input-grouped-example',
     templateUrl: './platform-multi-input-grouped-example.component.html',
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormsModule, FdpFormGroupModule, PlatformMultiInputModule, ReactiveFormsModule]
 })
 export class PlatformMultiInputGroupedExampleComponent {
     list_elements = [

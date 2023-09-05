@@ -1,11 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
+import { PlatformIconTabBarModule, TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
 import { cloneDeep } from 'lodash-es';
-import { TabConfig } from '@fundamental-ngx/platform/icon-tab-bar';
+import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({
     selector: 'fd-icon-tab-bar-filter-type-example',
-    templateUrl: './platform-icon-tab-bar-filter-type-example.component.html'
+    templateUrl: './platform-icon-tab-bar-filter-type-example.component.html',
+    standalone: true,
+    imports: [PlatformIconTabBarModule]
 })
 export class PlatformIconTabBarFilterTypeExampleComponent implements OnInit {
     @Input()

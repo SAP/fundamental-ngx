@@ -1,4 +1,3 @@
-import { MessageToastPo } from './message-toast.po';
 import {
     click,
     doesItExist,
@@ -11,6 +10,7 @@ import {
     waitForNotDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { MessageToastPo } from './message-toast.po';
 
 describe('Textarea component test', () => {
     const messageToastPage = new MessageToastPo();

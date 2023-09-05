@@ -1,8 +1,6 @@
-import { IllustratedMessagePo } from './illustrated-message.po';
 import {
     checkElementScreenshot,
     click,
-    doesItExist,
     elementDisplayed,
     getElementArrayLength,
     isElementClickable,
@@ -10,6 +8,7 @@ import {
     waitForElDisplayed,
     waitForNotPresent
 } from '../../../../../e2e';
+import { IllustratedMessagePo } from './illustrated-message.po';
 
 describe('Illustrated-message test suite', () => {
     const illustratedMessagePage = new IllustratedMessagePo();

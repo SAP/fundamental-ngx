@@ -203,6 +203,38 @@
                     "namedChunks": false,
                     "vendorChunk": false,
                     "optimization": false
+                },
+                "core": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/core.routes.ts"
+                        }
+                    ]
+                },
+                "cdk": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/cdk.routes.ts"
+                        }
+                    ]
+                },
+                "platform": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/platform.routes.ts"
+                        }
+                    ]
+                },
+                "cx": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/cx.routes.ts"
+                        }
+                    ]
                 }
             },
             "outputs": ["{options.outputPath}"],
@@ -217,6 +249,26 @@
             "configurations": {
                 "production": {
                     "browserTarget": "docs:build:production"
+                },
+                "cx": {
+                    "browserTarget": "docs:build:cx",
+                    "port": 4201,
+                    "hmr": true
+                },
+                "core": {
+                    "browserTarget": "docs:build:core",
+                    "port": 4202,
+                    "hmr": true
+                },
+                "cdk": {
+                    "browserTarget": "docs:build:cdk",
+                    "port": 4203,
+                    "hmr": true
+                },
+                "platform": {
+                    "browserTarget": "docs:build:platform",
+                    "port": 4204,
+                    "hmr": true
                 },
                 "hot-module-replacement": {
                     "hmr": true

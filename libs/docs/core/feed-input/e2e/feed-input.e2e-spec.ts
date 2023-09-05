@@ -1,24 +1,20 @@
 import {
-    addValue,
-    clearValue,
     doesItExist,
     elementDisplayed,
     getAttributeByName,
     getElementArrayLength,
     getElementPlaceholder,
-    getElementSize,
     getElementTitle,
     isEnabled,
     refreshPage,
     scrollIntoView,
-    sendKeys,
     setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { four_lines_text } from './feed-input';
+import { default_avatar, default_placeholder, send_button_tooltip } from './feed-input-page-contents';
 import { FeedInputPo } from './feed-input.po';
-import { eight_lines_text, four_lines_text } from './feed-input';
-import { default_avatar, default_placeholder, emptyValuesArr, send_button_tooltip } from './feed-input-page-contents';
 
 describe('Verify Feed Input component', () => {
     const feedInputPage = new FeedInputPo();

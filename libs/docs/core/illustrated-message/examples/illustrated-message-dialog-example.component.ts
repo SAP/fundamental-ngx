@@ -1,9 +1,27 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-illustrated-message-dialog-example',
-    templateUrl: './illustrated-message-dialog-example.component.html'
+    templateUrl: './illustrated-message-dialog-example.component.html',
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        IllustratedMessageModule,
+        BarModule,
+        InitialFocusDirective,
+        ButtonModule
+    ]
 })
 export class IllustratedMessageDialogExampleComponent {
     dialogSvgConfig = {

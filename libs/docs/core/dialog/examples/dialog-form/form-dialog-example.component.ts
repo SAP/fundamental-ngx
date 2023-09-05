@@ -1,10 +1,28 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { FormsModule } from '@angular/forms';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-form-dialog-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './form-dialog-example.component.html'
+    templateUrl: './form-dialog-example.component.html',
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        BarModule,
+        CheckboxComponent,
+        FormsModule,
+        ButtonModule
+    ]
 })
 export class FormDialogExampleComponent {
     confirmationReason: string;

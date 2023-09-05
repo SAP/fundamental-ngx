@@ -19,11 +19,45 @@ const PlatformMultiInputCompactExampleComponentTs = 'platform-multi-input-compac
 const PlatformMultiInputLoadingExampleComponent = 'platform-multi-input-loading-example.component.html';
 const PlatformMultiInputLoadingExampleComponentTs = 'platform-multi-input-loading-example.component.ts';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { PlatformMultiInputCompactExampleComponent as PlatformMultiInputCompactExampleComponent_1 } from './examples/platform-multi-input-compact-example.component';
+import { PlatformMultiInputComplexExampleComponent } from './examples/platform-multi-input-complex-example.component';
+import { PlatformMultiInputDeclineExampleComponent } from './examples/platform-multi-input-decline-example.component';
+import { PlatformMultiInputDisabledExampleComponent } from './examples/platform-multi-input-disabled.component';
+import { PlatformMultiInputExampleComponent } from './examples/platform-multi-input-example.component';
+import { PlatformMultiInputGroupedExampleComponent } from './examples/platform-multi-input-grouped-example.component';
+import { PlatformMultiInputLoadingExampleComponent as PlatformMultiInputLoadingExampleComponent_1 } from './examples/platform-multi-input-loading-example.component';
+import { PlatformMultiInputMobileExampleComponent } from './examples/platform-multi-input-mobile-example.component';
+import { PlatformMultiInputReactiveExampleComponent } from './examples/platform-multi-input-reactive-example.component';
 
 @Component({
     selector: 'fd-platform-multi-input-docs',
-    templateUrl: './platform-multi-input-docs.component.html'
+    templateUrl: './platform-multi-input-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        PlatformMultiInputExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        PlatformMultiInputCompactExampleComponent_1,
+        PlatformMultiInputComplexExampleComponent,
+        PlatformMultiInputGroupedExampleComponent,
+        PlatformMultiInputDeclineExampleComponent,
+        PlatformMultiInputDisabledExampleComponent,
+        PlatformMultiInputMobileExampleComponent,
+        PlatformMultiInputReactiveExampleComponent,
+        PlatformMultiInputLoadingExampleComponent_1
+    ]
 })
 export class PlatformMultiInputDocsComponent {
     multiInputSimple: ExampleFile[] = [

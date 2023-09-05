@@ -1,4 +1,3 @@
-import { FixedCardLayoutPo } from './fixed-card-layout.po';
 import {
     browserIsSafari,
     click,
@@ -12,6 +11,7 @@ import {
     waitForInvisibilityOf,
     waitForPresent
 } from '../../../../../e2e';
+import { FixedCardLayoutPo } from './fixed-card-layout.po';
 
 describe('Fixed card layout test suite', () => {
     const fxdCardLayoutPage = new FixedCardLayoutPo();

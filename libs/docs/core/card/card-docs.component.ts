@@ -1,6 +1,28 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import { RouterLink } from '@angular/router';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { BarChartListCardExampleComponent } from './examples/bar-chart-list-card/bar-chart-list-card-example.component';
+import { CardCalendarExampleComponent } from './examples/calendar-card/card-calendar-example.component';
+import { CardCompactExampleComponent } from './examples/card-compact-example.component';
+import { CardExampleComponent } from './examples/card-example.component';
+import { CardFooterExampleComponent } from './examples/card-footer-example.component';
+import { CardKpiExampleComponent } from './examples/card-kpi-example.component';
+import { CardLoaderExampleComponent } from './examples/card-loader-example.component';
+import { CardLoadingExampleComponent } from './examples/card-loading/card-loading-example.component';
+import { CardTableExampleComponent } from './examples/card-table-example.component';
+import { CardLinkListExampleComponent } from './examples/link-list-card/card-link-list-example.component';
+import { CardListExampleComponent } from './examples/list-card/card-list-example.component';
+import { CardObjectExampleComponent } from './examples/object-card/card-object-example.component';
+import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
 
 const cardExampleScss = 'card-example.component.scss';
 const cardKpiExampleScss = 'card-kpi-example.component.scss';
@@ -33,7 +55,29 @@ const cardLinkListTs = 'link-list-card/card-link-list-example.component.ts';
 const cardLinkListHtml = 'link-list-card/card-link-list-example.component.html';
 
 @Component({
-    templateUrl: './card-docs.component.html'
+    templateUrl: './card-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        CardExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        CardCompactExampleComponent,
+        CardLoaderExampleComponent,
+        CardFooterExampleComponent,
+        CardKpiExampleComponent,
+        CardTableExampleComponent,
+        BarChartListCardExampleComponent,
+        CardObjectExampleComponent,
+        CardCalendarExampleComponent,
+        CardQuickViewExampleComponent,
+        CardListExampleComponent,
+        CardLinkListExampleComponent,
+        RouterLink,
+        CardLoadingExampleComponent
+    ]
 })
 export class CardDocsComponent {
     standard: ExampleFile[] = [
@@ -43,7 +87,7 @@ export class CardDocsComponent {
             fileName: 'card-example'
         },
         {
-            language: 'ts',
+            language: 'typescript',
             code: getAssetFromModuleAssets(cardExampleTs),
             fileName: 'card-example'
         },

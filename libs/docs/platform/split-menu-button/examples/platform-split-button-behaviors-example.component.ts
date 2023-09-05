@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
 
 @Component({
     selector: 'fdp-platform-split-button-behaviors-example',
-    templateUrl: 'platform-split-button-behaviors-example.component.html'
+    templateUrl: 'platform-split-button-behaviors-example.component.html',
+    standalone: true,
+    imports: [PlatformSplitMenuButtonModule, PlatformMenuModule]
 })
 export class PlatformDocsSplitMenuButtonBehaviorComponent {
     label1 = 'Option 1';

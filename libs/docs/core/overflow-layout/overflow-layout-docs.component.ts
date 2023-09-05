@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
 
-import { ExampleFile, getAssetFromModuleAssets } from '@fundamental-ngx/docs/shared';
+import {
+    CodeExampleComponent,
+    ComponentExampleComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    SeparatorComponent,
+    getAssetFromModuleAssets
+} from '@fundamental-ngx/docs/shared';
+import { OverflowLayoutAlwaysVisibleExampleComponent } from './examples/always-visible/overflow-layout-always-visible-example.component';
+import { OverflowLayoutComplexExampleComponent } from './examples/complex/overflow-layout-complex-example.component';
+import { OverflowLayoutDefaultExampleComponent } from './examples/default/overflow-layout-default-example.component';
 
 const overflowLayoutComplexExampleScss = 'complex/overflow-layout-complex-example.component.scss';
 const overflowLayoutDefaultExampleHtml = 'default/overflow-layout-default-example.component.html';
@@ -13,7 +24,18 @@ const overflowLayoutVisibleItemsExampleTs = 'always-visible/overflow-layout-alwa
 
 @Component({
     selector: 'app-overflow-layout',
-    templateUrl: './overflow-layout-docs.component.html'
+    templateUrl: './overflow-layout-docs.component.html',
+    standalone: true,
+    imports: [
+        DocsSectionTitleComponent,
+        DescriptionComponent,
+        ComponentExampleComponent,
+        OverflowLayoutDefaultExampleComponent,
+        CodeExampleComponent,
+        SeparatorComponent,
+        OverflowLayoutAlwaysVisibleExampleComponent,
+        OverflowLayoutComplexExampleComponent
+    ]
 })
 export class OverflowLayoutDocsComponent {
     overflowLayoutDefaultExample: ExampleFile[] = [

@@ -11,8 +11,8 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
-import { InlineHelpPo } from './inline-help.po';
 import { customMessage, defaultMessage } from './inline-help-contents';
+import { InlineHelpPo } from './inline-help.po';
 
 describe('Inline help test suite', () => {
     const inlineHelpPage = new InlineHelpPo();

@@ -1,4 +1,3 @@
-import { BreadcrumbPo } from './breadcrumb.po';
 import {
     getElementArrayLength,
     isElementClickable,
@@ -7,6 +6,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { BreadcrumbPo } from './breadcrumb.po';
 
 describe('Breadcrumb test suite:', () => {
     const breadcrumbPage: BreadcrumbPo = new BreadcrumbPo();

@@ -1,4 +1,3 @@
-import { StandardListItemPo } from './standard-list-item.po';
 import {
     checkElArrIsClickable,
     checkElementDisplayed,
@@ -13,6 +12,7 @@ import {
     waitForPresent
 } from '../../../../../e2e';
 import { linkAttr, secondaryAttr, secondaryTypes, toolbarTextValue } from './standard-list-item-contents';
+import { StandardListItemPo } from './standard-list-item.po';
 
 describe('Standard List Item test suite:', () => {
     const standardListPage = new StandardListItemPo();

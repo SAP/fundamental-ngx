@@ -3,6 +3,117 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.19...v0.46.0-rc.20) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.18...v0.46.0-rc.19) (2023-09-05)
+
+
+### Bug Fixes
+
+* **platform:** search field a11y fixes ([#10451](https://github.com/SAP/fundamental-ngx/issues/10451)) ([bb9f6b8](https://github.com/SAP/fundamental-ngx/commit/bb9f6b84b5bf927006f41c925c48c9aa1a321276))
+
+
+
+
+
+# [0.46.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.17...v0.46.0-rc.18) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.16...v0.46.0-rc.17) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.15...v0.46.0-rc.16) (2023-09-05)
+
+
+### Features
+
+* **platform:** added aria-labelledby to the table ([#10446](https://github.com/SAP/fundamental-ngx/issues/10446)) ([73ee20f](https://github.com/SAP/fundamental-ngx/commit/73ee20f6f22c8782c08003d50707ecb4ca4e683c))
+
+
+
+
+
+# [0.46.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.14...v0.46.0-rc.15) (2023-09-05)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.13...v0.46.0-rc.14) (2023-09-04)
+
+
+### Features
+
+* **docs:** examples standalone migration ([#10409](https://github.com/SAP/fundamental-ngx/issues/10409)) ([3eb7071](https://github.com/SAP/fundamental-ngx/commit/3eb7071d7f5a266d9ab7ee36a05bbf105af81413)), closes [#10458](https://github.com/SAP/fundamental-ngx/issues/10458)
+
+
+
+
+
+# [0.46.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.12...v0.46.0-rc.13) (2023-09-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.11...v0.46.0-rc.12) (2023-09-01)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.10...v0.46.0-rc.11) (2023-08-31)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.9...v0.46.0-rc.10) (2023-08-31)
+
+
+### Bug Fixes
+
+* **platform:** cell height instead of tbody ([#10440](https://github.com/SAP/fundamental-ngx/issues/10440)) ([702c568](https://github.com/SAP/fundamental-ngx/commit/702c5689a03efc223ad23aa66ff2966b96511eb7))
+
+
+
+
+
+# [0.46.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.8...v0.46.0-rc.9) (2023-08-31)
+
+
+### Bug Fixes
+
+* **platform:** custom row height ([#10439](https://github.com/SAP/fundamental-ngx/issues/10439)) ([3302769](https://github.com/SAP/fundamental-ngx/commit/3302769aa8be647006287b75d46e41e97c66a0eb))
+
+
+
+
+
 # [0.46.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.7...v0.46.0-rc.8) (2023-08-29)
 
 

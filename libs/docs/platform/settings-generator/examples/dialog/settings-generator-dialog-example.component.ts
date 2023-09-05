@@ -1,3 +1,4 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -8,9 +9,19 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
-import { SettingsGeneratorComponent, SettingsModel } from '@fundamental-ngx/platform/settings-generator';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
+import {
+    SettingsGeneratorComponent,
+    SettingsGeneratorModule,
+    SettingsModel
+} from '@fundamental-ngx/platform/settings-generator';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { BehaviorSubject, Observable, delay, map, of } from 'rxjs';
 
@@ -61,7 +72,20 @@ export class ExampleUserService {
     templateUrl: './settings-generator-dialog-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ExampleUserService]
+    providers: [ExampleUserService],
+    standalone: true,
+    imports: [
+        TitleComponent,
+        DialogModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        MessagePopoverFormWrapperComponent,
+        SettingsGeneratorModule,
+        TemplateDirective,
+        BarModule,
+        MessagePopoverComponent,
+        ButtonModule
+    ]
 })
 export class SettingsGeneratorDialogExampleComponent {
     confirmationReason: string;

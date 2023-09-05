@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { StepInputModule } from '@fundamental-ngx/core/step-input';
 
 @Component({
     selector: 'fd-step-input-form-example',
@@ -67,7 +69,9 @@ import { FormControl } from '@angular/forms';
                 <small>Value: {{ value2 }}</small>
             </div>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [FormLabelModule, StepInputModule, FormsModule, ReactiveFormsModule]
 })
 export class StepInputFormExampleComponent {
     stepInputFormControl1 = new FormControl(100);

@@ -1,4 +1,3 @@
-import { TextPo } from './text.po';
 import {
     checkElementScreenshot,
     click,
@@ -12,6 +11,7 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../../../../e2e';
+import { TextPo } from './text.po';
 
 import { testTextLess, testTextLessLabel, testTextMore, testTextMoreLabel } from './text-contents';
 

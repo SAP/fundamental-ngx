@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
-import { Schema } from '@fundamental-ngx/docs/schema';
+import { Schema, SchemaComponent } from '@fundamental-ngx/docs/schema';
 
 @Component({
     selector: 'playground',
     templateUrl: './playground.component.html',
     styleUrls: ['./playground.components.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [SchemaComponent]
 })
 export class PlayGroundComponent {
     @Input() schema: Schema;

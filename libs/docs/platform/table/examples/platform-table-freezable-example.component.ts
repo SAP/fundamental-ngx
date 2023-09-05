@@ -1,21 +1,35 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import {
-    newTableRow,
+    PlatformTableModule,
     TableDataProvider,
     TableDataSource,
     TableRow,
     TableRowType,
-    TableState
+    TableState,
+    newTableRow
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-freezable-example',
     templateUrl: './platform-table-freezable-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdDatetimeModule
+    ]
 })
 export class PlatformTableFreezableExampleComponent {
     source: TableDataSource<TableRow>;
