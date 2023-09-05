@@ -37,6 +37,7 @@
             [allCellsFocusable]="true"
             [popIn]="_poppingColumns.length > 0"
             [class.fd-table--no-outer-border]="noOuterBorders"
+            [attr.aria-labelledby]="_ariaLabelledBy"
         >
             <thead fd-table-header class="fdp-table__header">
                 <tr
@@ -170,10 +171,11 @@
             <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
 
             <!-- the tbody element below is so the scrollbar renders correctly -->
-            <tbody
-                *ngIf="_virtualScrollDirective?.virtualScroll"
-                [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"
-            ></tbody>
+            <tbody *ngIf="_virtualScrollDirective?.virtualScroll">
+                <tr>
+                    <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </ng-template>

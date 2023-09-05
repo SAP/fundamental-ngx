@@ -6,7 +6,7 @@
         "experimentalDecorators": true,
         "module": "commonjs",
         "target": "esnext",
-        "types": ["node", "webdriverio/async", "@wdio/jasmine-framework", "axe-core"]
+        "types": ["node", "webdriverio/async", "@wdio/jasmine-framework", "axe-core", "@types/jasmine"]
     },
     "includes": ["wdio/**/*.ts"]
 }

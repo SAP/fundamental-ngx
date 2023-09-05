@@ -311,8 +311,8 @@ describe('TestDatePickerComponent', () => {
         datepicker.isOpen = true;
         datepicker.fdDatePickerComponent._showPopoverContents = true;
         fixture.detectChanges();
-        jest.spyOn(datepicker.selectedDateChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
+        spyOn(datepicker.selectedDateChange, 'emit');
+        spyOn(datepicker, 'onChange');
 
         const date = new FdDate(2000, 10, 10);
         const strDate = (<any>datepicker.fdDatePickerComponent)._formatDate(date);
@@ -335,8 +335,8 @@ describe('TestDatePickerComponent', () => {
         datepicker.isOpen = true;
         datepicker.fdDatePickerComponent._showPopoverContents = true;
         fixture.detectChanges();
-        jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
+        spyOn(datepicker.selectedRangeDateChange, 'emit');
+        spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2000, 10, 10);
         const date2 = new FdDate(2011, 10, 10);
 
@@ -359,8 +359,8 @@ describe('TestDatePickerComponent', () => {
         datepicker.isOpen = true;
         datepicker.fdDatePickerComponent._showPopoverContents = true;
         fixture.detectChanges();
-        jest.spyOn(datepicker.selectedRangeDateChange, 'emit');
-        jest.spyOn(datepicker, 'onChange');
+        spyOn(datepicker.selectedRangeDateChange, 'emit');
+        spyOn(datepicker, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
         const date2 = new FdDate(2000, 10, 10);
         const strDate1 = (<any>datepicker.fdDatePickerComponent)._formatDate(date1);

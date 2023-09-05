@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
+
+
+### Bug Fixes
+
+* **platform:** cell height instead of tbody ([#10442](https://github.com/SAP/fundamental-ngx/issues/10442)) ([e6282cd](https://github.com/SAP/fundamental-ngx/commit/e6282cd7be7110eeaf2b7eddcabb709592317638))
+* **platform:** custom row height ([#10439](https://github.com/SAP/fundamental-ngx/issues/10439)) ([#10441](https://github.com/SAP/fundamental-ngx/issues/10441)) ([0c21d8b](https://github.com/SAP/fundamental-ngx/commit/0c21d8bbd4f7c783bfaf6e2b08cb53fd4b179797))
+* **platform:** fixed multi combobox async value selection token ([#10473](https://github.com/SAP/fundamental-ngx/issues/10473)) ([01ea7e2](https://github.com/SAP/fundamental-ngx/commit/01ea7e2fab0afdbd2dfbacc58fcf551fe60fbf7d))
+
+
+### Features
+
+* **platform:** added aria-labelledby to the table ([#10447](https://github.com/SAP/fundamental-ngx/issues/10447)) ([580c698](https://github.com/SAP/fundamental-ngx/commit/580c6985f7ee95ae72046269056c5a047cebe8ef))
+
+
+
+
+
 ## [0.43.5](https://github.com/SAP/fundamental-ngx/compare/v0.43.4...v0.43.5) (2023-08-16)
 
 

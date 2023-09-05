@@ -119,4 +119,15 @@ export class PlatformMultiComboboxDocsComponent {
             component: 'MultiComboboxLoadingExampleComponent'
         }
     ];
+
+    multiComboboxRemoteDatasourceExample: ExampleFile[] = [
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-remote-datasource-example',
+            code: getAssetFromModuleAssets(
+                'multi-combobox-remote-datasource/multi-combobox-remote-datasource-example.component.ts'
+            ),
+            component: 'MultiComboboxRemoteDatasourceExampleComponent'
+        }
+    ];
 }

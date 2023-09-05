@@ -323,7 +323,7 @@ export class MultiInputComponent
 
     /** @hidden */
     @ViewChild('control', { read: TemplateRef })
-    controlTemplate: TemplateRef<any>;
+    controlTemplate: TemplateRef<{ displayAddonButton: boolean }>;
 
     /** @hidden */
     @ViewChild('list', { read: TemplateRef })

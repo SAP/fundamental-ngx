@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.6](https://github.com/SAP/fundamental-ngx/compare/v0.43.5...v0.43.6) (2023-09-04)
+
+
+### Bug Fixes
+
+* **core:** localize tokenizer more label [#10106](https://github.com/SAP/fundamental-ngx/issues/10106) ([#10460](https://github.com/SAP/fundamental-ngx/issues/10460)) ([d1055e9](https://github.com/SAP/fundamental-ngx/commit/d1055e9af281d531b18bcae7d5f14cc30bdea4f2))
+
+
+
+
+
 ## [0.43.5](https://github.com/SAP/fundamental-ngx/compare/v0.43.4...v0.43.5) (2023-08-16)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

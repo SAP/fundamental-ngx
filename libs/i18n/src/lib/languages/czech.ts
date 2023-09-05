@@ -146,7 +146,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: '{{ count }} více'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
