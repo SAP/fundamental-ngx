@@ -12,6 +12,14 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-multi-combobox"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/multi-combobox/docs.json",
+                "entities": ["MultiComboboxComponent", "BaseMultiCombobox"]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

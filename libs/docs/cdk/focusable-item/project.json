@@ -12,6 +12,14 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-cdk-focusable-item"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/cdk/focusable-item/docs.json",
+                "entities": ["FocusableItemComponent"]
+            },
+            "dependsOn": ["cdk:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

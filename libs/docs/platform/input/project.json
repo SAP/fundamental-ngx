@@ -12,6 +12,14 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-input"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/input/docs.json",
+                "entities": ["InputComponent"]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

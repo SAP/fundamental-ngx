@@ -12,6 +12,19 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-form-generator"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/form-generator/docs.json",
+                "entities": [
+                    "FormGeneratorComponent",
+                    "FormGeneratorService",
+                    "DynamicFormControlDirective",
+                    "DynamicFormControlFieldDirective"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

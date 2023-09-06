@@ -12,6 +12,20 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-standard-list-item"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/standard-list-item/docs.json",
+                "entities": [
+                    "ListComponent",
+                    "StandardListItemComponent",
+                    "ListFooter",
+                    "ListGroupHeader",
+                    "ListConfig"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -12,6 +12,14 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-display-list-item"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/display-list-item/docs.json",
+                "entities": ["DisplayListItemComponent", "ListComponent", "ListFooter", "ListGroupHeader", "ListConfig"]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

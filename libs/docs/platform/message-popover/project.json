@@ -12,6 +12,19 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-message-popover"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/message-popover/docs.json",
+                "entities": [
+                    "MessagePopoverComponent",
+                    "MessagePopoverFormWrapperComponent",
+                    "MessageViewComponent",
+                    "MessagePopoverFormItemDirective"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

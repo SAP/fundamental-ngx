@@ -13,6 +13,14 @@
                 "configFile": "libs/docs/fn/selectable-list/wdio.conf.js"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-fn-selectable-list"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/cdk/selectable-list/docs.json",
+                "entities": ["SelectableListDirective", "SelectableItemDirective", "SelectionService"]
+            },
+            "dependsOn": ["cdk:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

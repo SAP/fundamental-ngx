@@ -12,6 +12,34 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-table"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/table/docs.json",
+                "entities": [
+                    "TableComponent",
+                    "TableColumnComponent",
+                    "TableToolbarComponent",
+                    "TableToolbarActionsComponent",
+                    "FdpTableCell",
+                    "FdpCellDef",
+                    "FdpTableHeader",
+                    "FdpHeaderCellDef",
+                    "TableViewSettingsDialogComponent",
+                    "TableViewSettingsFilterComponent",
+                    "FdpViewSettingsFilterCustomDef",
+                    "TableP13DialogComponent",
+                    "TableP13SortComponent",
+                    "TableP13FilterComponent",
+                    "TableP13GroupComponent",
+                    "TableP13ColumnsComponent",
+                    "TableDataSource",
+                    "TableDataProvider",
+                    "PlatformTableCellResponsiveDirective"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

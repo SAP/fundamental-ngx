@@ -13,6 +13,14 @@
                 "configFile": "libs/docs/fn/focusable-grid/wdio.conf.js"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-fn-focusable-grid"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/cdk/focusable-grid/docs.json",
+                "entities": ["FocusableGridDirective", "FocusableListDirective", "FocusableItemDirective"]
+            },
+            "dependsOn": ["cdk:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -12,6 +12,22 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-icon-tab-bar"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/icon-tab-bar/docs.json",
+                "entities": [
+                    "IconTabBarComponent",
+                    "IconTabBarTextTypeComponent",
+                    "IconTabBarIconTypeComponent",
+                    "IconTabBarProcessTypeComponent",
+                    "IconTabBarFilterTypeComponent",
+                    "IconTabBarPopoverComponent",
+                    "TextTypePopoverComponent"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

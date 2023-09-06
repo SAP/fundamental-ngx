@@ -36,6 +36,11 @@ export default async function runExecutor(
         }
         return acc;
     }, []);
+    const foundEntities = new Set(entities.map(({ name }) => name));
+    const missingEntities = options.entities.filter((e) => !foundEntities.has(e));
+    if (missingEntities.length > 0) {
+        logger.warn(`Could not find documentation for the following entities: ${missingEntities.join(', ')}`);
+    }
     writeFileSync(options.outputPath, JSON.stringify(entities, null, 2));
     return { success: true };
 }

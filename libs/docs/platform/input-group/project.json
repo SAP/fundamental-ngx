@@ -12,6 +12,19 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-input-group"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/input-group/docs.json",
+                "entities": [
+                    "InputGroupConfig",
+                    "InputGroupComponent",
+                    "InputGroupAddonComponent",
+                    "InputGroupInputComponent"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

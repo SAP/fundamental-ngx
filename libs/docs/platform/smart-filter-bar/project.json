@@ -12,6 +12,23 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-smart-filter-bar"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/smart-filter-bar/docs.json",
+                "entities": [
+                    "SmartFilterBarComponent",
+                    "SmartFilterBarConditionFieldComponent",
+                    "SmartFilterBarConditionsDialogComponent",
+                    "SmartFilterBarFieldDefinitionDirective",
+                    "SmartFilterBarService",
+                    "SmartFilterBarSubjectDirective",
+                    "SmartFilterBarOptionsDataProvider",
+                    "SmartFilterBarSettingsDialogComponent"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -12,6 +12,20 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-dynamic-page"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/dynamic-page/docs.json",
+                "entities": [
+                    "DynamicPageComponent",
+                    "DynamicPageTitleComponent",
+                    "DynamicPageKeyInfoComponent",
+                    "DynamicPageHeaderComponent",
+                    "DynamicPageContentComponent"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

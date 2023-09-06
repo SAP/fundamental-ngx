@@ -12,6 +12,23 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-wizard-generator"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/wizard-generator/docs.json",
+                "entities": [
+                    "WizardGeneratorService",
+                    "WizardDialogGeneratorService",
+                    "WizardGeneratorComponent",
+                    "DialogWizardGeneratorComponent",
+                    "WizardBodyComponent",
+                    "WizardGeneratorStepComponent",
+                    "WizardSummaryStepComponent",
+                    "WizardSummarySectionComponent"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

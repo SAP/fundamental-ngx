@@ -12,6 +12,23 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-platform-settings-generator"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/platform/settings-generator/docs.json",
+                "entities": [
+                    "SettingsGeneratorComponent",
+                    "SettingsGeneratorService",
+                    "SettingsGeneratorLayoutAccessorService",
+                    "SettingsGeneratorContentComponent",
+                    "SettingsGeneratorSectionComponent",
+                    "SettingsGeneratorSidebarLayoutComponent",
+                    "SettingsGeneratorSidebarIconComponent",
+                    "ThemeSelectorListComponent"
+                ]
+            },
+            "dependsOn": ["platform:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]
