@@ -3,12 +3,12 @@
         <fd-dialog-header [dir]="_dir">
             <ng-template fdkTemplate="header">
                 <ng-container *ngTemplateOutlet="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-container>
-                <ng-container *ngIf="!mobile">
-                    <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
-                </ng-container>
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body [dir]="_dir">
+            <ng-container *ngIf="!mobile">
+                <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
+            </ng-container>
             <div fd-scrollbar class="fdp-value-help-dialog__content-holder">
                 <ng-container *ngIf="mobile">
                     <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
@@ -121,17 +121,12 @@
 
 <ng-template #advancedSearchContent>
     <ng-container *ngIf="isSelectionTab">
-        <form
-            class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search"
-            aria-label="Selectid filters"
-            [id]="'advanced-search-' + id"
-        >
+        <div class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search" [id]="'advanced-search-' + id">
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
                 <div fdLayoutGridRow>
                     <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                         <fdp-search-field
                             [placeholder]="'platformVHD.searchButtonLabel' | fdTranslate"
-                            [ariaLabel]="'platformVHD.searchButtonLabel' | fdTranslate"
                             (searchSubmit)="search()"
                             (inputChange)="_mainSearch = $event.text"
                         ></fdp-search-field>
@@ -161,14 +156,6 @@
                                     ) | fdTranslate
                                 "
                                 (click)="toggleAdvancedSearch()"
-                                [attr.aria-label]="
-                                    (mobile
-                                        ? 'platformVHD.searchAdvancedSearchLabel'
-                                        : isOpenAdvanced
-                                        ? 'platformVHD.searchHideAdvancedSearchLabel'
-                                        : 'platformVHD.searchShowAdvancedSearchLabel'
-                                    ) | fdTranslate
-                                "
                             ></button>
                             <button
                                 fd-toolbar-item
@@ -184,7 +171,6 @@
                 </div>
             </fd-layout-grid>
             <div
-                ariaLabel="Selected Panel Content"
                 [id]="'advanced-search-content-' + id"
                 *ngIf="isOpenAdvanced && _hasAdvanced"
                 class="fdp-value-help-dialog__advanced-filters"
@@ -255,7 +241,7 @@
                     </ng-template>
                 </fd-busy-indicator>
             </div>
-        </form>
+        </div>
     </ng-container>
 </ng-template>
 
