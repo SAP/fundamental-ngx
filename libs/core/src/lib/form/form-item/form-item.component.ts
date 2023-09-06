@@ -9,8 +9,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { first } from 'rxjs';
-import { FORM_ITEM_CONTROL, FormItemControl } from './../form-item-control/form-item-control';
-import { FormLabelComponent } from './../form-label/form-label.component';
+import { FORM_ITEM_CONTROL, FormItemControl } from '../form-item-control/form-item-control';
+import { FormLabelComponent } from '../form-label/form-label.component';
 
 /**
  * Directive to be applied to the parent of a form control.

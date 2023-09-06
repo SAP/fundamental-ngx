@@ -6,7 +6,7 @@ import { By } from '@angular/platform-browser';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
-import { FdpFormGroupModule } from './../form-group/fdp-form.module';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { CheckboxComponent } from './checkbox.component';
 import { PlatformCheckboxModule } from './checkbox.module';
 

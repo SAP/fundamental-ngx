@@ -1,8 +1,8 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListModule } from '../list.module';
-import { ListNavigationItemComponent } from './../list-navigation-item/list-navigation-item.component';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { ListNavigationItemComponent } from '../list-navigation-item/list-navigation-item.component';
+import { ListModule } from '../list.module';
 
 @Component({
     template: `

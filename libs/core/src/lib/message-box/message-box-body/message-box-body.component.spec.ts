@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessageBoxBodyComponent } from './message-box-body.component';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { MessageBoxHost, MessageBoxConfig } from './../utils/message-box-config.class';
+import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
+import { MessageBoxBodyComponent } from './message-box-body.component';
 
 describe('MessageBoxBodyComponent', () => {
     let component: MessageBoxBodyComponent;

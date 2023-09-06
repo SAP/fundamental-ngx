@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableColumnResizeService } from '@fundamental-ngx/platform/table-helpers';
 
+import { TableColumnResizeServiceMock } from '../../mocks/table-column-resize-mock.service';
 import { PlatformTableColumnResizerComponent } from './table-column-resizer.component';
-import { TableColumnResizeServiceMock } from './../../mocks/table-column-resize-mock.service';
 
 describe('PlatformTableColumnResizerComponent', () => {
     let component: PlatformTableColumnResizerComponent;

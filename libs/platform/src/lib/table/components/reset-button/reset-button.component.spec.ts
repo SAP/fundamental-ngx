@@ -1,10 +1,10 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
-import { PlatformTableModule } from './../../table.module';
+import { PlatformTableModule } from '../../table.module';
 
-import { RESETTABLE_TOKEN, Resettable, ResetButtonComponent } from './reset-button.component';
+import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from './reset-button.component';
 
 class ResettableMock implements Resettable {
     readonly isResetAvailableSubject$ = new BehaviorSubject<boolean>(false);

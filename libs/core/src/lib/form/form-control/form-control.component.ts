@@ -18,7 +18,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
-import { FormItemControl, registerFormItemControl } from './../form-item-control/form-item-control';
+import { FormItemControl, registerFormItemControl } from '../form-item-control/form-item-control';
 
 /**
  * Directive intended for use on form controls.
