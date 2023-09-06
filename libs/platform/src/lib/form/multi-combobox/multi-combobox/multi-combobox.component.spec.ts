@@ -1,17 +1,17 @@
 import { A } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { DATA_PROVIDERS, DataProvider, isSelectableOptionItem } from '@fundamental-ngx/platform/shared';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
-import { MultiComboboxComponent } from './multi-combobox.component';
 import { MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
 import { PlatformMultiComboboxModule } from '../multi-combobox.module';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
+import { MultiComboboxComponent } from './multi-combobox.component';
 
 @Component({
     selector: 'fdp-multi-combobox-test',
@@ -71,7 +71,13 @@ describe('MultiComboboxComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule],
+            imports: [
+                FdpFormGroupModule,
+                FormModule,
+                ReactiveFormsModule,
+                PlatformMultiComboboxModule,
+                ContentDensityModule
+            ],
             declarations: [MultiComboboxStandardComponent],
             providers: [DynamicComponentService, RtlService, { provide: DATA_PROVIDERS, useClass: DataProvider as any }]
         }).compileComponents();

@@ -1,28 +1,28 @@
-import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
-import { Component, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import {
     ComponentFixture,
+    TestBed,
     discardPeriodicTasks,
     fakeAsync,
     flush,
     flushMicrotasks,
     inject,
-    TestBed,
     waitForAsync
 } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormModule } from '@fundamental-ngx/core/form';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { DATA_PROVIDERS, DataProvider, isOptionItem } from '@fundamental-ngx/platform/shared';
 
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { PlatformComboboxModule } from '../combobox.module';
 import { ComboboxComponent, ComboboxSelectionChangeEvent } from './combobox.component';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-combobox-test',
@@ -87,7 +87,8 @@ describe('ComboboxComponent default values', () => {
                 FormsModule,
                 ReactiveFormsModule,
                 CommonModule,
-                PlatformComboboxModule
+                PlatformComboboxModule,
+                ContentDensityModule
             ],
             declarations: [ComboboxStandardComponent],
             providers: [

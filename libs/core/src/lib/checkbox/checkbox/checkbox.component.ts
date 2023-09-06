@@ -1,3 +1,4 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
     AfterViewInit,
     Attribute,
@@ -6,25 +7,28 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
     HostBinding,
     Input,
     OnDestroy,
     Output,
     Renderer2,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import equal from 'fast-deep-equal';
 import { Subscription } from 'rxjs';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FD_CHECKBOX_COMPONENT } from '../tokens';
-import { NgClass, NgIf } from '@angular/common';
+import { FD_CHECKBOX_VALUES_DEFAULT, FdCheckboxValues } from './fd-checkbox-values.interface';
 
 let checkboxUniqueId = 0;
 
@@ -51,7 +55,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
     ],
     host: { '[attr.tabindex]': '-1' },
     standalone: true,
-    imports: [NgIf, FormsModule, NgClass]
+    imports: [NgIf, FormsModule, NgClass, ContentDensityModule]
 })
 export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
