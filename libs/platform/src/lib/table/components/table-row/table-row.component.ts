@@ -7,7 +7,6 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    inject,
     Input,
     NgZone,
     OnChanges,
@@ -17,21 +16,23 @@ import {
     QueryList,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-    destroyObservable,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
     KeyUtil,
-    RtlService
+    RtlService,
+    destroyObservable,
+    uuidv4
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
     EditableTableCell,
-    isTreeRowFirstCell,
     SelectionMode,
     SelectionModeValue,
     TableColumn,
@@ -40,11 +41,11 @@ import {
     TableRow,
     TableRowKeyboardDrag,
     TableRowService,
-    TableService
+    TableService,
+    isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -132,6 +133,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
 
     /** @hidden */
     _rtl = false;
+
+    /** @hidden */
+    _rowSelectionHelperTextId = `rowSelectionHelper-${uuidv4()}`;
 
     /** @hidden */
     readonly _isTreeRowFirstCell = isTreeRowFirstCell;
