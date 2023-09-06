@@ -40,7 +40,10 @@ import { takeUntil } from 'rxjs/operators';
             useExisting: TableHeaderRowComponent
         },
         DestroyedService
-    ]
+    ],
+    host: {
+        role: 'row'
+    }
 })
 export class TableHeaderRowComponent extends TableRowDirective implements OnInit {
     /** Table ID. */

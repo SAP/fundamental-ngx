@@ -31,7 +31,11 @@ import {
             useExisting: TablePoppingRowComponent
         },
         DestroyedService
-    ]
+    ],
+    host: {
+        role: 'row',
+        '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
+    }
 })
 export class TablePoppingRowComponent<T> extends TableRowDirective {
     /** Table Row. */
