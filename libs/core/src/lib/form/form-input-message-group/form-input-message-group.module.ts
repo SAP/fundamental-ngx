@@ -1,11 +1,12 @@
-import { CommonModule } from '@angular/common';
-import { FormInputMessageGroupComponent } from './form-input-message-group.component';
 import { NgModule } from '@angular/core';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { FormInputMessageGroupComponent } from './form-input-message-group.component';
 
+/**
+ * @deprecated
+ * Import `FormInputMessageGroupComponent` directly as a standalone component.
+ */
 @NgModule({
-    imports: [CommonModule, PopoverModule],
-    exports: [FormInputMessageGroupComponent],
-    declarations: [FormInputMessageGroupComponent]
+    imports: [FormInputMessageGroupComponent],
+    exports: [FormInputMessageGroupComponent]
 })
 export class FormInputMessageGroupModule {}

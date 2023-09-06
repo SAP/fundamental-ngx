@@ -10,14 +10,22 @@ import {
     Validators
 } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-input-form-group-example',
     templateUrl: './input-form-group-example.component.html',
     styleUrls: ['input-form-group-example.component.scss'],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormItemModule, FormLabelModule, FormControlModule, NgFor, ButtonModule]
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FormItemComponent,
+        FormLabelComponent,
+        FormControlModule,
+        NgFor,
+        ButtonModule
+    ]
 })
 export class InputFormGroupExampleComponent implements OnInit {
     myForm: FormGroup;

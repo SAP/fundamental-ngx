@@ -3,10 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { CheckboxComponent } from './checkbox.component';
-import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import { CheckboxComponent } from './checkbox.component';
 import { PlatformCheckboxModule } from './checkbox.module';
 
 @Component({
@@ -85,7 +86,14 @@ describe('Checkbox test Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, PlatformCheckboxModule],
+            imports: [
+                FdpFormGroupModule,
+                FormModule,
+                FormsModule,
+                ReactiveFormsModule,
+                PlatformCheckboxModule,
+                ContentDensityModule
+            ],
             declarations: [TestCheckboxComponent]
         }).compileComponents();
     }));

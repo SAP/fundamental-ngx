@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { MomentDatetimeModule } from '@fundamental-ngx/moment-adapter';
 import moment, { Moment } from 'moment';
@@ -20,7 +20,7 @@ import 'moment/locale/fr';
     providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
     standalone: true,
     imports: [
-        FormLabelModule,
+        FormLabelComponent,
         SegmentedButtonModule,
         FormsModule,
         ButtonModule,

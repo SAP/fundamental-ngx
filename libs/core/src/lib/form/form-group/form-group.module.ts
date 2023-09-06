@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormGroupComponent } from './form-group.component';
 
+/**
+ * @deprecated
+ * Import `FormGroupComponent` directly as a standalone component.
+ */
 @NgModule({
-    imports: [CommonModule],
-    exports: [FormGroupComponent],
-    declarations: [FormGroupComponent]
+    imports: [FormGroupComponent],
+    exports: [FormGroupComponent]
 })
 export class FormGroupModule {}

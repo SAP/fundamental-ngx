@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FieldSetModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FieldsetComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 
 @Component({
@@ -11,9 +11,9 @@ import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        FieldSetModule,
-        FormItemModule,
-        FormLabelModule,
+        FieldsetComponent,
+        FormItemComponent,
+        FormLabelComponent,
         MultiInputModule,
         JsonPipe
     ]

@@ -1,15 +1,14 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    HostBinding,
-    ViewEncapsulation,
     ElementRef,
+    HostBinding,
     Input,
     OnChanges,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Represents a form group element.
@@ -28,7 +27,8 @@ import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
     templateUrl: './form-group.component.html',
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./form-group.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class FormGroupComponent implements CssClassBuilder, OnChanges, OnInit {
     /** @hidden */

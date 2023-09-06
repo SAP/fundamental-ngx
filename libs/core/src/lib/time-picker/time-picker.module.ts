@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { I18nModule } from '@fundamental-ngx/i18n';
 
-import { TimePickerComponent } from './time-picker.component';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { FormMessageComponent } from '@fundamental-ngx/core/form';
+import { TimePickerComponent } from './time-picker.component';
 
 @NgModule({
     declarations: [TimePickerComponent],
@@ -19,7 +19,7 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         PopoverModule,
         InputGroupModule,
         TimeModule,
-        FormMessageModule,
+        FormMessageComponent,
         ContentDensityModule,
         I18nModule
     ],

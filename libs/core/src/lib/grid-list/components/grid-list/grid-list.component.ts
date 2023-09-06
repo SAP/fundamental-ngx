@@ -1,28 +1,27 @@
 import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
-    QueryList,
-    ViewEncapsulation,
+    EventEmitter,
     Input,
     OnChanges,
-    SimpleChanges,
-    ChangeDetectorRef,
-    EventEmitter,
-    Output,
-    AfterContentInit,
     OnDestroy,
-    ChangeDetectionStrategy
+    Output,
+    QueryList,
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, filter, Subscription } from 'rxjs';
+import { Nullable, RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { BehaviorSubject, Subscription, filter } from 'rxjs';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
-import { GridListItemComponent } from '../grid-list-item/grid-list-item.component';
 import {
-    GridListSelectionMode,
     GridListSelectionActions,
-    GridListSelectionEvent
-} from './../../models/grid-list-selection.models';
-import { RangeSelector } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+    GridListSelectionEvent,
+    GridListSelectionMode
+} from '../../models/grid-list-selection.models';
+import { GridListItemComponent } from '../grid-list-item/grid-list-item.component';
 import { GridList } from './grid-list-base.component';
 
 let gridListUniqueId = 0;

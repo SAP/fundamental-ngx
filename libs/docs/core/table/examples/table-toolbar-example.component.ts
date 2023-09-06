@@ -7,7 +7,7 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TableModule } from '@fundamental-ngx/core/table';
@@ -36,8 +36,8 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '
         CdkScrollable,
         ScrollbarDirective,
         ReactiveFormsModule,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule,
         BarModule
     ]

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { TableColumnResizableSide } from './../directives/table-cell-resizable.directive';
+import { TableColumnResizableSide } from '../directives/table-cell-resizable.directive';
 
 @Pipe({ name: 'columnResizableSide', standalone: true })
 export class ColumnResizableSidePipe implements PipeTransform {

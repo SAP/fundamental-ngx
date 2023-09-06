@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
@@ -35,8 +35,8 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         ScrollbarDirective,
         WizardModule,
         MessageStripComponent,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule,
         FormsModule,
         LayoutGridModule,

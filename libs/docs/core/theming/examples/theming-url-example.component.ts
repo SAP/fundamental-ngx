@@ -2,7 +2,7 @@ import { JsonPipe, NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@fundamental-ngx/core/theming';
 
 @Component({
@@ -18,7 +18,7 @@ import { CompleteThemeDefinition, THEMING_CONFIG_TOKEN, ThemingService } from '@
         }
     ],
     standalone: true,
-    imports: [NgFor, ButtonModule, FormLabelModule, JsonPipe]
+    imports: [NgFor, ButtonModule, FormLabelComponent, JsonPipe]
 })
 export class ThemingUrlExampleComponent {
     themes = this._themingService.getThemes();

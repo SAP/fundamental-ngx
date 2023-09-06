@@ -2,14 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { TimePickerComponent } from './time-picker.component';
 import { TimePickerModule } from './time-picker.module';
@@ -27,7 +27,7 @@ describe('TimePickerComponent', () => {
                 ButtonModule,
                 FdDatetimeModule,
                 TimeModule,
-                FormMessageModule,
+                FormMessageComponent,
                 TimePickerModule
             ],
             declarations: [TimePickerComponent]

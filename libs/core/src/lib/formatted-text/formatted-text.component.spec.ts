@@ -8,7 +8,7 @@ describe('FormattedTextComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FormattedTextComponent]
+            imports: [FormattedTextComponent]
         }).compileComponents();
         (HTMLIFrameElement.prototype as any).sandbox = 'allow-forms allow-scripts';
     });

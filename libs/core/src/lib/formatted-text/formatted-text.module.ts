@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { FormattedTextComponent } from './formatted-text.component';
 
+/**
+ * @deprecated
+ * Import `FormattedTextComponent` directly as a standalone component.
+ */
 @NgModule({
-    declarations: [FormattedTextComponent],
     exports: [FormattedTextComponent],
-    imports: [CommonModule]
+    imports: [FormattedTextComponent]
 })
 export class FormattedTextModule {}

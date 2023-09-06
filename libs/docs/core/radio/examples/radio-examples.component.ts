@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-    FieldSetModule,
-    FormGroupModule,
-    FormHeaderModule,
-    FormItemModule,
-    FormLegendModule
+    FieldsetComponent,
+    FormGroupComponent,
+    FormHeaderComponent,
+    FormItemComponent,
+    FormLegendDirective
 } from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 
@@ -14,11 +14,11 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
     templateUrl: './radio-example.component.html',
     standalone: true,
     imports: [
-        FormHeaderModule,
-        FieldSetModule,
-        FormLegendModule,
-        FormGroupModule,
-        FormItemModule,
+        FormHeaderComponent,
+        FieldsetComponent,
+        FormLegendDirective,
+        FormGroupComponent,
+        FormItemComponent,
         RadioModule,
         FormsModule
     ]

@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormModule } from '../form.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormLegendDirective } from './form-legend.directive';
 
 @Component({
-    template: ` <legend #directiveElement fd-form-legend>Test Text</legend> `
+    template: ` <legend #directiveElement fd-form-legend>Test Text</legend> `,
+    imports: [FormLegendDirective],
+    standalone: true
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -16,8 +18,7 @@ describe('FormLegendDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [FormModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

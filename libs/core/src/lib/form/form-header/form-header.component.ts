@@ -13,7 +13,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     template: `<span class="fd-form-header__text"><ng-content></ng-content></span>`,
     styleUrls: ['./form-header.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class FormHeaderComponent {
     /** @hidden */

@@ -4,11 +4,11 @@ import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModu
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
-    FieldSetModule,
+    FieldsetComponent,
     FormControlModule,
-    FormItemModule,
-    FormLabelModule,
-    FormLegendModule
+    FormItemComponent,
+    FormLabelComponent,
+    FormLegendDirective
 } from '@fundamental-ngx/core/form';
 import { Properties } from '../../models/schema.model';
 import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pipe';
@@ -25,12 +25,12 @@ import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pip
         NgIf,
         NgSwitch,
         NgSwitchCase,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule,
         CheckboxComponent,
-        FieldSetModule,
-        FormLegendModule,
+        FieldsetComponent,
+        FormLegendDirective,
         forwardRef(() => SchemaGroupComponent),
         ButtonModule,
         AsFormControlPipe,

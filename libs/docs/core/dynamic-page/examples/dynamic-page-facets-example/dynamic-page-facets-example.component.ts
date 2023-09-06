@@ -12,7 +12,7 @@ import {
     DynamicPageModule
 } from '@fundamental-ngx/core/dynamic-page';
 import { FacetModule } from '@fundamental-ngx/core/facets';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
@@ -63,7 +63,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ToolbarItemDirective,
         ContentDensityDirective,
         ToolbarSeparatorComponent,
-        FormLabelModule,
+        FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
         ObjectStatusModule,

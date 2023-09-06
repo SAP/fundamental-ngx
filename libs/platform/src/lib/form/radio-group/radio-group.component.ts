@@ -1,3 +1,5 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterContentChecked,
     AfterViewInit,
@@ -7,7 +9,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Host,
     HostListener,
     Inject,
@@ -19,29 +20,28 @@ import {
     Self,
     SkipSelf,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { Subject, merge } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { merge, Subject } from 'rxjs';
 
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import {
-    PlatformFormFieldControl,
     InLineLayoutCollectionBaseInput,
     PlatformFormField,
+    PlatformFormFieldControl,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService,
     SelectItem
 } from '@fundamental-ngx/platform/shared';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormGroupComponent, FormItemComponent } from '@fundamental-ngx/core/form';
 import { RadioButtonComponent } from './radio/radio.component';
-import { FormItemModule, FormGroupModule } from '@fundamental-ngx/core/form';
-import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
 
 /**
  * Radio group implementation based on the
@@ -59,7 +59,7 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => RadioGroupComponent), multi: true }],
     standalone: true,
-    imports: [FormGroupModule, NgIf, NgFor, FormItemModule, NgTemplateOutlet, RadioButtonComponent]
+    imports: [FormGroupComponent, NgIf, NgFor, FormItemComponent, NgTemplateOutlet, RadioButtonComponent]
 })
 export class RadioGroupComponent
     extends InLineLayoutCollectionBaseInput

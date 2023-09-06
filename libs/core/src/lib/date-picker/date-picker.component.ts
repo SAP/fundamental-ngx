@@ -1,3 +1,5 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,8 +8,6 @@ import {
     ComponentRef,
     ElementRef,
     EventEmitter,
-    forwardRef,
-    inject,
     Inject,
     Injector,
     Input,
@@ -15,18 +15,20 @@ import {
     OnInit,
     Optional,
     Output,
-    TemplateRef,
     QueryList,
     SimpleChanges,
+    TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef,
+    inject
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator, FormsModule } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
     CalendarComponent,
     CalendarType,
@@ -36,24 +38,24 @@ import {
     FdCalendarView,
     NavigationButtonDisableFunction
 } from '@fundamental-ngx/core/calendar';
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { PopoverService } from '@fundamental-ngx/core/popover';
-import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
-import { createMissingDateImplementationError } from './errors';
-import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import {
+    FormItemControl,
+    FormMessageComponent,
+    PopoverFormMessageService,
+    registerFormItemControl
+} from '@fundamental-ngx/core/form';
+import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from './tokens';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject, Subscription } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { DatePickerMobileComponent } from './date-picker-mobile/date-picker-mobile.component';
 import { DatePicker } from './date-picker.model';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { NgTemplateOutlet, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { createMissingDateImplementationError } from './errors';
+import { FD_DATE_PICKER_COMPONENT, FD_DATE_PICKER_MOBILE_CONFIG } from './tokens';
 
 let datePickerCounter = 0;
 
@@ -103,7 +105,7 @@ let datePickerCounter = 0;
         NgTemplateOutlet,
         PopoverModule,
         NgIf,
-        FormMessageModule,
+        FormMessageComponent,
         InputGroupModule,
         FormsModule,
         CalendarComponent,

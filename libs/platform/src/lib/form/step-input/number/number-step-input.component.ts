@@ -1,3 +1,4 @@
+import { NgIf, formatNumber } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -13,24 +14,23 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import { formatNumber, NgIf } from '@angular/common';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { OnlyDigitsDirective, RtlService } from '@fundamental-ngx/cdk/utils';
-import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
-import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
-import { StepInputConfig } from '../step-input.config';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
     ContentDensityModule,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { StepInputIncrementDirective } from '../step-input-increment.directive';
+import { FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
+import { StepInputChangeEvent, StepInputComponent } from '../base.step-input';
 import { StepInputControlDirective } from '../step-input-control.directive';
 import { StepInputDecrementDirective } from '../step-input-decrement.directive';
-import { FormInputMessageGroupModule, FormMessageModule } from '@fundamental-ngx/core/form';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { StepInputIncrementDirective } from '../step-input-increment.directive';
+import { StepInputConfig } from '../step-input.config';
 
 /**
  * Fundamental number-step-input component
@@ -58,14 +58,14 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
     ],
     standalone: true,
     imports: [
-        FormInputMessageGroupModule,
+        FormInputMessageGroupComponent,
         ButtonModule,
         StepInputDecrementDirective,
         StepInputControlDirective,
         OnlyDigitsDirective,
         StepInputIncrementDirective,
         NgIf,
-        FormMessageModule,
+        FormMessageComponent,
         ContentDensityModule
     ]
 })

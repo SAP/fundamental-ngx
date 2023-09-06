@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
@@ -28,8 +28,8 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
         InitialFocusDirective,
         LinkComponent,
         RouterLink,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         FormControlModule
     ]
 })

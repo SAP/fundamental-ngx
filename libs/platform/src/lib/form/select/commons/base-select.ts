@@ -1,3 +1,5 @@
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { ENTER } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -18,15 +20,11 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { ENTER } from '@angular/cdk/keycodes';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
 
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { ListComponent } from '@fundamental-ngx/core/list';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
     ContentDensityService,
     FocusEscapeDirection,
@@ -34,18 +32,20 @@ import {
     TemplateDirective,
     warnOnce
 } from '@fundamental-ngx/cdk/utils';
+import { ListComponent } from '@fundamental-ngx/core/list';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import {
     CollectionBaseInput,
-    PlatformFormFieldControl,
     isJsObject,
     isOptionItem,
     isString,
-    PlatformFormField
+    PlatformFormField,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
-import { SelectConfig } from '../select.config';
 import { TextAlignment } from '../../combobox';
-import { SelectOptionItem } from './../models/select.models';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { SelectOptionItem } from '../models/select.models';
+import { SelectConfig } from '../select.config';
 
 export type FdpSelectData<T> = SelectOptionItem[] | Observable<T[]> | T[];
 

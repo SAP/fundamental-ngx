@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import 'moment/locale/bg';
 import 'moment/locale/de';
@@ -37,7 +37,7 @@ import 'moment/locale/zh-cn';
         </fd-segmented-button>
         <fd-calendar [(ngModel)]="date"></fd-calendar>`,
     standalone: true,
-    imports: [FormLabelModule, SegmentedButtonModule, FormsModule, ButtonModule, CalendarComponent, FdDatetimeModule]
+    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonModule, CalendarComponent, FdDatetimeModule]
 })
 export class CalendarI18nMomentExampleComponent {
     date = moment();

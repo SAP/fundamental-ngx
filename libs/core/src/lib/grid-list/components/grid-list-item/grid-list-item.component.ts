@@ -1,3 +1,4 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -15,18 +16,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
-import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
-import { GridListSelectionMode, GridListSelectionActions } from '../../models/grid-list-selection.models';
+import { GridListSelectionActions, GridListSelectionMode } from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
-import { GridList } from './../grid-list/grid-list-base.component';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
+import { GridList } from '../grid-list/grid-list-base.component';
 
 let gridListItemUniqueId = 0;
 

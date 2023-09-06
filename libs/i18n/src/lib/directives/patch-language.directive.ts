@@ -1,10 +1,10 @@
 import { Directive, Inject, Input, OnDestroy, Self, SkipSelf } from '@angular/core';
 import { cloneDeep, merge } from 'lodash-es';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
 import { FdLanguage, FdLanguagePatch } from '../models';
-import { FD_LANGUAGE } from './../utils/tokens';
+import { FD_LANGUAGE } from '../utils/tokens';
 
 @Directive({
     selector: '[fdPatchLanguage]',

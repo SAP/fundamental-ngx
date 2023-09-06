@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,9 +9,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { InlineHelpFormPlacement } from '../inline-help-placement.type';
-import { TriggerConfig } from '@fundamental-ngx/core/popover';
 
 let formLabelIdCount = 0;
 
@@ -28,7 +32,9 @@ let formLabelIdCount = 0;
     templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [LinkComponent, NgIf, IconModule, InlineHelpModule, NgTemplateOutlet]
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required. */

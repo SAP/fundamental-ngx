@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
-import { NotificationGroupBaseDirective } from './../notification-utils/notification-group-base';
+import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
 
 @Component({
     selector: 'fd-notification-body',

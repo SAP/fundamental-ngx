@@ -2,8 +2,8 @@ import { Component, ContentChildren, QueryList, ViewChild } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 
-import { whenStable } from '@fundamental-ngx/core/tests';
 import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/cdk/utils';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { TokenComponent } from './token.component';
 import { TokenModule } from './token.module';
 import { TokenizerComponent } from './tokenizer.component';
@@ -35,8 +35,8 @@ describe('TokenizerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TokenModule],
-            declarations: [HostComponent, FormControlComponent],
+            imports: [TokenModule, FormControlComponent],
+            declarations: [HostComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

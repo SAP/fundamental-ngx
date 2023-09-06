@@ -1,16 +1,16 @@
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChildren, QueryList } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from '@fundamental-ngx/core/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { FdpFormGroupModule } from './../form-group/fdp-form.module';
-import { CheckboxGroupComponent } from './checkbox-group.component';
-import { PlatformCheckboxGroupModule } from './checkbox-group.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxModule } from '../checkbox/checkbox.module';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
+import { FdpFormGroupModule } from '../form-group/fdp-form.module';
+import { CheckboxGroupComponent } from './checkbox-group.component';
+import { PlatformCheckboxGroupModule } from './checkbox-group.module';
 
 @Component({
     selector: 'fdp-cbg-reactive-test',

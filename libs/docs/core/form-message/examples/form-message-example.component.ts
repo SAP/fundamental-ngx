@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
     FormControlModule,
-    FormInputMessageGroupModule,
-    FormItemModule,
-    FormLabelModule,
-    FormMessageModule
+    FormInputMessageGroupComponent,
+    FormItemComponent,
+    FormLabelComponent,
+    FormMessageComponent
 } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
@@ -22,11 +22,11 @@ import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
     ],
     standalone: true,
     imports: [
-        FormItemModule,
-        FormLabelModule,
-        FormInputMessageGroupModule,
+        FormItemComponent,
+        FormLabelComponent,
+        FormInputMessageGroupComponent,
         FormControlModule,
-        FormMessageModule,
+        FormMessageComponent,
         InputGroupModule,
         MultiInputModule,
         FormsModule
