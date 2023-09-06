@@ -1,3 +1,9 @@
+import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { Direction } from '@angular/cdk/bidi';
+import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -6,8 +12,8 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
-    Injector,
     Inject,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -24,32 +30,25 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
-import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Direction } from '@angular/cdk/bidi';
 
 import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { DynamicComponentService, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { SearchComponent } from '@fundamental-ngx/core/shared';
+import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import equal from 'fast-deep-equal';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldMobileInterface
 } from './search-field-mobile/search-field-mobile.interface';
-import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
-import { SearchComponent } from '@fundamental-ngx/core/shared';
-import equal from 'fast-deep-equal';
+import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
     text: string;
@@ -70,8 +69,7 @@ export interface ValueLabelItem {
 @Directive({
     selector: '[fdpSearchFieldSuggestion]',
     host: {
-        tabindex: '-1',
-        role: 'list-item'
+        tabindex: '-1'
     }
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
