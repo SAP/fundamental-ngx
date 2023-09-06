@@ -12,6 +12,27 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-quick-view"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/quick-view/docs.json",
+                "entities": [
+                    "QuickViewComponent",
+                    "QuickViewTitleComponent",
+                    "QuickViewSubheaderComponent",
+                    "QuickViewSubheaderTitleComponent",
+                    "QuickViewSubheaderSubtitleComponent",
+                    "QuickViewGroupComponent",
+                    "QuickViewGroupTitleComponent",
+                    "QuickViewGroupItemComponent",
+                    "QuickViewGroupItemLabelComponent",
+                    "QuickViewGroupItemContentComponent",
+                    "QuickViewGroupItemContentElementDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

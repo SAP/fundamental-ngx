@@ -12,6 +12,28 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-side-navigation"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/side-navigation/docs.json",
+                "entities": [
+                    "SideNavigationComponent",
+                    "SideNavigationModel",
+                    "SideNavigationUtilityDirective",
+                    "SideNavigationMainComponent",
+                    "NestedListDirective",
+                    "NestedListPopoverComponent",
+                    "NestedListHeaderDirective",
+                    "NestedListIconComponent",
+                    "NestedListItem",
+                    "NestedListModel",
+                    "NestedListLink",
+                    "NestedItemService"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

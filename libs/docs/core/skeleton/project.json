@@ -12,6 +12,15 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-skeleton"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/skeleton/docs.json",
+                "entities": ["SkeletonComponent"]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

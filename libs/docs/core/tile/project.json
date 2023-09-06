@@ -12,6 +12,49 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-tile"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/tile/docs.json",
+                "entities": [
+                    "TileComponent",
+                    "TileHeaderDirective",
+                    "TileContentDirective",
+                    "TileFooterDirective",
+                    "TileTitleDirective",
+                    "TileSubtitleDirective",
+                    "TileSectionDirective",
+                    "TileRefreshDirective",
+                    "TileFooterTextDirective",
+                    "TileHeaderContentDirective",
+                    "TileProfileImgDirective",
+                    "TileLogoDirective",
+                    "TileContentBylineDirective",
+                    "TileContentTextDirective",
+                    "TileBackgroundImgDirective",
+                    "TileToggleDirective",
+                    "TileContainerDirective",
+                    "TilePageIndicatorDirective",
+                    "TileDotDirective",
+                    "TileActionCloseDirective",
+                    "TileActionIndicatorDirective",
+                    "TileTitleContainerDirective",
+                    "TileActionContainerDirective",
+                    "TileSlideContainerDirective",
+                    "NumericContentDirective",
+                    "NumericContentKpiContainerDirective",
+                    "NumericContentKpiDirective",
+                    "NumericContentLaunchIconContainerDirective",
+                    "NumericContentLaunchIconDirective",
+                    "NumericContentScaleArrowDirective",
+                    "NumericContentScaleContainerDirective",
+                    "NumericContentScaleDirective",
+                    "NumericContentScaleTextDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

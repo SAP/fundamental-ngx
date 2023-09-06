@@ -19,6 +19,10 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "compodoc": {
+            "command": "npx compodoc libs/cdk --output dist/compodoc-outputs/cdk",
+            "outputs": ["{workspaceRoot}/dist/compodoc-outputs/cdk/documentation.json"]
+        },
         "build-umbrella": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/cdk"],

@@ -12,6 +12,23 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-popover"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/popover/docs.json",
+                "entities": [
+                    "PopoverComponent",
+                    "PopoverBodyComponent",
+                    "PopoverControlComponent",
+                    "PopoverDropdownComponent",
+                    "PopoverBodyHeaderDirective",
+                    "PopoverBodySubheaderDirective",
+                    "PopoverBodyFooterDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

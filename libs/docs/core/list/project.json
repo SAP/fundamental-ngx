@@ -12,6 +12,28 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-list"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/list/docs.json",
+                "entities": [
+                    "ListComponent",
+                    "ListItemDirective",
+                    "ListLabelDirective",
+                    "ListTitleDirective",
+                    "ListSecondaryDirective",
+                    "ListGroupHeaderDirective",
+                    "ListIconDirective",
+                    "ListFooterDirective",
+                    "ListMessageDirective",
+                    "ListNavigationItemArrowDirective",
+                    "ListNavigationItemTextDirective",
+                    "ListNavigationItemComponent"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

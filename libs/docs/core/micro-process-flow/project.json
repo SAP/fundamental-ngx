@@ -12,6 +12,19 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-micro-process-flow"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/micro-process-flow/docs.json",
+                "entities": [
+                    "MicroProcessFlowComponent",
+                    "MicroProcessFlowItemComponent",
+                    "MicroProcessFlowIconComponent"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

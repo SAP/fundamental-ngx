@@ -12,6 +12,25 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-table"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/table/docs.json",
+                "entities": [
+                    "TableBodyDirective",
+                    "TableCellDirective",
+                    "TableHeaderDirective",
+                    "TableRowDirective",
+                    "TableComponent",
+                    "TableResponsiveWrapperDirective",
+                    "TableWrapperComponent",
+                    "TableFixedDirective",
+                    "ColumnSortableDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -12,6 +12,24 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-calendar"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/calendar/docs.json",
+                "entities": [
+                    "CalendarComponent",
+                    "CalendarDayViewComponent",
+                    "CalendarMonthViewComponent",
+                    "CalendarYearViewComponent",
+                    "CalendarHeaderViewComponent",
+                    "CalendarI18nLabels",
+                    "FdDate",
+                    "FdDatetimeAdapter"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

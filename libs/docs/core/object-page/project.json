@@ -12,6 +12,24 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-object-page"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/object-page/docs.json",
+                "entities": [
+                    "DynamicPageComponent",
+                    "DynamicPageSubheaderComponent",
+                    "DynamicPageHeaderComponent",
+                    "DynamicPageTitleContentComponent",
+                    "DynamicPageLayoutActionsComponent",
+                    "DynamicPageGlobalActionsComponent",
+                    "DynamicPageFooterComponent",
+                    "DynamicPageContentComponent"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

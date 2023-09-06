@@ -22,6 +22,10 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "compodoc": {
+            "command": "npx compodoc libs/moment-adapter --output dist/compodoc-outputs/moment-adapter",
+            "outputs": ["{workspaceRoot}/dist/compodoc-outputs/moment-adapter/documentation.json"]
+        },
         "build": {
             "executor": "@nx/angular:package",
             "options": {

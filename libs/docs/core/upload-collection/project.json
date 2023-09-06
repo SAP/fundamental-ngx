@@ -12,6 +12,26 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-upload-collection"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/upload-collection/docs.json",
+                "entities": [
+                    "UploadCollectionComponent",
+                    "UploadCollectionButtonGroupComponent",
+                    "UploadCollectionFormItemComponent",
+                    "UploadCollectionItemDirective",
+                    "UploadCollectionThumbnailDirective",
+                    "UploadCollectionTitleDirective",
+                    "UploadCollectionDescriptionDirective",
+                    "UploadCollectionTextSeparatorDirective",
+                    "UploadCollectionStatusGroupDirective",
+                    "UploadCollectionTitleContainerDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

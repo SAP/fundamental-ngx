@@ -18,6 +18,10 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "compodoc": {
+            "command": "npx compodoc libs/datetime-adapter --output dist/compodoc-outputs/datetime-adapter",
+            "outputs": ["{workspaceRoot}/dist/compodoc-outputs/datetime-adapter/documentation.json"]
+        },
         "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/datetime-adapter"],

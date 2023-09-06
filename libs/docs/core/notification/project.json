@@ -12,6 +12,36 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-notification"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/notification/docs.json",
+                "entities": [
+                    "NotificationTitleDirective",
+                    "NotificationIndicatorDirective",
+                    "NotificationParagraphDirective",
+                    "NotificationFooterContentDirective",
+                    "NotificationSeparatorDirective",
+                    "NotificationLimitTitleDirective",
+                    "NotificationLimitDescriptionDirective",
+                    "NotificationActionsComponent",
+                    "NotificationContentComponent",
+                    "NotificationLimitComponent",
+                    "NotificationGroupHeaderComponent",
+                    "NotificationGroupComponent",
+                    "NotificationGroupListComponent",
+                    "NotificationComponent",
+                    "NotificationHeaderComponent",
+                    "NotificationBodyComponent",
+                    "NotificationFooterComponent",
+                    "NotificationContainer",
+                    "NotificationConfig",
+                    "NotificationRef"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

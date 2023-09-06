@@ -12,6 +12,30 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-card"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/card/docs.json",
+                "entities": [
+                    "CardComponent",
+                    "CardHeaderComponent",
+                    "CardTitleDirective",
+                    "CardSubtitleDirective",
+                    "CardSecondSubtitleDirective",
+                    "CardContentComponent",
+                    "CardLoaderComponent",
+                    "CardKpiHeaderComponent",
+                    "CardKpiValueDirective",
+                    "CardKpiScaleIconDirective",
+                    "CardKpiScaleTextDirective",
+                    "CardKpiAnalyticsDirective",
+                    "CardKpiAnalyticsLabelDirective",
+                    "CardKpiAnalyticsContentDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

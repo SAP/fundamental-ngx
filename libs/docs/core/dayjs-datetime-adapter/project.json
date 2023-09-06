@@ -12,6 +12,15 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-dayjs-datetime-adapter"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/dayjs-datetime-adapter/docs.json",
+                "entities": ["DayjsDatetimeAdapter"]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc", "datetime-adapter:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

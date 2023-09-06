@@ -12,6 +12,25 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-radio"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/radio/docs.json",
+                "entities": [
+                    "FormControlComponent",
+                    "FormGroupComponent",
+                    "FormItemComponent",
+                    "FormLabelComponent",
+                    "FormHeaderComponent",
+                    "FormLegendDirective",
+                    "FormMessageComponent",
+                    "FormSetDirective",
+                    "FormInputMessageGroupComponent"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

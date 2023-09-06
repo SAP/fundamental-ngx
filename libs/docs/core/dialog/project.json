@@ -12,6 +12,27 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-dialog"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/dialog/docs.json",
+                "entities": [
+                    "DialogService",
+                    "DialogContainerComponent",
+                    "DialogTitleDirective",
+                    "DialogCloseButtonDirective",
+                    "DialogDecisiveButtonDirective",
+                    "DialogConfig",
+                    "DialogPosition",
+                    "DialogBodyComponent",
+                    "DialogHeaderComponent",
+                    "DialogFooterComponent",
+                    "DialogRef"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

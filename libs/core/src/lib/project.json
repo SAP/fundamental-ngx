@@ -23,6 +23,10 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "compodoc": {
+            "command": "npx compodoc libs/core --output dist/compodoc-outputs/core",
+            "outputs": ["{workspaceRoot}/dist/compodoc-outputs/core/documentation.json"]
+        },
         "build-umbrella": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/core"],

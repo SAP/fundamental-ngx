@@ -19,6 +19,10 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "compodoc": {
+            "command": "npx compodoc libs/cx --output dist/compodoc-outputs/cx",
+            "outputs": ["{workspaceRoot}/dist/compodoc-outputs/cx/documentation.json"]
+        },
         "build-umbrella": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/cx"],

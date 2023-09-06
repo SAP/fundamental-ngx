@@ -12,6 +12,23 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-shellbar"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/shellbar/docs.json",
+                "entities": [
+                    "ProductMenuComponent",
+                    "ShellbarComponent",
+                    "ShellbarActionComponent",
+                    "ShellbarActionsComponent",
+                    "ShellbarLogoComponent",
+                    "ShellbarSubtitleComponent",
+                    "ShellbarTitleComponent"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

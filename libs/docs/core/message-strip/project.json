@@ -12,6 +12,20 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-message-strip"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/message-strip/docs.json",
+                "entities": [
+                    "MessageStripComponent",
+                    "AutoDismissMessageStripDirective",
+                    "MessageStripAlertService",
+                    "MessageStripAlertRef"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

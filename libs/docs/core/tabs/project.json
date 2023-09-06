@@ -12,6 +12,33 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-tabs"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/tabs/docs.json",
+                "entities": [
+                    "TabListComponent",
+                    "TabPanelComponent",
+                    "TabTitleDirective",
+                    "TabNavComponent",
+                    "TabLinkDirective",
+                    "TabItemDirective",
+                    "TabTagDirective",
+                    "TabIconComponent",
+                    "TabCountDirective",
+                    "TabLabelDirective",
+                    "TabProcessDirective",
+                    "TabHeaderDirective",
+                    "TabCounterHeaderDirective",
+                    "TabProcessIconDirective",
+                    "TabItemExpandComponent",
+                    "TabSeparator",
+                    "TabInfo"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

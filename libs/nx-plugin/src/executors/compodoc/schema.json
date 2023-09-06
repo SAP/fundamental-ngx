@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "version": 2,
+    "title": "Compodoc",
+    "description": "Compile typedocs using Compodoc",
+    "type": "object",
+    "properties": {
+        "outputPath": {
+            "type": "string",
+            "description": "Path to the output directory"
+        },
+        "entities": {
+            "type": "array",
+            "description": "List of entities to document",
+            "items": {
+                "type": "string"
+            }
+        },
+        "libraryPath": {
+            "type": "string",
+            "description": "Path to the library directory"
+        }
+    },
+    "required": []
+}

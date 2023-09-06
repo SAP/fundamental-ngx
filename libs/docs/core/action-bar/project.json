@@ -13,13 +13,21 @@
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-action-bar"]
         },
-        "compodoc": {
+        "extract-compodoc": {
             "executor": "@fundamental-ngx/nx-plugin:compodoc",
             "options": {
-                "outputPath": "libs/docs/core/action-bar/docs",
-                "entities": ["ActionBarComponent", "ActionButtonGroupComponent"],
-                "libraryPath": "libs/core/src/lib/action-bar"
-            }
+                "outputPath": "libs/docs/core/action-bar/docs.json",
+                "entities": [
+                    "ActionBarComponent",
+                    "ActionBarTitleComponent",
+                    "ActionBarActionsDirective",
+                    "ActionBarBackDirective",
+                    "ActionBarDescriptionDirective",
+                    "ActionBarHeaderDirective",
+                    "ActionBarMobileDirective"
+                ]
+            },
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

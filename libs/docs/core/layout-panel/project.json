@@ -12,6 +12,25 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-layout-panel"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/layout-panel/docs.json",
+                "entities": [
+                    "LayoutPanelComponent",
+                    "LayoutPanelActionsComponent",
+                    "LayoutPanelBodyComponent",
+                    "LayoutPanelDescriptionComponent",
+                    "LayoutPanelFiltersComponent",
+                    "LayoutPanelFooterComponent",
+                    "LayoutPanelHeaderComponent",
+                    "LayoutPanelHeadComponent",
+                    "LayoutPanelTitleDirective"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

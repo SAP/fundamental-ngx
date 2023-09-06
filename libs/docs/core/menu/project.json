@@ -12,6 +12,24 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-menu"]
+        },
+        "extract-compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/menu/docs.json",
+                "entities": [
+                    "MenuAddonDirective",
+                    "MenuComponent",
+                    "MenuGroupComponent",
+                    "MenuItemDirective",
+                    "MenuItemAddonDirective",
+                    "MenuListDirective",
+                    "MenuTitleDirective",
+                    "MenuKeyboardService"
+                ]
+            },
+            "outputs": ["{options}.outputPath"],
+            "dependsOn": ["core:compodoc"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -10,6 +10,7 @@
                 "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
                 "cacheableOperations": [
                     "generate-typedoc",
+                    "compodoc",
                     "compile-typedoc",
                     "build",
                     "build-umbrella",

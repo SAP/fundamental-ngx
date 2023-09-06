@@ -1,0 +1,16 @@
+{
+    "$schema": "./node_modules/@compodoc/compodoc/src/config/schema.json",
+    "tsconfig": "./tsconfig.doc.json",
+    "output": "compodoc-output",
+    "exportFormat": "json",
+    "disableDomTree": true,
+    "disableTemplateTab": true,
+    "disableStyleTab": true,
+    "disableGraph": true,
+    "disableCoverage": true,
+    "disablePrivate": true,
+    "disableProtected": true,
+    "disableInternal": true,
+    "disableLifeCycleHooks": true,
+    "disableSourceCode": true
+}
