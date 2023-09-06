@@ -7,6 +7,25 @@
     [status]="row.value[semanticHighlighting]"
 ></td>
 
+<!-- hidden text for screenreader -->
+<ng-template #selectionScreenReaderText>
+    <span
+        aria-hidden="true"
+        [attr.id]="_rowSelectionHelperTextId"
+        [ngStyle]="{
+            position: 'absolute !important',
+            height: '1px',
+            width: '1px',
+            overflow: 'hidden',
+            clip: 'rect(1px, 1px, 1px, 1px)',
+            color: 'transparent',
+            display: 'block'
+        }"
+    >
+        {{ (row.checked ? 'platformTable.deselectSingleRow' : 'platformTable.selectSingleRow') | fdTranslate }}
+    </span>
+</ng-template>
+
 <!-- Row Selection Cell -->
 <ng-container [ngSwitch]="selectionMode">
     <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
@@ -24,28 +43,16 @@
                     | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
             "
             [attr.aria-selected]="row.checked"
+            [attr.aria-labelledby]="_rowSelectionHelperTextId"
+            [attr.title]="
+                (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
+                    | fdTranslate
+            "
             (click)="_toggleSingleSelectableRow()"
             (keydown.enter)="_toggleSingleSelectableRow()"
             (keydown.space)="_toggleSingleSelectableRow()"
         >
-            <!-- hidden text for screenreader -->
-            <span
-                style="
-                    position: absolute !important;
-                    height: 1px;
-                    width: 1px;
-                    overflow: hidden;
-                    clip: rect(1px, 1px, 1px, 1px);
-                    color: transparent;
-                "
-            >
-                <ng-container *ngIf="row.checked">
-                    {{ 'platformTable.deselectSingleRow' | fdTranslate }}
-                </ng-container>
-                <ng-container *ngIf="!row.checked">
-                    {{ 'platformTable.selectSingleRow' | fdTranslate }}
-                </ng-container>
-            </span>
+            <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
         </td>
     </ng-container>
 
@@ -59,12 +66,18 @@
             [focusable]="true"
             (keydown.enter)="_toggleMultiSelectRow(row, $event)"
             (keydown.space)="_toggleMultiSelectRow(row, $event)"
+            [attr.aria-labelledby]="_rowSelectionHelperTextId"
+            [attr.title]="
+                (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
+                    | fdTranslate
+            "
             [style]="
                 _contentDensityObserver
                     | async
                     | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
             "
         >
+            <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
             <fd-checkbox
                 tabIndexValue="-1"
                 labelClass="fd-table__checkbox-label"
