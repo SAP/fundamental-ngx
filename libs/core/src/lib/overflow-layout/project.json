@@ -9,7 +9,8 @@
             "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/core/overflow-layout"],
             "options": {
-                "project": "libs/core/src/lib/overflow-layout/ng-package.json"
+                "project": "libs/core/src/lib/overflow-layout/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": true
             },
             "configurations": {
                 "production": {

@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-multi-input",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/multi-input",
     "projectType": "library",
     "prefix": "fdp-doc",

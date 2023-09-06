@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-info-label",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/info-label",
     "projectType": "library",
     "prefix": "fdp-doc",

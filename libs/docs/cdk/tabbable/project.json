@@ -1,5 +1,6 @@
 {
     "name": "docs-cdk-tabbable",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/cdk/tabbable",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "e2eFiles": ["libs/docs/cdk/tabbable/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-cdk-tabbable"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-cdk-tabbable"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

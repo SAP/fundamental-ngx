@@ -1,5 +1,6 @@
 {
     "name": "docs-core-generic-tag",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/generic-tag",
     "projectType": "library",
     "prefix": "fundamental-ngx",

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-action-bar",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/action-bar",
     "projectType": "library",
     "prefix": "fundamental-ngx",
@@ -11,6 +12,14 @@
                 "devServerTarget": "docs:serve:e2e"
             },
             "outputs": ["{workspaceRoot}/allure-results/docs-core-action-bar"]
+        },
+        "compodoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compodoc",
+            "options": {
+                "outputPath": "libs/docs/core/action-bar/docs",
+                "entities": ["ActionBarComponent", "ActionButtonGroupComponent"],
+                "libraryPath": "libs/core/src/lib/action-bar"
+            }
         }
     },
     "tags": ["type:lib", "scope:docs"]

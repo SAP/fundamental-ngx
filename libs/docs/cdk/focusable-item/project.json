@@ -1,5 +1,6 @@
 {
     "name": "docs-cdk-focusable-item",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/cdk/focusable-item",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "e2eFiles": ["libs/docs/cdk/focusable-item/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-cdk-focusable-item"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-cdk-focusable-item"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

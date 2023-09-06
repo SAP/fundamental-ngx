@@ -9,7 +9,8 @@
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/platform/variant-management"],
             "options": {
-                "project": "libs/platform/src/lib/variant-management/ng-package.json"
+                "project": "libs/platform/src/lib/variant-management/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": true
             },
             "configurations": {
                 "production": {

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-object-marker",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/object-marker",
     "projectType": "library",
     "prefix": "fundamental-ngx",
