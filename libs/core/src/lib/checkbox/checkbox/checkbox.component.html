@@ -35,17 +35,21 @@
     (click)="_onLabelClick($event)"
 >
     <span class="fd-checkbox__checkmark" aria-hidden="true"></span>
-    <div class="fd-checkbox__label-container" *ngIf="label">
+    <div class="fd-checkbox__label-container" *ngIf="label || _projectedContent">
         <ng-container>
-            <span class="fd-checkbox__text">
+            <span class="fd-checkbox__text" *ngIf="label">
                 {{ label }}
             </span>
         </ng-container>
 
         <ng-container *ngIf="!label">
             <span class="fd-checkbox__text">
-                <ng-content></ng-content>
+                <ng-template cdkPortalOutlet></ng-template>
             </span>
         </ng-container>
     </div>
 </label>
+
+<span [attr.hidden]="!_projectedContent ? true : null" #domPortal>
+    <ng-content></ng-content>
+</span>

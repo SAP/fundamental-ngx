@@ -1,3 +1,4 @@
+import { CdkPortalOutlet, DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
 import { NgClass, NgIf } from '@angular/common';
 import {
     AfterViewInit,
@@ -55,7 +56,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
     ],
     host: { '[attr.tabindex]': '-1' },
     standalone: true,
-    imports: [NgIf, FormsModule, NgClass, ContentDensityModule]
+    imports: [NgIf, FormsModule, NgClass, ContentDensityModule, PortalModule]
 })
 export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
@@ -138,9 +139,6 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     @Input()
     displayOnly = false;
 
-    /** @hidden */
-    private _subscriptions = new Subscription();
-
     /** Sets values returned by control. */
     @Input()
     set values(checkboxValues: FdCheckboxValues) {
@@ -167,17 +165,24 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     /** Emits event on focus change */
     @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    /** @hidden values returned by control. */
-    private _values: FdCheckboxValues = { ...FD_CHECKBOX_VALUES_DEFAULT };
-    /** Stores current checkbox value. */
-    public checkboxValue: any;
-    /** Stores current checkbox state. */
-    public checkboxState: FdCheckboxTypes;
+    /** @hidden */
+    @ViewChild('domPortal')
+    private readonly _domPortalContent: ElementRef<HTMLElement>;
 
-    /** @hidden Reference to callback provided by FormControl.*/
-    public onTouched = (): void => {};
-    /** @hidden Reference to callback provided by FormControl.*/
-    public onValueChange: (value: any) => void = () => {};
+    /** @hidden */
+    @ViewChild(CdkPortalOutlet, { static: false })
+    private readonly _portalOutlet: CdkPortalOutlet;
+
+    /** @hidden */
+    _projectedDomPortal: Portal<any>;
+
+    /** Stores current checkbox value. */
+    checkboxValue: any;
+    /** Stores current checkbox state. */
+    checkboxState: FdCheckboxTypes;
+
+    /** @hidden */
+    _projectedContent = false;
 
     /** @hidden Used to define if control is in 'indeterminate' state.*/
     get isIndeterminate(): boolean {
@@ -190,6 +195,15 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     }
 
     /** @hidden */
+    private _subscriptions = new Subscription();
+
+    /** @hidden values returned by control. */
+    private _values: FdCheckboxValues = { ...FD_CHECKBOX_VALUES_DEFAULT };
+
+    /** @hidden */
+    _domPortal: DomPortal<HTMLElement>;
+
+    /** @hidden */
     constructor(
         public elementRef: ElementRef<Element>,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
@@ -199,6 +213,11 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     ) {
         this.tabIndexValue = tabIndexValue;
     }
+
+    /** @hidden Reference to callback provided by FormControl.*/
+    public onTouched = (): void => {};
+    /** @hidden Reference to callback provided by FormControl.*/
+    public onValueChange: (value: any) => void = () => {};
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -210,6 +229,11 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
                 elementRef: this.labelElement
             }
         );
+
+        this._domPortal = new DomPortal(this._domPortalContent);
+        this._projectedContent = !!this._domPortal.element.innerHTML.trim();
+        this._changeDetectorRef.detectChanges();
+        this._portalOutlet?.attach(this._domPortal);
     }
 
     /** @hidden */
