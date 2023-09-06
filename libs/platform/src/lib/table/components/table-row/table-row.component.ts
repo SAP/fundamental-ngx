@@ -42,6 +42,7 @@ import {
     TableRowKeyboardDrag,
     TableRowService,
     TableService,
+    isTreeRow,
     isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
 import { Subject, fromEvent, merge } from 'rxjs';
@@ -58,7 +59,11 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableRowComponent
         }
-    ]
+    ],
+    host: {
+        role: 'row',
+        '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
+    }
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
     /** Row ID. */
@@ -154,6 +159,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
 
     /** @hidden */
     readonly _tableRowService = inject(TableRowService);
+
+    /** @hidden */
+    readonly _isTreeRow = isTreeRow;
 
     /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();

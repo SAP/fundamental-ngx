@@ -40,7 +40,10 @@ import {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableHeaderRowComponent
         }
-    ]
+    ],
+    host: {
+        role: 'row'
+    }
 })
 export class TableHeaderRowComponent extends TableRowDirective implements OnInit {
     /** Table ID. */
