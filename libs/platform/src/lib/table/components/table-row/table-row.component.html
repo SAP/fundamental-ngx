@@ -71,6 +71,7 @@
                 (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
                     | fdTranslate
             "
+            [attr.aria-selected]="row.checked"
             [style]="
                 _contentDensityObserver
                     | async
