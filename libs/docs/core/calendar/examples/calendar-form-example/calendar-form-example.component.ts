@@ -10,7 +10,7 @@ import {
     FdDatetimeAdapter,
     FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-calendar-form-example',
@@ -27,7 +27,7 @@ import { FormItemModule } from '@fundamental-ngx/core/form';
         }
     ],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormItemModule, CalendarComponent, ButtonModule, FdDatetimeModule]
+    imports: [FormsModule, ReactiveFormsModule, FormItemComponent, CalendarComponent, ButtonModule, FdDatetimeModule]
 })
 export class CalendarFormExamplesComponent {
     customForm = new FormGroup({

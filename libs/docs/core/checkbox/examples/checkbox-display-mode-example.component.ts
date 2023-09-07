@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-checkbox-display-mode-example',
@@ -24,7 +24,7 @@ import { FormLabelModule } from '@fundamental-ngx/core/form';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormLabelModule, CheckboxComponent, FormsModule, ButtonModule]
+    imports: [FormLabelComponent, CheckboxComponent, FormsModule, ButtonModule]
 })
 export class CheckboxDisplayModeExampleComponent {
     checkboxValue = false;

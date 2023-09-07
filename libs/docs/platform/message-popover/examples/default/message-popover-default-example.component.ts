@@ -11,7 +11,7 @@ import {
     Validators
 } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
@@ -30,8 +30,8 @@ import { Observable, delay, of } from 'rxjs';
     imports: [
         MessagePopoverFormWrapperComponent,
         FormsModule,
-        FormItemModule,
-        FormLabelModule,
+        FormItemComponent,
+        FormLabelComponent,
         PlatformInputModule,
         MessagePopoverFormItemDirective,
         BarModule,

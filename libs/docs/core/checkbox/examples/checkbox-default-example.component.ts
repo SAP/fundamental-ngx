@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-checkbox-default-example',
@@ -16,7 +16,7 @@ import { FormLabelModule } from '@fundamental-ngx/core/form';
         Value: {{ checkboxValue }}
     `,
     standalone: true,
-    imports: [FormLabelModule, CheckboxComponent, FormsModule]
+    imports: [FormLabelComponent, CheckboxComponent, FormsModule]
 })
 export class CheckboxDefaultExampleComponent {
     checkboxValue = false;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
 
@@ -8,6 +8,6 @@ import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
     templateUrl: './platform-input-group-disabled-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormLabelModule, PlatformInputGroupModule, PlatformButtonModule]
+    imports: [FormLabelComponent, PlatformInputGroupModule, PlatformButtonModule]
 })
 export class PlatformInputGroupDisabledExampleComponent {}

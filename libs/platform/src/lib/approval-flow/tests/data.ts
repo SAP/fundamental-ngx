@@ -1,4 +1,4 @@
-import { ApprovalProcess, ApprovalTeam, ApprovalUser } from './../interfaces';
+import { ApprovalProcess, ApprovalTeam, ApprovalUser } from '../interfaces';
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 export const users: ApprovalUser[] = [

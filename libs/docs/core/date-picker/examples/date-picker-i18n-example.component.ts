@@ -4,7 +4,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
 
@@ -74,7 +74,14 @@ const CUSTOM_DATETIME_FORMATS = {
         }
     ],
     standalone: true,
-    imports: [FormLabelModule, SegmentedButtonModule, ButtonModule, DatePickerComponent, FormsModule, FdDatetimeModule]
+    imports: [
+        FormLabelComponent,
+        SegmentedButtonModule,
+        ButtonModule,
+        DatePickerComponent,
+        FormsModule,
+        FdDatetimeModule
+    ]
 })
 export class DatePickerI18nExampleComponent {
     date = FdDate.getNow();

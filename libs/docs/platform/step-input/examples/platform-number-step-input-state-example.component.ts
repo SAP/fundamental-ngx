@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PlatformStepInputModule } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -10,7 +10,7 @@ import { PlatformStepInputModule } from '@fundamental-ngx/platform/form';
     templateUrl: './platform-number-step-input-state-example.component.html',
     styleUrls: ['./platform-number-step-input-state-example.component.scss'],
     standalone: true,
-    imports: [ContentDensityDirective, NgFor, FormLabelModule, PlatformStepInputModule]
+    imports: [ContentDensityDirective, NgFor, FormLabelComponent, PlatformStepInputModule]
 })
 export class PlatformNumberStepInputStateExampleComponent {
     states: StateOption[] = [

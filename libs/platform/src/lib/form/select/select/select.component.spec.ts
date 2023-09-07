@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityMode, ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { isOptionItem, OptionItem } from '@fundamental-ngx/platform/shared';
+import { OptionItem, isOptionItem } from '@fundamental-ngx/platform/shared';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { FdpSelectionChangeEvent } from '../commons/base-select';
 import { PlatformSelectModule } from '../select.module';
 import { SelectComponent } from '../select/select.component';
-import { FdpSelectionChangeEvent } from '../commons/base-select';
-import { runValueAccessorTests } from 'ngx-cva-test-suite';
-import { ContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fdp-select-test',
@@ -79,7 +79,8 @@ describe('Select Component default values', () => {
                 FormsModule,
                 ReactiveFormsModule,
                 CommonModule,
-                PlatformSelectModule
+                PlatformSelectModule,
+                ContentDensityModule
             ],
             declarations: [SelectStandardComponent],
             providers: [DynamicComponentService, MenuKeyboardService]

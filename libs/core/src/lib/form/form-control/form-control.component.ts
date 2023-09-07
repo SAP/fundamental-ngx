@@ -11,9 +11,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
-import { FormItemControl, registerFormItemControl } from './../form-item-control/form-item-control';
+import { FormItemControl, registerFormItemControl } from '../form-item-control/form-item-control';
 
 /**
  * Directive intended for use on form controls.
@@ -29,7 +34,9 @@ import { FormItemControl, registerFormItemControl } from './../form-item-control
     styleUrls: ['./form-control.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [registerFormItemControl(FormControlComponent)]
+    imports: [ContentDensityModule],
+    providers: [registerFormItemControl(FormControlComponent), contentDensityObserverProviders()],
+    standalone: true
 })
 export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy, FormItemControl {
     /**
@@ -70,22 +77,31 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    /** @hidden
+    /** @hidden */
+    constructor(
+        public elementRef: ElementRef<HTMLElement>,
+        _contentDensityObserver: ContentDensityObserver,
+        @Attribute('aria-label') private ariaLabelAttr: string,
+        @Attribute('aria-labelledby') private ariaLabelledByAttr: string
+    ) {
+        _contentDensityObserver.subscribe();
+    }
+
+    /**
+     * @hidden
      * CssClassBuilder interface implementation
      * function must return single string
      * function is responsible for order which css classes are applied
      */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [this.state ? 'is-' + this.state : '', this.class];
+        const tagName = this.elementRef.nativeElement.tagName.toLowerCase();
+        return [
+            this.state ? 'is-' + this.state : '',
+            this.class,
+            tagName === 'textarea' ? 'fd-textarea' : tagName === 'input' ? 'fd-input' : ''
+        ];
     }
-
-    /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        @Attribute('aria-label') private ariaLabelAttr: string,
-        @Attribute('aria-labelledby') private ariaLabelledByAttr: string
-    ) {}
 
     /** @hidden */
     ngOnInit(): void {

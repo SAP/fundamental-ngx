@@ -8,7 +8,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -29,7 +29,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
         FixedCardLayoutModule,
         NgIf,
         CardModule,
-        FormItemModule,
+        FormItemComponent,
         ObjectStatusModule,
         ListModule,
         FocusableGridDirective,

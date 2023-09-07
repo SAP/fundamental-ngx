@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -9,7 +10,12 @@ import {
     ViewEncapsulation,
     inject
 } from '@angular/core';
-import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverControlComponent,
+    TriggerConfig
+} from '@fundamental-ngx/core/popover';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Component({
@@ -17,7 +23,9 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     templateUrl: './form-input-message-group.component.html',
     styleUrls: ['./form-input-message-group.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class FormInputMessageGroupComponent {
     /**

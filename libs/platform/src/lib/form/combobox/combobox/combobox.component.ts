@@ -18,7 +18,7 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
+import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
@@ -28,24 +28,24 @@ import {
     ComboBoxDataSource,
     DATA_PROVIDERS,
     DataProvider,
-    PlatformFormFieldControl,
     OptionItem,
-    PlatformFormField
+    PlatformFormField,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 
-import { BaseCombobox } from '../commons/base-combobox';
-import { ComboboxConfig } from '../combobox.config';
-import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
-import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
-import { ListSecondaryDirective, ListModule } from '@fundamental-ngx/core/list';
-import { FormMessageModule, FormInputMessageGroupModule } from '@fundamental-ngx/core/form';
-import { AutoCompleteDirective } from '../../auto-complete/auto-complete.directive';
+import { FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PopoverBodyComponent, PopoverControlComponent, PopoverComponent } from '@fundamental-ngx/core/popover';
-import { NgTemplateOutlet, NgIf, NgFor, NgClass } from '@angular/common';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { AutoCompleteDirective } from '../../auto-complete/auto-complete.directive';
+import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
+import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
+import { ComboboxConfig } from '../combobox.config';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+import { BaseCombobox } from '../commons/base-combobox';
 
 export class ComboboxSelectionChangeEvent {
     /**
@@ -75,12 +75,12 @@ export class ComboboxSelectionChangeEvent {
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        FormInputMessageGroupModule,
+        FormInputMessageGroupComponent,
         InputGroupModule,
         FormsModule,
         AutoCompleteDirective,
         NgIf,
-        FormMessageModule,
+        FormMessageComponent,
         ListModule,
         NgFor,
         NgClass,

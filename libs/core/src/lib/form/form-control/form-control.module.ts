@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormControlComponent } from './form-control.component';
-import { InputFormControlDirective } from './input-form-control.directive';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { TextareaFormControlDirective } from './textarea-form-control.directive';
 
+/**
+ * @deprecated
+ * Import `FormControlComponent` directly as a standalone component.
+ */
 @NgModule({
-    imports: [CommonModule, ContentDensityModule],
-    exports: [FormControlComponent, InputFormControlDirective, TextareaFormControlDirective, ContentDensityModule],
-    declarations: [FormControlComponent, InputFormControlDirective, TextareaFormControlDirective]
+    imports: [FormControlComponent],
+    exports: [FormControlComponent]
 })
 export class FormControlModule {}

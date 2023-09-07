@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.25...v0.46.0-rc.26) (2023-09-07)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.46.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.25) (2023-09-06)
+
+
+### Bug Fixes
+
+* **platform:** fix dragdrop with virtual scroll ([#10476](https://github.com/SAP/fundamental-ngx/issues/10476)) ([010e001](https://github.com/SAP/fundamental-ngx/commit/010e001652714a277df4cfc6a409f707500f641c))
+
+
+### Features
+
+* **core:** form sublibrary standalone migration ([#10481](https://github.com/SAP/fundamental-ngx/issues/10481)) ([ca21e5b](https://github.com/SAP/fundamental-ngx/commit/ca21e5b45b63effeb3bc58b556598e2d1a493492))
+
+
+
+
+
 # [0.46.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.23...v0.46.0-rc.24) (2023-09-05)
 
 

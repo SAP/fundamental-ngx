@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {
     FormControlModule,
-    FormInputMessageGroupModule,
-    FormItemModule,
-    FormLabelModule,
-    FormMessageModule
+    FormInputMessageGroupComponent,
+    FormItemComponent,
+    FormLabelComponent,
+    FormMessageComponent
 } from '@fundamental-ngx/core/form';
 
 @Component({
@@ -18,6 +18,12 @@ import {
         `
     ],
     standalone: true,
-    imports: [FormItemModule, FormLabelModule, FormInputMessageGroupModule, FormControlModule, FormMessageModule]
+    imports: [
+        FormItemComponent,
+        FormLabelComponent,
+        FormInputMessageGroupComponent,
+        FormControlModule,
+        FormMessageComponent
+    ]
 })
 export class FormMessagingStateExampleComponent {}

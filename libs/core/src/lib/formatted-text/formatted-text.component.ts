@@ -1,12 +1,12 @@
 import {
-    Component,
-    ViewEncapsulation,
     ChangeDetectionStrategy,
+    Component,
+    HostBinding,
     Input,
     OnChanges,
-    HostBinding,
     OnInit,
-    SimpleChanges
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -42,7 +42,8 @@ export type LinkTargetType = '' | '_blank' | '_self' | '_top' | '_parent' | '_se
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class FormattedTextComponent implements OnInit, OnChanges {
     /**

@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FieldSetModule, FormItemModule } from '@fundamental-ngx/core/form';
+import { FieldsetComponent, FormItemComponent } from '@fundamental-ngx/core/form';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 
 @Component({
@@ -9,7 +9,7 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
     templateUrl: './radio-form-group-example.component.html',
     styleUrls: ['radio-form-group-example.component.scss'],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FieldSetModule, NgFor, FormItemModule, RadioModule]
+    imports: [FormsModule, ReactiveFormsModule, FieldsetComponent, NgFor, FormItemComponent, RadioModule]
 })
 export class RadioFormGroupExampleComponent {
     radioInput = {

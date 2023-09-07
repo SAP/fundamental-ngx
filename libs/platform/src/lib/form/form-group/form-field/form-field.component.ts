@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -8,7 +9,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Inject,
     Input,
     OnChanges,
@@ -23,51 +23,51 @@ import {
     SkipSelf,
     TemplateRef,
     ViewChild,
-    ViewChildren
+    ViewChildren,
+    forwardRef
 } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { FD_FORM_FIELD, FormFieldControl, FormStates } from '@fundamental-ngx/cdk/forms';
 import { uniqBy } from 'lodash-es';
-import { BehaviorSubject, combineLatest, filter, Observable, Subject, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, combineLatest, filter, tap } from 'rxjs';
 import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     Column,
     ColumnLayout,
+    FieldHintInput,
     FieldHintOptions,
     FormError,
-    PlatformFormFieldControl,
     FormFieldErrorDirectiveContext,
     FormFieldGroup,
     FormGroupContainer,
+    HintContent,
     LabelLayout,
+    PlatformFormField,
+    PlatformFormFieldControl,
     RESPONSIVE_BREAKPOINTS_CONFIG,
     ResponsiveBreakPointConfig,
-    ResponsiveBreakpointsService,
-    PlatformFormField,
-    FieldHintInput,
-    HintContent
+    ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getFormState } from '../../helpers';
-import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
-import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
-import { generateColumnClass, normalizeColumnLayout } from '../helpers';
-import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
 import { InputMessageGroupWithTemplate } from '../../input-message-group-with-template/input-message-group-with-template.component';
+import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
+import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 import {
     FDP_FORM_FIELD_HINT_LAYOUT_CONFIG,
     FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT,
     HintLayoutConfig
 } from '../fdp-form.tokens';
+import { FormFieldErrorDirective } from '../form-field-error/form-field-error.directive';
+import { FormFieldControlExtrasComponent } from '../form-field-extras/form-field-extras.component';
+import { generateColumnClass, normalizeColumnLayout } from '../helpers';
 import { FormFieldLayoutService } from '../services/form-field-layout.service';
-import { defaultFormFieldHintOptions } from '../config/default-form-field-hint-options';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { FormLabelModule, FormMessageModule, FormItemModule } from '@fundamental-ngx/core/form';
-import { NgIf, NgTemplateOutlet, NgFor, AsyncPipe } from '@angular/common';
 
 let defaultId = 0;
 
@@ -96,13 +96,13 @@ const formGroupChildProvider: Provider = {
     providers: [formFieldProvider, formGroupChildProvider, FormFieldLayoutService],
     standalone: true,
     imports: [
-        FormItemModule,
+        FormItemComponent,
         NgIf,
         NgTemplateOutlet,
         InputMessageGroupWithTemplate,
         NgFor,
-        FormMessageModule,
-        FormLabelModule,
+        FormMessageComponent,
+        FormLabelComponent,
         LinkComponent,
         IconModule,
         InlineHelpModule,

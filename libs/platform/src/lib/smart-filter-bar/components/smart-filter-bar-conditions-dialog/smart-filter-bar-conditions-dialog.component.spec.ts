@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SmartFilterBarConditionsDialogComponent } from './smart-filter-bar-conditions-dialog.component';
-import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
-import { DynamicFormFieldItem } from '@fundamental-ngx/platform/form';
-import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { SmartFilterBarConditionBuilder } from './../../interfaces/smart-filter-bar-condition';
-import { PlatformSmartFilterBarModule } from './../../smart-filter-bar.module';
+import { DynamicFormFieldItem } from '@fundamental-ngx/platform/form';
+import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
+import { SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
+import { PlatformSmartFilterBarModule } from '../../smart-filter-bar.module';
+import { SmartFilterBarConditionsDialogComponent } from './smart-filter-bar-conditions-dialog.component';
 
 const mockData: SmartFilterBarConditionBuilder = {
     header: 'Test',

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
@@ -19,7 +19,7 @@ import { TextComponent } from '@fundamental-ngx/core/text';
     standalone: true,
     imports: [
         FacetModule,
-        FormLabelModule,
+        FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
         AvatarModule,
@@ -34,7 +34,7 @@ export class FacetGroupExampleComponent {}
     templateUrl: './form-facet-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FacetModule, FormLabelModule, TextComponent]
+    imports: [FacetModule, FormLabelComponent, TextComponent]
 })
 export class FormFacetExampleComponent {}
 
@@ -92,7 +92,7 @@ export class RatingIndicatorFacetExampleComponent {}
         ButtonModule,
         NgIf,
         FacetModule,
-        FormLabelModule,
+        FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
         AvatarModule,

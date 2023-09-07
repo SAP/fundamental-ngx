@@ -12,7 +12,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import { FormItemModule } from '@fundamental-ngx/core/form';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { SliderComponent } from '@fundamental-ngx/core/slider';
 
@@ -52,7 +52,7 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
         ComboboxModule,
         DatePickerComponent,
         FormsModule,
-        FormItemModule,
+        FormItemComponent,
         SliderComponent
     ]
 })

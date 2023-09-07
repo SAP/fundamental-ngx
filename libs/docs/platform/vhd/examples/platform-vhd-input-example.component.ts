@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { TokenModule } from '@fundamental-ngx/core/token';
 import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
@@ -59,7 +59,7 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
     templateUrl: './platform-vhd-input-example.component.html',
     standalone: true,
     imports: [
-        FormLabelModule,
+        FormLabelComponent,
         InputGroupModule,
         ButtonModule,
         ContentDensityDirective,

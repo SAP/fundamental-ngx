@@ -20,34 +20,34 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator, FormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { CalendarComponent, CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { PopoverService } from '@fundamental-ngx/core/popover';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import { PopoverService } from '@fundamental-ngx/core/popover';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
-import { createMissingDateImplementationError } from './errors';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { DateTimePicker } from './datetime-picker.model';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from './tokens';
-import { DatetimePickerMobileComponent } from './datetime-picker-mobile/datetime-picker-mobile.component';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { TimeModule } from '@fundamental-ngx/core/time';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { NgTemplateOutlet, NgIf, NgClass } from '@angular/common';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { TimeModule } from '@fundamental-ngx/core/time';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { DatetimePickerMobileComponent } from './datetime-picker-mobile/datetime-picker-mobile.component';
+import { DateTimePicker } from './datetime-picker.model';
+import { createMissingDateImplementationError } from './errors';
+import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from './tokens';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover,
@@ -93,7 +93,7 @@ import { NgTemplateOutlet, NgIf, NgClass } from '@angular/common';
         InputGroupModule,
         FormsModule,
         NgIf,
-        FormMessageModule,
+        FormMessageComponent,
         SegmentedButtonModule,
         ButtonModule,
         CalendarComponent,

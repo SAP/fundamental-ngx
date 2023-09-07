@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { patchLanguage } from '@fundamental-ngx/i18n';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
@@ -29,6 +29,6 @@ import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
         })
     ],
     standalone: true,
-    imports: [FormLabelModule, PlatformTextAreaModule]
+    imports: [FormLabelComponent, PlatformTextAreaModule]
 })
 export class TranslationWrapper2Component {}

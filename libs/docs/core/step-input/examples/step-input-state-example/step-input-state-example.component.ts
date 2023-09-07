@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { StepInputModule } from '@fundamental-ngx/core/step-input';
 
 @Component({
@@ -52,7 +52,7 @@ import { StepInputModule } from '@fundamental-ngx/core/step-input';
         </div>
     `,
     standalone: true,
-    imports: [FormLabelModule, StepInputModule]
+    imports: [FormLabelComponent, StepInputModule]
 })
 export class StepInputStateExampleComponent {
     value1: number | null = 0;

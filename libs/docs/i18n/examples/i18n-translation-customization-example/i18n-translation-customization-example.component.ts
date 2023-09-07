@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormLabelModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { FdLanguagePatch, FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { TranslationWrapper1Component } from './translation-wrapper-1.component';
@@ -11,7 +11,7 @@ import { TranslationWrapper2Component } from './translation-wrapper-2.component'
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        FormLabelModule,
+        FormLabelComponent,
         PlatformTextAreaModule,
         FdPatchLanguageDirective,
         TranslationWrapper1Component,

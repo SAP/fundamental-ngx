@@ -8,7 +8,8 @@ import { Directive, HostBinding } from '@angular/core';
 @Directive({
     // TODO to be discussed
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-form-legend]'
+    selector: '[fd-form-legend]',
+    standalone: true
 })
 export class FormLegendDirective {
     /** @hidden */

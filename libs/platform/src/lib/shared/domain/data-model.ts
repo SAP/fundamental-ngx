@@ -1,6 +1,6 @@
 import { coerceArray } from '@angular/cdk/coercion';
-import { isBlank } from './../utils/lang';
 import { TemplateRef } from '@angular/core';
+import { isBlank } from '../utils/lang';
 
 /**
  * Interface SelectItem is used to deal with complex object in order to be able to format

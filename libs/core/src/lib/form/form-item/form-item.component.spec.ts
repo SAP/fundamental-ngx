@@ -1,10 +1,12 @@
-import { FormItemComponent } from './form-item.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormItemComponent } from './form-item.component';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<div #componentElement fd-form-item [horizontal]="horizontal" [isInline]="inline">FormItem</div>'
+    template: '<div #componentElement fd-form-item [horizontal]="horizontal" [isInline]="inline">FormItem</div>',
+    imports: [FormItemComponent],
+    standalone: true
 })
 export class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -20,7 +22,7 @@ describe('FormItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [FormItemComponent, TestComponent]
+            imports: [TestComponent]
         });
     }));
 

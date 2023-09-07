@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormLabelModule, FormMessageModule } from '@fundamental-ngx/core/form';
+import { FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
 @Component({
@@ -17,8 +17,8 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
         ReactiveFormsModule,
         PlatformTextAreaModule,
         ContentDensityDirective,
-        FormLabelModule,
-        FormMessageModule
+        FormLabelComponent,
+        FormMessageComponent
     ]
 })
 export class PlatformTextareaBasicExampleComponent {

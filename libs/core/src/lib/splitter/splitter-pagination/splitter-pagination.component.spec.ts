@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
+import { SplitterComponent } from '../splitter.component';
 import { SplitterPaginationComponent } from './splitter-pagination.component';
-import { SplitterComponent } from './../splitter.component';
 
 describe('SplitterPaginationComponent', () => {
     let component: SplitterPaginationComponent;

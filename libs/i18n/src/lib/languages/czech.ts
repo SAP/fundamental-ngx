@@ -470,7 +470,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR'
+        selectSingleRow: 'To select row, press SPACEBAR',
+        deselectSingleRowTitle: 'Click to deselect',
+        selectSingleRowTitle: 'Click to select'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',
