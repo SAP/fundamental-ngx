@@ -66,6 +66,7 @@
             [focusable]="true"
             (keydown.enter)="_toggleMultiSelectRow(row, $event)"
             (keydown.space)="_toggleMultiSelectRow(row, $event)"
+            [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
             [attr.title]="
                 (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
