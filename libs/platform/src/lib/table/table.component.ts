@@ -339,7 +339,7 @@ export class TableComponent<T = any>
     @Input()
     set selectionMode(value: SelectionModeValue) {
         this._selectionMode = value;
-        this._isShownSelectionColumn = this.selectionMode !== SelectionMode.NONE;
+        this._isSelectionColumnShown = this.selectionMode !== SelectionMode.NONE;
         this._setSelectionColumnWidth();
     }
 
@@ -539,6 +539,19 @@ export class TableComponent<T = any>
         );
     }
 
+    /**
+     *  Whether the selection column should be shown,
+     *  If there are no visible rows or visible columns
+     *  or selection mode is none, then selection column should not be shown.
+     **/
+    get isSelectionColumnShown(): boolean {
+        return (
+            this._isSelectionColumnShown &&
+            !!this._tableRowsVisible.length &&
+            this._tableService.visibleColumnsLength > 0
+        );
+    }
+
     /** @hidden */
     get _ariaLabelledBy(): string | null {
         if (this.ariaLabelledBy) {
@@ -602,7 +615,7 @@ export class TableComponent<T = any>
     /** @hidden */
     _dndTableRowsPlaceholder: TableRow[] = [];
     /** @hidden */
-    _isShownSelectionColumn = false;
+    _isSelectionColumnShown = false;
     /** @hidden */
     readonly _toolbarContext: ToolbarContext;
     /** @hidden */
@@ -1864,7 +1877,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        this._tableColumnsLength = this._visibleColumns.length + (this._isShownSelectionColumn ? 1 : 0);
+        this._tableColumnsLength = this._visibleColumns.length + (this._isSelectionColumnShown ? 1 : 0);
     }
 
     /** @hidden */
@@ -2056,7 +2069,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _setSelectionColumnWidth(): void {
-        this._selectionColumnWidth = this._isShownSelectionColumn
+        this._selectionColumnWidth = this._isSelectionColumnShown
             ? SELECTION_COLUMN_WIDTH.get(this.contentDensityObserver.value) ?? 0
             : 0;
     }

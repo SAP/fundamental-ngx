@@ -20,3 +20,5 @@ libs/core/reports
 .tmp
 e2e/tmp
 axe-reports
+
+.angular
