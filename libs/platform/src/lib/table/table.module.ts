@@ -77,7 +77,10 @@ import { TableCellHeaderPopoverComponent } from './components';
 import { TableRowComponent } from './components/table-row/table-row.component';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
 import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
-import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
+import {
+    IsColumnHasHeaderMenuPipe,
+    TableHeaderRowComponent
+} from './components/table-header-row/table-header-row.component';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
@@ -115,7 +118,8 @@ const EXPORTABLE_DECLARATIONS = [
     TableRowComponent,
     TableGroupRowComponent,
     TablePoppingRowComponent,
-    TableHeaderRowComponent
+    TableHeaderRowComponent,
+    IsColumnHasHeaderMenuPipe
 ];
 
 @NgModule({

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { SelectionModel } from '@angular/cdk/collections';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -22,18 +25,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ListComponent } from '@fundamental-ngx/core/list';
 import {
     applyCssClass,
     CssClassBuilder,
@@ -46,13 +40,20 @@ import {
     RtlService,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { ListComponent } from '@fundamental-ngx/core/list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is _OptionItem<ItemType, ValueType> {
     return isOptionItemBase<ValueType>(candidate) && 'item' in candidate;
@@ -351,7 +352,10 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
+    _defaultAriaLabel: Nullable<string>;
+
+    /** @hidden */
+    readonly optionItems$ = new BehaviorSubject<OptionItem[]>([]);
 
     /** @hidden */
     readonly _searchTermCtrl = new FormControl('');
@@ -458,13 +462,11 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
         );
 
-        if (!this.ariaLabel) {
-            this._subscriptions.add(
-                this._language.subscribe(() => {
-                    this._getAriaLabel();
-                })
-            );
-        }
+        this._subscriptions.add(
+            this._language.subscribe(() => {
+                this._getAriaLabel();
+            })
+        );
     }
 
     /** @hidden */
@@ -920,7 +922,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     private async _getAriaLabel(): Promise<void> {
         const lang = await firstValueFrom(this._language);
-        this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
+        this._defaultAriaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }
 

@@ -627,10 +627,12 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         sortDialogNotSortedLabel: '(Не відсортовано)',
         sortDialogConfirmBtnLabel: 'OK',
         sortDialogCancelBtnLabel: 'Скасувати',
-        selectAllCheckboxLabel: 'Select all',
+        selectAllCheckboxLabel: 'Вибрати все',
         deselectAllCheckboxLabel: 'Deselect all',
-        deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR'
+        deselectSingleRow: 'Щоб скасувати вибір, натисніть пробіл',
+        selectSingleRow: 'Щоб вибрати рядок, натисніть пробіл',
+        deselectSingleRowTitle: 'Клацніть, щоб зняти виділення',
+        selectSingleRowTitle: 'Клацніть, щоб виділити рядок'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',
