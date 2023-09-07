@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.28...v0.46.0-rc.29) (2023-09-07)
+
+
+### Bug Fixes
+
+* **platform:** table boolean filter reset ([#10505](https://github.com/SAP/fundamental-ngx/issues/10505)) ([a4aedaa](https://github.com/SAP/fundamental-ngx/commit/a4aedaabc937fed4f20f1e45af154aa0524eb51d))
+
+
+### Features
+
+* **platform:** always showing title on the thead contents ([#10423](https://github.com/SAP/fundamental-ngx/issues/10423)) ([c6d5678](https://github.com/SAP/fundamental-ngx/commit/c6d567811deaa4e9a8b2d75dff83a19a07328f8d))
+
+
+
+
+
 # [0.46.0-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.27...v0.46.0-rc.28) (2023-09-07)
 
 
