@@ -137,6 +137,6 @@ export class FilterRule<T = any> {
 
     /** @hidden */
     private valueExists(value: any): boolean {
-        return !!value || value === 0;
+        return !!value || value === 0 || typeof value === 'boolean';
     }
 }
