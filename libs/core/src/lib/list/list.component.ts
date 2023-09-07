@@ -14,22 +14,23 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { ListItemComponent } from './list-item/list-item.component';
-import { merge, Observable, Subject } from 'rxjs';
-import { map, startWith, takeUntil } from 'rxjs/operators';
 import {
     FocusEscapeDirection,
     KeyboardSupportService,
     LIST_ITEM_COMPONENT,
-    ListItemInterface
+    ListItemInterface,
+    Nullable
 } from '@fundamental-ngx/cdk/utils';
-import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
-import { ListFocusItem } from './list-focus-item.model';
-import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { Observable, Subject, merge } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListComponentInterface } from './list-component.interface';
-import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
+import { ListFocusItem } from './list-focus-item.model';
+import { ListItemComponent } from './list-item/list-item.component';
+import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 import { ListUnreadIndicator } from './list-unread-indicator.interface';
+import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
 
 /**
  * The directive that represents a list.
@@ -116,9 +117,11 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     @HostBinding('class.fd-list--navigation')
     hasNavigation = false;
 
-    /** @hidden */
-    @HostBinding('attr.role')
-    _role = 'list'; // default role for lists
+    /**
+     * User-provided role.
+     */
+    @Input()
+    role: Nullable<string>;
 
     /** @hidden */
     @ContentChildren(LIST_ITEM_COMPONENT)
@@ -131,6 +134,18 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     @ContentChildren(ListFocusItem)
     private _focusItems: QueryList<ListFocusItem>;
+
+    /** @hidden */
+    @HostBinding('attr.aria-role')
+    private get _ariaRole(): string {
+        return this.role || this._defaultRole;
+    }
+
+    /**
+     * @hidden
+     * Default role for lists
+     */
+    private _defaultRole = 'list';
 
     /** An RxJS Subject that will kill the data stream upon queryList changes (for unsubscribing)  */
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
@@ -234,9 +249,9 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         const items = this.items.filter((item) => item.link);
         this.hasNavigation = items.length > 0;
         if (!this.selection) {
-            this._role = this.hasNavigation ? 'navigation' : 'list';
+            this._defaultRole = this.hasNavigation ? 'navigation' : 'list';
         } else {
-            this._role = 'listbox';
+            this._defaultRole = 'listbox';
         }
     }
 
