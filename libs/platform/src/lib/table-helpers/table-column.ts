@@ -60,7 +60,7 @@ export abstract class TableColumn {
     abstract applyText: boolean;
 
     /** Stores information for the header cell if the ellipsis are visible after the column resize */
-    abstract headerOverflows: boolean;
+    abstract headerOverflows: boolean; // Not being used anywhere, is here for information
 
     /** Whether this column is visible */
     abstract responsiveState: FdpColumnResponsiveState;
