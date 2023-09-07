@@ -49,7 +49,7 @@
         <ng-template #defaultHeaderCellTemplate>
             <span
                 [id]="rowId + '-header-cell-' + _column.name"
-                [attr.title]="_column.headerOverflows ? _column.label : null"
+                [attr.title]="_column.label"
                 class="fd-table__cell--truncate-txt"
                 >{{ _column.label }}</span
             >
