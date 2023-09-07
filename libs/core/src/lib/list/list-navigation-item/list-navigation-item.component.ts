@@ -1,3 +1,5 @@
+import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -5,22 +7,20 @@ import {
     ContentChild,
     ContentChildren,
     ElementRef,
-    forwardRef,
     HostBinding,
     HostListener,
     Input,
     Optional,
-    QueryList
+    QueryList,
+    forwardRef
 } from '@angular/core';
-import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { FocusableOption } from '@angular/cdk/a11y';
+import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
-import { FD_LIST_COMPONENT } from '../tokens';
 import { ListComponentInterface } from '../list-component.interface';
+import { FD_LIST_COMPONENT } from '../tokens';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -55,10 +55,6 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _tabIndex;
 
     /** @hidden */
-    @HostBinding('attr.aria-expanded')
-    _expanded = false;
-
-    /** @hidden */
     @HostBinding('attr.aria-level')
     _ariaLevel: number;
 
@@ -87,6 +83,15 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _childItems: QueryList<ListNavigationItemComponent>;
 
     /** @hidden */
+    @HostBinding('attr.aria-expanded')
+    private get _ariaExpanded(): boolean | null {
+        return this._isExpandable ? this._expanded : null;
+    }
+
+    /** @hidden */
+    _expanded = false;
+
+    /** @hidden */
     _innerText: string;
 
     /** @hidden
@@ -94,14 +99,14 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
      */
     _isItemVisible = true;
 
-    /** @hidden handles rtl service */
-    private _dir: 'ltr' | 'rtl' | null = 'ltr';
-
     /** @hidden */
     readonly _focused$ = new Subject<boolean>();
 
     /** @hidden */
     readonly _clicked$ = new Subject<MouseEvent>();
+
+    /** @hidden handles rtl service */
+    private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {}
