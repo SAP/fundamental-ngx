@@ -120,7 +120,7 @@
 
 <ng-template #advancedSearchContent>
     <ng-container *ngIf="isSelectionTab">
-        <div class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search" [id]="'advanced-search-' + id">
+        <form class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search" [id]="'advanced-search-' + id">
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
                 <div fdLayoutGridRow>
                     <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
@@ -239,7 +239,7 @@
                     </ng-template>
                 </fd-busy-indicator>
             </div>
-        </div>
+        </form>
     </ng-container>
 </ng-template>
 
