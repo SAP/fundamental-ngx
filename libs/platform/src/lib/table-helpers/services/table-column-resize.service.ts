@@ -1,12 +1,12 @@
 import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
-import { BehaviorSubject, fromEvent, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TABLE_COLUMN_MIN_WIDTH } from '../constants';
 
-import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 import { Table } from '../table';
+import { TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 
 export const TABLE_RESIZER_BORDER_WIDTH = 3;
 

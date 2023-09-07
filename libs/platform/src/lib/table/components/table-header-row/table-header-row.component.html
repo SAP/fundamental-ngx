@@ -91,7 +91,7 @@
             [hasFilter]="(_fdpTableService.filterRules$ | async)?.has(column.key) === true"
             [hasSorting]="(_fdpTableService.sortRules$ | async)?.has(column.key) === true"
             [sorting]="(_fdpTableService.sortRules$ | async)?.get(column.key)"
-            [attr.title]="column?.headerOverflows ? column.label : null"
+            [attr.title]="column.label"
         >
             <!-- Header menu -->
             <fdp-table-cell-header-popover
