@@ -1,10 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import {
+    ClickedBehaviorModule,
+    DisabledBehaviorModule,
+    DragAndDropModule,
+    IntersectionSpyDirective,
+    PipeModule,
+    RepeatModule
+} from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -15,68 +24,62 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RadioModule } from '@fundamental-ngx/core/radio';
+import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { TableModule } from '@fundamental-ngx/core/table';
-import {
-    ClickedBehaviorModule,
-    DisabledBehaviorModule,
-    IntersectionSpyDirective,
-    PipeModule,
-    RepeatModule
-} from '@fundamental-ngx/cdk/utils';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { I18nModule } from '@fundamental-ngx/i18n';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { TableHelpersModule } from '@fundamental-ngx/platform/table-helpers';
 
-import { TableComponent } from './table.component';
-import { TableColumnComponent } from './components';
-import { TableToolbarComponent } from './components';
-import { TableToolbarActionsComponent } from './components';
-import { ResetButtonComponent } from './components';
-import { TableViewSettingsDialogComponent } from './components';
-import { TableViewSettingsFilterComponent } from './components';
-import { SortingComponent } from './components';
-import { GroupingComponent } from './components';
-import { FiltersComponent } from './components';
-import { FiltersListStepComponent } from './components';
-import { FilterStepComponent } from './components';
-import { FilterSingleSelectComponent } from './components';
-import { FilterMultiSelectComponent } from './components';
-import { FilterCustomComponent } from './components';
-import { TableP13DialogComponent } from './components';
-import { TableP13SortComponent } from './components';
-import { TableP13FilterComponent } from './components';
-import { TableP13GroupComponent } from './components';
-import { TableP13ColumnsComponent } from './components';
 import {
-    P13SortingDialogComponent,
-    GetAvailableSortColumnsPipe
+    FilterCustomComponent,
+    FilterMultiSelectComponent,
+    FilterRuleComponent,
+    FilterSingleSelectComponent,
+    FilterStepComponent,
+    FiltersComponent,
+    FiltersListStepComponent,
+    GroupingComponent,
+    P13ColumnsDialogComponent,
+    P13FilteringDialogComponent,
+    P13GroupingDialogComponent,
+    ResetButtonComponent,
+    SortingComponent,
+    TableColumnComponent,
+    TableP13ColumnsComponent,
+    TableP13DialogComponent,
+    TableP13FilterComponent,
+    TableP13GroupComponent,
+    TableP13SortComponent,
+    TableToolbarActionsComponent,
+    TableToolbarComponent,
+    TableViewSettingsDialogComponent,
+    TableViewSettingsFilterComponent
+} from './components';
+import {
+    GetAvailableSortColumnsPipe,
+    P13SortingDialogComponent
 } from './components/table-p13-dialog/sorting/sorting.component';
-import { P13GroupingDialogComponent } from './components';
-import { P13FilteringDialogComponent } from './components';
-import { FilterRuleComponent } from './components';
-import { P13ColumnsDialogComponent } from './components';
+import { TableComponent } from './table.component';
 
-import { PlatformTableColumnResizerComponent } from './components';
-import { NoDataWrapperComponent } from './components';
+import { NoDataWrapperComponent, PlatformTableColumnResizerComponent } from './components';
 import { TableEditableCellComponent } from './components/table-editable-cell/table-editable-cell.component';
 import { TableToolbarLeftActionsComponent } from './components/table-toolbar/table-toolbar-left-actions.component';
 
-import { TableHeaderCellContentComponent } from './components';
-import { TableCellHeaderPopoverComponent } from './components';
-import { TableRowComponent } from './components/table-row/table-row.component';
+import { TableCellHeaderPopoverComponent, TableHeaderCellContentComponent } from './components';
 import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
+import {
+    IsColumnHasHeaderMenuPipe,
+    TableHeaderRowComponent
+} from './components/table-header-row/table-header-row.component';
 import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
-import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
+import { TableRowComponent } from './components/table-row/table-row.component';
 
 const EXPORTABLE_DECLARATIONS = [
     TableComponent,
@@ -114,7 +117,8 @@ const EXPORTABLE_DECLARATIONS = [
     TableRowComponent,
     TableGroupRowComponent,
     TablePoppingRowComponent,
-    TableHeaderRowComponent
+    TableHeaderRowComponent,
+    IsColumnHasHeaderMenuPipe
 ];
 
 @NgModule({

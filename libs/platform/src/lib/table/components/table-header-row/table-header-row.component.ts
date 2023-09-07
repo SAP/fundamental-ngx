@@ -2,13 +2,16 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    inject,
     Input,
     OnInit,
+    Pipe,
+    PipeTransform,
     QueryList,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
@@ -25,7 +28,6 @@ import {
     TableRowService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -141,9 +143,16 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
     }
+}
+
+/** @hidden */
+@Pipe({ name: 'isColumnHasHeaderMenu' })
+export class IsColumnHasHeaderMenuPipe implements PipeTransform {
+    /** @hidden */
+    private readonly _fdpTableService = inject(TableService);
 
     /** @hidden */
-    _isColumnHasHeaderMenu(column: TableColumn): boolean {
+    transform(column: TableColumn): boolean {
         return (
             column.sortable ||
             column.groupable ||
