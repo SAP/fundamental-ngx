@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    HostListener,
     Input,
     NgZone,
     OnChanges,
@@ -107,6 +108,10 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     @Input()
     freezeEndColumnsTo: string;
 
+    /** Whether the row is tree row. */
+    @Input()
+    isTreeRow: boolean;
+
     /**
      * Event emitted when keyboard drag performed.
      */
@@ -204,6 +209,18 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
                     this._onKeyDown(event);
                 });
         });
+    }
+
+    /** @hidden */
+    @HostListener('keydown.arrowLeft', ['$event'])
+    @HostListener('keydown.arrowRight', ['$event'])
+    private _onArrowKeydown($event: KeyboardEvent): void {
+        if ($event.target === this._elmRef.nativeElement && this.isTreeRow) {
+            const shouldBeOpen = KeyUtil.isKeyCode($event, this._rtl ? LEFT_ARROW : RIGHT_ARROW);
+            if (shouldBeOpen !== this.row.expanded) {
+                this._toggleGroupRow();
+            }
+        }
     }
 
     /** @hidden */

@@ -96,8 +96,8 @@
                             [fdkDndItem]="row"
                             [applyDragItemClass]="isDraggable"
                             [class]="row | rowClasses : rowsClass"
-                            [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
-                            [focusable]="rowsActivable || !!row.navigatable"
+                            [tabindex]="row.isTree || rowsActivable || !!row.navigatable ? 0 : -1"
+                            [focusable]="row.isTree || rowsActivable || !!row.navigatable"
                             [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                             [activable]="rowsActivable || !!row.navigatable"
                             [active]="rowIndex === _navigatedRowIndex"
@@ -109,6 +109,7 @@
                             [main]="true"
                             [class.fd-table__row--draggable]="isDraggable"
                             fdp-table-row
+                            [isTreeRow]="row.isTree"
                             [rowId]="id"
                             [index]="rowIndex"
                             [row]="row"
