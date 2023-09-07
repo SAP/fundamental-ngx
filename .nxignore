@@ -1,3 +1,4 @@
 # Ignore test files while computing dependency graph
 **/*.spec.ts
 /**/*/typedoc
+**/*/docs.json

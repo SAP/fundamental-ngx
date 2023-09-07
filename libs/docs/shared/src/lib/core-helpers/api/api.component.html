@@ -1,21 +1,253 @@
-<div class="api-main-container">
-    <h2 class="api-main-header">{{ activeFile }}</h2>
-    <span style="display: flex; flex-grow: 1"></span>
+<fd-form-group>
+    <div fd-form-item>
+        <label fd-form-label for="entitySelect">Select entity</label>
 
-    <button
-        *ngIf="files.length > 1"
-        fd-button
-        [label]="'Select a file (' + files.length + ')'"
-        [fdMenu]="true"
-        [fdMenuTrigger]="menu"
-    ></button>
+        <fd-select [(ngModel)]="selectedDocItem" controlId="entitySelect">
+            <ng-container *ngFor="let group of docItems | async">
+                <li fd-list-group-header>
+                    <span fd-list-title>{{ group[0] | titlecase }}</span>
+                </li>
+                <li fd-option *ngFor="let option of group[1]" [value]="option">
+                    <span fd-list-title>{{ option.name }}</span>
+                </li>
+            </ng-container>
+        </fd-select>
+    </div>
+</fd-form-group>
 
-    <fd-menu #menu [fillControlMode]="null" placement="bottom-start">
-        <li fd-menu-item *ngFor="let file of files" [class.is-selected]="file === activeFile" (click)="getFile(file)">
-            <div fd-menu-interactive>
-                <span fd-menu-title>{{ file }}</span>
-            </div>
-        </li>
-    </fd-menu>
-</div>
-<div [innerHTML]="result"></div>
+<fd-dynamic-page *ngIf="selectedDocItem">
+    <fd-dynamic-page-header>
+        <ng-container *fdDynamicPageHeaderTitle>
+            {{ selectedDocItem.name }}
+            <fd-info-label label="Deprecated" color="1" *ngIf="selectedDocItem.deprecated" fdCompact></fd-info-label>
+        </ng-container>
+        <fd-dynamic-page-global-actions>
+            <!-- global actions -->
+            <fd-toolbar fdType="transparent" [clearBorder]="true">
+                <a
+                    fd-toolbar-item
+                    fd-button
+                    fdCompact
+                    fdType="transparent"
+                    glyph="inspection"
+                    label="Open on github"
+                    title="Open on github"
+                    [href]="githubLink(selectedDocItem)"
+                    target="_blank"
+                ></a>
+            </fd-toolbar>
+        </fd-dynamic-page-global-actions>
+    </fd-dynamic-page-header>
+    <fd-dynamic-page-subheader
+        [collapsible]="true"
+        [pinnable]="true"
+        [collapsed]="false"
+        *ngIf="selectedDocItem.description"
+    >
+        <div [innerHTML]="selectedDocItem.description"></div>
+    </fd-dynamic-page-subheader>
+    <fd-tab-list>
+        <fd-tab title="General">
+            <table fd-table>
+                <thead fd-table-header>
+                    <tr fd-table-row>
+                        <th fd-table-cell>Name</th>
+                        <th fd-table-cell>Value</th>
+                    </tr>
+                </thead>
+                <tbody fd-table-body>
+                    <tr fd-table-row *ngIf="selectedDocItem.type">
+                        <td fd-table-cell>Type</td>
+                        <td fd-table-cell>
+                            <code>{{ selectedDocItem.type }}</code>
+                        </td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.selector">
+                        <td fd-table-cell>Selector</td>
+                        <td fd-table-cell>
+                            <code>{{ selectedDocItem.selector }}</code>
+                        </td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.changeDetection">
+                        <td fd-table-cell>Change Detection</td>
+                        <td fd-table-cell>
+                            <code>{{ selectedDocItem.changeDetection }}</code>
+                        </td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.standalone">
+                        <td fd-table-cell>Standalone</td>
+                        <td fd-table-cell>{{ selectedDocItem.standalone }}</td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.providers?.length">
+                        <td fd-table-cell>Providers</td>
+                        <td fd-table-cell>
+                            <ng-container *ngFor="let provider of selectedDocItem.providers">
+                                <code>{{ provider.name }}</code
+                                ><br />
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.imports?.length">
+                        <td fd-table-cell>Imports</td>
+                        <td fd-table-cell>
+                            <ng-container *ngFor="let imp of selectedDocItem.imports">
+                                <code>{{ imp.name }}</code
+                                ><br />
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.implements?.length > 0">
+                        <td fd-table-cell>Implements</td>
+                        <td fd-table-cell>
+                            <ng-container *ngFor="let implement of selectedDocItem.implements">
+                                <code>{{ implement }}</code
+                                ><br />
+                            </ng-container>
+                        </td>
+                    </tr>
+                    <tr fd-table-row *ngIf="selectedDocItem.extends">
+                        <td fd-table-cell>Extends</td>
+                        <td fd-table-cell>
+                            <code>{{ selectedDocItem.extends }}</code
+                            ><br />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fd-tab>
+        <fd-tab *ngIf="selectedDocItem?.properties?.length" title="Properties">
+            <fd-dynamic-page-content id="Properties">
+                <ul fd-list [byline]="true">
+                    <li fd-list-item *ngFor="let property of selectedDocItem.properties">
+                        <div fd-list-content>
+                            <div fd-list-title>
+                                {{ property.name }}
+                                <fd-info-label [label]="property.type"></fd-info-label>
+                            </div>
+                            <div fd-list-byline>
+                                <span *ngIf="property.defaultValue"
+                                    >Default: <code>{{ property.defaultValue }}</code></span
+                                ><br />
+                                <div *ngIf="property.description" [innerHTML]="property.description"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </fd-dynamic-page-content>
+        </fd-tab>
+        <fd-tab *ngIf="selectedDocItem?.propertiesClass?.length" title="Class Properties">
+            <fd-dynamic-page-content id="ClassProperties">
+                <ul fd-list [byline]="true">
+                    <li fd-list-item *ngFor="let property of selectedDocItem.propertiesClass">
+                        <div fd-list-content>
+                            <div fd-list-title>
+                                {{ property.name }}
+                                <fd-info-label [label]="property.type"></fd-info-label>
+                            </div>
+                            <div fd-list-byline>
+                                <span *ngIf="property.defaultValue"
+                                    >Default: <code>{{ property.defaultValue }}</code></span
+                                ><br />
+                                <div
+                                    *ngIf="property.description"
+                                    class="fd-list-item-docs-description"
+                                    [innerHTML]="property.description"
+                                ></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </fd-dynamic-page-content>
+        </fd-tab>
+        <fd-tab *ngIf="selectedDocItem?.methodsClass?.length" title="Methods">
+            <fd-dynamic-page-content id="Methods">
+                <ul fd-list [byline]="true" [navigationIndicator]="true">
+                    <li fd-list-item *ngFor="let method of selectedDocItem.methodsClass">
+                        <div fd-list-content>
+                            <div fd-list-title>
+                                {{ method.name }}
+                                <fd-info-label [label]="method.returnType" color="3"></fd-info-label>
+                            </div>
+                            <div fd-list-byline>
+                                <ng-container *ngIf="method.args.length > 0">
+                                    <span>Params:</span><br />
+                                    <span *ngFor="let arg of method.args">
+                                        <code>{{ arg.name }}</code>
+                                        <fd-info-label
+                                            fdCompact
+                                            color="2"
+                                            [label]="arg.type"
+                                            *ngIf="arg.type"
+                                        ></fd-info-label>
+                                    </span>
+                                </ng-container>
+                                <br />
+                                <div
+                                    *ngIf="method.description"
+                                    class="fd-list-item-docs-description"
+                                    [innerHTML]="method.description"
+                                ></div>
+                            </div>
+                        </div>
+                        <a
+                            fd-button
+                            [href]="githubLink(selectedDocItem, $any(method.line))"
+                            target="_blank"
+                            glyph="inspection"
+                            title="Open on Github"
+                        >
+                        </a>
+                    </li>
+                </ul>
+            </fd-dynamic-page-content>
+        </fd-tab>
+        <fd-tab *ngIf="selectedDocItem?.inputsClass?.length" title="Inputs">
+            <fd-dynamic-page-content id="Inputs">
+                <ul fd-list [byline]="true">
+                    <li fd-list-item *ngFor="let input of selectedDocItem.inputsClass">
+                        <div fd-list-content>
+                            <div fd-list-title>
+                                {{ input.name }}
+                                <fd-info-label color="5" [label]="input.type"></fd-info-label>
+                            </div>
+                            <div fd-list-byline>
+                                <span *ngIf="input.defaultValue"
+                                    >Default: <code>{{ input.defaultValue }}</code></span
+                                ><br />
+                                <div
+                                    *ngIf="input.description"
+                                    class="fd-list-item-docs-description"
+                                    [innerHTML]="input.description"
+                                ></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </fd-dynamic-page-content>
+        </fd-tab>
+        <fd-tab *ngIf="selectedDocItem?.outputsClass?.length" title="Outputs">
+            <fd-dynamic-page-content id="Outputs">
+                <ul fd-list [byline]="true">
+                    <li fd-list-item *ngFor="let output of selectedDocItem.outputsClass">
+                        <div fd-list-content>
+                            <div fd-list-title>
+                                {{ output.name }}
+                                <fd-info-label [label]="output.type"></fd-info-label>
+                            </div>
+                            <div fd-list-byline>
+                                <span *ngIf="output.defaultValue"
+                                    >Default: <code>{{ output.defaultValue }}</code></span
+                                ><br />
+                                <div
+                                    *ngIf="output.description"
+                                    class="fd-list-item-docs-description"
+                                    [innerHTML]="output.description"
+                                ></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </fd-dynamic-page-content>
+        </fd-tab>
+    </fd-tab-list>
+</fd-dynamic-page>

@@ -9,6 +9,16 @@ import { readFileSync, writeFileSync } from 'fs';
 import merge from 'lodash/merge';
 import { Schema } from './schema';
 
+const readEntities = (collection: Record<string, Array<any>> | Array<any>, entities: string[]) => {
+    if (Array.isArray(collection)) {
+        return collection.filter(({ name }) => entities.indexOf(name) > -1);
+    }
+    return Object.keys(collection).reduce(
+        (acc: any[], key) => [...acc, ...readEntities(collection[key], entities)],
+        []
+    );
+};
+
 export default async function runExecutor(
     options: Schema,
     executorContext: ExecutorContext
@@ -28,14 +38,7 @@ export default async function runExecutor(
         const fileContent = JSON.parse(readFileSync(f).toString());
         return merge(acc, fileContent);
     }, {});
-    const entities = Object.keys(outputFileContents).reduce((acc: any[], key) => {
-        const value = outputFileContents[key];
-        if (Array.isArray(value)) {
-            const entitiesFromValue = value.filter(({ name }) => options.entities.indexOf(name) > -1);
-            acc.push(...entitiesFromValue);
-        }
-        return acc;
-    }, []);
+    const entities = readEntities(outputFileContents, options.entities);
     const foundEntities = new Set(entities.map(({ name }) => name));
     const missingEntities = options.entities.filter((e) => !foundEntities.has(e));
     if (missingEntities.length > 0) {

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { FdLanguage } from '@fundamental-ngx/i18n';
 import { ApiDocsService } from './services/api-docs.service';
+import { CompodocService } from './services/compodoc.service';
 import { currentComponentProvider } from './tokens/current-component.token';
 import { hasI18nProvider } from './tokens/has-i18n.token';
 
@@ -28,7 +29,7 @@ export function configureRoutes<ApiFiles = Record<string, string[]>>(
                     path: 'api',
                     loadComponent: () => import('./core-helpers/api/api.component').then((m) => m.ApiComponent),
                     data: { content: apiFiles[apiFilesKey] },
-                    providers: [ApiDocsService]
+                    providers: [ApiDocsService, CompodocService]
                 });
             }
             if (i18nKey) {

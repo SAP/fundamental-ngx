@@ -1,17 +1,16 @@
-.api-main-header {
-    margin: 0;
-    font-weight: bold;
-    text-rendering: optimizeLegibility;
-}
-
-.api-main-container {
-    margin-top: 2em;
+:host {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
+    flex-direction: column;
+    gap: 1rem;
 
-fd-popover ::ng-deep .fd-button {
-    margin-right: 0;
+    ::ng-deep {
+        .fd-dynamic-page {
+            height: initial !important;
+        }
+        .fd-list-item-docs-description {
+            * {
+                text-wrap: wrap;
+            }
+        }
+    }
 }

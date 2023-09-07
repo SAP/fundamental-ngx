@@ -36,7 +36,8 @@
                     "TableP13ColumnsComponent",
                     "TableDataSource",
                     "TableDataProvider",
-                    "PlatformTableCellResponsiveDirective"
+                    "PlatformTableCellResponsiveDirective",
+                    "TableRow"
                 ]
             },
             "dependsOn": ["platform:compodoc"]
