@@ -9,7 +9,11 @@
     >
         <ul class="fd-list">
             <li class="fd-list__navigation-item fd-list__navigation-item--condensed">
-                <fd-icon class="fd-list__navigation-item-icon" [glyph]="_iconComponent.glyph"></fd-icon>
+                <fd-icon
+                    role="presentation"
+                    class="fd-list__navigation-item-icon"
+                    [glyph]="_iconComponent.glyph"
+                ></fd-icon>
                 <span class="fd-list__navigation-item-text">{{ _innerText }}</span>
             </li>
         </ul>

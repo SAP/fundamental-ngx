@@ -1,3 +1,5 @@
+import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -12,15 +14,13 @@ import {
     Optional,
     QueryList
 } from '@angular/core';
-import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { FocusableOption } from '@angular/cdk/a11y';
+import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
-import { FD_LIST_COMPONENT } from '../tokens';
 import { ListComponentInterface } from '../list-component.interface';
+import { FD_LIST_COMPONENT } from '../tokens';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -188,11 +188,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** support for FocusKeyManager for arrow key navigation */
     focus(): void {
-        if (!this._isExpandable) {
-            this._elementRef.nativeElement.focus();
-        } else {
-            this._listNavigationItemArrow?._focus();
-        }
+        this._elementRef.nativeElement.focus();
     }
 
     /** support for FocusKeyManager for arrow key navigation */
