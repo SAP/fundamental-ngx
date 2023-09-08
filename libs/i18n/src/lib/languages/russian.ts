@@ -538,7 +538,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         headerMenuUnfreeze: 'Разморозить',
         headerMenuFilter: 'Фильтр',
         defaultEmptyMessage: 'Ничего не найдено',
-        emptyCell: 'Empty',
+        emptyCell: 'Пусто',
         noVisibleColumnsMessage:
             'Сейчас в таблице нет видимых столбцов. Пожалуйста, выберите нужные столбцы в настройках таблицы.',
         resetChangesButtonLabel: 'Сбросить',
