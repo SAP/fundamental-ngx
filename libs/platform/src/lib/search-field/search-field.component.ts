@@ -70,8 +70,7 @@ export interface ValueLabelItem {
 @Directive({
     selector: '[fdpSearchFieldSuggestion]',
     host: {
-        tabindex: '-1',
-        role: 'list-item'
+        tabindex: '-1'
     }
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
