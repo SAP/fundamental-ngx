@@ -334,6 +334,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Pastro',
         submitButtonTitle: 'Kërko',
+        searchInputLabel: 'Kërko',
         synchronizeButtonTitle: 'Sinkronizo',
         searchSuggestionMessage: '{{ count }} sugjerime u gjetën.',
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar'

@@ -474,6 +474,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Очистить',
         submitButtonTitle: 'Поиск',
+        searchInputLabel: 'Поиск',
         synchronizeButtonTitle: 'Синхронизировать',
         searchSuggestionMessage: (params) => {
             const count = params['count'];
