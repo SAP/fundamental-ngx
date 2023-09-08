@@ -129,12 +129,10 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
 
     /** @hidden */
     _onOpenChange(isOpen: boolean): void {
-        if (this.formMessage) {
-            if (isOpen) {
-                this.formMessage._popover.close();
-            }
-            this.formMessage._popover.setIgnoreTriggers(isOpen);
+        if (isOpen) {
+            this.formMessage?._popover?.close();
         }
+        this.formMessage?._popover?.setIgnoreTriggers(isOpen);
     }
 
     /** @hidden */
