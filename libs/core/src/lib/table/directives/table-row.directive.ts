@@ -29,7 +29,10 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
             useExisting: TableRowDirective
         },
         DestroyedService
-    ]
+    ],
+    host: {
+        role: 'row'
+    }
 })
 export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */

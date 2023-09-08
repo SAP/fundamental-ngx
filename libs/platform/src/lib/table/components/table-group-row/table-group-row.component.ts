@@ -33,7 +33,11 @@ import { Observable } from 'rxjs';
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableGroupRowComponent
         }
-    ]
+    ],
+    host: {
+        role: 'row',
+        '[attr.aria-expanded]': 'row.expanded'
+    }
 })
 export class TableGroupRowComponent<T> extends TableRowDirective implements OnChanges {
     /** Table ID. */
