@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.31...v0.46.0-rc.32) (2023-09-08)
+
+
+### Bug Fixes
+
+* **platform:** some improvements to search field and VHD aria labels ([#10494](https://github.com/SAP/fundamental-ngx/issues/10494)) ([b79ca76](https://github.com/SAP/fundamental-ngx/commit/b79ca765dacfa444c1a93c382077e1fd311f4d0e))
+
+
+### Features
+
+* **core:** multi input option item ([#10415](https://github.com/SAP/fundamental-ngx/issues/10415)) ([a31d209](https://github.com/SAP/fundamental-ngx/commit/a31d2096fb37a8b9339244394bdbd91a26b02276))
+
+
+
+
+
 # [0.46.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.30...v0.46.0-rc.31) (2023-09-08)
 
 
