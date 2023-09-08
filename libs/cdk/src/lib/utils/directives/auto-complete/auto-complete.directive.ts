@@ -1,5 +1,5 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { KeyUtil } from '../../functions/key-util';
 
 export interface AutoCompleteEvent {

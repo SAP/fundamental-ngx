@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OptionItem } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent, OptionItem } from '@fundamental-ngx/core/multi-input';
 
 interface Item {
     value: string;
@@ -11,7 +11,9 @@ interface Item {
     template: `
         <fd-multi-input placeholder="Search here..." [selected]="selected" [dropdownValues]="objectValues">
         </fd-multi-input>
-    `
+    `,
+    standalone: true,
+    imports: [MultiInputComponent]
 })
 export class MultiInputOptionItemExampleComponent {
     selected = [

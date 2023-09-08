@@ -22,6 +22,7 @@ import { MultiInputFormExampleComponent } from './examples/multi-input-form-exam
 import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
 import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
 import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
+import { MultiInputOptionItemExampleComponent } from './examples/multi-input-option-item-example/multi-input-option-item-example.component';
 
 const simpleH = 'multi-input-example/multi-input-example.component.html';
 const simpleT = 'multi-input-example/multi-input-example.component.ts';
@@ -84,7 +85,8 @@ const optionItemT = 'multi-input-option-item-example/multi-input-option-item-exa
         MultiInputNewTokensExampleComponent,
         MultiInputCustomItemExampleComponent,
         MultiInputDropdownWidthExampleComponent,
-        MultiInputAddonClickedExampleComponent
+        MultiInputAddonClickedExampleComponent,
+        MultiInputOptionItemExampleComponent
     ]
 })
 export class MultiInputDocsComponent {

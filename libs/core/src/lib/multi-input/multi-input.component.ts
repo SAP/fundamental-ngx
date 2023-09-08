@@ -1,3 +1,5 @@
+import { SelectionModel } from '@angular/cdk/collections';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -21,21 +23,13 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { SelectionModel } from '@angular/cdk/collections';
+import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ListComponent } from '@fundamental-ngx/core/list';
 import {
     applyCssClass,
+    AutoCompleteDirective,
     CssClassBuilder,
     DynamicComponentService,
     FocusEscapeDirection,
@@ -44,15 +38,27 @@ import {
     Nullable,
     RangeSelector,
     RtlService,
+    SearchHighlightPipe,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
+import { FormControlComponent, FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { ListComponent, ListModule } from '@fundamental-ngx/core/list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
 
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 
 function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is _OptionItem<ItemType, ValueType> {
     return isOptionItemBase<ValueType>(candidate) && 'item' in candidate;
@@ -83,7 +89,27 @@ function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionI
         contentDensityObserverProviders()
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        PopoverComponent,
+        PopoverControlComponent,
+        FormsModule,
+        PopoverBodyComponent,
+        InputGroupModule,
+        TokenModule,
+        NgFor,
+        FormControlComponent,
+        AutoCompleteDirective,
+        ReactiveFormsModule,
+        ListModule,
+        CheckboxComponent,
+        LinkComponent,
+        AsyncPipe,
+        SearchHighlightPipe
+    ]
 })
 export class MultiInputComponent<ItemType = any, ValueType = any>
     implements

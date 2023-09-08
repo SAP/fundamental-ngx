@@ -2,13 +2,13 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-multi-input-custom-item-example',
     templateUrl: './multi-input-custom-item-example.component.html',
     standalone: true,
-    imports: [MultiInputModule, FormsModule, ListModule, JsonPipe]
+    imports: [MultiInputComponent, FormsModule, ListModule, JsonPipe]
 })
 export class MultiInputCustomItemExampleComponent {
     values: Item[] = [

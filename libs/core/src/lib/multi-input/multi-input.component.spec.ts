@@ -4,7 +4,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { firstValueFrom } from 'rxjs';
 import { MultiInputComponent } from './multi-input.component';
-import { MultiInputModule } from './multi-input.module';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -24,7 +23,7 @@ describe('MultiInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MultiInputModule],
+            imports: [MultiInputComponent],
             providers: [DynamicComponentService, RtlService]
         }).compileComponents();
     }));
