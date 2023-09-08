@@ -9,7 +9,6 @@ import {
     getAssetFromModuleAssets,
     SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
-import { ActionSheetDefaultExampleComponent } from '../action-sheet/examples';
 import { AvatarGroupLegacyGroupTypeExampleComponent } from './examples/avatar-group-legacy-group-type-example.component';
 import { AvatarGroupLegacyIndividualTypeExampleComponent } from './examples/avatar-group-legacy-individual-type-example.component';
 
@@ -26,7 +25,6 @@ const avatarGroupDataServiceTs = 'avatar-group-legacy-data-example.service.ts';
     imports: [
         DocsSectionTitleComponent,
         ComponentExampleComponent,
-        ActionSheetDefaultExampleComponent,
         CodeExampleComponent,
         SeparatorComponent,
         DescriptionComponent,

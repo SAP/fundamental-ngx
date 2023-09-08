@@ -1,10 +1,25 @@
+import { NgForOf, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Size } from '@fundamental-ngx/core';
+import { Size } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupComponent, AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { AvatarGroupDataExampleService } from '../avatar-group-data-example.service';
 
 @Component({
     selector: 'fd-avatar-group-vertical-example',
-    templateUrl: './avatar-group-vertical-example.component.html'
+    templateUrl: './avatar-group-vertical-example.component.html',
+    standalone: true,
+    imports: [
+        AvatarGroupComponent,
+        NgForOf,
+        NgIf,
+        AvatarComponent,
+        QuickViewModule,
+        LinkComponent,
+        AvatarGroupItemDirective
+    ]
 })
 export class AvatarGroupVerticalExampleComponent {
     readonly avatarGroupDataExampleService: AvatarGroupDataExampleService = inject(AvatarGroupDataExampleService);

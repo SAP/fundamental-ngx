@@ -1,11 +1,27 @@
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { NgForOf, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { KeyUtil, PopoverComponent, RtlService, Size } from '@fundamental-ngx/core';
+import { KeyUtil, RtlService, Size } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupComponent, AvatarGroupItemDirective } from '@fundamental-ngx/core/avatar-group';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { AvatarGroupDataExampleService } from '../avatar-group-data-example.service';
 
 @Component({
     selector: 'fd-avatar-group-group-type-example',
-    templateUrl: './group-type-example.component.html'
+    templateUrl: './group-type-example.component.html',
+    standalone: true,
+    imports: [
+        AvatarGroupComponent,
+        NgForOf,
+        NgIf,
+        AvatarComponent,
+        QuickViewModule,
+        LinkComponent,
+        AvatarGroupItemDirective
+    ]
 })
 export class GroupTypeExampleComponent {
     size: Size = 'l';
