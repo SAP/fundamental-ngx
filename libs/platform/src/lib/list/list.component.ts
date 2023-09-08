@@ -1,3 +1,6 @@
+import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { SelectionModel } from '@angular/cdk/collections';
+import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,7 +10,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Host,
     HostListener,
     Inject,
@@ -20,49 +22,46 @@ import {
     Self,
     SkipSelf,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { SelectionModel } from '@angular/cdk/collections';
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import {
-    asyncScheduler,
     BehaviorSubject,
+    Observable,
+    Subject,
+    Subscription,
+    asyncScheduler,
     filter,
     firstValueFrom,
     isObservable,
     map,
-    Observable,
     observeOn,
     of,
     startWith,
-    Subject,
-    Subscription,
     switchMap
 } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import {
     ArrayListDataSource,
     CollectionBaseInput,
-    isBlank,
-    isDataSource,
-    isPresent,
     ListDataSource,
     ObservableListDataSource,
     PlatformFormField,
-    PlatformFormFieldControl
+    PlatformFormFieldControl,
+    isBlank,
+    isDataSource,
+    isPresent
 } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, ListItemDef } from './base-list-item';
-import { ListConfig } from './list.config';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
 import { FdpListComponent } from './fdpListComponent.token';
-import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
+import { ListConfig } from './list.config';
+import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
 import { FdpList, FdpListDataSource, ListType, SelectionType } from './models/list';
 
 export class SelectionChangeEvent {
@@ -141,7 +140,7 @@ export class ListComponent<T>
 
     /** define the role to custom requirement. */
     @Input()
-    role = 'listbox';
+    role = 'list';
 
     /** ListType 'inactive' | 'active' | 'navigation' | 'detail' */
     @Input()
