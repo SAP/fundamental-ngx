@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.30...v0.46.0-rc.31) (2023-09-08)
+
+
+### Features
+
+* **core:** adoption of horizon 2023 specs in menu ([#9993](https://github.com/SAP/fundamental-ngx/issues/9993)) ([add601c](https://github.com/SAP/fundamental-ngx/commit/add601ca147d47a90f2c068b3585b1d2b0bbb98c))
+
+
+### BREAKING CHANGES
+
+* **core:** `fd-menu-separator` is removed and `li[fd-menu-item][hasSeparator]` should be used
+
+
+
+
+
 # [0.46.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.29...v0.46.0-rc.30) (2023-09-08)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
