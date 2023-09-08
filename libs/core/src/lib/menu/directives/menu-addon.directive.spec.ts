@@ -1,5 +1,5 @@
-import { MenuAddonDirective } from './menu-addon.directive';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { MenuAddonDirective } from './menu-addon.directive';
 
 describe('MenuAddonDirective', () => {
     let directive: MenuAddonDirective;

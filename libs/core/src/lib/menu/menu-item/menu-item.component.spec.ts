@@ -1,9 +1,9 @@
 import { Component, forwardRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { MenuTriggerDirective } from '../directives/menu-trigger.directive';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuComponent } from '../menu.component';
 import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
-import { MenuTriggerDirective } from '../directives/menu-trigger.directive';
 
 @Component({
     template: `

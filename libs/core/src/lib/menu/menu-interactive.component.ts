@@ -1,6 +1,6 @@
-import { Component, ContentChild, ElementRef, HostBinding, inject, ViewChild } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
+import { Component, ContentChild, ElementRef, HostBinding, ViewChild, inject } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 
 @Component({

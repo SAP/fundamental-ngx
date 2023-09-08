@@ -8,8 +8,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT } from './tokens';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';

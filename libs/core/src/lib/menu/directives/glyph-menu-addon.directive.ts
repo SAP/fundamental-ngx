@@ -1,7 +1,7 @@
 import { CdkPortalOutlet, ComponentPortal, DomPortal, Portal, TemplatePortal } from '@angular/cdk/portal';
-import { ComponentRef, DestroyRef, Directive, EmbeddedViewRef, inject, Input, OnDestroy } from '@angular/core';
+import { ComponentRef, DestroyRef, Directive, EmbeddedViewRef, Input, OnDestroy, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { combineLatest, first, map, Observable, of, shareReplay, Subject, tap } from 'rxjs';
+import { Observable, Subject, combineLatest, first, map, of, shareReplay, tap } from 'rxjs';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { switchMap } from 'rxjs/operators';
 import { MenuComponent } from '../menu.component';
@@ -44,28 +44,6 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     private _destroyRef = inject(DestroyRef);
 
     /** @hidden */
-    setGlyphPortalOutlet(outlet: CdkPortalOutlet): void {
-        this._addonGlyphPortalOutlet$.next(outlet);
-    }
-
-    /** @hidden */
-    renderElement<ComponentType>(element: ComponentPortal<ComponentType>): Observable<ComponentRef<ComponentType>>;
-    /** @hidden */
-    renderElement<TemplateContext>(
-        element: TemplatePortal<TemplateContext>
-    ): Observable<EmbeddedViewRef<TemplateContext>>;
-    /** @hidden */
-    renderElement(element: DomPortal): Observable<any>;
-    /** @hidden */
-    renderElement(element: Portal<any>): Observable<any> {
-        return this._addonGlyphPortalOutlet$.pipe(
-            first(),
-            tap((outlet) => outlet.detach()),
-            map((outlet) => outlet.attach(element))
-        );
-    }
-
-    /** @hidden */
     constructor() {
         combineLatest([this._addonGlyphPortalOutlet$, this._glyphName$])
             .pipe(
@@ -95,6 +73,33 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     }
 
     /** @hidden */
+    setGlyphPortalOutlet(outlet: CdkPortalOutlet): void {
+        this._addonGlyphPortalOutlet$.next(outlet);
+    }
+
+    /** @hidden */
+    renderElement<ComponentType>(element: ComponentPortal<ComponentType>): Observable<ComponentRef<ComponentType>>;
+    /** @hidden */
+    renderElement<TemplateContext>(
+        element: TemplatePortal<TemplateContext>
+    ): Observable<EmbeddedViewRef<TemplateContext>>;
+    /** @hidden */
+    renderElement(element: DomPortal): Observable<any>;
+    /** @hidden */
+    renderElement(element: Portal<any>): Observable<any> {
+        return this._addonGlyphPortalOutlet$.pipe(
+            first(),
+            tap((outlet) => outlet.detach()),
+            map((outlet) => outlet.attach(element))
+        );
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._removeGlyphAddonFromMenu();
+    }
+
+    /** @hidden */
     private _addGlyphAddonToMenu(): void {
         this._menuComponent?.registerAddon(this);
     }
@@ -102,10 +107,5 @@ export class GlyphMenuAddonDirective implements OnDestroy {
     /** @hidden */
     private _removeGlyphAddonFromMenu(): void {
         this._menuComponent?.unregisterAddon(this);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._removeGlyphAddonFromMenu();
     }
 }

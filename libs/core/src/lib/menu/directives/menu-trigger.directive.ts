@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Subscription } from 'rxjs';
 
 import { MenuComponent } from '../menu.component';
 

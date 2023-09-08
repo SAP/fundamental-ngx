@@ -1,19 +1,19 @@
+import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
-    OnDestroy,
     Input,
+    OnDestroy,
     Output,
-    ViewEncapsulation,
-    ContentChild,
-    ChangeDetectorRef
+    ViewEncapsulation
 } from '@angular/core';
-import { FocusableOption } from '@angular/cdk/a11y';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';

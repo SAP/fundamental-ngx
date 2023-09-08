@@ -26,14 +26,14 @@ import {
 import { defer, fromEvent, Observable, Subject, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
-import { MenuTitleDirective } from '../directives/menu-title.directive';
-import { DefaultMenuItem } from '../default-menu-item.class';
-import { MenuInteractiveComponent } from '../menu-interactive.component';
-import { MenuService } from '../services/menu.service';
-import { coerceBoolean, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { coerceBoolean, Nullable } from '@fundamental-ngx/cdk/utils';
+import { DefaultMenuItem } from '../default-menu-item.class';
+import { MenuTitleDirective } from '../directives/menu-title.directive';
+import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { FD_MENU_ITEM_COMPONENT } from '../menu.tokens';
+import { MenuService } from '../services/menu.service';
 
 let menuUniqueId = 0;
 

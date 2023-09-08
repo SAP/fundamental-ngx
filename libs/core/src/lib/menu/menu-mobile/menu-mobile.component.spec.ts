@@ -2,6 +2,7 @@ import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
@@ -9,7 +10,6 @@ import { MenuComponent } from '../menu.component';
 import { MenuModule } from '../menu.module';
 import { MenuMobileComponent } from './menu-mobile.component';
 import { MenuMobileModule } from './menu-mobile.module';
-import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
 

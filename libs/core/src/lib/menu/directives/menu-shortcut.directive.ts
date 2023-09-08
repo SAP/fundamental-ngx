@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
-import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { MenuItemComponent } from '../menu-item/menu-item.component';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector

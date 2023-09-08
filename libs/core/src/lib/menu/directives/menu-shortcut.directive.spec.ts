@@ -1,7 +1,7 @@
-import { MenuShortcutDirective } from './menu-shortcut.directive';
-import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Observable, Subject } from 'rxjs';
+import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { MenuShortcutDirective } from './menu-shortcut.directive';
 
 describe('MenuShortcutDirective', () => {
     const buildMenuItem = (subject: Subject<boolean>): MenuItemComponent =>

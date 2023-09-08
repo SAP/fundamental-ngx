@@ -1,5 +1,5 @@
-import { Component, ElementRef, HostBinding, inject, Input, ViewChild } from '@angular/core';
 import { CdkPortalOutlet, PortalModule } from '@angular/cdk/portal';
+import { Component, ElementRef, HostBinding, Input, ViewChild, inject } from '@angular/core';
 import { GlyphMenuAddonDirective } from './glyph-menu-addon.directive';
 
 @Component({

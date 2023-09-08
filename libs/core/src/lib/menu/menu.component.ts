@@ -29,16 +29,16 @@ import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
 
-import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
-import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
-import { MenuService } from './services/menu.service';
-import { MENU_COMPONENT, MenuInterface } from './menu.interface';
-import { MenuItemComponent } from './menu-item/menu-item.component';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
+import { MenuItemComponent } from './menu-item/menu-item.component';
+import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
+import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
+import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { FD_MENU_COMPONENT, FD_MENU_ITEM_COMPONENT } from './menu.tokens';
+import { MenuService } from './services/menu.service';
 
 let menuUniqueId = 0;
 

@@ -1,7 +1,7 @@
-import { MenuTriggerDirective } from './menu-trigger.directive';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { MenuComponent } from '../menu.component';
 import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { MenuComponent } from '../menu.component';
+import { MenuTriggerDirective } from './menu-trigger.directive';
 
 @Component({
     template: '<div [fdMenuTrigger]="null"></div>',

@@ -1,5 +1,5 @@
-import { MenuKeyboardService } from './menu-keyboard.service';
 import { DefaultMenuItem } from './default-menu-item.class';
+import { MenuKeyboardService } from './menu-keyboard.service';
 
 describe('MenuKeyboardService', () => {
     let service: MenuKeyboardService;

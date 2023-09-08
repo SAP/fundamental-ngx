@@ -1,9 +1,9 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { MenuComponent } from './menu.component';
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { MenuModule } from './menu.module';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { MenuComponent } from './menu.component';
+import { MenuModule } from './menu.module';
 import { MenuService } from './services/menu.service';
 
 @Component({

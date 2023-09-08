@@ -1,10 +1,10 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { MenuService } from './menu.service';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { MenuComponent } from '../menu.component';
-import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
 import { MenuInteractiveComponent } from '../menu-interactive.component';
+import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
+import { MenuComponent } from '../menu.component';
+import { MenuService } from './menu.service';
 
 @Component({
     selector: 'fd-menu-test',

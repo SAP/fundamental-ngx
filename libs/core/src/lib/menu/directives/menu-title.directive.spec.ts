@@ -1,6 +1,6 @@
-import { MenuTitleDirective } from './menu-title.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { MenuTitleDirective } from './menu-title.directive';
 
 @Component({
     template: '<div fd-menu-title>{{ menuTitle }}</div>',

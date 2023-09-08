@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuMobileComponent } from './menu-mobile.component';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { NgModule } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { MenuMobileComponent } from './menu-mobile.component';
 
 @NgModule({
     imports: [CommonModule, DialogModule, ButtonModule, MenuMobileComponent],

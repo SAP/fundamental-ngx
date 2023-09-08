@@ -1,3 +1,4 @@
+export * from './directives/glyph-menu-addon.directive';
 export * from './directives/menu-addon.directive';
 export * from './directives/menu-item-input.directive';
 export * from './directives/menu-shortcut.directive';
