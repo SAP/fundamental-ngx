@@ -5,11 +5,13 @@
         [type]="type"
         [size]="size"
         [orientation]="orientation"
+        fdkResizeObserver
         fdkFocusableList
         [contentDirection]="contentDirection$ | async"
         [wrap]="true"
         [navigationDirection]="orientation"
         [items]="avatars"
+        (resized)="_detectChanges()"
     >
         <fd-popover *ngFor="let item of avatars" [noArrow]="false" [focusAutoCapture]="true">
             <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
@@ -47,14 +49,13 @@
     </fd-avatar-group-host>
 </ng-container>
 <ng-template #groupType>
-    <fd-popover [noArrow]="false" [focusAutoCapture]="true" fdkResizeObserver #popoverResize="fdkResizeObserver">
+    <fd-popover [noArrow]="false" [focusAutoCapture]="true" fdkResizeObserver (resized)="_detectChanges()">
         <fd-popover-control>
             <fd-avatar-group-host
                 #avatarGroupHostComponent
                 [type]="type"
                 [size]="size"
                 [orientation]="orientation"
-                [resizeEmitter]="popoverResize.resized"
                 [fdkFocusableItem]="true"
             >
                 <ng-container *ngFor="let item of avatars">

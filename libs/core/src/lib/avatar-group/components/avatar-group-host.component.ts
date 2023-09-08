@@ -40,7 +40,6 @@ import { AvatarGroupHostConfig } from '../types';
     standalone: true,
     imports: [NgIf],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    hostDirectives: [ResizeObserverDirective],
     encapsulation: ViewEncapsulation.None
 })
 export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig {
@@ -58,15 +57,14 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasEl
 
     /** @hidden */
     @Input()
-    resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
-
-    /** @hidden */
-    @Input()
     items: QueryList<AvatarGroupItemDirective>;
 
     /** @hidden */
     @ContentChildren(AvatarGroupItemRendererDirective, { descendants: true })
     portals: QueryList<AvatarGroupItemRendererDirective>;
+
+    /** @hidden */
+    resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
 
     /** The reference to the host element */
     elementRef = inject(ElementRef);

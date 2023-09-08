@@ -16,7 +16,6 @@ import {
     DynamicPortalComponent,
     FocusableItemDirective,
     FocusableListDirective,
-    ResizeObserverChangeDetectorRef,
     ResizeObserverDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
@@ -44,10 +43,6 @@ import { AvatarGroupHostConfig } from './types';
         {
             provide: AVATAR_GROUP_HOST_CONFIG,
             useExisting: AvatarGroupComponent
-        },
-        {
-            provide: ResizeObserverChangeDetectorRef,
-            useExisting: ChangeDetectorRef
         }
     ],
     imports: [
@@ -123,4 +118,12 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
         map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
     );
+
+    /** @hidden */
+    private _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
+    _detectChanges(): void {
+        this._cdr.detectChanges();
+    }
 }

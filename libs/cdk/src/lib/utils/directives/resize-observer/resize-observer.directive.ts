@@ -1,32 +1,30 @@
-import { ChangeDetectorRef, Directive, ElementRef, inject, Output } from '@angular/core';
+import { Directive, ElementRef, inject, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { HasElementRef } from '../../interfaces';
 import { ResizeObserverService } from '../../services/resize-observer.service';
-import { ResizeObserverChangeDetectorRef } from './resize-observer-change-detector-ref.class';
 
 @Directive({
     selector: '[fdkResizeObserver]',
     exportAs: 'fdkResizeObserver',
     standalone: true
 })
-export class ResizeObserverDirective {
+export class ResizeObserverDirective implements HasElementRef {
+    /**
+     * When the element is resized, emits an array of ResizeObserverEntry objects.
+     **/
+    @Output()
+    resized: Observable<ResizeObserverEntry[]>;
+
+    /**
+     * The reference to the Resize target element.
+     **/
+    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+
     /** @hidden */
     private _resizeObserverService = inject(ResizeObserverService);
 
     /** @hidden */
-    private _elementRef: ElementRef<HTMLElement> = inject(ElementRef);
-
-    /** @hidden
-     * Change detector if is provided through DI then use it, otherwise use default one.
-     * */
-    private _cdr = inject(ResizeObserverChangeDetectorRef, { optional: true }) || inject(ChangeDetectorRef);
-
-    /** @hidden
-     * Since resize observer does not invoke change detection, we need to do it manually.
-     * */
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    @Output()
-    resized: Observable<ResizeObserverEntry[]> = this._resizeObserverService
-        .observe(this._elementRef.nativeElement)
-        .pipe(tap(() => this._cdr.detectChanges()));
+    constructor() {
+        this.resized = this._resizeObserverService.observe(this.elementRef.nativeElement);
+    }
 }
