@@ -325,7 +325,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         // selected items should be displayed in the same order as options
         const valueIndexes = new Map<any, number>(this._suggestions.map((s, i) => [s.value, i]));
         this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value)! - valueIndexes.get(b.value)!);
-        this._propagateChange();
 
         this._tokenizer.onResize();
 
@@ -359,8 +358,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         // setting value, it will call setValue()
         this.value = selectedItems;
-
-        this._emitChangeEvent();
     }
 
     /** @hidden */
