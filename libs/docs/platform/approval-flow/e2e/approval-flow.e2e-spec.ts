@@ -348,6 +348,7 @@ describe('Approval flow', () => {
             await click(detailsDialogSendReminderBtn);
             await waitForElDisplayed(detailsDialogSendReminderBtn);
             await click(detailsDialogSendReminderBtn);
+            await pause(500);
             const approvalFlowNodeCountAfterAdd = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
             await expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdd - 1);
@@ -447,8 +448,7 @@ describe('Approval flow', () => {
             await waitForElDisplayed(approvalFlowNodeActionMenu);
             await click(approvalFlowNodeActionMenu, 3);
             await waitForElDisplayed(approvalFlowNodeActionMenuItem, 2);
-            await click(approvalFlowNodeActionMenuItem, 2);
-
+            await click('.fd-menu__title[title*="Remove"]');
             await waitForElDisplayed(messageStrip);
             const approvalFlowNodeCountAfterRemove = await getElementArrayLength(afDefaultExample + approvalFlowNode);
 
@@ -459,7 +459,7 @@ describe('Approval flow', () => {
             await scrollIntoView(afDefaultExample);
             const startingNodeCount = await getElementArrayLength(afDefaultExample + nodeCardInfo);
             await enterEditMode(afDefaultExample);
-            (await browserIsFirefox())
+            browserIsFirefox()
                 ? await click(approvalFlowNodeActionMenu, 5)
                 : await click(approvalFlowNodeActionMenu, 4);
             await waitForElDisplayed(approvalFlowNodeActionMenuItem);
