@@ -2,6 +2,7 @@ import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
@@ -27,7 +28,9 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
                 <div fd-menu-interactive></div>
             </li>
         </fd-submenu>
-    `
+    `,
+    standalone: true,
+    imports: [MenuModule, MenuMobileModule]
 })
 class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
@@ -48,9 +51,14 @@ describe('MenuMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TesNestedMenuItemComponent],
-            imports: [MenuModule, MenuMobileModule, NoopAnimationsModule],
-            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+            imports: [MenuModule, MenuMobileModule, NoopAnimationsModule, TesNestedMenuItemComponent],
+            providers: [
+                {
+                    provide: MOBILE_CONFIG_TEST_TOKEN,
+                    useValue: MOBILE_CONFIG
+                },
+                { provide: FD_DIALOG_FOCUS_TRAP_ERROR, useValue: true }
+            ]
         }).compileComponents();
     }));
 
@@ -78,7 +86,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        const openDialogSpy = spyOn<any>(menuMobile, '_openDialog').and.callThrough();
+        const openDialogSpy = jest.spyOn(<any>menuMobile, '_openDialog');
 
         menu.open();
 
@@ -115,7 +123,7 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeTrue();
+        expect(menuMobile.isSubmenu).toBe(true);
     });
 
     it('should use correct menu title', async () => {
@@ -149,12 +157,12 @@ describe('MenuMobileComponent', () => {
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeTrue();
+        expect(menuMobile.isSubmenu).toBe(true);
         fixture.nativeElement.querySelector('#menu-mobile-navigate-back').click();
 
         await whenStable(fixture);
 
-        expect(menuMobile.isSubmenu).toBeFalse();
+        expect(menuMobile.isSubmenu).toBe(false);
     });
 
     it('should properly render with empty MobileConfig', async () => {

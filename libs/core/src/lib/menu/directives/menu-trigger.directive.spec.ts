@@ -1,9 +1,13 @@
-import { MenuTriggerDirective } from './menu-trigger.directive';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { MenuComponent } from '../menu.component';
 import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { MenuComponent } from '../menu.component';
+import { MenuTriggerDirective } from './menu-trigger.directive';
 
-@Component({ template: '<div [fdMenuTrigger]="null"></div>' })
+@Component({
+    template: '<div [fdMenuTrigger]="null"></div>',
+    imports: [MenuTriggerDirective],
+    standalone: true
+})
 class TestComponent {
     @ViewChild(MenuTriggerDirective) menuTrigger: MenuTriggerDirective;
 }
@@ -15,7 +19,7 @@ describe('MenuTriggerDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, MenuTriggerDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -37,9 +41,9 @@ describe('MenuTriggerDirective', () => {
     });
 
     it('should set menu trigger', () => {
-        const setTriggerSpy = spyOnProperty(menu, 'trigger', 'set');
-        const listenersSpy = spyOn<any>(directive, '_subscribeToMenu');
-        const attributesSpy = spyOn<any>(directive, '_setAriaAttributes');
+        const setTriggerSpy = jest.spyOn(menu, 'trigger', 'set');
+        const listenersSpy = jest.spyOn(directive as any, '_subscribeToMenu');
+        const attributesSpy = jest.spyOn(directive as any, '_setAriaAttributes');
 
         directive.menu = undefined;
 
@@ -59,7 +63,7 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaHasPopup).toBeTrue();
+        expect(directive.ariaHasPopup).toBe(true);
         expect(directive.ariaExpanded).toBeFalsy();
         expect(directive.ariaControls).toBeFalsy();
 
@@ -68,7 +72,7 @@ describe('MenuTriggerDirective', () => {
 
         tick();
 
-        expect(directive.ariaExpanded).toBeTrue();
+        expect(directive.ariaExpanded).toBe(true);
         expect(directive.ariaControls).toEqual(menu.id);
     }));
 });

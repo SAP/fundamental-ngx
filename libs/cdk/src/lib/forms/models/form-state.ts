@@ -1,1 +1,3 @@
-export type FormStates = 'success' | 'error' | 'warning' | 'information' | 'default';
+export const formStates = ['success', 'error', 'warning', 'default', 'information'] as const;
+
+export type FormStates = (typeof formStates)[number];

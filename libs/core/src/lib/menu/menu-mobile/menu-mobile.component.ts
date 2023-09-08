@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -12,25 +14,45 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogBodyComponent, DialogService } from '@fundamental-ngx/core/dialog';
-import { Observable, of } from 'rxjs';
-import { MenuService } from '../services/menu.service';
-import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { map, startWith, take, takeUntil } from 'rxjs/operators';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
+import { InitialFocusDirective, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DialogBodyComponent, DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
-    MobileModeControl,
-    MobileModeConfigToken
+    MobileModeConfigToken,
+    MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { Observable, of } from 'rxjs';
+import { map, startWith, take, takeUntil } from 'rxjs/operators';
+import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
+import { MenuService } from '../services/menu.service';
 
 @Component({
     selector: 'fd-menu-mobile',
     templateUrl: './menu-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogModule,
+        TemplateDirective,
+        BarModule,
+        NgIf,
+        ButtonModule,
+        ContentDensityDirective,
+        TitleModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgTemplateOutlet,
+        InitialFocusDirective,
+        AsyncPipe
+    ]
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
     /** @hidden */

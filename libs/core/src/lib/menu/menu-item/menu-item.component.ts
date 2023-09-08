@@ -7,6 +7,8 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
+    HostBinding,
     Inject,
     InjectionToken,
     Input,
@@ -24,11 +26,14 @@ import {
 import { defer, fromEvent, Observable, Subject, Subscription, timer } from 'rxjs';
 import { filter, switchMap, takeUntil } from 'rxjs/operators';
 
-import { MenuTitleDirective } from '../directives/menu-title.directive';
+import { BooleanInput } from '@angular/cdk/coercion';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { coerceBoolean, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DefaultMenuItem } from '../default-menu-item.class';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
+import { MenuTitleDirective } from '../directives/menu-title.directive';
+import { MenuInteractiveComponent } from '../menu-interactive.component';
+import { FD_MENU_ITEM_COMPONENT } from '../menu.tokens';
 import { MenuService } from '../services/menu.service';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let menuUniqueId = 0;
 
@@ -39,7 +44,9 @@ export interface BaseSubmenu {
     ariaLabel: Nullable<string>;
     ariaLabelledby: Nullable<string>;
     _menuItemsChange$: Observable<void>;
+
     _registerItem(item: MenuItemComponent): void;
+
     _unregisterItem(item: MenuItemComponent): void;
 }
 
@@ -53,9 +60,18 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'attr.role': 'menuitem',
-        '[class.fd-menu__item]': 'true'
-    }
+        '[attr.role]': '"menuitem"',
+        '[class.fd-menu__item]': 'true',
+        '[class.fd-menu--full-width]': 'menuService?.menuComponent?.mobile || false'
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet],
+    providers: [
+        {
+            provide: FD_MENU_ITEM_COMPONENT,
+            useExisting: forwardRef(() => MenuItemComponent)
+        }
+    ]
 })
 export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, AfterContentInit, OnDestroy {
     /** Set the Menu Item as disabled/enabled */
@@ -74,6 +90,12 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     @Input()
     parentSubmenu: BaseSubmenu | undefined;
 
+    /** Whether the menu item has a separator */
+    @Input()
+    @HostBinding('class.has-separator')
+    @coerceBoolean
+    hasSeparator: BooleanInput;
+
     /** Emitted when the menu item is selected. */
     @Output()
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -84,8 +106,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     menuItemTitle: MenuTitleDirective;
 
     /** @hidden Reference to the Menu Item interactive element */
-    @ContentChild(MenuInteractiveDirective)
-    menuInteractive: MenuInteractiveDirective;
+    @ContentChild(MenuInteractiveComponent)
+    menuInteractive: MenuInteractiveComponent;
 
     /** @hidden Whether sub-menu is currently visible*/
     submenuVisible = false;
@@ -265,7 +287,8 @@ export class MenuItemComponent implements DefaultMenuItem, OnInit, OnChanges, Af
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: SUBMENU, useExisting: SubmenuComponent }],
-    exportAs: 'fdSubmenu'
+    exportAs: 'fdSubmenu',
+    standalone: true
 })
 export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     /** Aria-label for navigation */
@@ -280,7 +303,7 @@ export class SubmenuComponent implements BaseSubmenu, AfterContentInit {
     @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
     /** @hidden Reference to Submenu MenuItems  */
-    @ContentChildren(MenuItemComponent)
+    @ContentChildren(FD_MENU_ITEM_COMPONENT)
     _projectedItems: QueryList<MenuItemComponent>;
 
     /** @hidden */

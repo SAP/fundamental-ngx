@@ -1,13 +1,17 @@
-import { waitForAsync } from '@angular/core/testing';
-import { MenuInteractiveDirective } from './menu-interactive.directive';
-import { MockElementRef } from '@fundamental-ngx/core/tests';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MenuInteractiveComponent } from './menu-interactive.component';
 
-describe('MenuLinkDirective', () => {
-    let directive: MenuInteractiveDirective;
+describe('MenuInteractiveComponent', () => {
+    let componentFixture: ComponentFixture<MenuInteractiveComponent>;
+    let directive: MenuInteractiveComponent;
 
-    beforeEach(waitForAsync(() => {
-        directive = new MenuInteractiveDirective(new MockElementRef());
-    }));
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [MenuInteractiveComponent]
+        }).compileComponents();
+        componentFixture = TestBed.createComponent(MenuInteractiveComponent);
+        directive = componentFixture.componentInstance;
+    });
 
     it('should create an instance', () => {
         expect(directive).toBeTruthy();
@@ -17,24 +21,24 @@ describe('MenuLinkDirective', () => {
         directive.ariaHaspopup = true;
         directive.setSelected(true);
 
-        expect(directive.selected).toBeTrue();
+        expect(directive.selected).toBe(true);
 
         directive.setSelected(false);
         directive.ariaHaspopup = false;
         directive.setSelected(true);
 
-        expect(directive.selected).toBeFalse();
+        expect(directive.selected).toBe(false);
     });
 
     it('should properly set disabled state', () => {
         directive.setDisabled(false);
 
-        expect(directive.disabled).toBeFalse();
+        expect(directive.disabled).toBe(false);
         expect(directive.tabindex).toEqual(0);
 
         directive.setDisabled(true);
 
-        expect(directive.disabled).toBeTrue();
+        expect(directive.disabled).toBe(true);
         expect(directive.tabindex).toEqual(-1);
     });
 
@@ -42,17 +46,17 @@ describe('MenuLinkDirective', () => {
         const menuId = 'test-id';
         directive.setSubmenu(true);
 
-        expect(directive.ariaHaspopup).toBeTrue();
+        expect(directive.ariaHaspopup).toBe(true);
         expect(directive.ariaControls).toBeFalsy();
 
         directive.setSubmenu(true, menuId);
 
-        expect(directive.ariaHaspopup).toBeTrue();
+        expect(directive.ariaHaspopup).toBe(true);
         expect(directive.ariaControls).toEqual(menuId);
 
         directive.setSubmenu(false);
 
-        expect(directive.ariaHaspopup).toBeFalse();
+        expect(directive.ariaHaspopup).toBe(false);
         expect(directive.ariaControls).toBeFalsy();
     });
 });

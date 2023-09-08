@@ -8,6 +8,7 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
+    forwardRef,
     Injector,
     Input,
     OnDestroy,
@@ -21,21 +22,23 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { combineLatest, map, startWith, Subscription, tap } from 'rxjs';
 
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
+import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
-import { MenuService } from './services/menu.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
-import { MenuItemComponent } from './menu-item/menu-item.component';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { FD_MENU_COMPONENT, FD_MENU_ITEM_COMPONENT } from './menu.tokens';
+import { MenuService } from './services/menu.service';
 
 let menuUniqueId = 0;
 
@@ -48,7 +51,16 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [MenuService, PopoverService, contentDensityObserverProviders()]
+    providers: [
+        MenuService,
+        PopoverService,
+        {
+            provide: FD_MENU_COMPONENT,
+            useExisting: forwardRef(() => MenuComponent)
+        },
+        contentDensityObserverProviders()
+    ],
+    standalone: true
 })
 export class MenuComponent
     extends BasePopoverClass
@@ -60,6 +72,7 @@ export class MenuComponent
         this._mobile = coerceBooleanProperty(value);
         this._menuService.setMenuMode(this.mobile);
     }
+
     get mobile(): boolean {
         return this._mobile;
     }
@@ -112,14 +125,25 @@ export class MenuComponent
     _menuRootTemplate: TemplateRef<any>;
 
     /** @hidden Reference to all menu Items */
-    @ContentChildren(MenuItemComponent)
+    @ContentChildren(FD_MENU_ITEM_COMPONENT)
     _menuItems: QueryList<MenuItemComponent>;
+
+    /** @hidden Menu item segmented item headers */
+    @ContentChildren(SegmentedButtonHeaderDirective)
+    _segmentedButtonHeaderItems: QueryList<SegmentedButtonHeaderDirective<unknown>>;
+
+    /** @hidden Menu item segmented item options */
+    @ContentChildren(SegmentedButtonOptionDirective)
+    _segmentedButtonOptions: QueryList<SegmentedButtonOptionDirective<unknown>>;
 
     /** @hidden Whether use a menu in mobile mode */
     private _mobile = false;
 
     /** @hidden Reference to external menu trigger */
     private _externalTrigger: ElementRef;
+
+    /** @hidden */
+    private _addons: Set<unknown> = new Set();
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -129,6 +153,11 @@ export class MenuComponent
 
     /** @hidden */
     private _clickEventListener: null | (() => void);
+
+    /** @hidden */
+    get hasAddons(): boolean {
+        return this._addons.size > 0;
+    }
 
     /** @hidden */
     private get _popoverConfig(): BasePopoverClass {
@@ -170,6 +199,18 @@ export class MenuComponent
         });
     }
 
+    /** Register addon */
+    registerAddon(addon: unknown): void {
+        this._addons.add(addon);
+        this._changeDetectorRef.markForCheck();
+    }
+
+    /** Unregister addon */
+    unregisterAddon(addon: unknown): void {
+        this._addons.delete(addon);
+        this._changeDetectorRef.markForCheck();
+    }
+
     /** @hidden */
     ngAfterContentInit(): void {
         this._menuService.setMenuComponent(this);
@@ -188,6 +229,61 @@ export class MenuComponent
         });
 
         this._menuService.setMenuMode(this.mobile);
+
+        combineLatest([
+            this._menuItems.changes.pipe(
+                startWith(this._menuItems),
+                map((items) => items.toArray())
+            ),
+            this._segmentedButtonHeaderItems.changes.pipe(
+                startWith(this._segmentedButtonHeaderItems),
+                map((items) => items.toArray())
+            ),
+            this._segmentedButtonOptions.changes.pipe(
+                startWith(this._segmentedButtonOptions),
+                map((items) => items.toArray())
+            )
+        ])
+            .pipe(
+                map(([menuItems, segmentedButtonHeaderItems, segmentedButtonOptions]) =>
+                    menuItems.map((item, index) => ({
+                        menuItem: item,
+                        segmentedButtonHeaderItem: segmentedButtonHeaderItems.find(
+                            (headerItem) => headerItem.elementRef.nativeElement === item.elementRef.nativeElement
+                        ),
+                        segmentedButtonOption: segmentedButtonOptions.find(
+                            (option) => option.elementRef.nativeElement === item.elementRef.nativeElement
+                        ),
+                        index
+                    }))
+                ),
+                map((items) => {
+                    let headers = items.filter((item) => !!item.segmentedButtonHeaderItem);
+                    const options = items.filter((item) => !!item.segmentedButtonOption);
+                    headers = headers.map((header, headerIndex) => ({
+                        ...header,
+                        options: options.reduce((acc, option) => {
+                            const lastOption = acc[acc.length - 1];
+                            const optionIndex = option.index;
+                            if (!lastOption || optionIndex === lastOption.index + 1) {
+                                if (headerIndex === headers.length - 1 && optionIndex > header.index) {
+                                    acc.push(option);
+                                } else if (optionIndex > header.index && optionIndex < headers[headerIndex + 1].index) {
+                                    acc.push(option);
+                                }
+                            }
+                            return acc;
+                        }, [])
+                    }));
+                    return headers;
+                }),
+                tap((headers) =>
+                    headers.forEach(({ segmentedButtonHeaderItem, options }) => {
+                        segmentedButtonHeaderItem.setOptions(options.map((option) => option.segmentedButtonOption));
+                    })
+                )
+            )
+            .subscribe();
     }
 
     /** @hidden */
@@ -206,6 +302,7 @@ export class MenuComponent
         this._destroyEventListeners();
         this._listenOnTriggerRefClicks();
     }
+
     get trigger(): ElementRef {
         return this._externalTrigger;
     }
@@ -247,6 +344,11 @@ export class MenuComponent
     }
 
     /** @hidden */
+    detectChanges(): void {
+        this._changeDetectorRef.detectChanges();
+    }
+
+    /** @hidden */
     private _cleanUpMenuAfterClose(): void {
         this._menuService.resetMenuState();
     }
@@ -259,7 +361,7 @@ export class MenuComponent
             this._setupPopoverService();
         }
 
-        this._changeDetectorRef.detectChanges();
+        this.detectChanges();
     }
 
     /** @hidden */

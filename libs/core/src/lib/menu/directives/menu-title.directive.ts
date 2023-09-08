@@ -5,7 +5,8 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
  */
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-menu-title]'
+    selector: '[fd-menu-title]',
+    standalone: true
 })
 export class MenuTitleDirective {
     /** @hidden */
