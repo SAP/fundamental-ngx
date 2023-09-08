@@ -136,7 +136,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     private _focusItems: QueryList<ListFocusItem>;
 
     /** @hidden */
-    @HostBinding('attr.aria-role')
+    @HostBinding('attr.role')
     private get _ariaRole(): string {
         return this.role || this._defaultRole;
     }

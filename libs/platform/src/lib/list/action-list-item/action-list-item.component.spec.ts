@@ -49,10 +49,11 @@ describe('ActionListItemComponent', () => {
         }).compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(ActionListItemComponentTestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should create', () => {
