@@ -13,7 +13,7 @@
     [attr.aria-setsize]="ariaSetsize"
     [attr.aria-label]="ariaLabel"
     [attr.aria-multiselectable]="ariaMultiselectable"
-    [attr.role]="role"
+    [role]="role"
     [unreadIndicator]="unreadIndicator"
 >
     <ng-container *ngIf="loadMore && loadOnScroll">
@@ -33,7 +33,7 @@
                 [style.max-height]="maxHeight"
                 (onScrollAction)="_scrollHandler()"
                 [scrollPercent]="scrollOffsetPercentage"
-                [attr.role]="role"
+                [role]="role"
             >
                 <ng-container *ngIf="_items.length !== 0; then thenBlock; else elseBlock"></ng-container>
             </div>
