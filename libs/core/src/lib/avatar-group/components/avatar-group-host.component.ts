@@ -16,7 +16,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { HasElementRef, ResizeObserverDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    applyCssClass,
+    CssClassBuilder,
+    HasElementRef,
+    Nullable,
+    ResizeObserverDirective
+} from '@fundamental-ngx/cdk/utils';
 import { animationFrames, combineLatest, delayWhen, map, Observable, startWith, Subject } from 'rxjs';
 import { AvatarGroupItemRendererDirective } from '../directives/avatar-group-item-renderer.directive';
 import { AvatarGroupItemDirective } from '../directives/avatar-group-item.directive';
@@ -24,25 +30,19 @@ import { AvatarGroupHostConfig } from '../types';
 
 @Component({
     selector: 'fd-avatar-group-host',
-    host: {
-        class: 'fd-avatar-group',
-        '[class.fd-avatar-group--individual-type]': 'type === "individual"',
-        '[class.fd-avatar-group--group-type]': 'type === "group"',
-        '[class.fd-avatar-group--horizontal]': 'orientation === "horizontal"',
-        '[class.fd-avatar-group--vertical]': 'orientation === "vertical"',
-        '[class.fd-avatar-group--xs]': 'size === "xs"',
-        '[class.fd-avatar-group--s]': 'size === "s"',
-        '[class.fd-avatar-group--m]': 'size === "m"',
-        '[class.fd-avatar-group--l]': 'size === "l"',
-        '[class.fd-avatar-group--xl]': 'size === "xl"'
-    },
     template: '<ng-content></ng-content>',
     standalone: true,
     imports: [NgIf],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig {
+export class AvatarGroupHostComponent
+    implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig, CssClassBuilder
+{
+    /** @hidden */
+    @Input()
+    class: Nullable<string>;
+
     /** @hidden */
     @Input()
     type: AvatarGroupHostConfig['type'];
@@ -80,6 +80,19 @@ export class AvatarGroupHostComponent implements AfterViewInit, OnChanges, HasEl
 
     /** @hidden */
     private _onChanges$ = new Subject<SimpleChanges>();
+
+    /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            this.class || '',
+            'fd-avatar-group',
+            this.type === 'individual' ? 'fd-avatar-group--individual-type' : '',
+            this.type === 'group' ? 'fd-avatar-group--group-type' : '',
+            this.orientation ? 'fd-avatar-group--' + this.orientation : '',
+            this.size ? 'fd-avatar-group--' + this.size : ''
+        ];
+    }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

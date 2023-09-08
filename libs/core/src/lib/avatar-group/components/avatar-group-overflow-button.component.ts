@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -11,7 +10,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
+    applyCssClass,
     ColorAccent,
+    CssClassBuilder,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItemDirective,
     Nullable,
@@ -30,7 +31,6 @@ import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
     host: {
         role: 'button'
     },
-    hostDirectives: [NgClass],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
@@ -41,7 +41,10 @@ import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
         }
     ]
 })
-export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective implements OnChanges, OnInit {
+export class AvatarGroupOverflowButtonComponent
+    extends FocusableItemDirective
+    implements OnChanges, OnInit, CssClassBuilder
+{
     /**
      * Size of the overflow button.
      */
@@ -61,7 +64,8 @@ export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective i
     @Input() colorAccent: Nullable<ColorAccent> = null;
 
     /** @hidden */
-    private ngClassDirective = inject(NgClass);
+    @Input()
+    class: Nullable<string>;
 
     /** @hidden */
     constructor() {
@@ -70,22 +74,23 @@ export class AvatarGroupOverflowButtonComponent extends FocusableItemDirective i
     }
 
     /** @hidden */
+    @applyCssClass
+    buildComponentCssClass(): string[] {
+        return [
+            this.class || '',
+            'fd-avatar fd-avatar--overflow',
+            'fd-avatar--' + this.size,
+            this.colorAccent ? 'fd-avatar--' + this.colorAccent : ''
+        ];
+    }
+
+    /** @hidden */
     ngOnInit(): void {
-        this.updateClass();
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnChanges(): void {
-        this.updateClass();
-    }
-
-    /** @hidden */
-    private updateClass(): void {
-        this.ngClassDirective.klass = [
-            'fd-avatar fd-avatar--overflow',
-            'fd-avatar--' + this.size,
-            this.colorAccent ? 'fd-avatar--' + this.colorAccent : ''
-        ].join(' ');
-        this.ngClassDirective.ngDoCheck();
+        this.buildComponentCssClass();
     }
 }
