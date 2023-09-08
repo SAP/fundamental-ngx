@@ -389,6 +389,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Изчисти',
         submitButtonTitle: 'Търси',
+        searchInputLabel: 'Търси',
         synchronizeButtonTitle: 'Синхронизирай',
         searchSuggestionMessage: (params) => {
             const count = params['count'];
