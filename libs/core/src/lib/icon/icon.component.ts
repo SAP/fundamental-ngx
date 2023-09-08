@@ -60,6 +60,11 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.aria-label')
     ariaLabel: Nullable<string>;
 
+    /** Aria-hidden attribute for Icon element. */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden: Nullable<boolean>;
+
     /** Whether or not this icon is for a list navigation item. */
     @HostBinding('class.fd-list__navigation-item-icon')
     _navigationItemIcon = false;

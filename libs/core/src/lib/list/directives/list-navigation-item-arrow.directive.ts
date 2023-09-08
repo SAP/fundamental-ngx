@@ -1,4 +1,5 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fd-list-navigation-item-arrow], [fdListNavigaitonItemArrow]',
@@ -23,6 +24,11 @@ export class ListNavigationItemArrowDirective {
     /** @hidden */
     @HostBinding('class.is-expanded')
     expanded = false;
+
+    /** Aria-hidden attribute value. */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden: Nullable<boolean> = true;
 
     /** @hidden */
     _setExpanded(expanded: boolean): void {
