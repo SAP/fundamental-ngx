@@ -373,6 +373,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         headerMenuUnfreeze: 'हैडर मेनू अनफ्रीज',
         headerMenuFilter: 'फिल्टर',
         defaultEmptyMessage: 'डाटा प्राप्त नहीं हुआ',
+        emptyCell: 'खाली',
         noVisibleColumnsMessage:
             'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'रीसेट करें',
