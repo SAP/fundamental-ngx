@@ -1,4 +1,5 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
@@ -8,7 +9,10 @@ import { Directive, HostListener } from '@angular/core';
     },
     standalone: true
 })
-export class MenuItemInputDirective {
+export class MenuItemInputDirective implements HasElementRef {
+    /** @hidden */
+    elementRef = inject(ElementRef);
+
     /**
      * This is needed to prevent the click event from bubbling up to the menu item
      * and potentially closing the menu or triggering other actions.
@@ -16,6 +20,8 @@ export class MenuItemInputDirective {
     @HostListener('keydown', ['$event'])
     @HostListener('click', ['$event'])
     onInteraction($event: KeyboardEvent | MouseEvent): void {
-        $event.stopPropagation();
+        if ($event.target === this.elementRef.nativeElement) {
+            $event.stopPropagation();
+        }
     }
 }

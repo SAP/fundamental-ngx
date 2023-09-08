@@ -1,7 +1,8 @@
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
-import { Component, ContentChild, ElementRef, HostBinding, ViewChild, inject } from '@angular/core';
+import { Component, ContentChild, ElementRef, HostBinding, HostListener, ViewChild, inject } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MenuAddonDirective } from './directives/menu-addon.directive';
+import { MenuItemInputDirective } from './directives/menu-item-input.directive';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -58,6 +59,10 @@ export class MenuInteractiveComponent {
     readonly fdMenuLinkClass: boolean = true;
 
     /** @hidden */
+    @ContentChild(MenuItemInputDirective)
+    private _input: MenuItemInputDirective;
+
+    /** @hidden */
     _fromSplitButton = false;
 
     /** @hidden */
@@ -76,6 +81,15 @@ export class MenuInteractiveComponent {
             this._startAddonInstance.setAddonPosition = 'before';
         }
         return this._startAddonInstance;
+    }
+
+    /** @hidden */
+    @HostListener('keydown.enter', ['$event'])
+    @HostListener('keydown.space', ['$event'])
+    _handleKeydown($event: KeyboardEvent): void {
+        if (this._input && $event.target === this.elementRef.nativeElement) {
+            this._input.elementRef.nativeElement.focus();
+        }
     }
 
     /** @hidden */
