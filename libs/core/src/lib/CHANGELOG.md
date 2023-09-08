@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.32...v0.46.0-rc.33) (2023-09-08)
+
+
+### Bug Fixes
+
+* **core:** childless list item aria-expanded ([#10498](https://github.com/SAP/fundamental-ngx/issues/10498)) ([1af4e0b](https://github.com/SAP/fundamental-ngx/commit/1af4e0ba121c057c4597e61539f37603e956b747))
+
+
+
+
+
 # [0.46.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.31...v0.46.0-rc.32) (2023-09-08)
 
 
