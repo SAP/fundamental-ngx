@@ -22,6 +22,7 @@ import { MultiInputFormExampleComponent } from './examples/multi-input-form-exam
 import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
 import { MultiInputMobileExampleComponent } from './examples/multi-input-mobile-example/multi-input-mobile-example.component';
 import { MultiInputNewTokensExampleComponent } from './examples/multi-input-new-tokens-example/multi-input-new-tokens-example.component';
+import { MultiInputOptionItemExampleComponent } from './examples/multi-input-option-item-example/multi-input-option-item-example.component';
 
 const simpleH = 'multi-input-example/multi-input-example.component.html';
 const simpleT = 'multi-input-example/multi-input-example.component.ts';
@@ -59,6 +60,8 @@ const widthT = 'multi-input-dropdown-width-example/multi-input-dropdown-width-ex
 const addonH = 'multi-input-addon-clicked-example/multi-input-addon-clicked-example.component.html';
 const addonT = 'multi-input-addon-clicked-example/multi-input-addon-clicked-example.component.ts';
 
+const optionItemT = 'multi-input-option-item-example/multi-input-option-item-example.component.ts';
+
 @Component({
     selector: 'app-multi-input-docs',
     templateUrl: './multi-input-docs.component.html',
@@ -82,7 +85,8 @@ const addonT = 'multi-input-addon-clicked-example/multi-input-addon-clicked-exam
         MultiInputNewTokensExampleComponent,
         MultiInputCustomItemExampleComponent,
         MultiInputDropdownWidthExampleComponent,
-        MultiInputAddonClickedExampleComponent
+        MultiInputAddonClickedExampleComponent,
+        MultiInputOptionItemExampleComponent
     ]
 })
 export class MultiInputDocsComponent {
@@ -251,6 +255,14 @@ export class MultiInputDocsComponent {
             component: 'MultiInputAddonClickedExampleComponent',
             code: getAssetFromModuleAssets(addonT),
             fileName: 'multi-input-addon-clicked-example'
+        }
+    ];
+    optionItemT: ExampleFile[] = [
+        {
+            code: getAssetFromModuleAssets(optionItemT),
+            fileName: 'multi-input-option-item-example',
+            component: 'MultiInputOptionItemExampleComponent',
+            language: 'typescript'
         }
     ];
 }

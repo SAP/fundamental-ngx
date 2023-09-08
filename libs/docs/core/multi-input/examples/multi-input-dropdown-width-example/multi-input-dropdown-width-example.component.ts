@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-multi-input-dropdown-width-example',
@@ -9,7 +9,7 @@ import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MultiInputModule, FormsModule, JsonPipe]
+    imports: [MultiInputComponent, FormsModule, JsonPipe]
 })
 export class MultiInputDropdownWidthExampleComponent {
     selected = [
