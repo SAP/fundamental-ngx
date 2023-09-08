@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
+
+
+### Bug Fixes
+
+* **platform:** empty cell screenreader issue ([#10508](https://github.com/SAP/fundamental-ngx/issues/10508)) ([6b90596](https://github.com/SAP/fundamental-ngx/commit/6b90596dd268c98bf28db6fd173e2699d5bcab2c))
+* **platform:** row selection tooltip ([#10487](https://github.com/SAP/fundamental-ngx/issues/10487)) ([5151685](https://github.com/SAP/fundamental-ngx/commit/5151685b7395fe2c0816003f6c8f484de8d5d328))
+
+
+
+
+
 ## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

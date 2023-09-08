@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
+
+
+### Bug Fixes
+
+* **core,platform:** add role="row" and aria-expanded on row level ([#10492](https://github.com/SAP/fundamental-ngx/issues/10492)) ([1fc741b](https://github.com/SAP/fundamental-ngx/commit/1fc741bd794bf3a9fa4889bcaf05f0bc8e964689))
+* **core,platform:** multi-input aria-label ([#10497](https://github.com/SAP/fundamental-ngx/issues/10497)) ([6022905](https://github.com/SAP/fundamental-ngx/commit/6022905abeb327412f75c0c54252055c032d1799))
+* **core:** childless list item aria-expanded ([#10499](https://github.com/SAP/fundamental-ngx/issues/10499)) ([c27afd6](https://github.com/SAP/fundamental-ngx/commit/c27afd6818176ead1d216b0c9f34e2c6a0eb689e))
+* **core:** custom list role ([#10502](https://github.com/SAP/fundamental-ngx/issues/10502)) ([21310a2](https://github.com/SAP/fundamental-ngx/commit/21310a2699f49ae36038e7fef661f901a6622b5a))
+
+
+
+
+
 ## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
 
 

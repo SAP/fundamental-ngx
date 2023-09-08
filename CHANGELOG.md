@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
+
+
+### Bug Fixes
+
+* **core,platform:** add role="row" and aria-expanded on row level ([#10492](https://github.com/SAP/fundamental-ngx/issues/10492)) ([1fc741b](https://github.com/SAP/fundamental-ngx/commit/1fc741bd794bf3a9fa4889bcaf05f0bc8e964689))
+* **core,platform:** multi-input aria-label ([#10497](https://github.com/SAP/fundamental-ngx/issues/10497)) ([6022905](https://github.com/SAP/fundamental-ngx/commit/6022905abeb327412f75c0c54252055c032d1799))
+* **core:** childless list item aria-expanded ([#10499](https://github.com/SAP/fundamental-ngx/issues/10499)) ([c27afd6](https://github.com/SAP/fundamental-ngx/commit/c27afd6818176ead1d216b0c9f34e2c6a0eb689e))
+* **core:** custom list role ([#10502](https://github.com/SAP/fundamental-ngx/issues/10502)) ([21310a2](https://github.com/SAP/fundamental-ngx/commit/21310a2699f49ae36038e7fef661f901a6622b5a))
+* **platform:** add aria-selected to multiselect first td ([#10489](https://github.com/SAP/fundamental-ngx/issues/10489)) ([7852063](https://github.com/SAP/fundamental-ngx/commit/7852063270d002defeaefe4140fe980d12913be9))
+* **platform:** empty cell screenreader issue ([#10508](https://github.com/SAP/fundamental-ngx/issues/10508)) ([6b90596](https://github.com/SAP/fundamental-ngx/commit/6b90596dd268c98bf28db6fd173e2699d5bcab2c))
+* **platform:** hiding selection column when data is not visible ([#10484](https://github.com/SAP/fundamental-ngx/issues/10484)) ([4658ca0](https://github.com/SAP/fundamental-ngx/commit/4658ca0642972474bba11b5aae81d09eb820a420))
+* **platform:** row selection tooltip ([#10487](https://github.com/SAP/fundamental-ngx/issues/10487)) ([5151685](https://github.com/SAP/fundamental-ngx/commit/5151685b7395fe2c0816003f6c8f484de8d5d328))
+* **platform:** some improvements to search field and VHD aria labels ([#10493](https://github.com/SAP/fundamental-ngx/issues/10493)) ([79c8349](https://github.com/SAP/fundamental-ngx/commit/79c8349b0d591e54b84aa6832cd3928a5391e937))
+* **platform:** table boolean filter reset ([#10506](https://github.com/SAP/fundamental-ngx/issues/10506)) ([3d5fb00](https://github.com/SAP/fundamental-ngx/commit/3d5fb009bc5b24b5225aa535b3a8e1435318122d))
+* **platform:** table header cells without popovers should have aria-haspopup false ([#10434](https://github.com/SAP/fundamental-ngx/issues/10434)) ([576435a](https://github.com/SAP/fundamental-ngx/commit/576435aceecc47a5a760ec4e221bc2db74fcfee3))
+
+
+### Features
+
+* **platform:** always showing title on the thead contents ([#10507](https://github.com/SAP/fundamental-ngx/issues/10507)) ([f77ac1c](https://github.com/SAP/fundamental-ngx/commit/f77ac1c919ac95aa50efe401ac9b2fa282fd08c6))
+* **platform:** table tree nodes are operable using left and right arrow keys ([#10482](https://github.com/SAP/fundamental-ngx/issues/10482)) ([db5e86e](https://github.com/SAP/fundamental-ngx/commit/db5e86ebcfee89387566c5f5a7e373d13620f499))
+
+
+
+
+
 ## [0.43.7](https://github.com/SAP/fundamental-ngx/compare/v0.43.6...v0.43.7) (2023-09-05)
 
 
