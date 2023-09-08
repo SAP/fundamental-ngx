@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.29...v0.46.0-rc.30) (2023-09-08)
+
+
+### Bug Fixes
+
+* **core:** custom list role ([#10501](https://github.com/SAP/fundamental-ngx/issues/10501)) ([beba45c](https://github.com/SAP/fundamental-ngx/commit/beba45c3978384b966d10764260eb10fe2b12661))
+
+
+
+
+
 # [0.46.0-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.28...v0.46.0-rc.29) (2023-09-07)
 
 **Note:** Version bump only for package @fundamental-ngx/core
