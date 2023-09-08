@@ -7,7 +7,6 @@ import {
     Component,
     ContentChildren,
     ElementRef,
-    forwardRef,
     HostListener,
     Input,
     OnChanges,
@@ -16,9 +15,10 @@ import {
     Optional,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { of, Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { ColorAccent, KeyUtil, Nullable, RtlService, Size } from '@fundamental-ngx/cdk/utils';

@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     Attribute,
     ChangeDetectionStrategy,
@@ -18,14 +19,13 @@ import {
 import {
     ANY_LANGUAGE_LETTERS_REGEX,
     ColorAccent,
+    CssClassBuilder,
+    Nullable,
     Size,
     applyCssClass,
-    getRandomColorAccent,
-    CssClassBuilder
+    getRandomColorAccent
 } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_AVATAR_COMPONENT } from './tokens';
-import { NgIf } from '@angular/common';
 
 let avatarUniqueId = 0;
 

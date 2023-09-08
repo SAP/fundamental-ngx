@@ -1,7 +1,7 @@
 import { CdkPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
-import { Directive, EmbeddedViewRef, inject, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, Input, OnInit, ViewContainerRef, inject } from '@angular/core';
 import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItem, Nullable } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, fromEvent, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, fromEvent } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AVATAR_GROUP_HOST_CONFIG } from '../tokens';
 import { AvatarGroupItemDirective } from './avatar-group-item.directive';

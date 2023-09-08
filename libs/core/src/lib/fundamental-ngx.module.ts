@@ -29,6 +29,7 @@ import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { FormattedTextModule } from '@fundamental-ngx/core/formatted-text';
+import { GenericTagModule } from '@fundamental-ngx/core/generic-tag';
 import { GridListModule } from '@fundamental-ngx/core/grid-list';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
@@ -177,6 +178,7 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
         IllustratedMessageModule,
         StatusIndicatorModule,
         GridListModule,
+        GenericTagModule,
         ResizableCardLayoutModule,
         MessagePageModule,
         VerticalNavigationModule,

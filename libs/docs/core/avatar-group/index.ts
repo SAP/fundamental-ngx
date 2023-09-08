@@ -4,15 +4,12 @@ export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () =>
-            import('./avatar-group-header/avatar-group-header.component').then(
-                (m) => m.AvatarGroupHeaderComponent
-            ),
+            import('./avatar-group-header/avatar-group-header.component').then((m) => m.AvatarGroupHeaderComponent),
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./avatar-group-docs.component').then((m) => m.AvatarGroupDocsComponent)
+                loadComponent: () => import('./avatar-group-docs.component').then((m) => m.AvatarGroupDocsComponent)
             }
         ]
     }

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { NgForOf, NgIf } from '@angular/common';
 import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -11,7 +12,6 @@ import { AvatarGroupLegacyOverflowBodyDirective } from './directives/avatar-grou
 import { AvatarGroupLegacyOverflowButtonTextDirective } from './directives/avatar-group-legacy-overflow-button-text.directive';
 import { AvatarGroupLegacyOverflowButtonDirective } from './directives/avatar-group-legacy-overflow-button.directive';
 import { AvatarGroupLegacyOverflowItemDirective } from './directives/avatar-group-legacy-overflow-item.directive';
-import { NgForOf, NgIf } from '@angular/common';
 
 const NUMBER_OF_ITEMS = 20;
 
