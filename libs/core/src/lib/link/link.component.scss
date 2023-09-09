@@ -3,3 +3,9 @@
 .fd-link__content--icon-line-height {
     line-height: var(--sapContent_LineHeight);
 }
+[fdLink],
+[fd-link],
+[fd-breadcrumb-link] {
+    --fdLink_Display: inline-flex;
+    --fdLink_Icon_Spacing: 0.125rem;
+}
