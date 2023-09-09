@@ -190,7 +190,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _getScrollElement(): HTMLElement | null {
+    _getScrollElement(): HTMLElement | null {
         return this._tabComponent?._scrollbar.elementRef.nativeElement || this._scrollbar?.elementRef.nativeElement;
     }
 
