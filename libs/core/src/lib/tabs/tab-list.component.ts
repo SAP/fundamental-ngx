@@ -16,21 +16,21 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { DestroyedService, KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { DestroyedService, KeyUtil, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
-import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
+import { TabLinkDirective } from './tab-link/tab-link.directive';
+import { TabListComponentInterface } from './tab-list-component.interface';
+import { LIST_COMPONENT } from './tab-list.token';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { LIST_COMPONENT } from './tab-list.token';
-import { TabListComponentInterface } from './tab-list-component.interface';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -142,16 +142,21 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     headerContainer: ElementRef;
 
     /** @hidden */
-    @ViewChild('contentContainer', { read: ElementRef, static: true })
-    contentContainer: ElementRef;
+    @ViewChild(ScrollbarDirective)
+    _scrollbar: ScrollbarDirective;
+
+    /** @hidden */
+    @ViewChild('menu', { read: MenuComponent })
+    menu: MenuComponent;
 
     /** @hidden */
     @ViewChild(OverflowLayoutComponent)
     private _overflowLayout: OverflowLayoutComponent;
 
     /** @hidden */
-    @ViewChild('menu', { read: MenuComponent })
-    menu: MenuComponent;
+    get contentContainer(): ElementRef<HTMLElement> {
+        return this._scrollbar?.elementRef;
+    }
 
     /** @hidden Collection of tabs in original order */
     _tabArray: TabInfo[];
