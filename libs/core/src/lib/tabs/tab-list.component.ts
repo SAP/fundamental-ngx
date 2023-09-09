@@ -148,8 +148,8 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _overflowLayout: OverflowLayoutComponent;
 
     /** @hidden */
-    get contentContainer(): HTMLElement {
-        return this._scrollbar?.elementRef.nativeElement;
+    get contentContainer(): ElementRef<HTMLElement> {
+        return this._scrollbar?.elementRef;
     }
 
     /** @hidden Collection of tabs in original order */
@@ -374,7 +374,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     private _scrollToPanel(tabPanel: TabPanelComponent): void {
         const panelElement = tabPanel.elementRef.nativeElement;
-        const containerElement = this._scrollbar.elementRef.nativeElement;
+        const containerElement = this.contentContainer.nativeElement;
         const distanceToScroll = panelElement.offsetTop - containerElement.offsetTop;
         const maximumScrollTop = containerElement.scrollHeight - containerElement.clientHeight;
         const currentScrollPosition = Math.ceil(containerElement.scrollTop);
