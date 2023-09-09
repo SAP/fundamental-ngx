@@ -1,3 +1,4 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -8,30 +9,30 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Input,
     OnDestroy,
     Output,
     QueryList,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
-import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
+import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
-import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
+import { TabLinkDirective } from './tab-link/tab-link.directive';
+import { TabListComponentInterface } from './tab-list-component.interface';
+import { LIST_COMPONENT } from './tab-list.token';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { LIST_COMPONENT } from './tab-list.token';
-import { TabListComponentInterface } from './tab-list-component.interface';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -135,12 +136,21 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     headerContainer: ElementRef;
 
     /** @hidden */
-    @ViewChild('contentContainer', { read: ElementRef, static: true })
-    contentContainer: ElementRef;
+    @ViewChild(ScrollbarDirective)
+    _scrollbar: ScrollbarDirective;
 
     /** @hidden */
     @ViewChild('menu', { read: MenuComponent })
     menu: MenuComponent;
+
+    /** @hidden */
+    @ViewChild(OverflowLayoutComponent)
+    private _overflowLayout: OverflowLayoutComponent;
+
+    /** @hidden */
+    get contentContainer(): HTMLElement {
+        return this._scrollbar?.elementRef.nativeElement;
+    }
 
     /** @hidden Collection of tabs in original order */
     _tabArray: TabInfo[];
@@ -153,10 +163,6 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** Event is thrown always when tab is selected by keyboard actions */
     readonly tabSelected: Subject<number> = new Subject<number>();
-
-    /** @hidden */
-    @ViewChild(OverflowLayoutComponent)
-    private _overflowLayout: OverflowLayoutComponent;
 
     /** Event is thrown always, when some property is changed */
     readonly tabPanelPropertyChanged: Subject<void> = new Subject<void>();
@@ -368,7 +374,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     private _scrollToPanel(tabPanel: TabPanelComponent): void {
         const panelElement = tabPanel.elementRef.nativeElement;
-        const containerElement = this.contentContainer.nativeElement;
+        const containerElement = this._scrollbar.elementRef.nativeElement;
         const distanceToScroll = panelElement.offsetTop - containerElement.offsetTop;
         const maximumScrollTop = containerElement.scrollHeight - containerElement.clientHeight;
         const currentScrollPosition = Math.ceil(containerElement.scrollTop);
