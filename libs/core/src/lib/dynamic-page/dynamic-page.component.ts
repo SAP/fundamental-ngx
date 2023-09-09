@@ -44,6 +44,10 @@ import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
     providers: [DynamicPageService]
 })
 export class DynamicPageComponent implements AfterViewInit, OnDestroy {
+    /** Whether DynamicPage should snap on scroll */
+    @Input()
+    disableSnapOnScroll = false;
+
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
@@ -151,7 +155,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._propagatePropertiesToChildren();
         this._setContentFooterSpacer();
 
-        if (this._pageSubheaderComponent?.collapsible) {
+        if (!this.disableSnapOnScroll && this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
         }
 
