@@ -14,10 +14,10 @@ import {
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 
-import { TableService } from '../table.service';
-import { TableCellDirective } from './table-cell.directive';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
+import { TableService } from '../table.service';
+import { TableCellDirective } from './table-cell.directive';
 
 export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
 
@@ -28,7 +28,10 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableRowDirective
         }
-    ]
+    ],
+    host: {
+        role: 'row'
+    }
 })
 export class TableRowDirective extends FocusableListDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
