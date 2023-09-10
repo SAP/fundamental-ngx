@@ -377,6 +377,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     tokenizer: TokenizerComponent;
 
     /** @hidden */
+    _defaultAriaLabel: Nullable<string>;
+
+    /** @hidden */
     readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
 
     /** @hidden */
@@ -484,13 +487,11 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
         );
 
-        if (!this.ariaLabel) {
-            this._subscriptions.add(
-                this._language.subscribe(() => {
-                    this._getAriaLabel();
-                })
-            );
-        }
+        this._subscriptions.add(
+            this._language.subscribe(() => {
+                this._getAriaLabel();
+            })
+        );
     }
 
     /** @hidden */
@@ -946,7 +947,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     private async _getAriaLabel(): Promise<void> {
         const lang = await firstValueFrom(this._language);
-        this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
+        this._defaultAriaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }
 
