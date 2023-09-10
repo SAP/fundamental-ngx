@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.33...v0.46.0-rc.34) (2023-09-10)
+
+
+### Bug Fixes
+
+* **core,platform:** multi-input aria-label ([#10496](https://github.com/SAP/fundamental-ngx/issues/10496)) ([a1a3089](https://github.com/SAP/fundamental-ngx/commit/a1a3089d425fb4fc3bec3ada4634fcf600c1b867))
+
+
+
+
+
 # [0.46.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.32...v0.46.0-rc.33) (2023-09-08)
 
 
