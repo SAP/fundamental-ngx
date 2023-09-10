@@ -320,6 +320,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Wyczyść',
         submitButtonTitle: 'Szukaj',
+        searchInputLabel: 'Szukaj',
         synchronizeButtonTitle: 'Synchronizuj',
         searchSuggestionMessage: 'Znaleziono {{ count }} możliwych wyników.',
         searchSuggestionNavigateMessage: 'Poruszaj się za pomocą strzałek góra/dół'

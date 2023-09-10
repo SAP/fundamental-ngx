@@ -472,6 +472,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Очистити',
         submitButtonTitle: 'Пошук',
+        searchInputLabel: 'Пошук',
         synchronizeButtonTitle: 'Синхронізувати',
         searchSuggestionMessage: (params) => {
             const count = params['count'];

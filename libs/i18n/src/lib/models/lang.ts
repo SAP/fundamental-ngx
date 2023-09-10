@@ -411,6 +411,7 @@ export interface FdLanguage {
     platformSearchField: {
         clearButtonTitle: FdLanguageKey;
         submitButtonTitle: FdLanguageKey;
+        searchInputLabel: FdLanguageKey;
         synchronizeButtonTitle: FdLanguageKey;
         /**
          * @param count

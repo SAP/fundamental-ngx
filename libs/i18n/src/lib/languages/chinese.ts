@@ -318,6 +318,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: '清空',
         submitButtonTitle: '搜索',
+        searchInputLabel: '搜索',
         synchronizeButtonTitle: '同步',
         searchSuggestionMessage: '找到{{ count }}条建议。',
         searchSuggestionNavigateMessage: '用上下方向键来导航'
