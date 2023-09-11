@@ -609,9 +609,11 @@ export class DatetimePickerComponent<D>
         }
         this.onClose.emit();
         this.isOpen = false;
+        this._changeDetRef.detectChanges();
         this._onOpenStateChanged(this.isOpen);
         this._focusTrapService?.unpauseCurrentFocusTrap();
         this.handleOnTouched();
+        this._showPopoverContents = false;
     }
 
     /** @hidden */
@@ -703,7 +705,6 @@ export class DatetimePickerComponent<D>
 
         if (this.showFooter) {
             this.closePopover();
-            this._changeDetRef.detectChanges();
         }
     }
 
@@ -788,6 +789,10 @@ export class DatetimePickerComponent<D>
             this._inputElement.nativeElement.focus({
                 preventScroll: this.preventScrollOnFocus
             });
+        }
+        if (!isOpen) {
+            this._showPopoverContents = false;
+            this._changeDetRef.detectChanges();
         }
     }
 
