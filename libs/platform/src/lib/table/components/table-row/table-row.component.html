@@ -118,7 +118,6 @@
     [focusable]="true"
     [attr.role]="column.role"
     [headers]="rowId + '__' + column.name"
-    [ngClass]="'fdp-table__col--' + column.name"
     [ngClass]="[
         'fdp-table__col--' + column.name,
         column._freezed ? 'fd-table__cell--fixed' : '',
