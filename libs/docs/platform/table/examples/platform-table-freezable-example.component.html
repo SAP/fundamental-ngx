@@ -15,7 +15,8 @@
 
         <fdp-column name="description" key="description" label="Description" width="200px"> </fdp-column>
 
-        <fdp-column name="price" key="price.value" label="Price" align="end" width="100px"> </fdp-column>
+        <fdp-column name="price" [freezable]="true" key="price.value" label="Price" align="end" width="100px">
+        </fdp-column>
 
         <fdp-column name="status" key="status" label="Status" align="center" width="200px"> </fdp-column>
 

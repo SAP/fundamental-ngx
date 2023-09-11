@@ -3,16 +3,15 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
-    EventEmitter,
     inject,
     Input,
-    Output,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
 import {
@@ -20,12 +19,12 @@ import {
     FILTER_STRING_STRATEGY,
     FilterableColumnDataType,
     SortDirection,
+    Table,
     TableColumn,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fdp-table-cell-header-popover',
@@ -53,14 +52,6 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** Whether the filtering from header is disabled. */
     @Input()
     filteringFromHeaderDisabled: Nullable<boolean> = false;
-
-    /** Column freezing. */
-    @Output()
-    freezeToColumn = new EventEmitter<{ name: TableColumn['name']; endFreezable: TableColumn['endFreezable'] }>();
-
-    /** Column unfreezing. */
-    @Output()
-    unFreeze = new EventEmitter<{ name: TableColumn['name']; endFreezable: TableColumn['endFreezable'] }>();
 
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
@@ -105,6 +96,9 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     private readonly _tableService = inject(TableService);
 
     /** @hidden */
+    private readonly _table = inject(Table);
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._popoverItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._popoverItems$.next(this._popoverItems.map((t) => t.templateRef));
@@ -114,6 +108,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** @hidden */
     _setColumnHeaderSortBy(field: TableColumn['key'], direction: SortDirection): void {
         this._tableService.setSort([{ field, direction }]);
+        this.popover?.close();
     }
 
     /** @hidden */
@@ -142,5 +137,18 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
         };
 
         this._tableService.addFilters([collectionFilter]);
+        this.popover?.close();
+    }
+
+    /** @hidden */
+    _freeze(): void {
+        this._table.freezeToColumn(this.column.name, this.column.endFreezable);
+        this.popover?.close();
+    }
+
+    /** @hidden */
+    _unFreeze(): void {
+        this._table.unfreeze(this.column.name, this.column.endFreezable);
+        this.popover?.close();
     }
 }
