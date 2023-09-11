@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { TabsModule } from '@fundamental-ngx/core/tabs';
-import { DynamicPageModule } from './dynamic-page.module';
 import { DynamicPageComponent } from './dynamic-page.component';
+import { DynamicPageModule } from './dynamic-page.module';
 
 @Component({
     template: ` <fd-dynamic-page>
@@ -58,7 +58,7 @@ describe('DynamicPageComponent default values', () => {
 
     it('should collapse on scroll content', fakeAsync(() => {
         fixture.detectChanges();
-        const element = dynamicPageComponent._contentComponent.first.elementRef.nativeElement;
+        const element = dynamicPageComponent._getScrollElement()!;
         element.scrollTop = 1000;
         fixture.detectChanges();
         element.dispatchEvent(new Event('scroll'));

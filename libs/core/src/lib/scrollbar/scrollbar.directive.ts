@@ -1,19 +1,20 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
     CSP_NONCE,
     Directive,
     ElementRef,
     HostBinding,
     HostListener,
-    inject,
     Input,
     OnDestroy,
     PLATFORM_ID,
-    Renderer2
+    Renderer2,
+    inject
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import scrollbarStyles from 'fundamental-styles/dist/js/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 
 export type ScrollbarOverflowOptions = 'auto' | 'scroll' | 'hidden';
 
@@ -40,7 +41,7 @@ let styleSheet: HTMLStyleElement | null = null;
     hostDirectives: [CdkScrollable],
     standalone: true
 })
-export class ScrollbarDirective implements OnDestroy {
+export class ScrollbarDirective implements OnDestroy, HasElementRef {
     /** Whether overflow horizontal content should be hidden. */
     @Input()
     set noHorizontalScroll(value: BooleanInput) {
@@ -105,6 +106,9 @@ export class ScrollbarDirective implements OnDestroy {
     _inPopover = false;
 
     /** @hidden */
+    elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+
+    /** @hidden */
     private _document: Document = inject(DOCUMENT);
 
     /** @hidden */
@@ -124,7 +128,7 @@ export class ScrollbarDirective implements OnDestroy {
     /**
      * @hidden
      */
-    constructor(private _elementRef: ElementRef<HTMLElement>, renderer2: Renderer2) {
+    constructor(renderer2: Renderer2) {
         scrollbarElementsQuantity++;
         const platform = inject(PLATFORM_ID);
         if (!styleSheet && isPlatformBrowser(platform)) {
@@ -155,7 +159,7 @@ export class ScrollbarDirective implements OnDestroy {
 
     /** method to invoke scroll */
     scroll(options: ScrollToOptions): void {
-        this._elementRef.nativeElement.scroll(options);
+        this.elementRef.nativeElement.scroll(options);
     }
 
     /** @hidden */
