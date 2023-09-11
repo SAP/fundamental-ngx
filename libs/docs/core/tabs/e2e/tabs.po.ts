@@ -25,7 +25,7 @@ export class TabsPo extends CoreBaseComponentPo {
     removeBtn = this.AddExample + 'button:nth-child(3)';
     expandedList = '.cdk-overlay-container ';
     expandedListItem = this.expandedList + '.fd-menu__title';
-    moreBtn = this.collapsibleOverflowExample + '.fd-tabs__item--overflow';
+    moreBtn = this.collapsibleOverflowExample + 'fd-tab-list:nth-child(6) ' + '.fd-tabs__item--overflow';
 
     // playground form
     modeSelect = '#playgroundmode ';

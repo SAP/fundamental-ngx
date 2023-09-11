@@ -185,6 +185,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._initStackContentSubscription();
+        this._listenOnTabPanelsExpandedChange();
+        this._listenOnTabPanelsAndInitiallyExpandTabPanel();
         this._listenOnPropertiesChange();
     }
 
@@ -260,9 +263,6 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     private _setupTabPanelsChangeListeners(): void {
         this._listenOnTabPanelsAndUpdateStorageStructures();
-        this._initStackContentSubscription();
-        this._listenOnTabPanelsExpandedChange();
-        this._listenOnTabPanelsAndInitiallyExpandTabPanel();
     }
 
     /** @hidden Setup mechanisms required for handling the stacked content behavior */
