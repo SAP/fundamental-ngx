@@ -1,5 +1,9 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { TableComponent } from '../table.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     ChildTableDataSource,
     SelectionMode,
@@ -8,6 +12,10 @@ import {
     TableRowToggleOpenStateEvent,
     TableRowType
 } from '@fundamental-ngx/platform/table-helpers';
+import { of } from 'rxjs';
+import { TableRowComponent } from '../components/table-row/table-row.component';
+import { TableComponent } from '../table.component';
+import { PlatformTableModule } from '../table.module';
 import {
     SourceItem,
     TreeTableChildDataProviderMock,
@@ -15,14 +23,6 @@ import {
     treeItemParentsCount,
     treeItemsChildrenPerParentCount
 } from './helpers';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { PlatformTableModule } from '../table.module';
-import { RouterModule } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { of } from 'rxjs';
-import { TableRowComponent } from '../components/table-row/table-row.component';
 
 @Component({
     template: `
@@ -276,7 +276,7 @@ describe('TableComponent Tree View with lazily loaded children', () => {
         });
 
         it('should change type for row with 0 children to "item"', async () => {
-            let firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
+            const firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
             expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
             expect(firstRow.row.type).toEqual(TableRowType.TREE);
 
@@ -296,8 +296,6 @@ describe('TableComponent Tree View with lazily loaded children', () => {
             await fixture.whenStable();
 
             calculateTableElementsMetaData();
-
-            firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
 
             expect(firstRow.row.type).toEqual(TableRowType.ITEM);
         });
