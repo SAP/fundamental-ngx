@@ -1,20 +1,21 @@
-import { DOCUMENT } from '@angular/common';
-import { Directive, ElementRef, EventEmitter, HostBinding, inject, Input, NgZone, Output } from '@angular/core';
+/* eslint-disable @typescript-eslint/member-ordering */
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
-import { DestroyedService, TabbableElementService } from '../../services';
-import { HasElementRef } from '../../interfaces';
+import { DOCUMENT } from '@angular/common';
+import { Directive, ElementRef, EventEmitter, inject, Input, NgZone, Output, Renderer2 } from '@angular/core';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 import {
     DeprecatedSelector,
     FD_DEPRECATED_DIRECTIVE_SELECTOR,
     getDeprecatedModel
 } from '../../deprecated-selector.class';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { FocusableObserver } from './focusable.observer';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
-import { Nullable } from '../../models/nullable';
 import { KeyUtil } from '../../functions';
+import { HasElementRef } from '../../interfaces';
+import { Nullable } from '../../models/nullable';
+import { DestroyedService, TabbableElementService } from '../../services';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
+import { FocusableObserver } from './focusable.observer';
 
 export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
@@ -87,12 +88,6 @@ export class FocusableItemDirective implements HasElementRef {
     /** @hidden */
     private _timerId: ReturnType<typeof setTimeout> | null;
 
-    /** @hidden */
-    @HostBinding('attr.tabindex')
-    get _tabindex(): number {
-        return this._tabbable ? 0 : -1;
-    }
-
     /** Element reference. */
     public readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
     /** @hidden */
@@ -105,6 +100,8 @@ export class FocusableItemDirective implements HasElementRef {
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
     /** @hidden */
     protected readonly _zone = inject(NgZone);
+    /** @hidden */
+    private readonly _renderer2 = inject(Renderer2);
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
 
@@ -143,6 +140,7 @@ export class FocusableItemDirective implements HasElementRef {
     /** Set tabbable state */
     setTabbable(state: boolean): void {
         this._tabbable = state;
+        this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
 
         if (state) {
             this._enableTabbableElements();

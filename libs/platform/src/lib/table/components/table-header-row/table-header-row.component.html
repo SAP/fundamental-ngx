@@ -21,6 +21,7 @@
     "
     (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
     (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+    (cellFocused)="_tableRowService.cellFocused($event)"
     [attr.aria-description]="
         !checkedState
             ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
