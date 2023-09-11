@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.35...v0.46.0-rc.36) (2023-09-11)
+
+
+### Bug Fixes
+
+* **platform:** fix freeze functionality ([#10529](https://github.com/SAP/fundamental-ngx/issues/10529)) ([b2949fb](https://github.com/SAP/fundamental-ngx/commit/b2949fbd790fa43ba67fe17db0165a34d5ceb8dd))
+
+
+
+
+
 # [0.46.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.33...v0.46.0-rc.35) (2023-09-11)
 
 
