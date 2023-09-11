@@ -8,6 +8,7 @@ import {
     FILTER_STRING_STRATEGY,
     FilterableColumnDataType,
     SortDirection,
+    Table,
     TableColumn,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
@@ -41,7 +42,13 @@ describe('TableCellHeaderPopoverComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [TableCellHeaderPopoverComponent],
             imports: [PopoverModule, PlatformListModule, TemplateDirective],
-            providers: [TableService]
+            providers: [
+                TableService,
+                {
+                    provide: Table,
+                    useValue: {}
+                }
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(TableCellHeaderPopoverComponent);

@@ -1,4 +1,10 @@
 import { Table } from '../table';
+import { TableColumn } from '../table-column';
+
+export interface TableColumnFreezeInternalEvent {
+    name: TableColumn['name'];
+    endFreezable: TableColumn['endFreezable'];
+}
 
 export interface FreezeChange {
     current: string | null;

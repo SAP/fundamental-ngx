@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.35...v0.46.0-rc.36) (2023-09-11)
+
+
+### Bug Fixes
+
+* **platform:** fix freeze functionality ([#10529](https://github.com/SAP/fundamental-ngx/issues/10529)) ([b2949fb](https://github.com/SAP/fundamental-ngx/commit/b2949fbd790fa43ba67fe17db0165a34d5ceb8dd))
+
+
+
+
+
+# [0.46.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.33...v0.46.0-rc.35) (2023-09-11)
+
+
+### Bug Fixes
+
+* **core,platform:** add role="row" and aria-expanded to tr elements ([#10491](https://github.com/SAP/fundamental-ngx/issues/10491)) ([463c8d6](https://github.com/SAP/fundamental-ngx/commit/463c8d6ba04addf8d9bd02be48a930d91986a7bd))
+* **core,platform:** multi-input aria-label ([#10496](https://github.com/SAP/fundamental-ngx/issues/10496)) ([a1a3089](https://github.com/SAP/fundamental-ngx/commit/a1a3089d425fb4fc3bec3ada4634fcf600c1b867))
+
+
+### Features
+
+* **platform:** table tree nodes are operable using left and right arrow keys ([#10480](https://github.com/SAP/fundamental-ngx/issues/10480)) ([aad5825](https://github.com/SAP/fundamental-ngx/commit/aad5825c94b38338589fafc46027ece1c635e2f3))
+
+
+
+
+
+# [0.46.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.33...v0.46.0-rc.34) (2023-09-10)
+
+
+### Bug Fixes
+
+* **core,platform:** add role="row" and aria-expanded to tr elements ([#10491](https://github.com/SAP/fundamental-ngx/issues/10491)) ([463c8d6](https://github.com/SAP/fundamental-ngx/commit/463c8d6ba04addf8d9bd02be48a930d91986a7bd))
+* **core,platform:** multi-input aria-label ([#10496](https://github.com/SAP/fundamental-ngx/issues/10496)) ([a1a3089](https://github.com/SAP/fundamental-ngx/commit/a1a3089d425fb4fc3bec3ada4634fcf600c1b867))
+
+
+
+
+
 # [0.46.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.32...v0.46.0-rc.33) (2023-09-08)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

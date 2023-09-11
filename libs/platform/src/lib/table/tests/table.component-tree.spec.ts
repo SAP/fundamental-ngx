@@ -3,14 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-    SourceItem,
-    TreeTableDataProviderMock,
-    totalTreeItems,
-    treeItemParentsCount,
-    treeItemsChildrenPerParentCount
-} from './helpers';
-import { TableComponent } from '../table.component';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
     SelectionMode,
     TableDataSource,
@@ -18,9 +11,16 @@ import {
     TableRowToggleOpenStateEvent,
     TableRowType
 } from '@fundamental-ngx/platform/table-helpers';
-import { PlatformTableModule } from '../table.module';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { TableRowComponent } from '../components/table-row/table-row.component';
+import { TableComponent } from '../table.component';
+import { PlatformTableModule } from '../table.module';
+import {
+    SourceItem,
+    TreeTableDataProviderMock,
+    totalTreeItems,
+    treeItemParentsCount,
+    treeItemsChildrenPerParentCount
+} from './helpers';
 
 @Component({
     template: `
@@ -261,7 +261,7 @@ describe('TableComponent Tree View', () => {
         });
 
         it('should change type for row with 0 children to "item"', async () => {
-            let firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
+            const firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
             expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
             expect(firstRow.row.type).toEqual(TableRowType.TREE);
 
@@ -281,8 +281,6 @@ describe('TableComponent Tree View', () => {
             await fixture.whenStable();
 
             calculateTableElementsMetaData();
-
-            firstRow = tableRowTogglerCellsArray[0].componentInstance as TableRowComponent<any>;
 
             expect(firstRow.row.type).toEqual(TableRowType.ITEM);
         });

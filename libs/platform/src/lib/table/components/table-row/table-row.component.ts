@@ -1,4 +1,4 @@
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,6 +7,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    HostListener,
     Input,
     NgZone,
     OnChanges,
@@ -42,6 +43,7 @@ import {
     TableRowKeyboardDrag,
     TableRowService,
     TableService,
+    isTreeRow,
     isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
 import { Subject, fromEvent, merge } from 'rxjs';
@@ -58,7 +60,11 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableRowComponent
         }
-    ]
+    ],
+    host: {
+        role: 'row',
+        '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
+    }
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
     /** Row ID. */
@@ -156,6 +162,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     readonly _tableRowService = inject(TableRowService);
 
     /** @hidden */
+    readonly _isTreeRow = isTreeRow;
+
+    /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();
 
     /** @hidden */
@@ -203,6 +212,18 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
                     this._onKeyDown(event);
                 });
         });
+    }
+
+    /** @hidden */
+    @HostListener('keydown.arrowLeft', ['$event'])
+    @HostListener('keydown.arrowRight', ['$event'])
+    private _onArrowKeydown($event: KeyboardEvent): void {
+        if ($event.target === this._elmRef.nativeElement && this.row.isTree) {
+            const shouldBeOpen = KeyUtil.isKeyCode($event, this._rtl ? LEFT_ARROW : RIGHT_ARROW);
+            if (shouldBeOpen !== this.row.expanded) {
+                this._toggleGroupRow();
+            }
+        }
     }
 
     /** @hidden */
