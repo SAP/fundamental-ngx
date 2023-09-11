@@ -20,8 +20,8 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -50,6 +50,9 @@ export class DynamicPageTabChangeEvent {
     providers: [DynamicPageService]
 })
 export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy {
+    /** Whether DynamicPage should snap on scroll */
+    @Input()
+    disableSnapOnScroll = false;
     /** Page role  */
     @Input()
     @HostBinding('attr.role')

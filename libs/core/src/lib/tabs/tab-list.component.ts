@@ -16,21 +16,21 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { DestroyedService, KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { DestroyedService, KeyUtil, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
-import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
+import { TabLinkDirective } from './tab-link/tab-link.directive';
+import { TabListComponentInterface } from './tab-list-component.interface';
+import { LIST_COMPONENT } from './tab-list.token';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { LIST_COMPONENT } from './tab-list.token';
-import { TabListComponentInterface } from './tab-list-component.interface';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -142,16 +142,21 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     headerContainer: ElementRef;
 
     /** @hidden */
-    @ViewChild('contentContainer', { read: ElementRef, static: true })
-    contentContainer: ElementRef;
+    @ViewChild(ScrollbarDirective)
+    _scrollbar: ScrollbarDirective;
+
+    /** @hidden */
+    @ViewChild('menu', { read: MenuComponent })
+    menu: MenuComponent;
 
     /** @hidden */
     @ViewChild(OverflowLayoutComponent)
     private _overflowLayout: OverflowLayoutComponent;
 
     /** @hidden */
-    @ViewChild('menu', { read: MenuComponent })
-    menu: MenuComponent;
+    get contentContainer(): ElementRef<HTMLElement> {
+        return this._scrollbar?.elementRef;
+    }
 
     /** @hidden Collection of tabs in original order */
     _tabArray: TabInfo[];
@@ -186,6 +191,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._initStackContentSubscription();
+        this._listenOnTabPanelsExpandedChange();
+        this._listenOnTabPanelsAndInitiallyExpandTabPanel();
         this._listenOnPropertiesChange();
     }
 
@@ -261,9 +269,6 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden */
     private _setupTabPanelsChangeListeners(): void {
         this._listenOnTabPanelsAndUpdateStorageStructures();
-        this._initStackContentSubscription();
-        this._listenOnTabPanelsExpandedChange();
-        this._listenOnTabPanelsAndInitiallyExpandTabPanel();
     }
 
     /** @hidden Setup mechanisms required for handling the stacked content behavior */
@@ -271,8 +276,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._tabPanelsChange$
             .pipe(
                 filter(() => this.stackContent),
-                delay(0),
-                takeUntil(this._onDestroy$)
+                delay(0)
             )
             .subscribe(() =>
                 this._tabArray.filter((tab) => !tab.panel.disabled).forEach((tab) => tab.panel._expand(true))
@@ -281,14 +285,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** @hidden */
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
-        this._tabPanelsChange$
-            .pipe(
-                map((tabPanels) => tabPanels.map((el) => new TabInfo(el))),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe((tabs) => {
-                this._tabArray = tabs;
-            });
+        this._tabPanelsChange$.pipe(map((tabPanels) => tabPanels.map((el) => new TabInfo(el)))).subscribe((tabs) => {
+            this._tabArray = tabs;
+        });
     }
 
     /** @hidden */
@@ -296,10 +295,11 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         this._tabPanelsChange$
             .pipe(
                 map((tabPanels) => tabPanels.map((tab) => tab._expandedStateChange.asObservable())),
-                switchMap((tabPanels) => merge(...tabPanels)),
-                takeUntil(this._onDestroy$)
+                switchMap((tabPanels) => merge(...tabPanels))
             )
-            .subscribe((event) => this._expandTab(event.target, event.state));
+            .subscribe((event) => {
+                this._expandTab(event.target, event.state);
+            });
     }
 
     /** @hidden */
