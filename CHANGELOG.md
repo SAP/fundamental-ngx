@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.8...v0.43.9) (2023-09-11)
+
+
+### Bug Fixes
+
+* **core:** added spacing to the icons in fd-link ([#10516](https://github.com/SAP/fundamental-ngx/issues/10516)) ([85904a8](https://github.com/SAP/fundamental-ngx/commit/85904a827ca1b0c3fed3b47dc2c76aa4bb76b700))
+* **core:** vertical nav keyboard navigation ([#10504](https://github.com/SAP/fundamental-ngx/issues/10504)) ([08e3a20](https://github.com/SAP/fundamental-ngx/commit/08e3a2014cf4cd8bf98d2b7996bbc3283921ccb0))
+* **platform:** checkbox column tabindex ([#10533](https://github.com/SAP/fundamental-ngx/issues/10533)) ([4b33815](https://github.com/SAP/fundamental-ngx/commit/4b33815d63a6c09d9fa3db9644b4be1797295730))
+* **platform:** fix freeze functionality ([#10530](https://github.com/SAP/fundamental-ngx/issues/10530)) ([ae0cb4c](https://github.com/SAP/fundamental-ngx/commit/ae0cb4ca1532e1308fc3e80c6625f039208913e7))
+* **platform:** search field accessibility update ([#10514](https://github.com/SAP/fundamental-ngx/issues/10514)) ([1eaeccd](https://github.com/SAP/fundamental-ngx/commit/1eaeccde2a868764aac97e201d01ddb7c5e573a8))
+
+
+### Features
+
+* **core,platform:** dynamic page snap on scroll disable input ([#10518](https://github.com/SAP/fundamental-ngx/issues/10518)) ([9d39c61](https://github.com/SAP/fundamental-ngx/commit/9d39c6123e4a4b66b29ff15187af25f209b882be))
+
+
+
+
+
 ## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
 
 

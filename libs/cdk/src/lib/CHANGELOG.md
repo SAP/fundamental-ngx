@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.8...v0.43.9) (2023-09-11)
+
+
+### Bug Fixes
+
+* **platform:** checkbox column tabindex ([#10533](https://github.com/SAP/fundamental-ngx/issues/10533)) ([4b33815](https://github.com/SAP/fundamental-ngx/commit/4b33815d63a6c09d9fa3db9644b4be1797295730))
+
+
+
+
+
 ## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

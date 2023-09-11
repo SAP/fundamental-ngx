@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.8...v0.43.9) (2023-09-11)
+
+
+### Bug Fixes
+
+* **platform:** search field accessibility update ([#10514](https://github.com/SAP/fundamental-ngx/issues/10514)) ([1eaeccd](https://github.com/SAP/fundamental-ngx/commit/1eaeccde2a868764aac97e201d01ddb7c5e573a8))
+
+
+
+
+
 ## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
 
 

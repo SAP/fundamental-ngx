@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.8...v0.43.9) (2023-09-11)
+
+
+### Bug Fixes
+
+* **core:** added spacing to the icons in fd-link ([#10516](https://github.com/SAP/fundamental-ngx/issues/10516)) ([85904a8](https://github.com/SAP/fundamental-ngx/commit/85904a827ca1b0c3fed3b47dc2c76aa4bb76b700))
+* **core:** vertical nav keyboard navigation ([#10504](https://github.com/SAP/fundamental-ngx/issues/10504)) ([08e3a20](https://github.com/SAP/fundamental-ngx/commit/08e3a2014cf4cd8bf98d2b7996bbc3283921ccb0))
+
+
+### Features
+
+* **core,platform:** dynamic page snap on scroll disable input ([#10518](https://github.com/SAP/fundamental-ngx/issues/10518)) ([9d39c61](https://github.com/SAP/fundamental-ngx/commit/9d39c6123e4a4b66b29ff15187af25f209b882be))
+
+
+
+
+
 ## [0.43.8](https://github.com/SAP/fundamental-ngx/compare/v0.43.7...v0.43.8) (2023-09-08)
 
 
