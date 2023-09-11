@@ -102,7 +102,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract freezeToColumn(columnKey: string, end?: boolean): void;
 
     /** Unfreeze column */
-    abstract unfreeze(columnKey: string): void;
+    abstract unfreeze(columnKey: string, end?: boolean): void;
 
     /** Search in all table columns */
     abstract search(searchInput: SearchInput): void;

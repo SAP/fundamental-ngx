@@ -2,10 +2,8 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
     inject,
     Input,
-    Output,
     QueryList,
     TemplateRef,
     ViewChild,
@@ -19,6 +17,7 @@ import {
     FILTER_STRING_STRATEGY,
     FilterableColumnDataType,
     SortDirection,
+    Table,
     TableColumn,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
@@ -53,14 +52,6 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     @Input()
     filteringFromHeaderDisabled: Nullable<boolean> = false;
 
-    /** Column freezing. */
-    @Output()
-    freezeToColumn = new EventEmitter<{ name: TableColumn['name']; endFreezable: TableColumn['endFreezable'] }>();
-
-    /** Column unfreezing. */
-    @Output()
-    unFreeze = new EventEmitter<{ name: TableColumn['name']; endFreezable: TableColumn['endFreezable'] }>();
-
     /** @hidden */
     @ViewChild(PopoverComponent, { static: false })
     popover: Nullable<PopoverComponent>;
@@ -68,18 +59,6 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** @hidden */
     @ViewChildren(TemplateDirective)
     _popoverItems: QueryList<TemplateDirective>;
-
-    /** @hidden */
-    _popoverItems$ = new BehaviorSubject<TemplateRef<any>[]>([]);
-
-    /** @hidden */
-    protected readonly SORT_DIRECTION = SortDirection;
-
-    /** @hidden */
-    private readonly _destroy$ = inject(DestroyedService);
-
-    /** @hidden */
-    private readonly _tableService = inject(TableService);
 
     /** @hidden */
     _headerPopoverTriggers: TriggerConfig[] = [
@@ -104,6 +83,21 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     ];
 
     /** @hidden */
+    _popoverItems$ = new BehaviorSubject<TemplateRef<any>[]>([]);
+
+    /** @hidden */
+    protected readonly SORT_DIRECTION = SortDirection;
+
+    /** @hidden */
+    private readonly _destroy$ = inject(DestroyedService);
+
+    /** @hidden */
+    private readonly _tableService = inject(TableService);
+
+    /** @hidden */
+    private readonly _table = inject(Table);
+
+    /** @hidden */
     ngAfterViewInit(): void {
         this._popoverItems.changes.pipe(startWith(null), takeUntil(this._destroy$)).subscribe(() => {
             this._popoverItems$.next(this._popoverItems.map((t) => t.templateRef));
@@ -113,6 +107,7 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** @hidden */
     _setColumnHeaderSortBy(field: TableColumn['key'], direction: SortDirection): void {
         this._tableService.setSort([{ field, direction }]);
+        this.popover?.close();
     }
 
     /** @hidden */
@@ -141,5 +136,18 @@ export class TableCellHeaderPopoverComponent implements AfterViewInit {
         };
 
         this._tableService.addFilters([collectionFilter]);
+        this.popover?.close();
+    }
+
+    /** @hidden */
+    _freeze(): void {
+        this._table.freezeToColumn(this.column.name, this.column.endFreezable);
+        this.popover?.close();
+    }
+
+    /** @hidden */
+    _unFreeze(): void {
+        this._table.unfreeze(this.column.name, this.column.endFreezable);
+        this.popover?.close();
     }
 }

@@ -97,6 +97,7 @@
             <fdp-table-cell-header-popover
                 #tablePopover
                 [disabled]="!(column | isColumnHasHeaderMenu)"
+                [columnFrozen]="column._freezed || column._endFreezed"
                 [column]="column"
                 [popoverTemplate]="(column | isColumnHasHeaderMenu) ? column.headerCellPopoverTemplate : null"
                 [filteringFromHeaderDisabled]="_fdpTableService._isFilteringFromHeaderDisabled$ | async"
