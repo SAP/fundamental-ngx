@@ -1,7 +1,11 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fd-list-navigation-item-arrow], [fdListNavigaitonItemArrow]'
+    selector: '[fd-list-navigation-item-arrow], [fdListNavigaitonItemArrow]',
+    host: {
+        tabindex: '-1',
+        role: 'presentation'
+    }
 })
 export class ListNavigationItemArrowDirective {
     /** @hidden */
@@ -21,19 +25,11 @@ export class ListNavigationItemArrowDirective {
     expanded = false;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef) {}
-
-    /** @hidden */
     _setExpanded(expanded: boolean): void {
         if (this.expanded !== expanded) {
             this.rightArrowClass = !this.rightArrowClass;
             this.downArrowClass = !this.downArrowClass;
         }
         this.expanded = expanded;
-    }
-
-    /** @hidden */
-    _focus(): void {
-        this._elRef.nativeElement.focus();
     }
 }
