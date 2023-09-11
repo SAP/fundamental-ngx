@@ -1,3 +1,4 @@
+import { wait } from 'nx-cloud/lib/utilities/waiter';
 import {
     browserIsFirefox,
     click,
@@ -64,75 +65,95 @@ describe('Tabs test suite', () => {
     }, 1);
 
     it('should check tabs selecting', async () => {
-        await expect(await checkTabsSelect(tabsExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(IconOnlyExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(ProcessExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(FilterExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(AddExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(collapsibleOverflowExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(collapsibleExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(SelectionExample)).toBe(true, 'One of the tabs is not selected');
-        await expect(await checkTabsSelect(stackendContentExample)).toBe(true, 'One of the tabs is not selected');
+        const context = 'One of the tabs is not selected';
+        expect(await checkTabsSelect(tabsExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(IconOnlyExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(ProcessExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(FilterExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(AddExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(collapsibleOverflowExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(collapsibleExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(SelectionExample))
+            .withContext(context)
+            .toBe(true);
+        expect(await checkTabsSelect(stackendContentExample))
+            .withContext(context)
+            .toBe(true);
     });
 
     it('should check adding-removing tab', async () => {
         const originalLength = await getElementArrayLength(AddExample + fdTab);
         await click(addBtn);
         let newLength = await getElementArrayLength(AddExample + fdTab);
-        await expect(newLength).toBeGreaterThan(originalLength);
+        expect(newLength).toBeGreaterThan(originalLength);
         await click(removeBtn);
         await click(removeBtn);
         newLength = await getElementArrayLength(AddExample + fdTab);
-        await expect(originalLength).toBeGreaterThan(newLength);
+        expect(originalLength).toBeGreaterThan(newLength);
         for (newLength; newLength !== 1; newLength--) {
             await click(removeBtn);
         }
         await click(removeBtn);
         const lengthAfterRemoving = await getElementArrayLength(AddExample + fdTab);
         // Check that the last tab can not be removed
-        await expect(lengthAfterRemoving).toEqual(1);
+        expect(lengthAfterRemoving).toEqual(1);
     });
 
     it('should check choosing tabs via buttons', async () => {
-        if ((await browserIsFirefox()) && (await currentPlatformName()) === 'macOS') {
+        if (browserIsFirefox() && currentPlatformName() === 'macOS') {
             return;
         }
         await click(chooseTabsBtn, 1);
         const tabLinkSelector = SelectionExample + fdTab + ' ' + fdTabFF;
-        await expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 1)).toEqual('true');
+        expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 1)).toEqual('true');
         await click(chooseTabsBtn);
-        await expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 0)).toEqual('true');
-        await expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 1)).toEqual('false');
+        expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 0)).toEqual('true');
+        expect(await getAttributeByName(tabLinkSelector, 'aria-selected', 1)).toEqual('false');
     });
 
     it('check collapsible overflow', async () => {
-        if ((await browserIsFirefox()) && (await currentPlatformName()) === 'macOS') {
+        if (browserIsFirefox() && currentPlatformName() === 'macOS') {
             return;
         }
         await scrollIntoView(collapsibleOverflowExample);
         const length = await getElementArrayLength(collapsibleOverflowExample + collapsibleTab);
-        const lastPointOfMainList = await getText(collapsibleOverflowExample + collapsibleTab, length - 1);
+        const lastOfMainList = async () => await getText(collapsibleOverflowExample + collapsibleTab, length - 1);
+        const lastPointOfMainList = await lastOfMainList();
         await click(moreBtn);
         const firstPointOfExpandedList = await getText(expandedListItem);
         await click(expandedListItem);
-        await expect(await getText(expandedListItem)).toEqual(lastPointOfMainList);
-        await expect(await getText(collapsibleOverflowExample + collapsibleTab, length - 1)).toEqual(
-            firstPointOfExpandedList
-        );
+        await wait(500);
+        const firstItemInDropdown = await getText(expandedListItem);
+        expect(firstItemInDropdown).toEqual(lastPointOfMainList);
+        expect(await lastOfMainList()).toEqual(firstPointOfExpandedList);
     });
 
     it('should check collapsible tabs', async () => {
         await scrollIntoView(collapsibleExample);
         await clickOnTab(collapsibleExample, 2);
-        await expect(await getAttributeByName(collapsibleExample + ' ' + fdTabFF, 'aria-selected', 2)).toEqual('true');
+        expect(await getAttributeByName(collapsibleExample + ' ' + fdTabFF, 'aria-selected', 2)).toEqual('true');
     });
 
     it('should check that tabs change according to chosen filter and compact modes', async () => {
         await click(modeSelect);
         await click(filterMode);
         await click(compactCheckBox);
-        await expect(await getElementClass(threeTabsList)).toContain('is-compact');
-        await expect(await getElementClass(threeTabsGroup)).toContain('filter');
+        expect(await getElementClass(threeTabsList)).toContain('is-compact');
+        expect(await getElementClass(threeTabsGroup)).toContain('filter');
     });
 
     it('should check that icon changes according to chosen', async () => {
@@ -141,21 +162,21 @@ describe('Tabs test suite', () => {
         await click(compactCheckBox);
         await click(iconSelect);
         await click(accidentalLeaveIcon);
-        await expect(await getElementClass(fdIcon)).toContain('accidental');
+        expect(await getElementClass(fdIcon)).toContain('accidental');
     });
 
     it('should check set custom title in playground', async () => {
         const customTitle = 'Battle';
         await scrollIntoView(playGroundExample);
         await setValue(titleField, customTitle);
-        await expect(await getText(playGroundExample + tabTitle)).toBe(customTitle);
+        expect(await getText(playGroundExample + tabTitle)).toBe(customTitle);
     });
 
     it('should check set custom title in playground', async () => {
         const customCount = '123';
         await scrollIntoView(playGroundExample);
         await setValue(counterField, customCount);
-        await expect(await getText(playGroundExample + tabCount)).toBe(customCount);
+        expect(await getText(playGroundExample + tabCount)).toBe(customCount);
     });
 
     it('should check choosing icon for tab without icon mode', async () => {
@@ -163,10 +184,10 @@ describe('Tabs test suite', () => {
         await click(iconSelect);
         await click(accidentalLeaveIcon);
         // icon should not exist cz by default tabs mode is not icon
-        await expect(await doesItExist(fdIcon)).toBe(false);
+        expect(await doesItExist(fdIcon)).toBe(false);
         await click(modeSelect);
         await click(iconOnlyMode);
-        await expect(await isElementDisplayed(fdIcon)).toBe(true);
+        expect(await isElementDisplayed(fdIcon)).toBe(true);
     });
 
     it('should check RTL and LTR orientation', async () => {
@@ -175,11 +196,11 @@ describe('Tabs test suite', () => {
 
     xit('should check examples visual regression', async () => {
         await tabsPage.saveExampleBaselineScreenshot();
-        await expect(await tabsPage.compareWithBaseline()).toBeLessThan(5);
+        expect(await tabsPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     async function checkTabsSelect(section: string): Promise<boolean> {
-        let length;
+        let length: number = 0;
         if (section === collapsibleOverflowExample) {
             length = (await getElementArrayLength(section + fdTab)) - 3;
         }
@@ -195,7 +216,7 @@ describe('Tabs test suite', () => {
                 }
             }
             if (section === stackendContentExample && i === 0) {
-                await expect(await getAttributeByName(tabLinkElSelector, 'aria-selected', i)).toEqual('true');
+                expect(await getAttributeByName(tabLinkElSelector, 'aria-selected', i)).toEqual('true');
             }
             if (section !== collapsibleExample && section !== stackendContentExample && i !== 0) {
                 await click(section + fdTab, i);
@@ -208,6 +229,6 @@ describe('Tabs test suite', () => {
     }
 
     async function clickOnTab(section: string, index: number = 0): Promise<void> {
-        return (await browserIsFirefox()) ? await click(section + fdTabFF, index) : await click(section + fdTab, index);
+        return browserIsFirefox() ? await click(section + fdTabFF, index) : await click(section + fdTab, index);
     }
 });
