@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.36...v0.46.0-rc.37) (2023-09-11)
+
+
+### Features
+
+* **core,platform:** ability to disable snap-on-scroll on dynamic page ([#10517](https://github.com/SAP/fundamental-ngx/issues/10517)) ([e95be7c](https://github.com/SAP/fundamental-ngx/commit/e95be7ce635303baf33696cb553e74c395a9eee2))
+
+
+
+
+
 # [0.46.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.35...v0.46.0-rc.36) (2023-09-11)
 
 
