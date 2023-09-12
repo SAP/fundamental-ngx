@@ -320,6 +320,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'साफ़ करें',
         submitButtonTitle: 'खोज करें',
+        searchInputLabel: 'खोज करें',
         synchronizeButtonTitle: 'सिंक्रनाइज़ करें',
         searchSuggestionMessage: '{{ count }} सुझाव मिले',
         searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें'
