@@ -1,36 +1,27 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { AvatarGroupComponent } from './avatar-group.component';
+import { AvatarGroupOverflowBodyComponent } from './components/avatar-group-overflow-body/avatar-group-overflow-body.component';
+import { AvatarGroupOverflowButtonComponent } from './components/avatar-group-overflow-button.component';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 import { AvatarGroupOverflowBodyDirective } from './directives/avatar-group-overflow-body.directive';
-import { AvatarGroupOverflowItemDirective } from './directives/avatar-group-overflow-item.directive';
 import { AvatarGroupOverflowButtonDirective } from './directives/avatar-group-overflow-button.directive';
-import { AvatarGroupOverflowButtonTextDirective } from './directives/avatar-group-overflow-button-text.directive';
-import { AvatarGroupFocusableAvatarDirective } from './directives/avatar-group-focusable-avatar.directive';
-import { AvatarGroupPopoverControlDirective } from './directives/avatar-group-popover-control.directive';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [
+        AvatarGroupComponent,
+        AvatarGroupItemDirective,
+        AvatarGroupOverflowButtonComponent,
+        AvatarGroupOverflowButtonDirective,
+        AvatarGroupOverflowBodyComponent,
+        AvatarGroupOverflowBodyDirective
+    ],
     exports: [
         AvatarGroupComponent,
         AvatarGroupItemDirective,
-        AvatarGroupFocusableAvatarDirective,
-        AvatarGroupPopoverControlDirective,
-        AvatarGroupOverflowBodyDirective,
-        AvatarGroupOverflowItemDirective,
+        AvatarGroupOverflowButtonComponent,
         AvatarGroupOverflowButtonDirective,
-        AvatarGroupOverflowButtonTextDirective
-    ],
-    declarations: [
-        AvatarGroupComponent,
-        AvatarGroupItemDirective,
-        AvatarGroupFocusableAvatarDirective,
-        AvatarGroupPopoverControlDirective,
-        AvatarGroupOverflowBodyDirective,
-        AvatarGroupOverflowItemDirective,
-        AvatarGroupOverflowButtonDirective,
-        AvatarGroupOverflowButtonTextDirective
+        AvatarGroupOverflowBodyComponent,
+        AvatarGroupOverflowBodyDirective
     ]
 })
 export class AvatarGroupModule {}

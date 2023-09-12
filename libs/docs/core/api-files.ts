@@ -23,15 +23,16 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
-    avatarGroup: [
-        'AvatarGroupComponent',
-        'AvatarGroupItemDirective',
-        'AvatarGroupFocusableAvatarDirective',
-        'AvatarGroupPopoverControlDirective',
-        'AvatarGroupOverflowBodyDirective',
-        'AvatarGroupOverflowItemDirective',
-        'AvatarGroupOverflowButtonDirective',
-        'AvatarGroupOverflowButtonTextDirective'
+    avatarGroup: ['AvatarGroupComponent'],
+    avatarGroupLegacy: [
+        'AvatarGroupLegacyComponent',
+        'AvatarGroupLegacyItemDirective',
+        'AvatarGroupLegacyFocusableAvatarDirective',
+        'AvatarGroupLegacyPopoverControlDirective',
+        'AvatarGroupLegacyOverflowBodyDirective',
+        'AvatarGroupLegacyOverflowItemDirective',
+        'AvatarGroupLegacyOverflowButtonDirective',
+        'AvatarGroupLegacyOverflowButtonTextDirective'
     ],
     initialFocus: ['InitialFocusDirective'],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],

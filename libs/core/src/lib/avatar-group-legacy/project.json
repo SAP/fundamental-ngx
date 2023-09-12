@@ -1,0 +1,47 @@
+{
+    "name": "core-avatar-group-legacy",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/core/src/lib/avatar-group-legacy",
+    "prefix": "fd",
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/libs/core/avatar-group-legacy"],
+            "options": {
+                "tsConfig": "libs/core/src/lib/avatar-group-legacy/tsconfig.lib.json",
+                "project": "libs/core/src/lib/avatar-group-legacy/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": false
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/core/src/lib/avatar-group-legacy/tsconfig.lib.prod.json"
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/avatar-group-legacy/**/*.ts",
+                    "libs/core/src/lib/avatar-group-legacy/**/*.html"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/core/src/lib/avatar-group-legacy/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        }
+    },
+    "tags": ["type:lib", "scope:fd"]
+}

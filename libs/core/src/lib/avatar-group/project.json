@@ -1,13 +1,14 @@
 {
     "name": "core-avatar-group",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "projectType": "library",
-    "sourceRoot": "libs/core/src/lib/avatar-group",
+    "sourceRoot": "libs/core/src/lib/avatar-group/src",
     "prefix": "fd",
+    "tags": ["scope:fd", "type:lib"],
+    "projectType": "library",
     "targets": {
         "build": {
             "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/avatar-group"],
+            "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
             "options": {
                 "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.json",
                 "project": "libs/core/src/lib/avatar-group/ng-package.json",
@@ -16,17 +17,12 @@
             "configurations": {
                 "production": {
                     "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.json"
                 }
-            }
-        },
-        "lint": {
-            "executor": "@nx/linter:eslint",
-            "options": {
-                "lintFilePatterns": [
-                    "libs/core/src/lib/avatar-group/**/*.ts",
-                    "libs/core/src/lib/avatar-group/**/*.html"
-                ]
-            }
+            },
+            "defaultConfiguration": "production"
         },
         "test": {
             "executor": "@nx/jest:jest",
@@ -41,7 +37,16 @@
                     "codeCoverage": true
                 }
             }
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "libs/core/src/lib/avatar-group/**/*.ts",
+                    "libs/core/src/lib/avatar-group/**/*.html"
+                ]
+            }
         }
-    },
-    "tags": ["type:lib", "scope:fd"]
+    }
 }

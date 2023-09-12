@@ -1,25 +1,16 @@
 <fd-doc-page>
     <header>Avatar Group</header>
+
     <description>
         <p>
-            The Avatar Group displays a number of avatars which act as a digital representation of the user. It is
-            useful for visually showcasing a team, project team members, or employees for example.
+            The <code>fd-avatar-group</code> component is used to display a group of avatars. Visualization is done
+            using the <code>fd-avatar</code> component in conjunction with the
+            <code>[fdAvatarGroupItem]</code> structural directive. Every item can and in most cases should have a
+            details template provided as well.<br />
+            Details template will be displayed in a popover when item is focused.
         </p>
-        Types options:
-        <ul>
-            <li>Group type</li>
-            <li>Individual type</li>
-        </ul>
-
-        Size variations:
-        <ul>
-            <li>Extra Small (xs)</li>
-            <li>Small (s)</li>
-            <li>Medium (m)</li>
-            <li>Large (l)</li>
-            <li>Extra Large (xl)</li>
-        </ul>
     </description>
+
     <import module="AvatarGroupModule" subPackage="avatar-group"></import>
 
     <fd-header-tabs></fd-header-tabs>

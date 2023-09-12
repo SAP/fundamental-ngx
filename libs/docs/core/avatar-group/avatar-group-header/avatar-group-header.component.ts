@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
     DescriptionComponent,
     DocPageComponent,
@@ -8,8 +8,9 @@ import {
 } from '@fundamental-ngx/docs/shared';
 
 @Component({
-    selector: 'fd-avatar-group-header',
+    selector: 'app-avatar-group-header',
     templateUrl: './avatar-group-header.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })

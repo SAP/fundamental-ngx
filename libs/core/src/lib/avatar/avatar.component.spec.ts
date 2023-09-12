@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AvatarModule } from './avatar.module';
 import { AvatarComponent } from './avatar.component';
 
 @Component({
     selector: 'fd-test-object-status',
-    template: `<fd-avatar
+    template: ` <fd-avatar
         [size]="size"
         [glyph]="glyph"
         [circle]="circle"
@@ -19,7 +18,9 @@ import { AvatarComponent } from './avatar.component';
         [border]="border"
         [label]="label"
     >
-    </fd-avatar>`
+    </fd-avatar>`,
+    standalone: true,
+    imports: [AvatarComponent]
 })
 class TestComponent {
     size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
@@ -43,8 +44,7 @@ describe('AvatarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarModule]
+            imports: [TestComponent]
         })
             .overrideComponent(AvatarComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

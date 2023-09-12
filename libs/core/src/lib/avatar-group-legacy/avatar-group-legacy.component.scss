@@ -1,0 +1,439 @@
+/*!
+ * Fundamental Library Styles v0.28.3
+ * Copyright (c) 2023 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
+ */
+/*!
+.fd-avatar-group-legacy+((--individual|--group), (--xs|--s|--m|--l|--xl)
+*/
+.fd-avatar-group-legacy {
+    -webkit-box-sizing: border-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    border: 0;
+    box-sizing: border-box;
+    color: var(--sapTextColor);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 400;
+    forced-color-adjust: none;
+    line-height: var(--sapContent_LineHeight);
+    margin: 0;
+    padding: 0;
+}
+
+.fd-avatar-group-legacy:after,
+.fd-avatar-group-legacy:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+.fd-avatar-group-legacy--group-type[tabindex='0'],
+.fd-avatar-group-legacy__popover-control[tabindex='0'] {
+    cursor: pointer;
+}
+
+.fd-avatar-group-legacy--group-type[tabindex='0'].is-focus,
+.fd-avatar-group-legacy--group-type[tabindex='0']:focus,
+.fd-avatar-group-legacy__popover-control[tabindex='0'].is-focus,
+.fd-avatar-group-legacy__popover-control[tabindex='0']:focus {
+    outline: none;
+}
+
+.fd-avatar-group-legacy--group-type[tabindex='0'].is-focus:after,
+.fd-avatar-group-legacy--group-type[tabindex='0']:focus:after,
+.fd-avatar-group-legacy__popover-control[tabindex='0'].is-focus:after,
+.fd-avatar-group-legacy__popover-control[tabindex='0']:focus:after {
+    border-color: var(--sapContent_FocusColor);
+    border-radius: var(--fdAvatarGroup_Focus_Outline_Radius);
+    border-style: var(--sapContent_FocusStyle);
+    border-width: var(--sapContent_FocusWidth);
+    bottom: var(--fdAvatarGroup_Focus_Outline_Offset);
+    content: '';
+    left: var(--fdAvatarGroup_Focus_Outline_Offset);
+    pointer-events: none;
+    position: absolute;
+    right: var(--fdAvatarGroup_Focus_Outline_Offset);
+    top: var(--fdAvatarGroup_Focus_Outline_Offset);
+}
+
+.fd-avatar-group-legacy__popover-control {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: auto;
+}
+
+.fd-avatar-group-legacy__focusable-avatar.is-focus,
+.fd-avatar-group-legacy__focusable-avatar:focus,
+.fd-avatar-group-legacy__item[tabindex='0'].is-focus,
+.fd-avatar-group-legacy__item[tabindex='0']:focus {
+    outline: none;
+    z-index: 5;
+}
+
+.fd-avatar-group-legacy__focusable-avatar.is-focus .fd-avatar:after,
+.fd-avatar-group-legacy__focusable-avatar:focus .fd-avatar:after,
+.fd-avatar-group-legacy__item[tabindex='0'].is-focus .fd-avatar:after,
+.fd-avatar-group-legacy__item[tabindex='0']:focus .fd-avatar:after {
+    border-color: var(--sapContent_FocusColor);
+    border-radius: var(--fdAvatar_Focus_Outline_Radius_Circle);
+    border-style: var(--sapContent_FocusStyle);
+    border-width: var(--sapContent_FocusWidth);
+    bottom: var(--fdAvatar_Focus_Outline_Offset);
+    content: '';
+    left: var(--fdAvatar_Focus_Outline_Offset);
+    pointer-events: none;
+    position: absolute;
+    right: var(--fdAvatar_Focus_Outline_Offset);
+    top: var(--fdAvatar_Focus_Outline_Offset);
+}
+
+.fd-avatar-group-legacy--group-type .fd-avatar-group-legacy__more-button {
+    pointer-events: none;
+}
+
+.fd-avatar-group-legacy__item {
+    -webkit-box-sizing: border-box;
+    border: 0;
+    box-sizing: border-box;
+    color: var(--sapTextColor);
+    display: inline-block;
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 400;
+    forced-color-adjust: none;
+    line-height: var(--sapContent_LineHeight);
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.fd-avatar-group-legacy__item:after,
+.fd-avatar-group-legacy__item:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+.fd-avatar-group-legacy__more-button {
+    outline: none !important;
+}
+
+.fd-avatar-group-legacy__more-button.is-focus,
+.fd-avatar-group-legacy__more-button:focus {
+    outline: none;
+}
+
+.fd-avatar-group-legacy__more-button.is-focus:after,
+.fd-avatar-group-legacy__more-button:focus:after {
+    border-color: var(--sapContent_FocusColor);
+    border-radius: var(--fdAvatar_Focus_Outline_Radius_Circle);
+    border-style: var(--sapContent_FocusStyle);
+    border-width: var(--sapContent_FocusWidth);
+    bottom: var(--fdAvatar_Focus_Outline_Offset);
+    content: '';
+    left: var(--fdAvatar_Focus_Outline_Offset);
+    pointer-events: none;
+    position: absolute;
+    right: var(--fdAvatar_Focus_Outline_Offset);
+    top: var(--fdAvatar_Focus_Outline_Offset);
+}
+
+.fd-avatar-group-legacy__more-button .fd-avatar-group-legacy__button-text {
+    font-size: inherit;
+}
+
+.fd-avatar-group-legacy__overflow-body {
+    -webkit-box-sizing: border-box;
+    border: 0;
+    box-sizing: border-box;
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-size: var(--sapFontSize);
+    font-weight: 400;
+    forced-color-adjust: none;
+    line-height: var(--sapContent_LineHeight);
+    margin: 0;
+    padding: 1rem;
+    white-space: normal;
+}
+
+.fd-avatar-group-legacy__overflow-body:after,
+.fd-avatar-group-legacy__overflow-body:before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+.fd-avatar-group-legacy__overflow-body--no-padding {
+    padding: 0;
+}
+
+.fd-avatar-group-legacy__overflow-body--no-horizontal-scroll {
+    overflow-x: hidden;
+}
+
+.fd-avatar-group-legacy__overflow-body--no-vertical-scroll {
+    overflow-y: hidden;
+}
+
+.fd-avatar-group-legacy__overflow-body .fd-avatar-group-legacy__item {
+    margin: 0.25rem;
+}
+
+.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item,
+.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__more-button {
+    height: 2rem;
+    max-height: 2rem;
+    max-width: 2rem;
+    min-height: 2rem;
+    min-width: 2rem;
+    width: 2rem;
+}
+
+.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__more-button {
+    border-radius: 25rem;
+    border-width: var(--fdAvatarGroup_MoreButton_Border);
+    font-size: 1rem;
+}
+
+.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item,
+.fd-avatar-group-legacy--s .fd-avatar-group-legacy__more-button {
+    height: 3rem;
+    max-height: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    min-width: 3rem;
+    width: 3rem;
+}
+
+.fd-avatar-group-legacy--s .fd-avatar-group-legacy__more-button {
+    border-radius: 25rem;
+    border-width: var(--fdAvatarGroup_MoreButton_Border);
+    font-size: 1.125rem;
+}
+
+.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item,
+.fd-avatar-group-legacy--m .fd-avatar-group-legacy__more-button {
+    height: 4rem;
+    max-height: 4rem;
+    max-width: 4rem;
+    min-height: 4rem;
+    min-width: 4rem;
+    width: 4rem;
+}
+
+.fd-avatar-group-legacy--m .fd-avatar-group-legacy__more-button {
+    border-radius: 25rem;
+    border-width: var(--fdAvatarGroup_MoreButton_Border);
+    font-size: 1.5rem;
+}
+
+.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item,
+.fd-avatar-group-legacy--l .fd-avatar-group-legacy__more-button {
+    height: 5rem;
+    max-height: 5rem;
+    max-width: 5rem;
+    min-height: 5rem;
+    min-width: 5rem;
+    width: 5rem;
+}
+
+.fd-avatar-group-legacy--l .fd-avatar-group-legacy__more-button {
+    border-radius: 25rem;
+    border-width: var(--fdAvatarGroup_MoreButton_Border);
+    font-size: 2.25rem;
+}
+
+.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item,
+.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__more-button {
+    height: 7rem;
+    max-height: 7rem;
+    max-width: 7rem;
+    min-height: 7rem;
+    min-width: 7rem;
+    width: 7rem;
+}
+
+.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__more-button {
+    border-radius: 25rem;
+    border-width: var(--fdAvatarGroup_MoreButton_Border);
+    font-size: 3rem;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: 0.0625rem;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item {
+    margin-left: 0.0625rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: 0.125rem;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item {
+    margin-left: 0.125rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: 0.125rem;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item {
+    margin-left: 0.125rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: 0.125rem;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item {
+    margin-left: 0.125rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: 0.25rem;
+}
+
+.fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--individual-type.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item {
+    margin-left: 0.25rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: -0.75rem;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--xs .fd-avatar-group-legacy__item {
+    margin-left: -0.75rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: -1.25rem;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--s .fd-avatar-group-legacy__item {
+    margin-left: -1.25rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: -1.625rem;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--m .fd-avatar-group-legacy__item {
+    margin-left: -1.625rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: -2rem;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--l .fd-avatar-group-legacy__item {
+    margin-left: -2rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item {
+    margin-left: 0;
+    margin-right: -2.75rem;
+}
+
+.fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item[dir='rtl'],
+[dir='rtl'] .fd-avatar-group-legacy--group-type.fd-avatar-group-legacy--xl .fd-avatar-group-legacy__item {
+    margin-left: -2.75rem;
+    margin-right: 0;
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-1 {
+    background-color: var(--fdAvatar_Accent_Color_1);
+    border: var(--fdAvatar_Accent_Color_1_Border);
+    color: var(--fdAvatar_Accent_Color_1_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-2 {
+    background-color: var(--fdAvatar_Accent_Color_2);
+    border: var(--fdAvatar_Accent_Color_2_Border);
+    color: var(--fdAvatar_Accent_Color_2_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-3 {
+    background-color: var(--fdAvatar_Accent_Color_3);
+    border: var(--fdAvatar_Accent_Color_3_Border);
+    color: var(--fdAvatar_Accent_Color_3_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-4 {
+    background-color: var(--fdAvatar_Accent_Color_4);
+    border: var(--fdAvatar_Accent_Color_4_Border);
+    color: var(--fdAvatar_Accent_Color_4_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-5 {
+    background-color: var(--fdAvatar_Accent_Color_5);
+    border: var(--fdAvatar_Accent_Color_5_Border);
+    color: var(--fdAvatar_Accent_Color_5_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-6 {
+    background-color: var(--fdAvatar_Accent_Color_6);
+    border: var(--fdAvatar_Accent_Color_6_Border);
+    color: var(--fdAvatar_Accent_Color_6_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-7 {
+    background-color: var(--fdAvatar_Accent_Color_7);
+    border: var(--fdAvatar_Accent_Color_7_Border);
+    color: var(--fdAvatar_Accent_Color_7_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-8 {
+    background-color: var(--fdAvatar_Accent_Color_8);
+    border: var(--fdAvatar_Accent_Color_8_Border);
+    color: var(--fdAvatar_Accent_Color_8_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-9 {
+    background-color: var(--fdAvatar_Accent_Color_9);
+    border: var(--fdAvatar_Accent_Color_9_Border);
+    color: var(--fdAvatar_Accent_Color_9_Text);
+}
+
+.fd-avatar-group-legacy .fd-avatar-group-legacy__more-button--accent-color-10 {
+    background-color: var(--fdAvatar_Accent_Color_10);
+    border: var(--fdAvatar_Accent_Color_10_Border);
+    color: var(--fdAvatar_Accent_Color_10_Text);
+}

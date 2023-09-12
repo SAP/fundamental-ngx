@@ -4,6 +4,6 @@ export default {
     ...baseConfig,
     displayName: 'core-avatar-group',
     preset: '../../../../../jest.preset.js',
-    setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts', '../../../../../jest-extended-matchers.ts'],
+    setupFilesAfterEnv: ['<rootDir>/test-setup.ts', '../../../../../jest-extended-matchers.ts'],
     coverageDirectory: '../../../../../dist/coverage/core-avatar-group'
 };

@@ -2,7 +2,7 @@
     "name": "docs-core-avatar-group",
     "sourceRoot": "libs/docs/core/avatar-group",
     "projectType": "library",
-    "prefix": "fundamental-ngx",
+    "prefix": "fdp-doc",
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",
@@ -10,7 +10,7 @@
                 "e2eFiles": ["libs/docs/core/avatar-group/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["{workspaceRoot}/allure-results/docs-core-avatar-group"]
+            "outputs": ["allure-results/docs-core-avatar-group"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     Attribute,
     ChangeDetectionStrategy,
@@ -18,12 +19,12 @@ import {
 import {
     ANY_LANGUAGE_LETTERS_REGEX,
     ColorAccent,
+    CssClassBuilder,
+    Nullable,
     Size,
     applyCssClass,
-    getRandomColorAccent,
-    CssClassBuilder
+    getRandomColorAccent
 } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_AVATAR_COMPONENT } from './tokens';
 
 let avatarUniqueId = 0;
@@ -49,7 +50,9 @@ const ALTER_ICON_OPTIONS = {
     ],
     host: {
         '[attr.tabindex]': '_tabindex'
-    }
+    },
+    standalone: true,
+    imports: [NgIf]
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */
