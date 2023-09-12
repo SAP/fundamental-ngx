@@ -7,13 +7,13 @@
         [orientation]="orientation"
         fdkResizeObserver
         fdkFocusableList
-        [contentDirection]="contentDirection$ | async"
+        [contentDirection]="_contentDirection$ | async"
         [wrap]="true"
         [navigationDirection]="orientation"
-        [items]="avatars"
+        [items]="_avatars"
         (resized)="_detectChanges()"
     >
-        <fd-popover *ngFor="let item of avatars" [noArrow]="false" [focusAutoCapture]="true">
+        <fd-popover *ngFor="let item of _avatars" [noArrow]="false" [focusAutoCapture]="true">
             <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
                 <ng-template
                     #outletItem="fdAvatarGroupItemPortal"
@@ -31,7 +31,7 @@
         <fd-popover
             [noArrow]="false"
             [focusAutoCapture]="true"
-            *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent.hiddenItems(); let hiddenItems"
+            *fdAvatarGroupInternalOverflowButton="avatarGroupHostComponent._hiddenItems(); let hiddenItems"
         >
             <fd-popover-control tabindex="-1">
                 <ng-template
@@ -58,7 +58,7 @@
                 [orientation]="orientation"
                 [fdkFocusableItem]="true"
             >
-                <ng-container *ngFor="let item of avatars">
+                <ng-container *ngFor="let item of _avatars">
                     <ng-template
                         cdkPortalOutlet
                         fdAvatarGroupItemPortal
@@ -68,7 +68,7 @@
                     </ng-template>
                 </ng-container>
                 <ng-template
-                    [fdAvatarGroupInternalOverflowButton]="avatarGroupHostComponent.hiddenItems()"
+                    [fdAvatarGroupInternalOverflowButton]="avatarGroupHostComponent._hiddenItems()"
                     let-hiddenItems
                 >
                     <ng-template
@@ -81,15 +81,15 @@
         <fd-popover-body>
             <ng-template
                 [ngTemplateOutlet]="avatarGroupOverflowBodyTemplate"
-                [ngTemplateOutletContext]="{ $implicit: avatarRenderers }"
+                [ngTemplateOutletContext]="{ $implicit: _avatarRenderers }"
             ></ng-template>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
 <ng-template #overflowButtonTemplate let-hiddenItems>
-    <ng-container *ngIf="overflowButton; else defaultOverflowButton">
+    <ng-container *ngIf="_overflowButton; else defaultOverflowButton">
         <ng-template
-            [ngTemplateOutlet]="overflowButton.templateRef"
+            [ngTemplateOutlet]="_overflowButton._templateRef"
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     </ng-container>
@@ -101,9 +101,9 @@
 </ng-template>
 
 <ng-template #avatarGroupOverflowBodyTemplate let-hiddenItems>
-    <ng-container *ngIf="avatarGroupPopoverBody; else defaultAvatarGroupOverflowBodyTemplate">
+    <ng-container *ngIf="_avatarGroupPopoverBody; else defaultAvatarGroupOverflowBodyTemplate">
         <ng-template
-            [ngTemplateOutlet]="avatarGroupPopoverBody.templateRef"
+            [ngTemplateOutlet]="_avatarGroupPopoverBody._templateRef"
             [ngTemplateOutletContext]="{ hiddenItems: hiddenItems }"
         />
     </ng-container>

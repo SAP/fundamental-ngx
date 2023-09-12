@@ -11,5 +11,5 @@ import { AvatarGroupItemRendererDirective } from './avatar-group-item-renderer.d
 })
 export class AvatarGroupOverflowButtonDirective {
     /** @hidden */
-    readonly templateRef: TemplateRef<{ hiddenItems: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
+    readonly _templateRef: TemplateRef<{ hiddenItems: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
 }

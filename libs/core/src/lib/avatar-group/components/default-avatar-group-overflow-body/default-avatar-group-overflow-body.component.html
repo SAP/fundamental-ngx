@@ -2,28 +2,28 @@
     <div fd-bar barDesign="header">
         <div fd-bar-left>
             <fd-button-bar
-                *ngIf="isDetailStage"
-                (click)="openOverflowMain()"
+                *ngIf="_isDetailStage"
+                (click)="_openOverflowMain()"
                 [glyph]="isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'"
                 fdType="transparent"
                 aria-label="Back"
                 title="Back"
             ></fd-button-bar>
             <fd-bar-element>
-                {{ isDetailStage ? selectedItem.title : overflowPopoverTitle }}
+                {{ _isDetailStage ? _selectedItem.title : overflowPopoverTitle }}
             </fd-bar-element>
-            <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
+            <fd-bar-element *ngIf="_isDetailStage">&nbsp;</fd-bar-element>
         </div>
     </div>
 </div>
 <div
     class="fd-avatar-group__overflow-body"
-    [class.fd-avatar-group__overflow-body--no-padding]="isDetailStage"
-    [class.fd-avatar-group__overflow-body--no-horizontal-scroll]="isDetailStage"
+    [class.fd-avatar-group__overflow-body--no-padding]="_isDetailStage"
+    [class.fd-avatar-group__overflow-body--no-horizontal-scroll]="_isDetailStage"
     fdkFocusableList
     navigationDirection="horizontal"
 >
-    <ng-container *ngIf="overflowPopoverStage === 'main'; else detailsStage">
+    <ng-container *ngIf="_overflowPopoverStage === 'main'; else detailsStage">
         <ng-container *ngFor="let item of avatars">
             <ng-template
                 cdkPortalOutlet
@@ -35,6 +35,6 @@
         </ng-container>
     </ng-container>
     <ng-template #detailsStage>
-        <ng-template [ngTemplateOutlet]="selectedItem.details"></ng-template>
+        <ng-template [ngTemplateOutlet]="_selectedItem.details"></ng-template>
     </ng-template>
 </div>

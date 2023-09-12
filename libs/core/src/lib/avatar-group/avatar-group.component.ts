@@ -100,22 +100,22 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
-    avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
+    _avatarRenderers: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
     @ContentChildren(AvatarGroupItemDirective)
-    avatars: QueryList<AvatarGroupItemDirective>;
+    _avatars: QueryList<AvatarGroupItemDirective>;
 
     /** @hidden */
     @ContentChild(AvatarGroupOverflowButtonDirective)
-    overflowButton: AvatarGroupOverflowButtonDirective;
+    _overflowButton: AvatarGroupOverflowButtonDirective;
 
     /** @hidden */
     @ContentChild(AvatarGroupOverflowBodyDirective)
-    avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
+    _avatarGroupPopoverBody: AvatarGroupOverflowBodyDirective;
 
     /** @hidden */
-    contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
+    _contentDirection$: Observable<'rtl' | 'ltr'> = (inject(RtlService, { optional: true })?.rtl || of(false)).pipe(
         map((isRtl) => (isRtl ? 'rtl' : 'ltr'))
     );
 

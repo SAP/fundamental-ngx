@@ -44,27 +44,31 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, OnDestroy {
-    /** @hidden */
+    /**
+     * List of avatars to be rendered in the overflow popover.
+     **/
     @Input()
     avatars: Iterable<AvatarGroupItemRendererDirective> = [];
 
-    /** @hidden */
+    /**
+     * Title of the overflow popover.
+     * */
     @Input()
     overflowPopoverTitle: string;
 
     /** @hidden */
     @ViewChildren(AvatarGroupItemRendererDirective)
-    avatarGroupItemPortals: QueryList<AvatarGroupItemRendererDirective>;
+    _avatarGroupItemPortals: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
-    overflowPopoverStage: 'main' | 'details' = 'main';
+    _overflowPopoverStage: 'main' | 'details' = 'main';
 
     /** @hidden */
-    selectedItem: AvatarGroupItemDirective;
+    _selectedItem: AvatarGroupItemDirective;
 
     /** @hidden */
-    get isDetailStage(): boolean {
-        return this.overflowPopoverStage === 'details';
+    get _isDetailStage(): boolean {
+        return this._overflowPopoverStage === 'details';
     }
 
     /** @hidden */
@@ -75,7 +79,7 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     private _itemClickSubscription: Subscription;
 
     /** @hidden */
-    private readonly changeDetectorRef = inject(ChangeDetectorRef);
+    private readonly _changeDetectorRef = inject(ChangeDetectorRef);
 
     /** @hidden */
     private readonly _renderer = inject(Renderer2);
@@ -85,9 +89,9 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.avatarGroupItemPortals.changes
+        this._avatarGroupItemPortals.changes
             .pipe(
-                startWith(this.avatarGroupItemPortals),
+                startWith(this._avatarGroupItemPortals),
                 map((avatarGroupItemPortals) => avatarGroupItemPortals.toArray())
             )
             .subscribe((items: AvatarGroupItemRendererDirective[]) => {
@@ -102,9 +106,9 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
                         )
                     )
                 ).subscribe((item: AvatarGroupItemRendererDirective) => {
-                    this.overflowPopoverStage = 'details';
-                    this.selectedItem = item.avatarGroupItem;
-                    this.changeDetectorRef.detectChanges();
+                    this._overflowPopoverStage = 'details';
+                    this._selectedItem = item.avatarGroupItem;
+                    this._changeDetectorRef.detectChanges();
                 });
             });
     }
@@ -117,8 +121,8 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     }
 
     /** @hidden */
-    openOverflowMain(): void {
-        this.overflowPopoverStage = 'main';
-        this.changeDetectorRef.detectChanges();
+    _openOverflowMain(): void {
+        this._overflowPopoverStage = 'main';
+        this._changeDetectorRef.detectChanges();
     }
 }

@@ -63,7 +63,9 @@ export class AvatarGroupOverflowButtonComponent
      */
     @Input() colorAccent: Nullable<ColorAccent> = null;
 
-    /** @hidden */
+    /**
+     * The class to apply to the host element.
+     **/
     @Input()
     class: Nullable<string>;
 

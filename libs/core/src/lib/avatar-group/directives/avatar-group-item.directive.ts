@@ -1,13 +1,11 @@
 import { Directive, inject, Input, TemplateRef } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Avatar group item directive, used to provide a template for the avatar group item.
  */
 @Directive({
     selector: '[fdAvatarGroupItem]',
-    standalone: true,
-    providers: [DestroyedService]
+    standalone: true
 })
 export class AvatarGroupItemDirective {
     /**
@@ -23,7 +21,7 @@ export class AvatarGroupItemDirective {
     forceVisibility = false;
 
     /** @hidden */
-    templateRef: TemplateRef<void> = inject(TemplateRef);
+    _templateRef: TemplateRef<void> = inject(TemplateRef);
 
     /**
      * Template for the details of the avatar group item.

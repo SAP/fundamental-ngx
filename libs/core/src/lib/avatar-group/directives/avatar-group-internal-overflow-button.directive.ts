@@ -6,23 +6,25 @@ import { AvatarGroupItemRendererDirective } from './avatar-group-item-renderer.d
     standalone: true
 })
 export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
-    /** @hidden */
+    /**
+     * List of hidden items to be rendered in the overflow popover.
+     **/
     @Input('fdAvatarGroupInternalOverflowButton')
     set hiddenItems(value: AvatarGroupItemRendererDirective[] | null) {
         const hiddenItems = value || [];
         if (hiddenItems.length > 0) {
-            this.show(hiddenItems);
+            this._show(hiddenItems);
         } else {
-            this.hide();
+            this._hide();
         }
     }
 
     /** @hidden */
-    readonly templateRef: TemplateRef<{ $implicit: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
+    private readonly _templateRef: TemplateRef<{ $implicit: AvatarGroupItemRendererDirective[] }> = inject(TemplateRef);
     /** @hidden */
-    readonly viewContainerRef = inject(ViewContainerRef);
+    private readonly _viewContainerRef = inject(ViewContainerRef);
     /** @hidden */
-    private embeddedView?: EmbeddedViewRef<any>;
+    private _embeddedView?: EmbeddedViewRef<any>;
 
     /** @hidden */
     static ngTemplateContextGuard(
@@ -32,26 +34,26 @@ export class AvatarGroupInternalOverflowButtonDirective implements OnDestroy {
         return true;
     }
     /** @hidden */
-    show(hiddenItems: AvatarGroupItemRendererDirective[]): void {
+    ngOnDestroy(): void {
+        this._hide();
+    }
+
+    /** @hidden */
+    private _show(hiddenItems: AvatarGroupItemRendererDirective[]): void {
         const context = { $implicit: hiddenItems };
-        if (this.embeddedView) {
-            this.embeddedView.context = context;
-            this.embeddedView.detectChanges();
+        if (this._embeddedView) {
+            this._embeddedView.context = context;
+            this._embeddedView.detectChanges();
             return;
         }
-        this.viewContainerRef.clear();
-        this.embeddedView = this.viewContainerRef.createEmbeddedView(this.templateRef, context);
-        this.embeddedView.detectChanges();
+        this._viewContainerRef.clear();
+        this._embeddedView = this._viewContainerRef.createEmbeddedView(this._templateRef, context);
+        this._embeddedView.detectChanges();
     }
 
     /** @hidden */
-    hide(): void {
-        this.viewContainerRef.clear();
-        this.embeddedView = undefined;
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this.hide();
+    private _hide(): void {
+        this._viewContainerRef.clear();
+        this._embeddedView = undefined;
     }
 }

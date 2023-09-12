@@ -39,38 +39,54 @@ import { AvatarGroupHostConfig } from '../types';
 export class AvatarGroupHostComponent
     implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig, CssClassBuilder
 {
-    /** @hidden */
+    /**
+     * The class to apply to the host element.
+     **/
     @Input()
     class: Nullable<string>;
 
-    /** @hidden */
+    /**
+     * The type of the avatar group.
+     * Options include 'individual' and 'group'.
+     **/
     @Input()
     type: AvatarGroupHostConfig['type'];
 
-    /** @hidden */
+    /**
+     * The orientation of the avatar group.
+     * Options include 'horizontal' and 'vertical'.
+     **/
     @Input()
     orientation: AvatarGroupHostConfig['orientation'];
 
-    /** @hidden */
+    /**
+     * The size of the avatar group.
+     * Options include 'xs', 's', 'm', 'l', and 'xl'.
+     **/
     @Input()
     size: AvatarGroupHostConfig['size'];
 
-    /** @hidden */
+    /**
+     * The items to be rendered in the avatar group.
+     **/
     @Input()
     items: QueryList<AvatarGroupItemDirective>;
 
-    /** @hidden */
+    /**
+     * @hidden
+     * The portals to be rendered in the avatar group.
+     **/
     @ContentChildren(AvatarGroupItemRendererDirective, { descendants: true })
-    portals: QueryList<AvatarGroupItemRendererDirective>;
+    _portals: QueryList<AvatarGroupItemRendererDirective>;
 
     /** @hidden */
-    resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
+    _resizeEmitter: Observable<ResizeObserverEntry[]> = inject(ResizeObserverDirective).resized;
 
     /** The reference to the host element */
     elementRef = inject(ElementRef);
 
     /** @hidden */
-    hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);
+    _hiddenItems = signal<AvatarGroupItemRendererDirective[]>([]);
 
     /** @hidden */
     private readonly _destroyRef = inject(DestroyRef);
@@ -102,15 +118,15 @@ export class AvatarGroupHostComponent
     /** @hidden */
     ngAfterViewInit(): void {
         combineLatest([
-            this.resizeEmitter.pipe(map((entries) => entries[0].contentRect.width)),
-            this.portals.changes.pipe(
-                startWith(this.portals),
+            this._resizeEmitter.pipe(map((entries) => entries[0].contentRect.width)),
+            this._portals.changes.pipe(
+                startWith(this._portals),
                 map((r) => r.toArray())
             ),
             this._onChanges$.pipe(startWith({}))
         ])
             .pipe(
-                map(([containerWidth, items]) => this.calculateVisibility(containerWidth, items)),
+                map(([containerWidth, items]) => this._calculateVisibility(containerWidth, items)),
                 delayWhen(() => animationFrames()),
                 takeUntilDestroyed(this._destroyRef)
             )
@@ -118,12 +134,12 @@ export class AvatarGroupHostComponent
                 visibleItems.forEach((item) => item.show());
                 hiddenItems.forEach((item) => item.hide());
                 this._cdr.detectChanges();
-                this.hiddenItems.set(hiddenItems);
+                this._hiddenItems.set(hiddenItems);
             });
     }
 
     /** @hidden */
-    calculateVisibility(
+    private _calculateVisibility(
         containerWidth: number,
         items: AvatarGroupItemRendererDirective[]
     ): {
