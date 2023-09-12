@@ -10,6 +10,7 @@ import {
     inject,
     Input,
     OnChanges,
+    OnInit,
     QueryList,
     signal,
     SimpleChanges,
@@ -37,7 +38,7 @@ import { AvatarGroupHostConfig } from '../types';
     encapsulation: ViewEncapsulation.None
 })
 export class AvatarGroupHostComponent
-    implements AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig, CssClassBuilder
+    implements OnInit, AfterViewInit, OnChanges, HasElementRef, AvatarGroupHostConfig, CssClassBuilder
 {
     /**
      * The class to apply to the host element.
@@ -111,7 +112,13 @@ export class AvatarGroupHostComponent
     }
 
     /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+        this.buildComponentCssClass();
         this._onChanges$.next(changes);
     }
 
