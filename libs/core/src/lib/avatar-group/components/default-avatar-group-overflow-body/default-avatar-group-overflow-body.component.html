@@ -24,7 +24,7 @@
     navigationDirection="horizontal"
 >
     <ng-container *ngIf="_overflowPopoverStage === 'main'; else detailsStage">
-        <ng-container *ngFor="let item of avatars">
+        <ng-container *ngFor="let item of avatars; trackBy: _trackByFn">
             <ng-template
                 cdkPortalOutlet
                 fdAvatarGroupItemPortal

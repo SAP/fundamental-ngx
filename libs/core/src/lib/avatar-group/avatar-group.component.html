@@ -13,7 +13,7 @@
         [items]="_avatars"
         (resized)="_detectChanges()"
     >
-        <fd-popover *ngFor="let item of _avatars" [noArrow]="false" [focusAutoCapture]="true">
+        <fd-popover *ngFor="let item of _avatars; trackBy: _trackByFn" [noArrow]="false" [focusAutoCapture]="true">
             <fd-popover-control tabindex="-1" (click)="outletItem.element.focus()">
                 <ng-template
                     #outletItem="fdAvatarGroupItemPortal"
@@ -58,7 +58,7 @@
                 [orientation]="orientation"
                 [fdkFocusableItem]="true"
             >
-                <ng-container *ngFor="let item of _avatars">
+                <ng-container *ngFor="let item of _avatars; trackBy: _trackByFn">
                     <ng-template
                         cdkPortalOutlet
                         fdAvatarGroupItemPortal

@@ -88,6 +88,10 @@ export class DefaultAvatarGroupOverflowBodyComponent implements AfterViewInit, O
     private readonly _rtlService = inject(RtlService, { optional: true });
 
     /** @hidden */
+    _trackByFn(_: number, item: AvatarGroupItemRendererDirective): AvatarGroupItemRendererDirective {
+        return item;
+    }
+    /** @hidden */
     ngAfterViewInit(): void {
         this._avatarGroupItemPortals.changes
             .pipe(

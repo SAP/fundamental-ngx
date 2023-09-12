@@ -123,6 +123,11 @@ export class AvatarGroupComponent implements AvatarGroupHostConfig {
     private _cdr = inject(ChangeDetectorRef);
 
     /** @hidden */
+    _trackByFn(_: number, item: AvatarGroupItemDirective): AvatarGroupItemDirective {
+        return item;
+    }
+
+    /** @hidden */
     _detectChanges(): void {
         this._cdr.detectChanges();
     }
