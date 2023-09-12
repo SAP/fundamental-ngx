@@ -71,6 +71,18 @@ export const ROUTES: Routes = [
         data: {
             primary: true
         }
+    },
+    {
+        path: 'examples',
+        children: [
+            {
+                path: 'tree',
+                loadComponent: () =>
+                    import('./examples/platform-table-tree-example.component').then(
+                        (c) => c.PlatformTableTreeExampleComponent
+                    )
+            }
+        ]
     }
 ];
 export const LIBRARY_NAME = 'table';
