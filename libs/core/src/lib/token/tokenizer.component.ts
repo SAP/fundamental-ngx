@@ -429,6 +429,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /**
+     * @hidden
      * Check whether user intends to go back to the previous token
      **/
     private _goBackRequested($event: KeyboardEvent, rtl: boolean): boolean {
@@ -439,6 +440,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
     }
 
     /**
+     * @hidden
      * Check whether user intends to go forward to the next token
      **/
     private _goForwardRequested($event: KeyboardEvent, rtl: boolean): boolean {
