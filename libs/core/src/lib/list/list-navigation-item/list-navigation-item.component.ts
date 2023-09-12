@@ -94,48 +94,23 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     /** @hidden */
     _innerText: string;
 
-    /** @hidden
-     * false if list-item is within unexpanded list (not visible to user until list expanded). default is true
-     */
-    _isItemVisible = true;
-
     /** @hidden */
     readonly _focused$ = new Subject<boolean>();
 
     /** @hidden */
     readonly _clicked$ = new Subject<MouseEvent>();
 
+    /**
+     * @hidden
+     * false if list-item is within unexpanded list (not visible to user until list expanded). default is true
+     */
+    _isItemVisible = true;
+
     /** @hidden handles rtl service */
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {}
-
-    /** @hidden */
-    ngAfterContentInit(): void {
-        if (this._listComponent) {
-            this._isExpandable = true;
-        } else {
-            this._tabIndex = 0;
-        }
-        if (this._iconComponent) {
-            this._iconComponent._navigationItemIcon = true;
-        }
-        this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
-        this._ariaLevel = 1;
-        this._childItems?.forEach((item) => {
-            item._ariaLevel = 2;
-        });
-    }
-
-    /** @hidden */
-    ngAfterViewInit(): void {
-        this._subscribeToRtl();
-        if (this._isExpandable) {
-            this._expanded = false;
-        }
-        this._setIsItemVisible(this.expanded);
-    }
 
     /** @hidden */
     @HostListener('click', ['$event'])
@@ -168,6 +143,34 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
         this._focused$.next(event.target !== this._elementRef?.nativeElement);
     }
 
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this._listComponent) {
+            this._isExpandable = true;
+            this._listComponent.role = 'group';
+        } else {
+            this._tabIndex = 0;
+        }
+        if (this._iconComponent) {
+            this._iconComponent._navigationItemIcon = true;
+            this._iconComponent.ariaHidden = true;
+        }
+        this._innerText = this._text.elementRef.nativeElement.textContent ?? '';
+        this._ariaLevel = 1;
+        this._childItems?.forEach((item) => {
+            item._ariaLevel = 2;
+        });
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._subscribeToRtl();
+        if (this._isExpandable) {
+            this._expanded = false;
+        }
+        this._setIsItemVisible(this.expanded);
+    }
+
     /** @hidden
      * set the _isItemVisible of sublist items to true if this(containing) list is expanded.
      */
@@ -193,11 +196,7 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
 
     /** support for FocusKeyManager for arrow key navigation */
     focus(): void {
-        if (!this._isExpandable) {
-            this._elementRef.nativeElement.focus();
-        } else {
-            this._listNavigationItemArrow?._focus();
-        }
+        this._elementRef.nativeElement.focus();
     }
 
     /** support for FocusKeyManager for arrow key navigation */

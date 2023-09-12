@@ -1,7 +1,12 @@
-import { Directive, ElementRef, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
-    selector: '[fd-list-navigation-item-arrow], [fdListNavigaitonItemArrow]'
+    selector: '[fd-list-navigation-item-arrow], [fdListNavigaitonItemArrow]',
+    host: {
+        tabindex: '-1',
+        role: 'presentation'
+    }
 })
 export class ListNavigationItemArrowDirective {
     /** @hidden */
@@ -20,8 +25,10 @@ export class ListNavigationItemArrowDirective {
     @HostBinding('class.is-expanded')
     expanded = false;
 
-    /** @hidden */
-    constructor(private _elRef: ElementRef) {}
+    /** Aria-hidden attribute value. */
+    @Input()
+    @HostBinding('attr.aria-hidden')
+    ariaHidden: Nullable<boolean> = true;
 
     /** @hidden */
     _setExpanded(expanded: boolean): void {
@@ -30,10 +37,5 @@ export class ListNavigationItemArrowDirective {
             this.downArrowClass = !this.downArrowClass;
         }
         this.expanded = expanded;
-    }
-
-    /** @hidden */
-    _focus(): void {
-        this._elRef.nativeElement.focus();
     }
 }
