@@ -433,10 +433,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
      * Check whether user intends to go back to the previous token
      **/
     private _goBackRequested($event: KeyboardEvent, rtl: boolean): boolean {
-        if (!rtl) {
-            return KeyUtil.isKeyCode($event, LEFT_ARROW) || KeyUtil.isKeyCode($event, UP_ARROW);
-        }
-        return KeyUtil.isKeyCode($event, RIGHT_ARROW) || KeyUtil.isKeyCode($event, DOWN_ARROW);
+        const backKeys = rtl ? [RIGHT_ARROW, DOWN_ARROW] : [LEFT_ARROW, UP_ARROW];
+        return KeyUtil.isKeyCode($event, backKeys);
     }
 
     /**
@@ -444,10 +442,8 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
      * Check whether user intends to go forward to the next token
      **/
     private _goForwardRequested($event: KeyboardEvent, rtl: boolean): boolean {
-        if (!rtl) {
-            return KeyUtil.isKeyCode($event, RIGHT_ARROW) || KeyUtil.isKeyCode($event, DOWN_ARROW);
-        }
-        return KeyUtil.isKeyCode($event, LEFT_ARROW) || KeyUtil.isKeyCode($event, UP_ARROW);
+        const forwardKeys = rtl ? [LEFT_ARROW, UP_ARROW] : [RIGHT_ARROW, DOWN_ARROW];
+        return KeyUtil.isKeyCode($event, forwardKeys);
     }
 
     /** @hidden */
