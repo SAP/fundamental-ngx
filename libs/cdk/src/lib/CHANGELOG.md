@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.39...v0.46.0-rc.40) (2023-09-12)
+
+
+### Features
+
+* **core:** avatar group horizon ([#10349](https://github.com/SAP/fundamental-ngx/issues/10349)) ([e5c63a4](https://github.com/SAP/fundamental-ngx/commit/e5c63a4e5de93d8644ec8709708e7931a4bc2006))
+
+
+
+
+
 # [0.46.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.38...v0.46.0-rc.39) (2023-09-12)
 
 

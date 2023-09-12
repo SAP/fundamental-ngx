@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.39...v0.46.0-rc.40) (2023-09-12)
+
+
+### Bug Fixes
+
+* **core:** vertical nav keyboard navigation ([#10503](https://github.com/SAP/fundamental-ngx/issues/10503)) ([17fcc1e](https://github.com/SAP/fundamental-ngx/commit/17fcc1e9fdd6024637fbe280909724ab87355f15))
+* **platform:** fixed multi combobox async value selection token ([#10456](https://github.com/SAP/fundamental-ngx/issues/10456)) ([6c671ed](https://github.com/SAP/fundamental-ngx/commit/6c671eddd65f7bf953e1e601b442a5516fabe8e3))
+
+
+### Features
+
+* **core:** avatar group horizon ([#10349](https://github.com/SAP/fundamental-ngx/issues/10349)) ([e5c63a4](https://github.com/SAP/fundamental-ngx/commit/e5c63a4e5de93d8644ec8709708e7931a4bc2006))
+* **core:** tokenizer vertical arrow keys navigation ([#10534](https://github.com/SAP/fundamental-ngx/issues/10534)) ([69aea55](https://github.com/SAP/fundamental-ngx/commit/69aea55086e4d8922c54e318ce7512e1a816cad7))
+
+
+
+
+
 # [0.46.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.38...v0.46.0-rc.39) (2023-09-12)
 
 **Note:** Version bump only for package @fundamental-ngx/core

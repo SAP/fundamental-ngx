@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.39...v0.46.0-rc.40) (2023-09-12)
+
+
+### Bug Fixes
+
+* **platform:** screenreader only span for empty platform table cells ([#10512](https://github.com/SAP/fundamental-ngx/issues/10512)) ([2555798](https://github.com/SAP/fundamental-ngx/commit/2555798b8af86937d94ff4ebfe0ebf1b2cf1acc7))
+* **platform:** search field accessibility improvements ([#10515](https://github.com/SAP/fundamental-ngx/issues/10515)) ([0c40875](https://github.com/SAP/fundamental-ngx/commit/0c40875289eca61da856a47d2ed0a133ea5c9151))
+
+
+
+
+
 # [0.46.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.38...v0.46.0-rc.39) (2023-09-12)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.39...v0.46.0-rc.40) (2023-09-12)
+
+
+### Bug Fixes
+
+* **platform:** add aria-selected to multiselect first td ([#10490](https://github.com/SAP/fundamental-ngx/issues/10490)) ([5192893](https://github.com/SAP/fundamental-ngx/commit/5192893ec526599dab63216ee442682454da9b07))
+* **platform:** console error when opening platform select ([#10419](https://github.com/SAP/fundamental-ngx/issues/10419)) ([6c8cc83](https://github.com/SAP/fundamental-ngx/commit/6c8cc83c5316af9f762f76466a9488c58c07c1d6))
+* **platform:** fixed multi combobox async value selection token ([#10456](https://github.com/SAP/fundamental-ngx/issues/10456)) ([6c671ed](https://github.com/SAP/fundamental-ngx/commit/6c671eddd65f7bf953e1e601b442a5516fabe8e3))
+* **platform:** screenreader only span for empty platform table cells ([#10512](https://github.com/SAP/fundamental-ngx/issues/10512)) ([2555798](https://github.com/SAP/fundamental-ngx/commit/2555798b8af86937d94ff4ebfe0ebf1b2cf1acc7))
+* **platform:** search field accessibility improvements ([#10515](https://github.com/SAP/fundamental-ngx/issues/10515)) ([0c40875](https://github.com/SAP/fundamental-ngx/commit/0c40875289eca61da856a47d2ed0a133ea5c9151))
+
+
+
+
+
 # [0.46.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.38...v0.46.0-rc.39) (2023-09-12)
 
 
