@@ -1,3 +1,14 @@
+import {
+    A,
+    BACKSPACE,
+    DELETE,
+    DOWN_ARROW,
+    ENTER,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SPACE,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
@@ -8,7 +19,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     HostListener,
     Inject,
     Input,
@@ -22,22 +32,22 @@ import {
     ViewChild,
     ViewChildren,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { BehaviorSubject, fromEvent, merge, Observable, startWith, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil, debounceTime, map } from 'rxjs/operators';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
 import {
-    applyCssClass,
     CssClassBuilder,
     KeyUtil,
     Nullable,
-    resizeObservable,
-    RtlService
+    RtlService,
+    applyCssClass,
+    resizeObservable
 } from '@fundamental-ngx/cdk/utils';
-import { TokenComponent } from './token.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { BehaviorSubject, Observable, Subject, Subscription, fromEvent, merge, startWith } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { TokenComponent } from './token.component';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -386,20 +396,19 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
             event.preventDefault();
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this._focusInput();
-        } else if ((KeyUtil.isKeyCode(event, LEFT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, RIGHT_ARROW) && rtl)) {
+        } else if (this._goBackRequested(event, rtl)) {
+            event.preventDefault();
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-        } else if ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl)) {
+        } else if (this._goForwardRequested(event, rtl)) {
+            event.preventDefault();
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
         } else if (KeyUtil.isKeyCode(event, A) && !this._getInputValue() && this._isControlKey(event)) {
             event.preventDefault();
             this.tokenList.forEach((token) => (token.selected = true));
         }
-        if (
-            newIndex === this.tokenList.length &&
-            ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl))
-        ) {
+        if (newIndex === this.tokenList.length && this._goForwardRequested(event, rtl)) {
             this._focusInput();
         } else if (newIndex! > this.tokenList.length - this.moreTokensRight.length && this._isInputFocused()) {
             this.focusTokenElement(newIndex! - this.moreTokensRight.length);
@@ -417,6 +426,24 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         });
 
         return totalTokenWidth;
+    }
+
+    /**
+     * @hidden
+     * Check whether user intends to go back to the previous token
+     **/
+    private _goBackRequested($event: KeyboardEvent, rtl: boolean): boolean {
+        const backKeys = rtl ? [RIGHT_ARROW, DOWN_ARROW] : [LEFT_ARROW, UP_ARROW];
+        return KeyUtil.isKeyCode($event, backKeys);
+    }
+
+    /**
+     * @hidden
+     * Check whether user intends to go forward to the next token
+     **/
+    private _goForwardRequested($event: KeyboardEvent, rtl: boolean): boolean {
+        const forwardKeys = rtl ? [LEFT_ARROW, UP_ARROW] : [RIGHT_ARROW, DOWN_ARROW];
+        return KeyUtil.isKeyCode($event, forwardKeys);
     }
 
     /** @hidden */
