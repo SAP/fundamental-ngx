@@ -373,6 +373,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         headerMenuUnfreeze: 'Unfreeze',
         headerMenuFilter: 'Filter',
         defaultEmptyMessage: 'No data found',
+        emptyCell: 'Empty',
         noVisibleColumnsMessage:
             'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Reset',

@@ -388,6 +388,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         headerMenuUnfreeze: 'Menuja "Shkrije"',
         headerMenuFilter: 'Filtro',
         defaultEmptyMessage: 'No data found',
+        emptyCell: 'Bosh',
         noVisibleColumnsMessage:
             'Right now, there are no visible columns in the table. Please select the columns you need in the table settings.',
         resetChangesButtonLabel: 'Rivendos',

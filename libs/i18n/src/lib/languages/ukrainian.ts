@@ -537,6 +537,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         headerMenuUnfreeze: 'Розморозити',
         headerMenuFilter: 'Фільтр',
         defaultEmptyMessage: 'Нічого не знайдено',
+        emptyCell: 'Empty',
         noVisibleColumnsMessage:
             'На даний момент у таблиці немає видимих стовпців. Виберіть потрібні стовпці в налаштуваннях таблиці.',
         resetChangesButtonLabel: 'Скинути',

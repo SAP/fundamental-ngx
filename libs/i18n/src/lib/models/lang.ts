@@ -469,6 +469,7 @@ export interface FdLanguage {
         headerMenuUnfreeze: FdLanguageKey;
         headerMenuFilter: FdLanguageKey;
         defaultEmptyMessage: FdLanguageKey;
+        emptyCell: FdLanguageKey;
         noVisibleColumnsMessage: FdLanguageKey;
         resetChangesButtonLabel: FdLanguageKey;
         editableCellNumberPlaceholder: FdLanguageKey;

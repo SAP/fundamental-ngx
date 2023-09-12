@@ -156,6 +156,19 @@
         ></span>
 
         <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
+            <span
+                *ngIf="(row.value | valueByPath : column.key) === '' || (row.value | valueByPath : column.key) === null"
+                [ngStyle]="{
+                    position: 'absolute !important',
+                    height: '1px',
+                    width: '1px',
+                    overflow: 'hidden',
+                    clip: 'rect(1px, 1px, 1px, 1px)',
+                    color: 'transparent',
+                    display: 'block'
+                }"
+                >{{ 'platformTable.emptyCell' | fdTranslate }}</span
+            >
             <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                 <ng-container
                     *ngTemplateOutlet="
