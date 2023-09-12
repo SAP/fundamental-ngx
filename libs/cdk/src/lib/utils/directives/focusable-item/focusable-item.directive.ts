@@ -1,26 +1,26 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
     DestroyRef,
     Directive,
     ElementRef,
     EventEmitter,
-    HostBinding,
-    inject,
     Input,
     NgZone,
-    Output
+    Output,
+    Renderer2,
+    inject
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
-import { TabbableElementService } from '../../services';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { FocusableObserver } from './focusable.observer';
-import { fromEvent, Subject } from 'rxjs';
-import { Nullable } from '../../models/nullable';
-import { KeyUtil } from '../../functions';
-import { FocusableItem } from './focusable.item';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject, fromEvent } from 'rxjs';
+import { KeyUtil } from '../../functions';
+import { Nullable } from '../../models/nullable';
+import { TabbableElementService } from '../../services';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE } from './focusable-item.tokens';
+import { FocusableItem } from './focusable.item';
+import { FocusableObserver } from './focusable.observer';
 
 export type CellFocusedEventAnnouncer = Nullable<(position: FocusableItemPosition) => string>;
 
@@ -71,12 +71,6 @@ export class FocusableItemDirective implements FocusableItem {
     _position: FocusableItemPosition;
 
     /** @hidden */
-    @HostBinding('attr.tabindex')
-    get _tabindex(): number {
-        return this._tabbable ? 0 : -1;
-    }
-
-    /** @hidden */
     protected readonly _destroyRef = inject(DestroyRef);
     /** @hidden */
     protected readonly _zone = inject(NgZone);
@@ -97,6 +91,9 @@ export class FocusableItemDirective implements FocusableItem {
     private readonly _tabbableElementService = inject(TabbableElementService);
     /** @hidden */
     private readonly _liveAnnouncer = inject(LiveAnnouncer);
+
+    /** @hidden */
+    private readonly _renderer2 = inject(Renderer2);
 
     /** @hidden */
     private readonly _document = inject(DOCUMENT);
@@ -149,6 +146,7 @@ export class FocusableItemDirective implements FocusableItem {
     /** Set tabbable state */
     setTabbable(state: boolean): void {
         this._tabbable = state;
+        this._renderer2.setAttribute(this.elementRef.nativeElement, 'tabindex', this._tabbable ? '0' : '-1');
 
         if (state) {
             this._enableTabbableElements();
