@@ -320,6 +320,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Temiz',
         submitButtonTitle: 'Ara',
+        searchInputLabel: 'Ara',
         synchronizeButtonTitle: 'Senkronize',
         searchSuggestionMessage: '{{ count }} öneri bulundu.',
         searchSuggestionNavigateMessage: 'gezinmek için yukarı ve aşağı okları kullanın'

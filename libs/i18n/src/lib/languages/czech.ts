@@ -323,6 +323,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Vymazat',
         submitButtonTitle: 'Search',
+        searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronizovat',
         searchSuggestionMessage: 'Počet nalezených návrhů: {{ count }}.',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů'

@@ -61,7 +61,7 @@
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
-                [attr.aria-label]="ariaLabel"
+                [attr.aria-label]="ariaLabel || 'platformSearchField.searchInputLabel' | fdTranslate"
                 [attr.aria-labelledby]="ariaLabelledBy"
                 [attr.aria-controls]="_menuId"
                 [attr.aria-expanded]="
@@ -80,7 +80,8 @@
                 *ngIf="inputText && inputText.length > 0"
             >
                 <button
-                    [title]="'platformSearchField.clearButtonTitle' | fdTranslate"
+                    [attr.aria-hidden]="!mobile"
+                    [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
                     class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
                     [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                     [attr.disabled]="disabled ? '' : null"
@@ -97,8 +98,9 @@
                 *ngIf="forceSearchButton || isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
+                    [attr.aria-hidden]="!mobile"
                     *ngIf="!disableSearch"
-                    [title]="'platformSearchField.submitButtonTitle' | fdTranslate"
+                    [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
                     class="fdp-search-field__submit fd-button fd-button--transparent {{ appearance?.buttonClass }}"
                     [class.fd-input-group__button]="!appearance?.removeGroupButtonClass"
                     [attr.id]="_submitId"
@@ -115,7 +117,8 @@
                 *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
-                    [title]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
+                    [attr.aria-hidden]="!mobile"
+                    [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
                     class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
                         appearance?.buttonClass
                     }}"

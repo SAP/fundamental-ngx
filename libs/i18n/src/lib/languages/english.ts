@@ -319,6 +319,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'Clear',
         submitButtonTitle: 'Search',
+        searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronize',
         searchSuggestionMessage: '{{ count }} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate'

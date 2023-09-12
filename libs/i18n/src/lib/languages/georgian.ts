@@ -321,6 +321,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     platformSearchField: {
         clearButtonTitle: 'გასუფთავება',
         submitButtonTitle: 'ძებნა',
+        searchInputLabel: 'ძებნა',
         synchronizeButtonTitle: 'სინქრონიზაცია',
         searchSuggestionMessage: 'ნაპოვნია {{ count }} შემოთავაზება.',
         searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები'
