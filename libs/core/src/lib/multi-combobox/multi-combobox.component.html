@@ -157,8 +157,8 @@
         [id]="this._cva.id + '-result'"
         role="listbox"
         [style.max-height]="!mobile && maxHeight"
-        [style.min-width]="!mobile && minWidth + 'px'"
-        [style.max-width]="autoResize && maxWidth + 'px'"
+        [style.min-width.px]="!mobile && minWidth"
+        [style.max-width.px]="autoResize && maxWidth"
         [attr.aria-labelledby]="this._cva.id + '-search'"
         aria-multiselectable="true"
     >

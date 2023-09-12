@@ -5,6 +5,7 @@ import {
     getElementClass,
     getText,
     getTextArr,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -124,7 +125,7 @@ describe('multi-combobox test suite', () => {
                     await click(inputField, i);
                     await sendKeys(searchValue);
 
-                    if (i == inputCount - 1) {
+                    if (i == inputCount - 2) {
                         await browser.pause(500);
                     }
 
@@ -238,6 +239,7 @@ describe('multi-combobox test suite', () => {
     async function checkMultiSelect(index: number = 0): Promise<void> {
         await expandList(index);
         await selectTwoItems(listItemCheckbox);
+        await pause(500);
         const markedItems = (await getTextArr(selectedListItem)).sort();
         await click(expandButton, index);
         const tokens = await getText(tokenInputField, index);

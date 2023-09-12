@@ -22,7 +22,7 @@ import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
-import { DynamicComponentService, KeyUtil, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, KeyUtil, SearchHighlightPipe, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,
@@ -35,7 +35,6 @@ import {
 } from '@fundamental-ngx/platform/shared';
 
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     ContentDensityModule,
@@ -254,11 +253,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._suggestions.find((s) => s.value === token.value);
-        if (optionItem) {
-            this.toggleSelection(optionItem);
-            this._rangeSelector.reset();
-        }
+        this.toggleSelection(token);
+        this._rangeSelector.reset();
     }
 
     /** @hidden */

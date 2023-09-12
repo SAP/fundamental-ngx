@@ -151,16 +151,15 @@
 <ng-template #listTemplate>
     <ul
         fd-list
-        [hasMessage]="!!stateMessage"
         (focusEscapeList)="handleListFocusEscape($event)"
         [dropdownMode]="true"
         class="fdp-multi-combobox__list fd-list--multi-input"
         [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
         [id]="id + '-result'"
         role="listbox"
-        [style.maxHeight]="!mobile && maxHeight"
-        [style.minWidth]="!mobile && minWidth + 'px'"
-        [style.maxWidth]="autoResize && maxWidth + 'px'"
+        [style.max-height]="!mobile && maxHeight"
+        [style.min-width]="!mobile && minWidth + 'px'"
+        [style.max-width]="autoResize && maxWidth + 'px'"
         [attr.aria-labelledby]="id + '-search'"
         aria-multiselectable="true"
     >
