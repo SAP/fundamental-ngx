@@ -10,7 +10,7 @@ import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Vi
  * ```
  */
 @Component({
-    selector: 'fd-popover-control',
+    selector: 'fd-popover-control, [fdPopoverControl]',
     templateUrl: './popover-control.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
