@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.41...v0.46.0-rc.42) (2023-09-13)
+
+
+### Features
+
+* **core,platform:** object status horizon update ([#10539](https://github.com/SAP/fundamental-ngx/issues/10539)) ([6ad5198](https://github.com/SAP/fundamental-ngx/commit/6ad5198e58c09a9673f82bb177e513db9f3e0a31))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** - Core Object Status now uses `ColorAccent` type as `indicationColor` property type;
+- Content projection has been removed from Core Object Status;
+- `IndicationColorType` from `@fundamental-ngx/platform/object-status` now extended to max number of 10.
+- To provide custom complex text template for Core Object Status, use `textTemplate` input property of `fd-object-status` to pass custom TemplateRef;
+- To provide custom complex text template for Platform Object Status, use `<ng-template fdpObjectStatusText>...</ng-template>` content-projected template.
+
+
+
+
+
 # [0.46.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.40...v0.46.0-rc.41) (2023-09-13)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
