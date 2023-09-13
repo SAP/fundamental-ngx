@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.40...v0.46.0-rc.41) (2023-09-13)
+
+
+### Features
+
+* **core:** progress indicator horizon update ([#10540](https://github.com/SAP/fundamental-ngx/issues/10540)) ([ce71bdc](https://github.com/SAP/fundamental-ngx/commit/ce71bdcfd3e66333348e1491386c1c591ea1c5e6))
+
+
+
+
+
 # [0.46.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.39...v0.46.0-rc.40) (2023-09-12)
 
 
