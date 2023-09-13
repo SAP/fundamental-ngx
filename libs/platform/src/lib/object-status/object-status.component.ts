@@ -2,15 +2,30 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
+    Directive,
     EventEmitter,
     HostListener,
     Input,
     Output,
-    ViewEncapsulation
+    TemplateRef,
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 
 import { ColorAccent, KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent as CoreObjectStatusComponent, ObjectStatus } from '@fundamental-ngx/core/object-status';
+
+@Directive({
+    selector: '[fdpObjectStatusText]',
+    standalone: true
+})
+export class PlatformObjectStatusTextDirective {
+    /**
+     * Template reference.
+     */
+    templateRef = inject(TemplateRef);
+}
 
 /**
  * @deprecated
@@ -80,6 +95,10 @@ export class ObjectStatusComponent {
     /** Event sent when button is clicked */
     @Output()
     objectStatusClick: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
+
+    /** @hidden */
+    @ContentChild(PlatformObjectStatusTextDirective)
+    _textDirective: Nullable<PlatformObjectStatusTextDirective>;
 
     /** @hidden */
     @HostListener('keydown', ['$event'])

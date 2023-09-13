@@ -21,7 +21,7 @@ import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
-import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
+import { ObjectStatusComponent, PlatformObjectStatusTextDirective } from '@fundamental-ngx/platform/object-status';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 import { I18nModule } from '@fundamental-ngx/i18n';
@@ -63,6 +63,7 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
         GridListModule,
         DialogModule,
         ObjectStatusComponent,
+        PlatformObjectStatusTextDirective,
         PlatformListModule,
         StandardListItemModule,
         PlatformSearchFieldModule,

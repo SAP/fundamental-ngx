@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { ObjectStatusComponent } from './object-status.component';
+import { ObjectStatusComponent, PlatformObjectStatusTextDirective } from './object-status.component';
 
 /**
  * @deprecated
  * Use `ObjectStatusComponent` import instead.
  */
 @NgModule({
-    imports: [ObjectStatusComponent],
-    exports: [ObjectStatusComponent]
+    imports: [ObjectStatusComponent, PlatformObjectStatusTextDirective],
+    exports: [ObjectStatusComponent, PlatformObjectStatusTextDirective]
 })
 export class PlatformObjectStatusModule {}

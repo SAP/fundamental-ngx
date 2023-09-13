@@ -282,7 +282,7 @@
         [attr.title]="secondary"
         [attr.nowrap]="secondaryWrap"
     >
-        <fdp-object-status [status]="statusType" [inverted]="inverted"> {{ secondary }}</fdp-object-status>
+        <fdp-object-status [status]="statusType" [inverted]="inverted" [label]="secondary"></fdp-object-status>
     </span>
 </ng-template>
 <ng-template #advancedSecondary let-secondary>
@@ -303,6 +303,6 @@
         [attr.title]="secondary.title ?? secondary.text"
         [attr.nowrap]="secondaryWrap"
     >
-        <fdp-object-status [status]="statusType" [inverted]="inverted"> {{ secondary.text }}</fdp-object-status>
+        <fdp-object-status [status]="statusType" [inverted]="inverted" [label]="secondary.text"></fdp-object-status>
     </span>
 </ng-template>

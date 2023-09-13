@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -6,6 +6,7 @@ import {
     Input,
     OnChanges,
     OnInit,
+    TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ColorAccent, CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
@@ -26,7 +27,9 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
             [ariaLabel]="glyphAriaLabel"
         >
         </fd-icon>
-
+        <span *ngIf="textTemplate" class="fd-object-status__text" [class]="_textClass">
+            <ng-template [ngTemplateOutlet]="textTemplate"></ng-template>
+        </span>
         <span *ngIf="label" class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
     `,
     styleUrls: ['./object-status.component.scss'],
@@ -42,7 +45,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         '[attr.tabindex]': 'clickable ? 0 : -1'
     },
     standalone: true,
-    imports: [NgIf, IconComponent]
+    imports: [NgIf, IconComponent, NgTemplateOutlet]
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -97,12 +100,18 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     @Input()
     secondaryIndication = false;
 
+    /**
+     * Template reference for complex object status texts.
+     */
+    @Input()
+    textTemplate: Nullable<TemplateRef<any>>;
+
     /** @hidden */
     _textClass: string;
 
     /** Whether the Object status is icon-only. */
     get iconOnly(): boolean {
-        return !this.label;
+        return !this.label && !this.textTemplate;
     }
 
     /** @hidden */
