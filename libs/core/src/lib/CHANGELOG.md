@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.42...v0.46.0-rc.43) (2023-09-13)
+
+
+### Bug Fixes
+
+* **core:** remove incorrect aria attribute ([#10541](https://github.com/SAP/fundamental-ngx/issues/10541)) ([70085a0](https://github.com/SAP/fundamental-ngx/commit/70085a0fb49334c270364c35927a66354bbd5963))
+
+
+
+
+
 # [0.46.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.41...v0.46.0-rc.42) (2023-09-13)
 
 
