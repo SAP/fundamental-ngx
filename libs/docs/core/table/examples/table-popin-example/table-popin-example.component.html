@@ -35,7 +35,7 @@
                     <td fd-table-cell colspan="100%">
                         <p fd-table-text>
                             <label fd-form-label>Status:</label>
-                            <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                            <span fd-object-status [status]="fruit.status" [label]="fruit.statusName"></span>
                         </p>
                         <p fd-table-text>
                             <label fd-form-label>Date Of Expire:</label>
@@ -82,7 +82,7 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true">
-                        <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                        <span fd-object-status [status]="fruit.status" [label]="fruit.statusName"></span>
                     </td>
                     <td fd-table-cell [fitContent]="true">
                         {{ fruit.dateOfExpire }}
@@ -133,7 +133,7 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell>
-                        <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                        <span fd-object-status [status]="fruit.status" [label]="fruit.statusName"></span>
                     </td>
                     <td fd-table-cell>
                         {{ fruit.dateOfExpire }}
@@ -209,7 +209,7 @@
                     <td fd-table-cell colspan="100%">
                         <p fd-table-text>
                             <label fd-form-label>Status:</label>
-                            <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
+                            <span fd-object-status [status]="fruit.status" [label]="fruit.statusName"></span>
                         </p>
                         <p fd-table-text>
                             <label fd-form-label>Date Of Expire:</label>

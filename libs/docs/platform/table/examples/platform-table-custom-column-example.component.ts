@@ -8,7 +8,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformListModule } from '@fundamental-ngx/platform/list';
@@ -64,7 +64,7 @@ import {
         FdpTableCell,
         PlatformInputModule,
         FormsModule,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         AsyncPipe,
         FdDatetimeModule
     ]

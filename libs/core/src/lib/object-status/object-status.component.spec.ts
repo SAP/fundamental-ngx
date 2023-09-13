@@ -1,4 +1,4 @@
-import { Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ObjectStatusComponent } from './object-status.component';
@@ -17,7 +17,9 @@ import { ObjectStatusComponent } from './object-status.component';
             [large]="large"
         >
         </span>
-    `
+    `,
+    standalone: true,
+    imports: [ObjectStatusComponent]
 })
 class TestObjectStatusComponent {
     @ViewChild(ObjectStatusComponent, { static: true, read: ElementRef })
@@ -39,8 +41,7 @@ describe('ObjectStatusComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectStatusComponent, TestObjectStatusComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [TestObjectStatusComponent]
         }).compileComponents();
     }));
 

@@ -7,7 +7,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { TextComponent } from '@fundamental-ngx/core/text';
@@ -23,7 +23,7 @@ import { TextComponent } from '@fundamental-ngx/core/text';
         TextComponent,
         RatingIndicatorModule,
         AvatarModule,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         ObjectNumberModule
     ]
 })
@@ -61,7 +61,7 @@ export class ImageFacetExampleComponent {}
     templateUrl: './key-value-facet-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FacetModule, ObjectStatusModule, ObjectNumberModule]
+    imports: [FacetModule, ObjectStatusComponent, ObjectNumberModule]
 })
 export class KeyValueFacetExampleComponent {}
 
@@ -70,7 +70,7 @@ export class KeyValueFacetExampleComponent {}
     templateUrl: './key-value-facet-alignment-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FacetModule, ObjectStatusModule, ObjectNumberModule]
+    imports: [FacetModule, ObjectStatusComponent, ObjectNumberModule]
 })
 export class KeyValueFacetAlignmentExampleComponent {}
 
@@ -96,7 +96,7 @@ export class RatingIndicatorFacetExampleComponent {}
         TextComponent,
         RatingIndicatorModule,
         AvatarModule,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         ObjectNumberModule,
         SkeletonModule
     ]
