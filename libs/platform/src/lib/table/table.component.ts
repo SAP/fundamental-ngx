@@ -29,6 +29,7 @@ import {
 } from '@angular/core';
 
 import {
+    dfs,
     DndListDirective,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableGridDirective,
@@ -1763,7 +1764,7 @@ export class TableComponent<T = any>
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._reIndexTableRows();
         this.onTableRowsChanged();
-
+        this._syncTristateSelection();
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
 
@@ -1775,6 +1776,52 @@ export class TableComponent<T = any>
         }
 
         this._cdr.detectChanges();
+    }
+
+    /**
+     * Function which updates the table rows when the data source changes
+     * and syncs the selection state of the table rows with the data source.
+     * @hidden
+     **/
+    private _syncTristateSelection(): void {
+        if (
+            (this.selectionMode === SelectionMode.MULTIPLE || this._selectionMode === SelectionMode.SINGLE) &&
+            this.enableTristateMode
+        ) {
+            const added = [];
+            const removed = [];
+            dfs(
+                this._tableRows.filter((item) => item.level === 0),
+                (r) => {
+                    const children = r.children || [];
+                    const selectedChildren: TableRow<T>[] = [];
+                    const indeterminateChildren: TableRow<T>[] = [];
+                    children.forEach((child) => {
+                        if (child.checked === true) {
+                            selectedChildren.push(child);
+                        } else if (child.checked === null) {
+                            indeterminateChildren.push(child);
+                        }
+                    });
+
+                    const selectedAll = selectedChildren.length === children.length && children.length > 0;
+                    const selectedSome = selectedChildren.length > 0;
+                    if (r.checked) {
+                        this._applySelectionToChildren(r, added, removed);
+                        return;
+                    }
+                    if (selectedAll) {
+                        r.checked = true;
+                        return;
+                    }
+                    if (selectedSome || indeterminateChildren.length > 0) {
+                        r.checked = null;
+                        return;
+                    }
+                }
+            );
+            this._emitRowSelectionChangeEvent(added, removed);
+        }
     }
 
     /** @hidden */
@@ -1930,11 +1977,19 @@ export class TableComponent<T = any>
 
         while (currentRow) {
             const children = findRowChildren(currentRow, this._tableRows).filter((r) => r.parent === currentRow);
-            const totalChecked = children.filter((r) => r.checked);
+            const totalChecked: TableRow<T>[] = [];
+            const totalIndeterminate: TableRow<T>[] = [];
+            children.forEach((r) => {
+                if (r.checked === true) {
+                    totalChecked.push(r);
+                } else if (r.checked === null) {
+                    totalIndeterminate.push(r);
+                }
+            });
             const checkedAll = totalChecked.length === children.length;
             const checkedAny = totalChecked.length > 0;
 
-            currentRow.checked = checkedAll ? true : checkedAny ? null : false;
+            currentRow.checked = checkedAll ? true : checkedAny || totalIndeterminate.length > 0 ? null : false;
             currentRow.checked || currentRow.checked === null
                 ? addedRows.push(currentRow)
                 : removedRows.push(currentRow);
@@ -1945,9 +2000,9 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
-        const allChilren = findRowChildren(row, this._tableRows);
+        const allChildren = findRowChildren(row, this._tableRows);
 
-        allChilren.forEach((r) => {
+        allChildren.forEach((r) => {
             r.checked = row.checked;
             r.checked ? addedRows.push(r) : removedRows.push(r);
         });
