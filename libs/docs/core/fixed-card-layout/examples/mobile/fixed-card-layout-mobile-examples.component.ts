@@ -8,7 +8,7 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -27,7 +27,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         FixedCardLayoutModule,
         CardModule,
         ListModule,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         FocusableGridDirective,
         TableModule,
         AvatarModule,

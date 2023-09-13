@@ -10,16 +10,8 @@ export enum genericColors {
     '192,57,159'
 }
 export const semanticText = ['Negative', 'Critical', 'Positive', 'Informative', 'Default'];
-export const genericColorText = [
-    'Indication Color',
-    'Indication Color',
-    'Indication Color',
-    'Indication Color',
-    'Indication Color',
-    'Indication Color',
-    'Indication Color',
-    'Indication Color'
-];
+export const genericColorText = new Array(8).fill(null).map(() => 'Indication Color');
+export const invertedColorText = new Array(20).fill(null).map(() => 'Indication Color');
 export const objStatusText = [
     'Negative',
     'Critical',

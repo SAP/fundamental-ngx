@@ -1,14 +1,14 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
-import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-clickable-and-icon-example',
     templateUrl: './platform-object-status-clickable-and-icon-example.component.html',
     styleUrls: ['./platform-object-status-clickable-and-icon-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule, NgFor]
+    imports: [ObjectStatusComponent, NgFor]
 })
 export class PlatformObjectStatusClickableAndIconExampleComponent {
     items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);

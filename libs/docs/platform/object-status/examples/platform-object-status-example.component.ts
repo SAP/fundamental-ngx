@@ -1,14 +1,14 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
-import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-example',
     templateUrl: './platform-object-status-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusExampleComponent {}
 
@@ -17,7 +17,7 @@ export class PlatformObjectStatusExampleComponent {}
     templateUrl: './platform-object-status-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusTextExampleComponent {}
 
@@ -26,7 +26,7 @@ export class PlatformObjectStatusTextExampleComponent {}
     templateUrl: './platform-object-status-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [NgFor, PlatformObjectStatusModule]
+    imports: [NgFor, ObjectStatusComponent]
 })
 export class PlatformObjectStatusGenericExampleComponent {
     items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
@@ -37,7 +37,7 @@ export class PlatformObjectStatusGenericExampleComponent {
     templateUrl: './platform-object-status-icon-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusTextIconExampleComponent {}
 
@@ -46,7 +46,7 @@ export class PlatformObjectStatusTextIconExampleComponent {}
     templateUrl: './platform-object-status-inverted-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedTextExampleComponent {}
 
@@ -55,7 +55,7 @@ export class PlatformObjectStatusInvertedTextExampleComponent {}
     templateUrl: './platform-object-status-inverted-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [NgFor, PlatformObjectStatusModule]
+    imports: [NgFor, ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedGenericTextExampleComponent {
     items: ColorAccent[] = new Array(10).fill(null).map((_, index) => (index + 1) as ColorAccent);

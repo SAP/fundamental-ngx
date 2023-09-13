@@ -1,3 +1,4 @@
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,30 +11,27 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { getFormState } from '@fundamental-ngx/platform/form';
 import { countBy, flatten } from 'lodash-es';
+import { MessageViewComponent } from './components/message-view/message-view.component';
 import {
     MessagePopoverEntry,
     MessagePopoverError,
     MessagePopoverErrorGroup
 } from './models/message-popover-entry.interface';
 import { MessagePopoverWrapper } from './models/message-popover-wrapper.interface';
-import { convertFormState, convertFormStateToMessagePopoverState } from './utils';
 import { MessagePopover, MessagePopoverState } from './models/message-popover.interface';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { MessageViewComponent } from './components/message-view/message-view.component';
-import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { FormsModule } from '@angular/forms';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { convertFormState, convertFormStateToMessagePopoverState } from './utils';
 
 @Component({
     selector: 'fdp-message-popover',
@@ -51,7 +49,7 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
         SegmentedButtonModule,
         FormsModule,
         NgFor,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         InitialFocusDirective,
         MessageViewComponent,
         FdTranslatePipe

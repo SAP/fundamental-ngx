@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
-import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
-import { ObjectStatusDynamicFormFieldItem } from '../../interfaces/dynamic-form-item';
-import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
+import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
+import { ObjectStatusDynamicFormFieldItem } from '../../interfaces/dynamic-form-item';
+import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
 
 @Component({
     selector: 'fdp-dynamic-form-generator-object-status',
@@ -12,6 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, PlatformObjectStatusModule]
+    imports: [FormsModule, ReactiveFormsModule, ObjectStatusComponent]
 })
 export class DynamicFormGeneratorObjectStatusComponent extends BaseDynamicFormGeneratorControl<ObjectStatusDynamicFormFieldItem> {}

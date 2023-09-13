@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import {
     BaseListItem,
     ObjectListItemModule,
@@ -153,7 +153,7 @@ export class ListDataProvider extends DataProvider<Product> {
     selector: 'fdp-platform-object-list-item-with-row-navigation-example',
     templateUrl: './platform-object-list-item-with-row-navigation-example.component.html',
     standalone: true,
-    imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusModule]
+    imports: [PlatformListModule, ObjectListItemModule, ObjectMarkerModule, ObjectStatusComponent]
 })
 export class PlatformObjectListItemWithRowNavigationExampleComponent {
     _dataSource: ListDataSource<Product> = new ListDataSource<Product>(new ListDataProvider());

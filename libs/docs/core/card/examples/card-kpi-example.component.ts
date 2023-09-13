@@ -12,7 +12,7 @@ import { delay, tap } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { CardModule } from '@fundamental-ngx/core/card';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { GoogleChartService, Visualization } from './card-kpi-google-charts.service';
 
 @Component({
@@ -21,7 +21,7 @@ import { GoogleChartService, Visualization } from './card-kpi-google-charts.serv
     styleUrls: ['./card-kpi-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CardModule, ObjectStatusModule, BusyIndicatorComponent]
+    imports: [CardModule, ObjectStatusComponent, BusyIndicatorComponent]
 })
 export class CardKpiExampleComponent implements AfterViewInit {
     isLoading = true;

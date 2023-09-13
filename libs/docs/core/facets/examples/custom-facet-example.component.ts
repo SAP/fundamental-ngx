@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FacetModule } from '@fundamental-ngx/core/facets';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fd-custom-facet-example',
@@ -19,6 +19,6 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
         `
     ],
     standalone: true,
-    imports: [FacetModule, ObjectStatusModule]
+    imports: [FacetModule, ObjectStatusComponent]
 })
 export class CustomFacetExampleComponent {}
