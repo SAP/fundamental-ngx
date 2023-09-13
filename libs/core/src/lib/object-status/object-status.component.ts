@@ -1,13 +1,15 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
     Input,
     OnChanges,
-    ViewEncapsulation,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder, NullableObject, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, CssClassBuilder, Nullable, NullableObject, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_OBJECT_STATUS_COMPONENT } from './tokens';
 
 export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
@@ -26,9 +28,6 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
         </fd-icon>
 
         <span *ngIf="label" class="fd-object-status__text" [class]="_textClass">{{ label }}</span>
-
-        <!-- DEPRECATED - Remove in v0.23.0 -->
-        <ng-content></ng-content>
     `,
     styleUrls: ['./object-status.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -41,7 +40,9 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative' 
     ],
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, IconComponent]
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
@@ -74,10 +75,11 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
 
     /**
      * A number representing the indication color.
-     * Option includes numbers from 1 to 8
+     * For non-inverted state available numbers are from 1 to 8.
+     * For inverted state available numbers are from 1 to 10.
      */
     @Input()
-    indicationColor: Nullable<number>;
+    indicationColor: Nullable<ColorAccent>;
 
     /** Whether the Object Status is clickable. */
     @Input()
@@ -91,8 +93,17 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     @Input()
     large = false;
 
+    /** Whether to use secondary set of indication colors. */
+    @Input()
+    secondaryIndication = false;
+
     /** @hidden */
     _textClass: string;
+
+    /** Whether the Object status is icon-only. */
+    get iconOnly(): boolean {
+        return !this.label;
+    }
 
     /** @hidden */
     constructor(public readonly elementRef: ElementRef) {}
@@ -125,6 +136,8 @@ type ObjectStatusData = NullableObject<{
     indicationColor: number;
     clickable: boolean;
     class: string;
+    iconOnly: boolean;
+    secondaryIndication: boolean;
 }>;
 
 export const buildObjectStatusCssClasses = (data: ObjectStatusData): string[] => [
@@ -132,7 +145,10 @@ export const buildObjectStatusCssClasses = (data: ObjectStatusData): string[] =>
     data.inverted ? 'fd-object-status--inverted' : '',
     data.large ? 'fd-object-status--large' : '',
     data.status ? `fd-object-status--${data.status}` : '',
-    data.indicationColor ? `fd-object-status--indication-${data.indicationColor}` : '',
+    data.indicationColor
+        ? `fd-object-status--indication-${data.indicationColor}${data.secondaryIndication ? 'b' : ''}`
+        : '',
     data.clickable ? 'fd-object-status--link' : '',
+    data.iconOnly ? 'fd-object-status--icon-only' : '',
     data.class || ''
 ];

@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { IndicationColorType, PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
+import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-example',
@@ -28,7 +29,7 @@ export class PlatformObjectStatusTextExampleComponent {}
     imports: [NgFor, PlatformObjectStatusModule]
 })
 export class PlatformObjectStatusGenericExampleComponent {
-    items: IndicationColorType[] = [1, 2, 3, 4, 5, 6, 7, 8];
+    items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
 }
 
 @Component({
@@ -57,5 +58,5 @@ export class PlatformObjectStatusInvertedTextExampleComponent {}
     imports: [NgFor, PlatformObjectStatusModule]
 })
 export class PlatformObjectStatusInvertedGenericTextExampleComponent {
-    items: IndicationColorType[] = [1, 2, 3, 4, 5, 6, 7, 8];
+    items: ColorAccent[] = new Array(10).fill(null).map((_, index) => (index + 1) as ColorAccent);
 }

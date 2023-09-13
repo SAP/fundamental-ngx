@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { IndicationColorType, PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
+import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-clickable-and-icon-example',
@@ -10,9 +11,9 @@ import { IndicationColorType, PlatformObjectStatusModule } from '@fundamental-ng
     imports: [PlatformObjectStatusModule, NgFor]
 })
 export class PlatformObjectStatusClickableAndIconExampleComponent {
-    items: IndicationColorType[] = [1, 2, 3, 4, 5, 6, 7, 8];
+    items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
 
-    showAlert(index: IndicationColorType): void {
+    showAlert(index: ColorAccent): void {
         alert('you clicked the clickable ObjectStatus' + index);
     }
 

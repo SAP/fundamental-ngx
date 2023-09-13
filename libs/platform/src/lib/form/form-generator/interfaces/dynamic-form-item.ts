@@ -3,15 +3,14 @@ import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Observable } from 'rxjs';
 
-import { ContentDensity } from '@fundamental-ngx/cdk/utils';
-import { ColumnLayout, FieldHintInput, HintInput, InlineLayout, SelectItem } from '@fundamental-ngx/platform/shared';
-import { InputType } from '../../input/input.component';
-import { DynamicFormGroup } from './dynamic-form-group';
-import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
-import { TextAlignment } from '../../combobox';
+import { ColorAccent, ContentDensity } from '@fundamental-ngx/cdk/utils';
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { IndicationColorType } from '@fundamental-ngx/platform/object-status';
+import { ColumnLayout, FieldHintInput, HintInput, InlineLayout, SelectItem } from '@fundamental-ngx/platform/shared';
+import { TextAlignment } from '../../combobox';
+import { InputType } from '../../input/input.component';
+import { DynamicFormControl, DynamicFormGroupControl } from '../dynamic-form-control';
+import { DynamicFormGroup } from './dynamic-form-group';
 
 export type DynamicFormItemChoice<T = any> =
     | DynamicFormItemChoiceTypes<T>[]
@@ -307,7 +306,7 @@ export interface ObjectStatusDynamicFormFieldItem extends BaseDynamicFormFieldIt
     guiOptions?: BaseDynamicFormFieldItem['guiOptions'] & {
         status?: ObjectStatus;
         icon?: string;
-        indicationColor?: IndicationColorType;
+        indicationColor?: ColorAccent;
     };
 }
 

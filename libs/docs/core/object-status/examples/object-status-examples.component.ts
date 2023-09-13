@@ -1,5 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 @Component({
@@ -18,7 +19,9 @@ export class ObjectStatusTextExampleComponent {}
     standalone: true,
     imports: [NgFor, ObjectStatusModule]
 })
-export class ObjectStatusGenericExampleComponent {}
+export class ObjectStatusGenericExampleComponent {
+    indicators: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
+}
 
 @Component({
     selector: 'fd-object-status-numeric-icon-example',
@@ -37,6 +40,7 @@ export class ObjectStatusTextIconExampleComponent {}
     imports: [ObjectStatusModule, NgFor]
 })
 export class ObjectStatusClickableAndIconExampleComponent {
+    indicators: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
     showAlert(): void {
         alert('you clicked the clickable ObjectStatus');
     }
@@ -58,7 +62,9 @@ export class ObjectStatusInvertedTextExampleComponent {}
     standalone: true,
     imports: [NgFor, ObjectStatusModule]
 })
-export class ObjectStatusInvertedGenericTextExampleComponent {}
+export class ObjectStatusInvertedGenericTextExampleComponent {
+    indicators: ColorAccent[] = new Array(10).fill(null).map((_, index) => (index + 1) as ColorAccent);
+}
 
 @Component({
     selector: 'fd-object-status-object-status-large-example',
