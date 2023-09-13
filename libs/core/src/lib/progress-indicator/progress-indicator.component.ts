@@ -1,29 +1,32 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
-    Component,
-    ViewEncapsulation,
+    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
     Input,
     OnChanges,
-    SimpleChanges,
-    ElementRef,
-    AfterViewInit,
-    ChangeDetectorRef,
+    OnDestroy,
     OnInit,
-    OnDestroy
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
+import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 
 export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | 'negative';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'fd-progress-indicator',
     templateUrl: './progress-indicator.component.html',
     styleUrls: ['./progress-indicator.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
     /** The text to display if you would like to override the default percentage text. */

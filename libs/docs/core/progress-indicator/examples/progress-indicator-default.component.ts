@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicator';
+import { ProgressIndicatorComponent } from '@fundamental-ngx/core/progress-indicator';
 
 @Component({
     selector: 'fd-progress-indicator-default',
     templateUrl: './progress-indicator-default.component.html',
     standalone: true,
-    imports: [ProgressIndicatorModule]
+    imports: [ProgressIndicatorComponent]
 })
 export class ProgressIndicatorDefaultComponent {
     customUnitValueNow = 80;

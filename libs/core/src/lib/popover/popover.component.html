@@ -5,7 +5,7 @@
     [class]="additionalTriggerClass"
     (keydown)="triggerKeyDownHandler($event)"
 >
-    <ng-content select="fd-popover-control"></ng-content>
+    <ng-content select="fd-popover-control, [fdPopoverControl]"></ng-content>
 </div>
 
 <ng-template #templateRef>
