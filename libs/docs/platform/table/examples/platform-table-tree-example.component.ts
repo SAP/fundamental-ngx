@@ -404,6 +404,7 @@ const ITEMS: ExampleItem[] = [
                                     },
                                     {
                                         name: 'Beam Breaker B-2',
+                                        selected: true,
                                         category: 'other',
                                         description: 'sapien in sapien iaculis congue',
                                         price: {

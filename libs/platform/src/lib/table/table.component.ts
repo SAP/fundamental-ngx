@@ -29,7 +29,6 @@ import {
 } from '@angular/core';
 
 import {
-    dfs,
     DndListDirective,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableGridDirective,
@@ -48,6 +47,7 @@ import { TableComponent as FdTableComponent } from '@fundamental-ngx/core/table'
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
 import {
+    applySelectionToChildren,
     buildNewRowSkeleton,
     CollectionFilter,
     CollectionGroup,
@@ -1764,7 +1764,6 @@ export class TableComponent<T = any>
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._reIndexTableRows();
         this.onTableRowsChanged();
-        this._syncTristateSelection();
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
 
@@ -1776,52 +1775,6 @@ export class TableComponent<T = any>
         }
 
         this._cdr.detectChanges();
-    }
-
-    /**
-     * Function which updates the table rows when the data source changes
-     * and syncs the selection state of the table rows with the data source.
-     * @hidden
-     **/
-    private _syncTristateSelection(): void {
-        if (
-            (this.selectionMode === SelectionMode.MULTIPLE || this._selectionMode === SelectionMode.SINGLE) &&
-            this.enableTristateMode
-        ) {
-            const added = [];
-            const removed = [];
-            dfs(
-                this._tableRows.filter((item) => item.level === 0),
-                (r) => {
-                    const children = r.children || [];
-                    const selectedChildren: TableRow<T>[] = [];
-                    const indeterminateChildren: TableRow<T>[] = [];
-                    children.forEach((child) => {
-                        if (child.checked === true) {
-                            selectedChildren.push(child);
-                        } else if (child.checked === null) {
-                            indeterminateChildren.push(child);
-                        }
-                    });
-
-                    const selectedAll = selectedChildren.length === children.length && children.length > 0;
-                    const selectedSome = selectedChildren.length > 0;
-                    if (r.checked) {
-                        this._applySelectionToChildren(r, added, removed);
-                        return;
-                    }
-                    if (selectedAll) {
-                        r.checked = true;
-                        return;
-                    }
-                    if (selectedSome || indeterminateChildren.length > 0) {
-                        r.checked = null;
-                        return;
-                    }
-                }
-            );
-            this._emitRowSelectionChangeEvent(added, removed);
-        }
     }
 
     /** @hidden */
@@ -2000,12 +1953,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
-        const allChildren = findRowChildren(row, this._tableRows);
-
-        allChildren.forEach((r) => {
-            r.checked = row.checked;
-            r.checked ? addedRows.push(r) : removedRows.push(r);
-        });
+        applySelectionToChildren(this._tableRows, row, addedRows, removedRows);
     }
 
     /** @hidden */
