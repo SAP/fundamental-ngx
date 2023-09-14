@@ -197,7 +197,7 @@ export function convertTreeObjectsToTableRows<T>(
 
             rows.push(...children);
         }
-        if (row.level === 0) {
+        if (row.level === 0 && row.isTree) {
             dfs([row], (r) => {
                 const children = r.children || [];
                 const selectedChildren: TableRow<T>[] = [];
