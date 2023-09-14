@@ -47,6 +47,7 @@ import { TableComponent as FdTableComponent } from '@fundamental-ngx/core/table'
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
 import {
+    applySelectionToChildren,
     buildNewRowSkeleton,
     CollectionFilter,
     CollectionGroup,
@@ -1763,7 +1764,6 @@ export class TableComponent<T = any>
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._reIndexTableRows();
         this.onTableRowsChanged();
-
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
 
@@ -1930,11 +1930,19 @@ export class TableComponent<T = any>
 
         while (currentRow) {
             const children = findRowChildren(currentRow, this._tableRows).filter((r) => r.parent === currentRow);
-            const totalChecked = children.filter((r) => r.checked);
+            const totalChecked: TableRow<T>[] = [];
+            const totalIndeterminate: TableRow<T>[] = [];
+            children.forEach((r) => {
+                if (r.checked === true) {
+                    totalChecked.push(r);
+                } else if (r.checked === null) {
+                    totalIndeterminate.push(r);
+                }
+            });
             const checkedAll = totalChecked.length === children.length;
             const checkedAny = totalChecked.length > 0;
 
-            currentRow.checked = checkedAll ? true : checkedAny ? null : false;
+            currentRow.checked = checkedAll ? true : checkedAny || totalIndeterminate.length > 0 ? null : false;
             currentRow.checked || currentRow.checked === null
                 ? addedRows.push(currentRow)
                 : removedRows.push(currentRow);
@@ -1945,12 +1953,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
-        const allChilren = findRowChildren(row, this._tableRows);
-
-        allChilren.forEach((r) => {
-            r.checked = row.checked;
-            r.checked ? addedRows.push(r) : removedRows.push(r);
-        });
+        applySelectionToChildren(this._tableRows, row, addedRows, removedRows);
     }
 
     /** @hidden */
