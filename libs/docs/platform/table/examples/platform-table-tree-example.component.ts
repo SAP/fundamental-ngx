@@ -82,6 +82,7 @@ export interface ExampleItem {
     statusColor?: string;
     date?: FdDate;
     verified?: boolean;
+    selected?: boolean;
     children?: ExampleItem[];
 }
 
@@ -150,6 +151,7 @@ const ITEMS: ExampleItem[] = [
                 status: 'Out of stock',
                 statusColor: 'negative',
                 date: new FdDate(2020, 2, 5),
+                selected: true,
                 verified: true
             },
             {
@@ -386,6 +388,7 @@ const ITEMS: ExampleItem[] = [
                                     },
                                     {
                                         name: 'Beam Breaker B-2',
+                                        selected: true,
                                         category: 'other',
                                         description: 'sapien in sapien iaculis congue',
                                         price: {
