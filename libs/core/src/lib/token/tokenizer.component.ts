@@ -9,7 +9,7 @@ import {
     SPACE,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { DOCUMENT } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -43,8 +43,13 @@ import {
     applyCssClass,
     resizeObservable
 } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BehaviorSubject, Observable, Subject, Subscription, fromEvent, merge, startWith } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { TokenComponent } from './token.component';
@@ -55,7 +60,21 @@ import { TokenComponent } from './token.component';
     styleUrls: ['./tokenizer.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        InputGroupModule,
+        ButtonModule,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        ListModule,
+        NgFor,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBuilder, OnInit, OnChanges {
     /** user's custom classes */

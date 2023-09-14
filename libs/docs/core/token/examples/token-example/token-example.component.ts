@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TokenModule } from '@fundamental-ngx/core/token';
+import { TokenComponent } from '@fundamental-ngx/core/token';
 import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
 
 @Component({
@@ -13,7 +13,7 @@ import { FdPatchLanguageDirective } from '@fundamental-ngx/i18n';
         `
     ],
     standalone: true,
-    imports: [TokenModule, FdPatchLanguageDirective]
+    imports: [TokenComponent, FdPatchLanguageDirective]
 })
 export class TokenExampleComponent {
     isOpen = true;

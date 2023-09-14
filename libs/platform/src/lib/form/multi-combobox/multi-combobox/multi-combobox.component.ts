@@ -45,7 +45,7 @@ import { FormControlModule, FormInputMessageGroupComponent, FormMessageComponent
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { TokenModule, TokenizerComponent } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
@@ -87,7 +87,9 @@ let deprecationWarningShown = false;
         PopoverBodyComponent,
         FormInputMessageGroupComponent,
         InputGroupModule,
-        TokenModule,
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
         NgFor,
         FormControlModule,
         FormsModule,

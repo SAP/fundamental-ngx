@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { TokenModule } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { patchLanguage } from '@fundamental-ngx/i18n';
 import {
     PlatformValueHelpDialogModule,
@@ -69,7 +69,16 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
         })
     ],
     standalone: true,
-    imports: [ButtonModule, NgIf, TokenModule, ContentDensityDirective, NgFor, PlatformValueHelpDialogModule]
+    imports: [
+        ButtonModule,
+        NgIf,
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
+        ContentDensityDirective,
+        NgFor,
+        PlatformValueHelpDialogModule
+    ]
 })
 export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
     filters: FilterData[];
