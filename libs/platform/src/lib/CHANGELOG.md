@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.44...v0.46.0-rc.45) (2023-09-14)
+
+
+### Bug Fixes
+
+* **platform:** table initial selection hydration ([#10544](https://github.com/SAP/fundamental-ngx/issues/10544)) ([81e4c3b](https://github.com/SAP/fundamental-ngx/commit/81e4c3b9f3f1e3753b1f75ed7cbb27b070b12405))
+
+
+
+
+
 # [0.46.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.43...v0.46.0-rc.44) (2023-09-14)
 
 
