@@ -5,7 +5,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { TokenModule } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
 import {
     PlatformValueHelpDialogModule,
@@ -65,7 +65,9 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
         ContentDensityDirective,
         PlatformValueHelpDialogModule,
         NgFor,
-        TokenModule,
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
         ToolbarItemDirective,
         NgIf
     ]

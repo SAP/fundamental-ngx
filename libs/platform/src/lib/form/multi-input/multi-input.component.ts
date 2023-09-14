@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
+import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,7 +7,6 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Host,
     Inject,
     Injector,
@@ -21,24 +21,15 @@ import {
     ViewChild,
     ViewChildren,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
-import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
 import { DisplayFnPipe, DynamicComponentService, InitialFocusDirective, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import {
-    DATA_PROVIDERS,
-    DataProvider,
-    PlatformFormFieldControl,
-    MultiInputDataSource,
-    MultiInputOption,
-    isFunction,
-    PlatformFormField
-} from '@fundamental-ngx/platform/shared';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import {
     BaseListItem,
     ListComponent,
@@ -47,27 +38,36 @@ import {
     SelectionType,
     StandardListItemModule
 } from '@fundamental-ngx/platform/list';
+import {
+    DATA_PROVIDERS,
+    DataProvider,
+    MultiInputDataSource,
+    MultiInputOption,
+    PlatformFormField,
+    PlatformFormFieldControl,
+    isFunction
+} from '@fundamental-ngx/platform/shared';
 
-import { InputType } from '../input/input.component';
-import { AutoCompleteEvent, AutoCompleteDirective } from '../auto-complete/auto-complete.directive';
-import { BaseMultiInput } from './base-multi-input';
-import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
-import { MULTIINPUT_COMPONENT } from './multi-input.interface';
-import { MultiInputConfig } from './multi-input.config';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ContentDensityModule,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import equal from 'fast-deep-equal';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { firstValueFrom, Observable } from 'rxjs';
-import { NgTemplateOutlet, NgIf, NgFor } from '@angular/common';
-import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FormControlModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import equal from 'fast-deep-equal';
+import { Observable, firstValueFrom } from 'rxjs';
+import { AutoCompleteDirective, AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
+import { InputType } from '../input/input.component';
+import { BaseMultiInput } from './base-multi-input';
+import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
+import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
+import { MultiInputConfig } from './multi-input.config';
+import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 
 let uniqueHiddenLabel = 0;
 
@@ -105,7 +105,9 @@ export class MultiInputSelectionChangeEvent {
         PopoverBodyComponent,
         InputGroupModule,
         NgIf,
-        TokenModule,
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
         NgFor,
         FormControlModule,
         FormsModule,

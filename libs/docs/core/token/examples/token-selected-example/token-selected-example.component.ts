@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TokenModule } from '@fundamental-ngx/core/token';
+import { TokenComponent } from '@fundamental-ngx/core/token';
 
 @Component({
     selector: 'fd-token-selected-example',
@@ -12,6 +12,6 @@ import { TokenModule } from '@fundamental-ngx/core/token';
         `
     ],
     standalone: true,
-    imports: [TokenModule]
+    imports: [TokenComponent]
 })
 export class TokenSelectedExampleComponent {}
