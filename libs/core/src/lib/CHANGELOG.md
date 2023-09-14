@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.43...v0.46.0-rc.44) (2023-09-14)
+
+
+### Features
+
+* **core:** token standalone migration ([#10546](https://github.com/SAP/fundamental-ngx/issues/10546)) ([fee2bf0](https://github.com/SAP/fundamental-ngx/commit/fee2bf0ee929e9429c933d501c686358dde62c1c))
+
+
+
+
+
 # [0.46.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.42...v0.46.0-rc.43) (2023-09-13)
 
 
