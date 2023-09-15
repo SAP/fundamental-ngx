@@ -43,7 +43,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         listItemStatusDraft: 'Brouillon'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Value Input'
+        multiInputAriaLabel: 'Multi Value Input',
+        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
     },
     coreMessageStrip: {
         dismissLabel: 'Rejeter'

@@ -60,7 +60,20 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         dismissLabel: 'Закрыть'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Value Input'
+        multiInputAriaLabel: 'Multi Value Input',
+        tokensCountText: ({ length }) => {
+            const option = pluralization.process(length);
+            switch (option) {
+                case 'zero':
+                    return 'Нет выбранных вариантов.';
+                case 'one':
+                    return `Выбран 1 вариант.`;
+                case 'few':
+                    return `Выбрано ${length} варианта.`;
+                default:
+                    return `Выбрано ${length} вариантов.`;
+            }
+        }
     },
     coreNavigation: {
         mainNavigation: 'Главная Навигация',
