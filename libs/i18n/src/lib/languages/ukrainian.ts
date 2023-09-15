@@ -59,7 +59,20 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         dismissLabel: 'Закрити'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Value Input'
+        multiInputAriaLabel: 'Multi Value Input',
+        tokensCountText: ({ length }) => {
+            const option = pluralization.process(length);
+            switch (option) {
+                case 'zero':
+                    return 'Немає вибраних варіантів.';
+                case 'one':
+                    return `Обрано 1 варіант.`;
+                case 'few':
+                    return `Обрано ${length} варіанти.`;
+                default:
+                    return `Обрано ${length} варіантів.`;
+            }
+        }
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

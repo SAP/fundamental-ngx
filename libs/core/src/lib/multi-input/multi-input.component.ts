@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
@@ -55,7 +56,7 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
@@ -67,6 +68,8 @@ function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidat
 function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionItemBase<ValueType> {
     return typeof candidate === 'object' && candidate !== null && 'value' in candidate && 'label' in candidate;
 }
+
+let uniqueHiddenLabel = 0;
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -108,7 +111,8 @@ function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionI
         CheckboxComponent,
         LinkComponent,
         AsyncPipe,
-        SearchHighlightPipe
+        SearchHighlightPipe,
+        FdTranslatePipe
     ]
 })
 export class MultiInputComponent<ItemType = any, ValueType = any>
@@ -339,6 +343,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Whether or not to display the addon button. */
     @Input()
     displayAddonButton = true;
+
+    /** @hidden */
+    private _tokenCountHiddenLabel = `fd-multi-input-token-count-id-${uniqueHiddenLabel++}`;
+
+    /** token  count hidden label */
+    @Input()
+    tokenHiddenId: string = this._tokenCountHiddenLabel;
 
     /** Event emitted, when the multi input's popover body is opened or closed */
     @Output()
