@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { GridListModule } from '@fundamental-ngx/core/grid-list';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
@@ -17,7 +17,7 @@ interface GridListItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [GridListModule, NgFor, AvatarModule, LinkComponent, RouterLink, NgIf]
+    imports: [GridListModule, NgFor, AvatarComponent, LinkComponent, RouterLink, NgIf]
 })
 export class GridListMoreExampleComponent {
     totalItems = 50;

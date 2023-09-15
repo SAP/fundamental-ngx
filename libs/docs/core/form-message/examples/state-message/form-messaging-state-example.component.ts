@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-    FormControlModule,
+    FormControlComponent,
     FormInputMessageGroupComponent,
     FormItemComponent,
     FormLabelComponent,
@@ -22,7 +22,7 @@ import {
         FormItemComponent,
         FormLabelComponent,
         FormInputMessageGroupComponent,
-        FormControlModule,
+        FormControlComponent,
         FormMessageComponent
     ]
 })

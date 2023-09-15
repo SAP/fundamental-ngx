@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
-    FormControlModule,
+    FormControlComponent,
     FormHeaderComponent,
     FormInputMessageGroupComponent,
     FormItemComponent,
@@ -13,7 +13,7 @@ import {
     selector: 'fd-textarea-example',
     templateUrl: './textarea-example.component.html',
     standalone: true,
-    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlModule, ContentDensityDirective]
+    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlComponent, ContentDensityDirective]
 })
 export class TextareaExampleComponent {}
 
@@ -21,7 +21,7 @@ export class TextareaExampleComponent {}
     selector: 'fd-textarea-inline-help-example',
     templateUrl: './textarea-inline-help-example.component.html',
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, FormControlModule]
+    imports: [FormItemComponent, FormLabelComponent, FormControlComponent]
 })
 export class TextareaInlineHelpExampleComponent {}
 
@@ -33,7 +33,7 @@ export class TextareaInlineHelpExampleComponent {}
         FormItemComponent,
         FormLabelComponent,
         FormInputMessageGroupComponent,
-        FormControlModule,
+        FormControlComponent,
         FormMessageComponent
     ]
 })

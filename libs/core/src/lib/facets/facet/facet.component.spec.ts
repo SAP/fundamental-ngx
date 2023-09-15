@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
@@ -101,7 +101,7 @@ describe('Image Facet Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, FacetModule, IconModule],
+            imports: [CommonModule, AvatarComponent, FacetModule, IconModule],
             declarations: [TestImageFacetComponent]
         }).compileComponents();
     }));
@@ -292,7 +292,7 @@ describe('Key Value Facet Alignment Component', () => {
                 CommonModule,
                 ObjectStatusComponent,
                 ObjectNumberModule,
-                AvatarModule,
+                AvatarComponent,
                 FacetModule,
                 IconModule,
                 LinkModule,

@@ -3,7 +3,7 @@ import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -34,7 +34,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
         ListModule,
         FocusableGridDirective,
         TableModule,
-        AvatarModule,
+        AvatarComponent,
         ContentDensityDirective
     ]
 })

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
@@ -8,7 +8,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     templateUrl: './popover-programmatic-open-example.component.html',
     styleUrls: ['popover-programmatic-open-example.component.scss'],
     standalone: true,
-    imports: [PopoverComponent, PopoverControlComponent, AvatarModule, PopoverBodyComponent, ButtonModule]
+    imports: [PopoverComponent, PopoverControlComponent, AvatarComponent, PopoverBodyComponent, ButtonModule]
 })
 export class PopoverProgrammaticOpenExampleComponent {
     isOpen = false;

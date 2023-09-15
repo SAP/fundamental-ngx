@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormControlModule, FormItemComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormItemComponent } from '@fundamental-ngx/core/form';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 
 @Component({
@@ -18,7 +18,7 @@ import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fu
         TokenizerInputDirective,
         ContentDensityDirective,
         NgFor,
-        FormControlModule
+        FormControlComponent
     ]
 })
 export class TokenizerCompactExampleComponent implements OnInit {

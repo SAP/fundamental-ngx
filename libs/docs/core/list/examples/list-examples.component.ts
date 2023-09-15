@@ -1,12 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import {
-    PopoverBodyComponent,
-    PopoverComponent as PopoverComponent_1,
-    PopoverTriggerDirective
-} from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 import {
     ShellbarActionComponent,
     ShellbarActionsComponent,
@@ -30,7 +25,7 @@ import {
         ShellbarUserMenuComponent,
         PopoverTriggerDirective,
         ShellbarActionComponent,
-        PopoverComponent_1,
+        PopoverComponent,
         PopoverBodyComponent,
         ListModule
     ]

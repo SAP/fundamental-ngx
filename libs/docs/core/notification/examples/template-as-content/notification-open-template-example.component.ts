@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NotificationModule, NotificationService } from '@fundamental-ngx/core/notification';
 
@@ -9,7 +9,7 @@ import { NotificationModule, NotificationService } from '@fundamental-ngx/core/n
     templateUrl: './notification-open-template-example.component.html',
     styles: ['.action-button {margin-left: 12px;}'],
     standalone: true,
-    imports: [ButtonModule, NotificationModule, AvatarModule]
+    imports: [ButtonModule, NotificationModule, AvatarComponent]
 })
 export class NotificationOpenTemplateExampleComponent {
     @ViewChild('notificationTemplate') notificationTemplate: TemplateRef<unknown>;

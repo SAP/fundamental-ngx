@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -22,7 +22,7 @@ import { TextComponent } from '@fundamental-ngx/core/text';
         FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
-        AvatarModule,
+        AvatarComponent,
         ObjectStatusComponent,
         ObjectNumberModule
     ]
@@ -52,7 +52,7 @@ export class FormLinkFacetExampleComponent {}
     templateUrl: './image-facet-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FacetModule, AvatarModule]
+    imports: [FacetModule, AvatarComponent]
 })
 export class ImageFacetExampleComponent {}
 
@@ -95,7 +95,7 @@ export class RatingIndicatorFacetExampleComponent {}
         FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
-        AvatarModule,
+        AvatarComponent,
         ObjectStatusComponent,
         ObjectNumberModule,
         SkeletonModule

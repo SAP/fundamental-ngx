@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { PipeModule } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
@@ -31,7 +31,7 @@ import { StandardListItemComponent } from './standard-list-item.component';
         ButtonModule,
         PlatformLinkModule,
         ListModule,
-        AvatarModule,
+        AvatarComponent,
         RouterModule,
         ObjectStatusComponent,
         ContentDensityModule

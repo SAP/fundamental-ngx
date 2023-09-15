@@ -41,7 +41,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FormControlModule, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -91,7 +91,7 @@ let deprecationWarningShown = false;
         TokenizerComponent,
         TokenizerInputDirective,
         NgFor,
-        FormControlModule,
+        FormControlComponent,
         FormsModule,
         AutoCompleteDirective,
         FormMessageComponent,

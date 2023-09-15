@@ -1,13 +1,12 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { MenuModule } from '@fundamental-ngx/core/menu';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf, NgFor } from '@angular/common';
 
 /**
  * This Component extends popover component and passes all the options and events from outside to popover component
@@ -18,7 +17,7 @@ import { NgIf, NgFor } from '@angular/common';
     templateUrl: './shellbar-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonModule, MenuModule, AvatarModule, NgFor]
+    imports: [NgIf, ButtonModule, MenuModule, AvatarComponent, NgFor]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */

@@ -1,7 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -26,7 +26,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
         ObjectStatusComponent,
         FocusableGridDirective,
         TableModule,
-        AvatarModule,
+        AvatarComponent,
         ContentDensityDirective
     ]
 })

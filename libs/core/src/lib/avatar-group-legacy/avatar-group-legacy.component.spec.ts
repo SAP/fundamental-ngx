@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NgForOf, NgIf } from '@angular/common';
 import { Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { AvatarGroupLegacyComponent, AvatarGroupLegacyType } from './avatar-group-legacy.component';
@@ -56,7 +56,7 @@ const NUMBER_OF_ITEMS = 20;
     imports: [
         AvatarGroupLegacyComponent,
         PopoverModule,
-        AvatarModule,
+        AvatarComponent,
         ButtonModule,
         AvatarGroupLegacyTestComponent,
         AvatarGroupLegacyItemDirective,

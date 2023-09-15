@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
-    FormControlModule,
+    FormControlComponent,
     FormHeaderComponent,
     FormInputMessageGroupComponent,
     FormItemComponent,
@@ -13,7 +13,7 @@ import {
     selector: 'fd-input-example',
     templateUrl: './input-example.component.html',
     standalone: true,
-    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlModule, ContentDensityDirective]
+    imports: [FormHeaderComponent, FormItemComponent, FormLabelComponent, FormControlComponent, ContentDensityDirective]
 })
 export class InputExampleComponent {}
 
@@ -21,7 +21,7 @@ export class InputExampleComponent {}
     selector: 'fd-input-inline-help-example',
     templateUrl: './input-inline-help-example.component.html',
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, FormControlModule]
+    imports: [FormItemComponent, FormLabelComponent, FormControlComponent]
 })
 export class InputInlineHelpExampleComponent {}
 
@@ -33,7 +33,7 @@ export class InputInlineHelpExampleComponent {}
         FormItemComponent,
         FormLabelComponent,
         FormInputMessageGroupComponent,
-        FormControlModule,
+        FormControlComponent,
         FormMessageComponent
     ]
 })

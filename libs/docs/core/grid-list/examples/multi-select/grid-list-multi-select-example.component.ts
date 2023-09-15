@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from
 
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
     GridListComponent,
@@ -29,7 +29,7 @@ interface GridListItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [GridListModule, NgFor, AvatarModule, LinkComponent, RouterLink, ButtonModule]
+    imports: [GridListModule, NgFor, AvatarComponent, LinkComponent, RouterLink, ButtonModule]
 })
 export class GridListMultiSelectExampleComponent {
     @ViewChild(GridListComponent)
