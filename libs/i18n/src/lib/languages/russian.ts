@@ -69,9 +69,9 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                 case 'one':
                     return `Выбран 1 вариант.`;
                 case 'few':
-                    return `Выбрано 2 варианта.`;
+                    return `Выбрано ${length} варианта.`;
                 default:
-                    return `Выбрано 5 вариантов.`;
+                    return `Выбрано ${length} вариантов.`;
             }
         }
     },
