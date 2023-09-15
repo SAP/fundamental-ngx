@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { QuickViewModule } from '..';
 
 @Component({
@@ -23,7 +23,7 @@ describe('QuickViewSubheaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [QuickViewModule, AvatarModule]
+            imports: [QuickViewModule, AvatarComponent]
         }).compileComponents();
     }));
 

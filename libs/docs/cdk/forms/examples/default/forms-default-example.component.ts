@@ -12,12 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
-import {
-    CvaControl,
-    CvaDirective,
-    CvaDirective as CvaDirective_1,
-    FD_FORM_FIELD_CONTROL
-} from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
@@ -33,7 +28,7 @@ import { cloneDeep } from 'lodash-es';
         FdpFormGroupModule,
         FormsModule,
         ReactiveFormsModule,
-        CvaDirective_1,
+        CvaDirective,
         forwardRef(() => CustomCdkControlExampleComponent),
         NgIf,
         DataSourceDirective,

@@ -1,7 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -58,7 +58,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         BreadcrumbModule,
         LinkComponent,
         FacetModule,
-        AvatarModule,
+        AvatarComponent,
         ToolbarComponent,
         ToolbarItemDirective,
         ContentDensityDirective,

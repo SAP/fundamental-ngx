@@ -2,7 +2,7 @@ import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupLegacyModule } from '@fundamental-ngx/core/avatar-group-legacy';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -28,7 +28,7 @@ import { AvatarGeneratorExampleService } from './avatar-generator-example.servic
         QuickViewModule,
         NgIf,
         BarModule,
-        AvatarModule,
+        AvatarComponent,
         LinkComponent,
         OverflowLayoutModule,
         NgFor,

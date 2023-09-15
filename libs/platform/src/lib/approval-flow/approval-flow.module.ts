@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -56,7 +56,7 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
     imports: [
         CommonModule,
         FormsModule,
-        AvatarModule,
+        AvatarComponent,
         BarModule,
         ButtonModule,
         IconModule,

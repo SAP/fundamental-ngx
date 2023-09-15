@@ -3,15 +3,15 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { ThumbnailImageComponent } from './thumbnail-image.component';
 import { Media } from '../thumbnail.interfaces';
 import { PlatformThumbnailModule } from '../thumbnail.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ThumbnailImageComponent } from './thumbnail-image.component';
 
 @Component({
     template: `<fdp-thumbnail-image #thumbnailImageComponent [mediaList]="mediaList"></fdp-thumbnail-image>`
@@ -47,7 +47,14 @@ describe('DefaultThumbnailImageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            imports: [
+                CommonModule,
+                AvatarComponent,
+                DialogModule,
+                CarouselModule,
+                ButtonModule,
+                PlatformThumbnailModule
+            ],
             declarations: [DefaultThumbnailImageTestComponent],
             providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
@@ -110,7 +117,14 @@ describe('HorizontalThumbnailImageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule, PlatformThumbnailModule],
+            imports: [
+                CommonModule,
+                AvatarComponent,
+                DialogModule,
+                CarouselModule,
+                ButtonModule,
+                PlatformThumbnailModule
+            ],
             declarations: [HorizontalThumbnailImageTestComponent],
             providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
@@ -196,7 +210,7 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
         TestBed.configureTestingModule({
             imports: [
                 CommonModule,
-                AvatarModule,
+                AvatarComponent,
                 DialogModule,
                 CarouselModule,
                 ButtonModule,

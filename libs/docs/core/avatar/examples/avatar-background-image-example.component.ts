@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-avatar-background-image-example',
@@ -13,6 +13,6 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [AvatarModule]
+    imports: [AvatarComponent]
 })
 export class AvatarBackgroundImageExampleComponent {}

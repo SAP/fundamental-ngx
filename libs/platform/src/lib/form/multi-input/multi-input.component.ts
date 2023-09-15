@@ -54,7 +54,7 @@ import {
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FormControlModule } from '@fundamental-ngx/core/form';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
@@ -109,7 +109,7 @@ export class MultiInputSelectionChangeEvent {
         TokenizerComponent,
         TokenizerInputDirective,
         NgFor,
-        FormControlModule,
+        FormControlComponent,
         FormsModule,
         AutoCompleteDirective,
         InitialFocusDirective,

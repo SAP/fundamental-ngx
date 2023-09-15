@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -33,7 +33,7 @@ export type Notification = {
         NgIf,
         NgTemplateOutlet,
         NgFor,
-        AvatarModule
+        AvatarComponent
     ]
 })
 export class NotificationGroupExampleComponent {

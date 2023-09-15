@@ -9,7 +9,7 @@ import {
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
-import { FormControlModule, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -49,7 +49,7 @@ import {
         MenuModule,
         ToolbarLabelDirective,
         FormLabelComponent,
-        FormControlModule,
+        FormControlComponent,
         ToolbarOverflowButtonDirective,
         ToolbarOverflowButtonMenuDirective,
         SegmentedButtonModule,

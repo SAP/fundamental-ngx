@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
     selector: 'fd-bar-page-responsive-example',
     templateUrl: './bar-page-responsive-example.component.html',
     standalone: true,
-    imports: [BarModule, AvatarModule, AsyncPipe]
+    imports: [BarModule, AvatarComponent, AsyncPipe]
 })
 export class BarPageResponsiveExampleComponent implements OnInit {
     navigationArrow$: Observable<string>;

@@ -10,7 +10,7 @@ import {
     Validators
 } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-input-form-group-example',
@@ -22,7 +22,7 @@ import { FormControlModule, FormItemComponent, FormLabelComponent } from '@funda
         ReactiveFormsModule,
         FormItemComponent,
         FormLabelComponent,
-        FormControlModule,
+        FormControlComponent,
         NgFor,
         ButtonModule
     ]

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-    FormControlModule,
+    FormControlComponent,
     FormInputMessageGroupComponent,
     FormItemComponent,
     FormLabelComponent,
@@ -25,7 +25,7 @@ import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
         FormItemComponent,
         FormLabelComponent,
         FormInputMessageGroupComponent,
-        FormControlModule,
+        FormControlComponent,
         FormMessageComponent,
         InputGroupModule,
         MultiInputModule,

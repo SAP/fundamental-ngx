@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 
 @Component({
@@ -7,6 +7,6 @@ import { CardModule } from '@fundamental-ngx/core/card';
     templateUrl: 'card-object-example.component.html',
     styleUrls: ['./card-object-example.component.scss'],
     standalone: true,
-    imports: [CardModule, AvatarModule]
+    imports: [CardModule, AvatarComponent]
 })
 export class CardObjectExampleComponent {}

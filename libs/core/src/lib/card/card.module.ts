@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -47,7 +47,7 @@ const components = [
 
 @NgModule({
     declarations: [...components],
-    imports: [CommonModule, ButtonModule, AvatarModule, ObjectStatusComponent, ContentDensityModule],
-    exports: [ButtonModule, AvatarModule, ...components, ContentDensityModule]
+    imports: [CommonModule, ButtonModule, AvatarComponent, ObjectStatusComponent, ContentDensityModule],
+    exports: [ButtonModule, AvatarComponent, ...components, ContentDensityModule]
 })
 export class CardModule {}

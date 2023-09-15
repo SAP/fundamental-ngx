@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,16 +8,15 @@ import {
     Input,
     ViewEncapsulation
 } from '@angular/core';
-import { ThumbnailSettingsItem } from '../../../models/settings.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { isSubscribable } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ListAvatarConfig, ListIconConfig } from '@fundamental-ngx/platform/list';
 import { merge } from 'lodash-es';
 import { Observable } from 'rxjs';
-import { isSubscribable } from '@fundamental-ngx/cdk/utils';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NgIf } from '@angular/common';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ThumbnailSettingsItem } from '../../../models/settings.model';
 
 @Component({
     selector: 'fdp-settings-generator-sidebar-icon',
@@ -24,7 +24,7 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, SkeletonModule, IconModule, AvatarModule]
+    imports: [NgIf, SkeletonModule, IconModule, AvatarComponent]
 })
 export class SettingsGeneratorSidebarIconComponent {
     /** Thumbnail configuration. */

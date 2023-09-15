@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
@@ -34,7 +34,7 @@ import { debounceTime } from 'rxjs/operators';
         NgIf,
         CarouselItemComponent,
         CardModule,
-        AvatarModule,
+        AvatarComponent,
         ListModule
     ]
 })

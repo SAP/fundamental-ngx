@@ -9,7 +9,7 @@ import {
     ViewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -22,7 +22,7 @@ import { debounceTime } from 'rxjs/operators';
     styleUrls: ['./carousel-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CarouselComponent, CarouselItemComponent, CardModule, AvatarModule, ListModule]
+    imports: [CarouselComponent, CarouselItemComponent, CardModule, AvatarComponent, ListModule]
 })
 export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')
