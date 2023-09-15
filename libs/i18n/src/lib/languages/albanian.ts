@@ -46,7 +46,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         dismissLabel: 'Largoje'
     },
     coreMultiInput: {
-        multiInputAriaLabel: 'Multi Value Input'
+        multiInputAriaLabel: 'Multi Value Input',
+        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',

@@ -63,6 +63,8 @@ function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionI
     return typeof candidate === 'object' && candidate !== null && 'value' in candidate && 'label' in candidate;
 }
 
+let uniqueHiddenLabel = 0;
+
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
  * limited number of pre-defined options with a filter-enabled context.
@@ -314,6 +316,13 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Whether or not to display the addon button. */
     @Input()
     displayAddonButton = true;
+
+    /** @hidden */
+    private _tokenCountHiddenLabel = `fd-multi-input-token-count-id-${uniqueHiddenLabel++}`;
+
+    /** token  count hidden label */
+    @Input()
+    tokenHiddenId: string = this._tokenCountHiddenLabel;
 
     /** Event emitted, when the multi input's popover body is opened or closed */
     @Output()

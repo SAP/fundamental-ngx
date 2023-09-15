@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MultiInputComponent } from './multi-input.component';
-import { TokenModule } from '@fundamental-ngx/core/token';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { FormModule } from '@fundamental-ngx/core/form';
+import { AutoCompleteModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { LinkModule } from '@fundamental-ngx/core/link';
-import { AutoCompleteModule } from '@fundamental-ngx/cdk/utils';
-import { DeprecatedMultiInputCompactDirective } from './deprecated-multi-input-compact.directive';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { I18nModule } from '@fundamental-ngx/i18n';
+import { DeprecatedMultiInputCompactDirective } from './deprecated-multi-input-compact.directive';
+import { MultiInputComponent } from './multi-input.component';
 
 @NgModule({
     declarations: [MultiInputComponent, DeprecatedMultiInputCompactDirective],
@@ -29,7 +29,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         CheckboxModule,
         LinkModule,
         AutoCompleteModule,
-        ContentDensityModule
+        ContentDensityModule,
+        I18nModule
     ],
     exports: [MultiInputComponent, DeprecatedMultiInputCompactDirective, ContentDensityModule]
 })
