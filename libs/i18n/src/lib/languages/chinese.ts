@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_CHINESE: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
+        selectAllLabel: '选择全部（{selectedItems}，共 {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: '上一项',
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: '取消',
-        listItemStatusAriaLabel: '列表项的状态：{{ status }}。',
-        listItemCounterAriaLabel: '列表项有{{ count }}个子项。',
+        listItemStatusAriaLabel: '列表项的状态：{status}。',
+        listItemCounterAriaLabel: '列表项有{count}个子项。',
         listItemButtonDetailsTitle: '详情',
         listItemButtonDeleteTitle: '删除',
         listItemStatusContainsErrors: '有错误',
@@ -54,24 +54,24 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: '树项目{{ itemDetails }}，{{ index }} / {{ total }} {{ selectedDescription }}'
+        linkItemAriaLabel: '树项目{itemDetails}，{index} / {total} {selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }}项更多'
+        moreItemsButton: '{count}项更多'
     },
     corePagination: {
-        pageLabel: '第{{ pageNumber }}页',
-        currentPageAriaLabel: '目前在第{{ pageNumber }}页',
+        pageLabel: '第{pageNumber}页',
+        currentPageAriaLabel: '目前在第{pageNumber}页',
         labelBeforeInputMobile: '页：',
-        labelAfterInputMobile: ' / {{ totalCount }}',
-        inputAriaLabel: '页输入，目前所在页，页 {{ pageNumber }} / {{ totalCount }}',
+        labelAfterInputMobile: ' / {totalCount}',
+        inputAriaLabel: '页输入，目前所在页，页 {pageNumber} / {totalCount}',
         itemsPerPageLabel: '每页显示结果：',
         firstLabel: '第一页',
         previousLabel: '上一页',
         nextLabel: '下一页',
         lastLabel: '最后一页',
         ariaLabel: '分页',
-        totalResultsLabel: '总共{{ totalCount }}个结果'
+        totalResultsLabel: '总共{totalCount}个结果'
     },
     coreProductSwitch: {
         ariaLabel: '产品切换'
@@ -82,18 +82,18 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: '滑动条最小值为{{ min }}，最大值为{{ max }}',
-        singleValueminDetails: '值等于{{ value }}',
-        singleValuemaxDetails: '值等于{{ value }}',
-        singleValueNowDetails: '目前值等于{{ value }}',
-        multipleHandle1MinMaxDetails: '范围滑动条最小值为{{ min }}，最大值为{{ max }}',
-        multipleHandle1ValueminDetails: '值等于{{ value }}',
-        multipleHandle1ValuemaxDetails: '值等于{{ value }}',
-        multipleHandle1ValueNowDetails: '目前值等于{{ value }}',
-        multipleHandle2MinMaxDetails: '范围滑动条最小值为{{ min }}，最大值为{{ max }}',
-        multipleHandle2ValueminDetails: '值等于{{ value }}',
-        multipleHandle2ValuemaxDetails: '值等于{{ value }}',
-        multipleHandle2ValueNowDetails: '目前值等于{{ value }}'
+        singleMinMaxDetails: '滑动条最小值为{min}，最大值为{max}',
+        singleValueminDetails: '值等于{value}',
+        singleValuemaxDetails: '值等于{value}',
+        singleValueNowDetails: '目前值等于{value}',
+        multipleHandle1MinMaxDetails: '范围滑动条最小值为{min}，最大值为{max}',
+        multipleHandle1ValueminDetails: '值等于{value}',
+        multipleHandle1ValuemaxDetails: '值等于{value}',
+        multipleHandle1ValueNowDetails: '目前值等于{value}',
+        multipleHandle2MinMaxDetails: '范围滑动条最小值为{min}，最大值为{max}',
+        multipleHandle2ValueminDetails: '值等于{value}',
+        multipleHandle2ValuemaxDetails: '值等于{value}',
+        multipleHandle2ValueNowDetails: '目前值等于{value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: '更多动作',
@@ -143,7 +143,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         ariaRoleDescription: '标签'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }}项更多'
+        moreLabel: '{count}项更多'
     },
     coreUploadCollection: {
         menuOkText: '确定',
@@ -203,11 +203,11 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         messagesTeamRemoved: '移除了1个队',
         messagesErrorBuildGraph: '在试图建立图表时出现了一个错误。请检查初始数据。',
         messagesUndoAction: '撤销',
-        nodeMembersCount: '{{ count }}个成员',
+        nodeMembersCount: '{count}个成员',
         nodeVariousTeams: '多个队',
         nodeStatusDueToday: '今天到期',
-        nodeStatusDueInXDays: '{{ count }}日后到期',
-        nodeStatusXDaysOverdue: '已过期{{ count }}日',
+        nodeStatusDueInXDays: '{count}日后到期',
+        nodeStatusXDaysOverdue: '已过期{count}日',
         nodeActionAddApproversBefore: '在此之前添加审批者',
         nodeActionAddApproversAfter: '在此之后添加审批者',
         nodeActionAddApproversParallel: '添加并行的审批者',
@@ -228,7 +228,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         toolbarEditApprover: '编辑审批者',
         watchersInputPlaceholder: '搜索…',
         userListSelectedItemsCountSingular: '选择了1个项',
-        userListSelectedItemsCountPlural: '选择了{{ count }}个项',
+        userListSelectedItemsCountPlural: '选择了{count}个项',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -252,15 +252,15 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         searchHideAdvancedSearchLabel: '隐藏筛选',
         searchShowAllAdvancedSearchLabel: '显示所有筛选',
         searchHideAllAdvancedSearchLabel: '隐藏所有筛选',
-        selectTabDisplayCountLabel: '项（{{ count }}）',
+        selectTabDisplayCountLabel: '项（{count}）',
         selectTabMoreBtnLabel: '更多',
-        selectTabCountHiddenA11yLabel: '包含{{ rowCount }}行和{{ colCount }}列',
+        selectTabCountHiddenA11yLabel: '包含{rowCount}行和{colCount}列',
         selectMobileTabBackBtnTitle: '返回',
         selectMobileTabBtnOpenDialogLabel: '打开对话框',
-        selectMobileTabTitle: '{{ title }}标签页',
+        selectMobileTabTitle: '{title}标签页',
         selectMobileConditionEmpty: '空',
         defineConditionTitle: '产品',
-        defineConditionSelectedValueHiddenA11yLabel: '选定的值 {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: '选定的值 {value}',
         defineConditionConditionsGroupHeaderInclude: '包含',
         defineConditionConditionsGroupHeaderExclude: '不包含',
         defineConditionFromPlaceholder: '从',
@@ -281,14 +281,14 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: '空',
         defineConditionConditionStrategyLabelNotEqualTo: '不等于',
         defineConditionConditionStrategyLabelNotEmpty: '不为空',
-        defineConditionMaxCountError: '请最多输入{{ count }}个字符',
+        defineConditionMaxCountError: '请最多输入{count}个字符',
         selectTabTitle: '从列表选',
         searchTableEmptyMessage: '使用搜索获取结果',
         defineTabTitle: '定义条件'
     },
     platformCombobox: {
         countListResultsSingular: '1条搜索结果',
-        countListResultsPlural: '{{ count }}条搜索结果'
+        countListResultsPlural: '{count}条搜索结果'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: '选择选项',
@@ -298,12 +298,12 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '超出1个字符',
-        counterMessageCharactersOverTheLimitPlural: '超出{{ count }}个字符',
+        counterMessageCharactersOverTheLimitPlural: '超出{count}个字符',
         counterMessageCharactersRemainingSingular: '还可以输入1个字符',
-        counterMessageCharactersRemainingPlural: '还可以输入{{ count }}个字符'
+        counterMessageCharactersRemainingPlural: '还可以输入{count}个字符'
     },
     platformLink: {
-        roleDescriptionWithMedia: '媒体：{{ media }}'
+        roleDescriptionWithMedia: '媒体：{media}'
     },
     platformList: {
         loadingAriaLabel: '加载中'
@@ -321,13 +321,13 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         submitButtonTitle: '搜索',
         searchInputLabel: '搜索',
         synchronizeButtonTitle: '同步',
-        searchSuggestionMessage: '找到{{ count }}条建议。',
+        searchSuggestionMessage: '找到{count}条建议。',
         searchSuggestionNavigateMessage: '用上下方向键来导航'
     },
     platformSmartFilterBar: {
         searchPlaceholder: '搜索…',
         submitButtonLabel: '确认',
-        filtersButtonLabel: '筛选（{{ filtersCount }}）',
+        filtersButtonLabel: '筛选（{filtersCount}）',
         showFiltersButtonLabel: '显示筛选',
         hideFiltersButtonLabel: '隐藏筛选',
         defineConditionsRemoveConditionButtonTitle: '移除条件',
@@ -384,7 +384,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: '搜索…',
         P13ColumnsDialogsShowSelected: '显示选定的',
         P13ColumnsDialogShowAll: '显示全部 ',
-        P13ColumnsDialogSelectAll: '选择全部（{{ selectedColumnsCount }} / {{ selectableColumnsCount }}）',
+        P13ColumnsDialogSelectAll: '选择全部（{selectedColumnsCount} / {selectableColumnsCount}）',
         P13ColumnsDialogConfirmationBtnLabel: '确定',
         P13ColumnsDialogCancelBtnLabel: '取消',
         P13ColumnsDialogMoveToTopBtn: '移至顶部',
@@ -409,9 +409,9 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         P13FilterBooleanOptionTrue: '是',
         P13FilterBooleanOptionFalse: '否',
         P13FilterDialogHeader: '筛选方式',
-        P13FilterDialogIncludePanelTitleWithCount: '包括（{{ count }}）',
+        P13FilterDialogIncludePanelTitleWithCount: '包括（{count}）',
         P13FilterDialogIncludePanelTitleWithoutCount: '包括',
-        P13FilterDialogExcludePanelTitleWithCount: '排除（{{ count }}）',
+        P13FilterDialogExcludePanelTitleWithCount: '排除（{count}）',
         P13FilterDialogExcludePanelTitleWithoutCount: '排除',
         P13FilterDialogRemoveFilterBtnTitle: '移除筛选',
         P13FilterDialoAddFilterBtnTitle: '添加筛选',
@@ -444,7 +444,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '（未筛选）',
-        filterDialogFilterByLabel: '筛选方式：{{ filterLabel }}',
+        filterDialogFilterByLabel: '筛选方式：{filterLabel}',
         filterDialogFilterTitle: '筛选',
         filterDialogFilterBy: '筛选方式',
         filterDialogConfirmBtnLabel: '确定',
@@ -487,13 +487,13 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         moveToCloseBtn: '取消',
         newFolderTitle: '新建文件夹',
         newFolderAtRootInputLabel: '新建文件夹名称',
-        newFolderAtFolderInputLabel: '{{ folderName }}内的新文件夹名称',
+        newFolderAtFolderInputLabel: '{folderName}内的新文件夹名称',
         newFolderInputPlaceholder: '在此输入…',
-        newFolderInputErrorLabel: '请最多输入{{ count }}个字符',
+        newFolderInputErrorLabel: '请最多输入{count}个字符',
         newFolderDialogCreateBtnLabel: '新建',
         newFolderDialogCancelBtnLabel: '取消',
         breadcrumbLabelAllFiles: '全部文件',
-        breadcrumbLabelAllFilesWithTotal: '全部文件（{{ total }}）',
+        breadcrumbLabelAllFilesWithTotal: '全部文件（{total}）',
         searchPlaceholder: '搜索…',
         addBtnLabel: '添加',
         newFolderBtnLabel: '新建文件夹',
@@ -514,48 +514,46 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         dragDropAreaText: '拖动文件进行上传',
         noDataText: '没有发现文件',
         noDataDescription: '投掷文件进行上传，或使用 "添加 "按钮。',
-        paginationTotal: '显示{{ from }}-{{ to }}个，总共{{ total }}个',
+        paginationTotal: '显示{from}-{to}个，总共{total}个',
         resultsPerPage: '每页结果',
-        messageCreateFailed: '未能创建{{ folderName }}。',
-        messageCreateSuccess: '{{ folderName }}已被成功创建。',
-        messageUpdateVersionFailed: '未能更新{{ folderName }}的版本。',
-        messageUpdateVersionSuccess: '{{ folderName }}的版本已被更新。',
-        messageFileRenameFailed: '未能将"{{ from }}"重新命名为"{{ to }}"。',
-        messageFileRenameSuccess: '"{{ from }}"已被重新命名为"{{ to }}"。',
-        messageRemoveFoldersAndFilesFailed: '未能移除{{ foldersCount }}个文件夹和{{ filesCount }}个文件。',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }}个文件夹和{{ filesCount }}个文件已被移除。',
-        messageRemoveFoldersFailed: '未能移除{{ foldersCount }}个文件夹。',
-        messageRemoveFoldersSuccess: '{{ foldersCount }}个文件夹已被移除。',
-        messageRemoveFilesFailed: '未能移除{{ filesCount }}个文件。',
-        messageRemoveFilesSuccess: '{{ filesCount }}个未见已被移除。',
-        messageRemoveFileOrFolderFailed: '未能移除{{ name }}。',
-        messageRemoveFileOrFolderSuccess: '{{ name }}已被移除。',
-        messageMoveFoldersAndFilesFailed: '未能将{{ foldersCount }}个文件夹和{{ filesCount }}个文件移至{{ to }}。',
-        messageMoveFoldersAndFilesSuccess: '{{ foldersCount }}个文件夹和{{ filesCount }}个文件已被移至{{ to }}。',
-        messageMoveFoldersFailed: '未能将{{ foldersCount }}个文件夹移至{{ to }}。',
-        messageMoveFoldersSuccess: '{{ foldersCount }}个文件夹已被移至{{ to }}。',
-        messageMoveFilesFailed: '未能将{{ filesCount }}个文件移至{{ to }}。',
-        messageMoveFilesSuccess: '{{ filesCount }}个文件已被移至{{ to }}。',
-        messageMoveFileOrFolderFailed: '未能将{{ name }}移至{{ to }}。',
-        messageMoveFileOrFolderSuccess: '{{ name }}已被移至{{ to }}。',
-        messageMoveRootFoldersAndFilesFailed: '未能将{{ foldersCount }}个文件夹和{{ filesCount }}个文件移至全部文件。',
-        messageMoveRootFoldersAndFilesSuccess: '{{ foldersCount }}个文件夹和{{ filesCount }}个文件已被移至全部文件。',
-        messageMoveRootFoldersFailed: '未能将{{ foldersCount }}个文件夹移至全部文件。',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }}个文件夹已被移至到全部文件。',
-        messageMoveRootFilesFailed: '未能将{{ filesCount }}个文件移至全部文件。',
-        messageMoveRootFilesSuccess: '{{ filesCount }}个文件已被移至全部文件。',
-        messageMoveRootFileOrFolderFailed: '未能将{{ name }}移至全部文件。',
-        messageMoveRootFileOrFolderSuccess: '{{ name }}已被移至全部文件。',
-        messageFileTypeMismatchPlural: '{{ filesCount }}个文件的类型不符合要求。允许的文件类型：{{ allowedTypes }}。',
-        messageFileTypeMismatchSingular: '文件"{{ fileName }}"的类型不符合要求。允许的文件类型：{{ allowedTypes }}。',
-        messageFileSizeExceededPlural:
-            '{{ filesCount }}个文件超过了文件大小限制。允许的最大文件大小：{{ maxFileSize }}。',
-        messageFileSizeExceededSingular:
-            '文件"{{ fileName }}"超过了文件大小限制。允许的最大文件大小：{{ maxFileSize }}。',
+        messageCreateFailed: '未能创建{folderName}。',
+        messageCreateSuccess: '{folderName}已被成功创建。',
+        messageUpdateVersionFailed: '未能更新{folderName}的版本。',
+        messageUpdateVersionSuccess: '{folderName}的版本已被更新。',
+        messageFileRenameFailed: '未能将"{from}"重新命名为"{to}"。',
+        messageFileRenameSuccess: '"{from}"已被重新命名为"{to}"。',
+        messageRemoveFoldersAndFilesFailed: '未能移除{foldersCount}个文件夹和{filesCount}个文件。',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount}个文件夹和{filesCount}个文件已被移除。',
+        messageRemoveFoldersFailed: '未能移除{foldersCount}个文件夹。',
+        messageRemoveFoldersSuccess: '{foldersCount}个文件夹已被移除。',
+        messageRemoveFilesFailed: '未能移除{filesCount}个文件。',
+        messageRemoveFilesSuccess: '{filesCount}个未见已被移除。',
+        messageRemoveFileOrFolderFailed: '未能移除{name}。',
+        messageRemoveFileOrFolderSuccess: '{name}已被移除。',
+        messageMoveFoldersAndFilesFailed: '未能将{foldersCount}个文件夹和{filesCount}个文件移至{to}。',
+        messageMoveFoldersAndFilesSuccess: '{foldersCount}个文件夹和{filesCount}个文件已被移至{to}。',
+        messageMoveFoldersFailed: '未能将{foldersCount}个文件夹移至{to}。',
+        messageMoveFoldersSuccess: '{foldersCount}个文件夹已被移至{to}。',
+        messageMoveFilesFailed: '未能将{filesCount}个文件移至{to}。',
+        messageMoveFilesSuccess: '{filesCount}个文件已被移至{to}。',
+        messageMoveFileOrFolderFailed: '未能将{name}移至{to}。',
+        messageMoveFileOrFolderSuccess: '{name}已被移至{to}。',
+        messageMoveRootFoldersAndFilesFailed: '未能将{foldersCount}个文件夹和{filesCount}个文件移至全部文件。',
+        messageMoveRootFoldersAndFilesSuccess: '{foldersCount}个文件夹和{filesCount}个文件已被移至全部文件。',
+        messageMoveRootFoldersFailed: '未能将{foldersCount}个文件夹移至全部文件。',
+        messageMoveRootFoldersSuccess: '{foldersCount}个文件夹已被移至到全部文件。',
+        messageMoveRootFilesFailed: '未能将{filesCount}个文件移至全部文件。',
+        messageMoveRootFilesSuccess: '{filesCount}个文件已被移至全部文件。',
+        messageMoveRootFileOrFolderFailed: '未能将{name}移至全部文件。',
+        messageMoveRootFileOrFolderSuccess: '{name}已被移至全部文件。',
+        messageFileTypeMismatchPlural: '{filesCount}个文件的类型不符合要求。允许的文件类型：{allowedTypes}。',
+        messageFileTypeMismatchSingular: '文件"{fileName}"的类型不符合要求。允许的文件类型：{allowedTypes}。',
+        messageFileSizeExceededPlural: '{filesCount}个文件超过了文件大小限制。允许的最大文件大小：{maxFileSize}。',
+        messageFileSizeExceededSingular: '文件"{fileName}"超过了文件大小限制。允许的最大文件大小：{maxFileSize}。',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }}个文件超过了文件名称长度限制。允许的文件名称长度：{{ maxFilenameLength }}个字符。',
+            '{filesCount}个文件超过了文件名称长度限制。允许的文件名称长度：{maxFilenameLength}个字符。',
         messageFileNameLengthExceededSingular:
-            '名称"{{ fileName }}"超过了文件名称长度限制。允许的文件名称长度：{{ maxFilenameLength }}个字符。'
+            '名称"{fileName}"超过了文件名称长度限制。允许的文件名称长度：{maxFilenameLength}个字符。'
     },
     platformWizardGenerator: {
         summarySectionEditStep: '编辑'
@@ -602,10 +600,10 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         selectOptionLabel: '选择一个选项'
     },
     fnSlider: {
-        minMaxDetails: '滑动条最小值为{{ min }}，最大值为{{ max }}',
-        valueminDetails: '值等于{{ value }}',
-        valuemaxDetails: '值等于{{ value }}',
-        valueNowDetails: '目前值等于{{ value }}'
+        minMaxDetails: '滑动条最小值为{min}，最大值为{max}',
+        valueminDetails: '值等于{value}',
+        valuemaxDetails: '值等于{value}',
+        valueNowDetails: '目前值等于{value}'
     },
     fnSwitch: {
         semanticAcceptLabel: '接受',

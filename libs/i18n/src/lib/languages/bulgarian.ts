@@ -1,14 +1,11 @@
 import { FdLanguage } from '../models/lang';
-import { PluralizationSet1 } from './pluralization/set1';
-
-const pluralization = new PluralizationSet1();
 
 /**
  * Default set of translations of Fundamental UI library for Bulgarian language
  */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
+        selectAllLabel: 'Избери всички ({selectedItems} от {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Отиди на предишния елемент',
@@ -37,17 +34,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Отмени',
-        listItemStatusAriaLabel: 'Артикулът има статус. Статус: {{ status }}.',
-        listItemCounterAriaLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Артикулът има 1 дете.';
-                default:
-                    return 'Артикулът има {{ count }} деца.';
-            }
-        },
+        listItemStatusAriaLabel: 'Артикулът има статус. Статус: {status}.',
+        listItemCounterAriaLabel: 'Артикулът има { count, plural, one {1 дете} other {# деца} }.',
         listItemButtonDetailsTitle: 'Подробности',
         listItemButtonDeleteTitle: 'Изтрий',
         listItemStatusContainsErrors: 'Съдържа грешки',
@@ -59,40 +47,31 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Елемент от дърво {{ itemDetails }}, {{ index }} от {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Елемент от дърво {itemDetails}, {index} от {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Още 1 елемент';
-                default:
-                    return 'Още {{ count }} елемента';
-            }
-        }
+        moreItemsButton: 'Още { count, plural, one {1 елемент} other {# елемента} }'
     },
     corePagination: {
-        pageLabel: 'Страница {{ pageNumber }}',
-        currentPageAriaLabel: 'Страница {{ pageNumber }} е активна',
+        pageLabel: 'Страница {pageNumber}',
+        currentPageAriaLabel: 'Страница {pageNumber} е активна',
         labelBeforeInputMobile: 'Страница:',
-        labelAfterInputMobile: 'от {{ totalCount }}',
-        inputAriaLabel: 'Поле за страница, Текуща страница, Page {{ pageNumber }} of {{ totalCount }}',
+        labelAfterInputMobile: 'от {totalCount}',
+        inputAriaLabel: 'Поле за страница, Текуща страница, Page {pageNumber} of {totalCount}',
         itemsPerPageLabel: 'Резултати на Страница:',
         firstLabel: 'Първа',
         previousLabel: 'Предна',
         nextLabel: 'Следваща',
         lastLabel: 'Последна',
         ariaLabel: 'Пагинация',
-        totalResultsLabel: '{{ totalCount }} резултати'
+        totalResultsLabel: '{totalCount} резултати'
     },
     coreProductSwitch: {
         ariaLabel: 'Продуктов превключвател'
@@ -103,20 +82,20 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
-        singleValueminDetails: 'Стойността е {{ value }}',
-        singleValuemaxDetails: 'Стойността е {{ value }}',
-        singleValueNowDetails: 'Текущата стойност е {{ value }}',
+        singleMinMaxDetails: 'Минималната стойност на плъзгача е {min}, максималната стойност е {max}',
+        singleValueminDetails: 'Стойността е {value}',
+        singleValuemaxDetails: 'Стойността е {value}',
+        singleValueNowDetails: 'Текущата стойност е {value}',
         multipleHandle1MinMaxDetails:
-            'Минималната стойност на плъзгача за обхват е {{ min }}, максималната стойност е {{ max }}',
-        multipleHandle1ValueminDetails: 'Стойността е {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Стойността е {{ value }}',
-        multipleHandle1ValueNowDetails: 'Текущата стойност е {{ value }}',
+            'Минималната стойност на плъзгача за обхват е {min}, максималната стойност е {max}',
+        multipleHandle1ValueminDetails: 'Стойността е {value}',
+        multipleHandle1ValuemaxDetails: 'Стойността е {value}',
+        multipleHandle1ValueNowDetails: 'Текущата стойност е {value}',
         multipleHandle2MinMaxDetails:
-            'Минималната стойност на плъзгача за обхват е {{ min }}, максималната стойност е {{ max }}',
-        multipleHandle2ValueminDetails: 'Стойността е {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Стойността е {{ value }}',
-        multipleHandle2ValueNowDetails: 'Текущата стойност е {{ value }}'
+            'Минималната стойност на плъзгача за обхват е {min}, максималната стойност е {max}',
+        multipleHandle2ValueminDetails: 'Стойността е {value}',
+        multipleHandle2ValuemaxDetails: 'Стойността е {value}',
+        multipleHandle2ValueNowDetails: 'Текущата стойност е {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Повече възможности',
@@ -168,16 +147,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         ariaRoleDescription: 'жетон'
     },
     coreTokenizer: {
-        moreLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Още 1 елемент';
-                default:
-                    return 'Още {{ count }} елемента';
-            }
-        }
+        moreLabel: 'Още { count, plural, one {1 елемент} other {# елемента} }'
     },
     coreUploadCollection: {
         menuOkText: 'OK',
@@ -238,38 +208,11 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         messagesTeamRemoved: '1 отбор е премахнат',
         messagesErrorBuildGraph: 'Възникна грешка при опит за изграждане на графиката. Проверете първоначалните данни.',
         messagesUndoAction: 'Отмяна',
-        nodeMembersCount: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return '1 член';
-                default:
-                    return '{{ count }} членове';
-            }
-        },
+        nodeMembersCount: '{ count, plural, one {1 член} other {# членове} }',
         nodeVariousTeams: 'Различни екипи',
         nodeStatusDueToday: 'Предстои днес',
-        nodeStatusDueInXDays: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Предстои след 1 ден';
-                default:
-                    return 'Предстои след {{ count }} дни';
-            }
-        },
-        nodeStatusXDaysOverdue: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return '1 ден просрочие';
-                default:
-                    return '{{ count }} дни просрочие';
-            }
-        },
+        nodeStatusDueInXDays: 'Предстои след { count, plural, one {1 ден} other {# дни} }',
+        nodeStatusXDaysOverdue: '{ count, plural, one {1 ден} other {# дни} } просрочие',
         nodeActionAddApproversBefore: 'Добавете одобряващи преди',
         nodeActionAddApproversAfter: 'Добавете одобряващи след това',
         nodeActionAddApproversParallel: 'Добавете паралелни одобряващи',
@@ -290,7 +233,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         toolbarEditApprover: 'Редактирай на одобряващия',
         watchersInputPlaceholder: 'Търси тук...',
         userListSelectedItemsCountSingular: 'Избран е 1 елемент',
-        userListSelectedItemsCountPlural: 'Избрани са {{ count }} елементи',
+        userListSelectedItemsCountPlural: 'Избрани са {count} елементи',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -314,15 +257,15 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Скриване на филтрите',
         searchShowAllAdvancedSearchLabel: 'Показване на всички филтри',
         searchHideAllAdvancedSearchLabel: 'Скриване на всички филтри',
-        selectTabDisplayCountLabel: '({{ count }}) артикули',
+        selectTabDisplayCountLabel: '({count}) артикули',
         selectTabMoreBtnLabel: 'Повече',
-        selectTabCountHiddenA11yLabel: 'съдържа {{ rowCount }} ред(а) и {{ colCount }} колонa/и',
+        selectTabCountHiddenA11yLabel: 'съдържа {rowCount} ред(а) и {colCount} колонa/и',
         selectMobileTabBackBtnTitle: 'Обратно',
         selectMobileTabBtnOpenDialogLabel: 'Отвори диалоговия прозорец',
-        selectMobileTabTitle: '{{ title }} раздел',
+        selectMobileTabTitle: '{title} раздел',
         selectMobileConditionEmpty: 'Празен',
         defineConditionTitle: 'Продукт',
-        defineConditionSelectedValueHiddenA11yLabel: 'избрана стойност {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'избрана стойност {value}',
         defineConditionConditionsGroupHeaderInclude: 'Включи',
         defineConditionConditionsGroupHeaderExclude: 'Изключи',
         defineConditionFromPlaceholder: 'от',
@@ -343,23 +286,15 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'празно',
         defineConditionConditionStrategyLabelNotEqualTo: 'не е равно на',
         defineConditionConditionStrategyLabelNotEmpty: 'не празно',
-        defineConditionMaxCountError: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Въведи стойност с не повече от 1 символ';
-                default:
-                    return 'Въведи стойност с не повече от {{ count }} символа';
-            }
-        },
+        defineConditionMaxCountError:
+            'Въведи стойност с не повече от { count, plural, one {1 символ} other {# символа} }',
         selectTabTitle: 'Избери от списъка',
         searchTableEmptyMessage: 'Use the search to get results',
         defineTabTitle: 'Дефиниране на условия'
     },
     platformCombobox: {
         countListResultsSingular: '1 елемент от списъка с резултати',
-        countListResultsPlural: '{{ count }} елемента от списъка с резултати'
+        countListResultsPlural: '{count} елемента от списъка с резултати'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Избери Опции',
@@ -369,12 +304,12 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 символ над ограничението',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} символи над ограничението',
+        counterMessageCharactersOverTheLimitPlural: '{count} символи над ограничението',
         counterMessageCharactersRemainingSingular: 'Остава 1 символ',
-        counterMessageCharactersRemainingPlural: 'Остават {{ count }} символи'
+        counterMessageCharactersRemainingPlural: 'Остават {count} символи'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Медия: {{ media }}'
+        roleDescriptionWithMedia: 'Медия: {media}'
     },
     platformList: {
         loadingAriaLabel: 'зареждане'
@@ -392,22 +327,13 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         submitButtonTitle: 'Търси',
         searchInputLabel: 'Търси',
         synchronizeButtonTitle: 'Синхронизирай',
-        searchSuggestionMessage: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return 'Намерено е 1 предложение.';
-                default:
-                    return 'Намерени са {{ count }} предложения.';
-            }
-        },
+        searchSuggestionMessage: '{ count, plural, one {Намерено е 1 предложение} other {Намерени са # предложения} }.',
         searchSuggestionNavigateMessage: 'използвайте стрелки нагоре и надолу за навигация'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Търси',
         submitButtonLabel: 'Търси',
-        filtersButtonLabel: 'Филтри ({{ filtersCount }})',
+        filtersButtonLabel: 'Филтри ({filtersCount})',
         showFiltersButtonLabel: 'Покажи филтрите',
         hideFiltersButtonLabel: 'Скрий филтрите',
         defineConditionsRemoveConditionButtonTitle: 'Премахни Условие',
@@ -464,7 +390,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Търси',
         P13ColumnsDialogsShowSelected: 'Покажи избраните',
         P13ColumnsDialogShowAll: 'Покажи всички',
-        P13ColumnsDialogSelectAll: 'Покажи всички ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Покажи всички ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Отмени',
         P13ColumnsDialogMoveToTopBtn: 'Измести най-отгоре',
@@ -489,9 +415,9 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Да',
         P13FilterBooleanOptionFalse: 'Не',
         P13FilterDialogHeader: 'Филтрирано от',
-        P13FilterDialogIncludePanelTitleWithCount: 'Добави ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Добави ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Добави',
-        P13FilterDialogExcludePanelTitleWithCount: 'Изключи ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Изключи ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclude',
         P13FilterDialogRemoveFilterBtnTitle: 'Премахни Филтър',
         P13FilterDialoAddFilterBtnTitle: 'Добави Филтър',
@@ -524,7 +450,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Нефилтрирано)',
-        filterDialogFilterByLabel: 'Филтрирано по: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Филтрирано по: {filterLabel}',
         filterDialogFilterTitle: 'Филтър',
         filterDialogFilterBy: 'Филтрирано по',
         filterDialogConfirmBtnLabel: 'OK',
@@ -567,13 +493,13 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         moveToCloseBtn: 'Отмени',
         newFolderTitle: 'Нова папка',
         newFolderAtRootInputLabel: 'Име на новата папка',
-        newFolderAtFolderInputLabel: 'Име на новата папка вътре в {{ folderName }}',
+        newFolderAtFolderInputLabel: 'Име на новата папка вътре в {folderName}',
         newFolderInputPlaceholder: 'Пиши тук...',
-        newFolderInputErrorLabel: 'Максимум {{ count }} символ(а) позволени',
+        newFolderInputErrorLabel: 'Максимум {count} символ(а) позволени',
         newFolderDialogCreateBtnLabel: 'Създай',
         newFolderDialogCancelBtnLabel: 'Отмени',
         breadcrumbLabelAllFiles: 'Всички файлове',
-        breadcrumbLabelAllFilesWithTotal: 'Всички файлове ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'Всички файлове ({total})',
         searchPlaceholder: 'Търси',
         addBtnLabel: 'Добави',
         newFolderBtnLabel: 'Нова папка',
@@ -594,55 +520,51 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         dragDropAreaText: 'Плъзнете файлове за качване',
         noDataText: 'Няма намерени файлове',
         noDataDescription: 'Пуснете файлове за качване или използвайте бутона „Добави“.',
-        paginationTotal: 'Показване {{ from }}-{{ to }} от {{ total }}',
+        paginationTotal: 'Показване {from}-{to} от {total}',
         resultsPerPage: 'Резултати на страница',
-        messageCreateFailed: 'Неуспешно създадена {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} е създаден.',
-        messageUpdateVersionFailed: 'Неуспешно актуализиране на версията на {{ folderName }}.',
-        messageUpdateVersionSuccess: 'Версията на {{ folderName }} е актуализирана.',
-        messageFileRenameFailed: 'Неуспешно преименуване от "{{ from }}" на "{{ to }}."',
-        messageFileRenameSuccess: '"{{ from }}" беще преименуван на "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed:
-            'Неуспешно премахване на {{ foldersCount }} папки и {{ filesCount }} файлове.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} папки и {{ filesCount }} файлове бяха изтрити.',
-        messageRemoveFoldersFailed: 'Неуспешно премахване на {{ foldersCount }} папки.',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} папки са премахнати.',
-        messageRemoveFilesFailed: 'Неуспешно премахване на {{ filesCount }} файлове.',
-        messageRemoveFilesSuccess: '{{ filesCount }} файлове са премахнати.',
-        messageRemoveFileOrFolderFailed: 'Неуспешно премахване на {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} беше изтрита.',
-        messageMoveFoldersAndFilesFailed:
-            'Неуспешно преместване {{ foldersCount }} папки и {{ filesCount }} файлове в {{ to }}.',
-        messageMoveFoldersAndFilesSuccess:
-            '{{ foldersCount }} папки и {{ filesCount }} файлове са преместени в {{ to }}.',
-        messageMoveFoldersFailed: 'Неуспешно преместване {{ foldersCount }} папки в {{ to }}.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} папки беше преместена в {{ to }}.',
-        messageMoveFilesFailed: 'Неуспешно преместване {{ filesCount }} файлове в {{ to }}.',
-        messageMoveFilesSuccess: '{{ filesCount }} файлове бяха преместени в {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Неуспешно преместване {{ name }} в {{ to }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} е изместен(а) в {{ to }}.',
+        messageCreateFailed: 'Неуспешно създадена {folderName}.',
+        messageCreateSuccess: '{folderName} е създаден.',
+        messageUpdateVersionFailed: 'Неуспешно актуализиране на версията на {folderName}.',
+        messageUpdateVersionSuccess: 'Версията на {folderName} е актуализирана.',
+        messageFileRenameFailed: 'Неуспешно преименуване от "{from}" на "{to}."',
+        messageFileRenameSuccess: '"{from}" беще преименуван на "{to}".',
+        messageRemoveFoldersAndFilesFailed: 'Неуспешно премахване на {foldersCount} папки и {filesCount} файлове.',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount} папки и {filesCount} файлове бяха изтрити.',
+        messageRemoveFoldersFailed: 'Неуспешно премахване на {foldersCount} папки.',
+        messageRemoveFoldersSuccess: '{foldersCount} папки са премахнати.',
+        messageRemoveFilesFailed: 'Неуспешно премахване на {filesCount} файлове.',
+        messageRemoveFilesSuccess: '{filesCount} файлове са премахнати.',
+        messageRemoveFileOrFolderFailed: 'Неуспешно премахване на {name}.',
+        messageRemoveFileOrFolderSuccess: '{name} беше изтрита.',
+        messageMoveFoldersAndFilesFailed: 'Неуспешно преместване {foldersCount} папки и {filesCount} файлове в {to}.',
+        messageMoveFoldersAndFilesSuccess: '{foldersCount} папки и {filesCount} файлове са преместени в {to}.',
+        messageMoveFoldersFailed: 'Неуспешно преместване {foldersCount} папки в {to}.',
+        messageMoveFoldersSuccess: '{foldersCount} папки беше преместена в {to}.',
+        messageMoveFilesFailed: 'Неуспешно преместване {filesCount} файлове в {to}.',
+        messageMoveFilesSuccess: '{filesCount} файлове бяха преместени в {to}.',
+        messageMoveFileOrFolderFailed: 'Неуспешно преместване {name} в {to}.',
+        messageMoveFileOrFolderSuccess: '{name} е изместен(а) в {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Неуспешно преместване {{ foldersCount }} папки и {{ filesCount }} файлове от всички файлове.',
-        messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} папки and {{ filesCount }} файлове успешно преместени.',
-        messageMoveRootFoldersFailed: 'Неуспешно преместване {{ foldersCount }} папки за всички файлове.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} папки бяха преместени за всички файлове.',
-        messageMoveRootFilesFailed: 'Неуспешно преместване {{ filesCount }} файлове за всички файлове.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} файлове бяха изместени за всички файлове.',
-        messageMoveRootFileOrFolderFailed: 'Неуспешно преместване {{ name }} за всички файлове.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} е изместен за всички файлове.',
+            'Неуспешно преместване {foldersCount} папки и {filesCount} файлове от всички файлове.',
+        messageMoveRootFoldersAndFilesSuccess: '{foldersCount} папки and {filesCount} файлове успешно преместени.',
+        messageMoveRootFoldersFailed: 'Неуспешно преместване {foldersCount} папки за всички файлове.',
+        messageMoveRootFoldersSuccess: '{foldersCount} папки бяха преместени за всички файлове.',
+        messageMoveRootFilesFailed: 'Неуспешно преместване {filesCount} файлове за всички файлове.',
+        messageMoveRootFilesSuccess: '{filesCount} файлове бяха изместени за всички файлове.',
+        messageMoveRootFileOrFolderFailed: 'Неуспешно преместване {name} за всички файлове.',
+        messageMoveRootFileOrFolderSuccess: '{name} е изместен за всички файлове.',
         messageFileTypeMismatchPlural:
-            '{{ filesCount }} файлове имат грешно разширение. Позволени разширения: {{ allowedTypes }}.',
+            '{filesCount} файлове имат грешно разширение. Позволени разширения: {allowedTypes}.',
         messageFileTypeMismatchSingular:
-            'Файлът "{{ fileName }}" има грешно разширение. Позволени разширения: {{ allowedTypes }}.',
+            'Файлът "{fileName}" има грешно разширение. Позволени разширения: {allowedTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} файлове надвишават максималната големина на файла. Позволен максимален размер на файла: {{ maxFileSize }}.',
+            '{filesCount} файлове надвишават максималната големина на файла. Позволен максимален размер на файла: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'Файлът "{{ fileName }}" надвишава максималната големина на файла. Позволен максимален размер на файла: {{ maxFileSize }}.',
+            'Файлът "{fileName}" надвишава максималната големина на файла. Позволен максимален размер на файла: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} файлове надвишават максималната дължина на името на файла. Позволена дължина на името на файла: {{ maxFilenameLength }} символа.',
+            '{filesCount} файлове надвишават максималната дължина на името на файла. Позволена дължина на името на файла: {maxFilenameLength} символа.',
         messageFileNameLengthExceededSingular:
-            'Името "{{ fileName }}" надвишава максималната дължина на името на файла. Позволена дължина на името на файла: {{ maxFilenameLength }} символа.'
+            'Името "{fileName}" надвишава максималната дължина на името на файла. Позволена дължина на името на файла: {maxFilenameLength} символа.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редактирай'
@@ -689,10 +611,10 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         selectOptionLabel: 'Изберете опция'
     },
     fnSlider: {
-        minMaxDetails: 'Минималната стойност на плъзгача е {{ min }}, максималната стойност е {{ max }}',
-        valueminDetails: 'Стойността е {{ value }}',
-        valuemaxDetails: 'Стойността е {{ value }}',
-        valueNowDetails: 'Текущата стойност е {{ value }}'
+        minMaxDetails: 'Минималната стойност на плъзгача е {min}, максималната стойност е {max}',
+        valueminDetails: 'Стойността е {value}',
+        valuemaxDetails: 'Стойността е {value}',
+        valueNowDetails: 'Текущата стойност е {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Приеми',

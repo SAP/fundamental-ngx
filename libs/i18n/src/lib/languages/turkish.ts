@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_TURKISH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Hepsini seç ({{selectedItems}}/{{totalItems}})'
+        selectAllLabel: 'Hepsini seç ({selectedItems}/{totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Önceki öğeye git',
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Vazgeç',
-        listItemStatusAriaLabel: 'Eşyayı statü var. Statü: {{ status }}.',
-        listItemCounterAriaLabel: 'Eşyayı {{ count }} alt eşyası var.',
+        listItemStatusAriaLabel: 'Eşyayı statü var. Statü: {status}.',
+        listItemCounterAriaLabel: 'Eşyayı {count} alt eşyası var.',
         listItemButtonDetailsTitle: 'Detaylar',
         listItemButtonDeleteTitle: 'Sil',
         listItemStatusContainsErrors: 'Hata içerir',
@@ -47,31 +47,31 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Ağaç Öğesi {{ itemDetails }}, {{ index }} / {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Ağaç Öğesi {itemDetails}, {index} / {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} ürün daha'
+        moreItemsButton: '{count} ürün daha'
     },
     corePagination: {
-        pageLabel: 'Sayfa {{ pageNumber }}',
-        currentPageAriaLabel: 'Sayfa {{ pageNumber }} geçerli sayfadır',
+        pageLabel: 'Sayfa {pageNumber}',
+        currentPageAriaLabel: 'Sayfa {pageNumber} geçerli sayfadır',
         labelBeforeInputMobile: 'Sayfa:',
-        labelAfterInputMobile: 'of {{ totalCount }}',
-        inputAriaLabel: 'Sayfa girişi, Geçerli sayfa, Sayfa {{ pageNumber }} / {{ totalCount }}',
+        labelAfterInputMobile: 'of {totalCount}',
+        inputAriaLabel: 'Sayfa girişi, Geçerli sayfa, Sayfa {pageNumber} / {totalCount}',
         itemsPerPageLabel: 'Sayfa Başına Sonuçlar:',
         firstLabel: 'İlk',
         previousLabel: 'Önceki',
         nextLabel: 'Sonraki',
         lastLabel: 'Son',
         ariaLabel: 'Sayfalandırma',
-        totalResultsLabel: '{{ totalCount }} Sonuçlar'
+        totalResultsLabel: '{totalCount} Sonuçlar'
     },
     coreProductSwitch: {
         ariaLabel: 'Ürün Anahtarı'
@@ -82,18 +82,18 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: ' Kaydırıcının {{ min }} minimum değeri, {{ max }} maksimum değeri',
-        singleValueminDetails: 'Değer {{ value }}',
-        singleValuemaxDetails: 'Değer {{ value }}',
-        singleValueNowDetails: 'Geçerli değer {{ value }}',
-        multipleHandle1MinMaxDetails: ' Aralığı kaydırma  {{ min }} minimum değeri, {{ max }} maksimum değeri',
-        multipleHandle1ValueminDetails: 'Değer {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Değer {{ value }}',
-        multipleHandle1ValueNowDetails: 'Geçerli değer {{ value }}',
-        multipleHandle2MinMaxDetails: ' Aralığı kaydırma  {{ min }} minimum değeri, {{ max }} maksimum değeri',
-        multipleHandle2ValueminDetails: 'Değer {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Değer {{ value }}',
-        multipleHandle2ValueNowDetails: 'Geçerli değer  {{ value }}'
+        singleMinMaxDetails: ' Kaydırıcının {min} minimum değeri, {max} maksimum değeri',
+        singleValueminDetails: 'Değer {value}',
+        singleValuemaxDetails: 'Değer {value}',
+        singleValueNowDetails: 'Geçerli değer {value}',
+        multipleHandle1MinMaxDetails: ' Aralığı kaydırma  {min} minimum değeri, {max} maksimum değeri',
+        multipleHandle1ValueminDetails: 'Değer {value}',
+        multipleHandle1ValuemaxDetails: 'Değer {value}',
+        multipleHandle1ValueNowDetails: 'Geçerli değer {value}',
+        multipleHandle2MinMaxDetails: ' Aralığı kaydırma  {min} minimum değeri, {max} maksimum değeri',
+        multipleHandle2ValueminDetails: 'Değer {value}',
+        multipleHandle2ValuemaxDetails: 'Değer {value}',
+        multipleHandle2ValueNowDetails: 'Geçerli değer  {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Daha fazla hareket',
@@ -144,7 +144,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         ariaRoleDescription: 'jeton'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} ürün daha'
+        moreLabel: '{count} ürün daha'
     },
     coreUploadCollection: {
         menuOkText: 'Tamam',
@@ -205,11 +205,11 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         messagesTeamRemoved: '1 takım kaldırıldı',
         messagesErrorBuildGraph: 'Grafik oluşturulurken bir hata oluştu. İlk verileri kontrol edi.',
         messagesUndoAction: 'Geri almak',
-        nodeMembersCount: '{{ count }} üyeler',
+        nodeMembersCount: '{count} üyeler',
         nodeVariousTeams: 'Çeşitli takımlar',
         nodeStatusDueToday: 'Bugün teslim tarihi',
-        nodeStatusDueInXDays: ' {{ count }} gün içinde vadesi doluyor',
-        nodeStatusXDaysOverdue: '{{ count }} gecikmiş gün',
+        nodeStatusDueInXDays: ' {count} gün içinde vadesi doluyor',
+        nodeStatusXDaysOverdue: '{count} gecikmiş gün',
         nodeActionAddApproversBefore: 'Daha önce onaylayanlar ekleme',
         nodeActionAddApproversAfter: 'Onaylayanları afte ekler',
         nodeActionAddApproversParallel: 'Paralel onaylayanlar ekleme',
@@ -230,7 +230,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         toolbarEditApprover: 'Onaylayanı düzenle',
         watchersInputPlaceholder: 'Burada ara..',
         userListSelectedItemsCountSingular: '1 eşyayı seçildi',
-        userListSelectedItemsCountPlural: '{{ count }} eşyayılar seçildi',
+        userListSelectedItemsCountPlural: '{count} eşyayılar seçildi',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -254,15 +254,15 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Filtreleri gizles',
         searchShowAllAdvancedSearchLabel: 'Tüm filtreleri göster',
         searchHideAllAdvancedSearchLabel: 'Tüm filtreleri gizle',
-        selectTabDisplayCountLabel: 'Eşyayı ({{ count }})',
+        selectTabDisplayCountLabel: 'Eşyayı ({count})',
         selectTabMoreBtnLabel: 'Daha',
-        selectTabCountHiddenA11yLabel: '{{ rowCount }} satır ve {{ colCount }} sütun içerir',
+        selectTabCountHiddenA11yLabel: '{rowCount} satır ve {colCount} sütun içerir',
         selectMobileTabBackBtnTitle: 'Geri',
         selectMobileTabBtnOpenDialogLabel: 'İletişim kutusunu aç',
-        selectMobileTabTitle: '{{ title }} sekmesi',
+        selectMobileTabTitle: '{title} sekmesi',
         selectMobileConditionEmpty: 'Boş',
         defineConditionTitle: 'Ürün',
-        defineConditionSelectedValueHiddenA11yLabel: ' {{ value }} seçilen değer',
+        defineConditionSelectedValueHiddenA11yLabel: ' {value} seçilen değer',
         defineConditionConditionsGroupHeaderInclude: 'Dahil et',
         defineConditionConditionsGroupHeaderExclude: 'Dışla',
         defineConditionFromPlaceholder: 'dan',
@@ -283,14 +283,14 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'boş',
         defineConditionConditionStrategyLabelNotEqualTo: 'eşit değil',
         defineConditionConditionStrategyLabelNotEmpty: 'boş değil',
-        defineConditionMaxCountError: '{{ count }} karakterden fazla olmayan bir değer gir',
+        defineConditionMaxCountError: '{count} karakterden fazla olmayan bir değer gir',
         selectTabTitle: 'Listeden seç',
         searchTableEmptyMessage: 'Sonuçları almak için aramayı kullanın',
         defineTabTitle: 'Koşulları Tanımla'
     },
     platformCombobox: {
         countListResultsSingular: '1 sonuç listesi eşyayı',
-        countListResultsPlural: '{{ count }} sonuç listesi eşyayılar'
+        countListResultsPlural: '{count} sonuç listesi eşyayılar'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: "Seçenekler'i seçin",
@@ -300,12 +300,12 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 karakter sınırın üzerinde',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }}  karakter sınırı aşıyor',
+        counterMessageCharactersOverTheLimitPlural: '{count}  karakter sınırı aşıyor',
         counterMessageCharactersRemainingSingular: '1 karakter kaldı',
-        counterMessageCharactersRemainingPlural: '{{ count }}  karakterler kaldı'
+        counterMessageCharactersRemainingPlural: '{count}  karakterler kaldı'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Medya: {{ media }}'
+        roleDescriptionWithMedia: 'Medya: {media}'
     },
     platformList: {
         loadingAriaLabel: 'yükleniyor'
@@ -323,13 +323,13 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         submitButtonTitle: 'Ara',
         searchInputLabel: 'Ara',
         synchronizeButtonTitle: 'Senkronize',
-        searchSuggestionMessage: '{{ count }} öneri bulundu.',
+        searchSuggestionMessage: '{count} öneri bulundu.',
         searchSuggestionNavigateMessage: 'gezinmek için yukarı ve aşağı okları kullanın'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Ara',
         submitButtonLabel: 'Git',
-        filtersButtonLabel: 'Filtreler ({{ filtersCount }})',
+        filtersButtonLabel: 'Filtreler ({filtersCount})',
         showFiltersButtonLabel: 'Filtreleri göster',
         hideFiltersButtonLabel: 'Filtreleri gizle',
         defineConditionsRemoveConditionButtonTitle: 'Koşullu kaldır',
@@ -386,7 +386,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Ara',
         P13ColumnsDialogsShowSelected: 'Seçilenleri Göster',
         P13ColumnsDialogShowAll: 'Hepsini Göster',
-        P13ColumnsDialogSelectAll: 'Hepsini ({{ selectedColumnsCount }}/{{ selectableColumnsCount }}) seç',
+        P13ColumnsDialogSelectAll: 'Hepsini ({selectedColumnsCount}/{selectableColumnsCount}) seç',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Vazgeç',
         P13ColumnsDialogMoveToTopBtn: 'Yukarı Taşı',
@@ -411,9 +411,9 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Evet',
         P13FilterBooleanOptionFalse: 'Hayır',
         P13FilterDialogHeader: 'Tarafından filtre',
-        P13FilterDialogIncludePanelTitleWithCount: 'Include ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Include ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Include',
-        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclude',
         P13FilterDialogRemoveFilterBtnTitle: 'Filtre kaldır',
         P13FilterDialoAddFilterBtnTitle: 'Filtre ekle',
@@ -446,7 +446,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Filtrelenmemiş)',
-        filterDialogFilterByLabel: 'Filtreleme ölçütü: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filtreleme ölçütü: {filterLabel}',
         filterDialogFilterTitle: 'Filtre',
         filterDialogFilterBy: 'Filtreleme ölçütü',
         filterDialogConfirmBtnLabel: 'OK',
@@ -489,13 +489,13 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         moveToCloseBtn: 'Vazgeç',
         newFolderTitle: 'Yeni Dizinr',
         newFolderAtRootInputLabel: 'Yeni Dizin adı',
-        newFolderAtFolderInputLabel: '{{ folderName }} içindeki yeni dizin adı',
+        newFolderAtFolderInputLabel: '{folderName} içindeki yeni dizin adı',
         newFolderInputPlaceholder: 'Buraya yaz..',
-        newFolderInputErrorLabel: 'Maksimum {{ count }} karaktere izin verilir',
+        newFolderInputErrorLabel: 'Maksimum {count} karaktere izin verilir',
         newFolderDialogCreateBtnLabel: 'Oluşturma',
         newFolderDialogCancelBtnLabel: 'Vazgeç',
         breadcrumbLabelAllFiles: 'Tüm dosyalar',
-        breadcrumbLabelAllFilesWithTotal: 'Tüm dosyalar ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'Tüm dosyalar ({total})',
         searchPlaceholder: 'Ara',
         addBtnLabel: 'Ekle',
         newFolderBtnLabel: 'Yeni Dizin',
@@ -516,53 +516,50 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         dragDropAreaText: 'Yüklenecek dosyaları sürükleyin',
         noDataText: 'Dosya bulunamadı',
         noDataDescription: 'Yüklenecek dosyaları bırakın veya “Ekle” düğmesini kullanın.',
-        paginationTotal: '{{ total }}/{{ from }}-{{ to }} arasında gösteriliyor',
+        paginationTotal: '{total}/{from}-{to} arasında gösteriliyor',
         resultsPerPage: 'Sayfa başına sonuç',
-        messageCreateFailed: '{{ folderName }} oluşturulamadı.',
-        messageCreateSuccess: '{{ folderName }} oluşturuladı.',
-        messageUpdateVersionFailed: '{{ folderName }} sürümü güncellenemedi.',
-        messageUpdateVersionSuccess: '{{ folderName }} sürümü güncellendi.',
-        messageFileRenameFailed: '"{{ from }}" olarak yeniden adlandırılamadı "{{ to }}"',
-        messageFileRenameSuccess: '"{{ from }}", "{{ to }}" olarak yeniden adlandırıldı.',
-        messageRemoveFoldersAndFilesFailed: '{{ foldersCount }} dizin ve {{ filesCout }} dosya kaldırılamadı.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} dizinleri ve {{ filesCount }} dosyaları kaldırıldı.',
-        messageRemoveFoldersFailed: '{{ foldersCount }} dizinleri kaldırılamadı',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} dizinleri kaldırıladı.',
-        messageRemoveFilesFailed: '{{ filesCount }} dosyaları kaldırılamadı.',
-        messageRemoveFilesSuccess: '{{ filesCount }}  dosyaları kaldırıldı.',
-        messageRemoveFileOrFolderFailed: ' {{ name }} kaldırılamadı.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} kaldırıldı.',
-        messageMoveFoldersAndFilesFailed:
-            '{{ foldersCount }} dizini ve {{ filesCount }} dosyası, {{ to }}  taşınamadı.',
-        messageMoveFoldersAndFilesSuccess: '{{ foldersCount }} dizini ve {{ filesCount }} dosyası, {{ to }}  taşınadı.',
-        messageMoveFoldersFailed: '{{ foldersCount }} dizini, {{ to }}  taşınamadı.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} dizini, {{ to }}  taşınadı.',
-        messageMoveFilesFailed: '{{ filesCount }} dosyası, {{ to }}  taşınamadı.',
-        messageMoveFilesSuccess: '{{ filesCount }} dosyası, {{ to }}  taşınadı.',
-        messageMoveFileOrFolderFailed: '{{ name }}, {{ to }} taşınamadı.',
-        messageMoveFileOrFolderSuccess: '{{ name }}, {{ to }} taşınadı.',
+        messageCreateFailed: '{folderName} oluşturulamadı.',
+        messageCreateSuccess: '{folderName} oluşturuladı.',
+        messageUpdateVersionFailed: '{folderName} sürümü güncellenemedi.',
+        messageUpdateVersionSuccess: '{folderName} sürümü güncellendi.',
+        messageFileRenameFailed: '"{from}" olarak yeniden adlandırılamadı "{to}"',
+        messageFileRenameSuccess: '"{from}", "{to}" olarak yeniden adlandırıldı.',
+        messageRemoveFoldersAndFilesFailed: '{foldersCount} dizin ve {filesCout} dosya kaldırılamadı.',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount} dizinleri ve {filesCount} dosyaları kaldırıldı.',
+        messageRemoveFoldersFailed: '{foldersCount} dizinleri kaldırılamadı',
+        messageRemoveFoldersSuccess: '{foldersCount} dizinleri kaldırıladı.',
+        messageRemoveFilesFailed: '{filesCount} dosyaları kaldırılamadı.',
+        messageRemoveFilesSuccess: '{filesCount}  dosyaları kaldırıldı.',
+        messageRemoveFileOrFolderFailed: ' {name} kaldırılamadı.',
+        messageRemoveFileOrFolderSuccess: '{name} kaldırıldı.',
+        messageMoveFoldersAndFilesFailed: '{foldersCount} dizini ve {filesCount} dosyası, {to}  taşınamadı.',
+        messageMoveFoldersAndFilesSuccess: '{foldersCount} dizini ve {filesCount} dosyası, {to}  taşınadı.',
+        messageMoveFoldersFailed: '{foldersCount} dizini, {to}  taşınamadı.',
+        messageMoveFoldersSuccess: '{foldersCount} dizini, {to}  taşınadı.',
+        messageMoveFilesFailed: '{filesCount} dosyası, {to}  taşınamadı.',
+        messageMoveFilesSuccess: '{filesCount} dosyası, {to}  taşınadı.',
+        messageMoveFileOrFolderFailed: '{name}, {to} taşınamadı.',
+        messageMoveFileOrFolderSuccess: '{name}, {to} taşınadı.',
         messageMoveRootFoldersAndFilesFailed:
-            '{{ foldersCount }} dizinleri ve {{ filesCount }} dosyaları tüm dosyalara taşınamadı.',
+            '{foldersCount} dizinleri ve {filesCount} dosyaları tüm dosyalara taşınamadı.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} dizinleri ve {{ filesCount }} dosyaları tüm dosyalara taşınadı.',
-        messageMoveRootFoldersFailed: '{{ foldersCount }} dizini tüm dosyalara taşınamadı.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} dizinler tüm dosyalara taşındı.',
-        messageMoveRootFilesFailed: '{{ filesCount }} dosyası tüm dosyalara taşınamadı.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} dizinler tüm dosyalara taşındı.',
-        messageMoveRootFileOrFolderFailed: '{{ name }} tüm dosyalara taşınamadı.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} tüm dosyalara taşındı.',
-        messageFileTypeMismatchPlural:
-            '{{ filesCount }} dosyalarının türü yanlış. İzin verilen türler: {{ allowedTypes }}.',
-        messageFileTypeMismatchSingular:
-            '"{{ fileName }}" dosyasının türü yanlış. İzin verilen türler: {{ allowedTypes }}.',
+            '{foldersCount} dizinleri ve {filesCount} dosyaları tüm dosyalara taşınadı.',
+        messageMoveRootFoldersFailed: '{foldersCount} dizini tüm dosyalara taşınamadı.',
+        messageMoveRootFoldersSuccess: '{foldersCount} dizinler tüm dosyalara taşındı.',
+        messageMoveRootFilesFailed: '{filesCount} dosyası tüm dosyalara taşınamadı.',
+        messageMoveRootFilesSuccess: '{filesCount} dizinler tüm dosyalara taşındı.',
+        messageMoveRootFileOrFolderFailed: '{name} tüm dosyalara taşınamadı.',
+        messageMoveRootFileOrFolderSuccess: '{name} tüm dosyalara taşındı.',
+        messageFileTypeMismatchPlural: '{filesCount} dosyalarının türü yanlış. İzin verilen türler: {allowedTypes}.',
+        messageFileTypeMismatchSingular: '"{fileName}" dosyasının türü yanlış. İzin verilen türler: {allowedTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} dosya maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {{ maxFileSize }}.',
+            '{filesCount} dosya maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            '"{{ fileName }}" dosyası maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {{ maxFileSize }}.',
+            '"{fileName}" dosyası maksimum dosya boyutunu aştı. İzin verilen maksimum dosya boyutu: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} dosya maksimum dosya adı uzunluğunu aştı. İzin verilen dosya adı uzunluğu: {{ maxFilenameLength }} karakter.',
+            '{filesCount} dosya maksimum dosya adı uzunluğunu aştı. İzin verilen dosya adı uzunluğu: {maxFilenameLength} karakter.',
         messageFileNameLengthExceededSingular:
-            '"{{ fileName }}", maksimum dosya adı uzunluğunu aştı. İzin verilen dosya adı uzunluğu: {{ maxFilenameLength }} karakter.'
+            '"{fileName}", maksimum dosya adı uzunluğunu aştı. İzin verilen dosya adı uzunluğu: {maxFilenameLength} karakter.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Düzenle'
@@ -609,10 +606,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         selectOptionLabel: 'Bir seçenek seçin'
     },
     fnSlider: {
-        minMaxDetails: 'Kaydırıcının {{ min }} minimum değeri, {{ max }} maksimum değeri',
-        valueminDetails: 'Değer {{ value }}',
-        valuemaxDetails: 'Değer {{ value }}',
-        valueNowDetails: 'Geçerli değer  {{ value }}'
+        minMaxDetails: 'Kaydırıcının {min} minimum değeri, {max} maksimum değeri',
+        valueminDetails: 'Değer {value}',
+        valuemaxDetails: 'Değer {value}',
+        valueNowDetails: 'Geçerli değer  {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Kabul et',

@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Selekto të gjitha ({{ selectedItems }} nga {{ totalItems }})'
+        selectAllLabel: 'Selekto të gjitha ({selectedItems} nga {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Shko te artikulli i mëparshëm',
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anulo',
-        listItemStatusAriaLabel: 'Artikulli ka status. Statusi: {{ status }}.',
-        listItemCounterAriaLabel: 'Artikulli ka {{ count }} nënartikuj.',
+        listItemStatusAriaLabel: 'Artikulli ka status. Statusi: {status}.',
+        listItemCounterAriaLabel: 'Artikulli ka {count} nënartikuj.',
         listItemButtonDetailsTitle: 'Detaje',
         listItemButtonDeleteTitle: 'Fshi',
         listItemStatusContainsErrors: 'Përmban gabime.',
@@ -47,37 +47,31 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Artikulli i pemës {{ itemDetails }}, {{ index }} nga {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Artikulli i pemës {itemDetails}, {index} nga {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: (params) => {
-            const count = params['count'];
-            if (count === 1) {
-                return '1 artikuj më shumë';
-            }
-            return `${count} artikuj të tjerë`;
-        }
+        moreItemsButton: '{count} artikuj { count, plural, one {më shumë} other {të tjerë} }'
     },
     corePagination: {
-        pageLabel: 'Faqja {{ pageNumber }}',
-        currentPageAriaLabel: 'Faqja {{ pageNumber }} është faqja aktuale',
+        pageLabel: 'Faqja {pageNumber}',
+        currentPageAriaLabel: 'Faqja {pageNumber} është faqja aktuale',
         labelBeforeInputMobile: 'Faqja:',
-        labelAfterInputMobile: 'nga {{ totalCount }}',
-        inputAriaLabel: 'Hyrja e faqes, Faqja aktuale, Faqja {{pageNumber }} nga {{ TotalCount }}',
+        labelAfterInputMobile: 'nga {totalCount}',
+        inputAriaLabel: 'Hyrja e faqes, Faqja aktuale, Faqja {pageNumber} nga {TotalCount}',
         itemsPerPageLabel: 'Rezultatet për faqe:',
         firstLabel: 'Së pari',
         previousLabel: 'E mëparshme',
         nextLabel: 'Tjetër',
         lastLabel: 'E fundit',
         ariaLabel: 'Faqimi',
-        totalResultsLabel: '{{ totalCount }} Rezultate'
+        totalResultsLabel: '{totalCount} Rezultate'
     },
     coreProductSwitch: {
         ariaLabel: 'Ndërprerësi i produktit'
@@ -88,18 +82,18 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
-        singleValueminDetails: 'Vlera është {{ value }}',
-        singleValuemaxDetails: 'Vlera është  {{ value }}',
-        singleValueNowDetails: 'Vlera aktuale është {{ value }}',
-        multipleHandle1MinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
-        multipleHandle1ValueminDetails: 'Vlera është  {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Vlera është {{ value }}',
-        multipleHandle1ValueNowDetails: 'Vlera aktuale është{{ value }}',
-        multipleHandle2MinMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është{{ max }}',
-        multipleHandle2ValueminDetails: 'Vlera është {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Vlera është {{ value }}',
-        multipleHandle2ValueNowDetails: 'Vlera aktuale është {{ value }}'
+        singleMinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}',
+        singleValueminDetails: 'Vlera është {value}',
+        singleValuemaxDetails: 'Vlera është  {value}',
+        singleValueNowDetails: 'Vlera aktuale është {value}',
+        multipleHandle1MinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}',
+        multipleHandle1ValueminDetails: 'Vlera është  {value}',
+        multipleHandle1ValuemaxDetails: 'Vlera është {value}',
+        multipleHandle1ValueNowDetails: 'Vlera aktuale është{value}',
+        multipleHandle2MinMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është{max}',
+        multipleHandle2ValueminDetails: 'Vlera është {value}',
+        multipleHandle2ValuemaxDetails: 'Vlera është {value}',
+        multipleHandle2ValueNowDetails: 'Vlera aktuale është {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Më shumë veprime',
@@ -151,13 +145,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         ariaRoleDescription: 'shenjë'
     },
     coreTokenizer: {
-        moreLabel: (params) => {
-            const count = params['count'];
-            if (count === 1) {
-                return '1 artikuj më shumë';
-            }
-            return `${count} artikuj të tjerë`;
-        }
+        moreLabel: '{count} artikuj { count, plural, one {më shumë} other {të tjerë} }'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
@@ -219,11 +207,11 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         messagesErrorBuildGraph:
             'Pati një gabim gjatë përpjekjes për të ndërtuar grafikun. Kontrolloni të dhënat fillestare.',
         messagesUndoAction: 'Zhbëj',
-        nodeMembersCount: '{{ count }} anëtarë',
+        nodeMembersCount: '{count} anëtarë',
         nodeVariousTeams: 'Skuadra të ndryshme',
         nodeStatusDueToday: 'Afati kohor është sot',
-        nodeStatusDueInXDays: ' Afati kohor në {{ count }} ditë',
-        nodeStatusXDaysOverdue: '{{ count }} ditë me vonesë',
+        nodeStatusDueInXDays: ' Afati kohor në {count} ditë',
+        nodeStatusXDaysOverdue: '{count} ditë me vonesë',
         nodeActionAddApproversBefore: 'Shto miratues më parë',
         nodeActionAddApproversAfter: 'Shto miratues më pas',
         nodeActionAddApproversParallel: 'Shto miratues paralel',
@@ -244,7 +232,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarEditApprover: 'Redakto miratuesin',
         watchersInputPlaceholder: 'Kërko këtu..',
         userListSelectedItemsCountSingular: '1 artikull i zgjedhur',
-        userListSelectedItemsCountPlural: '{{ count }} artikujt të zgjedhur',
+        userListSelectedItemsCountPlural: '{count} artikujt të zgjedhur',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -268,15 +256,15 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Fshih filtrat',
         searchShowAllAdvancedSearchLabel: 'Shfaq të gjithë filtrat',
         searchHideAllAdvancedSearchLabel: 'Fshih të gjithë filtrat',
-        selectTabDisplayCountLabel: 'Artikujt ({{ count }})',
+        selectTabDisplayCountLabel: 'Artikujt ({count})',
         selectTabMoreBtnLabel: 'Më shumë',
-        selectTabCountHiddenA11yLabel: 'përmban {{ rowCount }} rreshta dhe {{ colCount }} kolona',
+        selectTabCountHiddenA11yLabel: 'përmban {rowCount} rreshta dhe {colCount} kolona',
         selectMobileTabBackBtnTitle: 'Pas',
         selectMobileTabBtnOpenDialogLabel: 'Hap dialogun',
-        selectMobileTabTitle: '{{ title }} skeda',
+        selectMobileTabTitle: '{title} skeda',
         selectMobileConditionEmpty: 'Bosh',
         defineConditionTitle: 'Produkt',
-        defineConditionSelectedValueHiddenA11yLabel: 'vlera e zgjedhur {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'vlera e zgjedhur {value}',
         defineConditionConditionsGroupHeaderInclude: 'Përfshij',
         defineConditionConditionsGroupHeaderExclude: 'Përjashto',
         defineConditionFromPlaceholder: 'nga',
@@ -297,14 +285,14 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'bosh',
         defineConditionConditionStrategyLabelNotEqualTo: 'jo e barabartë me',
         defineConditionConditionStrategyLabelNotEmpty: 'jo bosh',
-        defineConditionMaxCountError: 'Shto një vlerë me jo më shumë se {{ count }} karaktere.',
+        defineConditionMaxCountError: 'Shto një vlerë me jo më shumë se {count} karaktere.',
         selectTabTitle: 'Zgjidh nga lista',
         searchTableEmptyMessage: 'Përdor kërkimin për të marrë rezultate',
         defineTabTitle: 'Përcaktoni kushtet'
     },
     platformCombobox: {
         countListResultsSingular: '1 artikull i listës së rezultateve',
-        countListResultsPlural: '{{ count }} artikujt e listës së rezultateve'
+        countListResultsPlural: '{count} artikujt e listës së rezultateve'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Zgjidhni Opsionet',
@@ -314,12 +302,12 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 karakter mbi limitin ',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} karaktere mbi limitin',
+        counterMessageCharactersOverTheLimitPlural: '{count} karaktere mbi limitin',
         counterMessageCharactersRemainingSingular: '1 karakter i mbetur',
-        counterMessageCharactersRemainingPlural: '{{ count }} karaktere të mbetur'
+        counterMessageCharactersRemainingPlural: '{count} karaktere të mbetur'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Media: {{ media }}'
+        roleDescriptionWithMedia: 'Media: {media}'
     },
     platformList: {
         loadingAriaLabel: 'duke u ngarkuar'
@@ -337,13 +325,13 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         submitButtonTitle: 'Kërko',
         searchInputLabel: 'Kërko',
         synchronizeButtonTitle: 'Sinkronizo',
-        searchSuggestionMessage: '{{ count }} sugjerime u gjetën.',
+        searchSuggestionMessage: '{count} sugjerime u gjetën.',
         searchSuggestionNavigateMessage: 'përdor shigjetat lart e poshtë për të lundruar'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Kërko',
         submitButtonLabel: 'Shko',
-        filtersButtonLabel: 'Filtrat ({{ filtersCount }})',
+        filtersButtonLabel: 'Filtrat ({filtersCount})',
         showFiltersButtonLabel: 'Shfaq filtrat',
         hideFiltersButtonLabel: 'Fshih filtrat',
         defineConditionsRemoveConditionButtonTitle: 'Hiq kushtin',
@@ -400,7 +388,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Kërko',
         P13ColumnsDialogsShowSelected: 'Shfaq të zgjedhurat',
         P13ColumnsDialogShowAll: 'Shfaq të gjitha',
-        P13ColumnsDialogSelectAll: 'Përzgjidh të gjitha ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Përzgjidh të gjitha ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Anulo',
         P13ColumnsDialogMoveToTopBtn: 'Kalo në krye',
@@ -425,9 +413,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Po',
         P13FilterBooleanOptionFalse: 'Jo',
         P13FilterDialogHeader: 'Filtro sipas',
-        P13FilterDialogIncludePanelTitleWithCount: 'Përfshi ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Përfshi ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Përfshi',
-        P13FilterDialogExcludePanelTitleWithCount: 'Përjashto ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Përjashto ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Përjashto',
         P13FilterDialogRemoveFilterBtnTitle: 'Hiq filtrin',
         P13FilterDialoAddFilterBtnTitle: 'Shto filtrin',
@@ -460,7 +448,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
-        filterDialogFilterByLabel: 'Filtro sipas: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filtro sipas: {filterLabel}',
         filterDialogFilterTitle: 'Filtro',
         filterDialogFilterBy: 'Filtro sipas',
         filterDialogConfirmBtnLabel: 'OK',
@@ -503,9 +491,9 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         moveToCloseBtn: 'Anulo',
         newFolderTitle: 'Dosje e re',
         newFolderAtRootInputLabel: 'Emëro një dosje të re',
-        newFolderAtFolderInputLabel: 'Emëro një dosje të re brenda {{ folderName }}',
+        newFolderAtFolderInputLabel: 'Emëro një dosje të re brenda {folderName}',
         newFolderInputPlaceholder: 'Shkruaj këtu..',
-        newFolderInputErrorLabel: 'Maksimuni i karaktereve te lejuara është {{ count }}',
+        newFolderInputErrorLabel: 'Maksimuni i karaktereve te lejuara është {count}',
         newFolderDialogCreateBtnLabel: 'Krijo',
         newFolderDialogCancelBtnLabel: 'Anulo',
         breadcrumbLabelAllFiles: 'Të gjithë skedarët',
@@ -530,54 +518,51 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         dragDropAreaText: 'Tërhiq skedarët për t`i ngarkuar',
         noDataText: 'Nuk u gjet asnjë skedar',
         noDataDescription: 'Hidhni skedarët për të ngarkuar ose përdorni butonin "Shto".',
-        paginationTotal: 'Po shfaqen {{ from }}-{{ to }} nga {{ total }}',
+        paginationTotal: 'Po shfaqen {from}-{to} nga {total}',
         resultsPerPage: 'Rezultatet për faqe',
-        messageCreateFailed: 'Dështoj krijimi i {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} është krijuar.',
-        messageUpdateVersionFailed: 'Përditësimi i versionit të dështoi {{ folderName }}.',
-        messageUpdateVersionSuccess: '{{ folderName }} versioni është përditësuar.',
-        messageFileRenameFailed: 'Riemërtimi nga "{{ from }}" në "{{ to }}  dështoi."',
-        messageFileRenameSuccess: '"{{ from }}" është riemërtuar në "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed:
-            'Dështoi për të hequr {{ foldersCount }} dosje dhe {{ filesCount }} skedare.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} dojse he {{ filesCount }} skedare janë hequr.',
-        messageRemoveFoldersFailed: 'Dështoi për të hequr {{ foldersCount }} dosje.',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} dosje janë hequr.',
-        messageRemoveFilesFailed: 'Dështoi për të hequr {{ filesCount }} skedare.',
-        messageRemoveFilesSuccess: '{{ filesCount }} skedare janë hequr.',
-        messageRemoveFileOrFolderFailed: 'Dështoi për të hequr {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} ështe hequr.',
+        messageCreateFailed: 'Dështoj krijimi i {folderName}.',
+        messageCreateSuccess: '{folderName} është krijuar.',
+        messageUpdateVersionFailed: 'Përditësimi i versionit të dështoi {folderName}.',
+        messageUpdateVersionSuccess: '{folderName} versioni është përditësuar.',
+        messageFileRenameFailed: 'Riemërtimi nga "{from}" në "{to}  dështoi."',
+        messageFileRenameSuccess: '"{from}" është riemërtuar në "{to}".',
+        messageRemoveFoldersAndFilesFailed: 'Dështoi për të hequr {foldersCount} dosje dhe {filesCount} skedare.',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount} dojse he {filesCount} skedare janë hequr.',
+        messageRemoveFoldersFailed: 'Dështoi për të hequr {foldersCount} dosje.',
+        messageRemoveFoldersSuccess: '{foldersCount} dosje janë hequr.',
+        messageRemoveFilesFailed: 'Dështoi për të hequr {filesCount} skedare.',
+        messageRemoveFilesSuccess: '{filesCount} skedare janë hequr.',
+        messageRemoveFileOrFolderFailed: 'Dështoi për të hequr {name}.',
+        messageRemoveFileOrFolderSuccess: '{name} ështe hequr.',
         messageMoveFoldersAndFilesFailed:
-            'Zhvendosja e dosjeve {{ foldersCount }} dhe skedarët {{ filesCount }} në {{ to }} dështoi.',
-        messageMoveFoldersAndFilesSuccess: '{{ foldersCount }} dosje dhe {{ filesCount }} janë zhvendosur në {{ to }}.',
-        messageMoveFoldersFailed: 'Zhvendosja e dosjeve {{ foldersCount }} dështoi në {{ to }}.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} dosje janë zhvendosur në{{ to }}.',
-        messageMoveFilesFailed: 'Zhvendosja e  {{ filesCount }} skedarëve në {{ to }} ka dështuar.',
-        messageMoveFilesSuccess: '{{ filesCount }} dosje janë zhvendosur në {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Lëvizja e {{ name }} në {{ to }} ka dështuar.',
-        messageMoveFileOrFolderSuccess: '{{ name }} është zhvendosur në {{ to }}.',
+            'Zhvendosja e dosjeve {foldersCount} dhe skedarët {filesCount} në {to} dështoi.',
+        messageMoveFoldersAndFilesSuccess: '{foldersCount} dosje dhe {filesCount} janë zhvendosur në {to}.',
+        messageMoveFoldersFailed: 'Zhvendosja e dosjeve {foldersCount} dështoi në {to}.',
+        messageMoveFoldersSuccess: '{foldersCount} dosje janë zhvendosur në{to}.',
+        messageMoveFilesFailed: 'Zhvendosja e  {filesCount} skedarëve në {to} ka dështuar.',
+        messageMoveFilesSuccess: '{filesCount} dosje janë zhvendosur në {to}.',
+        messageMoveFileOrFolderFailed: 'Lëvizja e {name} në {to} ka dështuar.',
+        messageMoveFileOrFolderSuccess: '{name} është zhvendosur në {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Zhvendosja e skedarëve {{ foldersCount }} dhe {{ filesCount }} në të gjithë skedarët ka dështuar.',
+            'Zhvendosja e skedarëve {foldersCount} dhe {filesCount} në të gjithë skedarët ka dështuar.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} dosje dhe {{ filesCount }} skedarë janë zhvendosur në të gjithë skedarët.',
-        messageMoveRootFoldersFailed: 'Zhvendosja e dosjeve {{ foldersCount }} në të gjithë skedarët dështoi.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} dosje janë zhvendosur në të gjithë skedarët.',
-        messageMoveRootFilesFailed: 'Zhvendosja e skedarëve {{ filesCount }} në të gjithë skedarët dështoi.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} skedare janë zhvendosur në të gjithë skedarët.',
-        messageMoveRootFileOrFolderFailed: 'Zhvendosja e {{ emri }} te të gjithë skedarët ka dështuar.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} është zhvendosur në të gjithë skedarët.',
-        messageFileTypeMismatchPlural:
-            '{{ filesCount }} skedarët kanë llojin e gabuar. Llojet e lejuara: {{ allowedTypes }}.',
-        messageFileTypeMismatchSingular:
-            'Skedari "{{ fileName }}" ka llojin e gabuar. Llojet e lejuara: {{ allowedTypes }}.',
+            '{foldersCount} dosje dhe {filesCount} skedarë janë zhvendosur në të gjithë skedarët.',
+        messageMoveRootFoldersFailed: 'Zhvendosja e dosjeve {foldersCount} në të gjithë skedarët dështoi.',
+        messageMoveRootFoldersSuccess: '{foldersCount} dosje janë zhvendosur në të gjithë skedarët.',
+        messageMoveRootFilesFailed: 'Zhvendosja e skedarëve {filesCount} në të gjithë skedarët dështoi.',
+        messageMoveRootFilesSuccess: '{filesCount} skedare janë zhvendosur në të gjithë skedarët.',
+        messageMoveRootFileOrFolderFailed: 'Zhvendosja e {emri} te të gjithë skedarët ka dështuar.',
+        messageMoveRootFileOrFolderSuccess: '{name} është zhvendosur në të gjithë skedarët.',
+        messageFileTypeMismatchPlural: '{filesCount} skedarët kanë llojin e gabuar. Llojet e lejuara: {allowedTypes}.',
+        messageFileTypeMismatchSingular: 'Skedari "{fileName}" ka llojin e gabuar. Llojet e lejuara: {allowedTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} skedarët tejkaluan madhësinë maksimale të skedarit. Madhësia maksimale e lejuar e skedarit:{{ maxFileSize }}.',
+            '{filesCount} skedarët tejkaluan madhësinë maksimale të skedarit. Madhësia maksimale e lejuar e skedarit:{maxFileSize}.',
         messageFileSizeExceededSingular:
-            'Skedari "{{ fileName }}" ka tejkaluar madhësinë maksimale të skedarit. Madhësia maksimale e lejuar e skedarit: {{ maxFileSize }}.',
+            'Skedari "{fileName}" ka tejkaluar madhësinë maksimale të skedarit. Madhësia maksimale e lejuar e skedarit: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} skedare tejkaluan gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {{ maxFilenameLength }} karaktere.',
+            '{filesCount} skedare tejkaluan gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {maxFilenameLength} karaktere.',
         messageFileNameLengthExceededSingular:
-            'Emri "{{ fileName }}" ka tejkaluar gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {{ maxFilenameLength }} karaktere.'
+            'Emri "{fileName}" ka tejkaluar gjatësinë maksimale të emrit. Gjatësia e lejuar e emrit të skedarit: {maxFilenameLength} karaktere.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Redakto'
@@ -624,10 +609,10 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         selectOptionLabel: 'Zgjidhni një opsion'
     },
     fnSlider: {
-        minMaxDetails: 'Vlera minimale e rrëshqitësit është {{ min }}, vlera maksimale është {{ max }}',
-        valueminDetails: 'Vlera është  {{ value }}',
-        valuemaxDetails: 'Vlera është  {{ value }}',
-        valueNowDetails: 'Vlera aktuale është  {{ value }}'
+        minMaxDetails: 'Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}',
+        valueminDetails: 'Vlera është  {value}',
+        valuemaxDetails: 'Vlera është  {value}',
+        valueNowDetails: 'Vlera aktuale është  {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Pranoje',

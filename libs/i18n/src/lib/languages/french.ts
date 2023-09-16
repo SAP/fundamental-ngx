@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_FRENCH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Tout sélectionner ({{selectedItems}} sur {{totalItems}})'
+        selectAllLabel: 'Tout sélectionner ({selectedItems} sur {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: "Aller à l'élément précédent",
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Annuler',
-        listItemStatusAriaLabel: "L'élément a un statut. Statut: {{ status }}.",
-        listItemCounterAriaLabel: "L'élément a {{ count }} d'enfants.",
+        listItemStatusAriaLabel: "L'élément a un statut. Statut: {status}.",
+        listItemCounterAriaLabel: "L'élément a {count} d'enfants.",
         listItemButtonDetailsTitle: 'Détails',
         listItemButtonDeleteTitle: 'Supprimer',
         listItemStatusContainsErrors: 'Comporte des erreurs',
@@ -44,7 +44,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreMessageStrip: {
         dismissLabel: 'Rejeter'
@@ -54,25 +54,24 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel:
-            "Élément de l'arborescence {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}"
+        linkItemAriaLabel: "Élément de l'arborescence {itemDetails}, {index} of {total}{selectedDescription}"
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} plus'
+        moreItemsButton: '{count} plus'
     },
     corePagination: {
-        pageLabel: 'Page {{ pageNumber }}',
-        currentPageAriaLabel: 'Page {{ pageNumber }} est la page en cours',
+        pageLabel: 'Page {pageNumber}',
+        currentPageAriaLabel: 'Page {pageNumber} est la page en cours',
         labelBeforeInputMobile: 'Page:',
-        labelAfterInputMobile: 'de {{ totalCount }}',
-        inputAriaLabel: 'Entrée de page, Page actuelle, Page {{ pageNumber }} of {{ totalCount }}',
+        labelAfterInputMobile: 'de {totalCount}',
+        inputAriaLabel: 'Entrée de page, Page actuelle, Page {pageNumber} of {totalCount}',
         itemsPerPageLabel: 'Résultats par pages:',
         firstLabel: 'Premier',
         previousLabel: 'Précédent',
         nextLabel: 'Prochain',
         lastLabel: 'Dernier',
         ariaLabel: 'Pagination',
-        totalResultsLabel: '{{ totalCount }} Résultats'
+        totalResultsLabel: '{totalCount} Résultats'
     },
     coreProductSwitch: {
         ariaLabel: 'Échange de produit'
@@ -83,18 +82,18 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',
-        singleValueminDetails: 'La valeur est {{ value }}',
-        singleValuemaxDetails: 'La valeur est {{ value }}',
-        singleValueNowDetails: 'La valeur actuelle est {{ value }}',
-        multipleHandle1MinMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',
-        multipleHandle1ValueminDetails: 'La valeur est {{ value }}',
-        multipleHandle1ValuemaxDetails: 'La valeur est {{ value }}',
-        multipleHandle1ValueNowDetails: 'La valeur actuelle est {{ value }}',
-        multipleHandle2MinMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',
-        multipleHandle2ValueminDetails: 'La valeur est {{ value }}',
-        multipleHandle2ValuemaxDetails: 'La valeur est {{ value }}',
-        multipleHandle2ValueNowDetails: 'La valeur actuelle est {{ value }}'
+        singleMinMaxDetails: 'La valeur minimale du curseur est {min}, la valeur maximale est {max}',
+        singleValueminDetails: 'La valeur est {value}',
+        singleValuemaxDetails: 'La valeur est {value}',
+        singleValueNowDetails: 'La valeur actuelle est {value}',
+        multipleHandle1MinMaxDetails: 'La valeur minimale du curseur est {min}, la valeur maximale est {max}',
+        multipleHandle1ValueminDetails: 'La valeur est {value}',
+        multipleHandle1ValuemaxDetails: 'La valeur est {value}',
+        multipleHandle1ValueNowDetails: 'La valeur actuelle est {value}',
+        multipleHandle2MinMaxDetails: 'La valeur minimale du curseur est {min}, la valeur maximale est {max}',
+        multipleHandle2ValueminDetails: 'La valeur est {value}',
+        multipleHandle2ValuemaxDetails: 'La valeur est {value}',
+        multipleHandle2ValueNowDetails: 'La valeur actuelle est {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: "Plus d'actions",
@@ -146,7 +145,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         ariaRoleDescription: 'jeton'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} plus'
+        moreLabel: '{count} plus'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
@@ -208,11 +207,11 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         messagesErrorBuildGraph:
             'Il y a eu une erreur en essayant de construire le graphique. Vérifiez les données initiales',
         messagesUndoAction: 'Annuler',
-        nodeMembersCount: '{{nombre }} membres',
+        nodeMembersCount: '{nombre} membres',
         nodeVariousTeams: 'Plusieurs équipes',
         nodeStatusDueToday: "À rendre aujourd'hui",
-        nodeStatusDueInXDays: ' Échéance dans {{nombre }} jours',
-        nodeStatusXDaysOverdue: '{{nombre}} jours de retard',
+        nodeStatusDueInXDays: ' Échéance dans {nombre} jours',
+        nodeStatusXDaysOverdue: '{nombre} jours de retard',
         nodeActionAddApproversBefore: 'Ajoutez des approbateurs avant',
         nodeActionAddApproversAfter: 'Ajoutez des approbateurs après',
         nodeActionAddApproversParallel: 'Ajouter des approbateurs en parallèle',
@@ -233,7 +232,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         toolbarEditApprover: "Editer l'approbateur",
         watchersInputPlaceholder: 'Rechercher ici..',
         userListSelectedItemsCountSingular: '1 élément sélectionné',
-        userListSelectedItemsCountPlural: '{{ count }} éléments sélectionnés',
+        userListSelectedItemsCountPlural: '{count} éléments sélectionnés',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -257,15 +256,15 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Masquer les filtres',
         searchShowAllAdvancedSearchLabel: 'Afficher tous les filtres',
         searchHideAllAdvancedSearchLabel: 'Masquer tous les filtres',
-        selectTabDisplayCountLabel: 'Articles ({{ count }})',
+        selectTabDisplayCountLabel: 'Articles ({count})',
         selectTabMoreBtnLabel: "Plus d'infos",
-        selectTabCountHiddenA11yLabel: 'contient {{ rowCount }} lignes et {{ colCount }} colonnes',
+        selectTabCountHiddenA11yLabel: 'contient {rowCount} lignes et {colCount} colonnes',
         selectMobileTabBackBtnTitle: 'Retour',
         selectMobileTabBtnOpenDialogLabel: 'Ouvrir la boîte de dialogue',
-        selectMobileTabTitle: '{{ title }} onglet',
+        selectMobileTabTitle: '{title} onglet',
         selectMobileConditionEmpty: 'Vide',
         defineConditionTitle: 'Produit',
-        defineConditionSelectedValueHiddenA11yLabel: 'valeur sélectionnée {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'valeur sélectionnée {value}',
         defineConditionConditionsGroupHeaderInclude: 'Inclure',
         defineConditionConditionsGroupHeaderExclude: 'Exclure',
         defineConditionFromPlaceholder: 'de',
@@ -286,14 +285,14 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'vide',
         defineConditionConditionStrategyLabelNotEqualTo: 'pas égal à',
         defineConditionConditionStrategyLabelNotEmpty: 'non vide',
-        defineConditionMaxCountError: 'Entrez une valeur ne contenant pas plus de {{ count }} caractères',
+        defineConditionMaxCountError: 'Entrez une valeur ne contenant pas plus de {count} caractères',
         selectTabTitle: 'Sélectionnez dans la liste',
         searchTableEmptyMessage: 'Utilisez la recherche pour obtenir des résultats',
         defineTabTitle: 'Définir les conditions'
     },
     platformCombobox: {
         countListResultsSingular: "1 resultat sur la liste d'éléments",
-        countListResultsPlural: '{{ count }} éléments de la liste de résultats'
+        countListResultsPlural: '{count} éléments de la liste de résultats'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Sélectionnez les options',
@@ -303,12 +302,12 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 caractère au-dessus de la limite',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} de caractères au-delà de la limite',
+        counterMessageCharactersOverTheLimitPlural: '{count} de caractères au-delà de la limite',
         counterMessageCharactersRemainingSingular: '1 seul caractère restant',
-        counterMessageCharactersRemainingPlural: '{{ count }} de caractères restants'
+        counterMessageCharactersRemainingPlural: '{count} de caractères restants'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Média: {{ media }}'
+        roleDescriptionWithMedia: 'Média: {media}'
     },
     platformList: {
         loadingAriaLabel: 'chargement'
@@ -326,13 +325,13 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         submitButtonTitle: 'Rechercher',
         searchInputLabel: 'Rechercher',
         synchronizeButtonTitle: 'Synchroniser',
-        searchSuggestionMessage: '{{ count }} de suggestions trouvées',
+        searchSuggestionMessage: '{count} de suggestions trouvées',
         searchSuggestionNavigateMessage: 'utiliser les flèches haut et bas pour naviguer'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Rechercher',
         submitButtonLabel: 'Aller',
-        filtersButtonLabel: 'Filtres ({{ filtersCount }})',
+        filtersButtonLabel: 'Filtres ({filtersCount})',
         showFiltersButtonLabel: 'Affichez les filtres',
         hideFiltersButtonLabel: 'Masquer les filtres',
         defineConditionsRemoveConditionButtonTitle: 'Supprimer la condition',
@@ -389,7 +388,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Recherchez',
         P13ColumnsDialogsShowSelected: 'Afficher la sélection',
         P13ColumnsDialogShowAll: 'Afficher tout',
-        P13ColumnsDialogSelectAll: 'Sélectionner tout ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Sélectionner tout ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Annuler',
         P13ColumnsDialogMoveToTopBtn: 'Haut de page',
@@ -414,9 +413,9 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Oui',
         P13FilterBooleanOptionFalse: 'Non',
         P13FilterDialogHeader: 'Filtrer par',
-        P13FilterDialogIncludePanelTitleWithCount: 'Inclure ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Inclure ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Inclure',
-        P13FilterDialogExcludePanelTitleWithCount: 'Exclure ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Exclure ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclure',
         P13FilterDialogRemoveFilterBtnTitle: 'Supprimer le filtre',
         P13FilterDialoAddFilterBtnTitle: 'Ajouter un filtre',
@@ -449,7 +448,7 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Non filtré)',
-        filterDialogFilterByLabel: 'Filtrer par: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filtrer par: {filterLabel}',
         filterDialogFilterTitle: 'Filtre',
         filterDialogFilterBy: 'Filtrer par',
         filterDialogConfirmBtnLabel: 'OK',
@@ -492,13 +491,13 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         moveToCloseBtn: 'Annuler',
         newFolderTitle: 'Nouveau dossier',
         newFolderAtRootInputLabel: 'Nom du nouveau dossier',
-        newFolderAtFolderInputLabel: 'Nom du nouveau dossier dans {{ folderName }}',
+        newFolderAtFolderInputLabel: 'Nom du nouveau dossier dans {folderName}',
         newFolderInputPlaceholder: 'Saisissez ici..',
-        newFolderInputErrorLabel: 'Maximum {{ count }} de caractères autorisés',
+        newFolderInputErrorLabel: 'Maximum {count} de caractères autorisés',
         newFolderDialogCreateBtnLabel: 'Créer',
         newFolderDialogCancelBtnLabel: 'Annuler',
         breadcrumbLabelAllFiles: 'Tous les fichiers',
-        breadcrumbLabelAllFilesWithTotal: 'Tous les fichiers ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'Tous les fichiers ({total})',
         searchPlaceholder: 'Recherchez',
         addBtnLabel: 'Ajouter',
         newFolderBtnLabel: 'Nouveau dossier',
@@ -519,57 +518,57 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         dragDropAreaText: 'Faites glisser les fichiers à télécharger',
         noDataText: 'Aucun fichier trouvé',
         noDataDescription: 'Déposez les fichiers à télécharger, ou utilisez le bouton "Ajouter"..',
-        paginationTotal: 'Affichage de {{ from }}-{ to }} de {{ total }}',
+        paginationTotal: 'Affichage de {from}-{ to} de {total}',
         resultsPerPage: 'Résultats par page',
-        messageCreateFailed: 'Échec de la création de {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} a été créé.',
-        messageUpdateVersionFailed: 'Impossible de mettre à jour la version de {{ folderName }}.',
-        messageUpdateVersionSuccess: 'La version de {{ folderName }} a été mise à jour.',
-        messageFileRenameFailed: 'Impossible de renommer "{{ from }}" en "{{ to }}."',
-        messageFileRenameSuccess: '"{{ from }}" a été renommé en "{{ to }}".',
+        messageCreateFailed: 'Échec de la création de {folderName}.',
+        messageCreateSuccess: '{folderName} a été créé.',
+        messageUpdateVersionFailed: 'Impossible de mettre à jour la version de {folderName}.',
+        messageUpdateVersionSuccess: 'La version de {folderName} a été mise à jour.',
+        messageFileRenameFailed: 'Impossible de renommer "{from}" en "{to}."',
+        messageFileRenameSuccess: '"{from}" a été renommé en "{to}".',
         messageRemoveFoldersAndFilesFailed:
-            'Échec de la suppression des dossiers {{ foldersCount }} et des fichiers {{ filesCount }}.',
+            'Échec de la suppression des dossiers {foldersCount} et des fichiers {filesCount}.',
         messageRemoveFoldersAndFilesSuccess:
-            'Les dossiers {{ foldersCount }} et les fichiers {{ filesCount }} ont été supprimés',
-        messageRemoveFoldersFailed: 'Échec de la suppression des dossiers {{ foldersCount }}.',
-        messageRemoveFoldersSuccess: 'Les dossiers {{ foldersCount }} ont été supprimés',
-        messageRemoveFilesFailed: 'Échec de la suppression des fichiers {{ fichiersCount }}.',
-        messageRemoveFilesSuccess: 'Les fichiers {{ filesCount }} ont été supprimés',
-        messageRemoveFileOrFolderFailed: 'Échec de la suppression de {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} a été supprimé',
+            'Les dossiers {foldersCount} et les fichiers {filesCount} ont été supprimés',
+        messageRemoveFoldersFailed: 'Échec de la suppression des dossiers {foldersCount}.',
+        messageRemoveFoldersSuccess: 'Les dossiers {foldersCount} ont été supprimés',
+        messageRemoveFilesFailed: 'Échec de la suppression des fichiers {fichiersCount}.',
+        messageRemoveFilesSuccess: 'Les fichiers {filesCount} ont été supprimés',
+        messageRemoveFileOrFolderFailed: 'Échec de la suppression de {name}.',
+        messageRemoveFileOrFolderSuccess: '{name} a été supprimé',
         messageMoveFoldersAndFilesFailed:
-            'Échec du déplacement des dossiers {{ foldersCount }} et des fichiers {{ filesCount }} vers {{ to }}',
+            'Échec du déplacement des dossiers {foldersCount} et des fichiers {filesCount} vers {to}',
         messageMoveFoldersAndFilesSuccess:
-            '{{ foldersCount }} dossiers et {{ filesCount }} fichiers ont été déplacés vers {{ to }}.',
-        messageMoveFoldersFailed: 'Échec du déplacement de {{ foldersCount }} dossiers vers {{ to }}.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} dossiers ont été déplacés vers {{ to }}.',
-        messageMoveFilesFailed: 'Échec du déplacement de {{ filesCount }} fichiers vers {{ to }}.',
-        messageMoveFilesSuccess: '{{ filesCount }} fichiers ont été déplacés vers {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Échec du déplacement de {{ name }} vers {{ to }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} a été déplacé vers {{ to }}.',
+            '{foldersCount} dossiers et {filesCount} fichiers ont été déplacés vers {to}.',
+        messageMoveFoldersFailed: 'Échec du déplacement de {foldersCount} dossiers vers {to}.',
+        messageMoveFoldersSuccess: '{foldersCount} dossiers ont été déplacés vers {to}.',
+        messageMoveFilesFailed: 'Échec du déplacement de {filesCount} fichiers vers {to}.',
+        messageMoveFilesSuccess: '{filesCount} fichiers ont été déplacés vers {to}.',
+        messageMoveFileOrFolderFailed: 'Échec du déplacement de {name} vers {to}.',
+        messageMoveFileOrFolderSuccess: '{name} a été déplacé vers {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Échec du déplacement des {{ foldersCount }} dossiers et des {{ filesCount }} fichiers vers tous les fichiers.',
+            'Échec du déplacement des {foldersCount} dossiers et des {filesCount} fichiers vers tous les fichiers.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} dossiers et {{ filesCount }} fichiers ont été déplacés vers tous les fichiers.',
-        messageMoveRootFoldersFailed: 'Impossible de déplacer les dossiers {{ foldersCount }} vers tous les fichiers.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} dossiers ont été déplacés vers tous les fichiers.',
-        messageMoveRootFilesFailed: 'Impossible de déplacer les {{ filesCount }} fichiers vers tous les fichiers.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} fichiers ont été déplacés vers tous les fichiers.',
-        messageMoveRootFileOrFolderFailed: 'Impossible de déplacer {{ name }} vers tous les fichiers.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} a été déplacé dans tous les fichiers.',
+            '{foldersCount} dossiers et {filesCount} fichiers ont été déplacés vers tous les fichiers.',
+        messageMoveRootFoldersFailed: 'Impossible de déplacer les dossiers {foldersCount} vers tous les fichiers.',
+        messageMoveRootFoldersSuccess: '{foldersCount} dossiers ont été déplacés vers tous les fichiers.',
+        messageMoveRootFilesFailed: 'Impossible de déplacer les {filesCount} fichiers vers tous les fichiers.',
+        messageMoveRootFilesSuccess: '{filesCount} fichiers ont été déplacés vers tous les fichiers.',
+        messageMoveRootFileOrFolderFailed: 'Impossible de déplacer {name} vers tous les fichiers.',
+        messageMoveRootFileOrFolderSuccess: '{name} a été déplacé dans tous les fichiers.',
         messageFileTypeMismatchPlural:
-            "{{ filesCount }} fichiers n'ont pas le bon type. Types autorisés :  {{ allowedTypes }}.",
+            "{filesCount} fichiers n'ont pas le bon type. Types autorisés :  {allowedTypes}.",
         messageFileTypeMismatchSingular:
-            'Le fichier "{{ fileName }}" n\'a pas le bon type. Types autorisés : {{ allowedTypes }}.',
+            'Le fichier "{fileName}" n\'a pas le bon type. Types autorisés : {allowedTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} fichiers ont dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {{ maxFileSize }}.',
+            '{filesCount} fichiers ont dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'Le fichier "{{ fileName }}" a dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {{ maxFileSize }}.',
+            'Le fichier "{fileName}" a dépassé la taille maximale du fichier. Taille maximale autorisée du fichier : {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} fichiers ont dépassé la longueur maximale du nom de fichier. ' +
-            'Longueur autorisée du nom de fichier : {{ maxFilenameLength }} caractères.',
+            '{filesCount} fichiers ont dépassé la longueur maximale du nom de fichier. ' +
+            'Longueur autorisée du nom de fichier : {maxFilenameLength} caractères.',
         messageFileNameLengthExceededSingular:
-            'Le nom "{{ fileName }}" a dépassé la longueur maximale. Longueur autorisée du nom de fichier: {{ maxFilenameLength }} caractères.'
+            'Le nom "{fileName}" a dépassé la longueur maximale. Longueur autorisée du nom de fichier: {maxFilenameLength} caractères.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Editer'
@@ -616,10 +615,10 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         selectOptionLabel: 'Sélectionnez une option'
     },
     fnSlider: {
-        minMaxDetails: 'La valeur minimale du curseur est {{ min }}, la valeur maximale est {{ max }}',
-        valueminDetails: 'La valeur est {{ value }}',
-        valuemaxDetails: 'La valeur est {{ value }}',
-        valueNowDetails: 'La valeur actuelle est {{ value }}'
+        minMaxDetails: 'La valeur minimale du curseur est {min}, la valeur maximale est {max}',
+        valueminDetails: 'La valeur est {value}',
+        valuemaxDetails: 'La valeur est {value}',
+        valueNowDetails: 'La valeur actuelle est {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Accepter',

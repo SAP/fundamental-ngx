@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_POLISH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Zaznacz wszystko ({{selectedItems}} z {{totalItems}})'
+        selectAllLabel: 'Zaznacz wszystko ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Idź do poprzedniego elementu',
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Anuluj',
-        listItemStatusAriaLabel: 'Status elementu: {{ status }} ',
-        listItemCounterAriaLabel: 'Element posiada {{ count }} subelementów',
+        listItemStatusAriaLabel: 'Status elementu: {status} ',
+        listItemCounterAriaLabel: 'Element posiada {count} subelementów',
         listItemButtonDetailsTitle: 'Szczegóły',
         listItemButtonDeleteTitle: 'Usuń',
         listItemStatusContainsErrors: 'Zawiera błędy',
@@ -47,31 +47,31 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Element drzewa {{ itemDetails }}, {{ index }} z {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Element drzewa {itemDetails}, {index} z {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} więcej'
+        moreItemsButton: '{count} więcej'
     },
     corePagination: {
-        pageLabel: 'Strona {{ pageNumber }}',
-        currentPageAriaLabel: 'Aktualna strona {{ pageNumber }}',
+        pageLabel: 'Strona {pageNumber}',
+        currentPageAriaLabel: 'Aktualna strona {pageNumber}',
         labelBeforeInputMobile: 'Strona:',
-        labelAfterInputMobile: 'z {{ totalCount }}',
-        inputAriaLabel: 'Dane strony, Aktualna strona, Strona {{ pageNumber }} z {{ totalCount }}',
+        labelAfterInputMobile: 'z {totalCount}',
+        inputAriaLabel: 'Dane strony, Aktualna strona, Strona {pageNumber} z {totalCount}',
         itemsPerPageLabel: 'Liczba wyników na stronę:',
         firstLabel: 'Pierwszy',
         previousLabel: 'Poprzedni',
         nextLabel: 'Następny',
         lastLabel: 'Ostatni',
         ariaLabel: 'Stronicowanie',
-        totalResultsLabel: 'Liczba wyników: {{ totalCount }}'
+        totalResultsLabel: 'Liczba wyników: {totalCount}'
     },
     coreProductSwitch: {
         ariaLabel: 'Przełącznik Produktu'
@@ -82,18 +82,18 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Minimalna wartość {{ min }}, maksymalna wartość {{ max }}',
-        singleValueminDetails: 'Wartość {{ value }}',
-        singleValuemaxDetails: 'Wartość {{ value }}',
-        singleValueNowDetails: 'Aktualna wartość: {{ value }}',
-        multipleHandle1MinMaxDetails: 'Minimalna wartość {{ min }}, maksymalna wartość {{ max }}',
-        multipleHandle1ValueminDetails: 'Wartość {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Wartość {{ value }}',
-        multipleHandle1ValueNowDetails: 'Aktualna wartość {{ value }}',
-        multipleHandle2MinMaxDetails: 'Minimalna wartość {{ min }}, maksymalna wartość {{ max }}',
-        multipleHandle2ValueminDetails: 'Wartość {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Wartość {{ value }}',
-        multipleHandle2ValueNowDetails: 'Aktualna wartość {{ max }}'
+        singleMinMaxDetails: 'Minimalna wartość {min}, maksymalna wartość {max}',
+        singleValueminDetails: 'Wartość {value}',
+        singleValuemaxDetails: 'Wartość {value}',
+        singleValueNowDetails: 'Aktualna wartość: {value}',
+        multipleHandle1MinMaxDetails: 'Minimalna wartość {min}, maksymalna wartość {max}',
+        multipleHandle1ValueminDetails: 'Wartość {value}',
+        multipleHandle1ValuemaxDetails: 'Wartość {value}',
+        multipleHandle1ValueNowDetails: 'Aktualna wartość {value}',
+        multipleHandle2MinMaxDetails: 'Minimalna wartość {min}, maksymalna wartość {max}',
+        multipleHandle2ValueminDetails: 'Wartość {value}',
+        multipleHandle2ValuemaxDetails: 'Wartość {value}',
+        multipleHandle2ValueNowDetails: 'Aktualna wartość {max}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Pokaż więcej',
@@ -144,7 +144,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} więcej'
+        moreLabel: '{count} więcej'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
@@ -205,11 +205,11 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         messagesTeamRemoved: '1 zespół usuniety',
         messagesErrorBuildGraph: 'Wystąpił błąd podczas budowy grafu. Sprawdź wprowadzone dane.',
         messagesUndoAction: 'Cofnij',
-        nodeMembersCount: 'Liczba subnodów {{ count }}',
+        nodeMembersCount: 'Liczba subnodów {count}',
         nodeVariousTeams: 'Różne zespoły',
         nodeStatusDueToday: 'Do dziś',
-        nodeStatusDueInXDays: 'Termin dni {{ count }}',
-        nodeStatusXDaysOverdue: 'Liczba dni zaległych {{ count }}',
+        nodeStatusDueInXDays: 'Termin dni {count}',
+        nodeStatusXDaysOverdue: 'Liczba dni zaległych {count}',
         nodeActionAddApproversBefore: 'Dodaj zatwierdzających przed',
         nodeActionAddApproversAfter: 'Dodaj zatwierdzających po',
         nodeActionAddApproversParallel: 'Dodaj równolegle zatwierdzających',
@@ -229,8 +229,8 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         toolbarRemove: 'Usuń',
         toolbarEditApprover: 'Edytuj zatwierdzającego',
         watchersInputPlaceholder: 'Szukaj tutaj..',
-        userListSelectedItemsCountSingular: 'Liczba zaznaczonych elementów: {{ count }}',
-        userListSelectedItemsCountPlural: 'Liczba zaznaczonych elementów: {{ count }}',
+        userListSelectedItemsCountSingular: 'Liczba zaznaczonych elementów: {count}',
+        userListSelectedItemsCountPlural: 'Liczba zaznaczonych elementów: {count}',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -254,15 +254,15 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Ukryj filtry',
         searchShowAllAdvancedSearchLabel: 'Pokaż wszystkie filtry',
         searchHideAllAdvancedSearchLabel: 'Ukryj wszystkie filtry',
-        selectTabDisplayCountLabel: 'Elementy ({{ count }})',
+        selectTabDisplayCountLabel: 'Elementy ({count})',
         selectTabMoreBtnLabel: 'Więcej',
-        selectTabCountHiddenA11yLabel: 'Liczba wierszy {{ rowCount }}, liczba kolumn {{ colCount }}',
+        selectTabCountHiddenA11yLabel: 'Liczba wierszy {rowCount}, liczba kolumn {colCount}',
         selectMobileTabBackBtnTitle: 'Powrót',
         selectMobileTabBtnOpenDialogLabel: 'Otwórz dialog',
-        selectMobileTabTitle: '{{ title }} zakładka',
+        selectMobileTabTitle: '{title} zakładka',
         selectMobileConditionEmpty: 'Pusty',
         defineConditionTitle: 'Produkt',
-        defineConditionSelectedValueHiddenA11yLabel: 'zaznaczona wartość {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'zaznaczona wartość {value}',
         defineConditionConditionsGroupHeaderInclude: 'Zawiera',
         defineConditionConditionsGroupHeaderExclude: 'Nie zawiera',
         defineConditionFromPlaceholder: 'od',
@@ -283,14 +283,14 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'pusty',
         defineConditionConditionStrategyLabelNotEqualTo: 'nie równy',
         defineConditionConditionStrategyLabelNotEmpty: 'nie pusty',
-        defineConditionMaxCountError: 'Wprowadź wartość zawierającą nie wiecej niż {{ count }} znaków',
+        defineConditionMaxCountError: 'Wprowadź wartość zawierającą nie wiecej niż {count} znaków',
         selectTabTitle: 'Wybierz z listy',
         searchTableEmptyMessage: 'Użyj wyszukiwania by uzyskać wyniki',
         defineTabTitle: 'Zdefinjuj warunki'
     },
     platformCombobox: {
         countListResultsSingular: 'Lista 1 elementowa',
-        countListResultsPlural: 'Lista {{ count }} elementowa'
+        countListResultsPlural: 'Lista {count} elementowa'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Zaznacz elementy',
@@ -299,13 +299,13 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         mobileShowSelectedItemsButton: 'Pokaż zaznaczone elementy'
     },
     platformTextarea: {
-        counterMessageCharactersOverTheLimitSingular: 'Liczba znaków powyżej limitu {{ count }}',
-        counterMessageCharactersOverTheLimitPlural: 'Liczba znaków powyżej limitu {{ count }}',
-        counterMessageCharactersRemainingSingular: 'Liczba pozostających znaków {{ count }}',
-        counterMessageCharactersRemainingPlural: 'Liczba pozostających znaków {{ count }}'
+        counterMessageCharactersOverTheLimitSingular: 'Liczba znaków powyżej limitu {count}',
+        counterMessageCharactersOverTheLimitPlural: 'Liczba znaków powyżej limitu {count}',
+        counterMessageCharactersRemainingSingular: 'Liczba pozostających znaków {count}',
+        counterMessageCharactersRemainingPlural: 'Liczba pozostających znaków {count}'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Media: {{ media }}'
+        roleDescriptionWithMedia: 'Media: {media}'
     },
     platformList: {
         loadingAriaLabel: 'wczytywanie'
@@ -323,13 +323,13 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         submitButtonTitle: 'Szukaj',
         searchInputLabel: 'Szukaj',
         synchronizeButtonTitle: 'Synchronizuj',
-        searchSuggestionMessage: 'Znaleziono {{ count }} możliwych wyników.',
+        searchSuggestionMessage: 'Znaleziono {count} możliwych wyników.',
         searchSuggestionNavigateMessage: 'Poruszaj się za pomocą strzałek góra/dół'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Szukaj',
         submitButtonLabel: 'Idź',
-        filtersButtonLabel: 'Filtry ({{ filtersCount }})',
+        filtersButtonLabel: 'Filtry ({filtersCount})',
         showFiltersButtonLabel: 'Pokaż filtry',
         hideFiltersButtonLabel: 'Ukryj filtry',
         defineConditionsRemoveConditionButtonTitle: 'Usuń warunek',
@@ -386,7 +386,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Szukaj',
         P13ColumnsDialogsShowSelected: 'Pokaż wybrane',
         P13ColumnsDialogShowAll: 'Pokaż wszystkie',
-        P13ColumnsDialogSelectAll: 'Pokaż wszystkie ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Pokaż wszystkie ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Anuluj',
         P13ColumnsDialogMoveToTopBtn: 'Przesuń do samej góry',
@@ -411,9 +411,9 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Tak',
         P13FilterBooleanOptionFalse: 'Nie',
         P13FilterDialogHeader: 'Filtruj',
-        P13FilterDialogIncludePanelTitleWithCount: 'Zawiera ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Zawiera ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Zawiera',
-        P13FilterDialogExcludePanelTitleWithCount: 'Nie zawiera ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Nie zawiera ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Nie zawiera',
         P13FilterDialogRemoveFilterBtnTitle: 'Usuń Filtr',
         P13FilterDialoAddFilterBtnTitle: 'Dodaj Filtr',
@@ -446,7 +446,7 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Nie zastosowano żadnego filtra)',
-        filterDialogFilterByLabel: 'Użyto filtr: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Użyto filtr: {filterLabel}',
         filterDialogFilterTitle: 'Filtr',
         filterDialogFilterBy: 'Użyto filtr',
         filterDialogConfirmBtnLabel: 'OK',
@@ -489,13 +489,13 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         moveToCloseBtn: 'Anuluj',
         newFolderTitle: 'Nowy folder',
         newFolderAtRootInputLabel: 'Nazwa nowego folderu',
-        newFolderAtFolderInputLabel: 'Nazwa nowego folderu wewnątrz folderu {{ folderName }}',
+        newFolderAtFolderInputLabel: 'Nazwa nowego folderu wewnątrz folderu {folderName}',
         newFolderInputPlaceholder: 'Pisz tutaj...',
-        newFolderInputErrorLabel: 'Maksymalna liczba znaków {{ count }}',
+        newFolderInputErrorLabel: 'Maksymalna liczba znaków {count}',
         newFolderDialogCreateBtnLabel: 'Utwórz',
         newFolderDialogCancelBtnLabel: 'Anuluj',
         breadcrumbLabelAllFiles: 'Wszystkie pliki',
-        breadcrumbLabelAllFilesWithTotal: 'Wszystkie pliki ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'Wszystkie pliki ({total})',
         searchPlaceholder: 'Szukaj',
         addBtnLabel: 'Dodaj`',
         newFolderBtnLabel: 'Nowy Folder',
@@ -516,58 +516,56 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         dragDropAreaText: 'Przeciągnij by przekazać plik',
         noDataText: 'Nie znaleziono żadnych plików',
         noDataDescription: 'Upuść pliki żeby przekazać lub użyj przycisku “Dodaj” ',
-        paginationTotal: 'Widoczne {{ from }}-{{ to }} z {{ total }}',
+        paginationTotal: 'Widoczne {from}-{to} z {total}',
         resultsPerPage: 'Liczba wyników na strone',
-        messageCreateFailed: 'Nie udało się utworzyć {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} został utworzony.',
-        messageUpdateVersionFailed: 'Nie udało się zaktualizować wersji {{ folderName }}.',
-        messageUpdateVersionSuccess: '{{ folderName }} wersja zaktualizowana.',
-        messageFileRenameFailed: 'Nie powiodła się zmiana nazwy z "{{ from }}" na "{{ to }}."',
-        messageFileRenameSuccess: '"{{ from }}" został zmieniony na "{{ to }}".',
+        messageCreateFailed: 'Nie udało się utworzyć {folderName}.',
+        messageCreateSuccess: '{folderName} został utworzony.',
+        messageUpdateVersionFailed: 'Nie udało się zaktualizować wersji {folderName}.',
+        messageUpdateVersionSuccess: '{folderName} wersja zaktualizowana.',
+        messageFileRenameFailed: 'Nie powiodła się zmiana nazwy z "{from}" na "{to}."',
+        messageFileRenameSuccess: '"{from}" został zmieniony na "{to}".',
         messageRemoveFoldersAndFilesFailed:
-            'Nie powiodło się usunięcie folderów w liczbie {{ foldersCount }} oraz plików w liczbie {{ filesCount }} .',
+            'Nie powiodło się usunięcie folderów w liczbie {foldersCount} oraz plików w liczbie {filesCount} .',
         messageRemoveFoldersAndFilesSuccess:
-            'Liczba folderów usunięta {{ foldersCount }} oraz liczba plików usuniętych {{ filesCount }}.',
-        messageRemoveFoldersFailed: 'Nie powiodło się usunięcie folderów w liczbie {{ foldersCount }}.',
-        messageRemoveFoldersSuccess: 'Liczba folderów usuniętych {{ foldersCount }}',
-        messageRemoveFilesFailed: 'Nie powiodło się usunięcie plików w liczbie {{ foldersCount }}.',
-        messageRemoveFilesSuccess: 'Liczba plików usuniętych {{ foldersCount }}',
-        messageRemoveFileOrFolderFailed: 'Nie powiodło się usunięcie {{ name }}.',
-        messageRemoveFileOrFolderSuccess: 'Usunięto {{ name }}.',
+            'Liczba folderów usunięta {foldersCount} oraz liczba plików usuniętych {filesCount}.',
+        messageRemoveFoldersFailed: 'Nie powiodło się usunięcie folderów w liczbie {foldersCount}.',
+        messageRemoveFoldersSuccess: 'Liczba folderów usuniętych {foldersCount}',
+        messageRemoveFilesFailed: 'Nie powiodło się usunięcie plików w liczbie {foldersCount}.',
+        messageRemoveFilesSuccess: 'Liczba plików usuniętych {foldersCount}',
+        messageRemoveFileOrFolderFailed: 'Nie powiodło się usunięcie {name}.',
+        messageRemoveFileOrFolderSuccess: 'Usunięto {name}.',
         messageMoveFoldersAndFilesFailed:
-            'Nie powiodło się przeniesienie folderów w liczbie {{ foldersCount }} oraz plików w liczbie {{ filesCount }} do {{ to }}.',
+            'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} oraz plików w liczbie {filesCount} do {to}.',
         messageMoveFoldersAndFilesSuccess:
-            'Foldery w liczbie {{ foldersCount }} oraz pliki w liczbie {{ filesCount }} zostały przeniesione do {{ to }}.',
-        messageMoveFoldersFailed: 'Nie powiodło się przeniesienie folderów w liczbie {{ foldersCount }} do {{ to }}.',
-        messageMoveFoldersSuccess: 'Foldery w liczbie {{ foldersCount }} zostały przeniesione do {{ to }}.',
-        messageMoveFilesFailed: 'Nie powiodło się przeniesienie plików w liczbie {{ filesCount }} do {{ to }}.',
-        messageMoveFilesSuccess: 'Pliki w liczbie {{ filesCount }} zostały przeniesione do {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Nie powiodło się przeniesienie {{ name }} do {{ to }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} przeniesiono do {{ to }}.',
+            'Foldery w liczbie {foldersCount} oraz pliki w liczbie {filesCount} zostały przeniesione do {to}.',
+        messageMoveFoldersFailed: 'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} do {to}.',
+        messageMoveFoldersSuccess: 'Foldery w liczbie {foldersCount} zostały przeniesione do {to}.',
+        messageMoveFilesFailed: 'Nie powiodło się przeniesienie plików w liczbie {filesCount} do {to}.',
+        messageMoveFilesSuccess: 'Pliki w liczbie {filesCount} zostały przeniesione do {to}.',
+        messageMoveFileOrFolderFailed: 'Nie powiodło się przeniesienie {name} do {to}.',
+        messageMoveFileOrFolderSuccess: '{name} przeniesiono do {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Nie powiodło się przeniesienie folderów w liczbie {{ foldersCount }} oraz plików w liczbie {{ filesCount }} do wszystkich plików.',
+            'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} oraz plików w liczbie {filesCount} do wszystkich plików.',
         messageMoveRootFoldersAndFilesSuccess:
-            'Foldery w liczbie {{ foldersCount }} oraz pliki w liczbie {{ filesCount }} zostały przeniesione do wszystkich plików.',
+            'Foldery w liczbie {foldersCount} oraz pliki w liczbie {filesCount} zostały przeniesione do wszystkich plików.',
         messageMoveRootFoldersFailed:
-            'Nie powiodło się przeniesienie folderów w liczbie {{ foldersCount }} do wszystkich folderów.',
-        messageMoveRootFoldersSuccess:
-            'Foldery w liczbie {{ foldersCount }} zostały przeniesione do wszystkich folderów.',
+            'Nie powiodło się przeniesienie folderów w liczbie {foldersCount} do wszystkich folderów.',
+        messageMoveRootFoldersSuccess: 'Foldery w liczbie {foldersCount} zostały przeniesione do wszystkich folderów.',
         messageMoveRootFilesFailed:
-            'Nie powiodło się przeniesienie plików w liczbie {{ filesCount }} do wszystkich plików.',
-        messageMoveRootFilesSuccess: 'Pliki w liczbie {{ filesCount }} zostały przeniesione do wszystkich plików.',
-        messageMoveRootFileOrFolderFailed: 'Nie powiodło się przeniesienie {{ name }} do wszystkich plików.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} przeniesiono do wszystkich plików.',
-        messageFileTypeMismatchPlural:
-            'Liczba plików ze złym typem {{ filesCount }}. Typy dozwolone: {{ allowedTypes }}.',
-        messageFileTypeMismatchSingular: 'Plik "{{ fileName }}" ma zły typ. Typy dozwolone: {{ allowedTypes }}.',
+            'Nie powiodło się przeniesienie plików w liczbie {filesCount} do wszystkich plików.',
+        messageMoveRootFilesSuccess: 'Pliki w liczbie {filesCount} zostały przeniesione do wszystkich plików.',
+        messageMoveRootFileOrFolderFailed: 'Nie powiodło się przeniesienie {name} do wszystkich plików.',
+        messageMoveRootFileOrFolderSuccess: '{name} przeniesiono do wszystkich plików.',
+        messageFileTypeMismatchPlural: 'Liczba plików ze złym typem {filesCount}. Typy dozwolone: {allowedTypes}.',
+        messageFileTypeMismatchSingular: 'Plik "{fileName}" ma zły typ. Typy dozwolone: {allowedTypes}.',
         messageFileSizeExceededPlural:
-            'Liczba plików przekraczająca maksymalny rozmiar {{ filesCount }}. Maksymalna wielkość pliku do: {{ maxFileSize }}.',
+            'Liczba plików przekraczająca maksymalny rozmiar {filesCount}. Maksymalna wielkość pliku do: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'Plik "{{ fileName }}" przekroczył maksymalny rozmiar. Maksymalna wielkość pliku: {{ maxFileSize }}.',
+            'Plik "{fileName}" przekroczył maksymalny rozmiar. Maksymalna wielkość pliku: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            'Liczba plików przekraczająca maksymalną długość nazwy {{ filesCount }}. Maksymalna długość: {{ maxFilenameLength }} znaków.',
+            'Liczba plików przekraczająca maksymalną długość nazwy {filesCount}. Maksymalna długość: {maxFilenameLength} znaków.',
         messageFileNameLengthExceededSingular:
-            'Nazwa "{{ fileName }}" przekroczyła maksymalną długość. Maksymalna długość: {{ maxFilenameLength }} znaków.'
+            'Nazwa "{fileName}" przekroczyła maksymalną długość. Maksymalna długość: {maxFilenameLength} znaków.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edytuj'
@@ -614,10 +612,10 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         selectOptionLabel: 'Wybierz opcję'
     },
     fnSlider: {
-        minMaxDetails: 'Minimalna wartość {{ min }}, maksymalna wartość {{ max }}',
-        valueminDetails: 'Wartość {{ value }}',
-        valuemaxDetails: 'Wartość {{ value }}',
-        valueNowDetails: 'Aktualna wartość: {{ value }}'
+        minMaxDetails: 'Minimalna wartość {min}, maksymalna wartość {max}',
+        valueminDetails: 'Wartość {value}',
+        valuemaxDetails: 'Wartość {value}',
+        valueNowDetails: 'Aktualna wartość: {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Zatwierdz',

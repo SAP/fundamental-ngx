@@ -53,7 +53,7 @@ export interface FdLanguage {
     };
     coreMultiInput: {
         multiInputAriaLabel: FdLanguageKey;
-        tokensCountText: FdLanguageKeyFunction;
+        tokensCountText: FdLanguageKey;
     };
     coreNavigation: {
         mainNavigation: FdLanguageKey;
@@ -635,6 +635,10 @@ export interface FdLanguage {
         messageUpdateVersionFailed: FdLanguageKey;
         /** @param folderName */
         messageUpdateVersionSuccess: FdLanguageKey;
+        /** @param foldersCount */
+        folderNamePluralization?: FdLanguageKey;
+        /** @param filesCount */
+        fileNamePluralization?: FdLanguageKey;
         /**
          * @param from
          * @param to

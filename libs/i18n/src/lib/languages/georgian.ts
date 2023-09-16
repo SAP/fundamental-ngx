@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'ყველას არჩევა ({{selectedItems}} {{totalItems}}-დან)'
+        selectAllLabel: 'ყველას არჩევა ({selectedItems} {totalItems}-დან)'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'წინა ელემენტზე გადასვლა',
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'გაუქმება',
-        listItemStatusAriaLabel: 'ელემენტის სტატუსია: {{ status }}.',
-        listItemCounterAriaLabel: 'ელემენტს აქვს {{ count }} შვილი.',
+        listItemStatusAriaLabel: 'ელემენტის სტატუსია: {status}.',
+        listItemCounterAriaLabel: 'ელემენტს აქვს {count} შვილი.',
         listItemButtonDetailsTitle: 'დეტალები',
         listItemButtonDeleteTitle: 'წაშლა',
         listItemStatusContainsErrors: 'შეიცავს შეცდომებს',
@@ -47,32 +47,31 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'მთავარი ნავიგაცია',
         navigationPath: 'ნავიგაციის გზა'
     },
     coreNestedList: {
-        linkItemAriaLabel:
-            'სიის ელემენტი {{ itemDetails }}, ინდექსით {{ index }} {{ total }}-დან {{ selectedDescription }}'
+        linkItemAriaLabel: 'სიის ელემენტი {itemDetails}, ინდექსით {index} {total}-დან {selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'დანარჩენი {{ count }}'
+        moreItemsButton: 'დანარჩენი {count}'
     },
     corePagination: {
-        pageLabel: 'გვერდი {{ pageNumber }}',
-        currentPageAriaLabel: 'მიმდინარე გვერდია {{ pageNumber }}',
+        pageLabel: 'გვერდი {pageNumber}',
+        currentPageAriaLabel: 'მიმდინარე გვერდია {pageNumber}',
         labelBeforeInputMobile: 'გვერდი:',
-        labelAfterInputMobile: '{{ totalCount }}-დან',
-        inputAriaLabel: 'გვერდის ველი, მიმდინარე გვერდი, გვერდი {{ pageNumber }} {{ totalCount }}-დან',
+        labelAfterInputMobile: '{totalCount}-დან',
+        inputAriaLabel: 'გვერდის ველი, მიმდინარე გვერდი, გვერდი {pageNumber} {totalCount}-დან',
         itemsPerPageLabel: 'შედეგები გვერდზე:',
         firstLabel: 'პირველი',
         previousLabel: 'წინა',
         nextLabel: 'შემდეგი',
         lastLabel: 'ბოლო',
         ariaLabel: 'გვერდები',
-        totalResultsLabel: 'სულ {{ totalCount }} შედეგი'
+        totalResultsLabel: 'სულ {totalCount} შედეგი'
     },
     coreProductSwitch: {
         ariaLabel: 'გადამრთველი'
@@ -83,18 +82,18 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
-        singleValueminDetails: 'მნიშვნელობაა {{ value }}',
-        singleValuemaxDetails: 'მნიშვნელობაა {{ value }}',
-        singleValueNowDetails: 'მიმდინარე მნიშვნელობაა {{ value }}',
-        multipleHandle1MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
-        multipleHandle1ValueminDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle1ValuemaxDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle1ValueNowDetails: 'მიმდინარე მნიშვნელობაა {{ value }}',
-        multipleHandle2MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმუმი - {{ max }}',
-        multipleHandle2ValueminDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle2ValuemaxDetails: 'მნიშვნელობაა {{ value }}',
-        multipleHandle2ValueNowDetails: 'მიმდინარე მნიშვნელობაა {{ value }}'
+        singleMinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',
+        singleValueminDetails: 'მნიშვნელობაა {value}',
+        singleValuemaxDetails: 'მნიშვნელობაა {value}',
+        singleValueNowDetails: 'მიმდინარე მნიშვნელობაა {value}',
+        multipleHandle1MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',
+        multipleHandle1ValueminDetails: 'მნიშვნელობაა {value}',
+        multipleHandle1ValuemaxDetails: 'მნიშვნელობაა {value}',
+        multipleHandle1ValueNowDetails: 'მიმდინარე მნიშვნელობაა {value}',
+        multipleHandle2MinMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმუმი - {max}',
+        multipleHandle2ValueminDetails: 'მნიშვნელობაა {value}',
+        multipleHandle2ValuemaxDetails: 'მნიშვნელობაა {value}',
+        multipleHandle2ValueNowDetails: 'მიმდინარე მნიშვნელობაა {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'მეტი ქმედებები',
@@ -145,7 +144,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         ariaRoleDescription: 'ტოკენი'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} სხვა'
+        moreLabel: '{count} სხვა'
     },
     coreUploadCollection: {
         menuOkText: 'კარგი',
@@ -206,11 +205,11 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         messagesTeamRemoved: 'გუნდი წაიშალა',
         messagesErrorBuildGraph: 'გრაფის დამუშავებისას წარმოიშვა შეცდომა. შეამოწმეთ საწყისი მონაცემები.',
         messagesUndoAction: 'უკან დაბრუნება',
-        nodeMembersCount: '{{ count }} წევრი',
+        nodeMembersCount: '{count} წევრი',
         nodeVariousTeams: 'სხვადასხვა გუნდი',
         nodeStatusDueToday: 'ვადა იწურება დღეს',
-        nodeStatusDueInXDays: ' ვადა იწურება {{ count }} დღეში',
-        nodeStatusXDaysOverdue: 'ვადას გადაცდა {{ count }} დღე',
+        nodeStatusDueInXDays: ' ვადა იწურება {count} დღეში',
+        nodeStatusXDaysOverdue: 'ვადას გადაცდა {count} დღე',
         nodeActionAddApproversBefore: 'დაამატე დამდასტურებელი წინ',
         nodeActionAddApproversAfter: 'დაამატე დამდასტურებელი შემდეგ',
         nodeActionAddApproversParallel: 'დაამატე პარალელური დამდასტურებელი',
@@ -231,7 +230,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarEditApprover: 'შეასწორე დამდასტურებელი',
         watchersInputPlaceholder: 'ძებნა...',
         userListSelectedItemsCountSingular: '1 ელემენტი არჩეულია',
-        userListSelectedItemsCountPlural: '{{ count }} ელემენტი არჩეულია',
+        userListSelectedItemsCountPlural: '{count} ელემენტი არჩეულია',
         statusApproved: 'დადასტურებული',
         statusRejected: 'უარყოფილი',
         statusInProgress: 'მიმდინარე',
@@ -255,15 +254,15 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'დამალე ფილტრები',
         searchShowAllAdvancedSearchLabel: 'მაჩვენე ყველა ფილტრი',
         searchHideAllAdvancedSearchLabel: 'დამალე ყველა ფილტრი',
-        selectTabDisplayCountLabel: 'ელემენტები ({{ count }})',
+        selectTabDisplayCountLabel: 'ელემენტები ({count})',
         selectTabMoreBtnLabel: 'მეტი',
-        selectTabCountHiddenA11yLabel: 'შეიცავს {{ rowCount }} სტრიქონს და {{ colCount }} სვეტს',
+        selectTabCountHiddenA11yLabel: 'შეიცავს {rowCount} სტრიქონს და {colCount} სვეტს',
         selectMobileTabBackBtnTitle: 'უკან',
         selectMobileTabBtnOpenDialogLabel: 'დიალოგური ფანჯრის გახსნა',
-        selectMobileTabTitle: '{{ title }} ტაბი',
+        selectMobileTabTitle: '{title} ტაბი',
         selectMobileConditionEmpty: 'ცარიელი',
         defineConditionTitle: 'სახელი',
-        defineConditionSelectedValueHiddenA11yLabel: 'არჩეული მნიშვნელობა {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'არჩეული მნიშვნელობა {value}',
         defineConditionConditionsGroupHeaderInclude: 'მოცვა',
         defineConditionConditionsGroupHeaderExclude: 'გამოყოფა',
         defineConditionFromPlaceholder: 'საიდან',
@@ -284,14 +283,14 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'ცარიელი',
         defineConditionConditionStrategyLabelNotEqualTo: 'არ უდრის',
         defineConditionConditionStrategyLabelNotEmpty: 'არ არის ცარიელი',
-        defineConditionMaxCountError: 'შეიყვანეთ მნიშვნელობა, არანაკლებ {{ count }} სიმბოლო',
+        defineConditionMaxCountError: 'შეიყვანეთ მნიშვნელობა, არანაკლებ {count} სიმბოლო',
         selectTabTitle: 'სიიდან არჩევა',
         searchTableEmptyMessage: 'გამოიყენეთ ძებნა შედეგების მისაღებად',
         defineTabTitle: 'პირობის განსაზღვრა'
     },
     platformCombobox: {
         countListResultsSingular: '1 რეზულტატი',
-        countListResultsPlural: '{{ count }} რეზულტატი'
+        countListResultsPlural: '{count} რეზულტატი'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'აირჩიეთ ოფციები',
@@ -301,12 +300,12 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 სიმბოლო აღემატება ლიმიტს',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} სიმბოლო აღემატება ლიმიტს',
+        counterMessageCharactersOverTheLimitPlural: '{count} სიმბოლო აღემატება ლიმიტს',
         counterMessageCharactersRemainingSingular: 'დარჩა 1 სიმბოლო',
-        counterMessageCharactersRemainingPlural: 'დარჩა {{ count }} სიმბოლო'
+        counterMessageCharactersRemainingPlural: 'დარჩა {count} სიმბოლო'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'მედია: {{ media }}'
+        roleDescriptionWithMedia: 'მედია: {media}'
     },
     platformList: {
         loadingAriaLabel: 'იტვირთება'
@@ -324,13 +323,13 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         submitButtonTitle: 'ძებნა',
         searchInputLabel: 'ძებნა',
         synchronizeButtonTitle: 'სინქრონიზაცია',
-        searchSuggestionMessage: 'ნაპოვნია {{ count }} შემოთავაზება.',
+        searchSuggestionMessage: 'ნაპოვნია {count} შემოთავაზება.',
         searchSuggestionNavigateMessage: 'ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'ძებნა',
         submitButtonLabel: 'წინ',
-        filtersButtonLabel: 'ფილტრები ({{ filtersCount }})',
+        filtersButtonLabel: 'ფილტრები ({filtersCount})',
         showFiltersButtonLabel: 'მაჩვენე ფილტრები',
         hideFiltersButtonLabel: 'დამალე ფილტრები',
         defineConditionsRemoveConditionButtonTitle: 'პირობის ამოღება',
@@ -387,7 +386,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'ძებნა',
         P13ColumnsDialogsShowSelected: 'მაჩვენე არჩეული',
         P13ColumnsDialogShowAll: 'მაჩვენე ყველა',
-        P13ColumnsDialogSelectAll: 'აირჩიე ყველა ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'აირჩიე ყველა ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'კარგი',
         P13ColumnsDialogCancelBtnLabel: 'გაუქმება',
         P13ColumnsDialogMoveToTopBtn: 'ზემოთ ატანა',
@@ -412,9 +411,9 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         P13FilterBooleanOptionTrue: 'დიახ',
         P13FilterBooleanOptionFalse: 'არა',
         P13FilterDialogHeader: 'ფილტრი',
-        P13FilterDialogIncludePanelTitleWithCount: 'ჩართე ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'ჩართე ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'ჩართე',
-        P13FilterDialogExcludePanelTitleWithCount: 'გამოტოვე ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'გამოტოვე ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'გამოტოვე',
         P13FilterDialogRemoveFilterBtnTitle: 'ფილტრის მოხსნა',
         P13FilterDialoAddFilterBtnTitle: 'ფილტრის დამატება',
@@ -447,7 +446,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(გაუფილტრავი)',
-        filterDialogFilterByLabel: 'გაფილტრე: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'გაფილტრე: {filterLabel}',
         filterDialogFilterTitle: 'ფილტრი',
         filterDialogFilterBy: 'გაფილტრე',
         filterDialogConfirmBtnLabel: 'კარგი',
@@ -490,13 +489,13 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         moveToCloseBtn: 'გაუქმება',
         newFolderTitle: 'ახალი საქაღალდე',
         newFolderAtRootInputLabel: 'ახალი საქაღალდის სახელი',
-        newFolderAtFolderInputLabel: '{{ folderName }}-ში ახალი საქაღალდის სახელი',
+        newFolderAtFolderInputLabel: '{folderName}-ში ახალი საქაღალდის სახელი',
         newFolderInputPlaceholder: 'აკრიფეთ აქ...',
-        newFolderInputErrorLabel: 'ნებადართულია მაქსიმუმ {{ count }} სიმბოლო',
+        newFolderInputErrorLabel: 'ნებადართულია მაქსიმუმ {count} სიმბოლო',
         newFolderDialogCreateBtnLabel: 'შექმნა',
         newFolderDialogCancelBtnLabel: 'გაუქმება',
         breadcrumbLabelAllFiles: 'ყველა ფაილი',
-        breadcrumbLabelAllFilesWithTotal: 'ყველა ფაილი ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'ყველა ფაილი ({total})',
         searchPlaceholder: 'ძებნა',
         addBtnLabel: 'დამატება',
         newFolderBtnLabel: 'ახალი საქაღალდე',
@@ -517,54 +516,51 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         dragDropAreaText: 'ჩააგდეთ ფაილი ასატვირთად',
         noDataText: 'ფაილები არ მოიძებნა',
         noDataDescription: 'ჩააგდეთ ფაილი ასატვირთად, ან დააჭირეთ "დამატებას"',
-        paginationTotal: 'ნაჩვენებია {{ from }}-{{ to }} {{ total }}-დან',
+        paginationTotal: 'ნაჩვენებია {from}-{to} {total}-დან',
         resultsPerPage: 'რეზულტატი გვერდზე',
-        messageCreateFailed: '{{ folderName }} ვერ შეიქმნა.',
-        messageCreateSuccess: '{{ folderName }} შეიქმნა.',
-        messageUpdateVersionFailed: '{{ folderName }}-ის ვერსიის განახლება ვერ მოხერხდა.',
-        messageUpdateVersionSuccess: '{{ folderName }}-ის ვერსია განახლდა.',
-        messageFileRenameFailed: 'სახელის გადარქმევა "{{ from }}"-დან "{{ to }}"-ზე ვერ მოხერხდა.',
-        messageFileRenameSuccess: '"{{ from }}"-ს დაერქვა "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed:
-            '{{ foldersCount }} საქაღალდის და {{ filesCount }} ფაილის წაშლა ვერ მოხერხდა.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} საქაღალდე და {{ filesCount }} ფაილი წაიშალა.',
-        messageRemoveFoldersFailed: '{{ foldersCount }} საქაღალდე ვერ წაიშალა.',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} საქაღალდე წაიშალა.',
-        messageRemoveFilesFailed: '{{ filesCount }} ფაილი ვერ წაიშალა.',
-        messageRemoveFilesSuccess: '{{ filesCount }} ფაილი წაიშალა.',
-        messageRemoveFileOrFolderFailed: '{{ name }} ვერ წაიშალა.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} წაიშალა.',
+        messageCreateFailed: '{folderName} ვერ შეიქმნა.',
+        messageCreateSuccess: '{folderName} შეიქმნა.',
+        messageUpdateVersionFailed: '{folderName}-ის ვერსიის განახლება ვერ მოხერხდა.',
+        messageUpdateVersionSuccess: '{folderName}-ის ვერსია განახლდა.',
+        messageFileRenameFailed: 'სახელის გადარქმევა "{from}"-დან "{to}"-ზე ვერ მოხერხდა.',
+        messageFileRenameSuccess: '"{from}"-ს დაერქვა "{to}".',
+        messageRemoveFoldersAndFilesFailed: '{foldersCount} საქაღალდის და {filesCount} ფაილის წაშლა ვერ მოხერხდა.',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount} საქაღალდე და {filesCount} ფაილი წაიშალა.',
+        messageRemoveFoldersFailed: '{foldersCount} საქაღალდე ვერ წაიშალა.',
+        messageRemoveFoldersSuccess: '{foldersCount} საქაღალდე წაიშალა.',
+        messageRemoveFilesFailed: '{filesCount} ფაილი ვერ წაიშალა.',
+        messageRemoveFilesSuccess: '{filesCount} ფაილი წაიშალა.',
+        messageRemoveFileOrFolderFailed: '{name} ვერ წაიშალა.',
+        messageRemoveFileOrFolderSuccess: '{name} წაიშალა.',
         messageMoveFoldersAndFilesFailed:
-            '{{ foldersCount }} საქაღალდის და {{ filesCount }} ფაილის გადატანა ვერ მოხერხდა {{ to }}-ში.',
-        messageMoveFoldersAndFilesSuccess:
-            '{{ foldersCount }} საქაღალდე და {{ filesCount }} ფაილი გადატანილია {{ to }}-ში.',
-        messageMoveFoldersFailed: '{{ foldersCount }} საქაღალდის გადატანა ვერ მოხერხდა {{ to }}-ში.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} საქაღალდე გადატანილია {{ to }}-ში.',
-        messageMoveFilesFailed: '{{ filesCount }} ფაილის გადატანა ვერ მოხერხდა {{ to }}-ში.',
-        messageMoveFilesSuccess: '{{ filesCount }} ფაილი გადატანილია {{ to }}-ში.',
-        messageMoveFileOrFolderFailed: '{{ name }}-ის გადატანა ვერ მოხდა {{ to }}-ში.',
-        messageMoveFileOrFolderSuccess: '{{ name }} გადატანილია {{ to }}-ში.',
-        messageMoveRootFoldersAndFilesFailed:
-            '{{ foldersCount }} საქაღალდის და {{ filesCount }} ფაილის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFoldersAndFilesSuccess: '{{ foldersCount }} საქაღალდე და {{ filesCount }} ფაილი გადატანილია.',
-        messageMoveRootFoldersFailed: '{{ foldersCount }} საქაღალდის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} საქაღალდე გადატანილია.',
-        messageMoveRootFilesFailed: '{{ filesCount }} ფაილის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} ფაილი გადატანილია.',
-        messageMoveRootFileOrFolderFailed: '{{ name }}-ის გადატანა ვერ მოხერხდა.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} გადატანილია.',
+            '{foldersCount} საქაღალდის და {filesCount} ფაილის გადატანა ვერ მოხერხდა {to}-ში.',
+        messageMoveFoldersAndFilesSuccess: '{foldersCount} საქაღალდე და {filesCount} ფაილი გადატანილია {to}-ში.',
+        messageMoveFoldersFailed: '{foldersCount} საქაღალდის გადატანა ვერ მოხერხდა {to}-ში.',
+        messageMoveFoldersSuccess: '{foldersCount} საქაღალდე გადატანილია {to}-ში.',
+        messageMoveFilesFailed: '{filesCount} ფაილის გადატანა ვერ მოხერხდა {to}-ში.',
+        messageMoveFilesSuccess: '{filesCount} ფაილი გადატანილია {to}-ში.',
+        messageMoveFileOrFolderFailed: '{name}-ის გადატანა ვერ მოხდა {to}-ში.',
+        messageMoveFileOrFolderSuccess: '{name} გადატანილია {to}-ში.',
+        messageMoveRootFoldersAndFilesFailed: '{foldersCount} საქაღალდის და {filesCount} ფაილის გადატანა ვერ მოხერხდა.',
+        messageMoveRootFoldersAndFilesSuccess: '{foldersCount} საქაღალდე და {filesCount} ფაილი გადატანილია.',
+        messageMoveRootFoldersFailed: '{foldersCount} საქაღალდის გადატანა ვერ მოხერხდა.',
+        messageMoveRootFoldersSuccess: '{foldersCount} საქაღალდე გადატანილია.',
+        messageMoveRootFilesFailed: '{filesCount} ფაილის გადატანა ვერ მოხერხდა.',
+        messageMoveRootFilesSuccess: '{filesCount} ფაილი გადატანილია.',
+        messageMoveRootFileOrFolderFailed: '{name}-ის გადატანა ვერ მოხერხდა.',
+        messageMoveRootFileOrFolderSuccess: '{name} გადატანილია.',
         messageFileTypeMismatchPlural:
-            '{{ filesCount }} ფაილს აქვს აკრძალული გაფართოება. ნებადართული გაფართოებებია: {{ allowedTypes }}.',
+            '{filesCount} ფაილს აქვს აკრძალული გაფართოება. ნებადართული გაფართოებებია: {allowedTypes}.',
         messageFileTypeMismatchSingular:
-            'ფაილს "{{ fileName }}" აქვს აკრძალული გაფართოება. ნებადართული გაფართოებებია: {{ allowedTypes }}.',
+            'ფაილს "{fileName}" აქვს აკრძალული გაფართოება. ნებადართული გაფართოებებია: {allowedTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} ფაილი აჭარბებს მაქსიმალურ მოცულობას. ნებადართული მაქსიმალური ზომაა: {{ maxFileSize }}.',
+            '{filesCount} ფაილი აჭარბებს მაქსიმალურ მოცულობას. ნებადართული მაქსიმალური ზომაა: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'ფაილი "{{ fileName }}" აჭარბებს მაქსიმალურ მოცულობას. ნებადართული მაქსიმალური ზომაა: {{ maxFileSize }}.',
+            'ფაილი "{fileName}" აჭარბებს მაქსიმალურ მოცულობას. ნებადართული მაქსიმალური ზომაა: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} ფაილი აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {{ maxFilenameLength }} characters.',
+            '{filesCount} ფაილი აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {maxFilenameLength} characters.',
         messageFileNameLengthExceededSingular:
-            'ფაილი "{{ fileName }}" აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {{ maxFilenameLength }} characters.'
+            'ფაილი "{fileName}" აჭარბებს მაქსიმალურ სახელის სიგრძეს. მაქსიმალური სიგრძეა: {maxFilenameLength} characters.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'შესწორება'
@@ -611,10 +607,10 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         selectOptionLabel: 'აირჩიეთ ვარიანტი'
     },
     fnSlider: {
-        minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {{ min }}, მაქსიმალური - {{ max }}',
-        valueminDetails: 'მნიშვნელობა არის {{ value }}',
-        valuemaxDetails: 'მნიშვნელობა არის {{ value }}',
-        valueNowDetails: 'მიმდინარე მნიშვნელობა {{ value }}'
+        minMaxDetails: 'სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმალური - {max}',
+        valueminDetails: 'მნიშვნელობა არის {value}',
+        valuemaxDetails: 'მნიშვნელობა არის {value}',
+        valueNowDetails: 'მიმდინარე მნიშვნელობა {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'დათანხმება',

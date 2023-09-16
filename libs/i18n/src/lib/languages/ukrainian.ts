@@ -1,13 +1,11 @@
-import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
-import { PluralizationSet1 } from './pluralization/set1';
+import { FdLanguage } from '../models/lang';
 
-const pluralization = new PluralizationSet1();
 /**
  * Default set of translations of Fundamental UI libarary for Ukrainian language
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Вибрати все ({{selectedItems}} з {{totalItems}})'
+        selectAllLabel: 'Вибрати все ({selectedItems} з {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Перейти до попереднього елемента',
@@ -36,19 +34,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Скасувати',
-        listItemStatusAriaLabel: 'Елемент має статус. Статус: {{ status }}.',
-        listItemCounterAriaLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Елемент має 1 дочірній елемент.`;
-                case 'few':
-                    return `Елемент має ${count} дочірніх елемента.`;
-                default:
-                    return `Елемент має ${count} дочірніх елементів.`;
-            }
-        },
+        listItemStatusAriaLabel: 'Елемент має статус. Статус: {status}.',
+        listItemCounterAriaLabel:
+            'Елемент має {count, plural, one {один дочірній елемент} few {# дочірніх елемента} other {# дочірніх елементів} }.',
         listItemButtonDetailsTitle: 'Подробиці',
         listItemButtonDeleteTitle: 'Видалити',
         listItemStatusContainsErrors: 'Містить помилки',
@@ -60,54 +48,32 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => {
-            const option = pluralization.process(length);
-            switch (option) {
-                case 'zero':
-                    return 'Немає вибраних варіантів.';
-                case 'one':
-                    return `Обрано 1 варіант.`;
-                case 'few':
-                    return `Обрано ${length} варіанти.`;
-                default:
-                    return `Обрано ${length} варіантів.`;
-            }
-        }
+        tokensCountText:
+            '{ length, plural, =0 {Немає вибраних} other {Обрано #} } { length, plural, one {варіант} few {варіанти} other {варіантів} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Елемент дерева {{ itemDetails }}, {{ index }} із {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Елемент дерева {itemDetails}, {index} із {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Ще 1 елемент`;
-                case 'few':
-                    return `Ще ${count} елемента`;
-                default:
-                    return `Ще ${count} елементів`;
-            }
-        }
+        moreItemsButton: `Ще { count, plural, one {елемент} few {елемента} other {елементів} }`
     },
     corePagination: {
-        pageLabel: 'Сторінка {{ pageNumber }}',
-        currentPageAriaLabel: 'Сторінка {{ pageNumber }} є активною',
+        pageLabel: 'Сторінка {pageNumber}',
+        currentPageAriaLabel: 'Сторінка {pageNumber} є активною',
         labelBeforeInputMobile: 'Сторінка:',
-        labelAfterInputMobile: 'із {{ totalCount }}',
-        inputAriaLabel: 'Поле вводу сторінки, Поточна сторінка, Сторінка {{ pageNumber }} із {{ totalCount }}',
+        labelAfterInputMobile: 'із {totalCount}',
+        inputAriaLabel: 'Поле вводу сторінки, Поточна сторінка, Сторінка {pageNumber} із {totalCount}',
         itemsPerPageLabel: 'Результатів на сторінці:',
         firstLabel: 'Перейти до першої',
         previousLabel: 'Перейти до попердньої',
         nextLabel: 'Перейти до наступної',
         lastLabel: 'Перейти до останньої',
         ariaLabel: 'Нумерація сторінок',
-        totalResultsLabel: '{{ totalCount }} результатів'
+        totalResultsLabel: '{totalCount} результатів'
     },
     coreProductSwitch: {
         ariaLabel: 'Перемикач'
@@ -118,18 +84,18 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         search: 'Пошук'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
-        singleValueminDetails: 'Поточне значення: {{ value }}',
-        singleValuemaxDetails: 'Поточне значення: {{ value }}',
-        singleValueNowDetails: 'Поточне значення: {{ value }}',
-        multipleHandle1MinMaxDetails: 'Мінімальне значення слайдера {{ min }}, максимальне значення {{ max }}',
-        multipleHandle1ValueminDetails: 'Поточне значення: {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Поточне значення: {{ value }}',
-        multipleHandle1ValueNowDetails: 'Поточне значення: {{ value }}',
-        multipleHandle2MinMaxDetails: 'Мінімальне значення слайдера {{ min }}, максимальне значення {{ max }}',
-        multipleHandle2ValueminDetails: 'Поточне значення: {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Поточне значення: {{ value }}',
-        multipleHandle2ValueNowDetails: 'Поточне значення: {{ value }}'
+        singleMinMaxDetails: 'Мінімальне значення слайдера {min}, максимальне значення {max}',
+        singleValueminDetails: 'Поточне значення: {value}',
+        singleValuemaxDetails: 'Поточне значення: {value}',
+        singleValueNowDetails: 'Поточне значення: {value}',
+        multipleHandle1MinMaxDetails: 'Мінімальне значення слайдера {min}, максимальне значення {max}',
+        multipleHandle1ValueminDetails: 'Поточне значення: {value}',
+        multipleHandle1ValuemaxDetails: 'Поточне значення: {value}',
+        multipleHandle1ValueNowDetails: 'Поточне значення: {value}',
+        multipleHandle2MinMaxDetails: 'Мінімальне значення слайдера {min}, максимальне значення {max}',
+        multipleHandle2ValueminDetails: 'Поточне значення: {value}',
+        multipleHandle2ValuemaxDetails: 'Поточне значення: {value}',
+        multipleHandle2ValueNowDetails: 'Поточне значення: {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Більше дій',
@@ -181,18 +147,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         ariaRoleDescription: 'токен'
     },
     coreTokenizer: {
-        moreLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Ще 1 елемент`;
-                case 'few':
-                    return `Ще ${count} елемента`;
-                default:
-                    return `Ще ${count} елементів`;
-            }
-        }
+        moreLabel: 'Ще { count, plural, one {# елемент} few {# елемента} other {# елементів} }'
     },
     coreUploadCollection: {
         menuOkText: 'ОК',
@@ -253,44 +208,11 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         messagesTeamRemoved: '1 команду видалено',
         messagesErrorBuildGraph: 'Під час спроби побудувати графік сталася помилка. Перевірте вхідні дані.',
         messagesUndoAction: 'Скасувати',
-        nodeMembersCount: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `1 член команди`;
-                case 'few':
-                    return `${count} члена команди`;
-                default:
-                    return `${count || 0} членів команди`;
-            }
-        },
+        nodeMembersCount: '{ count, plural, one {1 член}, few {# члена}, other {# членів} } команди',
         nodeVariousTeams: 'Різні команди',
         nodeStatusDueToday: 'Термін виконання сьогодні',
-        nodeStatusDueInXDays: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Термін виконання через 1 день`;
-                case 'few':
-                    return `Термін виконання через ${count} дні`;
-                default:
-                    return `Термін виконання через ${count || 0} днів`;
-            }
-        },
-        nodeStatusXDaysOverdue: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Прострочено на 1 день`;
-                case 'few':
-                    return `Прострочено на ${count} дні`;
-                default:
-                    return `Прострочено на ${count || 0} днів`;
-            }
-        },
+        nodeStatusDueInXDays: 'Термін виконання через { count, plural, one {1 день} few {# дні} other {# днів} }',
+        nodeStatusXDaysOverdue: 'Прострочено на { count, plural, one {1 день} few {# дні} other {# днів} }',
         nodeActionAddApproversBefore: 'Додати стверджувача до',
         nodeActionAddApproversAfter: 'Додати стверджувача після',
         nodeActionAddApproversParallel: 'Додати паралельних стверджувачів',
@@ -311,18 +233,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         toolbarEditApprover: 'Редагувати стверджувача',
         watchersInputPlaceholder: 'Пошук',
         userListSelectedItemsCountSingular: 'Вибрано 1 елемент',
-        userListSelectedItemsCountPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Вибрано 1 елемент`;
-                case 'few':
-                    return `Вибрано ${count} елементи`;
-                default:
-                    return `Вибрано ${count || 0} елементів`;
-            }
-        },
+        userListSelectedItemsCountPlural:
+            'Вибрано { count, plural, one {1 елемент} few {# елемента} other {# елементів} }',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -346,45 +258,16 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Сховати фільтри',
         searchShowAllAdvancedSearchLabel: 'Показати всі фільтри',
         searchHideAllAdvancedSearchLabel: 'Сховати всі фільтри',
-        selectTabDisplayCountLabel: 'Елементи ({{ count }})',
+        selectTabDisplayCountLabel: 'Елементи ({count})',
         selectTabMoreBtnLabel: 'Більше',
-        selectTabCountHiddenA11yLabel: (params) => {
-            const rowCount = params['rowCount'];
-            const rowOption = pluralization.process(rowCount);
-            let rowPart: string;
-            switch (rowOption) {
-                case 'one':
-                    rowPart = 'містить 1 ряд';
-                    break;
-                case 'few':
-                    rowPart = `містить ${rowCount} ряди`;
-                    break;
-                default:
-                    rowPart = `містить ${rowCount} рядів`;
-                    break;
-            }
-            const colCount = params['colCount'];
-            const colOption = pluralization.process(colCount);
-            let colPart: string;
-            switch (colOption) {
-                case 'one':
-                    colPart = '1 колонку';
-                    break;
-                case 'few':
-                    colPart = `${colCount} колонки`;
-                    break;
-                default:
-                    colPart = `${colCount} колонок`;
-                    break;
-            }
-            return `${rowPart} і ${colPart}`;
-        },
+        selectTabCountHiddenA11yLabel:
+            'містить { rowCount, plural, one {1 ряд} few {# ряди} other {# рядів} } і { colCount, plural, one {1 колонку} few {# колонки} other {# колонок} }',
         selectMobileTabBackBtnTitle: 'Назад',
         selectMobileTabBtnOpenDialogLabel: 'Відкрити діалогове вікно',
-        selectMobileTabTitle: '{{ title }} вкладка',
+        selectMobileTabTitle: '{title} вкладка',
         selectMobileConditionEmpty: 'Пусто',
         defineConditionTitle: 'Продукт',
-        defineConditionSelectedValueHiddenA11yLabel: 'вибране значення {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'вибране значення {value}',
         defineConditionConditionsGroupHeaderInclude: 'Включні умови',
         defineConditionConditionsGroupHeaderExclude: 'Виключні умови',
         defineConditionFromPlaceholder: 'від',
@@ -405,34 +288,15 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'порожнє',
         defineConditionConditionStrategyLabelNotEqualTo: 'не дорівнює',
         defineConditionConditionStrategyLabelNotEmpty: 'не порожнє',
-        defineConditionMaxCountError: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Введіть значення не більше ніж 1 символу`;
-                default:
-                    return `Введіть значення не більше ніж ${count || 0} символів`;
-            }
-        },
+        defineConditionMaxCountError:
+            'Введіть значення не більше ніж { count, plural, one {1 символ} few {# символи} other {# символів} }',
         selectTabTitle: 'Вибрати зі списку',
         searchTableEmptyMessage: 'Використовуйте пошук, щоб отримати результати',
         defineTabTitle: 'Визначити умови'
     },
     platformCombobox: {
         countListResultsSingular: '1 елемент',
-        countListResultsPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `1 елемент`;
-                case 'few':
-                    return `${count} елементи`;
-                default:
-                    return `${count || 0} елементів`;
-            }
-        }
+        countListResultsPlural: '{ count, plural, one {1 елемент} few {# елементи} other {# елементів} }'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Вибрати опції',
@@ -442,34 +306,14 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: 'Перевищено ліміт на 1 символ',
-        counterMessageCharactersOverTheLimitPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Перевищено ліміт на 1 символ`;
-                case 'few':
-                    return `Перевищено ліміт на ${count} символи`;
-                default:
-                    return `Перевищено ліміт на ${count || 0} символів`;
-            }
-        },
+        counterMessageCharactersOverTheLimitPlural:
+            'Перевищено ліміт на { count, plural, one {1 символ} few {# символи} other {# символів} }',
         counterMessageCharactersRemainingSingular: 'Залишився 1 символ',
-        counterMessageCharactersRemainingPlural: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Залишилось 1 символ`;
-                case 'few':
-                    return `Залишилось ${count} символи`;
-                default:
-                    return `Залишилось ${count || 0} символів`;
-            }
-        }
+        counterMessageCharactersRemainingPlural:
+            'Залишилось { count, plural, one {1 символ} few {# символи} other {# символів} }'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Медіа: {{ media }}'
+        roleDescriptionWithMedia: 'Медіа: {media}'
     },
     platformList: {
         loadingAriaLabel: 'завантаження'
@@ -487,24 +331,13 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         submitButtonTitle: 'Пошук',
         searchInputLabel: 'Пошук',
         synchronizeButtonTitle: 'Синхронізувати',
-        searchSuggestionMessage: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Знайдено 1 варіант`;
-                case 'few':
-                    return `Знайдено ${count} варіанти`;
-                default:
-                    return `Знайдено ${count || 0} варіантів`;
-            }
-        },
+        searchSuggestionMessage: 'Знайдено { count, plural, one {1 варіант} few {# варіанти} other {# варіантів} }',
         searchSuggestionNavigateMessage: 'використовуйте стрілки вгору та вниз для навігації'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Пошук',
         submitButtonLabel: 'Перейти',
-        filtersButtonLabel: 'Фільтри ({{ filtersCount }})',
+        filtersButtonLabel: 'Фільтри ({filtersCount})',
         showFiltersButtonLabel: 'Показати фільтри',
         hideFiltersButtonLabel: 'Сховати фільтри',
         defineConditionsRemoveConditionButtonTitle: 'Видалити умову',
@@ -561,7 +394,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Пошук',
         P13ColumnsDialogsShowSelected: 'Показати вибране',
         P13ColumnsDialogShowAll: 'Показати все',
-        P13ColumnsDialogSelectAll: 'Вибрати всі ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Вибрати всі ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Скасувати',
         P13ColumnsDialogMoveToTopBtn: 'Перемістити вгору',
@@ -586,9 +419,9 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Так',
         P13FilterBooleanOptionFalse: 'Ні',
         P13FilterDialogHeader: 'Фільтрувати за',
-        P13FilterDialogIncludePanelTitleWithCount: 'Включні умови ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Включні умови ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Включні умови',
-        P13FilterDialogExcludePanelTitleWithCount: 'Виключні умови ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Виключні умови ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Виключні умови',
         P13FilterDialogRemoveFilterBtnTitle: 'Видалити фільтр',
         P13FilterDialoAddFilterBtnTitle: 'Додати фільтр',
@@ -621,7 +454,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Не відфільтровано)',
-        filterDialogFilterByLabel: 'Фільтрувати за: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Фільтрувати за: {filterLabel}',
         filterDialogFilterTitle: 'Фільтр',
         filterDialogFilterBy: 'Фільтрувати за',
         filterDialogConfirmBtnLabel: 'OK',
@@ -664,24 +497,14 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         moveToCloseBtn: 'Скасувати',
         newFolderTitle: 'Нова папка',
         newFolderAtRootInputLabel: 'Назва нової папки',
-        newFolderAtFolderInputLabel: 'Назва нової папки усередині {{ folderName }',
+        newFolderAtFolderInputLabel: 'Назва нової папки усередині {folderName}',
         newFolderInputPlaceholder: 'Введіть назву..',
-        newFolderInputErrorLabel: (params) => {
-            const count = params['count'];
-            const option = pluralization.process(count);
-            switch (option) {
-                case 'one':
-                    return `Максимально дозволено 1 символ`;
-                case 'few':
-                    return `Максимально дозволено ${count} символи`;
-                default:
-                    return `Максимально дозволено ${count} символів`;
-            }
-        },
+        newFolderInputErrorLabel:
+            'Максимально дозволено { count, plural, one {1 символ} few {# символи} other {# символів} }',
         newFolderDialogCreateBtnLabel: 'Створити',
         newFolderDialogCancelBtnLabel: 'Скасувати',
         breadcrumbLabelAllFiles: 'Усі файли',
-        breadcrumbLabelAllFilesWithTotal: 'Усі файли ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'Усі файли ({total})',
         searchPlaceholder: 'Пошук',
         addBtnLabel: 'Додати',
         newFolderBtnLabel: 'Нова папка',
@@ -702,94 +525,53 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         dragDropAreaText: 'Перетягніть файли для завантаження',
         noDataText: 'Файлів не знайдено',
         noDataDescription: 'Перетягніть файли для завантаження або скористайтеся кнопкою «Додати».',
-        paginationTotal: 'Показано {{ from }}-{{ to }} із {{ total }}',
+        paginationTotal: 'Показано {from}-{to} із {total}',
         resultsPerPage: 'Результатів на сторінці',
-        messageCreateFailed: 'Не вдалося створити {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} успішно створено.',
-        messageUpdateVersionFailed: 'Не вдалося оновити версію {{ folderName }}.',
-        messageUpdateVersionSuccess: 'Версія {{ folderName }} оновлена.',
-        messageFileRenameFailed: 'Не вдалося перейменувати "{{ from }}" на "{{ to }}."',
-        messageFileRenameSuccess: '{{ from }}" перейменовано на "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed: (params) =>
-            `Не вдалося видалити ${folderNamePluralization(params)} і ${fileNamePluralization(params)}.`,
-        messageRemoveFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} і ${fileNamePluralization(params)} видалено.`,
-        messageRemoveFoldersFailed: (params) => `Не вдалося видалити ${folderNamePluralization(params)}.`,
-        messageRemoveFoldersSuccess: (params) => `Видалено ${folderNamePluralization(params)}.`,
-        messageRemoveFilesFailed: (params) => `Не вдалося видалити ${fileNamePluralization(params)}.`,
-        messageRemoveFilesSuccess: (params) => `Видалено ${fileNamePluralization(params)}.`,
-        messageRemoveFileOrFolderFailed: 'Не вдалося видалити {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} видалено.',
-        messageMoveFoldersAndFilesFailed: (params) =>
-            `Не вдалося перемістити ${folderNamePluralization(params)} і ${fileNamePluralization(params)} до {{ to }}.`,
-        messageMoveFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} і ${fileNamePluralization(params)} переміщено в {{ to }}.`,
-        messageMoveFoldersFailed: (params) => `Не вдалося перемістити ${folderNamePluralization(params)} до {{ to }}.`,
-        messageMoveFoldersSuccess: (params) => `${folderNamePluralization(params)} переміщено до {{ to }}.`,
-        messageMoveFilesFailed: (params) => `Не вдалося перемістити ${fileNamePluralization(params)} до {{ to }}.`,
-        messageMoveFilesSuccess: (params) => `${fileNamePluralization(params)} переміщено до {{ to }}.`,
-        messageMoveFileOrFolderFailed: 'Не вдалося перемістити {{ name }} до {{ to }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} переміщено в {{ to }}.',
-        messageMoveRootFoldersAndFilesFailed: (params) =>
-            `Не вдалося перемістити ${folderNamePluralization(params)} і ${fileNamePluralization(
-                params
-            )} до всіх файлів.`,
-        messageMoveRootFoldersAndFilesSuccess: (params) =>
-            `${folderNamePluralization(params)} і ${fileNamePluralization(params)} переміщено до всіх файлів.`,
-        messageMoveRootFoldersFailed: (params) =>
-            `Не вдалося перемістити ${folderNamePluralization(params)} до всіх файлів.`,
-        messageMoveRootFoldersSuccess: (params) => `${folderNamePluralization(params)} переміщено до всіх файлів.`,
-        messageMoveRootFilesFailed: (params) =>
-            `Не вдалося перемістити ${fileNamePluralization(params)} до всіх файлів.`,
-        messageMoveRootFilesSuccess: (params) => `${fileNamePluralization(params)} переміщено до всіх файлів.`,
-        messageMoveRootFileOrFolderFailed: 'Не вдалося перемістити {{ name }} до всіх файлів.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} переміщено до всіх файлів.',
-        messageFileTypeMismatchPlural: (params) => {
-            const filesCount = params['filesCount'];
-            const foldersCountOption = pluralization.process(filesCount);
-            switch (foldersCountOption) {
-                case 'one':
-                    return '1 файл має неправильний тип. Дозволені типи: {{ allowedTypes }}.';
-                case 'few':
-                    return `${filesCount} файли мають неправильний тип. Дозволені типи: {{ allowedTypes }}.`;
-                default:
-                    return `${filesCount || 0} файлів мають неправильний тип. Дозволені типи: {{ allowedTypes }}.`;
-            }
-        },
-        messageFileTypeMismatchSingular:
-            'Файл "{{ fileName }}" має неправильний тип. Дозволені типи: {{ allowedTypes }}.',
-        messageFileSizeExceededPlural: (params) => {
-            const filesCount = params['filesCount'];
-            const foldersCountOption = pluralization.process(filesCount);
-            switch (foldersCountOption) {
-                case 'one':
-                    return '1 файл перевищує максимальний розмір файлу. Дозволений максимальний розмір файлу: {{ maxFileSize }}.';
-                case 'few':
-                    return `${filesCount} файли перевищують максимальний розмір файлу. Дозволений максимальний розмір файлу: {{ maxFileSize }}.`;
-                default:
-                    return `${
-                        filesCount || 0
-                    } файлів перевищують максимальний розмір файлу. Дозволений максимальний розмір файлу: {{ maxFileSize }}.`;
-            }
-        },
+        messageCreateFailed: 'Не вдалося створити {folderName}.',
+        messageCreateSuccess: '{folderName} успішно створено.',
+        messageUpdateVersionFailed: 'Не вдалося оновити версію {folderName}.',
+        messageUpdateVersionSuccess: 'Версія {folderName} оновлена.',
+        messageFileRenameFailed: 'Не вдалося перейменувати "{from}" на "{to}."',
+        messageFileRenameSuccess: '{from}" перейменовано на "{to}".',
+        folderNamePluralization: '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} }',
+        fileNamePluralization: '{ filesCount, plural, one {1 файл} few {# файли} other {# файлів} }',
+        messageRemoveFoldersAndFilesFailed: `Не вдалося видалити {@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization}.`,
+        messageRemoveFoldersAndFilesSuccess: `{@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} видалено.`,
+        messageRemoveFoldersFailed: `Не вдалося видалити {@@platformUploadCollection.folderNamePluralization}.`,
+        messageRemoveFoldersSuccess: `Видалено {@@platformUploadCollection.folderNamePluralization}.`,
+        messageRemoveFilesFailed: `Не вдалося видалити {@@platformUploadCollection.fileNamePluralization}.`,
+        messageRemoveFilesSuccess: `Видалено {@@platformUploadCollection.fileNamePluralization}.`,
+        messageRemoveFileOrFolderFailed: 'Не вдалося видалити {name}.',
+        messageRemoveFileOrFolderSuccess: '{name} видалено.',
+        messageMoveFoldersAndFilesFailed: `Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} до {to}.`,
+        messageMoveFoldersAndFilesSuccess: `{@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} переміщено в {to}.`,
+        messageMoveFoldersFailed: `Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} до {to}.`,
+        messageMoveFoldersSuccess: `{@@platformUploadCollection.folderNamePluralization} переміщено до {to}.`,
+        messageMoveFilesFailed: `Не вдалося перемістити {@@platformUploadCollection.fileNamePluralization} до {to}.`,
+        messageMoveFilesSuccess: `{@@platformUploadCollection.fileNamePluralization} переміщено до {to}.`,
+        messageMoveFileOrFolderFailed: 'Не вдалося перемістити {name} до {to}.',
+        messageMoveFileOrFolderSuccess: '{name} переміщено в {to}.',
+        messageMoveRootFoldersAndFilesFailed: `Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} до всіх файлів.`,
+        messageMoveRootFoldersAndFilesSuccess: `{@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} переміщено до всіх файлів.`,
+        messageMoveRootFoldersFailed: `Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} до всіх файлів.`,
+        messageMoveRootFoldersSuccess: `{@@platformUploadCollection.folderNamePluralization} переміщено до всіх файлів.`,
+        messageMoveRootFilesFailed: `Не вдалося перемістити {@@platformUploadCollection.fileNamePluralization} до всіх файлів.`,
+        messageMoveRootFilesSuccess: `{@@platformUploadCollection.fileNamePluralization} переміщено до всіх файлів.`,
+        messageMoveRootFileOrFolderFailed: 'Не вдалося перемістити {name} до всіх файлів.',
+        messageMoveRootFileOrFolderSuccess: '{name} переміщено до всіх файлів.',
+        messageFileTypeMismatchPlural:
+            '{filesCount, plural, one {1 файл}, few {# файли}, other {# файлів} } мають неправильний тип. Дозволені типи: {allowedTypes}.',
+        messageFileTypeMismatchSingular: 'Файл "{fileName}" має неправильний тип. Дозволені типи: {allowedTypes}.',
+        messageFileSizeExceededPlural:
+            // eslint-disable-next-line max-len
+            '{ filesCount, plural, one {1 файл перевищує} few {# файли перевищують} other {# файлів перевищують} } максимальний розмір файлу. Дозволений максимальний розмір файлу: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'Файл "{{ fileName }}" перевищує максимальний розмір файлу. Дозволений максимальний розмір файлу: {{ maxFileSize }}.',
-        messageFileNameLengthExceededPlural: (params) => {
-            const filesCount = params['filesCount'];
-            const foldersCountOption = pluralization.process(filesCount);
-            switch (foldersCountOption) {
-                case 'one':
-                    return '1 файл перевищив максимальну довжину імені файлу. Дозволена довжина імені файлу: {{ maxFilenameLength }} символів.';
-                case 'few':
-                    return `${filesCount} файли перевищили максимальну довжину імені файлу. Дозволена довжина імені файлу: {{ maxFilenameLength }} символів.`;
-                default:
-                    return `${
-                        filesCount || 0
-                    } файлів перевищили максимальну довжину імені файлу. Дозволена довжина імені файлу: {{ maxFilenameLength }} символів.`;
-            }
-        },
+            'Файл "{fileName}" перевищує максимальний розмір файлу. Дозволений максимальний розмір файлу: {maxFileSize}.',
+        messageFileNameLengthExceededPlural:
+            // eslint-disable-next-line max-len
+            '{ filesCount, plural, one {1 файл перевищив} few {# файли перевищили} other {# файлів перевищили} } максимальну довжину імені файлу. Дозволена довжина імені файлу: {maxFilenameLength} символів.',
         messageFileNameLengthExceededSingular:
-            'Назва "{{ fileName }}" перевищує максимальну довжину імені файлу. Дозволена довжина імені файлу: {{ maxFilenameLength }} символів.'
+            'Назва "{fileName}" перевищує максимальну довжину імені файлу. Дозволена довжина імені файлу: {maxFilenameLength} символів.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Редагувати'
@@ -836,10 +618,10 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         selectOptionLabel: 'Виберіть опцію'
     },
     fnSlider: {
-        minMaxDetails: 'Мінімальне значення слайдера {{min}}, максимальне значення {{ max }}',
-        valueminDetails: 'Поточне значення: {{ value }}',
-        valuemaxDetails: 'Поточне значення: {{ value }}',
-        valueNowDetails: 'Поточне значення: {{ value }}'
+        minMaxDetails: 'Мінімальне значення слайдера {min}, максимальне значення {max}',
+        valueminDetails: 'Поточне значення: {value}',
+        valuemaxDetails: 'Поточне значення: {value}',
+        valueNowDetails: 'Поточне значення: {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Прийняти',
@@ -851,45 +633,3 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         noData: 'Немає даних'
     }
 };
-
-/**
- * Pluralization for "file" word in ukrainian language
- *
- * Output samples:
- * * 1 файл
- * * 2 файли
- * * 10 файлів
- */
-function fileNamePluralization(params: FdLanguageKeyArgs): string {
-    const filesCount = params['filesCount'];
-    const filesCountOption = pluralization.process(filesCount);
-    switch (filesCountOption) {
-        case 'one':
-            return '1 файл';
-        case 'few':
-            return `${filesCount} файли`;
-        default:
-            return `${filesCount || 0} файлів`;
-    }
-}
-
-/**
- * Pluralization for "folder" word in ukrainian language
- *
- * Outputs samples:
- * * 1 папку
- * * 2 папки
- * * 10 папок
- */
-function folderNamePluralization(params: FdLanguageKeyArgs): string {
-    const foldersCount = params['foldersCount'];
-    const foldersCountOption = pluralization.process(foldersCount);
-    switch (foldersCountOption) {
-        case 'one':
-            return '1 папку';
-        case 'few':
-            return `${foldersCount} папки`;
-        default:
-            return `${foldersCount || 0} папок`;
-    }
-}

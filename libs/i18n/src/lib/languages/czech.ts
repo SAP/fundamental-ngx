@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_CZECH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Vybrat vše ({{selectedItems}} z {{totalItems}})'
+        selectAllLabel: 'Vybrat vše ({selectedItems} z {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Přejít na předchozí položku',
@@ -34,8 +34,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Zrušit',
-        listItemStatusAriaLabel: 'Položka má stav. Stav: {{ status }}',
-        listItemCounterAriaLabel: 'Položka má {{ count }} potomků.',
+        listItemStatusAriaLabel: 'Položka má stav. Stav: {status}',
+        listItemCounterAriaLabel: 'Položka má {count} potomků.',
         listItemButtonDetailsTitle: 'Podrobnosti',
         listItemButtonDeleteTitle: 'Vymazat',
         listItemStatusContainsErrors: 'Obsahuje chyby',
@@ -47,31 +47,31 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Položka stromu {{ itemDetails }}, {{ index }} z {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Položka stromu {itemDetails}, {index} z {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} více'
+        moreItemsButton: '{count} více'
     },
     corePagination: {
-        pageLabel: 'Strana {{ pageNumber }}',
-        currentPageAriaLabel: 'Stránka {{ pageNumber }} je aktuální stránka',
+        pageLabel: 'Strana {pageNumber}',
+        currentPageAriaLabel: 'Stránka {pageNumber} je aktuální stránka',
         labelBeforeInputMobile: 'Strana:',
-        labelAfterInputMobile: 'z {{ totalCount }}',
-        inputAriaLabel: 'Vstup stránky, aktuální stránka, stránka {{ pageNumber }} z {{ totalCount }}',
+        labelAfterInputMobile: 'z {totalCount}',
+        inputAriaLabel: 'Vstup stránky, aktuální stránka, stránka {pageNumber} z {totalCount}',
         itemsPerPageLabel: 'Výsledky na stránku:',
         firstLabel: 'První',
         previousLabel: 'Předchozí',
         nextLabel: 'Další',
         lastLabel: 'Poslední',
         ariaLabel: 'Stránkování',
-        totalResultsLabel: '{{ totalCount }} Výsledky'
+        totalResultsLabel: '{totalCount} Výsledky'
     },
     coreProductSwitch: {
         ariaLabel: 'Přepínač produktu'
@@ -82,20 +82,18 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Minimální hodnota posuvníku je {{ min }}, maximální hodnota je {{ max }}',
-        singleValueminDetails: 'Hodnota je {{ value}}',
-        singleValuemaxDetails: 'Hodnota je {{ value }}',
-        singleValueNowDetails: 'Aktuální hodnota je {{ value}}',
-        multipleHandle1MinMaxDetails:
-            'Minimální hodnota posuvníku rozsahu je {{ min }}, maximální hodnota je {{ max }}',
-        multipleHandle1ValueminDetails: 'Hodnota je {{ value}}',
-        multipleHandle1ValuemaxDetails: 'Hodnota je {{ value}}',
-        multipleHandle1ValueNowDetails: 'Aktuální hodnota je {{ value}}',
-        multipleHandle2MinMaxDetails:
-            'Minimální hodnota posuvníku rozsahu je {{ min }}, maximální hodnota je {{ max }}',
-        multipleHandle2ValueminDetails: 'Hodnota je {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Hodnota je {{ value }}',
-        multipleHandle2ValueNowDetails: 'Aktuální hodnota je {{ value}}'
+        singleMinMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
+        singleValueminDetails: 'Hodnota je {value}',
+        singleValuemaxDetails: 'Hodnota je {value}',
+        singleValueNowDetails: 'Aktuální hodnota je {value}',
+        multipleHandle1MinMaxDetails: 'Minimální hodnota posuvníku rozsahu je {min}, maximální hodnota je {max}',
+        multipleHandle1ValueminDetails: 'Hodnota je {value}',
+        multipleHandle1ValuemaxDetails: 'Hodnota je {value}',
+        multipleHandle1ValueNowDetails: 'Aktuální hodnota je {value}',
+        multipleHandle2MinMaxDetails: 'Minimální hodnota posuvníku rozsahu je {min}, maximální hodnota je {max}',
+        multipleHandle2ValueminDetails: 'Hodnota je {value}',
+        multipleHandle2ValuemaxDetails: 'Hodnota je {value}',
+        multipleHandle2ValueNowDetails: 'Aktuální hodnota je {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'Více akcí',
@@ -147,7 +145,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} více'
+        moreLabel: '{count} více'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
@@ -208,11 +206,11 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         messagesTeamRemoved: '1 tým byl odstraněn',
         messagesErrorBuildGraph: 'There was an error when trying to build graph. Check the initial data.',
         messagesUndoAction: 'Zpět',
-        nodeMembersCount: '{{ count }} členů',
+        nodeMembersCount: '{count} členů',
         nodeVariousTeams: 'Různé týmy',
         nodeStatusDueToday: 'Ke schválení dnes',
-        nodeStatusDueInXDays: ' Ke schválení za {{ count }} dní',
-        nodeStatusXDaysOverdue: '{{ count }} dní po schválení',
+        nodeStatusDueInXDays: ' Ke schválení za {count} dní',
+        nodeStatusXDaysOverdue: '{count} dní po schválení',
         nodeActionAddApproversBefore: 'Přidejte schvalovatele před',
         nodeActionAddApproversAfter: 'Přidejte schvalovatele za',
         nodeActionAddApproversParallel: 'Přidejte paralelní schvalovatele',
@@ -233,7 +231,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         toolbarEditApprover: 'Upravit schvalovatele',
         watchersInputPlaceholder: 'Hledej tady..',
         userListSelectedItemsCountSingular: 'Vybrána 1 položka',
-        userListSelectedItemsCountPlural: 'Počet vybraných položek: {{ count }}',
+        userListSelectedItemsCountPlural: 'Počet vybraných položek: {count}',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -257,15 +255,15 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Skrýt filtry',
         searchShowAllAdvancedSearchLabel: 'Zobrazit všechny filtry',
         searchHideAllAdvancedSearchLabel: 'Skrýt všechny filtry',
-        selectTabDisplayCountLabel: 'Položky ({{ count }})',
+        selectTabDisplayCountLabel: 'Položky ({count})',
         selectTabMoreBtnLabel: 'Více',
-        selectTabCountHiddenA11yLabel: 'obsahuje {{ rowCount }} řádků a {{ colCount }} sloupců',
+        selectTabCountHiddenA11yLabel: 'obsahuje {rowCount} řádků a {colCount} sloupců',
         selectMobileTabBackBtnTitle: 'Zpět',
         selectMobileTabBtnOpenDialogLabel: 'Otevřít dialog',
-        selectMobileTabTitle: 'Karta {{ title }}',
+        selectMobileTabTitle: 'Karta {title}',
         selectMobileConditionEmpty: 'Prázdný',
         defineConditionTitle: 'Produkt',
-        defineConditionSelectedValueHiddenA11yLabel: 'vybraná hodnota {{ hodnota }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'vybraná hodnota {hodnota}',
         defineConditionConditionsGroupHeaderInclude: 'Zahrnout',
         defineConditionConditionsGroupHeaderExclude: 'Vyloučit',
         defineConditionFromPlaceholder: 'od',
@@ -286,14 +284,14 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'prázdný',
         defineConditionConditionStrategyLabelNotEqualTo: 'nerovná se',
         defineConditionConditionStrategyLabelNotEmpty: 'není prázdný',
-        defineConditionMaxCountError: 'Zadejte hodnotu s maximálně {{ count }} znaků',
+        defineConditionMaxCountError: 'Zadejte hodnotu s maximálně {count} znaků',
         selectTabTitle: 'Vyberte ze seznamu',
         searchTableEmptyMessage: 'K získání výsledků použijte vyhledávání',
         defineTabTitle: 'Definujte podmínky'
     },
     platformCombobox: {
         countListResultsSingular: '1 položka výsledkové listiny',
-        countListResultsPlural: '{{ count }} položek výsledkového seznamu'
+        countListResultsPlural: '{count} položek výsledkového seznamu'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Vyberte Možnosti',
@@ -303,12 +301,12 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 znak nad limit',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} znaků překračuje limit',
+        counterMessageCharactersOverTheLimitPlural: '{count} znaků překračuje limit',
         counterMessageCharactersRemainingSingular: 'Zbývá 1 znak',
-        counterMessageCharactersRemainingPlural: 'Zbývá {{ count }} znaků'
+        counterMessageCharactersRemainingPlural: 'Zbývá {count} znaků'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Médium: {{ media }}'
+        roleDescriptionWithMedia: 'Médium: {media}'
     },
     platformList: {
         loadingAriaLabel: 'načítání'
@@ -326,13 +324,13 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         submitButtonTitle: 'Search',
         searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronizovat',
-        searchSuggestionMessage: 'Počet nalezených návrhů: {{ count }}.',
+        searchSuggestionMessage: 'Počet nalezených návrhů: {count}.',
         searchSuggestionNavigateMessage: 'k navigaci použijte šipky nahoru a dolů'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Vyhledávání',
         submitButtonLabel: 'Jdi',
-        filtersButtonLabel: 'Filtry ({{ filtersCount }})',
+        filtersButtonLabel: 'Filtry ({filtersCount})',
         showFiltersButtonLabel: 'Zobrazit filtry',
         hideFiltersButtonLabel: 'Skrýt filtry',
         defineConditionsRemoveConditionButtonTitle: 'Odstraňte podmínku',
@@ -389,7 +387,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Vyhledávání',
         P13ColumnsDialogsShowSelected: 'Zobrazit vybrané',
         P13ColumnsDialogShowAll: 'Ukázat vše',
-        P13ColumnsDialogSelectAll: 'Vybrat vše ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Vybrat vše ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Zrušit',
         P13ColumnsDialogMoveToTopBtn: 'Přejít na začátek',
@@ -414,9 +412,9 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Ano',
         P13FilterBooleanOptionFalse: 'Ne',
         P13FilterDialogHeader: 'Filtrovat podle',
-        P13FilterDialogIncludePanelTitleWithCount: 'Zahrnout ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Zahrnout ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Zahrnout',
-        P13FilterDialogExcludePanelTitleWithCount: 'Vyloučit ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Vyloučit ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Vyloučit',
         P13FilterDialogRemoveFilterBtnTitle: 'Odstraňte filtr',
         P13FilterDialoAddFilterBtnTitle: 'Přidat filtr',
@@ -449,7 +447,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Rozbalit vše',
         toolbarActionCollapseAllButtonTitle: 'Sbalit vše',
         filterDialogNotFilteredLabel: '(Nefiltrováno)',
-        filterDialogFilterByLabel: 'Filtrovat podle: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filtrovat podle: {filterLabel}',
         filterDialogFilterTitle: 'Filtr',
         filterDialogFilterBy: 'Filtrovat podle',
         filterDialogConfirmBtnLabel: 'OK',
@@ -492,13 +490,13 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         moveToCloseBtn: 'Zrušit',
         newFolderTitle: 'Nová složka',
         newFolderAtRootInputLabel: 'Název nové složky',
-        newFolderAtFolderInputLabel: 'Název nové složky uvnitř {{ folderName }}',
+        newFolderAtFolderInputLabel: 'Název nové složky uvnitř {folderName}',
         newFolderInputPlaceholder: 'Napište sem..',
-        newFolderInputErrorLabel: 'Maximální povolený počet znaků: {{ count }}',
+        newFolderInputErrorLabel: 'Maximální povolený počet znaků: {count}',
         newFolderDialogCreateBtnLabel: 'Vytvořit',
         newFolderDialogCancelBtnLabel: 'Zrušit',
         breadcrumbLabelAllFiles: 'All files',
-        breadcrumbLabelAllFilesWithTotal: 'Všechny soubory ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'Všechny soubory ({total})',
         searchPlaceholder: 'Vyhledávání',
         addBtnLabel: 'Přidat',
         newFolderBtnLabel: 'Nová složka',
@@ -519,53 +517,51 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         dragDropAreaText: 'Přetáhněte soubory k nahrání',
         noDataText: 'Nebyly nalezeny žádné soubory',
         noDataDescription: 'Přetáhněte soubory, které chcete nahrát, nebo použijte tlačítko „Přidat“.',
-        paginationTotal: 'Zobrazeno {{ from }}-{{ to }} z {{ to }}',
+        paginationTotal: 'Zobrazeno {from}-{to} z {to}',
         resultsPerPage: 'Výsledky na stránku',
-        messageCreateFailed: 'Vytvoření {{ folderName }} se nezdařilo.',
-        messageCreateSuccess: '{{ folderName }} byl vytvořen.',
-        messageUpdateVersionFailed: 'Aktualizace verze {{ folderName }} se nezdařila.',
-        messageUpdateVersionSuccess: 'Verze {{ folderName }} byla aktualizována.',
-        messageFileRenameFailed: 'Nepodařilo se přejmenovat "{{ from }}" na "{{ to }}."',
-        messageFileRenameSuccess: '"{{ from }}" bylo přejmenováno na "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed:
-            'Nepodařilo se odstranit {{ foldersCount }} složky a {{ filesCount }} soubory.',
-        messageRemoveFoldersAndFilesSuccess: 'Bylo odstraněno {{ foldersCount }} složek a {{ filesCount }} souborů.',
-        messageRemoveFoldersFailed: 'Nepodařilo se odstranit složky ({{ foldersCount }}).',
-        messageRemoveFoldersSuccess: 'Složky ({{ foldersCount }}) byly odstraněny.',
-        messageRemoveFilesFailed: 'Nepodařilo se odstranit {{ filesCount }} soubory.',
-        messageRemoveFilesSuccess: 'Soubory {{ filesCount }} byly odstraněny.',
-        messageRemoveFileOrFolderFailed: 'Nepodařilo se odstranit {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} bylo odstraněno.',
+        messageCreateFailed: 'Vytvoření {folderName} se nezdařilo.',
+        messageCreateSuccess: '{folderName} byl vytvořen.',
+        messageUpdateVersionFailed: 'Aktualizace verze {folderName} se nezdařila.',
+        messageUpdateVersionSuccess: 'Verze {folderName} byla aktualizována.',
+        messageFileRenameFailed: 'Nepodařilo se přejmenovat "{from}" na "{to}."',
+        messageFileRenameSuccess: '"{from}" bylo přejmenováno na "{to}".',
+        messageRemoveFoldersAndFilesFailed: 'Nepodařilo se odstranit {foldersCount} složky a {filesCount} soubory.',
+        messageRemoveFoldersAndFilesSuccess: 'Bylo odstraněno {foldersCount} složek a {filesCount} souborů.',
+        messageRemoveFoldersFailed: 'Nepodařilo se odstranit složky ({foldersCount}).',
+        messageRemoveFoldersSuccess: 'Složky ({foldersCount}) byly odstraněny.',
+        messageRemoveFilesFailed: 'Nepodařilo se odstranit {filesCount} soubory.',
+        messageRemoveFilesSuccess: 'Soubory {filesCount} byly odstraněny.',
+        messageRemoveFileOrFolderFailed: 'Nepodařilo se odstranit {name}.',
+        messageRemoveFileOrFolderSuccess: '{name} bylo odstraněno.',
         messageMoveFoldersAndFilesFailed:
-            'Nepodařilo se přesunout {{ foldersCount }} složky a {{ filesCount }} soubory do {{ to }}.',
-        messageMoveFoldersAndFilesSuccess:
-            'Složky {{ foldersCount }} a soubory {{ filesCount }} byly přesunuty do {{ to }}.',
-        messageMoveFoldersFailed: 'Přesunutí {{ foldersCount }} složek do {{ to }} se nezdařilo.',
-        messageMoveFoldersSuccess: 'Složky {{ foldersCount }} byly přesunuty do {{ to }}.',
-        messageMoveFilesFailed: 'Přesunutí {{ filesCount }} souborů do {{ to }} se nezdařilo.',
-        messageMoveFilesSuccess: 'Soubory {{ filesCount }} byly přesunuty do {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Nepodařilo se přesunout {{ name }} do {{ do }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} bylo přesunuto do {{ do }}.',
+            'Nepodařilo se přesunout {foldersCount} složky a {filesCount} soubory do {to}.',
+        messageMoveFoldersAndFilesSuccess: 'Složky {foldersCount} a soubory {filesCount} byly přesunuty do {to}.',
+        messageMoveFoldersFailed: 'Přesunutí {foldersCount} složek do {to} se nezdařilo.',
+        messageMoveFoldersSuccess: 'Složky {foldersCount} byly přesunuty do {to}.',
+        messageMoveFilesFailed: 'Přesunutí {filesCount} souborů do {to} se nezdařilo.',
+        messageMoveFilesSuccess: 'Soubory {filesCount} byly přesunuty do {to}.',
+        messageMoveFileOrFolderFailed: 'Nepodařilo se přesunout {name} do {do}.',
+        messageMoveFileOrFolderSuccess: '{name} bylo přesunuto do {do}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Nepodařilo se přesunout {{ foldersCount }} složky a {{ filesCount }} soubory do všech souborů.',
+            'Nepodařilo se přesunout {foldersCount} složky a {filesCount} soubory do všech souborů.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} složky a {{ filesCount }} soubory byly přesunuty do všech souborů.',
-        messageMoveRootFoldersFailed: 'Přesunutí {{ foldersCount }} složek do všech souborů se nezdařilo.',
-        messageMoveRootFoldersSuccess: 'Složky {{ foldersCount }} byly přesunuty do všech souborů.',
-        messageMoveRootFilesFailed: 'Nepodařilo se přesunout {{ filesCount }} soubory do všech souborů.',
-        messageMoveRootFilesSuccess: 'Soubory {{ filesCount }} byly přesunuty do všech souborů.',
-        messageMoveRootFileOrFolderFailed: 'Nepodařilo se přesunout {{ name }} do všech souborů.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} bylo přesunuto do všech souborů.',
-        messageFileTypeMismatchPlural: 'Soubory {{ filesCount }} mají nesprávný typ. Povolené typy: {{ allowTypes }}.',
-        messageFileTypeMismatchSingular: 'Soubor "{{ fileName }}" má nesprávný typ. Povolené typy: {{ allowTypes }}.',
+            '{foldersCount} složky a {filesCount} soubory byly přesunuty do všech souborů.',
+        messageMoveRootFoldersFailed: 'Přesunutí {foldersCount} složek do všech souborů se nezdařilo.',
+        messageMoveRootFoldersSuccess: 'Složky {foldersCount} byly přesunuty do všech souborů.',
+        messageMoveRootFilesFailed: 'Nepodařilo se přesunout {filesCount} soubory do všech souborů.',
+        messageMoveRootFilesSuccess: 'Soubory {filesCount} byly přesunuty do všech souborů.',
+        messageMoveRootFileOrFolderFailed: 'Nepodařilo se přesunout {name} do všech souborů.',
+        messageMoveRootFileOrFolderSuccess: '{name} bylo přesunuto do všech souborů.',
+        messageFileTypeMismatchPlural: 'Soubory {filesCount} mají nesprávný typ. Povolené typy: {allowTypes}.',
+        messageFileTypeMismatchSingular: 'Soubor "{fileName}" má nesprávný typ. Povolené typy: {allowTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} soubory překročily maximální velikost souboru. Povolená maximální velikost souboru: {{ maxFileSize }}.',
+            '{filesCount} soubory překročily maximální velikost souboru. Povolená maximální velikost souboru: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'Soubor "{{ fileName }}" překročil maximální velikost souboru. Povolená maximální velikost souboru: {{ maxFileSize }}.',
+            'Soubor "{fileName}" překročil maximální velikost souboru. Povolená maximální velikost souboru: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} soubory překročily maximální délku souboru. Povolená délka názvu souboru: {{ maxFilenameLength }} znaků.',
+            '{filesCount} soubory překročily maximální délku souboru. Povolená délka názvu souboru: {maxFilenameLength} znaků.',
         messageFileNameLengthExceededSingular:
-            'Název "{{ fileName }}" překročil maximální délku souboru. Povolená délka názvu souboru: {{ maxFilenameLength }} znaků.'
+            'Název "{fileName}" překročil maximální délku souboru. Povolená délka názvu souboru: {maxFilenameLength} znaků.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Upravit'
@@ -612,10 +608,10 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         selectOptionLabel: 'Vyberte možnost'
     },
     fnSlider: {
-        minMaxDetails: 'Minimální hodnota posuvníku je {{ min }}, maximální hodnota je {{ max }}',
-        valueminDetails: 'Hodnota je {{ hodnota }}',
-        valuemaxDetails: 'Hodnota je {{ hodnota }}',
-        valueNowDetails: 'Aktuální hodnota je {{ hodnota }}'
+        minMaxDetails: 'Minimální hodnota posuvníku je {min}, maximální hodnota je {max}',
+        valueminDetails: 'Hodnota je {hodnota}',
+        valuemaxDetails: 'Hodnota je {hodnota}',
+        valueNowDetails: 'Aktuální hodnota je {hodnota}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Akceptovat',

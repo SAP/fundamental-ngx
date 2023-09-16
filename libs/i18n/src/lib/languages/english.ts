@@ -5,7 +5,7 @@ import { FdLanguage } from '../models/lang';
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     coreMultiComboBox: {
-        selectAllLabel: 'Select all ({{selectedItems}} of {{totalItems}})'
+        selectAllLabel: 'Select all ({selectedItems} of {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Go to previous item',
@@ -29,13 +29,13 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         datetimeCancelLabel: 'Cancel'
     },
     coreFeedListItem: {
-        moreLabel: '{{count}} more',
+        moreLabel: '{count} more',
         lessLabel: 'Less'
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'Cancel',
-        listItemStatusAriaLabel: 'Item has status. Status: {{ status }}.',
-        listItemCounterAriaLabel: 'Item has {{ count }} children.',
+        listItemStatusAriaLabel: 'Item has status. Status: {status}.',
+        listItemCounterAriaLabel: 'Item has {count} children.',
         listItemButtonDetailsTitle: 'Details',
         listItemButtonDeleteTitle: 'Delete',
         listItemStatusContainsErrors: 'Contains errors',
@@ -47,31 +47,31 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'Tree Item {{ itemDetails }}, {{ index }} of {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'Tree Item {itemDetails}, {index} of {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} more'
+        moreItemsButton: '{count} more'
     },
     corePagination: {
-        pageLabel: 'Page {{ pageNumber }}',
-        currentPageAriaLabel: 'Page {{ pageNumber }} is current page',
+        pageLabel: 'Page {pageNumber}',
+        currentPageAriaLabel: 'Page {pageNumber} is current page',
         labelBeforeInputMobile: 'Page:',
-        labelAfterInputMobile: 'of {{ totalCount }}',
-        inputAriaLabel: 'Page input, Current page, Page {{ pageNumber }} of {{ totalCount }}',
+        labelAfterInputMobile: 'of {totalCount}',
+        inputAriaLabel: 'Page input, Current page, Page {pageNumber} of {totalCount}',
         itemsPerPageLabel: 'Results per Page:',
         firstLabel: 'First',
         previousLabel: 'Previous',
         nextLabel: 'Next',
         lastLabel: 'Last',
         ariaLabel: 'Pagination',
-        totalResultsLabel: '{{ totalCount }} Results'
+        totalResultsLabel: '{totalCount} Results'
     },
     coreProductSwitch: {
         ariaLabel: 'Product Switch'
@@ -82,18 +82,18 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
-        singleValueminDetails: 'Value is {{ value }}',
-        singleValuemaxDetails: 'Value is {{ value }}',
-        singleValueNowDetails: 'Current value is {{ value }}',
-        multipleHandle1MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
-        multipleHandle1ValueminDetails: 'Value is {{ value }}',
-        multipleHandle1ValuemaxDetails: 'Value is {{ value }}',
-        multipleHandle1ValueNowDetails: 'Current value is {{ value }}',
-        multipleHandle2MinMaxDetails: 'Range slider minimum value is {{ min }}, maximum value is {{ max }}',
-        multipleHandle2ValueminDetails: 'Value is {{ value }}',
-        multipleHandle2ValuemaxDetails: 'Value is {{ value }}',
-        multipleHandle2ValueNowDetails: 'Current value is {{ value }}'
+        singleMinMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',
+        singleValueminDetails: 'Value is {value}',
+        singleValuemaxDetails: 'Value is {value}',
+        singleValueNowDetails: 'Current value is {value}',
+        multipleHandle1MinMaxDetails: 'Range slider minimum value is {min}, maximum value is {max}',
+        multipleHandle1ValueminDetails: 'Value is {value}',
+        multipleHandle1ValuemaxDetails: 'Value is {value}',
+        multipleHandle1ValueNowDetails: 'Current value is {value}',
+        multipleHandle2MinMaxDetails: 'Range slider minimum value is {min}, maximum value is {max}',
+        multipleHandle2ValueminDetails: 'Value is {value}',
+        multipleHandle2ValuemaxDetails: 'Value is {value}',
+        multipleHandle2ValueNowDetails: 'Current value is {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'More actions',
@@ -115,7 +115,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         tabListExpandButtonText: 'More'
     },
     coreText: {
-        moreLabel: '{{count}} more',
+        moreLabel: '{count} more',
         lessLabel: 'Less'
     },
     coreTime: {
@@ -144,7 +144,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: '{count} more'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
@@ -204,11 +204,11 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         messagesTeamRemoved: '1 team has been removed',
         messagesErrorBuildGraph: 'There was an error when trying to build graph. Check the initial data.',
         messagesUndoAction: 'Undo',
-        nodeMembersCount: '{{ count }} members',
+        nodeMembersCount: '{count} members',
         nodeVariousTeams: 'Various teams',
         nodeStatusDueToday: 'Due today',
-        nodeStatusDueInXDays: ' Due in {{ count }} days',
-        nodeStatusXDaysOverdue: '{{ count }} days overdue',
+        nodeStatusDueInXDays: ' Due in {count} days',
+        nodeStatusXDaysOverdue: '{count} days overdue',
         nodeActionAddApproversBefore: 'Add approvers before',
         nodeActionAddApproversAfter: 'Add approvers after',
         nodeActionAddApproversParallel: 'Add parallel approvers',
@@ -229,7 +229,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         toolbarEditApprover: 'Edit approver',
         watchersInputPlaceholder: 'Search here..',
         userListSelectedItemsCountSingular: '1 item selected',
-        userListSelectedItemsCountPlural: '{{ count }} items selected',
+        userListSelectedItemsCountPlural: '{count} items selected',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -253,15 +253,15 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         searchHideAdvancedSearchLabel: 'Hide filters',
         searchShowAllAdvancedSearchLabel: 'Show all filters',
         searchHideAllAdvancedSearchLabel: 'Hide all filters',
-        selectTabDisplayCountLabel: 'Items ({{ count }})',
+        selectTabDisplayCountLabel: 'Items ({count})',
         selectTabMoreBtnLabel: 'More',
-        selectTabCountHiddenA11yLabel: 'contains {{ rowCount }} rows and {{ colCount }} columns',
+        selectTabCountHiddenA11yLabel: 'contains {rowCount} rows and {colCount} columns',
         selectMobileTabBackBtnTitle: 'Back',
         selectMobileTabBtnOpenDialogLabel: 'Open dialog',
-        selectMobileTabTitle: '{{ title }} tab',
+        selectMobileTabTitle: '{title} tab',
         selectMobileConditionEmpty: 'Empty',
         defineConditionTitle: 'Product',
-        defineConditionSelectedValueHiddenA11yLabel: 'selected value {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'selected value {value}',
         defineConditionConditionsGroupHeaderInclude: 'Include',
         defineConditionConditionsGroupHeaderExclude: 'Exclude',
         defineConditionFromPlaceholder: 'from',
@@ -282,14 +282,14 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'empty',
         defineConditionConditionStrategyLabelNotEqualTo: 'not equal to',
         defineConditionConditionStrategyLabelNotEmpty: 'not empty',
-        defineConditionMaxCountError: 'Enter a value with no more than {{ count }} characters',
+        defineConditionMaxCountError: 'Enter a value with no more than {count} characters',
         selectTabTitle: 'Select from list',
         searchTableEmptyMessage: 'Use the search to get results',
         defineTabTitle: 'Define Conditions'
     },
     platformCombobox: {
         countListResultsSingular: '1 result list item',
-        countListResultsPlural: '{{ count }} result list items'
+        countListResultsPlural: '{count} result list items'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'Select Options',
@@ -299,12 +299,12 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 character over the limit',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} characters over the limit',
+        counterMessageCharactersOverTheLimitPlural: '{count} characters over the limit',
         counterMessageCharactersRemainingSingular: '1 character remaining',
-        counterMessageCharactersRemainingPlural: '{{ count }} characters remaining'
+        counterMessageCharactersRemainingPlural: '{count} characters remaining'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'Media: {{ media }}'
+        roleDescriptionWithMedia: 'Media: {media}'
     },
     platformList: {
         loadingAriaLabel: 'loading'
@@ -322,13 +322,13 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         submitButtonTitle: 'Search',
         searchInputLabel: 'Search',
         synchronizeButtonTitle: 'Synchronize',
-        searchSuggestionMessage: '{{ count }} suggestions found.',
+        searchSuggestionMessage: '{count} suggestions found.',
         searchSuggestionNavigateMessage: 'use up and down arrows to navigate'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'Search',
         submitButtonLabel: 'Go',
-        filtersButtonLabel: 'Filters ({{ filtersCount }})',
+        filtersButtonLabel: 'Filters ({filtersCount})',
         showFiltersButtonLabel: 'Show filters',
         hideFiltersButtonLabel: 'Hide filters',
         defineConditionsRemoveConditionButtonTitle: 'Remove condition',
@@ -385,7 +385,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'Search',
         P13ColumnsDialogsShowSelected: 'Show Selected',
         P13ColumnsDialogShowAll: 'Show all',
-        P13ColumnsDialogSelectAll: 'Select All ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'Select All ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'OK',
         P13ColumnsDialogCancelBtnLabel: 'Cancel',
         P13ColumnsDialogMoveToTopBtn: 'Move to Top',
@@ -410,9 +410,9 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         P13FilterBooleanOptionTrue: 'Yes',
         P13FilterBooleanOptionFalse: 'No',
         P13FilterDialogHeader: 'Filter By',
-        P13FilterDialogIncludePanelTitleWithCount: 'Include ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'Include ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'Include',
-        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'Exclude ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'Exclude',
         P13FilterDialogRemoveFilterBtnTitle: 'Remove Filter',
         P13FilterDialoAddFilterBtnTitle: 'Add Filter',
@@ -445,7 +445,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(Not Filtered)',
-        filterDialogFilterByLabel: 'Filter by: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'Filter by: {filterLabel}',
         filterDialogFilterTitle: 'Filter',
         filterDialogFilterBy: 'Filter By',
         filterDialogConfirmBtnLabel: 'OK',
@@ -488,13 +488,13 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         moveToCloseBtn: 'Cancel',
         newFolderTitle: 'New folder',
         newFolderAtRootInputLabel: 'Name of new folder',
-        newFolderAtFolderInputLabel: 'Name of new folder inside of {{ folderName }}',
+        newFolderAtFolderInputLabel: 'Name of new folder inside of {folderName}',
         newFolderInputPlaceholder: 'Type here..',
-        newFolderInputErrorLabel: 'Maximum {{ count }} characters allowed',
+        newFolderInputErrorLabel: 'Maximum {count} characters allowed',
         newFolderDialogCreateBtnLabel: 'Create',
         newFolderDialogCancelBtnLabel: 'Cancel',
         breadcrumbLabelAllFiles: 'All files',
-        breadcrumbLabelAllFilesWithTotal: 'All files ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'All files ({total})',
         searchPlaceholder: 'Search',
         addBtnLabel: 'Add',
         newFolderBtnLabel: 'New Folder',
@@ -515,53 +515,50 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         dragDropAreaText: 'Drag files to upload',
         noDataText: 'No files found',
         noDataDescription: 'Drop files to upload, or use the “Add” button.',
-        paginationTotal: 'Showing {{ from }}-{{ to }} of {{ total }}',
+        paginationTotal: 'Showing {from}-{to} of {total}',
         resultsPerPage: 'Results per page',
-        messageCreateFailed: 'Failed to create {{ folderName }}.',
-        messageCreateSuccess: '{{ folderName }} has been created.',
-        messageUpdateVersionFailed: 'Failed to update version of {{ folderName }}.',
-        messageUpdateVersionSuccess: '{{ folderName }} version has been updated.',
-        messageFileRenameFailed: 'Failed to rename "{{ from }}" to "{{ to }}."',
-        messageFileRenameSuccess: '"{{ from }}" has been renamed to "{{ to }}".',
-        messageRemoveFoldersAndFilesFailed: 'Failed to remove {{ foldersCount }} folders and {{ filesCount }} files.',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} folders and {{ filesCount }} files have been removed.',
-        messageRemoveFoldersFailed: 'Failed to remove {{ foldersCount }} folders.',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} folders have been removed.',
-        messageRemoveFilesFailed: 'Failed to remove {{ filesCount }} files.',
-        messageRemoveFilesSuccess: '{{ filesCount }} files have been removed.',
-        messageRemoveFileOrFolderFailed: 'Failed to remove {{ name }}.',
-        messageRemoveFileOrFolderSuccess: '{{ name }} has been removed.',
-        messageMoveFoldersAndFilesFailed:
-            'Failed to move {{ foldersCount }} folders and {{ filesCount }} files to {{ to }}.',
-        messageMoveFoldersAndFilesSuccess:
-            '{{ foldersCount }} folders and {{ filesCount }} files have been moved to {{ to }}.',
-        messageMoveFoldersFailed: 'Failed to move {{ foldersCount }} folders to {{ to }}.',
-        messageMoveFoldersSuccess: '{{ foldersCount }} folders have been moved to {{ to }}.',
-        messageMoveFilesFailed: 'Failed to move {{ filesCount }} files to {{ to }}.',
-        messageMoveFilesSuccess: '{{ filesCount }} files have been moved to {{ to }}.',
-        messageMoveFileOrFolderFailed: 'Failed to move {{ name }} to {{ to }}.',
-        messageMoveFileOrFolderSuccess: '{{ name }} has been moved to {{ to }}.',
+        messageCreateFailed: 'Failed to create {folderName}.',
+        messageCreateSuccess: '{folderName} has been created.',
+        messageUpdateVersionFailed: 'Failed to update version of {folderName}.',
+        messageUpdateVersionSuccess: '{folderName} version has been updated.',
+        messageFileRenameFailed: 'Failed to rename "{from}" to "{to}."',
+        messageFileRenameSuccess: '"{from}" has been renamed to "{to}".',
+        messageRemoveFoldersAndFilesFailed: 'Failed to remove {foldersCount} folders and {filesCount} files.',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount} folders and {filesCount} files have been removed.',
+        messageRemoveFoldersFailed: 'Failed to remove {foldersCount} folders.',
+        messageRemoveFoldersSuccess: '{foldersCount} folders have been removed.',
+        messageRemoveFilesFailed: 'Failed to remove {filesCount} files.',
+        messageRemoveFilesSuccess: '{filesCount} files have been removed.',
+        messageRemoveFileOrFolderFailed: 'Failed to remove {name}.',
+        messageRemoveFileOrFolderSuccess: '{name} has been removed.',
+        messageMoveFoldersAndFilesFailed: 'Failed to move {foldersCount} folders and {filesCount} files to {to}.',
+        messageMoveFoldersAndFilesSuccess: '{foldersCount} folders and {filesCount} files have been moved to {to}.',
+        messageMoveFoldersFailed: 'Failed to move {foldersCount} folders to {to}.',
+        messageMoveFoldersSuccess: '{foldersCount} folders have been moved to {to}.',
+        messageMoveFilesFailed: 'Failed to move {filesCount} files to {to}.',
+        messageMoveFilesSuccess: '{filesCount} files have been moved to {to}.',
+        messageMoveFileOrFolderFailed: 'Failed to move {name} to {to}.',
+        messageMoveFileOrFolderSuccess: '{name} has been moved to {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Failed to move {{ foldersCount }} folders and {{ filesCount }} files to all files.',
+            'Failed to move {foldersCount} folders and {filesCount} files to all files.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} folders and {{ filesCount }} files have been moved to all files.',
-        messageMoveRootFoldersFailed: 'Failed to move {{ foldersCount }} folders to all files.',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} folders have been moved to all files.',
-        messageMoveRootFilesFailed: 'Failed to move {{ filesCount }} files to all files.',
-        messageMoveRootFilesSuccess: '{{ filesCount }} files have been moved to all files.',
-        messageMoveRootFileOrFolderFailed: 'Failed to move {{ name }} to all files.',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} has been moved to all files.',
-        messageFileTypeMismatchPlural: '{{ filesCount }} files have the wrong type. Allowed types: {{ allowedTypes }}.',
-        messageFileTypeMismatchSingular:
-            'The file "{{ fileName }}" has the wrong type. Allowed types: {{ allowedTypes }}.',
+            '{foldersCount} folders and {filesCount} files have been moved to all files.',
+        messageMoveRootFoldersFailed: 'Failed to move {foldersCount} folders to all files.',
+        messageMoveRootFoldersSuccess: '{foldersCount} folders have been moved to all files.',
+        messageMoveRootFilesFailed: 'Failed to move {filesCount} files to all files.',
+        messageMoveRootFilesSuccess: '{filesCount} files have been moved to all files.',
+        messageMoveRootFileOrFolderFailed: 'Failed to move {name} to all files.',
+        messageMoveRootFileOrFolderSuccess: '{name} has been moved to all files.',
+        messageFileTypeMismatchPlural: '{filesCount} files have the wrong type. Allowed types: {allowedTypes}.',
+        messageFileTypeMismatchSingular: 'The file "{fileName}" has the wrong type. Allowed types: {allowedTypes}.',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} files exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.',
+            '{filesCount} files exceeded the maximum file size. Allowed max file size: {maxFileSize}.',
         messageFileSizeExceededSingular:
-            'The file "{{ fileName }}" exceeded the maximum file size. Allowed max file size: {{ maxFileSize }}.',
+            'The file "{fileName}" exceeded the maximum file size. Allowed max file size: {maxFileSize}.',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} files exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.',
+            '{filesCount} files exceeded the maximum filename length. Allowed filename length: {maxFilenameLength} characters.',
         messageFileNameLengthExceededSingular:
-            'The name "{{ fileName }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.'
+            'The name "{fileName}" exceeded the maximum filename length. Allowed filename length: {maxFilenameLength} characters.'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'Edit'
@@ -608,10 +605,10 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         selectOptionLabel: 'Select an Option'
     },
     fnSlider: {
-        minMaxDetails: 'Slider minimum value is {{ min }}, maximum value is {{ max }}',
-        valueminDetails: 'Value is {{ value }}',
-        valuemaxDetails: 'Value is {{ value }}',
-        valueNowDetails: 'Current value is {{ value }}'
+        minMaxDetails: 'Slider minimum value is {min}, maximum value is {max}',
+        valueminDetails: 'Value is {value}',
+        valuemaxDetails: 'Value is {value}',
+        valueNowDetails: 'Current value is {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'Accept',

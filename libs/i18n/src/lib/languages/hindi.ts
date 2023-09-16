@@ -34,8 +34,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     },
     coreGridList: {
         filterBarCancelButtonTitle: 'रद्द करें',
-        listItemStatusAriaLabel: 'वस्तु की स्थिति है। स्थिति: {{ status }}',
-        listItemCounterAriaLabel: 'वस्तु के {{ count }} उपसूची है।',
+        listItemStatusAriaLabel: 'वस्तु की स्थिति है। स्थिति: {status}',
+        listItemCounterAriaLabel: 'वस्तु के {count} उपसूची है।',
         listItemButtonDetailsTitle: 'विवरण',
         listItemButtonDeleteTitle: 'मिटायें',
         listItemStatusContainsErrors: 'इसमें गलतियां हैं',
@@ -47,31 +47,31 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
-        tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`
+        tokensCountText: 'Contains {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
         mainNavigation: 'Main Navigation',
         navigationPath: 'Navigation Path'
     },
     coreNestedList: {
-        linkItemAriaLabel: 'ट्री वस्तु {{ itemDetails }}, {{ index }} का {{ total }}{{ selectedDescription }}'
+        linkItemAriaLabel: 'ट्री वस्तु {itemDetails}, {index} का {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: '{{ count }} अधिक'
+        moreItemsButton: '{count} अधिक'
     },
     corePagination: {
-        pageLabel: 'पृष्ठ {{ pageNumber }}',
-        currentPageAriaLabel: 'पृष्ठ {{ pageNumber }} वर्तमान पृष्ठ है',
+        pageLabel: 'पृष्ठ {pageNumber}',
+        currentPageAriaLabel: 'पृष्ठ {pageNumber} वर्तमान पृष्ठ है',
         labelBeforeInputMobile: 'पृष्ठ :',
-        labelAfterInputMobile: 'का {{ totalCount }}',
-        inputAriaLabel: 'पेज इनपुट, वर्तमान पृष्ठ, पृष्ठ {{ pageNumber }} का {{ totalCount }}',
+        labelAfterInputMobile: 'का {totalCount}',
+        inputAriaLabel: 'पेज इनपुट, वर्तमान पृष्ठ, पृष्ठ {pageNumber} का {totalCount}',
         itemsPerPageLabel: 'प्रति पृष्ठ परिणाम :',
         firstLabel: 'पहला',
         previousLabel: 'पिछला',
         nextLabel: 'अगला',
         lastLabel: 'अंतिम',
         ariaLabel: 'पृष्ठ अंकन',
-        totalResultsLabel: '{{ totalCount }} परिणाम'
+        totalResultsLabel: '{totalCount} परिणाम'
     },
     coreProductSwitch: {
         ariaLabel: 'उत्पाद स्विच'
@@ -82,18 +82,18 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         search: 'Search'
     },
     coreSlider: {
-        singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',
-        singleValueminDetails: 'मूल्य है {{ value }}',
-        singleValuemaxDetails: 'मूल्य है {{ value }}',
-        singleValueNowDetails: 'वर्तमान मूल्य है {{ value }}',
-        multipleHandle1MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',
-        multipleHandle1ValueminDetails: 'मूल्य है {{ value }}',
-        multipleHandle1ValuemaxDetails: 'मूल्य है {{ value }}',
-        multipleHandle1ValueNowDetails: 'वर्तमान मूल्य है {{ value }}',
-        multipleHandle2MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {{ min }}, अधिकतम मूल्य है {{ max }}',
-        multipleHandle2ValueminDetails: 'मूल्य है {{ value }}',
-        multipleHandle2ValuemaxDetails: 'मूल्य है {{ value }}',
-        multipleHandle2ValueNowDetails: 'वर्तमान मूल्य है {{ value }}'
+        singleMinMaxDetails: 'स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',
+        singleValueminDetails: 'मूल्य है {value}',
+        singleValuemaxDetails: 'मूल्य है {value}',
+        singleValueNowDetails: 'वर्तमान मूल्य है {value}',
+        multipleHandle1MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',
+        multipleHandle1ValueminDetails: 'मूल्य है {value}',
+        multipleHandle1ValuemaxDetails: 'मूल्य है {value}',
+        multipleHandle1ValueNowDetails: 'वर्तमान मूल्य है {value}',
+        multipleHandle2MinMaxDetails: 'रेंज स्लाइडर न्यूनतम मूल्य है {min}, अधिकतम मूल्य है {max}',
+        multipleHandle2ValueminDetails: 'मूल्य है {value}',
+        multipleHandle2ValuemaxDetails: 'मूल्य है {value}',
+        multipleHandle2ValueNowDetails: 'वर्तमान मूल्य है {value}'
     },
     coreSplitButton: {
         expandButtonAriaLabel: 'अधिक क्रियाएं',
@@ -144,7 +144,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         ariaRoleDescription: 'टोकन'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} अधिक'
+        moreLabel: '{count} अधिक'
     },
     coreUploadCollection: {
         menuOkText: 'ठीक है',
@@ -205,11 +205,11 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         messagesTeamRemoved: '1 समूह को हटा दिया गया है',
         messagesErrorBuildGraph: 'ग्राफ़ बनाने का प्रयास करते समय एक गलति हुई| प्रारंभिक डेटा की जाँच करें।',
         messagesUndoAction: 'पूर्ववत करें',
-        nodeMembersCount: '{{ count }} सदस्य',
+        nodeMembersCount: '{count} सदस्य',
         nodeVariousTeams: 'विविध समूह',
         nodeStatusDueToday: 'नियत तिथि',
-        nodeStatusDueInXDays: '{{ count }} दिनों में देय है',
-        nodeStatusXDaysOverdue: '{{ count }} दिन अतिदेय',
+        nodeStatusDueInXDays: '{count} दिनों में देय है',
+        nodeStatusXDaysOverdue: '{count} दिन अतिदेय',
         nodeActionAddApproversBefore: 'पहले अनुमोदक जोड़ें',
         nodeActionAddApproversAfter: 'बाद में अनुमोदक जोड़ें',
         nodeActionAddApproversParallel: 'समानांतर अनुमोदक जोड़ें',
@@ -230,7 +230,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarEditApprover: 'अनुमोदक संपादित करें',
         watchersInputPlaceholder: 'यहां खोजें..',
         userListSelectedItemsCountSingular: '1 आइटम चुना गया',
-        userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए',
+        userListSelectedItemsCountPlural: '{count} आइटम चुने गए',
         statusApproved: 'approved',
         statusRejected: 'rejected',
         statusInProgress: 'in progress',
@@ -254,15 +254,15 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         searchHideAdvancedSearchLabel: 'फ़िल्टर छुपाएं',
         searchShowAllAdvancedSearchLabel: 'सभी फ़िल्टर दिखाएं',
         searchHideAllAdvancedSearchLabel: 'सभी फ़िल्टर छुपाएं',
-        selectTabDisplayCountLabel: '({{ count }}) वस्तुएं',
+        selectTabDisplayCountLabel: '({count}) वस्तुएं',
         selectTabMoreBtnLabel: 'और',
-        selectTabCountHiddenA11yLabel: 'इसमें {{ rowCount }} पंक्तियाँ और {{ colCount }} कॉलम हैं',
+        selectTabCountHiddenA11yLabel: 'इसमें {rowCount} पंक्तियाँ और {colCount} कॉलम हैं',
         selectMobileTabBackBtnTitle: 'वापस',
         selectMobileTabBtnOpenDialogLabel: 'डायलॉग खोलें',
-        selectMobileTabTitle: '{{ title }} टैब',
+        selectMobileTabTitle: '{title} टैब',
         selectMobileConditionEmpty: 'खाली',
         defineConditionTitle: 'उत्पाद',
-        defineConditionSelectedValueHiddenA11yLabel: 'चयनित मूल्य {{ value }}',
+        defineConditionSelectedValueHiddenA11yLabel: 'चयनित मूल्य {value}',
         defineConditionConditionsGroupHeaderInclude: 'शामिल करें',
         defineConditionConditionsGroupHeaderExclude: 'बहिष्कृत करें',
         defineConditionFromPlaceholder: 'से',
@@ -283,14 +283,14 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         defineConditionConditionStrategyLabelEmpty: 'खाली',
         defineConditionConditionStrategyLabelNotEqualTo: 'के बराबर नहीं',
         defineConditionConditionStrategyLabelNotEmpty: 'खाली नही',
-        defineConditionMaxCountError: '{{ count }} से अधिक अक्षरो वाला कोई मूल्य दर्ज करें',
+        defineConditionMaxCountError: '{count} से अधिक अक्षरो वाला कोई मूल्य दर्ज करें',
         selectTabTitle: 'सूची में से चयन करें',
         searchTableEmptyMessage: 'परिणाम प्राप्त करने के लिए खोज का प्रयोग करें',
         defineTabTitle: 'शर्तों को परिभाषित करें'
     },
     platformCombobox: {
         countListResultsSingular: '1 परिणाम सूची आइटम',
-        countListResultsPlural: '{{ count }} परिणाम सूची आइटम'
+        countListResultsPlural: '{count} परिणाम सूची आइटम'
     },
     platformMultiCombobox: {
         inputGlyphAriaLabel: 'विकल्प चुनें',
@@ -300,12 +300,12 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
     },
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: '1 सीमा से अधिक चरित्र',
-        counterMessageCharactersOverTheLimitPlural: '{{ count }} सीमा से अधिक वर्ण',
+        counterMessageCharactersOverTheLimitPlural: '{count} सीमा से अधिक वर्ण',
         counterMessageCharactersRemainingSingular: '1 चरित्र शेष',
-        counterMessageCharactersRemainingPlural: '{{ count }} शेष वर्ण'
+        counterMessageCharactersRemainingPlural: '{count} शेष वर्ण'
     },
     platformLink: {
-        roleDescriptionWithMedia: 'मीडिया: {{ media }}'
+        roleDescriptionWithMedia: 'मीडिया: {media}'
     },
     platformList: {
         loadingAriaLabel: 'लोड हो रहा है'
@@ -323,13 +323,13 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         submitButtonTitle: 'खोज करें',
         searchInputLabel: 'खोज करें',
         synchronizeButtonTitle: 'सिंक्रनाइज़ करें',
-        searchSuggestionMessage: '{{ count }} सुझाव मिले',
+        searchSuggestionMessage: '{count} सुझाव मिले',
         searchSuggestionNavigateMessage: 'नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें'
     },
     platformSmartFilterBar: {
         searchPlaceholder: 'खोज करें',
         submitButtonLabel: 'जाओ',
-        filtersButtonLabel: 'फिल्टर ({{ filtersCount }})',
+        filtersButtonLabel: 'फिल्टर ({filtersCount})',
         showFiltersButtonLabel: 'फ़िल्टर दिखाएं',
         hideFiltersButtonLabel: 'फ़िल्टर छुपाएं',
         defineConditionsRemoveConditionButtonTitle: 'शर्त हटाएं',
@@ -386,7 +386,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         P13ColumnsDialogSearchPlaceholder: 'खोज',
         P13ColumnsDialogsShowSelected: 'चयनित दिखाएँ',
         P13ColumnsDialogShowAll: 'सब दिखाएं',
-        P13ColumnsDialogSelectAll: 'सभी का चयन करे ({{ selectedColumnsCount }}/{{ selectableColumnsCount }})',
+        P13ColumnsDialogSelectAll: 'सभी का चयन करे ({selectedColumnsCount}/{selectableColumnsCount})',
         P13ColumnsDialogConfirmationBtnLabel: 'ठीक है',
         P13ColumnsDialogCancelBtnLabel: 'रद्द करो',
         P13ColumnsDialogMoveToTopBtn: 'शीर्ष पर जाएं',
@@ -411,9 +411,9 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         P13FilterBooleanOptionTrue: 'हां',
         P13FilterBooleanOptionFalse: 'नहीं',
         P13FilterDialogHeader: 'के द्वारा छनित',
-        P13FilterDialogIncludePanelTitleWithCount: 'शामिल ({{ count }})',
+        P13FilterDialogIncludePanelTitleWithCount: 'शामिल ({count})',
         P13FilterDialogIncludePanelTitleWithoutCount: 'शामिल',
-        P13FilterDialogExcludePanelTitleWithCount: 'निकालना ({{ count }})',
+        P13FilterDialogExcludePanelTitleWithCount: 'निकालना ({count})',
         P13FilterDialogExcludePanelTitleWithoutCount: 'निकालना',
         P13FilterDialogRemoveFilterBtnTitle: 'फ़िल्टर हटाएं',
         P13FilterDialoAddFilterBtnTitle: 'फ़िल्टर जोड़ें',
@@ -446,7 +446,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         toolbarActionExpandAllButtonTitle: 'Expand all',
         toolbarActionCollapseAllButtonTitle: 'Collapse all',
         filterDialogNotFilteredLabel: '(फ़िल्टर नहीं किया गया)',
-        filterDialogFilterByLabel: 'के द्वारा छनित: {{ filterLabel }}',
+        filterDialogFilterByLabel: 'के द्वारा छनित: {filterLabel}',
         filterDialogFilterTitle: 'फ़िल्टर',
         filterDialogFilterBy: 'के द्वारा छनित',
         filterDialogConfirmBtnLabel: 'अनुमोदन',
@@ -489,13 +489,13 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         moveToCloseBtn: 'रद्द करें',
         newFolderTitle: 'नया फोल्डर',
         newFolderAtRootInputLabel: 'नए फोल्डर का नाम',
-        newFolderAtFolderInputLabel: 'नए फोल्डर का नाम {{ folderName }}',
+        newFolderAtFolderInputLabel: 'नए फोल्डर का नाम {folderName}',
         newFolderInputPlaceholder: 'यहा लिखें..',
-        newFolderInputErrorLabel: 'अधिकतम {{ count }} पात्र अनुमत',
+        newFolderInputErrorLabel: 'अधिकतम {count} पात्र अनुमत',
         newFolderDialogCreateBtnLabel: 'सृजन करें',
         newFolderDialogCancelBtnLabel: 'रद्द करें',
         breadcrumbLabelAllFiles: 'सभी फाइलें',
-        breadcrumbLabelAllFilesWithTotal: 'सभी फाइलें ({{ total }})',
+        breadcrumbLabelAllFilesWithTotal: 'सभी फाइलें ({total})',
         searchPlaceholder: 'तलाश करें',
         addBtnLabel: 'जोड़ें',
         newFolderBtnLabel: 'नया फोल्डर',
@@ -516,52 +516,52 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         dragDropAreaText: 'अपलोड करने के लिए फ़ाइलें खींचें',
         noDataText: 'कोई फाइल नहीं मिली',
         noDataDescription: 'अपलोड करने के लिए फ़ाइलें छोड़ें, या "जोड़ें" बटन का उपयोग करें।',
-        paginationTotal: '{{ from }}-{{ to }} of {{ total }} दिखा रहा है',
+        paginationTotal: '{from}-{to} of {total} दिखा रहा है',
         resultsPerPage: 'प्रति पेज नतीजे',
-        messageCreateFailed: '{{ folderName }} बनाने में विफल।',
-        messageCreateSuccess: '{{ folderName }} बनाया गया है।',
-        messageUpdateVersionFailed: '{{ folderName }}का संस्करण अपडेट करने में विफल।',
-        messageUpdateVersionSuccess: '{{ folderName }} संस्करण अद्यतन किया गया है।',
-        messageFileRenameFailed: '"{{ from }}" तक "{{ to }}" नाम बदलने में विफल।',
-        messageFileRenameSuccess: '"{{ from }}" का नाम बदलकर कर "{{ to }}" दिया गया है।',
-        messageRemoveFoldersAndFilesFailed: '{{ foldersCount }} फ़ोल्डर्स और {{ filesCount }} फ़ाइलें हटाने में विफल।',
-        messageRemoveFoldersAndFilesSuccess: '{{ foldersCount }} फ़ोल्डर्स और {{ filesCount }} फ़ाइलें हटा दी गई हैं।',
-        messageRemoveFoldersFailed: '{{ foldersCount }} फ़ोल्डर्स हटाने में विफल ।',
-        messageRemoveFoldersSuccess: '{{ foldersCount }} फ़ोल्डर हटा दिए गए हैं।',
-        messageRemoveFilesFailed: '{{ filesCount }} फ़ाइलें हटाने में विफल ।',
-        messageRemoveFilesSuccess: '{{ filesCount }} फ़ाइलें हटा दी गई हैं।',
-        messageRemoveFileOrFolderFailed: '{{ name }} हटाने में विफल ।',
-        messageRemoveFileOrFolderSuccess: '{{ name }} निकाल दिया गया है।',
+        messageCreateFailed: '{folderName} बनाने में विफल।',
+        messageCreateSuccess: '{folderName} बनाया गया है।',
+        messageUpdateVersionFailed: '{folderName}का संस्करण अपडेट करने में विफल।',
+        messageUpdateVersionSuccess: '{folderName} संस्करण अद्यतन किया गया है।',
+        messageFileRenameFailed: '"{from}" तक "{to}" नाम बदलने में विफल।',
+        messageFileRenameSuccess: '"{from}" का नाम बदलकर कर "{to}" दिया गया है।',
+        messageRemoveFoldersAndFilesFailed: '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें हटाने में विफल।',
+        messageRemoveFoldersAndFilesSuccess: '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें हटा दी गई हैं।',
+        messageRemoveFoldersFailed: '{foldersCount} फ़ोल्डर्स हटाने में विफल ।',
+        messageRemoveFoldersSuccess: '{foldersCount} फ़ोल्डर हटा दिए गए हैं।',
+        messageRemoveFilesFailed: '{filesCount} फ़ाइलें हटाने में विफल ।',
+        messageRemoveFilesSuccess: '{filesCount} फ़ाइलें हटा दी गई हैं।',
+        messageRemoveFileOrFolderFailed: '{name} हटाने में विफल ।',
+        messageRemoveFileOrFolderSuccess: '{name} निकाल दिया गया है।',
         messageMoveFoldersAndFilesFailed:
-            '{{ to }} तक {{ foldersCount }} फ़ोल्डर्स और {{ filesCount }} फ़ाइलें स्थानांतरित करने में विफल।',
+            '{to} तक {foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें स्थानांतरित करने में विफल।',
         messageMoveFoldersAndFilesSuccess:
-            '{{ foldersCount }} फ़ोल्डर्स और {{ filesCount }} फ़ाइलें स्थानांतरित कर दी गई हैं {{ to }}।',
-        messageMoveFoldersFailed: '{{ to }} तक {{ foldersCount }} फ़ोल्डर्स स्थानांतरित करने में विफल।',
-        messageMoveFoldersSuccess: '{{ foldersCount }} फ़ोल्डर्स को स्थानांतरित कर दिया गया है {{ to }}।',
-        messageMoveFilesFailed: '{{ to }} तक {{ filesCount }} फ़ाइलें स्थानांतरित करने में विफल।',
-        messageMoveFilesSuccess: '{{ filesCount }} फ़ाइलें स्थानांतरित कर दी गई हैं {{ to }}।',
-        messageMoveFileOrFolderFailed: 'स्थानांतरित करने में विफल {{ name }} प्रति {{ to }}।',
-        messageMoveFileOrFolderSuccess: '{{ name }} में ले जाया गया है {{ to }}।',
+            '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें स्थानांतरित कर दी गई हैं {to}।',
+        messageMoveFoldersFailed: '{to} तक {foldersCount} फ़ोल्डर्स स्थानांतरित करने में विफल।',
+        messageMoveFoldersSuccess: '{foldersCount} फ़ोल्डर्स को स्थानांतरित कर दिया गया है {to}।',
+        messageMoveFilesFailed: '{to} तक {filesCount} फ़ाइलें स्थानांतरित करने में विफल।',
+        messageMoveFilesSuccess: '{filesCount} फ़ाइलें स्थानांतरित कर दी गई हैं {to}।',
+        messageMoveFileOrFolderFailed: 'स्थानांतरित करने में विफल {name} प्रति {to}।',
+        messageMoveFileOrFolderSuccess: '{name} में ले जाया गया है {to}।',
         messageMoveRootFoldersAndFilesFailed:
-            'स्थानांतरित करने में विफल {{ foldersCount }} फ़ोल्डर्स और {{ filesCount }} सभी फाइलों के लिए फ़ाइलें।',
+            'स्थानांतरित करने में विफल {foldersCount} फ़ोल्डर्स और {filesCount} सभी फाइलों के लिए फ़ाइलें।',
         messageMoveRootFoldersAndFilesSuccess:
-            '{{ foldersCount }} फ़ोल्डर्स और {{ filesCount }} फ़ाइलें सभी फ़ाइलों में ले जाया गया है।',
-        messageMoveRootFoldersFailed: 'स्थानांतरित करने में विफल {{ foldersCount }} सभी फाइलों के लिए फ़ोल्डर।',
-        messageMoveRootFoldersSuccess: '{{ foldersCount }} फ़ोल्डर्स को सभी फाइलों में ले जाया गया है।',
-        messageMoveRootFilesFailed: 'स्थानांतरित करने में विफल {{ filesCount }} सभी फाइलों के लिए फ़ाइलें।',
-        messageMoveRootFilesSuccess: '{{ filesCount }} फ़ाइलें सभी फ़ाइलों में ले जाया गया है।',
-        messageMoveRootFileOrFolderFailed: 'स्थानांतरित करने में विफल {{ name }} सभी फाइलों के लिए।',
-        messageMoveRootFileOrFolderSuccess: '{{ name }} सभी फाइलों में ले जाया गया है।',
-        messageFileTypeMismatchPlural: '{{ filesCount }} फाइलों का प्रकार गलत है। अनुमत प्रकार: {{ allowedTypes }}।',
-        messageFileTypeMismatchSingular: 'फ़ाइल "{{ fileName }}" गलत प्रकार है। अनुमत प्रकार: {{ allowedTypes }}।',
+            '{foldersCount} फ़ोल्डर्स और {filesCount} फ़ाइलें सभी फ़ाइलों में ले जाया गया है।',
+        messageMoveRootFoldersFailed: 'स्थानांतरित करने में विफल {foldersCount} सभी फाइलों के लिए फ़ोल्डर।',
+        messageMoveRootFoldersSuccess: '{foldersCount} फ़ोल्डर्स को सभी फाइलों में ले जाया गया है।',
+        messageMoveRootFilesFailed: 'स्थानांतरित करने में विफल {filesCount} सभी फाइलों के लिए फ़ाइलें।',
+        messageMoveRootFilesSuccess: '{filesCount} फ़ाइलें सभी फ़ाइलों में ले जाया गया है।',
+        messageMoveRootFileOrFolderFailed: 'स्थानांतरित करने में विफल {name} सभी फाइलों के लिए।',
+        messageMoveRootFileOrFolderSuccess: '{name} सभी फाइलों में ले जाया गया है।',
+        messageFileTypeMismatchPlural: '{filesCount} फाइलों का प्रकार गलत है। अनुमत प्रकार: {allowedTypes}।',
+        messageFileTypeMismatchSingular: 'फ़ाइल "{fileName}" गलत प्रकार है। अनुमत प्रकार: {allowedTypes}।',
         messageFileSizeExceededPlural:
-            '{{ filesCount }} फ़ाइलें अधिकतम फ़ाइल आकार से अधिक हो गईं। अनुमत अधिकतम फ़ाइल आकार: {{ maxFileSize }}।',
+            '{filesCount} फ़ाइलें अधिकतम फ़ाइल आकार से अधिक हो गईं। अनुमत अधिकतम फ़ाइल आकार: {maxFileSize}।',
         messageFileSizeExceededSingular:
-            'फ़ाइल "{{ fileName }}" अधिकतम फ़ाइल आकार को पार कर गया। अनुमत अधिकतम फ़ाइल आकार: {{ maxFileSize }}।',
+            'फ़ाइल "{fileName}" अधिकतम फ़ाइल आकार को पार कर गया। अनुमत अधिकतम फ़ाइल आकार: {maxFileSize}।',
         messageFileNameLengthExceededPlural:
-            '{{ filesCount }} फ़ाइलें फ़ाइल नाम की अधिकतम लंबाई को पार कर गई हैं। अनुमत फ़ाइल नाम लंबाई: {{ maxFilenameLength }} पात्र।',
+            '{filesCount} फ़ाइलें फ़ाइल नाम की अधिकतम लंबाई को पार कर गई हैं। अनुमत फ़ाइल नाम लंबाई: {maxFilenameLength} पात्र।',
         messageFileNameLengthExceededSingular:
-            'नाम "{{ fileName }}" फ़ाइल नाम की अधिकतम लंबाई को पार कर गया। अनुमत फ़ाइल नाम लंबाई: {{ maxFilenameLength }} पात्र।'
+            'नाम "{fileName}" फ़ाइल नाम की अधिकतम लंबाई को पार कर गया। अनुमत फ़ाइल नाम लंबाई: {maxFilenameLength} पात्र।'
     },
     platformWizardGenerator: {
         summarySectionEditStep: 'संपादित करें'
@@ -608,10 +608,10 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         selectOptionLabel: 'एक विकल्प चुनें'
     },
     fnSlider: {
-        minMaxDetails: 'स्लाइडर न्यूनतम मूल्य {{ min }}, अधिकतम मूल्य {{ max }}',
-        valueminDetails: 'मूल्य {{ value }}',
-        valuemaxDetails: 'मूल्य {{ value }}',
-        valueNowDetails: 'वर्तमान मूल्य {{ value }}'
+        minMaxDetails: 'स्लाइडर न्यूनतम मूल्य {min}, अधिकतम मूल्य {max}',
+        valueminDetails: 'मूल्य {value}',
+        valuemaxDetails: 'मूल्य {value}',
+        valueNowDetails: 'वर्तमान मूल्य {value}'
     },
     fnSwitch: {
         semanticAcceptLabel: 'स्वीकार करें',
