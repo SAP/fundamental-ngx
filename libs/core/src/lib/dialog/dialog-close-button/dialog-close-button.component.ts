@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 /**
  * Directive that applies fundamental dialog styling to a dialog close button.
@@ -17,6 +17,8 @@ import { Component, Input } from '@angular/core';
         '[class.fd-button--transparent]': 'true',
         '[attr.title]': 'title'
     },
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `<fd-icon glyph="decline"></fd-icon><ng-content></ng-content>`
 })
 export class DialogCloseButtonComponent {

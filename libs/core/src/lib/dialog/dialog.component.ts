@@ -19,13 +19,13 @@ import { Subscription } from 'rxjs';
 
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
 
-import { DialogConfig } from './utils/dialog-config.class';
-import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
+import { DialogBase } from './base/dialog-base.class';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
-import { DialogRef } from './utils/dialog-ref.class';
-import { DialogBase } from './base/dialog-base.class';
+import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogTitleDirective } from './directives/dialog-title.directive';
+import { DialogConfig } from './utils/dialog-config.class';
+import { DialogRef } from './utils/dialog-ref.class';
 
 /**
  * Dialog component.
@@ -50,7 +50,7 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })]
 })
 export class DialogComponent
-    extends DialogBase
+    extends DialogBase<DialogRef>
     implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder
 {
     /** Custom classes */
@@ -119,6 +119,12 @@ export class DialogComponent
     /** @hidden Whenever dialog is dragged */
     isDragged: boolean;
 
+    /**
+     * @hidden
+     * Whether the Dialog in full-screen mode.
+     */
+    _fullScreen = false;
+
     /** @hidden */
     private _class = '';
 
@@ -164,6 +170,7 @@ export class DialogComponent
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
         this._listenOnHidden();
+        this._listenOnFullScreen();
     }
 
     /** @hidden */
@@ -182,6 +189,17 @@ export class DialogComponent
             this._class,
             this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
         ];
+    }
+
+    /** @hidden */
+    private _listenOnFullScreen(): void {
+        this._subscriptions.add(
+            this._ref.fullScreen.subscribe((isFullScreen) => {
+                this._fullScreen = isFullScreen;
+                this._changeDetectorRef.detectChanges();
+                this.adjustResponsivePadding();
+            })
+        );
     }
 
     /** @hidden Listen on Dialog visibility */

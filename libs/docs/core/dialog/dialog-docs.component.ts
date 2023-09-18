@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -24,6 +25,7 @@ import { DialogBackdropContainerExampleComponent } from './examples/dialog-backd
 import { DialogComplexExampleComponent } from './examples/dialog-complex/dialog-complex-example.component';
 import { DialogConfigurationExampleComponent } from './examples/dialog-configuration/dialog-configuration-example.component';
 import { FormDialogExampleComponent } from './examples/dialog-form/form-dialog-example.component';
+import { DialogFullScreenExampleComponent } from './examples/dialog-full-screen/dialog-full-screen-example.component';
 import { DialogInnerPopoverComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
 import { DialogMobileExampleComponent } from './examples/dialog-mobile/dialog-mobile-example.component';
 import { DialogObjectExampleComponent } from './examples/dialog-object-example/dialog-object-example.component';
@@ -71,6 +73,9 @@ const autoLabelHtml = 'auto-label/auto-label-dialog-example.component.html';
 const formDialogTs = 'dialog-form/form-dialog-example.component.ts';
 const formDialogHtml = 'dialog-form/form-dialog-example.component.html';
 
+const dialogFullScreenTs = 'dialog-full-screen/dialog-full-screen-example.component.ts';
+const dialogFullScreenHtml = 'dialog-full-screen/dialog-full-screen-example.component.html';
+
 const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts';
 
 @Component({
@@ -103,7 +108,11 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
         TitleComponent,
         CdkScrollable,
         ScrollbarDirective,
-        BarModule
+        BarModule,
+        DialogFullScreenExampleComponent,
+        AsyncPipe,
+        JsonPipe,
+        NgIf
     ]
 })
 export class DialogDocsComponent {
@@ -111,6 +120,7 @@ export class DialogDocsComponent {
 
     data: any = {
         properties: {
+            allowFullScreen: false,
             hasBackdrop: true,
             backdropClickCloseable: true,
             escKeyCloseable: true,
@@ -336,6 +346,20 @@ export class DialogDocsComponent {
             code: getAssetFromModuleAssets(complexDialogTs),
             fileName: 'dialog-complex-example',
             component: 'DialogComplexExampleComponent'
+        }
+    ];
+
+    fullScreenDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(dialogFullScreenHtml),
+            fileName: 'dialog-full-screen-example'
+        },
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets(dialogFullScreenTs),
+            fileName: 'dialog-full-screen-example',
+            component: 'DialogFullScreenExampleComponent'
         }
     ];
 

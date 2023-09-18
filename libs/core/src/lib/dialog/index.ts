@@ -28,3 +28,5 @@ export * from './utils/dialog.animations';
 export * from './dialog.types';
 export * from './tokens';
 export * from './utils/dialog-overlay.container';
+
+export * from './dialog-full-screen-toggler-button/dialog-full-screen-toggler-button.component';

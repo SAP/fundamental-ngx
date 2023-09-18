@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { DialogConfig } from '../utils/dialog-config.class';
@@ -8,6 +8,7 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 @Component({
     selector: 'fd-dialog-default',
     templateUrl: './dialog-default.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogDefaultComponent implements AfterViewInit {
@@ -48,5 +49,10 @@ export class DialogDefaultComponent implements AfterViewInit {
     /** @hidden */
     _cancelButtonClicked(): void {
         this._defaultDialogContent?.cancelButtonCallback?.();
+    }
+
+    /** @hidden */
+    _fullScreenButtonClicked(): void {
+        this._defaultDialogContent?.fullScreenButtonCallback?.();
     }
 }

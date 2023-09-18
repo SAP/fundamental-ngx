@@ -1,7 +1,14 @@
-import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
+import {
+    AfterContentInit,
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    Optional,
+    ViewEncapsulation
+} from '@angular/core';
 
-import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
+import { DialogConfig } from '../utils/dialog-config.class';
 
 export const DialogButtonClass = 'fd-dialog__decisive-button';
 
@@ -19,7 +26,9 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
  * */
 @Component({
     selector: 'fd-dialog-footer',
-    templateUrl: './dialog-footer.component.html'
+    templateUrl: './dialog-footer.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
     /** @hidden */

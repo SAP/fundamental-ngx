@@ -208,6 +208,23 @@
 </component-example>
 <code-example [exampleFiles]="dialogInnerPopover"></code-example>
 
+<separator></separator>
+
+<fd-docs-section-title id="full-screen-dialog" componentName="dialog"> Full screen toggler </fd-docs-section-title>
+<description>
+    <p>Dialog suports being toggled between defined width and height constraints and full-screen mode.</p>
+    <p>
+        In order to display full-screen toggler button, developers should use
+        <code>[fd-dialog-full-screen-toggler-button]</code>
+    </p>
+</description>
+<component-example>
+    <fd-dialog-full-screen-example></fd-dialog-full-screen-example>
+</component-example>
+<code-example [exampleFiles]="fullScreenDialog"></code-example>
+
+<separator></separator>
+
 <fd-docs-section-title id="playground-dialog" componentName="dialog"> Playground Area </fd-docs-section-title>
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <button fd-button label="Open Dialog" (click)="openDialog(playgroundDialog)"></button>
@@ -217,6 +234,13 @@
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
             <h1 fd-title id="fd-dialog-header-11">Playground Dialog</h1>
+            {{ dialogConfig | json }}
+            <button
+                fd-dialog-full-screen-toggler-button
+                *ngIf="dialogConfig.allowFullScreen"
+                [title]="(dialog.fullScreen | async) === true ? 'Leave full-screen mode' : 'Enter full-screen mode'"
+                (click)="dialog.toggleFullScreen()"
+            ></button>
             <button fd-dialog-close-button (click)="dialog.dismiss()" title="close"></button>
         </fd-dialog-header>
 

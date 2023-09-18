@@ -16,6 +16,7 @@ import {
     TemplateRef,
     Type,
     ViewChild,
+    ViewEncapsulation,
     ViewRef
 } from '@angular/core';
 
@@ -37,6 +38,7 @@ import { dialogFade } from '../utils/dialog.animations';
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
     animations: [dialogFade],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogContainerComponent
