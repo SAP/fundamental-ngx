@@ -2569,15 +2569,15 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@jsdevtools/npm-publish@2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-2.2.1.tgz#e4e22017e684ee9490b2798f5e129c11c71df70e"
-  integrity sha512-fBSoI0dE1JlFBBiONnf+ztN8eoDJAkvvTvIcuuxb81JivSA4DGN4ZpP4/w3+68upadt/wHBQdKFjzUidODWqTg==
+"@jsdevtools/npm-publish@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-2.2.2.tgz#862091d1e1a3bedd05cd41512e09aecf72a2954d"
+  integrity sha512-qqQYmNgC3oL7dKoKewVQGRddnsCSRyJbQCH5Gf2yiqH1EQtb0PCPrpfpsIy7AFQjxZaYlvEQfinymyFguRAKKw==
   dependencies:
-    "@types/semver" "^7.5.0"
-    command-line-args "^5.1.1"
-    semver "^7.5.3"
-    tar "^6.1.15"
+    "@types/semver" "^7.5.1"
+    command-line-args "^5.2.1"
+    semver "7.5.4"
+    tar "6.2.0"
 
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"
@@ -3930,10 +3930,10 @@
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
-"@types/semver@^7.3.12", "@types/semver@^7.5.0":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.0.tgz#591c1ce3a702c45ee15f47a42ade72c2fd78978a"
-  integrity sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==
+"@types/semver@^7.3.12", "@types/semver@^7.5.1":
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.2.tgz#31f6eec1ed7ec23f4f05608d3a2d381df041f564"
+  integrity sha512-7aqorHYgdNO4DM36stTiGO3DvKoex9TQRwsJU6vMaFGyqpBA1MNZkz+PG3gaNUPpTAOYhT1WR7M1JyA3fbS9Cw==
 
 "@types/send@*":
   version "0.17.1"
@@ -6250,7 +6250,7 @@ combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-command-line-args@^5.1.1:
+command-line-args@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/command-line-args/-/command-line-args-5.2.1.tgz#c44c32e437a57d7c51157696893c5909e9cec42e"
   integrity sha512-H4UfQhZyakIjC74I9d34fGYDwk3XpSr17QhEd0Q3I9Xq1CETHo4Hcuo87WyWHpAF1aSLjLRf5lD9ZGX2qStUvg==
@@ -17158,10 +17158,10 @@ tar@6.1.11:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-tar@^6.1.11, tar@^6.1.15, tar@^6.1.2:
-  version "6.1.15"
-  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.15.tgz#c9738b0b98845a3b344d334b8fa3041aaba53a69"
-  integrity sha512-/zKt9UyngnxIT/EAGYuxaMYgOIJiP81ab9ZfkILq4oNLPFX50qyYmu7jRj9qeXoxmJHjGlbH0+cm2uy1WCs10A==
+tar@6.2.0, tar@^6.1.11, tar@^6.1.2:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-6.2.0.tgz#b14ce49a79cb1cd23bc9b016302dea5474493f73"
+  integrity sha512-/Wo7DcT0u5HUV486xg675HtjNd3BXZ6xDbzsCUZPt5iw8bTQ63bP0Raut3mvro9u+CUyq7YQd8Cx55fsZXxqLQ==
   dependencies:
     chownr "^2.0.0"
     fs-minipass "^2.0.0"
