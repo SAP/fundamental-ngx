@@ -1,14 +1,16 @@
 import { Injectable, Type } from '@angular/core';
-import { FormComponentDefinition } from './interfaces/form-component-definition';
-import { DEFAULT_COMPONENTS_LIST } from './config/default-components-list';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
+import { DEFAULT_COMPONENTS_LIST } from './config/default-components-list';
+import { FormComponentDefinition } from './interfaces/form-component-definition';
 
 /**
  * Since form generator service most probably will be provided by parent component,
  * so that forms map does not interfere with other form generators,
  * Components Accessor is a separate service with a global scope, which can be also provided per component.
  */
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class FormGeneratorComponentsAccessorService {
     /**
      * @hidden

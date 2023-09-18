@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Optional, ViewEncapsulation } from '@angular/core';
 import { FD_DIALOG_BODY_COMPONENT } from '../tokens';
 
+import { AsyncPipe, NgIf } from '@angular/common';
+import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
@@ -32,7 +35,9 @@ import { DialogRef } from '../utils/dialog-ref.class';
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    hostDirectives: [ScrollbarDirective]
+    hostDirectives: [ScrollbarDirective],
+    standalone: true,
+    imports: [NgIf, DynamicPortalComponent, BusyIndicatorComponent, AsyncPipe]
 })
 export class DialogBodyComponent {
     /** @hidden */

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 /**
  * Directive that applies fundamental dialog styling to a dialog close button.
@@ -19,7 +20,9 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    template: `<fd-icon glyph="decline"></fd-icon><ng-content></ng-content>`
+    template: `<fd-icon glyph="decline"></fd-icon><ng-content></ng-content>`,
+    standalone: true,
+    imports: [IconComponent]
 })
 export class DialogCloseButtonComponent {
     /** Displays dialog close button in mobile mode */

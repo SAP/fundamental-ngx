@@ -267,6 +267,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ThemingService, provideTheming } from '@fundamental-ngx/core/theming';
+import { provideDialogService } from '@fundamental-ngx/core/dialog';
 ${getImport({ name: mainComponent.componentName, path: './app/' + mainComponent.basis })};
 
 bootstrapApplication(${mainComponent.componentName}, {
@@ -277,6 +278,7 @@ bootstrapApplication(${mainComponent.componentName}, {
       provideTheming({
         defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'
       }),
+      provideDialogService()
     ],
   }).then((appRef: ApplicationRef) => appRef.injector.get(ThemingService).init());
   `;

@@ -22,7 +22,7 @@ import {
 
 import { applyCssClass, CssClassBuilder, DynamicComponentContainer, Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
+import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angular/cdk/portal';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogContentType } from '../dialog.types';
@@ -39,7 +39,9 @@ import { dialogFade } from '../utils/dialog.animations';
     styleUrls: ['./dialog-container.component.scss'],
     animations: [dialogFade],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PortalModule]
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>

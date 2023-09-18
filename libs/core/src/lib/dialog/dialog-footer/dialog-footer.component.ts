@@ -7,6 +7,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { NgTemplateOutlet } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
 import { DialogConfig } from '../utils/dialog-config.class';
 
@@ -28,7 +31,9 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     selector: 'fd-dialog-footer',
     templateUrl: './dialog-footer.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [BarModule, ContentDensityDirective, NgTemplateOutlet]
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
     /** @hidden */
