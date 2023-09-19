@@ -19,7 +19,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Injector,
     Input,
     OnChanges,
@@ -31,9 +30,10 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import {
@@ -52,13 +52,25 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { AutoCompleteDirective, DisplayFnPipe, SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ComboboxItem } from './combobox-item';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
-import { GroupFunction } from './list-group.pipe';
+import { GroupFunction, ListGroupPipe } from './list-group.pipe';
 import { FD_COMBOBOX_COMPONENT } from './tokens';
 
 let comboboxUniqueId = 0;
@@ -87,6 +99,7 @@ let comboboxUniqueId = 0;
         },
         registerFormItemControl(ComboboxComponent),
         MenuKeyboardService,
+        DynamicComponentService,
         contentDensityObserverProviders(),
         {
             provide: FD_COMBOBOX_COMPONENT,
@@ -99,7 +112,27 @@ let comboboxUniqueId = 0;
         '[class.fd-combobox-custom-class--mobile]': 'mobile'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        NgIf,
+        ListModule,
+        InputGroupModule,
+        FormsModule,
+        AutoCompleteDirective,
+        ButtonModule,
+        IconComponent,
+        ContentDensityModule,
+        NgFor,
+        DisplayFnPipe,
+        SearchHighlightPipe,
+        FdTranslatePipe,
+        ListGroupPipe
+    ]
 })
 export class ComboboxComponent
     implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, FormItemControl

@@ -1,8 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
-
-import { ComboboxModule } from './combobox.module';
 import { ComboboxComponent } from './combobox.component';
 
 describe('ComboboxComponent', () => {
@@ -11,8 +8,7 @@ describe('ComboboxComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ComboboxModule],
-            providers: [DynamicComponentService]
+            imports: [ComboboxComponent]
         }).compileComponents();
     }));
 
