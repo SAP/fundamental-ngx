@@ -48,10 +48,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
             {
-                path: 'i18n',
-                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.ROUTES)
-            },
-            {
                 path: 'side-navigation',
                 loadChildren: () => import('@fundamental-ngx/docs/cx/side-navigation').then(configureCxRoutes)
             }

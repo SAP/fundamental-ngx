@@ -1,0 +1,141 @@
+/* eslint-disable max-len */
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import {
+    CodeExampleComponent,
+    CodeSnippetComponent,
+    DescriptionComponent,
+    DocsSectionTitleComponent,
+    ExampleFile,
+    HeaderComponent
+} from '@fundamental-ngx/docs/shared';
+
+@Component({
+    template: `
+        <header>Writing translations</header>
+        <description>
+            <p>
+                Translations consist of two parts: the translation identifier and the translation itself. The
+                translation identifier is a string that is used to identify the translation. The translation itself is
+                the string that is displayed to the user.
+            </p>
+            <p>
+                The format in which the translation is written depends on the type of the loader. If you are loading
+                translations from a JavaScript object, then it can be a function too, along with a string.
+            </p>
+            <p>
+                Let's take example from Platform Upload collection translation identifiers. They have a prefix
+                <code>platformUploadCollection</code>. Whole list of the identifiers can be found in the
+                <a routerLink="/platform/upload-collection/i18n" fd-link>upload collection i18n documentation page</a>.
+                For the sake of the example, let's take a small list of them from English translations file:
+            </p>
+            <fd-code-snippet [file]="jsonExample"></fd-code-snippet>
+            <p>
+                Here, in the list above, we see 4 translation variants: a simple string, a string with a placeholder,
+                with internal references and
+                <a href="https://support.crowdin.com/icu-message-syntax" fd-link target="_blank">ICU expression</a>
+            </p>
+            <p>
+                If you'd loaded translation strings using the JavaScript object, you'd have access to functions as well
+                and above example would take the following form:
+            </p>
+            <fd-code-snippet [file]="jsExample"></fd-code-snippet>
+            <p>
+                The JavaScript object is a valid translation source, but it is not the most convenient one if you want
+                to translate your application using a translation service. For that, you need to use format, which is
+                represented by the raw strings in the example above. The format is called
+                <a href="https://formatjs.io/docs/core-concepts/icu-syntax/" fd-link target="_blank"
+                    >ICU Message Syntax</a
+                >, and it is a standard for the translation strings. It is supported by most of the translation
+                services, and it is the recommended format for the translations.
+            </p>
+            <p>
+                Our translation interpolations are using
+                <a href="https://formatjs.io/" fd-link target="_blank">formatjs</a>
+                library, which is the most popular ICU Message Syntax implementation for JavaScript.
+            </p>
+        </description>
+        <fd-docs-section-title id="internal-references" componentName="i18n">
+            How does internal references work?
+        </fd-docs-section-title>
+        <description>
+            <p>
+                Internal references are used to reference other translations. When our translations resolver finds a
+                reference, it tries to find the translation for the reference and replace the reference with the
+                translation, if it is found. Then it assembles one big ICU Message Syntax string and passes it to the
+                formatjs library for the interpolation. One thing to note is that if referenced translation needs some
+                context, then the context is also needed for the referee translation. For example, if we have a
+                translation
+                <code>platformUploadCollection.folderNamePluralization</code>
+                and it is referenced in another translation
+                <code>platformUploadCollection.messageRemoveFoldersAndFilesFailed</code>
+                , then the
+                <code>platformUploadCollection.messageRemoveFoldersAndFilesFailed</code>
+                translation needs to have minimum the same context as the
+                <code>platformUploadCollection.folderNamePluralization</code>
+                translation, otherwise the interpolation will fail.
+            </p>
+        </description>
+        <fd-docs-section-title id="escaping-curly-braces">
+            How to escape <code>{{ '{' }}</code> and <code>{{ '}' }}</code> characters?
+        </fd-docs-section-title>
+        <description>
+            <p>
+                If you need to use <code>{{ '{' }}</code> or <code>{{ '}' }}</code> characters in your translation, you
+                need to wrap them in single or double quotes.
+            </p>
+            <p>
+                For example, if your translation needs to be <code>{{ fromToCodeTranslation }}</code> and your contexts
+                are <code>from</code> and <code>to</code>, then your translation will look like this:
+                <code>{{ fromToCode }}</code>
+            </p>
+        </description>
+    `,
+    imports: [
+        HeaderComponent,
+        DescriptionComponent,
+        RouterLink,
+        LinkComponent,
+        CodeExampleComponent,
+        CodeSnippetComponent,
+        DocsSectionTitleComponent
+    ],
+    standalone: true
+})
+export class WritingTranslationsComponent {
+    fromToCode = "'{'{from}'}'-'{'{to}'}'";
+    fromToCodeTranslation = '{0-12}';
+    jsonExample: ExampleFile = {
+        language: 'json',
+        code: `{
+  "platformUploadCollection.folderNamePluralization": "{folderCount, plural, =1 {1 folder} other {# folders}}",
+  "platformUploadCollection.fileNamePluralization": "{filesCount, plural, =1 {1 file} other {# files}}",
+  "platformUploadCollection.removeBtnLabel": "Remove",
+  "platformUploadCollection.messageUpdateVersionSuccess": "{folderName} version has been updated.",
+  "platformUploadCollection.messageRemoveFoldersAndFilesFailed": "Failed to remove {@@platformUploadCollection.folderNamePluralization} and {@@platformUploadCollection.fileNamePluralization} files."
+}`
+    };
+    jsExample: ExampleFile = {
+        language: 'js',
+        code: `const folderNamePluralization = ({folderCount}) => {
+    return folderCount === 1 ? '1 folder' : \`\${folderCount} folders\`;
+};
+
+const fileNamePluralization = ({filesCount}) => {
+    return filesCount === 1 ? '1 file' : \`\${filesCount} files\`;
+};
+
+const platformUploadCollection = {
+    folderNamePluralization,
+    fileNamePluralization,
+    removeBtnLabel: 'Remove',
+    messageUpdateVersionSuccess: ({folderName}) => \`\${folderName} version has been updated.\`,
+    messageRemoveFoldersAndFilesFailed: ({folderName, fileName}) => {
+        const folders = folderNamePluralization({folderName});
+        const files = fileNamePluralization({fileName});
+        return \`Failed to remove \${folders} and \${files} files.\`;
+    }
+};`
+    };
+}

@@ -22,9 +22,9 @@ import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
         patchLanguage({
             platformTextarea: {
                 counterMessageCharactersOverTheLimitSingular: '1 Zeichen über dem Limit',
-                counterMessageCharactersOverTheLimitPlural: '{{ count }} Zeichen über dem Limit',
+                counterMessageCharactersOverTheLimitPlural: '{ count } Zeichen über dem Limit',
                 counterMessageCharactersRemainingSingular: '1 Zeichen übrig',
-                counterMessageCharactersRemainingPlural: '{{ count }} Zeichen übrig'
+                counterMessageCharactersRemainingPlural: '{ count } Zeichen übrig'
             }
         })
     ],

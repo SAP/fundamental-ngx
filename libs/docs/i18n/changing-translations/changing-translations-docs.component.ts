@@ -9,23 +9,11 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { PlatformI18nTranslationCustomizationExampleComponent } from '../patching-translations/examples/i18n-translation-customization-example/i18n-translation-customization-example.component';
 import { PlatformLanguageChangeExampleComponent } from './examples/i18n-language-change-example/i18n-language-change-example.component';
-import { PlatformI18nTranslationCustomizationExampleComponent } from './examples/i18n-translation-customization-example/i18n-translation-customization-example.component';
-
-const translationCustomizationExampleComponentHtml =
-    'i18n-translation-customization-example/i18n-translation-customization-example.component.html';
-const translationCustomizationExampleComponentTs =
-    'i18n-translation-customization-example/i18n-translation-customization-example.component.ts';
-const translationCustomizationWrapper1Component =
-    'i18n-translation-customization-example/translation-wrapper-1.component.ts';
-const translationCustomizationWrapper2Component =
-    'i18n-translation-customization-example/translation-wrapper-2.component.ts';
-const languageChangeExampleComponentHtml = 'i18n-language-change-example/i18n-language-change-example.component.html';
-const languageChangeExampleComponentTs = 'i18n-language-change-example/i18n-language-change-example.component.ts';
 
 @Component({
-    selector: 'app-button',
-    templateUrl: './platform-i18n-docs.component.html',
+    templateUrl: './changing-translations-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
@@ -39,7 +27,7 @@ const languageChangeExampleComponentTs = 'i18n-language-change-example/i18n-lang
         PlatformLanguageChangeExampleComponent
     ]
 })
-export class PlatformI18nDocsComponent {
+export class ChangingTranslationsDocsComponent {
     basicUsageExample = {
         language: 'typescript',
         code: `import { FD_LANGUAGE, FdLanguage, FD_LANGUAGE_UKRAINIAN } from '@fundamental-ngx/i18n';
@@ -81,45 +69,16 @@ export const CUSTOM_LANGUAGE: FdLanguage = {
         `
     };
 
-    translationCustomizationExample: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(translationCustomizationExampleComponentHtml, 'shared'),
-            fileName: 'i18n-translation-customization-example'
-        },
-        {
-            language: 'typescript',
-            component: 'PlatformI18nTranslationCustomizationExampleComponent',
-            code: getAssetFromModuleAssets(translationCustomizationExampleComponentTs, 'shared'),
-            fileName: 'i18n-translation-customization-example',
-            name: 'Host component'
-        },
-        {
-            language: 'typescript',
-            component: 'TranslationWrapper1Component',
-            code: getAssetFromModuleAssets(translationCustomizationWrapper1Component, 'shared'),
-            fileName: 'translation-wrapper-1',
-            name: 'Wrapper component 1'
-        },
-        {
-            language: 'typescript',
-            component: 'TranslationWrapper2Component',
-            code: getAssetFromModuleAssets(translationCustomizationWrapper2Component, 'shared'),
-            fileName: 'translation-wrapper-2',
-            name: 'Wrapper component 2'
-        }
-    ];
-
     languageChangeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets(languageChangeExampleComponentHtml, 'shared'),
+            code: getAssetFromModuleAssets('i18n-language-change-example/i18n-language-change-example.component.html'),
             fileName: 'i18n-language-change-example-example'
         },
         {
             language: 'typescript',
             component: 'PlatformLanguageChangeExampleComponent',
-            code: getAssetFromModuleAssets(languageChangeExampleComponentTs, 'shared'),
+            code: getAssetFromModuleAssets('i18n-language-change-example/i18n-language-change-example.component.ts'),
             fileName: 'i18n-language-change-example-example'
         }
     ];

@@ -93,6 +93,11 @@
                         "output": "./assets/cdk"
                     },
                     {
+                        "input": "./libs/i18n",
+                        "glob": "README.md",
+                        "output": "./assets/i18n"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"
@@ -130,7 +135,7 @@
                     {
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/i18n",
-                        "output": "./docs/shared/i18n"
+                        "output": "./docs/i18n"
                     },
                     {
                         "glob": "**/examples/**/*",

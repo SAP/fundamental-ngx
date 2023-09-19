@@ -1,0 +1,36 @@
+<fd-docs-section-title id="language-change" componentName="i18n"> Changing languages at runtime </fd-docs-section-title>
+<description>
+    <p>
+        In this particular example such capabilities are shown on the level of a component due to the limitations of the
+        example itself. The same scenario can and should be used in the root of your app.
+    </p>
+</description>
+<component-example>
+    <app-language-change-example></app-language-change-example>
+</component-example>
+<code-example [exampleFiles]="languageChangeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-translations" componentName="i18n">
+    Creating custom translations
+</fd-docs-section-title>
+<description>
+    <p>
+        Although <code>fundamental-ngx</code> library provides a rich set of languages to work with out of the box, it's
+        possible to also define your own languages when needed. The language object is just a set of key/values, that
+        are defined per component. This object should implement <code>FdLanguage</code> interface.
+    </p>
+    <p>
+        You may provide both strings with interpolation using double curly brackets (<code>
+            {{ '{{' }} paramName {{ "}}" }}</code
+        >) or functions as language values.
+    </p>
+    <p>
+        The list of available keys can be found in the corresponding docs section of each component. The I18n section is
+        visible only for the components that have translations. The default English value for each translation is also
+        in this documentation.
+    </p>
+
+    <fd-code-snippet [file]="translationExample"></fd-code-snippet>
+</description>

@@ -3,7 +3,17 @@ import { cloneDeep, merge } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FdLanguage, FdLanguagePatch } from '../models';
+import { flattenTranslations } from './flatten-translations';
+import { loadJson } from './load-json';
 import { FD_LANGUAGE } from './tokens';
+
+export const patchedObj = (
+    lang: FdLanguage,
+    patch: FdLanguagePatch | ((lang: FdLanguage) => FdLanguagePatch)
+): FdLanguage => {
+    const patchObj = typeof patch === 'function' ? patch(lang) : patch;
+    return loadJson(flattenTranslations(patchObj, null));
+};
 
 /**
  * DI utility function, that allows to override `FD_LANGUAGE` injection token with part of the language object, that is used globally
@@ -42,11 +52,7 @@ export function patchLanguage(
     return {
         provide: FD_LANGUAGE,
         useFactory: (lang$: Observable<FdLanguage>) =>
-            lang$.pipe(
-                map((lang) =>
-                    merge(cloneDeep(lang), typeof languagePatch === 'function' ? languagePatch(lang) : languagePatch)
-                )
-            ),
+            lang$.pipe(map((lang) => merge(cloneDeep(lang), patchedObj(lang, languagePatch)))),
         deps: [[new SkipSelf(), FD_LANGUAGE]]
     };
 }

@@ -62,6 +62,7 @@
     "fundamental-styles": "0.30.2-rc.30",
     "highlight.js": "11.7.0",
     "intl": "1.2.5",
+    "intl-messageformat": "10.5.2",
     "lodash-es": "4.17.21",
     "marked": "4.3.0",
     "moment": "2.29.4",

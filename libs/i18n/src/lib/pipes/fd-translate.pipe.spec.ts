@@ -1,66 +1,115 @@
-import { ChangeDetectorRef, DestroyRef } from '@angular/core';
-import { delay, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BehaviorSubject, delay } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
-import { FdLanguage } from '../models';
+import { FdLanguage, FdLanguageKeyArgs } from '../models';
+import { FD_LANGUAGE } from '../utils/tokens';
 import { FdTranslatePipe } from './fd-translate.pipe';
-import { TestBed } from '@angular/core/testing';
+
+const lang: FdLanguage = {
+    ...FD_LANGUAGE_ENGLISH,
+    platformApprovalFlow: {
+        ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
+        nodeMembersCount: (params) => `${params['count']} members`
+    }
+};
+
+@Component({
+    template: `{{ testKey | fdTranslate : testArgs }}`,
+    standalone: true,
+    imports: [FdTranslatePipe],
+    changeDetection: ChangeDetectionStrategy.OnPush
+})
+class TestComponent {
+    @Input() testKey: string;
+    @Input() testArgs: FdLanguageKeyArgs;
+}
 
 describe('FdTranslate pipe', () => {
-    let pipe: FdTranslatePipe;
-    const changeDetectorRefMock = { markForCheck: () => {} } as ChangeDetectorRef;
-    let destroyRef: DestroyRef;
-    beforeEach(() => {
-        TestBed.configureTestingModule({});
-        destroyRef = TestBed.inject(DestroyRef);
-    });
+    let lang$: BehaviorSubject<FdLanguage>;
+    let testComponentFixture: ComponentFixture<TestComponent>;
+
+    function getTranslatedValue(): string {
+        return testComponentFixture.nativeElement.textContent.trim();
+    }
+
+    function setCtx(key: string, args?: FdLanguageKeyArgs): void {
+        testComponentFixture.componentRef.setInput('testKey', key);
+        testComponentFixture.componentRef.setInput('testArgs', args);
+        testComponentFixture.detectChanges();
+    }
+
+    function expectValueToBe(v: string): void {
+        expect(getTranslatedValue()).toBe(v);
+    }
+
+    const beforeEachTest = (): void => {
+        lang$ = new BehaviorSubject<FdLanguage>(lang);
+        TestBed.configureTestingModule({
+            imports: [TestComponent],
+            providers: [
+                {
+                    provide: FD_LANGUAGE,
+                    useValue: lang$
+                }
+            ]
+        });
+    };
+
     describe('pipe functionality', () => {
+        beforeEach(async () => {
+            beforeEachTest();
+            await TestBed.compileComponents();
+            testComponentFixture = TestBed.createComponent(TestComponent);
+        });
         it("should return value by key, if it's available", () => {
-            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH), destroyRef, changeDetectorRefMock);
-            expect(pipe.transform('platformApprovalFlow.defaultWatchersLabel')).toBe('Watchers');
-            expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 10 })).toBe('10 members');
+            setCtx('platformApprovalFlow.defaultWatchersLabel');
+            expectValueToBe('Watchers');
+            setCtx('platformApprovalFlow.nodeMembersCount', { count: 10 });
+            expectValueToBe('10 members');
         });
 
         it('should return empty string if value is not found', () => {
-            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH), destroyRef, changeDetectorRefMock);
-            expect(pipe.transform('wrong')).toBe('');
+            setCtx('wrong');
+            expectValueToBe('');
         });
-
         it('should work with function values', () => {
-            const customLang = {
+            const nodeMembersCount = jest.fn((params) => `${params['count']} function members`);
+            lang$.next({
                 ...FD_LANGUAGE_ENGLISH,
                 platformApprovalFlow: {
                     ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
-                    nodeMembersCount: (params: { count: number }) => `${params.count} function members`
+                    nodeMembersCount
                 }
-            } as FdLanguage;
-            const spy = jest.spyOn<any, any>(customLang.platformApprovalFlow, 'nodeMembersCount');
-            pipe = new FdTranslatePipe(of(customLang), destroyRef, changeDetectorRefMock);
-            expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 function members');
-            expect(spy).toHaveBeenCalledWith({ count: 15 });
-            expect(spy).toHaveBeenCalledTimes(1);
+            });
+            setCtx('platformApprovalFlow.nodeMembersCount', { count: 15 });
+            expectValueToBe('15 function members');
+            expect(nodeMembersCount).toHaveBeenCalledWith({ count: 15 });
+            expect(nodeMembersCount).toHaveBeenCalledTimes(1);
         });
         it('should fall back to English dictionary if function value throws', () => {
-            const customLang = {
+            const nodeMembersCount = jest.fn(() => {
+                throw new Error('Oops');
+            });
+            lang$.next({
                 ...FD_LANGUAGE_ENGLISH,
                 platformApprovalFlow: {
                     ...FD_LANGUAGE_ENGLISH.platformApprovalFlow,
-                    nodeMembersCount: () => {
-                        throw new Error('Oops');
-                    }
+                    nodeMembersCount
                 }
-            } as FdLanguage;
-            const spy = jest.spyOn<any, any>(customLang.platformApprovalFlow, 'nodeMembersCount' as any);
-            pipe = new FdTranslatePipe(of(customLang), destroyRef, changeDetectorRefMock);
-            expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 members');
-            expect(spy).toHaveBeenCalled();
+            });
+            setCtx('platformApprovalFlow.nodeMembersCount', { count: 15 });
+            expectValueToBe('15 members');
+            expect(nodeMembersCount).toHaveBeenCalled();
         });
         it('should fall back to English dictionary if value was not found', () => {
             const customLang = {
                 ...FD_LANGUAGE_ENGLISH
-            } as FdLanguage;
+            };
             delete (<any>customLang).platformApprovalFlow;
-            pipe = new FdTranslatePipe(of(customLang), destroyRef, changeDetectorRefMock);
-            expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 15 })).toBe('15 members');
+            lang$.next(customLang);
+            setCtx('platformApprovalFlow.nodeMembersCount', { count: 15 });
+            expectValueToBe('15 members');
         });
     });
 
@@ -68,22 +117,31 @@ describe('FdTranslate pipe', () => {
         // cannot use fakeAsync, because rxjs delays are not taken into account with it
         // https://github.com/angular/angular/issues/44351
         const DELAY = 5;
-
-        beforeEach(() => {
-            pipe = new FdTranslatePipe(of(FD_LANGUAGE_ENGLISH).pipe(delay(DELAY)), destroyRef, changeDetectorRefMock);
+        beforeEach(async () => {
+            beforeEachTest();
+            TestBed.overrideProvider(FD_LANGUAGE, {
+                useValue: lang$.pipe(delay(DELAY))
+            });
+            await TestBed.compileComponents();
+            testComponentFixture = TestBed.createComponent(TestComponent);
         });
 
         it('without params', (done) => {
-            expect(pipe.transform('platformApprovalFlow.defaultWatchersLabel')).toBe('');
+            setCtx('platformApprovalFlow.defaultWatchersLabel');
+            expectValueToBe('');
             setTimeout(() => {
-                expect(pipe.transform('platformApprovalFlow.defaultWatchersLabel')).toBe('Watchers');
+                testComponentFixture.detectChanges();
+                expectValueToBe('Watchers');
                 done();
             }, DELAY + 1);
         });
+
         it('with params', (done) => {
-            expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 10 })).toBe('');
+            setCtx('platformApprovalFlow.nodeMembersCount', { count: 10 });
+            expectValueToBe('');
             setTimeout(() => {
-                expect(pipe.transform('platformApprovalFlow.nodeMembersCount', { count: 10 })).toBe('10 members');
+                testComponentFixture.detectChanges();
+                expectValueToBe('10 members');
                 done();
             }, DELAY + 1);
         });
