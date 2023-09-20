@@ -217,9 +217,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
-        if (this._overlayRef) {
-            this._overlayRef.updatePosition();
-        }
+        this._overlayRef?.updatePosition();
     }
 
     /** Temporary sets the ignoring of the event triggers. */
@@ -505,6 +503,7 @@ export class PopoverService extends BasePopoverClass {
         body._closeOnEscapeKey = this.closeOnEscapeKey;
         body._bodyRole = this._bodyRole;
         body._bodyId = this._bodyId;
+        body._resizable = this.resizable;
         this._detectChanges();
     }
 
