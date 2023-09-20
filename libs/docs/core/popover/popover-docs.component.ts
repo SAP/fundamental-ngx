@@ -23,6 +23,7 @@ import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
 import { PopoverPlacementExampleComponent } from './examples/popover-placement/popover-placement-example.component';
 import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
+import { PopoverResizableExampleComponent } from './examples/popover-resizable/popover-resizable-example.component';
 import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
 import { PopoverExampleComponent } from './examples/popover-simple/popover-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
@@ -61,6 +62,9 @@ const popoverTriggerSrc = 'popover-trigger-example/popover-trigger-example.compo
 const mobilePopoverHtmlSrc = 'popover-mobile/popover-mobile-example.component.html';
 const mobilePopoverTsSrc = 'popover-mobile/popover-mobile-example.component.ts';
 
+const resizablePopoverHtmlSrc = 'popover-resizable/popover-resizable-example.component.html';
+const resizablePopoverTsSrc = 'popover-resizable/popover-resizable-example.component.ts';
+
 const dynamicContainerHeightHtmlSrc =
     'popover-dynamic-container-height/popover-dynamic-container-height-example.component.html';
 const dynamicContainerHeightTsSrc =
@@ -92,7 +96,8 @@ const dynamicContainerHeightTsSrc =
         RouterLink,
         PopoverMobileExampleComponent,
         PopoverDynamicContainerHeightExampleComponent,
-        PopoverLazyInitOfBodyExampleComponent
+        PopoverLazyInitOfBodyExampleComponent,
+        PopoverResizableExampleComponent
     ]
 })
 export class PopoverDocsComponent {
@@ -320,6 +325,20 @@ export class PopoverDocsComponent {
             component: 'PopoverLazyLoadedBodyComponent',
             code: getAssetFromModuleAssets('popover-lazy-init-of-body/popover-lazy-loaded-body.component.ts'),
             fileName: 'popover-lazy-loaded-body'
+        }
+    ];
+
+    resizablePopovers: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets(resizablePopoverHtmlSrc),
+            fileName: 'popover-resizable-example'
+        },
+        {
+            language: 'typescript',
+            component: 'PopoverResizableExampleComponent',
+            code: getAssetFromModuleAssets(resizablePopoverTsSrc),
+            fileName: 'popover-resizable-example'
         }
     ];
 }

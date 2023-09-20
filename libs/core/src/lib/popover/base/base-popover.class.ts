@@ -1,7 +1,7 @@
-import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
-import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Directive()
 export class BasePopoverClass {
@@ -142,6 +142,10 @@ export class BasePopoverClass {
     /** Whether position shouldn't change, when popover approach the corner of page */
     @Input()
     fixedPosition = false;
+
+    /** Whether the popover body is resizable. */
+    @Input()
+    resizable = false;
 
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
