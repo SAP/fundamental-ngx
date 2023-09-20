@@ -3,7 +3,7 @@ import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from './dialog-service/dialog.service';
 
 /**
- * Provides necessary services for dialog functionality to property work.
+ * Provides necessary services for dialog functionality to properly work.
  * @returns Array of Providers.
  */
 export function provideDialogService(): Provider[] {
