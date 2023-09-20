@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "Синхронизирай",
     "platformSearchField.searchSuggestionMessage": "{ count, plural, one {Намерено е 1 предложение} other {Намерени са # предложения} }.",
     "platformSearchField.searchSuggestionNavigateMessage": "използвайте стрелки нагоре и надолу за навигация",
+    "platformSwitch.ariaLabel": "Превключвател",
     "platformSmartFilterBar.searchPlaceholder": "Търси",
     "platformSmartFilterBar.submitButtonLabel": "Търси",
     "platformSmartFilterBar.filtersButtonLabel": "Филтри ({filtersCount})",

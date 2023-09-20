@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "Senkronize",
     "platformSearchField.searchSuggestionMessage": "{count} öneri bulundu.",
     "platformSearchField.searchSuggestionNavigateMessage": "gezinmek için yukarı ve aşağı okları kullanın",
+    "platformSwitch.ariaLabel": "Anahtar",
     "platformSmartFilterBar.searchPlaceholder": "Ara",
     "platformSmartFilterBar.submitButtonLabel": "Git",
     "platformSmartFilterBar.filtersButtonLabel": "Filtreler ({filtersCount})",

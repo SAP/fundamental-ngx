@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "Synchronizovat",
     "platformSearchField.searchSuggestionMessage": "Počet nalezených návrhů: {count}.",
     "platformSearchField.searchSuggestionNavigateMessage": "k navigaci použijte šipky nahoru a dolů",
+    "platformSwitch.ariaLabel": "Switch",
     "platformSmartFilterBar.searchPlaceholder": "Vyhledávání",
     "platformSmartFilterBar.submitButtonLabel": "Jdi",
     "platformSmartFilterBar.filtersButtonLabel": "Filtry ({filtersCount})",

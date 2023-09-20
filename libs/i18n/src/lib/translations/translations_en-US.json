@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "Synchronize",
     "platformSearchField.searchSuggestionMessage": "{count} suggestions found.",
     "platformSearchField.searchSuggestionNavigateMessage": "use up and down arrows to navigate",
+    "platformSwitch.ariaLabel": "Switch input",
     "platformSmartFilterBar.searchPlaceholder": "Search",
     "platformSmartFilterBar.submitButtonLabel": "Go",
     "platformSmartFilterBar.filtersButtonLabel": "Filters ({filtersCount})",

@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "Синхронізувати",
     "platformSearchField.searchSuggestionMessage": "Знайдено { count, plural, one {1 варіант} few {# варіанти} other {# варіантів} }",
     "platformSearchField.searchSuggestionNavigateMessage": "використовуйте стрілки вгору та вниз для навігації",
+    "platformSwitch.ariaLabel": "Перемикач",
     "platformSmartFilterBar.searchPlaceholder": "Пошук",
     "platformSmartFilterBar.submitButtonLabel": "Перейти",
     "platformSmartFilterBar.filtersButtonLabel": "Фільтри ({filtersCount})",

@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Inject,
-    QueryList,
-    ViewChildren,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgFor, NgIf } from '@angular/common';
@@ -14,22 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import {
-    DialogBodyComponent,
-    DialogComponent,
-    DialogFooterComponent,
-    DialogHeaderComponent,
-    DialogRef
-} from '@fundamental-ngx/core/dialog';
+import { DialogBodyComponent, DialogComponent, DialogFooterComponent, DialogHeaderComponent, DialogRef } from '@fundamental-ngx/core/dialog';
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSync } from '@fundamental-ngx/i18n';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { FILTER_STRATEGY, FilterAllStrategy } from '@fundamental-ngx/platform/table';
-import { Observable, firstValueFrom } from 'rxjs';
 import { getSelectItemValue } from '../../helpers';
 import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
 import { SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
@@ -105,15 +90,11 @@ export class SmartFilterBarConditionsDialogComponent {
     private _submittedForms: any[] = [];
 
     /** @hidden */
-    private _language: FdLanguage;
-
-    /** @hidden */
-    private _translationResolver = new TranslationResolver();
+    private resolveTranslation = resolveTranslationSync();
 
     /** @hidden */
     constructor(
         private _dialogRef: DialogRef<SmartFilterBarConditionBuilder, SmartFilterBarCondition[]>,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService
     ) {
@@ -121,11 +102,10 @@ export class SmartFilterBarConditionsDialogComponent {
     }
 
     /** @hidden */
-    private async _init(): Promise<void> {
+    private _init(): void {
         this.config = this._dialogRef.data;
 
-        this._language = await firstValueFrom(this._language$);
-        this.conditionOperatorOptions = await this._getApplicableConditionOperators();
+        this.conditionOperatorOptions = this._getApplicableConditionOperators();
 
         this._addExistingConditions(getSelectItemValue(this.config.conditions));
 
@@ -208,10 +188,7 @@ export class SmartFilterBarConditionsDialogComponent {
         for (const strategyItem in labelsConfig) {
             if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
                 const translationKey = labelsConfig[strategyItem];
-                labelsConfig[strategyItem] = this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.' + translationKey
-                );
+                labelsConfig[strategyItem] = this.resolveTranslation('platformSmartFilterBar.' + translationKey);
             }
         }
 
@@ -257,10 +234,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.filterConditionValuePlaceholder'
-                ),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValuePlaceholder'),
                 controlType: this.config.controlType,
                 when: (value) => value.operator !== FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -278,10 +252,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.filterConditionValueFromPlaceholder'
-                ),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueFromPlaceholder'),
                 controlType: this.config.controlType,
                 when: (value) => value.operator === FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -299,10 +270,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value2,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.filterConditionValueToPlaceholder'
-                ),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueToPlaceholder'),
                 required: true,
                 controlType: this.config.controlType,
                 when: (value) => value?.operator === FILTER_STRATEGY.BETWEEN,

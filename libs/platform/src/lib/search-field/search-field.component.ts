@@ -32,7 +32,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
+import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
 import { FormsModule } from '@angular/forms';
@@ -50,7 +50,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSync } from '@fundamental-ngx/i18n';
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
@@ -366,7 +366,7 @@ export class SearchFieldComponent
     private _categories: ValueLabelItem[];
 
     /** @hidden */
-    private _currentSearchSuggestionAnnoucementMessage = '';
+    private _currentSearchSuggestionAnnouncementMessage = '';
 
     /** @hidden */
     private _suggestionOverlayRef: OverlayRef | null;
@@ -378,7 +378,7 @@ export class SearchFieldComponent
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
     /** @hidden */
-    private _translationResolver = new TranslationResolver();
+    private resolveTranslation = resolveTranslationSync();
 
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
@@ -398,7 +398,6 @@ export class SearchFieldComponent
         protected readonly _cd: ChangeDetectorRef,
         @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,
         readonly contentDensityObserver: ContentDensityObserver
@@ -483,7 +482,7 @@ export class SearchFieldComponent
     onValueChange(event: string): void {
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
-        setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
+        setTimeout(() => (this._currentSearchSuggestionAnnouncementMessage = ''));
         this._isSearchDone = false;
         this._isRefresh = false;
 
@@ -510,7 +509,7 @@ export class SearchFieldComponent
             this.dataSource.match(match);
         }
 
-        this._updateSearchAnnoucementText();
+        this._updateSearchAnnouncementText();
     }
 
     /**
@@ -718,23 +717,19 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    private async _updateSearchAnnoucementText(): Promise<void> {
+    private async _updateSearchAnnouncementText(): Promise<void> {
         // create search suggestion message with count.
         const suggestionCount = this._getSuggestionsLength();
-        const lang = await firstValueFrom(this._language$);
-        const searchSuggestionMessage = this._translationResolver.resolve(
-            lang,
-            'platformSearchField.searchSuggestionMessage',
-            { count: suggestionCount }
-        );
-        const searchSuggestionNavigateMessage = this._translationResolver.resolve(
-            lang,
+        const searchSuggestionMessage = this.resolveTranslation('platformSearchField.searchSuggestionMessage', {
+            count: suggestionCount
+        });
+        const searchSuggestionNavigateMessage = this.resolveTranslation(
             'platformSearchField.searchSuggestionNavigateMessage'
         );
-        this._currentSearchSuggestionAnnoucementMessage =
+        this._currentSearchSuggestionAnnouncementMessage =
             searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
         if (this.inputText?.length > 0) {
-            await this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
+            await this._liveAnnouncer.announce(this._currentSearchSuggestionAnnouncementMessage);
         }
     }
 

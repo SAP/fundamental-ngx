@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "同步",
     "platformSearchField.searchSuggestionMessage": "找到{count}条建议。",
     "platformSearchField.searchSuggestionNavigateMessage": "用上下方向键来导航",
+    "platformSwitch.ariaLabel": "开关",
     "platformSmartFilterBar.searchPlaceholder": "搜索…",
     "platformSmartFilterBar.submitButtonLabel": "确认",
     "platformSmartFilterBar.filtersButtonLabel": "筛选（{filtersCount}）",

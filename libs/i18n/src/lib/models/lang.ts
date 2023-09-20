@@ -420,6 +420,9 @@ export interface FdLanguage {
         searchSuggestionMessage: FdLanguageKey;
         searchSuggestionNavigateMessage: FdLanguageKey;
     };
+    platformSwitch: {
+        ariaLabel: FdLanguageKey;
+    };
     platformSmartFilterBar: {
         searchPlaceholder: FdLanguageKey;
         submitButtonLabel: FdLanguageKey;

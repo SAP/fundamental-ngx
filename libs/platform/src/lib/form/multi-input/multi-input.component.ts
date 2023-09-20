@@ -58,9 +58,8 @@ import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import equal from 'fast-deep-equal';
-import { Observable, firstValueFrom } from 'rxjs';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
 import { InputType } from '../input/input.component';
 import { BaseMultiInput } from './base-multi-input';
@@ -115,7 +114,8 @@ export class MultiInputSelectionChangeEvent {
         PlatformListModule,
         StandardListItemModule,
         DisplayFnPipe,
-        ContentDensityModule
+        ContentDensityModule,
+        FdTranslatePipe
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
@@ -229,9 +229,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     private readonly _listItems: QueryList<BaseListItem>;
 
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
-
-    /** @hidden */
     constructor(
         /** @hidden */
         readonly cd: ChangeDetectorRef,
@@ -258,9 +255,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD) formField: PlatformFormField,
         /** @hidden */
         @Optional() @SkipSelf() @Host() @Inject(FD_FORM_FIELD_CONTROL) formControl: PlatformFormFieldControl,
-        readonly contentDensityObserver: ContentDensityObserver,
-        /** @hidden */
-        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>
+        readonly contentDensityObserver: ContentDensityObserver
     ) {
         super(
             cd,
@@ -291,8 +286,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (!this.dataSource && this.entityClass && providers?.has(this.entityClass)) {
             this.dataSource = new MultiInputDataSource(providers.get(this.entityClass)!);
         }
-
-        this._getAriaLabel();
     }
 
     /** @hidden */
@@ -539,11 +532,5 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             },
             { injector }
         );
-    }
-
-    /** @hidden */
-    private async _getAriaLabel(): Promise<void> {
-        const lang = await firstValueFrom(this._language);
-        this.ariaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }

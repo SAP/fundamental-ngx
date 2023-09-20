@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "სინქრონიზაცია",
     "platformSearchField.searchSuggestionMessage": "ნაპოვნია {count} შემოთავაზება.",
     "platformSearchField.searchSuggestionNavigateMessage": "ნავიგაციისთვის გამოიყენეთ ზედა და ქვედა ღილაკები",
+    "platformSwitch.ariaLabel": "გადამრთველი",
     "platformSmartFilterBar.searchPlaceholder": "ძებნა",
     "platformSmartFilterBar.submitButtonLabel": "წინ",
     "platformSmartFilterBar.filtersButtonLabel": "ფილტრები ({filtersCount})",

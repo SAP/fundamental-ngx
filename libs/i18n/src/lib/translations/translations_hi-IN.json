@@ -239,6 +239,7 @@
     "platformSearchField.synchronizeButtonTitle": "सिंक्रनाइज़ करें",
     "platformSearchField.searchSuggestionMessage": "{count} सुझाव मिले",
     "platformSearchField.searchSuggestionNavigateMessage": "नेविगेट करने के लिए ऊपर और नीचे तीरों का उपयोग करें",
+    "platformSwitch.ariaLabel": "स्विच",
     "platformSmartFilterBar.searchPlaceholder": "खोज करें",
     "platformSmartFilterBar.submitButtonLabel": "जाओ",
     "platformSmartFilterBar.filtersButtonLabel": "फिल्टर ({filtersCount})",
