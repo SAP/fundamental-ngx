@@ -1,10 +1,6 @@
-import { ChangeDetectorRef, DestroyRef, Inject, Pipe, PipeTransform } from '@angular/core';
-import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, skip } from 'rxjs';
-
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
-import { FD_LANGUAGE } from '../utils/tokens';
-import { TranslationResolver } from '../utils/translation-resolver';
+import { Pipe, PipeTransform } from '@angular/core';
+import { FdLanguageKeyArgs } from '../models/lang';
+import { resolveTranslationSignal } from '../utils';
 
 @Pipe({
     name: 'fdTranslate',
@@ -13,48 +9,11 @@ import { TranslationResolver } from '../utils/translation-resolver';
 })
 export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
-
-    /** @hidden */
-    private readonly _key$ = new BehaviorSubject<string | undefined>(undefined);
-
-    /** @hidden */
-    private readonly _args$ = new BehaviorSubject<FdLanguageKeyArgs | undefined>(undefined);
-
-    /** @hidden */
-    private _value: string | undefined;
-
-    /** @hidden */
-    constructor(
-        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
-        private readonly _destroyRef: DestroyRef,
-        private _cdr: ChangeDetectorRef
-    ) {
-        this._instantiateSubscription();
-    }
+    private resolveTranslationSignal = resolveTranslationSignal();
 
     /** Translate a key with arguments and, optionally, default value */
     transform(key: string, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
-        this._key$.next(key);
-        this._args$.next(args);
-
-        return this._value || defaultValue;
-    }
-
-    /** @hidden */
-    private _instantiateSubscription(): void {
-        combineLatest([
-            this._language$,
-            this._key$.pipe(skip(1), filter(Boolean), distinctUntilChanged()),
-            this._args$.pipe(skip(1), distinctUntilChanged())
-        ])
-            .pipe(
-                map(([lang, key, args]) => this._translationResolver.resolve(lang, key, args)),
-                takeUntilDestroyed(this._destroyRef)
-            )
-            .subscribe((value) => {
-                this._value = value;
-                this._cdr.markForCheck();
-            });
+        const translationSignal = this.resolveTranslationSignal(key, args);
+        return translationSignal() || defaultValue;
     }
 }

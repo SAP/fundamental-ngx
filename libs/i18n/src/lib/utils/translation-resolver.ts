@@ -14,11 +14,12 @@ export class TranslationResolver {
         lang: FdLanguage,
         key: FdLanguageKey,
         args?: FdLanguageKeyArgs,
+        locale?: Nullable<string>,
         fallbackLanguage: Nullable<FdLanguage> = FD_LANGUAGE_ENGLISH
     ): string {
         const resolvedValue = this.getRaw(lang, key, args);
         if (resolvedValue !== '') {
-            return this._interpolate(resolvedValue, args);
+            return this._interpolate(resolvedValue, args, locale);
         }
         if (isDevMode() && fallbackLanguage) {
             console.warn(
@@ -32,11 +33,11 @@ export class TranslationResolver {
     /**
      * @hidden
      */
-    private _interpolate(expression: string, args: FdLanguageKeyArgs = {}): string {
+    private _interpolate(expression: string, args: FdLanguageKeyArgs = {}, locale?: Nullable<string>): string {
         if (expression.indexOf('{') === -1) {
             return expression;
         }
-        const result = new IntlMessageFormat(expression, 'en-US').format(args);
+        const result = new IntlMessageFormat(expression, locale || 'en-US').format(args);
         return Array.isArray(result) ? result.join('') : result.toString();
     }
 
