@@ -229,7 +229,6 @@ export class DatetimePickerComponent<D>
     @Input()
     set state(state: FormStates) {
         this._state = state;
-        this._popoverFormMessage.messageType = state;
     }
 
     get state(): FormStates {
@@ -387,6 +386,10 @@ export class DatetimePickerComponent<D>
         read: ElementRef
     })
     _inputElement: ElementRef<HTMLInputElement>;
+
+    /** @hidden */
+    @ViewChild('formMessageTemplate')
+    private readonly _formMessageTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild('pickerTemplate')
@@ -832,9 +835,8 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message ?? '';
+        this._popoverFormMessage.message = this._formMessageTemplate;
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state;
     }
 
     /** @hidden */
