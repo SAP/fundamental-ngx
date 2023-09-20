@@ -35,6 +35,11 @@ fd-popover-body {
             display: none !important;
         }
 
+        &--disable-transitions {
+            transition: none !important;
+            -webkit-transition: none !important;
+        }
+
         &.fd-form-message {
             &::before {
                 width: auto;
