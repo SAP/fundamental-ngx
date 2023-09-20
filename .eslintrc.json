@@ -10,6 +10,10 @@
                         "allow": [],
                         "depConstraints": [
                             {
+                                "sourceTag": "scope:cdk",
+                                "onlyDependOnLibsWithTags": ["scope:cdk"]
+                            },
+                            {
                                 "sourceTag": "scope:fd",
                                 "onlyDependOnLibsWithTags": ["scope:fd", "scope:i18n", "scope:cdk"]
                             },
