@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.9...v0.43.10) (2023-09-20)
+
+
+### Bug Fixes
+
+* **core:** multi input description text ([#10556](https://github.com/SAP/fundamental-ngx/issues/10556)) ([aa7fa3e](https://github.com/SAP/fundamental-ngx/commit/aa7fa3e8384c207784f6154d0f1295ddba04cb56))
+* **core:** russian localization fix ([3191f21](https://github.com/SAP/fundamental-ngx/commit/3191f211a8136bf814fa7c8930e3a6ac63f583d9))
+
+
+
+
+
 ## [0.43.9](https://github.com/SAP/fundamental-ngx/compare/v0.43.8...v0.43.9) (2023-09-11)
 
 
