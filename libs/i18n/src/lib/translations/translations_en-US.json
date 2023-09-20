@@ -69,7 +69,7 @@
     "coreSwitch.semanticAcceptLabel": "Accept",
     "coreSwitch.semanticDeclineLabel": "Decline",
     "coreTabs.tabListExpandButtonText": "More",
-    "coreText.moreLabel": "{count} more",
+    "coreText.moreLabel": "More",
     "coreText.lessLabel": "Less",
     "coreTime.componentAriaName": "Time picker",
     "coreTime.increaseHoursLabel": "Increase hours",
