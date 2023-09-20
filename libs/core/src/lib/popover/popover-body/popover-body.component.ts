@@ -5,22 +5,22 @@ import {
     Component,
     ElementRef,
     HostListener,
+    Input,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 
-import { ConnectionPositionPair, CdkScrollable } from '@angular/cdk/overlay';
+import { A11yModule, CdkTrapFocus } from '@angular/cdk/a11y';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { CdkTrapFocus, A11yModule } from '@angular/cdk/a11y';
+import { CdkScrollable, ConnectionPositionPair } from '@angular/cdk/overlay';
 
 import { Subject } from 'rxjs';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { KeyUtil, Nullable, ResizeDirective, ResizeHandleDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -39,14 +39,32 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
     styleUrls: ['./popover-body.component.scss'],
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
     standalone: true,
-    imports: [A11yModule, NgIf, CdkScrollable, ScrollbarDirective, NgTemplateOutlet]
+    imports: [
+        A11yModule,
+        NgIf,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgTemplateOutlet,
+        ResizeHandleDirective,
+        ResizeDirective
+    ]
 })
 export class PopoverBodyComponent implements AfterViewInit {
-    /** Whether to wrap content with fd-scrollbar directive. */
-    _disableScrollbar = false;
+    /** Minimum width of the popover body element. */
+    @Input()
+    minWidth: Nullable<string>;
 
-    /** Should fd-scrollbar have tabindex*/
-    _tabbableScrollbar = true;
+    /** Maximum width of the popover body element. */
+    @Input()
+    maxWidth: Nullable<string>;
+
+    /** Minimum height of the popover body element. */
+    @Input()
+    minHeight: Nullable<string>;
+
+    /** Maximum height of the popover body element. */
+    @Input()
+    maxHeight: Nullable<string>;
 
     /** @hidden */
     @ViewChild(CdkTrapFocus)
@@ -55,6 +73,12 @@ export class PopoverBodyComponent implements AfterViewInit {
     /** @hidden */
     @ViewChild(ScrollbarDirective)
     _scrollbar: ScrollbarDirective;
+
+    /** Whether to wrap content with fd-scrollbar directive. */
+    _disableScrollbar = false;
+
+    /** Should fd-scrollbar have tabindex*/
+    _tabbableScrollbar = true;
 
     /** Whether the popover should have an arrow. */
     _noArrow = true;
@@ -71,38 +95,48 @@ export class PopoverBodyComponent implements AfterViewInit {
      */
     _focusAutoCapture = false;
 
-    /** @hidden Property bind to popover's body */
+    /** @hidden Property bind to popover's body. */
     _popoverBodyWidth: number;
 
-    /** @hidden Property bind to popover's body */
+    /** @hidden Property bind to popover's body. */
     _popoverBodyMinWidth: number;
 
-    /** @hidden Property bind to popover's body */
+    /** @hidden Property bind to popover's body. */
     _maxWidth: Nullable<number>;
 
-    /** @hidden Property bind to popover's body */
+    /** @hidden Property bind to popover's body. */
     _closeOnEscapeKey = false;
 
-    /** @hidden Aria role for the popover body */
+    /** @hidden Aria role for the popover body. */
     _bodyRole: Nullable<string> = null;
 
-    /** @hidden Aria role for the popover body */
+    /** @hidden Aria role for the popover body. */
     _bodyId: Nullable<string> = null;
 
-    /** Classes added to arrow element */
+    /** Classes added to arrow element. */
     _arrowClasses = '';
 
-    /** Additional style to put margin into body component, to give a place for arrow */
-    _marginStyle: Nullable<string> = null;
-
-    /** @hidden text rendered inside popover's body */
+    /** @hidden text rendered inside popover's body. */
     text: Nullable<string> = null;
 
-    /** @hidden template rendered inside popover's body */
+    /** @hidden template rendered inside popover's body. */
     _templateToDisplay: TemplateRef<any>;
+
+    /** @hidden Whether the popover body is resizable. */
+    _resizable = false;
+
+    /** @hidden */
+    _resizeHandleLocation: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'bottom-right';
 
     /** Close event from popover body */
     onClose = new Subject<void>();
+
+    /** @hidden */
+    constructor(
+        readonly _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        readonly _contentDensityObserver: ContentDensityObserver
+    ) {}
 
     /** Handler escape keydown */
     @HostListener('keyup', ['$event'])
@@ -115,13 +149,6 @@ export class PopoverBodyComponent implements AfterViewInit {
     }
 
     /** @hidden */
-    constructor(
-        readonly _elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
-        readonly _contentDensityObserver: ContentDensityObserver
-    ) {}
-
-    /** @hidden */
     ngAfterViewInit(): void {
         if (this._scrollbar) {
             this._scrollbar._inPopover = true;
@@ -130,10 +157,15 @@ export class PopoverBodyComponent implements AfterViewInit {
 
     /** @hidden */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
+        this._resizeHandleLocation = `${position.overlayY === 'top' ? 'bottom' : 'top'}-${
+            position.overlayX === 'start' ? 'right' : 'left'
+        }`;
         if (this._noArrow) {
             this._arrowClasses = '';
             return;
         }
+
+        let arrowClasses: string[] = [];
 
         if (
             position.overlayY !== position.originY &&
@@ -141,10 +173,12 @@ export class PopoverBodyComponent implements AfterViewInit {
             position.overlayY !== 'center' &&
             position.overlayX === position.originX
         ) {
-            this._arrowClasses =
-                `fd-popover__body--${position.overlayY === 'top' ? 'below' : 'above'}` +
-                ` fd-popover__body--arrow-${position.overlayY}` +
-                ` fd-popover__body--arrow-x-${position.originX} `;
+            arrowClasses = [
+                `fd-popover__body--${position.overlayY === 'top' ? 'below' : 'above'}`,
+                `fd-popover__body--${position.overlayX === 'start' ? 'left' : 'right'}`,
+                `fd-popover__body--arrow-${position.overlayY}`,
+                `fd-popover__body--arrow-x-${position.originX}`
+            ];
         } else if (
             position.overlayX !== position.originX &&
             position.overlayX !== 'center' &&
@@ -155,13 +189,18 @@ export class PopoverBodyComponent implements AfterViewInit {
             if (rtl === 'rtl') {
                 overlayX = position.overlayX === 'end' ? 'start' : 'end';
             }
-            this._arrowClasses =
-                `fd-popover__body--${overlayX === 'start' ? 'after' : 'before'}` +
-                ` fd-popover__body--arrow-${overlayX === 'start' ? 'left' : 'right'}` +
-                ` fd-popover__body--arrow-y-${position.originY} `;
+            arrowClasses = [
+                `fd-popover__body--${overlayX === 'start' ? 'after' : 'before'}`,
+                `fd-popover__body--${overlayX === 'start' ? 'left' : 'right'}`,
+                `fd-popover__body--${position.overlayY === 'center' ? 'middle' : position.overlayY}`,
+                `fd-popover__body--arrow-${overlayX === 'start' ? 'left' : 'right'}`,
+                `fd-popover__body--arrow-y-${position.originY} `
+            ];
         } else {
-            this._arrowClasses = 'fd-popover__body--no-arrow';
+            arrowClasses = ['fd-popover__body--no-arrow'];
         }
+
+        this._arrowClasses = arrowClasses.join(' ');
 
         this.detectChanges();
     }
