@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -11,17 +12,16 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { TableService } from './table.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { first, startWith } from 'rxjs';
 import { TableCellDirective } from './directives/table-cell.directive';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TableService } from './table.service';
 
 export const FdTableContentDensityProviderParams = {
     supportedContentDensity: [ContentDensityMode.COMPACT, ContentDensityMode.CONDENSED, ContentDensityMode.COZY]
@@ -43,7 +43,8 @@ export const FdTableContentDensityProviderParams = {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [TableService, contentDensityObserverProviders(FdTableContentDensityProviderParams)],
-    hostDirectives: [FocusableGridDirective]
+    hostDirectives: [FocusableGridDirective],
+    standalone: true
 })
 export class TableComponent implements AfterContentInit, AfterViewInit {
     /** @hidden */

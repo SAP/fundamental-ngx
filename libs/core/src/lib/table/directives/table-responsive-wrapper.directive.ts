@@ -14,6 +14,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-table-responsive-wrapper]',
     host: {
         style: 'overflow-x: auto'
-    }
+    },
+    standalone: true
 })
 export class TableResponsiveWrapperDirective {}

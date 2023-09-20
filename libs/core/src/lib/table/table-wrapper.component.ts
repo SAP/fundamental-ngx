@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import {
     ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityObserverTarget
+    ContentDensityObserverTarget,
+    contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 
 /**
@@ -28,7 +28,8 @@ import {
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true
 })
 export class TableWrapperComponent implements AfterContentInit, OnDestroy {
     /** @hidden */
