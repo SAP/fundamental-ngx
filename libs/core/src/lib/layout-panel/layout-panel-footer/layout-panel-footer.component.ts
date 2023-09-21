@@ -13,7 +13,7 @@ export type FooterPosition = 'start' | 'end';
 
 @Component({
     selector: 'fd-layout-panel-footer',
-    templateUrl: './layout-panel-footer.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

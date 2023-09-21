@@ -4,7 +4,7 @@ import { QuickViewGroupItemContentElementDirective } from './quick-view-group-it
 
 @Component({
     selector: 'fd-quick-view-group-item-content',
-    templateUrl: './quick-view-group-item-content.component.html',
+    template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })

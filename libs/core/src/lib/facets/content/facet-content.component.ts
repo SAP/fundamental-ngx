@@ -4,7 +4,7 @@ import { addClassNameToFacetElement } from '../utils';
 
 @Component({
     selector: 'fd-facet-content',
-    template: ` <ng-content></ng-content> `,
+    template: `<ng-content></ng-content>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true

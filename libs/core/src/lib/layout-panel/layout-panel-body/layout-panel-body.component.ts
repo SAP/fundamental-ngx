@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
  */
 @Component({
     selector: 'fd-layout-panel-body',
-    templateUrl: './layout-panel-body.component.html',
+    template: `<ng-content></ng-content>`,
     host: {
         '[class.fd-has-display-block]': 'true'
     },

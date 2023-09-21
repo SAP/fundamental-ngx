@@ -39,7 +39,7 @@ import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-list], [fdList]',
-    templateUrl: `./list.component.html`,
+    template: `<ng-content></ng-content>`,
     host: {
         class: 'fd-list'
     },

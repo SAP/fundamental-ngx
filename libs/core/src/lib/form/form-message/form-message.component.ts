@@ -15,7 +15,7 @@ import { CSS_CLASS_NAME, getTypeClassName } from './constants';
  */
 @Component({
     selector: 'fd-form-message',
-    templateUrl: './form-message.component.html',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./form-message.component.scss'],
     host: {
         'aria-live': 'assertive',

@@ -23,7 +23,7 @@ import {
  */
 @Component({
     selector: 'fd-action-sheet-control',
-    templateUrl: './action-sheet-control.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
