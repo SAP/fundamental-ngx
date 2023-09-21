@@ -10,3 +10,4 @@ export * from './models/selection-change.event';
 export * from './multi-combobox-config';
 export * from './multi-combobox.component';
 export * from './multi-combobox.token';
+export * from './select-all-toggler/select-all-toggler.component';
