@@ -10,7 +10,7 @@ import { DialogBodyComponent, DialogComponent, DialogFooterComponent, DialogHead
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdTranslatePipe, resolveTranslationSync } from '@fundamental-ngx/i18n';
+import { FdLanguageKeyIdentifier, FdTranslatePipe, resolveTranslationSync } from '@fundamental-ngx/i18n';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
@@ -187,8 +187,9 @@ export class SmartFilterBarConditionsDialogComponent {
         const labelsConfig = { ...this._conditionLabelKeys };
         for (const strategyItem in labelsConfig) {
             if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
-                const translationKey = labelsConfig[strategyItem];
-                labelsConfig[strategyItem] = this.resolveTranslation('platformSmartFilterBar.' + translationKey);
+                const translationKey = ('platformSmartFilterBar.' +
+                    labelsConfig[strategyItem]) as FdLanguageKeyIdentifier;
+                labelsConfig[strategyItem] = this.resolveTranslation(translationKey);
             }
         }
 

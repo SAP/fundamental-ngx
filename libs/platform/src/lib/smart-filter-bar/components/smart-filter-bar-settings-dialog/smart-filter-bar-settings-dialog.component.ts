@@ -1,62 +1,22 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    Inject,
-    OnDestroy,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { asyncScheduler, BehaviorSubject, firstValueFrom, Observable, Subject, Subscription } from 'rxjs';
 import { observeOn, takeUntil } from 'rxjs/operators';
 
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { DialogBodyComponent, DialogComponent, DialogFooterComponent, DialogHeaderComponent, DialogRef } from '@fundamental-ngx/core/dialog';
+import { FdpSelectionChangeEvent, SelectComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import {
-    Resettable,
-    RESETTABLE_TOKEN,
-    Table,
-    TableDataSource,
-    TableRowSelectionChangeEvent
-} from '@fundamental-ngx/platform/table';
+import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN, Table, TableColumnComponent, TableComponent, TableDataSource, TableRowSelectionChangeEvent, TableToolbarActionsComponent, TableToolbarComponent } from '@fundamental-ngx/platform/table';
 
+import { FD_LANGUAGE, FdLanguage, FdLanguageKeyIdentifier, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgIf } from '@angular/common';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import {
-    BarElementDirective,
-    BarLeftDirective,
-    BarRightDirective,
-    ButtonBarComponent
-} from '@fundamental-ngx/core/bar';
+import { BarElementDirective, BarLeftDirective, BarRightDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import {
-    DialogBodyComponent,
-    DialogComponent,
-    DialogFooterComponent,
-    DialogHeaderComponent
-} from '@fundamental-ngx/core/dialog';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
-import { SelectComponent } from '@fundamental-ngx/platform/form';
-import {
-    ResetButtonComponent,
-    TableColumnComponent,
-    TableComponent,
-    TableToolbarActionsComponent,
-    TableToolbarComponent
-} from '@fundamental-ngx/platform/table';
-import {
-    FdpCellDef,
-    FdpTableCell,
-    TableDataSourceDirective,
-    TableHeaderResizerDirective,
-    TableInitialStateDirective
-} from '@fundamental-ngx/platform/table-helpers';
+import { FdpCellDef, FdpTableCell, TableDataSourceDirective, TableHeaderResizerDirective, TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
 import { SmartFilterBarFieldDefinition } from '../../interfaces/smart-filter-bar-field-definition';
 import { FieldFilterItem } from '../../interfaces/smart-filter-bar-field-filter-item';
 import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
@@ -255,11 +215,9 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         const labels = { ...this._categoryLabelKeys };
         for (const strategyItem in labels) {
             if (Object.prototype.hasOwnProperty.call(labels, strategyItem)) {
-                const translationKey = labels[strategyItem];
-                labels[strategyItem] = this._translationResolver.resolve(
-                    lang,
-                    'platformSmartFilterBar.' + translationKey
-                );
+                const translationKey = ('platformSmartFilterBar.' +
+                    labels[strategyItem as keyof SmartFilterBarVisibilityCategoryLabels]) as FdLanguageKeyIdentifier;
+                labels[strategyItem] = this._translationResolver.resolve(lang, translationKey);
             }
         }
         for (const [selectValue, selectLabel] of Object.entries(labels)) {
