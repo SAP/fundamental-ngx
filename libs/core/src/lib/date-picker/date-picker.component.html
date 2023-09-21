@@ -4,6 +4,12 @@
     <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
 
+<ng-template #popoverMessageTemplate>
+    <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+        {{ _message }}
+    </fd-form-message>
+</ng-template>
+
 <ng-template #desktopTemplate>
     <fd-popover
         [(isOpen)]="isOpen"
@@ -20,9 +26,7 @@
         </fd-popover-control>
         <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen">
             <ng-container *ngIf="_showPopoverContents">
-                <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-                    {{ _message }}
-                </fd-form-message>
+                <ng-template [ngTemplateOutlet]="popoverMessageTemplate"></ng-template>
                 <ng-content></ng-content>
                 <ng-template [ngTemplateOutlet]="calendarTemplate"></ng-template>
             </ng-container>

@@ -188,7 +188,16 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** method updating template or text inside rendered PopoverBody */
-    updateContent(stringContent: Nullable<string>, templateContent: Nullable<TemplateRef<any>>): void {
+    updateContent(
+        stringContent: Nullable<string> | Nullable<TemplateRef<any>>,
+        templateContent: Nullable<TemplateRef<any>>
+    ): void {
+        templateContent = !templateContent
+            ? typeof stringContent === 'string'
+                ? null
+                : stringContent
+            : templateContent;
+        stringContent = typeof stringContent === 'string' ? stringContent : null;
         this.stringContent = stringContent;
         this.templateContent = templateContent;
         if (this._getPopoverBody()) {
