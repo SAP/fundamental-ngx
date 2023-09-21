@@ -20,7 +20,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         '[class.fd-notification-container]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class NotificationContainer {}

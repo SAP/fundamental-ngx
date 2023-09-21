@@ -1,3 +1,6 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { SelectionModel } from '@angular/cdk/collections';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -26,25 +29,26 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { SelectionModel } from '@angular/cdk/collections';
 import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
-import { SELECT_COMPONENT, SelectInterface } from './select.interface';
-import { SelectKeyManagerService } from './select-key-manager.service';
-import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
-import { SelectMobileComponent } from './select-mobile/select-mobile.component';
-import { SelectMobileModule } from './select-mobile/select-mobile.module';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormFieldAdvancedStateMessage, FormStates } from '@fundamental-ngx/cdk/forms';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
+import { SelectKeyManagerService } from './select-key-manager.service';
+import { SelectMobileComponent } from './select-mobile/select-mobile.component';
+import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 
 let selectUniqueId = 0;
 
@@ -81,6 +85,19 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         registerFormItemControl(SelectComponent),
         SelectKeyManagerService,
         contentDensityObserverProviders()
+    ],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        NgIf,
+        NgClass,
+        IconComponent,
+        ListComponent,
+        ListMessageDirective,
+        FdTranslatePipe
     ]
 })
 export class SelectComponent<T = any>
@@ -803,12 +820,13 @@ export class SelectComponent<T = any>
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             this.selectOptionsListTemplate,
-            SelectMobileModule,
             SelectMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 }

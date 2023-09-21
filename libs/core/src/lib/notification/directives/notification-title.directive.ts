@@ -1,7 +1,8 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdNotificationTitle], [fd-notification-title]'
+    selector: '[fdNotificationTitle], [fd-notification-title]',
+    standalone: true
 })
 export class NotificationTitleDirective {
     /** @hidden */

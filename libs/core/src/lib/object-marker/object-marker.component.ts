@@ -1,14 +1,14 @@
+import { NgIf } from '@angular/common';
 import {
-    Component,
-    OnInit,
-    ViewEncapsulation,
     ChangeDetectionStrategy,
+    Component,
+    ElementRef,
     Input,
     OnChanges,
-    ElementRef
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -22,7 +22,9 @@ import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1',
         '[attr.role]': 'clickable ? "link" :""'
-    }
+    },
+    standalone: true,
+    imports: [NgIf]
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

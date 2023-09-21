@@ -2,7 +2,8 @@ import { ContentChild, Directive, ElementRef, HostBinding, Input } from '@angula
 import { OverflowItemContainerRefDirective } from './overflow-item-container-ref.directive';
 
 @Directive({
-    selector: '[fdOverflowLayoutItemContainer]'
+    selector: '[fdOverflowLayoutItemContainer]',
+    standalone: true
 })
 export class OverflowLayoutItemContainerDirective {
     /** @hidden */

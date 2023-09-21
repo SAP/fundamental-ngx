@@ -5,7 +5,8 @@ import { Directive } from '@angular/core';
     selector: '[fd-quick-view-group-item-content-element]',
     host: {
         class: `${QuickViewGroupItemContentElementDirective.class}`
-    }
+    },
+    standalone: true
 })
 export class QuickViewGroupItemContentElementDirective {
     /** @hidden */

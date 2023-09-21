@@ -1,12 +1,12 @@
+import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
-    ViewEncapsulation,
     HostListener,
-    Output
+    Output,
+    ViewEncapsulation
 } from '@angular/core';
-import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -25,7 +25,8 @@ import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
     selector: 'fd-action-sheet-control',
     templateUrl: './action-sheet-control.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class ActionSheetControlComponent {
     /** Emitted event when control button is clicked */

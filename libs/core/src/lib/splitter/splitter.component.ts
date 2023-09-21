@@ -16,7 +16,8 @@ import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split
     styleUrls: ['./splitter.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'fd-splitter' }
+    host: { class: 'fd-splitter' },
+    standalone: true
 })
 export class SplitterComponent {
     /** @hidden */

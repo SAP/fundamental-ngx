@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@ang
 @Component({
     selector: 'fd-grid-list-item-toolbar',
     templateUrl: './grid-list-item-toolbar.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class GridListItemToolbarComponent {
     /** @hidden */

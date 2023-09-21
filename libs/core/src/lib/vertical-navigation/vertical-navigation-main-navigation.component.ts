@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
-import { ListComponent, FD_LIST_COMPONENT } from '@fundamental-ngx/core/list';
+import { FD_LIST_COMPONENT, ListComponent } from '@fundamental-ngx/core/list';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-vertical-navigation-main-navigation',
@@ -11,7 +12,9 @@ import { ListComponent, FD_LIST_COMPONENT } from '@fundamental-ngx/core/list';
     </nav>`,
     styleUrls: ['./vertical-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdTranslatePipe]
 })
 export class VerticalNavigationMainNavigationComponent {
     /** @hidden */

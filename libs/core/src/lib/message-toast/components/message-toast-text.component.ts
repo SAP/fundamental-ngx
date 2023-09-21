@@ -7,7 +7,8 @@ import { MessageToastRef } from '../ref/message-toast.ref';
     selector: 'fd-message-toast-text',
     template: `{{ message }}`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class MessageToastTextComponent implements ToastTextComponent {
     /** @hidden */

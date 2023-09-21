@@ -1,19 +1,20 @@
+import { NgIf } from '@angular/common';
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
     Component,
-    Input,
-    ViewEncapsulation,
-    HostBinding,
     ContentChildren,
-    QueryList,
-    AfterContentInit,
+    ElementRef,
+    HostBinding,
+    Input,
     OnDestroy,
-    ElementRef
+    QueryList,
+    ViewEncapsulation
 } from '@angular/core';
-import { FD_LINK_COMPONENT } from '@fundamental-ngx/core/link';
-import { startWith, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_LINK_COMPONENT } from '@fundamental-ngx/core/link';
+import { Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-object-identifier',
@@ -27,7 +28,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     `,
     styleUrls: ['./object-identifier.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     /** Description text */

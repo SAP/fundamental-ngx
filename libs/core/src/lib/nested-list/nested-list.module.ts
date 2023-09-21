@@ -1,52 +1,35 @@
 import { NgModule } from '@angular/core';
-import { NestedListDirective } from './nested-list/nested-list.directive';
-import { NestedLinkDirective } from './nested-link/nested-link.directive';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
 import { NestedItemDirective } from './nested-item/nested-item.directive';
+import { NestedLinkDirective } from './nested-link/nested-link.directive';
 import {
     NestedListExpandIconComponent,
     NestedListHeaderDirective,
     NestedListIconComponent,
     NestedListTitleDirective
 } from './nested-list-directives';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { CommonModule } from '@angular/common';
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedListPopoverComponent } from './nested-list-popover/nested-list-popover.component';
+import { NestedListDirective } from './nested-list/nested-list.directive';
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
-import { NestedListStateService } from './nested-list-state.service';
-import { RouterModule } from '@angular/router';
-import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+
+const components = [
+    NestedListDirective,
+    NestedLinkDirective,
+    NestedItemDirective,
+    NestedListIconComponent,
+    NestedListTitleDirective,
+    NestedListHeaderDirective,
+    NestedListPopoverComponent,
+    PreparedNestedListComponent,
+    NestedListExpandIconComponent,
+    NestedListContentDirective
+];
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, RouterModule, IconModule, ContentDensityModule],
-    declarations: [
-        NestedListDirective,
-        NestedLinkDirective,
-        NestedItemDirective,
-        NestedListIconComponent,
-        NestedListTitleDirective,
-        NestedListHeaderDirective,
-        NestedListPopoverComponent,
-        PreparedNestedListComponent,
-        NestedListExpandIconComponent,
-        NestedListContentDirective
-    ],
-    exports: [
-        NestedListDirective,
-        NestedLinkDirective,
-        NestedItemDirective,
-        NestedListIconComponent,
-        NestedListTitleDirective,
-        NestedListHeaderDirective,
-        NestedListPopoverComponent,
-        PreparedNestedListComponent,
-        NestedListExpandIconComponent,
-        NestedListContentDirective,
-        ContentDensityModule
-    ],
-    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
+    imports: [...components],
+    exports: [...components],
+    providers: [MenuKeyboardService, NestedListKeyboardService]
 })
 export class NestedListModule {}

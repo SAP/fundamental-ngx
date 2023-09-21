@@ -15,19 +15,26 @@ import {
 } from '@angular/core';
 import { combineLatest, Observable, startWith, Subscription } from 'rxjs';
 
-import { NestedListStateService } from '../nested-list-state.service';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListStateService } from '../nested-list-state.service';
+import { NestedListInterface } from './nested-list.interface';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]',
-    providers: [contentDensityObserverProviders()]
+    providers: [
+        contentDensityObserverProviders(),
+        MenuKeyboardService,
+        NestedListKeyboardService,
+        NestedListStateService
+    ],
+    standalone: true
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
     /** In case the user wants to no use icons for items in this list */

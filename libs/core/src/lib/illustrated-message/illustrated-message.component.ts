@@ -1,7 +1,8 @@
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostBinding,
@@ -9,13 +10,12 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    ViewEncapsulation,
-    SimpleChanges
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { applyCssClass, RequireOnlyOne } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { fromEvent, Subscription } from 'rxjs';
+import { CssClassBuilder, RequireOnlyOne, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { Subscription, fromEvent } from 'rxjs';
 
 export interface SvgConfig {
     scene?: RequireOnlyOne<SvgItemConfig, 'url' | 'file'>;
@@ -40,7 +40,9 @@ let illustratedMessageUniqueId = 0;
     templateUrl: './illustrated-message.component.html',
     styleUrls: ['./illustrated-message.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class IllustratedMessageComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit, CssClassBuilder {
     /**

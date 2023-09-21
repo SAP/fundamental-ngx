@@ -8,6 +8,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-bar-middle]',
     host: {
         class: 'fd-bar__middle'
-    }
+    },
+    standalone: true
 })
 export class BarMiddleDirective {}

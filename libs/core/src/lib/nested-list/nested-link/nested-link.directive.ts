@@ -9,13 +9,14 @@ import {
     Input,
     Output
 } from '@angular/core';
-import { NestedListTitleDirective } from '../nested-list-directives';
-import { NestedItemService } from '../nested-item/nested-item.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NestedItemLink } from '../nested-item/nested-item.interface';
+import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedListTitleDirective } from '../nested-list-directives';
 
 @Directive({
-    selector: '[fdNestedLink], [fd-nested-list-link]'
+    selector: '[fdNestedLink], [fd-nested-list-link]',
+    standalone: true
 })
 export class NestedLinkDirective implements NestedItemLink {
     /** Function that is called on click event dispatch on this element. */

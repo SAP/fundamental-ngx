@@ -1,4 +1,5 @@
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -16,12 +17,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
+import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
-import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-micro-process-flow',
@@ -39,7 +40,9 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
             useExisting: MicroProcessFlowComponent
         },
         contentDensityObserverProviders()
-    ]
+    ],
+    standalone: true,
+    imports: [NgIf]
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
     /** Should connector between items be hidden. */

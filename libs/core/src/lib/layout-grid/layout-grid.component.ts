@@ -9,9 +9,9 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { CSS_CLASS_NAME } from './constants';
 import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
 
@@ -23,7 +23,9 @@ import { LayoutGridRowDirective } from './directives/layout-grid-row.directive';
     templateUrl: './layout-grid.component.html',
     styleUrls: ['./layout-grid.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, LayoutGridRowDirective]
 })
 export class LayoutGridComponent implements OnInit, OnChanges, CssClassBuilder {
     /** Custom classes */

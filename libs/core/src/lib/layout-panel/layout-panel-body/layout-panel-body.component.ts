@@ -18,7 +18,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
         '[class.fd-has-display-block]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class LayoutPanelBodyComponent {
     /** @hidden */

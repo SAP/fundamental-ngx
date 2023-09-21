@@ -1,6 +1,5 @@
 import { ContentChild, Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
 
 export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'neutral';
@@ -18,7 +17,8 @@ export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'ne
  */
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tab-item]'
+    selector: '[fd-tab-item]',
+    standalone: true
 })
 export class TabItemDirective implements CssClassBuilder, OnChanges, OnInit {
     /** Apply user custom styles */

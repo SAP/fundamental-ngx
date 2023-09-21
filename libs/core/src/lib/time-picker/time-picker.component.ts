@@ -18,7 +18,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -29,8 +29,13 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
+import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormMessageComponent } from '@fundamental-ngx/core/form';
+import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './errors';
 
 let timePickerCounter = 0;
@@ -60,7 +65,22 @@ let timePickerCounter = 0;
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        InputGroupComponent,
+        InputGroupInputDirective,
+        PopoverBodyComponent,
+        NgIf,
+        FormMessageComponent,
+        TimeComponent,
+        FormsModule,
+        NgSwitch,
+        NgSwitchCase,
+        FdTranslatePipe
+    ]
 })
 export class TimePickerComponent<D>
     implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator, FormItemControl

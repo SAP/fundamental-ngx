@@ -1,3 +1,6 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -5,28 +8,33 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Inject,
     Input,
-    isDevMode,
     LOCALE_ID,
     OnDestroy,
     OnInit,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef,
+    isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
-import { filter, switchMap, takeUntil } from 'rxjs/operators';
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { SafeHtml } from '@angular/platform-browser';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import NumberFormat = Intl.NumberFormat;
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import {
+    FormInputMessageGroupComponent,
+    FormItemControl,
+    FormMessageComponent,
+    registerFormItemControl
+} from '@fundamental-ngx/core/form';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Observable, Subscription, defer, fromEvent, interval, merge, timer } from 'rxjs';
+import { filter, switchMap, takeUntil } from 'rxjs/operators';
+import NumberFormat = Intl.NumberFormat;
 
 let stepInputUniqueId = 0;
 
@@ -48,7 +56,9 @@ let stepInputUniqueId = 0;
     host: {
         class: 'fd-step-input__container',
         '(focusout)': 'handleFocusOut($event)'
-    }
+    },
+    standalone: true,
+    imports: [FormInputMessageGroupComponent, NgIf, ButtonComponent, FormMessageComponent, FdTranslatePipe]
 })
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, FormItemControl {
     /** Sets compact mode */

@@ -1,7 +1,8 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdListBylineLeft], [fd-list-byline-left]'
+    selector: '[fdListBylineLeft], [fd-list-byline-left]',
+    standalone: true
 })
 export class ListBylineLeftDirective {
     /** @hidden */

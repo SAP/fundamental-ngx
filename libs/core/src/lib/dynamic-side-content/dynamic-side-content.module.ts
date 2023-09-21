@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { DynamicSideContentComponent } from './dynamic-side-content.component';
-import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
+import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
+import { DynamicSideContentComponent } from './dynamic-side-content.component';
 
 const components = [DynamicSideContentComponent, DynamicSideContentSideComponent, DynamicSideContentMainComponent];
 
+/**
+ * @deprecated
+ */
 @NgModule({
-    declarations: [...components],
-    imports: [CommonModule],
+    imports: [...components],
     exports: [...components]
 })
 export class DynamicSideContentModule {}

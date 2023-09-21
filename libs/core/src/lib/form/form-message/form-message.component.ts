@@ -8,7 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, DynamicComponentService, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 /**
  * Form message. Intended to be displayed with a form control for validation purposes.
@@ -21,6 +21,7 @@ import { CSS_CLASS_NAME, getTypeClassName } from './constants';
         'aria-live': 'assertive',
         'aria-atomic': 'true'
     },
+    providers: [DynamicComponentService],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-illustrated-message-actions',
@@ -6,6 +6,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-illustrated-message__actions'
-    }
+    },
+    standalone: true
 })
 export class IllustratedMessageActionsComponent {}

@@ -2,7 +2,8 @@ import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-item-footer-byline]'
+    selector: '[fd-item-footer-byline]',
+    standalone: true
 })
 export class FeedListFooterBylineDirective {
     /** @hidden */

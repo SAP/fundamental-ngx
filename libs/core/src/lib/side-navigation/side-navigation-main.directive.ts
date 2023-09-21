@@ -2,7 +2,8 @@ import { ContentChild, Directive, HostBinding } from '@angular/core';
 import { NestedListDirective } from '@fundamental-ngx/core/nested-list';
 
 @Directive({
-    selector: '[fdSideNavigationMain], [fd-side-nav-main]'
+    selector: '[fdSideNavigationMain], [fd-side-nav-main]',
+    standalone: true
 })
 export class SideNavigationMainDirective {
     /** @hidden */

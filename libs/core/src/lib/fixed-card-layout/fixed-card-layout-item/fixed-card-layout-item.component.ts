@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
+import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 
 @Component({
     selector: 'fd-fixed-card-layout-item',
@@ -7,7 +7,8 @@ import { FocusableOption } from '@angular/cdk/a11y';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         style: 'display: block'
-    }
+    },
+    standalone: true
 })
 export class FixedCardLayoutItemComponent implements FocusableOption {
     /** @hidden */

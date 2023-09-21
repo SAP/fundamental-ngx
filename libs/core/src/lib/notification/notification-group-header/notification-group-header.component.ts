@@ -12,11 +12,15 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityDirective,
+    ContentDensityMode,
+    LocalContentDensityMode
+} from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NotificationGroupBaseDirective } from '../notification-utils/notification-group-base';
-import { ContentDensityMode, LocalContentDensityMode } from '@fundamental-ngx/core/content-density';
 
 @Component({
     selector: 'fd-notification-group-header',
@@ -41,7 +45,9 @@ import { ContentDensityMode, LocalContentDensityMode } from '@fundamental-ngx/co
         <ng-content></ng-content>
     `,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ButtonComponent, ContentDensityDirective]
 })
 export class NotificationGroupHeaderComponent extends NotificationGroupBaseDirective implements OnInit, OnDestroy {
     /** @hidden */

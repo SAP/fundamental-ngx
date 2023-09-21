@@ -1,27 +1,29 @@
 import {
-    Component,
-    OnInit,
     AfterContentInit,
     ChangeDetectionStrategy,
-    ElementRef,
+    Component,
     ContentChild,
-    Input,
+    ElementRef,
     HostBinding,
-    Renderer2,
-    OnChanges
+    Input,
+    OnChanges,
+    OnInit,
+    Renderer2
 } from '@angular/core';
 
 import { AvatarComponent, FD_AVATAR_COMPONENT } from '@fundamental-ngx/core/avatar';
 
-import { CLASS_NAME } from './constants';
+import { NgIf } from '@angular/common';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CardSubtitleDirective } from './card-subtitle.directive';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CLASS_NAME } from './constants';
 
 @Component({
     selector: 'fd-card-header',
     templateUrl: './card-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
     /** Whether card header is interactive */

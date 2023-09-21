@@ -15,10 +15,11 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { PanelContentDirective } from './panel-content/panel-content.directive';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf } from '@angular/common';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { PanelContentDirective } from './panel-content/panel-content.directive';
 
 let panelUniqueId = 0;
 let panelExpandUniqueId = 0;
@@ -35,7 +36,9 @@ let panelExpandUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./panel.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true,
+    imports: [NgIf, ButtonComponent]
 })
 export class PanelComponent implements OnInit, OnDestroy {
     /** User's custom classes */

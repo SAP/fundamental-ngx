@@ -1,25 +1,27 @@
+import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Input,
     OnDestroy,
     Output,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { stateType } from '@fundamental-ngx/core/radio';
-import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
-import { Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { stateType } from '@fundamental-ngx/core/radio';
+import { Subscription } from 'rxjs';
+import { FileUploaderDragndropDirective } from './directives/file-uploader-dragndrop.directive';
+import { FileUploaderSelectDirective } from './directives/file-uploader-select.directive';
+import { FileUploadOutput, FileUploaderService } from './file-uploader.service';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -46,7 +48,9 @@ let fileUploaderInputUniqueId = 0;
         contentDensityObserverProviders()
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FileUploaderDragndropDirective, ButtonComponent, FileUploaderSelectDirective]
 })
 export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, FormItemControl {
     /** @hidden */

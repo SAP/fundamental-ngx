@@ -1,3 +1,4 @@
+import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -18,16 +19,18 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, combineLatest, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, combineLatest } from 'rxjs';
 import { buffer, debounceTime, filter, map, tap } from 'rxjs/operators';
-import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { CarouselConfig, CarouselDirective, CarouselItemDirective, PanEndOutput } from '@fundamental-ngx/core/carousel';
 
-import { TimeColumnConfig } from './time-column-config';
-import { SelectableViewItem } from '../models';
+import { NgFor, NgIf } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SelectableViewItem } from '../models';
+import { TimeColumnConfig } from './time-column-config';
 
 let timeColumnUniqueId = 0;
 
@@ -44,7 +47,9 @@ export interface TimeColumnItemOutput<T> {
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-time__col'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, ButtonComponent, CarouselDirective, NgFor, CarouselItemDirective, FdTranslatePipe]
 })
 export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
     implements AfterViewInit, OnInit, OnDestroy, OnChanges

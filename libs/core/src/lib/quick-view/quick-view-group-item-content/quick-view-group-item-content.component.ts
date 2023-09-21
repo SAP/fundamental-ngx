@@ -5,7 +5,8 @@ import { QuickViewGroupItemContentElementDirective } from './quick-view-group-it
 @Component({
     selector: 'fd-quick-view-group-item-content',
     templateUrl: './quick-view-group-item-content.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class QuickViewGroupItemContentComponent implements AfterViewInit {
     /** @hidden */

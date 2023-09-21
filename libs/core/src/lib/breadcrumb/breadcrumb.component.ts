@@ -1,3 +1,5 @@
+import { PortalModule } from '@angular/cdk/portal';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -15,14 +17,30 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject } from 'rxjs';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import {
+    GlyphMenuAddonDirective,
+    MenuAddonDirective,
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
+import {
+    OverflowExpandDirective,
+    OverflowItemRefDirective,
+    OverflowLayoutComponent,
+    OverflowLayoutItemDirective
+} from '@fundamental-ngx/core/overflow-layout';
 import { Placement } from '@fundamental-ngx/core/shared';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { BehaviorSubject } from 'rxjs';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -50,6 +68,27 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             provide: FD_BREADCRUMB_COMPONENT,
             useExisting: BreadcrumbComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        OverflowLayoutComponent,
+        NgFor,
+        OverflowItemRefDirective,
+        OverflowLayoutItemDirective,
+        PortalModule,
+        OverflowExpandDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        NgIf,
+        GlyphMenuAddonDirective,
+        MenuAddonDirective,
+        MenuTitleDirective,
+        MenuTriggerDirective,
+        LinkComponent,
+        IconComponent,
+        AsyncPipe,
+        FdTranslatePipe
     ]
 })
 export class BreadcrumbComponent implements OnInit, AfterViewInit {

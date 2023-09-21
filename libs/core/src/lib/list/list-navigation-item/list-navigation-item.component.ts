@@ -1,5 +1,6 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -29,7 +30,9 @@ import { FD_LIST_COMPONENT } from '../tokens';
     styleUrls: ['./list-navigation-item.component.scss'],
     host: {
         role: 'treeitem'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, IconComponent]
 })
 export class ListNavigationItemComponent implements AfterContentInit, AfterViewInit, FocusableOption {
     /** Whether or not the list item is expanded. */

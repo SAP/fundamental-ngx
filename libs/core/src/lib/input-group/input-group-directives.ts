@@ -9,15 +9,16 @@ import {
     OnInit,
     Renderer2
 } from '@angular/core';
-import { InputGroupPlacement } from './types';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { Subscription } from 'rxjs';
+import { InputGroupPlacement } from './types';
 
 @Directive({
     selector: '[fdInputGroupInput], [fd-input-group-input]',
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true
 })
 export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
     /** user's custom classes */
@@ -62,13 +63,15 @@ export class InputGroupInputDirective implements CssClassBuilder, OnInit, OnChan
 }
 
 @Directive({
-    selector: '[fdTextareaGroupInput], [fd-textarea-group-input]'
+    selector: '[fdTextareaGroupInput], [fd-textarea-group-input]',
+    standalone: true
 })
 export class InputGroupTextareaDirective {}
 
 @Directive({
     selector: '[fdInputGroupAddon], [fd-input-group-addon]',
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true
 })
 export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuilder, AfterContentInit, OnDestroy {
     /** user's custom classes */
@@ -160,6 +163,7 @@ export class InputGroupAddOnDirective implements OnInit, OnChanges, CssClassBuil
     selector: '[fdInputGroupAddonButton], [fd-input-group-addon-button]',
     host: {
         class: 'fd-input-group__button'
-    }
+    },
+    standalone: true
 })
 export class InputGroupAddonButtonDirective {}

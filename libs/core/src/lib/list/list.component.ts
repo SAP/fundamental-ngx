@@ -57,7 +57,8 @@ import { FD_LIST_COMPONENT, FD_LIST_UNREAD_INDICATOR } from './tokens';
             provide: FD_LIST_UNREAD_INDICATOR,
             useExisting: ListComponent
         }
-    ]
+    ],
+    standalone: true
 })
 export class ListComponent implements ListComponentInterface, ListUnreadIndicator, OnInit, AfterContentInit, OnDestroy {
     /** Whether dropdown mode is included to component, used for Select and Combobox */

@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,14 +8,35 @@ import {
     TemplateRef,
     ViewChild
 } from '@angular/core';
-import { MessageBoxContent } from '../utils/message-box-content.class';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { MessageBoxBodyComponent } from '../message-box-body/message-box-body.component';
+import { MessageBoxFooterComponent } from '../message-box-footer/message-box-footer.component';
+import { MessageBoxHeaderComponent } from '../message-box-header/message-box-header.component';
+import { MessageBoxComponent } from '../message-box.component';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
+import { MessageBoxContent } from '../utils/message-box-content.class';
 
 /** Message box component used to create the message box in object based approach */
 @Component({
     selector: 'fd-message-box-default',
     templateUrl: './message-box-default.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        MessageBoxComponent,
+        MessageBoxHeaderComponent,
+        TitleComponent,
+        MessageBoxBodyComponent,
+        NgTemplateOutlet,
+        MessageBoxFooterComponent,
+        ButtonBarComponent,
+        InitialFocusDirective,
+        ContentDensityDirective
+    ]
 })
 export class MessageBoxDefaultComponent implements OnInit, AfterViewInit {
     /** @hidden */

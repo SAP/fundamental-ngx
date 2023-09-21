@@ -1,3 +1,5 @@
+import { ConfigurableFocusTrapFactory, FocusTrap } from '@angular/cdk/a11y';
+import { ESCAPE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,29 +9,26 @@ import {
     ComponentRef,
     ElementRef,
     EmbeddedViewRef,
-    HostListener,
     HostBinding,
+    HostListener,
+    Inject,
     Input,
-    Optional,
-    OnInit,
     OnDestroy,
+    OnInit,
+    Optional,
     TemplateRef,
     Type,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation,
-    Inject
+    ViewEncapsulation
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { NotificationRef } from '../notification-utils/notification-ref';
-import { AbstractFdNgxClass, RtlService, KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { NotificationConfig } from '../notification-utils/notification-config';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { AbstractFdNgxClass, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FD_POPOVER_COMPONENT, PopoverComponent } from '@fundamental-ngx/core/popover';
-import { ESCAPE } from '@angular/cdk/keycodes';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
-import { FocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
+import { NotificationConfig } from '../notification-utils/notification-config';
+import { NotificationRef } from '../notification-utils/notification-ref';
 
 @Component({
     selector: 'fd-notification',
@@ -46,7 +45,8 @@ import { FocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
         role: 'alertdialog',
         '[attr.id]': 'id'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class NotificationComponent extends AbstractFdNgxClass implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */

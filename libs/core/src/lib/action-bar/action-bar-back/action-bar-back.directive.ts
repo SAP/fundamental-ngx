@@ -16,6 +16,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-action-bar-back]',
     host: {
         class: 'fd-action-bar__back'
-    }
+    },
+    standalone: true
 })
 export class ActionBarBackDirective {}

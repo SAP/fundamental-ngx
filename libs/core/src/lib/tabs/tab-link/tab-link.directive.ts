@@ -19,7 +19,8 @@ import { AbstractFdNgxClass, KeyUtil } from '@fundamental-ngx/cdk/utils';
     host: {
         role: 'tab',
         tabindex: '-1'
-    }
+    },
+    standalone: true
 })
 export class TabLinkDirective extends AbstractFdNgxClass implements FocusableOption {
     /** Whether the link is active */

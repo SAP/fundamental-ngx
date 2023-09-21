@@ -15,6 +15,8 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
 
+import { NgIf } from '@angular/common';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_BUTTON_COMPONENT } from './tokens';
 
 /**
@@ -47,7 +49,9 @@ import { FD_BUTTON_COMPONENT } from './tokens';
             provide: FD_BUTTON_COMPONENT,
             useExisting: ButtonComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [NgIf, IconComponent]
 })
 export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */

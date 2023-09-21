@@ -18,7 +18,8 @@ export class TimelineNodeOutletContext<T> {
 }
 
 @Directive({
-    selector: '[fdTimelineNodeDef], [fd-timeline-node-def]'
+    selector: '[fdTimelineNodeDef], [fd-timeline-node-def]',
+    standalone: true
 })
 export class TimelineNodeDefDirective<T> {
     /** Data passed to the template*/

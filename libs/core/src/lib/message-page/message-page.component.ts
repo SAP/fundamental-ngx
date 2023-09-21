@@ -1,13 +1,14 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
     Input,
     OnChanges,
-    ViewEncapsulation,
-    OnInit
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
 
@@ -16,7 +17,9 @@ export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
     templateUrl: './message-page.component.html',
     styleUrls: ['./message-page.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom class */

@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,16 +11,17 @@ import {
     Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { NestedItemService } from './nested-item/nested-item.service';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { NestedItemService } from './nested-item/nested-item.service';
 
 let uniqueId = 0;
 
 @Directive({
-    selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
+    selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]',
+    standalone: true
 })
 export class NestedListHeaderDirective {
     /** Id of the element. */
@@ -43,7 +45,8 @@ export class NestedListHeaderDirective {
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]',
-    template: `<ng-content></ng-content>`
+    template: `<ng-content></ng-content>`,
+    standalone: true
 })
 export class NestedListIconComponent extends IconComponent {
     /** Role attribute */
@@ -57,7 +60,8 @@ export class NestedListIconComponent extends IconComponent {
 }
 
 @Directive({
-    selector: '[fdNestedDirectivesTitle], [fd-nested-list-title]'
+    selector: '[fdNestedDirectivesTitle], [fd-nested-list-title]',
+    standalone: true
 })
 export class NestedListTitleDirective {
     /** @hidden */
@@ -85,7 +89,9 @@ export class NestedListTitleDirective {
         tabindex: '-1'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [IconComponent, AsyncPipe]
 })
 export class NestedListExpandIconComponent {
     /** @hidden */

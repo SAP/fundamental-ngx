@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { FACET_CLASS_NAME } from '../constants';
 import { addClassNameToFacetElement } from '../utils';
 
@@ -6,7 +6,8 @@ import { addClassNameToFacetElement } from '../utils';
     selector: 'fd-facet-content',
     template: ` <ng-content></ng-content> `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class FacetContentComponent implements OnInit {
     /** @hidden */

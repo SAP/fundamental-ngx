@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
@@ -9,7 +9,8 @@ import { KeyUtil } from '@fundamental-ngx/cdk/utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-col fd-col--12'
-    }
+    },
+    standalone: true
 })
 export class GridListMoreBtnComponent {
     /** Sets title of the button */

@@ -12,6 +12,10 @@ import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
             ::ng-deep .fd-overflow-layout__items .fd-info-label {
                 margin: 0 0.5rem;
             }
+
+            ::ng-deep .fd-overflow-layout__items .fd-info-label .fd-info-label__text {
+                white-space: nowrap;
+            }
         `
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,

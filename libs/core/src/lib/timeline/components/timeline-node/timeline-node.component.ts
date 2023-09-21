@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,6 +9,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 import { TimelineNodeComponentInterface } from './timeline-node-component.interface';
 
@@ -19,7 +21,9 @@ import { TimelineNodeComponentInterface } from './timeline-node-component.interf
     host: {
         class: 'fd-timeline__node-wrapper',
         '[class.fd-timeline__node-wrapper--icon]': '!!glyph'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, IconComponent]
 })
 export class TimelineNodeComponent implements TimelineNodeComponentInterface, OnInit, OnDestroy {
     /** Glyph of the current timeline node.*/

@@ -41,7 +41,6 @@ import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective } from '../../auto-complete/auto-complete.directive';
-import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { ComboboxConfig } from '../combobox.config';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
@@ -276,12 +275,13 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
-            PlatformComboboxMobileModule,
             ComboboxMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 

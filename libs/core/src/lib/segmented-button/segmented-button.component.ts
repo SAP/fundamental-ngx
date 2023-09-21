@@ -1,3 +1,4 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,21 +7,20 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    forwardRef,
     HostBinding,
     HostListener,
     Input,
     OnDestroy,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
-import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
-import { asyncScheduler, fromEvent, merge, Subject } from 'rxjs';
-import { destroyObservable, KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { KeyUtil, destroyObservable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
+import { Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
+import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
 
 export const isDisabledClass = 'is-disabled';
 
@@ -52,7 +52,8 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
             useExisting: forwardRef(() => SegmentedButtonComponent),
             multi: true
         }
-    ]
+    ],
+    standalone: true
 })
 export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */

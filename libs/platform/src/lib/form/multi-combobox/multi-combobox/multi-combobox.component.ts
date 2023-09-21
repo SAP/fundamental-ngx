@@ -49,7 +49,6 @@ import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fu
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
-import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
@@ -419,12 +418,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.mobileControlTemplate },
-            PlatformMultiComboboxMobileModule,
             MultiComboboxMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 }
