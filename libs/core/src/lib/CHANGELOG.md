@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.49...v0.46.0-rc.50) (2023-09-21)
+
+
+### Bug Fixes
+
+* **core:** use template ref to initialize styles ([#10574](https://github.com/SAP/fundamental-ngx/issues/10574)) ([84182c5](https://github.com/SAP/fundamental-ngx/commit/84182c5d428304f5b88454d2d905cba3caa96dd1))
+
+
+
+
+
 # [0.46.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.48...v0.46.0-rc.49) (2023-09-20)
 
 
