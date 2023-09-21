@@ -1,9 +1,10 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { TabLinkDirective } from '../tab-link/tab-link.directive';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
-import { TabLinkDirective } from '../tab-link/tab-link.directive';
 
 @Component({
     selector: 'fd-test-tabs',
@@ -38,7 +39,7 @@ describe('TabNavDirective', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestNavWrapperComponent],
-            imports: [TabsModule],
+            imports: [TabsModule, ContentDensityModule],
             providers: [RtlService]
         }).compileComponents();
     }));

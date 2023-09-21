@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeedListItemComponent } from './feed-list-item.component';
-import { PipeModule } from '@fundamental-ngx/cdk/utils';
-import { LinkModule } from '@fundamental-ngx/core/link';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, I18nModule } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { of } from 'rxjs';
+import { FeedListItemComponent } from './feed-list-item.component';
 
 const componentClassPrefix = 'fd-feed-list__item';
 
@@ -18,8 +16,7 @@ describe('FeedListItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FeedListItemComponent],
-            imports: [PipeModule, LinkModule, I18nModule],
+            imports: [FeedListItemComponent],
             providers: [
                 {
                     provide: FD_LANGUAGE,

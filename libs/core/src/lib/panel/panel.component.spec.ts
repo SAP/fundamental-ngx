@@ -1,8 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { PanelModule } from './panel.module';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { PanelContentDirective } from './panel-content/panel-content.directive';
+import { PanelTitleDirective } from './panel-title/panel-title.directive';
+import { PanelComponent } from './panel.component';
 
 @Component({
     template: `
@@ -12,7 +15,9 @@ import { RtlService } from '@fundamental-ngx/cdk/utils';
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet lorem.
             </div>
         </fd-panel>
-    `
+    `,
+    standalone: true,
+    imports: [PanelComponent, PanelTitleDirective, PanelContentDirective, ContentDensityModule]
 })
 class TestComponent {
     @ViewChild('panelRef', { read: ElementRef })
@@ -30,8 +35,7 @@ describe('PanelComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [PanelModule],
+            imports: [TestComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

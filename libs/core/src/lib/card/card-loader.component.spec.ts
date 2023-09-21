@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CardLoaderComponent } from './card-loader.component';
@@ -10,8 +9,7 @@ describe('CardLoaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [CardLoaderComponent]
+            imports: [CardLoaderComponent]
         }).compileComponents();
     }));
 

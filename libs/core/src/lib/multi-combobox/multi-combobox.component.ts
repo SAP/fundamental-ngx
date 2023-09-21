@@ -18,7 +18,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
-import { CvaControl, CvaDirective, OptionItem, SelectableOptionItem, SelectItem } from '@fundamental-ngx/cdk/forms';
+import { CvaControl, CvaDirective, OptionItem, SelectItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteDirective,
     AutoCompleteEvent,

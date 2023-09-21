@@ -8,7 +8,7 @@ describe('MessagePageActionsComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MessagePageActionsComponent]
+            imports: [MessagePageActionsComponent]
         }).compileComponents();
     }));
 

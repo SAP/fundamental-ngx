@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Type, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TemplateModule } from '@fundamental-ngx/cdk/utils';
-import { MessageBoxFooterComponent, MessageBoxButtonClass } from './message-box-footer.component';
-import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
-import { BarModule } from '@fundamental-ngx/core/bar';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
+import { MessageBoxButtonClass, MessageBoxFooterComponent } from './message-box-footer.component';
 
 @Component({
     template: `
@@ -16,7 +16,9 @@ import { whenStable } from '@fundamental-ngx/core/tests';
                 </div>
             </ng-template>
         </fd-message-box-footer>
-    `
+    `,
+    standalone: true,
+    imports: [MessageBoxFooterComponent, BarMiddleDirective, TemplateDirective]
 })
 class CustomFooterTestComponent {
     @ViewChild(MessageBoxFooterComponent) messageBoxFooter: MessageBoxFooterComponent;
@@ -27,7 +29,9 @@ class CustomFooterTestComponent {
         <fd-message-box-footer>
             <fd-button-bar label="Default button">Default button</fd-button-bar>
         </fd-message-box-footer>
-    `
+    `,
+    standalone: true,
+    imports: [MessageBoxFooterComponent, ButtonBarComponent]
 })
 class DefaultFooterTestComponent {
     @ViewChild(MessageBoxFooterComponent) messageBoxFooter: MessageBoxFooterComponent;
@@ -36,8 +40,7 @@ class DefaultFooterTestComponent {
 describe('MessageBoxFooterComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-            imports: [BarModule, TemplateModule],
+            imports: [CustomFooterTestComponent, DefaultFooterTestComponent],
             providers: [{ provide: MessageBoxHost, useValue: { _messageBoxConfig: new MessageBoxConfig() } }]
         });
     }));

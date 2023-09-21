@@ -1,12 +1,12 @@
-import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { ROOT_PAGE } from '../constants';
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
-import { NoDefaultPanePipe, SplitterPaneContainerComponent } from './splitter-pane-container.component';
 import { SplitterComponent } from '../splitter.component';
+import { SplitterPaneContainerComponent } from './splitter-pane-container.component';
 
 @Component({
     template: `
@@ -17,7 +17,9 @@ import { SplitterComponent } from '../splitter.component';
                 <fd-splitter-split-pane #paneTwo [id]="paneTwoId"> Pane {{ paneTwoId }} </fd-splitter-split-pane>
             </fd-splitter-pane-container>
         </fd-splitter>
-    `
+    `,
+    standalone: true,
+    imports: [SplitterComponent, SplitterPaneContainerComponent, SplitterSplitPaneComponent]
 })
 class SplitterHostComponent {
     @ViewChild(SplitterPaneContainerComponent)
@@ -41,14 +43,7 @@ describe('SplitterPaneContainerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                SplitterHostComponent,
-                SplitterComponent,
-                SplitterPaneContainerComponent,
-                SplitterSplitPaneComponent,
-                NoDefaultPanePipe
-            ],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [SplitterHostComponent]
         }).compileComponents();
     }));
 

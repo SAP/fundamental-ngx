@@ -26,7 +26,19 @@ import {
                 </div>
             </div>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [
+        NumericContentDirective,
+        NumericContentKpiContainerDirective,
+        NumericContentKpiDirective,
+        NumericContentLaunchIconContainerDirective,
+        NumericContentLaunchIconDirective,
+        NumericContentScaleArrowDirective,
+        NumericContentScaleContainerDirective,
+        NumericContentScaleDirective,
+        NumericContentScaleTextDirective
+    ]
 })
 export class TestComponent {
     @ViewChild(NumericContentDirective)
@@ -50,18 +62,7 @@ describe('NumericContentDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                NumericContentDirective,
-                NumericContentKpiContainerDirective,
-                NumericContentKpiDirective,
-                NumericContentLaunchIconContainerDirective,
-                NumericContentLaunchIconDirective,
-                NumericContentScaleArrowDirective,
-                NumericContentScaleContainerDirective,
-                NumericContentScaleDirective,
-                NumericContentScaleTextDirective,
-                TestComponent
-            ]
+            imports: [TestComponent]
         });
     }));
 

@@ -8,7 +8,7 @@ describe('MessagePageSubtitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MessagePageSubtitleComponent]
+            imports: [MessagePageSubtitleComponent]
         }).compileComponents();
     }));
 

@@ -21,7 +21,7 @@ const components = [
  * Use direct imports of components and directives.
  */
 @NgModule({
-    imports: [components],
-    exports: [components]
+    imports: [...components],
+    exports: [...components]
 })
 export class BarModule {}

@@ -29,7 +29,7 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { TimeComponent } from '@fundamental-ngx/core/time';
 
-import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormMessageComponent } from '@fundamental-ngx/core/form';
@@ -74,6 +74,7 @@ let timePickerCounter = 0;
         InputGroupInputDirective,
         PopoverBodyComponent,
         NgIf,
+        NgTemplateOutlet,
         FormMessageComponent,
         TimeComponent,
         FormsModule,

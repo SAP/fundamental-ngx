@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 import { PanelTitleDirective } from './panel-title/panel-title.directive';
 import { PanelComponent } from './panel.component';
@@ -9,7 +10,7 @@ import { PanelComponent } from './panel.component';
  * Use direct imports of PanelComponent, PanelContentDirective, PanelTitleDirective
  */
 @NgModule({
-    imports: [PanelComponent, PanelContentDirective, PanelTitleDirective],
-    exports: [PanelComponent, PanelContentDirective, PanelTitleDirective]
+    imports: [PanelComponent, PanelContentDirective, PanelTitleDirective, ContentDensityModule],
+    exports: [PanelComponent, PanelContentDirective, PanelTitleDirective, ContentDensityModule]
 })
 export class PanelModule {}

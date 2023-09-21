@@ -8,7 +8,7 @@ describe('GridListGroupHeaderComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GridListGroupHeaderComponent]
+            imports: [GridListGroupHeaderComponent]
         }).compileComponents();
     });
 

@@ -1,14 +1,17 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 
-import { CardModule } from '@fundamental-ngx/core/card';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import {
+    CardComponent,
+    CardContentComponent,
+    CardHeaderComponent,
+    CardTitleDirective
+} from '@fundamental-ngx/core/card';
+import { ListComponent, ListItemComponent } from '@fundamental-ngx/core/list';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { ResizableCardLayoutComponent } from './resizable-card-layout.component';
 import { ResizableCardItemComponent } from './resizable-card-item/resizable-card-item.component';
+import { ResizableCardLayoutComponent } from './resizable-card-layout.component';
 @Component({
     template: `
         <fd-resizable-card-layout>
@@ -100,7 +103,18 @@ import { ResizableCardItemComponent } from './resizable-card-item/resizable-card
                 </fd-card>
             </fd-resizable-card-item>
         </fd-resizable-card-layout>
-    `
+    `,
+    standalone: true,
+    imports: [
+        ResizableCardLayoutComponent,
+        ResizableCardItemComponent,
+        ListComponent,
+        ListItemComponent,
+        CardComponent,
+        CardHeaderComponent,
+        CardTitleDirective,
+        CardContentComponent
+    ]
 })
 class TestResizableCardLayoutComponent {
     @ViewChild(ResizableCardLayoutComponent)
@@ -116,8 +130,7 @@ describe('ResizableCardLayoutComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ResizableCardLayoutComponent, ResizableCardItemComponent, TestResizableCardLayoutComponent],
-            imports: [CommonModule, CardModule, ListModule, IconModule]
+            imports: [TestResizableCardLayoutComponent]
         }).compileComponents();
     }));
 

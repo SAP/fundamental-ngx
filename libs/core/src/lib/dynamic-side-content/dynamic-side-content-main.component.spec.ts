@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 
@@ -10,8 +9,7 @@ describe('DynamicSideContentMainComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [DynamicSideContentMainComponent]
+            imports: [DynamicSideContentMainComponent]
         }).compileComponents();
     }));
 

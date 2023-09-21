@@ -2,9 +2,9 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
 import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
-import { FeedInputModule } from './feed-input.module';
+import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
+import { FeedInputComponent } from './feed-input.component';
 
 @Component({
     template: `
@@ -12,7 +12,9 @@ import { FeedInputModule } from './feed-input.module';
             <textarea fdFeedInputTextarea [fdFeedInputTextareaMaxRows]="maxRows"></textarea>
             <button fdFeedInputButton></button>
         </fd-feed-input>
-    `
+    `,
+    standalone: true,
+    imports: [FeedInputComponent, FeedInputTextareaDirective, FeedInputButtonDirective]
 })
 class TestComponent {
     @ViewChild(FeedInputTextareaDirective)
@@ -36,8 +38,7 @@ describe('FeedInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FeedInputModule],
-            declarations: [TestComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

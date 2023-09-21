@@ -8,7 +8,7 @@ describe('IllustratedMessageFigcaptionComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [IllustratedMessageFigcaptionComponent]
+            imports: [IllustratedMessageFigcaptionComponent]
         }).compileComponents();
     });
 

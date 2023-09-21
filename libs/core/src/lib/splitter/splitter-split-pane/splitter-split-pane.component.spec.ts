@@ -10,7 +10,7 @@ describe('SplitterSplitPaneComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SplitterSplitPaneComponent]
+            imports: [SplitterSplitPaneComponent]
         }).compileComponents();
     }));
 

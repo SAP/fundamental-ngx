@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SelectableItemDirective, SelectionService } from '@fundamental-ngx/cdk/utils';
-import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import { TreeItem } from '../../models/tree-item';
+import { FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
+import { ClickedBehaviorModule, SelectionService } from '@fundamental-ngx/cdk/utils';
 import { TreeDataSourceParser } from '../../data-source/tree-data-source-parser';
+import { TreeItem } from '../../models/tree-item';
 import { TreeService } from '../../tree.service';
 
 import { TreeItemComponent } from './tree-item.component';
@@ -23,8 +20,7 @@ describe('TreeItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TreeItemComponent],
-            imports: [DataSourceDirective, IconModule, SkeletonModule, SelectableItemDirective, I18nModule],
+            imports: [ClickedBehaviorModule.forRoot(), TreeItemComponent],
             providers: [
                 TreeService,
                 {

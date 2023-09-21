@@ -2,15 +2,17 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
-import { SelectionService } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { ClickedBehaviorModule, SelectionService } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Observable, of } from 'rxjs';
+import { TreeItemComponent } from './components/tree-item/tree-item.component';
 import { SelectionServiceMock } from './components/tree-item/tree-item.component.spec';
 import { TreeDataSourceParser } from './data-source/tree-data-source-parser';
+import { TreeItemDefDirective } from './directives/tree-item-def.directive';
+import { TreeItemIconDirective, TreeItemTextDirective } from './directives/tree-item-icon.directive';
 import { SelectionPlacement, SelectionType } from './models/selection-type';
 import { TreeItem } from './models/tree-item';
 import { TreeComponent } from './tree.component';
-import { TreeModule } from './tree.module';
 import { TreeService } from './tree.service';
 
 interface TreeItemData {
@@ -57,7 +59,16 @@ interface TreeItemData {
                 <span fdTreeItemText>Item 3 (Level 1)</span>
             </fd-tree-item>
         </fd-tree>
-    `
+    `,
+    standalone: true,
+    imports: [
+        TreeComponent,
+        FormsModule,
+        IconComponent,
+        TreeItemComponent,
+        TreeItemTextDirective,
+        TreeItemIconDirective
+    ]
 })
 export class ProjectedTreeItemsComponent {
     @ViewChild(TreeComponent)
@@ -93,7 +104,9 @@ export class ProjectedTreeItemsComponent {
                 <span fdTreeItemText>{{ item.data.title }}</span>
             </fd-tree-item>
         </fd-tree>
-    `
+    `,
+    standalone: true,
+    imports: [TreeComponent, TreeItemComponent, TreeItemDefDirective, TreeItemTextDirective]
 })
 export class DataSourceTreeComponent {
     dataSource: Observable<Partial<TreeItem<TreeItemData>>[]> = of([
@@ -166,8 +179,7 @@ describe('Tree component with projected nodes', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ProjectedTreeItemsComponent],
-            imports: [TreeModule, IconModule, FormsModule],
+            imports: [ClickedBehaviorModule.forRoot(), ProjectedTreeItemsComponent],
             providers: [
                 TreeService,
                 {
@@ -256,8 +268,7 @@ describe('Tree component with data source and tree item template', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [DataSourceTreeComponent],
-            imports: [TreeModule, IconModule],
+            imports: [ClickedBehaviorModule.forRoot(), DataSourceTreeComponent],
             providers: [
                 TreeService,
                 {

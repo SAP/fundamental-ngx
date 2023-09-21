@@ -9,6 +9,7 @@ import { CardSubtitleDirective } from './card-subtitle.directive';
 import { CardTitleDirective } from './card-title.directive';
 import { CardComponent } from './card.component';
 
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
 import { CardLoaderComponent } from './card-loader.component';
 import { CardKpiAnalyticsContentDirective } from './kpi/card-kpi-analytics-content.directive';
@@ -40,7 +41,7 @@ const components = [
 ];
 
 @NgModule({
-    imports: [...components],
-    exports: [...components]
+    imports: [...components, ContentDensityModule],
+    exports: [...components, ContentDensityModule]
 })
 export class CardModule {}

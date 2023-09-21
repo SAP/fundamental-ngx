@@ -35,7 +35,7 @@ import { WizardStepComponent } from '../wizard-step/wizard-step.component';
     standalone: true,
     imports: [
         NgIf,
-        ActionSheetComponent_1,
+        ActionSheetComponent,
         ActionSheetControlComponent,
         NgTemplateOutlet,
         ActionSheetBodyComponent,

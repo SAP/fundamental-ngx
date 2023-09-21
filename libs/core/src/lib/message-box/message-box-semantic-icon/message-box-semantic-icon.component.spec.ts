@@ -9,7 +9,7 @@ describe('MessageBoxSemanticIconComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [MessageBoxSemanticIconComponent],
+            imports: [MessageBoxSemanticIconComponent],
             providers: [{ provide: MessageBoxHost, useValue: { _messageBoxConfig: new MessageBoxConfig() } }]
         }).compileComponents();
     });

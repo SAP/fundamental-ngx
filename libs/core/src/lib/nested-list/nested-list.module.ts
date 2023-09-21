@@ -11,6 +11,7 @@ import {
 } from './nested-list-directives';
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
 import { NestedListPopoverComponent } from './nested-list-popover/nested-list-popover.component';
+import { NestedListStateService } from './nested-list-state.service';
 import { NestedListDirective } from './nested-list/nested-list.directive';
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
 
@@ -30,6 +31,6 @@ const components = [
 @NgModule({
     imports: [...components],
     exports: [...components],
-    providers: [MenuKeyboardService, NestedListKeyboardService]
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class NestedListModule {}

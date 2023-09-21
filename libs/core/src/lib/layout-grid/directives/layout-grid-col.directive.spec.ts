@@ -21,7 +21,9 @@ const XL_COL_SIZE = 3;
                 ></div>
             </div>
         </fd-layout-grid>
-    `
+    `,
+    standalone: true,
+    imports: [LayoutGridColDirective, LayoutGridComponent]
 })
 class TestNestedContainerComponent {
     @ViewChild(LayoutGridColDirective, { static: true })
@@ -40,7 +42,7 @@ describe('LayoutGridColDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
+            imports: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

@@ -8,7 +8,7 @@ describe('LayoutPanelFiltersComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [LayoutPanelFiltersComponent]
+            imports: [LayoutPanelFiltersComponent]
         }).compileComponents();
     }));
 

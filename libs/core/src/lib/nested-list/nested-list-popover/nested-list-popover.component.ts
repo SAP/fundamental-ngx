@@ -32,7 +32,7 @@ import { NestedListPopoverInterface } from './nested-list-popover.interface';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        PopoverComponent_1,
+        PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
         NestedLinkDirective,

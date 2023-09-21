@@ -4,7 +4,9 @@ import { ObjectMarkerComponent } from './object-marker.component';
 
 @Component({
     selector: 'fd-test-object-marker',
-    template: ` <span fd-object-marker>Test Object Marker</span> `
+    template: ` <span fd-object-marker>Test Object Marker</span> `,
+    standalone: true,
+    imports: [ObjectMarkerComponent]
 })
 class TestObjectMarkerComponent {
     @ViewChild(ObjectMarkerComponent, { static: true })
@@ -17,7 +19,7 @@ describe('ObjectMarkerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectMarkerComponent, TestObjectMarkerComponent]
+            imports: [TestObjectMarkerComponent]
         }).compileComponents();
     }));
 
