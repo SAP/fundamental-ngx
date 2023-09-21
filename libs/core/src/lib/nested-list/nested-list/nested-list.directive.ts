@@ -7,14 +7,13 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
-    inject,
     Inject,
-    InjectionToken,
     INJECTOR,
     Injector,
     Input,
     OnDestroy,
     Optional,
+    Provider,
     QueryList
 } from '@angular/core';
 import { combineLatest, Observable, startWith, Subscription } from 'rxjs';
@@ -30,7 +29,22 @@ import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedListInterface } from './nested-list.interface';
 
-export const SMT = new InjectionToken<NestedListStateService>('TestService');
+function provideNestedListStateService(): Provider {
+    // Nested list can be nested, and that will cause on each individual instance of NestedListStateService.
+    return {
+        provide: NestedListStateService,
+        useFactory: (injector: Injector) =>
+            injector.get(NestedListStateService, new NestedListStateService(), { skipSelf: true }),
+        deps: [INJECTOR]
+    };
+}
+
+/**
+ * <div fd-nested-list>
+ *  <div fd-nested-list>
+ *  </div>
+ * </div>
+ */
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]',
@@ -38,13 +52,7 @@ export const SMT = new InjectionToken<NestedListStateService>('TestService');
         contentDensityObserverProviders(),
         MenuKeyboardService,
         NestedListKeyboardService,
-        // Nested list can be nested, and that will cause on each individual instance of NestedListStateService.
-        {
-            provide: NestedListStateService,
-            useFactory: (injector: Injector) =>
-                injector.get(NestedListStateService, new NestedListStateService(), { skipSelf: true }),
-            deps: [INJECTOR]
-        }
+        provideNestedListStateService()
     ],
     standalone: true
 })
@@ -106,13 +114,6 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     private _tabindex = '-1';
 
     /** @hidden */
-    private readonly _nestedListStateService =
-        inject(NestedListStateService, {
-            optional: true,
-            skipSelf: true
-        }) || inject(NestedListStateService);
-
-    /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
 
     /** @hidden */
@@ -121,6 +122,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
+        private readonly _nestedListStateService: NestedListStateService,
         @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
         private _contentDensityObserver: ContentDensityObserver
     ) {
