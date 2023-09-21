@@ -1,13 +1,13 @@
 import { computed, inject, isSignal, signal, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguage, FdLanguageKeyArgs } from '../../models/lang';
+import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../../models/lang';
 import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
 import { resolveTranslationSync } from './resolve-translations-sync';
 
 type CanBeSignal<T> = T | Signal<T>;
 type ResolveSignalFn<ReturnType> = (
-    key: CanBeSignal<string>,
+    key: CanBeSignal<FdLanguageKeyIdentifier>,
     args?: Nullable<CanBeSignal<FdLanguageKeyArgs>>
 ) => Signal<ReturnType>;
 
@@ -52,7 +52,7 @@ function isResolveTranslationsSignalOptions(
  * @param options
  */
 function getResolveTranslationsSignalOptions(
-    keyOrOptions?: CanBeSignal<string> | ResolveTranslationsSignalOptions,
+    keyOrOptions?: CanBeSignal<FdLanguageKeyIdentifier> | ResolveTranslationsSignalOptions,
     options?: ResolveTranslationsSignalOptions
 ): ResolveTranslationsSignalOptions {
     const optionsFromKey = isResolveTranslationsSignalOptions(keyOrOptions) ? keyOrOptions : {};
@@ -71,13 +71,13 @@ export function resolveTranslationSignal(options?: ResolveTranslationsSignalOpti
  * @param options
  */
 export function resolveTranslationSignal(
-    key: CanBeSignal<string>,
+    key: CanBeSignal<FdLanguageKeyIdentifier>,
     args?: Nullable<CanBeSignal<FdLanguageKeyArgs>>,
     options?: ResolveTranslationsSignalOptions
 ): Signal<string>;
 // eslint-disable-next-line jsdoc/require-jsdoc
 export function resolveTranslationSignal(
-    keyOrOptions?: CanBeSignal<string> | ResolveTranslationsSignalOptions,
+    keyOrOptions?: CanBeSignal<FdLanguageKeyIdentifier> | ResolveTranslationsSignalOptions,
     args?: Nullable<CanBeSignal<FdLanguageKeyArgs>>,
     options?: ResolveTranslationsSignalOptions
 ): Signal<string> | ResolveSignalFn<string> {
@@ -85,7 +85,10 @@ export function resolveTranslationSignal(
     const fdLocaleSignal = getFdLocaleSignal(fdLocale);
     const fdLangSignal = getFdLangSignal(fdLang);
 
-    const fn = (k: CanBeSignal<string>, ctx?: Nullable<CanBeSignal<FdLanguageKeyArgs>>): Signal<string> => {
+    const fn = (
+        k: CanBeSignal<FdLanguageKeyIdentifier>,
+        ctx?: Nullable<CanBeSignal<FdLanguageKeyArgs>>
+    ): Signal<string> => {
         const kSignal = isSignal(k) ? k : signal(k);
         const ctxSignal = isSignal(ctx) ? ctx : signal(ctx || {});
         return computed(() =>

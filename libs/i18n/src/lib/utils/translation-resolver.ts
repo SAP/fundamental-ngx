@@ -3,7 +3,13 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IntlMessageFormat } from 'intl-messageformat';
 import { get } from 'lodash-es';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
-import { FdLanguage, FdLanguageKey, FdLanguageKeyArgs, FdLanguageKeyFunction } from '../models';
+import {
+    FdLanguage,
+    FdLanguageKey,
+    FdLanguageKeyArgs,
+    FdLanguageKeyFunction,
+    FdLanguageKeyIdentifier
+} from '../models';
 
 const _internalReferenceRegExp = /\{\s*@@([^{}\s]*)\s*}/g;
 
@@ -12,7 +18,7 @@ export class TranslationResolver {
     /** Resolves the translation for the provided language by key and args */
     resolve(
         lang: FdLanguage,
-        key: FdLanguageKey,
+        key: FdLanguageKeyIdentifier,
         args?: FdLanguageKeyArgs,
         locale?: Nullable<string>,
         fallbackLanguage: FdLanguage = FD_LANGUAGE_ENGLISH
@@ -33,7 +39,7 @@ export class TranslationResolver {
     /** @hidden */
     private _resolveWithoutFallback(
         lang: FdLanguage,
-        key: FdLanguageKey,
+        key: FdLanguageKeyIdentifier,
         args?: FdLanguageKeyArgs,
         locale?: Nullable<string>
     ): string {
@@ -58,13 +64,16 @@ export class TranslationResolver {
     /**
      * Returns the raw ICU string for the provided language by key and args
      **/
-    private getRaw(lang: FdLanguage, key: FdLanguageKey, args?: FdLanguageKeyArgs): string {
+    private getRaw(lang: FdLanguage, key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs): string {
         const val = this._getFdLanguageKeyValue(lang, key, args);
         if (typeof val === 'string') {
             const internalReferences = val.match(_internalReferenceRegExp);
             if (internalReferences) {
                 const replacements: Array<[string, string]> = internalReferences.map((internalReference) => {
-                    const internalReferenceKey = internalReference.replace(_internalReferenceRegExp, '$1');
+                    const internalReferenceKey = internalReference.replace(
+                        _internalReferenceRegExp,
+                        '$1'
+                    ) as FdLanguageKeyIdentifier;
                     const replacementValue = this.getRaw(lang, internalReferenceKey, args);
                     return [internalReference, replacementValue];
                 });
@@ -79,7 +88,11 @@ export class TranslationResolver {
     }
 
     /** @hidden */
-    private _getFdLanguageKeyValue(lang: FdLanguage, key: FdLanguageKey, args?: FdLanguageKeyArgs): string | null {
+    private _getFdLanguageKeyValue(
+        lang: FdLanguage,
+        key: FdLanguageKeyIdentifier,
+        args?: FdLanguageKeyArgs
+    ): string | null {
         const resolvedKey = this._tryResolveKey(lang, key);
         if (typeof resolvedKey === 'string') {
             return resolvedKey;

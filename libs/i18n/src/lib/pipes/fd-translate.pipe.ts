@@ -2,7 +2,7 @@ import { ChangeDetectorRef, DestroyRef, Pipe, PipeTransform } from '@angular/cor
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, skip, switchMap } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdLanguageKeyArgs } from '../models/lang';
+import { FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models/lang';
 import { resolveTranslationObservable } from '../utils';
 
 @Pipe({
@@ -29,7 +29,7 @@ export class FdTranslatePipe implements PipeTransform {
     }
 
     /** Translate a key with arguments and, optionally, default value */
-    transform(key: string, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
+    transform(key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
         this._key$.next(key);
         this._args$.next(args);
 

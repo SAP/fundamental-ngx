@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { combineLatest, isObservable, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FdLanguage, FdLanguageKeyArgs } from '../../models/lang';
+import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../../models/lang';
 import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
 import { ResolveFn } from './common-types';
@@ -63,7 +63,7 @@ export function resolveTranslationObservable(
  * Helper utility function for getting translations observable
  */
 export function resolveTranslationObservable(
-    key: string,
+    key: FdLanguageKeyIdentifier,
     args?: Nullable<FdLanguageKeyArgs>,
     options?: ResolveTranslationsObservableOptions
 ): Observable<string>;
@@ -71,7 +71,7 @@ export function resolveTranslationObservable(
  * Helper utility function for getting translations
  */
 export function resolveTranslationObservable(
-    keyOrOptions?: string | ResolveTranslationsObservableOptions,
+    keyOrOptions?: FdLanguageKeyIdentifier | ResolveTranslationsObservableOptions,
     args?: Nullable<FdLanguageKeyArgs>,
     options?: ResolveTranslationsObservableOptions
 ): Observable<string> | ResolveFn<Observable<string>> {
@@ -80,7 +80,7 @@ export function resolveTranslationObservable(
     const langAndLocale$ = combineLatest([getFdLangObservable(fdLang), getFdLocaleObservable(fdLocale)]);
 
     const resolver = new TranslationResolver();
-    const fn = (k: string, ctx?: Nullable<FdLanguageKeyArgs>): Observable<string> =>
+    const fn = (k: FdLanguageKeyIdentifier, ctx?: Nullable<FdLanguageKeyArgs>): Observable<string> =>
         langAndLocale$.pipe(map(([lang, locale]) => resolver.resolve(lang, k, ctx || {}, locale)));
 
     if (!keyOrOptions || typeof keyOrOptions !== 'string') {

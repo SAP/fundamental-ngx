@@ -1,4 +1,5 @@
-import { FdLanguageKeyFunction, FdLanguagePatch } from '../models';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FdLanguage, FdLanguageKeyFunction, FdLanguageKeyIdentifier, FdLanguagePatch } from '../models';
 
 /**
  * Transforms hierarchical object into object with flat keys
@@ -8,10 +9,23 @@ import { FdLanguageKeyFunction, FdLanguagePatch } from '../models';
  * @param translationValueTransformer
  */
 export function flattenTranslations(
-    translations: FdLanguagePatch,
-    prefix: string | null = null,
+    translations: FdLanguage,
+    prefix?: Nullable<string>,
     translationValueTransformer?: (value: string | FdLanguageKeyFunction) => string | FdLanguageKeyFunction
-): Record<string, string | FdLanguageKeyFunction> {
+): Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction>;
+export function flattenTranslations(
+    translations: FdLanguagePatch,
+    prefix?: Nullable<string>,
+    translationValueTransformer?: (value: string | FdLanguageKeyFunction) => string | FdLanguageKeyFunction
+): Partial<Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction>>;
+// eslint-disable-next-line jsdoc/require-jsdoc
+export function flattenTranslations(
+    translations: FdLanguagePatch | FdLanguage,
+    prefix?: Nullable<string>,
+    translationValueTransformer?: (value: string | FdLanguageKeyFunction) => string | FdLanguageKeyFunction
+):
+    | Partial<Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction>>
+    | Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction> {
     if (!translations) {
         return {};
     }

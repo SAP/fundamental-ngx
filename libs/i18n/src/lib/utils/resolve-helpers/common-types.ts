@@ -1,4 +1,4 @@
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguageKeyArgs } from '../../models/lang';
+import { FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../../models/lang';
 
-export type ResolveFn<ReturnType> = (key: string, args?: Nullable<FdLanguageKeyArgs>) => ReturnType;
+export type ResolveFn<ReturnType> = (key: FdLanguageKeyIdentifier, args?: Nullable<FdLanguageKeyArgs>) => ReturnType;
