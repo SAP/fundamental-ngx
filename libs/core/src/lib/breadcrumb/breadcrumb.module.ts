@@ -5,10 +5,10 @@ import { LinkModule } from '@fundamental-ngx/core/link';
 import { BreadcrumbItemComponent } from './breadcrumb-item.component';
 import { BreadcrumbComponent } from './breadcrumb.component';
 
-const exports = [BreadcrumbComponent, BreadcrumbItemComponent, LinkModule, ContentDensityModule];
+const components = [BreadcrumbComponent, BreadcrumbItemComponent, LinkModule, ContentDensityModule];
 
 @NgModule({
-    imports: [...exports],
-    exports: [...exports]
+    imports: [...components],
+    exports: [...components]
 })
 export class BreadcrumbModule {}
