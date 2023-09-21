@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BehaviorSubject, delay } from 'rxjs';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
-import { FdLanguage, FdLanguageKeyArgs } from '../models';
+import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models';
 import { FD_LANGUAGE } from '../utils/tokens';
 import { FdTranslatePipe } from './fd-translate.pipe';
 
@@ -21,7 +21,7 @@ const lang: FdLanguage = {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestComponent {
-    @Input() testKey: string;
+    @Input() testKey: FdLanguageKeyIdentifier;
     @Input() testArgs: FdLanguageKeyArgs;
 }
 
@@ -33,7 +33,7 @@ describe('FdTranslate pipe', () => {
         return testComponentFixture.nativeElement.textContent.trim();
     }
 
-    function setCtx(key: string, args?: FdLanguageKeyArgs): void {
+    function setCtx(key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs): void {
         testComponentFixture.componentRef.setInput('testKey', key);
         testComponentFixture.componentRef.setInput('testArgs', args);
         testComponentFixture.detectChanges();
@@ -70,6 +70,7 @@ describe('FdTranslate pipe', () => {
         });
 
         it('should return empty string if value is not found', () => {
+            // @ts-expect-error: testing wrong key
             setCtx('wrong');
             expectValueToBe('');
         });

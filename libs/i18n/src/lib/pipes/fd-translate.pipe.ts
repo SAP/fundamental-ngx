@@ -15,7 +15,7 @@ export class FdTranslatePipe implements PipeTransform {
     private readonly _translationResolver = resolveTranslationObservable();
 
     /** @hidden */
-    private readonly _key$ = new BehaviorSubject<string | undefined>(undefined);
+    private readonly _key$ = new BehaviorSubject<FdLanguageKeyIdentifier | undefined>(undefined);
 
     /** @hidden */
     private readonly _args$ = new BehaviorSubject<FdLanguageKeyArgs | undefined>(undefined);

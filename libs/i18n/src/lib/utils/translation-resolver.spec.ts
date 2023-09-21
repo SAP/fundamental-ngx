@@ -19,7 +19,7 @@ describe('TranslationResolver', () => {
         },
         internalRefInIcu: 'test {count, plural, =1 {one item {@@internalRef}} other {# items {@@internalRef}} }'
     };
-    const resolve = (key: string, args?: FdLanguageKeyArgs): string => resolver.resolve(lang, key, args);
+    const resolve = (key: any, args?: FdLanguageKeyArgs): string => resolver.resolve(lang, key, args);
     beforeEach(() => {
         resolver = new TranslationResolver();
     });

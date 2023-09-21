@@ -59,6 +59,7 @@ describe('loadJson', () => {
     ];
     testCases.forEach(([input, output]) => {
         it(`should convert ${JSON.stringify(input)} to ${JSON.stringify(output)}`, () => {
+            // @ts-expect-error: testing wrong key
             const result = loadJson(input);
             expect(result).toEqual(output);
         });
