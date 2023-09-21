@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { FieldsetComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
@@ -13,7 +13,7 @@ import { FieldsetComponent, FormItemComponent, FormLabelComponent } from '@funda
         FieldsetComponent,
         FormItemComponent,
         FormLabelComponent,
-        ComboboxModule
+        ComboboxComponent
     ]
 })
 export class ComboboxDisabledExampleComponent {

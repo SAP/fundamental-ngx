@@ -1,27 +1,4 @@
 import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ContentChildren,
-    ElementRef,
-    EventEmitter,
-    forwardRef,
-    Injector,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    Output,
-    QueryList,
-    SimpleChanges,
-    TemplateRef,
-    ViewChild,
-    ViewContainerRef,
-    ViewEncapsulation
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
     BACKSPACE,
     CONTROL,
     DOWN_ARROW,
@@ -34,9 +11,31 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
+    ElementRef,
+    EventEmitter,
+    Injector,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    QueryList,
+    SimpleChanges,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation,
+    forwardRef
+} from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { FD_LIST_MESSAGE_DIRECTIVE, ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import {
     AutoCompleteEvent,
     DynamicComponentService,
@@ -45,20 +44,33 @@ import {
     Nullable
 } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { FD_LIST_MESSAGE_DIRECTIVE, ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
-import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
-import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
-import { ComboboxItem } from './combobox-item';
-import { GroupFunction } from './list-group.pipe';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { AutoCompleteDirective, DisplayFnPipe, SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ComboboxItem } from './combobox-item';
+import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
+import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
+import { GroupFunction, ListGroupPipe } from './list-group.pipe';
 import { FD_COMBOBOX_COMPONENT } from './tokens';
 
 let comboboxUniqueId = 0;
@@ -87,6 +99,7 @@ let comboboxUniqueId = 0;
         },
         registerFormItemControl(ComboboxComponent),
         MenuKeyboardService,
+        DynamicComponentService,
         contentDensityObserverProviders(),
         {
             provide: FD_COMBOBOX_COMPONENT,
@@ -99,7 +112,27 @@ let comboboxUniqueId = 0;
         '[class.fd-combobox-custom-class--mobile]': 'mobile'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        NgIf,
+        ListModule,
+        InputGroupModule,
+        FormsModule,
+        AutoCompleteDirective,
+        ButtonModule,
+        IconComponent,
+        ContentDensityModule,
+        NgFor,
+        DisplayFnPipe,
+        SearchHighlightPipe,
+        FdTranslatePipe,
+        ListGroupPipe
+    ]
 })
 export class ComboboxComponent
     implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, FormItemControl
@@ -205,9 +238,6 @@ export class ComboboxComponent
     /** Whether the matching string should be highlighted during filtration. */
     @Input()
     highlighting = true;
-
-    /** Whether the matching string should be highlighted after combobox value is selected. */
-    filterHighlight = true;
 
     /** Whether the popover should close when a user selects a result. */
     @Input()
@@ -330,6 +360,9 @@ export class ComboboxComponent
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<HTMLElement>;
 
+    /** Whether the matching string should be highlighted after combobox value is selected. */
+    filterHighlight = true;
+
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     readonly nonOpeningKeys: number[] = [
         ESCAPE,
@@ -374,12 +407,6 @@ export class ComboboxComponent
     private _value: any;
 
     /** @hidden */
-    onChange: (value: any) => void = () => {};
-
-    /** @hidden */
-    onTouched = (): void => {};
-
-    /** @hidden */
     constructor(
         private readonly _overlay: Overlay,
         private readonly _cdRef: ChangeDetectorRef,
@@ -390,6 +417,12 @@ export class ComboboxComponent
     ) {
         this._repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: true });
     }
+
+    /** @hidden */
+    onChange: (value: any) => void = () => {};
+
+    /** @hidden */
+    onTouched = (): void => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -552,9 +585,7 @@ export class ComboboxComponent
     /** @hidden */
     handleSearchTermChange(): void {
         this.displayedValues = this.filterFn(this.dropdownValues, this.inputText);
-        if (this.popoverComponent) {
-            this.popoverComponent.refreshPosition();
-        }
+        this.popoverComponent?.refreshPosition();
     }
 
     /** @hidden */
@@ -640,7 +671,7 @@ export class ComboboxComponent
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
-        const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue);
+        const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue)[0];
         const index: number = this.dropdownValues.findIndex((value) => value === activeValue);
         if (this.dropdownValues[index + offset]) {
             this.onMenuClickHandler(this.dropdownValues[index + offset]);
@@ -704,7 +735,7 @@ export class ComboboxComponent
 
     /** @hidden */
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
-        return this.dropdownValues.find((value) => this.displayFn(value) === displayValue);
+        return this.dropdownValues.filter((value) => this.displayFn(value) === displayValue);
     }
 
     /** @hidden */
@@ -719,9 +750,10 @@ export class ComboboxComponent
     /** @hidden */
     private _propagateChange(): void {
         if (this.communicateByObject) {
-            const value = this._getOptionObjectByDisplayedValue(this.inputText);
-            if (this.displayFn(value) !== this.displayFn(this.getValue())) {
-                this.setValue(value);
+            const values = this._getOptionObjectByDisplayedValue(this.inputText);
+            // Do not set new value if theres multiple items that have same label.
+            if (values.length === 1 && this.displayFn(values[0]) !== this.displayFn(this.getValue())) {
+                this.setValue(values[0]);
             }
             this.onChange(this.getValue());
         } else {

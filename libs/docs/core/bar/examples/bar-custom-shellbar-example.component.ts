@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
 
@@ -12,7 +12,7 @@ import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
     templateUrl: './bar-custom-shellbar-example.component.html',
     styleUrls: ['./bar-custom-shellbar-example.component.scss'],
     standalone: true,
-    imports: [BarModule, ComboboxModule, ContentDensityDirective, FormsModule, ButtonModule, AvatarComponent]
+    imports: [BarModule, ComboboxComponent, ContentDensityDirective, FormsModule, ButtonModule, AvatarComponent]
 })
 export class BarCustomShellbarExampleComponent {
     searchTerm = '';

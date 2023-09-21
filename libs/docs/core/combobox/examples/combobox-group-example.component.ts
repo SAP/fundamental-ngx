@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { ComboboxModule, GroupFunction } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent, GroupFunction } from '@fundamental-ngx/core/combobox';
 
 export type ComboboxItem = { name: string; type: string };
 
@@ -9,7 +9,7 @@ export type ComboboxItem = { name: string; type: string };
     selector: 'fd-combobox-group-example',
     templateUrl: './combobox-group-example.component.html',
     standalone: true,
-    imports: [ComboboxModule, FormsModule]
+    imports: [ComboboxComponent, FormsModule]
 })
 export class ComboboxGroupExampleComponent {
     searchTerm = '';
