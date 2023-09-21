@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Inject, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
-import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_UKRAINIAN, FdLanguage } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_UKRAINIAN, FD_LOCALE, FdLanguage } from '@fundamental-ngx/i18n';
 import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,12 +15,17 @@ import { BehaviorSubject } from 'rxjs';
         {
             provide: FD_LANGUAGE,
             useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
+        },
+        {
+            provide: FD_LOCALE,
+            useFactory: () => new BehaviorSubject(inject(LOCALE_ID))
         }
     ],
     standalone: true,
     imports: [SegmentedButtonModule, FormsModule, ButtonModule, FormLabelComponent, PlatformTextAreaModule]
 })
 export class PlatformLanguageChangeExampleComponent {
+    fdLocale$ = inject(FD_LOCALE) as BehaviorSubject<string>;
     lang = 'en';
 
     constructor(@Inject(FD_LANGUAGE) private langSubject$: BehaviorSubject<FdLanguage>) {}
@@ -29,9 +34,11 @@ export class PlatformLanguageChangeExampleComponent {
         switch (lang) {
             case 'en':
                 this.langSubject$.next(FD_LANGUAGE_ENGLISH);
+                this.fdLocale$.next('en-US');
                 break;
             case 'ua':
                 this.langSubject$.next(FD_LANGUAGE_UKRAINIAN);
+                this.fdLocale$.next('uk-UA');
                 break;
             case 'custom': {
                 // modify all values of existing English dictionary
@@ -44,6 +51,7 @@ export class PlatformLanguageChangeExampleComponent {
                     })
                 ) as any;
                 this.langSubject$.next(custom);
+                this.fdLocale$.next('en-US');
                 break;
             }
         }
