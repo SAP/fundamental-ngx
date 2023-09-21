@@ -1,6 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { ChangeDetectorRef, DestroyRef, Pipe, PipeTransform } from '@angular/core';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, skip, switchMap } from 'rxjs';
+
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FdLanguageKeyArgs } from '../models/lang';
-import { resolveTranslationSignal } from '../utils';
+import { resolveTranslationObservable } from '../utils';
 
 @Pipe({
     name: 'fdTranslate',
@@ -9,11 +12,43 @@ import { resolveTranslationSignal } from '../utils';
 })
 export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
-    private resolveTranslationSignal = resolveTranslationSignal();
+    private readonly _translationResolver = resolveTranslationObservable();
+
+    /** @hidden */
+    private readonly _key$ = new BehaviorSubject<string | undefined>(undefined);
+
+    /** @hidden */
+    private readonly _args$ = new BehaviorSubject<FdLanguageKeyArgs | undefined>(undefined);
+
+    /** @hidden */
+    private _value: string | undefined;
+
+    /** @hidden */
+    constructor(private readonly _destroyRef: DestroyRef, private _cdr: ChangeDetectorRef) {
+        this._instantiateSubscription();
+    }
 
     /** Translate a key with arguments and, optionally, default value */
     transform(key: string, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
-        const translationSignal = this.resolveTranslationSignal(key, args);
-        return translationSignal() || defaultValue;
+        this._key$.next(key);
+        this._args$.next(args);
+
+        return this._value || defaultValue;
+    }
+
+    /** @hidden */
+    private _instantiateSubscription(): void {
+        combineLatest([
+            this._key$.pipe(skip(1), filter(Boolean), distinctUntilChanged()),
+            this._args$.pipe(skip(1), distinctUntilChanged())
+        ])
+            .pipe(
+                switchMap(([key, args]) => this._translationResolver(key, args)),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe((value) => {
+                this._value = value;
+                this._cdr.markForCheck();
+            });
     }
 }

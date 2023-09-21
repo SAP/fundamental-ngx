@@ -15,11 +15,11 @@ export class TranslationResolver {
         key: FdLanguageKey,
         args?: FdLanguageKeyArgs,
         locale?: Nullable<string>,
-        fallbackLanguage: Nullable<FdLanguage> = FD_LANGUAGE_ENGLISH
+        fallbackLanguage: FdLanguage = FD_LANGUAGE_ENGLISH
     ): string {
-        const resolvedValue = this.getRaw(lang, key, args);
+        const resolvedValue = this._resolveWithoutFallback(lang, key, args, locale);
         if (resolvedValue !== '') {
-            return this._interpolate(resolvedValue, args, locale);
+            return resolvedValue;
         }
         if (isDevMode() && fallbackLanguage) {
             console.warn(
@@ -27,7 +27,21 @@ export class TranslationResolver {
             );
         }
         // not a function, not a string, fall back to english, if possible
-        return fallbackLanguage ? this.resolve(fallbackLanguage, key, args, null) ?? '' : '';
+        return this._resolveWithoutFallback(fallbackLanguage, key, args, locale);
+    }
+
+    /** @hidden */
+    private _resolveWithoutFallback(
+        lang: FdLanguage,
+        key: FdLanguageKey,
+        args?: FdLanguageKeyArgs,
+        locale?: Nullable<string>
+    ): string {
+        const resolvedValue = this.getRaw(lang, key, args);
+        if (resolvedValue !== '') {
+            return this._interpolate(resolvedValue, args, locale);
+        }
+        return '';
     }
 
     /**
