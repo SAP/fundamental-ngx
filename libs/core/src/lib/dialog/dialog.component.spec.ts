@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogComponent } from './dialog.component';
-import { DialogService } from './dialog-service/dialog.service';
-import { DialogModule } from './dialog.module';
 import { Component, NgModule, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogRef } from './utils/dialog-ref.class';
-import { DialogConfig } from './utils/dialog-config.class';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Subject } from 'rxjs';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
+import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
+import { DialogComponent } from './dialog.component';
+import { provideDialogService } from './provide-dialog-service';
+import { DialogConfig } from './utils/dialog-config.class';
+import { DialogRef } from './utils/dialog-ref.class';
 
 @Component({
     template: `
@@ -21,16 +21,17 @@ import { Subject } from 'rxjs';
                 <button></button>
             </fd-dialog-footer>
         </fd-dialog>
-    `
+    `,
+    standalone: true,
+    providers: [provideDialogService()],
+    imports: [DialogComponent, DialogBodyComponent, DialogHeaderComponent, DialogFooterComponent]
 })
 class TemplateTestComponent {
     @ViewChild(DialogComponent) dialog: DialogComponent;
 }
 
 @NgModule({
-    declarations: [TemplateTestComponent],
-    imports: [CommonModule, BrowserModule, DialogModule, NoopAnimationsModule],
-    providers: [DialogService]
+    imports: [TemplateTestComponent, NoopAnimationsModule]
 })
 class TestModule {}
 

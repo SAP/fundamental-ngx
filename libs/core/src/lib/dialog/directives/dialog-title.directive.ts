@@ -9,7 +9,8 @@ let titleUniqueId = 1;
     selector: '[fd-dialog-title]',
     host: {
         '[attr.id]': 'id'
-    }
+    },
+    standalone: true
 })
 export class DialogTitleDirective implements AfterViewInit {
     /** Title ID attribute, generated automatically if not provided */

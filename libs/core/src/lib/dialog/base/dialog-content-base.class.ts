@@ -46,6 +46,9 @@ export class DialogContentBase {
     /** Close Button Callback */
     closeButtonCallback?: () => void;
 
+    /** Full screen Button Click callback */
+    fullScreenButtonCallback?: () => void;
+
     /** close button title */
     closeButtonTitle?: string;
 

@@ -16,12 +16,13 @@ import {
     TemplateRef,
     Type,
     ViewChild,
+    ViewEncapsulation,
     ViewRef
 } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder, DynamicComponentContainer, Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
+import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angular/cdk/portal';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogContentType } from '../dialog.types';
@@ -37,7 +38,10 @@ import { dialogFade } from '../utils/dialog.animations';
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
     styleUrls: ['./dialog-container.component.scss'],
     animations: [dialogFade],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PortalModule]
 })
 export class DialogContainerComponent
     extends DynamicComponentContainer<DialogContentType>

@@ -1,4 +1,12 @@
-import { AfterContentInit, ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectorRef,
+    ContentChildren,
+    Directive,
+    QueryList,
+    TemplateRef,
+    inject
+} from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -8,9 +16,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 @Directive()
 export abstract class DialogFooterBase implements AfterContentInit {
     /** @hidden */
-    footerTemplate: TemplateRef<any> | undefined;
-
-    /** @hidden */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
@@ -19,14 +24,14 @@ export abstract class DialogFooterBase implements AfterContentInit {
     buttons: QueryList<ButtonBarComponent>;
 
     /** @hidden */
+    footerTemplate: TemplateRef<any> | undefined;
+
+    /** @hidden */
+    private readonly _cdr = inject(ChangeDetectorRef);
+
+    /** @hidden */
     ngAfterContentInit(): void {
         this._assignCustomTemplates();
-    }
-
-    /** @hidden Assign custom templates */
-    private _assignCustomTemplates(): void {
-        const footerTemplate = this.customTemplates.find((template) => template.getName() === 'footer');
-        this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
     }
 
     /** @hidden */
@@ -43,5 +48,12 @@ export abstract class DialogFooterBase implements AfterContentInit {
                 addClassToButton(button._buttonComponent);
             })
         );
+    }
+
+    /** @hidden Assign custom templates */
+    private _assignCustomTemplates(): void {
+        const footerTemplate = this.customTemplates.find((template) => template.name === 'footer');
+        this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
+        this._cdr.detectChanges();
     }
 }
