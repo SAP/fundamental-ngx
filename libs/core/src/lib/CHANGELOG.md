@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.50...v0.46.0-rc.51) (2023-09-21)
+
+
+### Bug Fixes
+
+* **core:** do not set value if identical labels found ([#10570](https://github.com/SAP/fundamental-ngx/issues/10570)) ([dac5ced](https://github.com/SAP/fundamental-ngx/commit/dac5ced86b3a07e1c9075f482eceb9b1ee5be684))
+
+
+
+
+
 # [0.46.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.49...v0.46.0-rc.50) (2023-09-21)
 
 
