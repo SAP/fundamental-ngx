@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.52...v0.46.0-rc.53) (2023-09-22)
+
+
+### Features
+
+* **core:** complete standalone migration ([#10578](https://github.com/SAP/fundamental-ngx/issues/10578)) ([183de4d](https://github.com/SAP/fundamental-ngx/commit/183de4d0e07faeb6b08001ae9a35c73ec24b4412))
+
+
+### BREAKING CHANGES
+
+* **core:** - `DynamicComponentService` is now provided in root;
+- `ActionSheetMobileModule` has been removed. Instead use `ActionSheetMobileComponent`;
+- `MenuMobileModule` has been removed. Instead use `MenuMobileComponent`;
+- `MobileMultiComboboxModule` has been removed. Instead use `MobileMultiComboboxComponent`;
+- `TimelineNodeHeaderInfoComponent` has been removed in favor of `TimelineNodeHeaderDirective`;
+- `TimelineNodeHeaderComponent` has been removed in favor of `TimelineNodeHeaderDirective`;
+
+
+
+
+
 # [0.46.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.51...v0.46.0-rc.52) (2023-09-21)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
