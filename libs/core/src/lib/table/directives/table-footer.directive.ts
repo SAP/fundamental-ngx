@@ -1,7 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableFooter], [fd-table-footer]'
+    selector: '[fdTableFooter], [fd-table-footer]',
+    standalone: true
 })
 export class TableFooterDirective {
     /** @hidden */

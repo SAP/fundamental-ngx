@@ -1,4 +1,5 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -11,8 +12,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 type TileType = null | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
 type TileSize = null | 's';
@@ -22,7 +22,9 @@ type TileSize = null | 's';
     templateUrl: './tile.component.html',
     styleUrls: ['./tile.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class TileComponent implements CssClassBuilder, AfterViewInit, OnChanges {
     /** user's custom classes */

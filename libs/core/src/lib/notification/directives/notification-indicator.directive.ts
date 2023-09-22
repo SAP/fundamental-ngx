@@ -1,11 +1,11 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 export type IndicatorStates = 'success' | 'error' | 'warning' | 'information';
 
 @Directive({
-    selector: '[fdNotificationIndicator], [fd-notification-indicator]'
+    selector: '[fdNotificationIndicator], [fd-notification-indicator]',
+    standalone: true
 })
 export class NotificationIndicatorDirective implements OnChanges, OnInit, CssClassBuilder {
     /** Type of the indicator. Can be 'success' | 'error' | 'warning' | 'information' */

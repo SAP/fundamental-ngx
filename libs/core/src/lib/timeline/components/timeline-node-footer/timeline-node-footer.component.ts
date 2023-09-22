@@ -14,6 +14,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
                 margin-left: 0.5rem;
             }
         `
-    ]
+    ],
+    standalone: true
 })
 export class TimelineNodeFooterComponent {}

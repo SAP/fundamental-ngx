@@ -1,10 +1,14 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import {
+    MenuComponent,
+    MenuInteractiveDirective,
+    MenuItemComponent,
+    MenuTitleDirective
+} from '@fundamental-ngx/core/menu';
 import { SplitButtonComponent, splitButtonTextClass } from './split-button.component';
-import { MenuModule } from '@fundamental-ngx/core/menu';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { I18nModule } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-test-component',
@@ -23,7 +27,16 @@ import { I18nModule } from '@fundamental-ngx/i18n';
                 </li>
             </fd-menu>
         </fd-split-button>
-    `
+    `,
+    standalone: true,
+    imports: [
+        SplitButtonComponent,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveDirective,
+        MenuTitleDirective,
+        ContentDensityModule
+    ]
 })
 export class TestComponent {
     moreBtnTitle: string;
@@ -38,8 +51,7 @@ describe('SplitButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule, ButtonModule, I18nModule],
-            declarations: [SplitButtonComponent, TestComponent]
+            imports: [TestComponent]
         });
     }));
 

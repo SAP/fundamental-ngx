@@ -11,13 +11,13 @@ import {
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
 import { NestedListStateService } from '../nested-list-state.service';
 import { NestedItemInterface } from './nested-item.interface';
 import { NestedItemService } from './nested-item.service';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 let sideNavigationItemUniqueId = 0;
 
@@ -26,7 +26,8 @@ let sideNavigationItemUniqueId = 0;
     providers: [NestedItemService],
     host: {
         role: 'treeitem'
-    }
+    },
+    standalone: true
 })
 export class NestedItemDirective implements AfterContentInit, NestedItemInterface, OnDestroy {
     /** Whether item should be expanded */

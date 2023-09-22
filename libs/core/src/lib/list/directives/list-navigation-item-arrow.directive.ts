@@ -6,7 +6,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     host: {
         tabindex: '-1',
         role: 'presentation'
-    }
+    },
+    standalone: true
 })
 export class ListNavigationItemArrowDirective {
     /** @hidden */

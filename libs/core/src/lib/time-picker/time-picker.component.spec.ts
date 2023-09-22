@@ -1,18 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FormMessageComponent } from '@fundamental-ngx/core/form';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { TimeModule } from '@fundamental-ngx/core/time';
 import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { TimePickerComponent } from './time-picker.component';
-import { TimePickerModule } from './time-picker.module';
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;
@@ -20,17 +13,7 @@ describe('TimePickerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FormsModule,
-                PopoverModule,
-                InputGroupModule,
-                ButtonModule,
-                FdDatetimeModule,
-                TimeModule,
-                FormMessageComponent,
-                TimePickerModule
-            ],
-            declarations: [TimePickerComponent]
+            imports: [FdDatetimeModule, TimePickerComponent]
         }).compileComponents();
     }));
 
@@ -203,7 +186,9 @@ describe('TimePickerComponent', () => {
 });
 
 @Component({
-    template: ` <fd-time-picker></fd-time-picker>`
+    template: ` <fd-time-picker></fd-time-picker>`,
+    standalone: true,
+    imports: [FdDatetimeModule, TimePickerComponent]
 })
 class TimePickerHostComponent {
     @ViewChild(TimePickerComponent) picker: TimePickerComponent<FdDate>;
@@ -213,8 +198,7 @@ runValueAccessorTests<TimePickerComponent<FdDate>, TimePickerHostComponent>({
     component: TimePickerComponent,
     name: 'Time picker',
     testModuleMetadata: {
-        imports: [TimePickerModule, FdDatetimeModule],
-        declarations: [TimePickerHostComponent]
+        imports: [TimePickerHostComponent]
     },
     hostTemplate: {
         getTestingComponent: (fixture) => fixture.componentInstance.picker,

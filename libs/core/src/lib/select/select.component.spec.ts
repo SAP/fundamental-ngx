@@ -1,14 +1,15 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular/cdk/keycodes';
 import { ModifierKeys } from '@angular/cdk/testing';
+import { ChangeDetectionStrategy, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
-import { SelectComponent } from './select.component';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { SelectModule } from './select.module';
-import { SelectKeyManagerService } from './select-key-manager.service';
-import { OptionComponent } from './option/option.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { OptionComponent } from './option/option.component';
+import { SelectKeyManagerService } from './select-key-manager.service';
+import { SelectComponent } from './select.component';
+import { SelectModule } from './select.module';
 
 @Component({
     template: `
@@ -123,7 +124,7 @@ describe('SelectComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent, TestFilteringWrapperComponent, ValueCompareWithSelectComponent],
-            imports: [SelectModule, NoopAnimationsModule]
+            imports: [SelectModule, NoopAnimationsModule, ContentDensityModule]
         })
             .overrideComponent(SelectComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }

@@ -8,7 +8,9 @@ import { CardCounterDirective } from './card-counter.directive';
 import { CLASS_NAME } from './constants';
 
 @Component({
-    template: `<span fd-card-counter [status]="status">1 of 10</span>`
+    template: `<span fd-card-counter [status]="status">1 of 10</span>`,
+    standalone: true,
+    imports: [CardCounterDirective]
 })
 class TestComponent {
     status: ObjectStatus | null = null;
@@ -20,7 +22,7 @@ describe('CardCounterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, CardCounterDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

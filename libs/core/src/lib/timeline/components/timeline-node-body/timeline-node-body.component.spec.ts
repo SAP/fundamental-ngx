@@ -1,8 +1,9 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, Output } from '@angular/core';
 
-import { TimelineNodeBodyComponent } from './timeline-node-body.component';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
+import { TimelineNodeBodyComponent } from './timeline-node-body.component';
 
 describe('TimelineNodeBodyComponent', () => {
     let component: TimeLineNodeBodyTestComponent;
@@ -10,7 +11,7 @@ describe('TimelineNodeBodyComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TimelineNodeBodyComponent, MockedTextComponent, TimeLineNodeBodyTestComponent],
+            imports: [TimeLineNodeBodyTestComponent],
             providers: [
                 {
                     provide: TimelinePositionControlService,
@@ -19,7 +20,16 @@ describe('TimelineNodeBodyComponent', () => {
                     }
                 }
             ]
-        }).compileComponents();
+        })
+            .overrideComponent(TimelineNodeBodyComponent, {
+                remove: {
+                    imports: [TextComponent]
+                },
+                add: {
+                    imports: [MockedTextComponent]
+                }
+            })
+            .compileComponents();
     });
 
     beforeEach(() => {
@@ -56,7 +66,9 @@ describe('TimelineNodeBodyComponent', () => {
         <div style="width: 300px;">
             <fd-timeline-node-body [maxLines]="maxLines" [content]="content"></fd-timeline-node-body>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [TimelineNodeBodyComponent]
 })
 class TimeLineNodeBodyTestComponent {
     maxLines = 2;
@@ -72,8 +84,17 @@ class TimeLineNodeBodyTestComponent {
 
 @Component({
     selector: 'fd-text',
-    template: '<a class="fd-text__link--more" (click)="isCollapsedChange.emit(true)"></a>'
+    template: '<a class="fd-text__link--more" (click)="isCollapsedChange.emit(true)"></a>',
+    standalone: true
 })
 class MockedTextComponent {
+    @Input()
+    expandable: boolean;
+    @Input()
+    maxLines: number;
+    @Input()
+    text: string;
+    @Input()
+    isCollapsed: boolean;
     @Output() isCollapsedChange = new EventEmitter<boolean>();
 }

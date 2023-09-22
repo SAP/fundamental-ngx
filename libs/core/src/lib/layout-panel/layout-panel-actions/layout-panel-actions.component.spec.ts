@@ -8,7 +8,7 @@ describe('LayoutPanelActionsComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [LayoutPanelActionsComponent]
+            imports: [LayoutPanelActionsComponent]
         }).compileComponents();
     }));
 

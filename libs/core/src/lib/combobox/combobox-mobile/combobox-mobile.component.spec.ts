@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ComboboxMobileComponent } from './combobox-mobile.component';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { EventEmitter } from '@angular/core';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 import { RouterTestingModule } from '@angular/router/testing';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+import { ComboboxMobileComponent } from './combobox-mobile.component';
 
 describe('ComboboxMobileComponent', () => {
     let component: ComboboxMobileComponent;
@@ -41,8 +40,7 @@ describe('ComboboxMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule, RouterTestingModule],
-            declarations: [ComboboxMobileComponent],
+            imports: [ComboboxMobileComponent, NoopAnimationsModule, RouterTestingModule],
             providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent }]
         }).compileComponents();
     }));

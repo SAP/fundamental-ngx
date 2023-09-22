@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,8 +8,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
 
@@ -21,7 +21,9 @@ type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
         '[attr.aria-label]': 'ariaLabel'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [DecimalPipe]
 })
 export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder {
     /**

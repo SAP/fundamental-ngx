@@ -1,23 +1,25 @@
 import {
-    ComponentFactoryResolver,
-    Injectable,
     ApplicationRef,
-    Injector,
-    EmbeddedViewRef,
+    Compiler,
+    ComponentFactoryResolver,
     ComponentRef,
+    EmbeddedViewRef,
+    Injectable,
+    Injector,
+    NgModuleFactory,
     TemplateRef,
     Type,
-    Compiler,
-    NgModuleFactory,
     ViewContainerRef
 } from '@angular/core';
-import { DynamicComponentInjector } from './dynamic-component-injector';
 import { DynamicComponentConfig } from './dynamic-component-config';
+import { DynamicComponentInjector } from './dynamic-component-injector';
 
 /**
  * Service used to dynamically generate components like dialogs/alerts/notifications
  */
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class DynamicComponentService {
     /** @hidden */
     constructor(
@@ -81,6 +83,7 @@ export class DynamicComponentService {
     /** Function that destroys dynamic component */
     public destroyComponent(componentRef: ComponentRef<any>): void {
         this._applicationRef.detachView(componentRef.hostView);
+        componentRef.hostView.detach();
         componentRef.destroy();
     }
 
@@ -94,6 +97,12 @@ export class DynamicComponentService {
     /** @hidden */
     private _attachToContainer<V>(componentRef: ComponentRef<V>, config: DynamicComponentConfig): void {
         const configObj = Object.assign({}, config);
+        if (config.containerRef) {
+            componentRef.hostView.detach();
+            config.containerRef.insert(componentRef.hostView);
+            return;
+        }
+        this._applicationRef.attachView(componentRef.hostView);
         const componentEl = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         if (configObj.container !== 'body') {
             configObj.container?.appendChild(componentEl);
@@ -111,7 +120,7 @@ export class DynamicComponentService {
         const dynamicComponentInjector = new DynamicComponentInjector(injector || this._injector, dependenciesMap);
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(componentType);
         const componentRef = componentFactory.create(dynamicComponentInjector);
-        this._applicationRef.attachView(componentRef.hostView);
+        // this._applicationRef.attachView(componentRef.hostView);
         return componentRef;
     }
 

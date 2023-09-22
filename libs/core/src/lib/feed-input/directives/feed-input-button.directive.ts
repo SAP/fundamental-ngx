@@ -7,7 +7,8 @@ import { Directive, ElementRef, HostBinding, OnInit, Renderer2 } from '@angular/
     selector: '[fdFeedInputButton]',
     host: {
         class: 'fd-button fd-feed-input__submit-button is-cozy'
-    }
+    },
+    standalone: true
 })
 export class FeedInputButtonDirective implements OnInit {
     /** @hidden */

@@ -1,8 +1,9 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
-    selector: '[fdListIcon], [fd-list-icon]'
+    selector: '[fdListIcon], [fd-list-icon]',
+    standalone: true
 })
 export class ListIconDirective implements OnChanges, OnInit, CssClassBuilder {
     /** The icon name to display. See the icon page for the list of icons

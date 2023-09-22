@@ -10,8 +10,8 @@ import {
 
 import { KeyboardSupportService, Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 
 let actionSheetBodyUniqueIdCounter = 0;
 
@@ -33,7 +33,8 @@ let actionSheetBodyUniqueIdCounter = 0;
     templateUrl: './action-sheet-body.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true
 })
 export class ActionSheetBodyComponent {
     /** Id of the Action Sheet Body. */

@@ -493,7 +493,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
      * */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.getName()) {
+            switch (template.name) {
                 case '_optionItemTemplate':
                     this._optionItemTemplate = template.templateRef;
                     break;

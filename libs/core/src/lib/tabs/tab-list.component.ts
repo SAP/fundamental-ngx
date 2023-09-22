@@ -1,4 +1,6 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -21,8 +23,21 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import {
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
+import {
+    OverflowExpandDirective,
+    OverflowItemRefDirective,
+    OverflowLayoutComponent,
+    OverflowLayoutFocusableItemDirective,
+    OverflowLayoutItemDirective
+} from '@fundamental-ngx/core/overflow-layout';
+import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
@@ -32,6 +47,17 @@ import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabListComponentInterface } from './tab-list-component.interface';
 import { LIST_COMPONENT } from './tab-list.token';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
+import {
+    TabCountDirective,
+    TabCounterHeaderDirective,
+    TabHeaderDirective,
+    TabIconComponent,
+    TabLabelDirective,
+    TabProcessDirective,
+    TabProcessIconDirective,
+    TabSeparatorDirective,
+    TabTagDirective
+} from './tab-utils/tab-directives';
 import { TabInfo } from './tab-utils/tab-info.class';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
@@ -56,6 +82,40 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
             provide: LIST_COMPONENT,
             useExisting: forwardRef(() => TabListComponent)
         }
+    ],
+    standalone: true,
+    imports: [
+        OverflowLayoutComponent,
+        NgFor,
+        OverflowItemRefDirective,
+        TabItemDirective,
+        OverflowLayoutItemDirective,
+        TabLinkDirective,
+        OverflowLayoutFocusableItemDirective,
+        NgTemplateOutlet,
+        NgIf,
+        NgSwitch,
+        NgSwitchCase,
+        TabHeaderDirective,
+        TabCounterHeaderDirective,
+        TabLabelDirective,
+        TabIconComponent,
+        TabCountDirective,
+        TabProcessDirective,
+        NgSwitchDefault,
+        TabTagDirective,
+        TabProcessIconDirective,
+        TabSeparatorDirective,
+        OverflowExpandDirective,
+        TabItemExpandComponent,
+        MenuTriggerDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        ScrollSpyDirective,
+        CdkScrollable,
+        ScrollbarDirective,
+        MenuTitleDirective
     ]
 })
 export class TabListComponent implements TabListComponentInterface, AfterContentInit, AfterViewInit, OnDestroy {

@@ -2,6 +2,7 @@ import { Directive } from '@angular/core';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-grid-list-title-bar-additional-title-item]'
+    selector: '[fd-grid-list-title-bar-additional-title-item]',
+    standalone: true
 })
 export class GridListTitleBarAdditionalTitleItemDirective {}

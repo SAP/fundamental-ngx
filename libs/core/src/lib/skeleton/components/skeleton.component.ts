@@ -1,4 +1,5 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -18,7 +19,9 @@ let skeletonUniqueId = 0;
     templateUrl: './skeleton.component.html',
     styleUrls: ['./skeleton.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgFor]
 })
 export class SkeletonComponent implements OnChanges {
     /** Whether the skeleton is animated. True by default. */

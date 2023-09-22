@@ -20,15 +20,20 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { firstValueFrom, Observable, Subscription } from 'rxjs';
-import { NgModel } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
+import { Observable, Subscription, firstValueFrom } from 'rxjs';
 
 import { FocusKeyManagerItemDirective, FocusKeyManagerListDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { OnlyDigitsDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormControlComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -63,7 +68,23 @@ let paginationUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: true
+    preserveWhitespaces: true,
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        FocusKeyManagerListDirective,
+        ButtonComponent,
+        FocusKeyManagerItemDirective,
+        NgFor,
+        FormLabelComponent,
+        FormsModule,
+        FormControlComponent,
+        OnlyDigitsDirective,
+        SelectComponent,
+        OptionComponent,
+        FdTranslatePipe
+    ]
 })
 export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */

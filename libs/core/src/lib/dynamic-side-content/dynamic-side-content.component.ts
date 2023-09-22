@@ -1,30 +1,30 @@
 import {
-    Component,
-    OnInit,
-    OnChanges,
     AfterContentInit,
-    ElementRef,
-    ViewEncapsulation,
     ChangeDetectionStrategy,
-    Input,
-    HostBinding,
+    ChangeDetectorRef,
+    Component,
     ContentChildren,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit,
     QueryList,
-    ChangeDetectorRef
+    ViewEncapsulation
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import {
+    DYNAMIC_SIDE_CONTENT_CHILD_TOKEN,
     DYNAMIC_SIDE_CONTENT_CLASS_NAME,
     DynamicSideContentPosition,
-    DynamicSideContentSize,
-    DYNAMIC_SIDE_CONTENT_CHILD_TOKEN
+    DynamicSideContentSize
 } from './constants';
-import { getPositionClassName, getSizeClassName } from './utils';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { getPositionClassName, getSizeClassName } from './utils';
 
 let componentId = 0;
 
@@ -33,7 +33,9 @@ let componentId = 0;
     templateUrl: './dynamic-side-content.component.html',
     styleUrls: ['./dynamic-side-content.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, OnInit, AfterContentInit {
     /**

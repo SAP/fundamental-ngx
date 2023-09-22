@@ -1,13 +1,13 @@
 import {
     Directive,
+    ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
     Input,
-    Output,
     OnInit,
-    Renderer2,
-    ElementRef
+    Output,
+    Renderer2
 } from '@angular/core';
 
 /**
@@ -18,7 +18,8 @@ import {
     host: {
         '[class.fd-feed-input__textarea]': 'true',
         '[class.fd-textarea]': 'true'
-    }
+    },
+    standalone: true
 })
 export class FeedInputTextareaDirective implements OnInit {
     /** The maximum rows allowed to grow */

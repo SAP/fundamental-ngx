@@ -1,8 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { FD_LIST_MESSAGE_DIRECTIVE } from './tokens';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FD_LIST_MESSAGE_DIRECTIVE } from './tokens';
 
 @Directive({
     selector: '[fd-list-message], [fdListMessage]',
@@ -11,7 +10,8 @@ import { FormStates } from '@fundamental-ngx/cdk/forms';
             provide: FD_LIST_MESSAGE_DIRECTIVE,
             useExisting: ListMessageDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder {
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */

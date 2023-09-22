@@ -139,7 +139,6 @@ export class DatePickerComponent<D>
     @Input()
     set message(message: string) {
         this._message = message;
-        this._popoverFormMessage.message = message;
     }
 
     /** The trigger events that will open/close the message box.
@@ -228,7 +227,6 @@ export class DatePickerComponent<D>
     @Input()
     set state(state: Nullable<FormStates>) {
         this._state = state || 'default';
-        this._popoverFormMessage.messageType = state || 'default';
     }
 
     /** @hidden */
@@ -392,6 +390,10 @@ export class DatePickerComponent<D>
     /** @hidden */
     @ViewChild('calendarTemplate')
     private readonly _calendarTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('popoverMessageTemplate')
+    private readonly _messagePopoverTemplate: TemplateRef<any>;
 
     /** @hidden */
     _message: string | null = null;
@@ -953,9 +955,8 @@ export class DatePickerComponent<D>
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message || '';
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state;
+        this._popoverFormMessage.message = this._messagePopoverTemplate;
     }
 
     /** @hidden */

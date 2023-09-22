@@ -1,10 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { FormGroupComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { TitleModule } from '@fundamental-ngx/core/title';
 import { QuickViewGroupItemContentElementDirective } from './quick-view-group-item-content/quick-view-group-item-content-element.directive';
 import { QuickViewGroupItemContentComponent } from './quick-view-group-item-content/quick-view-group-item-content.component';
 import { QuickViewGroupItemLabelComponent } from './quick-view-group-item-label/quick-view-group-item-label.component';
@@ -19,15 +14,6 @@ import { QuickViewComponent } from './quick-view/quick-view.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        TitleModule,
-        BarModule,
-        FormGroupComponent,
-        FormItemComponent,
-        FormLabelComponent,
-        PopoverModule
-    ],
-    declarations: [
         QuickViewComponent,
         QuickViewTitleComponent,
         QuickViewSubheaderComponent,

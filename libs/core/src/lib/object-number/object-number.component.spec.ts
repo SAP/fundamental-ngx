@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ObjectNumberComponent } from './object-number.component';
 
@@ -12,7 +12,9 @@ import { ObjectNumberComponent } from './object-number.component';
         [large]="large"
         [status]="status"
         [class]="class"
-    ></fd-object-number>`
+    ></fd-object-number>`,
+    standalone: true,
+    imports: [ObjectNumberComponent]
 })
 class TestObjectNumberComponent {
     @ViewChild(ObjectNumberComponent, { static: true })
@@ -31,7 +33,7 @@ describe('ObjectNumberComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectNumberComponent, TestObjectNumberComponent]
+            imports: [TestObjectNumberComponent]
         }).compileComponents();
     }));
 

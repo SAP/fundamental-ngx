@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -17,17 +19,18 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { DialogBodyComponent, FD_DIALOG_BODY_COMPONENT } from '@fundamental-ngx/core/dialog';
-import { scrollTop } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { WizardStepComponent } from './wizard-step/wizard-step.component';
-import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
-import { WizardContentComponent } from './wizard-content/wizard-content.component';
-import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
-import { WIZARD } from './wizard-injection-token';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { Observable, Subscription } from 'rxjs';
+import { ACTIVE_STEP_STATUS, COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS } from './constants';
+import { WizardContentComponent } from './wizard-content/wizard-content.component';
+import { WIZARD } from './wizard-injection-token';
+import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
+import { WizardStepComponent } from './wizard-step/wizard-step.component';
+import { WizardService } from './wizard.service';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -60,6 +63,7 @@ export const handleTimeoutReference = (): void => {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
+        WizardService,
         {
             provide: WIZARD,
             useExisting: WizardComponent
@@ -67,7 +71,9 @@ export const handleTimeoutReference = (): void => {
     ],
     host: {
         role: 'region'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, ScrollSpyDirective, CdkScrollable, ScrollbarDirective, NgFor, NgTemplateOutlet]
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
     /**

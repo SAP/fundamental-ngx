@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DialogFooterComponent, DialogButtonClass } from './dialog-footer.component';
-import { Component, Type, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Type, ViewChild } from '@angular/core';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogButtonClass, DialogFooterComponent } from './dialog-footer.component';
 
 @Component({
     template: `
@@ -15,7 +15,9 @@ import { DialogConfig } from '../utils/dialog-config.class';
                 </div>
             </ng-template>
         </fd-dialog-footer>
-    `
+    `,
+    standalone: true,
+    imports: [DialogFooterComponent, TemplateDirective, BarModule]
 })
 class CustomFooterTestComponent {
     @ViewChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
@@ -26,7 +28,9 @@ class CustomFooterTestComponent {
         <fd-dialog-footer>
             <fd-button-bar label="Default button">Default button</fd-button-bar>
         </fd-dialog-footer>
-    `
+    `,
+    standalone: true,
+    imports: [DialogFooterComponent, BarModule]
 })
 class DefaultFooterTestComponent {
     @ViewChild(DialogFooterComponent) dialogFooterRef: DialogFooterComponent;
@@ -35,9 +39,12 @@ class DefaultFooterTestComponent {
 describe('DialogFooterComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DialogFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-            imports: [BarModule, TemplateModule],
+            imports: [CustomFooterTestComponent, DefaultFooterTestComponent],
             providers: [DialogConfig]
+        }).overrideComponent(DialogFooterComponent, {
+            set: {
+                changeDetection: ChangeDetectionStrategy.Default
+            }
         });
     }));
 

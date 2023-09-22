@@ -16,7 +16,8 @@ import { FD_OVERFLOW_ITEM } from '../tokens/overflow-item.token';
             provide: FD_OVERFLOW_ITEM,
             useExisting: OverflowLayoutItemDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
     /** Whether to force the visibility of the item. */

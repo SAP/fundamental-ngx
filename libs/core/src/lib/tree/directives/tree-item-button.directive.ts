@@ -4,6 +4,7 @@ import { Directive } from '@angular/core';
     selector: '[fdTreeItemButton]',
     host: {
         class: 'fd-tree__button'
-    }
+    },
+    standalone: true
 })
 export class TreeItemButtonDirective {}

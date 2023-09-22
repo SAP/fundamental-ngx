@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { PanelComponent } from './panel.component';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
 import { PanelTitleDirective } from './panel-title/panel-title.directive';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { PanelComponent } from './panel.component';
 
+/**
+ * @deprecated
+ * Use direct imports of PanelComponent, PanelContentDirective, PanelTitleDirective
+ */
 @NgModule({
-    declarations: [PanelComponent, PanelContentDirective, PanelTitleDirective],
-    imports: [CommonModule, ButtonModule, ContentDensityModule],
+    imports: [PanelComponent, PanelContentDirective, PanelTitleDirective, ContentDensityModule],
     exports: [PanelComponent, PanelContentDirective, PanelTitleDirective, ContentDensityModule]
 })
 export class PanelModule {}

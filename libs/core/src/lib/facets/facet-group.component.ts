@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
@@ -12,7 +12,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
         '[class.fd-facet-group]': 'true',
         '[attr.aria-label]': 'ariaLabel',
         role: 'group'
-    }
+    },
+    standalone: true
 })
 export class FacetGroupComponent {
     /**

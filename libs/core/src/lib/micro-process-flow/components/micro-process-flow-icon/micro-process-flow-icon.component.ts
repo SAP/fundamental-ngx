@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { IconFont } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-micro-process-flow-icon',
@@ -9,7 +9,9 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-micro-process-flow__icon-container'
-    }
+    },
+    standalone: true,
+    imports: [IconComponent]
 })
 export class MicroProcessFlowIconComponent {
     /** The icon name to display. See the icon page for the list of icons

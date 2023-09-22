@@ -65,11 +65,15 @@
     </fd-input-group>
 </ng-template>
 
+<ng-template #formMessageTemplate>
+    <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
+        {{ _message }}
+    </fd-form-message>
+</ng-template>
+
 <ng-template #pickerTemplate>
     <div class="fd-datetime__wrapper">
-        <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
-            {{ _message }}
-        </fd-form-message>
+        <ng-template [ngTemplateOutlet]="formMessageTemplate"></ng-template>
         <div
             class="fd-datetime__display-type-switcher"
             [class.fd-datetime__display-type-switcher--desktop]="!mobile || (mobile && mobileLandscape)"

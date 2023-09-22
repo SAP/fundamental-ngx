@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
@@ -49,7 +49,7 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
         SelectModule,
         InitialFocusDirective,
         NgFor,
-        ComboboxModule,
+        ComboboxComponent,
         DatePickerComponent,
         FormsModule,
         FormItemComponent,

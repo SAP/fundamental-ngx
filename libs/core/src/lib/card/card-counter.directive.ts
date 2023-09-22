@@ -1,14 +1,14 @@
-import { Directive, OnInit, ElementRef, Input, OnChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatus, buildObjectStatusCssClasses } from '@fundamental-ngx/core/object-status';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { CLASS_NAME } from './constants';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-card-counter]'
+    selector: '[fd-card-counter]',
+    standalone: true
 })
 export class CardCounterDirective implements OnInit, OnChanges, CssClassBuilder {
     /**

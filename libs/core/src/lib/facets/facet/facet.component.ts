@@ -1,14 +1,17 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
-    Component,
-    ChangeDetectionStrategy,
-    ViewEncapsulation,
-    Input,
-    ElementRef,
-    Renderer2,
     AfterViewInit,
-    HostBinding
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    Renderer2,
+    ViewEncapsulation
 } from '@angular/core';
-import { FacetType, FACET_CLASS_NAME } from '../constants';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FACET_CLASS_NAME, FacetType } from '../constants';
 import { addClassNameToFacetElement } from '../utils';
 
 let randomId = 0;
@@ -22,7 +25,9 @@ let randomTitleId = 0;
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.fd-facet]': 'true'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, TitleComponent, FormLabelComponent]
 })
 export class FacetComponent implements AfterViewInit {
     /** the type of Facet: form, key-value, image, rating-indicator */

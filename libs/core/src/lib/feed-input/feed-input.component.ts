@@ -1,23 +1,24 @@
 import {
+    AfterContentInit,
     ChangeDetectionStrategy,
     Component,
     ContentChild,
     Input,
+    OnDestroy,
     ViewEncapsulation,
-    AfterContentInit,
-    forwardRef,
-    OnDestroy
+    forwardRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
 import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
+import { FeedInputTextareaDirective } from './directives/feed-input-textarea.directive';
 
 @Component({
     selector: 'fd-feed-input',
     templateUrl: './feed-input.component.html',
     styleUrls: ['./feed-input.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class FeedInputComponent implements AfterContentInit, OnDestroy {
     /** Component disable state */

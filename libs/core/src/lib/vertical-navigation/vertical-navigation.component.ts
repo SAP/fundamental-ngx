@@ -1,3 +1,4 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -9,16 +10,18 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { delay, map, merge, startWith, Subject, takeUntil } from 'rxjs';
-import { ListNavigationItemComponent } from '@fundamental-ngx/core/list';
+import { ListComponent, ListNavigationItemComponent } from '@fundamental-ngx/core/list';
+import { Subject, delay, map, merge, startWith, takeUntil } from 'rxjs';
+import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
 
 @Component({
     selector: 'fd-vertical-navigation',
     templateUrl: './vertical-navigation.component.html',
     styleUrls: ['./vertical-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [VerticalNavigationMainNavigationComponent, ListComponent]
 })
 export class VerticalNavigationComponent implements AfterContentInit, OnDestroy {
     /** Whether or not this component is to be shown in 'condensed' mode. */

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -10,6 +10,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-illustrated-message__figcaption'
-    }
+    },
+    standalone: true
 })
 export class IllustratedMessageFigcaptionComponent {}

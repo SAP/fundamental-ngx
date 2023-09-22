@@ -1,3 +1,5 @@
+import { FocusableOption } from '@angular/cdk/a11y';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -12,9 +14,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusableOption } from '@angular/cdk/a11y';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
 
 export type ResizeDirection = 'vertical' | 'horizontal' | 'both';
@@ -46,7 +46,9 @@ let cardUniqueId = 0;
     templateUrl: 'resizable-card-item.component.html',
     styleUrls: ['./resizable-card-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class ResizableCardItemComponent implements FocusableOption, OnDestroy {
     /** Card properties from the config */

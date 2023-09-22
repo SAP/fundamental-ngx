@@ -2,6 +2,17 @@
     <fd-dialog-header>
         <h1 fd-title [id]="_defaultDialogContent?.titleId">{{ _defaultDialogContent?.title }}</h1>
         <button
+            fd-dialog-full-screen-toggler-button
+            *ngIf="_defaultDialogContent?.allowFullScreen"
+            #fullScreenTogglerButton
+            [title]="
+                (fullScreenTogglerButton._fullscreen
+                    ? _defaultDialogContent?.fullScreenMinifyButtonText
+                    : _defaultDialogContent?.fullScreenExpandButtonText) || ''
+            "
+            (click)="_fullScreenButtonClicked()"
+        ></button>
+        <button
             fd-dialog-close-button
             *ngIf="_defaultDialogContent?.closeButtonCallback"
             [title]="_defaultDialogContent?.closeButtonTitle || ''"

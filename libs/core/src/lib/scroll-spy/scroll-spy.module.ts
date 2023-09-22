@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 
 import { ScrollSpyDirective } from './scroll-spy.directive';
 
+/**
+ * @deprecated
+ * Use direct `ScrollSpyDirective` import.
+ */
 @NgModule({
-    declarations: [ScrollSpyDirective],
+    imports: [ScrollSpyDirective],
     exports: [ScrollSpyDirective]
 })
 export class ScrollSpyModule {}

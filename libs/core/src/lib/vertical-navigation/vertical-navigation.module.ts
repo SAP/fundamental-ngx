@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { VerticalNavigationComponent } from './vertical-navigation.component';
-import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
-import { ListModule } from '@fundamental-ngx/core/list';
 import { VerticalNavigationGroupHeaderDirective } from './vertical-navigation-group-header.directive';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
+import { VerticalNavigationComponent } from './vertical-navigation.component';
 
+const components = [
+    VerticalNavigationComponent,
+    VerticalNavigationMainNavigationComponent,
+    VerticalNavigationGroupHeaderDirective
+];
+
+/**
+ * @deprecated
+ * Use direct imports of `VerticalNavigationComponent`, `VerticalNavigationMainNavigationComponent`, `VerticalNavigationGroupHeaderDirective`
+ */
 @NgModule({
-    declarations: [
-        VerticalNavigationComponent,
-        VerticalNavigationMainNavigationComponent,
-        VerticalNavigationGroupHeaderDirective
-    ],
-    imports: [CommonModule, ListModule, I18nModule],
-    exports: [
-        VerticalNavigationComponent,
-        VerticalNavigationMainNavigationComponent,
-        VerticalNavigationGroupHeaderDirective
-    ]
+    imports: [...components],
+    exports: [...components]
 })
 export class VerticalNavigationModule {}

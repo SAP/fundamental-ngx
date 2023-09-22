@@ -6,7 +6,8 @@ import { Directive, Input } from '@angular/core';
         class: 'fd-list__byline',
         '[class.fd-list__byline--2-col]': 'twoCol',
         '[class.fd-list__byline--wrap]': 'wrap'
-    }
+    },
+    standalone: true
 })
 export class ListBylineDirective {
     /** Whether or not this is a 2-column byline. */

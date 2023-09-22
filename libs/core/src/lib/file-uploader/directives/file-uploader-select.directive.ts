@@ -1,11 +1,11 @@
-import { Directive, Input, Output, EventEmitter } from '@angular/core';
-import { HostListener, HostBinding } from '@angular/core';
+import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 
 /**
  * Directive tool to facilitate interacting with a native file input element.
  */
 @Directive({
-    selector: '[fdFileSelect]'
+    selector: '[fdFileSelect]',
+    standalone: true
 })
 export class FileUploaderSelectDirective {
     /** Whether the input should accept multiple file selections. */

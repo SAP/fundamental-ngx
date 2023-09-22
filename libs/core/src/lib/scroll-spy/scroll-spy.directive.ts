@@ -4,7 +4,8 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
  * A directive designed to help navigation elements determine the element currently in view of the user.
  */
 @Directive({
-    selector: '[fdScrollSpy]'
+    selector: '[fdScrollSpy]',
+    standalone: true
 })
 export class ScrollSpyDirective {
     /**

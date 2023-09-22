@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
@@ -9,7 +9,7 @@ import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/for
     templateUrl: './combobox-example.component.html',
     styleUrls: ['combobox-example.component.scss'],
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, ComboboxModule, FormsModule, ContentDensityDirective]
+    imports: [FormItemComponent, FormLabelComponent, ComboboxComponent, FormsModule, ContentDensityDirective]
 })
 export class ComboboxExampleComponent {
     searchTermOne = '';

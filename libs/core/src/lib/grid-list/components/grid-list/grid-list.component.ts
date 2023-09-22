@@ -32,7 +32,8 @@ let gridListUniqueId = 0;
     styleUrls: ['./grid-list.component.scss', '../../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: GridList, useExisting: GridListComponent }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class GridListComponent<T> extends GridList<T> implements OnChanges, AfterContentInit, OnDestroy {
     /** id for the Element */

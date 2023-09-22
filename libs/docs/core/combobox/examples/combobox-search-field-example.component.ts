@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-combobox-search-field-example',
     templateUrl: './combobox-search-field-example.component.html',
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, ComboboxModule, FormsModule]
+    imports: [FormItemComponent, FormLabelComponent, ComboboxComponent, FormsModule]
 })
 export class ComboboxSearchFieldExampleComponent {
     searchTerm = '';

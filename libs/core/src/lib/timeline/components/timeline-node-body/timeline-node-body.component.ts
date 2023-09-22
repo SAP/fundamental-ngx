@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, NgZone, ViewEncapsulation } from '@angular/core';
-import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
+import { TextComponent } from '@fundamental-ngx/core/text';
 import { first } from 'rxjs/operators';
+import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
 @Component({
     selector: 'fd-timeline-node-body',
@@ -9,7 +10,9 @@ import { first } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-timeline__post-content'
-    }
+    },
+    standalone: true,
+    imports: [TextComponent]
 })
 export class TimelineNodeBodyComponent {
     /** Text content of timeline node*/

@@ -11,7 +11,7 @@ import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Vi
  */
 @Component({
     selector: 'fd-popover-control, [fdPopoverControl]',
-    templateUrl: './popover-control.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

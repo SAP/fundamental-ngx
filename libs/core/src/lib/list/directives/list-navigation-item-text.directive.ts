@@ -1,7 +1,8 @@
 import { Directive, ElementRef, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fd-list-navigation-item-text], [fdListNavigaitonItemText]'
+    selector: '[fd-list-navigation-item-text], [fdListNavigaitonItemText]',
+    standalone: true
 })
 export class ListNavigationItemTextDirective {
     /** @hidden */

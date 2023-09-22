@@ -1,12 +1,12 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Applies a thumb styles
  */
 @Directive({
-    selector: '[fdFeedInputAvatar]'
+    selector: '[fdFeedInputAvatar]',
+    standalone: true
 })
 export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */

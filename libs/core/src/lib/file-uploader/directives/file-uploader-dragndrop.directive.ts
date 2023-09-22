@@ -1,11 +1,12 @@
 import { Directive, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { FileUploaderService, FileUploadOutput } from '../file-uploader.service';
+import { FileUploadOutput, FileUploaderService } from '../file-uploader.service';
 
 /**
  * Directive that handles the drag and drop feature of the file input.
  */
 @Directive({
-    selector: '[fdFileDragnDrop], [fd-file-drag-n-drop]'
+    selector: '[fdFileDragnDrop], [fd-file-drag-n-drop]',
+    standalone: true
 })
 export class FileUploaderDragndropDirective {
     /** Whether multiple files can be dropped at once. */

@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 
 type OpenChangeHandle = (isOpen: boolean) => void;
@@ -5,7 +6,9 @@ type OpenChangeHandle = (isOpen: boolean) => void;
 @Component({
     selector: 'fd-action-sheet-mobile',
     templateUrl: './action-sheet-mobile.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class ActionSheetMobileComponent {
     /** Whenever links should be visible */

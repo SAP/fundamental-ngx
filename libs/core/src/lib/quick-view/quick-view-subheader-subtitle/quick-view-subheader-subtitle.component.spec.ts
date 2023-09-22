@@ -8,7 +8,7 @@ describe('QuickViewSubheaderSubtitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [QuickViewSubheaderSubtitleComponent]
+            imports: [QuickViewSubheaderSubtitleComponent]
         }).compileComponents();
     }));
 

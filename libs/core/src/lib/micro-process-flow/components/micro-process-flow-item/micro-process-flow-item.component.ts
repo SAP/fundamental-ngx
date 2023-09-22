@@ -1,11 +1,12 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
-    Component,
-    ViewEncapsulation,
-    Input,
-    ElementRef,
     ChangeDetectorRef,
-    ContentChild
+    Component,
+    ContentChild,
+    ElementRef,
+    Input,
+    ViewEncapsulation
 } from '@angular/core';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemType } from '../../types';
@@ -21,7 +22,9 @@ import { MicroProcessFlowItemType } from '../../types';
         '[class.fd-micro-process-flow__item--critical]': 'state === "critical"',
         '[class.fd-micro-process-flow__item--negative]': 'state === "negative"',
         '[class.fd-micro-process-flow__item--information]': 'state === "information"'
-    }
+    },
+    standalone: true,
+    imports: [NgIf]
 })
 export class MicroProcessFlowItemComponent {
     /** Item state */

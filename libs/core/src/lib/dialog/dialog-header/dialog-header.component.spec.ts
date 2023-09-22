@@ -1,10 +1,13 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DialogHeaderComponent } from './dialog-header.component';
-import { Component, Type, ViewChild } from '@angular/core';
-import { DialogConfig } from '../utils/dialog-config.class';
-import { TemplateModule } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, Type, ViewChild } from '@angular/core';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
+import { DialogConfig } from '../utils/dialog-config.class';
+import { DialogHeaderComponent } from './dialog-header.component';
 
 @Component({
     template: `
@@ -24,7 +27,9 @@ import { BarModule } from '@fundamental-ngx/core/bar';
                 </div>
             </ng-template>
         </fd-dialog-header>
-    `
+    `,
+    standalone: true,
+    imports: [DialogHeaderComponent, TemplateDirective, BarModule]
 })
 class CustomHeaderTestComponent {
     @ViewChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
@@ -36,7 +41,9 @@ class CustomHeaderTestComponent {
             <h1 fd-title>Default Title</h1>
             <button fd-dialog-close-button></button>
         </fd-dialog-header>
-    `
+    `,
+    standalone: true,
+    imports: [DialogHeaderComponent, DialogCloseButtonComponent, TitleComponent]
 })
 class DefaultHeaderTestComponent {
     @ViewChild(DialogHeaderComponent) dialogHeaderRef: DialogHeaderComponent;
@@ -45,9 +52,18 @@ class DefaultHeaderTestComponent {
 describe('DialogHeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [DialogHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
-            imports: [BarModule, TemplateModule],
+            declarations: [],
+            imports: [
+                DialogHeaderComponent,
+                CustomHeaderTestComponent,
+                DefaultHeaderTestComponent,
+                ContentDensityModule
+            ],
             providers: [DialogConfig]
+        }).overrideComponent(DialogHeaderComponent, {
+            set: {
+                changeDetection: ChangeDetectionStrategy.Default
+            }
         });
     }));
 

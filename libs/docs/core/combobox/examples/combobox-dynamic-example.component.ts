@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 @Component({
     selector: 'fd-combobox-dynamic-example',
     templateUrl: './combobox-dynamic-example.component.html',
     standalone: true,
-    imports: [ComboboxModule]
+    imports: [ComboboxComponent]
 })
 export class ComboboxDynamicExampleComponent {
     selectedIndex: number;

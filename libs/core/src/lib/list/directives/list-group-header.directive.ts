@@ -8,7 +8,8 @@ let uniqueId = 0;
         '[style.outline]': '"none"',
         '[class.fd-list__item]': 'true',
         '[class.fd-list__group-header]': 'true'
-    }
+    },
+    standalone: true
 })
 export class ListGroupHeaderDirective {
     /** id of an element to be applied */
