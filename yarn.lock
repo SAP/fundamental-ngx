@@ -2225,12 +2225,12 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fundamental-styles/common-css@0.29.4":
-  version "0.29.4"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/common-css/-/common-css-0.29.4.tgz#aa4801e339faaf310c39ca344772a082fccaaa11"
-  integrity sha512-0AmD517f7T1KDTmBHDtqpkl2bP7blBjiVd9T052zgx4RgXcCg9kyePfUzavt/U0vp50sUdskt6lj0ivIAr+hPQ==
+"@fundamental-styles/common-css@0.30.1":
+  version "0.30.1"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/common-css/-/common-css-0.30.1.tgz#9f3b3b1703626977c543baadbdbe7f44d4996f77"
+  integrity sha512-1NCtjcUGzB/DTEitIJnG27aB0ypcUmnipvHfdAgS82ty37IIf/hjRwqGWjBhnBNoay4fqWxZ2AUVxswkx+tklQ==
   dependencies:
-    "@sap-theming/theming-base-content" "^11.4.0"
+    "@sap-theming/theming-base-content" "^11.6.0"
 
 "@fundamental-styles/cx@0.30.0-rc.35":
   version "0.30.0-rc.35"
@@ -3242,10 +3242,10 @@
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
   integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
 
-"@sap-theming/theming-base-content@^11.4.0":
-  version "11.6.3"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.3.tgz#c378e7f2d0f1e94a1e237927d5ec503a682cfeb2"
-  integrity sha512-5ItFsrHFzzbg4iGCigsDS2Pv6WHV7lFDp17jVt0V6/OLaYQJ/30A0NK5bgtk2cQlcAo4HBAGcBkPmATIfPUWlg==
+"@sap-theming/theming-base-content@^11.6.0":
+  version "11.6.8"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
+  integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
 
 "@schematics/angular@16.1.0":
   version "16.1.0"
