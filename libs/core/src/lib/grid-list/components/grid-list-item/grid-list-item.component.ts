@@ -20,11 +20,20 @@ import { Subscription } from 'rxjs';
 import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { GridListItemBodyDirective } from '../../directives/grid-list-item-body.directive';
 import { parseLayoutPattern } from '../../helpers/parse-layout-pattern';
 import { GridListSelectionActions, GridListSelectionMode } from '../../models/grid-list-selection.models';
 import { GridListItemFooterBarComponent } from '../grid-list-item-footer-bar/grid-list-item-footer-bar.component';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
+import { GridListTitleBarSpacerComponent } from '../grid-list-title-bar-spacer/grid-list-title-bar-spacer.component';
 import { GridList } from '../grid-list/grid-list-base.component';
 
 let gridListItemUniqueId = 0;
@@ -43,7 +52,20 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
     templateUrl: './grid-list-item.component.html',
     styleUrls: ['./grid-list-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        GridListTitleBarSpacerComponent,
+        ButtonComponent,
+        ContentDensityDirective,
+        IconComponent,
+        TitleComponent,
+        FormsModule,
+        ObjectStatusComponent,
+        FdTranslatePipe
+    ]
 })
 export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
     /** id for the Element */

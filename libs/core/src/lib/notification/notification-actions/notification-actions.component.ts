@@ -12,7 +12,8 @@ import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/butt
     selector: 'fd-notification-actions',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class NotificationActionsComponent {
     /** @hidden */

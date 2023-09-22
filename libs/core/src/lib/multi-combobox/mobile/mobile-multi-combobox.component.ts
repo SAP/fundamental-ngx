@@ -1,13 +1,20 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, ElementRef, Inject, OnDestroy, OnInit, Optional, TemplateRef, ViewChild } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { takeUntil } from 'rxjs/operators';
 import { MobileMultiComboboxInterface } from '../models/multi-combobox.interface';
 import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
@@ -15,7 +22,23 @@ import { MULTI_COMBOBOX_COMPONENT } from '../multi-combobox.token';
 @Component({
     selector: 'fd-mobile-multi-combobox',
     templateUrl: './mobile-multi-combobox.component.html',
-    styleUrls: ['./mobile-multi-combobox.component.scss']
+    styleUrls: ['./mobile-multi-combobox.component.scss'],
+    standalone: true,
+    imports: [
+        DialogModule,
+        NgIf,
+        TitleComponent,
+        TemplateDirective,
+        BarMiddleDirective,
+        BarElementDirective,
+        NgTemplateOutlet,
+        ButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        ButtonBarComponent,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class MobileMultiComboboxComponent
     extends MobileModeBase<MobileMultiComboboxInterface>

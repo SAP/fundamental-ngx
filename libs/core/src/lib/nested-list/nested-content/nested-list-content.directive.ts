@@ -12,17 +12,18 @@ import {
     Output,
     Renderer2
 } from '@angular/core';
-import { NestedLinkDirective } from '../nested-link/nested-link.directive';
-import { NestedListExpandIconComponent } from '../nested-list-directives';
-import { NestedItemService } from '../nested-item/nested-item.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NestedItemService } from '../nested-item/nested-item.service';
+import { NestedLinkDirective } from '../nested-link/nested-link.directive';
+import { NestedListExpandIconComponent } from '../nested-list-directives';
 
 @Directive({
     selector: '[fdNestedListContent], [fd-nested-list-content]',
     host: {
         tabindex: '0'
-    }
+    },
+    standalone: true
 })
 export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     /** Whether this element is selected*/

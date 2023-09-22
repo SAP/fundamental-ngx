@@ -1,3 +1,4 @@
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,30 +9,37 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
-    inject,
     Input,
     OnDestroy,
     OnInit,
     Output,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { DataSource, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import {
+    ClickedBehaviorModule,
     FDK_SELECTABLE_ITEM_PROVIDER,
     Nullable,
     SelectableItemDirective,
     SelectableItemToken,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
-import { distinctUntilChanged, filter, startWith, Subject, switchMap } from 'rxjs';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject, distinctUntilChanged, filter, startWith, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource } from '../../data-source/tree-data-source';
+import { TreeItemDirective } from '../../directives/tree-item.directive';
+import { BaseTreeItem } from '../../models/base-tree-item.class';
 import { TreeItem, TreeItemState } from '../../models/tree-item';
 import { SelectionModeModel, TreeService } from '../../tree.service';
-import { BaseTreeItem } from '../../models/base-tree-item.class';
-import { TreeItemDirective } from '../../directives/tree-item.directive';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-tree-item',
@@ -52,6 +60,20 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             provide: BaseTreeItem,
             useExisting: TreeItemComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        SelectableItemDirective,
+        NgClass,
+        ClickedBehaviorModule,
+        NgIf,
+        NgTemplateOutlet,
+        IconComponent,
+        SkeletonComponent,
+        CheckboxComponent,
+        FormsModule,
+        RadioButtonComponent,
+        FdTranslatePipe
     ]
 })
 export class TreeItemComponent<T extends TreeItem = TreeItem, P = any>

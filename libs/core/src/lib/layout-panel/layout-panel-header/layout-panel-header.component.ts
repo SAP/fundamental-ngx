@@ -17,7 +17,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     selector: 'fd-layout-panel-header',
     templateUrl: './layout-panel-header.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class LayoutPanelHeaderComponent {
     /** @hidden */

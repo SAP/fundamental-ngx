@@ -1,9 +1,10 @@
 import { Inject, Optional, Pipe, PipeTransform } from '@angular/core';
-import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
 import { DatetimeAdapter } from './datetime-adapter';
+import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
 
 @Pipe({
-    name: 'dateFormat'
+    name: 'dateFormat',
+    standalone: true
 })
 export class DateFormatPipe<D> implements PipeTransform {
     /** @hidden */
@@ -23,7 +24,8 @@ export class DateFormatPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dateTimeFormat'
+    name: 'dateTimeFormat',
+    standalone: true
 })
 export class DateTimeFormatPipe<D> implements PipeTransform {
     /** @hidden */
@@ -43,7 +45,8 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dateFromNow'
+    name: 'dateFromNow',
+    standalone: true
 })
 export class DateFromNowPipe<D> implements PipeTransform {
     /** @hidden */

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { IllustratedMessageComponent, IllustratedMessageType } from './illustrated-message.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { IllustratedMessageComponent, IllustratedMessageType } from './illustrated-message.component';
 
 @Component({
     template: `
@@ -14,7 +14,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
                 </p>
             </figcaption>
         </figure>
-    `
+    `,
+    standalone: true,
+    imports: [IllustratedMessageComponent]
 })
 class TestIllustratedMessageComponent {
     @ViewChild(IllustratedMessageComponent, { static: true, read: ElementRef })
@@ -30,7 +32,7 @@ describe('IllustratedMessageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [IllustratedMessageComponent, TestIllustratedMessageComponent]
+            imports: [TestIllustratedMessageComponent]
         }).compileComponents();
     }));
 

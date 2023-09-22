@@ -11,7 +11,8 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
 @Component({
     selector: 'fd-message-box-semantic-icon',
     template: `<i [class]="'sap-icon--' + _getIcon" role="presentation"></i>`,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class MessageBoxSemanticIconComponent {
     /** Custom semantic icon */

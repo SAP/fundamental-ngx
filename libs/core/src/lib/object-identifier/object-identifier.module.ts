@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ObjectIdentifierComponent } from './object-identifier.component';
 
+/**
+ * @deprecated
+ * Use direct import of `ObjectIdentifierComponent`.
+ */
 @NgModule({
-    declarations: [ObjectIdentifierComponent],
-    imports: [CommonModule],
+    imports: [ObjectIdentifierComponent],
     exports: [ObjectIdentifierComponent]
 })
 export class ObjectIdentifierModule {}

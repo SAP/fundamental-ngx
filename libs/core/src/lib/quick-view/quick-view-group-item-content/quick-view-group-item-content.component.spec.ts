@@ -8,7 +8,7 @@ describe('QuickViewGroupItemContentComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [QuickViewGroupItemContentComponent]
+            imports: [QuickViewGroupItemContentComponent]
         }).compileComponents();
     }));
 

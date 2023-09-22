@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -5,8 +6,8 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
-    Inject,
     HostBinding,
+    Inject,
     Input,
     NgZone,
     OnChanges,
@@ -15,12 +16,12 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { TabTitleDirective } from '../tab-utils/tab-directives';
-import { TabItemState } from '../tab-item/tab-item.directive';
-import { first, Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { LIST_COMPONENT } from '../tab-list.token';
+import { Subject, first } from 'rxjs';
+import { TabItemState } from '../tab-item/tab-item.directive';
 import { TabListComponentInterface } from '../tab-list-component.interface';
+import { LIST_COMPONENT } from '../tab-list.token';
+import { TabTitleDirective } from '../tab-utils/tab-directives';
 
 let tabPanelUniqueId = 0;
 
@@ -46,7 +47,9 @@ export class TabPanelStateChange {
         '[attr.aria-labelledby]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class TabPanelComponent implements OnChanges {
     /** Id of the tab. If none is provided, one will be generated. */

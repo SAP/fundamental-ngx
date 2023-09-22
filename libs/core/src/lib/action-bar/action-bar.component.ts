@@ -25,7 +25,8 @@ import { warnOnce } from '@fundamental-ngx/core/utils';
     },
     styleUrls: ['./action-bar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class ActionBarComponent {
     /** @hidden */

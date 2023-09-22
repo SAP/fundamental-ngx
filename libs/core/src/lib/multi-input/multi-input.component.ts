@@ -58,7 +58,6 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
 function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is _OptionItem<ItemType, ValueType> {
@@ -873,15 +872,16 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             {
                 listTemplate: this.listTemplate,
                 controlTemplate: this.controlTemplate
             },
-            MultiInputMobileModule,
             MultiInputMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 

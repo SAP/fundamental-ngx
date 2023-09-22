@@ -1,13 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 import { CLASS_NAME } from '../constants';
 
 @Component({
     selector: 'fd-card-kpi-header',
     templateUrl: './card-kpi-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class CardKpiHeaderComponent implements OnInit, CssClassBuilder {
     /** @hidden */

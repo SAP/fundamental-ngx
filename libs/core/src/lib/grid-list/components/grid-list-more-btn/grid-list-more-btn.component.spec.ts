@@ -8,7 +8,7 @@ describe('GridListMoreBtnComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GridListMoreBtnComponent]
+            imports: [GridListMoreBtnComponent]
         }).compileComponents();
     });
 

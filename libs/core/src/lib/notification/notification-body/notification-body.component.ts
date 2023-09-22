@@ -5,7 +5,8 @@ import { NotificationGroupBaseDirective } from '../notification-utils/notificati
     selector: 'fd-notification-body',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class NotificationBodyComponent extends NotificationGroupBaseDirective {
     /** @hidden */

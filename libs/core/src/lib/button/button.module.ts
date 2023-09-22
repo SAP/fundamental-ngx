@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ButtonComponent } from './button.component';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 
+/**
+ * @deprecated
+ * Use `ButtonComponent` import instead
+ */
 @NgModule({
-    imports: [CommonModule, IconModule, ContentDensityModule],
-    exports: [ButtonComponent, ContentDensityModule],
-    declarations: [ButtonComponent]
+    imports: [ButtonComponent],
+    exports: [ButtonComponent]
 })
 export class ButtonModule {}

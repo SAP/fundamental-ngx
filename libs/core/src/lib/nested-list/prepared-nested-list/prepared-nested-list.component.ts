@@ -1,7 +1,19 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NestedListDirective } from '../nested-list/nested-list.directive';
-import { NestedListItem, NestedListModel } from '../nested-list-model';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation, forwardRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
+import { NestedItemDirective } from '../nested-item/nested-item.directive';
+import { NestedLinkDirective } from '../nested-link/nested-link.directive';
+import {
+    NestedListExpandIconComponent,
+    NestedListHeaderDirective,
+    NestedListIconComponent,
+    NestedListTitleDirective
+} from '../nested-list-directives';
+import { NestedListItem, NestedListModel } from '../nested-list-model';
+import { NestedListPopoverComponent } from '../nested-list-popover/nested-list-popover.component';
+import { NestedListDirective } from '../nested-list/nested-list.directive';
 
 /**
  * Component for internal usage, allows to generate the nested list from defined object.
@@ -11,7 +23,24 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     templateUrl: './prepared-nested-list.component.html',
     styleUrls: ['./prepared-nested-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NestedListDirective,
+        NgFor,
+        NgIf,
+        NestedListHeaderDirective,
+        NestedItemDirective,
+        NestedListPopoverComponent,
+        NestedListContentDirective,
+        NgTemplateOutlet,
+        NestedListExpandIconComponent,
+        forwardRef(() => PreparedNestedListComponent),
+        NestedLinkDirective,
+        RouterLink,
+        NestedListIconComponent,
+        NestedListTitleDirective
+    ]
 })
 export class PreparedNestedListComponent {
     /**

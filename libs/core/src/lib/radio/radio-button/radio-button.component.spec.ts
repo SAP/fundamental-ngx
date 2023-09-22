@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { RadioButtonComponent } from './radio-button.component';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RadioButtonComponent } from './radio-button.component';
 
 @Component({
     template: `
@@ -15,7 +15,9 @@ import { FormsModule } from '@angular/forms';
             [value]="3"
             name="radio"
         ></fd-radio-button>
-    `
+    `,
+    standalone: true,
+    imports: [FormsModule, RadioButtonComponent, TestRadioButtonComponent]
 })
 class TestRadioButtonComponent {
     selectedValue = 1;
@@ -31,8 +33,7 @@ describe('RadioButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [RadioButtonComponent, TestRadioButtonComponent]
+            imports: [TestRadioButtonComponent]
         }).compileComponents();
     }));
 

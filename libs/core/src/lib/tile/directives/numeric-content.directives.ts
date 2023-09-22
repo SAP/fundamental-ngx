@@ -1,13 +1,13 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 export type NumericContentState = 'negative' | 'critical' | 'positive' | 'informative' | 'neutral';
 export type NumericContentSize = 's' | 'm' | 'l';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content]'
+    selector: '[fd-numeric-content]',
+    standalone: true
 })
 export class NumericContentDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
@@ -66,7 +66,8 @@ export class NumericContentDirective implements OnInit, OnChanges, CssClassBuild
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-launch-icon-container]'
+    selector: '[fd-numeric-content-launch-icon-container]',
+    standalone: true
 })
 export class NumericContentLaunchIconContainerDirective {
     /** @hidden */
@@ -76,7 +77,8 @@ export class NumericContentLaunchIconContainerDirective {
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-launch-icon]'
+    selector: '[fd-numeric-content-launch-icon]',
+    standalone: true
 })
 export class NumericContentLaunchIconDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
@@ -113,7 +115,8 @@ export class NumericContentLaunchIconDirective implements OnInit, OnChanges, Css
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-kpi-container]'
+    selector: '[fd-numeric-content-kpi-container]',
+    standalone: true
 })
 export class NumericContentKpiContainerDirective {
     /** @hidden */
@@ -123,7 +126,8 @@ export class NumericContentKpiContainerDirective {
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-kpi]'
+    selector: '[fd-numeric-content-kpi]',
+    standalone: true
 })
 export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the KPI. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
@@ -164,7 +168,8 @@ export class NumericContentKpiDirective implements OnInit, OnChanges, CssClassBu
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-scale-container]'
+    selector: '[fd-numeric-content-scale-container]',
+    standalone: true
 })
 export class NumericContentScaleContainerDirective {
     /** @hidden */
@@ -174,7 +179,8 @@ export class NumericContentScaleContainerDirective {
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-scale-arrow]'
+    selector: '[fd-numeric-content-scale-arrow]',
+    standalone: true
 })
 export class NumericContentScaleArrowDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
@@ -211,7 +217,8 @@ export class NumericContentScaleArrowDirective implements OnInit, OnChanges, Css
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-scale]'
+    selector: '[fd-numeric-content-scale]',
+    standalone: true
 })
 export class NumericContentScaleDirective implements OnInit, OnChanges, CssClassBuilder {
     /** State of the SCALE. Options are neutral (default), 'positive', 'negative', 'critical', and 'informative'. */
@@ -248,7 +255,8 @@ export class NumericContentScaleDirective implements OnInit, OnChanges, CssClass
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-numeric-content-scale-text]'
+    selector: '[fd-numeric-content-scale-text]',
+    standalone: true
 })
 export class NumericContentScaleTextDirective {
     /** @hidden */

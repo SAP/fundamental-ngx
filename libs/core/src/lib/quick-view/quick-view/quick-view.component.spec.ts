@@ -2,8 +2,17 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { QuickViewModule } from '../quick-view.module';
+import { QuickViewGroupItemContentComponent } from '../quick-view-group-item-content/quick-view-group-item-content.component';
+import { QuickViewGroupItemLabelComponent } from '../quick-view-group-item-label/quick-view-group-item-label.component';
+import { QuickViewGroupItemComponent } from '../quick-view-group-item/quick-view-group-item.component';
+import { QuickViewGroupTitleComponent } from '../quick-view-group-title/quick-view-group-title.component';
+import { QuickViewGroupComponent } from '../quick-view-group/quick-view-group.component';
+import { QuickViewSubheaderSubtitleComponent } from '../quick-view-subheader-subtitle/quick-view-subheader-subtitle.component';
+import { QuickViewSubheaderTitleComponent } from '../quick-view-subheader-title/quick-view-subheader-title.component';
+import { QuickViewSubheaderComponent } from '../quick-view-subheader/quick-view-subheader.component';
+import { QuickViewComponent } from './quick-view.component';
 
 @Component({
     template: `
@@ -41,7 +50,24 @@ import { QuickViewModule } from '../quick-view.module';
                 </fd-quick-view-group-item>
             </fd-quick-view-group>
         </fd-quick-view>
-    `
+    `,
+    standalone: true,
+    imports: [
+        QuickViewComponent,
+        QuickViewSubheaderComponent,
+        QuickViewSubheaderTitleComponent,
+        QuickViewSubheaderSubtitleComponent,
+        QuickViewGroupComponent,
+        QuickViewGroupTitleComponent,
+        QuickViewGroupItemComponent,
+        QuickViewGroupItemContentComponent,
+        QuickViewGroupItemLabelComponent,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgFor,
+        AvatarComponent
+    ]
 })
 class TestComponent {
     @ViewChild('quickViewRef', { read: ElementRef })
@@ -96,8 +122,7 @@ describe('QuickViewComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule, AvatarComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

@@ -1,7 +1,8 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableHeader], [fd-table-header]'
+    selector: '[fdTableHeader], [fd-table-header]',
+    standalone: true
 })
 export class TableHeaderDirective {
     /** @hidden */

@@ -7,7 +7,9 @@ import { CardTitleDirective } from './card-title.directive';
 import { CLASS_NAME } from './constants';
 
 @Component({
-    template: `<h1 fd-card-title>Title</h1>`
+    template: `<h1 fd-card-title>Title</h1>`,
+    standalone: true,
+    imports: [CardTitleDirective]
 })
 class TestComponent {}
 
@@ -17,7 +19,7 @@ describe('CardTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, CardTitleDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

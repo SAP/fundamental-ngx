@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { QuickViewModule } from '..';
+import { QuickViewSubheaderComponent, QuickViewSubheaderSubtitleComponent, QuickViewSubheaderTitleComponent } from '..';
 
 @Component({
     template: `
@@ -12,7 +12,14 @@ import { QuickViewModule } from '..';
             <fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>
             <fd-quick-view-subheader-subtitle> Subheader Subtitle</fd-quick-view-subheader-subtitle>
         </fd-quick-view-subheader>
-    `
+    `,
+    standalone: true,
+    imports: [
+        QuickViewSubheaderComponent,
+        AvatarComponent,
+        QuickViewSubheaderSubtitleComponent,
+        QuickViewSubheaderTitleComponent
+    ]
 })
 class TestComponent {}
 
@@ -22,8 +29,7 @@ describe('QuickViewSubheaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule, AvatarComponent]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

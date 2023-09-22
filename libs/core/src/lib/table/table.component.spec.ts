@@ -12,7 +12,7 @@ describe('TableComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TableComponent],
+            imports: [TableComponent],
             providers: [{ provide: TableService, useValue: tableSpy }]
         }).compileComponents();
     }));

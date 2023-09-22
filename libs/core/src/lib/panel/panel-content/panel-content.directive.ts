@@ -13,7 +13,8 @@ let panelContentUniqueId = 0;
  */
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-panel-content]'
+    selector: '[fd-panel-content]',
+    standalone: true
 })
 export class PanelContentDirective {
     /** @hidden */

@@ -1,31 +1,33 @@
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
-    Component,
-    OnInit,
-    OnChanges,
-    Input,
-    Output,
-    EventEmitter,
-    ElementRef,
     ChangeDetectionStrategy,
-    SimpleChanges,
-    HostBinding,
-    ViewEncapsulation,
     ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+    ViewEncapsulation,
     forwardRef
 } from '@angular/core';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 import {
+    INDICATOR_CLASSES,
     INDICATOR_DEFAULT_CAPACITY,
     INDICATOR_PREFIX,
-    INDICATOR_CLASSES,
     RatingIndicatorSize,
     RatingIndicatorSizeEnum
 } from '../constants';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { RatingStarLabelPipe } from '../pipes/rating-star-label.pipe';
 
 let ratingUID = 0;
 
@@ -51,7 +53,9 @@ interface RatingViewItem {
             multi: true
         },
         registerFormItemControl(RatingIndicatorComponent)
-    ]
+    ],
+    standalone: true,
+    imports: [NgTemplateOutlet, NgFor, NgIf, PopoverTriggerDirective, PopoverComponent, RatingStarLabelPipe]
 })
 export class RatingIndicatorComponent
     implements OnInit, OnChanges, CssClassBuilder, ControlValueAccessor, FormItemControl

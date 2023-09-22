@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { ListModule } from './list.module';
 
 @Component({
@@ -16,7 +17,9 @@ import { ListModule } from './list.module';
         >
             Action Bar Title Test Text
         </ul>
-    `
+    `,
+    standalone: true,
+    imports: [ListModule, ContentDensityModule]
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -41,8 +44,7 @@ describe('ListComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

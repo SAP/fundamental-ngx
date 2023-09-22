@@ -1,9 +1,9 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
-    selector: '[fdTileContent], [fd-tile-content]'
+    selector: '[fdTileContent], [fd-tile-content]',
+    standalone: true
 })
 export class TileContentDirective {
     /** @hidden */
@@ -17,7 +17,8 @@ export class TileContentDirective {
 }
 
 @Directive({
-    selector: '[fdTileContentByline], [fd-tile-content-byline]'
+    selector: '[fdTileContentByline], [fd-tile-content-byline]',
+    standalone: true
 })
 export class TileContentBylineDirective {
     /** @hidden */
@@ -26,7 +27,8 @@ export class TileContentBylineDirective {
 }
 
 @Directive({
-    selector: '[fdTileContentText], [fd-tile-content-text]'
+    selector: '[fdTileContentText], [fd-tile-content-text]',
+    standalone: true
 })
 export class TileContentTextDirective {
     /** @hidden */
@@ -35,7 +37,8 @@ export class TileContentTextDirective {
 }
 
 @Directive({
-    selector: '[fdTileFooter], [fd-tile-footer]'
+    selector: '[fdTileFooter], [fd-tile-footer]',
+    standalone: true
 })
 export class TileFooterDirective {
     /** @hidden */
@@ -49,7 +52,8 @@ export class TileFooterDirective {
 }
 
 @Directive({
-    selector: '[fdTileFooterText], [fd-tile-footer-text]'
+    selector: '[fdTileFooterText], [fd-tile-footer-text]',
+    standalone: true
 })
 export class TileFooterTextDirective {
     /** @hidden */
@@ -58,7 +62,8 @@ export class TileFooterTextDirective {
 }
 
 @Directive({
-    selector: '[fdTileHeader], [fd-tile-header]'
+    selector: '[fdTileHeader], [fd-tile-header]',
+    standalone: true
 })
 export class TileHeaderDirective {
     /** @hidden */
@@ -72,7 +77,8 @@ export class TileHeaderDirective {
 }
 
 @Directive({
-    selector: '[fdTileHeaderContent], [fd-tile-header-content]'
+    selector: '[fdTileHeaderContent], [fd-tile-header-content]',
+    standalone: true
 })
 export class TileHeaderContentDirective {
     /** @hidden */
@@ -81,7 +87,8 @@ export class TileHeaderContentDirective {
 }
 
 @Directive({
-    selector: '[fdTileSection], [fd-tile-section]'
+    selector: '[fdTileSection], [fd-tile-section]',
+    standalone: true
 })
 export class TileSectionDirective {
     /** @hidden */
@@ -90,7 +97,8 @@ export class TileSectionDirective {
 }
 
 @Directive({
-    selector: '[fdTileTitle], [fd-tile-subtitle]'
+    selector: '[fdTileTitle], [fd-tile-subtitle]',
+    standalone: true
 })
 export class TileSubtitleDirective {
     /** @hidden */
@@ -99,7 +107,8 @@ export class TileSubtitleDirective {
 }
 
 @Directive({
-    selector: '[fdTileTitle], [fd-tile-title]'
+    selector: '[fdTileTitle], [fd-tile-title]',
+    standalone: true
 })
 export class TileTitleDirective {
     /** @hidden */
@@ -108,7 +117,8 @@ export class TileTitleDirective {
 }
 
 @Directive({
-    selector: '[fdTileTitleContainer], [fd-tile-title-container]'
+    selector: '[fdTileTitleContainer], [fd-tile-title-container]',
+    standalone: true
 })
 export class TileTitleContainerDirective {
     /** @hidden */
@@ -117,7 +127,8 @@ export class TileTitleContainerDirective {
 }
 
 @Directive({
-    selector: '[fdTileRefresh], [fd-tile-refresh]'
+    selector: '[fdTileRefresh], [fd-tile-refresh]',
+    standalone: true
 })
 export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Glyph */
@@ -163,7 +174,8 @@ let profileTileUniqueId = 0;
     selector: '[fdTileProfileImg], [fd-tile-profile-img]',
     host: {
         'attr.role': 'img'
-    }
+    },
+    standalone: true
 })
 export class TileProfileImgDirective {
     /** @hidden */
@@ -197,7 +209,8 @@ export class TileProfileImgDirective {
 }
 
 @Directive({
-    selector: '[fdTileLogo], [fd-tile-logo]'
+    selector: '[fdTileLogo], [fd-tile-logo]',
+    standalone: true
 })
 export class TileLogoDirective {
     /** @hidden */
@@ -206,7 +219,8 @@ export class TileLogoDirective {
 }
 
 @Directive({
-    selector: '[fdTileToggle], [fd-tile-toggle]'
+    selector: '[fdTileToggle], [fd-tile-toggle]',
+    standalone: true
 })
 export class TileToggleDirective {
     /** @hidden */
@@ -215,7 +229,8 @@ export class TileToggleDirective {
 }
 
 @Directive({
-    selector: '[fdTileContainer], [fd-tile-container]'
+    selector: '[fdTileContainer], [fd-tile-container]',
+    standalone: true
 })
 export class TileContainerDirective {
     /** @hidden */
@@ -229,7 +244,8 @@ export class TileContainerDirective {
 }
 
 @Directive({
-    selector: '[fdTileSlideContainer], [fd-tile-slide-container]'
+    selector: '[fdTileSlideContainer], [fd-tile-slide-container]',
+    standalone: true
 })
 export class TileSlideContainerDirective {
     /** @hidden */
@@ -238,7 +254,8 @@ export class TileSlideContainerDirective {
 }
 
 @Directive({
-    selector: '[fdTileBackgroundImg], [fd-tile-background-img]'
+    selector: '[fdTileBackgroundImg], [fd-tile-background-img]',
+    standalone: true
 })
 export class TileBackgroundImgDirective {
     /** @hidden */
@@ -257,7 +274,8 @@ export class TileBackgroundImgDirective {
 }
 
 @Directive({
-    selector: '[fdTilePageIndicator], [fd-tile-page-indicator]'
+    selector: '[fdTilePageIndicator], [fd-tile-page-indicator]',
+    standalone: true
 })
 export class TilePageIndicatorDirective {
     /** @hidden */
@@ -266,7 +284,8 @@ export class TilePageIndicatorDirective {
 }
 
 @Directive({
-    selector: '[fdTileDot], [fd-tile-dot]'
+    selector: '[fdTileDot], [fd-tile-dot]',
+    standalone: true
 })
 export class TileDotDirective {
     /** @hidden */
@@ -280,7 +299,8 @@ export class TileDotDirective {
 }
 
 @Directive({
-    selector: '[fdTileActionClose], [fd-tile-action-close]'
+    selector: '[fdTileActionClose], [fd-tile-action-close]',
+    standalone: true
 })
 export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
@@ -319,7 +339,8 @@ export class TileActionCloseDirective implements OnInit, OnChanges, CssClassBuil
 }
 
 @Directive({
-    selector: '[fdTileActionIndicator], [fd-tile-action-indicator]'
+    selector: '[fdTileActionIndicator], [fd-tile-action-indicator]',
+    standalone: true
 })
 export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
@@ -358,7 +379,8 @@ export class TileActionIndicatorDirective implements OnInit, OnChanges, CssClass
 }
 
 @Directive({
-    selector: '[fdTileActionContainer], [fd-tile-action-container]'
+    selector: '[fdTileActionContainer], [fd-tile-action-container]',
+    standalone: true
 })
 export class TileActionContainerDirective {
     /** @hidden */

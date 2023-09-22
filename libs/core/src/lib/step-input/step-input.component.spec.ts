@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { whenStable } from '@fundamental-ngx/core/tests';
-import { StepInputComponent } from './step-input.component';
-import { StepInputModule } from './step-input.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
+import { StepInputComponent } from './step-input.component';
 
 const initialValue = 100;
 
@@ -33,7 +33,9 @@ const lang$ = new BehaviorSubject(FD_LANGUAGE_ENGLISH);
             provide: FD_LANGUAGE,
             useValue: lang$
         }
-    ]
+    ],
+    standalone: true,
+    imports: [StepInputComponent, ContentDensityModule]
 })
 class TestWrapperComponent {
     @ViewChild(StepInputComponent, { static: true })
@@ -73,8 +75,7 @@ describe('StepInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [StepInputModule]
+            imports: [TestWrapperComponent]
         }).compileComponents();
     }));
 

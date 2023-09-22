@@ -13,7 +13,8 @@ export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
         '[class.fd-wizard__progress-bar--lg]': 'size === "lg"',
         '[class.fd-wizard__progress-bar--xl]': 'size === "xl"',
         '[style.display]': 'visible ? "" : "none"'
-    }
+    },
+    standalone: true
 })
 export class WizardProgressBarDirective {
     /**

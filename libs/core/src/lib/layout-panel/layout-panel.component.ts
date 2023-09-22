@@ -22,7 +22,8 @@ let layoutPanelUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./layout-panel.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class LayoutPanelComponent implements OnChanges, OnInit {
     /** @Input Background image of the panel. */

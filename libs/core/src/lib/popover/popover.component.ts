@@ -32,10 +32,8 @@ import equal from 'fast-deep-equal';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyDirective } from './popover-body.directive';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
-import { PopoverChildContent } from './popover-child-content.interface';
 import { PopoverControlComponent } from './popover-control/popover-control.component';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
-import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverService, PopoverTemplate } from './popover-service/popover.service';
 import { POPOVER_COMPONENT } from './popover.interface';
 import { FD_POPOVER_COMPONENT } from './tokens';
@@ -303,15 +301,16 @@ export class PopoverComponent
 
         this._popoverService._mobile = true;
 
-        this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
+        this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
             {
                 popoverBodyContentTemplate: this.popoverBodyContentTemplate,
                 popoverFooterContentTemplate: this.popoverFooterContentTemplate
-            } as PopoverChildContent,
-            PopoverMobileModule,
+            },
             PopoverMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
 
         this._listenOnTriggerRefClicks();

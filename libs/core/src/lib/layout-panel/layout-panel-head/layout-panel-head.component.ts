@@ -15,9 +15,10 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  */
 @Component({
     selector: 'fd-layout-panel-head',
-    templateUrl: './layout-panel-head.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class LayoutPanelHeadComponent {
     /** @hidden */

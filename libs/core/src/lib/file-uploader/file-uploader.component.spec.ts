@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FileUploaderComponent } from './file-uploader.component';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { FileUploaderSelectDirective } from './directives/file-uploader-select.directive';
-import { FileUploaderDragndropDirective } from './directives/file-uploader-dragndrop.directive';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ChangeDetectorRef } from '@angular/core';
+import { FileUploaderDragndropDirective } from './directives/file-uploader-dragndrop.directive';
+import { FileUploaderSelectDirective } from './directives/file-uploader-select.directive';
+import { FileUploaderComponent } from './file-uploader.component';
 
 interface MockFile extends File {
     size: number;
@@ -18,8 +15,7 @@ describe('FileUploaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective],
-            imports: [CommonModule, FormsModule, ButtonModule]
+            imports: [FileUploaderComponent, FileUploaderSelectDirective, FileUploaderDragndropDirective]
         }).compileComponents();
     }));
 

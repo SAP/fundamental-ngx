@@ -1,7 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdVerticalNavigationGroupHeader], [fd-vertical-navigation-group-header]'
+    selector: '[fdVerticalNavigationGroupHeader], [fd-vertical-navigation-group-header]',
+    standalone: true
 })
 export class VerticalNavigationGroupHeaderDirective {
     /** @hidden */

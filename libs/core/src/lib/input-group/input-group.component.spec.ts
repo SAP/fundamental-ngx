@@ -1,15 +1,13 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { InputGroupComponent } from './input-group.component';
 import { FormsModule } from '@angular/forms';
+import { first } from 'rxjs/operators';
 import {
     InputGroupAddOnDirective,
     InputGroupInputDirective,
     InputGroupTextareaDirective
 } from './input-group-directives';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { first } from 'rxjs/operators';
+import { InputGroupComponent } from './input-group.component';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
@@ -17,8 +15,8 @@ describe('InputGroupComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, ButtonModule, IconModule],
-            declarations: [
+            imports: [
+                FormsModule,
                 InputGroupInputDirective,
                 InputGroupAddOnDirective,
                 InputGroupTextareaDirective,

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { ObjectNumberComponent } from './object-number.component';
 
+/**
+ * @deprecated
+ * Use direct import of `ObjectNumberComponent`
+ */
 @NgModule({
-    declarations: [ObjectNumberComponent],
-    imports: [CommonModule],
+    imports: [ObjectNumberComponent],
     exports: [ObjectNumberComponent]
 })
 export class ObjectNumberModule {}

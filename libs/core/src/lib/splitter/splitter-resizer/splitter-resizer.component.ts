@@ -16,11 +16,13 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subject, throttleTime } from 'rxjs';
+import { Subject, fromEvent, throttleTime } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     SplitterPaneContainerOrientation,
     SplitterPaneContainerOrientationType
@@ -36,7 +38,9 @@ import {
         class: 'fd-splitter__resizer',
         '[class.is-active]': '_start != null || _isInFocus',
         '[tabindex]': '0'
-    }
+    },
+    standalone: true,
+    imports: [ButtonComponent, IconComponent]
 })
 export class SplitterResizerComponent implements OnDestroy {
     /** Orientation of the splitter's host pane container. */

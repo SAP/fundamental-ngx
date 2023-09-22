@@ -8,7 +8,7 @@ describe('FeedListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FeedListComponent]
+            imports: [FeedListComponent]
         }).compileComponents();
     });
 

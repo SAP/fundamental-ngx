@@ -12,7 +12,8 @@ export type ListBylineStatus = 'neutral' | 'positive' | 'negative' | 'critical' 
         '[class.fd-list__byline-right--critical]': 'status === "critical"',
         '[class.fd-list__byline-right--informative]': 'status === "informative"',
         '[class.fd-list__byline-right--wrap]': 'wrap'
-    }
+    },
+    standalone: true
 })
 export class ListBylineRightDirective {
     /** Semantic status of byline

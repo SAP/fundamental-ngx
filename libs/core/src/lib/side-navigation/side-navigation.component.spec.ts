@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 
-import { SideNavigationComponent } from './side-navigation.component';
 import { Component, ViewChild } from '@angular/core';
-import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
+import { SideNavigationComponent } from './side-navigation.component';
 
 @Component({
     template: `
@@ -84,7 +84,10 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
                 </ul>
             </div>
         </fd-side-nav>
-    `
+    `,
+    standalone: true,
+    imports: [NestedListModule, SideNavigationComponent, SideNavigationMainDirective],
+    providers: [MenuKeyboardService]
 })
 class TestNestedContainerComponent {
     @ViewChild('sideNavigationComponent')
@@ -99,9 +102,7 @@ describe('SideNavigationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [SideNavigationComponent, SideNavigationMainDirective, TestNestedContainerComponent],
-            providers: [MenuKeyboardService]
+            imports: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

@@ -10,7 +10,7 @@ describe('MessageBoxBodyComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [MessageBoxBodyComponent],
+            imports: [MessageBoxBodyComponent],
             providers: [
                 {
                     provide: MessageBoxHost,

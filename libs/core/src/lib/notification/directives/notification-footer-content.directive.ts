@@ -1,7 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdNotificationFooterContent], [fd-notification-footer-content]'
+    selector: '[fdNotificationFooterContent], [fd-notification-footer-content]',
+    standalone: true
 })
 export class NotificationFooterContentDirective {
     /** @hidden */

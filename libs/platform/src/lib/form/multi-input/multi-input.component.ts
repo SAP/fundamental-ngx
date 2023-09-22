@@ -65,7 +65,6 @@ import { AutoCompleteDirective, AutoCompleteEvent } from '../auto-complete/auto-
 import { InputType } from '../input/input.component';
 import { BaseMultiInput } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MultiInputConfig } from './multi-input.config';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 
@@ -532,12 +531,13 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
-            PlatformMultiInputMobileModule,
             PlatformMultiInputMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 

@@ -12,11 +12,12 @@ import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split
 
 @Component({
     selector: 'fd-splitter',
-    templateUrl: './splitter.component.html',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./splitter.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'fd-splitter' }
+    host: { class: 'fd-splitter' },
+    standalone: true
 })
 export class SplitterComponent {
     /** @hidden */

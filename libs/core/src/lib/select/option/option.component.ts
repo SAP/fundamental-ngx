@@ -1,5 +1,8 @@
+import { FocusOrigin, FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, SPACE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -14,11 +17,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
-import { ENTER, hasModifierKey, SPACE } from '@angular/cdk/keycodes';
 
 import { ListTitleDirective } from '@fundamental-ngx/core/list';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { startWith } from 'rxjs/operators';
 import { OptionsInterface } from '../options.interface';
@@ -76,9 +78,11 @@ export class FdOptionSelectionChange {
                 outline: none;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [NgIf, ListTitleDirective, NgTemplateOutlet]
 })
-export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {
+export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {
     /** Option id attribute */
     @Input()
     id = `fd-option-${optionUniqueId++}`;

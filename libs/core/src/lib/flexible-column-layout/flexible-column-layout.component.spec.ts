@@ -4,22 +4,22 @@ import { By } from '@angular/platform-browser';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
 import {
-    ONE_COLUMN_START_FULL_SCREEN,
-    ONE_COLUMN_MID_FULL_SCREEN,
-    ONE_COLUMN_END_FULL_SCREEN,
-    TWO_COLUMNS_START_EXPANDED,
-    TWO_COLUMNS_MID_EXPANDED,
-    TWO_COLUMNS_END_EXPANDED,
-    THREE_COLUMNS_MID_EXPANDED,
-    THREE_COLUMNS_END_EXPANDED,
-    THREE_COLUMNS_START_MINIMIZED,
-    THREE_COLUMNS_END_MINIMIZED,
-    FlexibleColumnLayout,
+    DEFAULT_FLEXIBLE_LAYOUT_CONFIG,
     FD_FLEXIBLE_LAYOUT_CONFIG,
-    DEFAULT_FLEXIBLE_LAYOUT_CONFIG
+    FlexibleColumnLayout,
+    ONE_COLUMN_END_FULL_SCREEN,
+    ONE_COLUMN_MID_FULL_SCREEN,
+    ONE_COLUMN_START_FULL_SCREEN,
+    THREE_COLUMNS_END_EXPANDED,
+    THREE_COLUMNS_END_MINIMIZED,
+    THREE_COLUMNS_MID_EXPANDED,
+    THREE_COLUMNS_START_MINIMIZED,
+    TWO_COLUMNS_END_EXPANDED,
+    TWO_COLUMNS_MID_EXPANDED,
+    TWO_COLUMNS_START_EXPANDED
 } from './constants';
+import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
 
 function setViewport(width: number, height: number): void {
     window.innerWidth = width;
@@ -46,7 +46,9 @@ function setViewport(width: number, height: number): void {
                 </div>
             </ng-template>
         </fd-flexible-column-layout>
-    `
+    `,
+    standalone: true,
+    imports: [FlexibleColumnLayoutComponent]
 })
 class TestFlexibleColumnLayoutComponent {
     @ViewChild(FlexibleColumnLayoutComponent)
@@ -61,7 +63,7 @@ describe('FlexibleColumnLayoutComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [FlexibleColumnLayoutComponent, TestFlexibleColumnLayoutComponent],
+            imports: [TestFlexibleColumnLayoutComponent],
             providers: [
                 {
                     provide: FD_FLEXIBLE_LAYOUT_CONFIG,

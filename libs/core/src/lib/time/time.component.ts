@@ -1,10 +1,10 @@
+import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
-    forwardRef,
     Input,
     OnChanges,
     OnDestroy,
@@ -13,20 +13,22 @@ import {
     QueryList,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { Meridian, SelectableViewItem } from './models';
-import { createMissingDateImplementationError } from './errors';
-import { TimeColumnComponent } from './time-column/time-column.component';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { createMissingDateImplementationError } from './errors';
+import { Meridian, SelectableViewItem } from './models';
+import { TimeColumnComponent } from './time-column/time-column.component';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -52,7 +54,9 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
         contentDensityObserverProviders()
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [TimeColumnComponent, NgIf, AsyncPipe, FdTranslatePipe]
 })
 export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
     /**
