@@ -2719,6 +2719,13 @@
   dependencies:
     "@nx/cypress" "16.5.5"
 
+"@nrwl/devkit@*":
+  version "16.9.0"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-16.9.0.tgz#5f47580f9f4950b85cc1606ede5772e43e591119"
+  integrity sha512-zf6qvW2FV5Rtk0xr2eQnTQ8UZJ/v20UNHnm0oFNz5fsAolKY0wiWSsXnycYvfFTWc6epukFw49hymf5Ei1lHiA==
+  dependencies:
+    "@nx/devkit" "16.9.0"
+
 "@nrwl/devkit@16.5.5":
   version "16.5.5"
   resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-16.5.5.tgz#fca9dce9f12b1bf676d525859dfe4935cc71056b"
@@ -2833,13 +2840,26 @@
     dotenv "~10.0.0"
     semver "7.5.3"
 
-"@nx/devkit@16.5.5", "@nx/devkit@>=16.1.3 < 17":
+"@nx/devkit@16.5.5":
   version "16.5.5"
   resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-16.5.5.tgz#815a2ed91c3b561697817a46cf7bb4dd3f3f4d0c"
   integrity sha512-9YaQ3s5VMgTXo5cEuaVc2b6btZU2REmHsgn/V4Gi3nSmwBHvIn86gtlh4BoBFinHpqge1chG/dC+B7yoXioQmQ==
   dependencies:
     "@nrwl/devkit" "16.5.5"
     ejs "^3.1.7"
+    ignore "^5.0.4"
+    semver "7.5.3"
+    tmp "~0.2.1"
+    tslib "^2.3.0"
+
+"@nx/devkit@16.9.0", "@nx/devkit@>=16.1.3 < 17":
+  version "16.9.0"
+  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-16.9.0.tgz#e37fcbe675a48e503ef8712cb9f56a154d796db7"
+  integrity sha512-cqCLyiX9he+4XPalUysIfuDZ+b+JbnuFRwo0xIcrk86SwskVWBHGXgXthC7KoEK0ToCQXP+cEbXZqa5zZmuGbQ==
+  dependencies:
+    "@nrwl/devkit" "*"
+    ejs "^3.1.7"
+    enquirer "~2.3.6"
     ignore "^5.0.4"
     semver "7.5.3"
     tmp "~0.2.1"
@@ -3237,12 +3257,7 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.6.8":
-  version "11.6.8"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
-  integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
-
-"@sap-theming/theming-base-content@^11.6.0":
+"@sap-theming/theming-base-content@11.6.8", "@sap-theming/theming-base-content@^11.6.0":
   version "11.6.8"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
   integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
