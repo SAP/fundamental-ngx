@@ -223,10 +223,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cdk@16.1.0":
-  version "16.1.0"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-16.1.0.tgz#ef4af9889990ad33fe9a6221110b1cad3fd2b3a1"
-  integrity sha512-6+b4QhqzzF27ydtw8bjuwSl7+WEf5F8eyASgLx9Jt9W3MrBxcqdLj5bfoSAXOY8E+Zjp0BmjqQ3OVpfjfp94gw==
+"@angular/cdk@16.2.5":
+  version "16.2.5"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-16.2.5.tgz#f4e024871ad97598e1e70607f1aa96c7384c1364"
+  integrity sha512-9VbdWSYVFQq9y7Dl8KMooE+Sa5nx0l4Neue1IMmSS2v8b602VykiYA5aqz0BsLjfoiboXlUz6LCBXxukJtogcQ==
   dependencies:
     tslib "^2.3.0"
   optionalDependencies:
@@ -3237,12 +3237,7 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.6.8":
-  version "11.6.8"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
-  integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
-
-"@sap-theming/theming-base-content@^11.6.0":
+"@sap-theming/theming-base-content@11.6.8", "@sap-theming/theming-base-content@^11.6.0":
   version "11.6.8"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
   integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
