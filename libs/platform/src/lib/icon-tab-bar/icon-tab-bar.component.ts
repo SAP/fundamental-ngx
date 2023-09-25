@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -14,6 +15,10 @@ import { ContentDensityService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
 import { Subject } from 'rxjs';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
+import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
+import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
+import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
 import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from './interfaces/tab-color-associations.interface';
 import { TabConfig } from './interfaces/tab-config.interface';
@@ -24,7 +29,16 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
     templateUrl: './icon-tab-bar.component.html',
     styleUrls: ['./icon-tab-bar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        IconTabBarProcessTypeComponent,
+        IconTabBarFilterTypeComponent,
+        IconTabBarIconTypeComponent,
+        IconTabBarTextTypeComponent
+    ]
 })
 export class IconTabBarComponent implements OnInit, OnDestroy {
     /**
@@ -102,7 +116,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
 
     /** Event emitted when user clicks on x icon in tab. */
     @Output()
-    closeTab = new EventEmitter<number>();
+    closeTab = new EventEmitter<IconTabBarItem>();
 
     /** @hidden */
     _cssClassForContainer: string[];
@@ -156,6 +170,27 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
 
     /**
      * @hidden
+     * @param event reordered array of IconTabBarItem
+     */
+    _onReorder(event: IconTabBarItem[]): void {
+        this.iconTabReordered.emit(event);
+    }
+
+    /**
+     * @hidden
+     * @param selectedItem
+     */
+    _selectItem(selectedItem: IconTabBarItem): void {
+        this.iconTabSelected.emit(selectedItem);
+    }
+
+    /** @hidden */
+    _closeTab(item: IconTabBarItem): void {
+        this.closeTab.emit(item);
+    }
+
+    /**
+     * @hidden
      * @returns array of css classes for icon-tab-bar container
      */
     private _generateContainerStyles(): string[] {
@@ -177,23 +212,4 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
         }
         return styles;
     }
-
-    /**
-     * @hidden
-     * @param event reordered array of IconTabBarItem
-     */
-    _onReorder(event: IconTabBarItem[]): void {
-        this.iconTabReordered.emit(event);
-    }
-
-    /**
-     * @hidden
-     * @param selectedItem
-     */
-    _selectItem(selectedItem: IconTabBarItem): void {
-        this.iconTabSelected.emit(selectedItem);
-    }
-
-    /** @hidden */
-    _closeTab(index: IconTabBarItem): void {}
 }

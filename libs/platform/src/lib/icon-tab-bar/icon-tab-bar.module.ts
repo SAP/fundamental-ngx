@@ -1,11 +1,4 @@
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-
-import { OverflowListModule } from '@fundamental-ngx/cdk/utils';
-import { IconComponent } from '@fundamental-ngx/core/icon';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
@@ -18,31 +11,21 @@ import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.dire
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
 
+const components = [
+    IconTabBarComponent,
+    IconTabBarTextTypeComponent,
+    IconTabBarIconTypeComponent,
+    IconTabBarProcessTypeComponent,
+    IconTabBarFilterTypeComponent,
+    IconTabBarPopoverComponent,
+    TextTypePopoverComponent,
+    IconBarDndListDirective,
+    IconBarDndItemDirective,
+    IconBarDndContainerDirective
+];
+
 @NgModule({
-    declarations: [
-        IconTabBarComponent,
-        IconTabBarTextTypeComponent,
-        IconTabBarIconTypeComponent,
-        IconTabBarProcessTypeComponent,
-        IconTabBarFilterTypeComponent,
-        IconTabBarPopoverComponent,
-        TextTypePopoverComponent,
-        IconBarDndListDirective,
-        IconBarDndItemDirective,
-        IconBarDndContainerDirective
-    ],
-    imports: [CommonModule, IconComponent, PopoverModule, OverflowListModule, DragDropModule, ButtonComponent],
-    exports: [
-        IconTabBarComponent,
-        IconTabBarTextTypeComponent,
-        IconTabBarIconTypeComponent,
-        IconTabBarProcessTypeComponent,
-        IconTabBarFilterTypeComponent,
-        IconTabBarPopoverComponent,
-        TextTypePopoverComponent,
-        IconBarDndListDirective,
-        IconBarDndItemDirective,
-        IconBarDndContainerDirective
-    ]
+    imports: [...components],
+    exports: [...components]
 })
 export class PlatformIconTabBarModule {}

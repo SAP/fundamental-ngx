@@ -12,8 +12,14 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
-import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
+import { FdDnDEvent, IconBarDndContainerDirective } from '../../directives/dnd/icon-bar-dnd-container.directive';
+import { IconBarDndItemDirective } from '../../directives/dnd/icon-bar-dnd-item.directive';
+import { IconBarDndListDirective } from '../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
@@ -30,7 +36,21 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
 
 @Component({
     selector: 'fdp-icon-tab-bar-text-type',
-    templateUrl: './icon-tab-bar-text-type.component.html'
+    templateUrl: './icon-tab-bar-text-type.component.html',
+    standalone: true,
+    imports: [
+        IconBarDndContainerDirective,
+        OverflowListDirective,
+        IconBarDndListDirective,
+        NgFor,
+        OverflowListItemDirective,
+        IconBarDndItemDirective,
+        NgClass,
+        NgIf,
+        TextTypePopoverComponent,
+        ButtonComponent,
+        IconComponent
+    ]
 })
 export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     /** @hidden list of tab html elements, that can receive focus */

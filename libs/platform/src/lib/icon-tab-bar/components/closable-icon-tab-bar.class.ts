@@ -27,8 +27,6 @@ export abstract class ClosableIconTabBar extends IconTabBarBase {
         this._tabs = this._updateTabs(this._tabs);
 
         this._triggerRecalculationVisibleItems();
-
-        console.log(tab);
         this.closeTab.emit(tab.tab);
     }
 

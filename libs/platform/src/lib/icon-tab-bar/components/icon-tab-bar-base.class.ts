@@ -136,66 +136,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /**
      * @hidden
-     * @description initialize state of tabs
-     */
-    protected _initTabs(): void {
-        this._tabs = this._generateTabBarItems(this.tabsConfig);
-        const selectedItem = this._tabs.find((item) => item.active);
-        this._selectedUid = selectedItem?.uId;
-        this._lastVisibleTabIndex = this._tabs.length - 1;
-    }
-
-    /**
-     * @hidden
-     * @description generate IconTabItems from TabConfig array
-     */
-    private _generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
-        const flatIndexRef: FlatIndex = { value: 0 };
-        return config.map((item, index) => {
-            const result: IconTabBarItem = {
-                ...item,
-                index,
-                cssClasses: [],
-                uId: index.toString(),
-                hidden: false,
-                subItems: undefined,
-                flatIndex: flatIndexRef.value++
-            };
-            if (item.color) {
-                result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
-            }
-            result.subItems = item.subItems?.length
-                ? this._generateSubItems(item.subItems, result, flatIndexRef)
-                : undefined;
-            return result;
-        });
-    }
-
-    /** @hidden */
-    private _generateSubItems(
-        subItems: TabConfig[],
-        parent: IconTabBarItem,
-        flatIndexRef: FlatIndex
-    ): IconTabBarItem[] {
-        return subItems?.map((item, index) => {
-            const result: IconTabBarItem = {
-                ...item,
-                index,
-                uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
-                cssClasses: [],
-                subItems: undefined,
-                flatIndex: flatIndexRef.value++,
-                parentUId: parent.uId
-            };
-            if (Array.isArray(item.subItems) && item.subItems.length) {
-                result.subItems = this._generateSubItems(item.subItems, result, flatIndexRef);
-            }
-            return result;
-        });
-    }
-
-    /**
-     * @hidden
      * @param selectedItem
      * @param event
      */
@@ -252,22 +192,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
     /** @hidden */
     _trackByTab(index: number, tab: IconTabBarItem): string {
         return tab.uId;
-    }
-
-    /**
-     * @hidden
-     * Mapping function to resolve UI tab element to it's focusable part/descendant
-     */
-    protected _getTabUIElementFocusable(tabUIElement: unknown): HTMLElement | null {
-        if (tabUIElement && typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
-            if ((<ElementRef>tabUIElement).nativeElement instanceof HTMLElement) {
-                return (<ElementRef<HTMLElement>>tabUIElement).nativeElement;
-            }
-        }
-        if (isDevMode()) {
-            console.warn('Failed to get focusable tab element');
-        }
-        return null;
     }
 
     /**
@@ -330,16 +254,91 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
 
     /**
      * @hidden
+     * Mapping function to resolve UI tab element to it's focusable part/descendant
+     */
+    protected _getTabUIElementFocusable(tabUIElement: unknown): HTMLElement | null {
+        if (tabUIElement && typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
+            if ((<ElementRef>tabUIElement).nativeElement instanceof HTMLElement) {
+                return (<ElementRef<HTMLElement>>tabUIElement).nativeElement;
+            }
+        }
+        if (isDevMode()) {
+            console.warn('Failed to get focusable tab element');
+        }
+        return null;
+    }
+
+    /**
+     * @hidden
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
         this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).subscribe(() => {
             if (this.overflowDirective && !this._destroyed) {
                 const extra = this.overflowDirective.getAmountOfExtraItems();
-                console.log(extra);
                 this._recalculateVisibleItems(extra);
                 this._cd.detectChanges();
             }
+        });
+    }
+
+    /**
+     * @hidden
+     * @description initialize state of tabs
+     */
+    protected _initTabs(): void {
+        this._tabs = this._generateTabBarItems(this.tabsConfig);
+        const selectedItem = this._tabs.find((item) => item.active);
+        this._selectedUid = selectedItem?.uId;
+        this._lastVisibleTabIndex = this._tabs.length - 1;
+    }
+
+    /**
+     * @hidden
+     * @description generate IconTabItems from TabConfig array
+     */
+    private _generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
+        const flatIndexRef: FlatIndex = { value: 0 };
+        return config.map((item, index) => {
+            const result: IconTabBarItem = {
+                ...item,
+                index,
+                cssClasses: [],
+                uId: index.toString(),
+                hidden: false,
+                subItems: undefined,
+                flatIndex: flatIndexRef.value++
+            };
+            if (item.color) {
+                result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+            }
+            result.subItems = item.subItems?.length
+                ? this._generateSubItems(item.subItems, result, flatIndexRef)
+                : undefined;
+            return result;
+        });
+    }
+
+    /** @hidden */
+    private _generateSubItems(
+        subItems: TabConfig[],
+        parent: IconTabBarItem,
+        flatIndexRef: FlatIndex
+    ): IconTabBarItem[] {
+        return subItems?.map((item, index) => {
+            const result: IconTabBarItem = {
+                ...item,
+                index,
+                uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
+                cssClasses: [],
+                subItems: undefined,
+                flatIndex: flatIndexRef.value++,
+                parentUId: parent.uId
+            };
+            if (Array.isArray(item.subItems) && item.subItems.length) {
+                result.subItems = this._generateSubItems(item.subItems, result, flatIndexRef);
+            }
+            return result;
         });
     }
 }
