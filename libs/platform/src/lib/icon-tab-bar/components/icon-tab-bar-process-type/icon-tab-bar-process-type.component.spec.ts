@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { generateTestConfig } from '../../tests-helper';
 import { OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { of } from 'rxjs';
 import { IconTabBarComponent } from '../../icon-tab-bar.component';
+import { generateTestConfig } from '../../tests-helper';
+import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
 
 const AMOUNT_OF_EXTRA_TABS = 80;
 
@@ -15,9 +14,8 @@ describe('IconTabBarProcessTypeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [IconTabBarProcessTypeComponent],
-            providers: [{ provide: IconTabBarComponent, useValue: {} }],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [IconTabBarProcessTypeComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }]
         }).compileComponents();
     });
 

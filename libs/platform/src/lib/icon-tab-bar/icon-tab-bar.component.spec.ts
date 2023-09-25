@@ -1,24 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Component } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { FdDnDEvent } from './directives/dnd/icon-bar-dnd-container.directive';
+import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconTabBarComponent } from './icon-tab-bar.component';
 import { TabConfig } from './interfaces/tab-config.interface';
-import { TabType } from './types';
-import { OverflowListModule, RtlService } from '@fundamental-ngx/cdk/utils';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
-import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
-import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
-import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
-import { IconTabBarPopoverComponent } from './components/popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
-import { TextTypePopoverComponent } from './components/popovers/text-type-popover/text-type-popover.component';
-import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
-import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
-import { FdDnDEvent, IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
 import { generateTestConfig } from './tests-helper';
-import { By } from '@angular/platform-browser';
+import { TabType } from './types';
 
 @Component({
     template: ` <fdp-icon-tab-bar
@@ -28,7 +17,9 @@ import { By } from '@angular/platform-browser';
         [iconTabType]="iconTabType"
         (iconTabSelected)="selected()"
         (iconTabReordered)="reordered()"
-    ></fdp-icon-tab-bar>`
+    ></fdp-icon-tab-bar>`,
+    standalone: true,
+    imports: [IconTabBarComponent]
 })
 class HostComponent {
     enableTabReordering = false;
@@ -47,21 +38,7 @@ let fixture: ComponentFixture<HostComponent>;
 describe('IconTabBarComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                HostComponent,
-                IconTabBarComponent,
-                IconTabBarTextTypeComponent,
-                IconTabBarIconTypeComponent,
-                IconTabBarProcessTypeComponent,
-                IconTabBarFilterTypeComponent,
-                IconTabBarPopoverComponent,
-                TextTypePopoverComponent,
-                IconBarDndListDirective,
-                IconBarDndItemDirective,
-                IconBarDndContainerDirective
-            ],
-            providers: [RtlService],
-            imports: [IconModule, PopoverModule, OverflowListModule, DragDropModule]
+            imports: [HostComponent]
         }).compileComponents();
     });
 
