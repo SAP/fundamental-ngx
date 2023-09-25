@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.56...v0.46.0-rc.57) (2023-09-25)
+
+
+### Features
+
+* **platform:** icon tab bar horizon update ([#10594](https://github.com/SAP/fundamental-ngx/issues/10594)) ([1296d39](https://github.com/SAP/fundamental-ngx/commit/1296d3960d0ceaaa2ea525925c8e2927f2d82c8d))
+
+
+
+
+
 # [0.46.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.55...v0.46.0-rc.56) (2023-09-24)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
