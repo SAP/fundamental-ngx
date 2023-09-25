@@ -5,7 +5,7 @@
             <i class="sap-icon--slim-arrow-down" role="presentation"></i>
         </button>
     </fd-popover-control>
-    <fd-popover-body>
+    <fd-popover-body class="fd-icon-tab-bar">
         <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
             <ng-container *ngFor="let item of extraTabs; let idx = index; trackBy: _trackByTab">
                 <li *ngIf="isSeparators" tabindex="-1" class="fd-icon-tab-bar__icon-separator">
@@ -14,7 +14,8 @@
                 <li
                     class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                     role="listitem"
-                    [class]="item.cssClasses"
+                    [class.fd-icon-tab-bar__list-item--closable]="item.closable"
+                    [ngClass]="item.cssClasses"
                     tabindex="-1"
                 >
                     <a
@@ -43,6 +44,16 @@
                             {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
                         </div>
                     </a>
+                    <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
+                        <button
+                            fd-button
+                            class="fd-icon-tab-bar__button"
+                            fdType="transparent"
+                            (click)="closeTab.emit(item.uId)"
+                        >
+                            <fd-icon glyph="decline"></fd-icon>
+                        </button>
+                    </div>
                 </li>
             </ng-container>
         </ul>

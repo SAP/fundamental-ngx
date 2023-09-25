@@ -13,4 +13,6 @@ export type TabConfig = NullableObject<{
     badge: boolean;
     /** config for nested tabs */
     subItems: TabConfig[];
+    /** Whether the tab can be closed. */
+    closable: boolean;
 }>;

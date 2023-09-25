@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
+import { IconTabBarComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { cloneDeep } from 'lodash-es';
 import { textTypeConfig } from '../config-for-examples/text-type.config';
 
@@ -15,7 +15,7 @@ import { textTypeConfig } from '../config-for-examples/text-type.config';
         `
     ],
     standalone: true,
-    imports: [PlatformIconTabBarModule]
+    imports: [IconTabBarComponent]
 })
 export class PlatformIconTabBarConfigurablePaddingsExampleComponent {
     itemsForSmExample = cloneDeep(textTypeConfig);

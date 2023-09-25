@@ -1,5 +1,5 @@
-import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FLIPPER_SIZE } from '../../constants';
@@ -17,7 +17,8 @@ export interface FdDnDEvent {
 }
 
 @Directive({
-    selector: '[fdpIconBarDndContainer], [fdp-icon-bar-dnd-container]'
+    selector: '[fdpIconBarDndContainer], [fdp-icon-bar-dnd-container]',
+    standalone: true
 })
 export class IconBarDndContainerDirective implements OnDestroy {
     /**

@@ -32,7 +32,8 @@ export class StackblitzDependencies {
         'tslib',
         'typescript',
         'fast-deep-equal',
-        'lodash-es'
+        'lodash-es',
+        'zone.js'
     ];
 
     static getDependencies(packageInfo: Record<string, any>, lernaInfo: Record<string, any>): Record<string, any> {
