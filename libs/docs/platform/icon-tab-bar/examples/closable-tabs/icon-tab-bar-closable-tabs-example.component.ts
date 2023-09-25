@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
+import { IconTabBarComponent } from '@fundamental-ngx/platform/icon-tab-bar';
 import { cloneDeep } from 'lodash-es';
 import { longIconTypeConfig } from '../config-for-examples/icon-type-config';
 
 @Component({
     selector: 'fdp-icon-tab-bar-closable-tabs-example',
     standalone: true,
-    imports: [PlatformIconTabBarModule],
+    imports: [IconTabBarComponent],
     templateUrl: './icon-tab-bar-closable-tabs-example.component.html',
     styles: [],
     encapsulation: ViewEncapsulation.None,
