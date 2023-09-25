@@ -57,7 +57,7 @@ export class TranslationResolver {
         if (expression.indexOf('{') === -1) {
             return expression;
         }
-        const result = new IntlMessageFormat(expression, locale || 'en-US').format(args);
+        const result = new IntlMessageFormat(expression, locale || 'en-US').format(args || {});
         return Array.isArray(result) ? result.join('') : result.toString();
     }
 
@@ -115,7 +115,7 @@ export class TranslationResolver {
 
     /** @hidden */
     private _tryExecuteLanguageFunction(
-        expression?: Nullable<FdLanguageKeyFunction>,
+        expression?: Nullable<FdLanguageKeyFunction<any>>,
         args: FdLanguageKeyArgs = {}
     ): string | null {
         if (!expression) {

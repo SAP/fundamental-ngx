@@ -1,5 +1,5 @@
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguage, FdLanguageKeyFunction, FdLanguageKeyIdentifier, FdLanguagePatch } from '../models';
+import { FdLanguageKey, FdLanguageKeyCtx, FdLanguageKeyIdentifier, FdLanguagePatch, FlatFdLanguage } from '../models';
 
 /**
  * Transforms hierarchical object into object with flat keys
@@ -9,27 +9,16 @@ import { FdLanguage, FdLanguageKeyFunction, FdLanguageKeyIdentifier, FdLanguageP
  * @param translationValueTransformer
  */
 export function flattenTranslations(
-    translations: FdLanguage,
-    prefix?: Nullable<string>,
-    translationValueTransformer?: (value: string | FdLanguageKeyFunction) => string | FdLanguageKeyFunction
-): Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction>;
-export function flattenTranslations(
     translations: FdLanguagePatch,
     prefix?: Nullable<string>,
-    translationValueTransformer?: (value: string | FdLanguageKeyFunction) => string | FdLanguageKeyFunction
-): Partial<Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction>>;
-// eslint-disable-next-line jsdoc/require-jsdoc
-export function flattenTranslations(
-    translations: FdLanguagePatch | FdLanguage,
-    prefix?: Nullable<string>,
-    translationValueTransformer?: (value: string | FdLanguageKeyFunction) => string | FdLanguageKeyFunction
-):
-    | Partial<Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction>>
-    | Record<FdLanguageKeyIdentifier, string | FdLanguageKeyFunction> {
+    translationValueTransformer?: <Key extends FdLanguageKeyIdentifier>(
+        value: FdLanguageKey<FdLanguageKeyCtx<Key>>
+    ) => FdLanguageKey<FdLanguageKeyCtx<Key>>
+): Partial<FlatFdLanguage> {
     if (!translations) {
         return {};
     }
-    return Object.keys(translations).reduce((acc: any, key) => {
+    return Object.keys(translations).reduce((acc: Partial<FlatFdLanguage>, key: string) => {
         const translationValue = translations[key];
         const globalKey = prefix ? `${prefix}.${key}` : key;
         if (typeof translationValue === 'string' || typeof translationValue === 'function') {

@@ -1,7 +1,7 @@
 import { FactoryProvider, SkipSelf } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FdLanguage, FdLanguagePatch } from '../models';
+import { FdLanguage, FdLanguagePatch, FlatFdLanguage } from '../models';
 import { flattenTranslations } from './flatten-translations';
 import { flatToHierarchy } from './load-json';
 import { FD_LANGUAGE } from './tokens';
@@ -50,7 +50,7 @@ export function patchLanguage(
         useFactory: (lang$: Observable<FdLanguage>) =>
             lang$.pipe(
                 map((lang) => {
-                    const original = flattenTranslations(lang);
+                    const original = flattenTranslations(lang) as FlatFdLanguage;
                     const patch = flattenTranslations(patchedObj(lang, languagePatch));
                     return flatToHierarchy({
                         ...original,

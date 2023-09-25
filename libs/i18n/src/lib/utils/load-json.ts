@@ -1,4 +1,4 @@
-import { FdLanguage, FdLanguageKey, FdLanguageKeyIdentifier } from '../models/lang';
+import { FdLanguage, FdLanguageKeyIdentifier, FlatFdLanguage } from '../models/lang';
 
 interface RecursiveRecord<V = string> {
     [key: string]: V | RecursiveRecord<V>;
@@ -35,10 +35,10 @@ export function loadJson(source: Partial<Record<FdLanguageKeyIdentifier, string>
  *
  * @param source
  */
-export function flatToHierarchy(source: Record<FdLanguageKeyIdentifier, string | FdLanguageKey>): FdLanguage {
+export function flatToHierarchy(source: FlatFdLanguage): FdLanguage {
     const result = {};
     Object.entries(source).forEach(([key, value]) => {
-        set<string | FdLanguageKey>(result, key, value);
+        set(result, key, value);
     });
     return result as FdLanguage;
 }

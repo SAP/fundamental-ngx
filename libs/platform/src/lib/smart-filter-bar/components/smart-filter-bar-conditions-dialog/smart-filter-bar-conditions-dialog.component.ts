@@ -10,14 +10,14 @@ import { DialogBodyComponent, DialogComponent, DialogFooterComponent, DialogHead
 import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdLanguageKeyIdentifier, FdTranslatePipe, resolveTranslationSync } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { FILTER_STRATEGY, FilterAllStrategy } from '@fundamental-ngx/platform/table';
 import { getSelectItemValue } from '../../helpers';
 import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
-import { SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
+import { SmartFilterBarStrategy, SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
 import { SmartFilterBarService } from '../../smart-filter-bar.service';
 
 @Component({
@@ -90,7 +90,7 @@ export class SmartFilterBarConditionsDialogComponent {
     private _submittedForms: any[] = [];
 
     /** @hidden */
-    private resolveTranslation = resolveTranslationSync();
+    private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
     constructor(
@@ -184,13 +184,12 @@ export class SmartFilterBarConditionsDialogComponent {
             this.config.dataType
         );
 
-        const labelsConfig = { ...this._conditionLabelKeys };
-        for (const strategyItem in labelsConfig) {
-            if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
-                const translationKey = ('platformSmartFilterBar.' +
-                    labelsConfig[strategyItem]) as FdLanguageKeyIdentifier;
-                labelsConfig[strategyItem] = this.resolveTranslation(translationKey);
-            }
+        const labelsConfig: Record<SmartFilterBarStrategy, string> = { ...this._conditionLabelKeys };
+        for (const strategyItem of Object.keys(this._conditionLabelKeys) as SmartFilterBarStrategy[]) {
+            const translationKey = 'platformSmartFilterBar.' + labelsConfig[strategyItem];
+            labelsConfig[strategyItem] = this.resolveTranslation(
+                translationKey as `platformSmartFilterBar.${SmartFilterBarStrategyLabels[SmartFilterBarStrategy]}`
+            );
         }
 
         return strategy.map((s: FilterAllStrategy) => ({

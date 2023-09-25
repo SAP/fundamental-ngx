@@ -1,14 +1,16 @@
 import { computed, inject, isSignal, signal, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../../models/lang';
+import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models/lang';
 import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
-import { resolveTranslationSync } from './resolve-translations-sync';
+import { TranslationResolver } from '../translation-resolver';
 
 type CanBeSignal<T> = T | Signal<T>;
-type ResolveSignalFn<ReturnType> = (
-    key: CanBeSignal<FdLanguageKeyIdentifier>,
-    args?: Nullable<CanBeSignal<FdLanguageKeyArgs>>
+type ResolveTranslationSignalFnArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
+    ? [CanBeSignal<Key>]
+    : [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>];
+type ResolveSignalFn<ReturnType> = <Key extends FdLanguageKeyIdentifier>(
+    ...args: ResolveTranslationSignalFnArgs<Key>
 ) => Signal<ReturnType>;
 
 function getFdLocaleSignal(fdLocale?: Nullable<CanBeSignal<string>>): Signal<string> {
@@ -37,70 +39,40 @@ interface ResolveTranslationsSignalOptions {
 }
 
 /**
- * Determine if the options are of type ResolveTranslationsSignalOptions
- * @param options
- */
-function isResolveTranslationsSignalOptions(
-    options?: Nullable<CanBeSignal<string> | ResolveTranslationsSignalOptions>
-): options is ResolveTranslationsSignalOptions {
-    return !!options && typeof options !== 'string' && !isSignal(options);
-}
-
-/**
- * Get the options for the resolve translations signal
- * @param keyOrOptions
- * @param options
- */
-function getResolveTranslationsSignalOptions(
-    keyOrOptions?: CanBeSignal<FdLanguageKeyIdentifier> | ResolveTranslationsSignalOptions,
-    options?: ResolveTranslationsSignalOptions
-): ResolveTranslationsSignalOptions {
-    const optionsFromKey = isResolveTranslationsSignalOptions(keyOrOptions) ? keyOrOptions : {};
-    const optionsFromOptions = isResolveTranslationsSignalOptions(options) ? options : {};
-    return { ...optionsFromKey, ...optionsFromOptions };
-}
-
-/**
  * Helper utility which gives you the signal creator for translation resolving.
  */
-export function resolveTranslationSignal(options?: ResolveTranslationsSignalOptions): ResolveSignalFn<string>;
-/**
- * Helper utility which gives you the signal for translation resolving.
- * @param key
- * @param args
- * @param options
- */
-export function resolveTranslationSignal(
-    key: CanBeSignal<FdLanguageKeyIdentifier>,
-    args?: Nullable<CanBeSignal<FdLanguageKeyArgs>>,
-    options?: ResolveTranslationsSignalOptions
-): Signal<string>;
-// eslint-disable-next-line jsdoc/require-jsdoc
-export function resolveTranslationSignal(
-    keyOrOptions?: CanBeSignal<FdLanguageKeyIdentifier> | ResolveTranslationsSignalOptions,
-    args?: Nullable<CanBeSignal<FdLanguageKeyArgs>>,
-    options?: ResolveTranslationsSignalOptions
-): Signal<string> | ResolveSignalFn<string> {
-    const { fdLang, fdLocale } = getResolveTranslationsSignalOptions(keyOrOptions, options);
+function resolveTranslationSignalFn(options?: ResolveTranslationsSignalOptions): ResolveSignalFn<string> {
+    const { fdLang, fdLocale } = options || {};
     const fdLocaleSignal = getFdLocaleSignal(fdLocale);
     const fdLangSignal = getFdLangSignal(fdLang);
+    const resolver = new TranslationResolver();
 
-    const fn = (
-        k: CanBeSignal<FdLanguageKeyIdentifier>,
-        ctx?: Nullable<CanBeSignal<FdLanguageKeyArgs>>
-    ): Signal<string> => {
+    return (...args) => {
+        const [k, ctx] = args;
         const kSignal = isSignal(k) ? k : signal(k);
-        const ctxSignal = isSignal(ctx) ? ctx : signal(ctx || {});
+        const ctxSignal = ctx ? (isSignal(ctx) ? ctx : signal(ctx)) : undefined;
         return computed(() =>
-            resolveTranslationSync(kSignal(), ctxSignal(), {
-                fdLang: fdLangSignal(),
-                fdLocale: fdLocaleSignal()
-            })
+            resolver.resolve(fdLangSignal(), kSignal(), (ctxSignal ? ctxSignal() : {}) as any, fdLocaleSignal())
         );
     };
+}
 
-    if (!keyOrOptions || isResolveTranslationsSignalOptions(keyOrOptions)) {
-        return fn;
-    }
-    return fn(keyOrOptions, args);
+type TranslationSignalArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
+    ? [CanBeSignal<Key>] | [CanBeSignal<Key>, ResolveTranslationsSignalOptions]
+    :
+          | [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>]
+          | [CanBeSignal<Key>, CanBeSignal<FdLanguageKeyCtx<Key>>, ResolveTranslationsSignalOptions];
+
+/**
+ * Helper utility which gives you the signal for translation resolving.
+ */
+export function resolveTranslationSignal<K extends FdLanguageKeyIdentifier>(
+    ...args: TranslationSignalArgs<K>
+): Signal<string> {
+    const [key, ctxOrOptions, options] = args;
+    const signalCreator = resolveTranslationSignalFn({
+        ...(ctxOrOptions || {}),
+        ...(options || {})
+    });
+    return signalCreator<K>(...([key, ctxOrOptions] as ResolveTranslationSignalFnArgs<K>));
 }

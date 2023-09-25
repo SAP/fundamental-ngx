@@ -3,7 +3,7 @@ import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, skip, swi
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models/lang';
-import { resolveTranslationObservable } from '../utils';
+import { resolveTranslationObservableFn } from '../utils';
 
 @Pipe({
     name: 'fdTranslate',
@@ -12,7 +12,7 @@ import { resolveTranslationObservable } from '../utils';
 })
 export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
-    private readonly _translationResolver = resolveTranslationObservable();
+    private readonly _translationResolver = resolveTranslationObservableFn();
 
     /** @hidden */
     private readonly _key$ = new BehaviorSubject<FdLanguageKeyIdentifier | undefined>(undefined);
@@ -43,7 +43,7 @@ export class FdTranslatePipe implements PipeTransform {
             this._args$.pipe(skip(1), distinctUntilChanged())
         ])
             .pipe(
-                switchMap(([key, args]) => this._translationResolver(key, args)),
+                switchMap(([key, args]) => this._translationResolver(key, args as any)),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((value) => {

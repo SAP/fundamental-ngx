@@ -2,29 +2,14 @@ import { inject } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { combineLatest, isObservable, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FdLanguage, FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../../models/lang';
+import { FdLanguage, FdLanguageKeyCtx, FdLanguageKeyIdentifier } from '../../models/lang';
 import { FD_LANGUAGE, FD_LOCALE } from '../tokens';
 import { TranslationResolver } from '../translation-resolver';
-import { ResolveFn } from './common-types';
+import { ResolveFnArgs, ResolveTranslationFn } from './common-types';
 
 interface ResolveTranslationsObservableOptions {
     fdLang?: Nullable<FdLanguage | Observable<FdLanguage>>;
     fdLocale?: Nullable<string | Observable<string>>;
-}
-
-/**
- * Combine the options for the resolve translations observable
- */
-function getResolveTranslationsObservableOptions(
-    keyOrOptions?: string | ResolveTranslationsObservableOptions,
-    options?: ResolveTranslationsObservableOptions
-): ResolveTranslationsObservableOptions {
-    const optionsFromKey = typeof keyOrOptions === 'string' ? {} : keyOrOptions;
-    const optionsFromOptions = options || {};
-    return {
-        ...optionsFromKey,
-        ...optionsFromOptions
-    };
 }
 
 /**
@@ -54,37 +39,32 @@ function getFdLangObservable(fdLang?: Nullable<FdLanguage | Observable<FdLanguag
 }
 
 /**
- * Helper utility function for getting translation observable factory
+ * Get observable creator for the resolve translations
  */
-export function resolveTranslationObservable(
+export function resolveTranslationObservableFn(
     options?: ResolveTranslationsObservableOptions
-): ResolveFn<Observable<string>>;
-/**
- * Helper utility function for getting translations observable
- */
-export function resolveTranslationObservable(
-    key: FdLanguageKeyIdentifier,
-    args?: Nullable<FdLanguageKeyArgs>,
-    options?: ResolveTranslationsObservableOptions
-): Observable<string>;
-/**
- * Helper utility function for getting translations
- */
-export function resolveTranslationObservable(
-    keyOrOptions?: FdLanguageKeyIdentifier | ResolveTranslationsObservableOptions,
-    args?: Nullable<FdLanguageKeyArgs>,
-    options?: ResolveTranslationsObservableOptions
-): Observable<string> | ResolveFn<Observable<string>> {
-    const { fdLang, fdLocale } = getResolveTranslationsObservableOptions(keyOrOptions, options);
-
+): ResolveTranslationFn<Observable<string>> {
+    const { fdLang, fdLocale } = options || {};
     const langAndLocale$ = combineLatest([getFdLangObservable(fdLang), getFdLocaleObservable(fdLocale)]);
 
     const resolver = new TranslationResolver();
-    const fn = (k: FdLanguageKeyIdentifier, ctx?: Nullable<FdLanguageKeyArgs>): Observable<string> =>
-        langAndLocale$.pipe(map(([lang, locale]) => resolver.resolve(lang, k, ctx || {}, locale)));
+    return function <Key extends FdLanguageKeyIdentifier>(...args: ResolveFnArgs<Key>): Observable<string> {
+        const [k, ctx] = args;
+        return langAndLocale$.pipe(map(([lang, locale]) => resolver.resolve(lang, k, ctx || {}, locale)));
+    };
+}
 
-    if (!keyOrOptions || typeof keyOrOptions !== 'string') {
-        return fn;
-    }
-    return fn(keyOrOptions, args || {});
+type ResolveTranslationArgs<Key extends FdLanguageKeyIdentifier> = FdLanguageKeyCtx<Key> extends undefined
+    ? [Key] | [Key, ResolveTranslationsObservableOptions]
+    : [Key, FdLanguageKeyCtx<Key>] | [Key, FdLanguageKeyCtx<Key>, ResolveTranslationsObservableOptions];
+
+/**
+ * Helper utility function for getting translations observable
+ */
+export function resolveTranslationObservable<Key extends FdLanguageKeyIdentifier>(
+    ...args: ResolveTranslationArgs<Key>
+): Observable<string> {
+    const [key, ctxOrOptions, options] = args;
+    const observableCreator = resolveTranslationObservableFn({ ...(ctxOrOptions || {}), ...(options || {}) });
+    return observableCreator<Key>(...([key, ctxOrOptions] as ResolveFnArgs<Key>));
 }
