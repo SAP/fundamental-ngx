@@ -41,7 +41,7 @@ interface ResolveTranslationsSignalOptions {
 /**
  * Helper utility which gives you the signal creator for translation resolving.
  */
-function resolveTranslationSignalFn(options?: ResolveTranslationsSignalOptions): ResolveSignalFn<string> {
+export function resolveTranslationSignalFn(options?: ResolveTranslationsSignalOptions): ResolveSignalFn<string> {
     const { fdLang, fdLocale } = options || {};
     const fdLocaleSignal = getFdLocaleSignal(fdLocale);
     const fdLangSignal = getFdLangSignal(fdLang);

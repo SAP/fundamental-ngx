@@ -4,8 +4,11 @@ import {
     FD_LANGUAGE,
     FD_LANGUAGE_ENGLISH,
     resolveTranslationObservable,
+    resolveTranslationObservableFn,
     resolveTranslationSignal,
-    resolveTranslationSync
+    resolveTranslationSignalFn,
+    resolveTranslationSync,
+    resolveTranslationSyncFn
 } from '@fundamental-ngx/i18n';
 import { BehaviorSubject } from 'rxjs';
 
@@ -40,7 +43,7 @@ import { BehaviorSubject } from 'rxjs';
             </span>
             <br />
             <span aria-describedby="translation_resolver_utility_async_post_injection_context_descriptor">
-                {{ resolveTranslation$('coreDatePicker.dateInputLabel') | async }}
+                {{ dateInputLabelObservable | async }}
             </span>
         </div>
 
@@ -50,7 +53,17 @@ import { BehaviorSubject } from 'rxjs';
             </span>
             <br />
             <span aria-describedby="translation_resolver_utility_sync_post_injection_context_descriptor">
-                {{ resolveTranslation('coreDatePicker.dateRangeInputLabel') }}
+                {{ dateRangeInputLabelSync }}
+            </span>
+        </div>
+
+        <div>
+            <span id="translation_resolver_utility_signal_post_injection_context_descriptor">
+                signal resolve of the translation with a function call after injection context
+            </span>
+            <br />
+            <span aria-describedby="translation_resolver_utility_signal_post_injection_context_descriptor">
+                {{ dateRangeInputLabelSignal() }}
             </span>
         </div>
     `,
@@ -65,30 +78,40 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UsingUtilityFunctionsExampleComponent {
     /**
-     * Async resolve of the translation. It takes FD_LANGUAGE from the DI token and returns an observable.
+     * Async resolve of the translation
      */
     coreDatePickerDateInputLabel$ = resolveTranslationObservable('coreDatePicker.dateInputLabel');
     /**
-     * Sync resolve of the translation. It takes FD_LANGUAGE from the DI token, subscribes to it
-     * and returns a string available at the moment of the function call.
+     * Sync resolve of the translation
      */
+
     coreDatePickerDateInputLabel = resolveTranslationSync('coreDatePicker.dateInputLabel');
+
     /**
-     * Using signal to resolve the translation. It takes FD_LANGUAGE from the DI token and returns a
-     * computed signal
+     * Using signal to resolve the translation
      */
     coreDatePickerDateInputLabelSignal = resolveTranslationSignal('coreDatePicker.dateInputLabel');
 
     /**
-     * if resolveTranslation$ is called without any parameters, it returns a function,
-     * which can be used outside the injection context and will be bound to the current DI FD_LANGUAGE instance
-     * and will return an observable of the translation.
+     * You can also call a factory function to get the observable resolver
      */
-    resolveTranslation$ = resolveTranslationObservable();
+    translationObservableResolver = resolveTranslationObservableFn();
+
     /**
-     * if resolveTranslation is called without any parameters, it returns a function,
-     * which can be used outside the injection context and will be bound to the current DI FD_LANGUAGE instance
-     * latest value and will return a string of the translation.
+     * You can also call a factory function to get the sync resolver,
+     * with this, you can use the resolver later on, without the need to
+     * call it in injection context
      */
-    resolveTranslation = resolveTranslationSync();
+    translationSyncResolver = resolveTranslationSyncFn();
+
+    /**
+     * You can also call a factory function to get the signal resolver
+     */
+    translationSignalResolver = resolveTranslationSignalFn();
+
+    dateInputLabelObservable = this.translationObservableResolver('coreDatePicker.dateRangeInputLabel');
+
+    dateRangeInputLabelSync = this.translationSyncResolver('coreDatePicker.dateRangeInputLabel');
+
+    dateRangeInputLabelSignal = this.translationSignalResolver('coreDatePicker.dateRangeInputLabel');
 }
