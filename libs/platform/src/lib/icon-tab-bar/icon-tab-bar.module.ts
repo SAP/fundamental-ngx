@@ -1,21 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { IconModule } from '@fundamental-ngx/core/icon';
 import { OverflowListModule } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 
-import { IconTabBarComponent } from './icon-tab-bar.component';
-import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
+import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
 import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
-import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
+import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
 import { IconTabBarPopoverComponent } from './components/popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 import { TextTypePopoverComponent } from './components/popovers/text-type-popover/text-type-popover.component';
-import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
+import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
+import { IconTabBarComponent } from './icon-tab-bar.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,7 @@ import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.dire
         IconBarDndItemDirective,
         IconBarDndContainerDirective
     ],
-    imports: [CommonModule, IconModule, PopoverModule, OverflowListModule, DragDropModule],
+    imports: [CommonModule, IconComponent, PopoverModule, OverflowListModule, DragDropModule, ButtonComponent],
     exports: [
         IconTabBarComponent,
         IconTabBarTextTypeComponent,

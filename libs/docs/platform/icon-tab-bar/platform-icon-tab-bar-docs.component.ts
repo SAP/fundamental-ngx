@@ -11,6 +11,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { IconTabBarClosableTabsExampleComponent } from './examples/closable-tabs/icon-tab-bar-closable-tabs-example.component';
 import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
 import { PlatformIconTabBarFilterTypeExampleComponent } from './examples/platform-icon-tab-bar-filter-type-example/platform-icon-tab-bar-filter-type-example.component';
 import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
@@ -79,7 +80,8 @@ export interface IconTabBarItem extends TabConfig {
         PlatformIconTabBarFilterTypeExampleComponent,
         PlatformIconTabBarProcessTypeExampleComponent,
         MessageStripComponent,
-        PlatformIconTabBarConfigurablePaddingsExampleComponent
+        PlatformIconTabBarConfigurablePaddingsExampleComponent,
+        IconTabBarClosableTabsExampleComponent
     ]
 })
 export class PlatformIconTabBarDocsComponent {

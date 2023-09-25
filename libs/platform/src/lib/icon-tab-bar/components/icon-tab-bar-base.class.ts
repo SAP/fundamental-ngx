@@ -15,18 +15,18 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
-import { OverflowListDirective, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { KeyUtil, OverflowListDirective } from '@fundamental-ngx/cdk/utils';
 import { cloneDeep } from 'lodash-es';
+import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
+import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
 import { TabConfig } from '../interfaces/tab-config.interface';
 import { TabDestinyMode } from '../types';
-import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { IconTabBarPopoverBase } from './popovers/icon-tab-bar-popover-base.class';
-import { TabColorAssociations } from '../interfaces/tab-color-associations.interface';
 
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit, OnDestroy {
@@ -275,7 +275,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @param selectedItem
      * @description select extra item inside popover
      */
-    async _selectExtraItem(selectedItem: IconTabBarItem): Promise<void> {
+    _selectExtraItem(selectedItem: IconTabBarItem): void {
         const deletedItem = this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0] as IconTabBarItem;
         this._tabs.splice(selectedItem.index, 1, deletedItem);
 
@@ -302,7 +302,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
         this._extraTabs = [...this._extraTabs];
 
         this._selectItem(selectedItem);
-        await this._triggerRecalculationVisibleItems();
+        this._triggerRecalculationVisibleItems();
         this._focusItem(this._lastVisibleTabIndex);
     }
 
@@ -332,13 +332,15 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
      * @hidden
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
-    protected async _triggerRecalculationVisibleItems(): Promise<void> {
-        await this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).toPromise();
-        if (this.overflowDirective && !this._destroyed) {
-            const extra = this.overflowDirective.getAmountOfExtraItems();
-            this._recalculateVisibleItems(extra);
-            this._cd.markForCheck();
-        }
+    protected _triggerRecalculationVisibleItems(): void {
+        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).subscribe(() => {
+            if (this.overflowDirective && !this._destroyed) {
+                const extra = this.overflowDirective.getAmountOfExtraItems();
+                console.log(extra);
+                this._recalculateVisibleItems(extra);
+                this._cd.detectChanges();
+            }
+        });
     }
 }
 

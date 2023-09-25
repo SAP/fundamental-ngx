@@ -10,14 +10,14 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
-import { TabConfig } from './interfaces/tab-config.interface';
-import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from './types';
 import { ContentDensityService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from './interfaces/tab-color-associations.interface';
+import { TabConfig } from './interfaces/tab-config.interface';
+import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from './types';
 
 @Component({
     selector: 'fdp-icon-tab-bar',
@@ -92,13 +92,17 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
      * @description Emits when some tab is selected.
      */
     @Output()
-    iconTabSelected: EventEmitter<IconTabBarItem> = new EventEmitter<IconTabBarItem>();
+    iconTabSelected = new EventEmitter<IconTabBarItem>();
 
     /**
      * @description Emits when user drop tab.
      */
     @Output()
-    iconTabReordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
+    iconTabReordered = new EventEmitter<IconTabBarItem[]>();
+
+    /** Event emitted when user clicks on x icon in tab. */
+    @Output()
+    closeTab = new EventEmitter<number>();
 
     /** @hidden */
     _cssClassForContainer: string[];
@@ -189,4 +193,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     _selectItem(selectedItem: IconTabBarItem): void {
         this.iconTabSelected.emit(selectedItem);
     }
+
+    /** @hidden */
+    _closeTab(index: IconTabBarItem): void {}
 }
