@@ -24,6 +24,10 @@ const components = [
     IconBarDndContainerDirective
 ];
 
+/**
+ * @deprecated
+ * Import `IconTabBarComponent` directly instead.
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]
