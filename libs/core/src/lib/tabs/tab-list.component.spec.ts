@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TabPanelComponent } from './tab-panel/tab-panel.component';
-import { TabListComponent } from './tab-list.component';
-import { TabsModule } from './tabs.module';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { TabListComponent } from './tab-list.component';
+import { TabPanelComponent } from './tab-panel/tab-panel.component';
+import { TabsModule } from './tabs.module';
 
 @Component({
     template: ` <fd-tab-list>
@@ -57,6 +57,7 @@ describe('TabListComponent', () => {
     it('should select tab', async () => {
         await whenStable(fixture);
         const tabChangeSpy = jest.spyOn(component.selectedTabChange, 'emit');
+        const tabIndexChangeSpy = jest.spyOn(component.selectedTabIndexChange, 'emit');
         const firstActiveTab = testComponent.tabs.first;
         const secondActiveTab = testComponent.tabs.last;
 
@@ -65,6 +66,7 @@ describe('TabListComponent', () => {
         await whenStable(fixture);
 
         expect(tabChangeSpy).toHaveBeenCalled();
+        expect(tabIndexChangeSpy).toHaveBeenCalledWith(3);
         expect(firstActiveTab.expanded).toBe(false);
         expect(secondActiveTab.expanded).toBe(true);
     });
@@ -87,11 +89,13 @@ describe('TabListComponent', () => {
         await whenStable(fixture);
 
         const tabChangeSpy = jest.spyOn(component.selectedTabChange, 'emit');
+        const tabIndexChangeSpy = jest.spyOn(component.selectedTabIndexChange, 'emit');
         fixture.componentInstance.showDisabled = false;
 
         await whenStable(fixture);
 
         expect(tabChangeSpy).toHaveBeenCalled();
+        expect(tabIndexChangeSpy).toHaveBeenCalledWith(0);
     });
 });
 
