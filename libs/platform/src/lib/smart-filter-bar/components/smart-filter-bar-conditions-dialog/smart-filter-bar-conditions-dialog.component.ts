@@ -8,22 +8,62 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { FilterAllStrategy, FILTER_STRATEGY } from '@fundamental-ngx/platform/table';
-import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
-import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
-import { SmartFilterBarService } from '../../smart-filter-bar.service';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
+import { FILTER_STRATEGY, FilterAllStrategy } from '@fundamental-ngx/platform/table';
+import { Observable, firstValueFrom } from 'rxjs';
 import { getSelectItemValue } from '../../helpers';
+import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
 import { SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { firstValueFrom, Observable } from 'rxjs';
+import { SmartFilterBarService } from '../../smart-filter-bar.service';
 
 @Component({
     selector: 'fdp-smart-filter-bar-conditions-dialog',
     templateUrl: './smart-filter-bar-conditions-dialog.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgIf,
+        FormsModule,
+        NgFor,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
+        FormGeneratorComponent,
+        ButtonComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        BusyIndicatorComponent,
+        FdTranslatePipe
+    ]
 })
 export class SmartFilterBarConditionsDialogComponent {
     /** Condition builder config. */

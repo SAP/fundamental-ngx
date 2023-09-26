@@ -1,15 +1,37 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import {
     CollectionGroup,
-    getUniqueListValuesByKey,
     SortDirection,
-    TableDialogCommonData
+    TableDialogCommonData,
+    getUniqueListValuesByKey
 } from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 
 export interface GroupDialogColumn {
     label: string;
@@ -45,7 +67,30 @@ class GroupRule {
     styleUrls: ['./grouping.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13GroupingDialogComponent }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgFor,
+        SelectComponent,
+        OptionComponent,
+        CheckboxComponent,
+        FormsModule,
+        ButtonComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
+    ]
 })
 export class P13GroupingDialogComponent implements Resettable {
     /** Table columns available for grouping */

@@ -1,12 +1,7 @@
 import { JsonPipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import {
-    DATE_TIME_FORMATS,
-    DatetimeAdapter,
-    FD_DATETIME_FORMATS,
-    FdDatetimeAdapter
-} from '@fundamental-ngx/core/datetime';
+import { provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import {
     PlatformWizardGeneratorModule,
     WizardGeneratorFormsValue,
@@ -16,16 +11,7 @@ import {
 @Component({
     selector: 'fundamental-ngx-wizard-generator-special-elements-example',
     templateUrl: './wizard-generator-special-elements-example.component.html',
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
-        }
-    ],
+    providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
 })

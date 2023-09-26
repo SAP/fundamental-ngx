@@ -1,10 +1,14 @@
 import { Component, Input } from '@angular/core';
 
+import { NgIf } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 
 @Component({
     selector: 'fdp-object-marker',
-    templateUrl: './object-marker.component.html'
+    templateUrl: './object-marker.component.html',
+    standalone: true,
+    imports: [NgIf, ObjectMarkerComponent]
 })
 export class PlatformObjectMarkerComponent {
     /**

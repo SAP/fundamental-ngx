@@ -1,7 +1,8 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-    selector: '[fdpSmartFilterBarToolbarItem]'
+    selector: '[fdpSmartFilterBarToolbarItem]',
+    standalone: true
 })
 export class SmartFilterBarToolbarItemDirective {
     /** @hidden */

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-dynamic-page-key-info',
@@ -8,7 +8,8 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, Templ
         </ng-template>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class DynamicPageKeyInfoComponent {
     /**

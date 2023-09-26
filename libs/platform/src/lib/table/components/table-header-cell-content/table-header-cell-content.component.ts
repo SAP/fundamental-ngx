@@ -1,5 +1,8 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { TableIconDirective } from '@fundamental-ngx/core/table';
 import { CollectionSort, SortDirection, TableColumn } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
@@ -19,7 +22,9 @@ import { CollectionSort, SortDirection, TableColumn } from '@fundamental-ngx/pla
                 width: 100%;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [NgTemplateOutlet, NgIf, IconComponent, TableIconDirective]
 })
 export class TableHeaderCellContentComponent {
     /** Table Id */

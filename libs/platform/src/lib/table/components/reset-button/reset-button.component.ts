@@ -1,4 +1,7 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, InjectionToken, ViewEncapsulation } from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Observable } from 'rxjs';
 
 /**
@@ -25,7 +28,9 @@ export const RESETTABLE_TOKEN = new InjectionToken<Resettable>('Resettable');
         [disabled]="(resettable.isResetAvailable$ | async) === false"
     ></button>`,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [ButtonComponent, AsyncPipe, FdTranslatePipe]
 })
 export class ResetButtonComponent {
     /** @hidden */

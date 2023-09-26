@@ -1,16 +1,17 @@
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
     HostBinding,
-    inject,
     Input,
     OnChanges,
     Output,
     QueryList,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
@@ -18,7 +19,7 @@ import {
     FocusableItemDirective,
     Nullable
 } from '@fundamental-ngx/cdk/utils';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
+import { TableCellDirective, TableRowDirective } from '@fundamental-ngx/core/table';
 import { CollectionGroup, TableColumn, TableRow, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { Observable } from 'rxjs';
 
@@ -37,7 +38,9 @@ import { Observable } from 'rxjs';
     host: {
         role: 'row',
         '[attr.aria-expanded]': 'row.expanded'
-    }
+    },
+    standalone: true,
+    imports: [TableCellDirective, NgTemplateOutlet, NgIf, AsyncPipe]
 })
 export class TableGroupRowComponent<T> extends TableRowDirective implements OnChanges {
     /** Table ID. */

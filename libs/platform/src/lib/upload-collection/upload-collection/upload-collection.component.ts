@@ -15,34 +15,72 @@ import {
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
-import { warnOnce, uuidv4 } from '@fundamental-ngx/core/utils';
+import { DatePipe, NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BreadcrumbComponent, BreadcrumbItemComponent } from '@fundamental-ngx/core/breadcrumb';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
-import { ColumnAlign, SelectionMode, TableRowSelectionChangeEvent } from '@fundamental-ngx/platform/table';
-import { isDataSource } from '@fundamental-ngx/platform/shared';
-import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
+import { FileUploaderSelectDirective } from '@fundamental-ngx/core/file-uploader';
+import {
+    FormControlComponent,
+    FormInputMessageGroupComponent,
+    FormItemComponent,
+    FormMessageComponent
+} from '@fundamental-ngx/core/form';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { PaginationComponent } from '@fundamental-ngx/core/pagination';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { uuidv4, warnOnce } from '@fundamental-ngx/core/utils';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
+import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
+import { ConvertBytesPipe, isDataSource } from '@fundamental-ngx/platform/shared';
+import {
+    ColumnAlign,
+    SelectionMode,
+    TableColumnComponent,
+    TableComponent,
+    TableRowSelectionChangeEvent
+} from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpHeaderCellDef,
+    FdpTableCell,
+    FdpTableHeader,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { MoveToComponent, MoveToComponentDialogData } from '../dialogs/move-to/move-to.component';
-import { FilesValidatorService } from '../services/files-validator.service';
+import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
+import { UploadCollectionDragnDropDirective } from '../directives/upload-collection-dragndrop.directive';
+import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
+import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
 import {
     BreadcrumbList,
+    FileSizeExceedEvent,
+    FilenameLengthExceedEvent,
+    FilesValidatorOutput,
     ItemPerPage,
     Message,
     MessageOptions,
     MessageStripType,
     MessageType,
-    UploadCollectionFile,
-    UploadCollectionFolder,
-    UploadCollectionItem,
-    UploadCollectionItemStatus,
-    FilenameLengthExceedEvent,
-    FileSizeExceedEvent,
     MoveToEvent,
     TypeMismatchEvent,
     UpdateVersionEvent,
-    FilesValidatorOutput,
-    UploadCollectionCmp
+    UploadCollectionCmp,
+    UploadCollectionFile,
+    UploadCollectionFolder,
+    UploadCollectionItem,
+    UploadCollectionItemStatus
 } from '../models/upload-collection.models';
-import { generateMessageStripeData } from '../helpers/generate-message-stripe-data';
-import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
+import { FilesValidatorService } from '../services/files-validator.service';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 
@@ -56,7 +94,51 @@ let randomId = 0;
     selector: 'fdp-upload-collection',
     templateUrl: './upload-collection.component.html',
     styleUrls: ['./upload-collection.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        NgIf,
+        MessageStripComponent,
+        NgTemplateOutlet,
+        ToolbarComponent,
+        BreadcrumbComponent,
+        BreadcrumbItemComponent,
+        LinkComponent,
+        NgFor,
+        ToolbarSpacerDirective,
+        InputGroupComponent,
+        FormsModule,
+        ButtonComponent,
+        ToolbarItemDirective,
+        UploadCollectionDragnDropDirective,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        TableComponent,
+        TableInitialStateDirective,
+        TableColumnComponent,
+        FdpCellDef,
+        FdpTableCell,
+        IconComponent,
+        FormItemComponent,
+        FormInputMessageGroupComponent,
+        FormControlComponent,
+        FormMessageComponent,
+        BusyIndicatorComponent,
+        ObjectStatusComponent,
+        FdpHeaderCellDef,
+        FdpTableHeader,
+        MenuButtonComponent,
+        MenuTriggerDirective,
+        PaginationComponent,
+        MenuComponent,
+        MenuItemComponent,
+        FileUploaderSelectDirective,
+        NgSwitch,
+        NgSwitchCase,
+        DatePipe,
+        FdTranslatePipe,
+        ConvertBytesPipe
+    ]
 })
 export class UploadCollectionComponent
     implements OnChanges, OnDestroy, UploadCollectionCmp<FdpUploadCollectionDataSource>

@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Subject } from 'rxjs';
 
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 import { SEARCH_FIELD_COMPONENT, SearchFieldMobileInterface } from '../search-field-mobile.interface';
@@ -41,8 +41,7 @@ describe('SearchFieldMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule],
-            declarations: [SearchFieldMobileComponent],
+            imports: [DialogModule, NoopAnimationsModule, SearchFieldMobileComponent],
             providers: [
                 DynamicComponentService,
                 { provide: SEARCH_FIELD_COMPONENT, useValue: new SearchFieldComponent() }

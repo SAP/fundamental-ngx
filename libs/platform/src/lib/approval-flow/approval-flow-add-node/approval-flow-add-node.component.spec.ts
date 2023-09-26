@@ -2,17 +2,16 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
-import { PlatformApprovalFlowModule } from '../approval-flow.module';
-import {
-    APPROVAL_FLOW_APPROVER_TYPES,
-    ApprovalFlowAddNodeComponent,
-    AddNodeDialogRefData
-} from './approval-flow-add-node.component';
+import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
 import { ApprovalNode, ApprovalTeam } from '../interfaces';
 import { ApprovalFlowAddNodeViewService } from '../services/approval-flow-add-node-view.service';
-import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
-import { TeamDataProvider, UserDataProvider } from '../tests/providers';
 import { teams } from '../tests/data';
+import { TeamDataProvider, UserDataProvider } from '../tests/providers';
+import {
+    APPROVAL_FLOW_APPROVER_TYPES,
+    AddNodeDialogRefData,
+    ApprovalFlowAddNodeComponent
+} from './approval-flow-add-node.component';
 
 const node: ApprovalNode = {
     id: 'id1',
@@ -39,10 +38,11 @@ describe('ApprovalFlowAddNodeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
+            imports: [ApprovalFlowAddNodeComponent, NoopAnimationsModule],
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
-                { provide: DialogConfig, useValue: dialogConfig }
+                { provide: DialogConfig, useValue: dialogConfig },
+                ApprovalFlowAddNodeViewService
             ]
         }).compileComponents();
     });

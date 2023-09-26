@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
 import {
     CollectionBooleanFilter,
@@ -101,6 +101,7 @@ export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilter
     selector: 'fdp-platform-smart-filter-bar-custom-filter-example',
     templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html',
     standalone: true,
+    providers: [provideDateTimeFormats()],
     imports: [
         PlatformSmartFilterBarModule,
         TitleComponent,

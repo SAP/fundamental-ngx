@@ -12,17 +12,22 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { PanelTitleDirective } from '@fundamental-ngx/core/panel';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
-import { PanelConfig } from './panel.config';
-import { PanelContentComponent } from './panel-content/panel-content.component';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
+    ContentDensityDirective,
     ContentDensityObserver,
     contentDensityObserverProviders,
     defaultContentDensityObserverConfigs
 } from '@fundamental-ngx/core/content-density';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    PanelComponent as CorePanelComponent,
+    PanelContentDirective,
+    PanelTitleDirective
+} from '@fundamental-ngx/core/panel';
+import { PanelContentComponent } from './panel-content/panel-content.component';
+import { PanelConfig } from './panel.config';
 
 /** Panel change event instance */
 export class PanelExpandChangeEvent {
@@ -60,7 +65,9 @@ let platformPanelTitleUniqueId = 0;
                 deps: [PanelConfig]
             }
         })
-    ]
+    ],
+    standalone: true,
+    imports: [CorePanelComponent, ContentDensityDirective, PanelTitleDirective, PanelContentDirective]
 })
 export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     /**

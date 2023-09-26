@@ -1,8 +1,18 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef, OnInit, Optional } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Optional, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { AsyncPipe, NgIf } from '@angular/common';
 import { RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
+import {
+    ActionBarBackDirective,
+    ActionBarDescriptionDirective,
+    ActionBarHeaderDirective,
+    ActionBarTitleComponent,
+    ActionBarComponent as CoreActionBarComponent
+} from '@fundamental-ngx/core/action-bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 /**
  * @deprecated
@@ -10,7 +20,19 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
  */
 @Component({
     selector: 'fdp-action-bar',
-    templateUrl: './action-bar.component.html'
+    templateUrl: './action-bar.component.html',
+    standalone: true,
+    imports: [
+        CoreActionBarComponent,
+        ActionBarHeaderDirective,
+        NgIf,
+        ActionBarBackDirective,
+        ButtonComponent,
+        ActionBarTitleComponent,
+        ActionBarDescriptionDirective,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class ActionBarComponent extends BaseComponent implements OnInit {
     /**

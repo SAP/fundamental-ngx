@@ -1,15 +1,15 @@
-import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 
-import { SmartFilterBarService } from './smart-filter-bar.service';
-import { PlatformSmartFilterBarModule } from './smart-filter-bar.module';
+import { BaseDynamicFormGeneratorControl, FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
 import { SmartFilterBarCustomFilterConfig } from './interfaces/smart-filter-bar-custom-filter-config';
-import { BaseDynamicFormGeneratorControl } from '@fundamental-ngx/platform/form';
+import { SmartFilterBarService } from './smart-filter-bar.service';
 
 @Component({
     selector: 'fdp-smart-filter-bar-slider-test',
-    template: ``
+    template: '',
+    standalone: true
 })
 class TestFilterComponent extends BaseDynamicFormGeneratorControl {
     constructor() {
@@ -34,8 +34,8 @@ describe('SmartFilterBarService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformSmartFilterBarModule],
-            declarations: [TestFilterComponent]
+            imports: [TestFilterComponent],
+            providers: [SmartFilterBarService, FormGeneratorService]
         });
         service = TestBed.inject(SmartFilterBarService);
     });

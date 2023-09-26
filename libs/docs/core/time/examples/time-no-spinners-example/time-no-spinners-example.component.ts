@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TimeModule } from '@fundamental-ngx/core/time';
 
 @Component({
     selector: 'fd-time-no-spinners-example',
     templateUrl: './time-no-spinners-example.component.html',
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        }
-    ],
+    providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [TimeModule, FormsModule]
 })

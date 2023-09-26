@@ -8,7 +8,7 @@ describe('TableHeaderCellContentComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TableHeaderCellContentComponent]
+            imports: [TableHeaderCellContentComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(TableHeaderCellContentComponent);

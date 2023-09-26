@@ -1,16 +1,32 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
     Input,
     OnChanges,
     Output,
-    AfterViewInit,
     SimpleChanges,
     ViewEncapsulation
 } from '@angular/core';
 
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    FormControlComponent,
+    FormInputMessageGroupComponent,
+    FormLabelComponent,
+    FormMessageComponent
+} from '@fundamental-ngx/core/form';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+import { ListGroupHeaderDirective } from '@fundamental-ngx/core/list';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
+import { ConditionCountMessageDirective } from '../../directives/condition-count-message.directive';
 import {
     BaseEntity,
     VhdDefineExcludeStrategy,
@@ -19,7 +35,6 @@ import {
     VhdExcludedEntity,
     VhdIncludedEntity
 } from '../../models';
-import { MAX_CHARACTER_HINT_COUNT } from '../../constans';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
 class ExtendedBaseEntity extends BaseEntity {
@@ -41,7 +56,30 @@ let titleUniqueId = 0;
     templateUrl: './define-tab.component.html',
     styleUrls: ['./define-tab.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TitleComponent,
+        NgFor,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
+        FormLabelComponent,
+        SelectComponent,
+        FormsModule,
+        NgIf,
+        ListGroupHeaderDirective,
+        OptionComponent,
+        NgTemplateOutlet,
+        FormInputMessageGroupComponent,
+        FormControlComponent,
+        ConditionCountMessageDirective,
+        ButtonComponent,
+        NgSwitch,
+        NgSwitchCase,
+        FormMessageComponent,
+        FdTranslatePipe
+    ]
 })
 export class DefineTabComponent extends VhdBaseTab implements OnChanges, AfterViewInit {
     /** @hidden */

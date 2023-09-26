@@ -3,7 +3,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -11,6 +11,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    forwardRef,
     HostListener,
     Inject,
     Injector,
@@ -34,13 +35,23 @@ import {
 import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { FormsModule } from '@angular/forms';
+import {
+    DynamicComponentService,
+    KeyUtil,
+    Nullable,
+    RtlService,
+    SearchHighlightPipe
+} from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
 import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
 import {
@@ -70,7 +81,8 @@ export interface ValueLabelItem {
     selector: '[fdpSearchFieldSuggestion]',
     host: {
         tabindex: '-1'
-    }
+    },
+    standalone: true
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
     /** @hidden */
@@ -98,6 +110,25 @@ type Appearance = SearchComponent['appearance'] | undefined;
             provide: FD_SHELLBAR_SEARCH_COMPONENT,
             useExisting: SearchFieldComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        MenuTriggerDirective,
+        NgIf,
+        MenuComponent,
+        NgFor,
+        MenuItemComponent,
+        SelectComponent,
+        OptionComponent,
+        FormsModule,
+        IconComponent,
+        NgClass,
+        SearchFieldSuggestionDirective,
+        AsyncPipe,
+        SearchHighlightPipe,
+        FdTranslatePipe,
+        forwardRef(() => SuggestionMatchesPipe)
     ]
 })
 export class SearchFieldComponent
@@ -725,7 +756,8 @@ export class SearchFieldComponent
 }
 
 @Pipe({
-    name: 'suggestionMatches'
+    name: 'suggestionMatches',
+    standalone: true
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     /** @hidden */

@@ -13,7 +13,31 @@ import { debounceTime } from 'rxjs/operators';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
-import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
+import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 
 export interface DialogTableColumn {
     label: string;
@@ -50,7 +74,37 @@ const INITIAL_SHOW_ALL_ITEMS = true;
     styleUrls: ['./columns.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13ColumnsDialogComponent }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        ToolbarComponent,
+        SearchFieldComponent,
+        ToolbarSpacerDirective,
+        ButtonComponent,
+        ToolbarItemDirective,
+        NgIf,
+        ListComponent,
+        ListItemComponent,
+        CheckboxComponent,
+        FormsModule,
+        ListTitleDirective,
+        NgFor,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy {
     /** @hidden */
