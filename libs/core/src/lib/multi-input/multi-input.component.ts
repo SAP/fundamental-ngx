@@ -10,7 +10,6 @@ import {
     EventEmitter,
     forwardRef,
     HostListener,
-    Inject,
     Injector,
     Input,
     OnChanges,
@@ -25,7 +24,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import {
@@ -56,7 +55,7 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
@@ -387,9 +386,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    _defaultAriaLabel: Nullable<string>;
-
-    /** @hidden */
     readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
 
     /** @hidden */
@@ -419,9 +415,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
-
-    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -429,7 +422,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
@@ -495,12 +487,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._getViewModel()
                 .pipe(map((viewModel) => !viewModel.displayedOptions.some((c) => !c.isSelected)))
                 .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
-        );
-
-        this._subscriptions.add(
-            this._language.subscribe(() => {
-                this._getAriaLabel();
-            })
         );
     }
 
@@ -953,12 +939,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 return { selectedOptions: selected, displayedOptions };
             })
         );
-    }
-
-    /** @hidden */
-    private async _getAriaLabel(): Promise<void> {
-        const lang = await firstValueFrom(this._language);
-        this._defaultAriaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }
 

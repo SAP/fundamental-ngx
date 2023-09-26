@@ -61,7 +61,7 @@
                 class="fdp-search-field__input fd-input fd-input-group__input {{ appearance?.searchFieldClass }}"
                 [attr.id]="_inputId"
                 [attr.disabled]="disabled ? '' : null"
-                [attr.aria-label]="ariaLabel || 'platformSearchField.searchInputLabel' | fdTranslate"
+                [attr.aria-label]="ariaLabel || ('platformSearchField.searchInputLabel' | fdTranslate)"
                 [attr.aria-labelledby]="ariaLabelledBy"
                 [attr.aria-controls]="_menuId"
                 [attr.aria-expanded]="

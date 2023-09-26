@@ -29,5 +29,12 @@ export const ROUTES: Routes = [
         },
         loadChildren: () => import('@fundamental-ngx/docs/cdk')
     },
+    {
+        path: 'i18n',
+        data: {
+            library: 'I18n'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/i18n')
+    },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];

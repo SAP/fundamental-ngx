@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, DestroyRef, Inject, Pipe, PipeTransform } from '@angular/core';
-import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, map, Observable, skip } from 'rxjs';
+import { ChangeDetectorRef, DestroyRef, Pipe, PipeTransform } from '@angular/core';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, skip, switchMap } from 'rxjs';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdLanguage, FdLanguageKeyArgs } from '../models/lang';
-import { FD_LANGUAGE } from '../utils/tokens';
-import { TranslationResolver } from '../utils/translation-resolver';
+import { FdLanguageKeyArgs, FdLanguageKeyIdentifier } from '../models/lang';
+import { resolveTranslationObservableFn } from '../utils';
 
 @Pipe({
     name: 'fdTranslate',
@@ -13,10 +12,10 @@ import { TranslationResolver } from '../utils/translation-resolver';
 })
 export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
+    private readonly _translationResolver = resolveTranslationObservableFn();
 
     /** @hidden */
-    private readonly _key$ = new BehaviorSubject<string | undefined>(undefined);
+    private readonly _key$ = new BehaviorSubject<FdLanguageKeyIdentifier | undefined>(undefined);
 
     /** @hidden */
     private readonly _args$ = new BehaviorSubject<FdLanguageKeyArgs | undefined>(undefined);
@@ -25,16 +24,12 @@ export class FdTranslatePipe implements PipeTransform {
     private _value: string | undefined;
 
     /** @hidden */
-    constructor(
-        @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
-        private readonly _destroyRef: DestroyRef,
-        private _cdr: ChangeDetectorRef
-    ) {
+    constructor(private readonly _destroyRef: DestroyRef, private _cdr: ChangeDetectorRef) {
         this._instantiateSubscription();
     }
 
     /** Translate a key with arguments and, optionally, default value */
-    transform(key: string, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
+    transform(key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs | Record<string, any>, defaultValue = ''): string {
         this._key$.next(key);
         this._args$.next(args);
 
@@ -44,12 +39,11 @@ export class FdTranslatePipe implements PipeTransform {
     /** @hidden */
     private _instantiateSubscription(): void {
         combineLatest([
-            this._language$,
             this._key$.pipe(skip(1), filter(Boolean), distinctUntilChanged()),
             this._args$.pipe(skip(1), distinctUntilChanged())
         ])
             .pipe(
-                map(([lang, key, args]) => this._translationResolver.resolve(lang, key, args)),
+                switchMap(([key, args]) => this._translationResolver(key, args as any)),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((value) => {

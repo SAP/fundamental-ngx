@@ -1,7 +1,18 @@
 import { readCachedProjectGraph } from 'nx/src/project-graph/project-graph';
 
 const knownTypes = new Set(['app', 'e2e', 'tools', 'lib']);
-const knownScopes = new Set(['docs', 'fd', 'fdp', 'fn', 'cx', 'tools', 'datetime-adapter', 'components-e2e', 'i18n']);
+const knownScopes = new Set([
+    'docs',
+    'fd',
+    'fdp',
+    'cdk',
+    'fn',
+    'cx',
+    'tools',
+    'datetime-adapter',
+    'components-e2e',
+    'i18n'
+]);
 
 // For some reason this test hangs. TODO: investigate whats wrong.
 describe('Nx projects (nx.json)', () => {

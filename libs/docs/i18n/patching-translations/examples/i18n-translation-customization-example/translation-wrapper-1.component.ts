@@ -12,7 +12,7 @@ import { patchLanguage } from '@fundamental-ngx/i18n';
             // also function can be used to provide complex translation logic
             platformTextarea: {
                 counterMessageCharactersRemainingSingular: 'You can type 1 more character',
-                counterMessageCharactersRemainingPlural: 'You can type {{ count }} more characters',
+                counterMessageCharactersRemainingPlural: 'You can type { count } more characters',
                 counterMessageCharactersOverTheLimitPlural: (params) => {
                     switch (+params.count) {
                         case 2:

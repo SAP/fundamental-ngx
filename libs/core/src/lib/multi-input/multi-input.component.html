@@ -90,7 +90,7 @@
                     [placeholder]="placeholder"
                     [formControl]="_searchTermCtrl"
                     [attr.aria-required]="required"
-                    [ariaLabel]="ariaLabel || _defaultAriaLabel"
+                    [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
                     [ariaLabelledBy]="ariaLabelledBy"
                     [attr.aria-describedby]="tokenHiddenId"
                     (keydown)="_handleInputKeydown($event)"
