@@ -36,7 +36,13 @@ import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
 import { FormsModule } from '@angular/forms';
-import { DynamicComponentService, KeyUtil, Nullable, RtlService, SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
+import {
+    DynamicComponentService,
+    KeyUtil,
+    Nullable,
+    RtlService,
+    SearchHighlightPipe
+} from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -48,7 +54,10 @@ import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n
 import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
-import { SEARCH_FIELD_COMPONENT, SearchFieldMobileInterface } from './search-field-mobile/search-field-mobile.interface';
+import {
+    SEARCH_FIELD_COMPONENT,
+    SearchFieldMobileInterface
+} from './search-field-mobile/search-field-mobile.interface';
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 

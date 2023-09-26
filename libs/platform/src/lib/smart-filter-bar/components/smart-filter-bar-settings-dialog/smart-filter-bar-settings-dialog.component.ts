@@ -1,22 +1,65 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
-import { asyncScheduler, BehaviorSubject, firstValueFrom, Observable, Subject, Subscription } from 'rxjs';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    OnDestroy,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
+import { BehaviorSubject, Observable, Subject, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
 import { observeOn, takeUntil } from 'rxjs/operators';
 
-import { DialogBodyComponent, DialogComponent, DialogFooterComponent, DialogHeaderComponent, DialogRef } from '@fundamental-ngx/core/dialog';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
 import { FdpSelectionChangeEvent, SelectComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN, Table, TableColumnComponent, TableComponent, TableDataSource, TableRowSelectionChangeEvent, TableToolbarActionsComponent, TableToolbarComponent } from '@fundamental-ngx/platform/table';
+import {
+    RESETTABLE_TOKEN,
+    ResetButtonComponent,
+    Resettable,
+    Table,
+    TableColumnComponent,
+    TableComponent,
+    TableDataSource,
+    TableRowSelectionChangeEvent,
+    TableToolbarActionsComponent,
+    TableToolbarComponent
+} from '@fundamental-ngx/platform/table';
 
-import { FD_LANGUAGE, FdLanguage, FdLanguageKeyIdentifier, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgIf } from '@angular/common';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { BarElementDirective, BarLeftDirective, BarRightDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { FdpCellDef, FdpTableCell, TableDataSourceDirective, TableHeaderResizerDirective, TableInitialStateDirective } from '@fundamental-ngx/platform/table-helpers';
+import {
+    FD_LANGUAGE,
+    FdLanguage,
+    FdLanguageKeyIdentifier,
+    FdTranslatePipe,
+    TranslationResolver
+} from '@fundamental-ngx/i18n';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { SmartFilterBarFieldDefinition } from '../../interfaces/smart-filter-bar-field-definition';
 import { FieldFilterItem } from '../../interfaces/smart-filter-bar-field-filter-item';
 import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
