@@ -23,7 +23,6 @@
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
-    "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
     "@fundamental-styles/cx": "FDCXSTYLES_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER",
