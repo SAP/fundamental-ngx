@@ -20,11 +20,17 @@
             }
         },
         "test": {
-            "executor": "@angular-devkit/build-angular:karma",
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "main": "libs/platform/src/lib/table-helpers/test.ts",
-                "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/table-helpers/karma.conf.js"
+                "jestConfig": "libs/platform/src/lib/table-helpers/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
             }
         },
         "lint": {
