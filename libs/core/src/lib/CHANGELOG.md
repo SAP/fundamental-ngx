@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.57...v0.46.0-rc.58) (2023-09-26)
+
+
+### Features
+
+* **platform:** migration to standalone api ([#10595](https://github.com/SAP/fundamental-ngx/issues/10595)) ([4fd75e6](https://github.com/SAP/fundamental-ngx/commit/4fd75e63e39b813952888a9351b0215678315e51))
+
+
+
+
+
 # [0.46.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.56...v0.46.0-rc.57) (2023-09-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
