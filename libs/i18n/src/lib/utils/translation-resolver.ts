@@ -43,7 +43,7 @@ export class TranslationResolver {
         args?: FdLanguageKeyArgs,
         locale?: Nullable<string>
     ): string {
-        const resolvedValue = this.getRaw(lang, key, args);
+        const resolvedValue = this._getRaw(lang, key, args);
         if (resolvedValue !== '') {
             return this._interpolate(resolvedValue, args, locale);
         }
@@ -64,7 +64,7 @@ export class TranslationResolver {
     /**
      * Returns the raw ICU string for the provided language by key and args
      **/
-    private getRaw(lang: FdLanguage, key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs): string {
+    private _getRaw(lang: FdLanguage, key: FdLanguageKeyIdentifier, args?: FdLanguageKeyArgs): string {
         const val = this._getFdLanguageKeyValue(lang, key, args);
         if (typeof val === 'string') {
             const internalReferences = val.match(_internalReferenceRegExp);
@@ -74,7 +74,7 @@ export class TranslationResolver {
                         _internalReferenceRegExp,
                         '$1'
                     ) as FdLanguageKeyIdentifier;
-                    const replacementValue = this.getRaw(lang, internalReferenceKey, args);
+                    const replacementValue = this._getRaw(lang, internalReferenceKey, args);
                     return [internalReference, replacementValue];
                 });
                 return this._applyReplacements(val, replacements);
