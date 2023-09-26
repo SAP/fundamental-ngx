@@ -240,6 +240,14 @@
                             "with": "apps/docs/src/environments/cx.routes.ts"
                         }
                     ]
+                },
+                "i18n": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/i18n.routes.ts"
+                        }
+                    ]
                 }
             },
             "outputs": ["{options.outputPath}"],
@@ -273,6 +281,11 @@
                 "platform": {
                     "browserTarget": "docs:build:platform",
                     "port": 4204,
+                    "hmr": true
+                },
+                "i18n": {
+                    "browserTarget": "docs:build:i18n",
+                    "port": 4205,
                     "hmr": true
                 },
                 "hot-module-replacement": {
