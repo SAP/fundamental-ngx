@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
     CodeExampleComponent,
     CodeSnippetComponent,
@@ -29,7 +28,6 @@ import { UsingUtilityFunctionsExampleComponent } from './examples/using-utility-
         BasicUsageExampleComponent,
         UsingUtilityFunctionsExampleComponent,
         LinkComponent,
-        MessageStripComponent,
         UsingTranslationPipeExampleComponent
     ]
 })
