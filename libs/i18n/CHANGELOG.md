@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.58...v0.46.0-rc.59) (2023-09-26)
+
+
+### Features
+
+* **i18n:** using json formats as a source for tew and added resolve utilities ([#10571](https://github.com/SAP/fundamental-ngx/issues/10571)) ([5fa5e37](https://github.com/SAP/fundamental-ngx/commit/5fa5e37746429f926a38a9f36fb277bd55618ccc))
+
+
+
+
+
 # [0.46.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.57...v0.46.0-rc.58) (2023-09-26)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
