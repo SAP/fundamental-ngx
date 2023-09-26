@@ -15,7 +15,9 @@ export type NestedKeyOf<ObjectType extends object> = {
 type _FdLanguageKeyIdentifierUnion = `${NestedKeyOf<FdLanguage>}`;
 
 export type FdLanguageKeyIdentifier = {
-    [Key in _FdLanguageKeyIdentifierUnion]: ObjectPathType<FdLanguage, Key> extends FdLanguageKey<any> ? Key : never;
+    [Key in _FdLanguageKeyIdentifierUnion]: ObjectPathType<FdLanguage, Key> extends FdLanguageKey<any> | undefined
+        ? Key
+        : never;
 }[_FdLanguageKeyIdentifierUnion];
 
 export type FdLanguageKeyCtx<T extends FdLanguageKeyIdentifier> = ObjectPathType<FdLanguage, T> extends FdLanguageKey<
@@ -676,9 +678,9 @@ export interface FdLanguage {
         /** @param folderName */
         messageUpdateVersionSuccess: FdLanguageKey<{ folderName: string }>;
         /** @param foldersCount */
-        folderNamePluralization?: FdLanguageKey<{ foldersCount: number }>;
+        folderNamePluralization: FdLanguageKey<{ foldersCount: number }>;
         /** @param filesCount */
-        fileNamePluralization?: FdLanguageKey<{ filesCount: number }>;
+        fileNamePluralization: FdLanguageKey<{ filesCount: number }>;
         /**
          * @param from
          * @param to

@@ -8,8 +8,8 @@ import { PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-    selector: 'app-language-change-example',
-    templateUrl: './i18n-language-change-example.component.html',
+    selector: 'fd-language-change-example',
+    templateUrl: './language-change-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
@@ -24,7 +24,7 @@ import { BehaviorSubject } from 'rxjs';
     standalone: true,
     imports: [SegmentedButtonModule, FormsModule, ButtonModule, FormLabelComponent, PlatformTextAreaModule]
 })
-export class PlatformLanguageChangeExampleComponent {
+export class LanguageChangeExampleComponent {
     fdLocale$ = inject(FD_LOCALE) as BehaviorSubject<string>;
     lang = 'en';
 

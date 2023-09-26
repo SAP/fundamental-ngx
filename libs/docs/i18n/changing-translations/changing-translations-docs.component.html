@@ -6,9 +6,29 @@
     </p>
 </description>
 <component-example>
-    <app-language-change-example></app-language-change-example>
+    <fd-language-change-example></fd-language-change-example>
 </component-example>
 <code-example [exampleFiles]="languageChangeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="locale-change" componentName="i18n"> Changing locales at runtime </fd-docs-section-title>
+<description>
+    <p>
+        Translations have a concept of locale, which is a combination of language and region. For example, English
+        language has different locales for US, UK, Australia, etc. The locale is used to determine the correct
+        translations for the given language. For example, in English there are two plural forms: one for singular and
+        one for plural. In Russian, there are three plural forms: one for singular, one for few and one for plural.
+    </p>
+    <p>
+        To control the locale, you can provide <code>FD_LOCALE</code> token with the locale you want to use. The locale
+        should be in the format of <code>language-region</code>. For example, <code>en-US</code> or <code>uk-UA</code>.
+    </p>
+</description>
+<component-example>
+    <fd-locale-change-example></fd-locale-change-example>
+</component-example>
+<code-example [exampleFiles]="localeChangeExample"></code-example>
 
 <separator></separator>
 

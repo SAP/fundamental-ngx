@@ -10,7 +10,8 @@ import {
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
 import { PlatformI18nTranslationCustomizationExampleComponent } from '../patching-translations/examples/i18n-translation-customization-example/i18n-translation-customization-example.component';
-import { PlatformLanguageChangeExampleComponent } from './examples/i18n-language-change-example/i18n-language-change-example.component';
+import { LanguageChangeExampleComponent } from './examples/i18n-language-change-example/language-change-example.component';
+import { LocaleChangeExampleComponent } from './examples/i18n-locale-change-example/locale-change-example.component';
 
 @Component({
     templateUrl: './changing-translations-docs.component.html',
@@ -24,7 +25,8 @@ import { PlatformLanguageChangeExampleComponent } from './examples/i18n-language
         ComponentExampleComponent,
         PlatformI18nTranslationCustomizationExampleComponent,
         CodeExampleComponent,
-        PlatformLanguageChangeExampleComponent
+        LanguageChangeExampleComponent,
+        LocaleChangeExampleComponent
     ]
 })
 export class ChangingTranslationsDocsComponent {
@@ -72,14 +74,28 @@ export const CUSTOM_LANGUAGE: FdLanguage = {
     languageChangeExample: ExampleFile[] = [
         {
             language: 'html',
-            code: getAssetFromModuleAssets('i18n-language-change-example/i18n-language-change-example.component.html'),
+            code: getAssetFromModuleAssets('i18n-language-change-example/language-change-example.component.html'),
             fileName: 'i18n-language-change-example-example'
         },
         {
             language: 'typescript',
-            component: 'PlatformLanguageChangeExampleComponent',
-            code: getAssetFromModuleAssets('i18n-language-change-example/i18n-language-change-example.component.ts'),
+            component: 'LanguageChangeExampleComponent',
+            code: getAssetFromModuleAssets('i18n-language-change-example/language-change-example.component.ts'),
             fileName: 'i18n-language-change-example-example'
+        }
+    ];
+
+    localeChangeExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: getAssetFromModuleAssets('i18n-locale-change-example/locale-change-example.component.html'),
+            fileName: 'locale-change-example'
+        },
+        {
+            language: 'typescript',
+            component: 'LocaleChangeExampleComponent',
+            code: getAssetFromModuleAssets('i18n-locale-change-example/locale-change-example.component.ts'),
+            fileName: 'locale-change-example'
         }
     ];
 }
