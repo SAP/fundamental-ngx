@@ -1,16 +1,10 @@
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NestedKeyOf, Nullable, ObjectPathType } from '@fundamental-ngx/cdk/utils';
 
 export type FdLanguageKeyArgs = Nullable<Record<string, string | number | boolean>>;
 
 export type FdLanguageKeyFunction<T> = T extends undefined ? () => string : (args: T) => string;
 
 export type FdLanguageKey<T = undefined> = string | FdLanguageKeyFunction<T>;
-
-export type NestedKeyOf<ObjectType extends object> = {
-    [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends object
-        ? `${Key}` | `${Key}.${NestedKeyOf<ObjectType[Key]>}`
-        : `${Key}`;
-}[keyof ObjectType & (string | number)];
 
 type _FdLanguageKeyIdentifierUnion = `${NestedKeyOf<FdLanguage>}`;
 
@@ -25,14 +19,6 @@ export type FdLanguageKeyCtx<T extends FdLanguageKeyIdentifier> = ObjectPathType
 >
     ? Args
     : undefined;
-
-export type ObjectPathType<T, K extends keyof T | string> = K extends keyof T
-    ? T[K]
-    : K extends `${infer First}.${infer Rest}`
-    ? First extends keyof T
-        ? ObjectPathType<T[First], Rest>
-        : never
-    : never;
 
 export type FlatFdLanguage = {
     [Key in FdLanguageKeyIdentifier]: FdLanguageKey<FdLanguageKeyCtx<Key>>;
