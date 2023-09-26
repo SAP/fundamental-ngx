@@ -1,5 +1,6 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../../dist/libs/cdk/data-source",
     "lib": {
         "entryFile": "./index.ts"
     }
