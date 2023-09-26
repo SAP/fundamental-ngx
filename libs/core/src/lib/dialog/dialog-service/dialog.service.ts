@@ -1,17 +1,19 @@
-import { inject, Inject, Injectable, Injector, Optional, PLATFORM_ID } from '@angular/core';
-import { takeUntil } from 'rxjs';
-import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
-import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { DialogRef } from '../utils/dialog-ref.class';
-import { DialogBaseService } from '../base/dialog-base.service';
-import { DialogContentType } from '../dialog.types';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, Injector, Optional, PLATFORM_ID, inject } from '@angular/core';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { takeUntil } from 'rxjs';
+import { DialogBaseService } from '../base/dialog-base.service';
+import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
+import { DialogContentType } from '../dialog.types';
+import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 
 /** Service used to create a dialog. */
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class DialogService extends DialogBaseService<DialogContainerComponent> {
     /** @hidden */
     private platformId = inject(PLATFORM_ID);

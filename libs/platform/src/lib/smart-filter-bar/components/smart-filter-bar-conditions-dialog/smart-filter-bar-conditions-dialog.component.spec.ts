@@ -3,10 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { DynamicFormFieldItem } from '@fundamental-ngx/platform/form';
+import { DynamicFormFieldItem, FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { FilterableColumnDataType } from '@fundamental-ngx/platform/table';
 import { SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
-import { PlatformSmartFilterBarModule } from '../../smart-filter-bar.module';
+import { SmartFilterBarService } from '../../smart-filter-bar.service';
 import { SmartFilterBarConditionsDialogComponent } from './smart-filter-bar-conditions-dialog.component';
 
 const mockData: SmartFilterBarConditionBuilder = {
@@ -40,9 +40,10 @@ describe('SmartFilterBarConditionsDialogComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, PlatformSmartFilterBarModule],
-            declarations: [SmartFilterBarConditionsDialogComponent],
+            imports: [NoopAnimationsModule, SmartFilterBarConditionsDialogComponent],
             providers: [
+                SmartFilterBarService,
+                FormGeneratorService,
                 {
                     provide: DialogRef,
                     useValue: dialogRefMock

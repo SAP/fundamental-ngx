@@ -6,7 +6,8 @@ let platformPanelContentUniqueId = 0;
     selector: 'fdp-panel-content',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./panel-content.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class PanelContentComponent {
     /**

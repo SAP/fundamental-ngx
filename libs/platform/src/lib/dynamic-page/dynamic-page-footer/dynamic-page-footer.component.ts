@@ -1,10 +1,11 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-dynamic-page-footer',
     template: '<ng-template #contentTemplateRef><ng-content></ng-content></ng-template>',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class DynamicPageFooterComponent {
     /**

@@ -1,7 +1,22 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogTitleDirective
+} from '@fundamental-ngx/core/dialog';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { UploadCollectionFolder } from '../../models/upload-collection.models';
 
 @Component({
@@ -12,6 +27,25 @@ import { UploadCollectionFolder } from '../../models/upload-collection.models';
                 font-weight: bold;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TitleComponent,
+        DialogTitleDirective,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        FormItemComponent,
+        FormLabelComponent,
+        FormsModule,
+        FormControlComponent,
+        NgIf,
+        ObjectStatusComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
     ]
 })
 export class NewFolderComponent implements AfterViewInit {

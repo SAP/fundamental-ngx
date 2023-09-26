@@ -3,7 +3,8 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { VhdTab } from '../../models';
 
 @Component({
-    template: ''
+    template: '',
+    standalone: true
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class VhdBaseTab {

@@ -1,22 +1,30 @@
+import { NgIf } from '@angular/common';
 import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     Output,
-    ViewChild,
-    ViewEncapsulation,
-    ChangeDetectionStrategy,
-    AfterViewInit,
     Renderer2,
-    ElementRef
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 @Component({
     selector: 'fdp-feed-input',
     templateUrl: './feed-input.component.html',
     styleUrls: ['./feed-input.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, AvatarComponent, FormsModule, FormControlComponent, ButtonComponent, FdTranslatePipe]
 })
 export class FeedInputComponent implements AfterViewInit {
     /** The user image source, If is not set, then the user image will display placeholder image.  */

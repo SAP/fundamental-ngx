@@ -16,12 +16,48 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { isObservable, Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogConfig,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
+import { FormControlComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+import { ListIconDirective, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { TabItemDirective, TabLinkDirective, TabNavComponent, TabTagDirective } from '@fundamental-ngx/core/tabs';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
+import { cloneDeep } from 'lodash-es';
+import { DefineTabComponent } from '../components/define-tab/define-tab.component';
+import { SelectTabComponent } from '../components/select-tab/select-tab.component';
+import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
+import { defaultConditionDisplayFn } from '../constans/condition-display.function';
 import {
     ArrayValueHelpDialogDataSource,
     BaseEntity,
@@ -35,9 +71,6 @@ import {
     VhdValue,
     VhdValueChangeEvent
 } from '../models';
-import { VhdFilterComponent } from '../components/value-help-dialog-filter/value-help-dialog-filter.component';
-import { defaultConditionDisplayFn } from '../constans/condition-display.function';
-import { cloneDeep } from 'lodash-es';
 
 export type FdpValueHelpDialogDataSource<T> =
     | ValueHelpDialogDataSource<T>
@@ -51,7 +84,56 @@ let vhiUniqueId = 0;
     templateUrl: './value-help-dialog.component.html',
     styleUrls: ['./value-help-dialog.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        NgTemplateOutlet,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgIf,
+        DialogFooterComponent,
+        TitleComponent,
+        TokenizerComponent,
+        NgFor,
+        TokenComponent,
+        ToolbarItemDirective,
+        FormControlComponent,
+        TokenizerInputDirective,
+        ButtonComponent,
+        FormsModule,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
+        SearchFieldComponent,
+        ToolbarComponent,
+        ToolbarSpacerDirective,
+        BusyIndicatorComponent,
+        FormLabelComponent,
+        SkeletonComponent,
+        SelectTabComponent,
+        DefineTabComponent,
+        ListLinkDirective,
+        ListTitleDirective,
+        ListIconDirective,
+        TabNavComponent,
+        TabItemDirective,
+        TabLinkDirective,
+        TabTagDirective,
+        BarComponent,
+        BarLeftDirective,
+        BarElementDirective,
+        BarRightDirective,
+        ButtonBarComponent,
+        NgSwitch,
+        NgSwitchCase,
+        SlicePipe,
+        FdTranslatePipe,
+        DisplayFnPipe
+    ]
 })
 export class PlatformValueHelpDialogComponent<T = any> implements OnChanges, OnDestroy {
     /** Id of the popover */

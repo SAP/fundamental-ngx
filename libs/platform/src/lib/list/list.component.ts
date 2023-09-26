@@ -44,9 +44,18 @@ import {
 } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
-import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { KeyUtil, Nullable, RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
+import {
+    ListComponent as CoreListComponent,
+    FD_LIST_UNREAD_INDICATOR,
+    ListItemComponent,
+    ListUnreadIndicator
+} from '@fundamental-ngx/core/list';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { FD_LANGUAGE, FdLanguage, FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
 import {
     ArrayListDataSource,
     CollectionBaseInput,
@@ -93,7 +102,20 @@ let nextListId = 0;
     ],
     host: {
         '[attr.tabindex]': '-1'
-    }
+    },
+    standalone: true,
+    imports: [
+        CoreListComponent,
+        NgIf,
+        BusyIndicatorComponent,
+        InfiniteScrollDirective,
+        ListItemComponent,
+        NgTemplateOutlet,
+        NgFor,
+        RepeatDirective,
+        SkeletonComponent,
+        FdTranslatePipe
+    ]
 })
 export class ListComponent<T>
     extends CollectionBaseInput

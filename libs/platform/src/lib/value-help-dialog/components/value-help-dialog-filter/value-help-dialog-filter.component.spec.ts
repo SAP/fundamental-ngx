@@ -8,7 +8,7 @@ describe('VhdFilterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [VhdFilterComponent]
+            imports: [VhdFilterComponent]
         }).compileComponents();
     });
 

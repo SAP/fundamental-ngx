@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, DoCheck } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { CollectionFilter } from '@fundamental-ngx/platform/table-helpers';
 
-import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
 
 /**
  * Custom Select filter type.
@@ -20,7 +21,9 @@ import {
     templateUrl: './filter-custom.component.html',
     // Keep it "Default" intentionally to run ngDoCheck when child template emits changes
     changeDetection: ChangeDetectionStrategy.Default,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true,
+    imports: [NgTemplateOutlet]
 })
 export class FilterCustomComponent implements DoCheck {
     /** ViewSettingsFilter options the filter is created from */
