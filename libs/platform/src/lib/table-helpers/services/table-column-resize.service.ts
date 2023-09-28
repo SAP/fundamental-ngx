@@ -317,10 +317,10 @@ export class TableColumnResizeService implements OnDestroy {
         if (
             diffX > 0 &&
             (this._tableRef._freezableColumns.has(this._resizedColumn) ||
-                this._tableRef._freezableEndColumns.has(this._resizedColumn))
+                this._tableRef._freezableEndColumns?.has(this._resizedColumn))
         ) {
             let actualWidth = this.getPrevColumnsWidth(this._resizedColumn) + columnWidth;
-            if (this._tableRef._freezableEndColumns.has(this._resizedColumn)) {
+            if (this._tableRef._freezableEndColumns?.has(this._resizedColumn)) {
                 actualWidth = this.getNextColumnsWidth(this._resizedColumn) + columnWidth;
             }
             const newWidth = actualWidth + diffX;
