@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -10,25 +12,51 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarElementDirective, BarMiddleDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogCloseButtonComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogService
+} from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { takeUntil } from 'rxjs/operators';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldChildContent,
     SearchFieldMobileInterface
 } from '../search-field-mobile.interface';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-search-field-mobile',
     templateUrl: 'search-field-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarMiddleDirective,
+        BarElementDirective,
+        NgIf,
+        NgTemplateOutlet,
+        DialogCloseButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        DialogFooterComponent,
+        ButtonBarComponent
+    ]
 })
 export class SearchFieldMobileComponent
     extends MobileModeBase<SearchFieldMobileInterface>

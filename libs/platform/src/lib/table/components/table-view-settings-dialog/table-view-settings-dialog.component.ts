@@ -59,7 +59,8 @@ export const dialogConfig: DialogConfig = {
     selector: 'fdp-table-view-settings-dialog',
     template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestroy {
     /** Reference to table component. */

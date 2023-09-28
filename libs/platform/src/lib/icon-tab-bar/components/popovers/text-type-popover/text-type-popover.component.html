@@ -6,7 +6,7 @@
                 <i class="sap-icon--slim-arrow-down" role="presentation"></i>
             </button>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body class="fd-icon-tab-bar">
             <ul
                 fdpIconBarDndList
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
@@ -38,7 +38,7 @@
                 </div>
             </a>
         </fd-popover-control>
-        <fd-popover-body>
+        <fd-popover-body class="fd-icon-tab-bar">
             <ul
                 fdpIconBarDndList
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
@@ -58,7 +58,8 @@
         <li
             [attr.aria-level]="level"
             class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
-            [class]="item.cssClasses"
+            [class.fd-icon-tab-bar__list-item--closable]="item.closable"
+            [ngClass]="item.cssClasses"
             fdpIconBarDndItem
             [dndItemData]="item"
             role="listitem"
@@ -82,6 +83,16 @@
                     {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
                 </div>
             </a>
+            <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
+                <button
+                    fd-button
+                    class="fd-icon-tab-bar__button"
+                    fdType="transparent"
+                    (click)="closeTab.emit(item.uId)"
+                >
+                    <fd-icon glyph="decline"></fd-icon>
+                </button>
+            </div>
         </li>
         <ng-container *ngIf="item.subItems?.length">
             <ng-container

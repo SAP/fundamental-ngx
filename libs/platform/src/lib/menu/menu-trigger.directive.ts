@@ -1,3 +1,6 @@
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
     AfterContentInit,
     Directive,
@@ -9,15 +12,12 @@ import {
     Self,
     ViewContainerRef
 } from '@angular/core';
-import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { MenuCloseMethod, MenuComponent } from './menu.component';
 import { MenuItemComponent } from './menu-item.component';
+import { MenuCloseMethod, MenuComponent } from './menu.component';
 
 @Directive({
     selector: `[fdpMenuTriggerFor]`,
@@ -25,7 +25,8 @@ import { MenuItemComponent } from './menu-item.component';
         'aria-haspopup': 'menu',
         '[attr.aria-expanded]': 'isMenuOpen || null',
         '[attr.aria-controls]': 'isMenuOpen ? menu.menuId : null'
-    }
+    },
+    standalone: true
 })
 export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     /** Set Menu Component for which this trigger will be associated. */

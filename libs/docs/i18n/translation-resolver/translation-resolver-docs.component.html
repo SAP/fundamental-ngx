@@ -1,0 +1,39 @@
+<fd-docs-section-title id="basic" componentName="i18n"> Basic Usage </fd-docs-section-title>
+<description>
+    You can resolve translations using the <code>TranslationResolver</code> class and a <code>FdLanguage</code>
+    object any time
+</description>
+<component-example>
+    <fd-translation-resolver-basic-usage-example />
+</component-example>
+<code-example [exampleFiles]="basicTranslationResolverExampleFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="withUtility" componentName="i18n"> Using utility functions </fd-docs-section-title>
+<description>
+    <p>
+        You can resolve translations using the utility functions as well, which are available globally and should be
+        used inside the
+        <a href="https://angular.io/guide/dependency-injection-context" fd-link target="_blank">
+            dependency injection context
+        </a>
+    </p>
+</description>
+<component-example>
+    <fd-translation-resolver-using-utility-functions-example />
+</component-example>
+<code-example [exampleFiles]="utilityTranslationResolverExampleFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="withPipe" componentName="i18n"> Using fdTranslate pipe </fd-docs-section-title>
+<description>
+    <p>You can resolve provided translations using the <code>fdTranslate</code> pipe</p>
+</description>
+<component-example>
+    <fd-using-translation-pipe-example />
+</component-example>
+<code-example [exampleFiles]="usingTranslationPipeExampleFiles"></code-example>
+
+<separator></separator>

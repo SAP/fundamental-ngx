@@ -13,7 +13,8 @@ import { Directive, TemplateRef } from '@angular/core';
  * ```
  */
 @Directive({
-    selector: '[fdpVariantManagementDirtyLabel]'
+    selector: '[fdpVariantManagementDirtyLabel]',
+    standalone: true
 })
 export class VariantManagementDirtyLabelDirective {
     /** @hidden */

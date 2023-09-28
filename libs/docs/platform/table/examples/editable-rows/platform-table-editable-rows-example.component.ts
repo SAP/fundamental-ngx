@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import {
@@ -37,12 +37,7 @@ import {
     templateUrl: './platform-table-editable-rows-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        }
-    ],
+    providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [
         TableDataSourceDirective,

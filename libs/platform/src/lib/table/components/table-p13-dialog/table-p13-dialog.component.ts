@@ -64,7 +64,8 @@ const dialogConfig: DialogConfig = {
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class TableP13DialogComponent implements OnDestroy {
     /** Reference to table component. */

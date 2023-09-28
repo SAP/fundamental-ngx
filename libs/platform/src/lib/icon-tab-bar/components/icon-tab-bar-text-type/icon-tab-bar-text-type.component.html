@@ -11,12 +11,13 @@
     >
         <li
             *ngFor="let item of _tabs; let idx = index; trackBy: _trackByTab"
-            [class]="item.cssClasses"
+            [ngClass]="item.cssClasses"
             fdkOverflowListItem
             fdpIconBarDndItem
             [dndSeparatorClass]="['fd-icon-tab-bar__item--dnd-separator']"
             [dndItemData]="item"
             class="fd-icon-tab-bar__item"
+            [class.fd-icon-tab-bar__item--closable]="item.closable"
             [attr.aria-hidden]="item.hidden"
             role="presentation"
         >
@@ -52,9 +53,15 @@
                     [colorAssociations]="colorAssociations"
                     (selectedSubItem)="_selectItem($event)"
                     (keydown)="_keyDownHandler($event, item, idx)"
+                    (closeTab)="_closeTab($event)"
                 >
                 </fdp-text-type-popover>
             </ng-template>
+            <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
+                <button fd-button class="fd-icon-tab-bar__button" fdType="transparent" (click)="_closeTab(item.uId)">
+                    <fd-icon glyph="decline"></fd-icon>
+                </button>
+            </div>
         </li>
         <li *ngIf="_extraTabs.length" role="presentation" class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow">
             <fdp-text-type-popover
@@ -66,6 +73,7 @@
                 (selectedExtraItem)="_selectExtraItem($event)"
                 (focusFirstVisibleItem)="_focusItem(0)"
                 (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
+                (closeTab)="_closeTab($event)"
             >
             </fdp-text-type-popover>
         </li>

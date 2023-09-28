@@ -16,6 +16,7 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 
@@ -28,7 +29,9 @@ import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
     host: {
         class: 'fd-menu__item',
         tabindex: '-1'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
     /** Set the Menu Item as disabled/enabled */

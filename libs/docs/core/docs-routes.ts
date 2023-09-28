@@ -52,10 +52,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
             {
-                path: 'i18n',
-                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.ROUTES)
-            },
-            {
                 path: 'action-bar',
                 loadChildren: () => import('@fundamental-ngx/docs/core/action-bar').then(configureCoreRoutes)
             },

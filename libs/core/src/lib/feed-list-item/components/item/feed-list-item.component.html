@@ -58,7 +58,9 @@
         *ngIf="!isRichText && hasMore"
         (click)="toggleTextView()"
         >{{
-            isCollapsed ? ('coreFeedListItem.moreLabel' | fdTranslate) : ('coreFeedListItem.lessLabel' | fdTranslate)
+            isCollapsed
+                ? ('coreFeedListItem.moreLabel' | fdTranslate : { count: (text ? text.length : 0) - maxChars })
+                : ('coreFeedListItem.lessLabel' | fdTranslate)
         }}</a
     >
 </ng-template>

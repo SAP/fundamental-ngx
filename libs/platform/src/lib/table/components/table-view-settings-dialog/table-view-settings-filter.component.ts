@@ -34,7 +34,8 @@ import {
     selector: 'fdp-table-view-settings-filter',
     template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class TableViewSettingsFilterComponent {
     /** Table column name on which to filter. */

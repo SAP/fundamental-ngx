@@ -73,5 +73,6 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:i18n"]
+    "tags": ["type:lib", "scope:i18n"],
+    "implicitDependencies": ["cdk"]
 }

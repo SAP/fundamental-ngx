@@ -1,13 +1,14 @@
 import { AfterViewInit, ContentChildren, Directive, QueryList } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import { Table, TableDataSource, TableState } from '@fundamental-ngx/platform/table';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SmartFilterBarFieldDefinition } from '../interfaces/smart-filter-bar-field-definition';
 import { SmartFilterBarFieldDefinitionDirective } from './smart-filter-bar-field-definition.directive';
 
 @Directive({
     selector: '[fdpSmartFilterBarSubject], [fdp-smart-filter-bar-subject]',
-    exportAs: 'fdp-smart-filter-bar-subject'
+    exportAs: 'fdp-smart-filter-bar-subject',
+    standalone: true
 })
 export class SmartFilterBarSubjectDirective implements AfterViewInit {
     /** @hidden */

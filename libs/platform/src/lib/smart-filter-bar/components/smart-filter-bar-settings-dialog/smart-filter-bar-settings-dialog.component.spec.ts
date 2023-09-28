@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SmartFilterBarSettingsDialogComponent } from './smart-filter-bar-settings-dialog.component';
-import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
-import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
-import { whenStable } from '@fundamental-ngx/core/tests';
-import { SmartFilterBarVisibilityCategory } from '../../interfaces/smart-filter-bar-visibility-category';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogConfig, DialogRef, FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { FilterType, FilterableColumnDataType } from '@fundamental-ngx/platform/table';
 import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
-import { PlatformSmartFilterBarModule } from '../../smart-filter-bar.module';
+import { SmartFilterBarVisibilityCategory } from '../../interfaces/smart-filter-bar-visibility-category';
+import { SmartFilterBarSettingsDialogComponent } from './smart-filter-bar-settings-dialog.component';
 
 const mockData: SmartFilterSettingsDialogConfig = {
     fields: [
@@ -40,8 +39,7 @@ describe('SmartFilterBarSettingsDialogComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [NoopAnimationsModule, PlatformSmartFilterBarModule],
-            declarations: [SmartFilterBarSettingsDialogComponent],
+            imports: [NoopAnimationsModule, SmartFilterBarSettingsDialogComponent],
             providers: [
                 {
                     provide: DialogRef,

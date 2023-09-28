@@ -1,12 +1,10 @@
 import { EventEmitter, QueryList } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BehaviorSubject } from 'rxjs';
 
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-
 import { Table, TableColumn } from '@fundamental-ngx/platform/table-helpers';
-import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 import { TableViewSettingsDialogComponent } from './table-view-settings-dialog.component';
+import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 
 class TableComponentMock
     implements
@@ -43,8 +41,7 @@ describe('TableViewSettingsDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule],
-            declarations: [TableViewSettingsDialogComponent]
+            imports: [TableViewSettingsDialogComponent]
         }).compileComponents();
     }));
 

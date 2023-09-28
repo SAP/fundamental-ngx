@@ -4,6 +4,33 @@ import { take } from 'rxjs/operators';
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { isObject } from '@fundamental-ngx/platform/shared';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import {
+    ListComponent,
+    ListIconDirective,
+    ListItemComponent,
+    ListLinkDirective,
+    ListTitleDirective
+} from '@fundamental-ngx/core/list';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { UploadCollectionFolder, UploadCollectionItem } from '../../models/upload-collection.models';
 import { NewFolderComponent } from '../new-folder/new-folder.component';
 
@@ -31,6 +58,31 @@ export interface MoveToComponentDialogData {
                 font-weight: bold;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        NgIf,
+        TitleComponent,
+        ButtonComponent,
+        BarRightDirective,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        ListComponent,
+        ListItemComponent,
+        ListTitleDirective,
+        NgFor,
+        ListLinkDirective,
+        IconComponent,
+        ListIconDirective,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
     ]
 })
 export class MoveToComponent implements OnInit {

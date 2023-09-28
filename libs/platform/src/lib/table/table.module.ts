@@ -1,40 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
-import {
-    ClickedBehaviorModule,
-    DisabledBehaviorModule,
-    DragAndDropModule,
-    IntersectionSpyDirective,
-    PipeModule,
-    RepeatModule
-} from '@fundamental-ngx/cdk/utils';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { PanelModule } from '@fundamental-ngx/core/panel';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { RadioModule } from '@fundamental-ngx/core/radio';
-import { ScrollbarModule } from '@fundamental-ngx/core/scrollbar';
-import { SelectModule } from '@fundamental-ngx/core/select';
-import { TableModule } from '@fundamental-ngx/core/table';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { PlatformDatePickerModule, PlatformInputModule, PlatformSwitchModule } from '@fundamental-ngx/platform/form';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
-import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { TableHelpersModule } from '@fundamental-ngx/platform/table-helpers';
 
 import {
@@ -122,44 +87,7 @@ const EXPORTABLE_DECLARATIONS = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        TableModule,
-        ToolbarModule,
-        FormModule,
-        CheckboxModule,
-        RadioModule,
-        InputGroupModule,
-        PopoverModule,
-        ListModule,
-        PlatformButtonModule,
-        PipeModule,
-        ButtonModule,
-        PlatformInputModule,
-        DialogModule,
-        PlatformSearchFieldModule,
-        IconModule,
-        I18nModule,
-        SelectModule,
-        LayoutGridModule,
-        PanelModule,
-        DatePickerModule,
-        BusyIndicatorModule,
-        DragAndDropModule,
-        ScrollbarModule,
-        PlatformDatePickerModule,
-        PlatformSwitchModule,
-        ContentDensityModule,
-        SkeletonModule,
-        RepeatModule,
-        DisabledBehaviorModule,
-        PlatformListModule,
-        ClickedBehaviorModule.forRoot(),
-        TableHelpersModule,
-        IntersectionSpyDirective
-    ],
-    declarations: [...EXPORTABLE_DECLARATIONS],
+    imports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule],
     exports: [...EXPORTABLE_DECLARATIONS, TableHelpersModule]
 })
 export class PlatformTableModule {}

@@ -1,5 +1,8 @@
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { InputComponent, PlatformDatePickerComponent, SwitchComponent } from '@fundamental-ngx/platform/form';
 import { EditableTableCell, TableColumn, TableRow } from '@fundamental-ngx/platform/table-helpers';
 import { set } from 'lodash-es';
 
@@ -10,7 +13,18 @@ let controlUniqId = 0;
     templateUrl: './table-editable-cell.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: EditableTableCell, useExisting: TableEditableCellComponent }]
+    providers: [{ provide: EditableTableCell, useExisting: TableEditableCellComponent }],
+    standalone: true,
+    imports: [
+        FormsModule,
+        NgSwitch,
+        NgSwitchCase,
+        InputComponent,
+        PlatformDatePickerComponent,
+        SwitchComponent,
+        NgSwitchDefault,
+        FdTranslatePipe
+    ]
 })
 export class TableEditableCellComponent implements EditableTableCell {
     /** Table row definition. */

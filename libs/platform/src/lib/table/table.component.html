@@ -50,7 +50,9 @@
                     [selectionColumnWidth]="_selectionColumnWidth"
                     [freezeColumnsTo]="freezeColumnsTo"
                     [freezeEndColumnsTo]="freezeEndColumnsTo"
-                    (fdkClicked)="_onRowClick(null, $event)"
+                    (keydown.enter)="_onRowClick(null, $event)"
+                    (keydown.space)="_onRowClick(null, $event)"
+                    (click)="_onRowClick(null, $event)"
                     [disableSelectionCheckbox]="_dataSourceTableRows.length === 0"
                 ></tr>
             </thead>
@@ -101,7 +103,9 @@
                             [highlightActive]="highlightNavigatedRow"
                             [style.height.px]="rowHeight"
                             [attr.aria-level]="isTreeTable ? row.level + 1 : null"
-                            (fdkClicked)="_onRowClick(row, $event)"
+                            (keydown.enter)="_onRowClick(row, $event)"
+                            (keydown.space)="_onRowClick(row, $event)"
+                            (click)="_onRowClick(row, $event)"
                             (started)="_dndTableDirective?.dragDropStart()"
                             [main]="true"
                             [class.fd-table__row--draggable]="isDraggable"

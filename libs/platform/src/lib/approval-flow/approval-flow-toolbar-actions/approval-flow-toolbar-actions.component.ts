@@ -1,9 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
+import { NgIf } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
 import { ApprovalFlowGraph, ApprovalGraphMetadata } from '../approval-flow-graph';
-import { ApprovalGraphNode } from '../interfaces/approval-node';
 import { isNodeApproved } from '../helpers';
+import { ApprovalGraphNode } from '../interfaces/approval-node';
 
 /**
  * @deprecated
@@ -17,7 +21,9 @@ import { isNodeApproved } from '../helpers';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fdp-approval-flow-toolbar-actions'
-    }
+    },
+    standalone: true,
+    imports: [ContentDensityDirective, NgIf, ButtonComponent, FdTranslatePipe]
 })
 export class ApprovalFlowToolbarActionsComponent {
     /** Approval flow graph */

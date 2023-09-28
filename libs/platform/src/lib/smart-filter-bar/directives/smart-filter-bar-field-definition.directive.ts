@@ -1,9 +1,10 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Directive, Input } from '@angular/core';
-import { CollectionFilterGroupStrategy, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { CollectionFilterGroupStrategy, FilterType, FilterableColumnDataType } from '@fundamental-ngx/platform/table';
 
 @Directive({
-    selector: '[fdpSmartFilterBarFieldDefinition], [fdp-smart-filter-bar-field-definition]'
+    selector: '[fdpSmartFilterBarFieldDefinition], [fdp-smart-filter-bar-field-definition]',
+    standalone: true
 })
 export class SmartFilterBarFieldDefinitionDirective {
     /** Field data accessor key. */

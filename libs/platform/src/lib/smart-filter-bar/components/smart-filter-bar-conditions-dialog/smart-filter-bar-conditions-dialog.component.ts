@@ -2,28 +2,66 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    Inject,
     QueryList,
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 
-import { FilterAllStrategy, FILTER_STRATEGY } from '@fundamental-ngx/platform/table';
-import { SelectItem } from '@fundamental-ngx/platform/shared';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { DynamicFormControl, DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
-import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
-import { SmartFilterBarService } from '../../smart-filter-bar.service';
+import { SelectItem } from '@fundamental-ngx/platform/shared';
+import { FILTER_STRATEGY, FilterAllStrategy } from '@fundamental-ngx/platform/table';
 import { getSelectItemValue } from '../../helpers';
-import { SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { firstValueFrom, Observable } from 'rxjs';
+import { SmartFilterBarCondition, SmartFilterBarConditionBuilder } from '../../interfaces/smart-filter-bar-condition';
+import { SmartFilterBarStrategy, SmartFilterBarStrategyLabels } from '../../interfaces/strategy-labels.type';
+import { SmartFilterBarService } from '../../smart-filter-bar.service';
 
 @Component({
     selector: 'fdp-smart-filter-bar-conditions-dialog',
     templateUrl: './smart-filter-bar-conditions-dialog.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgIf,
+        FormsModule,
+        NgFor,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
+        FormGeneratorComponent,
+        ButtonComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        BusyIndicatorComponent,
+        FdTranslatePipe
+    ]
 })
 export class SmartFilterBarConditionsDialogComponent {
     /** Condition builder config. */
@@ -65,15 +103,11 @@ export class SmartFilterBarConditionsDialogComponent {
     private _submittedForms: any[] = [];
 
     /** @hidden */
-    private _language: FdLanguage;
-
-    /** @hidden */
-    private _translationResolver = new TranslationResolver();
+    private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
     constructor(
         private _dialogRef: DialogRef<SmartFilterBarConditionBuilder, SmartFilterBarCondition[]>,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _cdr: ChangeDetectorRef,
         private _smartFilterBarService: SmartFilterBarService
     ) {
@@ -81,11 +115,10 @@ export class SmartFilterBarConditionsDialogComponent {
     }
 
     /** @hidden */
-    private async _init(): Promise<void> {
+    private _init(): void {
         this.config = this._dialogRef.data;
 
-        this._language = await firstValueFrom(this._language$);
-        this.conditionOperatorOptions = await this._getApplicableConditionOperators();
+        this.conditionOperatorOptions = this._getApplicableConditionOperators();
 
         this._addExistingConditions(getSelectItemValue(this.config.conditions));
 
@@ -164,15 +197,12 @@ export class SmartFilterBarConditionsDialogComponent {
             this.config.dataType
         );
 
-        const labelsConfig = { ...this._conditionLabelKeys };
-        for (const strategyItem in labelsConfig) {
-            if (Object.prototype.hasOwnProperty.call(labelsConfig, strategyItem)) {
-                const translationKey = labelsConfig[strategyItem];
-                labelsConfig[strategyItem] = this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.' + translationKey
-                );
-            }
+        const labelsConfig: Record<SmartFilterBarStrategy, string> = { ...this._conditionLabelKeys };
+        for (const strategyItem of Object.keys(this._conditionLabelKeys) as SmartFilterBarStrategy[]) {
+            const translationKey = 'platformSmartFilterBar.' + labelsConfig[strategyItem];
+            labelsConfig[strategyItem] = this.resolveTranslation(
+                translationKey as `platformSmartFilterBar.${SmartFilterBarStrategyLabels[SmartFilterBarStrategy]}`
+            );
         }
 
         return strategy.map((s: FilterAllStrategy) => ({
@@ -217,10 +247,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.filterConditionValuePlaceholder'
-                ),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValuePlaceholder'),
                 controlType: this.config.controlType,
                 when: (value) => value.operator !== FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -238,10 +265,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.filterConditionValueFromPlaceholder'
-                ),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueFromPlaceholder'),
                 controlType: this.config.controlType,
                 when: (value) => value.operator === FILTER_STRATEGY.BETWEEN,
                 onchange: (value, _, control: DynamicFormControl) => {
@@ -259,10 +283,7 @@ export class SmartFilterBarConditionsDialogComponent {
                 default: condition?.value2,
                 type: this.config.filterType,
                 choices: this.config.choices,
-                placeholder: this._translationResolver.resolve(
-                    this._language,
-                    'platformSmartFilterBar.filterConditionValueToPlaceholder'
-                ),
+                placeholder: this.resolveTranslation('platformSmartFilterBar.filterConditionValueToPlaceholder'),
                 required: true,
                 controlType: this.config.controlType,
                 when: (value) => value?.operator === FILTER_STRATEGY.BETWEEN,

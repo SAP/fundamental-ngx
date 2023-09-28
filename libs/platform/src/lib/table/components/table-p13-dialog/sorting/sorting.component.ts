@@ -4,19 +4,40 @@ import {
     Component,
     Pipe,
     PipeTransform,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import {
     CollectionSort,
-    getUniqueListValuesByKey,
     SortDirection,
-    TableDialogCommonData
+    TableDialogCommonData,
+    getUniqueListValuesByKey
 } from '@fundamental-ngx/platform/table-helpers';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor } from '@angular/common';
+import { DisabledBehaviorDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 
 export interface SortDialogColumn {
     label: string;
@@ -57,7 +78,30 @@ class ValidatedSortRule implements SortRule {
     styleUrls: ['./sorting.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13SortingDialogComponent }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgFor,
+        SelectComponent,
+        OptionComponent,
+        ButtonComponent,
+        DisabledBehaviorDirective,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe,
+        forwardRef(() => GetAvailableSortColumnsPipe)
+    ]
 })
 export class P13SortingDialogComponent implements Resettable {
     /** Table columns available for sorting */
@@ -178,7 +222,11 @@ export class P13SortingDialogComponent implements Resettable {
     private _isRuleValid = (rule: ValidatedSortRule): boolean => rule?.isValid;
 }
 
-@Pipe({ name: 'getAvailableSortColumns', pure: false })
+@Pipe({
+    name: 'getAvailableSortColumns',
+    pure: false,
+    standalone: true
+})
 export class GetAvailableSortColumnsPipe implements PipeTransform {
     /** @hidden */
     transform(columns: SortDialogColumn[], rules: SortRule[], currentKey: string | null): SortDialogColumn[] {

@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 
 import { PlatformObjectMarkerComponent } from './object-marker.component';
 
 @Component({
     selector: 'fdp-test-object-marker',
-    template: ` <fdp-object-marker [glyph]="glyph" [clickable]="clickable">Object marker</fdp-object-marker>`
+    template: ` <fdp-object-marker [glyph]="glyph" [clickable]="clickable">Object marker</fdp-object-marker>`,
+    standalone: true,
+    imports: [PlatformObjectMarkerComponent]
 })
 class TestPlatformPlatformObjectMarkerComponent {
     @ViewChild(PlatformObjectMarkerComponent, { static: true }) component: PlatformObjectMarkerComponent;
@@ -25,8 +25,7 @@ describe('PlatformObjectMarkerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ObjectMarkerModule],
-            declarations: [PlatformObjectMarkerComponent, TestPlatformPlatformObjectMarkerComponent]
+            imports: [TestPlatformPlatformObjectMarkerComponent]
         }).compileComponents();
     }));
 

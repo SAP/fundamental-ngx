@@ -1,19 +1,39 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import {
-    Component,
-    Input,
-    Output,
-    EventEmitter,
-    ChangeDetectionStrategy,
-    SimpleChanges,
-    ViewEncapsulation,
-    OnChanges,
     AfterViewInit,
-    ViewChild
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf, SlicePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FocusableGridDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { BarComponent, BarElementDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
-import { VhdFilter, VdhTableSelection } from '../../models';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import {
+    TableBodyDirective,
+    TableCellDirective,
+    TableComponent,
+    TableHeaderDirective,
+    TableRowDirective,
+    TableTextDirective
+} from '@fundamental-ngx/core/table';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { VdhTableSelection, VhdFilter } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
 let titleUniqueId = 0;
@@ -23,7 +43,34 @@ let titleUniqueId = 0;
     templateUrl: './select-tab.component.html',
     styleUrls: ['./select-tab.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        InfiniteScrollDirective,
+        FocusableGridDirective,
+        TableComponent,
+        FormLabelComponent,
+        TableHeaderDirective,
+        NgIf,
+        TableRowDirective,
+        TableCellDirective,
+        CheckboxComponent,
+        FormsModule,
+        NgFor,
+        TableBodyDirective,
+        TableTextDirective,
+        BarComponent,
+        BarMiddleDirective,
+        BarElementDirective,
+        ButtonComponent,
+        RepeatDirective,
+        SkeletonComponent,
+        SlicePipe,
+        FdTranslatePipe
+    ]
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
     /** @hidden */
