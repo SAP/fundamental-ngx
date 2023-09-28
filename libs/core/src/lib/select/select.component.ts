@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, ScrollStrategy } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -14,7 +14,6 @@ import {
     HostListener,
     Injector,
     Input,
-    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -26,10 +25,11 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    isDevMode
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, defer, merge } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -124,7 +124,11 @@ export class SelectComponent<T = any>
         return this._extendedBodyTemplate;
     }
 
-    /** Id of the control. */
+    /** Scrolling strategy to be used for popover. */
+    @Input()
+    scrollStrategy: ScrollStrategy;
+
+    /** The ID of the control. */
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
 
