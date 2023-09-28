@@ -310,14 +310,25 @@ export class TableColumnResizeService implements OnDestroy {
             }
         }
 
-        if (diffX > 0 && this._tableRef._freezableColumns.has(this._resizedColumn)) {
-            const freezeToNextColumnName = this._visibleColumnNames[this._tableRef._freezableColumns.size];
-            const actualWidth = this.getPrevColumnsWidth(freezeToNextColumnName);
+        /**
+         * In case "_resizedColumn" is freezable, make sure the overall width of freezable columns does not exceed the width of the table.
+         * If it does, columns will be made unfrozen.
+         */
+        if (
+            diffX > 0 &&
+            (this._tableRef._freezableColumns.has(this._resizedColumn) ||
+                this._tableRef._freezableEndColumns.has(this._resizedColumn))
+        ) {
+            let actualWidth = this.getPrevColumnsWidth(this._resizedColumn) + columnWidth;
+            if (this._tableRef._freezableEndColumns.has(this._resizedColumn)) {
+                actualWidth = this.getNextColumnsWidth(this._resizedColumn) + columnWidth;
+            }
             const newWidth = actualWidth + diffX;
             const maxWidth = this._tableRef.getMaxAllowedFreezableColumnsWidth();
-            // in case "_resizedColumn" is freezable, make sure the overall width of freezable columns does not exceed the width of the table
             if (newWidth >= maxWidth) {
-                diffX = maxWidth - actualWidth;
+                this._tableRef._freezableColumns.forEach((column) => {
+                    this._tableRef.unfreeze(column.toString());
+                });
             }
         }
 
