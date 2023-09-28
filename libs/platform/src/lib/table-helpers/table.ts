@@ -40,6 +40,9 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Freezable column names and their respective indexes */
     abstract get _freezableColumns(): ReadonlyMap<string, number>;
 
+    /** Freezable column names and their respective indexes */
+    abstract get _freezableEndColumns(): ReadonlyMap<string, number>;
+
     /** Width of the table element in px */
     abstract get _tableWidthPx(): number;
 
