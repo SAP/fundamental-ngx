@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.62...v0.46.0-rc.64) (2023-09-29)
+
+
+### Features
+
+* **core:** multi input value identifier ([#10601](https://github.com/SAP/fundamental-ngx/issues/10601)) ([781046c](https://github.com/SAP/fundamental-ngx/commit/781046cff13b0693eee975757b26a13a3f7d2dc1))
+
+
+
+
+
 # [0.46.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.61...v0.46.0-rc.62) (2023-09-28)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
