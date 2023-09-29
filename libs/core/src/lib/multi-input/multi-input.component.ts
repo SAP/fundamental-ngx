@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -10,9 +9,9 @@ import {
     EventEmitter,
     forwardRef,
     HostListener,
-    Inject,
     Injector,
     Input,
+    isDevMode,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -25,7 +24,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import {
@@ -35,7 +34,9 @@ import {
     FocusEscapeDirection,
     FocusTrapService,
     KeyUtil,
+    NestedKeyOf,
     Nullable,
+    ObjectPathType,
     RangeSelector,
     RtlService,
     uuidv4
@@ -50,13 +51,14 @@ import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import get from 'lodash-es/get';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
+import { PairSelectionModel } from './pair-selection.model';
 
 function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is _OptionItem<ItemType, ValueType> {
-    return isOptionItemBase<ValueType>(candidate) && 'item' in candidate;
+    return isOptionItemBase<ValueType>(candidate) && 'item' in candidate && 'id' in candidate;
 }
 
 function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionItemBase<ValueType> {
@@ -152,11 +154,22 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     @Input()
     set selected(values: ValueType[]) {
         this._selectionModel.clear();
-        values?.forEach((item) => this._selectionModel.select(item));
+        if (values) {
+            const potentialItems = [...values];
+            const options: _OptionItem<ItemType, ValueType>[] = [];
+            potentialItems.forEach((value) => {
+                let optionItem = this._optionItems.find((i) => i.value === value);
+                if (!optionItem) {
+                    optionItem = this._getOptionItem(value as unknown as ItemType);
+                }
+                options.push(optionItem);
+            });
+            this._selectionModel.select(options.map((item) => [item.id, item]));
+        }
     }
 
     get selected(): ValueType[] {
-        return this._selectionModel.selected;
+        return this._selectionModel.selected.map((c) => c.value);
     }
 
     /** user's custom classes */
@@ -169,7 +182,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
      * See multi input examples for details.
      */
     @Input()
-    filterFn = this._defaultFilter;
+    filterFn: (contentArray: this['dropdownValues'], searchTerm: string) => this['dropdownValues'] =
+        this._defaultFilter;
 
     /**
      * Value function. Accepts an object of the same type as the
@@ -196,6 +210,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
      */
     @Input()
     newTokenParseFn: (searchTerm: string) => any = this._defaultParse;
+
+    /**
+     * Identifier function or path to an identifier property.
+     */
+    @Input()
+    optionItemIdentifier: OptionItemIdentifierInput<ItemType>;
 
     /**
      * Validate function. Used to check if new token can be added into list.
@@ -361,16 +381,17 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     tokenizer: TokenizerComponent;
 
     /** @hidden */
-    _defaultAriaLabel: Nullable<string>;
-
+    get _optionItems(): _OptionItem<ItemType, ValueType>[] {
+        return this.optionItems$.value;
+    }
     /** @hidden */
-    readonly optionItems$ = new BehaviorSubject<OptionItem[]>([]);
+    readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
 
     /** @hidden */
     readonly _searchTermCtrl = new FormControl('');
 
     /** @hidden */
-    readonly _selectionModel = new SelectionModel<ValueType>(true);
+    readonly _selectionModel = new PairSelectionModel<OptionItemIdentifier, OptionItem<ItemType, ValueType>>();
 
     /** @hidden */
     readonly _viewModel$: Observable<ViewModel<ItemType, ValueType>> = this._getViewModel();
@@ -393,9 +414,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
-
-    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -403,7 +421,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
@@ -469,12 +486,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._getViewModel()
                 .pipe(map((viewModel) => !viewModel.displayedOptions.some((c) => !c.isSelected)))
                 .subscribe((allItemsSelected) => this.allItemsSelectedChange.emit(allItemsSelected))
-        );
-
-        this._subscriptions.add(
-            this._language.subscribe(() => {
-                this._getAriaLabel();
-            })
         );
     }
 
@@ -580,7 +591,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** Method that selects all possible options. */
     selectAllItems(selectAll: boolean): void {
         if (selectAll) {
-            this.selected = this.optionItems$.getValue().map((c) => c.value);
+            this.selected = this._optionItems.map((c) => c.value);
         } else {
             this.selected = [];
         }
@@ -589,24 +600,24 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _onCheckboxKeyup(value: any, event: KeyboardEvent, index: number): void {
+    _onCheckboxKeyup(option: _OptionItem<ItemType, ValueType>, event: KeyboardEvent, index: number): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            this._onCheckboxClick(value, event, index);
+            this._onCheckboxClick(option, event, index);
         }
     }
 
     /** @hidden */
     async _onCheckboxClick(
-        value: any,
+        option: _OptionItem<ItemType, ValueType>,
         event: MouseEvent | KeyboardEvent,
         index: number,
         isListItem = false
     ): Promise<void> {
-        const toggledSelection = !this._selectionModel.isSelected(value);
+        const toggledSelection = !this._selectionModel.isSelected(option.id);
         this._rangeSelector.onRangeElementToggled(index, event);
         const sub = this._viewModel$.pipe(first()).subscribe((vm) => {
             this._rangeSelector.applyValueToEachInRange((idx) =>
-                this._handleSelect(toggledSelection, vm.displayedOptions[idx].value, false)
+                this._handleSelect(toggledSelection, vm.displayedOptions[idx], false)
             );
             this._changeDetRef.detectChanges();
         });
@@ -620,18 +631,23 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _onTokenClick(value: any, resetSearch: boolean, event?: MouseEvent): void {
+    _onTokenClick(option: _OptionItem<ItemType, ValueType>, resetSearch: boolean, event?: MouseEvent): void {
         event?.preventDefault(); // prevent this function from being called twice when checkbox updates
-        this._handleSelect(false, value, resetSearch, true);
+        this._handleSelect(false, option, resetSearch, true);
     }
 
     /** @hidden */
-    _handleSelect(checked: any, value: any, resetSearch = true, fromTokenCloseClick = false): void {
+    _handleSelect(
+        checked: any,
+        option: _OptionItem<ItemType, ValueType>,
+        resetSearch = true,
+        fromTokenCloseClick = false
+    ): void {
         const previousLength = this._selectionModel.selected.length;
         if (checked) {
-            this._selectionModel.select(value);
+            this._selectionModel.select(option.id, option);
         } else {
-            this._selectionModel.deselect(value);
+            this._selectionModel.deselect(option.id);
         }
 
         // Handle popover placement update
@@ -763,7 +779,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private _addNewTokenToDropDownValues(newToken): void {
         this.dropdownValues.push(newToken);
         const newOption = this._getOptionItem(newToken);
-        this.optionItems$.next([...this.optionItems$.value, newOption]);
+        this.optionItems$.next([...this._optionItems, newOption]);
     }
 
     /** @hidden */
@@ -771,7 +787,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         const filtered = this.filterFn(this.dropdownValues, searchTerm);
         if (Array.isArray(filtered) && filtered.length > 0 && this.autoComplete) {
             const optionItem = this._getOptionItem(filtered[0]);
-            this._handleSelect(true, optionItem.value);
+            this._handleSelect(true, optionItem);
             this._searchTermCtrl.setValue('');
             this.open = false;
             return true;
@@ -780,13 +796,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _defaultFilter(contentArray: any[], searchTerm: string = ''): any[] {
+    private _defaultFilter(contentArray: this['dropdownValues'], searchTerm: string = ''): this['dropdownValues'] {
         const searchLower = searchTerm.toLocaleLowerCase();
         return contentArray.filter((item) => {
             if (item) {
-                const displayedValue = this.displayFn(item);
-                const term = typeof displayedValue === 'string' ? displayedValue.toLocaleLowerCase() : '';
-
+                const displayedValue = isOptionItem(item) ? item.label : this.displayFn(item);
+                const term = displayedValue?.toLocaleLowerCase() || '';
                 return this.typeAheadMatcher(term, searchLower);
             }
         });
@@ -825,7 +840,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     private _propagateChange(emitInMobile?: boolean): void {
         if (!this.mobile || emitInMobile) {
-            const selected = [...this._selectionModel.selected];
+            const selected = this._selectionModel.selected.map((c) => c.value);
             this.onChange(selected);
             this.selectedChange.emit(selected);
         }
@@ -859,6 +874,24 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
+    private _getItemIdentifier(item: ItemType): OptionItemIdentifier {
+        if (!this.optionItemIdentifier) {
+            const value = this.valueFn(item);
+            if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'symbol' && isDevMode()) {
+                console.warn(
+                    'optionItemIdentifier is not set and valueFn does not return a string, number or symbol',
+                    item
+                );
+            }
+            return value as OptionItemIdentifier;
+        }
+        if (typeof this.optionItemIdentifier === 'function') {
+            return this.optionItemIdentifier(item);
+        }
+        return get(item, this.optionItemIdentifier) as OptionItemIdentifier;
+    }
+
+    /** @hidden */
     private _resetSearchTerm(): void {
         this._searchTermCtrl.setValue('');
         this._changeDetRef.detectChanges();
@@ -871,6 +904,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         }
         const { label, value } = this._getValueAndLabelOfItem(item);
         return {
+            id: this._getItemIdentifier(item),
             item,
             label,
             value,
@@ -895,50 +929,48 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    private _getOptionItemByValue(
-        value: ValueType,
-        optionItems: _OptionItem<ItemType, ValueType>[] = []
-    ): _OptionItem<ItemType, ValueType> | undefined {
-        return optionItems.find((c) => c.value === value);
-    }
-
-    /** @hidden */
     private _getViewModel(): Observable<ViewModel<ItemType, ValueType>> {
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
-            this._selectionModel.changed.pipe(startWith(null)),
+            this._selectionModel.selectionChanged.pipe(startWith(null)),
             this.optionItems$
         ]).pipe(
-            map(([, , optionItems]) => {
-                const selected = this.selected.map(
-                    (v) => this._getOptionItemByValue(v, optionItems) || this._getOptionItem(v as any)
-                );
+            map(() => {
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value ?? '';
-                const filtered = this.filterFn(
-                    optionItems.map((c) => c.item),
-                    searchTerm
-                );
+                const filtered = this.filterFn(this.dropdownValues, searchTerm);
                 const displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
                     this._getOptionItem(item)
                 );
-                displayedOptions.forEach((c) => (c.isSelected = selected.findIndex((d) => d?.value === c.value) > -1));
-                return { selectedOptions: selected, displayedOptions };
+                displayedOptions.forEach((c) => (c.isSelected = this._selectionModel.isSelected(c.id)));
+                return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
         );
-    }
-
-    /** @hidden */
-    private async _getAriaLabel(): Promise<void> {
-        const lang = await firstValueFrom(this._language);
-        this._defaultAriaLabel = this._translationResolver.resolve(lang, 'coreMultiInput.multiInputAriaLabel');
     }
 }
 
 interface _OptionItem<ItemType = any, ValueType = any> extends OptionItemBase<ValueType> {
+    id: OptionItemIdentifier;
     item: ItemType;
     isSelected?: boolean;
 }
+
+export type OptionItemWithItemIdentifierValues<
+    ItemType extends object,
+    AllTheKeys extends (string | keyof ItemType)[] = NestedKeyOf<ItemType>[]
+> = {
+    [Key in AllTheKeys[number]]: ObjectPathType<ItemType, Key> extends OptionItemIdentifier ? Key : never;
+}[AllTheKeys[number]];
+
+export type AcceptableKeysOf<ItemType = any> = ItemType extends object
+    ? OptionItemWithItemIdentifierValues<ItemType>
+    : never;
+
+export type OptionItemIdentifierInput<ItemType = any> =
+    | ((item: ItemType) => OptionItemIdentifier)
+    | AcceptableKeysOf<ItemType>;
+
+export type OptionItemIdentifier = string | number | symbol;
 
 export type OptionItem<ItemType = any, ValueType = any> = Omit<_OptionItem<ItemType, ValueType>, 'isSelected'>;
 
