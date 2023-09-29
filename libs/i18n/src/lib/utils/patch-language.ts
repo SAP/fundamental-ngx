@@ -1,9 +1,15 @@
 import { FactoryProvider, SkipSelf } from '@angular/core';
-import { cloneDeep, merge } from 'lodash-es';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FdLanguage, FdLanguagePatch } from '../models';
+import { FdLanguage, FdLanguagePatch, FlatFdLanguage } from '../models';
+import { flattenTranslations } from './flatten-translations';
+import { flatToHierarchy } from './load-json';
 import { FD_LANGUAGE } from './tokens';
+
+export const patchedObj = (
+    lang: FdLanguage,
+    patch: FdLanguagePatch | ((lang: FdLanguage) => FdLanguagePatch)
+): FdLanguagePatch => (typeof patch === 'function' ? patch(lang) : patch);
 
 /**
  * DI utility function, that allows to override `FD_LANGUAGE` injection token with part of the language object, that is used globally
@@ -43,9 +49,14 @@ export function patchLanguage(
         provide: FD_LANGUAGE,
         useFactory: (lang$: Observable<FdLanguage>) =>
             lang$.pipe(
-                map((lang) =>
-                    merge(cloneDeep(lang), typeof languagePatch === 'function' ? languagePatch(lang) : languagePatch)
-                )
+                map((lang) => {
+                    const original = flattenTranslations(lang) as FlatFdLanguage;
+                    const patch = flattenTranslations(patchedObj(lang, languagePatch));
+                    return flatToHierarchy({
+                        ...original,
+                        ...patch
+                    });
+                })
             ),
         deps: [[new SkipSelf(), FD_LANGUAGE]]
     };

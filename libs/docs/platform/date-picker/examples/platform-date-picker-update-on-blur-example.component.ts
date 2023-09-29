@@ -1,13 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import {
-    DATE_TIME_FORMATS,
-    DatetimeAdapter,
-    FD_DATETIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter
-} from '@fundamental-ngx/core/datetime';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 
@@ -27,14 +21,7 @@ import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
-        }
+        provideDateTimeFormats()
     ],
     standalone: true,
     imports: [FormLabelComponent, PlatformDatePickerComponent, FormsModule]

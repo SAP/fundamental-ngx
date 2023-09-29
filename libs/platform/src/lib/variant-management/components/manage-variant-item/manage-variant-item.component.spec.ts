@@ -1,14 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { I18nModule } from '@fundamental-ngx/i18n';
-import {
-    FdpFormGroupModule,
-    PlatformCheckboxGroupModule,
-    PlatformCheckboxModule,
-    PlatformInputModule
-} from '@fundamental-ngx/platform/form';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { ManageVariantItemComponent } from './manage-variant-item.component';
 
@@ -23,22 +14,17 @@ describe('ManageVariantItemComponent', () => {
             existingVariantNames: ['Second']
         };
         await TestBed.configureTestingModule({
-            declarations: [ManageVariantItemComponent],
-            imports: [
-                ReactiveFormsModule,
-                I18nModule,
-                PlatformInputModule,
-                PlatformCheckboxGroupModule,
-                PlatformCheckboxModule,
-                FdpFormGroupModule
-            ],
+            imports: [ManageVariantItemComponent],
             providers: [
                 {
                     provide: DialogRef,
                     useValue: dialogRef
+                },
+                {
+                    provide: DialogConfig,
+                    useValue: {}
                 }
-            ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(ManageVariantItemComponent);

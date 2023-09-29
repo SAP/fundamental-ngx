@@ -1,4 +1,4 @@
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -6,7 +6,9 @@ import { ObjectAttributeComponent } from './object-attribute.component';
 
 @Component({
     selector: 'fdp-object-attribute-test',
-    template: ` <fdp-object-attribute label="label1"></fdp-object-attribute> `
+    template: ` <fdp-object-attribute label="label1"></fdp-object-attribute> `,
+    standalone: true,
+    imports: [ObjectAttributeComponent]
 })
 class TestComponent {}
 
@@ -16,8 +18,7 @@ describe('ObjectAttributeComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectAttributeComponent, TestComponent],
-            providers: []
+            imports: [TestComponent]
         }).compileComponents();
     }));
 
@@ -53,7 +54,9 @@ describe('ObjectAttributeComponent', () => {
 
 /** testing content projection */
 @Component({
-    template: '<fdp-object-attribute> testing </fdp-object-attribute> '
+    template: '<fdp-object-attribute> testing </fdp-object-attribute> ',
+    standalone: true,
+    imports: [ObjectAttributeComponent]
 })
 export class ObjectAttributeContentProjectionTesterComponent {}
 
@@ -62,8 +65,7 @@ describe('Content projection', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectAttributeComponent, ObjectAttributeContentProjectionTesterComponent],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [ObjectAttributeContentProjectionTesterComponent]
         }).compileComponents();
     }));
 
@@ -82,7 +84,9 @@ describe('Content projection', () => {
 /** testing link */
 @Component({
     selector: 'fdp-object-attribute-test',
-    template: ` <fdp-object-attribute linkText="label1" islink="true"></fdp-object-attribute> `
+    template: ` <fdp-object-attribute linkText="label1" islink="true"></fdp-object-attribute> `,
+    standalone: true,
+    imports: [ObjectAttributeComponent]
 })
 class LinkTestComponent {}
 
@@ -92,8 +96,7 @@ describe('ObjectAttributeComponent With Link', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectAttributeComponent, LinkTestComponent],
-            providers: []
+            imports: [LinkTestComponent]
         }).compileComponents();
     }));
 

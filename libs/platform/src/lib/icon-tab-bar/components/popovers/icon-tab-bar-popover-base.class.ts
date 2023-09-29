@@ -1,3 +1,4 @@
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     ChangeDetectorRef,
     Directive,
@@ -10,9 +11,8 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { TabColorAssociations } from '../../interfaces/tab-color-associations.interface';
 
@@ -65,6 +65,10 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     /** @description Emits when popover is closed and focus should be applied to last visible tab */
     @Output()
     focusLastVisibleItem: EventEmitter<void> = new EventEmitter<void>();
+
+    /** Event emits when user clicks on x button in tab. */
+    @Output()
+    closeTab = new EventEmitter<string>();
 
     /**
      * @hidden

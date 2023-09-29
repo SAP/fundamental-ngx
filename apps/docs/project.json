@@ -93,6 +93,11 @@
                         "output": "./assets/cdk"
                     },
                     {
+                        "input": "./libs/i18n",
+                        "glob": "README.md",
+                        "output": "./assets/i18n"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"
@@ -130,7 +135,7 @@
                     {
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/i18n",
-                        "output": "./docs/shared/i18n"
+                        "output": "./docs/i18n"
                     },
                     {
                         "glob": "**/examples/**/*",
@@ -235,6 +240,14 @@
                             "with": "apps/docs/src/environments/cx.routes.ts"
                         }
                     ]
+                },
+                "i18n": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/i18n.routes.ts"
+                        }
+                    ]
                 }
             },
             "outputs": ["{options.outputPath}"],
@@ -268,6 +281,11 @@
                 "platform": {
                     "browserTarget": "docs:build:platform",
                     "port": 4204,
+                    "hmr": true
+                },
+                "i18n": {
+                    "browserTarget": "docs:build:i18n",
+                    "port": 4205,
                     "hmr": true
                 },
                 "hot-module-replacement": {

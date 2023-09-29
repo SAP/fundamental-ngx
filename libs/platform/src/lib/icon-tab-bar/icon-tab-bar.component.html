@@ -45,6 +45,7 @@
         [densityMode]="densityMode"
         [colorAssociations]="colorAssociations"
         (selected)="_selectItem($event)"
+        (closeTab)="_closeTab($event)"
     ></fdp-icon-tab-bar-icon-type>
 </ng-template>
 
@@ -58,5 +59,6 @@
         [colorAssociations]="colorAssociations"
         (reordered)="_onReorder($event)"
         (selected)="_selectItem($event)"
+        (closeTab)="_closeTab($event)"
     ></fdp-icon-tab-bar-text-type>
 </ng-template>

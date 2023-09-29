@@ -14,10 +14,10 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ButtonType } from '@fundamental-ngx/core/button';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
+import { MenuComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { MenuComponent } from '@fundamental-ngx/platform/menu';
 
 /**
  * <fdp-split-menu-button [menu]="menu" [buttonLabel]="Default button" (primaryButtonClick)="onPrimaryButtonClick1()">
@@ -33,7 +33,9 @@ import { MenuComponent } from '@fundamental-ngx/platform/menu';
     selector: 'fdp-split-menu-button',
     templateUrl: './split-menu-button.component.html',
     styleUrls: ['split-menu-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ButtonComponent, MenuTriggerDirective]
 })
 export class SplitMenuButtonComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
     /** Whether or not the element should keep a fixed width. The width could change if the text changes length. */

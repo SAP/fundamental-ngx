@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
@@ -19,7 +20,9 @@ export type footerSize = 'sm' | 'md' | 'lg' | 'xl';
     selector: 'fdp-page-footer',
     templateUrl: './page-footer.component.html',
     styleUrls: ['./page-footer.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgTemplateOutlet]
 })
 export class PlatformFooterComponent {
     /** logo template accpets the generic html */

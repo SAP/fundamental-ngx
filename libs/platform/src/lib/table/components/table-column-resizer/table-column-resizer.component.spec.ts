@@ -10,7 +10,7 @@ describe('PlatformTableColumnResizerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [PlatformTableColumnResizerComponent],
+            imports: [PlatformTableColumnResizerComponent],
             providers: [{ provide: TableColumnResizeService, useClass: TableColumnResizeServiceMock }]
         }).compileComponents();
     }));

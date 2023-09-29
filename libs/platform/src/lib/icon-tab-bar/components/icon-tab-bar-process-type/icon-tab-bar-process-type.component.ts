@@ -1,17 +1,31 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
 
-import { IconTabBarBase } from '../icon-tab-bar-base.class';
-import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
-import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
+import { NgFor, NgIf } from '@angular/common';
+import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { cloneDeep } from 'lodash-es';
+import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
+import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
 import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 @Component({
     selector: 'fdp-icon-tab-bar-process-type',
-    templateUrl: './icon-tab-bar-process-type.component.html'
+    templateUrl: './icon-tab-bar-process-type.component.html',
+    standalone: true,
+    imports: [
+        OverflowListDirective,
+        NgIf,
+        IconTabBarPopoverComponent,
+        NgFor,
+        OverflowListItemDirective,
+        IconComponent,
+        ButtonComponent
+    ]
 })
-export class IconTabBarProcessTypeComponent extends IconTabBarBase {
+export class IconTabBarProcessTypeComponent extends ClosableIconTabBar {
     /** @hidden list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabUIElements: QueryList<ElementRef<HTMLElement>>;
 

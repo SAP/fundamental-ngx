@@ -57,6 +57,11 @@
                 {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
             </div>
         </a>
+        <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
+            <button fd-button class="fd-icon-tab-bar__button" fdType="transparent" (click)="_closeTab(item.uId)">
+                <fd-icon glyph="decline"></fd-icon>
+            </button>
+        </div>
         <span *ngIf="_lastVisibleTabIndex !== idx" class="fd-icon-tab-bar__separator">
             <fd-icon glyph="process"></fd-icon>
         </span>

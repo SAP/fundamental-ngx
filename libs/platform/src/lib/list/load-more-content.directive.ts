@@ -2,7 +2,8 @@ import { Directive, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Directive({
-    selector: '[fdpListLoadMoreContent]'
+    selector: '[fdpListLoadMoreContent]',
+    standalone: true
 })
 export class LoadMoreContentDirective {
     /** @hidden */

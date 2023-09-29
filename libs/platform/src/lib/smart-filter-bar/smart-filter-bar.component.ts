@@ -24,8 +24,6 @@ import { map, take } from 'rxjs/operators';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig, DialogService } from '@fundamental-ngx/core/dialog';
-import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
-import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import {
     DynamicFormFieldItem,
     DynamicFormItem,
@@ -33,23 +31,35 @@ import {
     FormGeneratorService,
     PreparedDynamicFormFieldItem
 } from '@fundamental-ngx/platform/form';
+import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, SelectItem } from '@fundamental-ngx/platform/shared';
+import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+    ToolbarComponent,
+    ToolbarItemDirective,
+    ToolbarSeparatorComponent,
+    ToolbarSpacerDirective
+} from '@fundamental-ngx/core/toolbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
+import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { SmartFilterBarSettingsDialogComponent } from './components/smart-filter-bar-settings-dialog/smart-filter-bar-settings-dialog.component';
+import { SMART_FILTER_BAR_RENDERER_COMPONENT } from './constants';
 import { SmartFilterBarSubjectDirective } from './directives/smart-filter-bar-subject.directive';
 import { SmartFilterBarToolbarItemDirective } from './directives/smart-filter-bar-toolbar-item.directive';
-import { SmartFilterBarManagedPreset, SmartFilterChangeObject } from './interfaces/smart-filter-bar-change';
-import { SmartFilterBarFieldDefinition } from './interfaces/smart-filter-bar-field-definition';
-import { SmartFilterBarDynamicFormFieldItem } from './interfaces/smart-filter-dynamic-form-item';
-import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
-import { SmartFilterSettingsDialogConfig } from './interfaces/smart-filter-bar-settings-dialog-config';
-import { SmartFilterBarService } from './smart-filter-bar.service';
-import { SMART_FILTER_BAR_RENDERER_COMPONENT } from './constants';
-import { SmartFilterBar } from './smart-filter-bar.class';
-import { SmartFilterBarConditionFieldComponent } from './components/smart-filter-bar-condition-field/smart-filter-bar-condition-field.component';
 import { getSelectItemValue } from './helpers';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SmartFilterBarManagedPreset, SmartFilterChangeObject } from './interfaces/smart-filter-bar-change';
+import { SmartFilterBarCondition } from './interfaces/smart-filter-bar-condition';
+import { SmartFilterBarFieldDefinition } from './interfaces/smart-filter-bar-field-definition';
+import { SmartFilterSettingsDialogConfig } from './interfaces/smart-filter-bar-settings-dialog-config';
+import { SmartFilterBarDynamicFormFieldItem } from './interfaces/smart-filter-dynamic-form-item';
+import { SmartFilterBar } from './smart-filter-bar.class';
+import { SmartFilterBarService } from './smart-filter-bar.service';
 
 const defaultColumnsLayout = 'XL4-L3-M2-S1';
 
@@ -87,6 +97,8 @@ const smartFilterBarProvider: Provider = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         smartFilterBarProvider,
+        SmartFilterBarService,
+        FormGeneratorService,
         {
             provide: FDP_PRESET_MANAGED_COMPONENT,
             useExisting: SmartFilterBarComponent
@@ -95,7 +107,21 @@ const smartFilterBarProvider: Provider = {
     host: {
         class: 'fdp-smart-filter-bar',
         '[class.fdp-smart-filter-bar--transparent]': 'transparent'
-    }
+    },
+    standalone: true,
+    imports: [
+        ToolbarComponent,
+        NgIf,
+        NgFor,
+        NgTemplateOutlet,
+        ToolbarSeparatorComponent,
+        SearchFieldComponent,
+        ToolbarSpacerDirective,
+        ButtonComponent,
+        ToolbarItemDirective,
+        FormGeneratorComponent,
+        FdTranslatePipe
+    ]
 })
 export class SmartFilterBarComponent extends SmartFilterBar implements AfterViewInit, OnDestroy {
     /**

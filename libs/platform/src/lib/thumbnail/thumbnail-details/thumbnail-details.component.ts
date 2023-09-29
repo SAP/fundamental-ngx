@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -7,10 +9,20 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
-import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { Media } from '../thumbnail.interfaces';
 import { warnOnce } from '@fundamental-ngx/cdk/utils';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
+import { Media } from '../thumbnail.interfaces';
 
 interface DialogRefData {
     selectedMedia: Media;
@@ -27,7 +39,21 @@ interface DialogRefData {
 @Component({
     selector: 'fdp-thumbnail-details',
     templateUrl: './thumbnail-details.component.html',
-    styleUrls: ['./thumbnail-details.component.scss']
+    styleUrls: ['./thumbnail-details.component.scss'],
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgIf,
+        ThumbnailImageComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
+    ]
 })
 export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     /** Reference to thumbnail images component */

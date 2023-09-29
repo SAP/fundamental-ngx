@@ -1,14 +1,16 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { LabelType } from '@fundamental-ngx/core/info-label';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
+import { InfoLabelComponent as CoreInfoLabelComponent, LabelType } from '@fundamental-ngx/core/info-label';
 
 @Component({
     selector: 'fdp-info-label',
     templateUrl: './info-label.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CoreInfoLabelComponent]
 })
 export class InfoLabelComponent {
     /**

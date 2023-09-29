@@ -12,10 +12,16 @@ import {
 } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { IconTabBarBase } from '../icon-tab-bar-base.class';
-import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
-import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
+import { FdDnDEvent, IconBarDndContainerDirective } from '../../directives/dnd/icon-bar-dnd-container.directive';
+import { IconBarDndItemDirective } from '../../directives/dnd/icon-bar-dnd-item.directive';
+import { IconBarDndListDirective } from '../../directives/dnd/icon-bar-dnd-list.directive';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
+import { ClosableIconTabBar } from '../closable-icon-tab-bar.class';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
 
 /** @hidden */
@@ -30,9 +36,23 @@ type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
 
 @Component({
     selector: 'fdp-icon-tab-bar-text-type',
-    templateUrl: './icon-tab-bar-text-type.component.html'
+    templateUrl: './icon-tab-bar-text-type.component.html',
+    standalone: true,
+    imports: [
+        IconBarDndContainerDirective,
+        OverflowListDirective,
+        IconBarDndListDirective,
+        NgFor,
+        OverflowListItemDirective,
+        IconBarDndItemDirective,
+        NgClass,
+        NgIf,
+        TextTypePopoverComponent,
+        ButtonComponent,
+        IconComponent
+    ]
 })
-export class IconTabBarTextTypeComponent extends IconTabBarBase {
+export class IconTabBarTextTypeComponent extends ClosableIconTabBar {
     /** @hidden list of tab html elements, that can receive focus */
     @ViewChildren('tabItem') _tabUIElements: QueryList<TabItem>;
 
@@ -52,10 +72,10 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
     layoutMode: 'row' | 'column';
 
     /**
-     * @description Emits when user drop tab.
+     * @description Emits when user drops the tab.
      */
     @Output()
-    reordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
+    reordered = new EventEmitter<IconTabBarItem[]>();
 
     /** @hidden */
     constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
@@ -66,9 +86,9 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
      * @hidden
      * @param selectedItem
      */
-    async _selectExtraItem(selectedItem: IconTabBarItem | undefined): Promise<void> {
-        // Check if selected item is subItem
-        // Then to find root tab, and pass it to parent method.
+    _selectExtraItem(selectedItem: IconTabBarItem | undefined): void {
+        // Check if the selected item is subItem
+        // Then to find root tab, and pass it to the parent method.
         if (selectedItem?.uId.includes(UNIQUE_KEY_SEPARATOR)) {
             const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
             selectedItem = this._tabs.find((tab) => tab.uId === rootTabUid);
@@ -76,7 +96,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         if (!selectedItem) {
             return;
         }
-        await super._selectExtraItem(selectedItem);
+        super._selectExtraItem(selectedItem);
     }
 
     /**
@@ -171,55 +191,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
         this._tabs = this._updateTabs(this._tabs);
         this._triggerRecalculationVisibleItems();
-    }
-
-    /**
-     * @hidden
-     * @param uid
-     * @param arr
-     * @returns {parent, tab}
-     * @description Get tab reference inside main tab array and  reference to parent array.
-     */
-    private _getTabInfoFromMainList(
-        uid: string,
-        arr: any[] = this._tabs
-    ): { parent: IconTabBarItem[]; tab: IconTabBarItem } | undefined {
-        let result: { parent: IconTabBarItem[]; tab: IconTabBarItem } | undefined;
-        for (let i = 0; i < arr.length; i++) {
-            const item = arr[i];
-            if (item.uId === uid) {
-                result = { parent: arr, tab: item };
-                break;
-            } else if (Array.isArray(item.subItems)) {
-                result = this._getTabInfoFromMainList(uid, item.subItems);
-                if (result) {
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-    /**
-     * @hidden
-     * @param arr
-     * @param parentUid
-     * @description Update indexes, uIds, styles.
-     */
-    private _updateTabs(arr: IconTabBarItem[], parentUid?: string, flatIndexRef = { value: 0 }): IconTabBarItem[] {
-        return arr.map((item, index) => {
-            item.index = index;
-            item.uId = parentUid ? `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}` : `${index}`;
-            item.flatIndex = flatIndexRef.value++;
-            item.parentUId = parentUid;
-            if (!parentUid) {
-                item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
-            }
-            if (Array.isArray(item.subItems)) {
-                item.subItems = this._updateTabs(item.subItems, item.uId, flatIndexRef);
-            }
-            return { ...item };
-        });
     }
 
     /** @hidden */

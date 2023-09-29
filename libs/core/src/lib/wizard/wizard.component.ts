@@ -23,8 +23,8 @@ import { Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { DialogBodyComponent, FD_DIALOG_BODY_COMPONENT } from '@fundamental-ngx/core/dialog';
 import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
-import { Observable, Subscription } from 'rxjs';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
+import { Subscription } from 'rxjs';
 import { ACTIVE_STEP_STATUS, COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS } from './constants';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { WIZARD } from './wizard-injection-token';
@@ -70,7 +70,8 @@ export const handleTimeoutReference = (): void => {
         }
     ],
     host: {
-        role: 'region'
+        role: 'region',
+        '[attr.aria-label]': 'ariaLabel || _defaultAriaLabel()'
     },
     standalone: true,
     imports: [NgIf, ScrollSpyDirective, CdkScrollable, ScrollbarDirective, NgFor, NgTemplateOutlet]
@@ -106,7 +107,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * If not provided, is being translated by i18n package
      */
     @Input()
-    @HostBinding('attr.aria-label')
     ariaLabel: string;
 
     /** @hidden */
@@ -139,13 +139,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     stackedStepsRight: WizardStepComponent[] = [];
 
     /** @hidden */
+    protected _defaultAriaLabel = resolveTranslationSignal('coreWizard.ariaLabel');
+
+    /** @hidden */
     private _stepEventSubscriptions: Subscription = new Subscription();
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
-
-    /** @hidden */
-    private _translationResolver = new TranslationResolver();
 
     /** @hidden */
     private _previousWidth: number;
@@ -154,15 +154,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     constructor(
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
-        @Inject(FD_LANGUAGE) _language$: Observable<FdLanguage>,
         @Optional() @Inject(FD_DIALOG_BODY_COMPONENT) private _dialogBodyComponent: DialogBodyComponent
-    ) {
-        const sub = _language$.subscribe((lang) => {
-            // set ariaLabel only if it's not applied manually
-            this.ariaLabel ??= this._translationResolver.resolve(lang, 'coreWizard.ariaLabel');
-        });
-        this._subscriptions.add(sub);
-    }
+    ) {}
 
     /** @hidden */
     @HostListener('window:resize')

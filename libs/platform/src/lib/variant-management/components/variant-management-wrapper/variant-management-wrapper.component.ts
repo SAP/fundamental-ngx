@@ -52,7 +52,8 @@ import { FDP_VARIANT_MANAGEMENT, FDP_VARIANT_MANAGEMENT_WRAPPER } from '../../to
             provide: FDP_VARIANT_MANAGEMENT_WRAPPER,
             useExisting: VariantManagementWrapperComponent
         }
-    ]
+    ],
+    standalone: true
 })
 export class VariantManagementWrapperComponent implements AfterViewInit, OnDestroy {
     /** Variant management component. */

@@ -1,6 +1,30 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { TableDataSource } from '@fundamental-ngx/platform/table';
+import { FormsModule } from '@angular/forms';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
+import { CheckboxComponent, InputComponent } from '@fundamental-ngx/platform/form';
+import { TableColumnComponent, TableComponent, TableDataSource } from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { VariantItem } from '../../variant-item.class';
 import { VariantManagementDataProvider } from './data-provider';
 
@@ -8,7 +32,33 @@ import { VariantManagementDataProvider } from './data-provider';
     selector: 'fdp-manage-variants-dialog',
     templateUrl: './manage-variants-dialog.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        TableComponent,
+        TableInitialStateDirective,
+        TableColumnComponent,
+        FdpCellDef,
+        FdpTableCell,
+        IconComponent,
+        NgIf,
+        InputComponent,
+        FormsModule,
+        RadioButtonComponent,
+        CheckboxComponent,
+        ButtonComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
+    ]
 })
 export class ManageVariantsDialogComponent {
     /** @hidden */

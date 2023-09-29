@@ -9,6 +9,18 @@ import {
 } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
+import { ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
+import { ObjectIdentifierComponent } from '@fundamental-ngx/core/object-identifier';
+import { ObjectNumberComponent } from '@fundamental-ngx/core/object-number';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BaseListItem, StatusType } from '../base-list-item';
 import { ObjectListItemRowComponent } from './object-list-item-row.component';
 
@@ -18,7 +30,25 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     styleUrls: ['./object-list-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        ListItemComponent,
+        NgTemplateOutlet,
+        ListLinkDirective,
+        RouterLink,
+        ListTitleDirective,
+        AvatarComponent,
+        ObjectIdentifierComponent,
+        ObjectNumberComponent,
+        FormItemComponent,
+        CheckboxComponent,
+        FormsModule,
+        RadioButtonComponent,
+        ButtonComponent,
+        FdTranslatePipe
+    ]
 })
 export class ObjectListItemComponent extends BaseListItem {
     /** define label for screen reader */

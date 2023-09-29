@@ -1,0 +1,10 @@
+<div style="display: flex; flex-direction: row; justify-content: space-around; align-items: center">
+    <fd-segmented-button [ngModel]="locale$ | async" (ngModelChange)="changeLocale($event)">
+        <button fd-button [label]="initialLocaleValue" [value]="initialLocaleValue"></button>
+        <button fd-button label="uk-UA" value="uk-UA"></button>
+        <button fd-button label="ka-GE" value="ka-GE"></button>
+    </fd-segmented-button>
+    <input type="number" min="0" fd-form-control [ngModel]="count()" (ngModelChange)="count.set($event)" />
+</div>
+
+<div>{{ pluralizationExample() }}</div>

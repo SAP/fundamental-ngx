@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -12,13 +13,12 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { TableColumnResizeService } from '@fundamental-ngx/platform/table-helpers';
 import { fromEvent, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 /** @dynamic */
 @Component({
@@ -29,7 +29,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fdp-table-column-resizer'
-    }
+    },
+    standalone: true
 })
 export class PlatformTableColumnResizerComponent implements OnInit {
     /** @hidden */

@@ -1,21 +1,21 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     Input,
     TemplateRef,
     ViewChild,
-    ContentChild,
     ViewEncapsulation
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
+import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
+import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
 import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
 import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
 import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.component';
-import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
-import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
 
 /**
  * Dynamic Page Title Component.
@@ -31,7 +31,8 @@ import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-pag
             provide: DYNAMIC_PAGE_HEADER_TOKEN,
             useExisting: DynamicPageTitleComponent
         }
-    ]
+    ],
+    standalone: true
 })
 export class DynamicPageTitleComponent implements DynamicPageHeader {
     /**

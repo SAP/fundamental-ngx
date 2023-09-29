@@ -49,7 +49,7 @@ import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/cor
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { DatePickerMobileComponent } from './date-picker-mobile/date-picker-mobile.component';
@@ -451,7 +451,7 @@ export class DatePickerComponent<D>
      * Date input aria label key based on type
      * @hidden
      */
-    get _dateInputArialLabelKey(): string {
+    get _dateInputArialLabelKey(): FdLanguageKeyIdentifier {
         // return either input value or a key for "fdTranslate" pipe
         return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
