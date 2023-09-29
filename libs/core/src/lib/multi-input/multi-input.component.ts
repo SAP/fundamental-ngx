@@ -155,9 +155,16 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     set selected(values: ValueType[]) {
         this._selectionModel.clear();
         if (values) {
-            this._selectionModel.select(
-                this._optionItems.filter((c) => values.includes(c.value)).map((item) => [item.id, item])
-            );
+            const potentialItems = [...values];
+            const options: _OptionItem<ItemType, ValueType>[] = [];
+            potentialItems.forEach((value) => {
+                let optionItem = this._optionItems.find((i) => i.value === value);
+                if (!optionItem) {
+                    optionItem = this._getOptionItem(value as unknown as ItemType);
+                }
+                options.push(optionItem);
+            });
+            this._selectionModel.select(options.map((item) => [item.id, item]));
         }
     }
 
