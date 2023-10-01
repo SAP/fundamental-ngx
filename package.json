@@ -123,7 +123,7 @@
     "conventional-changelog": "4.0.0",
     "conventional-changelog-angular": "6.0.0",
     "conventional-changelog-cli": "3.0.0",
-    "conventional-recommended-bump": "7.0.1",
+    "conventional-recommended-bump": "9.0.0",
     "coveralls": "3.1.1",
     "dotenv": "16.0.3",
     "eslint": "8.34.0",
