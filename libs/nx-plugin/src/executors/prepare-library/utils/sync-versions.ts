@@ -5,6 +5,7 @@ import { major, minor, parse } from 'semver';
 import { PrepareOptions } from './prepare.options';
 
 const packageJson = JSON.parse(readFileSync(`./package.json`, 'utf8'));
+const lernaJson = JSON.parse(readFileSync(`./lerna.json`, 'utf8'));
 const excludedFilesPatterns = ['md', 'mjs', 'map', 'ts'].map((fileType) => `**/*.${fileType}`);
 
 const aboveMinorVersion = (version) => {
@@ -18,7 +19,7 @@ const angularVersion =
     )?.[0] || '';
 
 const versions = {
-    VERSION_PLACEHOLDER: packageJson.version,
+    VERSION_PLACEHOLDER: lernaJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
     ANGULAR_VER_PLACEHOLDER: `^${major(angularVersion)}.${minor(angularVersion)}.0`,
     RXJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.rxjs),
