@@ -20,10 +20,10 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
+    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
     "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
     "@fundamental-styles/cx": "FDCXSTYLES_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",

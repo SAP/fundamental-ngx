@@ -43,6 +43,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fd"],
-    "implicitDependencies": ["i18n", "cdk"]
+    "tags": ["type:lib", "scope:fd"]
 }

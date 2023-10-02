@@ -62,6 +62,5 @@
             "style": "scss"
         }
     },
-    "tags": ["type:lib", "scope:datetime-adapter"],
-    "implicitDependencies": ["core"]
+    "tags": ["type:lib", "scope:datetime-adapter"]
 }

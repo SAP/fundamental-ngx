@@ -55,6 +55,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:i18n"],
-    "implicitDependencies": ["cdk"]
+    "tags": ["type:lib", "scope:i18n"]
 }

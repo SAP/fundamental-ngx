@@ -39,6 +39,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:cx"],
-    "implicitDependencies": ["i18n", "core"]
+    "tags": ["type:lib", "scope:cx"]
 }

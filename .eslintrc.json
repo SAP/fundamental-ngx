@@ -45,8 +45,7 @@
                                     "scope:cdk"
                                 ]
                             }
-                        ],
-                        "enforceBuildableLibDependency": true
+                        ]
                     }
                 ],
                 "@nx/dependency-checks": [
