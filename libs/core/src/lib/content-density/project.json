@@ -9,7 +9,8 @@
             "executor": "@nx/angular:ng-packagr-lite",
             "outputs": ["{workspaceRoot}/dist/libs/core/content-density"],
             "options": {
-                "project": "libs/core/src/lib/content-density/ng-package.json"
+                "project": "libs/core/src/lib/content-density/ng-package.json",
+                "updateBuildableProjectDepsInPackageJson": true
             },
             "configurations": {
                 "production": {

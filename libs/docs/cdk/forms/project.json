@@ -1,5 +1,6 @@
 {
     "name": "docs-cdk-forms",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/cdk/forms",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "e2eFiles": ["libs/docs/cdk/forms/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-cdk-forms"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-cdk-forms"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

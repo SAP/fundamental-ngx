@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-step-input",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/step-input",
     "projectType": "library",
     "prefix": "fdp-doc",

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-multi-combobox",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/multi-combobox",
     "projectType": "library",
     "prefix": "fundamental-ngx",

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-illustrated-message",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/illustrated-message",
     "projectType": "library",
     "prefix": "fundamental-ngx",

@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-search-field",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/search-field",
     "projectType": "library",
     "prefix": "fdp-doc",

@@ -1,5 +1,6 @@
 {
     "name": "docs",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
@@ -44,7 +45,7 @@
                 ],
                 "parallel": true
             },
-            "outputs": ["libs/docs/typedoc"]
+            "outputs": ["{workspaceRoot}/libs/docs/typedoc"]
         },
         "build": {
             "executor": "@nx/angular:webpack-browser",

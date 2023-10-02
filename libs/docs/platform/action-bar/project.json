@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-action-bar",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/action-bar",
     "projectType": "library",
     "prefix": "fdp-doc",
