@@ -16,7 +16,7 @@
     "packageManager": "yarn@1.22.18",
     "scripts": {
         "preinstall": "npx only-allow yarn",
-        "build": "echo Building default app && nx build",
+        "build": "echo Building default app && nx compile",
         "build-docs-netlify": "yarn run build --configuration=production-unoptimized",
         "build:umbrella": "echo Building umbrella libraries && nx run-many --target=build --all",
         "build:umbrella:prod": "echo Building umbrella libraries PROD && yarn run build:umbrella -- --configuration=production",

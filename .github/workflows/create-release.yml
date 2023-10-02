@@ -155,7 +155,7 @@ jobs:
               uses: ./.github/actions/nodejs
 
             - name: Run build prod
-              run: npx nx run-many --target=build --projects=docs --configuration=production
+              run: npx nx run docs:compile:production
 
             - name: Publish to gh-pages
               uses: JamesIves/github-pages-deploy-action@v4

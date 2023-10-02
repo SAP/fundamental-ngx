@@ -3,14 +3,14 @@ const traverse = require('@babel/traverse').default;
 const generator = require('@babel/generator').default;
 const t = require('@babel/types');
 const { sync: globSync } = require('fast-glob');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync, unlinkSync } = require('fs');
 
-const files = globSync('libs/platform/src/lib/*/project.json', {
+const files = globSync('libs/cx/src/lib/*/project.json', {
     // ignore: ['libs/docs/cdk/forms/index.ts', 'libs/docs/cdk/data-source/index.ts', 'libs/docs/cdk/drag-n-drop/index.ts']
 });
 
 files.forEach((file) => {
-    const content = JSON.parse(readFileSync(file, 'utf-8'));
-    delete content.targets.build;
-    writeFileSync(file, JSON.stringify(content, null, 2), 'utf-8');
+    const projectDir = require('path').dirname(file);
+    unlinkSync(`${projectDir}/tsconfig.lib.prod.json`);
+    unlinkSync(`${projectDir}/package.json`);
 });

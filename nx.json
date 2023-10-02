@@ -8,7 +8,15 @@
             "runner": "nx-cloud",
             "options": {
                 "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
-                "cacheableOperations": ["generate-typedoc", "compile-typedoc", "build", "lint", "test", "e2e"],
+                "cacheableOperations": [
+                    "generate-typedoc",
+                    "compile-typedoc",
+                    "compile",
+                    "build",
+                    "lint",
+                    "test",
+                    "e2e"
+                ],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
             }

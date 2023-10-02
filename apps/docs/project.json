@@ -32,22 +32,7 @@
             },
             "defaultConfiguration": "affected-local"
         },
-        "generate-typedoc": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx run core:compile-typedoc",
-                    "npx nx run platform:compile-typedoc",
-                    "npx nx run datetime-adapter:compile-typedoc",
-                    "npx nx run moment-adapter:compile-typedoc",
-                    "npx nx run i18n:compile-typedoc",
-                    "npx nx run cdk:compile-typedoc"
-                ],
-                "parallel": true
-            },
-            "outputs": ["{workspaceRoot}/libs/docs/typedoc"]
-        },
-        "build": {
+        "compile": {
             "executor": "@nx/angular:webpack-browser",
             "options": {
                 "outputPath": "dist/apps/docs",
@@ -253,39 +238,39 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^build", "generate-typedoc"]
+            "dependsOn": ["^compile-typedoc"]
         },
         "serve": {
             "executor": "@nx/angular:webpack-dev-server",
             "options": {
-                "browserTarget": "docs:build"
+                "browserTarget": "docs:compile"
             },
             "configurations": {
                 "production": {
-                    "browserTarget": "docs:build:production"
+                    "browserTarget": "docs:compile:production"
                 },
                 "cx": {
-                    "browserTarget": "docs:build:cx",
+                    "browserTarget": "docs:compile:cx",
                     "port": 4201,
                     "hmr": true
                 },
                 "core": {
-                    "browserTarget": "docs:build:core",
+                    "browserTarget": "docs:compile:core",
                     "port": 4202,
                     "hmr": true
                 },
                 "cdk": {
-                    "browserTarget": "docs:build:cdk",
+                    "browserTarget": "docs:compile:cdk",
                     "port": 4203,
                     "hmr": true
                 },
                 "platform": {
-                    "browserTarget": "docs:build:platform",
+                    "browserTarget": "docs:compile:platform",
                     "port": 4204,
                     "hmr": true
                 },
                 "i18n": {
-                    "browserTarget": "docs:build:i18n",
+                    "browserTarget": "docs:compile:i18n",
                     "port": 4205,
                     "hmr": true
                 },
