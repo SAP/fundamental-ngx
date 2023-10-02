@@ -362,7 +362,8 @@ export class PopoverService extends BasePopoverClass {
             .position()
             .flexibleConnectedTo(this.appendTo || this._triggerElement)
             .withPositions(resultPosition)
-            .withPush(false);
+            .withPush(false)
+            .withGrowAfterOpen(true);
     }
 
     /** remove listeners from trigger element events */
