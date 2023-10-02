@@ -1,8 +1,8 @@
 import { logger, ProjectConfiguration } from '@nx/devkit';
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { parse, major, minor } from 'semver';
-import { PrepareOptions } from './prepare.options';
 import { glob } from 'glob';
+import { major, minor, parse } from 'semver';
+import { PrepareOptions } from './prepare.options';
 
 const packageJson = JSON.parse(readFileSync(`./package.json`, 'utf8'));
 const excludedFilesPatterns = ['md', 'mjs', 'map', 'ts'].map((fileType) => `**/*.${fileType}`);
@@ -24,7 +24,6 @@ const versions = {
     RXJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.rxjs),
     FAST_DEEP_EQUAL_VER_PLACEHOLDER: packageJson.dependencies['fast-deep-equal'],
     FDSTYLES_VER_PLACEHOLDER: packageJson.dependencies['fundamental-styles'],
-    FDNSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/fn'],
     FDCXSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/cx'],
     FOCUSTRAP_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['focus-trap']),
     FOCUSVISIBLE_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['focus-visible']),
