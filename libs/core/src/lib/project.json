@@ -4,7 +4,6 @@
     "projectType": "library",
     "sourceRoot": "libs/core/src/lib",
     "prefix": "fd",
-    "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
             "executor": "@fundamental-ngx/nx-plugin:prepare-library",
@@ -23,13 +22,12 @@
             },
             "outputs": ["{options.outputPath}"]
         },
-        "build-umbrella": {
+        "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/core"],
             "options": {
                 "tsConfig": "libs/core/src/lib/tsconfig.lib.json",
-                "project": "libs/core/src/lib/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
+                "project": "libs/core/src/lib/ng-package.json"
             },
             "configurations": {
                 "production": {

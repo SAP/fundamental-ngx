@@ -22,25 +22,7 @@
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/i18n"],
             "options": {
-                "project": "libs/i18n/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/i18n/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
-        "build-umbrella": {
-            "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/i18n"],
-            "options": {
-                "project": "libs/i18n/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
+                "project": "libs/i18n/ng-package.json"
             },
             "configurations": {
                 "production": {

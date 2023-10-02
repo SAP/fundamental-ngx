@@ -5,23 +5,6 @@
     "sourceRoot": "libs/platform/src/lib/variant-management",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/variant-management"],
-            "options": {
-                "project": "libs/platform/src/lib/variant-management/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": true
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/platform/src/lib/variant-management/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

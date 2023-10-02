@@ -5,20 +5,6 @@
     "sourceRoot": "libs/platform/src/lib/action-button-group",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/action-button-group"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/action-button-group/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
