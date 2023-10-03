@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.67...v0.46.0-rc.68) (2023-10-03)
+
+
+### Bug Fixes
+
+* **platform:** column freezing/unfreezing while resizing now behaves the same as ui5 ([#10607](https://github.com/SAP/fundamental-ngx/issues/10607)) ([8badcf2](https://github.com/SAP/fundamental-ngx/commit/8badcf28b725b93ad83983c2b217079b09b1c563))
+
+
+
+
+
 # [0.46.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.66...v0.46.0-rc.67) (2023-10-03)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
