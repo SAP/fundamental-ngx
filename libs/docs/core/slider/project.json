@@ -1,5 +1,6 @@
 {
     "name": "docs-core-slider",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/slider",
     "projectType": "library",
     "prefix": "fundamental-ngx",

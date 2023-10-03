@@ -67,8 +67,8 @@
                 <fd-token
                     *ngFor="let option of viewModel.selectedOptions; trackBy: _trackBy"
                     [disabled]="disabled"
-                    (onCloseClick)="_onTokenClick(option.value, false, $event)"
-                    (onRemove)="_onTokenClick(option.value, false)"
+                    (onCloseClick)="_onTokenClick(option, false, $event)"
+                    (onRemove)="_onTokenClick(option, false)"
                 >
                     <span [innerHtml]="option.label"></span>
                 </fd-token>
@@ -119,11 +119,11 @@
                 *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: _trackBy"
                 fd-list-item
                 [attr.aria-label]="option.label"
-                (click)="_onCheckboxClick(option.value, $event, idx, true)"
-                (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
+                (click)="_onCheckboxClick(option, $event, idx, true)"
+                (keyup)="_onCheckboxKeyup(option, $event, idx)"
                 [selected]="!!option.isSelected"
             >
-                <fd-checkbox (click)="_onCheckboxClick(option.value, $event, idx)" [value]="option.isSelected">
+                <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
                     <!-- TODO -->
                 </fd-checkbox>
 

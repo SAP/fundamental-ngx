@@ -45,8 +45,17 @@
                                     "scope:cdk"
                                 ]
                             }
-                        ],
-                        "enforceBuildableLibDependency": true
+                        ]
+                    }
+                ],
+                "@nx/dependency-checks": [
+                    "error",
+                    {
+                        "buildTargets": ["build"],
+                        "checkMissingDependencies": true,
+                        "checkObsoleteDependencies": true,
+                        "checkVersionMismatches": true,
+                        "ignoredDependencies": ["@angular/cdk", "rxjs", "tslib", "zone.js"]
                     }
                 ]
             }

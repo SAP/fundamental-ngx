@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-object-status",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/object-status",
     "projectType": "library",
     "prefix": "fdp-doc",

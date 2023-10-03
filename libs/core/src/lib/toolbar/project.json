@@ -5,20 +5,6 @@
     "sourceRoot": "libs/core/src/lib/toolbar",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/toolbar"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/toolbar/tsconfig.lib.json",
-                "project": "libs/core/src/lib/toolbar/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/toolbar/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

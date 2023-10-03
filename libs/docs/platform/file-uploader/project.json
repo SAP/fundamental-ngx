@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-file-uploader",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/file-uploader",
     "projectType": "library",
     "prefix": "fdp-doc",

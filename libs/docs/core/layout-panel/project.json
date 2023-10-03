@@ -1,5 +1,6 @@
 {
     "name": "docs-core-layout-panel",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/layout-panel",
     "projectType": "library",
     "prefix": "fundamental-ngx",

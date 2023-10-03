@@ -1,5 +1,6 @@
 {
     "name": "docs-core-info-label",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/info-label",
     "projectType": "library",
     "prefix": "fundamental-ngx",
