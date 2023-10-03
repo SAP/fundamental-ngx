@@ -1,9 +1,10 @@
 {
     "name": "@fundamental-ngx/i18n",
-    "version": "0.46.0-rc.61",
+    "version": "0.46.0-rc.67",
     "peerDependencies": {
         "@angular/common": "ANGULAR_VER_PLACEHOLDER",
         "@angular/core": "ANGULAR_VER_PLACEHOLDER",
+        "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
         "rxjs": "RXJS_VER_PLACEHOLDER"
     },
     "dependencies": {

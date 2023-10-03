@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-display-list-item",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/display-list-item",
     "projectType": "library",
     "prefix": "fdp-doc",

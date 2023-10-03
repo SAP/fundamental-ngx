@@ -11,8 +11,8 @@
                 "cacheableOperations": [
                     "generate-typedoc",
                     "compile-typedoc",
+                    "compile",
                     "build",
-                    "build-umbrella",
                     "lint",
                     "test",
                     "e2e"
@@ -61,11 +61,8 @@
             "dependsOn": ["^build"],
             "inputs": ["production", "^production"]
         },
-        "build-umbrella": {
-            "dependsOn": ["^build-umbrella"]
-        },
         "prepare": {
-            "dependsOn": ["build-umbrella"]
+            "dependsOn": ["build"]
         },
         "test": {
             "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]

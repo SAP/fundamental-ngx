@@ -2,8 +2,8 @@ import { ExecutorContext, readTargetOptions } from '@nx/devkit';
 import { readFileSync, readdirSync, renameSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { Application, DefaultTheme, PageEvent, Reflection, TSConfigReader } from 'typedoc';
-import { FdThemeContext } from './theme';
 import { CompileTypedocExecutorSchema } from './schema';
+import { FdThemeContext } from './theme';
 
 export class FdTheme extends DefaultTheme {
     private _contextCache?: FdThemeContext;
@@ -24,8 +24,7 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
         },
         context
     );
-    const { buildTarget = 'build' } = context.workspace?.projects[context.projectName as string] as any;
-    const { tsConfig } = readTargetOptions({ project: context.projectName as string, target: buildTarget }, context);
+    const { tsConfig } = readTargetOptions({ project: context.projectName as string, target: 'build' }, context);
 
     const app = new Application();
     app.options.addReader(new TSConfigReader());

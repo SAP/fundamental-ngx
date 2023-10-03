@@ -1,5 +1,6 @@
 {
     "name": "docs-core-multi-input",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/multi-input",
     "projectType": "library",
     "prefix": "fundamental-ngx",

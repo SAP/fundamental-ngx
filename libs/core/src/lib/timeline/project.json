@@ -5,20 +5,6 @@
     "sourceRoot": "libs/core/src/lib/timeline",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/timeline"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/timeline/tsconfig.lib.json",
-                "project": "libs/core/src/lib/timeline/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/timeline/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
