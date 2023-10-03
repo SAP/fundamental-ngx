@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-form-container",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/form-container",
     "projectType": "library",
     "prefix": "fdp-doc",

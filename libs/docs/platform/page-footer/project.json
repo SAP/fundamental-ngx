@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-page-footer",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/page-footer",
     "projectType": "library",
     "prefix": "fdp-doc",

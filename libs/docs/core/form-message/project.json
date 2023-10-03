@@ -1,5 +1,6 @@
 {
     "name": "docs-core-form-message",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/form-message",
     "projectType": "library",
     "prefix": "fundamental-ngx",
