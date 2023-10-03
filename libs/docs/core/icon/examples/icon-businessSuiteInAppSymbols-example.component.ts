@@ -243,6 +243,7 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'empty-sequence',
         'cross-union',
         'empty-union',
-        'cross-target'
+        'cross-target',
+        'non-stackable'
     ];
 }
