@@ -1,15 +1,11 @@
-import { ElementRef, Injectable, OnDestroy } from '@angular/core';
-import { MessageStates } from './form-message.component';
+import { ElementRef, Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { PopoverService } from '@fundamental-ngx/core/popover';
-import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 @Injectable()
 export class PopoverFormMessageService implements OnDestroy {
     /** @hidden */
-    private _type: MessageStates;
-
-    /** @hidden */
-    private _message: string;
+    private _message: Nullable<string | TemplateRef<any>>;
 
     /** @hidden */
     private _hidden = false;
@@ -18,13 +14,7 @@ export class PopoverFormMessageService implements OnDestroy {
     constructor(private _popoverService: PopoverService) {}
 
     /** @hidden */
-    set messageType(type: MessageStates) {
-        this._type = type;
-        this._updatePopover();
-    }
-
-    /** @hidden */
-    set message(message: string) {
+    set message(message: Nullable<string | TemplateRef<any>>) {
         this._message = message;
         this._updatePopover();
     }
@@ -59,11 +49,7 @@ export class PopoverFormMessageService implements OnDestroy {
 
     /** @hidden */
     private _getAdditionalClass(): string[] {
-        return [
-            CSS_CLASS_NAME.message,
-            getTypeClassName(this._type),
-            this._shouldBeHidden() ? 'fd-popover__body--hidden' : ''
-        ].filter((v): v is string => !!v);
+        return [this._shouldBeHidden() ? 'fd-popover__body--hidden' : ''].filter((v): v is string => !!v);
     }
 
     /** @hidden */

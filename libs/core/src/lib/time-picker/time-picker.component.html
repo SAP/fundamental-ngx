@@ -39,9 +39,7 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-            {{ _message }}
-        </fd-form-message>
+        <ng-template [ngTemplateOutlet]="formMessageTemplate"></ng-template>
         <ng-content></ng-content>
         <fd-time
             *ngIf="isOpen"
@@ -59,7 +57,7 @@
     </fd-popover-body>
 </fd-popover>
 
-<div style="display: none" aria-hidden="true">
+<div [style.display]="'none'" aria-hidden="true">
     <div [attr.id]="_formValueStateMessageId" aria-atomic="true" aria-live="assertive">
         <ng-container [ngSwitch]="state">
             <ng-container *ngSwitchCase="'success'">{{ valueStateSuccessMessage }}</ng-container>
@@ -70,3 +68,9 @@
         {{ _message }}
     </div>
 </div>
+
+<ng-template #formMessageTemplate>
+    <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+        {{ _message }}
+    </fd-form-message>
+</ng-template>
