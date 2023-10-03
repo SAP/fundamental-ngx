@@ -1,6 +1,6 @@
 {
   "name": "@fundamental-ngx/core",
-  "version": "0.46.0-rc.64",
+  "version": "0.46.0-rc.68",
   "schematics": "./schematics/collection.json",
   "ng-update": {
     "migrations": "./schematics/migrations.json"
@@ -23,13 +23,13 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/platform-browser": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
+    "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
+    "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
     "rxjs": "RXJS_VER_PLACEHOLDER"
   },
   "dependencies": {
-    "@fundamental-ngx/cdk": "VERSION_PLACEHOLDER",
-    "@fundamental-ngx/i18n": "VERSION_PLACEHOLDER",
     "compare-versions": "COMPARE_VERSIONS_VER_PLACEHOLDER",
     "fast-deep-equal": "FAST_DEEP_EQUAL_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",

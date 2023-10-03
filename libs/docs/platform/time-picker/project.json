@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-time-picker",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/time-picker",
     "projectType": "library",
     "prefix": "fdp-doc",

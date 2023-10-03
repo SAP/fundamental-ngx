@@ -5,20 +5,6 @@
     "sourceRoot": "libs/core/src/lib/message-box",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/message-box"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.json",
-                "project": "libs/core/src/lib/message-box/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

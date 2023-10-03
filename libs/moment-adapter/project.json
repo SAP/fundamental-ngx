@@ -26,23 +26,7 @@
             "executor": "@nx/angular:package",
             "options": {
                 "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
-                "project": "libs/moment-adapter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/moment-adapter/tsconfig.lib.prod.json"
-                }
-            },
-            "outputs": ["{workspaceRoot}/dist/libs/moment-adapter"],
-            "defaultConfiguration": "production"
-        },
-        "build-umbrella": {
-            "executor": "@nx/angular:package",
-            "options": {
-                "tsConfig": "libs/moment-adapter/tsconfig.lib.json",
-                "project": "libs/moment-adapter/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
+                "project": "libs/moment-adapter/ng-package.json"
             },
             "configurations": {
                 "production": {
@@ -78,6 +62,5 @@
             "style": "scss"
         }
     },
-    "tags": ["type:lib", "scope:datetime-adapter"],
-    "implicitDependencies": ["core"]
+    "tags": ["type:lib", "scope:datetime-adapter"]
 }

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-skeleton",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/skeleton",
     "projectType": "library",
     "prefix": "fundamental-ngx",
