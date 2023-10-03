@@ -23,6 +23,13 @@ import { MicroProcessFlowItemType } from '../../types';
         '[class.fd-micro-process-flow__item--negative]': 'state === "negative"',
         '[class.fd-micro-process-flow__item--information]': 'state === "information"'
     },
+    styles: [
+        `
+            fd-micro-process-flow-item .fd-info-label__text {
+                white-space: nowrap;
+            }
+        `
+    ],
     standalone: true,
     imports: [NgIf]
 })
