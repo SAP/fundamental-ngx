@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ObjectAttributeComponent } from '@fundamental-ngx/platform/object-attribute';
 
 @Component({
     selector: 'fdp-object-list-item-row',
@@ -19,7 +20,9 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     </div>`,
     styleUrls: ['./object-list-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ObjectAttributeComponent]
 })
 export class ObjectListItemRowComponent {
     /** object attribute label */

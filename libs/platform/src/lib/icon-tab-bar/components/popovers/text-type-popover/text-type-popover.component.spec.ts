@@ -1,12 +1,12 @@
-import { NO_ERRORS_SCHEMA, SimpleChanges } from '@angular/core';
+import { SimpleChanges } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
-import { TextTypePopoverComponent } from './text-type-popover.component';
-import { generateTabBarItems, generateTestConfig } from '../../../tests-helper';
 import { IconTabBarComponent } from '../../../icon-tab-bar.component';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
+import { generateTabBarItems, generateTestConfig } from '../../../tests-helper';
+import { TextTypePopoverComponent } from './text-type-popover.component';
 
 describe('TextTypePopoverComponent', () => {
     let component: TextTypePopoverComponent;
@@ -15,9 +15,8 @@ describe('TextTypePopoverComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TextTypePopoverComponent],
-            providers: [{ provide: IconTabBarComponent, useValue: {} }],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [TextTypePopoverComponent],
+            providers: [{ provide: IconTabBarComponent, useValue: {} }]
         }).compileComponents();
     });
 
@@ -84,11 +83,11 @@ describe('TextTypePopoverComponent', () => {
         };
         component.ngOnChanges({ selectedSubItemUid: component.parentTab } as any);
 
-        expect(component._containsSelected).toBeFalse();
+        expect(component._containsSelected).toBe(false);
 
         component.selectedSubItemUid = '0.1.2.3';
         component.ngOnChanges({ selectedSubItemUid: component.selectedSubItemUid } as any);
-        expect(component._containsSelected).toBeTrue();
+        expect(component._containsSelected).toBe(true);
     });
 
     it('should emit selectedExtraItem event.', () => {

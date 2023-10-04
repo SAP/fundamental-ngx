@@ -11,6 +11,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnAlignValue,
     FdpCellDef,
@@ -23,7 +24,6 @@ import {
     TableColumnResizeService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 /**
  * The component that represents a table column.
@@ -50,7 +50,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: TableColumn, useExisting: TableColumnComponent }]
+    providers: [{ provide: TableColumn, useExisting: TableColumnComponent }],
+    standalone: true
 })
 export class TableColumnComponent extends TableColumn implements OnInit, OnChanges {
     /** Column unique identifier. */

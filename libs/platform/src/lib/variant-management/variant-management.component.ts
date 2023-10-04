@@ -1,3 +1,4 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,11 +11,28 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FilterStringsPipe, Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    BarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
 import { DialogService } from '@fundamental-ngx/core/dialog';
-import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { HeaderSizes } from '@fundamental-ngx/core/title';
-import { SearchInput } from '@fundamental-ngx/platform/search-field';
+import { ListComponent, ListItemComponent, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
+import {
+    PopoverBodyComponent,
+    PopoverBodyFooterDirective,
+    PopoverBodyHeaderDirective,
+    PopoverComponent,
+    PopoverControlComponent,
+    TriggerConfig
+} from '@fundamental-ngx/core/popover';
+import { HeaderSizes, TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MenuButtonComponent } from '@fundamental-ngx/platform/menu-button';
+import { SearchFieldComponent, SearchInput } from '@fundamental-ngx/platform/search-field';
 import equal from 'fast-deep-equal';
 import { BehaviorSubject } from 'rxjs';
 import { ManageVariantItemComponent } from './components/manage-variant-item/manage-variant-item.component';
@@ -37,6 +55,31 @@ import { VariantItem } from './variant-item.class';
             provide: FDP_VARIANT_MANAGEMENT,
             useExisting: VariantManagementComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        PopoverComponent,
+        PopoverControlComponent,
+        TitleComponent,
+        NgTemplateOutlet,
+        MenuButtonComponent,
+        PopoverBodyComponent,
+        PopoverBodyHeaderDirective,
+        BarComponent,
+        BarLeftDirective,
+        BarElementDirective,
+        SearchFieldComponent,
+        ListComponent,
+        NgFor,
+        ListItemComponent,
+        ListLinkDirective,
+        ListTitleDirective,
+        PopoverBodyFooterDirective,
+        BarRightDirective,
+        ButtonBarComponent,
+        FdTranslatePipe,
+        FilterStringsPipe
     ]
 })
 export class VariantManagementComponent<T = any> implements VariantManagement<T> {

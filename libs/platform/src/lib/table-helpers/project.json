@@ -5,26 +5,18 @@
     "sourceRoot": "libs/platform/src/lib/table-helpers",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/table-helpers"],
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/table-helpers/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
+                "jestConfig": "libs/platform/src/lib/table-helpers/jest.config.ts",
+                "passWithNoTests": true
             },
             "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.lib.prod.json"
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
                 }
-            }
-        },
-        "test": {
-            "executor": "@angular-devkit/build-angular:karma",
-            "options": {
-                "main": "libs/platform/src/lib/table-helpers/test.ts",
-                "tsConfig": "libs/platform/src/lib/table-helpers/tsconfig.spec.json",
-                "karmaConfig": "libs/platform/src/lib/table-helpers/karma.conf.js"
             }
         },
         "lint": {

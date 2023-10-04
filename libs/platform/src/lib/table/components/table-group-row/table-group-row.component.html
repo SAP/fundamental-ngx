@@ -7,7 +7,9 @@
     [attr.colspan]="tableColumnsLength"
     [attr.aria-expanded]="row.expanded"
     [attr.data-nesting-level]="row.level + 1"
-    (fdkClicked)="toggleGroupRow.emit(row)"
+    (keydown.enter)="toggleGroupRow.emit(row)"
+    (keydown.space)="toggleGroupRow.emit(row)"
+    (click)="toggleGroupRow.emit(row)"
 >
     <ng-container *ngTemplateOutlet="tableCellExpandTemplate"></ng-container>
 </td>

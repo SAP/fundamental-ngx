@@ -8,14 +8,16 @@ import {
     Output
 } from '@angular/core';
 
-import { ButtonType } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
     styleUrls: ['./menu-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ButtonComponent]
 })
 export class MenuButtonComponent extends BaseComponent {
     /** Label for menu button */

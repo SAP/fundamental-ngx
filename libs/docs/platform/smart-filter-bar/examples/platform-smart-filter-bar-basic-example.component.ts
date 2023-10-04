@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
-    PlatformSmartFilterBarModule,
     SmartFilterBar,
+    SmartFilterBarComponent,
+    SmartFilterBarFieldDefinitionDirective,
+    SmartFilterBarSubjectDirective,
     SmartFilterChangeObject
 } from '@fundamental-ngx/platform/smart-filter-bar';
 import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
@@ -23,7 +25,9 @@ import {
     standalone: true,
     imports: [
         ButtonModule,
-        PlatformSmartFilterBarModule,
+        SmartFilterBarComponent,
+        SmartFilterBarFieldDefinitionDirective,
+        SmartFilterBarSubjectDirective,
         ContentDensityDirective,
         TitleComponent,
         TableDataSourceDirective,
@@ -31,7 +35,8 @@ import {
         PlatformTableModule,
         TableInitialStateDirective,
         FdDatetimeModule
-    ]
+    ],
+    providers: [provideDateTimeFormats()]
 })
 export class PlatformSmartFilterBarBasicExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;

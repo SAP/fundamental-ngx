@@ -1,5 +1,6 @@
 {
     "name": "docs-core-checkbox",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/checkbox",
     "projectType": "library",
     "prefix": "fundamental-ngx",

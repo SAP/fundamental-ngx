@@ -5,20 +5,6 @@
     "sourceRoot": "libs/platform/src/lib/link",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/link"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/link/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/link/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/link/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

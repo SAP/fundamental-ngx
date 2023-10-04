@@ -21,15 +21,25 @@ import {
 import { Subscription } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
+import { GridListItemComponent } from '@fundamental-ngx/core/grid-list';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { GridListItemComponent } from '@fundamental-ngx/core/grid-list';
 
-import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
-import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
-import { isNodeApproved, isNodeStarted } from '../helpers';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
+import { FdTranslatePipe, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ObjectStatusComponent, PlatformObjectStatusTextDirective } from '@fundamental-ngx/platform/object-status';
 import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
-import { TranslationResolver } from '@fundamental-ngx/i18n';
+import { isNodeApproved, isNodeStarted } from '../helpers';
+import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
+import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
 
 const NODE_STATUS_CLASS_MAP = {
     approved: 'positive',
@@ -56,7 +66,25 @@ let defaultId = 0;
         class: 'fdp-approval-flow-node',
         '[class.fdp-approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes',
         '[class.fdp-approval-flow-node--first-final]': 'meta?.firstOfMultipleFinalNodes'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        ButtonComponent,
+        ContentDensityDirective,
+        MenuTriggerDirective,
+        ObjectStatusComponent,
+        PlatformObjectStatusTextDirective,
+        NgTemplateOutlet,
+        ApprovalFlowDropZoneDirective,
+        NgSwitch,
+        NgSwitchCase,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        FdTranslatePipe
+    ]
 })
 export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** Approval flow graph node */

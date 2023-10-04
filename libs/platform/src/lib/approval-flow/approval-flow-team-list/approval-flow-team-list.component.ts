@@ -1,8 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ApprovalTeam } from '../interfaces';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FormGroupComponent, FormItemComponent } from '@fundamental-ngx/core/form';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { ListComponent, StandardListItemComponent } from '@fundamental-ngx/platform/list';
 import { trackByFn } from '../helpers';
+import { ApprovalTeam } from '../interfaces';
 
 /**
  * @deprecated
@@ -16,7 +23,19 @@ import { trackByFn } from '../helpers';
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fdp-approval-flow-team-list'
-    }
+    },
+    standalone: true,
+    imports: [
+        ListComponent,
+        ContentDensityDirective,
+        FormGroupComponent,
+        NgFor,
+        FormItemComponent,
+        RadioButtonComponent,
+        FormsModule,
+        StandardListItemComponent,
+        IconComponent
+    ]
 })
 export class ApprovalFlowTeamListComponent {
     /** Approval flow teams */

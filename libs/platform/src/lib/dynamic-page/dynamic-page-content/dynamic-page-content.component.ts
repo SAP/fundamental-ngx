@@ -13,7 +13,8 @@ import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../constan
             <ng-content></ng-content>
         </ng-template>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class DynamicPageContentComponent {
     /**

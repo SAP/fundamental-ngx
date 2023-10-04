@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, combineLatest } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { FD_LANGUAGE_ENGLISH } from '../languages';
 import { FdLanguage, FdLanguagePatch } from '../models';
+import { patchedObj } from '../utils';
 import { FD_LANGUAGE } from '../utils/tokens';
 
 @Directive({
@@ -34,7 +35,9 @@ export class FdPatchLanguageDirective implements OnDestroy {
     ) {
         combineLatest([parentFdLanguage$, this._languagePatch$])
             .pipe(
-                map(([parentLang, languagePatch]) => merge(cloneDeep(parentLang), languagePatch)),
+                map(([parentLang, languagePatch]) =>
+                    merge(cloneDeep(parentLang), patchedObj(parentLang, languagePatch || {}))
+                ),
                 takeUntil(this._onDestroy$)
             )
             .subscribe((translation) => fdLanguageSubject$.next(translation));

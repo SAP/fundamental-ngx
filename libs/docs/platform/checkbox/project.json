@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-checkbox",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/checkbox",
     "projectType": "library",
     "prefix": "fdp-doc",

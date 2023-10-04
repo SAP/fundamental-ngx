@@ -9,15 +9,16 @@ import {
     Output
 } from '@angular/core';
 
-import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
-import { ButtonType, GlyphPosition } from '@fundamental-ngx/core/button';
+import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
-import { ModuleDeprecation } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
-    styleUrls: ['./button.component.scss']
+    styleUrls: ['./button.component.scss'],
+    standalone: true,
+    imports: [CoreButtonComponent]
 })
 export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** Position of glyph related to text */

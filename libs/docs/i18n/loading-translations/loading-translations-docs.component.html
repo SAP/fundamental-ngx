@@ -1,0 +1,16 @@
+<fd-docs-section-title id="basic" componentName="i18n"> Basic Usage </fd-docs-section-title>
+<description>
+    <code>@fundamental-ngx/i18n</code> exports already translated messages for the {{ supportedLanguages }}. To use
+    them, you simply import <code>FD_LANGUAGE_{{ '{' }}upperCase(languageName){{ '}' }}</code> and provide it to the DI
+    context of your interest.
+    <fd-code-snippet [file]="basicUsageExample"></fd-code-snippet>
+</description>
+
+<separator></separator>
+
+<fd-docs-section-title id="json" componentName="i18n"> Loading JSON </fd-docs-section-title>
+<description>
+    You can also load the language from a JSON file. In order to do this, you will need to use the
+    <code>loadJson</code> helper function to properly transform the JSON into the <code>FdLanguage</code> interface.
+    <fd-code-snippet [file]="jsonUsageExample"></fd-code-snippet>
+</description>

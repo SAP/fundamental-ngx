@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
     FdpViewSettingsFilterCustomDef,
     FilterType,
@@ -14,7 +13,9 @@ import { TableViewSettingsFilterComponent } from './table-view-settings-filter.c
         <fdp-table-view-settings-filter [column]="column" [label]="label" [type]="type" [values]="values">
             <ng-container *fdpViewSettingsFilterCustomDef> Custom filter template </ng-container>
         </fdp-table-view-settings-filter>
-    `
+    `,
+    standalone: true,
+    imports: [TableViewSettingsFilterComponent, FdpViewSettingsFilterCustomDef]
 })
 class HostTableViewSettingsFilterComponent {
     @ViewChild(TableViewSettingsFilterComponent) filter: TableViewSettingsFilterComponent;
@@ -35,8 +36,7 @@ describe('TableViewSettingsFilterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, FdpViewSettingsFilterCustomDef],
-            declarations: [HostTableViewSettingsFilterComponent, TableViewSettingsFilterComponent]
+            imports: [HostTableViewSettingsFilterComponent]
         }).compileComponents();
     }));
 

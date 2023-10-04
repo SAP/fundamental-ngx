@@ -3,8 +3,7 @@ import { SectionInterface, SectionInterfaceContent } from '@fundamental-ngx/docs
 
 export const guides: SectionInterfaceContent[] = [
     { url: 'core/home', name: 'Home' },
-    { url: 'core/new-component', name: 'New Component' },
-    { url: 'core/i18n', name: 'I18n' }
+    { url: 'core/new-component', name: 'New Component' }
 ];
 
 export const components: SectionInterfaceContent[] = [

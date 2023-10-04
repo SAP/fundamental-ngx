@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { TimeModule } from '@fundamental-ngx/core/time';
 
@@ -9,12 +9,7 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     selector: 'fd-time-form-example',
     styleUrls: ['time-form-example.component.scss'],
     templateUrl: './time-form-example.component.html',
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        }
-    ],
+    providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, TimeModule, NgIf]
 })

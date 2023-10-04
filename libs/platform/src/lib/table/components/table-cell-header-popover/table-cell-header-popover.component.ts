@@ -1,19 +1,25 @@
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
-    inject,
     Input,
     QueryList,
     TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { ListIconDirective, ListLinkDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { PopoverComponent, TriggerConfig } from '@fundamental-ngx/core/popover';
+import { TablePopoverDirective } from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FreeContentListItemComponent, ListComponent } from '@fundamental-ngx/platform/list';
 import {
     CollectionStringFilter,
     FILTER_STRING_STRATEGY,
@@ -30,7 +36,26 @@ import { startWith } from 'rxjs/operators';
     selector: 'fdp-table-cell-header-popover',
     templateUrl: './table-cell-header-popover.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        PopoverComponent,
+        TablePopoverDirective,
+        ListComponent,
+        NgFor,
+        FreeContentListItemComponent,
+        NgTemplateOutlet,
+        TemplateDirective,
+        ListLinkDirective,
+        ListIconDirective,
+        ListTitleDirective,
+        FormItemComponent,
+        FormLabelComponent,
+        FormControlComponent,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class TableCellHeaderPopoverComponent implements AfterViewInit {
     /** Column definition. */

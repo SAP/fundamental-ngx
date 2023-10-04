@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { destroyObservable } from '@fundamental-ngx/cdk';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -45,12 +45,7 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
     templateUrl: './platform-table-preserved-state-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        }
-    ],
+    providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [
         ButtonModule,

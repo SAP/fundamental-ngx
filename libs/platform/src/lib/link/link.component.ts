@@ -1,22 +1,24 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
-    ChangeDetectorRef,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
-    EventEmitter,
     ElementRef,
+    EventEmitter,
     Input,
     OnInit,
     Output,
+    Renderer2,
     ViewChild,
-    ViewEncapsulation,
-    Renderer2
+    ViewEncapsulation
 } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
+import { LinkComponent as CoreLinkComponent } from '@fundamental-ngx/core/link';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
 export type LinkType = 'standard' | 'emphasized' | 'subtle';
@@ -28,7 +30,9 @@ const VALID_INPUT_TYPES = ['standard', 'emphasized', 'subtle'];
     templateUrl: './link.component.html',
     styleUrls: ['./link.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [CoreLinkComponent, FdTranslatePipe]
 })
 export class LinkComponent extends BaseComponent implements OnInit, AfterViewInit {
     /**

@@ -1,13 +1,14 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
-import { FilesValidatorService } from '../services/files-validator.service';
 import { FilesValidatorOutput } from '../models/upload-collection.models';
+import { FilesValidatorService } from '../services/files-validator.service';
 
 /**
  * Directive that handles the drag and drop feature of the file input.
  */
 @Directive({
-    selector: '[fdpUploadCollectionDragnDrop]'
+    selector: '[fdpUploadCollectionDragnDrop]',
+    standalone: true
 })
 export class UploadCollectionDragnDropDirective {
     /** Whether multiple files can be dropped at once. */

@@ -48,10 +48,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
             {
-                path: 'i18n',
-                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.ROUTES)
-            },
-            {
                 path: 'control-value-accessor',
                 loadChildren: () => import('@fundamental-ngx/docs/cdk/forms').then(configureCdkRoutes)
             },

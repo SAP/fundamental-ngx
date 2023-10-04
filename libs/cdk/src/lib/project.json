@@ -4,7 +4,6 @@
     "projectType": "library",
     "sourceRoot": "libs/cdk/src/lib",
     "prefix": "fdk",
-    "buildTarget": "build-umbrella",
     "targets": {
         "prepare": {
             "executor": "@fundamental-ngx/nx-plugin:prepare-library",
@@ -19,13 +18,12 @@
             },
             "outputs": ["{options.outputPath}"]
         },
-        "build-umbrella": {
+        "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/cdk"],
             "options": {
                 "tsConfig": "libs/cdk/src/lib/tsconfig.lib.json",
-                "project": "libs/cdk/src/lib/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
+                "project": "libs/cdk/src/lib/ng-package.json"
             },
             "configurations": {
                 "production": {
@@ -46,5 +44,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "tags": ["type:lib", "scope:cdk"]
 }

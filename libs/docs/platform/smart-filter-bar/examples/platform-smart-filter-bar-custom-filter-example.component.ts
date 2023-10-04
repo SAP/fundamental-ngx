@@ -1,6 +1,6 @@
 import { Component, Injector } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { SelectItem, isSelectItem } from '@fundamental-ngx/platform/shared';
+import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { isSelectItem, SelectItem } from '@fundamental-ngx/platform/shared';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -10,18 +10,19 @@ import {
     CollectionNumberFilter,
     CollectionSelectFilter,
     CollectionStringFilter,
-    FilterType,
     FilterableColumnDataType,
+    FilterType,
+    isCollectionFilter,
     TableDataProvider,
     TableDataSource,
-    TableState,
-    isCollectionFilter
+    TableState
 } from '@fundamental-ngx/platform/table';
 
 import {
     BaseDynamicFormGeneratorControl,
     dynamicFormFieldProvider,
-    dynamicFormGroupChildProvider
+    dynamicFormGroupChildProvider,
+    FormGeneratorService
 } from '@fundamental-ngx/platform/form';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,8 +35,8 @@ import {
     PlatformSmartFilterBarModule,
     SmartFilterBarCondition,
     SmartFilterBarCustomFilterConfig,
-    SmartFilterBarService,
-    smartFilterBarProvider
+    smartFilterBarProvider,
+    SmartFilterBarService
 } from '@fundamental-ngx/platform/smart-filter-bar';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import {
@@ -101,6 +102,7 @@ export class PlatformSmartFilterBarDateRendererComponent extends BaseSmartFilter
     selector: 'fdp-platform-smart-filter-bar-custom-filter-example',
     templateUrl: './platform-smart-filter-bar-custom-filter-example.component.html',
     standalone: true,
+    providers: [provideDateTimeFormats(), SmartFilterBarService, FormGeneratorService],
     imports: [
         PlatformSmartFilterBarModule,
         TitleComponent,

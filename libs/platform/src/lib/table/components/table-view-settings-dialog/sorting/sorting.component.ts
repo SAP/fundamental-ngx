@@ -4,8 +4,34 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import {
+    ListComponent,
+    ListGroupHeaderDirective,
+    ListItemComponent,
+    ListTitleDirective
+} from '@fundamental-ngx/core/list';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CollectionSort, SortDirection, Table, TableDialogCommonData } from '@fundamental-ngx/platform/table-helpers';
-import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
 export interface SettingsSortDialogColumn {
     label: string;
@@ -31,7 +57,32 @@ const INITIAL_DIRECTION = SortDirection.ASC;
     templateUrl: './sorting.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => SortingComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        ListComponent,
+        ListGroupHeaderDirective,
+        ListTitleDirective,
+        ListItemComponent,
+        RadioButtonComponent,
+        FormsModule,
+        NgIf,
+        NgFor,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
+    ]
 })
 export class SortingComponent implements Resettable {
     /** Current selected direction */

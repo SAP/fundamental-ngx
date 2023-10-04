@@ -78,7 +78,7 @@
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
-            ariaLabel || 'coreSlider.singleMinMaxDetails' | fdTranslate : { min: minValue, max: maxValue }
+            ariaLabel || ('coreSlider.singleMinMaxDetails' | fdTranslate : { min: minValue, max: maxValue })
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? singleSliderPopover : null"
@@ -132,7 +132,7 @@
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
-            ariaLabel || 'coreSlider.multipleHandle1MinMaxDetails' | fdTranslate : { min: minValue, max: maxValue }
+            ariaLabel || ('coreSlider.multipleHandle1MinMaxDetails' | fdTranslate : { min: minValue, max: maxValue })
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover1 : null"
@@ -166,7 +166,7 @@
         [attr.tabindex]="disabled ? -1 : 0"
         role="slider"
         [attr.aria-label]="
-            ariaLabel || 'coreSlider.multipleHandle2MinMaxDetails' | fdTranslate : { min: minValue, max: maxValue }
+            ariaLabel || ('coreSlider.multipleHandle2MinMaxDetails' | fdTranslate : { min: minValue, max: maxValue })
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover2 : null"

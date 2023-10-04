@@ -1,5 +1,6 @@
 {
     "name": "docs-cx-side-navigation",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/cx/side-navigation",
     "projectType": "library",
     "prefix": "fdp-doc",

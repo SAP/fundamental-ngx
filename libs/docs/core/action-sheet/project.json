@@ -1,5 +1,6 @@
 {
     "name": "docs-core-action-sheet",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/action-sheet",
     "projectType": "library",
     "prefix": "fundamental-ngx",

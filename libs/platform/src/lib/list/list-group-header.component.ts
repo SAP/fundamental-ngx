@@ -1,4 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ListGroupHeaderDirective, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { BaseListItem } from './base-list-item';
 
 let nextListGrpHeaderId = 0;
@@ -9,7 +10,9 @@ let nextListGrpHeaderId = 0;
         <span fd-list-title>{{ groupHeaderTitle }}</span>
         <ng-content></ng-content>
     </li>`,
-    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }]
+    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeaderComponent) }],
+    standalone: true,
+    imports: [ListGroupHeaderDirective, ListTitleDirective]
 })
 export class ListGroupHeaderComponent extends BaseListItem implements OnInit {
     /** Displays list group header title */

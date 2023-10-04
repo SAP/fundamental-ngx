@@ -5,20 +5,6 @@
     "sourceRoot": "libs/platform/src/lib/feed-input",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/feed-input"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/feed-input/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

@@ -1,3 +1,4 @@
+import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ContentChildren,
@@ -13,7 +14,6 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
-import { ViewportRuler } from '@angular/cdk/overlay';
 
 @Directive({
     selector: '[fdkOverflowList]',
@@ -79,10 +79,11 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     getAmountOfExtraItems(): number {
         const elements = this.overflowItems.toArray().map((item) => item.el.nativeElement);
         const computed = getComputedStyle(this._el.nativeElement);
-        const contentWidth =
+        const contentWidth = Math.floor(
             this._el.nativeElement.clientWidth -
-            parseFloat(computed.paddingLeft || '0') -
-            parseFloat(computed.paddingRight || '0');
+                parseFloat(computed.paddingLeft || '0') -
+                parseFloat(computed.paddingRight || '0')
+        );
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 
@@ -116,7 +117,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
 
             itemsTotalWidth += this.isRtl
                 ? containerWidth - item.offsetLeft - itemsTotalWidth
-                : item.offsetWidth + item.offsetLeft - itemsTotalWidth;
+                : Math.ceil(item.offsetWidth + item.offsetLeft - itemsTotalWidth);
 
             if (parentWidth < itemsTotalWidth) {
                 this._clearTempStyles(arrItems);

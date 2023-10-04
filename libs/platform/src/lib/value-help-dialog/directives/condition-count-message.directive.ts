@@ -1,11 +1,12 @@
-import { Directive, Input } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { Directive, Input } from '@angular/core';
 import { AbstractControl, FormControl, NG_VALIDATORS, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fdp-condition-count-message]',
-    providers: [{ provide: NG_VALIDATORS, useExisting: ConditionCountMessageDirective, multi: true }]
+    providers: [{ provide: NG_VALIDATORS, useExisting: ConditionCountMessageDirective, multi: true }],
+    standalone: true
 })
 export class ConditionCountMessageDirective {
     /** Max characters allowed */
