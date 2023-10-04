@@ -108,7 +108,7 @@ const NUMBER_OF_TABS = 10;
             [collapsibleTabs]="true"
             [collapseOverflow]="true"
             [maxVisibleTabs]="maxVisibleTabs"
-        >
+            >
             <fd-tab *ngFor="let title of _tabs" [title]="title">{{ title }} content</fd-tab>
         </fd-tab-list>
     `
