@@ -24,7 +24,8 @@ import {
     FD_LANGUAGE_POLISH,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_TURKISH,
-    FD_LANGUAGE_UKRAINIAN
+    FD_LANGUAGE_UKRAINIAN,
+    FD_LANGUAGE_GERMAN
 } from '@fundamental-ngx/i18n';
 import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 import { DocsService } from '../../services/docs.service';
@@ -83,6 +84,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'English', value: FD_LANGUAGE_ENGLISH },
         { name: 'Français', value: FD_LANGUAGE_FRENCH },
         { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
+        { name: 'Deutsch', value: FD_LANGUAGE_GERMAN },
         { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
         { name: 'Polski', value: FD_LANGUAGE_POLISH },
