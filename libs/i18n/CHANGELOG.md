@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.70...v0.46.0-rc.71) (2023-10-04)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 # [0.46.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.69...v0.46.0-rc.70) (2023-10-04)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
