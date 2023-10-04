@@ -1,15 +1,28 @@
 @import 'fundamental-styles/dist/busy-indicator';
 
+$siblingBusyIndicator: '* + .fd-busy-indicator';
+$onlyChildBusyIndicator: '.fd-busy-indicator:first-child';
+
+#{$siblingBusyIndicator},
+#{$siblingBusyIndicator} + .fd-busy-indicator-extended__label {
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#{$siblingBusyIndicator} + .fd-busy-indicator-extended__label {
+    z-index: 2;
+    transform: translate(-50%, 50%) !important;
+}
+
+#{$onlyChildBusyIndicator} ~ .fd-busy-indicator__overlay {
+    background-color: transparent;
+}
+
 .fd-busy-indicator {
     z-index: 2;
-
-    &--absolute {
-        white-space: nowrap;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
 
     &__container {
         display: block;
@@ -39,9 +52,5 @@
         z-index: 1;
         background-color: var(--sapBaseColor);
         opacity: 0.72;
-
-        &--transparent {
-            background-color: transparent;
-        }
     }
 }
