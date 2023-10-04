@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.71...v0.46.0-rc.72) (2023-10-04)
+
+
+### Bug Fixes
+
+* **docs,core:** various defect hunt issues ([#10655](https://github.com/SAP/fundamental-ngx/issues/10655)) ([0df8db7](https://github.com/SAP/fundamental-ngx/commit/0df8db70f37d8a0027f37ac92434a7a30acb3c2b))
+
+
+
+
+
 # [0.46.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.70...v0.46.0-rc.71) (2023-10-04)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
