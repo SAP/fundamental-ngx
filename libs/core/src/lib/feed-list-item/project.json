@@ -5,20 +5,6 @@
     "sourceRoot": "libs/core/src/lib/feed-list-item",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/feed-list-item"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/feed-list-item/tsconfig.lib.json",
-                "project": "libs/core/src/lib/feed-list-item/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/feed-list-item/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

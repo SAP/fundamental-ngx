@@ -5,20 +5,6 @@
     "sourceRoot": "libs/platform/src/lib/form",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/form"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/form/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-message-toast",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/message-toast",
     "projectType": "library",
     "prefix": "fundamental-ngx",

@@ -5,20 +5,6 @@
     "sourceRoot": "libs/core/src/lib/breadcrumb",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/breadcrumb"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
-                "project": "libs/core/src/lib/breadcrumb/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-datetime-picker",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/datetime-picker",
     "projectType": "library",
     "prefix": "fdp-doc",
