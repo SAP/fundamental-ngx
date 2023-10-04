@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.69...v0.46.0-rc.70) (2023-10-04)
+
+
+### Bug Fixes
+
+* **core:** popover header/footer should be sticky, and popovers should be able to grow ([#10630](https://github.com/SAP/fundamental-ngx/issues/10630)) ([e8a47ca](https://github.com/SAP/fundamental-ngx/commit/e8a47ca5096bb05daaf86ddfc483efa3229462be))
+
+
+
+
+
 # [0.46.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.68...v0.46.0-rc.69) (2023-10-03)
 
 
