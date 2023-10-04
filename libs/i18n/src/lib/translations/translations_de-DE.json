@@ -27,7 +27,7 @@
     "coreGridList.listItemStatusDraft": "Entwurf",
     "coreMessageStrip.dismissLabel": "Ignorieren",
     "coreMultiInput.multiInputAriaLabel": "Eingabe mehrerer Werte",
-    "coreMultiInput.tokensCountText": "Enthält {length, plural, =0 {no token} =1 {1 token} andere {# tokens} }.",
+    "coreMultiInput.tokensCountText": "Enthält {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.",
     "coreNavigation.mainNavigation": "Hauptnavigation",
     "coreNavigation.navigationPath": "Navigationspfad",
     "coreNestedList.linkItemAriaLabel": "Strukturelement {itemDetails}, {index} von {total}{selectedDescription}",
