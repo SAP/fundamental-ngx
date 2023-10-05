@@ -9,6 +9,13 @@ export const ROUTES: Routes = [
         loadChildren: () => import('@fundamental-ngx/docs/core')
     },
     {
+        path: 'btp',
+        data: {
+            library: 'BTP'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/btp')
+    },
+    {
         path: 'platform',
         data: {
             library: 'Platform'

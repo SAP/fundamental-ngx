@@ -79,6 +79,11 @@
                         "output": "./assets/cdk"
                     },
                     {
+                        "input": "./libs/btp",
+                        "glob": "README.md",
+                        "output": "./assets/btp"
+                    },
+                    {
                         "input": "./libs/i18n",
                         "glob": "README.md",
                         "output": "./assets/i18n"
@@ -107,6 +112,11 @@
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/core",
                         "output": "./docs/core"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
+                        "input": "libs/docs/btp",
+                        "output": "./docs/btp"
                     },
                     {
                         "glob": "**/examples/**/*",
@@ -211,6 +221,14 @@
                         }
                     ]
                 },
+                "btp": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/btp.routes.ts"
+                        }
+                    ]
+                },
                 "platform": {
                     "fileReplacements": [
                         {
@@ -272,6 +290,11 @@
                 "i18n": {
                     "browserTarget": "docs:compile:i18n",
                     "port": 4205,
+                    "hmr": true
+                },
+                "btp": {
+                    "browserTarget": "docs:compile:btp",
+                    "port": 4206,
                     "hmr": true
                 },
                 "hot-module-replacement": {
