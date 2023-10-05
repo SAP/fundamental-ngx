@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.77) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** inline help screenreader bug when using template ([#10651](https://github.com/SAP/fundamental-ngx/issues/10651)) ([afb2d08](https://github.com/SAP/fundamental-ngx/commit/afb2d081893df843f2ecb1127cdd415d2d7580c2))
+* **core:** tab list tabindex fix ([#10672](https://github.com/SAP/fundamental-ngx/issues/10672)) ([d236062](https://github.com/SAP/fundamental-ngx/commit/d236062964d121e3cc88fc6683c2d09e99ea1524))
+
+
+
+
+
 # [0.46.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.76) (2023-10-05)
 
 
