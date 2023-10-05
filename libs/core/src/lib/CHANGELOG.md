@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.77...v0.46.0-rc.78) (2023-10-05)
+
+
+### Features
+
+* **core:** add index emit to tab selection ([#10673](https://github.com/SAP/fundamental-ngx/issues/10673)) ([15291b4](https://github.com/SAP/fundamental-ngx/commit/15291b4a900f90855e6176245e98fe39ed7bc378))
+
+
+
+
+
 # [0.46.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.77) (2023-10-05)
 
 
