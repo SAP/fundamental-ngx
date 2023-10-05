@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "हटाने-योग्य",
     "coreToken.ariaRoleDescription": "टोकन",
     "coreTokenizer.moreLabel": "{count} अधिक",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "ठीक है",
     "coreUploadCollection.menuCancelText": "रद्द करें",
     "coreUploadCollection.menuEditAriaLabel": "संपादित करें",

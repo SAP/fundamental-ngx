@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "Cancellabile",
     "coreToken.ariaRoleDescription": "gettone",
     "coreTokenizer.moreLabel": "{ count, plural, one {1 più} other {Altri #} } articoli",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "Ok",
     "coreUploadCollection.menuCancelText": "Annulla",
     "coreUploadCollection.menuEditAriaLabel": "Modifica",

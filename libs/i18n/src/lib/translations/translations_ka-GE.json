@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "წაშლადი",
     "coreToken.ariaRoleDescription": "ტოკენი",
     "coreTokenizer.moreLabel": "{count} სხვა",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "კარგი",
     "coreUploadCollection.menuCancelText": "გაუქმება",
     "coreUploadCollection.menuEditAriaLabel": "შესწორება",
