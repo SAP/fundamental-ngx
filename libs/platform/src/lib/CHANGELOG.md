@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.76) (2023-10-05)
+
+
+### Bug Fixes
+
+* **platform:** fdp multi combobox fires multiple times after value is selected ([#10513](https://github.com/SAP/fundamental-ngx/issues/10513)) ([4e97fc5](https://github.com/SAP/fundamental-ngx/commit/4e97fc5eafdd8fccba02d89a4bf6fb76241396f6))
+
+
+
+
+
 # [0.46.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.74...v0.46.0-rc.75) (2023-10-05)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
