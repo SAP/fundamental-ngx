@@ -167,6 +167,10 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     @Output()
     selectedTabChange = new EventEmitter<TabPanelComponent>();
 
+    /** Event emitted when the selected panel index changes. */
+    @Output()
+    selectedTabIndexChange = new EventEmitter<number>();
+
     /** Event emitted when visible items count has been changed. */
     @Output()
     visibleItemsCount = new EventEmitter<number>();
@@ -291,7 +295,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             const _tabWasActive = tab.active;
             this._activateStackedTab(tab.panel, false);
             if (!_tabWasActive) {
-                this.selectedTabChange.emit(tab.panel);
+                this._selectedTabChange(tab.panel);
             }
         }
     }
@@ -428,7 +432,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             this._detectChanges();
         }
 
-        this.selectedTabChange.emit(tabPanel);
+        this._selectedTabChange(tabPanel);
     }
 
     /** @hidden */
@@ -455,5 +459,13 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden Whether tab can be expanded/collapsed */
     private _canChangeExpandState(tabPanel: TabPanelComponent, expand: boolean): boolean {
         return !tabPanel.disabled && expand !== tabPanel.expanded && expand === false ? this.collapsibleTabs : true;
+    }
+
+    /** @hidden */
+    private _selectedTabChange(tabPanel: TabPanelComponent): void {
+        this.selectedTabChange.emit(tabPanel);
+
+        const index = this._tabArray.findIndex((tabInfo) => tabInfo.panel === tabPanel);
+        this.selectedTabIndexChange.emit(index);
     }
 }
