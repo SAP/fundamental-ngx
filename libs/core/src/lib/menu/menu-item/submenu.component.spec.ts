@@ -8,7 +8,7 @@ describe('SubmenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SubmenuComponent]
+            imports: [SubmenuComponent]
         }).compileComponents();
     }));
 

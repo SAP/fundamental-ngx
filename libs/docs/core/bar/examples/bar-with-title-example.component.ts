@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -7,6 +7,6 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     selector: 'fd-bar-with-title-example',
     templateUrl: './bar-with-title-example.component.html',
     standalone: true,
-    imports: [BarModule, TitleComponent, AvatarModule]
+    imports: [BarModule, TitleComponent, AvatarComponent]
 })
 export class BarWithTitleExampleComponent {}

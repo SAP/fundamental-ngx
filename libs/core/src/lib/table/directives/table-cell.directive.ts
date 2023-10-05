@@ -1,7 +1,7 @@
-import { AfterContentInit, ContentChildren, Directive, HostBinding, Input, QueryList } from '@angular/core';
-import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
 import { BooleanInput } from '@angular/cdk/coercion';
+import { AfterContentInit, ContentChildren, Directive, HostBinding, Input, QueryList } from '@angular/core';
+import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItemDirective } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]',
@@ -10,7 +10,8 @@ import { BooleanInput } from '@angular/cdk/coercion';
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
             useExisting: TableCellDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class TableCellDirective extends FocusableItemDirective implements AfterContentInit {
     /** Whether to show the table cell's horizontal borders */

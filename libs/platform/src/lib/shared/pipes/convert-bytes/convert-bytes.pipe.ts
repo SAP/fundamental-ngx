@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'convertBytes' })
+@Pipe({
+    name: 'convertBytes',
+    standalone: true
+})
 export class ConvertBytesPipe implements PipeTransform {
     /** @hidden */
     private readonly _sizes: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];

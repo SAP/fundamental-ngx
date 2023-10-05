@@ -1,23 +1,24 @@
+import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
-    OnDestroy,
     Input,
+    OnDestroy,
     Output,
-    ViewEncapsulation,
-    ContentChild,
-    ChangeDetectorRef
+    ViewEncapsulation
 } from '@angular/core';
-import { FocusableOption } from '@angular/cdk/a11y';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
+import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fdp-menu-item',
@@ -28,7 +29,9 @@ import { MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
     host: {
         class: 'fd-menu__item',
         tabindex: '-1'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet]
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
     /** Set the Menu Item as disabled/enabled */
@@ -68,8 +71,8 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     }
 
     /** @hidden */
-    @ContentChild(MenuInteractiveDirective)
-    _fdMenuInteractiveChild: MenuInteractiveDirective;
+    @ContentChild(MenuInteractiveComponent)
+    _fdMenuInteractiveChild: MenuInteractiveComponent;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}

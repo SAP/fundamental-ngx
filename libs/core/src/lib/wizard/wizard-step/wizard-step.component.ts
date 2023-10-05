@@ -1,3 +1,4 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -15,17 +16,16 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
-import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS, FD_WIZARD_STEP_INDICATOR } from '../constants';
-import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
+import { NgIf } from '@angular/common';
+import { COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS, FD_WIZARD_STEP_INDICATOR } from '../constants';
 import { WizardStepIndicator } from '../models/wizard-step';
+import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -39,7 +39,9 @@ import { WizardStepIndicator } from '../models/wizard-step';
         '[attr.aria-label]': 'ariaLabel'
     },
     templateUrl: './wizard-step.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy {
     /**

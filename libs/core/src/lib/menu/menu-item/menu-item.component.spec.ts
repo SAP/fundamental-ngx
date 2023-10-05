@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, forwardRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
+import { MenuTriggerDirective } from '../directives/menu-trigger.directive';
+import { MenuInteractiveComponent } from '../menu-interactive.component';
 import { MenuComponent } from '../menu.component';
-import { MenuModule } from '../menu.module';
-import { MenuItemComponent } from './menu-item.component';
+import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
 
 @Component({
     template: `
@@ -12,12 +12,14 @@ import { MenuItemComponent } from './menu-item.component';
                 <div fd-menu-interactive></div>
             </li>
         </fd-menu>
-    `
+    `,
+    standalone: true,
+    imports: [MenuComponent, MenuItemComponent, MenuInteractiveComponent]
 })
 class TestMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild(MenuItemComponent) menuItem: MenuItemComponent;
-    @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
+    @ViewChild(MenuInteractiveComponent) menuInteractive: MenuInteractiveComponent;
 
     disabled = false;
 }
@@ -26,12 +28,11 @@ describe('MenuItemComponent', () => {
     let fixture: ComponentFixture<TestMenuItemComponent>;
     let menu: MenuComponent;
     let menuItem: MenuItemComponent;
-    let menuInteractive: MenuInteractiveDirective;
+    let menuInteractive: MenuInteractiveComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestMenuItemComponent],
-            imports: [MenuModule]
+            imports: [TestMenuItemComponent]
         }).compileComponents();
     }));
 
@@ -54,8 +55,8 @@ describe('MenuItemComponent', () => {
     });
 
     it('should configure menu interactive', () => {
-        const setSubmenuSpy = spyOn(menuInteractive, 'setSubmenu');
-        const setDisabledSpy = spyOn(menuInteractive, 'setDisabled');
+        const setSubmenuSpy = jest.spyOn(menuInteractive, 'setSubmenu');
+        const setDisabledSpy = jest.spyOn(menuInteractive, 'setDisabled');
 
         menuItem.ngAfterContentInit();
 
@@ -64,8 +65,8 @@ describe('MenuItemComponent', () => {
     });
 
     it('should set item as active on click', fakeAsync(() => {
-        const setActiveSpy = spyOn(menuItem.menuService!, 'setActive').and.callThrough();
-        const setSelectedSpy = spyOn(menuItem, 'setSelected');
+        const setActiveSpy = jest.spyOn(menuItem.menuService!, 'setActive');
+        const setSelectedSpy = jest.spyOn(menuItem, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
@@ -84,15 +85,15 @@ describe('MenuItemComponent', () => {
 
         tick();
 
-        const setActiveSpy = spyOn(menuItem.menuService!, 'setActive');
+        const setActiveSpy = jest.spyOn(menuItem.menuService!, 'setActive');
 
         menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
 
         tick();
 
         expect(setActiveSpy).not.toHaveBeenCalled();
-        expect(menuInteractive.selected).toBeFalse();
-        expect(menuItem['_hoverSubscriptions'].closed).toBeFalse();
+        expect(menuInteractive.selected).toBe(false);
+        expect(menuItem['_hoverSubscriptions'].closed).toBe(false);
     }));
 
     it('should have no hover listener in mobile mode', fakeAsync(() => {
@@ -100,11 +101,11 @@ describe('MenuItemComponent', () => {
 
         tick();
 
-        expect(menuItem['_hoverSubscriptions'].closed).toBeTrue();
+        expect(menuItem['_hoverSubscriptions'].closed).toBe(true);
     }));
 
     it('should set disabled state', fakeAsync(() => {
-        const setDisabledSpy = spyOn(menuInteractive, 'setDisabled').and.callThrough();
+        const setDisabledSpy = jest.spyOn(menuInteractive, 'setDisabled');
 
         fixture.componentInstance.disabled = true;
         fixture.detectChanges();
@@ -112,7 +113,7 @@ describe('MenuItemComponent', () => {
         tick();
 
         expect(setDisabledSpy).toHaveBeenCalledWith(true);
-        expect(menuInteractive.disabled).toBeTrue();
+        expect(menuInteractive.disabled).toBe(true);
     }));
 });
 
@@ -136,13 +137,15 @@ describe('MenuItemComponent', () => {
                 <div fd-menu-interactive>Option 2.1</div>
             </li>
         </fd-submenu>
-    `
+    `,
+    standalone: true,
+    imports: [MenuTriggerDirective, MenuComponent, MenuItemComponent, MenuInteractiveComponent, SubmenuComponent]
 })
 class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
     @ViewChild('menuItemWithNestedMenu') menuItemWithNestedMenu: MenuItemComponent;
     @ViewChild('menuNestedItem') menuNestedItem: MenuItemComponent;
-    @ViewChild(MenuInteractiveDirective) menuInteractive: MenuInteractiveDirective;
+    @ViewChild(forwardRef(() => MenuInteractiveComponent)) menuInteractive: MenuInteractiveComponent;
 }
 
 describe('MenuItemComponent nested', () => {
@@ -150,12 +153,11 @@ describe('MenuItemComponent nested', () => {
     let menu: MenuComponent;
     let menuItemWithNestedMenu: MenuItemComponent;
     let nestedMenuItem: MenuItemComponent;
-    let menuInteractiveWithNested: MenuInteractiveDirective;
+    let menuInteractiveWithNested: MenuInteractiveComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TesNestedMenuItemComponent],
-            imports: [MenuModule]
+            imports: [TesNestedMenuItemComponent]
         }).compileComponents();
     }));
 
@@ -181,11 +183,11 @@ describe('MenuItemComponent nested', () => {
 
     it('should have submenu', () => {
         expect(menuItemWithNestedMenu.submenu).toBeTruthy();
-        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(false);
     });
 
     it('should open/close submenu', fakeAsync(() => {
-        const setSelectedSpy = spyOn(menuInteractiveWithNested, 'setSelected');
+        const setSelectedSpy = jest.spyOn(menuInteractiveWithNested, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
@@ -195,16 +197,16 @@ describe('MenuItemComponent nested', () => {
         menuItemWithNestedMenu.setSelected(true);
 
         expect(setSelectedSpy).toHaveBeenCalledWith(true);
-        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(true);
 
         menuItemWithNestedMenu.setSelected(false);
 
         expect(setSelectedSpy).toHaveBeenCalledWith(false);
-        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(false);
     }));
 
     it('should open submenu on menu item hover', fakeAsync(() => {
-        const openSubmenuSpy = spyOn(menuItemWithNestedMenu, 'setSelected').and.callThrough();
+        const openSubmenuSpy = jest.spyOn(menuItemWithNestedMenu, 'setSelected');
 
         menu.open();
         fixture.detectChanges();
@@ -216,7 +218,7 @@ describe('MenuItemComponent nested', () => {
         tick();
 
         expect(openSubmenuSpy).toHaveBeenCalled();
-        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(true);
     }));
 
     it('should close sibling opened submenu when mouse goes on another menu item', fakeAsync(() => {
@@ -228,19 +230,19 @@ describe('MenuItemComponent nested', () => {
         menuInteractiveWithNested.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         tick();
         // Since hover on the second option submenu is shown
-        expect(menuItemWithNestedMenu.submenuVisible).toBeTrue();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(true);
 
         // Hover moves on sibling menu item
         menu._menuItems.first.menuInteractive.elementRef.nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         tick();
 
         // the second option submenu gets closed
-        expect(menuItemWithNestedMenu.submenuVisible).toBeFalse();
+        expect(menuItemWithNestedMenu.submenuVisible).toBe(false);
     }));
 
     it('should configure menu interactive', () => {
-        const setSubmenuSpy = spyOn(menuInteractiveWithNested, 'setSubmenu');
-        const setDisabledSpy = spyOn(menuInteractiveWithNested, 'setDisabled');
+        const setSubmenuSpy = jest.spyOn(menuInteractiveWithNested, 'setSubmenu');
+        const setDisabledSpy = jest.spyOn(menuInteractiveWithNested, 'setDisabled');
 
         menuItemWithNestedMenu.ngAfterContentInit();
 

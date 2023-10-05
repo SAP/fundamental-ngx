@@ -20,8 +20,23 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
+import {
+    DynamicPageComponent as CoreDynamicPageComponent,
+    DynamicPageContentComponent as CoreDynamicPageContentComponent,
+    DynamicPageFooterComponent as CoreDynamicPageFooterComponent,
+    DynamicPageHeaderComponent as CoreDynamicPageHeaderComponent,
+    DynamicPageGlobalActionsComponent,
+    DynamicPageHeaderSubtitleDirective,
+    DynamicPageHeaderTitleDirective,
+    DynamicPageLayoutActionsComponent,
+    DynamicPageSubheaderComponent,
+    DynamicPageTitleContentComponent
+} from '@fundamental-ngx/core/dynamic-page';
+import { FacetComponent } from '@fundamental-ngx/core/facets';
+import { TabListComponent, TabPanelComponent } from '@fundamental-ngx/core/tabs';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
@@ -47,9 +62,34 @@ export class DynamicPageTabChangeEvent {
     styleUrls: ['./dynamic-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DynamicPageService]
+    providers: [DynamicPageService],
+    standalone: true,
+    imports: [
+        CoreDynamicPageComponent,
+        NgIf,
+        CoreDynamicPageHeaderComponent,
+        BreadcrumbComponent,
+        NgTemplateOutlet,
+        DynamicPageHeaderSubtitleDirective,
+        DynamicPageHeaderTitleDirective,
+        DynamicPageTitleContentComponent,
+        FacetComponent,
+        DynamicPageGlobalActionsComponent,
+        DynamicPageLayoutActionsComponent,
+        DynamicPageSubheaderComponent,
+        TabListComponent,
+        NgFor,
+        TabPanelComponent,
+        DynamicPageContentComponent,
+        DynamicPageFooterComponent,
+        CoreDynamicPageFooterComponent,
+        CoreDynamicPageContentComponent
+    ]
 })
 export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy {
+    /** Whether DynamicPage should snap on scroll */
+    @Input()
+    disableSnapOnScroll = false;
     /** Page role  */
     @Input()
     @HostBinding('attr.role')

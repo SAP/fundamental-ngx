@@ -1,19 +1,19 @@
-import { isString } from '@fundamental-ngx/cdk/utils';
-import { TableRowType } from './enums/row-type.enum';
-import { isTableRow, TableRow, TableRowImpl } from './models/table-row.model';
-import { TableColumn } from './table-column';
-import { SelectionMode, SelectionModeValue } from './enums/selection-mode.enum';
-import { RowComparator } from './models/row-comparator.model';
-import { TableDataSource } from './domain/table-data-source';
-import { FdpTableDataSource } from './models/data-source.type';
+import { dfs, isString } from '@fundamental-ngx/cdk/utils';
 import { isDataSource } from '@fundamental-ngx/platform/shared';
+import { cloneDeep, get, set } from 'lodash-es';
+import { isObservable } from 'rxjs';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
-import { cloneDeep, set, get } from 'lodash-es';
-import { GroupTableRowValueType, TreeLike } from './models/tree-table.model';
-import { CollectionGroup } from './interfaces/collection-group.interface';
+import { TableDataSource } from './domain/table-data-source';
+import { TableRowType } from './enums/row-type.enum';
+import { SelectionMode, SelectionModeValue } from './enums/selection-mode.enum';
 import { SortDirection } from './enums/sort-direction.enum';
-import { isObservable } from 'rxjs';
+import { CollectionGroup } from './interfaces/collection-group.interface';
+import { FdpTableDataSource } from './models/data-source.type';
+import { RowComparator } from './models/row-comparator.model';
+import { TableRow, TableRowImpl, isTableRow } from './models/table-row.model';
+import { GroupTableRowValueType, TreeLike } from './models/tree-table.model';
+import { TableColumn } from './table-column';
 
 /** @hidden */
 export function newTableRow<T = any>(row: Partial<TableRow<T>>): TableRow<T> {
@@ -21,7 +21,7 @@ export function newTableRow<T = any>(row: Partial<TableRow<T>>): TableRow<T> {
         throw new Error('Unexpected value. TableRow.value cannot be undefined.');
     }
 
-    const newRow: TableRow<T> = new TableRowImpl({
+    return new TableRowImpl({
         type: row.type || TableRowType.ITEM,
         checked: row.checked || false,
         index: row.index || 0,
@@ -35,7 +35,6 @@ export function newTableRow<T = any>(row: Partial<TableRow<T>>): TableRow<T> {
         state: row.state || 'readonly',
         children: row.children || []
     });
-    return newRow;
 }
 
 /** @hidden */
@@ -196,6 +195,35 @@ export function convertTreeObjectsToTableRows<T>(
 
             rows.push(...children);
         }
+        if (row.level === 0 && row.isTree) {
+            dfs([row], (r) => {
+                const children = r.children || [];
+                const selectedChildren: TableRow<T>[] = [];
+                const indeterminateChildren: TableRow<T>[] = [];
+                children.forEach((child) => {
+                    if (child.checked === true) {
+                        selectedChildren.push(child);
+                    } else if (child.checked === null) {
+                        indeterminateChildren.push(child);
+                    }
+                });
+
+                const selectedAll = selectedChildren.length === children.length && children.length > 0;
+                const selectedSome = selectedChildren.length > 0;
+                if (r.checked) {
+                    applySelectionToChildren(rows, r, [], []);
+                    return;
+                }
+                if (selectedAll) {
+                    r.checked = true;
+                    return;
+                }
+                if (selectedSome || indeterminateChildren.length > 0) {
+                    r.checked = null;
+                    return;
+                }
+            });
+        }
     });
 
     return rows;
@@ -228,6 +256,21 @@ export function getSelectionStatusByRowValue<T>(
         });
     }
     return rowMap;
+}
+
+/** @hidden */
+export function applySelectionToChildren<T>(
+    allRows: Array<TableRow<T>>,
+    row: TableRow,
+    addedRows: TableRow<T>[],
+    removedRows: TableRow<T>[]
+): void {
+    const allChildren = findRowChildren(row, allRows);
+
+    allChildren.forEach((r) => {
+        r.checked = row.checked;
+        r.checked ? addedRows.push(r) : removedRows.push(r);
+    });
 }
 
 /** @hidden */

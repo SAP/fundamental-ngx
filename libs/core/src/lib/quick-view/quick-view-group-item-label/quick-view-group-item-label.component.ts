@@ -1,9 +1,12 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-quick-view-group-item-label',
     templateUrl: './quick-view-group-item-label.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FormLabelComponent]
 })
 export class QuickViewGroupItemLabelComponent implements AfterViewInit {
     /** @hidden */

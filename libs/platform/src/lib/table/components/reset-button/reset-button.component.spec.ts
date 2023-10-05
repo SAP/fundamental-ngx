@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
 
-import { PlatformTableModule } from '../../table.module';
-
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from './reset-button.component';
 
 class ResettableMock implements Resettable {
@@ -19,8 +17,7 @@ describe('PlatformTableResetButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformTableModule],
-            declarations: [ResetButtonComponent],
+            imports: [ResetButtonComponent],
             providers: [
                 {
                     provide: RESETTABLE_TOKEN,

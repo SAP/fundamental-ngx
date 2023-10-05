@@ -5,7 +5,7 @@ import {
     getTextArr,
     waitForElDisplayed
 } from '../../../../../e2e';
-import { genericColorText, objStatusText, semanticText } from './object-status-contents';
+import { genericColorText, invertedColorText, objStatusText, semanticText } from './object-status-contents';
 import { ObjectStatusPo } from './object-status.po';
 
 describe('Object Status test suite', () => {
@@ -75,7 +75,7 @@ describe('Object Status test suite', () => {
 
     describe('inverted object status with generic indication colors examples', () => {
         it('should check text value', async () => {
-            await checkObjectValues(invertedColorExamples + text, genericColorText);
+            await checkObjectValues(invertedColorExamples + text, invertedColorText);
         });
     });
 

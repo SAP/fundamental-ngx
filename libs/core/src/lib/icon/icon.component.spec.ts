@@ -1,34 +1,23 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component } from '@angular/core';
 
-import { IconModule } from './icon.module';
+import { IconComponent } from './icon.component';
 
 const ICON_NAME = 'add';
-const FONT_NAME = 'SAP-icons';
-
-@Component({
-    selector: 'fd-test-icon',
-    template: ` <fd-icon [font]="fontName" [glyph]="iconName"></fd-icon> `
-})
-class TestWrapperComponent {
-    readonly iconName = ICON_NAME;
-    fontName = FONT_NAME;
-}
 
 describe('IconComponent', () => {
-    let component: TestWrapperComponent;
-    let fixture: ComponentFixture<TestWrapperComponent>;
+    let component: IconComponent;
+    let fixture: ComponentFixture<IconComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [IconModule]
+            imports: [IconComponent]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TestWrapperComponent);
+        fixture = TestBed.createComponent(IconComponent);
         component = fixture.componentInstance;
+        fixture.componentRef.setInput('glyph', ICON_NAME);
         fixture.detectChanges();
     });
 
@@ -37,21 +26,20 @@ describe('IconComponent', () => {
     });
 
     it('should add icon class with glyph on input', () => {
-        const icon = fixture.debugElement.nativeElement.querySelector('fd-icon');
-        expect(icon.className).toContain('sap-icon--' + ICON_NAME);
+        expect(fixture.debugElement.nativeElement.className).toContain('sap-icon--' + ICON_NAME);
     });
 
     it('should apply SAP-icons-TNT icon font with font on input', () => {
-        component.fontName = 'SAP-icons-TNT';
+        fixture.componentRef.setInput('font', 'SAP-icons-TNT');
         fixture.detectChanges();
-        const icon = fixture.debugElement.nativeElement.querySelector('fd-icon');
-        expect(icon.className).toContain('sap-icon-TNT--' + ICON_NAME);
+        expect(fixture.debugElement.nativeElement.className).toContain('sap-icon-TNT--' + ICON_NAME);
     });
 
     it('should change the icon font to BusinessSuiteInAppSymbols', () => {
-        component.fontName = 'BusinessSuiteInAppSymbols';
+        fixture.componentRef.setInput('font', 'BusinessSuiteInAppSymbols');
         fixture.detectChanges();
-        const icon = fixture.debugElement.nativeElement.querySelector('fd-icon');
-        expect(icon.className).toContain('sap-icon-businessSuiteInAppSymbols--' + ICON_NAME);
+        expect(fixture.debugElement.nativeElement.className).toContain(
+            'sap-icon-businessSuiteInAppSymbols--' + ICON_NAME
+        );
     });
 });

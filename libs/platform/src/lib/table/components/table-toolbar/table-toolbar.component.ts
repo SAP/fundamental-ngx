@@ -11,7 +11,16 @@ import {
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+    ToolbarComponent,
+    ToolbarItemDirective,
+    ToolbarSeparatorComponent,
+    ToolbarSpacerDirective
+} from '@fundamental-ngx/core/toolbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
+import { SearchFieldComponent, SearchInput, SuggestionItem } from '@fundamental-ngx/platform/search-field';
 import { Table, TableService } from '@fundamental-ngx/platform/table-helpers';
 import { takeUntil } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './table-toolbar';
@@ -38,7 +47,20 @@ let tableToolbarTitleUniqueId = 0;
     templateUrl: './table-toolbar.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
+    providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }],
+    standalone: true,
+    imports: [
+        ToolbarComponent,
+        NgIf,
+        ToolbarItemDirective,
+        ToolbarSeparatorComponent,
+        NgTemplateOutlet,
+        ToolbarSpacerDirective,
+        SearchFieldComponent,
+        ButtonComponent,
+        AsyncPipe,
+        FdTranslatePipe
+    ]
 })
 export class TableToolbarComponent implements TableToolbarInterface, OnDestroy {
     /**

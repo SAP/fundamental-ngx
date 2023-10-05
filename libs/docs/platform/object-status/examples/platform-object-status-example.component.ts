@@ -1,13 +1,14 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { IndicationColorType, PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
+import { ColorAccent } from '@fundamental-ngx/cdk/utils';
+import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
 
 @Component({
     selector: 'fdp-platform-object-status-example',
     templateUrl: './platform-object-status-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusExampleComponent {}
 
@@ -16,7 +17,7 @@ export class PlatformObjectStatusExampleComponent {}
     templateUrl: './platform-object-status-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusTextExampleComponent {}
 
@@ -25,10 +26,10 @@ export class PlatformObjectStatusTextExampleComponent {}
     templateUrl: './platform-object-status-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [NgFor, PlatformObjectStatusModule]
+    imports: [NgFor, ObjectStatusComponent]
 })
 export class PlatformObjectStatusGenericExampleComponent {
-    items: IndicationColorType[] = [1, 2, 3, 4, 5, 6, 7, 8];
+    items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
 }
 
 @Component({
@@ -36,7 +37,7 @@ export class PlatformObjectStatusGenericExampleComponent {
     templateUrl: './platform-object-status-icon-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusTextIconExampleComponent {}
 
@@ -45,7 +46,7 @@ export class PlatformObjectStatusTextIconExampleComponent {}
     templateUrl: './platform-object-status-inverted-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [PlatformObjectStatusModule]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedTextExampleComponent {}
 
@@ -54,8 +55,8 @@ export class PlatformObjectStatusInvertedTextExampleComponent {}
     templateUrl: './platform-object-status-inverted-generic-text-example.component.html',
     styleUrls: ['./platform-object-status-example.component.scss'],
     standalone: true,
-    imports: [NgFor, PlatformObjectStatusModule]
+    imports: [NgFor, ObjectStatusComponent]
 })
 export class PlatformObjectStatusInvertedGenericTextExampleComponent {
-    items: IndicationColorType[] = [1, 2, 3, 4, 5, 6, 7, 8];
+    items: ColorAccent[] = new Array(10).fill(null).map((_, index) => (index + 1) as ColorAccent);
 }

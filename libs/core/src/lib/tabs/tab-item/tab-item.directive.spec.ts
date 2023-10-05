@@ -1,9 +1,11 @@
-import { TabItemDirective } from './tab-item.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { TabItemDirective } from './tab-item.directive';
 
 @Component({
-    template: ` <li fd-tab-item #directiveElement></li> `
+    template: ` <li fd-tab-item #directiveElement></li> `,
+    standalone: true,
+    imports: [TabItemDirective]
 })
 class TestNestedContainerComponent {
     @ViewChild('directiveElement', { static: true, read: TabItemDirective })
@@ -17,7 +19,7 @@ describe('TabItemDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, TabItemDirective]
+            imports: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ProductSwitchBodyComponent } from './product-switch-body.component';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ProductSwitchItem } from './product-switch.item';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
-import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { ProductSwitchBodyComponent } from './product-switch-body.component';
+import { ProductSwitchItem } from './product-switch.item';
 
 @Component({
     selector: 'fd-test-component',
-    template: '<fd-product-switch-body [products]="list"> </fd-product-switch-body>'
+    template: '<fd-product-switch-body [products]="list"> </fd-product-switch-body>',
+    standalone: true,
+    imports: [ProductSwitchBodyComponent]
 })
 export class TestComponent {
     list: ProductSwitchItem[] = [
@@ -53,8 +51,7 @@ describe('ProductSwitchBodyComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, ButtonModule, DragAndDropModule, DragDropModule],
-            declarations: [ProductSwitchBodyComponent, TestComponent]
+            imports: [TestComponent]
         });
     }));
 

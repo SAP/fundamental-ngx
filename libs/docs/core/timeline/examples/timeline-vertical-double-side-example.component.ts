@@ -1,7 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -16,7 +16,7 @@ import { TIMELINE_EXAMPLE_DATA } from './timeline-basic-example/timeline-example
         CdkScrollable,
         ScrollbarDirective,
         TimelineModule,
-        AvatarModule,
+        AvatarComponent,
         NgIf,
         ButtonModule,
         ContentDensityDirective,

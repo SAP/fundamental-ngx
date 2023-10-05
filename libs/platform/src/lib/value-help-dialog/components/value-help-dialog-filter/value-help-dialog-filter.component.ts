@@ -5,7 +5,8 @@ import { VhdFilter } from '../../models/vhd-filter.model';
 @Component({
     selector: 'fdp-value-help-dialog-filter',
     template: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class VhdFilterComponent implements VhdFilter {
     /** Uniq key for search and filtering */

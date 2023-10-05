@@ -1,7 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    BasePopoverClass,
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { BasePopoverClass } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
 
 @Component({
@@ -13,7 +20,9 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
             provide: FD_PRODUCT_SWITCH_COMPONENT,
             useExisting: ProductSwitchComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, FdTranslatePipe]
 })
 export class ProductSwitchComponent extends BasePopoverClass {
     /** Placement of a popover. */

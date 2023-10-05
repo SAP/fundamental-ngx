@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import {
     PlatformTableModule,
@@ -51,7 +51,7 @@ import { Observable, of } from 'rxjs';
         FdpCellDef,
         FdpTableCell,
         NgIf,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         FdDatetimeModule
     ]
 })

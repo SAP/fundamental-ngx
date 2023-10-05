@@ -31,8 +31,23 @@ fd-popover-body {
         max-width: 100%;
         display: flex;
 
+        .fd-popover__body-footer,
+        .fd-popover__body-header {
+            position: sticky;
+            z-index: 6;
+        }
+
+        .fd-popover__body-footer {
+            bottom: 0;
+        }
+
         &--hidden {
             display: none !important;
+        }
+
+        &--disable-transitions {
+            transition: none !important;
+            -webkit-transition: none !important;
         }
 
         &.fd-form-message {

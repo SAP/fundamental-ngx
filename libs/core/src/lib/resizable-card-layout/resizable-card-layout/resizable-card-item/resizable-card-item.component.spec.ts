@@ -1,9 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 import { Component, QueryList, ViewChildren } from '@angular/core';
-
-import { CardModule } from '@fundamental-ngx/core/card';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ResizableCardItemComponent } from './resizable-card-item.component';
 
@@ -13,7 +9,9 @@ import { ResizableCardItemComponent } from './resizable-card-item.component';
         <fd-resizable-card-item [cardWidthColSpan]="2" [cardHeightRowSpan]="19" [left]="400" [top]="0">
             2
         </fd-resizable-card-item>
-    `
+    `,
+    standalone: true,
+    imports: [ResizableCardItemComponent]
 })
 class TestResizableCardItemComponent {
     config = {
@@ -36,8 +34,7 @@ describe('ResizableCardItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ResizableCardItemComponent, TestResizableCardItemComponent],
-            imports: [CommonModule, CardModule, IconModule]
+            imports: [TestResizableCardItemComponent]
         }).compileComponents();
     }));
 

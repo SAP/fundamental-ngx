@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -14,21 +15,23 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import {
     ColumnSeparatorValue,
     FD_FLEXIBLE_LAYOUT_CONFIG,
-    FlexibleLayoutConfig,
     FlexibleColumnLayout,
     FlexibleColumnLayoutDefinition,
+    FlexibleLayoutConfig,
     LG_SCREEN_SIZE,
     MD_SCREEN_SIZE,
     ONE_COLUMN_END_FULL_SCREEN,
     ONE_COLUMN_MID_FULL_SCREEN,
     ONE_COLUMN_START_FULL_SCREEN,
-    ScreenSize,
     SM_SCREEN_SIZE,
+    ScreenSize,
     THREE_COLUMNS_END_EXPANDED,
     THREE_COLUMNS_END_MINIMIZED,
     THREE_COLUMNS_MID_EXPANDED,
@@ -50,7 +53,9 @@ import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
             provide: FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT,
             useExisting: FlexibleColumnLayoutComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [NgTemplateOutlet, NgIf, ButtonComponent, ContentDensityDirective]
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
     /**

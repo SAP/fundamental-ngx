@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DragAndDropModule, FdDropEvent } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { GridListItemOutputEvent, GridListModule } from '@fundamental-ngx/core/grid-list';
@@ -27,7 +27,7 @@ interface GridListItem {
         ContentDensityDirective,
         ButtonModule,
         NgFor,
-        AvatarModule,
+        AvatarComponent,
         LinkComponent,
         RouterLink
     ]

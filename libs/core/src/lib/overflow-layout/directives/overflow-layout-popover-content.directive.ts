@@ -1,20 +1,21 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Directive, HostBinding, HostListener, Inject, Input, OnDestroy, Optional } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { OverflowContainer } from '../interfaces/overflow-container.interface';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
-import { OverflowPopoverContent } from '../interfaces/overflow-popover-content.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
+import { OverflowPopoverContent } from '../interfaces/overflow-popover-content.interface';
 import { FD_OVERFLOW_CONTAINER } from '../tokens/overflow-container.token';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Directive to wrap Overlay Layout "More" popover content.
  * Used to apply keyboard navigation through the items.
  */
 @Directive({
-    selector: '[fdOverflowLayoutPopoverContent]'
+    selector: '[fdOverflowLayoutPopoverContent]',
+    standalone: true
 })
 export class OverflowLayoutPopoverContentDirective implements OverflowPopoverContent, OnDestroy {
     /**

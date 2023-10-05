@@ -16,10 +16,11 @@
     [class.fd-dialog__content--m]="dialogPaddingSize === 'md'"
     [class.fd-dialog__content--l]="dialogPaddingSize === 'lg'"
     [class.fd-dialog__content--xl]="dialogPaddingSize === 'xl'"
-    [class.fd-dialog__content--mobile]="dialogConfig.mobile"
+    [class.fd-dialog__content--mobile]="dialogConfig.mobile || _fullScreen"
     [class.fd-dialog__content--no-mobile-stretch]="dialogConfig.mobileOuterSpacing"
     [class.fd-dialog__content--draggable-grab]="dialogConfig.draggable && !isDragged"
     [class.fd-dialog__content--draggable-grabbing]="dialogConfig.draggable && isDragged"
+    [class.fd-dialog__content-full-screen]="_fullScreen"
     [cdkDragDisabled]="!dialogConfig.draggable"
     [fdkResizeDisabled]="!dialogConfig.resizable"
     [attr.id]="dialogConfig.id"
@@ -31,7 +32,7 @@
     (cdkDragEnded)="isDragged = false"
     (onResizeEnd)="adjustResponsivePadding()"
 >
-    <span fdkResizeHandle *ngIf="dialogConfig.resizable" class="fd-dialog__resize-handle"></span>
+    <span fdkResizeHandle *ngIf="dialogConfig.resizable && !_fullScreen" class="fd-dialog__resize-handle"></span>
 
     <div cdkDragHandle [cdkDragHandleDisabled]="!dialogConfig.draggable">
         <ng-content select="fd-dialog-header"></ng-content>

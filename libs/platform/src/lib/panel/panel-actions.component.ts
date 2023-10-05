@@ -16,6 +16,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
         `
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class PanelActionsComponent {}

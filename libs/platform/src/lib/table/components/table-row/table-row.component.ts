@@ -1,4 +1,5 @@
-import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     HostBinding,
+    HostListener,
     Input,
     NgZone,
     OnChanges,
@@ -20,21 +22,36 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import {
+    DisabledBehaviorDirective,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
     KeyUtil,
     RtlService,
+    ValueByPathPipe,
     destroyObservable,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
+    TableCellDirective,
+    TableIconDirective,
+    TableRowDirective,
+    TableStatusIndicatorDirective
+} from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import {
+    ColumnResizableSidePipe,
     EditableTableCell,
+    FdpCellSelectableDirective,
+    PlatformTableCellResizableDirective,
+    SelectionCellStylesPipe,
     SelectionMode,
     SelectionModeValue,
+    TableCellStylesPipe,
     TableColumn,
     TableColumnResizeService,
     TableDraggableDirective,
@@ -42,10 +59,12 @@ import {
     TableRowKeyboardDrag,
     TableRowService,
     TableService,
+    isTreeRow,
     isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { TableEditableCellComponent } from '../table-editable-cell/table-editable-cell.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -58,6 +77,35 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TableRowComponent
         }
+    ],
+    host: {
+        role: 'row',
+        '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        TableCellDirective,
+        TableStatusIndicatorDirective,
+        DisabledBehaviorDirective,
+        NgStyle,
+        NgSwitch,
+        NgSwitchCase,
+        FdpCellSelectableDirective,
+        NgTemplateOutlet,
+        CheckboxComponent,
+        FormsModule,
+        NgFor,
+        PlatformTableCellResizableDirective,
+        NgClass,
+        TableEditableCellComponent,
+        TableIconDirective,
+        AsyncPipe,
+        ValueByPathPipe,
+        FdTranslatePipe,
+        SelectionCellStylesPipe,
+        TableCellStylesPipe,
+        ColumnResizableSidePipe
     ]
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
@@ -156,6 +204,9 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
     readonly _tableRowService = inject(TableRowService);
 
     /** @hidden */
+    readonly _isTreeRow = isTreeRow;
+
+    /** @hidden */
     private readonly _refreshChildRows$ = new Subject<void>();
 
     /** @hidden */
@@ -203,6 +254,18 @@ export class TableRowComponent<T> extends TableRowDirective implements OnInit, A
                     this._onKeyDown(event);
                 });
         });
+    }
+
+    /** @hidden */
+    @HostListener('keydown.arrowLeft', ['$event'])
+    @HostListener('keydown.arrowRight', ['$event'])
+    private _onArrowKeydown($event: KeyboardEvent): void {
+        if ($event.target === this._elmRef.nativeElement && this.row.isTree) {
+            const shouldBeOpen = KeyUtil.isKeyCode($event, this._rtl ? LEFT_ARROW : RIGHT_ARROW);
+            if (shouldBeOpen !== this.row.expanded) {
+                this._toggleGroupRow();
+            }
+        }
     }
 
     /** @hidden */

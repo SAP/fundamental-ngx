@@ -1,7 +1,8 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdListContent], [fd-list-content]'
+    selector: '[fdListContent], [fd-list-content]',
+    standalone: true
 })
 export class ListContentDirective {
     /** @hidden */

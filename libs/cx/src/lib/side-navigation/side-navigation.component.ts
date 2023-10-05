@@ -16,19 +16,20 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
+import { warnOnce } from '@fundamental-ngx/core/utils';
 import {
     NestedListComponent,
     NestedListKeyboardService,
     NestedListStateService,
     PreparedNestedListComponent
 } from '@fundamental-ngx/cx/nested-list';
-import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainComponent } from './side-navigation-main.component';
 import { SideNavigationModel } from './side-navigation-model';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { warnOnce } from '@fundamental-ngx/core/utils';
+import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 
 /**
  * The side-navigation is a wrapping component representing
@@ -40,7 +41,7 @@ import { warnOnce } from '@fundamental-ngx/core/utils';
     templateUrl: './side-navigation.component.html',
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [NestedListKeyboardService, NestedListStateService]
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationComponent
     implements AfterContentInit, AfterViewInit, OnInit, OnChanges, SideNavigationInterface

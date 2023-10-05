@@ -229,7 +229,6 @@ export class DatetimePickerComponent<D>
     @Input()
     set state(state: FormStates) {
         this._state = state;
-        this._popoverFormMessage.messageType = state;
     }
 
     get state(): FormStates {
@@ -387,6 +386,10 @@ export class DatetimePickerComponent<D>
         read: ElementRef
     })
     _inputElement: ElementRef<HTMLInputElement>;
+
+    /** @hidden */
+    @ViewChild('formMessageTemplate')
+    private readonly _formMessageTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild('pickerTemplate')
@@ -609,9 +612,11 @@ export class DatetimePickerComponent<D>
         }
         this.onClose.emit();
         this.isOpen = false;
+        this._changeDetRef.detectChanges();
         this._onOpenStateChanged(this.isOpen);
         this._focusTrapService?.unpauseCurrentFocusTrap();
         this.handleOnTouched();
+        this._showPopoverContents = false;
     }
 
     /** @hidden */
@@ -703,7 +708,6 @@ export class DatetimePickerComponent<D>
 
         if (this.showFooter) {
             this.closePopover();
-            this._changeDetRef.detectChanges();
         }
     }
 
@@ -789,6 +793,10 @@ export class DatetimePickerComponent<D>
                 preventScroll: this.preventScrollOnFocus
             });
         }
+        if (!isOpen) {
+            this._showPopoverContents = false;
+            this._changeDetRef.detectChanges();
+        }
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
@@ -827,9 +835,8 @@ export class DatetimePickerComponent<D>
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message ?? '';
+        this._popoverFormMessage.message = this._formMessageTemplate;
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state;
     }
 
     /** @hidden */

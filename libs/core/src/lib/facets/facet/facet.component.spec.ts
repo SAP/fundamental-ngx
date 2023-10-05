@@ -3,18 +3,18 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextModule } from '@fundamental-ngx/core/text';
 
-import { FacetComponent } from './facet.component';
+import { FACET_CLASS_NAME } from '../constants';
 import { FacetContentComponent } from '../content/facet-content.component';
 import { FacetModule } from '../facet.module';
-import { FACET_CLASS_NAME } from '../constants';
+import { FacetComponent } from './facet.component';
 
 @Component({
     template: `
@@ -101,7 +101,7 @@ describe('Image Facet Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, AvatarModule, FacetModule, IconModule],
+            imports: [CommonModule, AvatarComponent, FacetModule, IconModule],
             declarations: [TestImageFacetComponent]
         }).compileComponents();
     }));
@@ -223,7 +223,7 @@ describe('Key Value Facet Component', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, ObjectStatusModule, ObjectNumberModule, FacetModule, IconModule],
+            imports: [CommonModule, ObjectStatusComponent, ObjectNumberModule, FacetModule, IconModule],
             declarations: [TestKeyValueFacetComponent]
         }).compileComponents();
     }));
@@ -290,9 +290,9 @@ describe('Key Value Facet Alignment Component', () => {
         TestBed.configureTestingModule({
             imports: [
                 CommonModule,
-                ObjectStatusModule,
+                ObjectStatusComponent,
                 ObjectNumberModule,
-                AvatarModule,
+                AvatarComponent,
                 FacetModule,
                 IconModule,
                 LinkModule,

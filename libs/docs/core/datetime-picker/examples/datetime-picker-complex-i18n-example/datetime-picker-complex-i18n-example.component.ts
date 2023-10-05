@@ -8,10 +8,7 @@ import {
     FdDate,
     FdDatetimeAdapter
 } from '@fundamental-ngx/core/datetime';
-import {
-    DatetimePickerComponent,
-    DatetimePickerComponent as DatetimePickerComponent_1
-} from '@fundamental-ngx/core/datetime-picker';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SelectModule } from '@fundamental-ngx/core/select';
 import {
@@ -53,7 +50,7 @@ const placeholders = new Map([
         }
     ],
     standalone: true,
-    imports: [FormLabelComponent, SelectModule, NgFor, DatetimePickerComponent_1, FormsModule]
+    imports: [FormLabelComponent, SelectModule, NgFor, DatetimePickerComponent, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {
     locale = 'en-ca';

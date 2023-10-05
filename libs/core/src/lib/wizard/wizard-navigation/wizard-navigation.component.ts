@@ -5,7 +5,8 @@ import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 @Component({
     selector: 'fd-wizard-navigation',
     templateUrl: './wizard-navigation.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class WizardNavigationComponent {
     /** Aria label for the wizard navigation component element. */

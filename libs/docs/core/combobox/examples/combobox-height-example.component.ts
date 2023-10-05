@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 @Component({
     selector: 'fd-combobox-height-example',
     templateUrl: './combobox-height-example.component.html',
     standalone: true,
-    imports: [ComboboxModule, FormsModule]
+    imports: [ComboboxComponent, FormsModule]
 })
 export class ComboboxHeightExampleComponent {
     searchTermOne = '';

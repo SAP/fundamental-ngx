@@ -1,5 +1,6 @@
 {
     "name": "docs-cdk-dnd",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/cdk/drag-n-drop",
     "projectType": "library",
     "prefix": "fdp-doc",

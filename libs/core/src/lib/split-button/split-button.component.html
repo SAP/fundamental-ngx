@@ -26,7 +26,7 @@
         [fdType]="fdType"
         [disabled]="disabled"
         [ariaLabel]="'coreSplitButton.expandButtonAriaLabel' | fdTranslate"
-        [attr.title]="expandButtonTitle || 'coreSplitButton.expandButtonAriaLabel' | fdTranslate"
+        [attr.title]="expandButtonTitle || ('coreSplitButton.expandButtonAriaLabel' | fdTranslate)"
         [class.is-active]="menu.isOpen"
     ></button>
     <ng-content select="fd-menu"></ng-content>

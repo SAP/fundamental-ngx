@@ -11,12 +11,12 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDP_PRESET_MANAGED_COMPONENT, PresetManagedComponent } from '@fundamental-ngx/platform/shared';
 import equal from 'fast-deep-equal';
 import { filter, startWith, Subscription } from 'rxjs';
 import { VariantManagement } from '../../models/variant-management';
 import { FDP_VARIANT_MANAGEMENT, FDP_VARIANT_MANAGEMENT_WRAPPER } from '../../tokens';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 /**
  * Wrapper component used to wrap components that implement `PresetManagedComponent`.
@@ -44,7 +44,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
  */
 @Component({
     selector: 'fdp-variant-management-wrapper',
-    templateUrl: './variant-management-wrapper.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -52,7 +52,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             provide: FDP_VARIANT_MANAGEMENT_WRAPPER,
             useExisting: VariantManagementWrapperComponent
         }
-    ]
+    ],
+    standalone: true
 })
 export class VariantManagementWrapperComponent implements AfterViewInit, OnDestroy {
     /** Variant management component. */

@@ -1,13 +1,10 @@
-import { NestedItemDirective } from './nested-item.directive';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListExpandIconComponent } from '../nested-list-directives';
 import { NestedListModule } from '../nested-list.module';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListStateService } from '../nested-list-state.service';
+import { NestedItemDirective } from './nested-item.directive';
 import { NestedItemService } from './nested-item.service';
 
 @Component({
@@ -95,8 +92,7 @@ describe('NestedItemDirective', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [NestedListModule, PopoverModule],
-            declarations: [TestNestedContainerComponent],
-            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+            declarations: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

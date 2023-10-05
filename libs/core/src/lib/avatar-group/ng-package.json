@@ -1,6 +1,6 @@
 {
     "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-    "dest": "../../../../../dist/libs/core/avatar-group",
+    "dest": "../../../../../dist/libs/core/src/lib/avatar-group",
     "lib": {
         "entryFile": "./index.ts"
     }

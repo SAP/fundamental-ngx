@@ -1,8 +1,8 @@
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule } from '@angular/forms';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { FormControlModule } from '@fundamental-ngx/core/form';
-import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'fd-upload-collection-form-item',
@@ -10,7 +10,7 @@ import { NgIf } from '@angular/common';
     templateUrl: './upload-collection-form-item.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, FormControlModule, FormsModule, FdTranslatePipe]
+    imports: [NgIf, FormControlComponent, FormsModule, FdTranslatePipe]
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     /** @hidden */

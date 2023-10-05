@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { QuickViewModule } from '../quick-view.module';
+import { QuickViewTitleComponent } from './quick-view-title.component';
 
 @Component({
-    template: `<fd-quick-view-title #titleRef>{{ title }}</fd-quick-view-title>`
+    template: `<fd-quick-view-title #titleRef>{{ title }}</fd-quick-view-title>`,
+    standalone: true,
+    imports: [QuickViewTitleComponent]
 })
 class TestComponent {
     title = 'Details';
@@ -17,8 +19,7 @@ describe('QuickViewTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

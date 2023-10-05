@@ -1,11 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { QuickViewModule } from '../quick-view.module';
+import { QuickViewSubheaderTitleComponent } from './quick-view-subheader-title.component';
 
 @Component({
-    template: `<fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>`
+    template: `<fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>`,
+    standalone: true,
+    imports: [QuickViewSubheaderTitleComponent]
 })
 class TestComponent {}
 
@@ -15,8 +17,7 @@ describe('QuickViewSubheaderTitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

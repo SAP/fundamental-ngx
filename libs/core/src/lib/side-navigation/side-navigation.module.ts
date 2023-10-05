@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
-import { SideNavigationComponent } from './side-navigation.component';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
-import { NestedListModule } from '@fundamental-ngx/core/nested-list';
+import { SideNavigationComponent } from './side-navigation.component';
 
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { NestedListKeyboardService, NestedListStateService } from '@fundamental-ngx/core/nested-list';
+
+/**
+ * @deprecated
+ */
 @NgModule({
-    imports: [CommonModule, NestedListModule],
-    exports: [SideNavigationComponent, SideNavigationMainDirective, SideNavigationUtilityDirective, NestedListModule],
-    declarations: [SideNavigationComponent, SideNavigationMainDirective, SideNavigationUtilityDirective]
+    imports: [SideNavigationComponent, SideNavigationMainDirective, SideNavigationUtilityDirective],
+    exports: [SideNavigationComponent, SideNavigationMainDirective, SideNavigationUtilityDirective],
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class SideNavigationModule {}

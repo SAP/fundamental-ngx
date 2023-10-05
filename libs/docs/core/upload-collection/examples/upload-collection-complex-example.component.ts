@@ -23,7 +23,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { ToolbarComponent, ToolbarLabelDirective, ToolbarSpacerDirective } from '@fundamental-ngx/core/toolbar';
@@ -33,7 +33,6 @@ import {
     UploadCollectionDescriptionDirective,
     UploadCollectionFormItemComponent,
     UploadCollectionItemDirective,
-    UploadCollectionItemDirective as UploadCollectionItemDirective_1,
     UploadCollectionStatusGroupDirective,
     UploadCollectionStatusItemDirective,
     UploadCollectionTextSeparatorDirective,
@@ -67,7 +66,7 @@ interface FileItem {
         UploadCollectionComponent,
         NgFor,
         ListModule,
-        UploadCollectionItemDirective_1,
+        UploadCollectionItemDirective,
         CheckboxComponent,
         UploadCollectionThumbnailDirective,
         IconModule,
@@ -80,7 +79,7 @@ interface FileItem {
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         UploadCollectionStatusItemDirective,
         UploadCollectionButtonGroupComponent,
         MessagePageModule,

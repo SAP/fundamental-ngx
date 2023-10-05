@@ -1,5 +1,6 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Injectable, TemplateRef, Type } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRefBase } from '../base/dialog-ref-base.class';
 
 export interface DialogRefLoadingConfiguration {
@@ -21,11 +22,17 @@ export class DialogRef<T = any, P = any> extends DialogRefBase<T, P> implements 
     /** @hidden */
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
 
+    /** @hidden */
+    private readonly _fullScreen = new BehaviorSubject<boolean>(false);
+
     /** Observable that is triggered whenever the dialog should be visually hidden or visible.*/
     onHide: Observable<boolean> = this._onHide.asObservable();
 
     /** Observable that is triggered whenever the dialog should be displayed in loading state.*/
     onLoading: Observable<boolean> = this._onLoading.asObservable();
+
+    /** Observable that is triggered whenever the full-screen state being changed. */
+    fullScreen = this._fullScreen.asObservable();
 
     /** Value used to determine if dialog window should be hidden or visible. */
     isLoading: boolean;
@@ -56,5 +63,12 @@ export class DialogRef<T = any, P = any> extends DialogRefBase<T, P> implements 
         this.loadingContent = loadingData.loadingContent;
         this.isLoading = loadingData.isLoading;
         this._onLoading.next(loadingData.isLoading);
+    }
+
+    /**
+     * Toggles full-screen mode of the Dialog.
+     */
+    toggleFullScreen(): void {
+        this._fullScreen.next(!this._fullScreen.value);
     }
 }

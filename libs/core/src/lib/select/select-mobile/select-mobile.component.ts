@@ -1,28 +1,33 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostListener,
     Inject,
     OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
-    HostListener,
-    ViewChild,
-    ChangeDetectionStrategy
+    ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { ESCAPE } from '@angular/cdk/keycodes';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
-    MobileModeConfigToken,
     MobileModeBase,
+    MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { ESCAPE } from '@angular/cdk/keycodes';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
 
 /**
  * This component provides extended mobile support for Select component to render list of option since full screen
@@ -31,7 +36,18 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 @Component({
     selector: 'fd-select-mobile',
     templateUrl: './select-mobile.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    providers: [DynamicComponentService],
+    imports: [
+        DialogModule,
+        NgIf,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        NgTemplateOutlet,
+        ButtonBarComponent
+    ]
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden

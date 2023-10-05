@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
 
-import { DynamicPageBackgroundType, CLASS_NAME, DynamicPageResponsiveSize } from '../constants';
+import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../constants';
 import { addClassNameToElement } from '../utils';
 
 /**
@@ -14,7 +14,8 @@ import { addClassNameToElement } from '../utils';
 @Component({
     selector: 'fdp-dynamic-page-content-host',
     template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class DynamicPageContentHostComponent implements OnInit {
     /**

@@ -1,38 +1,44 @@
-import { Directive, ElementRef, HostListener, Inject, Optional } from '@angular/core';
-import { FocusableOption } from '@angular/cdk/a11y';
-import { AvatarGroupInterface } from '../avatar-group.interface';
-import { AVATAR_GROUP_COMPONENT } from '../tokens';
+import { Directive, inject, Input, TemplateRef } from '@angular/core';
 
+/**
+ * Avatar group item directive, used to provide a template for the avatar group item.
+ */
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-avatar-group-item]',
-    host: { class: 'fd-avatar-group__item' }
+    selector: '[fdAvatarGroupItem]',
+    standalone: true
 })
-export class AvatarGroupItemDirective implements FocusableOption {
-    /** Item disable state */
-    disabled = false;
+export class AvatarGroupItemDirective {
+    /**
+     * Text, which will be displayed when in overflow popover and activated
+     * */
+    @Input('fdAvatarGroupItemTitle')
+    title: string;
+
+    /**
+     * If set to true, item will never be hidden in overflow popover
+     * */
+    @Input('fdAvatarGroupItemForceVisibility')
+    forceVisibility = false;
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef<HTMLElement>,
-        @Optional() @Inject(AVATAR_GROUP_COMPONENT) private readonly _component: AvatarGroupInterface
-    ) {}
+    _templateRef: TemplateRef<void> = inject(TemplateRef);
 
-    /** @hidden */
-    get _element(): HTMLElement {
-        return this._elementRef.nativeElement;
-    }
-
-    /** Handler for mouse events */
-    @HostListener('click')
-    onClick(): void {
-        if (this._component) {
-            this._component._setActiveItem(this);
+    /**
+     * Template for the details of the avatar group item.
+     * This template it used to render additional information in the overflow popover.
+     * */
+    @Input('fdAvatarGroupItem')
+    set details(detailsTemplate: TemplateRef<void> | string) {
+        if (typeof detailsTemplate === 'string') {
+            return;
         }
+        this._details = detailsTemplate;
+    }
+
+    get details(): TemplateRef<void> {
+        return this._details;
     }
 
     /** @hidden */
-    focus(): void {
-        this._element.focus();
-    }
+    private _details: TemplateRef<void>;
 }

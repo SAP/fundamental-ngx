@@ -1,5 +1,6 @@
 {
     "name": "docs-core-scroll-spy",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/scroll-spy",
     "projectType": "library",
     "prefix": "fundamental-ngx",

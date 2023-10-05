@@ -1,4 +1,5 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -12,12 +13,11 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { Subscription } from 'rxjs';
 import { FD_RADIO_BUTTON_COMPONENT } from '../tokens';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
@@ -44,7 +44,9 @@ let uniqueId = 0;
     ],
     host: {
         '(focusout)': 'onTouched()'
-    }
+    },
+    standalone: true,
+    imports: [FormsModule, AsyncPipe]
 })
 export class RadioButtonComponent
     implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl

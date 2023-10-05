@@ -2,8 +2,8 @@ import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupLegacyModule } from '@fundamental-ngx/core/avatar-group-legacy';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -12,7 +12,6 @@ import {
     PopoverBodyComponent,
     PopoverBodyHeaderDirective,
     PopoverComponent,
-    PopoverComponent as PopoverComponent_1,
     PopoverControlComponent
 } from '@fundamental-ngx/core/popover';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
@@ -29,23 +28,23 @@ import { AvatarGeneratorExampleService } from './avatar-generator-example.servic
         QuickViewModule,
         NgIf,
         BarModule,
-        AvatarModule,
+        AvatarComponent,
         LinkComponent,
         OverflowLayoutModule,
         NgFor,
-        PopoverComponent_1,
+        PopoverComponent,
         PopoverControlComponent,
         NgTemplateOutlet,
         PopoverBodyComponent,
         ButtonModule,
-        AvatarGroupModule,
+        AvatarGroupLegacyModule,
         PopoverBodyHeaderDirective
     ]
 })
 export class OverflowLayoutComplexExampleComponent {
     size: Size = 's';
 
-    itemsToRender = this._avatarService.generate();
+    itemsToRender: any[];
 
     @ViewChild('overflowPopover', { read: PopoverComponent })
     overflowPopover: PopoverComponent;
@@ -67,7 +66,9 @@ export class OverflowLayoutComplexExampleComponent {
         return this.overflowPopoverStage === 'detail';
     }
 
-    constructor(private _avatarService: AvatarGeneratorExampleService) {}
+    constructor(private _avatarService: AvatarGeneratorExampleService) {
+        this.itemsToRender = this._avatarService.generate();
+    }
 
     addItem(): void {
         this.itemsToRender.push(this._avatarService.generateAvatar());

@@ -10,7 +10,8 @@ import { TableService } from './table.service';
 @Component({
     selector: 'fdp-test',
     template: '<div></div>',
-    providers: [TableResponsiveService]
+    providers: [TableResponsiveService],
+    standalone: true
 })
 export class TestComponent {
     constructor(public tableResponsiveService: TableResponsiveService) {}
@@ -70,7 +71,7 @@ describe('TableResponsiveService', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestComponent],
+            imports: [TestComponent],
             providers: [
                 TableService,
                 {
@@ -88,7 +89,7 @@ describe('TableResponsiveService', () => {
     });
 
     it('should transform plain breakpoints to a correct model', () => {
-        const breakpointTransformerSpy = spyOn(service as any, '_normalizeBreakpoints').and.callThrough();
+        const breakpointTransformerSpy = jest.spyOn(service as any, '_normalizeBreakpoints');
 
         service.registerResponsiveColumn(column, plainBreakpoints);
 

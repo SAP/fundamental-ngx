@@ -1,3 +1,13 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import {
+    CdkDrag,
+    CdkDragDrop,
+    CdkDragEnter,
+    CdkDragPlaceholder,
+    CdkDragStart,
+    CdkDropList,
+    CdkDropListGroup
+} from '@angular/cdk/drag-drop';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -21,15 +31,19 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, skip, takeUntil } from 'rxjs/operators';
 
-import { resizeObservable, RtlService, getDocumentFontSize } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NumberInput, coerceNumberProperty } from '@angular/cdk/coercion';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import {
+    DragAndDropModule,
+    Nullable,
+    RtlService,
+    getDocumentFontSize,
+    resizeObservable
+} from '@fundamental-ngx/cdk/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
-import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 
 const REM_IN_PX = getDocumentFontSize();
 const CARD_MINIMUM_WIDTH = REM_IN_PX * 20; // 20rem
@@ -39,7 +53,10 @@ const MAX_COLUMNS = 10;
 
 let cardRank = 1;
 
-@Directive({ selector: '[fdCardDef]' })
+@Directive({
+    selector: '[fdCardDef]',
+    standalone: true
+})
 export class CardDefinitionDirective {
     /**
      * Behaves like rank of card.
@@ -90,7 +107,19 @@ type CardColumn = CardDefinitionDirective[];
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fd-fixed-card-layout'
-    }
+    },
+    standalone: true,
+    imports: [
+        CdkDropListGroup,
+        DragAndDropModule,
+        NgFor,
+        CdkDropList,
+        CdkDrag,
+        FixedCardLayoutItemComponent,
+        NgTemplateOutlet,
+        CdkDragPlaceholder,
+        NgIf
+    ]
 })
 export class FixedCardLayoutComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
     /** Drag drop behavior can be disabled */

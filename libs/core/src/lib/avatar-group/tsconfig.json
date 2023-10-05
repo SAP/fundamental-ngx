@@ -1,5 +1,8 @@
 {
-    "extends": "../../../../../tsconfig.base.json",
+    "compilerOptions": {
+        "target": "es2022",
+        "useDefineForClassFields": false
+    },
     "files": [],
     "include": [],
     "references": [
@@ -7,17 +10,8 @@
             "path": "./tsconfig.lib.json"
         },
         {
-            "path": "./tsconfig.lib.prod.json"
-        },
-        {
             "path": "./tsconfig.spec.json"
         }
     ],
-    "compilerOptions": {
-        "forceConsistentCasingInFileNames": true,
-        "strict": false,
-        "noImplicitReturns": false,
-        "noFallthroughCasesInSwitch": true,
-        "target": "es2022"
-    }
+    "extends": "../../../../../tsconfig.base.json"
 }

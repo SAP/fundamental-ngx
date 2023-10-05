@@ -1,16 +1,17 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { Directive, ElementRef, Input, OnChanges, OnInit, inject } from '@angular/core';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
-    // TODO to be discussed
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-tokenizer-input]'
+    selector: '[fdTokenizerInput], [fd-tokenizer-input]',
+    standalone: true
 })
 export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuilder {
     /** user's custom classes */
     @Input()
     class: string;
+
+    /** @hidden */
+    readonly elementRef = inject(ElementRef);
 
     /** @hidden
      * CssClassBuilder interface implementation
@@ -21,9 +22,6 @@ export class TokenizerInputDirective implements OnInit, OnChanges, CssClassBuild
     buildComponentCssClass(): string[] {
         return ['fd-tokenizer__input', this.class];
     }
-
-    /** @hidden */
-    constructor(public readonly elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {

@@ -3,14 +3,14 @@ import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
 import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TableModule } from '@fundamental-ngx/core/table';
@@ -30,11 +30,11 @@ import { TableModule } from '@fundamental-ngx/core/table';
         NgIf,
         CardModule,
         FormItemComponent,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         ListModule,
         FocusableGridDirective,
         TableModule,
-        AvatarModule,
+        AvatarComponent,
         ContentDensityDirective
     ]
 })

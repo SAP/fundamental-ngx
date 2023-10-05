@@ -1,15 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { NestedListModule } from '../nested-list.module';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListStateService } from '../nested-list-state.service';
-import { NestedListDirective } from './nested-list.directive';
 import {
     ContentDensityGlobalKeyword,
     ContentDensityMode,
+    ContentDensityModule,
     LocalContentDensityMode
 } from '@fundamental-ngx/core/content-density';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListStateService } from '../nested-list-state.service';
+import { NestedListModule } from '../nested-list.module';
+import { NestedListDirective } from './nested-list.directive';
 
 @Component({
     template: `
@@ -65,7 +66,7 @@ describe('NestedListDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [NestedListModule],
+            imports: [NestedListModule, ContentDensityModule],
             declarations: [TestNestedContainerComponent],
             providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
         }).compileComponents();

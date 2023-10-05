@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { AvatarModule } from './avatar.module';
+import { By } from '@angular/platform-browser';
+import { ColorAccent, Nullable } from '@fundamental-ngx/cdk/utils';
+import { AvatarValueStates } from './avatar-value-states.type';
 import { AvatarComponent } from './avatar.component';
 
 @Component({
     selector: 'fd-test-object-status',
-    template: `<fd-avatar
+    template: ` <fd-avatar
         [size]="size"
         [glyph]="glyph"
         [circle]="circle"
@@ -18,10 +20,15 @@ import { AvatarComponent } from './avatar.component';
         [zoomGlyph]="zoomGlyph"
         [border]="border"
         [label]="label"
+        [valueState]="valueState"
     >
-    </fd-avatar>`
+    </fd-avatar>`,
+    standalone: true,
+    imports: [AvatarComponent]
 })
 class TestComponent {
+    @ViewChild(AvatarComponent)
+    avatarComponent: AvatarComponent;
     size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
     glyph: string | null = null;
     circle = false;
@@ -29,12 +36,12 @@ class TestComponent {
     placeholder = false;
     contain = false;
     tile = false;
-    colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | null = null;
+    colorAccent: Nullable<ColorAccent> = null;
     random = false;
     zoomGlyph: string | null = null;
     border = false;
     label: string | null = null;
-    @ViewChild(AvatarComponent) avatarComponent: AvatarComponent;
+    valueState: Nullable<AvatarValueStates>;
 }
 
 describe('AvatarComponent', () => {
@@ -43,8 +50,7 @@ describe('AvatarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarModule]
+            imports: [TestComponent]
         })
             .overrideComponent(AvatarComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -163,5 +169,23 @@ describe('AvatarComponent', () => {
         component.label = 'Marjolein van Veen';
         fixture.detectChanges();
         expect(component.avatarComponent.abbreviate).toEqual('MvV');
+    });
+
+    it('should add respective Value State Icons', () => {
+        const stateIcons: Record<AvatarValueStates, string> = {
+            positive: 'message-success',
+            caution: 'message-warning',
+            negative: 'message-error',
+            information: 'message-information'
+        };
+
+        Object.keys(stateIcons).forEach((state) => {
+            component.valueState = state as AvatarValueStates;
+            fixture.detectChanges();
+            const badgeElementClassList = fixture.debugElement.query(By.css('.fd-avatar__zoom-icon')).nativeElement
+                .classList;
+            expect(badgeElementClassList).toContain(`fd-avatar__zoom-icon--${state}`);
+            expect(badgeElementClassList).toContain(`sap-icon--${stateIcons[state]}`);
+        });
     });
 });

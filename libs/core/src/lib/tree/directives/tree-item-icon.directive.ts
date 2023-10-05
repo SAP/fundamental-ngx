@@ -4,7 +4,8 @@ import { Directive, HostBinding } from '@angular/core';
     selector: '[fdTreeItemIcon]',
     host: {
         class: 'fd-tree__icon'
-    }
+    },
+    standalone: true
 })
 export class TreeItemIconDirective {
     /** @hidden */
@@ -20,6 +21,7 @@ export class TreeItemIconDirective {
     selector: '[fdTreeItemText]',
     host: {
         class: 'fd-tree__text'
-    }
+    },
+    standalone: true
 })
 export class TreeItemTextDirective {}

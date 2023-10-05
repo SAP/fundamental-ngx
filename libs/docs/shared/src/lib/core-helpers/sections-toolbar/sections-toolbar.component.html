@@ -63,23 +63,22 @@
                             </ng-container>
                         </ul>
                     </li>
+                    <ng-template #listItemTpl let-item>
+                        <li fd-nested-list-item>
+                            <a
+                                fd-nested-list-link
+                                [routerLink]="'/' + item.url"
+                                routerLinkActive="is-selected"
+                                (keypress)="onKeypressHandler($event)"
+                                tabindex="0"
+                                role="button"
+                            >
+                                <span fd-nested-list-title>{{ item.name }}</span>
+                            </a>
+                        </li>
+                    </ng-template>
                 </ul>
             </div>
         </fd-side-nav>
     </div>
 </div>
-
-<ng-template #listItemTpl let-item>
-    <li fd-nested-list-item>
-        <a
-            fd-nested-list-link
-            [routerLink]="'/' + item.url"
-            routerLinkActive="is-selected"
-            (keypress)="onKeypressHandler($event)"
-            tabindex="0"
-            role="button"
-        >
-            <span fd-nested-list-title>{{ item.name }}</span>
-        </a>
-    </li>
-</ng-template>

@@ -1,5 +1,5 @@
 import {
-    AfterContentInit,
+    AfterViewInit,
     ContentChild,
     Directive,
     ElementRef,
@@ -11,10 +11,11 @@ import {
     Output,
     SimpleChanges
 } from '@angular/core';
-import { ResizeHandleDirective } from './resize-handle.directive';
-import { fromEvent, merge, Observable, Subscription } from 'rxjs';
-import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
+import { Observable, Subscription, fromEvent, merge } from 'rxjs';
+import { filter, map, pairwise, takeUntil, tap } from 'rxjs/operators';
+import { Nullable } from '../../models/nullable';
 import { RtlService } from '../../services/rtl.service';
+import { ResizeHandleDirective } from './resize-handle.directive';
 
 interface ResizeMove {
     x: number;
@@ -25,7 +26,7 @@ interface ResizeMove {
     selector: '[fdkResize]',
     standalone: true
 })
-export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
+export class ResizeDirective implements OnChanges, AfterViewInit, OnDestroy {
     /** Element limiting resizable container growth */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdkResizeBoundary') resizeBoundary: string | HTMLElement = 'body';
@@ -33,6 +34,10 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** Whether resizable behaviour should be disabled */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('fdkResizeDisabled') disabled = false;
+
+    /** Additional class to be applied to the Element ref during resize. */
+    @Input()
+    fdkResizeClass: string;
 
     /** Localization of resize handle inside resizable container */
     // eslint-disable-next-line @angular-eslint/no-input-rename
@@ -54,10 +59,27 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     @Output() onResizeEnd = new EventEmitter<void>();
 
     /** @hidden Reference to Resize handle */
-    @ContentChild(ResizeHandleDirective, { static: false }) resizeHandleReference;
+    @ContentChild(ResizeHandleDirective, { static: false })
+    set resizeHandleReference(value: Nullable<ResizeHandleDirective>) {
+        this._resizeHandleReference = value;
+        if (!value) {
+            this._unsubscribe();
+        } else {
+            this._setResizeListeners();
+        }
+    }
+    get resizeHandleReference(): Nullable<ResizeHandleDirective> {
+        return this._resizeHandleReference;
+    }
+
+    /** @hidden */
+    private _resizeHandleReference: Nullable<ResizeHandleDirective>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _resizeSubscriptions = new Subscription();
 
     /** @hidden */
     private _isRtl = false;
@@ -69,7 +91,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['disabled']) {
             if (changes['disabled'].previousValue === false && changes['disabled'].currentValue === true) {
-                this._subscriptions.unsubscribe();
+                this._unsubscribe();
             } else if (changes['disabled'].previousValue === true && changes['disabled'].currentValue === false) {
                 this._setResizeListeners();
             }
@@ -77,7 +99,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
+    ngAfterViewInit(): void {
         if (this._rtlService) {
             this._subscriptions.add(this._rtlService.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
         }
@@ -90,6 +112,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+        this._resizeSubscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -97,12 +120,19 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         return this._isRtl ? -1 : 1;
     }
 
+    /** @hidden */
+    private _unsubscribe(): void {
+        this._resizeSubscriptions.unsubscribe();
+        this._resizeSubscriptions = new Subscription();
+    }
+
     /** @hidden Sets Resize listeners */
     private _setResizeListeners(): void {
+        this._unsubscribe();
         const resize = this._getResizeFunction();
-        const moveOffset = this._getMoveOffsetFunction();
+        let moveOffset = this._getMoveOffsetFunction();
         const resizeContainer = this._findResizeContainer();
-        if (!resizeContainer) {
+        if (!resizeContainer || !this.resizeHandleReference) {
             return;
         }
         const isBoundaryOverflow = this._getBoundaryOverflowFunction(resizeContainer);
@@ -111,7 +141,15 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         const mouseMoveEvent$ = fromEvent<MouseEvent>(resizeContainer, 'mousemove');
         const mouseDownEvent$ = fromEvent<MouseEvent>(this.resizeHandleReference.elementRef.nativeElement, 'mousedown');
 
-        const resizeActive$ = merge(mouseDownEvent$.pipe(mapTo(true)), mouseUpEvent$.pipe(mapTo(false)));
+        const resizeActive$ = merge(
+            mouseDownEvent$.pipe(
+                map(() => true),
+                tap(() => {
+                    moveOffset = this._getMoveOffsetFunction();
+                })
+            ),
+            mouseUpEvent$.pipe(map(() => false))
+        );
         const emitResizableEvents$ = this._getResizeEventsNotifiers(resizeActive$);
         const preventOtherPointerEvents$ = this._blockOtherPointerEvents(resizeActive$);
 
@@ -129,9 +167,9 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
             tap(() => setupResizer())
         );
 
-        this._subscriptions.add(setupResize$.subscribe());
-        this._subscriptions.add(emitResizableEvents$.subscribe());
-        this._subscriptions.add(preventOtherPointerEvents$.subscribe());
+        this._resizeSubscriptions.add(setupResize$.subscribe());
+        this._resizeSubscriptions.add(emitResizableEvents$.subscribe());
+        this._resizeSubscriptions.add(preventOtherPointerEvents$.subscribe());
     }
 
     /** @hidden Creates resize function*/
@@ -181,6 +219,9 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     private _findResizeContainer(): Element | null {
         let resizeContainer: Element | null;
         if (typeof this.resizeBoundary === 'string') {
+            if (this.resizeBoundary === 'body') {
+                return document.body;
+            }
             resizeContainer = this._elementRef.nativeElement.closest(this.resizeBoundary);
         } else {
             resizeContainer = this.resizeBoundary;
@@ -190,7 +231,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
             return resizeContainer;
         } else {
             console.warn(`fdResize - Cannot find "${this.resizeBoundary}", falling back to "body"`);
-            return document.querySelector('body');
+            return document.body;
         }
     }
 
@@ -243,8 +284,20 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden Block resizable container pointer events when resizing  */
     private _blockOtherPointerEvents(trigger$: Observable<boolean>): Observable<any> {
         return trigger$.pipe(
+            tap((isActive) => {
+                if (!this.fdkResizeClass) {
+                    return;
+                }
+                if (!isActive) {
+                    this._elementRef.nativeElement.classList.remove(this.fdkResizeClass);
+                } else {
+                    this._elementRef.nativeElement.classList.add(this.fdkResizeClass);
+                }
+            }),
             map((isActive) => (isActive ? 'none' : 'auto')),
-            tap((value) => (this._elementRef.nativeElement.style.pointerEvents = value))
+            tap((value) => {
+                this._elementRef.nativeElement.style.pointerEvents = value;
+            })
         );
     }
 }

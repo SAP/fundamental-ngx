@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,6 +9,8 @@ import {
     Optional,
     ViewChild
 } from '@angular/core';
+import { BarComponent, BarElementDirective, BarLeftDirective } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogHeaderBase } from '@fundamental-ngx/core/dialog';
 import { MessageBoxSemanticIconComponent } from '../message-box-semantic-icon/message-box-semantic-icon.component';
 import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
@@ -31,7 +34,17 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
 @Component({
     selector: 'fd-message-box-header',
     templateUrl: './message-box-header.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        BarComponent,
+        ContentDensityDirective,
+        NgTemplateOutlet,
+        BarLeftDirective,
+        BarElementDirective,
+        NgIf,
+        MessageBoxSemanticIconComponent
+    ]
 })
 export class MessageBoxHeaderComponent extends DialogHeaderBase implements AfterViewInit {
     /** @hidden */

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-overflow-layout",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/overflow-layout",
     "projectType": "library",
     "prefix": "fundamental-ngx",

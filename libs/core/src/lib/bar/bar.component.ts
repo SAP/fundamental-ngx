@@ -8,13 +8,13 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import {
+    ContentDensityMode,
     ContentDensityObserver,
-    contentDensityObserverProviders,
-    ContentDensityMode
+    contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { Subscription } from 'rxjs';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
 export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer';
@@ -35,7 +35,8 @@ export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | '
         contentDensityObserverProviders({
             defaultContentDensity: ContentDensityMode.COMPACT
         })
-    ]
+    ],
+    standalone: true
 })
 export class BarComponent implements OnChanges, OnInit, CssClassBuilder, OnDestroy {
     /** user's custom classes */

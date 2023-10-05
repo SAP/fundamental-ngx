@@ -1,4 +1,17 @@
 import {
+    ALT,
+    BACKSPACE,
+    CONTROL,
+    DOWN_ARROW,
+    ENTER,
+    ESCAPE,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SHIFT,
+    TAB,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
+import {
     AfterViewInit,
     ChangeDetectorRef,
     ContentChildren,
@@ -20,30 +33,18 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import {
-    ALT,
-    BACKSPACE,
-    CONTROL,
-    DOWN_ARROW,
-    ENTER,
-    ESCAPE,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    SHIFT,
-    TAB,
-    UP_ARROW
-} from '@angular/cdk/keycodes';
 
 import { combineLatest, fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { takeUntil, startWith } from 'rxjs/operators';
+import { startWith, takeUntil } from 'rxjs/operators';
 
-import { DialogConfig } from '@fundamental-ngx/core/dialog';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { FdpListComponent, ListComponent } from '@fundamental-ngx/platform/list';
+import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { FdpListComponent, ListComponent } from '@fundamental-ngx/platform/list';
 import {
+    ArrayMultiInputDataSource,
     CollectionBaseInput,
-    PlatformFormFieldControl,
     isDataSource,
     isFunction,
     isJsObject,
@@ -51,15 +52,14 @@ import {
     isString,
     MatchingBy,
     MatchingStrategy,
-    MultiInputOption,
-    ArrayMultiInputDataSource,
-    ObservableMultiInputDataSource,
     MultiInputDataSource,
-    PlatformFormField
+    MultiInputOption,
+    ObservableMultiInputDataSource,
+    PlatformFormField,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 import { TextAlignment } from '../combobox';
 import { MultiInputConfig } from './multi-input.config';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type FdpMultiInputDataSource<T> = MultiInputDataSource<T> | Observable<T[]> | T[];
 
@@ -742,7 +742,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      * */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.getName()) {
+            switch (template.name) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;

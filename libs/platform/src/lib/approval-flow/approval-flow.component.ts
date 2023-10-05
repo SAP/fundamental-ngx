@@ -1,3 +1,5 @@
+import { CdkDrag } from '@angular/cdk/drag-drop';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -19,27 +21,72 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { CdkDrag } from '@angular/cdk/drag-drop';
-import { combineLatest, fromEvent, merge, Subject, Subscription } from 'rxjs';
-import { throttleTime, switchMap, mapTo, map, startWith, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, Subscription, combineLatest, fromEvent, merge } from 'rxjs';
+import { distinctUntilChanged, map, mapTo, startWith, switchMap, throttleTime } from 'rxjs/operators';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { GridListComponent, GridListSelectionEvent } from '@fundamental-ngx/core/grid-list';
 
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { BarComponent, BarElementDirective, BarRightDirective } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    GridListItemBodyDirective,
+    GridListItemComponent,
+    GridListItemImageDirective,
+    GridListItemToolbarComponent,
+    GridListTitleBarComponent,
+    GridListTitleBarSpacerComponent
+} from '@fundamental-ngx/core/grid-list';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import {
+    IllustratedMessageComponent,
+    IllustratedMessageFigcaptionComponent,
+    IllustratedMessageTextDirective,
+    IllustratedMessageTitleDirective
+} from '@fundamental-ngx/core/illustrated-message';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import {
+    ApprovalFlowTeamDataSource,
+    ApprovalFlowUserDataSource,
+    DATA_PROVIDERS,
+    DataProvider
+} from '@fundamental-ngx/platform/shared';
+import { cloneDeep, uniqBy } from 'lodash-es';
+import {
+    APPROVAL_FLOW_NODE_TYPES,
+    AddNodeDialogFormData,
+    AddNodeDialogRefData,
+    ApprovalFlowAddNodeComponent,
+    ApprovalFlowNodeTarget
+} from './approval-flow-add-node/approval-flow-add-node.component';
 import {
     ApprovalFlowApproverDetailsComponent,
     ApprovalFlowApproverDetailsDialogRefData
 } from './approval-flow-approver-details/approval-flow-approver-details.component';
+import {
+    ApprovalFlowGraph,
+    ApprovalGraphMetadata,
+    generateApprovalFlowGraph,
+    generateApprovalFlowGraphMetadata
+} from './approval-flow-graph';
+import {
+    ApprovalFlowMessage,
+    ApprovalFlowMessageType,
+    ApprovalFlowMessagesComponent
+} from './approval-flow-messages/approval-flow-messages.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import {
-    AddNodeDialogFormData,
-    APPROVAL_FLOW_NODE_TYPES,
-    ApprovalFlowAddNodeComponent,
-    AddNodeDialogRefData,
-    ApprovalFlowNodeTarget
-} from './approval-flow-add-node/approval-flow-add-node.component';
+    ApprovalFlowSelectTypeComponent,
+    SelectTypeDialogFormData
+} from './approval-flow-select-type/approval-flow-select-type.component';
+import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-actions/approval-flow-toolbar-actions.component';
 import {
     displayUserFn,
     getBlankApprovalGraphNode,
@@ -58,28 +105,7 @@ import {
     ApprovalUser,
     SendRemindersData
 } from './interfaces';
-import {
-    ApprovalFlowSelectTypeComponent,
-    SelectTypeDialogFormData
-} from './approval-flow-select-type/approval-flow-select-type.component';
-import {
-    ApprovalFlowGraph,
-    ApprovalGraphMetadata,
-    generateApprovalFlowGraph,
-    generateApprovalFlowGraphMetadata
-} from './approval-flow-graph';
-import {
-    ApprovalFlowMessage,
-    ApprovalFlowMessageType
-} from './approval-flow-messages/approval-flow-messages.component';
-import {
-    DataProvider,
-    DATA_PROVIDERS,
-    ApprovalFlowTeamDataSource,
-    ApprovalFlowUserDataSource
-} from '@fundamental-ngx/platform/shared';
-import { cloneDeep, uniqBy } from 'lodash-es';
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-node-view.service';
 
 let defaultId = 0;
 /**
@@ -91,7 +117,39 @@ let defaultId = 0;
     templateUrl: './approval-flow.component.html',
     styleUrls: ['./approval-flow.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [ApprovalFlowAddNodeViewService],
+    standalone: true,
+    imports: [
+        ContentDensityDirective,
+        ApprovalFlowMessagesComponent,
+        GridListComponent,
+        GridListTitleBarComponent,
+        GridListTitleBarSpacerComponent,
+        NgIf,
+        ApprovalFlowToolbarActionsComponent,
+        NgFor,
+        AvatarComponent,
+        MultiInputComponent,
+        FormsModule,
+        IconComponent,
+        ApprovalFlowNodeComponent,
+        CdkDrag,
+        GridListItemComponent,
+        GridListItemToolbarComponent,
+        NgTemplateOutlet,
+        GridListItemImageDirective,
+        GridListItemBodyDirective,
+        BarComponent,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonComponent,
+        IllustratedMessageComponent,
+        IllustratedMessageFigcaptionComponent,
+        IllustratedMessageTitleDirective,
+        IllustratedMessageTextDirective,
+        FdTranslatePipe
+    ]
 })
 export class ApprovalFlowComponent implements OnInit, OnChanges, OnDestroy {
     /** Title which is displayed in the header of the Approval Flow component. */

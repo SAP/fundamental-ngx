@@ -36,6 +36,9 @@ export const dialogSchema: any = {
                 responsivePadding: {
                     type: 'boolean'
                 },
+                allowFullScreen: {
+                    type: 'boolean'
+                },
                 width: {
                     type: 'string'
                 },

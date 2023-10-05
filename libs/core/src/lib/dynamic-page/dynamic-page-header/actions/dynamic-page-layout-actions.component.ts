@@ -1,17 +1,17 @@
 import {
-    Component,
-    ChangeDetectionStrategy,
-    ViewEncapsulation,
     AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
     ElementRef,
     Renderer2,
-    ChangeDetectorRef,
-    ContentChild
+    ViewEncapsulation
 } from '@angular/core';
-import { DynamicPageBaseActions } from './dynamic-page-base-actions';
-import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { Subject } from 'rxjs';
+import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
+import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
 @Component({
     selector: 'fd-dynamic-page-layout-actions',
@@ -20,7 +20,8 @@ import { Subject } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     host: {
         role: 'toolbar'
-    }
+    },
+    standalone: true
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
     /** @hidden */

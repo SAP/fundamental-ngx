@@ -8,7 +8,7 @@ describe('TableWrapperComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TableWrapperComponent]
+            imports: [TableWrapperComponent]
         }).compileComponents();
     }));
 

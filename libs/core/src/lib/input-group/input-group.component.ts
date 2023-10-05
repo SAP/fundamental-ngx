@@ -13,20 +13,22 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { filter, fromEvent, map, merge, Observable, Subject, takeUntil, debounceTime } from 'rxjs';
+import { debounceTime, filter, fromEvent, map, merge, Observable, Subject, takeUntil } from 'rxjs';
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     InputGroupAddonButtonDirective,
     InputGroupAddOnDirective,
     InputGroupInputDirective
 } from './input-group-directives';
 import { InputGroupPlacement } from './types';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
 
 let addOnNonButtonRandomId = 0;
 let addOnButtonRandomId = 0;
@@ -58,7 +60,18 @@ let addOnInputRandomId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '(focusout)': '_focusOut($event)'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        InputGroupAddOnDirective,
+        ButtonComponent,
+        InputGroupAddonButtonDirective,
+        FormsModule,
+        InputGroupInputDirective,
+        AsyncPipe
+    ]
 })
 export class InputGroupComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /**

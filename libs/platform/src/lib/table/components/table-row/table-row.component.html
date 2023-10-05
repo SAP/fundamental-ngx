@@ -71,6 +71,7 @@
                 (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
                     | fdTranslate
             "
+            [attr.aria-selected]="row.checked"
             [style]="
                 _contentDensityObserver
                     | async
@@ -118,7 +119,6 @@
     [focusable]="true"
     [attr.role]="column.role"
     [headers]="rowId + '__' + column.name"
-    [ngClass]="'fdp-table__col--' + column.name"
     [ngClass]="[
         'fdp-table__col--' + column.name,
         column._freezed ? 'fd-table__cell--fixed' : '',
@@ -157,6 +157,19 @@
         ></span>
 
         <ng-container *ngIf="row.state === 'readonly'; else editModeCell">
+            <span
+                *ngIf="(row.value | valueByPath : column.key) === '' || (row.value | valueByPath : column.key) === null"
+                [ngStyle]="{
+                    position: 'absolute !important',
+                    height: '1px',
+                    width: '1px',
+                    overflow: 'hidden',
+                    clip: 'rect(1px, 1px, 1px, 1px)',
+                    color: 'transparent',
+                    display: 'block'
+                }"
+                >{{ 'platformTable.emptyCell' | fdTranslate }}</span
+            >
             <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                 <ng-container
                     *ngTemplateOutlet="

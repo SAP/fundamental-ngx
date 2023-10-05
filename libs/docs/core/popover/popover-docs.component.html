@@ -214,6 +214,8 @@
 </component-example>
 <code-example [exampleFiles]="dynamicContainerHeight"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="lazy-init-of-body" componentName="popover">
     Lazy initialization of popover body
 </fd-docs-section-title>
@@ -232,3 +234,22 @@
     <fd-popover-lazy-init-of-body-example></fd-popover-lazy-init-of-body-example>
 </component-example>
 <code-example [exampleFiles]="lazyLoadBody"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="resizable" componentName="popover"> Resizable popover </fd-docs-section-title>
+<description>
+    <p>
+        Popovers can be made resizable if <code>[resizable]</code> input property is set to <code>true</code> of the
+        <code>fd-popover</code> component.
+    </p>
+    <p>The location of the resize handle is automatically determined based on the positioning of the popover body.</p>
+    <p>
+        Additionally, developers can specify min and max width and height of the popover body to restrict the boundaries
+        of the resize.
+    </p>
+</description>
+<component-example>
+    <fd-popover-resizable-example></fd-popover-resizable-example>
+</component-example>
+<code-example [exampleFiles]="resizablePopovers"></code-example>

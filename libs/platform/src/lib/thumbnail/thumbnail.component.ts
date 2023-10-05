@@ -12,6 +12,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { NgIf } from '@angular/common';
 import { RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
@@ -42,7 +43,9 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     selector: 'fdp-thumbnail',
     templateUrl: './thumbnail.component.html',
     styleUrls: ['./thumbnail.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, ThumbnailImageComponent]
 })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
     /** List of media objects to display. */

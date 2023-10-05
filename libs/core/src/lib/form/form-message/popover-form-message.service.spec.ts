@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PopoverFormMessageService } from './popover-form-message.service';
-import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Component } from '@angular/core';
+import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
+import { PopoverFormMessageService } from './popover-form-message.service';
 
 @Component({
     template: ``,
@@ -35,14 +35,6 @@ describe('PopoverFormMessageService', () => {
         const updateSpy = jest.spyOn(<any>service, '_updatePopover');
 
         service.message = 'New Message';
-
-        expect(updateSpy).toHaveBeenCalled();
-    });
-
-    it('should trigger _updatePopover on message type change ', () => {
-        const updateSpy = jest.spyOn(<any>service, '_updatePopover');
-
-        service.messageType = 'information';
 
         expect(updateSpy).toHaveBeenCalled();
     });

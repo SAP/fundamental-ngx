@@ -1,24 +1,4 @@
 import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    ContentChildren,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Host,
-    Inject,
-    Input,
-    OnDestroy,
-    Optional,
-    Output,
-    QueryList,
-    Self,
-    SkipSelf,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import {
     ALT,
     BACKSPACE,
     CONTROL,
@@ -41,35 +21,55 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Host,
+    Inject,
+    Input,
+    OnDestroy,
+    Optional,
+    Output,
+    QueryList,
+    Self,
+    SkipSelf,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { Observable, Subject, Subscription, fromEvent, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import {
     ArrayComboBoxDataSource,
-    coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
-    PlatformFormFieldControl,
-    isDataSource,
-    isFunction,
-    isJsObject,
-    isOptionItem,
-    isString,
     MatchingBy,
     MatchingStrategy,
     ObservableComboBoxDataSource,
     OptionItem,
-    PlatformFormField
+    PlatformFormField,
+    PlatformFormFieldControl,
+    coerceArraySafe,
+    isDataSource,
+    isFunction,
+    isJsObject,
+    isOptionItem,
+    isString
 } from '@fundamental-ngx/platform/shared';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
@@ -813,7 +813,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.getName()) {
+            switch (template.name) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;

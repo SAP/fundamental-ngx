@@ -10,9 +10,26 @@ import {
 import equal from 'fast-deep-equal/es6';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { DialogRef } from '@fundamental-ngx/core/dialog';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
     CollectionFilter,
     FilterType,
@@ -20,10 +37,11 @@ import {
     TableColumn,
     TableDialogCommonData
 } from '@fundamental-ngx/platform/table-helpers';
+import { ResetButtonComponent, Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
-import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { FilterStepComponent } from './filter-step.component';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
-import { SelectableFilter } from './filters-list-step.component';
+import { FiltersListStepComponent, SelectableFilter } from './filters-list-step.component';
 
 export interface FiltersDialogData extends TableDialogCommonData {
     filterBy: CollectionFilter[];
@@ -44,7 +62,29 @@ export enum ACTIVE_STEP {
     templateUrl: './filters.component.html',
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: forwardRef(() => FiltersComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        NgIf,
+        NgTemplateOutlet,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        NgSwitch,
+        NgSwitchCase,
+        FiltersListStepComponent,
+        FilterStepComponent,
+        FdTranslatePipe
+    ]
 })
 export class FiltersComponent implements Resettable, AfterViewInit {
     /** Reference to the available steps */

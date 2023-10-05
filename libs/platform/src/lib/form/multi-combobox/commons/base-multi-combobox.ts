@@ -1,4 +1,17 @@
 import {
+    ALT,
+    BACKSPACE,
+    CONTROL,
+    DOWN_ARROW,
+    ENTER,
+    ESCAPE,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SHIFT,
+    TAB,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
+import {
     AfterViewInit,
     ChangeDetectorRef,
     ContentChildren,
@@ -21,37 +34,28 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import {
-    ALT,
-    BACKSPACE,
-    CONTROL,
-    DOWN_ARROW,
-    ENTER,
-    ESCAPE,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    SHIFT,
-    TAB,
-    UP_ARROW
-} from '@angular/cdk/keycodes';
 
-import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
-import { takeUntil, skip } from 'rxjs/operators';
 import equal from 'fast-deep-equal';
+import { BehaviorSubject, fromEvent, isObservable, Observable, Subject, Subscription, timer } from 'rxjs';
+import { skip, takeUntil } from 'rxjs/operators';
 
+import { FormStates } from '@fundamental-ngx/cdk/forms';
+import {
+    ContentDensity,
+    FocusEscapeDirection,
+    KeyUtil,
+    Nullable,
+    RangeSelector,
+    TemplateDirective
+} from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
-import { RangeSelector } from '@fundamental-ngx/cdk/utils';
-import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ListComponent } from '@fundamental-ngx/core/list';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
 import {
     ArrayMultiComboBoxDataSource,
     coerceArraySafe,
     CollectionBaseInput,
-    PlatformFormFieldControl,
     isDataSource,
     isFunction,
     isJsObject,
@@ -63,12 +67,13 @@ import {
     MultiComboBoxDataSource,
     ObservableMultiComboBoxDataSource,
     PlatformFormField,
+    PlatformFormFieldControl,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export const MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
 
@@ -621,14 +626,25 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
             return;
         }
 
-        for (let i = 0; i <= this.selectedItems.length; i++) {
+        for (let i = 0; i < this.selectedItems.length; i++) {
             const selectedItem = this.selectedItems[i];
-            const idx = this._fullFlatSuggestions.findIndex(
-                (item) => item.label === selectedItem || item.value === selectedItem
-            );
-            if (idx !== -1) {
-                this._selectedSuggestions.push(this._fullFlatSuggestions[idx]);
-                this._fullFlatSuggestions[idx].selected = true;
+            const finder = (item: SelectableOptionItem): boolean =>
+                item.label === selectedItem || item.value === selectedItem;
+            const idFromFullFlatSuggestions = this._fullFlatSuggestions.findIndex(finder);
+            const idFromSuggestions = (this._suggestions || []).findIndex(finder);
+            const itemIndex = Math.max(idFromFullFlatSuggestions, idFromSuggestions);
+            const collection = idFromFullFlatSuggestions !== -1 ? this._fullFlatSuggestions : this._suggestions;
+            if (idFromFullFlatSuggestions === -1 && idFromSuggestions === -1) {
+                this._convertToOptionItems([selectedItem]).forEach((optionItem: SelectableOptionItem) => {
+                    optionItem.selected = true;
+                    this._selectedSuggestions.push(optionItem);
+                });
+            } else if (this._suggestions && collection === this._suggestions) {
+                this._fullFlatSuggestions.push(collection[itemIndex]);
+            }
+            if (itemIndex > -1) {
+                this._selectedSuggestions.push(collection[itemIndex]);
+                collection[itemIndex].selected = true;
             }
         }
 
@@ -1014,7 +1030,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
      */
     private _assignCustomTemplates(): void {
         this.customTemplates.forEach((template) => {
-            switch (template.getName()) {
+            switch (template.name) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;
                     break;

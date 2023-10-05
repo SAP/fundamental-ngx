@@ -52,6 +52,9 @@
             [iconTitle]="title"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
         >
+            <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
+                'coreMultiInput.tokensCountText' | fdTranslate : { length: selected.length }
+            }}</span>
             <fd-tokenizer
                 #tokenizer
                 [compactCollapse]="compactCollapse"
@@ -62,10 +65,10 @@
                 tabindex="-1"
             >
                 <fd-token
-                    *ngFor="let option of viewModel.selectedOptions; trackBy: valueFn"
+                    *ngFor="let option of viewModel.selectedOptions; trackBy: _trackBy"
                     [disabled]="disabled"
-                    (onCloseClick)="_onTokenClick(option.value, false, $event)"
-                    (onRemove)="_onTokenClick(option.value, false)"
+                    (onCloseClick)="_onTokenClick(option, false, $event)"
+                    (onRemove)="_onTokenClick(option, false)"
                 >
                     <span [innerHtml]="option.label"></span>
                 </fd-token>
@@ -80,14 +83,16 @@
                     (onComplete)="_handleComplete($event)"
                     #searchInputElement
                     [displayFn]="displayFn"
+                    [matcher]="typeAheadMatcher"
                     [inputText]="_searchTermCtrl.value || ''"
                     [options]="dropdownValues"
                     [enable]="autoComplete && !mobile"
                     [placeholder]="placeholder"
                     [formControl]="_searchTermCtrl"
                     [attr.aria-required]="required"
-                    [attr.aria-label]="ariaLabel"
-                    [attr.aria-labelledby]="ariaLabelledBy"
+                    [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
+                    [ariaLabelledBy]="ariaLabelledBy"
+                    [attr.aria-describedby]="tokenHiddenId"
                     (keydown)="_handleInputKeydown($event)"
                     [attr.id]="inputId"
                     (focus)="tokenizer._showAllTokens()"
@@ -104,21 +109,21 @@
             class="fd-multi-input-menu-overflow"
             [selection]="true"
             [mobileMode]="mobile"
-            [style.maxHeight]="!mobile ? maxHeight : 'auto'"
+            [style.max-height]="!mobile ? maxHeight : 'auto'"
             [byline]="byline"
             (focusEscapeList)="handleListFocusEscape($event)"
-            [style.minWidth]="'100%'"
+            [style.min-width]="'100%'"
             aria-multiselectable="true"
         >
             <li
-                *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: valueFn"
+                *ngFor="let option of viewModel.displayedOptions; index as idx; trackBy: _trackBy"
                 fd-list-item
                 [attr.aria-label]="option.label"
-                (click)="_onCheckboxClick(option.value, $event, idx, true)"
-                (keyup)="_onCheckboxKeyup(option.value, $event, idx)"
-                [selected]="option.isSelected"
+                (click)="_onCheckboxClick(option, $event, idx, true)"
+                (keyup)="_onCheckboxKeyup(option, $event, idx)"
+                [selected]="!!option.isSelected"
             >
-                <fd-checkbox (click)="_onCheckboxClick(option.value, $event, idx)" [value]="option.isSelected">
+                <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
                     <!-- TODO -->
                 </fd-checkbox>
 
@@ -135,7 +140,7 @@
                 (keyDown)="_showAllKeyDown($event)"
                 (click)="_showAllClicked($event)"
             >
-                <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
+                <a fd-link role="button" tabindex="0">Show All ({{ dropdownValues.length }})</a>
             </li>
         </ul>
     </ng-template>

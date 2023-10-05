@@ -1,43 +1,62 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { MenuComponent } from './menu.component';
-import { MenuTitleDirective } from './directives/menu-title.directive';
-import { MenuInteractiveDirective } from './directives/menu-interactive.directive';
-import { MenuSeparatorComponent } from './menu-separator/menu-separator.component';
-import { MenuAddonDirective } from './directives/menu-addon.directive';
-import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
-import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { MenuTriggerDirective } from './directives/menu-trigger.directive';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { PortalModule } from '@angular/cdk/portal';
 import { DynamicComponentService, InitialFocusModule } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { GlyphMenuAddonDirective } from './directives/glyph-menu-addon.directive';
+import { MenuAddonDirective } from './directives/menu-addon.directive';
+import { MenuItemInputDirective } from './directives/menu-item-input.directive';
+import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
+import { MenuTitleDirective } from './directives/menu-title.directive';
+import { MenuTriggerDirective } from './directives/menu-trigger.directive';
+import { SegmentedButtonHeaderDirective } from './directives/segmented-button/segmented-button-header.directive';
+import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
+import { ToggleButtonDirective } from './directives/toggle-button.directive';
+import { MenuInteractiveComponent } from './menu-interactive.component';
+import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
+import { MenuSeparatorDirective } from './menu-separator.directive';
+import { MenuComponent } from './menu.component';
 
 @NgModule({
-    imports: [CommonModule, PopoverModule, IconModule, InitialFocusModule, ContentDensityModule],
-    declarations: [
+    imports: [
+        CommonModule,
+        PopoverModule,
+        InitialFocusModule,
+        ContentDensityModule,
+        GlyphMenuAddonDirective,
+        PortalModule,
         MenuComponent,
         MenuItemComponent,
         MenuAddonDirective,
-        MenuSeparatorComponent,
+        MenuSeparatorDirective,
         MenuShortcutDirective,
-        MenuInteractiveDirective,
+        MenuInteractiveComponent,
         MenuTitleDirective,
         SubmenuComponent,
-        MenuTriggerDirective
+        MenuTriggerDirective,
+        ToggleButtonDirective,
+        SegmentedButtonHeaderDirective,
+        SegmentedButtonOptionDirective,
+        MenuItemInputDirective
     ],
     exports: [
         MenuComponent,
         MenuItemComponent,
         SubmenuComponent,
-        MenuSeparatorComponent,
+        MenuSeparatorDirective,
         MenuShortcutDirective,
-        MenuInteractiveDirective,
+        MenuInteractiveComponent,
         MenuTitleDirective,
         MenuAddonDirective,
         MenuTriggerDirective,
-        ContentDensityModule
+        ContentDensityModule,
+        GlyphMenuAddonDirective,
+        ToggleButtonDirective,
+        SegmentedButtonHeaderDirective,
+        SegmentedButtonOptionDirective,
+        MenuItemInputDirective
     ],
     providers: [DynamicComponentService]
 })

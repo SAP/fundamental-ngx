@@ -3,8 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { firstValueFrom } from 'rxjs';
-import { MultiInputComponent } from './multi-input.component';
-import { MultiInputModule } from './multi-input.module';
+import { MultiInputComponent, OptionItem } from './multi-input.component';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -22,9 +21,16 @@ describe('MultiInputComponent', () => {
         fixture.detectChanges();
     }
 
+    /**
+     * Returns option items from component instance
+     */
+    function optionItems(): OptionItem<any, any>[] {
+        return component['_optionItems'];
+    }
+
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MultiInputModule],
+            imports: [MultiInputComponent],
             providers: [DynamicComponentService, RtlService]
         }).compileComponents();
     }));
@@ -141,7 +147,7 @@ describe('MultiInputComponent', () => {
 
         await fixture.whenStable();
 
-        component._handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, optionItems()[0]);
 
         expect(changeSpy).not.toHaveBeenCalled();
         expect(selectedChangeSpy).not.toHaveBeenCalled();
@@ -161,7 +167,7 @@ describe('MultiInputComponent', () => {
 
         await fixture.whenStable();
 
-        component._handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, optionItems()[0]);
 
         expect(component.onChange).not.toHaveBeenCalled();
         expect(component.selectedChange.emit).not.toHaveBeenCalled();
@@ -228,7 +234,7 @@ describe('MultiInputComponent', () => {
         expect(vm1.selectedOptions.length).toEqual(1);
         expect(component.selected).toEqual(['foo1']);
 
-        component._handleSelect(true, component.dropdownValues[1]);
+        component._handleSelect(true, optionItems()[1]);
 
         const vm2 = await firstValueFrom(component._viewModel$);
         expect(vm2.displayedOptions.length).toEqual(3);

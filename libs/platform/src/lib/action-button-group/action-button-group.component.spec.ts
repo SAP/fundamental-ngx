@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 import { ActionButtonGroupComponent } from './action-button-group.component';
 
 @Component({
@@ -12,7 +11,9 @@ import { ActionButtonGroupComponent } from './action-button-group.component';
             <button>Save</button>
             <button>Cancel</button>
         </fdp-action-button-group>
-    `
+    `,
+    standalone: true,
+    imports: [ActionButtonGroupComponent]
 })
 class ActionButtonGroupTestComponent {
     @ViewChild('actionbuttongroup') actionbuttongroup: ActionButtonGroupComponent;
@@ -24,8 +25,7 @@ describe('ActionButtonGroupComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
-            imports: [ActionBarModule]
+            imports: [ActionButtonGroupTestComponent]
         }).compileComponents();
     }));
 

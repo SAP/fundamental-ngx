@@ -1,13 +1,11 @@
 import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import {
     CollectionGroup,
     CollectionStringFilter,
     FILTER_STRING_STRATEGY,
     FilterableColumnDataType,
     SortDirection,
+    Table,
     TableColumn,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
@@ -39,9 +37,14 @@ describe('TableCellHeaderPopoverComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TableCellHeaderPopoverComponent],
-            imports: [PopoverModule, PlatformListModule, TemplateDirective],
-            providers: [TableService]
+            imports: [TableCellHeaderPopoverComponent],
+            providers: [
+                TableService,
+                {
+                    provide: Table,
+                    useValue: {}
+                }
+            ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(TableCellHeaderPopoverComponent);

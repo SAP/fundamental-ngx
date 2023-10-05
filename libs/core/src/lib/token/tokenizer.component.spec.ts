@@ -3,9 +3,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 
 import { DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { whenStable } from '@fundamental-ngx/core/tests';
+import { TokenizerInputDirective } from './token-input.directive';
 import { TokenComponent } from './token.component';
-import { TokenModule } from './token.module';
 import { TokenizerComponent } from './tokenizer.component';
 
 @Component({
@@ -17,16 +18,18 @@ import { TokenizerComponent } from './tokenizer.component';
             <fd-token>Token 3</fd-token>
             <input fd-tokenizer-input fd-form-control />
         </fd-tokenizer>
-    `
+    `,
+    standalone: true,
+    imports: [TokenComponent, TokenizerComponent, TokenizerInputDirective, FormControlComponent, ContentDensityModule]
 })
 class HostComponent {
-    compact: boolean | undefined = undefined;
-
     @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
     @ViewChild(FormControlComponent) formControl: FormControlComponent;
 
     @ContentChildren(TokenComponent, { read: TokenComponent })
     tokenList: QueryList<TokenComponent>;
+
+    compact: boolean | undefined = undefined;
 }
 
 describe('TokenizerComponent', () => {
@@ -35,8 +38,7 @@ describe('TokenizerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [TokenModule, FormControlComponent],
-            declarations: [HostComponent],
+            imports: [HostComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

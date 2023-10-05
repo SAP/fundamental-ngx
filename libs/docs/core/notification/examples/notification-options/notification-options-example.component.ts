@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -13,7 +13,7 @@ import { NotificationModule } from '@fundamental-ngx/core/notification';
     standalone: true,
     imports: [
         NotificationModule,
-        AvatarModule,
+        AvatarComponent,
         ButtonModule,
         MessageStripComponent,
         ActionSheetModule,

@@ -1,10 +1,12 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { LayoutPanelFooterComponent, FooterPosition } from './layout-panel-footer.component';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FooterPosition, LayoutPanelFooterComponent } from './layout-panel-footer.component';
 
 @Component({
     selector: 'fd-test-layout-panel-footer',
-    template: `<fd-layout-panel-footer [position]="position"> </fd-layout-panel-footer> `
+    template: `<fd-layout-panel-footer [position]="position"> </fd-layout-panel-footer> `,
+    standalone: true,
+    imports: [LayoutPanelFooterComponent]
 })
 class TestLayoutPanelFooterComponent {
     @ViewChild(LayoutPanelFooterComponent, { static: true, read: ElementRef })
@@ -20,7 +22,7 @@ describe('LayoutPanelFooterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [LayoutPanelFooterComponent, TestLayoutPanelFooterComponent]
+            imports: [TestLayoutPanelFooterComponent]
         }).compileComponents();
     }));
 

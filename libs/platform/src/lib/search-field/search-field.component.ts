@@ -1,3 +1,9 @@
+import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { Direction } from '@angular/cdk/bidi';
+import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
+import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { AsyncPipe, DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -5,9 +11,10 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    forwardRef,
     HostListener,
-    Injector,
     Inject,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
@@ -24,32 +31,35 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
-import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { FocusableOption, FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Direction } from '@angular/cdk/bidi';
 
-import { firstValueFrom, fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
+import { fromEvent, isObservable, merge, Observable, of, Subject } from 'rxjs';
 import { filter, map, take, takeUntil } from 'rxjs/operators';
 
-import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { FormsModule } from '@angular/forms';
+import {
+    DynamicComponentService,
+    KeyUtil,
+    Nullable,
+    RtlService,
+    SearchHighlightPipe
+} from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { SearchComponent } from '@fundamental-ngx/core/shared';
+import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
+import { FdTranslatePipe, resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
+import { MenuComponent, MenuItemComponent, MenuTriggerDirective } from '@fundamental-ngx/platform/menu';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import equal from 'fast-deep-equal';
 import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldMobileInterface
 } from './search-field-mobile/search-field-mobile.interface';
-import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { FD_SHELLBAR_SEARCH_COMPONENT } from '@fundamental-ngx/core/shellbar';
-import { SearchComponent } from '@fundamental-ngx/core/shared';
-import equal from 'fast-deep-equal';
+import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
     text: string;
@@ -70,9 +80,9 @@ export interface ValueLabelItem {
 @Directive({
     selector: '[fdpSearchFieldSuggestion]',
     host: {
-        tabindex: '-1',
-        role: 'list-item'
-    }
+        tabindex: '-1'
+    },
+    standalone: true
 })
 export class SearchFieldSuggestionDirective implements FocusableOption {
     /** @hidden */
@@ -100,6 +110,25 @@ type Appearance = SearchComponent['appearance'] | undefined;
             provide: FD_SHELLBAR_SEARCH_COMPONENT,
             useExisting: SearchFieldComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        MenuTriggerDirective,
+        NgIf,
+        MenuComponent,
+        NgFor,
+        MenuItemComponent,
+        SelectComponent,
+        OptionComponent,
+        FormsModule,
+        IconComponent,
+        NgClass,
+        SearchFieldSuggestionDirective,
+        AsyncPipe,
+        SearchHighlightPipe,
+        FdTranslatePipe,
+        forwardRef(() => SuggestionMatchesPipe)
     ]
 })
 export class SearchFieldComponent
@@ -337,7 +366,7 @@ export class SearchFieldComponent
     private _categories: ValueLabelItem[];
 
     /** @hidden */
-    private _currentSearchSuggestionAnnoucementMessage = '';
+    private _currentSearchSuggestionAnnouncementMessage = '';
 
     /** @hidden */
     private _suggestionOverlayRef: OverlayRef | null;
@@ -349,7 +378,7 @@ export class SearchFieldComponent
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
 
     /** @hidden */
-    private _translationResolver = new TranslationResolver();
+    private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
@@ -369,7 +398,6 @@ export class SearchFieldComponent
         protected readonly _cd: ChangeDetectorRef,
         @Optional() private readonly _rtl: RtlService,
         @Inject(DOCUMENT) private readonly _document: Document,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         private readonly _liveAnnouncer: LiveAnnouncer,
         readonly _dynamicComponentService: DynamicComponentService,
         readonly contentDensityObserver: ContentDensityObserver
@@ -454,7 +482,7 @@ export class SearchFieldComponent
     onValueChange(event: string): void {
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
-        setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
+        setTimeout(() => (this._currentSearchSuggestionAnnouncementMessage = ''));
         this._isSearchDone = false;
         this._isRefresh = false;
 
@@ -481,7 +509,7 @@ export class SearchFieldComponent
             this.dataSource.match(match);
         }
 
-        this._updateSearchAnnoucementText();
+        this._updateSearchAnnouncementText();
     }
 
     /**
@@ -689,23 +717,19 @@ export class SearchFieldComponent
     }
 
     /** @hidden */
-    private async _updateSearchAnnoucementText(): Promise<void> {
+    private async _updateSearchAnnouncementText(): Promise<void> {
         // create search suggestion message with count.
         const suggestionCount = this._getSuggestionsLength();
-        const lang = await firstValueFrom(this._language$);
-        const searchSuggestionMessage = this._translationResolver.resolve(
-            lang,
-            'platformSearchField.searchSuggestionMessage',
-            { count: suggestionCount }
-        );
-        const searchSuggestionNavigateMessage = this._translationResolver.resolve(
-            lang,
+        const searchSuggestionMessage = this.resolveTranslation('platformSearchField.searchSuggestionMessage', {
+            count: suggestionCount
+        });
+        const searchSuggestionNavigateMessage = this.resolveTranslation(
             'platformSearchField.searchSuggestionNavigateMessage'
         );
-        this._currentSearchSuggestionAnnoucementMessage =
+        this._currentSearchSuggestionAnnouncementMessage =
             searchSuggestionMessage + (suggestionCount > 0 ? searchSuggestionNavigateMessage : '');
         if (this.inputText?.length > 0) {
-            await this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
+            await this._liveAnnouncer.announce(this._currentSearchSuggestionAnnouncementMessage);
         }
     }
 
@@ -727,7 +751,8 @@ export class SearchFieldComponent
 }
 
 @Pipe({
-    name: 'suggestionMatches'
+    name: 'suggestionMatches',
+    standalone: true
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     /** @hidden */

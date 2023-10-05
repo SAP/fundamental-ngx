@@ -1,15 +1,15 @@
 import {
-    Component,
-    OnInit,
-    ElementRef,
     ChangeDetectionStrategy,
-    Input,
+    Component,
+    ElementRef,
     HostBinding,
+    Input,
+    OnInit,
     Renderer2,
     forwardRef
 } from '@angular/core';
 
-import { DYNAMIC_SIDE_CONTENT_CLASS_NAME, DYNAMIC_SIDE_CONTENT_CHILD_TOKEN } from './constants';
+import { DYNAMIC_SIDE_CONTENT_CHILD_TOKEN, DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 
 let componentId = 0;
 
@@ -22,7 +22,8 @@ let componentId = 0;
             provide: DYNAMIC_SIDE_CONTENT_CHILD_TOKEN,
             useExisting: forwardRef(() => DynamicSideContentSideComponent)
         }
-    ]
+    ],
+    standalone: true
 })
 export class DynamicSideContentSideComponent implements OnInit {
     /** Unique element Id, by default it's auto generated */

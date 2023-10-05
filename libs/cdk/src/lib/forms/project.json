@@ -5,20 +5,6 @@
     "sourceRoot": "libs/cdk/src/lib/forms",
     "prefix": "fdk",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/cdk/forms"],
-            "options": {
-                "tsConfig": "libs/cdk/src/lib/forms/tsconfig.lib.json",
-                "project": "libs/cdk/src/lib/forms/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/cdk/src/lib/forms/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
@@ -40,5 +26,5 @@
             }
         }
     },
-    "tags": ["type:lib", "scope:fd"]
+    "tags": ["type:lib", "scope:cdk"]
 }

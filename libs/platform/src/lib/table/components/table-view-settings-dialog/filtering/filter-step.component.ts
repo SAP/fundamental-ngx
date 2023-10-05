@@ -13,8 +13,15 @@ import {
 import { ContentDensity } from '@fundamental-ngx/cdk/utils';
 import { CollectionFilter, FILTER_STRATEGY, FilterType } from '@fundamental-ngx/platform/table-helpers';
 
+import { NgSwitch, NgSwitchCase } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { TableViewSettingsFilterComponent } from '../table-view-settings-filter.component';
-import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step';
+import { FilterCustomComponent } from './filter-custom.component';
+import { FilterMultiSelectComponent } from './filter-multi-select.component';
+import { FilterSingleSelectComponent } from './filter-single-select.component';
+import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 /**
  * Filter dialog step.
@@ -29,7 +36,18 @@ import { FiltersViewStep, FILTERS_VIEW_STEP_TOKEN } from './filters-active-step'
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
-    providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FilterStepComponent) }]
+    providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FilterStepComponent) }],
+    standalone: true,
+    imports: [
+        ButtonComponent,
+        TitleComponent,
+        NgSwitch,
+        NgSwitchCase,
+        FilterSingleSelectComponent,
+        FilterMultiSelectComponent,
+        FilterCustomComponent,
+        FdTranslatePipe
+    ]
 })
 export class FilterStepComponent implements FiltersViewStep {
     /** ViewSettingsFilter options the filter is created from */

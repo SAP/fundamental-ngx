@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ProgressIndicatorModule } from '@fundamental-ngx/core/progress-indicator';
+import { ProgressIndicatorComponent } from '@fundamental-ngx/core/progress-indicator';
 
 @Component({
     selector: 'fd-progress-indicator-truncation',
     templateUrl: './progress-indicator-truncation.component.html',
     standalone: true,
-    imports: [ProgressIndicatorModule]
+    imports: [ProgressIndicatorComponent]
 })
 export class ProgressIndicatorTruncationComponent {}

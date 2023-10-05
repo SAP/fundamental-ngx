@@ -5,7 +5,8 @@ let notificationHeaderCounter = 0;
     selector: 'fd-notification-header',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class NotificationHeaderComponent {
     /** @hidden */

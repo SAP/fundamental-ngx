@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,8 +9,8 @@ import {
     OnChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 /**
  * Directive used to identify the template which will populate the tab header.
@@ -25,7 +26,8 @@ import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
  * ```
  */
 @Directive({
-    selector: '[fdTabTitleTemplate], [fd-tab-title-template]'
+    selector: '[fdTabTitleTemplate], [fd-tab-title-template]',
+    standalone: true
 })
 export class TabTitleDirective {}
 
@@ -33,7 +35,8 @@ export class TabTitleDirective {}
  * Directive for counter element, available in most of the modes on `tab` component
  */
 @Directive({
-    selector: '[fdTabCount], [fd-tab-count]'
+    selector: '[fdTabCount], [fd-tab-count]',
+    standalone: true
 })
 export class TabCountDirective {
     /** @hidden */
@@ -52,7 +55,9 @@ export class TabCountDirective {
         <ng-content></ng-content>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, IconComponent]
 })
 export class TabIconComponent implements CssClassBuilder, OnChanges {
     /** Apply user custom styles */
@@ -92,7 +97,8 @@ export class TabIconComponent implements CssClassBuilder, OnChanges {
     selector: '[fdTabTag], [fd-tab-tag]',
     host: {
         class: 'fd-tabs__tag'
-    }
+    },
+    standalone: true
 })
 export class TabTagDirective {}
 
@@ -100,7 +106,8 @@ export class TabTagDirective {}
     selector: '[fdTabLabel], [fd-tab-label]',
     host: {
         class: 'fd-tabs__label'
-    }
+    },
+    standalone: true
 })
 export class TabLabelDirective {}
 
@@ -108,7 +115,8 @@ export class TabLabelDirective {}
     selector: '[fdTabProcess], [fd-tab-process]',
     host: {
         class: 'fd-tabs__process'
-    }
+    },
+    standalone: true
 })
 export class TabProcessDirective {}
 
@@ -116,7 +124,8 @@ export class TabProcessDirective {}
     selector: '[fdTabHeader], [fd-tab-header]',
     host: {
         class: 'fd-tabs__header'
-    }
+    },
+    standalone: true
 })
 export class TabHeaderDirective {}
 
@@ -124,7 +133,8 @@ export class TabHeaderDirective {}
     selector: '[fdTabCounterHeader], [fd-tab-counter-header]',
     host: {
         class: 'fd-tabs__counter-header'
-    }
+    },
+    standalone: true
 })
 export class TabCounterHeaderDirective {}
 
@@ -132,7 +142,8 @@ export class TabCounterHeaderDirective {}
     selector: '[fdTabProcessIcon], [fd-tab-process-icon]',
     host: {
         class: 'fd-tabs__process-icon'
-    }
+    },
+    standalone: true
 })
 export class TabProcessIconDirective {}
 
@@ -140,6 +151,7 @@ export class TabProcessIconDirective {}
     selector: '[fdTabSeparator], [fd-tab-separator]',
     host: {
         class: 'fd-tabs__separator'
-    }
+    },
+    standalone: true
 })
 export class TabSeparatorDirective {}

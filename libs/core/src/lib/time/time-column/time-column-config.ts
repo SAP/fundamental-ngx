@@ -1,6 +1,8 @@
+import { FdLanguageKeyIdentifier } from '@fundamental-ngx/i18n';
+
 export interface TimeColumnConfig {
-    decreaseLabel: string;
-    increaseLabel: string;
-    label: string;
-    navigationInstruction: string;
+    decreaseLabel: FdLanguageKeyIdentifier;
+    increaseLabel: FdLanguageKeyIdentifier;
+    label: FdLanguageKeyIdentifier;
+    navigationInstruction: FdLanguageKeyIdentifier;
 }

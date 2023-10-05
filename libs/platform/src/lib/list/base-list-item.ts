@@ -1,3 +1,4 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewChecked,
     AfterViewInit,
@@ -7,28 +8,26 @@ import {
     EventEmitter,
     HostListener,
     Inject,
-    inject,
     Input,
     OnDestroy,
     OnInit,
     Optional,
     Output,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    inject
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { ColorAccent, KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Nullable, Size } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { BaseComponent, isPresent } from '@fundamental-ngx/platform/shared';
-import { ListConfig } from './list.config';
-import { FdpListComponent } from './fdpListComponent.token';
 import { merge } from 'lodash-es';
-import { IconComponent } from '@fundamental-ngx/core/icon';
+import { FdpListComponent } from './fdpListComponent.token';
+import { ListConfig } from './list.config';
 import { FdpList, ListType, SelectionType } from './models/list';
-import { FD_LIST_UNREAD_INDICATOR, ListUnreadIndicator } from '@fundamental-ngx/core/list';
 
 export const IS_ACTIVE_CLASS = 'is-active';
 let nextListItemId = 0;
@@ -114,7 +113,10 @@ export class ModifyItemEvent {
     action: 'delete' | 'edit';
 }
 
-@Directive({ selector: '[fdpItemDef]' })
+@Directive({
+    selector: '[fdpItemDef]',
+    standalone: true
+})
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ListItemDef implements ItemDef {
     /** @hidden */

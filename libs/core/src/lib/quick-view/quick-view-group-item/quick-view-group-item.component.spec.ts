@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { QuickViewModule } from '../quick-view.module';
+import { QuickViewGroupItemContentComponent } from '../quick-view-group-item-content/quick-view-group-item-content.component';
+import { QuickViewGroupItemLabelComponent } from '../quick-view-group-item-label/quick-view-group-item-label.component';
+import { QuickViewGroupItemComponent } from './quick-view-group-item.component';
 
 @Component({
     template: `
@@ -10,7 +12,9 @@ import { QuickViewModule } from '../quick-view.module';
             <fd-quick-view-group-item-label> Group Item Label </fd-quick-view-group-item-label>
             <fd-quick-view-group-item-content> Group Item Content </fd-quick-view-group-item-content>
         </fd-quick-view-group-item>
-    `
+    `,
+    standalone: true,
+    imports: [QuickViewGroupItemComponent, QuickViewGroupItemLabelComponent, QuickViewGroupItemContentComponent]
 })
 class TestComponent {}
 
@@ -20,8 +24,7 @@ describe('QuickViewGroupItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

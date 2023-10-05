@@ -4,9 +4,31 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
+import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 
-import { FilterDialogData, FilterDialogResultData, FilterableColumn, FilterRule } from './filtering.model';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf } from '@angular/common';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { LayoutGridColDirective, LayoutGridComponent, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+import { PanelComponent, PanelContentDirective, PanelTitleDirective } from '@fundamental-ngx/core/panel';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FilterRuleComponent } from './filter-rule.component';
+import { FilterDialogData, FilterDialogResultData, FilterRule, FilterableColumn } from './filtering.model';
 
 export { FilterDialogData, FilterDialogResultData };
 
@@ -15,7 +37,34 @@ export { FilterDialogData, FilterDialogResultData };
     styleUrls: ['./filtering.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: RESETTABLE_TOKEN, useExisting: P13FilteringDialogComponent }],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        PanelComponent,
+        PanelTitleDirective,
+        PanelContentDirective,
+        NgFor,
+        LayoutGridComponent,
+        LayoutGridRowDirective,
+        FilterRuleComponent,
+        LayoutGridColDirective,
+        ButtonComponent,
+        NgIf,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
+    ]
 })
 export class P13FilteringDialogComponent implements Resettable {
     /** @hidden */

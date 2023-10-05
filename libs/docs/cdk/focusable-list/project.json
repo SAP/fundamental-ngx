@@ -1,5 +1,6 @@
 {
     "name": "docs-cdk-focusable-list",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/fn/focusable-list",
     "projectType": "library",
     "prefix": "fdp-doc",

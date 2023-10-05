@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { CardModule } from '@fundamental-ngx/core/card';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
@@ -9,6 +9,6 @@ import { TableModule } from '@fundamental-ngx/core/table';
     templateUrl: './card-table-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CardModule, FocusableGridDirective, TableModule, ObjectStatusModule]
+    imports: [CardModule, FocusableGridDirective, TableModule, ObjectStatusComponent]
 })
 export class CardTableExampleComponent {}

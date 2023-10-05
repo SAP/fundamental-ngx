@@ -1,10 +1,11 @@
-import { Directive, ElementRef, TemplateRef, ViewContainerRef, ViewRef, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, OnDestroy, TemplateRef, ViewContainerRef, ViewRef } from '@angular/core';
 
 /**
  * Directive to hide component without actual destroying of the component instance.
  */
 @Directive({
-    selector: '[fdOverflowItemContainerRef]'
+    selector: '[fdOverflowItemContainerRef]',
+    standalone: true
 })
 export class OverflowItemContainerRefDirective implements OnDestroy {
     /** @hidden */

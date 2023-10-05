@@ -1,17 +1,21 @@
-import { HostBinding } from '@angular/core';
 import {
-    Component,
-    ViewEncapsulation,
     ChangeDetectionStrategy,
-    Input,
-    SimpleChanges,
+    Component,
     ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
     OnInit,
-    OnChanges
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { SafePipe, TruncatePipe } from '@fundamental-ngx/cdk/utils';
+import { FormattedTextComponent } from '@fundamental-ngx/core/formatted-text';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CSS_CLASS_NAME } from '../../constants';
 
 @Component({
@@ -19,7 +23,9 @@ import { CSS_CLASS_NAME } from '../../constants';
     templateUrl: './feed-list-item.component.html',
     styleUrls: ['./feed-list-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, FormattedTextComponent, LinkComponent, SafePipe, TruncatePipe, FdTranslatePipe]
 })
 export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */

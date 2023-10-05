@@ -1,8 +1,28 @@
-export type FdLanguageKeyArgs = Record<string, string | number | boolean>;
+import { NestedKeyOf, Nullable, ObjectPathType } from '@fundamental-ngx/cdk/utils';
 
-export type FdLanguageKeyFunction = (args: FdLanguageKeyArgs) => string;
+export type FdLanguageKeyArgs = Nullable<Record<string, string | number | boolean>>;
 
-export type FdLanguageKey = string | FdLanguageKeyFunction;
+export type FdLanguageKeyFunction<T> = T extends undefined ? () => string : (args: T) => string;
+
+export type FdLanguageKey<T = undefined> = string | FdLanguageKeyFunction<T>;
+
+type _FdLanguageKeyIdentifierUnion = `${NestedKeyOf<FdLanguage>}`;
+
+export type FdLanguageKeyIdentifier = {
+    [Key in _FdLanguageKeyIdentifierUnion]: ObjectPathType<FdLanguage, Key> extends FdLanguageKey<any> | undefined
+        ? Key
+        : never;
+}[_FdLanguageKeyIdentifierUnion];
+
+export type FdLanguageKeyCtx<T extends FdLanguageKeyIdentifier> = ObjectPathType<FdLanguage, T> extends FdLanguageKey<
+    infer Args
+>
+    ? Args
+    : undefined;
+
+export type FlatFdLanguage = {
+    [Key in FdLanguageKeyIdentifier]: FdLanguageKey<FdLanguageKeyCtx<Key>>;
+};
 
 /**
  * Representation of the dictionary per UI component
@@ -39,9 +59,9 @@ export interface FdLanguage {
     coreGridList: {
         filterBarCancelButtonTitle: FdLanguageKey;
         /** @param status */
-        listItemStatusAriaLabel: FdLanguageKey;
+        listItemStatusAriaLabel: FdLanguageKey<{ status: string }>;
         /** @param count */
-        listItemCounterAriaLabel: FdLanguageKey;
+        listItemCounterAriaLabel: FdLanguageKey<{ count: number }>;
         listItemButtonDetailsTitle: FdLanguageKey;
         listItemButtonDeleteTitle: FdLanguageKey;
         listItemStatusContainsErrors: FdLanguageKey;
@@ -53,6 +73,7 @@ export interface FdLanguage {
     };
     coreMultiInput: {
         multiInputAriaLabel: FdLanguageKey;
+        tokensCountText: FdLanguageKey;
     };
     coreNavigation: {
         mainNavigation: FdLanguageKey;
@@ -65,35 +86,40 @@ export interface FdLanguage {
          * @param total
          * @param selectedDescription
          */
-        linkItemAriaLabel: FdLanguageKey;
+        linkItemAriaLabel: FdLanguageKey<{
+            itemDetails: string;
+            index: number;
+            total: number;
+            selectedDescription: string;
+        }>;
     };
     coreOverflowLayout: {
         /** @param count */
-        moreItemsButton: FdLanguageKey;
+        moreItemsButton: FdLanguageKey<{ count: number }>;
     };
     corePagination: {
         /** @param pageNumber */
-        pageLabel: FdLanguageKey;
+        pageLabel: FdLanguageKey<{ pageNumber: number }>;
         /**
          * @param pageNumber
          * @param totalCount
          */
-        currentPageAriaLabel: FdLanguageKey;
+        currentPageAriaLabel: FdLanguageKey<{ pageNumber: number; totalCount: number }>;
         /**
          * @param pageNumber
          * @param totalCount
          */
-        labelBeforeInputMobile: FdLanguageKey;
+        labelBeforeInputMobile: FdLanguageKey<{ pageNumber: number; totalCount: number }>;
         /**
          * @param pageNumber
          * @param totalCount
          */
-        labelAfterInputMobile: FdLanguageKey;
+        labelAfterInputMobile: FdLanguageKey<{ pageNumber: number; totalCount: number }>;
         /**
          * @param pageNumber
          * @param totalCount
          */
-        inputAriaLabel: FdLanguageKey;
+        inputAriaLabel: FdLanguageKey<{ pageNumber: number; totalCount: number }>;
         itemsPerPageLabel: FdLanguageKey;
         firstLabel: FdLanguageKey;
         previousLabel: FdLanguageKey;
@@ -105,7 +131,7 @@ export interface FdLanguage {
          * @param from
          * @param to
          */
-        totalResultsLabel: FdLanguageKey;
+        totalResultsLabel: FdLanguageKey<{ totalCount: number; from: number; to: number }>;
     };
     coreProductSwitch: {
         ariaLabel: FdLanguageKey;
@@ -120,35 +146,35 @@ export interface FdLanguage {
          * @param min
          * @param max
          */
-        singleMinMaxDetails: FdLanguageKey;
+        singleMinMaxDetails: FdLanguageKey<{ min: number; max: number }>;
         /** @param value */
-        singleValueminDetails: FdLanguageKey;
+        singleValueminDetails: FdLanguageKey<{ value: number | string }>;
         /** @param value */
-        singleValuemaxDetails: FdLanguageKey;
+        singleValuemaxDetails: FdLanguageKey<{ value: number | string }>;
         /** @param value */
-        singleValueNowDetails: FdLanguageKey;
+        singleValueNowDetails: FdLanguageKey<{ value: number | string }>;
         /**
          * @param min
          * @param max
          */
-        multipleHandle1MinMaxDetails: FdLanguageKey;
+        multipleHandle1MinMaxDetails: FdLanguageKey<{ min: number; max: number }>;
         /** @param value */
-        multipleHandle1ValueminDetails: FdLanguageKey;
+        multipleHandle1ValueminDetails: FdLanguageKey<{ value: number | string }>;
         /** @param value */
-        multipleHandle1ValuemaxDetails: FdLanguageKey;
+        multipleHandle1ValuemaxDetails: FdLanguageKey<{ value: number | string }>;
         /** @param value */
-        multipleHandle1ValueNowDetails: FdLanguageKey;
+        multipleHandle1ValueNowDetails: FdLanguageKey<{ value: number | string }>;
         /**
          * @param min
          * @param max
          */
-        multipleHandle2MinMaxDetails: FdLanguageKey;
+        multipleHandle2MinMaxDetails: FdLanguageKey<{ min: number; max: number }>;
         /** @param value */
-        multipleHandle2ValueminDetails: FdLanguageKey;
+        multipleHandle2ValueminDetails: FdLanguageKey<{ value: number | string }>;
         /** @param value */
-        multipleHandle2ValuemaxDetails: FdLanguageKey;
+        multipleHandle2ValuemaxDetails: FdLanguageKey<{ value: number | string }>;
         /** @param value */
-        multipleHandle2ValueNowDetails: FdLanguageKey;
+        multipleHandle2ValueNowDetails: FdLanguageKey<{ value: number | string }>;
     };
     coreSplitButton: {
         expandButtonAriaLabel: FdLanguageKey;
@@ -281,13 +307,13 @@ export interface FdLanguage {
         messagesErrorBuildGraph: FdLanguageKey;
         messagesUndoAction: FdLanguageKey;
         /** @param count */
-        nodeMembersCount: FdLanguageKey;
+        nodeMembersCount: FdLanguageKey<{ count: number }>;
         nodeVariousTeams: FdLanguageKey;
         nodeStatusDueToday: FdLanguageKey;
         /** @param count */
-        nodeStatusDueInXDays: FdLanguageKey;
+        nodeStatusDueInXDays: FdLanguageKey<{ count: number }>;
         /** @param count */
-        nodeStatusXDaysOverdue: FdLanguageKey;
+        nodeStatusXDaysOverdue: FdLanguageKey<{ count: number }>;
         nodeActionAddApproversBefore: FdLanguageKey;
         nodeActionAddApproversAfter: FdLanguageKey;
         nodeActionAddApproversParallel: FdLanguageKey;
@@ -309,7 +335,7 @@ export interface FdLanguage {
         watchersInputPlaceholder: FdLanguageKey;
         userListSelectedItemsCountSingular: FdLanguageKey;
         /** @param count */
-        userListSelectedItemsCountPlural: FdLanguageKey;
+        userListSelectedItemsCountPlural: FdLanguageKey<{ count: number }>;
         statusApproved: FdLanguageKey;
         statusRejected: FdLanguageKey;
         statusInProgress: FdLanguageKey;
@@ -334,20 +360,20 @@ export interface FdLanguage {
         searchShowAllAdvancedSearchLabel: FdLanguageKey;
         searchHideAllAdvancedSearchLabel: FdLanguageKey;
         /** @param count */
-        selectTabDisplayCountLabel: FdLanguageKey;
+        selectTabDisplayCountLabel: FdLanguageKey<{ count: number }>;
         selectTabMoreBtnLabel: FdLanguageKey;
         /**
          * @param rowCount
          * @param colCount
          */
-        selectTabCountHiddenA11yLabel: FdLanguageKey;
+        selectTabCountHiddenA11yLabel: FdLanguageKey<{ rowCount: number; colCount: number }>;
         selectMobileTabBackBtnTitle: FdLanguageKey;
         selectMobileTabBtnOpenDialogLabel: FdLanguageKey;
         selectMobileTabTitle: FdLanguageKey;
         selectMobileConditionEmpty: FdLanguageKey;
         defineConditionTitle: FdLanguageKey;
         /** @param value */
-        defineConditionSelectedValueHiddenA11yLabel: FdLanguageKey;
+        defineConditionSelectedValueHiddenA11yLabel: FdLanguageKey<{ value: string }>;
         defineConditionConditionsGroupHeaderInclude: FdLanguageKey;
         defineConditionConditionsGroupHeaderExclude: FdLanguageKey;
         defineConditionFromPlaceholder: FdLanguageKey;
@@ -369,7 +395,7 @@ export interface FdLanguage {
         defineConditionConditionStrategyLabelNotEqualTo: FdLanguageKey;
         defineConditionConditionStrategyLabelNotEmpty: FdLanguageKey;
         /** @param count */
-        defineConditionMaxCountError: FdLanguageKey;
+        defineConditionMaxCountError: FdLanguageKey<{ count: number }>;
         selectTabTitle: FdLanguageKey;
         searchTableEmptyMessage: FdLanguageKey;
         defineTabTitle: FdLanguageKey;
@@ -377,7 +403,7 @@ export interface FdLanguage {
     platformCombobox: {
         countListResultsSingular: FdLanguageKey;
         /** @param count */
-        countListResultsPlural: FdLanguageKey;
+        countListResultsPlural: FdLanguageKey<{ count: number }>;
     };
     platformMultiCombobox: {
         inputGlyphAriaLabel: FdLanguageKey;
@@ -388,14 +414,14 @@ export interface FdLanguage {
     platformTextarea: {
         counterMessageCharactersOverTheLimitSingular: FdLanguageKey;
         /** @param count */
-        counterMessageCharactersOverTheLimitPlural: FdLanguageKey;
+        counterMessageCharactersOverTheLimitPlural: FdLanguageKey<{ count: number }>;
         counterMessageCharactersRemainingSingular: FdLanguageKey;
         /** @param count */
-        counterMessageCharactersRemainingPlural: FdLanguageKey;
+        counterMessageCharactersRemainingPlural: FdLanguageKey<{ count: number }>;
     };
     platformLink: {
         /** @param media */
-        roleDescriptionWithMedia: FdLanguageKey;
+        roleDescriptionWithMedia: FdLanguageKey<{ media: string }>;
     };
     platformList: {
         loadingAriaLabel: FdLanguageKey;
@@ -411,18 +437,22 @@ export interface FdLanguage {
     platformSearchField: {
         clearButtonTitle: FdLanguageKey;
         submitButtonTitle: FdLanguageKey;
+        searchInputLabel: FdLanguageKey;
         synchronizeButtonTitle: FdLanguageKey;
         /**
          * @param count
          */
-        searchSuggestionMessage: FdLanguageKey;
+        searchSuggestionMessage: FdLanguageKey<{ count: number }>;
         searchSuggestionNavigateMessage: FdLanguageKey;
+    };
+    platformSwitch: {
+        ariaLabel: FdLanguageKey;
     };
     platformSmartFilterBar: {
         searchPlaceholder: FdLanguageKey;
         submitButtonLabel: FdLanguageKey;
         /** @param filtersCount */
-        filtersButtonLabel: FdLanguageKey;
+        filtersButtonLabel: FdLanguageKey<{ filtersCount: number }>;
         showFiltersButtonLabel: FdLanguageKey;
         hideFiltersButtonLabel: FdLanguageKey;
         defineConditionsRemoveConditionButtonTitle: FdLanguageKey;
@@ -468,6 +498,7 @@ export interface FdLanguage {
         headerMenuUnfreeze: FdLanguageKey;
         headerMenuFilter: FdLanguageKey;
         defaultEmptyMessage: FdLanguageKey;
+        emptyCell: FdLanguageKey;
         noVisibleColumnsMessage: FdLanguageKey;
         resetChangesButtonLabel: FdLanguageKey;
         editableCellNumberPlaceholder: FdLanguageKey;
@@ -481,7 +512,7 @@ export interface FdLanguage {
          * @param selectedColumnsCount
          * @param selectableColumnsCount
          */
-        P13ColumnsDialogSelectAll: FdLanguageKey;
+        P13ColumnsDialogSelectAll: FdLanguageKey<{ selectedColumnsCount: number; selectableColumnsCount: number }>;
         P13ColumnsDialogConfirmationBtnLabel: FdLanguageKey;
         P13ColumnsDialogCancelBtnLabel: FdLanguageKey;
         P13ColumnsDialogMoveToTopBtn: FdLanguageKey;
@@ -507,10 +538,10 @@ export interface FdLanguage {
         P13FilterBooleanOptionFalse: FdLanguageKey;
         P13FilterDialogHeader: FdLanguageKey;
         /** @param count */
-        P13FilterDialogIncludePanelTitleWithCount: FdLanguageKey;
+        P13FilterDialogIncludePanelTitleWithCount: FdLanguageKey<{ count: number }>;
         P13FilterDialogIncludePanelTitleWithoutCount: FdLanguageKey;
         /** @param count */
-        P13FilterDialogExcludePanelTitleWithCount: FdLanguageKey;
+        P13FilterDialogExcludePanelTitleWithCount: FdLanguageKey<{ count: number }>;
         P13FilterDialogExcludePanelTitleWithoutCount: FdLanguageKey;
         P13FilterDialogConfirmationBtnLabel: FdLanguageKey;
         P13FilterDialogRemoveFilterBtnTitle: FdLanguageKey;
@@ -544,7 +575,7 @@ export interface FdLanguage {
         toolbarActionCollapseAllButtonTitle: FdLanguageKey;
         filterDialogNotFilteredLabel: FdLanguageKey;
         /** @param filterLabel */
-        filterDialogFilterByLabel: FdLanguageKey;
+        filterDialogFilterByLabel: FdLanguageKey<{ filterLabel: string }>;
         filterDialogFilterTitle: FdLanguageKey;
         filterDialogFilterBy: FdLanguageKey;
         filterDialogConfirmBtnLabel: FdLanguageKey;
@@ -588,15 +619,15 @@ export interface FdLanguage {
         newFolderTitle: FdLanguageKey;
         newFolderAtRootInputLabel: FdLanguageKey;
         /** @param folderName */
-        newFolderAtFolderInputLabel: FdLanguageKey;
+        newFolderAtFolderInputLabel: FdLanguageKey<{ folderName: string }>;
         newFolderInputPlaceholder: FdLanguageKey;
         /** @param count */
-        newFolderInputErrorLabel: FdLanguageKey;
+        newFolderInputErrorLabel: FdLanguageKey<{ count: number }>;
         newFolderDialogCreateBtnLabel: FdLanguageKey;
         newFolderDialogCancelBtnLabel: FdLanguageKey;
         breadcrumbLabelAllFiles: FdLanguageKey;
         /** @param total */
-        breadcrumbLabelAllFilesWithTotal: FdLanguageKey;
+        breadcrumbLabelAllFilesWithTotal: FdLanguageKey<{ total: number }>;
         searchPlaceholder: FdLanguageKey;
         addBtnLabel: FdLanguageKey;
         newFolderBtnLabel: FdLanguageKey;
@@ -622,142 +653,146 @@ export interface FdLanguage {
          * @param to
          * @param total
          */
-        paginationTotal: FdLanguageKey;
+        paginationTotal: FdLanguageKey<{ from: number; to: number; total: number }>;
         resultsPerPage: FdLanguageKey;
         /** @param folderName */
-        messageCreateFailed: FdLanguageKey;
+        messageCreateFailed: FdLanguageKey<{ folderName: string }>;
         /** @param folderName */
-        messageCreateSuccess: FdLanguageKey;
+        messageCreateSuccess: FdLanguageKey<{ folderName: string }>;
         /** @param folderName */
-        messageUpdateVersionFailed: FdLanguageKey;
+        messageUpdateVersionFailed: FdLanguageKey<{ folderName: string }>;
         /** @param folderName */
-        messageUpdateVersionSuccess: FdLanguageKey;
+        messageUpdateVersionSuccess: FdLanguageKey<{ folderName: string }>;
+        /** @param foldersCount */
+        folderNamePluralization: FdLanguageKey<{ foldersCount: number }>;
+        /** @param filesCount */
+        fileNamePluralization: FdLanguageKey<{ filesCount: number }>;
         /**
          * @param from
          * @param to
          */
-        messageFileRenameFailed: FdLanguageKey;
+        messageFileRenameFailed: FdLanguageKey<{ from: string; to: string }>;
         /**
          * @param from
          * @param to
          */
-        messageFileRenameSuccess: FdLanguageKey;
+        messageFileRenameSuccess: FdLanguageKey<{ from: string; to: string }>;
         /**
          * @param foldersCount
          * @param filesCount
          */
-        messageRemoveFoldersAndFilesFailed: FdLanguageKey;
+        messageRemoveFoldersAndFilesFailed: FdLanguageKey<{ foldersCount: number; filesCount: number }>;
         /**
          * @param foldersCount
          * @param filesCount
          */
-        messageRemoveFoldersAndFilesSuccess: FdLanguageKey;
+        messageRemoveFoldersAndFilesSuccess: FdLanguageKey<{ foldersCount: number; filesCount: number }>;
         /** @param foldersCount */
-        messageRemoveFoldersFailed: FdLanguageKey;
+        messageRemoveFoldersFailed: FdLanguageKey<{ foldersCount: number }>;
         /** @param foldersCount */
-        messageRemoveFoldersSuccess: FdLanguageKey;
+        messageRemoveFoldersSuccess: FdLanguageKey<{ foldersCount: number }>;
         /** @param filesCount */
-        messageRemoveFilesFailed: FdLanguageKey;
+        messageRemoveFilesFailed: FdLanguageKey<{ filesCount: number }>;
         /** @param filesCount */
-        messageRemoveFilesSuccess: FdLanguageKey;
+        messageRemoveFilesSuccess: FdLanguageKey<{ filesCount: number }>;
         /** @param name */
-        messageRemoveFileOrFolderFailed: FdLanguageKey;
+        messageRemoveFileOrFolderFailed: FdLanguageKey<{ name: string }>;
         /** @param name */
-        messageRemoveFileOrFolderSuccess: FdLanguageKey;
+        messageRemoveFileOrFolderSuccess: FdLanguageKey<{ name: string }>;
         /**
          * @param foldersCount
          * @param filesCount
          * @param to
          */
-        messageMoveFoldersAndFilesFailed: FdLanguageKey;
+        messageMoveFoldersAndFilesFailed: FdLanguageKey<{ foldersCount: number; filesCount: number; to: string }>;
         /**
          * @param foldersCount
          * @param filesCount
          * @param to
          */
-        messageMoveFoldersAndFilesSuccess: FdLanguageKey;
+        messageMoveFoldersAndFilesSuccess: FdLanguageKey<{ foldersCount: number; filesCount: number; to: string }>;
         /**
          * @param foldersCount
          * @param to
          */
-        messageMoveFoldersFailed: FdLanguageKey;
+        messageMoveFoldersFailed: FdLanguageKey<{ foldersCount: number; to: string }>;
         /**
          * @param foldersCount
          * @param to
          */
-        messageMoveFoldersSuccess: FdLanguageKey;
+        messageMoveFoldersSuccess: FdLanguageKey<{ foldersCount: number; to: string }>;
         /**
          * @param filesCount
          * @param to
          */
-        messageMoveFilesFailed: FdLanguageKey;
+        messageMoveFilesFailed: FdLanguageKey<{ filesCount: number; to: string }>;
         /**
          * @param filesCount
          * @param to
          */
-        messageMoveFilesSuccess: FdLanguageKey;
+        messageMoveFilesSuccess: FdLanguageKey<{ filesCount: number; to: string }>;
         /**
          * @param name
          * @param to
          */
-        messageMoveFileOrFolderFailed: FdLanguageKey;
+        messageMoveFileOrFolderFailed: FdLanguageKey<{ name: string; to: string }>;
         /**
          * @param name
          * @param to
          */
-        messageMoveFileOrFolderSuccess: FdLanguageKey;
+        messageMoveFileOrFolderSuccess: FdLanguageKey<{ name: string; to: string }>;
         /**
          * @param foldersCount
          * @param filesCount
          */
-        messageMoveRootFoldersAndFilesFailed: FdLanguageKey;
+        messageMoveRootFoldersAndFilesFailed: FdLanguageKey<{ foldersCount: number; filesCount: number }>;
         /**
          * @param foldersCount
          * @param filesCount
          */
-        messageMoveRootFoldersAndFilesSuccess: FdLanguageKey;
+        messageMoveRootFoldersAndFilesSuccess: FdLanguageKey<{ foldersCount: number; filesCount: number }>;
         /** @param foldersCount */
-        messageMoveRootFoldersFailed: FdLanguageKey;
+        messageMoveRootFoldersFailed: FdLanguageKey<{ foldersCount: number }>;
         /** @param foldersCount */
-        messageMoveRootFoldersSuccess: FdLanguageKey;
+        messageMoveRootFoldersSuccess: FdLanguageKey<{ foldersCount: number }>;
         /** @param filesCount */
-        messageMoveRootFilesFailed: FdLanguageKey;
+        messageMoveRootFilesFailed: FdLanguageKey<{ filesCount: number }>;
         /** @param filesCount */
-        messageMoveRootFilesSuccess: FdLanguageKey;
+        messageMoveRootFilesSuccess: FdLanguageKey<{ filesCount: number }>;
         /** @param name */
-        messageMoveRootFileOrFolderFailed: FdLanguageKey;
+        messageMoveRootFileOrFolderFailed: FdLanguageKey<{ name: string }>;
         /** @param name */
-        messageMoveRootFileOrFolderSuccess: FdLanguageKey;
+        messageMoveRootFileOrFolderSuccess: FdLanguageKey<{ name: string }>;
         /**
          * @param filesCount
          * @param allowedTypes
          */
-        messageFileTypeMismatchPlural: FdLanguageKey;
+        messageFileTypeMismatchPlural: FdLanguageKey<{ filesCount: number; allowedTypes: string }>;
         /**
          * @param fileName
          * @param allowedTypes
          */
-        messageFileTypeMismatchSingular: FdLanguageKey;
+        messageFileTypeMismatchSingular: FdLanguageKey<{ fileName: string; allowedTypes: string }>;
         /**
          * @param filesCount
          * @param maxFileSize
          */
-        messageFileSizeExceededPlural: FdLanguageKey;
+        messageFileSizeExceededPlural: FdLanguageKey<{ filesCount: number; maxFileSize: string | number }>;
         /**
          * @param fileName
          * @param maxFileSize
          */
-        messageFileSizeExceededSingular: FdLanguageKey;
+        messageFileSizeExceededSingular: FdLanguageKey<{ fileName: string; maxFileSize: string | number }>;
         /**
          * @param filesCount
          * @param maxFilenameLength
          */
-        messageFileNameLengthExceededPlural: FdLanguageKey;
+        messageFileNameLengthExceededPlural: FdLanguageKey<{ filesCount: number; maxFilenameLength: number }>;
         /**
          * @param fileName
          * @param maxFilenameLength
          */
-        messageFileNameLengthExceededSingular: FdLanguageKey;
+        messageFileNameLengthExceededSingular: FdLanguageKey<{ fileName: string; maxFilenameLength: number }>;
     };
     platformWizardGenerator: {
         summarySectionEditStep: FdLanguageKey;

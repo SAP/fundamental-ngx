@@ -5,20 +5,6 @@
     "sourceRoot": "libs/core/src/lib/input-group",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/core/input-group"],
-            "options": {
-                "tsConfig": "libs/core/src/lib/input-group/tsconfig.lib.json",
-                "project": "libs/core/src/lib/input-group/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/input-group/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

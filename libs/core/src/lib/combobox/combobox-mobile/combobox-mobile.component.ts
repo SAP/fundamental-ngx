@@ -21,14 +21,33 @@ import {
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
 
-import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { asyncScheduler } from 'rxjs';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 
 @Component({
     selector: 'fd-combobox-mobile',
     templateUrl: './combobox-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogModule,
+        NgIf,
+        TitleComponent,
+        TemplateDirective,
+        BarModule,
+        NgTemplateOutlet,
+        CdkScrollable,
+        ScrollbarDirective,
+        InitialFocusDirective
+    ]
 })
 export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
     /** @hidden */

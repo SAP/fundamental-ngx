@@ -1,11 +1,11 @@
+import { BooleanInput, NumberInput, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty, coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
-    selector: '[fd-layout-grid-col], [fdLayoutGridCol]'
+    selector: '[fd-layout-grid-col], [fdLayoutGridCol]',
+    standalone: true
 })
 export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChanges {
     /** Defines the width of the element on the layout grid. */

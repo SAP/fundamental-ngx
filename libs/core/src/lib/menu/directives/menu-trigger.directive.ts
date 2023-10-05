@@ -1,11 +1,12 @@
 import { Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Subscription } from 'rxjs';
 
 import { MenuComponent } from '../menu.component';
 
 @Directive({
-    selector: '[fdMenuTrigger]'
+    selector: '[fdMenuTrigger]',
+    standalone: true
 })
 export class MenuTriggerDirective implements OnDestroy {
     /** Set reference to Menu Component */

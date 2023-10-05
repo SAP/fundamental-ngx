@@ -1,16 +1,16 @@
 import {
-    Component,
-    ChangeDetectionStrategy,
-    ViewEncapsulation,
     AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
     ElementRef,
     Renderer2,
-    ChangeDetectorRef,
-    ContentChild
+    ViewEncapsulation
 } from '@angular/core';
-import { DynamicPageBaseActions } from './dynamic-page-base-actions';
-import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
+import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
 @Component({
     selector: 'fd-dynamic-page-global-actions',
@@ -19,7 +19,8 @@ import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
     encapsulation: ViewEncapsulation.None,
     host: {
         role: 'toolbar'
-    }
+    },
+    standalone: true
 })
 export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
     /** @hidden */

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-grid-list-title-bar',
@@ -6,7 +7,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     host: {
         class: 'fd-col fd-col--12'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ToolbarComponent, ToolbarLabelDirective]
 })
 export class GridListTitleBarComponent {
     /** Sets title of the Grid List */

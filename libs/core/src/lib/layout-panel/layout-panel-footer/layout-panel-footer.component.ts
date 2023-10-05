@@ -7,17 +7,16 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 export type FooterPosition = 'start' | 'end';
 
 @Component({
     selector: 'fd-layout-panel-footer',
-    templateUrl: './layout-panel-footer.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */

@@ -1,22 +1,24 @@
+import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
     HostBinding,
-    inject,
     Input,
     Output,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { FDK_FOCUSABLE_LIST_DIRECTIVE } from '@fundamental-ngx/cdk/utils';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
+import { DisabledBehaviorDirective, FDK_FOCUSABLE_LIST_DIRECTIVE, ValueByPathPipe } from '@fundamental-ngx/cdk/utils';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
+import { TableCellDirective, TableRowDirective, TableTextDirective } from '@fundamental-ngx/core/table';
 import {
-    isTreeRow,
-    isTreeRowFirstCell,
     SelectionMode,
     SelectionModeValue,
     TableRow,
-    TableService
+    TableService,
+    isTreeRow,
+    isTreeRowFirstCell
 } from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
@@ -30,6 +32,22 @@ import {
             provide: FDK_FOCUSABLE_LIST_DIRECTIVE,
             useExisting: TablePoppingRowComponent
         }
+    ],
+    host: {
+        role: 'row',
+        '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        TableCellDirective,
+        DisabledBehaviorDirective,
+        NgFor,
+        TableTextDirective,
+        FormLabelComponent,
+        NgTemplateOutlet,
+        AsyncPipe,
+        ValueByPathPipe
     ]
 })
 export class TablePoppingRowComponent<T> extends TableRowDirective {

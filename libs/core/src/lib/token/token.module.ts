@@ -1,26 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { TokenizerInputDirective } from './token-input.directive';
 import { TokenComponent } from './token.component';
 import { TokenizerComponent } from './tokenizer.component';
-import { TokenizerInputDirective } from './token-input.directive';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
-import { I18nModule } from '@fundamental-ngx/i18n';
 
+/**
+ * @deprecated
+ * Use direct imports of `TokenComponent`, `TokenizerComponent`, `TokenizerInputDirective` instead
+ */
 @NgModule({
-    declarations: [TokenComponent, TokenizerComponent, TokenizerInputDirective],
-    imports: [
-        CommonModule,
-        InputGroupModule,
-        ButtonModule,
-        PopoverModule,
-        ListModule,
-        ContentDensityModule,
-        I18nModule
-    ],
-    exports: [TokenComponent, TokenizerComponent, TokenizerInputDirective, ContentDensityModule]
+    imports: [TokenComponent, TokenizerComponent, TokenizerInputDirective],
+    exports: [TokenComponent, TokenizerComponent, TokenizerInputDirective]
 })
 export class TokenModule {}

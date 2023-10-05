@@ -1,0 +1,24 @@
+<fd-docs-section-title id="language-customization" componentName="i18n">
+    Customizing language per component
+</fd-docs-section-title>
+<description>
+    <p>
+        In order to provide language customizations on a component-by-component basis, use the
+        <code>fdLanguagePatch</code> directive. You will also need to import the
+        <code>@fundamental-ngx/i18n</code> module.
+    </p>
+    <p>
+        It is also possible to easily override the global language for a certain component by providing
+        <code>FD_LANGUAGE</code> token at any child scope. Use the <code>patchLanguage</code> utility function for this.
+    </p>
+    <p>
+        <b>Note:</b> you should understand that providing an injection token in a certain module will affect the scope
+        where this module is imported. Thus it's recommended to provide overrides on the level of components or lazy
+        loaded modules.
+    </p>
+</description>
+<component-example>
+    <app-i18n-translation-customization-example></app-i18n-translation-customization-example>
+</component-example>
+<code-example [exampleFiles]="translationCustomizationExampleFiles"></code-example>
+<separator></separator>

@@ -1,18 +1,20 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
+    HostBinding,
     Input,
     Output,
     ViewChild,
-    ViewEncapsulation,
-    HostBinding,
-    ChangeDetectorRef
+    ViewEncapsulation
 } from '@angular/core';
-import { distinctUntilChanged } from 'rxjs/operators';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { distinctUntilChanged } from 'rxjs/operators';
 
+import { NgIf } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
 
@@ -21,7 +23,9 @@ let dynamicPageSubHeaderId = 0;
     selector: 'fd-dynamic-page-subheader',
     templateUrl: './dynamic-page-subheader.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, ButtonComponent]
 })
 export class DynamicPageSubheaderComponent {
     /**

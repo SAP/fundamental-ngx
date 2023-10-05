@@ -8,7 +8,7 @@ describe('GridListItemToolbarComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GridListItemToolbarComponent]
+            imports: [GridListItemToolbarComponent]
         }).compileComponents();
     });
 

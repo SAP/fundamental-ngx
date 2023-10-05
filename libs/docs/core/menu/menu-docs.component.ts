@@ -10,6 +10,7 @@ import {
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
+import { ExtendedMenuExampleComponent } from './examples/extended-menu-example.component';
 import {
     MenuAddonExampleComponent,
     MenuExampleComponent,
@@ -44,7 +45,8 @@ const menuWithSubmenuTs = 'menu-with-submenu-example.component.ts';
         MenuScrollbarExampleComponent,
         MenuWithSubmenuExampleComponent,
         RouterLink,
-        MenuMobileExampleComponent
+        MenuMobileExampleComponent,
+        ExtendedMenuExampleComponent
     ]
 })
 export class MenuDocsComponent {
@@ -100,6 +102,15 @@ export class MenuDocsComponent {
             fileName: 'menu-with-submenu-example',
             typescriptFileCode: menuWithSubmenuTs,
             component: 'MenuWithSubmenuExampleComponent'
+        }
+    ];
+
+    extendedMenu: ExampleFile[] = [
+        {
+            language: 'typescript',
+            code: getAssetFromModuleAssets('extended-menu-example.component.ts'),
+            fileName: 'extended-menu-example.component',
+            component: 'ExtendedMenuExampleComponent'
         }
     ];
 }

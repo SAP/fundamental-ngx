@@ -7,16 +7,40 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { ApprovalFlowAddNodeViewService, VIEW_MODES } from '../services/approval-flow-add-node-view.service';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
+import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
+import { ApprovalFlowTeamListComponent } from '../approval-flow-team-list/approval-flow-team-list.component';
+import { ApprovalFlowUserDetailsComponent } from '../approval-flow-user-details/approval-flow-user-details.component';
+import { ApprovalFlowUserListComponent } from '../approval-flow-user-list/approval-flow-user-list.component';
 import { displayTeamFn, displayUserFn, filterByName, trackByFn } from '../helpers';
 import { ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
-import { ApprovalFlowTeamDataSource, ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ApprovalFlowAddNodeViewService, VIEW_MODES } from '../services/approval-flow-add-node-view.service';
 
 export interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -63,7 +87,38 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fdp-approval-flow-dialog fdp-approval-flow-add-node'
-    }
+    },
+    standalone: true,
+    imports: [
+        DialogComponent,
+        ContentDensityDirective,
+        DialogHeaderComponent,
+        TemplateDirective,
+        NgIf,
+        IconComponent,
+        SearchFieldComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        FormItemComponent,
+        FormLabelComponent,
+        SelectComponent,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        OptionComponent,
+        MultiInputComponent,
+        FormsModule,
+        CheckboxComponent,
+        DatePickerComponent,
+        ApprovalFlowTeamListComponent,
+        ApprovalFlowUserListComponent,
+        ApprovalFlowUserDetailsComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        BusyIndicatorComponent,
+        FdTranslatePipe
+    ]
 })
 export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */

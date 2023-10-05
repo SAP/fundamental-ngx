@@ -1,7 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableFixed], [fd-table-fixed]'
+    selector: '[fdTableFixed], [fd-table-fixed]',
+    standalone: true
 })
 export class TableFixedDirective {
     /** @hidden */

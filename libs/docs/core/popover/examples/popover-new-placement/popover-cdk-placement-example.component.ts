@@ -2,15 +2,10 @@ import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { NgFor } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import {
-    PopoverBodyComponent,
-    PopoverComponent,
-    PopoverComponent as PopoverComponent_1,
-    PopoverControlComponent
-} from '@fundamental-ngx/core/popover';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
 
@@ -24,10 +19,10 @@ import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
         FormsModule,
         NgFor,
         ButtonModule,
-        PopoverComponent_1,
+        PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,
-        AvatarModule
+        AvatarComponent
     ]
 })
 export class PopoverCdkPlacementExampleComponent {

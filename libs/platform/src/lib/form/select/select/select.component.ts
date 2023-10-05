@@ -14,18 +14,17 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlContainer, NgControl, NgForm, FormsModule } from '@angular/forms';
+import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
-import { PlatformFormFieldControl, PlatformFormField } from '@fundamental-ngx/platform/shared';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { SelectComponent as CoreSelect, SelectModule } from '@fundamental-ngx/core/select';
+import { PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { BaseSelect } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
-import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { NgIf, NgFor, NgTemplateOutlet, NgClass } from '@angular/common';
-import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
     selector: 'fdp-select',
@@ -130,9 +129,9 @@ export class SelectComponent extends BaseSelect implements AfterViewInit, AfterV
     /** @hidden */
     _onOpenChange(isOpen: boolean): void {
         if (isOpen) {
-            this.formMessage._popover.close();
+            this.formMessage?._popover?.close();
         }
-        this.formMessage._popover.setIgnoreTriggers(isOpen);
+        this.formMessage?._popover?.setIgnoreTriggers(isOpen);
     }
 
     /** @hidden */

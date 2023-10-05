@@ -21,6 +21,10 @@ $block: fd-multi-input;
         }
     }
 
+    &__invisible-text {
+        display: none !important;
+    }
+
     &-input-group-custom {
         max-width: 100%;
     }

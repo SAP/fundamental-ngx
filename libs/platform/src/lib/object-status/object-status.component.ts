@@ -1,25 +1,45 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
+    Directive,
     EventEmitter,
     HostListener,
     Input,
     Output,
-    ViewEncapsulation
+    TemplateRef,
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ObjectStatusComponent as CoreObjectStatusComponent, ObjectStatus } from '@fundamental-ngx/core/object-status';
 
-export type IndicationColorType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+@Directive({
+    selector: '[fdpObjectStatusText]',
+    standalone: true
+})
+export class PlatformObjectStatusTextDirective {
+    /**
+     * Template reference.
+     */
+    templateRef = inject(TemplateRef);
+}
+
+/**
+ * @deprecated
+ * Use `ColorAccent` from `@fundamental-ngx/cdk/utils` instead.
+ */
+export type IndicationColorType = ColorAccent;
 
 @Component({
     selector: 'fdp-object-status',
     templateUrl: './object-status.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CoreObjectStatusComponent]
 })
 export class ObjectStatusComponent {
     /**
@@ -38,10 +58,15 @@ export class ObjectStatusComponent {
 
     /**
      * A number representing the indication color.
-     * Option includes numbers from 1 to 8
+     * For non-inverted state available numbers are from 1 to 8.
+     * For inverted state available numbers are from 1 to 10.
      */
     @Input()
-    indicationColor: IndicationColorType;
+    indicationColor: ColorAccent;
+
+    /** Whether to use secondary set of indication colors. */
+    @Input()
+    secondaryIndication = false;
 
     /** Whether the Object Status is clickable. */
     @Input()
@@ -70,6 +95,10 @@ export class ObjectStatusComponent {
     /** Event sent when button is clicked */
     @Output()
     objectStatusClick: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
+
+    /** @hidden */
+    @ContentChild(PlatformObjectStatusTextDirective)
+    _textDirective: Nullable<PlatformObjectStatusTextDirective>;
 
     /** @hidden */
     @HostListener('keydown', ['$event'])

@@ -71,7 +71,7 @@
     <fdp-column name="status" key="status">
         <fdp-table-header *fdpHeaderCellDef>Status</fdp-table-header>
         <fdp-table-cell *fdpCellDef="let item; as: exampleItemType">
-            <span fd-object-status [status]="item.statusColor">{{ item.status }}</span>
+            <span fd-object-status [status]="item.statusColor" [label]="item.status"></span>
         </fdp-table-cell>
     </fdp-column>
     <fdp-column name="index" key="index">

@@ -7,7 +7,9 @@ import { CardSubtitleDirective } from './card-subtitle.directive';
 import { CLASS_NAME } from './constants';
 
 @Component({
-    template: `<span fd-card-subtitle>Subtitle</span>`
+    template: `<span fd-card-subtitle>Subtitle</span>`,
+    standalone: true,
+    imports: [CardSubtitleDirective]
 })
 class TestComponent {}
 
@@ -17,7 +19,7 @@ describe('CardSubtitleComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, CardSubtitleDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

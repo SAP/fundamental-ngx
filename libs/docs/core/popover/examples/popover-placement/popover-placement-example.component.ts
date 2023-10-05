@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
@@ -8,6 +8,6 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
     templateUrl: './popover-placement-example.component.html',
     styleUrls: ['popover-placement-example.component.scss'],
     standalone: true,
-    imports: [PopoverComponent, PopoverControlComponent, ButtonModule, PopoverBodyComponent, AvatarModule]
+    imports: [PopoverComponent, PopoverControlComponent, ButtonModule, PopoverBodyComponent, AvatarComponent]
 })
 export class PopoverPlacementExampleComponent {}

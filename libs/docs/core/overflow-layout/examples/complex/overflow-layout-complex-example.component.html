@@ -73,7 +73,7 @@
     </fd-quick-view>
 </ng-template>
 
-<fd-overflow-layout class="fd-avatar-group">
+<fd-overflow-layout class="fd-avatar-group-legacy">
     <ng-container *ngFor="let person of itemsToRender; let i = index">
         <ng-container *fdOverflowItemRef="let hidden; let globalIndex = globalIndex">
             <ng-template #avatarRenderer let-person let-hidden="hidden" let-innerIndex="innerIndex">
@@ -181,7 +181,7 @@
             <fd-popover-control>
                 <button
                     fd-button
-                    fd-avatar-group-overflow-button
+                    fd-avatar-group-legacy-overflow-button
                     [size]="size"
                     (click)="handleControlClick($event, overflowPopover)"
                     (keydown)="handleControlKeydown($event, overflowPopover)"
@@ -189,16 +189,16 @@
                     +{{ items.length }}
                 </button>
             </fd-popover-control>
-            <fd-popover-body aria-labelledby="avatar-group-0-popover-header" role="tooltip">
+            <fd-popover-body aria-labelledby="avatar-group-legacy-0-popover-header" role="tooltip">
                 <div
-                    class="fd-popover__wrapper fd-overflow-layout__popover-container--avatar-group"
+                    class="fd-popover__wrapper fd-overflow-layout__popover-container--avatar-group-legacy"
                     fdOverflowLayoutPopoverContent
                     [items]="items"
                 >
                     <div fd-popover-body-header *ngIf="!isDetailStage">
                         <div fd-bar barDesign="header">
                             <div fd-bar-left>
-                                <fd-bar-element id="avatar-group-0-popover-header">
+                                <fd-bar-element id="avatar-group-legacy-0-popover-header">
                                     Team Members ({{ items.length }})
                                 </fd-bar-element>
                                 <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
@@ -9,7 +9,7 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
     styleUrls: ['./platform-menu-example-styles.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [ButtonModule, PlatformMenuModule, AvatarModule]
+    imports: [ButtonModule, PlatformMenuModule, AvatarComponent]
 })
 export class PlatformMenuXPositionExampleComponent {
     item = '';

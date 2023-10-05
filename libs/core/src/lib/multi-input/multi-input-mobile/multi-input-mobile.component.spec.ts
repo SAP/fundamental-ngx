@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { MultiInputMobileComponent } from './multi-input-mobile.component';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { EventEmitter } from '@angular/core';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { MultiInputComponent } from '../multi-input.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { MultiInputComponent } from '../multi-input.component';
 import { MULTI_INPUT_COMPONENT } from '../multi-input.interface';
+import { MultiInputMobileComponent } from './multi-input-mobile.component';
 
 describe('MultiInputMobileComponent', () => {
     let component: MultiInputMobileComponent;
@@ -35,8 +34,8 @@ describe('MultiInputMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule, NoopAnimationsModule],
-            declarations: [MultiInputMobileComponent],
+            imports: [MultiInputMobileComponent, NoopAnimationsModule],
+            declarations: [],
             providers: [
                 DynamicComponentService,
                 { provide: MULTI_INPUT_COMPONENT, useValue: mockedMultiInputComponent }

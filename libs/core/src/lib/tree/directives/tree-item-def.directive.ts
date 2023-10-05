@@ -3,7 +3,8 @@ import { TreeItem } from '../models/tree-item';
 import { TreeItemDefContext } from '../models/tree-item-def-context';
 
 @Directive({
-    selector: '[fdTreeItemDef]'
+    selector: '[fdTreeItemDef]',
+    standalone: true
 })
 export class TreeItemDefDirective<T extends TreeItem = TreeItem> {
     /**

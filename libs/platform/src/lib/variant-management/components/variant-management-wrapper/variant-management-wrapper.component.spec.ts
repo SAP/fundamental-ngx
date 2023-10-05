@@ -24,6 +24,7 @@ export const defaultDummyPreset = {
 @Component({
     selector: 'fdp-variant-management-managed-component',
     template: '<ng-content></ng-content>',
+    standalone: true,
     providers: [
         {
             provide: FDP_PRESET_MANAGED_COMPONENT,
@@ -48,6 +49,7 @@ export class VariantManagementManagedTestComponent implements PresetManagedCompo
 @Component({
     selector: 'fdp-variant-management-test',
     template: ` <ng-content></ng-content> `,
+    standalone: true,
     providers: [
         {
             provide: FDP_VARIANT_MANAGEMENT,
@@ -81,7 +83,9 @@ export class VariantManagementTestComponent implements VariantManagement<DummyPr
             <fdp-variant-management-test #manager></fdp-variant-management-test>
             <fdp-variant-management-managed-component #presetComponent></fdp-variant-management-managed-component>
         </fdp-variant-management-wrapper>
-    `
+    `,
+    standalone: true,
+    imports: [VariantManagementWrapperComponent, VariantManagementTestComponent, VariantManagementManagedTestComponent]
 })
 export class VariantManagementWrapperTestComponent {
     @ViewChild('wrapper')
@@ -100,12 +104,7 @@ describe('VariantManagementWrapperComponent with projected variant management co
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                VariantManagementWrapperTestComponent,
-                VariantManagementTestComponent,
-                VariantManagementManagedTestComponent,
-                VariantManagementWrapperComponent
-            ]
+            imports: [VariantManagementWrapperTestComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(VariantManagementWrapperTestComponent);

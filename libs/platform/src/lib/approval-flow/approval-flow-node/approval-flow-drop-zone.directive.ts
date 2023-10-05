@@ -5,7 +5,8 @@ import { ApprovalFlowNewNodePlacement } from '../approval-flow-add-node/approval
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fdp-approval-flow-drop-zone]',
-    exportAs: 'fdp-approval-flow-drop-zone'
+    exportAs: 'fdp-approval-flow-drop-zone',
+    standalone: true
 })
 export class ApprovalFlowDropZoneDirective {
     /** Approval flow new node placement */

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -84,7 +84,7 @@ interface ExampleRow {
         ListModule,
         FormItemComponent,
         FormLabelComponent,
-        FormControlModule,
+        FormControlComponent,
         SortByPipe,
         FilterPipe
     ]

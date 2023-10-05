@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
@@ -30,7 +30,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
         RouterLink,
         FormItemComponent,
         FormLabelComponent,
-        FormControlModule
+        FormControlComponent
     ]
 })
 export class InitialFocusDefaultExampleComponent {

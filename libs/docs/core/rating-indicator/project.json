@@ -1,5 +1,6 @@
 {
     "name": "docs-core-rating-indicator",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/rating-indicator",
     "projectType": "library",
     "prefix": "fundamental-ngx",

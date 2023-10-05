@@ -39,6 +39,9 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     /** Freezable column names and their respective indexes */
     abstract get _freezableColumns(): ReadonlyMap<string, number>;
 
+    /** Freezable column names and their respective indexes */
+    abstract get _freezableEndColumns(): ReadonlyMap<string, number>;
+
     /** Width of the table element in px */
     abstract get _tableWidthPx(): number;
 
@@ -101,7 +104,7 @@ export abstract class Table<T = any> implements PresetManagedComponent<PlatformT
     abstract freezeToColumn(columnKey: string, end?: boolean): void;
 
     /** Unfreeze column */
-    abstract unfreeze(columnKey: string): void;
+    abstract unfreeze(columnKey: string, end?: boolean): void;
 
     /** Search in all table columns */
     abstract search(searchInput: SearchInput): void;

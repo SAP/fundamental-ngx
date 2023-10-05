@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ObjectIdentifierComponent } from './object-identifier.component';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ObjectIdentifierComponent } from './object-identifier.component';
 
 @Component({
     selector: 'fd-test-object-identifier',
@@ -10,7 +10,9 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
         <fd-object-identifier #objectRef [medium]="medium" [bold]="bold" [description]="description">
             <a #linkRef fd-link>Link</a>
         </fd-object-identifier>
-    `
+    `,
+    standalone: true,
+    imports: [LinkComponent, ObjectIdentifierComponent]
 })
 class TestObjectIdentifierComponent {
     @ViewChild('objectRef', { read: ElementRef })
@@ -35,8 +37,7 @@ describe('ObjectIdentifierComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ObjectIdentifierComponent, TestObjectIdentifierComponent],
-            imports: [LinkComponent]
+            imports: [TestObjectIdentifierComponent]
         }).compileComponents();
     }));
 

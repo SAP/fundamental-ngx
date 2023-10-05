@@ -188,7 +188,16 @@ export class PopoverService extends BasePopoverClass {
     }
 
     /** method updating template or text inside rendered PopoverBody */
-    updateContent(stringContent: Nullable<string>, templateContent: Nullable<TemplateRef<any>>): void {
+    updateContent(
+        stringContent: Nullable<string> | Nullable<TemplateRef<any>>,
+        templateContent: Nullable<TemplateRef<any>>
+    ): void {
+        templateContent = !templateContent
+            ? typeof stringContent === 'string'
+                ? null
+                : stringContent
+            : templateContent;
+        stringContent = typeof stringContent === 'string' ? stringContent : null;
         this.stringContent = stringContent;
         this.templateContent = templateContent;
         if (this._getPopoverBody()) {
@@ -217,9 +226,7 @@ export class PopoverService extends BasePopoverClass {
 
     /** Method called to refresh position of opened popover */
     refreshPosition(): void {
-        if (this._overlayRef) {
-            this._overlayRef.updatePosition();
-        }
+        this._overlayRef?.updatePosition();
     }
 
     /** Temporary sets the ignoring of the event triggers. */
@@ -373,7 +380,8 @@ export class PopoverService extends BasePopoverClass {
             .position()
             .flexibleConnectedTo(this.appendTo || this._triggerElement)
             .withPositions(resultPosition)
-            .withPush(false);
+            .withPush(false)
+            .withGrowAfterOpen(true);
     }
 
     /** remove listeners from trigger element events */
@@ -505,6 +513,7 @@ export class PopoverService extends BasePopoverClass {
         body._closeOnEscapeKey = this.closeOnEscapeKey;
         body._bodyRole = this._bodyRole;
         body._bodyId = this._bodyId;
+        body._resizable = this.resizable;
         this._detectChanges();
     }
 

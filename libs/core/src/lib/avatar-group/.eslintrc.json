@@ -4,11 +4,6 @@
     "overrides": [
         {
             "files": ["*.ts"],
-            "extends": [
-                "plugin:@nx/angular",
-                "plugin:@angular-eslint/template/process-inline-templates",
-                "../../../../../.eslintrc-overrides.json"
-            ],
             "rules": {
                 "@angular-eslint/no-host-metadata-property": "off",
                 "@angular-eslint/directive-selector": [
@@ -28,7 +23,11 @@
                     }
                 ]
             },
-            "plugins": ["@angular-eslint/eslint-plugin", "@typescript-eslint"]
+            "extends": [
+                "plugin:@nx/angular",
+                "plugin:@angular-eslint/template/process-inline-templates",
+                "../../../../../.eslintrc-overrides.json"
+            ]
         },
         {
             "files": ["*.html"],

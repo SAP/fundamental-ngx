@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
@@ -10,7 +10,7 @@ import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
     templateUrl: './micro-process-flow-other-controls-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MicroProcessFlowModule, StatusIndicatorModule, AvatarModule, NgFor, InfoLabelModule]
+    imports: [MicroProcessFlowModule, StatusIndicatorModule, AvatarComponent, NgFor, InfoLabelModule]
 })
 export class MicroProcessFlowOtherControlsExampleComponent {
     /* eslint-disable max-len */

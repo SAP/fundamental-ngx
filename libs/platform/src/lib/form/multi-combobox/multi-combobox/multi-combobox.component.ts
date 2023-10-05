@@ -22,7 +22,7 @@ import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import equal from 'fast-deep-equal';
 
-import { DynamicComponentService, KeyUtil, warnOnce } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, KeyUtil, SearchHighlightPipe, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import {
     DATA_PROVIDERS,
@@ -35,22 +35,20 @@ import {
 } from '@fundamental-ngx/platform/shared';
 
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     ContentDensityModule,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FormControlModule, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { TokenModule, TokenizerComponent } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
-import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
@@ -88,9 +86,11 @@ let deprecationWarningShown = false;
         PopoverBodyComponent,
         FormInputMessageGroupComponent,
         InputGroupModule,
-        TokenModule,
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
         NgFor,
-        FormControlModule,
+        FormControlComponent,
         FormsModule,
         AutoCompleteDirective,
         FormMessageComponent,
@@ -254,11 +254,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._suggestions.find((s) => s.value === token.value);
-        if (optionItem) {
-            this.toggleSelection(optionItem);
-            this._rangeSelector.reset();
-        }
+        this.toggleSelection(token);
+        this._rangeSelector.reset();
     }
 
     /** @hidden */
@@ -417,12 +414,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.mobileControlTemplate },
-            PlatformMultiComboboxMobileModule,
             MultiComboboxMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 }

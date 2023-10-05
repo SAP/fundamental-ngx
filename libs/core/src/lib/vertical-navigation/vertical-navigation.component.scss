@@ -13,4 +13,23 @@ $block: fd-vertical-nav;
             z-index: 1001;
         }
     }
+    // Since navigation item holds inner subtree, we need to use pseudoelement with strict height for focus outline.
+    .fd-list__navigation-item {
+        &:focus {
+            outline: none;
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                outline-offset: var(--fdVerticalNav_Item_Focus_Outline_Offset);
+                outline-color: var(--sapContent_FocusColor);
+                outline-style: var(--sapContent_FocusStyle);
+                outline-width: var(--sapContent_FocusWidth);
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2.75rem;
+            }
+        }
+    }
 }

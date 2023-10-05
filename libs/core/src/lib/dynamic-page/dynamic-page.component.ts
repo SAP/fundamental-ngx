@@ -16,22 +16,24 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
-import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
-import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
-import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
-import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
-import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
-import { DynamicPageService } from './dynamic-page.service';
-import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
-import { TabListComponent } from '@fundamental-ngx/core/tabs';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import {
     FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT,
     FlexibleColumnLayoutComponent
 } from '@fundamental-ngx/core/flexible-column-layout';
+import { TabListComponent } from '@fundamental-ngx/core/tabs';
+import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
+import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
+import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
+import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
+import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
+import { DynamicPageWrapperDirective } from './dynamic-page-wrapper.directive';
+import { DynamicPageService } from './dynamic-page.service';
+import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
 import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
 
@@ -41,9 +43,15 @@ import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
     styleUrls: ['./dynamic-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [DynamicPageService]
+    providers: [DynamicPageService],
+    standalone: true,
+    imports: [NgIf, CdkScrollable, ScrollbarDirective]
 })
 export class DynamicPageComponent implements AfterViewInit, OnDestroy {
+    /** Whether DynamicPage should snap on scroll */
+    @Input()
+    disableSnapOnScroll = false;
+
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
@@ -123,6 +131,10 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     _dynamicPageElement: ElementRef;
 
     /** @hidden */
+    @ViewChild(ScrollbarDirective)
+    _scrollbar: ScrollbarDirective;
+
+    /** @hidden */
     _headerCollapsible = true;
 
     /** @hidden **/
@@ -147,7 +159,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
         this._propagatePropertiesToChildren();
         this._setContentFooterSpacer();
 
-        if (this._pageSubheaderComponent?.collapsible) {
+        if (!this.disableSnapOnScroll && this._pageSubheaderComponent?.collapsible) {
             this._addScrollListeners();
         }
 
@@ -179,6 +191,11 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     refreshSize(): void {
         this._setContainerPositions();
         this._sizeChangeHandle();
+    }
+
+    /** @hidden */
+    _getScrollElement(): HTMLElement | null {
+        return this._tabComponent?._scrollbar.elementRef.nativeElement || this._scrollbar?.elementRef.nativeElement;
     }
 
     /** Set the positions of the tabs and content with respect to the window */
@@ -245,28 +262,17 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _addScrollListeners(): void {
-        const tabElement = this._tabComponent?.contentContainer?.nativeElement;
-        if (tabElement) {
-            this._listenOnScroll(tabElement);
-            return;
+        const element = this._getScrollElement();
+        if (element) {
+            fromEvent(element, 'scroll')
+                .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+                .subscribe(() => {
+                    const collapse =
+                        !this._dynamicPageService.pinned.value &&
+                        (element.scrollTop > 0 || element.scrollHeight <= element.clientHeight);
+                    this._dynamicPageService.collapsed.next(collapse);
+                });
         }
-
-        const contentElement = this._contentComponent.first?.elementRef?.nativeElement;
-        if (contentElement) {
-            this._listenOnScroll(contentElement);
-        }
-    }
-
-    /** @hidden */
-    private _listenOnScroll(element: HTMLElement): void {
-        fromEvent(element, 'scroll')
-            .pipe(debounceTime(10), takeUntil(this._onDestroy$))
-            .subscribe(() => {
-                const collapse =
-                    !this._dynamicPageService.pinned.value &&
-                    (element.scrollTop > 0 || element.scrollHeight <= element.clientHeight);
-                this._dynamicPageService.collapsed.next(collapse);
-            });
     }
 
     /** @hidden Listen for window resize and adjust tab and content positions accordingly */

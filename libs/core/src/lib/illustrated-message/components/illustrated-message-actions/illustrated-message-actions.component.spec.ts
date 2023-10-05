@@ -8,7 +8,7 @@ describe('IllustratedMessageActionsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [IllustratedMessageActionsComponent]
+            imports: [IllustratedMessageActionsComponent]
         }).compileComponents();
     });
 

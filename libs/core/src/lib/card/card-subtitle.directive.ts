@@ -1,12 +1,12 @@
-import { OnInit, ElementRef, Directive } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { Directive, ElementRef, OnInit } from '@angular/core';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 import { CLASS_NAME } from './constants';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-card-subtitle]'
+    selector: '[fd-card-subtitle]',
+    standalone: true
 })
 export class CardSubtitleDirective implements OnInit, CssClassBuilder {
     /** @hidden */

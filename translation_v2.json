@@ -1,0 +1,20 @@
+{
+    "comment": "Translation configuration for fundamental-ngx",
+    "collections": [
+        {
+            "collectionName": "Fundamental-NGX",
+            "folders": [
+                {
+                    "startingFolderPath": "./libs/i18n/src/lib/translations",
+                    "sourceFilters": ["**/*.json"]
+                }
+            ]
+        }
+    ],
+    "defaultConfiguration": {
+        "targetFolderPath": ".",
+        "pseudoLocFolderPath": ".",
+        "oneQFolderPath": ".",
+        "targetFileNamingConvention": "[filename]_[langCode].[extension]"
+    }
+}

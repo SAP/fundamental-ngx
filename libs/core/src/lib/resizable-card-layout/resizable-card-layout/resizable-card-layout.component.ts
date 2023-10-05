@@ -1,3 +1,4 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -16,20 +17,19 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import {
-    horizontalResizeStep,
-    gap,
-    ResizedEvent,
     ResizableCardItemComponent,
     ResizableCardItemConfig,
-    verticalResizeStep,
-    horizontalResizeOffset
+    ResizedEvent,
+    gap,
+    horizontalResizeOffset,
+    horizontalResizeStep,
+    verticalResizeStep
 } from './resizable-card-item/resizable-card-item.component';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 export type LayoutSize = 'sm' | 'md' | 'lg' | 'xl';
 export type ResizableCardLayoutConfig = Array<ResizableCardItemConfig>;
@@ -39,7 +39,8 @@ export type ResizableCardLayoutConfig = Array<ResizableCardItemConfig>;
     templateUrl: 'resizable-card-layout.component.html',
     styleUrls: ['./resizable-card-layout.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class ResizableCardLayoutComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
     /** Object for setting each card property */

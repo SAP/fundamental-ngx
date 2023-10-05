@@ -28,25 +28,42 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { AsyncPipe, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
 import {
     DndListDirective,
+    DragAndDropModule,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
     FocusableGridDirective,
+    FocusableGridDirective as FocusableGridDirective_1,
+    IntersectionSpyDirective,
     KeyUtil,
     Nullable,
     RangeSelector,
+    RepeatDirective,
     resizeObservable,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { TableComponent as FdTableComponent } from '@fundamental-ngx/core/table';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import {
+    TableComponent as CoreTableComponent,
+    TableService as CoreTableService,
+    TableComponent as FdTableComponent,
+    TableBodyDirective,
+    TableCellDirective,
+    TableHeaderDirective,
+    TableRowDirective
+} from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { FDP_PRESET_MANAGED_COMPONENT, isJsObject } from '@fundamental-ngx/platform/shared';
 import {
+    applySelectionToChildren,
     buildNewRowSkeleton,
     CollectionFilter,
     CollectionGroup,
@@ -70,6 +87,7 @@ import {
     isTreeRowFirstCell,
     PlatformTableManagedPreset,
     ROW_HEIGHT,
+    RowClassesPipe,
     RowComparator,
     SaveRowsEvent,
     SELECTION_COLUMN_WIDTH,
@@ -98,6 +116,7 @@ import {
     TableRowToggleOpenStateEvent,
     TableRowType,
     TableScrollable,
+    TableScrollableDirective,
     TableScrollDispatcherService,
     TableService,
     TableSortChangeEvent,
@@ -108,6 +127,11 @@ import equal from 'fast-deep-equal';
 import { BehaviorSubject, fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { TABLE_TOOLBAR, TableToolbarInterface } from './components';
+import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
+import { TableGroupRowComponent } from './components/table-group-row/table-group-row.component';
+import { TableHeaderRowComponent } from './components/table-header-row/table-header-row.component';
+import { TablePoppingRowComponent } from './components/table-popping-row/table-popping-row.component';
+import { TableRowComponent } from './components/table-row/table-row.component';
 
 interface ToolbarContext {
     counter: Observable<number>;
@@ -159,6 +183,7 @@ let tableUniqueId = 0;
         { provide: Table, useExisting: forwardRef(() => TableComponent) },
         TableRowService,
         TableService,
+        CoreTableService,
         TableScrollDispatcherService,
         TableColumnResizeService,
         TableResponsiveService,
@@ -192,7 +217,36 @@ let tableUniqueId = 0;
         class: 'fdp-table',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        BusyIndicatorComponent,
+        PlatformTableColumnResizerComponent,
+        TableScrollableDirective,
+        FocusableGridDirective_1,
+        CoreTableComponent,
+        TableHeaderDirective,
+        TableHeaderRowComponent,
+        TableBodyDirective,
+        DragAndDropModule,
+        NgFor,
+        NgSwitch,
+        NgSwitchCase,
+        TableGroupRowComponent,
+        NgSwitchDefault,
+        TableRowComponent,
+        TablePoppingRowComponent,
+        RepeatDirective,
+        TableRowDirective,
+        TableCellDirective,
+        SkeletonComponent,
+        IntersectionSpyDirective,
+        AsyncPipe,
+        FdTranslatePipe,
+        RowClassesPipe
+    ]
 })
 export class TableComponent<T = any>
     extends Table<T>
@@ -1404,7 +1458,7 @@ export class TableComponent<T = any>
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T> | null, event: KeyboardEvent | MouseEvent): void {
+    _onRowClick(row: TableRow<T> | null, event: Event): void {
         if (row && row.state !== 'readonly') {
             return;
         }
@@ -1763,7 +1817,6 @@ export class TableComponent<T = any>
         this._tableRows = [...this._newTableRows, ...this._dataSourceTableRows];
         this._reIndexTableRows();
         this.onTableRowsChanged();
-
         this._calculateIsShownNavigationColumn();
         this._rangeSelector.reset();
 
@@ -1930,11 +1983,19 @@ export class TableComponent<T = any>
 
         while (currentRow) {
             const children = findRowChildren(currentRow, this._tableRows).filter((r) => r.parent === currentRow);
-            const totalChecked = children.filter((r) => r.checked);
+            const totalChecked: TableRow<T>[] = [];
+            const totalIndeterminate: TableRow<T>[] = [];
+            children.forEach((r) => {
+                if (r.checked === true) {
+                    totalChecked.push(r);
+                } else if (r.checked === null) {
+                    totalIndeterminate.push(r);
+                }
+            });
             const checkedAll = totalChecked.length === children.length;
             const checkedAny = totalChecked.length > 0;
 
-            currentRow.checked = checkedAll ? true : checkedAny ? null : false;
+            currentRow.checked = checkedAll ? true : checkedAny || totalIndeterminate.length > 0 ? null : false;
             currentRow.checked || currentRow.checked === null
                 ? addedRows.push(currentRow)
                 : removedRows.push(currentRow);
@@ -1945,12 +2006,7 @@ export class TableComponent<T = any>
 
     /** @hidden */
     private _applySelectionToChildren(row: TableRow, addedRows: TableRow<T>[], removedRows: TableRow<T>[]): void {
-        const allChilren = findRowChildren(row, this._tableRows);
-
-        allChilren.forEach((r) => {
-            r.checked = row.checked;
-            r.checked ? addedRows.push(r) : removedRows.push(r);
-        });
+        applySelectionToChildren(this._tableRows, row, addedRows, removedRows);
     }
 
     /** @hidden */

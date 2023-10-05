@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { TableP13DialogComponent } from './table-p13-dialog.component';
 
 describe('TableP13DialogComponent', () => {
@@ -9,8 +8,7 @@ describe('TableP13DialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule],
-            declarations: [TableP13DialogComponent]
+            imports: [TableP13DialogComponent]
         }).compileComponents();
     }));
 

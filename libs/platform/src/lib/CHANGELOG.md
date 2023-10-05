@@ -3,6 +3,423 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.71...v0.46.0-rc.72) (2023-10-04)
+
+
+### Bug Fixes
+
+* **docs,core:** various defect hunt issues ([#10655](https://github.com/SAP/fundamental-ngx/issues/10655)) ([0df8db7](https://github.com/SAP/fundamental-ngx/commit/0df8db70f37d8a0027f37ac92434a7a30acb3c2b))
+
+
+
+
+
+# [0.46.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.70...v0.46.0-rc.71) (2023-10-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.69...v0.46.0-rc.70) (2023-10-04)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.68...v0.46.0-rc.69) (2023-10-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.67...v0.46.0-rc.68) (2023-10-03)
+
+
+### Bug Fixes
+
+* **platform:** column freezing/unfreezing while resizing now behaves the same as ui5 ([#10607](https://github.com/SAP/fundamental-ngx/issues/10607)) ([8badcf2](https://github.com/SAP/fundamental-ngx/commit/8badcf28b725b93ad83983c2b217079b09b1c563))
+
+
+
+
+
+# [0.46.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.66...v0.46.0-rc.67) (2023-10-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.65...v0.46.0-rc.66) (2023-10-03)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.64...v0.46.0-rc.65) (2023-10-02)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.62...v0.46.0-rc.64) (2023-09-29)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.61...v0.46.0-rc.62) (2023-09-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.60...v0.46.0-rc.61) (2023-09-28)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.59...v0.46.0-rc.60) (2023-09-27)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.58...v0.46.0-rc.59) (2023-09-26)
+
+
+### Features
+
+* **i18n:** using json formats as a source for tew and added resolve utilities ([#10571](https://github.com/SAP/fundamental-ngx/issues/10571)) ([5fa5e37](https://github.com/SAP/fundamental-ngx/commit/5fa5e37746429f926a38a9f36fb277bd55618ccc))
+
+
+
+
+
+# [0.46.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.57...v0.46.0-rc.58) (2023-09-26)
+
+
+### Features
+
+* **platform:** migration to standalone api ([#10595](https://github.com/SAP/fundamental-ngx/issues/10595)) ([4fd75e6](https://github.com/SAP/fundamental-ngx/commit/4fd75e63e39b813952888a9351b0215678315e51))
+
+
+
+
+
+# [0.46.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.56...v0.46.0-rc.57) (2023-09-25)
+
+
+### Features
+
+* **platform:** icon tab bar horizon update ([#10594](https://github.com/SAP/fundamental-ngx/issues/10594)) ([1296d39](https://github.com/SAP/fundamental-ngx/commit/1296d3960d0ceaaa2ea525925c8e2927f2d82c8d))
+
+
+
+
+
+# [0.46.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.55...v0.46.0-rc.56) (2023-09-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.54...v0.46.0-rc.55) (2023-09-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.53...v0.46.0-rc.54) (2023-09-22)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.52...v0.46.0-rc.53) (2023-09-22)
+
+
+### Features
+
+* **core:** complete standalone migration ([#10578](https://github.com/SAP/fundamental-ngx/issues/10578)) ([183de4d](https://github.com/SAP/fundamental-ngx/commit/183de4d0e07faeb6b08001ae9a35c73ec24b4412))
+
+
+### BREAKING CHANGES
+
+* **core:** - `DynamicComponentService` is now provided in root;
+- `ActionSheetMobileModule` has been removed. Instead use `ActionSheetMobileComponent`;
+- `MenuMobileModule` has been removed. Instead use `MenuMobileComponent`;
+- `MobileMultiComboboxModule` has been removed. Instead use `MobileMultiComboboxComponent`;
+- `TimelineNodeHeaderInfoComponent` has been removed in favor of `TimelineNodeHeaderDirective`;
+- `TimelineNodeHeaderComponent` has been removed in favor of `TimelineNodeHeaderDirective`;
+
+
+
+
+
+# [0.46.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.51...v0.46.0-rc.52) (2023-09-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.50...v0.46.0-rc.51) (2023-09-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.49...v0.46.0-rc.50) (2023-09-21)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.48...v0.46.0-rc.49) (2023-09-20)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.47...v0.46.0-rc.48) (2023-09-18)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.46...v0.46.0-rc.47) (2023-09-15)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.45...v0.46.0-rc.46) (2023-09-15)
+
+
+### Features
+
+* **core:** avatar component horizon update ([#10553](https://github.com/SAP/fundamental-ngx/issues/10553)) ([b3b3533](https://github.com/SAP/fundamental-ngx/commit/b3b3533b04a6bb83dd40be5ad69e0186244616f7))
+
+
+
+
+
+# [0.46.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.44...v0.46.0-rc.45) (2023-09-14)
+
+
+### Bug Fixes
+
+* **platform:** table initial selection hydration ([#10544](https://github.com/SAP/fundamental-ngx/issues/10544)) ([81e4c3b](https://github.com/SAP/fundamental-ngx/commit/81e4c3b9f3f1e3753b1f75ed7cbb27b070b12405))
+
+
+
+
+
+# [0.46.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.43...v0.46.0-rc.44) (2023-09-14)
+
+
+### Features
+
+* **core:** token standalone migration ([#10546](https://github.com/SAP/fundamental-ngx/issues/10546)) ([fee2bf0](https://github.com/SAP/fundamental-ngx/commit/fee2bf0ee929e9429c933d501c686358dde62c1c))
+
+
+
+
+
+# [0.46.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.42...v0.46.0-rc.43) (2023-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.41...v0.46.0-rc.42) (2023-09-13)
+
+
+### Features
+
+* **core,platform:** object status horizon update ([#10539](https://github.com/SAP/fundamental-ngx/issues/10539)) ([6ad5198](https://github.com/SAP/fundamental-ngx/commit/6ad5198e58c09a9673f82bb177e513db9f3e0a31))
+
+
+### BREAKING CHANGES
+
+* **core,platform:** - Core Object Status now uses `ColorAccent` type as `indicationColor` property type;
+- Content projection has been removed from Core Object Status;
+- `IndicationColorType` from `@fundamental-ngx/platform/object-status` now extended to max number of 10.
+- To provide custom complex text template for Core Object Status, use `textTemplate` input property of `fd-object-status` to pass custom TemplateRef;
+- To provide custom complex text template for Platform Object Status, use `<ng-template fdpObjectStatusText>...</ng-template>` content-projected template.
+
+
+
+
+
+# [0.46.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.40...v0.46.0-rc.41) (2023-09-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.39...v0.46.0-rc.40) (2023-09-12)
+
+
+### Bug Fixes
+
+* **platform:** add aria-selected to multiselect first td ([#10490](https://github.com/SAP/fundamental-ngx/issues/10490)) ([5192893](https://github.com/SAP/fundamental-ngx/commit/5192893ec526599dab63216ee442682454da9b07))
+* **platform:** console error when opening platform select ([#10419](https://github.com/SAP/fundamental-ngx/issues/10419)) ([6c8cc83](https://github.com/SAP/fundamental-ngx/commit/6c8cc83c5316af9f762f76466a9488c58c07c1d6))
+* **platform:** fixed multi combobox async value selection token ([#10456](https://github.com/SAP/fundamental-ngx/issues/10456)) ([6c671ed](https://github.com/SAP/fundamental-ngx/commit/6c671eddd65f7bf953e1e601b442a5516fabe8e3))
+* **platform:** screenreader only span for empty platform table cells ([#10512](https://github.com/SAP/fundamental-ngx/issues/10512)) ([2555798](https://github.com/SAP/fundamental-ngx/commit/2555798b8af86937d94ff4ebfe0ebf1b2cf1acc7))
+* **platform:** search field accessibility improvements ([#10515](https://github.com/SAP/fundamental-ngx/issues/10515)) ([0c40875](https://github.com/SAP/fundamental-ngx/commit/0c40875289eca61da856a47d2ed0a133ea5c9151))
+
+
+
+
+
+# [0.46.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.38...v0.46.0-rc.39) (2023-09-12)
+
+
+### Bug Fixes
+
+* **platform:** checkbox column tabindex ([#10532](https://github.com/SAP/fundamental-ngx/issues/10532)) ([8869d42](https://github.com/SAP/fundamental-ngx/commit/8869d42e8121235efe05487e8160bef38e9f47e7))
+
+
+
+
+
+# [0.46.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.37...v0.46.0-rc.38) (2023-09-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.36...v0.46.0-rc.37) (2023-09-11)
+
+
+### Features
+
+* **core,platform:** ability to disable snap-on-scroll on dynamic page ([#10517](https://github.com/SAP/fundamental-ngx/issues/10517)) ([e95be7c](https://github.com/SAP/fundamental-ngx/commit/e95be7ce635303baf33696cb553e74c395a9eee2))
+
+
+
+
+
+# [0.46.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.35...v0.46.0-rc.36) (2023-09-11)
+
+
+### Bug Fixes
+
+* **platform:** fix freeze functionality ([#10529](https://github.com/SAP/fundamental-ngx/issues/10529)) ([b2949fb](https://github.com/SAP/fundamental-ngx/commit/b2949fbd790fa43ba67fe17db0165a34d5ceb8dd))
+
+
+
+
+
+# [0.46.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.33...v0.46.0-rc.35) (2023-09-11)
+
+
+### Bug Fixes
+
+* **core,platform:** add role="row" and aria-expanded to tr elements ([#10491](https://github.com/SAP/fundamental-ngx/issues/10491)) ([463c8d6](https://github.com/SAP/fundamental-ngx/commit/463c8d6ba04addf8d9bd02be48a930d91986a7bd))
+* **core,platform:** multi-input aria-label ([#10496](https://github.com/SAP/fundamental-ngx/issues/10496)) ([a1a3089](https://github.com/SAP/fundamental-ngx/commit/a1a3089d425fb4fc3bec3ada4634fcf600c1b867))
+
+
+### Features
+
+* **platform:** table tree nodes are operable using left and right arrow keys ([#10480](https://github.com/SAP/fundamental-ngx/issues/10480)) ([aad5825](https://github.com/SAP/fundamental-ngx/commit/aad5825c94b38338589fafc46027ece1c635e2f3))
+
+
+
+
+
+# [0.46.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.33...v0.46.0-rc.34) (2023-09-10)
+
+
+### Bug Fixes
+
+* **core,platform:** add role="row" and aria-expanded to tr elements ([#10491](https://github.com/SAP/fundamental-ngx/issues/10491)) ([463c8d6](https://github.com/SAP/fundamental-ngx/commit/463c8d6ba04addf8d9bd02be48a930d91986a7bd))
+* **core,platform:** multi-input aria-label ([#10496](https://github.com/SAP/fundamental-ngx/issues/10496)) ([a1a3089](https://github.com/SAP/fundamental-ngx/commit/a1a3089d425fb4fc3bec3ada4634fcf600c1b867))
+
+
+
+
+
+# [0.46.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.32...v0.46.0-rc.33) (2023-09-08)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.31...v0.46.0-rc.32) (2023-09-08)
+
+
+### Bug Fixes
+
+* **platform:** some improvements to search field and VHD aria labels ([#10494](https://github.com/SAP/fundamental-ngx/issues/10494)) ([b79ca76](https://github.com/SAP/fundamental-ngx/commit/b79ca765dacfa444c1a93c382077e1fd311f4d0e))
+
+
+
+
+
+# [0.46.0-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.30...v0.46.0-rc.31) (2023-09-08)
+
+
+### Features
+
+* **core:** adoption of horizon 2023 specs in menu ([#9993](https://github.com/SAP/fundamental-ngx/issues/9993)) ([add601c](https://github.com/SAP/fundamental-ngx/commit/add601ca147d47a90f2c068b3585b1d2b0bbb98c))
+
+
+### BREAKING CHANGES
+
+* **core:** `fd-menu-separator` is removed and `li[fd-menu-item][hasSeparator]` should be used
+
+
+
+
+
 # [0.46.0-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.29...v0.46.0-rc.30) (2023-09-08)
 
 
