@@ -44,6 +44,10 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Eingabe mehrerer Werte',
+        noResults: 'No results.',
+        navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
+        escapeNavigateTokens:
+            'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
         tokensCountText: ({ length }) => {
             if (length === 0) {
                 return 'Enthält no token';
