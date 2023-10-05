@@ -132,8 +132,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             srElement.innerText = content;
         } else if (content) {
             this._srViewRef = content.createEmbeddedView(null);
-            this._viewContainerRef.insert(this._srViewRef);
-            srElement = this._srViewRef.rootNodes[0];
+            if (this._srViewRef.rootNodes[0] instanceof Text) {
+                srElement.innerText = this._srViewRef.rootNodes[0].textContent;
+            } else {
+                srElement = this._srViewRef.rootNodes[0];
+            }
         }
 
         if (srElement.style) {

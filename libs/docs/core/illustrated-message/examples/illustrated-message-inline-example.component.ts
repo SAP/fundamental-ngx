@@ -1,5 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IllustratedMessageModule, SvgConfig } from '@fundamental-ngx/core/illustrated-message';
 import { getAsset } from '@fundamental-ngx/docs/shared';
 import { zip } from 'rxjs';
@@ -11,13 +11,14 @@ const dialogSvg = 'assets/images/sapIllus-Dialog-NoMail.svg';
     selector: 'fd-illustrated-message-inline-example',
     templateUrl: './illustrated-message-inline-example.component.html',
     standalone: true,
-    imports: [IllustratedMessageModule, ButtonModule]
+    imports: [IllustratedMessageModule, ButtonComponent]
 })
 export class IllustratedMessageInlineExampleComponent implements AfterViewInit {
     sceneConfig: SvgConfig;
+    assets = [getAsset(sceneSvg), getAsset(dialogSvg)];
 
     async ngAfterViewInit() {
-        zip(getAsset(sceneSvg), getAsset(dialogSvg)).subscribe(([scene, dialog]) => {
+        zip(...this.assets).subscribe(([scene, dialog]) => {
             this.sceneConfig = {
                 scene: { file: scene, id: 'sapIllus-Scene-NoMail-1' },
                 dialog: { file: dialog, id: 'sapIllus-Dialog-NoMail' }
