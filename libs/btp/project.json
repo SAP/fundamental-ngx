@@ -1,0 +1,48 @@
+{
+    "name": "btp",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/btp",
+    "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:fdb"],
+    "projectType": "library",
+    "targets": {
+        "prepare": {
+            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+            "options": {
+                "distPath": "dist/libs/btp"
+            }
+        },
+        "compile-typedoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "options": {
+                "outputPath": "libs/docs/typedoc/btp"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/btp"],
+            "options": {
+                "tsConfig": "libs/btp/tsconfig.lib.json",
+                "project": "libs/btp/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/btp/tsconfig.lib.prod.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/btp/src/lib/**/*.ts",
+                    "libs/btp/src/lib/**/*.html",
+                    "libs/btp/navigation/**/*.ts",
+                    "libs/btp/navigation/**/*.html"
+                ]
+            }
+        }
+    }
+}
