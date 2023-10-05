@@ -1,5 +1,6 @@
 {
     "name": "docs-core-tree",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/tree",
     "projectType": "library",
     "prefix": "fundamental-ngx",

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-avatar-group",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/avatar-group",
     "projectType": "library",
     "prefix": "fdp-doc",
@@ -10,7 +11,7 @@
                 "e2eFiles": ["libs/docs/core/avatar-group/e2e/**/*.e2e-spec.ts"],
                 "devServerTarget": "docs:serve:e2e"
             },
-            "outputs": ["allure-results/docs-core-avatar-group"]
+            "outputs": ["{workspaceRoot}/allure-results/docs-core-avatar-group"]
         }
     },
     "tags": ["type:lib", "scope:docs"]

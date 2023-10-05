@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-split-menu-button",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/split-menu-button",
     "projectType": "library",
     "prefix": "fdp-doc",

@@ -89,7 +89,7 @@ jobs:
               with:
                   parallel-commands: |
                       npx nx run-many --target=lint --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx --parallel=2
-                      npx nx run-many --target=build-umbrella --all --parallel=1
+                      npx nx run-many --target=build --all --parallel=1
 
             - name: Pack libraries
               run: npx nx run-many --target=prepare --projects=i18n,cdk,core,platform,moment-adapter,datetime-adapter,cx --parallel=3 --projectVersion=${{ steps.bumpVersion.outputs.newVersion }} --pack
@@ -155,7 +155,7 @@ jobs:
               uses: ./.github/actions/nodejs
 
             - name: Run build prod
-              run: npx nx run-many --target=build --projects=docs --configuration=production
+              run: npx nx run docs:compile:production
 
             - name: Publish to gh-pages
               uses: JamesIves/github-pages-deploy-action@v4

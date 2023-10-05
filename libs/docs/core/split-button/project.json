@@ -1,5 +1,6 @@
 {
     "name": "docs-core-split-button",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/split-button",
     "projectType": "library",
     "prefix": "fundamental-ngx",

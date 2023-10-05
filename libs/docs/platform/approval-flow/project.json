@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-approval-flow",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/approval-flow",
     "projectType": "library",
     "prefix": "fdp-doc",

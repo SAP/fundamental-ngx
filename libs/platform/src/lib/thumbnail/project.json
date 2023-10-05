@@ -5,20 +5,6 @@
     "sourceRoot": "libs/platform/src/lib/thumbnail",
     "prefix": "fdp",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/libs/platform/thumbnail"],
-            "options": {
-                "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
-                "project": "libs/platform/src/lib/thumbnail/ng-package.json",
-                "updateBuildableProjectDepsInPackageJson": false
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.prod.json"
-                }
-            }
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {
