@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.73...v0.46.0-rc.74) (2023-10-05)
+
+
+### Features
+
+* add German language support ([#10660](https://github.com/SAP/fundamental-ngx/issues/10660)) ([0d1c686](https://github.com/SAP/fundamental-ngx/commit/0d1c686c82628488294e1b09952330e9ae0627a8))
+
+
+
+
+
 # [0.46.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.72...v0.46.0-rc.73) (2023-10-05)
 
 
