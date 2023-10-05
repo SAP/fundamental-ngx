@@ -1,1 +1,19 @@
-<p>Basic example is here</p>
+<fdb-navigation [style.width]="'fit-content'">
+    <a fdb-navigation-link *fdbNavigationHome> Home </a>
+    <ul fdb-navigation-list>
+        <li fd-navigation-list-item>
+            <a fdb-navigation-link glyph="survey" routerLink="/btp/new-component"> New Component </a>
+        </li>
+        <li fd-navigation-list-item>
+            <a fdb-navigation-link glyph="list" routerLink="/btp/navigation"> Navigation </a>
+            <ul fdb-navigation-list>
+                <li fd-navigation-list-item>
+                    <a fdb-navigation-link glyph="survey" routerLink="/btp/new-component"> New Component </a>
+                </li>
+                <li fd-navigation-list-item>
+                    <a fdb-navigation-link glyph="list" routerLink="/btp/navigation"> Navigation </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</fdb-navigation>
