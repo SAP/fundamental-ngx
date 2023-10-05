@@ -74,6 +74,9 @@ export interface FdLanguage {
     coreMultiInput: {
         multiInputAriaLabel: FdLanguageKey;
         tokensCountText: FdLanguageKey;
+        noResults: FdLanguageKey;
+        navigateSelectionsWithArrows: FdLanguageKey;
+        escapeNavigateTokens: FdLanguageKey;
     };
     coreNavigation: {
         mainNavigation: FdLanguageKey;

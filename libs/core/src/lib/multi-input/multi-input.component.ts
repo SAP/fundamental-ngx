@@ -9,6 +9,8 @@ import {
     EventEmitter,
     forwardRef,
     HostListener,
+    inject,
+    Inject,
     Injector,
     Input,
     isDevMode,
@@ -24,7 +26,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import {
@@ -51,13 +53,20 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
 
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import {
+    FD_LANGUAGE,
+    FdLanguage,
+    FdLanguageKeyIdentifier,
+    FdTranslatePipe,
+    TranslationResolver
+} from '@fundamental-ngx/i18n';
 import get from 'lodash-es/get';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
@@ -426,6 +435,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     _dir: string;
 
+    /** @hidden */
+    private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
+
     /** typeahead matcher function */
     get typeAheadMatcher(): (item: string, searchTerm: string) => boolean {
         if (this.includes) {
@@ -441,6 +453,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
+    private _noResultsAnnounced = false;
+
+    /** @hidden */
+    private _translationResolver = new TranslationResolver();
+
+    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -448,6 +466,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
+        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
@@ -973,6 +992,34 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 displayedOptions.forEach((c) => (c.isSelected = this._selectionModel.isSelected(c.id)));
                 return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
+        );
+    }
+
+    /** @hidden */
+    _makeSearchTermChangeAnnouncements(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
+            this._liveAnnouncer.clear();
+            const filtered = this.filterFn(this.dropdownValues, this.searchTerm);
+            if (!filtered.length && !this._noResultsAnnounced) {
+                this._makeAnnouncement('noResults');
+                this._noResultsAnnounced = true;
+            } else if (filtered.length) {
+                this._makeAnnouncement('navigateSelectionsWithArrows');
+                this._noResultsAnnounced = false;
+            }
+            if (this.tokenizer?.tokenList?.length) {
+                this._makeAnnouncement('escapeNavigateTokens');
+            }
+        }
+    }
+
+    /** @hidden */
+    private async _makeAnnouncement(message: string): Promise<void> {
+        await this._liveAnnouncer.announce(
+            this._translationResolver.resolve(
+                await firstValueFrom(this._language),
+                ('coreMultiInput.' + message) as FdLanguageKeyIdentifier
+            )
         );
     }
 }
