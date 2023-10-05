@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.72...v0.46.0-rc.73) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** add role="button" to show all link ([#10658](https://github.com/SAP/fundamental-ngx/issues/10658)) ([9cad0ed](https://github.com/SAP/fundamental-ngx/commit/9cad0ed16638b7d4d74c0a0167800f81bc42d4c0))
+
+
+
+
+
 # [0.46.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.71...v0.46.0-rc.72) (2023-10-04)
 
 
