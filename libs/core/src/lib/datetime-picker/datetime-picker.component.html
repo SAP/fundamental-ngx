@@ -52,9 +52,7 @@
         >
             <ng-container *ngIf="_showPopoverContents">
                 <div class="fd-datetime__wrapper">
-                    <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
-                        {{ _message }}
-                    </fd-form-message>
+                    <ng-template [ngTemplateOutlet]="formMessageTemplate"></ng-template>
                     <div class="fd-datetime__display-type-switcher">
                         <fd-segmented-button [(ngModel)]="_displayType">
                             <button
@@ -134,3 +132,9 @@
         </fd-popover-body>
     </fd-popover>
 </div>
+
+<ng-template #formMessageTemplate>
+    <fd-form-message id="fd-form-message" [embedded]="true" *ngIf="_message" [type]="state">
+        {{ _message }}
+    </fd-form-message>
+</ng-template>
