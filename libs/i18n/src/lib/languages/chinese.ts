@@ -143,7 +143,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         ariaRoleDescription: '标签'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }}项更多'
+        moreLabel: '{{ count }}项更多',
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: '确定',

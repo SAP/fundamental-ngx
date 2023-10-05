@@ -157,7 +157,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
                 return '1 artikuj më shumë';
             }
             return `${count} artikuj të tjerë`;
-        }
+        },
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',
