@@ -456,6 +456,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private _noResultsAnnounced = false;
 
     /** @hidden */
+    private _resultsAnnounced = false;
+
+    /** @hidden */
     private _translationResolver = new TranslationResolver();
 
     /** @hidden */
@@ -1003,9 +1006,11 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             if (!filtered.length && !this._noResultsAnnounced) {
                 this._makeAnnouncement('noResults');
                 this._noResultsAnnounced = true;
-            } else if (filtered.length) {
+                this._resultsAnnounced = false;
+            } else if (filtered.length && !this._resultsAnnounced) {
                 this._makeAnnouncement('navigateSelectionsWithArrows');
                 this._noResultsAnnounced = false;
+                this._resultsAnnounced = true;
             }
             if (this.tokenizer?.tokenList?.length) {
                 this._makeAnnouncement('escapeNavigateTokens');
@@ -1019,7 +1024,8 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
             this._translationResolver.resolve(
                 await firstValueFrom(this._language),
                 ('coreMultiInput.' + message) as FdLanguageKeyIdentifier
-            )
+            ),
+            10000
         );
     }
 }
