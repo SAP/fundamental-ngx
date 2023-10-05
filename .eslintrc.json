@@ -18,6 +18,10 @@
                                 "onlyDependOnLibsWithTags": ["scope:fd", "scope:i18n", "scope:cdk"]
                             },
                             {
+                                "sourceTag": "scope:fdb",
+                                "onlyDependOnLibsWithTags": ["scope:fd", "scope:fdb", "scope:i18n", "scope:cdk"]
+                            },
+                            {
                                 "sourceTag": "scope:fdp",
                                 "onlyDependOnLibsWithTags": ["scope:fd", "scope:fdp", "scope:i18n", "scope:cdk"]
                             },
