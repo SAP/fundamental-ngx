@@ -20,7 +20,6 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
         </ng-container>
         <span class="fd-navigation__text"><ng-content></ng-content></span>
         <span
-            *ngIf="isActive()"
             class="fd-navigation__selection-indicator"
             role="presentation"
             aria-hidden="true"
@@ -28,7 +27,7 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
         >
         </span>
         <span
-            *ngIf="navigationListItemComponent?.navigationListComponent()"
+            *ngIf="navigationListItemComponent?.childNavigationListComponent()"
             class="fd-navigation__has-children-indicator"
             role="presentation"
             aria-hidden="true"
@@ -67,7 +66,9 @@ export class NavigationLinkComponent implements OnInit, OnChanges, CssClassBuild
     /** @hidden */
     @HostListener('click', ['$event'])
     onClick(event: MouseEvent): void {
-        this.navigationListItemComponent.toggle();
+        if (this.navigationListItemComponent.childNavigationListComponent()) {
+            this.navigationListItemComponent.toggle();
+        }
     }
 
     /** @hidden */

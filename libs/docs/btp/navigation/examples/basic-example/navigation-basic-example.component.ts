@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
     NavigationComponent,
+    NavigationContentEndComponent,
+    NavigationContentStartComponent,
     NavigationHomeDirective,
     NavigationLinkComponent,
     NavigationListComponent,
@@ -17,7 +19,9 @@ import {
         NavigationListItemComponent,
         NavigationLinkComponent,
         RouterLink,
-        NavigationHomeDirective
+        NavigationHomeDirective,
+        NavigationContentStartComponent,
+        NavigationContentEndComponent
     ],
     standalone: true
 })

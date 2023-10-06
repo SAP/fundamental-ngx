@@ -1,19 +1,73 @@
-<fdb-navigation [style.width]="'fit-content'">
-    <a fdb-navigation-link *fdbNavigationHome> Home </a>
-    <ul fdb-navigation-list>
-        <li fd-navigation-list-item>
-            <a fdb-navigation-link glyph="survey" routerLink="/btp/new-component"> New Component </a>
-        </li>
-        <li fd-navigation-list-item>
-            <a fdb-navigation-link glyph="list" routerLink="/btp/navigation"> Navigation </a>
-            <ul fdb-navigation-list>
-                <li fd-navigation-list-item>
-                    <a fdb-navigation-link glyph="survey" routerLink="/btp/new-component"> New Component </a>
-                </li>
-                <li fd-navigation-list-item>
-                    <a fdb-navigation-link glyph="list" routerLink="/btp/navigation"> Navigation </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
+<fdb-navigation [style.width]="'fit-content'" [style.min-height.rem]="65">
+    <!--    <a fdb-navigation-link *fdbNavigationHome> Home </a>-->
+    <fdb-navigation-content-start>
+        <ul fdb-navigation-list>
+            <li fd-navigation-list-item [group]="true" [expanded]="true">
+                <a fdb-navigation-link> Main items </a>
+                <ul fdb-navigation-list>
+                    <li fd-navigation-list-item>
+                        <a fdb-navigation-link glyph="create-entry-time"> Time </a>
+                    </li>
+                    <li fd-navigation-list-item [expanded]="true">
+                        <a fdb-navigation-link glyph="basket"> Basket </a>
+                        <ul fdb-navigation-list>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Future orders </a>
+                            </li>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Current orders </a>
+                            </li>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Past orders </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li fd-navigation-list-item>
+                        <a fdb-navigation-link glyph="action"> Sharing </a>
+                        <ul fdb-navigation-list>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Send </a>
+                            </li>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Receive </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li fd-navigation-list-item [group]="true">
+                <a fdb-navigation-link> Favourites </a>
+                <ul fdb-navigation-list>
+                    <li fd-navigation-list-item>
+                        <a fdb-navigation-link glyph="shield"> Shield </a>
+                    </li>
+                    <li fd-navigation-list-item [expanded]="true">
+                        <a fdb-navigation-link glyph="settings"> Settings </a>
+                        <ul fdb-navigation-list>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> User Settings </a>
+                            </li>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Profile Settings </a>
+                            </li>
+                            <li fd-navigation-list-item>
+                                <a fdb-navigation-link> Password Change </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="fd-navigation__list-item fd-navigation__list-item--spacer"></li>
+        </ul>
+    </fdb-navigation-content-start>
+    <fdb-navigation-content-end>
+        <ul fdb-navigation-list>
+            <li fd-navigation-list-item>
+                <a fdb-navigation-link glyph="sys-help"> Help </a>
+            </li>
+            <li fd-navigation-list-item>
+                <a fdb-navigation-link glyph="compare"> Legal </a>
+            </li>
+        </ul>
+    </fdb-navigation-content-end>
 </fdb-navigation>

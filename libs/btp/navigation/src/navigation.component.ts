@@ -28,13 +28,7 @@ import { FdbNavigationMode, FdbNavigationState, FdbNavigationType } from './navi
 @Component({
     selector: 'fdb-navigation',
     template: `
-        <div class="fd-navigation__container fd-navigation__container--top">
-            <ul fdb-navigation-list>
-                <li fd-navigation-list-item [linkTemplate]="linkTemplate()" class="fd-navigation__list-item--home"></li>
-                <li class="fd-navigation__list-item fd-navigation__list-item--separator"></li>
-            </ul>
-            <ng-content></ng-content>
-        </div>
+        <ng-content></ng-content>
         <ng-template #defaultLinkTemplate>
             <a fdb-navigation-link glyph="home"> Home </a>
         </ng-template>
@@ -63,6 +57,11 @@ export class NavigationComponent
     class = '';
 
     /** @hidden */
+    @Input('state')
+    set _state(state: FdbNavigationState) {
+        this.state.set(state);
+    }
+
     /** @hidden */
     @Input('horizontal')
     set _horizontal(horizontal: boolean) {
@@ -89,7 +88,9 @@ export class NavigationComponent
 
     /** @hidden */
     @ViewChild('defaultLinkTemplate')
-    defaultLinkTemplate: TemplateRef<void>;
+    set _defaultLinkTemplate(templateRef: TemplateRef<any>) {
+        this.defaultLinkTemplate.set(templateRef);
+    }
 
     /** @hidden */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
@@ -102,15 +103,21 @@ export class NavigationComponent
     type = signal<FdbNavigationType>('vertical');
     /** @hidden */
     homeDirective = signal<NavigationHomeDirective | null>(null);
+
     /** @hidden */
-    linkTemplate = computed(() => this.homeDirective()?.templateRef || this.defaultLinkTemplate);
+    defaultLinkTemplate = signal<TemplateRef<any> | null>(null);
+    /** @hidden */
+    homeLinkTemplate = computed(() =>
+        this.homeDirective() ? this.homeDirective()!.templateRef : this.defaultLinkTemplate()
+    );
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             this.class,
             'fd-navigation',
-            this.type() === 'horizontal' ? 'fd-navigation--horizontal' : 'fd-navigation--vertical'
+            this.type() === 'horizontal' ? 'fd-navigation--horizontal' : 'fd-navigation--vertical',
+            `fd-navigation--${this.state()}`
         ];
     }
 
