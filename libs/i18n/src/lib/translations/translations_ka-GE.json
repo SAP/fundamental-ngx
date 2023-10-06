@@ -504,5 +504,8 @@
     "fnSwitch.semanticDeclineLabel": "უარყოფა",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "ძებნა",
+    "btpSearchField.clearButtonLabel": "გასუფთავება",
+    "btpSearchField.searchInputPlaceholder": "ძებნა"
 }

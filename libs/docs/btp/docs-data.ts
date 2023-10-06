@@ -9,7 +9,8 @@ export const guides: SectionInterfaceContent[] = [
 export const components: SectionInterfaceContent[] = [
     { url: 'btp/navigation', name: 'Navigation' },
     { url: 'btp/tool-header', name: 'Tool Header' },
-    { url: 'btp/tool-layout', name: 'Tool Layout' }
+    { url: 'btp/tool-layout', name: 'Tool Layout' },
+    { url: 'btp/search-field', name: 'Search Field' }
 ];
 
 export const sections: SectionInterface[] = [

@@ -1,6 +1,42 @@
 <fd-docs-section-title id="simple" componentName="FdbToolHeader">Basic example</fd-docs-section-title>
-<description> </description>
+<description>
+    <p>The tool header component has three modes:</p>
+    <ul>
+        <li>Desktop - the default mode, which is displayed on desktop devices.</li>
+        <li>Tablet - displayed on mid-sized devices</li>
+        <li>Mobile - displayed on mobile devices</li>
+    </ul>
+    <p>
+        Tool header component must have a <code>productName</code> and Logo. By default, the logo will be SAP logo, but
+        you can override it by providing your own logo.
+    </p>
+</description>
 <component-example [hasBackground]="false">
     <fdb-tool-header-basic-example></fdb-tool-header-basic-example>
 </component-example>
 <code-example [exampleFiles]="basicExample"></code-example>
+
+<separator />
+
+<fd-docs-section-title id="autoMode" componentName="FdbToolHeader">Auto mode example</fd-docs-section-title>
+<description>
+    <p>
+        The tool header component modes and orientations can be set to auto, which will automatically change the mode
+        based on the element's width.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-tool-header-auto-mode-example></fdb-tool-header-auto-mode-example>
+</component-example>
+<code-example [exampleFiles]="autoModeExample"></code-example>
+
+<separator />
+
+<fd-docs-section-title id="productSwitch" componentName="FdbToolHeader">Product switch example</fd-docs-section-title>
+<description>
+    <p>The tool header component can have a product switcher</p>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-tool-header-product-switch-example></fdb-tool-header-product-switch-example>
+</component-example>
+<code-example [exampleFiles]="productSwitchExample"></code-example>

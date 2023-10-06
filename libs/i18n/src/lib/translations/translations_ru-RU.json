@@ -506,5 +506,8 @@
     "fnSwitch.semanticDeclineLabel": "Отклонить",
     "coreTree.expand": "Развернуть узел",
     "coreTree.collapse": "Свернуть узел",
-    "coreTree.noData": "Нет данных"
+    "coreTree.noData": "Нет данных",
+    "btpSearchField.searchButtonLabel": "Поиск",
+    "btpSearchField.clearButtonLabel": "Очистить",
+    "btpSearchField.searchInputPlaceholder": "Поиск"
 }

@@ -504,5 +504,8 @@
     "fnSwitch.semanticDeclineLabel": "拒绝",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "搜索",
+    "btpSearchField.clearButtonLabel": "清除",
+    "btpSearchField.searchInputPlaceholder": "搜索"
 }

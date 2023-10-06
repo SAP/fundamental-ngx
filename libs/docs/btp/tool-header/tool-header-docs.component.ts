@@ -7,9 +7,12 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
-    getExampleFile
+    getExampleFile,
+    SeparatorComponent
 } from '@fundamental-ngx/docs/shared';
+import { ToolHeaderAutoModeExampleComponent } from './examples/auto-mode-example/auto-mode-example.component';
 import { ToolHeaderBasicExampleComponent } from './examples/basic-example/tool-header-basic-example.component';
+import { ProductSwitchExampleComponent } from './examples/product-switch-example/product-switch-example.component';
 
 @Component({
     templateUrl: './tool-header-docs.component.html',
@@ -21,14 +24,28 @@ import { ToolHeaderBasicExampleComponent } from './examples/basic-example/tool-h
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,
-        ToolHeaderBasicExampleComponent
+        ToolHeaderBasicExampleComponent,
+        SeparatorComponent,
+        ToolHeaderAutoModeExampleComponent,
+        ProductSwitchExampleComponent
     ]
 })
 export class ToolHeaderDocsComponent {
     basicExample: ExampleFile[] = [
+        getExampleFile('basic-example/tool-header-basic-example.component.html'),
         getExampleFile('basic-example/tool-header-basic-example.component.ts', {
             component: 'ToolHeaderBasicExampleComponent'
-        }),
-        getExampleFile('basic-example/tool-header-basic-example.component.ts')
+        })
+    ];
+    autoModeExample: ExampleFile[] = [
+        getExampleFile('auto-mode-example/auto-mode-example.component.html'),
+        getExampleFile('auto-mode-example/auto-mode-example.component.ts', {
+            component: 'ToolHeaderAutoModeExampleComponent'
+        })
+    ];
+    productSwitchExample: ExampleFile[] = [
+        getExampleFile('product-switch-example/product-switch-example.component.ts', {
+            component: 'ProductSwitchExampleComponent'
+        })
     ];
 }

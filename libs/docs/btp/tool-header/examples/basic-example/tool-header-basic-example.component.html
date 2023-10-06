@@ -1,1 +1,29 @@
-<p>Basic example is here</p>
+<fd-segmented-button [(ngModel)]="viewMode" [style.margin-bottom.rem]="1">
+    <button fd-button value="mobile">Mobile</button>
+    <button fd-button value="tablet">Tablet</button>
+    <button fd-button value="desktop">Desktop</button>
+</fd-segmented-button>
+
+<fdb-tool-header productName="Fundamental-ngx" [mode]="viewMode">
+    <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
+
+    <fdb-tool-header-actions [actions]="actions"></fdb-tool-header-actions>
+
+    <fd-avatar
+        fdbToolHeaderUser
+        [fdMenuTrigger]="userMenu"
+        role="button"
+        [circle]="true"
+        glyph="account"
+        size="xs"
+        [clickable]="true"
+    ></fd-avatar>
+    <fd-menu #userMenu>
+        <li fd-menu-item>
+            <a fd-menu-interactive>
+                <fd-menu-addon glyph="system-exit-2"></fd-menu-addon>
+                <span fd-menu-title> Log out </span>
+            </a>
+        </li>
+    </fd-menu>
+</fdb-tool-header>

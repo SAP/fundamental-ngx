@@ -504,5 +504,8 @@
     "fnSwitch.semanticDeclineLabel": "Rënia",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "Kërko",
+    "btpSearchField.clearButtonLabel": "Pastro",
+    "btpSearchField.searchInputPlaceholder": "Kërko"
 }

@@ -504,5 +504,8 @@
     "fnSwitch.semanticDeclineLabel": "Odmítnout",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "Hledat",
+    "btpSearchField.clearButtonLabel": "Vymazat",
+    "btpSearchField.searchInputPlaceholder": "Hledat"
 }
