@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.11](https://github.com/SAP/fundamental-ngx/compare/v0.43.10...v0.43.11) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** add role="button" to show all link ([#10657](https://github.com/SAP/fundamental-ngx/issues/10657)) ([850fb20](https://github.com/SAP/fundamental-ngx/commit/850fb2079292458b189b81f62c50b2d8f7ed876e))
+* **core:** dialog service dismiss all ([#10624](https://github.com/SAP/fundamental-ngx/issues/10624)) ([93002db](https://github.com/SAP/fundamental-ngx/commit/93002db934e1375373a083b7aa0552708808fb6f))
+* **core:** popover header/footer should be sticky, and popovers should be able to grow ([#10631](https://github.com/SAP/fundamental-ngx/issues/10631)) ([ce68629](https://github.com/SAP/fundamental-ngx/commit/ce68629025d5ae6890a4dc9eefc6e048ccc299c3))
+* **core:** some improvements to using labels with block busy indicator ([#10635](https://github.com/SAP/fundamental-ngx/issues/10635)) ([66c6314](https://github.com/SAP/fundamental-ngx/commit/66c6314de3fd02d32c6987d0e0c1368248228588))
+* **core:** tokenizer more button focus issue ([#10653](https://github.com/SAP/fundamental-ngx/issues/10653)) ([a8c2e2e](https://github.com/SAP/fundamental-ngx/commit/a8c2e2e6b508230d4308cf0aa0e00f5c32d76e24))
+* **core:** update token total count properly ([#10610](https://github.com/SAP/fundamental-ngx/issues/10610)) ([97fae8a](https://github.com/SAP/fundamental-ngx/commit/97fae8a155752ee19564542bb994ee7ca6faad3b))
+* **core:** use template ref to initialize styles ([#10652](https://github.com/SAP/fundamental-ngx/issues/10652)) ([858fe94](https://github.com/SAP/fundamental-ngx/commit/858fe945580e70d8a1266970e00bc95f08b5c3b8))
+
+
+### Features
+
+* **core:** downport multi input option identifier ([#10632](https://github.com/SAP/fundamental-ngx/issues/10632)) ([52f2102](https://github.com/SAP/fundamental-ngx/commit/52f21029ca63ffde12bc2142c1e2ccab9c1d4ab8))
+
+
+
+
+
 ## [0.43.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.9...v0.43.10) (2023-09-20)
 
 
