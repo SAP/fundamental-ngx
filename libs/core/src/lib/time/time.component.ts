@@ -378,7 +378,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreaseHoursLabel,
             increaseLabel: this._timeI18nLabels.increaseHoursLabel,
-            label: this._timeI18nLabels.hoursLabel,
+            label: this._timeI18nLabels.hrsLabel,
+            fullLabel: this._timeI18nLabels.hoursLabel,
             navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
@@ -391,7 +392,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreaseMinutesLabel,
             increaseLabel: this._timeI18nLabels.increaseMinutesLabel,
-            label: this._timeI18nLabels.minutesLabel,
+            label: this._timeI18nLabels.minLabel,
+            fullLabel: this._timeI18nLabels.minutesLabel,
             navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
@@ -404,7 +406,8 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         return {
             decreaseLabel: this._timeI18nLabels.decreaseSecondsLabel,
             increaseLabel: this._timeI18nLabels.increaseSecondsLabel,
-            label: this._timeI18nLabels.secondsLabel,
+            label: this._timeI18nLabels.secLabel,
+            fullLabel: this._timeI18nLabels.secondsLabel,
             navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
@@ -418,6 +421,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             decreaseLabel: this._timeI18nLabels.decreasePeriodLabel,
             increaseLabel: this._timeI18nLabels.increasePeriodLabel,
             label: this._timeI18nLabels.periodLabel,
+            fullLabel: this._timeI18nLabels.periodLabel,
             navigationInstruction: this._timeI18nLabels.navigationInstruction
         };
     }
