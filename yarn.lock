@@ -8535,12 +8535,7 @@ esbuild-wasm@0.18.17:
   resolved "https://registry.yarnpkg.com/esbuild-wasm/-/esbuild-wasm-0.18.17.tgz#d3d8827502c7714212a7b2544ee99132f07189cc"
   integrity sha512-9OHGcuRzy+I8ziF9FzjfKLWAPbvi0e/metACVg9k6bK+SI4FFxeV6PcZsz8RIVaMD4YNehw+qj6UMR3+qj/EuQ==
 
-esbuild-wasm@>=0.13.8:
-  version "0.18.16"
-  resolved "https://registry.yarnpkg.com/esbuild-wasm/-/esbuild-wasm-0.18.16.tgz#7526461a14b3e8ab3e6fbcc328583b4d79c39ad0"
-  integrity sha512-MHb4voI4z3MdTVxoA/cLpgorl7Tg//M3zdN5u05AVXEPCHr0jO1xAB0kUhi24u+jA8LduuvbB32W5q8+cK9KLg==
-
-esbuild-wasm@^0.19.0:
+esbuild-wasm@>=0.13.8, esbuild-wasm@^0.19.0:
   version "0.19.4"
   resolved "https://registry.yarnpkg.com/esbuild-wasm/-/esbuild-wasm-0.19.4.tgz#1b3c2771bdb478d1188aaf93a010d2ad06d120c8"
   integrity sha512-i/9KP80bdGhWBvYjAJd8u3cwMvaAdBeuSwKcAJ2tfsMkS1q4ZqB0wecc3lELJC/pg7rysx21uw1JofkYLuexrg==
@@ -11430,10 +11425,10 @@ jest-pnp-resolver@^1.2.2:
   resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.3.tgz#930b1546164d4ad5937d5540e711d4d38d4cad2e"
   integrity sha512-+3NpwQEnRoIBtx4fyhblQDPgJI0H1IEIkX7ShLUjPGA7TtUTvI1oiKi3SR4oBR0hQhQR80l4WAe5RrXBwWMA8w==
 
-jest-preset-angular@13.1.1:
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/jest-preset-angular/-/jest-preset-angular-13.1.1.tgz#b608dc25c6c566983795f15065a0e90d609129a3"
-  integrity sha512-X8i7icKt9U5uhj7YKqdEZm7ZZPvNFRxfBnU+9SALdIkHYJhwtlJ5/MUk9wo4f3lX2smOkIl9LPJUu1APO+11Jg==
+jest-preset-angular@13.1.2:
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/jest-preset-angular/-/jest-preset-angular-13.1.2.tgz#9625b9ee72d24afda6c7c5d9c8a0c08172489a45"
+  integrity sha512-kuzuIch/YYTMaMnuGDaiZEu++Bjc5WskOAmMwqWO0Grpcd0SulqTOV70Gz6Q/ZOQuMye+LS4KPyIVfqnJr2e3g==
   dependencies:
     bs-logger "^0.2.6"
     esbuild-wasm ">=0.13.8"
@@ -14695,16 +14690,7 @@ pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-pretty-format@^29.0.0, pretty-format@^29.6.1:
-  version "29.6.1"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.6.1.tgz#ec838c288850b7c4f9090b867c2d4f4edbfb0f3e"
-  integrity sha512-7jRj+yXO0W7e4/tSJKoR7HRIHLPPjtNaUGG2xxKQnGvPNRkgWcQ0AZX6P4KBRJN4FcTBWb3sa7DVUJmocYuoog==
-  dependencies:
-    "@jest/schemas" "^29.6.0"
-    ansi-styles "^5.0.0"
-    react-is "^18.0.0"
-
-pretty-format@^29.7.0:
+pretty-format@^29.0.0, pretty-format@^29.6.1, pretty-format@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.7.0.tgz#ca42c758310f365bfa71a0bda0a807160b776812"
   integrity sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==
