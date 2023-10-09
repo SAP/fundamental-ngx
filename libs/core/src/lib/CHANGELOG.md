@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.78...v0.46.0-rc.79) (2023-10-06)
+
+
+### Bug Fixes
+
+* **core:** tokenizer more button focus issue ([#10654](https://github.com/SAP/fundamental-ngx/issues/10654)) ([3ea5299](https://github.com/SAP/fundamental-ngx/commit/3ea5299105b44215afd383cdd75516270a02f9e4))
+
+
+
+
+
 # [0.46.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.77...v0.46.0-rc.78) (2023-10-05)
 
 
