@@ -1,3 +1,5 @@
+import { TAB } from '@angular/cdk/keycodes';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,11 +9,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { TAB } from '@angular/cdk/keycodes';
+import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FD_BUSY_INDICATOR_COMPONENT } from './tokens';
-import { NgIf } from '@angular/common';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';
 
