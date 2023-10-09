@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "Usuń",
     "coreToken.ariaRoleDescription": "token",
     "coreTokenizer.moreLabel": "{count} więcej",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "Ok",
     "coreUploadCollection.menuCancelText": "Anuluj",
     "coreUploadCollection.menuEditAriaLabel": "Edytuj",

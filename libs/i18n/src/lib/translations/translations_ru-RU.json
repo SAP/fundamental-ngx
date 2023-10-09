@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "Удаляемый",
     "coreToken.ariaRoleDescription": "токен",
     "coreTokenizer.moreLabel": "Еще { count, plural, one {1 елемент} few {# елемента} other {# елементов} }",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "ОК",
     "coreUploadCollection.menuCancelText": "Отменить",
     "coreUploadCollection.menuEditAriaLabel": "Редактировать",
