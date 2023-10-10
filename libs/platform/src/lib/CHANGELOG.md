@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.11](https://github.com/SAP/fundamental-ngx/compare/v0.43.10...v0.43.11) (2023-10-05)
+
+
+### Bug Fixes
+
+* **platform:** column freezing/unfreezing while resizing now behaves the same as ui5 ([#10606](https://github.com/SAP/fundamental-ngx/issues/10606)) ([8785bb0](https://github.com/SAP/fundamental-ngx/commit/8785bb089286dfe1e2f245009633fd0716d5c077))
+* **platform:** column freezing/unfreezing while resizing now behaves the same as ui5 ([#10611](https://github.com/SAP/fundamental-ngx/issues/10611)) ([d15017a](https://github.com/SAP/fundamental-ngx/commit/d15017a6bd7c599503bd6858ddc40ab22c5cee03))
+* **platform:** fdp multi combobox fires multiple times after value is selected ([#10513](https://github.com/SAP/fundamental-ngx/issues/10513)) ([#10675](https://github.com/SAP/fundamental-ngx/issues/10675)) ([b6d83e3](https://github.com/SAP/fundamental-ngx/commit/b6d83e3f46771abe4dfd42dcfe5e216f656a94e3))
+
+
+
+
+
 ## [0.43.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.9...v0.43.10) (2023-09-20)
 
 

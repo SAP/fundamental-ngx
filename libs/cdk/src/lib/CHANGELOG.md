@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.11](https://github.com/SAP/fundamental-ngx/compare/v0.43.10...v0.43.11) (2023-10-05)
+
+
+### Features
+
+* **core:** downport multi input option identifier ([#10632](https://github.com/SAP/fundamental-ngx/issues/10632)) ([52f2102](https://github.com/SAP/fundamental-ngx/commit/52f21029ca63ffde12bc2142c1e2ccab9c1d4ab8))
+
+
+
+
+
 ## [0.43.10](https://github.com/SAP/fundamental-ngx/compare/v0.43.9...v0.43.10) (2023-09-20)
 
 
