@@ -31,7 +31,8 @@ const versions = {
     LODASH_ES_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['lodash-es']),
     COMPARE_VERSIONS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['compare-versions']),
     DAYJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.dayjs),
-    THEMING_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['@sap-theming/theming-base-content'])
+    THEMING_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['@sap-theming/theming-base-content']),
+    MESSAGEFORMAT_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['intl-messageformat'])
 };
 
 const transformOverrideParamToPlaceholderKey = (param: string): keyof typeof versions => {
