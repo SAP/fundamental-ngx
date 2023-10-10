@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "Silinebilir",
     "coreToken.ariaRoleDescription": "jeton",
     "coreTokenizer.moreLabel": "{count} ürün daha",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "Tamam",
     "coreUploadCollection.menuCancelText": "İptal",
     "coreUploadCollection.menuEditAriaLabel": "Düzenle",

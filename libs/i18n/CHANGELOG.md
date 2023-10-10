@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.80...v0.46.0-rc.81) (2023-10-10)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.79...v0.46.0-rc.80) (2023-10-09)
+
+
+### Bug Fixes
+
+* **core:** add aria-label to fd-tokenizer ([#10678](https://github.com/SAP/fundamental-ngx/issues/10678)) ([2bd8c58](https://github.com/SAP/fundamental-ngx/commit/2bd8c58182b1f52cd20916214c70f79b09d7bcf0))
+
+
+
+
+
 # [0.46.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.78...v0.46.0-rc.79) (2023-10-06)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

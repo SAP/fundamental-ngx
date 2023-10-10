@@ -90,6 +90,7 @@
     "coreToken.deleteButtonLabel": "可删除",
     "coreToken.ariaRoleDescription": "标签",
     "coreTokenizer.moreLabel": "{count}项更多",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "确定",
     "coreUploadCollection.menuCancelText": "取消",
     "coreUploadCollection.menuEditAriaLabel": "编辑",
