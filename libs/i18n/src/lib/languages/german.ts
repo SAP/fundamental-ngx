@@ -134,7 +134,7 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         increaseSecondsLabel: 'Sekunden erhöhen',
         secLabel: 'Sek.',
         hoursLabel: 'Std.',
-        minutesLabel: 'Minute',
+        minutesLabel: 'Minuten',
         secondsLabel: 'Sekunden',
         decreaseSecondsLabel: 'Sekunden reduzieren',
         increasePeriodLabel: 'Zeitraum vergrößern',
