@@ -93,6 +93,7 @@
     "coreToken.deleteButtonLabel": "Supprimable",
     "coreToken.ariaRoleDescription": "jeton",
     "coreTokenizer.moreLabel": "{count} plus",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "Ok",
     "coreUploadCollection.menuCancelText": "Annuler",
     "coreUploadCollection.menuEditAriaLabel": "Éditer",

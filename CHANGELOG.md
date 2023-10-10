@@ -3,6 +3,125 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.80...v0.46.0-rc.81) (2023-10-10)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.46.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.79...v0.46.0-rc.80) (2023-10-09)
+
+
+### Bug Fixes
+
+* **core:** add aria-label to fd-tokenizer ([#10678](https://github.com/SAP/fundamental-ngx/issues/10678)) ([2bd8c58](https://github.com/SAP/fundamental-ngx/commit/2bd8c58182b1f52cd20916214c70f79b09d7bcf0))
+
+
+
+
+
+# [0.46.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.78...v0.46.0-rc.79) (2023-10-06)
+
+
+### Bug Fixes
+
+* **core:** tokenizer more button focus issue ([#10654](https://github.com/SAP/fundamental-ngx/issues/10654)) ([3ea5299](https://github.com/SAP/fundamental-ngx/commit/3ea5299105b44215afd383cdd75516270a02f9e4))
+
+
+
+
+
+# [0.46.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.77...v0.46.0-rc.78) (2023-10-05)
+
+
+### Features
+
+* **core:** add index emit to tab selection ([#10673](https://github.com/SAP/fundamental-ngx/issues/10673)) ([15291b4](https://github.com/SAP/fundamental-ngx/commit/15291b4a900f90855e6176245e98fe39ed7bc378))
+
+
+
+
+
+# [0.46.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.77) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** inline help screenreader bug when using template ([#10651](https://github.com/SAP/fundamental-ngx/issues/10651)) ([afb2d08](https://github.com/SAP/fundamental-ngx/commit/afb2d081893df843f2ecb1127cdd415d2d7580c2))
+* **core:** tab list tabindex fix ([#10672](https://github.com/SAP/fundamental-ngx/issues/10672)) ([d236062](https://github.com/SAP/fundamental-ngx/commit/d236062964d121e3cc88fc6683c2d09e99ea1524))
+* **platform:** fdp multi combobox fires multiple times after value is selected ([#10513](https://github.com/SAP/fundamental-ngx/issues/10513)) ([4e97fc5](https://github.com/SAP/fundamental-ngx/commit/4e97fc5eafdd8fccba02d89a4bf6fb76241396f6))
+
+
+
+
+
+# [0.46.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.76) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** tab list tabindex fix ([#10672](https://github.com/SAP/fundamental-ngx/issues/10672)) ([d236062](https://github.com/SAP/fundamental-ngx/commit/d236062964d121e3cc88fc6683c2d09e99ea1524))
+* **platform:** fdp multi combobox fires multiple times after value is selected ([#10513](https://github.com/SAP/fundamental-ngx/issues/10513)) ([4e97fc5](https://github.com/SAP/fundamental-ngx/commit/4e97fc5eafdd8fccba02d89a4bf6fb76241396f6))
+
+
+
+
+
+# [0.46.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.74...v0.46.0-rc.75) (2023-10-05)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.46.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.73...v0.46.0-rc.74) (2023-10-05)
+
+
+### Features
+
+* add German language support ([#10660](https://github.com/SAP/fundamental-ngx/issues/10660)) ([0d1c686](https://github.com/SAP/fundamental-ngx/commit/0d1c686c82628488294e1b09952330e9ae0627a8))
+
+
+
+
+
+# [0.46.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.72...v0.46.0-rc.73) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** add role="button" to show all link ([#10658](https://github.com/SAP/fundamental-ngx/issues/10658)) ([9cad0ed](https://github.com/SAP/fundamental-ngx/commit/9cad0ed16638b7d4d74c0a0167800f81bc42d4c0))
+
+
+
+
+
+# [0.46.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.71...v0.46.0-rc.72) (2023-10-04)
+
+
+### Bug Fixes
+
+* **docs,core:** various defect hunt issues ([#10655](https://github.com/SAP/fundamental-ngx/issues/10655)) ([0df8db7](https://github.com/SAP/fundamental-ngx/commit/0df8db70f37d8a0027f37ac92434a7a30acb3c2b))
+
+
+
+
+
+# [0.46.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.70...v0.46.0-rc.71) (2023-10-04)
+
+
+### Bug Fixes
+
+* **core:** 10412 ([#10659](https://github.com/SAP/fundamental-ngx/issues/10659)) ([8b1b171](https://github.com/SAP/fundamental-ngx/commit/8b1b17143d6dde57a52034b60323af0dde2c98c5))
+* **core:** unit test ([#10634](https://github.com/SAP/fundamental-ngx/issues/10634)) ([6f002bc](https://github.com/SAP/fundamental-ngx/commit/6f002bcc5e12c2ae65cbbe27bd018369181b3b9f))
+
+
+
+
+
 # [0.46.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.69...v0.46.0-rc.70) (2023-10-04)
 
 

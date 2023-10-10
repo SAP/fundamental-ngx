@@ -93,6 +93,7 @@
     "coreToken.deleteButtonLabel": "Изтриваем",
     "coreToken.ariaRoleDescription": "жетон",
     "coreTokenizer.moreLabel": "Още { count, plural, one {1 елемент} other {# елемента} }",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "OK",
     "coreUploadCollection.menuCancelText": "Отмени",
     "coreUploadCollection.menuEditAriaLabel": "Редактирай",
