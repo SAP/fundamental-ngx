@@ -2,12 +2,13 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    inject,
     Input,
     OnChanges,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { applyCssClass, CssClassBuilder, HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 export type ToolLayoutMode = '' | 'tablet' | 'phone';
 
@@ -20,7 +21,7 @@ export type ToolLayoutMode = '' | 'tablet' | 'phone';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
-export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder {
+export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder, HasElementRef {
     /** user's custom classes */
     @Input()
     class: string;
@@ -33,7 +34,7 @@ export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder {
     mode: ToolLayoutMode;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
+    readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden
      * CssClassBuilder interface implementation
