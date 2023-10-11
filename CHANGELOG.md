@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.12](https://github.com/SAP/fundamental-ngx/compare/v0.43.11...v0.43.12) (2023-10-11)
+
+
+### Bug Fixes
+
+* **core,platform:** busy indicator should not have aria-live polite by default, search input count issue ([#10681](https://github.com/SAP/fundamental-ngx/issues/10681)) ([0e6a29e](https://github.com/SAP/fundamental-ngx/commit/0e6a29ebc043b2f5ccc97c0421f5fa6a06c7d54d))
+* **core:** add aria-label to tokenizer ([#10679](https://github.com/SAP/fundamental-ngx/issues/10679)) ([4516b74](https://github.com/SAP/fundamental-ngx/commit/4516b741eeea3916da9b5610344d509fb68a51af))
+
+
+### Features
+
+* downport of the portuguese language ([#10701](https://github.com/SAP/fundamental-ngx/issues/10701)) ([76f4c13](https://github.com/SAP/fundamental-ngx/commit/76f4c132150249d918702cfe6fb8dfa63f3b4f25))
+
+
+
+
+
 ## [0.43.11](https://github.com/SAP/fundamental-ngx/compare/v0.43.10...v0.43.11) (2023-10-05)
 
 
