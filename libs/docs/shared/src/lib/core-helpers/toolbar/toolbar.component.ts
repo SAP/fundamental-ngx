@@ -45,6 +45,7 @@ import {
     FD_LANGUAGE_HINDI,
     FD_LANGUAGE_ITALIAN,
     FD_LANGUAGE_POLISH,
+    FD_LANGUAGE_PORTUGUESE,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN,
@@ -127,6 +128,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
         { name: 'Polski', value: FD_LANGUAGE_POLISH },
+        { name: 'Português', value: FD_LANGUAGE_PORTUGUESE },
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
         { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
         { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
