@@ -10,6 +10,8 @@ import {
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { ToolLayoutBasicExampleComponent } from './examples/basic-example/tool-layout-basic-example.component';
+import { ToolLayoutPhoneExampleComponent } from './examples/phone-example/tool-layout-phone-example.component';
+import { ToolLayoutTabletExampleComponent } from './examples/tablet-example/tool-layout-tablet-example.component';
 
 @Component({
     templateUrl: './tool-layout-docs.component.html',
@@ -21,7 +23,9 @@ import { ToolLayoutBasicExampleComponent } from './examples/basic-example/tool-l
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,
-        ToolLayoutBasicExampleComponent
+        ToolLayoutBasicExampleComponent,
+        ToolLayoutTabletExampleComponent,
+        ToolLayoutPhoneExampleComponent
     ]
 })
 export class ToolLayoutDocsComponent {
@@ -29,6 +33,20 @@ export class ToolLayoutDocsComponent {
         getExampleFile('basic-example/tool-layout-basic-example.component.ts', {
             component: 'ToolLayoutBasicExampleComponent'
         }),
-        getExampleFile('basic-example/tool-layout-basic-example.component.ts')
+        getExampleFile('basic-example/tool-layout-basic-example.component.html')
+    ];
+
+    tabletExample: ExampleFile[] = [
+        getExampleFile('tablet-example/tool-layout-tablet-example.component.ts', {
+            component: 'ToolLayoutTabletExampleComponent'
+        }),
+        getExampleFile('tablet-example/tool-layout-tablet-example.component.html')
+    ];
+
+    phoneExample: ExampleFile[] = [
+        getExampleFile('phone-example/tool-layout-phone-example.component.ts', {
+            component: 'ToolLayoutPhoneExampleComponent'
+        }),
+        getExampleFile('phone-example/tool-layout-phone-example.component.html')
     ];
 }

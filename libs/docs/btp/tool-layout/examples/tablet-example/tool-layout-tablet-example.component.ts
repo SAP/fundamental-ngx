@@ -8,8 +8,8 @@ import {
 } from '@fundamental-ngx/btp/tool-layout';
 
 @Component({
-    selector: 'fdb-tool-layout-basic-example',
-    templateUrl: './tool-layout-basic-example.component.html',
+    selector: 'fdb-tool-layout-tablet-example',
+    templateUrl: './tool-layout-tablet-example.component.html',
     imports: [
         ToolLayoutComponent,
         ToolLayoutContainerDirective,
@@ -19,4 +19,4 @@ import {
     ],
     standalone: true
 })
-export class ToolLayoutBasicExampleComponent {}
+export class ToolLayoutTabletExampleComponent {}
