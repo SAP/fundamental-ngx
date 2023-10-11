@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.85...v0.46.0-rc.86) (2023-10-11)
+
+
+### Bug Fixes
+
+* **core:** add full labels to time component for screenreader ([#10683](https://github.com/SAP/fundamental-ngx/issues/10683)) ([dfe09c5](https://github.com/SAP/fundamental-ngx/commit/dfe09c5b4e8421b83daadbf66c38f3fdcfd37080))
+
+
+
+
+
 # [0.46.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.84...v0.46.0-rc.85) (2023-10-11)
 
 **Note:** Version bump only for package @fundamental-ngx/core
