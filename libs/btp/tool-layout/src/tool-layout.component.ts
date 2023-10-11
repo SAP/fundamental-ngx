@@ -14,7 +14,7 @@ export type ToolLayoutMode = '' | 'tablet' | 'phone';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fdb-tool-layout]',
+    selector: '[fdbToolLayout]', // Using camel case, because it should become directive sometime in the future
     template: ` <ng-content></ng-content>`,
     styleUrls: ['./tool-layout.component.scss'],
     encapsulation: ViewEncapsulation.None,

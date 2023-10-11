@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
-    ToolLayoutComponent,
     ToolLayoutContainerDirective,
     ToolLayoutContentContainerDirective,
+    ToolLayoutDirective,
     ToolLayoutHeaderContainerDirective,
     ToolLayoutNavigationContainerDirective
 } from '@fundamental-ngx/btp/tool-layout';
@@ -11,7 +11,7 @@ import {
     selector: 'fdb-tool-layout-tablet-example',
     templateUrl: './tool-layout-tablet-example.component.html',
     imports: [
-        ToolLayoutComponent,
+        ToolLayoutDirective,
         ToolLayoutContainerDirective,
         ToolLayoutContentContainerDirective,
         ToolLayoutHeaderContainerDirective,
