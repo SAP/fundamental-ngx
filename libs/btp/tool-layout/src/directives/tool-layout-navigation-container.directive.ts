@@ -1,15 +1,13 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdb-tool-layout-navigation-container]',
-    standalone: true
+    selector: '[fdbToolLayoutNavigationContainer]',
+    standalone: true,
+    host: {
+        class: 'fd-tool-layout__navigation-container'
+    }
 })
 export class ToolLayoutNavigationContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tool-layout__navigation-container')
-    _navContainerClass = true;
-
     /**
      * whether the navigation is a popup
      */

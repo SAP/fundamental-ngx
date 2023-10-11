@@ -1,12 +1,10 @@
-import { Directive, HostBinding } from '@angular/core';
+import { Directive } from '@angular/core';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdb-tool-layout-container]',
-    standalone: true
+    selector: '[fdbToolLayoutContainer]',
+    standalone: true,
+    host: {
+        class: 'fd-tool-layout__container'
+    }
 })
-export class ToolLayoutContainerDirective {
-    /** @hidden */
-    @HostBinding('class.fd-tool-layout__container')
-    _containerClass = true;
-}
+export class ToolLayoutContainerDirective {}

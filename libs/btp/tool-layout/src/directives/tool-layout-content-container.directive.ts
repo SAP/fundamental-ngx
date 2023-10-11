@@ -1,14 +1,13 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { Directive, ElementRef, inject, Input, OnChanges, OnInit } from '@angular/core';
+import { applyCssClass, CssClassBuilder, HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 export type ToolLayoutContentContainerBackground = '' | 'transparent' | 'list';
 
 @Directive({
-    // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fdb-tool-layout-content-container]',
+    selector: '[fdbToolLayoutContentContainer]',
     standalone: true
 })
-export class ToolLayoutContentContainerDirective implements OnChanges, OnInit, CssClassBuilder {
+export class ToolLayoutContentContainerDirective implements OnChanges, OnInit, CssClassBuilder, HasElementRef {
     /** user's custom classes */
     @Input()
     class: string;
@@ -23,7 +22,7 @@ export class ToolLayoutContentContainerDirective implements OnChanges, OnInit, C
     background: ToolLayoutContentContainerBackground;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>) {}
+    readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden
      * CssClassBuilder interface implementation
