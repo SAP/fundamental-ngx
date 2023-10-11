@@ -195,7 +195,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
                 default:
                     return `Ще ${count} елементів`;
             }
-        }
+        },
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'ОК',

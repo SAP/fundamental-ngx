@@ -147,7 +147,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         ariaRoleDescription: 'jeton'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} ürün daha'
+        moreLabel: '{{ count }} ürün daha',
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'Tamam',

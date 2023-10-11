@@ -149,7 +149,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         ariaRoleDescription: 'jeton'
     },
     coreTokenizer: {
-        moreLabel: '{{ count }} plus'
+        moreLabel: '{{ count }} plus',
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',

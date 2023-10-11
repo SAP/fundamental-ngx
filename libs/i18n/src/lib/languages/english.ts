@@ -147,7 +147,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: '{{count}} more'
+        moreLabel: '{{count}} more',
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',

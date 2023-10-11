@@ -163,7 +163,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
                 return '1 più articoli';
             }
             return `Altri ${count} articoli`;
-        }
+        },
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'Ok',

@@ -180,7 +180,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
                 default:
                     return 'Още {{ count }} елемента';
             }
-        }
+        },
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'OK',

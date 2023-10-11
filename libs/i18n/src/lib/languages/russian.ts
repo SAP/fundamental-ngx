@@ -196,7 +196,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                 default:
                     return `Еще ${count} елементов`;
             }
-        }
+        },
+        tokenizerLabel: 'Tokenizer'
     },
     coreUploadCollection: {
         menuOkText: 'ОК',
