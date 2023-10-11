@@ -1,33 +1,34 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { CURRENT_LIB, Libraries } from '../../utilities';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
 import {
-    FdLanguage,
     FD_LANGUAGE,
     FD_LANGUAGE_ALBANIAN,
     FD_LANGUAGE_BULGARIAN,
-    FD_LANGUAGE_CZECH,
     FD_LANGUAGE_CHINESE,
+    FD_LANGUAGE_CZECH,
     FD_LANGUAGE_ENGLISH,
     FD_LANGUAGE_FRENCH,
     FD_LANGUAGE_GEORGIAN,
+    FD_LANGUAGE_GERMAN,
     FD_LANGUAGE_HINDI,
     FD_LANGUAGE_ITALIAN,
     FD_LANGUAGE_POLISH,
+    FD_LANGUAGE_PORTUGUESE,
     FD_LANGUAGE_RUSSIAN,
     FD_LANGUAGE_TURKISH,
     FD_LANGUAGE_UKRAINIAN,
-    FD_LANGUAGE_GERMAN
+    FdLanguage
 } from '@fundamental-ngx/i18n';
-import { ContentDensityMode, GlobalContentDensityService } from '@fundamental-ngx/core/content-density';
+import { BehaviorSubject, Subject, filter, fromEvent } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
@@ -67,10 +68,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     themes: CompleteThemeDefinition[];
 
-    version: Version = {
-        id: this._docsService.getPackageJson().version,
-        url: ''
-    };
+    version: Version;
 
     versions: Version[];
 
@@ -88,6 +86,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
         { name: 'Polski', value: FD_LANGUAGE_POLISH },
+        { name: 'Portuguese', value: FD_LANGUAGE_PORTUGUESE },
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
         { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
         { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
@@ -144,6 +143,10 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             .subscribe((theme) => {
                 this.updateHighlightTheme(theme?.id as string);
             });
+        this.version = {
+            id: this._docsService.getPackageJson().version,
+            url: ''
+        };
     }
 
     ngOnInit(): void {

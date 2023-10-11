@@ -9,6 +9,7 @@ export * from './german';
 export * from './hindi';
 export * from './italian';
 export * from './polish';
+export * from './portuguese';
 export * from './russian';
 export * from './turkish';
 export * from './ukrainian';

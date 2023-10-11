@@ -238,6 +238,10 @@ export class SearchFieldComponent
     @Input()
     forceSearchButton = false;
 
+    /** Whether to disable the "suggestions found" live announcer. */
+    @Input()
+    disableSuggestionsFoundAnnouncer = false;
+
     /** Input change event. */
     @Output()
     inputChange: EventEmitter<SearchInput> = new EventEmitter();
