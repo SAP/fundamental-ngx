@@ -5,6 +5,7 @@ const knownScopes = new Set([
     'docs',
     'fd',
     'fdp',
+    'fdb',
     'cdk',
     'fn',
     'cx',
