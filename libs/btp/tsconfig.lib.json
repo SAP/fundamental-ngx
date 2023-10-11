@@ -6,8 +6,8 @@
         "declarationMap": true,
         "inlineSources": true,
         "types": [],
-        "experimentalDecorators": true,
+        "experimentalDecorators": true
     },
     "exclude": ["src/**/*.spec.ts", "src/test-setup.ts", "jest.config.ts", "src/**/*.test.ts"],
-    "include": ["src/**/*.ts", "navigation/**/*.ts"]
+    "include": ["src/**/*.ts", "navigation/**/*.ts", "tool-layout/**/*.ts"]
 }
