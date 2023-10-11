@@ -1,0 +1,6 @@
+{
+    "name": "docs-btp",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "targets": {},
+    "tags": ["scope:docs", "type:lib"]
+}
