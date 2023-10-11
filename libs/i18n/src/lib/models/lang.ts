@@ -248,6 +248,7 @@ export interface FdLanguage {
     };
     coreTokenizer: {
         moreLabel: FdLanguageKey;
+        tokenizerLabel: FdLanguageKey;
     };
     coreUploadCollection: {
         menuOkText: FdLanguageKey;

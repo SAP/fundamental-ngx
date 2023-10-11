@@ -93,6 +93,7 @@
     "coreToken.deleteButtonLabel": "E fshishme",
     "coreToken.ariaRoleDescription": "shenjë",
     "coreTokenizer.moreLabel": "{count} artikuj { count, plural, one {më shumë} other {të tjerë} }",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "Ok",
     "coreUploadCollection.menuCancelText": "Anulo",
     "coreUploadCollection.menuEditAriaLabel": "Ndrysho",

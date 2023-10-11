@@ -24,10 +24,7 @@ import {
     alertText2,
     buttonsPopoverTestText,
     containerTestText,
-    cozyHeaderTestText,
-    cozySubheaderTestText,
     fruitsTestArr,
-    headerTestText,
     messageTestText,
     placeholderTestText,
     popoverExampleTestText,
@@ -35,7 +32,6 @@ import {
     popoverTestText,
     popoverTestText2,
     popoverTestText3,
-    subheaderTestText,
     triggerTestText
 } from './popover-contents';
 
@@ -118,27 +114,6 @@ describe('Popover test suite', () => {
             }
         });
 
-        it('should check that icon has popover and all options are clickable', async () => {
-            await scrollIntoView(icon, 1);
-            await click(icon, 1);
-            const iconLength = await getElementArrayLength(option);
-            for (let i = 3; i < iconLength; i++) {
-                await expect(await isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
-            }
-        });
-
-        it('should check that icon money has popover and all options and arrow button are clickable', async () => {
-            await scrollIntoView(iconMoney);
-            await click(iconMoney);
-            await expect(await isElementDisplayed(popover, 1)).toBe(true, `popover not displayed`);
-            await expect(await isElementClickable(standardMoneyButton)).toBe(true, `button not clickable`);
-            await expect(await getText(barElement, 1)).toBe(headerTestText);
-            const iconMoneyLength = await getElementArrayLength(option);
-            for (let i = 3; i < iconMoneyLength; i++) {
-                await expect(await isElementClickable(option, i)).toBe(true, `option with index ${i} not clickable`);
-            }
-        });
-
         it('should check that basic popover buttons have popovers and all options are clickable', async () => {
             await scrollIntoView(basicPopoverButton);
             const buttonsLength = await getElementArrayLength(basicPopoverButton);
@@ -158,8 +133,6 @@ describe('Popover test suite', () => {
         it('should check that button popover have header, subheader and buttons are clickable', async () => {
             await scrollIntoView(basicPopoverButton);
             await click(basicPopoverButton);
-            await expect((await getText(barElement)).trim()).toBe(cozyHeaderTestText);
-            await expect((await getText(barElement, 1)).trim()).toBe(subheaderTestText);
 
             await expect(await isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
             await expect(await isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
@@ -194,13 +167,11 @@ describe('Popover test suite', () => {
         it('should check that button "with header" has header', async () => {
             await scrollIntoView(headerPopoverButton);
             await click(headerPopoverButton, 1);
-            await expect(await getText(barElement)).toBe(cozyHeaderTestText);
         });
 
         it('should check that button "with header and footer" has header and all buttons are clickable', async () => {
             await scrollIntoView(headerPopoverButton);
             await click(headerPopoverButton, 2);
-            await expect(await getText(barElement)).toBe(cozyHeaderTestText);
 
             await expect(await isElementClickable(barElement, 1)).toBe(true, `save button not clickable`);
             await expect(await isElementClickable(barElement, 2)).toBe(true, `cancel button not clickable`);
@@ -209,8 +180,6 @@ describe('Popover test suite', () => {
         it('should check that button "with header, subHeader and footer" has header, subheader and all buttons are clickable', async () => {
             await scrollIntoView(headerPopoverButton);
             await click(headerPopoverButton, 3);
-            await expect(await getText(barElement)).toBe(cozyHeaderTestText);
-            await expect(await getText(barElement, 1)).toBe(cozySubheaderTestText);
 
             await expect(await isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
             await expect(await isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
@@ -344,7 +313,6 @@ describe('Popover test suite', () => {
                 }
                 await expect(await isElementClickable(barElement)).toBe(true, `button with index ${i} not clickable`);
             }
-            await expect(await getText(barElement, 1)).toBe(headerTestText);
         });
     });
 

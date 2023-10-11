@@ -93,6 +93,7 @@
     "coreToken.deleteButtonLabel": "Smazatelné",
     "coreToken.ariaRoleDescription": "token",
     "coreTokenizer.moreLabel": "{count} více",
+    "coreTokenizer.tokenizerLabel": "Tokenizer",
     "coreUploadCollection.menuOkText": "Ok",
     "coreUploadCollection.menuCancelText": "Zrušit",
     "coreUploadCollection.menuEditAriaLabel": "Upravit",
