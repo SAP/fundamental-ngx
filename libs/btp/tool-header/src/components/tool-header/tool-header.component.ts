@@ -51,7 +51,9 @@ import { ToolHeaderLogoDirective } from '../../directives/tool-header-logo.direc
 import { ToolHeaderUserDirective } from '../../directives/tool-header-user.directive';
 import { ToolHeaderComponentClass } from '../../tool-header-component.class';
 
-export type FdbToolHeaderMode = 'desktop' | 'tablet' | 'mobile';
+// @todo should be unified with tool layout component mode
+export type FdbToolHeaderMode = '' | 'tablet' | 'mobile';
+
 const imports = [
     ToolHeaderGroupDirective,
     NgIf,

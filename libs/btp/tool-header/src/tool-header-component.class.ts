@@ -7,7 +7,7 @@ import { FdbToolHeaderState } from './tool-header-state.type';
 
 export abstract class ToolHeaderComponentClass {
     /** Mode signal */
-    mode = signal<FdbToolHeaderMode>('desktop');
+    mode = signal<FdbToolHeaderMode>('');
 
     /** @hidden */
     orientation = signal<'landscape' | 'portrait'>('landscape');

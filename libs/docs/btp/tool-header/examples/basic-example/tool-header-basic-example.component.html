@@ -1,11 +1,11 @@
 <fd-segmented-button [(ngModel)]="viewMode" [style.margin-bottom.rem]="1">
     <button fd-button value="mobile">Mobile</button>
     <button fd-button value="tablet">Tablet</button>
-    <button fd-button value="desktop">Desktop</button>
+    <button fd-button [value]="''">Desktop</button>
 </fd-segmented-button>
 
 <fdb-tool-header
-    [fdContentDensity]="viewMode === 'desktop' ? 'compact' : 'cozy'"
+    [fdContentDensity]="viewMode === '' ? 'compact' : 'cozy'"
     productName="Fundamental-ngx"
     secondTitle="HQ Angular Components"
     [mode]="viewMode"

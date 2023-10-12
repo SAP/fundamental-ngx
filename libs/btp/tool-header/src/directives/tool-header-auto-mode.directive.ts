@@ -81,11 +81,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
                 const [mode, orientation = 'landscape'] = _mode;
                 this._toolHeaderComponent._mode = mode;
                 this._toolHeaderComponent._orientation = orientation;
-                if (mode === 'desktop') {
-                    this._contentDensity.fdContentDensity = ContentDensityMode.COMPACT;
-                } else {
-                    this._contentDensity.fdContentDensity = ContentDensityMode.COZY;
-                }
+                this._contentDensity.fdContentDensity = mode ? ContentDensityMode.COMPACT : ContentDensityMode.COZY;
             });
     }
 
@@ -97,7 +93,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
      */
     private _getMode(width: number, config: FdbToolHeaderModeConfig): [FdbToolHeaderMode, 'landscape' | 'portrait'] {
         if (width >= config.desktop) {
-            return ['desktop', 'landscape'];
+            return ['', 'landscape'];
         }
         if (width <= config.mobile) {
             return ['mobile', 'landscape'];

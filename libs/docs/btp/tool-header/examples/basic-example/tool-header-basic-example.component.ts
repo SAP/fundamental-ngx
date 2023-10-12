@@ -68,7 +68,7 @@ export class ToolHeaderBasicExampleComponent {
     @ViewChild('notificationsPopover')
     notificationsPopoverComponent: PopoverComponent;
 
-    viewMode: FdbToolHeaderMode = 'desktop';
+    viewMode: FdbToolHeaderMode = '';
 
     searchValue: string;
 
