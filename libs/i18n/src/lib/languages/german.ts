@@ -44,6 +44,10 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Eingabe mehrerer Werte',
+        noResults: 'Keine Ergebnisse.',
+        navigateSelectionsWithArrows: 'Navigieren Sie mit den Aufwärts- und Abwärtspfeilen durch die Auswahl.',
+        escapeNavigateTokens:
+            'Drücken Sie Escape, um das Eingabefeld zu verlassen, und navigieren Sie mit der linken und rechten Pfeiltaste durch die ausgewählten Optionen.',
         tokensCountText: ({ length }) => {
             if (length === 0) {
                 return 'Enthält no token';

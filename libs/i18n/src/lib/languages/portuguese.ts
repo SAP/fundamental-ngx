@@ -45,6 +45,10 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Entrada de valores múltiplos',
+        noResults: 'Sem resultados.',
+        navigateSelectionsWithArrows: 'Navegue pelas seleções com as setas para cima e para baixo.',
+        escapeNavigateTokens:
+            'Pressione escape para sair do campo de entrada e use as teclas de seta para a esquerda e para a direita para navegar pelas opções selecionadas.',
         tokensCountText: ({ length }) => {
             let plural = `${length} tokens`;
             if (length === 0) {

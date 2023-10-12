@@ -61,6 +61,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
     },
     coreMultiInput: {
         multiInputAriaLabel: 'Multi Value Input',
+        noResults: 'No results.',
+        navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
+        escapeNavigateTokens:
+            'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
         tokensCountText: ({ length }) => {
             const option = pluralization.process(length);
             switch (option) {
