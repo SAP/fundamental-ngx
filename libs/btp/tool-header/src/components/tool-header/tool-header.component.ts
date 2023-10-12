@@ -128,7 +128,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
 
     /** @hidden */
     @Input('orientation')
-    set _orientation(orientation: 'horizontal' | 'vertical') {
+    set _orientation(orientation: 'landscape' | 'portrait') {
         if (orientation !== this.orientation()) {
             this.orientation.set(orientation);
         }
@@ -220,7 +220,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         if (this.searchFieldExpanded()) {
             if (
                 this.mode() === 'tablet' &&
-                this.orientation() === 'horizontal' &&
+                this.orientation() === 'portrait' &&
                 this.searchField() &&
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 !event.composedPath().includes(this.searchField()!.elementRef.nativeElement)

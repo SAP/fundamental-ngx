@@ -10,7 +10,7 @@ export abstract class ToolHeaderComponentClass {
     mode = signal<FdbToolHeaderMode>('desktop');
 
     /** @hidden */
-    orientation = signal<'horizontal' | 'vertical'>('horizontal');
+    orientation = signal<'landscape' | 'portrait'>('landscape');
 
     /** @hidden */
     protected fdbToolHeaderState = computed<FdbToolHeaderState>(() => {
@@ -20,6 +20,7 @@ export abstract class ToolHeaderComponentClass {
                 menuButtonVisible: !this.searchFieldExpanded(),
                 logoVisible: !this.searchFieldExpanded(),
                 productNameVisible: false,
+                secondTitleVisible: false,
                 searchFieldVisible: this.searchFieldExpanded(),
                 searchFieldToggleActionVisible: !!this.searchField() && !this.searchFieldExpanded(),
                 providedActionsVisible: !this.searchFieldExpanded(),
@@ -30,18 +31,24 @@ export abstract class ToolHeaderComponentClass {
             };
         }
         if (this.mode() === 'tablet') {
+            const isPortrait = this.orientation() === 'portrait';
+            const isLandscape = !isPortrait;
+            const searchFieldVisible = this.searchFieldExpanded() || isLandscape;
+            const searchFieldToggleActionVisible = !searchFieldVisible && !!this.searchField();
+
             return {
-                backButtonVisible: this.searchFieldExpanded() && this.orientation() === 'vertical',
-                menuButtonVisible: !this.searchFieldExpanded(),
+                backButtonVisible: false,
+                menuButtonVisible: true,
                 logoVisible: true,
-                productNameVisible: this.orientation() === 'vertical' ? !this.searchFieldExpanded() : true,
-                searchFieldVisible: this.searchFieldExpanded(),
-                searchFieldToggleActionVisible: !!this.searchField() && !this.searchFieldExpanded(),
+                productNameVisible: isPortrait ? !this.searchFieldExpanded() : true,
+                secondTitleVisible: isLandscape ? false : !this.searchFieldExpanded(),
+                searchFieldVisible,
+                searchFieldToggleActionVisible,
                 providedActionsVisible: true,
                 userAvatarVisible: true,
                 productSwitchVisible: true,
                 voiceInputVisible: false,
-                separatorsBetweenActionsVisible: this.orientation() === 'horizontal'
+                separatorsBetweenActionsVisible: this.orientation() === 'landscape'
             };
         }
         return {
@@ -49,6 +56,7 @@ export abstract class ToolHeaderComponentClass {
             menuButtonVisible: true,
             logoVisible: true,
             productNameVisible: true,
+            secondTitleVisible: true,
             searchFieldVisible: true,
             searchFieldToggleActionVisible: false,
             providedActionsVisible: true,

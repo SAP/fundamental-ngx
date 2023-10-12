@@ -6,15 +6,15 @@ import { FdbToolHeaderMode, ToolHeaderComponent } from '../components/tool-heade
 
 interface FdbToolHeaderModeConfig {
     desktop: number;
-    tabletHorizontal: [number, number];
-    tabletVertical: [number, number];
+    tabletlandscape: [number, number];
+    tabletportrait: [number, number];
     mobile: number;
 }
 
 const DEFAULT_CONFIG: FdbToolHeaderModeConfig = {
     desktop: ResponsiveBreakpoints.L + 1,
-    tabletHorizontal: [ResponsiveBreakpoints.M + 1, ResponsiveBreakpoints.L],
-    tabletVertical: [ResponsiveBreakpoints.S + 1, ResponsiveBreakpoints.M],
+    tabletlandscape: [ResponsiveBreakpoints.M + 1, ResponsiveBreakpoints.L],
+    tabletportrait: [ResponsiveBreakpoints.S + 1, ResponsiveBreakpoints.M],
     mobile: ResponsiveBreakpoints.S
 };
 
@@ -73,7 +73,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
                 takeUntilDestroyed()
             )
             .subscribe((_mode) => {
-                const [mode, orientation = 'horizontal'] = _mode;
+                const [mode, orientation = 'landscape'] = _mode;
                 this._toolHeaderComponent._mode = mode;
                 this._toolHeaderComponent._orientation = orientation;
             });
@@ -85,16 +85,16 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
      * @param config
      * @private
      */
-    private _getMode(width: number, config: FdbToolHeaderModeConfig): [FdbToolHeaderMode, 'horizontal' | 'vertical'] {
+    private _getMode(width: number, config: FdbToolHeaderModeConfig): [FdbToolHeaderMode, 'landscape' | 'portrait'] {
         if (width >= config.desktop) {
-            return ['desktop', 'horizontal'];
+            return ['desktop', 'landscape'];
         }
         if (width <= config.mobile) {
-            return ['mobile', 'horizontal'];
+            return ['mobile', 'landscape'];
         }
         return [
             'tablet',
-            width >= config.tabletHorizontal[0] && width <= config.tabletHorizontal[1] ? 'horizontal' : 'vertical'
+            width >= config.tabletlandscape[0] && width <= config.tabletlandscape[1] ? 'landscape' : 'portrait'
         ];
     }
 }

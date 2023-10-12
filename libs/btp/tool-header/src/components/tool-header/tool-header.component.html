@@ -34,18 +34,16 @@
             />
         </ng-template>
     </div>
-    <ng-container *ngIf="fdbToolHeaderState().productNameVisible">
-        <div fdbToolHeaderElement>
-            <h1 class="fd-tool-header__product-name">
-                {{ productName }}
-            </h1>
+    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().productNameVisible">
+        <h1 class="fd-tool-header__product-name">
+            {{ productName }}
+        </h1>
+    </div>
+    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().secondTitleVisible && secondTitle">
+        <div class="fd-tool-header__second-title">
+            {{ secondTitle }}
         </div>
-        <div fdbToolHeaderElement *ngIf="secondTitle">
-            <div class="fd-tool-header__second-title">
-                {{ secondTitle }}
-            </div>
-        </div>
-    </ng-container>
+    </div>
 </div>
 
 <div fdbToolHeaderGroup center *ngIf="fdbToolHeaderState().searchFieldVisible">

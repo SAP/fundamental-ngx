@@ -3,6 +3,7 @@ export interface FdbToolHeaderState {
     menuButtonVisible: boolean;
     logoVisible: boolean;
     productNameVisible: boolean;
+    secondTitleVisible: boolean;
     searchFieldVisible: boolean;
     searchFieldToggleActionVisible: boolean;
     providedActionsVisible: boolean;
