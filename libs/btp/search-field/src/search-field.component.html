@@ -8,6 +8,8 @@
         [ngModel]="_value"
         (ngModelChange)="updateValue($event)"
         (keydown.enter)="_search()"
+        (focusin)="_inputFocused.set(true)"
+        (focusout)="_inputFocused.set(false)"
         #searchInputField
     />
     <div role="presentation" aria-hidden="true" class="fd-search-field__underline"></div>
@@ -27,6 +29,7 @@
                 (click)="_search()"
                 glyph="slim-arrow-right"
                 class="fd-button--nested"
+                [class.is-focus]="_value && _inputFocused()"
                 [ariaLabel]="'btpSearchField.searchButtonLabel' | fdTranslate"
                 [attr.aria-disabled]="!_value"
                 [attr.tabindex]="!_value ? -1 : 0"

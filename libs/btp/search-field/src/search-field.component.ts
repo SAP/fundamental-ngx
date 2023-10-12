@@ -8,6 +8,7 @@ import {
     inject,
     Input,
     Output,
+    signal,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -46,6 +47,11 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
 
     /** Value of the input field. */
     protected _value?: string;
+
+    /**
+     * Whether the search field is focused
+     * @hidden */
+    protected _inputFocused = signal(false);
 
     /** @hidden */
     private _cvaControl: CvaControl<string> = inject(CvaControl);
