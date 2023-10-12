@@ -15,7 +15,6 @@
     <fdb-tool-header-basic-example></fdb-tool-header-basic-example>
 </component-example>
 <code-example [exampleFiles]="basicExample"></code-example>
-
 <separator />
 
 <fd-docs-section-title id="autoMode" componentName="FdbToolHeader">Auto mode example</fd-docs-section-title>
@@ -29,7 +28,20 @@
     <fdb-tool-header-auto-mode-example></fdb-tool-header-auto-mode-example>
 </component-example>
 <code-example [exampleFiles]="autoModeExample"></code-example>
+<separator />
 
+<fd-docs-section-title id="menuButton" componentName="FdbToolHeader">Menu button example</fd-docs-section-title>
+<description>
+    <p>
+        The tool header component can have menu button, which will be displayed before the logo. It can be controlled
+        with keyboard. In RTL, <code>left arrow</code> will output collapse event and <code>right arrow</code>
+        will output expand event. In LTR it is the opposite.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-tool-header-menu-button-example></fdb-tool-header-menu-button-example>
+</component-example>
+<code-example [exampleFiles]="menuButtonExample"></code-example>
 <separator />
 
 <fd-docs-section-title id="productSwitch" componentName="FdbToolHeader">Product switch example</fd-docs-section-title>

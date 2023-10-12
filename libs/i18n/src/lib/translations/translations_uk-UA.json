@@ -509,5 +509,6 @@
     "coreTree.noData": "Немає даних",
     "btpSearchField.searchButtonLabel": "Пошук",
     "btpSearchField.clearButtonLabel": "Очистити",
-    "btpSearchField.searchInputPlaceholder": "Пошук"
+    "btpSearchField.searchInputPlaceholder": "Пошук",
+    "btpToolHeader.menuButtonAriaLabel": "Кнопка меню"
 }

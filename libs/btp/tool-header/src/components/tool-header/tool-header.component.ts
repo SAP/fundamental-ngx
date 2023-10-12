@@ -34,6 +34,7 @@ import {
     OverflowLayoutItemDirective
 } from '@fundamental-ngx/core/overflow-layout';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subscription } from 'rxjs';
 import { ToolHeaderActionsDirective } from '../../directives/tool-header-actions.directive';
 import { ToolHeaderButtonDirective } from '../../directives/tool-header-button.directive';
@@ -67,7 +68,8 @@ const imports = [
     IconComponent,
     ButtonComponent,
     ToolHeaderButtonDirective,
-    ToolHeaderLogoDirective
+    ToolHeaderLogoDirective,
+    FdTranslatePipe
 ];
 
 @Component({
@@ -137,6 +139,22 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     menuClick = new EventEmitter<void>();
 
     /**
+     * Event emitted when user intends to expand the menu.
+     * Happens when user clicks `right arrow` key on the menu button
+     * if on ltr or `left arrow` key if on rtl.
+     **/
+    @Output()
+    menuExpand = new EventEmitter<void>();
+
+    /**
+     * Event emitted when user intends to collapse the menu.
+     * Happens when user clicks `left arrow` key on the menu button
+     * if on ltr or `right arrow` key if on rtl.
+     **/
+    @Output()
+    menuCollapse = new EventEmitter<void>();
+
+    /**
      * Event emitted when the microphone button is clicked
      **/
     @Output()
@@ -202,6 +220,24 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     ngOnDestroy(): void {
         if (this._searchFieldOutsideClickSubscription) {
             this._searchFieldOutsideClickSubscription.unsubscribe();
+        }
+    }
+
+    /** @hidden */
+    protected _handleMenuLeftArrowKey(): void {
+        if (this._rtl()) {
+            this.menuExpand.emit();
+        } else {
+            this.menuCollapse.emit();
+        }
+    }
+
+    /** @hidden */
+    protected _handleMenuRightArrowKey(): void {
+        if (this._rtl()) {
+            this.menuCollapse.emit();
+        } else {
+            this.menuExpand.emit();
         }
     }
 }

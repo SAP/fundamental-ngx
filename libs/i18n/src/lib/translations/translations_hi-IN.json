@@ -507,5 +507,6 @@
     "coreTree.noData": "No data",
     "btpSearchField.searchButtonLabel": "खोजें",
     "btpSearchField.clearButtonLabel": "साफ़ करें",
-    "btpSearchField.searchInputPlaceholder": "खोजें"
+    "btpSearchField.searchInputPlaceholder": "खोजें",
+    "btpToolHeader.menuButtonAriaLabel": "मेनू बटन"
 }

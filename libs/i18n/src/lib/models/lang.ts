@@ -867,4 +867,7 @@ export interface FdLanguage {
         clearButtonLabel: FdLanguageKey;
         searchInputPlaceholder: FdLanguageKey;
     };
+    btpToolHeader: {
+        menuButtonAriaLabel: FdLanguageKey;
+    };
 }

@@ -507,5 +507,6 @@
     "coreTree.noData": "No data",
     "btpSearchField.searchButtonLabel": "Kërko",
     "btpSearchField.clearButtonLabel": "Pastro",
-    "btpSearchField.searchInputPlaceholder": "Kërko"
+    "btpSearchField.searchInputPlaceholder": "Kërko",
+    "btpToolHeader.menuButtonAriaLabel": "Butoni i menysë"
 }

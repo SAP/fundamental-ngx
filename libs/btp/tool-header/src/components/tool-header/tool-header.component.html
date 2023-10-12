@@ -3,7 +3,16 @@
         <button fd-button fdbToolHeaderButton glyph="slim-arrow-left" (click)="searchFieldExpanded.set(false)"></button>
     </div>
     <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().menuButtonVisible && showMenuButton">
-        <button fd-button fdbToolHeaderButton glyph="menu2" (click)="menuClick.emit()"></button>
+        <button
+            fd-button
+            fdbToolHeaderButton
+            [title]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
+            [ariaLabel]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
+            glyph="menu2"
+            (keydown.arrowLeft)="_handleMenuLeftArrowKey()"
+            (keydown.arrowRight)="_handleMenuRightArrowKey()"
+            (click)="menuClick.emit()"
+        ></button>
     </div>
     <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().logoVisible">
         <ng-container *ngIf="_toolHeaderLogoDirective; else defaultLogo">

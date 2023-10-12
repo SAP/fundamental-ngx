@@ -1,5 +1,7 @@
-import { computed, signal } from '@angular/core';
+import { computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FdbToolHeaderMode } from './components/tool-header/tool-header.component';
 import { FdbToolHeaderState } from './tool-header-state.type';
 
@@ -30,7 +32,7 @@ export abstract class ToolHeaderComponentClass {
         if (this.mode() === 'tablet') {
             return {
                 backButtonVisible: this.searchFieldExpanded() && this.orientation() === 'vertical',
-                menuButtonVisible: !this.searchFieldExpanded() && this.orientation() === 'vertical',
+                menuButtonVisible: !this.searchFieldExpanded(),
                 logoVisible: true,
                 productNameVisible: !this.searchFieldExpanded(),
                 searchFieldVisible: this.searchFieldExpanded(),
@@ -62,4 +64,10 @@ export abstract class ToolHeaderComponentClass {
 
     /** @hidden */
     protected searchFieldExpanded = signal<boolean>(false);
+
+    /**
+     * RTL signal
+     * @hidden
+     */
+    protected _rtl = toSignal(inject(RtlService).rtl);
 }

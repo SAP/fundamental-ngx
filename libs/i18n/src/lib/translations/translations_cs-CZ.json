@@ -507,5 +507,6 @@
     "coreTree.noData": "No data",
     "btpSearchField.searchButtonLabel": "Hledat",
     "btpSearchField.clearButtonLabel": "Vymazat",
-    "btpSearchField.searchInputPlaceholder": "Hledat"
+    "btpSearchField.searchInputPlaceholder": "Hledat",
+    "btpToolHeader.menuButtonAriaLabel": "Tlačítko Menu"
 }

@@ -507,5 +507,6 @@
     "coreTree.noData": "No data",
     "btpSearchField.searchButtonLabel": "ძებნა",
     "btpSearchField.clearButtonLabel": "გასუფთავება",
-    "btpSearchField.searchInputPlaceholder": "ძებნა"
+    "btpSearchField.searchInputPlaceholder": "ძებნა",
+    "btpToolHeader.menuButtonAriaLabel": "მენიუს ღილაკი"
 }

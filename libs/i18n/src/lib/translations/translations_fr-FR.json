@@ -507,5 +507,6 @@
     "coreTree.noData": "No data",
     "btpSearchField.searchButtonLabel": "Rechercher",
     "btpSearchField.clearButtonLabel": "Effacer",
-    "btpSearchField.searchInputPlaceholder": "Rechercher"
+    "btpSearchField.searchInputPlaceholder": "Rechercher",
+    "btpToolHeader.menuButtonAriaLabel": "Bouton Menu"
 }

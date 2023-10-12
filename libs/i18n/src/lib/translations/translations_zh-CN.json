@@ -507,5 +507,6 @@
     "coreTree.noData": "No data",
     "btpSearchField.searchButtonLabel": "搜索",
     "btpSearchField.clearButtonLabel": "清除",
-    "btpSearchField.searchInputPlaceholder": "搜索"
+    "btpSearchField.searchInputPlaceholder": "搜索",
+    "btpToolHeader.menuButtonAriaLabel": "菜单按钮"
 }
