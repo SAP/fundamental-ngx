@@ -1,0 +1,36 @@
+<div class="fd-search-field">
+    <fd-icon glyph="search" class="fd-search-field__icon" role="presentation" [ariaHidden]="true"></fd-icon>
+    <input
+        [placeholder]="placeholder || ('btpSearchField.searchInputPlaceholder' | fdTranslate)"
+        type="search"
+        aria-label="Search"
+        class="fd-search-field__input"
+        [ngModel]="_value"
+        (ngModelChange)="updateValue($event)"
+        (keydown.enter)="_search()"
+        #searchInputField
+    />
+    <div role="presentation" aria-hidden="true" class="fd-search-field__underline"></div>
+    <div class="fd-search-field__actions">
+        <div class="fd-search-field__action-container">
+            <button
+                fd-button
+                class="fd-button--nested"
+                glyph="decline"
+                [ariaLabel]="'btpSearchField.clearButtonLabel' | fdTranslate"
+                (click)="updateValue(''); searchInputField.focus()"
+            ></button>
+        </div>
+        <div class="fd-search-field__action-container">
+            <button
+                fd-button
+                (click)="_search()"
+                glyph="slim-arrow-right"
+                class="fd-button--nested"
+                [ariaLabel]="'btpSearchField.searchButtonLabel' | fdTranslate"
+                [attr.aria-disabled]="!_value"
+                [attr.tabindex]="!_value ? -1 : 0"
+            ></button>
+        </div>
+    </div>
+</div>

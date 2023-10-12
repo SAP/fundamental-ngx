@@ -8,61 +8,27 @@ import {
     inject,
     Input,
     Output,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { of, tap } from 'rxjs';
 
 @Component({
     selector: 'fdb-search-field',
-    template: `
-        <div class="fd-search-field">
-            <fd-icon glyph="search" class="fd-search-field__icon" role="presentation" [ariaHidden]="true"></fd-icon>
-            <input
-                [placeholder]="placeholder || ('btpSearchField.searchInputPlaceholder' | fdTranslate)"
-                type="search"
-                aria-label="Search"
-                class="fd-search-field__input"
-                [ngModel]="_value"
-                (ngModelChange)="updateValue($event)"
-                (keydown.enter)="_search()"
-                #searchInputField
-            />
-            <div role="presentation" aria-hidden="true" class="fd-search-field__underline"></div>
-            <div class="fd-search-field__actions">
-                <div class="fd-search-field__action-container" *ngIf="_value">
-                    <button
-                        class="fd-button fd-button--nested"
-                        [attr.aria-label]="'btpSearchField.clearButtonLabel' | fdTranslate"
-                        (click)="updateValue(''); searchInputField.focus()"
-                    >
-                        <i class="sap-icon--decline" role="presentation"></i>
-                    </button>
-                </div>
-                <div class="fd-search-field__action-container">
-                    <button
-                        (click)="_search()"
-                        class="fd-button fd-button--nested"
-                        [attr.aria-label]="'btpSearchField.searchButtonLabel' | fdTranslate"
-                        [attr.aria-disabled]="!_value"
-                        [attr.tabindex]="!_value ? -1 : 0"
-                    >
-                        <fd-icon glyph="slim-arrow-right" role="presentation"></fd-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `,
+    templateUrl: './search-field.component.html',
     styleUrls: ['../../../../node_modules/fundamental-styles/dist/search-field.css'],
     standalone: true,
     hostDirectives: [CvaDirective],
     providers: [CvaControl],
-    imports: [IconComponent, NgIf, FormsModule, FdTranslatePipe]
+    imports: [IconComponent, NgIf, FormsModule, FdTranslatePipe, ButtonComponent],
+    encapsulation: ViewEncapsulation.None
 })
 export class SearchFieldComponent implements AfterViewInit, HasElementRef {
     /** Placeholder for the input field. */
