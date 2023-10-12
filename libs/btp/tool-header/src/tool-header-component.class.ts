@@ -34,7 +34,7 @@ export abstract class ToolHeaderComponentClass {
                 backButtonVisible: this.searchFieldExpanded() && this.orientation() === 'vertical',
                 menuButtonVisible: !this.searchFieldExpanded(),
                 logoVisible: true,
-                productNameVisible: !this.searchFieldExpanded(),
+                productNameVisible: this.orientation() === 'vertical' ? !this.searchFieldExpanded() : true,
                 searchFieldVisible: this.searchFieldExpanded(),
                 searchFieldToggleActionVisible: !!this.searchField() && !this.searchFieldExpanded(),
                 providedActionsVisible: true,
