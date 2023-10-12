@@ -53,7 +53,7 @@
 </div>
 
 <div fdbToolHeaderGroup actions>
-    <fd-overflow-layout fdbToolHeaderElement [style.justify-content]="'end'">
+    <fd-overflow-layout fdbToolHeaderElement [style.justify-content]="'end'" [maxVisibleItems]="0">
         <ng-container *ngIf="fdbToolHeaderState().searchFieldToggleActionVisible">
             <div fdbToolHeaderElement *fdOverflowItemRef="let hidden" [forceVisibility]="true" fdOverflowLayoutItem>
                 <button
@@ -65,23 +65,29 @@
             </div>
         </ng-container>
         <ng-container *ngIf="fdbToolHeaderState().providedActionsVisible">
-            <ng-container *ngFor="let action of _toolHeaderActionsDirective?._actions() || []">
+            <ng-container *ngFor="let action of _toolHeaderActionsDirective?._actions()">
                 <div
                     fdbToolHeaderElement
                     *fdOverflowItemRef="let hidden"
                     [forceVisibility]="!!action.forceVisibility"
                     fdOverflowLayoutItem
                 >
-                    <button
-                        fd-button
-                        #buttonComponent
-                        fdbToolHeaderButton
-                        [glyph]="action.glyph"
-                        (click)="action.clickCallback(buttonComponent)"
-                        [ariaLabel]="action.label"
-                    >
-                        <span class="fd-button__badge" *ngIf="action.hasBadge"></span>
-                    </button>
+                    <ng-template
+                        [ngIf]="!!action.templateRef"
+                        [ngIfThen]="$any(action.templateRef)"
+                        [ngIfElse]="defaultActionButtonTemplate"
+                    ></ng-template>
+                    <ng-template #defaultActionButtonTemplate>
+                        <button
+                            fd-button
+                            fdbToolHeaderButton
+                            [glyph]="action.glyph"
+                            (click)="action.clickCallback()"
+                            [ariaLabel]="action.label"
+                        >
+                            <span class="fd-button__badge" *ngIf="action.hasBadge"></span>
+                        </button>
+                    </ng-template>
                     <div
                         class="fd-tool-header__separator"
                         *ngIf="action.hasSeparator && fdbToolHeaderState().separatorsBetweenActionsVisible"
@@ -90,31 +96,27 @@
             </ng-container>
         </ng-container>
 
-        <ng-container *fdOverflowExpand="let overflowItems">
-            <div fdbToolHeaderElement>
-                <button fd-button fdbToolHeaderButton glyph="overflow" [fdMenuTrigger]="overflownItemsMenu"></button>
-            </div>
-            <fd-menu additionalBodyClass="fdb-tool-header-actions-overflow-popover-body" #overflownItemsMenu>
+        <fdb-navigation-menu-popover *fdOverflowExpand="let overflowItems" fdbToolHeaderElement>
+            <button *fdbNavigationMenuPopoverControl fd-button fdbToolHeaderButton glyph="overflow"></button>
+            <ul *fdPopoverBody fdkFocusableList [wrap]="true" fdb-navigation-menu>
                 <ng-container *ngFor="let item of overflowItems">
-                    <li
-                        [hasSeparator]="!!action.hasSeparator && fdbToolHeaderState().separatorsBetweenActionsVisible"
-                        fd-menu-item
-                        *ngIf="_actions()[item.globalIndex] as action"
-                    >
-                        <a
-                            fd-menu-interactive
-                            #menuInteractiveComponent
-                            (click)="action.clickCallback(menuInteractiveComponent)"
-                        >
-                            <fd-menu-addon [glyph]="action.glyph"></fd-menu-addon>
-                            <span fd-menu-title>
-                                {{ action.label }}
-                            </span>
-                        </a>
-                    </li>
+                    <ng-container *ngIf="_toolHeaderActionsDirective?._actions() as actions">
+                        <li
+                            *ngIf="
+                                fdbToolHeaderState().searchFieldToggleActionVisible
+                                    ? actions[item.globalIndex - 1]
+                                    : actions[item.globalIndex] as action
+                            "
+                            fdb-navigation-menu-item
+                            fdkFocusableItem
+                            [glyph]="action.glyph"
+                            (click)="action.clickCallback()"
+                            [label]="action.label"
+                        ></li>
+                    </ng-container>
                 </ng-container>
-            </fd-menu>
-        </ng-container>
+            </ul>
+        </fdb-navigation-menu-popover>
     </fd-overflow-layout>
     <ng-container *ngIf="fdbToolHeaderState().userAvatarVisible && _toolHeaderUser">
         <div fdbToolHeaderElement>

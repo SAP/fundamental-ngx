@@ -4,10 +4,44 @@
     <button fd-button value="desktop">Desktop</button>
 </fd-segmented-button>
 
-<fdb-tool-header productName="Fundamental-ngx" [mode]="viewMode">
+<fdb-tool-header productName="Fundamental-ngx" [mode]="viewMode" id="basic">
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
 
-    <fdb-tool-header-actions [actions]="actions"></fdb-tool-header-actions>
+    <fdb-tool-header-actions [actions]="actions">
+        <ng-template
+            fdbToolHeaderAction
+            [forceVisibility]="true"
+            label="Notifications"
+            glyph="bell"
+            (clicked)="notificationsActionClicked()"
+        >
+            <fd-popover [noArrow]="false">
+                <fd-popover-control>
+                    <button
+                        fd-button
+                        fdbToolHeaderButton
+                        [hasBadge]="true"
+                        [glyph]="'bell'"
+                        [ariaLabel]="'Notifications'"
+                    ></button>
+                </fd-popover-control>
+                <div
+                    *fdPopoverBody
+                    [ngStyle]="{
+                        padding: '0.5rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.5rem'
+                    }"
+                >
+                    <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
+                    <fd-message-strip *fdkRepeat="10; let index = index">
+                        A new notification has arrived. {{ index }}
+                    </fd-message-strip>
+                </div>
+            </fd-popover>
+        </ng-template>
+    </fdb-tool-header-actions>
 
     <fd-avatar
         fdbToolHeaderUser

@@ -1,14 +1,17 @@
-import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgIf, NgStyle } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import {
     FdbToolHeaderActionButton,
     FdbToolHeaderMode,
+    ToolHeaderActionDirective,
     ToolHeaderActionsDirective,
+    ToolHeaderButtonDirective,
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
+import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -19,6 +22,13 @@ import {
     MenuTitleDirective,
     MenuTriggerDirective
 } from '@fundamental-ngx/core/menu';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import {
+    PopoverBodyDirective,
+    PopoverBodyHeaderDirective,
+    PopoverComponent,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
@@ -39,11 +49,23 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         ToolHeaderActionsDirective,
         MenuComponent,
         MenuTriggerDirective,
-        SegmentedButtonComponent
+        SegmentedButtonComponent,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyDirective,
+        RepeatDirective,
+        ToolHeaderActionDirective,
+        ToolHeaderButtonDirective,
+        MessageStripComponent,
+        PopoverBodyHeaderDirective,
+        NgStyle
     ],
     standalone: true
 })
 export class ToolHeaderBasicExampleComponent {
+    @ViewChild('notificationsPopover')
+    notificationsPopoverComponent: PopoverComponent;
+
     viewMode: FdbToolHeaderMode = 'desktop';
 
     searchValue: string;
@@ -61,15 +83,6 @@ export class ToolHeaderBasicExampleComponent {
         ],
         [
             {
-                label: 'Notifications',
-                glyph: 'bell',
-                clickCallback: () => {
-                    console.log('Action 1');
-                },
-                forceVisibility: true,
-                hasBadge: true
-            },
-            {
                 label: 'Settings',
                 glyph: 'settings',
                 clickCallback: () => {
@@ -83,5 +96,9 @@ export class ToolHeaderBasicExampleComponent {
     valueUpdate($event: string) {
         console.log($event);
         this.searchValue = $event;
+    }
+
+    notificationsActionClicked() {
+        console.log('notificationsActionClicked');
     }
 }

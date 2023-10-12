@@ -1,11 +1,11 @@
-import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
+import { TemplateRef } from '@angular/core';
 
 export interface FdbToolHeaderActionButton {
+    templateRef?: TemplateRef<void>;
     glyph: string;
     label: string;
     forceVisibility?: boolean;
-    clickCallback: (button: ButtonComponent | MenuInteractiveComponent) => void;
+    clickCallback: () => void;
     hasBadge?: boolean;
     hasSeparator?: boolean;
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -12,11 +12,16 @@ import {
     OnDestroy,
     Output,
     ViewEncapsulation,
-    computed,
     inject
 } from '@angular/core';
+import {
+    NavigationMenuComponent,
+    NavigationMenuItemComponent,
+    NavigationMenuPopoverComponent,
+    NavigationMenuPopoverControlDirective
+} from '@fundamental-ngx/btp/navigation-menu';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
-import { FD_PRODUCT_SWITCH_COMPONENT } from '@fundamental-ngx/core';
+import { FD_PRODUCT_SWITCH_COMPONENT, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -85,7 +90,16 @@ const imports = [
         class: 'fd-tool-header',
         '[class.fd-tool-header--menu]': 'showMenuButton'
     },
-    imports,
+    imports: [
+        imports,
+        NavigationMenuComponent,
+        NavigationMenuItemComponent,
+        FocusableListDirective,
+        FocusableItemDirective,
+        NavigationMenuPopoverComponent,
+        NavigationMenuPopoverControlDirective,
+        AsyncPipe
+    ],
     providers: [
         contentDensityObserverProviders(),
         {
@@ -190,16 +204,12 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     @ContentChild(FD_PRODUCT_SWITCH_COMPONENT)
     _toolHeaderProductSwitch?: unknown;
 
-    /**
-     * Combined list of actions from ToolHeaderActionsDirective and ToolHeaderComponent
-     * @hidden */
-    protected _actions = computed(() => [undefined, ...(this._toolHeaderActionsDirective?._actions() || [])]);
-
     /** @hidden */
     private _searchFieldOutsideClickSubscription?: Subscription;
 
     /** @hidden */
     private _ngZone = inject(NgZone);
+
     /**
      * The handler, responsible for closing the search field
      * on outside click
