@@ -4,7 +4,13 @@
     <button fd-button value="desktop">Desktop</button>
 </fd-segmented-button>
 
-<fdb-tool-header productName="Fundamental-ngx" secondTitle="HQ Angular Components" [mode]="viewMode" id="basic">
+<fdb-tool-header
+    [fdContentDensity]="viewMode === 'desktop' ? 'compact' : 'cozy'"
+    productName="Fundamental-ngx"
+    secondTitle="HQ Angular Components"
+    [mode]="viewMode"
+    id="basic"
+>
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
 
     <fdb-tool-header-actions [actions]="actions">

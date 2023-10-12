@@ -1,6 +1,7 @@
 import { computed, Directive, ElementRef, inject, Input, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { HasElementRef, ResizeObserverService, ResponsiveBreakpoints } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { distinctUntilChanged, map, startWith } from 'rxjs';
 import { FdbToolHeaderMode, ToolHeaderComponent } from '../components/tool-header/tool-header.component';
 
@@ -20,6 +21,7 @@ const DEFAULT_CONFIG: FdbToolHeaderModeConfig = {
 
 @Directive({
     selector: 'fdb-tool-header[fdbToolHeaderAutoMode]',
+    hostDirectives: [ContentDensityDirective],
     standalone: true
 })
 export class ToolHeaderAutoModeDirective implements HasElementRef {
@@ -40,6 +42,9 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
      * Current configuration of the directive.
      */
     protected _config = signal(DEFAULT_CONFIG);
+
+    /** @hidden */
+    protected _contentDensity = inject(ContentDensityDirective);
 
     /**
      * Signal of the Width of the element
@@ -76,6 +81,11 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
                 const [mode, orientation = 'landscape'] = _mode;
                 this._toolHeaderComponent._mode = mode;
                 this._toolHeaderComponent._orientation = orientation;
+                if (mode === 'desktop') {
+                    this._contentDensity.fdContentDensity = ContentDensityMode.COMPACT;
+                } else {
+                    this._contentDensity.fdContentDensity = ContentDensityMode.COZY;
+                }
             });
     }
 

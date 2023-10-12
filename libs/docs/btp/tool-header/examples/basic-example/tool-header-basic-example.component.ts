@@ -14,6 +14,7 @@ import {
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     MenuAddonDirective,
     MenuComponent,
@@ -58,7 +59,8 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         ToolHeaderButtonDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
-        NgStyle
+        NgStyle,
+        ContentDensityDirective
     ],
     standalone: true
 })
