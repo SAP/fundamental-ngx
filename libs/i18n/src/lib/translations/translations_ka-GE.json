@@ -508,5 +508,6 @@
     "btpSearchField.searchButtonLabel": "ძებნა",
     "btpSearchField.clearButtonLabel": "გასუფთავება",
     "btpSearchField.searchInputPlaceholder": "ძებნა",
+    "btpSearchField.searchInputAriaLabel": "ძებნა",
     "btpToolHeader.menuButtonAriaLabel": "მენიუს ღილაკი"
 }

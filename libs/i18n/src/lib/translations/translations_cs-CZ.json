@@ -508,5 +508,6 @@
     "btpSearchField.searchButtonLabel": "Hledat",
     "btpSearchField.clearButtonLabel": "Vymazat",
     "btpSearchField.searchInputPlaceholder": "Hledat",
+    "btpSearchField.searchInputAriaLabel": "Hledat",
     "btpToolHeader.menuButtonAriaLabel": "Tlačítko Menu"
 }

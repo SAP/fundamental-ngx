@@ -508,5 +508,6 @@
     "btpSearchField.searchButtonLabel": "खोजें",
     "btpSearchField.clearButtonLabel": "साफ़ करें",
     "btpSearchField.searchInputPlaceholder": "खोजें",
+    "btpSearchField.searchInputAriaLabel": "खोजें",
     "btpToolHeader.menuButtonAriaLabel": "मेनू बटन"
 }

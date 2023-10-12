@@ -510,5 +510,6 @@
     "btpSearchField.searchButtonLabel": "Пошук",
     "btpSearchField.clearButtonLabel": "Очистити",
     "btpSearchField.searchInputPlaceholder": "Пошук",
+    "btpSearchField.searchInputAriaLabel": "Пошук",
     "btpToolHeader.menuButtonAriaLabel": "Кнопка меню"
 }

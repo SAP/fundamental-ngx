@@ -507,5 +507,6 @@
     "btpSearchField.searchButtonLabel": "Procurar",
     "btpSearchField.clearButtonLabel": "Limpar",
     "btpSearchField.searchInputPlaceholder": "Procurar",
+    "btpSearchField.searchInputAriaLabel": "Procurar",
     "btpToolHeader.menuButtonAriaLabel": "Botão de menu"
 }

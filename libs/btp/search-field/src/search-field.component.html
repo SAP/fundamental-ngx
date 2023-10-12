@@ -3,7 +3,7 @@
     <input
         [placeholder]="placeholder || ('btpSearchField.searchInputPlaceholder' | fdTranslate)"
         type="search"
-        aria-label="Search"
+        [attr.aria-label]="'btpSearchField.searchInputAriaLabel' | fdTranslate"
         class="fd-search-field__input"
         [ngModel]="_value"
         (ngModelChange)="updateValue($event)"

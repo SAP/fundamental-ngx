@@ -508,5 +508,6 @@
     "btpSearchField.searchButtonLabel": "Ara",
     "btpSearchField.clearButtonLabel": "Temizle",
     "btpSearchField.searchInputPlaceholder": "Ara",
+    "btpSearchField.searchInputAriaLabel": "Ara",
     "btpToolHeader.menuButtonAriaLabel": "Menü düğmesi"
 }
