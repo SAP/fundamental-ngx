@@ -1,5 +1,15 @@
 import { NgIf } from '@angular/common';
-import { AfterViewInit, Component, DestroyRef, ElementRef, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    DestroyRef,
+    ElementRef,
+    EventEmitter,
+    inject,
+    Input,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
@@ -62,6 +72,10 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
     @Output() search = new EventEmitter<string>();
 
     /** @hidden */
+    @ViewChild('searchInputField')
+    protected _searchInputField?: ElementRef<HTMLInputElement>;
+
+    /** @hidden */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** Value of the input field. */
@@ -72,6 +86,11 @@ export class SearchFieldComponent implements AfterViewInit, HasElementRef {
 
     /** @hidden */
     private _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    focus(): void {
+        this._searchInputField?.nativeElement.focus();
+    }
     /** @hidden */
     ngAfterViewInit(): void {
         this._cvaControl.listenToChanges();

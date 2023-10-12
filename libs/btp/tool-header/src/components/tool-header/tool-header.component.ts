@@ -8,10 +8,12 @@ import {
     EventEmitter,
     HostListener,
     Input,
+    NgZone,
     OnDestroy,
     Output,
     ViewEncapsulation,
-    computed
+    computed,
+    inject
 } from '@angular/core';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '@fundamental-ngx/core';
@@ -35,7 +37,7 @@ import {
 } from '@fundamental-ngx/core/overflow-layout';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subscription } from 'rxjs';
+import { Subscription, first } from 'rxjs';
 import { ToolHeaderActionsDirective } from '../../directives/tool-header-actions.directive';
 import { ToolHeaderButtonDirective } from '../../directives/tool-header-button.directive';
 import { ToolHeaderElementDirective } from '../../directives/tool-header-element.directive';
@@ -196,6 +198,8 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     /** @hidden */
     private _searchFieldOutsideClickSubscription?: Subscription;
 
+    /** @hidden */
+    private _ngZone = inject(NgZone);
     /**
      * The handler, responsible for closing the search field
      * on outside click
@@ -221,6 +225,16 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         if (this._searchFieldOutsideClickSubscription) {
             this._searchFieldOutsideClickSubscription.unsubscribe();
         }
+    }
+
+    /**
+     * Expand the search field
+     **/
+    expandSearchField(): void {
+        this.searchFieldExpanded.set(true);
+        this._ngZone.onStable.pipe(first()).subscribe(() => {
+            this.searchField()?.focus();
+        });
     }
 
     /** @hidden */
