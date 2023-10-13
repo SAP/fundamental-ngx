@@ -367,7 +367,7 @@ export class NavigationListItemComponent
     /** @hidden */
     show(): void {
         this._hidden.set(false);
-        this.elementRef.nativeElement.style.display = 'block';
+        this.elementRef.nativeElement.style.display = 'flex';
         this.buildComponentCssClass();
     }
 
@@ -378,7 +378,7 @@ export class NavigationListItemComponent
             .every((item) => item._hidden());
         this._hidden.set(shouldHide);
         this.isOpen = shouldHide;
-        this.elementRef.nativeElement.style.display = shouldHide ? 'none' : 'block';
+        this.elementRef.nativeElement.style.display = shouldHide ? 'none' : 'flex';
         this.buildComponentCssClass();
     }
 
