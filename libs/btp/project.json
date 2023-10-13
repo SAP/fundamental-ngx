@@ -37,10 +37,12 @@
             "executor": "@nx/linter:eslint",
             "options": {
                 "lintFilePatterns": [
-                    "libs/btp/src/lib/**/*.ts",
-                    "libs/btp/src/lib/**/*.html",
-                    "libs/btp/navigation/**/*.ts",
-                    "libs/btp/navigation/**/*.html"
+                    "libs/btp/**/*.ts",
+                    "libs/btp/**/*.html",
+                    "libs/btp/navigation-menu/**/*.ts",
+                    "libs/btp/navigation-menu/**/*.html",
+                    "libs/btp/shared/**/*.ts",
+                    "libs/btp/shared/**/*.html"
                 ]
             }
         }

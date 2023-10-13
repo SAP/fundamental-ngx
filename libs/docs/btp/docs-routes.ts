@@ -41,6 +41,10 @@ export const ROUTES: Routes = [
             {
                 path: 'tool-layout',
                 loadChildren: () => import('@fundamental-ngx/docs/btp/tool-layout').then(configureBtpRoutes)
+            },
+            {
+                path: 'search-field',
+                loadChildren: () => import('@fundamental-ngx/docs/btp/search-field').then(configureBtpRoutes)
             }
         ]
     }

@@ -862,4 +862,13 @@ export interface FdLanguage {
         semanticAcceptLabel: FdLanguageKey;
         semanticDeclineLabel: FdLanguageKey;
     };
+    btpSearchField: {
+        searchButtonLabel: FdLanguageKey;
+        clearButtonLabel: FdLanguageKey;
+        searchInputPlaceholder: FdLanguageKey;
+        searchInputAriaLabel: FdLanguageKey;
+    };
+    btpToolHeader: {
+        menuButtonAriaLabel: FdLanguageKey;
+    };
 }

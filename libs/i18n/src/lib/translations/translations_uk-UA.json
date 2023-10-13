@@ -506,5 +506,10 @@
     "fnSwitch.semanticDeclineLabel": "Відхилити",
     "coreTree.expand": "Розгорнути вузол",
     "coreTree.collapse": "Згорнути вузол",
-    "coreTree.noData": "Немає даних"
+    "coreTree.noData": "Немає даних",
+    "btpSearchField.searchButtonLabel": "Пошук",
+    "btpSearchField.clearButtonLabel": "Очистити",
+    "btpSearchField.searchInputPlaceholder": "Пошук",
+    "btpSearchField.searchInputAriaLabel": "Пошук",
+    "btpToolHeader.menuButtonAriaLabel": "Кнопка меню"
 }
