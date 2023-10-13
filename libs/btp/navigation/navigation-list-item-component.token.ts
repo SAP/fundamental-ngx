@@ -1,10 +1,11 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { DomPortal } from '@angular/cdk/portal';
 import { ElementRef, Signal, WritableSignal, effect, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLinkActive } from '@angular/router';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
-import { filter } from 'rxjs';
+import { filter, of } from 'rxjs';
 import { FdbNavigationComponent } from './navigation-component.token';
 import { FdbNavigationListComponent } from './navigation-list-component.token';
 
@@ -54,13 +55,16 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
     parentNavigationListComponent = inject(FdbNavigationListComponent);
 
     /** @hidden */
-    private _listenToSnappedExpandedState = true;
-
-    /** @hidden */
     protected readonly _rtl = inject(RtlService, { optional: true });
 
     /** @hidden */
+    protected readonly _isRtl = toSignal(this._rtl?.rtl || of(false), { requireSync: true });
+
+    /** @hidden */
     protected readonly _popoverService = inject(PopoverService);
+
+    /** @hidden */
+    private _listenToSnappedExpandedState = true;
 
     /** @hidden */
     constructor() {
