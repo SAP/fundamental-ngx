@@ -2,9 +2,9 @@ import { NgIf, NgStyle } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import {
     FdbToolHeaderActionButton,
-    FdbToolHeaderMode,
     ToolHeaderActionDirective,
     ToolHeaderActionsDirective,
     ToolHeaderButtonDirective,
@@ -68,7 +68,7 @@ export class ToolHeaderBasicExampleComponent {
     @ViewChild('notificationsPopover')
     notificationsPopoverComponent: PopoverComponent;
 
-    viewMode: FdbToolHeaderMode = '';
+    viewMode: FdbViewMode = '';
 
     searchValue: string;
 

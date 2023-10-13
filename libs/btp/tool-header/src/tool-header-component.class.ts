@@ -1,20 +1,20 @@
 import { computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { FdbToolHeaderMode } from './components/tool-header/tool-header.component';
 import { FdbToolHeaderState } from './tool-header-state.type';
 
 export abstract class ToolHeaderComponentClass {
     /** Mode signal */
-    mode = signal<FdbToolHeaderMode>('');
+    mode = signal<FdbViewMode>('');
 
     /** @hidden */
     orientation = signal<'landscape' | 'portrait'>('landscape');
 
     /** @hidden */
     protected fdbToolHeaderState = computed<FdbToolHeaderState>(() => {
-        if (this.mode() === 'mobile') {
+        if (this.mode() === 'phone') {
             return {
                 backButtonVisible: this.searchFieldExpanded(),
                 menuButtonVisible: !this.searchFieldExpanded(),

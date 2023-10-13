@@ -16,6 +16,7 @@ import { ToolHeaderBasicExampleComponent } from './examples/basic-example/tool-h
 import { CustomLogoExampleComponent } from './examples/custom-logo-example/custom-logo-example.component';
 import { MenuButtonExampleComponent } from './examples/menu-button-example/menu-button-example.component';
 import { ProductSwitchExampleComponent } from './examples/product-switch-example/product-switch-example.component';
+import { UsageWithLayoutExampleComponent } from './examples/usage-with-layout-example/usage-with-layout-example.component';
 
 @Component({
     templateUrl: './tool-header-docs.component.html',
@@ -33,7 +34,8 @@ import { ProductSwitchExampleComponent } from './examples/product-switch-example
         ProductSwitchExampleComponent,
         MenuButtonExampleComponent,
         CustomLogoExampleComponent,
-        MessageStripComponent
+        MessageStripComponent,
+        UsageWithLayoutExampleComponent
     ]
 })
 export class ToolHeaderDocsComponent {
@@ -47,6 +49,12 @@ export class ToolHeaderDocsComponent {
         getExampleFile('auto-mode-example/auto-mode-example.component.html'),
         getExampleFile('auto-mode-example/auto-mode-example.component.ts', {
             component: 'ToolHeaderAutoModeExampleComponent'
+        })
+    ];
+    toolLayoutExample: ExampleFile[] = [
+        getExampleFile('usage-with-layout-example/usage-with-layout-example.component.html'),
+        getExampleFile('usage-with-layout-example/usage-with-layout-example.component.ts', {
+            component: 'UsageWithLayoutExampleComponent'
         })
     ];
     menuButtonExample: ExampleFile[] = [

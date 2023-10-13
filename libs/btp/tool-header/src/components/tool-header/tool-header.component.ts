@@ -21,6 +21,7 @@ import {
     NavigationMenuPopoverControlDirective
 } from '@fundamental-ngx/btp/navigation-menu';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { FD_PRODUCT_SWITCH_COMPONENT, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -50,9 +51,6 @@ import { ToolHeaderGroupDirective } from '../../directives/tool-header-group.dir
 import { ToolHeaderLogoDirective } from '../../directives/tool-header-logo.directive';
 import { ToolHeaderUserDirective } from '../../directives/tool-header-user.directive';
 import { ToolHeaderComponentClass } from '../../tool-header-component.class';
-
-// @todo should be unified with tool layout component mode
-export type FdbToolHeaderMode = '' | 'tablet' | 'mobile';
 
 const imports = [
     ToolHeaderGroupDirective,
@@ -122,7 +120,7 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
 
     /** Mode */
     @Input('mode')
-    set _mode(mode: FdbToolHeaderMode) {
+    set _mode(mode: FdbViewMode) {
         if (mode !== this.mode()) {
             this.mode.set(mode);
         }

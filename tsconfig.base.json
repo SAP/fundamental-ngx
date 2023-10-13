@@ -35,6 +35,7 @@
             "@fundamental-ngx/btp/navigation": ["libs/btp/navigation/src/index.ts"],
             "@fundamental-ngx/btp/navigation-menu": ["libs/btp/navigation-menu/src/index.ts"],
             "@fundamental-ngx/btp/search-field": ["libs/btp/search-field/src/index.ts"],
+            "@fundamental-ngx/btp/shared": ["libs/btp/shared/src/index.ts"],
             "@fundamental-ngx/btp/tool-header": ["libs/btp/tool-header/src/index.ts"],
             "@fundamental-ngx/btp/tool-layout": ["libs/btp/tool-layout/src/index.ts"],
             "@fundamental-ngx/cdk": ["libs/cdk/src/lib/index.ts"],

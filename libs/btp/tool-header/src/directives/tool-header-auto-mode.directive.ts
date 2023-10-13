@@ -1,26 +1,28 @@
-import { computed, Directive, ElementRef, inject, Input, signal } from '@angular/core';
+import { computed, Directive, ElementRef, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { HasElementRef, ResizeObserverService, ResponsiveBreakpoints } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityDirective, ContentDensityMode } from '@fundamental-ngx/core/content-density';
 import { distinctUntilChanged, map, startWith } from 'rxjs';
-import { FdbToolHeaderMode, ToolHeaderComponent } from '../components/tool-header/tool-header.component';
+import { ToolHeaderComponent } from '../components/tool-header/tool-header.component';
 
 interface FdbToolHeaderModeConfig {
     desktop: number;
-    tabletlandscape: [number, number];
-    tabletportrait: [number, number];
-    mobile: number;
+    tabletLandscape: [number, number];
+    tabletPortrait: [number, number];
+    phone: number;
 }
 
 const DEFAULT_CONFIG: FdbToolHeaderModeConfig = {
     desktop: ResponsiveBreakpoints.L + 1,
-    tabletlandscape: [ResponsiveBreakpoints.M + 1, ResponsiveBreakpoints.L],
-    tabletportrait: [ResponsiveBreakpoints.S + 1, ResponsiveBreakpoints.M],
-    mobile: ResponsiveBreakpoints.S
+    tabletLandscape: [ResponsiveBreakpoints.M + 1, ResponsiveBreakpoints.L],
+    tabletPortrait: [ResponsiveBreakpoints.S + 1, ResponsiveBreakpoints.M],
+    phone: ResponsiveBreakpoints.S
 };
 
 @Directive({
     selector: 'fdb-tool-header[fdbToolHeaderAutoMode]',
+    exportAs: 'fdbToolHeaderAutoMode',
     hostDirectives: [ContentDensityDirective],
     standalone: true
 })
@@ -32,6 +34,24 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
     @Input() set config(config: Partial<FdbToolHeaderModeConfig>) {
         this._config.set({ ...DEFAULT_CONFIG, ...config });
     }
+
+    /**
+     * Current mode of the ToolHeaderComponent
+     */
+    @Output()
+    modeChange = new EventEmitter<FdbViewMode>();
+
+    /**
+     * Current orientation of the ToolHeaderComponent
+     */
+    @Output()
+    orientationChange = new EventEmitter<'landscape' | 'portrait'>();
+
+    /**
+     * Current content density of the ToolHeaderComponent
+     */
+    @Output()
+    contentDensityChange = new EventEmitter<ContentDensityMode>();
 
     /**
      * Reference to the element on which the directive is applied.
@@ -81,7 +101,11 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
                 const [mode, orientation = 'landscape'] = _mode;
                 this._toolHeaderComponent._mode = mode;
                 this._toolHeaderComponent._orientation = orientation;
-                this._contentDensity.fdContentDensity = mode ? ContentDensityMode.COMPACT : ContentDensityMode.COZY;
+                const contentDensity = mode ? ContentDensityMode.COMPACT : ContentDensityMode.COZY;
+                this._contentDensity.fdContentDensity = contentDensity;
+                this.modeChange.emit(mode);
+                this.orientationChange.emit(orientation);
+                this.contentDensityChange.emit(contentDensity);
             });
     }
 
@@ -91,16 +115,16 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
      * @param config
      * @private
      */
-    private _getMode(width: number, config: FdbToolHeaderModeConfig): [FdbToolHeaderMode, 'landscape' | 'portrait'] {
+    private _getMode(width: number, config: FdbToolHeaderModeConfig): [FdbViewMode, 'landscape' | 'portrait'] {
         if (width >= config.desktop) {
             return ['', 'landscape'];
         }
-        if (width <= config.mobile) {
-            return ['mobile', 'landscape'];
+        if (width <= config.phone) {
+            return ['phone', 'landscape'];
         }
         return [
             'tablet',
-            width >= config.tabletlandscape[0] && width <= config.tabletlandscape[1] ? 'landscape' : 'portrait'
+            width >= config.tabletLandscape[0] && width <= config.tabletLandscape[1] ? 'landscape' : 'portrait'
         ];
     }
 }
