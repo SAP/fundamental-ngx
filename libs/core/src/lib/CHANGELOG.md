@@ -3,6 +3,124 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.86...v0.46.0-rc.87) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.85...v0.46.0-rc.86) (2023-10-11)
+
+
+### Bug Fixes
+
+* **core:** add full labels to time component for screenreader ([#10683](https://github.com/SAP/fundamental-ngx/issues/10683)) ([dfe09c5](https://github.com/SAP/fundamental-ngx/commit/dfe09c5b4e8421b83daadbf66c38f3fdcfd37080))
+
+
+
+
+
+# [0.46.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.84...v0.46.0-rc.85) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.83...v0.46.0-rc.84) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.82...v0.46.0-rc.83) (2023-10-10)
+
+
+### Bug Fixes
+
+* **core,platform:** busy indicator should not have aria-live polite by default, search input count issue ([#10682](https://github.com/SAP/fundamental-ngx/issues/10682)) ([1269785](https://github.com/SAP/fundamental-ngx/commit/1269785fd24d4fef4c4fdba1fc72c9a47402f5d1))
+
+
+
+
+
+# [0.46.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.81...v0.46.0-rc.82) (2023-10-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.80...v0.46.0-rc.81) (2023-10-10)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.79...v0.46.0-rc.80) (2023-10-09)
+
+
+### Bug Fixes
+
+* **core:** add aria-label to fd-tokenizer ([#10678](https://github.com/SAP/fundamental-ngx/issues/10678)) ([2bd8c58](https://github.com/SAP/fundamental-ngx/commit/2bd8c58182b1f52cd20916214c70f79b09d7bcf0))
+
+
+
+
+
+# [0.46.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.78...v0.46.0-rc.79) (2023-10-06)
+
+
+### Bug Fixes
+
+* **core:** tokenizer more button focus issue ([#10654](https://github.com/SAP/fundamental-ngx/issues/10654)) ([3ea5299](https://github.com/SAP/fundamental-ngx/commit/3ea5299105b44215afd383cdd75516270a02f9e4))
+
+
+
+
+
+# [0.46.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.77...v0.46.0-rc.78) (2023-10-05)
+
+
+### Features
+
+* **core:** add index emit to tab selection ([#10673](https://github.com/SAP/fundamental-ngx/issues/10673)) ([15291b4](https://github.com/SAP/fundamental-ngx/commit/15291b4a900f90855e6176245e98fe39ed7bc378))
+
+
+
+
+
+# [0.46.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.77) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** inline help screenreader bug when using template ([#10651](https://github.com/SAP/fundamental-ngx/issues/10651)) ([afb2d08](https://github.com/SAP/fundamental-ngx/commit/afb2d081893df843f2ecb1127cdd415d2d7580c2))
+* **core:** tab list tabindex fix ([#10672](https://github.com/SAP/fundamental-ngx/issues/10672)) ([d236062](https://github.com/SAP/fundamental-ngx/commit/d236062964d121e3cc88fc6683c2d09e99ea1524))
+
+
+
+
+
+# [0.46.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.76) (2023-10-05)
+
+
+### Bug Fixes
+
+* **core:** tab list tabindex fix ([#10672](https://github.com/SAP/fundamental-ngx/issues/10672)) ([d236062](https://github.com/SAP/fundamental-ngx/commit/d236062964d121e3cc88fc6683c2d09e99ea1524))
+
+
+
+
+
 # [0.46.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.74...v0.46.0-rc.75) (2023-10-05)
 
 **Note:** Version bump only for package @fundamental-ngx/core

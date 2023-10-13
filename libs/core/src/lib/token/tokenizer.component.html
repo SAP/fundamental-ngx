@@ -1,4 +1,8 @@
-<div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
+<div
+    class="fd-tokenizer fd-tokenizer--scrollable"
+    [class.is-focus]="_tokenizerHasFocus"
+    [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
+>
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <div role="listbox" [style.width]="_tokensContainerWidth">
             <ng-content select="fd-token"></ng-content>
@@ -42,11 +46,11 @@
 <ng-template #moreElement>
     <span
         (click)="moreClicked()"
-        *ngIf="_showMoreElement && _hiddenTokens.length > 0"
+        *ngIf="_showMoreElement && _hiddenTokens.length > 0 && _tokenizerHasFocus"
         #moreElementSpan
         class="fd-tokenizer-more"
         role="button"
-        tabindex="0"
+        tabindex="-1"
     >
         <ng-container *ngIf="(_compact$ | async) || compactCollapse">
             {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: moreTokensLeft.length + moreTokensRight.length } }}

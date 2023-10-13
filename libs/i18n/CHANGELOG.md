@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.86...v0.46.0-rc.87) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.85...v0.46.0-rc.86) (2023-10-11)
+
+
+### Bug Fixes
+
+* **core:** add full labels to time component for screenreader ([#10683](https://github.com/SAP/fundamental-ngx/issues/10683)) ([dfe09c5](https://github.com/SAP/fundamental-ngx/commit/dfe09c5b4e8421b83daadbf66c38f3fdcfd37080))
+
+
+
+
+
+# [0.46.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.84...v0.46.0-rc.85) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.83...v0.46.0-rc.84) (2023-10-11)
+
+
+### Features
+
+* add Portuguese language support ([#10699](https://github.com/SAP/fundamental-ngx/issues/10699)) ([f7d632e](https://github.com/SAP/fundamental-ngx/commit/f7d632eb34bd37ad54b48b7fb82344ac103a5207))
+
+
+
+
+
+# [0.46.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.82...v0.46.0-rc.83) (2023-10-10)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.81...v0.46.0-rc.82) (2023-10-10)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.80...v0.46.0-rc.81) (2023-10-10)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.79...v0.46.0-rc.80) (2023-10-09)
+
+
+### Bug Fixes
+
+* **core:** add aria-label to fd-tokenizer ([#10678](https://github.com/SAP/fundamental-ngx/issues/10678)) ([2bd8c58](https://github.com/SAP/fundamental-ngx/commit/2bd8c58182b1f52cd20916214c70f79b09d7bcf0))
+
+
+
+
+
+# [0.46.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.78...v0.46.0-rc.79) (2023-10-06)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.77...v0.46.0-rc.78) (2023-10-05)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.77) (2023-10-05)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
+# [0.46.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.75...v0.46.0-rc.76) (2023-10-05)
+
+**Note:** Version bump only for package @fundamental-ngx/i18n
+
+
+
+
+
 # [0.46.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.74...v0.46.0-rc.75) (2023-10-05)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n

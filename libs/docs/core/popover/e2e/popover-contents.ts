@@ -1,7 +1,3 @@
-export const headerTestText = 'Header';
-export const cozyHeaderTestText = 'Cozy Header';
-export const cozySubheaderTestText = 'Cozy SubHeader';
-export const subheaderTestText = 'SubHeader Middle section with Full Width Element';
 export const popoverTestText = 'This popover is connected to trigger element';
 export const fruitsTestArr = ['Pineapple', 'Apple', 'Pepper', 'Tomato'];
 export const popoverExampleTestText = 'Popover Example';

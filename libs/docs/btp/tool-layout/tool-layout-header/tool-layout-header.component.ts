@@ -9,6 +9,14 @@ import {
 
 @Component({
     templateUrl: './tool-layout-header.component.html',
+    styles: [
+        `
+            code {
+                color: #00677f;
+            }
+        `
+    ],
+
     standalone: true,
     imports: [HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent, RouterOutlet]
 })

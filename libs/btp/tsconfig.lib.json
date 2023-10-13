@@ -2,11 +2,18 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "outDir": "../../dist/out-tsc",
+        "target": "ES2022",
         "declaration": true,
         "declarationMap": true,
-        "inlineSources": true,
-        "types": []
+        "types": [],
+        "lib": ["dom", "es2018"],
+        "useDefineForClassFields": false
     },
-    "exclude": ["src/**/*.spec.ts", "src/test-setup.ts", "jest.config.ts", "src/**/*.test.ts"],
-    "include": ["src/**/*.ts", "navigation/**/*.ts"]
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    },
+    "exclude": ["test.ts", "**/*.spec.ts", "jest.config.ts", "src/test-setup.ts"],
+    "include": ["**/*.ts"]
 }
