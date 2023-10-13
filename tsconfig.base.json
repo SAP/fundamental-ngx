@@ -33,6 +33,9 @@
         "paths": {
             "@fundamental-ngx/btp": ["libs/btp/src/index.ts"],
             "@fundamental-ngx/btp/navigation": ["libs/btp/navigation/src/index.ts"],
+            "@fundamental-ngx/btp/navigation-menu": ["libs/btp/navigation-menu/src/index.ts"],
+            "@fundamental-ngx/btp/search-field": ["libs/btp/search-field/src/index.ts"],
+            "@fundamental-ngx/btp/shared": ["libs/btp/shared/src/index.ts"],
             "@fundamental-ngx/btp/tool-header": ["libs/btp/tool-header/src/index.ts"],
             "@fundamental-ngx/btp/tool-layout": ["libs/btp/tool-layout/src/index.ts"],
             "@fundamental-ngx/cdk": ["libs/cdk/src/lib/index.ts"],
@@ -143,6 +146,7 @@
             "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
             "@fundamental-ngx/docs/btp": ["libs/docs/btp/index.ts"],
             "@fundamental-ngx/docs/btp/navigation": ["libs/docs/btp/navigation/index.ts"],
+            "@fundamental-ngx/docs/btp/search-field": ["libs/docs/btp/search-field/index.ts"],
             "@fundamental-ngx/docs/btp/tool-header": ["libs/docs/btp/tool-header/index.ts"],
             "@fundamental-ngx/docs/btp/tool-layout": ["libs/docs/btp/tool-layout/index.ts"],
             "@fundamental-ngx/docs/cdk": ["libs/docs/cdk/index.ts"],

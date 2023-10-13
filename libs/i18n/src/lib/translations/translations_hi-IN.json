@@ -504,5 +504,10 @@
     "fnSwitch.semanticDeclineLabel": "अस्वीकार करें",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "खोजें",
+    "btpSearchField.clearButtonLabel": "साफ़ करें",
+    "btpSearchField.searchInputPlaceholder": "खोजें",
+    "btpSearchField.searchInputAriaLabel": "खोजें",
+    "btpToolHeader.menuButtonAriaLabel": "मेनू बटन"
 }

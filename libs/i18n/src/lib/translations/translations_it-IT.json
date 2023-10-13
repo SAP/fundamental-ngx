@@ -504,5 +504,10 @@
     "fnSwitch.semanticDeclineLabel": "Declino",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "Cerca",
+    "btpSearchField.clearButtonLabel": "Cancella",
+    "btpSearchField.searchInputPlaceholder": "Cerca",
+    "btpSearchField.searchInputAriaLabel": "Cerca",
+    "btpToolHeader.menuButtonAriaLabel": "Pulsante Menù"
 }

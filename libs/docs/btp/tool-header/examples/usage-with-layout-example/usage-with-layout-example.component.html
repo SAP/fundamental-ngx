@@ -1,0 +1,27 @@
+<div fdbToolLayout [mode]="fdbToolHeaderModes.modeChange | async">
+    <div fdbToolLayoutContainer>
+        <div fdbToolLayoutHeaderContainer>
+            <fdb-tool-header
+                showMenuButton
+                productName="Fundamental-ngx"
+                secondTitle="Angular"
+                fdbToolHeaderAutoMode
+                (menuExpand)="toggleMenu(true)"
+                (menuCollapse)="toggleMenu(false)"
+                #fdbToolHeaderModes="fdbToolHeaderAutoMode"
+            >
+                <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
+
+                <fdb-tool-header-actions [actions]="actions"></fdb-tool-header-actions>
+            </fdb-tool-header>
+        </div>
+    </div>
+    <div fdbToolLayoutContainer>
+        <div fdbToolLayoutNavigationContainer>
+            <div style="width: 15rem; height: 20rem; background: #00677f"></div>
+        </div>
+        <div fdbToolLayoutContentContainer>
+            <div style="width: 100%; height: 20rem; background: #00677f"></div>
+        </div>
+    </div>
+</div>

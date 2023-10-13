@@ -504,5 +504,10 @@
     "fnSwitch.semanticDeclineLabel": "Отхвърли",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "Търси",
+    "btpSearchField.clearButtonLabel": "Изчисти",
+    "btpSearchField.searchInputPlaceholder": "Търси",
+    "btpSearchField.searchInputAriaLabel": "Търси",
+    "btpToolHeader.menuButtonAriaLabel": "Бутон Меню"
 }

@@ -504,5 +504,10 @@
     "fnSwitch.semanticDeclineLabel": "Refuser",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "Rechercher",
+    "btpSearchField.clearButtonLabel": "Effacer",
+    "btpSearchField.searchInputPlaceholder": "Rechercher",
+    "btpSearchField.searchInputAriaLabel": "Rechercher",
+    "btpToolHeader.menuButtonAriaLabel": "Bouton Menu"
 }

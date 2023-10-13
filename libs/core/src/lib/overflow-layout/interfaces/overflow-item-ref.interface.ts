@@ -1,4 +1,4 @@
-import { ElementRef, TemplateRef } from '@angular/core';
+import { ElementRef, Injector, TemplateRef } from '@angular/core';
 import { OverflowItem } from './overflow-item.interface';
 
 export type OverflowItemDirectiveContext<T = any> = {
@@ -8,6 +8,7 @@ export type OverflowItemDirectiveContext<T = any> = {
     first: boolean;
     last: boolean;
     item?: T;
+    injector: Injector;
 };
 
 export interface OverflowItemRef<T = any> {
@@ -47,6 +48,9 @@ export interface OverflowItemRef<T = any> {
 
     /** Item instance. Used for correct autocomplete. */
     item: T;
+
+    /** Injector of the directive. */
+    readonly injector: Injector;
 
     /**
      * Sets the element reference of the directive.
