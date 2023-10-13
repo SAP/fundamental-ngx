@@ -16,7 +16,7 @@
     </div>
     <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().logoVisible">
         <ng-container *ngIf="_toolHeaderLogoDirective; else defaultLogo">
-            <ng-content select="img[fdbToolHeaderLogo]"></ng-content>
+            <ng-content select="[fdbToolHeaderLogo]"></ng-content>
         </ng-container>
         <ng-template #defaultLogo>
             <img
@@ -51,7 +51,7 @@
 </div>
 
 <div fdbToolHeaderGroup actions>
-    <fd-overflow-layout fdbToolHeaderElement [style.justify-content]="'end'" [maxVisibleItems]="0">
+    <fd-overflow-layout fdbToolHeaderElement [style.justify-content]="'end'">
         <ng-container *ngIf="fdbToolHeaderState().searchFieldToggleActionVisible">
             <div fdbToolHeaderElement *fdOverflowItemRef="let hidden" [forceVisibility]="true" fdOverflowLayoutItem>
                 <button

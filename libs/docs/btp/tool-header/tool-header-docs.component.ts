@@ -12,6 +12,7 @@ import {
 } from '@fundamental-ngx/docs/shared';
 import { ToolHeaderAutoModeExampleComponent } from './examples/auto-mode-example/auto-mode-example.component';
 import { ToolHeaderBasicExampleComponent } from './examples/basic-example/tool-header-basic-example.component';
+import { CustomLogoExampleComponent } from './examples/custom-logo-example/custom-logo-example.component';
 import { MenuButtonExampleComponent } from './examples/menu-button-example/menu-button-example.component';
 import { ProductSwitchExampleComponent } from './examples/product-switch-example/product-switch-example.component';
 
@@ -29,7 +30,8 @@ import { ProductSwitchExampleComponent } from './examples/product-switch-example
         SeparatorComponent,
         ToolHeaderAutoModeExampleComponent,
         ProductSwitchExampleComponent,
-        MenuButtonExampleComponent
+        MenuButtonExampleComponent,
+        CustomLogoExampleComponent
     ]
 })
 export class ToolHeaderDocsComponent {
@@ -53,6 +55,11 @@ export class ToolHeaderDocsComponent {
     productSwitchExample: ExampleFile[] = [
         getExampleFile('product-switch-example/product-switch-example.component.ts', {
             component: 'ProductSwitchExampleComponent'
+        })
+    ];
+    customLogoExample: ExampleFile[] = [
+        getExampleFile('custom-logo-example/custom-logo-example.component.ts', {
+            component: 'CustomLogoExampleComponent'
         })
     ];
 }
