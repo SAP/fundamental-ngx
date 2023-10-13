@@ -8,7 +8,16 @@
  */
 export const API_FILES = {
     navigation: [],
-    toolHeader: ['ToolHeaderComponent', 'ToolHeaderActionsDirective', 'ToolHeaderAutoModeDirective'],
+    toolHeader: [
+        'ToolHeaderComponent',
+        'ToolHeaderActionsDirective',
+        'ToolHeaderAutoModeDirective',
+        'ToolHeaderActionDirective',
+        'ToolHeaderButtonDirective',
+        'ToolHeaderUserDirective',
+        'ToolHeaderProductSwitchComponent',
+        'ToolHeaderLogoDirective'
+    ],
     toolLayout: [],
     searchField: ['SearchFieldComponent']
 } as const;

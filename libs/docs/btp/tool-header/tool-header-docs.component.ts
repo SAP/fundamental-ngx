@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TableModule } from '@fundamental-ngx/core/table';
 import {
     CodeExampleComponent,
@@ -31,7 +32,8 @@ import { ProductSwitchExampleComponent } from './examples/product-switch-example
         ToolHeaderAutoModeExampleComponent,
         ProductSwitchExampleComponent,
         MenuButtonExampleComponent,
-        CustomLogoExampleComponent
+        CustomLogoExampleComponent,
+        MessageStripComponent
     ]
 })
 export class ToolHeaderDocsComponent {
