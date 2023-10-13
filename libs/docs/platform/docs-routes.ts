@@ -165,10 +165,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/platform/standard-list-item').then(configurePlatformRoutes)
             },
             {
-                path: 'thumbnail',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/thumbnail').then(configurePlatformRoutes)
-            },
-            {
                 path: 'time-picker',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/time-picker').then(configurePlatformRoutes)
             },

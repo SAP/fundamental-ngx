@@ -612,12 +612,6 @@ export interface FdLanguage {
         deselectSingleRowTitle: FdLanguageKey;
         selectSingleRowTitle: FdLanguageKey;
     };
-    platformThumbnail: {
-        detailsGotoPreviousButtonTitle: FdLanguageKey;
-        detailsGotoNextButtonTitle: FdLanguageKey;
-        detailsDialogCloseBtnLabel: FdLanguageKey;
-        roleDescription: FdLanguageKey;
-    };
     platformUploadCollection: {
         moveToTitle: FdLanguageKey;
         moveToTitleFolder: FdLanguageKey;

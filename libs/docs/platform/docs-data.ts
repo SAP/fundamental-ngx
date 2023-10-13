@@ -47,7 +47,6 @@ export const components: SectionInterfaceContent[] = [
         ]
     },
     { url: 'platform/textarea', name: 'Textarea' },
-    { url: 'platform/thumbnail', name: 'Thumbnail' },
     { url: 'platform/time-picker', name: 'Time Picker' },
     { url: 'platform/switch', name: 'Switch' },
     { url: 'platform/step-input', name: 'Step Input' },

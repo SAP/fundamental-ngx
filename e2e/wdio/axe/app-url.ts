@@ -32,7 +32,6 @@ export const appURLs = {
         switch: '/switch',
         table: '/table',
         textarea: '/textarea',
-        thumbnail: '/thumbnail',
         timePicker: '/time-picker',
         uploadCollections: '/upload-collection',
         valueHelpDialog: '/value-help-dialog',
