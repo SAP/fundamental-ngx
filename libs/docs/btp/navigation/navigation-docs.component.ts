@@ -7,9 +7,11 @@ import {
     DescriptionComponent,
     DocsSectionTitleComponent,
     ExampleFile,
+    SeparatorComponent,
     getExampleFile
 } from '@fundamental-ngx/docs/shared';
 import { NavigationBasicExampleComponent } from './examples/basic-example/navigation-basic-example.component';
+import { NavigationParentItemLinkComponent } from './examples/parent-item-link/navigation-parent-item-link.component';
 
 @Component({
     templateUrl: './navigation-docs.component.html',
@@ -21,7 +23,9 @@ import { NavigationBasicExampleComponent } from './examples/basic-example/naviga
         TableModule,
         ComponentExampleComponent,
         CodeExampleComponent,
-        NavigationBasicExampleComponent
+        NavigationBasicExampleComponent,
+        SeparatorComponent,
+        NavigationParentItemLinkComponent
     ]
 })
 export class NavigationDocsComponent {

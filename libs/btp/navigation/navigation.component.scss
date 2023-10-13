@@ -1,0 +1,75 @@
+@import 'fundamental-styles/dist/navigation';
+
+$block: fd-navigation;
+
+.#{$block} {
+    & &__container--top {
+        padding-left: var(--fdNavigation_Padding_X);
+        padding-right: var(--fdNavigation_Padding_X);
+        padding-bottom: 0.25rem;
+    }
+
+    &--snapped {
+        .#{$block}__container--top {
+            overflow: visible !important;
+        }
+        .#{$block}__container--hidden-overflow {
+            overflow: hidden !important;
+        }
+    }
+
+    &__list-container--custom-menu {
+        box-shadow: var(--sapMenu_Shadow1);
+    }
+}
+
+.fd-navigation--snapped .fd-navigation__list-container.fd-navigation__list-container--menu {
+    position: static;
+}
+
+.fd-navigation__list-item:not(.fd-navigation__list-item--home) {
+    position: relative;
+}
+
+.fd-navigation__list-container--menu {
+    > .fd-scrollbar {
+        overflow: visible !important;
+    }
+
+    .fd-navigation__list--parent-items {
+        .fd-navigation__list-item {
+            // Give more focus area for submenu
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: -1rem;
+                right: -1rem;
+            }
+            > .fd-navigation__list-container {
+                display: none;
+                top: -0.5rem;
+            }
+
+            &:hover,
+            &:focus,
+            &:focus-within {
+                > .fd-navigation__list-container {
+                    display: block;
+                }
+            }
+
+            .fd-navigation__list-container--submenu {
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: -2rem;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+}

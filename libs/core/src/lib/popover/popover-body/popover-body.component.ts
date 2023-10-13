@@ -6,6 +6,7 @@ import {
     ElementRef,
     HostListener,
     Input,
+    Renderer2,
     TemplateRef,
     ViewChild,
     ViewEncapsulation
@@ -132,9 +133,13 @@ export class PopoverBodyComponent implements AfterViewInit {
     onClose = new Subject<void>();
 
     /** @hidden */
+    private _bodyComponentClasses: string | null = null;
+
+    /** @hidden */
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
+        private readonly _renderer: Renderer2,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {}
 
@@ -153,6 +158,20 @@ export class PopoverBodyComponent implements AfterViewInit {
         if (this._scrollbar) {
             this._scrollbar._inPopover = true;
         }
+    }
+
+    /** @hidden */
+    _setBodyComponentClasses(classes: string | null): void {
+        this._bodyComponentClasses?.split(' ').forEach((klass) => {
+            this._renderer.removeClass(this._elementRef.nativeElement, klass);
+        });
+        this._bodyComponentClasses = classes;
+        if (!this._bodyComponentClasses) {
+            return;
+        }
+        this._bodyComponentClasses.split(' ').forEach((klass) => {
+            this._renderer.addClass(this._elementRef.nativeElement, klass);
+        });
     }
 
     /** @hidden */

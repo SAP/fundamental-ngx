@@ -32,7 +32,7 @@
         "jsxFragmentFactory": "JSX.Fragment",
         "paths": {
             "@fundamental-ngx/btp": ["libs/btp/src/index.ts"],
-            "@fundamental-ngx/btp/navigation": ["libs/btp/navigation/src/index.ts"],
+            "@fundamental-ngx/btp/navigation": ["libs/btp/navigation/index.ts"],
             "@fundamental-ngx/btp/navigation-menu": ["libs/btp/navigation-menu/src/index.ts"],
             "@fundamental-ngx/btp/search-field": ["libs/btp/search-field/src/index.ts"],
             "@fundamental-ngx/btp/shared": ["libs/btp/shared/src/index.ts"],
