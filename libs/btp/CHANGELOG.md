@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.90...v0.46.0-rc.91) (2023-10-14)
+
+
+### Bug Fixes
+
+* **btp:** vertical navigation ui bug fixes ([#10716](https://github.com/SAP/fundamental-ngx/issues/10716)) ([bb6323a](https://github.com/SAP/fundamental-ngx/commit/bb6323a78e4d326a6d895ef492d5d91d36004b1e))
+
+
+
+
+
 # [0.46.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.89...v0.46.0-rc.90) (2023-10-13)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
