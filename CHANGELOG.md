@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.91...v0.46.0-rc.92) (2023-10-14)
+
+
+### Bug Fixes
+
+* **btp:** fixed z-index of the home list item on expanded and popup modes ([#10717](https://github.com/SAP/fundamental-ngx/issues/10717)) ([a2120b3](https://github.com/SAP/fundamental-ngx/commit/a2120b3475dcb306ea92a2e52cae281e960dd467))
+
+
+
+
+
 # [0.46.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.90...v0.46.0-rc.91) (2023-10-14)
 
 
