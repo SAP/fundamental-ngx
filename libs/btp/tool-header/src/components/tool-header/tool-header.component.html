@@ -1,11 +1,18 @@
 <div fdbToolHeaderGroup [class.fd-tool-header--menu]="showMenuButton">
     <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().backButtonVisible">
-        <button fd-button fdbToolHeaderButton glyph="slim-arrow-left" (click)="searchFieldExpanded.set(false)"></button>
+        <button
+            fd-button
+            toolHeader
+            fdType="transparent"
+            glyph="slim-arrow-left"
+            (click)="searchFieldExpanded.set(false)"
+        ></button>
     </div>
     <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().menuButtonVisible && showMenuButton">
         <button
             fd-button
-            fdbToolHeaderButton
+            toolHeader
+            fdType="transparent"
             [title]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
             [ariaLabel]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
             glyph="menu2"
@@ -56,7 +63,8 @@
             <div fdbToolHeaderElement *fdOverflowItemRef="let hidden" [forceVisibility]="true" fdOverflowLayoutItem>
                 <button
                     fd-button
-                    fdbToolHeaderButton
+                    toolHeader
+                    fdType="transparent"
                     glyph="search"
                     (click)="$event.stopPropagation(); expandSearchField()"
                 ></button>
@@ -78,7 +86,8 @@
                     <ng-template #defaultActionButtonTemplate>
                         <button
                             fd-button
-                            fdbToolHeaderButton
+                            toolHeader
+                            fdType="transparent"
                             [glyph]="action.glyph"
                             (click)="action.clickCallback()"
                             [ariaLabel]="action.label"
@@ -95,7 +104,13 @@
         </ng-container>
 
         <fdb-navigation-menu-popover *fdOverflowExpand="let overflowItems" fdbToolHeaderElement>
-            <button *fdbNavigationMenuPopoverControl fd-button fdbToolHeaderButton glyph="overflow"></button>
+            <button
+                *fdbNavigationMenuPopoverControl
+                fd-button
+                toolHeader
+                fdType="transparent"
+                glyph="overflow"
+            ></button>
             <ul *fdPopoverBody fdkFocusableList [wrap]="true" fdb-navigation-menu>
                 <ng-container *ngFor="let item of overflowItems">
                     <ng-container *ngIf="_toolHeaderActionsDirective?._actions() as actions">
@@ -131,7 +146,8 @@
     <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().voiceInputVisible">
         <button
             fd-button
-            fdbToolHeaderButton
+            toolHeader
+            fdType="transparent"
             glyph="microphone"
             [ariaLabel]="'Search with voice'"
             (click)="microphoneClick.emit()"

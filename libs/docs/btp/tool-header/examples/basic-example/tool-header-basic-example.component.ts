@@ -7,7 +7,6 @@ import {
     FdbToolHeaderActionButton,
     ToolHeaderActionDirective,
     ToolHeaderActionsDirective,
-    ToolHeaderButtonDirective,
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
@@ -56,7 +55,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverBodyDirective,
         RepeatDirective,
         ToolHeaderActionDirective,
-        ToolHeaderButtonDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,

@@ -13,7 +13,6 @@ import {
 } from '@fundamental-ngx/core/product-switch';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ToolHeaderButtonDirective } from '../directives/tool-header-button.directive';
 
 @Component({
     selector: 'fdb-tool-header-product-switch',
@@ -23,7 +22,6 @@ import { ToolHeaderButtonDirective } from '../directives/tool-header-button.dire
         PopoverBodyComponent,
         PopoverComponent,
         PopoverControlComponent,
-        ToolHeaderButtonDirective,
         ProductSwitchComponent,
         ProductSwitchButtonDirective
     ],
@@ -44,7 +42,7 @@ import { ToolHeaderButtonDirective } from '../directives/tool-header-button.dire
             <button
                 *fdProductSwitchButton
                 fd-button
-                fdbToolHeaderButton
+                toolHeader
                 [attr.aria-label]="'coreProductSwitch.ariaLabel' | fdTranslate"
                 [attr.title]="'coreProductSwitch.ariaLabel' | fdTranslate"
                 glyph="grid"
