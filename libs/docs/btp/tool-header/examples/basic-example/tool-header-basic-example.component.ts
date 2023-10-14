@@ -13,7 +13,7 @@ import {
 } from '@fundamental-ngx/btp/tool-header';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     MenuAddonDirective,
@@ -60,7 +60,8 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,
-        ContentDensityDirective
+        ContentDensityDirective,
+        ButtonBadgeDirective
     ],
     standalone: true
 })
