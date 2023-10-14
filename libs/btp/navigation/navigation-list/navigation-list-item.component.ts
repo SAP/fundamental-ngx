@@ -200,6 +200,16 @@ export class NavigationListItemComponent
             !this._hidden()
     );
 
+    /**
+     * Icon which should be used for the toggle button.
+     **/
+    toggleIcon = computed(() => {
+        if (this.expandedAttr()) {
+            return 'slim-arrow-down';
+        }
+        return this._isRtl() ? 'slim-arrow-left' : 'slim-arrow-right';
+    });
+
     /** @hidden */
     domPortal: Nullable<DomPortal>;
 
@@ -357,7 +367,7 @@ export class NavigationListItemComponent
     /** @hidden */
     show(): void {
         this._hidden.set(false);
-        this.elementRef.nativeElement.style.display = 'block';
+        this.elementRef.nativeElement.style.display = 'flex';
         this.buildComponentCssClass();
     }
 
@@ -368,7 +378,7 @@ export class NavigationListItemComponent
             .every((item) => item._hidden());
         this._hidden.set(shouldHide);
         this.isOpen = shouldHide;
-        this.elementRef.nativeElement.style.display = shouldHide ? 'none' : 'block';
+        this.elementRef.nativeElement.style.display = shouldHide ? 'none' : 'flex';
         this.buildComponentCssClass();
     }
 
