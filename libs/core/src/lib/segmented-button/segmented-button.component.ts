@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -7,7 +8,6 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    HostBinding,
     HostListener,
     Input,
     OnDestroy,
@@ -42,7 +42,9 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
     template: `<ng-content></ng-content>`,
     styleUrls: ['./segmented-button.component.scss'],
     host: {
-        role: 'group'
+        role: 'group',
+        '[class.fd-segmented-button]': 'true',
+        '[class.fd-segmented-button--vertical]': 'vertical'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -57,12 +59,15 @@ export type SegmentedButtonValue = string | (string | null)[] | null;
 })
 export class SegmentedButtonComponent implements AfterViewInit, ControlValueAccessor, OnDestroy {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
-    @Input()
-    toggle = false;
+    @Input({ transform: coerceBooleanProperty })
+    toggle: BooleanInput;
 
-    /** @hidden */
-    @HostBinding('class.fd-segmented-button')
-    _fdSegmentedButtonClass = true;
+    /**
+     * Whether segmented button is on vertical mode,
+     * which allows to display buttons vertically
+     **/
+    @Input({ transform: coerceBooleanProperty })
+    vertical: BooleanInput;
 
     /** @hidden */
     @ContentChildren(FD_BUTTON_COMPONENT)
