@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.92...v0.46.0-rc.93) (2023-10-15)
+
+
+### Bug Fixes
+
+* **core:** some multi-combobox fixes ([#10712](https://github.com/SAP/fundamental-ngx/issues/10712)) ([386396f](https://github.com/SAP/fundamental-ngx/commit/386396f2d3f6e96f48cdfc9b44f2d8dac9c775b0))
+
+
+
+
+
 # [0.46.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.91...v0.46.0-rc.92) (2023-10-14)
 
 **Note:** Version bump only for package @fundamental-ngx/core
