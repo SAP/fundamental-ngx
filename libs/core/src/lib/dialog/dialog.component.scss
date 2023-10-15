@@ -28,3 +28,12 @@
     max-height: 100% !important;
     transform: none !important;
 }
+
+// TODO: move to fundamental-styles
+.fd-dialog__content--mobile {
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    position: fixed !important;
+}
