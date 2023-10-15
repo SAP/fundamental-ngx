@@ -92,7 +92,7 @@
         "@nx/jest": "16.9.1",
         "@nx/js": "16.9.1",
         "@nx/linter": "16.9.1",
-        "@nx/plugin": "16.9.1",
+        "@nx/plugin": "16.10.0",
         "@nx/workspace": "16.9.1",
         "@schematics/angular": "16.2.4",
         "@swc-node/register": "1.6.8",
