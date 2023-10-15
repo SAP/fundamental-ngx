@@ -8,9 +8,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder, HasElementRef } from '@fundamental-ngx/cdk/utils';
-
-export type ToolLayoutMode = '' | 'tablet' | 'phone';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
+import { applyCssClass, CssClassBuilder, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -31,7 +30,7 @@ export class ToolLayoutComponent implements OnChanges, OnInit, CssClassBuilder, 
      * The default (not specified) mode is desktop.
      */
     @Input()
-    mode: ToolLayoutMode;
+    mode: Nullable<FdbViewMode>;
 
     /** @hidden */
     readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);

@@ -503,5 +503,10 @@
     "fnSwitch.semanticDeclineLabel": "Recusar",
     "coreTree.expand": "Expandir nó",
     "coreTree.collapse": "Recolher nó",
-    "coreTree.noData": "Não há dados"
+    "coreTree.noData": "Não há dados",
+    "btpSearchField.searchButtonLabel": "Procurar",
+    "btpSearchField.clearButtonLabel": "Limpar",
+    "btpSearchField.searchInputPlaceholder": "Procurar",
+    "btpSearchField.searchInputAriaLabel": "Procurar",
+    "btpToolHeader.menuButtonAriaLabel": "Botão de menu"
 }

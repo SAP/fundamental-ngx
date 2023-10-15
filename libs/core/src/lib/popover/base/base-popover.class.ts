@@ -26,6 +26,10 @@ export class BasePopoverClass {
     @Input()
     additionalBodyClass: string | null = null;
 
+    /** Classes that should be applied to fd-popover-body component directly. */
+    @Input()
+    additionalBodyComponentClasses: string | null = null;
+
     /** Whether the popover container needs an extra class for styling. */
     @Input()
     additionalTriggerClass: string | null = null;

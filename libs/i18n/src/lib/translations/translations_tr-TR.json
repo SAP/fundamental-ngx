@@ -504,5 +504,10 @@
     "fnSwitch.semanticDeclineLabel": "Reddet",
     "coreTree.expand": "Expand node",
     "coreTree.collapse": "Collapse node",
-    "coreTree.noData": "No data"
+    "coreTree.noData": "No data",
+    "btpSearchField.searchButtonLabel": "Ara",
+    "btpSearchField.clearButtonLabel": "Temizle",
+    "btpSearchField.searchInputPlaceholder": "Ara",
+    "btpSearchField.searchInputAriaLabel": "Ara",
+    "btpToolHeader.menuButtonAriaLabel": "Menü düğmesi"
 }

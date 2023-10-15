@@ -10,7 +10,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, HasElementRef, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
@@ -53,7 +53,10 @@ import { FD_BUTTON_COMPONENT } from './tokens';
     standalone: true,
     imports: [NgIf, IconComponent]
 })
-export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
+export class ButtonComponent
+    extends BaseButton
+    implements OnChanges, CssClassBuilder, OnInit, OnDestroy, HasElementRef
+{
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
@@ -102,6 +105,16 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
+    constructor(
+        public readonly elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef,
+        _contentDensityObserver: ContentDensityObserver
+    ) {
+        super();
+        _contentDensityObserver.subscribe();
+    }
+
     /** Forces the focus outline around the button, which is not default behavior in Safari. */
     @HostListener('click', ['$event'])
     clicked(event: MouseEvent): void {
@@ -110,34 +123,6 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
         if (target && document.activeElement !== target) {
             target.focus();
         }
-    }
-
-    /** @hidden */
-    constructor(
-        public readonly elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _contentDensityObserver: ContentDensityObserver
-    ) {
-        super();
-        _contentDensityObserver.subscribe();
-    }
-
-    /** Function runs when component is initialized
-     * function should build component css class
-     * function should build css style
-     */
-    public ngOnChanges(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    public ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** @hidden
@@ -155,6 +140,24 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             this.toggled ? `fd-button--toggled` : '',
             this.class
         ];
+    }
+
+    /** Function runs when component is initialized
+     * function should build component css class
+     * function should build css style
+     */
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

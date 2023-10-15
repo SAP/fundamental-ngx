@@ -504,5 +504,10 @@
     "fnSwitch.semanticDeclineLabel": "Ablehnen",
     "coreTree.expand": "Knoten erweitern",
     "coreTree.collapse": "Knoten reduzieren",
-    "coreTree.noData": "Keine Daten"
+    "coreTree.noData": "Keine Daten",
+    "btpSearchField.searchButtonLabel": "Suchen",
+    "btpSearchField.clearButtonLabel": "Löschen",
+    "btpSearchField.searchInputPlaceholder": "Suchen",
+    "btpSearchField.searchInputAriaLabel": "Suchen",
+    "btpToolHeader.menuButtonAriaLabel": "Menü-Knopf"
 }
