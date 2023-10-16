@@ -7,10 +7,12 @@ import {
     NavigationContentEndComponent,
     NavigationContentStartComponent,
     NavigationHomeDirective,
+    NavigationItemSpacerDirective,
     NavigationLinkComponent,
     NavigationListComponent,
     NavigationListItemComponent
 } from '@fundamental-ngx/btp/navigation';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 
@@ -28,10 +30,12 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         NavigationContentEndComponent,
         FormsModule,
         ButtonComponent,
-        SegmentedButtonComponent
+        SegmentedButtonComponent,
+        NavigationItemSpacerDirective
     ],
     standalone: true
 })
 export class NavigationBasicExampleComponent {
-    value: FdbNavigationState = 'expanded';
+    state: FdbNavigationState = 'expanded';
+    mode: FdbViewMode = '';
 }

@@ -1,11 +1,13 @@
 import { computed, Signal, TemplateRef } from '@angular/core';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdbNavigationListItemComponent } from './navigation-list-item-component.token';
+import { FdbNavigationState, FdbNavigationType } from './navigation.types';
 
 export abstract class FdbNavigationComponent {
-    abstract state: Signal<'expanded' | 'snapped' | 'popup'>;
-    abstract type: Signal<'horizontal' | 'vertical'>;
-    abstract mode: Signal<'desktop' | 'tablet' | 'phone'>;
+    abstract state: Signal<FdbNavigationState>;
+    abstract type: Signal<FdbNavigationType>;
+    abstract mode: Signal<FdbViewMode>;
     abstract homeLinkTemplate: Signal<TemplateRef<void> | null>;
     abstract setNextItemActive(): void;
     abstract setActiveItem(item: FdbNavigationListItemComponent): void;
@@ -15,11 +17,11 @@ export abstract class FdbNavigationComponent {
     abstract getMoreButton(): Nullable<FdbNavigationListItemComponent>;
 
     /** @hidden */
-    isSnapped = computed(() => this.state() === 'snapped');
+    isSnapped = computed(() => this.state() === 'snapped' && !this.isPhone());
     /** @hidden */
-    isPopup = computed(() => this.state() === 'popup');
+    isPopup = computed(() => this.state() === 'popup' || this.isPhone());
     /** @hidden */
-    isExpanded = computed(() => this.state() === 'expanded');
+    isExpanded = computed(() => this.state() === 'expanded' && !this.isPhone());
 
     /** @hidden */
     isHorizontal = computed(() => this.type() === 'horizontal');
@@ -27,7 +29,7 @@ export abstract class FdbNavigationComponent {
     isVertical = computed(() => this.type() === 'vertical');
 
     /** @hidden */
-    isDesktop = computed(() => this.mode() === 'desktop');
+    isDesktop = computed(() => this.mode() === '');
     /** @hidden */
     isTablet = computed(() => this.mode() === 'tablet');
     /** @hidden */

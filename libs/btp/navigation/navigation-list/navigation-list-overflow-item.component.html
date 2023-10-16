@@ -11,6 +11,10 @@
 >
     <ng-content select="[fdb-navigation-link]"></ng-content>
 </div>
+<!-- Detach elements from their hosts immediately to fix issue with flickering elements. -->
+<ul hidden>
+    <ng-template *ngFor="let item of hiddenItems()" [cdkPortalOutlet]="item.domPortal"></ng-template>
+</ul>
 <ng-template #childrenTemplate>
     <div class="fd-navigation__list-container--menu">
         <ul class="fd-navigation__list fd-navigation__list--parent-items fd-menu__list">
