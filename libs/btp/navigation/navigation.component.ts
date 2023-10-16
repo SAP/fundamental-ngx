@@ -24,6 +24,7 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { CssClassBuilder, HasElementRef, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, merge, startWith, switchMap } from 'rxjs';
 import { NavigationHomeDirective } from './directives/navigation-home.directive';
@@ -35,7 +36,7 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
 import { NavigationListItemComponent } from './navigation-list/navigation-list-item.component';
 import { NavigationListComponent } from './navigation-list/navigation-list.component';
 import { NavigationService } from './navigation.service';
-import { FdbNavigationMode, FdbNavigationState, FdbNavigationType } from './navigation.types';
+import { FdbNavigationState, FdbNavigationType } from './navigation.types';
 
 @Component({
     selector: 'fdb-navigation',
@@ -83,7 +84,7 @@ export class NavigationComponent
 
     /** @hidden */
     @Input('mode')
-    set _mode(mode: FdbNavigationMode) {
+    set _mode(mode: FdbViewMode) {
         this.mode.set(mode);
     }
 
@@ -121,7 +122,7 @@ export class NavigationComponent
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
     /** @hidden */
-    mode = signal<FdbNavigationMode>('desktop');
+    mode = signal<FdbViewMode>('');
     /** @hidden */
     state = signal<FdbNavigationState>('expanded');
     /** @hidden */
@@ -152,7 +153,7 @@ export class NavigationComponent
             this.class,
             'fd-navigation',
             this.type() === 'horizontal' ? 'fd-navigation--horizontal' : 'fd-navigation--vertical',
-            `fd-navigation--${this.mode()}`,
+            this.mode() ? `fd-navigation--${this.mode()}` : '',
             // Mobile mode should not support snapped state.
             this.isSnapped() || this.state() !== 'snapped' ? `fd-navigation--${this.state()}` : ''
         ];

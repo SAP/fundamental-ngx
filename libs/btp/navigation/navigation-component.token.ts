@@ -1,12 +1,13 @@
 import { computed, Signal, TemplateRef } from '@angular/core';
+import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FdbNavigationListItemComponent } from './navigation-list-item-component.token';
-import { FdbNavigationMode, FdbNavigationState, FdbNavigationType } from './navigation.types';
+import { FdbNavigationState, FdbNavigationType } from './navigation.types';
 
 export abstract class FdbNavigationComponent {
     abstract state: Signal<FdbNavigationState>;
     abstract type: Signal<FdbNavigationType>;
-    abstract mode: Signal<FdbNavigationMode>;
+    abstract mode: Signal<FdbViewMode>;
     abstract homeLinkTemplate: Signal<TemplateRef<void> | null>;
     abstract setNextItemActive(): void;
     abstract setActiveItem(item: FdbNavigationListItemComponent): void;
@@ -28,7 +29,7 @@ export abstract class FdbNavigationComponent {
     isVertical = computed(() => this.type() === 'vertical');
 
     /** @hidden */
-    isDesktop = computed(() => this.mode() === 'desktop');
+    isDesktop = computed(() => this.mode() === '');
     /** @hidden */
     isTablet = computed(() => this.mode() === 'tablet');
     /** @hidden */
