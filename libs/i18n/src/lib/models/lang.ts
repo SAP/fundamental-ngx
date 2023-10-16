@@ -57,6 +57,9 @@ export interface FdLanguage {
         noResults: FdLanguageKey;
         navigateSelectionsWithArrows: FdLanguageKey;
         escapeNavigateTokens: FdLanguageKey;
+        countListResultsSingular: FdLanguageKey;
+        /** @param count */
+        countListResultsPlural: FdLanguageKey;
     };
     coreNavigation: {
         mainNavigation: FdLanguageKey;
