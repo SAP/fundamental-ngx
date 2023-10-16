@@ -8,6 +8,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     HostListener,
     Input,
@@ -22,7 +23,7 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { CssClassBuilder, HasElementRef, KeyUtil, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { debounceTime, merge, startWith, switchMap } from 'rxjs';
 import { NavigationHomeDirective } from './directives/navigation-home.directive';
@@ -142,13 +143,18 @@ export class NavigationComponent
     private readonly _isSnapped$ = toObservable(this.isSnapped);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
             this.class,
             'fd-navigation',
             this.type() === 'horizontal' ? 'fd-navigation--horizontal' : 'fd-navigation--vertical',
-            `fd-navigation--${this.state()}`
+            `fd-navigation--${this.mode()}`,
+            // Mobile mode should not support snapped state.
+            this.isSnapped() || this.state() !== 'snapped' ? `fd-navigation--${this.state()}` : ''
         ];
     }
 
@@ -180,7 +186,8 @@ export class NavigationComponent
                         startWith(null),
                         debounceTime(5)
                     )
-                )
+                ),
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 const listItems = this._navigationContents.reduce(

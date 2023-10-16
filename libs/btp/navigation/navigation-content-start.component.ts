@@ -6,6 +6,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     QueryList,
     ViewChild,
@@ -14,9 +15,10 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { Subject, asyncScheduler, filter, merge, observeOn, startWith, tap } from 'rxjs';
+import { Subject, asyncScheduler, debounceTime, distinctUntilChanged, filter, observeOn, startWith, tap } from 'rxjs';
 import { FdbNavigationComponent } from './navigation-component.token';
 import { NavigationContentComponent } from './navigation-content.token';
 import { NavigationLinkComponent } from './navigation-link.component';
@@ -89,6 +91,9 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
     override refresh$ = new Subject<void>();
 
     /** @hidden */
+    private _calculationInProgress = false;
+
+    /** @hidden */
     private readonly _canTrackItems = signal(false);
 
     /** @hidden */
@@ -102,6 +107,9 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
 
     /** @hidden */
     private readonly _scrollbar = inject(ScrollbarDirective);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor() {
@@ -131,13 +139,26 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
     /** @hidden */
     ngAfterViewInit(): void {
         this._canTrackItems.set(true);
-        merge(this._navigationItems.changes.pipe(startWith(null)))
+        this._navigationItems.changes
+            .pipe(startWith(null))
             .pipe(
                 tap(() => {
                     this.refresh$.next();
                 }),
                 filter(() => this._navigationItems?.length > 0),
-                observeOn(asyncScheduler)
+                observeOn(asyncScheduler),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe(() => {
+                this._calculateVisibleItems();
+            });
+
+        resizeObservable(this._elementRef.nativeElement)
+            .pipe(
+                debounceTime(30),
+                distinctUntilChanged((prev, current) => prev[0].contentRect.height === current[0].contentRect.height),
+                filter(() => !this._calculationInProgress),
+                takeUntilDestroyed(this._destroyRef)
             )
             .subscribe(() => {
                 this._calculateVisibleItems();
@@ -160,11 +181,20 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
 
     /** @hidden */
     private _calculateVisibleItems(): void {
+        if (this._calculationInProgress) {
+            return;
+        }
+        this._calculationInProgress = true;
+        this._hiddenItems = [];
+        this._cdr.detectChanges();
         if (!this._navigationComponent.isSnapped()) {
             this._navigationItems.forEach((item) => {
                 item.show();
             });
             this.showOverflowButton.set(false);
+            setTimeout(() => {
+                this._calculationInProgress = false;
+            });
             return;
         }
         this._elementRef.nativeElement.classList.add(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
@@ -172,7 +202,8 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
         this._cdr.detectChanges();
         let canDisplayItems = true;
         const containerHeight = this._elementRef.nativeElement.getBoundingClientRect().height;
-        const showMoreHeight = this._showMoreOverflow.nativeElement.getBoundingClientRect().height * 2;
+        const showMoreHeight =
+            (this.showMoreOverflowItem?.elementRef.nativeElement.getBoundingClientRect().height || 0) * 2;
         const homeElementSize = this._navigationLists.toArray().reduce((height, list) => {
             height += list.getHomeElementSize().height;
             return height;
@@ -193,6 +224,10 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
             { root: [], children: [] }
         );
 
+        this._navigationItems.forEach((item) => {
+            item.show();
+        });
+
         navigationItemGroups.children.forEach((item) => {
             item.calculateExpanded();
             if (!canDisplayItems) {
@@ -201,7 +236,7 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
                 return;
             }
 
-            item.show();
+            // item.show();
 
             totalAvailableHeight -= item.elementRef.nativeElement.getBoundingClientRect().height;
 
@@ -220,6 +255,9 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
         this._elementRef.nativeElement.classList.remove(FD_NAVIGATION_OVERFLOW_ITEM_CLASS);
 
         this._handleOverflowItems(hiddenElements);
+        setTimeout(() => {
+            this._calculationInProgress = false;
+        }, 5);
     }
 
     /** @hidden */

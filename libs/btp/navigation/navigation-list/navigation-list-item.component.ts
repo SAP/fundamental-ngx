@@ -151,7 +151,7 @@ export class NavigationListItemComponent
     override additionalBodyClass = 'fd-navigation__list-container';
 
     /** @hidden */
-    override additionalBodyComponentClasses = 'fd-navigation fd-navigation--snapped';
+    // override additionalBodyComponentClasses = 'fd-navigation fd-navigation--snapped';
 
     /** @hidden */
     routerLink = signal<RouterLink | null>(null);
@@ -229,6 +229,13 @@ export class NavigationListItemComponent
     constructor() {
         super();
         effect(() => {
+            this.additionalBodyComponentClasses = [
+                'fd-navigation',
+                'fd-navigation--snapped',
+                `fd-navigation--${this.navigationComponent.mode()}`
+            ]
+                .filter((klass) => !!klass)
+                .join(' ');
             this._popoverService.updateContent(null, this.childrenTemplate());
         });
     }

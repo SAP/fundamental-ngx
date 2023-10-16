@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
+    FdbNavigationMode,
     FdbNavigationState,
     NavigationComponent,
     NavigationContentEndComponent,
     NavigationContentStartComponent,
     NavigationHomeDirective,
+    NavigationItemSpacerDirective,
     NavigationLinkComponent,
     NavigationListComponent,
     NavigationListItemComponent
@@ -28,10 +30,12 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         NavigationContentEndComponent,
         FormsModule,
         ButtonComponent,
-        SegmentedButtonComponent
+        SegmentedButtonComponent,
+        NavigationItemSpacerDirective
     ],
     standalone: true
 })
 export class NavigationBasicExampleComponent {
-    value: FdbNavigationState = 'expanded';
+    state: FdbNavigationState = 'expanded';
+    mode: FdbNavigationMode = 'desktop';
 }

@@ -1,19 +1,19 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, isDevMode, OnDestroy, Optional, Renderer2, RendererFactory2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Nullable, THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
 import { cloneDeep, merge } from 'lodash-es';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { Nullable, THEME_SWITCHER_ROUTER_MISSING_ERROR } from '@fundamental-ngx/cdk/utils';
 import { BaseThemingConfig } from './config';
-import { ThemingConfig } from './interfaces/theming-config.interface';
-import { STANDARD_THEMES } from './standard-themes';
 import {
     CompleteThemeDefinition,
     CompleteThemingResource,
     ThemeDefinition,
     ThemeStyleLink
 } from './interfaces/theme.interface';
+import { ThemingConfig } from './interfaces/theming-config.interface';
+import { STANDARD_THEMES } from './standard-themes';
 import { THEMING_CONFIG_TOKEN } from './tokens';
 
 @Injectable()
@@ -69,6 +69,14 @@ export class ThemingService implements OnDestroy {
         this._availableThemes = new Map<string, CompleteThemeDefinition>(
             mergedThemes.map((theme) => [theme.id, theme])
         );
+
+        const defaultTheme = this._availableThemes.get(this.config.defaultTheme);
+
+        if (!defaultTheme) {
+            return;
+        }
+
+        this._currentThemeSubject.next(defaultTheme);
     }
 
     /**
@@ -77,8 +85,8 @@ export class ThemingService implements OnDestroy {
     init(): void {
         if (this.config.changeThemeOnQueryParamChange) {
             this._setThemeByRoute();
-        } else {
-            this.setTheme(this.config.defaultTheme);
+        } else if (this._currentThemeSubject.value?.id) {
+            this.setTheme(this._currentThemeSubject.value.id);
         }
     }
 

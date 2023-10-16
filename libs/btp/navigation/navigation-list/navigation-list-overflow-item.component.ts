@@ -33,10 +33,10 @@ export class NavigationListOverflowItemComponent extends NavigationListItemCompo
     /** @hidden */
     // eslint-disable-next-line @angular-eslint/no-input-rename
     @Input('hiddenItems')
-    set _hiddenItems(value: FdbNavigationListItemComponent[]) {
+    set _hiddenItems(items: FdbNavigationListItemComponent[]) {
         this.hiddenItems().forEach((item) => item.destroyPortal());
-        value.forEach((item) => item.createPortal());
-        this.hiddenItems.set(value);
+        items.forEach((item) => item.createPortal());
+        this.hiddenItems.set(items);
     }
 
     /** @hidden */
@@ -52,7 +52,7 @@ export class NavigationListOverflowItemComponent extends NavigationListItemCompo
         effect(
             () => {
                 const items = this.hiddenItems();
-                this.hasPortalChildren.set(this.hiddenItems().length > 0);
+                this.hasPortalChildren.set(items.length > 0);
                 if (items.length === 0) {
                     return;
                 }

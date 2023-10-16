@@ -3,9 +3,12 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
+    DestroyRef,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject, startWith } from 'rxjs';
 import { NavigationContentComponent } from './navigation-content.token';
 import { FdbNavigationListItemComponent } from './navigation-list-item-component.token';
@@ -39,8 +42,11 @@ export class NavigationContentEndComponent extends NavigationContentComponent im
     override refresh$ = new Subject<void>();
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     ngAfterViewInit(): void {
-        this._listItems.changes.pipe(startWith(null)).subscribe(() => {
+        this._listItems.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this.refresh$.next();
         });
     }

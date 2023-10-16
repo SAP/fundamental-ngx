@@ -1,7 +1,7 @@
 <ng-content select="ul[fdb-navigation-list]"></ng-content>
 
 <ng-container *ngIf="showOverflowButton()">
-    <ul fdb-navigation-list [showHome]="false" #showMoreOverflowMenu>
+    <ul fdb-navigation-list class="fd-navigation__list--no-grow" [showHome]="false" #showMoreOverflowMenu>
         <li
             fdb-navigation-list-overflow-item
             [alwaysFocusable]="true"

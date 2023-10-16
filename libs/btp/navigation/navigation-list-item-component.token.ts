@@ -1,7 +1,7 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { DomPortal } from '@angular/cdk/portal';
-import { ElementRef, Signal, WritableSignal, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { DestroyRef, ElementRef, Signal, WritableSignal, effect, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { RouterLinkActive } from '@angular/router';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
@@ -64,12 +64,15 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
     protected readonly _popoverService = inject(PopoverService);
 
     /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
     private _listenToSnappedExpandedState = true;
 
     /** @hidden */
     constructor() {
         super();
-        this._rtl?.rtl.subscribe((isRtl) => {
+        this._rtl?.rtl.pipe(takeUntilDestroyed()).subscribe((isRtl) => {
             this.placement = isRtl ? 'left-start' : 'right-start';
             this._popoverService.refreshConfiguration(this);
         });
@@ -106,17 +109,22 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
 
         effect(() => {
             const activeRouterLink = this.routerLinkActive();
-            activeRouterLink?.isActiveChange.subscribe((isActive) => {
+            activeRouterLink?.isActiveChange.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isActive) => {
                 this.parentListItemComponent?.setSnappedActiveState(isActive);
             });
         });
 
-        this.isOpenChange.pipe(filter(() => this.navigationComponent.isSnapped())).subscribe((isOpen) => {
-            this.isOpen = isOpen;
-            this.expanded.set(isOpen);
-            if (!this.isOpen) {
-                this.focus();
-            }
-        });
+        this.isOpenChange
+            .pipe(
+                filter(() => this.navigationComponent.isSnapped()),
+                takeUntilDestroyed(this._destroyRef)
+            )
+            .subscribe((isOpen) => {
+                this.isOpen = isOpen;
+                this.expanded.set(isOpen);
+                if (!this.isOpen) {
+                    this.focus();
+                }
+            });
     }
 }

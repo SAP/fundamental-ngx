@@ -1,4 +1,5 @@
 export * from './directives/navigation-home.directive';
+export * from './directives/navigation-list-spacer.directive';
 export * from './navigation-content-end.component';
 export * from './navigation-content-start.component';
 export * from './navigation-link.component';

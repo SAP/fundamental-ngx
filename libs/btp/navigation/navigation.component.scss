@@ -16,6 +16,16 @@ $block: fd-navigation;
 
         .#{$block}__container--top {
             overflow: visible !important;
+            display: flex;
+            flex-direction: column;
+
+            .#{$block}__list {
+                flex-grow: 1;
+                height: auto;
+                &--no-grow {
+                    flex-grow: 0;
+                }
+            }
         }
         .#{$block}__container--hidden-overflow {
             overflow: hidden !important;
@@ -32,10 +42,17 @@ $block: fd-navigation;
     &__list-container--custom-menu {
         box-shadow: var(--sapMenu_Shadow1);
     }
+
+    &__list-item--spacer {
+        &--hidden {
+            display: none !important;
+        }
+    }
 }
 
 .#{$block}--snapped .#{$block}__list-container.#{$block}__list-container--menu {
-    position: static;
+    position: relative;
+    transition: none;
 }
 
 .#{$block}__list-item:not(.#{$block}__list-item--home) {
@@ -83,4 +100,8 @@ $block: fd-navigation;
             }
         }
     }
+}
+
+.fd-popover__body.fd-navigation__list-container {
+    display: block;
 }
