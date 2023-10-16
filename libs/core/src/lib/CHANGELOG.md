@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.93...v0.46.0-rc.94) (2023-10-16)
+
+
+### Bug Fixes
+
+* **core,btp:** various dh fixes ([#10731](https://github.com/SAP/fundamental-ngx/issues/10731)) ([7c75869](https://github.com/SAP/fundamental-ngx/commit/7c758697eda4076305f048dc865565a2b7db0488))
+
+
+
+
+
 # [0.46.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.92...v0.46.0-rc.93) (2023-10-15)
 
 
