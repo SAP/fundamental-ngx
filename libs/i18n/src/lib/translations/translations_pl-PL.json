@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "Zablokowany",
     "coreGridList.listItemStatusDraft": "Szkic",
     "coreMessageStrip.dismissLabel": "Odrzuć",
+    "coreMultiInput.countListResultsSingular": "Lista 1 elementowa.",
+    "coreMultiInput.countListResultsPlural": "Lista {count} elementowa.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

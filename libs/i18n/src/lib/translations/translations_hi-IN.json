@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "बंद",
     "coreGridList.listItemStatusDraft": "प्रालेख",
     "coreMessageStrip.dismissLabel": "खारिज करें",
+    "coreMultiInput.countListResultsSingular": "1 परिणाम सूची आइटम",
+    "coreMultiInput.countListResultsPlural": "{count} परिणाम सूची आइटम",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

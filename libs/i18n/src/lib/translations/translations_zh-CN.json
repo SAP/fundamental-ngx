@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "被锁定",
     "coreGridList.listItemStatusDraft": "拟稿",
     "coreMessageStrip.dismissLabel": "关闭",
+    "coreMultiInput.countListResultsSingular": "1条搜索结果。",
+    "coreMultiInput.countListResultsPlural": "{count}条搜索结果。",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

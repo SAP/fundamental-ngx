@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "Zamčený",
     "coreGridList.listItemStatusDraft": "Koncept",
     "coreMessageStrip.dismissLabel": "Zrušit",
+    "coreMultiInput.countListResultsSingular": "1 položka výsledkové listiny.",
+    "coreMultiInput.countListResultsPlural": "{count} položek výsledkového seznamu.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

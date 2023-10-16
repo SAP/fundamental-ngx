@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "I kyçur",
     "coreGridList.listItemStatusDraft": "Draft",
     "coreMessageStrip.dismissLabel": "Largoje",
+    "coreMultiInput.countListResultsSingular": "1 artikull i listës së rezultateve.",
+    "coreMultiInput.countListResultsPlural": "{count} artikujt e listës së rezultateve.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

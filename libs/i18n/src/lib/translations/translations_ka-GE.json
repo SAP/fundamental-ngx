@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "დაბლოკილი",
     "coreGridList.listItemStatusDraft": "დაუსრულებელი",
     "coreMessageStrip.dismissLabel": "გაუქმება",
+    "coreMultiInput.countListResultsSingular": "1 რეზულტატი.",
+    "coreMultiInput.countListResultsPlural": "{count} რეზულტატი.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

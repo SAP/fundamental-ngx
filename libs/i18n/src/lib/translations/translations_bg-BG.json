@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "Заключен",
     "coreGridList.listItemStatusDraft": "Чернова",
     "coreMessageStrip.dismissLabel": "Отхвърляне",
+    "coreMultiInput.countListResultsSingular": "1 елемент от списъка с резултати.",
+    "coreMultiInput.countListResultsPlural": "{count} елемента от списъка с резултати.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

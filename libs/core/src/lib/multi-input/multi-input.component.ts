@@ -438,6 +438,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     /** @hidden */
     private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
 
+    /** @hidden */
+    private _language: FdLanguage;
+
+    /** @hidden */
+    private _announcement = '';
+
     /** typeahead matcher function */
     get typeAheadMatcher(): (item: string, searchTerm: string) => boolean {
         if (this.includes) {
@@ -469,10 +475,17 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Inject(FD_LANGUAGE) private readonly _language: Observable<FdLanguage>,
+        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
-    ) {}
+    ) {
+        this._init();
+    }
+
+    /** @hidden */
+    private async _init(): Promise<void> {
+        this._language = await firstValueFrom(this._language$);
+    }
 
     /** @hidden CssClassBuilder interface implementation
      * function must return single string
@@ -996,37 +1009,51 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
         );
-    }
-
-    /** @hidden */
+    } /** @hidden */
     _makeSearchTermChangeAnnouncements(event: KeyboardEvent): void {
         if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
             this._liveAnnouncer.clear();
             const filtered = this.filterFn(this.dropdownValues, this.searchTerm);
             if (!filtered.length && !this._noResultsAnnounced) {
-                this._makeAnnouncement('noResults');
+                this._buildAnnouncement('noResults');
                 this._noResultsAnnounced = true;
                 this._resultsAnnounced = false;
-            } else if (filtered.length && !this._resultsAnnounced) {
-                this._makeAnnouncement('navigateSelectionsWithArrows');
-                this._noResultsAnnounced = false;
-                this._resultsAnnounced = true;
+            } else if (filtered.length) {
+                this._buildAnnouncement(filtered.length);
+                if (!this._resultsAnnounced) {
+                    this._buildAnnouncement('navigateSelectionsWithArrows');
+                    this._noResultsAnnounced = false;
+                    this._resultsAnnounced = true;
+                }
             }
             if (this.tokenizer?.tokenList?.length) {
-                this._makeAnnouncement('escapeNavigateTokens');
+                this._buildAnnouncement('escapeNavigateTokens');
             }
+            this._makeAnnouncement(this._announcement);
         }
     }
 
     /** @hidden */
-    private async _makeAnnouncement(message: string): Promise<void> {
-        await this._liveAnnouncer.announce(
+    private _buildAnnouncement(message: string | number): void {
+        this._announcement =
+            this._announcement +
             this._translationResolver.resolve(
-                await firstValueFrom(this._language),
-                ('coreMultiInput.' + message) as FdLanguageKeyIdentifier
-            ),
-            10000
-        );
+                this._language,
+                (typeof message === 'string'
+                    ? 'coreMultiInput.' + message
+                    : message === 1
+                    ? 'coreMultiInput.countListResultsSingular'
+                    : 'coreMultiInput.countListResultsPlural') as FdLanguageKeyIdentifier,
+                { count: message }
+            ) +
+            ' ';
+    }
+
+    /** @hidden */
+    private async _makeAnnouncement(message: string): Promise<void> {
+        await this._liveAnnouncer.announce(message).then(() => {
+            this._announcement = '';
+        });
     }
 }
 

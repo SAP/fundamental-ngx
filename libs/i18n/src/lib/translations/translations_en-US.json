@@ -26,6 +26,8 @@
     "coreGridList.listItemStatusLocked": "Locked",
     "coreGridList.listItemStatusDraft": "Draft",
     "coreMessageStrip.dismissLabel": "Dismiss",
+    "coreMultiInput.countListResultsSingular": "1 result list item.",
+    "coreMultiInput.countListResultsPlural": "{count} result list items.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",

@@ -25,6 +25,8 @@
     "coreGridList.listItemStatusContainsErrors": "Comporte des erreurs",
     "coreGridList.listItemStatusLocked": "Bloqué",
     "coreGridList.listItemStatusDraft": "Brouillon",
+    "coreMultiInput.countListResultsSingular": "1 resultat sur la liste d'éléments.",
+    "coreMultiInput.countListResultsPlural": "{count} éléments de la liste de résultats.",
     "coreMultiInput.multiInputAriaLabel": "Multi Value Input",
     "coreMultiInput.noResults": "No results.",
     "coreMultiInput.navigateSelectionsWithArrows": "Navigate selections with the up and down arrows.",
