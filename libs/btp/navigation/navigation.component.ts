@@ -1,5 +1,6 @@
 /* eslint-disable @angular-eslint/no-input-rename,@angular-eslint/no-host-metadata-property */
 import { FocusKeyManager } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
@@ -95,6 +96,13 @@ export class NavigationComponent
     }
 
     /** @hidden */
+    @Input({ alias: 'homeSeparator', transform: coerceBooleanProperty })
+    set _homeSeparator(value: BooleanInput) {
+        // It will always be a boolean, because of the transform
+        this.homeSeparator.set(value as boolean);
+    }
+
+    /** @hidden */
     @ContentChild(NavigationHomeDirective)
     set _homeDirective(homeDirective: NavigationHomeDirective) {
         this.homeDirective.set(homeDirective);
@@ -121,6 +129,12 @@ export class NavigationComponent
     /** @hidden */
     elementRef: ElementRef<HTMLElement> = inject(ElementRef);
 
+    /**
+     * Whether to show a separator between home item and the rest of the navigation items.
+     * Default is true.
+     */
+    homeSeparator = signal(true);
+
     /** @hidden */
     mode = signal<FdbViewMode>('');
     /** @hidden */
@@ -133,9 +147,10 @@ export class NavigationComponent
     /** @hidden */
     defaultLinkTemplate = signal<TemplateRef<any> | null>(null);
     /** @hidden */
-    homeLinkTemplate = computed(() =>
-        this.homeDirective() ? this.homeDirective()!.templateRef : this.defaultLinkTemplate()
-    );
+    homeLinkTemplate = computed(() => {
+        const homeDirective = this.homeDirective();
+        return homeDirective ? homeDirective.templateRef : this.defaultLinkTemplate();
+    });
 
     /** @hidden */
     private _keyboardEventsManager: Nullable<FocusKeyManager<FdbNavigationListItemComponent>>;

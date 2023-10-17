@@ -12,11 +12,12 @@ import {
     signal
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
 import { filter, of } from 'rxjs';
 import { FdbNavigationComponent } from './navigation-component.token';
+import { NavigationLinkComponent } from './navigation-link.component';
 import { FdbNavigationListComponent } from './navigation-list-component.token';
 
 @Directive()
@@ -31,9 +32,11 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
     abstract isGroup: Signal<boolean>;
     abstract level: Signal<number>;
     abstract normalizedLevel: Signal<number>;
-    abstract routerLinkActive: Signal<RouterLinkActive | null>;
+    abstract routerLinkActive: WritableSignal<RouterLinkActive | null>;
+    abstract routerLink: WritableSignal<RouterLink | null>;
     abstract parentListItemComponent: FdbNavigationListItemComponent | null;
     abstract alwaysFocusable: boolean;
+    abstract linkComponent: Nullable<NavigationLinkComponent>;
     abstract domPortal: Nullable<DomPortal>;
     abstract focusOnClonedLink(): void;
     abstract expand(): void;
@@ -76,7 +79,7 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
     protected readonly _popoverService = inject(PopoverService);
 
     /** @hidden */
-    private readonly _destroyRef = inject(DestroyRef);
+    protected readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     private _listenToSnappedExpandedState = true;

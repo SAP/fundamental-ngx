@@ -8,6 +8,7 @@ export abstract class FdbNavigationComponent {
     abstract state: Signal<FdbNavigationState>;
     abstract type: Signal<FdbNavigationType>;
     abstract mode: Signal<FdbViewMode>;
+    abstract homeSeparator: Signal<boolean>;
     abstract homeLinkTemplate: Signal<TemplateRef<void> | null>;
     abstract setNextItemActive(): void;
     abstract setActiveItem(item: FdbNavigationListItemComponent): void;

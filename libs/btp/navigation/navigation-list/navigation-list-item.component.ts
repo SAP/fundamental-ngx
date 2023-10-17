@@ -26,6 +26,7 @@ import {
     inject,
     signal
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
     CssClassBuilder,
@@ -156,6 +157,19 @@ export class NavigationListItemComponent
 
     /** @hidden */
     routerLinkActive = signal<RouterLinkActive | null>(null);
+
+    /** @hidden */
+    isRouterLinkActive = computed(() => {
+        const routerLinkActive = this.routerLinkActive();
+        if (routerLinkActive) {
+            return toSignal(routerLinkActive.isActiveChange, {
+                initialValue: routerLinkActive.isActive,
+                injector: this.injector
+            })();
+        }
+        return false;
+    });
+
     /** @hidden */
     childNavigationListComponent = signal<FdbNavigationListComponent | null>(null);
     /** @hidden */

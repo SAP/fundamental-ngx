@@ -6,5 +6,5 @@ import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 })
 export class NavigationHomeDirective {
     /** @hidden */
-    constructor(readonly templateRef: TemplateRef<any>, private viewContainerRef: ViewContainerRef) {}
+    constructor(readonly templateRef: TemplateRef<any>, private _viewContainerRef: ViewContainerRef) {}
 }
