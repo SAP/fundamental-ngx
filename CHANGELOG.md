@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.94...v0.46.0-rc.95) (2023-10-17)
+
+
+### Bug Fixes
+
+* **btp:** snapped functionality for ungrouped items ([#10738](https://github.com/SAP/fundamental-ngx/issues/10738)) ([6413b9e](https://github.com/SAP/fundamental-ngx/commit/6413b9e6e07b2fdaddb6d4cdc9ea900777c06503))
+
+
+
+
+
 # [0.46.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.93...v0.46.0-rc.94) (2023-10-16)
 
 
