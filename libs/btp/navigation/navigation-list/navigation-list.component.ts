@@ -90,6 +90,15 @@ export class NavigationListComponent
     isParentGroupChild = computed(() => this.parentListItemComponent?.isGroup() ?? false);
 
     /** @hidden */
+    isInGroup = computed(() => this.isParentGroupChild() || !!this.parentListComponent?.isParentGroupChild());
+
+    /** @hidden */
+    level = computed(() => (this.parentListComponent ? this.parentListComponent.level() + 1 : 1));
+
+    /** @hidden */
+    normalizedLevel = computed(() => (this.isInGroup() ? this.level() : this.level() + (this.level() === 2 ? 1 : 0)));
+
+    /** @hidden */
     focused = false;
 
     /** @hidden */

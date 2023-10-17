@@ -17,6 +17,7 @@ import {
     OnChanges,
     OnInit,
     QueryList,
+    Signal,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
@@ -151,9 +152,6 @@ export class NavigationListItemComponent
     override additionalBodyClass = 'fd-navigation__list-container';
 
     /** @hidden */
-    // override additionalBodyComponentClasses = 'fd-navigation fd-navigation--snapped';
-
-    /** @hidden */
     routerLink = signal<RouterLink | null>(null);
 
     /** @hidden */
@@ -183,18 +181,35 @@ export class NavigationListItemComponent
     /** @hidden */
     parentInPortal = computed(() => this.parentListItemComponent?.inPortal() || false);
 
-    /** @hidden */
-    level = computed(() => (this.parentListItemComponent?.level() ? this.parentListItemComponent.level() + 1 : 1));
+    /**
+     * Used in attribute only. For actual calculation of level of nesting use `normalizedLevel`.
+     */
+    get level(): Signal<number> {
+        return this.parentNavigationListComponent.level;
+    }
+
+    /**
+     * Used for calculation of the level of inclusion. Can be different than the actual level due to ability to mix grouped lists with ungrouped.
+     * For ungrouped lists will add +1 for the first list in the hierarchy to mimic group existence.
+     */
+    normalizedLevel = computed(() => {
+        if (this.parentNavigationListComponent.isInGroup() || this.isGroup()) {
+            return this.level();
+        }
+        return this.level() + 1;
+    });
 
     /** @hidden */
-    _isInPopover = computed(() => this.navigationComponent.isSnapped() && (this.level() > 2 || this._hidden()));
+    _isInPopover = computed(
+        () => this.navigationComponent.isSnapped() && (this.normalizedLevel() > 2 || this._hidden())
+    );
 
     /** @hidden */
     // eslint-disable-next-line max-len
     expandedAttr = computed(
         () =>
             (this.expanded() ||
-                (!this.parentListItemComponent &&
+                (this.normalizedLevel() === 1 &&
                     !!this.childNavigationListComponent() &&
                     this.navigationComponent.isSnapped())) &&
             !this._hidden()
@@ -262,7 +277,7 @@ export class NavigationListItemComponent
                                 hiddenItems[hiddenItems.length - 1]?.elementRef.nativeElement));
 
                 const secondLevelHiddenElementCondition =
-                    this.level() > 2 &&
+                    this.normalizedLevel() > 2 &&
                     ((KeyUtil.isKeyCode(event, UP_ARROW) &&
                         this.parentNavigationListComponent.listItems.first === this) ||
                         (KeyUtil.isKeyCode(event, DOWN_ARROW) &&
@@ -381,7 +396,7 @@ export class NavigationListItemComponent
     /** @hidden */
     checkSelfHidden(): void {
         const shouldHide = this._childNavigationListItems
-            ?.filter((item) => item.level() === this.level() + 1)
+            ?.filter((item) => item.normalizedLevel() === this.normalizedLevel() + 1)
             .every((item) => item._hidden());
         this._hidden.set(shouldHide);
         this.isOpen = shouldHide;
@@ -471,7 +486,7 @@ export class NavigationListItemComponent
             this.expanded.set(shouldExpand);
             this._popoverService.close();
 
-            if (this.inPortal() && this.level() === 2) {
+            if (this.inPortal() && this.normalizedLevel() === 2) {
                 this._navigationComponent.focusMoreButton();
             } else {
                 this.parentListItemComponent?.focus();

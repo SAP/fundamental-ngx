@@ -215,19 +215,26 @@ export class NavigationComponent
                         if (item.alwaysFocusable) {
                             return false;
                         }
-                        if (!item.parentListItemComponent) {
+
+                        const moreOpened = this._navigationContents.some((c) => c.showMoreOpened());
+
+                        if (item.level() === 1) {
                             if (!this.isSnapped()) {
                                 return false;
                             }
 
-                            return item.isGroup();
+                            if (item.normalizedLevel() === 1) {
+                                return true;
+                            }
+
+                            return item._hidden() && !moreOpened;
                         }
 
                         if (this.isSnapped()) {
                             if (
                                 item.inPortal() &&
-                                (item.parentListItemComponent.isOpen || item.parentNavigationListComponent.focused) &&
-                                this._navigationContents.some((c) => c.showMoreOpened())
+                                (item.parentListItemComponent?.isOpen || item.parentNavigationListComponent.focused) &&
+                                moreOpened
                             ) {
                                 return false;
                             }
@@ -237,7 +244,7 @@ export class NavigationComponent
                             return item.parentListItemComponent?.expandedAttr() !== true;
                         }
 
-                        const navigatable = item.parentListItemComponent.fullPathExpanded() === false;
+                        const navigatable = item.parentListItemComponent?.fullPathExpanded() === false;
 
                         return navigatable;
                     });
