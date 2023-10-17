@@ -9,6 +9,12 @@
     }
 }
 
+.fd-input-group.fdp-search-field__input-group.fd-shellbar__search-field:hover {
+    .fd-select__control.fd-shellbar__search-category {
+        border-radius: var(--fdShellbar_Input_Border_Radius);
+    }
+}
+
 .fd-shellbar--cx-side-nav {
     box-shadow: var(--sapContent_Shadow0);
     padding-left: 0.5rem;
