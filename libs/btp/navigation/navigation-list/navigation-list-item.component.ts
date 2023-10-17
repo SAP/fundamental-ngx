@@ -26,7 +26,7 @@ import {
     inject,
     signal
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
     CssClassBuilder,
@@ -39,7 +39,6 @@ import {
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PopoverComponent, PopoverControlComponent, PopoverService } from '@fundamental-ngx/core/popover';
-import { startWith } from 'rxjs';
 import { FdbNavigationComponent } from '../navigation-component.token';
 import { NavigationLinkComponent } from '../navigation-link.component';
 import { FdbNavigationListComponent } from '../navigation-list-component.token';
@@ -160,7 +159,16 @@ export class NavigationListItemComponent
     routerLinkActive = signal<RouterLinkActive | null>(null);
 
     /** @hidden */
-    isRouterLinkActive = signal(false);
+    isRouterLinkActive = computed(() => {
+        const routerLinkActive = this.routerLinkActive();
+        if (routerLinkActive) {
+            return toSignal(routerLinkActive.isActiveChange, {
+                initialValue: routerLinkActive.isActive,
+                injector: this.injector
+            })();
+        }
+        return false;
+    });
 
     /** @hidden */
     childNavigationListComponent = signal<FdbNavigationListComponent | null>(null);
@@ -259,21 +267,6 @@ export class NavigationListItemComponent
                 .join(' ');
             this._popoverService.updateContent(null, this.childrenTemplate());
         });
-
-        effect(
-            () => {
-                const activeRoute = this.routerLinkActive();
-
-                activeRoute?.isActiveChange
-                    .pipe(startWith(activeRoute.isActive), takeUntilDestroyed(this._destroyRef))
-                    .subscribe((isActive) => {
-                        this.isRouterLinkActive.set(isActive);
-                    });
-            },
-            {
-                allowSignalWrites: true
-            }
-        );
     }
 
     /** @hidden */

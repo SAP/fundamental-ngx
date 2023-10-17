@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/no-input-rename,@angular-eslint/no-host-metadata-property */
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
@@ -96,9 +96,10 @@ export class NavigationComponent
     }
 
     /** @hidden */
-    @Input({ alias: 'homeSeparator', transform: (value: any) => coerceBooleanProperty(value) })
-    set _homeSeparator(value: boolean) {
-        this.homeSeparator.set(value);
+    @Input({ alias: 'homeSeparator', transform: coerceBooleanProperty })
+    set _homeSeparator(value: BooleanInput) {
+        // It will always be a boolean, because of the transform
+        this.homeSeparator.set(value as boolean);
     }
 
     /** @hidden */
@@ -146,9 +147,10 @@ export class NavigationComponent
     /** @hidden */
     defaultLinkTemplate = signal<TemplateRef<any> | null>(null);
     /** @hidden */
-    homeLinkTemplate = computed(() =>
-        this.homeDirective() ? this.homeDirective()!.templateRef : this.defaultLinkTemplate()
-    );
+    homeLinkTemplate = computed(() => {
+        const homeDirective = this.homeDirective();
+        return homeDirective ? homeDirective.templateRef : this.defaultLinkTemplate();
+    });
 
     /** @hidden */
     private _keyboardEventsManager: Nullable<FocusKeyManager<FdbNavigationListItemComponent>>;

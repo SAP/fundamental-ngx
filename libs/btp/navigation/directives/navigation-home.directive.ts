@@ -1,4 +1,4 @@
-import { Directive, TemplateRef, inject } from '@angular/core';
+import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
     selector: '[fdbNavigationHome]',
@@ -6,5 +6,5 @@ import { Directive, TemplateRef, inject } from '@angular/core';
 })
 export class NavigationHomeDirective {
     /** @hidden */
-    public readonly templateRef = inject(TemplateRef<any>);
+    constructor(readonly templateRef: TemplateRef<any>, private _viewContainerRef: ViewContainerRef) {}
 }
