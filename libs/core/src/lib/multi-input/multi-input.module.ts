@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AutoCompleteModule, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { AutoCompleteModule, MultiAnnouncerModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -30,7 +30,8 @@ import { MultiInputComponent } from './multi-input.component';
         LinkModule,
         AutoCompleteModule,
         ContentDensityModule,
-        I18nModule
+        I18nModule,
+        MultiAnnouncerModule
     ],
     exports: [MultiInputComponent, DeprecatedMultiInputCompactDirective, ContentDensityModule]
 })

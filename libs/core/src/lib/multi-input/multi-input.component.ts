@@ -10,7 +10,6 @@ import {
     forwardRef,
     HostListener,
     inject,
-    Inject,
     Injector,
     Input,
     isDevMode,
@@ -26,7 +25,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject, combineLatest, firstValueFrom, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
 import {
@@ -51,7 +50,6 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import get from 'lodash-es/get';
@@ -420,21 +418,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     private readonly _rangeSelector = new RangeSelector();
 
     /** @hidden */
-    private _noResultsAnnounced = false;
-
-    /** @hidden */
-    private _resultsAnnounced = false;
-
-    /** @hidden */
-    private _translationResolver = new TranslationResolver();
-
-    /** @hidden */
-    private _language: FdLanguage;
-
-    /** @hidden */
-    private _announcement = '';
-
-    /** @hidden */
     constructor(
         readonly _contentDensityObserver: ContentDensityObserver,
         public readonly elementRef: ElementRef<HTMLElement>,
@@ -442,17 +425,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         private readonly _dynamicComponentService: DynamicComponentService,
         private readonly _injector: Injector,
         private readonly _viewContainerRef: ViewContainerRef,
-        @Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _focusTrapService: FocusTrapService
-    ) {
-        this._init();
-    }
-
-    /** @hidden */
-    private async _init(): Promise<void> {
-        this._language = await firstValueFrom(this._language$);
-    }
+    ) {}
 
     /** @hidden CssClassBuilder interface implementation
      * function must return single string
@@ -975,53 +950,6 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
                 return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
         );
-    }
-
-    /** @hidden */
-    _makeSearchTermChangeAnnouncements(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
-            this._liveAnnouncer.clear();
-            const filtered = this.filterFn(this.dropdownValues, this.searchTerm);
-            if (!filtered.length && !this._noResultsAnnounced) {
-                this._buildAnnouncement('noResults');
-                this._noResultsAnnounced = true;
-                this._resultsAnnounced = false;
-            } else if (filtered.length) {
-                this._buildAnnouncement(filtered.length);
-                if (!this._resultsAnnounced) {
-                    this._buildAnnouncement('navigateSelectionsWithArrows');
-                    this._noResultsAnnounced = false;
-                    this._resultsAnnounced = true;
-                }
-            }
-            if (this.tokenizer?.tokenList?.length) {
-                this._buildAnnouncement('escapeNavigateTokens');
-            }
-            this._makeAnnouncement(this._announcement);
-        }
-    }
-
-    /** @hidden */
-    private _buildAnnouncement(message: string | number): void {
-        this._announcement =
-            this._announcement +
-            this._translationResolver.resolve(
-                this._language,
-                typeof message === 'string'
-                    ? 'coreMultiInput.' + message
-                    : message === 1
-                    ? 'coreMultiInput.countListResultsSingular'
-                    : 'coreMultiInput.countListResultsPlural',
-                { count: message }
-            ) +
-            ' ';
-    }
-
-    /** @hidden */
-    private async _makeAnnouncement(message: string): Promise<void> {
-        await this._liveAnnouncer.announce(message).then(() => {
-            this._announcement = '';
-        });
     }
 }
 
