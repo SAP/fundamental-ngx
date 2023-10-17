@@ -54,25 +54,17 @@
                     </li>
                 </ul>
             </li>
-            <li fdb-navigation-list-item [group]="true">
-                <a fdb-navigation-link label="Favourites"></a>
+            <li fdb-navigation-list-item [expanded]="true">
+                <a fdb-navigation-link glyph="settings" label="Settings without wrapper"></a>
                 <ul fdb-navigation-list>
                     <li fdb-navigation-list-item>
-                        <a fdb-navigation-link glyph="shield" label="Shield"></a>
+                        <a fdb-navigation-link label="User Settings"></a>
                     </li>
-                    <li fdb-navigation-list-item [expanded]="true">
-                        <a fdb-navigation-link glyph="settings" label="Settings"></a>
-                        <ul fdb-navigation-list>
-                            <li fdb-navigation-list-item>
-                                <a fdb-navigation-link label="User Settings"></a>
-                            </li>
-                            <li fdb-navigation-list-item>
-                                <a fdb-navigation-link label="Profile Settings"></a>
-                            </li>
-                            <li fdb-navigation-list-item>
-                                <a fdb-navigation-link label="Password Change"></a>
-                            </li>
-                        </ul>
+                    <li fdb-navigation-list-item>
+                        <a fdb-navigation-link label="Profile Settings"></a>
+                    </li>
+                    <li fdb-navigation-list-item>
+                        <a fdb-navigation-link label="Password Change"></a>
                     </li>
                 </ul>
             </li>
@@ -117,6 +109,23 @@
                                 <a fdb-navigation-link label="Password Change"></a>
                             </li>
                         </ul>
+                    </li>
+                </ul>
+            </li>
+            <li fdb-navigation-list-item>
+                <a fdb-navigation-link glyph="shield" label="Shield without wrapper"></a>
+            </li>
+            <li fdb-navigation-list-item [expanded]="true">
+                <a fdb-navigation-link glyph="settings" label="Settings without wrapper"></a>
+                <ul fdb-navigation-list>
+                    <li fdb-navigation-list-item>
+                        <a fdb-navigation-link label="User Settings"></a>
+                    </li>
+                    <li fdb-navigation-list-item>
+                        <a fdb-navigation-link label="Profile Settings"></a>
+                    </li>
+                    <li fdb-navigation-list-item>
+                        <a fdb-navigation-link label="Password Change"></a>
                     </li>
                 </ul>
             </li>

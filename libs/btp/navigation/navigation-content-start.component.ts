@@ -214,7 +214,7 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
 
         const navigationItemGroups = this._navigationItems.reduce(
             (acc: { root: FdbNavigationListItemComponent[]; children: FdbNavigationListItemComponent[] }, item) => {
-                const itemLevel = item.level();
+                const itemLevel = item.normalizedLevel();
                 if (itemLevel > 2) {
                     return acc;
                 }

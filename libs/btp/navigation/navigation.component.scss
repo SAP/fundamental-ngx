@@ -9,6 +9,11 @@ $block: fd-navigation;
         padding-bottom: 0.25rem;
     }
 
+    &__list {
+        min-height: 100%;
+        height: auto;
+    }
+
     &--snapped {
         .#{$block}__list-item--home {
             position: relative;
@@ -22,6 +27,7 @@ $block: fd-navigation;
             .#{$block}__list {
                 flex-grow: 1;
                 height: auto;
+                min-height: 0;
                 &--no-grow {
                     flex-grow: 0;
                 }

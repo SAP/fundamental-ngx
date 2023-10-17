@@ -2,9 +2,9 @@
     class="fd-navigation__item"
     [class.fd-navigation__item--group]="isGroup()"
     [class.fd-navigation__item--overflow]="_hidden()"
-    [class.fd-navigation__item--child]="parentNavigationListComponent.parentListComponent?.isParentGroupChild()"
+    [class.fd-navigation__item--child]="normalizedLevel() > 2"
     [class.fd-navigation__item--with-expander]="
-        childNavigationListComponent() && level() < 3 && linkComponent?._routerLink
+        childNavigationListComponent() && normalizedLevel() < 3 && linkComponent?._routerLink
     "
     aria-current="page"
     [attr.aria-selected]="
@@ -23,7 +23,7 @@
     <ng-content select="[fdb-navigation-link]"></ng-content>
     <button
         (click)="toggle()"
-        *ngIf="childNavigationListComponent() && level() < 3 && linkComponent?._routerLink"
+        *ngIf="childNavigationListComponent() && normalizedLevel() < 3 && linkComponent?._routerLink"
         fd-button
         class="fd-button--nested fd-navigation__expander"
     >
@@ -33,7 +33,7 @@
 <ng-container
     *ngIf="
         (childNavigationListComponent() && !navigationComponent.isSnapped()) ||
-        (navigationComponent.isSnapped() && level() < 2) ||
+        (navigationComponent.isSnapped() && normalizedLevel() < 2) ||
         _hidden()
     "
 >

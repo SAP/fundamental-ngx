@@ -54,7 +54,7 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
         <span
             *ngIf="
                 navigationListItemComponent?.childNavigationListComponent() &&
-                navigationListItemComponent?.level() !== 3 &&
+                navigationListItemComponent?.normalizedLevel() !== 3 &&
                 !_routerLink
             "
             class="fd-navigation__has-children-indicator"

@@ -4,6 +4,9 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
 
 export abstract class FdbNavigationListComponent {
     abstract isParentGroupChild: Signal<boolean>;
+    abstract isInGroup: Signal<boolean>;
+    abstract level: Signal<number>;
+    abstract normalizedLevel: Signal<number>;
     abstract parentListComponent: FdbNavigationListComponent | null;
     abstract homeListItem: Nullable<FdbNavigationListItemComponent>;
     abstract listItems: QueryList<FdbNavigationListItemComponent>;
