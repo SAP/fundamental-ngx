@@ -4,7 +4,11 @@
 @import 'fundamental-styles/dist/input-group';
 
 @include cdk.a11y-visually-hidden();
-
+.fd-input-group.fdp-search-field__input-group.fd-shellbar__search-field:hover {
+    .fd-select__control.fd-shellbar__search-category {
+        border-radius: var(--fdShellbar_Input_Border_Radius);
+    }
+}
 .fdp-search-field {
     /* Remove clear "x" from search field for IE browsers */
     input[type='text']::-ms-clear {
