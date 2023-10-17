@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.97) (2023-10-17)
+
+
+### Bug Fixes
+
+* **btp:** custom vertical nav home ([#10744](https://github.com/SAP/fundamental-ngx/issues/10744)) ([c1398da](https://github.com/SAP/fundamental-ngx/commit/c1398da9f0f425e8a7eaf253c76edeae729fad70))
+
+
+
+
+
 # [0.46.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.96) (2023-10-17)
 
 **Note:** Version bump only for package @fundamental-ngx/btp

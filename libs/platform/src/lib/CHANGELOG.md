@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.97) (2023-10-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed shellbar search outline and hover jumping ([#10742](https://github.com/SAP/fundamental-ngx/issues/10742)) ([82e86a4](https://github.com/SAP/fundamental-ngx/commit/82e86a47a4fcd7b21903004c394d426630e66386))
+
+
+
+
+
 # [0.46.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.96) (2023-10-17)
 
 
