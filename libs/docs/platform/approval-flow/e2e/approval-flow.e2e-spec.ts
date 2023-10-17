@@ -109,7 +109,7 @@ describe('Approval flow', () => {
     }, 1);
 
     afterEach(async () => {
-        await refreshPage();
+        await refreshPage(true);
         await waitForPresent(approvalFlowPage.root);
         await waitForElDisplayed(approvalFlowPage.title);
     }, 1);
