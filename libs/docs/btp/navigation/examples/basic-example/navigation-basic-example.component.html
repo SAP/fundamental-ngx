@@ -12,8 +12,14 @@
 </fd-segmented-button>
 <p>&nbsp;</p>
 
-<fdb-navigation [state]="state" [mode]="mode" [style.width]="'fit-content'" [style.height.px]="400">
-    <!--    <a fdb-navigation-link *fdbNavigationHome> Home </a>-->
+<fdb-navigation
+    [state]="state"
+    [mode]="mode"
+    homeSeparator="false"
+    [style.width]="'fit-content'"
+    [style.height.px]="400"
+>
+    <a fdb-navigation-link [routerLink]="['/btp/navigation']" *fdbNavigationHome glyph="home" label="Home"></a>
     <fdb-navigation-content-start>
         <ul fdb-navigation-list>
             <li fdb-navigation-list-item [group]="true" [expanded]="true">

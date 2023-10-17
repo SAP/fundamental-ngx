@@ -107,6 +107,9 @@ export class NavigationLinkComponent implements OnInit, OnChanges, CssClassBuild
         self: true
     });
 
+    /** @hidden */
+    readonly _routerLinkActive = inject(RouterLinkActive, { optional: true });
+
     /**
      * If user applies RouterLink, we need to check if the link is active
      * @hidden
@@ -118,6 +121,13 @@ export class NavigationLinkComponent implements OnInit, OnChanges, CssClassBuild
 
     /** @hidden */
     private readonly _navigationComponent = inject(FdbNavigationComponent);
+
+    /** @hidden */
+    constructor() {
+        this.navigationListItemComponent.linkComponent = this;
+        this.navigationListItemComponent.routerLink.set(this._routerLink);
+        this.navigationListItemComponent.routerLinkActive.set(this._routerLinkActive);
+    }
 
     /** @hidden */
     @applyCssClass

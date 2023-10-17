@@ -7,11 +7,7 @@
         childNavigationListComponent() && normalizedLevel() < 3 && linkComponent?._routerLink
     "
     aria-current="page"
-    [attr.aria-selected]="
-        (routerLinkActive()?.isActiveChange | async) || (childrenActive() && navigationComponent.isSnapped())
-            ? true
-            : null
-    "
+    [attr.aria-selected]="isRouterLinkActive() || (childrenActive() && navigationComponent.isSnapped()) ? true : null"
     [attr.aria-expanded]="expandedAttr()"
     [attr.aria-level]="level()"
     #navigationItem
@@ -63,7 +59,7 @@
                         aria-level="1"
                         role="treeitem"
                         aria-expanded="true"
-                        [attr.aria-selected]="routerLinkActive()?.isActive"
+                        [attr.aria-selected]="isRouterLinkActive()"
                     >
                         <a
                             class="fd-navigation__link"

@@ -54,6 +54,10 @@ $block: fd-navigation;
             display: none !important;
         }
     }
+
+    .fd-navigation-list-item--home-without-separator {
+        margin-bottom: 0.09rem;
+    }
 }
 
 .#{$block}--snapped .#{$block}__list-container.#{$block}__list-container--menu {

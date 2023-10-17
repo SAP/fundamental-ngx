@@ -5,9 +5,14 @@
             [linkTemplate]="tmp"
             [alwaysFocusable]="true"
             #homeListItem
+            [class.fd-navigation-list-item--home-without-separator]="!_navigationComponent.homeSeparator()"
             class="fd-navigation__list-item--home"
         ></li>
-        <li #homeListSeparator class="fd-navigation__list-item fd-navigation__list-item--separator"></li>
+        <li
+            *ngIf="_navigationComponent.homeSeparator()"
+            #homeListSeparator
+            class="fd-navigation__list-item fd-navigation__list-item--separator"
+        ></li>
     </ng-container>
 </ng-container>
 <ng-content></ng-content>
