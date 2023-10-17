@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.96) (2023-10-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed shellbar search outline and hover jumping ([#10742](https://github.com/SAP/fundamental-ngx/issues/10742)) ([82e86a4](https://github.com/SAP/fundamental-ngx/commit/82e86a47a4fcd7b21903004c394d426630e66386))
+* **core:** remove assertive from time column ([#10735](https://github.com/SAP/fundamental-ngx/issues/10735)) ([05ea88c](https://github.com/SAP/fundamental-ngx/commit/05ea88c7bd2c492276546d1cbcb6342f3dba3906))
+
+
+### Features
+
+* **core:** avatar glyph font family ([#10740](https://github.com/SAP/fundamental-ngx/issues/10740)) ([e9c88dd](https://github.com/SAP/fundamental-ngx/commit/e9c88dd86f46eb2188af38fc147c664de98af6a1))
+
+
+
+
+
 # [0.46.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.94...v0.46.0-rc.95) (2023-10-17)
 
 **Note:** Version bump only for package @fundamental-ngx/core
