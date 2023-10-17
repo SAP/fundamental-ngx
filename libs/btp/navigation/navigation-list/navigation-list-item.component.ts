@@ -318,6 +318,7 @@ export class NavigationListItemComponent
     clonedMainLinkKeydown(event: KeyboardEvent): void {
         if (this._isCollapseAction(event)) {
             this._popoverService.close();
+            this.focus();
             return;
         }
 
@@ -485,6 +486,10 @@ export class NavigationListItemComponent
         } else {
             this.expanded.set(shouldExpand);
             this._popoverService.close();
+
+            if (!this.inPortal()) {
+                this.focus();
+            }
 
             if (this.inPortal() && this.normalizedLevel() === 2) {
                 this._navigationComponent.focusMoreButton();

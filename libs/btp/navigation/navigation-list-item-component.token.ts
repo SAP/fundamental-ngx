@@ -1,6 +1,16 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { DomPortal } from '@angular/cdk/portal';
-import { DestroyRef, ElementRef, Signal, WritableSignal, effect, inject, signal } from '@angular/core';
+import {
+    DestroyRef,
+    Directive,
+    ElementRef,
+    OnDestroy,
+    Signal,
+    WritableSignal,
+    effect,
+    inject,
+    signal
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { RouterLinkActive } from '@angular/router';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -9,7 +19,8 @@ import { filter, of } from 'rxjs';
 import { FdbNavigationComponent } from './navigation-component.token';
 import { FdbNavigationListComponent } from './navigation-list-component.token';
 
-export abstract class FdbNavigationListItemComponent extends BasePopoverClass implements FocusableOption {
+@Directive()
+export abstract class FdbNavigationListItemComponent extends BasePopoverClass implements FocusableOption, OnDestroy {
     abstract elementRef: ElementRef<HTMLElement>;
     abstract expanded: WritableSignal<boolean>;
     abstract expandedAttr: Signal<boolean>;
@@ -124,8 +135,14 @@ export abstract class FdbNavigationListItemComponent extends BasePopoverClass im
                 this.isOpen = isOpen;
                 this.expanded.set(isOpen);
                 if (!this.isOpen) {
-                    this.focus();
+                    // this.focus();
                 }
             });
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._popoverService.close();
+        this._popoverService.onDestroy();
     }
 }
