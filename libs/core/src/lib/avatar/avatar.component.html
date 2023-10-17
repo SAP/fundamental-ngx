@@ -9,13 +9,13 @@
 >
 </i>
 
-<i
+<fd-icon
     *ngIf="glyph || showDefault"
     class="fd-avatar__icon"
     role="presentation"
-    [class]="glyph ? 'sap-icon--' + glyph : 'sap-icon--person-placeholder'"
->
-</i>
+    [font]="font"
+    [glyph]="glyph || 'person-placeholder'"
+></fd-icon>
 
 <div #content [style.display]="'none'">
     <ng-content></ng-content>
