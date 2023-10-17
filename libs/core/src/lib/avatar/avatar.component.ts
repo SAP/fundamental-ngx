@@ -25,6 +25,7 @@ import {
     applyCssClass,
     getRandomColorAccent
 } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { AvatarIconPipe } from './avatar-icon.pipe';
 import { AvatarValueStates } from './avatar-value-states.type';
 import { FD_AVATAR_COMPONENT } from './tokens';
@@ -54,7 +55,7 @@ const ALTER_ICON_OPTIONS = {
         '[attr.tabindex]': '_tabindex'
     },
     standalone: true,
-    imports: [NgIf, AvatarIconPipe]
+    imports: [NgIf, AvatarIconPipe, IconComponent]
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */
@@ -86,6 +87,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
 
     /** The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*. */
     @Input() size: Size = 'l';
+
+    /** Font family of the icon. */
+    @Input()
+    font: IconComponent['font'] = 'SAP-icons';
 
     /** The glyph name. */
     @Input() glyph: Nullable<string> = null;
@@ -226,19 +231,6 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
         @Attribute('tabindex') private hostTabindex: number | null
     ) {}
 
-    /** @hidden */
-    ngOnInit(): void {
-        this.buildComponentCssClass();
-    }
-
-    /** @hidden */
-    ngOnChanges(): void {
-        if (this.zoomGlyph) {
-            this.clickable = true;
-        }
-        this.buildComponentCssClass();
-    }
-
     /** @hidden
      * CssClassBuilder interface implementation
      * function must return single string
@@ -266,13 +258,27 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnCh
     @HostListener('keydown.enter', ['$event'])
     @HostListener('keydown.space', ['$event'])
     _onClick(event: Event): void {
-        if (this.clickable) {
-            event.preventDefault();
-            this.avatarClicked.emit(event);
-            if (this.zoomGlyph) {
-                this.zoomGlyphClicked.next();
-            }
+        if (!this.clickable) {
+            return;
         }
+        event.preventDefault();
+        this.avatarClicked.emit(event);
+        if (this.zoomGlyph) {
+            this.zoomGlyphClicked.next();
+        }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnChanges(): void {
+        if (this.zoomGlyph) {
+            this.clickable = true;
+        }
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
