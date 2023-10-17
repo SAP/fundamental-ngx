@@ -49,6 +49,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
+        countListResultsSingular: '1 परिणाम सूची आइटम',
+        countListResultsPlural: '{{ count }} परिणाम सूची आइटम',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
         tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`

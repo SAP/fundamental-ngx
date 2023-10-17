@@ -49,6 +49,8 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
+        countListResultsSingular: 'Lista 1 elementowa.',
+        countListResultsPlural: 'Lista {{ count }} elementowa.',
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
         tokensCountText: ({ length }) => `Contains ${length || 'no'} token${length === 1 ? '' : 's'}.`

@@ -63,6 +63,19 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         multiInputAriaLabel: 'Multi Value Input',
         noResults: 'No results.',
         navigateSelectionsWithArrows: 'Navigate selections with the up and down arrows.',
+        countListResultsSingular: '1 элемент.',
+        countListResultsPlural: (params) => {
+            const count = params['count'];
+            const option = pluralization.process(count);
+            switch (option) {
+                case 'one':
+                    return `1 элемент.`;
+                case 'few':
+                    return `${count} элемента.`;
+                default:
+                    return `${count || 0} элементов.`;
+            }
+        },
         escapeNavigateTokens:
             'Press escape to exit the input field and use the left and right arrow keys to navigate through the selected options.',
         tokensCountText: ({ length }) => {

@@ -46,6 +46,8 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         multiInputAriaLabel: 'Eingabe mehrerer Werte',
         noResults: 'Keine Ergebnisse.',
         navigateSelectionsWithArrows: 'Navigieren Sie mit den Aufwärts- und Abwärtspfeilen durch die Auswahl.',
+        countListResultsSingular: '1 Ergebnislisteneintrag.',
+        countListResultsPlural: '{{count}} Ergebnislisteneinträge.',
         escapeNavigateTokens:
             'Drücken Sie Escape, um das Eingabefeld zu verlassen, und navigieren Sie mit der linken und rechten Pfeiltaste durch die ausgewählten Optionen.',
         tokensCountText: ({ length }) => {

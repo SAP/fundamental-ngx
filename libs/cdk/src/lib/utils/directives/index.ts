@@ -8,6 +8,7 @@ export * from './initial-focus/initial-focus.directive';
 export * from './initial-focus/initial-focus.module';
 export * from './line-clamp/line-clamp.directive';
 export * from './line-clamp/line-clamp.module';
+export * from './multi-announcer/multi-announcer.directive';
 export * from './only-digits/only-digits.directive';
 export * from './only-digits/only-digits.module';
 export * from './overflow-list/overflow-list-item.directive';

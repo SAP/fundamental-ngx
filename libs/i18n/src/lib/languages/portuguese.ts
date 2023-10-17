@@ -47,6 +47,8 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         multiInputAriaLabel: 'Entrada de valores múltiplos',
         noResults: 'Sem resultados.',
         navigateSelectionsWithArrows: 'Navegue pelas seleções com as setas para cima e para baixo.',
+        countListResultsSingular: '1 item da lista de resultados.',
+        countListResultsPlural: '{{count}} itens da lista de resultados.',
         escapeNavigateTokens:
             'Pressione escape para sair do campo de entrada e use as teclas de seta para a esquerda e para a direita para navegar pelas opções selecionadas.',
         tokensCountText: ({ length }) => {

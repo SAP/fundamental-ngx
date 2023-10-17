@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { InitialFocusModule, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusModule, MultiAnnouncerModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { TokenModule } from '@fundamental-ngx/core/token';
@@ -29,7 +29,8 @@ import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
         FormModule,
         PlatformContentDensityDeprecationsModule,
         ContentDensityModule,
-        InitialFocusModule
+        InitialFocusModule,
+        MultiAnnouncerModule
     ],
     exports: [PlatformMultiInputComponent, PlatformContentDensityDeprecationsModule, ContentDensityModule]
 })
