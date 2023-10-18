@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.13](https://github.com/SAP/fundamental-ngx/compare/v0.43.12...v0.43.13) (2023-10-18)
+
+
+### Bug Fixes
+
+* **core:** add full labels to time component for screenreader ([#10684](https://github.com/SAP/fundamental-ngx/issues/10684)) ([545d2b2](https://github.com/SAP/fundamental-ngx/commit/545d2b2c776a4b907d50b4fe9a1572d386f1aae7))
+* **core:** improved multi-input a11y ([#10677](https://github.com/SAP/fundamental-ngx/issues/10677)) ([0ef52e1](https://github.com/SAP/fundamental-ngx/commit/0ef52e10be074002bc785fe7c12fd330e2447b6c))
+* **core:** improved multi-input screenreader (ng15) ([#10733](https://github.com/SAP/fundamental-ngx/issues/10733)) ([311ca0f](https://github.com/SAP/fundamental-ngx/commit/311ca0fd9317d7c593ecb2d2747b665dbacadb76))
+
+
+
+
+
 ## [0.43.12](https://github.com/SAP/fundamental-ngx/compare/v0.43.11...v0.43.12) (2023-10-11)
 
 
