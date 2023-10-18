@@ -725,6 +725,8 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             this._toggleSelection(item);
             this.inputText = '';
         }
+
+        this._searchTermChanged();
     }
 
     /**

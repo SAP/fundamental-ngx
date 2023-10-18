@@ -128,7 +128,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
         { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
         { name: 'Polski', value: FD_LANGUAGE_POLISH },
-        { name: 'Português', value: FD_LANGUAGE_PORTUGUESE },
+        { name: 'Português(Brazil)', value: FD_LANGUAGE_PORTUGUESE },
         { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
         { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
         { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
@@ -151,6 +151,12 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             name: 'CX',
             callback: () => {
                 this._routerService.navigate(['cx/home']);
+            }
+        },
+        {
+            name: 'BTP',
+            callback: () => {
+                this._routerService.navigate(['btp/home']);
             }
         },
         {

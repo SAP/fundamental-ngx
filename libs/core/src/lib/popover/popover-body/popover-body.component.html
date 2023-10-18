@@ -2,7 +2,7 @@
     class="fd-popover__body fd-popover__body--static"
     [class.fd-popover__body--no-arrow]="_noArrow"
     [class.fd-popover__body--resizable]="_resizable"
-    [class]="_arrowClasses + (_additionalBodyClass || '')"
+    [class]="_arrowClasses + ' ' + (_additionalBodyClass || '')"
     [cdkTrapFocus]="_focusTrapped"
     [style.min-width]="_popoverBodyMinWidth ? null : minWidth"
     [style.max-width]="_maxWidth ? null : maxWidth"

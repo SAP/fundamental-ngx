@@ -6,7 +6,7 @@
             "folders": [
                 {
                     "startingFolderPath": "./libs/i18n/src/lib/translations",
-                    "sourceFilters": ["**/*.json"]
+                    "sourceFilters": ["**/translations_en-US.json"]
                 }
             ]
         }

@@ -4,5 +4,6 @@ export interface TimeColumnConfig {
     decreaseLabel: FdLanguageKeyIdentifier;
     increaseLabel: FdLanguageKeyIdentifier;
     label: FdLanguageKeyIdentifier;
+    fullLabel: FdLanguageKeyIdentifier;
     navigationInstruction: FdLanguageKeyIdentifier;
 }

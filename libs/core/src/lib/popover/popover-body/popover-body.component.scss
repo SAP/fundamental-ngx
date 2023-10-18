@@ -127,6 +127,10 @@ fd-popover-body {
             }
         }
     }
+
+    &__resize-handle {
+        user-select: none;
+    }
 }
 
 .cdk-overlay {

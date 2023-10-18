@@ -208,18 +208,24 @@ export interface FdLanguage {
         /** Aria label for the 'increase hours' button */
         increaseHoursLabel: FdLanguageKey;
         /** label for the 'hours' column */
+        hrsLabel: FdLanguageKey;
+        /** full label for the 'hours' column */
         hoursLabel: FdLanguageKey;
         /** Aria label for the 'decrease hours' button */
         decreaseHoursLabel: FdLanguageKey;
         /** Aria label for the 'increase minutes' button */
         increaseMinutesLabel: FdLanguageKey;
         /** label for the 'minutes' column */
+        minLabel: FdLanguageKey;
+        /** full label for the 'minutes' column */
         minutesLabel: FdLanguageKey;
         /** Aria label for the 'decrease minutes' button */
         decreaseMinutesLabel: FdLanguageKey;
         /** Aria label for the 'increase seconds' button */
         increaseSecondsLabel: FdLanguageKey;
         /** label for the 'seconds' column */
+        secLabel: FdLanguageKey;
+        /** full label for the 'seconds' column */
         secondsLabel: FdLanguageKey;
         /** Aria label for the 'decrease seconds' button */
         decreaseSecondsLabel: FdLanguageKey;
@@ -858,5 +864,14 @@ export interface FdLanguage {
     fnSwitch: {
         semanticAcceptLabel: FdLanguageKey;
         semanticDeclineLabel: FdLanguageKey;
+    };
+    btpSearchField: {
+        searchButtonLabel: FdLanguageKey;
+        clearButtonLabel: FdLanguageKey;
+        searchInputPlaceholder: FdLanguageKey;
+        searchInputAriaLabel: FdLanguageKey;
+    };
+    btpToolHeader: {
+        menuButtonAriaLabel: FdLanguageKey;
     };
 }

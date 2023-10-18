@@ -3,6 +3,124 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.97...v0.46.0-rc.98) (2023-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.97) (2023-10-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed shellbar search outline and hover jumping ([#10742](https://github.com/SAP/fundamental-ngx/issues/10742)) ([82e86a4](https://github.com/SAP/fundamental-ngx/commit/82e86a47a4fcd7b21903004c394d426630e66386))
+
+
+
+
+
+# [0.46.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.96) (2023-10-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed shellbar search outline and hover jumping ([#10742](https://github.com/SAP/fundamental-ngx/issues/10742)) ([82e86a4](https://github.com/SAP/fundamental-ngx/commit/82e86a47a4fcd7b21903004c394d426630e66386))
+
+
+
+
+
+# [0.46.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.94...v0.46.0-rc.95) (2023-10-17)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.93...v0.46.0-rc.94) (2023-10-16)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.92...v0.46.0-rc.93) (2023-10-15)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.91...v0.46.0-rc.92) (2023-10-14)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.90...v0.46.0-rc.91) (2023-10-14)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.89...v0.46.0-rc.90) (2023-10-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.88...v0.46.0-rc.89) (2023-10-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.87...v0.46.0-rc.88) (2023-10-13)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.86...v0.46.0-rc.87) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.85...v0.46.0-rc.86) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+# [0.46.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.84...v0.46.0-rc.85) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 # [0.46.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.83...v0.46.0-rc.84) (2023-10-11)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

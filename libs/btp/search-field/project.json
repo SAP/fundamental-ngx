@@ -1,0 +1,7 @@
+{
+    "sourceRoot": "libs/btp/search-field/src",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "name": "btp-search-field",
+    "projectType": "library",
+    "tags": ["scope:fdb", "type:lib"]
+}

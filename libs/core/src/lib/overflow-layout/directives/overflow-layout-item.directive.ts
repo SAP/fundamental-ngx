@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Inject, Input, OnInit, Optional, Output, SkipSelf } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { OverflowLayoutFocusableItem } from '../interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
@@ -56,15 +56,18 @@ export class OverflowLayoutItemDirective implements OverflowItem, OnInit {
      */
     focusableItem: OverflowLayoutFocusableItem;
 
-    /** @hidden */
-    private _forceVisibility = false;
+    /** Reference to the element */
+    elmRef = inject(ElementRef);
 
     /** @hidden */
-    constructor(
-        private _overflowContainer: OverflowLayoutComponent,
-        public elmRef: ElementRef,
-        @Optional() @SkipSelf() @Inject(FD_OVERFLOW_ITEM_REF) private _overflowItemRef: OverflowItemRef | null
-    ) {}
+    protected _overflowItemRef: OverflowItemRef | null = inject(FD_OVERFLOW_ITEM_REF, {
+        optional: true,
+        skipSelf: true
+    });
+    /** @hidden */
+    private _forceVisibility = false;
+    /** @hidden */
+    private _overflowContainer = inject(OverflowLayoutComponent);
 
     /** @hidden */
     ngOnInit(): void {

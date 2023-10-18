@@ -1,9 +1,9 @@
-import { Directive, forwardRef, Input, isDevMode, OnDestroy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Directive, Input, OnDestroy, forwardRef, isDevMode } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ContentDensityGlobalKeyword, LocalContentDensityMode } from '../content-density.types';
-import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { isContentDensityMode } from '../helpers/density-type-checkers';
+import { CONTENT_DENSITY_DIRECTIVE } from '../tokens/content-density-directive';
 import { ContentDensityMode } from '../types/content-density.mode';
 
 /**
@@ -29,7 +29,8 @@ export class ContentDensityDirective extends BehaviorSubject<LocalContentDensity
      * Update the content density of the element on the fly
      */
     @Input()
-    set fdContentDensity(val: LocalContentDensityMode | '') {
+    // `${ContentDensityMode}` is here to allow the user to pass a string literal
+    set fdContentDensity(val: `${ContentDensityMode}` | LocalContentDensityMode | '') {
         if (!isContentDensityMode(val)) {
             if (isDevMode() && val !== '') {
                 console.log(

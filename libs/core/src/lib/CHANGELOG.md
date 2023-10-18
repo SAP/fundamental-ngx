@@ -3,6 +3,154 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.97...v0.46.0-rc.98) (2023-10-18)
+
+
+### Bug Fixes
+
+* **core:** dynamic stacked tabs ([#10745](https://github.com/SAP/fundamental-ngx/issues/10745)) ([3b061bb](https://github.com/SAP/fundamental-ngx/commit/3b061bb491c80d45e4171437e0c761510baea315))
+
+
+
+
+
+# [0.46.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.97) (2023-10-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed shellbar search outline and hover jumping ([#10742](https://github.com/SAP/fundamental-ngx/issues/10742)) ([82e86a4](https://github.com/SAP/fundamental-ngx/commit/82e86a47a4fcd7b21903004c394d426630e66386))
+* **core:** remove assertive from time column ([#10735](https://github.com/SAP/fundamental-ngx/issues/10735)) ([05ea88c](https://github.com/SAP/fundamental-ngx/commit/05ea88c7bd2c492276546d1cbcb6342f3dba3906))
+
+
+### Features
+
+* **core:** avatar glyph font family ([#10740](https://github.com/SAP/fundamental-ngx/issues/10740)) ([e9c88dd](https://github.com/SAP/fundamental-ngx/commit/e9c88dd86f46eb2188af38fc147c664de98af6a1))
+
+
+
+
+
+# [0.46.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.96) (2023-10-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fixed shellbar search outline and hover jumping ([#10742](https://github.com/SAP/fundamental-ngx/issues/10742)) ([82e86a4](https://github.com/SAP/fundamental-ngx/commit/82e86a47a4fcd7b21903004c394d426630e66386))
+* **core:** remove assertive from time column ([#10735](https://github.com/SAP/fundamental-ngx/issues/10735)) ([05ea88c](https://github.com/SAP/fundamental-ngx/commit/05ea88c7bd2c492276546d1cbcb6342f3dba3906))
+
+
+### Features
+
+* **core:** avatar glyph font family ([#10740](https://github.com/SAP/fundamental-ngx/issues/10740)) ([e9c88dd](https://github.com/SAP/fundamental-ngx/commit/e9c88dd86f46eb2188af38fc147c664de98af6a1))
+
+
+
+
+
+# [0.46.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.94...v0.46.0-rc.95) (2023-10-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.93...v0.46.0-rc.94) (2023-10-16)
+
+
+### Bug Fixes
+
+* **core,btp:** various dh fixes ([#10731](https://github.com/SAP/fundamental-ngx/issues/10731)) ([7c75869](https://github.com/SAP/fundamental-ngx/commit/7c758697eda4076305f048dc865565a2b7db0488))
+
+
+
+
+
+# [0.46.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.92...v0.46.0-rc.93) (2023-10-15)
+
+
+### Bug Fixes
+
+* **core:** some multi-combobox fixes ([#10712](https://github.com/SAP/fundamental-ngx/issues/10712)) ([386396f](https://github.com/SAP/fundamental-ngx/commit/386396f2d3f6e96f48cdfc9b44f2d8dac9c775b0))
+
+
+
+
+
+# [0.46.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.91...v0.46.0-rc.92) (2023-10-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.90...v0.46.0-rc.91) (2023-10-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.89...v0.46.0-rc.90) (2023-10-13)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.88...v0.46.0-rc.89) (2023-10-13)
+
+
+### Features
+
+* **btp:** navigation component implementation ([#10656](https://github.com/SAP/fundamental-ngx/issues/10656)) ([da54e74](https://github.com/SAP/fundamental-ngx/commit/da54e74b969841b221b7b6e193069f79ea2ba787))
+
+
+
+
+
+# [0.46.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.87...v0.46.0-rc.88) (2023-10-13)
+
+
+### Features
+
+* **btp:** introduced tool header and search field components ([#10706](https://github.com/SAP/fundamental-ngx/issues/10706)) ([abcdb25](https://github.com/SAP/fundamental-ngx/commit/abcdb25341f12af2aac08a1a931133de3f398179))
+
+
+
+
+
+# [0.46.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.86...v0.46.0-rc.87) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.46.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.85...v0.46.0-rc.86) (2023-10-11)
+
+
+### Bug Fixes
+
+* **core:** add full labels to time component for screenreader ([#10683](https://github.com/SAP/fundamental-ngx/issues/10683)) ([dfe09c5](https://github.com/SAP/fundamental-ngx/commit/dfe09c5b4e8421b83daadbf66c38f3fdcfd37080))
+
+
+
+
+
+# [0.46.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.84...v0.46.0-rc.85) (2023-10-11)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
 # [0.46.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.83...v0.46.0-rc.84) (2023-10-11)
 
 **Note:** Version bump only for package @fundamental-ngx/core

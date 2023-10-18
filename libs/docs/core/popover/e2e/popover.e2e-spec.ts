@@ -92,7 +92,7 @@ describe('Popover test suite', () => {
     }, 1);
 
     afterEach(async () => {
-        await refreshPage();
+        await refreshPage(true);
         await waitForPresent(popoverPage.root);
         await waitForElDisplayed(popoverPage.title);
     }, 1);

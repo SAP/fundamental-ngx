@@ -570,7 +570,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             case 'hours':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseHoursLabel',
-                    label: 'coreTime.hoursLabel',
+                    label: 'coreTime.hrsLabel',
+                    fullLabel: 'coreTime.hoursLabel',
                     decreaseLabel: 'coreTime.decreaseHoursLabel',
                     navigationInstruction: 'coreTime.navigationInstruction'
                 };
@@ -578,7 +579,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             case 'minutes':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseMinutesLabel',
-                    label: 'coreTime.minutesLabel',
+                    label: 'coreTime.minLabel',
+                    fullLabel: 'coreTime.minutesLabel',
                     decreaseLabel: 'coreTime.decreaseMinutesLabel',
                     navigationInstruction: 'coreTime.navigationInstruction'
                 };
@@ -586,7 +588,8 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
             case 'seconds':
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increaseSecondsLabel',
-                    label: 'coreTime.secondsLabel',
+                    label: 'coreTime.secLabel',
+                    fullLabel: 'coreTime.secondsLabel',
                     decreaseLabel: 'coreTime.decreaseSecondsLabel',
                     navigationInstruction: 'coreTime.navigationInstruction'
                 };
@@ -595,6 +598,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
                 this.internalTranslationConfig = {
                     increaseLabel: 'coreTime.increasePeriodLabel',
                     label: 'coreTime.periodLabel',
+                    fullLabel: 'coreTime.periodLabel',
                     decreaseLabel: 'coreTime.decreasePeriodLabel',
                     navigationInstruction: 'coreTime.navigationInstruction'
                 };

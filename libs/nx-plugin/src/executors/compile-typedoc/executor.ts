@@ -1,7 +1,8 @@
 import { ExecutorContext, readTargetOptions } from '@nx/devkit';
+import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync, readdirSync, renameSync, writeFileSync } from 'fs';
-import { join } from 'path';
-import { Application, DefaultTheme, PageEvent, Reflection, TSConfigReader } from 'typedoc';
+import { join, parse, resolve } from 'path';
+import { Application, DefaultTheme, PageEvent, Reflection, TSConfigReader, TypeDocOptions } from 'typedoc';
 import { CompileTypedocExecutorSchema } from './schema';
 import { FdThemeContext } from './theme';
 
@@ -30,27 +31,35 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
     app.options.addReader(new TSConfigReader());
 
     app.renderer.defineTheme('fd-typedoc', FdTheme);
+    const entryPoints = fastGlobSync(projectPath + '/**/*/ng-package.json').map((f) => {
+        const json = JSON.parse(readFileSync(f, 'utf-8'));
+        const main = json.lib.entryFile;
+        return resolve(parse(f).dir, main);
+    });
 
-    app.bootstrap({
+    await app.bootstrapWithPlugins({
         tsconfig: tsConfig,
         out: outputPath,
         json: join(outputPath, 'typedoc.json'),
-        entryPoints: [projectPath],
+        entryPoints,
         hideGenerator: true,
         excludePrivate: true,
         excludeExternals: true,
+        plugin: ['typedoc-plugin-merge-modules'],
+        mergeModulesRenameDefaults: true,
+        mergeModulesMergeMode: 'project',
         compilerOptions: {
             jsx: 'react',
             jsxFactory: 'JSX.createElement',
             jsxFragmentFactory: 'JSX.Fragment'
         },
         theme: 'fd-typedoc'
-    });
+    } as unknown as Partial<TypeDocOptions>);
 
     const project = app.convert();
 
     if (!project) {
-        return;
+        return { success: false };
     }
 
     const outputDir = outputPath;

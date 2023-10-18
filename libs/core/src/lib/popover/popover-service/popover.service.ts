@@ -514,6 +514,7 @@ export class PopoverService extends BasePopoverClass {
         body._bodyRole = this._bodyRole;
         body._bodyId = this._bodyId;
         body._resizable = this.resizable;
+        body._setBodyComponentClasses(this.additionalBodyComponentClasses);
         this._detectChanges();
     }
 

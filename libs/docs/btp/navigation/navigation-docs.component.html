@@ -1,0 +1,35 @@
+<fd-docs-section-title id="simple" componentName="FdbNavigation">Basic example</fd-docs-section-title>
+<description>
+    <p>
+        Vertical navigation can accept multiple states, such as: <code>expanded</code>, <code>snapped</code>,
+        <code>popup</code>.
+    </p>
+    <p>Developers can set the state by using <code>[state]</code> input property.</p>
+    <p>
+        Additionally, developers can define the visual styling for a particular device: <code>desktop</code>,
+        <code>tablet</code>, <code>mobile</code>.
+    </p>
+    <p>This can be set with <code>[mode]</code> input property which is <code>desktop</code> by default.</p>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-navigation-basic-example></fdb-navigation-basic-example>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="simple" componentName="FdbNavigation">Parent Navigation as Link</fd-docs-section-title>
+<description>
+    <p>By default, the Parent Navigation Item functions as a Navigation Group.</p>
+    <p>
+        A small arrow icon shows the item's expanded/collapsed state in this scenario. In the snapped variant, clicking
+        on such a navigation item will open a popover that displays the title and Child Items.
+    </p>
+    <p>
+        Although not recommended, the Navigation Item can function for navigation and expansion/collapse. In this case,
+        clicking on the arrow will show/hide Child Items, and clicking on the item will perform the navigation.
+    </p>
+</description>
+<component-example [hasBackground]="false">
+    <fdb-navigation-parent-item-link></fdb-navigation-parent-item-link>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
