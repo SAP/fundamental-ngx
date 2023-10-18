@@ -191,6 +191,8 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         backButtonLabel: 'Torna indietro'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Aggiungi un passo',
+        nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Osservatori',
         defaultTitle: 'Processo di approvazione',
         nextButtonAriaLabel: 'Vai alla diapositiva successiva',
@@ -258,10 +260,10 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         watchersInputPlaceholder: 'Cerca qui..',
         userListSelectedItemsCountSingular: '1 elemento selezionato',
         userListSelectedItemsCountPlural: '{{ count }} elementi selezionati',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'approvato',
+        statusRejected: 'respinto',
+        statusInProgress: 'in corso',
+        statusNotStarted: 'non ancora iniziato'
     },
     platformFeedInput: {
         userTitle: 'Utente'

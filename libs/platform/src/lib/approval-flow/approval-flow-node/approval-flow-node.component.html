@@ -29,7 +29,7 @@
         fdType="transparent"
         tabindex="0"
         glyph="overflow"
-        title="Menu"
+        [title]="'platformApprovalFlow.nodeMenuButtonTitle' | fdTranslate"
         fdCompact
         [fdMenuTrigger]="menu"
         [disabled]="_isEditActionsAvailable"
@@ -128,7 +128,7 @@
         *ngIf="node.status !== 'approved'"
         fd-button
         glyph="add"
-        title="Add node"
+        [title]="'platformApprovalFlow.addNodeButtonTitle' | fdTranslate"
         fdCompact
         class="fdp-approval-flow-node__add"
         [class.fdp-approval-flow-node__add--blank]="this._blank"

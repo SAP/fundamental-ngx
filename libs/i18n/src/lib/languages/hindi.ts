@@ -175,6 +175,8 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         backButtonLabel: 'वापस जाएं'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'अनुमोदक जोड़ें',
+        nodeMenuButtonTitle: 'अनुमोदक मेनू',
         defaultWatchersLabel: 'नजर रखने वाले',
         defaultTitle: 'अनुमोदन प्रक्रिया',
         nextButtonAriaLabel: 'आगे की स्लाइड पर जाएं',
@@ -241,10 +243,10 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         watchersInputPlaceholder: 'यहां खोजें..',
         userListSelectedItemsCountSingular: '1 आइटम चुना गया',
         userListSelectedItemsCountPlural: '{{ count }} आइटम चुने गए',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'मंजूर',
+        statusRejected: 'अस्वीकृत',
+        statusInProgress: 'कार्यान्वित',
+        statusNotStarted: 'शुरू नहीं हुआ'
     },
     platformFeedInput: {
         userTitle: 'उपयोगकर्ता'

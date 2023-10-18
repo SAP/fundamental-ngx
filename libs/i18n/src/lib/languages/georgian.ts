@@ -176,6 +176,8 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         backButtonLabel: 'უკან დაბრუნება'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'დამატება',
+        nodeMenuButtonTitle: 'მენიუ',
         defaultWatchersLabel: 'დამკვირვებლები',
         defaultTitle: 'დადასტურების პროცესი',
         nextButtonAriaLabel: 'შემდეგ სლაიდზე გადასვლა',

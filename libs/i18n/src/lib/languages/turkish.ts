@@ -175,6 +175,8 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         backButtonLabel: 'Geri dön'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Bir adım ekle',
+        nodeMenuButtonTitle: 'Daha',
         defaultWatchersLabel: 'Gözlemciler',
         defaultTitle: 'Onay süreci',
         nextButtonAriaLabel: 'Sonraki slayta git',
@@ -241,10 +243,10 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         watchersInputPlaceholder: 'Burada ara..',
         userListSelectedItemsCountSingular: '1 eşyayı seçildi',
         userListSelectedItemsCountPlural: '{{ count }} eşyayılar seçildi',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'onaylandı',
+        statusRejected: 'reddedildi',
+        statusInProgress: 'devam ediyor',
+        statusNotStarted: 'başlamadı'
     },
     platformFeedInput: {
         userTitle: 'kullanıcı'

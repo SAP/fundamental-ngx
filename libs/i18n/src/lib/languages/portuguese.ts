@@ -182,6 +182,8 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         backButtonLabel: 'Voltar'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Adicionar um passo',
+        nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Observadores',
         defaultTitle: 'Processo de aprovação',
         nextButtonAriaLabel: 'Ir para o próximo slide',

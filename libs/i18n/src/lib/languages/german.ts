@@ -181,6 +181,8 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         backButtonLabel: 'Zurück'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Schritt hinzufügen',
+        nodeMenuButtonTitle: 'Menü',
         defaultWatchersLabel: 'Beobachter',
         defaultTitle: 'Genehmigungsprozess',
         nextButtonAriaLabel: 'Zur nächsten Folie',

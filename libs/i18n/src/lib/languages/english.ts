@@ -175,6 +175,8 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         backButtonLabel: 'Go Back'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Add node',
+        nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Watchers',
         defaultTitle: 'Approval process',
         nextButtonAriaLabel: 'Go to next slide',

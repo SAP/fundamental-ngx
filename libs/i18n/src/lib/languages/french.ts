@@ -177,6 +177,8 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         backButtonLabel: 'Revenir en arrière'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Ajouter un nœud',
+        nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Observateurs',
         defaultTitle: "Procédure d'approbation",
         nextButtonAriaLabel: 'Aller à la diapo suivante',
@@ -244,10 +246,10 @@ export const FD_LANGUAGE_FRENCH: FdLanguage = {
         watchersInputPlaceholder: 'Rechercher ici..',
         userListSelectedItemsCountSingular: '1 élément sélectionné',
         userListSelectedItemsCountPlural: '{{ count }} éléments sélectionnés',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'approuvé',
+        statusRejected: 'rejeté',
+        statusInProgress: 'en cours',
+        statusNotStarted: 'non commencé'
     },
     platformFeedInput: {
         userTitle: 'Utilisateur'
