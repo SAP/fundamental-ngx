@@ -27,7 +27,6 @@ export * from '@fundamental-ngx/platform/smart-filter-bar';
 export * from '@fundamental-ngx/platform/split-menu-button';
 export * from '@fundamental-ngx/platform/table';
 export * from '@fundamental-ngx/platform/table-helpers';
-export * from '@fundamental-ngx/platform/upload-collection';
 export * from '@fundamental-ngx/platform/value-help-dialog';
 export * from '@fundamental-ngx/platform/variant-management';
 export * from '@fundamental-ngx/platform/wizard-generator';

@@ -16,7 +16,6 @@ import {
     PlatformComboboxModule,
     PlatformDatePickerModule,
     PlatformDatetimePickerModule,
-    PlatformFileUploaderModule,
     PlatformFormGeneratorModule,
     PlatformInputGroupModule,
     PlatformInputModule,
@@ -48,7 +47,6 @@ import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
 import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
 import { PlatformTableModule, TableHelpersModule } from '@fundamental-ngx/platform/table';
-import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
 import { VariantManagementModule } from '@fundamental-ngx/platform/variant-management';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
@@ -77,7 +75,6 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformSliderModule,
         PlatformSplitMenuButtonModule,
         PlatformTableModule,
-        PlatformUploadCollectionModule,
         PlatformValueHelpDialogModule,
         PlatformWizardGeneratorModule,
 
@@ -91,7 +88,6 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformStepInputModule,
         PlatformInputGroupModule,
         PlatformMultiInputModule,
-        PlatformFileUploaderModule,
         PlatformAutoCompleteModule,
         PlatformComboboxModule,
         PlatformSelectModule,

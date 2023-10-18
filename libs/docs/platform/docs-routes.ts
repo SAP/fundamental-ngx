@@ -201,15 +201,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/platform/feed-input').then(configurePlatformRoutes)
             },
             {
-                path: 'file-uploader',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/file-uploader').then(configurePlatformRoutes)
-            },
-            {
-                path: 'upload-collection',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/upload-collection').then(configurePlatformRoutes)
-            },
-            {
                 path: 'approval-flow',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/approval-flow').then(configurePlatformRoutes)
             },

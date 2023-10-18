@@ -75,7 +75,6 @@ export const API_FILES = {
     multiInput: ['PlatformMultiInputComponent'],
     valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
-    fileUploader: ['PlatformFileUploaderComponent'],
     uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
     approvalFlow: ['ApprovalFlowComponent'],
     slider: ['SliderComponent'],

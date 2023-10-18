@@ -38,7 +38,6 @@ exports.config = {
             './e2e/wdio/platform/**/display-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/dynamic-page-layout.e2e-spec.ts',
             './e2e/wdio/platform/**/feed-input.e2e-spec.ts',
-            './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
             './e2e/wdio/platform/**/form-container.e2e-spec.ts',
             './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
             './e2e/wdio/platform/**/icon-tab-bar.e2e-spec.ts',

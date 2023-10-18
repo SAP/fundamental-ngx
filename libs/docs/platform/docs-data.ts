@@ -14,7 +14,6 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/checkbox-group', name: 'Checkbox Group' },
     { url: 'platform/date-picker', name: 'Date Picker' },
     { url: 'platform/datetime-picker', name: 'Datetime Picker' },
-    { url: 'platform/file-uploader', name: 'File Uploader' },
     { url: 'platform/info-label', name: 'Info Label' },
     { url: 'platform/input', name: 'Input' },
     { url: 'platform/input-group', name: 'Input Group' },
@@ -52,7 +51,6 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/step-input', name: 'Step Input' },
     { url: 'platform/select', name: 'Select' },
     { url: 'platform/combobox', name: 'Combobox' },
-    { url: 'platform/upload-collection', name: 'Upload Collection' },
     {
         name: 'List And Items',
         subItems: [

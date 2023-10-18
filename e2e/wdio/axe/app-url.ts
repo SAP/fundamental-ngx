@@ -8,7 +8,6 @@ export const appURLs = {
         datePicker: '/date-picker',
         datetimePicker: '/datetime-picker',
         feedInput: '/feed-input',
-        fileUploader: '/file-uploader',
         infoLabel: '/info-label',
         input: '/input',
         inputGroup: '/input-group',
@@ -33,7 +32,6 @@ export const appURLs = {
         table: '/table',
         textarea: '/textarea',
         timePicker: '/time-picker',
-        uploadCollections: '/upload-collection',
         valueHelpDialog: '/value-help-dialog',
         dynamicPageLayout: '/dynamic-page',
         formContainerLayout: '/form-container'

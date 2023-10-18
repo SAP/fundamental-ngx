@@ -279,7 +279,6 @@
             "@fundamental-ngx/docs/platform/display-list-item": ["libs/docs/platform/display-list-item/index.ts"],
             "@fundamental-ngx/docs/platform/dynamic-page": ["libs/docs/platform/dynamic-page/index.ts"],
             "@fundamental-ngx/docs/platform/feed-input": ["libs/docs/platform/feed-input/index.ts"],
-            "@fundamental-ngx/docs/platform/file-uploader": ["libs/docs/platform/file-uploader/index.ts"],
             "@fundamental-ngx/docs/platform/form-container": ["libs/docs/platform/form-container/index.ts"],
             "@fundamental-ngx/docs/platform/form-generator": ["libs/docs/platform/form-generator/index.ts"],
             "@fundamental-ngx/docs/platform/icon-tab-bar": ["libs/docs/platform/icon-tab-bar/index.ts"],
