@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -7,21 +9,21 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Input,
     OnDestroy,
     Output,
     QueryList,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { DestroyedService, KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -30,7 +32,6 @@ import { TabListComponentInterface } from './tab-list-component.interface';
 import { LIST_COMPONENT } from './tab-list.token';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 
@@ -159,7 +160,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     }
 
     /** @hidden Collection of tabs in original order */
-    _tabArray: TabInfo[];
+    _tabArray: TabInfo[] = [];
 
     /** @hidden Whether to disable scroll spy */
     _disableScrollSpy = false;
@@ -285,9 +286,15 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
 
     /** @hidden */
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
-        this._tabPanelsChange$.pipe(map((tabPanels) => tabPanels.map((el) => new TabInfo(el)))).subscribe((tabs) => {
-            this._tabArray = tabs;
-        });
+        this._tabPanelsChange$
+            .pipe(
+                map((tabPanels) =>
+                    tabPanels.map((el) => this._tabArray?.find((tabInfo) => tabInfo.panel === el) || new TabInfo(el))
+                )
+            )
+            .subscribe((tabs) => {
+                this._tabArray = tabs;
+            });
     }
 
     /** @hidden */

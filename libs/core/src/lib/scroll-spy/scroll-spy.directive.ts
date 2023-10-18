@@ -1,12 +1,15 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, inject } from '@angular/core';
+import { DestroyedService, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { debounceTime, takeUntil } from 'rxjs';
 
 /**
  * A directive designed to help navigation elements determine the element currently in view of the user.
  */
 @Directive({
-    selector: '[fdScrollSpy]'
+    selector: '[fdScrollSpy]',
+    providers: [DestroyedService]
 })
-export class ScrollSpyDirective {
+export class ScrollSpyDirective implements OnInit {
     /**
      * An array of tags to track.
      */
@@ -51,7 +54,10 @@ export class ScrollSpyDirective {
     private _currentActive: HTMLElement | undefined;
 
     /** @hidden */
-    constructor(private readonly _elRef: ElementRef) {}
+    private readonly _elRef = inject(ElementRef);
+
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyedService);
 
     /** @hidden */
     @HostListener('scroll', ['$event'])
@@ -81,5 +87,15 @@ export class ScrollSpyDirective {
             this._currentActive = spiedTag;
             this.spyChange.emit(this._currentActive);
         }
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        // When the spy container being resized, re-evaluate scroll position.
+        resizeObservable(this._elRef.nativeElement)
+            .pipe(debounceTime(30), takeUntil(this._destroyRef))
+            .subscribe(() => {
+                this.onScroll({ target: this._elRef.nativeElement } as Event);
+            });
     }
 }

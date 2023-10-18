@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 export class TabStackedContentExampleComponent {
     tabs: { title: string; content: string }[] = [];
 
+    showZeroTab = false;
+    showSixthTab = false;
+
     constructor() {
         for (let i = 1; i <= 5; i++) {
             this.tabs.push({ title: `Tab ${i}`, content: `Content ${i}` });
