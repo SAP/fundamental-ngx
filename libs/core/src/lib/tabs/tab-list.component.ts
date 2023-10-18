@@ -217,7 +217,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     }
 
     /** @hidden Collection of tabs in original order */
-    _tabArray: TabInfo[];
+    _tabArray: TabInfo[] = [];
 
     /** @hidden Whether to disable scroll spy */
     _disableScrollSpy = false;
@@ -346,7 +346,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
         this._tabPanelsChange$
             .pipe(
-                map((tabPanels) => tabPanels.map((el) => new TabInfo(el))),
+                map((tabPanels) =>
+                    tabPanels.map((el) => this._tabArray?.find((tabInfo) => tabInfo.panel === el) || new TabInfo(el))
+                ),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((tabs) => {
