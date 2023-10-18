@@ -644,14 +644,16 @@ export class DatePickerComponent<D>
         const endChanged = !this._dateTimeAdapter.datesEqual(dates.end, this.selectedRangeDate.end);
         if (dates && (startChanged || endChanged)) {
             const shouldClose = this.closeOnDateChoose && dates.end !== null;
-            this._inputFieldDate = this._formatDateRange(dates);
-            this.selectedRangeDate = {
-                start: dates.start,
-                end: dates.end
-            };
-            this.selectedRangeDateChange.emit(this.selectedRangeDate);
-            this.onChange(this.selectedRangeDate);
-            this._isInvalidDateInput = !this.isModelValid();
+            if (dates.end !== null) {
+                this._inputFieldDate = this._formatDateRange(dates);
+                this.selectedRangeDate = {
+                    start: dates.start,
+                    end: dates.end
+                };
+                this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                this.onChange(this.selectedRangeDate);
+                this._isInvalidDateInput = !this.isModelValid();
+            }
             if (shouldClose) {
                 this.closeCalendar();
             }
