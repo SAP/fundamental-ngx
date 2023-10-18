@@ -65,6 +65,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { getSelectItemByInputValue, getTokenIndexByIdlOrValue } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
+import { MultiAnnouncerDirective } from './multi-announcer/multi-announcer.directive';
 import { SelectAllTogglerComponent } from './select-all-toggler/select-all-toggler.component';
 
 export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory: () => 12 });
@@ -128,7 +129,8 @@ export const FD_MAP_LIMIT = new InjectionToken<number>('Map limit≥', { factory
         NgClass,
         ListSecondaryDirective,
         FdTranslatePipe,
-        SearchHighlightPipe
+        SearchHighlightPipe,
+        MultiAnnouncerDirective
     ]
 })
 export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implements AfterViewInit, OnInit {

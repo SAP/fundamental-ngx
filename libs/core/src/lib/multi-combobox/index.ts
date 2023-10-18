@@ -7,6 +7,7 @@ export * from './helpers';
 export * from './mobile/mobile-multi-combobox.component';
 export * from './models/multi-combobox.interface';
 export * from './models/selection-change.event';
+export * from './multi-announcer/multi-announcer.directive';
 export * from './multi-combobox-config';
 export * from './multi-combobox.component';
 export * from './multi-combobox.token';

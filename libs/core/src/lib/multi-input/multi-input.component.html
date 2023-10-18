@@ -94,10 +94,11 @@
                     [ariaLabelledBy]="ariaLabelledBy"
                     [attr.aria-describedby]="tokenHiddenId"
                     (keydown)="_handleInputKeydown($event)"
-                    (keyup)="_makeSearchTermChangeAnnouncements($event)"
                     [attr.id]="inputId"
                     (focus)="tokenizer._showAllTokens()"
                     (blur)="tokenizer._hideTokens()"
+                    fdMultiAnnouncer
+                    [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
                 />
             </fd-tokenizer>
         </fd-input-group>

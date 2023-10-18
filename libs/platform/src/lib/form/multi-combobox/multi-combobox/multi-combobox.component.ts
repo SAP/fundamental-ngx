@@ -44,6 +44,7 @@ import {
 import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -100,7 +101,8 @@ let deprecationWarningShown = false;
         ListSecondaryDirective,
         SearchHighlightPipe,
         FdTranslatePipe,
-        ContentDensityModule
+        ContentDensityModule,
+        MultiAnnouncerDirective
     ]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {

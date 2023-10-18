@@ -56,6 +56,7 @@ import {
 } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -115,7 +116,8 @@ export class MultiInputSelectionChangeEvent {
         StandardListItemModule,
         DisplayFnPipe,
         ContentDensityModule,
-        FdTranslatePipe
+        FdTranslatePipe,
+        MultiAnnouncerDirective
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
