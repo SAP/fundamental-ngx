@@ -690,5 +690,7 @@ export const Icons = [
     'currency',
     'bell-2',
     'accessibility',
-    'high-priority'
+    'high-priority',
+    'da',
+    'da-2'
 ];
