@@ -181,6 +181,8 @@ export class IconTNTExampleComponent {
         'indicator',
         'indicator-active',
         'task-optional',
-        'task-done'
+        'task-done',
+        'ai-1',
+        'ai-2'
     ];
 }
