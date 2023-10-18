@@ -321,6 +321,8 @@ export interface FdLanguage {
         nodeStatusDueInXDays: FdLanguageKey<{ count: number }>;
         /** @param count */
         nodeStatusXDaysOverdue: FdLanguageKey<{ count: number }>;
+        addNodeButtonTitle: FdLanguageKey;
+        nodeMenuButtonTitle: FdLanguageKey;
         nodeActionAddApproversBefore: FdLanguageKey;
         nodeActionAddApproversAfter: FdLanguageKey;
         nodeActionAddApproversParallel: FdLanguageKey;
