@@ -12,3 +12,8 @@
         margin: 0;
     }
 }
+
+// TODO: remove hardcoded style after fundamental-styles version bump
+.fd-table__cell--focusable[aria-selected=true]:after {
+    border-color: var(--sapContent_FocusColor) !important;
+}
