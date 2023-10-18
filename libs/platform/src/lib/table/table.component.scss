@@ -16,6 +16,11 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
 $fd-table-scrollbar-width: var(--fdScrollbar_Dimension);
 $fd-table-scrollbar-width-with-border: calc(#{$fd-table-scrollbar-width} + var(--sapList_BorderWidth, 0.0625rem));
 
+// TODO: remove hardcoded style after fundamental-styles version bump
+.fd-table__cell--focusable[aria-selected=true]:after {
+    border-color: var(--sapContent_FocusColor) !important;
+}
+
 // TODO: Remove after new fundamental-styles version release.
 @mixin fd-compact-or-condensed() {
     @at-root {
