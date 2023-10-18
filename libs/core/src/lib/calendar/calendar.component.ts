@@ -23,26 +23,28 @@ import { Subscription } from 'rxjs';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
-import { DateRange } from './models/date-range';
-import { CalendarCurrent } from './models/calendar-current';
-import { CalendarYearGrid } from './models/calendar-year-grid';
-import { AggregatedYear } from './models/aggregated-year';
-import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
-import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
-import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
-import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
-import { CalendarService } from './calendar.service';
-import { createMissingDateImplementationError } from './calendar-errors';
-import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
-import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
-import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
+import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityModule,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
+import { createMissingDateImplementationError } from './calendar-errors';
+import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { CalendarAggregatedYearViewComponent } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
+import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
+import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
+import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
+import { CalendarService } from './calendar.service';
+import { AggregatedYear } from './models/aggregated-year';
+import { CalendarCurrent } from './models/calendar-current';
+import { CalendarYearGrid } from './models/calendar-year-grid';
+import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from './models/common';
+import { DateRange } from './models/date-range';
+import { patchDeprecatedI18nLabels } from './patch-deprecated-i18n-labels';
+import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
 
 let calendarUniqueId = 0;
 
@@ -74,7 +76,11 @@ let calendarUniqueId = 0;
             multi: true
         },
         CalendarService,
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        {
+            provide: FD_LANGUAGE,
+            useFactory: patchDeprecatedI18nLabels
+        }
     ],
     host: {
         '(focusout)': '_focusOut($event)',

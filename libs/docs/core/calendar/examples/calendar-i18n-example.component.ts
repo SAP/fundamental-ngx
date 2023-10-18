@@ -1,6 +1,6 @@
-import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CalendarComponent, CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
+import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -9,24 +9,7 @@ import {
     FdDatetimeAdapter,
     FdDatetimeModule
 } from '@fundamental-ngx/core/datetime';
-
-// i18n aria labels service provider
-@Injectable()
-export class CalendarI18nChineseLabels extends CalendarI18nLabels {
-    yearSelectionLabel = `選擇年份`;
-
-    previousYearLabel = '前一年';
-
-    nextYearLabel = '明年';
-
-    monthSelectionLabel = '選擇一個月';
-
-    previousMonthLabel = '前一個月';
-
-    nextMonthLabel = '下個月';
-
-    dateSelectionLabel = '選擇日期';
-}
+import { patchLanguage } from '@fundamental-ngx/i18n';
 
 @Component({
     selector: 'fd-calendar-i18n-example',
@@ -46,10 +29,17 @@ export class CalendarI18nChineseLabels extends CalendarI18nLabels {
             provide: DATE_TIME_FORMATS,
             useValue: FD_DATETIME_FORMATS
         },
-        {
-            provide: CalendarI18nLabels,
-            useClass: CalendarI18nChineseLabels
-        }
+        patchLanguage({
+            coreCalendar: {
+                yearSelectionLabel: `選擇年份`,
+                previousYearLabel: '前一年',
+                nextYearLabel: '明年',
+                monthSelectionLabel: '選擇一個月',
+                previousMonthLabel: '前一個月',
+                nextMonthLabel: '下個月',
+                dateSelectionLabel: '選擇日期'
+            }
+        })
     ],
     standalone: true,
     imports: [CalendarComponent, FormsModule, FdDatetimeModule]
