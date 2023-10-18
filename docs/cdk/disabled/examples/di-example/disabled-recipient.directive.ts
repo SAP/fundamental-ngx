@@ -3,7 +3,8 @@ import { DisabledViewModifier, FdkDisabledProvider } from '@fundamental-ngx/cdk/
 
 @Directive({
     selector: '[fdDisabledRecipient]',
-    providers: [FdkDisabledProvider]
+    providers: [FdkDisabledProvider],
+    standalone: true
 })
 export class DisabledRecipientDirective implements DisabledViewModifier {
     constructor(private _disabled$: FdkDisabledProvider, private _elementRef: ElementRef) {

@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,7 +8,9 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { destroyObservable } from '@fundamental-ngx/cdk';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,
@@ -16,6 +19,7 @@ import {
     CollectionSelectFilter,
     CollectionSort,
     CollectionStringFilter,
+    PlatformTableModule,
     SortDirection,
     TableColumnsChangeEvent,
     TableComponent,
@@ -28,19 +32,30 @@ import {
     TableSortChangeEvent,
     TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableDraggableDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
-import { destroyObservable } from '@fundamental-ngx/cdk';
 
 @Component({
     selector: 'fdp-platform-table-preserved-state-example',
     templateUrl: './platform-table-preserved-state-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        }
+    providers: [provideDateTimeFormats()],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        TableDraggableDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformTablePreservedStateExampleComponent {

@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,15 +9,34 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-carousel-dynamic-items-example',
     templateUrl: './carousel-dynamic-items-example.component.html',
     styleUrls: ['./carousel-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        CarouselComponent,
+        NgIf,
+        CarouselItemComponent,
+        CardModule,
+        AvatarComponent,
+        ListModule
+    ]
 })
 export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')

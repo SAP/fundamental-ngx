@@ -1,9 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-icon-example',
     templateUrl: './icon-example.component.html',
-    styleUrls: ['icon-example.component.scss']
+    styleUrls: ['icon-example.component.scss'],
+    standalone: true,
+    imports: [NgFor, IconModule]
 })
 export class IconExampleComponent {
     icons: string[] = [
@@ -691,12 +695,14 @@ export class IconExampleComponent {
         'people-connected',
         'select-appointments',
         'light-mode',
-        'dark-mode'
-        // 'time-off',
-        // 'add-calendar',
-        // 'currency',
-        // 'bell-2',
-        // 'accessibility',
-        // 'high-priority'
+        'dark-mode',
+        'time-off',
+        'add-calendar',
+        'currency',
+        'bell-2',
+        'accessibility',
+        'high-priority',
+        'da',
+        'da-2'
     ];
 }

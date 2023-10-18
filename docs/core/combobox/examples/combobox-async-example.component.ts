@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { Observable } from 'rxjs';
 
 @Component({
     selector: 'fd-combobox-async-example',
-    templateUrl: './combobox-async-example.component.html'
+    templateUrl: './combobox-async-example.component.html',
+    standalone: true,
+    imports: [ComboboxComponent, FormsModule, AsyncPipe]
 })
 export class ComboboxAsyncExampleComponent implements OnInit {
     searchTerm = '';

@@ -1,6 +1,13 @@
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DataProvider } from '@fundamental-ngx/cdk/data-source';
-import { FdMultiComboBoxDataSource, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
+import { DataProvider, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
+import { CvaDirective } from '@fundamental-ngx/cdk/forms';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import {
+    FdMultiComboBoxDataSource,
+    MultiComboboxModule,
+    MultiComboboxSelectionChangeEvent
+} from '@fundamental-ngx/core/multi-combobox';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -18,7 +25,9 @@ const OPTIONS = [
 @Component({
     selector: 'fd-multi-combobox-loading-example',
     templateUrl: './multi-combobox-loading-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [BusyIndicatorComponent, CvaDirective, DataSourceDirective, MultiComboboxModule, JsonPipe]
 })
 export class MultiComboboxLoadingExampleComponent {
     dataSource = new FdMultiComboBoxDataSource(new DelayedDataProvider(OPTIONS));

@@ -1,13 +1,32 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import { NgFor, NgIf } from '@angular/common';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import {
+    FdpFormGroupModule,
+    FileUploaderInvalidChangeEvent,
+    FileUploaderSelectionChangeEvent,
+    PlatformFileUploaderModule
+} from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-reactive-example',
     templateUrl: './platform-file-uploader-reactive-example.component.html',
     styleUrls: ['platform-file-uploader-reactive-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule,
+        FdpFormGroupModule,
+        ReactiveFormsModule,
+        PlatformFileUploaderModule,
+        NgIf,
+        PlatformButtonModule,
+        ContentDensityDirective,
+        NgFor
+    ]
 })
 export class PlatformFileUploaderReactiveExampleComponent {
     files: File[];

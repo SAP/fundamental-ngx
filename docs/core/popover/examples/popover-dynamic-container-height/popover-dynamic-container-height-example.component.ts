@@ -1,4 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverContainerDirective,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-dynamic-container-height-example',
@@ -13,6 +22,16 @@ import { Component } from '@angular/core';
                 width: 100%;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        PopoverContainerDirective,
+        NgIf,
+        ButtonModule,
+        PopoverComponent,
+        PopoverControlComponent,
+        AvatarComponent,
+        PopoverBodyComponent
     ]
 })
 export class PopoverDynamicContainerHeightExampleComponent {

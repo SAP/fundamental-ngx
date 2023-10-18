@@ -1,9 +1,48 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, ContentChildren, QueryList } from '@angular/core';
-import { UploadCollectionItemDirective } from '@fundamental-ngx/core/upload-collection';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import {
+    UploadCollectionButtonGroupComponent,
+    UploadCollectionComponent,
+    UploadCollectionDescriptionDirective,
+    UploadCollectionFormItemComponent,
+    UploadCollectionItemDirective,
+    UploadCollectionStatusGroupDirective,
+    UploadCollectionStatusItemDirective,
+    UploadCollectionTextSeparatorDirective,
+    UploadCollectionThumbnailDirective,
+    UploadCollectionTitleContainerDirective,
+    UploadCollectionTitleDirective
+} from '@fundamental-ngx/core/upload-collection';
 
 @Component({
     selector: 'fd-upload-collection-example',
-    templateUrl: './upload-collection-example.component.html'
+    templateUrl: './upload-collection-example.component.html',
+    standalone: true,
+    imports: [
+        UploadCollectionComponent,
+        NgFor,
+        ListModule,
+        UploadCollectionItemDirective,
+        UploadCollectionThumbnailDirective,
+        IconModule,
+        UploadCollectionTitleContainerDirective,
+        LinkComponent,
+        UploadCollectionTitleDirective,
+        UploadCollectionFormItemComponent,
+        NgIf,
+        ObjectMarkerModule,
+        UploadCollectionDescriptionDirective,
+        UploadCollectionTextSeparatorDirective,
+        UploadCollectionStatusGroupDirective,
+        ObjectStatusComponent,
+        UploadCollectionStatusItemDirective,
+        UploadCollectionButtonGroupComponent
+    ]
 })
 export class UploadCollectionExampleComponent {
     files = [

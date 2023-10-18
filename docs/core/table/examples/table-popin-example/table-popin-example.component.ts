@@ -1,6 +1,12 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { FormLabelComponent } from '@fundamental-ngx/core/form';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { TableModule } from '@fundamental-ngx/core/table';
 import { Observable } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -12,6 +18,18 @@ import { map } from 'rxjs/operators';
                 margin: 0 0 10px 0;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        FocusableGridDirective,
+        TableModule,
+        NgFor,
+        NgIf,
+        FormLabelComponent,
+        ObjectStatusComponent,
+        CheckboxComponent,
+        FormsModule,
+        AsyncPipe
     ]
 })
 export class TablePopinExampleComponent implements OnInit {

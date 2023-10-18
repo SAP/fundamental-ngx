@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import {
-    DatetimeAdapter,
-    DATE_TIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core/datetime';
+import { NgIf } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { FdpFormGroupModule, PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-datetime-picker-reactive-example',
@@ -16,15 +13,10 @@ import {
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
-        }
-    ]
+        provideDateTimeFormats()
+    ],
+    standalone: true,
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformDatetimePickerComponent, NgIf, ButtonModule]
 })
 export class PlatformDatetimePickerReactiveExampleComponent {
     datetimePickerForm = new FormGroup({});

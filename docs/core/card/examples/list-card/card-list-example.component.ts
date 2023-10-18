@@ -1,4 +1,11 @@
+import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 interface Casts {
     name?: string;
@@ -8,7 +15,19 @@ interface Casts {
 
 @Component({
     selector: 'fd-card-list-example',
-    templateUrl: 'card-list-example.component.html'
+    templateUrl: 'card-list-example.component.html',
+    standalone: true,
+    imports: [
+        CardModule,
+        ListModule,
+        NgClass,
+        ListSecondaryDirective,
+        ObjectStatusComponent,
+        SelectModule,
+        ContentDensityDirective,
+        NgFor,
+        AvatarComponent
+    ]
 })
 export class CardListExampleComponent implements OnInit {
     selectedMovie = 'Movie 1';

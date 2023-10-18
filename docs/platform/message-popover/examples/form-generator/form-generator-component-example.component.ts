@@ -1,18 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { JsonPipe, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
-import {
-    DATE_TIME_FORMATS,
-    DatetimeAdapter,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS,
-    FdDate
-} from '@fundamental-ngx/core/datetime';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
     DynamicFormItemValidationResult,
     DynamicFormValue,
-    FormGeneratorComponent
+    FormGeneratorComponent,
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
+import { MessagePopoverComponent, MessagePopoverFormWrapperComponent } from '@fundamental-ngx/platform/message-popover';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -24,17 +23,22 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
 @Component({
     selector: 'fdp-message-popover-form-generator-example',
     templateUrl: './form-generator-component-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
-        }
+        provideDateTimeFormats()
+    ],
+    standalone: true,
+    imports: [
+        MessagePopoverFormWrapperComponent,
+        PlatformFormGeneratorModule,
+        BarModule,
+        MessagePopoverComponent,
+        NgIf,
+        PlatformButtonModule,
+        JsonPipe
     ]
 })
 export class FormGeneratorComponentExample {

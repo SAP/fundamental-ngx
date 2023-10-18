@@ -1,6 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+import { JsonPipe, NgIf } from '@angular/common';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import {
+    DynamicFormItem,
+    DynamicFormValue,
+    FormGeneratorComponent,
+    PlatformFormGeneratorModule
+} from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -11,7 +18,9 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
 
 @Component({
     selector: 'fdp-platform-form-generator-no-colons-example',
-    templateUrl: './platform-form-generator-no-colons-example.component.html'
+    templateUrl: './platform-form-generator-no-colons-example.component.html',
+    standalone: true,
+    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorNoColonsExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TruncateDirective } from '@fundamental-ngx/cdk/utils';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-truncate-example',
@@ -13,6 +15,8 @@ import { Component } from '@angular/core';
         <p fdkTruncate [fdkTruncateState]="true">
             This element <fd-icon glyph="customer"></fd-icon> should be truncated by default value <b>200px</b>
         </p>
-    `
+    `,
+    standalone: true,
+    imports: [TruncateDirective, IconModule]
 })
 export class TruncateExampleComponent {}

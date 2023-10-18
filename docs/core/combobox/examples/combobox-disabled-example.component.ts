@@ -1,9 +1,20 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
+import { FieldsetComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-combobox-disabled-example',
-    templateUrl: './combobox-disabled-example.component.html'
+    templateUrl: './combobox-disabled-example.component.html',
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FieldsetComponent,
+        FormItemComponent,
+        FormLabelComponent,
+        ComboboxComponent
+    ]
 })
 export class ComboboxDisabledExampleComponent {
     dropdownValues = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];

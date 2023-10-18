@@ -1,0 +1,21 @@
+<label for="mobile-landscape">Mobile datetime picker with landscape mode:</label>
+<br />
+<fdp-datetime-picker
+    name="mobile-landscape"
+    [mobile]="true"
+    [mobileConfig]="mobileLandscapeConfig"
+    [mobileLandscape]="true"
+    placeholder="MM/dd/YYYY, hh:mm"
+></fdp-datetime-picker>
+<br />
+<label for="mobile-portrait">Mobile datetime picker with portrait mode:</label>
+<br />
+<fdp-datetime-picker
+    name="mobile-portrait"
+    [mobile]="true"
+    [mobileConfig]="mobilePortraitConfig"
+    [mobilePortrait]="true"
+    [allowNull]="false"
+    placeholder="Enter a date mandatorily"
+>
+</fdp-datetime-picker>

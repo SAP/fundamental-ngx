@@ -1,7 +1,14 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
+import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
+import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { of } from 'rxjs';
 
 @Component({
@@ -16,7 +23,6 @@ import { of } from 'rxjs';
                 ...FD_LANGUAGE_ENGLISH,
                 platformSmartFilterBar: {
                     ...FD_LANGUAGE_ENGLISH.platformSmartFilterBar,
-
                     // Strategy labels
                     filterConditionContains: 'custom "contains" label',
                     filterConditionEqualTo: 'custom "equal to" label',
@@ -31,7 +37,6 @@ import { of } from 'rxjs';
                     filterConditionOnOrAfter: 'custom "on or after" label',
                     filterConditionBefore: 'custom "before" label',
                     filterConditionBeforeOrOn: 'custom "before or on" label',
-
                     // Filters visibility category labels
                     settingsCategoryAll: 'Custom "All" label',
                     settingsCategoryVisible: 'Custom "Visible" label',
@@ -40,7 +45,18 @@ import { of } from 'rxjs';
                     settingsCategoryMandatory: 'Custom "Mandatory" label'
                 }
             })
-        }
+        },
+        provideDateTimeFormats()
+    ],
+    standalone: true,
+    imports: [
+        PlatformSmartFilterBarModule,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdDatetimeModule
     ]
 })
 export class PlatformSmartFilterBarCustomLabelsExampleComponent {

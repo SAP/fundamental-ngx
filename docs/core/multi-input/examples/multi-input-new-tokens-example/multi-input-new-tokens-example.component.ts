@@ -1,8 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-multi-input-new-tokens-example',
-    templateUrl: './multi-input-new-tokens-example.component.html'
+    templateUrl: './multi-input-new-tokens-example.component.html',
+    standalone: true,
+    imports: [MultiInputComponent, FormsModule, NgFor]
 })
 export class MultiInputNewTokensExampleComponent {
     values: Item[] = [
@@ -18,11 +23,11 @@ export class MultiInputNewTokensExampleComponent {
 
     selected: Item[] = [];
 
-    displayFunc(obj: any): string {
+    displayFunc(obj: Item): string {
         return obj.name;
     }
 
-    parseFunc(value: string): Record<string, any> {
+    parseFunc(value: string): Item {
         return { name: value };
     }
 

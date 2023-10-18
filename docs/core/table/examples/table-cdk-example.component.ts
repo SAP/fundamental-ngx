@@ -1,6 +1,9 @@
+import { CdkDrag, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkTable, CdkTableModule } from '@angular/cdk/table';
 import { Component, ViewChild } from '@angular/core';
-import { CdkTable } from '@angular/cdk/table';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 export interface CellData {
     column1: string;
@@ -20,7 +23,9 @@ const CELL_DATA: CellData[] = [
 @Component({
     selector: 'fd-table-cdk-example',
     templateUrl: './table-cdk-example.component.html',
-    styleUrls: ['table-cdk-example.component.scss']
+    styleUrls: ['table-cdk-example.component.scss'],
+    standalone: true,
+    imports: [TableModule, CdkTableModule, CdkDropList, CdkDragHandle, LinkComponent, IconModule, CdkDrag]
 })
 export class TableCdkExampleComponent {
     @ViewChild('table') table: CdkTable<Record<string, any>[]>;

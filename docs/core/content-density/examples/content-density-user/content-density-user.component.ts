@@ -1,17 +1,22 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
 @Component({
     selector: 'fd-docs-content-density-user',
     template: `
         <ng-content></ng-content>
-        <span fd-object-status class="example-component__object-status" [inverted]="true">
-            {{ _contentDensityObserver | async }}
-        </span>
+        <span
+            fd-object-status
+            class="example-component__object-status"
+            [inverted]="true"
+            [label]="_contentDensityObserver | async"
+        ></span>
     `,
     styleUrls: ['./content-density-user.component.scss'],
     host: {
@@ -27,7 +32,9 @@ import {
             defaultContentDensity: ContentDensityMode.COMPACT
         })
     ],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [ObjectStatusComponent, AsyncPipe]
 })
 export class ContentDensityUserComponent {
     constructor(readonly _contentDensityObserver: ContentDensityObserver) {

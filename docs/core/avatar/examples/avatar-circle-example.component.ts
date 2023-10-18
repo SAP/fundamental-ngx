@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-avatar-circle-example',
@@ -10,6 +11,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
             }
         `
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [AvatarComponent]
 })
 export class AvatarCircleExampleComponent {}

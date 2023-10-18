@@ -1,7 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
+import { JsonPipe, NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
+    PlatformWizardGeneratorModule,
     WizardGeneratorComponent,
     WizardGeneratorFormsValue,
     WizardGeneratorItem
@@ -10,7 +15,9 @@ import {
 @Component({
     selector: 'fdp-wizard-generator-external-navigation-example',
     templateUrl: './wizard-generator-external-navigation-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformWizardGeneratorModule, NgIf, BarModule, PlatformButtonModule, ContentDensityDirective, JsonPipe]
 })
 export class WizardGeneratorExternalNavigationExampleComponent {
     @ViewChild(WizardGeneratorComponent)

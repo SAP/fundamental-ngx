@@ -1,13 +1,42 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
-import { SmartFilterBar, SmartFilterChangeObject } from '@fundamental-ngx/platform/smart-filter-bar';
-import { FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import {
+    SmartFilterBar,
+    SmartFilterBarComponent,
+    SmartFilterBarFieldDefinitionDirective,
+    SmartFilterBarSubjectDirective,
+    SmartFilterChangeObject
+} from '@fundamental-ngx/platform/smart-filter-bar';
+import { FilterType, FilterableColumnDataType, PlatformTableModule } from '@fundamental-ngx/platform/table';
+import {
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-smart-filter-bar-basic-example',
     templateUrl: './platform-smart-filter-bar-basic-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        SmartFilterBarComponent,
+        SmartFilterBarFieldDefinitionDirective,
+        SmartFilterBarSubjectDirective,
+        ContentDensityDirective,
+        TitleComponent,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdDatetimeModule
+    ],
+    providers: [provideDateTimeFormats()]
 })
 export class PlatformSmartFilterBarBasicExampleComponent {
     readonly dataTypeEnum = FilterableColumnDataType;

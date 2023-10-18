@@ -1,5 +1,19 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import {
+    DeprecatedToolbarSizeDirective,
+    ToolbarComponent,
+    ToolbarItemDirective,
+    ToolbarSeparatorComponent
+} from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-dynamic-page-responsive-example',
@@ -20,6 +34,22 @@ import { MessageToastService } from '@fundamental-ngx/core/message-toast';
                 min-height: 20vh;
             }
         `
+    ],
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        DynamicPageModule,
+        BreadcrumbModule,
+        ContentDensityDirective,
+        LinkComponent,
+        ToolbarComponent,
+        DeprecatedToolbarSizeDirective,
+        ToolbarItemDirective,
+        ToolbarSeparatorComponent,
+        CdkScrollable,
+        BarModule,
+        MessageToastModule
     ]
 })
 export class DynamicPageResponsiveExampleComponent {

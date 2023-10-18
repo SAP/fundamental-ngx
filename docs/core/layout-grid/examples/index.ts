@@ -8,8 +8,8 @@ import { LayoutGridResponsiveExampleComponent } from './layout-grid-responsive-e
 import { LayoutGridResponsiveOffsetExampleComponent } from './layout-grid-responsive-offset-example.component';
 import { LayoutGridRowExampleComponent } from './layout-grid-row-example.component';
 
-export * from './layout-grid-basic-example.component';
 export * from './example-layout-grid-block.component';
+export * from './layout-grid-basic-example.component';
 export * from './layout-grid-growing-example.component';
 export * from './layout-grid-nesting-example.component';
 export * from './layout-grid-no-gap-example.component';

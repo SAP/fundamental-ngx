@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { FormattedTextComponent } from '@fundamental-ngx/core/formatted-text';
 
 @Component({
     selector: 'fd-formatted-text-example',
-    templateUrl: './formatted-text-example.component.html'
+    templateUrl: './formatted-text-example.component.html',
+    standalone: true,
+    imports: [FormattedTextComponent]
 })
 export class FormattedTextExampleComponent {
     rawHtmlBase = `

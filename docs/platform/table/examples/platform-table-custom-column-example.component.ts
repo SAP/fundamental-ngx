@@ -2,25 +2,66 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import {
-    TableDataSource,
+    PlatformTableModule,
+    SortDirection,
     TableDataProvider,
-    TableState,
+    TableDataSource,
     TableRowSelectionChangeEvent,
-    SortDirection
+    TableState
 } from '@fundamental-ngx/platform/table';
+import {
+    FdpCellDef,
+    FdpHeaderCellDef,
+    FdpTableCell,
+    FdpTableHeader,
+    TableCellHeaderPopoverDirective,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 
 @Component({
     selector: 'fdp-platform-table-custom-column-example',
     templateUrl: './platform-table-custom-column-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        }
+    providers: [provideDateTimeFormats()],
+    standalone: true,
+    imports: [
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        PlatformTableModule,
+        TableInitialStateDirective,
+        FdpHeaderCellDef,
+        FdpTableHeader,
+        TableCellHeaderPopoverDirective,
+        PopoverComponent,
+        PopoverControlComponent,
+        ButtonModule,
+        ContentDensityDirective,
+        PopoverBodyComponent,
+        PlatformListModule,
+        ListModule,
+        NgFor,
+        NgTemplateOutlet,
+        FdpCellDef,
+        FdpTableCell,
+        PlatformInputModule,
+        FormsModule,
+        ObjectStatusComponent,
+        AsyncPipe,
+        FdDatetimeModule
     ]
 })
 export class PlatformTableCustomColumnExampleComponent {

@@ -1,12 +1,33 @@
-import { Component, ChangeDetectionStrategy, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
+import { NgIf } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-non-collapsible-example',
     templateUrl: './platform-dynamic-page-non-collapsible-example.component.html',
     styleUrls: ['./platform-dynamic-page-non-collapsible-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ButtonModule,
+        NgIf,
+        PlatformDynamicPageModule,
+        BreadcrumbModule,
+        LinkComponent,
+        ToolbarComponent,
+        ToolbarItemDirective,
+        ContentDensityDirective,
+        ToolbarSeparatorComponent,
+        BarModule
+    ]
 })
 export class PlatformDynamicPageNonCollapsibleExampleComponent implements OnDestroy {
     @ViewChild('overlay')

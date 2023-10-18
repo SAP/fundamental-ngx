@@ -1,0 +1,69 @@
+<fd-segmented-button [(ngModel)]="viewMode" [style.margin-bottom.rem]="1">
+    <button fd-button value="mobile">Mobile</button>
+    <button fd-button value="tablet">Tablet</button>
+    <button fd-button [value]="''">Desktop</button>
+</fd-segmented-button>
+
+<fdb-tool-header
+    [fdContentDensity]="viewMode === '' ? 'compact' : 'cozy'"
+    productName="Fundamental-ngx"
+    secondTitle="HQ Angular Components"
+    [mode]="viewMode"
+    id="basic"
+>
+    <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
+
+    <fdb-tool-header-actions [actions]="actions">
+        <ng-template
+            fdbToolHeaderAction
+            [forceVisibility]="true"
+            label="Notifications"
+            glyph="bell"
+            (clicked)="notificationsActionClicked()"
+        >
+            <fd-popover [noArrow]="false">
+                <fd-popover-control>
+                    <button
+                        fd-button
+                        fdbToolHeaderButton
+                        [hasBadge]="true"
+                        [glyph]="'bell'"
+                        [ariaLabel]="'Notifications'"
+                    ></button>
+                </fd-popover-control>
+                <div
+                    *fdPopoverBody
+                    [ngStyle]="{
+                        padding: '0.5rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.5rem'
+                    }"
+                >
+                    <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
+                    <fd-message-strip *fdkRepeat="10; let index = index">
+                        A new notification has arrived. {{ index }}
+                    </fd-message-strip>
+                </div>
+            </fd-popover>
+        </ng-template>
+    </fdb-tool-header-actions>
+
+    <fd-avatar
+        fdbToolHeaderUser
+        [fdMenuTrigger]="userMenu"
+        role="button"
+        [circle]="true"
+        glyph="account"
+        size="xs"
+        [clickable]="true"
+    ></fd-avatar>
+    <fd-menu #userMenu>
+        <li fd-menu-item>
+            <a fd-menu-interactive>
+                <fd-menu-addon glyph="system-exit-2"></fd-menu-addon>
+                <span fd-menu-title> Log out </span>
+            </a>
+        </li>
+    </fd-menu>
+</fdb-tool-header>

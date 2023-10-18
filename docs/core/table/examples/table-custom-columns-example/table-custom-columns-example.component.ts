@@ -1,6 +1,11 @@
+import { NgFor, UpperCasePipe } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { TableComponent } from '@fundamental-ngx/core/table';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { TableComponent, TableModule } from '@fundamental-ngx/core/table';
 import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {
@@ -26,7 +31,9 @@ const CELL_DATA: CellData[] = [
 
 @Component({
     selector: 'fd-table-custom-columns-example',
-    templateUrl: './table-custom-columns-example.component.html'
+    templateUrl: './table-custom-columns-example.component.html',
+    standalone: true,
+    imports: [FocusableGridDirective, TableModule, NgFor, LinkComponent, IconModule, ButtonModule, UpperCasePipe]
 })
 export class TableCustomColumnsExampleComponent {
     displayedColumns: string[];

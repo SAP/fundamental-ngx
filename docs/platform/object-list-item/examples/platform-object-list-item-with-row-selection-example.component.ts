@@ -1,9 +1,17 @@
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { FormsModule } from '@angular/forms';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
+import {
+    BaseListItem,
+    ObjectListItemModule,
+    PlatformListModule,
+    SelectionChangeEvent
+} from '@fundamental-ngx/platform/list';
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
-import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Product[] = [
     {
@@ -141,7 +149,17 @@ export class ListDataProvider extends DataProvider<Product> {
 }
 @Component({
     selector: 'fdp-platform-object-list-item-with-row-selection-example',
-    templateUrl: './platform-object-list-item-with-row-selection-example.component.html'
+    templateUrl: './platform-object-list-item-with-row-selection-example.component.html',
+    standalone: true,
+    imports: [
+        ToolbarComponent,
+        ToolbarLabelDirective,
+        PlatformListModule,
+        FormsModule,
+        ObjectListItemModule,
+        ObjectMarkerModule,
+        ObjectStatusComponent
+    ]
 })
 export class PlatformObjectListItemWithRowSelectionExampleComponent implements AfterViewInit {
     _dataSource = new ListDataSource<Product>(new ListDataProvider());

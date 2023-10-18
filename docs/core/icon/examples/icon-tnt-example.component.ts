@@ -1,9 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-icon-tnt-example',
     templateUrl: './icon-tnt-example.component.html',
-    styleUrls: ['icon-example.component.scss']
+    styleUrls: ['icon-example.component.scss'],
+    standalone: true,
+    imports: [NgFor, IconModule]
 })
 export class IconTNTExampleComponent {
     icons: string[] = [
@@ -152,6 +156,33 @@ export class IconTNTExampleComponent {
         'status-terminating',
         'solution-not-licensed',
         'clear-all-mapping',
-        'map-all-fields'
+        'map-all-fields',
+        'process-package',
+        'process-kpis',
+        'insights',
+        'escalation-boundary-interrupting',
+        'escalation-boundary-non-interrupting',
+        'escalation-throwing',
+        'solution',
+        'binary',
+        'uuid',
+        'github',
+        'robot',
+        'string',
+        'boolean',
+        'array',
+        'any',
+        'integer',
+        'float',
+        'build-work-zone',
+        'build-apps',
+        'build-process-automation',
+        'map-all-fields',
+        'indicator',
+        'indicator-active',
+        'task-optional',
+        'task-done',
+        'ai-1',
+        'ai-2'
     ];
 }

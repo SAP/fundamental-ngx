@@ -6,7 +6,8 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     styleUrls: ['./card-bar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    host: { class: 'fd-card-bar-example' }
+    host: { class: 'fd-card-bar-example' },
+    standalone: true
 })
 export class CardBarComponent {
     /** value in percentage, minimum 0, maximum 100 */

@@ -1,10 +1,14 @@
+import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-textarea-autogrow-example',
     templateUrl: './platform-textarea-autogrow-example.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule]
 })
 export class PlatformTextareaAutogrowExampleComponent {
     form: FormGroup;

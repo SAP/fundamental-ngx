@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { IndicatorStates } from '@fundamental-ngx/core/notification';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
 
 export type Notification = {
     avatar: string;
@@ -16,7 +21,20 @@ export type Notification = {
 @Component({
     selector: 'fd-notification-group-example',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: './notification-group-example.component.html'
+    templateUrl: './notification-group-example.component.html',
+    standalone: true,
+    imports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        ButtonModule,
+        PopoverBodyComponent,
+        NotificationModule,
+        TabsModule,
+        NgIf,
+        NgTemplateOutlet,
+        NgFor,
+        AvatarComponent
+    ]
 })
 export class NotificationGroupExampleComponent {
     expandedByDate = true;

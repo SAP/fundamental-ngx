@@ -1,9 +1,42 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
     selector: 'fd-fixed-card-layout-examples',
     templateUrl: './fixed-card-layout-examples.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        SegmentedButtonModule,
+        FormsModule,
+        ButtonModule,
+        CdkScrollable,
+        ScrollbarDirective,
+        FixedCardLayoutModule,
+        NgIf,
+        CardModule,
+        FormItemComponent,
+        ObjectStatusComponent,
+        ListModule,
+        FocusableGridDirective,
+        TableModule,
+        AvatarComponent,
+        ContentDensityDirective
+    ]
 })
 export class FixedCardLayoutExampleComponent {
     cardsHidden = [];

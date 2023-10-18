@@ -1,4 +1,7 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PlatformListModule } from '@fundamental-ngx/platform/list';
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
 import { Observable, of } from 'rxjs';
 
@@ -6,7 +9,9 @@ import { Observable, of } from 'rxjs';
     selector: 'fdp-doc-platform-list-free-content-example',
     templateUrl: './platform-list-free-content-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [PlatformListModule, ListModule, NgIf]
 })
 export class PlatformListFreeContentExampleComponent {
     _dataSource = new ListDataSource<ListItem>(new ListDataProvider());

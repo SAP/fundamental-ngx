@@ -8,15 +8,21 @@ import {
     OnInit,
     ViewChild
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'fd-carousel-multiple-active-item-example',
     templateUrl: './carousel-multiple-active-item-example.component.html',
     styleUrls: ['./carousel-example.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CarouselComponent, CarouselItemComponent, CardModule, AvatarComponent, ListModule]
 })
 export class CarouselMultipleActiveItemExampleComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel')

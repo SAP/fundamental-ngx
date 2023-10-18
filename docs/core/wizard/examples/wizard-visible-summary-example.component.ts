@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -6,15 +8,44 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-visible-summary-example',
     templateUrl: './wizard-visible-summary-example.component.html',
     styleUrls: ['./wizard-visible-summary-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        WizardModule,
+        MessageStripComponent,
+        FormItemComponent,
+        FormLabelComponent,
+        FormControlComponent,
+        FormsModule,
+        LayoutGridModule,
+        LinkComponent,
+        RouterLink,
+        BarModule,
+        NgIf,
+        ButtonModule
+    ]
 })
 export class WizardVisibleSummaryExampleComponent {
     step1status: WizardStepStatus = 'current';

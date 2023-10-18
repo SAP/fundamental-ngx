@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     selector: 'fd-message-strip-example',
     templateUrl: './message-strip-example.component.html',
-    styleUrls: ['message-strip-example.component.scss']
+    styleUrls: ['message-strip-example.component.scss'],
+    standalone: true,
+    imports: [MessageStripComponent]
 })
 export class MessageStripExampleComponent {}

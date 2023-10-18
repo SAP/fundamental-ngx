@@ -1,10 +1,27 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+    FieldsetComponent,
+    FormControlComponent,
+    FormItemComponent,
+    FormLabelComponent
+} from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-textarea-form-group-example',
     templateUrl: './textarea-form-group-example.component.html',
-    styleUrls: ['textarea-form-group-example.component.scss']
+    styleUrls: ['textarea-form-group-example.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FieldsetComponent,
+        FormItemComponent,
+        FormLabelComponent,
+        FormControlComponent,
+        JsonPipe
+    ]
 })
 export class TextareaFormGroupExampleComponent {
     customForm = new FormGroup({

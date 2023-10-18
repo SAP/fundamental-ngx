@@ -1,9 +1,20 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FieldsetComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 @Component({
     selector: 'fd-input-group-form-example',
-    templateUrl: './input-group-form-example.component.html'
+    templateUrl: './input-group-form-example.component.html',
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FieldsetComponent,
+        FormItemComponent,
+        FormLabelComponent,
+        InputGroupModule
+    ]
 })
 export class InputGroupFormExampleComponent {
     customForm = new FormGroup({

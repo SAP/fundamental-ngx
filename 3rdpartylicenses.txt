@@ -67,209 +67,55 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
+@formatjs/fast-memoize
+MIT
+MIT License
+
+Copyright (c) 2021 FormatJS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+@formatjs/icu-messageformat-parser
+MIT
+MIT License
+
+Copyright (c) 2021 FormatJS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+@formatjs/icu-skeleton-parser
+MIT
+MIT License
+
+Copyright (c) 2021 FormatJS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+@fundamental-ngx/btp
+
 @fundamental-ngx/cdk
 Apache-2.0
-
-@fundamental-ngx/cdk/data-source
-
-@fundamental-ngx/cdk/forms
-
-@fundamental-ngx/cdk/utils
 
 @fundamental-ngx/core
 Apache-2.0
 
-@fundamental-ngx/core/action-bar
-
-@fundamental-ngx/core/action-sheet
-
-@fundamental-ngx/core/avatar
-
-@fundamental-ngx/core/avatar-group
-
-@fundamental-ngx/core/bar
-
-@fundamental-ngx/core/breadcrumb
-
-@fundamental-ngx/core/busy-indicator
-
-@fundamental-ngx/core/button
-
-@fundamental-ngx/core/calendar
-
-@fundamental-ngx/core/card
-
-@fundamental-ngx/core/carousel
-
-@fundamental-ngx/core/checkbox
-
-@fundamental-ngx/core/combobox
-
-@fundamental-ngx/core/content-density
-
-@fundamental-ngx/core/date-picker
-
-@fundamental-ngx/core/datetime
-
-@fundamental-ngx/core/datetime-picker
-
-@fundamental-ngx/core/dialog
-
-@fundamental-ngx/core/dynamic-page
-
-@fundamental-ngx/core/dynamic-side-content
-
-@fundamental-ngx/core/facets
-
-@fundamental-ngx/core/feed-input
-
-@fundamental-ngx/core/feed-list-item
-
-@fundamental-ngx/core/file-uploader
-
-@fundamental-ngx/core/fixed-card-layout
-
-@fundamental-ngx/core/flexible-column-layout
-
-@fundamental-ngx/core/form
-
-@fundamental-ngx/core/formatted-text
-
-@fundamental-ngx/core/grid-list
-
-@fundamental-ngx/core/icon
-
-@fundamental-ngx/core/illustrated-message
-
-@fundamental-ngx/core/infinite-scroll
-
-@fundamental-ngx/core/info-label
-
-@fundamental-ngx/core/inline-help
-
-@fundamental-ngx/core/input-group
-
-@fundamental-ngx/core/layout-grid
-
-@fundamental-ngx/core/layout-panel
-
-@fundamental-ngx/core/link
-
-@fundamental-ngx/core/list
-
-@fundamental-ngx/core/menu
-
-@fundamental-ngx/core/message-box
-
-@fundamental-ngx/core/message-page
-
-@fundamental-ngx/core/message-strip
-
-@fundamental-ngx/core/message-toast
-
-@fundamental-ngx/core/micro-process-flow
-
-@fundamental-ngx/core/mobile-mode
-
-@fundamental-ngx/core/multi-combobox
-
-@fundamental-ngx/core/multi-input
-
-@fundamental-ngx/core/nested-list
-
-@fundamental-ngx/core/notification
-
-@fundamental-ngx/core/object-identifier
-
-@fundamental-ngx/core/object-marker
-
-@fundamental-ngx/core/object-number
-
-@fundamental-ngx/core/object-status
-
-@fundamental-ngx/core/overflow-layout
-
-@fundamental-ngx/core/pagination
-
-@fundamental-ngx/core/panel
-
-@fundamental-ngx/core/popover
-
-@fundamental-ngx/core/product-switch
-
-@fundamental-ngx/core/progress-indicator
-
-@fundamental-ngx/core/quick-view
-
-@fundamental-ngx/core/radio
-
-@fundamental-ngx/core/rating-indicator
-
-@fundamental-ngx/core/resizable-card-layout
-
-@fundamental-ngx/core/scroll-spy
-
-@fundamental-ngx/core/scrollbar
-
-@fundamental-ngx/core/segmented-button
-
-@fundamental-ngx/core/select
-
-@fundamental-ngx/core/shared
-
-@fundamental-ngx/core/shellbar
-
-@fundamental-ngx/core/side-navigation
-
-@fundamental-ngx/core/skeleton
-
-@fundamental-ngx/core/slider
-
-@fundamental-ngx/core/split-button
-
-@fundamental-ngx/core/splitter
-
-@fundamental-ngx/core/status-indicator
-
-@fundamental-ngx/core/step-input
-
-@fundamental-ngx/core/switch
-
-@fundamental-ngx/core/table
-
-@fundamental-ngx/core/tabs
-
-@fundamental-ngx/core/text
-
-@fundamental-ngx/core/theming
-
-@fundamental-ngx/core/tile
-
-@fundamental-ngx/core/time
-
-@fundamental-ngx/core/time-picker
-
-@fundamental-ngx/core/timeline
-
-@fundamental-ngx/core/title
-
-@fundamental-ngx/core/token
-
-@fundamental-ngx/core/toolbar
-
-@fundamental-ngx/core/tree
-
-@fundamental-ngx/core/upload-collection
-
-@fundamental-ngx/core/utils
-
-@fundamental-ngx/core/vertical-navigation
-
-@fundamental-ngx/core/wizard
-
-@fundamental-ngx/cx/nested-list
-
-@fundamental-ngx/cx/side-navigation
+@fundamental-ngx/cx
+Apache-2.0
 
 @fundamental-ngx/datetime-adapter
 Apache-2.0
@@ -279,69 +125,8 @@ Apache-2.0
 @fundamental-ngx/moment-adapter
 Apache-2.0
 
-@fundamental-ngx/platform/action-bar
-
-@fundamental-ngx/platform/action-button-group
-
-@fundamental-ngx/platform/approval-flow
-
-@fundamental-ngx/platform/button
-
-@fundamental-ngx/platform/dynamic-page
-
-@fundamental-ngx/platform/feed-input
-
-@fundamental-ngx/platform/form
-
-@fundamental-ngx/platform/icon-tab-bar
-
-@fundamental-ngx/platform/info-label
-
-@fundamental-ngx/platform/link
-
-@fundamental-ngx/platform/list
-
-@fundamental-ngx/platform/menu
-
-@fundamental-ngx/platform/menu-button
-
-@fundamental-ngx/platform/message-popover
-
-@fundamental-ngx/platform/object-attribute
-
-@fundamental-ngx/platform/object-marker
-
-@fundamental-ngx/platform/object-status
-
-@fundamental-ngx/platform/page-footer
-
-@fundamental-ngx/platform/panel
-
-@fundamental-ngx/platform/search-field
-
-@fundamental-ngx/platform/settings-generator
-
-@fundamental-ngx/platform/shared
-
-@fundamental-ngx/platform/slider
-
-@fundamental-ngx/platform/smart-filter-bar
-
-@fundamental-ngx/platform/split-menu-button
-
-@fundamental-ngx/platform/table
-
-@fundamental-ngx/platform/table-helpers
-
-@fundamental-ngx/platform/thumbnail
-
-@fundamental-ngx/platform/upload-collection
-
-@fundamental-ngx/platform/value-help-dialog
-
-@fundamental-ngx/platform/variant-management
-
-@fundamental-ngx/platform/wizard-generator
+@fundamental-ngx/platform
+Apache-2.0
 
 @stackblitz/sdk
 MIT
@@ -708,6 +493,43 @@ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
 SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+intl-messageformat
+BSD-3-Clause
+Copyright (c) 2021, Oath Inc.
+
+Licensed under the terms of the New BSD license. See below for terms.
+
+Redistribution and use of this software in source and binary forms,
+with or without modification, are permitted provided that the following
+conditions are met:
+
+- Redistributions of source code must retain the above
+  copyright notice, this list of conditions and the
+  following disclaimer.
+
+- Redistributions in binary form must reproduce the above
+  copyright notice, this list of conditions and the
+  following disclaimer in the documentation and/or other
+  materials provided with the distribution.
+
+- Neither the name of Oath Inc. nor the names of its
+  contributors may be used to endorse or promote products
+  derived from this software without specific prior
+  written permission of Oath Inc.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 

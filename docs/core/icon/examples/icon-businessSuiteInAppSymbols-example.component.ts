@@ -1,9 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-icon-businessSuiteInAppSymbols-example',
     templateUrl: './icon-businessSuiteInAppSymbols-example.component.html',
-    styleUrls: ['icon-example.component.scss']
+    styleUrls: ['icon-example.component.scss'],
+    standalone: true,
+    imports: [NgFor, IconModule]
 })
 export class IconBusinessSuiteInAppSymbolsExampleComponent {
     icons: string[] = [
@@ -239,6 +243,7 @@ export class IconBusinessSuiteInAppSymbolsExampleComponent {
         'empty-sequence',
         'cross-union',
         'empty-union',
-        'cross-target'
+        'cross-target',
+        'non-stackable'
     ];
 }

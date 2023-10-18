@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BaseDataProvider, MultiInputDataSource } from '@fundamental-ngx/platform/shared';
 
+import { FormsModule } from '@angular/forms';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -61,7 +64,9 @@ const OPTIONS = [
 @Component({
     selector: 'fdp-platform-multi-input-loading-example',
     templateUrl: './platform-multi-input-loading-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [FdpFormGroupModule, BusyIndicatorComponent, PlatformMultiInputModule, FormsModule]
 })
 export class PlatformMultiInputLoadingExampleComponent {
     readonly dataSource = new MultiInputDataSource(new DelayedBaseDataProvider(OPTIONS));

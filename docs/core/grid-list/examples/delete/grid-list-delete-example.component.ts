@@ -1,5 +1,9 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
+import { RouterLink } from '@angular/router';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import { GridListItemOutputEvent, GridListModule } from '@fundamental-ngx/core/grid-list';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 
 interface GridListItem {
     id: number;
@@ -12,7 +16,9 @@ interface GridListItem {
     templateUrl: './grid-list-delete-example.component.html',
     styleUrls: ['./grid-list-delete-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [GridListModule, NgFor, AvatarComponent, LinkComponent, RouterLink, NgIf]
 })
 export class GridListDeleteExampleComponent {
     list: GridListItem[] = [

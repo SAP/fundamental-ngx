@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenComponent } from '@fundamental-ngx/core/token';
 
 @Component({
     selector: 'fd-token-readonly-example',
@@ -9,6 +10,8 @@ import { Component } from '@angular/core';
                 padding-right: 4px;
             }
         `
-    ]
+    ],
+    standalone: true,
+    imports: [TokenComponent]
 })
 export class TokenReadOnlyExampleComponent {}

@@ -1,9 +1,27 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { FormsModule } from '@angular/forms';
+import { FocusableGridDirective, RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
     selector: 'fd-table-checkboxes-example',
-    templateUrl: './table-checkboxes-example.component.html'
+    templateUrl: './table-checkboxes-example.component.html',
+    standalone: true,
+    imports: [
+        FocusableGridDirective,
+        TableModule,
+        ContentDensityDirective,
+        CheckboxComponent,
+        FormsModule,
+        NgFor,
+        LinkComponent,
+        IconModule
+    ]
 })
 export class TableCheckboxesExampleComponent {
     private readonly _rangeSelector = new RangeSelector();

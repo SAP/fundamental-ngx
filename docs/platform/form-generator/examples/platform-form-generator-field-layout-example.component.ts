@@ -1,13 +1,14 @@
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
-    DatetimeAdapter,
-    DATE_TIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core/datetime';
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
+    DynamicFormItem,
+    DynamicFormValue,
+    FormGeneratorComponent,
+    PlatformFormGeneratorModule
+} from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     new Promise<boolean>((resolve) => {
@@ -22,15 +23,10 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
-        }
-    ]
+        provideDateTimeFormats()
+    ],
+    standalone: true,
+    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorFieldLayoutExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

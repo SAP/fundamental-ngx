@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
@@ -10,7 +11,9 @@ import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/mess
         // The MessageBoxService is already provided on the MessageBoxModule module.
         // We do it at the component level here, due to the limitations of our example generation script.
         MessageBoxService
-    ]
+    ],
+    standalone: true,
+    imports: [ButtonModule]
 })
 export class ObjectBasedMessageBoxExampleComponent {
     title = 'Fruit facts';
@@ -34,15 +37,15 @@ export class ObjectBasedMessageBoxExampleComponent {
             ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body'
         });
 
-        messageBoxRef.afterClosed.subscribe(
-            (result) => {
+        messageBoxRef.afterClosed.subscribe({
+            next: (result) => {
                 this.closeReason = 'Message box closed with result: ' + result;
                 this._cdr.detectChanges();
             },
-            (error) => {
+            error: (error) => {
                 this.closeReason = 'Message box dismissed with result: ' + error;
                 this._cdr.detectChanges();
             }
-        );
+        });
     }
 }
