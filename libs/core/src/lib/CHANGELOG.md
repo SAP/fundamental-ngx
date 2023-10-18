@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.97...v0.46.0-rc.98) (2023-10-18)
+
+
+### Bug Fixes
+
+* **core:** dynamic stacked tabs ([#10745](https://github.com/SAP/fundamental-ngx/issues/10745)) ([3b061bb](https://github.com/SAP/fundamental-ngx/commit/3b061bb491c80d45e4171437e0c761510baea315))
+
+
+
+
+
 # [0.46.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.95...v0.46.0-rc.97) (2023-10-17)
 
 
