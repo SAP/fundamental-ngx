@@ -7,6 +7,27 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI library for Bulgarian language
  */
 export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Изберете година',
+        yearsRangeSelectionLabel: 'Изберете обхват на години',
+        monthSelectionLabel: 'Изберете месец',
+        dateSelectionLabel: 'Изберете дата',
+        previousYearLabel: 'Предходна година',
+        nextYearLabel: 'Следваща година',
+        previousMonthLabel: 'Предходен месец',
+        nextMonthLabel: 'Следващ месец',
+        weekColumnLabel: 'Седмица в календара',
+        dateSelectedLabel: 'Избрана дата',
+        todayLabel: 'Днес',
+        rangeStartLabel: 'Начало на обхвата',
+        rangeEndLabel: 'Край на обхвата',
+        dayInPastLabel: 'Минали дни',
+        closeCalendarLabel: 'Затвори календара',
+        calendarDayViewDescription: 'Календар',
+        calendarMonthViewDescription: 'Избор на месец',
+        calendarYearsViewDescription: 'Избор на година',
+        calendarYearsRangeViewDescription: 'Избор на обхват на години'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
     },

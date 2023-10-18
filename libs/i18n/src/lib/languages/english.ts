@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for English language
  */
 export const FD_LANGUAGE_ENGLISH: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Select year',
+        yearsRangeSelectionLabel: 'Select years range',
+        monthSelectionLabel: 'Select month',
+        dateSelectionLabel: 'Select date',
+        previousYearLabel: 'Previous year',
+        nextYearLabel: 'Next year',
+        previousMonthLabel: 'Previous month',
+        nextMonthLabel: 'Next month',
+        weekColumnLabel: 'Calendar week',
+        dateSelectedLabel: 'Selected date',
+        todayLabel: 'Today',
+        rangeStartLabel: 'Range start',
+        rangeEndLabel: 'Range end',
+        dayInPastLabel: 'Past days',
+        closeCalendarLabel: 'Close calendar',
+        calendarDayViewDescription: 'Calendar',
+        calendarMonthViewDescription: 'Month picker',
+        calendarYearsViewDescription: 'Year picker',
+        calendarYearsRangeViewDescription: 'Years range picker'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Select all ({{selectedItems}} of {{totalItems}})'
     },

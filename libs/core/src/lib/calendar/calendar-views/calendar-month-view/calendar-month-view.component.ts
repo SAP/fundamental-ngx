@@ -21,7 +21,6 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
-import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -86,8 +85,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _dateTimeAdapter: DatetimeAdapter<D>,
-        private _calendarI18nLabels: CalendarI18nLabels
+        private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
     /** @hidden */
@@ -128,32 +126,6 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     /** View ID */
     get viewId(): string {
         return this.id + '-month-view';
-    }
-
-    /**
-     * @hidden
-     * Today cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _todayAriaLabel(): string {
-        return this._calendarI18nLabels.todayLabel;
-    }
-
-    /**
-     * @hidden
-     * Selected date cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _selectedDateAriaLabel(): string {
-        return this._calendarI18nLabels.dateSelectedLabel;
-    }
-
-    /**
-     * @hidden
-     * View description
-     */
-    get _viewRoleDescription(): string {
-        return this._calendarI18nLabels.calendarMonthViewDescription;
     }
 
     /**

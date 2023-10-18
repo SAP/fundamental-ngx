@@ -1,31 +1,39 @@
-import { Attribute, Directive } from '@angular/core';
-
-import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
+import { Attribute, ChangeDetectorRef, Directive, Inject } from '@angular/core';
+import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
+import { map, Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DestroyedService } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-calendar-close-button]',
     host: {
         class: 'fd-calendar__close-button',
-        '[attr.aria-label]': '_ariaLabel',
-        '[attr.title]': '_title'
-    }
+        '[attr.aria-label]': '_originalAriaLabel || _closeCalendarLabel',
+        '[attr.title]': '_originalTitle || _closeCalendarLabel'
+    },
+    providers: [DestroyedService]
 })
 export class CalendarCloseButtonDirective {
     /** @hidden */
-    get _ariaLabel(): string {
-        return this._originalAriaLabel || this._calendarI18nLabels.closeCalendarLabel;
-    }
-
-    /** @hidden */
-    get _title(): string {
-        return this._originalTitle || this._calendarI18nLabels.closeCalendarLabel;
-    }
+    protected _closeCalendarLabel: string;
 
     /** @hidden */
     constructor(
-        @Attribute('aria-label') private _originalAriaLabel: string,
-        @Attribute('title') private _originalTitle: string,
-        private _calendarI18nLabels: CalendarI18nLabels
-    ) {}
+        @Attribute('aria-label') protected _originalAriaLabel: string,
+        @Attribute('title') protected _originalTitle: string,
+        @Inject(FD_LANGUAGE) lang$: Observable<FdLanguage>,
+        protected _changeDetectorRef: ChangeDetectorRef,
+        protected _destroyed$: DestroyedService
+    ) {
+        lang$
+            .pipe(
+                map((l) => l.coreCalendar.closeCalendarLabel as string),
+                takeUntil(this._destroyed$)
+            )
+            .subscribe((closeCalendarLabel: string) => {
+                this._closeCalendarLabel = closeCalendarLabel;
+                this._changeDetectorRef.markForCheck();
+            });
+    }
 }

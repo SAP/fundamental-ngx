@@ -1,31 +1,14 @@
-import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 
-import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
 import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { DayjsDatetimeAdapter, DAYJS_DATETIME_FORMATS } from '@fundamental-ngx/datetime-adapter';
 import dayjs from 'dayjs';
+import { patchLanguage } from '@fundamental-ngx/i18n';
 
 // Dayjs locale data required for this example
-import 'dayjs/locale/fr';
-import 'dayjs/locale/de';
 import 'dayjs/locale/bg';
-
-// Translated aria labels.
-// Please note these labels should be translated for each locale separately
-@Injectable()
-export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel = `Sélection de l'année`;
-
-    previousYearLabel = 'Année précédente';
-
-    nextYearLabel = 'Année suivante';
-
-    monthSelectionLabel = 'Sélection du mois';
-
-    previousMonthLabel = 'Mois précédent';
-
-    nextMonthLabel = 'Mois suivant';
-}
+import 'dayjs/locale/de';
+import 'dayjs/locale/fr';
 
 // using custom date format to better demonstrate i18n capabilities
 const CUSTOM_DATETIME_FORMATS = {
@@ -55,10 +38,16 @@ const CUSTOM_DATETIME_FORMATS = {
             useClass: DayjsDatetimeAdapter,
             deps: [LOCALE_ID]
         },
-        {
-            provide: CalendarI18nLabels,
-            useClass: CustomI18nLabels
-        },
+        patchLanguage({
+            coreCalendar: {
+                yearSelectionLabel: `Sélection de l'année`,
+                previousYearLabel: 'Année précédente',
+                nextYearLabel: 'Année suivante',
+                monthSelectionLabel: 'Sélection du mois',
+                previousMonthLabel: 'Mois précédent',
+                nextMonthLabel: 'Mois suivant'
+            }
+        }),
         {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_DATETIME_FORMATS

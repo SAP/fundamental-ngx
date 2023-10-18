@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Polish language
  */
 export const FD_LANGUAGE_POLISH: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Wybierz rok',
+        yearsRangeSelectionLabel: 'Wybierz zakres lat',
+        monthSelectionLabel: 'Wybierz miesiąc',
+        dateSelectionLabel: 'Wybierz datę',
+        previousYearLabel: 'Poprzedni rok',
+        nextYearLabel: 'Następny rok',
+        previousMonthLabel: 'Poprzedni miesiąc',
+        nextMonthLabel: 'Następny miesiąc',
+        weekColumnLabel: 'Tydzień kalendarza',
+        dateSelectedLabel: 'Wybrana data',
+        todayLabel: 'Dziś',
+        rangeStartLabel: 'Początek zakresu',
+        rangeEndLabel: 'Koniec zakresu',
+        dayInPastLabel: 'Minione dni',
+        closeCalendarLabel: 'Zamknij kalendarz',
+        calendarDayViewDescription: 'Kalendarz',
+        calendarMonthViewDescription: 'Wybór miesiąca',
+        calendarYearsViewDescription: 'Wybór roku',
+        calendarYearsRangeViewDescription: 'Wybór zakresu lat'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Zaznacz wszystko ({{selectedItems}} z {{totalItems}})'
     },

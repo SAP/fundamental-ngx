@@ -1,4 +1,8 @@
-<table class="fd-calendar__table" role="grid" [attr.aria-roledescription]="_viewRoleDescription">
+<table
+    class="fd-calendar__table"
+    role="grid"
+    [attr.aria-roledescription]="'coreCalendar.calendarDayViewDescription' | fdTranslate"
+>
     <thead class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row" role="row">
             <th
@@ -6,7 +10,7 @@
                 class="fd-calendar__item fd-calendar__item--side-helper"
                 role="columnheader"
                 [attr.id]="_weekNumbersColumnHeaderId"
-                [attr.aria-label]="_weekColumnLabelAriaLabel"
+                [attr.aria-label]="'coreCalendar.weekColumnLabel' | fdTranslate"
             ></th>
             <th
                 class="fd-calendar__item fd-calendar__item--side-helper"
@@ -87,9 +91,9 @@
 
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
-    <div [attr.id]="_todayLabelId">{{ _todayAriaLabel }}</div>
-    <div [attr.id]="_selectedDateLabelId">{{ _selectedDateAriaLabel }}</div>
-    <div [attr.id]="_dateRangeStartLabelId">{{ _rangeStartAriaLabel }}</div>
-    <div [attr.id]="_dateRangeEndLabelId">{{ _rangeEndAriaLabel }}</div>
-    <div [attr.id]="_dateInPastLabelId">{{ _dateInPastAriaLabel }}</div>
+    <div [attr.id]="_todayLabelId">{{ 'coreCalendar.todayLabel' | fdTranslate }}</div>
+    <div [attr.id]="_selectedDateLabelId">{{ 'coreCalendar.dateSelectedLabel' | fdTranslate }}</div>
+    <div [attr.id]="_dateRangeStartLabelId">{{ 'coreCalendar.rangeStartLabel' | fdTranslate }}</div>
+    <div [attr.id]="_dateRangeEndLabelId">{{ 'coreCalendar.rangeEndLabel' | fdTranslate }}</div>
+    <div [attr.id]="_dateInPastLabelId">{{ 'coreCalendar.dayInPastLabel' | fdTranslate }}</div>
 </div>

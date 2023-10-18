@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Albanian language
  */
 export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Zgjidhni vitin',
+        yearsRangeSelectionLabel: 'Zgjidhni shtrirjen e viteve',
+        monthSelectionLabel: 'Zgjidhni muajin',
+        dateSelectionLabel: 'Zgjidhni datën',
+        previousYearLabel: 'Viti i kaluar',
+        nextYearLabel: 'Viti tjetër',
+        previousMonthLabel: 'Muaji i kaluar',
+        nextMonthLabel: 'Muaji tjetër',
+        weekColumnLabel: 'Java e kalendarit',
+        dateSelectedLabel: 'Data e zgjedhur',
+        todayLabel: 'Sot',
+        rangeStartLabel: 'Fillimi i shtrirjes',
+        rangeEndLabel: 'Përfundimi i shtrirjes',
+        dayInPastLabel: 'Ditë të kaluara',
+        closeCalendarLabel: 'Mbyll kalendarin',
+        calendarDayViewDescription: 'Kalendar',
+        calendarMonthViewDescription: 'Zgjedhësi i muajit',
+        calendarYearsViewDescription: 'Zgjedhësi i vitit',
+        calendarYearsRangeViewDescription: 'Zgjedhësi i shtrirjes së viteve'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Selekto të gjitha ({{ selectedItems }} nga {{ totalItems }})'
     },

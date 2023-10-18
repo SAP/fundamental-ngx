@@ -38,6 +38,8 @@ import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from 
 import { CalendarType, DaysOfWeek, FdCalendarView, NavigationButtonDisableFunction } from './types';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { patchDeprecatedI18nLabels } from './patch-deprecated-i18n-labels';
+import { FD_LANGUAGE } from '@fundamental-ngx/i18n';
 
 let calendarUniqueId = 0;
 
@@ -69,7 +71,11 @@ let calendarUniqueId = 0;
             multi: true
         },
         CalendarService,
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        {
+            provide: FD_LANGUAGE,
+            useFactory: patchDeprecatedI18nLabels
+        }
     ],
     host: {
         '(focusout)': '_focusOut($event)',

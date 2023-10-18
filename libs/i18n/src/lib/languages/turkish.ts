@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI libarary for Turkish language
  */
 export const FD_LANGUAGE_TURKISH: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Yıl Seç',
+        yearsRangeSelectionLabel: 'Yıl Aralığı Seç',
+        monthSelectionLabel: 'Ay Seç',
+        dateSelectionLabel: 'Tarih Seç',
+        previousYearLabel: 'Önceki Yıl',
+        nextYearLabel: 'Sonraki Yıl',
+        previousMonthLabel: 'Önceki Ay',
+        nextMonthLabel: 'Sonraki Ay',
+        weekColumnLabel: 'Takvim Haftası',
+        dateSelectedLabel: 'Seçilen Tarih',
+        todayLabel: 'Bugün',
+        rangeStartLabel: 'Aralık Başlangıcı',
+        rangeEndLabel: 'Aralık Sonu',
+        dayInPastLabel: 'Geçmiş Günler',
+        closeCalendarLabel: 'Takvimi Kapat',
+        calendarDayViewDescription: 'Takvim',
+        calendarMonthViewDescription: 'Ay Seçici',
+        calendarYearsViewDescription: 'Yıl Seçici',
+        calendarYearsRangeViewDescription: 'Yıl Aralığı Seçici'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Hepsini seç ({{selectedItems}}/{{totalItems}})'
     },
