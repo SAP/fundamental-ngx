@@ -24,6 +24,7 @@ import { DestroyedService, KeyUtil, Nullable, scrollTop } from '@fundamental-ngx
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
