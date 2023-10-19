@@ -7,7 +7,8 @@ import { debounceTime, takeUntil } from 'rxjs';
  */
 @Directive({
     selector: '[fdScrollSpy]',
-    providers: [DestroyedService]
+    providers: [DestroyedService],
+    exportAs: 'fdScrollSpy'
 })
 export class ScrollSpyDirective implements OnInit {
     /**
@@ -61,13 +62,13 @@ export class ScrollSpyDirective implements OnInit {
 
     /** @hidden */
     @HostListener('scroll', ['$event'])
-    onScroll(event: Event): void {
+    onScroll(event?: Event, forced = false): void {
         if (this.scrollSpyDisabled) {
             return;
         }
 
         let spiedTag: HTMLElement | undefined;
-        const target = event.target as HTMLElement;
+        const target = (event?.target || this._elRef.nativeElement) as HTMLElement;
         const children: HTMLElement[] = this._elRef.nativeElement.children;
         const [firstChild] = children;
         const childrenLength = children.length;
@@ -83,7 +84,7 @@ export class ScrollSpyDirective implements OnInit {
             }
         }
 
-        if ((spiedTag || this.fireEmpty) && spiedTag !== this._currentActive) {
+        if (forced || ((spiedTag || this.fireEmpty) && spiedTag !== this._currentActive)) {
             this._currentActive = spiedTag;
             this.spyChange.emit(this._currentActive);
         }
@@ -95,7 +96,7 @@ export class ScrollSpyDirective implements OnInit {
         resizeObservable(this._elRef.nativeElement)
             .pipe(debounceTime(30), takeUntil(this._destroyRef))
             .subscribe(() => {
-                this.onScroll({ target: this._elRef.nativeElement } as Event);
+                this.onScroll(undefined, true);
             });
     }
 }

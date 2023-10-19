@@ -10,13 +10,15 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    NgZone,
     OnDestroy,
     Output,
     QueryList,
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { DestroyedService, KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -24,7 +26,7 @@ import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
-import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
@@ -155,6 +157,10 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _overflowLayout: OverflowLayoutComponent;
 
     /** @hidden */
+    @ViewChild('scrollSpy', { read: ScrollSpyDirective })
+    private readonly _scrollSpy: Nullable<ScrollSpyDirective>;
+
+    /** @hidden */
     get contentContainer(): ElementRef<HTMLElement> {
         return this._scrollbar?.elementRef;
     }
@@ -178,9 +184,11 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private readonly _zone = inject(NgZone);
+
+    /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        private _elRef: ElementRef,
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _onDestroy$: DestroyedService
     ) {}
@@ -290,10 +298,13 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             .pipe(
                 map((tabPanels) =>
                     tabPanels.map((el) => this._tabArray?.find((tabInfo) => tabInfo.panel === el) || new TabInfo(el))
-                )
+                ),
+                tap((tabs) => (this._tabArray = tabs)),
+                switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable))),
+                takeUntil(this._onDestroy$)
             )
-            .subscribe((tabs) => {
-                this._tabArray = tabs;
+            .subscribe(() => {
+                this.stackContent && this._scrollSpy?.onScroll(undefined, true);
             });
     }
 
