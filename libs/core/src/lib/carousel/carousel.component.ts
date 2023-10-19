@@ -1,3 +1,5 @@
+import { Direction } from '@angular/cdk/bidi';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewChecked,
@@ -23,16 +25,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Direction } from '@angular/cdk/bidi';
-import { debounceTime, take, takeUntil } from 'rxjs/operators';
-import { merge, Subject } from 'rxjs';
-import { resizeObservable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
-import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { RtlService, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf, NgTemplateOutlet, NgClass, NgFor } from '@angular/common';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject, merge } from 'rxjs';
+import { debounceTime, take, takeUntil } from 'rxjs/operators';
+import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
+import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
@@ -373,6 +373,7 @@ export class CarouselComponent
     onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
         this._isRtl() ? this.previous() : this.next();
+        this.carouselContainer.nativeElement.focus();
     }
 
     /** @hidden */
@@ -380,6 +381,7 @@ export class CarouselComponent
     onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
         this._isRtl() ? this.next() : this.previous();
+        this.carouselContainer.nativeElement.focus();
     }
 
     /** Transitions to the previous slide in the carousel. */
