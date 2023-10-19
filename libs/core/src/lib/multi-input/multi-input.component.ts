@@ -671,6 +671,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         fromTokenCloseClick = false
     ): void {
         const previousLength = this._selectionModel.selected.length;
+        option = this._getOptionItem(option);
         if (checked) {
             this._selectionModel.select(option.id, option);
         } else {
