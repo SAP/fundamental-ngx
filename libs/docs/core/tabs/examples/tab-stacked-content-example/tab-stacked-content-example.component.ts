@@ -20,4 +20,10 @@ export class TabStackedContentExampleComponent {
             this.tabs.push({ title: `Tab ${i}`, content: `Content ${i}` });
         }
     }
+
+    showZeroTabLater(): void {
+        setTimeout(() => {
+            this.showZeroTab = true;
+        }, 2000);
+    }
 }
