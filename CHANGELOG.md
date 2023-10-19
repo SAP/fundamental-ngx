@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.0...v0.46.1-rc.1) (2023-10-19)
+
+
+### Bug Fixes
+
+* **core:** async scenario handler ([#10761](https://github.com/SAP/fundamental-ngx/issues/10761)) ([a129f5e](https://github.com/SAP/fundamental-ngx/commit/a129f5ecd5891f33706f7b9bdd93c6236e13b881))
+* **core:** fixed range date picker premature value update ([#10757](https://github.com/SAP/fundamental-ngx/issues/10757)) ([da4b65d](https://github.com/SAP/fundamental-ngx/commit/da4b65d8c43b642c3a034c2f220b537d4dc0217c))
+* **core:** multi input new token ([#10759](https://github.com/SAP/fundamental-ngx/issues/10759)) ([b88a359](https://github.com/SAP/fundamental-ngx/commit/b88a35922c6dfe134ff2229aa8cf955344bfc6e6))
+* **e2e:** temporary do a full page refresh ([#10763](https://github.com/SAP/fundamental-ngx/issues/10763)) ([0e440a3](https://github.com/SAP/fundamental-ngx/commit/0e440a315185fa292663be4332246e41fd29d2ea))
+
+
+
+
+
 ## [0.46.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.0...v0.46.1-rc.0) (2023-10-19)
 
 
