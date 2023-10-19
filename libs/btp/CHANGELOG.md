@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.0...v0.46.1-rc.0) (2023-10-19)
+
+
+### Bug Fixes
+
+* **btp:** incorrect import of the styling of tool-header ([#10760](https://github.com/SAP/fundamental-ngx/issues/10760)) ([aad7dbe](https://github.com/SAP/fundamental-ngx/commit/aad7dbe226285b7860822944d3b90c2e7f572b8a))
+
+
+
+
+
+# [0.46.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.100...v0.46.0) (2023-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
+# [0.46.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.99...v0.46.0-rc.100) (2023-10-18)
+
+**Note:** Version bump only for package @fundamental-ngx/btp
+
+
+
+
+
 # [0.46.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.46.0-rc.98...v0.46.0-rc.99) (2023-10-18)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
