@@ -384,6 +384,26 @@ export class CarouselComponent
         this.carouselContainer.nativeElement.focus();
     }
 
+    /** @hidden */
+    @HostListener('keydown.arrowUp', ['$event'])
+    onKeydownArrowUp(event: KeyboardEvent): void {
+        if (this.vertical) {
+            event.preventDefault();
+            this.previous();
+            this.carouselContainer.nativeElement.focus();
+        }
+    }
+
+    /** @hidden */
+    @HostListener('keydown.arrowDown', ['$event'])
+    onKeydownArrowDown(event: KeyboardEvent): void {
+        if (this.vertical) {
+            event.preventDefault();
+            this.next();
+            this.carouselContainer.nativeElement.focus();
+        }
+    }
+
     /** Transitions to the previous slide in the carousel. */
     previous(): void {
         if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
