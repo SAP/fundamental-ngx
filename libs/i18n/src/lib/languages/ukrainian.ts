@@ -234,6 +234,8 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         backButtonLabel: 'Повернутися назад'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Додати',
+        nodeMenuButtonTitle: 'Меню',
         defaultWatchersLabel: 'Спостерігачі',
         defaultTitle: 'Процес затвердження',
         nextButtonAriaLabel: 'Перейти до наступного слайду',
@@ -344,10 +346,10 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
                     return `Вибрано ${count || 0} елементів`;
             }
         },
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'затверджено',
+        statusRejected: 'відхилено',
+        statusInProgress: 'в процесі',
+        statusNotStarted: 'не розпочато'
     },
     platformFeedInput: {
         userTitle: 'Користувач'

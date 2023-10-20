@@ -235,6 +235,8 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         backButtonLabel: 'Вернуться назад'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Добавить',
+        nodeMenuButtonTitle: 'Меню',
         defaultWatchersLabel: 'Наблюдатели',
         defaultTitle: 'Процесс утверждения',
         nextButtonAriaLabel: 'Перейти к следующему слайд',
@@ -345,10 +347,10 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
                     return `Выбрано ${count || 0} элементов`;
             }
         },
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'утверждено',
+        statusRejected: 'отклонено',
+        statusInProgress: 'в процессе',
+        statusNotStarted: 'не начато'
     },
     platformFeedInput: {
         userTitle: 'Пользователь'

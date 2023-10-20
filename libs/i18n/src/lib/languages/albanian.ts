@@ -188,6 +188,8 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         backButtonLabel: 'Kthehu mbrapa'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Shto një hap',
+        nodeMenuButtonTitle: 'Menyja',
         defaultWatchersLabel: 'Vrojtuesit',
         defaultTitle: 'Procesi i aprovimit',
         nextButtonAriaLabel: 'Shko te skedari tjetër',
@@ -255,10 +257,10 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         watchersInputPlaceholder: 'Kërko këtu..',
         userListSelectedItemsCountSingular: '1 artikull i zgjedhur',
         userListSelectedItemsCountPlural: '{{ count }} artikujt të zgjedhur',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'aprovuar',
+        statusRejected: 'refuzuar',
+        statusInProgress: 'në zhvillim',
+        statusNotStarted: 'nuk ka filluar'
     },
     platformFeedInput: {
         userTitle: 'Përdoruesi'

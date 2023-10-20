@@ -174,6 +174,8 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         backButtonLabel: '返回'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: '添加结点',
+        nodeMenuButtonTitle: '更多',
         defaultWatchersLabel: '观察者',
         defaultTitle: '审批流程',
         nextButtonAriaLabel: '下一张',
@@ -239,10 +241,10 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         watchersInputPlaceholder: '搜索…',
         userListSelectedItemsCountSingular: '选择了1个项',
         userListSelectedItemsCountPlural: '选择了{{ count }}个项',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: '已批准',
+        statusRejected: '已拒绝',
+        statusInProgress: '进行中',
+        statusNotStarted: '尚未开始'
     },
     platformFeedInput: {
         userTitle: '用户'

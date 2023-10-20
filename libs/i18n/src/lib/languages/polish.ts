@@ -175,6 +175,8 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         backButtonLabel: 'Powrót'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Dodaj krok',
+        nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Obserwatorzy',
         defaultTitle: 'Proces zatwierdzenia',
         nextButtonAriaLabel: 'Idz do nestępnego slajdu',
@@ -241,10 +243,10 @@ export const FD_LANGUAGE_POLISH: FdLanguage = {
         watchersInputPlaceholder: 'Szukaj tutaj..',
         userListSelectedItemsCountSingular: 'Liczba zaznaczonych elementów: {{ count }}',
         userListSelectedItemsCountPlural: 'Liczba zaznaczonych elementów: {{ count }}',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'zatwierdzone',
+        statusRejected: 'odrzucone',
+        statusInProgress: 'w trakcie',
+        statusNotStarted: 'nie rozpoczęte'
     },
     platformFeedInput: {
         userTitle: 'Użytkownik'

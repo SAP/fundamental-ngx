@@ -208,6 +208,8 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         backButtonLabel: 'Върни Се Обратно'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Добавете стъпка',
+        nodeMenuButtonTitle: 'Меню',
         defaultWatchersLabel: 'Наблюдатели',
         defaultTitle: 'Процес на одобрение',
         nextButtonAriaLabel: 'Преминете към следващия слайд',
@@ -301,10 +303,10 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         watchersInputPlaceholder: 'Търси тук...',
         userListSelectedItemsCountSingular: 'Избран е 1 елемент',
         userListSelectedItemsCountPlural: 'Избрани са {{ count }} елементи',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'одобрено',
+        statusRejected: 'отхвърлено',
+        statusInProgress: 'в ход',
+        statusNotStarted: 'не е започнато'
     },
     platformFeedInput: {
         userTitle: 'User'

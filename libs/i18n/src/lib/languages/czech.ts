@@ -178,6 +178,8 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         backButtonLabel: 'Vraťit se zpět'
     },
     platformApprovalFlow: {
+        addNodeButtonTitle: 'Přidat krok',
+        nodeMenuButtonTitle: 'Menu',
         defaultWatchersLabel: 'Pozorovatelé',
         defaultTitle: 'Schvalovací proces',
         nextButtonAriaLabel: 'Přejít na další část',
@@ -244,10 +246,10 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         watchersInputPlaceholder: 'Hledej tady..',
         userListSelectedItemsCountSingular: 'Vybrána 1 položka',
         userListSelectedItemsCountPlural: 'Počet vybraných položek: {{ count }}',
-        statusApproved: 'approved',
-        statusRejected: 'rejected',
-        statusInProgress: 'in progress',
-        statusNotStarted: 'not started'
+        statusApproved: 'schváleno',
+        statusRejected: 'odmítnuto',
+        statusInProgress: 'v průběhu',
+        statusNotStarted: 'nezačalo'
     },
     platformFeedInput: {
         userTitle: 'Uživatel'
