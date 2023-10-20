@@ -17,9 +17,10 @@ import {
     QueryList,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { Nullable, TabbableElementService, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { DialogBodyComponent, FD_DIALOG_BODY_COMPONENT } from '@fundamental-ngx/core/dialog';
 import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -149,6 +150,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _previousWidth: number;
+
+    /** @hidden */
+    private readonly _tabbableService = inject(TabbableElementService);
 
     /** @hidden */
     constructor(
@@ -447,7 +451,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _focusFirstTabbableElement(index = 0): void {
         const contentContainer = this._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[index];
-        const elToFocus = contentContainer?.querySelector('button, input, select, [tabindex]') as HTMLElement;
+        const elToFocus = this._tabbableService.getTabbableElement(contentContainer);
         elToFocus?.focus();
     }
 
