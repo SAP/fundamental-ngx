@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { WizardComponent } from './wizard.component';
 import { WizardModule } from './wizard.module';
+import { TabbableElementService } from "@fundamental-ngx/cdk/utils";
 
 @Component({
     template: `
@@ -147,6 +148,7 @@ describe('WizardComponent', () => {
         const contentContainer = (component as any)._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[2];
         expect(contentContainer).toBeTruthy();
         const tabbableEl = (contentContainer?.querySelector('button, input, select, [tabindex]') as HTMLElement);
+        const viewServiceSpy = jest.spyOn(TestBed.inject(TabbableElementService), 'getTabbableElement').mockReturnValue(tabbableEl);
 
         component.ngAfterViewInit();
         tick(500);
@@ -154,6 +156,7 @@ describe('WizardComponent', () => {
         component.steps.first.statusChange.emit();
         tick(500);
 
+        expect(viewServiceSpy).toHaveBeenCalledWith(contentContainer);
         expect(tabbableEl).toBeTruthy();
         expect(document.activeElement).toBe(tabbableEl);
     }));

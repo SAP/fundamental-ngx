@@ -451,8 +451,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _focusFirstTabbableElement(index = 0): void {
         const contentContainer = this._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[index];
-        const elToFocus = this._tabbableService.getTabbableElement(contentContainer);
-        elToFocus?.focus();
+        this._tabbableService.getTabbableElement(contentContainer)?.focus();
     }
 
     /** @hidden */
