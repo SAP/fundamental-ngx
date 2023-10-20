@@ -1,4 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
@@ -8,6 +9,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -15,7 +17,6 @@ import {
     Input,
     NgZone,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -23,13 +24,15 @@ import {
     Renderer2,
     SimpleChanges,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { RtlService, resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { KeyUtil, RtlService, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { Subject, merge } from 'rxjs';
-import { debounceTime, take, takeUntil } from 'rxjs/operators';
+import { merge } from 'rxjs';
+import { debounceTime, take } from 'rxjs/operators';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
 import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
@@ -66,11 +69,9 @@ class CarouselActiveSlides {
         '[style.width]': 'width'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, NgClass, NgFor, ButtonModule, FdTranslatePipe]
+    imports: [NgIf, NgTemplateOutlet, NgClass, NgFor, ButtonComponent, FdTranslatePipe]
 })
-export class CarouselComponent
-    implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges, OnDestroy
-{
+export class CarouselComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnChanges {
     /** ID for the Carousel. */
     @Input()
     @HostBinding('attr.id')
@@ -217,12 +218,6 @@ export class CarouselComponent
     }
 
     /** @hidden */
-    private _rightNavigationBtnLabel: string;
-
-    /** @hidden */
-    private _leftNavigationBtnLabel: string;
-
-    /** @hidden */
     private _visibleSlidesCount: number | 'auto' = 1;
 
     /** @hidden */
@@ -243,8 +238,8 @@ export class CarouselComponent
     /** @hidden */
     private _slideSwiped = false;
 
-    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    /** @hidden */
+    private readonly _destroyRef = inject(DestroyRef);
 
     /** @hidden */
     constructor(
@@ -255,6 +250,31 @@ export class CarouselComponent
         private readonly _zone: NgZone,
         @Optional() private readonly _rtlService: RtlService
     ) {}
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent): void {
+        if (
+            KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW]) ||
+            (this.vertical && KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW]))
+        ) {
+            event.preventDefault();
+
+            if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+                this._isRtl() ? this.next() : this.previous();
+            }
+            if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+                this._isRtl() ? this.previous() : this.next();
+            }
+            if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+                this.previous();
+            }
+            if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+                this.next();
+            }
+            this.carouselContainer.nativeElement.focus();
+        }
+    }
 
     /** @hidden */
     ngOnInit(): void {
@@ -294,7 +314,7 @@ export class CarouselComponent
         this._subscribeServiceEvents();
 
         // Subscribe to dynamic update of slides
-        this.slides.changes.pipe(takeUntil(this._onDestroy$)).subscribe(() => this._onSlideUpdates());
+        this.slides.changes.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => this._onSlideUpdates());
         this._changeDetectorRef.markForCheck();
     }
 
@@ -315,12 +335,6 @@ export class CarouselComponent
             this._previousVisibleSlidesCount = this._visibleSlidesNumericCount;
             this._changeDetectorRef.detectChanges();
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -366,42 +380,6 @@ export class CarouselComponent
     /** get value for rtl */
     _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
-    }
-
-    /** @hidden */
-    @HostListener('keydown.arrowright', ['$event'])
-    onKeydownArrowRight(event: KeyboardEvent): void {
-        event.preventDefault();
-        this._isRtl() ? this.previous() : this.next();
-        this.carouselContainer.nativeElement.focus();
-    }
-
-    /** @hidden */
-    @HostListener('keydown.arrowleft', ['$event'])
-    onKeydownArrowLeft(event: KeyboardEvent): void {
-        event.preventDefault();
-        this._isRtl() ? this.next() : this.previous();
-        this.carouselContainer.nativeElement.focus();
-    }
-
-    /** @hidden */
-    @HostListener('keydown.arrowUp', ['$event'])
-    onKeydownArrowUp(event: KeyboardEvent): void {
-        if (this.vertical) {
-            event.preventDefault();
-            this.previous();
-            this.carouselContainer.nativeElement.focus();
-        }
-    }
-
-    /** @hidden */
-    @HostListener('keydown.arrowDown', ['$event'])
-    onKeydownArrowDown(event: KeyboardEvent): void {
-        if (this.vertical) {
-            event.preventDefault();
-            this.next();
-            this.carouselContainer.nativeElement.focus();
-        }
     }
 
     /** Transitions to the previous slide in the carousel. */
@@ -650,7 +628,7 @@ export class CarouselComponent
             this._changeDetectorRef.detectChanges();
         };
         refreshDirection();
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe(() => refreshDirection());
+        this._rtlService?.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => refreshDirection());
     }
 
     /** @hidden On Swiping of slide, manage page indicator */
@@ -704,7 +682,7 @@ export class CarouselComponent
             resizeObservable(this.slideContainer.nativeElement),
             resizeObservable(this.carouselContainer.nativeElement)
         )
-            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
+            .pipe(debounceTime(100), takeUntilDestroyed(this._destroyRef))
             .subscribe(() => {
                 const { width, slides } = this._getFittingSlidesAndWidth();
 
