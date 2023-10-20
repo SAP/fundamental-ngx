@@ -169,6 +169,8 @@
     "platformApprovalFlow.watchersInputPlaceholder": "ძებნა...",
     "platformApprovalFlow.userListSelectedItemsCountSingular": "1 ელემენტი არჩეულია",
     "platformApprovalFlow.userListSelectedItemsCountPlural": "{count} ელემენტი არჩეულია",
+    "platformApprovalFlow.addNodeButtonTitle": "დამატება",
+    "platformApprovalFlow.nodeMenuButtonTitle": "მენიუ",
     "platformApprovalFlow.statusApproved": "დადასტურებული",
     "platformApprovalFlow.statusRejected": "უარყოფილი",
     "platformApprovalFlow.statusInProgress": "მიმდინარე",
