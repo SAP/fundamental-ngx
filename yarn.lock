@@ -3175,12 +3175,12 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@jsdevtools/npm-publish@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-2.2.2.tgz#862091d1e1a3bedd05cd41512e09aecf72a2954d"
-  integrity sha512-qqQYmNgC3oL7dKoKewVQGRddnsCSRyJbQCH5Gf2yiqH1EQtb0PCPrpfpsIy7AFQjxZaYlvEQfinymyFguRAKKw==
+"@jsdevtools/npm-publish@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@jsdevtools/npm-publish/-/npm-publish-3.0.0.tgz#1e1b1ccf89420916bba8d509db6321b008f84370"
+  integrity sha512-JOZXHTZ3dRZKH3Ne4kbjHtVePMbKcxWZc363aNgBj2zhu6qfx6pRhfudcIDlCFAG2UexjiqeDcSPLIP2xF6c8Q==
   dependencies:
-    "@types/semver" "^7.5.1"
+    "@types/semver" "^7.5.2"
     command-line-args "^5.2.1"
     semver "7.5.4"
     tar "6.2.0"
@@ -4523,10 +4523,10 @@
   resolved "https://registry.yarnpkg.com/@types/retry/-/retry-0.12.0.tgz#2b35eccfcee7d38cd72ad99232fbd58bffb3c84d"
   integrity sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==
 
-"@types/semver@^7.3.12", "@types/semver@^7.5.1":
-  version "7.5.2"
-  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.2.tgz#31f6eec1ed7ec23f4f05608d3a2d381df041f564"
-  integrity sha512-7aqorHYgdNO4DM36stTiGO3DvKoex9TQRwsJU6vMaFGyqpBA1MNZkz+PG3gaNUPpTAOYhT1WR7M1JyA3fbS9Cw==
+"@types/semver@^7.3.12", "@types/semver@^7.5.2":
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.4.tgz#0a41252ad431c473158b22f9bfb9a63df7541cff"
+  integrity sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==
 
 "@types/send@*":
   version "0.17.1"
