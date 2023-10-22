@@ -90,7 +90,7 @@
         "@nx/devkit": "16.9.1",
         "@nx/eslint-plugin": "16.9.1",
         "@nx/jest": "16.9.1",
-        "@nx/js": "16.9.1",
+        "@nx/js": "17.0.1",
         "@nx/linter": "16.9.1",
         "@nx/plugin": "16.9.1",
         "@nx/workspace": "16.9.1",
