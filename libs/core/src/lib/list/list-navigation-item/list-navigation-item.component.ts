@@ -13,7 +13,11 @@ import {
     Input,
     Optional,
     QueryList,
-    forwardRef
+    Renderer2,
+    effect,
+    forwardRef,
+    inject,
+    signal
 } from '@angular/core';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
@@ -62,10 +66,6 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     _ariaLevel: number;
 
     /** @hidden */
-    @HostBinding('class.fd-list__navigation-item--condensed')
-    _condensed = false;
-
-    /** @hidden */
     @ContentChild(FD_LIST_COMPONENT)
     _listComponent: ListComponentInterface;
 
@@ -92,6 +92,9 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     }
 
     /** @hidden */
+    _condensed = signal(false);
+
+    /** @hidden */
     _expanded = false;
 
     /** @hidden */
@@ -113,7 +116,18 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     private _dir: 'ltr' | 'rtl' | null = 'ltr';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {}
+    private readonly _renderer2 = inject(Renderer2);
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {
+        effect(() => {
+            if (this._condensed()) {
+                this._renderer2.addClass(this._elementRef.nativeElement, 'fd-list__navigation-item--condensed');
+            } else {
+                this._renderer2.removeClass(this._elementRef.nativeElement, 'fd-list__navigation-item--condensed');
+            }
+        });
+    }
 
     /** @hidden */
     @HostListener('click', ['$event'])
