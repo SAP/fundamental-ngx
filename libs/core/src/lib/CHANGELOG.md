@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.1...v0.46.2-rc.0) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** wizard scroll and focus fixes ([#10768](https://github.com/SAP/fundamental-ngx/issues/10768)) ([8a0d2e4](https://github.com/SAP/fundamental-ngx/commit/8a0d2e431de9d2b7eb6512accac674f6e1f4eed8))
+
+
+
+
+
 ## [0.46.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.5...v0.46.1) (2023-10-23)
 
 **Note:** Version bump only for package @fundamental-ngx/core
