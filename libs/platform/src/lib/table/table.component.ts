@@ -1411,14 +1411,15 @@ export class TableComponent<T = any>
         }
 
         if (event && event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
-            const eventTarget = event.target as HTMLInputElement;
-            if (
-                eventTarget.type === 'checkbox' ||
-                (eventTarget.tagName !== 'INPUT' &&
-                    eventTarget.tagName !== 'BUTTON' &&
-                    eventTarget.tagName !== 'TEXTAREA')
-            ) {
-                event.preventDefault(); // prevent page scroll but still allow space presses in inputs
+            const eventTarget = event.target as HTMLElement;
+            const inputs = eventTarget.querySelectorAll(
+                'input:not(:disabled), button:not(:disabled), textarea:not(:disabled)'
+            );
+            if (inputs && inputs.length) {
+                event.preventDefault();
+                const firstElement = Array.from(inputs)[0] as HTMLElement;
+                firstElement.focus();
+                firstElement.dispatchEvent(new MouseEvent('click'));
             }
         }
 
