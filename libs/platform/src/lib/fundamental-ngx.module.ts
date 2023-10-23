@@ -2,8 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Injector, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
-import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform/approval-flow';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
@@ -55,8 +53,6 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
     imports: [CommonModule, FormsModule],
     exports: [
         PlatformPipeModule,
-        PlatformActionBarModule,
-        PlatformActionButtonGroupModule,
         PlatformApprovalFlowModule,
         PlatformButtonModule,
         PlatformDynamicPageModule,

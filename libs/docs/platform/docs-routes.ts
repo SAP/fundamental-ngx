@@ -38,10 +38,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/platform/button').then(configurePlatformRoutes)
             },
             {
-                path: 'action-bar',
-                loadChildren: () => import('@fundamental-ngx/docs/platform/action-bar').then(configurePlatformRoutes)
-            },
-            {
                 path: 'checkbox',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/checkbox').then(configurePlatformRoutes)
             },

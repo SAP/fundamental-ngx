@@ -1,6 +1,5 @@
 export const appURLs = {
     platform: {
-        actionBar: '/action-bar',
         approvalFlow: '/approval-flow',
         button: '/button',
         checkbox: '/checkbox',

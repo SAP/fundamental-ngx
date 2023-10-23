@@ -26,7 +26,6 @@ exports.config = {
     exclude: [],
     suites: {
         platformA: [
-            './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/approval-flow.e2e-spec.ts',
             './e2e/wdio/platform/**/button.e2e-spec.ts',
@@ -69,7 +68,6 @@ exports.config = {
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
-            './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
             './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
         ],

@@ -6,7 +6,6 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    actionbar: ['ActionBarComponent', 'ActionButtonGroupComponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     formGenerator: [
@@ -75,7 +74,6 @@ export const API_FILES = {
     multiInput: ['PlatformMultiInputComponent'],
     valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
-    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
     approvalFlow: ['ApprovalFlowComponent'],
     slider: ['SliderComponent'],
     footer: ['PlatformFooterComponent'],

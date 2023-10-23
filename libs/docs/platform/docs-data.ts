@@ -8,7 +8,6 @@ export const guides: SectionInterfaceContent[] = [
 ];
 
 export const components: SectionInterfaceContent[] = [
-    { url: 'platform/action-bar', name: 'Action Bar' },
     { url: 'platform/button', name: 'Button' },
     { url: 'platform/checkbox', name: 'Checkbox' },
     { url: 'platform/checkbox-group', name: 'Checkbox Group' },

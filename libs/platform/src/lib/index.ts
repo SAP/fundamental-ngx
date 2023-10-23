@@ -1,7 +1,5 @@
 export * from './fundamental-ngx.module';
 
-export * from '@fundamental-ngx/platform/action-bar';
-export * from '@fundamental-ngx/platform/action-button-group';
 export * from '@fundamental-ngx/platform/approval-flow';
 export * from '@fundamental-ngx/platform/button';
 export * from '@fundamental-ngx/platform/dynamic-page';
