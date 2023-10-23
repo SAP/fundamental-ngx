@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Directive, HostListener, Inject, inject, Input } from '@angular/core';
+import { Directive, HostListener, inject, Input } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { FD_LANGUAGE, FdLanguage, FdLanguageKeyIdentifier, TranslationResolver } from '@fundamental-ngx/i18n';
-import { firstValueFrom, Observable } from 'rxjs';
+import { resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 
 @Directive({
     selector: '[fdMultiAnnouncer]',
@@ -16,16 +15,10 @@ export class MultiAnnouncerDirective {
     multiAnnouncerOptions: any[];
 
     /** @hidden */
-    private readonly _translationResolver = new TranslationResolver();
-
-    /** @hidden */
     private _noResultsAnnounced = false;
 
     /** @hidden */
     private _resultsAnnounced = false;
-
-    /** @hidden */
-    private _language: FdLanguage;
 
     /** @hidden */
     private _announcement = '';
@@ -34,9 +27,7 @@ export class MultiAnnouncerDirective {
     private readonly _liveAnnouncer: LiveAnnouncer = inject(LiveAnnouncer);
 
     /** @hidden */
-    constructor(@Inject(FD_LANGUAGE) private readonly _language$: Observable<FdLanguage>) {
-        this._init();
-    }
+    private resolveTranslation = resolveTranslationSyncFn();
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -44,41 +35,35 @@ export class MultiAnnouncerDirective {
         if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
             this._liveAnnouncer.clear();
             if (!this.multiAnnouncerOptions.length && !this._noResultsAnnounced) {
-                this._buildAnnouncement('noResults');
+                this._buildAnnouncement(this.resolveTranslation('coreMultiInput.noResults'));
                 this._noResultsAnnounced = true;
                 this._resultsAnnounced = false;
             } else if (this.multiAnnouncerOptions.length) {
-                this._buildAnnouncement(this.multiAnnouncerOptions.length);
+                if (this.multiAnnouncerOptions.length === 1) {
+                    this._buildAnnouncement(
+                        this.resolveTranslation('coreMultiInput.countListResultsSingular', { count: 1 })
+                    );
+                } else {
+                    this._buildAnnouncement(
+                        this.resolveTranslation('coreMultiInput.countListResultsPlural', {
+                            count: this.multiAnnouncerOptions.length
+                        })
+                    );
+                }
                 if (!this._resultsAnnounced) {
-                    this._buildAnnouncement('navigateSelectionsWithArrows');
+                    this._buildAnnouncement(this.resolveTranslation('coreMultiInput.navigateSelectionsWithArrows'));
                     this._noResultsAnnounced = false;
                     this._resultsAnnounced = true;
                 }
             }
-            this._buildAnnouncement('escapeNavigateTokens');
+            this._buildAnnouncement(this.resolveTranslation('coreMultiInput.escapeNavigateTokens'));
             this._makeAnnouncement(this._announcement);
         }
     }
 
     /** @hidden */
-    private async _init(): Promise<void> {
-        this._language = await firstValueFrom(this._language$);
-    }
-
-    /** @hidden */
-    private _buildAnnouncement(message: string | number): void {
-        this._announcement =
-            this._announcement +
-            this._translationResolver.resolve(
-                this._language,
-                (typeof message === 'string'
-                    ? 'coreMultiInput.' + message
-                    : message === 1
-                    ? 'coreMultiInput.countListResultsSingular'
-                    : 'coreMultiInput.countListResultsPlural') as FdLanguageKeyIdentifier,
-                { count: message }
-            ) +
-            ' ';
+    private _buildAnnouncement(message: string): void {
+        this._announcement = this._announcement + message + ' ';
     }
 
     /** @hidden */
