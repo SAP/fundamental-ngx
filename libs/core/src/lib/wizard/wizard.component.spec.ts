@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angu
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { WizardComponent } from './wizard.component';
 import { WizardModule } from './wizard.module';
+import { TabbableElementService } from "@fundamental-ngx/cdk/utils";
 
 @Component({
     template: `
@@ -12,7 +13,7 @@ import { WizardModule } from './wizard.module';
                         <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
                         <fd-wizard-content>
                             Wizard Content for step 1
-                            <fd-wizard-next-step> Next step </fd-wizard-next-step>
+                            <fd-wizard-next-step> <button>Next step 1</button> </fd-wizard-next-step>
                         </fd-wizard-content>
                     </li>
                     <li
@@ -23,7 +24,7 @@ import { WizardModule } from './wizard.module';
                         <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                         <fd-wizard-content>
                             Wizard Content for step 2
-                            <fd-wizard-next-step> Next step </fd-wizard-next-step>
+                            <fd-wizard-next-step> <button>Next step 2</button> </fd-wizard-next-step>
                         </fd-wizard-content>
                     </li>
                     <li
@@ -37,14 +38,14 @@ import { WizardModule } from './wizard.module';
                         <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
                         <fd-wizard-content>
                             Wizard Content for step 3
-                            <fd-wizard-next-step> Next step </fd-wizard-next-step>
+                            <fd-wizard-next-step> <button>Next step 3</button> </fd-wizard-next-step>
                         </fd-wizard-content>
                     </li>
                     <li fd-wizard-step status="upcoming" label="Step 4: Future Step">
                         <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
                         <fd-wizard-content>
                             Wizard Content for step 4
-                            <fd-wizard-next-step> Next step </fd-wizard-next-step>
+                            <fd-wizard-next-step> <button>Next step 4</button> </fd-wizard-next-step>
                         </fd-wizard-content>
                     </li>
                 </ul>
@@ -127,7 +128,7 @@ describe('WizardComponent', () => {
 
     it('should setContentTemplates', fakeAsync(() => {
         component.ngAfterViewInit();
-        tick(10);
+        tick(500);
 
         expect(component.steps.first._stepId).toBe(0);
         expect(component.steps.last._stepId).toBe(3);
@@ -138,22 +139,33 @@ describe('WizardComponent', () => {
 
     it('should handleStepOrStatusChanges', fakeAsync(() => {
         component.wrapperContainer.nativeElement.children[0].scrollTo = () => {};
+        component.appendToWizard = true;
         jest.spyOn(component.scrollbar, 'scroll');
 
         component.ngAfterViewInit();
-        tick(10);
+        tick(500);
+
+        const contentContainer = (component as any)._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[2];
+        expect(contentContainer).toBeTruthy();
+        const tabbableEl = (contentContainer?.querySelector('button, input, select, [tabindex]') as HTMLElement);
+        const viewServiceSpy = jest.spyOn(TestBed.inject(TabbableElementService), 'getTabbableElement').mockReturnValue(tabbableEl);
+
+        component.ngAfterViewInit();
+        tick(500);
 
         component.steps.first.statusChange.emit();
-        tick(10);
+        tick(500);
 
-        expect(component.scrollbar.scroll).toHaveBeenCalled();
+        expect(viewServiceSpy).toHaveBeenCalledWith(contentContainer);
+        expect(tabbableEl).toBeTruthy();
+        expect(document.activeElement).toBe(tabbableEl);
     }));
 
     it('should handleScrollSpyChange', fakeAsync(() => {
         jest.spyOn(step3.nativeElement.children[0], 'id', 'get').mockReturnValue('2');
 
         component.ngAfterViewInit();
-        tick(10);
+        tick(500);
 
         component.scrollSpyChange(step3.nativeElement);
         tick(10);
