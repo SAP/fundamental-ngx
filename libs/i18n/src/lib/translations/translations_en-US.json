@@ -169,6 +169,8 @@
     "platformApprovalFlow.watchersInputPlaceholder": "Search here..",
     "platformApprovalFlow.userListSelectedItemsCountSingular": "1 item selected",
     "platformApprovalFlow.userListSelectedItemsCountPlural": "{count} items selected",
+    "platformApprovalFlow.addNodeButtonTitle": "Add node",
+    "platformApprovalFlow.nodeMenuButtonTitle": "Menu",
     "platformApprovalFlow.statusApproved": "approved",
     "platformApprovalFlow.statusRejected": "rejected",
     "platformApprovalFlow.statusInProgress": "in progress",

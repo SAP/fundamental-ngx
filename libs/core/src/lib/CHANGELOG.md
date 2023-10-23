@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.1...v0.46.2-rc.0) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** wizard scroll and focus fixes ([#10768](https://github.com/SAP/fundamental-ngx/issues/10768)) ([8a0d2e4](https://github.com/SAP/fundamental-ngx/commit/8a0d2e431de9d2b7eb6512accac674f6e1f4eed8))
+
+
+
+
+
+## [0.46.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.5...v0.46.1) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.46.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.4...v0.46.1-rc.5) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** various carousel fixes ([#10767](https://github.com/SAP/fundamental-ngx/issues/10767)) ([623d916](https://github.com/SAP/fundamental-ngx/commit/623d91662edc790c530ab133b21c51d21c6e2af9))
+
+
+
+
+
+## [0.46.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.3...v0.46.1-rc.4) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** reactive condensed state ([#10766](https://github.com/SAP/fundamental-ngx/issues/10766)) ([94969a1](https://github.com/SAP/fundamental-ngx/commit/94969a12b7b0fb8e373e5184c586b812e78fc2f3))
+
+
+
+
+
+## [0.46.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.2...v0.46.1-rc.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** popover close strategy fix ([#10779](https://github.com/SAP/fundamental-ngx/issues/10779)) ([919abed](https://github.com/SAP/fundamental-ngx/commit/919abed746e81015b003ee40898dc9631ffa88a5))
+
+
+
+
+
+## [0.46.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.1...v0.46.1-rc.2) (2023-10-20)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.46.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.0...v0.46.1-rc.1) (2023-10-19)
+
+
+### Bug Fixes
+
+* **core:** async scenario handler ([#10761](https://github.com/SAP/fundamental-ngx/issues/10761)) ([a129f5e](https://github.com/SAP/fundamental-ngx/commit/a129f5ecd5891f33706f7b9bdd93c6236e13b881))
+* **core:** fixed range date picker premature value update ([#10757](https://github.com/SAP/fundamental-ngx/issues/10757)) ([da4b65d](https://github.com/SAP/fundamental-ngx/commit/da4b65d8c43b642c3a034c2f220b537d4dc0217c))
+* **core:** multi input new token ([#10759](https://github.com/SAP/fundamental-ngx/issues/10759)) ([b88a359](https://github.com/SAP/fundamental-ngx/commit/b88a35922c6dfe134ff2229aa8cf955344bfc6e6))
+
+
+
+
+
 ## [0.46.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.0...v0.46.1-rc.0) (2023-10-19)
 
 **Note:** Version bump only for package @fundamental-ngx/core
