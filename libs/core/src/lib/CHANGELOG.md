@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.3...v0.46.1-rc.4) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** reactive condensed state ([#10766](https://github.com/SAP/fundamental-ngx/issues/10766)) ([94969a1](https://github.com/SAP/fundamental-ngx/commit/94969a12b7b0fb8e373e5184c586b812e78fc2f3))
+
+
+
+
+
 ## [0.46.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.2...v0.46.1-rc.3) (2023-10-23)
 
 
