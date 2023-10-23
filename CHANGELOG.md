@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.4...v0.46.1-rc.5) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** various carousel fixes ([#10767](https://github.com/SAP/fundamental-ngx/issues/10767)) ([623d916](https://github.com/SAP/fundamental-ngx/commit/623d91662edc790c530ab133b21c51d21c6e2af9))
+
+
+
+
+
 ## [0.46.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.3...v0.46.1-rc.4) (2023-10-23)
 
 
