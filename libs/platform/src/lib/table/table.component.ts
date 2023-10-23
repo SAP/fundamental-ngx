@@ -41,7 +41,8 @@ import {
     RangeSelector,
     RepeatDirective,
     resizeObservable,
-    RtlService
+    RtlService,
+    TabbableElementService
 } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import {
@@ -767,7 +768,8 @@ export class TableComponent<T = any>
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector
+        readonly injector: Injector,
+        private readonly _tabbableService: TabbableElementService
     ) {
         super();
         this.initialState?.setTable(this);
@@ -1465,14 +1467,11 @@ export class TableComponent<T = any>
 
         if (event && event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
             const eventTarget = event.target as HTMLElement;
-            const inputs = eventTarget.querySelectorAll(
-                'input:not(:disabled), button:not(:disabled), textarea:not(:disabled)'
-            );
-            if (inputs && inputs.length) {
+            const tabbableElement = this._tabbableService.getTabbableElement(eventTarget, false, true);
+            if (tabbableElement) {
                 event.preventDefault();
-                const firstElement = Array.from(inputs)[0] as HTMLElement;
-                firstElement.focus();
-                firstElement.dispatchEvent(new MouseEvent('click'));
+                tabbableElement.focus();
+                tabbableElement.dispatchEvent(new MouseEvent('click'));
             }
         }
 
