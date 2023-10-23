@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.4...v0.46.1-rc.5) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** various carousel fixes ([#10767](https://github.com/SAP/fundamental-ngx/issues/10767)) ([623d916](https://github.com/SAP/fundamental-ngx/commit/623d91662edc790c530ab133b21c51d21c6e2af9))
+
+
+
+
+
+## [0.46.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.3...v0.46.1-rc.4) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** reactive condensed state ([#10766](https://github.com/SAP/fundamental-ngx/issues/10766)) ([94969a1](https://github.com/SAP/fundamental-ngx/commit/94969a12b7b0fb8e373e5184c586b812e78fc2f3))
+
+
+
+
+
+## [0.46.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.2...v0.46.1-rc.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** popover close strategy fix ([#10779](https://github.com/SAP/fundamental-ngx/issues/10779)) ([919abed](https://github.com/SAP/fundamental-ngx/commit/919abed746e81015b003ee40898dc9631ffa88a5))
+* **docs:** illustrated message async data example ([#10780](https://github.com/SAP/fundamental-ngx/issues/10780)) ([58afe79](https://github.com/SAP/fundamental-ngx/commit/58afe79fcf0632eab38e8f14f853b2f94030d0d3))
+
+
+
+
+
+## [0.46.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.1...v0.46.1-rc.2) (2023-10-20)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.46.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.0...v0.46.1-rc.1) (2023-10-19)
 
 

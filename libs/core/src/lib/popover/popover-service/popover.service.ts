@@ -131,17 +131,17 @@ export class PopoverService extends BasePopoverClass {
 
     /** Closes the popover. */
     close(focusActiveElement = true): void {
-        if (this._overlayRef && this._overlayRef.hasAttached()) {
+        if (this._overlayRef) {
             this._overlayRef.dispose();
-
-            const prevState = this.isOpen;
-            this.isOpen = false;
-            if (prevState !== this.isOpen) {
-                this.isOpenChange.emit(this.isOpen);
-            }
-
-            this._focusLastActiveElementBeforeOpen(focusActiveElement);
         }
+
+        const prevState = this.isOpen;
+        this.isOpen = false;
+        if (prevState !== this.isOpen) {
+            this.isOpenChange.emit(this.isOpen);
+        }
+
+        this._focusLastActiveElementBeforeOpen(focusActiveElement);
     }
 
     /** Opens the popover. */
