@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.2...v0.46.1-rc.3) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** popover close strategy fix ([#10779](https://github.com/SAP/fundamental-ngx/issues/10779)) ([919abed](https://github.com/SAP/fundamental-ngx/commit/919abed746e81015b003ee40898dc9631ffa88a5))
+
+
+
+
+
 ## [0.46.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.1...v0.46.1-rc.2) (2023-10-20)
 
 **Note:** Version bump only for package @fundamental-ngx/core
