@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { CarouselItemInterface } from '../carousel.service';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { CarouselItemInterface } from '../carousel.service';
 
 export type Visibility = 'visible' | 'hidden';
 
@@ -10,6 +10,17 @@ let carouselItemCounter = 0;
 @Component({
     selector: 'fd-carousel-item',
     templateUrl: './carousel-item.component.html',
+    styles: [
+        `
+            .fd-carousel__slides {
+                min-width: initial !important;
+            }
+            .fd-carousel__item--active {
+                display: flex;
+                max-width: 100%;
+            }
+        `
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
