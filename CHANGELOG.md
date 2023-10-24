@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.1...v0.46.2-rc.2) (2023-10-24)
+
+
+### Bug Fixes
+
+* **e2e:** core calendar fix ([#10788](https://github.com/SAP/fundamental-ngx/issues/10788)) ([7f7a06b](https://github.com/SAP/fundamental-ngx/commit/7f7a06b90c3c89a22f8251b5fd7ddc4f24269281))
+
+
+
+
+
+## [0.46.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.0...v0.46.2-rc.1) (2023-10-23)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
 ## [0.46.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.1...v0.46.2-rc.0) (2023-10-23)
 
 
