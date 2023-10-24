@@ -37,7 +37,7 @@ import {
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
-    ContentDensityModule,
+    ContentDensityDirective,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
@@ -101,7 +101,7 @@ let deprecationWarningShown = false;
         ListSecondaryDirective,
         SearchHighlightPipe,
         FdTranslatePipe,
-        ContentDensityModule,
+        ContentDensityDirective,
         MultiAnnouncerDirective
     ]
 })
