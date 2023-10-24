@@ -261,6 +261,8 @@ describe('calendar test suite', () => {
             const today = new Date();
             const endDate = new Date(today);
             endDate.setDate(today.getDate() + 7);
+            const nextDayAfterEndDate = new Date();
+            nextDayAfterEndDate.setDate(endDate.getDate() + 1);
 
             if (endDate.getDate() < today.getDate()) {
                 await click(nextMonthButton);
@@ -276,9 +278,7 @@ describe('calendar test suite', () => {
             expect(
                 await (
                     await $(
-                        `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${
-                            endDate.getDate() + 1
-                        }"]:not(.fd-calendar__item--other)`
+                        `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${nextDayAfterEndDate.getDay()}"]:not(.fd-calendar__item--other)`
                     )
                 ).getAttribute('class')
             ).not.toContain('-legend-');
