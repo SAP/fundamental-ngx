@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.1...v0.46.2-rc.2) (2023-10-24)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.46.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.0...v0.46.2-rc.1) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.46.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.1...v0.46.2-rc.0) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.46.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.5...v0.46.1) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.46.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.4...v0.46.1-rc.5) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.46.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.3...v0.46.1-rc.4) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+## [0.46.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.2...v0.46.1-rc.3) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 ## [0.46.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.1...v0.46.1-rc.2) (2023-10-20)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk
