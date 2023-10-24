@@ -415,6 +415,9 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     readonly optionItems$ = new BehaviorSubject<_OptionItem<ItemType, ValueType>[]>([]);
 
     /** @hidden */
+    readonly _onlySelected$ = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
     readonly _searchTermCtrl = new FormControl('');
 
     /** @hidden */
@@ -603,6 +606,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         if (!this.open) {
             this._resetSearchTerm();
             this.enableParentFocusTrap();
+            this._onlySelected$.next(false);
         } else {
             this.disableParentFocusTrap();
 
@@ -780,6 +784,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
 
     /** @hidden */
     _moreClicked(): void {
+        this._onlySelected$.next(true);
         this.openChangeHandle(true);
     }
 
@@ -962,16 +967,24 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         return combineLatest([
             this._searchTermCtrl.valueChanges.pipe(startWith(this._searchTermCtrl.value)),
             this._selectionModel.selectionChanged.pipe(startWith(null)),
+            this._onlySelected$,
             this.optionItems$
         ]).pipe(
             map(() => {
                 // not using "searchTerm" value from combineLatest as it will be wrong for late subscribers, if any
                 const searchTerm = this._searchTermCtrl.value ?? '';
                 const filtered = this.filterFn(this.dropdownValues, searchTerm);
-                const displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
+                const onlySelected = this._onlySelected$.value;
+                let displayedOptions = (Array.isArray(filtered) ? filtered : []).map((item) =>
                     this._getOptionItem(item)
                 );
+
                 displayedOptions.forEach((c) => (c.isSelected = this._selectionModel.isSelected(c.id)));
+
+                if (onlySelected) {
+                    displayedOptions = displayedOptions.filter((item) => item.isSelected);
+                }
+
                 return { selectedOptions: this._selectionModel.selected, displayedOptions };
             })
         );
