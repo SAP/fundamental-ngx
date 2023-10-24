@@ -95,7 +95,8 @@ export interface MatchingBy {
 
 /** Matching Strategy: StartsWithPerTerm - Reqexp */
 export function getMatchingStrategyStartsWithPerTermReqexp(value: string): RegExp {
-    return new RegExp(`(\\s|^)(${value})`, 'gi');
+    // We need to escape all special characters in order not to break the regular expression.
+    return new RegExp(`(\\s|^)(${value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
 }
 
 /** @hidden */
