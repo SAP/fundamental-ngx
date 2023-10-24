@@ -58,7 +58,7 @@ export async function goBack(): Promise<void> {
     await browser.back();
 }
 
-export async function refreshPage(isFullRefresh = false): Promise<void> {
+export async function refreshPage(isFullRefresh = true): Promise<void> {
     try {
         // alerts block any interactions with the page
         await browser.dismissAlert();
