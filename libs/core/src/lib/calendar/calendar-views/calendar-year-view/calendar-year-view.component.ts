@@ -1,29 +1,29 @@
 import {
-    Component,
-    OnInit,
-    ViewEncapsulation,
-    Output,
-    Input,
-    EventEmitter,
-    ElementRef,
-    OnDestroy,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Inject,
+    Input,
     OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
     SimpleChanges,
-    Inject
+    ViewEncapsulation
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { CalendarService } from '../../calendar.service';
-import { CalendarYearGrid, CalendarYear } from '../../models/calendar-year-grid';
-import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
-import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { CalendarService } from '../../calendar.service';
+import { CalendarYear, CalendarYearGrid } from '../../models/calendar-year-grid';
+import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 
 /** Component representing the YearView of the Calendar Component. */
 @Component({
@@ -36,7 +36,7 @@ import { NgFor } from '@angular/common';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgFor, ButtonModule]
+    imports: [NgFor, ButtonModule, FdTranslatePipe]
 })
 export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */
@@ -85,32 +85,6 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
      */
     _firstYearInList: number;
 
-    /**
-     * @hidden
-     * Today cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _todayAriaLabel(): string {
-        return this._calendarI18nLabels.todayLabel;
-    }
-
-    /**
-     * @hidden
-     * Selected date cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _selectedDateAriaLabel(): string {
-        return this._calendarI18nLabels.dateSelectedLabel;
-    }
-
-    /**
-     * @hidden
-     * View description
-     */
-    get _viewRoleDescription(): string {
-        return this._calendarI18nLabels.calendarYearsViewDescription;
-    }
-
     /** View ID */
     get viewId(): string {
         return this.id + '-year-view';
@@ -147,8 +121,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _calendarI18nLabels: CalendarI18nLabels
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
         // default values
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());
