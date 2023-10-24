@@ -16,15 +16,15 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
+import { NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarYearGrid } from '../../models/calendar-year-grid';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
-import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'fd-calendar-aggregated-year-view',
@@ -36,7 +36,7 @@ import { NgFor } from '@angular/common';
         '[attr.id]': 'viewId'
     },
     standalone: true,
-    imports: [NgFor, ButtonModule]
+    imports: [NgFor, ButtonModule, FdTranslatePipe]
 })
 export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** Parameter used in id of years used for help with focusing on the correct element during keyboard navigation. */
@@ -66,32 +66,6 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
     /** Event fired when a year is selected. */
     @Output()
     readonly yearsClicked: EventEmitter<AggregatedYear> = new EventEmitter<AggregatedYear>();
-
-    /**
-     * @hidden
-     * Today cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _todayAriaLabel(): string {
-        return this._calendarI18nLabels.todayLabel;
-    }
-
-    /**
-     * @hidden
-     * Selected date cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _selectedDateAriaLabel(): string {
-        return this._calendarI18nLabels.dateSelectedLabel;
-    }
-
-    /**
-     * @hidden
-     * View description
-     */
-    get _viewRoleDescription(): string {
-        return this._calendarI18nLabels.calendarYearsRangeViewDescription;
-    }
 
     /**
      * View ID
@@ -161,8 +135,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>,
-        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _calendarI18nLabels: CalendarI18nLabels
+        @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {
         // default values
         this._currentYear = _dateTimeAdapter.getYear(_dateTimeAdapter.today());

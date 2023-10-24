@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.2...v0.46.2-rc.3) (2023-10-24)
+
+
+### Features
+
+* **core:** calendar now uses i18n package for translating labels ([#10748](https://github.com/SAP/fundamental-ngx/issues/10748)) ([38376f8](https://github.com/SAP/fundamental-ngx/commit/38376f83617ff77d00034ff0f5868af0ee6f4fbe))
+
+
+
+
+
 ## [0.46.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.1...v0.46.2-rc.2) (2023-10-24)
 
 **Note:** Version bump only for package @fundamental-ngx/core
