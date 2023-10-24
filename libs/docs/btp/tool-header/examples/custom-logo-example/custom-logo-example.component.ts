@@ -19,7 +19,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
                 fdbToolHeaderLogo
             />
             <fdb-tool-header-actions>
-                <ng-template label="Action 1" glyph="add" fdbToolHeaderAction>
+                <ng-template fdbToolHeaderAction>
                     <button fd-button fdbToolHeaderButton ariaLabel="Action 1" glyph="add"></button>
                 </ng-template>
             </fdb-tool-header-actions>
@@ -30,9 +30,9 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
         ToolHeaderAutoModeDirective,
         ToolHeaderLogoDirective,
         ToolHeaderActionsDirective,
-        ToolHeaderActionDirective,
         ButtonComponent,
-        ToolHeaderButtonDirective
+        ToolHeaderButtonDirective,
+        ToolHeaderActionDirective
     ],
     standalone: true
 })

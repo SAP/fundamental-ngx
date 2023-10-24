@@ -1,39 +1,26 @@
 @import 'fundamental-styles/dist/tool-header';
 
-.fd-popover__body.fdb-tool-header-actions-overflow-popover-body {
-    --fdPopover_Offset: 0.3875rem;
+.fd-tool-header__group {
+    gap: 0;
+}
 
-    width: auto;
-    height: auto;
-    padding: 0.5rem;
+.fd-overflow-layout__items
+    > .fd-overflow-layout__item:not(.fd-overflow-layout__item--last)
+    > .fd-tool-header__element
+    > * {
+    margin-right: 0.375rem;
+}
 
-    background: var(--sapGroup_ContentBackground);
-    border: none;
-    border-radius: 0.5rem;
+.fd-tool-header__group--center + .fd-tool-header__group--actions {
+    max-width: calc((100% - 16rem) / 2); /* Width of the search field is 16rem */
+}
 
-    box-shadow: var(--sapMenu_Shadow1);
+.fd-tool-header__element.is-separator + .fd-tool-header__element.is-separator {
+    display: none;
+}
 
-    .fd-menu {
-        --fdMenu_Item_Spacing_Left: 0;
-        //--fdMenu_Item_Spacing_Right: 0;
-
-        .fd-menu__link {
-            --fdMenu_Link_Height: 2rem;
-            border-radius: 0.375rem;
-            &:focus:after {
-                display: none;
-            }
-            &:focus:before {
-                border: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
-                border-radius: 0.375rem;
-                top: 0.125rem;
-                bottom: 0.125rem;
-                left: 0.125rem;
-                right: 0.125rem;
-                content: '';
-                pointer-events: none;
-                position: absolute;
-            }
-        }
-    }
+.fd-tool-header__navigation-menu {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
 }

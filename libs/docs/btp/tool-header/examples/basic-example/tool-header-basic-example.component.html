@@ -13,14 +13,8 @@
 >
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
 
-    <fdb-tool-header-actions [actions]="actions">
-        <ng-template
-            fdbToolHeaderAction
-            [forceVisibility]="true"
-            label="Notifications"
-            glyph="bell"
-            (clicked)="notificationsActionClicked()"
-        >
+    <fdb-tool-header-actions>
+        <ng-template fdbToolHeaderAction forceVisibility>
             <fd-popover [noArrow]="false">
                 <fd-popover-control>
                     <button fd-button fdbToolHeaderButton [glyph]="'bell'" [ariaLabel]="'Notifications'">
@@ -43,6 +37,21 @@
                 </div>
             </fd-popover>
         </ng-template>
+
+        <ng-container *ngFor="let action of actions; let index = index">
+            <ng-template fdbToolHeaderAction>
+                <button
+                    fd-button
+                    fdbToolHeaderButton
+                    [glyph]="action.glyph"
+                    [ariaLabel]="action.label"
+                    (click)="action.clickCallback()"
+                >
+                    <fd-button-badge *ngIf="action.hasBadge" />
+                </button>
+            </ng-template>
+            <fdb-tool-header-action-separator *ngIf="index % 3 === 0" />
+        </ng-container>
     </fdb-tool-header-actions>
 
     <fd-avatar

@@ -1,7 +1,75 @@
 <fdb-tool-header productName="Fundamental-ngx" secondTitle="Angular" fdbToolHeaderAutoMode #toolHeaderComponent>
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
 
-    <fdb-tool-header-actions [actions]="actions"></fdb-tool-header-actions>
+    <fdb-tool-header-actions>
+        <ng-template fdbToolHeaderAction forceVisibility>
+            <fd-popover [noArrow]="false">
+                <fd-popover-control>
+                    <button fd-button fdbToolHeaderButton [glyph]="'bell'" [ariaLabel]="'Notifications'">
+                        <fd-button-badge />
+                    </button>
+                </fd-popover-control>
+                <div
+                    *fdPopoverBody
+                    [ngStyle]="{
+                        padding: '0.5rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.5rem'
+                    }"
+                >
+                    <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
+                    <fd-message-strip *fdkRepeat="10; let index = index">
+                        A new notification has arrived. {{ index }}
+                    </fd-message-strip>
+                </div>
+            </fd-popover>
+        </ng-template>
+        <ng-container *ngFor="let action of actions; let index = index">
+            <ng-template fdbToolHeaderAction [forceVisibility]="action.forceVisibility" let-hidden="hidden">
+                <button
+                    *ngIf="!hidden; else hiddenTemplate"
+                    fd-button
+                    fdbToolHeaderButton
+                    [glyph]="action.glyph"
+                    [ariaLabel]="action.label"
+                    (click)="action.clickCallback()"
+                >
+                    <fd-button-badge *ngIf="action.hasBadge" />
+                </button>
+                <ng-template #hiddenTemplate>
+                    <fdb-navigation-menu-item
+                        (click)="action.clickCallback()"
+                        [glyph]="action.glyph"
+                        [label]="action.label"
+                    />
+                </ng-template>
+            </ng-template>
+            <fdb-tool-header-action-separator *ngIf="index % 3 === 0" />
+        </ng-container>
+    </fdb-tool-header-actions>
+
+    <fd-avatar
+        fdbToolHeaderUser
+        [fdMenuTrigger]="userMenu"
+        role="button"
+        [circle]="true"
+        glyph="account"
+        size="xs"
+        [clickable]="true"
+    ></fd-avatar>
+    <fd-menu #userMenu>
+        <li fd-menu-item>
+            <a fd-menu-interactive>
+                <fd-menu-addon glyph="system-exit-2"></fd-menu-addon>
+                <span fd-menu-title> Log out </span>
+            </a>
+        </li>
+    </fd-menu>
+
+    <fdb-tool-header-product-switch>
+        <fd-product-switch-body [products]="productSwitcher"></fd-product-switch-body>
+    </fdb-tool-header-product-switch>
 </fdb-tool-header>
 
 <div [style.margin-top.rem]="2">

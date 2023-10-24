@@ -1,5 +1,6 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { PortalModule } from '@angular/cdk/portal';
 import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
@@ -23,7 +24,7 @@ import {
 } from '@fundamental-ngx/btp/navigation-menu';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
-import { FD_PRODUCT_SWITCH_COMPONENT, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/core';
+import { FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -37,46 +38,23 @@ import {
     MenuTriggerDirective
 } from '@fundamental-ngx/core/menu';
 import {
-    OverflowExpandDirective,
+    OverflowItemRef,
     OverflowItemRefDirective,
     OverflowLayoutComponent,
     OverflowLayoutItemDirective
 } from '@fundamental-ngx/core/overflow-layout';
 import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FD_PRODUCT_SWITCH_COMPONENT } from '@fundamental-ngx/core/product-switch';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subscription, first } from 'rxjs';
+import { ToolHeaderActionContext, ToolHeaderActionDirective } from '../../directives/tool-header-action.directive';
 import { ToolHeaderActionsDirective } from '../../directives/tool-header-actions.directive';
 import { ToolHeaderElementDirective } from '../../directives/tool-header-element.directive';
 import { ToolHeaderGroupDirective } from '../../directives/tool-header-group.directive';
 import { ToolHeaderLogoDirective } from '../../directives/tool-header-logo.directive';
 import { ToolHeaderUserDirective } from '../../directives/tool-header-user.directive';
+import { ToolHeaderActionClass } from '../../tool-header-action.class';
 import { ToolHeaderComponentClass } from '../../tool-header-component.class';
-
-const imports = [
-    ToolHeaderGroupDirective,
-    NgIf,
-    NgTemplateOutlet,
-    OverflowLayoutComponent,
-    NgForOf,
-    OverflowLayoutItemDirective,
-    OverflowItemRefDirective,
-    OverflowExpandDirective,
-    PopoverComponent,
-    PopoverControlComponent,
-    PopoverBodyDirective,
-    MenuTriggerDirective,
-    MenuComponent,
-    MenuItemComponent,
-    MenuInteractiveComponent,
-    MenuTitleDirective,
-    MenuAddonDirective,
-    GlyphMenuAddonDirective,
-    ToolHeaderElementDirective,
-    IconComponent,
-    ButtonComponent,
-    ToolHeaderLogoDirective,
-    FdTranslatePipe
-];
 
 @Component({
     selector: 'fdb-tool-header',
@@ -90,7 +68,25 @@ const imports = [
         '[class.fd-tool-header--menu]': 'showMenuButton'
     },
     imports: [
-        imports,
+        ToolHeaderGroupDirective,
+        NgIf,
+        NgTemplateOutlet,
+        NgForOf,
+        PopoverComponent,
+        PopoverControlComponent,
+        MenuTriggerDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        MenuTitleDirective,
+        MenuAddonDirective,
+        GlyphMenuAddonDirective,
+        ToolHeaderElementDirective,
+        IconComponent,
+        ButtonComponent,
+        ToolHeaderButtonDirective,
+        ToolHeaderLogoDirective,
+        FdTranslatePipe,
         NavigationMenuComponent,
         NavigationMenuItemComponent,
         FocusableListDirective,
@@ -98,7 +94,11 @@ const imports = [
         NavigationMenuPopoverComponent,
         NavigationMenuPopoverControlDirective,
         AsyncPipe,
-        ToolHeaderButtonDirective
+        OverflowLayoutComponent,
+        OverflowLayoutItemDirective,
+        OverflowItemRefDirective,
+        PopoverBodyDirective,
+        PortalModule
     ],
     providers: [
         contentDensityObserverProviders(),
@@ -117,7 +117,6 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
      * Second Title is an optional second text identifier of the tool.
      **/
     @Input() secondTitle?: string;
-
     /** Mode */
     @Input('mode')
     set _mode(mode: FdbViewMode) {
@@ -205,6 +204,9 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
     _toolHeaderProductSwitch?: unknown;
 
     /** @hidden */
+    protected _hiddenActions: OverflowItemRef<ToolHeaderActionDirective>[] = [];
+
+    /** @hidden */
     private _searchFieldOutsideClickSubscription?: Subscription;
 
     /** @hidden */
@@ -263,5 +265,22 @@ export class ToolHeaderComponent extends ToolHeaderComponentClass implements OnD
         } else {
             this.menuExpand.emit();
         }
+    }
+
+    /** @hidden */
+    protected _handleHiddenItemsChange($event: OverflowItemRef<ToolHeaderActionDirective>[]): void {
+        this._hiddenActions = $event.reduce((acc: OverflowItemRef<ToolHeaderActionDirective>[], i) => {
+            if (!i.item.isSeparator) {
+                acc.push(i);
+            }
+            return acc;
+        }, []);
+    }
+
+    /** @hidden */
+    protected _overflownActionContext(action: ToolHeaderActionClass): ToolHeaderActionContext {
+        return {
+            hidden: true
+        };
     }
 }

@@ -1,3 +1,6 @@
+import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
@@ -17,8 +20,12 @@ import {
     Renderer2,
     SimpleChanges
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { merge, Subject } from 'rxjs';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
+import { intersectionObservable, KeyUtil } from '../../functions';
+import { destroyObservable } from '../../helpers';
+import { Nullable } from '../../models/nullable';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItem,
@@ -26,17 +33,10 @@ import {
     FocusableObserver,
     isItemFocusable
 } from '../focusable-item';
-import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
-import { merge, Subject } from 'rxjs';
-import { Nullable } from '../../models/nullable';
-import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { intersectionObservable, KeyUtil } from '../../functions';
-import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
-import { scrollIntoView, ScrollPosition } from './scroll';
+import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
 import { getItemElement } from '../focusable-item/get-item-element';
-import { destroyObservable } from '../../helpers';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
+import { scrollIntoView, ScrollPosition } from './scroll';
 
 export interface FocusableListItemFocusedEvent {
     index: number;
@@ -90,8 +90,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     /**
      * Configures wrapping mode which determines whether the active item will wrap to the other end of list when there are no more items in the given direction.
      */
-    @Input()
-    wrap = false;
+    @Input({ transform: coerceBooleanProperty })
+    wrap: BooleanInput = false;
 
     /** Function, which returns a string to be announced by screen-reader whenever an row which is in grid receives focus. */
     @Input()
@@ -396,7 +396,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                     this._initializeFocusManager(items, {
                         direction,
                         contentDirection: this.contentDirection,
-                        wrap: this.wrap
+                        wrap: !!this.wrap
                     });
                 }),
                 takeUntil(refresh$)

@@ -1,4 +1,4 @@
-import { NgIf, NgStyle } from '@angular/common';
+import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
@@ -7,6 +7,7 @@ import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import {
     FdbToolHeaderActionButton,
     ToolHeaderActionDirective,
+    ToolHeaderActionSeparatorComponent,
     ToolHeaderActionsDirective,
     ToolHeaderComponent,
     ToolHeaderUserDirective
@@ -55,13 +56,15 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverControlComponent,
         PopoverBodyDirective,
         RepeatDirective,
-        ToolHeaderActionDirective,
+        ToolHeaderButtonDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,
         ContentDensityDirective,
-        ButtonBadgeDirective,
-        ToolHeaderButtonDirective
+        ToolHeaderActionDirective,
+        NgForOf,
+        ToolHeaderActionSeparatorComponent,
+        ButtonBadgeDirective
     ],
     standalone: true
 })
@@ -73,35 +76,60 @@ export class ToolHeaderBasicExampleComponent {
 
     searchValue: string;
 
-    actions: Array<FdbToolHeaderActionButton[]> = [
-        [
-            {
-                label: 'Source Code',
-                glyph: 'source-code',
-                clickCallback: () => {
-                    console.log('Source code');
-                },
-                forceVisibility: false
+    actions: FdbToolHeaderActionButton[] = [
+        {
+            label: 'Source Code',
+            glyph: 'source-code',
+            clickCallback: () => {
+                console.log('Source code');
             }
-        ],
-        [
-            {
-                label: 'Settings',
-                glyph: 'settings',
-                clickCallback: () => {
-                    console.log('Settings');
-                },
-                forceVisibility: false
+        },
+        {
+            label: 'Settings',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
             }
-        ]
+        },
+        {
+            label: 'Something',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
+            }
+        },
+        {
+            label: 'Something',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
+            }
+        },
+        {
+            label: 'Something',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
+            }
+        },
+        {
+            label: 'Something',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
+            }
+        },
+        {
+            label: 'Something',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
+            }
+        }
     ];
 
     valueUpdate($event: string) {
         console.log($event);
         this.searchValue = $event;
-    }
-
-    notificationsActionClicked() {
-        console.log('notificationsActionClicked');
     }
 }

@@ -1,3 +1,4 @@
+export * from './components/tool-header-action-separator.component';
 export * from './components/tool-header-product-switch.component';
 export * from './components/tool-header/tool-header.component';
 export * from './directives/tool-header-action.directive';
