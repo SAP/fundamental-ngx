@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.6...v0.46.2-rc.7) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core,platform:** table cell focus issue ([#10755](https://github.com/SAP/fundamental-ngx/issues/10755)) ([dda7f78](https://github.com/SAP/fundamental-ngx/commit/dda7f78cdaa5001db68e11f9cb567a440f5b5945))
+
+
+
+
+
 ## [0.46.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.5...v0.46.2-rc.6) (2023-10-25)
 
 
