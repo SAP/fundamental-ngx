@@ -134,7 +134,11 @@
             </li>
 
             <li
-                *ngIf="showAllButton && viewModel.displayedOptions.length < dropdownValues.length"
+                *ngIf="
+                    showAllButton &&
+                    (_onlySelected$ | async) !== true &&
+                    viewModel.displayedOptions.length < dropdownValues.length
+                "
                 fd-list-item
                 class="fd-multi-input-show-all"
                 (keyDown)="_showAllKeyDown($event)"
