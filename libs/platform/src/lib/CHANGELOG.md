@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.6...v0.46.2-rc.7) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core,platform:** table cell focus issue ([#10755](https://github.com/SAP/fundamental-ngx/issues/10755)) ([dda7f78](https://github.com/SAP/fundamental-ngx/commit/dda7f78cdaa5001db68e11f9cb567a440f5b5945))
+* **platform:** special characters escape ([#10789](https://github.com/SAP/fundamental-ngx/issues/10789)) ([5055130](https://github.com/SAP/fundamental-ngx/commit/5055130ca6edb6ae02f582c6b34d959d8b77aebe))
+
+
+### Features
+
+* **core,platform:** combobox custom templates ([#10785](https://github.com/SAP/fundamental-ngx/issues/10785)) ([4e6be6e](https://github.com/SAP/fundamental-ngx/commit/4e6be6e577b80333f4e746f73e7a675a5ba880f9))
+
+
+
+
+
+## [0.46.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.5...v0.46.2-rc.6) (2023-10-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.46.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.4...v0.46.2-rc.5) (2023-10-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.46.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.3...v0.46.2-rc.4) (2023-10-25)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.46.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.2...v0.46.2-rc.3) (2023-10-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.46.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.1...v0.46.2-rc.2) (2023-10-24)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.46.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.0...v0.46.2-rc.1) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
+## [0.46.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.1...v0.46.2-rc.0) (2023-10-23)
+
+**Note:** Version bump only for package @fundamental-ngx/platform
+
+
+
+
+
 ## [0.46.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.5...v0.46.1) (2023-10-23)
 
 **Note:** Version bump only for package @fundamental-ngx/platform

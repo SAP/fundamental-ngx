@@ -3,6 +3,97 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.6...v0.46.2-rc.7) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core,platform:** table cell focus issue ([#10755](https://github.com/SAP/fundamental-ngx/issues/10755)) ([dda7f78](https://github.com/SAP/fundamental-ngx/commit/dda7f78cdaa5001db68e11f9cb567a440f5b5945))
+* **platform:** special characters escape ([#10789](https://github.com/SAP/fundamental-ngx/issues/10789)) ([5055130](https://github.com/SAP/fundamental-ngx/commit/5055130ca6edb6ae02f582c6b34d959d8b77aebe))
+
+
+### Features
+
+* **core,platform:** combobox custom templates ([#10785](https://github.com/SAP/fundamental-ngx/issues/10785)) ([4e6be6e](https://github.com/SAP/fundamental-ngx/commit/4e6be6e577b80333f4e746f73e7a675a5ba880f9))
+
+
+
+
+
+## [0.46.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.5...v0.46.2-rc.6) (2023-10-25)
+
+
+### Features
+
+* **core:** icon component text and background color ([#10791](https://github.com/SAP/fundamental-ngx/issues/10791)) ([a61c9ff](https://github.com/SAP/fundamental-ngx/commit/a61c9ff13ccdba4aff71dceac10da179bde7e551))
+
+
+
+
+
+## [0.46.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.4...v0.46.2-rc.5) (2023-10-25)
+
+
+### Bug Fixes
+
+* **e2e:** another calendar e2e fix ([#10795](https://github.com/SAP/fundamental-ngx/issues/10795)) ([fb857e8](https://github.com/SAP/fundamental-ngx/commit/fb857e80c0dc09f983c98b78bd5e46ec0d54aaf4))
+
+
+
+
+
+## [0.46.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.3...v0.46.2-rc.4) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core:** multi input more button dropdown values ([#10787](https://github.com/SAP/fundamental-ngx/issues/10787)) ([738914d](https://github.com/SAP/fundamental-ngx/commit/738914d6e262c749c87ed07ad55cb102f8c0598c))
+
+
+
+
+
+## [0.46.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.2...v0.46.2-rc.3) (2023-10-24)
+
+
+### Features
+
+* **core:** calendar now uses i18n package for translating labels ([#10748](https://github.com/SAP/fundamental-ngx/issues/10748)) ([38376f8](https://github.com/SAP/fundamental-ngx/commit/38376f83617ff77d00034ff0f5868af0ee6f4fbe))
+
+
+
+
+
+## [0.46.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.1...v0.46.2-rc.2) (2023-10-24)
+
+
+### Bug Fixes
+
+* **e2e:** core calendar fix ([#10788](https://github.com/SAP/fundamental-ngx/issues/10788)) ([7f7a06b](https://github.com/SAP/fundamental-ngx/commit/7f7a06b90c3c89a22f8251b5fd7ddc4f24269281))
+
+
+
+
+
+## [0.46.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.0...v0.46.2-rc.1) (2023-10-23)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.46.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.1...v0.46.2-rc.0) (2023-10-23)
+
+
+### Bug Fixes
+
+* **core:** wizard scroll and focus fixes ([#10768](https://github.com/SAP/fundamental-ngx/issues/10768)) ([8a0d2e4](https://github.com/SAP/fundamental-ngx/commit/8a0d2e431de9d2b7eb6512accac674f6e1f4eed8))
+
+
+
+
+
 ## [0.46.1](https://github.com/SAP/fundamental-ngx/compare/v0.46.1-rc.5...v0.46.1) (2023-10-23)
 
 **Note:** Version bump only for package fundamental-ngx

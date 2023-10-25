@@ -16,6 +16,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ContentChildren,
     ElementRef,
     EventEmitter,
@@ -55,7 +56,7 @@ import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteDirective, DisplayFnPipe, SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ContentDensityModule,
     ContentDensityObserver,
@@ -67,9 +68,10 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { PopoverBodyComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ComboboxItem } from './combobox-item';
+import { ComboboxItemDirective } from './combobox-item.directive';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
+import { COMBOBOX_COMPONENT, ComboboxInterface, ComboboxItemDirectiveContext } from './combobox.interface';
 import { GroupFunction, ListGroupPipe } from './list-group.pipe';
 import { FD_COMBOBOX_COMPONENT } from './tokens';
 
@@ -124,7 +126,7 @@ let comboboxUniqueId = 0;
         InputGroupModule,
         FormsModule,
         AutoCompleteDirective,
-        ButtonModule,
+        ButtonComponent,
         IconComponent,
         ContentDensityModule,
         NgFor,
@@ -134,7 +136,7 @@ let comboboxUniqueId = 0;
         ListGroupPipe
     ]
 })
-export class ComboboxComponent
+export class ComboboxComponent<T = any>
     implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, FormItemControl
 {
     /** Id for the Combobox. */
@@ -159,7 +161,7 @@ export class ComboboxComponent
 
     /** Values to be filtered in the search input. */
     @Input()
-    dropdownValues: any[] = [];
+    dropdownValues: T[] = [];
 
     /** Filter function. Accepts an array of objects and a search term as arguments
      * and returns a string. See search input examples for details. */
@@ -219,7 +221,7 @@ export class ComboboxComponent
      * Use it by passing an ng-template with implicit content. See examples for more info.
      */
     @Input()
-    itemTemplate: TemplateRef<any>;
+    itemTemplate: TemplateRef<ComboboxItemDirectiveContext<T>>;
 
     /**
      * Function used to handle grouping of items.
@@ -360,6 +362,10 @@ export class ComboboxComponent
     @ViewChild('listTemplate')
     listTemplate: TemplateRef<HTMLElement>;
 
+    /** @hidden */
+    @ContentChild(ComboboxItemDirective)
+    private readonly _comboboxItemRenderer: ComboboxItemDirective;
+
     /** Whether the matching string should be highlighted after combobox value is selected. */
     filterHighlight = true;
 
@@ -399,6 +405,11 @@ export class ComboboxComponent
 
     /** @hidden */
     clearInputBtnFocused = false;
+
+    /** @hidden */
+    get _customRenderer(): Nullable<TemplateRef<ComboboxItemDirectiveContext<T>>> {
+        return this._comboboxItemRenderer?.templateRef || this.itemTemplate;
+    }
 
     /** @hidden */
     private _subscriptions = new Subscription();

@@ -1,32 +1,23 @@
 import { Attribute, Directive } from '@angular/core';
-
-import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[fd-calendar-close-button]',
     host: {
         class: 'fd-calendar__close-button',
-        '[attr.aria-label]': '_ariaLabel',
-        '[attr.title]': '_title'
+        '[attr.aria-label]': '_originalAriaLabel || _closeCalendarLabel()',
+        '[attr.title]': '_originalTitle || _closeCalendarLabel()'
     },
     standalone: true
 })
 export class CalendarCloseButtonDirective {
     /** @hidden */
-    get _ariaLabel(): string {
-        return this._originalAriaLabel || this._calendarI18nLabels.closeCalendarLabel;
-    }
-
-    /** @hidden */
-    get _title(): string {
-        return this._originalTitle || this._calendarI18nLabels.closeCalendarLabel;
-    }
+    protected _closeCalendarLabel = resolveTranslationSignal('coreCalendar.closeCalendarLabel');
 
     /** @hidden */
     constructor(
-        @Attribute('aria-label') private _originalAriaLabel: string,
-        @Attribute('title') private _originalTitle: string,
-        private _calendarI18nLabels: CalendarI18nLabels
+        @Attribute('aria-label') protected _originalAriaLabel: string,
+        @Attribute('title') protected _originalTitle: string
     ) {}
 }
