@@ -131,18 +131,18 @@
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
-                <ng-container *ngIf="!groupItemTemplate">
+                <ng-container *ngIf="!groupItemTemplate; else customGroupItemTemplateRenderer">
                     <li fd-list-group-header role="option">
                         <span fd-list-title [attr.title]="group.label">{{ group.label }}</span>
                     </li>
                 </ng-container>
 
-                <ng-container *ngIf="groupItemTemplate">
-                    <ng-container
+                <ng-template #customGroupItemTemplateRenderer>
+                    <ng-template
                         [ngTemplateOutlet]="groupItemTemplate"
                         [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
-                    ></ng-container>
-                </ng-container>
+                    ></ng-template>
+                </ng-template>
 
                 <li
                     *ngFor="let optionItem of group.children; let i = index"
@@ -201,21 +201,21 @@
 </ng-template>
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
-    <ng-container *ngIf="!optionItemTemplate">
+    <ng-container *ngIf="!optionItemTemplate; else customOptinItemTemplateRenderer">
         <span [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight : inputText"></span>
     </ng-container>
 
-    <ng-container *ngIf="optionItemTemplate">
-        <ng-container
+    <ng-template #customOptinItemTemplateRenderer>
+        <ng-template
             [ngTemplateOutlet]="optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
-    </ng-container>
+        ></ng-template>
+    </ng-template>
 </ng-template>
 
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
     <ng-container *ngIf="showSecondaryText">
-        <ng-container *ngIf="!secondaryItemTemplate">
+        <ng-container *ngIf="!secondaryItemTemplate; else customSecondaryItemTemplateRenderer">
             <span
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
@@ -224,11 +224,11 @@
             ></span>
         </ng-container>
 
-        <ng-container *ngIf="secondaryItemTemplate">
-            <ng-container
+        <ng-template #customSecondaryItemTemplateRenderer>
+            <ng-template
                 [ngTemplateOutlet]="secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
-            ></ng-container>
-        </ng-container>
+            ></ng-template>
+        </ng-template>
     </ng-container>
 </ng-template>

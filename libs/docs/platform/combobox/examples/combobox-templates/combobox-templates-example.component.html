@@ -7,12 +7,13 @@
             displayKey="name"
             (selectionChange)="onSelect($event)"
         >
-            <ng-template fdkTemplate="optionItemTemplate" let-item let-index="index">
+            <!-- By providing use property, we can ensure types support for variables. -->
+            <ng-container *fdpComboboxItem="let item; use: model; index as index">
                 <div class="fd-template-container-div">
                     <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
                     <span class="fd-template-text">{{ item.name }}</span>
                 </div>
-            </ng-template>
+            </ng-container>
         </fdp-combobox>
         <fdp-form-field-extras> Selected: {{ selectedItem | json }} </fdp-form-field-extras>
     </fdp-form-field>
@@ -27,9 +28,9 @@
             groupKey="type"
             (selectionChange)="onSelect1($event)"
         >
-            <ng-template fdkTemplate="groupItemTemplate" let-item>
-                <li class="fd-list__group-header">{{ 'Type: ' + item.label }}</li>
-            </ng-template>
+            <ng-container *fdpComboboxGroup="let group">
+                <li class="fd-list__group-header">{{ 'Type: ' + group.label }}</li>
+            </ng-container>
         </fdp-combobox>
         <fdp-form-field-extras> Selected: {{ selectedItem1 | json }} </fdp-form-field-extras>
     </fdp-form-field>
@@ -43,9 +44,9 @@
             [showSecondaryText]="true"
             (selectionChange)="onSelect2($event)"
         >
-            <ng-template fdkTemplate="secondaryItemTemplate" let-item>
+            <ng-container *fdpComboboxSecondaryItem="let item; use: model">
                 <span class="fd-list__secondary">{{ item.type }}</span>
-            </ng-template>
+            </ng-container>
         </fdp-combobox>
         <fdp-form-field-extras> Selected: {{ selectedItem2 | json }} </fdp-form-field-extras>
     </fdp-form-field>
@@ -58,12 +59,12 @@
             displayKey="name"
             (selectionChange)="onSelect3($event)"
         >
-            <ng-template fdkTemplate="selectedItemTemplate" let-item>
+            <ng-container *fdpComboboxSelectedItem="let item; use: model">
                 <div class="fd-template-container-div">
                     <fd-icon glyph="accept" class="fd-template-icon"></fd-icon>
                     <span>{{ item.name }}</span>
                 </div>
-            </ng-template>
+            </ng-container>
         </fdp-combobox>
         <fdp-form-field-extras> Selected: {{ selectedItem3 | json }} </fdp-form-field-extras>
     </fdp-form-field>

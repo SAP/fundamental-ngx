@@ -27,12 +27,15 @@
 <ng-template let-term="term" #itemSource>
     <span
         fd-list-title
-        *ngIf="!itemTemplate"
+        *ngIf="!_customRenderer"
         [innerHTML]="term | displayFnPipe : displayFn | highlight : inputText : highlighting && filterHighlight"
     >
     </span>
-    <ng-container *ngIf="itemTemplate">
-        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: term }"></ng-container>
+    <ng-container *ngIf="_customRenderer">
+        <ng-container
+            [ngTemplateOutlet]="_customRenderer"
+            [ngTemplateOutletContext]="{ $implicit: term, inputText: inputText }"
+        ></ng-container>
     </ng-container>
 </ng-template>
 
