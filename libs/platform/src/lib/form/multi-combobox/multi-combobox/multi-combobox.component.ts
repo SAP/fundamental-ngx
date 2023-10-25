@@ -37,13 +37,14 @@ import {
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
-    ContentDensityModule,
+    ContentDensityDirective,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -100,7 +101,8 @@ let deprecationWarningShown = false;
         ListSecondaryDirective,
         SearchHighlightPipe,
         FdTranslatePipe,
-        ContentDensityModule
+        ContentDensityDirective,
+        MultiAnnouncerDirective
     ]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {

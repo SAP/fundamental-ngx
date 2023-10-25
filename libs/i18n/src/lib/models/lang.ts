@@ -132,6 +132,11 @@ export interface FdLanguage {
     coreMultiInput: {
         multiInputAriaLabel: FdLanguageKey;
         tokensCountText: FdLanguageKey;
+        noResults: FdLanguageKey;
+        navigateSelectionsWithArrows: FdLanguageKey;
+        escapeNavigateTokens: FdLanguageKey;
+        countListResultsSingular: FdLanguageKey<{ count: number }>;
+        countListResultsPlural: FdLanguageKey<{ count: number }>;
     };
     coreNavigation: {
         mainNavigation: FdLanguageKey;

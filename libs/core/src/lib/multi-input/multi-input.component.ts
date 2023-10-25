@@ -57,6 +57,7 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
+import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import get from 'lodash-es/get';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
@@ -114,7 +115,8 @@ let uniqueHiddenLabel = 0;
         LinkComponent,
         AsyncPipe,
         SearchHighlightPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        MultiAnnouncerDirective
     ]
 })
 export class MultiInputComponent<ItemType = any, ValueType = any>
