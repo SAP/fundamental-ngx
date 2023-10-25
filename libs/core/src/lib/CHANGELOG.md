@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.10...v0.46.2-rc.11) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core:** rating indicator missing display types ([#10798](https://github.com/SAP/fundamental-ngx/issues/10798)) ([c53179d](https://github.com/SAP/fundamental-ngx/commit/c53179db477db688798faeb8c32ab28eb60116e2))
+
+
+
+
+
 ## [0.46.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.9...v0.46.2-rc.10) (2023-10-25)
 
 **Note:** Version bump only for package @fundamental-ngx/core
