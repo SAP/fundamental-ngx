@@ -93,12 +93,18 @@ export class RatingIndicatorComponent
     disabled = false;
 
     /**
-     * Sets the is-display-mode class to the element.
      * Whether the rating indicator is in displayMode
      */
     @Input()
-    @HostBinding('class.is-display-mode')
+    @HostBinding('class.fd-rating-indicator--display-mode')
     displayMode = false;
+
+    /**
+     * Whether the rating indicator is in non-interactive state.
+     */
+    @Input()
+    @HostBinding('class.fd-rating-indicator--non-interactive')
+    nonInteractive = false;
 
     /**
      * Number of rates to display

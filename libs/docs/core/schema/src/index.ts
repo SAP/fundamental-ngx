@@ -7,6 +7,7 @@ export { dialogSchema } from './lib/dialog.schema';
 export { inputGroupSchema } from './lib/input-group.schema';
 export { messageStripSchema } from './lib/message-strip.schema';
 export { paginationSchema } from './lib/pagination.schema';
+export { ratingIndicatorSchema } from './lib/rating-indicator.schema';
 export { sliderSchema } from './lib/slider.schema';
 export { switchSchema } from './lib/switch.schema';
 export { tableSchema } from './lib/table.schema';
