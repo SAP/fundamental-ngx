@@ -148,7 +148,6 @@
                         <!-- Last rendered child row. -->
                         <ng-container *ngIf="row.parent?.lastChild?.index === row.index">
                             <tr
-                                tabindex="-1"
                                 aria-hidden="true"
                                 class="fd-table__intersection-spy"
                                 [fdkIntersectionSpy]="pageScrollingThreshold"
@@ -159,7 +158,6 @@
                     </ng-container>
                 </ng-container>
                 <tr
-                    tabindex="-1"
                     aria-hidden="true"
                     *ngIf="pageScrolling"
                     class="fd-table__intersection-spy"
