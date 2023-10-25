@@ -10,12 +10,7 @@
     [attr.role]="_bodyRole"
     [attr.id]="_bodyId"
 >
-    <div
-        fd-scrollbar
-        class="fd-popover__wrapper"
-        [overrideTabindex]="_tabbableScrollbar"
-        *ngIf="!_disableScrollbar; else renderer"
-    >
+    <div fd-scrollbar class="fd-popover__wrapper" *ngIf="!_disableScrollbar; else renderer">
         <ng-container *ngTemplateOutlet="renderer"></ng-container>
     </div>
 </div>

@@ -71,15 +71,9 @@ export class ScrollbarDirective implements OnDestroy, HasElementRef {
         return this._alwaysVisible;
     }
 
-    /** Whether to force apply tabindex attribute. */
+    /** @deprecated Whether to force apply tabindex attribute. */
     @Input()
-    overrideTabindex = true;
-
-    /** @hidden */
-    @HostBinding('attr.tabindex')
-    get _tabindex(): number | null {
-        return this.overrideTabindex ? 0 : null;
-    }
+    overrideTabindex = false;
 
     /** @hidden */
     @HostBinding('style.overflow-x')

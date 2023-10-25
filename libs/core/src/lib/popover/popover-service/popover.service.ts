@@ -499,7 +499,6 @@ export class PopoverService extends BasePopoverClass {
         body._noArrow = this.noArrow;
         body._focusAutoCapture = this.focusAutoCapture;
         body._disableScrollbar = this.disableScrollbar;
-        body._tabbableScrollbar = this.tabbableScrollbar;
         body._templateToDisplay = this.templateContent!;
         body._closeOnEscapeKey = this.closeOnEscapeKey;
         body._bodyRole = this._bodyRole;
@@ -529,6 +528,7 @@ export class PopoverService extends BasePopoverClass {
         if (focusLastElement && this.focusAutoCapture) {
             this._lastActiveElement = <HTMLElement>document.activeElement;
             this._getPopoverBody()?._focusFirstTabbableElement();
+            console.log(document.activeElement);
         }
     }
 

@@ -45,9 +45,6 @@ export class PopoverBodyComponent implements AfterViewInit {
     /** Whether to wrap content with fd-scrollbar directive. */
     _disableScrollbar = false;
 
-    /** Should fd-scrollbar have tabindex*/
-    _tabbableScrollbar = true;
-
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
@@ -178,5 +175,6 @@ export class PopoverBodyComponent implements AfterViewInit {
         if (this._focusAutoCapture) {
             this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
         }
+        console.log(document.activeElement);
     }
 }
