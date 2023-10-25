@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.3...v0.46.2-rc.4) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core:** multi input more button dropdown values ([#10787](https://github.com/SAP/fundamental-ngx/issues/10787)) ([738914d](https://github.com/SAP/fundamental-ngx/commit/738914d6e262c749c87ed07ad55cb102f8c0598c))
+
+
+
+
+
 ## [0.46.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.2...v0.46.2-rc.3) (2023-10-24)
 
 
