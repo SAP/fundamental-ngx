@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.9...v0.46.2-rc.10) (2023-10-25)
+
+
+### Bug Fixes
+
+* **platform:** rows should not have tabindex="-1" ([#10801](https://github.com/SAP/fundamental-ngx/issues/10801)) ([4667936](https://github.com/SAP/fundamental-ngx/commit/46679366278b6e3d998bad70afcf6a4c1d871acf))
+
+
+
+
+
 ## [0.46.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.8...v0.46.2-rc.9) (2023-10-25)
 
 
