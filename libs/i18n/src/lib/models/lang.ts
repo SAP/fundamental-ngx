@@ -28,6 +28,64 @@ export type FlatFdLanguage = {
  * Representation of the dictionary per UI component
  */
 export interface FdLanguage {
+    coreCalendar: {
+        /** Year selection aria label. Used on the button to navigate to the years view. */
+        yearSelectionLabel: FdLanguageKey;
+
+        /** Years range selection aria label. Used on the button to navigate to the years range view. */
+        yearsRangeSelectionLabel: FdLanguageKey;
+
+        /** Month selection aria label. Used on the button to navigate to the months view. */
+        monthSelectionLabel: FdLanguageKey;
+
+        /** Day selection aria label. Used on the button to navigate to the day view. */
+        dateSelectionLabel: FdLanguageKey;
+
+        /** Previous year aria label. Used on the button to switch to a previous year in the years view. */
+        previousYearLabel: FdLanguageKey;
+
+        /** Next year aria label. Used on the button to switch to a next year in the years view. */
+        nextYearLabel: FdLanguageKey;
+
+        /** Previous month aria label. Used on the button to switch to a previous month in the months view. */
+        previousMonthLabel: FdLanguageKey;
+
+        /** Next month aria label. Used on the button to switch to a next month in the months view. */
+        nextMonthLabel: FdLanguageKey;
+
+        /** Week number column label */
+        weekColumnLabel: FdLanguageKey;
+
+        /** Selected date label. Used on the selected day/month/year cell. */
+        dateSelectedLabel: FdLanguageKey;
+
+        /** Is used to describe present date */
+        todayLabel: FdLanguageKey;
+
+        /** Range start label. Used for date range selection */
+        rangeStartLabel: FdLanguageKey;
+
+        /** Range end label. Used for date range selection */
+        rangeEndLabel: FdLanguageKey;
+
+        /** Past days aria label. Used when days in the past are accessed */
+        dayInPastLabel: FdLanguageKey;
+
+        /** Past days aria label. Used when days in the past are accessed */
+        closeCalendarLabel: FdLanguageKey;
+
+        /** Calendar day view aria role description. */
+        calendarDayViewDescription: FdLanguageKey;
+
+        /** Calendar month view aria role description. */
+        calendarMonthViewDescription: FdLanguageKey;
+
+        /** Calendar years view aria role description. */
+        calendarYearsViewDescription: FdLanguageKey;
+
+        /** Calendar years range view aria role description. */
+        calendarYearsRangeViewDescription: FdLanguageKey;
+    };
     coreMultiComboBox: {
         selectAllLabel: FdLanguageKey;
     };
@@ -326,6 +384,8 @@ export interface FdLanguage {
         nodeStatusDueInXDays: FdLanguageKey<{ count: number }>;
         /** @param count */
         nodeStatusXDaysOverdue: FdLanguageKey<{ count: number }>;
+        addNodeButtonTitle: FdLanguageKey;
+        nodeMenuButtonTitle: FdLanguageKey;
         nodeActionAddApproversBefore: FdLanguageKey;
         nodeActionAddApproversAfter: FdLanguageKey;
         nodeActionAddApproversParallel: FdLanguageKey;

@@ -1,4 +1,6 @@
-<fd-vertical-navigation [condensed]="true">
+<button fd-button (click)="toggleCondensed()">Toggle condensed mode</button>
+<p>&nbsp;</p>
+<fd-vertical-navigation [condensed]="condensed()">
     <li fd-list-navigation-item>
         <fd-icon glyph="home"></fd-icon>
         <span fd-list-navigation-item-text> Overview </span>

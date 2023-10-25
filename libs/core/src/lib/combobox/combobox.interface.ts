@@ -16,3 +16,8 @@ export interface ComboboxInterface extends MobileMode {
     dialogApprove(): void;
     dialogDismiss(backup: string): void;
 }
+
+export interface ComboboxItemDirectiveContext<T = unknown> {
+    $implicit: T;
+    inputText: string;
+}

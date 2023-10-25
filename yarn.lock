@@ -2831,17 +2831,17 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/common-css@0.30.2-rc.46":
-  version "0.30.2-rc.46"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/common-css/-/common-css-0.30.2-rc.46.tgz#0b532a838fcea5c7a2c06e249045436ada115029"
-  integrity sha512-hGz3LkEPidFmu/7oYfQR6ZhSShN5QmlXnnJyfxDM512bzdNPiS3dEdxDNByglCJyUpxwU3nTdn0btK8EGWnqrw==
+"@fundamental-styles/common-css@0.30.2":
+  version "0.30.2"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/common-css/-/common-css-0.30.2.tgz#e00c3c194bf1d1c37ea74ca8fc17838e189a2b2d"
+  integrity sha512-GV5kTN718WbaxjnzdWSC99bb7XfI8tzQCtAZSEjHVNi1EaN4l5Xvh9hS2t/BbC53I0iM0rjAMgQ5Y+cXPzXuvQ==
   dependencies:
-    "@sap-theming/theming-base-content" "^11.6.0"
+    "@sap-theming/theming-base-content" "^11.7.0"
 
-"@fundamental-styles/cx@0.30.2-rc.46":
-  version "0.30.2-rc.46"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.30.2-rc.46.tgz#d19c17bda997a4aeaab17800956d303dc5203b16"
-  integrity sha512-LlGpovy/I2jFlrQSWiLrdr/HlKQFUVZ+tFAfQ+ky83osfoNI2SZZSlvZkH8Fc3vMojVtHFCeanNjYjWJzhgdrQ==
+"@fundamental-styles/cx@0.30.2":
+  version "0.30.2"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.30.2.tgz#8697ddda1abcb21fe8f4cd4a35c5ae266a2aec21"
+  integrity sha512-ckTCdm4Fd6Nrs4IldGNUKNypJFAHAXxoDo7aQuQ0YzGbwSVN83ixNoKzVMK6Vqglb/WS2KIwRvzIy3AatAsRIw==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -3190,21 +3190,21 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@lerna/child-process@7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@lerna/child-process/-/child-process-7.3.0.tgz#c56488a8a881f22a64793bf9339c5a2450a18559"
-  integrity sha512-rA+fGUo2j/LEq6w1w8s6oVikLbJTWoIDVpYMc7bUCtwDOUuZKMQiRtjmpavY3fTm7ltu42f4AKflc2A70K4wvA==
+"@lerna/child-process@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@lerna/child-process/-/child-process-7.4.1.tgz#efacbbe79794ef977feb86873d853bb8708707be"
+  integrity sha512-Bx1cRCZcVcWoz+atDQc4CSVzGuEgGJPOpIAXjQbBEA2cX5nqIBWdbye8eHu31En/F03aH9BhpNEJghs6wy4iTg==
   dependencies:
     chalk "^4.1.0"
     execa "^5.0.0"
     strong-log-transformer "^2.1.0"
 
-"@lerna/create@7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@lerna/create/-/create-7.3.0.tgz#5438c231f617b8e825731390d394f8684af471d5"
-  integrity sha512-fjgiKjg9VXwQ4ZKKsrXICEKRiC3yo6+FprR0mc55uz0s5e9xupoSGLobUTTBdE7ncNB3ibqml8dfaAn/+ESajQ==
+"@lerna/create@7.4.1":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@lerna/create/-/create-7.4.1.tgz#3e4bb7235bf5700e7e63c470eba5619171331c1a"
+  integrity sha512-zPO9GyWceRimtMD+j+aQ8xJgNPYn/Q/SzHf4wYN+4Rj5nrFKMyX+Et7FbWgUNpj0dRgyCCKBDYmTB7xQVVq4gQ==
   dependencies:
-    "@lerna/child-process" "7.3.0"
+    "@lerna/child-process" "7.4.1"
     "@npmcli/run-script" "6.0.2"
     "@nx/devkit" ">=16.5.1 < 17"
     "@octokit/plugin-enterprise-rest" "6.0.1"
@@ -3870,10 +3870,10 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.6.8", "@sap-theming/theming-base-content@^11.6.0":
-  version "11.6.8"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.6.8.tgz#3e70ddfe415f4492b3e37df2c642fbbf7cb8296d"
-  integrity sha512-LRYvqVeqFYCqhB4EMbFslQpgRLrYyOOsacWI0JZbWlnvRkbF4/pzKpr4ULyVPFp26CrwXhUZJeSSAa3/8KS6iw==
+"@sap-theming/theming-base-content@11.7.0", "@sap-theming/theming-base-content@^11.7.0":
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.7.0.tgz#381833a4d4a9da570514d2e56a45cb9db3cc5b8c"
+  integrity sha512-CeKhmXY2b8ya+RinaasLDyJ5+nmJbb00m4R8j7jQKVC6jbjs3k1X9cDtmiR/ayy6ASW/pTH4AjsolJrzeesRLg==
 
 "@schematics/angular@16.2.4":
   version "16.2.4"
@@ -9584,10 +9584,10 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.30.2-rc.46:
-  version "0.30.2-rc.46"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.30.2-rc.46.tgz#fe509c3e6aa145e2cb7ec6b58aabe85423ddf228"
-  integrity sha512-sBDHCXDTFogZ4Ccmxre0zbzsZrZrA7M17BXL/Ay2200zT2nxXObzjXfj8duVx9v67wz7iJYlMZNfs0vkqsiUBg==
+fundamental-styles@0.30.2:
+  version "0.30.2"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.30.2.tgz#7c9eda8e8fe2e976c71a967d6b2d9f14dd20d286"
+  integrity sha512-oD/U0wmf778Nu3gs329UKBr6gRXpMwSlHAj2qLR/67yKLKOcEDIWdrIqs1XCoAKknGRMoEP3Z7yT7w+scQGEMg==
 
 gauge@^4.0.3:
   version "4.0.4"
@@ -11973,13 +11973,13 @@ lcov-parse@^1.0.0:
   resolved "https://registry.yarnpkg.com/lcov-parse/-/lcov-parse-1.0.0.tgz#eb0d46b54111ebc561acb4c408ef9363bdc8f7e0"
   integrity sha512-aprLII/vPzuQvYZnDRU78Fns9I2Ag3gi4Ipga/hxnVMCZC8DnR2nI7XBqrPoywGfxqIx/DgarGvDJZAD3YBTgQ==
 
-lerna@7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/lerna/-/lerna-7.3.0.tgz#efecafbdce15694e2f6841256e073a3a2061053e"
-  integrity sha512-Dt8TH+J+c9+3MhTYcm5OxnNzXb87WG7GPNj3kidjYJjJY7KxIMDNU37qBTYRWA1h3wAeNKBplXVQYUPkGcYgkQ==
+lerna@7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/lerna/-/lerna-7.4.1.tgz#d124fa5f0a1fe10ae9a6081bc363d98f3f6caca9"
+  integrity sha512-c6sOO0dlJU689vStIsko+zjRdn2fJOWH8aNjePLNv2AubAdABKqfrDCpE2H/Q7+O80Duo68ZQtWYkUUk7hRWDw==
   dependencies:
-    "@lerna/child-process" "7.3.0"
-    "@lerna/create" "7.3.0"
+    "@lerna/child-process" "7.4.1"
+    "@lerna/create" "7.4.1"
     "@npmcli/run-script" "6.0.2"
     "@nx/devkit" ">=16.5.1 < 17"
     "@octokit/plugin-enterprise-rest" "6.0.1"
@@ -12972,10 +12972,10 @@ mute-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-1.0.0.tgz#e31bd9fe62f0aed23520aa4324ea6671531e013e"
   integrity sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==
 
-nan@2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.17.0.tgz#c0150a2368a182f033e9aa5195ec76ea41a199cb"
-  integrity sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==
+nan@2.18.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.18.0.tgz#26a6faae7ffbeb293a39660e88a76b82e30b7554"
+  integrity sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w==
 
 nanoid@^3.3.6:
   version "3.3.6"

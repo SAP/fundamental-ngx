@@ -41,8 +41,8 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
-import { Observable, Subject, Subscription, fromEvent, isObservable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject, Subscription, combineLatest, fromEvent, isObservable } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
 
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -70,6 +70,7 @@ import {
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
+import { FDP_COMBOBOX_ITEM_DEF, FdpComboboxItemDef } from '../directives/combobox-item.directive';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
@@ -204,7 +205,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     @ContentChildren(TemplateDirective)
-    customTemplates: QueryList<TemplateDirective>;
+    private readonly _customTemplates: QueryList<TemplateDirective>;
+
+    /** @hidden */
+    @ContentChildren(FDP_COMBOBOX_ITEM_DEF)
+    private readonly _customItemDef: QueryList<FdpComboboxItemDef>;
 
     /** @hidden Custom Option item Template */
     optionItemTemplate: TemplateRef<any>;
@@ -366,11 +371,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
         this.inputText = text;
 
-        const map = new Map();
-        map.set('query', text);
-        map.set('limit', 12);
+        const queryMap = new Map();
+        queryMap.set('query', text);
+        queryMap.set('limit', 12);
 
-        this.ds.match(map);
+        this.ds.match(queryMap);
     }
 
     /** @hidden */
@@ -631,10 +636,10 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         initDataSource.dataProvider.setMatchingStrategy(this._matchingStrategy);
 
         // initial data fetch
-        const map = new Map();
-        map.set('query', '*');
-        map.set('limit', 12);
-        initDataSource.match(map);
+        const queryMap = new Map();
+        queryMap.set('query', '*');
+        queryMap.set('limit', 12);
+        initDataSource.match(queryMap);
 
         return initDataSource;
     }
@@ -812,21 +817,31 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach((template) => {
-            switch (template.name) {
-                case 'optionItemTemplate':
-                    this.optionItemTemplate = template.templateRef;
-                    break;
-                case 'groupItemTemplate':
-                    this.groupItemTemplate = template.templateRef;
-                    break;
-                case 'secondaryItemTemplate':
-                    this.secondaryItemTemplate = template.templateRef;
-                    break;
-                case 'selectedItemTemplate':
-                    this.selectedItemTemplate = template.templateRef;
-                    break;
-            }
-        });
+        combineLatest([this._customTemplates.changes, this._customItemDef.changes])
+            .pipe(
+                startWith(null),
+                map(() =>
+                    this._customItemDef.length > 0 ? this._customItemDef.toArray() : this._customTemplates.toArray()
+                ),
+                takeUntil(this._destroyed)
+            )
+            .subscribe((data) => {
+                data.forEach((template: FdpComboboxItemDef | TemplateDirective) => {
+                    switch (template.name) {
+                        case 'optionItemTemplate':
+                            this.optionItemTemplate = template.templateRef;
+                            break;
+                        case 'groupItemTemplate':
+                            this.groupItemTemplate = template.templateRef;
+                            break;
+                        case 'secondaryItemTemplate':
+                            this.secondaryItemTemplate = template.templateRef;
+                            break;
+                        case 'selectedItemTemplate':
+                            this.selectedItemTemplate = template.templateRef;
+                            break;
+                    }
+                });
+            });
     }
 }
