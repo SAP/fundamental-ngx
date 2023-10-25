@@ -36,7 +36,8 @@ import {
     Nullable,
     RangeSelector,
     resizeObservable,
-    RtlService
+    RtlService,
+    TabbableElementService
 } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityMode,
@@ -701,7 +702,8 @@ export class TableComponent<T = any>
         private readonly _elRef: ElementRef,
         @Optional() private readonly _rtlService: RtlService,
         readonly contentDensityObserver: ContentDensityObserver,
-        readonly injector: Injector
+        readonly injector: Injector,
+        private readonly _tabbableService: TabbableElementService
     ) {
         super();
         this.initialState?.setTable(this);
@@ -1411,14 +1413,12 @@ export class TableComponent<T = any>
         }
 
         if (event && event instanceof KeyboardEvent && KeyUtil.isKeyCode(event, SPACE)) {
-            const eventTarget = event.target as HTMLInputElement;
-            if (
-                eventTarget.type === 'checkbox' ||
-                (eventTarget.tagName !== 'INPUT' &&
-                    eventTarget.tagName !== 'BUTTON' &&
-                    eventTarget.tagName !== 'TEXTAREA')
-            ) {
-                event.preventDefault(); // prevent page scroll but still allow space presses in inputs
+            const eventTarget = event.target as HTMLElement;
+            const tabbableElement = this._tabbableService.getTabbableElement(eventTarget, false, true);
+            if (tabbableElement) {
+                event.preventDefault();
+                tabbableElement.focus();
+                tabbableElement.dispatchEvent(new MouseEvent('click'));
             }
         }
 
