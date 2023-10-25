@@ -261,8 +261,10 @@ describe('calendar test suite', () => {
             const today = new Date();
             const endDate = new Date(today);
             endDate.setDate(today.getDate() + 7);
-            const nextDayAfterEndDate = new Date();
-            nextDayAfterEndDate.setDate(endDate.getDate() + 1);
+            const nextDayAfterEndDate = new Date(endDate);
+            nextDayAfterEndDate.setDate(nextDayAfterEndDate.getDate() + 1);
+
+            console.log(endDate.getDay());
 
             if (endDate.getDate() < today.getDate()) {
                 await click(nextMonthButton);
