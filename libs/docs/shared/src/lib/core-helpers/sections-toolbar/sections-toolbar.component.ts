@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { SortByPipe } from '../pipes/sort.pipe';
 import {
@@ -42,7 +43,8 @@ const SMALL_SCREEN_BREAKPOINT = 992;
         NgTemplateOutlet,
         RouterLinkActive,
         RouterLink,
-        SortByPipe
+        SortByPipe,
+        ScrollbarDirective
     ]
 })
 export class SectionsToolbarComponent implements OnInit, OnChanges {

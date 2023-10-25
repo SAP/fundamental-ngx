@@ -1,23 +1,36 @@
-<fd-docs-section-title id="individual-type" componentName="avatar-group"> Individual Type </fd-docs-section-title>
+<fd-docs-section-title id="default" componentName="AvatarGroup"> Avatar Group Standard Usage </fd-docs-section-title>
 <description>
-    Focus on Each Person (<code>type="individual"</code>). <br />
-    The avatars are displayed next to each other and don’t overlap. Use this type if each person is as important as the
-    group as a whole, and the user’s main focus is to get more information about some individuals in the group.
+    <p>
+        In this example, which is called <code>individual</code> type avatar group, which means that every item is
+        displayed separately, every item can be focused separately and details template will be displayed for that item.
+    </p>
 </description>
 <component-example>
-    <fd-avatar-group-individual-type-example></fd-avatar-group-individual-type-example>
+    <fundamental-ngx-avatar-group-default-example></fundamental-ngx-avatar-group-default-example>
 </component-example>
-<code-example [exampleFiles]="individualType"></code-example>
+<code-example [exampleFiles]="avatarGroupDefaultExample"></code-example>
 
-<separator></separator>
-
-<fd-docs-section-title id="group-type" componentName="avatar-group"> Group Type </fd-docs-section-title>
+<fd-docs-section-title id="group" componentName="AvatarGroup"> Group Type Standard Usage </fd-docs-section-title>
 <description>
-    Focus on the Sum of People (<code>type="group"</code>). <br />
-    The group type displays overlapping avatars. Use this type if it’s important to display the sum of people at first
-    sight, rather than the individuals.
+    <p>
+        The <code>fd-avatar-group</code> supports <code>group</code> type as well. In this case, all items are displayed
+        as one item. This is useful when there is a need to display a group of avatars in a limited space. In this case,
+        entire container can be focused and details template will be displayed for all items
+    </p>
 </description>
 <component-example>
     <fd-avatar-group-group-type-example></fd-avatar-group-group-type-example>
 </component-example>
-<code-example [exampleFiles]="groupType"></code-example>
+<code-example [exampleFiles]="avatarGroupGroupExample"></code-example>
+
+<fd-docs-section-title id="vertical" componentName="AvatarGroup"> Vertical Avatar Group Usage </fd-docs-section-title>
+<description>
+    <p>
+        The <code>fd-avatar-group</code> supports <code>vertical</code> orientation as well. In this case, all items are
+        displayed in a vertical list and overflow is not supported.
+    </p>
+</description>
+<component-example>
+    <fd-avatar-group-vertical-example></fd-avatar-group-vertical-example>
+</component-example>
+<code-example [exampleFiles]="verticalAvatarGroupExample"></code-example>

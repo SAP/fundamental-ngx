@@ -1,10 +1,11 @@
 import { logger, ProjectConfiguration } from '@nx/devkit';
 import { readFileSync, writeFileSync } from 'fs-extra';
-import { parse, major, minor } from 'semver';
-import { PrepareOptions } from './prepare.options';
 import { glob } from 'glob';
+import { major, minor, parse } from 'semver';
+import { PrepareOptions } from './prepare.options';
 
 const packageJson = JSON.parse(readFileSync(`./package.json`, 'utf8'));
+const lernaJson = JSON.parse(readFileSync(`./lerna.json`, 'utf8'));
 const excludedFilesPatterns = ['md', 'mjs', 'map', 'ts'].map((fileType) => `**/*.${fileType}`);
 
 const aboveMinorVersion = (version) => {
@@ -18,20 +19,20 @@ const angularVersion =
     )?.[0] || '';
 
 const versions = {
-    VERSION_PLACEHOLDER: packageJson.version,
+    VERSION_PLACEHOLDER: lernaJson.version,
     // As Angular version listed as peerDependency it should be ^X.0.0 to support any minor version
     ANGULAR_VER_PLACEHOLDER: `^${major(angularVersion)}.${minor(angularVersion)}.0`,
     RXJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.rxjs),
     FAST_DEEP_EQUAL_VER_PLACEHOLDER: packageJson.dependencies['fast-deep-equal'],
     FDSTYLES_VER_PLACEHOLDER: packageJson.dependencies['fundamental-styles'],
-    FDNSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/fn'],
     FDCXSTYLES_VER_PLACEHOLDER: packageJson.dependencies['@fundamental-styles/cx'],
     FOCUSTRAP_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['focus-trap']),
     FOCUSVISIBLE_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['focus-visible']),
     LODASH_ES_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['lodash-es']),
     COMPARE_VERSIONS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['compare-versions']),
     DAYJS_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies.dayjs),
-    THEMING_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['@sap-theming/theming-base-content'])
+    THEMING_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['@sap-theming/theming-base-content']),
+    MESSAGEFORMAT_VER_PLACEHOLDER: aboveMinorVersion(packageJson.dependencies['intl-messageformat'])
 };
 
 const transformOverrideParamToPlaceholderKey = (param: string): keyof typeof versions => {

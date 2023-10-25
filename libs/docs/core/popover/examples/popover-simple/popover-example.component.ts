@@ -1,7 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import {
+    BarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarMiddleDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import {
@@ -11,6 +18,7 @@ import {
     PopoverComponent,
     PopoverControlComponent
 } from '@fundamental-ngx/core/popover';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-popover-example',
@@ -21,12 +29,18 @@ import {
     imports: [
         PopoverComponent,
         PopoverControlComponent,
-        AvatarModule,
+        AvatarComponent,
         PopoverBodyComponent,
         IconModule,
         PopoverBodyHeaderDirective,
-        BarModule,
-        ButtonModule,
+        BarComponent,
+        ButtonBarComponent,
+        BarElementDirective,
+        BarLeftDirective,
+        BarMiddleDirective,
+        BarRightDirective,
+        ButtonComponent,
+        TitleComponent,
         ContentDensityDirective,
         PopoverBodyFooterDirective
     ]

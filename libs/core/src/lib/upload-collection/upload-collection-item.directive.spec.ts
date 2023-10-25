@@ -1,9 +1,11 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkModule } from '@fundamental-ngx/core/link';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ListItemComponent, ListModule } from '@fundamental-ngx/core/list';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
+import { UploadCollectionFormItemComponent } from './upload-collection-form-item/upload-collection-form-item.component';
 import { UploadCollectionItemDirective } from './upload-collection-item.directive';
 import {
     UploadCollectionDescriptionDirective,
@@ -12,8 +14,6 @@ import {
     UploadCollectionThumbnailDirective,
     UploadCollectionTitleDirective
 } from './upload-collection-simple.directives';
-import { UploadCollectionFormItemComponent } from './upload-collection-form-item/upload-collection-form-item.component';
-import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
 
 @Component({
     template: `
@@ -60,7 +60,7 @@ import { UploadCollectionButtonGroupComponent } from './upload-collection-button
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         UploadCollectionButtonGroupComponent
     ]
 })

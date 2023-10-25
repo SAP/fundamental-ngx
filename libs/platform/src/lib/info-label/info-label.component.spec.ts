@@ -1,13 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { InfoLabelComponent } from './info-label.component';
 
 @Component({
     selector: 'fdp-test-numeric-info-label',
-    template: `<fdp-info-label [color]="color" [glyph]="glyph">Info Label</fdp-info-label>`
+    template: `<fdp-info-label [color]="color" [glyph]="glyph">Info Label</fdp-info-label>`,
+    standalone: true,
+    imports: [InfoLabelComponent]
 })
 class TestInfoLabelNumericComponent {
     @ViewChild(InfoLabelComponent, { static: true }) component: InfoLabelComponent;
@@ -23,8 +24,7 @@ describe('InfoLabelComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [InfoLabelModule],
-            declarations: [InfoLabelComponent, TestInfoLabelNumericComponent]
+            imports: [TestInfoLabelNumericComponent]
         }).compileComponents();
     }));
 

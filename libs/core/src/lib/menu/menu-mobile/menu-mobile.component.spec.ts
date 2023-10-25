@@ -9,7 +9,6 @@ import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
 import { MenuModule } from '../menu.module';
 import { MenuMobileComponent } from './menu-mobile.component';
-import { MenuMobileModule } from './menu-mobile.module';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
 
@@ -30,7 +29,7 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
         </fd-submenu>
     `,
     standalone: true,
-    imports: [MenuModule, MenuMobileModule]
+    imports: [MenuModule]
 })
 class TesNestedMenuItemComponent {
     @ViewChild(MenuComponent) menu: MenuComponent;
@@ -51,7 +50,7 @@ describe('MenuMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule, MenuMobileModule, NoopAnimationsModule, TesNestedMenuItemComponent],
+            imports: [MenuModule, NoopAnimationsModule, TesNestedMenuItemComponent],
             providers: [
                 {
                     provide: MOBILE_CONFIG_TEST_TOKEN,

@@ -1,21 +1,21 @@
 <ng-container *ngIf="abbreviate">{{ abbreviate }}</ng-container>
 
 <i
-    *ngIf="zoomGlyph"
+    *ngIf="zoomGlyph || valueState"
     role="presentation"
     class="fd-avatar__zoom-icon"
-    [class]="zoomGlyph ? 'sap-icon--' + zoomGlyph : ''"
+    [class]="valueState | fdAvatarIcon : zoomGlyph"
     (mousedown)="zoomClicked($event)"
 >
 </i>
 
-<i
+<fd-icon
     *ngIf="glyph || showDefault"
     class="fd-avatar__icon"
     role="presentation"
-    [class]="glyph ? 'sap-icon--' + glyph : 'sap-icon--person-placeholder'"
->
-</i>
+    [font]="font"
+    [glyph]="glyph || 'person-placeholder'"
+></fd-icon>
 
 <div #content [style.display]="'none'">
     <ng-content></ng-content>

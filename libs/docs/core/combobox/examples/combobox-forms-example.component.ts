@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
 
@@ -20,7 +20,7 @@ interface ComboboxItem {
         ReactiveFormsModule,
         FormItemComponent,
         FormLabelComponent,
-        ComboboxModule,
+        ComboboxComponent,
         ListModule,
         FormMessageComponent,
         JsonPipe

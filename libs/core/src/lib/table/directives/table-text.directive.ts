@@ -1,7 +1,8 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableText], [fd-table-text]'
+    selector: '[fdTableText], [fd-table-text]',
+    standalone: true
 })
 export class TableTextDirective {
     /** Whether the text should have shadow (halo) & overflow should be hidden. */

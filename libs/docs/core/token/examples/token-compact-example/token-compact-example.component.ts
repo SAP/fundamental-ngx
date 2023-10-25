@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { TokenModule } from '@fundamental-ngx/core/token';
+import { TokenComponent } from '@fundamental-ngx/core/token';
 
 @Component({
     selector: 'fd-token-compact-example',
@@ -13,6 +13,6 @@ import { TokenModule } from '@fundamental-ngx/core/token';
         `
     ],
     standalone: true,
-    imports: [TokenModule, ContentDensityDirective]
+    imports: [TokenComponent, ContentDensityDirective]
 })
 export class TokenCompactExampleComponent {}

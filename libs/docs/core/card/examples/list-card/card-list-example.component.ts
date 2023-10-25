@@ -1,10 +1,10 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 interface Casts {
@@ -22,11 +22,11 @@ interface Casts {
         ListModule,
         NgClass,
         ListSecondaryDirective,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         SelectModule,
         ContentDensityDirective,
         NgFor,
-        AvatarModule
+        AvatarComponent
     ]
 })
 export class CardListExampleComponent implements OnInit {

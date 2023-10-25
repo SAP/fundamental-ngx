@@ -1,6 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'ratingStarLabel' })
+@Pipe({
+    name: 'ratingStarLabel',
+    standalone: true
+})
 export class RatingStarLabelPipe implements PipeTransform {
     /** Transforms the value to a rating value string. */
     transform(index: number, controlsCount: number, useHalves: boolean): string {

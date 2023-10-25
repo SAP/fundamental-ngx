@@ -16,10 +16,9 @@ import {
     Type,
     ViewContainerRef
 } from '@angular/core';
-import { PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
-import { BasePopoverClass } from '@fundamental-ngx/core/popover';
-import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FD_ICON_COMPONENT } from '@fundamental-ngx/core/icon';
+import { BasePopoverClass, PopoverService, TriggerConfig } from '@fundamental-ngx/core/popover';
 
 const INLINE_HELP_CLASS = 'fd-popover__body--inline-help fd-inline-help__content';
 const INLINE_HELP_ICON_CLASS = 'fd-popover__body--inline-help-icon';
@@ -36,7 +35,8 @@ let inlineHelpId = 0;
     providers: [PopoverService],
     host: {
         '[class.fd-inline-help__trigger]': 'true'
-    }
+    },
+    standalone: true
 })
 export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges, OnDestroy {
     /** The trigger events that will open/close the inline help component.
@@ -132,8 +132,11 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             srElement.innerText = content;
         } else if (content) {
             this._srViewRef = content.createEmbeddedView(null);
-            this._viewContainerRef.insert(this._srViewRef);
-            srElement = this._srViewRef.rootNodes[0];
+            if (this._srViewRef.rootNodes[0] instanceof Text) {
+                srElement.innerText = this._srViewRef.rootNodes[0].textContent;
+            } else {
+                srElement = this._srViewRef.rootNodes[0];
+            }
         }
 
         if (srElement.style) {

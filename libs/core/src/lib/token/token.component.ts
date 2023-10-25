@@ -1,3 +1,5 @@
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,20 +8,20 @@ import {
     DestroyRef,
     ElementRef,
     EventEmitter,
-    inject,
     Input,
     OnDestroy,
     Output,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subscription, fromEvent } from 'rxjs';
 
 /**
  * A token is used to represent contextualizing information.
@@ -34,7 +36,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     providers: [contentDensityObserverProviders()],
     host: {
         '[style.max-width.%]': '100'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, FdTranslatePipe]
 })
 export class TokenComponent implements AfterViewInit, OnDestroy {
     /** Whether the token is disabled. */
@@ -162,5 +166,6 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     _setTotalCount(count: number): void {
         this.totalCount = count;
+        this._cdRef.markForCheck();
     }
 }

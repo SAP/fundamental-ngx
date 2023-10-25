@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 let quickViewUniqueId = 0;
 
@@ -7,7 +7,8 @@ let quickViewUniqueId = 0;
     templateUrl: './quick-view.component.html',
     styleUrls: ['./quick-view.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class QuickViewComponent {
     /** Id of the quick view element. */

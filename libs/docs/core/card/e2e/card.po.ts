@@ -42,7 +42,7 @@ export class CardPo extends CoreBaseComponentPo {
     tableCardItemNames = 'fd-card-table-example tbody td:first-of-type';
     tableCardItemCountries = 'fd-card-table-example tbody td:nth-of-type(2)';
     tableCardItemPrices = 'fd-card-table-example tbody td:nth-of-type(3)';
-    tableCardItemStatuses = 'fd-card-table-example td span';
+    tableCardItemStatuses = 'fd-card-table-example td .fd-object-status__text';
     // bar chart examples
     barChartHeader = 'fd-bar-chart-list-card-example fd-card-header';
     barChartTitle = 'fd-bar-chart-list-card-example fd-card-header h2';

@@ -1,5 +1,6 @@
 {
     "name": "docs-core-date-picker",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/date-picker",
     "projectType": "library",
     "prefix": "fundamental-ngx",

@@ -4,7 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export type GroupFunction<T = any> = (items: T[]) => { [key: string]: T[] };
 
 @Pipe({
-    name: 'listGroupPipe'
+    name: 'listGroupPipe',
+    standalone: true
 })
 export class ListGroupPipe<T = any> implements PipeTransform {
     /** Group items */

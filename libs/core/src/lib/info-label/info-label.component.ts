@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,9 +8,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { IconFont } from '@fundamental-ngx/core/icon';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { IconComponent, IconFont } from '@fundamental-ngx/core/icon';
 
 export type LabelType = 'numeric' | 'icon';
 
@@ -18,7 +18,9 @@ export type LabelType = 'numeric' | 'icon';
     templateUrl: './info-label.component.html',
     styleUrls: ['./info-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, IconComponent]
 })
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */

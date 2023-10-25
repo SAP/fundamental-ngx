@@ -63,14 +63,15 @@
     >
         <span
             class="fd-time-column-custom-hidden"
-            aria-live="assertive"
             aria-atomic="true"
             [attr.aria-hidden]="!active"
             [attr.id]="currentIndicatorValueId"
             [class.fd-time-column-custom-hidden]="active"
         >
             {{ activeValue?.label }}
-            {{ timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.label | fdTranslate)) }}
+            {{
+                timeConfig?.label || (internalTranslationConfig && (internalTranslationConfig.fullLabel | fdTranslate))
+            }}
         </span>
     </div>
     <span *ngIf="!active" class="fd-time__item fd-time__item--collapsed">

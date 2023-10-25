@@ -1,6 +1,6 @@
 import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -15,7 +15,7 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
     imports: [
         CardModule,
         QuickViewModule,
-        AvatarModule,
+        AvatarComponent,
         NgFor,
         NgSwitch,
         NgSwitchCase,

@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-panel",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/panel",
     "projectType": "library",
     "prefix": "fdp-doc",

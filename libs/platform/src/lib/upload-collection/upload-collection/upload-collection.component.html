@@ -307,7 +307,7 @@
         </div>
 
         <!-- Table footer -->
-        <div class="fdp-upload-collection__table-footer" *ngIf="enablePagination">
+        <div class="fdp-upload-collection__table-footer" *ngIf="enablePagination && _totalItems">
             <!-- Pagination -->
             <div class="fdp-upload-collection__pagination">
                 <span [id]="id + '-pagination'" class="fdp-upload-collection__pagination--total">

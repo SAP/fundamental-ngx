@@ -1,7 +1,17 @@
-import { AfterContentInit, ChangeDetectorRef, Component, Optional } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Optional,
+    ViewEncapsulation
+} from '@angular/core';
 
-import { DialogConfig } from '../utils/dialog-config.class';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
+import { DialogConfig } from '../utils/dialog-config.class';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog header.
@@ -15,7 +25,11 @@ import { DialogHeaderBase } from '../base/dialog-header-base.class';
  */
 @Component({
     selector: 'fd-dialog-header',
-    templateUrl: './dialog-header.component.html'
+    templateUrl: './dialog-header.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [BarModule, ContentDensityDirective, NgTemplateOutlet, NgIf]
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
     /** @hidden */

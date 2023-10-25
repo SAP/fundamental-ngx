@@ -1,7 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import {
+    BasePopoverClass,
+    PopoverBodyComponent,
+    PopoverComponent,
+    PopoverControlComponent
+} from '@fundamental-ngx/core/popover';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { BasePopoverClass } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { ProductSwitchButtonDirective } from '../product-switch-button.directive';
 import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
 
 @Component({
@@ -13,6 +22,16 @@ import { FD_PRODUCT_SWITCH_COMPONENT } from '../tokens';
             provide: FD_PRODUCT_SWITCH_COMPONENT,
             useExisting: ProductSwitchComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        ButtonComponent,
+        PopoverBodyComponent,
+        FdTranslatePipe,
+        NgIf,
+        NgTemplateOutlet
     ]
 })
 export class ProductSwitchComponent extends BasePopoverClass {
@@ -23,4 +42,8 @@ export class ProductSwitchComponent extends BasePopoverClass {
     /** Whether the product switch is disabled. */
     @Input()
     disabled = false;
+
+    /** @hidden */
+    @ContentChild(ProductSwitchButtonDirective)
+    customProductSwitchButton: ProductSwitchButtonDirective;
 }

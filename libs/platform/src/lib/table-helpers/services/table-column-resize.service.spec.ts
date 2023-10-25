@@ -183,6 +183,6 @@ describe('TableColumnResizeService', () => {
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
-        expect(visibleColumn.headerOverflows).toBeFalse();
+        expect(visibleColumn.headerOverflows).toBe(false);
     });
 });

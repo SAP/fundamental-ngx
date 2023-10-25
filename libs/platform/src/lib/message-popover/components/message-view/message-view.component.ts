@@ -1,5 +1,6 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
-import { DOCUMENT, NgTemplateOutlet, NgFor, NgIf } from '@angular/common';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { DOCUMENT, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -14,16 +15,15 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Nullable, resizeObservable, TabbableElementService } from '@fundamental-ngx/cdk/utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Nullable, TabbableElementService, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { debounceTime } from 'rxjs';
 import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/message-popover-entry.interface';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
 
 @Component({
     selector: 'fdp-message-view',
@@ -100,7 +100,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
         ListModule,
         NgFor,
         NgIf,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         LinkComponent,
         FdTranslatePipe
     ]

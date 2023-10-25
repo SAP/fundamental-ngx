@@ -1,7 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -11,7 +11,7 @@ import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
@@ -43,7 +43,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         BreadcrumbModule,
         LinkComponent,
         FacetModule,
-        AvatarModule,
+        AvatarComponent,
         ToolbarComponent,
         ToolbarItemDirective,
         ContentDensityDirective,
@@ -51,7 +51,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         ObjectNumberModule,
         CdkScrollable,
         BarModule

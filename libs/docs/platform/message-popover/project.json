@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-message-popover",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/message-popover",
     "projectType": "library",
     "prefix": "fdp-doc",

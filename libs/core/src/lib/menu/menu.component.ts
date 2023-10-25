@@ -35,7 +35,6 @@ import { SegmentedButtonHeaderDirective } from './directives/segmented-button/se
 import { SegmentedButtonOptionDirective } from './directives/segmented-button/segmented-button-option.directive';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
-import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
 import { FD_MENU_COMPONENT, FD_MENU_ITEM_COMPONENT } from './menu.tokens';
 import { MenuService } from './services/menu.service';
@@ -54,6 +53,7 @@ let menuUniqueId = 0;
     providers: [
         MenuService,
         PopoverService,
+        DynamicComponentService,
         {
             provide: FD_MENU_COMPONENT,
             useExisting: forwardRef(() => MenuComponent)
@@ -381,12 +381,13 @@ export class MenuComponent
             parent: this._injector
         });
 
-        this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
+        this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
             this._menuRootTemplate,
-            MenuMobileModule,
             MenuMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
 
         this._listenOnTriggerRefClicks();

@@ -214,20 +214,22 @@ export class ${componentName} {}`;
     }
 
     private getFilePath(file: ExampleFile, extension: string): string {
-        return 'src/app/' + this.getFileBasis(file) + '.' + extension;
+        return `src/app/${this.getFileBasis(file)}.${extension}`;
     }
 
     private getFileBasis(file: ExampleFile): string {
+        let fileBasis: string;
         if (file.service) {
-            return file.fileName + '.service';
+            fileBasis = file.fileName + '.service';
+        } else if (file.pipe) {
+            fileBasis = file.fileName + '.pipe';
+        } else if (file.pure) {
+            fileBasis = file.fileName + '';
+        } else {
+            fileBasis = file.fileName + '.component';
         }
-        if (file.pipe) {
-            return file.fileName + '.pipe';
-        }
-        if (file.pure) {
-            return file.fileName + '';
-        }
-        return file.fileName + '.component';
+
+        return `${file.path ? file.path + '/' : ''}${fileBasis}`;
     }
 
     /** this function transform that-word, or that_word to ThatWord */
@@ -267,6 +269,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ThemingService, provideTheming } from '@fundamental-ngx/core/theming';
+import { provideDialogService } from '@fundamental-ngx/core/dialog';
 ${getImport({ name: mainComponent.componentName, path: './app/' + mainComponent.basis })};
 
 bootstrapApplication(${mainComponent.componentName}, {
@@ -277,6 +280,7 @@ bootstrapApplication(${mainComponent.componentName}, {
       provideTheming({
         defaultTheme: '${this._themingService?.getCurrentTheme()?.id || 'sap_horizon'}'
       }),
+      provideDialogService()
     ],
   }).then((appRef: ApplicationRef) => appRef.injector.get(ThemingService).init());
   `;

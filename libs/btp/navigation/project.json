@@ -1,0 +1,8 @@
+{
+    "name": "btp-navigation",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "libs/btp/navigation",
+    "prefix": "fdb",
+    "tags": ["type:lib", "scope:fdb"]
+}

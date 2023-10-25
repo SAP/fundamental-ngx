@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -11,16 +12,17 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import {
     NestedListDirective,
     NestedListKeyboardService,
     NestedListStateService,
     PreparedNestedListComponent
 } from '@fundamental-ngx/core/nested-list';
-import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationModel } from './side-navigation-model';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationInterface } from './side-navigation.interface';
 
 /**
@@ -33,7 +35,9 @@ import { SideNavigationInterface } from './side-navigation.interface';
     selector: 'fd-side-nav',
     styleUrls: ['side-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [NestedListKeyboardService, NestedListStateService]
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
+    standalone: true,
+    imports: [NgIf, SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {
     /**

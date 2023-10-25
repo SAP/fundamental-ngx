@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, TemplateRef, ViewChild } from '@angular/core';
-import { WizardSize } from '../wizard-progress-bar/wizard-progress-bar.directive';
 import { WizardNextStepComponent } from '../wizard-next-step/wizard-next-step.component';
+import { WizardSize } from '../wizard-progress-bar/wizard-progress-bar.directive';
 
 export type WizardContentBackground = 'solid' | 'list' | 'transparent';
 
@@ -8,7 +8,8 @@ export type WizardContentBackground = 'solid' | 'list' | 'transparent';
     selector: 'fd-wizard-content',
     templateUrl: './wizard-content.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./wizard-content.component.scss']
+    styleUrls: ['./wizard-content.component.scss'],
+    standalone: true
 })
 export class WizardContentComponent {
     /**

@@ -8,7 +8,7 @@ describe('GridListFooterComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GridListFooterComponent]
+            imports: [GridListFooterComponent]
         }).compileComponents();
     });
 

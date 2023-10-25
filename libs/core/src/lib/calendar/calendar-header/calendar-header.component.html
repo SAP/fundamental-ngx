@@ -7,8 +7,8 @@
             glyph="slim-arrow-left"
             [attr.id]="_prevButtonId"
             [disabled]="previousButtonDisabled"
-            [attr.title]="previousAriaLabel"
-            [ariaLabel]="previousAriaLabel"
+            [attr.title]="previousAriaLabel | fdTranslate"
+            [ariaLabel]="previousAriaLabel | fdTranslate"
             type="button"
             (click)="previousClicked.emit()"
         ></button>
@@ -61,8 +61,8 @@
             glyph="slim-arrow-right"
             [attr.id]="_nextButtonId"
             [disabled]="nextButtonDisabled"
-            [attr.title]="nextAriaLabel"
-            [ariaLabel]="nextAriaLabel"
+            [attr.title]="nextAriaLabel | fdTranslate"
+            [ariaLabel]="nextAriaLabel | fdTranslate"
             (click)="nextClicked.emit()"
             type="button"
         ></button>
@@ -71,7 +71,7 @@
 
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
-    <div [attr.id]="_selectMonthButtonAriaLabelId">{{ selectMonthAriaLabel }}</div>
-    <div [attr.id]="_selectYearButtonAriaLabelId">{{ selectYearAriaLabel }}</div>
-    <div [attr.id]="_selectYearsRangeButtonAriaLabelId">{{ selectAggregatedYearAriaLabel }}</div>
+    <div [attr.id]="_selectMonthButtonAriaLabelId">{{ selectMonthAriaLabel | fdTranslate }}</div>
+    <div [attr.id]="_selectYearButtonAriaLabelId">{{ 'coreCalendar.yearSelectionLabel' | fdTranslate }}</div>
+    <div [attr.id]="_selectYearsRangeButtonAriaLabelId">{{ selectAggregatedYearAriaLabel | fdTranslate }}</div>
 </div>

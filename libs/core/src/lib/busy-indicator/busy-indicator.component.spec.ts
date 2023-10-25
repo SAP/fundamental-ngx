@@ -67,22 +67,6 @@ describe('BusyIndicatorComponent', () => {
         expect(fixture.nativeElement.querySelector('.fd-busy-indicator--l')).toBeTruthy();
     });
 
-    it('should display properly with content projection', () => {
-        component.hasContent = true;
-        fixture.detectChanges();
-
-        expect(fixture.nativeElement.querySelector('.fd-busy-indicator--absolute')).toBeTruthy();
-        expect(fixture.nativeElement.querySelector('.fd-busy-indicator__overlay--transparent')).toBeFalsy();
-    });
-
-    it('should display properly with no projection', () => {
-        component.hasContent = false;
-        fixture.detectChanges();
-
-        expect(fixture.nativeElement.querySelector('.fd-busy-indicator--absolute')).toBeFalsy();
-        expect(fixture.nativeElement.querySelector('.fd-busy-indicator__overlay--transparent')).toBeTruthy();
-    });
-
     it('should display as block', () => {
         component.block = true;
         fixture.detectChanges();

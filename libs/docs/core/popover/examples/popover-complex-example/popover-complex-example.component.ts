@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
+import {
+    BarComponent,
+    BarElementDirective,
+    BarLeftDirective,
+    BarMiddleDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     PopoverBodyComponent,
@@ -10,6 +17,7 @@ import {
     PopoverComponent,
     PopoverControlComponent
 } from '@fundamental-ngx/core/popover';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Component({
     selector: 'fd-popover-complex-example',
@@ -19,11 +27,17 @@ import {
     imports: [
         PopoverComponent,
         PopoverControlComponent,
-        ButtonModule,
+        BarComponent,
+        ButtonBarComponent,
+        BarElementDirective,
+        BarLeftDirective,
+        BarMiddleDirective,
+        BarRightDirective,
+        ButtonComponent,
         PopoverBodyComponent,
-        AvatarModule,
+        TitleComponent,
+        AvatarComponent,
         PopoverBodyHeaderDirective,
-        BarModule,
         ContentDensityDirective,
         PopoverBodyFooterDirective
     ]

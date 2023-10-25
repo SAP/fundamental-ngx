@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { FormsModule } from '@angular/forms';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { ToolbarComponent, ToolbarLabelDirective } from '@fundamental-ngx/core/toolbar';
 import { ObjectListItemModule, PlatformListModule, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
@@ -152,7 +152,7 @@ export class ListDataProvider extends DataProvider<Product> {
         FormsModule,
         ObjectListItemModule,
         ObjectMarkerModule,
-        ObjectStatusModule
+        ObjectStatusComponent
     ]
 })
 export class PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent implements AfterViewInit {

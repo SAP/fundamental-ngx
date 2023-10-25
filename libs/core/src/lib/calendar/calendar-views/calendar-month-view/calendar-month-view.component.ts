@@ -1,29 +1,29 @@
 import {
-    Component,
-    Input,
-    Output,
-    ViewEncapsulation,
-    EventEmitter,
-    ElementRef,
-    OnInit,
-    OnDestroy,
-    ChangeDetectorRef,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
     Inject,
+    Input,
     OnChanges,
-    SimpleChanges
+    OnDestroy,
+    OnInit,
+    Output,
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
+import { NgFor } from '@angular/common';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
 import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
-import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgFor } from '@angular/common';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -36,7 +36,7 @@ import { NgFor } from '@angular/common';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgFor, ButtonModule]
+    imports: [NgFor, ButtonModule, FdTranslatePipe]
 })
 export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChanges, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */
@@ -90,8 +90,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _dateTimeAdapter: DatetimeAdapter<D>,
-        private _calendarI18nLabels: CalendarI18nLabels
+        private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
     /** @hidden */
@@ -132,32 +131,6 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     /** View ID */
     get viewId(): string {
         return this.id + '-month-view';
-    }
-
-    /**
-     * @hidden
-     * Today cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _todayAriaLabel(): string {
-        return this._calendarI18nLabels.todayLabel;
-    }
-
-    /**
-     * @hidden
-     * Selected date cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _selectedDateAriaLabel(): string {
-        return this._calendarI18nLabels.dateSelectedLabel;
-    }
-
-    /**
-     * @hidden
-     * View description
-     */
-    get _viewRoleDescription(): string {
-        return this._calendarI18nLabels.calendarMonthViewDescription;
     }
 
     /**

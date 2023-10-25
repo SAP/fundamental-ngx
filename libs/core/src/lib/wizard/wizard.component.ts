@@ -1,3 +1,5 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -15,19 +17,21 @@ import {
     QueryList,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Nullable, TabbableElementService, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { DialogBodyComponent, FD_DIALOG_BODY_COMPONENT } from '@fundamental-ngx/core/dialog';
-import { scrollTop } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { WizardStepComponent } from './wizard-step/wizard-step.component';
-import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
-import { WizardContentComponent } from './wizard-content/wizard-content.component';
-import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
-import { WIZARD } from './wizard-injection-token';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
+import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { resolveTranslationSignal } from '@fundamental-ngx/i18n';
+import { Subscription } from 'rxjs';
+import { ACTIVE_STEP_STATUS, COMPLETED_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS } from './constants';
+import { WizardContentComponent } from './wizard-content/wizard-content.component';
+import { WIZARD } from './wizard-injection-token';
+import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
+import { WizardStepComponent } from './wizard-step/wizard-step.component';
+import { WizardService } from './wizard.service';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -60,14 +64,18 @@ export const handleTimeoutReference = (): void => {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
+        WizardService,
         {
             provide: WIZARD,
             useExisting: WizardComponent
         }
     ],
     host: {
-        role: 'region'
-    }
+        role: 'region',
+        '[attr.aria-label]': 'ariaLabel || _defaultAriaLabel()'
+    },
+    standalone: true,
+    imports: [NgIf, ScrollSpyDirective, CdkScrollable, ScrollbarDirective, NgFor, NgTemplateOutlet]
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
     /**
@@ -100,7 +108,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * If not provided, is being translated by i18n package
      */
     @Input()
-    @HostBinding('attr.aria-label')
     ariaLabel: string;
 
     /** @hidden */
@@ -133,30 +140,26 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     stackedStepsRight: WizardStepComponent[] = [];
 
     /** @hidden */
+    protected _defaultAriaLabel = resolveTranslationSignal('coreWizard.ariaLabel');
+
+    /** @hidden */
     private _stepEventSubscriptions: Subscription = new Subscription();
 
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    private _translationResolver = new TranslationResolver();
+    private _previousWidth: number;
 
     /** @hidden */
-    private _previousWidth: number;
+    private readonly _tabbableService = inject(TabbableElementService);
 
     /** @hidden */
     constructor(
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
-        @Inject(FD_LANGUAGE) _language$: Observable<FdLanguage>,
         @Optional() @Inject(FD_DIALOG_BODY_COMPONENT) private _dialogBodyComponent: DialogBodyComponent
-    ) {
-        const sub = _language$.subscribe((lang) => {
-            // set ariaLabel only if it's not applied manually
-            this.ariaLabel ??= this._translationResolver.resolve(lang, 'coreWizard.ariaLabel');
-        });
-        this._subscriptions.add(sub);
-    }
+    ) {}
 
     /** @hidden */
     @HostListener('window:resize')
@@ -203,6 +206,22 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         this._stepEventSubscriptions.unsubscribe();
         this._subscriptions.unsubscribe();
         this.wrapperContainer?.nativeElement.removeEventListener('scroll', handleTimeoutReference);
+    }
+
+    /** @hidden */
+    scrollSpyChange($event: HTMLElement): void {
+        if (!_fromScrollToCurrentStep) {
+            this.steps.forEach((step) => {
+                if (step._stepId.toString() === $event.children[0].children[0].id) {
+                    step.status = CURRENT_STEP_STATUS;
+                } else if (step._stepId < parseInt($event.children[0].children[0].id, 10)) {
+                    step.status = COMPLETED_STEP_STATUS;
+                } else {
+                    step.status = UPCOMING_STEP_STATUS;
+                }
+            });
+        }
+        this._shrinkWhileAnyStepIsTooNarrow();
     }
 
     /**
@@ -413,15 +432,26 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                         '.' + WIZARD_NAVIGATION_CLASS
                     ).clientHeight;
 
-                    scrollTop(
-                        this.wrapperContainer.nativeElement.children[0],
-                        child.offsetTop - wizardNavigationHeight
-                    );
+                    scrollTop(this.wrapperContainer.nativeElement, child.offsetTop - wizardNavigationHeight);
+
+                    if (index === 0) {
+                        this._focusFirstTabbableElement(index);
+                    } else {
+                        // setTimeout needed to allow for smooth scroll animation
+                        setTimeout(() => {
+                            this._focusFirstTabbableElement(index);
+                        }, 500);
+                    }
                 }
             });
             this._setUpScrollListener();
         }
-        this.scrollbar.scroll({ top: 0, behavior: 'smooth' });
+    }
+
+    /** @hidden */
+    private _focusFirstTabbableElement(index = 0): void {
+        const contentContainer = this._elRef.nativeElement.querySelectorAll('.fd-wizard__content')[index];
+        this._tabbableService.getTabbableElement(contentContainer)?.focus();
     }
 
     /** @hidden */
@@ -502,6 +532,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             this.progressBar.visible = true;
             this._setContentTemplates();
             this._shrinkWhileAnyStepIsTooNarrow();
+        }
+        if (!this.appendToWizard) {
+            this._focusFirstTabbableElement();
         }
         setTimeout(() => {
             this._cdRef.detectChanges();
@@ -607,21 +640,5 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
 
         return this.steps.last;
-    }
-
-    /** @hidden */
-    scrollSpyChange($event: HTMLElement): void {
-        if (!_fromScrollToCurrentStep) {
-            this.steps.forEach((step) => {
-                if (step._stepId.toString() === $event.children[0].children[0].id) {
-                    step.status = CURRENT_STEP_STATUS;
-                } else if (step._stepId < parseInt($event.children[0].children[0].id, 10)) {
-                    step.status = COMPLETED_STEP_STATUS;
-                } else {
-                    step.status = UPCOMING_STEP_STATUS;
-                }
-            });
-        }
-        this._shrinkWhileAnyStepIsTooNarrow();
     }
 }

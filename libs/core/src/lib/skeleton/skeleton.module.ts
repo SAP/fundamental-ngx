@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { SkeletonComponent } from './components/skeleton.component';
 
+/**
+ * @deprecated
+ * Use direct `SkeletonComponent` import.
+ */
 @NgModule({
-    imports: [CommonModule],
-    declarations: [SkeletonComponent],
+    imports: [SkeletonComponent],
     exports: [SkeletonComponent]
 })
 export class SkeletonModule {}

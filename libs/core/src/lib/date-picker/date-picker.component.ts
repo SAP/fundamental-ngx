@@ -49,7 +49,7 @@ import { InputGroupInputDirective, InputGroupModule } from '@fundamental-ngx/cor
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { FdLanguageKeyIdentifier, FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { DatePickerMobileComponent } from './date-picker-mobile/date-picker-mobile.component';
@@ -139,7 +139,6 @@ export class DatePickerComponent<D>
     @Input()
     set message(message: string) {
         this._message = message;
-        this._popoverFormMessage.message = message;
     }
 
     /** The trigger events that will open/close the message box.
@@ -228,7 +227,6 @@ export class DatePickerComponent<D>
     @Input()
     set state(state: Nullable<FormStates>) {
         this._state = state || 'default';
-        this._popoverFormMessage.messageType = state || 'default';
     }
 
     /** @hidden */
@@ -394,6 +392,10 @@ export class DatePickerComponent<D>
     private readonly _calendarTemplate: TemplateRef<any>;
 
     /** @hidden */
+    @ViewChild('popoverMessageTemplate')
+    private readonly _messagePopoverTemplate: TemplateRef<any>;
+
+    /** @hidden */
     _message: string | null = null;
 
     /** @hidden */
@@ -449,7 +451,7 @@ export class DatePickerComponent<D>
      * Date input aria label key based on type
      * @hidden
      */
-    get _dateInputArialLabelKey(): string {
+    get _dateInputArialLabelKey(): FdLanguageKeyIdentifier {
         // return either input value or a key for "fdTranslate" pipe
         return this.type === 'range' ? 'coreDatePicker.dateRangeInputLabel' : 'coreDatePicker.dateInputLabel';
     }
@@ -642,14 +644,16 @@ export class DatePickerComponent<D>
         const endChanged = !this._dateTimeAdapter.datesEqual(dates.end, this.selectedRangeDate.end);
         if (dates && (startChanged || endChanged)) {
             const shouldClose = this.closeOnDateChoose && dates.end !== null;
-            this._inputFieldDate = this._formatDateRange(dates);
-            this.selectedRangeDate = {
-                start: dates.start,
-                end: dates.end
-            };
-            this.selectedRangeDateChange.emit(this.selectedRangeDate);
-            this.onChange(this.selectedRangeDate);
-            this._isInvalidDateInput = !this.isModelValid();
+            if (dates.end !== null) {
+                this._inputFieldDate = this._formatDateRange(dates);
+                this.selectedRangeDate = {
+                    start: dates.start,
+                    end: dates.end
+                };
+                this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                this.onChange(this.selectedRangeDate);
+                this._isInvalidDateInput = !this.isModelValid();
+            }
             if (shouldClose) {
                 this.closeCalendar();
             }
@@ -953,9 +957,8 @@ export class DatePickerComponent<D>
     /** @hidden */
     private _InitialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message || '';
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state;
+        this._popoverFormMessage.message = this._messagePopoverTemplate;
     }
 
     /** @hidden */

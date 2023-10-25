@@ -1,0 +1,19 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "../../dist/out-tsc",
+        "target": "ES2022",
+        "declaration": true,
+        "declarationMap": true,
+        "types": [],
+        "lib": ["dom", "es2018"],
+        "useDefineForClassFields": false
+    },
+    "angularCompilerOptions": {
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true,
+        "enableResourceInlining": true
+    },
+    "exclude": ["test.ts", "**/*.spec.ts", "jest.config.ts", "test-setup.ts"],
+    "include": ["**/*.ts"]
+}

@@ -29,7 +29,7 @@
         fdType="transparent"
         tabindex="0"
         glyph="overflow"
-        title="Menu"
+        [title]="'platformApprovalFlow.nodeMenuButtonTitle' | fdTranslate"
         fdCompact
         [fdMenuTrigger]="menu"
         [disabled]="_isEditActionsAvailable"
@@ -68,27 +68,30 @@
         </div>
 
         <fdp-object-status [status]="_objectStatus" [inverted]="true">
-            <ng-container *ngIf="approvalStatusTemplate; then userStatusTemplate; else defaultStatusTemplate">
-            </ng-container>
-
-            <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                <ng-container *ngIf="_dueIn === dueDateThreshold">
-                    {{ 'platformApprovalFlow.nodeStatusDueToday' | fdTranslate }}
+            <ng-template fdpObjectStatusText>
+                <ng-container *ngIf="approvalStatusTemplate; then userStatusTemplate; else defaultStatusTemplate">
                 </ng-container>
 
-                <ng-container *ngIf="_dueIn < dueDateThreshold">
-                    {{
-                        'platformApprovalFlow.nodeStatusDueInXDays' | fdTranslate : { count: dueDateThreshold - _dueIn }
-                    }}
-                </ng-container>
+                <ng-container *ngIf="checkDueDate && _showDueDateWarning">
+                    <ng-container *ngIf="_dueIn === dueDateThreshold">
+                        {{ 'platformApprovalFlow.nodeStatusDueToday' | fdTranslate }}
+                    </ng-container>
 
-                <ng-container *ngIf="_dueIn > dueDateThreshold">
-                    {{
-                        'platformApprovalFlow.nodeStatusXDaysOverdue'
-                            | fdTranslate : { count: _dueIn - dueDateThreshold }
-                    }}
+                    <ng-container *ngIf="_dueIn < dueDateThreshold">
+                        {{
+                            'platformApprovalFlow.nodeStatusDueInXDays'
+                                | fdTranslate : { count: dueDateThreshold - _dueIn }
+                        }}
+                    </ng-container>
+
+                    <ng-container *ngIf="_dueIn > dueDateThreshold">
+                        {{
+                            'platformApprovalFlow.nodeStatusXDaysOverdue'
+                                | fdTranslate : { count: _dueIn - dueDateThreshold }
+                        }}
+                    </ng-container>
                 </ng-container>
-            </ng-container>
+            </ng-template>
         </fdp-object-status>
     </div>
 </ng-template>
@@ -128,7 +131,7 @@
         *ngIf="node.status !== 'approved'"
         fd-button
         glyph="add"
-        title="Add node"
+        [title]="'platformApprovalFlow.addNodeButtonTitle' | fdTranslate"
         fdCompact
         class="fdp-approval-flow-node__add"
         [class.fdp-approval-flow-node__add--blank]="this._blank"

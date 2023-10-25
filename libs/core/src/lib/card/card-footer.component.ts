@@ -1,3 +1,4 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -8,8 +9,8 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { Subject, map, startWith, tap } from 'rxjs';
 import { CardFooterActionItemDirective } from './card-footer-action-item.directive';
-import { map, startWith, Subject, tap } from 'rxjs';
 
 @Component({
     selector: 'fd-card-footer',
@@ -18,7 +19,9 @@ import { map, startWith, Subject, tap } from 'rxjs';
         class: 'fd-card__footer'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgFor, NgTemplateOutlet]
 })
 export class CardFooterComponent implements AfterViewInit, OnDestroy {
     /** @hidden */

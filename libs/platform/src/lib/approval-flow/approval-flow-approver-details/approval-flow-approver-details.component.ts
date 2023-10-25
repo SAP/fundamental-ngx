@@ -10,9 +10,26 @@ import { Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
-import { ApprovalNode, ApprovalUser } from '../interfaces';
-import { filterByName } from '../helpers';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent
+} from '@fundamental-ngx/core/dialog';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { SearchFieldComponent } from '@fundamental-ngx/platform/search-field';
 import { ApprovalFlowUserDataSource } from '@fundamental-ngx/platform/shared';
+import { ApprovalFlowUserDetailsComponent } from '../approval-flow-user-details/approval-flow-user-details.component';
+import { ApprovalFlowUserListComponent } from '../approval-flow-user-list/approval-flow-user-list.component';
+import { filterByName } from '../helpers';
+import { ApprovalNode, ApprovalUser } from '../interfaces';
 
 export interface ApprovalFlowApproverDetailsDialogRefData {
     node?: ApprovalNode;
@@ -35,7 +52,25 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
     encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fdp-approval-flow-dialog fdp-approval-flow-approver-details'
-    }
+    },
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        NgIf,
+        IconComponent,
+        SearchFieldComponent,
+        ContentDensityDirective,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        ApprovalFlowUserDetailsComponent,
+        ApprovalFlowUserListComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        FdTranslatePipe
+    ]
 })
 export class ApprovalFlowApproverDetailsComponent implements OnInit {
     /** @hidden */

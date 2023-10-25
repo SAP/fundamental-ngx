@@ -37,19 +37,19 @@ import {
 import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
-    ContentDensityModule,
+    ContentDensityDirective,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { FormControlModule, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
+import { MultiAnnouncerDirective } from '@fundamental-ngx/core/multi-combobox';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
-import { TokenModule, TokenizerComponent } from '@fundamental-ngx/core/token';
+import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { AutoCompleteDirective, AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
-import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
@@ -87,9 +87,11 @@ let deprecationWarningShown = false;
         PopoverBodyComponent,
         FormInputMessageGroupComponent,
         InputGroupModule,
-        TokenModule,
+        TokenComponent,
+        TokenizerComponent,
+        TokenizerInputDirective,
         NgFor,
-        FormControlModule,
+        FormControlComponent,
         FormsModule,
         AutoCompleteDirective,
         FormMessageComponent,
@@ -99,7 +101,8 @@ let deprecationWarningShown = false;
         ListSecondaryDirective,
         SearchHighlightPipe,
         FdTranslatePipe,
-        ContentDensityModule
+        ContentDensityDirective,
+        MultiAnnouncerDirective
     ]
 })
 export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit, AfterViewInit {
@@ -364,8 +367,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         // selected items should be displayed in the same order as options
         const valueIndexes = new Map<any, number>(this._suggestions.map((s, i) => [s.value, i]));
         this._selectedSuggestions.sort((a, b) => valueIndexes.get(a.value)! - valueIndexes.get(b.value)!);
-        this._propagateChange();
-
         this._tokenizer.onResize();
 
         this._tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
@@ -398,8 +399,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         // setting value, it will call setValue()
         this.value = selectedItems;
-
-        this._emitChangeEvent();
     }
 
     /** @hidden */
@@ -417,12 +416,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._dynamicComponentService.createDynamicComponent(
             { listTemplate: this.listTemplate, controlTemplate: this.mobileControlTemplate },
-            PlatformMultiComboboxMobileModule,
             MultiComboboxMobileComponent,
-            this._viewContainerRef,
-            injector
+            {
+                containerRef: this._viewContainerRef
+            },
+            { injector }
         );
     }
 }

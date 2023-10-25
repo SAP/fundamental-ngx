@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { PlatformSmartFilterBarModule } from '@fundamental-ngx/platform/smart-filter-bar';
@@ -45,7 +45,8 @@ import { of } from 'rxjs';
                     settingsCategoryMandatory: 'Custom "Mandatory" label'
                 }
             })
-        }
+        },
+        provideDateTimeFormats()
     ],
     standalone: true,
     imports: [

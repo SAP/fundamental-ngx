@@ -19,6 +19,7 @@ import { AvatarInitialsExampleComponent } from './examples/avatar-initials-examp
 import { AvatarPlaceholderExampleComponent } from './examples/avatar-placeholder-example.component';
 import { AvatarTileExampleComponent } from './examples/avatar-tile-example.component';
 import { AvatarTransparentExampleComponent } from './examples/avatar-transparent-example.component';
+import { AvatarValueStateExampleComponent } from './examples/avatar-value-state-example.component';
 import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-example.component';
 
 @Component({
@@ -41,7 +42,8 @@ import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-exam
         AvatarAccentColorsExampleComponent,
         AvatarZoomIconExampleComponent,
         AvatarBordersExampleComponent,
-        AvatarDefaultImageWithAlternativeOptionsExampleComponent
+        AvatarDefaultImageWithAlternativeOptionsExampleComponent,
+        AvatarValueStateExampleComponent
     ]
 })
 export class AvatarDocsComponent {
@@ -115,6 +117,13 @@ export class AvatarDocsComponent {
         getExampleFile('avatar-default-image-with-alternative-options-example.component.html'),
         getExampleFile('avatar-default-image-with-alternative-options-example.component.ts', {
             component: 'AvatarDefaultImageWithAlternativeOptionsExampleComponent'
+        })
+    ];
+
+    avatarValueStates: ExampleFile[] = [
+        getExampleFile('avatar-value-state-example.component.html'),
+        getExampleFile('avatar-value-state-example.component.ts', {
+            component: 'AvatarValueStateExampleComponent'
         })
     ];
 }

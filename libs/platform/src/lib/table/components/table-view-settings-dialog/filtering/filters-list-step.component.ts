@@ -10,6 +10,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { NgFor } from '@angular/common';
+import {
+    ListComponent,
+    ListGroupHeaderDirective,
+    ListItemComponent,
+    ListLinkDirective,
+    ListTitleDirective
+} from '@fundamental-ngx/core/list';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FILTERS_VIEW_STEP_TOKEN, FiltersViewStep } from './filters-active-step';
 
 /**
@@ -28,7 +38,18 @@ export interface SelectableFilter {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     /** Each filters dialog step must provide FILTERS_VIEW_STEP_TOKEN to be accessible */
-    providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FiltersListStepComponent) }]
+    providers: [{ provide: FILTERS_VIEW_STEP_TOKEN, useExisting: forwardRef(() => FiltersListStepComponent) }],
+    standalone: true,
+    imports: [
+        TitleComponent,
+        ListComponent,
+        ListGroupHeaderDirective,
+        NgFor,
+        ListItemComponent,
+        ListLinkDirective,
+        ListTitleDirective,
+        FdTranslatePipe
+    ]
 })
 export class FiltersListStepComponent implements FiltersViewStep {
     /** Selectable filters list */

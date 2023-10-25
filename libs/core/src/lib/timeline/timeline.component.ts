@@ -1,3 +1,4 @@
+import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -22,15 +23,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { debounceTime, Subject } from 'rxjs';
-import { ViewportRuler } from '@angular/cdk/overlay';
+import { Subject, debounceTime } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { TimelineNodeHeaderDirective } from './components/timeline-node-header/timeline-node-header.directive';
+import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
 import { TimelineFirstListOutletDirective } from './directives/timeline-first-list-outlet.directive';
 import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directives/timeline-node-def.directive';
-import { TimelinePositionControlService } from './services/timeline-position-control.service';
-import { TimelineAxis, TimeLinePositionStrategy, TimelineSidePosition } from './types';
 import { TimelineSecondListOutletDirective } from './directives/timeline-second-list-outlet.directive';
+import { TimelinePositionControlService } from './services/timeline-position-control.service';
+import { TimeLinePositionStrategy, TimelineAxis, TimelineSidePosition } from './types';
 
 @Component({
     selector: 'fd-timeline',
@@ -45,7 +49,16 @@ import { TimelineSecondListOutletDirective } from './directives/timeline-second-
         class: 'fd-timeline',
         '[class.fd-timeline--horizontal]': 'axis === "horizontal"',
         '[class.fd-timeline--vertical]': 'axis === "vertical"'
-    }
+    },
+    standalone: true,
+    imports: [
+        TimelineFirstListOutletDirective,
+        TimelineSecondListOutletDirective,
+        RepeatDirective,
+        TimelineNodeComponent,
+        TimelineNodeHeaderDirective,
+        SkeletonComponent
+    ]
 })
 export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, AfterViewInit {
     /**

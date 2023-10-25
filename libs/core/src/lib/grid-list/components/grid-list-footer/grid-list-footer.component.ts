@@ -6,6 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     host: {
         class: 'fd-col fd-col--12'
     },
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class GridListFooterComponent {}

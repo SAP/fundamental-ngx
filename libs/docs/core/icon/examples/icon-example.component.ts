@@ -695,12 +695,14 @@ export class IconExampleComponent {
         'people-connected',
         'select-appointments',
         'light-mode',
-        'dark-mode'
-        // 'time-off',
-        // 'add-calendar',
-        // 'currency',
-        // 'bell-2',
-        // 'accessibility',
-        // 'high-priority'
+        'dark-mode',
+        'time-off',
+        'add-calendar',
+        'currency',
+        'bell-2',
+        'accessibility',
+        'high-priority',
+        'da',
+        'da-2'
     ];
 }

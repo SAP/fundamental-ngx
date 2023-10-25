@@ -3,22 +3,22 @@ import {
     Component,
     ElementRef,
     HostBinding,
+    Inject,
     Input,
-    ViewEncapsulation,
     OnChanges,
     OnInit,
     Optional,
-    Inject
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { BasePopoverClass, FD_POPOVER_COMPONENT } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-notification-group',
     template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

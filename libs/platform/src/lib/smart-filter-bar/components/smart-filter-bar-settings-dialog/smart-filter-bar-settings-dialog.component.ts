@@ -8,33 +8,100 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { asyncScheduler, BehaviorSubject, firstValueFrom, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, asyncScheduler, firstValueFrom } from 'rxjs';
 import { observeOn, takeUntil } from 'rxjs/operators';
 
-import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
+import {
+    DialogBodyComponent,
+    DialogComponent,
+    DialogFooterComponent,
+    DialogHeaderComponent,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
+import { FdpSelectionChangeEvent, SelectComponent } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 import {
-    Resettable,
     RESETTABLE_TOKEN,
+    ResetButtonComponent,
+    Resettable,
     Table,
+    TableColumnComponent,
+    TableComponent,
     TableDataSource,
-    TableRowSelectionChangeEvent
+    TableRowSelectionChangeEvent,
+    TableToolbarActionsComponent,
+    TableToolbarComponent
 } from '@fundamental-ngx/platform/table';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf } from '@angular/common';
+import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import {
+    BarElementDirective,
+    BarLeftDirective,
+    BarRightDirective,
+    ButtonBarComponent
+} from '@fundamental-ngx/core/bar';
+import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import {
+    FD_LANGUAGE,
+    FdLanguage,
+    FdLanguageKeyIdentifier,
+    FdTranslatePipe,
+    TranslationResolver
+} from '@fundamental-ngx/i18n';
+import {
+    FdpCellDef,
+    FdpTableCell,
+    TableDataSourceDirective,
+    TableHeaderResizerDirective,
+    TableInitialStateDirective
+} from '@fundamental-ngx/platform/table-helpers';
 import { SmartFilterBarFieldDefinition } from '../../interfaces/smart-filter-bar-field-definition';
-import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
 import { FieldFilterItem } from '../../interfaces/smart-filter-bar-field-filter-item';
-import { SmartFilterBarOptionsDataProvider } from './data-provider';
-import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
+import { SmartFilterSettingsDialogConfig } from '../../interfaces/smart-filter-bar-settings-dialog-config';
 import { SmartFilterBarVisibilityCategoryLabels } from '../../interfaces/smart-filter-bar-visibility-category';
+import { SmartFilterBarOptionsDataProvider } from './data-provider';
 
 @Component({
     selector: 'fdp-smart-filter-bar-settings-dialog',
     templateUrl: './smart-filter-bar-settings-dialog.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: RESETTABLE_TOKEN, useExisting: SmartFilterBarSettingsDialogComponent }]
+    providers: [{ provide: RESETTABLE_TOKEN, useExisting: SmartFilterBarSettingsDialogComponent }],
+    standalone: true,
+    imports: [
+        DialogComponent,
+        DialogHeaderComponent,
+        TemplateDirective,
+        BarLeftDirective,
+        BarElementDirective,
+        TitleComponent,
+        BarRightDirective,
+        ResetButtonComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        DialogBodyComponent,
+        NgIf,
+        TableDataSourceDirective,
+        TableHeaderResizerDirective,
+        TableComponent,
+        TableInitialStateDirective,
+        TableToolbarComponent,
+        TableToolbarActionsComponent,
+        SelectComponent,
+        TableColumnComponent,
+        FdpCellDef,
+        FdpTableCell,
+        IconComponent,
+        DialogFooterComponent,
+        ButtonBarComponent,
+        BusyIndicatorComponent,
+        FdTranslatePipe
+    ]
 })
 export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterViewInit, OnDestroy {
     /**
@@ -191,11 +258,9 @@ export class SmartFilterBarSettingsDialogComponent implements Resettable, AfterV
         const labels = { ...this._categoryLabelKeys };
         for (const strategyItem in labels) {
             if (Object.prototype.hasOwnProperty.call(labels, strategyItem)) {
-                const translationKey = labels[strategyItem];
-                labels[strategyItem] = this._translationResolver.resolve(
-                    lang,
-                    'platformSmartFilterBar.' + translationKey
-                );
+                const translationKey = ('platformSmartFilterBar.' +
+                    labels[strategyItem as keyof SmartFilterBarVisibilityCategoryLabels]) as FdLanguageKeyIdentifier;
+                labels[strategyItem] = this._translationResolver.resolve(lang, translationKey);
             }
         }
         for (const [selectValue, selectLabel] of Object.entries(labels)) {

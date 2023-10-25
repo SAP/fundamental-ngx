@@ -13,18 +13,18 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
-import { FdCalendarView } from '../types';
-import { CalendarCurrent } from '../models/calendar-current';
-import { CalendarYearGrid } from '../models/calendar-year-grid';
-import { CalendarService } from '../calendar.service';
 import { NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { CalendarService } from '../calendar.service';
+import { CalendarCurrent } from '../models/calendar-current';
+import { CalendarYearGrid } from '../models/calendar-year-grid';
+import { FdCalendarView } from '../types';
 
 /**
  * Internal use only.
@@ -40,7 +40,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonModule, NgIf]
+    imports: [ButtonModule, NgIf, FdTranslatePipe]
 })
 export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges {
     /** Currently active view. Needed for a11y labels. */
@@ -89,19 +89,26 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     readonly nextClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** Aria label for the previous button. Depends on the active view. */
-    previousAriaLabel: string;
+    get previousAriaLabel(): 'coreCalendar.previousMonthLabel' | 'coreCalendar.previousYearLabel' {
+        return this.isOnDayView ? 'coreCalendar.previousMonthLabel' : 'coreCalendar.previousYearLabel';
+    }
 
     /** Aria label for the next button. Depends on the active view. */
-    nextAriaLabel: string;
+    get nextAriaLabel(): 'coreCalendar.nextMonthLabel' | 'coreCalendar.nextYearLabel' {
+        return this.isOnDayView ? 'coreCalendar.nextMonthLabel' : 'coreCalendar.nextYearLabel';
+    }
 
     /** Button aria label to open month selection view. */
-    selectMonthAriaLabel: string;
-
-    /** Button aria label to open year selection view. */
-    selectYearAriaLabel: string;
+    get selectMonthAriaLabel(): 'coreCalendar.monthSelectionLabel' | 'coreCalendar.dateSelectionLabel' {
+        return this.isOnMonthView ? 'coreCalendar.dateSelectionLabel' : 'coreCalendar.monthSelectionLabel';
+    }
 
     /** Button aria label to open aggregated years selection view. */
-    selectAggregatedYearAriaLabel: string;
+    get selectAggregatedYearAriaLabel(): 'coreCalendar.yearsRangeSelectionLabel' | 'coreCalendar.dateSelectionLabel' {
+        return this.isOnAggregatedYearsView
+            ? 'coreCalendar.dateSelectionLabel'
+            : 'coreCalendar.yearsRangeSelectionLabel';
+    }
 
     /** Button label to open month selection view. */
     selectMonthLabel: string;
@@ -218,7 +225,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
     /** @hidden */
     constructor(
-        private _calendarI18nLabels: CalendarI18nLabels,
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
@@ -237,7 +243,6 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
             (changes.activeView && !changes.activeView.firstChange)
         ) {
             this._calculateLabels();
-            this._calculateAriaLabels();
         }
     }
 
@@ -249,11 +254,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
 
         this._calculateLabels();
 
-        this._calculateAriaLabels();
-
         this._listenToLocaleChanges();
-
-        this._listenToCalendarLabelsChanges();
     }
 
     /**
@@ -284,59 +285,10 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     }
 
     /** @hidden */
-    private _listenToCalendarLabelsChanges(): void {
-        this._calendarI18nLabels.labelsChange.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
-            this._calculateAriaLabels();
-            this._changeDetRef.markForCheck();
-        });
-    }
-
-    /** @hidden */
-    private _calculateAriaLabels(): void {
-        this._calculatePreviousAriaLabel();
-        this._calculateNextAriaLabel();
-        this._calculateSelectMonthAriaLabel();
-        this._calculateSelectYearAriaLabel();
-        this._calculateSelectAggregatedYearAriaLabel();
-    }
-
-    /** @hidden */
     private _calculateLabels(): void {
         this._calculateSelectMonthLabel();
         this._calculateSelectYearLabel();
         this._calculateSelectAggregatedYearLabel();
-    }
-
-    /** @hidden */
-    private _calculatePreviousAriaLabel(): void {
-        this.previousAriaLabel = this.isOnDayView
-            ? this._calendarI18nLabels.previousMonthLabel
-            : this._calendarI18nLabels.previousYearLabel;
-    }
-
-    /** @hidden */
-    private _calculateNextAriaLabel(): void {
-        this.nextAriaLabel = this.isOnDayView
-            ? this._calendarI18nLabels.nextMonthLabel
-            : this._calendarI18nLabels.nextYearLabel;
-    }
-    /** @hidden */
-    private _calculateSelectMonthAriaLabel(): void {
-        this.selectMonthAriaLabel = this.isOnMonthView
-            ? this._calendarI18nLabels.dateSelectionLabel
-            : this._calendarI18nLabels.monthSelectionLabel;
-    }
-
-    /** @hidden */
-    private _calculateSelectYearAriaLabel(): void {
-        this.selectYearAriaLabel = this._calendarI18nLabels.yearSelectionLabel;
-    }
-
-    /** @hidden */
-    private _calculateSelectAggregatedYearAriaLabel(): void {
-        this.selectAggregatedYearAriaLabel = this.isOnAggregatedYearsView
-            ? this._calendarI18nLabels.dateSelectionLabel
-            : this._calendarI18nLabels.yearsRangeSelectionLabel;
     }
 
     /** @hidden */

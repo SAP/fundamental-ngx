@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-multi-combobox",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/multi-combobox",
     "projectType": "library",
     "prefix": "fdp-doc",

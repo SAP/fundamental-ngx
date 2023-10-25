@@ -15,18 +15,19 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 import { BreadcrumbComponent, FD_BREADCRUMB_COMPONENT } from '@fundamental-ngx/core/breadcrumb';
+import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { IgnoreClickOnSelectionDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
+import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
+import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
-import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
+import { DynamicPageLayoutActionsComponent } from '../actions/dynamic-page-layout-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
-import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { DynamicPageHeaderTitleDirective } from '../../directives/dynamic-page-header-title.directive';
 
 export const ActionSquashBreakpointPx = 1280;
 
@@ -44,7 +45,9 @@ export const ActionSquashBreakpointPx = 1280;
             provide: DYNAMIC_PAGE_HEADER_TOKEN,
             useExisting: DynamicPageHeaderComponent
         }
-    ]
+    ],
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, IgnoreClickOnSelectionDirective]
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
     /** @hidden */

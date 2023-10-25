@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { SegmentedButtonComponent } from './segmented-button.component';
 
+/**
+ * @deprecated
+ * Use direct `SegmentedButtonComponent` import instead.
+ */
 @NgModule({
-    imports: [CommonModule],
-    exports: [SegmentedButtonComponent],
-    declarations: [SegmentedButtonComponent]
+    imports: [SegmentedButtonComponent],
+    exports: [SegmentedButtonComponent]
 })
 export class SegmentedButtonModule {}

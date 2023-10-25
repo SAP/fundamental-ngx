@@ -14,23 +14,29 @@ import {
     Optional,
     Output,
     SimpleChanges,
+    TemplateRef,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
-import { TimeComponent } from '@fundamental-ngx/core/time';
-import { PopoverFormMessageService, registerFormItemControl, FormItemControl } from '@fundamental-ngx/core/form';
-import { PopoverService } from '@fundamental-ngx/core/popover';
+import { FormItemControl, PopoverFormMessageService, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+import { PopoverService } from '@fundamental-ngx/core/popover';
+import { Placement, ValueStateAriaMessageService } from '@fundamental-ngx/core/shared';
+import { TimeComponent } from '@fundamental-ngx/core/time';
 
-import { createMissingDateImplementationError } from './errors';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { FormMessageComponent } from '@fundamental-ngx/core/form';
+import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { createMissingDateImplementationError } from './errors';
 
 let timePickerCounter = 0;
 
@@ -59,7 +65,23 @@ let timePickerCounter = 0;
     ],
     styleUrls: ['./time-picker.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        PopoverComponent,
+        PopoverControlComponent,
+        InputGroupComponent,
+        InputGroupInputDirective,
+        PopoverBodyComponent,
+        NgIf,
+        NgTemplateOutlet,
+        FormMessageComponent,
+        TimeComponent,
+        FormsModule,
+        NgSwitch,
+        NgSwitchCase,
+        FdTranslatePipe
+    ]
 })
 export class TimePickerComponent<D>
     implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator, FormItemControl
@@ -145,21 +167,13 @@ export class TimePickerComponent<D>
     @Input()
     set message(message: string) {
         this._message = message;
-        this._popoverFormMessage.message = message;
     }
-
-    /** @hidden */
-    _message: string | null = null;
 
     /** Type of the message. Can be 'success' | 'error' | 'warning' | 'information' */
     @Input()
     set messageType(messageType: FormStates) {
         this._messageType = messageType;
-        this._popoverFormMessage.messageType = messageType;
     }
-
-    /** @hidden */
-    _messageType: FormStates | null = null;
 
     /**
      * The trigger events that will open/close the message box.
@@ -170,9 +184,6 @@ export class TimePickerComponent<D>
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
-
-    /** @hidden */
-    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -193,7 +204,6 @@ export class TimePickerComponent<D>
     @Input()
     set state(state: FormStates) {
         this._state = state;
-        this._popoverFormMessage.messageType = state;
     }
 
     get state(): FormStates {
@@ -202,9 +212,6 @@ export class TimePickerComponent<D>
         }
         return this._state ?? 'default';
     }
-
-    /** @hidden */
-    private _state: FormStates | null = null;
 
     /**
      * Whether AddOn Button should be focusable
@@ -275,6 +282,19 @@ export class TimePickerComponent<D>
     @ViewChild(InputGroupInputDirective, { read: ElementRef })
     _inputElement: ElementRef;
 
+    /** @hidden */
+    @ViewChild('formMessageTemplate')
+    private readonly _formMessageTemplate: TemplateRef<any>;
+
+    /** @hidden */
+    _message: string | null = null;
+
+    /** @hidden */
+    _messageType: FormStates | null = null;
+
+    /** @hidden */
+    _messageTriggers: string[] = ['focusin', 'focusout'];
+
     /**
      * @hidden
      * Whether the input time is valid(success). Internal use.
@@ -309,15 +329,13 @@ export class TimePickerComponent<D>
     _formValueStateMessageId = `fd-time-picker-form-message-${timePickerCounter++}`;
 
     /** @hidden */
+    private _state: FormStates | null = null;
+
+    /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     private _subscriptions = new Subscription();
-
-    /** @hidden */
-    onChange: (_: Nullable<D>) => void = () => {};
-    /** @hidden */
-    onTouched: () => void = () => {};
 
     /** @hidden */
     get _placeholder(): string {
@@ -341,6 +359,11 @@ export class TimePickerComponent<D>
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
     }
+
+    /** @hidden */
+    onChange: (_: Nullable<D>) => void = () => {};
+    /** @hidden */
+    onTouched: () => void = () => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -618,8 +641,7 @@ export class TimePickerComponent<D>
     /** @hidden */
     private initialiseVariablesInMessageService(): void {
         this._popoverFormMessage.init(this._inputGroupElement);
-        this._popoverFormMessage.message = this._message ?? '';
+        this._popoverFormMessage.message = this._formMessageTemplate;
         this._popoverFormMessage.triggers = this._messageTriggers;
-        this._popoverFormMessage.messageType = this._state ?? 'default';
     }
 }

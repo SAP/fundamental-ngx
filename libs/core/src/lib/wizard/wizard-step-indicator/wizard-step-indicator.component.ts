@@ -1,3 +1,4 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -8,12 +9,18 @@ import {
     Output,
     ViewChild
 } from '@angular/core';
-import { WizardStepComponent } from '../wizard-step/wizard-step.component';
-import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
-import { Subscription } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    ActionSheetBodyComponent,
+    ActionSheetComponent,
+    ActionSheetControlComponent,
+    ActionSheetItemComponent
+} from '@fundamental-ngx/core/action-sheet';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { Subscription } from 'rxjs';
 import { FD_WIZARD_STEP_INDICATOR } from '../constants';
 import { WizardStepIndicator } from '../models/wizard-step';
+import { WizardStepComponent } from '../wizard-step/wizard-step.component';
 
 @Component({
     selector: 'fd-wizard-step-indicator',
@@ -24,6 +31,17 @@ import { WizardStepIndicator } from '../models/wizard-step';
             provide: FD_WIZARD_STEP_INDICATOR,
             useExisting: WizardStepIndicatorComponent
         }
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        ActionSheetComponent,
+        ActionSheetControlComponent,
+        NgTemplateOutlet,
+        ActionSheetBodyComponent,
+        NgFor,
+        ActionSheetItemComponent,
+        IconComponent
     ]
 })
 export class WizardStepIndicatorComponent implements WizardStepIndicator, OnDestroy {

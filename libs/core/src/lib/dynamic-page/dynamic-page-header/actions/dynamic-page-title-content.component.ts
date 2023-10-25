@@ -1,6 +1,8 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
-import { DynamicPageResponsiveSize } from '../../constants';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ToolbarComponent, ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
+import { DynamicPageResponsiveSize } from '../../constants';
 
 @Component({
     selector: 'fd-dynamic-page-title-content',
@@ -30,7 +32,9 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true,
+    imports: [NgIf, ToolbarComponent, ToolbarItemDirective, NgTemplateOutlet]
 })
 export class DynamicPageTitleContentComponent {
     /** @hidden */

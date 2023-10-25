@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DialogBodyComponent } from './dialog-body.component';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogRef } from '../utils/dialog-ref.class';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { DialogBodyComponent } from './dialog-body.component';
 
 describe('DialogBodyComponent', () => {
     let component: DialogBodyComponent;
@@ -11,8 +10,7 @@ describe('DialogBodyComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [BusyIndicatorModule],
-            declarations: [DialogBodyComponent],
+            imports: [DialogBodyComponent],
             providers: [DialogConfig, DialogRef]
         }).compileComponents();
     }));

@@ -15,13 +15,13 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { TabItemDirective } from '../tab-item/tab-item.directive';
-import { merge, Subject, Subscription } from 'rxjs';
-import { TabModes, TabSizes } from '../tab-list.component';
-import { takeUntil } from 'rxjs/operators';
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, KeyUtil, RtlService, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { Subject, Subscription, merge } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { TabItemDirective } from '../tab-item/tab-item.directive';
+import { TabLinkDirective } from '../tab-link/tab-link.directive';
+import { TabModes, TabSizes } from '../tab-list.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -30,7 +30,8 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
     providers: [contentDensityObserverProviders()],
     styleUrls: ['./tab-nav.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class TabNavComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy, CssClassBuilder {
     /** Apply user custom styles */

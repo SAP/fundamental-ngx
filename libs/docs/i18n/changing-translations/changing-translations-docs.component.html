@@ -1,0 +1,56 @@
+<fd-docs-section-title id="language-change" componentName="i18n"> Changing languages at runtime </fd-docs-section-title>
+<description>
+    <p>
+        In this particular example such capabilities are shown on the level of a component due to the limitations of the
+        example itself. The same scenario can and should be used in the root of your app.
+    </p>
+</description>
+<component-example>
+    <fd-language-change-example></fd-language-change-example>
+</component-example>
+<code-example [exampleFiles]="languageChangeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="locale-change" componentName="i18n"> Changing locales at runtime </fd-docs-section-title>
+<description>
+    <p>
+        Translations have a concept of locale, which is a combination of language and region. For example, English
+        language has different locales for US, UK, Australia, etc. The locale is used to determine the correct
+        translations for the given language. For example, in English there are two plural forms: one for singular and
+        one for plural. In Russian, there are three plural forms: one for singular, one for few and one for plural.
+    </p>
+    <p>
+        To control the locale, you can provide <code>FD_LOCALE</code> token with the locale you want to use. The locale
+        should be in the format of <code>language-region</code>. For example, <code>en-US</code> or <code>uk-UA</code>.
+    </p>
+</description>
+<component-example>
+    <fd-locale-change-example></fd-locale-change-example>
+</component-example>
+<code-example [exampleFiles]="localeChangeExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="custom-translations" componentName="i18n">
+    Creating custom translations
+</fd-docs-section-title>
+<description>
+    <p>
+        Although <code>fundamental-ngx</code> library provides a rich set of languages to work with out of the box, it's
+        possible to also define your own languages when needed. The language object is just a set of key/values, that
+        are defined per component. This object should implement <code>FdLanguage</code> interface.
+    </p>
+    <p>
+        You may provide both strings with interpolation using double curly brackets (<code>
+            {{ '{{' }} paramName {{ "}}" }}</code
+        >) or functions as language values.
+    </p>
+    <p>
+        The list of available keys can be found in the corresponding docs section of each component. The I18n section is
+        visible only for the components that have translations. The default English value for each translation is also
+        in this documentation.
+    </p>
+
+    <fd-code-snippet [file]="translationExample"></fd-code-snippet>
+</description>

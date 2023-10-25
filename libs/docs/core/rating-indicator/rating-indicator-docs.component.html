@@ -44,8 +44,18 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="dynamic" componentName="rating-indicator"> Test dynamic changes </fd-docs-section-title>
-<component-example>
-    <fd-ri-dynamic-example></fd-ri-dynamic-example>
-</component-example>
-<code-example [exampleFiles]="ratingIndicatorDynamicFields"></code-example>
+<fd-docs-section-title id="playground-rating-indicator" componentName="rating-indicator">
+    Playground Area
+</fd-docs-section-title>
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fd-rating-indicator
+        [totalRatings]="1"
+        [value]="3"
+        [displayMode]="data.properties.displayMode"
+        [allowHalves]="data.properties.allowHalves"
+        [disabled]="data.properties.disabled"
+        [size]="data.properties.size"
+        [indicatorCapacity]="data.properties.indicatorCapacity"
+        [nonInteractive]="data.properties.nonInteractive"
+    ></fd-rating-indicator>
+</playground>

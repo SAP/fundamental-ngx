@@ -8,18 +8,40 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { FILTER_STRATEGY, FilterableColumnDataType } from '@fundamental-ngx/platform/table-helpers';
 import { Subscription } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import { LayoutGridColDirective, LayoutGridRowDirective } from '@fundamental-ngx/core/layout-grid';
+import { OptionComponent, SelectComponent } from '@fundamental-ngx/core/select';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { FilterRule } from './filtering.model';
 
 @Component({
     selector: 'fdp-table-filter-rule',
     templateUrl: './filter-rule.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        LayoutGridRowDirective,
+        LayoutGridColDirective,
+        SelectComponent,
+        FormsModule,
+        NgFor,
+        OptionComponent,
+        NgSwitch,
+        NgSwitchCase,
+        NgSwitchDefault,
+        NgTemplateOutlet,
+        DatePickerComponent,
+        FormControlComponent,
+        FdTranslatePipe
+    ]
 })
 export class FilterRuleComponent implements OnDestroy {
     /** Rule to be displayed **/

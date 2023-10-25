@@ -65,6 +65,13 @@ There are two important things to consider:
 1.  You must be aware of the Apache License (which describes contributions) and **accept the Developer Certificate of Origin**. This is common practice in major Open Source projects. To make this process as simple as possible, we are using _[CLA assistant](https://cla-assistant.io/)_ for individual contributions. CLA assistant is an open source tool that integrates with GitHub very well and enables a one-click experience for accepting the CLA. For company contributors, special rules apply. See the respective section below for details.
 2.  You must follow **code style, quality, and product standards requirements**. You can find more information [HERE](https://github.com/SAP/fundamental-ngx/wiki/Code-Contribution-Guideline).
 
+### Local setup
+
+1. node and yarn is installed as per package.json versions
+2. run `yarn` to install (`npm i` without a package.lock probably won't work)
+3. (run `yarn prepare`)
+4. ckeck if the app works by `yarn start`
+
 ### Contributor License Agreement
 
 ## Developer Certificate of Origin (DCO)

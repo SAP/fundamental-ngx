@@ -9,6 +9,13 @@ export const ROUTES: Routes = [
         loadChildren: () => import('@fundamental-ngx/docs/core')
     },
     {
+        path: 'btp',
+        data: {
+            library: 'BTP'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/btp')
+    },
+    {
         path: 'platform',
         data: {
             library: 'Platform'
@@ -28,6 +35,13 @@ export const ROUTES: Routes = [
             library: 'CDK'
         },
         loadChildren: () => import('@fundamental-ngx/docs/cdk')
+    },
+    {
+        path: 'i18n',
+        data: {
+            library: 'I18n'
+        },
+        loadChildren: () => import('@fundamental-ngx/docs/i18n')
     },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];

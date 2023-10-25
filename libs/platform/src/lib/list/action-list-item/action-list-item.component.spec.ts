@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { ActionListItemComponent } from './action-list-item.component';
 
-import { PlatformListModule } from '../list.module';
+import { NgForOf } from '@angular/common';
+import { ListComponent } from '../list.component';
 
 export interface Action {
     title: string;
@@ -20,7 +20,9 @@ export interface Action {
             <fdp-action-list-item title="Action 3"> </fdp-action-list-item>
             <fdp-action-list-item title="Action 4"> </fdp-action-list-item>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [ListComponent, ActionListItemComponent]
 })
 class ActionListItemComponentTestComponent {
     @ViewChild(ActionListItemComponent, { read: ElementRef, static: true })
@@ -44,8 +46,7 @@ describe('ActionListItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule],
-            declarations: [ActionListItemComponentTestComponent, ActionListItemComponent]
+            imports: [ActionListItemComponentTestComponent]
         }).compileComponents();
     }));
 
@@ -125,7 +126,9 @@ describe('ActionListItemComponent', () => {
         <fdp-list>
             <fdp-action-list-item *ngFor="let item of items" [title]="item.title"></fdp-action-list-item>
         </fdp-list>
-    `
+    `,
+    standalone: true,
+    imports: [ListComponent, ActionListItemComponent, NgForOf]
 })
 class TestComponentContentComponent {
     items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
@@ -140,8 +143,7 @@ describe('ActionListItemComponent Imperative', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule],
-            declarations: [TestComponentContentComponent, ActionListItemComponent]
+            imports: [TestComponentContentComponent]
         }).compileComponents();
     }));
 

@@ -10,7 +10,7 @@ async function publish({ currentTryNumber = 1, packageJsonPath, tag, token, acce
             tag,
             access
         });
-        info(`Published ${result.package}@${result.version}`);
+        info(`Published ${result.name}@${result.version}`);
     } catch (e) {
         if (currentTryNumber < retryCount) {
             await publish({

@@ -1,0 +1,39 @@
+@import 'fundamental-styles/dist/tool-header';
+
+.fd-popover__body.fdb-tool-header-actions-overflow-popover-body {
+    --fdPopover_Offset: 0.3875rem;
+
+    width: auto;
+    height: auto;
+    padding: 0.5rem;
+
+    background: var(--sapGroup_ContentBackground);
+    border: none;
+    border-radius: 0.5rem;
+
+    box-shadow: var(--sapMenu_Shadow1);
+
+    .fd-menu {
+        --fdMenu_Item_Spacing_Left: 0;
+        //--fdMenu_Item_Spacing_Right: 0;
+
+        .fd-menu__link {
+            --fdMenu_Link_Height: 2rem;
+            border-radius: 0.375rem;
+            &:focus:after {
+                display: none;
+            }
+            &:focus:before {
+                border: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+                border-radius: 0.375rem;
+                top: 0.125rem;
+                bottom: 0.125rem;
+                left: 0.125rem;
+                right: 0.125rem;
+                content: '';
+                pointer-events: none;
+                position: absolute;
+            }
+        }
+    }
+}

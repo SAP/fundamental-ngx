@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
 import { NgIf } from '@angular/common';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonModule } from '@fundamental-ngx/core/button';
@@ -12,7 +12,7 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 import { TextComponent } from '@fundamental-ngx/core/text';
 import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } from '@fundamental-ngx/core/toolbar';
@@ -37,7 +37,7 @@ import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page
         DynamicPageHeaderSubtitleDirective,
         BreadcrumbModule,
         LinkComponent,
-        AvatarModule,
+        AvatarComponent,
         ToolbarComponent,
         ToolbarItemDirective,
         ContentDensityDirective,
@@ -46,7 +46,7 @@ import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page
         FormLabelComponent,
         TextComponent,
         RatingIndicatorModule,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         ObjectNumberModule,
         IconModule,
         InlineHelpModule,

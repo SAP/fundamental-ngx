@@ -1,0 +1,64 @@
+{
+    "name": "btp",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/btp",
+    "prefix": "fundamental-ngx",
+    "tags": ["type:lib", "scope:fdb"],
+    "projectType": "library",
+    "targets": {
+        "prepare": {
+            "executor": "@fundamental-ngx/nx-plugin:prepare-library",
+            "options": {
+                "distPath": "dist/libs/btp"
+            }
+        },
+        "compile-typedoc": {
+            "executor": "@fundamental-ngx/nx-plugin:compile-typedoc",
+            "options": {
+                "outputPath": "libs/docs/typedoc/btp"
+            },
+            "outputs": ["{options.outputPath}"]
+        },
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/libs/btp"],
+            "options": {
+                "tsConfig": "libs/btp/tsconfig.lib.json",
+                "project": "libs/btp/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "libs/btp/tsconfig.lib.prod.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "lint": {
+            "executor": "@nx/linter:eslint",
+            "options": {
+                "lintFilePatterns": [
+                    "libs/btp/**/*.ts",
+                    "libs/btp/**/*.html",
+                    "libs/btp/navigation-menu/**/*.ts",
+                    "libs/btp/navigation-menu/**/*.html",
+                    "libs/btp/shared/**/*.ts",
+                    "libs/btp/shared/**/*.html"
+                ]
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/btp/jest.config.ts",
+                "passWithNoTests": true
+            },
+            "configurations": {
+                "ci": {
+                    "ci": true,
+                    "codeCoverage": true
+                }
+            }
+        }
+    }
+}

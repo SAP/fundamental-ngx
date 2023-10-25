@@ -1,5 +1,6 @@
 {
     "name": "docs",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "apps/docs/src",
     "projectType": "application",
     "prefix": "fundamental-ngx",
@@ -31,22 +32,7 @@
             },
             "defaultConfiguration": "affected-local"
         },
-        "generate-typedoc": {
-            "executor": "nx:run-commands",
-            "options": {
-                "commands": [
-                    "npx nx run core:compile-typedoc",
-                    "npx nx run platform:compile-typedoc",
-                    "npx nx run datetime-adapter:compile-typedoc",
-                    "npx nx run moment-adapter:compile-typedoc",
-                    "npx nx run i18n:compile-typedoc",
-                    "npx nx run cdk:compile-typedoc"
-                ],
-                "parallel": true
-            },
-            "outputs": ["libs/docs/typedoc"]
-        },
-        "build": {
+        "compile": {
             "executor": "@nx/angular:webpack-browser",
             "options": {
                 "outputPath": "dist/apps/docs",
@@ -93,6 +79,16 @@
                         "output": "./assets/cdk"
                     },
                     {
+                        "input": "./libs/btp",
+                        "glob": "README.md",
+                        "output": "./assets/btp"
+                    },
+                    {
+                        "input": "./libs/i18n",
+                        "glob": "README.md",
+                        "output": "./assets/i18n"
+                    },
+                    {
                         "input": "./libs/docs/typedoc",
                         "glob": "**/*",
                         "output": "./assets/typedoc"
@@ -119,6 +115,11 @@
                     },
                     {
                         "glob": "**/examples/**/*",
+                        "input": "libs/docs/btp",
+                        "output": "./docs/btp"
+                    },
+                    {
+                        "glob": "**/examples/**/*",
                         "input": "libs/docs/platform",
                         "output": "./docs/platform"
                     },
@@ -130,7 +131,7 @@
                     {
                         "glob": "**/examples/**/*",
                         "input": "libs/docs/i18n",
-                        "output": "./docs/shared/i18n"
+                        "output": "./docs/i18n"
                     },
                     {
                         "glob": "**/examples/**/*",
@@ -220,6 +221,14 @@
                         }
                     ]
                 },
+                "btp": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/btp.routes.ts"
+                        }
+                    ]
+                },
                 "platform": {
                     "fileReplacements": [
                         {
@@ -235,39 +244,57 @@
                             "with": "apps/docs/src/environments/cx.routes.ts"
                         }
                     ]
+                },
+                "i18n": {
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/app.routes.ts",
+                            "with": "apps/docs/src/environments/i18n.routes.ts"
+                        }
+                    ]
                 }
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^build", "generate-typedoc"]
+            "dependsOn": ["^compile-typedoc"]
         },
         "serve": {
             "executor": "@nx/angular:webpack-dev-server",
             "options": {
-                "browserTarget": "docs:build"
+                "browserTarget": "docs:compile"
             },
             "configurations": {
                 "production": {
-                    "browserTarget": "docs:build:production"
+                    "browserTarget": "docs:compile:production"
                 },
                 "cx": {
-                    "browserTarget": "docs:build:cx",
+                    "browserTarget": "docs:compile:cx",
                     "port": 4201,
                     "hmr": true
                 },
                 "core": {
-                    "browserTarget": "docs:build:core",
+                    "browserTarget": "docs:compile:core",
                     "port": 4202,
                     "hmr": true
                 },
                 "cdk": {
-                    "browserTarget": "docs:build:cdk",
+                    "browserTarget": "docs:compile:cdk",
                     "port": 4203,
                     "hmr": true
                 },
                 "platform": {
-                    "browserTarget": "docs:build:platform",
+                    "browserTarget": "docs:compile:platform",
                     "port": 4204,
+                    "hmr": true
+                },
+                "i18n": {
+                    "browserTarget": "docs:compile:i18n",
+                    "port": 4205,
+                    "hmr": true
+                },
+                "btp": {
+                    "browserTarget": "docs:compile:btp",
+                    "port": 4206,
                     "hmr": true
                 },
                 "hot-module-replacement": {

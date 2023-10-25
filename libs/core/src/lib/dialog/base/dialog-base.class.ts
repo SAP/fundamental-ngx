@@ -1,3 +1,4 @@
+import { ESCAPE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -11,19 +12,20 @@ import {
     OnInit
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { ESCAPE } from '@angular/cdk/keycodes';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
-import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/cdk/utils';
+import { FocusTrapService, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
+import { FD_DIALOG_FOCUS_TRAP_ERROR } from '../tokens';
+import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
-import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
-import { FD_DIALOG_FOCUS_TRAP_ERROR } from '../tokens';
 
 @Directive()
-export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
+export abstract class DialogBase<T = any, D extends DialogRefBase<T> = DialogRefBase<T>>
+    implements OnInit, AfterViewInit, OnDestroy
+{
     /**
      * @hidden
      */
@@ -40,10 +42,10 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     protected _focusTrapId: string;
 
     /** @hidden */
-    private _subscriptions = new Subscription();
+    protected _subscriptions = new Subscription();
 
     /** @hidden */
-    abstract get _ref(): DialogRefBase<any>;
+    abstract get _ref(): D;
 
     /** @hidden */
     abstract get _config(): DialogConfigBase<any>;

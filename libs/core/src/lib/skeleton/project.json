@@ -5,22 +5,6 @@
     "sourceRoot": "libs/core/src/lib/skeleton",
     "prefix": "fd",
     "targets": {
-        "build": {
-            "executor": "@nx/angular:package",
-            "outputs": ["{workspaceRoot}/dist/libs/core/skeleton"],
-            "options": {
-                "project": "libs/core/src/lib/skeleton/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "libs/core/src/lib/skeleton/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "libs/core/src/lib/skeleton/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
-        },
         "lint": {
             "executor": "@nx/linter:eslint",
             "options": {

@@ -16,9 +16,9 @@ import { Router } from '@angular/router';
 import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DialogBase } from '@fundamental-ngx/core/dialog';
 
-import { MessageBoxHost, MessageBoxConfig } from './utils/message-box-config.class';
-import { MessageBoxRef } from './utils/message-box-ref.class';
 import { CSS_CLASS_NAME } from './utils/const';
+import { MessageBoxConfig, MessageBoxHost } from './utils/message-box-config.class';
+import { MessageBoxRef } from './utils/message-box-ref.class';
 
 /**
  * Message box component.
@@ -40,7 +40,8 @@ import { CSS_CLASS_NAME } from './utils/const';
         role: 'dialog'
     },
     encapsulation: ViewEncapsulation.None,
-    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }]
+    providers: [{ provide: MessageBoxHost, useExisting: MessageBoxComponent }],
+    standalone: true
 })
 export class MessageBoxComponent
     extends DialogBase

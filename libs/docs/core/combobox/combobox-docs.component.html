@@ -119,10 +119,15 @@
 
 <fd-docs-section-title id="custom-item" componentName="combobox"> Custom Item Template </fd-docs-section-title>
 <description>
-    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code> to
-    the component. The <code>itemTemplate</code> should align with the contents of an
-    <a routerLink="/core/list">fd-list-item</a>
-    directive.
+    <p>
+        Developers can have custom item renderer for the combobox list items by providing custom template wrapped with
+        <code>*fdComboboxItem</code> structural directive.
+    </p>
+    <p>
+        The <code>*fdComboboxItem</code> inner contents should align with the contents of a
+        <a routerLink="/core/list">fd-list-item</a>
+        directive.
+    </p>
 </description>
 <component-example>
     <fd-combobox-template-example></fd-combobox-template-example>

@@ -1,4 +1,6 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -10,28 +12,54 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    NgZone,
     OnDestroy,
     Output,
     QueryList,
     ViewChild,
     ViewChildren,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { OverflowLayoutComponent } from '@fundamental-ngx/core/overflow-layout';
+import {
+    MenuComponent,
+    MenuInteractiveComponent,
+    MenuItemComponent,
+    MenuTitleDirective,
+    MenuTriggerDirective
+} from '@fundamental-ngx/core/menu';
+import {
+    OverflowExpandDirective,
+    OverflowItemRefDirective,
+    OverflowLayoutComponent,
+    OverflowLayoutFocusableItemDirective,
+    OverflowLayoutItemDirective
+} from '@fundamental-ngx/core/overflow-layout';
+import { ScrollSpyDirective } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { Observable, Subject, Subscription, fromEvent, merge } from 'rxjs';
-import { debounceTime, delay, filter, first, map, startWith, switchMap } from 'rxjs/operators';
+import { debounceTime, delay, filter, first, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabItemDirective } from './tab-item/tab-item.directive';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabListComponentInterface } from './tab-list-component.interface';
 import { LIST_COMPONENT } from './tab-list.token';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
+import {
+    TabCountDirective,
+    TabCounterHeaderDirective,
+    TabHeaderDirective,
+    TabIconComponent,
+    TabLabelDirective,
+    TabProcessDirective,
+    TabProcessIconDirective,
+    TabSeparatorDirective,
+    TabTagDirective
+} from './tab-utils/tab-directives';
 import { TabInfo } from './tab-utils/tab-info.class';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
@@ -56,6 +84,40 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
             provide: LIST_COMPONENT,
             useExisting: forwardRef(() => TabListComponent)
         }
+    ],
+    standalone: true,
+    imports: [
+        OverflowLayoutComponent,
+        NgFor,
+        OverflowItemRefDirective,
+        TabItemDirective,
+        OverflowLayoutItemDirective,
+        TabLinkDirective,
+        OverflowLayoutFocusableItemDirective,
+        NgTemplateOutlet,
+        NgIf,
+        NgSwitch,
+        NgSwitchCase,
+        TabHeaderDirective,
+        TabCounterHeaderDirective,
+        TabLabelDirective,
+        TabIconComponent,
+        TabCountDirective,
+        TabProcessDirective,
+        NgSwitchDefault,
+        TabTagDirective,
+        TabProcessIconDirective,
+        TabSeparatorDirective,
+        OverflowExpandDirective,
+        TabItemExpandComponent,
+        MenuTriggerDirective,
+        MenuComponent,
+        MenuItemComponent,
+        MenuInteractiveComponent,
+        ScrollSpyDirective,
+        CdkScrollable,
+        ScrollbarDirective,
+        MenuTitleDirective
     ]
 })
 export class TabListComponent implements TabListComponentInterface, AfterContentInit, AfterViewInit, OnDestroy {
@@ -107,6 +169,10 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     @Output()
     selectedTabChange = new EventEmitter<TabPanelComponent>();
 
+    /** Event emitted when the selected panel index changes. */
+    @Output()
+    selectedTabIndexChange = new EventEmitter<number>();
+
     /** Event emitted when visible items count has been changed. */
     @Output()
     visibleItemsCount = new EventEmitter<number>();
@@ -148,12 +214,16 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _overflowLayout: OverflowLayoutComponent;
 
     /** @hidden */
+    @ViewChild('scrollSpy', { read: ScrollSpyDirective })
+    private readonly _scrollSpy: Nullable<ScrollSpyDirective>;
+
+    /** @hidden */
     get contentContainer(): ElementRef<HTMLElement> {
         return this._scrollbar?.elementRef;
     }
 
     /** @hidden Collection of tabs in original order */
-    _tabArray: TabInfo[];
+    _tabArray: TabInfo[] = [];
 
     /** @hidden Whether to disable scroll spy */
     _disableScrollSpy = false;
@@ -171,9 +241,11 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private readonly _zone = inject(NgZone);
+
+    /** @hidden */
     constructor(
         private readonly _changeDetectorRef: ChangeDetectorRef,
-        private _elRef: ElementRef,
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroyRef: DestroyRef
     ) {}
@@ -231,7 +303,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             const _tabWasActive = tab.active;
             this._activateStackedTab(tab.panel, false);
             if (!_tabWasActive) {
-                this.selectedTabChange.emit(tab.panel);
+                this._selectedTabChange(tab.panel);
             }
         }
     }
@@ -282,11 +354,15 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
         this._tabPanelsChange$
             .pipe(
-                map((tabPanels) => tabPanels.map((el) => new TabInfo(el))),
+                map((tabPanels) =>
+                    tabPanels.map((el) => this._tabArray?.find((tabInfo) => tabInfo.panel === el) || new TabInfo(el))
+                ),
+                tap((tabs) => (this._tabArray = tabs)),
+                switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable))),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((tabs) => {
-                this._tabArray = tabs;
+                this.stackContent && this._scrollSpy?.onScroll(undefined, true);
             });
     }
 
@@ -368,7 +444,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
             this._detectChanges();
         }
 
-        this.selectedTabChange.emit(tabPanel);
+        this._selectedTabChange(tabPanel);
     }
 
     /** @hidden */
@@ -395,5 +471,13 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
     /** @hidden Whether tab can be expanded/collapsed */
     private _canChangeExpandState(tabPanel: TabPanelComponent, expand: boolean): boolean {
         return !tabPanel.disabled && expand !== tabPanel.expanded && expand === false ? this.collapsibleTabs : true;
+    }
+
+    /** @hidden */
+    private _selectedTabChange(tabPanel: TabPanelComponent): void {
+        this.selectedTabChange.emit(tabPanel);
+
+        const index = this._tabArray.findIndex((tabInfo) => tabInfo.panel === tabPanel);
+        this.selectedTabIndexChange.emit(index);
     }
 }

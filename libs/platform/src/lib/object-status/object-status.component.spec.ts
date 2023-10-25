@@ -1,8 +1,7 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { ObjectStatusComponent } from './object-status.component';
 
 @Component({
@@ -14,8 +13,10 @@ import { ObjectStatusComponent } from './object-status.component';
         [clickable]="clickable"
         [inverted]="inverted"
         [large]="large"
-        >Info Label
-    </fdp-object-status>`
+        label="Info Label"
+    ></fdp-object-status>`,
+    standalone: true,
+    imports: [ObjectStatusComponent]
 })
 class TestPlatformObjectStatusComponent {
     @ViewChild(ObjectStatusComponent, { static: true }) component: ObjectStatusComponent;
@@ -36,8 +37,7 @@ describe('ObjectStatusComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ObjectStatusModule],
-            declarations: [ObjectStatusComponent, TestPlatformObjectStatusComponent]
+            imports: [TestPlatformObjectStatusComponent]
         }).compileComponents();
     }));
 

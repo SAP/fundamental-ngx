@@ -1,8 +1,9 @@
 import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
-    selector: '[fdTableIcon], [fd-table-icon]'
+    selector: '[fdTableIcon], [fd-table-icon]',
+    standalone: true
 })
 export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
     /** @hidden */

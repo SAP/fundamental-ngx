@@ -1,18 +1,18 @@
 import { OverlayContainer, OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { MessageToastTextComponent } from './components/message-toast-text.component';
 import { MessageToastConfig } from './config/message-toast.config';
+import { MESSAGE_TOAST_CONFIG } from './constants/message-toast.token';
 import { MessageToastComponent } from './message-toast.component';
 import { MessageToastService } from './message-toast.service';
-import { MessageToastTextComponent } from './components/message-toast-text.component';
+import { provideMessageToastConfig } from './provide-config';
 import { ToastOverlayContainer } from './toast-overlay-container.class';
-import { MESSAGE_TOAST_CONFIG } from './constants/message-toast.token';
 
 @NgModule({
-    imports: [CommonModule, PortalModule, OverlayModule],
+    imports: [CommonModule, PortalModule, OverlayModule, MessageToastComponent, MessageToastTextComponent],
     exports: [MessageToastComponent],
-    declarations: [MessageToastComponent, MessageToastTextComponent],
     providers: [
         MessageToastService,
         { provide: OverlayContainer, useClass: ToastOverlayContainer },
@@ -27,12 +27,7 @@ export class MessageToastModule {
     static withConfig(config: MessageToastConfig): ModuleWithProviders<MessageToastModule> {
         return {
             ngModule: MessageToastModule,
-            providers: [
-                {
-                    provide: MESSAGE_TOAST_CONFIG,
-                    useValue: config
-                }
-            ]
+            providers: [provideMessageToastConfig(config)]
         };
     }
 }

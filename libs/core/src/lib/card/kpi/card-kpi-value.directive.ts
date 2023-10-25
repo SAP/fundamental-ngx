@@ -1,6 +1,5 @@
-import { Directive, OnInit, ElementRef, Input } from '@angular/core';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 import { CLASS_NAME } from '../constants';
 
@@ -8,7 +7,8 @@ export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
 
 @Directive({
     // eslint-disable-next-line @angular-eslint/directive-selector
-    selector: '[fd-card-kpi-value]'
+    selector: '[fd-card-kpi-value]',
+    standalone: true
 })
 export class CardKpiValueDirective implements OnInit, CssClassBuilder {
     /** @hidden */

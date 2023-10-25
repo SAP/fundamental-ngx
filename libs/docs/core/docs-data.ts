@@ -3,8 +3,7 @@ import { SectionInterface, SectionInterfaceContent } from '@fundamental-ngx/docs
 
 export const guides: SectionInterfaceContent[] = [
     { url: 'core/home', name: 'Home' },
-    { url: 'core/new-component', name: 'New Component' },
-    { url: 'core/i18n', name: 'I18n' }
+    { url: 'core/new-component', name: 'New Component' }
 ];
 
 export const components: SectionInterfaceContent[] = [
@@ -12,6 +11,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/action-sheet', name: 'Action Sheet' },
     { url: 'core/avatar', name: 'Avatar' },
     { url: 'core/avatar-group', name: 'Avatar Group' },
+    { url: 'core/avatar-group-legacy', name: 'Avatar Group[Legacy]' },
     { url: 'core/bar', name: 'Bar' },
     { url: 'core/breadcrumb', name: 'Breadcrumb' },
     { url: 'core/busy-indicator', name: 'Busy Indicator' },

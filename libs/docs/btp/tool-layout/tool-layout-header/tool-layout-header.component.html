@@ -1,0 +1,40 @@
+<header>Tool Layout</header>
+<description>
+    The Tool Layout is an essential part of most BTP tools. The layout combines the Tool Header and the Navigation
+    components in one consistent structure.
+
+    <h3>Anatomy</h3>
+    <ul>
+        <li>
+            <b>Tool Header</b> - always present and is a top-aligned UI element that contains global actions and
+            controls navigation
+        </li>
+        <li><b>Navigation</b> - side navigation in all of its variants (expanded, snapped)</li>
+        <li><b>Content</b> - an empty container area that can hold any content.</li>
+    </ul>
+
+    <h3>Structure</h3>
+    <ul>
+        <li>
+            <code>fdbToolLayout</code> - For <b>tablet</b> mode set the input property <code>mode</code> to 'tablet'.
+            For <b>phone/mobile</b> mode set the input property <code>mode</code> to 'phone'. The default mode is
+            desktop and doesn't have to be set.
+        </li>
+        <li><code>fdbToolLayoutContainer</code></li>
+        <li><code>fdbToolLayoutHeaderContainer</code></li>
+        <li>
+            <code>fdbToolLayoutNavigationContainer</code> - For a navigation in popup set the input property
+            <code>popup</code> to true. If you need horizontal navigation set <code>horizontal</code> input property to
+            true.
+        </li>
+        <li>
+            <code>fdbToolLayoutContentContainer</code> - For <b>transparent</b> background set the input property
+            <code>background</code> to 'transparent'. For <b>list</b> background set the input property
+            <code>background</code> to 'list'.
+        </li>
+    </ul>
+</description>
+<import module="ToolLayoutComponent" subPackage="tool-layout"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>

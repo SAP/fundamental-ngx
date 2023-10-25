@@ -1,6 +1,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -11,7 +12,6 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
-    inject,
     Input,
     OnChanges,
     OnDestroy,
@@ -20,31 +20,36 @@ import {
     QueryList,
     SimpleChanges,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import {
-    applyCssClass,
     CssClassBuilder,
     KeyUtil,
     Nullable,
+    RepeatDirective,
     RtlService,
-    SelectableListValueType,
     SelectComponentRootToken,
-    SelectionService
+    SelectableItemDirective,
+    SelectableListValueType,
+    SelectionService,
+    applyCssClass
 } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { distinctUntilChanged, filter, fromEvent, startWith, Subscription, switchMap } from 'rxjs';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subscription, distinctUntilChanged, filter, fromEvent, startWith, switchMap } from 'rxjs';
 import { FdTreeAcceptableDataSource, FdTreeDataSource, FdTreeItemType } from './data-source/tree-data-source';
 import { TreeDataSourceParser } from './data-source/tree-data-source-parser';
 import { TreeItemDefDirective } from './directives/tree-item-def.directive';
 import { TreeItemDirective } from './directives/tree-item.directive';
 import { BaseTreeItem } from './models/base-tree-item.class';
-import { TreeService } from './tree.service';
 import { SelectionPlacement, SelectionType } from './models/selection-type';
 import { TreeItem, TreeItemGeneric } from './models/tree-item';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TreeService } from './tree.service';
 
 @Component({
     selector: 'fd-tree',
@@ -76,6 +81,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
             provide: FD_DATA_SOURCE_TRANSFORMER,
             useClass: TreeDataSourceParser
         }
+    ],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet,
+        RepeatDirective,
+        SkeletonComponent,
+        NgIf,
+        NgFor,
+        TreeItemDirective,
+        SelectableItemDirective,
+        FdTranslatePipe
     ]
 })
 export class TreeComponent<P extends FdTreeAcceptableDataSource, T extends TreeItem = FdTreeItemType<P>>

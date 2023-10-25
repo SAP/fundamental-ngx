@@ -6,3 +6,9 @@
     -o-transition: min-width 0.5s ease-in-out, width 0.5s ease-in-out;
     transition: min-width 0.5s ease-in-out, width 0.5s ease-in-out;
 }
+
+.fd-progress-indicator__container {
+    .fd-popover__control {
+        width: 100%;
+    }
+}

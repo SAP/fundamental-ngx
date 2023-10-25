@@ -1,7 +1,7 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComboboxItem, ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent, ComboboxItem } from '@fundamental-ngx/core/combobox';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -17,7 +17,7 @@ export interface ExampleItem {
     templateUrl: './combobox-byline-example.component.html',
     styleUrls: ['combobox-example.component.scss'],
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, ComboboxModule, FormsModule, ListModule, IconModule, JsonPipe]
+    imports: [FormItemComponent, FormLabelComponent, ComboboxComponent, FormsModule, ListModule, IconModule, JsonPipe]
 })
 export class ComboboxBylineExampleComponent {
     values: ExampleItem[] = [

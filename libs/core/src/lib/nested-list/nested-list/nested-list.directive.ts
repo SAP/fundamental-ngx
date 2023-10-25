@@ -8,26 +8,53 @@ import {
     forwardRef,
     HostBinding,
     Inject,
+    INJECTOR,
+    Injector,
     Input,
     OnDestroy,
     Optional,
+    Provider,
     QueryList
 } from '@angular/core';
 import { combineLatest, Observable, startWith, Subscription } from 'rxjs';
 
-import { NestedListStateService } from '../nested-list-state.service';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { NestedItemDirective } from '../nested-item/nested-item.directive';
 import { NestedItemService } from '../nested-item/nested-item.service';
-import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { NestedListInterface } from './nested-list.interface';
 import { NestedListHeaderDirective } from '../nested-list-directives';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FdLanguage, FD_LANGUAGE, TranslationResolver } from '@fundamental-ngx/i18n';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { NestedListKeyboardService } from '../nested-list-keyboard.service';
+import { NestedListStateService } from '../nested-list-state.service';
+import { NestedListInterface } from './nested-list.interface';
+
+function provideNestedListStateService(): Provider {
+    // Nested list can be nested, and that will cause on each individual instance of NestedListStateService.
+    return {
+        provide: NestedListStateService,
+        useFactory: (injector: Injector) =>
+            injector.get(NestedListStateService, new NestedListStateService(), { skipSelf: true }),
+        deps: [INJECTOR]
+    };
+}
+
+/**
+ * <div fd-nested-list>
+ *  <div fd-nested-list>
+ *  </div>
+ * </div>
+ */
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]',
-    providers: [contentDensityObserverProviders()]
+    providers: [
+        contentDensityObserverProviders(),
+        MenuKeyboardService,
+        NestedListKeyboardService,
+        provideNestedListStateService()
+    ],
+    standalone: true
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface, OnDestroy {
     /** In case the user wants to no use icons for items in this list */
@@ -92,10 +119,10 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** @hidden */
     constructor(
         @Optional() private _nestedItemService: NestedItemService,
-        private _nestedListStateService: NestedListStateService,
         private _nestedListKeyboardService: NestedListKeyboardService,
         private _elementRef: ElementRef,
         private _changeDetectionRef: ChangeDetectorRef,
+        private readonly _nestedListStateService: NestedListStateService,
         @Inject(FD_LANGUAGE) private _language$: Observable<FdLanguage>,
         private _contentDensityObserver: ContentDensityObserver
     ) {

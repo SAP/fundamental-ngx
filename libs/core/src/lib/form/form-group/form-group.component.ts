@@ -24,7 +24,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
  */
 @Component({
     selector: 'fd-form-group',
-    templateUrl: './form-group.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ['./form-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,

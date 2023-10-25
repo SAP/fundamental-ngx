@@ -1,9 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { QuickViewGroupItemContentElementDirective } from './quick-view-group-item-content-element.directive';
 
 @Component({
-    template: ` <div #directiveElement fd-quick-view-group-item-content-element>Element</div> `
+    template: ` <div #directiveElement fd-quick-view-group-item-content-element>Element</div> `,
+    standalone: true,
+    imports: [QuickViewGroupItemContentElementDirective]
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -16,7 +18,7 @@ describe('QuickViewGroupItemContentElementDirective', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, QuickViewGroupItemContentElementDirective]
+            imports: [TestComponent]
         }).compileComponents();
     }));
 

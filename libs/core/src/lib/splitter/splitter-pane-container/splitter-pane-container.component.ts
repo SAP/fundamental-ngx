@@ -1,3 +1,4 @@
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -15,18 +16,22 @@ import {
     PipeTransform,
     QueryList,
     SkipSelf,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
-import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 
-import { SplitterComponent } from '../splitter.component';
-import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';
-import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
+import { PortalModule } from '@angular/cdk/portal';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { PANE_AUTO_SIZE, PANE_NONE_SIZE, RESIZER_SIZE_PX, ROOT_PAGE } from '../constants';
+import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';
+import { SplitterPaginationComponent } from '../splitter-pagination/splitter-pagination.component';
+import { SplitterResizerComponent } from '../splitter-resizer/splitter-resizer.component';
+import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
+import { SplitterComponent } from '../splitter.component';
 import {
     SplitterPaneContainerOrientation,
     SplitterPaneContainerOrientationType
@@ -41,7 +46,17 @@ import {
         class: 'fd-splitter__pane-container',
         '[class.fd-splitter__pane-container--horizontal]': '!_isRootContainer && _isHorizontal',
         '[class.fd-splitter__pane-container--vertical]': '_isRootContainer || _isVertical'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        SplitterPaginationComponent,
+        NgFor,
+        PortalModule,
+        SplitterResizerComponent,
+        forwardRef(() => NoDefaultPanePipe)
+    ]
 })
 export class SplitterPaneContainerComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Pane type - vertical (default) or horizontal. */
@@ -434,7 +449,10 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     }
 }
 
-@Pipe({ name: 'noDefaultPane' })
+@Pipe({
+    name: 'noDefaultPane',
+    standalone: true
+})
 export class NoDefaultPanePipe implements PipeTransform {
     /** @hidden */
     constructor(private readonly _splitterPaneContainer: SplitterPaneContainerComponent) {}

@@ -20,16 +20,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { DecimalPipe, NgIf } from '@angular/common';
+import { KeyUtil, LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
 import { FD_RADIO_BUTTON_COMPONENT, RadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { ListLinkDirective } from '../directives/list-link.directive';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ListLinkDirective } from '../directives/list-link.directive';
 import { ListFocusItem } from '../list-focus-item.model';
-import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ListUnreadIndicator } from '../list-unread-indicator.interface';
 import { FD_LIST_LINK_DIRECTIVE, FD_LIST_UNREAD_INDICATOR } from '../tokens';
 
@@ -57,7 +58,9 @@ let listItemUniqueId = 0;
         }
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgIf, FormItemComponent, DecimalPipe]
 })
 export class ListItemComponent extends ListFocusItem implements AfterContentInit, OnDestroy, ListItemInterface {
     /** Whether list item is selected */

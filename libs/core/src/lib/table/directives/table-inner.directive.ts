@@ -1,7 +1,8 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableInner], [fd-table-inner]'
+    selector: '[fdTableInner], [fd-table-inner]',
+    standalone: true
 })
 export class TableInnerDirective {
     /** @hidden */

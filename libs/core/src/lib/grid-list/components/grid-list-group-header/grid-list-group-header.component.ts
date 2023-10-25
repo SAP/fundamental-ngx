@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 @Component({
     selector: 'fd-grid-list-group-header',
@@ -6,7 +6,8 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-col fd-col--12'
-    }
+    },
+    standalone: true
 })
 export class GridListGroupHeaderComponent {
     /** Sets the `aria-label` attribute to the element. */

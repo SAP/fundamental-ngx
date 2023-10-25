@@ -4,17 +4,16 @@ export const ROUTES: Routes = [
     {
         path: '',
         loadComponent: () =>
-            import('./avatar-group-header/avatar-group-header.component').then((c) => c.AvatarGroupHeaderComponent),
+            import('./avatar-group-header/avatar-group-header.component').then((m) => m.AvatarGroupHeaderComponent),
+        data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () => import('./avatar-group-docs.component').then((c) => c.AvatarGroupDocsComponent)
+                loadComponent: () => import('./avatar-group-docs.component').then((m) => m.AvatarGroupDocsComponent)
             }
-        ],
-        data: {
-            primary: true
-        }
+        ]
     }
 ];
+
 export const LIBRARY_NAME = 'avatar-group';
 export const API_FILE_KEY = 'avatarGroup';

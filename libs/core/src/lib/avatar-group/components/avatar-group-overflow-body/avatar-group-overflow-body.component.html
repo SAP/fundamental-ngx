@@ -1,0 +1,9 @@
+<ng-content select="[fd-popover-body-header]"></ng-content>
+<div
+    class="fd-avatar-group__overflow-body"
+    [class.fd-avatar-group__overflow-body--no-padding]="noPadding"
+    [class.fd-avatar-group__overflow-body--no-horizontal-scroll]="noHorizontalScroll"
+    [class.fd-avatar-group__overflow-body--no-vertical-scroll]="noVerticalScroll"
+>
+    <ng-content select="[fd-avatar-group-overflow-body-content]"></ng-content>
+</div>

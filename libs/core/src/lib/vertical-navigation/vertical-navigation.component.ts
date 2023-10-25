@@ -1,3 +1,4 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -7,23 +8,48 @@ import {
     Input,
     OnDestroy,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    effect,
+    signal
 } from '@angular/core';
-import { FocusKeyManager } from '@angular/cdk/a11y';
-import { delay, map, merge, startWith, Subject, takeUntil } from 'rxjs';
-import { ListNavigationItemComponent } from '@fundamental-ngx/core/list';
+import { ListComponent, ListNavigationItemComponent } from '@fundamental-ngx/core/list';
+import { Subject, delay, map, merge, startWith, takeUntil } from 'rxjs';
+import { VerticalNavigationMainNavigationComponent } from './vertical-navigation-main-navigation.component';
 
 @Component({
     selector: 'fd-vertical-navigation',
     templateUrl: './vertical-navigation.component.html',
     styleUrls: ['./vertical-navigation.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [VerticalNavigationMainNavigationComponent, ListComponent]
 })
 export class VerticalNavigationComponent implements AfterContentInit, OnDestroy {
     /** Whether or not this component is to be shown in 'condensed' mode. */
     @Input()
-    condensed = false;
+    set condensed(value: boolean) {
+        this._condensed.set(value);
+    }
+
+    get condensed(): boolean {
+        return this._condensed();
+    }
+
+    /** @hidden */
+    @ContentChildren(ListNavigationItemComponent, { descendants: true })
+    private readonly _navigationItems: QueryList<ListNavigationItemComponent>;
+
+    /** @hidden
+     * Querylist of list-items in main navigation.
+     */
+    @ContentChildren(ListNavigationItemComponent)
+    private set _mainItems(items: QueryList<ListNavigationItemComponent>) {
+        this._mainNavItems.set(items?.toArray() ?? []);
+    }
+
+    /** @hidden */
+    private _keyManager: FocusKeyManager<ListNavigationItemComponent>;
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$ = new Subject<void>();
@@ -32,29 +58,42 @@ export class VerticalNavigationComponent implements AfterContentInit, OnDestroy 
     private readonly _onRefresh$ = new Subject<void>();
 
     /** @hidden */
-    @ContentChildren(ListNavigationItemComponent, { descendants: true })
-    private _navigationItems: QueryList<ListNavigationItemComponent>;
-
-    /** @hidden
-     * Querylist of list-items in main navigation.
-     */
-    @ContentChildren(ListNavigationItemComponent)
-    private _mainNavigationItems: QueryList<ListNavigationItemComponent>;
+    private readonly _condensed = signal(false);
 
     /** @hidden */
-    private _keyManager: FocusKeyManager<ListNavigationItemComponent>;
+    private readonly _contentInited = signal(false);
+
+    /** @hidden */
+    private readonly _mainNavItems = signal<ListNavigationItemComponent[]>([]);
+
+    /** @hidden */
+    constructor() {
+        effect(
+            () => {
+                if (!this._contentInited()) {
+                    return;
+                }
+
+                const isCondensed = this._condensed();
+
+                this._mainNavItems().forEach((item) => {
+                    item._condensed.set(isCondensed);
+                });
+            },
+            {
+                allowSignalWrites: true
+            }
+        );
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        if (this.condensed) {
-            this._mainNavigationItems.forEach((navItem) => {
-                navItem._condensed = true;
-            });
-        }
+        this._contentInited.set(true);
+
         this._keyManager?.destroy();
         this._keyManager = new FocusKeyManager(this._navigationItems)
             .withHomeAndEnd()
-            .skipPredicate((item) => !item._isItemVisible || (item._condensed && item.expanded));
+            .skipPredicate((item) => !item._isItemVisible || (item._condensed() && item.expanded));
         this._listenOnQueryChange();
     }
 

@@ -5,6 +5,7 @@ import { Directive } from '@angular/core';
     selector: '[fd-grid-list-item-image]',
     host: {
         class: 'fd-grid-list__item-image'
-    }
+    },
+    standalone: true
 })
 export class GridListItemImageDirective {}

@@ -1,16 +1,16 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
-    Component,
-    Input,
-    ElementRef,
-    OnChanges,
-    ViewEncapsulation,
-    ChangeDetectionStrategy,
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    OnInit
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/cdk/utils';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -40,7 +40,9 @@ export class Point {
         '[attr.tabindex]': 'focusable ? 0 : -1'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, NgTemplateOutlet, NgFor]
 })
 export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssClassBuilder, OnInit {
     /**

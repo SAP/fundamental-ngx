@@ -39,9 +39,7 @@
         </fd-input-group>
     </fd-popover-control>
     <fd-popover-body>
-        <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
-            {{ _message }}
-        </fd-form-message>
+        <ng-template [ngTemplateOutlet]="formMessageTemplate"></ng-template>
         <ng-content></ng-content>
         <fd-time
             *ngIf="isOpen"
@@ -70,3 +68,9 @@
         {{ _message }}
     </div>
 </div>
+
+<ng-template #formMessageTemplate>
+    <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+        {{ _message }}
+    </fd-form-message>
+</ng-template>

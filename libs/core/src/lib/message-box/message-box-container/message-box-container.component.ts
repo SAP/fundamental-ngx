@@ -1,5 +1,5 @@
 import { AnimationEvent } from '@angular/animations';
-import { CdkPortalOutlet, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
+import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angular/cdk/portal';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -29,7 +29,9 @@ import { MessageBoxRef } from '../utils/message-box-ref.class';
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-template (attached)="_attached($event)" cdkPortalOutlet></ng-template>',
-    animations: [dialogFade]
+    animations: [dialogFade],
+    standalone: true,
+    imports: [PortalModule]
 })
 export class MessageBoxContainerComponent
     extends DynamicComponentContainer<MessageBoxContentType>

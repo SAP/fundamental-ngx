@@ -52,9 +52,7 @@
         align="center"
     >
         <fdp-table-cell *fdpCellDef="let item">
-            <span fd-object-status [status]="item.statusColor">
-                {{ item.status }}
-            </span>
+            <span fd-object-status [status]="item.statusColor" [label]="item.status"></span>
         </fdp-table-cell>
     </fdp-column>
 </fdp-table>

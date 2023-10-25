@@ -3,11 +3,12 @@ import { ReplaySubject, Subject } from 'rxjs';
 
 import { DragDrop, DragRef, DropListRef } from '@angular/cdk/drag-drop';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 import { IconTabBarDndItem, IconTabBarDndList } from '../../interfaces/icon-tab-bar-item.interface';
+import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 @Directive({
-    selector: '[fdpIconBarDndList], [fdp-icon-bar-dnd-list]'
+    selector: '[fdpIconBarDndList], [fdp-icon-bar-dnd-list]',
+    standalone: true
 })
 export class IconBarDndListDirective implements IconTabBarDndList, AfterViewInit, OnDestroy {
     /**

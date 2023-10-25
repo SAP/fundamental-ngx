@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-upload-collection",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/upload-collection",
     "projectType": "library",
     "prefix": "fdp-doc",

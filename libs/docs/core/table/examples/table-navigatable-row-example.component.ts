@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ObjectStatus, ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatus, ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { TableModule } from '@fundamental-ngx/core/table';
 
 interface TableIem {
@@ -40,7 +40,7 @@ interface TableMobileItem {
         NgIf,
         RouterLink,
         FormLabelComponent,
-        ObjectStatusModule
+        ObjectStatusComponent
     ]
 })
 export class TableNavigatableRowExampleComponent {

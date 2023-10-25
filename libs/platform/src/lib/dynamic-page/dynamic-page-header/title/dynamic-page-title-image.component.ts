@@ -8,7 +8,8 @@ import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsu
         </ng-template>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true
 })
 export class DynamicPageTitleImageComponent {
     /**

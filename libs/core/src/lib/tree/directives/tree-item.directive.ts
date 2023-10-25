@@ -5,7 +5,8 @@ import { TreeItem } from '../models/tree-item';
 
 @Directive({
     selector: '[fdTreeItem]',
-    exportAs: 'fdTreeItem'
+    exportAs: 'fdTreeItem',
+    standalone: true
 })
 export class TreeItemDirective<T extends TreeItem, P> implements OnDestroy {
     /** Tree item component instance. */

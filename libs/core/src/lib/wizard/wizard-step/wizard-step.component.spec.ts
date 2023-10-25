@@ -8,7 +8,7 @@ describe('WizardStepComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [WizardStepComponent]
+            imports: [WizardStepComponent]
         }).compileComponents();
     });
 

@@ -1,3 +1,5 @@
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,13 +12,12 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subscription } from 'rxjs';
 
-import { FdDropEvent, RtlService } from '@fundamental-ngx/cdk/utils';
-import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { FdDropEvent, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 
+import { NgFor, NgIf } from '@angular/common';
+import { DragAndDropModule } from '@fundamental-ngx/cdk/utils';
 import { ProductSwitchItem } from './product-switch.item';
 
 const containerWidthPxSmallMode = 588;
@@ -30,7 +31,9 @@ const containerWidthPx = 776;
         '../../../../../cdk/src/lib/utils/drag-and-drop/drag-and-drop.scss'
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [DragAndDropModule, NgFor, NgIf]
 })
 export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** Defines if drag and drop functionality should be included in product switch*/

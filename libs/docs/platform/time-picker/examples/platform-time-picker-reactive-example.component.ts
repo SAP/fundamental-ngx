@@ -4,13 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, 
 import { NgIf } from '@angular/common';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import {
-    DATE_TIME_FORMATS,
-    DatetimeAdapter,
-    FD_DATETIME_FORMATS,
-    FdDate,
-    FdDatetimeAdapter
-} from '@fundamental-ngx/core/datetime';
+import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/platform/form';
 
@@ -21,14 +15,7 @@ import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/p
     providers: [
         // Note that this is usually provided in the root of your application.
         // Due to the limit of this example we must provide it on this level.
-        {
-            provide: DatetimeAdapter,
-            useClass: FdDatetimeAdapter
-        },
-        {
-            provide: DATE_TIME_FORMATS,
-            useValue: FD_DATETIME_FORMATS
-        }
+        provideDateTimeFormats()
     ],
     standalone: true,
     imports: [

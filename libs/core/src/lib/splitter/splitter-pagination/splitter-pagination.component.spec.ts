@@ -11,7 +11,7 @@ describe('SplitterPaginationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SplitterPaginationComponent],
+            imports: [SplitterPaginationComponent],
             providers: [SplitterComponent]
         }).compileComponents();
     }));

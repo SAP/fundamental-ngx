@@ -1,14 +1,14 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-combobox-columns-example',
     templateUrl: './combobox-columns-example.component.html',
     standalone: true,
-    imports: [ComboboxModule, FormsModule, ListModule, NgClass, ListSecondaryDirective]
+    imports: [ComboboxComponent, FormsModule, ListModule, NgClass, ListSecondaryDirective]
 })
 export class ComboboxColumnsExampleComponent {
     searchTerm = '';

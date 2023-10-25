@@ -1,7 +1,8 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-    selector: '[fdTableBody], [fd-table-body]'
+    selector: '[fdTableBody], [fd-table-body]',
+    standalone: true
 })
 export class TableBodyDirective {
     /** @hidden */

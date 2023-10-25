@@ -25,7 +25,7 @@ import { FormLabelComponent } from '../form-label/form-label.component';
     // TODO to be discussed
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-form-item]',
-    template: ` <ng-content></ng-content>`,
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./form-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

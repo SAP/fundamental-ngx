@@ -9,9 +9,14 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ListFocusItem } from '@fundamental-ngx/core/list';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { FormItemComponent } from '@fundamental-ngx/core/form';
+import { ListFocusItem } from '@fundamental-ngx/core/list';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'fd-multi-combobox-select-all-toggler',
@@ -35,7 +40,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
         }
     ],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [ToolbarComponent, FormItemComponent, CheckboxComponent, FormsModule, FdTranslatePipe]
 })
 export class SelectAllTogglerComponent extends ListFocusItem implements OnInit {
     /**

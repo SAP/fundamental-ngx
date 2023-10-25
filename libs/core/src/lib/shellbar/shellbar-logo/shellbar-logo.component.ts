@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  */
 @Component({
     selector: 'fd-shellbar-logo',
-    templateUrl: './shellbar-logo.component.html',
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true

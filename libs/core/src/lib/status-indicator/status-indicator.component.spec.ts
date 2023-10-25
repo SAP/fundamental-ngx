@@ -14,7 +14,9 @@ import { LablePosition, StatusIndicatorComponent } from './status-indicator.comp
             viewBox="0 0 24 31"
         >
         </fd-status-indicator>
-    `
+    `,
+    standalone: true,
+    imports: [StatusIndicatorComponent]
 })
 class TestStatusIndicatorComponent {
     @ViewChild(StatusIndicatorComponent, { static: true, read: ElementRef })
@@ -44,7 +46,7 @@ describe('StatusIndicatorComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [StatusIndicatorComponent, TestStatusIndicatorComponent]
+            imports: [TestStatusIndicatorComponent]
         }).compileComponents();
     }));
 

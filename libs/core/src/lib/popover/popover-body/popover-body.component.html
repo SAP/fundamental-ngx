@@ -1,14 +1,22 @@
 <div
     class="fd-popover__body fd-popover__body--static"
     [class.fd-popover__body--no-arrow]="_noArrow"
-    [class]="_arrowClasses + (_additionalBodyClass || '')"
+    [class.fd-popover__body--resizable]="_resizable"
+    [class]="_arrowClasses + ' ' + (_additionalBodyClass || '')"
     [cdkTrapFocus]="_focusTrapped"
-    [style]="_marginStyle"
+    [style.min-width]="_popoverBodyMinWidth ? null : minWidth"
+    [style.max-width]="_maxWidth ? null : maxWidth"
+    [style.min-height]="minHeight"
+    [style.max-height]="maxHeight"
     [style.max-width.px]="_maxWidth"
     [style.min-width.px]="_popoverBodyMinWidth"
     [style.width.px]="_popoverBodyWidth"
     [attr.role]="_bodyRole"
     [attr.id]="_bodyId"
+    fdkResize
+    [fdkResizeDisabled]="!_resizable"
+    [fdkResizeClass]="'fd-popover__body--disable-transitions'"
+    [fdkResizeHandleLocation]="_resizeHandleLocation"
 >
     <div
         fd-scrollbar
@@ -18,6 +26,7 @@
     >
         <ng-container *ngTemplateOutlet="renderer"></ng-container>
     </div>
+    <span fdkResizeHandle *ngIf="_resizable" class="fd-popover__resize-handle"></span>
 </div>
 
 <ng-template #renderer>

@@ -13,3 +13,27 @@
         display: block;
     }
 }
+
+.fd-dialog__content-full-screen {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    transform: none !important;
+}
+
+// TODO: move to fundamental-styles
+.fd-dialog__content--mobile {
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    position: fixed !important;
+}

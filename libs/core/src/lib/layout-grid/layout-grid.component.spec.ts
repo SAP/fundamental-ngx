@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { LayoutGridComponent } from './layout-grid.component';
 import { CSS_CLASS_NAME } from './constants';
+import { LayoutGridComponent } from './layout-grid.component';
 
 @Component({
-    template: '<fd-layout-grid [noGap]="true"></fd-layout-grid>'
+    template: '<fd-layout-grid [noGap]="true"></fd-layout-grid>',
+    standalone: true,
+    imports: [LayoutGridComponent]
 })
 class TestNestedContainerComponent {
     @ViewChild(LayoutGridComponent, { static: true })
@@ -18,7 +20,7 @@ describe('LayoutGridComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, LayoutGridComponent]
+            imports: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

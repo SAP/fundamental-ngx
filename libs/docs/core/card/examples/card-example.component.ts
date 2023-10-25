@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
 
@@ -9,6 +9,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     styleUrls: ['./card-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CardModule, ListModule, AvatarModule]
+    imports: [CardModule, ListModule, AvatarComponent]
 })
 export class CardExampleComponent {}

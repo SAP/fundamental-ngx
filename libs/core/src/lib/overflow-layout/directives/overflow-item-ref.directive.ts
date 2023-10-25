@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, TemplateRef } from '@angular/core';
+import { Directive, ElementRef, inject, INJECTOR, Input, TemplateRef } from '@angular/core';
 import { OverflowItemDirectiveContext, OverflowItemRef } from '../interfaces/overflow-item-ref.interface';
 import { OverflowItem } from '../interfaces/overflow-item.interface';
 import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
@@ -13,7 +13,8 @@ import { FD_OVERFLOW_ITEM_REF } from '../tokens/overflow-item-ref.token';
             provide: FD_OVERFLOW_ITEM_REF,
             useExisting: OverflowItemRefDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
     /**
@@ -61,15 +62,18 @@ export class OverflowItemRefDirective<T = any> implements OverflowItemRef<T> {
     item: T;
 
     /** @hidden */
+    readonly injector = inject(INJECTOR);
+
+    /** @hidden */
+    constructor(public templateRef: TemplateRef<OverflowItemDirectiveContext<T>>) {}
+
+    /** @hidden */
     static ngTemplateContextGuard(
         dir: OverflowItemRefDirective,
         ctx: OverflowItemDirectiveContext
     ): ctx is OverflowItemDirectiveContext {
         return true;
     }
-
-    /** @hidden */
-    constructor(public templateRef: TemplateRef<OverflowItemDirectiveContext<T>>) {}
 
     /**
      * Sets the element reference of the `fdOverflowLayoutItem` directive.`

@@ -1,11 +1,12 @@
 import { Directive, ElementRef, HostListener, Inject, OnInit, Optional } from '@angular/core';
-import { MicroProcessFlowComponentInterface, MICRO_PROCESS_FLOW } from './injection-tokens';
+import { MICRO_PROCESS_FLOW, MicroProcessFlowComponentInterface } from './injection-tokens';
 
 @Directive({
     selector: '[fdMicroProcessFlowFocusableItem], [fd-micro-process-flow-focusable-item]',
     host: {
         class: 'fd-micro-process-flow__focusable-item'
-    }
+    },
+    standalone: true
 })
 export class MicroProcessFlowFocusableItemDirective implements OnInit {
     /** @hidden */

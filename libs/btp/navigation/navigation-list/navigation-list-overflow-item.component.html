@@ -1,0 +1,24 @@
+<div
+    class="fd-navigation__item"
+    [class.fd-navigation__item--group]="isGroup()"
+    [class.fd-navigation__item--child]="parentNavigationListComponent.parentListComponent?.isParentGroupChild()"
+    aria-current="page"
+    [attr.aria-selected]="childrenActive() && navigationComponent.isSnapped() ? true : null"
+    [attr.aria-expanded]="expandedAttr()"
+    [attr.aria-level]="1"
+    #navigationItem
+    role="menuitem"
+>
+    <ng-content select="[fdb-navigation-link]"></ng-content>
+</div>
+<!-- Detach elements from their hosts immediately to fix issue with flickering elements. -->
+<ul hidden>
+    <ng-template *ngFor="let item of hiddenItems()" [cdkPortalOutlet]="item.domPortal"></ng-template>
+</ul>
+<ng-template #childrenTemplate>
+    <div class="fd-navigation__list-container--menu">
+        <ul class="fd-navigation__list fd-navigation__list--parent-items fd-menu__list">
+            <ng-template *ngFor="let item of hiddenItems()" [cdkPortalOutlet]="item.domPortal"></ng-template>
+        </ul>
+    </div>
+</ng-template>

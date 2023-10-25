@@ -19,7 +19,7 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     FieldsetComponent,
-    FormControlModule,
+    FormControlComponent,
     FormGroupComponent,
     FormItemComponent,
     FormLabelComponent,
@@ -46,7 +46,7 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         WizardModule,
         FormItemComponent,
         FormLabelComponent,
-        FormControlModule,
+        FormControlComponent,
         ContentDensityDirective,
         FieldsetComponent,
         FormLegendDirective,

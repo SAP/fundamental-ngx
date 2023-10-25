@@ -1,0 +1,102 @@
+<div
+    class="fd-navigation__item"
+    [class.fd-navigation__item--group]="isGroup()"
+    [class.fd-navigation__item--overflow]="_hidden()"
+    [class.fd-navigation__item--child]="normalizedLevel() > 2"
+    [class.fd-navigation__item--with-expander]="
+        childNavigationListComponent() && normalizedLevel() < 3 && linkComponent?._routerLink
+    "
+    aria-current="page"
+    [attr.aria-selected]="isRouterLinkActive() || (childrenActive() && navigationComponent.isSnapped()) ? true : null"
+    [attr.aria-expanded]="expandedAttr()"
+    [attr.aria-level]="level()"
+    #navigationItem
+    role="menuitem"
+>
+    <ng-container *ngIf="linkTemplate">
+        <ng-template [ngTemplateOutlet]="linkTemplate" [ngTemplateOutletInjector]="injector"></ng-template>
+    </ng-container>
+    <ng-content select="[fdb-navigation-link]"></ng-content>
+    <button
+        (click)="toggle()"
+        *ngIf="childNavigationListComponent() && normalizedLevel() < 3 && linkComponent?._routerLink"
+        fd-button
+        class="fd-button--nested fd-navigation__expander"
+    >
+        <fd-icon [glyph]="toggleIcon()"></fd-icon>
+    </button>
+</div>
+<ng-container
+    *ngIf="
+        (childNavigationListComponent() && !navigationComponent.isSnapped()) ||
+        (navigationComponent.isSnapped() && normalizedLevel() < 2) ||
+        _hidden()
+    "
+>
+    <ng-template [ngTemplateOutlet]="childrenTemplate" [ngTemplateOutletInjector]="injector"></ng-template>
+</ng-container>
+
+<ng-template #childrenTemplate>
+    <ng-template #childNavigationLists>
+        <ng-content select="ul[fdb-navigation-list]"></ng-content>
+    </ng-template>
+
+    <ng-container *ngIf="isGroup(); else withWrapper">
+        <ng-template [ngTemplateOutlet]="childNavigationLists" [ngTemplateOutletInjector]="injector"></ng-template>
+    </ng-container>
+    <ng-template #withWrapper>
+        <ng-template #popoverTemplate>
+            <!-- fd-navigation__list-container -->
+            <div
+                *ngIf="childNavigationListComponent()"
+                [class.fd-navigation__list-container]="!navigationComponent.isSnapped()"
+                aria-hidden="true"
+            >
+                <div class="fd-navigation__list-wrapper popover-wrapper" aria-hidden="true">
+                    <div
+                        *ngIf="linkComponent && navigationComponent.isSnapped()"
+                        class="fd-navigation__item fd-navigation__item--title fd-navigation__item--child"
+                        aria-level="1"
+                        role="treeitem"
+                        aria-expanded="true"
+                        [attr.aria-selected]="isRouterLinkActive()"
+                    >
+                        <a
+                            class="fd-navigation__link"
+                            [routerLink]="$any(routerLink())?.commands"
+                            role="button"
+                            tabindex="0"
+                            (keydown)="clonedMainLinkKeydown($event)"
+                            #clonedMainLink
+                        >
+                            <span
+                                class="fd-navigation__icon sap-icon--basket"
+                                role="presentation"
+                                aria-hidden="true"
+                            ></span>
+                            <ng-container *ngTemplateOutlet="linkComponent.textRenderer!"></ng-container>
+                            <span class="fd-navigation__selection-indicator"></span>
+                        </a>
+                    </div>
+                    <ng-template
+                        [ngTemplateOutlet]="childNavigationLists"
+                        [ngTemplateOutletInjector]="injector"
+                    ></ng-template>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template [ngIf]="_hidden()" [ngIfElse]="popoverTemplate">
+            <div
+                *ngIf="childNavigationListComponent()"
+                class="fd-navigation__list-container fd-navigation__list-container--submenu fd-menu__sublist"
+            >
+                <div class="fd-navigation__list-wrapper">
+                    <ng-template
+                        [ngTemplateOutlet]="childNavigationLists"
+                        [ngTemplateOutletInjector]="injector"
+                    ></ng-template>
+                </div>
+            </div>
+        </ng-template>
+    </ng-template>
+</ng-template>

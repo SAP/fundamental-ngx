@@ -10,6 +10,7 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -18,7 +19,7 @@ import {
     PlatformFormField,
     PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
-import { BehaviorSubject, filter, startWith, Subject, Subscription, switchMap, zip } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, filter, startWith, switchMap, zip } from 'rxjs';
 import { FDP_MESSAGE_POPOVER_CONFIG, MessagePopoverConfig, MessagePopoverErrorConfig } from '../../default-config';
 import { MessagePopoverFormItemDirective } from '../../directives/message-popover-form-item.directive';
 import {
@@ -27,15 +28,14 @@ import {
     MessagePopoverErrorText
 } from '../../models/message-popover-entry.interface';
 import { MessagePopoverWrapper } from '../../models/message-popover-wrapper.interface';
-import { convertFormState } from '../../utils';
 import { MessagePopover } from '../../models/message-popover.interface';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { convertFormState } from '../../utils';
 
 export type MessagePopoverForm = NgForm | FormGroupDirective;
 
 @Component({
     selector: 'fdp-message-popover-form-wrapper',
-    templateUrl: './message-popover-form-wrapper.component.html',
+    template: `<ng-content></ng-content>`,
     exportAs: 'messagePopoverWrapper',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

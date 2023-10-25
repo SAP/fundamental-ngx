@@ -13,7 +13,9 @@ import { ProgressIndicatorComponent } from './progress-indicator.component';
             [valueNow]="valueNow"
         >
         </fd-progress-indicator>
-    `
+    `,
+    standalone: true,
+    imports: [ProgressIndicatorComponent]
 })
 class TestProgressIndicatorComponent {
     @ViewChild('indicatorRef', { read: ElementRef })
@@ -36,7 +38,7 @@ describe('ProgressIndicatorComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ProgressIndicatorComponent, TestProgressIndicatorComponent]
+            imports: [TestProgressIndicatorComponent]
         }).compileComponents();
     }));
 

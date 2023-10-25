@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ObjectMarkerComponent } from './object-marker.component';
 
+/**
+ * @deprecated
+ * Use direct import of `ObjectMarkerComponent`
+ */
 @NgModule({
-    declarations: [ObjectMarkerComponent],
-    imports: [CommonModule],
+    imports: [ObjectMarkerComponent],
     exports: [ObjectMarkerComponent]
 })
 export class ObjectMarkerModule {}

@@ -1,14 +1,15 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
-import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 import { ElementChord, IconTabBarDndItem, IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
+import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
+import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 
 @Directive({
-    selector: '[fdpIconBarDndItem], [fdp-icon-bar-dnd-item]'
+    selector: '[fdpIconBarDndItem], [fdp-icon-bar-dnd-item]',
+    standalone: true
 })
 export class IconBarDndItemDirective implements IconTabBarDndItem, AfterViewInit, OnDestroy {
     /**

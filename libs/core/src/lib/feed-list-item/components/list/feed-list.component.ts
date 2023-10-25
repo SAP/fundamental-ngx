@@ -1,20 +1,19 @@
 import {
+    AfterContentChecked,
+    ChangeDetectionStrategy,
     Component,
+    ContentChildren,
     ElementRef,
     Input,
-    OnInit,
-    OnDestroy,
     OnChanges,
-    SimpleChanges,
-    ViewEncapsulation,
-    ChangeDetectionStrategy,
-    ContentChildren,
+    OnDestroy,
+    OnInit,
     QueryList,
-    AfterContentChecked
+    SimpleChanges,
+    ViewEncapsulation
 } from '@angular/core';
+import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { Subscription } from 'rxjs';
-import { applyCssClass } from '@fundamental-ngx/cdk/utils';
-import { CssClassBuilder } from '@fundamental-ngx/cdk/utils';
 
 import { CSS_CLASS_NAME } from '../../constants';
 import { FeedListItemComponent } from '../item/feed-list-item.component';
@@ -24,7 +23,8 @@ import { FeedListItemComponent } from '../item/feed-list-item.component';
     templateUrl: './feed-list.component.html',
     styleUrls: ['./feed-list.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class FeedListComponent implements OnInit, AfterContentChecked, OnDestroy, OnChanges, CssClassBuilder {
     /** User's custom classes */

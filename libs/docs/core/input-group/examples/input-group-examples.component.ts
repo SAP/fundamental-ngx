@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
-    FormControlModule,
+    FormControlComponent,
     FormHeaderComponent,
     FormInputMessageGroupComponent,
     FormItemComponent,
@@ -47,7 +47,7 @@ export class InputGroupTextCompactExampleComponent {}
     selector: 'fd-input-group-complex-example',
     templateUrl: './input-group-complex-example.component.html',
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, InputGroupModule, FormControlModule, ButtonModule]
+    imports: [FormItemComponent, FormLabelComponent, InputGroupModule, FormControlComponent, ButtonModule]
 })
 export class InputGroupComplexExampleComponent {}
 

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { AvatarComponent } from './avatar.component';
 
+/**
+ * @deprecated
+ * Use `AvatarComponent` import instead.
+ */
 @NgModule({
-    imports: [CommonModule],
-    exports: [AvatarComponent],
-    declarations: [AvatarComponent]
+    imports: [AvatarComponent],
+    exports: [AvatarComponent]
 })
 export class AvatarModule {}

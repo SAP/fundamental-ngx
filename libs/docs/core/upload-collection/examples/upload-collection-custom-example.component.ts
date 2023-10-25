@@ -4,14 +4,13 @@ import { IconModule } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import {
     UploadCollectionButtonGroupComponent,
     UploadCollectionComponent,
     UploadCollectionDescriptionDirective,
     UploadCollectionFormItemComponent,
     UploadCollectionItemDirective,
-    UploadCollectionItemDirective as UploadCollectionItemDirective_1,
     UploadCollectionStatusGroupDirective,
     UploadCollectionStatusItemDirective,
     UploadCollectionTextSeparatorDirective,
@@ -28,7 +27,7 @@ import {
         UploadCollectionComponent,
         NgFor,
         ListModule,
-        UploadCollectionItemDirective_1,
+        UploadCollectionItemDirective,
         UploadCollectionThumbnailDirective,
         IconModule,
         UploadCollectionTitleContainerDirective,
@@ -40,7 +39,7 @@ import {
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
-        ObjectStatusModule,
+        ObjectStatusComponent,
         UploadCollectionStatusItemDirective,
         UploadCollectionButtonGroupComponent
     ]

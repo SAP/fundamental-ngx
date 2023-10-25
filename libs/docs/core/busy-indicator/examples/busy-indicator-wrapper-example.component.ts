@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { FormControlModule, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
+import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
     selector: 'fd-busy-indicator-wrapper-example',
@@ -13,7 +13,7 @@ import { FormControlModule, FormItemComponent, FormLabelComponent } from '@funda
         FormsModule,
         FormItemComponent,
         FormLabelComponent,
-        FormControlModule,
+        FormControlComponent,
         ButtonModule
     ]
 })

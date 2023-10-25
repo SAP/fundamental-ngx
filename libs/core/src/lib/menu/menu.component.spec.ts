@@ -1,6 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuComponent } from './menu.component';
 import { MenuModule } from './menu.module';
@@ -50,7 +51,7 @@ describe('MenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [MenuModule, TestMenuComponent]
+            imports: [TestMenuComponent, NoopAnimationsModule]
         }).compileComponents();
     }));
 

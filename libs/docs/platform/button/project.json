@@ -1,5 +1,6 @@
 {
     "name": "docs-platform-button",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/platform/button",
     "projectType": "library",
     "prefix": "fdp-doc",

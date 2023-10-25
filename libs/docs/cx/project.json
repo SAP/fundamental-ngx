@@ -1,7 +1,6 @@
 {
-    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "name": "docs-cx",
-    "root": "libs/docs/cx",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "targets": {},
     "tags": ["scope:docs", "type:lib"]
 }

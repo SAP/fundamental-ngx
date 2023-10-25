@@ -1,7 +1,7 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -35,7 +35,7 @@ export type Notification = {
         NgIf,
         NgTemplateOutlet,
         NgFor,
-        AvatarModule,
+        AvatarComponent,
         MessageToastModule
     ]
 })

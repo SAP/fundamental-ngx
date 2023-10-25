@@ -18,15 +18,19 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subscription, tap } from 'rxjs';
-import { first } from 'rxjs/operators';
 import { ButtonType } from '@fundamental-ngx/core/button';
 import { MenuComponent, MenuItemComponent } from '@fundamental-ngx/core/menu';
+import { Subscription, tap } from 'rxjs';
+import { first } from 'rxjs/operators';
 
-import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
-import { MainAction } from './main-action';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { MenuTriggerDirective } from '@fundamental-ngx/core/menu';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MainAction } from './main-action';
+import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 const splitButtonTextClasses = [splitButtonTextClass];
@@ -58,7 +62,9 @@ const splitButtonTextClasses = [splitButtonTextClass];
     styleUrls: ['./split-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [contentDensityObserverProviders()]
+    providers: [contentDensityObserverProviders()],
+    standalone: true,
+    imports: [NgClass, MenuTriggerDirective, ButtonComponent, NgTemplateOutlet, FdTranslatePipe]
 })
 export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, AfterViewInit {
     /** The icon to include in the button. See the icon page for the list of icons. */

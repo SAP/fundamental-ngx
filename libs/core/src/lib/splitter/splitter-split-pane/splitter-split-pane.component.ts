@@ -17,9 +17,9 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { PANE_AUTO_SIZE } from '../constants';
 
@@ -30,7 +30,8 @@ let paneUniqueId = 0;
     selector: 'fd-splitter-split-pane',
     templateUrl: './splitter-split-pane.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDestroy {
     /** Size (height in vertical orientation, width in horizontal orientation) of the pane. */

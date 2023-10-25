@@ -13,12 +13,13 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  */
 @Component({
     selector: 'fd-layout-panel-filters',
-    templateUrl: './layout-panel-filters.component.html',
+    template: `<ng-content></ng-content>`,
     host: {
         '[class.fd-has-display-block]': 'true'
     },
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class LayoutPanelFiltersComponent {
     /** @hidden */

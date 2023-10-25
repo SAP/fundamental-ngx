@@ -1,22 +1,29 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { ChangeDetectionStrategy } from '@angular/core';
 import { TokenComponent } from './token.component';
-import { TokenModule } from './token.module';
 
 describe('TokenComponent', () => {
     let component: TokenComponent;
     let fixture: ComponentFixture<TokenComponent>;
 
     beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TokenModule]
-        }).compileComponents();
+        TestBed.overrideComponent(TokenComponent, {
+            set: {
+                changeDetection: ChangeDetectionStrategy.Default
+            }
+        })
+            .configureTestingModule({
+                imports: [TokenComponent]
+            })
+            .compileComponents();
     }));
 
-    beforeEach(() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TokenComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        await fixture.whenStable();
     });
 
     it('should create', () => {
@@ -30,6 +37,17 @@ describe('TokenComponent', () => {
 
         fixture.detectChanges();
         expect(component.onCloseClick.emit).not.toHaveBeenCalled();
+    });
+
+    it('should not render close icon when in read-only mode', async () => {
+        component.readOnly = false;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeTruthy();
+        component.readOnly = true;
+        fixture.detectChanges();
+        await fixture.whenStable();
+        expect(fixture.nativeElement.querySelector('.fd-token__close')).toBeFalsy();
     });
 
     it('should fire onCloseClick when clicking x', () => {

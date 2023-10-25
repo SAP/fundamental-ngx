@@ -14,13 +14,33 @@ import {
 
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
-import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
+import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { IconBarDndItemDirective } from '../../../directives/dnd/icon-bar-dnd-item.directive';
+import { IconBarDndListDirective } from '../../../directives/dnd/icon-bar-dnd-list.directive';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
+import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 
 @Component({
     selector: 'fdp-text-type-popover',
     templateUrl: './text-type-popover.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgIf,
+        PopoverComponent,
+        PopoverControlComponent,
+        PopoverBodyComponent,
+        IconBarDndListDirective,
+        NgTemplateOutlet,
+        NgFor,
+        IconBarDndItemDirective,
+        NgClass,
+        ButtonComponent,
+        IconComponent
+    ]
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
     /** @hidden reference for html element, that opens dropdown and can receive focus */

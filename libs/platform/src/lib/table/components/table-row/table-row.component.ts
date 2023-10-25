@@ -1,4 +1,5 @@
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -21,21 +22,36 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import {
+    DisabledBehaviorDirective,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
     KeyUtil,
     RtlService,
+    ValueByPathPipe,
     destroyObservable,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
+    TableCellDirective,
+    TableIconDirective,
+    TableRowDirective,
+    TableStatusIndicatorDirective
+} from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import {
+    ColumnResizableSidePipe,
     EditableTableCell,
+    FdpCellSelectableDirective,
+    PlatformTableCellResizableDirective,
+    SelectionCellStylesPipe,
     SelectionMode,
     SelectionModeValue,
+    TableCellStylesPipe,
     TableColumn,
     TableColumnResizeService,
     TableDraggableDirective,
@@ -48,6 +64,7 @@ import {
 } from '@fundamental-ngx/platform/table-helpers';
 import { Subject, fromEvent, merge } from 'rxjs';
 import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { TableEditableCellComponent } from '../table-editable-cell/table-editable-cell.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -64,7 +81,32 @@ import { filter, startWith, switchMap, takeUntil } from 'rxjs/operators';
     host: {
         role: 'row',
         '[attr.aria-expanded]': '_isTreeRow(row) ? row.expanded : null'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        TableCellDirective,
+        TableStatusIndicatorDirective,
+        DisabledBehaviorDirective,
+        NgStyle,
+        NgSwitch,
+        NgSwitchCase,
+        FdpCellSelectableDirective,
+        NgTemplateOutlet,
+        CheckboxComponent,
+        FormsModule,
+        NgFor,
+        PlatformTableCellResizableDirective,
+        NgClass,
+        TableEditableCellComponent,
+        TableIconDirective,
+        AsyncPipe,
+        ValueByPathPipe,
+        FdTranslatePipe,
+        SelectionCellStylesPipe,
+        TableCellStylesPipe,
+        ColumnResizableSidePipe
+    ]
 })
 export class TableRowComponent<T> extends TableRowDirective implements OnInit, AfterViewInit, OnDestroy, OnChanges {
     /** Row ID. */

@@ -1,29 +1,36 @@
+import { FocusKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
-    Component,
-    ViewEncapsulation,
-    ChangeDetectionStrategy,
-    ContentChildren,
-    QueryList,
-    ChangeDetectorRef,
-    ContentChild,
-    HostBinding,
-    ViewChild,
-    ElementRef,
-    Output,
-    EventEmitter,
-    TemplateRef,
-    ViewChildren,
     AfterViewInit,
-    OnDestroy,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChild,
+    ContentChildren,
+    ElementRef,
+    EventEmitter,
+    HostBinding,
     Input,
-    OnInit,
     NgZone,
-    Optional
+    OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    QueryList,
+    TemplateRef,
+    ViewChild,
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
-import { debounceTime, filter, first, fromEvent, startWith, Subject, Subscription } from 'rxjs';
 import { KeyUtil, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { Subject, Subscription, debounceTime, filter, first, fromEvent, startWith } from 'rxjs';
+import { OverflowItemContainerRefDirective } from './directives/overflow-item-container-ref.directive';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
+import { OverflowLayoutPopoverContentDirective } from './directives/overflow-layout-popover-content.directive';
 import { OverflowContainer } from './interfaces/overflow-container.interface';
 import { OverflowExpand } from './interfaces/overflow-expand.interface';
 import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
@@ -34,7 +41,6 @@ import { FD_OVERFLOW_CONTAINER } from './tokens/overflow-container.token';
 import { FD_OVERFLOW_EXPAND } from './tokens/overflow-expand.token';
 import { FD_OVERFLOW_FOCUSABLE_ITEM } from './tokens/overflow-focusable-item.token';
 import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
-import { FocusKeyManager } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'fd-overflow-layout',
@@ -48,6 +54,20 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
             useExisting: OverflowLayoutComponent
         },
         OverflowLayoutService
+    ],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgTemplateOutlet,
+        NgFor,
+        OverflowLayoutItemContainerDirective,
+        OverflowItemContainerRefDirective,
+        PopoverComponent,
+        PopoverControlComponent,
+        ButtonComponent,
+        PopoverBodyComponent,
+        OverflowLayoutPopoverContentDirective,
+        FdTranslatePipe
     ]
 })
 export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy, OverflowContainer {

@@ -52,10 +52,6 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
             {
-                path: 'i18n',
-                loadChildren: () => import('@fundamental-ngx/docs/i18n').then((m) => m.ROUTES)
-            },
-            {
                 path: 'action-bar',
                 loadChildren: () => import('@fundamental-ngx/docs/core/action-bar').then(configureCoreRoutes)
             },
@@ -68,8 +64,8 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/core/avatar').then(configureCoreRoutes)
             },
             {
-                path: 'avatar-group',
-                loadChildren: () => import('@fundamental-ngx/docs/core/avatar-group').then(configureCoreRoutes)
+                path: 'avatar-group-legacy',
+                loadChildren: () => import('@fundamental-ngx/docs/core/avatar-group-legacy').then(configureCoreRoutes)
             },
             {
                 path: 'bar',
@@ -449,6 +445,10 @@ export const ROUTES: Routes = [
             {
                 path: 'multi-combobox',
                 loadChildren: () => import('@fundamental-ngx/docs/core/multi-combobox').then(configureCoreRoutes)
+            },
+            {
+                path: 'avatar-group',
+                loadChildren: () => import('@fundamental-ngx/docs/core/avatar-group').then(configureCoreRoutes)
             }
         ]
     }

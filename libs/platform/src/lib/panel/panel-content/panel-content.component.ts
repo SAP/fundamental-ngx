@@ -1,12 +1,13 @@
-import { Component, ChangeDetectionStrategy, Input, HostBinding } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 
 let platformPanelContentUniqueId = 0;
 
 @Component({
     selector: 'fdp-panel-content',
-    templateUrl: './panel-content.component.html',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./panel-content.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true
 })
 export class PanelContentComponent {
     /**

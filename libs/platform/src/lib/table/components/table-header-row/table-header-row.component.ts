@@ -1,3 +1,4 @@
+import { AsyncPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -9,25 +10,37 @@ import {
     QueryList,
     ViewChildren,
     ViewEncapsulation,
+    forwardRef,
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import {
+    DisabledBehaviorDirective,
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FDK_FOCUSABLE_LIST_DIRECTIVE,
     FocusableItemDirective,
     RtlService
 } from '@fundamental-ngx/cdk/utils';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
+import { PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
+import { TableCellDirective, TableRowDirective, TableStatusIndicatorDirective } from '@fundamental-ngx/core/table';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
+    ColumnResizableSidePipe,
+    PlatformTableCellResizableDirective,
+    SelectionCellStylesPipe,
     SelectionMode,
     SelectionModeValue,
+    TableCellStylesPipe,
     TableColumn,
     TableColumnResizeService,
     TableRowService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
+import { TableCellHeaderPopoverComponent } from '../table-cell-header-popover/table-cell-header-popover.component';
+import { TableHeaderCellContentComponent } from '../table-header-cell-content/table-header-cell-content.component';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -43,7 +56,29 @@ import {
     ],
     host: {
         role: 'row'
-    }
+    },
+    standalone: true,
+    imports: [
+        NgIf,
+        TableCellDirective,
+        TableStatusIndicatorDirective,
+        DisabledBehaviorDirective,
+        CheckboxComponent,
+        FormsModule,
+        NgFor,
+        PlatformTableCellResizableDirective,
+        NgClass,
+        NgStyle,
+        PopoverTriggerDirective,
+        TableHeaderCellContentComponent,
+        TableCellHeaderPopoverComponent,
+        AsyncPipe,
+        FdTranslatePipe,
+        SelectionCellStylesPipe,
+        TableCellStylesPipe,
+        ColumnResizableSidePipe,
+        forwardRef(() => IsColumnHasHeaderMenuPipe)
+    ]
 })
 export class TableHeaderRowComponent extends TableRowDirective implements OnInit {
     /** Table ID. */
@@ -149,7 +184,10 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
 }
 
 /** @hidden */
-@Pipe({ name: 'isColumnHasHeaderMenu' })
+@Pipe({
+    name: 'isColumnHasHeaderMenu',
+    standalone: true
+})
 export class IsColumnHasHeaderMenuPipe implements PipeTransform {
     /** @hidden */
     private readonly _fdpTableService = inject(TableService);

@@ -1,8 +1,16 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { Component, ElementRef, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import {
+    ListGroupHeaderDirective,
+    ListNavigationItemArrowDirective,
+    ListNavigationItemComponent,
+    ListNavigationItemTextDirective,
+    ListTitleDirective
+} from '@fundamental-ngx/core/list';
+import { VerticalNavigationGroupHeaderDirective } from './vertical-navigation-group-header.directive';
 import { VerticalNavigationComponent } from './vertical-navigation.component';
-import { ListNavigationItemComponent, ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-test-vertical-navigation',
@@ -37,7 +45,18 @@ import { ListNavigationItemComponent, ListModule } from '@fundamental-ngx/core/l
                 <span fd-list-title>Employee Services</span>
             </li>
         </fd-vertical-navigation>
-    `
+    `,
+    standalone: true,
+    imports: [
+        VerticalNavigationComponent,
+        IconComponent,
+        ListNavigationItemComponent,
+        ListNavigationItemTextDirective,
+        ListGroupHeaderDirective,
+        VerticalNavigationGroupHeaderDirective,
+        ListTitleDirective,
+        ListNavigationItemArrowDirective
+    ]
 })
 class TestVerticalNavigationComponent {
     @ViewChild('objectRef', { read: ElementRef })
@@ -54,9 +73,7 @@ describe('VerticalNavigationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [VerticalNavigationComponent, TestVerticalNavigationComponent],
-            imports: [ListModule],
-            schemas: [NO_ERRORS_SCHEMA]
+            imports: [TestVerticalNavigationComponent]
         }).compileComponents();
     }));
 

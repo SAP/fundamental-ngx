@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import { PortalModule } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BaseToastDurationDismissibleContainerComponent } from '@fundamental-ngx/cdk/utils';
 import { MessageToastConfig } from './config/message-toast.config';
 import { toastAnimation } from './constants/message-toast.animation';
@@ -21,7 +22,9 @@ import { toastAnimation } from './constants/message-toast.animation';
         '[attr.aria-live]': '"polite"',
         '[attr.id]': 'id',
         class: 'fd-message-toast'
-    }
+    },
+    standalone: true,
+    imports: [PortalModule]
 })
 export class MessageToastComponent extends BaseToastDurationDismissibleContainerComponent<MessageToastConfig> {
     /** @hidden */

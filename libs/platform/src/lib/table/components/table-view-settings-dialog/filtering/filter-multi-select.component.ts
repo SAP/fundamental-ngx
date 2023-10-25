@@ -1,4 +1,8 @@
+import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
 /**
@@ -12,7 +16,9 @@ type SelectableOption = TableFilterSelectOption & { selected: boolean };
     selector: 'fdp-filter-multi-select',
     templateUrl: './filter-multi-select.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [ListComponent, NgFor, ListItemComponent, CheckboxComponent, FormsModule, ListTitleDirective]
 })
 export class FilterMultiSelectComponent {
     /** Selectable filter options */

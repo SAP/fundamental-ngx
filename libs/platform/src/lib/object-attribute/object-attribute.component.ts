@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -15,7 +16,9 @@ import {
     templateUrl: './object-attribute.component.html',
     styleUrls: ['./object-attribute.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf]
 })
 export class ObjectAttributeComponent implements OnInit {
     /** label for the element */

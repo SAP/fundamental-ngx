@@ -1,8 +1,9 @@
 {
     "name": "docs-core-avatar-group",
+    "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "libs/docs/core/avatar-group",
     "projectType": "library",
-    "prefix": "fundamental-ngx",
+    "prefix": "fdp-doc",
     "targets": {
         "e2e": {
             "executor": "@fundamental-ngx/nx-plugin:e2e-test",

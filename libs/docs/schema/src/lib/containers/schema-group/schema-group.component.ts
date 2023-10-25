@@ -5,7 +5,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     FieldsetComponent,
-    FormControlModule,
+    FormControlComponent,
     FormItemComponent,
     FormLabelComponent,
     FormLegendDirective
@@ -27,7 +27,7 @@ import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pip
         NgSwitchCase,
         FormItemComponent,
         FormLabelComponent,
-        FormControlModule,
+        FormControlComponent,
         CheckboxComponent,
         FieldsetComponent,
         FormLegendDirective,

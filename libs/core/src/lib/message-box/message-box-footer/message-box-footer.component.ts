@@ -1,6 +1,9 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
-import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
+import { BarComponent, BarRightDirective } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogFooterBase } from '@fundamental-ngx/core/dialog';
+import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.class';
 
 export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
 
@@ -18,7 +21,9 @@ export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
  * */
 @Component({
     selector: 'fd-message-box-footer',
-    templateUrl: './message-box-footer.component.html'
+    templateUrl: './message-box-footer.component.html',
+    standalone: true,
+    imports: [BarComponent, ContentDensityDirective, NgTemplateOutlet, BarRightDirective]
 })
 export class MessageBoxFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
     /** @hidden */

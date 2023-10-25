@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OptionComponent } from './option.component';
 import SpyInstance = jest.SpyInstance;
@@ -15,7 +15,7 @@ describe('OptionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [OptionComponent],
+            imports: [OptionComponent],
             providers: [
                 { provide: ChangeDetectorRef, useValue: changeDetectorRef },
                 { provide: ElementRef, useValue: elementRef }

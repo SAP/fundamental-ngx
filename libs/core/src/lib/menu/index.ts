@@ -17,7 +17,6 @@ export * from './menu.module';
 
 export * from './menu-keyboard.service';
 export * from './menu-mobile/menu-mobile.component';
-export * from './menu-mobile/menu-mobile.module';
 export * from './menu.component';
 export * from './menu.interface';
 export * from './services/menu.service';

@@ -12,7 +12,8 @@ import { FD_LIST_LINK_DIRECTIVE } from '../tokens';
             provide: FD_LIST_LINK_DIRECTIVE,
             useExisting: ListLinkDirective
         }
-    ]
+    ],
+    standalone: true
 })
 export class ListLinkDirective implements OnChanges {
     /** Defines if navigation indicator arrow should be included inside list item */

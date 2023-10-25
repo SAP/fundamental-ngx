@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
     PopoverBodyComponent,
@@ -30,7 +30,7 @@ import {
         ButtonModule,
         PopoverComponent,
         PopoverControlComponent,
-        AvatarModule,
+        AvatarComponent,
         PopoverBodyComponent
     ]
 })
