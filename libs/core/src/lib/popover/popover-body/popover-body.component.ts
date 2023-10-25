@@ -236,5 +236,6 @@ export class PopoverBodyComponent implements AfterViewInit {
         if (this._focusAutoCapture) {
             this._cdkTrapFocus.focusTrap.focusFirstTabbableElement();
         }
+        console.log(document.activeElement);
     }
 }

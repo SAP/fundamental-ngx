@@ -42,9 +42,9 @@ export class BasePopoverClass {
     @Input()
     disableScrollbar = false;
 
-    /** Should fd-scrollbar have tabindex*/
+    /** @deprecated Should fd-scrollbar have tabindex*/
     @Input()
-    tabbableScrollbar = true;
+    tabbableScrollbar = false;
 
     /**
      * The placement of the popover.

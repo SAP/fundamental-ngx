@@ -92,7 +92,7 @@ export class MenuComponent
     @Input()
     focusAutoCapture = true;
 
-    /** Should fd-scrollbar have tabindex*/
+    /** @deprecated Should fd-scrollbar have tabindex*/
     @Input()
     tabbableScrollbar = false;
 
