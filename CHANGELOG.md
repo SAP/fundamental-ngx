@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.5...v0.46.2-rc.6) (2023-10-25)
+
+
+### Features
+
+* **core:** icon component text and background color ([#10791](https://github.com/SAP/fundamental-ngx/issues/10791)) ([a61c9ff](https://github.com/SAP/fundamental-ngx/commit/a61c9ff13ccdba4aff71dceac10da179bde7e551))
+
+
+
+
+
 ## [0.46.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.4...v0.46.2-rc.5) (2023-10-25)
 
 
