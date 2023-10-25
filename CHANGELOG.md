@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.4...v0.46.2-rc.5) (2023-10-25)
+
+
+### Bug Fixes
+
+* **e2e:** another calendar e2e fix ([#10795](https://github.com/SAP/fundamental-ngx/issues/10795)) ([fb857e8](https://github.com/SAP/fundamental-ngx/commit/fb857e80c0dc09f983c98b78bd5e46ec0d54aaf4))
+
+
+
+
+
 ## [0.46.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.3...v0.46.2-rc.4) (2023-10-25)
 
 
