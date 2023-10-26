@@ -59,7 +59,6 @@
         [@openCloseList]="currentScreen === 'list' ? 'open' : 'closed'"
         (@openCloseList.done)="_onListAnimationComplete($event)"
         fd-scrollbar
-        [overrideTabindex]="false"
     >
         <ul #listView fd-list class="message-popover__list fd-list--message-view" [navigationIndicator]="true">
             <ng-container *ngFor="let group of filteredErrors">

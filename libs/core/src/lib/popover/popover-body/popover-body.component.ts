@@ -78,9 +78,6 @@ export class PopoverBodyComponent implements AfterViewInit {
     /** Whether to wrap content with fd-scrollbar directive. */
     _disableScrollbar = false;
 
-    /** Should fd-scrollbar have tabindex*/
-    _tabbableScrollbar = true;
-
     /** Whether the popover should have an arrow. */
     _noArrow = true;
 

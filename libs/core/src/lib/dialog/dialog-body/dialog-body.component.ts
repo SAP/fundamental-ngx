@@ -46,7 +46,5 @@ export class DialogBodyComponent {
         @Optional() public dialogConfig: DialogConfig,
         @Optional() public dialogRef: DialogRef,
         @Inject(ScrollbarDirective) private _scrollbarDirective: ScrollbarDirective
-    ) {
-        this._scrollbarDirective.overrideTabindex = false;
-    }
+    ) {}
 }
