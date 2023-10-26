@@ -7,6 +7,27 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI library for Russian language
  */
 export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Выбрать год',
+        yearsRangeSelectionLabel: 'Выбрать диапазон лет',
+        monthSelectionLabel: 'Выбрать месяц',
+        dateSelectionLabel: 'Выбрать дату',
+        previousYearLabel: 'Предыдущий год',
+        nextYearLabel: 'Следующий год',
+        previousMonthLabel: 'Предыдущий месяц',
+        nextMonthLabel: 'Следующий месяц',
+        weekColumnLabel: 'Неделя календаря',
+        dateSelectedLabel: 'Выбранная дата',
+        todayLabel: 'Сегодня',
+        rangeStartLabel: 'Начало диапазона',
+        rangeEndLabel: 'Конец диапазона',
+        dayInPastLabel: 'Прошедшие дни',
+        closeCalendarLabel: 'Закрыть календарь',
+        calendarDayViewDescription: 'Календарь',
+        calendarMonthViewDescription: 'Выбор месяца',
+        calendarYearsViewDescription: 'Выбор года',
+        calendarYearsRangeViewDescription: 'Выбор диапазона лет'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Выбрать все ({{selectedItems}} из {{totalItems}})'
     },

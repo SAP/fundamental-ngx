@@ -5,6 +5,7 @@ import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeModule, FdDate } from '@f
 import { CalendarService } from '../../calendar.service';
 import { CalendarDay } from '../../models/calendar-day';
 import { CalendarDayViewComponent } from './calendar-day-view.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 describe('CalendarDayViewComponent', () => {
     let component: CalendarDayViewComponent<FdDate>;
@@ -13,7 +14,7 @@ describe('CalendarDayViewComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdDatetimeModule],
+            imports: [FdDatetimeModule, I18nModule],
             declarations: [CalendarDayViewComponent],
             providers: [CalendarService]
         }).compileComponents();

@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Czech language
  */
 export const FD_LANGUAGE_CZECH: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Vyberte rok',
+        yearsRangeSelectionLabel: 'Vyberte rozsah let',
+        monthSelectionLabel: 'Vyberte měsíc',
+        dateSelectionLabel: 'Vyberte datum',
+        previousYearLabel: 'Předchozí rok',
+        nextYearLabel: 'Další rok',
+        previousMonthLabel: 'Předchozí měsíc',
+        nextMonthLabel: 'Další měsíc',
+        weekColumnLabel: 'Kalendářní týden',
+        dateSelectedLabel: 'Vybrané datum',
+        todayLabel: 'Dnes',
+        rangeStartLabel: 'Počátek rozsahu',
+        rangeEndLabel: 'Konec rozsahu',
+        dayInPastLabel: 'Minulé dny',
+        closeCalendarLabel: 'Zavřít kalendář',
+        calendarDayViewDescription: 'Kalendář',
+        calendarMonthViewDescription: 'Výběr měsíce',
+        calendarYearsViewDescription: 'Výběr roku',
+        calendarYearsRangeViewDescription: 'Výběr rozsahu let'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Vybrat vše ({{selectedItems}} z {{totalItems}})'
     },

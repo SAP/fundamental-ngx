@@ -1,5 +1,9 @@
 <div class="fd-calendar__years">
-    <table class="fd-calendar__table" role="grid" [attr.aria-roledescription]="_viewRoleDescription">
+    <table
+        class="fd-calendar__table"
+        role="grid"
+        [attr.aria-roledescription]="'coreCalendar.calendarYearsViewDescription' | fdTranslate"
+    >
         <tbody class="fd-calendar__group" role="rowgroup">
             <tr
                 class="fd-calendar__row"
@@ -50,7 +54,7 @@
 
     <!-- Hidden elements for aria purposes -->
     <div hidden aria-hidden="true">
-        <div [attr.id]="_todayLabelId">{{ _todayAriaLabel }}</div>
-        <div [attr.id]="_selectedDateLabelId">{{ _selectedDateAriaLabel }}</div>
+        <div [attr.id]="_todayLabelId">{{ 'coreCalendar.todayLabel' | fdTranslate }}</div>
+        <div [attr.id]="_selectedDateLabelId">{{ 'coreCalendar.dateSelectedLabel' | fdTranslate }}</div>
     </div>
 </div>

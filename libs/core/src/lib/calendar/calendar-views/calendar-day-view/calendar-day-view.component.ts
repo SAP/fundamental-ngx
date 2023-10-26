@@ -26,7 +26,6 @@ import { ActiveCalendarDayCellStrategy as CalendarActiveDayCellStrategy, Calenda
 
 import { CalendarType, DaysOfWeek } from '../../types';
 import { CalendarService } from '../../calendar.service';
-import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 import { DisableDateFunction, EscapeFocusFunction, FocusableCalendarView } from '../../models/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 
@@ -228,8 +227,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
         private changeDetRef: ChangeDetectorRef,
         private calendarService: CalendarService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        public _dateTimeAdapter: DatetimeAdapter<D>,
-        private _calendarI18nLabels: CalendarI18nLabels
+        public _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
     /** @hidden */
@@ -269,6 +267,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     /**
      * Function for selecting a date on the calendar. Typically called when a date is clicked, but can also be called programmatically.
      * @param day CalendarDay object to be selected.
+     * @param event
      */
     selectDate(day: CalendarDay<D>, event?: MouseEvent): void {
         if (event) {
@@ -408,64 +407,6 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     }
 
     /**
-     * @hidden
-     * Today cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _todayAriaLabel(): string {
-        return this._calendarI18nLabels.todayLabel;
-    }
-
-    /**
-     * @hidden
-     * Selected date cell label.
-     * Is used in conjunction with cell date itself
-     */
-    get _selectedDateAriaLabel(): string {
-        return this._calendarI18nLabels.dateSelectedLabel;
-    }
-
-    /**
-     * @hidden
-     * column label
-     */
-    get _weekColumnLabelAriaLabel(): string {
-        return this._calendarI18nLabels.weekColumnLabel;
-    }
-
-    /**
-     * @hidden
-     * Range start label
-     */
-    get _rangeStartAriaLabel(): string {
-        return this._calendarI18nLabels.rangeStartLabel;
-    }
-
-    /**
-     * @hidden
-     * Range end label
-     */
-    get _rangeEndAriaLabel(): string {
-        return this._calendarI18nLabels.rangeEndLabel;
-    }
-
-    /**
-     * @hidden
-     * Date in past label
-     */
-    get _dateInPastAriaLabel(): string {
-        return this._calendarI18nLabels.dayInPastLabel;
-    }
-
-    /**
-     * @hidden
-     * View description
-     */
-    get _viewRoleDescription(): string {
-        return this._calendarI18nLabels.calendarDayViewDescription;
-    }
-
-    /**
      * View ID
      */
     get viewId(): string {
@@ -525,7 +466,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * Method that handles day cells keydown events,
      * @param event KeyboardEvent
      * @param cell CalendarDay
-     * @param grid with specified column and row as a x and y
+     * @param index
      */
     _onKeydownDayHandler(event: KeyboardEvent, cell: CalendarDay<D>, index: number): void {
         if (event.key === 'Tab' && !event.shiftKey) {

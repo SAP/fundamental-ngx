@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Hindi language
  */
 export const FD_LANGUAGE_HINDI: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'वर्ष चुनें',
+        yearsRangeSelectionLabel: 'वर्षों की सीमा चुनें',
+        monthSelectionLabel: 'महीना चुनें',
+        dateSelectionLabel: 'तारीख चुनें',
+        previousYearLabel: 'पिछला वर्ष',
+        nextYearLabel: 'अगला वर्ष',
+        previousMonthLabel: 'पिछला महीना',
+        nextMonthLabel: 'अगला महीना',
+        weekColumnLabel: 'कैलेंडर सप्ताह',
+        dateSelectedLabel: 'चयनित तारीख',
+        todayLabel: 'आज',
+        rangeStartLabel: 'सीमा प्रारंभ',
+        rangeEndLabel: 'सीमा समाप्त',
+        dayInPastLabel: 'बीते दिन',
+        closeCalendarLabel: 'कैलेंडर बंद करें',
+        calendarDayViewDescription: 'कैलेंडर',
+        calendarMonthViewDescription: 'महीना चयनकर्ता',
+        calendarYearsViewDescription: 'वर्ष चयनकर्ता',
+        calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'सबका चयन करें'
     },

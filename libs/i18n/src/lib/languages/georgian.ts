@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Georgian language
  */
 export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'წელის არჩევა',
+        yearsRangeSelectionLabel: 'წელთა შუალედის არჩევა',
+        monthSelectionLabel: 'თვის არჩევა',
+        dateSelectionLabel: 'თარიღის არჩევა',
+        previousYearLabel: 'წინა წელი',
+        nextYearLabel: 'შემდეგი წელი',
+        previousMonthLabel: 'წინა თვე',
+        nextMonthLabel: 'შემდეგი თვე',
+        weekColumnLabel: 'კალენდარის კვირა',
+        dateSelectedLabel: 'შერჩეული თარიღი',
+        todayLabel: 'დღეს',
+        rangeStartLabel: 'შუალედის დაწყება',
+        rangeEndLabel: 'შუალედის დასრულება',
+        dayInPastLabel: 'წინა დღეები',
+        closeCalendarLabel: 'კალენდარის დახურვა',
+        calendarDayViewDescription: 'კალენდარი',
+        calendarMonthViewDescription: 'თვის არჩევა',
+        calendarYearsViewDescription: 'წელის არჩევა',
+        calendarYearsRangeViewDescription: 'წელთა შუალედის არჩევა'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'ყველას არჩევა ({{selectedItems}} {{totalItems}}-დან)'
     },

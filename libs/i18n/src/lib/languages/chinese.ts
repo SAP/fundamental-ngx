@@ -4,6 +4,27 @@ import { FdLanguage } from '../models/lang';
  * Default set of translations of Fundamental UI library for Chinese language
  */
 export const FD_LANGUAGE_CHINESE: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: '选择年份',
+        yearsRangeSelectionLabel: '选择年份范围',
+        monthSelectionLabel: '选择月份',
+        dateSelectionLabel: '选择日期',
+        previousYearLabel: '上一年',
+        nextYearLabel: '下一年',
+        previousMonthLabel: '上个月',
+        nextMonthLabel: '下个月',
+        weekColumnLabel: '日历周',
+        dateSelectedLabel: '已选择日期',
+        todayLabel: '今天',
+        rangeStartLabel: '范围开始',
+        rangeEndLabel: '范围结束',
+        dayInPastLabel: '过去的天数',
+        closeCalendarLabel: '关闭日历',
+        calendarDayViewDescription: '日历',
+        calendarMonthViewDescription: '月份选择器',
+        calendarYearsViewDescription: '年份选择器',
+        calendarYearsRangeViewDescription: '年份范围选择器'
+    },
     coreMultiComboBox: {
         selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
     },

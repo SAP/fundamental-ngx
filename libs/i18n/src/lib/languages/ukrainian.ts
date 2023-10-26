@@ -6,6 +6,27 @@ const pluralization = new PluralizationSet1();
  * Default set of translations of Fundamental UI libarary for Ukrainian language
  */
 export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Оберіть рік',
+        yearsRangeSelectionLabel: 'Оберіть діапазон років',
+        monthSelectionLabel: 'Оберіть місяць',
+        dateSelectionLabel: 'Оберіть дату',
+        previousYearLabel: 'Попередній рік',
+        nextYearLabel: 'Наступний рік',
+        previousMonthLabel: 'Попередній місяць',
+        nextMonthLabel: 'Наступний місяць',
+        weekColumnLabel: 'Тиждень календаря',
+        dateSelectedLabel: 'Вибрана дата',
+        todayLabel: 'Сьогодні',
+        rangeStartLabel: 'Початок діапазону',
+        rangeEndLabel: 'Кінець діапазону',
+        dayInPastLabel: 'Минулі дні',
+        closeCalendarLabel: 'Закрити календар',
+        calendarDayViewDescription: 'Календар',
+        calendarMonthViewDescription: 'Вибір місяця',
+        calendarYearsViewDescription: 'Вибір року',
+        calendarYearsRangeViewDescription: 'Вибір діапазону років'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Вибрати все ({{selectedItems}} з {{totalItems}})'
     },

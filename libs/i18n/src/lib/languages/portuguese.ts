@@ -2,6 +2,27 @@
 import { FdLanguage } from '../models';
 
 export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
+    coreCalendar: {
+        yearSelectionLabel: 'Selecionar ano',
+        yearsRangeSelectionLabel: 'Selecionar intervalo de anos',
+        monthSelectionLabel: 'Selecionar mês',
+        dateSelectionLabel: 'Selecionar data',
+        previousYearLabel: 'Ano anterior',
+        nextYearLabel: 'Próximo ano',
+        previousMonthLabel: 'Mês anterior',
+        nextMonthLabel: 'Próximo mês',
+        weekColumnLabel: 'Semana do calendário',
+        dateSelectedLabel: 'Data selecionada',
+        todayLabel: 'Hoje',
+        rangeStartLabel: 'Início do intervalo',
+        rangeEndLabel: 'Fim do intervalo',
+        dayInPastLabel: 'Dias passados',
+        closeCalendarLabel: 'Fechar calendário',
+        calendarDayViewDescription: 'Calendário',
+        calendarMonthViewDescription: 'Seletor de mês',
+        calendarYearsViewDescription: 'Seletor de ano',
+        calendarYearsRangeViewDescription: 'Seletor de intervalo de anos'
+    },
     coreMultiComboBox: {
         selectAllLabel: 'Selecionar tudo ({{selectedItems}} de {{totalItems}})'
     },

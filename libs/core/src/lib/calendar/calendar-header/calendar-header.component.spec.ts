@@ -4,6 +4,7 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarService } from '../calendar.service';
 import { CalendarHeaderComponent } from './calendar-header.component';
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 describe('Calendar2HeaderComponent', () => {
     let component: CalendarHeaderComponent<FdDate>;
@@ -12,7 +13,7 @@ describe('Calendar2HeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [CalendarHeaderComponent],
-            imports: [ButtonModule, FdDatetimeModule],
+            imports: [ButtonModule, FdDatetimeModule, I18nModule],
             providers: [CalendarService]
         }).compileComponents();
     }));
