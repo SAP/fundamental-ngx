@@ -49,7 +49,7 @@ $onlyChildBusyIndicator: '.fd-busy-indicator:first-child';
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 1;
+        z-index: 10;
         background-color: var(--sapBaseColor);
         opacity: 0.72;
     }
