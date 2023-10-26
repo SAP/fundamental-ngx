@@ -7,7 +7,7 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../../calendar.service';
 import { CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarAggregatedYearViewComponent } from './calendar-aggregated-year-view.component';
-import { I18nModule } from "@fundamental-ngx/i18n";
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 describe('CalendarAggregatedYearViewComponent', () => {
     let component: CalendarAggregatedYearViewComponent<FdDate>;

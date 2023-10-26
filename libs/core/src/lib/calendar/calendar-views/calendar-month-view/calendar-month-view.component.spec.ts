@@ -5,7 +5,7 @@ import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
 import { CalendarMonthViewComponent } from './calendar-month-view.component';
-import { I18nModule } from "@fundamental-ngx/i18n";
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 describe('CalendarMonthViewComponent', () => {
     let component: CalendarMonthViewComponent<FdDate>;

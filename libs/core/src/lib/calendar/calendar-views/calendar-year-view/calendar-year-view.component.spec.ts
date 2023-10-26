@@ -3,7 +3,7 @@ import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYearViewComponent } from './calendar-year-view.component';
-import { I18nModule } from "@fundamental-ngx/i18n";
+import { I18nModule } from '@fundamental-ngx/i18n';
 
 describe('CalendarYearViewComponent', () => {
     let component: CalendarYearViewComponent<FdDate>;
