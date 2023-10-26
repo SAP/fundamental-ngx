@@ -6,12 +6,7 @@ import { NavigationMenuPopoverControlDirective } from './navigation-menu-popover
 @Component({
     selector: 'fdb-navigation-menu-popover',
     template: `
-        <fd-popover
-            additionalBodyClass="fdb-navigation-popover-body"
-            [noArrow]="false"
-            [disableScrollbar]="true"
-            [focusAutoCapture]="true"
-        >
+        <fd-popover additionalBodyClass="fdb-navigation-popover-body" [noArrow]="false" [focusAutoCapture]="true">
             <fd-popover-control>
                 <ng-template [ngTemplateOutlet]="_control.templateRef"></ng-template>
             </fd-popover-control>

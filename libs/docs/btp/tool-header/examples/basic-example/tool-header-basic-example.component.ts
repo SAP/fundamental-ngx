@@ -90,41 +90,6 @@ export class ToolHeaderBasicExampleComponent {
             clickCallback: () => {
                 console.log('Settings');
             }
-        },
-        {
-            label: 'Something',
-            glyph: 'settings',
-            clickCallback: () => {
-                console.log('Settings');
-            }
-        },
-        {
-            label: 'Something',
-            glyph: 'settings',
-            clickCallback: () => {
-                console.log('Settings');
-            }
-        },
-        {
-            label: 'Something',
-            glyph: 'settings',
-            clickCallback: () => {
-                console.log('Settings');
-            }
-        },
-        {
-            label: 'Something',
-            glyph: 'settings',
-            clickCallback: () => {
-                console.log('Settings');
-            }
-        },
-        {
-            label: 'Something',
-            glyph: 'settings',
-            clickCallback: () => {
-                console.log('Settings');
-            }
         }
     ];
 
