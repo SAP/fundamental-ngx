@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.12...v0.46.2-rc.13) (2023-10-27)
+
+
+### Bug Fixes
+
+* **core:** busy indicator overlay z-index ([#10808](https://github.com/SAP/fundamental-ngx/issues/10808)) ([2084705](https://github.com/SAP/fundamental-ngx/commit/2084705b44a4008e456ab2417374243b849ba2ca))
+* **core:** swap icon files along the theme switch ([#10538](https://github.com/SAP/fundamental-ngx/issues/10538)) ([be5f488](https://github.com/SAP/fundamental-ngx/commit/be5f488848ae890c307200b9df175baee1eb8467))
+
+
+
+
+
 ## [0.46.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.11...v0.46.2-rc.12) (2023-10-27)
 
 
