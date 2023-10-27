@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.11...v0.46.2-rc.12) (2023-10-27)
+
+
+### Bug Fixes
+
+* **core:** remove placeimg leftovers ([#10809](https://github.com/SAP/fundamental-ngx/issues/10809)) ([3de4554](https://github.com/SAP/fundamental-ngx/commit/3de45546fa9021cea1203ddd72bb3062bfa29338))
+
+
+
+
+
 ## [0.46.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.10...v0.46.2-rc.11) (2023-10-25)
 
 
