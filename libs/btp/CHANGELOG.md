@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.13...v0.46.2-rc.14) (2023-10-27)
+
+
+### Bug Fixes
+
+* **core,platform,cdk:** remove focusable scrollbar ([#10830](https://github.com/SAP/fundamental-ngx/issues/10830)) ([98480f7](https://github.com/SAP/fundamental-ngx/commit/98480f7a4030f0c2ff40df01239f25d17203a49d))
+
+
+
+
+
 ## [0.46.2-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.12...v0.46.2-rc.13) (2023-10-27)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
