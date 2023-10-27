@@ -2831,17 +2831,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/common-css@0.30.3-rc.2":
-  version "0.30.3-rc.2"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/common-css/-/common-css-0.30.3-rc.2.tgz#ef8daed4c90fbfe776e12c186dc8826cf2efab93"
-  integrity sha512-OEQAfJJiNhHzf5D6wf+Wa5but2fu3PNl3pXmQ/aQpfJhyl4Y/er+ZIky+NHqSooxjBgZBFJJWFakCr+/dN6wsg==
-  dependencies:
-    "@sap-theming/theming-base-content" "^11.7.0"
-
-"@fundamental-styles/cx@0.30.3-rc.2":
-  version "0.30.3-rc.2"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.30.3-rc.2.tgz#16d89c5f765fa2e1adc8bfc967171be6d46ecbef"
-  integrity sha512-NWPfnRKD980UXj8oIozQpHd2JLpQZksd4ZLVtMp3ptKHQjhrTZz8ccqeTPYkJhGcDoNOpyFZbxPRAojwOrY2sQ==
+"@fundamental-styles/cx@0.31.0":
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.31.0.tgz#5277c333c81792d8027c6e58eb9aac8859d7fdd0"
+  integrity sha512-+xOCOjg9w3AHCGywwVI2fGuIhnE29qxwqe86RxtFOrtQy/mfqC41YtV886+e0Du1t+4iXQcp3v9jewzI1Wg0kA==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -3874,6 +3867,13 @@
   version "11.7.0"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.7.0.tgz#381833a4d4a9da570514d2e56a45cb9db3cc5b8c"
   integrity sha512-CeKhmXY2b8ya+RinaasLDyJ5+nmJbb00m4R8j7jQKVC6jbjs3k1X9cDtmiR/ayy6ASW/pTH4AjsolJrzeesRLg==
+
+"@sap-ui/common-css@0.31.0":
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.31.0.tgz#d53d4d4fb9014c0d0f673d03487be2ea4bb8a5d0"
+  integrity sha512-oSPeF9KAzbQInFwAnklHovvExjONII+5vB8wP9PRCzbIrDPXWo2QFkg75+1jAIOl1u6Mvv+8nNRJpGnIZajvLQ==
+  dependencies:
+    "@sap-theming/theming-base-content" "^11.7.0"
 
 "@schematics/angular@16.2.4":
   version "16.2.4"
@@ -9584,10 +9584,10 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.30.3-rc.2:
-  version "0.30.3-rc.2"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.30.3-rc.2.tgz#99113fa7b63918bd22a1c102ef5535e47ef96403"
-  integrity sha512-HJHBg9G8/hIdpU9OzPnUHz5feyGBDvRhX8y0JV6JjwO0JmWACFTdPzRtg4ginh55ilmffxSqUfJ1bNjNoxwvsA==
+fundamental-styles@0.31.0:
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.31.0.tgz#082d9d3c16a194a791cb0752709af59bb6d6a1a2"
+  integrity sha512-ab9V1cvvX0IluN5uLi/lhofamQRI51tawMms6Sugh+NNX3Myre9KxirZsn/epvmST7hpeC9/N5POMwbFAyXQ4A==
 
 gauge@^4.0.3:
   version "4.0.4"
