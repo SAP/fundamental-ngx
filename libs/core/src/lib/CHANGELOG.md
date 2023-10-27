@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.11...v0.46.2-rc.12) (2023-10-27)
+
+
+### Bug Fixes
+
+* **core:** remove placeimg leftovers ([#10809](https://github.com/SAP/fundamental-ngx/issues/10809)) ([3de4554](https://github.com/SAP/fundamental-ngx/commit/3de45546fa9021cea1203ddd72bb3062bfa29338))
+
+
+
+
+
+## [0.46.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.10...v0.46.2-rc.11) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core:** rating indicator missing display types ([#10798](https://github.com/SAP/fundamental-ngx/issues/10798)) ([c53179d](https://github.com/SAP/fundamental-ngx/commit/c53179db477db688798faeb8c32ab28eb60116e2))
+
+
+
+
+
+## [0.46.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.9...v0.46.2-rc.10) (2023-10-25)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.46.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.8...v0.46.2-rc.9) (2023-10-25)
+
+
+### Bug Fixes
+
+* **core:** improved multi-input a11y ([#10676](https://github.com/SAP/fundamental-ngx/issues/10676)) ([9956a31](https://github.com/SAP/fundamental-ngx/commit/9956a316f38f7d853f43983ced8a70a4439a2cd5))
+
+
+
+
+
 ## [0.46.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.6...v0.46.2-rc.8) (2023-10-25)
 
 

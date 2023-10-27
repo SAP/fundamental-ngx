@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 
+import { RatingIndicatorComponent } from '@fundamental-ngx/core/rating-indicator';
+import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
     DocsSectionTitleComponent,
     ExampleFile,
+    PlayGroundComponent,
     SeparatorComponent,
     getAssetFromModuleAssets
 } from '@fundamental-ngx/docs/shared';
@@ -13,7 +16,6 @@ import { RatingIndicatorRatingsExampleComponent } from './examples/rating-indica
 import { RatingIndicatorSizesExampleComponent } from './examples/rating-indicator-sizes.component';
 import { RatingIndicatorCustomIconExampleComponent } from './examples/ri-custom-icon-example.component';
 import { RatingIndicatorDisplayModeComponent } from './examples/ri-display-mode-example.component';
-import { RatingIndicatorDynamicExampleComponent } from './examples/ri-dynamic-example.component';
 
 const sizeRatingHtml = 'rating-indicator-sizes.component.html';
 const sizesRatingTs = 'rating-indicator-sizes.component.ts';
@@ -23,9 +25,6 @@ const ratingsObjectTs = 'rating-indicator-ratings.component.ts';
 
 const baseHtml = 'rating-indicator-example.component.html';
 const baseTs = 'rating-indicator-examples.component.ts';
-
-const dynamicHtml = 'ri-dynamic-example.component.html';
-const dynamicTs = 'ri-dynamic-example.component.ts';
 
 const customIconHtml = 'ri-custom-icon-example.component.html';
 const customIconTs = 'ri-custom-icon-example.component.ts';
@@ -47,10 +46,24 @@ const displayModeTs = 'ri-display-mode-example.component.ts';
         RatingIndicatorCustomIconExampleComponent,
         RatingIndicatorSizesExampleComponent,
         RatingIndicatorRatingsExampleComponent,
-        RatingIndicatorDynamicExampleComponent
+        PlayGroundComponent,
+        RatingIndicatorComponent
     ]
 })
 export class RatingIndicatorDocsComponent {
+    schema: Schema;
+
+    data: any = {
+        properties: {
+            disabled: false,
+            allowHalves: false,
+            displayMode: false,
+            nonInteractive: false,
+            size: 'md',
+            indicatorCapacity: 5
+        }
+    };
+
     ratingIndicatorSizes: ExampleFile[] = [
         {
             language: 'html',
@@ -85,16 +98,6 @@ export class RatingIndicatorDocsComponent {
         }
     ];
 
-    ratingIndicatorDynamicFields: ExampleFile[] = [
-        {
-            language: 'html',
-            code: getAssetFromModuleAssets(dynamicHtml),
-            fileName: 'ri-dynamic-example',
-            typescriptFileCode: getAssetFromModuleAssets(dynamicTs),
-            component: 'RatingIndicatorDynamicExampleComponent'
-        }
-    ];
-
     ratingIndicatorCustomIcon: ExampleFile[] = [
         {
             language: 'html',
@@ -114,4 +117,12 @@ export class RatingIndicatorDocsComponent {
             component: 'RatingIndicatorDisplayModeComponent'
         }
     ];
+
+    constructor(private _schemaFactory: SchemaFactoryService) {
+        this.schema = this._schemaFactory.getComponent('ratingIndicator');
+    }
+
+    onSchemaValues(data): void {
+        this.data = data;
+    }
 }

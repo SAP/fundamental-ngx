@@ -9,7 +9,7 @@
             role="button"
             type="radio"
             class="fd-rating-indicator__input"
-            [disabled]="disabled"
+            [disabled]="disabled || nonInteractive || displayMode"
             [id]="rate.id"
             name="rating-{{ viewRatingUID }}"
             [value]="rate.value"
@@ -68,7 +68,7 @@
         type="radio"
         class="fd-rating-indicator__input fd-rating-indicator__input--zero-rating"
         (click)="onSelect(0)"
-        [disabled]="disabled"
+        [disabled]="disabled || nonInteractive || displayMode"
         name="rating-{{ viewRatingUID }}{{ halves ? '-halves' : '' }}"
         [checked]="viewValue === 0"
     />
