@@ -46,7 +46,7 @@ export class PopoverBodyComponent implements AfterViewInit {
     _disableScrollbar = false;
 
     /** Should fd-scrollbar have tabindex*/
-    _tabbableScrollbar = true;
+    _tabbableScrollbar = false;
 
     /** @hidden */
     @ViewChild(CdkTrapFocus)
