@@ -115,8 +115,6 @@ export class NavigationContentStartComponent extends NavigationContentComponent 
     constructor() {
         super();
 
-        this._scrollbar.overrideTabindex = false;
-
         effect(
             () => {
                 if (!this._canTrackItems()) {

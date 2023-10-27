@@ -92,10 +92,6 @@ export class MenuComponent
     @Input()
     focusAutoCapture = true;
 
-    /** Should fd-scrollbar have tabindex*/
-    @Input()
-    tabbableScrollbar = false;
-
     /** Open submenu on hover after given milliseconds */
     @Input()
     openOnHoverTime = 0;

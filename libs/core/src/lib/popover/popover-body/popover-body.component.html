@@ -18,12 +18,7 @@
     [fdkResizeClass]="'fd-popover__body--disable-transitions'"
     [fdkResizeHandleLocation]="_resizeHandleLocation"
 >
-    <div
-        fd-scrollbar
-        class="fd-popover__wrapper"
-        [overrideTabindex]="_tabbableScrollbar"
-        *ngIf="!_disableScrollbar; else renderer"
-    >
+    <div fd-scrollbar class="fd-popover__wrapper" *ngIf="!_disableScrollbar; else renderer">
         <ng-container *ngTemplateOutlet="renderer"></ng-container>
     </div>
     <span fdkResizeHandle *ngIf="_resizable" class="fd-popover__resize-handle"></span>
