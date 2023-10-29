@@ -80,7 +80,7 @@
         "@angular-eslint/template-parser": "16.1.0",
         "@angular/cli": "~16.2.0",
         "@angular/compiler-cli": "16.2.7",
-        "@angular/language-service": "16.2.7",
+        "@angular/language-service": "16.2.11",
         "@babel/core": "7.21.3",
         "@babel/runtime": "7.21.0",
         "@commitlint/cli": "17.7.1",
