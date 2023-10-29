@@ -89,7 +89,7 @@
         "@jsdevtools/npm-publish": "2.2.2",
         "@nx/devkit": "16.9.1",
         "@nx/eslint-plugin": "16.9.1",
-        "@nx/jest": "16.9.1",
+        "@nx/jest": "17.0.2",
         "@nx/js": "16.9.1",
         "@nx/linter": "16.9.1",
         "@nx/plugin": "16.9.1",
