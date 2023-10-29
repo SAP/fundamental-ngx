@@ -88,7 +88,7 @@
         "@sap-ui/common-css": "0.31.0",
         "@jsdevtools/npm-publish": "2.2.2",
         "@nx/devkit": "16.9.1",
-        "@nx/eslint-plugin": "16.9.1",
+        "@nx/eslint-plugin": "17.0.2",
         "@nx/jest": "16.9.1",
         "@nx/js": "16.9.1",
         "@nx/linter": "16.9.1",
