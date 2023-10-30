@@ -6,7 +6,7 @@
     "prefix": "fd",
     "targets": {
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/popover/**/*.ts", "libs/core/src/lib/popover/**/*.html"]
             }

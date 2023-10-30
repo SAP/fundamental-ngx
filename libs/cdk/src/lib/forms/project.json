@@ -6,7 +6,7 @@
     "prefix": "fdk",
     "targets": {
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "options": {
                 "lintFilePatterns": ["libs/cdk/src/lib/forms/**/*.ts", "libs/cdk/src/lib/forms/**/*.html"]
             }

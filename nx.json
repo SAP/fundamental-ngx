@@ -1,22 +1,10 @@
 {
-    "npmScope": "fundamental-ngx",
     "affected": {
         "defaultBase": "main"
     },
     "tasksRunnerOptions": {
         "default": {
-            "runner": "nx-cloud",
             "options": {
-                "accessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ=",
-                "cacheableOperations": [
-                    "generate-typedoc",
-                    "compile-typedoc",
-                    "compile",
-                    "build",
-                    "lint",
-                    "test",
-                    "e2e"
-                ],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
             }
@@ -59,19 +47,38 @@
     "targetDefaults": {
         "build": {
             "dependsOn": ["^build"],
-            "inputs": ["production", "^production"]
+            "inputs": ["production", "^production"],
+            "cache": true
         },
         "prepare": {
             "dependsOn": ["build"]
         },
         "test": {
-            "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"]
+            "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
+            "cache": true
         },
         "lint": {
-            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+            "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+            "cache": true
         },
         "lint-noop": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+        },
+        "transform-translations": {
+            "inputs": ["{projectRoot}/**/*.properties", "default"],
+            "cache": true
+        },
+        "generate-typedoc": {
+            "cache": true
+        },
+        "compile-typedoc": {
+            "cache": true
+        },
+        "compile": {
+            "cache": true
+        },
+        "e2e": {
+            "cache": true
         }
     },
     "namedInputs": {
@@ -92,5 +99,6 @@
             "!{projectRoot}/jest.config.[jt]s",
             "!{projectRoot}/src/test-setup.[jt]s"
         ]
-    }
+    },
+    "nxCloudAccessToken": "MzFiYWRhMTItYTAxYi00MGZjLWJmNDEtOTllMzEwZjI5ODNkfHJlYWQ="
 }
