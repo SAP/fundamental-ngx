@@ -65,3 +65,7 @@ sauce_connect.log
 .angular
 
 /**/*/typedoc
+
+libs/i18n/src/lib/translations/*.json
+
+.nx/cache

@@ -13,7 +13,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { Libraries } from '../../utilities';
 
-import { LowerCasePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, LowerCasePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import {
@@ -32,27 +32,9 @@ import {
     ShellbarSidenavDirective,
     ShellbarSizes
 } from '@fundamental-ngx/core/shellbar';
-import {
-    FD_LANGUAGE,
-    FD_LANGUAGE_ALBANIAN,
-    FD_LANGUAGE_BULGARIAN,
-    FD_LANGUAGE_CHINESE,
-    FD_LANGUAGE_CZECH,
-    FD_LANGUAGE_ENGLISH,
-    FD_LANGUAGE_FRENCH,
-    FD_LANGUAGE_GEORGIAN,
-    FD_LANGUAGE_GERMAN,
-    FD_LANGUAGE_HINDI,
-    FD_LANGUAGE_ITALIAN,
-    FD_LANGUAGE_POLISH,
-    FD_LANGUAGE_PORTUGUESE,
-    FD_LANGUAGE_RUSSIAN,
-    FD_LANGUAGE_TURKISH,
-    FD_LANGUAGE_UKRAINIAN,
-    FdLanguage
-} from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Subject, filter, fromEvent } from 'rxjs';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { FD_LANGUAGE, FdLanguage, loadProperties } from '@fundamental-ngx/i18n';
+import { BehaviorSubject, Observable, Subject, filter, fromEvent, zip } from 'rxjs';
+import { debounceTime, map, startWith, takeUntil } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
@@ -64,6 +46,24 @@ const isDark = (themeName: string): boolean => urlContains(themeName, 'dark');
 type Version = {
     id: string;
     url: string;
+};
+
+const languages = {
+    'sq-AL': 'Shqip',
+    'bg-BG': 'Български',
+    'zh-CN': '简体中文',
+    'cs-CZ': 'Český',
+    'de-DE': 'Deutsch',
+    'en-US': 'English',
+    'fr-FR': 'Français',
+    'ka-GE': 'ქართული',
+    'hi-IN': 'हिन्दी',
+    'it-IT': 'Italiano',
+    'pl-PL': 'Polski',
+    'pt-BR': 'Português(Brazil)',
+    'ru-RU': 'Русский',
+    'tr-TR': 'Türkçe',
+    'uk-UA': 'Українська'
 };
 
 @Component({
@@ -87,7 +87,8 @@ type Version = {
         NgTemplateOutlet,
         NgFor,
         IconModule,
-        LowerCasePipe
+        LowerCasePipe,
+        AsyncPipe
     ]
 })
 export class ToolbarDocsComponent implements OnInit, OnDestroy {
@@ -116,23 +117,13 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     initialTheme = 'sap_horizon';
 
-    translations = [
-        { name: 'Shqip', value: FD_LANGUAGE_ALBANIAN },
-        { name: 'Български', value: FD_LANGUAGE_BULGARIAN },
-        { name: '简体中文', value: FD_LANGUAGE_CHINESE },
-        { name: 'Český', value: FD_LANGUAGE_CZECH },
-        { name: 'Deutsch', value: FD_LANGUAGE_GERMAN },
-        { name: 'English', value: FD_LANGUAGE_ENGLISH },
-        { name: 'Français', value: FD_LANGUAGE_FRENCH },
-        { name: 'ქართული', value: FD_LANGUAGE_GEORGIAN },
-        { name: 'हिन्दी', value: FD_LANGUAGE_HINDI },
-        { name: 'Italiano', value: FD_LANGUAGE_ITALIAN },
-        { name: 'Polski', value: FD_LANGUAGE_POLISH },
-        { name: 'Português(Brazil)', value: FD_LANGUAGE_PORTUGUESE },
-        { name: 'Русский', value: FD_LANGUAGE_RUSSIAN },
-        { name: 'Türkçe', value: FD_LANGUAGE_TURKISH },
-        { name: 'Українська', value: FD_LANGUAGE_UKRAINIAN }
-    ];
+    translations$: Observable<Record<string, FdLanguage>[]> = zip(
+        Object.keys(languages).map((locale) =>
+            this._http
+                .get(`assets/i18n/translations_${locale}.properties`, { responseType: 'text' })
+                .pipe(map((lang) => ({ value: loadProperties(lang), name: languages[locale] })))
+        )
+    );
 
     items: ShellbarMenuItem[] = [
         {

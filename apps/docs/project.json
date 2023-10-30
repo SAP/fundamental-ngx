@@ -152,6 +152,11 @@
                         "glob": "**/*",
                         "input": "libs/docs/shared/src/lib/core-helpers/stackblitz/code-example-stack",
                         "output": "./stackblitz/example-stack"
+                    },
+                    {
+                        "glob": "**/*.properties",
+                        "input": "libs/i18n/src/lib/translations",
+                        "output": "./assets/i18n"
                     }
                 ],
                 "styles": [
@@ -256,7 +261,7 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^compile-typedoc"]
+            "dependsOn": ["^compile-typedoc", "^transform-translations"]
         },
         "serve": {
             "executor": "@nx/angular:webpack-dev-server",
@@ -306,10 +311,11 @@
                     "liveReload": false
                 }
             },
-            "defaultConfiguration": "hot-module-replacement"
+            "defaultConfiguration": "hot-module-replacement",
+            "dependsOn": ["^compile-typedoc", "^transform-translations"]
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "options": {
                 "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
             }
