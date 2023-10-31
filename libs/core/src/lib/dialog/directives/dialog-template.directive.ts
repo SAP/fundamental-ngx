@@ -6,18 +6,11 @@ export interface DialogTemplateDirectiveContext<T = DialogConfig<any>, U = T ext
     $implicit: DialogRef<U>;
     dialogConfig: T;
 }
-
-export type DialogConfigType<T, M> = DialogConfigInterface<T, M>;
-
-export type DialogConfigInterface<A, M> = DialogConfig & A extends DialogConfig ? never : DialogConfig<M>;
 @Directive({
     selector: '[fdDialogTemplate]',
-    exportAs: 'fdDialogTemplate',
     standalone: true
 })
 export class DialogTemplateDirective<T = DialogConfig<any>> {
-    /** @hidden */
-    // static ngAcceptInputType_fdDialogTemplateConfig: never | DialogConfig;
     /** Custom dialog config model. */
     @Input()
     fdDialogTemplateConfig: T;

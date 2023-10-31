@@ -25,7 +25,7 @@ export class MessageToastComponentExampleComponent {
 
 @Component({
     template: `
-        <ng-template let-messageToast #template>
+        <ng-template [fdMessageBoxTemplate] let-messageToast #template>
             {{ messageToast.data.message }}
         </ng-template>
     `,

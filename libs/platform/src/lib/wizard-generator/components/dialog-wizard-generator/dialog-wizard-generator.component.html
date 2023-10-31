@@ -110,7 +110,12 @@
     </fd-dialog-body>
 </fd-dialog>
 
-<ng-template let-messageBox let-messageBoxConfig="messageBoxConfig" #defaultConfirmationDialogTemplate>
+<ng-template
+    [fdMessageBoxTemplate]
+    let-messageBox
+    let-messageBoxConfig="messageBoxConfig"
+    #defaultConfirmationDialogTemplate
+>
     <fd-message-box [messageBoxConfig]="messageBoxConfig" [messageBoxRef]="messageBox">
         <fd-message-box-body>
             {{ confirmationDialogText }}
