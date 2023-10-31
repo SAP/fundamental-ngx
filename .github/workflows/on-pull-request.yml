@@ -126,7 +126,7 @@ jobs:
                   NX_CLOUD_DISTRIBUTED_EXECUTION=false npx nx run docs:e2e-app
 
     stop_agents:
-        #        if: ${{ always() }}
+        if: ${{ always() }}
         needs:
             - build_test
             - e2e_test
