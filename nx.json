@@ -72,10 +72,12 @@
             "cache": true
         },
         "compile-typedoc": {
-            "cache": true
+            "cache": true,
+            "dependsOn": ["^transform-translations"]
         },
         "compile": {
-            "cache": true
+            "cache": true,
+            "dependsOn": ["^transform-translations"]
         },
         "e2e": {
             "cache": true
