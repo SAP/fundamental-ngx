@@ -17,23 +17,26 @@ env:
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
 jobs:
-    agents:
-        name: Runner
-        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
-        secrets:
-            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-        with:
-            number-of-agents: 5
-            node-version: 16.x
-            yarn-version: 1.22.19
+    nx_agents:
+        name: Nx Cloud Agent ${{ matrix.agent }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                agent: [1, 2, 3, 4, 5]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/ci-environment
+            - name: Start Nx Cloud Agent
+              run: npx nx-cloud start-agent
+              env:
+                  NX_AGENT_NAME: ${{matrix.agent}}
 
     initialize_cloud:
         runs-on: ubuntu-latest
         name: Initialize Nx Cloud
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
+            - uses: ./.github/actions/ci-environment
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
@@ -58,8 +61,8 @@ jobs:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
 
-            - name: Setup Node.js and Cache
-              uses: ./.github/actions/nodejs
+            - name: Setup CI environment
+              uses: ./.github/actions/ci-environment
 
             # Does conventional version bump and creates a tag
             - name: Get next version
@@ -151,8 +154,8 @@ jobs:
                   ref: main # always fetch from main branch
                   token: ${{ secrets.GHACTIONS }}
 
-            - name: Setup Node.js and Cache
-              uses: ./.github/actions/nodejs
+            - name: Setup CI environment
+              uses: ./.github/actions/ci-environment
 
             - name: Run build prod
               run: npx nx run docs:compile:production
@@ -172,6 +175,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
+            - uses: ./.github/actions/ci-environment
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents
