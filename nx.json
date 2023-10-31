@@ -54,6 +54,7 @@
             "dependsOn": ["build"]
         },
         "test": {
+            "dependsOn": ["^transform-translations"],
             "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
             "cache": true
         },
@@ -66,9 +67,6 @@
         },
         "transform-translations": {
             "inputs": ["{projectRoot}/**/*.properties", "default"],
-            "cache": true
-        },
-        "generate-typedoc": {
             "cache": true
         },
         "compile-typedoc": {
