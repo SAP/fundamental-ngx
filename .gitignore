@@ -66,6 +66,4 @@ sauce_connect.log
 
 /**/*/typedoc
 
-libs/i18n/src/lib/translations/*.json
-
 .nx/cache

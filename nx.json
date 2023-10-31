@@ -54,7 +54,6 @@
             "dependsOn": ["build"]
         },
         "test": {
-            "dependsOn": ["^transform-translations"],
             "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],
             "cache": true
         },
@@ -70,12 +69,10 @@
             "cache": true
         },
         "compile-typedoc": {
-            "cache": true,
-            "dependsOn": ["^transform-translations"]
+            "cache": true
         },
         "compile": {
-            "cache": true,
-            "dependsOn": ["^transform-translations"]
+            "cache": true
         },
         "e2e": {
             "cache": true
