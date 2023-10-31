@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.18...v0.46.2-rc.19) (2023-10-31)
+
+
+### Bug Fixes
+
+* **core:** combobox groupFn nullable type ([#10848](https://github.com/SAP/fundamental-ngx/issues/10848)) ([386b17d](https://github.com/SAP/fundamental-ngx/commit/386b17d0bea9acb47c54950ccdfa9ee29a7b5bf4))
+
+
+
+
+
 ## [0.46.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.17...v0.46.2-rc.18) (2023-10-31)
 
 
