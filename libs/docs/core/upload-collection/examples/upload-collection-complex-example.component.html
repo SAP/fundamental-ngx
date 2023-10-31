@@ -89,7 +89,7 @@
     <fd-message-page-subtitle> Use the "Upload" button to upload files. </fd-message-page-subtitle>
 </fd-message-page>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #deleteDialog>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #deleteDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h1 fd-title>Delete Confirmation</h1>

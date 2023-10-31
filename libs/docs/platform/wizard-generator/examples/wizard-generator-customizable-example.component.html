@@ -78,7 +78,7 @@
     </ng-container>
 </ng-template>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialogTemplate>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <button fd-dialog-close-button (click)="dialog.dismiss()"></button>

@@ -30,4 +30,5 @@ export * from './tokens';
 export * from './utils/dialog-overlay.container';
 
 export * from './dialog-full-screen-toggler-button/dialog-full-screen-toggler-button.component';
+export * from './directives/dialog-template.directive';
 export * from './provide-dialog-service';

@@ -10,6 +10,7 @@ import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogFullScreenTogglerButtonComponent } from './dialog-full-screen-toggler-button/dialog-full-screen-toggler-button.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogComponent } from './dialog.component';
+import { DialogTemplateDirective } from './directives/dialog-template.directive';
 import { DialogTitleDirective } from './directives/dialog-title.directive';
 import { provideDialogService } from './provide-dialog-service';
 
@@ -22,7 +23,8 @@ const declarations = [
     DialogContainerComponent,
     DialogCloseButtonComponent,
     DialogTitleDirective,
-    DialogFullScreenTogglerButtonComponent
+    DialogFullScreenTogglerButtonComponent,
+    DialogTemplateDirective
 ];
 
 /**

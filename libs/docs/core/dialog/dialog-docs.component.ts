@@ -5,7 +5,7 @@ import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { DialogModule, DialogService, ExtendedDialogConfig } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
@@ -117,6 +117,8 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
 })
 export class DialogDocsComponent {
     schema: Schema;
+
+    playgroundDialogConfig: ExtendedDialogConfig<{ allowFullScreen: boolean }>;
 
     data: any = {
         properties: {
