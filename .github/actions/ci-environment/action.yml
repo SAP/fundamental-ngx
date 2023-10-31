@@ -45,7 +45,3 @@ runs:
           if: inputs.frozen-lockfile != 'true' || steps.node_modules.outputs.cache-hit != 'true'
           run: yarn install ${{ inputs.frozen-lockfile == 'true' && '--frozen-lockfile' || '' }}
           shell: bash
-
-        - name: Set up translations
-          run: npx nx run i18n:transform-translations
-          shell: bash
