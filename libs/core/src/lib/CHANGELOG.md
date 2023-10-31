@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.16...v0.46.2-rc.17) (2023-10-31)
+
+
+### Bug Fixes
+
+* **core:** link icon position ([#10833](https://github.com/SAP/fundamental-ngx/issues/10833)) ([a1ccf32](https://github.com/SAP/fundamental-ngx/commit/a1ccf3264058d9e51563a4be02527e15b9cafda3))
+
+
+
+
+
 ## [0.46.2-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.15...v0.46.2-rc.16) (2023-10-30)
 
 **Note:** Version bump only for package @fundamental-ngx/core
