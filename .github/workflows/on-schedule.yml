@@ -23,26 +23,29 @@ env:
     NODE_OPTIONS: '--max_old_space_size=4096'
 
 jobs:
-    agents:
-        name: Ubuntu latest
-        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
-        secrets:
-            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-        with:
-            number-of-agents: 5
-            node-version: 16.x
-            yarn-version: 1.22.19
-            install-commands: |
-                yarn install --frozen-lockfile
-                export DISPLAY=:99
-                sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+    nx_agents:
+        name: Nx Cloud Agent ${{ matrix.agent }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                agent: [1, 2, 3, 4, 5]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/ci-environment
+            - name: set up xvfb
+              run: |
+                  export DISPLAY=:99
+                  sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+            - name: Start Nx Cloud Agent
+              run: npx nx-cloud start-agent
+              env:
+                  NX_AGENT_NAME: ${{matrix.agent}}
     initialize_cloud:
         runs-on: ubuntu-latest
         name: Initialize Nx Cloud
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
+            - uses: ./.github/actions/ci-environment
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
     build_test:
@@ -62,7 +65,7 @@ jobs:
               name: Derive appropriate SHAs for base and head for nx-affected commands
               with:
                   main-branch-name: main
-            - uses: ./.github/actions/nodejs
+            - uses: ./.github/actions/ci-environment
 
             - uses: wagoid/commitlint-github-action@v3
               name: Commit lint
@@ -88,7 +91,7 @@ jobs:
               name: Checkout
               with:
                   fetch-depth: 0
-            - uses: ./.github/actions/nodejs
+            - uses: ./.github/actions/ci-environment
             - run: npx nx run docs:compile:production
             - uses: browser-actions/setup-chrome@latest
               with:
@@ -126,6 +129,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
+            - uses: ./.github/actions/ci-environment
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents

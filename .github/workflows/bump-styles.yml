@@ -16,16 +16,16 @@ jobs:
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
 
-            - name: Setup Node.js and Cache
-              uses: ./.github/actions/nodejs
+            - name: Setup CI environment
+              uses: ./.github/actions/ci-environment
 
             - name: Try to bump styles version
               id: bump-styles-version
               uses: ./.github/actions/bump-styles-version
 
-            - name: Setup Node.js and Cache
+            - name: Setup CI environment
               if: ${{ steps.bump-styles-version.outputs.new-styles-version != '' }}
-              uses: ./.github/actions/nodejs
+              uses: ./.github/actions/ci-environment
               with:
                   frozen-lockfile: false
 
