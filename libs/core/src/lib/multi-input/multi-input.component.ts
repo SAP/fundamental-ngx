@@ -28,6 +28,8 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, first, map, startWith } from 'rxjs/operators';
 
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FormStates } from '@fundamental-ngx/cdk/forms';
 import {
     applyCssClass,
     CssClassBuilder,
@@ -42,6 +44,7 @@ import {
     RtlService,
     uuidv4
 } from '@fundamental-ngx/cdk/utils';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
@@ -49,9 +52,6 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import get from 'lodash-es/get';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
@@ -604,9 +604,14 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _onCheckboxKeyup(option: _OptionItem<ItemType, ValueType>, event: KeyboardEvent, index: number): void {
+    _onCheckboxKeyup(
+        option: _OptionItem<ItemType, ValueType>,
+        event: KeyboardEvent,
+        index: number,
+        isListItem = false
+    ): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            this._onCheckboxClick(option, event, index);
+            this._onCheckboxClick(option, event, index, isListItem);
         }
     }
 
