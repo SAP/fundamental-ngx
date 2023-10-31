@@ -122,7 +122,7 @@
                 fd-list-item
                 [attr.aria-label]="option.label"
                 (click)="_onCheckboxClick(option, $event, idx, true)"
-                (keyup)="_onCheckboxKeyup(option, $event, idx)"
+                (keyup)="_onCheckboxKeyup(option, $event, idx, true)"
                 [selected]="!!option.isSelected"
             >
                 <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
