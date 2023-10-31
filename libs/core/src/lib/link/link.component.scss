@@ -1,5 +1,23 @@
+@import '@sap-ui/common-css/dist/sass/common-mixins';
 @import 'fundamental-styles/dist/link';
 
-.fd-link__content--icon-line-height {
-    line-height: var(--sapContent_LineHeight);
+$block: fd-link;
+
+.#{$block} {
+    &__content--icon-line-height {
+        line-height: var(--sapContent_LineHeight);
+    }
+
+    &__icon-container {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        &:first-child {
+            @include sap-set-margin-end(var(--fdLink_Icon_Spacing, 0));
+        }
+
+        &:last-child {
+            @include sap-set-margin-begin(var(--fdLink_Icon_Spacing, 0));
+        }
+    }
 }

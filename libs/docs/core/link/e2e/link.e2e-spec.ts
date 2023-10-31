@@ -46,7 +46,7 @@ describe('Link test suite', () => {
         });
 
         it('should check that the last link is inverted type', async () => {
-            await expect(await getElementAriaLabel(links, 5)).toBe('Inverted');
+            await expect(await getElementAriaLabel(links, 6)).toBe('Inverted');
         });
 
         it('should check link with right arrow', async () => {
