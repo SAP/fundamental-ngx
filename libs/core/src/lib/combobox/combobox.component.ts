@@ -227,7 +227,7 @@ export class ComboboxComponent<T = any>
      * Function used to handle grouping of items.
      */
     @Input()
-    groupFn: GroupFunction;
+    groupFn: Nullable<GroupFunction>;
 
     /** Max height of the popover. Any overflowing elements will be accessible through scrolling. */
     @Input()
