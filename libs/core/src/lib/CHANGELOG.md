@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.17...v0.46.2-rc.18) (2023-10-31)
+
+
+### Bug Fixes
+
+* **core:** multi input close dropdown when item selected ([#10850](https://github.com/SAP/fundamental-ngx/issues/10850)) ([faff8f3](https://github.com/SAP/fundamental-ngx/commit/faff8f35efbb57d60b9d82e04528a1a7fddf9b80))
+
+
+
+
+
 ## [0.46.2-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.16...v0.46.2-rc.17) (2023-10-31)
 
 
