@@ -178,6 +178,10 @@
         ],
         "*.{js,ts,html,md,json,yml}": [
             "yarn eslint --fix"
+        ],
+        "*.properties": [
+            "prettier --write",
+            "yarn nx run i18n:transform-translations"
         ]
     }
 }
