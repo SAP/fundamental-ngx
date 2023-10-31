@@ -22,8 +22,8 @@ jobs:
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
 
-            - name: Setup CI environment
-              uses: ./.github/actions/ci-environment
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
 
             - name: Check if pre release & get version
               id: get-version
@@ -45,8 +45,8 @@ jobs:
                   fetch-depth: 0
                   token: ${{ secrets.GHACTIONS }}
 
-            - name: Setup CI environment
-              uses: ./.github/actions/ci-environment
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
 
             - name: Wait for Netlify Deployment
               id: wait-for-deployment

@@ -24,7 +24,7 @@ jobs:
                 agent: [1, 2, 3, 4, 5, 6, 7, 8]
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - name: set up xvfb
               run: |
                   export DISPLAY=:99
@@ -39,7 +39,7 @@ jobs:
         name: Initialize Nx Cloud
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
@@ -60,7 +60,7 @@ jobs:
               name: Derive appropriate SHAs for base and head for nx-affected commands
               with:
                   main-branch-name: main
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
 
             - uses: wagoid/commitlint-github-action@v3
               name: Commit lint
@@ -91,7 +91,7 @@ jobs:
               name: Checkout
               with:
                   fetch-depth: 0
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - run: npx nx run docs:compile:production
             - uses: browser-actions/setup-chrome@latest
               with:
@@ -134,6 +134,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents

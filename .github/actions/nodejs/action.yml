@@ -1,5 +1,5 @@
-name: Fundamental-ngx CI Environment
-description: Action for CI environment setup
+name: Fundamental-ngx action for Node.js
+description: Node.js setup cache
 
 inputs:
     node-version:

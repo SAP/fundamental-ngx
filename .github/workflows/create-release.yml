@@ -25,7 +25,7 @@ jobs:
                 agent: [1, 2, 3, 4, 5]
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - name: Start Nx Cloud Agent
               run: npx nx-cloud start-agent
               env:
@@ -36,7 +36,7 @@ jobs:
         name: Initialize Nx Cloud
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - name: Initialize the Nx Cloud distributed CI run
               run: npx nx-cloud start-ci-run
 
@@ -61,8 +61,8 @@ jobs:
                   name: ${{ secrets.GH_NAME }}
                   email: ${{ secrets.GH_EMAIL }}
 
-            - name: Setup CI environment
-              uses: ./.github/actions/ci-environment
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
 
             # Does conventional version bump and creates a tag
             - name: Get next version
@@ -154,8 +154,8 @@ jobs:
                   ref: main # always fetch from main branch
                   token: ${{ secrets.GHACTIONS }}
 
-            - name: Setup CI environment
-              uses: ./.github/actions/ci-environment
+            - name: Setup Node.js and Cache
+              uses: ./.github/actions/nodejs
 
             - name: Run build prod
               run: npx nx run docs:compile:production
@@ -175,6 +175,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: ./.github/actions/ci-environment
+            - uses: ./.github/actions/nodejs
             - name: Stop all running agents for this CI run
               run: npx nx-cloud stop-all-agents
