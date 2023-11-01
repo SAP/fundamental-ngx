@@ -201,6 +201,12 @@
                             "maximumWarning": "2mb",
                             "maximumError": "6mb"
                         }
+                    ],
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/translations.ts",
+                            "with": "apps/docs/src/environments/translations.prod.ts"
+                        }
                     ]
                 },
                 "production-unoptimized": {
@@ -208,7 +214,13 @@
                     "sourceMap": false,
                     "namedChunks": false,
                     "vendorChunk": false,
-                    "optimization": false
+                    "optimization": false,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/translations.ts",
+                            "with": "apps/docs/src/environments/translations.prod.ts"
+                        }
+                    ]
                 },
                 "core": {
                     "fileReplacements": [

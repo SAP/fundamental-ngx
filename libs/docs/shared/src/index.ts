@@ -31,4 +31,5 @@ export * from './lib/tokens/current-component.token';
 export * from './lib/tokens/has-i18n.token';
 export * from './lib/tokens/lerna-json.token';
 export * from './lib/tokens/package-json.token';
+export * from './lib/tokens/translations.token';
 export * from './lib/utilities';

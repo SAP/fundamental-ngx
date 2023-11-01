@@ -15,7 +15,7 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
         const parsedPropertiesFilePath = parse(propertiesFilePath);
         const newFilePath = `${parsedPropertiesFilePath.dir}/${parsedPropertiesFilePath.name}.json`;
         const fileContents = readFileSync(propertiesFilePath, 'utf-8');
-        writeFileSync(newFilePath, JSON.stringify(loadProperties(fileContents), null, 4));
+        writeFileSync(newFilePath, JSON.stringify(loadProperties(fileContents), null, 4) + '\n');
     }
 
     return {

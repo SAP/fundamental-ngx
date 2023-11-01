@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
+    inject,
     Inject,
     OnDestroy,
     OnInit,
@@ -15,7 +16,7 @@ import { Libraries } from '../../utilities';
 
 import { AsyncPipe, LowerCasePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ContentDensityDirective,
     ContentDensityMode,
@@ -32,10 +33,11 @@ import {
     ShellbarSidenavDirective,
     ShellbarSizes
 } from '@fundamental-ngx/core/shellbar';
-import { FD_LANGUAGE, FdLanguage, loadProperties } from '@fundamental-ngx/i18n';
-import { BehaviorSubject, Observable, Subject, filter, fromEvent, zip } from 'rxjs';
-import { debounceTime, map, startWith, takeUntil } from 'rxjs/operators';
+import { FD_LANGUAGE, FdLanguage } from '@fundamental-ngx/i18n';
+import { BehaviorSubject, filter, fromEvent, Subject } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { DocsService } from '../../services/docs.service';
+import { Translations } from '../../tokens/translations.token';
 
 const urlContains = (themeName: string, search: string): boolean => themeName.toLowerCase().includes(search);
 
@@ -48,24 +50,6 @@ type Version = {
     url: string;
 };
 
-const languages = {
-    'sq-AL': 'Shqip',
-    'bg-BG': 'Български',
-    'zh-CN': '简体中文',
-    'cs-CZ': 'Český',
-    'de-DE': 'Deutsch',
-    'en-US': 'English',
-    'fr-FR': 'Français',
-    'ka-GE': 'ქართული',
-    'hi-IN': 'हिन्दी',
-    'it-IT': 'Italiano',
-    'pl-PL': 'Polski',
-    'pt-BR': 'Português(Brazil)',
-    'ru-RU': 'Русский',
-    'tr-TR': 'Türkçe',
-    'uk-UA': 'Українська'
-};
-
 @Component({
     selector: 'fd-docs-toolbar',
     templateUrl: './toolbar.component.html',
@@ -75,7 +59,7 @@ const languages = {
     standalone: true,
     imports: [
         ShellbarComponent,
-        ButtonModule,
+        ButtonComponent,
         ShellbarSidenavDirective,
         ContentDensityDirective,
         ShellbarLogoComponent,
@@ -117,13 +101,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     initialTheme = 'sap_horizon';
 
-    translations$: Observable<Record<string, FdLanguage>[]> = zip(
-        Object.keys(languages).map((locale) =>
-            this._http
-                .get(`assets/i18n/translations_${locale}.properties`, { responseType: 'text' })
-                .pipe(map((lang) => ({ value: loadProperties(lang), name: languages[locale] })))
-        )
-    );
+    translations$ = inject(Translations);
 
     items: ShellbarMenuItem[] = [
         {
