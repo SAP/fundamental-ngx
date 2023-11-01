@@ -49,7 +49,7 @@ class MultiComboboxStandardComponent {
         { name: 'Jalapeño', type: 'Vegetables' },
         { name: 'Spinach', type: 'Vegetables' }
     ];
-    selectedItems = null;
+    selectedItems: [{ name: string; type: string }] | null = [this.dataSource[0]];
     maxHeight: string;
     autoResize = false;
     contentDensity: ContentDensityMode = ContentDensityMode.COZY;
@@ -159,20 +159,20 @@ describe('MultiComboboxComponent default values', () => {
         const item = multiCombobox._suggestions[0];
         const propagateChangeSpy = spyOn(<any>multiCombobox, '_propagateChange');
 
-        expect(item.selected).toBeFalse();
+        expect(item.selected).toBe(true);
 
         multiCombobox.toggleSelection(item);
         fixture.detectChanges();
 
-        expect(item.selected).toBeTrue();
-        expect(multiCombobox._selectedSuggestions.length).toEqual(1);
+        expect(item.selected).toBe(false);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(0);
         expect(propagateChangeSpy).toHaveBeenCalled();
 
         multiCombobox.toggleSelection(item);
         fixture.detectChanges();
 
-        expect(item.selected).toBeFalse();
-        expect(multiCombobox._selectedSuggestions.length).toEqual(0);
+        expect(item.selected).toBe(true);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(1);
         expect(propagateChangeSpy).toHaveBeenCalled();
     });
 
@@ -207,5 +207,15 @@ describe('MultiComboboxComponent default values', () => {
         multiCombobox._addOnClicked(new MouseEvent('click'));
         expect(multiCombobox.addOnButtonClicked.emit).toHaveBeenCalled();
         expect(multiCombobox.showList).not.toHaveBeenCalled();
+    });
+
+    it('should not create items duplicates', async () => {
+        component.selectedItems = [component.dataSource[0]];
+        fixture.detectChanges();
+        await fixture.whenRenderingDone();
+        await fixture.whenStable();
+
+        expect(multiCombobox._suggestions.length).toEqual(component.dataSource.length);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(component.selectedItems.length);
     });
 });
