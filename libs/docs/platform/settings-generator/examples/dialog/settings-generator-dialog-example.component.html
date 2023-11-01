@@ -74,7 +74,7 @@
     </p>
 </ng-template>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h1 id="fd-dialog-header-10" fd-title>The History of Pineapple</h1>

@@ -15,7 +15,7 @@ class MessageBoxServiceTestComponent {
 
 @Component({
     template: `
-        <ng-template let-messageBoxRef let-messageBoxConfig="messageBoxConfig" #testTemplate>
+        <ng-template [fdMessageBoxTemplate] let-messageBoxRef let-messageBoxConfig="messageBoxConfig" #testTemplate>
             <fd-message-box [messageBoxRef]="messageBoxRef" [messageBoxConfig]="messageBoxConfig"></fd-message-box>
         </ng-template>
     `

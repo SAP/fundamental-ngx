@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { DynamicComponentService, InitialFocusModule, TemplateModule } from '@fundamental-ngx/cdk/utils';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { MessageBoxTemplateDirective } from './directives/message-box-template.directive';
 import { MessageBoxBodyComponent } from './message-box-body/message-box-body.component';
 import { MessageBoxContainerComponent } from './message-box-container/message-box-container.component';
 import { MessageBoxDefaultComponent } from './message-box-default/message-box-default.component';
@@ -17,7 +18,8 @@ const declarations = [
     MessageBoxFooterComponent,
     MessageBoxHeaderComponent,
     MessageBoxBodyComponent,
-    MessageBoxComponent
+    MessageBoxComponent,
+    MessageBoxTemplateDirective
 ];
 
 @NgModule({

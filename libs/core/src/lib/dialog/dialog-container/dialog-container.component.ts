@@ -26,6 +26,7 @@ import { CdkPortalOutlet, CdkPortalOutletAttachedRef, PortalModule } from '@angu
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogContentType } from '../dialog.types';
+import { DialogTemplateDirectiveContext } from '../directives/dialog-template.directive';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogContainer } from '../utils/dialog-container.model';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
@@ -135,7 +136,7 @@ export class DialogContainerComponent
     }
 
     /** @hidden Returns context for embedded template*/
-    private _templateContext(): { $implicit: DialogRef; dialogConfig: DialogConfig } {
+    private _templateContext(): DialogTemplateDirectiveContext {
         return { $implicit: this.ref, dialogConfig: this.dialogConfig };
     }
 

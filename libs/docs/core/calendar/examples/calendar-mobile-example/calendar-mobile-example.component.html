@@ -1,4 +1,4 @@
-<ng-template let-dialog let-dialogConfig="dialogConfig" #landScapeDialog>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #landScapeDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h3 fd-title>Pick a date</h3>
@@ -33,7 +33,7 @@
     (click)="openLandScapeDialog(landScapeDialog)"
 ></button>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #portraitDialog>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #portraitDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h3 fd-title>Pick a date</h3>

@@ -230,7 +230,13 @@
     <button fd-button label="Open Dialog" (click)="openDialog(playgroundDialog)"></button>
 </playground>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #playgroundDialog>
+<ng-template
+    [fdDialogTemplate]
+    [fdDialogTemplateConfig]="playgroundDialogConfig"
+    let-dialog
+    let-dialogConfig="dialogConfig"
+    #playgroundDialog
+>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
             <h1 fd-title id="fd-dialog-header-11">Playground Dialog</h1>
