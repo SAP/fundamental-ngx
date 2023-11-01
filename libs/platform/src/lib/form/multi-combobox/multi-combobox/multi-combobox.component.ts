@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -8,7 +9,6 @@ import {
     Host,
     Inject,
     Injector,
-    isDevMode,
     OnInit,
     Optional,
     Self,
@@ -16,7 +16,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    isDevMode
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
@@ -34,14 +35,14 @@ import {
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 
-import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
-import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
-import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
-import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
-import { MultiComboboxConfig } from '../multi-combobox.config';
-import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
+import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
+import { BaseMultiCombobox, MAP_LIMIT } from '../commons/base-multi-combobox';
+import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
+import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
+import { MultiComboboxConfig } from '../multi-combobox.config';
+import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 
 let deprecationWarningShown = false;
 
@@ -243,6 +244,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             const isList = !!target.closest('.fdp-multi-combobox__list-container');
             if (isList) {
                 return;
+            }
+            if (
+                this._suggestions?.length === 1 &&
+                this._suggestions[0].label === this.inputText &&
+                !this._suggestions[0].selected
+            ) {
+                this.toggleSelection(this._suggestions[0]);
             }
             this.showList(false);
             this.inputText = '';
