@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.20...v0.46.2-rc.21) (2023-11-01)
+
+
+### Bug Fixes
+
+* **platform:** remove selected duplicates ([#10858](https://github.com/SAP/fundamental-ngx/issues/10858)) ([5a88106](https://github.com/SAP/fundamental-ngx/commit/5a881065b3e2e9a7d57063b16057e193f86a6544))
+
+
+
+
+
 ## [0.46.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.19...v0.46.2-rc.20) (2023-11-01)
 
 
