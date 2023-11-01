@@ -17,7 +17,7 @@
         <div class="fd-search-field__action-container">
             <button
                 fd-button
-                class="fd-button--nested"
+                fdbNestedButton
                 glyph="decline"
                 [ariaLabel]="'btpSearchField.clearButtonLabel' | fdTranslate"
                 (click)="updateValue(''); searchInputField.focus()"
@@ -28,7 +28,7 @@
                 fd-button
                 (click)="_search()"
                 glyph="slim-arrow-right"
-                class="fd-button--nested"
+                fdbNestedButton
                 [class.is-focus]="_value && _inputFocused()"
                 [ariaLabel]="'btpSearchField.searchButtonLabel' | fdTranslate"
                 [attr.aria-disabled]="!_value"

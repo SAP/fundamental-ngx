@@ -28,6 +28,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import {
     CssClassBuilder,
     HasElementRef,
@@ -65,7 +66,8 @@ import { FdbNavigationListItemComponent } from '../navigation-list-item-componen
         PopoverControlComponent,
         RouterLink,
         ButtonComponent,
-        IconComponent
+        IconComponent,
+        NestedButtonDirective
     ],
     standalone: true
 })

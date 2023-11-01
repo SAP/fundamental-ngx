@@ -32,6 +32,7 @@
         "jsxFragmentFactory": "JSX.Fragment",
         "paths": {
             "@fundamental-ngx/btp": ["libs/btp/index.ts"],
+            "@fundamental-ngx/btp/button": ["libs/btp/button/index.ts"],
             "@fundamental-ngx/btp/navigation": ["libs/btp/navigation/index.ts"],
             "@fundamental-ngx/btp/navigation-menu": ["libs/btp/navigation-menu/src/index.ts"],
             "@fundamental-ngx/btp/search-field": ["libs/btp/search-field/src/index.ts"],
@@ -145,6 +146,7 @@
             "@fundamental-ngx/cx/side-navigation": ["libs/cx/src/lib/side-navigation/index.ts"],
             "@fundamental-ngx/datetime-adapter": ["libs/datetime-adapter/src/index.ts"],
             "@fundamental-ngx/docs/btp": ["libs/docs/btp/index.ts"],
+            "@fundamental-ngx/docs/btp/button": ["libs/docs/btp/button/index.ts"],
             "@fundamental-ngx/docs/btp/navigation": ["libs/docs/btp/navigation/index.ts"],
             "@fundamental-ngx/docs/btp/search-field": ["libs/docs/btp/search-field/index.ts"],
             "@fundamental-ngx/docs/btp/tool-header": ["libs/docs/btp/tool-header/index.ts"],

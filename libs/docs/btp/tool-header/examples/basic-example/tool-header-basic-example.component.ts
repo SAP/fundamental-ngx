@@ -1,6 +1,7 @@
 import { NgIf, NgStyle } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import {
@@ -59,7 +60,8 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverBodyHeaderDirective,
         NgStyle,
         ContentDensityDirective,
-        ButtonBadgeDirective
+        ButtonBadgeDirective,
+        ToolHeaderButtonDirective
     ],
     standalone: true
 })

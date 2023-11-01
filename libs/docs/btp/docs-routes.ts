@@ -31,6 +31,10 @@ export const ROUTES: Routes = [
                     import('@fundamental-ngx/docs/shared-pages').then((m) => m.NewComponentPageComponent)
             },
             {
+                path: 'button',
+                loadChildren: () => import('@fundamental-ngx/docs/btp/button').then(configureBtpRoutes)
+            },
+            {
                 path: 'navigation',
                 loadChildren: () => import('@fundamental-ngx/docs/btp/navigation').then(configureBtpRoutes)
             },

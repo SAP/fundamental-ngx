@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     BasePopoverClass,
@@ -23,7 +24,8 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
         PopoverComponent,
         PopoverControlComponent,
         ProductSwitchComponent,
-        ProductSwitchButtonDirective
+        ProductSwitchButtonDirective,
+        ToolHeaderButtonDirective
     ],
     template: `
         <fd-product-switch
@@ -42,11 +44,10 @@ import { FdTranslatePipe } from '@fundamental-ngx/i18n';
             <button
                 *fdProductSwitchButton
                 fd-button
-                toolHeader
+                fdbToolHeaderButton
                 [attr.aria-label]="'coreProductSwitch.ariaLabel' | fdTranslate"
                 [attr.title]="'coreProductSwitch.ariaLabel' | fdTranslate"
                 glyph="grid"
-                fdType="transparent"
             ></button>
             <ng-content></ng-content>
         </fd-product-switch>

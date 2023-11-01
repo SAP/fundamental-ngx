@@ -15,7 +15,6 @@ import { ContentDensityObserver, contentDensityObserverProviders } from '@fundam
 import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
 
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { NgIf } from '@angular/common';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { FD_BUTTON_COMPONENT } from './tokens';
@@ -61,10 +60,6 @@ export class ButtonComponent
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
-
-    /** Whether the button is the tool header button */
-    @Input({ transform: coerceBooleanProperty })
-    toolHeader: BooleanInput;
 
     /** @hidden */
     specialButtonType: Array<string> = ['emphasized', 'positive', 'negative', 'attention'];
@@ -143,7 +138,6 @@ export class ButtonComponent
             this.fdMenu ? 'fd-button--menu' : '',
             this._disabled || this._ariaDisabled ? 'is-disabled' : '',
             this.toggled ? `fd-button--toggled` : '',
-            this.toolHeader ? 'fd-button--tool-header' : '',
             this.class
         ];
     }

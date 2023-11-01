@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
+import { NestedButtonDirective } from '@fundamental-ngx/btp/button';
 import { CvaControl, CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -28,7 +29,7 @@ import { of, tap } from 'rxjs';
     standalone: true,
     hostDirectives: [CvaDirective],
     providers: [CvaControl],
-    imports: [IconComponent, NgIf, FormsModule, FdTranslatePipe, ButtonComponent],
+    imports: [IconComponent, NgIf, FormsModule, FdTranslatePipe, ButtonComponent, NestedButtonDirective],
     encapsulation: ViewEncapsulation.None
 })
 export class SearchFieldComponent implements AfterViewInit, HasElementRef {

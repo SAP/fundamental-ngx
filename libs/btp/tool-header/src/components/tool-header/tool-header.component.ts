@@ -14,6 +14,7 @@ import {
     ViewEncapsulation,
     inject
 } from '@angular/core';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
     NavigationMenuComponent,
     NavigationMenuItemComponent,
@@ -96,7 +97,8 @@ const imports = [
         FocusableItemDirective,
         NavigationMenuPopoverComponent,
         NavigationMenuPopoverControlDirective,
-        AsyncPipe
+        AsyncPipe,
+        ToolHeaderButtonDirective
     ],
     providers: [
         contentDensityObserverProviders(),

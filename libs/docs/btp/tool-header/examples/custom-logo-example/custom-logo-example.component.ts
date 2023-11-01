@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
     ToolHeaderActionDirective,
     ToolHeaderActionsDirective,
@@ -19,7 +20,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
             />
             <fdb-tool-header-actions>
                 <ng-template label="Action 1" glyph="add" fdbToolHeaderAction>
-                    <button fd-button toolHeader fdType="transparent" ariaLabel="Action 1" glyph="add"></button>
+                    <button fd-button fdbToolHeaderButton ariaLabel="Action 1" glyph="add"></button>
                 </ng-template>
             </fdb-tool-header-actions>
         </fdb-tool-header>
@@ -30,7 +31,8 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
         ToolHeaderLogoDirective,
         ToolHeaderActionsDirective,
         ToolHeaderActionDirective,
-        ButtonComponent
+        ButtonComponent,
+        ToolHeaderButtonDirective
     ],
     standalone: true
 })
