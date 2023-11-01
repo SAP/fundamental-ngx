@@ -152,6 +152,11 @@
                         "glob": "**/*",
                         "input": "libs/docs/shared/src/lib/core-helpers/stackblitz/code-example-stack",
                         "output": "./stackblitz/example-stack"
+                    },
+                    {
+                        "glob": "**/*.properties",
+                        "input": "libs/i18n/src/lib/translations",
+                        "output": "./assets/i18n"
                     }
                 ],
                 "styles": [
@@ -196,6 +201,12 @@
                             "maximumWarning": "2mb",
                             "maximumError": "6mb"
                         }
+                    ],
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/translations.ts",
+                            "with": "apps/docs/src/environments/translations.prod.ts"
+                        }
                     ]
                 },
                 "production-unoptimized": {
@@ -203,7 +214,13 @@
                     "sourceMap": false,
                     "namedChunks": false,
                     "vendorChunk": false,
-                    "optimization": false
+                    "optimization": false,
+                    "fileReplacements": [
+                        {
+                            "replace": "apps/docs/src/environments/translations.ts",
+                            "with": "apps/docs/src/environments/translations.prod.ts"
+                        }
+                    ]
                 },
                 "core": {
                     "fileReplacements": [
@@ -256,7 +273,7 @@
             },
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "development",
-            "dependsOn": ["^compile-typedoc"]
+            "dependsOn": ["^compile-typedoc", "^transform-translations"]
         },
         "serve": {
             "executor": "@nx/angular:webpack-dev-server",
@@ -306,7 +323,8 @@
                     "liveReload": false
                 }
             },
-            "defaultConfiguration": "hot-module-replacement"
+            "defaultConfiguration": "hot-module-replacement",
+            "dependsOn": ["^compile-typedoc"]
         },
         "lint": {
             "executor": "@nx/linter:eslint",

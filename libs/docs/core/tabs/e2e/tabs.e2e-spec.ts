@@ -1,4 +1,3 @@
-import { wait } from 'nx-cloud/lib/utilities/waiter';
 import {
     browserIsFirefox,
     click,
@@ -9,6 +8,7 @@ import {
     getElementClass,
     getText,
     isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     setValue,
@@ -136,7 +136,7 @@ describe('Tabs test suite', () => {
         await click(moreBtn);
         const firstPointOfExpandedList = await getText(expandedListItem);
         await click(expandedListItem);
-        await wait(500);
+        await pause(500);
         const firstItemInDropdown = await getText(expandedListItem);
         expect(firstItemInDropdown).toEqual(lastPointOfMainList);
         expect(await lastOfMainList()).toEqual(firstPointOfExpandedList);

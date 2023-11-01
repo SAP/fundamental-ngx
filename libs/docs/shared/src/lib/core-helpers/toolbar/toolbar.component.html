@@ -181,7 +181,7 @@
         <fd-icon glyph="message-information"></fd-icon>
         <span>Only applies to internal component translations</span>
     </li>
-    <li fd-menu-item *ngFor="let translation of translations">
+    <li fd-menu-item *ngFor="let translation of translations$ | async">
         <div fd-menu-interactive (click)="selectTranslation(translation.value)">
             <span fd-menu-title>{{ translation.name }}</span>
         </div>

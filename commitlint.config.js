@@ -17,7 +17,8 @@ const Configuration = {
                 'cx',
                 'btp',
                 'cdk',
-                'shared'
+                'shared',
+                'i18n'
             ]
         ],
         'body-max-line-length': [2, 'always', 400],

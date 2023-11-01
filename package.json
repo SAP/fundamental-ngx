@@ -132,6 +132,7 @@
         "eslint-plugin-json": "3.1.0",
         "eslint-plugin-markdown": "3.0.0",
         "eslint-plugin-prefer-arrow": "1.2.3",
+        "fast-glob": "3.3.1",
         "fs-extra": "10.1.0",
         "git-semver-tags": "5.0.1",
         "github-assistant": "0.3.4",
@@ -177,6 +178,9 @@
         ],
         "*.{js,ts,html,md,json,yml}": [
             "yarn eslint --fix"
+        ],
+        "*.properties": [
+            "yarn nx run i18n:transform-translations"
         ]
     }
 }

@@ -18,6 +18,13 @@
             },
             "outputs": ["{options.outputPath}"]
         },
+        "transform-translations": {
+            "executor": "@fundamental-ngx/nx-plugin:transform-translations",
+            "options": {
+                "properties": ["{projectRoot}/src/lib/translations/*.properties"]
+            },
+            "outputs": ["{projectRoot}/src/lib/translations/*.json"]
+        },
         "build": {
             "executor": "@nx/angular:package",
             "outputs": ["{workspaceRoot}/dist/libs/i18n"],
@@ -32,7 +39,8 @@
                     "tsConfig": "libs/i18n/tsconfig.lib.json"
                 }
             },
-            "defaultConfiguration": "production"
+            "defaultConfiguration": "production",
+            "dependsOn": ["transform-translations", "^build"]
         },
         "lint": {
             "executor": "@nx/linter:eslint",

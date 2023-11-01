@@ -72,6 +72,9 @@
         },
         "lint-noop": {
             "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+        },
+        "transform-translations": {
+            "inputs": ["{projectRoot}/**/*.properties", "default"]
         }
     },
     "namedInputs": {
