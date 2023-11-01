@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     CodeExampleComponent,
     CodeSnippetComponent,
@@ -18,7 +19,8 @@ import {
         CodeSnippetComponent,
         SeparatorComponent,
         ComponentExampleComponent,
-        CodeExampleComponent
+        CodeExampleComponent,
+        LinkComponent
     ]
 })
 export class LoadingTranslationsDocsComponent {
@@ -71,6 +73,38 @@ import { FD_LANGUAGE, FdLanguage, loadJson } from '@fundamental-ngx/i18n';
 export class AppModule {}
         `
     };
+
+    propertiesUsageExample = {
+        language: 'typescript',
+        code: `
+import { NgModule, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { of, map } from 'rxjs';
+import { FD_LANGUAGE, FdLanguage, loadProperties } from '@fundamental-ngx/i18n';
+
+/**
+ * uk.properties content
+...other properties
+coreMultiComboBox.selectAllLabel = Select all label custom
+*/
+
+@NgModule({
+    // ...
+    providers: [
+        {
+            provide: FD_LANGUAGE,
+            useFactory: () => {
+                return inject(HttpClient) // Or any other way to get the file content
+                    .get('./assets/i18n/uk.properties', { responseType: 'text' })
+                    .pipe(map(loadProperties))
+            }
+        },
+    ],
+})
+export class AppModule {}
+        `
+    };
+
     supportedLanguages = [
         'Albanian',
         'Bulgarian',

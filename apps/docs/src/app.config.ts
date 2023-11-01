@@ -6,13 +6,14 @@ import { provideFdkClicked } from '@fundamental-ngx/cdk/utils';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
 import { provideTheming } from '@fundamental-ngx/core/theming';
-import { DocsService, LERNA_JSON, PACKAGE_JSON } from '@fundamental-ngx/docs/shared';
+import { DocsService, LERNA_JSON, PACKAGE_JSON, Translations } from '@fundamental-ngx/docs/shared';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH } from '@fundamental-ngx/i18n';
 import { MarkdownModule } from 'ngx-markdown';
 import { BehaviorSubject } from 'rxjs';
 import lernaJson from '../../../lerna.json';
 import packageJson from '../../../package.json';
 import { ROUTES as applicationRoutes } from './environments/app.routes';
+import { translations } from './environments/translations';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -35,6 +36,10 @@ export const appConfig: ApplicationConfig = {
         {
             provide: FD_LANGUAGE,
             useValue: new BehaviorSubject(FD_LANGUAGE_ENGLISH)
+        },
+        {
+            provide: Translations,
+            useFactory: translations
         },
         importProvidersFrom(MarkdownModule.forRoot({ loader: HttpClient }))
     ]

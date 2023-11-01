@@ -20,6 +20,11 @@
             "implementation": "./src/executors/e2e-test/executor",
             "schema": "./src/executors/e2e-test/schema.json",
             "description": "e2e-test executor"
+        },
+        "transform-translations": {
+            "implementation": "./src/executors/transform-translations/executor",
+            "schema": "./src/executors/transform-translations/schema.json",
+            "description": "Transforms properties to json"
         }
     }
 }
