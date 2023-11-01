@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.19...v0.46.2-rc.20) (2023-11-01)
+
+
+### Features
+
+* **core:** dialog typechecks ([#10855](https://github.com/SAP/fundamental-ngx/issues/10855)) ([329e5d5](https://github.com/SAP/fundamental-ngx/commit/329e5d5e2e6467f19139d6b62aa9410d8e852738))
+
+
+
+
+
 ## [0.46.2-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.18...v0.46.2-rc.19) (2023-10-31)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
