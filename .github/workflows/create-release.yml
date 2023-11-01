@@ -17,16 +17,19 @@ env:
     NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
 jobs:
-    agents:
-        name: Runner
-        uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.8
-        secrets:
-            NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-        with:
-            number-of-agents: 5
-            node-version: 16.x
-            yarn-version: 1.22.19
+    nx_agents:
+        name: Nx Cloud Agent ${{ matrix.agent }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                agent: [1, 2, 3, 4, 5]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: ./.github/actions/nodejs
+            - name: Start Nx Cloud Agent
+              run: npx nx-cloud start-agent
+              env:
+                  NX_AGENT_NAME: ${{matrix.agent}}
 
     initialize_cloud:
         runs-on: ubuntu-latest
