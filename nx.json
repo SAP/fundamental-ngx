@@ -15,7 +15,8 @@
                     "build",
                     "lint",
                     "test",
-                    "e2e"
+                    "e2e",
+                    "transform-translations"
                 ],
                 "canTrackAnalytics": false,
                 "showUsageWarnings": true
