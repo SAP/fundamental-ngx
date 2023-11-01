@@ -164,6 +164,7 @@
         [style.max-width]="autoResize && maxWidth + 'px'"
         [attr.aria-labelledby]="id + '-search'"
         aria-multiselectable="true"
+        (keydown.tab)="close()"
     >
         <li
             *ngIf="stateMessage"
