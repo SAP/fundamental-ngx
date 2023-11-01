@@ -115,7 +115,10 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     elementFocused = new EventEmitter<boolean>();
 
     /** @hidden */
-    totalCount: number;
+    _totalCount: number;
+
+    /** @hidden */
+    _itemPosition: number;
 
     /** @hidden */
     private readonly _destroy$ = inject(DestroyedService);
@@ -173,8 +176,9 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    _setTotalCount(count: number): void {
-        this.totalCount = count;
+    _setTotalCount(count: number, itemPosition: number): void {
+        this._totalCount = count;
+        this._itemPosition = itemPosition;
         this._cdRef.markForCheck();
     }
 }

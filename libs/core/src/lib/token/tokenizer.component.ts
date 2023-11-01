@@ -632,7 +632,7 @@ export class TokenizerComponent implements AfterViewInit, OnDestroy, CssClassBui
         }
         this.handleTokenClickSubscriptions();
         this.previousTokenCount = this.tokenList.length;
-        this.tokenList.forEach((token) => token._setTotalCount(this.tokenList.length));
+        this.tokenList.forEach((token, index) => token._setTotalCount(this.tokenList.length, index + 1));
         this._cdRef.markForCheck();
     }
 
