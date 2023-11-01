@@ -504,6 +504,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             if (isList) {
                 return;
             }
+            if (
+                this._suggestions?.length === 1 &&
+                this._suggestions[0].label === this.inputText &&
+                !this._suggestions[0].selected
+            ) {
+                this._toggleSelection(this._suggestions[0]);
+            }
             this._showList(false);
             this.inputText = '';
         }
