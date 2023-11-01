@@ -86,7 +86,7 @@
                     [matcher]="typeAheadMatcher"
                     [inputText]="_searchTermCtrl.value || ''"
                     [options]="dropdownValues"
-                    [enable]="autoComplete && !mobile"
+                    [enable]="!includes && autoComplete && !mobile"
                     [placeholder]="placeholder"
                     [formControl]="_searchTermCtrl"
                     [attr.aria-required]="required"
