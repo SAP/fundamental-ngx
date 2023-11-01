@@ -639,7 +639,11 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements O
                     optionItem.selected = true;
                     this._selectedSuggestions.push(optionItem);
                 });
-            } else if (this._suggestions && collection === this._suggestions) {
+            } else if (
+                this._suggestions &&
+                collection === this._suggestions &&
+                !this._fullFlatSuggestions.includes(collection[itemIndex])
+            ) {
                 this._fullFlatSuggestions.push(collection[itemIndex]);
             }
             if (itemIndex > -1) {
