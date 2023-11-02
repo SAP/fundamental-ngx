@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.22...v0.46.2-rc.23) (2023-11-01)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.46.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.21...v0.46.2-rc.22) (2023-11-01)
+
+
+### Bug Fixes
+
+* **core:** token position in set ([#10860](https://github.com/SAP/fundamental-ngx/issues/10860)) ([99bdaa1](https://github.com/SAP/fundamental-ngx/commit/99bdaa12222a02e3bb10c23654c432a0c6688a53))
+
+
+
+
+
 ## [0.46.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.20...v0.46.2-rc.21) (2023-11-01)
 
 

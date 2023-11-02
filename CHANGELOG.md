@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.22...v0.46.2-rc.23) (2023-11-01)
+
+
+### Bug Fixes
+
+* **ci:** this fixed long-standing problem of the volta action hiccups ([#10867](https://github.com/SAP/fundamental-ngx/issues/10867)) ([1d54a15](https://github.com/SAP/fundamental-ngx/commit/1d54a154d0a21bfbcd9cc85210e3e341771d0b02))
+
+
+
+
+
+## [0.46.2-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.21...v0.46.2-rc.22) (2023-11-01)
+
+
+### Bug Fixes
+
+* **core:** token position in set ([#10860](https://github.com/SAP/fundamental-ngx/issues/10860)) ([99bdaa1](https://github.com/SAP/fundamental-ngx/commit/99bdaa12222a02e3bb10c23654c432a0c6688a53))
+
+
+
+
+
 ## [0.46.2-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.20...v0.46.2-rc.21) (2023-11-01)
 
 
