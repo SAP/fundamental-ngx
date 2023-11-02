@@ -427,6 +427,11 @@ export class ComboboxComponent
             return;
         }
 
+        if (KeyUtil.isKeyCode(event, TAB) && this.open) {
+            this._close();
+            return;
+        }
+
         if (KeyUtil.isKeyCode(event, ENTER)) {
             if (this.searchFn) {
                 this.searchFn();

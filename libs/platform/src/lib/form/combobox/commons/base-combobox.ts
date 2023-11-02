@@ -461,6 +461,11 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             return;
         }
 
+        if (KeyUtil.isKeyCode(event, TAB)) {
+            this._close();
+            return;
+        }
+
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             event.preventDefault();
 
@@ -523,6 +528,14 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
 
         this.selectOptionItem(optionItem);
+    }
+
+    /** @hidden */
+    _close(): void {
+        this.inputText = this.value ? this.inputText : '';
+        this.searchInputElement.nativeElement.focus();
+        this.isOpenChangeHandle(false);
+        this._cd.markForCheck();
     }
 
     /** @hidden */

@@ -693,10 +693,7 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
         } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this.openChangeHandle(false);
         } else if (KeyUtil.isKeyCode(event, TAB) && this.open) {
-            if (this.listComponent) {
-                this.listComponent.setItemActive(0);
-                event.preventDefault();
-            }
+            this._close();
         } else if (KeyUtil.isKeyType(event, 'alphabetical') || KeyUtil.isKeyType(event, 'numeric')) {
             if (!this.open) {
                 this.openChangeHandle(true);
