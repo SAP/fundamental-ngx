@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
+    ToolHeaderActionButtonDirective,
     ToolHeaderActionDirective,
-    ToolHeaderActionsDirective,
     ToolHeaderAutoModeDirective,
     ToolHeaderComponent,
     ToolHeaderLogoDirective
@@ -18,21 +17,18 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
                 src="https://raw.githubusercontent.com/SAP/fundamental/main/docs/images/land-page-assets/logo.svg"
                 fdbToolHeaderLogo
             />
-            <fdb-tool-header-actions>
-                <ng-template fdbToolHeaderAction>
-                    <button fd-button fdbToolHeaderButton ariaLabel="Action 1" glyph="add"></button>
-                </ng-template>
-            </fdb-tool-header-actions>
+            <ng-template fdbToolHeaderAction forceVisibility>
+                <button fd-button fdbToolHeaderActionButton ariaLabel="Action 1" glyph="add"></button>
+            </ng-template>
         </fdb-tool-header>
     `,
     imports: [
         ToolHeaderComponent,
         ToolHeaderAutoModeDirective,
         ToolHeaderLogoDirective,
-        ToolHeaderActionsDirective,
         ButtonComponent,
-        ToolHeaderButtonDirective,
-        ToolHeaderActionDirective
+        ToolHeaderActionDirective,
+        ToolHeaderActionButtonDirective
     ],
     standalone: true
 })

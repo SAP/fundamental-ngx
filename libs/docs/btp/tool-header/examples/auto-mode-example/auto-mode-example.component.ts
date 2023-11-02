@@ -6,15 +6,15 @@ import { NavigationMenuItemComponent } from '@fundamental-ngx/btp/navigation-men
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import {
     FdbToolHeaderActionButton,
+    ToolHeaderActionButtonDirective,
     ToolHeaderActionDirective,
     ToolHeaderActionSeparatorComponent,
-    ToolHeaderActionsDirective,
     ToolHeaderAutoModeDirective,
     ToolHeaderComponent,
     ToolHeaderProductSwitchComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
-import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -39,12 +39,10 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
         ToolHeaderComponent,
         SearchFieldComponent,
         FormsModule,
-        ToolHeaderActionsDirective,
         ToolHeaderAutoModeDirective,
         NgForOf,
         ToolHeaderActionDirective,
         ButtonComponent,
-        ToolHeaderButtonDirective,
         NgIf,
         ToolHeaderActionSeparatorComponent,
         MessageStripComponent,
@@ -65,7 +63,10 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
         ToolHeaderUserDirective,
         MenuTriggerDirective,
         NavigationMenuItemComponent,
-        ButtonBadgeDirective
+        ButtonBadgeDirective,
+        ClickedDirective,
+        ToolHeaderActionButtonDirective,
+        ToolHeaderButtonDirective
     ],
     selector: 'fdb-tool-header-auto-mode-example',
     standalone: true,

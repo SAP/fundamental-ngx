@@ -11,19 +11,18 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
-    inject,
     Input,
     OnChanges,
     OnDestroy,
     Output,
-    QueryList,
     Renderer2,
-    SimpleChanges
+    SimpleChanges,
+    inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { merge, Subject } from 'rxjs';
+import { Observable, Subject, merge } from 'rxjs';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { intersectionObservable, KeyUtil } from '../../functions';
+import { KeyUtil, intersectionObservable } from '../../functions';
 import { destroyObservable } from '../../helpers';
 import { Nullable } from '../../models/nullable';
 import {
@@ -36,7 +35,7 @@ import {
 import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
 import { getItemElement } from '../focusable-item/get-item-element';
 import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
-import { scrollIntoView, ScrollPosition } from './scroll';
+import { ScrollPosition, scrollIntoView } from './scroll';
 
 export interface FocusableListItemFocusedEvent {
     index: number;
@@ -53,6 +52,15 @@ interface FocusableListConfig {
     wrap?: boolean;
     direction?: 'vertical' | 'horizontal';
     contentDirection?: 'ltr' | 'rtl' | null;
+}
+
+export interface ItemsQueryList<T> extends Iterable<T> {
+    changes: Observable<ItemsQueryList<T>>;
+    length: number;
+    toArray(): T[];
+    find(predicate: (item: T, index: number) => boolean): Nullable<T>;
+    get(index: number): Nullable<T>;
+    forEach(param: (item: T, index: number) => void): void;
 }
 
 @Directive({
@@ -103,15 +111,15 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
-    readonly _projectedFocusableItems: QueryList<FocusableItem>;
+    readonly _projectedFocusableItems: ItemsQueryList<FocusableItem>;
 
     /** @hidden */
-    get _focusableItems(): QueryList<FocusableItem> {
+    get _focusableItems(): ItemsQueryList<FocusableItem> {
         return this._items ? this._items : this._projectedFocusableItems;
     }
 
     /** @hidden */
-    _items: QueryList<FocusableItem> | undefined;
+    _items: ItemsQueryList<FocusableItem> | undefined;
 
     /** @hidden */
     readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
@@ -242,7 +250,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** Set items programmatically. */
-    setItems(items: QueryList<FocusableItem>): void {
+    setItems(items: ItemsQueryList<FocusableItem>): void {
         this._items = items;
         this._listenOnItems();
     }

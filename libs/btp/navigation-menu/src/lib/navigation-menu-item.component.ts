@@ -1,6 +1,12 @@
 import { NgIf } from '@angular/common';
 import { Component, ElementRef, HostBinding, inject, Input } from '@angular/core';
-import { FDK_FOCUSABLE_ITEM_DIRECTIVE, FocusableItem, HasElementRef, Nullable } from '@fundamental-ngx/cdk/utils';
+import {
+    FDK_FOCUSABLE_ITEM_DIRECTIVE,
+    FocusableItem,
+    HasElementRef,
+    IndirectFocusableItemDirective,
+    Nullable
+} from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { fromEvent, Observable } from 'rxjs';
 
@@ -21,6 +27,7 @@ import { fromEvent, Observable } from 'rxjs';
     `,
     standalone: true,
     imports: [IconComponent, NgIf],
+    hostDirectives: [IndirectFocusableItemDirective],
     providers: [
         {
             provide: FDK_FOCUSABLE_ITEM_DIRECTIVE,
@@ -61,7 +68,7 @@ export class NavigationMenuItemComponent implements FocusableItem, HasElementRef
     element = (): HTMLElement => this.elementRef.nativeElement;
 
     /** @hidden */
-    isFocusable = (): boolean => this.tabindex !== -1;
+    isFocusable = (): boolean => !this.disabled;
 
     /** @hidden */
     setTabbable(tabbable: boolean): void {

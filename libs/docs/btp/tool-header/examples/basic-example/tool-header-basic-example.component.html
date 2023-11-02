@@ -13,45 +13,43 @@
 >
     <fdb-search-field [ngModel]="searchValue" (ngModelChange)="valueUpdate($event)"></fdb-search-field>
 
-    <fdb-tool-header-actions>
-        <ng-template fdbToolHeaderAction forceVisibility>
-            <fd-popover [noArrow]="false">
-                <fd-popover-control>
-                    <button fd-button fdbToolHeaderButton [glyph]="'bell'" [ariaLabel]="'Notifications'">
-                        <fd-button-badge></fd-button-badge>
-                    </button>
-                </fd-popover-control>
-                <div
-                    *fdPopoverBody
-                    [ngStyle]="{
-                        padding: '0.5rem',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '0.5rem'
-                    }"
-                >
-                    <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
-                    <fd-message-strip *fdkRepeat="10; let index = index">
-                        A new notification has arrived. {{ index }}
-                    </fd-message-strip>
-                </div>
-            </fd-popover>
-        </ng-template>
-
-        <ng-container *ngFor="let action of actions; let index = index">
-            <ng-template fdbToolHeaderAction>
-                <button
-                    fd-button
-                    fdbToolHeaderButton
-                    [glyph]="action.glyph"
-                    [ariaLabel]="action.label"
-                    (click)="action.clickCallback()"
-                >
-                    <fd-button-badge *ngIf="action.hasBadge" />
+    <ng-template fdbToolHeaderAction forceVisibility>
+        <fd-popover [noArrow]="false">
+            <fd-popover-control>
+                <button fd-button fdbToolHeaderButton [glyph]="'bell'" [label]="'Notifications'">
+                    <fd-button-badge></fd-button-badge>
                 </button>
-            </ng-template>
-        </ng-container>
-    </fdb-tool-header-actions>
+            </fd-popover-control>
+            <div
+                *fdPopoverBody
+                [ngStyle]="{
+                    padding: '0.5rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.5rem'
+                }"
+            >
+                <h2 [style.margin]="0" fdPopoverBodyHeader>Notifications</h2>
+                <fd-message-strip *fdkRepeat="10; let index = index">
+                    A new notification has arrived. {{ index }}
+                </fd-message-strip>
+            </div>
+        </fd-popover>
+    </ng-template>
+
+    <ng-container *ngFor="let action of actions; let index = index">
+        <ng-template fdbToolHeaderAction>
+            <button
+                fd-button
+                fdbToolHeaderActionButton
+                [glyph]="action.glyph"
+                [label]="action.label"
+                (click)="action.clickCallback()"
+            >
+                <fd-button-badge *ngIf="action.hasBadge" />
+            </button>
+        </ng-template>
+    </ng-container>
 
     <fd-avatar
         fdbToolHeaderUser

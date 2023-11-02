@@ -1,9 +1,5 @@
 @import 'fundamental-styles/dist/tool-header';
 
-.fd-tool-header__group {
-    gap: 0;
-}
-
 .fd-overflow-layout__items
     > .fd-overflow-layout__item:not(.fd-overflow-layout__item--last)
     > .fd-tool-header__element
@@ -23,4 +19,12 @@
     display: flex;
     flex-direction: column;
     overflow: visible;
+}
+
+.fd-tool-header {
+    .fd-button {
+        .fd-button__text {
+            display: none;
+        }
+    }
 }

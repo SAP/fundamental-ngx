@@ -6,9 +6,9 @@ import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import {
     FdbToolHeaderActionButton,
+    ToolHeaderActionButtonDirective,
     ToolHeaderActionDirective,
     ToolHeaderActionSeparatorComponent,
-    ToolHeaderActionsDirective,
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
@@ -48,7 +48,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         MenuTitleDirective,
         NgIf,
         ButtonComponent,
-        ToolHeaderActionsDirective,
         MenuComponent,
         MenuTriggerDirective,
         SegmentedButtonComponent,
@@ -56,7 +55,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverControlComponent,
         PopoverBodyDirective,
         RepeatDirective,
-        ToolHeaderButtonDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,
@@ -64,7 +62,9 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         ToolHeaderActionDirective,
         NgForOf,
         ToolHeaderActionSeparatorComponent,
-        ButtonBadgeDirective
+        ButtonBadgeDirective,
+        ToolHeaderActionButtonDirective,
+        ToolHeaderButtonDirective
     ],
     standalone: true
 })

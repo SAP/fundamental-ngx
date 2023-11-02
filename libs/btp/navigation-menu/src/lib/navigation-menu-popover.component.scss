@@ -9,4 +9,10 @@
         padding: 0;
         margin: 0.5rem;
     }
+
+    .fd-button.fd-tool-header__action-button {
+        max-width: initial;
+        width: 100%;
+        justify-content: flex-start;
+    }
 }

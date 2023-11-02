@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
@@ -13,4 +13,9 @@ import { FocusableListDirective } from '@fundamental-ngx/cdk/utils';
     hostDirectives: [FocusableListDirective],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NavigationMenuComponent {}
+export class NavigationMenuComponent {
+    /** @hidden */
+    constructor() {
+        inject(FocusableListDirective).wrap = true;
+    }
+}
