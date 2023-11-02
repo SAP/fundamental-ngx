@@ -281,6 +281,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             if (isList) {
                 return;
             }
+            if (
+                this._suggestions?.length === 1 &&
+                this._suggestions[0].label === this.inputText &&
+                !this._suggestions[0].selected
+            ) {
+                this.toggleSelection(this._suggestions[0]);
+            }
             this.showList(false);
             this.inputText = '';
         }

@@ -12,6 +12,7 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
 import { PlatformMultiComboboxModule } from '../multi-combobox.module';
 import { MultiComboboxComponent } from './multi-combobox.component';
+import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fdp-multi-combobox-test',
@@ -213,6 +214,17 @@ describe('MultiComboboxComponent default values', () => {
         multiCombobox._addOnClicked(new MouseEvent('click'));
         expect(multiCombobox.addOnButtonClicked.emit).toHaveBeenCalled();
         expect(multiCombobox.showList).not.toHaveBeenCalled();
+    });
+
+    it('should select item automatically if full match found', async () => {
+        multiCombobox._selectedSuggestions = [];
+        multiCombobox.inputText = component.dataSource[2].name;
+        multiCombobox.searchTermChanged(multiCombobox.inputText);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        multiCombobox.onBlur(new FocusEvent('blur', { relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement }));
+        expect(multiCombobox._selectedSuggestions.length).toEqual(1);
+        expect(multiCombobox._selectedSuggestions[0].label).toEqual(component.dataSource[2].name);
     });
 
     it('should not create items duplicates', async () => {

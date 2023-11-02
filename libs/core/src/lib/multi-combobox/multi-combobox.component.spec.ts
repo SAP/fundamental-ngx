@@ -9,6 +9,7 @@ import { CVATestSteps, runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { MultiComboboxComponent } from './multi-combobox.component';
 import { MultiComboboxModule } from './multi-combobox.module';
+import { By } from '@angular/platform-browser';
 
 const { contentDensityDirectiveProvider, setContentDensity } = mockedLocalContentDensityDirective(
     ContentDensityMode.COMPACT
@@ -80,7 +81,6 @@ describe('MultiComboBox component', () => {
     it('should be able to see Secondary Column', () => {
         component.showSecondaryText = true;
 
-        // component.dataSourceDirective.dataSource = [...component.dataSourceDirective.dataSource];
         fixture.detectChanges();
 
         component._onPrimaryButtonClick(component.isOpen);
@@ -150,6 +150,16 @@ describe('MultiComboBox component', () => {
         component._addOnClicked(new MouseEvent('click'));
         expect(buttonSpy).toHaveBeenCalled();
         expect(showListSpy).not.toHaveBeenCalled();
+    });
+
+    it('should select item automatically if full match found', async () => {
+        component.displayKey = 'name';
+        component.inputText = dataSource[2].name;
+        component._searchTermChanged(component.inputText);
+        fixture.detectChanges();
+        await fixture.whenStable();
+        component._onBlur(new FocusEvent('blur', { relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement }));
+        expect(component._selectedSuggestions.length).toEqual(1);
     });
 });
 

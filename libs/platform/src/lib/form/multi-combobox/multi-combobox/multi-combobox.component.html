@@ -186,7 +186,7 @@
         </li>
 
         <ng-content></ng-content>
-        <ng-container *ngIf="isGroup">
+        <ng-container *ngIf="isGroup; else plainList">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
                     <label fd-list-item fd-list-group-header role="group">
@@ -224,7 +224,7 @@
             </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="!isGroup">
+        <ng-template #plainList>
             <li
                 *ngFor="let optionItem of _suggestions; let i = index"
                 fd-list-item
@@ -245,7 +245,7 @@
                     [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
                 ></ng-container>
             </li>
-        </ng-container>
+        </ng-template>
     </ul>
 </ng-template>
 
