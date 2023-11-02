@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.24...v0.47.0-rc.0) (2023-11-02)
+
+
+### Features
+
+* **core,btp:** updated button with new features from styles ([#10728](https://github.com/SAP/fundamental-ngx/issues/10728)) ([8f30bf2](https://github.com/SAP/fundamental-ngx/commit/8f30bf2bf9e82228fc16303629b8f79138741c1c))
+
+
+### BREAKING CHANGES
+
+* **core,btp:** fdbToolHeaderButton now comes from `@fundamental-ngx/btp/button`
+
+
+
+
+
 ## [0.46.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.23...v0.46.2-rc.24) (2023-11-02)
 
 **Note:** Version bump only for package @fundamental-ngx/btp
