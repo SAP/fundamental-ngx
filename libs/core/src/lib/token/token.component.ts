@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -5,19 +7,18 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    inject,
     Input,
     OnDestroy,
     Output,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
 import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { Subscription, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 /**
@@ -115,7 +116,10 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     elementFocused = new EventEmitter<boolean>();
 
     /** @hidden */
-    totalCount: number;
+    _totalCount: number;
+
+    /** @hidden */
+    _itemPosition: number;
 
     /** @hidden */
     private readonly _destroy$ = inject(DestroyedService);
@@ -173,8 +177,9 @@ export class TokenComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    _setTotalCount(count: number): void {
-        this.totalCount = count;
+    _setTotalCount(count: number, itemPosition: number): void {
+        this._totalCount = count;
+        this._itemPosition = itemPosition;
         this._cdRef.markForCheck();
     }
 }

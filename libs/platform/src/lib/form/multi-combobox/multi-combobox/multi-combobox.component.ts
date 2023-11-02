@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -243,6 +244,13 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             const isList = !!target.closest('.fdp-multi-combobox__list-container');
             if (isList) {
                 return;
+            }
+            if (
+                this._suggestions?.length === 1 &&
+                this._suggestions[0].label === this.inputText &&
+                !this._suggestions[0].selected
+            ) {
+                this.toggleSelection(this._suggestions[0]);
             }
             this.showList(false);
             this.inputText = '';

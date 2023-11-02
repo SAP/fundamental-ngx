@@ -276,7 +276,7 @@ describe('calendar test suite', () => {
             expect(
                 await (
                     await $(
-                        `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${nextDayAfterEndDate.getDay()}"]:not(.fd-calendar__item--other-month)`
+                        `fd-calendar-special-day-example .fd-calendar__item[data-fd-calendar-date-day="${nextDayAfterEndDate.getDate()}"]:not(.fd-calendar__item--other-month)`
                     )
                 ).getAttribute('class')
             ).not.toContain('special-day');

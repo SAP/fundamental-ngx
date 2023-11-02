@@ -604,9 +604,14 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
-    _onCheckboxKeyup(option: _OptionItem<ItemType, ValueType>, event: KeyboardEvent, index: number): void {
+    _onCheckboxKeyup(
+        option: _OptionItem<ItemType, ValueType>,
+        event: KeyboardEvent,
+        index: number,
+        isListItem = false
+    ): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            this._onCheckboxClick(option, event, index);
+            this._onCheckboxClick(option, event, index, isListItem);
         }
     }
 
