@@ -217,6 +217,7 @@ describe('MultiComboboxComponent default values', () => {
     });
 
     it('should select item automatically if full match found', async () => {
+        multiCombobox._selectedSuggestions = [];
         multiCombobox.inputText = component.dataSource[2].name;
         multiCombobox.searchTermChanged(multiCombobox.inputText);
         fixture.detectChanges();
@@ -225,7 +226,7 @@ describe('MultiComboboxComponent default values', () => {
         expect(multiCombobox._selectedSuggestions.length).toEqual(1);
         expect(multiCombobox._selectedSuggestions[0].label).toEqual(component.dataSource[2].name);
     });
-  
+
     it('should not create items duplicates', async () => {
         component.selectedItems = [component.dataSource[0]];
         fixture.detectChanges();
