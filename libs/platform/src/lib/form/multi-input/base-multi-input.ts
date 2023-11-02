@@ -456,6 +456,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
             return;
         }
 
+        if (KeyUtil.isKeyCode(event, TAB) && this.isOpen) {
+            this.close();
+            return;
+        }
+
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
             event.preventDefault();
 

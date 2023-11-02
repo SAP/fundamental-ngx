@@ -163,6 +163,8 @@
         [style.max-width]="autoResize && maxWidth + 'px'"
         [attr.aria-labelledby]="this._cva.id + '-search'"
         aria-multiselectable="true"
+        (keydown.tab)="close()"
+        (keydown.shift.tab)="close()"
     >
         <fd-form-message
             *ngIf="!!this._cva.stateMessage"
@@ -177,20 +179,20 @@
             [flatItems]="_flatSuggestions"
         ></fd-multi-combobox-select-all-toggler>
         <ng-content></ng-content>
-        <ng-container *ngIf="isGroup">
+        <ng-container *ngIf="isGroup; else flatList">
             <ng-container *ngFor="let group of _suggestions">
-                <ng-container *ngIf="!groupItemTemplate">
+                <ng-container *ngIf="!groupItemTemplate; else groupItemTemplateRenderer">
                     <label fd-list-group-header role="group">
                         <span fd-list-title>{{ group.label }}</span>
                     </label>
                 </ng-container>
 
-                <ng-container *ngIf="groupItemTemplate">
+                <ng-template #groupItemTemplateRenderer>
                     <ng-container
                         [ngTemplateOutlet]="groupItemTemplate"
                         [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
                     ></ng-container>
-                </ng-container>
+                </ng-template>
 
                 <li
                     *ngFor="let optionItem of group.children; let i = index"
@@ -198,7 +200,7 @@
                     role="option"
                     [tabindex]="0"
                     (click)="!mobile && close()"
-                    (keyDown)="_onItemKeyDownHandler($event, i)"
+                    (keydown)="_onItemKeyDownHandler($event)"
                     [selected]="!!optionItem.selected"
                 >
                     <fd-checkbox
@@ -215,14 +217,14 @@
             </ng-container>
         </ng-container>
 
-        <ng-container *ngIf="!isGroup">
+        <ng-template #flatList>
             <li
                 *ngFor="let optionItem of _suggestions; let i = index"
                 fd-list-item
                 role="option"
                 [tabindex]="0"
                 (click)="!mobile && _onOptionClicked($event, i)"
-                (keyDown)="_onItemKeyDownHandler($event, i)"
+                (keydown)="_onItemKeyDownHandler($event)"
                 [selected]="!!optionItem.selected"
             >
                 <fd-checkbox
@@ -236,7 +238,7 @@
                     [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
                 ></ng-container>
             </li>
-        </ng-container>
+        </ng-template>
     </ul>
 </ng-template>
 
@@ -261,7 +263,7 @@
 </ng-template>
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
-    <ng-container *ngIf="!optionItemTemplate">
+    <ng-container *ngIf="!optionItemTemplate; else optionItemTemplateRenderer">
         <span
             fd-list-title
             [attr.title]="optionItem.label"
@@ -269,17 +271,17 @@
         ></span>
     </ng-container>
 
-    <ng-container *ngIf="optionItemTemplate">
+    <ng-template #optionItemTemplateRenderer>
         <ng-container
             [ngTemplateOutlet]="optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
         ></ng-container>
-    </ng-container>
+    </ng-template>
 </ng-template>
 
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
     <ng-container *ngIf="showSecondaryText">
-        <ng-container *ngIf="!secondaryItemTemplate">
+        <ng-container *ngIf="!secondaryItemTemplate; else secondaryItemTemplateRenderer">
             <span
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
@@ -288,11 +290,11 @@
             ></span>
         </ng-container>
 
-        <ng-container *ngIf="secondaryItemTemplate">
+        <ng-template #secondaryItemTemplateRenderer>
             <ng-container
                 [ngTemplateOutlet]="secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
             ></ng-container>
-        </ng-container>
+        </ng-template>
     </ng-container>
 </ng-template>

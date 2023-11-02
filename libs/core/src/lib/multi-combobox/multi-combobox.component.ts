@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -508,16 +508,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /** @hidden */
-    _onItemKeyDownHandler(event: KeyboardEvent, index: number): void {
+    _onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
             this.close();
-        } else if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            this.listComponent?.setItemActive(index - 1);
-        } else if (KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            this.listComponent?.setItemActive(index + 1);
         } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this._handleSelectAllItems(false);
@@ -576,10 +570,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** Closes the select popover body. */
     close(): void {
+        this._focusToSearchField();
         this._rangeSelector.reset();
         this.selectedShown$.next(false);
         this.inputText = '';
-        this._focusToSearchField();
 
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { A, DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -276,12 +276,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
             this.close();
-        } else if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            this.listComponent?.setItemActive(index - 1);
-        } else if (KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            this.listComponent?.setItemActive(index + 1);
         } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this.handleSelectAllItems(false);
@@ -310,6 +304,21 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         if (!this.mobile) {
             this.onPrimaryButtonClick(this.isOpen);
         }
+    }
+
+    /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
+    dialogDismiss(backup: SelectableOptionItem[]): void {
+        this._selectedSuggestions = [...backup];
+        this.inputText = '';
+        this.showList(false);
+        this.selectedShown$.next(false);
+    }
+
+    /** @hidden Handle dialog approval, closes popover and propagates data changes. */
+    dialogApprove(): void {
+        this.inputText = '';
+        this.showList(false);
+        this._propagateChange(true);
     }
 
     /**
@@ -342,21 +351,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this._tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
             this._tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
-    }
-
-    /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(backup: SelectableOptionItem[]): void {
-        this._selectedSuggestions = [...backup];
-        this.inputText = '';
-        this.showList(false);
-        this.selectedShown$.next(false);
-    }
-
-    /** @hidden Handle dialog approval, closes popover and propagates data changes. */
-    dialogApprove(): void {
-        this.inputText = '';
-        this.showList(false);
-        this._propagateChange(true);
     }
 
     /** @hidden */
