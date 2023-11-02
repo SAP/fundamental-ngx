@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
@@ -21,27 +22,27 @@ import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ng
 import { CvaControl, CvaDirective, SelectItem } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteEvent,
-    coerceArraySafe,
     ContentDensity,
     DestroyedService,
     DynamicComponentService,
     FocusEscapeDirection,
     KeyUtil,
     Nullable,
-    resizeObservable,
-    TemplateDirective
+    TemplateDirective,
+    coerceArraySafe,
+    resizeObservable
 } from '@fundamental-ngx/cdk/utils';
+import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import equal from 'fast-deep-equal';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
-import { SelectableOptionItem, OptionItem } from '@fundamental-ngx/cdk/forms';
+import { OptionItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
 import { MobileMultiComboboxComponent } from './mobile/mobile-multi-combobox.component';
 import { MobileMultiComboboxModule } from './mobile/mobile-multi-combobox.module';
@@ -479,6 +480,13 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
             const isList = !!target.closest('.fd-multi-combobox__list-container');
             if (isList) {
                 return;
+            }
+            if (
+                this._suggestions?.length === 1 &&
+                this._suggestions[0].label === this.inputText &&
+                !this._suggestions[0].selected
+            ) {
+                this._toggleSelection(this._suggestions[0]);
             }
             this._showList(false);
             this.inputText = '';

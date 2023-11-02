@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -14,10 +16,9 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
 import { DestroyedService, KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { fromEvent, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 /**
