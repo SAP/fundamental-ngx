@@ -1,4 +1,5 @@
-import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+/* eslint-disable @typescript-eslint/member-ordering */
+import { A, CONTROL, DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -21,27 +22,27 @@ import { DataSourceDirective, FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ng
 import { CvaControl, CvaDirective, SelectItem } from '@fundamental-ngx/cdk/forms';
 import {
     AutoCompleteEvent,
-    coerceArraySafe,
     ContentDensity,
     DestroyedService,
     DynamicComponentService,
     FocusEscapeDirection,
     KeyUtil,
     Nullable,
-    resizeObservable,
-    TemplateDirective
+    TemplateDirective,
+    coerceArraySafe,
+    resizeObservable
 } from '@fundamental-ngx/cdk/utils';
+import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { FD_LIST_COMPONENT, ListComponentInterface } from '@fundamental-ngx/core/list';
 
+import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import equal from 'fast-deep-equal';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
 
-import { SelectableOptionItem, OptionItem } from '@fundamental-ngx/cdk/forms';
+import { OptionItem, SelectableOptionItem } from '@fundamental-ngx/cdk/forms';
 import { BaseMultiCombobox } from './base-multi-combobox.class';
 import { MobileMultiComboboxComponent } from './mobile/mobile-multi-combobox.component';
 import { MobileMultiComboboxModule } from './mobile/mobile-multi-combobox.module';
@@ -500,16 +501,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
     }
 
     /** @hidden */
-    _onItemKeyDownHandler(event: KeyboardEvent, index: number): void {
+    _onItemKeyDownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this._focusToSearchField();
             this.close();
-        } else if (event.shiftKey && KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            this.listComponent?.setItemActive(index - 1);
-        } else if (KeyUtil.isKeyCode(event, TAB)) {
-            event.preventDefault();
-            this.listComponent?.setItemActive(index + 1);
         } else if ((event.ctrlKey || event.metaKey) && event.shiftKey && KeyUtil.isKeyCode(event, A)) {
             event.preventDefault();
             this._handleSelectAllItems(false);
@@ -568,10 +563,10 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
 
     /** Closes the select popover body. */
     close(): void {
+        this._focusToSearchField();
         this._rangeSelector.reset();
         this.selectedShown$.next(false);
         this.inputText = '';
-        this._focusToSearchField();
 
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);

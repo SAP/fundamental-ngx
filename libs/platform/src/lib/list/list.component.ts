@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -264,6 +265,10 @@ export class ListComponent<T>
     @Input()
     unreadIndicator = false;
 
+    /** Whether to intercept tab key navigation. */
+    @Input()
+    interceptTabKey = true;
+
     /** Event thrown, when selected item is changed */
     @Output()
     selectedItemChange: EventEmitter<SelectionChangeEvent> = new EventEmitter<SelectionChangeEvent>();
@@ -512,6 +517,10 @@ export class ListComponent<T>
      */
     _handleKeyDown(event: KeyboardEvent): Nullable<boolean> {
         if (!this._keyManager) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, TAB) && !this.interceptTabKey) {
             return;
         }
 

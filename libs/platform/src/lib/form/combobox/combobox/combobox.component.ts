@@ -28,16 +28,16 @@ import {
     ComboBoxDataSource,
     DATA_PROVIDERS,
     DataProvider,
-    PlatformFormFieldControl,
     OptionItem,
-    PlatformFormField
+    PlatformFormField,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 
-import { BaseCombobox } from '../commons/base-combobox';
-import { ComboboxConfig } from '../combobox.config';
-import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
+import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
+import { ComboboxConfig } from '../combobox.config';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
+import { BaseCombobox } from '../commons/base-combobox';
 
 export class ComboboxSelectionChangeEvent {
     /**
@@ -220,6 +220,14 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         }
 
         this.isOpenChangeHandle(false);
+    }
+
+    /** @hidden */
+    _close(): void {
+        this.inputText = this.value ? this.inputText : '';
+        this.searchInputElement.nativeElement.focus();
+        this.isOpenChangeHandle(false);
+        this._cd.markForCheck();
     }
 
     /** @hidden if not selected update model */

@@ -106,6 +106,7 @@
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
+        (keydown.tab)="_close()"
     >
         <li
             *ngIf="stateMessage"

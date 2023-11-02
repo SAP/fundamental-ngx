@@ -1,3 +1,17 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import {
+    BACKSPACE,
+    CONTROL,
+    DOWN_ARROW,
+    ENTER,
+    ESCAPE,
+    LEFT_ARROW,
+    RIGHT_ARROW,
+    SHIFT,
+    SPACE,
+    TAB,
+    UP_ARROW
+} from '@angular/cdk/keycodes';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -21,22 +35,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-    BACKSPACE,
-    CONTROL,
-    DOWN_ARROW,
-    ENTER,
-    ESCAPE,
-    LEFT_ARROW,
-    RIGHT_ARROW,
-    SHIFT,
-    SPACE,
-    TAB,
-    UP_ARROW
-} from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 
-import { FD_LIST_MESSAGE_DIRECTIVE, ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import {
     AutoCompleteEvent,
     DynamicComponentService,
@@ -45,20 +45,21 @@ import {
     Nullable
 } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { FD_LIST_MESSAGE_DIRECTIVE, ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
-import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
-import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
-import { ComboboxItem } from './combobox-item';
-import { GroupFunction } from './list-group.pipe';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
+import { ComboboxItem } from './combobox-item';
+import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
+import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
+import { GroupFunction } from './list-group.pipe';
 import { FD_COMBOBOX_COMPONENT } from './tokens';
 
 let comboboxUniqueId = 0;
@@ -636,6 +637,13 @@ export class ComboboxComponent
     /** Current select value */
     getValue(): any {
         return this._value;
+    }
+
+    /** @hidden */
+    _close(): void {
+        this.inputText = this._value ? this.inputText : '';
+        this.isOpenChangeHandle(false);
+        this.searchInputElement.nativeElement.focus();
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
