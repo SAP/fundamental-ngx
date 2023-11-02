@@ -211,11 +211,16 @@ describe('MultiComboboxComponent default values', () => {
     });
 
     it('should select item automatically if full match found', async () => {
+        multiCombobox._selectedSuggestions = [];
         multiCombobox.inputText = component.dataSource[2].name;
         multiCombobox.searchTermChanged(multiCombobox.inputText);
         fixture.detectChanges();
         await fixture.whenStable();
-        multiCombobox.onBlur(new FocusEvent('blur', { relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement }));
+        multiCombobox.onBlur(
+            new FocusEvent('blur', {
+                relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement
+            })
+        );
         expect(multiCombobox._selectedSuggestions.length).toEqual(1);
         expect(multiCombobox._selectedSuggestions[0].label).toEqual(component.dataSource[2].name);
     });

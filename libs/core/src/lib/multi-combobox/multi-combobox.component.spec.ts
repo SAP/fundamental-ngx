@@ -158,7 +158,11 @@ describe('MultiComboBox component', () => {
         component._searchTermChanged(component.inputText);
         fixture.detectChanges();
         await fixture.whenStable();
-        component._onBlur(new FocusEvent('blur', { relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement }));
+        component._onBlur(
+            new FocusEvent('blur', {
+                relatedTarget: fixture.debugElement.query(By.css('.fd-tokenizer__input')).nativeElement
+            })
+        );
         expect(component._selectedSuggestions.length).toEqual(1);
     });
 });
