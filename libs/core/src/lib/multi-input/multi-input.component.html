@@ -115,6 +115,7 @@
             [byline]="byline"
             (focusEscapeList)="handleListFocusEscape($event)"
             [style.min-width]="'100%'"
+            (keydown.tab)="_close()"
             aria-multiselectable="true"
         >
             <li

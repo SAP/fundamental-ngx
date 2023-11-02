@@ -342,6 +342,21 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
+    /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
+    dialogDismiss(backup: SelectableOptionItem[]): void {
+        this._selectedSuggestions = [...backup];
+        this.inputText = '';
+        this.showList(false);
+        this.selectedShown$.next(false);
+    }
+
+    /** @hidden Handle dialog approval, closes popover and propagates data changes. */
+    dialogApprove(): void {
+        this.inputText = '';
+        this.showList(false);
+        this._propagateChange(true);
+    }
+
     /**
      * @hidden
      * applying range selection. Note, that this function will be invoked after combobox item's value has been changed
@@ -372,21 +387,6 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this._tokenizer.tokenizerInnerEl.nativeElement.scrollLeft =
             this._tokenizer.tokenizerInnerEl.nativeElement.scrollWidth;
-    }
-
-    /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(backup: SelectableOptionItem[]): void {
-        this._selectedSuggestions = [...backup];
-        this.inputText = '';
-        this.showList(false);
-        this.selectedShown$.next(false);
-    }
-
-    /** @hidden Handle dialog approval, closes popover and propagates data changes. */
-    dialogApprove(): void {
-        this.inputText = '';
-        this.showList(false);
-        this._propagateChange(true);
     }
 
     /** @hidden */

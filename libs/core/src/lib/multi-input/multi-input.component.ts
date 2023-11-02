@@ -816,6 +816,12 @@ export class MultiInputComponent<ItemType = any, ValueType = any>
     }
 
     /** @hidden */
+    _close(): void {
+        this.searchInputElement.nativeElement.focus();
+        this.openChangeHandle(false);
+    }
+
+    /** @hidden */
     private _addNewTokenToDropDownValues(newToken): void {
         this.dropdownValues.push(newToken);
         const newOption = this._getOptionItem(newToken);

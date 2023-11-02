@@ -27,16 +27,16 @@
 <ng-template let-term="term" #itemSource>
     <span
         fd-list-title
-        *ngIf="!_customRenderer"
+        *ngIf="!_customRenderer; else customRendererTemplate"
         [innerHTML]="term | displayFnPipe : displayFn | highlight : inputText : highlighting && filterHighlight"
     >
     </span>
-    <ng-container *ngIf="_customRenderer">
+    <ng-template #customRendererTemplate>
         <ng-container
-            [ngTemplateOutlet]="_customRenderer"
+            [ngTemplateOutlet]="_customRenderer!"
             [ngTemplateOutletContext]="{ $implicit: term, inputText: inputText }"
         ></ng-container>
-    </ng-container>
+    </ng-template>
 </ng-template>
 
 <ng-template #mobileTemplate>
@@ -127,10 +127,12 @@
         [style.maxHeight]="!mobile && maxHeight"
         [hasMessage]="listMessages && listMessages.length > 0"
         [byline]="byline"
+        (keydown.tab)="_close()"
+        (keydown.shift.tab)="_close()"
         (focusEscapeList)="handleListFocusEscape($event)"
     >
         <ng-content></ng-content>
-        <ng-container *ngIf="groupFn">
+        <ng-container *ngIf="groupFn; else flatList">
             <ng-container *ngFor="let group of displayedValues | listGroupPipe : groupFn">
                 <li role="group" fd-list-group-header [tabindex]="0">
                     <span fd-list-title>{{ group.key }}</span>
@@ -143,7 +145,7 @@
                     class="fd-combobox-list-item"
                     *ngFor="let term of group.value"
                     [selected]="isSelected(term)"
-                    (keyDown)="onItemKeyDownHandler($event, term)"
+                    (keydown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"
                 >
                     <ng-container
@@ -153,7 +155,7 @@
                 </li>
             </ng-container>
         </ng-container>
-        <ng-container *ngIf="!groupFn">
+        <ng-template #flatList>
             <li
                 fd-list-item
                 role="option"
@@ -161,11 +163,11 @@
                 class="fd-combobox-list-item"
                 *ngFor="let term of displayedValues"
                 [selected]="isSelected(term)"
-                (keyDown)="onItemKeyDownHandler($event, term)"
+                (keydown)="onItemKeyDownHandler($event, term)"
                 (click)="onMenuClickHandler(term)"
             >
                 <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ term: term }"></ng-container>
             </li>
-        </ng-container>
+        </ng-template>
     </ul>
 </ng-template>

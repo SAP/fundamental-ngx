@@ -249,6 +249,14 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.isOpenChangeHandle(false);
     }
 
+    /** @hidden */
+    _close(): void {
+        this.inputText = this.value ? this.inputText : '';
+        this.searchInputElement.nativeElement.focus();
+        this.isOpenChangeHandle(false);
+        this._cd.markForCheck();
+    }
+
     /** @hidden if not selected update model */
     private _checkAndUpdate(modelValue: OptionItem): void {
         if (this.isSelectedOptionItem(modelValue)) {

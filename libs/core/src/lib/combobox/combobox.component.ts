@@ -680,6 +680,13 @@ export class ComboboxComponent<T = any>
         return this._value;
     }
 
+    /** @hidden */
+    _close(): void {
+        this.inputText = this._value ? this.inputText : '';
+        this.isOpenChangeHandle(false);
+        this.searchInputElement.nativeElement.focus();
+    }
+
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
         const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue)[0];
