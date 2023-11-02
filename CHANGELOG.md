@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.0...v0.47.0-rc.1) (2023-11-02)
+
+
+### Bug Fixes
+
+* **core,platform:** inputs with dropdowns ignore tab key ([#10852](https://github.com/SAP/fundamental-ngx/issues/10852)) ([ba79a5a](https://github.com/SAP/fundamental-ngx/commit/ba79a5ab21bdb9c21230b8ece5b91f17155a72d4))
+
+
+
+
+
 # [0.47.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.24...v0.47.0-rc.0) (2023-11-02)
 
 
