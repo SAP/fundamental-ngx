@@ -470,6 +470,11 @@ export class ComboboxComponent<T = any>
             return;
         }
 
+        if (KeyUtil.isKeyCode(event, TAB) && this.open) {
+            this._close();
+            return;
+        }
+
         if (KeyUtil.isKeyCode(event, ENTER)) {
             if (this.searchFn) {
                 this.searchFn();
@@ -678,6 +683,13 @@ export class ComboboxComponent<T = any>
     /** Current select value */
     getValue(): any {
         return this._value;
+    }
+
+    /** @hidden */
+    _close(): void {
+        this.inputText = this._value ? this.inputText : '';
+        this.isOpenChangeHandle(false);
+        this.searchInputElement.nativeElement.focus();
     }
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */

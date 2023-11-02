@@ -110,6 +110,8 @@
         *ngIf="_suggestions && _suggestions.length"
         role="listbox"
         aria-multiselectable="true"
+        [interceptTabKey]="false"
+        (keydown.tab)="close()"
     >
         <ng-container *ngIf="!isGroup">
             <fdp-standard-list-item
