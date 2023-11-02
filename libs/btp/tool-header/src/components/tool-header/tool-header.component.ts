@@ -14,6 +14,7 @@ import {
     ViewEncapsulation,
     inject
 } from '@angular/core';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
     NavigationMenuComponent,
     NavigationMenuItemComponent,
@@ -45,7 +46,6 @@ import { PopoverBodyDirective, PopoverComponent, PopoverControlComponent } from 
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { Subscription, first } from 'rxjs';
 import { ToolHeaderActionsDirective } from '../../directives/tool-header-actions.directive';
-import { ToolHeaderButtonDirective } from '../../directives/tool-header-button.directive';
 import { ToolHeaderElementDirective } from '../../directives/tool-header-element.directive';
 import { ToolHeaderGroupDirective } from '../../directives/tool-header-group.directive';
 import { ToolHeaderLogoDirective } from '../../directives/tool-header-logo.directive';
@@ -74,7 +74,6 @@ const imports = [
     ToolHeaderElementDirective,
     IconComponent,
     ButtonComponent,
-    ToolHeaderButtonDirective,
     ToolHeaderLogoDirective,
     FdTranslatePipe
 ];
@@ -98,7 +97,8 @@ const imports = [
         FocusableItemDirective,
         NavigationMenuPopoverComponent,
         NavigationMenuPopoverControlDirective,
-        AsyncPipe
+        AsyncPipe,
+        ToolHeaderButtonDirective
     ],
     providers: [
         contentDensityObserverProviders(),

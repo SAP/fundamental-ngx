@@ -29,6 +29,6 @@ export class SearchFieldDocsComponent {
         getExampleFile('basic-example/search-field-basic-example.component.ts', {
             component: 'SearchFieldBasicExampleComponent'
         }),
-        getExampleFile('basic-example/search-field-basic-example.component.ts')
+        getExampleFile('basic-example/search-field-basic-example.component.html')
     ];
 }

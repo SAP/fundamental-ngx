@@ -1,19 +1,19 @@
 import { NgIf, NgStyle } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import {
     FdbToolHeaderActionButton,
     ToolHeaderActionDirective,
     ToolHeaderActionsDirective,
-    ToolHeaderButtonDirective,
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonBadgeDirective, ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     MenuAddonDirective,
@@ -56,11 +56,12 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverBodyDirective,
         RepeatDirective,
         ToolHeaderActionDirective,
-        ToolHeaderButtonDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,
-        ContentDensityDirective
+        ContentDensityDirective,
+        ButtonBadgeDirective,
+        ToolHeaderButtonDirective
     ],
     standalone: true
 })

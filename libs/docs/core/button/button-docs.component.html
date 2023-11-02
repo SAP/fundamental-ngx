@@ -61,6 +61,24 @@
 
 <separator></separator>
 
+<fd-docs-section-title id="badged" componentName="button"> Badge buttons </fd-docs-section-title>
+<description>
+    <p>
+        Button gets a badge in cases of collecting a number of items from various pages in order to trigger an action.
+        Currently the Emphasized, Standard, Ghost and Transparent type of buttons are <b>required</b> to be used with
+        Badge.
+    </p>
+    <fd-message-strip [dismissible]="false" type="warning">
+        Badges cannot contain more than 4 characters.
+    </fd-message-strip>
+</description>
+<component-example>
+    <fd-button-badge-example />
+</component-example>
+<code-example [exampleFiles]="buttonBadgeExample"></code-example>
+
+<separator></separator>
+
 <description
     >The inputs for <code>button</code> will be translated into classes attributed to the fundamental-styles guidelines.
     <br />For example: <br />if <code>positive</code> is passed for <code>fdType</code>, the

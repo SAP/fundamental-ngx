@@ -23,13 +23,9 @@
         >
             <fd-popover [noArrow]="false">
                 <fd-popover-control>
-                    <button
-                        fd-button
-                        fdbToolHeaderButton
-                        [hasBadge]="true"
-                        [glyph]="'bell'"
-                        [ariaLabel]="'Notifications'"
-                    ></button>
+                    <button fd-button fdbToolHeaderButton [glyph]="'bell'" [ariaLabel]="'Notifications'">
+                        <fd-button-badge></fd-button-badge>
+                    </button>
                 </fd-popover-control>
                 <div
                     *fdPopoverBody

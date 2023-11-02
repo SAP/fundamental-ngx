@@ -6,6 +6,7 @@
     {{ label }}
 </span>
 <ng-content></ng-content>
+<ng-content select="fd-button-badge"></ng-content>
 
 <ng-container *ngIf="glyph && glyphPosition === 'after'">
     <fd-icon [glyph]="glyph"></fd-icon>

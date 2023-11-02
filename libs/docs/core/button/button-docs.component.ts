@@ -3,6 +3,7 @@ import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
     CodeExampleComponent,
     ComponentExampleComponent,
@@ -11,8 +12,10 @@ import {
     ExampleFile,
     PlayGroundComponent,
     SeparatorComponent,
-    getAssetFromModuleAssets
+    getAssetFromModuleAssets,
+    getExampleFile
 } from '@fundamental-ngx/docs/shared';
+import { ButtonBadgeExampleComponent } from './examples/button-badge-example.component';
 import { ButtonIconsExampleComponent } from './examples/button-icons-example.component';
 import { ButtonMenuExampleComponent } from './examples/button-menu-example.component';
 import { ButtonSizesExampleComponent } from './examples/button-sizes-example.component';
@@ -45,7 +48,9 @@ const buttonToggledExample = 'button-toggled-example.component';
         ButtonToggledExampleComponent,
         PlayGroundComponent,
         ButtonModule,
-        ContentDensityDirective
+        ContentDensityDirective,
+        MessageStripComponent,
+        ButtonBadgeExampleComponent
     ]
 })
 export class ButtonDocsComponent {
@@ -144,6 +149,12 @@ export class ButtonDocsComponent {
             fileName: 'button-toggled-example',
             component: 'ButtonToggledExampleComponent'
         }
+    ];
+
+    buttonBadgeExample: ExampleFile[] = [
+        getExampleFile('button-badge-example.component.ts', {
+            component: 'ButtonBadgeExampleComponent'
+        })
     ];
 
     constructor(private schemaFactory: SchemaFactoryService) {

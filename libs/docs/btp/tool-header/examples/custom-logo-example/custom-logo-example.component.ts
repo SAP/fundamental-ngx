@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
 import {
     ToolHeaderActionDirective,
     ToolHeaderActionsDirective,
     ToolHeaderAutoModeDirective,
-    ToolHeaderButtonDirective,
     ToolHeaderComponent,
     ToolHeaderLogoDirective
 } from '@fundamental-ngx/btp/tool-header';

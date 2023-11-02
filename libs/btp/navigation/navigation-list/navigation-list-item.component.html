@@ -21,7 +21,8 @@
         (click)="toggle()"
         *ngIf="childNavigationListComponent() && normalizedLevel() < 3 && linkComponent?._routerLink"
         fd-button
-        class="fd-button--nested fd-navigation__expander"
+        fdbNestedButton
+        class="fd-navigation__expander"
     >
         <fd-icon [glyph]="toggleIcon()"></fd-icon>
     </button>

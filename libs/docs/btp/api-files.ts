@@ -13,7 +13,6 @@ export const API_FILES = {
         'ToolHeaderActionsDirective',
         'ToolHeaderAutoModeDirective',
         'ToolHeaderActionDirective',
-        'ToolHeaderButtonDirective',
         'ToolHeaderUserDirective',
         'ToolHeaderProductSwitchComponent',
         'ToolHeaderLogoDirective'
