@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.46.2-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.23...v0.46.2-rc.24) (2023-11-02)
+
+
+### Bug Fixes
+
+* **core,platform:** multi combobox blur behaviour ([#10864](https://github.com/SAP/fundamental-ngx/issues/10864)) ([85ee3a4](https://github.com/SAP/fundamental-ngx/commit/85ee3a4a8c81ccd527b34f08a7ad4e1dd47591cc))
+
+
+
+
+
 ## [0.46.2-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.46.2-rc.22...v0.46.2-rc.23) (2023-11-01)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
