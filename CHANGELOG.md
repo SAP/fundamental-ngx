@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.6...v0.47.0-rc.7) (2023-11-03)
+
+
+### Bug Fixes
+
+* **platform:** keyboard improvements for search field ([#10882](https://github.com/SAP/fundamental-ngx/issues/10882)) ([eeb8036](https://github.com/SAP/fundamental-ngx/commit/eeb8036a2bb2acc708cc692b032b5c545bb856e1))
+
+
+
+
+
 # [0.47.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.5...v0.47.0-rc.6) (2023-11-03)
 
 
