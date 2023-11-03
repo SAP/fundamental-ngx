@@ -442,7 +442,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Excluir ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Excluir",
         "P13FilterDialogRemoveFilterBtnTitle": "Remover filtro",
-        "P13FilterDialoAddFilterBtnTitle": "Adicionar filtro",
+        "P13FilterDialogAddFilterBtnTitle": "Adicionar filtro",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Cancelar",
         "P13GroupDialogHeader": "Agrupar",
@@ -624,16 +624,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Selecionar uma opção"
-    },
-    "fnSlider": {
-        "minMaxDetails": "O valor mínimo do cursor é {min}, o valor máximo é {max}",
-        "valueminDetails": "O valor é {value}",
-        "valuemaxDetails": "O valor é {value}",
-        "valueNowDetails": "O valor atual é {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Aceitar",
-        "semanticDeclineLabel": "Recusar"
     },
     "coreTree": {
         "expand": "Expandir nó",

@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Виключні умови ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Виключні умови",
         "P13FilterDialogRemoveFilterBtnTitle": "Видалити фільтр",
-        "P13FilterDialoAddFilterBtnTitle": "Додати фільтр",
+        "P13FilterDialogAddFilterBtnTitle": "Додати фільтр",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Скасувати",
         "P13GroupDialogHeader": "Групування",
@@ -627,16 +627,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Виберіть опцію"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Мінімальне значення слайдера {min}, максимальне значення {max}",
-        "valueminDetails": "Поточне значення: {value}",
-        "valuemaxDetails": "Поточне значення: {value}",
-        "valueNowDetails": "Поточне значення: {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Прийняти",
-        "semanticDeclineLabel": "Відхилити"
     },
     "coreTree": {
         "expand": "Розгорнути вузол",

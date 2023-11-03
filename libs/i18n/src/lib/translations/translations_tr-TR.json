@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Exclude ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Exclude",
         "P13FilterDialogRemoveFilterBtnTitle": "Filtre kaldır",
-        "P13FilterDialoAddFilterBtnTitle": "Filtre ekle",
+        "P13FilterDialogAddFilterBtnTitle": "Filtre ekle",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Vazgeç",
         "P13GroupDialogHeader": "Grup",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Bir seçenek seçin"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Kaydırıcının {min} minimum değeri, {max} maksimum değeri",
-        "valueminDetails": "Değer {value}",
-        "valuemaxDetails": "Değer {value}",
-        "valueNowDetails": "Geçerli değer  {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Kabul et",
-        "semanticDeclineLabel": "Reddet"
     },
     "coreTree": {
         "expand": "Expand node",

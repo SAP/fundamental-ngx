@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Изключи ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Exclude",
         "P13FilterDialogRemoveFilterBtnTitle": "Премахни Филтър",
-        "P13FilterDialoAddFilterBtnTitle": "Добави Филтър",
+        "P13FilterDialogAddFilterBtnTitle": "Добави Филтър",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Отмени",
         "P13GroupDialogHeader": "Групирай",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Изберете опция"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Минималната стойност на плъзгача е {min}, максималната стойност е {max}",
-        "valueminDetails": "Стойността е {value}",
-        "valuemaxDetails": "Стойността е {value}",
-        "valueNowDetails": "Текущата стойност е {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Приеми",
-        "semanticDeclineLabel": "Отхвърли"
     },
     "coreTree": {
         "expand": "Expand node",
