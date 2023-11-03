@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "निकालना ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "निकालना",
         "P13FilterDialogRemoveFilterBtnTitle": "फ़िल्टर हटाएं",
-        "P13FilterDialoAddFilterBtnTitle": "फ़िल्टर जोड़ें",
+        "P13FilterDialogAddFilterBtnTitle": "फ़िल्टर जोड़ें",
         "P13FilterDialogConfirmationBtnLabel": "ठीक है",
         "P13FilterDialogCancelBtnLabel": "रद्द करें",
         "P13GroupDialogHeader": "समूह",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "एक विकल्प चुनें"
-    },
-    "fnSlider": {
-        "minMaxDetails": "स्लाइडर न्यूनतम मूल्य {min}, अधिकतम मूल्य {max}",
-        "valueminDetails": "मूल्य {value}",
-        "valuemaxDetails": "मूल्य {value}",
-        "valueNowDetails": "वर्तमान मूल्य {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "स्वीकार करें",
-        "semanticDeclineLabel": "अस्वीकार करें"
     },
     "coreTree": {
         "expand": "Expand node",

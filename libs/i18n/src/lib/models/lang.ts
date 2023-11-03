@@ -617,7 +617,7 @@ export interface FdLanguage {
         P13FilterDialogExcludePanelTitleWithoutCount: FdLanguageKey;
         P13FilterDialogConfirmationBtnLabel: FdLanguageKey;
         P13FilterDialogRemoveFilterBtnTitle: FdLanguageKey;
-        P13FilterDialoAddFilterBtnTitle: FdLanguageKey;
+        P13FilterDialogAddFilterBtnTitle: FdLanguageKey;
         P13FilterDialogCancelBtnLabel: FdLanguageKey;
         P13GroupDialogHeader: FdLanguageKey;
         P13GroupDialogNoneSelectedColumnSelectPlaceholder: FdLanguageKey;
@@ -909,23 +909,6 @@ export interface FdLanguage {
     };
     platformSelect: {
         selectOptionLabel: FdLanguageKey;
-    };
-    fnSlider: {
-        /**
-         * @param min
-         * @param max
-         */
-        minMaxDetails: FdLanguageKey;
-        /** @param value */
-        valueminDetails: FdLanguageKey;
-        /** @param value */
-        valuemaxDetails: FdLanguageKey;
-        /** @param value */
-        valueNowDetails: FdLanguageKey;
-    };
-    fnSwitch: {
-        semanticAcceptLabel: FdLanguageKey;
-        semanticDeclineLabel: FdLanguageKey;
     };
     btpSearchField: {
         searchButtonLabel: FdLanguageKey;

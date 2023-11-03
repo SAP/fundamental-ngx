@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Exclude ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Exclude",
         "P13FilterDialogRemoveFilterBtnTitle": "Remove Filter",
-        "P13FilterDialoAddFilterBtnTitle": "Add Filter",
+        "P13FilterDialogAddFilterBtnTitle": "Add Filter",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Cancel",
         "P13GroupDialogHeader": "Group",
@@ -517,7 +517,7 @@
         "newFolderTitle": "New folder",
         "newFolderAtRootInputLabel": "Name of new folder",
         "newFolderAtFolderInputLabel": "Name of new folder inside of {folderName}",
-        "newFolderInputPlaceholder": "Type here..",
+        "newFolderInputPlaceholder": "Type here...",
         "newFolderInputErrorLabel": "Maximum {count} characters allowed",
         "newFolderDialogCreateBtnLabel": "Create",
         "newFolderDialogCancelBtnLabel": "Cancel",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Select an Option"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Slider minimum value is {min}, maximum value is {max}",
-        "valueminDetails": "Value is {value}",
-        "valuemaxDetails": "Value is {value}",
-        "valueNowDetails": "Current value is {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Accept",
-        "semanticDeclineLabel": "Decline"
     },
     "coreTree": {
         "expand": "Expand node",

@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Përjashto ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Përjashto",
         "P13FilterDialogRemoveFilterBtnTitle": "Hiq filtrin",
-        "P13FilterDialoAddFilterBtnTitle": "Shto filtrin",
+        "P13FilterDialogAddFilterBtnTitle": "Shto filtrin",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Anulo",
         "P13GroupDialogHeader": "Grupo",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Zgjidhni një opsion"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Vlera minimale e rrëshqitësit është {min}, vlera maksimale është {max}",
-        "valueminDetails": "Vlera është  {value}",
-        "valuemaxDetails": "Vlera është  {value}",
-        "valueNowDetails": "Vlera aktuale është  {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Pranoje",
-        "semanticDeclineLabel": "Rënia"
     },
     "coreTree": {
         "expand": "Expand node",

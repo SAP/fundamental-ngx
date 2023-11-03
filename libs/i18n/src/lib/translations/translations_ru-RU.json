@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Исключающие условия ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Исключающие условия",
         "P13FilterDialogRemoveFilterBtnTitle": "Удалить фильтр",
-        "P13FilterDialoAddFilterBtnTitle": "Добавить фильтр",
+        "P13FilterDialogAddFilterBtnTitle": "Добавить фильтр",
         "P13FilterDialogConfirmationBtnLabel": "ОК",
         "P13FilterDialogCancelBtnLabel": "Отмена",
         "P13GroupDialogHeader": "Группировка",
@@ -627,16 +627,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Выберите вариант"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Минимальное значение слайдера {min}, максимальное значение {max}",
-        "valueminDetails": "Значение равно {value}",
-        "valuemaxDetails": "Значение равно {value}",
-        "valueNowDetails": "Текущее значение: {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Принять",
-        "semanticDeclineLabel": "Отклонить"
     },
     "coreTree": {
         "expand": "Развернуть узел",

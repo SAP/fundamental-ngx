@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "Vyloučit ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "Vyloučit",
         "P13FilterDialogRemoveFilterBtnTitle": "Odstraňte filtr",
-        "P13FilterDialoAddFilterBtnTitle": "Přidat filtr",
+        "P13FilterDialogAddFilterBtnTitle": "Přidat filtr",
         "P13FilterDialogConfirmationBtnLabel": "OK",
         "P13FilterDialogCancelBtnLabel": "Zrušit",
         "P13GroupDialogHeader": "Skupina",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "Vyberte možnost"
-    },
-    "fnSlider": {
-        "minMaxDetails": "Minimální hodnota posuvníku je {min}, maximální hodnota je {max}",
-        "valueminDetails": "Hodnota je {hodnota}",
-        "valuemaxDetails": "Hodnota je {hodnota}",
-        "valueNowDetails": "Aktuální hodnota je {hodnota}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "Akceptovat",
-        "semanticDeclineLabel": "Odmítnout"
     },
     "coreTree": {
         "expand": "Expand node",

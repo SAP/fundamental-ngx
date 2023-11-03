@@ -443,7 +443,7 @@
         "P13FilterDialogExcludePanelTitleWithCount": "გამოტოვე ({count})",
         "P13FilterDialogExcludePanelTitleWithoutCount": "გამოტოვე",
         "P13FilterDialogRemoveFilterBtnTitle": "ფილტრის მოხსნა",
-        "P13FilterDialoAddFilterBtnTitle": "ფილტრის დამატება",
+        "P13FilterDialogAddFilterBtnTitle": "ფილტრის დამატება",
         "P13FilterDialogConfirmationBtnLabel": "კარგი",
         "P13FilterDialogCancelBtnLabel": "გაუქმება",
         "P13GroupDialogHeader": "ჯგუფი",
@@ -625,16 +625,6 @@
     },
     "platformSelect": {
         "selectOptionLabel": "აირჩიეთ ვარიანტი"
-    },
-    "fnSlider": {
-        "minMaxDetails": "სლაიდერის მინიმალური მნიშვნელობაა {min}, მაქსიმალური - {max}",
-        "valueminDetails": "მნიშვნელობა არის {value}",
-        "valuemaxDetails": "მნიშვნელობა არის {value}",
-        "valueNowDetails": "მიმდინარე მნიშვნელობა {value}"
-    },
-    "fnSwitch": {
-        "semanticAcceptLabel": "დათანხმება",
-        "semanticDeclineLabel": "უარყოფა"
     },
     "coreTree": {
         "expand": "Expand node",
