@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.1...v0.47.0-rc.2) (2023-11-03)
+
+
+### Features
+
+* **i18n:** using properties format instead of the json ([543eedc](https://github.com/SAP/fundamental-ngx/commit/543eedc830c46e66a108e96585c0e68ea2504dc7))
+
+
+
+
+
 # [0.47.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.0...v0.47.0-rc.1) (2023-11-02)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin
