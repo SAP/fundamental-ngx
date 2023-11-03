@@ -80,6 +80,7 @@
                 *ngIf="inputText && inputText.length > 0"
             >
                 <button
+                    tabindex="-1"
                     [attr.aria-hidden]="!mobile"
                     [attr.aria-label]="'platformSearchField.clearButtonTitle' | fdTranslate"
                     class="fdp-search-field__clear fd-button fd-button--transparent {{ appearance?.buttonClass }}"
@@ -98,6 +99,7 @@
                 *ngIf="forceSearchButton || isLoading || (!isLoading && !_isSearchDone)"
             >
                 <button
+                    tabindex="-1"
                     [attr.aria-hidden]="!mobile"
                     *ngIf="!disableSearch"
                     [attr.aria-label]="'platformSearchField.submitButtonTitle' | fdTranslate"
@@ -117,7 +119,6 @@
                 *ngIf="!disableRefresh && !isLoading && (_isRefresh || _isSearchDone)"
             >
                 <button
-                    [attr.aria-hidden]="!mobile"
                     [attr.aria-label]="'platformSearchField.synchronizeButtonTitle' | fdTranslate"
                     class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent {{
                         appearance?.buttonClass
