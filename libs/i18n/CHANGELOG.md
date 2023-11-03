@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.4...v0.47.0-rc.5) (2023-11-03)
+
+
+### Bug Fixes
+
+* **i18n:** added comments on the translations properties and removed unused keys ([#10880](https://github.com/SAP/fundamental-ngx/issues/10880)) ([1c8ed33](https://github.com/SAP/fundamental-ngx/commit/1c8ed336f4d603904af0f8870f3f94a7a07841a8))
+
+
+
+
+
 # [0.47.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.3...v0.47.0-rc.4) (2023-11-03)
 
 
