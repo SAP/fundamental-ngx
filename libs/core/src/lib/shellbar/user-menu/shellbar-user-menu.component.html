@@ -25,7 +25,7 @@
             ></fd-avatar>
         </button>
 
-        <fd-menu
+        <fd-menu *ngIf="userMenu"
             #menu
             [triggers]="triggers"
             [placement]="placement"
