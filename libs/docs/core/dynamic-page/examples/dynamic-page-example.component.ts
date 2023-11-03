@@ -3,10 +3,10 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -33,7 +33,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     ],
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         DynamicPageModule,
         BreadcrumbModule,
@@ -43,7 +43,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ContentDensityDirective,
         ToolbarSeparatorComponent,
         CdkScrollable,
-        IconModule,
+        IconComponent,
         InlineHelpModule,
         BarModule,
         MessageToastModule

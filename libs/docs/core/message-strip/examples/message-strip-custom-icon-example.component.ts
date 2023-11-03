@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MessageStripComponent, MessageStripIconDirective } from '@fundamental-ngx/core/message-strip';
 
 @Component({
@@ -11,6 +11,6 @@ import { MessageStripComponent, MessageStripIconDirective } from '@fundamental-n
         </fd-message-strip>
     `,
     standalone: true,
-    imports: [MessageStripComponent, MessageStripIconDirective, IconModule]
+    imports: [MessageStripComponent, MessageStripIconDirective, IconComponent]
 })
 export class MessageStripCustomIconExampleComponent {}

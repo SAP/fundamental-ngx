@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
     DATE_TIME_FORMATS,
@@ -37,7 +37,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [ButtonModule, DatePickerComponent, FormsModule, FdDatetimeModule]
+    imports: [ButtonComponent, DatePickerComponent, FormsModule, FdDatetimeModule]
 })
 export class DatePickerDisableFocusScrollExampleComponent {
     date: Nullable<FdDate> = FdDate.getNow();

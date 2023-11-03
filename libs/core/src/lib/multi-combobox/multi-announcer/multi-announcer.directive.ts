@@ -12,7 +12,7 @@ import { resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 export class MultiAnnouncerDirective {
     /** @hidden */
     @Input()
-    multiAnnouncerOptions: any[];
+    multiAnnouncerOptions: unknown[];
 
     /** @hidden */
     private _noResultsAnnounced = false;

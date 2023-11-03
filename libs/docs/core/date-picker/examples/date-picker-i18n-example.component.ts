@@ -1,6 +1,6 @@
 import { Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -66,7 +66,7 @@ const CUSTOM_DATETIME_FORMATS = {
     imports: [
         FormLabelComponent,
         SegmentedButtonModule,
-        ButtonModule,
+        ButtonComponent,
         DatePickerComponent,
         FormsModule,
         FdDatetimeModule

@@ -1,13 +1,12 @@
+import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
-import { ShellbarMenuItem } from '../model/shellbar-menu-item';
-import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf, NgFor } from '@angular/common';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
+import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 
 /**
  * The component that represents a product menu.
@@ -24,7 +23,7 @@ import { NgIf, NgFor } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonModule, ContentDensityDirective, MenuModule, NgFor, IconModule]
+    imports: [NgIf, ButtonComponent, ContentDensityDirective, MenuModule, NgFor, IconComponent]
 })
 export class ProductMenuComponent {
     /** Whether the popover should close when the escape key is pressed. */
@@ -81,7 +80,7 @@ export class ProductMenuComponent {
     menu: MenuComponent;
 
     /** @hidden */
-    itemClicked(item: any, event: MouseEvent): void {
+    itemClicked(item: ShellbarMenuItem, event: MouseEvent): void {
         if (this.closePopoverOnSelect) {
             this.menu.close();
         }

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
@@ -38,7 +38,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [CalendarComponent, FormsModule, ButtonModule, DatePipe, FdDatetimeModule]
+    imports: [CalendarComponent, FormsModule, ButtonComponent, DatePipe, FdDatetimeModule]
 })
 export class CalendarProgrammaticallyChangeExampleComponent {
     date: FdDate = this.datetimeAdapter.today();

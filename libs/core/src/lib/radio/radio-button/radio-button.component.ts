@@ -48,7 +48,7 @@ let uniqueId = 0;
     standalone: true,
     imports: [FormsModule, AsyncPipe]
 })
-export class RadioButtonComponent
+export class RadioButtonComponent<T = any>
     implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnDestroy, FormItemControl
 {
     /** @hidden */
@@ -105,7 +105,7 @@ export class RadioButtonComponent
      * The field is mandatory when working with reactive forms
      */
     @Input()
-    set selectedValue(val: any) {
+    set selectedValue(val: T) {
         this.currentValue = val;
         this._setNativeElementCheckedState();
     }
@@ -126,7 +126,7 @@ export class RadioButtonComponent
      * The field is mandatory
      */
     @Input()
-    value: any;
+    value: T;
 
     /** If it is a mandatory field */
     @Input()
@@ -148,7 +148,7 @@ export class RadioButtonComponent
     class: string;
 
     /** @hidden */
-    currentValue: any;
+    currentValue: T;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -178,18 +178,18 @@ export class RadioButtonComponent
 
     // ControlValueAccessor implementation
     /** @hidden */
-    onChange: any = (): void => {};
+    onChange = (value: T): void => {};
 
     /** @hidden */
-    onTouched: any = (): void => {};
+    onTouched = (): void => {};
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: (value: T) => void): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
@@ -200,7 +200,7 @@ export class RadioButtonComponent
     }
 
     /** @hidden */
-    writeValue(value: any): void {
+    writeValue(value: T): void {
         this.valueChange(value, false);
     }
 
@@ -232,7 +232,7 @@ export class RadioButtonComponent
     }
 
     /** @hidden */
-    valueChange(value: any, emitEvent = true): void {
+    valueChange(value: T, emitEvent = true): void {
         this.currentValue = value;
 
         this._setNativeElementCheckedState();

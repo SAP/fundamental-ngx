@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } 
 import { FormsModule } from '@angular/forms';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'rtl-switch',
@@ -13,7 +13,7 @@ import { SwitchModule } from '@fundamental-ngx/core/switch';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormLabelComponent, SwitchModule, FormsModule]
+    imports: [FormLabelComponent, SwitchComponent, FormsModule]
 })
 export class DirectionalityComponent implements OnInit {
     id: string;

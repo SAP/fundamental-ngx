@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
@@ -10,6 +10,6 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
     styleUrls: ['./platform-menu-example-styles.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [CdkScrollable, ScrollbarDirective, ButtonModule, PlatformMenuModule]
+    imports: [CdkScrollable, ScrollbarDirective, ButtonComponent, PlatformMenuModule]
 })
 export class PlatformMenuScrollingExampleComponent {}

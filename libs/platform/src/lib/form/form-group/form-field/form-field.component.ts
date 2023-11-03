@@ -35,7 +35,7 @@ import { map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
@@ -104,7 +104,7 @@ const formGroupChildProvider: Provider = {
         FormMessageComponent,
         FormLabelComponent,
         LinkComponent,
-        IconModule,
+        IconComponent,
         InlineHelpModule,
         AsyncPipe
     ]

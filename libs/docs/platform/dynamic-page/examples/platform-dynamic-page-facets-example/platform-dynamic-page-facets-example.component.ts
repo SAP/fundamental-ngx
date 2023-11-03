@@ -4,11 +4,11 @@ import { NgIf } from '@angular/common';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
@@ -30,7 +30,7 @@ import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         PlatformDynamicPageModule,
         DynamicPageHeaderTitleDirective,
@@ -48,7 +48,7 @@ import { PlatformDynamicPagePageOverflowService } from '../platform-dynamic-page
         RatingIndicatorModule,
         ObjectStatusComponent,
         ObjectNumberModule,
-        IconModule,
+        IconComponent,
         InlineHelpModule,
         BarModule
     ]

@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
         TableModule,
         NgFor,
         LinkComponent,
-        IconModule,
+        IconComponent,
         PaginationModule,
         ToolbarItemDirective
     ]

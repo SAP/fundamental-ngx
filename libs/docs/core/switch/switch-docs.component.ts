@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 import {
     CodeExampleComponent,
@@ -52,7 +52,7 @@ const semanticSwitchExampleTs = 'semantic-switch-example/semantic-switch-example
         SemanticSwitchExampleComponent,
         SwitchFormsExampleComponent,
         PlayGroundComponent,
-        SwitchModule,
+        SwitchComponent,
         FormsModule,
         ContentDensityDirective
     ]

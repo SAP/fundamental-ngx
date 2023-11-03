@@ -3,7 +3,7 @@ import { isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import equal from 'fast-deep-equal';
 
 /** @hidden */
-export function lookupValue(item: any, lookupKey: string): string {
+export function lookupValue(item: unknown, lookupKey: string): string {
     if (isSelectItem(item)) {
         return lookupKey && item ? item.value[lookupKey] : item.value;
     } else {
@@ -12,7 +12,7 @@ export function lookupValue(item: any, lookupKey: string): string {
 }
 
 /** @hidden */
-export function displayValue(item: any, displayKey: string): string {
+export function displayValue(item: unknown, displayKey: string): string {
     if (isSelectItem(item)) {
         return item.label;
     } else if (isJsObject(item) && displayKey) {
@@ -20,12 +20,12 @@ export function displayValue(item: any, displayKey: string): string {
 
         return isFunction(currentItem) ? currentItem() : currentItem;
     } else {
-        return item;
+        return item as string;
     }
 }
 
 /** @hidden */
-export function objectGet(obj: any, is: string | string[] | undefined): any {
+export function objectGet(obj: unknown, is: string | string[] | undefined): any {
     if (!isJsObject(obj)) {
         return obj;
     } else if (isString(is)) {

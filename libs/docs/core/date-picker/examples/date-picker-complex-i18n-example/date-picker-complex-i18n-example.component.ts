@@ -2,7 +2,7 @@ import { Component, LOCALE_ID, ViewChild } from '@angular/core';
 
 // Dayjs locale data required for this example
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -30,7 +30,7 @@ import 'dayjs/locale/pl';
         FormLabelComponent,
         SegmentedButtonModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         DatePickerComponent,
         FdDatetimeModule
     ]

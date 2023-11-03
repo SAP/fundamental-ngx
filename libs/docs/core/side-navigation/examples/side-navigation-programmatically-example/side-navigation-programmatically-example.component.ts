@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 
@@ -7,7 +7,7 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
     selector: 'fd-side-navigation-programmatically-example',
     templateUrl: './side-navigation-programmatically-example.component.html',
     standalone: true,
-    imports: [SideNavigationModule, NestedListModule, ButtonModule]
+    imports: [SideNavigationModule, NestedListModule, ButtonComponent]
 })
 export class SideNavigationProgrammaticallyExampleComponent {
     open = true;

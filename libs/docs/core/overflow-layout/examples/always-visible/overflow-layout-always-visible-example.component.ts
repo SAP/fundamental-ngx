@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
@@ -10,7 +10,7 @@ import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [OverflowLayoutModule, NgFor, InfoLabelModule, ButtonModule]
+    imports: [OverflowLayoutModule, NgFor, InfoLabelModule, ButtonComponent]
 })
 export class OverflowLayoutAlwaysVisibleExampleComponent {
     itemsToRender: { forcedVisibility: boolean }[] = new Array(15).fill({ forcedVisibility: false });

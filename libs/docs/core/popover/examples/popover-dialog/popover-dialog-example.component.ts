@@ -1,9 +1,9 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component, TemplateRef } from '@angular/core';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -13,7 +13,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     templateUrl: './popover-dialog-example.component.html',
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         DialogModule,
         TitleComponent,
         CdkScrollable,
@@ -22,7 +22,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         PopoverControlComponent,
         InitialFocusDirective,
         PopoverBodyComponent,
-        MultiInputModule
+        MultiInputComponent
     ]
 })
 export class PopoverDialogExampleComponent {

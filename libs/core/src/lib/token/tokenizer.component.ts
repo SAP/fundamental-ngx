@@ -43,7 +43,7 @@ import {
     applyCssClass,
     resizeObservable
 } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -66,7 +66,7 @@ import { TokenComponent } from './token.component';
         NgIf,
         NgTemplateOutlet,
         InputGroupModule,
-        ButtonModule,
+        ButtonComponent,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,

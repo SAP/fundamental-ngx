@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     FD_FLEXIBLE_LAYOUT_CONFIG,
     FlexibleColumnLayout,
@@ -34,7 +34,7 @@ const CustomFlexibleCardLayoutConfig: FlexibleLayoutConfig = {
         }
     ],
     standalone: true,
-    imports: [ButtonModule, NgIf, FlexibleColumnLayoutModule]
+    imports: [ButtonComponent, NgIf, FlexibleColumnLayoutModule]
 })
 export class FlexibleColumnLayoutCustomConfigExampleComponent {
     /**

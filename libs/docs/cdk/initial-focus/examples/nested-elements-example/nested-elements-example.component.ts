@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import {
@@ -44,7 +44,7 @@ import { SliderComponent } from '@fundamental-ngx/core/slider';
     ],
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         SelectModule,
         InitialFocusDirective,

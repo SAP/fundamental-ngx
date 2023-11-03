@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 
@@ -8,6 +8,6 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
     templateUrl: './tab-selection-example.component.html',
     styleUrls: ['tab-selection-example.component.scss'],
     standalone: true,
-    imports: [TabsModule, FormLabelComponent, ButtonModule]
+    imports: [TabsModule, FormLabelComponent, ButtonComponent]
 })
 export class TabSelectionExampleComponent {}

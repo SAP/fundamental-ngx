@@ -1,7 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -11,7 +11,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './auto-label-dialog-example.component.html',
     standalone: true,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, ButtonModule]
+    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, BarModule, ButtonComponent]
 })
 export class AutoLabelDialogExampleComponent {
     confirmationReason: string;

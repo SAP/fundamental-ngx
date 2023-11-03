@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NgFor } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     PlatformValueHelpDialogModule,
     ValueHelpDialogDataSource,
@@ -47,7 +47,7 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
     selector: 'fdp-platform-vhd-token-example',
     templateUrl: './platform-vhd-token-example.component.html',
     standalone: true,
-    imports: [ButtonModule, PlatformValueHelpDialogModule, NgFor]
+    imports: [ButtonComponent, PlatformValueHelpDialogModule, NgFor]
 })
 export class PlatformVhdTokenExampleComponent implements OnInit {
     filters: FilterData[];

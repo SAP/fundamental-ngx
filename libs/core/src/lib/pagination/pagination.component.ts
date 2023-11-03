@@ -1,4 +1,4 @@
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
 import { BooleanInput, coerceArray, coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import {
     ChangeDetectionStrategy,
@@ -299,7 +299,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     /** @hidden */
-    skipItemPredicate(item: any): boolean {
+    skipItemPredicate(item: ElementRef & FocusableOption): boolean {
         return (
             getComputedStyle(item.nativeElement).display === 'none' ||
             item.nativeElement.getAttribute('disabled') === 'true'

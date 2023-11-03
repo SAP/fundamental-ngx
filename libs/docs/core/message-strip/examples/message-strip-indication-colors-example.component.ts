@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     MessageStripComponent,
     MessageStripIconDirective,
@@ -25,7 +25,7 @@ import {
         `
     ],
     standalone: true,
-    imports: [NgFor, MessageStripComponent, MessageStripIconDirective, IconModule]
+    imports: [NgFor, MessageStripComponent, MessageStripIconDirective, IconComponent]
 })
 export class MessageStripIndicationColorsExampleComponent {
     indicationColors = _messageStripIndicationColors;

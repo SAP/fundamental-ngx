@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core/message-box';
 
 @Component({
@@ -12,7 +12,7 @@ import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core/message
         MessageBoxService
     ],
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class SemanticTypesExampleComponent {
     title = 'Fruit facts';

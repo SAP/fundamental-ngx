@@ -36,12 +36,12 @@ import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { TimeModule } from '@fundamental-ngx/core/time';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { DatetimePickerMobileComponent } from './datetime-picker-mobile/datetime-picker-mobile.component';
@@ -94,8 +94,8 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
         FormsModule,
         NgIf,
         FormMessageComponent,
-        SegmentedButtonModule,
-        ButtonModule,
+        SegmentedButtonComponent,
+        ButtonComponent,
         CalendarComponent,
         NgClass,
         TimeModule,

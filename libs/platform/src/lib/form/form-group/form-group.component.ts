@@ -16,6 +16,7 @@
  *
  *
  */
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -41,12 +42,21 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormGroup, NgForm, FormsModule } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { AbstractControl, ControlContainer, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { resizeObservable } from '@fundamental-ngx/cdk/utils';
+import { AsyncPipe, KeyValuePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { FormField } from '@fundamental-ngx/cdk/forms';
+import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
+import {
+    ContentDensityModule,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     ColumnLayout,
     FieldHintOptions,
@@ -56,10 +66,8 @@ import {
     HintOptions,
     PlatformFormField
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { getField, getFormField, isFieldChild, isFieldGroupChild, isFieldGroupWrapperChild } from '../form-helpers';
-import { FormFieldErrorDirective } from './form-field-error/form-field-error.directive';
-import { FormFieldComponent } from './form-field/form-field.component';
+import { Field, FieldColumn, FieldGroup } from '../models/field.model';
 import {
     DefaultGapLayout,
     DefaultHorizontalFieldLayout,
@@ -67,22 +75,13 @@ import {
     DefaultVerticalFieldLayout,
     FORM_GROUP_CHILD_FIELD_TOKEN
 } from './constants';
-import { generateColumnClass, normalizeColumnLayout } from './helpers';
-import { FormFieldLayoutService } from './services/form-field-layout.service';
 import { FDP_FORM_FIELD_HINT_OPTIONS_DEFAULT } from './fdp-form.tokens';
-import {
-    contentDensityObserverProviders,
-    ContentDensityObserver,
-    ContentDensityModule
-} from '@fundamental-ngx/core/content-density';
-import { FormField } from '@fundamental-ngx/cdk/forms';
-import { Field, FieldColumn, FieldGroup } from '../models/field.model';
-import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { LinkComponent } from '@fundamental-ngx/core/link';
+import { FormFieldErrorDirective } from './form-field-error/form-field-error.directive';
+import { FormFieldComponent } from './form-field/form-field.component';
 import { FormGroupHeaderComponent } from './form-group-header/form-group-header.component';
-import { NgIf, NgTemplateOutlet, NgFor, AsyncPipe, KeyValuePipe } from '@angular/common';
+import { generateColumnClass, normalizeColumnLayout } from './helpers';
+import { FieldGroupRowValuePipe } from './pipes/field-group-row-value.pipe';
+import { FormFieldLayoutService } from './services/form-field-layout.service';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -182,7 +181,7 @@ let formGroupUniqueId = 0;
         NgFor,
         FormGroupHeaderComponent,
         LinkComponent,
-        IconModule,
+        IconComponent,
         InlineHelpModule,
         AsyncPipe,
         KeyValuePipe,

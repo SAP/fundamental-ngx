@@ -10,7 +10,7 @@ import {
 } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     PopoverBodyComponent,
     PopoverBodyFooterDirective,
@@ -31,7 +31,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         PopoverControlComponent,
         AvatarComponent,
         PopoverBodyComponent,
-        IconModule,
+        IconComponent,
         PopoverBodyHeaderDirective,
         BarComponent,
         ButtonBarComponent,

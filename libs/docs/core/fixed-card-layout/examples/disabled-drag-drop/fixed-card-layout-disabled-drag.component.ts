@@ -2,7 +2,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
@@ -17,7 +17,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         CdkScrollable,
         ScrollbarDirective,
         FixedCardLayoutModule,

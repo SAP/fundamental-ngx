@@ -2,7 +2,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component, TemplateRef } from '@angular/core';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -20,7 +20,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         IllustratedMessageModule,
         BarModule,
         InitialFocusDirective,
-        ButtonModule
+        ButtonComponent
     ]
 })
 export class IllustratedMessageDialogExampleComponent {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FirstDialogExampleComponent } from './first-dialog-example.component';
 
@@ -7,7 +7,7 @@ import { FirstDialogExampleComponent } from './first-dialog-example.component';
     selector: 'fd-dialog-stacked-example',
     template: '<button fd-button label="Open First Dialog" (click)="openDialog()"></button>',
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class DialogStackedExampleComponent {
     constructor(private _dialogService: DialogService) {}

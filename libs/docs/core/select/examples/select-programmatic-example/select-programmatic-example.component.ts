@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
@@ -8,7 +8,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     templateUrl: './select-programmatic-example.component.html',
     styleUrls: ['./select-programmatic-example.component.scss'],
     standalone: true,
-    imports: [ButtonModule, SelectModule, NgFor]
+    imports: [ButtonComponent, SelectModule, NgFor]
 })
 export class SelectProgrammaticExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

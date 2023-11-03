@@ -1,9 +1,9 @@
-import { EventEmitter, InjectionToken, QueryList, ElementRef } from '@angular/core';
+import { ElementRef, EventEmitter, InjectionToken, QueryList } from '@angular/core';
 
-import { OptionComponent } from './option/option.component';
-import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { Subject } from 'rxjs';
+import { OptionComponent } from './option/option.component';
 
 export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInterface');
 
@@ -11,12 +11,12 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInter
  * Select Interface to have typing and avoid circular dependency between
  * SelectComponent <==> SelectMobileComponent
  */
-export interface SelectInterface extends MobileMode {
+export interface SelectInterface<TOption = any> extends MobileMode {
     typeaheadDebounceInterval: number;
     selected: OptionComponent;
     mobileConfig: MobileModeConfig;
-    _options: QueryList<any>;
-    _destroy: any;
+    _options: QueryList<TOption>;
+    _destroy: Subject<void>;
     _optionPanel: ElementRef;
     _isOpen: boolean;
     _calculatedMaxHeight: number;

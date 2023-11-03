@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
 
 @Component({
@@ -7,7 +7,7 @@ import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/
     templateUrl: './carousel-loading-content-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CarouselComponent, CarouselItemComponent, ButtonModule]
+    imports: [CarouselComponent, CarouselItemComponent, ButtonComponent]
 })
 export class CarouselLoadingContentExampleComponent {
     loading = true;

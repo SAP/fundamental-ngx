@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 
 @Component({
@@ -7,6 +7,6 @@ import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow
     templateUrl: './micro-process-flow-object-between-nodes-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MicroProcessFlowModule, IconModule]
+    imports: [MicroProcessFlowModule, IconComponent]
 })
 export class MicroProcessFlowObjectBetweenNodesExampleComponent {}

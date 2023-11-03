@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ComboboxItem } from '@fundamental-ngx/core/combobox';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
@@ -20,7 +20,7 @@ export interface ExampleItem {
     selector: 'fdp-combobox-byline-example',
     templateUrl: './combobox-byline-example.component.html',
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, ListModule, IconModule, JsonPipe]
+    imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, ListModule, IconComponent, JsonPipe]
 })
 export class ComboboxBylineExampleComponent {
     dataSource: ExampleItem[] = [
