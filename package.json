@@ -93,7 +93,7 @@
         "@nx/js": "16.9.1",
         "@nx/linter": "16.9.1",
         "@nx/plugin": "16.9.1",
-        "@nx/workspace": "16.9.1",
+        "@nx/workspace": "17.0.3",
         "@schematics/angular": "16.2.4",
         "@swc-node/register": "1.6.8",
         "@swc/cli": "0.1.62",
