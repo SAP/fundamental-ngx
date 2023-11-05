@@ -86,7 +86,7 @@
         "@commitlint/cli": "17.7.1",
         "@commitlint/config-conventional": "17.7.0",
         "@sap-ui/common-css": "0.32.0-rc.7",
-        "@jsdevtools/npm-publish": "2.2.2",
+        "@jsdevtools/npm-publish": "3.0.1",
         "@nx/devkit": "16.9.1",
         "@nx/eslint-plugin": "16.9.1",
         "@nx/jest": "16.9.1",
