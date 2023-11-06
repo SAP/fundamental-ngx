@@ -26,6 +26,7 @@ export const FD_LANGUAGE_CZECH: FdLanguage = {
         calendarYearsRangeViewDescription: 'Výběr rozsahu let'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Multi Value Combo Box',
         selectAllLabel: 'Vybrat vše ({{selectedItems}} z {{totalItems}})'
     },
     coreCarousel: {

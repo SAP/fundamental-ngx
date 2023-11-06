@@ -23,6 +23,7 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Jahresbereichsauswahl'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Kombinationsfeld mit mehreren Werten',
         selectAllLabel: 'Alle auswählen ({{selectedItems}} von {{totalItems}})'
     },
     coreCarousel: {

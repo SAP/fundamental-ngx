@@ -26,6 +26,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स',
         selectAllLabel: 'सबका चयन करें'
     },
     coreCarousel: {

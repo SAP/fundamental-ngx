@@ -26,6 +26,7 @@ export const FD_LANGUAGE_GEORGIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'წელთა შუალედის არჩევა'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'მრავალ ღირებულების კომბინირებული ყუთი',
         selectAllLabel: 'ყველას არჩევა ({{selectedItems}} {{totalItems}}-დან)'
     },
     coreCarousel: {

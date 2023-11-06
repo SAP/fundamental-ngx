@@ -26,6 +26,7 @@ export const FD_LANGUAGE_ALBANIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Zgjedhësi i shtrirjes së viteve'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Kutia e kombinuar me shumë vlera',
         selectAllLabel: 'Selekto të gjitha ({{ selectedItems }} nga {{ totalItems }})'
     },
     coreCarousel: {

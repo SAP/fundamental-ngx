@@ -26,6 +26,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         calendarYearsRangeViewDescription: '年份范围选择器'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: '多值组合盒',
         selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
     },
     coreCarousel: {

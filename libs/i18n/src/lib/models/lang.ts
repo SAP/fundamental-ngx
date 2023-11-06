@@ -67,6 +67,7 @@ export interface FdLanguage {
         calendarYearsRangeViewDescription: FdLanguageKey;
     };
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: FdLanguageKey;
         selectAllLabel: FdLanguageKey;
     };
     coreCarousel: {
