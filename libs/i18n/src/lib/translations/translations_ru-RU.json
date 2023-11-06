@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "Выбор диапазона лет"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "Поле со списком с несколькими значениями",
         "selectAllLabel": "Выбрать все ({selectedItems} из {totalItems})"
     },
     "coreCarousel": {

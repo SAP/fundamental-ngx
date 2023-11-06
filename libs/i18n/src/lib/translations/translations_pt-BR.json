@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "Seletor de intervalo de anos"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "Caixa de combinação de vários valores",
         "selectAllLabel": "Selecionar tudo ({selectedItems} de {totalItems})"
     },
     "coreCarousel": {
