@@ -29,6 +29,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Избор на обхват на години'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Комбинирана кутия с множество стойности',
         selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
     },
     coreCarousel: {

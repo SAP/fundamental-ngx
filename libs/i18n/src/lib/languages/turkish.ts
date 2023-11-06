@@ -26,6 +26,7 @@ export const FD_LANGUAGE_TURKISH: FdLanguage = {
         calendarYearsRangeViewDescription: 'Yıl Aralığı Seçici'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Çoklu Değer Açılan Kutu',
         selectAllLabel: 'Hepsini seç ({{selectedItems}}/{{totalItems}})'
     },
     coreCarousel: {

@@ -26,6 +26,7 @@ export const FD_LANGUAGE_ITALIAN: FdLanguage = {
         calendarYearsRangeViewDescription: "Selettore dell'intervallo di anni"
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Casella combinata multivalore',
         selectAllLabel: 'Seleziona tutto ({{selectedItems}} di {{totalItems}})'
     },
     coreCarousel: {

@@ -29,6 +29,7 @@ export const FD_LANGUAGE_RUSSIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Выбор диапазона лет'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Поле со списком с несколькими значениями',
         selectAllLabel: 'Выбрать все ({{selectedItems}} из {{totalItems}})'
     },
     coreCarousel: {

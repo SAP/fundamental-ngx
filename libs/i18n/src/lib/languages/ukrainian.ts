@@ -28,6 +28,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Вибір діапазону років'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Багатозначне поле зі списком',
         selectAllLabel: 'Вибрати все ({{selectedItems}} з {{totalItems}})'
     },
     coreCarousel: {
