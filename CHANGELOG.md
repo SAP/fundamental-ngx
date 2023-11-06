@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.8...v0.47.0-rc.9) (2023-11-06)
+
+
+### Bug Fixes
+
+* **core:** fd-shellbar user menu showing dot for customized user menu ([#10888](https://github.com/SAP/fundamental-ngx/issues/10888)) ([d9ab066](https://github.com/SAP/fundamental-ngx/commit/d9ab066038c0dd3cc6bd83cfa1b6bec9f982eb58))
+
+
+
+
+
 # [0.47.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.7...v0.47.0-rc.8) (2023-11-05)
 
 **Note:** Version bump only for package fundamental-ngx
