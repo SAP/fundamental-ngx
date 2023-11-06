@@ -646,8 +646,6 @@ export interface FdLanguage {
         deselectAllCheckboxLabel: FdLanguageKey;
         deselectSingleRow: FdLanguageKey;
         selectSingleRow: FdLanguageKey;
-        deselectSingleRowTitle: FdLanguageKey;
-        selectSingleRowTitle: FdLanguageKey;
     };
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: FdLanguageKey;

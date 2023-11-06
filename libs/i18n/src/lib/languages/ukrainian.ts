@@ -690,9 +690,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         selectAllCheckboxLabel: 'Вибрати все',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'Щоб скасувати вибір, натисніть пробіл',
-        selectSingleRow: 'Щоб вибрати рядок, натисніть пробіл',
-        deselectSingleRowTitle: 'Клацніть, щоб зняти виділення',
-        selectSingleRowTitle: 'Клацніть, щоб виділити рядок'
+        selectSingleRow: 'Щоб вибрати рядок, натисніть пробіл'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',
