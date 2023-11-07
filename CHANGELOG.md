@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.11...v0.47.0-rc.12) (2023-11-07)
+
+
+### Bug Fixes
+
+* **btp:** tool header styles discrepancy and updated overflows ([#10904](https://github.com/SAP/fundamental-ngx/issues/10904)) ([759a77c](https://github.com/SAP/fundamental-ngx/commit/759a77c972f0e43f27696edb26bcb04a621e5a53))
+* **core:** multi input addon aria hidden ([#10914](https://github.com/SAP/fundamental-ngx/issues/10914)) ([f9e28b6](https://github.com/SAP/fundamental-ngx/commit/f9e28b6dc63e3fc65fc621dd73f67a76ca5877bf))
+
+
+### BREAKING CHANGES
+
+* **btp:** ToolHeaderActionsDirective has been removed
+
+* fix(btp,docs): fixed too header docs and incorrect content density type in auto mode
+
+* chore: formatting
+
+* fix(btp): fixed visibility of the second title on portrait tablet
+
+
+
+
+
 # [0.47.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.10...v0.47.0-rc.11) (2023-11-07)
 
 
