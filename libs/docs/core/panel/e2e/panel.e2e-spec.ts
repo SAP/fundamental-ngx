@@ -7,8 +7,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { PanelPo } from './panel.po';
 
@@ -23,7 +22,7 @@ describe('Panel test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(panelPage.root);
+        await panelPage.waitForRoot();
         await waitForElDisplayed(panelPage.title);
     }, 1);
 

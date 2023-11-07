@@ -10,8 +10,7 @@ import {
     mouseHoverElement,
     refreshPage,
     waitForElDisplayed,
-    waitForNotPresent,
-    waitForPresent
+    waitForNotPresent
 } from '../../../../../e2e';
 import { MenuPo } from './menu.po';
 
@@ -43,7 +42,7 @@ describe('Menu test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(menuPage.root);
+        await menuPage.waitForRoot();
         await waitForElDisplayed(menuPage.title);
     }, 1);
 

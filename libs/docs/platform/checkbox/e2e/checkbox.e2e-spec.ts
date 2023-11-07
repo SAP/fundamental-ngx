@@ -42,13 +42,13 @@ describe('Checkbox test suite', () => {
 
     beforeAll(async () => {
         await checkboxPage.open();
-        await waitForPresent(checkboxPage.root);
+        await checkboxPage.waitForRoot();
         await waitForElDisplayed(checkboxPage.title);
     }, 1);
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(checkboxPage.root);
+        await checkboxPage.waitForRoot();
         await waitForElDisplayed(checkboxPage.title);
     }, 1);
 

@@ -8,8 +8,7 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     disableSelectModeValueTestText,
@@ -53,7 +52,7 @@ describe('Select test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(selectPage.root);
+        await selectPage.waitForRoot();
         await waitForElDisplayed(selectPage.title);
     }, 2);
 

@@ -13,8 +13,7 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { fdTypeOptions, iconOptions, testText } from './button-contents';
 import { buttonPlaygroundTag } from './button-tags';
@@ -45,7 +44,7 @@ describe('Button test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(buttonPage.root);
+        await buttonPage.waitForRoot();
         await waitForElDisplayed(buttonPage.title);
     }, 1);
 

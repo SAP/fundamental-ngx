@@ -9,8 +9,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     ResultsArr2,
@@ -54,7 +53,7 @@ describe('Pagination test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(paginationPage.root);
+        await paginationPage.waitForRoot();
         await waitForElDisplayed(paginationPage.title);
     }, 1);
 

@@ -57,7 +57,7 @@ describe('Verify Switch component', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(switchPage.root);
+        await switchPage.waitForRoot();
         await waitForElDisplayed(switchPage.title);
     }, 1);
 

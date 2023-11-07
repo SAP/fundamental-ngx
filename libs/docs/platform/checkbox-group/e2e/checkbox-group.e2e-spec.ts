@@ -12,8 +12,7 @@ import {
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     countriesArr,
@@ -60,13 +59,13 @@ describe('Checkbox group test suite', () => {
 
     beforeAll(async () => {
         await checkboxGroupPage.open();
-        await waitForPresent(checkboxGroupPage.root);
+        await checkboxGroupPage.waitForRoot();
         await waitForElDisplayed(checkboxGroupPage.title);
     }, 2);
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(checkboxGroupPage.root);
+        await checkboxGroupPage.waitForRoot();
         await waitForElDisplayed(checkboxGroupPage.title);
     }, 2);
 

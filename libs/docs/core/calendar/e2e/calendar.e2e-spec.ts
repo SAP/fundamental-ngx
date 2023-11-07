@@ -13,8 +13,7 @@ import {
     pause,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     activeClass,
@@ -85,7 +84,7 @@ describe('calendar test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(calendarPage.root);
+        await calendarPage.waitForRoot();
         await waitForElDisplayed(calendarPage.title);
     }, 1);
 

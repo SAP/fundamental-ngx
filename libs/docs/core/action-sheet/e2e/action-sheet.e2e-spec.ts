@@ -13,8 +13,7 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     waitForElDisplayed,
-    waitForNotDisplayed,
-    waitForPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 
 describe('Action sheet test suite', () => {
@@ -34,7 +33,7 @@ describe('Action sheet test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(actionSheetPage.root);
+        await actionSheetPage.waitForRoot();
         await waitForElDisplayed(actionSheetPage.title);
     }, 1);
 

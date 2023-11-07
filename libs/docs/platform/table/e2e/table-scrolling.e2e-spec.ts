@@ -8,8 +8,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { runCommonTests } from './table-common-tests';
 import { tableCellArr2, testText2 } from './table-contents';
@@ -35,7 +34,7 @@ describe('Table component test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(tablePage.root);
+        await tablePage.waitForRoot();
         await waitForElDisplayed(tablePage.title);
     }, 1);
 

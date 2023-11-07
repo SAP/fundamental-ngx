@@ -5,8 +5,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { blockExamples } from './side-navigation-content';
 import { SideNavigationPo } from './side-navigation.po';
@@ -40,7 +39,7 @@ describe('Side-navigation test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(sideNavigationPage.root);
+        await sideNavigationPage.waitForRoot();
         await waitForElDisplayed(sideNavigationPage.title);
     }, 1);
 

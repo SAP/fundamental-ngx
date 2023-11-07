@@ -13,8 +13,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { sections } from './step-input-content';
 import { StepInputPo } from './step-input.po';
@@ -41,7 +40,7 @@ describe('Step input component test suit', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(stepInputPage.root);
+        await stepInputPage.waitForRoot();
         await waitForElDisplayed(stepInputPage.title);
     }, 2);
 

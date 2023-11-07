@@ -16,11 +16,11 @@ import {
     isElementClickable,
     isElementDisplayed,
     isEnabled,
+    pause,
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { alertText, componentExampleArr, dateTestText, tableCellArr, tableCellArr2, testText } from './table-content';
 import { TablePo } from './table.po';
@@ -71,7 +71,7 @@ describe('Table test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(tablePage.root);
+        await tablePage.waitForRoot();
         await waitForElDisplayed(tablePage.title);
     }, 1);
 
@@ -142,14 +142,18 @@ describe('Table test suite', () => {
         it('should check that table sort work correctly', async () => {
             await scrollIntoView(tableCustomColumnsExample);
             await click(tableCustomColumnsExample + button);
+            await pause(500);
             await click(dialogContent + button, 1);
             await click(dialogContent + button, 2);
+            await pause(500);
             const rowsDesc: string[] = await getTextArr(tableCustomColumnsExample + ' thead .fd-table__cell');
             await expect(await checkSortDirection(rowsDesc, 'desc')).toBe(true);
 
             await click(tableCustomColumnsExample + button);
+            await pause(500);
             await click(dialogContent + button);
             await click(dialogContent + button, 2);
+            await pause(500);
             const rowsAsc: string[] = await getTextArr(tableCustomColumnsExample + ' thead .fd-table__cell');
             await expect(await checkSortDirection(rowsAsc, 'asc')).toBe(true);
         });

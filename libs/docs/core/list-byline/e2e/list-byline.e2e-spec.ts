@@ -5,8 +5,7 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { ListBylinePo } from './list-byline.po';
 
@@ -21,7 +20,7 @@ describe('List byline test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(listBylinePage.root);
+        await listBylinePage.waitForRoot();
         await waitForElDisplayed(listBylinePage.title);
     }, 1);
 

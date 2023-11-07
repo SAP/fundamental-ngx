@@ -14,8 +14,7 @@ import {
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { PopoverPo } from './popover.po';
 
@@ -93,7 +92,7 @@ describe('Popover test suite', () => {
 
     afterEach(async () => {
         await refreshPage(true);
-        await waitForPresent(popoverPage.root);
+        await popoverPage.waitForRoot();
         await waitForElDisplayed(popoverPage.title);
     }, 1);
 

@@ -10,8 +10,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { IconTabBarPO } from './icon-tab-bar.po';
 
@@ -50,7 +49,7 @@ describe('Icon Tab Bar component test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(iconTabBarPage.root);
+        await iconTabBarPage.waitForRoot();
         await waitForElDisplayed(iconTabBarPage.title);
     }, 2);
 

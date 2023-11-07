@@ -16,8 +16,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { blockExamples } from './date-picker-contents';
 import { currentYear, getCurrentItemIndex, getCurrentMonth, getNextDay, invalidDate } from './date-picker-tags';
@@ -67,7 +66,7 @@ xdescribe('Date picker suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(datePickerPage.root);
+        await datePickerPage.waitForRoot();
         await waitForElDisplayed(datePickerPage.title);
     }, 1);
 
@@ -97,7 +96,7 @@ xdescribe('Date picker suite', () => {
             ) {
                 await checkChoosingDate(blockExamples[i]);
                 await refreshPage();
-                await waitForPresent(datePickerPage.root);
+                await datePickerPage.waitForRoot();
                 await waitForElDisplayed(datePickerPage.title);
             }
         }

@@ -4,8 +4,7 @@ import {
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { LinkPo } from './link.po';
 
@@ -19,7 +18,7 @@ describe('Link test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(linkPage.root);
+        await linkPage.waitForRoot();
         await waitForElDisplayed(linkPage.title);
     }, 1);
 

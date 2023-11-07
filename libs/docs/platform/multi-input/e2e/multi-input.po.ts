@@ -5,8 +5,7 @@ import {
     PlatformBaseComponentPo,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 
 export class MultiInputPo extends PlatformBaseComponentPo {
@@ -42,9 +41,9 @@ export class MultiInputPo extends PlatformBaseComponentPo {
             ? `//div[@title="${name}"]/../..`
             : `//span[@title="${name}"]/..`;
 
-    async expandDropdown(dropDownSelector: string, index: number = 0, usePause = false): Promise<void> {
+    async expandDropdown(dropDownSelector: string, index: number = 0): Promise<void> {
         await sendKeys(['Escape']);
-        usePause && (await pause(300));
+        await pause(300);
         await scrollIntoView(dropDownSelector, index);
         await click(dropDownSelector, index);
         await waitForElDisplayed(this.expandedDropdown);
@@ -58,7 +57,7 @@ export class MultiInputPo extends PlatformBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

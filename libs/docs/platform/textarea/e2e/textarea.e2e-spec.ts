@@ -20,7 +20,6 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForPresent,
     waitTextToBePresentInValue
 } from '../../../../../e2e';
 import {
@@ -79,7 +78,7 @@ describe('Verify Textarea component', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(textareaPage.root);
+        await textareaPage.waitForRoot();
         await waitForElDisplayed(textareaPage.title);
     }, 1);
 

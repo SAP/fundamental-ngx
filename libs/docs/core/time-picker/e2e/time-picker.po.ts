@@ -1,4 +1,4 @@
-import { click, CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { click, CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class TimePickerPo extends CoreBaseComponentPo {
     url = '/time-picker';
@@ -51,7 +51,7 @@ export class TimePickerPo extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

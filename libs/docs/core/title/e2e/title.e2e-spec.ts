@@ -1,10 +1,4 @@
-import {
-    getAttributeByName,
-    getElementClass,
-    refreshPage,
-    waitForElDisplayed,
-    waitForPresent
-} from '../../../../../e2e';
+import { getAttributeByName, getElementClass, refreshPage, waitForElDisplayed } from '../../../../../e2e';
 import { titleLevels, titleLevelsReversed } from './title-contents';
 import { TitlePo } from './title.po';
 
@@ -18,7 +12,7 @@ describe('Wizard component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(titlePage.root);
+        await titlePage.waitForRoot();
         await waitForElDisplayed(titlePage.title);
     }, 2);
 

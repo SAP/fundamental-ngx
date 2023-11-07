@@ -7,8 +7,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForInvisibilityOf,
-    waitForPresent
+    waitForInvisibilityOf
 } from '../../../../../e2e';
 import { SelectPo } from './select.po';
 
@@ -36,7 +35,7 @@ fdescribe('Select component:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(selectPage.root);
+        await selectPage.waitForRoot();
         await waitForElDisplayed(selectPage.title);
     }, 2);
 

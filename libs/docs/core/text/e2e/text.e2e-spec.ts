@@ -8,8 +8,7 @@ import {
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { TextPo } from './text.po';
 
@@ -25,7 +24,7 @@ describe('Text component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(textPage.root);
+        await textPage.waitForRoot();
         await waitForElDisplayed(textPage.title);
     }, 2);
 

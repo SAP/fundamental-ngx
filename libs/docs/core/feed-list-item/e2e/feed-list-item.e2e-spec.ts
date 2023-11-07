@@ -10,8 +10,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { alertText, testTextLess, testTextMore } from './feed-list-item-contents';
 import { FeedListItemPo } from './feed-list-item.po';
@@ -44,7 +43,7 @@ describe('Feed list item test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(feedListItemPage.root);
+        await feedListItemPage.waitForRoot();
         await waitForElDisplayed(feedListItemPage.title);
     }, 1);
 

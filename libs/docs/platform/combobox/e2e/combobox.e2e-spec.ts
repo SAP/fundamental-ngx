@@ -46,7 +46,7 @@ describe('Combobox test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(comboBoxPage.root);
+        await comboBoxPage.waitForRoot();
         await waitForElDisplayed(comboBoxPage.title);
     }, 1);
 

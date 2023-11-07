@@ -20,8 +20,7 @@ import {
     sendKeys,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    waitForNotPresent,
-    waitForPresent
+    waitForNotPresent
 } from '../../../../../e2e';
 import {
     compactClass,
@@ -88,7 +87,7 @@ describe('List test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(listPage.root);
+        await listPage.waitForRoot();
         await waitForElDisplayed(listPage.title);
     }, 1);
 

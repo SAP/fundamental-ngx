@@ -46,7 +46,7 @@ describe('Time picker suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(timePickerPage.root);
+        await timePickerPage.waitForRoot();
         await waitForElDisplayed(timePickerPage.title);
     }, 1);
 

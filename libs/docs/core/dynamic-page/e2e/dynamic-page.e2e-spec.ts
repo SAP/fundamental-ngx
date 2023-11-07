@@ -11,8 +11,7 @@ import {
     pause,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { DynamicPagePo } from './dynamic-page.po';
 
@@ -50,7 +49,7 @@ describe('dynamic side content test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(dynamicPagePage.root);
+        await dynamicPagePage.waitForRoot();
         await waitForElDisplayed(dynamicPagePage.title);
     }, 1);
 

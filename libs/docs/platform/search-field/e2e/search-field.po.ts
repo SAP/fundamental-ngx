@@ -1,11 +1,11 @@
-import { PlatformBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SearchFieldPo extends PlatformBaseComponentPo {
     url = '/search-field';
     root = '#page-content';
 
     searchFields = '[type="search"]';
-    searchIcons = '[title="Search"]';
+    searchIcons = '.fdp-search-field__submit';
     clearSearchIcon = '.fdp-search-field__clear';
     searchCategoryBtn = '.fdp-search-field__category-button';
     autosuggestionItems = 'ul.fd-menu__list';
@@ -21,7 +21,7 @@ export class SearchFieldPo extends PlatformBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 
