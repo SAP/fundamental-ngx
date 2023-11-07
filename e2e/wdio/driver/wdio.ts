@@ -79,6 +79,7 @@ export async function refreshPage(isFullRefresh = true): Promise<void> {
         }
     } else {
         await browser.refresh();
+        await pause(500);
         if (browserIsSafari()) {
             await pause();
         }

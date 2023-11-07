@@ -16,7 +16,13 @@ const fileExtensionToLanguage = {
 
 export const getAsset = (path: string): Observable<string> =>
     inject(HttpClient)
-        .get(path, { responseType: 'text' })
+        .get(path, {
+            responseType: 'text',
+            headers: {
+                // This one is needed for vite to ignore transforming TypeScript source files.
+                accept: 'text/html'
+            }
+        })
         .pipe(map((r) => r.trim()));
 
 export const getAssetFromModuleAssets = (
