@@ -49,7 +49,7 @@
             [isExpanded]="open && !mobile && viewModel.displayedOptions.length > 0"
             [isControl]="true"
             [glyph]="showAddonButton ? glyph : ''"
-            [iconTitle]="title"
+            [addonButtonAriaHidden]="!!title"
             (addOnButtonClicked)="_addOnButtonClicked($event)"
         >
             <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fd-multi-input__invisible-text">{{
