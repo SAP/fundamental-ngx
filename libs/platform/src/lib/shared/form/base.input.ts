@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -19,11 +20,9 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
 
-import { BaseComponent } from '../base';
 import {
     FD_FORM_FIELD,
     FD_FORM_FIELD_CONTROL,
@@ -31,9 +30,10 @@ import {
     FormStates,
     isValidControlState
 } from '@fundamental-ngx/cdk/forms';
-import { PlatformFormField, PlatformFormFieldControl } from './form-field';
-import { TriggerConfig } from '@fundamental-ngx/core/popover';
 import { FormInputMessageGroupComponent } from '@fundamental-ngx/core/form';
+import { TriggerConfig } from '@fundamental-ngx/core/popover';
+import { BaseComponent } from '../base';
+import { PlatformFormField, PlatformFormFieldControl } from './form-field';
 
 export const FDP_DO_CHECK = new InjectionToken<Observable<void>>('FdpInputDoCheckTrigger');
 
@@ -291,10 +291,12 @@ export abstract class BaseInput
         const labelAndHelpId = `fdp-form-label-content-${this.id}`;
         // if not specified, associate label and inline help ids with the input,
         // else add these ids to the specified ones
-        if (!this.ariaLabelledBy) {
-            this.ariaLabelledBy = labelAndHelpId;
-        } else {
-            this.ariaLabelledBy += ' ' + labelAndHelpId;
+        if (this.formField) {
+            if (!this.ariaLabelledBy) {
+                this.ariaLabelledBy = labelAndHelpId;
+            } else {
+                this.ariaLabelledBy += ' ' + labelAndHelpId;
+            }
         }
 
         this.innerErrorsTemplate = this.formField?.innerErrorRenderers;
