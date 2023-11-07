@@ -5,7 +5,7 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgFor, NgIf } from '@angular/common';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
 import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
@@ -35,7 +35,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     ],
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         FlexibleColumnLayoutModule,
         DynamicPageModule,

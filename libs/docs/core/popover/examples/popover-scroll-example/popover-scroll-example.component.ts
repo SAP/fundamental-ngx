@@ -1,7 +1,7 @@
 import { Overlay, ScrollStrategy } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
@@ -15,7 +15,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
         FormLabelComponent,
         PopoverComponent,
         PopoverControlComponent,
-        ButtonModule,
+        ButtonComponent,
         PopoverBodyComponent,
         CheckboxComponent,
         FormsModule

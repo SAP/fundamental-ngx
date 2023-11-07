@@ -14,8 +14,4 @@ export class DocsService {
     getLernaJson(): Record<string, any> {
         return this._lernaJson;
     }
-
-    rawFileContents(path: string): Promise<string> {
-        return import(`!${path}?raw`);
-    }
 }

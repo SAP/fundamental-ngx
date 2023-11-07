@@ -7,14 +7,14 @@ import { map } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-action-bar-mobile-example',
     templateUrl: './action-bar-mobile-example.component.html',
     standalone: true,
-    imports: [ActionBarModule, ButtonModule, MenuModule, AsyncPipe]
+    imports: [ActionBarModule, ButtonComponent, MenuModule, AsyncPipe]
 })
 export class ActionBarMobileExampleComponent implements OnInit {
     navigationArrow$: Observable<string>;

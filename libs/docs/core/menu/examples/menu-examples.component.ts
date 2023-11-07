@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 
@@ -7,7 +7,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
     selector: 'fd-menu-example',
     templateUrl: './menu-example.component.html',
     standalone: true,
-    imports: [ButtonModule, MenuModule]
+    imports: [ButtonComponent, MenuModule]
 })
 export class MenuExampleComponent {}
 
@@ -16,7 +16,7 @@ export class MenuExampleComponent {}
     templateUrl: './menu-addon-example.component.html',
     styleUrls: ['./menu-addon-example.component.scss'],
     standalone: true,
-    imports: [ButtonModule, MenuModule]
+    imports: [ButtonComponent, MenuModule]
 })
 export class MenuAddonExampleComponent {}
 
@@ -24,6 +24,6 @@ export class MenuAddonExampleComponent {}
     selector: 'fd-menu-separator-example',
     templateUrl: './menu-separator-example.component.html',
     standalone: true,
-    imports: [ButtonModule, MenuModule, ContentDensityDirective]
+    imports: [ButtonComponent, MenuModule, ContentDensityDirective]
 })
 export class MenuSeparatorExampleComponent {}

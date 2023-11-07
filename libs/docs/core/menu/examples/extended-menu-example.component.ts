@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FormControlComponent } from '@fundamental-ngx/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     MenuAddonDirective,
     MenuComponent,
@@ -70,7 +70,7 @@ import {
         </fd-menu>
     `,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         JsonPipe,
         MenuTriggerDirective,
         MenuComponent,

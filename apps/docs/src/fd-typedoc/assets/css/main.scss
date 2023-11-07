@@ -52,8 +52,6 @@
     canvas,
     video {
         display: inline-block;
-        *display: inline;
-        *zoom: 1;
     }
 
     /** Prevent modern browsers from displaying `audio` without controls. Remove excess height in iOS 5 devices. */
@@ -287,7 +285,6 @@
         border: 0; /* 1 */
         padding: 0;
         white-space: normal; /* 2 */
-        *margin-left: -7px;
     }
 
     /* 3 */
@@ -299,7 +296,6 @@
         font-size: 100%; /* 1 */
         margin: 0; /* 2 */
         vertical-align: baseline; /* 3 */
-        *vertical-align: middle;
     }
 
     /* 3 */
@@ -320,7 +316,6 @@
     html input[type='button'] {
         -webkit-appearance: button; /* 2 */
         cursor: pointer; /* 3 */
-        *overflow: visible;
     }
 
     /* 4 */
@@ -328,7 +323,6 @@
     input[type='submit'] {
         -webkit-appearance: button; /* 2 */
         cursor: pointer; /* 3 */
-        *overflow: visible;
     }
 
     /* 4 */
@@ -347,8 +341,6 @@
     input[type='radio'] {
         box-sizing: border-box; /* 1 */
         padding: 0; /* 2 */
-        *height: 13px; /* 3 */
-        *width: 13px;
     }
 
     input[type='search'] {

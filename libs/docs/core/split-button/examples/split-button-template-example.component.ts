@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 
@@ -14,6 +14,6 @@ import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
         `
     ],
     standalone: true,
-    imports: [SplitButtonModule, IconModule, MenuModule]
+    imports: [SplitButtonModule, IconComponent, MenuModule]
 })
 export class ButtonSplitTemplateExampleComponent {}

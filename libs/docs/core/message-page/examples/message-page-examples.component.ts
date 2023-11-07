@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
@@ -40,7 +40,7 @@ export class MessagePageSearchExampleComponent {}
     selector: 'fd-message-page-actions-example',
     templateUrl: './message-page-actions-example.component.html',
     standalone: true,
-    imports: [MessagePageModule, ButtonModule, ContentDensityDirective]
+    imports: [MessagePageModule, ButtonComponent, ContentDensityDirective]
 })
 export class MessagePageActionsExampleComponent {}
 
@@ -48,7 +48,7 @@ export class MessagePageActionsExampleComponent {}
     selector: 'fd-message-page-custom-icon-example',
     templateUrl: './message-page-custom-icon-example.component.html',
     standalone: true,
-    imports: [MessagePageModule, ButtonModule, ContentDensityDirective]
+    imports: [MessagePageModule, ButtonComponent, ContentDensityDirective]
 })
 export class MessagePageCustomIconExampleComponent {}
 
@@ -56,6 +56,6 @@ export class MessagePageCustomIconExampleComponent {}
     selector: 'fd-message-page-no-icon-example',
     templateUrl: './message-page-no-icon-example.component.html',
     standalone: true,
-    imports: [MessagePageModule, ButtonModule, ContentDensityDirective]
+    imports: [MessagePageModule, ButtonComponent, ContentDensityDirective]
 })
 export class MessagePageNoIconExampleComponent {}

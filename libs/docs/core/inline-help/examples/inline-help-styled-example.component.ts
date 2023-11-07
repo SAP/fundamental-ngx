@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 @Component({
@@ -17,6 +17,6 @@ import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
     ],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [IconModule, InlineHelpModule]
+    imports: [IconComponent, InlineHelpModule]
 })
 export class InlineHelpStyledExampleComponent {}

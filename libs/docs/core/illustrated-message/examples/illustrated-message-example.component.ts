@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 
 @Component({
     selector: 'fd-illustrated-message-example',
     templateUrl: './illustrated-message-example.component.html',
     standalone: true,
-    imports: [IllustratedMessageModule, ButtonModule]
+    imports: [IllustratedMessageModule, ButtonComponent]
 })
 export class IllustratedMessageExampleComponent {
     sceneConfig = {

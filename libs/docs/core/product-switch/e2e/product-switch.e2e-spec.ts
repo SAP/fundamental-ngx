@@ -5,8 +5,7 @@ import {
     getText,
     isElementDisplayed,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { ProductSwitchPo } from './product-switch.po';
 
@@ -20,7 +19,7 @@ describe('product switch test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(productSwitchPage.root);
+        await productSwitchPage.waitForRoot();
         await waitForElDisplayed(productSwitchPage.title);
     }, 1);
 

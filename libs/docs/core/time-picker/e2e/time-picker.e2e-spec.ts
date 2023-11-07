@@ -14,8 +14,7 @@ import {
     refreshPage,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { TimePickerPo } from './time-picker.po';
 
@@ -59,7 +58,7 @@ describe('Time-picker component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(timePickerPage.root);
+        await timePickerPage.waitForRoot();
         await waitForElDisplayed(timePickerPage.title);
     }, 2);
 

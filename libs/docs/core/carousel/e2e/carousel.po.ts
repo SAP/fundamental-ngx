@@ -1,5 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class CarouselPo extends CoreBaseComponentPo {
     private url = '/carousel';
@@ -24,7 +24,7 @@ export class CarouselPo extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

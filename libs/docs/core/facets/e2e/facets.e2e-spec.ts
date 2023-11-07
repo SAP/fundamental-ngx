@@ -4,8 +4,7 @@ import {
     getText,
     isElementClickable,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { FacetsPo } from './facets.po';
 
@@ -20,7 +19,7 @@ describe('dynamic side content test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(facetsPage.root);
+        await facetsPage.waitForRoot();
         await waitForElDisplayed(facetsPage.title);
     }, 1);
 

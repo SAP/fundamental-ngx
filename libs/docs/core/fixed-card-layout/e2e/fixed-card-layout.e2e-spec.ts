@@ -8,8 +8,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForInvisibilityOf,
-    waitForPresent
+    waitForInvisibilityOf
 } from '../../../../../e2e';
 import { FixedCardLayoutPo } from './fixed-card-layout.po';
 
@@ -35,7 +34,7 @@ describe('Fixed card layout test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(fxdCardLayoutPage.root);
+        await fxdCardLayoutPage.waitForRoot();
         await waitForElDisplayed(fxdCardLayoutPage.title);
     }, 1);
 

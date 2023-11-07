@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class QuickViewPo extends CoreBaseComponentPo {
     private url = '/quick-view';
@@ -26,7 +26,7 @@ export class QuickViewPo extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

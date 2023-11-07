@@ -4,7 +4,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -31,7 +31,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         LinkComponent,
         NgSwitchDefault,
         ContentDensityDirective,
-        ButtonModule
+        ButtonComponent
     ]
 })
 export class QuickViewDialogExampleComponent {

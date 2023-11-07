@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.10...v0.47.0-rc.11) (2023-11-07)
+
+
+### Features
+
+* vite builder support ([#10911](https://github.com/SAP/fundamental-ngx/issues/10911)) ([98b373d](https://github.com/SAP/fundamental-ngx/commit/98b373d3359f6ad0d64f733138327753edfc6091))
+
+
+
+
+
+# [0.47.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.9...v0.47.0-rc.10) (2023-11-07)
+
+
+### Features
+
+* **core,platform:** stricter types ([#10878](https://github.com/SAP/fundamental-ngx/issues/10878)) ([9b9badb](https://github.com/SAP/fundamental-ngx/commit/9b9badb1bcd1c8a25c01009700596986f650f69e))
+
+
+
+
+
+# [0.47.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.8...v0.47.0-rc.9) (2023-11-06)
+
+
+### Bug Fixes
+
+* **core:** fd-shellbar user menu showing dot for customized user menu ([#10888](https://github.com/SAP/fundamental-ngx/issues/10888)) ([d9ab066](https://github.com/SAP/fundamental-ngx/commit/d9ab066038c0dd3cc6bd83cfa1b6bec9f982eb58))
+
+
+
+
+
 # [0.47.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.7...v0.47.0-rc.8) (2023-11-05)
 
 **Note:** Version bump only for package fundamental-ngx

@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { AsyncPipe, NgFor, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -48,7 +48,7 @@ import {
         TableCellHeaderPopoverDirective,
         PopoverComponent,
         PopoverControlComponent,
-        ButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         PopoverBodyComponent,
         PlatformListModule,

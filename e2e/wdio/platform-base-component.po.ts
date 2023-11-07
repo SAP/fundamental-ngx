@@ -1,12 +1,17 @@
 import {
     checkElementScreenshot,
+    checkSelectorExists,
+    checkSelectorSupported,
     click,
+    defaultWaitTime,
     elementArray,
     getImageTagBrowserPlatform,
     open,
+    pause,
     saveElementScreenshot,
     scrollIntoView,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from './driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from './helper/assertion-helper';
 
@@ -30,6 +35,35 @@ export class PlatformBaseComponentPo {
             await click(switchers, i);
             await waitForElDisplayed(areas, i);
             await checkLtrOrientation(areas, i);
+        }
+    }
+
+    async waitForRoot(): Promise<void> {
+        try {
+            await browser.dismissAlert();
+        } catch {}
+        await browser.waitUntil(
+            async () => {
+                const state = await browser.execute(() => document.readyState);
+                return state === 'complete';
+            },
+            {
+                timeout: defaultWaitTime(),
+                timeoutMsg: 'Oops! Check your internet connection'
+            }
+        );
+
+        await this.checkPageLoaded();
+
+        await waitForPresent(this.root);
+    }
+
+    async checkPageLoaded(iteration = 0): Promise<void> {
+        if (!(await checkSelectorSupported(this.root)) && iteration < 2) {
+            await pause(500);
+            this.checkPageLoaded(iteration++);
+        } else if (iteration > 2) {
+            await checkSelectorExists(this.root);
         }
     }
 

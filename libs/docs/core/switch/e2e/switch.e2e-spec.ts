@@ -6,8 +6,7 @@ import {
     getElementClass,
     pause,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { SwitchPo } from './switch.po';
 
@@ -35,7 +34,7 @@ describe('Switch test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(switchPage.root);
+        await switchPage.waitForRoot();
         await waitForElDisplayed(switchPage.title);
     }, 1);
 

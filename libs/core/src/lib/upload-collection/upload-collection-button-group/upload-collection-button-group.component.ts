@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -9,8 +10,6 @@ import {
 } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'fd-upload-collection-button-group',
@@ -19,7 +18,7 @@ import { NgIf } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonModule, FdTranslatePipe]
+    imports: [NgIf, ButtonComponent, FdTranslatePipe]
 })
 export class UploadCollectionButtonGroupComponent {
     /** Event emitted when the user clicks the edit button. */

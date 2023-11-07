@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/platform/form';
@@ -15,7 +15,7 @@ import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/p
         provideDateTimeFormats()
     ],
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformTimePickerModule, ContentDensityDirective, FormsModule, ButtonModule]
+    imports: [FdpFormGroupModule, PlatformTimePickerModule, ContentDensityDirective, FormsModule, ButtonComponent]
 })
 export class PlatformTimePickerBasicExampleComponent {
     allowNullTimeObject: FdDate | null = new FdDate().setTime(12, 0, 0);

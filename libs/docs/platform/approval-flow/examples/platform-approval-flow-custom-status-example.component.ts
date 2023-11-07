@@ -6,7 +6,7 @@ import { NgFor, NgIf, NgSwitch, NgSwitchCase, TitleCasePipe } from '@angular/com
 import { FormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 import {
     ApprovalFlowComponent,
@@ -38,7 +38,7 @@ import { cloneDeep } from 'lodash-es';
         NgIf,
         FormsModule,
         NgFor,
-        MultiInputModule,
+        MultiInputComponent,
         ContentDensityDirective,
         TitleCasePipe
     ]

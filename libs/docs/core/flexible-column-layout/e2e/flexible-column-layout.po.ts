@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class FlexibleColumnLayoutPo extends CoreBaseComponentPo {
     private url = '/flexible-column-layout';
@@ -21,7 +21,7 @@ export class FlexibleColumnLayoutPo extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

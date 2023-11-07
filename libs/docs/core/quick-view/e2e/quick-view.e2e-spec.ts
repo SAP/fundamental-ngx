@@ -1,12 +1,4 @@
-import {
-    click,
-    getText,
-    refreshPage,
-    scrollIntoView,
-    waitForClickable,
-    waitForElDisplayed,
-    waitForPresent
-} from '../../../../../e2e';
+import { click, getText, refreshPage, scrollIntoView, waitForClickable, waitForElDisplayed } from '../../../../../e2e';
 import { address, companyName, email, mobile, phone, popoverHeaderValue } from './quick-view-content';
 import { QuickViewPo } from './quick-view.po';
 
@@ -39,7 +31,7 @@ describe('Quick view  test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(quickViewPage.root);
+        await quickViewPage.waitForRoot();
         await waitForElDisplayed(quickViewPage.title);
     }, 1);
 

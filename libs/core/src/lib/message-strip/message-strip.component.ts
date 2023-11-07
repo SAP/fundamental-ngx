@@ -1,3 +1,4 @@
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -10,15 +11,14 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder, Nullable } from '@fundamental-ngx/cdk/utils';
-import { I18nModule } from '@fundamental-ngx/i18n';
+import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { MessageStripType } from './message-strip-type';
-import { MessageStripIndicationColor } from './message-strip-indication-color';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { I18nModule } from '@fundamental-ngx/i18n';
 import { MessageStripIconDirective } from './message-strip-icon.directive';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { MessageStripIndicationColor } from './message-strip-indication-color';
+import { MessageStripType } from './message-strip-type';
 
 let messageStripUniqueId = 0;
 
@@ -41,7 +41,7 @@ let messageStripUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonModule, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconModule]
+    imports: [NgIf, ButtonComponent, ContentDensityDirective, I18nModule, NgTemplateOutlet, IconComponent]
 })
 export class MessageStripComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */

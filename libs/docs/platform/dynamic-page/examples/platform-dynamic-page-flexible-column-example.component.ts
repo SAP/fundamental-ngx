@@ -4,7 +4,7 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
 import { NgIf } from '@angular/common';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbComponent, BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -19,7 +19,7 @@ import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         FlexibleColumnLayoutModule,
         CdkScrollable,

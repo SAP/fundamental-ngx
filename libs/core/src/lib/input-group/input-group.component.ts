@@ -240,10 +240,10 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange = (value: string): void => {};
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     get elementRef(): ElementRef<HTMLElement> {
@@ -262,7 +262,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    writeValue(value: any): void {
+    writeValue(value: string): void {
         this._inputTextValue = value;
 
         this._changeDetectorRef.markForCheck();

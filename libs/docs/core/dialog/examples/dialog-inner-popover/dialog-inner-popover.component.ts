@@ -2,9 +2,9 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -19,7 +19,7 @@ interface Option {
         <p>{{ closeReason }}</p>
     `,
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class DialogInnerPopoverComponent {
     closeReason: string;
@@ -121,7 +121,15 @@ export class DialogInnerPopoverComponent {
         </fd-dialog>
     `,
     standalone: true,
-    imports: [DialogModule, TitleComponent, CdkScrollable, ScrollbarDirective, MultiInputModule, FormsModule, BarModule]
+    imports: [
+        DialogModule,
+        TitleComponent,
+        CdkScrollable,
+        ScrollbarDirective,
+        MultiInputComponent,
+        FormsModule,
+        BarModule
+    ]
 })
 export class DialogInnerPopoverExampleComponent {
     firstOptions: Option[];

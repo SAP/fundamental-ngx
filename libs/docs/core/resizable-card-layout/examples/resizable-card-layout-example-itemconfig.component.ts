@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
@@ -21,7 +21,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     styleUrls: ['./resizable-card-layout-example.component.scss'],
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         DynamicPageModule,
         BreadcrumbModule,

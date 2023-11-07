@@ -12,7 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -42,7 +42,7 @@ import { Observable, of } from 'rxjs';
     imports: [
         SegmentedButtonModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         TableDataSourceDirective,
         TableHeaderResizerDirective,
         PlatformTableModule,

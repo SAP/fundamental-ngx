@@ -26,8 +26,7 @@ import {
     waitForElDisappear,
     waitForElDisplayed,
     waitForNotDisplayed,
-    waitForNotPresent,
-    waitForPresent
+    waitForNotPresent
 } from '../../../../../e2e';
 import { papayaFruit } from './dialog';
 import {
@@ -84,7 +83,7 @@ describe('dialog test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(dialogPage.root);
+        await dialogPage.waitForRoot();
         await waitForElDisplayed(dialogPage.title);
     }, 1);
 
@@ -224,7 +223,7 @@ describe('dialog test suite', () => {
     describe('complex dialog example', () => {
         it('should check dialog selections', async () => {
             await refreshPage();
-            await waitForPresent(dialogPage.root);
+            await dialogPage.waitForRoot();
             await waitForElDisplayed(dialogPage.title);
             await openDialog(complexDialog);
             await pause(5000);

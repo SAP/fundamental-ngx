@@ -13,8 +13,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { smallTestText, testText } from './input-group-contents';
 import { InputGroupPo } from './input-group.po';
@@ -40,7 +39,7 @@ describe('Input group component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(inputGroupPage.root);
+        await inputGroupPage.waitForRoot();
         await waitForElDisplayed(inputGroupPage.title);
     }, 2);
 

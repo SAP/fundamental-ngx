@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -25,7 +25,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '
         ToolbarSpacerDirective,
         InputGroupModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         ToolbarItemDirective,
         BusyIndicatorComponent,
         FocusableGridDirective,

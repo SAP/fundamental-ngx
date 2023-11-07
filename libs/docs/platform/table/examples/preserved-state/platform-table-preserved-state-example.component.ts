@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { destroyObservable } from '@fundamental-ngx/cdk';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
@@ -48,7 +48,7 @@ import { delay, map, merge, Observable, of, Subject, switchMap, takeUntil } from
     providers: [provideDateTimeFormats()],
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         TableDataSourceDirective,
         TableHeaderResizerDirective,

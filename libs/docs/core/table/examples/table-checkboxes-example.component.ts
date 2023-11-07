@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective, RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { TableModule } from '@fundamental-ngx/core/table';
 
@@ -20,7 +20,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
         FormsModule,
         NgFor,
         LinkComponent,
-        IconModule
+        IconComponent
     ]
 })
 export class TableCheckboxesExampleComponent {

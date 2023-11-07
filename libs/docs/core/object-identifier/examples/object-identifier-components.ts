@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
-import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
+import { ObjectIdentifierComponent } from '@fundamental-ngx/core/object-identifier';
 
 @Component({
     selector: 'fd-object-identifier-default-example',
     templateUrl: './object-identifier-default-example.component.html',
     standalone: true,
-    imports: [ObjectIdentifierModule]
+    imports: [ObjectIdentifierComponent]
 })
 export class ObjectIdentifierDefaultExampleComponent {}
 
@@ -14,7 +14,7 @@ export class ObjectIdentifierDefaultExampleComponent {}
     selector: 'fd-object-identifier-link-example',
     templateUrl: './object-identifier-link-example.component.html',
     standalone: true,
-    imports: [ObjectIdentifierModule, LinkComponent]
+    imports: [ObjectIdentifierComponent, LinkComponent]
 })
 export class ObjectIdentifierLinkExampleComponent {}
 
@@ -22,7 +22,7 @@ export class ObjectIdentifierLinkExampleComponent {}
     selector: 'fd-object-identifier-bold-example',
     templateUrl: './object-identifier-bold-example.component.html',
     standalone: true,
-    imports: [ObjectIdentifierModule]
+    imports: [ObjectIdentifierComponent]
 })
 export class ObjectIdentifierBoldExampleComponent {}
 
@@ -30,6 +30,6 @@ export class ObjectIdentifierBoldExampleComponent {}
     selector: 'fd-object-identifier-descriptive-example',
     templateUrl: './object-identifier-descriptive-example.component.html',
     standalone: true,
-    imports: [ObjectIdentifierModule, LinkComponent]
+    imports: [ObjectIdentifierComponent, LinkComponent]
 })
 export class ObjectIdentifierDescriptiveExampleComponent {}

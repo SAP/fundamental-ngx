@@ -65,7 +65,7 @@ describe('Input Group should', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(inputGroupPage.root);
+        await inputGroupPage.waitForRoot();
         await waitForElDisplayed(inputGroupPage.title);
     }, 1);
 

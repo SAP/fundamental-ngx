@@ -8,7 +8,7 @@ import {
     FormMessageComponent
 } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputComponent } from '@fundamental-ngx/core/multi-input';
 
 @Component({
     selector: 'fd-form-message-example',
@@ -28,7 +28,7 @@ import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
         FormControlComponent,
         FormMessageComponent,
         InputGroupModule,
-        MultiInputModule,
+        MultiInputComponent,
         FormsModule
     ]
 })

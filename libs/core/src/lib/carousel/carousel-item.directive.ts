@@ -7,10 +7,10 @@ let carouselItemCounter = 0;
     exportAs: 'fdCarouselItem',
     standalone: true
 })
-export class CarouselItemDirective {
+export class CarouselItemDirective<T = unknown> {
     /** Value of the item , to keep some information inside */
     @Input()
-    value: any;
+    value: T;
 
     /** Initial height value, needed when carousel is inside popover */
     @Input()

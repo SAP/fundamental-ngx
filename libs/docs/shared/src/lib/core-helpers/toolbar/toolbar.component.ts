@@ -22,7 +22,7 @@ import {
     ContentDensityMode,
     GlobalContentDensityService
 } from '@fundamental-ngx/core/content-density';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { MenuComponent, MenuKeyboardService, MenuModule } from '@fundamental-ngx/core/menu';
 import {
     ProductMenuComponent,
@@ -70,7 +70,7 @@ type Version = {
         MenuModule,
         NgTemplateOutlet,
         NgFor,
-        IconModule,
+        IconComponent,
         LowerCasePipe,
         AsyncPipe
     ]

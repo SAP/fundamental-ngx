@@ -11,7 +11,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isSubscribable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { ListAvatarConfig, ListIconConfig } from '@fundamental-ngx/platform/list';
 import { merge } from 'lodash-es';
@@ -24,7 +24,7 @@ import { ThumbnailSettingsItem } from '../../../models/settings.model';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, SkeletonModule, IconModule, AvatarComponent]
+    imports: [NgIf, SkeletonModule, IconComponent, AvatarComponent]
 })
 export class SettingsGeneratorSidebarIconComponent {
     /** Thumbnail configuration. */

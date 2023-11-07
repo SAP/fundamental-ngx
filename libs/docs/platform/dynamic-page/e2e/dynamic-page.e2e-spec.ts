@@ -46,7 +46,7 @@ describe('Dynamic Page Layout test suite:', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(dynamicPageLayoutPage.root);
+        await dynamicPageLayoutPage.waitForRoot();
         await waitForElDisplayed(dynamicPageLayoutPage.title);
     }, 1);
 

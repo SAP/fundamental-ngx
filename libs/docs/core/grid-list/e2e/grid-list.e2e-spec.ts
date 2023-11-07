@@ -10,8 +10,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForClickable,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { isSelected, productTitle, text, textLocked } from './grid-list-content';
 import { GridListPo } from './grid-list.po';
@@ -43,7 +42,7 @@ describe('Grid-list test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(gridListPage.root);
+        await gridListPage.waitForRoot();
         await waitForElDisplayed(gridListPage.title);
     }, 1);
 
@@ -101,6 +100,10 @@ describe('Grid-list test suite', () => {
         for (let i = 0; i < arrayLength; i++) {
             await scrollIntoView(multiSelectModeCheckboxes, i);
             await click(multiSelectModeCheckboxes, i);
+            try {
+                // alerts block any interactions with the page
+                await browser.dismissAlert();
+            } catch {}
         }
         selectedArrayLength = await getElementArrayLength(multiSelectModeSelectedItems);
         await expect(selectedArrayLength).toEqual(arrayLength - 1);

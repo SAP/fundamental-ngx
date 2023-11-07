@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'fd-switch-forms-example',
     templateUrl: './switch-forms-example.component.html',
     styleUrls: ['./switch-forms-example.component.scss'],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, SwitchModule]
+    imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, SwitchComponent]
 })
 export class SwitchFormsExampleComponent {
     customForm = new FormGroup({

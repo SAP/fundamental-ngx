@@ -47,7 +47,7 @@ export interface SelectableOptionItem<T = any> extends OptionItem<T> {
 }
 
 /** @hidden */
-export function isSelectableItem(item: SelectItem): item is SelectItem {
+export function isSelectableItem(item: SelectItem | any): item is SelectItem {
     return (
         item &&
         item.label !== undefined &&
@@ -57,7 +57,7 @@ export function isSelectableItem(item: SelectItem): item is SelectItem {
 }
 
 /** @hidden */
-export function isSelectItem(item: SelectItem): item is SelectItem {
+export function isSelectItem(item: SelectItem | any): item is SelectItem {
     return item && item.label !== undefined && item.value !== undefined;
 }
 

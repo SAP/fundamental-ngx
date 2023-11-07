@@ -10,8 +10,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { FormMessagePo } from './form-message.po';
 
@@ -36,7 +35,7 @@ describe('Form Message test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(formMessagePage.root);
+        await formMessagePage.waitForRoot();
         await waitForElDisplayed(formMessagePage.title);
     }, 1);
 

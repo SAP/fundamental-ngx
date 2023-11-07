@@ -12,8 +12,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { TabsPo } from './tabs.po';
 
@@ -60,7 +59,7 @@ describe('Tabs test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(tabsPage.root);
+        await tabsPage.waitForRoot();
         await waitForElDisplayed(tabsPage.title);
     }, 1);
 

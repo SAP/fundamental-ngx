@@ -11,8 +11,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { RatingIndicatorPo } from './rating-indicator.po';
 
@@ -117,7 +116,7 @@ describe('Rating indicator test suite', () => {
                 return;
             }
             await refreshPage();
-            await waitForPresent(ratingIndicatorPage.root);
+            await ratingIndicatorPage.waitForRoot();
             await waitForElDisplayed(ratingIndicatorPage.title);
             await click(inputsDynamicChanges);
             // eslint-disable-next-line radix

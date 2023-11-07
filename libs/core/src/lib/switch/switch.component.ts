@@ -157,7 +157,7 @@ export class SwitchComponent implements ControlValueAccessor, OnDestroy, FormIte
      * @hidden
      * @param value Sets the value of the *checked* property of the switch.
      */
-    writeValue(value: any): void {
+    writeValue(value: boolean): void {
         this.checked = value;
         this.onChange(value);
         this._changeDetectorRef.detectChanges();

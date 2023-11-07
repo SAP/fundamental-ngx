@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageBoxExampleComponent } from './message-box-example.component';
 
 export interface TextData {
@@ -23,7 +23,7 @@ export interface TextData {
         MessageBoxService
     ],
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class ComponentBasedMessageBoxExampleComponent {
     closeReason: string;

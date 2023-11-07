@@ -26,7 +26,7 @@ let carouselItemCounter = 0;
     standalone: true,
     imports: [BusyIndicatorComponent]
 })
-export class CarouselItemComponent implements CarouselItemInterface {
+export class CarouselItemComponent<T = any> implements CarouselItemInterface {
     /** Id of the Carousel items. */
     @Input()
     @HostBinding('attr.id')
@@ -68,7 +68,7 @@ export class CarouselItemComponent implements CarouselItemInterface {
 
     /** Value of carousel item */
     @Input()
-    value: any;
+    value: T;
 
     /** @hidden */
     @HostBinding('class.fd-carousel__item')

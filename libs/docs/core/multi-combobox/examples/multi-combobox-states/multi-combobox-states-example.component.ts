@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective, FormStates } from '@fundamental-ngx/cdk/forms';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
-import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
+import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
     selector: 'fd-multi-combobox-states-example',
@@ -10,7 +10,7 @@ import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundame
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, CvaDirective, DataSourceDirective, MultiComboboxModule]
+    imports: [FormItemComponent, FormLabelComponent, CvaDirective, DataSourceDirective, MultiComboboxComponent]
 })
 export class MultiComboboxStatesExampleComponent {
     dataSource = [

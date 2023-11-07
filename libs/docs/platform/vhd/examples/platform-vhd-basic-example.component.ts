@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NgFor, NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { TokenComponent, TokenizerComponent, TokenizerInputDirective } from '@fundamental-ngx/core/token';
 import {
@@ -65,7 +65,7 @@ const data = exampleDataSource();
     templateUrl: './platform-vhd-basic-example.component.html',
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         TokenComponent,
         TokenizerComponent,

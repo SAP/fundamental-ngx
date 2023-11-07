@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
@@ -18,7 +18,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
         NgFor,
         LinkComponent,
         StepInputModule,
-        IconModule,
+        IconComponent,
         SplitButtonModule,
         MenuModule
     ]

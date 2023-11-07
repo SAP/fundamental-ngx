@@ -7,8 +7,7 @@ import {
     getElementSize,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { SplitterPo } from './spltiller.po';
 
@@ -23,7 +22,7 @@ describe('Standard List test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(splitterPage.root);
+        await splitterPage.waitForRoot();
         await waitForElDisplayed(splitterPage.title);
     }, 1);
 

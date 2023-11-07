@@ -9,8 +9,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { sizeL, sizeM, sizeS } from './busy-indicator-contents';
 import { BusyIndicatorPo } from './busy-indicator.po';
@@ -44,7 +43,7 @@ describe('Busy Indicator test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(busyIndicatorPage.root);
+        await busyIndicatorPage.waitForRoot();
         await waitForElDisplayed(busyIndicatorPage.title);
     }, 1);
 

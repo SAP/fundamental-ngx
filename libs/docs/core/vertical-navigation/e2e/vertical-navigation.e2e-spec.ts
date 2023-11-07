@@ -6,8 +6,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { VerticalNavigationPo } from './vertical-navigation.po';
 
@@ -34,7 +33,7 @@ describe('Vertical navigation component tests', function () {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(verticalNavigationPage.root);
+        await verticalNavigationPage.waitForRoot();
         await waitForElDisplayed(verticalNavigationPage.title);
     }, 2);
 

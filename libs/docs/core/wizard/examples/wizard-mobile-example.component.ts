@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
@@ -20,7 +20,7 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
         class: 'fd-wizard-mobile-docs'
     },
     standalone: true,
-    imports: [WizardModule, ButtonModule, BarModule]
+    imports: [WizardModule, ButtonComponent, BarModule]
 })
 export class WizardMobileExampleComponent {
     contentHeight = '450px';

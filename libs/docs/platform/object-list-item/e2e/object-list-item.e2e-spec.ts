@@ -9,8 +9,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { navUrl } from './object-list-item-contents';
 import { ObjectListItemPo } from './object-list-item.po';
@@ -52,7 +51,7 @@ describe('Object list item suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(objListPage.root);
+        await objListPage.waitForRoot();
         await waitForElDisplayed(objListPage.title);
     }, 1);
 
