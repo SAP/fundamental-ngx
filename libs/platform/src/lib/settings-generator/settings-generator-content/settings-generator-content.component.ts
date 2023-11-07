@@ -5,12 +5,12 @@ import {
     Component,
     EventEmitter,
     HostBinding,
-    inject,
     Input,
     Output,
     QueryList,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';

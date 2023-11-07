@@ -27,7 +27,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Inject,
     Input,
     OnChanges,
@@ -40,7 +39,8 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormsModule, NgForm } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
