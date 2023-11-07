@@ -640,7 +640,7 @@ export class ComboboxComponent
 
     /** Method that picks other value moved from current one by offset, called only when combobox is closed */
     private _chooseOtherItem(offset: number): void {
-        const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue);
+        const activeValue: any = this._getOptionObjectByDisplayedValue(this.inputTextValue)[0];
         const index: number = this.dropdownValues.findIndex((value) => value === activeValue);
         if (this.dropdownValues[index + offset]) {
             this.onMenuClickHandler(this.dropdownValues[index + offset]);
@@ -704,7 +704,7 @@ export class ComboboxComponent
 
     /** @hidden */
     private _getOptionObjectByDisplayedValue(displayValue: string): any {
-        return this.dropdownValues.find((value) => this.displayFn(value) === displayValue);
+        return this.dropdownValues.filter((value) => this.displayFn(value) === displayValue);
     }
 
     /** @hidden */
@@ -719,9 +719,10 @@ export class ComboboxComponent
     /** @hidden */
     private _propagateChange(): void {
         if (this.communicateByObject) {
-            const value = this._getOptionObjectByDisplayedValue(this.inputText);
-            if (this.displayFn(value) !== this.displayFn(this.getValue())) {
-                this.setValue(value);
+            const values = this._getOptionObjectByDisplayedValue(this.inputText);
+            // Do not set new value if theres multiple items that have same label.
+            if (values.length === 1 && this.displayFn(values[0]) !== this.displayFn(this.getValue())) {
+                this.setValue(values[0]);
             }
             this.onChange(this.getValue());
         } else {
