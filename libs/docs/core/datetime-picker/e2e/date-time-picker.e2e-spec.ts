@@ -15,8 +15,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { currentDay, date, date2, date3, date4, dates, i18n, testText, year2030 } from './date-time-picker-contents';
 import { DateTimePicker } from './date-time-picker.po';
@@ -60,7 +59,7 @@ describe('Datetime picker suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(dateTimePickerPage.root);
+        await dateTimePickerPage.waitForRoot();
         await waitForElDisplayed(dateTimePickerPage.title);
     }, 1);
 

@@ -9,8 +9,7 @@ import {
     scrollIntoView,
     sendKeys,
     waitForElDisplayed,
-    waitForNotPresent,
-    waitForPresent
+    waitForNotPresent
 } from '../../../../../e2e';
 import { MultiComboboxPo } from './multi-combobox.po';
 
@@ -47,7 +46,7 @@ describe('multi-combobox test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(multiComboboxPage.root);
+        await multiComboboxPage.waitForRoot();
         await waitForElDisplayed(multiComboboxPage.title);
     }, 1);
 

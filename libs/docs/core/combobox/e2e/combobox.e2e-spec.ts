@@ -17,8 +17,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 
 import {
@@ -60,7 +59,7 @@ describe('Combobox component test suit', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(comboboxPage.root);
+        await comboboxPage.waitForRoot();
         await waitForElDisplayed(comboboxPage.title);
     }, 2);
 

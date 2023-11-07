@@ -15,8 +15,7 @@ import {
     refreshPage,
     scrollIntoView,
     sendKeys,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { ShellbarPo } from './shellbar.po';
 
@@ -52,7 +51,7 @@ describe('shellbar test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(shellbarPage.root);
+        await shellbarPage.waitForRoot();
         await waitForElDisplayed(shellbarPage.title);
     }, 1);
 

@@ -45,7 +45,7 @@ describe('Notification component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(notificationPage.root);
+        await notificationPage.waitForRoot();
         await waitForElDisplayed(notificationPage.title);
     }, 2);
 

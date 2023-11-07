@@ -7,8 +7,7 @@ import {
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { BarPo } from './bar.po';
 
@@ -23,7 +22,7 @@ describe('Bar test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(barPage.root);
+        await barPage.waitForRoot();
         await waitForElDisplayed(barPage.title);
     }, 1);
 

@@ -7,8 +7,7 @@ import {
     pause,
     refreshPage,
     waitForElDisplayed,
-    waitForNotDisplayed,
-    waitForPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 import { FlexibleColumnLayoutPo } from './flexible-column-layout.po';
 
@@ -35,7 +34,7 @@ describe('Flexible column layout component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(flexibleColumnLayoutPage.root);
+        await flexibleColumnLayoutPage.waitForRoot();
         await waitForElDisplayed(flexibleColumnLayoutPage.title);
     }, 2);
 

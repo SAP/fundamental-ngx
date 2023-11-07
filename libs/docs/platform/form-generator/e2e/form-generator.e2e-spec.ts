@@ -12,8 +12,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { correctPassword, invalidBirthday, simplePassword, validBirthday } from './form-generator';
 import {
@@ -57,7 +56,7 @@ describe('Form generator test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(formGeneratorPage.root);
+        await formGeneratorPage.waitForRoot();
         await waitForElDisplayed(formGeneratorPage.title);
         await pause(300);
         if ((await doesItExist(busyIndicator)) === true) {

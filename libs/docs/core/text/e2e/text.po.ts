@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class TextPo extends CoreBaseComponentPo {
     url = '/text';
@@ -10,7 +10,7 @@ export class TextPo extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

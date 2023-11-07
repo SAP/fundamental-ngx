@@ -12,7 +12,6 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForPresent,
     waitForUnclickable
 } from '../../../../../e2e';
 import { compactDate, currentDate, date, text, year2030 } from './datetime-picker';
@@ -61,7 +60,7 @@ describe('Datetime picker suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(dateTimePickerPage.root);
+        await dateTimePickerPage.waitForRoot();
         await waitForElDisplayed(dateTimePickerPage.title);
     }, 2);
 

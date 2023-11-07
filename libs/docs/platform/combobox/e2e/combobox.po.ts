@@ -62,7 +62,7 @@ export class ComboBoxPo extends PlatformBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.pageTitle);
     }
 

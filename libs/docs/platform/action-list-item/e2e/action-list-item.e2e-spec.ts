@@ -7,8 +7,7 @@ import {
     getElementClass,
     getElementSize,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { alertTextArr, btnText } from './action-list-item-contents';
 import { ActionListItemPo } from './action-list-item.po';
@@ -23,7 +22,7 @@ describe('Action List Item Test Suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(actionListPage.root);
+        await actionListPage.waitForRoot();
         await waitForElDisplayed(actionListPage.title);
     }, 1);
 

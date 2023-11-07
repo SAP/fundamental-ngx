@@ -1,4 +1,4 @@
-import { getText, PlatformBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { getText, PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 import { outputLabel } from './split-menu-button-page-contents';
 
 export class SplitMenuButtonPo extends PlatformBaseComponentPo {
@@ -33,7 +33,7 @@ export class SplitMenuButtonPo extends PlatformBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

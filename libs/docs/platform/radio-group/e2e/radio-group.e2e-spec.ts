@@ -7,8 +7,7 @@ import {
     getText,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { RadioButtonGroupPage } from './radio-group.po';
 
@@ -86,7 +85,7 @@ describe('Radio button group  Test Suite', () => {
 
     afterEach(async () => {
         await refreshPage(true);
-        await waitForPresent(radioButtonGroupPage.root);
+        await radioButtonGroupPage.waitForRoot();
         await waitForElDisplayed(radioButtonGroupPage.title);
     }, 2);
 

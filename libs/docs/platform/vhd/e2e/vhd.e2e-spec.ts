@@ -79,7 +79,7 @@ describe('Value help dialog test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(valueHelpDialogPage.root);
+        await valueHelpDialogPage.waitForRoot();
         await waitForElDisplayed(valueHelpDialogPage.title);
     }, 1);
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { click, CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { click, CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class DateTimePicker extends CoreBaseComponentPo {
     url = '/datetime-picker';
@@ -57,7 +57,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 }

@@ -39,13 +39,13 @@ describe('Menu button test suite', () => {
 
     beforeAll(async () => {
         await menuBtnPage.open();
-        await waitForPresent(menuBtnPage.root);
+        await menuBtnPage.waitForRoot();
         await waitForElDisplayed(menuBtnPage.title);
     }, 1);
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(menuBtnPage.root);
+        await menuBtnPage.waitForRoot();
         await waitForElDisplayed(menuBtnPage.title);
     }, 1);
 

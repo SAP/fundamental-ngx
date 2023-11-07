@@ -1,4 +1,4 @@
-import { CoreBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class IllustratedMessagePo extends CoreBaseComponentPo {
     url = '/illustrated-message';
@@ -12,7 +12,7 @@ export class IllustratedMessagePo extends CoreBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

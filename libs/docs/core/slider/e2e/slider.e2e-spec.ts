@@ -14,8 +14,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { cozySliderClass, disabledAttribute } from './slider-contents';
 import { SliderPo } from './slider.po';
@@ -57,7 +56,7 @@ describe('slider test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(sliderPage.root);
+        await sliderPage.waitForRoot();
         await waitForElDisplayed(sliderPage.title);
     }, 1);
 

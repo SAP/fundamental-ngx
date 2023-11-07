@@ -16,8 +16,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { longLine, number, special_characters, text } from './input';
 import {
@@ -86,7 +85,7 @@ describe('Input should ', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(inputPage.root);
+        await inputPage.waitForRoot();
         await waitForElDisplayed(inputPage.title);
     }, 1);
 

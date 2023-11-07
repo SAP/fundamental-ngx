@@ -10,8 +10,7 @@ import {
     isEnabled,
     refreshPage,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { expected_category, search_placeholder } from './search-field-content';
 import { SearchFieldPo } from './search-field.po';
@@ -41,7 +40,7 @@ describe('Search field', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(searchPage.root);
+        await searchPage.waitForRoot();
         await waitForElDisplayed(searchPage.title);
     });
 
@@ -129,7 +128,7 @@ describe('Search field', () => {
         await expect(await getText(cozyWithDataSourceSearch, 3)).not.toContain('test');
     });
 
-    fit('should have autosuggestion after one letter', async () => {
+    it('should have autosuggestion after one letter', async () => {
         const arrLength = await getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
             if (i === 0 || i === 1) {

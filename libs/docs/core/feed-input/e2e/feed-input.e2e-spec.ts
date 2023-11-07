@@ -26,7 +26,7 @@ describe('Verify Feed Input component', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(feedInputPage.root);
+        await feedInputPage.waitForRoot();
         await waitForElDisplayed(feedInputPage.title);
     }, 1);
 

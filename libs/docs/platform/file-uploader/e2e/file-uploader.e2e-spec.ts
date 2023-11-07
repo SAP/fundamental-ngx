@@ -7,8 +7,7 @@ import {
     getText,
     refreshPage,
     uploadFile,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { imagePath, placeholderValue, titleValue } from './file-uploader.page-content';
 import { FileUploaderPo } from './file-uploader.po';
@@ -23,7 +22,7 @@ describe('File uploader test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(fileUploaderPage.root);
+        await fileUploaderPage.waitForRoot();
         await waitForElDisplayed(fileUploaderPage.title);
     }, 1);
 

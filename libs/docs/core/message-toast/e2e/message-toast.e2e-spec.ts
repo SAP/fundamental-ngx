@@ -7,8 +7,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForNotDisplayed,
-    waitForPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 import { MessageToastPo } from './message-toast.po';
 
@@ -22,7 +21,7 @@ describe('Textarea component test', () => {
 
     beforeEach(async () => {
         await refreshPage(true);
-        await waitForPresent(messageToastPage.root);
+        await messageToastPage.waitForRoot();
         await waitForElDisplayed(messageToastPage.title);
     }, 2);
 

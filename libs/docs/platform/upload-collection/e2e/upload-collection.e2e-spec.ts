@@ -14,8 +14,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForNotDisplayed,
-    waitForPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 import { columnHeaderTestArr, paginationTestArr, testFolder1, testFolderArr } from './upload-collection-content';
 
@@ -58,7 +57,7 @@ describe('Upload collection test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(uploadCollectionPage.root);
+        await uploadCollectionPage.waitForRoot();
         await waitForElDisplayed(uploadCollectionPage.title);
     }, 1);
 

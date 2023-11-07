@@ -6,8 +6,7 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { ButtonPo } from './button.po';
 
@@ -21,7 +20,7 @@ describe('Button test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(buttonPage.root);
+        await buttonPage.waitForRoot();
         await waitForElDisplayed(buttonPage.title);
     }, 1);
 

@@ -1,4 +1,4 @@
-import { PlatformBaseComponentPo, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
 export class SwitchPo extends PlatformBaseComponentPo {
     private url = '/switch';
@@ -36,7 +36,7 @@ export class SwitchPo extends PlatformBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForPresent(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.title);
     }
 

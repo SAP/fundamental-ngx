@@ -15,8 +15,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     cardDetails,
@@ -75,7 +74,7 @@ describe('Wizard generator test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(wizardGeneratorPage.root);
+        await wizardGeneratorPage.waitForRoot();
         await waitForElDisplayed(wizardGeneratorPage.title);
     }, 1);
 
@@ -866,6 +865,7 @@ describe('Wizard generator test suite', () => {
         describe('Other cases', () => {
             it('should check validation first required field', async () => {
                 await click(responsiveDialogExample + button);
+                await pause(500);
                 await checkFirstRequiredFieldValidation(dialog);
             });
 
