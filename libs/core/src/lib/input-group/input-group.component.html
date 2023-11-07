@@ -26,6 +26,7 @@
                 fd-button
                 fdInputGroupAddonButton
                 type="button"
+                [attr.aria-hidden]="addonButtonAriaHidden"
                 [fdType]="inShellbar ? 'standard' : 'transparent'"
                 [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
