@@ -101,7 +101,7 @@ export class ToolHeaderAutoModeDirective implements HasElementRef {
                 const [mode, orientation = 'landscape'] = _mode;
                 this._toolHeaderComponent._mode = mode;
                 this._toolHeaderComponent._orientation = orientation;
-                const contentDensity = mode ? ContentDensityMode.COMPACT : ContentDensityMode.COZY;
+                const contentDensity = mode ? ContentDensityMode.COZY : ContentDensityMode.COMPACT;
                 this._contentDensity.fdContentDensity = contentDensity;
                 this.modeChange.emit(mode);
                 this.orientationChange.emit(orientation);
