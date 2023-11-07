@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
-import {
-    ToolHeaderActionsDirective,
-    ToolHeaderAutoModeDirective,
-    ToolHeaderComponent
-} from '@fundamental-ngx/btp/tool-header';
+import { ToolHeaderAutoModeDirective, ToolHeaderComponent } from '@fundamental-ngx/btp/tool-header';
 
 @Component({
     selector: 'fdb-tool-header-menu-button-example',
@@ -22,7 +18,7 @@ import {
         </fdb-tool-header>
         <div [style.margin-top.rem]="2">Last action: {{ lastAction }}</div>
     `,
-    imports: [SearchFieldComponent, ToolHeaderActionsDirective, ToolHeaderAutoModeDirective, ToolHeaderComponent],
+    imports: [SearchFieldComponent, ToolHeaderAutoModeDirective, ToolHeaderComponent],
     standalone: true
 })
 export class MenuButtonExampleComponent {

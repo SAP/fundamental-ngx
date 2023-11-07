@@ -1,6 +1,5 @@
 .fdb-navigation-popover-body {
     --fdPopover_Offset: -0.3875rem;
-    padding: 0.5rem;
     background: var(--sapGroup_ContentBackground);
     border: none;
     border-radius: 0.5rem;
@@ -8,5 +7,12 @@
 
     .fd-navigation-menu {
         padding: 0;
+        margin: 0.5rem;
+    }
+
+    .fd-button.fd-tool-header__action-button {
+        max-width: initial;
+        width: 100%;
+        justify-content: flex-start;
     }
 }
