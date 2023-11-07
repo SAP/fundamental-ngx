@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { InitialFocusDirective, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogBodyComponent, DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
@@ -44,7 +44,7 @@ import { MenuService } from '../services/menu.service';
         TemplateDirective,
         BarModule,
         NgIf,
-        ButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         TitleModule,
         CdkScrollable,

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'fd-semantic-switch-example',
@@ -18,7 +18,7 @@ import { SwitchModule } from '@fundamental-ngx/core/switch';
         `
     ],
     standalone: true,
-    imports: [FormLabelComponent, SwitchModule, ContentDensityDirective]
+    imports: [FormLabelComponent, SwitchComponent, ContentDensityDirective]
 })
 export class SemanticSwitchExampleComponent {
     checked = false;

@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
@@ -41,7 +41,7 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.inter
         TemplateDirective,
         BarModule,
         NgTemplateOutlet,
-        ButtonModule,
+        ButtonComponent,
         CdkScrollable,
         ScrollbarDirective
     ]

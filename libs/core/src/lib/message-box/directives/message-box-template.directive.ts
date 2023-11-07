@@ -16,7 +16,7 @@ export interface MessageBoxTemplateDirectiveContext<
 export class MessageBoxTemplateDirective<T = MessageBoxConfig<any>> {
     /** Custom dialog config model. */
     @Input()
-    fdDialogTemplateConfig: T;
+    fdMessageBoxTemplateConfig: T;
 
     /** @hidden */
     readonly templateRef = inject(TemplateRef<MessageBoxTemplateDirectiveContext<T>>);

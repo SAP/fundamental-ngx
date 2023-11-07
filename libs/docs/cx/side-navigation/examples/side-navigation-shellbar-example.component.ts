@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ShellbarActionComponent,
     ShellbarActionsComponent,
@@ -22,7 +22,7 @@ import { CxSideNavigationModule } from '../../../../cx/src/lib/side-navigation/s
     standalone: true,
     imports: [
         ShellbarComponent,
-        ButtonModule,
+        ButtonComponent,
         ShellbarSidenavDirective,
         ShellbarLogoComponent,
         ShellbarSubtitleComponent,

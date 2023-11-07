@@ -12,7 +12,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
@@ -32,7 +32,7 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     },
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         A11yModule,
         NgIf,
         WizardModule,

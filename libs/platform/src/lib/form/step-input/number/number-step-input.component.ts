@@ -18,7 +18,7 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 import { OnlyDigitsDirective, RtlService } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ContentDensityModule,
     ContentDensityObserver,
@@ -59,7 +59,7 @@ import { StepInputConfig } from '../step-input.config';
     standalone: true,
     imports: [
         FormInputMessageGroupComponent,
-        ButtonModule,
+        ButtonComponent,
         StepInputDecrementDirective,
         StepInputControlDirective,
         OnlyDigitsDirective,

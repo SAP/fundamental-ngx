@@ -3,10 +3,10 @@ import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -72,12 +72,12 @@ interface ExampleRow {
         ContentDensityDirective,
         InputGroupModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         FocusableGridDirective,
         TableModule,
         NgFor,
         LinkComponent,
-        IconModule,
+        IconComponent,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,

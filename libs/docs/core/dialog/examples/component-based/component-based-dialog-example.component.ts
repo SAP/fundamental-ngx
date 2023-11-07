@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { DialogExampleComponent } from './dialog-example.component';
 
@@ -11,7 +11,7 @@ import { DialogExampleComponent } from './dialog-example.component';
         <p>{{ closeReason }}</p>
     `,
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class ComponentBasedDialogExampleComponent {
     closeReason: string;

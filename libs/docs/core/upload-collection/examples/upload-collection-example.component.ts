@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, ContentChildren, QueryList } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
@@ -29,7 +29,7 @@ import {
         ListModule,
         UploadCollectionItemDirective,
         UploadCollectionThumbnailDirective,
-        IconModule,
+        IconComponent,
         UploadCollectionTitleContainerDirective,
         LinkComponent,
         UploadCollectionTitleDirective,

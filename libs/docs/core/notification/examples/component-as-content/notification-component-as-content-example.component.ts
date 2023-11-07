@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { NotificationService } from '@fundamental-ngx/core/notification';
 import { NotificationExampleContentComponent } from './notification-content.component';
 
@@ -11,7 +11,7 @@ import { NotificationExampleContentComponent } from './notification-content.comp
         <span style="margin-left: 24px;">{{ closeReason }}</span>
     `,
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class NotificationComponentAsContentExampleComponent {
     public closeReason: string;

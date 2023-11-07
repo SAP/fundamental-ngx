@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { InitialFocusDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -43,7 +43,7 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
     imports: [
         NgIf,
         PopoverModule,
-        ButtonModule,
+        ButtonComponent,
         NgClass,
         BarModule,
         SegmentedButtonModule,

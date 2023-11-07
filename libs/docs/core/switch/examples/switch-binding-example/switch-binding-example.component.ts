@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { SwitchComponent } from '@fundamental-ngx/core/switch';
 
 @Component({
     selector: 'fd-switch-binding-example',
     templateUrl: './switch-binding-example.component.html',
     styleUrls: ['./switch-binding-example.component.scss'],
     standalone: true,
-    imports: [FormLabelComponent, SwitchModule, FormsModule, ButtonModule]
+    imports: [FormLabelComponent, SwitchComponent, FormsModule, ButtonComponent]
 })
 export class SwitchBindingExampleComponent {
     firstSwitch = false;

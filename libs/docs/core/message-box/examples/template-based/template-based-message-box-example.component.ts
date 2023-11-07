@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } fr
 
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 
@@ -11,7 +11,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './template-based-message-box-example.component.html',
     standalone: true,
-    imports: [MessageBoxModule, TitleComponent, BarModule, InitialFocusDirective, ButtonModule]
+    imports: [MessageBoxModule, TitleComponent, BarModule, InitialFocusDirective, ButtonComponent]
 })
 export class TemplateBasedMessageBoxExampleComponent {
     confirmationReason: string;

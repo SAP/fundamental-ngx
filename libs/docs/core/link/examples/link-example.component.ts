@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { BehaviorSubject, of } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { BehaviorSubject, of } from 'rxjs';
     selector: 'fd-link-example',
     templateUrl: './link-example.component.html',
     standalone: true,
-    imports: [LinkComponent, RouterLink, IconModule, AsyncPipe]
+    imports: [LinkComponent, RouterLink, IconComponent, AsyncPipe]
 })
 export class LinkExampleComponent {
     arrowRight$: BehaviorSubject<string> = new BehaviorSubject<string>('slim-arrow-right');

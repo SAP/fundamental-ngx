@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -19,7 +19,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         ToolbarComponent,
         ToolbarLabelDirective,

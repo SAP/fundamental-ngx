@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { Placement } from '@fundamental-ngx/core/shared';
 import { Observable } from 'rxjs';
@@ -25,7 +25,7 @@ import { map } from 'rxjs/operators';
         `
     ],
     standalone: true,
-    imports: [IconModule, InlineHelpModule, FormControlComponent, AsyncPipe]
+    imports: [IconComponent, InlineHelpModule, FormControlComponent, AsyncPipe]
 })
 export class InlineHelpExampleComponent {
     rtlDirection$: Observable<Placement>;

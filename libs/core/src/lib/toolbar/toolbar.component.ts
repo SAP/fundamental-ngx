@@ -22,28 +22,28 @@ import {
 } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
+import { NgFor, NgIf } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     applyCssClass,
     CssClassBuilder,
+    DynamicPortalComponent,
     OVERFLOW_PRIORITY_SCORE,
     OverflowPriority,
     ResizeObserverService
 } from '@fundamental-ngx/cdk/utils';
-import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
-import { TitleToken } from '@fundamental-ngx/core/title';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     ContentDensityMode,
     ContentDensityObserver,
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
-import { ToolbarItem } from './abstract-toolbar-item.class';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { DynamicPortalComponent } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { TitleToken } from '@fundamental-ngx/core/title';
+import { BehaviorSubject, combineLatest, map, Observable, startWith } from 'rxjs';
+import { ToolbarItem } from './abstract-toolbar-item.class';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
 import { ToolbarSpacerDirective } from './toolbar-spacer.directive';
-import { NgIf, NgFor } from '@angular/common';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -76,7 +76,7 @@ export const enum OverflowPriorityEnum {
         ToolbarSpacerDirective,
         ToolbarSeparatorComponent,
         PopoverModule,
-        ButtonModule,
+        ButtonComponent,
         NgFor,
         DynamicPortalComponent
     ]

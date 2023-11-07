@@ -1,6 +1,6 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -23,7 +23,7 @@ import 'moment/locale/fr';
         FormLabelComponent,
         SegmentedButtonModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         DatePickerComponent,
         MomentDatetimeModule
     ]

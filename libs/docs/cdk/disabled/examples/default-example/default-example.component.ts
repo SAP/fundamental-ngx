@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DisabledBehaviorDirective, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 
 @Component({
@@ -8,7 +8,7 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
     templateUrl: './default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ButtonModule, DisabledBehaviorDirective, LinkComponent, FocusableListDirective, FocusableItemDirective]
+    imports: [ButtonComponent, DisabledBehaviorDirective, LinkComponent, FocusableListDirective, FocusableItemDirective]
 })
 export class DefaultExampleComponent {
     constructor() {}

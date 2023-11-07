@@ -51,7 +51,7 @@ export interface TimeColumnItemOutput<T> {
     standalone: true,
     imports: [NgIf, ButtonComponent, CarouselDirective, NgFor, CarouselItemDirective, FdTranslatePipe]
 })
-export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
+export class TimeColumnComponent<K extends number, T extends SelectableViewItem<K> = SelectableViewItem<K>>
     implements AfterViewInit, OnInit, OnDestroy, OnChanges
 {
     /** items in row */
@@ -148,7 +148,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** @hidden */
     @ViewChildren(CarouselItemDirective)
-    items: QueryList<CarouselItemDirective>;
+    items: QueryList<CarouselItemDirective<T>>;
 
     /** @hidden */
     @ViewChild('indicator', { read: ElementRef })
@@ -196,7 +196,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     private _activeValue: Nullable<T>;
 
     /** @hidden */
-    private _activeCarouselItem: CarouselItemDirective;
+    private _activeCarouselItem: CarouselItemDirective<T>;
 
     /** @hidden */
     private _isDragging = false;
@@ -358,7 +358,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** Method that changes active item and triggers carousel scroll */
-    pick(item: CarouselItemDirective, index: number): void {
+    pick(item: CarouselItemDirective<T>, index: number): void {
         const currentIndex: number = this.items.toArray().findIndex((_item) => _item === this._activeCarouselItem);
         /** To prevent from switching time, when it's being dragged */
         if (!this._isDragging) {
@@ -469,7 +469,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * after => Defines if value was incremented/decremented, needed for hours to trigger AM/PM change
      * @hidden
      */
-    private _pickTime(item?: CarouselItemDirective, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
+    private _pickTime(item?: CarouselItemDirective<T>, smooth?: boolean, emitEvent?: boolean, after?: boolean): void {
         if (!item) {
             return;
         }
@@ -493,12 +493,12 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
      * Returns item with passed value
      * @hidden
      */
-    private _getItem(_item: Nullable<T>): CarouselItemDirective | undefined {
+    private _getItem(_item: Nullable<T>): CarouselItemDirective<T> | undefined {
         return this.items.find((item) => item.value === _item);
     }
 
     /** @hidden */
-    private _triggerCarousel(item: CarouselItemDirective, smooth?: boolean): void {
+    private _triggerCarousel(item: CarouselItemDirective<T>, smooth?: boolean): void {
         const array = this.items.toArray();
         let index: number = array.findIndex((_item) => _item === item) - this.offset;
 

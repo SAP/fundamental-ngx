@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
@@ -32,7 +32,7 @@ import {
     ],
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         DynamicPageModule,
         ToolbarComponent,

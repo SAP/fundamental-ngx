@@ -12,7 +12,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { CarouselComponent, CarouselItemComponent } from '@fundamental-ngx/core/carousel';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -29,7 +29,7 @@ import { debounceTime } from 'rxjs/operators';
     imports: [
         SegmentedButtonModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         CarouselComponent,
         NgIf,
         CarouselItemComponent,

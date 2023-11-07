@@ -3,7 +3,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 /**
  * Configuration for opening a notification with the NotificationService.
  */
-export class NotificationConfig {
+export class NotificationConfig<T = any> {
     /** Id for the notification component. If omitted, a unique one is generated. */
     id?: string;
 
@@ -20,7 +20,7 @@ export class NotificationConfig {
     container?: HTMLElement | 'body' = 'body';
 
     /** Data to pass along to the content through the NotificationRef. */
-    data?: any;
+    data?: T;
 
     /** Custom width of the notification. */
     width?: string;

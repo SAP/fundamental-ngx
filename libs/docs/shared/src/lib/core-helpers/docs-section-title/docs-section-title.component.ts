@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
 
 @Component({
@@ -32,7 +32,7 @@ import { CURRENT_LIB, Libraries } from '../../utilities/libraries';
     styleUrls: ['./docs-section-title.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [RouterLink, IconModule]
+    imports: [RouterLink, IconComponent]
 })
 export class DocsSectionTitleComponent implements OnInit, AfterViewInit {
     @ViewChild('title', { read: ElementRef })

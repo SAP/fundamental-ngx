@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformPageFooterModule } from '@fundamental-ngx/platform/page-footer';
 
@@ -23,6 +23,6 @@ export class PlatformPageFooterMultipleLineExampleComponent {}
     selector: 'fdp-platform-footer-with-icon-example',
     templateUrl: './platform-page-footer-with-icon-example.component.html',
     standalone: true,
-    imports: [PlatformPageFooterModule, PlatformLinkModule, IconModule]
+    imports: [PlatformPageFooterModule, PlatformLinkModule, IconComponent]
 })
 export class PlatformPageFooterWithIconExampleComponent {}

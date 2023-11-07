@@ -122,7 +122,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     @ViewChildren(TimeColumnComponent)
-    columns: QueryList<TimeColumnComponent<unknown, SelectableViewItem<unknown>>>;
+    columns: QueryList<TimeColumnComponent<number, SelectableViewItem<number>>>;
 
     /** Active column view to iterate with */
     activeView: FdTimeActiveView = 'hour';

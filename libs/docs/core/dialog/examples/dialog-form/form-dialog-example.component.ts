@@ -2,7 +2,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -21,7 +21,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         BarModule,
         CheckboxComponent,
         FormsModule,
-        ButtonModule
+        ButtonComponent
     ]
 })
 export class FormDialogExampleComponent {

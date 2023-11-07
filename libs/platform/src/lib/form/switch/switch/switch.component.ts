@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { SwitchComponent as CoreSwitchComponent } from '@fundamental-ngx/core/switch';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { BaseInput, PlatformFormField, PlatformFormFieldControl } from '@fundamental-ngx/platform/shared';
 import { SwitchConfig } from './switch.config';
@@ -33,7 +33,7 @@ export class SwitchChangeEvent {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: SwitchComponent, multi: true }],
     standalone: true,
-    imports: [SwitchModule, FdTranslatePipe]
+    imports: [CoreSwitchComponent, FdTranslatePipe]
 })
 export class SwitchComponent extends BaseInput {
     /** aria-labelledby attribute of the inner input element. */

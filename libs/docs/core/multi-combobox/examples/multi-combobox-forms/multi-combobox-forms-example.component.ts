@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
-import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
+import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
     selector: 'fd-multi-combobox-forms-example',
@@ -18,7 +18,7 @@ import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundame
         FormLabelComponent,
         CvaDirective,
         DataSourceDirective,
-        MultiComboboxModule,
+        MultiComboboxComponent,
         JsonPipe
     ]
 })

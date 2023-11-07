@@ -4,7 +4,7 @@ import { CdkScrollable } from '@angular/cdk/overlay';
 import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogService, ExtendedDialogConfig } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -103,7 +103,7 @@ const popoverDialogTs = 'dialog-inner-popover/dialog-inner-popover.component.ts'
         DialogBackdropContainerExampleComponent,
         DialogInnerPopoverComponent,
         PlayGroundComponent,
-        ButtonModule,
+        ButtonComponent,
         DialogModule,
         TitleComponent,
         CdkScrollable,

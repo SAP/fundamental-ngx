@@ -1,13 +1,13 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-icon-tnt-example',
     templateUrl: './icon-tnt-example.component.html',
     styleUrls: ['icon-example.component.scss'],
     standalone: true,
-    imports: [NgFor, IconModule]
+    imports: [NgFor, IconComponent]
 })
 export class IconTNTExampleComponent {
     icons: string[] = [

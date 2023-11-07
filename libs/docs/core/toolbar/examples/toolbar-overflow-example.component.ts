@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
@@ -25,7 +25,7 @@ import {
     standalone: true,
     imports: [
         ToolbarComponent,
-        ButtonModule,
+        ButtonComponent,
         ToolbarItemDirective,
         DatetimePickerComponent,
         SelectModule,

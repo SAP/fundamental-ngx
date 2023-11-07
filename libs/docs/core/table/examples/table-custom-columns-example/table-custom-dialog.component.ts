@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
@@ -93,7 +93,7 @@ import { DisplayedColumn } from './table-custom-columns-example.component';
         TemplateDirective,
         BarModule,
         ContentDensityDirective,
-        ButtonModule,
+        ButtonComponent,
         InputGroupModule,
         FormsModule,
         CdkScrollable,

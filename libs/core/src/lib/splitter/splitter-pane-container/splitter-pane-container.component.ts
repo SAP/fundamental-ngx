@@ -185,7 +185,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     }
 
     /** @hidden */
-    _getPaneStyles(pane: SplitterSplitPaneComponent): { [klass: string]: any } {
+    _getPaneStyles(pane: SplitterSplitPaneComponent): { [klass: string]: string } {
         const style = {
             'min-width': PANE_AUTO_SIZE,
             'max-width': PANE_NONE_SIZE,

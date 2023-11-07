@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DynamicPageModule } from '@fundamental-ngx/core/dynamic-page';
@@ -19,7 +19,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         DynamicPageModule,
         BreadcrumbModule,

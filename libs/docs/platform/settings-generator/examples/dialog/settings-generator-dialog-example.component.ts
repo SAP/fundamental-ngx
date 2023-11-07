@@ -11,7 +11,7 @@ import {
 import { Validators } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { ThemingService } from '@fundamental-ngx/core/theming';
@@ -84,7 +84,7 @@ export class ExampleUserService {
         TemplateDirective,
         BarModule,
         MessagePopoverComponent,
-        ButtonModule
+        ButtonComponent
     ]
 })
 export class SettingsGeneratorDialogExampleComponent {

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 import { ShellbarComponent, ShellbarLogoComponent, ShellbarSidenavDirective } from '@fundamental-ngx/core/shellbar';
@@ -13,7 +13,7 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
     standalone: true,
     imports: [
         ShellbarComponent,
-        ButtonModule,
+        ButtonComponent,
         ShellbarSidenavDirective,
         ShellbarLogoComponent,
         SideNavigationModule,

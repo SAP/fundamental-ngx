@@ -12,28 +12,28 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 import { ChangeDetectorRef, DestroyRef, Directive, ElementRef, EventEmitter, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataSourceDirective, MatchingBy, MatchingStrategy } from '@fundamental-ngx/cdk/data-source';
 import {
     CvaControl,
     CvaDirective,
     FormStates,
+    SelectableOptionItem,
     isOptionItem,
-    isSelectableOptionItem,
-    SelectableOptionItem
+    isSelectableOptionItem
 } from '@fundamental-ngx/cdk/forms';
-import { coerceArraySafe, isFunction, isJsObject, isString, Nullable, RangeSelector } from '@fundamental-ngx/cdk/utils';
+import { Nullable, RangeSelector, coerceArraySafe, isFunction, isJsObject, isString } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver } from '@fundamental-ngx/core/content-density';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, skip, startWith, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, Subscription, skip, startWith, timer } from 'rxjs';
 import {
-    FdMultiComboboxAcceptableDataSource,
-    FdMultiComboBoxDataSource
+    FdMultiComboBoxDataSource,
+    FdMultiComboboxAcceptableDataSource
 } from './data-source/multi-combobox-data-source';
 import { displayValue, flattenGroups, lookupValue, objectGet } from './helpers';
 import { MultiComboboxSelectionChangeEvent } from './models/selection-change.event';
 import { MultiComboboxConfig } from './multi-combobox-config';
 import { FD_MAP_LIMIT } from './multi-combobox.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export type TextAlignment = 'left' | 'right';
 
@@ -167,7 +167,7 @@ export abstract class BaseMultiCombobox<T = any> {
     private _dataSourceChanged = false;
 
     /** @hidden */
-    writeValue(value: any): void {
+    writeValue(value: T[]): void {
         this.selectedItems = coerceArraySafe(value);
         this._cva.writeValue(this.selectedItems);
         this._setSelectedSuggestions();
@@ -180,7 +180,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * @param emitOnChange whether to emit "onChange" event.
      * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
      */
-    setValue(value: any, emitOnChange = true): void {
+    setValue(value: T[], emitOnChange = true): void {
         this.selectedItems = coerceArraySafe(value);
         this._cva.setValue(this.selectedItems, emitOnChange);
         this._setSelectedSuggestions();
@@ -188,10 +188,10 @@ export abstract class BaseMultiCombobox<T = any> {
     }
 
     /** @hidden */
-    protected _displayFn = (value: any): string => displayValue(value, this.displayKey);
+    protected _displayFn = (value: T): string => displayValue(value, this.displayKey);
 
     /** @hidden */
-    protected _secondaryFn = (value: any): string => {
+    protected _secondaryFn = (value: T): string => {
         if (isOptionItem(value)) {
             return value.secondaryText ?? '';
         } else if (isJsObject(value) && this.secondaryKey) {
@@ -199,7 +199,7 @@ export abstract class BaseMultiCombobox<T = any> {
 
             return isFunction(currentItem) ? currentItem() : currentItem;
         } else {
-            return value;
+            return value as string;
         }
     };
 
@@ -239,7 +239,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Convert original data to SelectableOptionItems Interface
      * @hidden
      */
-    protected _convertToOptionItems(items: any[]): SelectableOptionItem<T>[] {
+    protected _convertToOptionItems(items: T[]): SelectableOptionItem<T>[] {
         const item = items[0];
 
         const elementTypeIsOptionItem = isSelectableOptionItem(item);
@@ -358,7 +358,7 @@ export abstract class BaseMultiCombobox<T = any> {
      * Convert T[] to SelectableOptionItems<T> Interface (Default)
      * @hidden
      */
-    protected _convertObjectsToDefaultOptionItems(items: any[]): SelectableOptionItem<T>[] {
+    protected _convertObjectsToDefaultOptionItems(items: T[]): SelectableOptionItem<T>[] {
         const selectItems: SelectableOptionItem[] = [];
 
         for (let i = 0; i < items.length; i++) {

@@ -2,11 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import {
     ArrayMultiComboBoxDataSource,
-    MultiComboboxModule,
+    MultiComboboxComponent,
     MultiComboboxSelectionChangeEvent
 } from '@fundamental-ngx/core/multi-combobox';
 import { of } from 'rxjs';
@@ -21,8 +21,8 @@ import { of } from 'rxjs';
         FormLabelComponent,
         CvaDirective,
         DataSourceDirective,
-        MultiComboboxModule,
-        ButtonModule,
+        MultiComboboxComponent,
+        ButtonComponent,
         JsonPipe
     ]
 })
