@@ -1,5 +1,5 @@
-import { Component, TemplateRef, ViewChild } from "@angular/core";
-import { ToolHeaderActionClass } from "../tool-header-action.class";
+import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ToolHeaderActionClass } from '../tool-header-action.class';
 
 @Component({
     selector: 'fdb-tool-header-action-separator',

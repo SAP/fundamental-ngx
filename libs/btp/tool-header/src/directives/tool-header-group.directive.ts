@@ -1,6 +1,6 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Directive, ElementRef, inject, Input } from '@angular/core';
-import { HasElementRef } from "@fundamental-ngx/cdk/utils";
+import { Directive, ElementRef, Input, inject } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 @Directive({
     selector: '[fdbToolHeaderGroup]',
