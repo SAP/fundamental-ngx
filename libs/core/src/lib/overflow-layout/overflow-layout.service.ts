@@ -1,6 +1,6 @@
 import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { resizeObservable } from '@fundamental-ngx/cdk/utils';
-import { debounceTime, distinctUntilChanged, filter, Observable, skip, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, debounceTime, distinctUntilChanged, filter, skip } from 'rxjs';
 import { OverflowLayoutItemContainerDirective } from './directives/overflow-layout-item-container.directive';
 import { OverflowLayoutFocusableItem } from './interfaces/overflow-focusable-item.interface';
 import { OverflowItemRef } from './interfaces/overflow-item-ref.interface';
@@ -10,7 +10,7 @@ export interface OverflowLayoutConfig {
     focusableItems: OverflowLayoutFocusableItem[];
     visibleItems: OverflowLayoutItemContainerDirective[];
     itemsWrapper: HTMLElement;
-    showMoreContainer: HTMLElement;
+    showMoreContainer?: HTMLElement;
     layoutContainerElement: HTMLElement;
     maxVisibleItems: number;
     direction: 'left' | 'right';
@@ -180,7 +180,9 @@ export class OverflowLayoutService implements OnDestroy {
         let fittingElmsWidth = 0;
         let shouldHideItems = false;
 
-        const showMoreContainerWidth = Math.ceil(this._getElementWidth(this.config.showMoreContainer));
+        const showMoreContainerWidth = Math.ceil(
+            this.config.showMoreContainer ? this._getElementWidth(this.config.showMoreContainer) : 0
+        );
         let layoutWidth = containerWidth - showMoreContainerWidth;
 
         // Try to find all forced visible items

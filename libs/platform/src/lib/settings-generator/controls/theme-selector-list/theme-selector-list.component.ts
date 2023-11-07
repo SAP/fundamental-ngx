@@ -1,12 +1,12 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, forwardRef } from '@angular/core';
+import { ClickedDirective } from '@fundamental-ngx/cdk/utils';
+import { ListModule } from '@fundamental-ngx/core/list';
 import {
     BaseDynamicFormGeneratorControl,
     dynamicFormFieldProvider,
     dynamicFormGroupChildProvider
 } from '@fundamental-ngx/platform/form';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-theme-selector-list',
@@ -19,7 +19,7 @@ import { ClickedBehaviorModule } from '@fundamental-ngx/cdk/utils';
     imports: [
         ListModule,
         NgFor,
-        ClickedBehaviorModule,
+        ClickedDirective,
         NgIf,
         forwardRef(() => ThemeSelectorListIconComponent),
         NgTemplateOutlet

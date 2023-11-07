@@ -1,7 +1,11 @@
-import { InjectionToken, Provider } from '@angular/core';
+import { InjectionToken, isDevMode, Provider } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { ClickedEventPlugin } from './clicked-event.plugin';
 
+/**
+ * @deprecated
+ * ClickedBehaviorModule is deprecated and will be removed in the next major release. Use ClickedDirective instead.
+ */
 export const ClickedBehaviorModuleForRootLoadedOnce = new InjectionToken<boolean>(
     'Checking Module providers had been loaded',
     { factory: () => false }
@@ -9,8 +13,14 @@ export const ClickedBehaviorModuleForRootLoadedOnce = new InjectionToken<boolean
 
 /**
  * Provides ClickedEventPlugin to the application
+ * @deprecated
  */
 export function provideFdkClicked(): Provider[] {
+    if (isDevMode()) {
+        console.warn(
+            `provideFdkClicked() is deprecated and will be removed in the next major release. Use ClickedDirective instead.`
+        );
+    }
     return [
         {
             provide: EVENT_MANAGER_PLUGINS,

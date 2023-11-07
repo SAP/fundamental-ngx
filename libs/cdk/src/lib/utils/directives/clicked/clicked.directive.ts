@@ -1,29 +1,38 @@
-import { Directive, EventEmitter, Inject, isDevMode, Output } from '@angular/core';
-import { ClickedBehaviorModuleForRootLoadedOnce } from './provide-fdk-clicked';
+import { DestroyRef, Directive, ElementRef, inject, Output, Renderer2 } from '@angular/core';
+import { fromEvent, merge, Observable, Subject } from 'rxjs';
 
 @Directive({
-    selector: '[fdkClicked]'
+    selector: '[fdkClicked]',
+    standalone: true
 })
 export class ClickedDirective {
     /**
      * Event name.
      */
     static eventName = 'fdkClicked';
+
     /**
-     * FdkClicked output. The sole purpose of the existence of this directive is to just silence Angular Language Service.
-     * This is the only viable solution, since NO_ERRORS_SCHEMA silences everything and valuable exception might slip
-     * through your eyes.
+     * Event emitted when user either clicks with mouse, or
+     * clicks on space or enter keys
      */
-    @Output() fdkClicked = new EventEmitter<MouseEvent | KeyboardEvent>();
+    @Output() fdkClicked: Observable<MouseEvent | KeyboardEvent>;
 
     /** @hidden */
-    constructor(@Inject(ClickedBehaviorModuleForRootLoadedOnce) clickedBehaviorModuleForRootLoadedOnce: boolean) {
-        if (!clickedBehaviorModuleForRootLoadedOnce && isDevMode()) {
-            console.warn(
-                'ClickedBehaviorModule.forRoot() was not called from RootModule, ' +
-                    'or provideFdkClicked() was not called during the bootstrap of application. ' +
-                    'You will not be able to use (fdkClicked) events in HostListeners.'
-            );
-        }
+    constructor() {
+        const { nativeElement: element } = inject<ElementRef<HTMLElement>>(ElementRef);
+        const renderer = inject(Renderer2);
+        const destroyRef = inject(DestroyRef);
+        const enter$ = new Subject<KeyboardEvent>();
+        const space$ = new Subject<KeyboardEvent>();
+
+        destroyRef.onDestroy(renderer.listen(element, 'keydown.enter', (e) => enter$.next(e)));
+        destroyRef.onDestroy(renderer.listen(element, 'keydown.space', (e) => space$.next(e)));
+
+        destroyRef.onDestroy(() => {
+            enter$.complete();
+            space$.complete();
+        });
+
+        this.fdkClicked = merge(fromEvent<MouseEvent>(element, 'click'), enter$, space$);
     }
 }

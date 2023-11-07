@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import {
     FdbToolHeaderActionButton,
-    ToolHeaderActionsDirective,
     ToolHeaderAutoModeDirective,
     ToolHeaderComponent
 } from '@fundamental-ngx/btp/tool-header';
@@ -26,7 +25,6 @@ import {
         ToolLayoutHeaderContainerDirective,
         ToolLayoutNavigationContainerDirective,
         SearchFieldComponent,
-        ToolHeaderActionsDirective,
         ToolHeaderAutoModeDirective,
         ToolHeaderComponent,
         FormsModule,

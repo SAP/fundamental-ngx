@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { FD_DATA_SOURCE_TRANSFORMER } from '@fundamental-ngx/cdk/data-source';
-import { ClickedBehaviorModule, SelectionService } from '@fundamental-ngx/cdk/utils';
+import { ClickedDirective, SelectionService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { Observable, of } from 'rxjs';
 import { TreeItemComponent } from './components/tree-item/tree-item.component';
@@ -179,7 +179,7 @@ describe('Tree component with projected nodes', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ClickedBehaviorModule.forRoot(), ProjectedTreeItemsComponent],
+            imports: [ClickedDirective, ProjectedTreeItemsComponent],
             providers: [
                 TreeService,
                 {
@@ -268,7 +268,7 @@ describe('Tree component with data source and tree item template', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ClickedBehaviorModule.forRoot(), DataSourceTreeComponent],
+            imports: [ClickedDirective, DataSourceTreeComponent],
             providers: [
                 TreeService,
                 {
