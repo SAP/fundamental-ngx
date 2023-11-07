@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.9...v0.47.0-rc.10) (2023-11-07)
+
+
+### Features
+
+* **core,platform:** stricter types ([#10878](https://github.com/SAP/fundamental-ngx/issues/10878)) ([9b9badb](https://github.com/SAP/fundamental-ngx/commit/9b9badb1bcd1c8a25c01009700596986f650f69e))
+
+
+
+
+
 # [0.47.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.8...v0.47.0-rc.9) (2023-11-06)
 
 **Note:** Version bump only for package @fundamental-ngx/cx
