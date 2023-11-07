@@ -41,7 +41,7 @@ export abstract class ToolHeaderComponentClass {
                 menuButtonVisible: true,
                 logoVisible: true,
                 productNameVisible: isPortrait ? !this.searchFieldExpanded() : true,
-                secondTitleVisible: isLandscape ? false : !this.searchFieldExpanded(),
+                secondTitleVisible: false,
                 searchFieldVisible,
                 searchFieldToggleActionVisible,
                 providedActionsVisible: true,
