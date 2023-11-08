@@ -22,3 +22,5 @@ e2e/tmp
 axe-reports
 
 .angular
+
+/.nx/cache
