@@ -1,18 +1,32 @@
-import { Directive, HostListener, Inject, inject, Input, NgModule } from '@angular/core';
-import { KeyUtil } from '../../functions';
+import {
+    ContentChildren,
+    Directive,
+    HostListener,
+    Inject,
+    inject,
+    Input,
+    NgModule,
+    QueryList
+} from '@angular/core';
+import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { FD_LANGUAGE, FdLanguage, TranslationResolver } from '@fundamental-ngx/i18n';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { firstValueFrom, Observable } from 'rxjs';
+import { TokenComponent } from "@fundamental-ngx/core/token";
 
 @Directive({
-    selector: '[fdkMultiAnnouncer]',
-    exportAs: 'fdkMultiAnnouncer',
+    selector: '[fdMultiAnnouncer]',
+    exportAs: 'fdMultiAnnouncer',
     standalone: true
 })
 export class MultiAnnouncerDirective {
     /** @hidden */
     @Input()
     multiAnnouncerOptions: any[];
+
+    /** @hidden */
+    @ContentChildren(TokenComponent, { descendants: true })
+    private _tokens: QueryList<TokenComponent>;
 
     /** @hidden */
     private readonly _translationResolver = new TranslationResolver();
@@ -53,13 +67,15 @@ export class MultiAnnouncerDirective {
                 this._resultsAnnounced = false;
             } else if (this.multiAnnouncerOptions.length) {
                 this._buildAnnouncement(this.multiAnnouncerOptions.length);
+                this._buildAnnouncement('navigateSelectionsWithArrows');
                 if (!this._resultsAnnounced) {
-                    this._buildAnnouncement('navigateSelectionsWithArrows');
                     this._noResultsAnnounced = false;
                     this._resultsAnnounced = true;
                 }
             }
-            this._buildAnnouncement('escapeNavigateTokens');
+            if (this._tokens && this._tokens.length) {
+                this._buildAnnouncement('escapeNavigateTokens');
+            }
             this._makeAnnouncement(this._announcement);
         }
     }
