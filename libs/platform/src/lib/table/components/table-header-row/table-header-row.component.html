@@ -60,6 +60,7 @@
         [columnName]="column.name"
         [id]="rowId + '__' + column.name"
         [attr.aria-colindex]="colIdx"
+        [attr.aria-sort]="(_fdpTableService.sortRules$ | async)?.get(column.key) | fdpTableColumnSortingDirection"
         [ngClass]="[
             'fdp-table__col--' + column.name,
             column._freezed ? 'fd-table__cell--fixed' : '',

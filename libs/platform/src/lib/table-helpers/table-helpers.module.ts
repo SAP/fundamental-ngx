@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import {
+    FdpCellDef,
     FdpCellSelectableDirective,
+    FdpEditableCellDef,
+    FdpEditableCellFormDirective,
+    FdpHeaderCellDef,
     FdpTableCell,
     FdpTableHeader,
     FdpViewSettingsFilterCustomDef,
@@ -8,17 +12,19 @@ import {
     PlatformTableColumnResponsiveDirective,
     TableCellHeaderPopoverDirective,
     TableDataSourceDirective,
-    TableHeaderResizerDirective,
-    TableScrollableDirective,
     TableDraggableDirective,
+    TableHeaderResizerDirective,
     TableInitialStateDirective,
-    TableVirtualScrollDirective,
-    FdpCellDef,
-    FdpEditableCellFormDirective,
-    FdpEditableCellDef,
-    FdpHeaderCellDef
+    TableScrollableDirective,
+    TableVirtualScrollDirective
 } from './directives';
-import { ColumnResizableSidePipe, RowClassesPipe, SelectionCellStylesPipe, TableCellStylesPipe } from './pipes';
+import {
+    ColumnResizableSidePipe,
+    RowClassesPipe,
+    SelectionCellStylesPipe,
+    TableCellStylesPipe,
+    TableColumnSortingDirectionPipe
+} from './pipes';
 
 const importExports = [
     TableInitialStateDirective,
@@ -44,7 +50,8 @@ const importExports = [
     SelectionCellStylesPipe,
     TableCellStylesPipe,
     ColumnResizableSidePipe,
-    RowClassesPipe
+    RowClassesPipe,
+    TableColumnSortingDirectionPipe
 ];
 
 @NgModule({
