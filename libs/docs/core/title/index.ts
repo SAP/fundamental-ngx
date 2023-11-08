@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { TitleDocsComponent } from './title-docs.component';
+import { TitleHeaderComponent } from './title-header/title-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./title-header/title-header.component').then((c) => c.TitleHeaderComponent),
+        component: TitleHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./title-docs.component').then((c) => c.TitleDocsComponent)
+                component: TitleDocsComponent
             }
         ],
         data: {

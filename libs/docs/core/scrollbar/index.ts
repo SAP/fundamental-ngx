@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ScrollbarDocsComponent } from './scrollbar-docs.component';
+import { ScrollbarHeaderComponent } from './scrollbar-header/scrollbar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./scrollbar-header/scrollbar-header.component').then((c) => c.ScrollbarHeaderComponent),
+        component: ScrollbarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./scrollbar-docs.component').then((c) => c.ScrollbarDocsComponent)
+                component: ScrollbarDocsComponent
             }
         ],
         data: {

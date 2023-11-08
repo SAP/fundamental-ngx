@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { CarouselDocsComponent } from './carousel-docs.component';
+import { CarouselHeaderComponent } from './carousel-header/carousel-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./carousel-header/carousel-header.component').then((c) => c.CarouselHeaderComponent),
+        component: CarouselHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./carousel-docs.component').then((c) => c.CarouselDocsComponent)
+                component: CarouselDocsComponent
             }
         ],
         data: {

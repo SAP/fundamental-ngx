@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { FacetDocsHeaderComponent } from './facet-header/facet-docs-header.component';
+import { FacetsDocsComponent } from './facets-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./facet-header/facet-docs-header.component').then((c) => c.FacetDocsHeaderComponent),
+        component: FacetDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./facets-docs.component').then((c) => c.FacetsDocsComponent)
+                component: FacetsDocsComponent
             }
         ],
         data: {

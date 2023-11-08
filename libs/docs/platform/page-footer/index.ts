@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformPageFooterDocsComponent } from './platform-page-footer-docs.component';
+import { PlatformPageFooterHeaderComponent } from './platform-page-footer-header/platform-page-footer-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-page-footer-header/platform-page-footer-header.component').then(
-                (c) => c.PlatformPageFooterHeaderComponent
-            ),
+        component: PlatformPageFooterHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-page-footer-docs.component').then((c) => c.PlatformPageFooterDocsComponent)
+                component: PlatformPageFooterDocsComponent
             }
         ],
         data: {

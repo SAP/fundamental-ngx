@@ -19,7 +19,7 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { getFormState } from '@fundamental-ngx/platform/form';
 import { countBy, flatten } from 'lodash-es';
@@ -46,7 +46,7 @@ import { convertFormState, convertFormStateToMessagePopoverState } from './utils
         ButtonComponent,
         NgClass,
         BarModule,
-        SegmentedButtonModule,
+        SegmentedButtonComponent,
         FormsModule,
         NgFor,
         ObjectStatusComponent,

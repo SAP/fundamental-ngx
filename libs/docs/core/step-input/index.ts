@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { StepInputDocsComponent } from './step-input-docs.component';
+import { StepInputHeaderComponent } from './step-input-header/step-input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./step-input-header/step-input-header.component').then((c) => c.StepInputHeaderComponent),
+        component: StepInputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./step-input-docs.component').then((c) => c.StepInputDocsComponent)
+                component: StepInputDocsComponent
             }
         ],
         data: {

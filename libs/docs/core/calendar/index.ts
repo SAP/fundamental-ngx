@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { CalendarDocsComponent } from './calendar-docs.component';
+import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./calendar-header/calendar-header.component').then((c) => c.CalendarHeaderComponent),
+        component: CalendarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./calendar-docs.component').then((c) => c.CalendarDocsComponent)
+                component: CalendarDocsComponent
             }
         ],
         data: {

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformActionBarDocsComponent } from './platform-action-bar-docs.component';
+import { PlatformActionBarHeaderComponent } from './platform-action-bar-header/platform-action-bar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-action-bar-header/platform-action-bar-header.component').then(
-                (c) => c.PlatformActionBarHeaderComponent
-            ),
+        component: PlatformActionBarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-action-bar-docs.component').then((c) => c.PlatformActionBarDocsComponent)
+                component: PlatformActionBarDocsComponent
             }
         ],
         data: {

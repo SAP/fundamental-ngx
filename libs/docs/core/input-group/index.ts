@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { InputGroupDocsComponent } from './input-group-docs.component';
+import { InputGroupHeaderComponent } from './input-group-header/input-group-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./input-group-header/input-group-header.component').then((c) => c.InputGroupHeaderComponent),
+        component: InputGroupHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./input-group-docs.component').then((c) => c.InputGroupDocsComponent)
+                component: InputGroupDocsComponent
             }
         ],
         data: {

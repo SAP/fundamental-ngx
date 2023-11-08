@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { MessagePageDocsComponent } from './message-page-docs.component';
+import { MessagePageHeaderComponent } from './message-page-header/message-page-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./message-page-header/message-page-header.component').then((c) => c.MessagePageHeaderComponent),
+        component: MessagePageHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./message-page-docs.component').then((c) => c.MessagePageDocsComponent)
+                component: MessagePageDocsComponent
             }
         ],
         data: {

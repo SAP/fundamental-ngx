@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TimelineDocsComponent } from './timeline-docs.component';
+import { TimelineHeaderDocsComponent } from './timeline-header-docs/timeline-header-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./timeline-header-docs/timeline-header-docs.component').then((c) => c.TimelineHeaderDocsComponent),
+        component: TimelineHeaderDocsComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./timeline-docs.component').then((c) => c.TimelineDocsComponent)
+                component: TimelineDocsComponent
             }
         ],
         data: {

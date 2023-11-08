@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { FormMessageDocsComponent } from './form-message-docs.component';
+import { FormMessageHeaderComponent } from './form-message-header/form-message-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./form-message-header/form-message-header.component').then((c) => c.FormMessageHeaderComponent),
+        component: FormMessageHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./form-message-docs.component').then((c) => c.FormMessageDocsComponent)
+                component: FormMessageDocsComponent
             }
         ],
         data: {

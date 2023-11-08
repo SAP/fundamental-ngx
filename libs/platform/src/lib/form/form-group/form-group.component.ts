@@ -55,7 +55,7 @@ import {
     contentDensityObserverProviders
 } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     ColumnLayout,
@@ -182,7 +182,7 @@ let formGroupUniqueId = 0;
         FormGroupHeaderComponent,
         LinkComponent,
         IconComponent,
-        InlineHelpModule,
+        InlineHelpDirective,
         AsyncPipe,
         KeyValuePipe,
         FieldGroupRowValuePipe,

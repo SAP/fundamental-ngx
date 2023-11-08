@@ -10,21 +10,21 @@ import {
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { filter, takeUntil } from 'rxjs/operators';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
+import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
+import { TitleComponent } from '@fundamental-ngx/core/title';
+import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
 import { WizardDialogData } from '../../interfaces/wizard-dialog-data.interface';
 import { WizardTitle } from '../../interfaces/wizard-title.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
-import { MessageBoxModule, MessageBoxService } from '@fundamental-ngx/core/message-box';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 
 @Component({
     selector: 'fdp-dialog-wizard-generator',
@@ -41,7 +41,7 @@ import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
         WizardBodyComponent,
         NgIf,
         BarModule,
-        PlatformButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         NgTemplateOutlet,
         MessageBoxModule,

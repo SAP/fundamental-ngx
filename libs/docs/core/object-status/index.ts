@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ObjectStatusDocsComponent } from './object-status-docs.component';
+import { ObjectStatusHeaderComponent } from './object-status-header/object-status-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./object-status-header/object-status-header.component').then((c) => c.ObjectStatusHeaderComponent),
+        component: ObjectStatusHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./object-status-docs.component').then((c) => c.ObjectStatusDocsComponent)
+                component: ObjectStatusDocsComponent
             }
         ],
         data: {

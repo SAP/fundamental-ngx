@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformWizardGeneratorDocsComponent } from './platform-wizard-generator-docs.component';
+import { PlatformWizardGeneratorHeaderComponent } from './platform-wizard-generator-header/platform-wizard-generator-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-wizard-generator-header/platform-wizard-generator-header.component').then(
-                (c) => c.PlatformWizardGeneratorHeaderComponent
-            ),
+        component: PlatformWizardGeneratorHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-wizard-generator-docs.component').then(
-                        (c) => c.PlatformWizardGeneratorDocsComponent
-                    )
+                component: PlatformWizardGeneratorDocsComponent
             }
         ],
         data: {

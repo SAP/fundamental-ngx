@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { ObjectIdentifierDocsComponent } from './object-identifier-docs.component';
+import { ObjectIdentifierHeaderComponent } from './object-identifier-header/object-identifier-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./object-identifier-header/object-identifier-header.component').then(
-                (c) => c.ObjectIdentifierHeaderComponent
-            ),
+        component: ObjectIdentifierHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./object-identifier-docs.component').then((c) => c.ObjectIdentifierDocsComponent)
+                component: ObjectIdentifierDocsComponent
             }
         ],
         data: {

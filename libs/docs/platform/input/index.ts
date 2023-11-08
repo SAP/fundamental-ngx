@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformInputDocsComponent } from './platform-input-docs.component';
+import { PlatformInputHeaderComponent } from './platform-input-header/platform-input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-input-header/platform-input-header.component').then(
-                (c) => c.PlatformInputHeaderComponent
-            ),
+        component: PlatformInputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./platform-input-docs.component').then((c) => c.PlatformInputDocsComponent)
+                component: PlatformInputDocsComponent
             }
         ],
         data: {

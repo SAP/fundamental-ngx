@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TabbableDocsComponent } from './tabbable-docs.component';
+import { TabbableHeaderComponent } from './tabbable-header/tabbable-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./tabbable-header/tabbable-header.component').then((c) => c.TabbableHeaderComponent),
+        component: TabbableHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./tabbable-docs.component').then((c) => c.TabbableDocsComponent)
+                component: TabbableDocsComponent
             }
         ],
         data: {

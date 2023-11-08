@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { WizardDocsComponent } from './wizard-docs.component';
+import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./wizard-header/wizard-header.component').then((c) => c.WizardHeaderComponent),
+        component: WizardHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./wizard-docs.component').then((c) => c.WizardDocsComponent)
+                component: WizardDocsComponent
             }
         ],
         data: {

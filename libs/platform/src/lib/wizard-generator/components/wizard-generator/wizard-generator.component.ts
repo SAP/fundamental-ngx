@@ -8,17 +8,17 @@ import {
 } from '@angular/core';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 
-import { WizardGeneratorService } from '../../wizard-generator.service';
+import { NgIf } from '@angular/common';
+import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
 import { WizardGeneratorFinishButtonDirective } from '../../directives/wizard-generator-finish-button.directive';
 import { WizardGeneratorGoNextButtonDirective } from '../../directives/wizard-generator-go-next-button.directive';
-import { WizardGeneratorSummaryStepDirective } from '../../directives/wizard-generator-summary-step.directive';
 import { WizardGeneratorReviewButtonDirective } from '../../directives/wizard-generator-review-button.directive';
+import { WizardGeneratorSummaryStepDirective } from '../../directives/wizard-generator-summary-step.directive';
+import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
-import { NgIf } from '@angular/common';
-import { WizardModule } from '@fundamental-ngx/core/wizard';
-import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fdp-wizard-generator',
@@ -27,7 +27,7 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [WizardGeneratorService, FormGeneratorService],
     standalone: true,
-    imports: [NgIf, WizardBodyComponent, WizardModule, RepeatDirective, SkeletonModule]
+    imports: [NgIf, WizardBodyComponent, WizardModule, RepeatDirective, SkeletonComponent]
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**

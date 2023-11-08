@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { LayoutPanelDocsHeaderComponent } from './layout-panel-docs-header/layout-panel-docs-header.component';
+import { LayoutPanelDocsComponent } from './layout-panel-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./layout-panel-docs-header/layout-panel-docs-header.component').then(
-                (c) => c.LayoutPanelDocsHeaderComponent
-            ),
+        component: LayoutPanelDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./layout-panel-docs.component').then((c) => c.LayoutPanelDocsComponent)
+                component: LayoutPanelDocsComponent
             }
         ],
         data: {

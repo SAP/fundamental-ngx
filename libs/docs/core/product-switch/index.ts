@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { ProductSwitchDocsHeaderComponent } from './product-switch-docs-header/product-switch-docs-header.component';
+import { ProductSwitchDocsComponent } from './product-switch-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./product-switch-docs-header/product-switch-docs-header.component').then(
-                (c) => c.ProductSwitchDocsHeaderComponent
-            ),
+        component: ProductSwitchDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./product-switch-docs.component').then((c) => c.ProductSwitchDocsComponent)
+                component: ProductSwitchDocsComponent
             }
         ],
         data: {

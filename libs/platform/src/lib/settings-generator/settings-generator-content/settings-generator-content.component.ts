@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
@@ -37,7 +37,7 @@ import { SettingsGeneratorSectionComponent } from './settings-generator-section/
         TitleComponent,
         NgIf,
         ButtonComponent,
-        SkeletonModule,
+        SkeletonComponent,
         TabsModule,
         NgFor,
         SettingsGeneratorSectionComponent,

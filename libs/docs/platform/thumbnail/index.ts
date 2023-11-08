@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformThumbnailHeaderComponent } from './platform-thumbnail-header/platform-thumbnail-header.component';
+import { PlatformThumbnailDocsComponent } from './platform-thumbnail.docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-thumbnail-header/platform-thumbnail-header.component').then(
-                (c) => c.PlatformThumbnailHeaderComponent
-            ),
+        component: PlatformThumbnailHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-thumbnail.docs.component').then((c) => c.PlatformThumbnailDocsComponent)
+                component: PlatformThumbnailDocsComponent
             }
         ],
         data: {

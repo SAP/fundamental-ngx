@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { NotificationDocsHeaderComponent } from './notification-docs-header/notification-docs-header.component';
+import { NotificationDocsComponent } from './notification-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./notification-docs-header/notification-docs-header.component').then(
-                (c) => c.NotificationDocsHeaderComponent
-            ),
+        component: NotificationDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./notification-docs.component').then((c) => c.NotificationDocsComponent)
+                component: NotificationDocsComponent
             }
         ],
         data: {

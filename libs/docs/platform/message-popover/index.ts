@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { MessagePopoverDocsComponent } from './message-popover-docs.component';
+import { MessagePopoverHeaderComponent } from './message-popover-header/message-popover-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./message-popover-header/message-popover-header.component').then(
-                (c) => c.MessagePopoverHeaderComponent
-            ),
+        component: MessagePopoverHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./message-popover-docs.component').then((c) => c.MessagePopoverDocsComponent)
+                component: MessagePopoverDocsComponent
             }
         ],
         data: {

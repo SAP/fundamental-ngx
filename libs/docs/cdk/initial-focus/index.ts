@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { InitialFocusDocsComponent } from './initial-focus-docs.component';
+import { InitialFocusHeaderComponent } from './initial-focus-header/initial-focus-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./initial-focus-header/initial-focus-header.component').then((c) => c.InitialFocusHeaderComponent),
+        component: InitialFocusHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./initial-focus-docs.component').then((c) => c.InitialFocusDocsComponent)
+                component: InitialFocusDocsComponent
             }
         ],
         data: {

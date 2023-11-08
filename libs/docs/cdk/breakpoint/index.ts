@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { BreakpointDocsComponent } from './breakpoint-docs.component';
+import { BreakpointHeaderComponent } from './breakpoint-header/breakpoint-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./breakpoint-header/breakpoint-header.component').then((c) => c.BreakpointHeaderComponent),
+        component: BreakpointHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./breakpoint-docs.component').then((c) => c.BreakpointDocsComponent)
+                component: BreakpointDocsComponent
             }
         ],
         data: {

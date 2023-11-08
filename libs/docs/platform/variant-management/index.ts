@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { VariantManagementDocsComponent } from './variant-management-docs.component';
+import { VariantManagementHeaderComponent } from './variant-management-header/variant-management-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./variant-management-header/variant-management-header.component').then(
-                (c) => c.VariantManagementHeaderComponent
-            ),
+        component: VariantManagementHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./variant-management-docs.component').then((c) => c.VariantManagementDocsComponent)
+                component: VariantManagementDocsComponent
             }
         ],
         data: {

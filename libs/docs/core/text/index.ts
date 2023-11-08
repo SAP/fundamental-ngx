@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { TextDocsComponent } from './text-docs.component';
+import { TextHeaderComponent } from './text-header/text-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./text-header/text-header.component').then((c) => c.TextHeaderComponent),
+        component: TextHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./text-docs.component').then((c) => c.TextDocsComponent)
+                component: TextDocsComponent
             }
         ],
         data: {

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { InfiniteScrollDocsComponent } from './infinite-scroll-docs.component';
+import { InfiniteScrollHeaderComponent } from './infinite-scroll-header/infinite-scroll-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./infinite-scroll-header/infinite-scroll-header.component').then(
-                (c) => c.InfiniteScrollHeaderComponent
-            ),
+        component: InfiniteScrollHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./infinite-scroll-docs.component').then((c) => c.InfiniteScrollDocsComponent)
+                component: InfiniteScrollDocsComponent
             }
         ],
         data: {

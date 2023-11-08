@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { FileUploaderDocsComponent } from './file-uploader-docs.component';
+import { FileUploaderHeaderComponent } from './file-uploader-header/file-uploader-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./file-uploader-header/file-uploader-header.component').then((c) => c.FileUploaderHeaderComponent),
+        component: FileUploaderHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./file-uploader-docs.component').then((c) => c.FileUploaderDocsComponent)
+                component: FileUploaderDocsComponent
             }
         ],
         data: {
