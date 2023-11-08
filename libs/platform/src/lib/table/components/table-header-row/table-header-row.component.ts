@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -23,6 +24,7 @@ import { TableRowDirective } from '@fundamental-ngx/core/table';
 import {
     SelectionMode,
     SelectionModeValue,
+    SortDirection,
     TableColumn,
     TableColumnResizeService,
     TableRowService,
@@ -107,6 +109,9 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
+
+    /** @hidden */
+    readonly SORT_DIRECTION = SortDirection;
 
     /** @hidden */
     readonly _tableColumnResizeService = inject(TableColumnResizeService);

@@ -7,6 +7,7 @@
         <fd-icon
             *ngIf="hasSorting"
             fd-table-icon
+            [ariaHidden]="true"
             [glyph]="sorting?.direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
         ></fd-icon>
     </div>
