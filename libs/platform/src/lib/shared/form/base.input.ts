@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -6,23 +8,25 @@ import {
     ElementRef,
     Host,
     Inject,
+    InjectionToken,
     Input,
-    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
     Self,
     SkipSelf,
-    ViewChild
+    ViewChild,
+    isDevMode
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Observable, Subject } from 'rxjs';
 
-import { BaseComponent } from '../base';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates, isValidControlState } from '@fundamental-ngx/cdk/forms';
+import { BaseComponent } from '../base';
 import { PlatformFormField, PlatformFormFieldControl } from './form-field';
+
+export const FDP_DO_CHECK = new InjectionToken<Observable<void>>('FdpInputDoCheckTrigger');
 
 let randomId = 0;
 
@@ -239,10 +243,12 @@ export abstract class BaseInput
         const labelAndHelpId = `fdp-form-label-content-${this.id}`;
         // if not specified, associate label and inline help ids with the input,
         // else add these ids to the specified ones
-        if (!this.ariaLabelledBy) {
-            this.ariaLabelledBy = labelAndHelpId;
-        } else {
-            this.ariaLabelledBy += ' ' + labelAndHelpId;
+        if (this.formField) {
+            if (!this.ariaLabelledBy) {
+                this.ariaLabelledBy = labelAndHelpId;
+            } else {
+                this.ariaLabelledBy += ' ' + labelAndHelpId;
+            }
         }
         this._cd.detectChanges();
     }
