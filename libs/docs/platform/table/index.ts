@@ -1,14 +1,20 @@
 import { Routes } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ExampleChildService } from '@fundamental-ngx/docs/shared';
+import { AdvancedExamplesDocsComponent } from './child-docs/advanced/advanced-examples-docs.component';
+import { ClickableRowsDocsComponent } from './child-docs/clickable-rows/clickable-rows-docs.component';
+import { P13DialogDocsComponent } from './child-docs/p13-dialog/p13-dialog-docs.component';
+import { PreservedStateDocsComponent } from './child-docs/preserving-state/preserved-state-docs.component';
+import { RowSelectionDocsComponent } from './child-docs/row-selection/row-selection-docs.component';
+import { TableScrollingDocsComponent } from './child-docs/scrolling/table-scrolling-docs.component';
+import { SettingsDialogDocsComponent } from './child-docs/settings-dialog/settings-dialog-docs.component';
+import { PlatformTableDocsComponent } from './platform-table-docs.component';
+import { PlatformTableHeaderComponent } from './platform-table-header/platform-table-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-table-header/platform-table-header.component').then(
-                (c) => c.PlatformTableHeaderComponent
-            ),
+        component: PlatformTableHeaderComponent,
         providers: [ExampleChildService, RtlService],
         children: [
             {
@@ -18,54 +24,35 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'basic',
-                loadComponent: () => import('./platform-table-docs.component').then((c) => c.PlatformTableDocsComponent)
+                component: PlatformTableDocsComponent
             },
             {
                 path: 'p13-dialog-table',
-                loadComponent: () =>
-                    import('./child-docs/p13-dialog/p13-dialog-docs.component').then((c) => c.P13DialogDocsComponent)
+                component: P13DialogDocsComponent
             },
             {
                 path: 'settings-dialog-table',
-                loadComponent: () =>
-                    import('./child-docs/settings-dialog/settings-dialog-docs.component').then(
-                        (c) => c.SettingsDialogDocsComponent
-                    )
+                component: SettingsDialogDocsComponent
             },
             {
                 path: 'scrolling',
-                loadComponent: () =>
-                    import('./child-docs/scrolling/table-scrolling-docs.component').then(
-                        (c) => c.TableScrollingDocsComponent
-                    )
+                component: TableScrollingDocsComponent
             },
             {
                 path: 'row-selection',
-                loadComponent: () =>
-                    import('./child-docs/row-selection/row-selection-docs.component').then(
-                        (c) => c.RowSelectionDocsComponent
-                    )
+                component: RowSelectionDocsComponent
             },
             {
                 path: 'clickable-rows',
-                loadComponent: () =>
-                    import('./child-docs/clickable-rows/clickable-rows-docs.component').then(
-                        (c) => c.ClickableRowsDocsComponent
-                    )
+                component: ClickableRowsDocsComponent
             },
             {
                 path: 'preserved-state',
-                loadComponent: () =>
-                    import('./child-docs/preserving-state/preserved-state-docs.component').then(
-                        (c) => c.PreservedStateDocsComponent
-                    )
+                component: PreservedStateDocsComponent
             },
             {
                 path: 'advanced',
-                loadComponent: () =>
-                    import('./child-docs/advanced/advanced-examples-docs.component').then(
-                        (c) => c.AdvancedExamplesDocsComponent
-                    )
+                component: AdvancedExamplesDocsComponent
             }
         ],
         data: {

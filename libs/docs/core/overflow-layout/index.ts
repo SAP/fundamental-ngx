@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { OverflowLayoutDocsComponent } from './overflow-layout-docs.component';
+import { OverflowLayoutHeaderComponent } from './overflow-layout-header/overflow-layout-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./overflow-layout-header/overflow-layout-header.component').then(
-                (c) => c.OverflowLayoutHeaderComponent
-            ),
+        component: OverflowLayoutHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./overflow-layout-docs.component').then((c) => c.OverflowLayoutDocsComponent)
+                component: OverflowLayoutDocsComponent
             }
         ],
         data: {

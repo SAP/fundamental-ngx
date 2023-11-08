@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformVhdHeaderComponent } from './platform-vhd-header/platform-vhd-header.component';
+import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-vhd-header/platform-vhd-header.component').then((c) => c.PlatformVhdHeaderComponent),
+        component: PlatformVhdHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./platform-vhd.docs.component').then((c) => c.PlatformVhdDocsComponent)
+                component: PlatformVhdDocsComponent
             }
         ],
         data: {

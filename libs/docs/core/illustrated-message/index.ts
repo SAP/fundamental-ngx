@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { IllustratedMessageDocsComponent } from './illustrated-message-docs.component';
+import { IllustratedMessageHeaderComponent } from './illustrated-message-header/illustrated-message-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./illustrated-message-header/illustrated-message-header.component').then(
-                (c) => c.IllustratedMessageHeaderComponent
-            ),
+        component: IllustratedMessageHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./illustrated-message-docs.component').then((c) => c.IllustratedMessageDocsComponent)
+                component: IllustratedMessageDocsComponent
             }
         ],
         data: {

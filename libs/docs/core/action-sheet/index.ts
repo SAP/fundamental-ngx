@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ActionSheetDocsComponent } from './action-sheet-docs.component';
+import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./action-sheet-header/action-sheet-header.component').then((c) => c.ActionSheetHeaderComponent),
+        component: ActionSheetHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./action-sheet-docs.component').then((c) => c.ActionSheetDocsComponent)
+                component: ActionSheetDocsComponent
             }
         ],
         data: {

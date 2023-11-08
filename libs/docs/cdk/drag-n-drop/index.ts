@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
+import { DndDocsComponent } from './dnd-docs.component';
+import { DndHeaderComponent } from './dnd-header/dnd-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./dnd-header/dnd-header.component').then((c) => c.DndHeaderComponent),
+        component: DndHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () => import('./dnd-docs.component').then((c) => c.DndDocsComponent)
+                component: DndDocsComponent
             }
         ]
     }

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { SelectableListDocsComponent } from './selectable-list-docs.component';
+import { SelectableListHeaderComponent } from './selectable-list-header/selectable-list-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./selectable-list-header/selectable-list-header.component').then(
-                (c) => c.SelectableListHeaderComponent
-            ),
+        component: SelectableListHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./selectable-list-docs.component').then((c) => c.SelectableListDocsComponent)
+                component: SelectableListDocsComponent
             }
         ],
         data: {

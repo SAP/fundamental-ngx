@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { QuickViewDocsHeaderComponent } from './quick-view-docs-header/quick-view-docs-header.component';
+import { QuickViewDocsComponent } from './quick-view-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./quick-view-docs-header/quick-view-docs-header.component').then(
-                (c) => c.QuickViewDocsHeaderComponent
-            ),
+        component: QuickViewDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./quick-view-docs.component').then((c) => c.QuickViewDocsComponent)
+                component: QuickViewDocsComponent
             }
         ],
         data: {

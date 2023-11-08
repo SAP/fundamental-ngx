@@ -1,17 +1,18 @@
 import { Routes } from '@angular/router';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedToolbarSizeDirective } from '@fundamental-ngx/core/toolbar';
+import { ToolbarDocumentationComponent } from './toolbar-documentation.component';
+import { ToolbarHeaderComponent } from './toolbar-header/toolbar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./toolbar-header/toolbar-header.component').then((c) => c.ToolbarHeaderComponent),
+        component: ToolbarHeaderComponent,
         providers: [moduleDeprecationsProvider(DeprecatedToolbarSizeDirective)],
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./toolbar-documentation.component').then((c) => c.ToolbarDocumentationComponent)
+                component: ToolbarDocumentationComponent
             }
         ],
         data: {

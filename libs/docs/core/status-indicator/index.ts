@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { StatusIndicatorDocsComponent } from './status-indicator-docs.component';
+import { StatusIndicatorHeaderComponent } from './status-indicator-header/status-indicator-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./status-indicator-header/status-indicator-header.component').then(
-                (c) => c.StatusIndicatorHeaderComponent
-            ),
+        component: StatusIndicatorHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./status-indicator-docs.component').then((c) => c.StatusIndicatorDocsComponent)
+                component: StatusIndicatorDocsComponent
             }
         ],
         data: {

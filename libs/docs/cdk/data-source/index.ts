@@ -1,17 +1,18 @@
 import { Routes } from '@angular/router';
+import { DataSourceDocsComponent } from './data-source-docs.component';
+import { DataSourceHeaderComponent } from './data-source-header/data-source-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./data-source-header/data-source-header.component').then((c) => c.DataSourceHeaderComponent),
+        component: DataSourceHeaderComponent,
         data: {
             primary: true
         },
         children: [
             {
                 path: '',
-                loadComponent: () => import('./data-source-docs.component').then((c) => c.DataSourceDocsComponent)
+                component: DataSourceDocsComponent
             }
         ]
     }

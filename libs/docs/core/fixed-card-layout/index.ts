@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { FixedCardLayoutDocsHeaderComponent } from './fixed-card-layout-docs-header/fixed-card-layout-docs-header.component';
+import { FixedCardLayoutDocsComponent } from './fixed-card-layout-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./fixed-card-layout-docs-header/fixed-card-layout-docs-header.component').then(
-                (c) => c.FixedCardLayoutDocsHeaderComponent
-            ),
+        component: FixedCardLayoutDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./fixed-card-layout-docs.component').then((c) => c.FixedCardLayoutDocsComponent)
+                component: FixedCardLayoutDocsComponent
             }
         ],
         data: {

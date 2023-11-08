@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { DatePickerDocsComponent } from './date-picker-docs.component';
+import { DatePickerHeaderComponent } from './date-picker-header/date-picker-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./date-picker-header/date-picker-header.component').then((c) => c.DatePickerHeaderComponent),
+        component: DatePickerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./date-picker-docs.component').then((c) => c.DatePickerDocsComponent)
+                component: DatePickerDocsComponent
             }
         ],
         data: {

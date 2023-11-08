@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformPanelDocsComponent } from './platform-panel-docs.component';
+import { PlatformPanelHeaderComponent } from './platform-panel-header/platform-panel-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-panel-header/platform-panel-header.component').then(
-                (c) => c.PlatformPanelHeaderComponent
-            ),
+        component: PlatformPanelHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./platform-panel-docs.component').then((c) => c.PlatformPanelDocsComponent)
+                component: PlatformPanelDocsComponent
             }
         ],
         data: {

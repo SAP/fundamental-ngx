@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { ThemingDocsComponent } from './theming-docs.component';
+import { ThemingHeaderComponent } from './theming-header/theming-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./theming-header/theming-header.component').then((c) => c.ThemingHeaderComponent),
+        component: ThemingHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./theming-docs.component').then((c) => c.ThemingDocsComponent)
+                component: ThemingDocsComponent
             }
         ],
         data: {

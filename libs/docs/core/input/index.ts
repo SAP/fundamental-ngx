@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { InputDocsComponent } from './input-docs.component';
+import { InputHeaderComponent } from './input-header/input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./input-header/input-header.component').then((c) => c.InputHeaderComponent),
+        component: InputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./input-docs.component').then((c) => c.InputDocsComponent)
+                component: InputDocsComponent
             }
         ],
         data: {

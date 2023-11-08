@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { DayjsDatetimeAdapterDocsComponent } from './dayjs-datetime-adapter-docs.component';
+import { DayjsDatetimeAdapterHeaderComponent } from './dayjs-datetime-adapter-header/dayjs-datetime-adapter-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./dayjs-datetime-adapter-header/dayjs-datetime-adapter-header.component').then(
-                (c) => c.DayjsDatetimeAdapterHeaderComponent
-            ),
+        component: DayjsDatetimeAdapterHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./dayjs-datetime-adapter-docs.component').then((c) => c.DayjsDatetimeAdapterDocsComponent)
+                component: DayjsDatetimeAdapterDocsComponent
             }
         ],
         data: {

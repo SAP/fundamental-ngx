@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { DynamicSideContentDocsComponent } from './dynamic-side-content-docs.component';
+import { DynamicSideContentHeaderComponent } from './dynamic-side-content-header/dynamic-side-content-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./dynamic-side-content-header/dynamic-side-content-header.component').then(
-                (c) => c.DynamicSideContentHeaderComponent
-            ),
+        component: DynamicSideContentHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./dynamic-side-content-docs.component').then((c) => c.DynamicSideContentDocsComponent)
+                component: DynamicSideContentDocsComponent
             }
         ],
         data: {

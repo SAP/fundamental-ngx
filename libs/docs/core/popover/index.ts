@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { PopoverDocsComponent } from './popover-docs.component';
+import { PopoverHeaderComponent } from './popover-header/popover-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./popover-header/popover-header.component').then((c) => c.PopoverHeaderComponent),
+        component: PopoverHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./popover-docs.component').then((c) => c.PopoverDocsComponent)
+                component: PopoverDocsComponent
             }
         ],
         data: {

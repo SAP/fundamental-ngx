@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ComboboxDocsComponent } from './combobox-docs.component';
+import { ComboboxHeaderComponent } from './combobox-header/combobox-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./combobox-header/combobox-header.component').then((c) => c.ComboboxHeaderComponent),
+        component: ComboboxHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./combobox-docs.component').then((c) => c.ComboboxDocsComponent)
+                component: ComboboxDocsComponent
             }
         ],
         data: {

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TileDocsHeaderComponent } from './tile-docs-header/tile-docs-header.component';
+import { TileDocsComponent } from './tile-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./tile-docs-header/tile-docs-header.component').then((c) => c.TileDocsHeaderComponent),
+        component: TileDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./tile-docs.component').then((c) => c.TileDocsComponent)
+                component: TileDocsComponent
             }
         ],
         data: {

@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { ObjectPageDocsComponent } from './object-page-docs.component';
+import { ObjectPageDocsHeaderComponent } from './object-page-header/object-page-docs-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./object-page-header/object-page-docs-header.component').then(
-                (c) => c.ObjectPageDocsHeaderComponent
-            ),
+        component: ObjectPageDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./object-page-docs.component').then((c) => c.ObjectPageDocsComponent)
+                component: ObjectPageDocsComponent
             }
         ],
         data: {

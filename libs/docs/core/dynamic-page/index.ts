@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { DynamicPageDocsComponent } from './dynamic-page-docs.component';
+import { DynamicPageDocsHeaderComponent } from './dynamic-page-header/dynamic-page-docs-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./dynamic-page-header/dynamic-page-docs-header.component').then(
-                (c) => c.DynamicPageDocsHeaderComponent
-            ),
+        component: DynamicPageDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./dynamic-page-docs.component').then((c) => c.DynamicPageDocsComponent)
+                component: DynamicPageDocsComponent
             }
         ],
         data: {

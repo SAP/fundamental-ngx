@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformMenuDocsComponent } from './platform-menu-docs.component';
+import { PlatformMenuHeaderComponent } from './platform-menu-header/platform-menu-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-menu-header/platform-menu-header.component').then((c) => c.PlatformMenuHeaderComponent),
+        component: PlatformMenuHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./platform-menu-docs.component').then((c) => c.PlatformMenuDocsComponent)
+                component: PlatformMenuDocsComponent
             }
         ],
         data: {

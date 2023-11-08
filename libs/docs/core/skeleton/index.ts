@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { SkeletonDocsComponent } from './skeleton-docs.component';
+import { SkeletonHeaderComponent } from './skeleton-header/skeleton-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./skeleton-header/skeleton-header.component').then((c) => c.SkeletonHeaderComponent),
+        component: SkeletonHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./skeleton-docs.component').then((c) => c.SkeletonDocsComponent)
+                component: SkeletonDocsComponent
             }
         ],
         data: {

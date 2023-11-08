@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { TimeDocsComponent } from './time-docs.component';
+import { TimeHeaderComponent } from './time-header/time-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./time-header/time-header.component').then((c) => c.TimeHeaderComponent),
+        component: TimeHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./time-docs.component').then((c) => c.TimeDocsComponent)
+                component: TimeDocsComponent
             }
         ],
         data: {

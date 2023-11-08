@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformCheckboxDocsComponent } from './platform-checkbox-docs.component';
+import { PlatformCheckboxHeaderComponent } from './platform-checkbox-header/platform-checkbox-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-checkbox-header/platform-checkbox-header.component').then(
-                (c) => c.PlatformCheckboxHeaderComponent
-            ),
+        component: PlatformCheckboxHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-checkbox-docs.component').then((c) => c.PlatformCheckboxDocsComponent)
+                component: PlatformCheckboxDocsComponent
             }
         ],
         data: {

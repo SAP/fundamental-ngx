@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformMultiInputDocsComponent } from './platform-multi-input-docs.component';
+import { PlatformMultiInputHeaderComponent } from './platform-multi-input-header/platform-multi-input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-multi-input-header/platform-multi-input-header.component').then(
-                (c) => c.PlatformMultiInputHeaderComponent
-            ),
+        component: PlatformMultiInputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-multi-input-docs.component').then((c) => c.PlatformMultiInputDocsComponent)
+                component: PlatformMultiInputDocsComponent
             }
         ],
         data: {

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformFileUploaderDocsComponent } from './platform-file-uploader-docs.component';
+import { PlatformFileUploaderHeaderComponent } from './platform-file-uploader-header/platform-file-uploader-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-file-uploader-header/platform-file-uploader-header.component').then(
-                (c) => c.PlatformFileUploaderHeaderComponent
-            ),
+        component: PlatformFileUploaderHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-file-uploader-docs.component').then((c) => c.PlatformFileUploaderDocsComponent)
+                component: PlatformFileUploaderDocsComponent
             }
         ],
         data: {
