@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.15...v0.47.0-rc.16) (2023-11-08)
+
+
+### Bug Fixes
+
+* **platform:** aria sort attribute ([#10920](https://github.com/SAP/fundamental-ngx/issues/10920)) ([eaa4762](https://github.com/SAP/fundamental-ngx/commit/eaa476236bc2a9aff971557945657112489dd88c))
+
+
+
+
+
 # [0.47.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.14...v0.47.0-rc.15) (2023-11-08)
 
 **Note:** Version bump only for package fundamental-ngx
