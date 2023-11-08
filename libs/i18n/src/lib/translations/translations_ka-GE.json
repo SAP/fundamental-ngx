@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "წელთა შუალედის არჩევა"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "მრავალ ღირებულების კომბინირებული ყუთი",
         "selectAllLabel": "ყველას არჩევა ({selectedItems} {totalItems}-დან)"
     },
     "coreCarousel": {

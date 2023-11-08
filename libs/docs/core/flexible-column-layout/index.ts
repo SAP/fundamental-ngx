@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { FlexibleColumnLayoutDocsHeaderComponent } from './flexible-column-layout-docs-header/flexible-column-layout-docs-header.component';
+import { FlexibleColumnLayoutDocsComponent } from './flexible-column-layout-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./flexible-column-layout-docs-header/flexible-column-layout-docs-header.component').then(
-                (c) => c.FlexibleColumnLayoutDocsHeaderComponent
-            ),
+        component: FlexibleColumnLayoutDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./flexible-column-layout-docs.component').then((c) => c.FlexibleColumnLayoutDocsComponent)
+                component: FlexibleColumnLayoutDocsComponent
             }
         ],
         data: {

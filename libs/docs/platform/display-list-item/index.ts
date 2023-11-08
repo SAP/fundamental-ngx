@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformDisplayListItemDocsComponent } from './platform-display-list-item-docs.component';
+import { PlatformDisplayListItemHeaderComponent } from './platform-display-list-item-header/platform-display-list-item-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-display-list-item-header/platform-display-list-item-header.component').then(
-                (c) => c.PlatformDisplayListItemHeaderComponent
-            ),
+        component: PlatformDisplayListItemHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-display-list-item-docs.component').then(
-                        (c) => c.PlatformDisplayListItemDocsComponent
-                    )
+                component: PlatformDisplayListItemDocsComponent
             }
         ],
         data: {

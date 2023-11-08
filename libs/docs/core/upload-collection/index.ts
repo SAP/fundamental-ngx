@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { UploadCollectionDocsComponent } from './upload-collection-docs.component';
+import { UploadCollectionHeaderComponent } from './upload-collection-header/upload-collection-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./upload-collection-header/upload-collection-header.component').then(
-                (c) => c.UploadCollectionHeaderComponent
-            ),
+        component: UploadCollectionHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./upload-collection-docs.component').then((c) => c.UploadCollectionDocsComponent)
+                component: UploadCollectionDocsComponent
             }
         ],
         data: {

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformLinkDocsComponent } from './platform-link-docs.component';
+import { PlatformLinkHeaderComponent } from './platform-link-header/platform-link-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-link-header/platform-link-header.component').then((c) => c.PlatformLinkHeaderComponent),
+        component: PlatformLinkHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./platform-link-docs.component').then((c) => c.PlatformLinkDocsComponent)
+                component: PlatformLinkDocsComponent
             }
         ],
         data: {

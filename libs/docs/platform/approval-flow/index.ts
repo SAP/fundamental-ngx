@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformApprovalFlowDocsComponent } from './platform-approval-flow-docs.component';
+import { PlatformApprovalFlowHeaderComponent } from './platform-approval-flow-header/platform-approval-flow-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-approval-flow-header/platform-approval-flow-header.component').then(
-                (c) => c.PlatformApprovalFlowHeaderComponent
-            ),
+        component: PlatformApprovalFlowHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-approval-flow-docs.component').then((c) => c.PlatformApprovalFlowDocsComponent)
+                component: PlatformApprovalFlowDocsComponent
             }
         ],
         data: {

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { RatingIndicatorDocsHeaderComponent } from './rating-indicator-docs-header/rating-indicator-docs-header.component';
+import { RatingIndicatorDocsComponent } from './rating-indicator-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./rating-indicator-docs-header/rating-indicator-docs-header.component').then(
-                (c) => c.RatingIndicatorDocsHeaderComponent
-            ),
+        component: RatingIndicatorDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./rating-indicator-docs.component').then((c) => c.RatingIndicatorDocsComponent)
+                component: RatingIndicatorDocsComponent
             }
         ],
         data: {

@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { SwitchDocsComponent } from './switch-docs.component';
+import { SwitchHeaderComponent } from './switch-header/switch-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./switch-header/switch-header.component').then((c) => c.SwitchHeaderComponent),
+        component: SwitchHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./switch-docs.component').then((c) => c.SwitchDocsComponent)
+                component: SwitchDocsComponent
             }
         ],
         data: {

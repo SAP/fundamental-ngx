@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { SegmentedButtonDocsComponent } from './segmented-button-docs.component';
+import { SegmentedButtonHeaderComponent } from './segmented-button-header/segmented-button-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./segmented-button-header/segmented-button-header.component').then(
-                (c) => c.SegmentedButtonHeaderComponent
-            ),
+        component: SegmentedButtonHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./segmented-button-docs.component').then((c) => c.SegmentedButtonDocsComponent)
+                component: SegmentedButtonDocsComponent
             }
         ],
         data: {

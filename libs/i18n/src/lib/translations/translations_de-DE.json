@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "Jahresbereichsauswahl"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "Kombinationsfeld mit mehreren Werten",
         "selectAllLabel": "Alle auswählen ({selectedItems} von {totalItems})"
     },
     "coreCarousel": {

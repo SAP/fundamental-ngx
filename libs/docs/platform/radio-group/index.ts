@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
+import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-radio-group-header/platform-radio-group-header.component').then(
-                (c) => c.PlatformRadioGroupHeaderComponent
-            ),
+        component: PlatformRadioGroupHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-radio-group-docs.component').then((c) => c.PlatformRadioGroupDocsComponent)
+                component: PlatformRadioGroupDocsComponent
             }
         ],
         data: {

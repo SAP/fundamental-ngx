@@ -61,7 +61,7 @@ export class VhdPo extends PlatformBaseComponentPo {
 
     async open(): Promise<void> {
         await super.open(this.url);
-        await waitForElDisplayed(this.root);
+        await this.waitForRoot();
         await waitForElDisplayed(this.pageHeader);
     }
 

@@ -36,7 +36,7 @@ import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemComponent, FormLabelComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import {
     Column,
@@ -105,7 +105,7 @@ const formGroupChildProvider: Provider = {
         FormLabelComponent,
         LinkComponent,
         IconComponent,
-        InlineHelpModule,
+        InlineHelpDirective,
         AsyncPipe
     ]
 })

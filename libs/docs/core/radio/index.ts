@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { RadioDocsComponent } from './radio-docs.component';
+import { RadioHeaderComponent } from './radio-header/radio-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./radio-header/radio-header.component').then((c) => c.RadioHeaderComponent),
+        component: RadioHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./radio-docs.component').then((c) => c.RadioDocsComponent)
+                component: RadioDocsComponent
             }
         ],
         data: {

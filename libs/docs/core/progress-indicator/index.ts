@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { ProgressIndicatorDocsComponent } from './progress-indicator-docs.component';
+import { ProgressIndicatorHeaderComponent } from './progress-indicator-header/progress-indicator-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./progress-indicator-header/progress-indicator-header.component').then(
-                (c) => c.ProgressIndicatorHeaderComponent
-            ),
+        component: ProgressIndicatorHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./progress-indicator-docs.component').then((c) => c.ProgressIndicatorDocsComponent)
+                component: ProgressIndicatorDocsComponent
             }
         ],
         data: {

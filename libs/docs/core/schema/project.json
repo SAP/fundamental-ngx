@@ -6,7 +6,7 @@
     "prefix": "fundamental-ngx",
     "targets": {
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "options": {
                 "lintFilePatterns": ["libs/docs/core/schema/**/*.ts", "libs/docs/core/schema/**/*.html"]
             }

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { BreadcrumbDocsComponent } from './breadcrumb-docs.component';
+import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./breadcrumb-header/breadcrumb-header.component').then((c) => c.BreadcrumbHeaderComponent),
+        component: BreadcrumbHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./breadcrumb-docs.component').then((c) => c.BreadcrumbDocsComponent)
+                component: BreadcrumbDocsComponent
             }
         ],
         data: {

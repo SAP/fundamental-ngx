@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ToolHeaderDocsComponent } from './tool-header-docs.component';
+import { ToolHeaderHeaderComponent } from './tool-header-header/tool-header-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./tool-header-header/tool-header-header.component').then((c) => c.ToolHeaderHeaderComponent),
+        component: ToolHeaderHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./tool-header-docs.component').then((c) => c.ToolHeaderDocsComponent)
+                component: ToolHeaderDocsComponent
             }
         ],
         data: {

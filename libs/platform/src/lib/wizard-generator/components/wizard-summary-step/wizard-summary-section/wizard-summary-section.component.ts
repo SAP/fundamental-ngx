@@ -5,7 +5,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { TitleComponent } from '@fundamental-ngx/core/title';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+import { LinkComponent } from '@fundamental-ngx/platform/link';
 import {
     FormattedFormStep,
     WizardGeneratorSummaryItem
@@ -17,7 +17,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgFor, TitleComponent, LayoutGridModule, FormLabelComponent, PlatformLinkModule, FdTranslatePipe]
+    imports: [NgFor, TitleComponent, LayoutGridModule, FormLabelComponent, LinkComponent, FdTranslatePipe]
 })
 export class WizardSummarySectionComponent {
     /**

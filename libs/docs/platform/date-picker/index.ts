@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformDatePickerDocsComponent } from './platform-date-picker-docs.component';
+import { PlatformDatePickerHeaderComponent } from './platform-date-picker-header/platform-date-picker-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-date-picker-header/platform-date-picker-header.component').then(
-                (c) => c.PlatformDatePickerHeaderComponent
-            ),
+        component: PlatformDatePickerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-date-picker-docs.component').then((c) => c.PlatformDatePickerDocsComponent)
+                component: PlatformDatePickerDocsComponent
             }
         ],
         data: {

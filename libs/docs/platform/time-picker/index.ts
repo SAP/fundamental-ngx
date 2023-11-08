@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformTimePickerDocsComponent } from './platform-time-picker-docs.component';
+import { PlatformTimePickerHeaderComponent } from './platform-time-picker-header/platform-time-picker-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-time-picker-header/platform-time-picker-header.component').then(
-                (c) => c.PlatformTimePickerHeaderComponent
-            ),
+        component: PlatformTimePickerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-time-picker-docs.component').then((c) => c.PlatformTimePickerDocsComponent)
+                component: PlatformTimePickerDocsComponent
             }
         ],
         data: {

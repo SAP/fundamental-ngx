@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { FeedListItemDocsComponent } from './feed-list-item-docs.component';
+import { FeedListItemHeaderComponent } from './feed-list-item-header/feed-list-item-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./feed-list-item-header/feed-list-item-header.component').then(
-                (c) => c.FeedListItemHeaderComponent
-            ),
+        component: FeedListItemHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./feed-list-item-docs.component').then((c) => c.FeedListItemDocsComponent)
+                component: FeedListItemDocsComponent
             }
         ],
         data: {

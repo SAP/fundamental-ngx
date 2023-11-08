@@ -37,7 +37,7 @@
             "defaultConfiguration": "production"
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "options": {
                 "lintFilePatterns": ["libs/core/src/lib/**/*.ts", "libs/core/src/lib/**/*.html"]
             }

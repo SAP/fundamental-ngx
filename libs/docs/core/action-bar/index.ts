@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ActionBarDocsComponent } from './action-bar-docs.component';
+import { ActionBarHeaderComponent } from './action-bar-header/action-bar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./action-bar-header/action-bar-header.component').then((c) => c.ActionBarHeaderComponent),
+        component: ActionBarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./action-bar-docs.component').then((c) => c.ActionBarDocsComponent)
+                component: ActionBarDocsComponent
             }
         ],
         data: {

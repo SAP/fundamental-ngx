@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { LinkDocsComponent } from './link-docs.component';
+import { LinkHeaderComponent } from './link-header/link-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./link-header/link-header.component').then((c) => c.LinkHeaderComponent),
+        component: LinkHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./link-docs.component').then((c) => c.LinkDocsComponent)
+                component: LinkDocsComponent
             }
         ],
         data: {

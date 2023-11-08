@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { FocusableItemDocsComponent } from './focusable-item-docs.component';
+import { FocusableItemHeaderComponent } from './focusable-item-header/focusable-item-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./focusable-item-header/focusable-item-header.component').then(
-                (c) => c.FocusableItemHeaderComponent
-            ),
+        component: FocusableItemHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./focusable-item-docs.component').then((c) => c.FocusableItemDocsComponent)
+                component: FocusableItemDocsComponent
             }
         ],
         data: {

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ShellbarDocsHeaderComponent } from './shellbar-docs-header/shellbar-docs-header.component';
+import { ShellbarDocsComponent } from './shellbar-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./shellbar-docs-header/shellbar-docs-header.component').then((c) => c.ShellbarDocsHeaderComponent),
+        component: ShellbarDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./shellbar-docs.component').then((c) => c.ShellbarDocsComponent)
+                component: ShellbarDocsComponent
             }
         ],
         data: {

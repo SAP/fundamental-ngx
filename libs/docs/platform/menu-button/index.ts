@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformMenuButtonDocsComponent } from './platform-menu-button-docs.component';
+import { PlatformMenuButtonHeaderComponent } from './platform-menu-button-header/platform-menu-button-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-menu-button-header/platform-menu-button-header.component').then(
-                (c) => c.PlatformMenuButtonHeaderComponent
-            ),
+        component: PlatformMenuButtonHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-menu-button-docs.component').then((c) => c.PlatformMenuButtonDocsComponent)
+                component: PlatformMenuButtonDocsComponent
             }
         ],
         data: {

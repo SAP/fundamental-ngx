@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TruncateDocsHeaderComponent } from './truncate-docs-header/truncate-docs-header.component';
+import { TruncateDocsComponent } from './truncate-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./truncate-docs-header/truncate-docs-header.component').then((c) => c.TruncateDocsHeaderComponent),
+        component: TruncateDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./truncate-docs.component').then((c) => c.TruncateDocsComponent)
+                component: TruncateDocsComponent
             }
         ],
         data: {

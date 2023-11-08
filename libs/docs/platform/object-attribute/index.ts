@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformObjectAttributeDocsComponent } from './platform-object-attribute-docs.component';
+import { PlatformObjectAttributeHeaderComponent } from './platform-object-attribute-header/platform-object-attribute-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-object-attribute-header/platform-object-attribute-header.component').then(
-                (c) => c.PlatformObjectAttributeHeaderComponent
-            ),
+        component: PlatformObjectAttributeHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-object-attribute-docs.component').then(
-                        (c) => c.PlatformObjectAttributeDocsComponent
-                    )
+                component: PlatformObjectAttributeDocsComponent
             }
         ],
         data: {

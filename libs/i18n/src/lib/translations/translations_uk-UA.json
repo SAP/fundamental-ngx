@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "Вибір діапазону років"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "Багатозначне поле зі списком",
         "selectAllLabel": "Вибрати все ({selectedItems} з {totalItems})"
     },
     "coreCarousel": {

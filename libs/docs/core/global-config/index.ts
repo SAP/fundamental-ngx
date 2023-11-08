@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { GlobalConfigDocsComponent } from './global-config-docs.component';
+import { GlobalConfigHeaderComponent } from './global-config-header/global-config-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./global-config-header/global-config-header.component').then((c) => c.GlobalConfigHeaderComponent),
+        component: GlobalConfigHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./global-config-docs.component').then((c) => c.GlobalConfigDocsComponent)
+                component: GlobalConfigDocsComponent
             }
         ],
         data: {

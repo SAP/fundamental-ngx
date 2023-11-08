@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformIconTabBarDocsComponent } from './platform-icon-tab-bar-docs.component';
+import { PlatformIconTabBarHeaderComponent } from './platform-icon-tab-bar-header/platform-icon-tab-bar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-icon-tab-bar-header/platform-icon-tab-bar-header.component').then(
-                (c) => c.PlatformIconTabBarHeaderComponent
-            ),
+        component: PlatformIconTabBarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-icon-tab-bar-docs.component').then((c) => c.PlatformIconTabBarDocsComponent)
+                component: PlatformIconTabBarDocsComponent
             }
         ],
         data: {

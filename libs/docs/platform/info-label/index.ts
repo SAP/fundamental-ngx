@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformInfoLabelDocsComponent } from './platform-info-label-docs.component';
+import { PlatformInfoLabelHeaderComponent } from './platform-info-label-header/platform-info-label-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-info-label-header/platform-info-label-header.component').then(
-                (c) => c.PlatformInfoLabelHeaderComponent
-            ),
+        component: PlatformInfoLabelHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-info-label-docs.component').then((c) => c.PlatformInfoLabelDocsComponent)
+                component: PlatformInfoLabelDocsComponent
             }
         ],
         data: {

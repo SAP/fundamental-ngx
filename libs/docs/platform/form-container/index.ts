@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformFormContainerDocsComponent } from './platform-form-container-docs.component';
+import { PlatformFormContainerHeaderComponent } from './platform-form-container-header/platform-form-container-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-form-container-header/platform-form-container-header.component').then(
-                (c) => c.PlatformFormContainerHeaderComponent
-            ),
+        component: PlatformFormContainerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-form-container-docs.component').then((c) => c.PlatformFormContainerDocsComponent)
+                component: PlatformFormContainerDocsComponent
             }
         ],
         data: {

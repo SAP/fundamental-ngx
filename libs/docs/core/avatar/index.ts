@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { AvatarDocsComponent } from './avatar-docs.component';
+import { AvatarHeaderComponent } from './avatar-header/avatar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./avatar-header/avatar-header.component').then((c) => c.AvatarHeaderComponent),
+        component: AvatarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./avatar-docs.component').then((c) => c.AvatarDocsComponent)
+                component: AvatarDocsComponent
             }
         ],
         data: {

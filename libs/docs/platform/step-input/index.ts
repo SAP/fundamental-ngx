@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformStepInputDocsComponent } from './platform-step-input-docs.component';
+import { PlatformStepInputHeaderComponent } from './platform-step-input-header/platform-step-input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-step-input-header/platform-step-input-header.component').then(
-                (c) => c.PlatformStepInputHeaderComponent
-            ),
+        component: PlatformStepInputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-step-input-docs.component').then((c) => c.PlatformStepInputDocsComponent)
+                component: PlatformStepInputDocsComponent
             }
         ],
         data: {

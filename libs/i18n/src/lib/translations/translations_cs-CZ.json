@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "Výběr rozsahu let"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "Multi Value Combo Box",
         "selectAllLabel": "Vybrat vše ({selectedItems} z {totalItems})"
     },
     "coreCarousel": {

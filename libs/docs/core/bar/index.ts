@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { BarDocsComponent } from './bar-docs.component';
+import { BarHeaderComponent } from './bar-header/bar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./bar-header/bar-header.component').then((c) => c.BarHeaderComponent),
+        component: BarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./bar-docs.component').then((c) => c.BarDocsComponent)
+                component: BarDocsComponent
             }
         ],
         data: {

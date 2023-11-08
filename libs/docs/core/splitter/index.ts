@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { SplitterDocsComponent } from './splitter-docs.component';
+import { SplitterHeaderComponent } from './splitter-header/splitter-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./splitter-header/splitter-header.component').then((c) => c.SplitterHeaderComponent),
+        component: SplitterHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./splitter-docs.component').then((c) => c.SplitterDocsComponent)
+                component: SplitterDocsComponent
             }
         ],
         data: {

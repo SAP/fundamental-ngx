@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TextareaDocsComponent } from './textarea-docs.component';
+import { TextareaHeaderComponent } from './textarea-header/textarea-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./textarea-header/textarea-header.component').then((c) => c.TextareaHeaderComponent),
+        component: TextareaHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./textarea-docs.component').then((c) => c.TextareaDocsComponent)
+                component: TextareaDocsComponent
             }
         ],
         data: {

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformInputGroupDocsComponent } from './platform-input-group-docs.component';
+import { PlatformInputGroupHeaderComponent } from './platform-input-group-header/platform-input-group-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-input-group-header/platform-input-group-header.component').then(
-                (c) => c.PlatformInputGroupHeaderComponent
-            ),
+        component: PlatformInputGroupHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-input-group-docs.component').then((c) => c.PlatformInputGroupDocsComponent)
+                component: PlatformInputGroupDocsComponent
             }
         ],
         data: {

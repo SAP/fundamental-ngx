@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformTextareaDocsComponent } from './platform-textarea-docs.component';
+import { PlatformTextareaHeaderComponent } from './platform-textarea-header/platform-textarea-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-textarea-header/platform-textarea-header.component').then(
-                (c) => c.PlatformTextareaHeaderComponent
-            ),
+        component: PlatformTextareaHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-textarea-docs.component').then((c) => c.PlatformTextareaDocsComponent)
+                component: PlatformTextareaDocsComponent
             }
         ],
         data: {

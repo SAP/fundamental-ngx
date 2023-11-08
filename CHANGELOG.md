@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.15...v0.47.0-rc.16) (2023-11-08)
+
+
+### Bug Fixes
+
+* **platform:** aria sort attribute ([#10920](https://github.com/SAP/fundamental-ngx/issues/10920)) ([eaa4762](https://github.com/SAP/fundamental-ngx/commit/eaa476236bc2a9aff971557945657112489dd88c))
+
+
+
+
+
+# [0.47.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.14...v0.47.0-rc.15) (2023-11-08)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.47.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.13...v0.47.0-rc.14) (2023-11-08)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.47.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.12...v0.47.0-rc.13) (2023-11-08)
+
+
+### Bug Fixes
+
+* **platform:** aria-labelledby for select ([#10916](https://github.com/SAP/fundamental-ngx/issues/10916)) ([5c763bf](https://github.com/SAP/fundamental-ngx/commit/5c763bf6bfe25759905b85d8ec6c0aa3f3730756))
+
+
+
+
+
+# [0.47.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.11...v0.47.0-rc.12) (2023-11-07)
+
+
+### Bug Fixes
+
+* **btp:** tool header styles discrepancy and updated overflows ([#10904](https://github.com/SAP/fundamental-ngx/issues/10904)) ([759a77c](https://github.com/SAP/fundamental-ngx/commit/759a77c972f0e43f27696edb26bcb04a621e5a53))
+* **core:** multi input addon aria hidden ([#10914](https://github.com/SAP/fundamental-ngx/issues/10914)) ([f9e28b6](https://github.com/SAP/fundamental-ngx/commit/f9e28b6dc63e3fc65fc621dd73f67a76ca5877bf))
+
+
+### BREAKING CHANGES
+
+* **btp:** ToolHeaderActionsDirective has been removed
+
+* fix(btp,docs): fixed too header docs and incorrect content density type in auto mode
+
+* chore: formatting
+
+* fix(btp): fixed visibility of the second title on portrait tablet
+
+
+
+
+
 # [0.47.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.10...v0.47.0-rc.11) (2023-11-07)
 
 
