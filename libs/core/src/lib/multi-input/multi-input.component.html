@@ -63,6 +63,8 @@
                 (moreClickedEvent)="_moreClicked()"
                 class="fd-multi-input-tokenizer-custom"
                 tabindex="-1"
+                fdMultiAnnouncer
+                [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
             >
                 <fd-token
                     *ngFor="let option of viewModel.selectedOptions; trackBy: _trackBy"
@@ -97,8 +99,6 @@
                     [attr.id]="inputId"
                     (focus)="tokenizer._showAllTokens()"
                     (blur)="tokenizer._hideTokens()"
-                    fdMultiAnnouncer
-                    [multiAnnouncerOptions]="filterFn(dropdownValues, searchTerm)"
                 />
             </fd-tokenizer>
         </fd-input-group>

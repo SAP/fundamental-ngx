@@ -52,6 +52,8 @@
             (moreClickedEvent)="moreClicked()"
             tabindex="-1"
             role="listbox"
+            fdMultiAnnouncer
+            [multiAnnouncerOptions]="showList ? _suggestions : []"
         >
             <fd-token
                 [readOnly]="disabled"
@@ -95,8 +97,6 @@
                 aria-roledescription="Multi Value Input"
                 fdkInitialFocus
                 [enabled]="autofocus"
-                fdMultiAnnouncer
-                [multiAnnouncerOptions]="_suggestions"
             />
         </fd-tokenizer>
     </fd-input-group>
