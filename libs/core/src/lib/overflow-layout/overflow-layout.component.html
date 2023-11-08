@@ -1,4 +1,4 @@
-<ng-template [ngIf]="showMorePosition === 'left'">
+<ng-template [ngIf]="renderShowMoreButton && showMorePosition === 'left'">
     <ng-template [ngTemplateOutlet]="showMore"></ng-template>
 </ng-template>
 
@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<ng-template [ngIf]="showMorePosition === 'right'">
+<ng-template [ngIf]="renderShowMoreButton && showMorePosition === 'right'">
     <ng-template [ngTemplateOutlet]="showMore"></ng-template>
 </ng-template>
 

@@ -50,91 +50,124 @@
     <ng-content select="fdb-search-field"></ng-content>
 </div>
 
-<div fdbToolHeaderGroup actions>
-    <fd-overflow-layout fdbToolHeaderElement [style.justify-content]="'end'">
-        <ng-container *ngIf="fdbToolHeaderState().searchFieldToggleActionVisible">
-            <div fdbToolHeaderElement *fdOverflowItemRef="let hidden" [forceVisibility]="true" fdOverflowLayoutItem>
+<fd-overflow-layout
+    fdbToolHeaderGroup
+    actions
+    [style.justify-content]="'end'"
+    (hiddenItemsChange)="_handleHiddenItemsChange($event)"
+    [renderShowMoreButton]="false"
+>
+    <ng-container *ngIf="fdbToolHeaderState().searchFieldToggleActionVisible">
+        <ng-template fdOverflowItemRef>
+            <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                 <button
                     fd-button
-                    fdbToolHeaderButton
+                    fdbToolHeaderActionButton
                     glyph="search"
                     (click)="$event.stopPropagation(); expandSearchField()"
                 ></button>
             </div>
-        </ng-container>
-        <ng-container *ngIf="fdbToolHeaderState().providedActionsVisible">
-            <ng-container *ngFor="let action of _toolHeaderActionsDirective?._actions()">
-                <div
-                    fdbToolHeaderElement
-                    *fdOverflowItemRef="let hidden"
-                    [forceVisibility]="!!action.forceVisibility"
-                    fdOverflowLayoutItem
-                >
-                    <ng-template
-                        [ngIf]="!!action.templateRef"
-                        [ngIfThen]="$any(action.templateRef)"
-                        [ngIfElse]="defaultActionButtonTemplate"
-                    ></ng-template>
-                    <ng-template #defaultActionButtonTemplate>
-                        <button
-                            fd-button
-                            fdbToolHeaderButton
-                            [glyph]="action.glyph"
-                            (click)="action.clickCallback()"
-                            [ariaLabel]="action.label"
+        </ng-template>
+    </ng-container>
+    <ng-container *ngIf="fdbToolHeaderState().providedActionsVisible">
+        <ng-container *ngFor="let action of _contentActions">
+            <ng-container *ngIf="action.isSeparator ? fdbToolHeaderState().separatorsBetweenActionsVisible : true">
+                <ng-template [fdOverflowItemRef]="action" let-hidden let-injector="injector">
+                    <ng-container *ngIf="hidden === false; else actionTemplate">
+                        <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="!!action.forceVisibility">
+                            <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>
+                        </div>
+                    </ng-container>
+                    <ng-template #actionTemplate>
+                        <ng-template
+                            [ngTemplateOutlet]="action.templateRef"
+                            [ngTemplateOutletContext]="{ hidden: hidden }"
+                            [ngTemplateOutletInjector]="injector"
                         >
-                            <span class="fd-button__badge" *ngIf="action.hasBadge"></span>
-                        </button>
+                        </ng-template>
                     </ng-template>
-                    <div
-                        class="fd-tool-header__separator"
-                        *ngIf="action.hasSeparator && fdbToolHeaderState().separatorsBetweenActionsVisible"
-                    ></div>
-                </div>
+                </ng-template>
             </ng-container>
         </ng-container>
+    </ng-container>
 
-        <fdb-navigation-menu-popover *fdOverflowExpand="let overflowItems" fdbToolHeaderElement>
-            <button *fdbNavigationMenuPopoverControl fd-button fdbToolHeaderButton glyph="overflow"></button>
-            <ul *fdPopoverBody fdkFocusableList [wrap]="true" fdb-navigation-menu>
-                <ng-container *ngFor="let item of overflowItems">
-                    <ng-container *ngIf="_toolHeaderActionsDirective?._actions() as actions">
-                        <li
-                            *ngIf="
-                                fdbToolHeaderState().searchFieldToggleActionVisible
-                                    ? actions[item.globalIndex - 1]
-                                    : actions[item.globalIndex] as action
-                            "
-                            fdb-navigation-menu-item
-                            fdkFocusableItem
-                            [glyph]="action.glyph"
-                            (click)="action.clickCallback()"
-                            [label]="action.label"
-                        ></li>
-                    </ng-container>
-                </ng-container>
-            </ul>
-        </fdb-navigation-menu-popover>
-    </fd-overflow-layout>
+    <!-- Custom overflow button used as overflow item START -->
+    <ng-container *ngIf="_delayedHiddenActions$ | async as hiddenActions">
+        <ng-container *ngIf="hiddenActions.length > 0">
+            <ng-template fdOverflowItemRef>
+                <fdb-navigation-menu-popover fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
+                    <button
+                        *fdbNavigationMenuPopoverControl
+                        fd-button
+                        fdbToolHeaderActionButton
+                        glyph="overflow"
+                    ></button>
+                    <fdb-navigation-menu
+                        class="fd-tool-header__navigation-menu"
+                        fdkIndirectFocusableList
+                        #indirectFocusableList="fdkIndirectFocusableList"
+                    >
+                        <ng-container *ngFor="let item of hiddenActions; trackBy: _trackHiddenAction">
+                            <ng-template
+                                [ngTemplateOutlet]="item.templateRef"
+                                [ngTemplateOutletContext]="{
+                                    $implicit: true,
+                                    index: item.index,
+                                    globalIndex: item.globalIndex,
+                                    first: item.first,
+                                    last: item.last,
+                                    injector: _indirectFocusableItemInjector(indirectFocusableList.injector, item)
+                                }"
+                            >
+                            </ng-template>
+                        </ng-container>
+                    </fdb-navigation-menu>
+                </fdb-navigation-menu-popover>
+            </ng-template>
+        </ng-container>
+    </ng-container>
+    <!-- Custom overflow button used as overflow item END -->
+
     <ng-container *ngIf="fdbToolHeaderState().userAvatarVisible && _toolHeaderUser">
-        <div fdbToolHeaderElement>
-            <div class="fd-tool-header__separator"></div>
-            <ng-content select="[fdbToolHeaderUser]"></ng-content>
-        </div>
+        <ng-container *ngIf="fdbToolHeaderState().separatorsBetweenActionsVisible">
+            <ng-template fdOverflowItemRef>
+                <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
+                    <div class="fd-tool-header__separator"></div>
+                </div>
+            </ng-template>
+        </ng-container>
+        <ng-template fdOverflowItemRef>
+            <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
+                <ng-content select="[fdbToolHeaderUser]"></ng-content>
+            </div>
+        </ng-template>
     </ng-container>
+
     <ng-container *ngIf="fdbToolHeaderState().productSwitchVisible && _toolHeaderProductSwitch">
-        <div fdbToolHeaderElement>
-            <div class="fd-tool-header__separator"></div>
-            <ng-content select="fdb-tool-header-product-switch, fd-product-switch"></ng-content>
-        </div>
+        <ng-container *ngIf="fdbToolHeaderState().separatorsBetweenActionsVisible">
+            <ng-template fdOverflowItemRef>
+                <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
+                    <div class="fd-tool-header__separator"></div>
+                </div>
+            </ng-template>
+        </ng-container>
+        <ng-template fdOverflowItemRef>
+            <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
+                <ng-content select="fdb-tool-header-product-switch, fd-product-switch"></ng-content>
+            </div>
+        </ng-template>
     </ng-container>
-    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().voiceInputVisible">
-        <button
-            fd-button
-            fdbToolHeaderButton
-            glyph="microphone"
-            [ariaLabel]="'Search with voice'"
-            (click)="microphoneClick.emit()"
-        ></button>
-    </div>
-</div>
+    <ng-container *ngIf="fdbToolHeaderState().voiceInputVisible">
+        <ng-template fdOverflowItemRef>
+            <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
+                <button
+                    fd-button
+                    fdbToolHeaderActionButton
+                    glyph="microphone"
+                    [ariaLabel]="'Search with voice'"
+                    (click)="microphoneClick.emit()"
+                ></button>
+            </div>
+        </ng-template>
+    </ng-container>
+</fd-overflow-layout>

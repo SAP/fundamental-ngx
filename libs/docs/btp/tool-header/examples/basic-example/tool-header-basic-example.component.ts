@@ -1,4 +1,4 @@
-import { NgIf, NgStyle } from '@angular/common';
+import { NgForOf, NgIf, NgStyle } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
@@ -6,8 +6,9 @@ import { SearchFieldComponent } from '@fundamental-ngx/btp/search-field';
 import { FdbViewMode } from '@fundamental-ngx/btp/shared';
 import {
     FdbToolHeaderActionButton,
+    ToolHeaderActionButtonDirective,
     ToolHeaderActionDirective,
-    ToolHeaderActionsDirective,
+    ToolHeaderActionSeparatorComponent,
     ToolHeaderComponent,
     ToolHeaderUserDirective
 } from '@fundamental-ngx/btp/tool-header';
@@ -47,7 +48,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         MenuTitleDirective,
         NgIf,
         ButtonComponent,
-        ToolHeaderActionsDirective,
         MenuComponent,
         MenuTriggerDirective,
         SegmentedButtonComponent,
@@ -55,12 +55,15 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         PopoverControlComponent,
         PopoverBodyDirective,
         RepeatDirective,
-        ToolHeaderActionDirective,
         MessageStripComponent,
         PopoverBodyHeaderDirective,
         NgStyle,
         ContentDensityDirective,
+        ToolHeaderActionDirective,
+        NgForOf,
+        ToolHeaderActionSeparatorComponent,
         ButtonBadgeDirective,
+        ToolHeaderActionButtonDirective,
         ToolHeaderButtonDirective
     ],
     standalone: true
@@ -73,35 +76,25 @@ export class ToolHeaderBasicExampleComponent {
 
     searchValue: string;
 
-    actions: Array<FdbToolHeaderActionButton[]> = [
-        [
-            {
-                label: 'Source Code',
-                glyph: 'source-code',
-                clickCallback: () => {
-                    console.log('Source code');
-                },
-                forceVisibility: false
+    actions: FdbToolHeaderActionButton[] = [
+        {
+            label: 'Source Code',
+            glyph: 'source-code',
+            clickCallback: () => {
+                console.log('Source code');
             }
-        ],
-        [
-            {
-                label: 'Settings',
-                glyph: 'settings',
-                clickCallback: () => {
-                    console.log('Settings');
-                },
-                forceVisibility: false
+        },
+        {
+            label: 'Settings',
+            glyph: 'settings',
+            clickCallback: () => {
+                console.log('Settings');
             }
-        ]
+        }
     ];
 
     valueUpdate($event: string) {
         console.log($event);
         this.searchValue = $event;
-    }
-
-    notificationsActionClicked() {
-        console.log('notificationsActionClicked');
     }
 }

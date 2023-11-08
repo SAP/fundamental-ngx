@@ -1,47 +1,33 @@
-import { Directive, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { FdbToolHeaderActionButton } from '../tool-header-action-button.type';
+import { ContentChild, Directive, inject, TemplateRef } from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ToolHeaderActionClass } from '../tool-header-action.class';
+
+export interface ToolHeaderActionContext {
+    hidden: boolean;
+}
 
 @Directive({
     selector: '[fdbToolHeaderAction]',
+    providers: [
+        {
+            provide: ToolHeaderActionClass,
+            useExisting: ToolHeaderActionDirective
+        }
+    ],
     standalone: true
 })
-export class ToolHeaderActionDirective implements FdbToolHeaderActionButton {
+export class ToolHeaderActionDirective extends ToolHeaderActionClass {
     /**
-     * Glyph which will be used for the action when in overflow mode.
-     */
-    @Input({ required: true })
-    glyph: string;
-
-    /**
-     * Label which will be used for the action when in overflow mode.
-     */
-    @Input({ required: true })
-    label: string;
-
-    /**
-     * Whether the action should have a separator next to it
-     */
-    @Input()
-    hasSeparator = false;
-
-    /**
-     * Whether the action is always visible.
-     */
-    @Input()
-    forceVisibility?: boolean;
-
-    /**
-     * Event emitted when the action is clicked when in overflow mode.
+     * Button component which will be used for the action
      **/
-    @Output()
-    clicked = new EventEmitter<void>();
+    @ContentChild(ButtonComponent, { descendants: true })
+    button: ButtonComponent;
 
     /** @hidden */
-    constructor(readonly templateRef: TemplateRef<any>) {}
+    templateRef = inject<TemplateRef<ToolHeaderActionContext>>(TemplateRef);
 
-    /**
-     * Function to be called when the action is clicked
-     * when in overflow mode.
-     **/
-    clickCallback = (): void => this.clicked.emit();
+    /** @hidden */
+    static ngTemplateContextGuard(dir: ToolHeaderActionDirective, ctx: unknown): ctx is ToolHeaderActionContext {
+        return !(dir.isSeparator || dir.forceVisibility);
+    }
 }

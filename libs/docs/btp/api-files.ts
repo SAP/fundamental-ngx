@@ -10,9 +10,8 @@ export const API_FILES = {
     navigation: [],
     toolHeader: [
         'ToolHeaderComponent',
-        'ToolHeaderActionsDirective',
         'ToolHeaderAutoModeDirective',
-        'ToolHeaderActionDirective',
+        'ToolHeaderActionComponent',
         'ToolHeaderUserDirective',
         'ToolHeaderProductSwitchComponent',
         'ToolHeaderLogoDirective'
