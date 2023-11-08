@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.16...v0.47.0-rc.17) (2023-11-08)
+
+
+### Bug Fixes
+
+* **core,platform,i18n:** add aria-label for multi combobox ([#10903](https://github.com/SAP/fundamental-ngx/issues/10903)) ([1470d3b](https://github.com/SAP/fundamental-ngx/commit/1470d3b8b345d826e7604af8cd7263cc76cd4569))
+
+
+
+
+
 # [0.47.0-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.15...v0.47.0-rc.16) (2023-11-08)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
