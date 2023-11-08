@@ -53,7 +53,7 @@
             tabindex="-1"
             role="listbox"
             fdMultiAnnouncer
-            [multiAnnouncerOptions]="showList ? _suggestions : []"
+            [multiAnnouncerOptions]="isOpen ? _suggestions : []"
         >
             <fd-token
                 [readOnly]="disabled"
