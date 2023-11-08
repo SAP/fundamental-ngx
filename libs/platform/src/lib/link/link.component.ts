@@ -15,7 +15,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { FD_ICON_COMPONENT, IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent as CoreLinkComponent } from '@fundamental-ngx/core/link';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -25,6 +25,10 @@ export type LinkType = 'standard' | 'emphasized' | 'subtle';
 export type NavigationTarget = '_blank' | '_self' | '_parent' | '_top' | 'framename';
 const VALID_INPUT_TYPES = ['standard', 'emphasized', 'subtle'];
 
+/**
+ * @deprecated
+ * Link component is deprecated. Use `fd-link` from `@fundamental-ngx/core/link` instead.
+ */
 @Component({
     selector: 'fdp-link',
     templateUrl: './link.component.html',
@@ -131,6 +135,7 @@ export class LinkComponent extends BaseComponent implements OnInit, AfterViewIni
     /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, private renderer2: Renderer2) {
         super(_cd);
+        warnOnce(`LinkComponent is deprecated. Use 'fd-link' from '@fundamental-ngx/core/link' instead.`);
     }
 
     /** @hidden */

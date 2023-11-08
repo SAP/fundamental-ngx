@@ -1,9 +1,13 @@
 import { Component, Input } from '@angular/core';
 
 import { NgIf } from '@angular/common';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 
+/**
+ * @deprecated
+ * Use ObjectMarkerComponent from `@fundamental-ngx/core/object-marker` instead.
+ */
 @Component({
     selector: 'fdp-object-marker',
     templateUrl: './object-marker.component.html',
@@ -40,4 +44,11 @@ export class PlatformObjectMarkerComponent {
     /** Sets control aria-title to a string attribute value */
     @Input()
     title: string;
+
+    /** @hidden */
+    constructor() {
+        warnOnce(
+            'PlatformObjectMarkerComponent is deprecated. Use ObjectMarkerComponent from `@fundamental-ngx/core/object-marker` instead.'
+        );
+    }
 }
