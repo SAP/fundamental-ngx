@@ -67,7 +67,7 @@ describe('Multi input test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(multiInputPage.root);
+        await multiInputPage.waitForRoot();
         await waitForElDisplayed(multiInputPage.title);
     }, 1);
 

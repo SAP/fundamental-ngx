@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Schema, SchemaFactoryService } from '@fundamental-ngx/docs/schema';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import {
@@ -47,7 +47,7 @@ const buttonToggledExample = 'button-toggled-example.component';
         ButtonStateExampleComponent,
         ButtonToggledExampleComponent,
         PlayGroundComponent,
-        ButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         MessageStripComponent,
         ButtonBadgeExampleComponent

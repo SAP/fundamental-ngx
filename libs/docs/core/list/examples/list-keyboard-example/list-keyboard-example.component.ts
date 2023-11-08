@@ -1,13 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FocusEscapeDirection } from '@fundamental-ngx/cdk/utils';
-import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ListComponent, ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-list-keyboard-example',
     templateUrl: './list-keyboard-example.component.html',
     standalone: true,
-    imports: [ButtonModule, ListModule]
+    imports: [ButtonComponent, ListModule]
 })
 export class ListKeyboardExampleComponent {
     @ViewChild(ButtonComponent, { read: ElementRef })

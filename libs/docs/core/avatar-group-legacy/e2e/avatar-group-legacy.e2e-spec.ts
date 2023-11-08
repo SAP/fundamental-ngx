@@ -31,7 +31,7 @@ describe('Avatar test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(avatarGroupPage.root);
+        await avatarGroupPage.waitForRoot();
         await waitForElDisplayed(avatarGroupPage.title);
     }, 1);
 

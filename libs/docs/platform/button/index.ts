@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedButtonAriaPressed, DeprecatedButtonAriaSelected } from '@fundamental-ngx/platform/button';
+import { PlatformButtonDocsComponent } from './platform-button-docs.component';
+import { PlatformButtonHeaderComponent } from './platform-button-header/platform-button-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-button-header/platform-button-header.component').then(
-                (c) => c.PlatformButtonHeaderComponent
-            ),
+        component: PlatformButtonHeaderComponent,
         providers: [
             moduleDeprecationsProvider(DeprecatedButtonAriaPressed),
             moduleDeprecationsProvider(DeprecatedButtonAriaSelected)
@@ -16,8 +15,7 @@ export const ROUTES: Routes = [
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-button-docs.component').then((c) => c.PlatformButtonDocsComponent)
+                component: PlatformButtonDocsComponent
             }
         ],
         data: {

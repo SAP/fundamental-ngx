@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.14...v0.47.0-rc.15) (2023-11-08)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.47.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.13...v0.47.0-rc.14) (2023-11-08)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.47.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.12...v0.47.0-rc.13) (2023-11-08)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.47.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.11...v0.47.0-rc.12) (2023-11-07)
+
+
+### Bug Fixes
+
+* **btp:** tool header styles discrepancy and updated overflows ([#10904](https://github.com/SAP/fundamental-ngx/issues/10904)) ([759a77c](https://github.com/SAP/fundamental-ngx/commit/759a77c972f0e43f27696edb26bcb04a621e5a53))
+
+
+### BREAKING CHANGES
+
+* **btp:** ToolHeaderActionsDirective has been removed
+
+* fix(btp,docs): fixed too header docs and incorrect content density type in auto mode
+
+* chore: formatting
+
+* fix(btp): fixed visibility of the second title on portrait tablet
+
+
+
+
+
+# [0.47.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.10...v0.47.0-rc.11) (2023-11-07)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
+# [0.47.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.9...v0.47.0-rc.10) (2023-11-07)
+
+
+### Features
+
+* **core,platform:** stricter types ([#10878](https://github.com/SAP/fundamental-ngx/issues/10878)) ([9b9badb](https://github.com/SAP/fundamental-ngx/commit/9b9badb1bcd1c8a25c01009700596986f650f69e))
+
+
+
+
+
+# [0.47.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.8...v0.47.0-rc.9) (2023-11-06)
+
+**Note:** Version bump only for package @fundamental-ngx/cdk
+
+
+
+
+
 # [0.47.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.7...v0.47.0-rc.8) (2023-11-05)
 
 **Note:** Version bump only for package @fundamental-ngx/cdk

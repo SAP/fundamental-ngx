@@ -33,7 +33,7 @@ describe('Inline help test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(inlineHelpPage.root);
+        await inlineHelpPage.waitForRoot();
         await waitForElDisplayed(inlineHelpPage.title);
     }, 1);
 

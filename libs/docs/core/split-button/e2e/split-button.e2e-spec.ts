@@ -7,8 +7,7 @@ import {
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { SplitButtonPo } from './split-button.po';
 
@@ -32,7 +31,7 @@ describe('Split-button test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(splitButtonPage.root);
+        await splitButtonPage.waitForRoot();
         await waitForElDisplayed(splitButtonPage.title);
     }, 1);
 

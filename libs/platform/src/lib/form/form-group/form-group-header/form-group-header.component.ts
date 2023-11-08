@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { HintOptions } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { FieldGroup } from '../../models/field.model';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { LinkComponent } from '@fundamental-ngx/core/link';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { IconComponent } from '@fundamental-ngx/core/icon';
+import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
+import { LinkComponent } from '@fundamental-ngx/core/link';
+import { HintOptions } from '@fundamental-ngx/platform/shared';
+import { FieldGroup } from '../../models/field.model';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
@@ -17,7 +17,7 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
         '[class.fd-form-group__header]': 'true'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, LinkComponent, IconModule, InlineHelpModule]
+    imports: [NgIf, NgTemplateOutlet, LinkComponent, IconComponent, InlineHelpDirective]
 })
 export class FormGroupHeaderComponent {
     /** Fields Group */

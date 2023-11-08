@@ -5,7 +5,7 @@ import { KeyUtil, Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupLegacyModule } from '@fundamental-ngx/core/avatar-group-legacy';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 import {
@@ -36,7 +36,7 @@ import { AvatarGeneratorExampleService } from './avatar-generator-example.servic
         PopoverControlComponent,
         NgTemplateOutlet,
         PopoverBodyComponent,
-        ButtonModule,
+        ButtonComponent,
         AvatarGroupLegacyModule,
         PopoverBodyHeaderDirective
     ]

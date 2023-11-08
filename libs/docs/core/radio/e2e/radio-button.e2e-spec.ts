@@ -4,8 +4,7 @@ import {
     getElementArrayLength,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { RadioButtonPo } from './radio-button.po';
 
@@ -19,7 +18,7 @@ describe('Radio button component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(radioButtonPage.root);
+        await radioButtonPage.waitForRoot();
         await waitForElDisplayed(radioButtonPage.title);
     }, 2);
 

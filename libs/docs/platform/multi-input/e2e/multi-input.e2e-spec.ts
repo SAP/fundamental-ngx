@@ -6,6 +6,7 @@ import {
     getElementPlaceholder,
     getText,
     isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -48,7 +49,7 @@ describe('Multi input test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(multiInputPage.root);
+        await multiInputPage.waitForRoot();
         await waitForElDisplayed(multiInputPage.title);
     }, 1);
 
@@ -63,11 +64,11 @@ describe('Multi input test suite', () => {
                 continue;
             }
             if (i !== mobileExample) {
-                await multiInputPage.expandDropdown(activeDropdownButtons, i, i === loadingExample);
+                await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = await getAttributeByNameArr(options, 'title');
                 await scrollIntoView(header, i);
                 await multiInputPage.selectOption(optionsArr[1]);
-                await multiInputPage.expandDropdown(activeDropdownButtons, i, i === loadingExample);
+                await multiInputPage.expandDropdown(activeDropdownButtons, i);
                 await scrollIntoView(header, i);
                 await multiInputPage.selectOption(optionsArr[2]);
                 await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
@@ -141,6 +142,7 @@ describe('Multi input test suite', () => {
                 await scrollIntoView(header, i);
                 await multiInputPage.selectOption(optionsArr[1]);
                 await click(approveButton);
+                await pause(500);
                 await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
                 await scrollIntoView('fd-tokenizer', i);
                 await (await $$('fd-tokenizer')[i]!.$('.fd-token__close')).click();
@@ -211,6 +213,7 @@ describe('Multi input test suite', () => {
                 await scrollIntoView(header, i);
                 await multiInputPage.selectOption(optionsArr[1]);
                 await click(approveButton);
+                await pause(500);
                 await expect(await getText(filledInput, i)).toContain(optionsArr[1]);
                 await expect((await getText(filledInput, i)).split('\n')[0]).toBe(optionsArr[1]);
                 await click(selectedToken);

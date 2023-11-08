@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 import { NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 
 @Component({
@@ -9,7 +9,7 @@ import { FlexibleColumnLayout, FlexibleColumnLayoutModule } from '@fundamental-n
     templateUrl: './flexible-column-layout-example.component.html',
     styleUrls: ['flexible-column-layout-example.component.scss'],
     standalone: true,
-    imports: [ButtonModule, NgIf, FlexibleColumnLayoutModule]
+    imports: [ButtonComponent, NgIf, FlexibleColumnLayoutModule]
 })
 export class FlexibleColumnLayoutExampleComponent {
     /**

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { MicroProcessFlowDocsComponent } from './micro-process-flow-docs.component';
+import { MicroProcessFlowHeaderComponent } from './micro-process-flow-header/micro-process-flow-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./micro-process-flow-header/micro-process-flow-header.component').then(
-                (c) => c.MicroProcessFlowHeaderComponent
-            ),
+        component: MicroProcessFlowHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./micro-process-flow-docs.component').then((c) => c.MicroProcessFlowDocsComponent)
+                component: MicroProcessFlowDocsComponent
             }
         ],
         data: {

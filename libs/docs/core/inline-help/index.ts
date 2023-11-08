@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { InlineHelpDocsComponent } from './inline-help-docs.component';
+import { InlineHelpHeaderComponent } from './inline-help-header/inline-help-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./inline-help-header/inline-help-header.component').then((c) => c.InlineHelpHeaderComponent),
+        component: InlineHelpHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./inline-help-docs.component').then((c) => c.InlineHelpDocsComponent)
+                component: InlineHelpDocsComponent
             }
         ],
         data: {

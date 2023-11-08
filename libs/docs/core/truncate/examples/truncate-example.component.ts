@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TruncateDirective } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 
 @Component({
     selector: 'fd-truncate-example',
@@ -17,6 +17,6 @@ import { IconModule } from '@fundamental-ngx/core/icon';
         </p>
     `,
     standalone: true,
-    imports: [TruncateDirective, IconModule]
+    imports: [TruncateDirective, IconComponent]
 })
 export class TruncateExampleComponent {}

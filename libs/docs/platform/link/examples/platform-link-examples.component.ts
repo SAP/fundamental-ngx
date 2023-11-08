@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 
 @Component({
     selector: 'fdp-platform-link-disabled-emphasized-example',
     templateUrl: './platform-link-disabled-emphasized-example.component.html',
     standalone: true,
-    imports: [PlatformLinkModule, IconModule]
+    imports: [PlatformLinkModule, IconComponent]
 })
 export class PlatformLinkDisabledEmphasizedExampleComponent {}
 
@@ -14,7 +14,7 @@ export class PlatformLinkDisabledEmphasizedExampleComponent {}
     selector: 'fdp-platform-link-disabled-example',
     templateUrl: './platform-link-disabled-example.component.html',
     standalone: true,
-    imports: [PlatformLinkModule, IconModule]
+    imports: [PlatformLinkModule, IconComponent]
 })
 export class PlatformLinkDisabledExampleComponent {}
 
@@ -22,7 +22,7 @@ export class PlatformLinkDisabledExampleComponent {}
     selector: 'fdp-platform-link-emphasized-example',
     templateUrl: './platform-link-emphasized-example.component.html',
     standalone: true,
-    imports: [PlatformLinkModule, IconModule]
+    imports: [PlatformLinkModule, IconComponent]
 })
 export class PlatformLinkEmphasizedExampleComponent {}
 
@@ -30,7 +30,7 @@ export class PlatformLinkEmphasizedExampleComponent {}
     selector: 'fdp-platform-link-icon-example',
     templateUrl: './platform-link-icon-example.component.html',
     standalone: true,
-    imports: [PlatformLinkModule, IconModule]
+    imports: [PlatformLinkModule, IconComponent]
 })
 export class PlatformLinkIconExampleComponent {}
 
@@ -46,7 +46,7 @@ export class PlatformLinkInvertedExampleComponent {}
     selector: 'fdp-platform-link-standard-example',
     templateUrl: './platform-link-standard-example.component.html',
     standalone: true,
-    imports: [PlatformLinkModule, IconModule]
+    imports: [PlatformLinkModule, IconComponent]
 })
 export class PlatformLinkStandardExampleComponent {}
 

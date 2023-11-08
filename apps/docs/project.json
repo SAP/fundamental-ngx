@@ -33,7 +33,7 @@
             "defaultConfiguration": "affected-local"
         },
         "compile": {
-            "executor": "@nx/angular:webpack-browser",
+            "executor": "@angular-devkit/build-angular:browser-esbuild",
             "options": {
                 "outputPath": "dist/apps/docs",
                 "index": "apps/docs/src/index.html",
@@ -174,6 +174,9 @@
                         "bundleName": "sap_horizon_fonts"
                     }
                 ],
+                "stylePreprocessorOptions": {
+                    "includePaths": ["node_modules"]
+                },
                 "scripts": ["node_modules/marked/marked.min.js"],
                 "allowedCommonJsDependencies": ["moment", "highlight.js", "fast-deep-equal", "focus-trap", "dayjs"],
                 "vendorChunk": true,
@@ -185,7 +188,8 @@
             },
             "configurations": {
                 "development": {
-                    "tsConfig": "apps/docs/tsconfig.app.json"
+                    "tsConfig": "apps/docs/tsconfig.app.json",
+                    "outputHashing": "all"
                 },
                 "production": {
                     "optimization": true,
@@ -211,6 +215,7 @@
                 },
                 "production-unoptimized": {
                     "tsConfig": "apps/docs/tsconfig.netlify.json",
+                    "outputHashing": "all",
                     "sourceMap": false,
                     "namedChunks": false,
                     "vendorChunk": false,
@@ -223,6 +228,7 @@
                     ]
                 },
                 "core": {
+                    "outputHashing": "all",
                     "fileReplacements": [
                         {
                             "replace": "apps/docs/src/environments/app.routes.ts",
@@ -231,6 +237,7 @@
                     ]
                 },
                 "cdk": {
+                    "outputHashing": "all",
                     "fileReplacements": [
                         {
                             "replace": "apps/docs/src/environments/app.routes.ts",
@@ -239,6 +246,7 @@
                     ]
                 },
                 "btp": {
+                    "outputHashing": "all",
                     "fileReplacements": [
                         {
                             "replace": "apps/docs/src/environments/app.routes.ts",
@@ -247,6 +255,7 @@
                     ]
                 },
                 "platform": {
+                    "outputHashing": "all",
                     "fileReplacements": [
                         {
                             "replace": "apps/docs/src/environments/app.routes.ts",
@@ -255,6 +264,7 @@
                     ]
                 },
                 "cx": {
+                    "outputHashing": "all",
                     "fileReplacements": [
                         {
                             "replace": "apps/docs/src/environments/app.routes.ts",
@@ -263,6 +273,7 @@
                     ]
                 },
                 "i18n": {
+                    "outputHashing": "all",
                     "fileReplacements": [
                         {
                             "replace": "apps/docs/src/environments/app.routes.ts",
@@ -276,7 +287,7 @@
             "dependsOn": ["^compile-typedoc", "^transform-translations"]
         },
         "serve": {
-            "executor": "@nx/angular:webpack-dev-server",
+            "executor": "@angular-devkit/build-angular:dev-server",
             "options": {
                 "browserTarget": "docs:compile"
             },
@@ -327,7 +338,7 @@
             "dependsOn": ["^compile-typedoc"]
         },
         "lint": {
-            "executor": "@nx/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "options": {
                 "lintFilePatterns": ["apps/docs/**/*.ts", "apps/docs/**/*.html"]
             }

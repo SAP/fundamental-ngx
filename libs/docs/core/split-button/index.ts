@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { SplitButtonDocsComponent } from './split-button-docs.component';
+import { SplitButtonHeaderComponent } from './split-button-header/split-button-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./split-button-header/split-button-header.component').then((c) => c.SplitButtonHeaderComponent),
+        component: SplitButtonHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./split-button-docs.component').then((c) => c.SplitButtonDocsComponent)
+                component: SplitButtonDocsComponent
             }
         ],
         data: {

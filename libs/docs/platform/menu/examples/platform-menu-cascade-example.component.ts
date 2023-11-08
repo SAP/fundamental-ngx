@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 
 @Component({
@@ -8,7 +8,7 @@ import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
     styleUrls: ['./platform-menu-example-styles.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [ButtonModule, PlatformMenuModule]
+    imports: [ButtonComponent, PlatformMenuModule]
 })
 export class PlatformMenuCascadeExampleComponent {
     item = '';

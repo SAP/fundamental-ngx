@@ -15,8 +15,7 @@ import {
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { sections } from './time-contents';
 import { TimePo } from './time.po';
@@ -58,7 +57,7 @@ describe('Time component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(timePage.root);
+        await timePage.waitForRoot();
         await waitForElDisplayed(timePage.title);
     }, 2);
 

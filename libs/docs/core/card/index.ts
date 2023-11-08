@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { CardDocsComponent } from './card-docs.component';
+import { CardHeaderComponent } from './card-header/card-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./card-header/card-header.component').then((c) => c.CardHeaderComponent),
+        component: CardHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./card-docs.component').then((c) => c.CardDocsComponent)
+                component: CardDocsComponent
             }
         ],
         data: {

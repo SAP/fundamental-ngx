@@ -1,4 +1,4 @@
-import { refreshPage, waitForElDisplayed, waitForPresent } from '../../../../../e2e';
+import { refreshPage, waitForElDisplayed } from '../../../../../e2e';
 import { DynamicSideContentPo } from './dynamic-side-content.po';
 
 describe('dynamic side content test suite', () => {
@@ -10,7 +10,7 @@ describe('dynamic side content test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(dynamicSideContentPage.root);
+        await dynamicSideContentPage.waitForRoot();
         await waitForElDisplayed(dynamicSideContentPage.title);
     }, 1);
 

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core/popover';
 
@@ -11,7 +11,7 @@ import { PopoverComponent, PopoverTriggerDirective } from '@fundamental-ngx/core
     templateUrl: './popover-mobile-example.component.html',
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         PopoverTriggerDirective,
         PopoverComponent,
         FormItemComponent,

@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { TreeDocsComponent } from './tree-docs.component';
+import { TreeHeaderComponent } from './tree-header/tree-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./tree-header/tree-header.component').then((c) => c.TreeHeaderComponent),
+        component: TreeHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./tree-docs.component').then((c) => c.TreeDocsComponent)
+                component: TreeDocsComponent
             }
         ],
         data: {

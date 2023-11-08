@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { PaginationDocsComponent } from './pagination-docs.component';
+import { PaginationHeaderComponent } from './pagination-header/pagination-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./pagination-header/pagination-header.component').then((c) => c.PaginationHeaderComponent),
+        component: PaginationHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./pagination-docs.component').then((c) => c.PaginationDocsComponent)
+                component: PaginationDocsComponent
             }
         ],
         data: {

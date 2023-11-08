@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { WizardModule, WizardService, WizardStepComponent } from '@fundamental-ngx/core/wizard';
 
@@ -25,7 +25,7 @@ import { WizardModule, WizardService, WizardStepComponent } from '@fundamental-n
         class: 'fd-wizard-example'
     },
     standalone: true,
-    imports: [ButtonModule, A11yModule, NgIf, WizardModule, RepeatDirective, SkeletonModule, BarModule]
+    imports: [ButtonComponent, A11yModule, NgIf, WizardModule, RepeatDirective, SkeletonModule, BarModule]
 })
 export class WizardLoadingExampleComponent {
     /**

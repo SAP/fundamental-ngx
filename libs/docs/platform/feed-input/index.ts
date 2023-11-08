@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformFeedInputDocsComponent } from './platform-feed-input-docs.component';
+import { PlatformFeedInputHeaderComponent } from './platform-feed-input-header/platform-feed-input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-feed-input-header/platform-feed-input-header.component').then(
-                (c) => c.PlatformFeedInputHeaderComponent
-            ),
+        component: PlatformFeedInputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-feed-input-docs.component').then((c) => c.PlatformFeedInputDocsComponent)
+                component: PlatformFeedInputDocsComponent
             }
         ],
         data: {

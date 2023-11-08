@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { MessageBoxDocsHeaderComponent } from './message-box-docs-header/message-box-docs-header.component';
+import { MessageBoxDocsComponent } from './message-box-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./message-box-docs-header/message-box-docs-header.component').then(
-                (c) => c.MessageBoxDocsHeaderComponent
-            ),
+        component: MessageBoxDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./message-box-docs.component').then((c) => c.MessageBoxDocsComponent)
+                component: MessageBoxDocsComponent
             }
         ],
         data: {

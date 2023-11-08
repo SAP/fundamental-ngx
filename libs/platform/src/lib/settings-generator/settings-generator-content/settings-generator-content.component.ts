@@ -1,18 +1,22 @@
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     EventEmitter,
     HostBinding,
-    inject,
     Input,
     Output,
     QueryList,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
 import { AsyncOrSyncPipe, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
 import { TabPanelComponent, TabsModule } from '@fundamental-ngx/core/tabs';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 import {
     GroupedFormSettingsItem,
     GroupedTemplateSettingsItem,
@@ -22,10 +26,6 @@ import {
     TemplateSettingsItem
 } from '../models/settings.model';
 import { SettingsGeneratorSectionComponent } from './settings-generator-section/settings-generator-section.component';
-import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
-import { TitleComponent } from '@fundamental-ngx/core/title';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 
 @Component({
     selector: 'fdp-settings-generator-content',
@@ -36,8 +36,8 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
     imports: [
         TitleComponent,
         NgIf,
-        ButtonModule,
-        SkeletonModule,
+        ButtonComponent,
+        SkeletonComponent,
         TabsModule,
         NgFor,
         SettingsGeneratorSectionComponent,

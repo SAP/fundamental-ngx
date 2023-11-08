@@ -148,6 +148,14 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     @Input()
     glyphAriaLabel: Nullable<string>;
 
+    /**
+     * Whether the input group addon button should be aria-hidden
+     * Useful in cases when the title is already applied on the
+     * input group parent component
+     **/
+    @Input()
+    addonButtonAriaHidden: Nullable<boolean>;
+
     /** The tooltip for the input group icon. */
     @Input()
     iconTitle: Nullable<string>;
@@ -240,10 +248,10 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange = (value: string): void => {};
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched = (): void => {};
 
     /** @hidden */
     get elementRef(): ElementRef<HTMLElement> {
@@ -262,7 +270,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
-    writeValue(value: any): void {
+    writeValue(value: string): void {
         this._inputTextValue = value;
 
         this._changeDetectorRef.markForCheck();

@@ -1,18 +1,16 @@
 import { Routes } from '@angular/router';
+import { SideNavigationDocsComponent } from './side-navigation-docs.component';
+import { SideNavigationHeaderComponent } from './side-navigation-header/side-navigation-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./side-navigation-header/side-navigation-header.component').then(
-                (c) => c.SideNavigationHeaderComponent
-            ),
+        component: SideNavigationHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./side-navigation-docs.component').then((c) => c.SideNavigationDocsComponent)
+                component: SideNavigationDocsComponent
             }
         ]
     }

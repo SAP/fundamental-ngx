@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TimePickerDocsComponent } from './time-picker-docs.component';
+import { TimePickerHeaderComponent } from './time-picker-header/time-picker-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./time-picker-header/time-picker-header.component').then((c) => c.TimePickerHeaderComponent),
+        component: TimePickerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./time-picker-docs.component').then((c) => c.TimePickerDocsComponent)
+                component: TimePickerDocsComponent
             }
         ],
         data: {

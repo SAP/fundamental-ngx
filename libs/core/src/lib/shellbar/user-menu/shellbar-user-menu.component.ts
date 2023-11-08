@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { ShellbarUser } from '../model/shellbar-user';
@@ -17,7 +17,7 @@ import { ShellbarUserMenu } from '../model/shellbar-user-menu';
     templateUrl: './shellbar-user-menu.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonModule, MenuModule, AvatarComponent, NgFor]
+    imports: [NgIf, ButtonComponent, MenuModule, AvatarComponent, NgFor]
 })
 export class ShellbarUserMenuComponent {
     /** The user data. */

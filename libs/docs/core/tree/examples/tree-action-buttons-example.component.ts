@@ -2,8 +2,8 @@ import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { TreeItem, TreeModule } from '@fundamental-ngx/core/tree';
 
 interface AdditionalTreeItemData {
@@ -17,7 +17,7 @@ interface AdditionalTreeItemData {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [DataSourceDirective, CvaDirective, TreeModule, IconModule, NgIf, ButtonModule]
+    imports: [DataSourceDirective, CvaDirective, TreeModule, IconComponent, NgIf, ButtonComponent]
 })
 export class TreeActionButtonsExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformObjectStatusDocsComponent } from './platform-object-status-docs.component';
+import { PlatformObjectStatusHeaderComponent } from './platform-object-status-header/platform-object-status-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-object-status-header/platform-object-status-header.component').then(
-                (c) => c.PlatformObjectStatusHeaderComponent
-            ),
+        component: PlatformObjectStatusHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-object-status-docs.component').then((c) => c.PlatformObjectStatusDocsComponent)
+                component: PlatformObjectStatusDocsComponent
             }
         ],
         data: {

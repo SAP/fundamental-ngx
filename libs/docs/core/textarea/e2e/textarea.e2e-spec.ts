@@ -15,8 +15,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { TextareaPo } from './textarea.po';
 
@@ -43,7 +42,7 @@ describe('Textarea component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(textareaPage.root);
+        await textareaPage.waitForRoot();
         await waitForElDisplayed(textareaPage.title);
     }, 1);
 

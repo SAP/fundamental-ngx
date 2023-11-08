@@ -5,9 +5,9 @@ import { Observable, Subject } from 'rxjs';
  * It can be injected into the content component through the constructor.
  * For a template, it is declared as part of the implicit context, see examples.
  */
-export class NotificationRef {
+export class NotificationRef<T = any, P = any> {
     /** @hidden */
-    protected readonly _afterClosed = new Subject<any>();
+    protected readonly _afterClosed = new Subject<P | undefined>();
 
     /**
      * Observable that is triggered when the notification is closed.
@@ -16,13 +16,13 @@ export class NotificationRef {
     public afterClosed: Observable<any> = this._afterClosed.asObservable();
 
     /** Data passed from the calling component to the content.*/
-    public data: any;
+    public data: T;
 
     /**
      * Closes the notification and passes the argument to the afterClosed observable.
      * @param result Value passed back to the observable as a result.
      */
-    close(result?: any): void {
+    close(result?: P): void {
         this._afterClosed.next(result);
         this._afterClosed.complete();
     }
@@ -31,7 +31,7 @@ export class NotificationRef {
      * Dismisses the notification and passes the argument to the afterClosed observable as an error.
      * @param reason Value passed back to the observable as an error.
      */
-    dismiss(reason?: any): void {
+    dismiss(reason?: P): void {
         this._afterClosed.error(reason);
     }
 }

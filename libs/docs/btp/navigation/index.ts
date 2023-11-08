@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { NavigationDocsComponent } from './navigation-docs.component';
+import { NavigationHeaderComponent } from './navigation-header/navigation-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./navigation-header/navigation-header.component').then((c) => c.NavigationHeaderComponent),
+        component: NavigationHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./navigation-docs.component').then((c) => c.NavigationDocsComponent)
+                component: NavigationDocsComponent
             }
         ],
         data: {

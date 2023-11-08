@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ScrollSpyDocsComponent } from './scroll-spy-docs.component';
+import { ScrollSpyHeaderComponent } from './scroll-spy-header/scroll-spy-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./scroll-spy-header/scroll-spy-header.component').then((c) => c.ScrollSpyHeaderComponent),
+        component: ScrollSpyHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./scroll-spy-docs.component').then((c) => c.ScrollSpyDocsComponent)
+                component: ScrollSpyDocsComponent
             }
         ],
         data: {

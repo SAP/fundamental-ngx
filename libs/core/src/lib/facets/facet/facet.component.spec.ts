@@ -9,7 +9,7 @@ import { LinkModule } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
-import { TextModule } from '@fundamental-ngx/core/text';
+import { TextComponent } from '@fundamental-ngx/core/text';
 
 import { FACET_CLASS_NAME } from '../constants';
 import { FacetContentComponent } from '../content/facet-content.component';
@@ -51,7 +51,7 @@ describe('FormFacetComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, FacetModule, IconModule, LinkModule, TextModule, RouterTestingModule],
+            imports: [CommonModule, FacetModule, IconModule, LinkModule, TextComponent, RouterTestingModule],
             declarations: [TestComponent]
         }).compileComponents();
     }));
@@ -296,7 +296,7 @@ describe('Key Value Facet Alignment Component', () => {
                 FacetModule,
                 IconModule,
                 LinkModule,
-                TextModule
+                TextComponent
             ],
             declarations: [TestKeyValueFacetAlignmentComponent]
         }).compileComponents();

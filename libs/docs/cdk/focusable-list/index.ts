@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { FocusableListDocsComponent } from './focusable-list-docs.component';
+import { FocusableListHeaderComponent } from './focusable-list-header/focusable-list-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./focusable-list-header/focusable-list-header.component').then(
-                (c) => c.FocusableListHeaderComponent
-            ),
+        component: FocusableListHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./focusable-list-docs.component').then((c) => c.FocusableListDocsComponent)
+                component: FocusableListDocsComponent
             }
         ],
         data: {

@@ -5,8 +5,7 @@ import {
     getElementClass,
     getText,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { SegmentedButtonPo } from './segmented-button.po';
 
@@ -33,7 +32,7 @@ describe('Select component:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(segmentedButtonPage.root);
+        await segmentedButtonPage.waitForRoot();
         await waitForElDisplayed(segmentedButtonPage.title);
     }, 2);
 

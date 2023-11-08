@@ -7,8 +7,7 @@ import {
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { MenuPo } from './menu.po';
 
@@ -38,7 +37,7 @@ describe('Menu component test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(menuPage.root);
+        await menuPage.waitForRoot();
         await waitForElDisplayed(menuPage.title);
     }, 1);
 

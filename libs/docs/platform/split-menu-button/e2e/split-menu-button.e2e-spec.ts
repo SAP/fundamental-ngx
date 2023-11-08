@@ -9,8 +9,7 @@ import {
     getElementTitle,
     refreshPage,
     waitForElDisplayed,
-    waitForNotDisplayed,
-    waitForPresent
+    waitForNotDisplayed
 } from '../../../../../e2e';
 import {
     behaviorBtnTextArr,
@@ -49,7 +48,7 @@ describe('Split menu button test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(spMenuBtnPage.root);
+        await spMenuBtnPage.waitForRoot();
         await waitForElDisplayed(spMenuBtnPage.title);
     }, 1);
 

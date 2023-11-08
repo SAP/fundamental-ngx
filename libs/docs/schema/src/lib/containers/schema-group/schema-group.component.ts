@@ -1,7 +1,7 @@
 import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import {
     FieldsetComponent,
@@ -32,7 +32,7 @@ import { AsFormControlPipe, AsFormGroupPipe } from '../../pipes/type-casting.pip
         FieldsetComponent,
         FormLegendDirective,
         forwardRef(() => SchemaGroupComponent),
-        ButtonModule,
+        ButtonComponent,
         AsFormControlPipe,
         AsFormGroupPipe
     ]

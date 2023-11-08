@@ -13,8 +13,7 @@ import {
     scrollIntoView,
     setValue,
     uploadFile,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import {
     acceptAlertText,
@@ -51,7 +50,7 @@ describe('File uploader component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(uploadCollectionPage.root);
+        await uploadCollectionPage.waitForRoot();
         await waitForElDisplayed(uploadCollectionPage.title);
     }, 2);
 

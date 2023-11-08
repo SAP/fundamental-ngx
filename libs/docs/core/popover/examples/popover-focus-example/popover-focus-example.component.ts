@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import {
     PopoverBodyComponent,
@@ -18,7 +18,7 @@ import {
     imports: [
         PopoverComponent,
         PopoverControlComponent,
-        ButtonModule,
+        ButtonComponent,
         PopoverBodyComponent,
         PopoverBodyHeaderDirective,
         BarModule,

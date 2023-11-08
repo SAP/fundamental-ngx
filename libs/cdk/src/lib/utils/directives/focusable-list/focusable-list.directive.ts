@@ -1,3 +1,6 @@
+import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
@@ -8,17 +11,20 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
-    inject,
     Input,
     OnChanges,
     OnDestroy,
     Output,
-    QueryList,
     Renderer2,
-    SimpleChanges
+    SimpleChanges,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, Subject, merge } from 'rxjs';
 import { finalize, map, startWith, takeUntil, tap } from 'rxjs/operators';
-import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
+import { KeyUtil, intersectionObservable } from '../../functions';
+import { destroyObservable } from '../../helpers';
+import { Nullable } from '../../models/nullable';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
     FocusableItem,
@@ -26,17 +32,10 @@ import {
     FocusableObserver,
     isItemFocusable
 } from '../focusable-item';
-import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
-import { merge, Subject } from 'rxjs';
-import { Nullable } from '../../models/nullable';
-import { FocusKeyManager, LiveAnnouncer } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { intersectionObservable, KeyUtil } from '../../functions';
-import { ENTER, ESCAPE, F2, MAC_ENTER } from '@angular/cdk/keycodes';
-import { scrollIntoView, ScrollPosition } from './scroll';
+import { FocusableItemPosition } from '../focusable-item/focusable-item.directive';
 import { getItemElement } from '../focusable-item/get-item-element';
-import { destroyObservable } from '../../helpers';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FDK_FOCUSABLE_LIST_DIRECTIVE } from './focusable-list.tokens';
+import { ScrollPosition, scrollIntoView } from './scroll';
 
 export interface FocusableListItemFocusedEvent {
     index: number;
@@ -53,6 +52,15 @@ interface FocusableListConfig {
     wrap?: boolean;
     direction?: 'vertical' | 'horizontal';
     contentDirection?: 'ltr' | 'rtl' | null;
+}
+
+export interface ItemsQueryList<T> extends Iterable<T> {
+    changes: Observable<ItemsQueryList<T>>;
+    length: number;
+    toArray(): T[];
+    find(predicate: (item: T, index: number) => boolean): Nullable<T>;
+    get(index: number): Nullable<T>;
+    forEach(param: (item: T, index: number) => void): void;
 }
 
 @Directive({
@@ -90,8 +98,8 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     /**
      * Configures wrapping mode which determines whether the active item will wrap to the other end of list when there are no more items in the given direction.
      */
-    @Input()
-    wrap = false;
+    @Input({ transform: coerceBooleanProperty })
+    wrap: BooleanInput = false;
 
     /** Function, which returns a string to be announced by screen-reader whenever an row which is in grid receives focus. */
     @Input()
@@ -103,15 +111,15 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
 
     /** @hidden */
     @ContentChildren(FDK_FOCUSABLE_ITEM_DIRECTIVE, { descendants: true })
-    readonly _projectedFocusableItems: QueryList<FocusableItem>;
+    readonly _projectedFocusableItems: ItemsQueryList<FocusableItem>;
 
     /** @hidden */
-    get _focusableItems(): QueryList<FocusableItem> {
+    get _focusableItems(): ItemsQueryList<FocusableItem> {
         return this._items ? this._items : this._projectedFocusableItems;
     }
 
     /** @hidden */
-    _items: QueryList<FocusableItem> | undefined;
+    _items: ItemsQueryList<FocusableItem> | undefined;
 
     /** @hidden */
     readonly _gridItemFocused$ = new Subject<FocusableItemPosition>();
@@ -242,7 +250,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     /** Set items programmatically. */
-    setItems(items: QueryList<FocusableItem>): void {
+    setItems(items: ItemsQueryList<FocusableItem>): void {
         this._items = items;
         this._listenOnItems();
     }
@@ -396,7 +404,7 @@ export class FocusableListDirective implements OnChanges, AfterViewInit, OnDestr
                     this._initializeFocusManager(items, {
                         direction,
                         contentDirection: this.contentDirection,
-                        wrap: this.wrap
+                        wrap: !!this.wrap
                     });
                 }),
                 takeUntil(refresh$)

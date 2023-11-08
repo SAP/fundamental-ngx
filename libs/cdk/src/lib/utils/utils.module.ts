@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RtlService } from './services/rtl.service';
+import { NgModule } from '@angular/core';
 import {
     AutoCompleteModule,
-    ClickedBehaviorModule,
+    BreakpointModule,
+    ClickedDirective,
     DisabledBehaviorModule,
     FocusableGridModule,
     FocusableItemModule,
     FocusableListModule,
     InitialFocusModule,
+    IntersectionSpyDirective,
     LineClampModule,
     OnlyDigitsModule,
     OverflowListModule,
@@ -17,11 +18,10 @@ import {
     ResizeModule,
     SelectableListModule,
     TemplateModule,
-    TruncateModule,
-    BreakpointModule,
-    IntersectionSpyDirective
+    TruncateModule
 } from './directives';
 import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
+import { RtlService } from './services/rtl.service';
 
 @NgModule({
     imports: [
@@ -41,7 +41,7 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         DisabledBehaviorModule,
         SelectableListModule,
         ReadonlyBehaviorModule,
-        ClickedBehaviorModule,
+        ClickedDirective,
         InitialFocusModule,
         BreakpointModule,
         IntersectionSpyDirective
@@ -62,7 +62,7 @@ import { DragAndDropModule } from './drag-and-drop/drag-and-drop.module';
         DisabledBehaviorModule,
         SelectableListModule,
         ReadonlyBehaviorModule,
-        ClickedBehaviorModule,
+        ClickedDirective,
         InitialFocusModule,
         BreakpointModule,
         IntersectionSpyDirective

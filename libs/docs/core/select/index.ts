@@ -1,16 +1,18 @@
 import { Routes } from '@angular/router';
 import { moduleDeprecationsProvider } from '@fundamental-ngx/cdk/utils';
 import { DeprecatedSelectCSSClasses } from '@fundamental-ngx/core/select';
+import { SelectDocsComponent } from './select-docs.component';
+import { SelectHeaderComponent } from './select-header/select-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./select-header/select-header.component').then((c) => c.SelectHeaderComponent),
+        component: SelectHeaderComponent,
         providers: [moduleDeprecationsProvider(DeprecatedSelectCSSClasses)],
         children: [
             {
                 path: '',
-                loadComponent: () => import('./select-docs.component').then((c) => c.SelectDocsComponent)
+                component: SelectDocsComponent
             }
         ],
         data: {

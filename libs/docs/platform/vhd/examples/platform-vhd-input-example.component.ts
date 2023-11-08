@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NgFor, NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -61,7 +61,7 @@ const exampleDataSource = (): { dataSource: ExampleTestModel[]; filters: FilterD
     imports: [
         FormLabelComponent,
         InputGroupModule,
-        ButtonModule,
+        ButtonComponent,
         ContentDensityDirective,
         PlatformValueHelpDialogModule,
         NgFor,

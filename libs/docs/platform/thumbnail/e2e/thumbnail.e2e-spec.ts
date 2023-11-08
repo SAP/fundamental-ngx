@@ -33,7 +33,7 @@ describe('Thumbnail field', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(thumbnailPage.root);
+        await thumbnailPage.waitForRoot();
         await waitForElDisplayed(thumbnailPage.title);
     }, 1);
 

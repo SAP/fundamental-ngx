@@ -1,19 +1,17 @@
 import { Routes } from '@angular/router';
+import { PatchingTranslationsDocsComponent } from './patching-translations-docs.component';
+import { PatchingTranslationsHeaderComponent } from './patching-translations-header/patching-translations-header.component';
 
 export const LIBRARY_NAME = 'patching-translations';
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./patching-translations-header/patching-translations-header.component').then(
-                (c) => c.PatchingTranslationsHeaderComponent
-            ),
+        component: PatchingTranslationsHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./patching-translations-docs.component').then((c) => c.PatchingTranslationsDocsComponent)
+                component: PatchingTranslationsDocsComponent
             }
         ]
     }

@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { DatetimePickerDocsComponent } from './datetime-picker-docs.component';
+import { DatetimePickerHeaderComponent } from './datetime-picker-header/datetime-picker-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./datetime-picker-header/datetime-picker-header.component').then(
-                (c) => c.DatetimePickerHeaderComponent
-            ),
+        component: DatetimePickerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./datetime-picker-docs.component').then((c) => c.DatetimePickerDocsComponent)
+                component: DatetimePickerDocsComponent
             }
         ],
         data: {

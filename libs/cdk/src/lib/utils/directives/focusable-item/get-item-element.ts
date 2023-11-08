@@ -1,10 +1,11 @@
+import { Nullable } from '../../models/nullable';
 import { FocusableItem } from './focusable.item';
 
 /**
  * Returns the element of the item.
  * @param item
  */
-export function getItemElement(item?: FocusableItem): HTMLElement | null {
+export function getItemElement(item?: Nullable<FocusableItem>): HTMLElement | null {
     if (!item) {
         return null;
     }

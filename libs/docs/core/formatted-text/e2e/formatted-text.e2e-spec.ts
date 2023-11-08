@@ -1,11 +1,4 @@
-import {
-    browserIsFirefox,
-    browserIsSafari,
-    getAlertText,
-    refreshPage,
-    waitForElDisplayed,
-    waitForPresent
-} from '../../../../../e2e';
+import { browserIsFirefox, browserIsSafari, getAlertText, refreshPage, waitForElDisplayed } from '../../../../../e2e';
 import { FormattedTextPo } from './formatted-text.po';
 
 describe('Formatted text component', () => {
@@ -17,7 +10,7 @@ describe('Formatted text component', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(formattedTextPage.root);
+        await formattedTextPage.waitForRoot();
         await waitForElDisplayed(formattedTextPage.title);
     }, 2);
 

@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { SCHEMAS, Schemas } from './consts/schemas';
@@ -13,11 +12,10 @@ import { SchemaFactoryService } from './services/schema-factory/schema-factory.s
 
 @NgModule({
     imports: [
-        CommonModule,
         ReactiveFormsModule,
         FormModule,
         CheckboxModule,
-        ButtonModule,
+        ButtonComponent,
         SchemaComponent,
         SchemaGroupComponent,
         AsFormControlPipe,

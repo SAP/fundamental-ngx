@@ -8,8 +8,7 @@ import {
     isElementDisplayed,
     refreshPage,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 
 import { customMessage, customWidth } from './message-strip';
@@ -41,7 +40,7 @@ describe('Message-strip test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(messageStripPage.root);
+        await messageStripPage.waitForRoot();
         await waitForElDisplayed(messageStripPage.title);
     }, 1);
 

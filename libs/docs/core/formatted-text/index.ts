@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { FormattedTextDocsComponent } from './formatted-text-docs.component';
+import { FormattedTextHeaderComponent } from './formatted-text-header/formatted-text-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./formatted-text-header/formatted-text-header.component').then(
-                (c) => c.FormattedTextHeaderComponent
-            ),
+        component: FormattedTextHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./formatted-text-docs.component').then((c) => c.FormattedTextDocsComponent)
+                component: FormattedTextDocsComponent
             }
         ],
         data: {

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformListDocsComponent } from './platform-list-docs.component';
+import { PlatformListHeaderComponent } from './platform-list-header/platform-list-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-list-header/platform-list-header.component').then((c) => c.PlatformListHeaderComponent),
+        component: PlatformListHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./platform-list-docs.component').then((c) => c.PlatformListDocsComponent)
+                component: PlatformListDocsComponent
             }
         ],
         data: {

@@ -19,7 +19,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DATE_TIME_FORMATS, DateTimeFormats, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { NgFor } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { CalendarService } from '../../calendar.service';
 import { CalendarYear, CalendarYearGrid } from '../../models/calendar-year-grid';
@@ -36,7 +36,7 @@ import { DefaultCalendarActiveCellStrategy, EscapeFocusFunction, FocusableCalend
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgFor, ButtonModule, FdTranslatePipe]
+    imports: [NgFor, ButtonComponent, FdTranslatePipe]
 })
 export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestroy, FocusableCalendarView {
     /** The id of the calendar passed from the parent component */

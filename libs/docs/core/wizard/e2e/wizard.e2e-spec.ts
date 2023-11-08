@@ -14,8 +14,7 @@ import {
     sendKeys,
     setValue,
     waitForElDisappear,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { WizardPo } from './wizard.po';
 import { firstAdress, firstAdressLength, fullName, secAdress, update } from './wizard.tags';
@@ -58,7 +57,7 @@ describe('Wizard component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(wizardPage.root);
+        await wizardPage.waitForRoot();
         await waitForElDisplayed(wizardPage.title);
     }, 2);
 

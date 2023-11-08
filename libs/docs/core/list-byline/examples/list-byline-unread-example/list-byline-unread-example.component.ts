@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 
 @Component({
@@ -9,6 +9,6 @@ import { ListModule } from '@fundamental-ngx/core/list';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ListModule, IconModule, ContentDensityDirective]
+    imports: [ListModule, IconComponent, ContentDensityDirective]
 })
 export class ListBylineUnreadExampleComponent {}

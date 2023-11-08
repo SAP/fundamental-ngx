@@ -1,7 +1,7 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 
@@ -10,7 +10,7 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     templateUrl: './scroll-spy-example.component.html',
     styleUrls: ['./scroll-spy-example.component.scss'],
     standalone: true,
-    imports: [NgFor, IconModule, CdkScrollable, ScrollbarDirective, ScrollSpyModule]
+    imports: [NgFor, IconComponent, CdkScrollable, ScrollbarDirective, ScrollSpyModule]
 })
 export class ScrollSpyExampleComponent implements OnInit {
     selectedSpy = 'element-0';

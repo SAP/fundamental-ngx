@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
 
@@ -20,7 +20,7 @@ import { OverflowLayoutModule } from '@fundamental-ngx/core/overflow-layout';
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [OverflowLayoutModule, NgFor, InfoLabelModule, ButtonModule]
+    imports: [OverflowLayoutModule, NgFor, InfoLabelModule, ButtonComponent]
 })
 export class OverflowLayoutDefaultExampleComponent {
     itemsToRender = new Array(10).fill(null);

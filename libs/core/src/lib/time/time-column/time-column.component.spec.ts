@@ -5,8 +5,8 @@ import { TimeModule } from '../time.module';
 import { TimeColumnComponent } from './time-column.component';
 
 describe('TimeColumnComponent', () => {
-    let component: TimeColumnComponent<unknown>;
-    let fixture: ComponentFixture<TimeColumnComponent<unknown>>;
+    let component: TimeColumnComponent<number>;
+    let fixture: ComponentFixture<TimeColumnComponent<number>>;
     const rows: SelectableViewItem<number>[] = Array.from(new Array(10)).map((_, index) => ({
         value: index + 1,
         label: (index + 1).toLocaleString()

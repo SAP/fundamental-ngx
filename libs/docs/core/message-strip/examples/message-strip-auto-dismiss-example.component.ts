@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 
 @Component({
@@ -18,6 +18,6 @@ import { AutoDismissMessageStripDirective, MessageStripComponent } from '@fundam
         <button fd-button (click)="messageStripComponent.open()">Open message strip</button>
     `,
     standalone: true,
-    imports: [MessageStripComponent, AutoDismissMessageStripDirective, ButtonModule]
+    imports: [MessageStripComponent, AutoDismissMessageStripDirective, ButtonComponent]
 })
 export class MessageStripAutoDismissExampleComponent {}

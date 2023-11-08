@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     PopoverBodyDirective,
     PopoverBodyFooterDirective,
@@ -29,7 +29,7 @@ import { PopoverLazyLoadedBodyComponent } from './popover-lazy-loaded-body.compo
         PopoverBodyDirective,
         PopoverBodyHeaderDirective,
         PopoverBodyFooterDirective,
-        ButtonModule,
+        ButtonComponent,
         PopoverLazyLoadedBodyComponent
     ],
     standalone: true

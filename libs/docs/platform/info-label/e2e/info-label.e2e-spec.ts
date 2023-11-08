@@ -39,7 +39,7 @@ xdescribe('Info Label component test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(infoLabelPage.root);
+        await infoLabelPage.waitForRoot();
         await waitForPresent(infoLabelPage.title);
     }, 1);
 

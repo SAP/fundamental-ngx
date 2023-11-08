@@ -6,8 +6,7 @@ import {
     getCurrentUrl,
     getElementClass,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { navTitlesArr, navUrl } from './display-list-item-contents';
 import { DisplayListItemPo } from './display-list-item.po';
@@ -30,7 +29,7 @@ describe('Display List Item test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(displayListPage.root);
+        await displayListPage.waitForRoot();
         await waitForElDisplayed(displayListPage.title);
     }, 1);
 

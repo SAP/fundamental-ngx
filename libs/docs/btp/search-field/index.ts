@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { SearchFieldDocsComponent } from './search-field-docs.component';
+import { SearchFieldHeaderComponent } from './search-field-header/search-field-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./search-field-header/search-field-header.component').then((c) => c.SearchFieldHeaderComponent),
+        component: SearchFieldHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./search-field-docs.component').then((c) => c.SearchFieldDocsComponent)
+                component: SearchFieldDocsComponent
             }
         ],
         data: {

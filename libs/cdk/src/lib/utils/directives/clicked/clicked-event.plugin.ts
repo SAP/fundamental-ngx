@@ -1,15 +1,23 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { ClickedDirective } from './clicked.directive';
 
 type EventHandlerFunction = ($event: Event) => void;
 type HandlerRemoveFunction = () => void;
 
+/**
+ * @deprecated
+ * No need to use it anymore. Use ClickedDirective directly instead.
+ */
 @Injectable()
 export class ClickedEventPlugin {
     /** @hidden */
-    constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: any) {}
+    constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: any) {
+        console.warn(
+            `ClickedEventPlugin is deprecated and will be removed in the next major release. Use ClickedDirective instead.`
+        );
+    }
 
     /** @hidden */
     addEventListener(element: HTMLElement, eventName: string, handler: EventHandlerFunction): ($event: Event) => void {

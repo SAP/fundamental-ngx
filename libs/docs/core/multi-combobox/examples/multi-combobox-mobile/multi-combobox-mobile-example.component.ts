@@ -5,14 +5,21 @@ import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
 import { FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { MultiComboboxModule, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
+import { MultiComboboxComponent, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/core/multi-combobox';
 
 @Component({
     selector: 'fd-multi-combobox-mobile-example',
     templateUrl: './multi-combobox-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormItemComponent, FormLabelComponent, CvaDirective, DataSourceDirective, MultiComboboxModule, JsonPipe]
+    imports: [
+        FormItemComponent,
+        FormLabelComponent,
+        CvaDirective,
+        DataSourceDirective,
+        MultiComboboxComponent,
+        JsonPipe
+    ]
 })
 export class MultiComboboxMobileExampleComponent {
     dataSource = [

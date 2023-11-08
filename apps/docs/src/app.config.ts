@@ -2,7 +2,6 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { PreloadAllModules, provideRouter, withHashLocation, withPreloading } from '@angular/router';
-import { provideFdkClicked } from '@fundamental-ngx/cdk/utils';
 import { provideContentDensity } from '@fundamental-ngx/core/content-density';
 import { provideDialogService } from '@fundamental-ngx/core/dialog';
 import { provideTheming } from '@fundamental-ngx/core/theming';
@@ -23,7 +22,6 @@ export const appConfig: ApplicationConfig = {
         provideTheming({ defaultTheme: 'sap_horizon' }),
         provideContentDensity({ storage: 'localStorage' }),
         provideDialogService(),
-        provideFdkClicked(),
         DocsService,
         {
             provide: PACKAGE_JSON,

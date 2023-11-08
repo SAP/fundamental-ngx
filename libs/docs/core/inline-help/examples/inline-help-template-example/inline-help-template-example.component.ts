@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
 
@@ -7,6 +7,6 @@ import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
     selector: 'fd-inline-help-template-example',
     templateUrl: './inline-help-template-example.component.html',
     standalone: true,
-    imports: [ObjectStatusComponent, InlineHelpModule, IconModule]
+    imports: [ObjectStatusComponent, InlineHelpModule, IconComponent]
 })
 export class InlineHelpTemplateExampleComponent {}

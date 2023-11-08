@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
+import { FormsDocsComponent } from './forms-docs.component';
+import { FormsHeaderComponent } from './forms-header/forms-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./forms-header/forms-header.component').then((c) => c.FormsHeaderComponent),
+        component: FormsHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () => import('./forms-docs.component').then((c) => c.FormsDocsComponent)
+                component: FormsDocsComponent
             }
         ]
     }

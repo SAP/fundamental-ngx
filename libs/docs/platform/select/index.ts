@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformSelectDocsComponent } from './platform-select-docs.component';
+import { PlatformSelectHeaderComponent } from './platform-select-header/platform-select-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-select-header/platform-select-header.component').then(
-                (c) => c.PlatformSelectHeaderComponent
-            ),
+        component: PlatformSelectHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-select-docs.component').then((c) => c.PlatformSelectDocsComponent)
+                component: PlatformSelectDocsComponent
             }
         ],
         data: {

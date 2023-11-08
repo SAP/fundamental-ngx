@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaDirective } from '@fundamental-ngx/cdk/forms';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { TreeItem, TreeModule } from '@fundamental-ngx/core/tree';
 
 export interface AdditionalTreeItemData {
@@ -14,7 +14,7 @@ export interface AdditionalTreeItemData {
     templateUrl: './simple-tree-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [DataSourceDirective, CvaDirective, TreeModule, IconModule]
+    imports: [DataSourceDirective, CvaDirective, TreeModule, IconComponent]
 })
 export class SimpleTreeExampleComponent {
     model: TreeItem<AdditionalTreeItemData>;

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ListBylineDocsComponent } from './list-byline-docs.component';
+import { ListBylineHeaderComponent } from './list-byline-header/list-byline-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./list-byline-header/list-byline-header.component').then((c) => c.ListBylineHeaderComponent),
+        component: ListBylineHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./list-byline-docs.component').then((c) => c.ListBylineDocsComponent)
+                component: ListBylineDocsComponent
             }
         ],
         data: {

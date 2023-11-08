@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
@@ -8,7 +8,7 @@ import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/m
     templateUrl: './action-sheet-mobile-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [ActionSheetModule, ButtonModule, MessageToastModule]
+    imports: [ActionSheetModule, ButtonComponent, MessageToastModule]
 })
 export class ActionSheetMobileExampleComponent {
     @ViewChild(ActionSheetComponent)

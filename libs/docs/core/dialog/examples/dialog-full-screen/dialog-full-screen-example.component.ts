@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogDefaultContent, DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -63,7 +63,7 @@ export class DialogFullScreenInnerExampleComponent {
 @Component({
     selector: 'fd-dialog-full-screen-example',
     standalone: true,
-    imports: [ButtonModule, BarModule, InputGroupModule, InitialFocusDirective, DialogModule, AsyncPipe],
+    imports: [ButtonComponent, BarModule, InputGroupModule, InitialFocusDirective, DialogModule, AsyncPipe],
     templateUrl: './dialog-full-screen-example.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

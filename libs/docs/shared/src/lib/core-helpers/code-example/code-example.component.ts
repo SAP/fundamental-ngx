@@ -11,7 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageStripAlertService, MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { Observable, ReplaySubject, isObservable, of, shareReplay, switchMap, tap, zip } from 'rxjs';
@@ -42,7 +42,7 @@ interface ExamplesEntity {
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         BusyIndicatorComponent,
         MessageStripComponent,

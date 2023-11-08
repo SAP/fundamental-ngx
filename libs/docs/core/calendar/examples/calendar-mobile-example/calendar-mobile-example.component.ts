@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CalendarCloseButtonDirective, CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
@@ -41,7 +41,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         CalendarComponent,
         FormsModule,
         BarModule,
-        ButtonModule,
+        ButtonComponent,
         DatePipe,
         FdDatetimeModule
     ]

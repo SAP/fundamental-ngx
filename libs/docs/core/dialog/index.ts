@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { DialogDocsHeaderComponent } from './dialog-docs-header/dialog-docs-header.component';
+import { DialogDocsComponent } from './dialog-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./dialog-docs-header/dialog-docs-header.component').then((c) => c.DialogDocsHeaderComponent),
+        component: DialogDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./dialog-docs.component').then((c) => c.DialogDocsComponent)
+                component: DialogDocsComponent
             }
         ],
         data: {

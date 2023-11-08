@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { ButtonDocsComponent } from './button-docs.component';
+import { ButtonHeaderComponent } from './button-header/button-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./button-header/button-header.component').then((c) => c.ButtonHeaderComponent),
+        component: ButtonHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./button-docs.component').then((c) => c.ButtonDocsComponent)
+                component: ButtonDocsComponent
             }
         ],
         data: {

@@ -58,7 +58,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
     standalone: true,
     imports: [NgIf, FormsModule, NgClass, ContentDensityModule, PortalModule]
 })
-export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
+export class CheckboxComponent<T = unknown> implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef<HTMLInputElement>;
@@ -79,11 +79,11 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
 
     /** Current selection state of the checkbox component */
     @Input()
-    set value(value: any) {
+    set value(value: T) {
         this.writeValue(value);
     }
 
-    get value(): any {
+    get value(): T {
         return this.checkboxValue;
     }
 
@@ -177,7 +177,7 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     _projectedDomPortal: Portal<any>;
 
     /** Stores current checkbox value. */
-    checkboxValue: any;
+    checkboxValue: T;
     /** Stores current checkbox state. */
     checkboxState: FdCheckboxTypes;
 
@@ -217,7 +217,7 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = (): void => {};
     /** @hidden Reference to callback provided by FormControl.*/
-    public onValueChange: (value: any) => void = () => {};
+    public onValueChange: (value: T) => void = () => {};
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -246,19 +246,19 @@ export class CheckboxComponent implements ControlValueAccessor, AfterViewInit, O
      * - sets new control value
      * - updates control state
      */
-    writeValue(value: any): void {
+    writeValue(value: T): void {
         this.checkboxValue = value;
         this._setState();
         this._detectChanges();
     }
 
     /** @hidden ControlValueAccessor interface method - sets onValueChange callback.*/
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: (value: T) => void): void {
         this.onValueChange = fn;
     }
 
     /** @hidden ControlValueAccessor interface method - sets onTouched callback.*/
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

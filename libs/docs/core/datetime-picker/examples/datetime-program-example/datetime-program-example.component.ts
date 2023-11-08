@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     DATE_TIME_FORMATS,
     DatetimeAdapter,
@@ -24,7 +24,7 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
         }
     ],
     standalone: true,
-    imports: [DatetimePickerComponent, FormsModule, ButtonModule]
+    imports: [DatetimePickerComponent, FormsModule, ButtonComponent]
 })
 export class DatetimeProgramExampleComponent {
     date = FdDate.getNow();

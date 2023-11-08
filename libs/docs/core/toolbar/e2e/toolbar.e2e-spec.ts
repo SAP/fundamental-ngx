@@ -61,7 +61,7 @@ describe('Toolbar test suite', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(toolbarPage.root);
+        await toolbarPage.waitForRoot();
         await waitForElDisplayed(toolbarPage.title);
     }, 2);
 

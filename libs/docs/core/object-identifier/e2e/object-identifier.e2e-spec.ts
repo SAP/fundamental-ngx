@@ -3,8 +3,7 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { ObjectIdentifierPo } from './object-identifier.po';
 
@@ -18,7 +17,7 @@ describe('Object identifier test suite', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(objectIdentifierPage.root);
+        await objectIdentifierPage.waitForRoot();
         await waitForElDisplayed(objectIdentifierPage.title);
     }, 1);
 

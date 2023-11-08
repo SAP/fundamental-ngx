@@ -1,4 +1,5 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
@@ -97,6 +98,10 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
     @Input()
     showMorePosition: 'left' | 'right' = 'right';
 
+    /** Whether the show more button should be rendered */
+    @Input({ transform: coerceBooleanProperty })
+    renderShowMoreButton: BooleanInput = true;
+
     /** Whether to render hidden items in reverse order. */
     @Input()
     reverseHiddenItems = false;
@@ -116,6 +121,12 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
      */
     @Output()
     hiddenItemsCount = new EventEmitter<number>();
+
+    /**
+     * Event, triggered when hidden items have been changed.
+     */
+    @Output()
+    hiddenItemsChange = new EventEmitter<OverflowItemRef[]>();
 
     /**
      * @hidden
@@ -211,7 +222,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
             items: this._items.toArray(),
             focusableItems: this._focusableOverflowItems.toArray(),
             itemsWrapper: this._itemsWrapper.nativeElement,
-            showMoreContainer: this._showMoreContainer.nativeElement,
+            showMoreContainer: this._showMoreContainer?.nativeElement,
             layoutContainerElement: this._layoutContainer.nativeElement,
             maxVisibleItems: this.maxVisibleItems,
             direction: this.showMorePosition,
@@ -254,6 +265,7 @@ export class OverflowLayoutComponent implements OnInit, AfterViewInit, OnDestroy
                 this._hiddenItems = result.hiddenItems;
                 this._showMore = result.showMore;
 
+                this.hiddenItemsChange.emit(result.hiddenItems);
                 this.hiddenItemsCount.emit(result.hiddenItems.length);
                 this.visibleItemsCount.emit(this._allItems.filter((i) => !i.hidden).length);
 

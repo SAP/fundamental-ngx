@@ -3,8 +3,7 @@ import {
     isElementClickable,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { BreadcrumbPo } from './breadcrumb.po';
 
@@ -18,7 +17,7 @@ describe('Breadcrumb test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(breadcrumbPage.root);
+        await breadcrumbPage.waitForRoot();
         await waitForElDisplayed(breadcrumbPage.title);
     }, 1);
 

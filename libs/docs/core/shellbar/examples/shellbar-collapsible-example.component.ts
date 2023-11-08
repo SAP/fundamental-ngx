@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -31,7 +31,7 @@ import {
     imports: [
         SegmentedButtonModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         ShellbarComponent,
         ShellbarLogoComponent,
         ProductMenuComponent,

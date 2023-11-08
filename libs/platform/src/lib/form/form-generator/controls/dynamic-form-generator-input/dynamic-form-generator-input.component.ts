@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
-import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
-import { InputDynamicFormFieldItem } from '../../interfaces/dynamic-form-item';
-import { PlatformInputModule } from '../../../input/fdp-input.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputComponent } from '../../../input/input.component';
+import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
+import { InputDynamicFormFieldItem } from '../../interfaces/dynamic-form-item';
+import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
 
 @Component({
     selector: 'fdp-dynamic-form-generator-input',
@@ -14,7 +14,7 @@ import { NgIf } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [NgIf, FormsModule, ReactiveFormsModule, PlatformInputModule]
+    imports: [NgIf, FormsModule, ReactiveFormsModule, InputComponent]
 })
 export class DynamicFormGeneratorInputComponent extends BaseDynamicFormGeneratorControl<InputDynamicFormFieldItem> {
     /** @hidden */

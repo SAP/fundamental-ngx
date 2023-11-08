@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
@@ -10,7 +10,7 @@ import { ToolbarItemDirective } from '@fundamental-ngx/core/toolbar';
     selector: 'fd-pagination-per-page-example',
     templateUrl: './pagination-per-page-example.component.html',
     standalone: true,
-    imports: [PaginationModule, ToolbarItemDirective, SegmentedButtonModule, FormsModule, NgFor, ButtonModule]
+    imports: [PaginationModule, ToolbarItemDirective, SegmentedButtonModule, FormsModule, NgFor, ButtonComponent]
 })
 export class PaginationPerPageExampleComponent {
     totalItems = 150;

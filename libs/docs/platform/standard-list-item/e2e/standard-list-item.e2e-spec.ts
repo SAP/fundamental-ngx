@@ -8,8 +8,7 @@ import {
     getElementArrayLength,
     getText,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { linkAttr, secondaryAttr, secondaryTypes, toolbarTextValue } from './standard-list-item-contents';
 import { StandardListItemPo } from './standard-list-item.po';
@@ -50,7 +49,7 @@ describe('Standard List Item test suite:', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(standardListPage.root);
+        await standardListPage.waitForRoot();
         await waitForElDisplayed(standardListPage.title);
     }, 1);
 

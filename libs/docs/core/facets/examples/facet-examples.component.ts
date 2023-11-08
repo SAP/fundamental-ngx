@@ -1,10 +1,10 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -43,7 +43,7 @@ export class FormFacetExampleComponent {}
     templateUrl: './form-link-facet-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FacetModule, IconModule, LinkComponent]
+    imports: [FacetModule, IconComponent, LinkComponent]
 })
 export class FormLinkFacetExampleComponent {}
 
@@ -89,7 +89,7 @@ export class RatingIndicatorFacetExampleComponent {}
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         NgIf,
         FacetModule,
         FormLabelComponent,

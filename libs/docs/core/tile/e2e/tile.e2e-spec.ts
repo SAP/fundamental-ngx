@@ -5,8 +5,7 @@ import {
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { TilePo } from './tile.po';
 
@@ -36,7 +35,7 @@ describe('Tile component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(tilePage.root);
+        await tilePage.waitForRoot();
         await waitForElDisplayed(tilePage.title);
     }, 1);
 

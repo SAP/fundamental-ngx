@@ -1,6 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, TemplateRef, inject } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import {
@@ -31,7 +31,7 @@ class ExampleStripAlertComponent implements OnDestroy {
             </ng-container>
         </ng-container>
     `,
-    imports: [NgIf, AsyncPipe, ButtonModule, ContentDensityDirective, LinkModule],
+    imports: [NgIf, AsyncPipe, ButtonComponent, ContentDensityDirective, LinkModule],
     styles: [
         `
             :host {
@@ -89,7 +89,7 @@ class ExampleStripAlertFooterComponent {
         `
     ],
     standalone: true,
-    imports: [ButtonModule, ContentDensityDirective]
+    imports: [ButtonComponent, ContentDensityDirective]
 })
 export class MessageStripAlertExampleComponent {
     private messageStripAlertService = inject(MessageStripAlertService);

@@ -4,7 +4,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogModule, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule, ListSecondaryDirective } from '@fundamental-ngx/core/list';
@@ -36,7 +36,7 @@ interface Fruit {
         NgFor,
         NgClass,
         ListSecondaryDirective,
-        ButtonModule,
+        ButtonComponent,
         AsyncPipe
     ]
 })

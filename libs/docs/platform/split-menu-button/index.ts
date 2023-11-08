@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformDocsSplitMenuButtonHeaderComponent } from './platform-split-menu-button-header/platform-split-menu-button-header.component';
+import { PlatformDocsSplitMenuButtonComponent } from './platform-split-menu-button.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-split-menu-button-header/platform-split-menu-button-header.component').then(
-                (c) => c.PlatformDocsSplitMenuButtonHeaderComponent
-            ),
+        component: PlatformDocsSplitMenuButtonHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-split-menu-button.component').then((c) => c.PlatformDocsSplitMenuButtonComponent)
+                component: PlatformDocsSplitMenuButtonComponent
             }
         ],
         data: {

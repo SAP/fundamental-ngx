@@ -8,8 +8,7 @@ import {
     refreshPage,
     scrollIntoView,
     uploadFile,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { FileUploaderPo } from './file-uploader.po';
 
@@ -33,7 +32,7 @@ describe('File uploader component test', () => {
 
     afterEach(async () => {
         await refreshPage();
-        await waitForPresent(fileUploaderPage.root);
+        await fileUploaderPage.waitForRoot();
         await waitForElDisplayed(fileUploaderPage.title);
     }, 2);
 

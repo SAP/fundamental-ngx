@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 
 @Component({
@@ -14,6 +14,6 @@ import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
         `
     ],
     standalone: true,
-    imports: [ButtonModule, ContentDensityDirective]
+    imports: [ButtonComponent, ContentDensityDirective]
 })
 export class ButtonSizesExampleComponent {}

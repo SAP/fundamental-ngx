@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { ResizableCardLayoutDocsHeaderComponent } from './resizable-card-layout-docs-header/resizable-card-layout-docs-header.component';
+import { ResizableCardLayoutDocsComponent } from './resizable-card-layout-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./resizable-card-layout-docs-header/resizable-card-layout-docs-header.component').then(
-                (c) => c.ResizableCardLayoutDocsHeaderComponent
-            ),
+        component: ResizableCardLayoutDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./resizable-card-layout-docs.component').then((c) => c.ResizableCardLayoutDocsComponent)
+                component: ResizableCardLayoutDocsComponent
             }
         ],
         data: {

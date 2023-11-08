@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 import { NgIf } from '@angular/common';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -25,7 +25,7 @@ import { FdpFormGroupModule, PlatformTimePickerModule } from '@fundamental-ngx/p
         PlatformTimePickerModule,
         ContentDensityDirective,
         SegmentedButtonModule,
-        ButtonModule,
+        ButtonComponent,
         NgIf
     ]
 })

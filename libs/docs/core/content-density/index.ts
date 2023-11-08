@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { ContentDensityDocsComponent } from './content-density-docs.component';
+import { ContentDensityHeaderComponent } from './content-density-header/content-density-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./content-density-header/content-density-header.component').then(
-                (c) => c.ContentDensityHeaderComponent
-            ),
+        component: ContentDensityHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./content-density-docs.component').then((c) => c.ContentDensityDocsComponent)
+                component: ContentDensityDocsComponent
             }
         ],
         data: {

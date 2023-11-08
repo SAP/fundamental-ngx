@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { SettingsGeneratorDocsComponent } from './settings-generator-docs.component';
+import { SettingsGeneratorHeaderComponent } from './settings-generator-header/settings-generator-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./settings-generator-header/settings-generator-header.component').then(
-                (c) => c.SettingsGeneratorHeaderComponent
-            ),
+        component: SettingsGeneratorHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./settings-generator-docs.component').then((c) => c.SettingsGeneratorDocsComponent)
+                component: SettingsGeneratorDocsComponent
             }
         ],
         data: {

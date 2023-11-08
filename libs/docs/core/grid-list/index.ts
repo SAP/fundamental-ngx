@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { GridListDocsComponent } from './grid-list-docs.component';
+import { GridListHeaderComponent } from './grid-list-header/grid-list-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./grid-list-header/grid-list-header.component').then((c) => c.GridListHeaderComponent),
+        component: GridListHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./grid-list-docs.component').then((c) => c.GridListDocsComponent)
+                component: GridListDocsComponent
             }
         ],
         data: {

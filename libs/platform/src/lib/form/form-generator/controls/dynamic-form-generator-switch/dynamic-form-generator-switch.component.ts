@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SwitchComponent } from '../../../switch/switch';
 import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
-import { PlatformSwitchModule } from '../../../switch/switch.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'fdp-dynamic-form-generator-switch',
@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, PlatformSwitchModule]
+    imports: [FormsModule, ReactiveFormsModule, SwitchComponent]
 })
 export class DynamicFormGeneratorSwitchComponent extends BaseDynamicFormGeneratorControl {
     /** @hidden */

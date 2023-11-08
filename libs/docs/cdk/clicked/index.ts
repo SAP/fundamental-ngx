@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { ClickedDocsComponent } from './clicked-docs.component';
+import { ClickedHeaderComponent } from './clicked-header/clicked-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./clicked-header/clicked-header.component').then((c) => c.ClickedHeaderComponent),
+        component: ClickedHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./clicked-docs.component').then((c) => c.ClickedDocsComponent)
+                component: ClickedDocsComponent
             }
         ],
         data: {

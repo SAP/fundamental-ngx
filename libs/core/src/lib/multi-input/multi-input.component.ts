@@ -64,11 +64,13 @@ import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobi
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { PairSelectionModel } from './pair-selection.model';
 
-function isOptionItem<ItemType = any, ValueType = any>(candidate: any): candidate is _OptionItem<ItemType, ValueType> {
+function isOptionItem<ItemType = any, ValueType = any>(
+    candidate: unknown
+): candidate is _OptionItem<ItemType, ValueType> {
     return isOptionItemBase<ValueType>(candidate) && 'item' in candidate && 'id' in candidate;
 }
 
-function isOptionItemBase<ValueType = any>(candidate: any): candidate is OptionItemBase<ValueType> {
+function isOptionItemBase<ValueType = any>(candidate: unknown): candidate is OptionItemBase<ValueType> {
     return typeof candidate === 'object' && candidate !== null && 'value' in candidate && 'label' in candidate;
 }
 

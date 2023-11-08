@@ -79,6 +79,7 @@ export async function refreshPage(isFullRefresh = true): Promise<void> {
         }
     } else {
         await browser.refresh();
+        await pause(500);
         if (browserIsSafari()) {
             await pause();
         }
@@ -586,9 +587,13 @@ export async function checkElementScreenshot(
 }
 
 export async function checkSelectorExists(selector: string, index: number = 0): Promise<void> {
-    if ((await $$(selector))[index] === undefined) {
+    if (!(await checkSelectorSupported(selector, index))) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }
+}
+
+export async function checkSelectorSupported(selector: string, index: number = 0): Promise<boolean> {
+    return (await $$(selector))[index] !== undefined;
 }
 
 export async function applyState(

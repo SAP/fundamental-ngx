@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { TableDocsHeaderComponent } from './table-docs-header/table-docs-header.component';
+import { TableDocsComponent } from './table-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./table-docs-header/table-docs-header.component').then((c) => c.TableDocsHeaderComponent),
+        component: TableDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./table-docs.component').then((c) => c.TableDocsComponent)
+                component: TableDocsComponent
             }
         ],
         data: {

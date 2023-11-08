@@ -36,7 +36,7 @@ import {
     ModifyItemEvent,
     PlatformListModule,
     SelectionType,
-    StandardListItemModule
+    StandardListItemComponent
 } from '@fundamental-ngx/platform/list';
 import {
     DATA_PROVIDERS,
@@ -113,7 +113,7 @@ export class MultiInputSelectionChangeEvent {
         AutoCompleteDirective,
         InitialFocusDirective,
         PlatformListModule,
-        StandardListItemModule,
+        StandardListItemComponent,
         DisplayFnPipe,
         ContentDensityModule,
         FdTranslatePipe,

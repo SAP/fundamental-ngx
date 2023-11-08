@@ -22,7 +22,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { DataSource, DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import {
-    ClickedBehaviorModule,
+    ClickedDirective,
     FDK_SELECTABLE_ITEM_PROVIDER,
     Nullable,
     SelectableItemDirective,
@@ -65,7 +65,7 @@ import { SelectionModeModel, TreeService } from '../../tree.service';
     imports: [
         SelectableItemDirective,
         NgClass,
-        ClickedBehaviorModule,
+        ClickedDirective,
         NgIf,
         NgTemplateOutlet,
         IconComponent,

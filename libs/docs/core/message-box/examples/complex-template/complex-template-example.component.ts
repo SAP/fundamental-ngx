@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageBoxComplexExampleComponent } from './message-box-complex-example.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { MessageBoxComplexExampleComponent } from './message-box-complex-example
         MessageBoxService
     ],
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class ComplexTemplateExampleComponent {
     constructor(private _messageBoxService: MessageBoxService) {}

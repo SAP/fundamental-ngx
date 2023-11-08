@@ -9,8 +9,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { TokenPo } from './token.po';
 
@@ -34,7 +33,7 @@ describe('Token component test', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(tokenPage.root);
+        await tokenPage.waitForRoot();
         await waitForElDisplayed(tokenPage.title);
     }, 2);
 

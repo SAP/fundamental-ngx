@@ -9,8 +9,7 @@ import {
     pause,
     refreshPage,
     scrollIntoView,
-    waitForElDisplayed,
-    waitForPresent
+    waitForElDisplayed
 } from '../../../../../e2e';
 import { ResizableCardLayoutPo } from './resizable-card-layout.po';
 
@@ -45,7 +44,7 @@ describe('Resizable card layout component:', () => {
 
     beforeEach(async () => {
         await refreshPage();
-        await waitForPresent(resizableCardLayoutPage.root);
+        await resizableCardLayoutPage.waitForRoot();
         await waitForElDisplayed(resizableCardLayoutPage.title);
     }, 2);
 

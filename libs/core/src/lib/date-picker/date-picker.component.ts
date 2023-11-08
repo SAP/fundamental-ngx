@@ -28,7 +28,7 @@ import { ControlValueAccessor, FormsModule, NG_VALIDATORS, NG_VALUE_ACCESSOR, Va
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
     CalendarComponent,
     CalendarType,
@@ -110,7 +110,7 @@ let datePickerCounter = 0;
         FormsModule,
         CalendarComponent,
         BarModule,
-        ButtonModule,
+        ButtonComponent,
         NgSwitch,
         NgSwitchCase,
         FdTranslatePipe

@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { TableModule } from '@fundamental-ngx/core/table';
 
@@ -9,7 +9,7 @@ import { TableModule } from '@fundamental-ngx/core/table';
     selector: 'fd-table-fixed-example',
     templateUrl: './table-fixed-example.component.html',
     standalone: true,
-    imports: [TableModule, FocusableGridDirective, NgFor, LinkComponent, IconModule]
+    imports: [TableModule, FocusableGridDirective, NgFor, LinkComponent, IconComponent]
 })
 export class TableFixedExampleComponent implements OnInit {
     tableRows: any[];
