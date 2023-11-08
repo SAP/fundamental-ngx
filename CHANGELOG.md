@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.14...v0.47.0-rc.15) (2023-11-08)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.47.0-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.13...v0.47.0-rc.14) (2023-11-08)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+# [0.47.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.12...v0.47.0-rc.13) (2023-11-08)
+
+
+### Bug Fixes
+
+* **platform:** aria-labelledby for select ([#10916](https://github.com/SAP/fundamental-ngx/issues/10916)) ([5c763bf](https://github.com/SAP/fundamental-ngx/commit/5c763bf6bfe25759905b85d8ec6c0aa3f3730756))
+
+
+
+
+
 # [0.47.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.11...v0.47.0-rc.12) (2023-11-07)
 
 

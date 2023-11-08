@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { VerticalNavigationDocsComponent } from './vertical-navigation-docs.component';
+import { VerticalNavigationHeaderComponent } from './vertical-navigation-header/vertical-navigation-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./vertical-navigation-header/vertical-navigation-header.component').then(
-                (c) => c.VerticalNavigationHeaderComponent
-            ),
+        component: VerticalNavigationHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./vertical-navigation-docs.component').then((c) => c.VerticalNavigationDocsComponent)
+                component: VerticalNavigationDocsComponent
             }
         ],
         data: {

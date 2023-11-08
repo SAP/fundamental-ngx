@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { CheckboxDocsComponent } from './checkbox-docs.component';
+import { CheckboxHeaderComponent } from './checkbox-header/checkbox-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./checkbox-header/checkbox-header.component').then((c) => c.CheckboxHeaderComponent),
+        component: CheckboxHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./checkbox-docs.component').then((c) => c.CheckboxDocsComponent)
+                component: CheckboxDocsComponent
             }
         ],
         data: {

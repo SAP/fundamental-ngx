@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 import { FdLanguage } from '@fundamental-ngx/i18n';
+import { TokenDocsComponent } from './token-docs.component';
+import { TokenHeaderComponent } from './token-header/token-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./token-header/token-header.component').then((c) => c.TokenHeaderComponent),
+        component: TokenHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./token-docs.component').then((c) => c.TokenDocsComponent)
+                component: TokenDocsComponent
             }
         ],
         data: {

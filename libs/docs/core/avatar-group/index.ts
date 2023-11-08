@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
+import { AvatarGroupDocsComponent } from './avatar-group-docs.component';
+import { AvatarGroupHeaderComponent } from './avatar-group-header/avatar-group-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./avatar-group-header/avatar-group-header.component').then((m) => m.AvatarGroupHeaderComponent),
+        component: AvatarGroupHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () => import('./avatar-group-docs.component').then((m) => m.AvatarGroupDocsComponent)
+                component: AvatarGroupDocsComponent
             }
         ]
     }

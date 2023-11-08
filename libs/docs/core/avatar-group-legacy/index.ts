@@ -1,18 +1,16 @@
 import { Routes } from '@angular/router';
+import { AvatarGroupLegacyDocsComponent } from './avatar-group-legacy-docs.component';
+import { AvatarGroupLegacyHeaderComponent } from './avatar-group-legacy-header/avatar-group-legacy-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./avatar-group-legacy-header/avatar-group-legacy-header.component').then(
-                (m) => m.AvatarGroupLegacyHeaderComponent
-            ),
+        component: AvatarGroupLegacyHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./avatar-group-legacy-docs.component').then((m) => m.AvatarGroupLegacyDocsComponent)
+                component: AvatarGroupLegacyDocsComponent
             }
         ]
     }

@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { LayoutGridDocsHeaderComponent } from './layout-grid-docs-header/layout-grid-docs-header.component';
+import { LayoutGridDocsComponent } from './layout-grid-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./layout-grid-docs-header/layout-grid-docs-header.component').then(
-                (c) => c.LayoutGridDocsHeaderComponent
-            ),
+        component: LayoutGridDocsHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./layout-grid-docs.component').then((c) => c.LayoutGridDocsComponent)
+                component: LayoutGridDocsComponent
             }
         ],
         data: {

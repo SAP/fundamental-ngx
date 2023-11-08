@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { MultiComboboxDocsComponent } from './multi-combobox-docs.component';
+import { MultiComboboxHeaderComponent } from './multi-combobox-header/multi-combobox-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./multi-combobox-header/multi-combobox-header.component').then(
-                (c) => c.MultiComboboxHeaderComponent
-            ),
+        component: MultiComboboxHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./multi-combobox-docs.component').then((c) => c.MultiComboboxDocsComponent)
+                component: MultiComboboxDocsComponent
             }
         ],
         data: {

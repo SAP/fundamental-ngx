@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
 import { CURRENT_LIB } from '@fundamental-ngx/docs/shared';
+import { MomentDatetimeAdapterDocsComponent } from './moment-datetime-adapter-docs.component';
+import { MomentDatetimeAdapterHeaderComponent } from './moment-datetime-adapter-header/moment-datetime-adapter-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./moment-datetime-adapter-header/moment-datetime-adapter-header.component').then(
-                (c) => c.MomentDatetimeAdapterHeaderComponent
-            ),
+        component: MomentDatetimeAdapterHeaderComponent,
         providers: [
             {
                 provide: CURRENT_LIB,
@@ -17,8 +16,7 @@ export const ROUTES: Routes = [
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./moment-datetime-adapter-docs.component').then((c) => c.MomentDatetimeAdapterDocsComponent)
+                component: MomentDatetimeAdapterDocsComponent
             }
         ],
         data: {

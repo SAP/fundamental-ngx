@@ -1,17 +1,18 @@
 import { Routes } from '@angular/router';
+import { GenericTagDocsComponent } from './generic-tag-docs.component';
+import { GenericTagHeaderComponent } from './generic-tag-header/generic-tag-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./generic-tag-header/generic-tag-header.component').then((m) => m.GenericTagHeaderComponent),
+        component: GenericTagHeaderComponent,
         data: {
             primary: true
         },
         children: [
             {
                 path: '',
-                loadComponent: () => import('./generic-tag-docs.component').then((m) => m.GenericTagDocsComponent)
+                component: GenericTagDocsComponent
             }
         ]
     }

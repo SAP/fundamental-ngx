@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
+import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./busy-indicator-header/busy-indicator-header.component').then(
-                (c) => c.BusyIndicatorHeaderComponent
-            ),
+        component: BusyIndicatorHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./busy-indicator-docs.component').then((c) => c.BusyIndicatorDocsComponent)
+                component: BusyIndicatorDocsComponent
             }
         ],
         data: {

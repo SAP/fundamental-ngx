@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { FeedInputDocsComponent } from './feed-input-docs.component';
+import { FeedInputHeaderComponent } from './feed-input-header/feed-input-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./feed-input-header/feed-input-header.component').then((c) => c.FeedInputHeaderComponent),
+        component: FeedInputHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./feed-input-docs.component').then((c) => c.FeedInputDocsComponent)
+                component: FeedInputDocsComponent
             }
         ],
         data: {

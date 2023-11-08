@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { MessageStripDocsComponent } from './message-strip-docs.component';
+import { MessageStripHeaderComponent } from './message-strip-header/message-strip-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./message-strip-header/message-strip-header.component').then((c) => c.MessageStripHeaderComponent),
+        component: MessageStripHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./message-strip-docs.component').then((c) => c.MessageStripDocsComponent)
+                component: MessageStripDocsComponent
             }
         ],
         data: {

@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ObjectNumberDocsComponent } from './object-number-docs.component';
+import { ObjectNumberHeaderComponent } from './object-number-header/object-number-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./object-number-header/object-number-header.component').then((c) => c.ObjectNumberHeaderComponent),
+        component: ObjectNumberHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./object-number-docs.component').then((c) => c.ObjectNumberDocsComponent)
+                component: ObjectNumberDocsComponent
             }
         ],
         data: {

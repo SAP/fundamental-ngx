@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { MessageToastDocsComponent } from './message-toast-docs.component';
+import { MessageToastHeaderComponent } from './message-toast-header/message-toast-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./message-toast-header/message-toast-header.component').then((c) => c.MessageToastHeaderComponent),
+        component: MessageToastHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./message-toast-docs.component').then((c) => c.MessageToastDocsComponent)
+                component: MessageToastDocsComponent
             }
         ],
         data: {

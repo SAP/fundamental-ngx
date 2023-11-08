@@ -1,16 +1,15 @@
 import { Routes } from '@angular/router';
+import { FocusableGridDocsComponent } from './focusable-grid-docs.component';
+import { FocusableGridHeaderComponent } from './focusable-grid-header/focusable-grid-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./focusable-grid-header/focusable-grid-header.component').then(
-                (c) => c.FocusableGridHeaderComponent
-            ),
+        component: FocusableGridHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./focusable-grid-docs.component').then((c) => c.FocusableGridDocsComponent)
+                component: FocusableGridDocsComponent
             }
         ],
         data: {

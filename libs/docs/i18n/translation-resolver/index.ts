@@ -1,18 +1,16 @@
 import { Routes } from '@angular/router';
+import { TranslationResolverDocsComponent } from './translation-resolver-docs.component';
+import { TranslationResolverHeaderComponent } from './translation-resolver-header/translation-resolver-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./translation-resolver-header/translation-resolver-header.component').then(
-                (c) => c.TranslationResolverHeaderComponent
-            ),
+        component: TranslationResolverHeaderComponent,
         data: { primary: true },
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./translation-resolver-docs.component').then((c) => c.TranslationResolverDocsComponent)
+                component: TranslationResolverDocsComponent
             }
         ]
     }

@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
+import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
+import { PlatformObjectMarkerDocsComponent } from './platform-object-marker-docs.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./object-marker-header/object-marker-header.component').then((c) => c.ObjectMarkerHeaderComponent),
+        component: ObjectMarkerHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-object-marker-docs.component').then((c) => c.PlatformObjectMarkerDocsComponent)
+                component: PlatformObjectMarkerDocsComponent
             }
         ],
         data: {

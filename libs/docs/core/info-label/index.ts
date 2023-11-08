@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { InfoLabelDocsComponent } from './info-label-docs.component';
+import { InfoLabelHeaderComponent } from './info-label-header/info-label-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./info-label-header/info-label-header.component').then((c) => c.InfoLabelHeaderComponent),
+        component: InfoLabelHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./info-label-docs.component').then((c) => c.InfoLabelDocsComponent)
+                component: InfoLabelDocsComponent
             }
         ],
         data: {

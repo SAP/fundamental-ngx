@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformSmartFilterBarDocsComponent } from './platform-smart-filter-bar-docs.component';
+import { PlatformSmartFilterBarHeaderComponent } from './platform-smart-filter-bar-header/platform-smart-filter-bar-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-smart-filter-bar-header/platform-smart-filter-bar-header.component').then(
-                (c) => c.PlatformSmartFilterBarHeaderComponent
-            ),
+        component: PlatformSmartFilterBarHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-smart-filter-bar-docs.component').then(
-                        (c) => c.PlatformSmartFilterBarDocsComponent
-                    )
+                component: PlatformSmartFilterBarDocsComponent
             }
         ],
         data: {

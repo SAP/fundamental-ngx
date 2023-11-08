@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformActionListItemDocsComponent } from './platform-action-list-item-docs.component';
+import { PlatformActionListItemHeaderComponent } from './platform-action-list-item-header/platform-action-list-item-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-action-list-item-header/platform-action-list-item-header.component').then(
-                (c) => c.PlatformActionListItemHeaderComponent
-            ),
+        component: PlatformActionListItemHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-action-list-item-docs.component').then(
-                        (c) => c.PlatformActionListItemDocsComponent
-                    )
+                component: PlatformActionListItemDocsComponent
             }
         ],
         data: {

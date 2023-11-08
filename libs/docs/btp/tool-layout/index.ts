@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
+import { ToolLayoutDocsComponent } from './tool-layout-docs.component';
+import { ToolLayoutHeaderComponent } from './tool-layout-header/tool-layout-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./tool-layout-header/tool-layout-header.component').then((c) => c.ToolLayoutHeaderComponent),
+        component: ToolLayoutHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./tool-layout-docs.component').then((c) => c.ToolLayoutDocsComponent)
+                component: ToolLayoutDocsComponent
             }
         ],
         data: {

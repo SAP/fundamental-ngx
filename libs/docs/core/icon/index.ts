@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { IconDocsComponent } from './icon-docs.component';
+import { IconHeaderComponent } from './icon-header/icon-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./icon-header/icon-header.component').then((c) => c.IconHeaderComponent),
+        component: IconHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./icon-docs.component').then((c) => c.IconDocsComponent)
+                component: IconDocsComponent
             }
         ],
         data: {

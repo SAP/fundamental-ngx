@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
+import { PlatformFormGeneratorDocsComponent } from './platform-form-generator-docs.component';
+import { PlatformFormGeneratorHeaderComponent } from './platform-form-generator-header/platform-form-generator-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () =>
-            import('./platform-form-generator-header/platform-form-generator-header.component').then(
-                (c) => c.PlatformFormGeneratorHeaderComponent
-            ),
+        component: PlatformFormGeneratorHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    import('./platform-form-generator-docs.component').then((c) => c.PlatformFormGeneratorDocsComponent)
+                component: PlatformFormGeneratorDocsComponent
             }
         ],
         data: {

@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { MenuDocsComponent } from './menu-docs.component';
+import { MenuHeaderComponent } from './menu-header/menu-header.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
-        loadComponent: () => import('./menu-header/menu-header.component').then((c) => c.MenuHeaderComponent),
+        component: MenuHeaderComponent,
         children: [
             {
                 path: '',
-                loadComponent: () => import('./menu-docs.component').then((c) => c.MenuDocsComponent)
+                component: MenuDocsComponent
             }
         ],
         data: {
