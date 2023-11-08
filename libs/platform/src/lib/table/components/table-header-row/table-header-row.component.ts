@@ -33,9 +33,11 @@ import {
     SelectionCellStylesPipe,
     SelectionMode,
     SelectionModeValue,
+    SortDirection,
     TableCellStylesPipe,
     TableColumn,
     TableColumnResizeService,
+    TableColumnSortingDirectionPipe,
     TableRowService,
     TableService
 } from '@fundamental-ngx/platform/table-helpers';
@@ -77,6 +79,7 @@ import { TableHeaderCellContentComponent } from '../table-header-cell-content/ta
         SelectionCellStylesPipe,
         TableCellStylesPipe,
         ColumnResizableSidePipe,
+        TableColumnSortingDirectionPipe,
         forwardRef(() => IsColumnHasHeaderMenuPipe)
     ]
 })
@@ -140,6 +143,9 @@ export class TableHeaderRowComponent extends TableRowDirective implements OnInit
 
     /** @hidden */
     readonly SELECTION_MODE = SelectionMode;
+
+    /** @hidden */
+    readonly SORT_DIRECTION = SortDirection;
 
     /** @hidden */
     readonly _tableColumnResizeService = inject(TableColumnResizeService);
