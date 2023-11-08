@@ -21,6 +21,7 @@
         "calendarYearsRangeViewDescription": "Yıl Aralığı Seçici"
     },
     "coreMultiComboBox": {
+        "multiComboBoxAriaLabel": "Çoklu Değer Açılan Kutu",
         "selectAllLabel": "Hepsini seç ({selectedItems}/{totalItems})"
     },
     "coreCarousel": {
