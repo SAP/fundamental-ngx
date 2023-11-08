@@ -15,45 +15,45 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlStatus, FormGroupDirective, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge, of } from 'rxjs';
+import { FormControlStatus, FormGroupDirective, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ColumnLayout,
+    FDP_DO_CHECK,
     FieldHintOptions,
-    PlatformFormFieldControl,
-    HintOptions,
     HintInput,
-    FDP_DO_CHECK
+    HintOptions,
+    PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { BehaviorSubject, Observable, Subject, Subscription, isObservable, merge, of } from 'rxjs';
+import { debounceTime, filter, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
 import { FormGeneratorFieldComponent } from '../form-generator-field/form-generator-field.component';
 
-import { FormGeneratorService } from '../form-generator.service';
-import {
-    DynamicFormItem,
-    DynamicFormItemMap,
-    DynamicFormItemValidationObject,
-    DynamicFormValue
-} from '../interfaces/dynamic-form-item';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { SkeletonComponent } from '@fundamental-ngx/core/skeleton';
+import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
+import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
 import {
     DynamicFormControl,
     DynamicFormControlGroup,
     DynamicFormGroupControl,
     DynamicFormGroupControls
 } from '../dynamic-form-control';
-import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
-import { DefaultGapLayout, DefaultVerticalFieldLayout, DefaultVerticalLabelLayout } from '../../form-group/constants';
-import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
-import { defaultFormGeneratorHintOptions } from '../config/default-form-generator-hint-options';
-import { getParentItem, isFormFieldItem, mapFormItems, transformFormItem } from '../helpers';
-import { GetOrderedFieldControlsPipe } from '../pipes/get-ordered-form-controls.pipe';
-import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
 import { DynamicFormControlFieldDirective } from '../dynamic-form-control-field.directive';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
+import { FormGeneratorService } from '../form-generator.service';
+import { FDP_FORM_GENERATOR_DEFAULT_HINT_OPTIONS } from '../form-generator.tokens';
+import { getParentItem, isFormFieldItem, mapFormItems, transformFormItem } from '../helpers';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
+import {
+    DynamicFormItem,
+    DynamicFormItemMap,
+    DynamicFormItemValidationObject,
+    DynamicFormValue
+} from '../interfaces/dynamic-form-item';
 import { GetHintOptionsPipe } from '../pipes/get-hint-options.pipe';
+import { GetOrderedFieldControlsPipe } from '../pipes/get-ordered-form-controls.pipe';
 
 let formUniqueId = 0;
 
@@ -99,7 +99,7 @@ export interface SubmitFormEventResult {
         NgTemplateOutlet,
         DynamicFormControlFieldDirective,
         FormGeneratorFieldComponent,
-        SkeletonModule,
+        SkeletonComponent,
         GetOrderedFieldControlsPipe,
         GetHintOptionsPipe
     ]

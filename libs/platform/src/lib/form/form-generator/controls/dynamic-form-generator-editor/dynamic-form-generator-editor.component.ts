@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextAreaComponent } from '../../../text-area/text-area.component';
 import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../providers/providers';
-import { PlatformTextAreaModule } from '../../../text-area/text-area.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'fdp-dynamic-form-generator-editor',
@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, PlatformTextAreaModule]
+    imports: [FormsModule, ReactiveFormsModule, TextAreaComponent]
 })
 export class DynamicFormGeneratorEditorComponent extends BaseDynamicFormGeneratorControl {
     /** @hidden */

@@ -2,7 +2,7 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
-import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
+import { InlineHelpDirective } from '@fundamental-ngx/core/inline-help';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { HintOptions } from '@fundamental-ngx/platform/shared';
 import { FieldGroup } from '../../models/field.model';
@@ -17,7 +17,7 @@ import { FieldGroup } from '../../models/field.model';
         '[class.fd-form-group__header]': 'true'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, LinkComponent, IconComponent, InlineHelpModule]
+    imports: [NgIf, NgTemplateOutlet, LinkComponent, IconComponent, InlineHelpDirective]
 })
 export class FormGroupHeaderComponent {
     /** Fields Group */
