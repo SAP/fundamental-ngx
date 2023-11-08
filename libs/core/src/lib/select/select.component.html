@@ -29,7 +29,6 @@
 <ng-template #selectInputControlTemplate>
     <div
         class="fd-select__control"
-        role="listbox"
         #selectControl
         [class]="_selectControlClass"
         [class.is-active]="_isOpen"
@@ -41,6 +40,8 @@
         [attr.aria-active]="_isOpen"
         aria-live="polite"
         [attr.aria-selected]="selected ? selected.selected : false"
+        role="combobox"
+        aria-roledescription="listbox"
         [attr.aria-expanded]="_isOpen"
         [attr.aria-disabled]="disabled"
         [attr.aria-controls]="controlId + '-list-box'"
@@ -70,7 +71,7 @@
             [class.is-disabled]="disabled"
             *ngIf="!readonly"
         >
-            <fd-icon [glyph]="glyph"></fd-icon>
+            <fd-icon [ariaHidden]="true" [glyph]="glyph"></fd-icon>
         </span>
     </div>
 </ng-template>
