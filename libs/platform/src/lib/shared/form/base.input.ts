@@ -6,22 +6,22 @@ import {
     DoCheck,
     ElementRef,
     Host,
-    inject,
     Inject,
     InjectionToken,
     Input,
-    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
     Self,
     SkipSelf,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    inject,
+    isDevMode
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
-import { filter, Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, filter, takeUntil } from 'rxjs';
 
 import {
     FD_FORM_FIELD,
