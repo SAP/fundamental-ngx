@@ -62,7 +62,10 @@ let listItemUniqueId = 0;
     standalone: true,
     imports: [NgIf, FormItemComponent, DecimalPipe]
 })
-export class ListItemComponent extends ListFocusItem implements AfterContentInit, OnDestroy, ListItemInterface {
+export class ListItemComponent<T = any>
+    extends ListFocusItem<T>
+    implements AfterContentInit, OnDestroy, ListItemInterface
+{
     /** Whether list item is selected */
     @Input()
     @HostBinding('class.is-selected')
