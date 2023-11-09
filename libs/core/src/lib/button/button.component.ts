@@ -10,7 +10,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder, HasElementRef, applyCssClass } from '@fundamental-ngx/cdk/utils';
+import { CssClassBuilder, FocusableItemDirective, HasElementRef, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { Subscription } from 'rxjs';
 import { BaseButton } from './base-button';
@@ -51,6 +51,7 @@ import { FD_BUTTON_COMPONENT } from './tokens';
         }
     ],
     standalone: true,
+    hostDirectives: [FocusableItemDirective],
     imports: [NgIf, IconComponent]
 })
 export class ButtonComponent
