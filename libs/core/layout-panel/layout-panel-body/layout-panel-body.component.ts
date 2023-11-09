@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 /**
  * Main content of the panel can that hold lists, table, tree, text, form or any other information.
@@ -11,16 +11,15 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
  * </fd-layout-panel>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-layout-panel-body',
-    template: `<ng-content></ng-content>`,
     host: {
         '[class.fd-has-display-block]': 'true'
     },
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class LayoutPanelBodyComponent {
     /** @hidden */
     @HostBinding('class.fd-layout-panel__body')

@@ -1,25 +1,13 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    HostBinding,
-    Inject,
-    Input,
-    OnChanges,
-    OnInit,
-    Optional,
-    ViewEncapsulation
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding, Inject, Input, OnChanges, OnInit, Optional } from '@angular/core';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { BasePopoverClass, FD_POPOVER_COMPONENT } from '@fundamental-ngx/core/popover';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-notification-group',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()

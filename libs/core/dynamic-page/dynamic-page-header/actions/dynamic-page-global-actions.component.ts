@@ -1,38 +1,24 @@
-import {
-    AfterContentInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ContentChild,
-    ElementRef,
-    Renderer2,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterContentInit, ContentChild, Directive, ElementRef } from '@angular/core';
 import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-dynamic-page-global-actions',
-    template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     host: {
         role: 'toolbar'
     },
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
     /** @hidden */
     @ContentChild(ToolbarComponent)
     _toolbarComponent: ToolbarComponent;
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        private _renderer: Renderer2,
-        private _changeDetRef: ChangeDetectorRef
-    ) {
+    constructor(private _elementRef: ElementRef) {
         super();
     }
 

@@ -1,23 +1,14 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    Input,
-    OnChanges,
-    OnInit,
-    ViewEncapsulation
-} from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { CssClassBuilder, Nullable, applyCssClass } from '@fundamental-ngx/cdk/utils';
 
 export type FooterPosition = 'start' | 'end';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-layout-panel-footer',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class LayoutPanelFooterComponent implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
     @Input()

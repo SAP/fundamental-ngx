@@ -1,20 +1,12 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ContentChildren,
-    HostBinding,
-    QueryList,
-    ViewEncapsulation
-} from '@angular/core';
+import { ContentChildren, Directive, HostBinding, QueryList } from '@angular/core';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-notification-actions',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NotificationActionsComponent {
     /** @hidden */
     @HostBinding('class.fd-notification__actions')

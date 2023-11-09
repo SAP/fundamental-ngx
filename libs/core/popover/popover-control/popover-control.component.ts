@@ -1,4 +1,4 @@
-import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, Directive, ElementRef } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -9,13 +9,11 @@ import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Vi
  * </fd-popover>
  * ```
  */
-@Component({
+@Directive({
     selector: 'fd-popover-control, [fdPopoverControl]',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class PopoverControlComponent implements AfterContentChecked {
     /** @hidden */
     _tabbable = false;

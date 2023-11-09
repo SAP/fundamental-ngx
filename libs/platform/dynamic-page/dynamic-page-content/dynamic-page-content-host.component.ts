@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
 
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../constants';
 import { addClassNameToElement } from '../utils';
@@ -11,12 +11,12 @@ import { addClassNameToElement } from '../utils';
  *
  */
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fdp-dynamic-page-content-host',
-    template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class DynamicPageContentHostComponent implements OnInit {
     /**
      * a unique identifier for this content

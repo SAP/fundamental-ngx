@@ -1,25 +1,21 @@
 import {
     AfterContentInit,
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component,
     ContentChild,
     ContentChildren,
+    Directive,
     ElementRef,
     HostBinding,
-    QueryList,
-    ViewEncapsulation
+    QueryList
 } from '@angular/core';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { NestedListComponent } from '@fundamental-ngx/cx/nested-list';
 
-@Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    selector: 'fdx-side-nav-main, div[fdx-side-nav-main]',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
+    selector: 'fdx-side-nav-main, div[fdx-side-nav-main]'
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class SideNavigationMainComponent implements AfterContentInit {
     /** @hidden */
     @ContentChild(NestedListComponent)

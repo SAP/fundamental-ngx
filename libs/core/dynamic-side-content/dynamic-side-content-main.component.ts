@@ -1,22 +1,12 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ElementRef,
-    HostBinding,
-    Input,
-    OnInit,
-    Renderer2,
-    forwardRef
-} from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2, forwardRef } from '@angular/core';
 
 import { DYNAMIC_SIDE_CONTENT_CHILD_TOKEN, DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 
 let componentId = 0;
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-dynamic-side-content-main',
-    template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: DYNAMIC_SIDE_CONTENT_CHILD_TOKEN,
@@ -25,6 +15,7 @@ let componentId = 0;
     ],
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class DynamicSideContentMainComponent implements OnInit {
     /** Unique element Id, by default it's auto generated */
     @Input()

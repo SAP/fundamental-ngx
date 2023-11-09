@@ -1,12 +1,5 @@
 import { DomPortal } from '@angular/cdk/portal';
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
-    ContentChild,
-    ElementRef,
-    ViewEncapsulation
-} from '@angular/core';
+import { AfterViewInit, ContentChild, Directive, ElementRef } from '@angular/core';
 import { FD_LINK_COMPONENT, LinkComponent } from '@fundamental-ngx/core/link';
 import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
 
@@ -19,9 +12,9 @@ import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
  * </fd-breadcrumb-item>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-breadcrumb-item',
-    template: '<ng-content></ng-content>',
     host: {
         class: 'fd-breadcrumb__item'
     },
@@ -31,10 +24,9 @@ import { FD_BREADCRUMB_ITEM_COMPONENT } from './tokens';
             useExisting: BreadcrumbItemComponent
         }
     ],
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class BreadcrumbItemComponent implements AfterViewInit {
     /** @hidden */
     @ContentChild(FD_LINK_COMPONENT)

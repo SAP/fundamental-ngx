@@ -1,12 +1,5 @@
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    HostListener,
-    Output,
-    ViewEncapsulation
-} from '@angular/core';
+import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -21,13 +14,12 @@ import {
  * </fd-action-sheet>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-action-sheet-control',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ActionSheetControlComponent {
     /** Emitted event when control button is clicked */
     @Output()

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 /**
  * Container for title and description.
@@ -13,13 +13,12 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  * </fd-layout-panel>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-layout-panel-head',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class LayoutPanelHeadComponent {
     /** @hidden */
     @HostBinding('class.fd-layout-panel__head')

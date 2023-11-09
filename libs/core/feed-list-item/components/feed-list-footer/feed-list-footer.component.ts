@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Directive } from '@angular/core';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-feed-list-footer',
-    template: '<ng-content></ng-content>',
     host: { class: 'fd-feed-list__footer' },
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FeedListFooterComponent {}

@@ -1,5 +1,5 @@
 <p>Template-driven form:</p>
-<fdp-message-popover-form-wrapper #templateDrivenWrapper>
+<fdp-message-popover-form-wrapper #templateDrivenWrapper="messagePopoverWrapper">
     <form>
         <div fd-form-item>
             <label fd-form-label>Required Input:</label>
@@ -36,7 +36,7 @@
 
 <p>Reactive form:</p>
 <p>Submit empty form to see errors.</p>
-<fdp-message-popover-form-wrapper #reactiveWrapper>
+<fdp-message-popover-form-wrapper #reactiveWrapper="messagePopoverWrapper">
     <form [formGroup]="reactiveFormExample" #reactiveForm>
         <div fd-form-item>
             <label fd-form-label>Name:</label>

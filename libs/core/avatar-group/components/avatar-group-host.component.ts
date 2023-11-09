@@ -33,6 +33,7 @@ import { AvatarGroupHostConfig } from '../types';
     template: '<ng-content></ng-content>',
     standalone: true,
     imports: [],
+    exportAs: 'avatarGroupHost',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })

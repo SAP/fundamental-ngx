@@ -1,14 +1,12 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
     ContentChildren,
     DestroyRef,
+    Directive,
     Inject,
     Input,
     OnDestroy,
-    QueryList,
-    ViewEncapsulation
+    QueryList
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, ControlContainer, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
@@ -33,14 +31,13 @@ import { convertFormState } from '../../utils';
 
 export type MessagePopoverForm = NgForm | FormGroupDirective;
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fdp-message-popover-form-wrapper',
-    template: `<ng-content></ng-content>`,
     exportAs: 'messagePopoverWrapper',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class MessagePopoverFormWrapperComponent implements MessagePopoverWrapper, AfterViewInit, OnDestroy {
     /** @hidden */
     @ContentChildren(ControlContainer, { descendants: true })

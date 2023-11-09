@@ -1,13 +1,13 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
 import { QuickViewGroupItemContentElementDirective } from './quick-view-group-item-content-element.directive';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-quick-view-group-item-content',
-    template: `<ng-content></ng-content>`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class QuickViewGroupItemContentComponent implements AfterViewInit {
     /** @hidden */
     constructor(private readonly _elRef: ElementRef<Element>) {}

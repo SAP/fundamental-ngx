@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Directive, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FACET_CLASS_NAME } from '../constants';
 import { addClassNameToFacetElement } from '../utils';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-facet-content',
-    template: `<ng-content></ng-content>`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FacetContentComponent implements OnInit {
     /** @hidden */
     constructor(

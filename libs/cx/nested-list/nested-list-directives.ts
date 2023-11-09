@@ -42,11 +42,11 @@ export class NestedListHeaderDirective {
     }
 }
 
-@Component({
+@Directive({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[cxNestedDirectivesIcon], [fdx-nested-list-icon]',
-    template: `<ng-content></ng-content>`
+    selector: '[cxNestedDirectivesIcon], [fdx-nested-list-icon]'
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NestedListIconComponent extends IconComponent {
     /** Role attribute */
     @Input()

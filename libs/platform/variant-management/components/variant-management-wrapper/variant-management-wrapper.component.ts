@@ -1,15 +1,13 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy,
-    Component,
     ContentChild,
     ContentChildren,
     DestroyRef,
+    Directive,
     inject,
     Input,
     OnDestroy,
-    QueryList,
-    ViewEncapsulation
+    QueryList
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FDP_PRESET_MANAGED_COMPONENT, PresetManagedComponent } from '@fundamental-ngx/platform/shared';
@@ -42,11 +40,9 @@ import { FDP_VARIANT_MANAGEMENT, FDP_VARIANT_MANAGEMENT_WRAPPER } from '../../to
  *  </fdp-variant-management-wrapper>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fdp-variant-management-wrapper',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: FDP_VARIANT_MANAGEMENT_WRAPPER,
@@ -55,6 +51,7 @@ import { FDP_VARIANT_MANAGEMENT, FDP_VARIANT_MANAGEMENT_WRAPPER } from '../../to
     ],
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class VariantManagementWrapperComponent implements AfterViewInit, OnDestroy {
     /** Variant management component. */
     @Input()

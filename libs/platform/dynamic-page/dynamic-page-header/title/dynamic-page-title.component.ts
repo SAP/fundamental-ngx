@@ -1,12 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ContentChild,
-    Input,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation
-} from '@angular/core';
+import { ContentChild, Directive, Input, TemplateRef, ViewChild } from '@angular/core';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
 import { DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
@@ -21,11 +13,9 @@ import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.compo
  * Dynamic Page Title Component.
  *
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fdp-dynamic-page-title',
-    template: '<ng-content></ng-content>',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: DYNAMIC_PAGE_HEADER_TOKEN,
@@ -34,6 +24,7 @@ import { DynamicPageTitleImageComponent } from './dynamic-page-title-image.compo
     ],
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class DynamicPageTitleComponent implements DynamicPageHeader {
     /**
      * Page Title

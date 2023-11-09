@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
+import { Directive, HostBinding, Input } from '@angular/core';
 
 let notificationHeaderCounter = 0;
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-notification-header',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NotificationHeaderComponent {
     /** @hidden */
     @HostBinding('class.fd-notification__header')

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Directive, HostBinding } from '@angular/core';
 
 /**
  * Layout Panel level filters that is specific to the data being displayed within the panel.
@@ -11,16 +11,15 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
  * </fd-layout-panel>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-layout-panel-filters',
-    template: `<ng-content></ng-content>`,
     host: {
         '[class.fd-has-display-block]': 'true'
     },
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class LayoutPanelFiltersComponent {
     /** @hidden */
     @HostBinding('class.fd-layout-panel__filters')

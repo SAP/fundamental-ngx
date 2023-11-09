@@ -1,15 +1,15 @@
 import { FocusableOption } from '@angular/cdk/a11y';
-import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
+import { Directive, ElementRef } from '@angular/core';
 
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-fixed-card-layout-item',
-    template: `<ng-content></ng-content>`,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         style: 'display: block'
     },
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class FixedCardLayoutItemComponent implements FocusableOption {
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

@@ -1,7 +1,7 @@
 <ng-content></ng-content>
 @if (type === 'individual') {
     <fd-avatar-group-host
-        #avatarGroupHostComponent
+        #avatarGroupHostComponent="avatarGroupHost"
         [type]="type"
         [size]="size"
         [orientation]="orientation"
@@ -55,7 +55,7 @@
     <fd-popover [noArrow]="false" [focusAutoCapture]="true" fdkResizeObserver (resized)="_detectChanges()">
         <fd-popover-control>
             <fd-avatar-group-host
-                #avatarGroupHostComponent
+                #avatarGroupHostComponent="avatarGroupHost"
                 [type]="type"
                 [size]="size"
                 [orientation]="orientation"

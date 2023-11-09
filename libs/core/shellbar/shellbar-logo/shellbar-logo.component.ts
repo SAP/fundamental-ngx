@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Directive } from '@angular/core';
 
 /**
  * The component that represents a shellbar logo.
@@ -9,11 +9,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
  *   </fd-shellbar-logo>
  * ```
  */
-@Component({
+@Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: 'fd-shellbar-logo',
-    template: `<ng-content></ng-content>`,
-    encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true
 })
+// eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class ShellbarLogoComponent {}
