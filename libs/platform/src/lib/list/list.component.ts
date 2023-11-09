@@ -67,7 +67,7 @@ import {
     isDataSource,
     isPresent
 } from '@fundamental-ngx/platform/shared';
-import { BaseListItem, ListItemDef } from './base-list-item';
+import { BaseListItem, LIST_ITEM_TYPE, ListItemDef } from './base-list-item';
 import { FdpListComponent } from './fdpListComponent.token';
 import { ListConfig } from './list.config';
 import { LoadMoreContentContext, LoadMoreContentDirective } from './load-more-content.directive';
@@ -924,15 +924,47 @@ export class ListComponent<T>
 
         this._partialNavigation = this.listItems.some((item) => item.navigationIndicator || item.listType === 'detail');
 
-        this.listItems.forEach((item, index) => {
+        let currentGroup: BaseListItem | null = null;
+        let currentGroupItemIds: string[] = [];
+        // Since we cannot use index from the iteration due to possible group item existence, we need to track it manually.
+        let itemIndex = 0;
+
+        this.listItems.forEach((item) => {
             if (!this._partialNavigation) {
                 item.navigated = this.navigated;
                 item.navigationIndicator = this.navigationIndicator;
                 item.listType = this.listType;
             }
+            if (item._type === LIST_ITEM_TYPE.HEADER) {
+                currentGroup?.listItem.nativeElement.setAttribute('aria-owns', currentGroupItemIds.join(' '));
+                currentGroupItemIds = [];
+                currentGroup = item;
+                return;
+            }
+            if (item._type !== LIST_ITEM_TYPE.ITEM) {
+                return;
+            }
 
-            item.ariaPosinet = index;
+            item.ariaPosinet = ++itemIndex;
+
+            if (currentGroup) {
+                currentGroupItemIds.push(item.listItem.nativeElement.id);
+            }
+
+            if (item === this.listItems.last) {
+                currentGroup?.listItem.nativeElement.setAttribute('aria-owns', currentGroupItemIds.join(' '));
+            }
         });
+
+        // this.listItems.filter((item) => item._type === 'item').forEach((item, index) => {
+        //     if (!this._partialNavigation) {
+        //         item.navigated = this.navigated;
+        //         item.navigationIndicator = this.navigationIndicator;
+        //         item.listType = this.listType;
+        //     }
+
+        //     item.ariaPosinet = index + 1;
+        // });
 
         this._cd.markForCheck();
     }

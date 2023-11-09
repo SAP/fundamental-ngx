@@ -106,6 +106,13 @@ export interface ListAdvancedDescription {
 
 export type ListDescription = string | ListAdvancedDescription;
 
+export enum LIST_ITEM_TYPE {
+    ITEM = 'item',
+    GROUP = 'group',
+    FOOTER = 'footer',
+    HEADER = 'header'
+}
+
 export class ModifyItemEvent {
     /** List Item component */
     source: BaseListItem;
@@ -302,6 +309,9 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
     @ViewChild(RadioButtonComponent)
     radioButtonComponent: RadioButtonComponent;
 
+    /** @hidden */
+    _type: LIST_ITEM_TYPE = LIST_ITEM_TYPE.ITEM;
+
     /**
      * @hidden
      * Whether By line mode is included to list component, by which
@@ -396,7 +406,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewInit
             return;
         }
 
-        currentItem.setAttribute('role', 'option');
+        currentItem.setAttribute('role', currentItem.getAttribute('role') || 'listitem');
         const parentNode = currentItem.parentNode instanceof HTMLElement && currentItem.parentNode;
         if (parentNode) {
             parentNode.removeAttribute('title');
