@@ -20,7 +20,8 @@ import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
 /**
  * @deprecated
- * Use the `fd-feed-input` component from `@fundamental-ngx/core/feed-input` instead.
+ * Use the `fd-feed-input[modelDriven]` component from `@fundamental-ngx/core/feed-input` instead.
+ * The `fd-feed-input` component is a drop-in replacement for the `fdp-feed-input` component.
  */
 @Component({
     selector: 'fdp-feed-input',
