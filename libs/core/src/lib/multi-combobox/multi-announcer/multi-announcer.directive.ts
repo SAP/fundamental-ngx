@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Directive, HostListener, inject, Input } from '@angular/core';
+import { ContentChildren, Directive, HostListener, inject, Input, QueryList } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
+import { TokenComponent } from '@fundamental-ngx/core/token';
 import { resolveTranslationSyncFn } from '@fundamental-ngx/i18n';
 
 @Directive({
@@ -13,6 +14,10 @@ export class MultiAnnouncerDirective {
     /** @hidden */
     @Input()
     multiAnnouncerOptions: unknown[];
+
+    /** @hidden */
+    @ContentChildren(TokenComponent, { descendants: true })
+    private _tokens: QueryList<TokenComponent>;
 
     /** @hidden */
     private _noResultsAnnounced = false;
@@ -50,13 +55,15 @@ export class MultiAnnouncerDirective {
                         })
                     );
                 }
+                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.navigateSelectionsWithArrows'));
                 if (!this._resultsAnnounced) {
-                    this._buildAnnouncement(this._resolveTranslation('coreMultiInput.navigateSelectionsWithArrows'));
                     this._noResultsAnnounced = false;
                     this._resultsAnnounced = true;
                 }
             }
-            this._buildAnnouncement(this._resolveTranslation('coreMultiInput.escapeNavigateTokens'));
+            if (this._tokens && this._tokens.length) {
+                this._buildAnnouncement(this._resolveTranslation('coreMultiInput.escapeNavigateTokens'));
+            }
             this._makeAnnouncement(this._announcement);
         }
     }
