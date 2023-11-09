@@ -1,10 +1,10 @@
-<div
-    class="fd-tokenizer fd-tokenizer--scrollable"
-    [class.is-focus]="_tokenizerHasFocus"
-    [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
->
+<div class="fd-tokenizer fd-tokenizer--scrollable" [class.is-focus]="_tokenizerHasFocus">
     <div class="fd-tokenizer__inner" #tokenizerInner>
-        <div role="listbox" [style.width]="_tokensContainerWidth">
+        <div
+            role="listbox"
+            [attr.aria-label]="'coreTokenizer.tokenizerLabel' | fdTranslate"
+            [style.width]="_tokensContainerWidth"
+        >
             <ng-content select="fd-token"></ng-content>
         </div>
 
