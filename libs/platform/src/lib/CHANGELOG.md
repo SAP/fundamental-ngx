@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.19...v0.47.0-rc.20) (2023-11-09)
+
+
+### Bug Fixes
+
+* **core,platform:** multi announcer improvements ([#10925](https://github.com/SAP/fundamental-ngx/issues/10925)) ([c0d3fc5](https://github.com/SAP/fundamental-ngx/commit/c0d3fc5dd5a9bcacdef405a6fd495c8591f176da))
+
+
+
+
+
 # [0.47.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.18...v0.47.0-rc.19) (2023-11-08)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
