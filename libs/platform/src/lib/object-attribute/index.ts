@@ -1,2 +1,7 @@
-export * from './object-attribute.component';
-export * from './object-attribute.module';
+import { ObjectAttributeComponent, ObjectAttributeModule } from '@fundamental-ngx/core/object-attribute';
+
+export {
+    /** @deprecated Replace import with @fundamental-ngx/core/object-attribute */
+    ObjectAttributeComponent,
+    ObjectAttributeModule as PlatformObjectAttributeModule
+};

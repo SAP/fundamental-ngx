@@ -1,12 +1,12 @@
-import { PlatformBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
+import { CoreBaseComponentPo, waitForElDisplayed } from '../../../../../e2e';
 
-export class ObjectAttributePo extends PlatformBaseComponentPo {
+export class ObjectAttributePo extends CoreBaseComponentPo {
     url = '/object-attribute';
     root = '#page-content';
 
-    standaloneTextObject = 'fdp-object-attribute-example .fd-object-attribute';
-    linkObject = 'fdp-platform-object-attribute-link-example .fd-object-attribute';
-    externalLinkObject = 'fdp-platform-object-attribute-link-example .fd-object-attribute--link';
+    standaloneTextObject = 'fd-object-attribute-example .fd-object-attribute';
+    linkObject = 'fd-object-attribute-link-example .fd-object-attribute';
+    externalLinkObject = 'fd-object-attribute-link-example .fd-object-attribute--link';
 
     async open(): Promise<void> {
         await super.open(this.url);

@@ -55,6 +55,7 @@ export const components: SectionInterfaceContent[] = [
     { url: 'core/micro-process-flow', name: 'Micro Process Flow' },
     { url: 'core/multi-input', name: 'Multi Input' },
     { url: 'core/notification', name: 'Notification' },
+    { url: 'core/object-attribute', name: 'Object Attribute' },
     { url: 'core/object-marker', name: 'Object Marker' },
     { url: 'core/object-identifier', name: 'Object Identifier' },
     { url: 'core/object-status', name: 'Object Status' },

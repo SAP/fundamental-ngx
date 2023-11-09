@@ -6,4 +6,4 @@ import { ObjectAttributeComponent } from './object-attribute.component';
     imports: [ObjectAttributeComponent],
     exports: [ObjectAttributeComponent]
 })
-export class PlatformObjectAttributeModule {}
+export class ObjectAttributeModule {}

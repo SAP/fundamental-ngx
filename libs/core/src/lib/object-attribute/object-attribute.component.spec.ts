@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 import { ObjectAttributeComponent } from './object-attribute.component';
 
 @Component({
-    selector: 'fdp-object-attribute-test',
-    template: ` <fdp-object-attribute label="label1"></fdp-object-attribute> `,
+    selector: 'fd-object-attribute-test',
+    template: ` <fd-object-attribute label="label1"></fd-object-attribute> `,
     standalone: true,
     imports: [ObjectAttributeComponent]
 })
@@ -35,26 +35,26 @@ describe('ObjectAttributeComponent', () => {
 
     /** check if element css class attached */
     it('should have fd-object-attribute class', () => {
-        const attributeElement = fixture.debugElement.query(By.css('fdp-object-attribute'));
+        const attributeElement = fixture.debugElement.query(By.css('fd-object-attribute'));
         expect(attributeElement.nativeElement.classList.contains('fd-object-attribute')).toBe(true);
     });
 
     /** check if element should have title */
     it('should have title label1', () => {
-        const attributeElement = fixture.debugElement.query(By.css('fdp-object-attribute'));
+        const attributeElement = fixture.debugElement.query(By.css('fd-object-attribute'));
         expect(attributeElement.nativeElement.title).toContain('label1');
     });
 
     /** check if element should have inner content as label1 */
     it('should have label1', () => {
-        const attributeElement = fixture.debugElement.query(By.css('fdp-object-attribute'));
+        const attributeElement = fixture.debugElement.query(By.css('fd-object-attribute'));
         expect(attributeElement.nativeElement.innerHTML).toContain('label1');
     });
 });
 
 /** testing content projection */
 @Component({
-    template: '<fdp-object-attribute> testing </fdp-object-attribute> ',
+    template: '<fd-object-attribute> testing </fd-object-attribute> ',
     standalone: true,
     imports: [ObjectAttributeComponent]
 })
@@ -76,15 +76,15 @@ describe('Content projection', () => {
 
     it('Content projection should display the text', async () => {
         fixture = TestBed.createComponent(ObjectAttributeContentProjectionTesterComponent);
-        const innerHtml = fixture.debugElement.query(By.css('fdp-object-attribute')).nativeElement.innerHTML;
+        const innerHtml = fixture.debugElement.query(By.css('fd-object-attribute')).nativeElement.innerHTML;
         expect(innerHtml).toContain('testing');
     });
 });
 
 /** testing link */
 @Component({
-    selector: 'fdp-object-attribute-test',
-    template: ` <fdp-object-attribute linkText="label1" islink="true"></fdp-object-attribute> `,
+    selector: 'fd-object-attribute-test',
+    template: ` <fd-object-attribute linkText="label1" islink="true"></fd-object-attribute> `,
     standalone: true,
     imports: [ObjectAttributeComponent]
 })

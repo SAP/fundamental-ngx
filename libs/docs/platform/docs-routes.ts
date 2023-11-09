@@ -143,11 +143,6 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/platform/object-marker').then(configurePlatformRoutes)
             },
             {
-                path: 'object-attribute',
-                loadChildren: () =>
-                    import('@fundamental-ngx/docs/platform/object-attribute').then(configurePlatformRoutes)
-            },
-            {
                 path: 'input-group',
                 loadChildren: () => import('@fundamental-ngx/docs/platform/input-group').then(configurePlatformRoutes)
             },

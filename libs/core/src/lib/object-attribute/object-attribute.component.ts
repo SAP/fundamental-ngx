@@ -10,9 +10,10 @@ import {
     Renderer2,
     ViewEncapsulation
 } from '@angular/core';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 
 @Component({
-    selector: 'fdp-object-attribute',
+    selector: 'fd-object-attribute, fdp-object-attribute',
     templateUrl: './object-attribute.component.html',
     styleUrls: ['./object-attribute.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -42,7 +43,11 @@ export class ObjectAttributeComponent implements OnInit {
     objectAttributeclick = new EventEmitter<Event>();
 
     /** @hidden */
-    constructor(private _el: ElementRef, private _renderer: Renderer2) {}
+    constructor(private _el: ElementRef<HTMLElement>, private _renderer: Renderer2) {
+        if (this._el.nativeElement.tagName === 'fdp-object-attribute') {
+            warnOnce('`fdp-object-attribute` selector is deprecated, use `fd-object-attribute` instead.');
+        }
+    }
 
     /** @hidden */
     ngOnInit(): void {

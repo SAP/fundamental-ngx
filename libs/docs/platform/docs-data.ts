@@ -27,7 +27,6 @@ export const components: SectionInterfaceContent[] = [
     { url: 'platform/panel', name: 'Panel' },
     { url: 'platform/object-marker', name: 'Object Marker' },
     { url: 'platform/object-status', name: 'Object Status' },
-    { url: 'platform/object-attribute', name: 'Object Attribute' },
     { url: 'platform/radio-group', name: 'Radio Button Group' },
     { url: 'platform/search-field', name: 'Search Field' },
     { url: 'platform/smart-filter-bar', name: 'Smart Filter Bar' },
