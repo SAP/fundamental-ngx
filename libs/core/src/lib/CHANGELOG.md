@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.20...v0.47.0-rc.21) (2023-11-10)
+
+
+### Bug Fixes
+
+* **core:** tokenizer listbox label ([#10927](https://github.com/SAP/fundamental-ngx/issues/10927)) ([b277960](https://github.com/SAP/fundamental-ngx/commit/b27796004ec263cfc4ed2c4d8fd4491f16dd6cf3))
+
+
+
+
+
 # [0.47.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.19...v0.47.0-rc.20) (2023-11-09)
 
 
