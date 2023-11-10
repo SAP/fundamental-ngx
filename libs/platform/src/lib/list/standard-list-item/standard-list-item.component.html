@@ -15,7 +15,8 @@
         [attr.aria-describedby]="ariaDescribedBy"
         [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet"
-        [attr.role]="role"
+        [ariaRole]="_listItemRole"
+        [attr.aria-selected]="_selectedAttr"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
         <a
@@ -46,7 +47,8 @@
         [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet"
         [class.fd-list__item--inactive]="listType === 'inactive'"
-        [attr.role]="role"
+        [ariaRole]="_listItemRole"
+        [attr.aria-selected]="_selectedAttr"
     >
         <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
         <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>

@@ -14,7 +14,8 @@
     [attr.aria-describedby]="ariaDescribedBy"
     [attr.aria-level]="ariaLevel"
     [attr.aria-posinet]="ariaPosinet"
-    [attr.role]="role"
+    [ariaRole]="_listItemRole"
+    [attr.aria-selected]="_selectedAttr"
 >
     <ng-content></ng-content>
 </li>

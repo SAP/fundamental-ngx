@@ -10,7 +10,7 @@
     [style.outline]="'none'"
     (keydown)="_keyManager?.onKeydown($event); _handleKeyDown($event)"
     (change)="_onSelectionChanged($event)"
-    [attr.aria-setsize]="ariaSetsize"
+    [attr.aria-setsize]="_ariaSetSize | async"
     [attr.aria-label]="ariaLabel"
     [attr.aria-multiselectable]="ariaMultiselectable"
     [role]="role"
