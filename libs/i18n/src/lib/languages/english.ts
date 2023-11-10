@@ -26,6 +26,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         calendarYearsRangeViewDescription: 'Years range picker'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Multi Value Combo Box',
         selectAllLabel: 'Select all ({{selectedItems}} of {{totalItems}})'
     },
     coreCarousel: {
@@ -502,9 +503,7 @@ export const FD_LANGUAGE_ENGLISH: FdLanguage = {
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR',
-        deselectSingleRowTitle: 'Click to deselect',
-        selectSingleRowTitle: 'Click to select'
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Go to Previous',

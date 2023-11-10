@@ -26,6 +26,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         calendarYearsRangeViewDescription: '年份范围选择器'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: '多值组合盒',
         selectAllLabel: '选择全部（{{ selectedItems }}，共 {{ totalItems }})'
     },
     coreCarousel: {
@@ -501,9 +502,7 @@ export const FD_LANGUAGE_CHINESE: FdLanguage = {
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR',
-        deselectSingleRowTitle: 'Click to deselect',
-        selectSingleRowTitle: 'Click to select'
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: '上一项',

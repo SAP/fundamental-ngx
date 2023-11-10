@@ -26,6 +26,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         calendarYearsRangeViewDescription: 'वर्षों की सीमा चयनकर्ता'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'मल्टी वैल्यू कॉम्बो बॉक्स',
         selectAllLabel: 'सबका चयन करें'
     },
     coreCarousel: {
@@ -503,9 +504,7 @@ export const FD_LANGUAGE_HINDI: FdLanguage = {
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR',
-        deselectSingleRowTitle: 'Click to deselect',
-        selectSingleRowTitle: 'Click to select'
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'पिछले पर जाएं',

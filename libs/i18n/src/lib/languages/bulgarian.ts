@@ -29,6 +29,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Избор на обхват на години'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Комбинирана кутия с множество стойности',
         selectAllLabel: 'Избери всички ({{selectedItems}} от {{totalItems}})'
     },
     coreCarousel: {
@@ -581,9 +582,7 @@ export const FD_LANGUAGE_BULGARIAN: FdLanguage = {
         selectAllCheckboxLabel: 'Select all',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'To deselect row, press SPACEBAR',
-        selectSingleRow: 'To select row, press SPACEBAR',
-        deselectSingleRowTitle: 'Click to deselect',
-        selectSingleRowTitle: 'Click to select'
+        selectSingleRow: 'To select row, press SPACEBAR'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Отиди на предишнита',

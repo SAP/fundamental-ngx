@@ -44,10 +44,6 @@
             "
             [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
-            [attr.title]="
-                (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
-                    | fdTranslate
-            "
             (click)="_toggleSingleSelectableRow()"
             (keydown.enter)="_toggleSingleSelectableRow()"
             (keydown.space)="_toggleSingleSelectableRow()"
@@ -68,10 +64,6 @@
             (keydown.space)="_toggleMultiSelectRow(row, $event)"
             [attr.aria-selected]="row.checked"
             [attr.aria-labelledby]="_rowSelectionHelperTextId"
-            [attr.title]="
-                (row.checked ? 'platformTable.deselectSingleRowTitle' : 'platformTable.selectSingleRowTitle')
-                    | fdTranslate
-            "
             [style]="
                 _contentDensityObserver
                     | async

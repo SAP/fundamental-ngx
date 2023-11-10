@@ -28,6 +28,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Вибір діапазону років'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Багатозначне поле зі списком',
         selectAllLabel: 'Вибрати все ({{selectedItems}} з {{totalItems}})'
     },
     coreCarousel: {
@@ -689,9 +690,7 @@ export const FD_LANGUAGE_UKRAINIAN: FdLanguage = {
         selectAllCheckboxLabel: 'Вибрати все',
         deselectAllCheckboxLabel: 'Deselect all',
         deselectSingleRow: 'Щоб скасувати вибір, натисніть пробіл',
-        selectSingleRow: 'Щоб вибрати рядок, натисніть пробіл',
-        deselectSingleRowTitle: 'Клацніть, щоб зняти виділення',
-        selectSingleRowTitle: 'Клацніть, щоб виділити рядок'
+        selectSingleRow: 'Щоб вибрати рядок, натисніть пробіл'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Перейти до попереднього',

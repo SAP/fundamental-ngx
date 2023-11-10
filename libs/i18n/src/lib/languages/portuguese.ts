@@ -24,6 +24,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         calendarYearsRangeViewDescription: 'Seletor de intervalo de anos'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Caixa de combinação de vários valores',
         selectAllLabel: 'Selecionar tudo ({{selectedItems}} de {{totalItems}})'
     },
     coreCarousel: {
@@ -509,9 +510,7 @@ export const FD_LANGUAGE_PORTUGUESE: FdLanguage = {
         selectAllCheckboxLabel: 'Selecionar tudo',
         deselectAllCheckboxLabel: 'Desmarcar tudo',
         deselectSingleRow: 'Para desmarcar a linha, pressione a BARRA DE ESPAÇOS',
-        selectSingleRow: 'Para selecionar a linha, pressione a BARRA DE ESPAÇOS',
-        deselectSingleRowTitle: 'Clique para desmarcar',
-        selectSingleRowTitle: 'Clique para selecionar'
+        selectSingleRow: 'Para selecionar a linha, pressione a BARRA DE ESPAÇOS'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Ir para o anterior',

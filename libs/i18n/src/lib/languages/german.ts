@@ -23,6 +23,7 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         calendarYearsRangeViewDescription: 'Jahresbereichsauswahl'
     },
     coreMultiComboBox: {
+        multiComboBoxAriaLabel: 'Kombinationsfeld mit mehreren Werten',
         selectAllLabel: 'Alle auswählen ({{selectedItems}} von {{totalItems}})'
     },
     coreCarousel: {
@@ -510,9 +511,7 @@ export const FD_LANGUAGE_GERMAN: FdLanguage = {
         selectAllCheckboxLabel: 'Alle auswählen',
         deselectAllCheckboxLabel: 'Gesamte Auswahl aufheben',
         deselectSingleRow: 'Zum Aufheben der Zeilenauswahl LEERTASTE drücken',
-        selectSingleRow: 'Zum Auswählen der Zeile LEERTASTE drücken',
-        deselectSingleRowTitle: 'Zum Aufheben der Auswahl klicken',
-        selectSingleRowTitle: 'Zum Auswählen klicken'
+        selectSingleRow: 'Zum Auswählen der Zeile LEERTASTE drücken'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Zum vorherigen',
