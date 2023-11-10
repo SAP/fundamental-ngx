@@ -1,7 +1,7 @@
 import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync, writeFileSync } from 'fs';
 import { parse } from 'path';
-import { format } from 'prettier';
+import { format, resolveConfig } from 'prettier';
 import { loadProperties } from './duplicates';
 import { TransformPropertiesExecutorSchema } from './schema';
 
@@ -16,9 +16,12 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
         const parsedPropertiesFilePath = parse(propertiesFilePath);
         const newFilePath = `${parsedPropertiesFilePath.dir}/${parsedPropertiesFilePath.name}.ts`;
         const fileContents = readFileSync(propertiesFilePath, 'utf-8');
+        const prettierConfig = await resolveConfig(newFilePath, {
+            editorconfig: true
+        });
         writeFileSync(
             newFilePath,
-            format(
+            await format(
                 `
             /* eslint-disable */
             // Do not modify, it's automatically created. Modify ${
@@ -26,7 +29,7 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
             } instead
             export default ${JSON.stringify(loadProperties(fileContents), null, 4)};
         `,
-                { parser: 'typescript' }
+                { ...prettierConfig, parser: 'typescript' }
             )
         );
     }
