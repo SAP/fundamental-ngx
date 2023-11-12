@@ -144,7 +144,7 @@
         "jest-extended": "3.2.4",
         "jest-preset-angular": "13.1.1",
         "lerna": "7.4.2",
-        "lint-staged": "13.2.3",
+        "lint-staged": "15.1.0",
         "nan": "2.18.0",
         "ng-packagr": "16.2.3",
         "ngx-cva-test-suite": "2.0.0",
