@@ -84,7 +84,7 @@
         "@babel/core": "7.21.3",
         "@babel/runtime": "7.21.0",
         "@commitlint/cli": "17.7.1",
-        "@commitlint/config-conventional": "17.7.0",
+        "@commitlint/config-conventional": "18.4.0",
         "@sap-ui/common-css": "0.32.0-rc.7",
         "@jsdevtools/npm-publish": "2.2.2",
         "@nx/devkit": "17.0.3",
