@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.16...v0.43.17) (2023-11-14)
+
+
+### Bug Fixes
+
+* **core,platform:** add aria-label for multi combobox ([#10909](https://github.com/SAP/fundamental-ngx/issues/10909)) ([bce6f61](https://github.com/SAP/fundamental-ngx/commit/bce6f612c64b89f0226a220a9a62055e0bac1b01))
+* **platform:** remove title tooltip from table checkbox ([#10908](https://github.com/SAP/fundamental-ngx/issues/10908)) ([d2a780d](https://github.com/SAP/fundamental-ngx/commit/d2a780dcef3e0a553a0b56f12509e202bec97619))
+
+
+### Features
+
+* **core:** calendar now uses i18n package for translating labels ([#10749](https://github.com/SAP/fundamental-ngx/issues/10749)) ([a986408](https://github.com/SAP/fundamental-ngx/commit/a986408808a3bcfa59a29e2ebe56a9d3d6ef97e1))
+
+
+
+
+
 ## [0.43.16](https://github.com/SAP/fundamental-ngx/compare/v0.43.15...v0.43.16) (2023-10-23)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
