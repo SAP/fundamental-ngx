@@ -5,33 +5,55 @@ import { Observable, shareReplay, zip } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const languages = {
-    'sq-AL': 'Shqip',
-    'bg-BG': 'Български',
-    'zh-CN': '简体中文',
-    'cs-CZ': 'Český',
-    'de-DE': 'Deutsch',
-    'en-US': 'English',
-    'fr-FR': 'Français',
-    'ka-GE': 'ქართული',
-    'hi-IN': 'हिन्दी',
-    'it-IT': 'Italiano',
-    'pl-PL': 'Polski',
-    'pt-BR': 'Português(Brazil)',
-    'ru-RU': 'Русский',
-    'tr-TR': 'Türkçe',
-    'uk-UA': 'Українська'
+    en: 'English',
+    ar: 'العربية',
+    bg: 'Български',
+    cs: 'Český',
+    da: 'Dansk',
+    de: 'Deutsch',
+    el: 'Ελληνικά',
+    es: 'Español',
+    fi: 'Finnish',
+    fr: 'Français',
+    he: 'עברית',
+    hi: 'हिन्दी',
+    hr: 'Hrvatski',
+    hu: 'Magyar',
+    it: 'Italiano',
+    ja: '日本語',
+    ka: 'ქართული',
+    kk: 'Қазақша',
+    ko: '한국어',
+    ms: 'Bahasa Melayu',
+    nl: 'Nederlands',
+    no: 'Norsk',
+    pl: 'Polski',
+    pt: 'Português(Brazil)',
+    ro: 'Română',
+    ru: 'Русский',
+    sk: 'Slovak',
+    sl: 'Slovenský',
+    sq: 'Shqip',
+    sv: 'Svenska',
+    th: 'ไทย',
+    tr: 'Türkçe',
+    uk: 'Українська',
+    zh_CN: '简体中文',
+    zh_TW: '繁體中文'
 };
 
 export function translations(): Observable<Array<{ value: FdLanguage; name: string }>> {
     const http = inject(HttpClient);
     return zip(
-        Object.keys(languages).map((locale) =>
-            http.get(`assets/i18n/translations_${locale}.properties`, { responseType: 'text' }).pipe(
+        Object.keys(languages).map((langCode) => {
+            const name = languages[langCode];
+            langCode = langCode === 'en' ? '' : '_' + langCode;
+            return http.get(`assets/i18n/translations${langCode}.properties`, { responseType: 'text' }).pipe(
                 map((lang) => ({
                     value: loadProperties(lang),
-                    name: languages[locale]
+                    name
                 }))
-            )
-        )
+            );
+        })
     ).pipe(shareReplay(1));
 }
