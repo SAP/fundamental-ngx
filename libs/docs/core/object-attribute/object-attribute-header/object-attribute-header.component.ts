@@ -9,8 +9,8 @@ import {
 
 @Component({
     selector: 'app-object-attribute-header',
-    templateUrl: './platform-object-attribute-header.component.html',
+    templateUrl: './object-attribute-header.component.html',
     standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
-export class PlatformObjectAttributeHeaderComponent {}
+export class ObjectAttributeHeaderComponent {}

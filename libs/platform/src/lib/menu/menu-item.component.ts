@@ -20,6 +20,9 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { MenuInteractiveComponent } from '@fundamental-ngx/core/menu';
 
+/**
+ * @deprecated
+ */
 @Component({
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',

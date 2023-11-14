@@ -8,9 +8,14 @@ import {
     Output
 } from '@angular/core';
 
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, ButtonType } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
+/**
+ * @deprecated
+ * Button component is deprecated. Use `fd-button` from `@fundamental-ngx/core/button` with `@fundamental-ngx/core/menu` instead.
+ */
 @Component({
     selector: 'fdp-menu-button',
     templateUrl: './menu-button.component.html',
@@ -44,6 +49,9 @@ export class MenuButtonComponent extends BaseComponent {
     /** @hidden */
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
+        warnOnce(
+            'MenuButtonComponent is deprecated. Use `fd-button` from `@fundamental-ngx/core/button` with `@fundamental-ngx/core/menu` instead.'
+        );
     }
 
     /**

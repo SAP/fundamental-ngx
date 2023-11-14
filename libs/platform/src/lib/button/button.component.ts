@@ -13,6 +13,10 @@ import { ModuleDeprecation, Nullable, warnOnce } from '@fundamental-ngx/cdk/util
 import { ButtonType, ButtonComponent as CoreButtonComponent, GlyphPosition } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 
+/**
+ * @deprecated
+ * Button component is deprecated. Use `fd-button` from `@fundamental-ngx/core` instead.
+ */
 @Component({
     selector: 'fdp-button',
     templateUrl: './button.component.html',
@@ -134,6 +138,9 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     /** @hidden */
     constructor(protected _changeDetector: ChangeDetectorRef, private _elementRef: ElementRef) {
         super(_changeDetector);
+        warnOnce(
+            "Platform's ButtonComponent is deprecated and will be removed in the next major release. Consider using Core's ButtonComponent instead."
+        );
     }
 
     /** @hidden */
