@@ -70,7 +70,8 @@ describe('FeedInputComponent', () => {
     });
 
     it('should button enable when textarea have a value', () => {
-        textareaEl.triggerEventHandler('keyup', { target: { value: 'Feed message' } });
+        textareaEl.nativeElement.value = 'Feed message';
+        textareaEl.triggerEventHandler('keyup');
         fixture.detectChanges();
 
         expect((<any>buttonDirective)._elementRef.nativeElement.getAttribute('aria-disabled')).toBe('false');

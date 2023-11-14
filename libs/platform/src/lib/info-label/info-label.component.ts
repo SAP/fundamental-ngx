@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { IconFont } from '@fundamental-ngx/core/icon';
 import { InfoLabelComponent as CoreInfoLabelComponent, LabelType } from '@fundamental-ngx/core/info-label';
 
+/**
+ * @deprecated Use `InfoLabelComponent` from `@fundamental-ngx/core` instead.
+ */
 @Component({
     selector: 'fdp-info-label',
     templateUrl: './info-label.component.html',
@@ -51,4 +54,11 @@ export class InfoLabelComponent {
     /** Sets control aria-title to a string attribute value */
     @Input()
     title: string;
+
+    /** @hidden */
+    constructor() {
+        warnOnce(
+            'InfoLabelComponent is deprecated. Use InfoLabelComponent from @fundamental-ngx/core/info-label instead.'
+        );
+    }
 }

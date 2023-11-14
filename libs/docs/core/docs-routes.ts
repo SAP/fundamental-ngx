@@ -124,6 +124,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('@fundamental-ngx/docs/core/dynamic-page').then(configureCoreRoutes)
             },
             {
+                path: 'object-attribute',
+                loadChildren: () => import('@fundamental-ngx/docs/core/object-attribute').then(configureCoreRoutes)
+            },
+            {
                 path: 'object-page',
                 loadChildren: () => import('@fundamental-ngx/docs/core/object-page').then(configureCoreRoutes)
             },

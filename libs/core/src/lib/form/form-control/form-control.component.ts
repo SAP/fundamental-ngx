@@ -29,7 +29,7 @@ import { FormItemControl, registerFormItemControl } from '../form-item-control/f
  */
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[fd-form-control]',
+    selector: 'input[fd-form-control], textarea[fd-form-control]',
     template: ` <ng-content></ng-content>`,
     styleUrls: ['./form-control.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -79,7 +79,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges,
 
     /** @hidden */
     constructor(
-        public elementRef: ElementRef<HTMLElement>,
+        public elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>,
         _contentDensityObserver: ContentDensityObserver,
         @Attribute('aria-label') private ariaLabelAttr: string,
         @Attribute('aria-labelledby') private ariaLabelledByAttr: string

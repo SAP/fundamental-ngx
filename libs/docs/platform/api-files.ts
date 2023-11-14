@@ -69,7 +69,6 @@ export const API_FILES = {
     list: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     standardlistitem: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     thumbnail: ['ThumbnailComponent'],
-    objectAttribute: ['ObjectAttributeComponent'],
     actionlistitem: ['ActionListItemComponent', 'ListComponent', 'ListConfig'],
     displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],

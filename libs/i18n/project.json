@@ -23,7 +23,7 @@
             "options": {
                 "properties": ["{projectRoot}/src/lib/translations/*.properties"]
             },
-            "outputs": ["{projectRoot}/src/lib/translations/*.json"]
+            "outputs": ["{projectRoot}/src/lib/translations/*.ts"]
         },
         "build": {
             "executor": "@nx/angular:package",

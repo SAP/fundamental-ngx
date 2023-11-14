@@ -4,11 +4,13 @@ import {
     EventEmitter,
     HostBinding,
     HostListener,
+    inject,
     Input,
     OnInit,
     Output,
     Renderer2
 } from '@angular/core';
+import { HasElementRef } from '@fundamental-ngx/cdk/utils';
 
 /**
  * Applies text area auto resize and set maximum rows to grow
@@ -21,7 +23,7 @@ import {
     },
     standalone: true
 })
-export class FeedInputTextareaDirective implements OnInit {
+export class FeedInputTextareaDirective implements HasElementRef, OnInit {
     /** The maximum rows allowed to grow */
     @Input()
     fdFeedInputTextareaMaxRows: number;
@@ -32,28 +34,26 @@ export class FeedInputTextareaDirective implements OnInit {
 
     /** Event emitted when the textarea value changed */
     @Output()
-    valueChange = new EventEmitter<boolean>();
+    valueChange = new EventEmitter<string>();
 
     /** @hidden */
-    @HostListener('keyup', ['$event'])
-    onKeyup(event): void {
+    elementRef: ElementRef<HTMLTextAreaElement> = inject(ElementRef);
+
+    /** @hidden */
+    private _renderer = inject(Renderer2);
+
+    /** @hidden */
+    @HostListener('keyup')
+    onKeyup(): void {
         this.resize();
-        this.valueChange.emit(event.target.value);
-    }
-
-    /** @hidden */
-    constructor(private readonly _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
-
-    /** @hidden */
-    get elementRef(): ElementRef<HTMLElement> {
-        return this._elementRef;
+        this.valueChange.emit(this.elementRef.nativeElement.value);
     }
 
     /** @hidden */
     ngOnInit(): void {
         if (this.fdFeedInputTextareaMaxRows) {
             const lineHeight = this._getTextareaLineHeight();
-            this._elementRef.nativeElement.style.maxHeight = lineHeight * this.fdFeedInputTextareaMaxRows + 'px';
+            this.elementRef.nativeElement.style.maxHeight = lineHeight * this.fdFeedInputTextareaMaxRows + 'px';
         }
     }
 
@@ -80,7 +80,7 @@ export class FeedInputTextareaDirective implements OnInit {
 
     /** @hidden get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
-        const computed = window.getComputedStyle(this._elementRef.nativeElement);
+        const computed = window.getComputedStyle(this.elementRef.nativeElement);
 
         return (
             parseInt(computed.getPropertyValue('border-top-width'), 10) +

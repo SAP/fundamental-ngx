@@ -12,11 +12,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { warnOnce } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 
+/**
+ * @deprecated
+ * Use the `fd-feed-input[modelDriven]` component from `@fundamental-ngx/core/feed-input` instead.
+ * The `fd-feed-input` component is a drop-in replacement for the `fdp-feed-input` component.
+ */
 @Component({
     selector: 'fdp-feed-input',
     templateUrl: './feed-input.component.html',
@@ -60,7 +66,12 @@ export class FeedInputComponent implements AfterViewInit {
     value: string | null;
 
     /** @hidden */
-    constructor(private _renderer: Renderer2) {}
+    constructor(private _renderer: Renderer2) {
+        warnOnce(
+            'FeedInputComponent is deprecated and will be removed in future release. ' +
+                'Use the `fd-feed-input` component from `@fundamental-ngx/core/feed-input` instead.'
+        );
+    }
 
     /** @hidden */
     ngAfterViewInit(): void {

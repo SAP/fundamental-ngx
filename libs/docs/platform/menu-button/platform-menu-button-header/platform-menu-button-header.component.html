@@ -1,8 +1,13 @@
 <fd-doc-page>
     <header>Menu Button</header>
+    <fd-message-strip type="warning" [dismissible]="false">
+        This component has been deprecated and will be removed in the next major release. Use
+        <a fd-link routerLink="/core/button">@fundamental-ngx/core/button</a> in conjunction with
+        <a fd-link routerLink="/core/menu">@fundamental-ngx/core/menu</a> instead.
+    </fd-message-strip>
     <description>
         The menu button is used for triggering the display of a menu.<br />
-        In <a routerLink="/core">@fundamental-ngx/core</a>, it is an extenstion of
+        In <a routerLink="/core">@fundamental-ngx/core</a>, it is an extension of
         <a routerLink="/core/button">@fundamental-ngx/button</a> directive, but in Platform this is a separate component
         and it reduces the complexity to create Menu Button.
         <br />

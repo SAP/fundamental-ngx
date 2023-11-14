@@ -476,7 +476,7 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
         if (event) {
             event.preventDefault();
         }
-        const optionItem = this._suggestions.find((s) => s.value === token.value);
+        const optionItem = this._flatSuggestions.find((s) => s.value === token.value);
         if (optionItem) {
             this._toggleSelection(optionItem, true);
             this._rangeSelector.reset();
@@ -750,11 +750,11 @@ export class MultiComboboxComponent<T = any> extends BaseMultiCombobox<T> implem
      */
     private _onListElementClicked(event: MouseEvent, index: number): void {
         // value has been changed at this point, so it can be safely used
-        const selectionState = this._suggestions[index].selected;
+        const selectionState = this._flatSuggestions[index].selected;
         this._rangeSelector.onRangeElementToggled(index, event);
         const toRemoveSet = new Set();
         this._rangeSelector.applyValueToEachInRange((idx) => {
-            const current = this._suggestions[idx];
+            const current = this._flatSuggestions[idx];
             if (current.selected !== selectionState) {
                 if (current.selected) {
                     // removing from "_selectedSuggestions" list

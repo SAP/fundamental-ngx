@@ -220,6 +220,7 @@ export const API_FILES = {
         'NotificationConfig',
         'NotificationRef'
     ],
+    objectAttribute: ['ObjectAttributeComponent'],
     objectIdentifier: ['ObjectIdentifierComponent'],
     objectMarker: ['ObjectMarkerComponent'],
     objectStatus: ['ObjectStatusModule', 'ObjectStatusComponent'],
