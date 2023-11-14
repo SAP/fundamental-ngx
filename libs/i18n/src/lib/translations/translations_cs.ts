@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Do not modify, it's automatically created. Modify translations_cs-CZ.properties instead
+// Do not modify, it's automatically created. Modify translations_cs.properties instead
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Vyberte rok',

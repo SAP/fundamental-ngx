@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Do not modify, it's automatically created. Modify translations_ka-GE.properties instead
+// Do not modify, it's automatically created. Modify translations_ka.properties instead
 export default {
     coreCalendar: {
         yearSelectionLabel: 'წელის არჩევა',

@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Do not modify, it's automatically created. Modify translations_tr-TR.properties instead
+// Do not modify, it's automatically created. Modify translations_tr.properties instead
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Yıl Seç',
