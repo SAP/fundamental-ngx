@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.21...v0.47.0-rc.22) (2023-11-14)
+
+**Note:** Version bump only for package @fundamental-ngx/nx-plugin
+
+
+
+
+
+# [0.47.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.20...v0.47.0-rc.21) (2023-11-10)
+
+
+### Bug Fixes
+
+* **i18n:** fixed increased bundle size because of the json formats ([#10936](https://github.com/SAP/fundamental-ngx/issues/10936)) ([8c42b29](https://github.com/SAP/fundamental-ngx/commit/8c42b291c4a7bd8e94f7acb1d8a4c657fa9606b2))
+
+
+
+
+
 # [0.47.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.19...v0.47.0-rc.20) (2023-11-09)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin

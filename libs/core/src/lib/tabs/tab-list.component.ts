@@ -23,7 +23,7 @@ import {
     inject
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { KeyUtil, Nullable, scrollTop } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, Nullable, scrollTop, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import {
     MenuComponent,
@@ -68,6 +68,8 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
 
 /**
  * Represents a list of tab-panels.
+ * @deprecated
+ * Use `@fundamental-ngx/platform/icon-tab-bar` instead
  */
 @Component({
     selector: 'fd-tab-list',
@@ -248,7 +250,9 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
         private readonly _changeDetectorRef: ChangeDetectorRef,
         readonly _contentDensityObserver: ContentDensityObserver,
         private readonly _destroyRef: DestroyRef
-    ) {}
+    ) {
+        warnOnce('TabListComponent is deprecated, use `@fundamental-ngx/platform/icon-tab-bar` instead');
+    }
 
     /** @hidden */
     ngAfterContentInit(): void {

@@ -13,7 +13,7 @@ import {
     inject
 } from '@angular/core';
 
-import { ColorAccent, KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
+import { ColorAccent, KeyUtil, Nullable, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent as CoreObjectStatusComponent, ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 @Directive({
@@ -33,6 +33,10 @@ export class PlatformObjectStatusTextDirective {
  */
 export type IndicationColorType = ColorAccent;
 
+/**
+ * @deprecated
+ * Use `ObjectStatus` from `@fundamental-ngx/core/object-status` instead.
+ */
 @Component({
     selector: 'fdp-object-status',
     templateUrl: './object-status.component.html',
@@ -99,6 +103,11 @@ export class ObjectStatusComponent {
     /** @hidden */
     @ContentChild(PlatformObjectStatusTextDirective)
     _textDirective: Nullable<PlatformObjectStatusTextDirective>;
+
+    /** @hidden */
+    constructor() {
+        warnOnce('ObjectStatusComponent is deprecated. Use ObjectStatusComponent from @fundamental-ngx/core instead.');
+    }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
