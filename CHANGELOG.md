@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.22...v0.47.0-rc.23) (2023-11-14)
+
+
+### Bug Fixes
+
+* **core:** fixed group item selections and deselections ([#10952](https://github.com/SAP/fundamental-ngx/issues/10952)) ([bfc39eb](https://github.com/SAP/fundamental-ngx/commit/bfc39eb7844d6d645036989d5e0aedad61e0b664))
+
+
+
+
+
 # [0.47.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.21...v0.47.0-rc.22) (2023-11-14)
 
 **Note:** Version bump only for package fundamental-ngx
