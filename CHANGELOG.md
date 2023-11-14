@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.17](https://github.com/SAP/fundamental-ngx/compare/v0.43.16...v0.43.17) (2023-11-14)
+
+
+### Bug Fixes
+
+* **core,platform:** add aria-label for multi combobox ([#10909](https://github.com/SAP/fundamental-ngx/issues/10909)) ([bce6f61](https://github.com/SAP/fundamental-ngx/commit/bce6f612c64b89f0226a220a9a62055e0bac1b01))
+* **core,platform:** inputs with dropdowns ignore tab key ([#10853](https://github.com/SAP/fundamental-ngx/issues/10853)) ([84a74cd](https://github.com/SAP/fundamental-ngx/commit/84a74cd59151e720479f533c6773ff61b3855895))
+* **core,platform:** multi combobox blur behaviour ([#10865](https://github.com/SAP/fundamental-ngx/issues/10865)) ([010609e](https://github.com/SAP/fundamental-ngx/commit/010609ebcdd2d2fad87aa9dcf5720b7068a7372d))
+* **core:** change default for popover focusable scrollbar ([#10831](https://github.com/SAP/fundamental-ngx/issues/10831)) ([c6529cb](https://github.com/SAP/fundamental-ngx/commit/c6529cb0e88bdea2ac28b7c9e9e922b39c3877cf))
+* **core:** close dropdown item when keyboard is used ([#10851](https://github.com/SAP/fundamental-ngx/issues/10851)) ([4594e00](https://github.com/SAP/fundamental-ngx/commit/4594e002cf1ff8dcd6905e5d7ad031d4d68d10a3))
+* **core:** disable autocomplete if includes enabled ([#10863](https://github.com/SAP/fundamental-ngx/issues/10863)) ([2110469](https://github.com/SAP/fundamental-ngx/commit/21104696600b60a1b2130fcf6d02708fc706c8a6))
+* **core:** multi input addon aria hidden ([#10915](https://github.com/SAP/fundamental-ngx/issues/10915)) ([e299437](https://github.com/SAP/fundamental-ngx/commit/e2994375415ab0c20f0e68a56e8ed57c6f43f832))
+* **core:** select aria attributes ([#10926](https://github.com/SAP/fundamental-ngx/issues/10926)) ([d0c5b17](https://github.com/SAP/fundamental-ngx/commit/d0c5b1725144f735e4fc04be1994c0353c274516))
+* **core:** token position in set ([#10861](https://github.com/SAP/fundamental-ngx/issues/10861)) ([8f9864c](https://github.com/SAP/fundamental-ngx/commit/8f9864c034dbe91bfc1d95523a72ff98ba3bfff0))
+* **core:** tokenizer listbox label ([#10937](https://github.com/SAP/fundamental-ngx/issues/10937)) ([940d90e](https://github.com/SAP/fundamental-ngx/commit/940d90e8984c4f03bba8d882b82cf8b677c8723d))
+* **e2e:** try to fix failing e2e tests ([#10792](https://github.com/SAP/fundamental-ngx/issues/10792)) ([b8de558](https://github.com/SAP/fundamental-ngx/commit/b8de5580d7c8454cd78d59906a1d2610bbe718f4))
+* **platform:** aria sort attribute ([#10922](https://github.com/SAP/fundamental-ngx/issues/10922)) ([a66b9a3](https://github.com/SAP/fundamental-ngx/commit/a66b9a3482a1ff47b4fa497651dc0e881086e2f4))
+* **platform:** aria-labelledby for select ([#10918](https://github.com/SAP/fundamental-ngx/issues/10918)) ([890b017](https://github.com/SAP/fundamental-ngx/commit/890b01752bb4f3ab4a2f1a499e1ee5934adf7810))
+* **platform:** improve functionality when using space bar on table cell with checkbox/switch/button/input child ([#10782](https://github.com/SAP/fundamental-ngx/issues/10782)) ([9b6035d](https://github.com/SAP/fundamental-ngx/commit/9b6035dba91be350d4386e6f1d52c976cbd8884b))
+* **platform:** keyboard improvements for search field ([#10881](https://github.com/SAP/fundamental-ngx/issues/10881)) ([61a54af](https://github.com/SAP/fundamental-ngx/commit/61a54af089aa426065d02a36cc625360d4ab7478))
+* **platform:** remove selected duplicates ([#10859](https://github.com/SAP/fundamental-ngx/issues/10859)) ([70444a3](https://github.com/SAP/fundamental-ngx/commit/70444a363fecdb26a6f49bcdebc966737357cf7b))
+* **platform:** remove title tooltip from table checkbox ([#10908](https://github.com/SAP/fundamental-ngx/issues/10908)) ([d2a780d](https://github.com/SAP/fundamental-ngx/commit/d2a780dcef3e0a553a0b56f12509e202bec97619))
+* **platform:** rows should not have tabindex="-1" ([#10800](https://github.com/SAP/fundamental-ngx/issues/10800)) ([8ce67c2](https://github.com/SAP/fundamental-ngx/commit/8ce67c2fa9ffa91638b6b9182d22412d2a4d9c6e))
+* **platform:** special characters escape ([#10790](https://github.com/SAP/fundamental-ngx/issues/10790)) ([f3fbc69](https://github.com/SAP/fundamental-ngx/commit/f3fbc6951511b8acea3c686df94cf443101f061a))
+* table cell focus issue ([#10754](https://github.com/SAP/fundamental-ngx/issues/10754)) ([45c36fb](https://github.com/SAP/fundamental-ngx/commit/45c36fbe22c88dd5f5778db4a436e7b128d39959))
+
+
+### Features
+
+* **core:** calendar now uses i18n package for translating labels ([#10749](https://github.com/SAP/fundamental-ngx/issues/10749)) ([a986408](https://github.com/SAP/fundamental-ngx/commit/a986408808a3bcfa59a29e2ebe56a9d3d6ef97e1))
+
+
+
+
+
 ## [0.43.16](https://github.com/SAP/fundamental-ngx/compare/v0.43.15...v0.43.16) (2023-10-23)
 
 **Note:** Version bump only for package fundamental-ngx
