@@ -278,9 +278,6 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
         this.linkDirectives.changes.pipe(startWith(this.linkDirectives), takeUntil(this._onDestroy$)).subscribe(() => {
             this._onLinkListChanged$.next();
             this.link = this.linkDirectives.length > 0;
-            if (this.linkDirectives && this.linkDirectives.length) {
-                this._role = 'link';
-            }
             this._changeDetectorRef.detectChanges();
         });
     }
