@@ -37,6 +37,10 @@ const components = [
     TabSeparatorDirective
 ];
 
+/**
+ * @deprecated
+ * Use `@fundamental-ngx/platform/icon-tab-bar` instead
+ */
 @NgModule({
     imports: [...components],
     exports: [...components]
