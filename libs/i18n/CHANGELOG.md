@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.47.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.23...v0.47.0-rc.24) (2023-11-14)
+
+
+### Features
+
+* **i18n:** added new languages ([#10954](https://github.com/SAP/fundamental-ngx/issues/10954)) ([c0bd65e](https://github.com/SAP/fundamental-ngx/commit/c0bd65ede6a962e149face554cd5ee36e39a2100))
+
+
+
+
+
 # [0.47.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.22...v0.47.0-rc.23) (2023-11-14)
 
 **Note:** Version bump only for package @fundamental-ngx/i18n
