@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
@@ -13,7 +13,7 @@ import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/mess
         MessageBoxService
     ],
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class ObjectBasedMessageBoxExampleComponent {
     title = 'Fruit facts';

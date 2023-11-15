@@ -1,13 +1,13 @@
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-menu-with-submenu-example',
     templateUrl: './menu-with-submenu-example.component.html',
     standalone: true,
-    imports: [ButtonModule, MenuModule, NgFor, NgTemplateOutlet, NgIf]
+    imports: [ButtonComponent, MenuModule, NgFor, NgTemplateOutlet, NgIf]
 })
 export class MenuWithSubmenuExampleComponent {
     activePath: MenuItemComponent[] = [];

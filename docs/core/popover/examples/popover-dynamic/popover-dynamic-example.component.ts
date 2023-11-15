@@ -1,14 +1,14 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-dynamic-example',
     templateUrl: './popover-dynamic-example.component.html',
     standalone: true,
-    imports: [PopoverComponent, PopoverControlComponent, ButtonModule, PopoverBodyComponent, NgIf, AvatarComponent]
+    imports: [PopoverComponent, PopoverControlComponent, ButtonComponent, PopoverBodyComponent, NgIf, AvatarComponent]
 })
 export class PopoverDynamicExampleComponent {
     @ViewChild('popoverComponent')

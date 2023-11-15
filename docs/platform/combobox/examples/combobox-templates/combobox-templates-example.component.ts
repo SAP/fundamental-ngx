@@ -2,13 +2,18 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { JsonPipe } from '@angular/common';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import {
     ComboboxSelectionChangeEvent,
     FdpFormGroupModule,
     PlatformComboboxModule
 } from '@fundamental-ngx/platform/form';
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+
+interface ComboboxTemplateItem {
+    name: string;
+    type: string;
+}
 
 @Component({
     selector: 'fdp-combobox-templates-example',
@@ -20,10 +25,10 @@ import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
     ],
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }],
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, IconModule, JsonPipe]
+    imports: [FdpFormGroupModule, PlatformComboboxModule, TemplateDirective, IconComponent, JsonPipe]
 })
 export class ComboboxTemplatesExampleComponent {
-    dataSource = [
+    dataSource: ComboboxTemplateItem[] = [
         { name: 'Apple', type: 'Fruits' },
         { name: 'Banana', type: 'Fruits' },
         { name: 'Pineapple', type: 'Fruits' },
@@ -33,6 +38,8 @@ export class ComboboxTemplatesExampleComponent {
         { name: 'Jalapeño', type: 'Vegetables' },
         { name: 'Spinach', type: 'Vegetables' }
     ];
+
+    model: ComboboxTemplateItem;
 
     selectedItem = null;
     selectedItem1 = null;

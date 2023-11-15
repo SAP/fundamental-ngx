@@ -2,7 +2,7 @@ import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ActionSheetComponent, ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { IndicatorStates, NotificationModule } from '@fundamental-ngx/core/notification';
@@ -26,7 +26,7 @@ export type Notification = {
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         PopoverTriggerDirective,
         PopoverComponent,
         NotificationModule,

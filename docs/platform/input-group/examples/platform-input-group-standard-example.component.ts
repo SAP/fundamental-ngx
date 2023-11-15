@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
 
@@ -9,6 +9,6 @@ import { PlatformInputGroupModule } from '@fundamental-ngx/platform/form';
     templateUrl: './platform-input-group-standard-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormLabelComponent, PlatformInputGroupModule, PlatformButtonModule, IconModule]
+    imports: [FormLabelComponent, PlatformInputGroupModule, PlatformButtonModule, IconComponent]
 })
 export class PlatformInputGroupStandardExampleComponent {}

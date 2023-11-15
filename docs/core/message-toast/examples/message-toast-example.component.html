@@ -5,6 +5,6 @@
 <button fd-button label="Hide All" fdType="emphasized" (click)="messageToastService.hideAll()"></button>
 
 <!-- Defining a template to open -->
-<ng-template let-messageToast #template>
+<ng-template [fdMessageBoxTemplate] let-messageToast #template>
     {{ messageToast.data.content }}
 </ng-template>

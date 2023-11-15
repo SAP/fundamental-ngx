@@ -3,7 +3,7 @@ import { NgFor } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from '@fundamental-ngx/core/popover';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -18,7 +18,7 @@ import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
         SegmentedButtonModule,
         FormsModule,
         NgFor,
-        ButtonModule,
+        ButtonComponent,
         PopoverComponent,
         PopoverControlComponent,
         PopoverBodyComponent,

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, Inject, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FD_LANGUAGE, FD_LANGUAGE_ENGLISH, FD_LANGUAGE_UKRAINIAN, FD_LOCALE, FdLanguage } from '@fundamental-ngx/i18n';
@@ -22,7 +22,7 @@ import { BehaviorSubject } from 'rxjs';
         }
     ],
     standalone: true,
-    imports: [SegmentedButtonModule, FormsModule, ButtonModule, FormLabelComponent, PlatformTextAreaModule]
+    imports: [SegmentedButtonModule, FormsModule, ButtonComponent, FormLabelComponent, PlatformTextAreaModule]
 })
 export class LanguageChangeExampleComponent {
     fdLocale$ = inject(FD_LOCALE) as BehaviorSubject<string>;

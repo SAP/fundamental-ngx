@@ -5,7 +5,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
@@ -32,7 +32,7 @@ import 'dayjs/locale/fr';
         }
     ],
     standalone: true,
-    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, NgFor, ButtonModule, DatePickerComponent]
+    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, NgFor, ButtonComponent, DatePickerComponent]
 })
 export class DatePickerDayjsAdapterExampleComponent {
     @ViewChild(DatePickerComponent) datePicker: DatePickerComponent<Dayjs>;

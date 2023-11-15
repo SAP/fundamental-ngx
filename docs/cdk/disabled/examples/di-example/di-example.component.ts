@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ClickedBehaviorModule, DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ClickedDirective, DisabledBehaviorDirective } from '@fundamental-ngx/cdk/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DisabledRecipientDirective } from './disabled-recipient.directive';
 
 @Component({
@@ -15,7 +15,7 @@ import { DisabledRecipientDirective } from './disabled-recipient.directive';
         `
     ],
     standalone: true,
-    imports: [DisabledBehaviorDirective, DisabledRecipientDirective, ButtonModule, ClickedBehaviorModule]
+    imports: [DisabledBehaviorDirective, DisabledRecipientDirective, ButtonComponent, ClickedDirective]
 })
 export class DiExampleComponent {
     rootElementDisabled = false;

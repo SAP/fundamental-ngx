@@ -1,29 +1,12 @@
-import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { DATE_TIME_FORMATS, DatetimeAdapter, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { DAYJS_DATETIME_FORMATS, DayjsDatetimeAdapter } from '@fundamental-ngx/datetime-adapter';
-
-// Translated aria labels.
-// Please note these labels should be translated for each locale separately
-@Injectable()
-export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel = `Sélection de l'année`;
-
-    previousYearLabel = 'Année précédente';
-
-    nextYearLabel = 'Année suivante';
-
-    monthSelectionLabel = 'Sélection du mois';
-
-    previousMonthLabel = 'Mois précédent';
-
-    nextMonthLabel = 'Mois suivant';
-}
+import { patchLanguage } from '@fundamental-ngx/i18n';
 
 // using custom date format to better demonstrate i18n capabilities
 const CUSTOM_DATETIME_FORMATS = {
@@ -64,10 +47,16 @@ const CUSTOM_DATETIME_FORMATS = {
             useClass: DayjsDatetimeAdapter,
             deps: [LOCALE_ID]
         },
-        {
-            provide: CalendarI18nLabels,
-            useClass: CustomI18nLabels
-        },
+        patchLanguage({
+            coreCalendar: {
+                yearSelectionLabel: `Sélection de l'année`,
+                previousYearLabel: 'Année précédente',
+                nextYearLabel: 'Année suivante',
+                monthSelectionLabel: 'Sélection du mois',
+                previousMonthLabel: 'Mois précédent',
+                nextMonthLabel: 'Mois suivant'
+            }
+        }),
         {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_DATETIME_FORMATS
@@ -77,7 +66,7 @@ const CUSTOM_DATETIME_FORMATS = {
     imports: [
         FormLabelComponent,
         SegmentedButtonModule,
-        ButtonModule,
+        ButtonComponent,
         DatePickerComponent,
         FormsModule,
         FdDatetimeModule

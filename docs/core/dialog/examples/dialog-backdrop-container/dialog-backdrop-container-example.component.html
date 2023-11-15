@@ -6,7 +6,7 @@
 
 <div #customContainer style="margin-top: 0.5rem"></div>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
             <h1 id="fd-dialog-header-2" fd-title>Backdrop Configuration</h1>

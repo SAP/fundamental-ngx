@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { PaginationComponent, PaginationModule } from '@fundamental-ngx/core/pagination';
 import { of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
@@ -22,7 +22,7 @@ import { delay, tap } from 'rxjs/operators';
         <div *ngIf="notification">{{ notification }}</div>
     `,
     standalone: true,
-    imports: [PaginationModule, ButtonModule, NgIf]
+    imports: [PaginationModule, ButtonComponent, NgIf]
 })
 export class PaginationExampleComponent {
     totalItems = 50;

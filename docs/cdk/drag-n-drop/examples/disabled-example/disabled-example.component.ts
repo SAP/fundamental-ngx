@@ -10,7 +10,7 @@ import {
     isOdd
 } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { delay, of } from 'rxjs';
@@ -49,7 +49,7 @@ import { delay, of } from 'rxjs';
     imports: [
         SegmentedButtonModule,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         CheckboxComponent,
         BusyIndicatorComponent,
         DragAndDropModule,

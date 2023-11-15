@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-button-toggled-example',
@@ -13,7 +13,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
         `
     ],
     standalone: true,
-    imports: [ButtonModule]
+    imports: [ButtonComponent]
 })
 export class ButtonToggledExampleComponent {
     toggled = true;

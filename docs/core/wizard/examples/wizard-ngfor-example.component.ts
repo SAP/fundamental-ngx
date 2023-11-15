@@ -10,7 +10,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -35,7 +35,7 @@ export type WizardStep = {
     },
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         A11yModule,
         NgIf,
         WizardModule,

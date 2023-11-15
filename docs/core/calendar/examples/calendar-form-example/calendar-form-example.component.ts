@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CalendarComponent } from '@fundamental-ngx/core/calendar';
 import {
     DATE_TIME_FORMATS,
@@ -27,7 +27,7 @@ import { FormItemComponent } from '@fundamental-ngx/core/form';
         }
     ],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormItemComponent, CalendarComponent, ButtonModule, FdDatetimeModule]
+    imports: [FormsModule, ReactiveFormsModule, FormItemComponent, CalendarComponent, ButtonComponent, FdDatetimeModule]
 })
 export class CalendarFormExamplesComponent {
     customForm = new FormGroup({

@@ -52,7 +52,7 @@
     </table>
 </fd-busy-indicator>
 
-<ng-template let-dialog let-dialogConfig="dialogConfig" #newItemDialog>
+<ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #newItemDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h1 fd-title>New Item</h1>

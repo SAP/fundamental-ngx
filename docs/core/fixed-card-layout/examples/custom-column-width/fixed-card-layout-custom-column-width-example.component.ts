@@ -1,6 +1,6 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ColumnsWidthConfig, FixedCardLayoutModule } from '@fundamental-ngx/core/fixed-card-layout';
 import { ListModule } from '@fundamental-ngx/core/list';
@@ -14,7 +14,7 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         CdkScrollable,
         ScrollbarDirective,
         FixedCardLayoutModule,

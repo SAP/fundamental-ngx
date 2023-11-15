@@ -1,8 +1,7 @@
-import { Component, Injectable, LOCALE_ID } from '@angular/core';
+import { Component, LOCALE_ID } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
@@ -11,26 +10,10 @@ import { PlatformDatePickerComponent } from '@fundamental-ngx/platform/form';
 import dayjs from 'dayjs';
 
 // Dayjs locale data required for this example
+import { patchLanguage } from '@fundamental-ngx/i18n';
 import 'dayjs/locale/bg';
 import 'dayjs/locale/de';
 import 'dayjs/locale/fr';
-
-// Translated aria labels.
-// Please note these labels should be translated for each locale separately
-@Injectable()
-export class CustomI18nLabels extends CalendarI18nLabels {
-    yearSelectionLabel = `Sélection de l'année`;
-
-    previousYearLabel = 'Année précédente';
-
-    nextYearLabel = 'Année suivante';
-
-    monthSelectionLabel = 'Sélection du mois';
-
-    previousMonthLabel = 'Mois précédent';
-
-    nextMonthLabel = 'Mois suivant';
-}
 
 // using custom date format to better demonstrate i18n capabilities
 const CUSTOM_DATETIME_FORMATS = {
@@ -58,17 +41,23 @@ const CUSTOM_DATETIME_FORMATS = {
             useClass: DayjsDatetimeAdapter,
             deps: [LOCALE_ID]
         },
-        {
-            provide: CalendarI18nLabels,
-            useClass: CustomI18nLabels
-        },
+        patchLanguage({
+            coreCalendar: {
+                yearSelectionLabel: `Sélection de l'année`,
+                previousYearLabel: 'Année précédente',
+                nextYearLabel: 'Année suivante',
+                monthSelectionLabel: 'Sélection du mois',
+                previousMonthLabel: 'Mois précédent',
+                nextMonthLabel: 'Mois suivant'
+            }
+        }),
         {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_DATETIME_FORMATS
         }
     ],
     standalone: true,
-    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonModule, PlatformDatePickerComponent]
+    imports: [FormLabelComponent, SegmentedButtonModule, FormsModule, ButtonComponent, PlatformDatePickerComponent]
 })
 export class PlatformDatePickeri18nExampleComponent {
     date = dayjs();

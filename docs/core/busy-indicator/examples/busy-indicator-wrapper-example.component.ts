@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
@@ -14,7 +14,7 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
         FormItemComponent,
         FormLabelComponent,
         FormControlComponent,
-        ButtonModule
+        ButtonComponent
     ]
 })
 export class BusyIndicatorWrapperExampleComponent {

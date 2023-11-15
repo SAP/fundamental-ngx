@@ -1,6 +1,6 @@
 <button fd-button label="Open Dialog" (click)="openDialog(template)"></button>
 
-<ng-template #template let-dialog let-dialogConfig="dialogConfig">
+<ng-template [fdDialogTemplate] #template let-dialog let-dialogConfig="dialogConfig">
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" role="dialog">
         <fd-dialog-header>
             <h1 id="fd-dialog-popover-1" fd-title>Popover Example</h1>

@@ -13,9 +13,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataSourceDirective } from '@fundamental-ngx/cdk/data-source';
 import { CvaControl, CvaDirective, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { MultiComboboxModule } from '@fundamental-ngx/core/multi-combobox';
+import { MultiComboboxComponent } from '@fundamental-ngx/core/multi-combobox';
 import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { cloneDeep } from 'lodash-es';
 
@@ -32,8 +32,8 @@ import { cloneDeep } from 'lodash-es';
         forwardRef(() => CustomCdkControlExampleComponent),
         NgIf,
         DataSourceDirective,
-        MultiComboboxModule,
-        ButtonModule
+        MultiComboboxComponent,
+        ButtonComponent
     ]
 })
 export class FormsDefaultExampleComponent {

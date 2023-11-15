@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild } from '@angular/core';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DialogDefaultContent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
@@ -10,7 +10,7 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './dialog-object-example.component.html',
     standalone: true,
-    imports: [ButtonModule, BarModule, InputGroupModule, InitialFocusDirective]
+    imports: [ButtonComponent, BarModule, InputGroupModule, InitialFocusDirective]
 })
 export class DialogObjectExampleComponent {
     constructor(private _dialogService: DialogService, private _cdr: ChangeDetectorRef) {}

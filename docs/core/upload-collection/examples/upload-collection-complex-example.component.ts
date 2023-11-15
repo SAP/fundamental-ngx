@@ -13,12 +13,12 @@ import {
 import { FormsModule } from '@angular/forms';
 import { RangeSelector } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { FileUploaderComponent, FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
-import { IconModule } from '@fundamental-ngx/core/icon';
+import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
@@ -62,14 +62,14 @@ interface FileItem {
         FileUploaderModule,
         ContentDensityDirective,
         FormsModule,
-        ButtonModule,
+        ButtonComponent,
         UploadCollectionComponent,
         NgFor,
         ListModule,
         UploadCollectionItemDirective,
         CheckboxComponent,
         UploadCollectionThumbnailDirective,
-        IconModule,
+        IconComponent,
         UploadCollectionTitleContainerDirective,
         LinkComponent,
         UploadCollectionTitleDirective,

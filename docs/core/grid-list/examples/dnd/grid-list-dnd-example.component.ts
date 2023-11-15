@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { RouterLink } from '@angular/router';
 import { DragAndDropModule, FdDropEvent } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { GridListItemOutputEvent, GridListModule } from '@fundamental-ngx/core/grid-list';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -25,7 +25,7 @@ interface GridListItem {
         GridListModule,
         DragAndDropModule,
         ContentDensityDirective,
-        ButtonModule,
+        ButtonComponent,
         NgFor,
         AvatarComponent,
         LinkComponent,

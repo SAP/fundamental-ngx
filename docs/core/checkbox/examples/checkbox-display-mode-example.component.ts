@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 
@@ -24,7 +24,7 @@ import { FormLabelComponent } from '@fundamental-ngx/core/form';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormLabelComponent, CheckboxComponent, FormsModule, ButtonModule]
+    imports: [FormLabelComponent, CheckboxComponent, FormsModule, ButtonComponent]
 })
 export class CheckboxDisplayModeExampleComponent {
     checkboxValue = false;

@@ -14,7 +14,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
@@ -40,7 +40,7 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     },
     standalone: true,
     imports: [
-        ButtonModule,
+        ButtonComponent,
         A11yModule,
         NgIf,
         WizardModule,

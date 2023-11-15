@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { TileModule } from '@fundamental-ngx/core/tile';
 
@@ -65,7 +65,7 @@ export class SlideTileExampleComponent {}
     selector: 'fd-action-tile-example',
     templateUrl: './action-tile-example.component.html',
     standalone: true,
-    imports: [TileModule, ButtonModule, ContentDensityDirective]
+    imports: [TileModule, ButtonComponent, ContentDensityDirective]
 })
 export class ActionTileExampleComponent {
     window: any;
@@ -79,7 +79,7 @@ export class ActionTileExampleComponent {
     selector: 'fd-line-tile-example',
     templateUrl: './line-tile-example.component.html',
     standalone: true,
-    imports: [TileModule, ContentDensityDirective, ButtonModule]
+    imports: [TileModule, ContentDensityDirective, ButtonComponent]
 })
 export class LineTileExampleComponent {
     window: any;

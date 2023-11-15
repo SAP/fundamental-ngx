@@ -9,7 +9,7 @@ import {
     ReactiveFormsModule,
     Validators
 } from '@angular/forms';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fundamental-ngx/core/form';
 
 @Component({
@@ -24,7 +24,7 @@ import { FormControlComponent, FormItemComponent, FormLabelComponent } from '@fu
         FormLabelComponent,
         FormControlComponent,
         NgFor,
-        ButtonModule
+        ButtonComponent
     ]
 })
 export class InputFormGroupExampleComponent implements OnInit {

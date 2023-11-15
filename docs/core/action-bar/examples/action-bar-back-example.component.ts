@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
-import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
     selector: 'fd-action-bar-back-example',
     templateUrl: './action-bar-back-example.component.html',
     standalone: true,
-    imports: [ActionBarModule, ButtonModule, AsyncPipe]
+    imports: [ActionBarModule, ButtonComponent, AsyncPipe]
 })
 export class ActionBarBackExampleComponent implements OnInit {
     navigationArrow$: Observable<string>;
