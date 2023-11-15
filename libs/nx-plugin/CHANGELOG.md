@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.25...v0.47.1) (2023-11-15)
+
+
+### Reverts
+
+* Revert "feat(i18n): added new languages (#10954)" ([d923993](https://github.com/SAP/fundamental-ngx/commit/d92399370737d336f441e4e3974e3689eeaad9b4)), closes [#10954](https://github.com/SAP/fundamental-ngx/issues/10954)
+
+
+
+
+
 # [0.47.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.25...v0.47.0) (2023-11-15)
 
 **Note:** Version bump only for package @fundamental-ngx/nx-plugin
