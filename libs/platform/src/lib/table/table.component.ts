@@ -33,6 +33,7 @@ import {
     DndListDirective,
     DragAndDropModule,
     FDK_FOCUSABLE_GRID_DIRECTIVE,
+    FocusableCellPosition,
     FocusableGridDirective,
     FocusableGridDirective as FocusableGridDirective_1,
     IntersectionSpyDirective,
@@ -506,6 +507,9 @@ export class TableComponent<T = any>
     /** Event emitted when all rows being collapsed. */
     @Output()
     allRowsCollapsed = new EventEmitter<void>();
+    /** Event emitted when a cell is focused. */
+    @Output()
+    readonly cellFocused = new EventEmitter<any>();
     /** @hidden */
     @ViewChild('tableScrollable')
     readonly tableScrollable: TableScrollable;
@@ -796,6 +800,12 @@ export class TableComponent<T = any>
                 })
             );
         }
+
+        this._subscriptions.add(
+            this._tableRowService.cellFocused$.subscribe((event) => {
+                this.cellFocused.emit(event);
+            })
+        );
     }
 
     /** Returns array of rows that are currently in viewport. */
@@ -1323,6 +1333,14 @@ export class TableComponent<T = any>
 
             this._toggleGroupRow(tableRow);
         }
+    }
+
+    /**
+     * Function used to focus a cell in the table utilizing a FocusableCellPosition interface.
+     */
+    focusCell(position: FocusableCellPosition): void {
+        const tableEl = this.table.nativeElement as HTMLTableElement;
+        tableEl.rows[position.rowIndex].cells[position.colIndex].focus();
     }
 
     // Private API
