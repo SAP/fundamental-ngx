@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.2-rc.1...v0.47.2) (2023-11-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.47.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.2-rc.0...v0.47.2-rc.1) (2023-11-15)
+
+
+### Bug Fixes
+
+* **core:** fd-list stopped reading out position ([#10934](https://github.com/SAP/fundamental-ngx/issues/10934)) ([8bd95a4](https://github.com/SAP/fundamental-ngx/commit/8bd95a44796626ea4a5db21ce98e7e66a0429756))
+
+
+### Features
+
+* updated styles and adopted changes ([#10963](https://github.com/SAP/fundamental-ngx/issues/10963)) ([e5df513](https://github.com/SAP/fundamental-ngx/commit/e5df513132a24142d9afa5d4bcd310308b64addd))
+
+
+
+
+
+## [0.47.2-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.0...v0.47.2-rc.0) (2023-11-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.47.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.25...v0.47.0) (2023-11-15)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.47.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.24...v0.47.0-rc.25) (2023-11-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.47.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.23...v0.47.0-rc.24) (2023-11-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.47.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.22...v0.47.0-rc.23) (2023-11-14)
+
+
+### Bug Fixes
+
+* **core:** fixed group item selections and deselections ([#10952](https://github.com/SAP/fundamental-ngx/issues/10952)) ([bfc39eb](https://github.com/SAP/fundamental-ngx/commit/bfc39eb7844d6d645036989d5e0aedad61e0b664))
+
+
+
+
+
+# [0.47.0-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.21...v0.47.0-rc.22) (2023-11-14)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+# [0.47.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.20...v0.47.0-rc.21) (2023-11-10)
+
+
+### Bug Fixes
+
+* **core:** tokenizer listbox label ([#10927](https://github.com/SAP/fundamental-ngx/issues/10927)) ([b277960](https://github.com/SAP/fundamental-ngx/commit/b27796004ec263cfc4ed2c4d8fd4491f16dd6cf3))
+
+
+
+
+
 # [0.47.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.47.0-rc.19...v0.47.0-rc.20) (2023-11-09)
 
 

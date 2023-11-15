@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { FdLanguage } from '../models';
-import json from '../translations/translations_fr-FR.json';
+import json from '../translations/translations_fr';
 
 export const FD_LANGUAGE_FRENCH = json as FdLanguage;

@@ -20,7 +20,7 @@ import { Observable, Subscription, merge } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
 
 import { AsyncPipe } from '@angular/common';
-import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
+import { KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MenuItemComponent } from './menu-item.component';
 
@@ -33,6 +33,10 @@ export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';
 const MENU_ID_ROOT = 'fdp-menu-';
 let menuIdCounter = 0;
 
+/**
+ * @deprecated
+ * Menu component is deprecated. Use `fd-menu` from `@fundamental-ngx/core/menu` instead.
+ */
 @Component({
     selector: 'fdp-menu',
     templateUrl: './menu.component.html',
@@ -115,6 +119,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
                 this._setMenuItemCascadeDirection();
             });
         }
+        warnOnce(`MenuComponent is deprecated. Use 'fd-menu' from '@fundamental-ngx/core/menu' instead.`);
     }
 
     /** @hidden */

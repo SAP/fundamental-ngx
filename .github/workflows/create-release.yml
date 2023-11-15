@@ -31,22 +31,12 @@ jobs:
               env:
                   NX_AGENT_NAME: ${{matrix.agent}}
 
-    initialize_cloud:
-        runs-on: ubuntu-latest
-        name: Initialize Nx Cloud
-        steps:
-            - uses: actions/checkout@v3
-            - uses: ./.github/actions/nodejs
-            - name: Initialize the Nx Cloud distributed CI run
-              run: npx nx-cloud start-ci-run
-
     create_release:
         name: Create release
         runs-on: ubuntu-latest
         outputs:
             npmTag: ${{ steps.releaseTags.outputs.npm }}
             ghTag: ${{ steps.releaseTags.outputs.gh }}
-        needs: initialize_cloud
         steps:
             - name: Fetch from origin repo
               uses: actions/checkout@v3
@@ -63,6 +53,9 @@ jobs:
 
             - name: Setup Node.js and Cache
               uses: ./.github/actions/nodejs
+
+            - name: Initialize the Nx Cloud distributed CI run
+              run: npx nx-cloud start-ci-run
 
             # Does conventional version bump and creates a tag
             - name: Get next version

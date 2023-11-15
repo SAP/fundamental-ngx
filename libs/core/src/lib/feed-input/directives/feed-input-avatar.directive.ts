@@ -33,6 +33,6 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return ['fd-feed-input__thumb', this.placeholder ? `sap-icon` : '', this.class];
+        return ['fd-feed-input__thumb', this.placeholder ? `fd-avatar--placeholder` : '', this.class];
     }
 }
