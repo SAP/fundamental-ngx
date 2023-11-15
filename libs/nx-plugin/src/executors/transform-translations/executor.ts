@@ -1,4 +1,3 @@
-import { execSync } from 'child_process';
 import { sync as fastGlobSync } from 'fast-glob';
 import { readFileSync, writeFileSync } from 'fs';
 import { parse } from 'path';
@@ -22,7 +21,7 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
         });
         writeFileSync(
             newFilePath,
-            format(
+            await format(
                 `
             /* eslint-disable */
             // Do not modify, it's automatically created. Modify ${
@@ -33,7 +32,6 @@ export default async function runExecutor(options: TransformPropertiesExecutorSc
                 { ...prettierConfig, parser: 'typescript' }
             )
         );
-        execSync(`git add ${newFilePath}`);
     }
 
     return {

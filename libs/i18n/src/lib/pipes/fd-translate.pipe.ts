@@ -43,7 +43,7 @@ export class FdTranslatePipe implements PipeTransform {
             this._args$.pipe(skip(1), distinctUntilChanged())
         ])
             .pipe(
-                switchMap(([key, args]) => this._translationResolver<any>(key, args as any)),
+                switchMap(([key, args]) => this._translationResolver(key, args as any)),
                 takeUntilDestroyed(this._destroyRef)
             )
             .subscribe((value) => {

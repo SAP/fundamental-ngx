@@ -88,7 +88,7 @@ export interface FdLanguage {
     };
     coreMultiComboBox: {
         /** Label for the multi-combobox. */
-        multiComboBoxAriaLabel?: FdLanguageKey;
+        multiComboBoxAriaLabel: FdLanguageKey;
         selectAllLabel: FdLanguageKey;
     };
     coreCarousel: {
@@ -736,9 +736,9 @@ export interface FdLanguage {
         /** @param folderName */
         messageUpdateVersionSuccess: FdLanguageKey<{ folderName: string }>;
         /** @param foldersCount */
-        folderNamePluralization?: FdLanguageKey<{ foldersCount: number }>;
+        folderNamePluralization: FdLanguageKey<{ foldersCount: number }>;
         /** @param filesCount */
-        fileNamePluralization?: FdLanguageKey<{ filesCount: number }>;
+        fileNamePluralization: FdLanguageKey<{ filesCount: number }>;
         /**
          * @param from
          * @param to

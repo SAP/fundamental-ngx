@@ -6,7 +6,7 @@
             "folders": [
                 {
                     "startingFolderPath": "./libs/i18n/src/lib/translations",
-                    "sourceFilters": ["**/translations.properties"]
+                    "sourceFilters": ["**/translations_en-US.properties"]
                 }
             ]
         }
@@ -15,6 +15,6 @@
         "targetFolderPath": ".",
         "pseudoLocFolderPath": ".",
         "oneQFolderPath": ".",
-        "targetFileNamingConvention": "translations_[langCode].[extension]"
+        "targetFileNamingConvention": "[filename]_[langCode].[extension]"
     }
 }
