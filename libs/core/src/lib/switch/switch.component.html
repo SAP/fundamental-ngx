@@ -4,13 +4,11 @@
     [style.cursor]="disabled ? 'auto' : 'pointer'"
     [class.is-compact]="_contentDensityObserver.isCompact$ | async"
     [class.fd-switch--semantic]="semantic"
+    [class.fd-switch--text]="activeText || inactiveText"
     [class.is-disabled]="disabled"
     [attr.aria-label]="ariaLabel"
     #switchEl
 >
-    <span *ngIf="isChecked ? activeText : inactiveText as text" class="fd-switch__text">
-        {{ text }}
-    </span>
     <span class="fd-switch__control">
         <input
             #switchInput
@@ -27,17 +25,19 @@
         />
         <div class="fd-switch__slider">
             <div class="fd-switch__track" aria-hidden="true">
-                <i
-                    *ngIf="semantic"
-                    role="presentation"
-                    class="fd-switch__icon fd-switch__icon--on sap-icon--accept"
-                ></i>
+                <span class="fd-switch__text fd-switch__text--on" *ngIf="activeText; else withIconOn">
+                    {{ activeText }}
+                </span>
+                <ng-template #withIconOn>
+                    <i role="presentation" class="fd-switch__icon fd-switch__icon--on sap-icon--accept"></i>
+                </ng-template>
                 <span class="fd-switch__handle" role="presentation"></span>
-                <i
-                    *ngIf="semantic"
-                    role="presentation"
-                    class="fd-switch__icon--off fd-switch__icon sap-icon--decline"
-                ></i>
+                <span class="fd-switch__text fd-switch__text--off" *ngIf="inactiveText; else withIconOff">
+                    {{ inactiveText }}
+                </span>
+                <ng-template #withIconOff>
+                    <i role="presentation" class="fd-switch__icon--off fd-switch__icon sap-icon--decline"></i>
+                </ng-template>
             </div>
 
             <span *ngIf="semantic" [id]="_semanticLabelId" aria-hidden="true" class="fd-switch__invisible-text">
