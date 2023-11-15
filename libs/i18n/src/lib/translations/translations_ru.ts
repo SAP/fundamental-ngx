@@ -564,38 +564,43 @@ export default {
         messageUpdateVersionSuccess: 'Версия {folderName} обновлена.',
         messageFileRenameFailed: 'Не удалось переименовать "{from}" в "{to}."',
         messageFileRenameSuccess: '{from}" переименовано в "{to}".',
-        folderNamePluralization: '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} }',
-        fileNamePluralization: '{ filesCount, plural, one {1 файл} few {# файла} other {# файлов} }',
         messageRemoveFoldersAndFilesFailed:
-            'Не удалось удалить {@@platformUploadCollection.folderNamePluralization} и {@@platformUploadCollection.fileNamePluralization}.',
+            'Не удалось удалить { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } и { filesCount, plural, one {1 файл} few {# файла} other {# файлов} }.',
         messageRemoveFoldersAndFilesSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} и {@@platformUploadCollection.fileNamePluralization} удалено.',
-        messageRemoveFoldersFailed: 'Не удалось удалить {@@platformUploadCollection.folderNamePluralization}.',
-        messageRemoveFoldersSuccess: 'Удалено {@@platformUploadCollection.folderNamePluralization}.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } и { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } удалено.',
+        messageRemoveFoldersFailed:
+            'Не удалось удалить { foldersCount, plural, one {1 папку} few {# папки} other {# папок} }.',
+        messageRemoveFoldersSuccess: 'Удалено { foldersCount, plural, one {1 папку} few {# папки} other {# папок} }.',
         messageRemoveFilesFailed: 'Не удалось удалить файлы {filesCount}.',
-        messageRemoveFilesSuccess: 'Удалено {@@platformUploadCollection.fileNamePluralization}.',
+        messageRemoveFilesSuccess: 'Удалено { filesCount, plural, one {1 файл} few {# файла} other {# файлов} }.',
         messageRemoveFileOrFolderFailed: 'Не удалось удалить {name}.',
         messageRemoveFileOrFolderSuccess: '{name} удалено.',
         messageMoveFoldersAndFilesFailed:
-            'Не удалось переместить {@@platformUploadCollection.folderNamePluralization} и {@@platformUploadCollection.fileNamePluralization} в {to}.',
+            'Не удалось переместить { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } и { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } в {to}.',
         messageMoveFoldersAndFilesSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} и {@@platformUploadCollection.fileNamePluralization} перемещены в {to}.',
-        messageMoveFoldersFailed: 'Не удалось переместить {@@platformUploadCollection.folderNamePluralization} в {to}.',
-        messageMoveFoldersSuccess: '{@@platformUploadCollection.folderNamePluralization} перемещен в {to}.',
-        messageMoveFilesFailed: 'Не удалось переместить {@@platformUploadCollection.fileNamePluralization} в {to}.',
-        messageMoveFilesSuccess: '{@@platformUploadCollection.fileNamePluralization} перемещен в {to}.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } и { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } перемещены в {to}.',
+        messageMoveFoldersFailed:
+            'Не удалось переместить { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } в {to}.',
+        messageMoveFoldersSuccess:
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } перемещен в {to}.',
+        messageMoveFilesFailed:
+            'Не удалось переместить { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } в {to}.',
+        messageMoveFilesSuccess:
+            '{ filesCount, plural, one {1 файл} few {# файла} other {# файлов} } перемещен в {to}.',
         messageMoveFileOrFolderFailed: 'Не удалось переместить {name} в {to}.',
         messageMoveFileOrFolderSuccess: '{name} перемещен в {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Не удалось переместить {@@platformUploadCollection.folderNamePluralization} и {@@platformUploadCollection.fileNamePluralization} во все файлы.',
+            'Не удалось переместить { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } и { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } во все файлы.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} и {@@platformUploadCollection.fileNamePluralization} перемещены ко всем файлам.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } и { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } перемещены ко всем файлам.',
         messageMoveRootFoldersFailed:
-            'Не удалось переместить {@@platformUploadCollection.folderNamePluralization} во все файлы.',
-        messageMoveRootFoldersSuccess: '{@@platformUploadCollection.folderNamePluralization} перемещен ко всем файлам.',
+            'Не удалось переместить { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } во все файлы.',
+        messageMoveRootFoldersSuccess:
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } перемещен ко всем файлам.',
         messageMoveRootFilesFailed:
-            'Не удалось переместить {@@platformUploadCollection.fileNamePluralization} во все файлы.',
-        messageMoveRootFilesSuccess: '{@@platformUploadCollection.fileNamePluralization} перемещены ко всем файлам.',
+            'Не удалось переместить { filesCount, plural, one {1 файл} few {# файла} other {# файлов} } во все файлы.',
+        messageMoveRootFilesSuccess:
+            '{ filesCount, plural, one {1 файл} few {# файла} other {# файлов} } перемещены ко всем файлам.',
         messageMoveRootFileOrFolderFailed: 'Не удалось переместить {name} во все файлы.',
         messageMoveRootFileOrFolderSuccess: '{name} перемещен ко всем файлам.',
         messageFileTypeMismatchPlural:

@@ -10,20 +10,21 @@ export default {
         nextYearLabel: 'Próximo ano',
         previousMonthLabel: 'Mês anterior',
         nextMonthLabel: 'Próximo mês',
-        weekColumnLabel: 'Semana do ano',
+        weekColumnLabel: 'Semana do calendário',
         dateSelectedLabel: 'Data selecionada',
         todayLabel: 'Hoje',
         rangeStartLabel: 'Início do intervalo',
         rangeEndLabel: 'Fim do intervalo',
-        dayInPastLabel: 'Últimos dias',
+        dayInPastLabel: 'Dias passados',
         closeCalendarLabel: 'Fechar calendário',
         calendarDayViewDescription: 'Calendário',
-        calendarMonthViewDescription: 'Selecionador de mês',
-        calendarYearsViewDescription: 'Selecionador de ano',
-        calendarYearsRangeViewDescription: 'Selecionador de intervalo de anos'
+        calendarMonthViewDescription: 'Seletor de mês',
+        calendarYearsViewDescription: 'Seletor de ano',
+        calendarYearsRangeViewDescription: 'Seletor de intervalo de anos'
     },
     coreMultiComboBox: {
-        selectAllLabel: 'Selecionar todos os ({selectedItems} de {totalItems})'
+        multiComboBoxAriaLabel: 'Caixa de combinação de vários valores',
+        selectAllLabel: 'Selecionar tudo ({selectedItems} de {totalItems})'
     },
     coreCarousel: {
         leftNavigationBtnLabel: 'Ir para o item anterior',
@@ -33,21 +34,21 @@ export default {
         dateInputLabel: 'Entrada de data',
         dateRangeInputLabel: 'Entrada de intervalo de datas',
         displayCalendarToggleLabel: 'Abrir selecionador',
-        valueStateSuccessMessage: 'Status de valor Sucesso',
-        valueStateInformationMessage: 'Status de valor Informação',
-        valueStateWarningMessage: 'Status de valor Advertência',
-        valueStateErrorMessage: 'Status de valor Erro'
+        valueStateSuccessMessage: 'Estado de valor Êxito',
+        valueStateInformationMessage: 'Estado de valor Informação',
+        valueStateWarningMessage: 'Estado de valor Aviso',
+        valueStateErrorMessage: 'Estado de valor Erro'
     },
     coreDatetimePicker: {
-        datetimeInputLabel: 'Entrada de data/hora',
+        datetimeInputLabel: 'Entrada de data e hora',
         displayDatetimeToggleLabel: 'Exibir alternância de calendário',
         displayTypeDateLabel: 'Data',
         displayTypeTimeLabel: 'Hora',
-        datetimeOkLabel: 'OK',
+        datetimeOkLabel: 'Ok',
         datetimeCancelLabel: 'Cancelar'
     },
     coreFeedListItem: {
-        moreLabel: 'Mais {count}',
+        moreLabel: 'mais {count}',
         lessLabel: 'Menos'
     },
     coreGridList: {
@@ -67,10 +68,10 @@ export default {
         countListResultsSingular: '1 item da lista de resultados.',
         countListResultsPlural: '{count} itens da lista de resultados.',
         multiInputAriaLabel: 'Entrada de valores múltiplos',
-        noResults: 'Nenhum resultado.',
-        navigateSelectionsWithArrows: 'Navegue nas seleções com as setas para cima e para baixo.',
+        noResults: 'Sem resultados.',
+        navigateSelectionsWithArrows: 'Navegue pelas seleções com as setas para cima e para baixo.',
         escapeNavigateTokens:
-            'Pressione escape para sair do campo de entrada e use as teclas para a esquerda e para a direita para navegar pelas opções selecionadas.',
+            'Pressione escape para sair do campo de entrada e use as teclas de seta para a esquerda e para a direita para navegar pelas opções selecionadas.',
         tokensCountText: 'Contém {length, plural, =0 {no token} =1 {1 token} other {# tokens} }.'
     },
     coreNavigation: {
@@ -81,7 +82,7 @@ export default {
         linkItemAriaLabel: 'Item da árvore {itemDetails}, {index} de {total}{selectedDescription}'
     },
     coreOverflowLayout: {
-        moreItemsButton: 'Mais {count}'
+        moreItemsButton: 'mais {count}'
     },
     corePagination: {
         pageLabel: 'Página {pageNumber}',
@@ -98,7 +99,7 @@ export default {
         totalResultsLabel: '{totalCount} resultados'
     },
     coreProductSwitch: {
-        ariaLabel: 'Alternância de produtos'
+        ariaLabel: 'Product Switch'
     },
     coreShellbar: {
         collapsedItemMenuLabel: 'Menu de item recolhido',
@@ -106,7 +107,7 @@ export default {
         search: 'Pesquisar'
     },
     coreSlider: {
-        singleMinMaxDetails: 'O valor mínimo do controle deslizante é {min}, o valor máximo é {max}',
+        singleMinMaxDetails: 'O valor mínimo do cursor é {min}, o valor máximo é {max}',
         singleValueminDetails: 'O valor é {value}',
         singleValuemaxDetails: 'O valor é {value}',
         singleValueNowDetails: 'O valor atual é {value}',
@@ -127,7 +128,7 @@ export default {
         paginationItemAriaLabel: 'Seção'
     },
     coreStepInput: {
-        incrementButtonTitle: 'Incrementar',
+        incrementButtonTitle: 'Aumentar',
         decrementButtonTitle: 'Reduzir',
         ariaRoleDescription: 'Entrada de passo'
     },
@@ -143,27 +144,27 @@ export default {
         lessLabel: 'Menos'
     },
     coreTime: {
-        componentAriaName: 'Seletor de hora',
+        componentAriaName: 'Selecionador de horas',
         increaseHoursLabel: 'Aumentar horas',
-        hrsLabel: 'Horas',
         hoursLabel: 'Horas',
-        decreaseHoursLabel: 'Diminuir horas',
+        hrsLabel: 'h',
+        decreaseHoursLabel: 'Reduzir horas',
         increaseMinutesLabel: 'Aumentar minutos',
-        minLabel: 'min',
         minutesLabel: 'Minutos',
-        decreaseMinutesLabel: 'Diminuir minutos',
+        minLabel: 'min',
+        decreaseMinutesLabel: 'Reduzir minutos',
         increaseSecondsLabel: 'Aumentar segundos',
-        secLabel: 's',
         secondsLabel: 'Segundos',
-        decreaseSecondsLabel: 'Diminuir segundos',
+        secLabel: 's',
+        decreaseSecondsLabel: 'Reduzir segundos',
         increasePeriodLabel: 'Aumentar período',
         periodLabel: 'Período',
-        decreasePeriodLabel: 'Diminuir período',
+        decreasePeriodLabel: 'Reduzir período',
         navigationInstruction:
-            'Para se mover entre os itens nessa lista, pressione a seta para cima ou para baixo. Para alternar entre listas, pressione a seta para a esquerda ou para a direita.'
+            'Para mover-se entre os itens nessa lista, pressione a seta para cima ou para baixo. Para mover-se entre as listas, pressione a seta para a esquerda ou a seta para a direita.'
     },
     coreTimePicker: {
-        timePickerInputLabel: 'Entrada de seletor de hora',
+        timePickerInputLabel: 'Entrada de selecionador de horas',
         timePickerButtonLabel: 'Abrir selecionador'
     },
     coreToken: {
@@ -171,11 +172,10 @@ export default {
         ariaRoleDescription: 'token'
     },
     coreTokenizer: {
-        moreLabel: 'Mais {count}',
-        tokenizerLabel: 'Tokenizador'
+        moreLabel: 'mais {count}'
     },
     coreUploadCollection: {
-        menuOkText: 'OK',
+        menuOkText: 'Ok',
         menuCancelText: 'Cancelar',
         menuEditAriaLabel: 'Editar',
         menuDeleteAriaLabel: 'Excluir',
@@ -200,12 +200,11 @@ export default {
         editModeSaveButtonLabel: 'Salvar',
         editModeExitButtonLabel: 'Sair',
         emptyTitle: 'Comece a adicionar aprovadores e observadores',
-        emptyHint:
-            'Para adicionar aprovadores, clique em "Adicionar um passo". Para adicionar observadores, clique no campo Observadores.',
+        emptyHint: 'Para adicionar aprovadores, clique em "Adicionar um passo". Para adicionar observadores',
         addNodeDialogHeaderAddApprovers: 'Adicionar aprovadores',
         addNodeDialogHeaderEditApprover: 'Editar aprovador',
         addNodeDialogHeaderAddApproverTeam: 'Usuário/equipe',
-        addNodeDialogHeaderDetail: 'Detalhe',
+        addNodeDialogHeaderDetail: 'Detalhes',
         addNodeDialogNodeType: 'Paralelo ou serial',
         addNodeDialogNodeTypeSerial: 'Serial',
         addNodeDialogNodeTypeParallel: 'Paralelo',
@@ -222,7 +221,7 @@ export default {
         addNodeSelectApproverActionBtnLabel: 'Selecionar',
         addNodeCancelApproverSelectionActionBtnLabel: 'Cancelar',
         addNodeApproverOrTeamDetailsCloseActionBtnLabel: 'Fechar',
-        userDetailsHeader: 'Detalhe',
+        userDetailsHeader: 'Detalhes',
         userDetailsSendReminderBtnLabel: 'Enviar lembrete',
         userDetailsCancelBtnLabel: 'Cancelar',
         messagesApproverAddedSuccess: '1 aprovador foi adicionado',
@@ -233,7 +232,7 @@ export default {
         messagesTeamRemoved: '1 equipe foi removida',
         messagesErrorBuildGraph: 'Ocorreu um erro ao tentar criar o gráfico. Verifique os dados iniciais.',
         messagesUndoAction: 'Desfazer',
-        nodeMembersCount: '{{count}} membros',
+        nodeMembersCount: '{count} membros',
         nodeVariousTeams: 'Várias equipes',
         nodeStatusDueToday: 'Vencimento hoje',
         nodeStatusDueInXDays: 'Vencimento em {count} dias',
@@ -259,7 +258,7 @@ export default {
         watchersInputPlaceholder: 'Pesquisar aqui...',
         userListSelectedItemsCountSingular: '1 item selecionado',
         userListSelectedItemsCountPlural: '{count} itens selecionados',
-        addNodeButtonTitle: 'Adicionar nó',
+        addNodeButtonTitle: 'Adicionar um passo',
         nodeMenuButtonTitle: 'Menu',
         statusApproved: 'aprovado',
         statusRejected: 'rejeitado',
@@ -288,7 +287,7 @@ export default {
         selectTabMoreBtnLabel: 'Mais',
         selectTabCountHiddenA11yLabel: 'contém {rowCount} linhas e {colCount} colunas',
         selectMobileTabBackBtnTitle: 'Voltar',
-        selectMobileTabBtnOpenDialogLabel: 'Abrir diálogo',
+        selectMobileTabBtnOpenDialogLabel: 'Abrir caixa de diálogo',
         selectMobileTabTitle: 'Guia {title}',
         selectMobileConditionEmpty: 'Vazio',
         defineConditionTitle: 'Produto',
@@ -304,7 +303,7 @@ export default {
         defineConditionConditionStrategyLabelContains: 'contém',
         defineConditionConditionStrategyLabelEqualTo: 'igual a',
         defineConditionConditionStrategyLabelBetween: 'entre',
-        defineConditionConditionStrategyLabelStartsWith: 'começa com',
+        defineConditionConditionStrategyLabelStartsWith: 'inicia com',
         defineConditionConditionStrategyLabelEndsWith: 'termina com',
         defineConditionConditionStrategyLabelLessThan: 'menor que',
         defineConditionConditionStrategyLabelLessThanEqual: 'menor que ou igual a',
@@ -314,7 +313,7 @@ export default {
         defineConditionConditionStrategyLabelNotEqualTo: 'não igual a',
         defineConditionConditionStrategyLabelNotEmpty: 'não vazio',
         defineConditionMaxCountError: 'Inserir um valor com um máximo de {count} caracteres',
-        selectTabTitle: 'Selecionar da lista',
+        selectTabTitle: 'Selecionar na lista',
         searchTableEmptyMessage: 'Usar a pesquisa para obter resultados',
         defineTabTitle: 'Definir condições'
     },
@@ -354,7 +353,7 @@ export default {
         searchInputLabel: 'Pesquisar',
         synchronizeButtonTitle: 'Sincronizar',
         searchSuggestionMessage: '{count} sugestões encontradas.',
-        searchSuggestionNavigateMessage: 'usar as setas para cima e para baixo para navegar'
+        searchSuggestionNavigateMessage: 'usar setas para cima e para baixo para navegar'
     },
     platformSwitch: {
         ariaLabel: 'Alternar entrada'
@@ -378,7 +377,7 @@ export default {
         filterConditionContains: 'contém',
         filterConditionEqualTo: 'igual a',
         filterConditionBetween: 'entre',
-        filterConditionBeginsWith: 'começa com',
+        filterConditionBeginsWith: 'inicia com',
         filterConditionEndsWith: 'termina com',
         filterConditionLessThan: 'menor que',
         filterConditionLessThanOrEqualTo: 'menor que ou igual a',
@@ -396,7 +395,7 @@ export default {
         settingsCategoryActive: 'Ativo',
         settingsCategoryVisibleAndActive: 'Visível e ativo',
         settingsCategoryMandatory: 'Obrigatório',
-        manageFieldConditions: 'Gerenciar campos de condição',
+        manageFieldConditions: 'Gerenciar condições de campo',
         refreshButtonAriaLabel: 'Atualizar'
     },
     platformTable: {
@@ -404,13 +403,13 @@ export default {
         headerMenuSortDesc: 'Classificar em ordem decrescente',
         headerMenuGroup: 'Agrupar',
         headerMenuFreeze: 'Congelar',
-        headerMenuEndFreeze: 'Congelar até o fim',
+        headerMenuEndFreeze: 'Término do congelamento',
         headerMenuUnfreeze: 'Descongelar',
         headerMenuFilter: 'Filtrar',
-        defaultEmptyMessage: 'Nenhum dado encontrado',
+        defaultEmptyMessage: 'Não foram encontrados dados',
         emptyCell: 'Vazio',
         noVisibleColumnsMessage:
-            'Neste momento, não existem colunas visíveis na tabela. Selecione as colunas de que você necessita nas configurações de tabela.',
+            'No momento, não há colunas visíveis na tabela. Selecione as colunas de que você precisa nas configurações da tabela.',
         resetChangesButtonLabel: 'Redefinir',
         editableCellNumberPlaceholder: 'Inserir valor',
         editableCellDatePlaceholder: 'Inserir valor',
@@ -439,7 +438,7 @@ export default {
         P13FilterStrategyLabelOnOrAfter: 'a partir de',
         P13FilterStrategyLabelBefore: 'antes',
         P13FilterStrategyLabelBeforeOrOn: 'até',
-        P13FilterStrategyLabelNotDefined: 'Não definida',
+        P13FilterStrategyLabelNotDefined: 'Não definido',
         P13FilterBooleanOptionNotDefined: '',
         P13FilterBooleanOptionTrue: 'Sim',
         P13FilterBooleanOptionFalse: 'Não',
@@ -502,10 +501,8 @@ export default {
         sortDialogCancelBtnLabel: 'Cancelar',
         selectAllCheckboxLabel: 'Selecionar tudo',
         deselectAllCheckboxLabel: 'Desmarcar tudo',
-        deselectSingleRow: 'Pressione a BARRA DE ESPAÇOS para desmarcar a linha',
-        selectSingleRow: 'Pressione a BARRA DE ESPAÇOS para selecionar a linha',
-        deselectSingleRowTitle: 'Clique para desmarcar',
-        selectSingleRowTitle: 'Clique para selecionar'
+        deselectSingleRow: 'Para desmarcar a linha, pressione a BARRA DE ESPAÇOS',
+        selectSingleRow: 'Para selecionar a linha, pressione a BARRA DE ESPAÇOS'
     },
     platformThumbnail: {
         detailsGotoPreviousButtonTitle: 'Ir para o anterior',
@@ -524,7 +521,7 @@ export default {
         newFolderAtRootInputLabel: 'Nome da nova pasta',
         newFolderAtFolderInputLabel: 'Nome da nova pasta dentro de {folderName}',
         newFolderInputPlaceholder: 'Digitar aqui...',
-        newFolderInputErrorLabel: 'Máximo de {count} caracteres permitidos',
+        newFolderInputErrorLabel: 'É permitido no máximo {count} caracteres',
         newFolderDialogCreateBtnLabel: 'Criar',
         newFolderDialogCancelBtnLabel: 'Cancelar',
         breadcrumbLabelAllFiles: 'Todos os arquivos',
@@ -539,8 +536,8 @@ export default {
         folderIconTitle: 'Ícone de pasta',
         fileIconTitle: 'Ícone de arquivo',
         editFileNameInputPlaceholder: 'Inserir um nome',
-        editFileNameFileAlreadyExistsError: 'Já existe um arquivo com esse nome',
-        editFileNameFolderAlreadyExistsError: 'Já existe uma pasta com esse nome',
+        editFileNameFileAlreadyExistsError: 'Já existe um arquivo com este nome',
+        editFileNameFolderAlreadyExistsError: 'Já existe uma pasta com este nome',
         itemStatusSuccessful: 'Com êxito',
         itemStatusUnsuccessful: 'Sem êxito',
         uploadNewFileAfterFailAction: 'Executar',
@@ -548,11 +545,11 @@ export default {
         itemMenuBtnTitle: 'Mais',
         dragDropAreaText: 'Arrastar arquivos para carregar',
         noDataText: 'Nenhum arquivo encontrado',
-        noDataDescription: 'Solte os arquivos para carregar ou use o botão "Adicionar".',
+        noDataDescription: 'Soltar arquivos para carregar ou usar o botão ‚ÄúAdicionar‚Äù.',
         paginationTotal: 'Mostrando {from}-{to} de {total}',
         resultsPerPage: 'Resultados por página',
         messageCreateFailed: 'Falha ao criar {folderName}.',
-        messageCreateSuccess: '{folderName} foi criada.',
+        messageCreateSuccess: '{folderName} foi criado.',
         messageUpdateVersionFailed: 'Falha ao atualizar versão de {folderName}.',
         messageUpdateVersionSuccess: 'A versão de {folderName} foi atualizada.',
         messageFileRenameFailed: 'Falha ao renomear "{from}" para "{to}."',
@@ -564,7 +561,7 @@ export default {
         messageRemoveFilesFailed: 'Falha ao remover {filesCount} arquivos.',
         messageRemoveFilesSuccess: '{filesCount} arquivos foram removidos.',
         messageRemoveFileOrFolderFailed: 'Falha ao remover {name}.',
-        messageRemoveFileOrFolderSuccess: '{name} foi removido.',
+        messageRemoveFileOrFolderSuccess: '{name} foi removido(a).',
         messageMoveFoldersAndFilesFailed: 'Falha ao mover {foldersCount} pastas e {filesCount} arquivos para {to}.',
         messageMoveFoldersAndFilesSuccess: '{foldersCount} pastas e {filesCount} arquivos foram movidos para {to}.',
         messageMoveFoldersFailed: 'Falha ao mover {foldersCount} pastas para {to}.',
@@ -582,10 +579,10 @@ export default {
         messageMoveRootFilesFailed: 'Falha ao mover {filesCount} arquivos para todos os arquivos.',
         messageMoveRootFilesSuccess: '{filesCount} arquivos foram movidos para todos os arquivos.',
         messageMoveRootFileOrFolderFailed: 'Falha ao mover {name} para todos os arquivos.',
-        messageMoveRootFileOrFolderSuccess: '{name} foi movido para todos os arquivos.',
+        messageMoveRootFileOrFolderSuccess: '{name} foi movido(a) para todos os arquivos',
         messageFileTypeMismatchPlural: '{filesCount} arquivos têm o tipo incorreto. Tipos permitidos: {allowedTypes}.',
         messageFileTypeMismatchSingular:
-            'O arquivo "{filesCount}" tem o tipo incorreto. Tipos permitidos: {allowedTypes}.',
+            'O arquivo "{fileName}" tem o tipo incorreto. Tipos permitidoss: {allowedTypes}.',
         messageFileSizeExceededPlural:
             '{filesCount} arquivos excederam o tamanho máximo de arquivo. Tamanho máximo permitido: {maxFileSize}.',
         messageFileSizeExceededSingular:
@@ -601,11 +598,11 @@ export default {
     platformMessagePopover: {
         allErrors: 'Tudo',
         defaultErrors: {
-            email: 'O e-mail é inválido.',
+            email: 'O e-mail é inválido',
             max: 'O campo excede o valor máximo',
-            maxLength: 'O campo excede o tamanho máximo',
+            maxLength: 'O campo excede o comprimento máximo',
             min: 'O valor do campo é inferior ao permitido',
-            minLength: 'O tamanho do campo é inferior ao permitido',
+            minLength: 'O comprimento do campo é inferior ao permitido',
             pattern: 'O valor do campo é inválido',
             required: 'O campo é obrigatório',
             requiredTrue: 'O campo é obrigatório'
@@ -622,7 +619,7 @@ export default {
         public: 'Público',
         applyAutomatically: 'Aplicar automaticamente',
         requiredFieldError: 'Este campo é obrigatório.',
-        nameTakenFieldError: 'Já existe uma variante com esse nome. Escolha um nome diferente.',
+        nameTakenFieldError: 'Já existe uma variante com este nome. Escolha um nome diferente.',
         cancel: 'Cancelar',
         manageViews: 'Gerenciar visualizações',
         markAsFavourite: 'Marcar como favorito',
@@ -645,10 +642,10 @@ export default {
         noData: 'Não há dados'
     },
     btpSearchField: {
-        searchButtonLabel: 'Pesquisar',
+        searchButtonLabel: 'Procurar',
         clearButtonLabel: 'Limpar',
-        searchInputPlaceholder: 'Pesquisar',
-        searchInputAriaLabel: 'Pesquisar'
+        searchInputPlaceholder: 'Procurar',
+        searchInputAriaLabel: 'Procurar'
     },
     btpToolHeader: {
         menuButtonAriaLabel: 'Botão de menu'
