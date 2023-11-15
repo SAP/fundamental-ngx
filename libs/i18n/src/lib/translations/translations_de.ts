@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Do not modify, it's automatically created. Modify translations_de-DE.properties instead
+// Do not modify, it's automatically created. Modify translations_de.properties instead
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Jahr auswählen',

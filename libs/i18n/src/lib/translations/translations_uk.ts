@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Do not modify, it's automatically created. Modify translations_uk-UA.properties instead
+// Do not modify, it's automatically created. Modify translations_uk.properties instead
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Оберіть рік',
@@ -236,7 +236,7 @@ export default {
         messagesTeamRemoved: '1 команду видалено',
         messagesErrorBuildGraph: 'Під час спроби побудувати графік сталася помилка. Перевірте вхідні дані.',
         messagesUndoAction: 'Скасувати',
-        nodeMembersCount: '{ count, plural, one {1 член}, few {# члена}, other {# членів} } команди',
+        nodeMembersCount: '{ count, plural, one {1 член} few {# члена} other {# членів} } команди',
         nodeVariousTeams: 'Різні команди',
         nodeStatusDueToday: 'Термін виконання сьогодні',
         nodeStatusDueInXDays: 'Термін виконання через { count, plural, one {1 день} few {# дні} other {# днів} }',
@@ -564,44 +564,48 @@ export default {
         messageUpdateVersionSuccess: 'Версія {folderName} оновлена.',
         messageFileRenameFailed: 'Не вдалося перейменувати "{from}" на "{to}."',
         messageFileRenameSuccess: '{from}" перейменовано на "{to}".',
-        folderNamePluralization: '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} }',
-        fileNamePluralization: '{ filesCount, plural, one {1 файл} few {# файли} other {# файлів} }',
         messageRemoveFoldersAndFilesFailed:
-            'Не вдалося видалити {@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization}.',
+            'Не вдалося видалити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} }.',
         messageRemoveFoldersAndFilesSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} видалено.',
-        messageRemoveFoldersFailed: 'Не вдалося видалити {@@platformUploadCollection.folderNamePluralization}.',
-        messageRemoveFoldersSuccess: 'Видалено {@@platformUploadCollection.folderNamePluralization}.',
-        messageRemoveFilesFailed: 'Не вдалося видалити {@@platformUploadCollection.fileNamePluralization}.',
-        messageRemoveFilesSuccess: 'Видалено {@@platformUploadCollection.fileNamePluralization}.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } видалено.',
+        messageRemoveFoldersFailed:
+            'Не вдалося видалити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} }.',
+        messageRemoveFoldersSuccess: 'Видалено { foldersCount, plural, one {1 папку} few {# папки} other {# папок} }.',
+        messageRemoveFilesFailed:
+            'Не вдалося видалити { filesCount, plural, one {1 файл} few {# файли} other {# файлів} }.',
+        messageRemoveFilesSuccess: 'Видалено { filesCount, plural, one {1 файл} few {# файли} other {# файлів} }.',
         messageRemoveFileOrFolderFailed: 'Не вдалося видалити {name}.',
         messageRemoveFileOrFolderSuccess: '{name} видалено.',
         messageMoveFoldersAndFilesFailed:
-            'Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} до {to}.',
+            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до {to}.',
         messageMoveFoldersAndFilesSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} переміщено в {to}.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено в {to}.',
         messageMoveFoldersFailed:
-            'Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} до {to}.',
-        messageMoveFoldersSuccess: '{@@platformUploadCollection.folderNamePluralization} переміщено до {to}.',
-        messageMoveFilesFailed: 'Не вдалося перемістити {@@platformUploadCollection.fileNamePluralization} до {to}.',
-        messageMoveFilesSuccess: '{@@platformUploadCollection.fileNamePluralization} переміщено до {to}.',
+            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } до {to}.',
+        messageMoveFoldersSuccess:
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } переміщено до {to}.',
+        messageMoveFilesFailed:
+            'Не вдалося перемістити { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до {to}.',
+        messageMoveFilesSuccess:
+            '{ filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено до {to}.',
         messageMoveFileOrFolderFailed: 'Не вдалося перемістити {name} до {to}.',
         messageMoveFileOrFolderSuccess: '{name} переміщено в {to}.',
         messageMoveRootFoldersAndFilesFailed:
-            'Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} до всіх файлів.',
+            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до всіх файлів.',
         messageMoveRootFoldersAndFilesSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} і {@@platformUploadCollection.fileNamePluralization} переміщено до всіх файлів.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } і { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено до всіх файлів.',
         messageMoveRootFoldersFailed:
-            'Не вдалося перемістити {@@platformUploadCollection.folderNamePluralization} до всіх файлів.',
+            'Не вдалося перемістити { foldersCount, plural, one {1 папку} few {# папки} other {# папок} } до всіх файлів.',
         messageMoveRootFoldersSuccess:
-            '{@@platformUploadCollection.folderNamePluralization} переміщено до всіх файлів.',
+            '{ foldersCount, plural, one {1 папку} few {# папки} other {# папок} } переміщено до всіх файлів.',
         messageMoveRootFilesFailed:
-            'Не вдалося перемістити {@@platformUploadCollection.fileNamePluralization} до всіх файлів.',
-        messageMoveRootFilesSuccess: '{@@platformUploadCollection.fileNamePluralization} переміщено до всіх файлів.',
+            'Не вдалося перемістити { filesCount, plural, one {1 файл} few {# файли} other {# файлів} } до всіх файлів.',
+        messageMoveRootFilesSuccess:
+            '{ filesCount, plural, one {1 файл} few {# файли} other {# файлів} } переміщено до всіх файлів.',
         messageMoveRootFileOrFolderFailed: 'Не вдалося перемістити {name} до всіх файлів.',
         messageMoveRootFileOrFolderSuccess: '{name} переміщено до всіх файлів.',
         messageFileTypeMismatchPlural:
-            '{filesCount, plural, one {1 файл}, few {# файли}, other {# файлів} } мають неправильний тип. Дозволені типи: {allowedTypes}.',
+            '{filesCount, plural, one {1 файл} few {# файли} other {# файлів} } мають неправильний тип. Дозволені типи: {allowedTypes}.',
         messageFileTypeMismatchSingular: 'Файл "{fileName}" має неправильний тип. Дозволені типи: {allowedTypes}.',
         messageFileSizeExceededPlural:
             '{ filesCount, plural, one {1 файл перевищує} few {# файли перевищують} other {# файлів перевищують} } максимальний розмір файлу. Дозволений максимальний розмір файлу: {maxFileSize}.',

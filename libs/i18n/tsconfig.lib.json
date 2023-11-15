@@ -9,7 +9,7 @@
         "target": "ES2022",
         "useDefineForClassFields": false
     },
-    "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts"],
+    "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.test.ts", "src/lib/utils/translation-tester.ts"],
     "files": ["./src/index.ts"],
     "include": ["**/*.ts"],
     "angularCompilerOptions": {

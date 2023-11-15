@@ -1,5 +1,5 @@
 /* eslint-disable */
-// Do not modify, it's automatically created. Modify translations_sq-AL.properties instead
+// Do not modify, it's automatically created. Modify translations_sq.properties instead
 export default {
     coreCalendar: {
         yearSelectionLabel: 'Zgjidhni vitin',
