@@ -183,6 +183,7 @@ export class IconTNTExampleComponent {
         'task-optional',
         'task-done',
         'ai-1',
-        'ai-2'
+        'ai-2',
+        'bound-validation-rule'
     ];
 }
