@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FocusableListModule } from '@fundamental-ngx/cdk';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
@@ -8,7 +9,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
     selector: 'fd-segmented-button-complex-example',
     templateUrl: './segmented-button-complex-example.component.html',
     standalone: true,
-    imports: [SegmentedButtonModule, FormsModule, NgFor, ButtonComponent]
+    imports: [SegmentedButtonModule, FormsModule, NgFor, ButtonComponent, FocusableListModule]
 })
 export class SegmentedButtonComplexExampleComponent {
     values: string[] = ['first', 'second', 'third'];

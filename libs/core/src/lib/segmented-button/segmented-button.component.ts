@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FocusableListDirective, KeyUtil, destroyObservable } from '@fundamental-ngx/cdk/utils';
+import { FocusableListDirective, KeyUtil, RtlService, destroyObservable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { Subject, asyncScheduler, fromEvent, merge } from 'rxjs';
 import { filter, observeOn, startWith, takeUntil, tap } from 'rxjs/operators';
@@ -94,9 +94,13 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         private readonly _changeDetRef: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _destroyRef: DestroyRef,
-        @Optional() @Host() private focusableList: FocusableListDirective
+        @Optional() @Host() private _focusableList: FocusableListDirective,
+        private _rtlService: RtlService
     ) {
-        this.focusableList.navigationDirection = 'horizontal';
+        this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
+        this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
+            this._focusableList.contentDirection = isRtl ? 'rtl' : 'ltr';
+        });
     }
 
     /** @hidden */
