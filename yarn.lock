@@ -2823,10 +2823,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@fundamental-styles/cx@0.32.0-rc.7":
-  version "0.32.0-rc.7"
-  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.32.0-rc.7.tgz#41a8a2827ce759c99144c05ad6bbe920ccd69070"
-  integrity sha512-DpMffKdX3uQ5Tc/JqpEr3R6jTvFn4YD3V2YkfeM5QvvbilVRkaNUDzJ9zozHWc4t0WvqqEyttlk+xms1Lxu3KA==
+"@fundamental-styles/cx@0.32.0-rc.14":
+  version "0.32.0-rc.14"
+  resolved "https://registry.yarnpkg.com/@fundamental-styles/cx/-/cx-0.32.0-rc.14.tgz#f72303ba81173ae87951ad7b97ac73741bdb7d8d"
+  integrity sha512-BsceGOBXkceCcKyGcaTx9l5S34jXAYil3BL9mm77l/HK8Y8yD97eND0uP8lkxJwfzCX3KWBoHeOAAdVjstojnA==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -3943,20 +3943,15 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sap-theming/theming-base-content@11.7.0":
-  version "11.7.0"
-  resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.7.0.tgz#381833a4d4a9da570514d2e56a45cb9db3cc5b8c"
-  integrity sha512-CeKhmXY2b8ya+RinaasLDyJ5+nmJbb00m4R8j7jQKVC6jbjs3k1X9cDtmiR/ayy6ASW/pTH4AjsolJrzeesRLg==
-
-"@sap-theming/theming-base-content@^11.8.0":
+"@sap-theming/theming-base-content@11.8.0", "@sap-theming/theming-base-content@^11.8.0":
   version "11.8.0"
   resolved "https://registry.yarnpkg.com/@sap-theming/theming-base-content/-/theming-base-content-11.8.0.tgz#9c0c04888182d98c3ef3ffdf0172affccfb05645"
   integrity sha512-ZrVle45GeK/dLRZWg8HcK4eNTrzgQCU+gW7kjeXoprlCDag88ZBQ9sQM+Bpnl3IDDyP1LN/yqC/d1g1bree80A==
 
-"@sap-ui/common-css@0.32.0-rc.7":
-  version "0.32.0-rc.7"
-  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.32.0-rc.7.tgz#d5bf6db475734b0328216124be72daa5f47bd5a2"
-  integrity sha512-I/6r9Rn3AmVQ57tOq2Gl5CBuvZkj4KNrLMVis8mciLxKMZG7QO/ZjYHsb60WKDDpBmQNDdW4T75J3XWMBh1JFA==
+"@sap-ui/common-css@0.32.0-rc.14":
+  version "0.32.0-rc.14"
+  resolved "https://registry.yarnpkg.com/@sap-ui/common-css/-/common-css-0.32.0-rc.14.tgz#eb9d591358bf175ac3a3e86483ee10f63dfb96c7"
+  integrity sha512-JfZE0AL6cDNGNGv3YaLVGZ9XP8xuf5VeIVa83ljkHm4FfWd394JygaPViJ2mGKavmhof26zcRfFi9iTc4i23xg==
   dependencies:
     "@sap-theming/theming-base-content" "^11.8.0"
 
@@ -9690,10 +9685,10 @@ functions-have-names@^1.2.2, functions-have-names@^1.2.3:
   resolved "https://registry.yarnpkg.com/functions-have-names/-/functions-have-names-1.2.3.tgz#0404fe4ee2ba2f607f0e0ec3c80bae994133b834"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-fundamental-styles@0.32.0-rc.7:
-  version "0.32.0-rc.7"
-  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.32.0-rc.7.tgz#d5b5ef52b20ecbb8e45eff3817992e2214b7d76c"
-  integrity sha512-727Z5LRnc/cSee9b6A12zZE1V9DcBp8QnrdsgchIEPkpv34EAvnYCIwcNzjNB7wqIgfg7ARRqsta0ARDXbrQow==
+fundamental-styles@0.32.0-rc.14:
+  version "0.32.0-rc.14"
+  resolved "https://registry.yarnpkg.com/fundamental-styles/-/fundamental-styles-0.32.0-rc.14.tgz#b7308746cf880dfc771cac315e384163aef86e7b"
+  integrity sha512-TWIk1MdbPcbYRR+LtJ5xPoKbby/IkuqyKZctlU9N5sAcajacRsWrEnoeTIz5rmSK2tFUluHLC7IpflKHbKeYeQ==
 
 gauge@^4.0.3:
   version "4.0.4"
