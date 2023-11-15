@@ -31,6 +31,8 @@
                 [glyph]="action.glyph"
                 [callback]="action.callback"
                 [label]="action.label"
+                [title]="action.title"
+                [ariaLabel]="!action.notificationCount ? action.ariaLabel : ''"
                 [notificationCount]="action.notificationCount"
                 [notificationLabel]="action.notificationLabel"
             ></fd-shellbar-action>

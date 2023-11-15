@@ -6,6 +6,8 @@
         fdCozy
         [glyph]="glyph"
         (click)="callback ? callback($event) : ''"
+        [attr.title]="title"
+        [ariaLabel]="ariaLabel"
     >
         <span *ngIf="notificationCount" class="fd-button__badge" [attr.aria-label]="notificationLabel">
             {{ notificationCount }}

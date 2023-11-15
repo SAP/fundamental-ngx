@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { NgIf } from '@angular/common';
-import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
+import { FD_SHELLBAR_ACTION_COMPONENT } from '../tokens';
 
 /**
  * The component that represents a shellbar action.
@@ -51,4 +51,12 @@ export class ShellbarActionComponent {
     /** Represents the number of notifications. */
     @Input()
     notificationCount: number;
+
+    /** title of the action button. */
+    @Input()
+    title: string;
+
+    /** aria-label of the action button */
+    @Input()
+    ariaLabel: string;
 }

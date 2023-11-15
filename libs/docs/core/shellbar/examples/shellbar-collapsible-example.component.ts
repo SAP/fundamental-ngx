@@ -172,6 +172,8 @@ export class ShellbarCollapsibleExampleComponent {
             glyph: 'pool',
             callback: this.actionPoolCallback,
             label: 'Pool',
+            title: 'Pool',
+            ariaLabel: 'Pool',
             notificationCount: 3,
             notificationLabel: 'Pool Count'
         },
@@ -179,6 +181,8 @@ export class ShellbarCollapsibleExampleComponent {
             glyph: 'bell',
             callback: this.actionNotificationCallback,
             label: 'Notifications',
+            title: 'Notifications',
+            ariaLabel: 'Notifications',
             notificationCount: 12,
             notificationLabel: 'Unread Notifications'
         }
