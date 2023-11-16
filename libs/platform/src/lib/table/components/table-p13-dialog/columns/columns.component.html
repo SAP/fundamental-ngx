@@ -23,6 +23,7 @@
                 [inputText]="(_searchQuerySubject | async) || ''"
                 [suggestions]="[]"
                 (inputChange)="_searchInputChange($event)"
+                fdkInitialFocus
             ></fdp-search-field>
 
             <fd-toolbar-spacer></fd-toolbar-spacer>
@@ -125,7 +126,6 @@
 
         <fd-button-bar
             fdType="transparent"
-            fdkInitialFocus
             [label]="'platformTable.P13ColumnsDialogCancelBtnLabel' | fdTranslate"
             (click)="cancel()"
         ></fd-button-bar>
