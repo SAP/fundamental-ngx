@@ -100,10 +100,21 @@ describe('FileUploaderComponent', () => {
 
     it('should handle clear', () => {
         jest.spyOn(component, 'onChange');
+        jest.spyOn(component, 'onChange');
+        jest.spyOn(component, 'setInputValue');
         component.clear();
         expect(component.inputRef.nativeElement.value).toEqual('');
+        expect(component.inputRef.nativeElement.placeholder).toEqual('');
+        expect(component.inputRef.nativeElement.title).toEqual('');
         expect(component.validFiles).toEqual([]);
         expect(component.invalidFiles).toEqual([]);
+        expect(component.setInputValue).toHaveBeenCalledWith([]);
+    });
+
+    it('should call clear when files array is set to empty', () => {
+        jest.spyOn(component, 'clear');
+        component.writeValue([]);
+        expect(component.clear).toHaveBeenCalled();
     });
 
     it('should be manageable width', () => {
