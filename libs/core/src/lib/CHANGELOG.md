@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.1...v0.47.3-rc.2) (2023-11-16)
+
+
+### Bug Fixes
+
+* **core:** fixed switch default off icon ([#10976](https://github.com/SAP/fundamental-ngx/issues/10976)) ([95655ec](https://github.com/SAP/fundamental-ngx/commit/95655ecda29059b7fa48245dfe2a977007867776))
+
+
+
+
+
 ## [0.47.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.0...v0.47.3-rc.1) (2023-11-16)
 
 **Note:** Version bump only for package @fundamental-ngx/core
