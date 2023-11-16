@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AutoCompleteModule, MultiAnnouncerModule, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { AutoCompleteModule, PipeModule } from '@fundamental-ngx/cdk/utils';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityModule } from '@fundamental-ngx/core/content-density';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -13,6 +13,7 @@ import { TokenModule } from '@fundamental-ngx/core/token';
 import { I18nModule } from '@fundamental-ngx/i18n';
 import { DeprecatedMultiInputCompactDirective } from './deprecated-multi-input-compact.directive';
 import { MultiInputComponent } from './multi-input.component';
+import { MultiAnnouncerModule } from '@fundamental-ngx/core/multi-combobox';
 
 @NgModule({
     declarations: [MultiInputComponent, DeprecatedMultiInputCompactDirective],
