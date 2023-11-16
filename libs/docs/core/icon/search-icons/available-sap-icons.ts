@@ -14,7 +14,7 @@ export interface FdIconDocsType {
     groups: string[];
     tags: string[];
     font: string;
-    searchField: string;
+    searchMatches?: Record<string, Array<[number, number]> | Record<number, Array<[number, number]>>>;
 }
 
 export const availableSapIcons: FdIconDocsType[] = [];
@@ -24,8 +24,7 @@ const toFdDocIconType = ({ names, groups, tags }: SAPIconType, font: string): Fd
     names,
     groups,
     tags,
-    font,
-    searchField: [tags.join(','), groups.join(',')].join(' ')
+    font
 });
 
 Object.values(sapIcons).forEach((icon: SAPIconType) => {

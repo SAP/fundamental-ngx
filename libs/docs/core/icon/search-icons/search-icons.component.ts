@@ -1,6 +1,7 @@
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -21,7 +22,7 @@ import {
     TableVirtualScrollDirective
 } from '@fundamental-ngx/platform/table';
 import Fuse from 'fuse.js';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { FdIconDocsType, availableSapIcons } from './available-sap-icons';
 
 @Component({
@@ -61,13 +62,21 @@ export class SearchIconsComponent {
 
     private copyService = inject(CopyService);
     private messageStripAlertService = inject(MessageStripAlertService);
+    private domSanitizer = inject(DomSanitizer);
+    iconType!: FdIconDocsType;
 
-    copyTheCode(row: FdIconDocsType) {
+    protected copyTheCode(row: FdIconDocsType) {
         this._copy(`<fd-icon font="${row.font}" glyph="${row.name}" />`);
     }
 
-    copyTheName(row: FdIconDocsType) {
+    protected copyTheName(row: FdIconDocsType) {
         this._copy(row.name);
+    }
+
+    protected highlightedInfoLabelHTML(s: string) {
+        return this.domSanitizer.bypassSecurityTrustHtml(
+            '<span class="highlighted-text fd-info-label__text">' + s + '</span>'
+        );
     }
 
     private _copy(text: string) {
@@ -93,10 +102,11 @@ class IconsDataSourceProvider extends TableDataProvider<FdIconDocsType> {
     constructor(data: FdIconDocsType[]) {
         super();
         this.fuse = new Fuse<FdIconDocsType>(data, {
-            keys: ['name', 'searchField'],
+            includeMatches: true,
+            keys: ['name', 'tags', 'groups'],
             shouldSort: true,
             threshold: 0.5,
-            minMatchCharLength: 3
+            minMatchCharLength: 2
         });
         this.originalData = data;
     }
@@ -106,6 +116,27 @@ class IconsDataSourceProvider extends TableDataProvider<FdIconDocsType> {
             return of(this.originalData);
         }
         this._searchInput$.next(tableState.searchInput.text);
-        return of(this.fuse.search(tableState.searchInput.text).map(({ item }) => item));
+        return of(
+            this.fuse.search(tableState.searchInput.text).map(
+                ({ item, matches }) =>
+                    ({
+                        ...item,
+                        searchMatches: (matches || []).reduce((acc, next) => {
+                            if (next.refIndex !== undefined) {
+                                const existingVals = acc[next.key as string] || {};
+                                acc[next.key as string] = {
+                                    ...existingVals,
+                                    [next.refIndex]: [...(existingVals[next.refIndex] || []), ...next.indices]
+                                };
+                                return acc;
+                            } else {
+                                const existingVals = acc[next.key as string] || [];
+                                acc[next.key as string] = [...existingVals, ...next.indices];
+                            }
+                            return acc;
+                        }, {})
+                    } as FdIconDocsType)
+            )
+        ).pipe(tap((r) => console.log(r)));
     }
 }
