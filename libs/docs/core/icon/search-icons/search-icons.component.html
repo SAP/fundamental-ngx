@@ -1,0 +1,44 @@
+<fdp-table
+    [dataSource]="source"
+    [initialVisibleColumns]="['icon', 'name', 'font', 'actions']"
+    [virtualScroll]="true"
+    bodyHeight="600px"
+>
+    <fdp-table-toolbar />
+    <fdp-column name="icon" label="" key="icon">
+        <fd-avatar
+            *fdpCellDef="let icon"
+            [glyph]="icon.name"
+            [font]="icon.font"
+            size="s"
+            [circle]="true"
+            [style.margin]="'1rem auto'"
+        />
+    </fdp-column>
+    <fdp-column name="name" key="name" label="Name">
+        <ng-template fdpCellDef let-icon>
+            <ng-container *ngIf="searchTerm(); else name">
+                <span class="highlighted-text" [innerHTML]="icon.name | highlight : searchTerm() : true"></span>
+            </ng-container>
+            <ng-template #name>
+                {{ icon.name }}
+            </ng-template>
+        </ng-template>
+    </fdp-column>
+
+    <fdp-column name="font" key="font" label="Font"></fdp-column>
+    <fdp-column name="actions" key="actions" label="Actions">
+        <ng-template fdpCellDef let-row>
+            <ng-container fdCompact>
+                <button
+                    fd-button
+                    glyph="source-code"
+                    label="Copy code"
+                    (click)="copyTheCode(row)"
+                    [style.margin-right.rem]="1"
+                ></button>
+                <button fd-button glyph="signature" label="Copy name" (click)="copyTheName(row)"></button>
+            </ng-container>
+        </ng-template>
+    </fdp-column>
+</fdp-table>

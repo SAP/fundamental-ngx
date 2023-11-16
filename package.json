@@ -59,6 +59,7 @@
         "focus-trap": "7.1.0",
         "focus-visible": "5.2.0",
         "fundamental-styles": "0.32.0",
+        "fuse.js": "7.0.0",
         "highlight.js": "11.7.0",
         "intl": "1.2.5",
         "intl-messageformat": "10.5.2",
@@ -85,14 +86,15 @@
         "@babel/runtime": "7.21.0",
         "@commitlint/cli": "17.7.1",
         "@commitlint/config-conventional": "17.7.0",
-        "@sap-ui/common-css": "0.32.0",
         "@jsdevtools/npm-publish": "2.2.2",
         "@nx/devkit": "17.0.3",
+        "@nx/eslint": "17.0.3",
         "@nx/eslint-plugin": "17.0.3",
         "@nx/jest": "17.0.3",
         "@nx/js": "17.0.3",
         "@nx/plugin": "17.0.3",
         "@nx/workspace": "17.0.3",
+        "@sap-ui/common-css": "0.32.0",
         "@schematics/angular": "16.2.4",
         "@swc-node/register": "1.6.8",
         "@swc/cli": "0.1.62",
@@ -168,8 +170,7 @@
         "wait-on": "6.0.1",
         "wdio-axe": "2.2.3",
         "wdio-chromedriver-service": "6.0.4",
-        "webdriverio": "7.27.0",
-        "@nx/eslint": "17.0.3"
+        "webdriverio": "7.27.0"
     },
     "lint-staged": {
         "*": [
