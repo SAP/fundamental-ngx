@@ -6,6 +6,7 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 import { SegmentedButtonComponent } from './segmented-button.component';
 import { SegmentedButtonModule } from './segmented-button.module';
+import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 const isSelectedClass = 'fd-button--toggled';
 
@@ -42,6 +43,7 @@ describe('SegmentedButtonComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [HostComponent],
+            providers: [RtlService],
             imports: [SegmentedButtonModule, ButtonModule]
         }).compileComponents();
     }));
