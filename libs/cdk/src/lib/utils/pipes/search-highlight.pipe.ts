@@ -7,15 +7,27 @@ import { escape } from 'lodash-es';
 })
 export class SearchHighlightPipe implements PipeTransform {
     /** Highlight search term in string. */
-    transform(value: string, args: string, active: boolean = true, includeSpans: boolean = false): string {
+    transform(
+        value: string,
+        matches: string | Array<[number, number]>,
+        active: boolean = true,
+        includeSpans: boolean = false
+    ): string {
         value = escape(value);
         let result: string = value;
-        if (args && value && active) {
-            const testStr: string = escape(args.trim().toLowerCase());
-            const startIndex = value.toLowerCase().indexOf(testStr);
-            if (startIndex !== -1) {
-                const matchingString = value.substr(startIndex, testStr.length);
-                result = value.replace(matchingString, '<strong>' + matchingString + '</strong>');
+        if (value && active && matches) {
+            if (Array.isArray(matches)) {
+                matches.forEach((match) => {
+                    const matchingString = value.substring(match[0], match[1] + 1);
+                    result = result.replace(matchingString, '<strong>' + matchingString + '</strong>');
+                });
+            } else if (typeof matches === 'string') {
+                const testStr: string = escape(matches.trim().toLowerCase());
+                const startIndex = value.toLowerCase().indexOf(testStr);
+                if (startIndex !== -1) {
+                    const matchingString = value.substring(startIndex, testStr.length);
+                    result = value.replace(matchingString, '<strong>' + matchingString + '</strong>');
+                }
             }
         }
         if (includeSpans) {

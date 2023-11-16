@@ -1,4 +1,11 @@
 <ul fd-tab-nav>
+    <li fd-tab-item *ngFor="let customTab of preCustomTabs">
+        <a fd-tab-link [routerLink]="customTab.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+            <span fd-tab-tag>
+                {{ customTab.title }}
+            </span>
+        </a>
+    </li>
     <li fd-tab-item>
         <a
             fd-tab-link
@@ -19,6 +26,13 @@
     <li fd-tab-item *ngIf="hasI18n">
         <a fd-tab-link routerLink="./i18n" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
             <span fd-tab-tag>I18n</span>
+        </a>
+    </li>
+    <li fd-tab-item *ngFor="let customTab of postCustomTabs">
+        <a fd-tab-link [routerLink]="customTab.link" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+            <span fd-tab-tag>
+                {{ customTab.title }}
+            </span>
         </a>
     </li>
 </ul>

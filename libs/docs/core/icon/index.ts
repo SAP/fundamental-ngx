@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { IconDocsComponent } from './icon-docs.component';
 import { IconHeaderComponent } from './icon-header/icon-header.component';
+import { SearchIconsComponent } from './search-icons/search-icons.component';
 
 export const ROUTES: Routes = [
     {
@@ -10,6 +11,10 @@ export const ROUTES: Routes = [
             {
                 path: '',
                 component: IconDocsComponent
+            },
+            {
+                path: 'search',
+                component: SearchIconsComponent
             }
         ],
         data: {
