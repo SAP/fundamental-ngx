@@ -28,7 +28,7 @@ export class FdpCellDef<T = any> {
     constructor(public templateRef: TemplateRef<FdpCellDefContext<T>>) {}
 
     /** @hidden */
-    static ngTemplateContextGuard(dir: FdpCellDef, ctx: FdpCellDefContext): ctx is FdpCellDefContext {
+    static ngTemplateContextGuard<T>(dir: FdpCellDef<T>, ctx: FdpCellDefContext): ctx is FdpCellDefContext<T> {
         return true;
     }
 }

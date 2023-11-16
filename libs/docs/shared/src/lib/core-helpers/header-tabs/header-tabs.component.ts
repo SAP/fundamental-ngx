@@ -1,5 +1,5 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ExampleChildService } from '../../services/example-child.service';
@@ -12,9 +12,14 @@ import { SeparatorComponent } from '../seperator/seperator.component';
     styleUrls: ['./header-tabs.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [TabsModule, RouterLinkActive, RouterLink, NgIf, SeparatorComponent, AsyncPipe]
+    imports: [TabsModule, RouterLinkActive, RouterLink, NgIf, SeparatorComponent, AsyncPipe, NgForOf]
 })
 export class HeaderTabsComponent {
+    @Input()
+    preCustomTabs: { title: string; link: string }[] = [];
+    @Input()
+    postCustomTabs: { title: string; link: string }[] = [];
+
     hasI18n = inject(HAS_I18N);
 
     observedLink = inject(ExampleChildService, {

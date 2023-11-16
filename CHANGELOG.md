@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.0...v0.47.3-rc.1) (2023-11-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.47.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.2...v0.47.3-rc.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* **platform:** move initial focus to search input on p13 ([#10973](https://github.com/SAP/fundamental-ngx/issues/10973)) ([94d566f](https://github.com/SAP/fundamental-ngx/commit/94d566f0ae3d2560ac3e412038466aebf6d719a8))
+
+
+
+
+
 ## [0.47.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.2-rc.1...v0.47.2) (2023-11-15)
 
 **Note:** Version bump only for package fundamental-ngx
