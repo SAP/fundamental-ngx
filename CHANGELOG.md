@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.3...v0.47.4-rc.0) (2023-11-17)
+
+
+### Features
+
+* **core,platform:** dropdown control tabout strategy ([#10928](https://github.com/SAP/fundamental-ngx/issues/10928)) ([388d321](https://github.com/SAP/fundamental-ngx/commit/388d3219a1b57dd5e23eafa0792bbd3d61f20620))
+
+
+
+
+
+## [0.47.3](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.2...v0.47.3) (2023-11-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.47.3-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.1...v0.47.3-rc.2) (2023-11-16)
+
+
+### Bug Fixes
+
+* **core:** fixed switch default off icon ([#10976](https://github.com/SAP/fundamental-ngx/issues/10976)) ([95655ec](https://github.com/SAP/fundamental-ngx/commit/95655ecda29059b7fa48245dfe2a977007867776))
+
+
+
+
+
+## [0.47.3-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.0...v0.47.3-rc.1) (2023-11-16)
+
+**Note:** Version bump only for package fundamental-ngx
+
+
+
+
+
+## [0.47.3-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.2...v0.47.3-rc.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* **platform:** move initial focus to search input on p13 ([#10973](https://github.com/SAP/fundamental-ngx/issues/10973)) ([94d566f](https://github.com/SAP/fundamental-ngx/commit/94d566f0ae3d2560ac3e412038466aebf6d719a8))
+
+
+
+
+
 ## [0.47.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.2-rc.1...v0.47.2) (2023-11-15)
 
 **Note:** Version bump only for package fundamental-ngx

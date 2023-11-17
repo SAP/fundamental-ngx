@@ -36,7 +36,12 @@
                     {{ inactiveText }}
                 </span>
                 <ng-template #withIconOff>
-                    <i role="presentation" class="fd-switch__icon--off fd-switch__icon sap-icon--decline"></i>
+                    <i
+                        role="presentation"
+                        class="fd-switch__icon--off fd-switch__icon"
+                        [class.sap-icon--decline]="semantic"
+                        [class.sap-icon--less]="!semantic"
+                    ></i>
                 </ng-template>
             </div>
 

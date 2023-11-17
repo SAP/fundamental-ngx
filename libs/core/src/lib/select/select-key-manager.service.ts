@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, UP_ARROW, hasModifierKey } from '@angular/cdk/keycodes';
+import { Injectable } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
+import { takeUntil } from 'rxjs/operators';
 
-import { SelectInterface } from './select.interface';
 import { OptionsInterface } from './options.interface';
+import { SelectInterface } from './select.interface';
 
 @Injectable()
 export class SelectKeyManagerService {
@@ -30,7 +30,7 @@ export class SelectKeyManagerService {
             // tab focus fix for mobile
             if (!this._component.mobile) {
                 this._component.focus();
-                this._component.close();
+                this._component.close(false, true);
             }
         });
 

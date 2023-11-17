@@ -1,7 +1,6 @@
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
     EventEmitter,
@@ -157,8 +156,7 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
     /** @hidden */
     constructor(
         private _keyboardSupportService: KeyboardSupportService<ListFocusItem>,
-        private _cdr: ChangeDetectorRef,
-        private _contentDensityObserver: ContentDensityObserver
+        _contentDensityObserver: ContentDensityObserver
     ) {
         _contentDensityObserver.subscribe();
     }
@@ -195,6 +193,13 @@ export class ListComponent implements ListComponentInterface, ListUnreadIndicato
         } else {
             this._keyboardSupportService.keyManager.setActiveItem(index);
         }
+    }
+
+    /**
+     * @returns Currently active list item.
+     */
+    getActiveItem(): ListFocusItem | null {
+        return this._keyboardSupportService.keyManager.activeItem;
     }
 
     /** @hidden */

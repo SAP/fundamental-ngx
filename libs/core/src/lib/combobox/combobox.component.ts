@@ -54,7 +54,7 @@ import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteDirective, DisplayFnPipe, SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -137,7 +137,15 @@ let comboboxUniqueId = 0;
     ]
 })
 export class ComboboxComponent<T = any>
-    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, FormItemControl
+    implements
+        ComboboxInterface,
+        SingleDropdownValueControl,
+        ControlValueAccessor,
+        OnInit,
+        OnChanges,
+        AfterViewInit,
+        OnDestroy,
+        FormItemControl
 {
     /** Id for the Combobox. */
     @Input()
@@ -321,6 +329,14 @@ export class ComboboxComponent<T = any>
     /** Whether list item options should be rendered as byline. */
     @Input()
     byline = false;
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'closeAndSelect';
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
@@ -688,6 +704,13 @@ export class ComboboxComponent<T = any>
     /** @hidden */
     _close(): void {
         this.inputText = this._value ? this.inputText : '';
+        if (this.tabOutStrategy === 'closeAndSelect') {
+            const focusedItem = this.listComponent.getActiveItem();
+            if (focusedItem) {
+                this._handleClickActions(focusedItem.value);
+                return;
+            }
+        }
         this.isOpenChangeHandle(false);
         this.searchInputElement.nativeElement.focus();
     }

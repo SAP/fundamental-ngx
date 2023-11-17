@@ -14,4 +14,11 @@ import {
     standalone: true,
     imports: [DocPageComponent, HeaderComponent, DescriptionComponent, ImportComponent, HeaderTabsComponent]
 })
-export class IconHeaderComponent {}
+export class IconHeaderComponent {
+    customTabs = [
+        {
+            title: 'Search',
+            link: '/core/icon/search'
+        }
+    ];
+}
