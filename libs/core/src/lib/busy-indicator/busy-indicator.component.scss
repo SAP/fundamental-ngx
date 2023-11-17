@@ -13,7 +13,7 @@ $onlyChildBusyIndicator: '.fd-busy-indicator:first-child';
 }
 
 #{$siblingBusyIndicator} + .fd-busy-indicator-extended__label {
-    z-index: 2;
+    z-index: 11;
     transform: translate(-50%, 50%) !important;
 }
 
@@ -22,7 +22,7 @@ $onlyChildBusyIndicator: '.fd-busy-indicator:first-child';
 }
 
 .fd-busy-indicator {
-    z-index: 2;
+    z-index: 11;
 
     &__container {
         display: block;
