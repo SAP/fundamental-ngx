@@ -145,6 +145,7 @@
                     class="fd-combobox-list-item"
                     *ngFor="let term of group.value"
                     [selected]="isSelected(term)"
+                    [value]="term"
                     (keydown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"
                 >
@@ -165,6 +166,7 @@
                 [selected]="isSelected(term)"
                 (keydown)="onItemKeyDownHandler($event, term)"
                 (click)="onMenuClickHandler(term)"
+                [value]="term"
             >
                 <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ term: term }"></ng-container>
             </li>

@@ -39,7 +39,7 @@ import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
-import { FormFieldAdvancedStateMessage, FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
@@ -102,6 +102,7 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
 })
 export class SelectComponent<T = any>
     implements
+        SingleDropdownValueControl,
         ControlValueAccessor,
         SelectInterface,
         OnInit,
@@ -240,6 +241,14 @@ export class SelectComponent<T = any>
     /** Holds advanced message renderer with respect to state. */
     @Input()
     advancedStateMessage: Nullable<FormFieldAdvancedStateMessage>;
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'close';
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -517,8 +526,11 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    close(forceClose: boolean = false): void {
+    close(forceClose = false, tabOut = false): void {
         if (this._isOpen || forceClose) {
+            if (tabOut && this.tabOutStrategy === 'closeAndSelect') {
+                this._keyManagerService._keyManager.activeItem?._selectViaInteraction();
+            }
             this._isOpen = false;
             this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();
