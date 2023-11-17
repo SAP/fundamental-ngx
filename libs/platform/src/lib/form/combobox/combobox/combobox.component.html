@@ -108,6 +108,7 @@
         [style.maxHeight]="!mobile && maxHeight"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
         (keydown.tab)="_close()"
+        (keydown.shift.tab)="_close()"
     >
         <li
             *ngIf="stateMessage"
@@ -153,6 +154,7 @@
                     [tabindex]="0"
                     (keyDown)="handlePressEnter($event, optionItem)"
                     [selected]="isSelectedOptionItem(optionItem)"
+                    [value]="optionItem"
                 >
                     <ng-container
                         [ngTemplateOutlet]="listItem"
@@ -171,6 +173,7 @@
                 [tabindex]="0"
                 (keyDown)="handlePressEnter($event, optionItem)"
                 [selected]="isSelectedOptionItem(optionItem)"
+                [value]="optionItem"
             >
                 <ng-container
                     [ngTemplateOutlet]="listItem"
