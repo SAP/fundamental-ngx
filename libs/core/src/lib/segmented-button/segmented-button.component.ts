@@ -95,7 +95,7 @@ export class SegmentedButtonComponent implements AfterViewInit, ControlValueAcce
         private readonly _elementRef: ElementRef,
         private readonly _destroyRef: DestroyRef,
         @Optional() @Host() private _focusableList: FocusableListDirective,
-        private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService
     ) {
         this._focusableList.navigationDirection = this.vertical ? 'vertical' : 'horizontal';
         this._rtlService.rtl.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((isRtl: boolean) => {
