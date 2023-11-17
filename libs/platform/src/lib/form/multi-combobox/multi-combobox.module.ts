@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { DynamicComponentService, TemplateModule, PipeModule, MultiAnnouncerModule } from '@fundamental-ngx/cdk/utils';
+import { DynamicComponentService, TemplateModule, PipeModule } from '@fundamental-ngx/cdk/utils';
+import { MultiAnnouncerModule } from '@fundamental-ngx/core/multi-combobox';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
