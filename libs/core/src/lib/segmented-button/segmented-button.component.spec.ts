@@ -169,6 +169,7 @@ describe('Segmented button component CVA', () => {
         },
         testModuleMetadata: {
             declarations: [HostComponent],
+            providers: [RtlService],
             imports: [SegmentedButtonModule, ButtonModule] // <= importing the module for app-select
         },
         hostTemplate: {
