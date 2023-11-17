@@ -67,7 +67,7 @@ import {
     isString
 } from '@fundamental-ngx/platform/shared';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
 import { FDP_COMBOBOX_ITEM_DEF, FdpComboboxItemDef } from '../directives/combobox-item.directive';
@@ -76,7 +76,10 @@ export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
 
 @Directive()
-export abstract class BaseCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseCombobox
+    extends CollectionBaseInput
+    implements SingleDropdownValueControl, AfterViewInit, OnDestroy
+{
     /** @hidden Method to emit change event */
     abstract emitChangeEvent<K>(value: K): void;
 
@@ -190,6 +193,14 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     get value(): any {
         return super.getValue();
     }
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'closeAndSelect';
 
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -530,6 +541,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     _close(): void {
+        if (this.tabOutStrategy === 'closeAndSelect') {
+            const focusedItem = this.listComponent.getActiveItem();
+            if (focusedItem) {
+                this.handleOptionItem(focusedItem.value);
+                return;
+            }
+        }
         this.inputText = this.value ? this.inputText : '';
         this.searchInputElement.nativeElement.focus();
         this.isOpenChangeHandle(false);

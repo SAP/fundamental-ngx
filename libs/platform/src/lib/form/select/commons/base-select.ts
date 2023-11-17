@@ -24,7 +24,7 @@ import { ControlContainer, NgControl, NgForm } from '@angular/forms';
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import {
     ContentDensityService,
     FocusEscapeDirection,
@@ -66,7 +66,10 @@ export class FdpSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseSelect extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseSelect
+    extends CollectionBaseInput
+    implements SingleDropdownValueControl, AfterViewInit, OnDestroy
+{
     /** Provides maximum default height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -199,6 +202,14 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
      * */
     @Input()
     maxWidth?: number;
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'close';
 
     /** Data for suggestion list */
     @Input()

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OptionComponent } from '../../../select/option/option.component';
 import { SelectComponent } from '../../../select/select/select.component';
 import { BaseDynamicFormGeneratorControl } from '../../base-dynamic-form-generator-control';
 import { SelectDynamicFormFieldItem } from '../../interfaces/dynamic-form-item';
@@ -14,7 +13,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../../p
     changeDetection: ChangeDetectionStrategy.OnPush,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, SelectComponent, OptionComponent]
+    imports: [FormsModule, ReactiveFormsModule, SelectComponent]
 })
 export class DynamicFormGeneratorSelectComponent extends BaseDynamicFormGeneratorControl<SelectDynamicFormFieldItem> {
     /** @hidden */
