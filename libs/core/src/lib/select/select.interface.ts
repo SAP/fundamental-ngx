@@ -25,7 +25,7 @@ export interface SelectInterface<TOption = any> extends MobileMode {
     isOpenChange: EventEmitter<boolean>;
     valueChange: EventEmitter<any>;
 
-    close(forceClose?: boolean): void;
+    close(forceClose?: boolean, tabOut?: boolean): void;
     open(): void;
     focus(): void;
     blur(): void;

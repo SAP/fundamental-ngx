@@ -1,0 +1,88 @@
+<fdp-table
+    [dataSource]="source"
+    [initialVisibleColumns]="['icon', 'name', 'tags', 'groups', 'font', 'actions']"
+    [virtualScroll]="true"
+    [pageScrollingThreshold]="0"
+    bodyHeight="600px"
+    [rowHeight]="82"
+>
+    <fdp-table-toolbar />
+    <fdp-column name="icon" label="" key="icon">
+        <fd-avatar
+            *fdpCellDef="let icon"
+            [glyph]="icon.name"
+            [font]="icon.font"
+            size="s"
+            [circle]="true"
+            [style.margin]="'1rem auto'"
+        />
+    </fdp-column>
+    <fdp-column name="name" key="name" label="Name">
+        <ng-template fdpCellDef let-icon [fdpCellDefAs]="iconType">
+            <ng-container *ngIf="icon.searchMatches && icon.searchMatches['name']; else name">
+                <span
+                    class="highlighted-text"
+                    [innerHTML]="icon.name | highlight : $any(icon.searchMatches['name']) : true"
+                >
+                </span>
+            </ng-container>
+            <ng-template #name>
+                {{ icon.name }}
+            </ng-template>
+        </ng-template>
+    </fdp-column>
+
+    <fdp-column name="tags" key="tags" label="Tags">
+        <ng-template fdpCellDef let-icon [fdpCellDefAs]="iconType">
+            <ng-container *ngIf="icon.searchMatches && icon.searchMatches['tags']; else justTags">
+                <ng-container *ngFor="let tag of icon.tags; let index = index">
+                    <fd-info-label
+                        [color]="$any(icon.searchMatches['tags'][index])?.length > 0 ? '6' : '0'"
+                        [innerHTML]="
+                            highlightedInfoLabelHTML(tag | highlight : $any(icon.searchMatches['tags'][index]) : true)
+                        "
+                    />
+                </ng-container>
+            </ng-container>
+            <ng-template #justTags>
+                <fd-info-label *ngFor="let tag of icon.tags" [label]="tag" />
+            </ng-template>
+        </ng-template>
+    </fdp-column>
+
+    <fdp-column name="groups" key="groups" label="Groups">
+        <ng-template fdpCellDef let-icon [fdpCellDefAs]="iconType">
+            <ng-container *ngIf="icon.searchMatches && icon.searchMatches['groups']; else justGroups">
+                <ng-container *ngFor="let group of icon.groups; let index = index">
+                    <fd-info-label
+                        [color]="$any(icon.searchMatches['groups'][index])?.length > 0 ? '6' : '1'"
+                        [innerHTML]="
+                            highlightedInfoLabelHTML(
+                                group | highlight : $any(icon.searchMatches['groups'][index]) : true
+                            )
+                        "
+                    />
+                </ng-container>
+            </ng-container>
+            <ng-template #justGroups>
+                <fd-info-label color="1" *ngFor="let group of icon.groups" [label]="group" />
+            </ng-template>
+        </ng-template>
+    </fdp-column>
+
+    <fdp-column name="font" key="font" label="Font"></fdp-column>
+    <fdp-column name="actions" key="actions" label="Actions">
+        <ng-template fdpCellDef let-row>
+            <ng-container fdCompact>
+                <button
+                    fd-button
+                    glyph="source-code"
+                    label="Copy code"
+                    (click)="copyTheCode(row)"
+                    [style.margin-right.rem]="1"
+                ></button>
+                <button fd-button glyph="signature" label="Copy name" (click)="copyTheName(row)"></button>
+            </ng-container>
+        </ng-template>
+    </fdp-column>
+</fdp-table>

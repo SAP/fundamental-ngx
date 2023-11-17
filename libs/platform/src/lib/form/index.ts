@@ -108,7 +108,6 @@ export * from './radio-group/radio/radio.component';
 
 export * from './select/commons/base-select';
 export * from './select/models/select.models';
-export * from './select/option/option.component';
 export * from './select/select.config';
 export * from './select/select.module';
 export * from './select/select/select.component';
