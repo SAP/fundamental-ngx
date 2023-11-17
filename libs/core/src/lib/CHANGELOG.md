@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.1...v0.47.4-rc.2) (2023-11-17)
+
+
+### Bug Fixes
+
+* **core:** cannot clear file uploader ([#10975](https://github.com/SAP/fundamental-ngx/issues/10975)) ([dec1480](https://github.com/SAP/fundamental-ngx/commit/dec1480ab9c53b153c398ae5ad2920d8d4b09438))
+
+
+
+
+
 ## [0.47.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.0...v0.47.4-rc.1) (2023-11-17)
 
 
