@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.2...v0.47.4-rc.3) (2023-11-17)
+
+
+### Bug Fixes
+
+* **platform:** add cellFocused event and focusCell method to platform table ([#10965](https://github.com/SAP/fundamental-ngx/issues/10965)) ([1bc57db](https://github.com/SAP/fundamental-ngx/commit/1bc57dbc276b2b14fe992b300dc65e94b3c63a87))
+
+
+
+
+
 ## [0.47.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.1...v0.47.4-rc.2) (2023-11-17)
 
 **Note:** Version bump only for package @fundamental-ngx/platform
