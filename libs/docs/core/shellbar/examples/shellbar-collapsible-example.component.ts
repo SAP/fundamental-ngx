@@ -137,7 +137,7 @@ export class ShellbarCollapsibleExampleComponent {
             label: 'Pool',
             title: 'Pool',
             ariaLabel: 'Pool',
-            notificationCount: 3,
+            notificationCount: 0,
             notificationLabel: 'Pool Count'
         },
         {
