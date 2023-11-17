@@ -12,4 +12,8 @@ export class FileUploaderExampleComponent {
     handleFileSelection(files: File[]): void {
         alert(files.length + ' Files selected successfully!!!');
     }
+
+    resetFiles(): void {
+        this.files = [];
+    }
 }
