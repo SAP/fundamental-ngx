@@ -4,6 +4,8 @@
         fdType="transparent"
         class="fd-shellbar__button"
         fdCozy
+        [attr.title]="title"
+        [ariaLabel]="ariaLabel"
         [glyph]="glyph"
         (click)="callback ? callback($event) : ''"
     >

@@ -45,4 +45,12 @@ export class ShellbarActionComponent {
     /** Represents the number of notifications. */
     @Input()
     notificationCount: number;
+
+    /** title of the action button. */
+    @Input()
+    title: string;
+
+    /** aria-label of the action button */
+    @Input()
+    ariaLabel: string;
 }
