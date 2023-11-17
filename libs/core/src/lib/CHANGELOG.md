@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.3...v0.47.4-rc.0) (2023-11-17)
+
+
+### Features
+
+* **core,platform:** dropdown control tabout strategy ([#10928](https://github.com/SAP/fundamental-ngx/issues/10928)) ([388d321](https://github.com/SAP/fundamental-ngx/commit/388d3219a1b57dd5e23eafa0792bbd3d61f20620))
+
+
+
+
+
 ## [0.47.3](https://github.com/SAP/fundamental-ngx/compare/v0.47.3-rc.2...v0.47.3) (2023-11-16)
 
 **Note:** Version bump only for package @fundamental-ngx/core
