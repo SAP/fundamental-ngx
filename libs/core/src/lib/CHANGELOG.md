@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.47.4-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.2...v0.47.4-rc.3) (2023-11-17)
+
+**Note:** Version bump only for package @fundamental-ngx/core
+
+
+
+
+
+## [0.47.4-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.1...v0.47.4-rc.2) (2023-11-17)
+
+
+### Bug Fixes
+
+* **core:** cannot clear file uploader ([#10975](https://github.com/SAP/fundamental-ngx/issues/10975)) ([dec1480](https://github.com/SAP/fundamental-ngx/commit/dec1480ab9c53b153c398ae5ad2920d8d4b09438))
+
+
+
+
+
+## [0.47.4-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.47.4-rc.0...v0.47.4-rc.1) (2023-11-17)
+
+
+### Bug Fixes
+
+* **core:** busy indicator overlay displaying over the dots ([#10979](https://github.com/SAP/fundamental-ngx/issues/10979)) ([de0e1e7](https://github.com/SAP/fundamental-ngx/commit/de0e1e78fc50d883ae4c72fac11e490d2cabcd01))
+
+
+
+
+
 ## [0.47.4-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.47.3...v0.47.4-rc.0) (2023-11-17)
 
 

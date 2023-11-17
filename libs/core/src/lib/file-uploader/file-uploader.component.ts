@@ -195,13 +195,13 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
 
     /** @hidden */
     writeValue(files: File[]): void {
-        if (this._isEmpty()) {
-            return;
-        }
-        if (!files) {
+        if (files && files.length === 0) {
             this.clear();
+        } else if (this._isEmpty()) {
+            return;
+        } else {
+            this._propagateFiles();
         }
-        this._propagateFiles();
     }
 
     /** @hidden */
@@ -235,7 +235,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
     }
 
     /** @hidden */
-    setInputValue(selectedFiles: File[]): void {
+    setInputValue(selectedFiles: File[], fromClear = false): void {
         let fileName = '';
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
         if (!this.inputRefText) {
@@ -249,7 +249,9 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
             this.inputRefText.nativeElement.placeholder = this.placeholder;
             this.inputRefText.nativeElement.title = this.placeholder;
         }
-        this.inputRefText.nativeElement.focus();
+        if (!fromClear) {
+            this.inputRefText.nativeElement.focus();
+        }
     }
 
     /** @hidden */
@@ -273,18 +275,14 @@ export class FileUploaderComponent implements ControlValueAccessor, OnDestroy, F
      * Clears the files from the input.
      */
     public clear(): void {
-        if (this.inputRef) {
-            this.inputRef.nativeElement.value = '';
-        }
-        if (this.inputRefText) {
-            this.inputRefText.nativeElement.value = '';
-        }
         this.validFiles = [];
         this.invalidFiles = [];
+        this._propagateFiles();
     }
 
     /** @hidden */
     private _isEmpty(): boolean {
+        console.log('_isEmpty');
         return this.validFiles.length === 0 && this.invalidFiles.length === 0;
     }
 
