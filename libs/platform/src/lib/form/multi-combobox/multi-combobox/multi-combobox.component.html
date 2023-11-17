@@ -49,6 +49,8 @@
                 [tokenizerFocusable]="false"
                 class="fdp-multi-combobox-tokenizer-custom"
                 (moreClickedEvent)="moreClicked()"
+                fdMultiAnnouncer
+                [multiAnnouncerOptions]="_suggestions"
             >
                 <fd-token
                     [readOnly]="disabled"
@@ -90,8 +92,6 @@
                     [attr.aria-readonly]="readonly"
                     [attr.aria-required]="required"
                     class="fd-tokenizer__input"
-                    fdkMultiAnnouncer
-                    [multiAnnouncerOptions]="_suggestions"
                 />
             </fd-tokenizer>
         </fd-input-group>

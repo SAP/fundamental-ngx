@@ -11,3 +11,4 @@ export * from './helpers';
 export * from './multi-combobox.token';
 export * from './models/multi-combobox.interface';
 export * from './models/selection-change.event';
+export * from './multi-announcer/multi-announcer.directive';
