@@ -6,7 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DestroyedService } from '@fundamental-ngx/cdk/utils';
+import { DestroyedService, FocusableCellPosition } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
@@ -67,6 +67,8 @@ export class PlatformTablePreservedStateExampleComponent {
 
     tableOffset = 0;
 
+    focusedCell: FocusableCellPosition;
+
     applyScroll = false;
 
     private readonly _destroy$ = inject(DestroyedService);
@@ -111,6 +113,10 @@ export class PlatformTablePreservedStateExampleComponent {
                 }
                 this.applyScroll = false;
                 this.table.tableScrollable.setScrollTop(this.tableOffset, false);
+
+                if (this.focusedCell) {
+                    this.table.focusCell(this.focusedCell);
+                }
             });
     }
 
@@ -153,6 +159,10 @@ export class PlatformTablePreservedStateExampleComponent {
 
     setTableOffset(offset: number): void {
         this.tableOffset = offset;
+    }
+
+    onCellFocused(event: any): void {
+        this.focusedCell = event;
     }
 }
 
