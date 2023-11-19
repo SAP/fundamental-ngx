@@ -93,7 +93,7 @@
         "@nx/jest": "17.0.3",
         "@nx/js": "17.0.3",
         "@nx/plugin": "17.0.3",
-        "@nx/workspace": "17.0.3",
+        "@nx/workspace": "17.1.2",
         "@sap-ui/common-css": "0.32.0",
         "@schematics/angular": "16.2.4",
         "@swc-node/register": "1.6.8",
