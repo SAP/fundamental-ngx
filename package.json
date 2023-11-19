@@ -90,7 +90,7 @@
         "@nx/devkit": "17.0.3",
         "@nx/eslint": "17.0.3",
         "@nx/eslint-plugin": "17.0.3",
-        "@nx/jest": "17.0.3",
+        "@nx/jest": "17.1.2",
         "@nx/js": "17.0.3",
         "@nx/plugin": "17.0.3",
         "@nx/workspace": "17.0.3",
