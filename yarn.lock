@@ -123,6 +123,18 @@
     "@angular-devkit/architect" "0.1602.4"
     rxjs "7.8.1"
 
+"@angular-devkit/core@16.2.10":
+  version "16.2.10"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-16.2.10.tgz#a095b86ae914445fdc83221e8c37d9355168a039"
+  integrity sha512-eo7suLDjyu5bSlEr4TluYkFm4v2PVLSAPgnau8XHHlN5Yg4P/BZ00ve7LA7C9S1gzRSCrxQhK5ki4rnoFTo5zg==
+  dependencies:
+    ajv "8.12.0"
+    ajv-formats "2.1.1"
+    jsonc-parser "3.2.0"
+    picomatch "2.3.1"
+    rxjs "7.8.1"
+    source-map "0.7.4"
+
 "@angular-devkit/core@16.2.4":
   version "16.2.4"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-16.2.4.tgz#fb8dd8d9af3f580d7bd4d3e31f0257e8c9b462b8"
@@ -134,6 +146,17 @@
     picomatch "2.3.1"
     rxjs "7.8.1"
     source-map "0.7.4"
+
+"@angular-devkit/schematics@16.2.10":
+  version "16.2.10"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-16.2.10.tgz#879fd0f130a00c88a57c9a8b64be3b4cd822771b"
+  integrity sha512-UCfPJKVNekb21bWRbzyx81tfHN3x8vU4ZMX/VA6xALg//QalMB7NOkkXBAssthnLastkyzkUtlvApTp2+R+EkQ==
+  dependencies:
+    "@angular-devkit/core" "16.2.10"
+    jsonc-parser "3.2.0"
+    magic-string "0.30.1"
+    ora "5.4.1"
+    rxjs "7.8.1"
 
 "@angular-devkit/schematics@16.2.4":
   version "16.2.4"
@@ -3954,6 +3977,15 @@
   integrity sha512-Oerll5+aVesdaack3frMeYTATs5ZLkgth/3BtaYwno0gNF9TeeJxdngotq3n42M8LQfNj+OddiXgm3Az39arWQ==
   dependencies:
     "@sap-theming/theming-base-content" "^11.9.0"
+
+"@schematics/angular@16.2.10":
+  version "16.2.10"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-16.2.10.tgz#1407a471367f0b7e1c37f9280a5756696ed8cffe"
+  integrity sha512-PXmoswvN7qknTsXDmEvhZ9UG+awwWnQ/1Jd/eqqQx08iAaAT81OsXj1bN7eSs6tEGBKGjPb6q2xzuiECAdymzg==
+  dependencies:
+    "@angular-devkit/core" "16.2.10"
+    "@angular-devkit/schematics" "16.2.10"
+    jsonc-parser "3.2.0"
 
 "@schematics/angular@16.2.4":
   version "16.2.4"
