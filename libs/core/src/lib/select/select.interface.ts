@@ -1,9 +1,8 @@
-import { EventEmitter, InjectionToken, QueryList, ElementRef } from '@angular/core';
+import { ElementRef, EventEmitter, InjectionToken, QueryList } from '@angular/core';
 
-import { OptionComponent } from './option/option.component';
-import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { OptionComponent } from './option/option.component';
 
 export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInterface');
 
@@ -25,7 +24,7 @@ export interface SelectInterface extends MobileMode {
     isOpenChange: EventEmitter<boolean>;
     valueChange: EventEmitter<any>;
 
-    close(forceClose?: boolean): void;
+    close(forceClose?: boolean, tabOut?: boolean): void;
     open(): void;
     focus(): void;
     blur(): void;

@@ -20,7 +20,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    forwardRef,
     Injector,
     Input,
     OnChanges,
@@ -32,7 +31,8 @@ import {
     TemplateRef,
     ViewChild,
     ViewContainerRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -53,7 +53,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { Overlay, RepositionScrollStrategy } from '@angular/cdk/overlay';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ComboboxItem } from './combobox-item';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
@@ -103,7 +103,15 @@ let comboboxUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComboboxComponent
-    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy, FormItemControl
+    implements
+        ComboboxInterface,
+        SingleDropdownValueControl,
+        ControlValueAccessor,
+        OnInit,
+        OnChanges,
+        AfterViewInit,
+        OnDestroy,
+        FormItemControl
 {
     /** Id for the Combobox. */
     @Input()
@@ -290,6 +298,14 @@ export class ComboboxComponent
     /** Whether list item options should be rendered as byline. */
     @Input()
     byline = false;
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'closeAndSelect';
 
     /** Event emitted when an item is clicked. Use *$event* to retrieve it. */
     @Output()
@@ -647,6 +663,13 @@ export class ComboboxComponent
     /** @hidden */
     _close(): void {
         this.inputText = this._value ? this.inputText : '';
+        if (this.tabOutStrategy === 'closeAndSelect') {
+            const focusedItem = this.listComponent.getActiveItem();
+            if (focusedItem) {
+                this._handleClickActions(focusedItem.value);
+                return;
+            }
+        }
         this.isOpenChangeHandle(false);
         this.searchInputElement.nativeElement.focus();
     }
