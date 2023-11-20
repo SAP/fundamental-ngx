@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
     AfterViewInit,
     Directive,
@@ -13,14 +14,13 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, FormControl, NgControl, NgForm } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subject, Subscription } from 'rxjs';
-import { BaseCVA } from '../models/cva';
-import { isValidControlState } from '../helpers/state';
-import { FormStates } from '../models/form-state';
-import { FormField, FormFieldControl } from '../models/form-field';
-import { FD_FORM_FIELD } from '../tokens/form-field.token';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
+import { filter, Subject, Subscription } from 'rxjs';
+import { isValidControlState } from '../helpers/state';
+import { BaseCVA } from '../models/cva';
+import { FormField, FormFieldControl } from '../models/form-field';
+import { FormStates } from '../models/form-state';
+import { FD_FORM_FIELD } from '../tokens/form-field.token';
 
 let randomId = 0;
 
@@ -31,54 +31,9 @@ let randomId = 0;
 export class CvaDirective<T = any>
     implements BaseCVA, FormFieldControl, OnInit, DoCheck, AfterViewInit, OnDestroy, ControlValueAccessor
 {
-    /**
-     * NgControl instance.
-     */
-    readonly ngControl = inject(NgControl, {
-        optional: true
-    });
-
-    /**
-     * Form container instance. Usually ngForm or FormGroup directives.
-     */
-    readonly controlContainer = inject(ControlContainer, {
-        optional: true,
-        skipSelf: true
-    });
-
-    /**
-     * Separate NgForm instance. For cases when formGroup is used with the form itself.
-     */
-    readonly ngForm = inject(NgForm, {
-        optional: true,
-        skipSelf: true
-    });
-
-    /**
-     * Element reference.
-     */
-    readonly elementRef = inject(ElementRef);
-
-    /** @hidden */
-    value: T;
-
-    /** @hidden */
-    constructor() {
-        if (this.ngControl) {
-            this.ngControl.valueAccessor = this;
-        }
-    }
-
-    /** @hidden */
-    private _defaultId = `fd-input-id-${randomId++}`;
-    /** @hidden */
-    private _disabled: boolean;
-    /** @hidden */
-    private _editable = true;
-
     /** ID for the Element */
     @Input()
-    id: string = this._defaultId;
+    id = `fd-input-id-${randomId++}`;
 
     /** Input placeholder */
     @Input()
@@ -98,6 +53,7 @@ export class CvaDirective<T = any>
             console.warn(`Provided value "${state}" is not a valid option for FormStates type`);
         }
     }
+
     get state(): FormStates {
         if (this._state) {
             return this._state;
@@ -109,17 +65,9 @@ export class CvaDirective<T = any>
 
         return this.formField?.getPriorityState() || 'error';
     }
-
     /** Holds the message with respect to state */
     @Input()
     stateMessage: Nullable<string>;
-
-    /**
-     * @hidden
-     * The state of the form control - applies css classes.
-     * Can be `success`, `error`, `warning`, `information` or 'default'
-     */
-    private _state: FormStates | undefined;
 
     /** Whether the input is disabled */
     @Input()
@@ -169,6 +117,16 @@ export class CvaDirective<T = any>
     @Input()
     name: string;
 
+    /** @hidden */
+    @Input()
+    value: T;
+
+    /**
+     * Emits when value changes.
+     */
+    @Output()
+    valueChange = new EventEmitter<T>();
+
     /**
      * Emits when change detection is needed.
      */
@@ -181,33 +139,11 @@ export class CvaDirective<T = any>
     @Output()
     markForCheck = new EventEmitter<void>();
 
-    /** @hidden */
-    protected _subscriptions = new Subscription();
-
     /**
      * Reference to internal Input element
      */
     @ViewChild('inputElementRef', { static: true, read: ElementRef })
     protected _elementRef: ElementRef;
-
-    /**
-     * See @FormFieldControl
-     */
-    focused = false;
-
-    /** Whether control has errors */
-    get controlInvalid(): boolean {
-        return this._controlInvalid;
-    }
-
-    /**
-     * @hidden
-     */
-    private _controlInvalid = false;
-    /**
-     * See @FormFieldControl
-     */
-    readonly stateChanges: Subject<any> = new Subject<any>();
 
     /** @hidden */
     readonly formField: FormField | null = inject(FD_FORM_FIELD, {
@@ -215,8 +151,81 @@ export class CvaDirective<T = any>
         optional: true
     });
 
+    /**
+     * See @FormFieldControl
+     */
+    readonly stateChanges: Subject<any> = new Subject<any>();
+
+    /**
+     * See @FormFieldControl
+     */
+    readonly writeValue$ = this.stateChanges.pipe(filter((change) => change === 'writeValue'));
+
+    /** Whether control has errors */
+    get controlInvalid(): boolean {
+        return this._controlInvalid;
+    }
+    /**
+     * See @FormFieldControl
+     */
+    focused = false;
+
     /** set when input field is mandatory form field */
     required: boolean;
+
+    /**
+     * NgControl instance.
+     */
+    readonly ngControl = inject(NgControl, {
+        optional: true
+    });
+
+    /**
+     * Form container instance. Usually ngForm or FormGroup directives.
+     */
+    readonly controlContainer = inject(ControlContainer, {
+        optional: true,
+        skipSelf: true
+    });
+
+    /**
+     * Separate NgForm instance. For cases when formGroup is used with the form itself.
+     */
+    readonly ngForm = inject(NgForm, {
+        optional: true,
+        skipSelf: true
+    });
+
+    /**
+     * Element reference.
+     */
+    readonly elementRef = inject(ElementRef);
+    /** @hidden */
+    protected _subscriptions = new Subscription();
+    /**
+     * @hidden
+     */
+    private _controlInvalid = false;
+
+    /**
+     * @hidden
+     * The state of the form control - applies css classes.
+     * Can be `success`, `error`, `warning`, `information` or 'default'
+     */
+    private _state: FormStates | undefined;
+
+    /** @hidden */
+    private _disabled: boolean;
+
+    /** @hidden */
+    private _editable = true;
+
+    /** @hidden */
+    constructor() {
+        if (this.ngControl) {
+            this.ngControl.valueAccessor = this;
+        }
+    }
 
     /** @hidden */
     onChange: (value: any) => void = () => {};
@@ -293,6 +302,7 @@ export class CvaDirective<T = any>
      */
     writeValue(value: T): void {
         this.value = value;
+        this.valueChange.emit(value);
         this.stateChanges.next('writeValue');
         this._markForCheck();
     }

@@ -1,4 +1,4 @@
-import { CdkPortalOutlet, DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
+import { CdkPortalOutlet, DomPortal, PortalModule } from '@angular/cdk/portal';
 import { NgClass, NgIf } from '@angular/common';
 import {
     AfterViewInit,
@@ -15,7 +15,8 @@ import {
     Renderer2,
     ViewChild,
     ViewEncapsulation,
-    forwardRef
+    forwardRef,
+    inject
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
@@ -173,9 +174,6 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     @ViewChild(CdkPortalOutlet, { static: false })
     private readonly _portalOutlet: CdkPortalOutlet;
 
-    /** @hidden */
-    _projectedDomPortal: Portal<any>;
-
     /** Stores current checkbox value. */
     checkboxValue: T;
     /** Stores current checkbox state. */
@@ -195,17 +193,19 @@ export class CheckboxComponent<T = unknown> implements ControlValueAccessor, Aft
     }
 
     /** @hidden */
+    _domPortal: DomPortal;
+
+    /** @hidden */
+    elementRef = inject(ElementRef);
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden values returned by control. */
     private _values: FdCheckboxValues = { ...FD_CHECKBOX_VALUES_DEFAULT };
 
     /** @hidden */
-    _domPortal: DomPortal<HTMLElement>;
-
-    /** @hidden */
     constructor(
-        public elementRef: ElementRef<Element>,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _changeDetectorRef: ChangeDetectorRef,
         private renderer: Renderer2,

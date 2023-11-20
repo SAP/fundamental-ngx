@@ -16,7 +16,7 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
@@ -103,7 +103,8 @@ const INITIAL_SHOW_ALL_ITEMS = true;
         DialogFooterComponent,
         ButtonBarComponent,
         AsyncPipe,
-        FdTranslatePipe
+        FdTranslatePipe,
+        InitialFocusDirective
     ]
 })
 export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy {

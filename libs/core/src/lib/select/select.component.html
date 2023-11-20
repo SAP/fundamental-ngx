@@ -7,7 +7,7 @@
         [isOpen]="_isOpen"
         [triggers]="[]"
         [focusTrapped]="true"
-        [disabled]="disabled || readonly"
+        [disabled]="disabled || _cvaDirective.readonly"
         [appendTo]="appendTo"
         [scrollStrategy]="scrollStrategy"
         [closeOnEscapeKey]="true"
@@ -35,21 +35,21 @@
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
         [class.is-disabled]="disabled"
-        [class.is-readonly]="readonly"
+        [class.is-readonly]="_cvaDirective.readonly"
         [attr.tabindex]="_tabIndex"
-        [attr.id]="controlId"
+        [attr.id]="_cvaDirective.id"
         [attr.aria-active]="_isOpen"
         aria-live="polite"
         role="combobox"
         aria-roledescription="listbox"
         [attr.aria-expanded]="_isOpen"
         [attr.aria-disabled]="disabled"
-        [attr.aria-controls]="controlId + '-list-box'"
-        [attr.aria-haspopup]="!(this.readonly || this.disabled)"
-        [attr.aria-required]="required"
+        [attr.aria-controls]="_cvaDirective.id + '-list-box'"
+        [attr.aria-haspopup]="!(_cvaDirective.readonly || this.disabled)"
+        [attr.aria-required]="_cvaDirective.required"
         [attr.title]="triggerValue"
-        [attr.aria-label]="ariaLabel || ('platformSelect.selectOptionLabel' | fdTranslate)"
-        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.aria-label]="_cvaDirective.ariaLabel || ('platformSelect.selectOptionLabel' | fdTranslate)"
+        [attr.aria-labelledby]="_cvaDirective.ariaLabelledBy"
         [attr.aria-activedescendant]="_getAriaActiveDescendant()"
         (focus)="_onFocus()"
         (blur)="_onBlur()"
@@ -69,7 +69,7 @@
             class="fd-button fd-button--transparent fd-select__button"
             [ngClass]="selectDropdownButtonClass"
             [class.is-disabled]="disabled"
-            *ngIf="!readonly"
+            *ngIf="!_cvaDirective.readonly"
         >
             <fd-icon [ariaHidden]="true" [glyph]="glyph"></fd-icon>
         </span>
@@ -85,19 +85,21 @@
         tabindex="-1"
         [mobileMode]="mobile"
         [dropdownMode]="true"
-        [hasMessage]="!!stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)"
-        [attr.id]="controlId + '-list-box'"
+        [hasMessage]="
+            !!_cvaDirective.stateMessage || (!!advancedStateMessage?.hasErrors && !!advancedStateMessage?.template)
+        "
+        [attr.id]="_cvaDirective.id + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
         [attr.tooltip]="triggerValue"
     >
         <li
-            *ngIf="stateMessage"
-            [attr.aria-label]="stateMessage"
+            *ngIf="_cvaDirective.stateMessage"
+            [attr.aria-label]="_cvaDirective.stateMessage"
             fd-list-message
             tabindex="-1"
             role="presentation"
-            [type]="state || 'default'"
-            [innerHtml]="stateMessage"
+            [type]="_cvaDirective.state || 'default'"
+            [innerHtml]="_cvaDirective.stateMessage"
         ></li>
 
         <li
@@ -105,7 +107,7 @@
             fd-list-message
             tabindex="-1"
             role="presentation"
-            [type]="state || 'default'"
+            [type]="_cvaDirective.state || 'default'"
         >
             <ng-template [ngTemplateOutlet]="advancedStateMessage!.template!"></ng-template>
         </li>

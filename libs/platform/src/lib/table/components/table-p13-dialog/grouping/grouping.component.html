@@ -19,7 +19,7 @@
             <fd-select
                 class="group-row__select"
                 [value]="rule.columnKey"
-                (valueChange)="_onRuleColumnKeyChange(rule, $event)"
+                (valueChange)="_onRuleColumnKeyChange(rule, $any($event))"
                 [placeholder]="'platformTable.P13GroupDialogNoneSelectedColumnSelectPlaceholder' | fdTranslate"
             >
                 <li fd-option *ngFor="let column of columns" [value]="column.key">

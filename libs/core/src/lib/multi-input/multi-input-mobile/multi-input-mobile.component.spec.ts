@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { EventEmitter } from '@angular/core';
@@ -10,7 +11,6 @@ import { MultiInputMobileComponent } from './multi-input-mobile.component';
 
 describe('MultiInputMobileComponent', () => {
     let component: MultiInputMobileComponent;
-    let anyComponent: any;
     let fixture: ComponentFixture<MultiInputMobileComponent>;
 
     const multiInputConfigObject: MobileModeConfig = {
@@ -60,7 +60,6 @@ describe('MultiInputMobileComponent', () => {
         };
         fixture = TestBed.createComponent(MultiInputMobileComponent);
         component = fixture.componentInstance;
-        anyComponent = <any>component;
         fixture.detectChanges();
     });
 
@@ -69,14 +68,16 @@ describe('MultiInputMobileComponent', () => {
     });
 
     it('should get multi input config, when it is passed by input', () => {
-        expect(anyComponent.mobileConfig).toEqual(multiInputConfigObject);
+        expect(component.mobileConfig).toEqual(multiInputConfigObject);
     });
 
     it('should open and close with approve', () => {
         component.ngOnInit();
-        const approveSpy = jest.spyOn(anyComponent._component, 'dialogApprove');
+        // @ts-expect-error
+        const approveSpy = jest.spyOn(component._component, 'dialogApprove');
         fixture.detectChanges();
-        anyComponent._component.openChange.emit(true);
+        // @ts-expect-error
+        component._component.openChange.emit(true);
         fixture.detectChanges();
         component.handleApprove();
         expect(approveSpy).toHaveBeenCalled();
@@ -84,10 +85,13 @@ describe('MultiInputMobileComponent', () => {
 
     it('should open and close with dismiss', () => {
         component.ngOnInit();
-        const dismissSpy = jest.spyOn(anyComponent._component, 'dialogDismiss');
+        // @ts-expect-error
+        const dismissSpy = jest.spyOn(component._component, 'dialogDismiss');
         fixture.detectChanges();
-        anyComponent._component.selected = [];
-        anyComponent._component.openChange.emit(true);
+        // @ts-expect-error
+        component._component.selected = [];
+        // @ts-expect-error
+        component._component.openChange.emit(true);
         fixture.detectChanges();
         component.handleDismiss();
         expect(dismissSpy).toHaveBeenCalledWith([]);

@@ -9,6 +9,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     HostListener,
@@ -20,16 +21,17 @@ import {
     Optional,
     Output,
     QueryList,
-    Self,
+    Signal,
     SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
     ViewEncapsulation,
-    isDevMode
+    inject,
+    isDevMode,
+    signal
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Observable, Subject, Subscription, defer, merge } from 'rxjs';
+import { Observable, Subscription, defer, map, merge } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -39,7 +41,13 @@ import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
 import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
-import { FormFieldAdvancedStateMessage, FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import {
+    CvaControl,
+    CvaDirective,
+    FormFieldAdvancedStateMessage,
+    SingleDropdownValueControl
+} from '@fundamental-ngx/cdk/forms';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
@@ -49,8 +57,6 @@ import { FdOptionSelectionChange, OptionComponent } from './option/option.compon
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
-
-let selectUniqueId = 0;
 
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
@@ -84,7 +90,8 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         },
         registerFormItemControl(SelectComponent),
         SelectKeyManagerService,
-        contentDensityObserverProviders()
+        contentDensityObserverProviders(),
+        CvaControl
     ],
     standalone: true,
     imports: [
@@ -98,13 +105,32 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
         ListComponent,
         ListMessageDirective,
         FdTranslatePipe
+    ],
+    hostDirectives: [
+        {
+            directive: CvaDirective,
+            // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
+            inputs: [
+                'value',
+                'id:controlId',
+                'state',
+                'ariaLabelledBy',
+                'placeholder',
+                'ariaLabel',
+                'stateMessage',
+                'disabled',
+                'readonly',
+                'name'
+            ],
+            // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
+            outputs: ['valueChange']
+        }
     ]
 })
 export class SelectComponent<T = any>
     implements
         SingleDropdownValueControl,
-        ControlValueAccessor,
-        SelectInterface,
+        SelectInterface<T>,
         OnInit,
         AfterViewInit,
         AfterContentInit,
@@ -129,37 +155,13 @@ export class SelectComponent<T = any>
     @Input()
     scrollStrategy: ScrollStrategy;
 
-    /** The ID of the control. */
-    @Input()
-    controlId = `fd-select-${selectUniqueId++}`;
-
-    /** Holds the control state of select */
-    @Input()
-    state: Nullable<FormStates>;
-
     /** Whether the select component should be displayed in mobile mode. */
     @Input()
     mobile = false;
 
-    /** Holds the message with respect to state */
-    @Input()
-    stateMessage: Nullable<string>;
-
     /** Whether the select component is disabled. */
     @Input()
     disabled = false;
-
-    /** If it is mandatory field */
-    @Input()
-    required = false;
-
-    /** Whether the select component is readonly. */
-    @Input()
-    readonly = false;
-
-    /** Placeholder for the select. Appears in the triggerbox if no option is selected. */
-    @Input()
-    placeholder: string;
 
     /** Value of the select control. */
     @Input()
@@ -169,6 +171,7 @@ export class SelectComponent<T = any>
             this._internalValue = newValue;
         }
     }
+
     get value(): any {
         return this._internalValue;
     }
@@ -214,14 +217,6 @@ export class SelectComponent<T = any>
     @Input()
     typeaheadDebounceInterval = 250;
 
-    /** Binds to control aria-labelledBy attribute */
-    @Input()
-    ariaLabelledBy: Nullable<string>;
-
-    /** Sets control aria-label attribute value */
-    @Input()
-    ariaLabel: Nullable<string>;
-
     /** Select Input Mobile Configuration */
     @Input()
     mobileConfig: MobileModeConfig = { hasCloseButton: true };
@@ -260,7 +255,7 @@ export class SelectComponent<T = any>
 
     /** @hidden */
     @ContentChildren(OptionComponent, { descendants: true })
-    _options: QueryList<OptionComponent>;
+    _options: QueryList<OptionComponent<T>>;
 
     /** @hidden */
     @ViewChild('selectControl')
@@ -288,9 +283,17 @@ export class SelectComponent<T = any>
     @ViewChild('optionPanel', { read: ElementRef })
     _optionPanel: ElementRef;
 
-    /** Whether popover is opened
-     * @hidden
-     */
+    /** @hidden */
+    get ariaLabelledBy(): Nullable<string> {
+        return this._cvaDirective.ariaLabelledBy;
+    }
+
+    /** @hidden */
+    get ariaLabel(): Nullable<string> {
+        return this._cvaDirective.ariaLabel;
+    }
+
+    /** @hidden */
     _isOpen = false;
 
     /** @hidden */
@@ -300,33 +303,33 @@ export class SelectComponent<T = any>
     _liveAnnouncer: LiveAnnouncer;
 
     /** @hidden */
-    _internalValue: any;
+    _internalValue: T;
 
     /** @hidden */
     _calculatedMaxHeight: number;
 
     /** @hidden */
-    _rtl = false;
-
-    /** @hidden */
-    _selectionModel: SelectionModel<OptionComponent>;
+    _selectionModel: SelectionModel<OptionComponent<T>>;
 
     /**
      * @hidden
      * Triggers when component is destroyed
      */
-    readonly _destroy = new Subject<void>();
+    readonly _destroyRef = inject(DestroyRef);
+
+    /** @hidden */
+    _textDirection: Signal<'ltr' | 'rtl'>;
 
     /** @hidden */
     get _selectControlClass(): string {
-        return [this.state ? `is-${this.state}` : '', this.selectControlClass]
+        return [this._cvaDirective.state ? `is-${this._cvaDirective.state}` : '', this.selectControlClass]
             .filter((className) => !!className)
             .join(' ');
     }
 
     /**
      * @hidden
-     * Combined stream of all of the child options' change events.
+     * Combined stream of all the child options' change events.
      */
     readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
         const _options = this._options;
@@ -336,6 +339,15 @@ export class SelectComponent<T = any>
             switchMap(() => merge(..._options.map((option) => option.selectionChange)))
         );
     });
+
+    /** @hidden */
+    protected _rtlService = inject(RtlService, { optional: true });
+
+    /** @hidden */
+    protected _cvaDirective: CvaDirective<T> = inject(CvaDirective);
+
+    /** @hidden */
+    protected _cvaControl: CvaControl<T> = inject(CvaControl);
 
     /** @hidden */
     private _extendedBodyTemplate = false;
@@ -355,19 +367,6 @@ export class SelectComponent<T = any>
     /** @hidden */
     private _subscriptions: Subscription = new Subscription();
 
-    /** @hidden */
-    @HostListener('window:resize')
-    _resizeScrollHandler(): void {
-        this._updateCalculatedHeight();
-    }
-
-    /** @hidden */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this._tabIndex = this.disabled ? -1 : 0;
-        this._changeDetectorRef.markForCheck();
-    }
-
     /** Selected option. */
     get selected(): OptionComponent {
         return this._selectionModel.selected[0];
@@ -377,9 +376,9 @@ export class SelectComponent<T = any>
     get triggerValue(): string {
         const emptyValue = ' ';
         if (this._selectionModel.isEmpty()) {
-            return this.placeholder || emptyValue;
+            return this._cvaDirective.placeholder || emptyValue;
         }
-        return this.selected.viewValue || this.placeholder || emptyValue;
+        return this.selected.viewValue || this._cvaDirective.placeholder || emptyValue;
     }
 
     /** equal to close
@@ -393,7 +392,7 @@ export class SelectComponent<T = any>
 
     /** Whether control can be interacted with */
     get isInteractive(): boolean {
-        return !(this.readonly || this.disabled);
+        return !(this._cvaDirective.readonly || this.disabled);
     }
 
     /**
@@ -415,9 +414,6 @@ export class SelectComponent<T = any>
         );
     }
 
-    /** @hidden */
-    _compareWith = (o1: any, o2: any): boolean => o1 === o2;
-
     /** Function to compare the option values with the selected values. */
     @Input()
     set compareWith(fn: (o1: any, o2: any) => boolean) {
@@ -430,6 +426,7 @@ export class SelectComponent<T = any>
             this._initializeSelection();
         }
     }
+
     get compareWith(): (o1: any, o2: any) => boolean {
         return this._compareWith;
     }
@@ -447,23 +444,56 @@ export class SelectComponent<T = any>
     /** @hidden */
     constructor(
         @Attribute('tabindex') _tabIndex: string,
-        @Optional() private readonly _rtlService: RtlService,
-        private readonly _keyManagerService: SelectKeyManagerService,
+        private readonly _keyManagerService: SelectKeyManagerService<T>,
         private readonly _changeDetectorRef: ChangeDetectorRef,
         private readonly _viewContainerRef: ViewContainerRef,
         @Optional() private readonly _dynamicComponentService: DynamicComponentService,
-        @Optional() @Self() private readonly ngControl: NgControl,
         @Optional() private readonly _injector: Injector,
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
-        if (this.ngControl) {
-            this.ngControl.valueAccessor = this;
-        }
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
+        this._textDirection = this._rtlService
+            ? toSignal(this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))), { requireSync: true })
+            : signal('ltr');
+    }
+
+    /** @hidden */
+    @HostListener('window:resize')
+    _resizeScrollHandler(): void {
+        this._updateCalculatedHeight();
+    }
+
+    /** Toggles the open state of the select. */
+    @HostListener('click')
+    toggle(): void {
+        this._isOpen ? this.close() : this.open();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _handleKeydown(event: KeyboardEvent): void {
+        if (!this.disabled && !this._cvaDirective.readonly) {
+            this._isOpen
+                ? this._keyManagerService._handleOpenKeydown(event)
+                : this._keyManagerService._handleClosedKeydown(event);
+        }
+        if (KeyUtil.isKeyCode(event, [ESCAPE, ENTER, SPACE])) {
+            this._controlElementRef.nativeElement.focus();
+        }
+    }
+
+    /** @hidden */
+    _compareWith = (o1: any, o2: any): boolean => o1 === o2;
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this._tabIndex = this.disabled ? -1 : 0;
     }
 
     /** @hidden */
     ngOnInit(): void {
+        this._cvaControl.listenToChanges();
         this._initializeCommonBehavior();
     }
 
@@ -490,7 +520,6 @@ export class SelectComponent<T = any>
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._cleanupCommonBehavior();
     }
 
     /** @hidden */
@@ -499,15 +528,9 @@ export class SelectComponent<T = any>
     /** @hidden */
     onTouched = (): void => {};
 
-    /** Toggles the open state of the select. */
-    @HostListener('click')
-    toggle(): void {
-        this._isOpen ? this.close() : this.open();
-    }
-
     /** Opens the select popover body. */
     open(): void {
-        if (this.disabled || this.readonly || !this._options || !this._getItemCount() || this._isOpen) {
+        if (this.disabled || this._cvaDirective.readonly || !this._options || !this._getItemCount() || this._isOpen) {
             return;
         }
         this._isOpen = true;
@@ -533,7 +556,7 @@ export class SelectComponent<T = any>
                 this._keyManagerService._keyManager.activeItem?._selectViaInteraction();
             }
             this._isOpen = false;
-            this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
+            this._keyManagerService._keyManager.withHorizontalOrientation(this._textDirection());
             this._changeDetectorRef.markForCheck();
             this.onTouched();
 
@@ -562,14 +585,14 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden from ControlValue Accessor */
-    writeValue(value: any): void {
+    writeValue(value: T): void {
         if (this._options) {
             this._setSelectionByValue(value);
         }
     }
 
     /** @hidden */
-    _setSelectionByValue(value: any | any[]): void {
+    _setSelectionByValue(value: T | T[]): void {
         this._selectionModel.clear();
         const correspondingOption = this._selectValue(value);
 
@@ -587,7 +610,7 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _selectValue(value: any): OptionComponent | undefined {
+    _selectValue(value: T | T[]): OptionComponent<T> | undefined {
         const correspondingOption = this._options.find((option: OptionComponent) => {
             try {
                 // Treat null as a special reset value.
@@ -619,14 +642,6 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this._changeDetectorRef.markForCheck();
-
-        this._tabIndex = -1;
-    }
-
-    /** @hidden */
     _highlightCorrectOption(): void {
         if (this._keyManagerService._keyManager && this._selectionModel.isEmpty()) {
             this._keyManagerService._keyManager.setFirstItemActive();
@@ -636,17 +651,11 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _cleanupCommonBehavior(): void {
-        this._destroy.next();
-        this._destroy.complete();
-    }
-
-    /** @hidden */
     _initializeSelection(): void {
         // Defer setting the value in order to avoid the "Expression
         // has changed after it was checked" errors from Angular.
         Promise.resolve().then(() => {
-            this._setSelectionByValue(this.ngControl ? this.ngControl.value : this._internalValue);
+            this._setSelectionByValue(this._cvaDirective.value);
         });
     }
 
@@ -688,41 +697,16 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _isRtl(): boolean {
-        if (this._rtlService) {
-            this._subscriptions.add(
-                this._rtlService.rtl.subscribe((rtl) => {
-                    this._rtl = rtl;
-                })
-            );
-        }
-        return this._rtl === true ? true : false;
-    }
-
-    /** @hidden */
     _registerEventsAfterContentInit(): void {
-        this._selectionModel.changed.pipe(takeUntil(this._destroy)).subscribe((event) => {
+        this._selectionModel.changed.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((event) => {
             event.added.forEach((option) => option._select());
             event.removed.forEach((option) => option._deselect());
         });
 
-        this._options.changes.pipe(startWith(null), takeUntil(this._destroy)).subscribe(() => {
+        this._options.changes.pipe(startWith(null), takeUntilDestroyed(this._destroyRef)).subscribe(() => {
             this._resetOptions();
             this._initializeSelection();
         });
-    }
-
-    /** @hidden */
-    @HostListener('keydown', ['$event'])
-    _handleKeydown(event: KeyboardEvent): void {
-        if (!this.disabled && !this.readonly) {
-            this._isOpen
-                ? this._keyManagerService._handleOpenKeydown(event)
-                : this._keyManagerService._handleClosedKeydown(event);
-        }
-        if (KeyUtil.isKeyCode(event, [ESCAPE, ENTER, SPACE])) {
-            this._controlElementRef.nativeElement.focus();
-        }
     }
 
     /** @hidden */
@@ -752,13 +736,11 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    _buttonClick(): void {}
-
-    /** @hidden */
     private _resetOptions(): void {
-        const changedOrDestroyed = merge(this._options.changes, this._destroy);
+        const changedOrDestroyed = <ObsType>(obs: Observable<ObsType>): Observable<ObsType> =>
+            obs.pipe(takeUntilDestroyed(this._destroyRef), takeUntil(this._options.changes));
 
-        this._optionSelectionChanges.pipe(takeUntil(changedOrDestroyed)).subscribe((event) => {
+        this._optionSelectionChanges.pipe(changedOrDestroyed).subscribe((event) => {
             this._onSelect(event.source, event.isUserInput);
 
             if (event.isUserInput && this._isOpen) {
@@ -770,7 +752,7 @@ export class SelectComponent<T = any>
         // Listen to changes in the internal state of the _options and react accordingly.
         // Handles cases like the labels of the selected _options changing.
         merge(...this._options.map((option) => option._stateChanges))
-            .pipe(takeUntil(changedOrDestroyed))
+            .pipe(changedOrDestroyed)
             .subscribe(() => {
                 this._changeDetectorRef.markForCheck();
             });

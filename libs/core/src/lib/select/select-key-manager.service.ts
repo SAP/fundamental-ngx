@@ -2,31 +2,31 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, UP_ARROW, hasModifierKey } from '@angular/cdk/keycodes';
 import { Injectable } from '@angular/core';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
-import { takeUntil } from 'rxjs/operators';
 
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { OptionsInterface } from './options.interface';
 import { SelectInterface } from './select.interface';
 
 @Injectable()
-export class SelectKeyManagerService {
+export class SelectKeyManagerService<ValueType = any> {
     /** @hidden */
-    _component: SelectInterface;
+    _component: SelectInterface<ValueType>;
 
     /** @hidden */
-    _keyManager: ActiveDescendantKeyManager<OptionsInterface>;
+    _keyManager: ActiveDescendantKeyManager<OptionsInterface<ValueType>>;
 
     /**
      * Sets up a key manager to listen to keyboard events on the overlay panel.
      * @hidden
      */
     _initKeyManager(): void {
-        this._keyManager = new ActiveDescendantKeyManager<OptionsInterface>(this._component._options)
+        this._keyManager = new ActiveDescendantKeyManager<OptionsInterface<ValueType>>(this._component._options)
             .withTypeAhead(this._component.typeaheadDebounceInterval)
             .withVerticalOrientation()
-            .withHorizontalOrientation(this._component._isRtl() ? 'rtl' : 'ltr')
+            .withHorizontalOrientation(this._component._textDirection())
             .withAllowedModifierKeys(['shiftKey']);
 
-        this._keyManager.tabOut.pipe(takeUntil(this._component._destroy)).subscribe(() => {
+        this._keyManager.tabOut.pipe(takeUntilDestroyed(this._component._destroyRef)).subscribe(() => {
             // tab focus fix for mobile
             if (!this._component.mobile) {
                 this._component.focus();
@@ -34,7 +34,7 @@ export class SelectKeyManagerService {
             }
         });
 
-        this._keyManager.change.pipe(takeUntil(this._component._destroy)).subscribe(() => {
+        this._keyManager.change.pipe(takeUntilDestroyed(this._component._destroyRef)).subscribe(() => {
             if (this._component._isOpen && this._component._optionPanel) {
                 this._scrollActiveOptionIntoView();
             } else if (!this._component._isOpen && this._keyManager.activeItem) {

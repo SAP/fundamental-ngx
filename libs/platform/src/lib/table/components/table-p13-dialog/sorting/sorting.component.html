@@ -21,7 +21,7 @@
             <fd-select
                 class="sort-row__select"
                 [value]="rule.columnKey"
-                (valueChange)="_onRuleColumnKeyChange(rule, $event)"
+                (valueChange)="_onRuleColumnKeyChange(rule, $any($event))"
                 [placeholder]="'platformTable.P13SortDialogNoneSelectedColumn' | fdTranslate"
             >
                 <li
@@ -36,7 +36,7 @@
             <fd-select
                 class="sort-row__select"
                 [value]="rule.direction"
-                (valueChange)="_onRuleDirectionChange(rule, $event)"
+                (valueChange)="_onRuleDirectionChange(rule, $any($event))"
                 [placeholder]="'platformTable.P13SortDialogNoneSelectedSorting' | fdTranslate"
             >
                 <li fd-option [value]="SORT_DIRECTION.ASC">

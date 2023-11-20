@@ -334,8 +334,7 @@
                     "liveReload": false
                 }
             },
-            "defaultConfiguration": "hot-module-replacement",
-            "dependsOn": ["^compile-typedoc"]
+            "defaultConfiguration": "hot-module-replacement"
         },
         "lint": {
             "executor": "@nx/eslint:lint",

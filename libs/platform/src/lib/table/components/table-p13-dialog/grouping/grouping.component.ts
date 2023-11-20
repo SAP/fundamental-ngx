@@ -12,7 +12,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
@@ -89,7 +89,8 @@ class GroupRule {
         ButtonComponent,
         DialogFooterComponent,
         ButtonBarComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        InitialFocusDirective
     ]
 })
 export class P13GroupingDialogComponent implements Resettable {

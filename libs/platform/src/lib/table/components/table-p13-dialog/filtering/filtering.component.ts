@@ -8,7 +8,7 @@ import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgFor, NgIf } from '@angular/common';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
@@ -63,7 +63,8 @@ export { FilterDialogData, FilterDialogResultData };
         NgIf,
         DialogFooterComponent,
         ButtonBarComponent,
-        FdTranslatePipe
+        FdTranslatePipe,
+        InitialFocusDirective
     ]
 })
 export class P13FilteringDialogComponent implements Resettable {

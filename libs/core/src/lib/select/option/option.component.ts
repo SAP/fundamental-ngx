@@ -82,14 +82,16 @@ export class FdOptionSelectionChange {
     standalone: true,
     imports: [NgIf, ListTitleDirective, NgTemplateOutlet]
 })
-export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {
+export class OptionComponent<ValueType = any>
+    implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface<ValueType>
+{
     /** Option id attribute */
     @Input()
     id = `fd-option-${optionUniqueId++}`;
 
     /** Value of the option. Similar to how a native select operates. */
     @Input()
-    value: any;
+    value: ValueType;
 
     /** Whether to disable this option specifically. */
     @Input()

@@ -1,9 +1,8 @@
-import { ElementRef, EventEmitter, InjectionToken, QueryList } from '@angular/core';
+import { DestroyRef, ElementRef, EventEmitter, InjectionToken, QueryList, Signal } from '@angular/core';
 
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { Subject } from 'rxjs';
-import { OptionComponent } from './option/option.component';
+import { OptionsInterface } from './options.interface';
 
 export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInterface');
 
@@ -11,12 +10,13 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInter
  * Select Interface to have typing and avoid circular dependency between
  * SelectComponent <==> SelectMobileComponent
  */
-export interface SelectInterface<TOption = any> extends MobileMode {
+export interface SelectInterface<ValueType = any> extends MobileMode {
     typeaheadDebounceInterval: number;
-    selected: OptionComponent;
+    selected: OptionsInterface<ValueType>;
     mobileConfig: MobileModeConfig;
-    _options: QueryList<TOption>;
-    _destroy: Subject<void>;
+    _textDirection: Signal<'ltr' | 'rtl'>;
+    _options: QueryList<OptionsInterface<ValueType>>;
+    _destroyRef: DestroyRef;
     _optionPanel: ElementRef;
     _isOpen: boolean;
     _calculatedMaxHeight: number;
@@ -29,7 +29,6 @@ export interface SelectInterface<TOption = any> extends MobileMode {
     open(): void;
     focus(): void;
     blur(): void;
-    _isRtl(): boolean;
     _getItemHeight(): number;
     _getOptionScrollPosition(optionIndex: number, optionHeight: number, currentScrollPosition: number): void;
 }

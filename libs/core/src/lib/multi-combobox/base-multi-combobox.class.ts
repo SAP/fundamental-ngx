@@ -66,7 +66,7 @@ export abstract class BaseMultiCombobox<T = any> {
     readonly dataSourceDirective: DataSourceDirective<T, FdMultiComboBoxDataSource<T>> = inject(DataSourceDirective);
 
     /** Control Value Accessor directive for forms support. */
-    readonly _cva = inject(CvaDirective<T>, {
+    readonly _cva = inject(CvaDirective<T[]>, {
         self: true
     });
 

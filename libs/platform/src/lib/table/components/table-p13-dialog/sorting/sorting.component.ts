@@ -19,7 +19,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
 import { NgFor } from '@angular/common';
-import { DisabledBehaviorDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { DisabledBehaviorDirective, InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
     BarLeftDirective,
@@ -100,7 +100,8 @@ class ValidatedSortRule implements SortRule {
         DialogFooterComponent,
         ButtonBarComponent,
         FdTranslatePipe,
-        forwardRef(() => GetAvailableSortColumnsPipe)
+        forwardRef(() => GetAvailableSortColumnsPipe),
+        InitialFocusDirective
     ]
 })
 export class P13SortingDialogComponent implements Resettable {
