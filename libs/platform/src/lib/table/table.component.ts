@@ -28,7 +28,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { AsyncPipe, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     DndListDirective,
     DragAndDropModule,
@@ -222,7 +222,6 @@ let tableUniqueId = 0;
     },
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         BusyIndicatorComponent,
         PlatformTableColumnResizerComponent,
@@ -233,11 +232,7 @@ let tableUniqueId = 0;
         TableHeaderRowComponent,
         TableBodyDirective,
         DragAndDropModule,
-        NgFor,
-        NgSwitch,
-        NgSwitchCase,
         TableGroupRowComponent,
-        NgSwitchDefault,
         TableRowComponent,
         TablePoppingRowComponent,
         RepeatDirective,
@@ -757,7 +752,7 @@ export class TableComponent<T = any>
      * Mapping function for the trackBy, provided by the user.
      * Is needed, because we are wrapping user supplied data into a `TableRow` class.
      */
-    _rowTrackBy: TrackByFunction<TableRow<T>> | TrackByFunction<number>;
+    _rowTrackBy: TrackByFunction<number>;
 
     /** @hidden */
     private readonly _defaultTrackBy: TrackByFunction<number> = (index: number) => index;

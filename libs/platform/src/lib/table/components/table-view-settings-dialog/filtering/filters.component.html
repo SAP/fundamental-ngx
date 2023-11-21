@@ -3,10 +3,9 @@
         <ng-template fdkTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <ng-container
-                        *ngIf="activeFilterStepView?.titleTemplateRef"
-                        [ngTemplateOutlet]="activeFilterStepView.titleTemplateRef"
-                    ></ng-container>
+                    @if (activeFilterStepView?.titleTemplateRef) {
+                        <ng-container [ngTemplateOutlet]="activeFilterStepView.titleTemplateRef"></ng-container>
+                    }
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -16,14 +15,11 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
-        <ng-container
-            *ngIf="activeFilterStepView?.bodyTemplateRef"
-            [ngTemplateOutlet]="activeFilterStepView.bodyTemplateRef"
-        ></ng-container>
+        @if (activeFilterStepView?.bodyTemplateRef) {
+            <ng-container [ngTemplateOutlet]="activeFilterStepView.bodyTemplateRef"></ng-container>
+        }
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
@@ -39,7 +35,6 @@
         </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>
-
 <!-- Keep active step component  -->
 @if (activeStep === ACTIVE_STEP.SELECT_FILTER) {
     <fdp-filters-list-step

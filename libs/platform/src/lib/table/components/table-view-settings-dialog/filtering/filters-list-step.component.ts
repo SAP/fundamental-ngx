@@ -10,7 +10,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import {
     ListComponent,
     ListGroupHeaderDirective,
@@ -44,7 +43,6 @@ export interface SelectableFilter {
         TitleComponent,
         ListComponent,
         ListGroupHeaderDirective,
-        NgFor,
         ListItemComponent,
         ListLinkDirective,
         ListTitleDirective,

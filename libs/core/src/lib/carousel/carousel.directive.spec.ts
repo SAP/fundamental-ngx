@@ -4,6 +4,7 @@ import { CarouselDirective } from './carousel.directive';
 import { CarouselItemDirective } from './carousel-item.directive';
 
 import { CarouselConfig, CarouselService } from './carousel.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

@@ -178,6 +178,7 @@ export class RadioButtonComponent<T = any>
 
     // ControlValueAccessor implementation
     /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (value: T): void => {};
 
     /** @hidden */

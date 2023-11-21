@@ -5,6 +5,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { DynamicPageComponent } from './dynamic-page.component';
 import { DynamicPageModule } from './dynamic-page.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `<fd-dynamic-page>

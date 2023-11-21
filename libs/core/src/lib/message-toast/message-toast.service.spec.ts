@@ -9,6 +9,7 @@ import { MESSAGE_TOAST_DATA } from './constants/message-toast.token';
 import { MessageToastModule } from './message-toast.module';
 
 import { MessageToastService } from './message-toast.service';
+import { CommonModule } from '@angular/common';
 
 const testMessage = 'Test message';
 

@@ -12,6 +12,7 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 import { PlatformThumbnailModule } from '../thumbnail.module';
 import { ThumbnailImageComponent } from './thumbnail-image.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `<fdp-thumbnail-image #thumbnailImageComponent [mediaList]="mediaList"></fdp-thumbnail-image>`

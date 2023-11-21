@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -40,7 +40,7 @@ import { Observable } from 'rxjs';
         '[attr.aria-expanded]': 'row.expanded'
     },
     standalone: true,
-    imports: [TableCellDirective, NgTemplateOutlet, NgIf, AsyncPipe]
+    imports: [TableCellDirective, NgTemplateOutlet, AsyncPipe]
 })
 export class TableGroupRowComponent<T> extends TableRowDirective implements OnChanges {
     /** Table ID. */

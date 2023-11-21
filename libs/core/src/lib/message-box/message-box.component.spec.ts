@@ -12,6 +12,7 @@ import { MessageBoxComponent } from './message-box.component';
 import { MessageBoxRef } from './utils/message-box-ref.class';
 import { MessageBoxModule } from './message-box.module';
 import { FD_DIALOG_FOCUS_TRAP_ERROR } from '@fundamental-ngx/core/dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

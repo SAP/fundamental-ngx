@@ -574,6 +574,7 @@ export async function saveElementScreenshot(
     selector: string,
     tag: string,
     options?: Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     index: number = 0
 ): Promise<void> {}
 
@@ -581,6 +582,7 @@ export async function checkElementScreenshot(
     selector: string,
     tag: string,
     options?: Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     index: number = 0
 ): Promise<any> {
     return true;

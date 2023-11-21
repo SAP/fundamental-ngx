@@ -14,7 +14,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -93,13 +93,11 @@ const INITIAL_SHOW_ALL_ITEMS = true;
         ToolbarSpacerDirective,
         ButtonComponent,
         ToolbarItemDirective,
-        NgIf,
         ListComponent,
         ListItemComponent,
         CheckboxComponent,
         FormsModule,
         ListTitleDirective,
-        NgFor,
         DialogFooterComponent,
         ButtonBarComponent,
         AsyncPipe,
@@ -148,7 +146,10 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef<ColumnsDialogData>, private cdr: ChangeDetectorRef) {
+    constructor(
+        public dialogRef: DialogRef<ColumnsDialogData>,
+        private cdr: ChangeDetectorRef
+    ) {
         const { availableColumns, visibleColumns } = this.dialogRef.data;
 
         this.availableColumns = availableColumns?.map(({ label, key }) => ({ label, key })) || [];

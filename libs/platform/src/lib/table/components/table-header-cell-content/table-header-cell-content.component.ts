@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -24,7 +24,7 @@ import { CollectionSort, SortDirection, TableColumn } from '@fundamental-ngx/pla
         `
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, NgIf, IconComponent, TableIconDirective]
+    imports: [NgTemplateOutlet, IconComponent, TableIconDirective]
 })
 export class TableHeaderCellContentComponent {
     /** Table Id */

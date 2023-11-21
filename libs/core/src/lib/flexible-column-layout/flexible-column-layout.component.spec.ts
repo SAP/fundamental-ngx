@@ -21,7 +21,7 @@ import {
 } from './constants';
 import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
 
-function setViewport(width: number, height: number): void {
+function setViewport(width: number): void {
     window.innerWidth = width;
     const resizeEvt = new Event('resize');
     window.dispatchEvent(resizeEvt);

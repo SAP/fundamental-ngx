@@ -13,7 +13,6 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
         <!-- Include Rules -->
         <fd-panel [expanded]="_includePanelExpanded">
@@ -47,7 +46,6 @@
                                     [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                     (click)="_removeRule(rule, _includeRules)"
                                 ></button>
-
                                 @if (_includeRules.length - 1 === $index) {
                                     <button
                                         fd-button
@@ -98,16 +96,18 @@
                                     [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
                                     (click)="_removeRule(rule, _excludeRules)"
                                 ></button>
-
-                                <button
-                                    *ngIf="_excludeRules.length - 1 === $index"
-                                    fd-button
-                                    fdType="transparent"
-                                    glyph="add"
-                                    [attr.aria-label]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                    [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                    (click)="_addNewRule(_excludeRules)"
-                                ></button>
+                                @if (_excludeRules.length - 1 === $index) {
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        glyph="add"
+                                        [attr.aria-label]="
+                                            'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
+                                        "
+                                        [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                        (click)="_addNewRule(_excludeRules)"
+                                    ></button>
+                                }
                             </div>
                         </div>
                     </fd-layout-grid>
@@ -115,14 +115,12 @@
             </div>
         </fd-panel>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"
             [label]="'platformTable.P13FilterDialogConfirmationBtnLabel' | fdTranslate"
             (click)="confirm()"
         ></fd-button-bar>
-
         <fd-button-bar
             fdType="transparent"
             fdkInitialFocus

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -39,11 +39,9 @@ import { startWith } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         PopoverComponent,
         TablePopoverDirective,
         ListComponent,
-        NgFor,
         FreeContentListItemComponent,
         NgTemplateOutlet,
         TemplateDirective,

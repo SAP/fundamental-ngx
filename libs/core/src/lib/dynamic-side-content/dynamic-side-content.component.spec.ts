@@ -9,6 +9,7 @@ import { DynamicSideContentMainComponent } from './dynamic-side-content-main.com
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 import { DynamicSideContentComponent } from './dynamic-side-content.component';
 import { DynamicSideContentModule } from './dynamic-side-content.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

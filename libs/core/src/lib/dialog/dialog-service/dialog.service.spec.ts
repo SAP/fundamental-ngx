@@ -5,6 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogService } from './dialog.service';
 import { DialogModule } from '../dialog.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: ``

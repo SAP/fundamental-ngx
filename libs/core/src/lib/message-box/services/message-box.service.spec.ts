@@ -5,6 +5,7 @@ import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MessageBoxService } from './message-box.service';
 import { MessageBoxModule } from '../message-box.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: ``

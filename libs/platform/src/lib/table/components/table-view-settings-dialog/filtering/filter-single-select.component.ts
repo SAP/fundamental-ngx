@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { CollectionFilter, TableFilterSelectOption } from '@fundamental-ngx/platform/table-helpers';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ListComponent, ListItemComponent, ListTitleDirective } from '@fundamental-ngx/core/list';
 import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
@@ -19,15 +18,7 @@ import { NOT_FILTERED_OPTION_VALUE } from './constants';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [
-        ListComponent,
-        ListItemComponent,
-        RadioButtonComponent,
-        FormsModule,
-        ListTitleDirective,
-        NgFor,
-        FdTranslatePipe
-    ]
+    imports: [ListComponent, ListItemComponent, RadioButtonComponent, FormsModule, ListTitleDirective, FdTranslatePipe]
 })
 export class FilterSingleSelectComponent {
     /** Selectable filter options */

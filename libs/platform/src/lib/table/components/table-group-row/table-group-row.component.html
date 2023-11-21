@@ -13,48 +13,42 @@
 >
     <ng-template [ngTemplateOutlet]="tableCellExpandTemplate"></ng-template>
 </td>
-
 <!-- Table Cell Expand Template -->
 <ng-template #tableCellExpandTemplate>
     <div class="fd-table__expand-wrapper">
         <span class="fd-table__expand" [class.fd-table__expand--open]="row.expanded" aria-hidden="true"></span>
-
-        <ng-container *ngIf="_groupRulesMap | async as groupRules">
+        @if (_groupRulesMap | async; as groupRules) {
             <!-- Group row template when no nested groups -->
-            <ng-container *ngIf="groupRules.size === 1">
+            @if (groupRules.size === 1) {
                 <div class="fd-table__text fd-table__text--no-wrap">
                     {{ row.value?.['value'] }} - {{ row.value?.['count'] }}
                 </div>
-            </ng-container>
-
+            }
             <!-- Group row template when there are nested groups -->
-            <ng-container *ngIf="groupRules.size !== 1">
+            @if (groupRules.size !== 1) {
                 <div class="fd-table__text fd-table__text--no-wrap">
                     <ng-template [ngTemplateOutlet]="tableHeaderCellContentTemplate"></ng-template>:
                     {{ row.value?.['value'] }}
                 </div>
-            </ng-container>
-        </ng-container>
+            }
+        }
     </div>
 </ng-template>
-
 <!-- Column Header Cell Content Template  -->
 <ng-template #tableHeaderCellContentTemplate>
-    <ng-container *ngIf="_column">
-        <ng-container *ngIf="_column.headerCellTemplate; else defaultHeaderCellTemplate">
+    @if (_column) {
+        @if (_column.headerCellTemplate) {
             <ng-template
                 [ngTemplateOutlet]="_column.headerCellTemplate"
                 [ngTemplateOutletContext]="{ $implicit: _column }"
             ></ng-template>
-        </ng-container>
-
-        <ng-template #defaultHeaderCellTemplate>
+        } @else {
             <span
                 [id]="rowId + '-header-cell-' + _column.name"
                 [attr.title]="_column.label"
                 class="fd-table__cell--truncate-txt"
                 >{{ _column.label }}</span
             >
-        </ng-template>
-    </ng-container>
+        }
+    }
 </ng-template>

@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -81,7 +81,6 @@ class GroupRule {
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgFor,
         SelectComponent,
         OptionComponent,
         CheckboxComponent,

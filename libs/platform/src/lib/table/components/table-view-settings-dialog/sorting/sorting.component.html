@@ -13,13 +13,11 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
         <ul fd-list [selection]="true">
             <li fd-list-group-header>
                 <span fd-list-title>{{ 'platformTable.sortDialogSortOrderHeader' | fdTranslate }}</span>
             </li>
-
             <li fd-list-item [selected]="direction === SORT_DIRECTION.ASC">
                 <fd-radio-button
                     name="sort-order"
@@ -41,22 +39,22 @@
                 <span fd-list-title>{{ 'platformTable.sortDialogSortOrderDesc' | fdTranslate }}</span>
             </li>
         </ul>
-
         <ul fd-list [selection]="true">
             <li fd-list-group-header>
                 <span fd-list-title>{{ 'platformTable.sortDialogSortByHeader' | fdTranslate }}</span>
             </li>
-
-            <li fd-list-item *ngIf="allowDisablingSorting" [selected]="field === NOT_SORTED_OPTION_VALUE">
-                <fd-radio-button
-                    name="sort-by"
-                    [value]="NOT_SORTED_OPTION_VALUE"
-                    state="default"
-                    [ngModel]="field"
-                    (ngModelChange)="_sortFieldChange($event)"
-                ></fd-radio-button>
-                <span fd-list-title>{{ 'platformTable.sortDialogNotSortedLabel' | fdTranslate }}</span>
-            </li>
+            @if (allowDisablingSorting) {
+                <li fd-list-item [selected]="field === NOT_SORTED_OPTION_VALUE">
+                    <fd-radio-button
+                        name="sort-by"
+                        [value]="NOT_SORTED_OPTION_VALUE"
+                        state="default"
+                        [ngModel]="field"
+                        (ngModelChange)="_sortFieldChange($event)"
+                    ></fd-radio-button>
+                    <span fd-list-title>{{ 'platformTable.sortDialogNotSortedLabel' | fdTranslate }}</span>
+                </li>
+            }
             @for (column of columns; track column) {
                 <li fd-list-item [selected]="column.key === field">
                     <fd-radio-button
@@ -71,7 +69,6 @@
             }
         </ul>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"

@@ -293,7 +293,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     }
 
     /** @hidden */
-    private _addButtonTextClass = (compact: boolean): void => {
+    private _addButtonTextClass = (): void => {
         const textSpanElement = this.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         if (!textSpanElement) {
             return;

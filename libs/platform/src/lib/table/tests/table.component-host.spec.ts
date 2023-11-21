@@ -22,29 +22,26 @@ import { PlatformTableModule } from '../table.module';
 
 @Component({
     template: `
-        <fdp-table
-            [dataSource]="source"
-            fdCompact
-            emptyTableMessage="No data found"
-            [selectionMode]="selection"
-            [rowsClass]="rowsClass"
-        >
-            <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
-
-            <fdp-column name="id" key="id" label="ID" *ngIf="showIdColumn"></fdp-column>
-
-            <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
-
-            <fdp-column name="price" key="price.value">
-                <fdp-table-header *fdpHeaderCellDef>Price Header</fdp-table-header>
-                <fdp-table-cell *fdpCellDef="let item">{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell>
-            </fdp-column>
-
-            <fdp-column name="status" key="status" label="Status"></fdp-column>
-
-            <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
-        </fdp-table>
-    `
+<fdp-table
+  [dataSource]="source"
+  fdCompact
+  emptyTableMessage="No data found"
+  [selectionMode]="selection"
+  [rowsClass]="rowsClass"
+  >
+  <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
+  @if (showIdColumn) {
+    <fdp-column name="id" key="id" label="ID"></fdp-column>
+  }
+  <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
+  <fdp-column name="price" key="price.value">
+    <fdp-table-header *fdpHeaderCellDef>Price Header</fdp-table-header>
+    <fdp-table-cell *fdpCellDef="let item">{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell>
+  </fdp-column>
+  <fdp-column name="status" key="status" label="Status"></fdp-column>
+  <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
+</fdp-table>
+`
 })
 class TableHostComponent {
     @ViewChild(TableComponent) table: TableComponent;

@@ -5,7 +5,6 @@
         [ngTemplateOutletContext]="_toolbarContext"
     ></ng-template>
 }
-
 <fd-busy-indicator
     [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
     [block]="true"
@@ -13,14 +12,12 @@
     <!-- Table Container -->
     <div class="fdp-table__container" #tableContainer>
         <ng-template [ngTemplateOutlet]="tableTemplate"></ng-template>
-
         @if (enableDragResize) {
             <!-- Table column resizer for visually representing the resizing process -->
             <fdp-table-column-resizer class="fdp-table__column-resizer"></fdp-table-column-resizer>
         }
     </div>
 </fd-busy-indicator>
-
 <!-- Table Template -->
 <ng-template #tableTemplate>
     <div
@@ -59,121 +56,165 @@
                     [disableSelectionCheckbox]="_dataSourceTableRows.length === 0"
                 ></tr>
             </thead>
-
-            <tbody
-                *ngIf="!!_tableRowsVisible.length && _tableService.visibleColumnsLength > 0; else emptyTableTemplate"
-                fd-table-body
-                fdkDndList
-                #tableBody
-                [dragoverPredicate]="_dndTableDirective?.dragoverPredicate"
-                [dropPredicate]="_dndTableDirective?.dropPredicate"
-                [noBorderX]="noBorderX || noBorders"
-                [noBorderY]="noBorderY || noBorders"
-                [tabIndex]="pageScrolling ? 0 : -1"
-                [items]="_dndTableRowsPlaceholder"
-                [draggable]="isDraggable"
-                [dropMode]="_dndTableDirective?.dropMode ?? 'group'"
-                (itemDropped)="_dndTableDirective?.dragDropItemDrop($event)"
-                (dropPredicateCalculating)="_calculatingLoading($event)"
-                (dropCancelled)="_dndTableDirective?.dropCancelled()"
-            >
-                <ng-container *ngFor="let rowIndex of _tableRowsInViewPortPlaceholder; trackBy: _rowTrackBy">
-                    @if (_tableRowsVisible[rowIndex]; as row) {
-                        @switch (row.type) {
-                            @case ('group') {
-                                <tr
-                                    fdp-table-group-row
-                                    [index]="rowIndex"
-                                    [height]="rowHeight"
-                                    [draggable]="isDraggable"
-                                    [row]="row"
-                                    [rowId]="id"
-                                    [keyToColumnMap]="_keyToColumnMap"
-                                    [tableColumnsLength]="_tableColumnsLength"
-                                    (toggleGroupRow)="_toggleGroupRow($event)"
-                                    (click)="_emitRowActivate(row)"
-                                ></tr>
+            @if (!!_tableRowsVisible.length && _tableService.visibleColumnsLength > 0) {
+                <tbody
+                    fd-table-body
+                    fdkDndList
+                    #tableBody
+                    [dragoverPredicate]="_dndTableDirective?.dragoverPredicate"
+                    [dropPredicate]="_dndTableDirective?.dropPredicate"
+                    [noBorderX]="noBorderX || noBorders"
+                    [noBorderY]="noBorderY || noBorders"
+                    [tabIndex]="pageScrolling ? 0 : -1"
+                    [items]="_dndTableRowsPlaceholder"
+                    [draggable]="isDraggable"
+                    [dropMode]="_dndTableDirective?.dropMode ?? 'group'"
+                    (itemDropped)="_dndTableDirective?.dragDropItemDrop($event)"
+                    (dropPredicateCalculating)="_calculatingLoading($event)"
+                    (dropCancelled)="_dndTableDirective?.dropCancelled()"
+                >
+                    @for (rowIndex of _tableRowsInViewPortPlaceholder; track _rowTrackBy($index, rowIndex)) {
+                        @if (_tableRowsVisible[rowIndex]; as row) {
+                            @switch (row.type) {
+                                @case ('group') {
+                                    <tr
+                                        fdp-table-group-row
+                                        [index]="rowIndex"
+                                        [height]="rowHeight"
+                                        [draggable]="isDraggable"
+                                        [row]="row"
+                                        [rowId]="id"
+                                        [keyToColumnMap]="_keyToColumnMap"
+                                        [tableColumnsLength]="_tableColumnsLength"
+                                        (toggleGroupRow)="_toggleGroupRow($event)"
+                                        (click)="_emitRowActivate(row)"
+                                    ></tr>
+                                }
+                                @default {
+                                    <tr
+                                        [fdkDndItem]="row"
+                                        [applyDragItemClass]="isDraggable"
+                                        [class]="row | rowClasses: rowsClass"
+                                        [tabindex]="row.isTree || rowsActivable || !!row.navigatable ? 0 : -1"
+                                        [focusable]="row.isTree || rowsActivable || !!row.navigatable"
+                                        [hoverable]="rowsActivable || isSelectionColumnShown || !!row.navigatable"
+                                        [activable]="rowsActivable || !!row.navigatable"
+                                        [active]="rowIndex === _navigatedRowIndex"
+                                        [highlightActive]="highlightNavigatedRow"
+                                        [style.height.px]="rowHeight"
+                                        [attr.aria-level]="isTreeTable ? row.level + 1 : null"
+                                        (keydown.enter)="_onRowClick(row, $event)"
+                                        (keydown.space)="_onRowClick(row, $event)"
+                                        (click)="_onRowClick(row, $event)"
+                                        (started)="_dndTableDirective?.dragDropStart()"
+                                        [main]="true"
+                                        [class.fd-table__row--draggable]="isDraggable"
+                                        fdp-table-row
+                                        [rowId]="id"
+                                        [index]="rowIndex"
+                                        [row]="row"
+                                        [selectionMode]="_selectionMode"
+                                        [selectableKey]="selectableKey"
+                                        [enableTristateMode]="enableTristateMode"
+                                        [fixed]="fixed"
+                                        [selectionColumnWidth]="_selectionColumnWidth"
+                                        [freezeColumnsTo]="freezeColumnsTo"
+                                        [freezeEndColumnsTo]="freezeEndColumnsTo"
+                                    ></tr>
+                                }
                             }
-                            @default {
+                            @if (row.type === 'item' && _poppingColumns.length > 0) {
                                 <tr
-                                    [fdkDndItem]="row"
-                                    [applyDragItemClass]="isDraggable"
+                                    fdp-table-popping-row
+                                    [secondary]="true"
+                                    [selectionMode]="selectionMode"
+                                    [row]="row"
+                                    [checked]="row.checked"
                                     [class]="row | rowClasses: rowsClass"
-                                    [tabindex]="row.isTree || rowsActivable || !!row.navigatable ? 0 : -1"
-                                    [focusable]="row.isTree || rowsActivable || !!row.navigatable"
-                                    [hoverable]="rowsActivable || isSelectionColumnShown || !!row.navigatable"
-                                    [activable]="rowsActivable || !!row.navigatable"
-                                    [active]="rowIndex === _navigatedRowIndex"
-                                    [highlightActive]="highlightNavigatedRow"
-                                    [style.height.px]="rowHeight"
-                                    [attr.aria-level]="isTreeTable ? row.level + 1 : null"
-                                    (keydown.enter)="_onRowClick(row, $event)"
-                                    (keydown.space)="_onRowClick(row, $event)"
-                                    (click)="_onRowClick(row, $event)"
-                                    (started)="_dndTableDirective?.dragDropStart()"
-                                    [main]="true"
-                                    [class.fd-table__row--draggable]="isDraggable"
-                                    fdp-table-row
-                                    [rowId]="id"
-                                    [index]="rowIndex"
-                                    [row]="row"
-                                    [selectionMode]="_selectionMode"
-                                    [selectableKey]="selectableKey"
-                                    [enableTristateMode]="enableTristateMode"
-                                    [fixed]="fixed"
-                                    [selectionColumnWidth]="_selectionColumnWidth"
-                                    [freezeColumnsTo]="freezeColumnsTo"
-                                    [freezeEndColumnsTo]="freezeEndColumnsTo"
+                                    (toggleGroupRow)="_toggleGroupRow($event)"
+                                    (cellClicked)="_onCellClick($event.index, $event.row)"
                                 ></tr>
                             }
-                        }
-                        @if (row.type === 'item' && _poppingColumns.length > 0) {
-                            <tr
-                                fdp-table-popping-row
-                                [secondary]="true"
-                                [selectionMode]="selectionMode"
-                                [row]="row"
-                                [checked]="row.checked"
-                                [class]="row | rowClasses: rowsClass"
-                                (toggleGroupRow)="_toggleGroupRow($event)"
-                                (cellClicked)="_onCellClick($event.index, $event.row)"
-                            ></tr>
-                        }
-                        @if (row.children.length === 0 && (row.childItemsLoading$ | async)) {
-                            <tr fd-table-row *fdkRepeat="3">
-                                <td fd-table-cell *fdkRepeat="_tableColumnsLength">
-                                    <fd-skeleton
-                                        [style.margin]="'auto 0'"
-                                        type="text"
-                                        textLines="1"
-                                        width="60%"
-                                    ></fd-skeleton>
-                                </td>
-                            </tr>
-                        }
-                        <!-- Last rendered child row. -->
-                        @if (row.parent?.lastChild?.index === row.index) {
-                            <tr
-                                aria-hidden="true"
-                                class="fd-table__intersection-spy"
-                                [fdkIntersectionSpy]="pageScrollingThreshold"
-                                (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
-                                [style.top.px]="pageScrollingThreshold * -1"
-                            ></tr>
+                            @if (row.children.length === 0 && (row.childItemsLoading$ | async)) {
+                                <tr fd-table-row *fdkRepeat="3">
+                                    <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+                                        <fd-skeleton
+                                            [style.margin]="'auto 0'"
+                                            type="text"
+                                            textLines="1"
+                                            width="60%"
+                                        ></fd-skeleton>
+                                    </td>
+                                </tr>
+                            }
+                            <!-- Last rendered child row. -->
+                            @if (row.parent?.lastChild?.index === row.index) {
+                                <tr
+                                    aria-hidden="true"
+                                    class="fd-table__intersection-spy"
+                                    [fdkIntersectionSpy]="pageScrollingThreshold"
+                                    (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
+                                    [style.top.px]="pageScrollingThreshold * -1"
+                                ></tr>
+                            }
                         }
                     }
-                </ng-container>
-                @if (pageScrolling) {
-                    <tr
-                        aria-hidden="true"
-                        class="fd-table__intersection-spy"
-                        [fdkIntersectionSpy]="pageScrollingThreshold"
-                        (intersected)="$event && _onSpyIntersect($event)"
-                        [style.top.px]="pageScrollingThreshold * -1"
-                    ></tr>
+                    @if (pageScrolling) {
+                        <tr
+                            aria-hidden="true"
+                            class="fd-table__intersection-spy"
+                            [fdkIntersectionSpy]="pageScrollingThreshold"
+                            (intersected)="$event && _onSpyIntersect($event)"
+                            [style.top.px]="pageScrollingThreshold * -1"
+                        ></tr>
+                    }
+                </tbody>
+            } @else {
+                @if (!_dataSourceDirective._firstLoadingDone) {
+                    <tbody fd-table-body>
+                        <tr fd-table-row *fdkRepeat="3">
+                            <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+                                <fd-skeleton
+                                    [style.margin]="'auto 0'"
+                                    type="text"
+                                    textLines="1"
+                                    width="60%"
+                                ></fd-skeleton>
+                            </td>
+                        </tr>
+                    </tbody>
+                } @else {
+                    <tbody fd-table-body class="fdp-table__empty">
+                        <tr fd-table-row>
+                            <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
+                                <div class="fdp-table__empty-table-message">
+                                    <ng-container>
+                                        <div #noDataWrapper>
+                                            <ng-content select="fdp-table-no-data-wrapper"></ng-content>
+                                        </div>
+                                        @if (!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0) {
+                                            <div>
+                                                {{
+                                                    emptyTableMessage ||
+                                                        ('platformTable.defaultEmptyMessage' | fdTranslate)
+                                                }}
+                                            </div>
+                                        }
+                                        @if (_tableService.visibleColumnsLength === 0) {
+                                            <div>
+                                                {{
+                                                    noVisibleColumnsMessage ||
+                                                        ('platformTable.noVisibleColumnsMessage' | fdTranslate)
+                                                }}
+                                            </div>
+                                        }
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 }
-            </tbody>
-
+            }
             @if (pageScrolling) {
                 <tbody class="fd-table__body__focus-mock"></tbody>
             }
@@ -188,43 +229,4 @@
         </table>
     </div>
 </ng-template>
-
 <!-- Empty Table Message -->
-<ng-template #emptyTableTemplate>
-    @if (!_dataSourceDirective._firstLoadingDone) {
-        <tbody fd-table-body>
-            <tr fd-table-row *fdkRepeat="3">
-                <td fd-table-cell *fdkRepeat="_tableColumnsLength">
-                    <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
-                </td>
-            </tr>
-        </tbody>
-    } @else {
-        <tbody fd-table-body class="fdp-table__empty">
-            <tr fd-table-row>
-                <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
-                    <div class="fdp-table__empty-table-message">
-                        <ng-container>
-                            <div #noDataWrapper>
-                                <ng-content select="fdp-table-no-data-wrapper"></ng-content>
-                            </div>
-                            @if (!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0) {
-                                <div>
-                                    {{ emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate) }}
-                                </div>
-                            }
-                            @if (_tableService.visibleColumnsLength === 0) {
-                                <div>
-                                    {{
-                                        noVisibleColumnsMessage ||
-                                            ('platformTable.noVisibleColumnsMessage' | fdTranslate)
-                                    }}
-                                </div>
-                            }
-                        </ng-container>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    }
-</ng-template>

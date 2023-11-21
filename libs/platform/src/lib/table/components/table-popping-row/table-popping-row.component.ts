@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -39,10 +39,8 @@ import {
     },
     standalone: true,
     imports: [
-        NgIf,
         TableCellDirective,
         DisabledBehaviorDirective,
-        NgFor,
         TableTextDirective,
         FormLabelComponent,
         NgTemplateOutlet,

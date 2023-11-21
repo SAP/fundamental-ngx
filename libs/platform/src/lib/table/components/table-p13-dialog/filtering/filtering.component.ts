@@ -7,7 +7,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { RESETTABLE_TOKEN, ResetButtonComponent, Resettable } from '../../reset-button/reset-button.component';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -54,13 +54,11 @@ export { FilterDialogData, FilterDialogResultData };
         PanelComponent,
         PanelTitleDirective,
         PanelContentDirective,
-        NgFor,
         LayoutGridComponent,
         LayoutGridRowDirective,
         FilterRuleComponent,
         LayoutGridColDirective,
         ButtonComponent,
-        NgIf,
         DialogFooterComponent,
         ButtonBarComponent,
         FdTranslatePipe

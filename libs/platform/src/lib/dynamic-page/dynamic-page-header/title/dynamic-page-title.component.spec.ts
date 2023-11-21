@@ -16,6 +16,7 @@ import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/act
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageComponent } from '../../dynamic-page.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

@@ -12,7 +12,7 @@ class MockIntersectionObserver implements IntersectionObserver {
     rootMargin: string;
     thresholds: readonly number[];
     targets: Element[] = [];
-    constructor(public callbackFn: IntersectionObserverCallback, options?: IntersectionObserverInit) {}
+    constructor(public callbackFn: IntersectionObserverCallback) {}
     disconnect(): void {}
     observe(target: Element): void {
         target['trigger'] = () => {
@@ -23,7 +23,7 @@ class MockIntersectionObserver implements IntersectionObserver {
     takeRecords(): IntersectionObserverEntry[] {
         return [];
     }
-    unobserve(target: Element): void {}
+    unobserve(): void {}
     trigger(): void {
         this.callbackFn(
             this.targets.map(

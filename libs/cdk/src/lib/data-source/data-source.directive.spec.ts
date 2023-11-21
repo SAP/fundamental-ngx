@@ -19,7 +19,7 @@ export class MockDataProvider extends AbstractDataProvider<any> {
         return of(this.items);
     }
 
-    getTotalItems(params?: Map<string, any>): Observable<number> {
+    getTotalItems(): Observable<number> {
         return of(this.items.length);
     }
 }

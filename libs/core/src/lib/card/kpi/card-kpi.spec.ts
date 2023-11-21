@@ -13,6 +13,7 @@ import { CardKpiValueDirective } from './card-kpi-value.directive';
 import { CardModule } from '../card.module';
 
 import { CLASS_NAME } from '../constants';
+import { CommonModule } from '@angular/common';
 
 @Component({
     template: `

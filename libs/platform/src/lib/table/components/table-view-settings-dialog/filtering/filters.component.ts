@@ -14,7 +14,7 @@ import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
     BarElementDirective,
@@ -70,7 +70,6 @@ export enum ACTIVE_STEP {
         TemplateDirective,
         BarLeftDirective,
         BarElementDirective,
-        NgIf,
         NgTemplateOutlet,
         BarRightDirective,
         ResetButtonComponent,
@@ -79,8 +78,6 @@ export enum ACTIVE_STEP {
         DialogBodyComponent,
         DialogFooterComponent,
         ButtonBarComponent,
-        NgSwitch,
-        NgSwitchCase,
         FiltersListStepComponent,
         FilterStepComponent,
         FdTranslatePipe
