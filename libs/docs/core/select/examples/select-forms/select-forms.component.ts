@@ -1,6 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { SelectModule } from '@fundamental-ngx/core/select';
 
 @Component({
@@ -8,7 +9,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     templateUrl: './select-forms.component.html',
     styleUrls: ['select-forms.component.scss'],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, SelectModule, NgFor]
+    imports: [FormsModule, ReactiveFormsModule, SelectModule, NgFor, ButtonComponent]
 })
 export class SelectFormsComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
@@ -20,4 +21,10 @@ export class SelectFormsComponent {
     disabledForm = new FormGroup({
         disabledControl: new FormControl({ value: 'Apple', disabled: true }, Validators.required)
     });
+
+    toggleDisabledState(): void {
+        this.disabledForm.controls.disabledControl.enabled
+            ? this.disabledForm.controls.disabledControl.disable()
+            : this.disabledForm.controls.disabledControl.enable();
+    }
 }
