@@ -15,7 +15,6 @@ import {
     Injector,
     Input,
     OnChanges,
-    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -30,7 +29,7 @@ import {
     isDevMode,
     signal
 } from '@angular/core';
-import { Observable, Subscription, defer, filter, map, merge } from 'rxjs';
+import { BehaviorSubject, Observable, defer, filter, map, merge } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -133,22 +132,8 @@ export class SelectComponent<T = any>
         AfterViewInit,
         AfterContentInit,
         OnChanges,
-        OnDestroy,
         FormItemControl
 {
-    /** @deprecated
-     * it is handled internally by controlTemplate != null|undefined is
-     * Equal as extendedBodyTemplate as true.
-     * Whether option components contain more than basic text. */
-    @Input()
-    set extendedBodyTemplate(value: boolean) {
-        this._extendedBodyTemplate = value;
-    }
-
-    get extendedBodyTemplate(): boolean {
-        return this._extendedBodyTemplate;
-    }
-
     /** Scrolling strategy to be used for popover. */
     @Input()
     scrollStrategy: ScrollStrategy;
@@ -229,16 +214,12 @@ export class SelectComponent<T = any>
     /** Value of the Select */
     @Input()
     set value(v: T) {
-        if (this._options) {
-            this._selectValue(v);
-        } else {
-            this._cvaDirective.setValue(v);
-        }
+        this._valueInput$.next(v);
     }
 
     /** @hidden */
     get value(): T {
-        return this._cvaDirective.value as T;
+        return this._cvaDirective.value?.value as T;
     }
 
     /** Event emitted when the popover open state changes. */
@@ -278,9 +259,6 @@ export class SelectComponent<T = any>
      */
     @ViewChild('optionPanel', { read: ElementRef })
     _optionPanel: ElementRef;
-
-    /** @hidden */
-    viewValue: string;
 
     /** @hidden */
     set ariaLabelledBy(v: Nullable<string>) {
@@ -334,19 +312,16 @@ export class SelectComponent<T = any>
     });
 
     /** @hidden */
-    protected _selectedOption?: OptionComponent<T>;
+    _cvaDirective: CvaDirective<OptionsInterface<T> | null> = inject(CvaDirective);
+
+    /**
+     * @hidden
+     * Observable used for syncing the input value and the rendered options
+     **/
+    protected _valueInput$ = new BehaviorSubject<T | null>(null);
 
     /** @hidden */
-    protected _rtlService = inject(RtlService, { optional: true });
-
-    /** @hidden */
-    protected _cvaDirective: CvaDirective<T | null> = inject(CvaDirective);
-
-    /** @hidden */
-    protected _cvaControl: CvaControl<T | null> = inject(CvaControl);
-
-    /** @hidden */
-    private _extendedBodyTemplate = false;
+    protected _cvaControl: CvaControl<OptionsInterface<T> | null> = inject(CvaControl);
 
     /** @hidden */
     private _controlElemFontSize = 0;
@@ -360,16 +335,13 @@ export class SelectComponent<T = any>
      */
     private _maxHeight: number;
 
-    /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
-
     /** Retrieves selected value if any. */
     get triggerValue(): string {
         const emptyValue = ' ';
         if (this.value === null) {
             return this._cvaDirective.placeholder || emptyValue;
         }
-        return this.viewValue || this._cvaDirective.placeholder || emptyValue;
+        return this._cvaDirective.value?.viewValue || this._cvaDirective.placeholder || emptyValue;
     }
 
     /** equal to close
@@ -440,8 +412,9 @@ export class SelectComponent<T = any>
         readonly _contentDensityObserver: ContentDensityObserver
     ) {
         this._tabIndex = parseInt(_tabIndex, 10) || 0;
-        this._textDirection = this._rtlService
-            ? toSignal(this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))), { requireSync: true })
+        const rtlService = inject(RtlService, { optional: true });
+        this._textDirection = rtlService
+            ? toSignal(rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'rtl' : 'ltr'))), { requireSync: true })
             : signal('ltr');
         this.valueChange = this._cvaDirective.valueChange.pipe(
             filter(() => this.canEmitValueChange),
@@ -486,6 +459,13 @@ export class SelectComponent<T = any>
     /** @hidden */
     ngAfterViewInit(): void {
         this._keyManagerService._initKeyManager();
+        this._valueInput$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((v) => {
+            if (v === null || v === undefined) {
+                this._cvaDirective.setValue(null);
+            } else {
+                this._selectValue(v);
+            }
+        });
         this._setupMobileMode();
     }
 
@@ -499,11 +479,6 @@ export class SelectComponent<T = any>
         if (changes['typeaheadDebounceInterval'] && this._keyManagerService._keyManager) {
             this._keyManagerService._keyManager.withTypeAhead(this.typeaheadDebounceInterval);
         }
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
     }
 
     /** Opens the select popover body. */
@@ -590,9 +565,7 @@ export class SelectComponent<T = any>
             }
         });
 
-        this._cvaDirective.setValue(correspondingOption ? correspondingOption.value : null);
-        this.viewValue = correspondingOption ? correspondingOption.viewValue : '';
-        this._selectedOption = correspondingOption;
+        this._cvaDirective.setValue(correspondingOption ? correspondingOption : null);
         return correspondingOption;
     }
 
@@ -729,17 +702,14 @@ export class SelectComponent<T = any>
      * @hidden
      * Invoked when an option is clicked.
      */
-    private _onSelect(option: OptionComponent, isUserInput: boolean): void {
+    private _onSelect(option: OptionComponent<T>, isUserInput: boolean): void {
         const wasSelected = this._compareWith(option.value, this.value);
         if ((option.value === null || option.value === undefined) && this.unselectMissingOption) {
             option._deselect();
             this._cvaDirective.setValue(null);
-            this.viewValue = '';
         } else {
             if (wasSelected !== option.selected) {
-                this._cvaDirective.setValue(option.selected ? option.value : null);
-                this.viewValue = option.selected ? option.viewValue : '';
-                this._selectedOption = option;
+                this._cvaDirective.setValue(option.selected ? option : null);
             }
             if (isUserInput) {
                 this._keyManagerService._keyManager.setActiveItem(option);

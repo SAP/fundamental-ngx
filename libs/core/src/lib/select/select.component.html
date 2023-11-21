@@ -57,7 +57,7 @@
         <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: _selectedOption }"
+                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: _cvaDirective.value }"
             >
             </ng-container>
 
