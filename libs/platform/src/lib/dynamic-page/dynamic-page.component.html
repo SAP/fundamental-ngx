@@ -35,9 +35,7 @@
             }
             @if (titleComponent.keyInfoComponent) {
                 <fd-dynamic-page-title-content>
-                    <ng-container
-                        [ngTemplateOutlet]="titleComponent.keyInfoComponent.contentTemplateRef"
-                    ></ng-container>
+                    <ng-template [ngTemplateOutlet]="titleComponent.keyInfoComponent.contentTemplateRef"></ng-template>
                 </fd-dynamic-page-title-content>
             }
             @if (titleComponent.imageComponent) {
@@ -47,16 +45,16 @@
             }
             @if (titleComponent.globalActionsComponent) {
                 <fd-dynamic-page-global-actions>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="titleComponent.globalActionsComponent.contentTemplateRef"
-                    ></ng-container>
+                    ></ng-template>
                 </fd-dynamic-page-global-actions>
             }
             @if (titleComponent.layoutActionsComponent) {
                 <fd-dynamic-page-layout-actions>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="titleComponent.layoutActionsComponent.contentTemplateRef"
-                    ></ng-container>
+                    ></ng-template>
                 </fd-dynamic-page-layout-actions>
             }
         </fd-dynamic-page-header>

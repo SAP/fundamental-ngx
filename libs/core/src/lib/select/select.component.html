@@ -52,11 +52,11 @@
         (blur)="_onBlur()"
     >
         <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
             >
-            </ng-container>
+            </ng-template>
             <ng-template #defaultSelectContent>
                 {{ triggerValue }}
             </ng-template>

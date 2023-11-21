@@ -38,23 +38,23 @@
         <div fdLayoutGridRow ngForm>
             @if (rule.strategy === FILTER_STRATEGY.BETWEEN) {
                 <div fdLayoutGridCol colGrow>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="ruleInputTemplate"
                         [ngTemplateOutletContext]="{ valueKey: 'value' }"
-                    ></ng-container>
+                    ></ng-template>
                 </div>
                 <div fdLayoutGridCol colGrow>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="ruleInputTemplate"
                         [ngTemplateOutletContext]="{ valueKey: 'value2' }"
-                    ></ng-container>
+                    ></ng-template>
                 </div>
             } @else {
                 <div fdLayoutGridCol colGrow>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="ruleInputTemplate"
                         [ngTemplateOutletContext]="{ valueKey: 'value' }"
-                    ></ng-container>
+                    ></ng-template>
                 </div>
             }
         </div>

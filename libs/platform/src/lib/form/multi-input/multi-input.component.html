@@ -130,10 +130,10 @@
                         <fdp-list-group-header [groupHeaderTitle]="group.label"></fdp-list-group-header>
                     }
                     @if (groupItemTemplate) {
-                        <ng-container
+                        <ng-template
                             [ngTemplateOutlet]="groupItemTemplate"
                             [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
-                        ></ng-container>
+                        ></ng-template>
                     }
                     @for (optionItem of group.children; track optionItem; let i = $index) {
                         <fdp-standard-list-item

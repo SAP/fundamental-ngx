@@ -68,10 +68,10 @@
                                             class="fdp-value-help-dialog__selection-token"
                                             (onCloseClick)="removeCondition(conditionIndex)"
                                         >
-                                            <ng-container
+                                            <ng-template
                                                 [ngTemplateOutlet]="conditionValue"
                                                 [ngTemplateOutletContext]="{ item: item }"
-                                            ></ng-container>
+                                            ></ng-template>
                                         </fd-token>
                                     }
                                     <input fd-form-control fd-tokenizer-input [disabled]="!hasSelectedAndConditions" />

@@ -30,10 +30,10 @@
         >
         </span>
     } @else {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="_customRenderer!"
             [ngTemplateOutletContext]="{ $implicit: term, inputText: inputText }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template #mobileTemplate>
@@ -145,10 +145,10 @@
                         (keydown)="onItemKeyDownHandler($event, term)"
                         (click)="onMenuClickHandler(term)"
                     >
-                        <ng-container
+                        <ng-template
                             [ngTemplateOutlet]="itemSource"
                             [ngTemplateOutletContext]="{ term: term }"
-                        ></ng-container>
+                        ></ng-template>
                     </li>
                 }
             }
@@ -164,10 +164,10 @@
                     (click)="onMenuClickHandler(term)"
                     [value]="term"
                 >
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="itemSource"
                         [ngTemplateOutletContext]="{ term: term }"
-                    ></ng-container>
+                    ></ng-template>
                 </li>
             }
         }

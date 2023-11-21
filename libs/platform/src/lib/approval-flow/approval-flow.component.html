@@ -144,9 +144,9 @@
                                             >
                                                 <fd-grid-list-item-toolbar>
                                                     @if (_isEditMode) {
-                                                        <ng-container
+                                                        <ng-template
                                                             [ngTemplateOutlet]="approvalFlowNode._overflowMenuButton"
-                                                        ></ng-container>
+                                                        ></ng-template>
                                                     }
                                                 </fd-grid-list-item-toolbar>
                                                 <fd-avatar
@@ -159,9 +159,9 @@
                                                     [circle]="true"
                                                 ></fd-avatar>
                                                 <ng-template fd-grid-list-item-body>
-                                                    <ng-container
+                                                    <ng-template
                                                         [ngTemplateOutlet]="approvalFlowNode._nodeContent"
-                                                    ></ng-container>
+                                                    ></ng-template>
                                                 </ng-template>
                                             </fd-grid-list-item>
                                         </fdp-approval-flow-node>

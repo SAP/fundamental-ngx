@@ -35,10 +35,10 @@
                         </li>
                         @for (strategy of _includeStrategy; track strategy) {
                             <li fd-option [value]="strategy.key">
-                                <ng-container
+                                <ng-template
                                     [ngTemplateOutlet]="conditionStrategyOption"
                                     [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
-                                ></ng-container>
+                                ></ng-template>
                             </li>
                         }
                     }
@@ -48,10 +48,10 @@
                         </li>
                         @for (strategy of _excludeStrategy; track strategy) {
                             <li fd-option [value]="strategy.key">
-                                <ng-container
+                                <ng-template
                                     [ngTemplateOutlet]="conditionStrategyOption"
                                     [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
-                                ></ng-container>
+                                ></ng-template>
                             </li>
                         }
                     }
@@ -77,10 +77,10 @@
                                         #fromModel="ngModel"
                                         [(ngModel)]="item.value"
                                     />
-                                    <ng-container
+                                    <ng-template
                                         [ngTemplateOutlet]="countError"
                                         [ngTemplateOutletContext]="{ $implicit: item.value && item.value.length }"
-                                    ></ng-container>
+                                    ></ng-template>
                                 </fd-form-input-message-group>
                             </div>
                             <div fdLayoutGridCol colGrow>
@@ -98,10 +98,10 @@
                                         #toModel="ngModel"
                                         [(ngModel)]="item.valueTo"
                                     />
-                                    <ng-container
+                                    <ng-template
                                         [ngTemplateOutlet]="countError"
                                         [ngTemplateOutletContext]="{ $implicit: item.value && item.value.length }"
-                                    ></ng-container>
+                                    ></ng-template>
                                 </fd-form-input-message-group>
                             </div>
                         } @else {
@@ -120,10 +120,10 @@
                                         [(ngModel)]="item.value"
                                     />
                                     @if (valueModel.invalid) {
-                                        <ng-container
+                                        <ng-template
                                             [ngTemplateOutlet]="countError"
                                             [ngTemplateOutletContext]="{ $implicit: item.value && item.value.length }"
-                                        ></ng-container>
+                                        ></ng-template>
                                     }
                                 </fd-form-input-message-group>
                             </div>

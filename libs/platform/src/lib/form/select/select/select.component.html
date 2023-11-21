@@ -42,40 +42,39 @@
             @if (item.icon) {
                 <fd-icon [glyph]="item.icon" class="fd-template-icon icon-margin"></fd-icon>
             }
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="listItem"
                 [ngTemplateOutletContext]="{ optionItem: item, index: index }"
-            ></ng-container>
-            <ng-container
-                secondary
+            ></ng-template>
+            <ng-template
                 [ngTemplateOutlet]="secondaryTextSource"
                 [ngTemplateOutletContext]="{ optionItem: item }"
-            ></ng-container>
+            ></ng-template>
         </li>
     }
 </fd-select>
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>
     @if (_isSelectedOptionItem(optionItem) && !!_selectedItemTemplate) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="_selectedItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
+        ></ng-template>
     }
     @if (!(_isSelectedOptionItem(optionItem) && _selectedItemTemplate)) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="optionItemSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     @if (!_optionItemTemplate) {
         <span [innerHTML]="optionItem.label"></span>
     } @else {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="_optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
@@ -87,10 +86,10 @@
                 [innerHTML]="optionItem.secondaryText"
             ></span>
         } @else {
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="_secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
-            ></ng-container>
+            ></ng-template>
         }
     }
 </ng-template>

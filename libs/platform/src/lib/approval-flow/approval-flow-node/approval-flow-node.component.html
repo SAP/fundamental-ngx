@@ -71,11 +71,11 @@
                 @if (approvalStatusTemplate) {
                     @if (!checkDueDate || !_showDueDateWarning) {
                         @if (approvalStatusTemplate) {
-                            <ng-container
+                            <ng-template
                                 [ngTemplateOutlet]="approvalStatusTemplate"
                                 [ngTemplateOutletContext]="{ node: node }"
                             >
-                            </ng-container>
+                            </ng-template>
                         }
                     }
                 } @else {

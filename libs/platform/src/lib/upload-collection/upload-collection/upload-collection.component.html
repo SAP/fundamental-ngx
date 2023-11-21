@@ -2,7 +2,7 @@
     <!-- Message strip -->
     @if (_message) {
         <fd-message-strip [type]="_message.messageStripType" (onDismiss)="_messageStripDismiss()">
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="message"
                 [ngTemplateOutletContext]="{
                     messageType: _message.messageType,
@@ -10,7 +10,7 @@
                     messageStripType: _message.messageStripType,
                     count: _message.count
                 }"
-            ></ng-container>
+            ></ng-template>
         </fd-message-strip>
     }
     <!-- Toolbar -->
@@ -436,81 +436,81 @@
     @if (_message) {
         @switch (messageType) {
             @case (_messageType.CREATE) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageNewFolder"
                     [ngTemplateOutletContext]="{
                         messageStripType: _message.messageStripType,
                         payload: _message.payload
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.UPDATE_VERSION) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageUpdateVersion"
                     [ngTemplateOutletContext]="{
                         messageStripType: _message.messageStripType,
                         payload: _message.payload
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.FILE_RENAME) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageFileRename"
                     [ngTemplateOutletContext]="{
                         messageStripType: _message.messageStripType,
                         payload: _message.payload
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.REMOVE) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageRemove"
                     [ngTemplateOutletContext]="{
                         payload: _message.payload,
                         messageStripType: _message.messageStripType,
                         count: _message.count
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.MOVE) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageMove"
                     [ngTemplateOutletContext]="{
                         payload: _message.payload,
                         messageStripType: _message.messageStripType,
                         count: _message.count
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.TYPE_MISMATCH) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageTypeMismatch"
                     [ngTemplateOutletContext]="{
                         payload: _message.payload,
                         messageStripType: _message.messageStripType,
                         count: _message.count
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.FILE_SIZE) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageFileSize"
                     [ngTemplateOutletContext]="{
                         payload: _message.payload,
                         messageStripType: _message.messageStripType,
                         count: _message.count
                     }"
-                ></ng-container>
+                ></ng-template>
             }
             @case (_messageType.FILE_NAME_LENGTH) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="messageFilenameLength"
                     [ngTemplateOutletContext]="{
                         payload: _message.payload,
                         messageStripType: _message.messageStripType,
                         count: _message.count
                     }"
-                ></ng-container>
+                ></ng-template>
             }
         }
     }

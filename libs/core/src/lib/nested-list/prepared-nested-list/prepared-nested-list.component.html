@@ -9,10 +9,10 @@
                 @if (condensed && first && item.list) {
                     <fd-nested-list-popover [title]="item.link?.title || ''">
                         <div fd-nested-list-content [selected]="!!item.link?.selected">
-                            <ng-container
+                            <ng-template
                                 [ngTemplateOutlet]="link"
                                 [ngTemplateOutletContext]="{ item: item }"
-                            ></ng-container>
+                            ></ng-template>
                             <button fd-nested-list-expand-icon></button>
                         </div>
                         @if (item.list) {
@@ -25,10 +25,7 @@
                 }
                 @if ((!condensed || !first) && item.list) {
                     <div fd-nested-list-content>
-                        <ng-container
-                            [ngTemplateOutlet]="link"
-                            [ngTemplateOutletContext]="{ item: item }"
-                        ></ng-container>
+                        <ng-template [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-template>
                         <button fd-nested-list-expand-icon></button>
                     </div>
                     @if (item.list) {

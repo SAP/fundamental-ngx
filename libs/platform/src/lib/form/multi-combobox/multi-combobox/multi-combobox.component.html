@@ -183,10 +183,10 @@
                     </label>
                 }
                 @if (groupItemTemplate) {
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="groupItemTemplate"
                         [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
-                    ></ng-container>
+                    ></ng-template>
                 }
                 @for (optionItem of group.children; track optionItem) {
                     <li
@@ -202,10 +202,10 @@
                             [ngModel]="optionItem.selected"
                         >
                         </fd-checkbox>
-                        <ng-container
+                        <ng-template
                             [ngTemplateOutlet]="listItem"
                             [ngTemplateOutletContext]="{ optionItem: optionItem, index: $index }"
-                        ></ng-container>
+                        ></ng-template>
                     </li>
                 }
             }
@@ -224,10 +224,10 @@
                         [ngModel]="optionItem.selected"
                     >
                     </fd-checkbox>
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="listItem"
                         [ngTemplateOutletContext]="{ optionItem: optionItem, index: $index }"
-                    ></ng-container>
+                    ></ng-template>
                 </li>
             }
         }
@@ -235,20 +235,20 @@
 </ng-template>
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>
     @if (optionItem.selected && !!selectedItemTemplate) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="selectedItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
+        ></ng-template>
     }
     @if (!(optionItem.selected && selectedItemTemplate)) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="optionItemSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
-        ></ng-container>
-        <ng-container
+        ></ng-template>
+        <ng-template
             [ngTemplateOutlet]="secondaryTextSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
@@ -259,10 +259,10 @@
             [innerHTML]="optionItem.label | highlight: inputText"
         ></span>
     } @else {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
@@ -275,10 +275,10 @@
                 [innerHTML]="optionItem.secondaryText | highlight: inputText"
             ></span>
         } @else {
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
-            ></ng-container>
+            ></ng-template>
         }
     }
 </ng-template>

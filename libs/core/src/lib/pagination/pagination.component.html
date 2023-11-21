@@ -3,10 +3,10 @@
         <div class="fd-pagination__per-page">
             <!-- note, that we're checking for the length of "itemsPerPageOptions", but using "_displayedPageSizeOptions" as "pageOptions" -->
             <!-- these 2 can be different, as "_displayedPageSizeOptions" may also include "itemsPerPage" if it's not included in options -->
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="itemsPerPageTemplate || perPage"
                 [ngTemplateOutletContext]="{ onSelect: _onChangePerPage, pageOptions: _displayedPageSizeOptions }"
-            ></ng-container>
+            ></ng-template>
         </div>
     }
     @if (totalItems >= itemsPerPage) {
@@ -165,10 +165,10 @@
     }
     @if (displayTotalItems) {
         <span class="fd-pagination__total" [attr.id]="_totalPagesElementId">
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="displayTextTemplate || total"
                 [ngTemplateOutletContext]="{ showing: _currentShowing }"
-            ></ng-container>
+            ></ng-template>
         </span>
     }
 }

@@ -126,10 +126,10 @@
                         <fd-checkbox (click)="_onCheckboxClick(option, $event, idx)" [value]="option.isSelected">
                             <!-- TODO -->
                         </fd-checkbox>
-                        <ng-container
+                        <ng-template
                             [ngTemplateOutlet]="itemSource"
                             [ngTemplateOutletContext]="{ option: option }"
-                        ></ng-container>
+                        ></ng-template>
                     </li>
                 }
                 @if (
@@ -153,10 +153,10 @@
         @if (!itemTemplate) {
             <span fd-list-title [innerHtml]="option.label | highlight: _searchTermCtrl.value || '' : highlight"></span>
         } @else {
-            <ng-container
+            <ng-template
                 [ngTemplateOutlet]="itemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: option.item }"
-            ></ng-container>
+            ></ng-template>
         }
     </ng-template>
 }

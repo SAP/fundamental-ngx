@@ -141,10 +141,10 @@
                         [selected]="isSelectedOptionItem(optionItem)"
                         [value]="optionItem"
                     >
-                        <ng-container
+                        <ng-template
                             [ngTemplateOutlet]="listItem"
                             [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
-                        ></ng-container>
+                        ></ng-template>
                     </li>
                 }
             }
@@ -159,10 +159,10 @@
                     [selected]="isSelectedOptionItem(optionItem)"
                     [value]="optionItem"
                 >
-                    <ng-container
+                    <ng-template
                         [ngTemplateOutlet]="listItem"
                         [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
-                    ></ng-container>
+                    ></ng-template>
                 </li>
             }
         }
@@ -170,20 +170,20 @@
 </ng-template>
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>
     @if (isSelectedOptionItem(optionItem) && !!selectedItemTemplate) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="selectedItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-        ></ng-container>
+        ></ng-template>
     }
     @if (!(isSelectedOptionItem(optionItem) && selectedItemTemplate)) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="optionItemSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
-        ></ng-container>
-        <ng-container
+        ></ng-template>
+        <ng-template
             [ngTemplateOutlet]="secondaryTextSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>

@@ -40,11 +40,11 @@
                                             </div>
                                             <ul fd-nested-list>
                                                 @for (subItem of itemSubItems; track subItem.name) {
-                                                    <ng-container
+                                                    <ng-template
                                                         [ngTemplateOutlet]="listItemTpl"
                                                         [ngTemplateOutletContext]="{ $implicit: subItem }"
                                                     >
-                                                    </ng-container>
+                                                    </ng-template>
                                                 }
                                             </ul>
                                         </li>

@@ -9,7 +9,6 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    forwardRef,
     HostBinding,
     Input,
     OnChanges,
@@ -20,10 +19,11 @@ import {
     Renderer2,
     ViewChild,
     ViewChildren,
-    ViewEncapsulation
+    ViewEncapsulation,
+    forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject, combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, combineLatest, fromEvent, of } from 'rxjs';
 import {
     debounceTime,
     distinctUntilChanged,
@@ -38,12 +38,12 @@ import {
 
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
-    applyCssClass,
     CssClassBuilder,
     KeyUtil,
     Nullable,
     OnlyDigitsDirective,
-    RtlService
+    RtlService,
+    applyCssClass
 } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityMode,
