@@ -179,7 +179,6 @@
                 },
                 "scripts": ["node_modules/marked/marked.min.js"],
                 "allowedCommonJsDependencies": ["moment", "highlight.js", "fast-deep-equal", "focus-trap", "dayjs"],
-                "vendorChunk": true,
                 "extractLicenses": false,
                 "buildOptimizer": false,
                 "sourceMap": true,
@@ -197,7 +196,6 @@
                     "sourceMap": false,
                     "namedChunks": false,
                     "extractLicenses": true,
-                    "vendorChunk": false,
                     "buildOptimizer": true,
                     "budgets": [
                         {
@@ -218,7 +216,6 @@
                     "outputHashing": "all",
                     "sourceMap": false,
                     "namedChunks": false,
-                    "vendorChunk": false,
                     "optimization": false,
                     "fileReplacements": [
                         {

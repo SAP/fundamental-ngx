@@ -27,17 +27,13 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
     );
     const { tsConfig } = readTargetOptions({ project: context.projectName as string, target: 'build' }, context);
 
-    const app = new Application();
-    app.options.addReader(new TSConfigReader());
-
-    app.renderer.defineTheme('fd-typedoc', FdTheme);
     const entryPoints = fastGlobSync(projectPath + '/**/*/ng-package.json').map((f) => {
         const json = JSON.parse(readFileSync(f, 'utf-8'));
         const main = json.lib.entryFile;
         return resolve(parse(f).dir, main);
     });
 
-    await app.bootstrapWithPlugins({
+    const app = await Application.bootstrapWithPlugins({
         tsconfig: tsConfig,
         out: outputPath,
         json: join(outputPath, 'typedoc.json'),
@@ -55,8 +51,11 @@ export default async function compileTypedocs(_options: CompileTypedocExecutorSc
         },
         theme: 'fd-typedoc'
     } as unknown as Partial<TypeDocOptions>);
+    app.options.addReader(new TSConfigReader());
 
-    const project = app.convert();
+    app.renderer.defineTheme('fd-typedoc', FdTheme);
+
+    const project = await app.convert();
 
     if (!project) {
         return { success: false };
