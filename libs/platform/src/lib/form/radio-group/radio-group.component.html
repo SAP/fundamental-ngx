@@ -24,8 +24,7 @@
                 ></ng-template>
             </div>
         }
-    }
-    @if (list) {
+    } @else {
         <ng-template [ngTemplateOutlet]="listvalues"></ng-template>
     }
 </fd-form-group>

@@ -41,8 +41,7 @@
                             (avatarClicked)="_onWatcherClick(watcher, $event)"
                         ></fd-avatar>
                     }
-                }
-                @if (_isEditMode) {
+                } @else {
                     <div class="fdp-approval-flow__watchers-input-container">
                         <fd-multi-input
                             [dropdownValues]="_usersForWatchersList"

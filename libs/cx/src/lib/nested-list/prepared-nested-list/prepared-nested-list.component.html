@@ -4,8 +4,7 @@
             <li fdx-nested-list-header>
                 {{ item.headerTitle }}
             </li>
-        }
-        @if (!item.headerTitle) {
+        } @else {
             <li fdx-nested-list-item [expanded]="!!item.expanded" (expandedChange)="_expandedChange($event, item)">
                 @if (condensed && first && item.list) {
                     <fdx-nested-list-popover [title]="item.link?.title || ''">

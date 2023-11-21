@@ -71,8 +71,7 @@
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     @if (!_optionItemTemplate) {
         <span [innerHTML]="optionItem.label"></span>
-    }
-    @if (_optionItemTemplate) {
+    } @else {
         <ng-container
             [ngTemplateOutlet]="_optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
@@ -87,8 +86,7 @@
                 fd-list-secondary
                 [innerHTML]="optionItem.secondaryText"
             ></span>
-        }
-        @if (_secondaryItemTemplate) {
+        } @else {
             <ng-container
                 [ngTemplateOutlet]="_secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"

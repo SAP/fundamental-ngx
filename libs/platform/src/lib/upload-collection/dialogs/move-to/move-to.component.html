@@ -7,8 +7,7 @@
                         <h1 class="fd-title--bold" fd-title>
                             {{ 'platformUploadCollection.moveToTitle' | fdTranslate }}
                         </h1>
-                    }
-                    @if (_currentFolder) {
+                    } @else {
                         <button
                             fd-button
                             fdType="transparent"

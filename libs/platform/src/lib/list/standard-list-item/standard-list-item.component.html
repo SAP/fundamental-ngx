@@ -269,8 +269,7 @@
         >
             {{ secondary }}
         </span>
-    }
-    @if (inverted) {
+    } @else {
         <span
             class="fd-list__byline-right"
             [attr.aria-label]="secondary"
@@ -292,8 +291,7 @@
         >
             {{ secondary.text }}
         </span>
-    }
-    @if (inverted) {
+    } @else {
         <span
             class="fd-list__byline-right"
             [attr.aria-label]="secondary.ariaLabel ?? secondary.text"

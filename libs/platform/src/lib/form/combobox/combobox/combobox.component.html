@@ -148,8 +148,7 @@
                     </li>
                 }
             }
-        }
-        @if (!isGroup) {
+        } @else {
             @for (optionItem of _suggestions; track optionItem; let i = $index) {
                 <li
                     (click)="handleOptionItem(optionItem)"

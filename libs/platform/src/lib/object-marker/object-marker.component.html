@@ -9,8 +9,7 @@
     >
         <ng-content></ng-content>
     </span>
-}
-@if (clickable) {
+} @else {
     <a
         [attr.href]="link"
         fd-object-marker

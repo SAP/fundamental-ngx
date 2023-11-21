@@ -67,8 +67,7 @@
     }
     @if (!valueText) {
         <span class="fd-progress-indicator__label"> {{ valueNow }}% </span>
-    }
-    @if (valueText) {
+    } @else {
         <span class="fd-progress-indicator__label">
             {{ valueText }}
         </span>

@@ -56,8 +56,7 @@
             <fd-submenu #versionSubmenu>
                 <ng-template [ngTemplateOutlet]="versionsTemplate"></ng-template>
             </fd-submenu>
-        }
-        @if (size !== 's') {
+        } @else {
             <button
                 fd-button
                 fdType="transparent"

@@ -10,8 +10,7 @@
                         <div fd-list-title>{{ item.label }}</div>
                         <div fd-list-byline>{{ item.description }}</div>
                     </div>
-                }
-                @if (item.template) {
+                } @else {
                     <ng-template
                         [ngTemplateOutlet]="item.template!"
                         [ngTemplateOutletContext]="{ $implicit: item }"

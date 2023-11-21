@@ -22,8 +22,7 @@
                 <fdp-table-cell *fdpCellDef="let item; as: _variantModel">
                     @if (!item.readonly) {
                         <fdp-input [(ngModel)]="item.name"></fdp-input>
-                    }
-                    @if (item.readonly) {
+                    } @else {
                         {{ item.name }}
                     }
                 </fdp-table-cell>

@@ -17,8 +17,7 @@
                 }
             </div>
         </div>
-    }
-    @if (!appendToWizard) {
+    } @else {
         <div cdkScrollable class="fd-wizard-container-wrapper">
             <div fd-scrollbar>
                 @for (contentTemplate of contentTemplates; track contentTemplate) {

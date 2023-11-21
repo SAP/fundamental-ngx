@@ -31,8 +31,7 @@
                                     [item]="step"
                                     [stepStatus]="step.status"
                                 ></fdp-wizard-generator-step>
-                            }
-                            @if (step.summary) {
+                            } @else {
                                 <fdp-wizard-summary-step
                                     [customSummaryStepTemplate]="customSummaryStepTemplate"
                                     [status]="step.status"
@@ -71,8 +70,7 @@
                                                 [ngTemplateOutletContext]="{ goNext: _goNextFn }"
                                             ></ng-template>
                                         }
-                                    }
-                                    @if (isLastStep) {
+                                    } @else {
                                         <ng-template #defaultFinishButtonTemplate>
                                             <fdp-button
                                                 [fdContentDensity]="navigationButtonLabels.finish.contentDensity"

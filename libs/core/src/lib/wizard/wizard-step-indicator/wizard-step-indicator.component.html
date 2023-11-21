@@ -17,8 +17,7 @@
             }
         </fd-action-sheet-body>
     </fd-action-sheet>
-}
-@if (!stackedItems || stackedItems.length <= 1) {
+} @else {
     <span
         class="fd-wizard__step-indicator"
         (click)="stepItemClicked(stackedItems.length ? stackedItems[0] : undefined, $event)"

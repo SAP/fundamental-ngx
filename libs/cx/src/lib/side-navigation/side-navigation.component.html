@@ -12,8 +12,7 @@
         <ng-content select="[fdx-side-nav-main]"></ng-content>
         <ng-template [ngTemplateOutlet]="scrollDown"></ng-template>
         <ng-content select="[fdx-side-nav-utility]"></ng-content>
-    }
-    @if (sideNavigationConfiguration) {
+    } @else {
         <ng-template [ngTemplateOutlet]="scrollUp"></ng-template>
         @if (sideNavigationConfiguration.mainNavigation) {
             <div fdx-side-nav-main>

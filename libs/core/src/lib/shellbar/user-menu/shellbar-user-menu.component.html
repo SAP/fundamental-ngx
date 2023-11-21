@@ -11,8 +11,7 @@
                 @if (!user.image) {
                     <fd-avatar size="xs" [colorAccent]="user.colorAccent" [circle]="true" label="{{ user.fullName }}">
                     </fd-avatar>
-                }
-                @if (user.image) {
+                } @else {
                     <fd-avatar
                         [colorAccent]="user.colorAccent"
                         [circle]="true"

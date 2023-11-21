@@ -1,8 +1,7 @@
 <div class="fdp-multi-combobox">
     @if (mobile) {
         <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
-    }
-    @if (!mobile) {
+    } @else {
         <fd-popover
             additionalBodyClass="fd-popover-custom-list fdp-multi-combobox__list-container"
             (isOpenChange)="popoverOpenChangeHandle($event)"
@@ -259,8 +258,7 @@
             [attr.title]="optionItem.label"
             [innerHTML]="optionItem.label | highlight: inputText"
         ></span>
-    }
-    @if (optionItemTemplate) {
+    } @else {
         <ng-container
             [ngTemplateOutlet]="optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
@@ -276,8 +274,7 @@
                 [attr.title]="optionItem.secondaryText"
                 [innerHTML]="optionItem.secondaryText | highlight: inputText"
             ></span>
-        }
-        @if (secondaryItemTemplate) {
+        } @else {
             <ng-container
                 [ngTemplateOutlet]="secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
