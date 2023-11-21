@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { SelectionModel } from '@angular/cdk/collections';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -26,25 +30,22 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { SelectionModel } from '@angular/cdk/collections';
 import { defer, merge, Observable, Subject, Subscription } from 'rxjs';
 import { startWith, switchMap, takeUntil } from 'rxjs/operators';
 
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { DynamicComponentService, KeyUtil, ModuleDeprecation, Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
-import { SELECT_COMPONENT, SelectInterface } from './select.interface';
-import { SelectKeyManagerService } from './select-key-manager.service';
+import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
+import { FormStates, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
+import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FdOptionSelectionChange, OptionComponent } from './option/option.component';
+import { SelectKeyManagerService } from './select-key-manager.service';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
 import { SelectMobileModule } from './select-mobile/select-mobile.module';
-import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
-import { ENTER, ESCAPE, SPACE } from '@angular/cdk/keycodes';
-import { FormStates } from '@fundamental-ngx/cdk/forms';
+import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 
 let selectUniqueId = 0;
 
@@ -88,6 +89,7 @@ export const SELECT_ITEM_HEIGHT_EM = 4;
 })
 export class SelectComponent<T = any>
     implements
+        SingleDropdownValueControl,
         ControlValueAccessor,
         SelectInterface,
         OnInit,
@@ -212,6 +214,14 @@ export class SelectComponent<T = any>
     /** Additional classname for the select dropdown button element. */
     @Input()
     selectDropdownButtonClass: Nullable<string>;
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'close';
 
     /** Event emitted when the popover open state changes. */
     @Output()
@@ -486,8 +496,11 @@ export class SelectComponent<T = any>
     }
 
     /** @hidden */
-    close(forceClose: boolean = false): void {
+    close(forceClose = false, tabOut = false): void {
         if (this._isOpen || forceClose) {
+            if (tabOut && this.tabOutStrategy === 'closeAndSelect') {
+                this._keyManagerService._keyManager.activeItem?._selectViaInteraction();
+            }
             this._isOpen = false;
             this._keyManagerService._keyManager.withHorizontalOrientation(this._isRtl() ? 'rtl' : 'ltr');
             this._changeDetectorRef.markForCheck();

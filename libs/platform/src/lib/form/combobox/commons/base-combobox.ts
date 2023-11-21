@@ -1,23 +1,4 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    ContentChildren,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Host,
-    Inject,
-    Input,
-    OnDestroy,
-    Optional,
-    Output,
-    QueryList,
-    Self,
-    SkipSelf,
-    TemplateRef,
-    ViewChild
-} from '@angular/core';
-import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+/* eslint-disable @typescript-eslint/member-ordering */
 import {
     ALT,
     BACKSPACE,
@@ -41,41 +22,64 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Host,
+    Inject,
+    Input,
+    OnDestroy,
+    Optional,
+    Output,
+    QueryList,
+    Self,
+    SkipSelf,
+    TemplateRef,
+    ViewChild
+} from '@angular/core';
+import { ControlContainer, NgControl, NgForm } from '@angular/forms';
+import { Observable, Subject, Subscription, fromEvent, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import {
     ArrayComboBoxDataSource,
-    coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
-    PlatformFormFieldControl,
-    isDataSource,
-    isFunction,
-    isJsObject,
-    isOptionItem,
-    isString,
     MatchingBy,
     MatchingStrategy,
     ObservableComboBoxDataSource,
     OptionItem,
-    PlatformFormField
+    PlatformFormField,
+    PlatformFormFieldControl,
+    coerceArraySafe,
+    isDataSource,
+    isFunction,
+    isJsObject,
+    isOptionItem,
+    isString
 } from '@fundamental-ngx/platform/shared';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
+import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, SingleDropdownValueControl } from '@fundamental-ngx/cdk/forms';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxConfig } from '../combobox.config';
-import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
 
 @Directive()
-export abstract class BaseCombobox extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseCombobox
+    extends CollectionBaseInput
+    implements AfterViewInit, SingleDropdownValueControl, OnDestroy
+{
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -176,6 +180,14 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Whether list item options should be rendered as byline. */
     @Input()
     byline = false;
+
+    /**
+     * Action to perform when user shifts focus from the dropdown.
+     * - `close` will close the dropdown preserving previously selected value.
+     * - `closeAndSelect` will close the dropdown and select last focused dropdown item.
+     */
+    @Input()
+    tabOutStrategy: 'close' | 'closeAndSelect' = 'closeAndSelect';
 
     /** Event emitted when data loading is started. */
     // eslint-disable-next-line @angular-eslint/no-output-on-prefix
@@ -532,6 +544,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     _close(): void {
+        if (this.tabOutStrategy === 'closeAndSelect') {
+            const focusedItem = this.listComponent.getActiveItem();
+            if (focusedItem) {
+                this.handleOptionItem(focusedItem.value);
+                return;
+            }
+        }
         this.inputText = this.value ? this.inputText : '';
         this.searchInputElement.nativeElement.focus();
         this.isOpenChangeHandle(false);
