@@ -2,6 +2,7 @@ import { DestroyRef, ElementRef, EventEmitter, InjectionToken, QueryList, Signal
 
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MobileMode, MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { Observable } from 'rxjs';
 import { OptionsInterface } from './options.interface';
 
 export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInterface');
@@ -12,7 +13,8 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInter
  */
 export interface SelectInterface<ValueType = any> extends MobileMode {
     typeaheadDebounceInterval: number;
-    selected: OptionsInterface<ValueType>;
+    value: ValueType;
+    viewValue: string;
     mobileConfig: MobileModeConfig;
     _textDirection: Signal<'ltr' | 'rtl'>;
     _options: QueryList<OptionsInterface<ValueType>>;
@@ -23,7 +25,7 @@ export interface SelectInterface<ValueType = any> extends MobileMode {
     _liveAnnouncer: LiveAnnouncer;
 
     isOpenChange: EventEmitter<boolean>;
-    valueChange: EventEmitter<any>;
+    valueChange: Observable<ValueType>;
 
     close(forceClose?: boolean, tabOut?: boolean): void;
     open(): void;

@@ -67,7 +67,7 @@ export class SelectKeyManagerService<ValueType = any> {
             event.preventDefault();
             this._component.open();
         } else {
-            const previouslySelectedOption = this._component.selected;
+            const previouslySelectedOption = this._component.value;
 
             if (KeyUtil.isKeyCode(event, [HOME, END])) {
                 if (KeyUtil.isKeyCode(event, HOME)) {
@@ -78,11 +78,11 @@ export class SelectKeyManagerService<ValueType = any> {
                 event.preventDefault();
             }
 
-            const selectedOption = this._component.selected;
+            const selectedOption = this._component.value;
 
             // a11y Since the value has changed, we need to announce it.
             if (selectedOption && previouslySelectedOption !== selectedOption) {
-                this._component._liveAnnouncer.announce((selectedOption as OptionsInterface).viewValue, 10000);
+                this._component._liveAnnouncer.announce(this._component.viewValue, 10000);
             }
             manager.onKeydown(event);
         }

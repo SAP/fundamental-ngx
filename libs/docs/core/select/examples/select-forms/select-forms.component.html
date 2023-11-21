@@ -15,6 +15,7 @@
         <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
     </fd-select>
 </form>
+<button (click)="toggleDisabled()">Toggle disabled</button>
 <small style="display: block">Value: {{ disabledForm.controls.disabledControl.value }}</small>
 <small style="display: block">Status: {{ disabledForm.status }}</small>
 

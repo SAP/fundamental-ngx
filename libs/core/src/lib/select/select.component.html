@@ -7,7 +7,7 @@
         [isOpen]="_isOpen"
         [triggers]="[]"
         [focusTrapped]="true"
-        [disabled]="disabled || _cvaDirective.readonly"
+        [disabled]="_cvaDirective.disabled || _cvaDirective.readonly"
         [appendTo]="appendTo"
         [scrollStrategy]="scrollStrategy"
         [closeOnEscapeKey]="true"
@@ -34,18 +34,18 @@
         [class]="_selectControlClass"
         [class.is-active]="_isOpen"
         [class.is-expanded]="_isOpen"
-        [class.is-disabled]="disabled"
+        [class.is-disabled]="_cvaDirective.disabled"
         [class.is-readonly]="_cvaDirective.readonly"
-        [attr.tabindex]="_tabIndex"
+        [attr.tabindex]="_cvaDirective.disabled ? '-1' : _tabIndex"
         [attr.id]="_cvaDirective.id"
         [attr.aria-active]="_isOpen"
         aria-live="polite"
         role="combobox"
         aria-roledescription="listbox"
         [attr.aria-expanded]="_isOpen"
-        [attr.aria-disabled]="disabled"
+        [attr.aria-disabled]="_cvaDirective.disabled"
         [attr.aria-controls]="_cvaDirective.id + '-list-box'"
-        [attr.aria-haspopup]="!(_cvaDirective.readonly || this.disabled)"
+        [attr.aria-haspopup]="!(_cvaDirective.readonly || _cvaDirective.disabled)"
         [attr.aria-required]="_cvaDirective.required"
         [attr.title]="triggerValue"
         [attr.aria-label]="_cvaDirective.ariaLabel || ('platformSelect.selectOptionLabel' | fdTranslate)"
@@ -57,7 +57,7 @@
         <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
             <ng-container
                 [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
+                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: _selectedOption }"
             >
             </ng-container>
 
@@ -68,7 +68,7 @@
         <span
             class="fd-button fd-button--transparent fd-select__button"
             [ngClass]="selectDropdownButtonClass"
-            [class.is-disabled]="disabled"
+            [class.is-disabled]="_cvaDirective.disabled"
             *ngIf="!_cvaDirective.readonly"
         >
             <fd-icon [ariaHidden]="true" [glyph]="glyph"></fd-icon>
