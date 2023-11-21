@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+<ng-template [ngTemplateOutlet]="mobile ? controlTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
     <fd-popover
         [isOpen]="isOpen && _suggestions.length > 0"
@@ -12,16 +12,13 @@
         additionalBodyClass="fdp-combobox__popover"
     >
         <fd-popover-control>
-            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body [hidden]="_suggestions.length === 0">
-            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="listTemplate"></ng-template>
             <ng-content></ng-content>
         </fd-popover-body>
     </fd-popover>
-</ng-template>
-<ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
 <ng-template #controlTemplate>
     <fd-form-input-message-group>

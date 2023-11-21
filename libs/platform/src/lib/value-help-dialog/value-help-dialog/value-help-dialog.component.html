@@ -2,22 +2,22 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header [dir]="_dir">
             <ng-template fdkTemplate="header">
-                <ng-container *ngTemplateOutlet="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-container>
+                <ng-template [ngTemplateOutlet]="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-template>
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body [dir]="_dir">
             @if (!mobile) {
-                <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
+                <ng-template [ngTemplateOutlet]="advancedSearchContent"></ng-template>
             }
             <div fd-scrollbar class="fdp-value-help-dialog__content-holder">
                 @if (mobile) {
-                    <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
+                    <ng-template [ngTemplateOutlet]="advancedSearchContent"></ng-template>
                 }
                 @if (selectedTab === _tabTypes.selectFromList) {
-                    <ng-container *ngTemplateOutlet="selectionContent"></ng-container>
+                    <ng-template [ngTemplateOutlet]="selectionContent"></ng-template>
                 }
                 @if (selectedTab === _tabTypes.defineConditions) {
-                    <ng-container *ngTemplateOutlet="defineConditionsContent"></ng-container>
+                    <ng-template [ngTemplateOutlet]="defineConditionsContent"></ng-template>
                 }
             </div>
         </fd-dialog-body>
@@ -308,18 +308,18 @@
     <h5 fd-title>{{ 'platformVHD.searchAdvancedSearchLabel' | fdTranslate }}</h5>
 </ng-template>
 <ng-template #desktopDialogTitle>
-    <ng-container *ngTemplateOutlet="dialogTitleText"></ng-container>
-    <ng-container *ngTemplateOutlet="desktopTabs"></ng-container>
+    <ng-template [ngTemplateOutlet]="dialogTitleText"></ng-template>
+    <ng-template [ngTemplateOutlet]="desktopTabs"></ng-template>
 </ng-template>
 <ng-template #mobileDialogTitle>
     <div class="fdp-value-help-dialog__mobile-title">
         @if (hasSelectedTab) {
-            <ng-container *ngTemplateOutlet="selectedTabHeader"></ng-container>
+            <ng-template [ngTemplateOutlet]="selectedTabHeader"></ng-template>
         } @else {
             <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
         }
     </div>
-    <ng-container *ngTemplateOutlet="mobileTabs"></ng-container>
+    <ng-template [ngTemplateOutlet]="mobileTabs"></ng-template>
 </ng-template>
 <ng-template #desktopTabs>
     @if (showSelectionTab && showDefineTab) {
@@ -399,29 +399,25 @@
 <ng-template #selectedTabHeader>
     @switch (selectedTab) {
         @case (_tabTypes.selectFromList) {
-            <ng-container
-                *ngTemplateOutlet="
-                    tabLink;
-                    context: {
-                        title: 'platformVHD.selectTabTitle' | fdTranslate,
-                        type: selectedTab
-                    }
-                "
-            ></ng-container>
+            <ng-template
+                [ngTemplateOutlet]="tabLink"
+                [ngTemplateOutletContext]="{
+                    title: 'platformVHD.selectTabTitle' | fdTranslate,
+                    type: selectedTab
+                }"
+            ></ng-template>
         }
         @case (_tabTypes.advancedSearch) {
-            <ng-container *ngTemplateOutlet="advancedHeader"></ng-container>
+            <ng-template [ngTemplateOutlet]="advancedHeader"></ng-template>
         }
         @case (_tabTypes.defineConditions) {
-            <ng-container
-                *ngTemplateOutlet="
-                    tabLink;
-                    context: {
-                        title: 'platformVHD.defineTabTitle' | fdTranslate,
-                        type: selectedTab
-                    }
-                "
-            ></ng-container>
+            <ng-template
+                [ngTemplateOutlet]="tabLink"
+                [ngTemplateOutletContext]="{
+                    title: 'platformVHD.defineTabTitle' | fdTranslate,
+                    type: selectedTab
+                }"
+            ></ng-template>
         }
     }
 </ng-template>
@@ -432,7 +428,7 @@
         </span>
     } @else {
         @if (item.strategy === 'not_empty') {
-            !(<ng-container *ngTemplateOutlet="emptyConditionText"></ng-container>)
+            !(<ng-template [ngTemplateOutlet]="emptyConditionText"></ng-template>)
         } @else {
             &lt;{{ 'platformVHD.selectMobileConditionEmpty' | fdTranslate }}&gt;
         }

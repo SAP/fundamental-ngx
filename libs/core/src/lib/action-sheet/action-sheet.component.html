@@ -9,14 +9,14 @@
         [focusAutoCapture]="true"
     >
         <fd-popover-control>
-            <ng-container *ngTemplateOutlet="actionSheetControl"></ng-container>
+            <ng-template [ngTemplateOutlet]="actionSheetControl"></ng-template>
         </fd-popover-control>
         <fd-popover-body>
-            <ng-container *ngTemplateOutlet="actionSheetBodyTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="actionSheetBodyTemplate"></ng-template>
         </fd-popover-body>
     </fd-popover>
 } @else {
-    <ng-container *ngTemplateOutlet="actionSheetControl"></ng-container>
+    <ng-template [ngTemplateOutlet]="actionSheetControl"></ng-template>
 }
 <ng-template #actionSheetBodyTemplate>
     <ng-content select="fd-action-sheet-body"></ng-content>

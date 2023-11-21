@@ -16,7 +16,7 @@
         [disabled]="disabled"
         (click)="onMainButtonClick($event)"
     >
-        <ng-container *ngTemplateOutlet="titleTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="titleTemplate"></ng-template>
     </button>
 
     <button

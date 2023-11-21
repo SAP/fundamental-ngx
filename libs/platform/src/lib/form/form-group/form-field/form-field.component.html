@@ -10,8 +10,8 @@
                 <ng-template [ngTemplateOutlet]="labelTemplate"></ng-template>
             </div>
         }
-        <ng-container *ngTemplateOutlet="withFormMessage"></ng-container>
-        <ng-container *ngTemplateOutlet="gapTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="withFormMessage"></ng-template>
+        <ng-template [ngTemplateOutlet]="gapTemplate"></ng-template>
     </div>
     <span aria-hidden="true" [style.display]="'none'" [id]="'fdp-form-hint-' + id">
         @if (isStringHint(hintOptions.content)) {
@@ -55,8 +55,11 @@
         }
         @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
             <fd-form-message type="error">
-                <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
-                </ng-container>
+                <ng-template
+                    [ngTemplateOutlet]="i18Strings"
+                    [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"
+                >
+                </ng-template>
             </fd-form-message>
         }
     </fdp-input-message-group>
@@ -84,8 +87,11 @@
         }
     }
     @if (groupedErrors.length === 0 && hasErrors() && i18Strings) {
-        <ng-container *ngTemplateOutlet="i18Strings; context: { $implicit: control?.ngControl?.errors }">
-        </ng-container>
+        <ng-template
+            [ngTemplateOutlet]="i18Strings"
+            [ngTemplateOutletContext]="{ $implicit: control?.ngControl?.errors }"
+        >
+        </ng-template>
     }
 </ng-template>
 <ng-template #labelTemplate>

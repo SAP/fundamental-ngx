@@ -1,5 +1,5 @@
 <div class="fd-multi-input">
-    <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="mobile ? controlTemplate : desktopTemplate"></ng-template>
 </div>
 <ng-template #desktopTemplate>
     <fd-popover
@@ -14,16 +14,13 @@
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
         <fd-popover-control>
-            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body>
-            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="listTemplate"></ng-template>
             <ng-content></ng-content>
         </fd-popover-body>
     </fd-popover>
-</ng-template>
-<ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
 <ng-template #controlTemplate>
     <fd-input-group

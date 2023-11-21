@@ -16,7 +16,7 @@
         [attr.aria-posinet]="ariaPosinet"
         [attr.role]="role"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"> </ng-template>
         <a
             #linkElement
             fd-list-link
@@ -27,7 +27,7 @@
             [navigated]="navigated"
             tabindex="-1"
         >
-            <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="objectTemplate"></ng-template>
         </a>
     </li>
 }
@@ -49,8 +49,8 @@
         (click)="_onItemClick()"
         [attr.role]="role"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
-        <ng-container *ngTemplateOutlet="objectTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="objectTemplate"></ng-template>
     </li>
 }
 @if (noDataText !== null && noDataText !== undefined) {
@@ -119,7 +119,7 @@
             <ng-content select="fdp-object-list-item-row"></ng-content>
         </div>
     </div>
-    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="actionsTemplate"></ng-template>
 </ng-template>
 <ng-template #selectionTemplate>
     @if ((selectionMode === 'multi' || selectionMode === 'single') && !rowSelection) {

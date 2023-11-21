@@ -23,4 +23,4 @@
 <ng-template #formLayout>
     <fdp-settings-generator-section [items]="settings!"></fdp-settings-generator-section>
 </ng-template>
-<ng-container *ngTemplateOutlet="_contentLayout === 'tabs' ? tabbedLayout : formLayout"></ng-container>
+<ng-template [ngTemplateOutlet]="_contentLayout === 'tabs' ? tabbedLayout : formLayout"></ng-template>

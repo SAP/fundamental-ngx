@@ -1,5 +1,8 @@
 <div class="fd-table__text--no-wrap" [class.fd-table__inner]="hasSorting || hasFilter">
-    <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: column }"></ng-container>
+    <ng-template
+        [ngTemplateOutlet]="tableHeaderCellContentTemplate"
+        [ngTemplateOutletContext]="{ column: column }"
+    ></ng-template>
 
     <div class="fd-table__column-header-icons" *ngIf="hasSorting || hasFilter">
         <fd-icon *ngIf="hasFilter" fd-table-icon glyph="filter"></fd-icon>

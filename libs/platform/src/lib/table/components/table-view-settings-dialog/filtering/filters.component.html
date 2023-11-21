@@ -41,20 +41,17 @@
 </fd-dialog>
 
 <!-- Keep active step component  -->
-<ng-container [ngSwitch]="activeStep">
-    <ng-container *ngSwitchCase="ACTIVE_STEP.SELECT_FILTER">
-        <fdp-filters-list-step
-            [filters]="viewSettingsFilters"
-            (selectFilter)="selectFilter($event)"
-        ></fdp-filters-list-step>
-    </ng-container>
-    <ng-container *ngSwitchCase="ACTIVE_STEP.FILTER">
-        <fdp-filter-step
-            [columnKey]="activeFilterColumnKey!"
-            [filter]="activeFilter!"
-            [filterBy]="filterBy"
-            (back)="goToFilters()"
-            (valueChange)="applyFilter($event, activeFilter!)"
-        ></fdp-filter-step>
-    </ng-container>
-</ng-container>
+@if (activeStep === ACTIVE_STEP.SELECT_FILTER) {
+    <fdp-filters-list-step
+        [filters]="viewSettingsFilters"
+        (selectFilter)="selectFilter($event)"
+    ></fdp-filters-list-step>
+} @else if (activeStep === ACTIVE_STEP.FILTER) {
+    <fdp-filter-step
+        [columnKey]="activeFilterColumnKey!"
+        [filter]="activeFilter!"
+        [filterBy]="filterBy"
+        (back)="goToFilters()"
+        (valueChange)="applyFilter($event, activeFilter!)"
+    ></fdp-filter-step>
+}

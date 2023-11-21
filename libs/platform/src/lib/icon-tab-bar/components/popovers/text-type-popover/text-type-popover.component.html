@@ -12,8 +12,8 @@
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
-                <ng-container [ngTemplateOutletContext]="{ level: 1, items: extraTabs }" [ngTemplateOutlet]="subItem">
-                </ng-container>
+                <ng-template [ngTemplateOutletContext]="{ level: 1, items: extraTabs }" [ngTemplateOutlet]="subItem">
+                </ng-template>
             </ul>
         </fd-popover-body>
     </fd-popover>

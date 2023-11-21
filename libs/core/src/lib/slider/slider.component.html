@@ -1,7 +1,7 @@
 <div class="fd-slider__inner">
-    <ng-container *ngTemplateOutlet="_isRange ? rangeMode : singleMode"></ng-container>
+    <ng-template [ngTemplateOutlet]="_isRange ? rangeMode : singleMode"></ng-template>
     <div class="fd-slider__track" (click)="onTrackClick($event)" #track>
-        <ng-container *ngTemplateOutlet="_isRange ? rangeModeTrack : singleModeTrack"></ng-container>
+        <ng-template [ngTemplateOutlet]="_isRange ? rangeModeTrack : singleModeTrack"></ng-template>
     </div>
     <div class="fd-slider__tick-wrapper">
         <div class="fd-slider__ticks" (click)="onTrackClick($event)">
@@ -113,12 +113,10 @@
         additionalBodyClass="fd-slider--tooltip-popover"
         placement="top"
     >
-        <ng-container
-            *ngTemplateOutlet="
-                popoverInner;
-                context: { target: _sliderValueTargets.SINGLE_SLIDER, position: _position }
-            "
-        ></ng-container>
+        <ng-template
+            [ngTemplateOutlet]="popoverInner"
+            [ngTemplateOutletContext]="{ target: _sliderValueTargets.SINGLE_SLIDER, position: _position }"
+        ></ng-template>
     </fd-popover>
 </ng-template>
 <ng-template #rangeMode>
@@ -198,12 +196,10 @@
         class="fd-popover--slider"
         placement="top"
     >
-        <ng-container
-            *ngTemplateOutlet="
-                popoverInner;
-                context: { target: _sliderValueTargets.RANGE_SLIDER1, position: _handle1Value }
-            "
-        ></ng-container>
+        <ng-template
+            [ngTemplateOutlet]="popoverInner"
+            [ngTemplateOutletContext]="{ target: _sliderValueTargets.RANGE_SLIDER1, position: _handle1Value }"
+        ></ng-template>
     </fd-popover>
     <fd-popover
         #rangeSliderPopover2
@@ -215,12 +211,10 @@
         class="fd-popover--slider"
         placement="top"
     >
-        <ng-container
-            *ngTemplateOutlet="
-                popoverInner;
-                context: { target: _sliderValueTargets.RANGE_SLIDER2, position: _handle2Value }
-            "
-        ></ng-container>
+        <ng-template
+            [ngTemplateOutlet]="popoverInner"
+            [ngTemplateOutletContext]="{ target: _sliderValueTargets.RANGE_SLIDER2, position: _handle2Value }"
+        ></ng-template>
     </fd-popover>
 </ng-template>
 <ng-template #popoverInner let-target="target" let-position="position">

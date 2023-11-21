@@ -2,10 +2,10 @@
     <div class="fd-multi-input fd-multi-input-custom">
         <div class="fd-multi-input-field">
             @if (mobile) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="control"
                     [ngTemplateOutletContext]="{ displayAddonButton: displayAddonButton }"
-                ></ng-container>
+                ></ng-template>
             } @else {
                 <fd-popover
                     additionalBodyClass="fd-popover-custom-list"
@@ -20,16 +20,17 @@
                 >
                     <fd-popover-control>
                         <form (submit)="_onSubmit()">
-                            <ng-container
-                                *ngTemplateOutlet="control; context: { displayAddonButton: displayAddonButton }"
-                            ></ng-container>
+                            <ng-template
+                                [ngTemplateOutlet]="control"
+                                [ngTemplateOutletContext]="{ displayAddonButton: displayAddonButton }"
+                            ></ng-template>
                         </form>
                     </fd-popover-control>
                     <fd-popover-body
                         [attr.aria-hidden]="!open"
                         [class.fd-popover__body--hidden]="!viewModel.displayedOptions.length"
                     >
-                        <ng-container *ngTemplateOutlet="list"></ng-container>
+                        <ng-template [ngTemplateOutlet]="list"></ng-template>
                         <ng-content></ng-content>
                     </fd-popover-body>
                 </fd-popover>

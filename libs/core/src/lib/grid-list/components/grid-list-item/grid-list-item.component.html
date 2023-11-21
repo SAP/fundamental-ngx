@@ -32,7 +32,7 @@
         ></span>
     }
     @if (selectionMode === 'singleSelect') {
-        <ng-container *ngTemplateOutlet="radio"></ng-container>
+        <ng-template [ngTemplateOutlet]="radio"></ng-template>
     }
     @if (
         counter ||
@@ -42,14 +42,14 @@
     ) {
         <div class="fd-toolbar fd-grid-list__item-toolbar">
             @if (selectionMode === 'singleSelectLeft') {
-                <ng-container *ngTemplateOutlet="radio"></ng-container>
+                <ng-template [ngTemplateOutlet]="radio"></ng-template>
             }
             @if (selectionMode === 'multiSelect') {
-                <ng-container *ngTemplateOutlet="checkbox"></ng-container>
+                <ng-template [ngTemplateOutlet]="checkbox"></ng-template>
             }
             @if (itemToolbarComponent?.contentTemplateRef) {
                 <div class="fd-toolbar--extra-content">
-                    <ng-container *ngTemplateOutlet="itemToolbarComponent!.contentTemplateRef"></ng-container>
+                    <ng-template [ngTemplateOutlet]="itemToolbarComponent!.contentTemplateRef"></ng-template>
                 </div>
             }
             <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
@@ -91,7 +91,7 @@
                 </span>
             }
             @if (selectionMode === 'singleSelectRight') {
-                <ng-container *ngTemplateOutlet="radio"></ng-container>
+                <ng-template [ngTemplateOutlet]="radio"></ng-template>
             }
         </div>
     }
@@ -109,11 +109,11 @@
         }
         @if (body?.templateRef) {
             <div class="fd-grid-list__item-content">
-                <ng-container [ngTemplateOutlet]="body!.templateRef"></ng-container>
+                <ng-template [ngTemplateOutlet]="body!.templateRef"></ng-template>
             </div>
         }
         @if (state || footerBarComponent?.contentTemplateRef) {
-            <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
+            <ng-template [ngTemplateOutlet]="itemFooter"></ng-template>
         }
     </div>
 </div>
@@ -157,7 +157,7 @@
     @if (footerBarComponent || state) {
         <div class="fd-grid-list__item-body-actions">
             @if (footerBarComponent?.contentTemplateRef) {
-                <ng-container *ngTemplateOutlet="footerBarComponent!.contentTemplateRef"></ng-container>
+                <ng-template [ngTemplateOutlet]="footerBarComponent!.contentTemplateRef"></ng-template>
             }
             @if (!footerBarComponent?.contentTemplateRef && state) {
                 @if (state === 'error') {

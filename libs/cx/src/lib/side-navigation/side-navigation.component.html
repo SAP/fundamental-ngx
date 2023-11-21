@@ -8,13 +8,13 @@
     [attr.aria-label]="'coreNavigation.mainNavigation' | fdTranslate"
 >
     @if (!sideNavigationConfiguration) {
-        <ng-container *ngTemplateOutlet="scrollUp"></ng-container>
+        <ng-template [ngTemplateOutlet]="scrollUp"></ng-template>
         <ng-content select="[fdx-side-nav-main]"></ng-content>
-        <ng-container *ngTemplateOutlet="scrollDown"></ng-container>
+        <ng-template [ngTemplateOutlet]="scrollDown"></ng-template>
         <ng-content select="[fdx-side-nav-utility]"></ng-content>
     }
     @if (sideNavigationConfiguration) {
-        <ng-container *ngTemplateOutlet="scrollUp"></ng-container>
+        <ng-template [ngTemplateOutlet]="scrollUp"></ng-template>
         @if (sideNavigationConfiguration.mainNavigation) {
             <div fdx-side-nav-main>
                 <fdx-prepared-nested-list
@@ -25,7 +25,7 @@
                 </fdx-prepared-nested-list>
             </div>
         }
-        <ng-container *ngTemplateOutlet="scrollDown"></ng-container>
+        <ng-template [ngTemplateOutlet]="scrollDown"></ng-template>
         @if (sideNavigationConfiguration.utilityNavigation) {
             <div fdx-side-nav-utility>
                 <fdx-prepared-nested-list

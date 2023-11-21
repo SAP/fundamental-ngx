@@ -1,5 +1,5 @@
 @if (!expanded || !_isExpandable || !_condensed() || !_listComponent) {
-    <ng-content></ng-content> <ng-container [ngTemplateOutlet]="subListTemplate"></ng-container>
+    <ng-content></ng-content> <ng-template [ngTemplateOutlet]="subListTemplate"></ng-template>
     @if (indicated || _childIndicatedAndCollapsed()) {
         <span class="fd-list__navigation-item-indicator"></span>
     }
@@ -24,7 +24,7 @@
         class="fd-popover__body fd-popover__body--no-arrow fd-list__navigation-item-popover--second-level"
         aria-hidden="false"
     >
-        <ng-container [ngTemplateOutlet]="subListTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="subListTemplate"></ng-template>
     </div>
 }
 <ng-template #subListTemplate>

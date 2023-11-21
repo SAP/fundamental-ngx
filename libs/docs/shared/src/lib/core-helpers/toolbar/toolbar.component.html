@@ -48,13 +48,13 @@
                 </li>
             </fd-menu>
             <fd-submenu #themeSubmenu>
-                <ng-container *ngTemplateOutlet="themesTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="themesTemplate"></ng-template>
             </fd-submenu>
             <fd-submenu #densitySubmenu>
-                <ng-container *ngTemplateOutlet="densitiesTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="densitiesTemplate"></ng-template>
             </fd-submenu>
             <fd-submenu #versionSubmenu>
-                <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="versionsTemplate"></ng-template>
             </fd-submenu>
         }
         @if (size !== 's') {
@@ -68,7 +68,7 @@
                 Content Density
             </button>
             <fd-menu #densityMenu [fillControlMode]="null" placement="bottom-end">
-                <ng-container *ngTemplateOutlet="densitiesTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="densitiesTemplate"></ng-template>
             </fd-menu>
             <button
                 fd-button
@@ -79,7 +79,7 @@
                 [fdMenuTrigger]="themesMenu"
             ></button>
             <fd-menu #themesMenu [fillControlMode]="null" placement="bottom-end">
-                <ng-container *ngTemplateOutlet="themesTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="themesTemplate"></ng-template>
             </fd-menu>
             <button
                 fd-button
@@ -95,10 +95,10 @@
                 [fillControlMode]="null"
                 [mobileConfig]="{ title: 'Language', cancelButtonText: 'Cancel', dialogConfig: { mobile: false } }"
             >
-                <ng-container *ngTemplateOutlet="i18nTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="i18nTemplate"></ng-template>
             </fd-menu>
             <fd-menu #versionsMenu [fillControlMode]="null" placement="bottom-end">
-                <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="versionsTemplate"></ng-template>
             </fd-menu>
         }
         <a

@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
     <!-- &#64;deprecated leaving class fd-popover-custom-list to support backwards compatibility-->
     <fd-popover
@@ -16,11 +16,11 @@
         (isOpenChange)="_popoverOpenChangeHandle($event)"
     >
         <fd-popover-control>
-            <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="selectInputControlTemplate"></ng-template>
         </fd-popover-control>
         <!-- &#64;deprecated leaving class fd-popover-custom-select-body to support backwards compatibility-->
         <fd-popover-body class="fd-popover-custom-select-body">
-            <ng-container [ngTemplateOutlet]="selectOptionsListTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="selectOptionsListTemplate"></ng-template>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
@@ -105,6 +105,6 @@
     </ul>
 </ng-template>
 <ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="selectInputControlTemplate"></ng-template>
     <div #dialogContainer></div>
 </ng-template>

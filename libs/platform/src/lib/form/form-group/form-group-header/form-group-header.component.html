@@ -1,11 +1,11 @@
 @if (fieldGroup && hintOptions?.position === 'before') {
-    <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
+    <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
 }
 <h6 class="fd-form-group__header-text">
     {{ fieldGroup?.label }}
 </h6>
 @if (fieldGroup && hintOptions?.position === 'after') {
-    <ng-container *ngTemplateOutlet="inlineHelpRef"></ng-container>
+    <ng-template [ngTemplateOutlet]="inlineHelpRef"></ng-template>
 }
 <ng-template #inlineHelpRef>
     @if (hintOptions) {

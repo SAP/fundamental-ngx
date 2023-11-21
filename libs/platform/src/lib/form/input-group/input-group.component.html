@@ -2,7 +2,7 @@
     <!-- Before input addons area -->
     @for (addon of _beforeInputAddons; track addon) {
         <fdp-input-group-addon-body>
-            <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
+            <ng-template [ngTemplateOutlet]="addon.contentTemplateRef"></ng-template>
         </fdp-input-group-addon-body>
     }
     <!-- Input -->
@@ -25,7 +25,7 @@
     <!-- After input addons area -->
     @for (addon of _afterInputAddons; track addon) {
         <fdp-input-group-addon-body [hasButton]="!!addon.button">
-            <ng-container *ngTemplateOutlet="addon.contentTemplateRef"></ng-container>
+            <ng-template [ngTemplateOutlet]="addon.contentTemplateRef"></ng-template>
         </fdp-input-group-addon-body>
     }
 </div>

@@ -11,7 +11,7 @@
     (click)="_focus()"
 >
     @if (_showPageIndicatorContainer && pageIndicatorsOrientation === 'top') {
-        <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
+        <ng-template [ngTemplateOutlet]="pageIndicatorContainer"></ng-template>
     }
     <div
         class="fd-carousel__content"
@@ -20,17 +20,17 @@
         [style.width]="_contentSizePx"
     >
         @if (_showNavigationButtonInContent) {
-            <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+            <ng-template [ngTemplateOutlet]="buttonLeft"></ng-template>
         }
         <div #slideContainer class="fd-carousel__slides">
             <ng-content></ng-content>
         </div>
         @if (_showNavigationButtonInContent) {
-            <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+            <ng-template [ngTemplateOutlet]="buttonRight"></ng-template>
         }
     </div>
     @if (_showPageIndicatorContainer && pageIndicatorsOrientation === 'bottom') {
-        <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
+        <ng-template [ngTemplateOutlet]="pageIndicatorContainer"></ng-template>
     }
     <div [style.display]="'none'" role="region" [attr.id]="id + '-accessibility'" aria-live="polite" dir="ltr">
         {{ screenReaderLabel }}
@@ -43,11 +43,11 @@
         [ngClass]="'fd-carousel__page-indicator-container--' + pageIndicatorBackground"
     >
         @if (_showNavigationButtonInPageIndicatorContainer) {
-            <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
+            <ng-template [ngTemplateOutlet]="buttonLeft"></ng-template>
         }
-        <ng-container *ngTemplateOutlet="pageIndicators"> </ng-container>
+        <ng-template [ngTemplateOutlet]="pageIndicators"> </ng-template>
         @if (_showNavigationButtonInPageIndicatorContainer) {
-            <ng-container *ngTemplateOutlet="buttonRight"></ng-container>
+            <ng-template [ngTemplateOutlet]="buttonRight"></ng-template>
         }
     </div>
 </ng-template>

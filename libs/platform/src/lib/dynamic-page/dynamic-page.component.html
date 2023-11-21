@@ -15,7 +15,7 @@
             [subtitleWrap]="titleComponent.subtitleWrap"
         >
             <fd-breadcrumb>
-                <ng-container [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="titleComponent.breadcrumbTemplate"></ng-template>
             </fd-breadcrumb>
             @if (titleComponent._subtitleDirective) {
                 <ng-container
@@ -42,7 +42,7 @@
             }
             @if (titleComponent.imageComponent) {
                 <fd-facet type="image">
-                    <ng-container [ngTemplateOutlet]="titleComponent.imageComponent.contentTemplateRef"></ng-container>
+                    <ng-template [ngTemplateOutlet]="titleComponent.imageComponent.contentTemplateRef"></ng-template>
                 </fd-facet>
             }
             @if (titleComponent.globalActionsComponent) {
@@ -75,7 +75,7 @@
             [unpinAriaLabel]="headerComponent.unpinAriaLabel"
             (collapsedChange)="headerComponent._onCollapseChange($event)"
         >
-            <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
+            <ng-template [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-template>
         </fd-dynamic-page-subheader>
     }
     @if (_isTabbed) {
@@ -87,7 +87,7 @@
             @for (tab of _tabs; track tab) {
                 <fd-tab [title]="tab.tabLabel" [id]="tab.id">
                     <fd-dynamic-page-content>
-                        <ng-container [ngTemplateOutlet]="tab.contentTemplateRef"></ng-container>
+                        <ng-template [ngTemplateOutlet]="tab.contentTemplateRef"></ng-template>
                     </fd-dynamic-page-content>
                 </fd-tab>
             }
@@ -95,12 +95,12 @@
     }
     @if (!_isTabbed && contentComponent) {
         <fd-dynamic-page-content>
-            <ng-container [ngTemplateOutlet]="contentComponent.contentTemplateRef"></ng-container>
+            <ng-template [ngTemplateOutlet]="contentComponent.contentTemplateRef"></ng-template>
         </fd-dynamic-page-content>
     }
     @if (footerComponent) {
         <fd-dynamic-page-footer>
-            <ng-container [ngTemplateOutlet]="footerComponent.contentTemplateRef"></ng-container>
+            <ng-template [ngTemplateOutlet]="footerComponent.contentTemplateRef"></ng-template>
         </fd-dynamic-page-footer>
     }
 </fd-dynamic-page>

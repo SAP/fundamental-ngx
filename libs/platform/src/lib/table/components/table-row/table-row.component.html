@@ -27,117 +27,58 @@
     </span>
 </ng-template>
 
-@switch (selectionMode) {
-    @case (SELECTION_MODE.SINGLE) {
-        <td
-            *ngIf="row.value[selectableKey] !== false; else selectionMock"
-            class="fd-table__cell--checkbox"
-            [class.fd-table__cell--fixed]="fixed"
-            [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
-            fd-table-cell
-            fd-table-cell-selectable
-            [focusable]="true"
-            [style]="
-                _contentDensityObserver
-                    | async
-                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
-            "
-            [attr.aria-selected]="row.checked"
-            [attr.aria-labelledby]="_rowSelectionHelperTextId"
-            (click)="_toggleSingleSelectableRow()"
-            (keydown.enter)="_toggleSingleSelectableRow()"
-            (keydown.space)="_toggleSingleSelectableRow()"
-        >
-            <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
-        </td>
-    }
-    @case (SELECTION_MODE.MULTIPLE) {
-        <td
-            *ngIf="row.value[selectableKey] !== false; else selectionMock"
-            class="fd-table__cell--checkbox"
-            [class.fd-table__cell--fixed]="fixed"
-            role="cell"
-            fd-table-cell
-            [focusable]="true"
-            (keydown.enter)="_toggleMultiSelectRow(row, $event)"
-            (keydown.space)="_toggleMultiSelectRow(row, $event)"
-            [attr.aria-labelledby]="_rowSelectionHelperTextId"
-            [attr.aria-selected]="row.checked"
-            [style]="
-                _contentDensityObserver
-                    | async
-                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
-            "
-        >
-            <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
-            <fd-checkbox
-                tabIndexValue="-1"
-                labelClass="fd-table__checkbox-label"
-                [tristate]="enableTristateMode"
-                [tristateSelectable]="false"
-                [ngModel]="row.checked$ | async"
-                (ngModelChange)="_toggleMultiSelectRow(row)"
-            ></fd-checkbox>
-        </td>
-    }
-}
-
 <!-- Row Selection Cell -->
-<ng-container [ngSwitch]="selectionMode">
-    <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
-        <td
-            *ngIf="row.value[selectableKey] !== false; else selectionMock"
-            class="fd-table__cell--checkbox"
-            [class.fd-table__cell--fixed]="fixed"
-            [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
-            fd-table-cell
-            fd-table-cell-selectable
-            [focusable]="true"
-            [style]="
-                _contentDensityObserver
-                    | async
-                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
-            "
-            [attr.aria-selected]="row.checked"
-            [attr.aria-labelledby]="_rowSelectionHelperTextId"
-            (click)="_toggleSingleSelectableRow()"
-            (keydown.enter)="_toggleSingleSelectableRow()"
-            (keydown.space)="_toggleSingleSelectableRow()"
-        >
-            <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
-        </td>
-    </ng-container>
-
-    <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
-        <td
-            *ngIf="row.value[selectableKey] !== false; else selectionMock"
-            class="fd-table__cell--checkbox"
-            [class.fd-table__cell--fixed]="fixed"
-            role="cell"
-            fd-table-cell
-            [focusable]="true"
-            (keydown.enter)="_toggleMultiSelectRow(row, $event)"
-            (keydown.space)="_toggleMultiSelectRow(row, $event)"
-            [attr.aria-labelledby]="_rowSelectionHelperTextId"
-            [attr.aria-selected]="row.checked"
-            [style]="
-                _contentDensityObserver
-                    | async
-                    | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
-            "
-        >
-            <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
-            <fd-checkbox
-                tabIndexValue="-1"
-                labelClass="fd-table__checkbox-label"
-                [tristate]="enableTristateMode"
-                [tristateSelectable]="false"
-                [ngModel]="row.checked$ | async"
-                (ngModelChange)="_toggleMultiSelectRow(row)"
-            ></fd-checkbox>
-        </td>
-    </ng-container>
-</ng-container>
+@if (selectionMode === SELECTION_MODE.SINGLE) {
+    <td
+        *ngIf="row.value[selectableKey] !== false; else selectionMock"
+        class="fd-table__cell--checkbox"
+        [class.fd-table__cell--fixed]="fixed"
+        [attr.role]="_hasRowHeaderColumn ? 'rowheader' : 'gridcell'"
+        fd-table-cell
+        fd-table-cell-selectable
+        [focusable]="true"
+        [style]="
+            _contentDensityObserver
+                | async
+                | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+        "
+        [attr.aria-selected]="row.checked"
+        [attr.aria-labelledby]="_rowSelectionHelperTextId"
+        (click)="_toggleSingleSelectableRow()"
+        (keydown.enter)="_toggleSingleSelectableRow()"
+        (keydown.space)="_toggleSingleSelectableRow()"
+    >
+        <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
+    </td>
+} @else if (selectionMode === SELECTION_MODE.MULTIPLE) {
+    <td
+        *ngIf="row.value[selectableKey] !== false; else selectionMock"
+        class="fd-table__cell--checkbox"
+        [class.fd-table__cell--fixed]="fixed"
+        role="cell"
+        fd-table-cell
+        [focusable]="true"
+        (keydown.enter)="_toggleMultiSelectRow(row, $event)"
+        (keydown.space)="_toggleMultiSelectRow(row, $event)"
+        [attr.aria-labelledby]="_rowSelectionHelperTextId"
+        [attr.aria-selected]="row.checked"
+        [style]="
+            _contentDensityObserver
+                | async
+                | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+        "
+    >
+        <ng-template [ngTemplateOutlet]="selectionScreenReaderText"></ng-template>
+        <fd-checkbox
+            tabIndexValue="-1"
+            labelClass="fd-table__checkbox-label"
+            [tristate]="enableTristateMode"
+            [tristateSelectable]="false"
+            [ngModel]="row.checked$ | async"
+            (ngModelChange)="_toggleMultiSelectRow(row)"
+        ></fd-checkbox>
+    </td>
+}
 
 <ng-template #selectionMock>
     <td

@@ -1,26 +1,26 @@
-<fd-popover
-    [disabled]="disabled"
-    [noArrow]="true"
-    fd-table-popover
-    [focusAutoCapture]="true"
-    [focusTrapped]="true"
-    *ngIf="!popoverTemplate; else projectedPopover"
-    [triggers]="_headerPopoverTriggers"
->
-    <fdp-list [noBorder]="true" [navigated]="true">
-        <fdp-free-content-list-item *ngFor="let item of _popoverItems$.asObservable() | async">
-            <ng-template [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{ popover: popover }"></ng-template>
-        </fdp-free-content-list-item>
-    </fdp-list>
-</fd-popover>
-<ng-template #projectedPopover>
+@if (!popoverTemplate) {
+    <fd-popover
+        [disabled]="disabled"
+        [noArrow]="true"
+        fd-table-popover
+        [focusAutoCapture]="true"
+        [focusTrapped]="true"
+        [triggers]="_headerPopoverTriggers"
+    >
+        <fdp-list [noBorder]="true" [navigated]="true">
+            @for (item of _popoverItems$.asObservable() | async; track item) {
+                <ng-template [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{ popover: popover }"></ng-template>
+            }
+        </fdp-list>
+    </fd-popover>
+} @else {
     <ng-template
         [ngTemplateOutlet]="popoverTemplate!"
         [ngTemplateOutletContext]="{ $implicit: _popoverItems$.asObservable() }"
     ></ng-template>
-</ng-template>
+}
 
-<ng-container *ngIf="column?.sortable">
+@if (column?.sortable) {
     <ng-template fdkTemplate="sortingAscPopoverItem" let-popover="popover">
         <a
             fd-list-link
@@ -43,9 +43,8 @@
             <span fd-list-title>{{ 'platformTable.headerMenuSortDesc' | fdTranslate }}</span>
         </a>
     </ng-template>
-</ng-container>
-
-<ng-container *ngIf="column?.groupable">
+}
+@if (column?.groupable) {
     <ng-template fdkTemplate="groupPopoverItem" let-popover="popover">
         <a
             fd-list-link
@@ -57,18 +56,15 @@
             <span fd-list-title>{{ 'platformTable.headerMenuGroup' | fdTranslate }}</span>
         </a>
     </ng-template>
-</ng-container>
-
-<ng-container *ngIf="column?.freezable || column?.endFreezable">
+}
+@if (column?.freezable || column?.endFreezable) {
     <ng-template fdkTemplate="freezePopoverItem" let-popover="popover">
         <ng-container *ngIf="!columnFrozen; else unfreezeTpl">
             <a fd-list-link [focusable]="true" (click)="_freeze()" (keyup.enter)="_freeze()">
                 <span></span>
-                <span fd-list-title *ngIf="!column.endFreezable">{{
-                    'platformTable.headerMenuFreeze' | fdTranslate
-                }}</span>
-                <span fd-list-title *ngIf="column.endFreezable">{{
-                    'platformTable.headerMenuEndFreeze' | fdTranslate
+                <span fd-list-title>{{
+                    (!column.endFreezable ? 'platformTable.headerMenuFreeze' : 'platformTable.headerMenuEndFreeze')
+                        | fdTranslate
                 }}</span>
             </a>
         </ng-container>
@@ -79,9 +75,9 @@
             </a>
         </ng-template>
     </ng-template>
-</ng-container>
+}
 
-<ng-container *ngIf="column?.filterable && !filteringFromHeaderDisabled">
+@if (column?.filterable && !filteringFromHeaderDisabled) {
     <ng-template fdkTemplate="filteringPopoverItem" let-popover="popover">
         <div fd-list-link [style.cursor]="'auto'">
             <i fd-list-icon glyph="filter"></i>
@@ -97,4 +93,4 @@
             </div>
         </div>
     </ng-template>
-</ng-container>
+}

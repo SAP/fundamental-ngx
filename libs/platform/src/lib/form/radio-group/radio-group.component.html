@@ -9,26 +9,24 @@
     @if (!list) {
         @for (radio of contentRadioButtons; track radio) {
             <div fd-form-item>
-                <ng-container
-                    *ngTemplateOutlet="
-                        radio?.renderer || null;
-                        context: {
-                            name: name,
-                            value: radio.value,
-                            state: state,
-                            disabled: disabled || radio.disabled,
-                            ariaLabel: radio.ariaLabel,
-                            ariaLabelledBy: radio.ariaLabelledBy,
-                            ariaDescribedBy: radio.ariaDescribedBy,
-                            title: radio.title
-                        }
-                    "
-                ></ng-container>
+                <ng-template
+                    [ngTemplateOutlet]="radio?.renderer || null"
+                    [ngTemplateOutletContext]="{
+                        name: name,
+                        value: radio.value,
+                        state: state,
+                        disabled: disabled || radio.disabled,
+                        ariaLabel: radio.ariaLabel,
+                        ariaLabelledBy: radio.ariaLabelledBy,
+                        ariaDescribedBy: radio.ariaDescribedBy,
+                        title: radio.title
+                    }"
+                ></ng-template>
             </div>
         }
     }
     @if (list) {
-        <ng-container *ngTemplateOutlet="listvalues"></ng-container>
+        <ng-template [ngTemplateOutlet]="listvalues"></ng-template>
     }
 </fd-form-group>
 <ng-template #listvalues>

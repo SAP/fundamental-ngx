@@ -22,7 +22,7 @@
             [navigationIndicator]="navigationIndicator"
             [navigated]="navigated"
         >
-            <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="commonTemplate"></ng-template>
         </a>
     </li>
 }
@@ -42,7 +42,7 @@
         [class.fd-list__item--inactive]="listType === 'inactive'"
         [attr.role]="role"
     >
-        <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="commonTemplate"></ng-template>
     </li>
 }
 <ng-template #commonTemplate>
@@ -50,10 +50,10 @@
         <span fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">{{ title }}</span>
     }
     @if (secondary) {
-        <ng-container
+        <ng-template
             [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
             [ngTemplateOutletContext]="{ $implicit: secondary }"
-        ></ng-container>
+        ></ng-template>
     }
 </ng-template>
 <ng-template #simpleSecondary let-secondary>

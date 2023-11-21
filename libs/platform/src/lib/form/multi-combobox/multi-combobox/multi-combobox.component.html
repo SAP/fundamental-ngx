@@ -1,6 +1,6 @@
 <div class="fdp-multi-combobox">
     @if (mobile) {
-        <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
     }
     @if (!mobile) {
         <fd-popover
@@ -13,11 +13,11 @@
         >
             <fd-popover-control>
                 <ng-container>
-                    <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+                    <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
                 </ng-container>
             </fd-popover-control>
             <fd-popover-body [style.width.%]="!autoResize && 100">
-                <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="listTemplate"></ng-template>
                 <ng-content></ng-content>
             </fd-popover-body>
         </fd-popover>
@@ -189,45 +189,45 @@
                         [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
                     ></ng-container>
                 }
-                @for (optionItem of group.children; track optionItem; let i = $index) {
+                @for (optionItem of group.children; track optionItem) {
                     <li
                         fd-list-item
                         role="option"
                         (click)="!mobile && close()"
-                        (keyDown)="onItemKeyDownHandler($event, i)"
+                        (keyDown)="onItemKeyDownHandler($event)"
                         [selected]="!!optionItem.selected"
                     >
                         <fd-checkbox
-                            (click)="onOptionCheckboxClicked($event, i)"
+                            (click)="onOptionCheckboxClicked($event, $index)"
                             (ngModelChange)="toggleSelection(optionItem)"
                             [ngModel]="optionItem.selected"
                         >
                         </fd-checkbox>
                         <ng-container
                             [ngTemplateOutlet]="listItem"
-                            [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                            [ngTemplateOutletContext]="{ optionItem: optionItem, index: $index }"
                         ></ng-container>
                     </li>
                 }
             }
         } @else {
-            @for (optionItem of _suggestions; track optionItem; let i = $index) {
+            @for (optionItem of _suggestions; track optionItem) {
                 <li
                     fd-list-item
                     role="option"
-                    (click)="!mobile && onOptionClicked($event, i)"
-                    (keydown)="onItemKeyDownHandler($event, i)"
+                    (click)="!mobile && onOptionClicked($event, $index)"
+                    (keydown)="onItemKeyDownHandler($event)"
                     [selected]="!!optionItem.selected"
                 >
                     <fd-checkbox
-                        (click)="onOptionCheckboxClicked($event, i)"
+                        (click)="onOptionCheckboxClicked($event, $index)"
                         (ngModelChange)="toggleSelection(optionItem)"
                         [ngModel]="optionItem.selected"
                     >
                     </fd-checkbox>
                     <ng-container
                         [ngTemplateOutlet]="listItem"
-                        [ngTemplateOutletContext]="{ optionItem: optionItem, index: i }"
+                        [ngTemplateOutletContext]="{ optionItem: optionItem, index: $index }"
                     ></ng-container>
                 </li>
             }

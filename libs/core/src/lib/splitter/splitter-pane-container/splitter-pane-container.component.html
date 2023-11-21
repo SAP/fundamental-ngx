@@ -1,8 +1,9 @@
 @if (_isRootContainer) {
     @if (_defaultPane.isOnCanvas && _activePanes.length > 1) {
-        <ng-container
-            *ngTemplateOutlet="panesTemplate; context: { panes: [_defaultPane], showResizer: true }"
-        ></ng-container>
+        <ng-template
+            [ngTemplateOutlet]="panesTemplate"
+            [ngTemplateOutletContext]="{ panes: [_defaultPane], showResizer: true }"
+        ></ng-template>
     }
     <div class="fd-splitter__split-pane">
         <div
@@ -10,14 +11,12 @@
             [class.fd-splitter__pane-container--horizontal]="!_isRootContainer && _isHorizontal"
             [class.fd-splitter__pane-container--vertical]="_isRootContainer || _isVertical"
         >
-            <ng-container
-                *ngTemplateOutlet="
-                    panesTemplate;
-                    context: {
-                        panes: _activePanes | noDefaultPane: _defaultPane.isOnCanvas && _activePanes.length > 1
-                    }
-                "
-            ></ng-container>
+            <ng-template
+                [ngTemplateOutlet]="panesTemplate"
+                [ngTemplateOutletContext]="{
+                    panes: _activePanes | noDefaultPane: _defaultPane.isOnCanvas && _activePanes.length > 1
+                }"
+            ></ng-template>
         </div>
         @if (_pages.length) {
             <fd-splitter-pagination
@@ -28,7 +27,7 @@
         }
     </div>
 } @else {
-    <ng-container *ngTemplateOutlet="panesTemplate; context: { panes: _panesOnCanvas }"></ng-container>
+    <ng-template [ngTemplateOutlet]="panesTemplate" [ngTemplateOutletContext]="{ panes: _panesOnCanvas }"></ng-template>
 }
 <!-- IDE won't recognize types properly below -->
 <ng-template #panesTemplate let-panes="panes" let-showResizer="showResizer">

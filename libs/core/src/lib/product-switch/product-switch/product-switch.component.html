@@ -23,7 +23,7 @@
                     fdType="transparent"
                 ></button>
             } @else {
-                <ng-container *ngTemplateOutlet="customProductSwitchButton.templateRef"></ng-container>
+                <ng-template [ngTemplateOutlet]="customProductSwitchButton.templateRef"></ng-template>
             }
         </fd-popover-control>
         <fd-popover-body>

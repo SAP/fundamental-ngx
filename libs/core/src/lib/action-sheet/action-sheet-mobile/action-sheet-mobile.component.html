@@ -3,6 +3,6 @@
         class="fd-action-sheet__wrapper fd-action-sheet__wrapper--active"
         (click)="_isOpenChangeHandle && _isOpenChangeHandle(false)"
     >
-        <ng-container *ngTemplateOutlet="childContent?.actionSheetBodyTemplate || null"></ng-container>
+        <ng-template [ngTemplateOutlet]="childContent?.actionSheetBodyTemplate || null"></ng-template>
     </div>
 }

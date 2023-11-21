@@ -31,9 +31,9 @@
                             }}
                         </span>
                     </ng-template>
-                    <ng-container
-                        *ngTemplateOutlet="_breadcrumbList.length > 0 ? multipleBreadcrumbs : singleBreadcrumb"
-                    ></ng-container>
+                    <ng-template
+                        [ngTemplateOutlet]="_breadcrumbList.length > 0 ? multipleBreadcrumbs : singleBreadcrumb"
+                    ></ng-template>
                 </fd-breadcrumb-item>
                 @for (item of _breadcrumbList; track item; let i = $index) {
                     <fd-breadcrumb-item>
@@ -43,9 +43,9 @@
                         <ng-template #textBreadcrumb>
                             <span>{{ item.folderName }} ({{ _totalItems }})</span>
                         </ng-template>
-                        <ng-container
-                            *ngTemplateOutlet="item.clikable ? clickableBreadcrumb : textBreadcrumb"
-                        ></ng-container>
+                        <ng-template
+                            [ngTemplateOutlet]="item.clikable ? clickableBreadcrumb : textBreadcrumb"
+                        ></ng-template>
                     </fd-breadcrumb-item>
                 }
             </fd-breadcrumb>

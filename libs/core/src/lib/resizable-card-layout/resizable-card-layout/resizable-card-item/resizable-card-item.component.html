@@ -23,8 +23,8 @@
             }
         </div>
         @if (resizable) {
-            <ng-container *ngTemplateOutlet="verticalHandleTemplate"></ng-container>
-            <ng-container *ngTemplateOutlet="horizontalHandleTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="verticalHandleTemplate"></ng-template>
+            <ng-template [ngTemplateOutlet]="horizontalHandleTemplate"></ng-template>
         }
     </div>
     <div

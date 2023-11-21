@@ -2,7 +2,7 @@
     <fd-action-sheet [style.pointer-events]="'all'">
         <fd-action-sheet-control>
             <span class="fd-wizard__step-indicator">
-                <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
+                <ng-template [ngTemplateOutlet]="stepIndicatorContent"></ng-template>
             </span>
         </fd-action-sheet-control>
         <fd-action-sheet-body>
@@ -23,7 +23,7 @@
         class="fd-wizard__step-indicator"
         (click)="stepItemClicked(stackedItems.length ? stackedItems[0] : undefined, $event)"
     >
-        <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
+        <ng-template [ngTemplateOutlet]="stepIndicatorContent"></ng-template>
     </span>
 }
 <ng-template #stepIndicatorContent>

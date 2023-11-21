@@ -17,7 +17,7 @@
         [attr.aria-posinet]="ariaPosinet"
         [attr.role]="role"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"> </ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"> </ng-template>
         <a
             #linkElement
             fd-list-link
@@ -25,7 +25,7 @@
             [navigationIndicator]="navigationIndicator"
             [navigated]="navigated"
         >
-            <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="_hasByLine ? byLineTemplate : commonTemplate"></ng-template>
         </a>
     </li>
 }
@@ -47,8 +47,8 @@
         [class.fd-list__item--inactive]="listType === 'inactive'"
         [attr.role]="role"
     >
-        <ng-container *ngTemplateOutlet="selectionTemplate"></ng-container>
-        <ng-container *ngTemplateOutlet="_hasByLine ? byLineTemplate : commonTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="selectionTemplate"></ng-template>
+        <ng-template [ngTemplateOutlet]="_hasByLine ? byLineTemplate : commonTemplate"></ng-template>
     </li>
 }
 @if (noDataText !== null && noDataText !== undefined) {
@@ -116,7 +116,7 @@
             {{ counter }}
         </span>
     }
-    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="actionsTemplate"></ng-template>
 </ng-template>
 <ng-template #byLineTemplate>
     <div fdListThumbnail>
@@ -165,20 +165,20 @@
         }
         <div class="fd-list__byline fd-list__byline--2-col">
             @if (description) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="_isAdvancedText(description) ? advancedDescription : simpleDescription"
                     [ngTemplateOutletContext]="{ $implicit: description }"
-                ></ng-container>
+                ></ng-template>
             }
             @if (secondary) {
-                <ng-container
+                <ng-template
                     [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
                     [ngTemplateOutletContext]="{ $implicit: secondary }"
-                ></ng-container>
+                ></ng-template>
             }
         </div>
     </div>
-    <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="actionsTemplate"></ng-template>
 </ng-template>
 <ng-template #selectionTemplate>
     @if ((selectionMode === 'multi' || selectionMode === 'single') && !rowSelection) {

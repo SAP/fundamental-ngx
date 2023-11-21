@@ -1,14 +1,14 @@
 @if (useForm) {
     <form #nativeForm (ngSubmit)="onSubmit.emit($event)" [id]="id" [name]="name">
-        <ng-container *ngTemplateOutlet="body"></ng-container>
+        <ng-template [ngTemplateOutlet]="body"></ng-template>
     </form>
 } @else {
     <!--  Render fields and field groups with assigned columns -->
-    <ng-container *ngTemplateOutlet="fields"></ng-container>
+    <ng-template [ngTemplateOutlet]="fields"></ng-template>
 }
 <ng-template #body>
     <!--  Render fields and field groups with assigned columns -->
-    <ng-container *ngTemplateOutlet="fields"></ng-container>
+    <ng-template [ngTemplateOutlet]="fields"></ng-template>
 </ng-template>
 <ng-template #fields>
     @if (mainTitle && !hideMainTItle) {
@@ -36,7 +36,7 @@
                         @for (field of fields.value; track trackByFieldName($index, field)) {
                             <div class="fd-row fd-form-item">
                                 <div class="fd-col" [class]="_inlineColumnLayoutClass" [style.order]="field.rank">
-                                    <ng-container *ngTemplateOutlet="field?.renderer || null"></ng-container>
+                                    <ng-template [ngTemplateOutlet]="field?.renderer || null"></ng-template>
                                 </div>
                             </div>
                         }

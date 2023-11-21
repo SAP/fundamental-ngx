@@ -9,7 +9,7 @@
     [class]="state ? 'is-' + state : ' '"
 >
     @if (placement === 'after' && !inputElement) {
-        <ng-container *ngTemplateOutlet="input"></ng-container>
+        <ng-template [ngTemplateOutlet]="input"></ng-template>
     }
     <ng-content></ng-content>
     @if (!addOnElement && (glyph || addOnText)) {
@@ -64,7 +64,7 @@
         }
     }
     @if (placement === 'before' && !inputElement) {
-        <ng-container *ngTemplateOutlet="input"></ng-container>
+        <ng-template [ngTemplateOutlet]="input"></ng-template>
     }
 </div>
 <ng-template #input>

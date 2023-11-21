@@ -7,11 +7,11 @@
             }
         </fd-dialog-header>
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="viewBody"></ng-container>
+            <ng-template [ngTemplateOutlet]="viewBody"></ng-template>
         </fd-dialog-body>
         @if (viewFooter) {
             <fd-dialog-footer>
-                <ng-container *ngTemplateOutlet="viewFooter"></ng-container>
+                <ng-template [ngTemplateOutlet]="viewFooter"></ng-template>
             </fd-dialog-footer>
         }
     </fd-dialog>

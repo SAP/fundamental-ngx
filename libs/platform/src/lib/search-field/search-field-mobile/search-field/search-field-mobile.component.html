@@ -5,7 +5,7 @@
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
                         @if (childContent?.inputFieldTemplate) {
-                            <ng-container [ngTemplateOutlet]="childContent?.inputFieldTemplate!"></ng-container>
+                            <ng-template [ngTemplateOutlet]="childContent?.inputFieldTemplate!"></ng-template>
                         }
                     </fd-bar-element>
                     @if (mobileConfig.hasCloseButton) {
@@ -21,7 +21,7 @@
         </fd-dialog-header>
         <fd-dialog-body>
             @if (childContent?.suggestionMenuTemplate) {
-                <ng-container [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"></ng-container>
+                <ng-template [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"></ng-template>
             }
         </fd-dialog-body>
         <fd-dialog-footer>

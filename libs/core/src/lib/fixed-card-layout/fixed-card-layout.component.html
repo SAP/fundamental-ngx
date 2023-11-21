@@ -37,14 +37,14 @@
                 (cdkDragDropped)="_onDragDropped($event)"
             >
                 <fd-fixed-card-layout-item>
-                    <ng-container *ngTemplateOutlet="card?.template || null"> </ng-container>
+                    <ng-template [ngTemplateOutlet]="card?.template || null"> </ng-template>
                 </fd-fixed-card-layout-item>
                 <div
                     *cdkDragPlaceholder
                     class="fd-fixed-card-layout__card-placeholder"
                     [style.margin-bottom.rem]="+_placeholderMargin"
                 >
-                    <ng-container *ngTemplateOutlet="card?.template || null"></ng-container>
+                    <ng-template [ngTemplateOutlet]="card?.template || null"></ng-template>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 @if (_renderer === 'title') {
     <span fd-list-title>
-        <ng-template *ngTemplateOutlet="plainRenderer"></ng-template>
+        <ng-template [ngTemplateOutlet]="plainRenderer"></ng-template>
     </span>
 } @else {
     <ng-content></ng-content>

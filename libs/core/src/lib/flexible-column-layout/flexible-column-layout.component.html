@@ -11,7 +11,7 @@
         [style.height]="_columnLayout.start === 0 ? '0' : 'auto'"
         [attr.aria-hidden]="_columnLayout.start === 0"
     >
-        <ng-container *ngTemplateOutlet="startColumn"></ng-container>
+        <ng-template [ngTemplateOutlet]="startColumn"></ng-template>
     </div>
     <!-- Left Separator -->
     @if (_leftColumnSeparator) {
@@ -42,7 +42,7 @@
         [style.height]="_columnLayout.mid === 0 ? '0' : 'auto'"
         [attr.aria-hidden]="_columnLayout.mid === 0"
     >
-        <ng-container *ngTemplateOutlet="midColumn"></ng-container>
+        <ng-template [ngTemplateOutlet]="midColumn"></ng-template>
     </div>
     <!-- Right Separator -->
     @if (_rightColumnSeparator) {
@@ -73,6 +73,6 @@
         [style.height]="_columnLayout.end === 0 ? '0' : 'auto'"
         [attr.aria-hidden]="_columnLayout.end === 0"
     >
-        <ng-container *ngTemplateOutlet="endColumn"></ng-container>
+        <ng-template [ngTemplateOutlet]="endColumn"></ng-template>
     </div>
 </div>

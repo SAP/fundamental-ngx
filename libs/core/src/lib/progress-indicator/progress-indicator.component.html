@@ -12,7 +12,7 @@
     @if (!hasPopover) {
         @if (_progressBarWidth >= 0) {
             <div class="fd-progress-indicator__container">
-                <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
+                <ng-template [ngTemplateOutlet]="indicatorContainer"></ng-template>
             </div>
         }
     } @else {
@@ -26,7 +26,7 @@
         >
             @if (_progressBarWidth >= 0) {
                 <fd-popover-control>
-                    <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
+                    <ng-template [ngTemplateOutlet]="indicatorContainer"></ng-template>
                 </fd-popover-control>
             }
             <fd-popover-body>

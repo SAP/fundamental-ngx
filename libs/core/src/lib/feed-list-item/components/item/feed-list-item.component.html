@@ -1,31 +1,34 @@
 @if (mobile) {
     <div class="fd-feed-list__wrapper">
         <div class="fd-feed-list__wrapper fd-feed-list__wrapper--header">
-            <ng-container *ngTemplateOutlet="avatarContent"></ng-container>
+            <ng-template [ngTemplateOutlet]="avatarContent"></ng-template>
             <div>
-                <ng-container *ngTemplateOutlet="author"></ng-container>
-                <ng-container *ngTemplateOutlet="footerContent"></ng-container>
+                <ng-template [ngTemplateOutlet]="author"></ng-template>
+                <ng-template [ngTemplateOutlet]="footerContent"></ng-template>
             </div>
         </div>
-        <ng-container *ngTemplateOutlet="actionContent"></ng-container>
+        <ng-template [ngTemplateOutlet]="actionContent"></ng-template>
     </div>
 } @else {
     <ng-content select="fd-feed-list-avatar"></ng-content>
 }
 <div class="fd-feed-list__content">
     @if (!mobile) {
-        <ng-container *ngTemplateOutlet="actionContent"></ng-container>
+        <ng-template [ngTemplateOutlet]="actionContent"></ng-template>
     }
     <p class="fd-feed-list__text">
         @if (!isRichText) {
-            <ng-container *ngTemplateOutlet="feedContent; context: { $implicit: author }"></ng-container>
+            <ng-template
+                [ngTemplateOutlet]="feedContent"
+                [ngTemplateOutletContext]="{ $implicit: author }"
+            ></ng-template>
         } @else {
-            <ng-container *ngTemplateOutlet="author"></ng-container>
+            <ng-template [ngTemplateOutlet]="author"></ng-template>
             <fd-formatted-text [htmlText]="text"></fd-formatted-text>
         }
     </p>
     @if (!mobile) {
-        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
+        <ng-template [ngTemplateOutlet]="footerContent"></ng-template>
     }
 </div>
 <ng-template #avatarContent>
@@ -47,7 +50,7 @@
                 [attr.href]="authorLink | safe: 'url'"
                 [emphasized]="true"
             >
-                <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
+                <ng-template [ngTemplateOutlet]="authorTitleTemplate"></ng-template>
             </a>
         } @else {
             {{ authorTitle }}
@@ -59,7 +62,7 @@
     {{ authorTitle }}
 </ng-template>
 <ng-template #feedContent let-param>
-    <ng-container *ngTemplateOutlet="param"></ng-container>
+    <ng-template [ngTemplateOutlet]="param"></ng-template>
     <span>
         {{ isCollapsed ? (text | truncate: maxChars) : text }}
     </span>

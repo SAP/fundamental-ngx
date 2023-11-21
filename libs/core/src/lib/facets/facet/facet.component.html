@@ -1,18 +1,18 @@
 @if (type === 'image') {
-    <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="customContentTemplate"></ng-template>
 } @else {
     @if (facetTitle) {
         <h1 fd-title [headerSize]="5" class="fd-margin-bottom--sm" [id]="titleId">{{ facetTitle }}</h1>
     }
     @if (type === 'form') {
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
     }
     @if (type === 'key-value' || 'custom') {
-        <ng-container *ngTemplateOutlet="customContentTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="customContentTemplate"></ng-template>
     }
     @if (type === 'rating-indicator') {
         <span fd-form-label>{{ subtitle }}</span>
-        <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        <ng-template [ngTemplateOutlet]="contentTemplate"></ng-template>
     }
 }
 <ng-template #contentTemplate>

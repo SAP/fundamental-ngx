@@ -74,7 +74,7 @@
                                         role="presentation"
                                         aria-hidden="true"
                                     ></span>
-                                    <ng-container *ngTemplateOutlet="linkComponent.textRenderer!"></ng-container>
+                                    <ng-template [ngTemplateOutlet]="linkComponent.textRenderer!"></ng-template>
                                     <span class="fd-navigation__selection-indicator"></span>
                                 </a>
                             </div>

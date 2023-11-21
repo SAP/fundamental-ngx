@@ -8,7 +8,7 @@
             <ng-content select="fd-token"></ng-content>
         </div>
         @if (_showOverflowPopover && ((_compact$ | async) || compactCollapse)) {
-            <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
+            <ng-template [ngTemplateOutlet]="tokensOverflow"></ng-template>
         } @else {
             @if (_showMoreElement && _hiddenTokens.length > 0) {
                 <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
@@ -35,7 +35,7 @@
 <ng-template #tokensOverflow>
     <fd-popover placement="bottom-start" title="" [noArrow]="false" [focusTrapped]="true" [focusAutoCapture]="true">
         <fd-popover-control>
-            <ng-container *ngTemplateOutlet="moreElement"></ng-container>
+            <ng-template [ngTemplateOutlet]="moreElement"></ng-template>
         </fd-popover-control>
         <fd-popover-body>
             <ul fd-list class="fd-tokenizer__overflow-list">

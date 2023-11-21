@@ -22,7 +22,7 @@
                     </fdx-nested-list-popover>
                 }
                 @if (!item.list) {
-                    <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
+                    <ng-template [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-template>
                 }
                 @if ((!condensed || !first) && item.list) {
                     <div fdx-nested-list-content>

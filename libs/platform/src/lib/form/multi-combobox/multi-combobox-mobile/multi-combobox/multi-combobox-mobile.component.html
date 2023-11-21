@@ -10,7 +10,7 @@
             <ng-template fdkTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
-                        <ng-container *ngTemplateOutlet="childContent?.controlTemplate || null"></ng-container>
+                        <ng-template [ngTemplateOutlet]="childContent?.controlTemplate || null"></ng-template>
                         @if (selectedShown$ | async) {
                             <button
                                 fd-button
@@ -38,7 +38,7 @@
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="childContent?.listTemplate || null"></ng-container>
+            <ng-template [ngTemplateOutlet]="childContent?.listTemplate || null"></ng-template>
         </fd-dialog-body>
         <fd-dialog-footer>
             @if (mobileConfig.approveButtonText) {

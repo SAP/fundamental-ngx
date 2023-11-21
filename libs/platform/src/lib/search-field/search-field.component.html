@@ -1,6 +1,6 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : inputFieldTemplate"></ng-container>
+<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : inputFieldTemplate"></ng-template>
 <ng-template #mobileTemplate>
-    <ng-container *ngTemplateOutlet="inputFieldTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="inputFieldTemplate"></ng-template>
 </ng-template>
 <ng-template #searchCategoryMenu>
     <button
@@ -49,7 +49,7 @@
             @if (_showCategoryDropdown) {
                 <span class="fd-input-group__addon fd-input-group__addon--button {{ appearance?.searchCategoryClass }}">
                     <ng-template
-                        *ngTemplateOutlet="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
+                        [ngTemplateOutlet]="categoryMode === 'select' ? searchCategorySelect : searchCategoryMenu"
                     ></ng-template>
                 </span>
             }

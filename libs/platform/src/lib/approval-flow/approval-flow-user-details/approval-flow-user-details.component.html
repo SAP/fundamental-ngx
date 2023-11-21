@@ -6,6 +6,6 @@
     </div>
 </div>
 @if (detailsTemplate) {
-    <ng-container [ngTemplateOutlet]="detailsTemplate" [ngTemplateOutletContext]="{ data: details | async }">
-    </ng-container>
+    <ng-template [ngTemplateOutlet]="detailsTemplate" [ngTemplateOutletContext]="{ data: details | async }">
+    </ng-template>
 }

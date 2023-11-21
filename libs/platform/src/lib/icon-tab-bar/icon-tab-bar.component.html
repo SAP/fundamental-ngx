@@ -1,15 +1,15 @@
 <div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
     @if (iconTabType === 'text') {
-        <ng-container *ngTemplateOutlet="textType"></ng-container>
+        <ng-template [ngTemplateOutlet]="textType"></ng-template>
     }
     @if (iconTabType === 'icon' || iconTabType === 'icon-only') {
-        <ng-container *ngTemplateOutlet="iconType"></ng-container>
+        <ng-template [ngTemplateOutlet]="iconType"></ng-template>
     }
     @if (iconTabType === 'filter') {
-        <ng-container *ngTemplateOutlet="filterType"></ng-container>
+        <ng-template [ngTemplateOutlet]="filterType"></ng-template>
     }
     @if (iconTabType === 'process') {
-        <ng-container *ngTemplateOutlet="processType"></ng-container>
+        <ng-template [ngTemplateOutlet]="processType"></ng-template>
     }
 </div>
 <ng-template #processType>

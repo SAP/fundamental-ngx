@@ -37,8 +37,11 @@
             >
                 @if (_items.length !== 0) {
                     @for (item of _items; track item; let i = $index) {
-                        <ng-container *ngTemplateOutlet="listItemDef.templateRef; context: { $implicit: item }">
-                        </ng-container>
+                        <ng-template
+                            [ngTemplateOutlet]="listItemDef.templateRef"
+                            [ngTemplateOutletContext]="{ $implicit: item }"
+                        >
+                        </ng-template>
                     }
                 } @else {
                     @if (!listItems.length && !_firstLoadingDone) {
@@ -78,7 +81,11 @@
     @if (!loadOnScroll) {
         @if (_items.length !== 0) {
             @for (item of _items; track item; let i = $index) {
-                <ng-container *ngTemplateOutlet="listItemDef.templateRef; context: { $implicit: item }"> </ng-container>
+                <ng-template
+                    [ngTemplateOutlet]="listItemDef.templateRef"
+                    [ngTemplateOutletContext]="{ $implicit: item }"
+                >
+                </ng-template>
             }
         } @else {
             @if (!listItems.length && !_firstLoadingDone) {

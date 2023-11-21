@@ -20,7 +20,7 @@
                     >
                         <ng-template #defaultDirtyIndicator>*</ng-template>
                         <ng-template
-                            *ngTemplateOutlet="dirtyLabel ? dirtyLabel.templateRef : defaultDirtyIndicator"
+                            [ngTemplateOutlet]="dirtyLabel ? dirtyLabel.templateRef : defaultDirtyIndicator"
                         ></ng-template>
                     </span>
                 }

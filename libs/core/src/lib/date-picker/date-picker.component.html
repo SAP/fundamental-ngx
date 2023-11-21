@@ -1,7 +1,4 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
-<ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
-</ng-template>
+<ng-template [ngTemplateOutlet]="mobile ? controlTemplate : desktopTemplate"></ng-template>
 <ng-template #popoverMessageTemplate>
     @if (_message) {
         <fd-form-message [embedded]="true" [type]="state">

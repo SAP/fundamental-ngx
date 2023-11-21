@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+<ng-template [ngTemplateOutlet]="mobile ? mobileTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
     <fd-popover
         additionalBodyClass="fd-popover-custom-list"
@@ -14,10 +14,10 @@
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
         <fd-popover-control>
-            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
         </fd-popover-control>
         <fd-popover-body [hidden]="!displayedValues.length">
-            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="listTemplate"></ng-template>
             <ng-content></ng-content>
         </fd-popover-body>
     </fd-popover>
@@ -37,7 +37,7 @@
     }
 </ng-template>
 <ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="controlTemplate"></ng-template>
 </ng-template>
 <ng-template #controlTemplate>
     <fd-input-group

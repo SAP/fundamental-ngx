@@ -125,12 +125,10 @@
                 }
             </ng-template>
             @if (hidden) {
-                <ng-container
-                    *ngTemplateOutlet="
-                        avatarRenderer;
-                        context: { $implicit: person, hidden: hidden, innerIndex: globalIndex }
-                    "
-                ></ng-container>
+                <ng-template
+                    [ngTemplateOutlet]="avatarRenderer"
+                    [ngTemplateOutletContext]="{ $implicit: person, hidden: hidden, innerIndex: globalIndex }"
+                ></ng-template>
             } @else {
                 <fd-popover
                     [noArrow]="false"
@@ -141,12 +139,10 @@
                     [focusTrapped]="true"
                 >
                     <fd-popover-control>
-                        <ng-container
-                            *ngTemplateOutlet="
-                                avatarRenderer;
-                                context: { $implicit: person, hidden: hidden, innerIndex: globalIndex }
-                            "
-                        ></ng-container>
+                        <ng-template
+                            [ngTemplateOutlet]="avatarRenderer"
+                            [ngTemplateOutletContext]="{ $implicit: person, hidden: hidden, innerIndex: globalIndex }"
+                        ></ng-template>
                     </fd-popover-control>
                     <fd-popover-body
                         [attr.aria-labelledby]="person.id + '-popover-header'"
@@ -209,12 +205,14 @@
                     <div class="fd-popover__body-content">
                         @if (overflowPopoverStage === 'main') {
                             @for (person of $any(items); track person; let i = $index) {
-                                <ng-container
-                                    *ngTemplateOutlet="
-                                        person.templateRef;
-                                        context: { $implicit: person, hidden: true, globalIndex: person.globalIndex }
-                                    "
-                                ></ng-container>
+                                <ng-template
+                                    [ngTemplateOutlet]="person.templateRef"
+                                    [ngTemplateOutletContext]="{
+                                        $implicit: person,
+                                        hidden: true,
+                                        globalIndex: person.globalIndex
+                                    }"
+                                ></ng-template>
                             }
                         }
                         @if (overflowPopoverStage === 'detail') {

@@ -11,7 +11,7 @@
     (keydown.space)="toggleGroupRow.emit(row)"
     (click)="toggleGroupRow.emit(row)"
 >
-    <ng-container *ngTemplateOutlet="tableCellExpandTemplate"></ng-container>
+    <ng-template [ngTemplateOutlet]="tableCellExpandTemplate"></ng-template>
 </td>
 
 <!-- Table Cell Expand Template -->
@@ -30,7 +30,7 @@
             <!-- Group row template when there are nested groups -->
             <ng-container *ngIf="groupRules.size !== 1">
                 <div class="fd-table__text fd-table__text--no-wrap">
-                    <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate"></ng-container>:
+                    <ng-template [ngTemplateOutlet]="tableHeaderCellContentTemplate"></ng-template>:
                     {{ row.value?.['value'] }}
                 </div>
             </ng-container>

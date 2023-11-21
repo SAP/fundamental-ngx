@@ -3,17 +3,17 @@
         @switch (align) {
             @case ('left') {
                 <div fd-bar-left>
-                    <ng-container *ngTemplateOutlet="barElement"></ng-container>
+                    <ng-template [ngTemplateOutlet]="barElement"></ng-template>
                 </div>
             }
             @case ('right') {
                 <div fd-bar-right>
-                    <ng-container *ngTemplateOutlet="barElement"></ng-container>
+                    <ng-template [ngTemplateOutlet]="barElement"></ng-template>
                 </div>
             }
             @default {
                 <div fd-bar-middle>
-                    <ng-container *ngTemplateOutlet="barElement"></ng-container>
+                    <ng-template [ngTemplateOutlet]="barElement"></ng-template>
                 </div>
             }
         }

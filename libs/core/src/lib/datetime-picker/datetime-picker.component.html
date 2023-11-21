@@ -1,4 +1,4 @@
-<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+<ng-template [ngTemplateOutlet]="mobile ? controlTemplate : desktopTemplate"></ng-template>
 <ng-template #desktopTemplate>
     <fd-popover
         [(isOpen)]="isOpen"
@@ -24,9 +24,6 @@
             }
         </fd-popover-body>
     </fd-popover>
-</ng-template>
-<ng-template #mobileTemplate>
-    <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
 <ng-template #controlTemplate>
     <fd-input-group

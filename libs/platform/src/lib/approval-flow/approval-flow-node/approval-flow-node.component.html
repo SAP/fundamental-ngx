@@ -118,15 +118,18 @@
     </div>
 </ng-template>
 @if (_showAddButton && meta?.canAddNodeBeforeAll && !node?.actionsConfig?.disableAddBefore) {
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before-all' }"></ng-container>
+    <ng-template
+        [ngTemplateOutlet]="addNodeButton"
+        [ngTemplateOutletContext]="{ placement: 'before-all' }"
+    ></ng-template>
 }
 @if (_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore) {
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }"></ng-container>
+    <ng-template [ngTemplateOutlet]="addNodeButton" [ngTemplateOutletContext]="{ placement: 'before' }"></ng-template>
 }
 @if (
     _showAddButton && meta?.canAddNodeAfter && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter
 ) {
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }"></ng-container>
+    <ng-template [ngTemplateOutlet]="addNodeButton" [ngTemplateOutletContext]="{ placement: 'after' }"></ng-template>
 }
 @if (
     _showAfterAllAddButton &&
@@ -134,7 +137,10 @@
     meta?.renderAddNodeAfterButton &&
     !node?.actionsConfig?.disableAddAfter
 ) {
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after-all' }"></ng-container>
+    <ng-template
+        [ngTemplateOutlet]="addNodeButton"
+        [ngTemplateOutletContext]="{ placement: 'after-all' }"
+    ></ng-template>
 }
 <ng-template #addNodeButton let-placement="placement">
     @if (node.status !== 'approved') {

@@ -35,16 +35,14 @@
                     </span>
                 }
                 @for (field of formControlItems; track _trackFn($index, field)) {
-                    <ng-container
-                        *ngTemplateOutlet="
-                            field.type === 'field' ? fieldRenderer : groupRenderer;
-                            context: {
-                                field: field,
-                                formFieldName: field.formItem.name,
-                                rank: field.formItem?.rank || 0
-                            }
-                        "
-                    ></ng-container>
+                    <ng-template
+                        [ngTemplateOutlet]="field.type === 'field' ? fieldRenderer : groupRenderer"
+                        [ngTemplateOutletContext]="{
+                            field: field,
+                            formFieldName: field.formItem.name,
+                            rank: field.formItem?.rank || 0
+                        }"
+                    ></ng-template>
                     <ng-template
                         #fieldRenderer
                         let-field="field"

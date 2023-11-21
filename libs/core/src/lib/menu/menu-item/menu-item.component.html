@@ -8,6 +8,6 @@
         [attr.aria-label]="submenu.ariaLabel"
         [attr.aria-labelledby]="submenu.ariaLabelledby"
     >
-        <ng-container *ngTemplateOutlet="submenu.templateRef"></ng-container>
+        <ng-template [ngTemplateOutlet]="submenu.templateRef"></ng-template>
     </ul>
 }

@@ -20,14 +20,14 @@
 >
     @if (!_disableScrollbar) {
         <div fd-scrollbar class="fd-popover__wrapper">
-            <ng-container *ngTemplateOutlet="renderer"></ng-container>
+            <ng-template [ngTemplateOutlet]="renderer"></ng-template>
         </div>
     } @else {
         <ng-content select="[fd-popover-body-header]"></ng-content>
         <ng-content select="[fd-popover-body-subheader]"></ng-content>
         <ng-content></ng-content>
         {{ text }}
-        <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
+        <ng-template [ngTemplateOutlet]="_templateToDisplay"></ng-template>
         <ng-content select="[fd-popover-body-footer]"></ng-content>
     }
     @if (_resizable) {
@@ -39,6 +39,6 @@
     <ng-content select="[fd-popover-body-subheader]"></ng-content>
     <ng-content></ng-content>
     {{ text }}
-    <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
+    <ng-template [ngTemplateOutlet]="_templateToDisplay"></ng-template>
     <ng-content select="[fd-popover-body-footer]"></ng-content>
 </ng-template>

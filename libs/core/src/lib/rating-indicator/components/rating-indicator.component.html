@@ -14,7 +14,7 @@
 <!--  role="application" is used in order to let user to change value with left/right arrows in JAWS, since JAWS ovverrides these actions -->
 <div class="fd-rating-indicator__container" role="application" aria-roledescription="Rating indicator">
     <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
-    <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
+    <ng-template [ngTemplateOutlet]="zeroRate"></ng-template>
     <!-- Available rate values -->
     @for (rate of _rates; track trackByFn(i, rate); let i = $index) {
         <input

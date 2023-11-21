@@ -15,7 +15,7 @@
             }
         </fd-dialog-header>
         <fd-dialog-body>
-            <ng-container *ngTemplateOutlet="childContent"></ng-container>
+            <ng-template [ngTemplateOutlet]="childContent"></ng-template>
         </fd-dialog-body>
         @if (mobileConfig.approveButtonText || mobileConfig.cancelButtonText) {
             <fd-dialog-footer>

@@ -4,7 +4,7 @@
             <h1 fd-title>{{ _messageBoxContent.title }}</h1>
         </fd-message-box-header>
         <fd-message-box-body>
-            <ng-container *ngTemplateOutlet="_contentTemplate"></ng-container>
+            <ng-template [ngTemplateOutlet]="_contentTemplate"></ng-template>
         </fd-message-box-body>
         @if (_footerVisible) {
             <fd-message-box-footer>

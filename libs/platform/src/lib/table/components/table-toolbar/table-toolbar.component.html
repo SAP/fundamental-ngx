@@ -15,7 +15,7 @@
         <ng-container *ngIf="_tableToolbarLeftActionsComponent">
             <span fd-toolbar-item fdOverflowPriority="never">
                 <fd-toolbar-separator *ngIf="!!title || !hideItemCount"></fd-toolbar-separator>
-                <ng-container *ngTemplateOutlet="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-container>
+                <ng-template [ngTemplateOutlet]="_tableToolbarLeftActionsComponent._contentTemplateRef"></ng-template>
             </span>
         </ng-container>
         <fd-toolbar-spacer></fd-toolbar-spacer>
@@ -72,7 +72,7 @@
         </ng-container>
 
         <span fd-toolbar-item *ngIf="tableToolbarActionsComponent" class="fdp-table-toolbar-actions">
-            <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
+            <ng-template [ngTemplateOutlet]="tableToolbarActionsComponent.contentTemplateRef"></ng-template>
         </span>
 
         <ng-container

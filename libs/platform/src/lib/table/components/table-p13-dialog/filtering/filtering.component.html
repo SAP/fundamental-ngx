@@ -48,15 +48,18 @@
                                     (click)="_removeRule(rule, _includeRules)"
                                 ></button>
 
-                                <button
-                                    *ngIf="_includeRules.length - 1 === $index"
-                                    fd-button
-                                    fdType="transparent"
-                                    glyph="add"
-                                    [attr.aria-label]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                    [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                    (click)="_addNewRule(_includeRules)"
-                                ></button>
+                                @if (_includeRules.length - 1 === $index) {
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        glyph="add"
+                                        [attr.aria-label]="
+                                            'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate
+                                        "
+                                        [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                        (click)="_addNewRule(_includeRules)"
+                                    ></button>
+                                }
                             </div>
                         </div>
                     </fd-layout-grid>
