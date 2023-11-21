@@ -289,41 +289,41 @@
         "serve": {
             "executor": "@angular-devkit/build-angular:dev-server",
             "options": {
-                "browserTarget": "docs:compile"
+                "buildTarget": "docs:compile"
             },
             "configurations": {
                 "production": {
-                    "browserTarget": "docs:compile:production"
+                    "buildTarget": "docs:compile:production"
                 },
                 "cx": {
-                    "browserTarget": "docs:compile:cx",
                     "port": 4201,
-                    "hmr": true
+                    "hmr": true,
+                    "buildTarget": "docs:compile:cx"
                 },
                 "core": {
-                    "browserTarget": "docs:compile:core",
                     "port": 4202,
-                    "hmr": true
+                    "hmr": true,
+                    "buildTarget": "docs:compile:core"
                 },
                 "cdk": {
-                    "browserTarget": "docs:compile:cdk",
                     "port": 4203,
-                    "hmr": true
+                    "hmr": true,
+                    "buildTarget": "docs:compile:cdk"
                 },
                 "platform": {
-                    "browserTarget": "docs:compile:platform",
                     "port": 4204,
-                    "hmr": true
+                    "hmr": true,
+                    "buildTarget": "docs:compile:platform"
                 },
                 "i18n": {
-                    "browserTarget": "docs:compile:i18n",
                     "port": 4205,
-                    "hmr": true
+                    "hmr": true,
+                    "buildTarget": "docs:compile:i18n"
                 },
                 "btp": {
-                    "browserTarget": "docs:compile:btp",
                     "port": 4206,
-                    "hmr": true
+                    "hmr": true,
+                    "buildTarget": "docs:compile:btp"
                 },
                 "hot-module-replacement": {
                     "hmr": true
