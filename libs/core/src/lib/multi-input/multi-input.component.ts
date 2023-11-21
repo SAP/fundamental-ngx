@@ -51,7 +51,7 @@ import { PopoverBodyComponent, PopoverComponent, PopoverControlComponent } from 
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
 
-import { AsyncPipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -100,7 +100,6 @@ let uniqueHiddenLabel = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         PopoverComponent,
         PopoverControlComponent,
@@ -108,7 +107,6 @@ let uniqueHiddenLabel = 0;
         PopoverBodyComponent,
         InputGroupModule,
         TokenModule,
-        NgFor,
         FormControlComponent,
         AutoCompleteDirective,
         ReactiveFormsModule,

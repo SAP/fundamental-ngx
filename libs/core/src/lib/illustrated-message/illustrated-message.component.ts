@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -42,7 +41,7 @@ let illustratedMessageUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class IllustratedMessageComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit, CssClassBuilder {
     /**

@@ -26,73 +26,73 @@
     (isOpenChange)="_onOpenChange($event)"
 >
     <ng-content></ng-content>
-    <li fd-option *ngIf="noValueLabel" [disabled]="false" [value]="null">
-        {{ noValueLabel }}
-    </li>
-    <li
-        fd-option
-        *ngFor="let item of _optionItems; index as index"
-        [disabled]="!!item.disabled"
-        [value]="item.value"
-        [attr.aria-labelledby]="ariaLabel"
-        [attr.aria-disabled]="disabled"
-    >
-        <fd-icon *ngIf="item.icon" [glyph]="item.icon" class="fd-template-icon icon-margin"></fd-icon>
-        <ng-container
-            [ngTemplateOutlet]="listItem"
-            [ngTemplateOutletContext]="{ optionItem: item, index: index }"
-        ></ng-container>
-        <ng-container
-            secondary
-            [ngTemplateOutlet]="secondaryTextSource"
-            [ngTemplateOutletContext]="{ optionItem: item }"
-        ></ng-container>
-    </li>
+    @if (noValueLabel) {
+        <li fd-option [disabled]="false" [value]="null">
+            {{ noValueLabel }}
+        </li>
+    }
+    @for (item of _optionItems; track item; let index = $index) {
+        <li
+            fd-option
+            [disabled]="!!item.disabled"
+            [value]="item.value"
+            [attr.aria-labelledby]="ariaLabel"
+            [attr.aria-disabled]="disabled"
+        >
+            @if (item.icon) {
+                <fd-icon [glyph]="item.icon" class="fd-template-icon icon-margin"></fd-icon>
+            }
+            <ng-container
+                [ngTemplateOutlet]="listItem"
+                [ngTemplateOutletContext]="{ optionItem: item, index: index }"
+            ></ng-container>
+            <ng-container
+                secondary
+                [ngTemplateOutlet]="secondaryTextSource"
+                [ngTemplateOutletContext]="{ optionItem: item }"
+            ></ng-container>
+        </li>
+    }
 </fd-select>
-
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>
-    <ng-container
-        *ngIf="_isSelectedOptionItem(optionItem) && !!_selectedItemTemplate"
-        [ngTemplateOutlet]="_selectedItemTemplate"
-        [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
-    ></ng-container>
-
-    <ng-container *ngIf="!(_isSelectedOptionItem(optionItem) && _selectedItemTemplate)">
+    @if (_isSelectedOptionItem(optionItem) && !!_selectedItemTemplate) {
+        <ng-container
+            [ngTemplateOutlet]="_selectedItemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
+        ></ng-container>
+    }
+    @if (!(_isSelectedOptionItem(optionItem) && _selectedItemTemplate)) {
         <ng-container
             [ngTemplateOutlet]="optionItemSource"
             [ngTemplateOutletContext]="{ optionItem: optionItem, index: index }"
         ></ng-container>
-    </ng-container>
+    }
 </ng-template>
-
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
-    <ng-container *ngIf="!_optionItemTemplate">
+    @if (!_optionItemTemplate) {
         <span [innerHTML]="optionItem.label"></span>
-    </ng-container>
-
-    <ng-container *ngIf="_optionItemTemplate">
+    }
+    @if (_optionItemTemplate) {
         <ng-container
             [ngTemplateOutlet]="_optionItemTemplate"
             [ngTemplateOutletContext]="{ $implicit: optionItem.value, index: index }"
         ></ng-container>
-    </ng-container>
+    }
 </ng-template>
-
 <ng-template let-optionItem="optionItem" #secondaryTextSource>
-    <ng-container *ngIf="showSecondaryText">
-        <ng-container *ngIf="!_secondaryItemTemplate">
+    @if (showSecondaryText) {
+        @if (!_secondaryItemTemplate) {
             <span
                 [style.text-align]="secondaryTextAlignment"
                 fd-list-secondary
                 [innerHTML]="optionItem.secondaryText"
             ></span>
-        </ng-container>
-
-        <ng-container *ngIf="_secondaryItemTemplate">
+        }
+        @if (_secondaryItemTemplate) {
             <ng-container
                 [ngTemplateOutlet]="_secondaryItemTemplate"
                 [ngTemplateOutletContext]="{ $implicit: optionItem.value }"
             ></ng-container>
-        </ng-container>
-    </ng-container>
+        }
+    }
 </ng-template>

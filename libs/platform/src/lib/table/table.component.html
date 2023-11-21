@@ -1,9 +1,10 @@
-<!-- Toolbar -->
-<ng-container
-    *ngIf="tableToolbar"
-    [ngTemplateOutlet]="tableToolbar.contentTemplateRef"
-    [ngTemplateOutletContext]="_toolbarContext"
-></ng-container>
+@if (tableToolbar) {
+    <!-- Toolbar -->
+    <ng-template
+        [ngTemplateOutlet]="tableToolbar.contentTemplateRef"
+        [ngTemplateOutletContext]="_toolbarContext"
+    ></ng-template>
+}
 
 <fd-busy-indicator
     [loading]="(_tableService.tableLoading$ | async) === true && _dataSourceDirective._firstLoadingDone"
@@ -13,8 +14,10 @@
     <div class="fdp-table__container" #tableContainer>
         <ng-container [ngTemplateOutlet]="tableTemplate"></ng-container>
 
-        <!-- Table column resizer for visually representing the resizing process -->
-        <fdp-table-column-resizer *ngIf="enableDragResize" class="fdp-table__column-resizer"></fdp-table-column-resizer>
+        @if (enableDragResize) {
+            <!-- Table column resizer for visually representing the resizing process -->
+            <fdp-table-column-resizer class="fdp-table__column-resizer"></fdp-table-column-resizer>
+        }
     </div>
 </fd-busy-indicator>
 
@@ -75,65 +78,68 @@
                 (dropCancelled)="_dndTableDirective?.dropCancelled()"
             >
                 <ng-container *ngFor="let rowIndex of _tableRowsInViewPortPlaceholder; trackBy: _rowTrackBy">
-                    <ng-container *ngIf="_tableRowsVisible[rowIndex] as row" [ngSwitch]="row.type">
-                        <tr
-                            *ngSwitchCase="'group'"
-                            fdp-table-group-row
-                            [index]="rowIndex"
-                            [height]="rowHeight"
-                            [draggable]="isDraggable"
-                            [row]="row"
-                            [rowId]="id"
-                            [keyToColumnMap]="_keyToColumnMap"
-                            [tableColumnsLength]="_tableColumnsLength"
-                            (toggleGroupRow)="_toggleGroupRow($event)"
-                            (click)="_emitRowActivate(row)"
-                        ></tr>
-
-                        <tr
-                            *ngSwitchDefault
-                            [fdkDndItem]="row"
-                            [applyDragItemClass]="isDraggable"
-                            [class]="row | rowClasses : rowsClass"
-                            [tabindex]="row.isTree || rowsActivable || !!row.navigatable ? 0 : -1"
-                            [focusable]="row.isTree || rowsActivable || !!row.navigatable"
-                            [hoverable]="rowsActivable || isSelectionColumnShown || !!row.navigatable"
-                            [activable]="rowsActivable || !!row.navigatable"
-                            [active]="rowIndex === _navigatedRowIndex"
-                            [highlightActive]="highlightNavigatedRow"
-                            [style.height.px]="rowHeight"
-                            [attr.aria-level]="isTreeTable ? row.level + 1 : null"
-                            (keydown.enter)="_onRowClick(row, $event)"
-                            (keydown.space)="_onRowClick(row, $event)"
-                            (click)="_onRowClick(row, $event)"
-                            (started)="_dndTableDirective?.dragDropStart()"
-                            [main]="true"
-                            [class.fd-table__row--draggable]="isDraggable"
-                            fdp-table-row
-                            [rowId]="id"
-                            [index]="rowIndex"
-                            [row]="row"
-                            [selectionMode]="_selectionMode"
-                            [selectableKey]="selectableKey"
-                            [enableTristateMode]="enableTristateMode"
-                            [fixed]="fixed"
-                            [selectionColumnWidth]="_selectionColumnWidth"
-                            [freezeColumnsTo]="freezeColumnsTo"
-                            [freezeEndColumnsTo]="freezeEndColumnsTo"
-                        ></tr>
-
-                        <tr
-                            *ngIf="row.type === 'item' && _poppingColumns.length > 0"
-                            fdp-table-popping-row
-                            [secondary]="true"
-                            [selectionMode]="selectionMode"
-                            [row]="row"
-                            [checked]="row.checked"
-                            [class]="row | rowClasses : rowsClass"
-                            (toggleGroupRow)="_toggleGroupRow($event)"
-                            (cellClicked)="_onCellClick($event.index, $event.row)"
-                        ></tr>
-                        <ng-container *ngIf="row.children.length === 0 && (row.childItemsLoading$ | async)">
+                    @if (_tableRowsVisible[rowIndex]; as row) {
+                        @switch (row.type) {
+                            @case ('group') {
+                                <tr
+                                    fdp-table-group-row
+                                    [index]="rowIndex"
+                                    [height]="rowHeight"
+                                    [draggable]="isDraggable"
+                                    [row]="row"
+                                    [rowId]="id"
+                                    [keyToColumnMap]="_keyToColumnMap"
+                                    [tableColumnsLength]="_tableColumnsLength"
+                                    (toggleGroupRow)="_toggleGroupRow($event)"
+                                    (click)="_emitRowActivate(row)"
+                                ></tr>
+                            }
+                            @default {
+                                <tr
+                                    [fdkDndItem]="row"
+                                    [applyDragItemClass]="isDraggable"
+                                    [class]="row | rowClasses: rowsClass"
+                                    [tabindex]="row.isTree || rowsActivable || !!row.navigatable ? 0 : -1"
+                                    [focusable]="row.isTree || rowsActivable || !!row.navigatable"
+                                    [hoverable]="rowsActivable || isSelectionColumnShown || !!row.navigatable"
+                                    [activable]="rowsActivable || !!row.navigatable"
+                                    [active]="rowIndex === _navigatedRowIndex"
+                                    [highlightActive]="highlightNavigatedRow"
+                                    [style.height.px]="rowHeight"
+                                    [attr.aria-level]="isTreeTable ? row.level + 1 : null"
+                                    (keydown.enter)="_onRowClick(row, $event)"
+                                    (keydown.space)="_onRowClick(row, $event)"
+                                    (click)="_onRowClick(row, $event)"
+                                    (started)="_dndTableDirective?.dragDropStart()"
+                                    [main]="true"
+                                    [class.fd-table__row--draggable]="isDraggable"
+                                    fdp-table-row
+                                    [rowId]="id"
+                                    [index]="rowIndex"
+                                    [row]="row"
+                                    [selectionMode]="_selectionMode"
+                                    [selectableKey]="selectableKey"
+                                    [enableTristateMode]="enableTristateMode"
+                                    [fixed]="fixed"
+                                    [selectionColumnWidth]="_selectionColumnWidth"
+                                    [freezeColumnsTo]="freezeColumnsTo"
+                                    [freezeEndColumnsTo]="freezeEndColumnsTo"
+                                ></tr>
+                            }
+                        }
+                        @if (row.type === 'item' && _poppingColumns.length > 0) {
+                            <tr
+                                fdp-table-popping-row
+                                [secondary]="true"
+                                [selectionMode]="selectionMode"
+                                [row]="row"
+                                [checked]="row.checked"
+                                [class]="row | rowClasses: rowsClass"
+                                (toggleGroupRow)="_toggleGroupRow($event)"
+                                (cellClicked)="_onCellClick($event.index, $event.row)"
+                            ></tr>
+                        }
+                        @if (row.children.length === 0 && (row.childItemsLoading$ | async)) {
                             <tr fd-table-row *fdkRepeat="3">
                                 <td fd-table-cell *fdkRepeat="_tableColumnsLength">
                                     <fd-skeleton
@@ -144,9 +150,9 @@
                                     ></fd-skeleton>
                                 </td>
                             </tr>
-                        </ng-container>
+                        }
                         <!-- Last rendered child row. -->
-                        <ng-container *ngIf="row.parent?.lastChild?.index === row.index">
+                        @if (row.parent?.lastChild?.index === row.index) {
                             <tr
                                 aria-hidden="true"
                                 class="fd-table__intersection-spy"
@@ -154,58 +160,71 @@
                                 (intersected)="$event && _tableRowService.loadChildRows(row.parent!)"
                                 [style.top.px]="pageScrollingThreshold * -1"
                             ></tr>
-                        </ng-container>
-                    </ng-container>
+                        }
+                    }
                 </ng-container>
-                <tr
-                    aria-hidden="true"
-                    *ngIf="pageScrolling"
-                    class="fd-table__intersection-spy"
-                    [fdkIntersectionSpy]="pageScrollingThreshold"
-                    (intersected)="$event && _onSpyIntersect($event)"
-                    [style.top.px]="pageScrollingThreshold * -1"
-                ></tr>
+                @if (pageScrolling) {
+                    <tr
+                        aria-hidden="true"
+                        class="fd-table__intersection-spy"
+                        [fdkIntersectionSpy]="pageScrollingThreshold"
+                        (intersected)="$event && _onSpyIntersect($event)"
+                        [style.top.px]="pageScrollingThreshold * -1"
+                    ></tr>
+                }
             </tbody>
 
-            <tbody *ngIf="pageScrolling" class="fd-table__body__focus-mock"></tbody>
-
-            <!-- the tbody element below is so the scrollbar renders correctly -->
-            <tbody *ngIf="_virtualScrollDirective?.virtualScroll">
-                <tr>
-                    <td colspan="100%" [style.height.px]="_virtualScrollDirective?.virtualScrollTotalHeight"></td>
-                </tr>
-            </tbody>
+            @if (pageScrolling) {
+                <tbody class="fd-table__body__focus-mock"></tbody>
+            }
+            @if (_virtualScrollDirective?.virtualScroll) {
+                <!-- the tbody element below is so the scrollbar renders correctly -->
+                <tbody>
+                    <tr>
+                        <td colspan="100%" [style.height.px]="_virtualScrollDirective!.virtualScrollTotalHeight"></td>
+                    </tr>
+                </tbody>
+            }
         </table>
     </div>
 </ng-template>
 
 <!-- Empty Table Message -->
 <ng-template #emptyTableTemplate>
-    <tbody *ngIf="!_dataSourceDirective._firstLoadingDone" fd-table-body>
-        <tr fd-table-row *fdkRepeat="3">
-            <td fd-table-cell *fdkRepeat="_tableColumnsLength">
-                <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
-            </td>
-        </tr>
-    </tbody>
-
-    <tbody *ngIf="_dataSourceDirective._firstLoadingDone" fd-table-body class="fdp-table__empty">
-        <tr fd-table-row>
-            <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
-                <div class="fdp-table__empty-table-message">
-                    <ng-container>
-                        <div #noDataWrapper>
-                            <ng-content select="fdp-table-no-data-wrapper"></ng-content>
-                        </div>
-                        <div *ngIf="!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0">
-                            {{ emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate) }}
-                        </div>
-                        <div *ngIf="_tableService.visibleColumnsLength === 0">
-                            {{ noVisibleColumnsMessage || ('platformTable.noVisibleColumnsMessage' | fdTranslate) }}
-                        </div>
-                    </ng-container>
-                </div>
-            </td>
-        </tr>
-    </tbody>
+    @if (!_dataSourceDirective._firstLoadingDone) {
+        <tbody fd-table-body>
+            <tr fd-table-row *fdkRepeat="3">
+                <td fd-table-cell *fdkRepeat="_tableColumnsLength">
+                    <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="60%"></fd-skeleton>
+                </td>
+            </tr>
+        </tbody>
+    } @else {
+        <tbody fd-table-body class="fdp-table__empty">
+            <tr fd-table-row>
+                <td fd-table-cell class="fd-table__cell--no-data" [attr.colspan]="_tableColumnsLength">
+                    <div class="fdp-table__empty-table-message">
+                        <ng-container>
+                            <div #noDataWrapper>
+                                <ng-content select="fdp-table-no-data-wrapper"></ng-content>
+                            </div>
+                            @if (!noDataWrapper.hasChildNodes() && _tableService.visibleColumnsLength > 0) {
+                                <div>
+                                    {{ emptyTableMessage || ('platformTable.defaultEmptyMessage' | fdTranslate) }}
+                                </div>
+                            }
+                            @if (_tableService.visibleColumnsLength === 0) {
+                                <div>
+                                    {{
+                                        noVisibleColumnsMessage ||
+                                            ('platformTable.noVisibleColumnsMessage' | fdTranslate)
+                                    }}
+                                </div>
+                            }
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    }
 </ng-template>

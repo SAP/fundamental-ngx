@@ -8,9 +8,10 @@
     [fieldColumnLayout]="{ S: 12, M: 12 }"
 >
 </fdp-form-generator>
-
-<fdp-button *ngIf="formCreated" (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
-
+@if (formCreated) {
+    <fdp-button (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+}
 <p>Form created: {{ formCreated }}</p>
-
-<p *ngIf="formValue">Form value: {{ formValue | json }}</p>
+@if (formValue) {
+    <p>Form value: {{ formValue | json }}</p>
+}

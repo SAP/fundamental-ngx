@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+
 import { Component, TemplateRef } from '@angular/core';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -25,11 +25,7 @@ import { TitleComponent } from '@fundamental-ngx/core/title';
         ScrollbarDirective,
         QuickViewModule,
         AvatarComponent,
-        NgFor,
-        NgSwitch,
-        NgSwitchCase,
         LinkComponent,
-        NgSwitchDefault,
         ContentDensityDirective,
         ButtonComponent
     ]

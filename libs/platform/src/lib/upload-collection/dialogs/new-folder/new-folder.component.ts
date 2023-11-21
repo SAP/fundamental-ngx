@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import {
@@ -41,7 +41,6 @@ import { UploadCollectionFolder } from '../../models/upload-collection.models';
         FormLabelComponent,
         FormsModule,
         FormControlComponent,
-        NgIf,
         ObjectStatusComponent,
         DialogFooterComponent,
         ButtonBarComponent,

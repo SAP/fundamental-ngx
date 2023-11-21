@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
@@ -24,12 +24,10 @@ import {
         PlatformWizardGeneratorModule,
         PlatformButtonModule,
         ContentDensityDirective,
-        NgFor,
         TitleComponent,
         LayoutGridModule,
         FormLabelComponent,
         PlatformLinkModule,
-        NgIf,
         JsonPipe
     ]
 })

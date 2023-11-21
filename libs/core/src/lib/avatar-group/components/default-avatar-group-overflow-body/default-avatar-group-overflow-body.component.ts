@@ -1,5 +1,5 @@
 import { PortalModule } from '@angular/cdk/portal';
-import { NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -25,11 +25,9 @@ import { AvatarGroupItemDirective } from '../../directives/avatar-group-item.dir
     selector: 'fd-default-avatar-group-overflow-body',
     templateUrl: './default-avatar-group-overflow-body.component.html',
     imports: [
-        NgForOf,
         PortalModule,
         AvatarGroupItemRendererDirective,
         FocusableListDirective,
-        NgIf,
         NgTemplateOutlet,
         PopoverBodyHeaderDirective,
         BarModule

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
-import { NgFor, NgIf } from '@angular/common';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
@@ -22,10 +21,8 @@ import {
         FdpFormGroupModule,
         ReactiveFormsModule,
         PlatformFileUploaderModule,
-        NgIf,
         PlatformButtonModule,
-        ContentDensityDirective,
-        NgFor
+        ContentDensityDirective
     ]
 })
 export class PlatformFileUploaderReactiveExampleComponent {

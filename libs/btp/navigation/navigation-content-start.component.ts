@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { NgIf } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -37,7 +37,6 @@ const FD_NAVIGATION_OVERFLOW_ITEM_CLASS = 'fd-navigation__container--hidden-over
     imports: [
         NavigationListComponent,
         NavigationListItemComponent,
-        NgIf,
         NavigationLinkComponent,
         NavigationListOverflowItemComponent
     ],

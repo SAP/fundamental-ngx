@@ -3,5 +3,6 @@
     mainTitle="Custom validation in Form Generator example"
     (formCreated)="onFormCreated()"
 ></fdp-form-generator>
-
-<fdp-button *ngIf="formCreated" (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+@if (formCreated) {
+    <fdp-button (click)="submitForm()" type="submit" label="Submit form"></fdp-button>
+}

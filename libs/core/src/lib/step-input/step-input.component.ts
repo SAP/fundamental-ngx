@@ -1,6 +1,6 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgIf } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -58,7 +58,7 @@ let stepInputUniqueId = 0;
         '(focusout)': 'handleFocusOut($event)'
     },
     standalone: true,
-    imports: [FormInputMessageGroupComponent, NgIf, ButtonComponent, FormMessageComponent, FdTranslatePipe]
+    imports: [FormInputMessageGroupComponent, ButtonComponent, FormMessageComponent, FdTranslatePipe]
 })
 export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, FormItemControl {
     /** Sets compact mode */

@@ -22,41 +22,45 @@
                     (_validIncludeRulesCount > 0
                         ? 'platformTable.P13FilterDialogIncludePanelTitleWithCount'
                         : 'platformTable.P13FilterDialogIncludePanelTitleWithoutCount'
-                    ) | fdTranslate : { count: _validIncludeRulesCount }
+                    ) | fdTranslate: { count: _validIncludeRulesCount }
                 }}
             </div>
             <div fd-panel-content>
-                <fd-layout-grid *ngFor="let rule of _includeRules; let i = index">
-                    <div fdLayoutGridRow>
-                        <fdp-table-filter-rule
-                            [fdLayoutGridCol]="10"
-                            [rule]="rule"
-                            (ruleChange)="_recalculateResetAvailability()"
-                            (ruleStateChange)="_onRuleStateChange()"
-                        ></fdp-table-filter-rule>
-                        <!-- Actions buttons -->
-                        <div [fdLayoutGridCol]="2">
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                glyph="sys-cancel"
-                                [attr.aria-label]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
-                                [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
-                                (click)="_removeRule(rule, _includeRules)"
-                            ></button>
+                @for (rule of _includeRules; track rule) {
+                    <fd-layout-grid>
+                        <div fdLayoutGridRow>
+                            <fdp-table-filter-rule
+                                [fdLayoutGridCol]="10"
+                                [rule]="rule"
+                                (ruleChange)="_recalculateResetAvailability()"
+                                (ruleStateChange)="_onRuleStateChange()"
+                            ></fdp-table-filter-rule>
+                            <!-- Actions buttons -->
+                            <div [fdLayoutGridCol]="2">
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="sys-cancel"
+                                    [attr.aria-label]="
+                                        'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
+                                    "
+                                    [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                    (click)="_removeRule(rule, _includeRules)"
+                                ></button>
 
-                            <button
-                                *ngIf="_includeRules.length - 1 === i"
-                                fd-button
-                                fdType="transparent"
-                                glyph="add"
-                                [attr.aria-label]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                (click)="_addNewRule(_includeRules)"
-                            ></button>
+                                <button
+                                    *ngIf="_includeRules.length - 1 === $index"
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="add"
+                                    [attr.aria-label]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                    [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                    (click)="_addNewRule(_includeRules)"
+                                ></button>
+                            </div>
                         </div>
-                    </div>
-                </fd-layout-grid>
+                    </fd-layout-grid>
+                }
             </div>
         </fd-panel>
         <!-- Exclude Rules -->
@@ -66,41 +70,45 @@
                     (_validExcludeRulesCount > 0
                         ? 'platformTable.P13FilterDialogExcludePanelTitleWithCount'
                         : 'platformTable.P13FilterDialogExcludePanelTitleWithoutCount'
-                    ) | fdTranslate : { count: _validExcludeRulesCount }
+                    ) | fdTranslate: { count: _validExcludeRulesCount }
                 }}
             </div>
             <div fd-panel-content>
-                <fd-layout-grid *ngFor="let rule of _excludeRules; let i = index">
-                    <div fdLayoutGridRow>
-                        <fdp-table-filter-rule
-                            [fdLayoutGridCol]="10"
-                            [rule]="rule"
-                            (ruleChange)="_recalculateResetAvailability()"
-                            (ruleStateChange)="_onRuleStateChange()"
-                        ></fdp-table-filter-rule>
-                        <!-- Actions buttons -->
-                        <div [fdLayoutGridCol]="2">
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                glyph="sys-cancel"
-                                [attr.aria-label]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
-                                [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
-                                (click)="_removeRule(rule, _excludeRules)"
-                            ></button>
+                @for (rule of _excludeRules; track rule) {
+                    <fd-layout-grid>
+                        <div fdLayoutGridRow>
+                            <fdp-table-filter-rule
+                                [fdLayoutGridCol]="10"
+                                [rule]="rule"
+                                (ruleChange)="_recalculateResetAvailability()"
+                                (ruleStateChange)="_onRuleStateChange()"
+                            ></fdp-table-filter-rule>
+                            <!-- Actions buttons -->
+                            <div [fdLayoutGridCol]="2">
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="sys-cancel"
+                                    [attr.aria-label]="
+                                        'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate
+                                    "
+                                    [title]="'platformTable.P13FilterDialogRemoveFilterBtnTitle' | fdTranslate"
+                                    (click)="_removeRule(rule, _excludeRules)"
+                                ></button>
 
-                            <button
-                                *ngIf="_excludeRules.length - 1 === i"
-                                fd-button
-                                fdType="transparent"
-                                glyph="add"
-                                [attr.aria-label]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
-                                (click)="_addNewRule(_excludeRules)"
-                            ></button>
+                                <button
+                                    *ngIf="_excludeRules.length - 1 === $index"
+                                    fd-button
+                                    fdType="transparent"
+                                    glyph="add"
+                                    [attr.aria-label]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                    [title]="'platformTable.P13FilterDialogAddFilterBtnTitle' | fdTranslate"
+                                    (click)="_addNewRule(_excludeRules)"
+                                ></button>
+                            </div>
                         </div>
-                    </div>
-                </fd-layout-grid>
+                    </fd-layout-grid>
+                }
             </div>
         </fd-panel>
     </fd-dialog-body>

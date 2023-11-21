@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -26,7 +25,6 @@ import {
     standalone: true,
     imports: [
         PopoverContainerDirective,
-        NgIf,
         ButtonComponent,
         PopoverComponent,
         PopoverControlComponent,

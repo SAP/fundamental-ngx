@@ -1,5 +1,4 @@
 <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
-
 <ng-template #desktopTemplate>
     <fd-popover
         additionalBodyClass="fd-popover-custom-list"
@@ -23,26 +22,23 @@
         </fd-popover-body>
     </fd-popover>
 </ng-template>
-
 <ng-template let-term="term" #itemSource>
-    <span
-        fd-list-title
-        *ngIf="!_customRenderer; else customRendererTemplate"
-        [innerHTML]="term | displayFnPipe : displayFn | highlight : inputText : highlighting && filterHighlight"
-    >
-    </span>
-    <ng-template #customRendererTemplate>
+    @if (!_customRenderer) {
+        <span
+            fd-list-title
+            [innerHTML]="term | displayFnPipe: displayFn | highlight: inputText : highlighting && filterHighlight"
+        >
+        </span>
+    } @else {
         <ng-container
             [ngTemplateOutlet]="_customRenderer!"
             [ngTemplateOutletContext]="{ $implicit: term, inputText: inputText }"
         ></ng-container>
-    </ng-template>
+    }
 </ng-template>
-
 <ng-template #mobileTemplate>
     <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
-
 <ng-template #controlTemplate>
     <fd-input-group
         [button]="showDropdownButton"
@@ -90,32 +86,32 @@
             (ngModelChange)="handleSearchTermChange()"
             (blur)="handleBlur()"
         />
-        <span
-            class="fd-input-group__addon fd-input-group__addon--button"
-            [class.fd-shellbar__input-group-addon]="inShellbar"
-            *ngIf="isSearch && showClearButton && inputText && inputText.length > 0"
-        >
-            <button
-                fd-button
-                class="fd-input-group__button"
-                type="button"
-                [fdType]="inShellbar ? 'standard' : 'transparent'"
-                title="Clear input"
-                [class.fd-shellbar__button]="inShellbar"
-                [attr.tabindex]="clearButtonFocusable ? 0 : -1"
-                (focus)="clearInputBtnFocus()"
-                (blur)="clearInputBtnBlur()"
-                (click)="_handleClearSearchTerm()"
+        @if (isSearch && showClearButton && inputText && inputText.length > 0) {
+            <span
+                class="fd-input-group__addon fd-input-group__addon--button"
+                [class.fd-shellbar__input-group-addon]="inShellbar"
             >
-                <fd-icon glyph="decline"></fd-icon>
-            </button>
-        </span>
+                <button
+                    fd-button
+                    class="fd-input-group__button"
+                    type="button"
+                    [fdType]="inShellbar ? 'standard' : 'transparent'"
+                    title="Clear input"
+                    [class.fd-shellbar__button]="inShellbar"
+                    [attr.tabindex]="clearButtonFocusable ? 0 : -1"
+                    (focus)="clearInputBtnFocus()"
+                    (blur)="clearInputBtnBlur()"
+                    (click)="_handleClearSearchTerm()"
+                >
+                    <fd-icon glyph="decline"></fd-icon>
+                </button>
+            </span>
+        }
     </fd-input-group>
     <div [id]="comboboxId + '-list-results'" class="fd-combobox-count-list-results">
         {{ displayedValues.length || 0 }} result list items
     </div>
 </ng-template>
-
 <ng-template #listTemplate>
     <ul
         fd-list
@@ -132,44 +128,48 @@
         (focusEscapeList)="handleListFocusEscape($event)"
     >
         <ng-content></ng-content>
-        <ng-container *ngIf="groupFn; else flatList">
-            <ng-container *ngFor="let group of displayedValues | listGroupPipe : groupFn">
+        @if (groupFn) {
+            @for (group of displayedValues | listGroupPipe: groupFn; track group) {
                 <li role="group" fd-list-group-header [tabindex]="0">
                     <span fd-list-title>{{ group.key }}</span>
                 </li>
+                @for (term of group.value; track term) {
+                    <li
+                        role="option"
+                        fd-list-item
+                        [attr.aria-placeholder]="group.key"
+                        [tabindex]="0"
+                        class="fd-combobox-list-item"
+                        [selected]="isSelected(term)"
+                        [value]="term"
+                        (keydown)="onItemKeyDownHandler($event, term)"
+                        (click)="onMenuClickHandler(term)"
+                    >
+                        <ng-container
+                            [ngTemplateOutlet]="itemSource"
+                            [ngTemplateOutletContext]="{ term: term }"
+                        ></ng-container>
+                    </li>
+                }
+            }
+        } @else {
+            @for (term of displayedValues; track term) {
                 <li
-                    role="option"
                     fd-list-item
-                    [attr.aria-placeholder]="group.key"
+                    role="option"
                     [tabindex]="0"
                     class="fd-combobox-list-item"
-                    *ngFor="let term of group.value"
                     [selected]="isSelected(term)"
-                    [value]="term"
                     (keydown)="onItemKeyDownHandler($event, term)"
                     (click)="onMenuClickHandler(term)"
+                    [value]="term"
                 >
                     <ng-container
                         [ngTemplateOutlet]="itemSource"
                         [ngTemplateOutletContext]="{ term: term }"
                     ></ng-container>
                 </li>
-            </ng-container>
-        </ng-container>
-        <ng-template #flatList>
-            <li
-                fd-list-item
-                role="option"
-                [tabindex]="0"
-                class="fd-combobox-list-item"
-                *ngFor="let term of displayedValues"
-                [selected]="isSelected(term)"
-                (keydown)="onItemKeyDownHandler($event, term)"
-                (click)="onMenuClickHandler(term)"
-                [value]="term"
-            >
-                <ng-container [ngTemplateOutlet]="itemSource" [ngTemplateOutletContext]="{ term: term }"></ng-container>
-            </li>
-        </ng-template>
+            }
+        }
     </ul>
 </ng-template>

@@ -19,35 +19,28 @@
     (blur)="_onFocusChanged(false)"
     (focus)="_onFocusChanged(true)"
 ></textarea>
-
 <!-- ICU recommends full text in format -->
-<div
-    class="fd-textarea-counter"
-    *ngIf="showExceededText"
-    aria-live="polite"
-    aria-atomic="true"
-    [attr.id]="id + '-counter'"
-    #counter
->
-    <!-- render spaces instead of the actual value while translation string is loading in order to avoid content jumps -->
-    <ng-container *ngIf="counterExcessOrRemaining === 'excess'; else charactersRemaining">
-        <span
-            [innerHtml]="
-                (exceededCharCount === 1
-                    ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
-                    : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
-                ) | fdTranslate : { count: exceededCharCount } : '&nbsp;&nbsp;'
-            "
-        ></span>
-    </ng-container>
-    <ng-template #charactersRemaining>
-        <span
-            [innerHtml]="
-                (exceededCharCount === 1
-                    ? 'platformTextarea.counterMessageCharactersRemainingSingular'
-                    : 'platformTextarea.counterMessageCharactersRemainingPlural'
-                ) | fdTranslate : { count: exceededCharCount } : '&nbsp;&nbsp;'
-            "
-        ></span>
-    </ng-template>
-</div>
+@if (showExceededText) {
+    <div class="fd-textarea-counter" aria-live="polite" aria-atomic="true" [attr.id]="id + '-counter'" #counter>
+        <!-- render spaces instead of the actual value while translation string is loading in order to avoid content jumps -->
+        @if (counterExcessOrRemaining === 'excess') {
+            <span
+                [innerHtml]="
+                    (exceededCharCount === 1
+                        ? 'platformTextarea.counterMessageCharactersOverTheLimitSingular'
+                        : 'platformTextarea.counterMessageCharactersOverTheLimitPlural'
+                    ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                "
+            ></span>
+        } @else {
+            <span
+                [innerHtml]="
+                    (exceededCharCount === 1
+                        ? 'platformTextarea.counterMessageCharactersRemainingSingular'
+                        : 'platformTextarea.counterMessageCharactersRemainingPlural'
+                    ) | fdTranslate: { count: exceededCharCount } : '&nbsp;&nbsp;'
+                "
+            ></span>
+        }
+    </div>
+}

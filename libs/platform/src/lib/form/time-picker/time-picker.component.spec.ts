@@ -13,31 +13,30 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
 @Component({
     selector: 'fdp-test-time-picker',
     template: `
-        <form [formGroup]="timePickerForm" (ngSubmit)="onSubmit()">
-            <fdp-form-group #ffg [formGroup]="timePickerForm">
-                <fdp-form-field
-                    #ffl1
-                    id="timePicker"
-                    zone="zLeft"
-                    rank="1"
-                    required="true"
-                    hint="This is a hint"
-                    placeholder="Enter a time"
-                    label="Time:"
-                >
-                    <fdp-time-picker name="timePicker" allowNull="false" formControlName="timePicker">
-                    </fdp-time-picker>
-                </fdp-form-field>
-
-                <ng-template #i18n let-errors>
-                    <ng-container *ngIf="errors.required">
-                        <span>Value is required</span>
-                    </ng-container>
-                </ng-template>
-            </fdp-form-group>
-            <button type="submit" #submitButton>Submit</button>
-        </form>
-    `,
+<form [formGroup]="timePickerForm" (ngSubmit)="onSubmit()">
+  <fdp-form-group #ffg [formGroup]="timePickerForm">
+    <fdp-form-field
+      #ffl1
+      id="timePicker"
+      zone="zLeft"
+      rank="1"
+      required="true"
+      hint="This is a hint"
+      placeholder="Enter a time"
+      label="Time:"
+      >
+      <fdp-time-picker name="timePicker" allowNull="false" formControlName="timePicker">
+      </fdp-time-picker>
+    </fdp-form-field>
+    <ng-template #i18n let-errors>
+      @if (errors.required) {
+        <span>Value is required</span>
+      }
+    </ng-template>
+  </fdp-form-group>
+  <button type="submit" #submitButton>Submit</button>
+</form>
+`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestTimePickerComponent {

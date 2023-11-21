@@ -1,4 +1,4 @@
-<ng-container *ngIf="isExtraItemsMode">
+@if (isExtraItemsMode) {
     <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
             <button class="fd-icon-tab-bar__overflow">
@@ -17,9 +17,8 @@
             </ul>
         </fd-popover-body>
     </fd-popover>
-</ng-container>
-
-<ng-container *ngIf="!isExtraItemsMode && parentTab">
+}
+@if (!isExtraItemsMode && parentTab) {
     <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
             <a
@@ -34,7 +33,9 @@
                     <span class="fd-icon-tab-bar__arrow">
                         <i class="sap-icon--slim-arrow-down" role="presentation"></i>
                     </span>
-                    <span *ngIf="parentTab.badge" class="fd-icon-tab-bar__badge"></span>
+                    @if (parentTab.badge) {
+                        <span class="fd-icon-tab-bar__badge"></span>
+                    }
                 </div>
             </a>
         </fd-popover-control>
@@ -51,10 +52,9 @@
             </ul>
         </fd-popover-body>
     </fd-popover>
-</ng-container>
-
+}
 <ng-template #subItem let-items="items" let-level="level">
-    <ng-container *ngFor="let item of items; trackBy: _trackByTab">
+    @for (item of items; track _trackByTab($index, item)) {
         <li
             [attr.aria-level]="level"
             class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
@@ -75,30 +75,36 @@
                 (keydown)="_textPopoverKeyDownHandler($event, item)"
             >
                 <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{ item.label }}</span>
-                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
-                    >({{ item.counter }})
-                </span>
-                <div class="screenreader-only" *ngIf="item.color">
-                    {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
-                </div>
+                @if (item.badge) {
+                    <span class="fd-icon-tab-bar__badge"></span>
+                }
+                @if (item.counter) {
+                    <span class="fd-list__counter fd-icon-tab-bar__list-item-counter">({{ item.counter }}) </span>
+                }
+                @if (item.color) {
+                    <div class="screenreader-only">
+                        {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                    </div>
+                }
             </a>
-            <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
-                <button
-                    fd-button
-                    class="fd-icon-tab-bar__button"
-                    fdType="transparent"
-                    (click)="closeTab.emit(item.uId)"
-                >
-                    <fd-icon glyph="decline"></fd-icon>
-                </button>
-            </div>
+            @if (item.closable) {
+                <div class="fd-icon-tab-bar__button-container">
+                    <button
+                        fd-button
+                        class="fd-icon-tab-bar__button"
+                        fdType="transparent"
+                        (click)="closeTab.emit(item.uId)"
+                    >
+                        <fd-icon glyph="decline"></fd-icon>
+                    </button>
+                </div>
+            }
         </li>
-        <ng-container *ngIf="item.subItems?.length">
+        @if (item.subItems?.length) {
             <ng-container
                 [ngTemplateOutletContext]="{ level: level + 1, items: item.subItems }"
                 [ngTemplateOutlet]="subItem"
             ></ng-container>
-        </ng-container>
-    </ng-container>
+        }
+    }
 </ng-template>

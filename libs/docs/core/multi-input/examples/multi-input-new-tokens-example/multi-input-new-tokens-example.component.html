@@ -6,8 +6,8 @@
     [newTokenValidateFn]="validateFunc"
     [(ngModel)]="selected"
 ></fd-multi-input>
-
-Selected: [<span *ngFor="let item of selected; let i = index">{{
-    i === selected.length - 1 ? item.name : item.name + ','
-}}</span
->]
+Selected: [
+@for (item of selected; track item; let i = $index) {
+    <span>{{ i === selected.length - 1 ? item.name : item.name + ',' }}</span>
+}
+]

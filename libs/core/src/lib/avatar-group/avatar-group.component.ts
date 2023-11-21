@@ -1,5 +1,5 @@
 import { DialogModule } from '@angular/cdk/dialog';
-import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -47,9 +47,7 @@ import { AvatarGroupHostConfig } from './types';
     ],
     imports: [
         AvatarGroupHostComponent,
-        NgIf,
         PopoverModule,
-        NgForOf,
         NgTemplateOutlet,
         FocusableItemDirective,
         DynamicPortalComponent,

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DragAndDropModule, FdDropEvent } from '@fundamental-ngx/cdk/utils';
@@ -26,7 +25,6 @@ interface GridListItem {
         DragAndDropModule,
         ContentDensityDirective,
         ButtonComponent,
-        NgFor,
         AvatarComponent,
         LinkComponent,
         RouterLink

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';

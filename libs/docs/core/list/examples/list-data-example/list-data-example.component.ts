@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -21,10 +21,8 @@ import { SortByPipe } from '@fundamental-ngx/docs/shared';
         FormsModule,
         ButtonComponent,
         ListModule,
-        NgFor,
         NgClass,
         ListSecondaryDirective,
-        NgIf,
         SortByPipe
     ]
 })

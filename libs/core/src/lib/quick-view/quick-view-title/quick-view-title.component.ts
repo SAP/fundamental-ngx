@@ -1,4 +1,4 @@
-import { NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
     BarComponent,
@@ -17,12 +17,9 @@ import { PopoverBodyHeaderDirective } from '@fundamental-ngx/core/popover';
     imports: [
         PopoverBodyHeaderDirective,
         BarComponent,
-        NgSwitch,
-        NgSwitchCase,
         BarLeftDirective,
         NgTemplateOutlet,
         BarRightDirective,
-        NgSwitchDefault,
         BarMiddleDirective,
         BarElementDirective
     ]

@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FocusableGridDirective, FocusableItemDirective, FocusableListDirective } from '@fundamental-ngx/cdk/utils';
 
@@ -33,7 +32,7 @@ import { FocusableGridDirective, FocusableItemDirective, FocusableListDirective 
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FocusableGridDirective, NgFor, FocusableListDirective, NgIf, FocusableItemDirective]
+    imports: [FocusableGridDirective, FocusableListDirective, FocusableItemDirective]
 })
 export class ShortRowsExampleComponent {
     constructor() {}

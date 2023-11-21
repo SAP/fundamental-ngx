@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { MicroProcessFlowItemType, MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 
 interface ExampleItem {
@@ -13,7 +12,7 @@ interface ExampleItem {
     templateUrl: './micro-process-flow-overflow-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [MicroProcessFlowModule, NgFor]
+    imports: [MicroProcessFlowModule]
 })
 export class MicroProcessFlowOverflowExampleComponent {
     items: ExampleItem[] = [];

@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -43,7 +43,6 @@ import { MenuService } from '../services/menu.service';
         DialogModule,
         TemplateDirective,
         BarModule,
-        NgIf,
         ButtonComponent,
         ContentDensityDirective,
         TitleModule,

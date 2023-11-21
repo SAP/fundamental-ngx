@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/platform/form';
@@ -8,7 +7,7 @@ import { FdpFormGroupModule, PlatformStepInputModule } from '@fundamental-ngx/pl
     templateUrl: './platform-number-step-input-template-example.component.html',
     styleUrls: ['./platform-number-step-input-template-example.component.scss'],
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformStepInputModule, FormsModule, NgIf]
+    imports: [FdpFormGroupModule, PlatformStepInputModule, FormsModule]
 })
 export class PlatformNumberStepInputTemplateFormExampleComponent {
     qty = 10;

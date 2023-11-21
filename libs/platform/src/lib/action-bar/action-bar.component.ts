@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Optional, Ou
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import {
     ActionBarBackDirective,
@@ -25,7 +25,6 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
     imports: [
         CoreActionBarComponent,
         ActionBarHeaderDirective,
-        NgIf,
         ActionBarBackDirective,
         ButtonComponent,
         ActionBarTitleComponent,
@@ -63,7 +62,10 @@ export class ActionBarComponent extends BaseComponent implements OnInit {
     navigationArrow$: Observable<string>;
 
     /** @hidden */
-    constructor(@Optional() private _rtlService: RtlService, _cd: ChangeDetectorRef) {
+    constructor(
+        @Optional() private _rtlService: RtlService,
+        _cd: ChangeDetectorRef
+    ) {
         super(_cd);
         warnOnce(
             'ActionBarComponent is deprecated since version 0.40.0 and will be removed in next release. Use [fd-action-bar] from @fundamental-ngx/core instead.'

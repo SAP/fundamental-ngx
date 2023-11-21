@@ -1,7 +1,5 @@
 <h4>Notification In Popover Dialog</h4>
-
 <button fd-button label="Notification" [fdPopoverTrigger]="popoverMobile"></button>
-
 <fd-popover #popoverMobile [mobile]="true" [mobileConfig]="mobileConfig">
     <ng-template #popoverBodyContent>
         <fd-notification [mobile]="true">
@@ -106,11 +104,8 @@
         </fd-notification>
     </ng-template>
 </fd-popover>
-
 <h4>Notification Group In Popover Dialog</h4>
-
 <button fd-button label="Notification Group" [fdPopoverTrigger]="popoverMobileGroup"></button>
-
 <fd-popover #popoverMobileGroup [mobile]="true" [mobileConfig]="mobileConfig">
     <ng-template #popoverBodyContent>
         <fd-notification-group>
@@ -122,7 +117,9 @@
                                 <h2 fd-notification-title [unread]="true">New Messages (2)</h2>
                             </fd-notification-header>
                             <fd-notification-actions>
-                                <button fd-button label="Accept All" *ngIf="expandedByDate"></button>
+                                @if (expandedByDate) {
+                                    <button fd-button label="Accept All"></button>
+                                }
                                 <button
                                     fd-button
                                     fdType="transparent"
@@ -141,7 +138,6 @@
                         </fd-notification-limit>
                     </fd-notification-group-list>
                 </fd-tab>
-
                 <fd-tab title="By Type">
                     <fd-notification-group-list>
                         <fd-notification-group-header [(expanded)]="expandedByType1">
@@ -150,7 +146,9 @@
                                 <h2 fd-notification-title [unread]="true">Today (2)</h2>
                             </fd-notification-header>
                             <fd-notification-actions>
-                                <button fd-button label="Accept All" *ngIf="expandedByType1"></button>
+                                @if (expandedByType1) {
+                                    <button fd-button label="Accept All"></button>
+                                }
                                 <button
                                     fd-button
                                     fdType="transparent"
@@ -169,7 +167,9 @@
                                 <h2 fd-notification-title [unread]="true">Today (2)</h2>
                             </fd-notification-header>
                             <fd-notification-actions>
-                                <button fd-button label="Accept All" *ngIf="expandedByType2"></button>
+                                @if (expandedByType2) {
+                                    <button fd-button label="Accept All"></button>
+                                }
                                 <button
                                     fd-button
                                     fdType="transparent"
@@ -205,55 +205,57 @@
         </fd-notification-group>
     </ng-template>
 </fd-popover>
-
 <ng-template #successNotifications>
-    <fd-notification-body *ngFor="let notification of notifications">
-        <fd-avatar [circle]="true" size="xs" [glyph]="notification.avatar"></fd-avatar>
-        <fd-notification-content>
-            <fd-notification-header>
-                <div fd-notification-indicator [type]="notification.indicator"></div>
-                <h2 fd-notification-title [unread]="notification.unread">
-                    {{ notification.title }}
-                </h2>
-            </fd-notification-header>
-            <p fd-notification-paragraph>
-                {{ notification.paragraph }}
-            </p>
-            <fd-notification-footer>
-                <span fd-notification-footer-content>{{ notification.footerContent1 }}</span>
-                <span fd-notification-separator></span>
-                <span fd-notification-footer-content>{{ notification.footerContent2 }}</span>
-            </fd-notification-footer>
-        </fd-notification-content>
-        <fd-notification-actions>
-            <button fd-button [label]="notification.actionButton"></button>
-            <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
-        </fd-notification-actions>
-    </fd-notification-body>
+    @for (notification of notifications; track notification) {
+        <fd-notification-body>
+            <fd-avatar [circle]="true" size="xs" [glyph]="notification.avatar"></fd-avatar>
+            <fd-notification-content>
+                <fd-notification-header>
+                    <div fd-notification-indicator [type]="notification.indicator"></div>
+                    <h2 fd-notification-title [unread]="notification.unread">
+                        {{ notification.title }}
+                    </h2>
+                </fd-notification-header>
+                <p fd-notification-paragraph>
+                    {{ notification.paragraph }}
+                </p>
+                <fd-notification-footer>
+                    <span fd-notification-footer-content>{{ notification.footerContent1 }}</span>
+                    <span fd-notification-separator></span>
+                    <span fd-notification-footer-content>{{ notification.footerContent2 }}</span>
+                </fd-notification-footer>
+            </fd-notification-content>
+            <fd-notification-actions>
+                <button fd-button [label]="notification.actionButton"></button>
+                <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
+            </fd-notification-actions>
+        </fd-notification-body>
+    }
 </ng-template>
-
 <ng-template #warningNotifications>
-    <fd-notification-body *ngFor="let notification of notificationsWarning">
-        <fd-avatar [circle]="true" size="xs" [glyph]="notification.avatar"></fd-avatar>
-        <fd-notification-content>
-            <fd-notification-header>
-                <div fd-notification-indicator [type]="notification.indicator"></div>
-                <h2 fd-notification-title [unread]="notification.unread">
-                    {{ notification.title }}
-                </h2>
-            </fd-notification-header>
-            <p fd-notification-paragraph>
-                {{ notification.paragraph }}
-            </p>
-            <fd-notification-footer>
-                <span fd-notification-footer-content>{{ notification.footerContent1 }}</span>
-                <span fd-notification-separator></span>
-                <span fd-notification-footer-content>{{ notification.footerContent2 }}</span>
-            </fd-notification-footer>
-        </fd-notification-content>
-        <fd-notification-actions>
-            <button fd-button [label]="notification.actionButton"></button>
-            <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
-        </fd-notification-actions>
-    </fd-notification-body>
+    @for (notification of notificationsWarning; track notification) {
+        <fd-notification-body>
+            <fd-avatar [circle]="true" size="xs" [glyph]="notification.avatar"></fd-avatar>
+            <fd-notification-content>
+                <fd-notification-header>
+                    <div fd-notification-indicator [type]="notification.indicator"></div>
+                    <h2 fd-notification-title [unread]="notification.unread">
+                        {{ notification.title }}
+                    </h2>
+                </fd-notification-header>
+                <p fd-notification-paragraph>
+                    {{ notification.paragraph }}
+                </p>
+                <fd-notification-footer>
+                    <span fd-notification-footer-content>{{ notification.footerContent1 }}</span>
+                    <span fd-notification-separator></span>
+                    <span fd-notification-footer-content>{{ notification.footerContent2 }}</span>
+                </fd-notification-footer>
+            </fd-notification-content>
+            <fd-notification-actions>
+                <button fd-button [label]="notification.actionButton"></button>
+                <button fd-button fdType="transparent" glyph="decline" ariaLabel="Close" title="close"></button>
+            </fd-notification-actions>
+        </fd-notification-body>
+    }
 </ng-template>

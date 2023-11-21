@@ -1,42 +1,44 @@
-<div
-    *ngIf="meta?.renderVerticalLineBefore"
-    class="fdp-approval-flow-node__vertical-line-before"
-    [class.fdp-approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"
-></div>
-
-<div
-    *ngIf="meta?.renderVerticalLineAfter"
-    class="fdp-approval-flow-node__vertical-line-after"
-    [class.fdp-approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"
-></div>
-
-<ng-container *ngIf="!_blank && !_space">
-    <div *ngIf="renderArrow" class="fdp-approval-flow-node__arrow"></div>
-
-    <div *ngIf="_isRoot && meta?.nodeIndex === 0" class="fdp-approval-flow-node__carousel-start-marker"></div>
-
-    <div *ngIf="_isFinal && meta?.nodeIndex === 0" class="fdp-approval-flow-node__carousel-end-marker"></div>
-
+@if (meta?.renderVerticalLineBefore) {
+    <div
+        class="fdp-approval-flow-node__vertical-line-before"
+        [class.fdp-approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"
+    ></div>
+}
+@if (meta?.renderVerticalLineAfter) {
+    <div
+        class="fdp-approval-flow-node__vertical-line-after"
+        [class.fdp-approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"
+    ></div>
+}
+@if (!_blank && !_space) {
+    @if (renderArrow) {
+        <div class="fdp-approval-flow-node__arrow"></div>
+    }
+    @if (_isRoot && meta?.nodeIndex === 0) {
+        <div class="fdp-approval-flow-node__carousel-start-marker"></div>
+    }
+    @if (_isFinal && meta?.nodeIndex === 0) {
+        <div class="fdp-approval-flow-node__carousel-end-marker"></div>
+    }
     <ng-content></ng-content>
-</ng-container>
-
+}
 <ng-template #overflowMenuButton>
     <!-- Actually just the fd-grid-item action button but with some hardcode to be used as menu trigger -->
-    <button
-        *ngIf="!node?.disableActions"
-        class="fdp-approval-flow-node__menu-button"
-        fd-button
-        fdType="transparent"
-        tabindex="0"
-        glyph="overflow"
-        [title]="'platformApprovalFlow.nodeMenuButtonTitle' | fdTranslate"
-        fdCompact
-        [fdMenuTrigger]="menu"
-        [disabled]="_isEditActionsAvailable"
-        (click)="$event.stopPropagation()"
-    ></button>
+    @if (!node?.disableActions) {
+        <button
+            class="fdp-approval-flow-node__menu-button"
+            fd-button
+            fdType="transparent"
+            tabindex="0"
+            glyph="overflow"
+            [title]="'platformApprovalFlow.nodeMenuButtonTitle' | fdTranslate"
+            fdCompact
+            [fdMenuTrigger]="menu"
+            [disabled]="_isEditActionsAvailable"
+            (click)="$event.stopPropagation()"
+        ></button>
+    }
 </ng-template>
-
 <ng-template #nodeContent>
     <div class="fdp-approval-flow-node__info">
         <div
@@ -44,109 +46,117 @@
             [class.fdp-approval-flow-node__name--members-count]="node.approvers.length > 1"
             [id]="approvalFlowNodeId"
         >
-            <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
+            @if (node.approvers.length === 1) {
                 {{ node.approvers[0].name }}
-            </ng-container>
-
-            <ng-template #multipleApprovers>
-                {{ 'platformApprovalFlow.nodeMembersCount' | fdTranslate : { count: node.approvers.length } }}
-            </ng-template>
+            } @else {
+                {{ 'platformApprovalFlow.nodeMembersCount' | fdTranslate: { count: node.approvers.length } }}
+            }
         </div>
-
         <div class="fdp-approval-flow-node__description">
-            <ng-container *ngIf="!node.variousTeams; else variousTeams">
+            @if (!node.variousTeams) {
                 {{
                     node.approvers.length > 1
                         ? node.description
                         : node.approvers.length
-                        ? node.approvers[0].description
-                        : ''
+                          ? node.approvers[0].description
+                          : ''
                 }}
-            </ng-container>
-
+            } @else {
+                {{ 'platformApprovalFlow.nodeVariousTeams' | fdTranslate }}
+            }
             <ng-template #variousTeams> {{ 'platformApprovalFlow.nodeVariousTeams' | fdTranslate }} </ng-template>
         </div>
-
         <fdp-object-status [status]="_objectStatus" [inverted]="true">
             <ng-template fdpObjectStatusText>
-                <ng-container *ngIf="approvalStatusTemplate; then userStatusTemplate; else defaultStatusTemplate">
-                </ng-container>
-
-                <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                    <ng-container *ngIf="_dueIn === dueDateThreshold">
+                @if (approvalStatusTemplate) {
+                    @if (!checkDueDate || !_showDueDateWarning) {
+                        @if (approvalStatusTemplate) {
+                            <ng-container
+                                [ngTemplateOutlet]="approvalStatusTemplate"
+                                [ngTemplateOutletContext]="{ node: node }"
+                            >
+                            </ng-container>
+                        }
+                    }
+                } @else {
+                    @if (!checkDueDate || !_showDueDateWarning) {
+                        @switch (node.status) {
+                            @case ('approved') {
+                                {{ 'platformApprovalFlow.statusApproved' | fdTranslate }}
+                            }
+                            @case ('rejected') {
+                                {{ 'platformApprovalFlow.statusRejected' | fdTranslate }}
+                            }
+                            @case ('in progress') {
+                                {{ 'platformApprovalFlow.statusInProgress' | fdTranslate }}
+                            }
+                            @case ('not started') {
+                                {{ 'platformApprovalFlow.statusNotStarted' | fdTranslate }}
+                            }
+                        }
+                    }
+                }
+                @if (checkDueDate && _showDueDateWarning) {
+                    @if (_dueIn === dueDateThreshold) {
                         {{ 'platformApprovalFlow.nodeStatusDueToday' | fdTranslate }}
-                    </ng-container>
-
-                    <ng-container *ngIf="_dueIn < dueDateThreshold">
+                    }
+                    @if (_dueIn < dueDateThreshold) {
                         {{
                             'platformApprovalFlow.nodeStatusDueInXDays'
-                                | fdTranslate : { count: dueDateThreshold - _dueIn }
+                                | fdTranslate: { count: dueDateThreshold - _dueIn }
                         }}
-                    </ng-container>
-
-                    <ng-container *ngIf="_dueIn > dueDateThreshold">
+                    }
+                    @if (_dueIn > dueDateThreshold) {
                         {{
                             'platformApprovalFlow.nodeStatusXDaysOverdue'
-                                | fdTranslate : { count: _dueIn - dueDateThreshold }
+                                | fdTranslate: { count: _dueIn - dueDateThreshold }
                         }}
-                    </ng-container>
-                </ng-container>
+                    }
+                }
             </ng-template>
         </fdp-object-status>
     </div>
 </ng-template>
-
-<ng-container *ngIf="_showAddButton && meta?.canAddNodeBeforeAll && !node?.actionsConfig?.disableAddBefore">
+@if (_showAddButton && meta?.canAddNodeBeforeAll && !node?.actionsConfig?.disableAddBefore) {
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before-all' }"></ng-container>
-</ng-container>
-
-<ng-container *ngIf="_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore">
+}
+@if (_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore) {
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }"></ng-container>
-</ng-container>
-
-<ng-container
-    *ngIf="
-        _showAddButton &&
-        meta?.canAddNodeAfter &&
-        meta?.renderAddNodeAfterButton &&
-        !node?.actionsConfig?.disableAddAfter
-    "
->
+}
+@if (
+    _showAddButton && meta?.canAddNodeAfter && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter
+) {
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }"></ng-container>
-</ng-container>
-
-<ng-container
-    *ngIf="
-        _showAfterAllAddButton &&
-        meta?.canAddNodeAfterAll &&
-        meta?.renderAddNodeAfterButton &&
-        !node?.actionsConfig?.disableAddAfter
-    "
->
+}
+@if (
+    _showAfterAllAddButton &&
+    meta?.canAddNodeAfterAll &&
+    meta?.renderAddNodeAfterButton &&
+    !node?.actionsConfig?.disableAddAfter
+) {
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after-all' }"></ng-container>
-</ng-container>
-
+}
 <ng-template #addNodeButton let-placement="placement">
-    <button
-        *ngIf="node.status !== 'approved'"
-        fd-button
-        glyph="add"
-        [title]="'platformApprovalFlow.addNodeButtonTitle' | fdTranslate"
-        fdCompact
-        class="fdp-approval-flow-node__add"
-        [class.fdp-approval-flow-node__add--blank]="this._blank"
-        [class.fdp-approval-flow-node__add--before]="
-            !this._blank && (placement === 'before' || placement === 'before-all')
-        "
-        [class.fdp-approval-flow-node__add--before-all]="!this._blank && placement === 'before-all'"
-        [class.fdp-approval-flow-node__add--after]="
-            !this._blank && (placement === 'after' || placement === 'after-all')
-        "
-        [class.fdp-approval-flow-node__add--after-all]="placement === 'after-all'"
-        [style.visibility]="dropZone.active ? 'hidden' : ''"
-        (click)="onAdd.emit(placement)"
-    ></button>
-
+    @if (node.status !== 'approved') {
+        <button
+            fd-button
+            glyph="add"
+            [title]="'platformApprovalFlow.addNodeButtonTitle' | fdTranslate"
+            fdCompact
+            class="fdp-approval-flow-node__add"
+            [class.fdp-approval-flow-node__add--blank]="this._blank"
+            [class.fdp-approval-flow-node__add--before]="
+                !this._blank && (placement === 'before' || placement === 'before-all')
+            "
+            [class.fdp-approval-flow-node__add--before-all]="!this._blank && placement === 'before-all'"
+            [class.fdp-approval-flow-node__add--after]="
+                !this._blank && (placement === 'after' || placement === 'after-all')
+            "
+            [class.fdp-approval-flow-node__add--after-all]="placement === 'after-all'"
+            [style.visibility]="dropZone.active ? 'hidden' : ''"
+            (click)="onAdd.emit(placement)"
+        ></button>
+    }
     <div
         #dropZone="fdp-approval-flow-drop-zone"
         fdp-approval-flow-drop-zone
@@ -157,81 +167,40 @@
         [class.fdp-approval-flow-node__drop-zone--partial]="_dropZonePartial(placement)"
     ></div>
 </ng-template>
-
-<ng-template #defaultStatusTemplate>
-    <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
-        <ng-container [ngSwitch]="node.status">
-            <ng-container *ngSwitchCase="'approved'">{{
-                'platformApprovalFlow.statusApproved' | fdTranslate
-            }}</ng-container>
-            <ng-container *ngSwitchCase="'rejected'">{{
-                'platformApprovalFlow.statusRejected' | fdTranslate
-            }}</ng-container>
-            <ng-container *ngSwitchCase="'in progress'">{{
-                'platformApprovalFlow.statusInProgress' | fdTranslate
-            }}</ng-container>
-            <ng-container *ngSwitchCase="'not started'">{{
-                'platformApprovalFlow.statusNotStarted' | fdTranslate
-            }}</ng-container>
-        </ng-container>
-    </ng-container>
-</ng-template>
-
-<ng-template #userStatusTemplate>
-    <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
-        <ng-container
-            *ngIf="approvalStatusTemplate"
-            [ngTemplateOutlet]="approvalStatusTemplate"
-            [ngTemplateOutletContext]="{ node: node }"
-        >
-        </ng-container>
-    </ng-container>
-</ng-template>
-
 <fd-menu #menu fdContentDensity placement="bottom-end" (isOpenChange)="_onMenuOpen()">
-    <li
-        *ngIf="meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore"
-        fd-menu-item
-        (click)="menu.close(); onAdd.emit('before')"
-    >
-        <div fd-menu-interactive>
-            <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversBefore' | fdTranslate }}</span>
-        </div>
-    </li>
-
-    <li
-        *ngIf="meta?.canAddNodeAfter && !this.node?.actionsConfig?.disableAddAfter"
-        fd-menu-item
-        (click)="menu.close(); onAdd.emit('after')"
-    >
-        <div fd-menu-interactive>
-            <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversAfter' | fdTranslate }}</span>
-        </div>
-    </li>
-
-    <li
-        *ngIf="meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel"
-        fd-menu-item
-        (click)="menu.close(); onAdd.emit('parallel')"
-    >
-        <div fd-menu-interactive>
-            <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversParallel' | fdTranslate }}</span>
-        </div>
-    </li>
-
-    <li
-        *ngIf="_isNotStarted && !this.node?.actionsConfig?.disableEdit"
-        fd-menu-item
-        (click)="menu.close(); onEdit.emit()"
-    >
-        <div fd-menu-interactive>
-            <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionEditApprover' | fdTranslate }}</span>
-        </div>
-    </li>
-
-    <li *ngIf="!this.node?.actionsConfig?.disableRemove" fd-menu-item (click)="menu.close(); onDelete.emit()">
-        <div fd-menu-interactive>
-            <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionRemove' | fdTranslate }}</span>
-        </div>
-    </li>
+    @if (meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore) {
+        <li fd-menu-item (click)="menu.close(); onAdd.emit('before')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversBefore' | fdTranslate }}</span>
+            </div>
+        </li>
+    }
+    @if (meta?.canAddNodeAfter && !this.node?.actionsConfig?.disableAddAfter) {
+        <li fd-menu-item (click)="menu.close(); onAdd.emit('after')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversAfter' | fdTranslate }}</span>
+            </div>
+        </li>
+    }
+    @if (meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel) {
+        <li fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
+            <div fd-menu-interactive>
+                <span fd-menu-title>{{ 'platformApprovalFlow.nodeActionAddApproversParallel' | fdTranslate }}</span>
+            </div>
+        </li>
+    }
+    @if (_isNotStarted && !this.node?.actionsConfig?.disableEdit) {
+        <li fd-menu-item (click)="menu.close(); onEdit.emit()">
+            <div fd-menu-interactive>
+                <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionEditApprover' | fdTranslate }}</span>
+            </div>
+        </li>
+    }
+    @if (!this.node?.actionsConfig?.disableRemove) {
+        <li fd-menu-item (click)="menu.close(); onDelete.emit()">
+            <div fd-menu-interactive>
+                <span fd-menu-title> {{ 'platformApprovalFlow.nodeActionRemove' | fdTranslate }}</span>
+            </div>
+        </li>
+    }
 </fd-menu>

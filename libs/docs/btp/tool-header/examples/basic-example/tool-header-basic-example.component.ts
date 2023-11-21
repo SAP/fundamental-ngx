@@ -1,4 +1,4 @@
-import { NgForOf, NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
@@ -46,7 +46,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         MenuAddonDirective,
         MenuItemComponent,
         MenuTitleDirective,
-        NgIf,
         ButtonComponent,
         MenuComponent,
         MenuTriggerDirective,
@@ -60,7 +59,6 @@ import { SegmentedButtonComponent } from '@fundamental-ngx/core/segmented-button
         NgStyle,
         ContentDensityDirective,
         ToolHeaderActionDirective,
-        NgForOf,
         ToolHeaderActionSeparatorComponent,
         ButtonBadgeDirective,
         ToolHeaderActionButtonDirective,

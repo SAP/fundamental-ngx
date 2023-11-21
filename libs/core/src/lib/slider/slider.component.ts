@@ -1,4 +1,8 @@
 /* eslint-disable @typescript-eslint/member-ordering */
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { Platform } from '@angular/cdk/platform';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -18,11 +22,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { Platform } from '@angular/cdk/platform';
-import { coerceNumberProperty } from '@angular/cdk/coercion';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
 import {
     debounceTime,
@@ -36,8 +36,25 @@ import {
     takeUntil
 } from 'rxjs/operators';
 
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import {
+    applyCssClass,
+    CssClassBuilder,
+    KeyUtil,
+    Nullable,
+    OnlyDigitsDirective,
+    RtlService
+} from '@fundamental-ngx/cdk/utils';
+import {
+    ContentDensityMode,
+    ContentDensityObserver,
+    contentDensityObserverProviders
+} from '@fundamental-ngx/core/content-density';
+import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 import { PopoverComponent, PopoverModule } from '@fundamental-ngx/core/popover';
-import { Nullable, OnlyDigitsDirective } from '@fundamental-ngx/cdk/utils';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
+import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
+import { SliderPositionDirective } from './slider-position.directive';
 import {
     SliderControlValue,
     SliderCustomValue,
@@ -45,17 +62,6 @@ import {
     SliderTickMark,
     SliderValueTargets
 } from './slider.model';
-import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
-import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
-import {
-    ContentDensityMode,
-    ContentDensityObserver,
-    contentDensityObserverProviders
-} from '@fundamental-ngx/core/content-density';
-import { SliderPositionDirective } from './slider-position.directive';
-import { NgTemplateOutlet, NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -87,8 +93,6 @@ let sliderId = 0;
     standalone: true,
     imports: [
         NgTemplateOutlet,
-        NgIf,
-        NgFor,
         SliderPositionDirective,
         PopoverModule,
         FormsModule,

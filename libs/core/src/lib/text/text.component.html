@@ -9,15 +9,15 @@
     >
         <span fdkLineClampTarget [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
     </span>
-
-    <a
-        fd-link
-        tabindex="0"
-        class="fd-text__link--more"
-        *ngIf="_expandable && _hasMore"
-        (keydown.enter)="toggleTextView()"
-        (click)="toggleTextView()"
-    >
-        {{ isCollapsed ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate) }}
-    </a>
+    @if (_expandable && _hasMore) {
+        <a
+            fd-link
+            tabindex="0"
+            class="fd-text__link--more"
+            (keydown.enter)="toggleTextView()"
+            (click)="toggleTextView()"
+        >
+            {{ isCollapsed ? ('coreText.moreLabel' | fdTranslate) : ('coreText.lessLabel' | fdTranslate) }}
+        </a>
+    }
 </p>

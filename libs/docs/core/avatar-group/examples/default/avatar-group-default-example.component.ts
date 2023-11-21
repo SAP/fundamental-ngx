@@ -1,4 +1,3 @@
-import { NgForOf, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Size } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -11,15 +10,7 @@ import { AvatarGroupDataExampleService } from '../avatar-group-data-example.serv
     selector: 'fundamental-ngx-avatar-group-default-example',
     templateUrl: './avatar-group-default-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        AvatarGroupComponent,
-        NgForOf,
-        NgIf,
-        AvatarComponent,
-        QuickViewModule,
-        LinkComponent,
-        AvatarGroupItemDirective
-    ],
+    imports: [AvatarGroupComponent, AvatarComponent, QuickViewModule, LinkComponent, AvatarGroupItemDirective],
     standalone: true
 })
 export class AvatarGroupDefaultExampleComponent {

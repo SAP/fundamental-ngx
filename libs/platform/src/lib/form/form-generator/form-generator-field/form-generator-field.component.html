@@ -16,27 +16,26 @@
     [formGroup]="form"
     #formField
 >
-    <ng-container *ngFor="let error of _errorModels; trackBy: _errorsTrackBy">
+    @for (error of _errorModels; track _errorsTrackBy($index, error)) {
         <span *fdpFormFieldError="error.type; let directiveError">
-            <ng-container *ngIf="_isAdvancedError(directiveError); else simpleErrorTemplate">
-                <ng-container *ngIf="directiveError.heading">
+            @if (_isAdvancedError(directiveError)) {
+                @if (directiveError.heading) {
                     <span *fdpFormFieldErrorHeading="let validationError; type: directiveError.type">
                         {{ validationError.heading }}
                     </span>
-                </ng-container>
-                <ng-container *ngIf="directiveError.description">
+                }
+                @if (directiveError.description) {
                     <span *fdpFormFieldErrorDescription="let validationError">
                         {{ validationError.description }}
                     </span>
-                </ng-container>
-            </ng-container>
-            <ng-template #simpleErrorTemplate>
+                }
+            } @else {
                 <span *fdpFormFieldErrorHeading="let validationError">
                     {{ error.value ? error.value : validationError }}
                 </span>
-            </ng-template>
+            }
         </span>
-    </ng-container>
+    }
     <ng-container
         [formField]="formField"
         [form]="form"

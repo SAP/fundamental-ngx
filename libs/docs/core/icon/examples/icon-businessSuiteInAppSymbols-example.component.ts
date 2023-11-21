@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 
@@ -7,7 +6,7 @@ import { IconComponent } from '@fundamental-ngx/core/icon';
     templateUrl: './icon-businessSuiteInAppSymbols-example.component.html',
     styleUrls: ['icon-example.component.scss'],
     standalone: true,
-    imports: [NgFor, IconComponent]
+    imports: [IconComponent]
 })
 export class IconBusinessSuiteInAppSymbolsExampleComponent {
     icons: string[] = [

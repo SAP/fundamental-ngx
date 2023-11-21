@@ -7,56 +7,64 @@
         >
             <ng-content select="fd-token"></ng-content>
         </div>
-
-        <ng-container *ngIf="_showOverflowPopover && ((_compact$ | async) || compactCollapse); else moreElement">
+        @if (_showOverflowPopover && ((_compact$ | async) || compactCollapse)) {
             <ng-container *ngTemplateOutlet="tokensOverflow"></ng-container>
-        </ng-container>
-
+        } @else {
+            @if (_showMoreElement && _hiddenTokens.length > 0) {
+                <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
+                    @if ((_compact$ | async) || compactCollapse) {
+                        {{
+                            'coreTokenizer.moreLabel'
+                                | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length }
+                        }}
+                    }
+                    @if ((_compact$ | async) === false && !compactCollapse) {
+                        {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+                    }
+                </span>
+            }
+        }
         <ng-content select="[fd-form-control]"></ng-content>
     </div>
-    <span fd-input-group-addon *ngIf="glyph" #inputGroupAddOn [button]="true" placement="after">
-        <button fd-button class="fd-tokenizer-addon" fdType="transparent" [glyph]="glyph" type="button"></button>
-    </span>
+    @if (glyph) {
+        <span fd-input-group-addon #inputGroupAddOn [button]="true" placement="after">
+            <button fd-button class="fd-tokenizer-addon" fdType="transparent" [glyph]="glyph" type="button"></button>
+        </span>
+    }
 </div>
-
 <ng-template #tokensOverflow>
     <fd-popover placement="bottom-start" title="" [noArrow]="false" [focusTrapped]="true" [focusAutoCapture]="true">
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="moreElement"></ng-container>
         </fd-popover-control>
-
         <fd-popover-body>
             <ul fd-list class="fd-tokenizer__overflow-list">
-                <li fd-list-item class="fd-tokenizer__overflow-list-item" *ngFor="let token of _hiddenTokens">
-                    <ng-container #viewContainer></ng-container>
-
-                    <span
-                        *ngIf="!token.readOnly"
-                        class="fd-token__close"
-                        role="button"
-                        [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
-                        (click)="token.closeClickHandler($event)"
-                    ></span>
-                </li>
+                @for (token of _hiddenTokens; track token) {
+                    <li fd-list-item class="fd-tokenizer__overflow-list-item">
+                        <ng-container #viewContainer></ng-container>
+                        @if (!token.readOnly) {
+                            <span
+                                class="fd-token__close"
+                                role="button"
+                                [attr.aria-label]="'coreToken.deleteButtonLabel' | fdTranslate"
+                                (click)="token.closeClickHandler($event)"
+                            ></span>
+                        }
+                    </li>
+                }
             </ul>
         </fd-popover-body>
     </fd-popover>
 </ng-template>
-
 <ng-template #moreElement>
-    <span
-        (click)="moreClicked()"
-        *ngIf="_showMoreElement && _hiddenTokens.length > 0"
-        #moreElementSpan
-        class="fd-tokenizer-more"
-        role="button"
-        tabindex="-1"
-    >
-        <ng-container *ngIf="(_compact$ | async) || compactCollapse">
-            {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: moreTokensLeft.length + moreTokensRight.length } }}
-        </ng-container>
-        <ng-container *ngIf="(_compact$ | async) === false && !compactCollapse">
-            {{ 'coreTokenizer.moreLabel' | fdTranslate : { count: hiddenCozyTokenCount } }}
-        </ng-container>
-    </span>
+    @if (_showMoreElement && _hiddenTokens.length > 0) {
+        <span (click)="moreClicked()" #moreElementSpan class="fd-tokenizer-more" role="button" tabindex="-1">
+            @if ((_compact$ | async) || compactCollapse) {
+                {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: moreTokensLeft.length + moreTokensRight.length } }}
+            }
+            @if ((_compact$ | async) === false && !compactCollapse) {
+                {{ 'coreTokenizer.moreLabel' | fdTranslate: { count: hiddenCozyTokenCount } }}
+            }
+        </span>
+    }
 </ng-template>

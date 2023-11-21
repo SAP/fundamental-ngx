@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -31,7 +30,6 @@ import { debounceTime } from 'rxjs/operators';
         FormsModule,
         ButtonComponent,
         CarouselComponent,
-        NgIf,
         CarouselItemComponent,
         CardModule,
         AvatarComponent,
@@ -46,7 +44,10 @@ export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewIn
     visibleSlidesCount = 3;
     cardsHidden = [];
 
-    constructor(private _changeDetectorRef: ChangeDetectorRef, private readonly _destroyRef: DestroyRef) {}
+    constructor(
+        private _changeDetectorRef: ChangeDetectorRef,
+        private readonly _destroyRef: DestroyRef
+    ) {}
 
     ngOnInit(): void {
         fromEvent(window, 'resize')

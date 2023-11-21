@@ -9,27 +9,26 @@ import {
     ContentChildren,
     DestroyRef,
     ElementRef,
-    inject,
     Input,
     OnDestroy,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    inject
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import { FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { ComboboxInterface, FD_COMBOBOX_COMPONENT } from '@fundamental-ngx/core/combobox';
 import { ContentDensityMode, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { SearchComponent } from '@fundamental-ngx/core/shared';
+import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
+import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import equal from 'fast-deep-equal';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
 import { ShellbarActionsComponent } from './shellbar-actions/shellbar-actions.component';
 import { FD_SHELLBAR_COMPONENT, FD_SHELLBAR_SEARCH_COMPONENT } from './tokens';
-import { SideNavigationInterface } from '@fundamental-ngx/core/side-navigation';
-import { Breakpoints, NormalizedBreakpoint, ShellbarGroupFlexOptions, ShellbarSizes } from './model/shellbar-sizes';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FdTranslatePipe } from '@fundamental-ngx/i18n';
-import { NgIf } from '@angular/common';
 
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
@@ -53,7 +52,7 @@ import { NgIf } from '@angular/common';
         }
     ],
     standalone: true,
-    imports: [NgIf, PortalModule, FdTranslatePipe]
+    imports: [PortalModule, FdTranslatePipe]
 })
 export class ShellbarComponent implements AfterContentInit, AfterViewInit, OnDestroy {
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */

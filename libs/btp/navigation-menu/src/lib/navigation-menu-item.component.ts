@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ElementRef, HostBinding, inject, Input } from '@angular/core';
 import {
     FDK_FOCUSABLE_ITEM_DIRECTIVE,
@@ -13,20 +12,18 @@ import { fromEvent, Observable } from 'rxjs';
 @Component({
     selector: 'fdb-navigation-menu-item, li[fdb-navigation-menu-item]',
     template: `
-        <fd-icon
-            class="fd-navigation-menu__icon"
-            [glyph]="glyph"
-            role="presentation"
-            aria-hidden="true"
-            *ngIf="glyph"
-        ></fd-icon>
-        <span class="fd-navigation-menu__text" *ngIf="label">
-            {{ label }}
-        </span>
+        @if (glyph) {
+            <fd-icon class="fd-navigation-menu__icon" [glyph]="glyph" role="presentation" aria-hidden="true"></fd-icon>
+        }
+        @if (label) {
+            <span class="fd-navigation-menu__text">
+                {{ label }}
+            </span>
+        }
         <ng-content></ng-content>
     `,
     standalone: true,
-    imports: [IconComponent, NgIf],
+    imports: [IconComponent],
     hostDirectives: [IndirectFocusableItemDirective],
     providers: [
         {

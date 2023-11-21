@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -58,7 +58,6 @@ export interface ApprovalFlowApproverDetailsDialogRefData {
         DialogComponent,
         DialogHeaderComponent,
         TemplateDirective,
-        NgIf,
         IconComponent,
         SearchFieldComponent,
         ContentDensityDirective,

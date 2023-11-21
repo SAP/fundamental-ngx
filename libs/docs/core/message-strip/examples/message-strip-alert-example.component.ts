@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, TemplateRef, inject } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -25,13 +25,13 @@ class ExampleStripAlertComponent implements OnDestroy {
 
 @Component({
     template: `
-        <ng-container *ngIf="alertRefs$ | async as alertRefs">
-            <ng-container *ngIf="alertRefs.length > 0">
+        @if (alertRefs$ | async; as alertRefs) {
+            @if (alertRefs.length > 0) {
                 <button fd-link fdCompact (click)="dismissAll(alertRefs)">Dismiss all ({{ alertRefs.length }})</button>
-            </ng-container>
-        </ng-container>
+            }
+        }
     `,
-    imports: [NgIf, AsyncPipe, ButtonComponent, ContentDensityDirective, LinkModule],
+    imports: [AsyncPipe, ButtonComponent, ContentDensityDirective, LinkModule],
     styles: [
         `
             :host {

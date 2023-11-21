@@ -48,7 +48,7 @@ import {
     isFunction
 } from '@fundamental-ngx/platform/shared';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ContentDensityModule,
     ContentDensityObserver,
@@ -103,11 +103,9 @@ export class MultiInputSelectionChangeEvent {
         PopoverControlComponent,
         PopoverBodyComponent,
         InputGroupModule,
-        NgIf,
         TokenComponent,
         TokenizerComponent,
         TokenizerInputDirective,
-        NgFor,
         FormControlComponent,
         FormsModule,
         AutoCompleteDirective,

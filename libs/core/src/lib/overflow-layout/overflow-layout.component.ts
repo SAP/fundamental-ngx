@@ -1,7 +1,7 @@
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -58,9 +58,7 @@ import { FD_OVERFLOW_ITEM_REF } from './tokens/overflow-item-ref.token';
     ],
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
-        NgFor,
         OverflowLayoutItemContainerDirective,
         OverflowItemContainerRefDirective,
         PopoverComponent,

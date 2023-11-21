@@ -1,55 +1,69 @@
 <div fdbToolHeaderGroup [class.fd-tool-header--menu]="showMenuButton">
-    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().backButtonVisible">
-        <button fd-button fdbToolHeaderButton glyph="slim-arrow-left" (click)="searchFieldExpanded.set(false)"></button>
-    </div>
-    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().menuButtonVisible && showMenuButton">
-        <button
-            fd-button
-            fdbToolHeaderButton
-            [title]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
-            [ariaLabel]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
-            glyph="menu2"
-            (keydown.arrowLeft)="_handleMenuLeftArrowKey()"
-            (keydown.arrowRight)="_handleMenuRightArrowKey()"
-            (click)="menuClick.emit()"
-        ></button>
-    </div>
-    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().logoVisible">
-        <ng-container *ngIf="_toolHeaderLogoDirective; else defaultLogo">
-            <ng-content select="[fdbToolHeaderLogo]"></ng-content>
-        </ng-container>
-        <ng-template #defaultLogo>
-            <img
-                fdbToolHeaderLogo
-                (click)="logoClick.emit()"
-                src="https://unpkg.com/fundamental-styles/dist/images/sap-logo.png"
-                srcset="
-                    https://unpkg.com/fundamental-styles/dist/images/sap-logo&#64;2x.png 1x,
-                    https://unpkg.com/fundamental-styles/dist/images/sap-logo&#64;3x.png 2x,
-                    https://unpkg.com/fundamental-styles/dist/images/sap-logo&#64;4x.png 3x
-                "
-                alt="SAP logo"
-                aria-label="SAP logo"
-                title="SAP logo"
-            />
-        </ng-template>
-    </div>
-    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().productNameVisible">
-        <h1 class="fd-tool-header__product-name">
-            {{ productName }}
-        </h1>
-    </div>
-    <div fdbToolHeaderElement *ngIf="fdbToolHeaderState().secondTitleVisible && secondTitle">
-        <div class="fd-tool-header__second-title">
-            {{ secondTitle }}
+    @if (fdbToolHeaderState().backButtonVisible) {
+        <div fdbToolHeaderElement>
+            <button
+                fd-button
+                fdbToolHeaderButton
+                glyph="slim-arrow-left"
+                (click)="searchFieldExpanded.set(false)"
+            ></button>
         </div>
+    }
+    @if (fdbToolHeaderState().menuButtonVisible && showMenuButton) {
+        <div fdbToolHeaderElement>
+            <button
+                fd-button
+                fdbToolHeaderButton
+                [title]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
+                [ariaLabel]="'btpToolHeader.menuButtonAriaLabel' | fdTranslate"
+                glyph="menu2"
+                (keydown.arrowLeft)="_handleMenuLeftArrowKey()"
+                (keydown.arrowRight)="_handleMenuRightArrowKey()"
+                (click)="menuClick.emit()"
+            ></button>
+        </div>
+    }
+    @if (fdbToolHeaderState().logoVisible) {
+        <div fdbToolHeaderElement>
+            @if (_toolHeaderLogoDirective) {
+                <ng-content select="[fdbToolHeaderLogo]"></ng-content>
+            } @else {
+                <img
+                    fdbToolHeaderLogo
+                    (click)="logoClick.emit()"
+                    src="https://unpkg.com/fundamental-styles/dist/images/sap-logo.png"
+                    srcset="
+                        https://unpkg.com/fundamental-styles/dist/images/sap-logo&#64;2x.png 1x,
+                        https://unpkg.com/fundamental-styles/dist/images/sap-logo&#64;3x.png 2x,
+                        https://unpkg.com/fundamental-styles/dist/images/sap-logo&#64;4x.png 3x
+                    "
+                    alt="SAP logo"
+                    aria-label="SAP logo"
+                    title="SAP logo"
+                />
+            }
+        </div>
+    }
+    @if (fdbToolHeaderState().productNameVisible) {
+        <div fdbToolHeaderElement>
+            <h1 class="fd-tool-header__product-name">
+                {{ productName }}
+            </h1>
+        </div>
+    }
+    @if (fdbToolHeaderState().secondTitleVisible && secondTitle) {
+        <div fdbToolHeaderElement>
+            <div class="fd-tool-header__second-title">
+                {{ secondTitle }}
+            </div>
+        </div>
+    }
+</div>
+@if (fdbToolHeaderState().searchFieldVisible) {
+    <div fdbToolHeaderGroup center>
+        <ng-content select="fdb-search-field"></ng-content>
     </div>
-</div>
-
-<div fdbToolHeaderGroup center *ngIf="fdbToolHeaderState().searchFieldVisible">
-    <ng-content select="fdb-search-field"></ng-content>
-</div>
-
+}
 <fd-overflow-layout
     fdbToolHeaderGroup
     actions
@@ -57,7 +71,7 @@
     (hiddenItemsChange)="_handleHiddenItemsChange($event)"
     [renderShowMoreButton]="false"
 >
-    <ng-container *ngIf="fdbToolHeaderState().searchFieldToggleActionVisible">
+    @if (fdbToolHeaderState().searchFieldToggleActionVisible) {
         <ng-template fdOverflowItemRef>
             <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                 <button
@@ -68,16 +82,23 @@
                 ></button>
             </div>
         </ng-template>
-    </ng-container>
-    <ng-container *ngIf="fdbToolHeaderState().providedActionsVisible">
-        <ng-container *ngFor="let action of _contentActions">
-            <ng-container *ngIf="action.isSeparator ? fdbToolHeaderState().separatorsBetweenActionsVisible : true">
+    }
+    @if (fdbToolHeaderState().providedActionsVisible) {
+        @for (action of _contentActions; track action) {
+            @if (action.isSeparator ? fdbToolHeaderState().separatorsBetweenActionsVisible : true) {
                 <ng-template [fdOverflowItemRef]="action" let-hidden let-injector="injector">
-                    <ng-container *ngIf="hidden === false; else actionTemplate">
+                    @if (hidden === false) {
                         <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="!!action.forceVisibility">
                             <ng-template [ngTemplateOutlet]="actionTemplate"></ng-template>
                         </div>
-                    </ng-container>
+                    } @else {
+                        <ng-template
+                            [ngTemplateOutlet]="action.templateRef"
+                            [ngTemplateOutletContext]="{ hidden: hidden }"
+                            [ngTemplateOutletInjector]="injector"
+                        >
+                        </ng-template>
+                    }
                     <ng-template #actionTemplate>
                         <ng-template
                             [ngTemplateOutlet]="action.templateRef"
@@ -87,13 +108,12 @@
                         </ng-template>
                     </ng-template>
                 </ng-template>
-            </ng-container>
-        </ng-container>
-    </ng-container>
-
+            }
+        }
+    }
     <!-- Custom overflow button used as overflow item START -->
-    <ng-container *ngIf="_delayedHiddenActions$ | async as hiddenActions">
-        <ng-container *ngIf="hiddenActions.length > 0">
+    @if (_delayedHiddenActions$ | async; as hiddenActions) {
+        @if (hiddenActions.length > 0) {
             <ng-template fdOverflowItemRef>
                 <fdb-navigation-menu-popover fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                     <button
@@ -107,7 +127,7 @@
                         fdkIndirectFocusableList
                         #indirectFocusableList="fdkIndirectFocusableList"
                     >
-                        <ng-container *ngFor="let item of hiddenActions; trackBy: _trackHiddenAction">
+                        @for (item of hiddenActions; track _trackHiddenAction($index, item)) {
                             <ng-template
                                 [ngTemplateOutlet]="item.templateRef"
                                 [ngTemplateOutletContext]="{
@@ -120,44 +140,42 @@
                                 }"
                             >
                             </ng-template>
-                        </ng-container>
+                        }
                     </fdb-navigation-menu>
                 </fdb-navigation-menu-popover>
             </ng-template>
-        </ng-container>
-    </ng-container>
+        }
+    }
     <!-- Custom overflow button used as overflow item END -->
-
-    <ng-container *ngIf="fdbToolHeaderState().userAvatarVisible && _toolHeaderUser">
-        <ng-container *ngIf="fdbToolHeaderState().separatorsBetweenActionsVisible">
+    @if (fdbToolHeaderState().userAvatarVisible && _toolHeaderUser) {
+        @if (fdbToolHeaderState().separatorsBetweenActionsVisible) {
             <ng-template fdOverflowItemRef>
                 <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                     <div class="fd-tool-header__separator"></div>
                 </div>
             </ng-template>
-        </ng-container>
+        }
         <ng-template fdOverflowItemRef>
             <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                 <ng-content select="[fdbToolHeaderUser]"></ng-content>
             </div>
         </ng-template>
-    </ng-container>
-
-    <ng-container *ngIf="fdbToolHeaderState().productSwitchVisible && _toolHeaderProductSwitch">
-        <ng-container *ngIf="fdbToolHeaderState().separatorsBetweenActionsVisible">
+    }
+    @if (fdbToolHeaderState().productSwitchVisible && _toolHeaderProductSwitch) {
+        @if (fdbToolHeaderState().separatorsBetweenActionsVisible) {
             <ng-template fdOverflowItemRef>
                 <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                     <div class="fd-tool-header__separator"></div>
                 </div>
             </ng-template>
-        </ng-container>
+        }
         <ng-template fdOverflowItemRef>
             <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                 <ng-content select="fdb-tool-header-product-switch, fd-product-switch"></ng-content>
             </div>
         </ng-template>
-    </ng-container>
-    <ng-container *ngIf="fdbToolHeaderState().voiceInputVisible">
+    }
+    @if (fdbToolHeaderState().voiceInputVisible) {
         <ng-template fdOverflowItemRef>
             <div fdbToolHeaderElement fdOverflowLayoutItem [forceVisibility]="true">
                 <button
@@ -169,5 +187,5 @@
                 ></button>
             </div>
         </ng-template>
-    </ng-container>
+    }
 </fd-overflow-layout>

@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -42,7 +42,6 @@ import { MessageBoxConfig, MessageBoxHost } from '../utils/message-box-config.cl
         NgTemplateOutlet,
         BarLeftDirective,
         BarElementDirective,
-        NgIf,
         MessageBoxSemanticIconComponent
     ]
 })
@@ -61,7 +60,10 @@ export class MessageBoxHeaderComponent extends DialogHeaderBase implements After
     }
 
     /** @hidden */
-    constructor(private _cdr: ChangeDetectorRef, @Optional() private messageBox?: MessageBoxHost) {
+    constructor(
+        private _cdr: ChangeDetectorRef,
+        @Optional() private messageBox?: MessageBoxHost
+    ) {
         super(_cdr);
     }
 

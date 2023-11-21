@@ -28,15 +28,19 @@
     ></button>
 </fd-toolbar>
 <ul fd-list>
-    <li fd-list-item *ngFor="let item of displayedItems | sortBy : ascendingSort; let ind = index">
-        <span fd-list-title>
-            {{ item }}
-        </span>
-        <span fd-list-secondary>
-            <button ariaLabel="Remove" title="Remove" fd-button glyph="delete" (click)="removeItem(ind)"></button>
-        </span>
-    </li>
-    <li fd-list-item [noData]="true" *ngIf="!displayedItems || displayedItems.length === 0">
-        <span fd-list-title> No results found! </span>
-    </li>
+    @for (item of displayedItems | sortBy: ascendingSort; track item; let ind = $index) {
+        <li fd-list-item>
+            <span fd-list-title>
+                {{ item }}
+            </span>
+            <span fd-list-secondary>
+                <button ariaLabel="Remove" title="Remove" fd-button glyph="delete" (click)="removeItem(ind)"></button>
+            </span>
+        </li>
+    }
+    @if (!displayedItems || displayedItems.length === 0) {
+        <li fd-list-item [noData]="true">
+            <span fd-list-title> No results found! </span>
+        </li>
+    }
 </ul>

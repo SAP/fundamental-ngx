@@ -1,18 +1,18 @@
 <div class="fd-feed-input" [class.is-disabled]="disabled">
-    <fd-avatar
-        *ngIf="avatarShow"
-        class="fd-feed-input__thumb"
-        size="s"
-        role="img"
-        [attr.aria-label]="'platformFeedInput.userTitle' | fdTranslate"
-        [title]="'platformFeedInput.userTitle' | fdTranslate"
-        [image]="avatarSrc"
-        [class.fd-avatar--placeholder]="!avatarSrc"
-        [class.sap-icon]="!avatarSrc"
-        [glyph]="!avatarSrc ? 'person-placeholder' : null"
-    >
-    </fd-avatar>
-
+    @if (avatarShow) {
+        <fd-avatar
+            class="fd-feed-input__thumb"
+            size="s"
+            role="img"
+            [attr.aria-label]="'platformFeedInput.userTitle' | fdTranslate"
+            [title]="'platformFeedInput.userTitle' | fdTranslate"
+            [image]="avatarSrc"
+            [class.fd-avatar--placeholder]="!avatarSrc"
+            [class.sap-icon]="!avatarSrc"
+            [glyph]="!avatarSrc ? 'person-placeholder' : null"
+        >
+        </fd-avatar>
+    }
     <textarea
         #textAreaElement
         fd-form-control
@@ -22,7 +22,6 @@
         [(ngModel)]="value"
         (ngModelChange)="onChange()"
     ></textarea>
-
     <fdp-button
         class="fd-feed-input__submit-button"
         glyph="feeder-arrow"

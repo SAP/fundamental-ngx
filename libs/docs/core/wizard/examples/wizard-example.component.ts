@@ -1,5 +1,5 @@
 import { A11yModule } from '@angular/cdk/a11y';
-import { NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -34,7 +34,6 @@ import { WizardModule, WizardService, WizardStepComponent, WizardStepStatus } fr
     imports: [
         ButtonComponent,
         A11yModule,
-        NgIf,
         WizardModule,
         TitleComponent,
         MessageStripComponent,

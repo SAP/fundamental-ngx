@@ -1,71 +1,4 @@
-<ng-container *ngIf="mobile; then headerTmpl; else avatarContent"></ng-container>
-<div class="fd-feed-list__content">
-    <ng-container *ngIf="!mobile">
-        <ng-container *ngTemplateOutlet="actionContent"></ng-container>
-    </ng-container>
-    <p class="fd-feed-list__text">
-        <ng-container *ngIf="!isRichText">
-            <ng-container *ngTemplateOutlet="feedContent; context: { $implicit: author }"></ng-container>
-        </ng-container>
-        <ng-container *ngIf="isRichText">
-            <ng-container *ngTemplateOutlet="author"></ng-container>
-            <fd-formatted-text [htmlText]="text"></fd-formatted-text>
-        </ng-container>
-    </p>
-    <ng-container *ngIf="!mobile">
-        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
-    </ng-container>
-</div>
-
-<ng-template #avatarContent>
-    <ng-content select="fd-feed-list-avatar"></ng-content>
-</ng-template>
-<ng-template #actionContent>
-    <ng-content select="fd-feed-list-action"></ng-content>
-</ng-template>
-<ng-template #footerContent>
-    <ng-content select="fd-feed-list-footer"></ng-content>
-</ng-template>
-
-<ng-template #author>
-    <span class="fd-feed-list__name">
-        <ng-container *ngIf="authorLink; else authorTitleTemplate">
-            <a
-                target="_blank"
-                fd-link
-                [attr.title]="authorTitle"
-                [attr.href]="authorLink | safe : 'url'"
-                [emphasized]="true"
-            >
-                <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
-            </a> </ng-container
-        >:
-    </span>
-</ng-template>
-<ng-template #authorTitleTemplate>
-    {{ authorTitle }}
-</ng-template>
-
-<ng-template #feedContent let-param>
-    <ng-container *ngTemplateOutlet="param"></ng-container>
-    <span>
-        {{ isCollapsed ? (text | truncate : maxChars) : text }}
-    </span>
-    <a
-        fd-link
-        class="fd-feed-list__link--more"
-        tabindex="0"
-        *ngIf="!isRichText && hasMore"
-        (click)="toggleTextView()"
-        >{{
-            isCollapsed
-                ? ('coreFeedListItem.moreLabel' | fdTranslate : { count: (text ? text.length : 0) - maxChars })
-                : ('coreFeedListItem.lessLabel' | fdTranslate)
-        }}</a
-    >
-</ng-template>
-
-<ng-template #headerTmpl>
+@if (mobile) {
     <div class="fd-feed-list__wrapper">
         <div class="fd-feed-list__wrapper fd-feed-list__wrapper--header">
             <ng-container *ngTemplateOutlet="avatarContent"></ng-container>
@@ -76,4 +9,65 @@
         </div>
         <ng-container *ngTemplateOutlet="actionContent"></ng-container>
     </div>
+} @else {
+    <ng-content select="fd-feed-list-avatar"></ng-content>
+}
+<div class="fd-feed-list__content">
+    @if (!mobile) {
+        <ng-container *ngTemplateOutlet="actionContent"></ng-container>
+    }
+    <p class="fd-feed-list__text">
+        @if (!isRichText) {
+            <ng-container *ngTemplateOutlet="feedContent; context: { $implicit: author }"></ng-container>
+        } @else {
+            <ng-container *ngTemplateOutlet="author"></ng-container>
+            <fd-formatted-text [htmlText]="text"></fd-formatted-text>
+        }
+    </p>
+    @if (!mobile) {
+        <ng-container *ngTemplateOutlet="footerContent"></ng-container>
+    }
+</div>
+<ng-template #avatarContent>
+    <ng-content select="fd-feed-list-avatar"></ng-content>
+</ng-template>
+<ng-template #actionContent>
+    <ng-content select="fd-feed-list-action"></ng-content>
+</ng-template>
+<ng-template #footerContent>
+    <ng-content select="fd-feed-list-footer"></ng-content>
+</ng-template>
+<ng-template #author>
+    <span class="fd-feed-list__name">
+        @if (authorLink) {
+            <a
+                target="_blank"
+                fd-link
+                [attr.title]="authorTitle"
+                [attr.href]="authorLink | safe: 'url'"
+                [emphasized]="true"
+            >
+                <ng-container *ngTemplateOutlet="authorTitleTemplate"></ng-container>
+            </a>
+        } @else {
+            {{ authorTitle }}
+        }
+        :
+    </span>
+</ng-template>
+<ng-template #authorTitleTemplate>
+    {{ authorTitle }}
+</ng-template>
+<ng-template #feedContent let-param>
+    <ng-container *ngTemplateOutlet="param"></ng-container>
+    <span>
+        {{ isCollapsed ? (text | truncate: maxChars) : text }}
+    </span>
+    @if (!isRichText && hasMore) {
+        <a fd-link class="fd-feed-list__link--more" tabindex="0" (click)="toggleTextView()">{{
+            isCollapsed
+                ? ('coreFeedListItem.moreLabel' | fdTranslate: { count: (text ? text.length : 0) - maxChars })
+                : ('coreFeedListItem.lessLabel' | fdTranslate)
+        }}</a>
+    }
 </ng-template>

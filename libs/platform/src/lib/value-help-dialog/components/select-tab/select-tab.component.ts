@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BarComponent, BarElementDirective, BarMiddleDirective } from '@fundamental-ngx/core/bar';
@@ -54,12 +54,10 @@ let titleUniqueId = 0;
         TableComponent,
         FormLabelComponent,
         TableHeaderDirective,
-        NgIf,
         TableRowDirective,
         TableCellDirective,
         CheckboxComponent,
         FormsModule,
-        NgFor,
         TableBodyDirective,
         TableTextDirective,
         BarComponent,

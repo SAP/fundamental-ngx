@@ -76,10 +76,12 @@ class TestFilteringWrapperComponent {
 type CarType = { id: string; name: string };
 @Component({
     template: `
-        <fd-select [value]="selectedCarType" (valueChange)="setCarTypeByCopy($event)" [compareWith]="comparator">
-            <fd-option *ngFor="let carType of carTypes" [value]="carType">{{ carType.name }}</fd-option>
-        </fd-select>
-    `
+<fd-select [value]="selectedCarType" (valueChange)="setCarTypeByCopy($event)" [compareWith]="comparator">
+  @for (carType of carTypes; track carType) {
+    <fd-option [value]="carType">{{ carType.name }}</fd-option>
+  }
+</fd-select>
+`
 })
 class ValueCompareWithSelectComponent {
     @ViewChild(SelectComponent)

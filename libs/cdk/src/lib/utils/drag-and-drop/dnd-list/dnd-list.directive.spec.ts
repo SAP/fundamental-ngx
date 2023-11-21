@@ -7,12 +7,14 @@ import { ElementChord } from '../dnd.interfaces';
 
 @Component({
     template: `
-        <div #directiveElement fd-dnd-list>
-            <div fd-dnd-item *ngFor="let item of list">
-                <div>{{ item }}</div>
-            </div>
-        </div>
-    `
+<div #directiveElement fd-dnd-list>
+  @for (item of list; track item) {
+    <div fd-dnd-item>
+      <div>{{ item }}</div>
+    </div>
+  }
+</div>
+`
 })
 class TestDndListComponent {
     @ViewChild('directiveElement', { static: true, read: DndListDirective })

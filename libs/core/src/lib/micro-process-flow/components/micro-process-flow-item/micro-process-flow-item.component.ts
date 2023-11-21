@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -31,7 +30,7 @@ import { MicroProcessFlowItemType } from '../../types';
         `
     ],
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class MicroProcessFlowItemComponent {
     /** Item state */
@@ -50,7 +49,10 @@ export class MicroProcessFlowItemComponent {
     focusableElement: MicroProcessFlowFocusableItemDirective;
 
     /** @hidden */
-    constructor(private _cd: ChangeDetectorRef, public elRef: ElementRef) {}
+    constructor(
+        private _cd: ChangeDetectorRef,
+        public elRef: ElementRef
+    ) {}
 
     /**
      * @param value Is current item the last one

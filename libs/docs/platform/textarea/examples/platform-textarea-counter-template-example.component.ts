@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
@@ -8,7 +7,7 @@ import { FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/pla
     templateUrl: './platform-textarea-counter-template-example.component.html',
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, FdpFormGroupModule, PlatformTextAreaModule, FormsModule]
+    imports: [FdpFormGroupModule, PlatformTextAreaModule, FormsModule]
 })
 export class PlatformTextareaCounterTemplateExampleComponent {
     textareaValidator: ValidatorFn[];

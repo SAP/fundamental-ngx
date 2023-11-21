@@ -1,6 +1,6 @@
 {{ label }}
 <ng-content></ng-content>
-<ng-container *ngIf="linkText !== null && linkText !== undefined">
+@if (linkText !== null && linkText !== undefined) {
     <span
         (click)="onObjectAttributeClick($event)"
         [attr.tabindex]="disabled ? '-1' : '0'"
@@ -13,4 +13,4 @@
     >
         {{ linkText }}
     </span>
-</ng-container>
+}

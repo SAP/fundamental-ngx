@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -31,14 +30,18 @@ import { take } from 'rxjs/operators';
 @Component({
     selector: 'fdp-settings-generator-tabs-layout',
     template: `
-        <fd-tab-list *ngIf="settings">
-            <fd-tab *ngFor="let tab of settings.items" [title]="tab.title | fdkAsyncOrSync">
-                <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
-            </fd-tab>
-        </fd-tab-list>
+        @if (settings) {
+            <fd-tab-list>
+                @for (tab of settings.items; track tab) {
+                    <fd-tab [title]="tab.title | fdkAsyncOrSync">
+                        <fdp-settings-generator-content [settings]="tab"></fdp-settings-generator-content>
+                    </fd-tab>
+                }
+            </fd-tab-list>
+        }
     `,
     standalone: true,
-    imports: [NgIf, TabsModule, NgFor, SettingsGeneratorModule, AsyncOrSyncPipe]
+    imports: [TabsModule, SettingsGeneratorModule, AsyncOrSyncPipe]
 })
 export class SettingsGeneratorTabsLayoutComponent extends BaseSettingsGeneratorLayout {
     protected _destroyRef = inject(DestroyRef);

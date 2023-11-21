@@ -7,18 +7,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
-import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
-import { WizardGeneratorService } from '../../wizard-generator.service';
-import {
-    WizardGeneratorSummaryItem,
-    FormattedFormStep
-} from '../../interfaces/wizard-generator-summary-item.interface';
 import { WizardGeneratorFormsValue, WizardStepForms } from '../../interfaces/wizard-generator-forms.interface';
+import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import {
+    FormattedFormStep,
+    WizardGeneratorSummaryItem
+} from '../../interfaces/wizard-generator-summary-item.interface';
+import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardSummarySectionComponent } from './wizard-summary-section/wizard-summary-section.component';
-import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'fdp-wizard-summary-step',
@@ -26,7 +26,7 @@ import { NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, NgFor, WizardSummarySectionComponent, NgTemplateOutlet]
+    imports: [WizardSummarySectionComponent, NgTemplateOutlet]
 })
 export class WizardSummaryStepComponent {
     /**

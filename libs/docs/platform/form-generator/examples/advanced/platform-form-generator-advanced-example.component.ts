@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -30,7 +30,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         provideDateTimeFormats()
     ],
     standalone: true,
-    imports: [NgIf, BarModule, PlatformButtonModule, JsonPipe, PlatformFormGeneratorModule]
+    imports: [BarModule, PlatformButtonModule, JsonPipe, PlatformFormGeneratorModule]
 })
 export class PlatformFormGeneratorAdvancedExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

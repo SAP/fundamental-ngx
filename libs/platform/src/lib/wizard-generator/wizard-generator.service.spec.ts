@@ -89,21 +89,21 @@ const TEST_ITEMS: WizardGeneratorItem[] = [
 
 @Component({
     template: `
-        <ng-container *ngIf="wizardCreated">
-            <fdp-wizard-body
-                [navigationButtonLabels]="navigationButtonLabels"
-                [hidden]="!wizardCreated"
-                [appendToWizard]="appendToWizard"
-                [contentHeight]="contentHeight"
-                [isFirstStep]="isFirstStep"
-                [isLastStep]="isLastStep"
-                [isSummaryStep]="isSummaryStep"
-                (statusChange)="stepStatusChanged($event.id, $event.status)"
-                (goNext)="goNext()"
-                (finish)="finish()"
-            ></fdp-wizard-body>
-        </ng-container>
-    `,
+@if (wizardCreated) {
+  <fdp-wizard-body
+    [navigationButtonLabels]="navigationButtonLabels"
+    [hidden]="!wizardCreated"
+    [appendToWizard]="appendToWizard"
+    [contentHeight]="contentHeight"
+    [isFirstStep]="isFirstStep"
+    [isLastStep]="isLastStep"
+    [isSummaryStep]="isSummaryStep"
+    (statusChange)="stepStatusChanged($event.id, $event.status)"
+    (goNext)="goNext()"
+    (finish)="finish()"
+  ></fdp-wizard-body>
+}
+`,
     providers: [WizardGeneratorService]
 })
 class WizardGeneratorTestComponent extends BaseWizardGenerator {

@@ -1,5 +1,5 @@
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
-import { NgFor } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -17,7 +17,6 @@ import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
         FormLabelComponent,
         SegmentedButtonModule,
         FormsModule,
-        NgFor,
         ButtonComponent,
         PopoverComponent,
         PopoverControlComponent,

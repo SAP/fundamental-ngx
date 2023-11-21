@@ -1,5 +1,5 @@
 import { PortalModule } from '@angular/cdk/portal';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -72,7 +72,6 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
     standalone: true,
     imports: [
         OverflowLayoutComponent,
-        NgFor,
         OverflowItemRefDirective,
         OverflowLayoutItemDirective,
         PortalModule,
@@ -80,7 +79,6 @@ import { FD_BREADCRUMB_COMPONENT, FD_BREADCRUMB_ITEM_COMPONENT } from './tokens'
         MenuComponent,
         MenuItemComponent,
         MenuInteractiveComponent,
-        NgIf,
         GlyphMenuAddonDirective,
         MenuAddonDirective,
         MenuTitleDirective,

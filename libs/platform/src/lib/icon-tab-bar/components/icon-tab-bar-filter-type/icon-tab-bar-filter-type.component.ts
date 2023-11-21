@@ -1,4 +1,4 @@
-import { NgFor, NgIf, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { OverflowListDirective, OverflowListItemDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -13,9 +13,7 @@ import { IconTabBarPopoverComponent } from '../popovers/icon-tab-bar-popover/ico
     standalone: true,
     imports: [
         OverflowListDirective,
-        NgIf,
         OverflowListItemDirective,
-        NgFor,
         IconComponent,
         IconTabBarPopoverComponent,
         SlicePipe,

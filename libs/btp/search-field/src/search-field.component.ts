@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterViewInit,
     Component,
@@ -29,7 +28,7 @@ import { of, tap } from 'rxjs';
     standalone: true,
     hostDirectives: [CvaDirective],
     providers: [CvaControl],
-    imports: [IconComponent, NgIf, FormsModule, FdTranslatePipe, ButtonComponent, NestedButtonDirective],
+    imports: [IconComponent, FormsModule, FdTranslatePipe, ButtonComponent, NestedButtonDirective],
     encapsulation: ViewEncapsulation.None
 })
 export class SearchFieldComponent implements AfterViewInit, HasElementRef {

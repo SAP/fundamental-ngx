@@ -1,21 +1,17 @@
 <div class="fd-icon-tab-bar" [class]="_cssClassForContainer">
-    <ng-container *ngIf="iconTabType === 'text'">
+    @if (iconTabType === 'text') {
         <ng-container *ngTemplateOutlet="textType"></ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="iconTabType === 'icon' || iconTabType === 'icon-only'">
+    }
+    @if (iconTabType === 'icon' || iconTabType === 'icon-only') {
         <ng-container *ngTemplateOutlet="iconType"></ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="iconTabType === 'filter'">
+    }
+    @if (iconTabType === 'filter') {
         <ng-container *ngTemplateOutlet="filterType"></ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="iconTabType === 'process'">
+    }
+    @if (iconTabType === 'process') {
         <ng-container *ngTemplateOutlet="processType"></ng-container>
-    </ng-container>
+    }
 </div>
-
 <ng-template #processType>
     <fdp-icon-tab-bar-process-type
         [tabsConfig]="tabsConfig"
@@ -25,7 +21,6 @@
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-process-type>
 </ng-template>
-
 <ng-template #filterType>
     <fdp-icon-tab-bar-filter-type
         [tabsConfig]="tabsConfig"
@@ -36,7 +31,6 @@
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-filter-type>
 </ng-template>
-
 <ng-template #iconType>
     <fdp-icon-tab-bar-icon-type
         [showLabel]="iconTabType === 'icon'"
@@ -48,7 +42,6 @@
         (closeTab)="_closeTab($event)"
     ></fdp-icon-tab-bar-icon-type>
 </ng-template>
-
 <ng-template #textType>
     <fdp-icon-tab-bar-text-type
         [tabsConfig]="tabsConfig"

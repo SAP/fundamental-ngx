@@ -11,9 +11,7 @@
     <fd-message-strip-example></fd-message-strip-example>
 </component-example>
 <code-example [exampleFiles]="messageStripBasicExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="message-strip-custom-icon" componentName="message-strip">
     Custom Icons
 </fd-docs-section-title>
@@ -27,9 +25,7 @@
     <fd-message-strip-custom-icon-example></fd-message-strip-custom-icon-example>
 </component-example>
 <code-example [exampleFiles]="messageStripCustomIconExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="message-strip-no-icon" componentName="message-strip">
     Message Strips Without Icons
 </fd-docs-section-title>
@@ -41,9 +37,7 @@
     <fd-message-strip-noicon-example></fd-message-strip-noicon-example>
 </component-example>
 <code-example [exampleFiles]="messageStripNoIconExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="message-strip-width" componentName="message-strip">
     Message Strips With Customizable Width
 </fd-docs-section-title>
@@ -55,9 +49,7 @@
     <fd-message-strip-width-example></fd-message-strip-width-example>
 </component-example>
 <code-example [exampleFiles]="messageStripWidthExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="message-strip-indication-color" componentName="message-strip">
     Message Strips Indication Colors
 </fd-docs-section-title>
@@ -72,9 +64,7 @@
     <fd-message-strip-indication-colors-example></fd-message-strip-indication-colors-example>
 </component-example>
 <code-example [exampleFiles]="messageStripIndicationColorsExample"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="message-strip-alert" componentName="message-strip-alert">
     Message Strip Alerts
 </fd-docs-section-title>
@@ -108,9 +98,7 @@
     <message-strip-alert-example></message-strip-alert-example>
 </component-example>
 <code-example [exampleFiles]="messageStripAlertExampleFiles"></code-example>
-
 <separator></separator>
-
 <fd-docs-section-title id="auto-dismiss-message-strip" componentName="message-strip-alert">
     Auto Dismiss Message Strip Alerts
 </fd-docs-section-title>
@@ -124,9 +112,7 @@
     <message-strip-auto-dismiss-example></message-strip-auto-dismiss-example>
 </component-example>
 <code-example [exampleFiles]="messageStripAutoDismissExampleFiles"></code-example>
-
 <separator></separator>
-
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"
@@ -134,13 +120,14 @@
     (onReset)="reset()"
     (onFormChanges)="onSchemaValues($event)"
 >
-    <fd-message-strip
-        *ngIf="shouldShow"
-        [type]="data.modifier.type"
-        [dismissible]="data.properties.dismissible"
-        [noIcon]="data.properties.noIcon"
-        [width]="data.properties.width"
-    >
-        {{ data.properties.message }}
-    </fd-message-strip>
+    @if (shouldShow) {
+        <fd-message-strip
+            [type]="data.modifier.type"
+            [dismissible]="data.properties.dismissible"
+            [noIcon]="data.properties.noIcon"
+            [width]="data.properties.width"
+        >
+            {{ data.properties.message }}
+        </fd-message-strip>
+    }
 </playground>

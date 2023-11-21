@@ -9,12 +9,13 @@
     [attr.aria-label]="valueText"
     [class]="state ? 'fd-progress-indicator--' + state : ''"
 >
-    <ng-container *ngIf="!hasPopover; else popoverTemplate">
-        <div class="fd-progress-indicator__container" *ngIf="_progressBarWidth >= 0">
-            <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
-        </div>
-    </ng-container>
-    <ng-template #popoverTemplate>
+    @if (!hasPopover) {
+        @if (_progressBarWidth >= 0) {
+            <div class="fd-progress-indicator__container">
+                <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
+            </div>
+        }
+    } @else {
         <fd-popover
             [style.width.%]="100"
             [noArrow]="false"
@@ -23,9 +24,11 @@
             #popover
             class="fd-progress-indicator__container"
         >
-            <fd-popover-control *ngIf="_progressBarWidth >= 0">
-                <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
-            </fd-popover-control>
+            @if (_progressBarWidth >= 0) {
+                <fd-popover-control>
+                    <ng-container *ngTemplateOutlet="indicatorContainer"></ng-container>
+                </fd-popover-control>
+            }
             <fd-popover-body>
                 <div class="fd-popover__wrapper">
                     <div class="fd-progress-indicator__overflow">
@@ -37,32 +40,37 @@
                 </div>
             </fd-popover-body>
         </fd-popover>
-    </ng-template>
+    }
 </div>
-
 <ng-template #indicatorContainer>
-    <div
-        *ngIf="_progressBarWidth > 0"
-        class="fd-progress-indicator__progress-bar"
-        [class.fd-progress-indicator__progress-bar--animated]="animate"
-        [style.min-width.%]="_progressBarWidth"
-        [style.width.%]="_progressBarWidth"
-    >
-        <ng-container *ngIf="_progressBarWidth > 50">
-            <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
-        </ng-container>
-    </div>
+    @if (_progressBarWidth > 0) {
+        <div
+            class="fd-progress-indicator__progress-bar"
+            [class.fd-progress-indicator__progress-bar--animated]="animate"
+            [style.min-width.%]="_progressBarWidth"
+            [style.width.%]="_progressBarWidth"
+        >
+            @if (_progressBarWidth > 50) {
+                <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
+            }
+        </div>
+    }
     <div class="fd-progress-indicator__remaining" [style.min-width]="0">
-        <ng-container *ngIf="_progressBarWidth <= 50">
+        @if (_progressBarWidth <= 50) {
             <ng-template [ngTemplateOutlet]="progressBarLabel"></ng-template>
-        </ng-container>
+        }
     </div>
 </ng-template>
-
 <ng-template #progressBarLabel>
-    <span class="fd-progress-indicator__icon" *ngIf="state"></span>
-    <span class="fd-progress-indicator__label" *ngIf="!valueText"> {{ valueNow }}% </span>
-    <span class="fd-progress-indicator__label" *ngIf="valueText">
-        {{ valueText }}
-    </span>
+    @if (state) {
+        <span class="fd-progress-indicator__icon"></span>
+    }
+    @if (!valueText) {
+        <span class="fd-progress-indicator__label"> {{ valueNow }}% </span>
+    }
+    @if (valueText) {
+        <span class="fd-progress-indicator__label">
+            {{ valueText }}
+        </span>
+    }
 </ng-template>

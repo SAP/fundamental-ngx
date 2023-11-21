@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -13,7 +13,7 @@ import {
     templateUrl: './wizard-generator-special-elements-example.component.html',
     providers: [provideDateTimeFormats()],
     standalone: true,
-    imports: [PlatformWizardGeneratorModule, NgIf, JsonPipe]
+    imports: [PlatformWizardGeneratorModule, JsonPipe]
 })
 export class WizardGeneratorSpecialElementsExampleComponent {
     wizardValue: WizardGeneratorFormsValue;

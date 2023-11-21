@@ -20,7 +20,7 @@ import { Observable, Subject, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import { NgTemplateOutlet, SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DisplayFnPipe, RtlService, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import {
@@ -94,11 +94,9 @@ let vhiUniqueId = 0;
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgIf,
         DialogFooterComponent,
         TitleComponent,
         TokenizerComponent,
-        NgFor,
         TokenComponent,
         ToolbarItemDirective,
         FormControlComponent,
@@ -128,8 +126,6 @@ let vhiUniqueId = 0;
         BarElementDirective,
         BarRightDirective,
         ButtonBarComponent,
-        NgSwitch,
-        NgSwitchCase,
         SlicePipe,
         FdTranslatePipe,
         DisplayFnPipe

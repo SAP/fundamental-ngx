@@ -1,22 +1,23 @@
-<ng-container *ngIf="abbreviate">{{ abbreviate }}</ng-container>
-
-<i
-    *ngIf="zoomGlyph || valueState"
-    role="presentation"
-    class="fd-avatar__zoom-icon"
-    [class]="valueState | fdAvatarIcon : zoomGlyph"
-    (mousedown)="zoomClicked($event)"
->
-</i>
-
-<fd-icon
-    *ngIf="glyph || showDefault"
-    class="fd-avatar__icon"
-    role="presentation"
-    [font]="font"
-    [glyph]="glyph || 'person-placeholder'"
-></fd-icon>
-
+@if (abbreviate) {
+    {{ abbreviate }}
+}
+@if (zoomGlyph || valueState) {
+    <i
+        role="presentation"
+        class="fd-avatar__zoom-icon"
+        [class]="valueState | fdAvatarIcon: zoomGlyph"
+        (mousedown)="zoomClicked($event)"
+    >
+    </i>
+}
+@if (glyph || showDefault) {
+    <fd-icon
+        class="fd-avatar__icon"
+        role="presentation"
+        [font]="font"
+        [glyph]="glyph || 'person-placeholder'"
+    ></fd-icon>
+}
 <div #content [style.display]="'none'">
     <ng-content></ng-content>
 </div>

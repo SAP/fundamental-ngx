@@ -10,7 +10,11 @@
     >
         <fd-icon fdTreeItemIcon [glyph]="item.data.icon"></fd-icon>
         <span fdTreeItemText>{{ item.data.title }}</span>
-        <button fd-button *ngIf="item.data.editable" fdType="transparent" fdTreeItemButton glyph="edit"></button>
-        <button fd-button *ngIf="item.data.editable" fdType="transparent" fdTreeItemButton glyph="decline"></button>
+        @if (item.data.editable) {
+            <button fd-button fdType="transparent" fdTreeItemButton glyph="edit"></button>
+        }
+        @if (item.data.editable) {
+            <button fd-button fdType="transparent" fdTreeItemButton glyph="decline"></button>
+        }
     </fd-tree-item>
 </fd-tree>

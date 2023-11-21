@@ -8,7 +8,6 @@
         <span class="fd-form-label">
             {{ 'platformApprovalFlow.selectTypeDialogParallelOrSerial' | fdTranslate }}
         </span>
-
         <fd-form-group class="fdp-approval-flow-select-type__form">
             <div fd-form-item>
                 <fd-radio-button
@@ -20,7 +19,6 @@
                     {{ 'platformApprovalFlow.selectTypeDialogNodeTypeParallel' | fdTranslate }}
                 </fd-radio-button>
             </div>
-
             <div fd-form-item>
                 <fd-radio-button
                     [value]="_nodeTypes.SERIAL"
@@ -31,15 +29,15 @@
                     {{ 'platformApprovalFlow.selectTypeDialogNodeTypeSerial' | fdTranslate }}
                 </fd-radio-button>
             </div>
-
-            <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
-                <fd-checkbox [(ngModel)]="_toNextSerial">
-                    {{ 'platformApprovalFlow.addNodeDialogAddToNext' | fdTranslate }}
-                </fd-checkbox>
-            </div>
+            @if (_nodeType === _nodeTypes.PARALLEL) {
+                <div fd-form-item>
+                    <fd-checkbox [(ngModel)]="_toNextSerial">
+                        {{ 'platformApprovalFlow.addNodeDialogAddToNext' | fdTranslate }}
+                    </fd-checkbox>
+                </div>
+            }
         </fd-form-group>
     </fd-dialog-body>
-
     <fd-dialog-footer fdCompact>
         <ng-container>
             <fd-button-bar
@@ -47,7 +45,6 @@
                 [label]="'platformApprovalFlow.selectTypeDialogConfirmButton' | fdTranslate"
                 (click)="_submit()"
             ></fd-button-bar>
-
             <fd-button-bar
                 fdkInitialFocus
                 fdType="transparent"

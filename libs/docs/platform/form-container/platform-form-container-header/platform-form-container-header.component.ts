@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { TableModule } from '@fundamental-ngx/core/table';
@@ -21,7 +20,6 @@ import { defaultFormFieldHintOptions } from '@fundamental-ngx/platform/form';
         DescriptionComponent,
         FocusableGridDirective,
         TableModule,
-        NgFor,
         ImportComponent,
         HeaderTabsComponent
     ]

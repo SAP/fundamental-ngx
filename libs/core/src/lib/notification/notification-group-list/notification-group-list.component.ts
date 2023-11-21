@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -16,14 +15,14 @@ import { NotificationGroupHeaderComponent } from '../notification-group-header/n
     selector: 'fd-notification-group-list',
     template: `
         <ng-content select="fd-notification-group-header"></ng-content>
-        <ng-container *ngIf="expanded">
+        @if (expanded) {
             <ng-content></ng-content>
-        </ng-container>
+        }
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class NotificationGroupListComponent implements AfterContentInit, OnDestroy {
     /** @hidden */

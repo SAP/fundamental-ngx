@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -48,7 +48,6 @@ import {
         TemplateDirective,
         BarMiddleDirective,
         BarElementDirective,
-        NgIf,
         NgTemplateOutlet,
         DialogCloseButtonComponent,
         CdkScrollable,

@@ -1,43 +1,46 @@
-<fd-message-strip
-    *ngFor="let message of messages; let i = index"
-    class="fdp-approval-flow-messages__item"
-    [type]="message.type === 'error' ? 'error' : 'success'"
-    [dismissible]="message.type !== 'error'"
-    (onDismiss)="_dismissMessage(i)"
->
-    <bdi>
-        <span [ngSwitch]="message.type">
-            <ng-container *ngSwitchCase="'approverAddSuccess'">
-                {{ 'platformApprovalFlow.messagesApproverAddedSuccess' | fdTranslate }}
-            </ng-container>
-            <ng-container *ngSwitchCase="'teamAddSuccess'">
-                {{ 'platformApprovalFlow.messagesTeamAddedSuccess' | fdTranslate }}
-            </ng-container>
-            <ng-container *ngSwitchCase="'nodeEdit'">
-                {{ 'platformApprovalFlow.messagesNodeEdited' | fdTranslate }}
-            </ng-container>
-            <ng-container *ngSwitchCase="'nodeRemove'">
-                {{ 'platformApprovalFlow.messagesNodeRemovedSingular' | fdTranslate }}
-            </ng-container>
-            <ng-container *ngSwitchCase="'nodesRemove'">
-                {{ 'platformApprovalFlow.messagesNodeRemovedPlural' | fdTranslate }}
-            </ng-container>
-            <ng-container *ngSwitchCase="'teamRemove'">
-                {{ 'platformApprovalFlow.messagesTeamRemoved' | fdTranslate }}
-            </ng-container>
-            <ng-container *ngSwitchCase="'error'">
-                {{ 'platformApprovalFlow.messagesErrorBuildGraph' | fdTranslate }}
-            </ng-container>
-        </span>
-
-        <a
-            href="#"
-            *ngIf="undoLastActionAvailable"
-            (click)="_undoLastAction(i, $event)"
-            (keyup.enter)="_undoLastAction(i, $event)"
-            (keyup.space)="_undoLastAction(i, $event)"
-        >
-            {{ 'platformApprovalFlow.messagesUndoAction' | fdTranslate }}
-        </a>
-    </bdi>
-</fd-message-strip>
+@for (message of messages; track message; let i = $index) {
+    <fd-message-strip
+        class="fdp-approval-flow-messages__item"
+        [type]="message.type === 'error' ? 'error' : 'success'"
+        [dismissible]="message.type !== 'error'"
+        (onDismiss)="_dismissMessage(i)"
+    >
+        <bdi>
+            <span>
+                @switch (message.type) {
+                    @case ('approverAddSuccess') {
+                        {{ 'platformApprovalFlow.messagesApproverAddedSuccess' | fdTranslate }}
+                    }
+                    @case ('teamAddSuccess') {
+                        {{ 'platformApprovalFlow.messagesTeamAddedSuccess' | fdTranslate }}
+                    }
+                    @case ('nodeEdit') {
+                        {{ 'platformApprovalFlow.messagesNodeEdited' | fdTranslate }}
+                    }
+                    @case ('nodeRemove') {
+                        {{ 'platformApprovalFlow.messagesNodeRemovedSingular' | fdTranslate }}
+                    }
+                    @case ('nodesRemove') {
+                        {{ 'platformApprovalFlow.messagesNodeRemovedPlural' | fdTranslate }}
+                    }
+                    @case ('teamRemove') {
+                        {{ 'platformApprovalFlow.messagesTeamRemoved' | fdTranslate }}
+                    }
+                    @case ('error') {
+                        {{ 'platformApprovalFlow.messagesErrorBuildGraph' | fdTranslate }}
+                    }
+                }
+            </span>
+            @if (undoLastActionAvailable) {
+                <a
+                    href="#"
+                    (click)="_undoLastAction(i, $event)"
+                    (keyup.enter)="_undoLastAction(i, $event)"
+                    (keyup.space)="_undoLastAction(i, $event)"
+                >
+                    {{ 'platformApprovalFlow.messagesUndoAction' | fdTranslate }}
+                </a>
+            }
+        </bdi>
+    </fd-message-strip>
+}

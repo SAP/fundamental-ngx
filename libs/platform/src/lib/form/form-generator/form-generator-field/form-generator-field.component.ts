@@ -14,11 +14,11 @@ import { FieldHintOptions, PlatformFormField } from '@fundamental-ngx/platform/s
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
 import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 import { DynamicFormControl } from '../dynamic-form-control';
+import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { DynamicFormItemValidationObject } from '../interfaces/dynamic-form-item';
-import { DynamicFormControlDirective } from '../dynamic-form-control.directive';
-import { NgFor, NgIf } from '@angular/common';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 
@@ -38,7 +38,7 @@ const formGroupChildProvider: Provider = {
     providers: [formFieldProvider, formGroupChildProvider],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, NgFor, NgIf, DynamicFormControlDirective]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, DynamicFormControlDirective]
 })
 export class FormGeneratorFieldComponent implements OnInit {
     /**
@@ -105,7 +105,10 @@ export class FormGeneratorFieldComponent implements OnInit {
     _errorModels: { type: string; value: any }[] = [];
 
     /** @hidden */
-    constructor(private _fgService: FormGeneratorService, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _fgService: FormGeneratorService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

@@ -23,7 +23,6 @@ import { Subscription } from 'rxjs';
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
-import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import {
     ContentDensityModule,
@@ -92,9 +91,6 @@ let calendarUniqueId = 0;
     imports: [
         ContentDensityModule,
         CalendarHeaderComponent,
-        NgIf,
-        NgSwitch,
-        NgSwitchCase,
         CalendarDayViewComponent,
         CalendarMonthViewComponent,
         CalendarYearViewComponent,

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 

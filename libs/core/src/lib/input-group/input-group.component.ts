@@ -20,7 +20,7 @@ import { debounceTime, filter, fromEvent, map, merge, Observable, Subject, takeU
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormItemControl, registerFormItemControl } from '@fundamental-ngx/core/form';
 
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -63,7 +63,6 @@ let addOnInputRandomId = 0;
     },
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         InputGroupAddOnDirective,
         ButtonComponent,
@@ -248,6 +247,7 @@ export class InputGroupComponent implements ControlValueAccessor, AfterViewInit,
     }
 
     /** @hidden */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onChange = (value: string): void => {};
 
     /** @hidden */

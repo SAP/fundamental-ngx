@@ -11,7 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -60,14 +60,12 @@ let titleUniqueId = 0;
     standalone: true,
     imports: [
         TitleComponent,
-        NgFor,
         LayoutGridComponent,
         LayoutGridRowDirective,
         LayoutGridColDirective,
         FormLabelComponent,
         SelectComponent,
         FormsModule,
-        NgIf,
         ListGroupHeaderDirective,
         OptionComponent,
         NgTemplateOutlet,
@@ -75,8 +73,6 @@ let titleUniqueId = 0;
         FormControlComponent,
         ConditionCountMessageDirective,
         ButtonComponent,
-        NgSwitch,
-        NgSwitchCase,
         FormMessageComponent,
         FdTranslatePipe
     ]

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DatetimeAdapter, FdDate, FdDatetimeModule, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -50,7 +49,6 @@ import {
         FdpEditableCellFormDirective,
         PlatformInputModule,
         SelectModule,
-        NgFor,
         FdpCellDef,
         FdDatetimeModule
     ]

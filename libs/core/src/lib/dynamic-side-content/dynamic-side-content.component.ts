@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import {
     DYNAMIC_SIDE_CONTENT_CHILD_TOKEN,
@@ -35,7 +35,7 @@ let componentId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet]
+    imports: [NgTemplateOutlet]
 })
 export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, OnInit, AfterContentInit {
     /**

@@ -6,7 +6,7 @@
 >
     <fdp-button type="submit" label="Submit form"></fdp-button>
 </fdp-form-generator>
-
 <p>Form created: {{ formCreated }}</p>
-
-<p *ngIf="formValue">Form value: {{ formValue | json }}</p>
+@if (formValue) {
+    <p>Form value: {{ formValue | json }}</p>
+}

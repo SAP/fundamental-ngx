@@ -1,6 +1,10 @@
-<svg class="fd-illustrated-message__illustration" *ngIf="!noSvg || _inlineSvg">
-    <use [attr.href]="_href"></use>
-</svg>
-<div *ngIf="_inlineSvg" [style.display]="'none'" [innerHTML]="_inlineSvg"></div>
+@if (!noSvg || _inlineSvg) {
+    <svg class="fd-illustrated-message__illustration">
+        <use [attr.href]="_href"></use>
+    </svg>
+}
+@if (_inlineSvg) {
+    <div [style.display]="'none'" [innerHTML]="_inlineSvg"></div>
+}
 <ng-content select="[fd-illustrated-message-figcaption]"></ng-content>
 <ng-content select="fd-illustrated-message-actions"></ng-content>

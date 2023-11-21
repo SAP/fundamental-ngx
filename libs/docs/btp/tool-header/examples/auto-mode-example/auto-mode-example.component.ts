@@ -1,4 +1,4 @@
-import { NgForOf, NgIf, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToolHeaderButtonDirective } from '@fundamental-ngx/btp/button';
@@ -40,10 +40,8 @@ import { ProductSwitchBodyComponent, ProductSwitchItem } from '@fundamental-ngx/
         SearchFieldComponent,
         FormsModule,
         ToolHeaderAutoModeDirective,
-        NgForOf,
         ToolHeaderActionDirective,
         ButtonComponent,
-        NgIf,
         ToolHeaderActionSeparatorComponent,
         MessageStripComponent,
         PopoverBodyHeaderDirective,

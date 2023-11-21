@@ -1,5 +1,5 @@
 <!--  list item navigation with Arrow-->
-<ng-container *ngIf="navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))">
+@if (navigationIndicator || (navigated && !(noDataText !== null && noDataText !== undefined))) {
     <li
         #listItem
         fd-list-item
@@ -25,10 +25,9 @@
             <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
         </a>
     </li>
-</ng-container>
-
+}
 <!--  list item without navigation and used for simple list display-->
-<ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)">
+@if (!navigationIndicator && !navigated && !(noDataText !== null && noDataText !== undefined)) {
     <li
         #listItem
         fd-list-item
@@ -45,20 +44,18 @@
     >
         <ng-container *ngTemplateOutlet="commonTemplate"></ng-container>
     </li>
-</ng-container>
-
+}
 <ng-template #commonTemplate>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">{{
-        title
-    }}</span>
-    <ng-container *ngIf="secondary">
+    @if (title) {
+        <span fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">{{ title }}</span>
+    }
+    @if (secondary) {
         <ng-container
             [ngTemplateOutlet]="_isAdvancedText(secondary) ? advancedSecondary : simpleSecondary"
             [ngTemplateOutletContext]="{ $implicit: secondary }"
         ></ng-container>
-    </ng-container>
+    }
 </ng-template>
-
 <ng-template #simpleSecondary let-secondary>
     <span fd-list-secondary [attr.aria-label]="secondary" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
         {{ secondary }}

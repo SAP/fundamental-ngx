@@ -20,7 +20,7 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import {
@@ -53,7 +53,10 @@ export class DynamicPageTabChangeEvent {
      * @param source Dynamic Page component
      * @param payload Tab component
      */
-    constructor(public source: DynamicPageContentComponent, public payload: TabPanelComponent) {}
+    constructor(
+        public source: DynamicPageContentComponent,
+        public payload: TabPanelComponent
+    ) {}
 }
 
 @Component({
@@ -66,7 +69,6 @@ export class DynamicPageTabChangeEvent {
     standalone: true,
     imports: [
         CoreDynamicPageComponent,
-        NgIf,
         CoreDynamicPageHeaderComponent,
         BreadcrumbComponent,
         NgTemplateOutlet,
@@ -78,7 +80,6 @@ export class DynamicPageTabChangeEvent {
         DynamicPageLayoutActionsComponent,
         DynamicPageSubheaderComponent,
         TabListComponent,
-        NgFor,
         TabPanelComponent,
         DynamicPageContentComponent,
         DynamicPageFooterComponent,
@@ -190,7 +191,10 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     _tabs: DynamicPageContentComponent[] = [];
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, public readonly elementRef: ElementRef<HTMLElement>) {
+    constructor(
+        protected _cd: ChangeDetectorRef,
+        public readonly elementRef: ElementRef<HTMLElement>
+    ) {
         super(_cd);
     }
 

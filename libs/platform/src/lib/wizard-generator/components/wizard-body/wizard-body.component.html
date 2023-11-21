@@ -1,95 +1,97 @@
-<fd-wizard
-    [displaySummaryStep]="displaySummaryStep"
-    [responsivePaddings]="responsivePaddings"
-    [appendToWizard]="appendToWizard"
-    [contentHeight]="contentHeight"
-    *ngIf="visibleItems"
->
-    <fd-wizard-navigation>
-        <ul fd-wizard-progress-bar>
-            <ng-container *ngFor="let step of visibleItems; let i = index; trackBy: _trackFn">
-                <li
-                    fd-wizard-step
-                    [label]="step.name"
-                    [status]="step.status"
-                    [optionalText]="step.optionalText"
-                    [branching]="!!step.branching"
-                    [stepClickValidator]="stepClickValidatorFn(i)"
-                    [isSummary]="!!step.summary"
-                    (statusChange)="stepStatusChanged(step.id, $event)"
-                    (stepClicked)="stepClicked(step.id)"
-                >
-                    <fd-wizard-step-indicator [glyph]="step.icon || null">
-                        <ng-container *ngIf="!step.icon">{{ i + 1 }}</ng-container>
-                    </fd-wizard-step-indicator>
-                    <fd-wizard-content>
-                        <fdp-wizard-generator-step
-                            *ngIf="!step.summary"
-                            [unifiedLayout]="unifiedLayout"
-                            [item]="step"
-                            [stepStatus]="step.status"
-                        ></fdp-wizard-generator-step>
-                        <fdp-wizard-summary-step
-                            *ngIf="step.summary"
-                            [customSummaryStepTemplate]="customSummaryStepTemplate"
-                            [status]="step.status"
-                        ></fdp-wizard-summary-step>
-
-                        <fd-wizard-next-step [canHide]="appendToWizard" *ngIf="navigationButtons">
-                            <ng-container *ngIf="!isLastStep">
-                                <ng-template #defaultGoNextButtonTemplate>
-                                    <fdp-button
-                                        [fdContentDensity]="navigationButtonLabels.goNext.contentDensity"
-                                        [buttonType]="navigationButtonLabels.goNext.type"
-                                        [label]="navigationButtonLabels.goNext.label"
-                                        (click)="goNext.emit()"
-                                    ></fdp-button>
-                                </ng-template>
-                                <ng-template #defaultReviewButtonTemplate>
-                                    <fdp-button
-                                        [fdContentDensity]="navigationButtonLabels.review.contentDensity"
-                                        [buttonType]="navigationButtonLabels.review.type"
-                                        [label]="navigationButtonLabels.review.label"
-                                        (click)="goNext.emit()"
-                                    ></fdp-button>
-                                </ng-template>
-                                <ng-template
-                                    [ngIf]="
-                                        (isBranchingStep && (!isCurrentStepCompleted || stepsOrderChanged)) ||
-                                        !isNextStepSummary
-                                    "
-                                    [ngIfElse]="reviewButton"
-                                >
-                                    <ng-template
-                                        [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
-                                        [ngTemplateOutletContext]="{ goNext: _goNextFn }"
-                                    ></ng-template>
-                                </ng-template>
-                                <ng-template #reviewButton>
-                                    <ng-template
-                                        [ngTemplateOutlet]="reviewButtonTemplate || defaultReviewButtonTemplate"
-                                        [ngTemplateOutletContext]="{ goNext: _goNextFn }"
-                                    ></ng-template>
-                                </ng-template>
-                            </ng-container>
-                            <ng-container *ngIf="isLastStep">
-                                <ng-template #defaultFinishButtonTemplate>
-                                    <fdp-button
-                                        [fdContentDensity]="navigationButtonLabels.finish.contentDensity"
-                                        [buttonType]="navigationButtonLabels.finish.type"
-                                        [label]="navigationButtonLabels.finish.label"
-                                        (click)="finish.emit()"
-                                    ></fdp-button>
-                                </ng-template>
-                                <ng-template
-                                    [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate"
-                                    [ngTemplateOutletContext]="{ finish: _finishFn }"
-                                ></ng-template>
-                            </ng-container>
-                        </fd-wizard-next-step>
-                    </fd-wizard-content>
-                </li>
-            </ng-container>
-        </ul>
-    </fd-wizard-navigation>
-</fd-wizard>
+@if (visibleItems) {
+    <fd-wizard
+        [displaySummaryStep]="displaySummaryStep"
+        [responsivePaddings]="responsivePaddings"
+        [appendToWizard]="appendToWizard"
+        [contentHeight]="contentHeight"
+    >
+        <fd-wizard-navigation>
+            <ul fd-wizard-progress-bar>
+                @for (step of visibleItems; track _trackFn(i, step); let i = $index) {
+                    <li
+                        fd-wizard-step
+                        [label]="step.name"
+                        [status]="step.status"
+                        [optionalText]="step.optionalText"
+                        [branching]="!!step.branching"
+                        [stepClickValidator]="stepClickValidatorFn(i)"
+                        [isSummary]="!!step.summary"
+                        (statusChange)="stepStatusChanged(step.id, $event)"
+                        (stepClicked)="stepClicked(step.id)"
+                    >
+                        <fd-wizard-step-indicator [glyph]="step.icon || null">
+                            @if (!step.icon) {
+                                {{ i + 1 }}
+                            }
+                        </fd-wizard-step-indicator>
+                        <fd-wizard-content>
+                            @if (!step.summary) {
+                                <fdp-wizard-generator-step
+                                    [unifiedLayout]="unifiedLayout"
+                                    [item]="step"
+                                    [stepStatus]="step.status"
+                                ></fdp-wizard-generator-step>
+                            }
+                            @if (step.summary) {
+                                <fdp-wizard-summary-step
+                                    [customSummaryStepTemplate]="customSummaryStepTemplate"
+                                    [status]="step.status"
+                                ></fdp-wizard-summary-step>
+                            }
+                            @if (navigationButtons) {
+                                <fd-wizard-next-step [canHide]="appendToWizard">
+                                    @if (!isLastStep) {
+                                        <ng-template #defaultGoNextButtonTemplate>
+                                            <fdp-button
+                                                [fdContentDensity]="navigationButtonLabels.goNext.contentDensity"
+                                                [buttonType]="navigationButtonLabels.goNext.type"
+                                                [label]="navigationButtonLabels.goNext.label"
+                                                (click)="goNext.emit()"
+                                            ></fdp-button>
+                                        </ng-template>
+                                        <ng-template #defaultReviewButtonTemplate>
+                                            <fdp-button
+                                                [fdContentDensity]="navigationButtonLabels.review.contentDensity"
+                                                [buttonType]="navigationButtonLabels.review.type"
+                                                [label]="navigationButtonLabels.review.label"
+                                                (click)="goNext.emit()"
+                                            ></fdp-button>
+                                        </ng-template>
+                                        @if (
+                                            (isBranchingStep && (!isCurrentStepCompleted || stepsOrderChanged)) ||
+                                            !isNextStepSummary
+                                        ) {
+                                            <ng-template
+                                                [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
+                                                [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                                            ></ng-template>
+                                        } @else {
+                                            <ng-template
+                                                [ngTemplateOutlet]="reviewButtonTemplate || defaultReviewButtonTemplate"
+                                                [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                                            ></ng-template>
+                                        }
+                                    }
+                                    @if (isLastStep) {
+                                        <ng-template #defaultFinishButtonTemplate>
+                                            <fdp-button
+                                                [fdContentDensity]="navigationButtonLabels.finish.contentDensity"
+                                                [buttonType]="navigationButtonLabels.finish.type"
+                                                [label]="navigationButtonLabels.finish.label"
+                                                (click)="finish.emit()"
+                                            ></fdp-button>
+                                        </ng-template>
+                                        <ng-template
+                                            [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate"
+                                            [ngTemplateOutletContext]="{ finish: _finishFn }"
+                                        ></ng-template>
+                                    }
+                                </fd-wizard-next-step>
+                            }
+                        </fd-wizard-content>
+                    </li>
+                }
+            </ul>
+        </fd-wizard-navigation>
+    </fd-wizard>
+}

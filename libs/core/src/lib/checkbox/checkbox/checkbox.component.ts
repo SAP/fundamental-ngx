@@ -1,5 +1,5 @@
 import { CdkPortalOutlet, DomPortal, Portal, PortalModule } from '@angular/cdk/portal';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
     AfterViewInit,
     Attribute,
@@ -56,7 +56,7 @@ export type FdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
     ],
     host: { '[attr.tabindex]': '-1' },
     standalone: true,
-    imports: [NgIf, FormsModule, NgClass, ContentDensityModule, PortalModule]
+    imports: [FormsModule, NgClass, ContentDensityModule, PortalModule]
 })
 export class CheckboxComponent<T = unknown> implements ControlValueAccessor, AfterViewInit, OnDestroy, FormItemControl {
     /** @hidden */

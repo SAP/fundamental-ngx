@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {
     ListItemComponent,
@@ -17,7 +17,6 @@ import { BaseListItem } from '../base-list-item';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         ListItemComponent,
         ListLinkDirective,
         RouterLink,

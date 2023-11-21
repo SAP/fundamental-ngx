@@ -24,7 +24,7 @@ import {
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -68,7 +68,7 @@ let cdkPopoverUniqueId = 0;
         '[attr.id]': 'id'
     },
     standalone: true,
-    imports: [NgIf, CdkOverlayOrigin, NgTemplateOutlet]
+    imports: [CdkOverlayOrigin, NgTemplateOutlet]
 })
 export class PopoverComponent
     extends BasePopoverClass

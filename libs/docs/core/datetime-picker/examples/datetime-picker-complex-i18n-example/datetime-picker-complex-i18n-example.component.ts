@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, Inject, LOCALE_ID, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -50,7 +49,7 @@ const placeholders = new Map([
         }
     ],
     standalone: true,
-    imports: [FormLabelComponent, SelectModule, NgFor, DatetimePickerComponent, FormsModule]
+    imports: [FormLabelComponent, SelectModule, DatetimePickerComponent, FormsModule]
 })
 export class DatetimePickerComplexI18nExampleComponent {
     locale = 'en-ca';

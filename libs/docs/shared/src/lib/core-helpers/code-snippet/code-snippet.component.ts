@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -24,12 +24,16 @@ import { ExampleFile } from '../code-example/example-file';
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <pre [class.bordered]="standAlone">
-            <code class="hljs" [class]="file.language" *ngIf="file" [innerHTML]="_highlightedCode | async"></code>
-            <code #contentBasedElement class="hljs" [class]="language" *ngIf="contentBased"><ng-content></ng-content></code>
-        </pre>
+  @if (file) {
+    <code class="hljs" [class]="file.language" [innerHTML]="_highlightedCode | async"></code>
+  }
+  @if (contentBased) {
+    <code #contentBasedElement class="hljs" [class]="language"><ng-content></ng-content></code>
+  }
+</pre>
     `,
     standalone: true,
-    imports: [NgIf, AsyncPipe]
+    imports: [AsyncPipe]
 })
 export class CodeSnippetComponent implements AfterViewInit, OnChanges {
     @Input()

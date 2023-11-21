@@ -25,7 +25,7 @@ import { filter } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/cdk/utils';
 
 import { PortalModule } from '@angular/cdk/portal';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { PANE_AUTO_SIZE, PANE_NONE_SIZE, RESIZER_SIZE_PX, ROOT_PAGE } from '../constants';
 import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';
 import { SplitterPaginationComponent } from '../splitter-pagination/splitter-pagination.component';
@@ -49,10 +49,8 @@ import {
     },
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         SplitterPaginationComponent,
-        NgFor,
         PortalModule,
         SplitterResizerComponent,
         forwardRef(() => NoDefaultPanePipe)

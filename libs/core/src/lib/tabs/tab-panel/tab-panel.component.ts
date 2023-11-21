@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -31,7 +30,10 @@ export class TabPanelStateChange {
      * @param target Tab panel that is being changed
      * @param state New state of the tab panel
      */
-    constructor(public target: TabPanelComponent, public state: boolean) {}
+    constructor(
+        public target: TabPanelComponent,
+        public state: boolean
+    ) {}
 }
 
 /**
@@ -49,7 +51,7 @@ export class TabPanelStateChange {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class TabPanelComponent implements OnChanges {
     /** Id of the tab. If none is provided, one will be generated. */

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageModule } from '../../dynamic-page.module';

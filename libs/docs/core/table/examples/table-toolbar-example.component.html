@@ -39,19 +39,21 @@
             </tr>
         </thead>
         <tbody fd-table-body>
-            <tr *ngFor="let row of displayedRows" fd-table-row>
-                <td fd-table-cell>{{ row.column1 }}</td>
-                <td fd-table-cell>{{ row.column2 }}</td>
-                <td fd-table-cell>{{ row.region }}</td>
-            </tr>
-
-            <tr *ngIf="!displayedRows || !displayedRows.length" fd-table-row>
-                <td fd-table-cell [noData]="true">No Results Found!</td>
-            </tr>
+            @for (row of displayedRows; track row) {
+                <tr fd-table-row>
+                    <td fd-table-cell>{{ row.column1 }}</td>
+                    <td fd-table-cell>{{ row.column2 }}</td>
+                    <td fd-table-cell>{{ row.region }}</td>
+                </tr>
+            }
+            @if (!displayedRows || !displayedRows.length) {
+                <tr fd-table-row>
+                    <td fd-table-cell [noData]="true">No Results Found!</td>
+                </tr>
+            }
         </tbody>
     </table>
 </fd-busy-indicator>
-
 <ng-template [fdDialogTemplate] let-dialog let-dialogConfig="dialogConfig" #newItemDialog>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>

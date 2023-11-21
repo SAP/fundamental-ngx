@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
@@ -27,7 +27,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
         provideDateTimeFormats()
     ],
     standalone: true,
-    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule, JsonPipe]
+    imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

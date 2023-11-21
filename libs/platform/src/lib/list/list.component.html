@@ -16,7 +16,7 @@
     [role]="role"
     [unreadIndicator]="unreadIndicator"
 >
-    <ng-container *ngIf="loadMore && loadOnScroll">
+    @if (loadMore && loadOnScroll) {
         <fd-busy-indicator
             size="l"
             class="fd-busy-indicator-custom fd-list__item--growing"
@@ -35,28 +35,95 @@
                 [scrollPercent]="scrollOffsetPercentage"
                 [role]="role"
             >
-                <ng-container *ngIf="_items.length !== 0; then thenBlock; else elseBlock"></ng-container>
+                @if (_items.length !== 0) {
+                    @for (item of _items; track item; let i = $index) {
+                        <ng-container *ngTemplateOutlet="listItemDef.templateRef; context: { $implicit: item }">
+                        </ng-container>
+                    }
+                } @else {
+                    @if (!listItems.length && !_firstLoadingDone) {
+                        @if (!hasByLine) {
+                            <li fd-list-item *fdkRepeat="3">
+                                <fd-skeleton
+                                    [style.margin]="'auto 0'"
+                                    type="text"
+                                    textLines="1"
+                                    width="40%"
+                                ></fd-skeleton>
+                            </li>
+                        } @else {
+                            <li fd-list-item *fdkRepeat="3">
+                                <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
+                                    <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                                    <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                                    <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                                </fd-skeleton>
+                            </li>
+                        }
+                        <ng-template #bylineLoading>
+                            <li fd-list-item *fdkRepeat="3">
+                                <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
+                                    <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                                    <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                                    <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                                </fd-skeleton>
+                            </li>
+                        </ng-template>
+                    }
+                    <ng-content></ng-content>
+                }
             </div>
         </fd-busy-indicator>
-    </ng-container>
-    <ng-container *ngIf="!loadOnScroll">
-        <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
-        <li
-            #listItem
-            *ngIf="loadMore && !loadOnScroll && _firstLoadingDone"
-            (click)="_getMoreData()"
-            fd-list-item
-            (keydown)="_loadOnKeyPress($event)"
-            [class.fd-list__item--custom-content]="loadMoreContent"
-            class="fd-list__item fd-list__item--growing fd-list__item--action"
-            [tabindex]="0"
-            role="button"
-        >
-            <ng-template [ngTemplateOutlet]="loadMoreElementContent"></ng-template>
-        </li>
-    </ng-container>
+    }
+    @if (!loadOnScroll) {
+        @if (_items.length !== 0) {
+            @for (item of _items; track item; let i = $index) {
+                <ng-container *ngTemplateOutlet="listItemDef.templateRef; context: { $implicit: item }"> </ng-container>
+            }
+        } @else {
+            @if (!listItems.length && !_firstLoadingDone) {
+                @if (!hasByLine) {
+                    <li fd-list-item *fdkRepeat="3">
+                        <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="40%"></fd-skeleton>
+                    </li>
+                } @else {
+                    <li fd-list-item *fdkRepeat="3">
+                        <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
+                            <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                            <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                            <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                        </fd-skeleton>
+                    </li>
+                }
+                <ng-template #bylineLoading>
+                    <li fd-list-item *fdkRepeat="3">
+                        <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
+                            <svg:rect x="0" y="0" width="48" height="48" rx="4" />
+                            <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
+                            <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
+                        </fd-skeleton>
+                    </li>
+                </ng-template>
+            }
+            <ng-content></ng-content>
+        }
+        @if (loadMore && !loadOnScroll && _firstLoadingDone) {
+            <li
+                #listItem
+                (click)="_getMoreData()"
+                fd-list-item
+                (keydown)="_loadOnKeyPress($event)"
+                [class.fd-list__item--custom-content]="loadMoreContent"
+                class="fd-list__item fd-list__item--growing fd-list__item--action"
+                [tabindex]="0"
+                role="button"
+            >
+                <ng-template [ngTemplateOutlet]="loadMoreElementContent"></ng-template>
+            </li>
+        }
+    }
     <ng-template #loadMoreElementContent>
-        <ng-container *ngIf="loadMoreContent; else defaultContent">
+        @if (loadMoreContent) {
             <div class="fd-list__title">
                 <ng-template
                     [ngTemplateOutlet]="loadMoreContent.templateRef"
@@ -64,8 +131,7 @@
                 >
                 </ng-template>
             </div>
-        </ng-container>
-        <ng-template #defaultContent>
+        } @else {
             <button class="fd-list__title">
                 <fd-busy-indicator
                     size="m"
@@ -79,31 +145,6 @@
                 {{ loadTitle }}
                 <ng-content select="#load"></ng-content>
             </button>
-        </ng-template>
+        }
     </ng-template>
 </ul>
-
-<ng-template #thenBlock>
-    <ng-container *ngFor="let item of _items; let i = index">
-        <ng-container *ngTemplateOutlet="listItemDef.templateRef; context: { $implicit: item }"> </ng-container>
-    </ng-container>
-</ng-template>
-<ng-template #elseBlock>
-    <ng-container *ngIf="!listItems.length && !_firstLoadingDone">
-        <ng-container *ngIf="!hasByLine; else bylineLoading">
-            <li fd-list-item *fdkRepeat="3">
-                <fd-skeleton [style.margin]="'auto 0'" type="text" textLines="1" width="40%"></fd-skeleton>
-            </li>
-        </ng-container>
-        <ng-template #bylineLoading>
-            <li fd-list-item *fdkRepeat="3">
-                <fd-skeleton width="100%" height="48px" [style.margin]="'auto 0'">
-                    <svg:rect x="0" y="0" width="48" height="48" rx="4" />
-                    <svg:rect x="60" y="0" width="40%" height="12" rx="4" />
-                    <svg:rect x="60" y="20" width="30%" height="8" rx="4" />
-                </fd-skeleton>
-            </li>
-        </ng-template>
-    </ng-container>
-    <ng-content></ng-content>
-</ng-template>

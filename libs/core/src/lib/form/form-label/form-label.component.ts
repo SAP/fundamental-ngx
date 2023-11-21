@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -34,7 +34,7 @@ let formLabelIdCount = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [LinkComponent, NgIf, IconComponent, InlineHelpModule, NgTemplateOutlet]
+    imports: [LinkComponent, IconComponent, InlineHelpModule, NgTemplateOutlet]
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required. */

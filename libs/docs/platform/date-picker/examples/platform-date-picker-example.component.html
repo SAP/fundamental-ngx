@@ -25,7 +25,6 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-
     <fdp-form-field #ffl2 id="examdate" [column]="2" [rank]="1" [required]="true" label="Single type date-picker:">
         <fdp-date-picker
             name="examdate"
@@ -37,7 +36,6 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-
     <fdp-form-field
         #ffl3
         id="holiday"
@@ -58,7 +56,6 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-
     <fdp-form-field #ffl4 id="journeydate" [column]="2" [rank]="2" label="Range type date-picker:">
         <fdp-date-picker
             name="journeydate"
@@ -81,25 +78,21 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-
     <ng-template #i18n let-errors>
-        <ng-container *ngIf="errors.required">
+        @if (errors.required) {
             <span>Value is required</span>
-        </ng-container>
-
-        <ng-container *ngIf="errors.nullRangeDate"> Range date is invalid. </ng-container>
+        }
+        @if (errors.nullRangeDate) {
+            Range date is invalid.
+        }
     </ng-template>
 </fdp-form-group>
-
 <p>Birthday: {{ datePickerForm.controls.birthday.value?.toDateString() }}</p>
 <span>Exam Date: {{ datePickerForm.controls.examdate.value?.toDateString() }}</span>
-
 <p>Holiday Start Date: {{ datePickerForm.controls.holiday.value?.start?.toDateString() }}</p>
 <span>Holiday End Date: {{ datePickerForm.controls.holiday.value?.end?.toDateString() }}</span>
-
 <p>Journey Start Date: {{ datePickerForm.controls.journeydate.value?.start?.toDateString() }}</p>
 <span>Journey End Date: {{ datePickerForm.controls.journeydate.value?.end?.toDateString() }}</span>
-
 <h3>Date Picker with Template Driven Form.</h3>
 <!--Template Driven Form-->
 <fdp-form-group columnLayout="XL2-L2-M1-S1">
@@ -114,7 +107,6 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-
     <fdp-form-field
         id="holiday"
         [column]="1"
@@ -134,7 +126,6 @@
         >
         </fdp-date-picker>
     </fdp-form-field>
-
     <fdp-form-field id="disableddate" [column]="2" [rank]="1" label="Disabled Date Picker:">
         <fdp-date-picker
             name="disabledDate"
@@ -144,20 +135,19 @@
             dateInputLabel="date input mm/dd/yyy"
         ></fdp-date-picker>
     </fdp-form-field>
-
     <ng-template #i18n let-errors>
-        <ng-container *ngIf="errors.required">
+        @if (errors.required) {
             <span>Value is required</span>
-        </ng-container>
-        <ng-container *ngIf="errors.nullRangeDate"> Range date is invalid. </ng-container>
+        }
+        @if (errors.nullRangeDate) {
+            Range date is invalid.
+        }
     </ng-template>
 </fdp-form-group>
-
 <!--Date picker use outside form-->
 <h3>Date Picker Use Outside Form.</h3>
 <fdp-date-picker name="dateOutsideForm" placeholder="mm/dd/yyyy" type="single" [(ngModel)]="dateOutsideForm">
 </fdp-date-picker>
-
 <h3>Range Date Picker Outside Form.</h3>
 <fdp-date-picker
     name="rangeDateOutsideForm"

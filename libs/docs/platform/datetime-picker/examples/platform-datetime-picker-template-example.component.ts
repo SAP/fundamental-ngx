@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { FdpFormGroupModule, PlatformDatetimePickerComponent } from '@fundamental-ngx/platform/form';
@@ -15,7 +14,7 @@ import { FdpFormGroupModule, PlatformDatetimePickerComponent } from '@fundamenta
         provideDateTimeFormats()
     ],
     standalone: true,
-    imports: [FdpFormGroupModule, PlatformDatetimePickerComponent, FormsModule, NgIf]
+    imports: [FdpFormGroupModule, PlatformDatetimePickerComponent, FormsModule]
 })
 export class PlatformDatetimePickerTemplateExampleComponent {
     date: FdDate = FdDate.getNow();

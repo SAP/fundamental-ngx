@@ -1,45 +1,45 @@
-<div class="fd-shellbar__action fd-shellbar__action--show-always" *ngIf="user">
-    <div class="fd-user-menu">
-        <button
-            fd-button
-            fdType="transparent"
-            class="fd-shellbar__button fd-shellbar__button--user-menu"
-            [disabled]="disabled"
-            [fdMenuTrigger]="menu"
-        >
-            <fd-avatar
-                size="xs"
-                *ngIf="!user.image"
-                [colorAccent]="user.colorAccent"
-                [circle]="true"
-                label="{{ user.fullName }}"
+@if (user) {
+    <div class="fd-shellbar__action fd-shellbar__action--show-always">
+        <div class="fd-user-menu">
+            <button
+                fd-button
+                fdType="transparent"
+                class="fd-shellbar__button fd-shellbar__button--user-menu"
+                [disabled]="disabled"
+                [fdMenuTrigger]="menu"
             >
-            </fd-avatar>
-
-            <fd-avatar
-                [colorAccent]="user.colorAccent"
-                [circle]="true"
-                size="xs"
-                *ngIf="user.image"
-                image="{{ user.image }}"
-            ></fd-avatar>
-        </button>
-
-        <fd-menu
-            #menu
-            *ngIf="userMenu"
-            [triggers]="triggers"
-            [placement]="placement"
-            [fillControlMode]="fillControlMode"
-            [closeOnEscapeKey]="closeOnEscapeKey"
-            [noArrow]="noArrow"
-            [closeOnOutsideClick]="closeOnOutsideClick"
-        >
-            <li fd-menu-item *ngFor="let item of userMenu" (click)="itemClick(item, $event)">
-                <div fd-menu-interactive>
-                    <span fd-menu-title>{{ item.text }}</span>
-                </div>
-            </li>
-        </fd-menu>
+                @if (!user.image) {
+                    <fd-avatar size="xs" [colorAccent]="user.colorAccent" [circle]="true" label="{{ user.fullName }}">
+                    </fd-avatar>
+                }
+                @if (user.image) {
+                    <fd-avatar
+                        [colorAccent]="user.colorAccent"
+                        [circle]="true"
+                        size="xs"
+                        image="{{ user.image }}"
+                    ></fd-avatar>
+                }
+            </button>
+            @if (userMenu) {
+                <fd-menu
+                    #menu
+                    [triggers]="triggers"
+                    [placement]="placement"
+                    [fillControlMode]="fillControlMode"
+                    [closeOnEscapeKey]="closeOnEscapeKey"
+                    [noArrow]="noArrow"
+                    [closeOnOutsideClick]="closeOnOutsideClick"
+                >
+                    @for (item of userMenu; track item) {
+                        <li fd-menu-item (click)="itemClick(item, $event)">
+                            <div fd-menu-interactive>
+                                <span fd-menu-title>{{ item.text }}</span>
+                            </div>
+                        </li>
+                    }
+                </fd-menu>
+            }
+        </div>
     </div>
-</div>
+}

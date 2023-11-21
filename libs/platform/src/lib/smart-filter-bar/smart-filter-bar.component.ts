@@ -36,7 +36,7 @@ import { FDP_PRESET_MANAGED_COMPONENT, SelectItem } from '@fundamental-ngx/platf
 import { CollectionFilterGroup, FilterableColumnDataType, FilterType } from '@fundamental-ngx/platform/table';
 
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
     ToolbarComponent,
@@ -111,8 +111,6 @@ const smartFilterBarProvider: Provider = {
     standalone: true,
     imports: [
         ToolbarComponent,
-        NgIf,
-        NgFor,
         NgTemplateOutlet,
         ToolbarSeparatorComponent,
         SearchFieldComponent,

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -25,7 +24,7 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
+    imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class FormInputMessageGroupComponent {
     /**

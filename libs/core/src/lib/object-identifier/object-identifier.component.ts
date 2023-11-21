@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterContentInit,
     ChangeDetectionStrategy,
@@ -22,15 +21,17 @@ import { startWith, takeUntil } from 'rxjs/operators';
         <p class="fd-object-identifier__title" [class.fd-object-identifier__title--bold]="bold">
             <ng-content></ng-content>
         </p>
-        <p class="fd-object-identifier__text" *ngIf="description">
-            {{ description }}
-        </p>
+        @if (description) {
+            <p class="fd-object-identifier__text">
+                {{ description }}
+            </p>
+        }
     `,
     styleUrls: ['./object-identifier.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     /** Description text */

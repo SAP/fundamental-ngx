@@ -1,4 +1,4 @@
-<ng-template [ngIf]="items && items.length > 0" [ngIfElse]="subHeader">
+@if (items && items.length > 0) {
     <button
         fd-button
         fdType="transparent"
@@ -11,7 +11,6 @@
     >
         <span class="fd-shellbar__title">{{ control }}</span>
     </button>
-
     <fd-menu
         #menu
         [placement]="placement"
@@ -20,21 +19,23 @@
         [closeOnEscapeKey]="closeOnEscapeKey"
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
-        <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
-            <a
-                [attr.href]="item.link ? item.link : null"
-                [attr.target]="item.newTab ? '_blank' : null"
-                fd-menu-interactive
-            >
-                <span fd-menu-title>{{ item.name }}</span>
-                <fd-icon *ngIf="item.glyph" fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
-            </a>
-        </li>
+        @for (item of items; track item) {
+            <li (click)="itemClicked(item, $event)" fd-menu-item>
+                <a
+                    [attr.href]="item.link ? item.link : null"
+                    [attr.target]="item.newTab ? '_blank' : null"
+                    fd-menu-interactive
+                >
+                    <span fd-menu-title>{{ item.name }}</span>
+                    @if (item.glyph) {
+                        <fd-icon fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
+                    }
+                </a>
+            </li>
+        }
     </fd-menu>
-</ng-template>
-
-<ng-template #subHeader>
+} @else {
     <span class="fd-shellbar__title fd-product-menu__title">
         {{ control }}
     </span>
-</ng-template>
+}

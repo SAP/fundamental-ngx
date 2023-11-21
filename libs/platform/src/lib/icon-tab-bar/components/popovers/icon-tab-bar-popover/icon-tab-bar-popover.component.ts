@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -9,16 +9,7 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
     selector: 'fdp-icon-tab-bar-popover',
     templateUrl: './icon-tab-bar-popover.component.html',
     standalone: true,
-    imports: [
-        PopoverComponent,
-        PopoverControlComponent,
-        PopoverBodyComponent,
-        NgFor,
-        NgIf,
-        IconComponent,
-        NgClass,
-        ButtonComponent
-    ]
+    imports: [PopoverComponent, PopoverControlComponent, PopoverBodyComponent, IconComponent, NgClass, ButtonComponent]
 })
 export class IconTabBarPopoverComponent extends IconTabBarPopoverBase {
     /** @hidden list of tab html elements, that can receive focus */

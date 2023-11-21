@@ -6,101 +6,109 @@
             </ng-template>
         </fd-dialog-header>
         <fd-dialog-body [dir]="_dir">
-            <ng-container *ngIf="!mobile">
+            @if (!mobile) {
                 <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
-            </ng-container>
+            }
             <div fd-scrollbar class="fdp-value-help-dialog__content-holder">
-                <ng-container *ngIf="mobile">
+                @if (mobile) {
                     <ng-container *ngTemplateOutlet="advancedSearchContent"></ng-container>
-                </ng-container>
-
-                <ng-container *ngIf="selectedTab === _tabTypes.selectFromList">
+                }
+                @if (selectedTab === _tabTypes.selectFromList) {
                     <ng-container *ngTemplateOutlet="selectionContent"></ng-container>
-                </ng-container>
-
-                <ng-container *ngIf="selectedTab === _tabTypes.defineConditions">
+                }
+                @if (selectedTab === _tabTypes.defineConditions) {
                     <ng-container *ngTemplateOutlet="defineConditionsContent"></ng-container>
-                </ng-container>
+                }
             </div>
         </fd-dialog-body>
         <fd-dialog-footer [dir]="_dir">
             <ng-template fdkTemplate="footer">
-                <div
-                    class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row"
-                    [attr.aria-label]="'platformVHD.selectionBarLabel' | fdTranslate"
-                    *ngIf="!isMobileAdvancedSearchActive"
-                >
-                    <h5 fd-title class="selected-and-condition-title" [id]="id + '-selected-item'">
-                        <ng-container *ngIf="hasSelectedAndConditions; else noItemsPanelTitle">
-                            {{ 'platformVHD.selectedAndConditionLabel' | fdTranslate }}
-                            ({{ selectedItems.length + validConditions.length }})
-                        </ng-container>
-                    </h5>
-
-                    <div class="fdp-value-help-dialog__tokens-wrapper">
-                        <div class="fdp-value-help-dialog__tokens">
-                            <!-- Selected items -->
-                            <fd-tokenizer [tokenizerFocusable]="false">
-                                <fd-token
-                                    fd-toolbar-item
-                                    fdOverflowPriority="high"
-                                    class="fdp-value-help-dialog__selection-token"
-                                    (onCloseClick)="removeSelected(selectedIndex)"
-                                    *ngFor="
-                                        let item of selectedItems;
-                                        index as selectedIndex;
-                                        trackBy: _trackBySelectedFn
-                                    "
-                                    >{{ !!tokenizerFn ? (item | displayFnPipe : tokenizerFn) : item[tokenViewField] }}
-                                </fd-token>
-                                <fd-token
-                                    fd-toolbar-item
-                                    fdOverflowPriority="high"
-                                    class="fdp-value-help-dialog__selection-token"
-                                    (onCloseClick)="removeCondition(conditionIndex)"
-                                    *ngFor="
-                                        let item of validConditions;
-                                        index as conditionIndex;
-                                        trackBy: _trackByConditionFn
-                                    "
-                                >
-                                    <ng-container
-                                        [ngTemplateOutlet]="conditionValue"
-                                        [ngTemplateOutletContext]="{ item: item }"
-                                    ></ng-container>
-                                </fd-token>
-                                <input fd-form-control fd-tokenizer-input [disabled]="!hasSelectedAndConditions" />
-                            </fd-tokenizer>
+                @if (!isMobileAdvancedSearchActive) {
+                    <div
+                        class="fdp-value-help-dialog__row fdp-value-help-dialog__selection-row"
+                        [attr.aria-label]="'platformVHD.selectionBarLabel' | fdTranslate"
+                    >
+                        <h5 fd-title class="selected-and-condition-title" [id]="id + '-selected-item'">
+                            @if (hasSelectedAndConditions) {
+                                {{ 'platformVHD.selectedAndConditionLabel' | fdTranslate }}
+                                ({{ selectedItems.length + validConditions.length }})
+                            } @else {
+                                {{ 'platformVHD.selectedEmptyLabel' | fdTranslate }}
+                            }
+                        </h5>
+                        <div class="fdp-value-help-dialog__tokens-wrapper">
+                            <div class="fdp-value-help-dialog__tokens">
+                                <!-- Selected items -->
+                                <fd-tokenizer [tokenizerFocusable]="false">
+                                    @for (
+                                        item of selectedItems;
+                                        track _trackBySelectedFn(selectedIndex, item);
+                                        let selectedIndex = $index
+                                    ) {
+                                        <fd-token
+                                            fd-toolbar-item
+                                            fdOverflowPriority="high"
+                                            class="fdp-value-help-dialog__selection-token"
+                                            (onCloseClick)="removeSelected(selectedIndex)"
+                                            >{{
+                                                !!tokenizerFn
+                                                    ? (item | displayFnPipe: tokenizerFn)
+                                                    : item[tokenViewField]
+                                            }}
+                                        </fd-token>
+                                    }
+                                    @for (
+                                        item of validConditions;
+                                        track _trackByConditionFn(conditionIndex, item);
+                                        let conditionIndex = $index
+                                    ) {
+                                        <fd-token
+                                            fd-toolbar-item
+                                            fdOverflowPriority="high"
+                                            class="fdp-value-help-dialog__selection-token"
+                                            (onCloseClick)="removeCondition(conditionIndex)"
+                                        >
+                                            <ng-container
+                                                [ngTemplateOutlet]="conditionValue"
+                                                [ngTemplateOutletContext]="{ item: item }"
+                                            ></ng-container>
+                                        </fd-token>
+                                    }
+                                    <input fd-form-control fd-tokenizer-input [disabled]="!hasSelectedAndConditions" />
+                                </fd-tokenizer>
+                            </div>
+                            <button
+                                (click)="clearSelectedAndConditionItems()"
+                                class="fdp-value-help-dialog__tokens-clear"
+                                fd-button
+                                [disabled]="!hasSelectedAndConditions"
+                                fdType="transparent"
+                                [title]="'platformVHD.footerClearSelectedTitle' | fdTranslate"
+                                glyph="decline"
+                                [attr.aria-label]="'platformVHD.footerClearSelectedAriaLabel' | fdTranslate"
+                            ></button>
                         </div>
-                        <button
-                            (click)="clearSelectedAndConditionItems()"
-                            class="fdp-value-help-dialog__tokens-clear"
-                            fd-button
-                            [disabled]="!hasSelectedAndConditions"
-                            fdType="transparent"
-                            [title]="'platformVHD.footerClearSelectedTitle' | fdTranslate"
-                            glyph="decline"
-                            [attr.aria-label]="'platformVHD.footerClearSelectedAriaLabel' | fdTranslate"
-                        ></button>
                     </div>
-                </div>
+                }
                 <div class="fdp-value-help-dialog__actions-row">
-                    <button
-                        fd-button
-                        data-go-advanced
-                        [label]="'platformVHD.searchButtonLabel' | fdTranslate"
-                        fdType="emphasized"
-                        *ngIf="mobile && isOpenAdvanced"
-                        (click)="searchAdvanced()"
-                    ></button>
-                    <button
-                        fd-button
-                        data-succes
-                        [label]="'platformVHD.successButtonLabel' | fdTranslate"
-                        fdType="emphasized"
-                        *ngIf="selectedTab !== _tabTypes.advancedSearch"
-                        (click)="success()"
-                    ></button>
+                    @if (mobile && isOpenAdvanced) {
+                        <button
+                            fd-button
+                            data-go-advanced
+                            [label]="'platformVHD.searchButtonLabel' | fdTranslate"
+                            fdType="emphasized"
+                            (click)="searchAdvanced()"
+                        ></button>
+                    }
+                    @if (selectedTab !== _tabTypes.advancedSearch) {
+                        <button
+                            fd-button
+                            data-succes
+                            [label]="'platformVHD.successButtonLabel' | fdTranslate"
+                            fdType="emphasized"
+                            (click)="success()"
+                        ></button>
+                    }
                     <button
                         fd-button
                         data-dismiss-dialog
@@ -113,136 +121,129 @@
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
-
-<ng-template #noItemsPanelTitle>
-    {{ 'platformVHD.selectedEmptyLabel' | fdTranslate }}
-</ng-template>
-
 <ng-template #advancedSearchContent>
-    <ng-container *ngIf="isSelectionTab">
+    @if (isSelectionTab) {
         <form class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search" [id]="'advanced-search-' + id">
-            <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
-                <div fdLayoutGridRow>
-                    <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
-                        <fdp-search-field
-                            [placeholder]="'platformVHD.searchButtonLabel' | fdTranslate"
-                            (searchSubmit)="search()"
-                            (inputChange)="_mainSearch = $event.text"
-                        ></fdp-search-field>
-                    </div>
-
-                    <div
-                        [fdLayoutGridCol]="12"
-                        [colMd]="12"
-                        [colLg]="mobile ? 12 : 6"
-                        [colXl]="mobile ? 12 : 6"
-                        *ngIf="_hasAdvanced"
-                        class="fdp-value-help-dialog__advanced-actions"
-                    >
-                        <fd-toolbar [clearBorder]="true">
-                            <fd-toolbar-spacer></fd-toolbar-spacer>
-                            <button
-                                fd-toolbar-item
-                                fd-button
-                                fdType="transparent"
-                                *ngIf="_hasAdvanced"
-                                [label]="
-                                    (mobile
-                                        ? 'platformVHD.searchAdvancedSearchLabel'
-                                        : isOpenAdvanced
-                                        ? 'platformVHD.searchHideAdvancedSearchLabel'
-                                        : 'platformVHD.searchShowAdvancedSearchLabel'
-                                    ) | fdTranslate
-                                "
-                                (click)="toggleAdvancedSearch()"
-                            ></button>
-                            <button
-                                fd-toolbar-item
-                                type="submit"
-                                fd-button
-                                fdType="emphasized"
-                                [label]="'platformVHD.searchButtonLabel' | fdTranslate"
-                                (click)="filter()"
-                            ></button>
-                        </fd-toolbar>
-                    </div>
-                </div>
-            </fd-layout-grid>
-            <div
-                [id]="'advanced-search-content-' + id"
-                *ngIf="isOpenAdvanced && _hasAdvanced"
-                class="fdp-value-help-dialog__advanced-filters"
-            >
-                <fd-busy-indicator [loading]="loadingState && _firstLoadingDone" [block]="true">
-                    <fd-layout-grid
-                        *ngIf="_firstLoadingDone; else filtersLoading"
-                        [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters"
-                    >
-                        <div fdLayoutGridRow>
-                            <ng-container
-                                *ngFor="
-                                    let filter of _displayedFilters | slice : 0 : shownFilterCount + 1;
-                                    trackBy: _trackByFilterFn
-                                "
-                            >
-                                <ng-container *ngIf="filter.advanced">
-                                    <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
-                                        <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
-                                            >{{ filter.label }}:</label
-                                        >
-                                        <input
-                                            [(ngModel)]="filter.value"
-                                            fd-form-control
-                                            type="text"
-                                            [name]="'search-by-' + filter.label"
-                                            [id]="'input' + filter.key"
-                                        />
-                                    </div>
-                                </ng-container>
-                            </ng-container>
-
+            @if (!mobile || (mobile && !isOpenAdvanced)) {
+                <fd-layout-grid>
+                    <div fdLayoutGridRow>
+                        <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
+                            <fdp-search-field
+                                [placeholder]="'platformVHD.searchButtonLabel' | fdTranslate"
+                                (searchSubmit)="search()"
+                                (inputChange)="_mainSearch = $event.text"
+                            ></fdp-search-field>
+                        </div>
+                        @if (_hasAdvanced) {
                             <div
-                                colGrow
                                 [fdLayoutGridCol]="12"
                                 [colMd]="12"
-                                [colLg]="6"
-                                [colXl]="3"
-                                *ngIf="filters.length > maxShownInitialFilters"
-                                class="fdp-value-help-dialog__toggle-filters"
+                                [colLg]="mobile ? 12 : 6"
+                                [colXl]="mobile ? 12 : 6"
+                                class="fdp-value-help-dialog__advanced-actions"
                             >
-                                <button
-                                    fd-button
-                                    fdType="transparent"
-                                    (click)="toggleShownFilters()"
-                                    [label]="
-                                        (isShowAllFilters
-                                            ? 'platformVHD.searchHideAllAdvancedSearchLabel'
-                                            : 'platformVHD.searchShowAllAdvancedSearchLabel'
-                                        ) | fdTranslate
-                                    "
-                                ></button>
+                                <fd-toolbar [clearBorder]="true">
+                                    <fd-toolbar-spacer></fd-toolbar-spacer>
+                                    @if (_hasAdvanced) {
+                                        <button
+                                            fd-toolbar-item
+                                            fd-button
+                                            fdType="transparent"
+                                            [label]="
+                                                (mobile
+                                                    ? 'platformVHD.searchAdvancedSearchLabel'
+                                                    : isOpenAdvanced
+                                                      ? 'platformVHD.searchHideAdvancedSearchLabel'
+                                                      : 'platformVHD.searchShowAdvancedSearchLabel'
+                                                ) | fdTranslate
+                                            "
+                                            (click)="toggleAdvancedSearch()"
+                                        ></button>
+                                    }
+                                    <button
+                                        fd-toolbar-item
+                                        type="submit"
+                                        fd-button
+                                        fdType="emphasized"
+                                        [label]="'platformVHD.searchButtonLabel' | fdTranslate"
+                                        (click)="filter()"
+                                    ></button>
+                                </fd-toolbar>
                             </div>
-                        </div>
-                    </fd-layout-grid>
-
-                    <ng-template #filtersLoading>
-                        <fd-skeleton width="100%" height="100px">
-                            <svg:rect x="0" y="0" rx="4" width="15%" height="8" />
-                            <svg:rect x="0" y="20" rx="4" width="25%" height="16" />
-
-                            <svg:rect x="35%" y="0" rx="4" width="15%" height="8" />
-                            <svg:rect x="35%" y="20" rx="4" width="25%" height="16" />
-
-                            <svg:rect x="0" y="60" rx="4" width="15%" height="8" />
-                            <svg:rect x="0" y="80" rx="4" width="25%" height="16" />
-                        </fd-skeleton>
-                    </ng-template>
-                </fd-busy-indicator>
-            </div>
+                        }
+                    </div>
+                </fd-layout-grid>
+            }
+            @if (isOpenAdvanced && _hasAdvanced) {
+                <div [id]="'advanced-search-content-' + id" class="fdp-value-help-dialog__advanced-filters">
+                    <fd-busy-indicator [loading]="loadingState && _firstLoadingDone" [block]="true">
+                        @if (_firstLoadingDone) {
+                            <fd-layout-grid
+                                [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters"
+                            >
+                                <div fdLayoutGridRow>
+                                    @for (
+                                        filter of _displayedFilters | slice: 0 : shownFilterCount + 1;
+                                        track _trackByFilterFn($index, filter)
+                                    ) {
+                                        @if (filter.advanced) {
+                                            <div [fdLayoutGridCol]="12" [colMd]="12" [colLg]="6" [colXl]="3">
+                                                <label
+                                                    class="fd-form-group__header"
+                                                    fd-form-label
+                                                    [for]="'input' + filter.key"
+                                                    >{{ filter.label }}:</label
+                                                >
+                                                <input
+                                                    [(ngModel)]="filter.value"
+                                                    fd-form-control
+                                                    type="text"
+                                                    [name]="'search-by-' + filter.label"
+                                                    [id]="'input' + filter.key"
+                                                />
+                                            </div>
+                                        }
+                                    }
+                                    @if (filters.length > maxShownInitialFilters) {
+                                        <div
+                                            colGrow
+                                            [fdLayoutGridCol]="12"
+                                            [colMd]="12"
+                                            [colLg]="6"
+                                            [colXl]="3"
+                                            class="fdp-value-help-dialog__toggle-filters"
+                                        >
+                                            <button
+                                                fd-button
+                                                fdType="transparent"
+                                                (click)="toggleShownFilters()"
+                                                [label]="
+                                                    (isShowAllFilters
+                                                        ? 'platformVHD.searchHideAllAdvancedSearchLabel'
+                                                        : 'platformVHD.searchShowAllAdvancedSearchLabel'
+                                                    ) | fdTranslate
+                                                "
+                                            ></button>
+                                        </div>
+                                    }
+                                </div>
+                            </fd-layout-grid>
+                        } @else {
+                            <fd-skeleton width="100%" height="100px">
+                                <svg:rect x="0" y="0" rx="4" width="15%" height="8" />
+                                <svg:rect x="0" y="20" rx="4" width="25%" height="16" />
+                                <svg:rect x="35%" y="0" rx="4" width="15%" height="8" />
+                                <svg:rect x="35%" y="20" rx="4" width="25%" height="16" />
+                                <svg:rect x="0" y="60" rx="4" width="15%" height="8" />
+                                <svg:rect x="0" y="80" rx="4" width="25%" height="16" />
+                            </fd-skeleton>
+                        }
+                    </fd-busy-indicator>
+                </div>
+            }
         </form>
-    </ng-container>
+    }
 </ng-template>
-
 <ng-template #selectionContent>
     <fd-busy-indicator
         [loading]="loadingState && _firstLoadingDone"
@@ -265,7 +266,6 @@
         ></fdp-select-tab>
     </fd-busy-indicator>
 </ng-template>
-
 <ng-template #defineConditionsContent>
     <div fd-scrollbar>
         <fdp-define-tab
@@ -278,13 +278,11 @@
         ></fdp-define-tab>
     </div>
 </ng-template>
-
 <ng-template #dialogTitleText>
     <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
 </ng-template>
-
 <ng-template #tabLink let-title="title" let-type="type">
-    <ng-container *ngIf="selectedTab === type && showSelectionTab && showDefineTab">
+    @if (selectedTab === type && showSelectionTab && showDefineTab) {
         <button
             fd-button
             glyph="navigation-left-arrow"
@@ -293,8 +291,8 @@
             [title]="'platformVHD.selectMobileTabBackBtnTitle' | fdTranslate"
         ></button>
         <h5 fd-title>{{ title }}</h5>
-    </ng-container>
-    <ng-container *ngIf="selectedTab !== type">
+    }
+    @if (selectedTab !== type) {
         <a
             fd-list-link
             (click)="switchTab(type)"
@@ -303,96 +301,104 @@
             <span fd-list-title>{{ title }}</span>
             <i fd-list-icon glyph="navigation-right-arrow"></i>
         </a>
-    </ng-container>
+    }
 </ng-template>
-
 <ng-template #advancedHeader>
     <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="toggleAdvancedSearch()"></button>
     <h5 fd-title>{{ 'platformVHD.searchAdvancedSearchLabel' | fdTranslate }}</h5>
 </ng-template>
-
 <ng-template #desktopDialogTitle>
     <ng-container *ngTemplateOutlet="dialogTitleText"></ng-container>
     <ng-container *ngTemplateOutlet="desktopTabs"></ng-container>
 </ng-template>
-
 <ng-template #mobileDialogTitle>
     <div class="fdp-value-help-dialog__mobile-title">
-        <ng-container *ngIf="hasSelectedTab; else dialogTitleText">
+        @if (hasSelectedTab) {
             <ng-container *ngTemplateOutlet="selectedTabHeader"></ng-container>
-        </ng-container>
+        } @else {
+            <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
+        }
     </div>
     <ng-container *ngTemplateOutlet="mobileTabs"></ng-container>
 </ng-template>
-
 <ng-template #desktopTabs>
-    <nav fd-tab-nav class="fdp-value-help-dialog__tabs" *ngIf="showSelectionTab && showDefineTab">
-        <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab">
-            <a
-                fd-tab-link
-                [active]="selectedTab === _tabTypes.selectFromList"
-                [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
-                ><span fd-tab-tag>{{ 'platformVHD.selectTabTitle' | fdTranslate }}</span></a
-            >
-        </div>
-        <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
-            <a
-                fd-tab-link
-                [active]="selectedTab === _tabTypes.defineConditions"
-                [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
-                ><span fd-tab-tag>{{ 'platformVHD.defineTabTitle' | fdTranslate }}</span></a
-            >
-        </div>
-    </nav>
-</ng-template>
-
-<ng-template #mobileTabs>
-    <div *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
-        <div fd-bar [inPage]="true" *ngIf="showSelectionTab">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    {{ 'platformVHD.selectTabTitle' | fdTranslate }}
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <fd-button-bar
-                        glyph="navigation-right-arrow"
-                        (click)="switchTab(_tabTypes.selectFromList)"
-                        [title]="
-                            'platformVHD.selectMobileTabTitle'
-                                | fdTranslate : { title: 'platformVHD.selectTabTitle' | fdTranslate }
-                        "
-                    ></fd-button-bar>
-                </fd-bar-element>
-            </div>
-        </div>
-        <div fd-bar [inPage]="true" *ngIf="showDefineTab">
-            <div fd-bar-left>
-                <fd-bar-element>
-                    {{ 'platformVHD.defineTabTitle' | fdTranslate }}
-                </fd-bar-element>
-            </div>
-            <div fd-bar-right>
-                <fd-bar-element>
-                    <fd-button-bar
-                        glyph="navigation-right-arrow"
-                        [title]="
-                            'platformVHD.selectMobileTabTitle'
-                                | fdTranslate : { title: 'platformVHD.defineTabTitle' | fdTranslate }
-                        "
-                        (click)="switchTab(_tabTypes.defineConditions)"
+    @if (showSelectionTab && showDefineTab) {
+        <nav fd-tab-nav class="fdp-value-help-dialog__tabs">
+            @if (showSelectionTab) {
+                <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)">
+                    <a
+                        fd-tab-link
+                        [active]="selectedTab === _tabTypes.selectFromList"
+                        [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
+                        ><span fd-tab-tag>{{ 'platformVHD.selectTabTitle' | fdTranslate }}</span></a
                     >
-                    </fd-button-bar>
-                </fd-bar-element>
-            </div>
-        </div>
-    </div>
+                </div>
+            }
+            @if (showDefineTab) {
+                <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)">
+                    <a
+                        fd-tab-link
+                        [active]="selectedTab === _tabTypes.defineConditions"
+                        [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
+                        ><span fd-tab-tag>{{ 'platformVHD.defineTabTitle' | fdTranslate }}</span></a
+                    >
+                </div>
+            }
+        </nav>
+    }
 </ng-template>
-
+<ng-template #mobileTabs>
+    @if (!hasSelectedTab && showSelectionTab && showDefineTab) {
+        <div>
+            @if (showSelectionTab) {
+                <div fd-bar [inPage]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>
+                            {{ 'platformVHD.selectTabTitle' | fdTranslate }}
+                        </fd-bar-element>
+                    </div>
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <fd-button-bar
+                                glyph="navigation-right-arrow"
+                                (click)="switchTab(_tabTypes.selectFromList)"
+                                [title]="
+                                    'platformVHD.selectMobileTabTitle'
+                                        | fdTranslate: { title: 'platformVHD.selectTabTitle' | fdTranslate }
+                                "
+                            ></fd-button-bar>
+                        </fd-bar-element>
+                    </div>
+                </div>
+            }
+            @if (showDefineTab) {
+                <div fd-bar [inPage]="true">
+                    <div fd-bar-left>
+                        <fd-bar-element>
+                            {{ 'platformVHD.defineTabTitle' | fdTranslate }}
+                        </fd-bar-element>
+                    </div>
+                    <div fd-bar-right>
+                        <fd-bar-element>
+                            <fd-button-bar
+                                glyph="navigation-right-arrow"
+                                [title]="
+                                    'platformVHD.selectMobileTabTitle'
+                                        | fdTranslate: { title: 'platformVHD.defineTabTitle' | fdTranslate }
+                                "
+                                (click)="switchTab(_tabTypes.defineConditions)"
+                            >
+                            </fd-button-bar>
+                        </fd-bar-element>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</ng-template>
 <ng-template #selectedTabHeader>
-    <ng-container [ngSwitch]="selectedTab">
-        <ng-container *ngSwitchCase="_tabTypes.selectFromList">
+    @switch (selectedTab) {
+        @case (_tabTypes.selectFromList) {
             <ng-container
                 *ngTemplateOutlet="
                     tabLink;
@@ -402,11 +408,11 @@
                     }
                 "
             ></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="_tabTypes.advancedSearch">
+        }
+        @case (_tabTypes.advancedSearch) {
             <ng-container *ngTemplateOutlet="advancedHeader"></ng-container>
-        </ng-container>
-        <ng-container *ngSwitchCase="_tabTypes.defineConditions">
+        }
+        @case (_tabTypes.defineConditions) {
             <ng-container
                 *ngTemplateOutlet="
                     tabLink;
@@ -416,19 +422,20 @@
                     }
                 "
             ></ng-container>
-        </ng-container>
-    </ng-container>
+        }
+    }
 </ng-template>
-
 <ng-template #conditionValue let-item="item">
-    <span *ngIf="item.strategy !== 'empty' && item.strategy !== 'not_empty'; else emptyCondition">
-        {{ item | displayFnPipe : conditionDisplayFn : _displayedFilters }}
-    </span>
-    <ng-template #emptyCondition>
-        <ng-container *ngIf="item.strategy === 'not_empty'; else emptyConditionText">
+    @if (item.strategy !== 'empty' && item.strategy !== 'not_empty') {
+        <span>
+            {{ item | displayFnPipe: conditionDisplayFn : _displayedFilters }}
+        </span>
+    } @else {
+        @if (item.strategy === 'not_empty') {
             !(<ng-container *ngTemplateOutlet="emptyConditionText"></ng-container>)
-        </ng-container>
-    </ng-template>
+        } @else {
+            &lt;{{ 'platformVHD.selectMobileConditionEmpty' | fdTranslate }}&gt;
+        }
+    }
 </ng-template>
-
 <ng-template #emptyConditionText> &lt;{{ 'platformVHD.selectMobileConditionEmpty' | fdTranslate }}&gt; </ng-template>

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -19,7 +18,7 @@ import { warnOnce } from '@fundamental-ngx/cdk/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class ObjectAttributeComponent implements OnInit {
     /** label for the element */
@@ -43,7 +42,10 @@ export class ObjectAttributeComponent implements OnInit {
     objectAttributeclick = new EventEmitter<Event>();
 
     /** @hidden */
-    constructor(private _el: ElementRef<HTMLElement>, private _renderer: Renderer2) {
+    constructor(
+        private _el: ElementRef<HTMLElement>,
+        private _renderer: Renderer2
+    ) {
         if (this._el.nativeElement.tagName === 'fdp-object-attribute') {
             warnOnce('`fdp-object-attribute` selector is deprecated, use `fd-object-attribute` instead.');
         }

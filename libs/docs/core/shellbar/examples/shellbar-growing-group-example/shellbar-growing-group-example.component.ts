@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ProductSwitchItem, ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import {
@@ -26,7 +25,6 @@ import {
         ProductMenuComponent,
         ShellbarSubtitleComponent,
         ShellbarActionsComponent,
-        NgFor,
         ShellbarActionComponent,
         ProductSwitchModule
     ]

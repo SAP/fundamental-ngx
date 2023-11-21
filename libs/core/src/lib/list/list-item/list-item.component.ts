@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { DecimalPipe, NgIf } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import { KeyUtil, LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent, FD_BUTTON_COMPONENT } from '@fundamental-ngx/core/button';
 import { CheckboxComponent, FD_CHECKBOX_COMPONENT } from '@fundamental-ngx/core/checkbox';
@@ -60,7 +60,7 @@ let listItemUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, FormItemComponent, DecimalPipe]
+    imports: [FormItemComponent, DecimalPipe]
 })
 export class ListItemComponent<T = any>
     extends ListFocusItem<T>

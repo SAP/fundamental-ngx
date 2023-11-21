@@ -30,12 +30,13 @@ const items = [
 
 @Component({
     template: `
-        <fdp-wizard-generator-step
-            *ngIf="step !== undefined"
-            (formsCreated)="formsCreated($event)"
-            [item]="step"
-        ></fdp-wizard-generator-step>
-    `,
+@if (step !== undefined) {
+  <fdp-wizard-generator-step
+    (formsCreated)="formsCreated($event)"
+    [item]="step"
+  ></fdp-wizard-generator-step>
+}
+`,
     providers: [WizardGeneratorService]
 })
 export class TestComponent {

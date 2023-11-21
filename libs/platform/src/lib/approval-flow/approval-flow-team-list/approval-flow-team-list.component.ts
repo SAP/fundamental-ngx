@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -29,7 +28,6 @@ import { ApprovalTeam } from '../interfaces';
         ListComponent,
         ContentDensityDirective,
         FormGroupComponent,
-        NgFor,
         FormItemComponent,
         RadioButtonComponent,
         FormsModule,

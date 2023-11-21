@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { NgIf } from '@angular/common';
 import { Nullable, RtlService } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
@@ -38,7 +37,7 @@ let panelExpandUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [contentDensityObserverProviders()],
     standalone: true,
-    imports: [NgIf, ButtonComponent]
+    imports: [ButtonComponent]
 })
 export class PanelComponent implements OnInit, OnDestroy {
     /** User's custom classes */

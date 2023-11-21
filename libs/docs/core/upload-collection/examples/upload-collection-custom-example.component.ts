@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, ContentChildren, QueryList } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { LinkComponent } from '@fundamental-ngx/core/link';
@@ -25,7 +24,6 @@ import {
     standalone: true,
     imports: [
         UploadCollectionComponent,
-        NgFor,
         ListModule,
         UploadCollectionItemDirective,
         UploadCollectionThumbnailDirective,
@@ -34,7 +32,6 @@ import {
         LinkComponent,
         UploadCollectionTitleDirective,
         UploadCollectionFormItemComponent,
-        NgIf,
         ObjectMarkerModule,
         UploadCollectionDescriptionDirective,
         UploadCollectionTextSeparatorDirective,

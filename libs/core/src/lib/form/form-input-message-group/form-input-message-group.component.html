@@ -1,4 +1,6 @@
-<div #popoverPlacementContainer *ngIf="placementContainer === 'self'" class="fd-form-input-message__container"></div>
+@if (placementContainer === 'self') {
+    <div #popoverPlacementContainer class="fd-form-input-message__container"></div>
+}
 <fd-popover
     class="fd-form-input-message-group"
     additionalBodyClass="fd-popover__body--input-message-group"

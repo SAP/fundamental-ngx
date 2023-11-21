@@ -1,11 +1,14 @@
 <fd-select placeholder="Select an option" [(value)]="selectedValue" [controlTemplate]="customSelectTemplate">
-    <li fd-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    @for (option of options; track option) {
+        <li fd-option [value]="option">{{ option }}</li>
+    }
 </fd-select>
-
 <ng-template #customSelectTemplate let-textValue let-selected="selected">
     <div class="custom-select-trigger-styling">
         <fd-icon glyph="action-settings"></fd-icon>
         {{ textValue }}
-        <span *ngIf="selected">{{ selected.id }}</span>
+        @if (selected) {
+            <span>{{ selected.id }}</span>
+        }
     </div>
 </ng-template>

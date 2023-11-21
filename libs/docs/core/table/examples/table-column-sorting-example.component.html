@@ -1,5 +1,4 @@
 <p>Sorting and filtering with toolbar elements:</p>
-
 <fd-toolbar title="Filter and sort for table elements">
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <ng-container fdCompact>
@@ -30,7 +29,6 @@
         ></button>
     </ng-container>
 </fd-toolbar>
-
 <table fd-table aria-label="Column Sorting and Filtering" class="fd-table-sortable-example" [allCellsFocusable]="true">
     <thead fd-table-header>
         <tr fd-table-row>
@@ -42,25 +40,22 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr
-            *ngFor="let row of displayedRows | filter : filterVal : 'column1' | sortBy : ascending : 'column1'"
-            fd-table-row
-        >
-            <td fd-table-cell class="fd-has-font-weight-semi">
-                <a fd-link href="#">{{ row.column1 }}</a>
-            </td>
-            <td fd-table-cell>{{ row.column2 }}</td>
-            <td fd-table-cell>{{ row.column3 }}</td>
-            <td fd-table-cell>{{ row.date }}</td>
-            <td fd-table-cell>
-                <fd-icon [glyph]="row.type"></fd-icon>
-            </td>
-        </tr>
+        @for (row of displayedRows | filter: filterVal : 'column1' | sortBy: ascending : 'column1'; track row) {
+            <tr fd-table-row>
+                <td fd-table-cell class="fd-has-font-weight-semi">
+                    <a fd-link href="#">{{ row.column1 }}</a>
+                </td>
+                <td fd-table-cell>{{ row.column2 }}</td>
+                <td fd-table-cell>{{ row.column3 }}</td>
+                <td fd-table-cell>{{ row.date }}</td>
+                <td fd-table-cell>
+                    <fd-icon [glyph]="row.type"></fd-icon>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
-
 <p>Sorting and filtering with inline popover:</p>
-
 <table fd-table aria-label="Column Sorting and Filtering" [allCellsFocusable]="true">
     <thead fd-table-header>
         <tr fd-table-row>
@@ -110,19 +105,18 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr
-            *ngFor="let row of displayedRows2 | filter : filterVal2 : 'column1' | sortBy : ascending2 : 'column1'"
-            fd-table-row
-        >
-            <td fd-table-cell class="fd-has-font-weight-semi">
-                <a fd-link href="#">{{ row.column1 }}</a>
-            </td>
-            <td fd-table-cell>{{ row.column2 }}</td>
-            <td fd-table-cell>{{ row.column3 }}</td>
-            <td fd-table-cell>{{ row.date }}</td>
-            <td fd-table-cell>
-                <fd-icon [glyph]="row.type"></fd-icon>
-            </td>
-        </tr>
+        @for (row of displayedRows2 | filter: filterVal2 : 'column1' | sortBy: ascending2 : 'column1'; track row) {
+            <tr fd-table-row>
+                <td fd-table-cell class="fd-has-font-weight-semi">
+                    <a fd-link href="#">{{ row.column1 }}</a>
+                </td>
+                <td fd-table-cell>{{ row.column2 }}</td>
+                <td fd-table-cell>{{ row.column3 }}</td>
+                <td fd-table-cell>{{ row.date }}</td>
+                <td fd-table-cell>
+                    <fd-icon [glyph]="row.type"></fd-icon>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

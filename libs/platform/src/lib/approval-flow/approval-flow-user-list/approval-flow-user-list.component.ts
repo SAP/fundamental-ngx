@@ -15,7 +15,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import {
@@ -44,7 +43,7 @@ const INTERVAL_IN_MS = 10;
         class: 'fdp-approval-flow-user-list'
     },
     standalone: true,
-    imports: [NgIf, ListComponent, FormsModule, NgFor, StandardListItemComponent, FdTranslatePipe]
+    imports: [ListComponent, FormsModule, StandardListItemComponent, FdTranslatePipe]
 })
 export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, OnDestroy {
     /** Approval flow users */

@@ -14,30 +14,30 @@ import { runValueAccessorTests } from 'ngx-cva-test-suite';
 @Component({
     selector: 'fdp-test-datetime-picker',
     template: `
-        <form [formGroup]="datetimePickerForm" (ngSubmit)="onSubmit()">
-            <fdp-form-group #ffg [formGroup]="datetimePickerForm" [object]="datetimePickerFormData">
-                <fdp-form-field
-                    #ffl1
-                    id="datetimePicker"
-                    zone="zLeft"
-                    rank="1"
-                    required="true"
-                    hint="This is a hint"
-                    placeholder="Enter a date"
-                    label="Date:"
-                >
-                    <fdp-datetime-picker name="datetimePicker" allowNull="false" formControlName="datetimePicker">
-                    </fdp-datetime-picker>
-                </fdp-form-field>
-                <ng-template #i18n let-errors>
-                    <ng-container *ngIf="errors.required">
-                        <span>Value is required</span>
-                    </ng-container>
-                </ng-template>
-            </fdp-form-group>
-            <button type="submit" #submitButton>Submit</button>
-        </form>
-    `,
+<form [formGroup]="datetimePickerForm" (ngSubmit)="onSubmit()">
+  <fdp-form-group #ffg [formGroup]="datetimePickerForm" [object]="datetimePickerFormData">
+    <fdp-form-field
+      #ffl1
+      id="datetimePicker"
+      zone="zLeft"
+      rank="1"
+      required="true"
+      hint="This is a hint"
+      placeholder="Enter a date"
+      label="Date:"
+      >
+      <fdp-datetime-picker name="datetimePicker" allowNull="false" formControlName="datetimePicker">
+      </fdp-datetime-picker>
+    </fdp-form-field>
+    <ng-template #i18n let-errors>
+      @if (errors.required) {
+        <span>Value is required</span>
+      }
+    </ng-template>
+  </fdp-form-group>
+  <button type="submit" #submitButton>Submit</button>
+</form>
+`,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 class TestDatetimePickerComponent {

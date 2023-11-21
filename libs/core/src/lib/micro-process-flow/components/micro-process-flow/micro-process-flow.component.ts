@@ -1,5 +1,5 @@
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { NgIf } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -42,7 +42,7 @@ import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-
         contentDensityObserverProviders()
     ],
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
     /** Should connector between items be hidden. */

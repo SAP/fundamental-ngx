@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -26,7 +26,7 @@ export type ProgressIndicatorState = 'informative' | 'positive' | 'critical' | '
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
+    imports: [NgTemplateOutlet, PopoverComponent, PopoverControlComponent, PopoverBodyComponent]
 })
 export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
     /** The text to display if you would like to override the default percentage text. */
@@ -67,7 +67,10 @@ export class ProgressIndicatorComponent implements OnInit, OnDestroy, OnChanges,
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {

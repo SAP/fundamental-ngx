@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -9,7 +8,7 @@ import { SelectModule } from '@fundamental-ngx/core/select';
     styleUrls: ['./select-custom-trigger.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [SelectModule, NgFor, IconComponent, NgIf]
+    imports: [SelectModule, IconComponent]
 })
 export class SelectCustomTriggerComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];

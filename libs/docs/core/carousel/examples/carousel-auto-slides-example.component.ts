@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { CardModule } from '@fundamental-ngx/core/card';
@@ -20,7 +19,6 @@ import {
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         ToolbarComponent,
         ToolbarLabelDirective,
         ToolbarSpacerDirective,

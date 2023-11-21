@@ -48,15 +48,15 @@ import { VerticalNavigationComponent } from './vertical-navigation.component';
     `,
     standalone: true,
     imports: [
-        VerticalNavigationComponent,
-        IconComponent,
-        ListNavigationItemComponent,
-        ListNavigationItemTextDirective,
-        ListGroupHeaderDirective,
-        VerticalNavigationGroupHeaderDirective,
-        ListTitleDirective,
-        ListNavigationItemArrowDirective
-    ]
+    VerticalNavigationComponent,
+    IconComponent,
+    ListNavigationItemComponent,
+    ListNavigationItemTextDirective,
+    ListGroupHeaderDirective,
+    VerticalNavigationGroupHeaderDirective,
+    ListTitleDirective,
+    ListNavigationItemArrowDirective
+]
 })
 class TestVerticalNavigationComponent {
     @ViewChild('objectRef', { read: ElementRef })

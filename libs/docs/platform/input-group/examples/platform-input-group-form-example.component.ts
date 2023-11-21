@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -15,7 +15,6 @@ import { FdpFormGroupModule, PlatformInputGroupModule } from '@fundamental-ngx/p
         FormsModule,
         ReactiveFormsModule,
         PlatformButtonModule,
-        NgIf,
         JsonPipe
     ]
 })

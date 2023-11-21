@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
@@ -9,7 +8,7 @@ import { FileUploaderModule } from '@fundamental-ngx/core/file-uploader';
     styleUrls: ['./file-uploader-min-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FileUploaderModule, FormsModule, NgFor]
+    imports: [FileUploaderModule, FormsModule]
 })
 export class FileUploaderMinExampleComponent {
     files: File[];

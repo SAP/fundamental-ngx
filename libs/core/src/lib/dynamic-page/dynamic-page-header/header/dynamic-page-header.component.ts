@@ -18,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BreadcrumbComponent, FD_BREADCRUMB_COMPONENT } from '@fundamental-ngx/core/breadcrumb';
 import { DYNAMIC_PAGE_HEADER_TOKEN, DynamicPageHeader } from '@fundamental-ngx/core/shared';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { IgnoreClickOnSelectionDirective, Nullable } from '@fundamental-ngx/cdk/utils';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageHeaderSubtitleDirective } from '../../directives/dynamic-page-header-subtitle.directive';
@@ -47,7 +47,7 @@ export const ActionSquashBreakpointPx = 1280;
         }
     ],
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, IgnoreClickOnSelectionDirective]
+    imports: [NgTemplateOutlet, IgnoreClickOnSelectionDirective]
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy, DynamicPageHeader {
     /** @hidden */

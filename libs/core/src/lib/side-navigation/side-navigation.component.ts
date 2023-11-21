@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -37,7 +36,7 @@ import { SideNavigationInterface } from './side-navigation.interface';
     encapsulation: ViewEncapsulation.None,
     providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService],
     standalone: true,
-    imports: [NgIf, SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
+    imports: [SideNavigationMainDirective, PreparedNestedListComponent, SideNavigationUtilityDirective]
 })
 export class SideNavigationComponent implements AfterContentInit, AfterViewInit, OnInit, SideNavigationInterface {
     /**
@@ -79,7 +78,10 @@ export class SideNavigationComponent implements AfterContentInit, AfterViewInit,
     additionalShellbarCssClass = 'fd-shellbar--side-nav';
 
     /** @hidden */
-    constructor(private keyboardService: NestedListKeyboardService, private nestedListState: NestedListStateService) {
+    constructor(
+        private keyboardService: NestedListKeyboardService,
+        private nestedListState: NestedListStateService
+    ) {
         this.keyboardService.refresh$.subscribe(() => {
             /** Refresh list of elements, that are being supported by keyboard */
             this.keyboardService.refreshItems(this.getLists());

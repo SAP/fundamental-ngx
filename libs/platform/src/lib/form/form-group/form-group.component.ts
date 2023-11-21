@@ -46,7 +46,7 @@ import { AbstractControl, ControlContainer, FormGroup, FormsModule, NgForm } fro
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { AsyncPipe, KeyValuePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import { FormField } from '@fundamental-ngx/cdk/forms';
 import { Nullable, resizeObservable } from '@fundamental-ngx/cdk/utils';
 import {
@@ -175,10 +175,8 @@ let formGroupUniqueId = 0;
     providers: [formGroupProvider, FormFieldLayoutService, contentDensityObserverProviders()],
     standalone: true,
     imports: [
-        NgIf,
         FormsModule,
         NgTemplateOutlet,
-        NgFor,
         FormGroupHeaderComponent,
         LinkComponent,
         IconComponent,
@@ -532,11 +530,12 @@ export class FormGroupComponent
 
     /** @hidden */
     private _listenFormFieldColumnChange(): void {
-        this.formGroupChildren.forEach((field: FormGroupField) =>
-            (<FormFieldComponent>field).onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
-                this._updateFieldByColumn();
-                this._cd.markForCheck();
-            })
+        this.formGroupChildren.forEach(
+            (field: FormGroupField) =>
+                (<FormFieldComponent>field).onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe(() => {
+                    this._updateFieldByColumn();
+                    this._cd.markForCheck();
+                })
         );
     }
 

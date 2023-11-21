@@ -1,12 +1,10 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
-
 <div cdkScrollable class="docs-fcl-example-overlay" #overlay>
-    <ng-container *ngIf="fullscreen">
+    @if (fullscreen) {
         <div class="docs-fcl-example-overlay-content">
             <div class="docs-fcl-example-button">
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
-
             <!-- Flexible Column Layout -->
             <fd-flexible-column-layout [(layout)]="localLayout">
                 <ng-template #startColumn>
@@ -33,31 +31,25 @@
                     <div class="docs-fcl-example-section">
                         <h2>End Column</h2>
                         <div>
-                            <button
-                                *ngIf="localLayout !== 'OneColumnEndFullScreen'"
-                                class="fd-button"
-                                (click)="changeLayout('OneColumnEndFullScreen')"
-                            >
-                                Expand Column 3
-                            </button>
-                            <button
-                                *ngIf="localLayout !== 'OneColumnEndFullScreen'"
-                                class="fd-button"
-                                (click)="changeLayout('TwoColumnsMidExpanded')"
-                            >
-                                Close Column 3
-                            </button>
-                            <button
-                                class="fd-button"
-                                *ngIf="localLayout === 'OneColumnEndFullScreen'"
-                                (click)="changeLayout('ThreeColumnsMidExpanded')"
-                            >
-                                Exit Full Screen Column 3
-                            </button>
+                            @if (localLayout !== 'OneColumnEndFullScreen') {
+                                <button class="fd-button" (click)="changeLayout('OneColumnEndFullScreen')">
+                                    Expand Column 3
+                                </button>
+                            }
+                            @if (localLayout !== 'OneColumnEndFullScreen') {
+                                <button class="fd-button" (click)="changeLayout('TwoColumnsMidExpanded')">
+                                    Close Column 3
+                                </button>
+                            }
+                            @if (localLayout === 'OneColumnEndFullScreen') {
+                                <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">
+                                    Exit Full Screen Column 3
+                                </button>
+                            }
                         </div>
                     </div>
                 </ng-template>
             </fd-flexible-column-layout>
         </div>
-    </ng-container>
+    }
 </div>

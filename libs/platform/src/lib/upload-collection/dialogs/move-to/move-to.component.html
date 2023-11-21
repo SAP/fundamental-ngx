@@ -3,10 +3,12 @@
         <ng-template fdkTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h1 class="fd-title--bold" *ngIf="!_currentFolder" fd-title>
-                        {{ 'platformUploadCollection.moveToTitle' | fdTranslate }}
-                    </h1>
-                    <ng-container *ngIf="_currentFolder">
+                    @if (!_currentFolder) {
+                        <h1 class="fd-title--bold" fd-title>
+                            {{ 'platformUploadCollection.moveToTitle' | fdTranslate }}
+                        </h1>
+                    }
+                    @if (_currentFolder) {
                         <button
                             fd-button
                             fdType="transparent"
@@ -17,7 +19,7 @@
                             <span>{{ 'platformUploadCollection.moveToTitleFolder' | fdTranslate }}</span>
                             {{ _currentFolder.name }}
                         </h1>
-                    </ng-container>
+                    }
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -31,26 +33,28 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body class="fd-dialog__body--no-horizontal-padding">
         <ul fd-list>
-            <li *ngIf="!_currentFolder" fd-list-item class="fd-list__item--title-background">
-                <span fd-list-title>{{ 'platformUploadCollection.moveToAllFilesSubHeaderLabel' | fdTranslate }}</span>
-            </li>
-            <li
-                fd-list-item
-                *ngFor="let folder of _foldersList"
-                [selected]="selectedFolder?.documentId === folder.documentId"
-            >
-                <a fd-list-link (click)="_hasFolders(folder.files) ? _openFolder(folder) : _selectFolder(folder)">
-                    <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
-                    <span fd-list-title>{{ folder.name }}</span>
-                    <i *ngIf="_hasFolders(folder.files)" fd-list-icon glyph="slim-arrow-right"></i>
-                </a>
-            </li>
+            @if (!_currentFolder) {
+                <li fd-list-item class="fd-list__item--title-background">
+                    <span fd-list-title>{{
+                        'platformUploadCollection.moveToAllFilesSubHeaderLabel' | fdTranslate
+                    }}</span>
+                </li>
+            }
+            @for (folder of _foldersList; track folder) {
+                <li fd-list-item [selected]="selectedFolder?.documentId === folder.documentId">
+                    <a fd-list-link (click)="_hasFolders(folder.files) ? _openFolder(folder) : _selectFolder(folder)">
+                        <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
+                        <span fd-list-title>{{ folder.name }}</span>
+                        @if (_hasFolders(folder.files)) {
+                            <i fd-list-icon glyph="slim-arrow-right"></i>
+                        }
+                    </a>
+                </li>
+            }
         </ul>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"

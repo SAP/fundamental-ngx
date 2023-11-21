@@ -1,4 +1,6 @@
-<fd-message-page glyph="attachment" *ngIf="!items.length">
-    <fd-message-page-title>No files found. </fd-message-page-title>
-    <fd-message-page-subtitle> Drop files to upload, or use the "+" button. </fd-message-page-subtitle>
-</fd-message-page>
+@if (!items.length) {
+    <fd-message-page glyph="attachment">
+        <fd-message-page-title>No files found. </fd-message-page-title>
+        <fd-message-page-subtitle> Drop files to upload, or use the "+" button. </fd-message-page-subtitle>
+    </fd-message-page>
+}

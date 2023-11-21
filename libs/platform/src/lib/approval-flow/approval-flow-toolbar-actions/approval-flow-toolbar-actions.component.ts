@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -23,7 +22,7 @@ import { ApprovalGraphNode } from '../interfaces/approval-node';
         class: 'fdp-approval-flow-toolbar-actions'
     },
     standalone: true,
-    imports: [ContentDensityDirective, NgIf, ButtonComponent, FdTranslatePipe]
+    imports: [ContentDensityDirective, ButtonComponent, FdTranslatePipe]
 })
 export class ApprovalFlowToolbarActionsComponent {
     /** Approval flow graph */

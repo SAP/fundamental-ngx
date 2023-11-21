@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
@@ -33,7 +33,6 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         ListItemComponent,
         NgTemplateOutlet,
         ListLinkDirective,

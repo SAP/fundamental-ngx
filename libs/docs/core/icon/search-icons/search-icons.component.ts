@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -42,7 +42,6 @@ import { FdIconDocsType, availableSapIcons } from './available-sap-icons';
         TableColumnComponent,
         TableInitialStateDirective,
         FdpCellDef,
-        NgForOf,
         InfoLabelComponent,
         IconComponent,
         TableToolbarComponent,
@@ -51,7 +50,6 @@ import { FdIconDocsType, availableSapIcons } from './available-sap-icons';
         AvatarComponent,
         SearchHighlightPipe,
         AsyncPipe,
-        NgIf,
         TableVirtualScrollDirective
     ]
 })
@@ -135,7 +133,7 @@ class IconsDataSourceProvider extends TableDataProvider<FdIconDocsType> {
                             }
                             return acc;
                         }, {})
-                    } as FdIconDocsType)
+                    }) as FdIconDocsType
             )
         ).pipe(tap((r) => console.log(r)));
     }

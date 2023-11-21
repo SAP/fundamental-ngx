@@ -44,7 +44,7 @@ import {
 } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { KeyUtil, Nullable, RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
 import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
@@ -106,12 +106,10 @@ let nextListId = 0;
     standalone: true,
     imports: [
         CoreListComponent,
-        NgIf,
         BusyIndicatorComponent,
         InfiniteScrollDirective,
         ListItemComponent,
         NgTemplateOutlet,
-        NgFor,
         RepeatDirective,
         SkeletonComponent,
         FdTranslatePipe

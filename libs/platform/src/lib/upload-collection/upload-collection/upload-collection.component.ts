@@ -15,7 +15,7 @@ import {
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
-import { DatePipe, NgFor, NgIf, NgSwitch, NgSwitchCase, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BreadcrumbComponent, BreadcrumbItemComponent } from '@fundamental-ngx/core/breadcrumb';
 import { BusyIndicatorComponent } from '@fundamental-ngx/core/busy-indicator';
@@ -97,14 +97,12 @@ let randomId = 0;
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        NgIf,
         MessageStripComponent,
         NgTemplateOutlet,
         ToolbarComponent,
         BreadcrumbComponent,
         BreadcrumbItemComponent,
         LinkComponent,
-        NgFor,
         ToolbarSpacerDirective,
         InputGroupComponent,
         FormsModule,
@@ -133,8 +131,6 @@ let randomId = 0;
         MenuComponent,
         MenuItemComponent,
         FileUploaderSelectDirective,
-        NgSwitch,
-        NgSwitchCase,
         DatePipe,
         FdTranslatePipe,
         ConvertBytesPipe

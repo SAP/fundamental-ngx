@@ -15,11 +15,9 @@
                 [attr.aria-haspopup]="true"
             ></button>
         </fd-popover-control>
-
         <fd-popover-body [id]="data.id + '-1'" role="tooltip">
             <fd-quick-view [id]="data.id">
                 <fd-quick-view-title align="middle">{{ data.title }}</fd-quick-view-title>
-
                 <fd-quick-view-subheader>
                     <fd-avatar [image]="data.subHeader.avatar" size="s"></fd-avatar>
                     <fd-quick-view-subheader-title>
@@ -29,43 +27,46 @@
                         {{ data.subHeader.subtitle }}
                     </fd-quick-view-subheader-subtitle>
                 </fd-quick-view-subheader>
-
-                <fd-quick-view-group
-                    *ngFor="let group of data.groups; let i = index"
-                    [attr.aria-labelledby]="getGroupId(i, group)"
-                >
-                    <fd-quick-view-group-title [id]="getGroupId(i, group)">
-                        {{ group.title }}
-                    </fd-quick-view-group-title>
-                    <fd-quick-view-group-item *ngFor="let item of group.items">
-                        <fd-quick-view-group-item-label>
-                            {{ item.label }}
-                        </fd-quick-view-group-item-label>
-                        <fd-quick-view-group-item-content>
-                            <ng-container [ngSwitch]="item.label">
-                                <a
-                                    *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                                    [href]="'tel:' + item.value"
-                                    fd-link
-                                    fd-quick-view-group-item-content-element
-                                    >{{ item.value }}</a
-                                >
-                                <a
-                                    *ngSwitchCase="'Email'"
-                                    [href]="'mailto:' + item.value"
-                                    fd-link
-                                    fd-quick-view-group-item-content-element
-                                    >{{ item.value }}</a
-                                >
-                                <div *ngSwitchDefault fd-quick-view-group-item-content-element>{{ item.value }}</div>
-                            </ng-container>
-                        </fd-quick-view-group-item-content>
-                    </fd-quick-view-group-item>
-                </fd-quick-view-group>
+                @for (group of data.groups; track group; let i = $index) {
+                    <fd-quick-view-group [attr.aria-labelledby]="getGroupId(i, group)">
+                        <fd-quick-view-group-title [id]="getGroupId(i, group)">
+                            {{ group.title }}
+                        </fd-quick-view-group-title>
+                        @for (item of group.items; track item) {
+                            <fd-quick-view-group-item>
+                                <fd-quick-view-group-item-label>
+                                    {{ item.label }}
+                                </fd-quick-view-group-item-label>
+                                <fd-quick-view-group-item-content>
+                                    @switch (item.label) {
+                                        @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                            <a
+                                                [href]="'tel:' + item.value"
+                                                fd-link
+                                                fd-quick-view-group-item-content-element
+                                                >{{ item.value }}</a
+                                            >
+                                        }
+                                        @case ('Email') {
+                                            <a
+                                                [href]="'mailto:' + item.value"
+                                                fd-link
+                                                fd-quick-view-group-item-content-element
+                                                >{{ item.value }}</a
+                                            >
+                                        }
+                                        @default {
+                                            <div fd-quick-view-group-item-content-element>{{ item.value }}</div>
+                                        }
+                                    }
+                                </fd-quick-view-group-item-content>
+                            </fd-quick-view-group-item>
+                        }
+                    </fd-quick-view-group>
+                }
             </fd-quick-view>
         </fd-popover-body>
     </fd-popover>
-
     <fd-popover
         placement="right-start"
         [noArrow]="false"
@@ -82,7 +83,6 @@
                 [attr.aria-haspopup]="true"
             ></button>
         </fd-popover-control>
-
         <fd-popover-body [id]="data.id + '-2'" role="tooltip">
             <fd-quick-view [id]="data.id + '-without-heading'">
                 <fd-quick-view-subheader>
@@ -94,39 +94,43 @@
                         {{ data.subHeader.subtitle }}
                     </fd-quick-view-subheader-subtitle>
                 </fd-quick-view-subheader>
-
-                <fd-quick-view-group
-                    *ngFor="let group of data.groups; let i = index"
-                    [attr.aria-labelledby]="getGroupId(i, group)"
-                >
-                    <fd-quick-view-group-title [id]="getGroupId(i, group)">
-                        {{ group.title }}
-                    </fd-quick-view-group-title>
-                    <fd-quick-view-group-item *ngFor="let item of group.items">
-                        <fd-quick-view-group-item-label>
-                            {{ item.label }}
-                        </fd-quick-view-group-item-label>
-                        <fd-quick-view-group-item-content>
-                            <ng-container [ngSwitch]="item.label">
-                                <a
-                                    *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                                    [href]="'tel:' + item.value"
-                                    fd-link
-                                    fd-quick-view-group-item-content-element
-                                    >{{ item.value }}</a
-                                >
-                                <a
-                                    *ngSwitchCase="'Email'"
-                                    [href]="'mailto:' + item.value"
-                                    fd-link
-                                    fd-quick-view-group-item-content-element
-                                    >{{ item.value }}</a
-                                >
-                                <div *ngSwitchDefault fd-quick-view-group-item-content-element>{{ item.value }}</div>
-                            </ng-container>
-                        </fd-quick-view-group-item-content>
-                    </fd-quick-view-group-item>
-                </fd-quick-view-group>
+                @for (group of data.groups; track group; let i = $index) {
+                    <fd-quick-view-group [attr.aria-labelledby]="getGroupId(i, group)">
+                        <fd-quick-view-group-title [id]="getGroupId(i, group)">
+                            {{ group.title }}
+                        </fd-quick-view-group-title>
+                        @for (item of group.items; track item) {
+                            <fd-quick-view-group-item>
+                                <fd-quick-view-group-item-label>
+                                    {{ item.label }}
+                                </fd-quick-view-group-item-label>
+                                <fd-quick-view-group-item-content>
+                                    @switch (item.label) {
+                                        @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                            <a
+                                                [href]="'tel:' + item.value"
+                                                fd-link
+                                                fd-quick-view-group-item-content-element
+                                                >{{ item.value }}</a
+                                            >
+                                        }
+                                        @case ('Email') {
+                                            <a
+                                                [href]="'mailto:' + item.value"
+                                                fd-link
+                                                fd-quick-view-group-item-content-element
+                                                >{{ item.value }}</a
+                                            >
+                                        }
+                                        @default {
+                                            <div fd-quick-view-group-item-content-element>{{ item.value }}</div>
+                                        }
+                                    }
+                                </fd-quick-view-group-item-content>
+                            </fd-quick-view-group-item>
+                        }
+                    </fd-quick-view-group>
+                }
             </fd-quick-view>
         </fd-popover-body>
     </fd-popover>

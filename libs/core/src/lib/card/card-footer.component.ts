@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -21,7 +21,7 @@ import { CardFooterActionItemDirective } from './card-footer-action-item.directi
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, NgFor, NgTemplateOutlet]
+    imports: [NgTemplateOutlet]
 })
 export class CardFooterComponent implements AfterViewInit, OnDestroy {
     /** @hidden */

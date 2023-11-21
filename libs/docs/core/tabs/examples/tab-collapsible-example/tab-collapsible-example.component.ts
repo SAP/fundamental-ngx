@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 
@@ -6,7 +5,7 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
     selector: 'fd-tab-collapsible-example',
     templateUrl: './tab-collapsible-example.component.html',
     standalone: true,
-    imports: [TabsModule, NgFor]
+    imports: [TabsModule]
 })
 export class TabCollapsibleExampleComponent {
     tabs: { title: string; content: string }[] = [];

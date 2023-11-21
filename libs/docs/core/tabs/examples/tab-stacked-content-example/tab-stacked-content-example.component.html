@@ -2,15 +2,21 @@
 <button fd-button (click)="showSixthTab = true">Add tab after</button>
 <p>&nbsp;</p>
 <fd-tab-list [stackContent]="true" maxContentHeight="250px">
-    <fd-tab *ngIf="showZeroTab" title="Tab 0">
-        <div class="tab-container-example">Tab 0 content</div>
-    </fd-tab>
-    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
-        <div class="tab-container-example">
-            {{ tab.content }}
-        </div>
-    </fd-tab>
-    <fd-tab *ngIf="showSixthTab" title="Tab 6">
-        <div class="tab-container-example">Tab 6 content</div>
-    </fd-tab>
+    @if (showZeroTab) {
+        <fd-tab title="Tab 0">
+            <div class="tab-container-example">Tab 0 content</div>
+        </fd-tab>
+    }
+    @for (tab of tabs; track tab) {
+        <fd-tab [title]="tab.title">
+            <div class="tab-container-example">
+                {{ tab.content }}
+            </div>
+        </fd-tab>
+    }
+    @if (showSixthTab) {
+        <fd-tab title="Tab 6">
+            <div class="tab-container-example">Tab 6 content</div>
+        </fd-tab>
+    }
 </fd-tab-list>

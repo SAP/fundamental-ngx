@@ -1,7 +1,7 @@
 /* eslint-disable @angular-eslint/no-input-rename */
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { PortalModule } from '@angular/cdk/portal';
-import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -77,9 +77,7 @@ import { ToolHeaderComponentClass } from '../../tool-header-component.class';
     },
     imports: [
         ToolHeaderGroupDirective,
-        NgIf,
         NgTemplateOutlet,
-        NgForOf,
         PopoverComponent,
         PopoverControlComponent,
         MenuTriggerDirective,

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { ActionChangeEvent } from '@fundamental-ngx/platform/list';
 
-import { NgFor } from '@angular/common';
 import { ActionListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
 import { Action } from './platform-action-list-item-border-less-example.component';
 
@@ -10,7 +9,7 @@ import { Action } from './platform-action-list-item-border-less-example.componen
     selector: 'fdp-platform-action-list-item-example',
     templateUrl: './platform-action-list-item-example.component.html',
     standalone: true,
-    imports: [PlatformListModule, ActionListItemModule, NgFor]
+    imports: [PlatformListModule, ActionListItemModule]
 })
 export class PlatformActionListItemExampleComponent {
     items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];

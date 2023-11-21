@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
@@ -8,7 +7,7 @@ import { ObjectStatusComponent } from '@fundamental-ngx/platform/object-status';
     templateUrl: './platform-object-status-clickable-and-icon-example.component.html',
     styleUrls: ['./platform-object-status-clickable-and-icon-example.component.scss'],
     standalone: true,
-    imports: [ObjectStatusComponent, NgFor]
+    imports: [ObjectStatusComponent]
 })
 export class PlatformObjectStatusClickableAndIconExampleComponent {
     items: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);

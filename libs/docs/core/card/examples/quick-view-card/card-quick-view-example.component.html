@@ -14,29 +14,33 @@
                         {{ data.subHeader.subtitle }}
                     </fd-quick-view-subheader-subtitle>
                 </fd-quick-view-subheader>
-
-                <fd-quick-view-group *ngFor="let group of data.groups">
-                    <fd-quick-view-group-title>
-                        {{ group.title }}
-                    </fd-quick-view-group-title>
-                    <fd-quick-view-group-item *ngFor="let item of group.items">
-                        <fd-quick-view-group-item-label>
-                            {{ item.label }}
-                        </fd-quick-view-group-item-label>
-                        <fd-quick-view-group-item-content>
-                            <ng-container [ngSwitch]="item.label">
-                                <a
-                                    *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                                    [href]="'tel:' + item.value"
-                                    fd-link
-                                    >{{ item.value }}</a
-                                >
-                                <a *ngSwitchCase="'Email'" [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
-                                <div *ngSwitchDefault>{{ item.value }}</div>
-                            </ng-container>
-                        </fd-quick-view-group-item-content>
-                    </fd-quick-view-group-item>
-                </fd-quick-view-group>
+                @for (group of data.groups; track group) {
+                    <fd-quick-view-group>
+                        <fd-quick-view-group-title>
+                            {{ group.title }}
+                        </fd-quick-view-group-title>
+                        @for (item of group.items; track item) {
+                            <fd-quick-view-group-item>
+                                <fd-quick-view-group-item-label>
+                                    {{ item.label }}
+                                </fd-quick-view-group-item-label>
+                                <fd-quick-view-group-item-content>
+                                    @switch (item.label) {
+                                        @case (item.label === 'Mobile' || item.label === 'Phone' ? item.label : '') {
+                                            <a [href]="'tel:' + item.value" fd-link>{{ item.value }}</a>
+                                        }
+                                        @case ('Email') {
+                                            <a [href]="'mailto:' + item.value" fd-link>{{ item.value }}</a>
+                                        }
+                                        @default {
+                                            <div>{{ item.value }}</div>
+                                        }
+                                    }
+                                </fd-quick-view-group-item-content>
+                            </fd-quick-view-group-item>
+                        }
+                    </fd-quick-view-group>
+                }
             </fd-quick-view>
         </fd-card-content>
         <fd-card-footer>

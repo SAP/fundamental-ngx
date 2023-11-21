@@ -1,12 +1,10 @@
 <button fd-button (click)="enterFullscreenExample()">Click to open full screen</button>
-
 <div cdkScrollable class="docs-fcl-example-overlay" #overlay>
-    <ng-container *ngIf="fullscreen">
+    @if (fullscreen) {
         <div class="docs-fcl-example-overlay-content">
             <div class="docs-fcl-example-button">
                 <button fd-button (click)="exitFullscreenExample($event)">Exit Example</button>
             </div>
-
             <!-- Flexible Column Layout -->
             <fd-flexible-column-layout [(layout)]="localLayout">
                 <ng-template #startColumn>
@@ -24,33 +22,35 @@
                         <fd-dynamic-page-header title="Lorem ipsum dolor sit amet, consectetur adipiscing elit">
                             <fd-dynamic-page-layout-actions>
                                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                                    <button
-                                        *ngIf="showMidColumnControls"
-                                        fd-button
-                                        fdType="transparent"
-                                        [attr.aria-label]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
-                                        (click)="
-                                            isFullScreen
-                                                ? changeLayout('TwoColumnsMidExpanded')
-                                                : changeLayout('OneColumnMidFullScreen')
-                                        "
-                                        [title]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
-                                    >
-                                        <i
-                                            [class.sap-icon--exitfullscreen]="isFullScreen"
-                                            [class.sap-icon--resize]="!isFullScreen"
-                                        ></i>
-                                    </button>
-                                    <button
-                                        *ngIf="showMidColumnControls"
-                                        fd-button
-                                        fdType="transparent"
-                                        aria-label="Close"
-                                        (click)="changeLayout('OneColumnStartFullScreen')"
-                                        title="Close"
-                                    >
-                                        <i class="sap-icon--decline"></i>
-                                    </button>
+                                    @if (showMidColumnControls) {
+                                        <button
+                                            fd-button
+                                            fdType="transparent"
+                                            [attr.aria-label]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
+                                            (click)="
+                                                isFullScreen
+                                                    ? changeLayout('TwoColumnsMidExpanded')
+                                                    : changeLayout('OneColumnMidFullScreen')
+                                            "
+                                            [title]="isFullScreen ? 'Exit Fullscreen' : 'Expand Fullscreen'"
+                                        >
+                                            <i
+                                                [class.sap-icon--exitfullscreen]="isFullScreen"
+                                                [class.sap-icon--resize]="!isFullScreen"
+                                            ></i>
+                                        </button>
+                                    }
+                                    @if (showMidColumnControls) {
+                                        <button
+                                            fd-button
+                                            fdType="transparent"
+                                            aria-label="Close"
+                                            (click)="changeLayout('OneColumnStartFullScreen')"
+                                            title="Close"
+                                        >
+                                            <i class="sap-icon--decline"></i>
+                                        </button>
+                                    }
                                 </fd-toolbar>
                             </fd-dynamic-page-layout-actions>
                         </fd-dynamic-page-header>
@@ -128,5 +128,5 @@
                 </ng-template>
             </fd-flexible-column-layout>
         </div>
-    </ng-container>
+    }
 </div>

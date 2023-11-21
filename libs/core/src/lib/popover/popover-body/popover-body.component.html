@@ -18,22 +18,27 @@
     [fdkResizeClass]="'fd-popover__body--disable-transitions'"
     [fdkResizeHandleLocation]="_resizeHandleLocation"
 >
-    <div fd-scrollbar class="fd-popover__wrapper" *ngIf="!_disableScrollbar; else renderer">
-        <ng-container *ngTemplateOutlet="renderer"></ng-container>
-    </div>
-    <span fdkResizeHandle *ngIf="_resizable" class="fd-popover__resize-handle"></span>
+    @if (!_disableScrollbar) {
+        <div fd-scrollbar class="fd-popover__wrapper">
+            <ng-container *ngTemplateOutlet="renderer"></ng-container>
+        </div>
+    } @else {
+        <ng-content select="[fd-popover-body-header]"></ng-content>
+        <ng-content select="[fd-popover-body-subheader]"></ng-content>
+        <ng-content></ng-content>
+        {{ text }}
+        <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
+        <ng-content select="[fd-popover-body-footer]"></ng-content>
+    }
+    @if (_resizable) {
+        <span fdkResizeHandle class="fd-popover__resize-handle"></span>
+    }
 </div>
-
 <ng-template #renderer>
     <ng-content select="[fd-popover-body-header]"></ng-content>
-
     <ng-content select="[fd-popover-body-subheader]"></ng-content>
-
     <ng-content></ng-content>
-
     {{ text }}
-
     <ng-container *ngTemplateOutlet="_templateToDisplay"></ng-container>
-
     <ng-content select="[fd-popover-body-footer]"></ng-content>
 </ng-template>

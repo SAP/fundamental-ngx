@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -22,7 +21,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         DynamicPageModule,
         BreadcrumbModule,
         LinkComponent,
@@ -32,8 +30,7 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ToolbarSeparatorComponent,
         ResizableCardLayoutModule,
         CardModule,
-        ListModule,
-        NgFor
+        ListModule
     ]
 })
 export class ResizableCardLayoutExampleLayoutConfigComponent implements OnInit {

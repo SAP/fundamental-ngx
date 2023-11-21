@@ -7,10 +7,12 @@
     </fd-popover-control>
     <fd-popover-body class="fd-icon-tab-bar">
         <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
-            <ng-container *ngFor="let item of extraTabs; let idx = index; trackBy: _trackByTab">
-                <li *ngIf="isSeparators" tabindex="-1" class="fd-icon-tab-bar__icon-separator">
-                    <fd-icon glyph="process"></fd-icon>
-                </li>
+            @for (item of extraTabs; track _trackByTab(idx, item); let idx = $index) {
+                @if (isSeparators) {
+                    <li tabindex="-1" class="fd-icon-tab-bar__icon-separator">
+                        <fd-icon glyph="process"></fd-icon>
+                    </li>
+                }
                 <li
                     class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                     role="listitem"
@@ -31,31 +33,37 @@
                                 <fd-icon [glyph]="item.icon"></fd-icon>
                             </span>
                         </span>
-                        <span
-                            *ngIf="showItemLabel && item.label"
-                            class="fd-list__title fd-icon-tab-bar__list-item-title"
-                            >{{ item.label }}</span
-                        >
-                        <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                        <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
-                            >({{ item.counter }})
-                        </span>
-                        <div class="screenreader-only" *ngIf="item.color">
-                            {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
-                        </div>
+                        @if (showItemLabel && item.label) {
+                            <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{ item.label }}</span>
+                        }
+                        @if (item.badge) {
+                            <span class="fd-icon-tab-bar__badge"></span>
+                        }
+                        @if (item.counter) {
+                            <span class="fd-list__counter fd-icon-tab-bar__list-item-counter"
+                                >({{ item.counter }})
+                            </span>
+                        }
+                        @if (item.color) {
+                            <div class="screenreader-only">
+                                {{ (colorAssociations && colorAssociations[item.color]) || item.color }}
+                            </div>
+                        }
                     </a>
-                    <div class="fd-icon-tab-bar__button-container" *ngIf="item.closable">
-                        <button
-                            fd-button
-                            class="fd-icon-tab-bar__button"
-                            fdType="transparent"
-                            (click)="closeTab.emit(item.uId)"
-                        >
-                            <fd-icon glyph="decline"></fd-icon>
-                        </button>
-                    </div>
+                    @if (item.closable) {
+                        <div class="fd-icon-tab-bar__button-container">
+                            <button
+                                fd-button
+                                class="fd-icon-tab-bar__button"
+                                fdType="transparent"
+                                (click)="closeTab.emit(item.uId)"
+                            >
+                                <fd-icon glyph="decline"></fd-icon>
+                            </button>
+                        </div>
+                    }
                 </li>
-            </ng-container>
+            }
         </ul>
     </fd-popover-body>
 </fd-popover>

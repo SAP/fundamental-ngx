@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
@@ -38,7 +38,6 @@ import {
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         DynamicPageModule,
         BreadcrumbModule,
         ContentDensityDirective,

@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody fd-table-body>
-            <ng-container *ngFor="let fruit of fruits">
+            @for (fruit of fruits; track fruit) {
                 <tr fd-table-row [main]="true" [activable]="true">
                     <td fd-table-cell>
                         <p fd-table-text [title]="true">{{ fruit.name }}</p>
@@ -26,9 +26,9 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                        @if (navigationArrow$ | async; as navigationArrow) {
                             <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        </ng-container>
+                        }
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true">
@@ -47,11 +47,10 @@
                         </p>
                     </td>
                 </tr>
-            </ng-container>
+            }
         </tbody>
     </table>
 </div>
-
 <div style="max-width: 768px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Tablet Mode</h4>
     <table
@@ -72,7 +71,7 @@
             </tr>
         </thead>
         <tbody fd-table-body>
-            <ng-container *ngFor="let fruit of fruits">
+            @for (fruit of fruits; track fruit) {
                 <tr fd-table-row [main]="true" [activable]="true">
                     <td fd-table-cell>
                         <p fd-table-text [title]="true">{{ fruit.name }}</p>
@@ -88,9 +87,9 @@
                         {{ fruit.dateOfExpire }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                        @if (navigationArrow$ | async; as navigationArrow) {
                             <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        </ng-container>
+                        }
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true">
@@ -101,11 +100,10 @@
                         </p>
                     </td>
                 </tr>
-            </ng-container>
+            }
         </tbody>
     </table>
 </div>
-
 <div style="max-width: 1200px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Desktop Mode</h4>
     <table fd-table [noBorderX]="true" [responsive]="true" aria-label="Pop In Mode on Responsive Table Tablet Mode">
@@ -121,7 +119,7 @@
             </tr>
         </thead>
         <tbody fd-table-body>
-            <ng-container *ngFor="let fruit of fruits">
+            @for (fruit of fruits; track fruit) {
                 <tr fd-table-row [main]="true" [activable]="true">
                     <td fd-table-cell>
                         {{ fruit.name }}
@@ -142,16 +140,15 @@
                         {{ fruit.description }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                        @if (navigationArrow$ | async; as navigationArrow) {
                             <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        </ng-container>
+                        }
                     </td>
                 </tr>
-            </ng-container>
+            }
         </tbody>
     </table>
 </div>
-
 <div style="max-width: 450px; padding-bottom: 50px">
     <h4 class="table-example-popin-title">Popin Mobile Mode with Checkboxes</h4>
     <table
@@ -180,7 +177,7 @@
             </tr>
         </thead>
         <tbody fd-table-body>
-            <ng-container *ngFor="let fruit of fruits; let ind = index">
+            @for (fruit of fruits; track fruit; let ind = $index) {
                 <tr fd-table-row [main]="true" [attr.aria-selected]="fruit.checked">
                     <td fd-table-cell>
                         <fd-checkbox
@@ -199,9 +196,9 @@
                         {{ fruit.price }}
                     </td>
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                        <ng-container *ngIf="navigationArrow$ | async as navigationArrow">
+                        @if (navigationArrow$ | async; as navigationArrow) {
                             <i fd-table-icon [glyph]="navigationArrow" [navigation]="true" role="presentation"></i>
-                        </ng-container>
+                        }
                     </td>
                 </tr>
                 <tr fd-table-row [secondary]="true" [attr.aria-selected]="fruit.checked">
@@ -221,7 +218,7 @@
                         </p>
                     </td>
                 </tr>
-            </ng-container>
+            }
         </tbody>
     </table>
 </div>

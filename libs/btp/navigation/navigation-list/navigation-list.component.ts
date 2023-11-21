@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
-import { NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -39,7 +39,7 @@ import { NavigationListItemComponent } from './navigation-list-item.component';
             useExisting: NavigationListComponent
         }
     ],
-    imports: [NgIf, NavigationListItemComponent]
+    imports: [NavigationListItemComponent]
 })
 export class NavigationListComponent
     implements OnInit, OnChanges, CssClassBuilder, HasElementRef, FdbNavigationListComponent

@@ -22,7 +22,7 @@ import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@f
 import { A11yModule } from '@angular/cdk/a11y';
 import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { ResizeDirective, ResizeHandleDirective } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { DialogBase } from './base/dialog-base.class';
@@ -61,7 +61,6 @@ import { DialogRef } from './utils/dialog-ref.class';
         CdkDrag,
         CdkScrollable,
         ScrollbarDirective,
-        NgIf,
         ResizeHandleDirective,
         CdkDragHandle
     ]

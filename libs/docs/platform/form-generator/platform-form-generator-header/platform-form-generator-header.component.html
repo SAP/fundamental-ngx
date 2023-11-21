@@ -24,7 +24,6 @@
             Developers can also set default form field parameters by calling <code>withConfig()</code> method of the
             <code>PlatformFormGeneratorModule</code> during it's import.
         </p>
-
         <h3>Form Generator Elements:</h3>
         <p>
             The table below shows a list of element types, attributes, and descriptions. All types have a built-in
@@ -40,11 +39,13 @@
                 </tr>
             </thead>
             <tbody fd-table-body>
-                <tr fd-table-row *ngFor="let prop of Elementtype">
-                    <td fd-table-cell>{{ prop[0] }}</td>
-                    <td fd-table-cell>{{ prop[1] }}</td>
-                    <td fd-table-cell>{{ prop[2] }}</td>
-                </tr>
+                @for (prop of Elementtype; track prop) {
+                    <tr fd-table-row>
+                        <td fd-table-cell>{{ prop[0] }}</td>
+                        <td fd-table-cell>{{ prop[1] }}</td>
+                        <td fd-table-cell>{{ prop[2] }}</td>
+                    </tr>
+                }
             </tbody>
         </table>
         <br />
@@ -58,10 +59,12 @@
                 </tr>
             </thead>
             <tbody fd-table-body>
-                <tr fd-table-row *ngFor="let prop of defaultHintOptions">
-                    <td fd-table-cell>{{ prop[0] }}</td>
-                    <td fd-table-cell>{{ prop[1] }}</td>
-                </tr>
+                @for (prop of defaultHintOptions; track prop) {
+                    <tr fd-table-row>
+                        <td fd-table-cell>{{ prop[0] }}</td>
+                        <td fd-table-cell>{{ prop[1] }}</td>
+                    </tr>
+                }
             </tbody>
         </table>
         <p>
@@ -72,6 +75,5 @@
         </p>
     </description>
     <import module="PlatformFormGeneratorModule" subPackage="form"></import>
-
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

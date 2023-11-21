@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarElementDirective, BarLeftDirective, ButtonBarComponent } from '@fundamental-ngx/core/bar';
@@ -49,9 +49,7 @@ import { SmartFilterBarService } from '../../smart-filter-bar.service';
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgIf,
         FormsModule,
-        NgFor,
         LayoutGridComponent,
         LayoutGridRowDirective,
         LayoutGridColDirective,

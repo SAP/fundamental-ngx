@@ -1,113 +1,120 @@
-<fd-busy-indicator *ngIf="_firstLoadingDone; else loadingTemplate" [loading]="formLoading" [block]="true">
-    <fdp-form-group
-        *ngIf="form"
-        [hint]="hint"
-        [mainTitle]="mainTitle"
-        [hideMainTItle]="hideMainTItle"
-        [formGroup]="form"
-        [columnLayout]="columnLayout"
-        [labelColumnLayout]="labelColumnLayout"
-        [fieldColumnLayout]="fieldColumnLayout"
-        [gapColumnLayout]="gapColumnLayout"
-        [unifiedLayout]="unifiedLayout"
-        [inlineColumnLayout]="inlineColumnLayout"
-        [useForm]="true"
-    >
-        <ng-container *ngFor="let error of _errorModels; trackBy: _errorsTrackBy">
-            <span *fdpFormFieldError="error.type; let directiveError">
-                <ng-container *ngIf="_isAdvancedError(directiveError); else simpleErrorTemplate">
-                    <ng-container *ngIf="directiveError.heading">
-                        <span *fdpFormFieldErrorHeading="let validationError; type: directiveError.type">
-                            {{ validationError.heading }}
-                        </span>
-                    </ng-container>
-                    <ng-container *ngIf="directiveError.description">
-                        <span *fdpFormFieldErrorDescription="let validationError">
-                            {{ validationError.description }}
-                        </span>
-                    </ng-container>
-                </ng-container>
-                <ng-template #simpleErrorTemplate>
-                    <span *fdpFormFieldErrorHeading="let validationError">
-                        {{ error.value ? error.value : validationError }}
-                    </span>
-                </ng-template>
-            </span>
-        </ng-container>
-        <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn">
-            <ng-container
-                *ngTemplateOutlet="
-                    field.type === 'field' ? fieldRenderer : groupRenderer;
-                    context: { field: field, formFieldName: field.formItem.name, rank: field.formItem?.rank || 0 }
-                "
-            ></ng-container>
-            <ng-template
-                #fieldRenderer
-                let-field="field"
-                let-formFieldName="formFieldName"
-                let-formGroupName="formGroupName"
-                let-rank="rank"
+@if (_firstLoadingDone) {
+    <fd-busy-indicator [loading]="formLoading" [block]="true">
+        @if (form) {
+            <fdp-form-group
+                [hint]="hint"
+                [mainTitle]="mainTitle"
+                [hideMainTItle]="hideMainTItle"
+                [formGroup]="form"
+                [columnLayout]="columnLayout"
+                [labelColumnLayout]="labelColumnLayout"
+                [fieldColumnLayout]="fieldColumnLayout"
+                [gapColumnLayout]="gapColumnLayout"
+                [unifiedLayout]="unifiedLayout"
+                [inlineColumnLayout]="inlineColumnLayout"
+                [useForm]="true"
             >
-                <ng-container
-                    *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
-                >
-                    <fdp-form-generator-field
-                        [hintOptions]="field.formItem.guiOptions | getHintOptions"
-                        [form]="form"
-                        [shouldShow]="shouldShowFields[field.formItem.name] !== false"
-                        [field]="field"
-                        [formFieldName]="formFieldName"
-                        [formGroupNamePath]="formGroupName"
-                        [rank]="rank"
-                    ></fdp-form-generator-field>
-                </ng-container>
-            </ng-template>
-            <ng-template #groupRenderer>
-                <fdp-form-field-group
-                    [hintOptions]="field.formItem.guiOptions | getHintOptions"
-                    [label]="field.formItem.message || ''"
-                    [labelColumnLayout]="field.formItem.guiOptions?.labelColumnLayout"
-                    [fieldColumnLayout]="field.formItem.guiOptions?.fieldColumnLayout"
-                    [gapColumnLayout]="field.formItem.guiOptions?.gapColumnLayout"
-                    [formName]="field.formItem.name"
-                >
-                    <ng-container *ngFor="let groupField of field | getOrderedFieldControls; trackBy: _groupTrackFn">
+                @for (error of _errorModels; track _errorsTrackBy($index, error)) {
+                    <span *fdpFormFieldError="error.type; let directiveError">
+                        @if (_isAdvancedError(directiveError)) {
+                            @if (directiveError.heading) {
+                                <span *fdpFormFieldErrorHeading="let validationError; type: directiveError.type">
+                                    {{ validationError.heading }}
+                                </span>
+                            }
+                            @if (directiveError.description) {
+                                <span *fdpFormFieldErrorDescription="let validationError">
+                                    {{ validationError.description }}
+                                </span>
+                            }
+                        } @else {
+                            <span *fdpFormFieldErrorHeading="let validationError">
+                                {{ error.value ? error.value : validationError }}
+                            </span>
+                        }
+                    </span>
+                }
+                @for (field of formControlItems; track _trackFn($index, field)) {
+                    <ng-container
+                        *ngTemplateOutlet="
+                            field.type === 'field' ? fieldRenderer : groupRenderer;
+                            context: {
+                                field: field,
+                                formFieldName: field.formItem.name,
+                                rank: field.formItem?.rank || 0
+                            }
+                        "
+                    ></ng-container>
+                    <ng-template
+                        #fieldRenderer
+                        let-field="field"
+                        let-formFieldName="formFieldName"
+                        let-formGroupName="formGroupName"
+                        let-rank="rank"
+                    >
                         <ng-container
-                            *fdpDynamicFormControlField="
-                                groupField;
-                                show: shouldShowFields[groupField.formItem.name!] !== false
-                            "
+                            *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
                         >
                             <fdp-form-generator-field
-                                [hintOptions]="groupField.formItem.guiOptions | getHintOptions"
+                                [hintOptions]="field.formItem.guiOptions | getHintOptions"
                                 [form]="form"
-                                [field]="groupField"
-                                [shouldShow]="shouldShowFields[groupField.formItem.name!] !== false"
-                                [formFieldName]="groupField.formItem.name"
-                                [formGroupNamePath]="field.formItem.name"
-                                [rank]="groupField.formItem.rank || 0"
+                                [shouldShow]="shouldShowFields[field.formItem.name] !== false"
+                                [field]="field"
+                                [formFieldName]="formFieldName"
+                                [formGroupNamePath]="formGroupName"
+                                [rank]="rank"
                             ></fdp-form-generator-field>
                         </ng-container>
-                    </ng-container>
-                </fdp-form-field-group>
-            </ng-template>
-        </ng-container>
-        <fdp-form-field *ngIf="!noAdditionalContent" [column]="1" [rank]="formControlItems.length + 1">
-            <!-- For user-defined elements, like submit button -->
-            <ng-content></ng-content>
-        </fdp-form-field>
-    </fdp-form-group>
-</fd-busy-indicator>
-
-<ng-template #loadingTemplate>
+                    </ng-template>
+                    <ng-template #groupRenderer>
+                        <fdp-form-field-group
+                            [hintOptions]="field.formItem.guiOptions | getHintOptions"
+                            [label]="field.formItem.message || ''"
+                            [labelColumnLayout]="field.formItem.guiOptions?.labelColumnLayout"
+                            [fieldColumnLayout]="field.formItem.guiOptions?.fieldColumnLayout"
+                            [gapColumnLayout]="field.formItem.guiOptions?.gapColumnLayout"
+                            [formName]="field.formItem.name"
+                        >
+                            @for (
+                                groupField of field | getOrderedFieldControls;
+                                track _groupTrackFn($index, groupField)
+                            ) {
+                                <ng-container
+                                    *fdpDynamicFormControlField="
+                                        groupField;
+                                        show: shouldShowFields[groupField.formItem.name!] !== false
+                                    "
+                                >
+                                    <fdp-form-generator-field
+                                        [hintOptions]="groupField.formItem.guiOptions | getHintOptions"
+                                        [form]="form"
+                                        [field]="groupField"
+                                        [shouldShow]="shouldShowFields[groupField.formItem.name!] !== false"
+                                        [formFieldName]="groupField.formItem.name"
+                                        [formGroupNamePath]="field.formItem.name"
+                                        [rank]="groupField.formItem.rank || 0"
+                                    ></fdp-form-generator-field>
+                                </ng-container>
+                            }
+                        </fdp-form-field-group>
+                    </ng-template>
+                }
+                @if (!noAdditionalContent) {
+                    <fdp-form-field [column]="1" [rank]="formControlItems.length + 1">
+                        <!-- For user-defined elements, like submit button -->
+                        <ng-content></ng-content>
+                    </fdp-form-field>
+                }
+            </fdp-form-group>
+        }
+    </fd-busy-indicator>
+} @else {
     <fd-skeleton width="100%" height="100px" [style.padding.rem]="1">
         <svg:rect x="0" y="0" rx="4" width="15%" height="8" />
         <svg:rect x="0" y="20" rx="4" width="25%" height="16" />
-
         <svg:rect x="35%" y="0" rx="4" width="15%" height="8" />
         <svg:rect x="35%" y="20" rx="4" width="25%" height="16" />
-
         <svg:rect x="0" y="60" rx="4" width="15%" height="8" />
         <svg:rect x="0" y="80" rx="4" width="25%" height="16" />
     </fd-skeleton>
-</ng-template>
+}

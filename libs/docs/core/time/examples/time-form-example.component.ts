@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -11,7 +10,7 @@ import { TimeModule } from '@fundamental-ngx/core/time';
     templateUrl: './time-form-example.component.html',
     providers: [provideDateTimeFormats()],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, TimeModule, NgIf]
+    imports: [FormsModule, ReactiveFormsModule, FormLabelComponent, TimeModule]
 })
 export class TimeFormExampleComponent {
     customForm = new FormGroup({

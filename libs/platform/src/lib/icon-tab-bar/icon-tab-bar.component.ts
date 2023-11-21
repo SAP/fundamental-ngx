@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -32,7 +32,6 @@ import { IconTabBarBackground, IconTabBarSize, TabDestinyMode, TabType } from '.
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         IconTabBarProcessTypeComponent,
         IconTabBarFilterTypeComponent,

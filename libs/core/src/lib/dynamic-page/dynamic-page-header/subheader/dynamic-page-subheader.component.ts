@@ -13,7 +13,6 @@ import {
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { distinctUntilChanged } from 'rxjs/operators';
 
-import { NgIf } from '@angular/common';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
@@ -25,7 +24,7 @@ let dynamicPageSubHeaderId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, ButtonComponent]
+    imports: [ButtonComponent]
 })
 export class DynamicPageSubheaderComponent {
     /**

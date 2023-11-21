@@ -1,5 +1,5 @@
-<ng-container *ngIf="showHome && navigationContentComponent.showHome">
-    <ng-container *ngIf="linkTemplate() as tmp">
+@if (showHome && navigationContentComponent.showHome) {
+    @if (linkTemplate(); as tmp) {
         <li
             fdb-navigation-list-item
             [linkTemplate]="tmp"
@@ -8,11 +8,9 @@
             [class.fd-navigation-list-item--home-without-separator]="!_navigationComponent.homeSeparator()"
             class="fd-navigation__list-item--home"
         ></li>
-        <li
-            *ngIf="_navigationComponent.homeSeparator()"
-            #homeListSeparator
-            class="fd-navigation__list-item fd-navigation__list-item--separator"
-        ></li>
-    </ng-container>
-</ng-container>
+        @if (_navigationComponent.homeSeparator()) {
+            <li #homeListSeparator class="fd-navigation__list-item fd-navigation__list-item--separator"></li>
+        }
+    }
+}
 <ng-content></ng-content>

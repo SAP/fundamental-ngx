@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -23,7 +22,7 @@ import { TimelineNodeComponentInterface } from './timeline-node-component.interf
         '[class.fd-timeline__node-wrapper--icon]': '!!glyph'
     },
     standalone: true,
-    imports: [NgIf, IconComponent]
+    imports: [IconComponent]
 })
 export class TimelineNodeComponent implements TimelineNodeComponentInterface, OnInit, OnDestroy {
     /** Glyph of the current timeline node.*/
@@ -39,7 +38,10 @@ export class TimelineNodeComponent implements TimelineNodeComponentInterface, On
     lineEl: ElementRef;
 
     /** @hidden */
-    constructor(public el: ElementRef, private _timelinePositionControl: TimelinePositionControlService) {}
+    constructor(
+        public el: ElementRef,
+        private _timelinePositionControl: TimelinePositionControlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

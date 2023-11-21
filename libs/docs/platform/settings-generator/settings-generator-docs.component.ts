@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -34,7 +34,6 @@ import { SettingsGeneratorMessagePopoverExampleComponent } from './examples/mess
         SettingsGeneratorCustomLayoutExampleComponent,
         SettingsGeneratorCustomControlExampleComponent,
         SettingsGeneratorDialogExampleComponent,
-        NgIf,
         CodeSnippetComponent,
         AsyncPipe
     ]

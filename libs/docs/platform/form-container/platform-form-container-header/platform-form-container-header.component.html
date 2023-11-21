@@ -35,14 +35,12 @@
                 </ul>
             </li>
         </ul>
-
         Specify the <code>columnLayoutType</code> at the <code>fdp-form-group</code> level to render the layout in that
         particular form. For example, if you want a 2 column layout in XL, 2 column layout in L, 2 column layout in M,
         and single-column layout in S, the corresponding <code>columnLayoutType</code> would be
         <code>XL2-L2-M2-S1</code>.
         <br />
         <br />
-
         <h3>React with custom screen-size breakpoints</h3>
         We have default breakpoints of screen sizes. on change of that, layout of form-container changes based on
         specification provided. Further we also have option to inject custom breakpoints as well. Please check component
@@ -50,7 +48,6 @@
         <strong>Change of column number for a field</strong> for reference.
         <br />
         <br />
-
         <h3>Inline help default global options</h3>
         <p>Inline help has default options as below:</p>
         <table fd-table>
@@ -61,10 +58,12 @@
                 </tr>
             </thead>
             <tbody fd-table-body>
-                <tr fd-table-row *ngFor="let prop of defaultHintOptions">
-                    <td fd-table-cell>{{ prop[0] }}</td>
-                    <td fd-table-cell>{{ prop[1] }}</td>
-                </tr>
+                @for (prop of defaultHintOptions; track prop) {
+                    <tr fd-table-row>
+                        <td fd-table-cell>{{ prop[0] }}</td>
+                        <td fd-table-cell>{{ prop[1] }}</td>
+                    </tr>
+                }
             </tbody>
         </table>
         <p>
@@ -77,6 +76,5 @@
         <br />
         <import module="FdpFormGroupModule" subPackage="form"></import>
     </description>
-
     <fd-header-tabs></fd-header-tabs>
 </fd-doc-page>

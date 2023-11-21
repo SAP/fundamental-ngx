@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -33,7 +32,6 @@ import {
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         DynamicPageModule,
         ToolbarComponent,
         ContentDensityDirective,

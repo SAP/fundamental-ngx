@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     DynamicFormItem,
@@ -23,7 +23,7 @@ export const dummyAwaitablePromise = (timeout = 200): Promise<boolean> =>
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [PlatformFormGeneratorModule, NgIf, PlatformButtonModule, JsonPipe]
+    imports: [PlatformFormGeneratorModule, PlatformButtonModule, JsonPipe]
 })
 export class PlatformFormGeneratorCustomFieldLayoutExampleComponent {
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;

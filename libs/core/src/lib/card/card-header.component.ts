@@ -13,7 +13,6 @@ import {
 
 import { AvatarComponent, FD_AVATAR_COMPONENT } from '@fundamental-ngx/core/avatar';
 
-import { NgIf } from '@angular/common';
 import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 import { CardSubtitleDirective } from './card-subtitle.directive';
 import { CLASS_NAME } from './constants';
@@ -23,7 +22,7 @@ import { CLASS_NAME } from './constants';
     templateUrl: './card-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, AfterContentInit {
     /** Whether card header is interactive */
@@ -55,7 +54,10 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     _subtitle: CardSubtitleDirective;
 
     /** @hidden */
-    constructor(public readonly elementRef: ElementRef<HTMLElement>, private renderer: Renderer2) {}
+    constructor(
+        public readonly elementRef: ElementRef<HTMLElement>,
+        private renderer: Renderer2
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

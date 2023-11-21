@@ -13,12 +13,12 @@
         >
         </fdp-datetime-picker>
     </fdp-form-field>
-
     <fdp-form-field id="disabledDatetime" [column]="2" label="Disabled Datetime Picker:">
         <fdp-datetime-picker name="disabledDatetime" [disabled]="true" [value]="date"> </fdp-datetime-picker>
     </fdp-form-field>
-
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required"> Value is required </span>
+        @if (errors.required) {
+            <span> Value is required </span>
+        }
     </ng-template>
 </fdp-form-group>

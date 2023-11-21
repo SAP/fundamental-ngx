@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -55,7 +55,7 @@ import { FD_FLEXIBLE_COLUMN_LAYOUT_COMPONENT } from './tokens';
         }
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, NgIf, ButtonComponent, ContentDensityDirective]
+    imports: [NgTemplateOutlet, ButtonComponent, ContentDensityDirective]
 })
 export class FlexibleColumnLayoutComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
     /**

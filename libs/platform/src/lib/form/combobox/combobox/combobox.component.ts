@@ -33,7 +33,7 @@ import {
     PlatformFormFieldControl
 } from '@fundamental-ngx/platform/shared';
 
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { SearchHighlightPipe } from '@fundamental-ngx/cdk/utils';
 import { FormInputMessageGroupComponent, FormMessageComponent } from '@fundamental-ngx/core/form';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
@@ -78,10 +78,8 @@ export class ComboboxSelectionChangeEvent {
         InputGroupModule,
         FormsModule,
         AutoCompleteDirective,
-        NgIf,
         FormMessageComponent,
         ListModule,
-        NgFor,
         NgClass,
         ListSecondaryDirective,
         SearchHighlightPipe,

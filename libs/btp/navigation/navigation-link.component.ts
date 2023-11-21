@@ -1,5 +1,5 @@
 /* eslint-disable @angular-eslint/no-host-metadata-property */
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -25,23 +25,24 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'a[fdb-navigation-link]',
     template: `
-        <ng-container *ngIf="glyph">
+        @if (glyph) {
             <fd-icon
                 [glyph]="glyph"
                 class="fd-navigation__icon"
                 [attr.role]="'presentation'"
                 [ariaHidden]="true"
             ></fd-icon>
-        </ng-container>
+        }
         <ng-template #textRenderer>
             <span class="fd-navigation__text">{{ label }}</span>
-            <span
-                class="fd-navigation__external-link-indicator"
-                role="presentation"
-                aria-hidden="true"
-                aria-label="external link indicator"
-                *ngIf="external"
-            ></span>
+            @if (external) {
+                <span
+                    class="fd-navigation__external-link-indicator"
+                    role="presentation"
+                    aria-hidden="true"
+                    aria-label="external link indicator"
+                ></span>
+            }
         </ng-template>
         <ng-container *ngTemplateOutlet="textRenderer" />
         <span
@@ -51,20 +52,21 @@ import { FdbNavigationListItemComponent } from './navigation-list-item-component
             aria-label="selection indicator"
         >
         </span>
-        <span
-            *ngIf="
-                navigationListItemComponent?.childNavigationListComponent() &&
-                navigationListItemComponent?.normalizedLevel() !== 3 &&
-                !_routerLink
-            "
-            class="fd-navigation__has-children-indicator"
-            role="presentation"
-            aria-hidden="true"
-            aria-label="has children indicator, expanded"
-        >
-        </span>
+        @if (
+            navigationListItemComponent?.childNavigationListComponent() &&
+            navigationListItemComponent?.normalizedLevel() !== 3 &&
+            !_routerLink
+        ) {
+            <span
+                class="fd-navigation__has-children-indicator"
+                role="presentation"
+                aria-hidden="true"
+                aria-label="has children indicator, expanded"
+            >
+            </span>
+        }
     `,
-    imports: [NgIf, IconComponent, AsyncPipe, NgTemplateOutlet],
+    imports: [IconComponent, AsyncPipe, NgTemplateOutlet],
     hostDirectives: [RouterLinkActive],
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,

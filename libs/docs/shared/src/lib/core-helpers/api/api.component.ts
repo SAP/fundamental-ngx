@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -11,7 +10,7 @@ import { ApiDocsService } from '../../services/api-docs.service';
     styleUrls: ['./api.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonComponent, MenuModule, NgFor]
+    imports: [ButtonComponent, MenuModule]
 })
 export class ApiComponent implements OnInit {
     @ViewChild('menu')
@@ -21,7 +20,10 @@ export class ApiComponent implements OnInit {
     activeFile: string;
     result: string;
 
-    constructor(private route: ActivatedRoute, private apiService: ApiDocsService) {}
+    constructor(
+        private route: ActivatedRoute,
+        private apiService: ApiDocsService
+    ) {}
 
     ngOnInit(): void {
         if (this.route.snapshot.data) {

@@ -15,34 +15,31 @@
             <i class="sap-icon--slim-arrow-left"></i>
         </button>
         <div class="fdp-media-container">
-            <img
-                *ngIf="_data.selectedMedia.mediaType === 'image'"
-                class="fdp-dialog-media-thumbnail-img"
-                [attr.aria-label]="_data.selectedMedia.label"
-                [src]="_data.selectedMedia.thumbnailUrl"
-                alt="first image"
-            />
-
-            <video
-                *ngIf="_data.selectedMedia.mediaType === 'video'"
-                [attr.aria-label]="_data.selectedMedia.label"
-                [src]="_data.selectedMedia.mediaUrl"
-                controls
-            >
-                {{ _data.selectedMedia.alt }}
-                <track
-                    [src]="_data.selectedMedia.captionFile"
-                    kind="captions"
-                    srclang="en"
-                    [label]="_data.selectedMedia.label"
+            @if (_data.selectedMedia.mediaType === 'image') {
+                <img
+                    class="fdp-dialog-media-thumbnail-img"
+                    [attr.aria-label]="_data.selectedMedia.label"
+                    [src]="_data.selectedMedia.thumbnailUrl"
+                    alt="first image"
                 />
-                <track
-                    [src]="_data.selectedMedia.audioDescFile"
-                    kind="descriptions"
-                    srclang="en"
-                    [label]="_data.selectedMedia.label"
-                />
-            </video>
+            }
+            @if (_data.selectedMedia.mediaType === 'video') {
+                <video [attr.aria-label]="_data.selectedMedia.label" [src]="_data.selectedMedia.mediaUrl" controls>
+                    {{ _data.selectedMedia.alt }}
+                    <track
+                        [src]="_data.selectedMedia.captionFile"
+                        kind="captions"
+                        srclang="en"
+                        [label]="_data.selectedMedia.label"
+                    />
+                    <track
+                        [src]="_data.selectedMedia.audioDescFile"
+                        kind="descriptions"
+                        srclang="en"
+                        [label]="_data.selectedMedia.label"
+                    />
+                </video>
+            }
         </div>
         <button
             class="fd-button fdp-thumbnail-button--right"
@@ -62,7 +59,6 @@
             (thumbnailClicked)="thumbnailClickHandle($event)"
         ></fdp-thumbnail-image>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             [label]="'platformThumbnail.detailsDialogCloseBtnLabel' | fdTranslate"

@@ -8,7 +8,9 @@
                     [ngModel]="rule.columnKey"
                     (ngModelChange)="rule.setColumnKey($event); _onModelChange()"
                 >
-                    <li fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</li>
+                    @for (column of rule.columns; track column) {
+                        <li fd-option [value]="column.key">{{ column.label }}</li>
+                    }
                 </fd-select>
             </div>
             <div fdLayoutGridCol colGrow>
@@ -18,65 +20,16 @@
                     [ngModel]="rule.strategy"
                     (ngModelChange)="rule.setStrategy($event); _onModelChange()"
                 >
-                    <li fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
-                        <ng-container [ngSwitch]="strategy">
-                            <span *ngSwitchCase="'between'">
-                                {{ 'platformTable.P13FilterStrategyLabelBetween' | fdTranslate }}
+                    @for (strategy of rule.strategies; track strategy) {
+                        <li fd-option [value]="strategy">
+                            <span>
+                                {{
+                                    strategyLabels[strategy] || 'platformTable.P13FilterStrategyLabelNotDefined'
+                                        | fdTranslate
+                                }}
                             </span>
-
-                            <span *ngSwitchCase="'contains'">
-                                {{ 'platformTable.P13FilterStrategyLabelContains' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'beginsWith'">
-                                {{ 'platformTable.P13FilterStrategyLabelBeginsWith' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'endsWith'">
-                                {{ 'platformTable.P13FilterStrategyLabelEndsWith' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'equalTo'">
-                                {{ 'platformTable.P13FilterStrategyLabelEqualTo' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'greaterThan'">
-                                {{ 'platformTable.P13FilterStrategyLabelGreaterThan' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'greaterThanOrEqualTo'">
-                                {{ 'platformTable.P13FilterStrategyLabelGreaterThanOrEqualTo' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'lessThan'">
-                                {{ 'platformTable.P13FilterStrategyLabelLessThan' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'lessThanOrEqualTo'">
-                                {{ 'platformTable.P13FilterStrategyLabelLessThanOrEqualTo' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'after'">
-                                {{ 'platformTable.P13FilterStrategyLabelAfter' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'onOrAfter'">
-                                {{ 'platformTable.P13FilterStrategyLabelOnOrAfter' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'before'">
-                                {{ 'platformTable.P13FilterStrategyLabelBefore' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchCase="'beforeOrOn'">
-                                {{ 'platformTable.P13FilterStrategyLabelBeforeOrOn' | fdTranslate }}
-                            </span>
-
-                            <span *ngSwitchDefault>
-                                {{ 'platformTable.P13FilterStrategyLabelNotDefined' | fdTranslate }}
-                            </span>
-                        </ng-container>
-                    </li>
+                        </li>
+                    }
                 </fd-select>
             </div>
         </div>

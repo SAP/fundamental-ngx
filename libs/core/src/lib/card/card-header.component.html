@@ -1,22 +1,19 @@
 <ng-content></ng-content>
-
 <ng-content select="fd-avatar"></ng-content>
-
 <div class="fd-card__header-text">
     <!-- Title -->
     <div class="fd-card__title-area">
         <ng-content select="[fd-card-title]"></ng-content>
         <ng-content select="[fd-card-counter]"></ng-content>
     </div>
-
     <!-- Subtitle -->
-    <div class="fd-card__subtitle-area" *ngIf="_subtitle">
-        <ng-content select="[fd-card-subtitle]"></ng-content>
-    </div>
-
+    @if (_subtitle) {
+        <div class="fd-card__subtitle-area">
+            <ng-content select="[fd-card-subtitle]"></ng-content>
+        </div>
+    }
     <!-- KPI -->
     <ng-content select="fd-card-kpi-header"></ng-content>
-
     <!-- Second Subtitle -->
     <ng-content select="[fd-card-second-subtitle]"></ng-content>
 </div>

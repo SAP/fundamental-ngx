@@ -39,7 +39,7 @@ import {
     SelectItem
 } from '@fundamental-ngx/platform/shared';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormGroupComponent, FormItemComponent } from '@fundamental-ngx/core/form';
 import { RadioButtonComponent } from './radio/radio.component';
 
@@ -59,7 +59,7 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FD_FORM_FIELD_CONTROL, useExisting: forwardRef(() => RadioGroupComponent), multi: true }],
     standalone: true,
-    imports: [FormGroupComponent, NgIf, NgFor, FormItemComponent, NgTemplateOutlet, RadioButtonComponent]
+    imports: [FormGroupComponent, FormItemComponent, NgTemplateOutlet, RadioButtonComponent]
 })
 export class RadioGroupComponent
     extends InLineLayoutCollectionBaseInput

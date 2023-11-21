@@ -17,11 +17,16 @@
                     [formControl]="formField.formControl"
                 ></fdp-number-step-input>
             </fdp-form-field>
-
             <ng-template #i18n let-errors>
-                <span id="step-input-valueRequiredError" *ngIf="errors.required"> Value is required </span>
-                <span id="step-input-valueMinError" *ngIf="errors.min"> Value must be more than {{ MIN_VALUE }} </span>
-                <span id="step-input-valueMaxError" *ngIf="errors.max"> Value must be less than {{ MAX_VALUE }} </span>
+                @if (errors.required) {
+                    <span id="step-input-valueRequiredError"> Value is required </span>
+                }
+                @if (errors.min) {
+                    <span id="step-input-valueMinError"> Value must be more than {{ MIN_VALUE }} </span>
+                }
+                @if (errors.max) {
+                    <span id="step-input-valueMaxError"> Value must be less than {{ MAX_VALUE }} </span>
+                }
             </ng-template>
         </fdp-form-group>
     </div>

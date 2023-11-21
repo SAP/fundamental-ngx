@@ -118,7 +118,10 @@ export class PlatformSmartFilterBarCustomFilterExampleComponent {
 
     source: TableDataSource<ExampleItem>;
 
-    constructor(datetimeAdapter: DatetimeAdapter<FdDate>, private _smartFilterBarService: SmartFilterBarService) {
+    constructor(
+        datetimeAdapter: DatetimeAdapter<FdDate>,
+        private _smartFilterBarService: SmartFilterBarService
+    ) {
         const sliderConfig: SmartFilterBarCustomFilterConfig = {
             conditionComponent: PlatformSmartFilterBarSliderComponent,
             types: ['price-slider'],

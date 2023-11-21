@@ -62,13 +62,13 @@ interface TreeItemData {
     `,
     standalone: true,
     imports: [
-        TreeComponent,
-        FormsModule,
-        IconComponent,
-        TreeItemComponent,
-        TreeItemTextDirective,
-        TreeItemIconDirective
-    ]
+    TreeComponent,
+    FormsModule,
+    IconComponent,
+    TreeItemComponent,
+    TreeItemTextDirective,
+    TreeItemIconDirective
+]
 })
 export class ProjectedTreeItemsComponent {
     @ViewChild(TreeComponent)

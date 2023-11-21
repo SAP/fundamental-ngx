@@ -19,7 +19,6 @@ import {
 } from '@angular/core';
 import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 
-import { NgIf } from '@angular/common';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL, FormStates } from '@fundamental-ngx/cdk/forms';
 import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 import { FormControlComponent } from '@fundamental-ngx/core/form';
@@ -49,7 +48,7 @@ export type WrapType = 'hard' | 'soft' | 'off';
         }
     ],
     standalone: true,
-    imports: [FormControlComponent, FormsModule, NgIf, FdTranslatePipe]
+    imports: [FormControlComponent, FormsModule, FdTranslatePipe]
 })
 export class TextAreaComponent extends BaseInput implements AfterViewChecked, OnInit, AfterViewInit {
     /**

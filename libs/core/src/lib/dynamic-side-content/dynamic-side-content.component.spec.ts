@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -12,16 +12,20 @@ import { DynamicSideContentModule } from './dynamic-side-content.module';
 
 @Component({
     template: `
-        <fd-dynamic-side-content [size]="size" [position]="position">
-            <fd-dynamic-side-content-side *ngIf="renderSideFromLeft">{{
-                sideTextContent
-            }}</fd-dynamic-side-content-side>
-            <fd-dynamic-side-content-main>{{ mainTextContent }}</fd-dynamic-side-content-main>
-            <fd-dynamic-side-content-side *ngIf="!renderSideFromLeft">{{
-                sideTextContent
-            }}</fd-dynamic-side-content-side>
-        </fd-dynamic-side-content>
-    `
+<fd-dynamic-side-content [size]="size" [position]="position">
+  @if (renderSideFromLeft) {
+    <fd-dynamic-side-content-side>{{
+      sideTextContent
+    }}</fd-dynamic-side-content-side>
+  }
+  <fd-dynamic-side-content-main>{{ mainTextContent }}</fd-dynamic-side-content-main>
+  @if (!renderSideFromLeft) {
+    <fd-dynamic-side-content-side>{{
+      sideTextContent
+    }}</fd-dynamic-side-content-side>
+  }
+</fd-dynamic-side-content>
+`
 })
 class TestHostComponent {
     @ViewChild(DynamicSideContentComponent) dynamicSideContent: DynamicSideContentComponent;

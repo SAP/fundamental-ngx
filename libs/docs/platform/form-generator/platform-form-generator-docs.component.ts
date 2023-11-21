@@ -34,7 +34,7 @@ const defaultConfigSrc = 'platform-form-generator-global-config-example.ts';
 const loadingFormGeneratorhtml = 'loading/platform-form-generator-loading-example.component.html';
 const loadingFormGeneratorSrc = 'loading/platform-form-generator-loading-example.component.ts';
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import {
     CodeExampleComponent,
@@ -80,7 +80,6 @@ import { PlatformFormGeneratorProgramaticSubmitComponent } from './examples/plat
         RouterLink,
         PlatformFormGeneratorCustomFieldLayoutExampleComponent,
         PlatformFormGeneratorInlineHelpExampleComponent,
-        NgIf,
         CodeSnippetComponent,
         PlatformFormGeneratorLoadingExampleComponent,
         PlatformFormGeneratorAdvancedExampleComponent,

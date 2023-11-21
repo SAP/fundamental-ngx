@@ -267,28 +267,27 @@
             </fd-wizard>
             <div fd-bar barDesign="floating-footer">
                 <div fd-bar-right>
-                    <fd-button-bar
-                        *ngIf="step1status !== 'current'"
-                        label="Previous Step"
-                        (click)="goToStep(currentStep - 1)"
-                    ></fd-button-bar>
-                    <fd-button-bar
-                        *ngIf="summaryStatus !== 'current'"
-                        [label]="step4status === 'current' ? 'Review' : 'Next Step'"
-                        [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
-                        (click)="goToStep(currentStep + 1)"
-                    ></fd-button-bar>
-                    <fd-button-bar
-                        *ngIf="summaryStatus === 'current'"
-                        label="Finish"
-                        [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
-                        (click)="dialog.close('Continue')"
-                    ></fd-button-bar>
+                    @if (step1status !== 'current') {
+                        <fd-button-bar label="Previous Step" (click)="goToStep(currentStep - 1)"></fd-button-bar>
+                    }
+                    @if (summaryStatus !== 'current') {
+                        <fd-button-bar
+                            [label]="step4status === 'current' ? 'Review' : 'Next Step'"
+                            [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
+                            (click)="goToStep(currentStep + 1)"
+                        ></fd-button-bar>
+                    }
+                    @if (summaryStatus === 'current') {
+                        <fd-button-bar
+                            label="Finish"
+                            [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
+                            (click)="dialog.close('Continue')"
+                        ></fd-button-bar>
+                    }
                     <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')"></fd-button-bar>
                 </div>
             </div>
         </fd-dialog-body>
     </fd-dialog>
 </ng-template>
-
 <button fd-button label="Open Wizard in Dialog" (click)="openDialog(confirmationDialog)"></button>

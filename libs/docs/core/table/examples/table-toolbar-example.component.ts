@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf } from '@angular/common';
+
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
@@ -30,8 +30,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSpacerDirective } from '
         BusyIndicatorComponent,
         FocusableGridDirective,
         TableModule,
-        NgFor,
-        NgIf,
         DialogModule,
         CdkScrollable,
         ScrollbarDirective,
@@ -50,7 +48,11 @@ export class TableToolbarExampleComponent implements OnInit {
     myForm: FormGroup;
     loading = false;
 
-    constructor(private _dialogService: DialogService, private _fb: FormBuilder, private _cdr: ChangeDetectorRef) {}
+    constructor(
+        private _dialogService: DialogService,
+        private _fb: FormBuilder,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     ngOnInit(): void {
         this.tableRows = [

@@ -1,25 +1,25 @@
 <fdp-list [hasByLine]="true" fdCompact>
     <fd-form-group>
-        <div *ngFor="let team of teams; let i = index; trackBy: _trackByFn" fd-form-item>
-            <fd-radio-button
-                [value]="team.id"
-                [attr.id]="'team-radio' + i"
-                [name]="'team-radio' + i"
-                [(ngModel)]="selectedTeamId"
-                (click)="onTeamRadioClick.emit(team)"
-            >
-            </fd-radio-button>
-
-            <fdp-standard-list-item
-                [attr.id]="'approval-team-' + team.id"
-                [avatar]="{ image: '', ariaLabel: team.name }"
-                [description]="team.description || team.members.length + ' members'"
-                [title]="team.name"
-                (click)="_showTeamDetails(team)"
-            >
-            </fdp-standard-list-item>
-
-            <fd-icon [glyph]="'navigation-' + (isRtl ? 'left' : 'right') + '-arrow'"></fd-icon>
-        </div>
+        @for (team of teams; track _trackByFn(i, team); let i = $index) {
+            <div fd-form-item>
+                <fd-radio-button
+                    [value]="team.id"
+                    [attr.id]="'team-radio' + i"
+                    [name]="'team-radio' + i"
+                    [(ngModel)]="selectedTeamId"
+                    (click)="onTeamRadioClick.emit(team)"
+                >
+                </fd-radio-button>
+                <fdp-standard-list-item
+                    [attr.id]="'approval-team-' + team.id"
+                    [avatar]="{ image: '', ariaLabel: team.name }"
+                    [description]="team.description || team.members.length + ' members'"
+                    [title]="team.name"
+                    (click)="_showTeamDetails(team)"
+                >
+                </fdp-standard-list-item>
+                <fd-icon [glyph]="'navigation-' + (isRtl ? 'left' : 'right') + '-arrow'"></fd-icon>
+            </div>
+        }
     </fd-form-group>
 </fdp-list>

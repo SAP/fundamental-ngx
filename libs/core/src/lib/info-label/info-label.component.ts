@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -20,7 +19,7 @@ export type LabelType = 'numeric' | 'icon';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, IconComponent]
+    imports: [IconComponent]
 })
 export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     /** User's custom classes */

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
@@ -14,7 +13,7 @@ import { SplitterComponent } from '../splitter.component';
         '[attr.role]': '"radiogroup"'
     },
     standalone: true,
-    imports: [NgFor, ButtonComponent, FdTranslatePipe]
+    imports: [ButtonComponent, FdTranslatePipe]
 })
 export class SplitterPaginationComponent {
     /** Array of pages ids. */

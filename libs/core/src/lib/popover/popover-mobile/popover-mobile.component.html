@@ -2,15 +2,17 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" data-mobile-popover>
         <fd-dialog-header>
             <h1 fd-title [id]="titleId">{{ title }}</h1>
-            <button fd-dialog-close-button *ngIf="this.mobileConfig.hasCloseButton" (click)="close()"></button>
+            @if (this.mobileConfig.hasCloseButton) {
+                <button fd-dialog-close-button (click)="close()"></button>
+            }
         </fd-dialog-header>
-
         <fd-dialog-body>
             <ng-container *ngTemplateOutlet="viewBody"></ng-container>
         </fd-dialog-body>
-
-        <fd-dialog-footer *ngIf="viewFooter">
-            <ng-container *ngTemplateOutlet="viewFooter"></ng-container>
-        </fd-dialog-footer>
+        @if (viewFooter) {
+            <fd-dialog-footer>
+                <ng-container *ngTemplateOutlet="viewFooter"></ng-container>
+            </fd-dialog-footer>
+        }
     </fd-dialog>
 </ng-template>

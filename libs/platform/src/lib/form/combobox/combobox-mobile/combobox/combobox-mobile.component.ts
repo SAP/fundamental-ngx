@@ -12,22 +12,20 @@ import {
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { NgTemplateOutlet } from '@angular/common';
+import { Nullable, TemplateDirective } from '@fundamental-ngx/cdk/utils';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
-import { DialogService } from '@fundamental-ngx/core/dialog';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
-import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { CdkScrollable } from '@angular/cdk/overlay';
-import { BarModule } from '@fundamental-ngx/core/bar';
-import { TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { TitleComponent } from '@fundamental-ngx/core/title';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
 
 @Component({
     selector: 'fdp-combobox-mobile',
@@ -37,7 +35,6 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
     standalone: true,
     imports: [
         DialogModule,
-        NgIf,
         TitleComponent,
         TemplateDirective,
         BarModule,

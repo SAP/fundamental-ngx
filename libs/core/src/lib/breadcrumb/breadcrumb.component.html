@@ -5,7 +5,7 @@
     (visibleItemsCount)="_onVisibleItemsCountChange($event)"
     (hiddenItemsCount)="_onHiddenItemsCountChange($event)"
 >
-    <ng-container *ngFor="let breadcrumb of _items">
+    @for (breadcrumb of _items; track breadcrumb) {
         <div
             *fdOverflowItemRef="breadcrumb; let hidden"
             fdOverflowLayoutItem
@@ -13,10 +13,10 @@
         >
             <ng-template [cdkPortalOutlet]="breadcrumb.portal"></ng-template>
         </div>
-    </ng-container>
+    }
     <ng-container *fdOverflowExpand="let breadcrumbs; items: _items">
         <fd-menu #menu [closeOnEscapeKey]="true" [focusAutoCapture]="true" [placement]="_placement$ | async">
-            <ng-container *ngFor="let breadcrumbItem of breadcrumbs">
+            @for (breadcrumbItem of breadcrumbs; track breadcrumbItem) {
                 <li
                     fd-menu-item
                     [disabled]="
@@ -29,52 +29,52 @@
                         (keydown.enter)="itemClicked(breadcrumbItem.item, $event)"
                         (keydown.space)="itemClicked(breadcrumbItem.item, $event)"
                     >
-                        <ng-container *ngIf="breadcrumbItem?.item.breadcrumbLink; else portalContent">
-                            <ng-container *ngIf="breadcrumbItem.item.breadcrumbLink._prefixIconName">
+                        @if (breadcrumbItem?.item.breadcrumbLink) {
+                            @if (breadcrumbItem.item.breadcrumbLink._prefixIconName) {
                                 <fd-menu-addon
                                     position="before"
                                     [glyph]="breadcrumbItem.item.breadcrumbLink._prefixIconName"
                                 ></fd-menu-addon>
-                            </ng-container>
+                            }
                             <span fd-menu-title>
                                 <ng-container [cdkPortalOutlet]="breadcrumbItem.item.linkContentPortal"></ng-container>
                             </span>
-                            <ng-container *ngIf="breadcrumbItem.item.breadcrumbLink._postfixIconName">
+                            @if (breadcrumbItem.item.breadcrumbLink._postfixIconName) {
                                 <fd-menu-addon
                                     [glyph]="breadcrumbItem.item.breadcrumbLink._postfixIconName"
                                 ></fd-menu-addon>
-                            </ng-container>
-                        </ng-container>
-                        <ng-template #portalContent>
+                            }
+                        } @else {
                             <span fd-menu-title>
                                 <ng-container
                                     [cdkPortalOutlet]="breadcrumbItem.item.breadcrumbItemPortal"
                                 ></ng-container>
                             </span>
-                        </ng-template>
+                        }
                     </a>
                 </li>
-            </ng-container>
+            }
         </fd-menu>
-        <span class="fd-breadcrumb__item" *ngIf="breadcrumbs.length > 0" [fdMenuTrigger]="menu">
-            <a
-                fd-link
-                [attr.aria-label]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
-                aria-haspopup="listbox"
-                tabindex="0"
-                class="fd-breadcrumb__collapsed"
-                (keydown.enter)="_keyDownHandle($event)"
-                (keydown.space)="_keyDownHandle($event)"
-            >
-                <fd-icon
-                    glyph="overflow"
-                    [title]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
-                    [ariaLabel]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
-                ></fd-icon>
-                <fd-icon glyph="slim-arrow-down"></fd-icon>
-            </a>
-        </span>
+        @if (breadcrumbs.length > 0) {
+            <span class="fd-breadcrumb__item" [fdMenuTrigger]="menu">
+                <a
+                    fd-link
+                    [attr.aria-label]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                    aria-haspopup="listbox"
+                    tabindex="0"
+                    class="fd-breadcrumb__collapsed"
+                    (keydown.enter)="_keyDownHandle($event)"
+                    (keydown.space)="_keyDownHandle($event)"
+                >
+                    <fd-icon
+                        glyph="overflow"
+                        [title]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                        [ariaLabel]="'coreBreadcrumb.overflowTitleMore' | fdTranslate"
+                    ></fd-icon>
+                    <fd-icon glyph="slim-arrow-down"></fd-icon>
+                </a>
+            </span>
+        }
     </ng-container>
 </fd-overflow-layout>
-
 <ng-content></ng-content>

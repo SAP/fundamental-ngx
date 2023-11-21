@@ -1,5 +1,5 @@
 import { TAB } from '@angular/cdk/keycodes';
-import { NgIf } from '@angular/common';
+
 import {
     ChangeDetectionStrategy,
     Component,
@@ -37,7 +37,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[class.fd-busy-indicator__container--inline]': '!block'
     },
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class BusyIndicatorComponent {
     /** Whether to display the loading indicator animation. */

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
@@ -14,16 +14,7 @@ import { I18nDocsLoaderService } from './i18n-docs-loader.service';
     templateUrl: './i18n-docs.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [
-        NgIf,
-        NgSwitch,
-        NgSwitchCase,
-        BusyIndicatorComponent,
-        FocusableGridDirective,
-        TableModule,
-        NgFor,
-        AsyncPipe
-    ]
+    imports: [BusyIndicatorComponent, FocusableGridDirective, TableModule, AsyncPipe]
 })
 export class I18nDocsComponent {
     status = LoadStatus.Loading;
@@ -31,7 +22,10 @@ export class I18nDocsComponent {
     readonly data$: Observable<TranslationProperty[]>;
     private lang$ = inject(FD_LANGUAGE);
 
-    constructor(private _route: ActivatedRoute, private i18nDocsLoader: I18nDocsLoaderService) {
+    constructor(
+        private _route: ActivatedRoute,
+        private i18nDocsLoader: I18nDocsLoaderService
+    ) {
         this.data$ = this._getData();
     }
 

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { NgFor } from '@angular/common';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { TitleComponent } from '@fundamental-ngx/core/title';
@@ -17,7 +16,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgFor, TitleComponent, LayoutGridModule, FormLabelComponent, LinkComponent, FdTranslatePipe]
+    imports: [TitleComponent, LayoutGridModule, FormLabelComponent, LinkComponent, FdTranslatePipe]
 })
 export class WizardSummarySectionComponent {
     /**

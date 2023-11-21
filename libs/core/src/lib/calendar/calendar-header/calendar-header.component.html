@@ -13,7 +13,7 @@
             (click)="previousClicked.emit()"
         ></button>
     </div>
-    <ng-container *ngIf="isOnDayView || isOnMonthView">
+    @if (isOnDayView || isOnMonthView) {
         <div class="fd-calendar__action">
             <!-- Select month button -->
             <button
@@ -40,8 +40,8 @@
                 <span [attr.id]="_yearButtonLabelId">{{ selectYearLabel }}</span>
             </button>
         </div>
-    </ng-container>
-    <ng-container *ngIf="isOnAggregatedYearsView || isOnYearView">
+    }
+    @if (isOnAggregatedYearsView || isOnYearView) {
         <div class="fd-calendar__action" aria-live="polite">
             <button
                 fd-button
@@ -53,7 +53,7 @@
                 <span [attr.id]="_yearsRangeButtonLabelId">{{ selectAggregatedYearLabel }}</span>
             </button>
         </div>
-    </ng-container>
+    }
     <div class="fd-calendar__action fd-calendar__action--arrow-right">
         <button
             fd-button
@@ -68,7 +68,6 @@
         ></button>
     </div>
 </header>
-
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
     <div [attr.id]="_selectMonthButtonAriaLabelId">{{ selectMonthAriaLabel | fdTranslate }}</div>

@@ -1,4 +1,4 @@
-import { NgIf, formatNumber } from '@angular/common';
+import { formatNumber } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -64,7 +64,6 @@ import { StepInputConfig } from '../step-input.config';
         StepInputControlDirective,
         OnlyDigitsDirective,
         StepInputIncrementDirective,
-        NgIf,
         FormMessageComponent,
         ContentDensityModule
     ]

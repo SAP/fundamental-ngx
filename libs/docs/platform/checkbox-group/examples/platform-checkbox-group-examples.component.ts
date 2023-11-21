@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { CheckboxComponent, CheckboxGroupComponent, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 
@@ -9,15 +9,7 @@ import { SelectItem } from '@fundamental-ngx/platform/shared';
     selector: 'fdp-platform-checkbox-group-examples',
     templateUrl: './platform-checkbox-group-example.component.html',
     standalone: true,
-    imports: [
-        FdpFormGroupModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CheckboxGroupComponent,
-        CheckboxComponent,
-        NgIf,
-        JsonPipe
-    ]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, CheckboxGroupComponent, CheckboxComponent, JsonPipe]
 })
 export class PlatformCheckboxGroupExampleComponent {
     fruits: string[] = ['Apple', 'Banana', 'Grapes'];
@@ -51,5 +43,9 @@ export class PlatformCheckboxGroupExampleComponent {
 }
 
 class LanguageKnown implements SelectItem {
-    constructor(public label: string, public value: string, public disabled: boolean) {}
+    constructor(
+        public label: string,
+        public value: string,
+        public disabled: boolean
+    ) {}
 }

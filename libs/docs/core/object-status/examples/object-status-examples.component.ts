@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ColorAccent } from '@fundamental-ngx/cdk/utils';
 import { ObjectStatusComponent } from '@fundamental-ngx/core/object-status';
@@ -17,7 +16,7 @@ export class ObjectStatusTextExampleComponent {}
     templateUrl: './object-status-generic-text-example.component.html',
     styleUrls: ['./object-status-examples.component.scss'],
     standalone: true,
-    imports: [NgFor, ObjectStatusComponent]
+    imports: [ObjectStatusComponent]
 })
 export class ObjectStatusGenericExampleComponent {
     indicators: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
@@ -37,7 +36,7 @@ export class ObjectStatusTextIconExampleComponent {}
     templateUrl: './object-status-clickable-and-icon-example.component.html',
     styleUrls: ['./object-status-examples.component.scss'],
     standalone: true,
-    imports: [ObjectStatusComponent, NgFor]
+    imports: [ObjectStatusComponent]
 })
 export class ObjectStatusClickableAndIconExampleComponent {
     indicators: ColorAccent[] = new Array(8).fill(null).map((_, index) => (index + 1) as ColorAccent);
@@ -60,7 +59,7 @@ export class ObjectStatusInvertedTextExampleComponent {}
     templateUrl: './object-status-inverted-generic-text-example.component.html',
     styleUrls: ['./object-status-examples.component.scss'],
     standalone: true,
-    imports: [NgFor, ObjectStatusComponent]
+    imports: [ObjectStatusComponent]
 })
 export class ObjectStatusInvertedGenericTextExampleComponent {
     indicators: ColorAccent[] = new Array(10).fill(null).map((_, index) => (index + 1) as ColorAccent);

@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
 import { KeyUtil, Nullable } from '@fundamental-ngx/cdk/utils';
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -55,7 +55,6 @@ export type GridListItemStatus = 'success' | 'warning' | 'error' | 'neutral';
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        NgIf,
         NgTemplateOutlet,
         GridListTitleBarSpacerComponent,
         ButtonComponent,
@@ -241,15 +240,15 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     @ContentChild(GridListItemFooterBarComponent)
-    footerBarComponent: GridListItemFooterBarComponent;
+    footerBarComponent: Nullable<GridListItemFooterBarComponent>;
 
     /** @hidden */
     @ContentChild(GridListItemToolbarComponent)
-    itemToolbarComponent: GridListItemToolbarComponent;
+    itemToolbarComponent: Nullable<GridListItemToolbarComponent>;
 
     /** @hidden */
     @ContentChild(GridListItemBodyDirective)
-    body: GridListItemBodyDirective;
+    body: Nullable<GridListItemBodyDirective>;
 
     /** @hidden */
     _selectedItem?: T;
@@ -350,8 +349,8 @@ export class GridListItemComponent<T> implements AfterViewInit, OnDestroy {
             this.selectionMode !== 'multiSelect'
                 ? null
                 : value || value === 0
-                ? GridListSelectionActions.ADD
-                : GridListSelectionActions.REMOVE;
+                  ? GridListSelectionActions.ADD
+                  : GridListSelectionActions.REMOVE;
 
         this._gridList.setSelectedItem(this.value, this._index, action, event);
     }

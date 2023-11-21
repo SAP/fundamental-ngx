@@ -12,8 +12,7 @@
     >
         <div class="fd-resizable-card-layout__card">
             <ng-content></ng-content>
-
-            <ng-container *ngIf="showingResizeIcon">
+            @if (showingResizeIcon) {
                 <div class="fd-resizable-card-layout__icon-wrapper">
                     <div
                         class="fd-resizable-card-layout__icon"
@@ -21,22 +20,19 @@
                         (mousedown)="onMouseDown($event, 'both')"
                     ></div>
                 </div>
-            </ng-container>
+            }
         </div>
-
-        <ng-container *ngIf="resizable">
+        @if (resizable) {
             <ng-container *ngTemplateOutlet="verticalHandleTemplate"></ng-container>
             <ng-container *ngTemplateOutlet="horizontalHandleTemplate"></ng-container>
-        </ng-container>
+        }
     </div>
-
     <div
         class="fd-resizable-card-layout__item--resize-transition"
         [style.width.px]="resizeIndicationBorderWidth"
         [style.height.px]="cardHeight"
     ></div>
 </div>
-
 <ng-template #verticalHandleTemplate>
     <div
         #verticalHandle
@@ -44,7 +40,6 @@
         (mousedown)="onMouseDown($event, 'horizontal')"
     ></div>
 </ng-template>
-
 <ng-template #horizontalHandleTemplate>
     <div
         #horizontalHandle

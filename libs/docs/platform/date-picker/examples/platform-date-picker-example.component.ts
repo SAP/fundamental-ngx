@@ -9,7 +9,6 @@ import {
     Validators
 } from '@angular/forms';
 
-import { NgIf } from '@angular/common';
 import { DateRange } from '@fundamental-ngx/core/calendar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -29,8 +28,7 @@ import { FdpFormGroupModule, PlatformDatePickerComponent } from '@fundamental-ng
         FormsModule,
         ReactiveFormsModule,
         PlatformDatePickerComponent,
-        ContentDensityDirective,
-        NgIf
+        ContentDensityDirective
     ]
 })
 export class PlatformDatePickerExampleComponent {

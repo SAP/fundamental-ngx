@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -33,7 +33,7 @@ export type GenericTagType = 'error' | 'success' | 'warning' | 'information';
         role: 'button'
     },
     standalone: true,
-    imports: [NgIf, NgClass]
+    imports: [NgClass]
 })
 export class GenericTagComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

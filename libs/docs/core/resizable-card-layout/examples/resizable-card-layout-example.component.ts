@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FocusableGridDirective } from '@fundamental-ngx/cdk/utils';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
@@ -20,7 +19,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         DynamicPageModule,
         BreadcrumbModule,
         LinkComponent,
@@ -31,7 +29,6 @@ import { ToolbarComponent, ToolbarItemDirective, ToolbarSeparatorComponent } fro
         ResizableCardLayoutModule,
         CardModule,
         ListModule,
-        NgFor,
         FocusableGridDirective,
         TableModule
     ]

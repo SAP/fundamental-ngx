@@ -1,27 +1,25 @@
-<ng-container *ngIf="shouldShowIcon">
+@if (shouldShowIcon) {
     <div class="fd-message-strip__icon-container" aria-hidden="true">
-        <ng-container *ngIf="icon; else typeSpecificIcon">
+        @if (icon) {
             <ng-template [ngTemplateOutlet]="icon.templateRef"></ng-template>
-        </ng-container>
-        <ng-template #typeSpecificIcon>
+        } @else {
             <fd-icon [glyph]="typeSpecificIconName"></fd-icon>
-        </ng-template>
+        }
     </div>
-</ng-container>
-
+}
 <p class="fd-message-strip__text">
     <ng-content></ng-content>
 </p>
-
-<button
-    class="fd-message-strip__close"
-    fd-button
-    glyph="decline"
-    fdType="transparent"
-    fdCompact
-    *ngIf="dismissible"
-    (click)="dismiss()"
-    [attr.aria-controls]="id"
-    [attr.aria-label]="'coreMessageStrip.dismissLabel' | fdTranslate"
-    [attr.title]="'coreMessageStrip.dismissLabel' | fdTranslate"
-></button>
+@if (dismissible) {
+    <button
+        class="fd-message-strip__close"
+        fd-button
+        glyph="decline"
+        fdType="transparent"
+        fdCompact
+        (click)="dismiss()"
+        [attr.aria-controls]="id"
+        [attr.aria-label]="'coreMessageStrip.dismissLabel' | fdTranslate"
+        [attr.title]="'coreMessageStrip.dismissLabel' | fdTranslate"
+    ></button>
+}

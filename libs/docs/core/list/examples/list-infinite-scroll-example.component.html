@@ -6,8 +6,10 @@
         [scrollOffset]="40"
         (onScrollAction)="scrollHandler()"
     >
-        <li fd-list-item *ngFor="let item of items">
-            {{ item }}
-        </li>
+        @for (item of items; track item) {
+            <li fd-list-item>
+                {{ item }}
+            </li>
+        }
     </ul>
 </fd-busy-indicator>

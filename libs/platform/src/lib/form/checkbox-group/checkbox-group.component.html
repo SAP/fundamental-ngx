@@ -5,8 +5,8 @@
     [attr.aria-labelledby]="ariaLabelledBy"
     [attr.aria-required]="required"
 >
-    <ng-container *ngIf="!list">
-        <ng-container *ngFor="let checkbox of contentCheckboxes; let i = index">
+    @if (!list) {
+        @for (checkbox of contentCheckboxes; track checkbox; let i = $index) {
             <ng-container
                 *ngTemplateOutlet="
                     checkboxtmpt;
@@ -26,15 +26,14 @@
                 "
             >
             </ng-container>
-        </ng-container>
-    </ng-container>
-    <ng-container *ngIf="list">
+        }
+    }
+    @if (list) {
         <ng-container *ngTemplateOutlet="listvalues"></ng-container>
-    </ng-container>
+    }
 </fd-form-group>
-
 <ng-template #listvalues>
-    <ng-container *ngFor="let item of list; let i = index">
+    @for (item of list; track item; let i = $index) {
         <ng-container
             *ngTemplateOutlet="
                 checkboxtmpt;
@@ -50,9 +49,8 @@
             "
         >
         </ng-container>
-    </ng-container>
+    }
 </ng-template>
-
 <ng-template
     #checkboxtmpt
     let-id="id"

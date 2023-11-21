@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -23,7 +22,7 @@ import { ShellbarMenuItem } from '../model/shellbar-menu-item';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf, ButtonComponent, ContentDensityDirective, MenuModule, NgFor, IconComponent]
+    imports: [ButtonComponent, ContentDensityDirective, MenuModule, IconComponent]
 })
 export class ProductMenuComponent {
     /** Whether the popover should close when the escape key is pressed. */

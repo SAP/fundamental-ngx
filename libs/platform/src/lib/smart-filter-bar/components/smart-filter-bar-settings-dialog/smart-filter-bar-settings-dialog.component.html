@@ -15,55 +15,59 @@
             </div>
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
-        <fdp-table
-            *ngIf="loaded; else loadingTpl"
-            #table
-            (rowSelectionChange)="_onRowSelectionChange($event)"
-            [dataSource]="source"
-            selectionMode="multiple"
-        >
-            <fdp-table-toolbar
-                [hideItemCount]="false"
-                [title]="'platformSmartFilterBar.selectFiltersAvailableFiltersText' | fdTranslate"
+        @if (loaded) {
+            <fdp-table
+                #table
+                (rowSelectionChange)="_onRowSelectionChange($event)"
+                [dataSource]="source"
+                selectionMode="multiple"
             >
-                <fdp-table-toolbar-actions>
-                    <fdp-select
-                        (selectionChange)="_onFilterVisibilityChange($event)"
-                        [list]="_filterVisibilityOptions"
-                        [value]="_filterVisibilityOptions[0].value"
-                    >
-                    </fdp-select>
-                </fdp-table-toolbar-actions>
-            </fdp-table-toolbar>
-            <fdp-column
-                align="start"
-                key="label"
-                [label]="'platformSmartFilterBar.selectFiltersFilterColumnLabel' | fdTranslate"
-                name="label"
-            ></fdp-column>
-            <fdp-column
-                align="center"
-                key="active"
-                [label]="'platformSmartFilterBar.selectFiltersActiveColumnLabel' | fdTranslate"
-                name="active"
-                width="150px"
-            >
-                <fdp-table-cell *fdpCellDef="let item">
-                    <fd-icon *ngIf="item.active" glyph="accept"></fd-icon>
-                </fdp-table-cell>
-            </fdp-column>
-        </fdp-table>
+                <fdp-table-toolbar
+                    [hideItemCount]="false"
+                    [title]="'platformSmartFilterBar.selectFiltersAvailableFiltersText' | fdTranslate"
+                >
+                    <fdp-table-toolbar-actions>
+                        <fdp-select
+                            (selectionChange)="_onFilterVisibilityChange($event)"
+                            [list]="_filterVisibilityOptions"
+                            [value]="_filterVisibilityOptions[0].value"
+                        >
+                        </fdp-select>
+                    </fdp-table-toolbar-actions>
+                </fdp-table-toolbar>
+                <fdp-column
+                    align="start"
+                    key="label"
+                    [label]="'platformSmartFilterBar.selectFiltersFilterColumnLabel' | fdTranslate"
+                    name="label"
+                ></fdp-column>
+                <fdp-column
+                    align="center"
+                    key="active"
+                    [label]="'platformSmartFilterBar.selectFiltersActiveColumnLabel' | fdTranslate"
+                    name="active"
+                    width="150px"
+                >
+                    <fdp-table-cell *fdpCellDef="let item">
+                        @if (item.active) {
+                            <fd-icon glyph="accept"></fd-icon>
+                        }
+                    </fdp-table-cell>
+                </fdp-column>
+            </fdp-table>
+        } @else {
+            <div [style.text-align]="'center'" [style.margin.rem]="1">
+                <fd-busy-indicator [loading]="true"></fd-busy-indicator>
+            </div>
+        }
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             (click)="_confirm()"
             fdType="emphasized"
             [label]="'platformSmartFilterBar.selectFiltersSubmitButtonLabel' | fdTranslate"
         ></fd-button-bar>
-
         <fd-button-bar
             (click)="_cancel()"
             fdType="transparent"
@@ -71,9 +75,3 @@
         ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>
-
-<ng-template #loadingTpl>
-    <div [style.text-align]="'center'" [style.margin.rem]="1">
-        <fd-busy-indicator [loading]="true"></fd-busy-indicator>
-    </div>
-</ng-template>

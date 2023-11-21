@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
@@ -17,7 +17,7 @@ import { FieldGroup } from '../../models/field.model';
         '[class.fd-form-group__header]': 'true'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, LinkComponent, IconComponent, InlineHelpDirective]
+    imports: [NgTemplateOutlet, LinkComponent, IconComponent, InlineHelpDirective]
 })
 export class FormGroupHeaderComponent {
     /** Fields Group */

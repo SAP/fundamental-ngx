@@ -1,4 +1,4 @@
-import { NgFor, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -53,7 +53,6 @@ import { delay, of } from 'rxjs';
         CheckboxComponent,
         BusyIndicatorComponent,
         DragAndDropModule,
-        NgFor,
         NgStyle
     ]
 })

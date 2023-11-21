@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf, TitleCasePipe } from '@angular/common';
+import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -43,11 +43,9 @@ interface ExamplesEntity {
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         BusyIndicatorComponent,
         MessageStripComponent,
         TabsModule,
-        NgFor,
         CodeSnippetComponent,
         AsyncPipe,
         TitleCasePipe

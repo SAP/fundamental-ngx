@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { NgFor, NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { MessageStripComponent } from '@fundamental-ngx/core/message-strip';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { trackByFn } from '../helpers';
@@ -33,7 +32,7 @@ export interface ApprovalFlowMessage {
         class: 'fdp-approval-flow-messages'
     },
     standalone: true,
-    imports: [NgFor, MessageStripComponent, NgSwitch, NgSwitchCase, NgIf, FdTranslatePipe]
+    imports: [MessageStripComponent, FdTranslatePipe]
 })
 export class ApprovalFlowMessagesComponent {
     /** Array of messages */

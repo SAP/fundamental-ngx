@@ -1,6 +1,6 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -36,7 +36,7 @@ import { FD_LIST_COMPONENT } from '../tokens';
         role: 'treeitem'
     },
     standalone: true,
-    imports: [NgIf, NgTemplateOutlet, IconComponent]
+    imports: [NgTemplateOutlet, IconComponent]
 })
 export class ListNavigationItemComponent implements AfterContentInit, AfterViewInit, FocusableOption {
     /** Whether or not the list item is expanded. */
@@ -119,7 +119,10 @@ export class ListNavigationItemComponent implements AfterContentInit, AfterViewI
     private readonly _renderer2 = inject(Renderer2);
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {
+    constructor(
+        private _elementRef: ElementRef,
+        @Optional() private _rtlService: RtlService
+    ) {
         effect(() => {
             if (this._condensed()) {
                 this._renderer2.addClass(this._elementRef.nativeElement, 'fd-list__navigation-item--condensed');

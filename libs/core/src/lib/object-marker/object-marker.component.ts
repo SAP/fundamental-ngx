@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -13,8 +12,12 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-object-marker]',
-    template: ` <i class="fd-object-marker__icon" [class]="' sap-icon--' + glyph" *ngIf="glyph"></i>
-        <span *ngIf="label" class="fd-object-marker__text">{{ label }}</span>
+    template: `@if (glyph) {
+            <i class="fd-object-marker__icon" [class]="' sap-icon--' + glyph"></i>
+        }
+        @if (label) {
+            <span class="fd-object-marker__text">{{ label }}</span>
+        }
         <ng-content></ng-content>`,
     styleUrls: ['./object-marker.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -24,7 +27,7 @@ import { CssClassBuilder, applyCssClass } from '@fundamental-ngx/cdk/utils';
         '[attr.role]': 'clickable ? "link" :""'
     },
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */

@@ -1,6 +1,6 @@
 import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { DOCUMENT, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -98,8 +98,6 @@ import { MessagePopoverEntry, MessagePopoverErrorGroup } from '../../models/mess
         CdkScrollable,
         ScrollbarDirective,
         ListModule,
-        NgFor,
-        NgIf,
         ObjectStatusComponent,
         LinkComponent,
         FdTranslatePipe

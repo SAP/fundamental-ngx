@@ -6,10 +6,12 @@ import { TableService } from '../table.service';
 
 @Component({
     template: `
-        <tr #directiveElement fd-table-row id="row">
-            <td fd-table-cell *ngFor="let key of keys" [key]="key">{{ key }}</td>
-        </tr>
-    `
+<tr #directiveElement fd-table-row id="row">
+  @for (key of keys; track key) {
+    <td fd-table-cell [key]="key">{{ key }}</td>
+  }
+</tr>
+`
 })
 class TestComponent {
     keys: string[] = ['key1', 'key2', 'key3', 'key4'];

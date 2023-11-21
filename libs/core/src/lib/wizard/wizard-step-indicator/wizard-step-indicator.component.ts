@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -34,12 +34,10 @@ import { WizardStepComponent } from '../wizard-step/wizard-step.component';
     ],
     standalone: true,
     imports: [
-        NgIf,
         ActionSheetComponent,
         ActionSheetControlComponent,
         NgTemplateOutlet,
         ActionSheetBodyComponent,
-        NgFor,
         ActionSheetItemComponent,
         IconComponent
     ]

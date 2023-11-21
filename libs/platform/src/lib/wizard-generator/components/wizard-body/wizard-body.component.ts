@@ -16,7 +16,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { WizardModule, WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ButtonComponent } from '@fundamental-ngx/platform/button';
 import { PreparedWizardGeneratorItem, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
@@ -37,9 +37,7 @@ export interface WizardStepChange {
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     imports: [
-        NgIf,
         WizardModule,
-        NgFor,
         WizardGeneratorStepComponent,
         WizardSummaryStepComponent,
         ButtonComponent,
@@ -189,7 +187,10 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     // eslint-disable-next-line @typescript-eslint/member-ordering
-    constructor(private _wizardGeneratorService: WizardGeneratorService, private _cd: ChangeDetectorRef) {}
+    constructor(
+        private _wizardGeneratorService: WizardGeneratorService,
+        private _cd: ChangeDetectorRef
+    ) {}
 
     /**
      * @hidden

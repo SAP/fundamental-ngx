@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 
 import { SPACE } from '@angular/cdk/keycodes';
-import { NgFor, NgIf, SlicePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 import { KeyUtil, RtlService, warnOnce } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { DialogService } from '@fundamental-ngx/core/dialog';
@@ -30,7 +30,7 @@ import { Media } from '../thumbnail.interfaces';
     templateUrl: './thumbnail-image.component.html',
     styleUrls: ['./thumbnail-image.component.scss'],
     standalone: true,
-    imports: [NgFor, AvatarComponent, NgIf, SlicePipe, FdTranslatePipe]
+    imports: [AvatarComponent, SlicePipe, FdTranslatePipe]
 })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** media list obejct contains group of Media object.*/

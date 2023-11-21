@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -8,7 +7,7 @@ import { FdpFormGroupModule, PlatformInputModule } from '@fundamental-ngx/platfo
     selector: 'fdp-platform-input-reactive-validation-example',
     templateUrl: './platform-input-reactive-validation-example.component.html',
     standalone: true,
-    imports: [FormsModule, FdpFormGroupModule, ReactiveFormsModule, PlatformInputModule, NgIf, PlatformButtonModule]
+    imports: [FormsModule, FdpFormGroupModule, ReactiveFormsModule, PlatformInputModule, PlatformButtonModule]
 })
 export class PlatformInputReactiveValidationExampleComponent implements OnInit {
     formGroupRegister: FormGroup;

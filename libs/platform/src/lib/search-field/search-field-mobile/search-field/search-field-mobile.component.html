@@ -4,37 +4,31 @@
             <ng-template fdkTemplate="header">
                 <div fd-bar-middle>
                     <fd-bar-element [fullWidth]="true">
-                        <ng-container
-                            *ngIf="childContent?.inputFieldTemplate"
-                            [ngTemplateOutlet]="childContent?.inputFieldTemplate!"
-                        ></ng-container>
+                        @if (childContent?.inputFieldTemplate) {
+                            <ng-container [ngTemplateOutlet]="childContent?.inputFieldTemplate!"></ng-container>
+                        }
                     </fd-bar-element>
-                    <button
-                        fd-dialog-close-button
-                        fdkInitialFocus
-                        *ngIf="mobileConfig?.hasCloseButton"
-                        [mobile]="true"
-                        (click)="_handleDismiss()"
-                    ></button>
+                    @if (mobileConfig.hasCloseButton) {
+                        <button
+                            fd-dialog-close-button
+                            fdkInitialFocus
+                            [mobile]="true"
+                            (click)="_handleDismiss()"
+                        ></button>
+                    }
                 </div>
             </ng-template>
         </fd-dialog-header>
-
         <fd-dialog-body>
-            <ng-container
-                *ngIf="childContent?.suggestionMenuTemplate"
-                [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"
-            ></ng-container>
+            @if (childContent?.suggestionMenuTemplate) {
+                <ng-container [ngTemplateOutlet]="childContent?.suggestionMenuTemplate!"></ng-container>
+            }
         </fd-dialog-body>
-
         <fd-dialog-footer>
-            <fd-button-bar
-                *ngIf="mobileConfig?.approveButtonText"
-                fdType="emphasized"
-                [label]="mobileConfig.approveButtonText!"
-                (click)="_handleApprove()"
-            >
-            </fd-button-bar>
+            @if (mobileConfig.approveButtonText) {
+                <fd-button-bar fdType="emphasized" [label]="mobileConfig.approveButtonText!" (click)="_handleApprove()">
+                </fd-button-bar>
+            }
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

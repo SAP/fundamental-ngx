@@ -14,25 +14,26 @@
         <ng-container *ngTemplateOutlet="startColumn"></ng-container>
     </div>
     <!-- Left Separator -->
-    <div
-        *ngIf="_leftColumnSeparator"
-        class="fd-flexible-column-layout__separator"
-        [attr.aria-label]="separatorAriaLabel"
-        (click)="_handleLeftColumnSeparatorClick()"
-    >
-        <button
-            fd-button
-            fdCompact
-            fdType="transparent"
-            class="fd-flexible-column-layout__button"
-            [title]="_leftColumnSeparator === 'left' ? expandTitle : collapseTitle"
+    @if (_leftColumnSeparator) {
+        <div
+            class="fd-flexible-column-layout__separator"
+            [attr.aria-label]="separatorAriaLabel"
+            (click)="_handleLeftColumnSeparatorClick()"
         >
-            <i
-                [class]="_leftColumnSeparator ? 'sap-icon--slim-arrow-' + _leftColumnSeparator : ''"
-                role="presentation"
-            ></i>
-        </button>
-    </div>
+            <button
+                fd-button
+                fdCompact
+                fdType="transparent"
+                class="fd-flexible-column-layout__button"
+                [title]="_leftColumnSeparator === 'left' ? expandTitle : collapseTitle"
+            >
+                <i
+                    [class]="_leftColumnSeparator ? 'sap-icon--slim-arrow-' + _leftColumnSeparator : ''"
+                    role="presentation"
+                ></i>
+            </button>
+        </div>
+    }
     <!-- Middle/Second Column -->
     <div
         class="fd-flexible-column-layout__column"
@@ -44,25 +45,26 @@
         <ng-container *ngTemplateOutlet="midColumn"></ng-container>
     </div>
     <!-- Right Separator -->
-    <div
-        *ngIf="_rightColumnSeparator"
-        class="fd-flexible-column-layout__separator"
-        [attr.aria-label]="separatorAriaLabel"
-        (click)="_handleRightColumnSeparatorClick()"
-    >
-        <button
-            fd-button
-            fdCompact
-            fdType="transparent"
-            class="fd-flexible-column-layout__button"
-            [title]="_rightColumnSeparator === 'left' ? expandTitle : collapseTitle"
+    @if (_rightColumnSeparator) {
+        <div
+            class="fd-flexible-column-layout__separator"
+            [attr.aria-label]="separatorAriaLabel"
+            (click)="_handleRightColumnSeparatorClick()"
         >
-            <i
-                [class]="_rightColumnSeparator ? 'sap-icon--slim-arrow-' + _rightColumnSeparator : ''"
-                role="presentation"
-            ></i>
-        </button>
-    </div>
+            <button
+                fd-button
+                fdCompact
+                fdType="transparent"
+                class="fd-flexible-column-layout__button"
+                [title]="_rightColumnSeparator === 'left' ? expandTitle : collapseTitle"
+            >
+                <i
+                    [class]="_rightColumnSeparator ? 'sap-icon--slim-arrow-' + _rightColumnSeparator : ''"
+                    role="presentation"
+                ></i>
+            </button>
+        </div>
+    }
     <!-- End/Right/Third Column -->
     <div
         class="fd-flexible-column-layout__column"

@@ -16,7 +16,6 @@
         <ng-content></ng-content>
     </fd-radio-button>
 </ng-template>
-
-<ng-container *ngIf="forceRender">
+@if (forceRender) {
     <ng-container *ngTemplateOutlet="renderer"></ng-container>
-</ng-container>
+}

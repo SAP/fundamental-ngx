@@ -22,7 +22,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -39,7 +39,6 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
     standalone: true,
     imports: [
         DialogModule,
-        NgIf,
         TitleComponent,
         TemplateDirective,
         BarModule,

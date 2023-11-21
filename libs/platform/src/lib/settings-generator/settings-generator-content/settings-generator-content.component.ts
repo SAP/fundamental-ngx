@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -35,11 +35,9 @@ import { SettingsGeneratorSectionComponent } from './settings-generator-section/
     standalone: true,
     imports: [
         TitleComponent,
-        NgIf,
         ButtonComponent,
         SkeletonComponent,
         TabsModule,
-        NgFor,
         SettingsGeneratorSectionComponent,
         NgTemplateOutlet,
         AsyncOrSyncPipe

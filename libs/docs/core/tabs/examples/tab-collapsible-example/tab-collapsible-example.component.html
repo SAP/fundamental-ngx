@@ -1,7 +1,9 @@
 <fd-tab-list [collapsibleTabs]="true">
-    <fd-tab *ngFor="let tab of tabs" [title]="tab.title">
-        <div class="tab-container-example">
-            {{ tab.content }}
-        </div>
-    </fd-tab>
+    @for (tab of tabs; track tab) {
+        <fd-tab [title]="tab.title">
+            <div class="tab-container-example">
+                {{ tab.content }}
+            </div>
+        </fd-tab>
+    }
 </fd-tab-list>

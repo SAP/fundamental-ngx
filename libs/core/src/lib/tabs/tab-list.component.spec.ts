@@ -7,12 +7,14 @@ import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabsModule } from './tabs.module';
 
 @Component({
-    template: ` <fd-tab-list>
-        <fd-tab title="Link" id="tab1"> Content Link </fd-tab>
-        <fd-tab title="Selected" id="tab2"> Content Selected </fd-tab>
-        <fd-tab title="Link" id="tab3"> Content Link Two </fd-tab>
-        <fd-tab title="Disabled" id="tab4" *ngIf="showDisabled"> Disabled </fd-tab>
-    </fd-tab-list>`
+    template: `<fd-tab-list>
+  <fd-tab title="Link" id="tab1"> Content Link </fd-tab>
+  <fd-tab title="Selected" id="tab2"> Content Selected </fd-tab>
+  <fd-tab title="Link" id="tab3"> Content Link Two </fd-tab>
+  @if (showDisabled) {
+    <fd-tab title="Disabled" id="tab4"> Disabled </fd-tab>
+  }
+</fd-tab-list>`
 })
 class TestTabsComponent {
     @ViewChildren(TabPanelComponent)
@@ -103,15 +105,17 @@ const NUMBER_OF_TABS = 10;
 
 @Component({
     template: `
-        <fd-tab-list
-            style="width: 200px"
-            [collapsibleTabs]="true"
-            [collapseOverflow]="true"
-            [maxVisibleTabs]="maxVisibleTabs"
-            >
-            <fd-tab *ngFor="let title of _tabs" [title]="title">{{ title }} content</fd-tab>
-        </fd-tab-list>
-    `
+<fd-tab-list
+  style="width: 200px"
+  [collapsibleTabs]="true"
+  [collapseOverflow]="true"
+  [maxVisibleTabs]="maxVisibleTabs"
+  >
+  @for (title of _tabs; track title) {
+    <fd-tab [title]="title">{{ title }} content</fd-tab>
+  }
+</fd-tab-list>
+`
 })
 class TestCollapsibleTabsComponent {
     @ViewChildren(TabPanelComponent)

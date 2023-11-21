@@ -32,7 +32,7 @@ import { PopoverService } from '@fundamental-ngx/core/popover';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { FormStates } from '@fundamental-ngx/cdk/forms';
 import { DynamicComponentService, FocusTrapService, Nullable } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -92,7 +92,6 @@ import { FD_DATETIME_PICKER_COMPONENT, FD_DATETIME_PICKER_MOBILE_CONFIG } from '
         PopoverModule,
         InputGroupModule,
         FormsModule,
-        NgIf,
         FormMessageComponent,
         SegmentedButtonComponent,
         ButtonComponent,

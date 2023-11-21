@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
@@ -24,7 +23,6 @@ import { LinkComponent } from '@fundamental-ngx/core/link';
     standalone: true,
     imports: [
         ButtonComponent,
-        NgIf,
         InitialFocusDirective,
         LinkComponent,
         RouterLink,

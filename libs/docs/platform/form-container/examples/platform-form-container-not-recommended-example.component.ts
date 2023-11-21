@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxGroupComponent, FdpFormGroupModule, PlatformTextAreaModule } from '@fundamental-ngx/platform/form';
@@ -8,14 +7,7 @@ import { CheckboxGroupComponent, FdpFormGroupModule, PlatformTextAreaModule } fr
     templateUrl: './platform-form-container-not-recommended-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [
-        NgIf,
-        FdpFormGroupModule,
-        FormsModule,
-        ReactiveFormsModule,
-        PlatformTextAreaModule,
-        CheckboxGroupComponent
-    ]
+    imports: [FdpFormGroupModule, FormsModule, ReactiveFormsModule, PlatformTextAreaModule, CheckboxGroupComponent]
 })
 export class PlatformFormContainerNotRecommendedExampleComponent {
     form: FormGroup = new FormGroup({});

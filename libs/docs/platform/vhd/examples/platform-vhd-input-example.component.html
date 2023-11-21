@@ -26,21 +26,26 @@
     (valueChange)="vhd1ValueChange($event)"
     headerId="fdp-vhd-header-4"
 >
-    <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters; index as i"
-        [main]="i < 2"
-        [key]="filter.key"
-        [label]="filter.label"
-        [advanced]="filter.advanced"
-    ></fdp-value-help-dialog-filter>
+    @for (filter of filters; track filter; let i = $index) {
+        <fdp-value-help-dialog-filter
+            [main]="i < 2"
+            [key]="filter.key"
+            [label]="filter.label"
+            [advanced]="filter.advanced"
+        ></fdp-value-help-dialog-filter>
+    }
 </fdp-value-help-dialog>
 <br />
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
-    <fd-token fd-toolbar-item *ngFor="let item of valuesMulti" fdCompact [readOnly]="true">
-        {{ item.name }}
-    </fd-token>
-    <br *ngIf="valuesMulti && valuesMulti?.length" />
+    @for (item of valuesMulti; track item) {
+        <fd-token fd-toolbar-item fdCompact [readOnly]="true">
+            {{ item.name }}
+        </fd-token>
+    }
+    @if (valuesMulti && valuesMulti.length) {
+        <br />
+    }
     <button
         fd-button
         fdCompact
@@ -60,13 +65,14 @@
     (valueChange)="vhd2ValueChange($event)"
     headerId="fdp-vhd-header-5"
 >
-    <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters; index as i"
-        [main]="i < 2"
-        [key]="filter.key"
-        [label]="filter.label"
-        [advanced]="filter.advanced"
-    ></fdp-value-help-dialog-filter>
+    @for (filter of filters; track filter; let i = $index) {
+        <fdp-value-help-dialog-filter
+            [main]="i < 2"
+            [key]="filter.key"
+            [label]="filter.label"
+            [advanced]="filter.advanced"
+        ></fdp-value-help-dialog-filter>
+    }
 </fdp-value-help-dialog>
 <br />
 <div fd-form-item>
@@ -97,11 +103,12 @@
     (valueChange)="vhd3ValueChange($event)"
     headerId="fdp-vhd-header-6"
 >
-    <fdp-value-help-dialog-filter
-        *ngFor="let filter of filters; index as i"
-        [main]="i < 2"
-        [key]="filter.key"
-        [label]="filter.label"
-        [advanced]="filter.advanced"
-    ></fdp-value-help-dialog-filter>
+    @for (filter of filters; track filter; let i = $index) {
+        <fdp-value-help-dialog-filter
+            [main]="i < 2"
+            [key]="filter.key"
+            [label]="filter.label"
+            [advanced]="filter.advanced"
+        ></fdp-value-help-dialog-filter>
+    }
 </fdp-value-help-dialog>

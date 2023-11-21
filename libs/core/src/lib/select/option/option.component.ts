@@ -20,7 +20,7 @@ import { Subject } from 'rxjs';
 
 import { ListTitleDirective } from '@fundamental-ngx/core/list';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { KeyUtil } from '@fundamental-ngx/cdk/utils';
 import { startWith } from 'rxjs/operators';
 import { OptionsInterface } from '../options.interface';
@@ -80,7 +80,7 @@ export class FdOptionSelectionChange {
         `
     ],
     standalone: true,
-    imports: [NgIf, ListTitleDirective, NgTemplateOutlet]
+    imports: [ListTitleDirective, NgTemplateOutlet]
 })
 export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestroy, FocusableOption, OptionsInterface {
     /** Option id attribute */
@@ -134,7 +134,10 @@ export class OptionComponent implements AfterViewInit, AfterViewChecked, OnDestr
     private _active = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @Hidden */
     ngAfterViewInit(): void {

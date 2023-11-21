@@ -14,7 +14,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompleteThemeDefinition, ThemingService } from '@fundamental-ngx/core/theming';
 import { Libraries } from '../../utilities';
 
-import { AsyncPipe, LowerCasePipe, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, LowerCasePipe, NgTemplateOutlet } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import {
@@ -66,10 +66,8 @@ type Version = {
         RouterLink,
         ProductMenuComponent,
         ShellbarActionsComponent,
-        NgIf,
         MenuModule,
         NgTemplateOutlet,
-        NgFor,
         IconComponent,
         LowerCasePipe,
         AsyncPipe

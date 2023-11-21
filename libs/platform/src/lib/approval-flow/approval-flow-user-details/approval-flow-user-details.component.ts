@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ApprovalUser } from '../interfaces';
@@ -20,7 +20,7 @@ import { ApprovalUser } from '../interfaces';
         class: 'fdp-approval-flow-user-details'
     },
     standalone: true,
-    imports: [AvatarComponent, NgIf, NgTemplateOutlet, AsyncPipe]
+    imports: [AvatarComponent, NgTemplateOutlet, AsyncPipe]
 })
 export class ApprovalFlowUserDetailsComponent {
     /** Approval Flow user */

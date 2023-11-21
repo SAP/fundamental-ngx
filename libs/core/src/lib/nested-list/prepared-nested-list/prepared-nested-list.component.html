@@ -1,47 +1,58 @@
 <ul fd-nested-list [textOnly]="!!list?.textOnly">
-    <ng-container *ngFor="let item of list?.items">
-        <li *ngIf="item.headerTitle" fd-nested-list-header>
-            {{ item.headerTitle }}
-        </li>
-        <li
-            *ngIf="!item.headerTitle"
-            fd-nested-list-item
-            [expanded]="!!item.expanded"
-            (expandedChange)="_expandedChange($event, item)"
-        >
-            <fd-nested-list-popover *ngIf="condensed && first && item.list" [title]="item.link?.title || ''">
-                <div fd-nested-list-content [selected]="!!item.link?.selected">
+    @for (item of list?.items; track item) {
+        @if (item.headerTitle) {
+            <li fd-nested-list-header>
+                {{ item.headerTitle }}
+            </li>
+        }
+        @if (!item.headerTitle) {
+            <li fd-nested-list-item [expanded]="!!item.expanded" (expandedChange)="_expandedChange($event, item)">
+                @if (condensed && first && item.list) {
+                    <fd-nested-list-popover [title]="item.link?.title || ''">
+                        <div fd-nested-list-content [selected]="!!item.link?.selected">
+                            <ng-container
+                                [ngTemplateOutlet]="link"
+                                [ngTemplateOutletContext]="{ item: item }"
+                            ></ng-container>
+                            <button fd-nested-list-expand-icon></button>
+                        </div>
+                        @if (item.list) {
+                            <fd-prepared-nested-list [first]="false" [list]="item.list"></fd-prepared-nested-list>
+                        }
+                    </fd-nested-list-popover>
+                }
+                @if (!item.list) {
                     <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
-                    <button fd-nested-list-expand-icon></button>
-                </div>
-                <fd-prepared-nested-list [first]="false" *ngIf="item.list" [list]="item.list"></fd-prepared-nested-list>
-            </fd-nested-list-popover>
-
-            <ng-container *ngIf="!item.list">
-                <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
-            </ng-container>
-
-            <ng-container *ngIf="(!condensed || !first) && item.list">
-                <div fd-nested-list-content>
-                    <ng-container [ngTemplateOutlet]="link" [ngTemplateOutletContext]="{ item: item }"></ng-container>
-                    <button fd-nested-list-expand-icon></button>
-                </div>
-                <fd-prepared-nested-list [first]="false" *ngIf="item.list" [list]="item.list"></fd-prepared-nested-list>
-            </ng-container>
-
-            <ng-template let-item="item" #link>
-                <a
-                    fd-nested-list-link
-                    *ngIf="item.link"
-                    [onClickCallback]="item.link.callback"
-                    [(selected)]="!item.list && item.link.selected"
-                    [attr.href]="item.link.href ? item.link.href : null"
-                    [routerLink]="item.link.routerLink ? item.link.routerLink : []"
-                >
-                    <span fd-nested-list-icon *ngIf="item.link.icon" [glyph]="item.link.icon"></span>
-                    <span fd-nested-list-title>{{ item.link.title }}</span>
-                </a>
-            </ng-template>
-        </li>
-    </ng-container>
+                }
+                @if ((!condensed || !first) && item.list) {
+                    <div fd-nested-list-content>
+                        <ng-container
+                            [ngTemplateOutlet]="link"
+                            [ngTemplateOutletContext]="{ item: item }"
+                        ></ng-container>
+                        <button fd-nested-list-expand-icon></button>
+                    </div>
+                    @if (item.list) {
+                        <fd-prepared-nested-list [first]="false" [list]="item.list"></fd-prepared-nested-list>
+                    }
+                }
+                <ng-template let-item="item" #link>
+                    @if (item.link) {
+                        <a
+                            fd-nested-list-link
+                            [onClickCallback]="item.link.callback"
+                            [(selected)]="!item.list && item.link.selected"
+                            [attr.href]="item.link.href ? item.link.href : null"
+                            [routerLink]="item.link.routerLink ? item.link.routerLink : []"
+                        >
+                            @if (item.link.icon) {
+                                <span fd-nested-list-icon [glyph]="item.link.icon"></span>
+                            }
+                            <span fd-nested-list-title>{{ item.link.title }}</span>
+                        </a>
+                    }
+                </ng-template>
+            </li>
+        }
+    }
 </ul>

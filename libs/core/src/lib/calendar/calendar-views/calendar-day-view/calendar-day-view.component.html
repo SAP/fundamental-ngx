@@ -5,96 +5,110 @@
 >
     <thead class="fd-calendar__group" role="rowgroup">
         <tr class="fd-calendar__row" role="row">
-            <th
-                *ngIf="showWeekNumbers"
-                class="fd-calendar__item fd-calendar__item--side-helper"
-                role="columnheader"
-                [attr.id]="_weekNumbersColumnHeaderId"
-                [attr.aria-label]="'coreCalendar.weekColumnLabel' | fdTranslate"
-            ></th>
-            <th
-                class="fd-calendar__item fd-calendar__item--side-helper"
-                role="columnheader"
-                *ngFor="let day of shortWeekDays; index as i"
-                [attr.aria-label]="longWeekDays[i]"
-            >
-                <div class="fd-calendar__text-wrapper">
-                    <span class="fd-calendar__text">{{ day }}</span>
-                </div>
-            </th>
+            @if (showWeekNumbers) {
+                <th
+                    class="fd-calendar__item fd-calendar__item--side-helper"
+                    role="columnheader"
+                    [attr.id]="_weekNumbersColumnHeaderId"
+                    [attr.aria-label]="'coreCalendar.weekColumnLabel' | fdTranslate"
+                ></th>
+            }
+            @for (day of shortWeekDays; track day; let i = $index) {
+                <th
+                    class="fd-calendar__item fd-calendar__item--side-helper"
+                    role="columnheader"
+                    [attr.aria-label]="longWeekDays[i]"
+                >
+                    <div class="fd-calendar__text-wrapper">
+                        <span class="fd-calendar__text">{{ day }}</span>
+                    </div>
+                </th>
+            }
         </tr>
     </thead>
     <tbody class="fd-calendar__group" role="rowgroup">
-        <tr class="fd-calendar__row" role="row" *ngFor="let row of _dayViewGrid; let rowIndex = index">
-            <th
-                *ngIf="showWeekNumbers"
-                class="fd-calendar__item fd-calendar__item--side-helper"
-                role="rowheader"
-                scope="row"
-                [attr.data-fd-calendar-week]="_weeks[rowIndex]"
-                [attr.id]="viewId + '-week-' + _weeks[rowIndex]"
-                [attr.aria-labelledby]="_weekNumbersColumnHeaderId + ' ' + (viewId + '-week-' + _weeks[rowIndex])"
-            >
-                <div class="fd-calendar__text-wrapper" *ngIf="_weeks && _weeks[rowIndex]">
-                    <span class="fd-calendar__text">
-                        {{ _weeks[rowIndex] }}
-                    </span>
-                </div>
-            </th>
-
-            <td
-                class="fd-calendar__item"
-                role="gridcell"
-                *ngFor="let cell of row; let cellIndex = index"
-                [class.fd-calendar__item--selected]="cell.selectedFirst || cell.selectedLast || cell.selected"
-                [class.fd-calendar__item--range]="
-                    (cell.selectedRange || cell.hoverRange) && !cell.selectedFirst && !cell.selectedLast
-                "
-                [class.fd-calendar__item--today]="cell.current"
-                [class.fd-calendar__item--weekend]="cell.weekend && markWeekends && cell.monthStatus === 'current'"
-                [class.fd-calendar__item--other]="cell.monthStatus !== 'current'"
-                [class.is-disabled]="cell.disabled"
-                [class]="cell.specialNumber ? 'fd-calendar__item--legend-' + cell.specialNumber : ''"
-                [attr.id]="cell.id"
-                [attr.data-fd-calendar-date-day]="cell.label"
-                [attr.data-fd-calendar-day]="cell.index"
-                [attr.aria-selected]="cell.selected"
-                [attr.aria-disabled]="cell.disabled"
-                [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
-                (click)="selectDate(cell, $event)"
-                (mouseenter)="_refreshHoverRange(cell)"
-                (keydown)="_onKeydownDayHandler($event, cell, _getIndex(rowIndex, cellIndex))"
-            >
-                <div class="fd-calendar__text-wrapper">
-                    <span
-                        class="fd-calendar__text"
-                        role="button"
+        @for (row of _dayViewGrid; track row; let rowIndex = $index) {
+            <tr class="fd-calendar__row" role="row">
+                @if (showWeekNumbers) {
+                    <th
+                        class="fd-calendar__item fd-calendar__item--side-helper"
+                        role="rowheader"
+                        scope="row"
+                        [attr.data-fd-calendar-week]="_weeks[rowIndex]"
+                        [attr.id]="viewId + '-week-' + _weeks[rowIndex]"
                         [attr.aria-labelledby]="
-                            cell.id +
-                            '-aria-label ' +
-                            (cell.selectedFirst ? _dateRangeStartLabelId + ' ' : '') +
-                            (cell.selectedLast ? _dateRangeEndLabelId + ' ' : '') +
-                            (cell.current ? _todayLabelId + ' ' : '') +
-                            (cell.selected && calType === 'single' ? _selectedDateLabelId + ' ' : '') +
-                            (cell.past ? _dateInPastLabelId : '')
+                            _weekNumbersColumnHeaderId + ' ' + (viewId + '-week-' + _weeks[rowIndex])
                         "
-                        >{{ cell.label }}</span
                     >
-                    <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
-                        {{ cell.ariaLabel }}
-                    </span>
-                </div>
-            </td>
-        </tr>
-        <tr class="fd-calendar__row" *ngIf="_dayViewGrid.length <= 5">
-            <td class="fd-calendar__item hidden-day"></td>
-        </tr>
-        <tr class="fd-calendar__row" *ngIf="_dayViewGrid.length === 4">
-            <td class="fd-calendar__item hidden-day"></td>
-        </tr>
+                        @if (_weeks && _weeks[rowIndex]) {
+                            <div class="fd-calendar__text-wrapper">
+                                <span class="fd-calendar__text">
+                                    {{ _weeks[rowIndex] }}
+                                </span>
+                            </div>
+                        }
+                    </th>
+                }
+                @for (cell of row; track cell; let cellIndex = $index) {
+                    <td
+                        class="fd-calendar__item"
+                        role="gridcell"
+                        [class.fd-calendar__item--selected]="cell.selectedFirst || cell.selectedLast || cell.selected"
+                        [class.fd-calendar__item--range]="
+                            (cell.selectedRange || cell.hoverRange) && !cell.selectedFirst && !cell.selectedLast
+                        "
+                        [class.fd-calendar__item--today]="cell.current"
+                        [class.fd-calendar__item--weekend]="
+                            cell.weekend && markWeekends && cell.monthStatus === 'current'
+                        "
+                        [class.fd-calendar__item--other]="cell.monthStatus !== 'current'"
+                        [class.is-disabled]="cell.disabled"
+                        [class]="cell.specialNumber ? 'fd-calendar__item--legend-' + cell.specialNumber : ''"
+                        [attr.id]="cell.id"
+                        [attr.data-fd-calendar-date-day]="cell.label"
+                        [attr.data-fd-calendar-day]="cell.index"
+                        [attr.aria-selected]="cell.selected"
+                        [attr.aria-disabled]="cell.disabled"
+                        [attr.tabindex]="cell.isTabIndexed ? 0 : -1"
+                        (click)="selectDate(cell, $event)"
+                        (mouseenter)="_refreshHoverRange(cell)"
+                        (keydown)="_onKeydownDayHandler($event, cell, _getIndex(rowIndex, cellIndex))"
+                    >
+                        <div class="fd-calendar__text-wrapper">
+                            <span
+                                class="fd-calendar__text"
+                                role="button"
+                                [attr.aria-labelledby]="
+                                    cell.id +
+                                    '-aria-label ' +
+                                    (cell.selectedFirst ? _dateRangeStartLabelId + ' ' : '') +
+                                    (cell.selectedLast ? _dateRangeEndLabelId + ' ' : '') +
+                                    (cell.current ? _todayLabelId + ' ' : '') +
+                                    (cell.selected && calType === 'single' ? _selectedDateLabelId + ' ' : '') +
+                                    (cell.past ? _dateInPastLabelId : '')
+                                "
+                                >{{ cell.label }}</span
+                            >
+                            <span hidden aria-hidden="true" [attr.id]="cell.id + '-aria-label'">
+                                {{ cell.ariaLabel }}
+                            </span>
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+        @if (_dayViewGrid.length <= 5) {
+            <tr class="fd-calendar__row">
+                <td class="fd-calendar__item hidden-day"></td>
+            </tr>
+        }
+        @if (_dayViewGrid.length === 4) {
+            <tr class="fd-calendar__row">
+                <td class="fd-calendar__item hidden-day"></td>
+            </tr>
+        }
     </tbody>
 </table>
-
 <!-- Hidden elements for aria purposes -->
 <div hidden aria-hidden="true">
     <div [attr.id]="_todayLabelId">{{ 'coreCalendar.todayLabel' | fdTranslate }}</div>

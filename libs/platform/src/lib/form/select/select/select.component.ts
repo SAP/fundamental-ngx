@@ -17,7 +17,7 @@ import {
 import { ControlContainer, FormsModule, NgControl, NgForm } from '@angular/forms';
 import { FD_FORM_FIELD, FD_FORM_FIELD_CONTROL } from '@fundamental-ngx/cdk/forms';
 
-import { NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { DynamicComponentService } from '@fundamental-ngx/cdk/utils';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListSecondaryDirective } from '@fundamental-ngx/core/list';
@@ -34,7 +34,7 @@ import { SelectConfig } from '../select.config';
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicComponentService, { provide: FD_FORM_FIELD_CONTROL, useExisting: SelectComponent, multi: true }],
     standalone: true,
-    imports: [SelectModule, FormsModule, NgIf, NgFor, IconComponent, NgTemplateOutlet, NgClass, ListSecondaryDirective]
+    imports: [SelectModule, FormsModule, IconComponent, NgTemplateOutlet, NgClass, ListSecondaryDirective]
 })
 export class SelectComponent extends BaseSelect implements AfterViewInit, AfterViewChecked {
     /**

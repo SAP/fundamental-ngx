@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
@@ -14,23 +13,23 @@ import {
 @Component({
     selector: 'fd-date-picker-form-range-example',
     template: `
-        <div *ngIf="customForm">
-            <form [formGroup]="customForm">
-                <fd-date-picker type="range" formControlName="dates" style="width: 300px"></fd-date-picker>
-            </form>
-
-            <small>
-                Touched: {{ customForm.controls.dates.touched }}<br />
-                Dirty: {{ customForm.controls.dates.dirty }}<br />
-                Valid: {{ customForm.controls.dates.valid }}<br />
-
-                Range Start Date:
-                {{ customForm.controls.dates.value?.start?.toDateString() || 'null' }}
-                <br />
-                Range End Date:
-                {{ customForm.controls.dates.value?.end?.toDateString() || 'null' }}
-            </small>
-        </div>
+        @if (customForm) {
+            <div>
+                <form [formGroup]="customForm">
+                    <fd-date-picker type="range" formControlName="dates" style="width: 300px"></fd-date-picker>
+                </form>
+                <small>
+                    Touched: {{ customForm.controls.dates.touched }}<br />
+                    Dirty: {{ customForm.controls.dates.dirty }}<br />
+                    Valid: {{ customForm.controls.dates.valid }}<br />
+                    Range Start Date:
+                    {{ customForm.controls.dates.value?.start?.toDateString() || 'null' }}
+                    <br />
+                    Range End Date:
+                    {{ customForm.controls.dates.value?.end?.toDateString() || 'null' }}
+                </small>
+            </div>
+        }
     `,
     providers: [
         {
@@ -43,7 +42,7 @@ import {
         }
     ],
     standalone: true,
-    imports: [NgIf, FormsModule, ReactiveFormsModule, DatePickerComponent, FdDatetimeModule]
+    imports: [FormsModule, ReactiveFormsModule, DatePickerComponent, FdDatetimeModule]
 })
 export class DatePickerFormRangeExampleComponent {
     customForm = new FormGroup({

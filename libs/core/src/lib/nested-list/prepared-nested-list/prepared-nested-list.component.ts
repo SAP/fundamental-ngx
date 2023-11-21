@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation, forwardRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Nullable } from '@fundamental-ngx/cdk/utils';
@@ -27,8 +27,6 @@ import { NestedListDirective } from '../nested-list/nested-list.directive';
     standalone: true,
     imports: [
         NestedListDirective,
-        NgFor,
-        NgIf,
         NestedListHeaderDirective,
         NestedItemDirective,
         NestedListPopoverComponent,

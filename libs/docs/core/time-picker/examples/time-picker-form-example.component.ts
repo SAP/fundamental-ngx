@@ -1,4 +1,4 @@
-import { DatePipe, NgIf } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FdDate, provideDateTimeFormats } from '@fundamental-ngx/core/datetime';
@@ -11,7 +11,7 @@ import { TimePickerModule } from '@fundamental-ngx/core/time-picker';
     styleUrls: ['time-picker-form-example.component.scss'],
     providers: [provideDateTimeFormats()],
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, FormItemComponent, FormLabelComponent, TimePickerModule, NgIf, DatePipe]
+    imports: [FormsModule, ReactiveFormsModule, FormItemComponent, FormLabelComponent, TimePickerModule, DatePipe]
 })
 export class TimePickerFormExampleComponent {
     customForm = new FormGroup({

@@ -23,7 +23,7 @@ import { takeUntil } from 'rxjs/operators';
 import { KeyUtil, RtlService } from '@fundamental-ngx/cdk/utils';
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { FdTranslatePipe } from '@fundamental-ngx/i18n';
 import { createMissingDateImplementationError } from './errors';
@@ -56,7 +56,7 @@ type MeridianViewItem = SelectableViewItem<Meridian>;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [TimeColumnComponent, NgIf, AsyncPipe, FdTranslatePipe]
+    imports: [TimeColumnComponent, AsyncPipe, FdTranslatePipe]
 })
 export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterViewInit, ControlValueAccessor {
     /**

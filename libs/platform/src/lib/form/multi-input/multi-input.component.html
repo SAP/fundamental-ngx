@@ -22,11 +22,9 @@
         </fd-popover-body>
     </fd-popover>
 </ng-template>
-
 <ng-template #mobileTemplate>
     <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
 </ng-template>
-
 <ng-template #controlTemplate>
     <fd-input-group
         [button]="true"
@@ -43,114 +41,116 @@
         <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
             >Contains {{ selected.length || 'no' }} token</span
         >
-        <fd-tokenizer
-            *ngIf="selected"
-            [tokenizerFocusable]="false"
-            [compactCollapse]="true"
-            #tokenizer
-            class="fd-multi-input-tokenizer-custom"
-            (moreClickedEvent)="moreClicked()"
-            tabindex="-1"
-            role="listbox"
-            fdMultiAnnouncer
-            [multiAnnouncerOptions]="isOpen ? _suggestions : []"
-        >
-            <fd-token
-                [readOnly]="disabled"
-                (onCloseClick)="removeToken(token)"
-                *ngFor="let token of selected; let i = index"
-                [attr.aria-posinset]="i"
-                [attr.aria-setsize]="selected.length"
+        @if (selected) {
+            <fd-tokenizer
+                [tokenizerFocusable]="false"
+                [compactCollapse]="true"
+                #tokenizer
+                class="fd-multi-input-tokenizer-custom"
+                (moreClickedEvent)="moreClicked()"
+                tabindex="-1"
+                role="listbox"
+                fdMultiAnnouncer
+                [multiAnnouncerOptions]="isOpen ? _suggestions : []"
             >
-                <span>{{ token.label | displayFnPipe : displayFn }}</span>
-            </fd-token>
-
-            <input
-                #searchInputElement
-                type="text"
-                class="fd-input fd-multi-input-tokenizer-input fd-tokenizer__input"
-                fdp-auto-complete
-                autocomplete="off"
-                (onComplete)="_onAutoComplete($event)"
-                (keydown.enter)="_onKeydownEnter($event)"
-                (keydown)="onInputKeydownHandler($event)"
-                [inputText]="inputText"
-                [options]="_suggestions"
-                fd-input-group-input
-                fd-form-control
-                [attr.id]="id"
-                [disabled]="disabled"
-                [(ngModel)]="inputText"
-                (ngModelChange)="searchTermChanged()"
-                [ngModelOptions]="{ standalone: true }"
-                [placeholder]="placeholder"
-                (focus)="onTouched(); tokenizer._showAllTokens()"
-                (blur)="tokenizer._hideTokens()"
-                [attr.aria-expanded]="isOpen && _suggestions.length > 0"
-                [readonly]="readonly"
-                aria-haspopup="listbox"
-                [attr.aria-readonly]="readonly"
-                [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
-                [ariaLabelledBy]="ariaLabelledBy"
-                [attr.aria-required]="required"
-                [attr.aria-describedby]="tokenHiddenId"
-                aria-roledescription="Multi Value Input"
-                fdkInitialFocus
-                [enabled]="autofocus"
-            />
-        </fd-tokenizer>
+                @for (token of selected; track token; let i = $index) {
+                    <fd-token
+                        [readOnly]="disabled"
+                        (onCloseClick)="removeToken(token)"
+                        [attr.aria-posinset]="i"
+                        [attr.aria-setsize]="selected.length"
+                    >
+                        <span>{{ token.label | displayFnPipe: displayFn }}</span>
+                    </fd-token>
+                }
+                <input
+                    #searchInputElement
+                    type="text"
+                    class="fd-input fd-multi-input-tokenizer-input fd-tokenizer__input"
+                    fdp-auto-complete
+                    autocomplete="off"
+                    (onComplete)="_onAutoComplete($event)"
+                    (keydown.enter)="_onKeydownEnter($event)"
+                    (keydown)="onInputKeydownHandler($event)"
+                    [inputText]="inputText"
+                    [options]="_suggestions"
+                    fd-input-group-input
+                    fd-form-control
+                    [attr.id]="id"
+                    [disabled]="disabled"
+                    [(ngModel)]="inputText"
+                    (ngModelChange)="searchTermChanged()"
+                    [ngModelOptions]="{ standalone: true }"
+                    [placeholder]="placeholder"
+                    (focus)="onTouched(); tokenizer._showAllTokens()"
+                    (blur)="tokenizer._hideTokens()"
+                    [attr.aria-expanded]="isOpen && _suggestions.length > 0"
+                    [readonly]="readonly"
+                    aria-haspopup="listbox"
+                    [attr.aria-readonly]="readonly"
+                    [ariaLabel]="ariaLabel || ('coreMultiInput.multiInputAriaLabel' | fdTranslate)"
+                    [ariaLabelledBy]="ariaLabelledBy"
+                    [attr.aria-required]="required"
+                    [attr.aria-describedby]="tokenHiddenId"
+                    aria-roledescription="Multi Value Input"
+                    fdkInitialFocus
+                    [enabled]="autofocus"
+                />
+            </fd-tokenizer>
+        }
     </fd-input-group>
 </ng-template>
 <ng-template #listTemplate>
-    <fdp-list
-        [noBorder]="true"
-        #listTemplateDD
-        [hasByLine]="hasByLine"
-        [selectionMode]="selectionMode"
-        *ngIf="_suggestions && _suggestions.length"
-        role="listbox"
-        aria-multiselectable="true"
-        [interceptTabKey]="false"
-        (keydown.tab)="close()"
-    >
-        <ng-container *ngIf="!isGroup">
-            <fdp-standard-list-item
-                *ngFor="let listItem of _suggestions"
-                [title]="listItem.label"
-                [description]="listItem.description || ''"
-                [avatar]="listItem.avatarSrc"
-                [value]="listItem.value"
-                (itemSelected)="selectionMode !== 'multi' && addToArray(listItem, true)"
-                (itemCheckboxSelected)="_checkboxSelected(listItem, $event)"
-                (buttonClicked)="deleteToken(listItem)"
-                role="option"
-            >
-            </fdp-standard-list-item>
-        </ng-container>
-        <ng-container *ngIf="isGroup">
-            <ng-container *ngFor="let group of _suggestions">
-                <ng-container *ngIf="!groupItemTemplate">
-                    <fdp-list-group-header [groupHeaderTitle]="group.label"></fdp-list-group-header>
-                </ng-container>
-
-                <ng-container *ngIf="groupItemTemplate">
-                    <ng-container
-                        [ngTemplateOutlet]="groupItemTemplate"
-                        [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
-                    ></ng-container>
-                </ng-container>
-
-                <fdp-standard-list-item
-                    *ngFor="let optionItem of group.children; let i = index"
-                    [title]="optionItem.label"
-                    [value]="optionItem.value"
-                    (itemSelected)="addToArray(optionItem, true)"
-                    (itemCheckboxSelected)="addToArray(optionItem, false)"
-                    (buttonClicked)="deleteToken(optionItem)"
-                    role="option"
-                >
-                </fdp-standard-list-item>
-            </ng-container>
-        </ng-container>
-    </fdp-list>
+    @if (_suggestions && _suggestions.length) {
+        <fdp-list
+            [noBorder]="true"
+            #listTemplateDD
+            [hasByLine]="hasByLine"
+            [selectionMode]="selectionMode"
+            role="listbox"
+            aria-multiselectable="true"
+            [interceptTabKey]="false"
+            (keydown.tab)="close()"
+        >
+            @if (!isGroup) {
+                @for (listItem of _suggestions; track listItem) {
+                    <fdp-standard-list-item
+                        [title]="listItem.label"
+                        [description]="listItem.description || ''"
+                        [avatar]="listItem.avatarSrc"
+                        [value]="listItem.value"
+                        (itemSelected)="selectionMode !== 'multi' && addToArray(listItem, true)"
+                        (itemCheckboxSelected)="_checkboxSelected(listItem, $event)"
+                        (buttonClicked)="deleteToken(listItem)"
+                        role="option"
+                    >
+                    </fdp-standard-list-item>
+                }
+            }
+            @if (isGroup) {
+                @for (group of _suggestions; track group) {
+                    @if (!groupItemTemplate) {
+                        <fdp-list-group-header [groupHeaderTitle]="group.label"></fdp-list-group-header>
+                    }
+                    @if (groupItemTemplate) {
+                        <ng-container
+                            [ngTemplateOutlet]="groupItemTemplate"
+                            [ngTemplateOutletContext]="{ $implicit: { label: group.label } }"
+                        ></ng-container>
+                    }
+                    @for (optionItem of group.children; track optionItem; let i = $index) {
+                        <fdp-standard-list-item
+                            [title]="optionItem.label"
+                            [value]="optionItem.value"
+                            (itemSelected)="addToArray(optionItem, true)"
+                            (itemCheckboxSelected)="addToArray(optionItem, false)"
+                            (buttonClicked)="deleteToken(optionItem)"
+                            role="option"
+                        >
+                        </fdp-standard-list-item>
+                    }
+                }
+            }
+        </fdp-list>
+    }
 </ng-template>

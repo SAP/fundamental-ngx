@@ -1,4 +1,4 @@
-<ng-container *ngIf="stackedItems && stackedItems.length > 1">
+@if (stackedItems && stackedItems.length > 1) {
     <fd-action-sheet [style.pointer-events]="'all'">
         <fd-action-sheet-control>
             <span class="fd-wizard__step-indicator">
@@ -6,28 +6,29 @@
             </span>
         </fd-action-sheet-control>
         <fd-action-sheet-body>
-            <li
-                fd-action-sheet-item
-                *ngFor="let step of stackedItems"
-                [label]="step.label"
-                [glyph]="step.glyph"
-                [disabled]="!step.visited"
-                (click)="stepItemClicked(step, $event)"
-            ></li>
+            @for (step of stackedItems; track step) {
+                <li
+                    fd-action-sheet-item
+                    [label]="step.label"
+                    [glyph]="step.glyph"
+                    [disabled]="!step.visited"
+                    (click)="stepItemClicked(step, $event)"
+                ></li>
+            }
         </fd-action-sheet-body>
     </fd-action-sheet>
-</ng-container>
-
-<ng-container *ngIf="!stackedItems || stackedItems.length <= 1">
+}
+@if (!stackedItems || stackedItems.length <= 1) {
     <span
         class="fd-wizard__step-indicator"
         (click)="stepItemClicked(stackedItems.length ? stackedItems[0] : undefined, $event)"
     >
         <ng-container *ngTemplateOutlet="stepIndicatorContent"></ng-container>
     </span>
-</ng-container>
-
+}
 <ng-template #stepIndicatorContent>
-    <fd-icon *ngIf="glyph" [glyph]="glyph" class="fd-wizard__icon"></fd-icon>
+    @if (glyph) {
+        <fd-icon [glyph]="glyph" class="fd-wizard__icon"></fd-icon>
+    }
     <ng-content></ng-content>
 </ng-template>

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
@@ -12,7 +12,7 @@ import { SeparatorComponent } from '../seperator/seperator.component';
     styleUrls: ['./header-tabs.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [TabsModule, RouterLinkActive, RouterLink, NgIf, SeparatorComponent, AsyncPipe, NgForOf]
+    imports: [TabsModule, RouterLinkActive, RouterLink, SeparatorComponent, AsyncPipe]
 })
 export class HeaderTabsComponent {
     @Input()

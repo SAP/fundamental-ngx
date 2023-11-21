@@ -3,7 +3,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { ConnectedPosition, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { AsyncPipe, DOCUMENT, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -115,9 +115,7 @@ type Appearance = SearchComponent['appearance'] | undefined;
     imports: [
         NgTemplateOutlet,
         MenuTriggerDirective,
-        NgIf,
         MenuComponent,
-        NgFor,
         MenuItemComponent,
         SelectComponent,
         OptionComponent,

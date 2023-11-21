@@ -1,65 +1,61 @@
-<th
-    *ngIf="_fdpTableService._semanticHighlighting$ | async"
-    [class.fd-table__cell--fixed]="fixed"
-    fd-table-cell
-    fd-table-status-indicator
-    fdkDisabled
-    [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
-    [style.max-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
-></th>
+@if (_fdpTableService._semanticHighlighting$ | async) {
+    <th
+        [class.fd-table__cell--fixed]="fixed"
+        fd-table-cell
+        fd-table-status-indicator
+        fdkDisabled
+        [style.min-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
+        [style.max-width]="_fdpTableService._semanticHighlightingColumnWidth$ | async"
+    ></th>
+}
 
-<th
-    *ngIf="isShownSelectionColumn"
-    fd-table-cell
-    [focusable]="true"
-    [class.fd-table__cell--fixed]="fixed"
-    class="fd-table__cell--checkbox"
-    [style]="
-        _contentDensityObserver
-            | async
-            | selectionCellStyles : _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
-    "
-    (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
-    (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
-    (cellFocused)="_tableRowService.cellFocused($event)"
-    [attr.aria-description]="
-        !checkedState
-            ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
-            : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
-    "
->
-    <fd-checkbox
-        tabIndexValue="-1"
-        *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
-        labelClass="fd-table__checkbox-label"
-        [fdkDisabled]="_fdpTableService.visibleColumnsLength === 0 || disableSelectionCheckbox"
-        [tristate]="true"
-        [tristateSelectable]="false"
-        [ngModel]="checkedState"
-        (ngModelChange)="_tableRowService.toggleAllSelectableRows($event)"
-    ></fd-checkbox>
-</th>
+@if (isShownSelectionColumn) {
+    <th
+        fd-table-cell
+        [focusable]="true"
+        [class.fd-table__cell--fixed]="fixed"
+        class="fd-table__cell--checkbox"
+        [style]="
+            _contentDensityObserver
+                | async
+                | selectionCellStyles: _rtl : (_fdpTableService._semanticHighlightingColumnWidth$ | async)
+        "
+        (keydown.enter)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+        (keydown.space)="_tableRowService.toggleAllSelectableRows(!checkedState)"
+        (cellFocused)="_tableRowService.cellFocused($event)"
+        [attr.aria-description]="
+            !checkedState
+                ? ('platformTable.selectAllCheckboxLabel' | fdTranslate)
+                : ('platformTable.deselectAllCheckboxLabel' | fdTranslate)
+        "
+    >
+        @if (selectionMode === SELECTION_MODE.MULTIPLE) {
+            <fd-checkbox
+                tabIndexValue="-1"
+                labelClass="fd-table__checkbox-label"
+                [fdkDisabled]="_fdpTableService.visibleColumnsLength === 0 || disableSelectionCheckbox"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                [ngModel]="checkedState"
+                (ngModelChange)="_tableRowService.toggleAllSelectableRows($event)"
+            ></fd-checkbox>
+        }
+    </th>
+}
 
-<ng-container
-    *ngFor="
-        let column of _fdpTableService.visibleColumns$ | async;
-        let colIdx = index;
-        trackBy: _columnTrackBy;
-        last as isLast
-    "
->
+@for (column of _fdpTableService.visibleColumns$ | async; track column.name) {
     <th
         [focusable]="true"
         role="columnheader"
         [fdpTableCellResizable]="
-            colIdx
+            $index
                 | columnResizableSide
                     : _fdpTableService.visibleColumnsLength
                     : (_fdpTableService._isShownNavigationColumn$ | async)
         "
         [columnName]="column.name"
         [id]="rowId + '__' + column.name"
-        [attr.aria-colindex]="colIdx"
+        [attr.aria-colindex]="$index"
         [attr.aria-sort]="(_fdpTableService.sortRules$ | async)?.get(column.key) | fdpTableColumnSortingDirection"
         [ngClass]="[
             'fdp-table__col--' + column.name,
@@ -67,7 +63,7 @@
             column.name === freezeColumnsTo ? 'fd-table__cell--fixed-last' : '',
             column._endFreezed ? 'fd-table__cell--fixed-end' : '',
             column.name === freezeEndColumnsTo ? 'fd-table__cell--fixed-end-last' : '',
-            isLast && (_fdpTableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
+            $last && (_fdpTableService._isShownNavigationColumn$ | async) !== true ? 'is-last-child' : '',
             (column | isColumnHasHeaderMenu) ? 'fd-table__item--clickable' : ''
         ]"
         [ngStyle]="
@@ -106,14 +102,11 @@
             ></fdp-table-cell-header-popover>
         </fdp-table-header-cell-content>
     </th>
-</ng-container>
+}
 
-<th
-    *ngIf="_fdpTableService._isShownNavigationColumn$ | async"
-    fd-table-cell
-    class="fdp-table__cell--navigation is-last-child"
-    role="columnheader"
-></th>
+@if (_fdpTableService._isShownNavigationColumn$ | async) {
+    <th fd-table-cell class="fdp-table__cell--navigation is-last-child" role="columnheader"></th>
+}
 
 <th
     aria-hidden="true"

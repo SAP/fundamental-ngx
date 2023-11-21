@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { FormLabelComponent } from '@fundamental-ngx/core/form';
@@ -52,7 +52,7 @@ customThemingConfig.customThemes = [
         }
     ],
     standalone: true,
-    imports: [NgFor, ButtonComponent, FormLabelComponent, JsonPipe]
+    imports: [ButtonComponent, FormLabelComponent, JsonPipe]
 })
 export class CustomThemeExampleComponent implements OnDestroy {
     themes: CompleteThemeDefinition[];

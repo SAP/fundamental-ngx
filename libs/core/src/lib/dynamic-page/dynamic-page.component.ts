@@ -32,7 +32,7 @@ import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
 import { asyncScheduler, fromEvent, Observable, startWith, Subject } from 'rxjs';
 import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
@@ -45,7 +45,7 @@ import { debounceTime, map, observeOn, takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicPageService],
     standalone: true,
-    imports: [NgIf, CdkScrollable, ScrollbarDirective]
+    imports: [CdkScrollable, ScrollbarDirective]
 })
 export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** Whether DynamicPage should snap on scroll */

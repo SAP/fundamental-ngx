@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -51,13 +50,15 @@ export class TabCountDirective {
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[fd-tab-icon]',
     template: `
-        <fd-icon role="presentation" *ngIf="icon" [glyph]="icon"></fd-icon>
+        @if (icon) {
+            <fd-icon role="presentation" [glyph]="icon"></fd-icon>
+        }
         <ng-content></ng-content>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgIf, IconComponent]
+    imports: [IconComponent]
 })
 export class TabIconComponent implements CssClassBuilder, OnChanges {
     /** Apply user custom styles */

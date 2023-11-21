@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ComponentRef, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { CdkPortalOutlet, ComponentPortal, PortalModule } from '@angular/cdk/portal';
+import { AsyncPipe } from '@angular/common';
+import { AfterViewInit, Component, ComponentRef, QueryList, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
-import { MessageStripAlertComponent } from '../message-strip-alert/message-strip-alert.component';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { Observable, map, startWith } from 'rxjs';
 import { MessageStripAlertContainerFooterComponent } from '../message-strip-alert-container-footer/message-strip-alert-container-footer.component';
-import { map, Observable, startWith } from 'rxjs';
+import { MessageStripAlertComponent } from '../message-strip-alert/message-strip-alert.component';
 
 import { MessageStripAlertRef } from '../message-strip-alert.ref';
 import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.interface';
@@ -16,9 +16,9 @@ import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.in
     selector: 'fd-message-strip-alert-container',
     template: `
         <div fdScrollbar>
-            <ng-container *ngFor="let portal of attachedElements">
+            @for (portal of attachedElements; track portal) {
                 <ng-template [cdkPortalOutlet]="portal"></ng-template>
-            </ng-container>
+            }
         </div>
         <fd-message-strip-alert-container-footer
             [alertRefs]="alertRefs$ | async"
@@ -27,7 +27,7 @@ import { MessageStripAlert } from '../message-strip-alert/message-strip-alert.in
     styleUrls: ['./message-strip-alert-container.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [NgFor, PortalModule, ScrollbarDirective, MessageStripAlertContainerFooterComponent, AsyncPipe]
+    imports: [PortalModule, ScrollbarDirective, MessageStripAlertContainerFooterComponent, AsyncPipe]
 })
 export class MessageStripAlertContainerComponent implements AfterViewInit {
     /**

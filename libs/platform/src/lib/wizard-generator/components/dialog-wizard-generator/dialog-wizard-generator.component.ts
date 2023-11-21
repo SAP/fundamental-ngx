@@ -11,7 +11,7 @@ import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { InitialFocusDirective } from '@fundamental-ngx/cdk/utils';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
@@ -39,7 +39,6 @@ import { WizardBodyComponent } from '../wizard-body/wizard-body.component';
         CdkScrollable,
         ScrollbarDirective,
         WizardBodyComponent,
-        NgIf,
         BarModule,
         ButtonComponent,
         ContentDensityDirective,

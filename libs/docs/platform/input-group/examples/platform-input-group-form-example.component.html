@@ -23,16 +23,16 @@
                     </fdp-input-group-addon>
                 </fdp-input-group>
             </fdp-form-field>
-
             <ng-template #i18n let-errors>
-                <span *ngIf="errors.required"> Value is required </span>
+                @if (errors.required) {
+                    <span> Value is required </span>
+                }
             </ng-template>
         </fdp-form-group>
     </div>
     <pre>Form result: {{ fg.formGroup.value | json }}</pre>
     <pre>Form Status: {{ fg.formGroup.status }}</pre>
 </main>
-
 <span aria-hidden="true" style="display: none" id="input-group-form-label">Quantity</span>
 <span aria-hidden="true" style="display: none" id="input-group-form-left-addon-aria-label-dollar">Currency: $</span>
 <span aria-hidden="true" style="display: none" id="input-group-form-right-addon-aria-label">Format: USD</span>

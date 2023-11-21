@@ -2,55 +2,57 @@
     <fd-dialog-header [class.show-search]="!_userToShowDetails && _isListMode">
         <ng-template fdkTemplate="header">
             <p>
-                <fd-icon
-                    *ngIf="_userToShowDetails && _data.node?.approvers && _data.node!.approvers!.length > 1"
-                    [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
-                    tabindex="0"
-                    role="button"
-                    (click)="_exitUserDetailsMode()"
-                    (keyup.space)="_exitUserDetailsMode()"
-                    (keyup.enter)="_exitUserDetailsMode()"
-                ></fd-icon>
-                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader"
-                    >{{ _data.node?.description }} ({{ _data.node?.approvers?.length ?? 0 }})</ng-container
-                >
+                @if (_userToShowDetails && _data.node?.approvers && _data.node!.approvers!.length > 1) {
+                    <fd-icon
+                        [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
+                        tabindex="0"
+                        role="button"
+                        (click)="_exitUserDetailsMode()"
+                        (keyup.space)="_exitUserDetailsMode()"
+                        (keyup.enter)="_exitUserDetailsMode()"
+                    ></fd-icon>
+                }
+                @if (_isListMode && !_userToShowDetails) {
+                    {{ _data.node?.description }} ({{ _data.node?.approvers?.length ?? 0 }})
+                } @else {
+                    {{ 'platformApprovalFlow.userDetailsHeader' | fdTranslate }}
+                }
             </p>
-
-            <fdp-search-field
-                *ngIf="!_userToShowDetails && _isListMode"
-                [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
-                fdCompact
-                [suggestions]="[]"
-                (inputChange)="_onSearchStringChange($event.text)"
-            ></fdp-search-field>
+            @if (!_userToShowDetails && _isListMode) {
+                <fdp-search-field
+                    [placeholder]="'platformApprovalFlow.addNodeSearchPlaceholder' | fdTranslate"
+                    fdCompact
+                    [suggestions]="[]"
+                    (inputChange)="_onSearchStringChange($event.text)"
+                ></fdp-search-field>
+            }
         </ng-template>
     </fd-dialog-header>
-
     <fd-dialog-body>
-        <fdp-approval-flow-user-details
-            *ngIf="_userToShowDetails"
-            [user]="_userToShowDetails"
-            [detailsTemplate]="_data.userDetailsTemplate"
-            [details]="_userToShowDetailsData$"
-        ></fdp-approval-flow-user-details>
-        <fdp-approval-flow-user-list
-            *ngIf="_isListMode"
-            [users]="_listItems"
-            (onUserClick)="_seeUserDetails($event)"
-            (onSelectionChange)="_selectedUsers = $event"
-        ></fdp-approval-flow-user-list>
+        @if (_userToShowDetails) {
+            <fdp-approval-flow-user-details
+                [user]="_userToShowDetails"
+                [detailsTemplate]="_data.userDetailsTemplate"
+                [details]="_userToShowDetailsData$"
+            ></fdp-approval-flow-user-details>
+        }
+        @if (_isListMode) {
+            <fdp-approval-flow-user-list
+                [users]="_listItems"
+                (onUserClick)="_seeUserDetails($event)"
+                (onSelectionChange)="_selectedUsers = $event"
+            ></fdp-approval-flow-user-list>
+        }
     </fd-dialog-body>
-
     <fd-dialog-footer fdCompact>
-        <ng-container *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)">
+        @if (_isListMode || (_userToShowDetails && _data.node?.approvers?.length === 1)) {
             <fd-button-bar
                 fdType="emphasized"
                 [label]="'platformApprovalFlow.userDetailsSendReminderBtnLabel' | fdTranslate"
                 [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
                 (click)="_sendReminder()"
             ></fd-button-bar>
-        </ng-container>
-
+        }
         <fd-button-bar
             fdkInitialFocus
             fdType="transparent"
@@ -59,7 +61,3 @@
         ></fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>
-
-<ng-template #defaultHeader>
-    {{ 'platformApprovalFlow.userDetailsHeader' | fdTranslate }}
-</ng-template>

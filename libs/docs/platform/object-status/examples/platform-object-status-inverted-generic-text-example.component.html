@@ -1,4 +1,4 @@
-<ng-container *ngFor="let item of items">
+@for (item of items; track item) {
     <fdp-object-status
         [indicationColor]="item"
         [label]="'Indication Color' + item"
@@ -7,11 +7,9 @@
         [inverted]="true"
         [ariaLabel]="'Object status Indication Color' + item"
     ></fdp-object-status>
-</ng-container>
-
+}
 <p>Secondary Set of Inverted indication colors:</p>
-
-<ng-container *ngFor="let item of items">
+@for (item of items; track item) {
     <fdp-object-status
         [indicationColor]="item"
         [label]="'Indication Color' + item"
@@ -21,4 +19,4 @@
         [secondaryIndication]="true"
         [ariaLabel]="'Object status Indication Color' + item"
     ></fdp-object-status>
-</ng-container>
+}

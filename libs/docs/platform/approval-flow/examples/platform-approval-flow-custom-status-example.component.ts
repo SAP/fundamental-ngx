@@ -2,7 +2,7 @@ import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { MessageToastService } from '@fundamental-ngx/core/message-toast';
@@ -31,17 +31,7 @@ import { cloneDeep } from 'lodash-es';
     selector: 'fdp-platform-approval-flow-status-example',
     templateUrl: './platform-approval-flow-custom-status-example.component.html',
     standalone: true,
-    imports: [
-        PlatformApprovalFlowModule,
-        NgSwitch,
-        NgSwitchCase,
-        NgIf,
-        FormsModule,
-        NgFor,
-        MultiInputComponent,
-        ContentDensityDirective,
-        TitleCasePipe
-    ]
+    imports: [PlatformApprovalFlowModule, FormsModule, MultiInputComponent, ContentDensityDirective, TitleCasePipe]
 })
 export class PlatformApprovalFlowCustomStatusExampleComponent implements OnDestroy {
     private graphs = getGraphs();

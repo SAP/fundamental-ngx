@@ -18,7 +18,7 @@ import { CdkScrollable, ConnectionPositionPair } from '@angular/cdk/overlay';
 
 import { Subject } from 'rxjs';
 
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { KeyUtil, Nullable, ResizeDirective, ResizeHandleDirective } from '@fundamental-ngx/cdk/utils';
 import { ContentDensityObserver, contentDensityObserverProviders } from '@fundamental-ngx/core/content-density';
 import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
@@ -40,15 +40,7 @@ import { ScrollbarDirective } from '@fundamental-ngx/core/scrollbar';
     styleUrls: ['./popover-body.component.scss'],
     providers: [contentDensityObserverProviders({ alwaysAddModifiers: true })],
     standalone: true,
-    imports: [
-        A11yModule,
-        NgIf,
-        CdkScrollable,
-        ScrollbarDirective,
-        NgTemplateOutlet,
-        ResizeHandleDirective,
-        ResizeDirective
-    ]
+    imports: [A11yModule, CdkScrollable, ScrollbarDirective, NgTemplateOutlet, ResizeHandleDirective, ResizeDirective]
 })
 export class PopoverBodyComponent implements AfterViewInit {
     /** Minimum width of the popover body element. */

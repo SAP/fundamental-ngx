@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { ContentDensityDirective } from '@fundamental-ngx/core/content-density';
 import { ListAvatarConfig, PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
@@ -14,7 +13,7 @@ export interface ListItem {
     selector: 'fdp-platform-standard-list-item-border-less-example',
     templateUrl: './platform-standard-list-item-border-less-example.component.html',
     standalone: true,
-    imports: [PlatformListModule, NgFor, StandardListItemModule, ContentDensityDirective]
+    imports: [PlatformListModule, StandardListItemModule, ContentDensityDirective]
 })
 export class PlatformStandardListItemBorderLessExampleComponent {
     items: ListItem[] = [

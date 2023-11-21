@@ -1,4 +1,4 @@
-import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -58,7 +58,6 @@ import { VariantItem } from './variant-item.class';
     ],
     standalone: true,
     imports: [
-        NgIf,
         PopoverComponent,
         PopoverControlComponent,
         TitleComponent,
@@ -71,7 +70,6 @@ import { VariantItem } from './variant-item.class';
         BarElementDirective,
         SearchFieldComponent,
         ListComponent,
-        NgFor,
         ListItemComponent,
         ListLinkDirective,
         ListTitleDirective,
@@ -155,7 +153,10 @@ export class VariantManagementComponent<T = any> implements VariantManagement<T>
     private _originalActiveVariant: VariantItem<T>;
 
     /** @hidden */
-    constructor(private readonly _dialogService: DialogService, private readonly _cdr: ChangeDetectorRef) {}
+    constructor(
+        private readonly _dialogService: DialogService,
+        private readonly _cdr: ChangeDetectorRef
+    ) {}
 
     /**
      * Manually select variant.

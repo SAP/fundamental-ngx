@@ -1,6 +1,6 @@
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -90,23 +90,18 @@ export type TabSizes = 's' | 'm' | 'l' | 'xl' | 'xxl';
     standalone: true,
     imports: [
         OverflowLayoutComponent,
-        NgFor,
         OverflowItemRefDirective,
         TabItemDirective,
         OverflowLayoutItemDirective,
         TabLinkDirective,
         OverflowLayoutFocusableItemDirective,
         NgTemplateOutlet,
-        NgIf,
-        NgSwitch,
-        NgSwitchCase,
         TabHeaderDirective,
         TabCounterHeaderDirective,
         TabLabelDirective,
         TabIconComponent,
         TabCountDirective,
         TabProcessDirective,
-        NgSwitchDefault,
         TabTagDirective,
         TabProcessIconDirective,
         TabSeparatorDirective,
@@ -365,7 +360,7 @@ export class TabListComponent implements TabListComponentInterface, AfterContent
                 switchMap(() => this._zone.onStable.pipe(startWith(this._zone.isStable))),
                 takeUntilDestroyed(this._destroyRef)
             )
-            .subscribe((tabs) => {
+            .subscribe(() => {
                 this.stackContent && this._scrollSpy?.onScroll(undefined, true);
             });
     }

@@ -1,4 +1,3 @@
-import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { Component } from '@angular/core';
 import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -28,11 +27,7 @@ import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
         PopoverBodyComponent,
         QuickViewModule,
         AvatarComponent,
-        NgFor,
-        NgSwitch,
-        NgSwitchCase,
-        LinkComponent,
-        NgSwitchDefault
+        LinkComponent
     ]
 })
 export class QuickViewPopoverExampleComponent {

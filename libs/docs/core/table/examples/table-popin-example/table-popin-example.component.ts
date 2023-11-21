@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FocusableGridDirective, RtlService } from '@fundamental-ngx/cdk/utils';
@@ -23,8 +23,6 @@ import { map } from 'rxjs/operators';
     imports: [
         FocusableGridDirective,
         TableModule,
-        NgFor,
-        NgIf,
         FormLabelComponent,
         ObjectStatusComponent,
         CheckboxComponent,

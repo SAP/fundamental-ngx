@@ -5,7 +5,6 @@
     [barDesign]="subHeaderTemplate ? 'header-with-subheader' : 'header'"
 >
     <ng-container *ngTemplateOutlet="headerTemplate ? headerTemplate : defaultTemplate"></ng-container>
-
     <ng-template #defaultTemplate>
         <div fd-bar-left>
             <fd-bar-element [fullWidth]="true">
@@ -20,7 +19,8 @@
         </div>
     </ng-template>
 </div>
-
-<div fd-bar *ngIf="subHeaderTemplate" class="fd-dialog__subheader" barDesign="subheader" [fdCozy]="dialogConfig.mobile">
-    <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
-</div>
+@if (subHeaderTemplate) {
+    <div fd-bar class="fd-dialog__subheader" barDesign="subheader" [fdCozy]="dialogConfig.mobile">
+        <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
+    </div>
+}

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RepeatDirective } from '@fundamental-ngx/cdk/utils';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
@@ -10,7 +9,7 @@ import { SkeletonModule } from '@fundamental-ngx/core/skeleton';
     selector: 'fd-list-byline-loading-example',
     templateUrl: './list-byline-loading-example.component.html',
     standalone: true,
-    imports: [ButtonComponent, ListModule, NgIf, RepeatDirective, IconComponent, SkeletonModule]
+    imports: [ButtonComponent, ListModule, RepeatDirective, IconComponent, SkeletonModule]
 })
 export class ListBylineLoadingExampleComponent {
     loading = true;

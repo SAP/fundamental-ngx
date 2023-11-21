@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -19,7 +18,7 @@ export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgIf]
+    imports: []
 })
 export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom class */

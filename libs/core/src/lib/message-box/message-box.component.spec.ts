@@ -4,7 +4,7 @@ import { NavigationStart, Router, RouterEvent, RouterModule } from '@angular/rou
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+
 import { Subject } from 'rxjs';
 
 import { MessageBoxConfig } from './utils/message-box-config.class';

@@ -1,23 +1,24 @@
 <h3>Cozy Mode</h3>
 <fdp-list [noBorder]="true" [hasByLine]="true">
-    <fdp-standard-list-item
-        *ngFor="let item of items"
-        [title]="item.title"
-        [avatar]="item.avatar"
-        [description]="item.description"
-        [secondary]="item.secondary"
-    >
-    </fdp-standard-list-item>
+    @for (item of items; track item) {
+        <fdp-standard-list-item
+            [title]="item.title"
+            [avatar]="item.avatar"
+            [description]="item.description"
+            [secondary]="item.secondary"
+        >
+        </fdp-standard-list-item>
+    }
 </fdp-list>
-
 <h3>Compact Mode</h3>
 <fdp-list fdCompact [noBorder]="true" [hasByLine]="true">
-    <fdp-standard-list-item
-        *ngFor="let item of items"
-        [title]="item.title"
-        [avatar]="item.avatar"
-        [description]="item.description"
-        [secondary]="item.secondary"
-    >
-    </fdp-standard-list-item>
+    @for (item of items; track item) {
+        <fdp-standard-list-item
+            [title]="item.title"
+            [avatar]="item.avatar"
+            [description]="item.description"
+            [secondary]="item.secondary"
+        >
+        </fdp-standard-list-item>
+    }
 </fdp-list>

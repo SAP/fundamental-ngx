@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import {
     Attribute,
     ChangeDetectionStrategy,
@@ -55,7 +54,7 @@ const ALTER_ICON_OPTIONS = {
         '[attr.tabindex]': '_tabindex'
     },
     standalone: true,
-    imports: [NgIf, AvatarIconPipe, IconComponent]
+    imports: [AvatarIconPipe, IconComponent]
 })
 export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder, OnChanges {
     /** User's custom classes */

@@ -1,6 +1,5 @@
 <ng-content></ng-content>
-
-<ng-container *ngIf="loading">
+@if (loading) {
     <div
         #busyIndicator
         class="fd-busy-indicator"
@@ -12,10 +11,9 @@
         <div class="fd-busy-indicator__circle"></div>
         <div class="fd-busy-indicator__circle"></div>
     </div>
-
-    <span *ngIf="label" class="fd-busy-indicator-extended__label">{{ label }}</span>
-
+    @if (label) {
+        <span class="fd-busy-indicator-extended__label">{{ label }}</span>
+    }
     <div class="fd-busy-indicator__overlay"></div>
-
     <div #fakeFocusElement tabindex="0" aria-hidden="true" (focusin)="fakeElementFocusHandler($event)"></div>
-</ng-container>
+}

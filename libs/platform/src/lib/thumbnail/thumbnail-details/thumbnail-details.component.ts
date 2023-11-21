@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { NgIf } from '@angular/common';
+
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -48,7 +48,6 @@ interface DialogRefData {
         CdkScrollable,
         ScrollbarDirective,
         DialogBodyComponent,
-        NgIf,
         ThumbnailImageComponent,
         DialogFooterComponent,
         ButtonBarComponent,
@@ -75,7 +74,10 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     maxImages = this.dialogRef.data.maxImages;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
+    constructor(
+        public dialogRef: DialogRef,
+        private _cdr: ChangeDetectorRef
+    ) {
         warnOnce('ThumbnailDetailsComponent is deprecated since version 0.40.0 and will be removed in next release.');
     }
 

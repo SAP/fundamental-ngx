@@ -4,7 +4,6 @@
             {{ 'platformUploadCollection.newFolderTitle' | fdTranslate }}
         </h1>
     </fd-dialog-header>
-
     <fd-dialog-body>
         <div fd-form-item>
             <label fd-form-label for="fdp-upload-collection-new-folder-input">
@@ -12,7 +11,7 @@
                     (_currentFolder
                         ? 'platformUploadCollection.newFolderAtFolderInputLabel'
                         : 'platformUploadCollection.newFolderAtRootInputLabel'
-                    ) | fdTranslate : { folderName: _currentFolder?.name || '' }
+                    ) | fdTranslate: { folderName: _currentFolder?.name || '' }
                 }}:
             </label>
             <input
@@ -24,17 +23,17 @@
                 [(ngModel)]="_newFolderName"
                 [placeholder]="'platformUploadCollection.newFolderInputPlaceholder' | fdTranslate"
             />
-            <span
-                *ngIf="_newFolderName.length > _maxFilenameLength"
-                fd-object-status
-                status="negative"
-                [label]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
-                [attr.title]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
-                [attr.aria-label]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
-            ></span>
+            @if (_newFolderName.length > _maxFilenameLength) {
+                <span
+                    fd-object-status
+                    status="negative"
+                    [label]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
+                    [attr.title]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
+                    [attr.aria-label]="'platformUploadCollection.newFolderInputErrorLabel' | fdTranslate"
+                ></span>
+            }
         </div>
     </fd-dialog-body>
-
     <fd-dialog-footer>
         <fd-button-bar
             fdType="emphasized"

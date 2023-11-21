@@ -15,11 +15,11 @@ import { QuickViewSubheaderComponent, QuickViewSubheaderSubtitleComponent, Quick
     `,
     standalone: true,
     imports: [
-        QuickViewSubheaderComponent,
-        AvatarComponent,
-        QuickViewSubheaderSubtitleComponent,
-        QuickViewSubheaderTitleComponent
-    ]
+    QuickViewSubheaderComponent,
+    AvatarComponent,
+    QuickViewSubheaderSubtitleComponent,
+    QuickViewSubheaderTitleComponent
+]
 })
 class TestComponent {}
 

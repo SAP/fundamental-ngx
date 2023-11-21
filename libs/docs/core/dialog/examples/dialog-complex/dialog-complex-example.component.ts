@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/overlay';
-import { AsyncPipe, NgClass, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InitialFocusDirective, TemplateDirective } from '@fundamental-ngx/cdk/utils';
@@ -31,9 +31,7 @@ interface Fruit {
         FormsModule,
         CdkScrollable,
         ScrollbarDirective,
-        NgIf,
         ListModule,
-        NgFor,
         NgClass,
         ListSecondaryDirective,
         ButtonComponent,

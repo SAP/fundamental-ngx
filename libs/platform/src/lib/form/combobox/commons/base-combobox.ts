@@ -282,7 +282,7 @@ export abstract class BaseCombobox
     }
 
     /** @hidden */
-    _flatSuggestions: OptionItem[];
+    _flatSuggestions: OptionItem[] = [];
 
     /** @hidden */
     protected _dataSource: FdpComboBoxDataSource<any>;

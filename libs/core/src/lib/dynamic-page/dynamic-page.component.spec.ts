@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
@@ -7,20 +7,26 @@ import { DynamicPageComponent } from './dynamic-page.component';
 import { DynamicPageModule } from './dynamic-page.module';
 
 @Component({
-    template: ` <fd-dynamic-page>
-        <fd-dynamic-page-header>Test Test</fd-dynamic-page-header>
-        <fd-dynamic-page-subheader></fd-dynamic-page-subheader>
-        <fd-tab-list *ngIf="tabs" [stackContent]="true" maxContentHeight="auto">
-            <fd-tab *ngFor="let tab of ['Tab 1', 'Tab 2', 'Tab 3']" [title]="tab">
-                <fd-dynamic-page-content>
-                    <div style="height: 150vh"></div>
-                </fd-dynamic-page-content>
-            </fd-tab>
-        </fd-tab-list>
-        <fd-dynamic-page-content *ngIf="!tabs">
+    template: `<fd-dynamic-page>
+  <fd-dynamic-page-header>Test Test</fd-dynamic-page-header>
+  <fd-dynamic-page-subheader></fd-dynamic-page-subheader>
+  @if (tabs) {
+    <fd-tab-list [stackContent]="true" maxContentHeight="auto">
+      @for (tab of ['Tab 1', 'Tab 2', 'Tab 3']; track tab) {
+        <fd-tab [title]="tab">
+          <fd-dynamic-page-content>
             <div style="height: 150vh"></div>
-        </fd-dynamic-page-content>
-    </fd-dynamic-page>`
+          </fd-dynamic-page-content>
+        </fd-tab>
+      }
+    </fd-tab-list>
+  }
+  @if (!tabs) {
+    <fd-dynamic-page-content>
+      <div style="height: 150vh"></div>
+    </fd-dynamic-page-content>
+  }
+</fd-dynamic-page>`
 })
 class TestComponent {
     tabs = false;

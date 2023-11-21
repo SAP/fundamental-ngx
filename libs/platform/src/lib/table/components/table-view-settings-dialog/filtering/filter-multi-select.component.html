@@ -1,6 +1,8 @@
 <ul fd-list [selection]="true">
-    <li fd-list-item *ngFor="let option of _selectableOptions" [selected]="option.selected">
-        <fd-checkbox [ngModel]="option.selected" (ngModelChange)="_onSelectChange(option, $event)"></fd-checkbox>
-        <span fd-list-title>{{ option.label }}</span>
-    </li>
+    @for (option of _selectableOptions; track option) {
+        <li fd-list-item [selected]="option.selected">
+            <fd-checkbox [ngModel]="option.selected" (ngModelChange)="_onSelectChange(option, $event)"></fd-checkbox>
+            <span fd-list-title>{{ option.label }}</span>
+        </li>
+    }
 </ul>

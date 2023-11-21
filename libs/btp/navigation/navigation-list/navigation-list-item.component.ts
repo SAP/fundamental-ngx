@@ -2,7 +2,7 @@
 import { FocusableOption } from '@angular/cdk/a11y';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { DomPortal } from '@angular/cdk/portal';
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -60,7 +60,6 @@ import { FdbNavigationListItemComponent } from '../navigation-list-item-componen
     ],
     imports: [
         AsyncPipe,
-        NgIf,
         NgTemplateOutlet,
         PopoverComponent,
         PopoverControlComponent,
